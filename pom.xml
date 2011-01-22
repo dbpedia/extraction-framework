@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.dbpedia.extraction</groupId>
+    <artifactId>main</artifactId>
+    <packaging>pom</packaging>
+    <version>2.0-SNAPSHOT</version>
+    <name>Parent POM of the DBpedia framework</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.compiler.version>1.6</java.compiler.version>
+        <maven.scala.plugin.version>2.15.0</maven.scala.plugin.version>
+        <scala.compiler.version>2.8.1</scala.compiler.version>
+        <scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
+        <dbpedia.framework.version>2.0-SNAPSHOT</dbpedia.framework.version>
+    </properties>
+
+    <modules>
+        <module>core</module>
+        <module>dump</module>
+        <module>server</module>
+        <module>live</module>
+        <module>scripts</module>
+        <module>wiktionary</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>${maven.scala.plugin.version}</version>
+
+                <configuration>
+                    <jvmArgs>
+                        <jvmArg>${scala.compiler.Xmx}</jvmArg>
+                    </jvmArgs>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+
+                    <execution>
+                        <id>test-compile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <phase>test-compile</phase>
+                    </execution>
+
+                    <execution>
+                        <id>process-resources</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.compiler.version}</source>
+                    <target>${java.compiler.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-compiler</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest</artifactId>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.dbpedia.extraction</groupId>
+                <artifactId>core</artifactId>
+                <version>${dbpedia.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dbpedia.extraction</groupId>
+                <artifactId>dump</artifactId>
+                <version>${dbpedia.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dbpedia.extraction</groupId>
+                <artifactId>server</artifactId>
+                <version>${dbpedia.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dbpedia.extraction</groupId>
+                <artifactId>scripts</artifactId>
+                <version>${dbpedia.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dbpedia.extraction</groupId>
+                <artifactId>wiktionary</artifactId>
+                <version>${dbpedia.framework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-compiler</artifactId>
+                <version>${scala.compiler.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala.compiler.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scalatest</groupId>
+                <artifactId>scalatest</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring</artifactId>
+                <version>2.5.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>1.1</version>
+                <type>jar</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openrdf</groupId>
+                <artifactId>openrdf</artifactId>
+                <version>1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.14</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sourceforge.collections</groupId>
+                <artifactId>collections-generic</artifactId>
+                <version>4.01</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mod4j.org.apache.commons</groupId>
+                <artifactId>lang</artifactId>
+                <version>2.1.0</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.oclc.oai</groupId>
+                <artifactId>harvester2</artifactId>
+                <version>0.1.12</version>
+            </dependency>
+
+
+            <!-- This dependency should have scope=test rather than scope=compile -->
+            <!--
+            <dependency>
+              <groupId>junit</groupId>
+              <artifactId>junit</artifactId>
+              <version>${junit.version}</version>
+              <scope>test</scope>
+            </dependency>
+            -->
+
+            <!-- OMFG! This dependency is horrible - this is a dead XML api project
+       from 2004. In the meanwhile, all this XML stuff is probably already part
+       of some standard java library -->
+            <dependency>
+                <groupId>org.jbind</groupId>
+                <artifactId>jbind</artifactId>
+                <version>1.2</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ini4j</groupId>
+                <artifactId>ini4j</artifactId>
+                <version>0.5.1</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.hp.hpl.jena</groupId>
+                <artifactId>jena</artifactId>
+                <version>2.6.2</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.hp.hpl.jena</groupId>
+                <artifactId>arq</artifactId>
+                <version>2.8.3</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- XStream for xml serialization (of jena result sets) -->
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>1.3.1</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+        </dependencies>
+
+
+    </dependencyManagement>
+
+    <repositories>
+
+        <repository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
+            <id>scala-tools.org</id>
+            <name>Scala-tools Maven2 Repository</name>
+            <url>http://scala-tools.org/repo-releases/</url>
+        </repository>
+
+        <repository>
+            <id>maven.aksw.internal</id>
+            <name>University Leipzig, AKSW Maven2 Repository</name>
+            <url>http://db0.aksw.org:8081/archiva/repository/internal</url>
+        </repository>
+
+        <repository>
+            <id>maven.aksw.snapshots</id>
+            <name>University Leipzig, AKSW Maven2 Repository</name>
+            <url>http://db0.aksw.org:8081/archiva/repository/snapshots</url>
+        </repository>
+
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <id>openanzo-snapshots</id>
+            <name>OpenAnzo Snapshots</name>
+            <url>http://www.openanzo.org/maven-repositories/snapshot</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <id>openanzo-releases</id>
+            <name>OpenAnzo Releases</name>
+            <url>http://www.openanzo.org/maven-repositories/release</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>scala-tools.org</id>
+            <name>Scala-tools Maven2 Repository</name>
+            <url>http://scala-tools.org/repo-releases/</url>
+        </pluginRepository>
+
+    </pluginRepositories>
+
+</project>
+
