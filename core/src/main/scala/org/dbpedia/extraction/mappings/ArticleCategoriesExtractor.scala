@@ -12,8 +12,6 @@ class ArticleCategoriesExtractor(extractionContext : ExtractionContext) extends 
 {
     private val language = extractionContext.language.wikiCode
 
-    require(Set("en").contains(language))
-
     private val dctermsSubjectProperty = extractionContext.ontology.getProperty("dct:subject").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =

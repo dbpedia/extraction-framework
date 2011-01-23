@@ -267,7 +267,8 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
         result = result.replace("%2F", "/")
         result = result.replace("%3A", ":")
 
-        result = result.replace("%", "_percent_")
+        //TODO add this as option in settings
+        //result = result.replace("%", "_percent_")
 
         // TODO maximal length of properties? (was 250)
         

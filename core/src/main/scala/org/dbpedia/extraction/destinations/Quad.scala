@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import java.net.URI
+import java.net.URI;
+import java.net.URLDecoder;
 import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.ontology.{OntologyProperty}
 import java.io.CharConversionException
@@ -21,16 +22,15 @@ class Quad(	val extractionContext : ExtractionContext,
 		    val datatype : Datatype )
 {
     //Validate input
-	if(subject == null) throw new NullPointerException("subject")
-	if(predicate == null) throw new NullPointerException("predicate")
-	if(value == null) throw new NullPointerException("value")
-	if(context == null) throw new NullPointerException("context")
+	  if(subject == null)   throw new NullPointerException("subject")
+	  if(predicate == null) throw new NullPointerException("predicate")
+	  if(value == null)     throw new NullPointerException("value")
+	  if(context == null)   throw new NullPointerException("context")
+    if(value.isEmpty)     throw new IllegalArgumentException("Value is empty")
 
-    if(value.isEmpty) throw new IllegalArgumentException("Value is empty")
-
-	new URI(subject)
-	new URI(context)
-	if(datatype == null) new URI(value)
+	  new URI(subject)
+	  new URI(context)
+	  if(datatype == null) new URI(value)
 
     def this( extractionContext : ExtractionContext,
               dataset : Dataset,
@@ -40,26 +40,41 @@ class Quad(	val extractionContext : ExtractionContext,
 		      context : String,
 		      datatype : Datatype = null ) = this(extractionContext, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
 
-    def renderNTriple = render(false)
+    def renderNTriple = render(false, false)
+    def renderNTripleAsIRI = render(false, true)
     
-    def renderNQuad = render(true)
+    def renderNQuad = render(true, false)
+    def renderNQuadAsIRI = render(true, true)
     
     override def toString = renderNQuad
     
-    private def render(includeContext : Boolean) : String =
+    private def render(includeContext : Boolean, encodeAsIRI : Boolean) : String =
     {
     	val sb = new StringBuilder
         
-        sb append "<" append subject append "> "
+        sb append "<"
+        if (encodeAsIRI)
+            toIRIstring(sb, subject)
+        else
+            sb append subject 
+        sb append "> "
         
-        sb append "<" append predicate append "> "
+        sb append "<"  ;
+        if (encodeAsIRI)
+            toIRIstring(sb, predicate)
+        else
+            sb append predicate 
+        sb append "> "
         
         if (datatype != null)
         {
             if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string")
             {
-            	sb append '"'
-            	escapeString(sb, value)
+            	sb append '"' + value;
+            	//if (encodeAsIRI)
+                  //  toIRIstring(sb, value)
+                //else
+                    //escapeString(sb, value)
             	sb append "\""
                 
                 sb append "@" + extractionContext.language.locale.getLanguage + " "
@@ -67,20 +82,35 @@ class Quad(	val extractionContext : ExtractionContext,
             else
             {
                 sb append '"'
-                escapeString(sb, value)
+                //if (encodeAsIRI)
+                  //  toIRIstring(sb, value)
+                //else
+                    escapeString(sb, value)
                 sb append "\"^^<" append datatype.uri append "> "
             }
         }
         else
         {
-            sb append '<'
-            escapeString(sb, value)
+            sb append '<' 
+            
+            if (encodeAsIRI)
+            	toIRIstring(sb, value)
+            else
+            	escapeString(sb, value)
+            
             sb append "> "
         }
         
         if (includeContext)
         {
-            sb append '<' append context append "> "
+        	sb append '<'
+        	
+            if (encodeAsIRI)
+            	toIRIstring(sb, context)
+            else
+            	sb append context
+            	
+            sb append "> "
         }
         
         sb append '.'
@@ -147,6 +177,53 @@ class Quad(	val extractionContext : ExtractionContext,
 
 				sb append hexStr
 			}
+		}
+		return sb
+	}
+	
+	/**
+	 * Encodes the string according to the IRI format (RFC 3987). N-Triples format can
+	 * accept unicode according to http://www.w3.org/2001/sw/RDFCore/ntriples/ Section 5.3
+	 */
+	private def toIRIstring(sb : StringBuilder, inputStr : String) : StringBuilder =
+	{
+		//escapeString(sb, URLDecoder.decode(input,"UTF-8"))
+		val input = URLDecoder.decode(inputStr,"UTF-8")
+
+    //remove special characters and '>'
+    val inputLength = input.length
+    var offset = 0
+
+    while (offset < inputLength)
+    {
+      val c = input.codePointAt(offset)
+      offset += Character.charCount(c)
+
+        //Ported from Jena's NTripleWriter
+      if (c == '\\' || c == '"')
+      {
+        sb append '\\' append c.toChar
+      }
+      else if (c == '\n')
+      {
+        sb append "\\n"
+      }
+      else if (c == '\r')
+      {
+        sb append "\\r";
+      }
+      else if (c == '\t')
+      {
+        sb append "\\t"
+      }
+      else if (c == '>')
+      {
+        sb append "%3E"
+      }
+      else
+      {
+        sb append c.toChar
+      }
 		}
 		return sb
 	}

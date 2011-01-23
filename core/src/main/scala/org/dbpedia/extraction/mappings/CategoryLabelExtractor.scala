@@ -11,8 +11,6 @@ class CategoryLabelExtractor(extractionContext : ExtractionContext) extends Extr
 {
     private val language = extractionContext.language.wikiCode
 
-    require(Set("en").contains(language))
-
     val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =

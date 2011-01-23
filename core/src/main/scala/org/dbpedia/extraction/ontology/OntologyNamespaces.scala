@@ -9,8 +9,8 @@ object OntologyNamespaces
     val DBPEDIA_DATATYPE_NAMESPACE = "http://dbpedia.org/datatype/"
     val DBPEDIA_PROPERTY_NAMESPACE = "http://dbpedia.org/ontology/"
     val DBPEDIA_SPECIFICPROPERTY_NAMESPACE = "http://dbpedia.org/ontology/"
-    val DBPEDIA_INSTANCE_NAMESPACE = "http://dbpedia.org/resource/"
-    val DBPEDIA_GENERAL_NAMESPACE = "http://dbpedia.org/property/"
+    val DBPEDIA_INSTANCE_NAMESPACE = "http://el.dbpedia.org/resource/"
+    val DBPEDIA_GENERAL_NAMESPACE = "http://el.dbpedia.org/property/"
 
     val OWL_PREFIX = "owl"
     val RDF_PREFIX = "rdf"

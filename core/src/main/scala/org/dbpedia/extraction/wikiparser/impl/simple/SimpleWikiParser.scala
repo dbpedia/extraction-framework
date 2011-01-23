@@ -38,6 +38,7 @@ final class SimpleWikiParser extends WikiParser
 
     private val propertyValueOrEnd = new Matcher(List("=", "|", "}}"), true);
     private val propertyEnd = new Matcher(List("|", "}}"), true);
+    private val templateParameterEnd = new Matcher(List("|", "}}}"), true);
 
     private val tableRowEnd1 = new Matcher(List("|}", "|+", "|-", "|", "!"));
     private val tableRowEnd2 = new Matcher(List("|}", "|-", "|", "!"));
@@ -219,7 +220,10 @@ final class SimpleWikiParser extends WikiParser
         }
         else if(source.lastTag("{{"))
         {
-            return parseTemplate(source, level)
+            if (source.getString(source.pos, source.pos+1) == "{")
+                return parseTemplateParameter(source, level)
+            else
+                return parseTemplate(source, level)
         }
         else if(source.lastTag("{|"))
         {
@@ -322,6 +326,18 @@ final class SimpleWikiParser extends WikiParser
             }
         }
     }
+
+    private def parseTemplateParameter(source : Source, level : Int) : TemplateParameterNode =
+    {
+        val line = source.line
+        source.pos = source.pos+1   //advance 1 char
+        var nodes = parseUntil(templateParameterEnd , source, level)
+
+        if(nodes.size != 1 || !nodes.head.isInstanceOf[TextNode])
+                throw new WikiParserException("Template variable contains invalid elements", line, source.findLine(line))
+
+        new TemplateParameterNode( nodes.head.toWikiText(), source.lastTag("|"), line)
+    }
     
     private def parseTemplate(source : Source, level : Int) : TemplateNode =
     {
@@ -329,7 +345,7 @@ final class SimpleWikiParser extends WikiParser
     	var title : WikiTitle = null;
     	var properties = List[PropertyNode]()
     	var curKeyIndex = 1
-    	
+
         while(true)
         {
             val propertyNode = parseProperty(source, curKeyIndex.toString(), level)
