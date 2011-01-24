@@ -1,21 +1,21 @@
 package org.dbpedia.extraction.mappings
 
 import collection.mutable.{ListBuffer, Stack}
-import org.dbpedia.extraction.wikiparser.{TemplateNode, TextNode, Node}
 import util.control.Breaks._
-import MyStringTrimmer._
 import java.util.regex.Pattern
-
+import org.dbpedia.extraction.wikiparser._
+import MyStack._
+import MyStringTrimmer._
 
 class MyStack(s : Stack[Node]) {
   val stack : Stack[Node] = s
   def prependString(str : String) : Unit  = {
     if(stack.head.isInstanceOf[TextNode]){
       val head = stack.pop
-      val newhead = new TextNode(str + head.asInstanceOf[TextNode].text, head.asInstanceOf[Node].line)
+      val newhead = new TextNode(str + head.asInstanceOf[TextNode].text, head.line)
       stack.push(newhead)
     } else {
-      val newhead = new TextNode(str, stack.head.asInstanceOf[Node].line)
+      val newhead = new TextNode(str, stack.head.line)
       stack.push(newhead)
     }
   }
@@ -56,36 +56,67 @@ class MyStack(s : Stack[Node]) {
       st
     }
 
-  def findNextNonTplNode() : Option[Node] = stack.find(node => !(node.isInstanceOf[TemplateNode] && node.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl"))
+  def findNextNonTplNode() : Option[Node] =
+    stack.find(
+      node => !(node.isInstanceOf[TemplateNode] && node.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl"))
 
-  //fulltrim textnodes (all multiple whitespaces and linebreaks are reduced to single ones) and remove textnodes, that are empty afterwards
-  def getFullTrimmed() : Stack[Node] = {
-    val copy = stack.clone
-    val ret = new Stack[Node]()
-    stack.foreach(node => {
-      node match {
-        case tn : TextNode => {
-          if(tn.text.fullTrim.equals("")){
-            var nextNode : Node = stack.pop
-            while (nextNode.isInstanceOf[TextNode] && nextNode.asInstanceOf[TextNode].text.fullTrim.equals("")){
-              nextNode = stack.pop
-            }
-            nextNode match {
-              case tn2 : TextNode => ret push tn2.asInstanceOf[TextNode].copy(text=tn2.text.fullTrim)
-              case n : Node =>  ret push n.copy(children=new Stack[Node]().pushAll(n.children.reverse).getFullTrimmed.toList)
-            }
-          } else {
-            ret push tn.copy(text=tn.text.fullTrim)
-          }
-        }
-        case n : Node => ret push n.copy(children=new Stack[Node]().pushAll(n.children.reverse).getFullTrimmed.toList)
-      }
-    })
-    return new Stack[Node]() pushAll ret  //reverse
+  def fullTrimmedPop() : Node = {
+    if(stack.head.isInstanceOf[TextNode]){
+      val next = stack.pop.asInstanceOf[TextNode]
+      return next.copy(text=next.text.fullTrim)
+    } else return stack.pop
+  }
+  def fullTrimmedHead() : Node = {
+    if(stack.head.isInstanceOf[TextNode]){
+      val next = stack.pop.asInstanceOf[TextNode]
+      val nextReplaced = next.copy(text=next.text.fullTrim)
+      stack.push(nextReplaced)
+    }
+    return stack.head
+  }
+
+  /**
+   * filters newline textnodes that come between a extractiontpl-template and a section node
+   *
+   */
+  def filterNewLines() = {
+    var wait = false
+    var count = 0
+    val otherStack = new  Stack[Node]()
+     stack.foreach(n => {
+       n match {
+         case tn : TemplateNode => if(tn.title.decoded == "Extractiontpl") wait = true
+         case sn : SectionNode => if(wait == true) {
+           wait = false
+           count = 0
+           otherStack.head match {
+             case textNode : TextNode => if(textNode.text.equals("")){
+               otherStack.pop //drop that text node
+             }
+             case _ =>
+           }
+
+         }
+         case _ =>
+       }
+       otherStack.push(n)
+
+       if(count == 3){
+         count = 0
+         wait = false
+       }
+
+       if(wait){
+         count += 1
+       }
+     })
+    stack.clear
+    stack.pushAll(otherStack)
   }
 }
+
 object MyStack {
-  implicit def convert1(s : Stack[Node]) : MyStack = {new MyStack(s)}
+  implicit def convert1(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def convert2(s : MyStack) : Stack[Node] = { s.stack }
 }
 
@@ -103,8 +134,8 @@ object TimeMeasurement {
 
 class MyStringTrimmer(s : String){
   val str = s
-  //reduce multiple whitespaces and linebreaks then trim
-  def fullTrim() : String = str.replaceAll("\\r?\\n{2,}", "\n").replaceAll("\\s{2,}", " ").trim
+  //reduce multiple whitespaces and lines with only whitespaces. then trim
+  def fullTrim() : String = str.replaceAll("\\r?\\n\\s{1,}\\r?\\n", "\n\n").replaceAll("^\\s{1,}\\r?\\n", "\n").replaceAll("\\r?\\n\\s{1,}$", "\n").replaceAll("\\s{2,}", " ").trim
 }
 object MyStringTrimmer {
   implicit def String2MyStringTrimmer(s : String) : MyStringTrimmer = new MyStringTrimmer(s)
