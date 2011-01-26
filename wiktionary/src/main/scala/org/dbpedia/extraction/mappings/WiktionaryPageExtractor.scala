@@ -132,15 +132,14 @@ val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitl
       //bindings.dump(0)
 
       // for debugging
-      /*val pageStr = "{{extractiontpl|list}}\n== section ==\n"
-      //val pageStr = "\n= sec {{tpl}} =\n"
+      /*val pageStr = "\n== one {{tpl}} ==\n"
       val testpage : PageNode = new SimpleWikiParser()(
         new WikiPage(
           new WikiTitle("test"),0,0, pageStr
         )
       )
-      val stack = new Stack[Node] pushAll testpage.children
-      stack.filterNewLines
+      val stack = new Stack[Node] pushAll testpage.children.reverse
+
       println(stack.map(dumpStr(_)).mkString ) */
     } report {
       duration : Long => println("took "+ duration +"ms")
@@ -212,7 +211,7 @@ object WiktionaryPageExtractor {
       breakable {
         while(pageIt.size > 0 ){
           val curNode = pageIt.fullTrimmedPop
-          printMsg("curNode "+dumpStrShort(curNode))
+          //printMsg("curNode "+dumpStrShort(curNode))
 
           //check for end of the var
           if(equals(endMarkerNode, curNode)) {
@@ -277,14 +276,14 @@ object WiktionaryPageExtractor {
 
   //extract does one step e.g. parse a var, or a list etc and then returns
   protected def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : WiktionaryPageExtractor.VarBindingsHierarchical = {
-    printFuncDump("extract", tplIt, pageIt)
+    printFuncDump("parseNode", tplIt, pageIt)
     val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
     val currNodeFromTemplate = tplIt.fullTrimmedPop
     val currNodeFromPage = pageIt.fullTrimmedHead
     val pageItCopy = pageIt.clone
 
     if(equals(currNodeFromTemplate, currNodeFromPage)){
-      pageIt.fullTrimmedPop //consume page node
+      pageIt.pop //consume page node
       return bindings
     }
 
@@ -319,6 +318,7 @@ object WiktionaryPageExtractor {
                 oneHadSuccess = false
                 for(tpl <- templates){
                   try{
+                    printMsg("try tpl")
                     bindings mergeWith parseNodesWithTemplate(new Stack[Node]() pushAll tpl.children.reverse, pageIt)
                     oneHadSuccess = true
                   } catch {
@@ -335,8 +335,20 @@ object WiktionaryPageExtractor {
             case _ =>  { }
           }
         } else {
-          printMsg("do recursion on children")
-          bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.fullTrimmedPop.children.reverse)
+          //parse template properties
+          if(!currNodeFromPage.isInstanceOf[TemplateNode]){
+            throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+          }
+          printMsg("same class but not do recursion on children")
+          breakable{
+            for(key <- tn.keySet){
+              if(tn.property(key).isDefined && currNodeFromPage.asInstanceOf[TemplateNode].property(key).isDefined){
+                bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.fullTrimmedPop.children.reverse)
+              } else {
+                break
+              }
+            }
+          }
         }
       }
       case tn : TextNode => {
@@ -357,7 +369,7 @@ object WiktionaryPageExtractor {
             bindings.addBinding(binding._1, binding._2)
           }
         } else if(currNodeFromPage.isInstanceOf[TextNode] && currNodeFromPage.asInstanceOf[TextNode].text.equals(tn.text)){
-          printMsg("match text. do recursion on children")
+          printMsg("matched text.")
           //bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.fullTrimAwarePop.children.reverse)
         } else {
           restore(pageIt, pageItCopy)
@@ -370,6 +382,7 @@ object WiktionaryPageExtractor {
           throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
         } else {
           printMsg("same class but not equal. do recursion on children")
+          pageIt.pop
           bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.fullTrimmedPop.children.reverse)
         }
       }
@@ -383,20 +396,20 @@ object WiktionaryPageExtractor {
   }
 
   protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node], name : String) : WiktionaryPageExtractor.VarBindingsHierarchical = {
-    printFuncDump("parseList "+name, tplIt, pageIt)
+    //printFuncDump("parseList "+name, tplIt, pageIt)
     val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
 
     try {
       breakable {
         while(pageIt.size > 0 ){
-          printFuncDump("parseList "+name+" item", tplIt, pageIt)
+          //printFuncDump("parseList "+name+" item", tplIt, pageIt)
 
-          if(endMarkerNode.isDefined && pageIt.size > 0){
+          /*if(endMarkerNode.isDefined && pageIt.size > 0){
             printMsg("check if continue list. endmarker:")
             printMsg(dumpStrShort(endMarkerNode.get))
             printMsg("head")
             printMsg(dumpStrShort(pageIt.fullTrimmedHead))
-          }
+          } */
           if(endMarkerNode.isDefined &&
             (
               (pageIt.size > 0 && equals(pageIt.fullTrimmedHead, endMarkerNode.get)) ||
@@ -405,7 +418,7 @@ object WiktionaryPageExtractor {
               )
             )
           ){    //TODO liststart = endmarker
-            printMsg("list ended by endmarker")
+            //printMsg("list ended by endmarker")
             break
           }
 
@@ -422,7 +435,7 @@ object WiktionaryPageExtractor {
 
   // parses the complete buffer
   protected def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : WiktionaryPageExtractor.VarBindingsHierarchical = {
-    printFuncDump("parseNodesWithTemplate", tplIt, pageIt)
+    //printFuncDump("parseNodesWithTemplate", tplIt, pageIt)
     val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
     while(tplIt.size > 0 && pageIt.size > 0){
       bindings mergeWith parseNode(tplIt, pageIt)
@@ -436,9 +449,9 @@ object WiktionaryPageExtractor {
     println(prefix + "------------")
     println(prefix + "<entering " + name +">")
     println(prefix + "<template (next 5)>")
-    println(prefix + tplIt.take(5).map(dumpStr(_)).mkString)
+    println(prefix + tplIt.take(5).map(dumpStrShort(_)).mkString)
     println(prefix + "<page (next 5)>")
-    println(prefix + pageIt.take(5).map(dumpStrt(_)).mkString)
+    println(prefix + pageIt.take(5).map(dumpStrShort(_)).mkString)
     println(prefix + "------------\n\n")
   }
 
