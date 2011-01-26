@@ -78,6 +78,7 @@ class WiktionaryPageExtractor extends Extractor {
     "example" -> "http://example.com/example"
   )
 
+
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
     //for DEBUG: wait a random time (this makes threading useless, but i can read the console output better)
@@ -117,12 +118,13 @@ val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitl
       )
     )
 
+
     measure {
       try {
         val tpl = new Stack[Node]().pushAll(pageTemplate.children.reverse).filterNewLines
-        //println(tpl.map(dumpStr(_)).mkString)
-        val bindings = parseNodesWithTemplate(tpl, new Stack[Node]().pushAll(page.children.reverse))
-        bindings.dump(0)
+        println(tpl.map(dumpStr(_)).mkString )
+        //val bindings = parseNodesWithTemplate(tpl, new Stack[Node]().pushAll(page.children.reverse))
+        //bindings.dump(0)
       } catch {
         case e : WiktionaryException => println("page could not be parsed. results so far:"); e.vars.dump(0)
       }
@@ -140,7 +142,7 @@ val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitl
       )
       val stack = new Stack[Node] pushAll testpage.children.reverse
 
-      println(stack.map(dumpStr(_)).mkString ) */
+      println(stack.map(dumpStr(_)).mkString )*/
     } report {
       duration : Long => println("took "+ duration +"ms")
     }
@@ -159,6 +161,7 @@ class VarException extends  WiktionaryException("no endmarker found", new VarBin
 
 object WiktionaryPageExtractor {
   private val language = "de"
+  private val subTemplateCache = scala.collection.mutable.Map[String, Stack[Node]]()
 
   class VarBindingsHierarchical (){
     val children  = new ListBuffer[VarBindingsHierarchical]()
@@ -262,6 +265,7 @@ object WiktionaryPageExtractor {
       return false
     }
     //the copy method is only available in the implementation of the abstract node-class
+    //so we cast to all subclasses
     n1 match {
       case tn : TemplateNode => n2.asInstanceOf[TemplateNode].copy(line=0).equals(tn.copy(line=0))
       case tn : TextNode => n2.asInstanceOf[TextNode].copy(line=0).equals(tn.copy(line=0))
@@ -301,15 +305,20 @@ object WiktionaryPageExtractor {
             case "list-end" =>    println("end list - you should not see this")
             case "contains" =>    {
               printMsg("include stuff")
-              val templates = ListBuffer[PageNode]()
+              val templates = ListBuffer[Stack[Node]]()
               for(property <- currNodeFromTemplate.children){  // children == properties
-                val name = property.asInstanceOf[PropertyNode].children(0).asInstanceOf[TextNode].text
+                val name = property.asInstanceOf[PropertyNode].children(0).asInstanceOf[TextNode].text.trim
                 if(! Set("contains", "unordered", "optional").contains(name)){
-                  try{
-                    templates append new SimpleWikiParser().apply(new WikiPage(new WikiTitle("extraction template "+name),0,0,Source.fromFile(language+"-"+name+".tpl", "utf-8").getLines.mkString))
-                  } catch {
-                    case e : FileNotFoundException =>  printMsg("referenced non existant sub template. skipped")
+                  val filename = language+"-"+name+".tpl"
+                  if(!subTemplateCache.contains(name)) {
+                    try{
+                      val tplPage = new SimpleWikiParser().apply(new WikiPage(new WikiTitle("extraction subtemplate "+name),0,0,Source.fromFile(filename, "utf-8").getLines.mkString))
+                      subTemplateCache += (name -> (new Stack[Node]().pushAll(tplPage.children.reverse)))
+                    } catch {
+                      case e : FileNotFoundException =>  printMsg("referenced non existant sub template "+filename+". skipped")
+                    }
                   }
+                  templates append subTemplateCache(name)
                 }
               }
               //apply these templates as often as possible
@@ -319,7 +328,7 @@ object WiktionaryPageExtractor {
                 for(tpl <- templates){
                   try{
                     printMsg("try tpl")
-                    bindings mergeWith parseNodesWithTemplate(new Stack[Node]() pushAll tpl.children.reverse, pageIt)
+                    bindings mergeWith parseNodesWithTemplate(tpl, pageIt)
                     oneHadSuccess = true
                   } catch {
                     case e : WiktionaryException =>  // try another template
@@ -339,16 +348,18 @@ object WiktionaryPageExtractor {
           if(!currNodeFromPage.isInstanceOf[TemplateNode]){
             throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
           }
-          printMsg("same class but not do recursion on children")
+          printMsg("do recursion on template properties")
           breakable{
             for(key <- tn.keySet){
+              println("propkey"+ key)
               if(tn.property(key).isDefined && currNodeFromPage.asInstanceOf[TemplateNode].property(key).isDefined){
-                bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.fullTrimmedPop.children.reverse)
+                bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll tn.property(key).get.children.reverse, new Stack[Node]() pushAll currNodeFromPage.asInstanceOf[TemplateNode].property(key).get.children.reverse)
               } else {
                 break
               }
             }
           }
+          pageIt.pop
         }
       }
       case tn : TextNode => {
@@ -382,7 +393,6 @@ object WiktionaryPageExtractor {
           throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
         } else {
           printMsg("same class but not equal. do recursion on children")
-          pageIt.pop
           bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.fullTrimmedPop.children.reverse)
         }
       }
@@ -542,7 +552,7 @@ object WiktionaryPageExtractor {
       case tn : TemplateNode => "<tpl>{{"+tn.children.map(dumpStrShort(_)+"|").mkString+"}}</tpl> "
       case tn : TextNode => "<text>"+tn.text + "</text> "
       case ln : LinkNode => "<link>[["+ln.children(0).asInstanceOf[TextNode].text+"]]</link> "
-      case sn : SectionNode=> "<section>"+sn.name + "</section> "
+      case sn : SectionNode=> "<section>"+sn.children.map(dumpStrShort(_)+"").mkString + "</section> "
       case pn : PropertyNode =>  dumpStrShort(pn.children(0))
       case n : Node=> "<other "+node.getClass+">"+node.retrieveText.get + "</other> "
     }

@@ -10,13 +10,17 @@ import MyStringTrimmer._
 class MyStack(s : Stack[Node]) {
   val stack : Stack[Node] = s
   def prependString(str : String) : Unit  = {
-    if(stack.head.isInstanceOf[TextNode]){
-      val head = stack.pop
-      val newhead = new TextNode(str + head.asInstanceOf[TextNode].text, head.line)
-      stack.push(newhead)
+    if(stack.size == 0){
+      stack push new TextNode(str,0)
     } else {
-      val newhead = new TextNode(str, stack.head.line)
-      stack.push(newhead)
+      if(stack.head.isInstanceOf[TextNode]){
+        val head = stack.pop
+        val newhead = new TextNode(str + head.asInstanceOf[TextNode].text, head.line)
+        stack.push(newhead)
+      } else {
+        val newhead = new TextNode(str, stack.head.line)
+        stack.push(newhead)
+      }
     }
   }
 
@@ -78,38 +82,41 @@ class MyStack(s : Stack[Node]) {
   /**
    * filters newline textnodes that come between a extractiontpl-template and a section node
    *
+   * example page
+   * == sec ==
+   * === sec2 ==
+   * ...
+   *
+   * should be parsed with the template
+   * {{extractiontpl|list-start}}
+   * == sec ==
+   * {{extractiontpl|list-start}}
+   * === sec 2 ==
+   * ...
+   *
+   * on the parsed page there will be only two section nodes
+   * on the parsed template there will be this:
+   * <tpl><tn="\n"><sec><tpl>
    */
   def filterNewLines() = {
-    var wait = false
-    var count = 0
     val otherStack = new  Stack[Node]()
-     stack.foreach(n => {
-       n match {
-         case tn : TemplateNode => if(tn.title.decoded == "Extractiontpl") wait = true
-         case sn : SectionNode => if(wait == true) {
-           wait = false
-           count = 0
-           otherStack.head match {
-             case textNode : TextNode => if(textNode.text.equals("")){
-               otherStack.pop //drop that text node
-             }
-             case _ =>
-           }
-
-         }
-         case _ =>
-       }
-       otherStack.push(n)
-
-       if(count == 3){
-         count = 0
-         wait = false
-       }
-
-       if(wait){
-         count += 1
-       }
-     })
+    val list = stack.toList
+    for(i <- list.indices) {
+      if(i > 0 && i < list.indices.last){
+        if(!
+          (
+            (
+            (list(i-1).isInstanceOf[SectionNode] && list(i+1).isInstanceOf[TemplateNode] && list(i+1).asInstanceOf[TemplateNode].title.decoded == "Extractiontpl")
+            ||
+            (list(i+1).isInstanceOf[SectionNode] && list(i-1).isInstanceOf[TemplateNode] && list(i-1).asInstanceOf[TemplateNode].title.decoded == "Extractiontpl")
+            )
+            && list(i).isInstanceOf[TextNode] && list(i).asInstanceOf[TextNode].text.equals("\n")
+          )
+        ){
+           otherStack push list(i)
+        }
+      }
+    }
     stack.clear
     stack.pushAll(otherStack)
   }

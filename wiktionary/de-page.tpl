@@ -1,7 +1,7 @@
 {{extractiontpl|list-start|languages-list}}
 == {{extractiontpl|var|word}} ({{Sprache|{{extractiontpl|var|language}}}}) ==
 {{extractiontpl|list-start|partofSpeech-list}}
-=== {{Wortart|{extractiontpl|var|pos}|Englisch}} ===
+=== {{Wortart|{{extractiontpl|var|pos}}|Englisch}} ===
 {{extractiontpl|contains|unordered|optional|
 hyphenation |
 pronunciation |
