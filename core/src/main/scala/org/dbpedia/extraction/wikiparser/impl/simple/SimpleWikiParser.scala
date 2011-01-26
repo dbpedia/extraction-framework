@@ -219,11 +219,13 @@ final class SimpleWikiParser extends WikiParser
             return parseLink(source, level)
         }
         else if(source.lastTag("{{"))
-        {
-            if (source.getString(source.pos, source.pos+1) == "{")
+        {   val nextToken = source.getString(source.pos, source.pos+1)
+            if ( nextToken == "{")
                 return parseTemplateParameter(source, level)
-            else
-                return parseTemplate(source, level)
+            //special template code {{#if
+            if ( nextToken == "#")
+                throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
+            return parseTemplate(source, level)
         }
         else if(source.lastTag("{|"))
         {

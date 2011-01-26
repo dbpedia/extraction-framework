@@ -13,8 +13,6 @@ class SkosCategoriesExtractor(extractionContext : ExtractionContext) extends Ext
 {
     private val language = extractionContext.language.wikiCode
 
-    require(Set("en").contains(language))
-
     private val rdfTypeProperty = extractionContext.ontology.getProperty("rdf:type").get
     private val skosConceptClass = extractionContext.ontology.getClass("skos:Concept").get
     private val skosPrefLabelProperty = extractionContext.ontology.getProperty("skos:prefLabel").get

@@ -13,7 +13,8 @@ class DisambiguationExtractor(extractionContext : ExtractionContext) extends Ext
 
     val disambiguationTitlePart = Map(
         "en" -> " (disambiguation)",
-        "el" -> " (αποσαφήνιση)"
+        "el" -> " (αποσαφήνιση)",
+        "de" -> " (Begriffsklärung)"
     )
 
     //require(Set("en", "el").contains(language))

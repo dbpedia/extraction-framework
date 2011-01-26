@@ -47,6 +47,7 @@ trait Extractor extends (PageNode => Graph)
      */
     private def retrieveEnglishTitle(page : PageNode) : Option[WikiTitle] =
     {
+        return Some(page.title)
         if(page.title.language.wikiCode == "en")
         {
             return Some(page.title)

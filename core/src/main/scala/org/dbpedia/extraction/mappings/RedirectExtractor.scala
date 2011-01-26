@@ -14,7 +14,7 @@ class RedirectExtractor(extractionContext : ExtractionContext) extends Extractor
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(page.title.namespace == WikiTitle.Namespace.Main && page.isRedirect)
+        if((page.title.namespace == WikiTitle.Namespace.Main || page.title.namespace == WikiTitle.Namespace.Template ) && page.isRedirect)
         {
             for(destination <- page.children.collect{case InternalLinkNode(destination, _, _) => destination})
             {

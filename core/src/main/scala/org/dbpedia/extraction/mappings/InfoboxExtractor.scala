@@ -26,6 +26,8 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
     // Configuration
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private val language = extractionContext.language.wikiCode
+
     private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
 
     private val templateNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Template)
@@ -38,7 +40,10 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
 
     private val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r)
 
-    private val ignoreProperties = Set("image", "image_photo")
+    private val ignoreProperties = Map (
+        "en"-> Set("image", "image_photo"),
+        "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
+    )
 
     private val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
     private val typeProperty = extractionContext.ontology.getProperty("rdf:type").get
@@ -97,7 +102,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                                yield template
 
         templateList.foreach(template => {
-            val propertyList = template.children.filterNot(property => ignoreProperties.contains(property.key.toLowerCase))
+            val propertyList = template.children.filterNot(property => ignoreProperties.get(language).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
             var propertiesFound = false
 
@@ -117,6 +122,10 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                         try
                         {
                             quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+
+                            //used for stats (do not delete)
+                            //quads ::= new Quad( extractionContext, DBpediaDatasets.InfoboxTest, subjectUri, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE + templateNamespace + ":" + template.title.encoded,
+                            //                    property.key, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
                         }
                         catch
                         {
@@ -140,6 +149,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                 // TODO write only wikiPageUsesTemplate if properties extracted
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
+                    //TODO change domain
                     quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty, "http://dbpedia.org/resource/" + templateNamespace + ":" + template.title.encoded, template.sourceUri, null)
                     seenTemplates.add(template.title.encoded)
                 }
