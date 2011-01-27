@@ -112,19 +112,18 @@ val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitl
     //    val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitle("test page"),0,0,
     //      "[1]abc[end]xyz[end][2]"))
 
-    val pageTemplate : PageNode = new SimpleWikiParser().apply(
-      new WikiPage(
-        new WikiTitle("test template"),0,0, "\n"+Source.fromFile(language+"-page.tpl").mkString
-      )
-    )
-
-
     measure {
+      val pageTemplate : PageNode = new SimpleWikiParser().apply(
+        new WikiPage(
+          new WikiTitle("test template"),0,0, "\n"+Source.fromFile(language+"-page.tpl").mkString
+        )
+      )
+      val tpl = new Stack[Node]().pushAll(pageTemplate.children.reverse).filterNewLines.filterTrimmed
+      val pageSt =  new Stack[Node]().pushAll(page.children.reverse).filterTrimmed
+      //println(tpl.map(dumpStr(_)).mkString )
       try {
-        val tpl = new Stack[Node]().pushAll(pageTemplate.children.reverse).filterNewLines
-        println(tpl.map(dumpStr(_)).mkString )
-        //val bindings = parseNodesWithTemplate(tpl, new Stack[Node]().pushAll(page.children.reverse))
-        //bindings.dump(0)
+        val bindings = parseNodesWithTemplate(tpl, pageSt)
+        bindings.dump(0)
       } catch {
         case e : WiktionaryException => println("page could not be parsed. results so far:"); e.vars.dump(0)
       }
@@ -213,7 +212,7 @@ object WiktionaryPageExtractor {
       var endMarkerFound = false
       breakable {
         while(pageIt.size > 0 ){
-          val curNode = pageIt.fullTrimmedPop
+          val curNode = pageIt.pop
           //printMsg("curNode "+dumpStrShort(curNode))
 
           //check for end of the var
@@ -236,6 +235,7 @@ object WiktionaryPageExtractor {
               val part1 =  curNode.asInstanceOf[TextNode].text.substring(0, idx)  //the endmarker is cut out and thrown away
               val part2 =  curNode.asInstanceOf[TextNode].text.substring(idx+endMarkerNode.asInstanceOf[TextNode].text.size, curNode.asInstanceOf[TextNode].text.size)
               if(!part1.isEmpty){
+                 printMsg("var += "+curNode)
                 varValue append new TextNode(part1, curNode.line)
               }
               //and put the rest back
@@ -247,6 +247,8 @@ object WiktionaryPageExtractor {
           }
 
           //not finished, keep recording
+          printMsg("var += "+curNode)
+
           varValue append curNode
         }
       }
@@ -282,22 +284,34 @@ object WiktionaryPageExtractor {
   protected def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : WiktionaryPageExtractor.VarBindingsHierarchical = {
     printFuncDump("parseNode", tplIt, pageIt)
     val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
-    val currNodeFromTemplate = tplIt.fullTrimmedPop
-    val currNodeFromPage = pageIt.fullTrimmedHead
+    val currNodeFromTemplate = tplIt.pop
+    val currNodeFromPage = pageIt.head    // we dont consume the pagenode here - needs to be consumed after processing
     val pageItCopy = pageIt.clone
 
+    //early detection of error or no action
     if(equals(currNodeFromTemplate, currNodeFromPage)){
+      //simple match
       pageIt.pop //consume page node
       return bindings
+    } else //determine whether they CAN equal
+    if(!
+      (
+        (currNodeFromTemplate.isInstanceOf[TemplateNode]
+          && currNodeFromTemplate.asInstanceOf[TemplateNode].title.decoded.equals( "Extractiontpl")
+        )
+        || currNodeFromPage.getClass == currNodeFromTemplate.getClass
+      )
+    ){
+      throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
     }
 
     currNodeFromTemplate match {
-      case tn : TemplateNode => {
-        if(tn.title.decoded == "Extractiontpl"){
-          val tplType = tn.property("1").get.children(0).asInstanceOf[TextNode].text
+      case tplNodeFromTpl : TemplateNode => {
+        if(tplNodeFromTpl.title.decoded == "Extractiontpl"){
+          val tplType = tplNodeFromTpl.property("1").get.children(0).asInstanceOf[TextNode].text
           tplType match {
             case "list-start" =>  {
-              val name =  tn.property("2").get.children(0).asInstanceOf[TextNode].text
+              val name =  tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
               val listTpl = tplIt.getList
               val endMarkerNode = tplIt.findNextNonTplNode  //that will be the node that follows the list in the template
               bindings addChild parseList(listTpl, pageIt, endMarkerNode, name)
@@ -310,10 +324,11 @@ object WiktionaryPageExtractor {
                 val name = property.asInstanceOf[PropertyNode].children(0).asInstanceOf[TextNode].text.trim
                 if(! Set("contains", "unordered", "optional").contains(name)){
                   val filename = language+"-"+name+".tpl"
-                  if(!subTemplateCache.contains(name)) {
+                  if(!subTemplateCache.contains(name)){
                     try{
                       val tplPage = new SimpleWikiParser().apply(new WikiPage(new WikiTitle("extraction subtemplate "+name),0,0,Source.fromFile(filename, "utf-8").getLines.mkString))
-                      subTemplateCache += (name -> (new Stack[Node]().pushAll(tplPage.children.reverse)))
+                      val tplSt = new Stack[Node]().pushAll(tplPage.children.reverse)
+                      subTemplateCache += (name -> tplSt.filterNewLines.filterTrimmed)
                     } catch {
                       case e : FileNotFoundException =>  printMsg("referenced non existant sub template "+filename+". skipped")
                     }
@@ -327,7 +342,7 @@ object WiktionaryPageExtractor {
                 oneHadSuccess = false
                 for(tpl <- templates){
                   try{
-                    printMsg("try tpl")
+                    printMsg("try subtpl")
                     bindings mergeWith parseNodesWithTemplate(tpl, pageIt)
                     oneHadSuccess = true
                   } catch {
@@ -337,63 +352,71 @@ object WiktionaryPageExtractor {
               }
             }
             case "var" => {
-              val endMarkerNode = if(tplIt.size > 0) Some(tplIt.fullTrimmedPop) else None
+              val endMarkerNode = if(tplIt.size > 0) Some(tplIt.pop) else None
               val binding = recordVar(currNodeFromTemplate.asInstanceOf[TemplateNode], endMarkerNode, pageIt)
               bindings.addBinding(binding._1, binding._2)
             }
             case _ =>  { }
           }
         } else {
+          //both are normal template nodes
           //parse template properties
-          if(!currNodeFromPage.isInstanceOf[TemplateNode]){
-            throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
-          }
-          printMsg("do recursion on template properties")
-          breakable{
-            for(key <- tn.keySet){
-              println("propkey"+ key)
-              if(tn.property(key).isDefined && currNodeFromPage.asInstanceOf[TemplateNode].property(key).isDefined){
-                bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll tn.property(key).get.children.reverse, new Stack[Node]() pushAll currNodeFromPage.asInstanceOf[TemplateNode].property(key).get.children.reverse)
-              } else {
-                break
+          currNodeFromPage match {
+            case tplNodeFromPage : TemplateNode => {
+              breakable{
+                for(key <- tplNodeFromTpl.keySet){
+                  println("propkey"+ key)
+                  if(tplNodeFromTpl.property(key).isDefined && tplNodeFromPage.property(key).isDefined){
+                    bindings addChild parseNodesWithTemplate(
+                      new Stack[Node]() pushAll tplNodeFromTpl.property(key).get.children.reverse,
+                      new Stack[Node]() pushAll tplNodeFromPage.property(key).get.children.reverse
+                    )
+                  } else {
+                    break
+                  }
+                }
               }
+              pageIt.pop
+            }
+            case _ => {
+              printMsg("you should not see this: shouldve been detected earlier")
+              throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
             }
           }
-          pageIt.pop
         }
       }
-      case tn : TextNode => {
+      case textNodeFromTpl : TextNode => {
         //variables can start recording in the middle of a textnode
-        if(currNodeFromPage.isInstanceOf[TextNode] && currNodeFromPage.asInstanceOf[TextNode].text.startsWith(tn.text) && !(currNodeFromPage.asInstanceOf[TextNode].text.equals(tn.text))){
-          if(tplIt.size > 0 && tplIt.fullTrimmedHead.isInstanceOf[TemplateNode] && tplIt.fullTrimmedHead.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "var"){
-            //consume the current node from page
-            val curNodeFromPage2 = pageIt.fullTrimmedPop
-            val varNode = tplIt.fullTrimmedPop
-            //split it
-            val remainder = curNodeFromPage2.asInstanceOf[TextNode].text.substring(currNodeFromTemplate.asInstanceOf[TextNode].text.size, curNodeFromPage2.asInstanceOf[TextNode].text.size)
-            //record var
-            val endMarkerNode = if(tplIt.size > 0) Some(tplIt.fullTrimmedPop) else None
+        currNodeFromPage match {
+           case textNodeFromPage : TextNode => {
+              if(textNodeFromPage.text.startsWith(textNodeFromTpl.text) && !textNodeFromPage.text.equals(textNodeFromTpl.text)){
+                //consume the current node from page
+                pageIt.pop
 
-            pageIt.prependString(remainder)
+                //cut out whats left (remove what is matched by textNodeFromTpl -> the prefix)
+                val remainder = textNodeFromPage.text.substring(textNodeFromTpl.text.size, textNodeFromPage.text.size)
 
-            val binding = recordVar(varNode.asInstanceOf[TemplateNode], endMarkerNode, pageIt)
-            bindings.addBinding(binding._1, binding._2)
-          }
-        } else if(currNodeFromPage.isInstanceOf[TextNode] && currNodeFromPage.asInstanceOf[TextNode].text.equals(tn.text)){
-          printMsg("matched text.")
-          //bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.fullTrimAwarePop.children.reverse)
-        } else {
-          restore(pageIt, pageItCopy)
-          throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+                pageIt.prependString(remainder)
+              } else {
+                restore(pageIt, pageItCopy)  //still needed? dont think so
+                throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+              }
+            }
+            case _ => {
+              printMsg("you should not see this: shouldve been detected earlier")
+              throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+            }
         }
+
       }
       case _ => {
         if(currNodeFromPage.getClass != currNodeFromTemplate.getClass){
-          restore(pageIt, pageItCopy)
+          restore(pageIt, pageItCopy) //still needed? dont think so
+          printMsg("you should not see this: shouldve been detected earlier")
           throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
         } else {
           printMsg("same class but not equal. do recursion on children")
-          bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.fullTrimmedPop.children.reverse)
+          bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.pop.children.reverse)
         }
       }
     }
@@ -418,13 +441,13 @@ object WiktionaryPageExtractor {
             printMsg("check if continue list. endmarker:")
             printMsg(dumpStrShort(endMarkerNode.get))
             printMsg("head")
-            printMsg(dumpStrShort(pageIt.fullTrimmedHead))
+            printMsg(dumpStrShort(pageIt.head))
           } */
           if(endMarkerNode.isDefined &&
             (
-              (pageIt.size > 0 && equals(pageIt.fullTrimmedHead, endMarkerNode.get)) ||
-              (pageIt.fullTrimmedHead.isInstanceOf[TextNode] && endMarkerNode.get.isInstanceOf[TextNode] &&
-                pageIt.fullTrimmedHead.asInstanceOf[TextNode].text.startsWith(endMarkerNode.get.asInstanceOf[TextNode].text)
+              (pageIt.size > 0 && equals(pageIt.head, endMarkerNode.get)) ||
+              (pageIt.head.isInstanceOf[TextNode] && endMarkerNode.get.isInstanceOf[TextNode] &&
+                pageIt.head.asInstanceOf[TextNode].text.startsWith(endMarkerNode.get.asInstanceOf[TextNode].text)
               )
             )
           ){    //TODO liststart = endmarker
@@ -549,7 +572,7 @@ object WiktionaryPageExtractor {
   protected  def dumpStrShort(node : Node) : String =
   {
     node match {
-      case tn : TemplateNode => "<tpl>{{"+tn.children.map(dumpStrShort(_)+"|").mkString+"}}</tpl> "
+      case tn : TemplateNode => "<tpl>{{"+tn.title.decoded+"|"+tn.children.map(dumpStrShort(_)+"|").mkString+"}}</tpl> "
       case tn : TextNode => "<text>"+tn.text + "</text> "
       case ln : LinkNode => "<link>[["+ln.children(0).asInstanceOf[TextNode].text+"]]</link> "
       case sn : SectionNode=> "<section>"+sn.children.map(dumpStrShort(_)+"").mkString + "</section> "

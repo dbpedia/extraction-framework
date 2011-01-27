@@ -66,17 +66,34 @@ class MyStack(s : Stack[Node]) {
 
   def fullTrimmedPop() : Node = {
     if(stack.head.isInstanceOf[TextNode]){
-      val next = stack.pop.asInstanceOf[TextNode]
-      return next.copy(text=next.text.fullTrim)
+      var next = stack.pop
+      while(next.isInstanceOf[TextNode] && next.asInstanceOf[TextNode].text.fullTrim.equals("")){
+        next = stack.pop
+      }
+      next match {
+        case tn : TextNode => return tn.copy(text=tn.text.fullTrim)
+        case _ => return next
+      }
     } else return stack.pop
   }
+
   def fullTrimmedHead() : Node = {
-    if(stack.head.isInstanceOf[TextNode]){
-      val next = stack.pop.asInstanceOf[TextNode]
-      val nextReplaced = next.copy(text=next.text.fullTrim)
-      stack.push(nextReplaced)
+    val node = stack.fullTrimmedPop
+    stack.push(node)
+    return node
+  }
+
+  def filterTrimmed = {
+    val otherStack = new  Stack[Node]()
+    while(stack.size > 0){
+      try {
+        otherStack push stack.fullTrimmedPop
+      } catch {
+        case e : NoSuchElementException =>
+      }
     }
-    return stack.head
+    stack.clear
+    stack.pushAll(otherStack)
   }
 
   /**
@@ -114,8 +131,10 @@ class MyStack(s : Stack[Node]) {
           )
         ){
            otherStack push list(i)
+        } else {
+          //println("filterNewLines: leave out " +list(i) +" context: "+list(i-1)+list(i)+list(i+1))
         }
-      }
+      } else otherStack push list(i)
     }
     stack.clear
     stack.pushAll(otherStack)
@@ -142,7 +161,7 @@ object TimeMeasurement {
 class MyStringTrimmer(s : String){
   val str = s
   //reduce multiple whitespaces and lines with only whitespaces. then trim
-  def fullTrim() : String = str.replaceAll("\\r?\\n\\s{1,}\\r?\\n", "\n\n").replaceAll("^\\s{1,}\\r?\\n", "\n").replaceAll("\\r?\\n\\s{1,}$", "\n").replaceAll("\\s{2,}", " ").trim
+  def fullTrim() : String = str.replaceAll("\\r?\\n\\s{1,}\\r?\\n", "\n\n").replaceAll("^\\s{1,}\\r?\\n", "\n").replaceAll("\\r?\\n\\s{1,}$", "\n").replaceAll("\\s{2,}", " ")
 }
 object MyStringTrimmer {
   implicit def String2MyStringTrimmer(s : String) : MyStringTrimmer = new MyStringTrimmer(s)
