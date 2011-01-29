@@ -76,7 +76,7 @@ class WiktionaryPageExtractor extends Extractor {
     "lang" -> "http://example.com/lang",
     "word" -> "http://example.com/word",
     "example" -> "http://example.com/example"
-  )
+  ) //TODO complete
 
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
@@ -85,32 +85,6 @@ class WiktionaryPageExtractor extends Extractor {
     //val r = new scala.util.Random
     //Thread sleep r.nextInt(10)*1000
 
-    //parseNodesWithTemplate(extractionTemplate.children.toBuffer, page.children.toBuffer)
-    /*   val testTemplate : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitle("test template"),0,0,
-  "{{extractiontpl|list-start|langlist}}" +
-      "{{extractiontpl|var|lang}}[[afterlang]]" +
-      "{{extractiontpl|list-start|poslist}}" +
-        "{{extractiontpl|var|pos}}[[afterpos]]" +
-        "{{extractiontpl|list-start|varlist}}" +
-          "{{extractiontpl|var|myvar}}\n" +
-        "{{extractiontpl|list-end}}\n" +
-      "{{extractiontpl|list-end}}[[endpos]]" +
-    "{{extractiontpl|list-end}}[[endlang]]"))
-val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitle("test page"),0,0,
-  "DEUTSCH[[afterlang]]" +
-    //"ADVERB\n\n" +
-    "SUBSTANTIV[[afterpos]]" +
-      "test1\n" +
-      "test2\n\n" +
-    "VERB[[afterpos]]" +
-      "#test3[[aftervar]]" +
-      "#test4[[aftervar]][[aftervarlist]]" +
-    "[[endpos]]" +
-    "[[endlang]]"))*/
-    //    val testTemplate : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitle("test template"),0,0,
-    //      "[1]{{extractiontpl|list-start|myvar}}{{extractiontpl|var|myvar}}[end]{{extractiontpl|list-end|myvar}}[2]"))
-    //    val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitle("test page"),0,0,
-    //      "[1]abc[end]xyz[end][2]"))
 
     measure {
       /*val tpl = MyStack.fromParsedFile(language+"-page.tpl").filterNewLines.filterTrimmed
@@ -134,9 +108,8 @@ val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitl
           new WikiTitle("test"),0,0, pageStr
         )
       )
-      val stack = new Stack[Node] pushAll testpage.children.reverse
+      testpage.children.foreach(node => println(dumpStr(node)))
 
-      println(stack.map(dumpStr(_)).mkString )
     } report {
       duration : Long => println("took "+ duration +"ms")
     }
@@ -585,15 +558,15 @@ object WiktionaryPageExtractor {
     str += prefix + node.getClass +"\n"
 
     //dump node properties according to its type
-    if(node.isInstanceOf[TextNode]){
-      str += prefix+"text : "+node.retrieveText +"\n"
-    } else
-    if(node.isInstanceOf[SectionNode]){
-      str += prefix+"secname : "+node.asInstanceOf[SectionNode].name +"\n"
-      str += prefix+"level : "+node.asInstanceOf[SectionNode].level +"\n"
-    }  else
-    if(node.isInstanceOf[TemplateNode]){
-      str += prefix+"tplname : "+node.asInstanceOf[TemplateNode].title.decoded +"\n"
+    node match {
+      case tn : TextNode =>  str += prefix+"text : "+tn.text +"\n"
+      case tn : SectionNode => {
+        str += prefix+"secname : "+tn.name +"\n"
+        str += prefix+"level : "+tn.level +"\n"
+      }
+      case tn : TemplateNode =>  str += prefix+"tplname : "+tn.title.decoded +"\n"
+      case tn : ExternalLinkNode =>  str += prefix+"destNodes : "+tn.destinationNodes +"\n"
+      case tn : InternalLinkNode =>  str += prefix+"destNodes : "+tn.destinationNodes +"\n"
     }
 
     //dump children

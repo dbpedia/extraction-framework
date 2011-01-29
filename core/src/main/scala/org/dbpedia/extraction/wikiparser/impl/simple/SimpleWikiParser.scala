@@ -245,7 +245,6 @@ final class SimpleWikiParser extends WikiParser
             //Set destination
             //val destination = source.getString(startPos, source.pos - m.tag.length).trim
             val destination = parseUntil(internalLinkLabelOrEnd, source, level)
-            println("parsing internal link node: "+destination)
             val destinationUri = if(destination(0).isInstanceOf[TextNode]){
               destination(0).asInstanceOf[TextNode].text
             } else {
@@ -273,7 +272,6 @@ final class SimpleWikiParser extends WikiParser
             //Set destination
             //val destinationURI = source.getString(startPos, source.pos - 1).trim
             val destination = parseUntil(externalLinkLabelOrEnd, source, level)
-            println("parsing external link node: "+destination)
             val destinationURI = if(destination(0).isInstanceOf[TextNode]){
               destination(0).asInstanceOf[TextNode].text
             } else {
