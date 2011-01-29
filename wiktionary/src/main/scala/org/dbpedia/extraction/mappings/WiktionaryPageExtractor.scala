@@ -113,12 +113,7 @@ val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitl
     //      "[1]abc[end]xyz[end][2]"))
 
     measure {
-      val pageTemplate : PageNode = new SimpleWikiParser().apply(
-        new WikiPage(
-          new WikiTitle("test template"),0,0, "\n"+Source.fromFile(language+"-page.tpl").mkString
-        )
-      )
-      val tpl = new Stack[Node]().pushAll(pageTemplate.children.reverse).filterNewLines.filterTrimmed
+      /*val tpl = MyStack.fromParsedFile(language+"-page.tpl").filterNewLines.filterTrimmed
       val pageSt =  new Stack[Node]().pushAll(page.children.reverse).filterTrimmed
       //println(tpl.map(dumpStr(_)).mkString )
       try {
@@ -127,13 +122,13 @@ val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitl
       } catch {
         case e : WiktionaryException => println("page could not be parsed. results so far:"); e.vars.dump(0)
       }
-
+       */
       // the hierarchical var bindings need to be normalized to be converted to rdf
       //flatLangPos(bindings)
       //bindings.dump(0)
 
       // for debugging
-      /*val pageStr = "\n== one {{tpl}} ==\n"
+      val pageStr = " [[1]] [[{{tpl}}]] [1] [{{tpl}}] "
       val testpage : PageNode = new SimpleWikiParser()(
         new WikiPage(
           new WikiTitle("test"),0,0, pageStr
@@ -141,7 +136,7 @@ val testPage : PageNode = new SimpleWikiParser().apply(new WikiPage(new WikiTitl
       )
       val stack = new Stack[Node] pushAll testpage.children.reverse
 
-      println(stack.map(dumpStr(_)).mkString )*/
+      println(stack.map(dumpStr(_)).mkString )
     } report {
       duration : Long => println("took "+ duration +"ms")
     }
@@ -286,7 +281,7 @@ object WiktionaryPageExtractor {
     val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
     val currNodeFromTemplate = tplIt.pop
     val currNodeFromPage = pageIt.head    // we dont consume the pagenode here - needs to be consumed after processing
-    val pageItCopy = pageIt.clone
+    var pageItCopy = pageIt.clone
 
     //early detection of error or no action
     if(equals(currNodeFromTemplate, currNodeFromPage)){
@@ -311,29 +306,31 @@ object WiktionaryPageExtractor {
           val tplType = tplNodeFromTpl.property("1").get.children(0).asInstanceOf[TextNode].text
           tplType match {
             case "list-start" =>  {
-              val name =  tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
+              //val name =  tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
               val listTpl = tplIt.getList
               val endMarkerNode = tplIt.findNextNonTplNode  //that will be the node that follows the list in the template
-              bindings addChild parseList(listTpl, pageIt, endMarkerNode, name)
+              bindings addChild parseList(listTpl, pageIt, endMarkerNode)
             }
             case "list-end" =>    println("end list - you should not see this")
             case "contains" =>    {
               printMsg("include stuff")
-              val templates = ListBuffer[Stack[Node]]()
+              val templates = ListBuffer[String]()
               for(property <- currNodeFromTemplate.children){  // children == properties
                 val name = property.asInstanceOf[PropertyNode].children(0).asInstanceOf[TextNode].text.trim
                 if(! Set("contains", "unordered", "optional").contains(name)){
                   val filename = language+"-"+name+".tpl"
                   if(!subTemplateCache.contains(name)){
                     try{
-                      val tplPage = new SimpleWikiParser().apply(new WikiPage(new WikiTitle("extraction subtemplate "+name),0,0,Source.fromFile(filename, "utf-8").getLines.mkString))
-                      val tplSt = new Stack[Node]().pushAll(tplPage.children.reverse)
-                      subTemplateCache += (name -> tplSt.filterNewLines.filterTrimmed)
+                      val tplSt = MyStack.fromParsedFile(language+"-"+name+".tpl")
+                      tplSt.filterNewLines.filterTrimmed
+                      if(tplSt.size != 0){
+                        subTemplateCache += (name -> tplSt)
+                      }
                     } catch {
                       case e : FileNotFoundException =>  printMsg("referenced non existant sub template "+filename+". skipped")
                     }
                   }
-                  templates append subTemplateCache(name)
+                  templates append name
                 }
               }
               //apply these templates as often as possible
@@ -341,12 +338,14 @@ object WiktionaryPageExtractor {
               while(oneHadSuccess) {
                 oneHadSuccess = false
                 for(tpl <- templates){
+                  pageItCopy = pageIt.clone
                   try{
-                    printMsg("try subtpl")
-                    bindings mergeWith parseNodesWithTemplate(tpl, pageIt)
+                    bindings mergeWith parseNodesWithTemplate(subTemplateCache(tpl).clone, pageIt)
                     oneHadSuccess = true
                   } catch {
-                    case e : WiktionaryException =>  // try another template
+                    case e : WiktionaryException =>  {
+                      restore(pageIt, pageItCopy)
+                    }// try another template
                   }
                 }
               }
@@ -409,6 +408,43 @@ object WiktionaryPageExtractor {
         }
 
       }
+      case linkNodeFromTpl : LinkNode => {
+        linkNodeFromTpl match {
+          case ilnFromTpl : InternalLinkNode => {
+            val ilnFromPage = currNodeFromPage.asInstanceOf[InternalLinkNode]
+            bindings addChild parseNodesWithTemplate(
+              new Stack[Node]() pushAll ilnFromTpl.destinationNodes.reverse,
+              new Stack[Node]() pushAll ilnFromPage.destinationNodes.reverse
+            )
+            bindings addChild parseNodesWithTemplate(
+              new Stack[Node]() pushAll ilnFromTpl.children.reverse,
+              new Stack[Node]() pushAll ilnFromPage.children.reverse
+            )
+          }
+          case interWikiLinkFromTpl : InterWikiLinkNode => {
+            val iwlnFromPage = currNodeFromPage.asInstanceOf[InterWikiLinkNode]
+            bindings addChild parseNodesWithTemplate(
+              new Stack[Node]() pushAll interWikiLinkFromTpl.destinationNodes.reverse,
+              new Stack[Node]() pushAll iwlnFromPage.destinationNodes.reverse
+            )
+            bindings addChild parseNodesWithTemplate(
+              new Stack[Node]() pushAll interWikiLinkFromTpl.children.reverse,
+              new Stack[Node]() pushAll iwlnFromPage.children.reverse
+            )
+          }
+          case externalLinkFromTpl : ExternalLinkNode => {
+            val elnFromPage = currNodeFromPage.asInstanceOf[ExternalLinkNode]
+            bindings addChild parseNodesWithTemplate(
+              new Stack[Node]() pushAll externalLinkFromTpl.destinationNodes.reverse,
+              new Stack[Node]() pushAll elnFromPage.destinationNodes.reverse
+            )
+            bindings addChild parseNodesWithTemplate(
+              new Stack[Node]() pushAll externalLinkFromTpl.children.reverse,
+              new Stack[Node]() pushAll elnFromPage.children.reverse
+            )
+          }
+        }
+      }
       case _ => {
         if(currNodeFromPage.getClass != currNodeFromTemplate.getClass){
           restore(pageIt, pageItCopy) //still needed? dont think so
@@ -428,7 +464,7 @@ object WiktionaryPageExtractor {
     st pushAll backup.reverse
   }
 
-  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node], name : String) : WiktionaryPageExtractor.VarBindingsHierarchical = {
+  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node]) : WiktionaryPageExtractor.VarBindingsHierarchical = {
     //printFuncDump("parseList "+name, tplIt, pageIt)
     val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
 
@@ -572,11 +608,10 @@ object WiktionaryPageExtractor {
   protected  def dumpStrShort(node : Node) : String =
   {
     node match {
-      case tn : TemplateNode => "<tpl>{{"+tn.title.decoded+"|"+tn.children.map(dumpStrShort(_)+"|").mkString+"}}</tpl> "
-      case tn : TextNode => "<text>"+tn.text + "</text> "
-      case ln : LinkNode => "<link>[["+ln.children(0).asInstanceOf[TextNode].text+"]]</link> "
-      case sn : SectionNode=> "<section>"+sn.children.map(dumpStrShort(_)+"").mkString + "</section> "
-      case pn : PropertyNode =>  dumpStrShort(pn.children(0))
+      case tn : TemplateNode => "<tpl>"+tn.toWikiText+"</tpl> "
+      case tn : TextNode => "<text>"+tn.toWikiText+"</text> "
+      case ln : LinkNode => "<link>"+ln.toWikiText+"</link> "
+      case sn : SectionNode=> "<section>"+sn.toWikiText+"</section> "
       case n : Node=> "<other "+node.getClass+">"+node.retrieveText.get + "</other> "
     }
   }

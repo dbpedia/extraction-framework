@@ -240,10 +240,17 @@ final class SimpleWikiParser extends WikiParser
         
         if(source.lastTag("[["))
         {
-            val m = source.find(internalLinkLabelOrEnd)
+            //val m = source.find(internalLinkLabelOrEnd)
 
             //Set destination
-            val destination = source.getString(startPos, source.pos - m.tag.length).trim
+            //val destination = source.getString(startPos, source.pos - m.tag.length).trim
+            val destination = parseUntil(internalLinkLabelOrEnd, source, level)
+            println("parsing internal link node: "+destination)
+            val destinationUri = if(destination(0).isInstanceOf[TextNode]){
+              destination(0).asInstanceOf[TextNode].text
+            } else {
+              null //this should never happen except for wiktionary-extraction-template pages
+            }
 
             //Parse label
             val nodes =
@@ -254,18 +261,24 @@ final class SimpleWikiParser extends WikiParser
                 else
                 {
                     //No label found => Use destination as label
-                    List(new TextNode(destination, source.line))
+                    List(new TextNode(destinationUri, source.line))
                 }
 
-            createLinkNode(source, destination, nodes, startLine, false)
+            createLinkNode(source, destinationUri, nodes, startLine, false, destination)
         }
         else if(source.lastTag("["))
         {
-            val tag = source.find(externalLinkLabelOrEnd)
+            //val tag = source.find(externalLinkLabelOrEnd)
 
             //Set destination
-            val destinationURI = source.getString(startPos, source.pos - 1).trim
-
+            //val destinationURI = source.getString(startPos, source.pos - 1).trim
+            val destination = parseUntil(externalLinkLabelOrEnd, source, level)
+            println("parsing external link node: "+destination)
+            val destinationURI = if(destination(0).isInstanceOf[TextNode]){
+              destination(0).asInstanceOf[TextNode].text
+            } else {
+              null //this should never happen except for wiktionary-extraction-template pages
+            }
             //Parse label
             val nodes =
                 if(source.lastTag(" "))
@@ -278,7 +291,7 @@ final class SimpleWikiParser extends WikiParser
                     List(new TextNode(destinationURI, source.line))
                 }
 
-            createLinkNode(source, destinationURI, nodes, startLine, true)
+            createLinkNode(source, destinationURI, nodes, startLine, true, destination)
         }
         else
         {
@@ -291,17 +304,17 @@ final class SimpleWikiParser extends WikiParser
             //Use destination as label
             val nodes = List(new TextNode(destinationURI, source.line))
 
-            createLinkNode(source, destinationURI, nodes, startLine, true)
+            createLinkNode(source, destinationURI, nodes, startLine, true, nodes)
         }
     }
 
-    private def createLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, external : Boolean) : LinkNode =
+    private def createLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, external : Boolean, destinationNodes : List[Node]) : LinkNode =
     {
         if(external)
         {
             try
             {
-        	    return ExternalLinkNode(URI.create(destination), nodes, line)
+        	    return ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
             }
             catch
             {
@@ -314,11 +327,11 @@ final class SimpleWikiParser extends WikiParser
 
             if(destinationTitle.language == source.language)
             {
-                return InternalLinkNode(destinationTitle, nodes, line)
+                return InternalLinkNode(destinationTitle, nodes, line, destinationNodes)
             }
             else
             {
-                return InterWikiLinkNode(destinationTitle, nodes, line)
+                return InterWikiLinkNode(destinationTitle, nodes, line, destinationNodes)
             }
         }
     }

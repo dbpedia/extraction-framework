@@ -1,9 +1,12 @@
 package org.dbpedia.extraction.mappings
 
 import collection.mutable.{ListBuffer, Stack}
+import io.{Source}
 import util.control.Breaks._
 import java.util.regex.Pattern
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
+import org.dbpedia.extraction.sources.WikiPage
 import MyStack._
 import MyStringTrimmer._
 
@@ -144,6 +147,17 @@ class MyStack(s : Stack[Node]) {
 object MyStack {
   implicit def convert1(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def convert2(s : MyStack) : Stack[Node] = { s.stack }
+  def fromParsedFile(name : String) : Stack[Node] = {
+    val str = Source.fromFile(name).mkString
+    //println("read file >"+str+"<")
+    val page : PageNode = new SimpleWikiParser().apply(
+        new WikiPage(
+          new WikiTitle("test template"),0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
+        )
+    )
+    new Stack[Node]().pushAll(page.children.reverse)
+  }
+
 }
 
 object TimeMeasurement {
