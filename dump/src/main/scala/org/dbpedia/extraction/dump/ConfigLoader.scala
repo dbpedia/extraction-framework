@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump
 
-import _root_.org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter, NTriplesFormatterAsIRI, NQuadsFormatterAsIRI }
+import _root_.org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
 import _root_.org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
 import _root_.org.dbpedia.extraction.mappings._
 import java.net.URL
@@ -49,7 +49,7 @@ object ConfigLoader
         //Load languages
         if(config.getProperty("languages") == null) throw new IllegalArgumentException("Property 'languages' not defined.")
         val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList
-        
+
         //Load property updateDumps
         val update = Option(config.getProperty("updateDumps")).getOrElse(return false).trim.toLowerCase match
         {
@@ -84,17 +84,8 @@ object ConfigLoader
         val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
 
         //Destination
-        val tripleDestination = 
-            if (config.usePercentEncoding )
-                new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
-            else
-                new FileDestination(new NTriplesFormatterAsIRI(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
-        val quadDestination = 
-            if (config.usePercentEncoding )
-                new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
-            else
-                new FileDestination(new NQuadsFormatterAsIRI(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq")
-
+        val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
+        val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq")
         val destination = new CompositeDestination(tripleDestination, quadDestination)
 
         new ExtractionJob(extractor, articlesSource, destination, "Extraction Job for " + language.wikiCode + " Wikipedia")
@@ -109,15 +100,7 @@ object ConfigLoader
         /** Output directory */
         if(config.getProperty("outputDir") == null) throw new IllegalArgumentException("Property 'outputDir' not defined.")
         val outputDir = new File(config.getProperty("outputDir"))
-        
-        /** Persent Encoding */
-        if(config.getProperty("usePercentEncoding") == null) throw new IllegalArgumentException("Property 'usePercentEncoding' not defined.")
-        val usePercentEncoding = config.getProperty("usePercentEncoding").trim.toLowerCase match
-        {
-            case BooleanLiteral(b) => b
-            case _ => throw new IllegalArgumentException("Invalid value for property 'usePercentEncoding'")
-        }
-                        
+
         /** Languages */
         if(config.getProperty("languages") == null) throw new IllegalArgumentException("Property 'languages' not defined.")
         private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList

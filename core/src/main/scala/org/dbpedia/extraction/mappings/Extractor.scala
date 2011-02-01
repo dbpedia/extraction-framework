@@ -24,9 +24,9 @@ trait Extractor extends (PageNode => Graph)
     final def apply(page : PageNode) : Graph =
     {
         //If the page is not english, retrieve the title of the corresponding english article
-        val enTitle = retrieveEnglishTitle(page).getOrElse(return new Graph())
+        val title = retrieveTitle(page).getOrElse(return new Graph())
         //Generate the page URI
-        val uri = OntologyNamespaces.getUri(enTitle.encodedWithNamespace, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        val uri = OntologyNamespaces.getResource(title.encodedWithNamespace, page.title.language.wikiCode)
         //Extract
         extract(page, uri, new PageContext())
     }
@@ -42,20 +42,35 @@ trait Extractor extends (PageNode => Graph)
     def extract(page : PageNode, subjectUri : String, context : PageContext) : Graph
 
     /**
-     * Retrieves the corresponding english title of a non-english page.
-     * If the given page is in english, its own title is returned.
+     * Retrieves the corresponding title of a page.
      */
-    private def retrieveEnglishTitle(page : PageNode) : Option[WikiTitle] =
+    private def retrieveTitle(page : PageNode) : Option[WikiTitle] =
     {
-        return Some(page.title)
-        if(page.title.language.wikiCode == "en")
-        {
-            return Some(page.title)
-        }
+        //#int if all titles true, original name implied true
+        val retrieveAllTitles=true
+        //#int if all titles false  option to extract with original name
+        val retrieveOriginalName=true
 
-        for(InterWikiLinkNode(destination, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
+        if (retrieveAllTitles==true)
+            return Some(page.title)
+        else
         {
-            return Some(destination)
+            if(page.title.language.wikiCode == "en")
+            {
+                return Some(page.title)
+            }
+
+            for(InterWikiLinkNode(destination, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
+            {
+                if (retrieveOriginalName==false)
+                {
+                    return Some(destination)
+                }
+                else
+                {
+                    return Some(page.title)
+                }
+            }
         }
 
         None

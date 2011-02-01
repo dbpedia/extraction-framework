@@ -113,6 +113,7 @@ class ObjectParser(val strict : Boolean = false) extends DataParser
 
     private def getUri(destination : WikiTitle) : String =
     {
-        OntologyNamespaces.getUri(destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        //OntologyNamespaces.getUri(destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        OntologyNamespaces.getResource(destination.encoded, destination.language.wikiCode)
     }
 }

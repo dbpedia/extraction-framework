@@ -62,7 +62,7 @@ if [ ! -d "$OUTLINKDIR" ]; then
 fi
 
 #join all datasets in file
-for LINE in `cat links.txt`;do
+for LINE in `cat $LINKS`;do
 	DATASET_IN=$LINKSDIR\/$LINE
 	# generate dataset name with lang postfix	
 	DATASET_OUT=$(echo "$OUTLINKDIR/$LINE" | sed -e 's/.nt/_el.nt/g' )

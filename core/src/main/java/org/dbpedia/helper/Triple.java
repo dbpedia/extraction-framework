@@ -90,6 +90,7 @@ public static String getHexString(byte[] b) throws Exception {
            String encPageID = CoreUtil.wikipediaEncode(pageID);
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
+           //TODO make resource domain configurable
            String resourceURI = "http://dbpedia.org/resource/"+ returnPageID;
            URI uri = new URIImpl(resourceURI);
            pageCacheKey = pageID;

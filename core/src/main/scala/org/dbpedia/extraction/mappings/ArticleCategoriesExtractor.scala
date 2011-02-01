@@ -40,6 +40,7 @@ class ArticleCategoriesExtractor(extractionContext : ExtractionContext) extends 
     {
         val categoryNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Category)
 
-        OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, language)
     }   
 }

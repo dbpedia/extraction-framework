@@ -17,7 +17,8 @@ class SameAsExtractor(extractionContext : ExtractionContext) extends Extractor
 
     private val sameAsMap = Map(
         "en" -> Set("el", "de", "co"),
-        "el" -> Set("en")
+        "el" -> Set("en"),
+        "de" -> Set("en", "el")
     )
 
     require( sameAsMap.keySet.contains(language), "SameAsExtractor's supported languages: " + sameAsMap.keySet.mkString(", ")+"; not "+language)
@@ -32,7 +33,7 @@ class SameAsExtractor(extractionContext : ExtractionContext) extends Extractor
         retrieveTranslationTitles (node,sameAsMap(language)).foreach { tuple:(String, WikiTitle) =>
             val (tlang, title) = tuple
             quads ::= new Quad(extractionContext, DBpediaDatasets.SameAs, subjectUri, sameAsProperty,
-                getUri(title,tlang), title.sourceUri, null)
+                OntologyNamespaces.getResource(title.encodedWithNamespace,tlang), title.sourceUri, null)
         }
         new Graph(quads)
     }
@@ -46,14 +47,5 @@ class SameAsExtractor(extractionContext : ExtractionContext) extends Extractor
             results += (destination.language.wikiCode -> destination)
         }
         results
-    }
-
-    private def getUri(destination : WikiTitle, lang : String) : String =
-    {
-        if (lang == "en")
-            "http://dbpedia.org/resource/" + destination.encodedWithNamespace
-            //OntologyNamespaces.getUri(destination.encodedWithNamespace, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
-        else
-            "http://" + lang + ".dbpedia.org/resource/" + destination.encodedWithNamespace
     }
 }

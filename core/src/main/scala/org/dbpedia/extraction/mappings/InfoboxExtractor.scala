@@ -28,7 +28,8 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
 
     private val language = extractionContext.language.wikiCode
 
-    private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
+    private val usesTemplateProperty = OntologyNamespaces.getProperty("wikiPageUsesTemplate",language)
+    //private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
 
     private val templateNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Template)
 
@@ -123,7 +124,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                         {
                             quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
-                            //used for stats (do not delete)
+                            //#statistics uncomment the following 2 lines (do not delete)
                             //quads ::= new Quad( extractionContext, DBpediaDatasets.InfoboxTest, subjectUri, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE + templateNamespace + ":" + template.title.encoded,
                             //                    property.key, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
                         }
@@ -150,7 +151,8 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
                     //TODO change domain
-                    quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty, "http://dbpedia.org/resource/" + templateNamespace + ":" + template.title.encoded, template.sourceUri, null)
+                    quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
+                                        OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language), template.sourceUri, null)
                     seenTemplates.add(template.title.encoded)
                 }
             }
@@ -282,7 +284,8 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
 
         // TODO maximal length of properties? (was 250)
         
-        OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + result
+        OntologyNamespaces.getProperty(result,language)
+        //OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + result
     }
 
     private def getPropertyLabel(key : String) : String =
