@@ -94,9 +94,14 @@ class WiktionaryPageExtractor extends Extractor {
         val bindings = parseNodesWithTemplate(tpl, pageSt)
         bindings.dump(0)
       } catch {
-        case e : WiktionaryException => println("page could not be parsed. results so far:"); e.vars.dump(0)
-      }
-       */
+        case e : WiktionaryException => {
+          println("page could not be parsed. reason:")
+          println(e.s)
+          println("results so far:")
+          e.vars.dump(0)
+        }
+      } */
+
       // the hierarchical var bindings need to be normalized to be converted to rdf
       //flatLangPos(bindings)
       //bindings.dump(0)
@@ -108,7 +113,7 @@ class WiktionaryPageExtractor extends Extractor {
           new WikiTitle("test"),0,0, pageStr
         )
       )
-      testpage.children.foreach(node => println(dumpStr(node)))
+      testpage.children.foreach(node => println(dumpStr(node)))*/
 
     } report {
       duration : Long => println("took "+ duration +"ms")
@@ -123,7 +128,7 @@ class WiktionaryPageExtractor extends Extractor {
   }
 }
 
-class WiktionaryException(s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
+class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
 class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
 
 object WiktionaryPageExtractor {
@@ -135,13 +140,16 @@ object WiktionaryPageExtractor {
     val bindings = new HashMap[String, List[Node]]()
     def addBinding(name : String, value : List[Node]) : Unit = {
       bindings += (name -> value)
+      dump(0)
     }
     def addChild(sub : VarBindingsHierarchical) : Unit = {
       children += sub
+      dump(0)
     }
     def mergeWith(other : VarBindingsHierarchical) = {
       children ++= other.children
       bindings ++= other.bindings
+      dump(0)
     }
     def dump(depth : Int = 0){
       val prefix = " "*depth
@@ -215,9 +223,8 @@ object WiktionaryPageExtractor {
           }
 
           //not finished, keep recording
-          printMsg("var += "+curNode)
-
           varValue append curNode
+          printMsg("var += "+curNode)
         }
       }
       if(!endMarkerFound){
@@ -234,7 +241,7 @@ object WiktionaryPageExtractor {
     if(n1.getClass != n2.getClass){
       return false
     }
-    //the copy method is only available in the implementation of the abstract node-class
+    //the copy method is not available in the implementation of the abstract node-class
     //so we cast to all subclasses
     n1 match {
       case tn : TemplateNode => n2.asInstanceOf[TemplateNode].copy(line=0).equals(tn.copy(line=0))
@@ -318,6 +325,7 @@ object WiktionaryPageExtractor {
                   } catch {
                     case e : WiktionaryException =>  {
                       restore(pageIt, pageItCopy)
+                      bindings mergeWith e.vars
                     }// try another template
                   }
                 }
@@ -471,6 +479,7 @@ object WiktionaryPageExtractor {
       }
     } catch {
       case e : WiktionaryException => printMsg("parseList caught an exception - list ended "+e) // now we know the list was finished
+      bindings addChild e.vars
     }
     bindings
   }
