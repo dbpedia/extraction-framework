@@ -107,13 +107,14 @@ class WiktionaryPageExtractor extends Extractor {
       //bindings.dump(0)
 
       // for debugging
-      val pageStr = " [[1]] [[{{tpl}}]] [1] [{{tpl}}] "
+      val pageStr = "[[{{tpl}} http://example.com]] "
       val testpage : PageNode = new SimpleWikiParser()(
         new WikiPage(
           new WikiTitle("test"),0,0, pageStr
         )
       )
-      testpage.children.foreach(node => println(dumpStr(node)))*/
+      testpage.children.foreach(node => println(dumpStr(node)))
+      assert(testpage.children(0).asInstanceOf[InternalLinkNode].destinationNodes(0).isInstanceOf[TemplateNode])
 
     } report {
       duration : Long => println("took "+ duration +"ms")
