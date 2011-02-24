@@ -8,9 +8,14 @@ import scala.io.Source
 import util.control.Breaks._
 import java.io.FileNotFoundException
 import collection.mutable.{Stack, ListBuffer, HashMap}
+
+//some of my utilities
 import MyStack._
+import MyNode._
 import TimeMeasurement._
-import WiktionaryPageExtractor._
+import MyStringTrimmer._
+import WiktionaryPageExtractor._ //shouldnt be the methods of the companion object available?
+import WiktionaryLogging._
 
 /**
  * @author Jonas Brekle <jonas.brekle@gmail.com>
@@ -87,9 +92,10 @@ class WiktionaryPageExtractor extends Extractor {
 
 
     measure {
-      /*val tpl = MyStack.fromParsedFile(language+"-page.tpl").filterNewLines.filterTrimmed
+      val tpl = MyStack.fromParsedFile(language+"-page.tpl").filterNewLines.filterTrimmed
       val pageSt =  new Stack[Node]().pushAll(page.children.reverse).filterTrimmed
-      //println(tpl.map(dumpStr(_)).mkString )
+      //println("dumping page")
+      //page.children.foreach(_.dump(0))
       try {
         val bindings = parseNodesWithTemplate(tpl, pageSt)
         bindings.dump(0)
@@ -97,17 +103,24 @@ class WiktionaryPageExtractor extends Extractor {
         case e : WiktionaryException => {
           println("page could not be parsed. reason:")
           println(e.s)
+          if(e.unexpectedNode.isDefined){
+            println("unexpected node:")
+            println(e.unexpectedNode.get)
+          }
           println("results so far:")
           e.vars.dump(0)
         }
-      } */
+      }
 
       // the hierarchical var bindings need to be normalized to be converted to rdf
       //flatLangPos(bindings)
       //bindings.dump(0)
 
       // for debugging
-      val pageStr = "[[{{tpl}} http://example.com]] "
+      /*println()
+      println("parse an example page... result:")
+      //val pageStr = "[[{{tpl|var|uri}}|uriLabel]]"  //ok das hier ist wahrscheinlich ein größeres problem
+      val pageStr = "[{{tpl|var|uri}} uriLabel]"
       val testpage : PageNode = new SimpleWikiParser()(
         new WikiPage(
           new WikiTitle("test"),0,0, pageStr
@@ -115,13 +128,10 @@ class WiktionaryPageExtractor extends Extractor {
       )
       testpage.children.foreach(node => println(dumpStr(node)))
       assert(testpage.children(0).asInstanceOf[InternalLinkNode].destinationNodes(0).isInstanceOf[TemplateNode])
-
+      */
     } report {
       duration : Long => println("took "+ duration +"ms")
     }
-
-    println()
-    println()
 
     //TODO build triples from bindings
 
@@ -129,49 +139,10 @@ class WiktionaryPageExtractor extends Extractor {
   }
 }
 
-class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
-class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
-
 object WiktionaryPageExtractor {
   private val language = "de"
   private val subTemplateCache = scala.collection.mutable.Map[String, Stack[Node]]()
 
-  class VarBindingsHierarchical (){
-    val children  = new ListBuffer[VarBindingsHierarchical]()
-    val bindings = new HashMap[String, List[Node]]()
-    def addBinding(name : String, value : List[Node]) : Unit = {
-      bindings += (name -> value)
-      dump(0)
-    }
-    def addChild(sub : VarBindingsHierarchical) : Unit = {
-      children += sub
-      dump(0)
-    }
-    def mergeWith(other : VarBindingsHierarchical) = {
-      children ++= other.children
-      bindings ++= other.bindings
-      dump(0)
-    }
-    def dump(depth : Int = 0){
-      val prefix = " "*depth
-      for(key <- bindings.keySet){
-        println(prefix+key+" -> "+bindings.apply(key))
-      }
-      for(child <- children){
-        child.dump(depth + 2)
-      }
-    }
-    def flat : VarBindingsHierarchical = {
-      val copi = new VarBindingsHierarchical
-      for(child <- children){
-        copi addChild child.flat
-      }
-      for(key <- bindings.keySet){
-        copi.addBinding(key, bindings.apply(key))
-      }
-      copi
-    }
-  }
 
   protected def recordVar(tplVarNode : TemplateNode, possibeEndMarkerNode: Option[Node], pageIt : Stack[Node]) : (String, List[Node]) = {
     val varValue = new ListBuffer[Node]()
@@ -183,7 +154,7 @@ object WiktionaryPageExtractor {
       //println("NO ENDMARKER")
     } else {
       val endMarkerNode = possibeEndMarkerNode.get
-      printMsg("endmarker "+dumpStrShort(endMarkerNode))
+      printMsg("endmarker "+endMarkerNode.dumpStrShort)
 
       //record from the page till we see the endmarker
       var endMarkerFound = false
@@ -257,9 +228,9 @@ object WiktionaryPageExtractor {
   }
 
   //extract does one step e.g. parse a var, or a list etc and then returns
-  protected def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : WiktionaryPageExtractor.VarBindingsHierarchical = {
+  protected def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
     printFuncDump("parseNode", tplIt, pageIt)
-    val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
+    val bindings = new VarBindingsHierarchical
     val currNodeFromTemplate = tplIt.pop
     val currNodeFromPage = pageIt.head    // we dont consume the pagenode here - needs to be consumed after processing
     var pageItCopy = pageIt.clone
@@ -278,6 +249,7 @@ object WiktionaryPageExtractor {
         || currNodeFromPage.getClass == currNodeFromTemplate.getClass
       )
     ){
+      println("early mismatch")
       throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
     }
 
@@ -337,6 +309,29 @@ object WiktionaryPageExtractor {
               val binding = recordVar(currNodeFromTemplate.asInstanceOf[TemplateNode], endMarkerNode, pageIt)
               bindings.addBinding(binding._1, binding._2)
             }
+            case "link" => {
+              if(!currNodeFromPage.isInstanceOf[LinkNode]){
+                throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+              }
+              val destination = currNodeFromPage match {
+                case iln : InternalLinkNode => new TextNode(iln.destination.decodedWithNamespace, 0)
+                case iwln : InterWikiLinkNode => new TextNode(iwln.destination.decodedWithNamespace, 0)
+                case eln : ExternalLinkNode => new TextNode(eln.destination.toString, 0)
+              }
+              //extract from the destination link
+              bindings addChild parseNodesWithTemplate(
+                new Stack[Node]() pushAll tplNodeFromTpl.property("2").get.children.reverse,
+                new Stack[Node]() push destination
+              )
+              if(tplNodeFromTpl.property("3").isDefined){
+                //extract from the label
+                bindings addChild parseNodesWithTemplate(
+                  new Stack[Node]() pushAll tplNodeFromTpl.property("3").get.children.reverse,
+                  new Stack[Node]() pushAll currNodeFromPage.children
+                )
+              }
+              pageIt.pop
+            }
             case _ =>  { }
           }
         } else {
@@ -344,14 +339,16 @@ object WiktionaryPageExtractor {
           //parse template properties
           currNodeFromPage match {
             case tplNodeFromPage : TemplateNode => {
-              breakable{
+              if(!tplNodeFromPage.title.decoded.equals(tplNodeFromTpl.title.decoded)) {
+                throw new WiktionaryException("the template does not match the page: unmatched template title", bindings, Some(currNodeFromPage))
+              }
+              breakable {
                 for(key <- tplNodeFromTpl.keySet){
-                  println("propkey"+ key)
                   if(tplNodeFromTpl.property(key).isDefined && tplNodeFromPage.property(key).isDefined){
-                    bindings addChild parseNodesWithTemplate(
-                      new Stack[Node]() pushAll tplNodeFromTpl.property(key).get.children.reverse,
-                      new Stack[Node]() pushAll tplNodeFromPage.property(key).get.children.reverse
-                    )
+                      bindings addChild parseNodesWithTemplate(
+                        new Stack[Node]() pushAll tplNodeFromTpl.property(key).get.children.reverse,
+                        new Stack[Node]() pushAll tplNodeFromPage.property(key).get.children.reverse
+                      )
                   } else {
                     break
                   }
@@ -361,7 +358,7 @@ object WiktionaryPageExtractor {
             }
             case _ => {
               printMsg("you should not see this: shouldve been detected earlier")
-              throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+              throw new WiktionaryException("the template does not match the page: unmatched template property", bindings, Some(currNodeFromPage))
             }
           }
         }
@@ -390,43 +387,7 @@ object WiktionaryPageExtractor {
         }
 
       }
-      case linkNodeFromTpl : LinkNode => {
-        linkNodeFromTpl match {
-          case ilnFromTpl : InternalLinkNode => {
-            val ilnFromPage = currNodeFromPage.asInstanceOf[InternalLinkNode]
-            bindings addChild parseNodesWithTemplate(
-              new Stack[Node]() pushAll ilnFromTpl.destinationNodes.reverse,
-              new Stack[Node]() pushAll ilnFromPage.destinationNodes.reverse
-            )
-            bindings addChild parseNodesWithTemplate(
-              new Stack[Node]() pushAll ilnFromTpl.children.reverse,
-              new Stack[Node]() pushAll ilnFromPage.children.reverse
-            )
-          }
-          case interWikiLinkFromTpl : InterWikiLinkNode => {
-            val iwlnFromPage = currNodeFromPage.asInstanceOf[InterWikiLinkNode]
-            bindings addChild parseNodesWithTemplate(
-              new Stack[Node]() pushAll interWikiLinkFromTpl.destinationNodes.reverse,
-              new Stack[Node]() pushAll iwlnFromPage.destinationNodes.reverse
-            )
-            bindings addChild parseNodesWithTemplate(
-              new Stack[Node]() pushAll interWikiLinkFromTpl.children.reverse,
-              new Stack[Node]() pushAll iwlnFromPage.children.reverse
-            )
-          }
-          case externalLinkFromTpl : ExternalLinkNode => {
-            val elnFromPage = currNodeFromPage.asInstanceOf[ExternalLinkNode]
-            bindings addChild parseNodesWithTemplate(
-              new Stack[Node]() pushAll externalLinkFromTpl.destinationNodes.reverse,
-              new Stack[Node]() pushAll elnFromPage.destinationNodes.reverse
-            )
-            bindings addChild parseNodesWithTemplate(
-              new Stack[Node]() pushAll externalLinkFromTpl.children.reverse,
-              new Stack[Node]() pushAll elnFromPage.children.reverse
-            )
-          }
-        }
-      }
+
       case _ => {
         if(currNodeFromPage.getClass != currNodeFromTemplate.getClass){
           restore(pageIt, pageItCopy) //still needed? dont think so
@@ -446,9 +407,9 @@ object WiktionaryPageExtractor {
     st pushAll backup.reverse
   }
 
-  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node]) : WiktionaryPageExtractor.VarBindingsHierarchical = {
+  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node]) : VarBindingsHierarchical = {
     //printFuncDump("parseList "+name, tplIt, pageIt)
-    val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
+    val bindings = new VarBindingsHierarchical
 
     try {
       breakable {
@@ -486,35 +447,66 @@ object WiktionaryPageExtractor {
   }
 
   // parses the complete buffer
-  protected def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : WiktionaryPageExtractor.VarBindingsHierarchical = {
+  protected def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
     //printFuncDump("parseNodesWithTemplate", tplIt, pageIt)
-    val bindings = new WiktionaryPageExtractor.VarBindingsHierarchical
+    val bindings = new VarBindingsHierarchical
     while(tplIt.size > 0 && pageIt.size > 0){
-      bindings mergeWith parseNode(tplIt, pageIt)
+        try {
+          bindings mergeWith parseNode(tplIt, pageIt)
+        } catch {
+          case e : WiktionaryException =>
+          bindings mergeWith e.vars
+
+          throw e.copy(vars=bindings)
+        }
     }
+    bindings.dump(0)
     bindings
   }
+}
 
-  protected def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node]) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length  - 7 //6 is the stack depth on the extract call. +1 for this func
-    val prefix =  " " * st_depth
-    println(prefix + "------------")
-    println(prefix + "<entering " + name +">")
-    println(prefix + "<template (next 5)>")
-    println(prefix + tplIt.take(5).map(dumpStrShort(_)).mkString)
-    println(prefix + "<page (next 5)>")
-    println(prefix + pageIt.take(5).map(dumpStrShort(_)).mkString)
-    println(prefix + "------------\n\n")
-  }
+class VarBindingsHierarchical (){
+    val children  = new ListBuffer[VarBindingsHierarchical]()
+    val bindings = new HashMap[String, List[Node]]()
+    def addBinding(name : String, value : List[Node]) : Unit = {
+      bindings += (name -> value)
+    }
+    def addChild(sub : VarBindingsHierarchical) : Unit = {
+      if(sub.bindings.size > 0 || sub.children.size > 0){
+        children += sub
+      }
+    }
+    def mergeWith(other : VarBindingsHierarchical) = {
+      children ++= other.children
+      bindings ++= other.bindings
+    }
 
-  protected def printMsg(str : String) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length  - 7
-    val prefix =  " " * st_depth
-    println(prefix + str)
-  }
+  def dump(depth : Int = 0){
+      val prefix = " "*depth
+      println(prefix+"{")
+      for(key <- bindings.keySet){
+        println(prefix+key+" -> "+bindings.apply(key))
+      }
+      for(child <- children){
+        child.dump(depth + 2)
+      }
+      println(prefix+"}")
+    }
 
-  protected def flatLangPos(vb : WiktionaryPageExtractor.VarBindingsHierarchical) : Unit = {
-    def getLang(vbi : WiktionaryPageExtractor.VarBindingsHierarchical) : Option[WiktionaryPageExtractor.VarBindingsHierarchical] = {
+  def flat : VarBindingsHierarchical = {
+      val copi = new VarBindingsHierarchical
+      for(child <- children){
+        copi addChild child.flat
+      }
+      for(key <- bindings.keySet){
+        copi.addBinding(key, bindings.apply(key))
+      }
+      copi
+    }
+
+   def flatLangPos() : Unit = {
+     //local functions
+     def getLang(vbi : VarBindingsHierarchical) : Option[VarBindingsHierarchical] = {
       if(vbi.bindings.contains("lang")){
         return Some(vbi)
       } else {
@@ -527,7 +519,8 @@ object WiktionaryPageExtractor {
         return None
       }
     }
-    def getPos(vbi : WiktionaryPageExtractor.VarBindingsHierarchical) : Option[WiktionaryPageExtractor.VarBindingsHierarchical] = {
+
+     def getPos(vbi : VarBindingsHierarchical) : Option[VarBindingsHierarchical] = {
       if(vbi.bindings.contains("pos")){
         return Some(vbi)
       } else {
@@ -540,7 +533,9 @@ object WiktionaryPageExtractor {
         return None
       }
     }
-    val lang = getLang(vb)
+
+    //actual function
+    val lang = getLang(this)
     if(lang.isDefined){
       val pos = getPos(lang.get)
       if(pos.isDefined){
@@ -552,50 +547,4 @@ object WiktionaryPageExtractor {
       } else println("no pos")
     } else println("no lang")
   }
-
-  protected def dump(node : Node, depth : Int = 0) : Unit =
-  {
-    println(dumpStr(node, depth))
-  }
-
-   protected def dumpStr(node : Node, depth : Int = 0) : String =
-  {
-    var str = ""
-    //indent by depth
-    val prefix = " "*depth
-
-    //print class
-    str += prefix + node.getClass +"\n"
-
-    //dump node properties according to its type
-    node match {
-      case tn : TextNode =>  str += prefix+"text : "+tn.text +"\n"
-      case tn : SectionNode => {
-        str += prefix+"secname : "+tn.name +"\n"
-        str += prefix+"level : "+tn.level +"\n"
-      }
-      case tn : TemplateNode =>  str += prefix+"tplname : "+tn.title.decoded +"\n"
-      case tn : ExternalLinkNode =>  str += prefix+"destNodes : "+tn.destinationNodes +"\n"
-      case tn : InternalLinkNode =>  str += prefix+"destNodes : "+tn.destinationNodes +"\n"
-    }
-
-    //dump children
-    str += prefix+"children:  {" +"\n"
-    node.children.foreach(
-      child => str += dumpStr(child, depth + 2)
-    )
-    str += prefix+"}" +"\n"
-    str
-  }
-
-  protected  def dumpStrShort(node : Node) : String =
-  {
-    node match {
-      case tn : TemplateNode => "<tpl>"+tn.toWikiText+"</tpl> "
-      case tn : TextNode => "<text>"+tn.toWikiText+"</text> "
-      case ln : LinkNode => "<link>"+ln.toWikiText+"</link> "
-      case sn : SectionNode=> "<section>"+sn.toWikiText+"</section> "
-      case n : Node=> "<other "+node.getClass+">"+node.retrieveText.get + "</other> "
-    }
-  }
-}
+ }

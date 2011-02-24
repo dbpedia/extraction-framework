@@ -8,7 +8,11 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.sources.WikiPage
 import MyStack._
+import MyNode._
 import MyStringTrimmer._
+
+case class WiktionaryException(s: String, vars : VarBindingsHierarchical, unexpectedNode : Option[Node]) extends  Exception(s) {}
+case class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
 
 class MyStack(s : Stack[Node]) {
   val stack : Stack[Node] = s
@@ -145,16 +149,18 @@ class MyStack(s : Stack[Node]) {
 }
 
 object MyStack {
-  implicit def convert1(s : Stack[Node]) : MyStack = { new MyStack(s) }
-  implicit def convert2(s : MyStack) : Stack[Node] = { s.stack }
+  implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
+  implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
   def fromParsedFile(name : String) : Stack[Node] = {
     val str = Source.fromFile(name).mkString
-    //println("read file >"+str+"<")
+    //println("read file "+name+">"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
           new WikiTitle("test template"),0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
         )
     )
+    println("dumping subtemplate")
+    page.children.foreach(_.dump(0))
     new Stack[Node]().pushAll(page.children.reverse)
   }
 
@@ -180,4 +186,78 @@ class MyStringTrimmer(s : String){
 object MyStringTrimmer {
   implicit def String2MyStringTrimmer(s : String) : MyStringTrimmer = new MyStringTrimmer(s)
   implicit def MyStringTrimmer2String(s : MyStringTrimmer) : String = s.str
+}
+
+object WiktionaryLogging {
+  def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node]) : Unit = {
+    val st_depth = new Exception("").getStackTrace.length  - 7 //6 is the stack depth on the extract call. +1 for this func
+    val prefix =  " " * st_depth
+    println(prefix + "------------")
+    println(prefix + "<entering " + name +">")
+    println(prefix + "<template (next 7)>")
+    println(prefix + tplIt.take(7).map(_.dumpStrShort).mkString)
+    println(prefix + "<page (next 7)>")
+    println(prefix + pageIt.take(7).map(_.dumpStrShort).mkString)
+    println(prefix + "------------\n\n")
+  }
+
+  def printMsg(str : String) : Unit = {
+    val st_depth = new Exception("").getStackTrace.length  - 7
+    val prefix =  " " * st_depth
+    println(prefix + str)
+  }
+}
+
+class MyNode (val n : Node){
+  def dump(depth : Int = 0) : Unit =
+  {
+    println(n.dumpStr(depth))
+  }
+
+  def dumpStr(depth : Int = 0) : String =
+  {
+    var str = ""
+    //indent by depth
+    val prefix = " "*depth
+
+    //print class
+    str += prefix + n.getClass +"\n"
+
+    //dump node properties according to its type
+    n match {
+      case tn : TextNode =>  str += prefix+"text : "+tn.text +"\n"
+      case tn : SectionNode => {
+        str += prefix+"secname : "+tn.name +"\n"
+        str += prefix+"level : "+tn.level +"\n"
+      }
+      case tn : TemplateNode =>  str += prefix+"tplname : "+tn.title.decoded +"\n"
+      case tn : ExternalLinkNode =>  str += prefix+"destNodes : "+tn.destinationNodes +"\n"
+      case tn : InternalLinkNode =>  str += prefix+"destNodes : "+tn.destinationNodes +"\n"
+      case pn : PropertyNode =>
+    }
+
+    //dump children
+    str += prefix+"children:  {" +"\n"
+    n.children.foreach(
+      child => str += child.dumpStr(depth + 2)
+    )
+    str += prefix+"}" +"\n"
+    str
+  }
+
+  def dumpStrShort() : String =
+  {
+    n match {
+      case tn : TemplateNode => "<tpl>"+tn.toWikiText+"</tpl> "
+      case tn : TextNode => "<text>"+tn.toWikiText+"</text> "
+      case ln : LinkNode => "<link>"+ln.toWikiText+"</link> "
+      case sn : SectionNode=> "<section>"+sn.toWikiText+"</section> "
+      case node : Node=> "<other "+node.getClass+">"+node.retrieveText.get + "</other> "
+    }
+  }
+}
+
+object MyNode{
+  implicit def Node2MyNode(node : Node) : MyNode = new MyNode(node)
+  implicit def MyNode2Node(mynode : MyNode) : Node = mynode.n
 }
