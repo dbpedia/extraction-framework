@@ -110,7 +110,7 @@ object WikiTitle
         val OntologyClass = Value(200)
         val OntologyProperty = Value(202)
         val Mapping = Value(204)
-        val Mapping_pl = Value(206)
+        val Mapping_pl = Value(220)
         val Mapping_de = Value(208)
         val Mapping_fr = Value(210)
         val Mapping_it = Value(212)
