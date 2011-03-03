@@ -57,7 +57,7 @@ object Redirect
       "nn" -> Set("#omdiriger","#REDIRECT"),
       "oc" -> Set("#REDIRECCION","#REDIRECT"),
       "pl" -> Set("#PATRZ","#PRZEKIERUJ","#TAM","#REDIRECT"),
-      "pt-br" -> Set("#REDIRECIONAMENTO","#REDIRECT"),
+      "pt" -> Set("#REDIRECIONAMENTO","#REDIRECT"),
       "ro" -> Set("#REDIRECTEAZA","#REDIRECT"),
       "ru" -> Set("#перенаправление","#перенапр","#REDIRECT"),
       "sa" -> Set("#पुनर्निदेशन","#REDIRECT"),
