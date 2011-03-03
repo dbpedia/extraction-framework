@@ -1,12 +1,15 @@
 package org.dbpedia.helper;
 
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.util.Language;
+import org.dbpedia.extraction.util.WikiUtil;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.rio.ntriples.NTriplesUtil;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
@@ -128,11 +131,13 @@ public class CoreUtil {
 		return outputString.toString();
 	}
 
+    /**
+     * @deprecated please use WikiUtil.wikiEncode!
+     * @param page_title: decoded page title
+     * @return encoded page title
+     */
+    @Deprecated
     public static String wikipediaEncode(String page_title) {
-        String strEncodedPageTitle = URLEncoder.encode(page_title.trim().replace(" ","_"));
-        // Decode slash "/", colon ":", as wikimedia does not encode these
-        strEncodedPageTitle = strEncodedPageTitle.replace("%2F","/");
-        strEncodedPageTitle =  strEncodedPageTitle.replace("%3A",":");
-        return strEncodedPageTitle;
+        return WikiUtil.wikiDecode(page_title, Language.Default());
  	}
 }
