@@ -138,6 +138,6 @@ public class CoreUtil {
      */
     @Deprecated
     public static String wikipediaEncode(String page_title) {
-        return WikiUtil.wikiDecode(page_title, Language.Default());
+        return WikiUtil.wikiEncode(page_title, Language.Default());
  	}
 }
