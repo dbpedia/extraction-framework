@@ -95,7 +95,7 @@ class ImageExtractor(extractionContext : ExtractionContext) extends Extractor
                     }
                     searchImage(children, sections).foreach(s => return Some(s))
                 }
-                case (linkNode @ InternalLinkNode(destination, _, _)) if destination.namespace == WikiTitle.Namespace.File =>
+                case (linkNode @ InternalLinkNode(destination, _, _, _)) if destination.namespace == WikiTitle.Namespace.File =>
                 {
                     for (fileName <- ImageLinkRegex.findFirstIn(destination.encoded);
                          if checkImageRights(fileName))
