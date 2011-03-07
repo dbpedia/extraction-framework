@@ -4,7 +4,7 @@
 	<updateOntologyAndMappingsPeriod>10</updateOntologyAndMappingsPeriod>
 	<language name ="en">
 		<extractors>
-			<extractor name ="org.dbpedia.extraction.mappings.LabelExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.LabelExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -14,7 +14,7 @@
 				</produces>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.WikiPageExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.WikiPageExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="STARTSWITH" pexact ="true">
 						<s></s>
@@ -31,7 +31,7 @@
 				<notice>set in source code</notice>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.InfoboxExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.InfoboxExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="STARTSWITH">
 						<s></s>
@@ -42,7 +42,7 @@
 				<notice>I deactivated warning output for catchObjectDataTypeFunctions, this was for a test run only</notice>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.PageLinksExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.PageLinksExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -52,7 +52,7 @@
 				</produces>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.GeoExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.GeoExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -98,7 +98,7 @@
 				<postprocessing type="IFEXISTSDONOTDELETE">in dbpedia gecoordinates might exist in another language version, but is not produced by the english live extraction</postprocessing>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.ExternalLinksExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.ExternalLinksExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -108,7 +108,7 @@
 				</produces>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.HomepageExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.HomepageExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -118,7 +118,7 @@
 				</produces>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.DisambiguationExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.DisambiguationExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -128,7 +128,7 @@
 				</produces>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.PersondataExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.PersondataExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -178,7 +178,7 @@
 				</produces>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.PndExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.PndExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -193,7 +193,7 @@
 				</produces>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.SkosCategoriesExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.SkosCategoriesExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -210,7 +210,7 @@
 				<notice>currently produces: Category, i.e. not language independent</notice>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.RedirectExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.RedirectExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -224,7 +224,7 @@
 			
 			
 			<!-- The following extractors should be considered -->
-			<extractor name ="org.dbpedia.extraction.mappings.CategoryLabelExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.CategoryLabelExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="STARTSWITH">
 						<s>DB_CATEGORY_NS</s>
@@ -235,7 +235,7 @@
 				
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.ArticleCategoriesExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.ArticleCategoriesExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="STARTSWITH">
 						<s></s>
@@ -307,7 +307,7 @@
 				<notice>Not sure whether those match patterns are totally correct or not</notice>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.PageIdExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.PageIdExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -317,7 +317,7 @@
 				</produces>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.RevisionIdExtractor" status="PURGE">
+			<extractor name ="org.dbpedia.extraction.mappings.RevisionIdExtractor" status="ACTIVE">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
