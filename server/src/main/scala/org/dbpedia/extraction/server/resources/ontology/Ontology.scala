@@ -1,9 +1,10 @@
-package org.dbpedia.extraction.server.resources
+package org.dbpedia.extraction.server.resources.ontology
 
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import xml.Elem
 import org.dbpedia.extraction.ontology.io.OntologyOWLWriter
+import org.dbpedia.extraction.server.resources.Base
 
 @Path("/ontology")
 class Ontology extends Base
