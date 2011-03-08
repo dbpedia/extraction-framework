@@ -197,6 +197,7 @@ public class LiveUpdateDestination implements Destination{
 //        System.out.println("//////////////////////////////////////////////////////////////////////////////////");
         PublishingData pubData = new PublishingData(addedTriplesList, true);
         Main.publishingDataQueue.add(pubData);
+
         this.hash.compare(extractionResult);
     }
 
