@@ -25,7 +25,7 @@ public class MappingUpdateFeeder extends Thread{
 
     private static Logger logger = Logger.getLogger(MappingUpdateFeeder.class);
     
-    public static String lastResponseDateFile = "./live/MappingUpdateLastResponseDate.dat";
+    public static String lastResponseDateFile = "./MappingUpdateLastResponseDate.dat";
     private String startDate = "2010-07-01T15:00:00Z";
 
     public MappingUpdateFeeder (String name, int priority) {
