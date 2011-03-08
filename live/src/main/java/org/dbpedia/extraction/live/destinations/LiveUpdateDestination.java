@@ -195,8 +195,8 @@ public class LiveUpdateDestination implements Destination{
 //        while(iter.hasNext())
 //            System.out.println(iter.next());
 //        System.out.println("//////////////////////////////////////////////////////////////////////////////////");
-//        PublishingData pubData = new PublishingData(addedTriplesList, true);
-//        Main.publishingDataQueue.add(pubData);
+        PublishingData pubData = new PublishingData(addedTriplesList, true);
+        Main.publishingDataQueue.add(pubData);
         this.hash.compare(extractionResult);
     }
 
@@ -1031,8 +1031,8 @@ public class LiveUpdateDestination implements Destination{
         }
 
         //Publish the deleted triples
-//        PublishingData pubData = new PublishingData(addedTriplesList,deletedTriplesString);
-//        Main.publishingDataQueue.add(pubData);
+        PublishingData pubData = new PublishingData(addedTriplesList,deletedTriplesString);
+        Main.publishingDataQueue.add(pubData);
 //            _removeTriplesForExtractor(extractorID);
     }
 
