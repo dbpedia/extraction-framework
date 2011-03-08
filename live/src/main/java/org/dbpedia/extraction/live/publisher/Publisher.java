@@ -10,10 +10,7 @@ import javax.xml.parsers.SAXParser;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +34,10 @@ public class Publisher extends Thread{
 //	private IUpdateStrategy diffStrategy;
 
 
-	private long sequenceNumber;
+	private long sequenceNumber = 0;
+
+    //This member is used to determine whether we have advanced to another hour, so we should reset sequenceNumber
+    private int hourNumber = -1;
 
 	private String graphName;
 
@@ -299,9 +299,9 @@ public class Publisher extends Thread{
 		File osmStateFile = new File(filename);
 //        File osmStateFile = new File("D:/Leipzig University/DBpediaExtraction/live/state.txt");
 		loadIniFile(osmStateFile, config);
-		sequenceNumber = Long.parseLong(config.get("sequenceNumber"));
+//		sequenceNumber = Long.parseLong(config.get("sequenceNumber"));
 
-		logger.info("Processing: " + sequenceNumber);
+//		logger.info("Processing: " + sequenceNumber);
 
 //		DiffResult diff = computeDiff(sequenceNumber);
 
@@ -320,7 +320,7 @@ public class Publisher extends Thread{
 
 
 		logger.info("Downloading new state");
-		advance(sequenceNumber + 1);
+//		advance(sequenceNumber + 1);
         sequenceNumber++;
 	}
 
@@ -364,14 +364,27 @@ public class Publisher extends Thread{
 	private void publishDiff(long id)//, IDiff<Model> diff)
 		throws IOException
 	{
-		String fileName = publishDiffBaseName + "/" + getFragment(id);
+        Calendar  currentDateCalendar= Calendar.getInstance();
+
+//		String fileName = publishDiffBaseName + "/" + getFragment(id);
+        //If we advance to another hour, then we should reset sequenceNumber
+        if(hourNumber != currentDateCalendar.get(Calendar.HOUR_OF_DAY))
+        {
+            hourNumber = currentDateCalendar.get(Calendar.HOUR_OF_DAY);
+            sequenceNumber = id = 0;
+        }
+        String fileName = publishDiffBaseName + "/" + currentDateCalendar.get(Calendar.YEAR) + "/"
+                + (currentDateCalendar.get(Calendar.MONTH)+1) + "/" + currentDateCalendar.get(Calendar.DAY_OF_MONTH) + "/"
+                + currentDateCalendar.get(Calendar.HOUR_OF_DAY) +  "/"
+                 + format(sequenceNumber);
 		File parent = new File(fileName).getParentFile();
+//        File requiredFolders = new File(fileName);
 		if(parent != null)
 			parent.mkdirs();
 
 		RDFDiffWriter rdfDiffWriter = new RDFDiffWriter(fileName);
         Model addedTriplesModel = ModelFactory.createDefaultModel();
-        PublishingData pubData = Main.publishingDataQueue.remove();
+        PublishingData pubData = Main.publishingDataQueue.poll();
         /////////////////////////////////////////////////////////////////////////////////////
 //        String personURI    = "http://somewhere/JohnSmith";
 //        String givenName    = "John";
@@ -391,9 +404,11 @@ public class Publisher extends Thread{
         /////////////////////////////////////////////////////////////////////////////////////
 //        RDFDiffWriter.write(addedTriplesModel, true, fileName, true);
 //        if((pubData.triplesModel == null) || (pubData.triplesModel.size() == 0))
+        if(pubData!=null){
             RDFDiffWriter.write(pubData.triplesString, false, fileName, true);
 //        else
             RDFDiffWriter.write(pubData.triplesModel, true, fileName, true);
+        }
 //		rdfDiffWriter.write(diff);
 		//RDFDiffWriter.writ
 	}
@@ -405,12 +420,18 @@ public class Publisher extends Thread{
 	*/
 
 	private String format(long value) {
-		String result = Long.toString(value);
+//		String result = Long.toString(value);
+        String result = String.format("%06d", value);
+        /*
+        if(value < 1000)
+            result = "0" + result;
+
 		if(value < 100)
 			result = "0" + result;
 
 		if(value < 10)
 			result = "0" + result;
+          */
 
 		return result;
 	}
