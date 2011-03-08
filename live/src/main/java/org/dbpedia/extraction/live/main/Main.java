@@ -6,6 +6,7 @@ import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
 import org.dbpedia.extraction.live.priority.PagePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
+import org.dbpedia.extraction.live.publisher.Publisher;
 import org.dbpedia.extraction.live.publisher.PublishingData;
 import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
@@ -79,6 +80,7 @@ public class Main
 
 //        System.out.println(Util.getDBpediaCategoryPrefix("en"));
 
+
         for(int i = 0; i < recentlyUpdatedInstances.length; i++)
                 recentlyUpdatedInstances[i] = new RecentlyUpdatedInstance();
 
@@ -100,7 +102,7 @@ public class Main
         MappingUpdateFeeder mappingFeeder = new MappingUpdateFeeder("Mapping feeder thread", 4);
         LiveUpdateFeeder liveFeeder = new LiveUpdateFeeder("Live feeder thread", 6);
         PageProcessor processor = new PageProcessor("Page processing thread", 8);
-//        Publisher publisher = new Publisher("Publisher", 4);
+        Publisher publisher = new Publisher("Publisher", 4);
 
 //        System.out.println(Util.getDBpediaCategoryPrefix("en"));
 
