@@ -214,7 +214,7 @@ public class Publisher extends Thread{
 
     public void initSync(){
         try{
-                String configFileName  = "./live/config.ini";
+                String configFileName  = "./live/dbpedia_default.ini";
                 File configFile = new File(configFileName);
 
                 Map<String, String> config = loadIniFile(configFile);
