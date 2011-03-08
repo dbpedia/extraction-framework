@@ -15,12 +15,11 @@ import org.dbpedia.extraction.live.util.OAIUtil;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.live.util.iterators.TimeWindowIterator;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
-
-import org.w3c.dom.NodeList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,7 +42,7 @@ public class LiveUpdateFeeder extends Thread{
 
     int pollInterval = 30;
     int sleepInterval = 5;
-    public static String lastResponseDateFile = "./live/lastResponseDate.dat";
+    public static String lastResponseDateFile = "./lastResponseDate.dat";
 
     int articleDelay = 0;
     boolean articleRenewal = false;
