@@ -384,6 +384,9 @@ public class Publisher extends Thread{
 
 		RDFDiffWriter rdfDiffWriter = new RDFDiffWriter(fileName);
         Model addedTriplesModel = ModelFactory.createDefaultModel();
+
+        Main.publishingDataQueue.remove(null);
+
         PublishingData pubData = Main.publishingDataQueue.poll();
         /////////////////////////////////////////////////////////////////////////////////////
 //        String personURI    = "http://somewhere/JohnSmith";
