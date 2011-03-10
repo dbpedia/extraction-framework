@@ -220,13 +220,13 @@ public class Publisher extends Thread{
                 Map<String, String> config = loadIniFile(configFile);
         //        Map<String, String> config = new HashMap<String, String>();
 
-                File osmConfigFile = new File(config.get("osmReplicationConfigPath") + "/configuration.txt");
+//                File osmConfigFile = new File(config.get("osmReplicationConfigPath") + "/configuration.txt");
 
         //        File osmConfigFile = new File("D:\\Leipzig University\\DBpediaExtraction\\live\\config.ini");
-                loadIniFile(osmConfigFile, config);
+//                loadIniFile(osmConfigFile, config);
 
 
-                System.out.println(config);
+//                System.out.println(config);
 
                 liveSync = new Publisher(config);
 //                run();
