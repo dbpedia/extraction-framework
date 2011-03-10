@@ -2,6 +2,7 @@ package org.dbpedia.extraction.live.main;
 
 
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
 import org.dbpedia.extraction.live.priority.PagePriority;
@@ -338,7 +339,7 @@ public class Main
                         instancesUpdatedInMinute = 0;
 
                         //Write statistics to the file
-                        File instancesFile = new File("./instancesstats.txt");
+                        File instancesFile = new File(LiveOptions.options.get("statisticsFilePath"));
                         FileWriter writer = new FileWriter(instancesFile);
                         writer.write(_instancesUpdatedInMinute + "\r\n");
 
