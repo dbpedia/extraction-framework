@@ -60,7 +60,7 @@ trait Extractor extends (PageNode => Graph)
                 return Some(page.title)
             }
 
-            for(InterWikiLinkNode(destination, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
+            for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
             {
                 if (retrieveOriginalName==false)
                 {

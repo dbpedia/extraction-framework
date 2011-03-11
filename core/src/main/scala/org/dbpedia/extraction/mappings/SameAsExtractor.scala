@@ -42,7 +42,7 @@ class SameAsExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         var results = Map[String, WikiTitle]()
 
-        for(InterWikiLinkNode(destination, _, _) <- page.children.reverse if destination.isInterlanguageLink && trans_lang.contains(destination.language.wikiCode) )
+        for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && trans_lang.contains(destination.language.wikiCode) )
         {
             results += (destination.language.wikiCode -> destination)
         }

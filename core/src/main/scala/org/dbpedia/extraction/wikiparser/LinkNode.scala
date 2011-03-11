@@ -19,7 +19,7 @@ sealed abstract class LinkNode(override val children : List[Node], override val 
  * @param children The nodes of the label of this link
  * @param line The source line number of this link
  */
-case class ExternalLinkNode(destination : URI, override val children : List[Node], override val line : Int) extends LinkNode(children, line)
+case class ExternalLinkNode(destination : URI, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) extends LinkNode(children, line)
 {
     def toWikiText() : String = "[" + destination.toString + " " + children.map(_.toWikiText).mkString("") + "]"
 }
@@ -33,7 +33,7 @@ case class ExternalLinkNode(destination : URI, override val children : List[Node
  * @param children The nodes of the label of this link
  * @param line The source line number of this link
  */
-case class InternalLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int) extends LinkNode(children, line)
+case class InternalLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) extends LinkNode(children, line)
 {
     def toWikiText() : String = "[[" + destination.decodedWithNamespace + "|" + children.map(_.toWikiText).mkString("") + "]]"
 }
@@ -47,7 +47,7 @@ case class InternalLinkNode(destination : WikiTitle, override val children : Lis
  * @param children The nodes of the label of this link
  * @param line The source line number of this link
  */
-case class InterWikiLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int) extends LinkNode(children, line)
+case class InterWikiLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) extends LinkNode(children, line)
 {
     def toWikiText() : String = "[[" + destination.decodedWithNamespace + "|" + children.map(_.toWikiText).mkString("") + "]]"
 }
