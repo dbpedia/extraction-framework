@@ -20,7 +20,7 @@ object MappingsLoader
     
     def load(context : ExtractionContext) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
     {
-        logger.info("Loadings mappings")
+        logger.info("Loadings mappings ("+context.language.wikiCode+")")
 
 		val templateMappings = new HashMap[String, TemplateMapping]()
 		val tableMappings = new ArrayBuffer[TableMapping]()
@@ -74,7 +74,7 @@ object MappingsLoader
             }
         }
 
-        logger.info("Mappings loaded")
+        logger.info("Mappings loaded ("+context.language.wikiCode+")")
 
 		(templateMappings.toMap, tableMappings.toList, conditionalMappings.toMap)
 	}

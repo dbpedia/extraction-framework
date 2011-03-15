@@ -83,13 +83,13 @@ class ExtractionManager(languages : Set[Language])
     def updateMappingPage(page : WikiPage, language : Language)
     {
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, page)))
-        _extractors = loadExtractors
+        _extractors = _extractors.updated(language, loadExtractor(language))
     }
 
     def removeMappingPage(title : WikiTitle, language : Language)
     {
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) - title)
-        _extractors = loadExtractors
+        _extractors = _extractors.updated(language, loadExtractor(language))
     }
 
     def ontology = _ontology
