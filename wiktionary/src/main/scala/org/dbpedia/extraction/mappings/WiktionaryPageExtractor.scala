@@ -7,7 +7,7 @@ import org.dbpedia.extraction.sources.WikiPage
 import scala.io.Source
 import util.control.Breaks._
 import java.io.FileNotFoundException
-import collection.mutable.{Stack, ListBuffer, HashMap}
+import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map}
 
 //some of my utilities
 import MyStack._
@@ -62,6 +62,10 @@ class WiktionaryPageExtractor extends Extractor {
     )   //TODO complete
   )
 
+  private val vars = Set("hyphenation-singular", "hyphenation-plural", "pronunciation-singular", "pronunciation-plural",
+    "audio-singular", "audio-plural")
+  private val senseVars = Set("meaning")
+
   //private val translatePOSback = Map() ++ (translatePOS map {case (lang,kv) => (lang, kv map {case (k, v) => (v, k)})})
   //TODO do this on a single line :)
   private var translatePOSback : scala.collection.mutable.Map[String, scala.collection.mutable.Map[String,String]] =  scala.collection.mutable.Map()
@@ -96,25 +100,63 @@ class WiktionaryPageExtractor extends Extractor {
       val pageSt =  new Stack[Node]().pushAll(page.children.reverse).filterTrimmed
       //println("dumping page")
       //page.children.foreach(_.dump(0))
+      var bindings : VarBindingsHierarchical = null
       try {
-        val bindings = parseNodesWithTemplate(tpl, pageSt)
-        bindings.dump(0)
+        bindings = parseNodesWithTemplate(tpl, pageSt)
       } catch {
         case e : WiktionaryException => {
+          bindings = e.vars
           println("page could not be parsed. reason:")
           println(e.s)
           if(e.unexpectedNode.isDefined){
             println("unexpected node:")
             println(e.unexpectedNode.get)
           }
-          println("results so far:")
-          e.vars.dump(0)
         }
       }
-
+      println("results")
+      println("before")
+      bindings.dump(0)
       // the hierarchical var bindings need to be normalized to be converted to rdf
-      //flatLangPos(bindings)
-      //bindings.dump(0)
+      val converted = bindings.flatLangPos
+      val converted2 : Map[Tuple2[String,String], Tuple2[Map[String, List[Node]], Map[List[Node],Map[String, List[Node]]]]] = new HashMap()
+      for (wlp <- converted){
+        val normalBindings : Map[String, List[Node]]= new HashMap()
+        //get normal var bindings out (these that are unique to a (word,lang,pos) combination)
+        for(varName <- vars){
+          val currBindings = wlp._2.getFirstBinding(varName)
+          if(currBindings.isDefined){
+            normalBindings += (varName -> currBindings.get)
+          }
+        }
+        val senseBindingsConverted : Map[List[Node],Map[String, List[Node]]] = new HashMap()
+        for(varName <- senseVars){
+          val senseBindings = wlp._2.getSenseBoundVarBinding(varName)
+          val senses = senseBindings.keySet
+          for(sense <- senses){
+             if(!senseBindingsConverted.contains(sense)){
+                senseBindingsConverted += (sense -> new HashMap())
+             }
+             senseBindingsConverted(sense) += (varName -> senseBindings(sense))
+          }
+        }
+        converted2 += (wlp._1 -> (normalBindings, senseBindingsConverted))
+      }
+      println("after")
+      //println(converted2)
+      println(subjectUri)
+      val usages = converted2.keySet
+      for(usage <- usages){
+        println("usage in language: "+usage._1+" as part of speech: "+usage._2)
+        println("normal properties:")
+        converted2(usage)._1.foreach {case (varName, binding) => println("\""+varName +"\" = "+binding)}
+        println("has "+converted2(usage)._2.size +" meanings:")
+        val meanings = converted2(usage)._2.keySet
+        for(meaning <- meanings){
+          println("  sense (name="+meaning+") has properties:")
+          converted2(usage)._2.apply(meaning).foreach {case (varName, binding) => println("    \""+varName +"\" = "+binding)}
+        }
+      }
 
       // for debugging
       /*println()
@@ -241,7 +283,7 @@ object WiktionaryPageExtractor {
       pageIt.pop //consume page node
       return bindings
     } else //determine whether they CAN equal
-    if(!
+    if(!  //NOT
       (
         (currNodeFromTemplate.isInstanceOf[TemplateNode]
           && currNodeFromTemplate.asInstanceOf[TemplateNode].title.decoded.equals( "Extractiontpl")
@@ -250,7 +292,7 @@ object WiktionaryPageExtractor {
       )
     ){
       println("early mismatch")
-      throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+      throw new WiktionaryException("the template does not match the page - different type", bindings, Some(currNodeFromPage))
     }
 
     currNodeFromTemplate match {
@@ -260,7 +302,9 @@ object WiktionaryPageExtractor {
           tplType match {
             case "list-start" =>  {
               //val name =  tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
+              //take everything from tpl till list is closed
               val listTpl = tplIt.getList
+              //take the node after the list as endmarker of this list
               val endMarkerNode = tplIt.findNextNonTplNode  //that will be the node that follows the list in the template
               bindings addChild parseList(listTpl, pageIt, endMarkerNode)
             }
@@ -268,6 +312,7 @@ object WiktionaryPageExtractor {
             case "contains" =>    {
               printMsg("include stuff")
               val templates = ListBuffer[String]()
+              val markers  = Set[Node]()
               for(property <- currNodeFromTemplate.children){  // children == properties
                 val name = property.asInstanceOf[PropertyNode].children(0).asInstanceOf[TextNode].text.trim
                 if(! Set("contains", "unordered", "optional").contains(name)){
@@ -278,6 +323,7 @@ object WiktionaryPageExtractor {
                       tplSt.filterNewLines.filterTrimmed
                       if(tplSt.size != 0){
                         subTemplateCache += (name -> tplSt)
+                        markers.add(tplSt.head)
                       }
                     } catch {
                       case e : FileNotFoundException =>  printMsg("referenced non existant sub template "+filename+". skipped")
@@ -293,12 +339,12 @@ object WiktionaryPageExtractor {
                 for(tpl <- templates){
                   pageItCopy = pageIt.clone
                   try{
-                    bindings mergeWith parseNodesWithTemplate(subTemplateCache(tpl).clone, pageIt)
+                    bindings addChild parseNodesWithTemplate(subTemplateCache(tpl).clone, pageIt)
                     oneHadSuccess = true
                   } catch {
                     case e : WiktionaryException =>  {
                       restore(pageIt, pageItCopy)
-                      bindings mergeWith e.vars
+                      bindings addChild e.vars
                     }// try another template
                   }
                 }
@@ -385,7 +431,6 @@ object WiktionaryPageExtractor {
               throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
             }
         }
-
       }
 
       case _ => {
@@ -452,12 +497,17 @@ object WiktionaryPageExtractor {
     val bindings = new VarBindingsHierarchical
     while(tplIt.size > 0 && pageIt.size > 0){
         try {
-          bindings mergeWith parseNode(tplIt, pageIt)
+          bindings addChild parseNode(tplIt, pageIt)
         } catch {
-          case e : WiktionaryException =>
-          bindings mergeWith e.vars
+          case e : WiktionaryException => {
+            //try dropping n nodes from the page
+            if(false){
 
-          throw e.copy(vars=bindings)
+            } else {
+              bindings addChild e.vars
+              throw e.copy(vars=bindings)
+            }
+          }
         }
     }
     bindings.dump(0)
@@ -473,7 +523,7 @@ class VarBindingsHierarchical (){
     }
     def addChild(sub : VarBindingsHierarchical) : Unit = {
       if(sub.bindings.size > 0 || sub.children.size > 0){
-        children += sub
+        children += sub.reduce
       }
     }
     def mergeWith(other : VarBindingsHierarchical) = {
@@ -482,69 +532,85 @@ class VarBindingsHierarchical (){
     }
 
   def dump(depth : Int = 0){
-      val prefix = " "*depth
-      println(prefix+"{")
-      for(key <- bindings.keySet){
-        println(prefix+key+" -> "+bindings.apply(key))
-      }
-      for(child <- children){
-        child.dump(depth + 2)
-      }
-      println(prefix+"}")
+    val prefix = " "*depth
+    println(prefix+"{")
+    for(key <- bindings.keySet){
+      println(prefix+key+" -> "+bindings.apply(key))
     }
+    for(child <- children){
+      child.dump(depth + 2)
+    }
+    println(prefix+"}")
+  }
 
+  //make the structure absolutly flat, maybe this is not what you want
   def flat : VarBindingsHierarchical = {
-      val copi = new VarBindingsHierarchical
+    val copi = new VarBindingsHierarchical
+    for(child <- children){
+      copi addChild child.flat
+    }
+    for(key <- bindings.keySet){
+      copi.addBinding(key, bindings.apply(key))
+    }
+    copi
+  }
+
+  //remove unnecessary deep paths
+  def reduce : VarBindingsHierarchical = {
+    val copi = new VarBindingsHierarchical
+    if(children.size == 1){
+      copi mergeWith children(0).reduce
+    } else {
+      copi.children ++= children
+    }
+    //copy bindings
+    for(key <- bindings.keySet){
+      copi.addBinding(key, bindings.apply(key))
+    }
+    copi
+  }
+
+  def getFirstBinding(key : String) : Option[List[Node]] = {
+    if(bindings.contains(key)){
+      return Some(bindings(key))
+    } else {
       for(child <- children){
-        copi addChild child.flat
+        val possibleLang = child.getFirstBinding(key)
+        if(possibleLang.isDefined){
+          return possibleLang
+        }
       }
-      for(key <- bindings.keySet){
-        copi.addBinding(key, bindings.apply(key))
-      }
-      copi
+      return None
     }
+  }
 
-   def flatLangPos() : Unit = {
-     //local functions
-     def getLang(vbi : VarBindingsHierarchical) : Option[VarBindingsHierarchical] = {
-      if(vbi.bindings.contains("lang")){
-        return Some(vbi)
+  def getSenseBoundVarBinding(key : String) : Map[List[Node], List[Node]] = {
+    val ret : Map[List[Node], List[Node]] = new HashMap()
+    for(child <- children){
+      if(child.bindings.contains(key)){
+        val binding = child.bindings(key)
+        val sense = getFirstBinding("meaning_id");
+        if(sense.isDefined){
+          ret += (sense.get -> binding)
+        }
       } else {
-        for(child <- vbi.children){
-          val possibleLang = getLang(child)
-          if(possibleLang.isDefined){
-            return possibleLang
-          }
-        }
-        return None
+        ret ++= child.getSenseBoundVarBinding(key)
       }
     }
+    ret
+  }
 
-     def getPos(vbi : VarBindingsHierarchical) : Option[VarBindingsHierarchical] = {
-      if(vbi.bindings.contains("pos")){
-        return Some(vbi)
-      } else {
-        for(child <- vbi.children){
-          val possiblePos = getPos(child)
-          if(possiblePos.isDefined){
-            return possiblePos
-          }
-        }
-        return None
+  def flatLangPos() : Map[Tuple2[String,String], VarBindingsHierarchical] = {
+    val ret : Map[Tuple2[String,String], VarBindingsHierarchical] = new HashMap()
+    for(child <- children){ //assumes that this is the top level VarBindingsHierachical object and that each child represents a (lang,pos)-block
+      val lang = child.getFirstBinding("language")
+      val pos  = child.getFirstBinding("pos")
+      if(lang.isDefined && pos.isDefined){
+        val langStr = lang.get.apply(0).asInstanceOf[TextNode].text   //assumes that the lang var is bound to e.g. List(TextNode(english))
+        val posStr  = pos.get.apply(0).asInstanceOf[TextNode].text    //assumes that the pos  var is bound to e.g. List(TextNode(verb))
+         ret += ((langStr, posStr) -> child)
       }
     }
-
-    //actual function
-    val lang = getLang(this)
-    if(lang.isDefined){
-      val pos = getPos(lang.get)
-      if(pos.isDefined){
-        val children = pos.get.children.clone
-        pos.get.children.clear
-        for(child <- children){
-          pos.get.children prepend child.flat
-        }
-      } else println("no pos")
-    } else println("no lang")
+    ret
   }
  }
