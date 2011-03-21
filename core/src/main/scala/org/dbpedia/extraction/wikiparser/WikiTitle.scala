@@ -120,6 +120,7 @@ object WikiTitle
         val Mapping_ru = Value(222)
         val Mapping_ca = Value(226)
         val Mapping_hu = Value(238)
+        val Mapping_tr = Value(246)
         val Mapping_sl = Value(268)
         val Mapping_hr = Value(284)
         val Mapping_el = Value(304)
@@ -141,6 +142,7 @@ object WikiTitle
                 case "ru" => Some(Namespace.Mapping_ru)
                 case "ca" => Some(Namespace.Mapping_ca)
                 case "hu" => Some(Namespace.Mapping_hu)
+                case "tr" => Some(Namespace.Mapping_tr)
                 case "sl" => Some(Namespace.Mapping_sl)
                 case "hr" => Some(Namespace.Mapping_hr)
                 case "el" => Some(Namespace.Mapping_el)
@@ -165,6 +167,7 @@ object WikiTitle
         "Mapping ru" -> Namespace.Mapping_ru,
         "Mapping ca" -> Namespace.Mapping_ca,
         "Mapping hu" -> Namespace.Mapping_hu,
+        "Mapping tr" -> Namespace.Mapping_tr,
         "Mapping sl" -> Namespace.Mapping_sl,
         "Mapping hr" -> Namespace.Mapping_hr,
         "Mapping el" -> Namespace.Mapping_el,
