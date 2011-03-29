@@ -95,7 +95,7 @@ class ImageExtractor(extractionContext : ExtractionContext) extends Extractor
                     }
                     searchImage(children, sections).foreach(s => return Some(s))
                 }
-                case (linkNode @ InternalLinkNode(destination, _, _, _)) if destination.namespace == WikiTitle.Namespace.File =>
+                case (linkNode @ InternalLinkNode(destination, _, _)) if destination.namespace == WikiTitle.Namespace.File =>
                 {
                     for (fileName <- ImageLinkRegex.findFirstIn(destination.encoded);
                          if checkImageRights(fileName))
@@ -180,7 +180,7 @@ class ImageExtractor(extractionContext : ExtractionContext) extends Extractor
 private object ImageExtractor
 {
     val NonFreeRegex = Map("en" -> """(?i)\{\{\s?non-free""".r,
-						   "el" -> """(?iu)\{\{\s?(εύλογη χρήση|σήμα|σήμα αθλητικού σωματείου|αφίσα ταινίας|σκηνή από ταινία|γραφικά υπολογιστή|εξώφυλλο άλμπουμ|εξώφυλλο βιβλίου|μη ελεύθερο έργο τέχνης|σελίδα κόμικς|σελίδα εφημερίδας|εικόνα-βιντεοπαιχνίδι|ιδιοκτησία Wikimedia)\s?\}\}""".r ,
+                           "el" -> """(?iu)\{\{\s?(εύλογη χρήση|σήμα|σήμα αθλητικού σωματείου|αφίσα ταινίας|σκηνή από ταινία|γραφικά υπολογιστή|εξώφυλλο άλμπουμ|εξώφυλλο βιβλίου|μη ελεύθερο έργο τέχνης|σελίδα κόμικς|σελίδα εφημερίδας|εικόνα-βιντεοπαιχνίδι|ιδιοκτησία Wikimedia)\s?\}\}""".r ,
                            "de" -> """(?iu)\{\{\s?(Dateiüberprüfung/benachrichtigt_\(Kategorie\)|Geschützt|Geschützt-Ungeklärt|Bild-LogoSH|Bild-PD-alt-100|Bild-PD-alt-1923|Bild-WikimediaCopyright)\s?\}\}""".r )
 
     private val ImageRegex = """(?i)[^\"/\*?<>|:]+\.(?:jpe?g|png|gif|svg)""".r

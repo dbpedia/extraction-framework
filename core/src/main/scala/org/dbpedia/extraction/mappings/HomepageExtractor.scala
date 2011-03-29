@@ -53,7 +53,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
                         return graph
                     }
                 }
-                case (linkNode @ ExternalLinkNode(destination, _, _, _)) :: _ =>
+                case (linkNode @ ExternalLinkNode(destination, _, _)) :: _ =>
                 {
                     val graph = generateStatement(subjectUri, pageContext, destination.toString, linkNode)
                     if (!graph.isEmpty)
@@ -137,7 +137,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         nodes match
         {
-            case ExternalLinkNode(destination, TextNode(label, _) :: Nil, _, _) :: tail =>
+            case ExternalLinkNode(destination, TextNode(label, _) :: Nil, _) :: tail =>
             {
                 if (officialRegex.findFirstIn(label).isDefined)
                 {

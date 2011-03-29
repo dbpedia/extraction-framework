@@ -31,7 +31,7 @@ class Quad(	val extractionContext : ExtractionContext,
     //TODO validate them on creation, now can be either URI/IRI
 	//new URI(subject)
 	//new URI(context)
-	if(datatype == null) new URI(value)
+	//if(datatype == null) new URI(value)
 
     def this( extractionContext : ExtractionContext,
               dataset : Dataset,
