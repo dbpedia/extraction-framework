@@ -19,7 +19,7 @@ object DBpediaDatasets
     val SkosCategories = new Dataset("skos_categories")
     val Revisions = new Dataset("revisions")
     val PageIds = new Dataset("page_ids")
-    val SameAs = new Dataset("sameas")
+    val SameAs = new Dataset("interlanguage_links")
 
     /**
      * Mapping based

@@ -17,7 +17,7 @@ class SameAsExtractor(extractionContext : ExtractionContext) extends Extractor
 
     private val sameAsMap = Map(
         "en" -> Set("el", "de", "co"),
-        "el" -> Set("en"),
+        "el" -> Set("en", "de"),
         "de" -> Set("en", "el")
     )
 
