@@ -106,25 +106,25 @@ object OntologyDatatypes
         val builder = new UnitBuilder
 	    
 	    builder.addDimension("Area");
-	    builder.addUnit(new StandardUnitDatatype("squareMetre", Set("square metre","m2","m²")));
-	    builder.addUnit(new FactorUnitDatatype("squareMillimetre", Set("mm2","mm²","square millimetre"), 1.0E-6));
+	    builder.addUnit(new StandardUnitDatatype("squareMetre", Set("square metre","m2","m²",/*el*/ "μ2","μ²","τ.μ.","τετραγωνικό μέτρο")));
+	    builder.addUnit(new FactorUnitDatatype("squareMillimetre", Set("mm2","mm²","square millimetre",/*el*/ "μμ2","μμ²"), 1.0E-6));
 	    builder.addUnit(new FactorUnitDatatype("squareCentimetre", Set("cm2","cm²","square centimetre"), 0.0001));
 	    builder.addUnit(new FactorUnitDatatype("squareDecimetre", Set("dm2","square decimetre"), 0.01));
 	    builder.addUnit(new FactorUnitDatatype("squareDecametre", Set("dam2","square decametre"), 0.1));
-	    builder.addUnit(new FactorUnitDatatype("squareHectometre", Set("hm2","square hectometre"), 10000.0));
-	    builder.addUnit(new FactorUnitDatatype("squareKilometre", Set("km²","km2","square kilometre","km\u00B2"), 1000000.0));
-	    builder.addUnit(new FactorUnitDatatype("hectare", Set("ha","hectare"), 10000.0));
+	    builder.addUnit(new FactorUnitDatatype("squareHectometre", Set("hm2","square hectometre",/*el*/ "στρέμμα","στρέμματα"), 10000.0));
+	    builder.addUnit(new FactorUnitDatatype("squareKilometre", Set("km²","km2","square kilometre","km\u00B2",/*el*/ "τετρ. χιλ.","χλμ2","χλμ²"), 1000000.0));
+	    builder.addUnit(new FactorUnitDatatype("hectare", Set("ha","hectare",/*el*/ "εκτάρια"), 10000.0));
 	    builder.addUnit(new FactorUnitDatatype("squareInch", Set("sqin","square inch"), 0.00064516));
 	    builder.addUnit(new FactorUnitDatatype("squareFoot", Set("sqft","ft2","ft²","square foot"), 0.09290304));
 	    builder.addUnit(new FactorUnitDatatype("squareYard", Set("sqyd","square yard"), 0.83612736));
-	    builder.addUnit(new FactorUnitDatatype("acre", Set("acre","acres"), 4046.564224));
-	    builder.addUnit(new FactorUnitDatatype("squareMile", Set("sqmi","mi2","mi²","square mile"), 2589988.110336));
+	    builder.addUnit(new FactorUnitDatatype("acre", Set("acre","acres",/*el*/ "Έικρ"), 4046.564224));
+	    builder.addUnit(new FactorUnitDatatype("squareMile", Set("sqmi","mi2","mi²","square mile",/*el*/ "τετραγωνικά μίλια"), 2589988.110336));
 	    builder.addUnit(new FactorUnitDatatype("squareNauticalMile", Set("sqnmi","nmi2","square nautical mile"), 3429904.0));
 	    types :::= builder.build
 	    
 	    builder.addDimension("Currency");
-	    builder.addUnit(new InconvertibleUnitDatatype("usDollar", Set("US","USD","Dollar","US dollar", "$")));
-	    builder.addUnit(new InconvertibleUnitDatatype("euro", Set("€","EUR","Euro")));
+	    builder.addUnit(new InconvertibleUnitDatatype("usDollar", Set("US","USD","Dollar","US dollar", "$",/*el*/ "δολάρια","δολάριο")));
+	    builder.addUnit(new InconvertibleUnitDatatype("euro", Set("€","EUR","Euro",/*el*/ "Ευρώ")));
 	    builder.addUnit(new InconvertibleUnitDatatype("poundSterling", Set("GBP","British Pound","£","Pound sterling")));
 	    builder.addUnit(new InconvertibleUnitDatatype("japaneseYen", Set("¥","yen","JPY","Japanese yen")));
 	    builder.addUnit(new InconvertibleUnitDatatype("russianRouble", Set("RUR","RUB","Russian rouble")));
@@ -284,14 +284,14 @@ object OntologyDatatypes
 	    types :::= builder.build
 	
 	    builder.addDimension("Density");
-	    builder.addUnit(new StandardUnitDatatype("kilogramPerCubicMetre", Set("kg·m−3","kg/m³","kg/m3","kg·m","kilogram per cubic metre")));
+	    builder.addUnit(new StandardUnitDatatype("kilogramPerCubicMetre", Set("kg·m−3","kg/m³","kg/m3","kg·m","kilogram per cubic metre",/*el*/ "κυβικό μέτρο","μ3")));
 	    builder.addUnit(new FactorUnitDatatype("kilogramPerLitre", Set("kg/l","kg/L","kilogram per litre"), 1000.0));
 	    builder.addUnit(new FactorUnitDatatype("gramPerCubicCentimetre", Set("g/cc","g/cm3","g/cm³","gram per cubic centimetre"), 1000.0));
 	    builder.addUnit(new FactorUnitDatatype("gramPerMillilitre", Set("g/ml","g/mL","gram per millilitre"), 1000.0));
 	    types :::= builder.build
 
 	    builder.addDimension("Energy");
-	    builder.addUnit(new StandardUnitDatatype("joule", Set("J","joule")));
+	    builder.addUnit(new StandardUnitDatatype("joule", Set("J","joule",/*el*/ "Τζάουλ")));
 	    builder.addUnit(new FactorUnitDatatype("kilojoule", Set("kJ","kilojoule"), 1000.0));
 	    builder.addUnit(new FactorUnitDatatype("erg", Set("erg"), 1.0E-7));
 	    builder.addUnit(new FactorUnitDatatype("milliwattHour", Set("mWh","milliwatt-hour"), 3.6));
@@ -364,26 +364,26 @@ object OntologyDatatypes
 	    types :::= builder.build
 
 	    builder.addDimension("Length");
-	    builder.addUnit(new StandardUnitDatatype("metre", Set("m","meter","metres","metre")));
-	    builder.addUnit(new FactorUnitDatatype("nanometre", Set("nm","nanometre"), 1.0E-9));
-	    builder.addUnit(new FactorUnitDatatype("micrometre", Set("µm","micrometre"), 1.0E-6));
-	    builder.addUnit(new FactorUnitDatatype("millimetre", Set("mm","millimetre"), 0.001));
-	    builder.addUnit(new FactorUnitDatatype("centimetre", Set("cm","centimetre"), 0.01));
-	    builder.addUnit(new FactorUnitDatatype("decimetre", Set("dm","decimetre"), 0.1));
+	    builder.addUnit(new StandardUnitDatatype("metre", Set("m","meter","metres","metre",/*el*/ "μ","μέτρα","μέτρο" )));
+	    builder.addUnit(new FactorUnitDatatype("nanometre", Set("nm","nanometre",/*el*/ "νανόμετρο"), 1.0E-9));
+	    builder.addUnit(new FactorUnitDatatype("micrometre", Set("µm","micrometre",/*el*/ "μικρόμετρο"), 1.0E-6));
+	    builder.addUnit(new FactorUnitDatatype("millimetre", Set("mm","millimetre",/*el*/ "χιλιοστόμετρο"), 0.001));
+	    builder.addUnit(new FactorUnitDatatype("centimetre", Set("cm","centimetre",/*el*/ "εκ","εκατοστά","εκατοστόμετρο"), 0.01));
+	    builder.addUnit(new FactorUnitDatatype("decimetre", Set("dm","decimetre",/*el*/ "δεκατόμετρο"), 0.1));
 	    builder.addUnit(new FactorUnitDatatype("decametre", Set("dam","decametre"), 10.0));
 	    builder.addUnit(new FactorUnitDatatype("hectometre", Set("hm","hectometre"), 100.0));
-	    builder.addUnit(new FactorUnitDatatype("kilometre", Set("km","kilometre"), 1000.0));
+	    builder.addUnit(new FactorUnitDatatype("kilometre", Set("km","kilometre",/*el*/ "χιλ","χιλιόμετρα"), 1000.0));
 	    builder.addUnit(new FactorUnitDatatype("megametre", Set("Mm","megametre"), 1000000.0));
 	    builder.addUnit(new FactorUnitDatatype("gigametre", Set("Gm","gigametre"), 1000000000.0));
-	    builder.addUnit(new FactorUnitDatatype("inch", Set("in","inch","''"), 0.0254));
+	    builder.addUnit(new FactorUnitDatatype("inch", Set("in","inch","''","\""), 0.0254));
 	    builder.addUnit(new FactorUnitDatatype("hand", Set("hand"), 0.1016));
-	    builder.addUnit(new FactorUnitDatatype("foot", Set("ft","feet","foot"), 0.3048));
+	    builder.addUnit(new FactorUnitDatatype("foot", Set("ft","feet","foot",/*el*/ "πόδια"), 0.3048));
 	    builder.addUnit(new FactorUnitDatatype("yard", Set("yd","yard"), 0.9144));
 	    builder.addUnit(new FactorUnitDatatype("fathom", Set("fathom"), 1.8288));
 	    builder.addUnit(new FactorUnitDatatype("rod", Set("rd","perch","pole","rod"), 5.0292));
 	    builder.addUnit(new FactorUnitDatatype("chain", Set("chain"), 20.1168));
 	    builder.addUnit(new FactorUnitDatatype("furlong", Set("furlong"), 201.168));
-	    builder.addUnit(new FactorUnitDatatype("mile", Set("mi","miles","mile"), 1609.344));
+	    builder.addUnit(new FactorUnitDatatype("mile", Set("mi","miles","mile",/*el*/ "μίλι","μίλια"), 1609.344));
 	    builder.addUnit(new FactorUnitDatatype("nautialMile", Set("nmi","nautial mile"), 1852.01));
 	    builder.addUnit(new FactorUnitDatatype("astronomicalUnit", Set("AU","astronomical unit"), 149597870691.0));
 	    builder.addUnit(new FactorUnitDatatype("lightYear", Set("ly","light-year"), 9460730472580800.0));
@@ -391,15 +391,15 @@ object OntologyDatatypes
 	    types :::= builder.build
 
 	    builder.addDimension("Mass");
-	    builder.addUnit(new StandardUnitDatatype("gram", Set("g","gram")));
-	    builder.addUnit(new FactorUnitDatatype("milligram", Set("mg","milligram"), 0.001));
-	    builder.addUnit(new FactorUnitDatatype("kilogram", Set("kg","kilogram"), 1000.0));
-	    builder.addUnit(new FactorUnitDatatype("tonne", Set("t","tonne"), 1000000.0));
+	    builder.addUnit(new StandardUnitDatatype("gram", Set("g","gram",/*el*/ "γραμμάρια","γρ")));
+	    builder.addUnit(new FactorUnitDatatype("milligram", Set("mg","milligram",/*el*/ "χιλιόγραμμάρια"), 0.001));
+	    builder.addUnit(new FactorUnitDatatype("kilogram", Set("kg","kilogram",/*el*/ "κιλά"), 1000.0));
+	    builder.addUnit(new FactorUnitDatatype("tonne", Set("t","tonne",/*el*/ "τόνοι","τόνος"), 1000000.0));
 	    builder.addUnit(new FactorUnitDatatype("stone", Set("st","stone"), 6350.29318));
 	    builder.addUnit(new FactorUnitDatatype("pound", Set("lb","lbs","lbm","pound"), 453.6));
 	    builder.addUnit(new FactorUnitDatatype("ounce", Set("oz","ounce"), 28.35));
 	    builder.addUnit(new FactorUnitDatatype("grain", Set("gr","grain"), 0.0648));
-	    builder.addUnit(new FactorUnitDatatype("carat", Set("carat"), 0.2));
+	    builder.addUnit(new FactorUnitDatatype("carat", Set("carat",/*el*/ "καράτια","καράτι"), 0.2));
 	    // builder.addUnit(new FactorUnitDatatype("atomicMassUnit", Set("Da","u","atomic mass unit"), "missing conversion factor"));
 	    types :::= builder.build
 
@@ -411,12 +411,12 @@ object OntologyDatatypes
 	    types :::= builder.build
 
 	    builder.addDimension("Power");
-	    builder.addUnit(new StandardUnitDatatype("watt", Set("W","watt")));
+	    builder.addUnit(new StandardUnitDatatype("watt", Set("W","watt",/*el*/ "Βατ")));
 	    builder.addUnit(new FactorUnitDatatype("kilowatt", Set("kW","kilowatt"), 1000.0));
 	    builder.addUnit(new FactorUnitDatatype("milliwatt", Set("mW","milliwatt"), 0.001));
 	    builder.addUnit(new FactorUnitDatatype("megawatt", Set("MW","megawatt"), 1000000.0));
 	    builder.addUnit(new FactorUnitDatatype("gigawatt", Set("GW","gigawatt"), 1000000000.0));
-	    builder.addUnit(new FactorUnitDatatype("horsepower", Set("hp","horsepower"), 745.72218));
+	    builder.addUnit(new FactorUnitDatatype("horsepower", Set("hp","horsepower","ίπποι"), 745.72218));
 	    builder.addUnit(new FactorUnitDatatype("pferdestaerke", Set("PS","pferdestaerke"), 735.49875));
 	    builder.addUnit(new FactorUnitDatatype("brake horsepower", Set("bhp","brake horsepower"), 745.7));
 	    types :::= builder.build
@@ -435,7 +435,7 @@ object OntologyDatatypes
 	    types :::= builder.build
 
 	    builder.addDimension("Speed");
-	    builder.addUnit(new StandardUnitDatatype("kilometrePerHour", Set("km/h","kmh","kilometre per hour")));
+	    builder.addUnit(new StandardUnitDatatype("kilometrePerHour", Set("km/h","kmh","kilometre per hour",/*el*/ "χιλιόμετρα ανά ώρα")));
 	    builder.addUnit(new FactorUnitDatatype("metrePerSecond", Set("m/s","ms","metre per second"), 3.6));
 	    builder.addUnit(new FactorUnitDatatype("kilometrePerSecond", Set("km/s","kilometre per second"), 3600.0));
 	    builder.addUnit(new FactorUnitDatatype("milePerHour", Set("mph","mi/h","mile per hour"), 1.60934));
@@ -445,17 +445,17 @@ object OntologyDatatypes
 	    types :::= builder.build
 
 	    builder.addDimension("Temperature");
-	    builder.addUnit(new StandardUnitDatatype("kelvin", Set("K","kelvin")));
-      builder.addUnit(new FactorUnitDatatype("degreeCelsius", Set("°C","degree celsius","C","Celsius"), 1.0, 273.15));
+	    builder.addUnit(new StandardUnitDatatype("kelvin", Set("K","kelvin",/*el*/ "Κ","κέλβιν")));
+      builder.addUnit(new FactorUnitDatatype("degreeCelsius", Set("°C","degree celsius","C","Celsius",/*el*/ "βαθμοί"), 1.0, 273.15));
 	    builder.addUnit(new FactorUnitDatatype("degreeFahrenheit", Set("°F","F","Fahrenheit","degree fahrenheit"), 5.0 / 9.0, 459.67));
 	    builder.addUnit(new FactorUnitDatatype("degreeRankine", Set("°R","R","degree rankine"), 5.0 / 9.0, 0));
 	    types :::= builder.build
 
 	    builder.addDimension("Time");
-	    builder.addUnit(new StandardUnitDatatype("second", Set("s","sec","secs","second","seconds")));
-	    builder.addUnit(new FactorUnitDatatype("minute", Set("m","min","min.","mins","minute","minutes"), 60.0));
-	    builder.addUnit(new FactorUnitDatatype("hour", Set("h","hr","hr.","hour","hours","std"), 3600.0));
-	    builder.addUnit(new FactorUnitDatatype("day", Set("d","days","day"), 86400.0));
+	    builder.addUnit(new StandardUnitDatatype("second", Set("s","sec","secs","second","seconds",/*el*/ "δ","δευτερόλεπτα")));
+	    builder.addUnit(new FactorUnitDatatype("minute", Set("m","min","min.","mins","minute","minutes",/*el*/ "λ","λεπτά"), 60.0));
+	    builder.addUnit(new FactorUnitDatatype("hour", Set("h","hr","hr.","hour","hours","std",/*el*/ "ω","ώρες","ώρα"), 3600.0));
+	    builder.addUnit(new FactorUnitDatatype("day", Set("d","days","day",/*el*/ "μ","μέρα","μέρες"), 86400.0));
 	    types :::= builder.build
 
 	    builder.addDimension("Torque");
@@ -466,13 +466,13 @@ object OntologyDatatypes
 	    types :::= builder.build
 
 	    builder.addDimension("Volume");
-	    builder.addUnit(new StandardUnitDatatype("cubicMetre", Set("m3","m³","cubic metre")));
-	    builder.addUnit(new FactorUnitDatatype("cubicMillimetre", Set("mm3","mm³","cubic millimetre"), 1.0E-9));
+	    builder.addUnit(new StandardUnitDatatype("cubicMetre", Set("m3","m³","cubic metre",/*el*/ "κυβικό μέτρο","μ3","μ³")));
+	    builder.addUnit(new FactorUnitDatatype("cubicMillimetre", Set("mm3","mm³","cubic millimetre",/*el*/ "μμ3","μμ³"), 1.0E-9));
 	    builder.addUnit(new FactorUnitDatatype("cubicCentimetre", Set("cm3","cm³","cc","cubic centimetre"), 1.0E-6));
 	    builder.addUnit(new FactorUnitDatatype("cubicDecimetre", Set("dm3","dm³","cubic decimetre"), 0.001));
 	    builder.addUnit(new FactorUnitDatatype("cubicDecametre", Set("dam3","cubic decametre"), 1000.0));
 	    builder.addUnit(new FactorUnitDatatype("cubicHectometre", Set("hm3","hm³","cubic hectometre"), 1000000.0));
-	    builder.addUnit(new FactorUnitDatatype("cubicKilometre", Set("km3","km³","cubic kilometre"), 1000000000.0));
+	    builder.addUnit(new FactorUnitDatatype("cubicKilometre", Set("km3","km³","cubic kilometre",/*el*/ "χιλ3","χιλ³"), 1000000000.0));
 	    builder.addUnit(new FactorUnitDatatype("microlitre", Set("ul","uL","microlitre"), 1.0E-9));
 	    builder.addUnit(new FactorUnitDatatype("millilitre", Set("ml","mL","millilitre"), 1.0E-6));
 	    builder.addUnit(new FactorUnitDatatype("centilitre", Set("cl","cL","centilitre"), 1.0E-5));

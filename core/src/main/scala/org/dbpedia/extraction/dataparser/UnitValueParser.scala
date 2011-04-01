@@ -24,35 +24,35 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
         case dt => throw new IllegalArgumentException("Invalid datatype: " + dt)
     })
 
-    private val ValueRegex1 = (prefix + """(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
+    private val ValueRegex1 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
 
-    private val ValueRegex2 = (prefix + """(-?[0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
+    private val ValueRegex2 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
 
-    private val UnitRegex = ("""(?<!\w)(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)(?!\d)""").r
+    private val UnitRegex = ("""(?iu)""" + """(?<!\w)(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)(?!\d)""").r
     
     /** Merging strings with feet and inches: 'x ft y in' and convert them into centimetres */
-    private val UnitValueRegex1a = (prefix + """(-?[0-9]+)\040*ft\040*([0-9]+)\040*in\b""" + postfix).r
+    private val UnitValueRegex1a = ("""(?iu)""" + prefix + """(-?[0-9]+)\040*ft\040*([0-9]+)\040*in\b""" + postfix).r
     
     /** Catches number and unit: e.q. 1.120.500,55 km */
-    private val UnitValueRegex1b = (prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
+    private val UnitValueRegex1b = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
     
     /** If different units are present, e.g.: 10 mi. (16.0934 km); the first will be returned */
     //TODO remove?
-    private val UnitValueRegex1c = (prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+    private val UnitValueRegex1c = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
                                     """)[\s]*\([\s]*(?:[0-9]+(?:\.[0-9]+)?)[\s]*(?:""" + unitRegexLabels + """)[\s]*\)[\s]*""" + postfix).r
                                    
     /** Catches number and unit: e.q. 1.120.500,55 km */
-    private val UnitValueRegex2a = (prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
+    private val UnitValueRegex2a = ("""(?iu)""" + prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
     
     /** If different units are present, e.g.: 10 mi. (16.0934 km); the first will be returned */
     //TODO remove?
-    private val UnitValueRegex2b = (prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+    private val UnitValueRegex2b = ("""(?iu)""" + prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
                                     """)[\s]*\([\s]*(?:[0-9]+(?:\,[0-9]+)?)[\s]*(?:""" + unitRegexLabels + """)[\s]*\)[\s]*""" + postfix).r
 
 
-    private val PrefixUnitValueRegex1 = (prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
+    private val PrefixUnitValueRegex1 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
 
-    private val PrefixUnitValueRegex2 = (prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
+    private val PrefixUnitValueRegex2 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
 
     override def parse(node : Node) : Option[(Double, UnitDatatype)] =
     {

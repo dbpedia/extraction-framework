@@ -8,7 +8,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InterWikiLinkNode
 /**
  * Extracts interwiki links and creates owl:sameAs triples
  */
-class SameAsExtractor(extractionContext : ExtractionContext) extends Extractor
+class InterwikiLinksExtractor(extractionContext : ExtractionContext) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 
