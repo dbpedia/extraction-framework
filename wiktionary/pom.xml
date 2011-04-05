@@ -39,15 +39,27 @@
       <!--version>2.13.2-SNAPSHOT</version-->
 
       <configuration>
-		<useFsc>true</useFsc>
-
-        <launchers>
+         <args>
+             <arg>-g:vars</arg>
+         </args>
+         <launchers>
           <launcher>
             <id>Extract</id>
             <mainClass>org.dbpedia.extraction.wiktionary.Extract</mainClass>
             <jvmArgs>
               <jvmArg>-Xmx1024m</jvmArg>
+              <jvmArg>-Xdebug</jvmArg>
+              <jvmArg>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</jvmArg>
+
             </jvmArgs>
+          </launcher>
+          <launcher>
+              <id>debug</id>
+                <mainClass>org.dbpedia.extraction.wiktionary.Extract</mainClass>
+                <jvmArgs>
+                  <jvmArg>-Xdebug</jvmArg>
+                  <jvmArg>-Xrunjdwp:transport=dt_socket,server=n,suspend=n,address=5005</jvmArg>
+                </jvmArgs>
           </launcher>
         </launchers>
       </configuration>

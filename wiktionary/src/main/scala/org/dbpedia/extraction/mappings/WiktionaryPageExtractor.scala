@@ -8,6 +8,7 @@ import scala.io.Source
 import util.control.Breaks._
 import java.io.FileNotFoundException
 import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map}
+import collection.SortedSet
 
 //some of my utilities
 import MyStack._
@@ -62,10 +63,6 @@ class WiktionaryPageExtractor extends Extractor {
     )   //TODO complete
   )
 
-  private val vars = Set("hyphenation-singular", "hyphenation-plural", "pronunciation-singular", "pronunciation-plural",
-    "audio-singular", "audio-plural")
-  private val senseVars = Set("meaning")
-
   //private val translatePOSback = Map() ++ (translatePOS map {case (lang,kv) => (lang, kv map {case (k, v) => (v, k)})})
   //TODO do this on a single line :)
   private var translatePOSback : scala.collection.mutable.Map[String, scala.collection.mutable.Map[String,String]] =  scala.collection.mutable.Map()
@@ -76,8 +73,8 @@ class WiktionaryPageExtractor extends Extractor {
   for(key <- translatePOS.keySet){
     for(lang <- possibleLanguages){
       translatePOSback.apply(lang) += translatePOS.apply(key).apply(lang) ->  key
-      translatePOSback.apply("uri") += translatePOS.apply(key).apply("uri") ->  key
     }
+    translatePOSback.apply("uri") += translatePOS.apply(key).apply("uri") ->  key
   }
 
   private val varPropMapping = Map (
@@ -94,12 +91,13 @@ class WiktionaryPageExtractor extends Extractor {
     //val r = new scala.util.Random
     //Thread sleep r.nextInt(10)*1000
 
-
+    //
     measure {
-      val tpl = MyStack.fromParsedFile(language+"-page.tpl").filterNewLines.filterTrimmed
-      val pageSt =  new Stack[Node]().pushAll(page.children.reverse).filterTrimmed
-      //println("dumping page")
+      val tpl = MyStack.fromParsedFile(language+"-page.tpl").filterNewLines
+      //println("dumping page untrimmed")
       //page.children.foreach(_.dump(0))
+      //println("abc   def\n\nxyz".fullTrim)
+      val pageSt =  new Stack[Node]().pushAll(page.children.reverse)
       var bindings : VarBindingsHierarchical = null
       try {
         bindings = parseNodesWithTemplate(tpl, pageSt)
@@ -116,21 +114,21 @@ class WiktionaryPageExtractor extends Extractor {
       }
       println("results")
       println("before")
-      bindings.dump(0)
+      //bindings.dump(0)
       // the hierarchical var bindings need to be normalized to be converted to rdf
       val converted = bindings.flatLangPos
       val converted2 : Map[Tuple2[String,String], Tuple2[Map[String, List[Node]], Map[List[Node],Map[String, List[Node]]]]] = new HashMap()
       for (wlp <- converted){
         val normalBindings : Map[String, List[Node]]= new HashMap()
         //get normal var bindings out (these that are unique to a (word,lang,pos) combination)
-        for(varName <- vars){
+        for(varName <- VarBindingsHierarchical.vars){
           val currBindings = wlp._2.getFirstBinding(varName)
           if(currBindings.isDefined){
             normalBindings += (varName -> currBindings.get)
           }
         }
         val senseBindingsConverted : Map[List[Node],Map[String, List[Node]]] = new HashMap()
-        for(varName <- senseVars){
+        for(varName <- VarBindingsHierarchical.senseVars){
           val senseBindings = wlp._2.getSenseBoundVarBinding(varName)
           val senses = senseBindings.keySet
           for(sense <- senses){
@@ -206,7 +204,7 @@ object WiktionaryPageExtractor {
           //printMsg("curNode "+dumpStrShort(curNode))
 
           //check for end of the var
-          if(equals(endMarkerNode, curNode)) {
+          if(endMarkerNode.equalsIgnoreLine(curNode)) {
             //println("endmarker found (equal)")
             endMarkerFound = true
             break
@@ -225,11 +223,12 @@ object WiktionaryPageExtractor {
               val part1 =  curNode.asInstanceOf[TextNode].text.substring(0, idx)  //the endmarker is cut out and thrown away
               val part2 =  curNode.asInstanceOf[TextNode].text.substring(idx+endMarkerNode.asInstanceOf[TextNode].text.size, curNode.asInstanceOf[TextNode].text.size)
               if(!part1.isEmpty){
-                 printMsg("var += "+curNode)
+                 printMsg("var += "+part1)
                 varValue append new TextNode(part1, curNode.line)
               }
               //and put the rest back
               if(!part2.isEmpty){
+                printMsg("putting back >"+part2+"<")
                 pageIt.prependString(part2)
               }
               break
@@ -249,28 +248,8 @@ object WiktionaryPageExtractor {
     return (tplVarNode.property("2").get.children(0).asInstanceOf[TextNode].text, varValue.toList)
   }
 
-  //why are line numbers stored - this messes up the equals method,
-  //we fix this using the scala 2.8 named constructor arguments aware copy method of case classes
-  protected def equals(n1 : Node, n2 : Node) : Boolean = {
-    if(n1.getClass != n2.getClass){
-      return false
-    }
-    //the copy method is not available in the implementation of the abstract node-class
-    //so we cast to all subclasses
-    n1 match {
-      case tn : TemplateNode => n2.asInstanceOf[TemplateNode].copy(line=0).equals(tn.copy(line=0))
-      case tn : TextNode => n2.asInstanceOf[TextNode].copy(line=0).equals(tn.copy(line=0))
-      case tn : SectionNode => n2.asInstanceOf[SectionNode].copy(line=0).equals(tn.copy(line=0))
-      case tn : ExternalLinkNode => n2.asInstanceOf[ExternalLinkNode].copy(line=0).equals(tn.copy(line=0))
-      case tn : InternalLinkNode => n2.asInstanceOf[InternalLinkNode].copy(line=0).equals(tn.copy(line=0))
-      case tn : InterWikiLinkNode => n2.asInstanceOf[InterWikiLinkNode].copy(line=0).equals(tn.copy(line=0))
-      case tn : PropertyNode => n2.asInstanceOf[PropertyNode].copy(line=0).equals(tn.copy(line=0))
-      case tn : TableNode => n2.asInstanceOf[TableNode].copy(line=0).equals(tn.copy(line=0))
-    }
-  }
-
   //extract does one step e.g. parse a var, or a list etc and then returns
-  protected def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
+  def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
     printFuncDump("parseNode", tplIt, pageIt)
     val bindings = new VarBindingsHierarchical
     val currNodeFromTemplate = tplIt.pop
@@ -278,19 +257,12 @@ object WiktionaryPageExtractor {
     var pageItCopy = pageIt.clone
 
     //early detection of error or no action
-    if(equals(currNodeFromTemplate, currNodeFromPage)){
+    if(currNodeFromTemplate.equalsIgnoreLine(currNodeFromPage)){
       //simple match
       pageIt.pop //consume page node
       return bindings
     } else //determine whether they CAN equal
-    if(!  //NOT
-      (
-        (currNodeFromTemplate.isInstanceOf[TemplateNode]
-          && currNodeFromTemplate.asInstanceOf[TemplateNode].title.decoded.equals( "Extractiontpl")
-        )
-        || currNodeFromPage.getClass == currNodeFromTemplate.getClass
-      )
-    ){
+    if(!currNodeFromTemplate.canMatchPageNode(currNodeFromPage)){
       println("early mismatch")
       throw new WiktionaryException("the template does not match the page - different type", bindings, Some(currNodeFromPage))
     }
@@ -312,7 +284,8 @@ object WiktionaryPageExtractor {
             case "contains" =>    {
               printMsg("include stuff")
               val templates = ListBuffer[String]()
-              val markers  = Set[Node]()
+              val markers  = Map[Node, Stack[Node]]()
+              //get the included templates
               for(property <- currNodeFromTemplate.children){  // children == properties
                 val name = property.asInstanceOf[PropertyNode].children(0).asInstanceOf[TextNode].text.trim
                 if(! Set("contains", "unordered", "optional").contains(name)){
@@ -323,7 +296,10 @@ object WiktionaryPageExtractor {
                       tplSt.filterNewLines.filterTrimmed
                       if(tplSt.size != 0){
                         subTemplateCache += (name -> tplSt)
-                        markers.add(tplSt.head)
+                        val anchor = tplSt.findNextNonTplNode
+                        if(anchor.isDefined){
+                          markers += (anchor.get -> tplSt)
+                        }
                       }
                     } catch {
                       case e : FileNotFoundException =>  printMsg("referenced non existant sub template "+filename+". skipped")
@@ -349,6 +325,24 @@ object WiktionaryPageExtractor {
                   }
                 }
               }
+              /*val endMarker = pageIt.findNextNonTplNode
+              var curPageNode : Node = null
+              while (pageIt.size > 0 && (if(endMarker.isDefined){(!endMarker.get.canMatchPageNode(pageIt.head))} else true)){
+                //seek until the next pagenode is one of the marker nodes
+                while (pageIt.size > 0 && !markers.exists({case (key, value) => key.equalsIgnoreLine(pageIt.head)})){
+                    curPageNode = pageIt.pop
+                    printMsg("dropped "+curPageNode)
+                }
+                if(pageIt.size > 0){
+                  //extract
+                  printMsg("found marker "+pageIt.head)
+                  try {
+                    bindings addChild  parseNodesWithTemplate(markers.find(_.equalsIgnoreLine(pageIt.head)).get._2, pageIt)
+                  } catch {
+                    case e : WiktionaryException => bindings addChild e.vars
+                  }
+                }
+              }*/
             }
             case "var" => {
               val endMarkerNode = if(tplIt.size > 0) Some(tplIt.pop) else None
@@ -469,7 +463,7 @@ object WiktionaryPageExtractor {
           } */
           if(endMarkerNode.isDefined &&
             (
-              (pageIt.size > 0 && equals(pageIt.head, endMarkerNode.get)) ||
+              (pageIt.size > 0 && pageIt.head.equalsIgnoreLine(endMarkerNode.get)) ||
               (pageIt.head.isInstanceOf[TextNode] && endMarkerNode.get.isInstanceOf[TextNode] &&
                 pageIt.head.asInstanceOf[TextNode].text.startsWith(endMarkerNode.get.asInstanceOf[TextNode].text)
               )
@@ -492,55 +486,99 @@ object WiktionaryPageExtractor {
   }
 
   // parses the complete buffer
-  protected def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
-    //printFuncDump("parseNodesWithTemplate", tplIt, pageIt)
+  def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
+    printFuncDump("parseNodesWithTemplate", tplIt, pageIt)
+
+    // try to skip unexpected nodes at the beginning
+    /*val dropable = 0
+    var dropped = 0
+    var pageItCopy : Stack[Node] = null
+    if(!(tplIt.head.isInstanceOf[TemplateNode] && tplIt.head.asInstanceOf[TemplateNode].title.decoded.equals("Extractiontpl") && tplIt.head.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text.equals("list-start"))){
+      val startMarker = tplIt.head
+      pageItCopy = pageIt.clone
+      breakable {
+        while (pageIt.size > 0 && !startMarker.canMatchPageNode(pageIt.head)){
+          if(dropped < dropable){
+            printMsg("dropping "+pageIt.pop)
+            dropped += 1
+          } else {
+            printMsg("revert dropping")
+            pageIt.clear
+            pageIt.pushAll(pageItCopy.reverse)
+            break
+          }
+        }
+      }
+    }*/
     val bindings = new VarBindingsHierarchical
     while(tplIt.size > 0 && pageIt.size > 0){
         try {
-          bindings addChild parseNode(tplIt, pageIt)
+         // try {
+            bindings addChild parseNode(tplIt, pageIt)
+          /*
+            //on success (no exception is thrown) we start counting drops from 0
+            dropped = 0
+            pageItCopy = pageIt.clone
+          }  catch {
+            case e : WiktionaryException => {
+              //skip unexpected nodes everywhere
+              if(dropped < dropable && pageIt.size > 0){
+                if(dropped == 0){
+                   pageItCopy = pageIt.clone
+                }
+                val droppedNode = pageIt.pop //drop a node and try again
+                printMsg("dropped "+droppedNode)
+                dropped += 1
+              } else {
+                //revert pageIt to the state before we tried dropping
+                printMsg("revert dropping")
+                pageIt.clear
+                pageIt.pushAll(pageItCopy.reverse)
+                throw e  //too many drops tried
+              }
+            }
+          }*/
         } catch {
           case e : WiktionaryException => {
-            //try dropping n nodes from the page
-            if(false){
-
-            } else {
-              bindings addChild e.vars
-              throw e.copy(vars=bindings)
-            }
+            bindings addChild e.vars   // merge current bindings with previous and "return" them
+            throw e.copy(vars=bindings)
           }
         }
     }
-    bindings.dump(0)
+    //bindings.dump(0)
     bindings
   }
 }
 
 class VarBindingsHierarchical (){
-    val children  = new ListBuffer[VarBindingsHierarchical]()
-    val bindings = new HashMap[String, List[Node]]()
-    def addBinding(name : String, value : List[Node]) : Unit = {
-      bindings += (name -> value)
+  val children  = new ListBuffer[VarBindingsHierarchical]()
+  val bindings = new HashMap[String, List[Node]]()
+
+  def addBinding(name : String, value : List[Node]) : Unit = {
+    bindings += (name -> value)
+  }
+  def addChild(sub : VarBindingsHierarchical) : Unit = {
+    if(sub.bindings.size > 0 || sub.children.size > 0){
+      children += sub.reduce
     }
-    def addChild(sub : VarBindingsHierarchical) : Unit = {
-      if(sub.bindings.size > 0 || sub.children.size > 0){
-        children += sub.reduce
-      }
-    }
-    def mergeWith(other : VarBindingsHierarchical) = {
-      children ++= other.children
-      bindings ++= other.bindings
-    }
+  }
+  def mergeWith(other : VarBindingsHierarchical) = {
+    children ++= other.children
+    bindings ++= other.bindings
+  }
 
   def dump(depth : Int = 0){
-    val prefix = " "*depth
-    println(prefix+"{")
-    for(key <- bindings.keySet){
-      println(prefix+key+" -> "+bindings.apply(key))
+    if(WiktionaryLogging.enabled){
+      val prefix = " "*depth
+      println(prefix+"{")
+      for(key <- bindings.keySet){
+        println(prefix+key+" -> "+bindings.apply(key))
+      }
+      for(child <- children){
+        child.dump(depth + 2)
+      }
+      println(prefix+"}")
     }
-    for(child <- children){
-      child.dump(depth + 2)
-    }
-    println(prefix+"}")
   }
 
   //make the structure absolutly flat, maybe this is not what you want
@@ -608,9 +646,38 @@ class VarBindingsHierarchical (){
       if(lang.isDefined && pos.isDefined){
         val langStr = lang.get.apply(0).asInstanceOf[TextNode].text   //assumes that the lang var is bound to e.g. List(TextNode(english))
         val posStr  = pos.get.apply(0).asInstanceOf[TextNode].text    //assumes that the pos  var is bound to e.g. List(TextNode(verb))
-         ret += ((langStr, posStr) -> child)
+        ret += ((langStr, posStr) -> child)
       }
     }
     ret
   }
- }
+
+  def sortByVars() : Tuple2[Map[String, List[Node]], Map[List[Node],Map[String, List[Node]]]] = {
+    val normalBindings : Map[String, List[Node]]= new HashMap()
+    //get normal var bindings out (these that are unique to a (word,lang,pos) combination)
+    for(varName <- VarBindingsHierarchical.vars){
+      val currBindings = getFirstBinding(varName)
+      if(currBindings.isDefined){
+        normalBindings += (varName -> currBindings.get)
+      }
+    }
+    val senseBindingsConverted : Map[List[Node],Map[String, List[Node]]] = new HashMap()
+    //get the sense-bound vars (each sense can have a own binding for that var)
+    for(varName <- VarBindingsHierarchical.senseVars){
+      val senseBindings = getSenseBoundVarBinding(varName)
+      val senses = senseBindings.keySet
+      for(sense <- senses){
+        if(!senseBindingsConverted.contains(sense)){
+          senseBindingsConverted += (sense -> new HashMap())
+        }
+        senseBindingsConverted(sense) += (varName -> senseBindings(sense))
+      }
+    }
+    return (normalBindings, senseBindingsConverted)
+  }
+}
+object VarBindingsHierarchical {
+  val vars = Set("hyphenation-singular", "hyphenation-plural", "pronunciation-singular", "pronunciation-plural",
+    "audio-singular", "audio-plural")
+  val senseVars = Set("meaning")
+}

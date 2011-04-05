@@ -10,6 +10,7 @@ import org.dbpedia.extraction.sources.WikiPage
 import MyStack._
 import MyNode._
 import MyStringTrimmer._
+import WiktionaryPageExtractor._
 
 case class WiktionaryException(s: String, vars : VarBindingsHierarchical, unexpectedNode : Option[Node]) extends  Exception(s) {}
 case class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
@@ -152,16 +153,26 @@ object MyStack {
   implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
   def fromParsedFile(name : String) : Stack[Node] = {
-    val str = Source.fromFile(name).mkString
-    //println("read file "+name+">"+str+"<")
+    var str = Source.fromFile(name).mkString
+    str = if(str.startsWith("=")){"\n"+str} else {str} //force leading \n
+    var removeLast = false
+    str = if(str.endsWith("=")){removeLast = true; str+"\n"} else {str} //force trailing \n
+    //println("read file "+name+" >"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
-          new WikiTitle("test template"),0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
+          new WikiTitle("template "+name),0,0, str
         )
     )
-    //println("dumping subtemplate")
-    //page.children.foreach(_.dump(0))
-    new Stack[Node]().pushAll(page.children.reverse)
+    val nodes = new Stack[Node]()
+    if(removeLast){
+      nodes.pushAll(page.children.reverse.tail) //without the last
+    } else {
+      nodes.pushAll(page.children.reverse)
+    }
+    //println("dumping subtemplate "+name)
+    nodes.foreach((n: Node) => println(n.dumpStrShort))
+
+    nodes
   }
 
 }
@@ -189,22 +200,27 @@ object MyStringTrimmer {
 }
 
 object WiktionaryLogging {
+  val enabled = false
   def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node]) : Unit = {
     val st_depth = new Exception("").getStackTrace.length  - 7 //6 is the stack depth on the extract call. +1 for this func
     val prefix =  " " * st_depth
-    println(prefix + "------------")
-    println(prefix + "<entering " + name +">")
-    println(prefix + "<template (next 7)>")
-    println(prefix + tplIt.take(7).map(_.dumpStrShort).mkString)
-    println(prefix + "<page (next 7)>")
-    println(prefix + pageIt.take(7).map(_.dumpStrShort).mkString)
-    println(prefix + "------------\n\n")
+    if(enabled){
+      println(prefix + "------------")
+      println(prefix + "<entering " + name +">")
+      println(prefix + "<template (next 10)>")
+      println(prefix + tplIt.take(10).map(_.dumpStrShort).mkString)
+      println(prefix + "<page (next 10)>")
+      println(prefix + pageIt.take(10).map(_.dumpStrShort).mkString)
+      println(prefix + "------------\n\n")
+    }
   }
 
   def printMsg(str : String) : Unit = {
     val st_depth = new Exception("").getStackTrace.length  - 7
     val prefix =  " " * st_depth
-    println(prefix + str)
+    if(enabled){
+      println(prefix + str)
+    }
   }
 }
 
@@ -254,6 +270,42 @@ class MyNode (val n : Node){
       case sn : SectionNode=> "<section>"+sn.toWikiText+"</section> "
       case node : Node=> "<other "+node.getClass+">"+node.retrieveText.get + "</other> "
     }
+  }
+
+  //why are line numbers stored - this messes up the equals method,
+  //we fix this using the scala 2.8 named constructor arguments aware copy method of case classes
+  def equalsIgnoreLine(other : Node) : Boolean = {
+    if(n.getClass != other.getClass){
+      return false
+    }
+    //the copy method is not available in the implementation of the abstract node-class
+    //so we cast to all subclasses
+    n match {
+      case tn : TemplateNode => other.asInstanceOf[TemplateNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : TextNode => other.asInstanceOf[TextNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : SectionNode => other.asInstanceOf[SectionNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : ExternalLinkNode => other.asInstanceOf[ExternalLinkNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : InternalLinkNode => other.asInstanceOf[InternalLinkNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : InterWikiLinkNode => other.asInstanceOf[InterWikiLinkNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : PropertyNode => other.asInstanceOf[PropertyNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : TableNode => other.asInstanceOf[TableNode].copy(line=0).equals(tn.copy(line=0))
+    }
+  }
+
+  def canMatchPageNode(other : Node) : Boolean = {
+    n match {
+      case tplNode : TemplateNode => if(tplNode.title.decoded.equals("Extractiontpl")) return true
+      case txtNode : TextNode => {
+        other match {
+          case otherTxtNode  : TextNode => {
+            return otherTxtNode.text.startsWith(txtNode.text)
+          }
+          case _ => return false
+        }
+      }
+      case _ =>
+    }
+    return n.getClass == other.getClass
   }
 }
 

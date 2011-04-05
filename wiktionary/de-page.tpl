@@ -14,9 +14,7 @@ reference
 }}{{extractiontpl|list-end}}
 {{extractiontpl|list-end}}
 
-{{Quellen}}
-{{extractiontpl|list-start|references-list}}:{{extractiontpl|var|reference}}
-{{extractiontpl|list-end}}
+
 
 {{extractiontpl|list-start|otherlanguages-list}}{{extractiontpl|link|{{extractiontpl|var|inOtherLanguages}}}}
 {{extractiontpl|list-end}}
