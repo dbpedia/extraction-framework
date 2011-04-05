@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef}
 
 class TableMapping( mapToClass : OntologyClass,
                     correspondingClass : OntologyClass,
@@ -50,7 +50,7 @@ class TableMapping( mapToClass : OntologyClass,
             var currentClass = mapToClass
             while(currentClass != null)
             {
-                val quad = new Quad(extractionContext, DBpediaDatasets.OntologyTypes, instanceUri, extractionContext.ontology.getProperty("rdf:type").get, currentClass.uri, rowNode.sourceUri)
+                val quad = new Quad(DBpediaDatasets.OntologyTypes, new IriRef(instanceUri), new IriRef(extractionContext.ontology.getProperty("rdf:type").get), new IriRef(currentClass.uri), new IriRef(rowNode.sourceUri))
                 graph = graph.merge(new Graph(quad))
                 
                 currentClass = currentClass.subClassOf
@@ -60,7 +60,7 @@ class TableMapping( mapToClass : OntologyClass,
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                val quad = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
+                val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(corUri), new IriRef(correspondingProperty), new IriRef(instanceUri), new IriRef(rowNode.sourceUri))
                 graph = graph.merge(new Graph(quad))
             }
             

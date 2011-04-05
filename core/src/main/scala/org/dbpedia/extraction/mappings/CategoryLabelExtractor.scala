@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, TypedLiteral, IriRef}
 
 /**
  * Extracts labels for Categories.
@@ -21,7 +21,7 @@ class CategoryLabelExtractor(extractionContext : ExtractionContext) extends Extr
 
         var quads = List[Quad]()
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.CategoryLabels, subjectUri, labelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+        quads ::= new Quad(DBpediaDatasets.CategoryLabels, new IriRef(subjectUri), new IriRef(labelProperty), new TypedLiteral(node.title.decoded, new Datatype("xsd:string")), new IriRef(node.sourceUri))
 
         new Graph(quads)
     }

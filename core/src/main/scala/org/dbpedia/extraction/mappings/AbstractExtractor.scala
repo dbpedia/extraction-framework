@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.{Logger, Level}
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, PlainLiteral}
 import org.dbpedia.extraction.wikiparser._
 import java.net.{URLEncoder, URL}
 import xml.XML
@@ -57,8 +57,8 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
         val shortText = short(text)
 
         //Create statements
-        val quadLong = new Quad(extractionContext, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
-        val quadShort = new Quad(extractionContext, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
+        val quadLong = new Quad(DBpediaDatasets.LongAbstracts, new IriRef(subjectUri), new IriRef(longProperty), new PlainLiteral(text), new IriRef(node.sourceUri))
+        val quadShort = new Quad(DBpediaDatasets.ShortAbstracts, new IriRef(subjectUri), new IriRef(shortProperty), new PlainLiteral(text), new IriRef(node.sourceUri))
 
         if(shortText.isEmpty)
         {

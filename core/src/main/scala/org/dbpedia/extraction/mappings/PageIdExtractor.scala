@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, TypedLiteral}
 import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser.PageNode
 
@@ -17,7 +17,7 @@ class PageIdExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         val objectLink = "http://" + extractionContext.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
 
-        new Graph(new Quad(extractionContext, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
-            node.id.toString, node.sourceUri, extractionContext.ontology.getDatatype("xsd:integer").get ))
+        new Graph(new Quad(DBpediaDatasets.PageIds, new IriRef(objectLink), new IriRef(wikiPageIdProperty),
+            new TypedLiteral(node.id.toString, extractionContext.ontology.getDatatype("xsd:integer").get), new IriRef(node.sourceUri)))
     }
 }

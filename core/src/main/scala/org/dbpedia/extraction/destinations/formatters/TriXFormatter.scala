@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.destinations.formatters
 
 import java.io.Writer
-import org.dbpedia.extraction.destinations.{Quad, Formatter}
+import org.dbpedia.extraction.destinations.{Quad, Formatter, IriRef, TypedLiteral, PlainLiteral, LanguageLiteral}
 import scala.xml.Utility
 import java.net.URI
 
@@ -25,19 +25,17 @@ class TriXFormatter(stylesheetURI : URI = null) extends Formatter
     override def write(quad : Quad, writer : Writer) : Unit =
     {
         writer.write("  <graph>\n")
-        writer.write("    <uri>" + encode(quad.context) + "</uri>\n")
+        writer.write("    <uri>" + encode(quad.context.uri) + "</uri>\n")
         writer.write("    <triple>\n")
 
-        writer.write("      <uri>" + encode(quad.subject) + "</uri>\n")
-        writer.write("      <uri>" + encode(quad.predicate) + "</uri>\n")
+        writer.write("      <uri>" + encode(quad.subject.uri) + "</uri>\n")
+        writer.write("      <uri>" + encode(quad.predicate.uri) + "</uri>\n")
 
-        if(quad.datatype != null)
-        {
-            writer.write("      <typedLiteral datatype=\"" + encode(quad.datatype.uri) + "\">" + encode(quad.value) + "</typedLiteral>\n")
-        }
-        else
-        {
-            writer.write("      <uri>" + encode(quad.value) + "</uri>\n")
+        quad.value match {
+          case tl : TypedLiteral =>     writer.write("      <typedLiteral datatype=\"" + encode(tl.dataType.uri) + "\">" + encode(tl.value) + "</typedLiteral>\n")
+          case ll : LanguageLiteral =>  writer.write("      <plainLiteral xml:lang=\"" + encode(ll.language) + "\">" + encode(ll.value) + "</typedLiteral>\n")
+          case pl : PlainLiteral =>     writer.write("      <plainLiteral>" + encode(pl.value) + "</plainLiteral>\n")
+          case iri : IriRef =>          writer.write("      <uri>" + encode(iri.uri) + "</uri>\n")
         }
 
         writer.write("    </triple>\n")

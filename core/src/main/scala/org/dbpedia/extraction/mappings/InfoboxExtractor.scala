@@ -8,7 +8,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.StringUtils._
 import java.net.URLEncoder
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, TypedLiteral, IriRef, PlainLiteral}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
 /**
@@ -116,7 +116,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads ::= new Quad(DBpediaDatasets.Infoboxes, new IriRef(subjectUri), new IriRef(propertyUri), new TypedLiteral(value, datatype), new IriRef(splitNode.sourceUri))
                         }
                         catch
                         {
@@ -129,8 +129,8 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(DBpediaDatasets.InfoboxProperties, new IriRef(propertyUri), new IriRef(typeProperty), new IriRef(propertyClass.uri), new IriRef(splitNode.sourceUri))
+                                quads ::= new Quad(DBpediaDatasets.InfoboxProperties, new IriRef(propertyUri), new IriRef(labelProperty), new PlainLiteral(propertyLabel), new IriRef(splitNode.sourceUri))
                             }
                         }
                     }
@@ -140,7 +140,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                 // TODO write only wikiPageUsesTemplate if properties extracted
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
-                    quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty, "http://dbpedia.org/resource/" + templateNamespace + ":" + template.title.encoded, template.sourceUri, null)
+                    quads ::= new Quad(DBpediaDatasets.Infoboxes, new IriRef(subjectUri), new IriRef(usesTemplateProperty), new IriRef("http://dbpedia.org/resource/" + templateNamespace + ":" + template.title.encoded), new IriRef(template.sourceUri))
                     seenTemplates.add(template.title.encoded)
                 }
             }

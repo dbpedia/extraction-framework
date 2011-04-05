@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.util.UriUtils
 import java.net.URI
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef}
 
 /**
  * Extracts links to the official homepage of an instance.
@@ -88,7 +88,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
         {
             for(link <- UriUtils.cleanLink(URI.create(url)))
             {
-                return new Graph(new Quad(extractionContext, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
+                return new Graph(new Quad(DBpediaDatasets.Homepages, new IriRef(subjectUri), new IriRef(homepageProperty), new IriRef(link), new IriRef(node.sourceUri)) :: Nil)
             }
         }
         catch

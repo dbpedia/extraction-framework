@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.ontology.OntologyProperty
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, PlainLiteral}
 import java.util.logging.{Logger, Level}
 
 /**
@@ -114,13 +114,13 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
         {
             instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
 
-            quads ::= new Quad(extractionContext,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
+          quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new IriRef(instanceUri), new IriRef(sourceUri))
         }
-
-        quads ::= new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
+        //TODO use typed literals?
+        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(typeOntProperty), new IriRef(featureOntClass.uri), new IriRef(sourceUri))
+        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(latOntProperty), new PlainLiteral(coord.latitude.toString), new IriRef(sourceUri))
+        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(lonOntProperty), new PlainLiteral(coord.longitude.toString), new IriRef(sourceUri))
+        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(pointOntProperty), new PlainLiteral(coord.latitude + " " + coord.longitude), new IriRef(sourceUri))
 
         return new Graph(quads)
     }

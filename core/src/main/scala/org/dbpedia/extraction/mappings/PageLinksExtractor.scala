@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.OntologyNamespaces
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InternalLinkNode, Node}
 
 /**
@@ -20,8 +20,8 @@ class PageLinksExtractor(extractionContext : ExtractionContext) extends Extracto
         var quads = List[Quad]()
         val list = collectInternalLinks(node)
         list.foreach(link => {
-            quads ::= new Quad(extractionContext, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty,
-                getUri(link.destination), link.sourceUri, null)
+            quads ::= new Quad(DBpediaDatasets.PageLinks, new IriRef(subjectUri), new IriRef(wikiPageWikiLinkProperty),
+                new IriRef(getUri(link.destination)), new IriRef(link.sourceUri))
         })
         new Graph(quads)
     }

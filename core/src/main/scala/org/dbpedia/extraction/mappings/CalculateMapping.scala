@@ -4,7 +4,7 @@ import _root_.org.dbpedia.extraction.ontology.{OntologyNamespaces, OntologyPrope
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.wikiparser.{TemplateNode}
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, TypedLiteral}
 
 class CalculateMapping( templateProperty1 : String,
                         templateProperty2 : String,
@@ -55,12 +55,12 @@ class CalculateMapping( templateProperty1 : String,
                 //DoubleParser
                 case (value1 : Double, value2 : Double) =>
                 {
-                    new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, (value1 + value2).toString, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
+                    new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral((value1 + value2).toString, ontologyProperty.range.asInstanceOf[Datatype]), new IriRef(node.sourceUri))
                 }
                 //IntegerParser
                 case (value1 : Int, value2 : Int) =>
                 {
-                    new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, (value1 + value2).toString, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
+                    new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral((value1 + value2).toString, ontologyProperty.range.asInstanceOf[Datatype]), new IriRef(node.sourceUri))
                 }
             }
 
@@ -76,13 +76,13 @@ class CalculateMapping( templateProperty1 : String,
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
-            val quad = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
+            val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral(value.toString, unit), new IriRef(sourceUri))
             return new Graph(quad)
         }
 
         //Write generic property
         val stdValue = unit.toStandardUnit(value)
-        val quad = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
+        val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral(stdValue.toString, new Datatype("xsd:double")), new IriRef(sourceUri))
         var graph = new Graph(quad)
 
         //Write specific properties
@@ -93,8 +93,8 @@ class CalculateMapping( templateProperty1 : String,
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
                  val propertyUri = OntologyNamespaces.DBPEDIA_SPECIFICPROPERTY_NAMESPACE + currentClass.name + "/" + ontologyProperty.name
-                 val quad = new Quad(extractionContext, DBpediaDatasets.SpecificProperties, subjectUri,
-                                     propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
+                 val quad = new Quad(DBpediaDatasets.SpecificProperties, new IriRef(subjectUri),
+                                     new IriRef(propertyUri), new TypedLiteral(outputValue.toString, specificPropertyUnit), new IriRef(sourceUri))
                  graph = graph.merge(new Graph(quad))
             }
 

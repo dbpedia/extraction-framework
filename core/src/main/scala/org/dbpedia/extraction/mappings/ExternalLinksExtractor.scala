@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.util.UriUtils
 import java.net.URI
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, IriRef}
 import org.dbpedia.extraction.destinations.{Quad}
 import org.dbpedia.extraction.wikiparser.{WikiTitle, PageNode, ExternalLinkNode, Node}
 
@@ -24,8 +24,8 @@ class ExternalLinksExtractor(extractionContext : ExtractionContext) extends Extr
         {
             try
             {
-                quads ::= new Quad(extractionContext, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty,
-                    uri, link.sourceUri, null)
+                quads ::= new Quad(DBpediaDatasets.ExternalLinks, new IriRef(subjectUri), new IriRef(wikiPageExternalLinkProperty),
+                    new IriRef(uri), new IriRef(link.sourceUri))
             }
             catch
             {

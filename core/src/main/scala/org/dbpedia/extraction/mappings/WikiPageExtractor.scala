@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, PlainLiteral}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 
 /**
@@ -21,10 +21,10 @@ class WikiPageExtractor(extractionContext : ExtractionContext) extends Extractor
 
         val objectLink = "http://" + extractionContext.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.LinksToWikipediaArticle, subjectUri, foafPageProperty,  objectLink, node.sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.LinksToWikipediaArticle, objectLink, dcLanguageProperty,  extractionContext.language.wikiCode, node.sourceUri)
+        quads ::= new Quad(DBpediaDatasets.LinksToWikipediaArticle, new IriRef(subjectUri), new IriRef(foafPageProperty),  new IriRef(objectLink), new IriRef(node.sourceUri))
+        quads ::= new Quad(DBpediaDatasets.LinksToWikipediaArticle, new IriRef(objectLink), new IriRef(dcLanguageProperty),  new PlainLiteral(extractionContext.language.wikiCode), new IriRef(node.sourceUri))
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.LinksToWikipediaArticle, objectLink, foafPrimaryTopicProperty, subjectUri, node.sourceUri)
+        quads ::= new Quad( DBpediaDatasets.LinksToWikipediaArticle, new IriRef(objectLink), new IriRef(foafPrimaryTopicProperty), new IriRef(subjectUri), new IriRef(node.sourceUri))
 
         new Graph(quads)
     }

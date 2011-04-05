@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, PlainLiteral}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateNode}
 
 /**
@@ -34,9 +34,12 @@ class GeoExtractor(extractionContext : ExtractionContext) extends Extractor
 
     private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Graph =
     {
-        new Graph( new Quad(extractionContext, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri) ::
-                   new Quad(extractionContext, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri) ::
-                   new Quad(extractionContext, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri) ::
-                   new Quad(extractionContext, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri) :: Nil )
+      val subj = new IriRef(subjectUri)
+
+      //TODO use typed literals?
+        new Graph( new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(typeOntProperty), new IriRef(featureOntClass.uri), new IriRef(sourceUri)) ::
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(latOntProperty), new PlainLiteral(coord.latitude.toString), new IriRef(sourceUri)) ::
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(lonOntProperty),  new PlainLiteral(coord.longitude.toString), new IriRef(sourceUri)) ::
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(pointOntProperty),  new PlainLiteral(coord.latitude + " " + coord.longitude), new IriRef(sourceUri)) :: Nil )
     }
 }

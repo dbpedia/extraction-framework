@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef}
 import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InternalLinkNode, Node}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
@@ -24,7 +24,7 @@ class ArticleCategoriesExtractor(extractionContext : ExtractionContext) extends 
 
         val list = collectInternalLinks(node)
         list.foreach(link => {
-            quads ::= new Quad(extractionContext, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
+            quads ::= new Quad(DBpediaDatasets.ArticleCategories, new IriRef(subjectUri), new IriRef(dctermsSubjectProperty), getUri(link.destination), new IriRef(link.sourceUri))
         })
         new Graph(quads)
     }
@@ -38,10 +38,10 @@ class ArticleCategoriesExtractor(extractionContext : ExtractionContext) extends 
         }
     }
 
-    private def getUri(destination : WikiTitle) : String =
+    private def getUri(destination : WikiTitle) : IriRef =
     {
         val categoryNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Category)
 
-        OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        new IriRef(OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE))
     }   
 }

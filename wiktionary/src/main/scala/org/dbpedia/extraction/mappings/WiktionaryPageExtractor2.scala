@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
 import impl.simple.SimpleWikiParser
-import org.dbpedia.extraction.destinations.Graph
+import org.dbpedia.extraction.destinations.{Graph, Quad}
 import org.dbpedia.extraction.sources.WikiPage
 import scala.io.Source
 import util.control.Breaks._
@@ -129,7 +129,7 @@ class WiktionaryPageExtractor2 extends Extractor {
 
       val blockBindings : Map[Tuple2[List[Node], List[Node]], VarBindingsHierarchical] = new HashMap
       blocks.foreach({case((lang, pos),blockReverse) => {
-        println("lang="+lang+" pos="+pos)
+        //println("lang="+lang+" pos="+pos)
         val block = new Stack[Node]() pushAll blockReverse
         val bindings = new VarBindingsHierarchical()
         while(block.size > 0){
@@ -158,9 +158,12 @@ class WiktionaryPageExtractor2 extends Extractor {
         blockBindings += ((lang, pos) -> bindings)
       }})
 
+      val quads = new ListBuffer[Quad]()
       //dumping results
       blockBindings.foreach({case((lang, pos),bindings) => {
         println("lang="+lang+" pos="+pos)
+        quads += new Quad()
+
         println("bindings")
         //bindings.dump(0)
         val bindingsConverted = bindings.sortByVars

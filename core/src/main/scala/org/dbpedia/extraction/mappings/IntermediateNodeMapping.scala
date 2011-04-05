@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import java.util.logging.{Logger}
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef}
 
 class IntermediateNodeMapping(nodeClass : OntologyClass,
                               correspondingProperty : OntologyProperty,
@@ -65,13 +65,13 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
             var currentClass = nodeClass
             while(currentClass != null)
             {
-                val quad = new Quad(extractionContext, DBpediaDatasets.OntologyTypes, instanceUri, extractionContext.ontology.getProperty("rdf:type").get, currentClass.uri, node.sourceUri)
+                val quad = new Quad(DBpediaDatasets.OntologyTypes, new IriRef(instanceUri), new IriRef(extractionContext.ontology.getProperty("rdf:type").get), new IriRef(currentClass.uri), new IriRef(node.sourceUri))
                 graph = graph.merge(new Graph(quad))
                 
                 currentClass = currentClass.subClassOf
             }
 
-            val quad2 = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+            val quad2 = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(originalSubjectUri), new IriRef(correspondingProperty), new IriRef(instanceUri), new IriRef(node.sourceUri));
             graph = graph.merge(new Graph(quad2))
         }
         

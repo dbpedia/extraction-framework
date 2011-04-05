@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.OntologyNamespaces
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef}
 import org.dbpedia.extraction.wikiparser._
 
 /**
@@ -34,13 +34,11 @@ class DisambiguationExtractor(extractionContext : ExtractionContext) extends Ext
                                                             || isAcronym(cleanPageTitle, linkNode.destination.decoded))
 
             val quads = disambigLinks.map{link =>
-                new Quad(extractionContext,
-                         DBpediaDatasets.DisambiguationLinks,
-                         subjectUri,
-                         wikiPageDisambiguatesProperty,
-                         OntologyNamespaces.getUri(link.destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE),
-                         link.sourceUri,
-                         null)
+                new Quad(DBpediaDatasets.DisambiguationLinks,
+                         new IriRef(subjectUri),
+                         new IriRef(wikiPageDisambiguatesProperty),
+                         new IriRef(OntologyNamespaces.getUri(link.destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)),
+                         new IriRef(link.sourceUri))
             }
 
             return new Graph(quads)
