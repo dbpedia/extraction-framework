@@ -1,0 +1,1 @@
+{{Siehe auch|{{extractiontlp|var|otherPage}}}}
