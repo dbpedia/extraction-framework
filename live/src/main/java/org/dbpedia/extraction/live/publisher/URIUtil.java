@@ -6,8 +6,10 @@ package org.dbpedia.extraction.live.publisher;
  * Time: 5:51:33 PM
  */
 
+import org.apache.commons.collections15.MultiMap;
+import org.apache.commons.collections15.multimap.MultiHashMap;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,9 +18,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.Collections;
-
-import org.apache.commons.collections15.MultiMap;
-import org.apache.commons.collections15.multimap.MultiHashMap;
 
 public class URIUtil
 {
