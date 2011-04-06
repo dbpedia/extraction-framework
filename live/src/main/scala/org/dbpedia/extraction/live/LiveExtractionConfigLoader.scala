@@ -249,6 +249,12 @@ object LiveExtractionConfigLoader extends ActionListener
       }
       articlesSource.foreach(CurrentWikiPage =>
             {
+              /*println(CurrentWikiPage.title.namespace.toString)
+
+              if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.UserTalk || CurrentWikiPage.title.namespace == WikiTitle.Namespace.User){
+                logger.info("User or user talk");
+                return ;
+              }*/
 
              if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.Main ||
                 CurrentWikiPage.title.namespace == WikiTitle.Namespace.File ||
@@ -257,6 +263,8 @@ object LiveExtractionConfigLoader extends ActionListener
                  val TempDest = new  StringDestination();
                  val CurrentPageNode = parser(CurrentWikiPage)
 
+
+
 //                 extractor.foreach(ex => println(ex(parser(CurrentWikiPage))));
 
 //                 println(extractor.map(ex => ex(parser(CurrentWikiPage)))
@@ -264,6 +272,9 @@ object LiveExtractionConfigLoader extends ActionListener
 
 //                 val RequiredGraph = extractor(parser(CurrentWikiPage));
 //
+                 /*println(CurrentPageNode.title);
+                 println(CurrentPageNode.title.encodedWithNamespace);*/
+
                  val strWikipage = "http://" + CurrentPageNode.title.language + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
                  liveDest = new LiveUpdateDestination(CurrentPageNode.title.toString, language.locale.getLanguage(),
                                       CurrentPageNode.id.toString)
