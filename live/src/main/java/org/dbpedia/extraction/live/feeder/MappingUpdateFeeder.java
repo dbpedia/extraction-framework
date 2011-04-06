@@ -4,7 +4,10 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.Util;
 import org.dbpedia.extraction.live.helper.MappingAffectedPagesHelper;
 import org.dbpedia.extraction.live.transformer.NodeToRecordTransformer;
-import org.dbpedia.extraction.live.util.*;
+import org.dbpedia.extraction.live.util.ExceptionUtil;
+import org.dbpedia.extraction.live.util.LastResponseDateManager;
+import org.dbpedia.extraction.live.util.OAIUtil;
+import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.sources.LiveExtractionXMLSource;
 import org.w3c.dom.Document;
 
@@ -72,7 +75,8 @@ public class MappingUpdateFeeder extends Thread{
                 NodeToRecordTransformer transformer = new NodeToRecordTransformer(baseWikiUri, mappingsOAIUri, oaiPrefix);
 
                 scala.xml.Node element = scala.xml.XML.loadString(XMLUtil.toString(doc));
-                org.dbpedia.extraction.sources.Source wikiPageSource = LiveExtractionXMLSource.fromXML((scala.xml.Elem)element);
+                org.dbpedia.extraction.sources.Source wikiPageSource = LiveExtractionXMLSource.fromXML((scala.xml.Elem) element);
+//                org.dbpedia.extraction.sources.Source wikiPageSource = XMLSource.fromXML((scala.xml.Elem) element);
 
                 //Last modification date of the mapping
                 String lastResponseDate = XMLUtil.getPageModificationDate(doc);
