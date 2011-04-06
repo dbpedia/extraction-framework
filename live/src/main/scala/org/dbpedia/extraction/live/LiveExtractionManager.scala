@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.live.extraction
 
-import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
-import org.dbpedia.extraction.sources.LiveExtractionXMLSource
 import xml.Elem
 
 import java.util.Properties;
@@ -9,7 +7,9 @@ import java.io.File
 
 import org.dbpedia.extraction.wikiparser.WikiTitle
 
-import java.io._;
+import java.io._
+import org.dbpedia.extraction.sources.{LiveExtractionSource, XMLSource, WikiSource, LiveExtractionXMLSource}
+;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,7 +38,7 @@ object LiveExtractionManager
  
   def extractFromPage(Element :scala.xml.Elem)
     {
-      val articlesSource = LiveExtractionXMLSource.fromXML(Element);
+      val articlesSource = LiveExtractionSource.fromXML(Element);
       //val extractor = Extractor.startExtraction(config.ontologySource, config.mappingsSource, emptySource, articlesSource, config.extractors(Language.Default), Language.Default)
 
       LiveExtractionConfigLoader.startExtraction(articlesSource);
