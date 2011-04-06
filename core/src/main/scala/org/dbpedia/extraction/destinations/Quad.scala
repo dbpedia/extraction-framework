@@ -55,17 +55,24 @@ class Quad(	val dataset : Dataset,
     	val sb = new StringBuilder
         
         sb append subject.render
-        
+
+        sb append " "
+
         sb append predicate.render
+
+        sb append " "
         
         sb append value.render
+
+        sb append " "
         
         if (includeContext)
         {
-            sb append '<' append context append "> "
+            sb append context.render
+            sb append " "
         }
         
-        sb append '.'
+        sb append ". "
         
         return sb.toString
     }
