@@ -51,30 +51,8 @@ class Quad(	val dataset : Dataset,
     
     private def render(includeContext : Boolean) : String =
     {
-      //TODO use ntriple abbreviation for repeated subject and subject-predicate-pairs
-    	val sb = new StringBuilder
-        
-        sb append subject.render
-
-        sb append " "
-
-        sb append predicate.render
-
-        sb append " "
-        
-        sb append value.render
-
-        sb append " "
-        
-        if (includeContext)
-        {
-            sb append context.render
-            sb append " "
-        }
-        
-        sb append ". "
-        
-        return sb.toString
+      subject.render + " " + predicate.render + " " + value.render +  " " +
+        (if (includeContext){ context.render +  " "  } else {""}) + ". "
     }
 }
 

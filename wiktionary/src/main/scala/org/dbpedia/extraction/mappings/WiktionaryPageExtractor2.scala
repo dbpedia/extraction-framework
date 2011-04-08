@@ -37,10 +37,10 @@ class WiktionaryPageExtractor2 extends Extractor {
   private val tpls = sections.map((name : String) => (name , MyStack.fromParsedFile(language+"-"+name+".tpl").filterNewLines)).toMap
 
   val ns = "http://wiktionary.org/" //TODO change all these uris to correct ones
-  val usageProperty = ns + "usage"
-  val languageProperty = "dc:language"
+  val usageProperty = ns + "hasUsage"
+  val languageProperty = "http://purl.org/dc/elements/1.1/language"
   val posProperty = ns + "pos"
-  val senseProperty = ns + "sense"
+  val senseProperty = ns + "hasSense"
   val varToProperty = Map[String, String](
     "meaning"                  -> (ns + "meaning"),
     "hyphenation-singular"     -> (ns + "hyphenation-singular"),
@@ -57,6 +57,8 @@ class WiktionaryPageExtractor2 extends Extractor {
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
+    val r = new scala.util.Random
+    Thread sleep r.nextInt(10)*1000
     val quads = new ListBuffer[Quad]()
     val word = subjectUri.split("/").last
     measure {
@@ -94,7 +96,7 @@ class WiktionaryPageExtractor2 extends Extractor {
       while(pageStack.size > 0){
         //try recognizing language block starts
         //println()
-        //println("inspect "+pageStack.head.dumpStrShort)
+        println(pageStack.head.toWikiText)
         try {
           //println("langBlock: "+langBlockStart.map(_.dumpStrShort).mkString)
           val langBlockBindings = parseNodesWithTemplate(langBlockStart.clone, pageStack)
@@ -182,13 +184,16 @@ class WiktionaryPageExtractor2 extends Extractor {
 
       val wiktionaryDataset : Dataset = new Dataset("wiktionary")
       val tripleContext = new IriRef(ns)
-      //dumping results
+      //generating triples
       blockBindings.foreach({case((lang, pos),bindings) => {
         println("lang="+lang+" pos="+pos)
-        val usageIri = new IriRef(ns+word+"-"+lang.map(_.retrieveText.get).mkString+"-"+pos.map(_.retrieveText.get).mkString)
+        val posStr = nodesToString(pos)
+        val langStr = nodesToString(lang)
+
+        val usageIri = new IriRef(ns+word+"-"+langStr+"-"+posStr)
         quads += new Quad(wiktionaryDataset, new IriRef(subjectUri), new IriRef(usageProperty), usageIri, tripleContext)
-        quads += new Quad(wiktionaryDataset, usageIri, new IriRef(languageProperty), new PlainLiteral(lang.map(_.retrieveText).mkString), tripleContext)
-        quads += new Quad(wiktionaryDataset, usageIri, new IriRef(posProperty), new PlainLiteral(pos.map(_.retrieveText).mkString), tripleContext)
+        quads += new Quad(wiktionaryDataset, usageIri, new IriRef(languageProperty), new PlainLiteral(langStr), tripleContext)
+        quads += new Quad(wiktionaryDataset, usageIri, new IriRef(posProperty), new PlainLiteral(posStr), tripleContext)
 
         println("bindings")
         //bindings.dump(0)
@@ -197,17 +202,19 @@ class WiktionaryPageExtractor2 extends Extractor {
         println("normal properties:")
         bindingsConverted._1.foreach {case (varName, binding) => {
           println("\""+varName +"\" = "+binding)
-          quads += new Quad(wiktionaryDataset, usageIri, new IriRef(varToProperty.apply(varName)), new PlainLiteral(binding.map(_.retrieveText.get).mkString), tripleContext)
+          quads += new Quad(wiktionaryDataset, usageIri, new IriRef(varToProperty.apply(varName)), new PlainLiteral(nodesToString(binding)), tripleContext)
         }}
         println("has "+bindingsConverted._2.size +" meanings:")
         val meanings = bindingsConverted._2.keySet
-        for(meaning <- meanings){
-          println("  sense (name="+meaning+") has properties:")
-          val senseIri = new IriRef(usageIri +"-"+ meaning.map(_.retrieveText).mkString)
+        for(meaningLabel <- meanings){
+          println("  sense (name="+meaningLabel+") has properties:")
+          val meaningLabelStr = nodesToString(meaningLabel)
+          val senseIri = new IriRef(usageIri.uri +"-"+ meaningLabelStr)
           quads += new Quad(wiktionaryDataset, usageIri, new IriRef(senseProperty), senseIri, tripleContext)
-          bindingsConverted._2.apply(meaning).foreach {case (varName, binding) => {
-            println("    \""+varName +"\" = "+binding)
-            quads += new Quad(wiktionaryDataset, senseIri, new IriRef(varToProperty.apply(varName)), new PlainLiteral(binding.map(_.retrieveText.get).mkString), tripleContext)
+          bindingsConverted._2.apply(meaningLabel).foreach {case (varName, binding) => {
+            val bindingStr =  nodesToString(binding)
+            println("    \""+varName +"\" = "+bindingStr)
+            quads += new Quad(wiktionaryDataset, senseIri, new IriRef(varToProperty.apply(varName)), new PlainLiteral(bindingStr), tripleContext)
           }}
         }
       }})
@@ -215,12 +222,15 @@ class WiktionaryPageExtractor2 extends Extractor {
       duration : Long => println("took "+ duration +"ms")
     }
     println(""+quads.size+" quads extracted for "+word)
+    quads.foreach((q : Quad) => println(q.renderNTriple))
     new Graph(quads.toList)
   }
 }
 object WiktionaryPageExtractor2 {
   private val language = "de"
   private val subTemplateCache = scala.collection.mutable.Map[String, Stack[Node]]()
+
+  protected def nodesToString(nodes : List[Node]) : String = nodes.map(_.retrieveText.getOrElse("")).mkString.trim
 
   protected def recordVar(tplVarNode : TemplateNode, possibeEndMarkerNode: Option[Node], pageIt : Stack[Node]) : (String, List[Node]) = {
     val varValue = new ListBuffer[Node]()

@@ -240,16 +240,10 @@ final class SimpleWikiParser extends WikiParser
         
         if(source.lastTag("[["))
         {
-            //val m = source.find(internalLinkLabelOrEnd)
+            val m = source.find(internalLinkLabelOrEnd)
 
             //Set destination
-            //val destination = source.getString(startPos, source.pos - m.tag.length).trim
-            val destination = parseUntil(internalLinkLabelOrEnd, source, level)
-            val destinationUri = if(destination(0).isInstanceOf[TextNode]){
-              destination(0).asInstanceOf[TextNode].text
-            } else {
-              null //this should never happen except for wiktionary-extraction-template pages
-            }
+            val destination = source.getString(startPos, source.pos - m.tag.length).trim
 
             //Parse label
             val nodes =
@@ -260,23 +254,18 @@ final class SimpleWikiParser extends WikiParser
                 else
                 {
                     //No label found => Use destination as label
-                    List(new TextNode(destinationUri, source.line))
+                    List(new TextNode(destination, source.line))
                 }
 
-            createLinkNode(source, destinationUri, nodes, startLine, false, destination)
+            createLinkNode(source, destination, nodes, startLine, false)
         }
         else if(source.lastTag("["))
         {
-            //val tag = source.find(externalLinkLabelOrEnd)
+            val tag = source.find(externalLinkLabelOrEnd)
 
             //Set destination
-            //val destinationURI = source.getString(startPos, source.pos - 1).trim
-            val destination = parseUntil(externalLinkLabelOrEnd, source, level)
-            val destinationURI = if(destination(0).isInstanceOf[TextNode]){
-              destination(0).asInstanceOf[TextNode].text
-            } else {
-              null //this should never happen except for wiktionary-extraction-template pages
-            }
+            val destinationURI = source.getString(startPos, source.pos - 1).trim
+
             //Parse label
             val nodes =
                 if(source.lastTag(" "))
@@ -289,7 +278,7 @@ final class SimpleWikiParser extends WikiParser
                     List(new TextNode(destinationURI, source.line))
                 }
 
-            createLinkNode(source, destinationURI, nodes, startLine, true, destination)
+            createLinkNode(source, destinationURI, nodes, startLine, true)
         }
         else
         {
@@ -302,17 +291,17 @@ final class SimpleWikiParser extends WikiParser
             //Use destination as label
             val nodes = List(new TextNode(destinationURI, source.line))
 
-            createLinkNode(source, destinationURI, nodes, startLine, true, nodes)
+            createLinkNode(source, destinationURI, nodes, startLine, true)
         }
     }
 
-    private def createLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, external : Boolean, destinationNodes : List[Node]) : LinkNode =
+    private def createLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, external : Boolean) : LinkNode =
     {
         if(external)
         {
             try
             {
-        	    return ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
+        	    return ExternalLinkNode(URI.create(destination), nodes, line)
             }
             catch
             {
@@ -325,11 +314,11 @@ final class SimpleWikiParser extends WikiParser
 
             if(destinationTitle.language == source.language)
             {
-                return InternalLinkNode(destinationTitle, nodes, line, destinationNodes)
+                return InternalLinkNode(destinationTitle, nodes, line)
             }
             else
             {
-                return InterWikiLinkNode(destinationTitle, nodes, line, destinationNodes)
+                return InterWikiLinkNode(destinationTitle, nodes, line)
             }
         }
     }
