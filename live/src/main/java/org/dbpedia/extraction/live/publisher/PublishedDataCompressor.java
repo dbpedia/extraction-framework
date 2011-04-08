@@ -53,7 +53,7 @@ public class PublishedDataCompressor extends Thread{
 
 //            Map<String, String> config = Publisher.loadIniFile(new File("./live/dbpedia_default.ini"));
 //            String publishBaseName = config.get("publishDiffRepoPath");
-            compressYear("2010-04-08-11");
+//            compressYear("2010-04-08-11");
             String publishBaseName = LiveOptions.options.get("publishDiffRepoPath");
             String lastProcessingDateFilename = publishBaseName + "/lastProcessingDate.dat";
             lastProcessingDate = _readLastProcessingDateFromFile(lastProcessingDateFilename);
