@@ -2,14 +2,16 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.mappings.ExtractionContext
 import impl.wikipedia.FlagTemplateParser
 import java.util.Locale
 
 /**
  * Parses links to other instances.
  */
-class ObjectParser(val strict : Boolean = false) extends DataParser
+class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean = false) extends DataParser
 {
+    private val language = extractionContext.language.wikiCode
     override def parse(node : Node) : Option[String] =
     {
         if (!strict)
@@ -30,7 +32,7 @@ class ObjectParser(val strict : Boolean = false) extends DataParser
                 //resolve templates to create links
                 case templateNode : TemplateNode if(node.children.length == 1) => resolveTemplate(templateNode) match
                 {
-                    case Some(destination) => return Some(getUri(destination))
+                    case Some(destination) => return Some(OntologyNamespaces.getResource(destination.encoded, extractionContext.language.wikiCode))
                     case None =>
                 }
 
@@ -106,7 +108,7 @@ class ObjectParser(val strict : Boolean = false) extends DataParser
 
     private def resolveTemplate(templateNode : TemplateNode) : Option[WikiTitle] =
     {
-        FlagTemplateParser.getDestination(templateNode).foreach(destination => return Some(destination))
+        FlagTemplateParser.getDestination(extractionContext,templateNode).foreach(destination => return Some(destination))
 
         None
     }

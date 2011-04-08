@@ -8,12 +8,13 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InterWikiLinkNode
 /**
  * Extracts interwiki links and creates owl:sameAs triples
  */
-class InterwikiLinksExtractor(extractionContext : ExtractionContext) extends Extractor
+class InterLanguageLinksExtractor(extractionContext : ExtractionContext) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 
     //extractionContext.ontology.getProperty("owl:sameAs").get //does not exist in ontology
-    private val sameAsProperty = "http://www.w3.org/2002/07/owl#sameAs"
+    private val interLanguageLinksProperty = "http://dbpedia.org/ontology/interLanguageLinks" // extractionContext.ontology.getProperty("interLanguageLinks")" +
+        //.getOrElse(throw new NoSuchElementException("Ontology property 'interLanguageLinks' does not exist in DBpedia Ontology."))
 
     private val sameAsMap = Map(
         "en" -> Set("el", "de", "co"),
@@ -21,7 +22,7 @@ class InterwikiLinksExtractor(extractionContext : ExtractionContext) extends Ext
         "de" -> Set("en", "el")
     )
 
-    require( sameAsMap.keySet.contains(language), "SameAsExtractor's supported languages: " + sameAsMap.keySet.mkString(", ")+"; not "+language)
+    require( sameAsMap.keySet.contains(language), "Interlanguage Links supports the following languages: " + sameAsMap.keySet.mkString(", ")+"; not "+language)
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -29,10 +30,9 @@ class InterwikiLinksExtractor(extractionContext : ExtractionContext) extends Ext
         
         var quads = List[Quad]()
 
-
         retrieveTranslationTitles (node,sameAsMap(language)).foreach { tuple:(String, WikiTitle) =>
             val (tlang, title) = tuple
-            quads ::= new Quad(extractionContext, DBpediaDatasets.SameAs, subjectUri, sameAsProperty,
+            quads ::= new Quad(extractionContext, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
                 OntologyNamespaces.getResource(title.encodedWithNamespace,tlang), title.sourceUri, null)
         }
         new Graph(quads)

@@ -77,7 +77,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
     private val dataTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
                                   .map(datatype => new DateTimeParser(extractionContext, new Datatype(datatype), true))
 
-    private val objectParser = new ObjectParser(true)
+    private val objectParser = new ObjectParser(extractionContext, true)
 
     private val linkParser = new LinkParser(true)
 

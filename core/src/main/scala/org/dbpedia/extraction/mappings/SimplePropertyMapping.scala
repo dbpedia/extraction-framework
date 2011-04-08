@@ -48,7 +48,7 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
     private val parser : DataParser = ontologyProperty.range match
     {
         //TODO
-        case c : OntologyClass if ontologyProperty.name != "foaf:homepage" => new ObjectParser()
+        case c : OntologyClass if ontologyProperty.name != "foaf:homepage" => new ObjectParser(extractionContext)
         case c : OntologyClass => new LinkParser()
         case dt : UnitDatatype => new UnitValueParser(extractionContext, if(unit != null) unit else dt)
         case dt : DimensionDatatype => new UnitValueParser(extractionContext, if(unit != null) unit else dt)
