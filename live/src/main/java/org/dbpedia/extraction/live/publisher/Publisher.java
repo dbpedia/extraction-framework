@@ -255,8 +255,13 @@ public class Publisher extends Thread{
 		long totalStartTime = System.nanoTime();
 		while(true) {
 			try {
+//                logger.info("Publish data queue = " + Main.publishingDataQueue.size());
+//                logger.info("");
+                System.out.print("");
+
                 if(!Main.publishingDataQueue.isEmpty()){
-                
+
+                    logger.info("Publishing data queue not empty");
                     long stepStartTime = System.nanoTime();
                     System.out.println("Inside Publisher");
     
@@ -316,6 +321,7 @@ public class Publisher extends Thread{
 //		logger.info("Publishing diff");
 
 //		publishDiff(sequenceNumber, diff.getMainDiff());
+        logger.info("Before PublishData");
         publishDiff(sequenceNumber);
 
 
@@ -373,10 +379,19 @@ public class Publisher extends Thread{
             hourNumber = currentDateCalendar.get(Calendar.HOUR_OF_DAY);
             sequenceNumber = id = 0;
         }
+
         String fileName = publishDiffBaseName + "/" + currentDateCalendar.get(Calendar.YEAR) + "/"
-                + (currentDateCalendar.get(Calendar.MONTH)+1) + "/" + currentDateCalendar.get(Calendar.DAY_OF_MONTH) + "/"
-                + currentDateCalendar.get(Calendar.HOUR_OF_DAY) +  "/"
+                + String.format("%02d", (currentDateCalendar.get(Calendar.MONTH)+1)) +
+                "/" + String.format("%02d",currentDateCalendar.get(Calendar.DAY_OF_MONTH)) + "/"
+                + String.format("%02d",currentDateCalendar.get(Calendar.HOUR_OF_DAY)) +  "/"
                  + format(sequenceNumber);
+        logger.info("Publishing data path = " + fileName);
+        /*String fileName = publishDiffBaseName + "/" + currentDateCalendar.get(Calendar.YEAR) + "/"
+                + (currentDateCalendar.get(Calendar.MONTH)+1) +
+                "/" + currentDateCalendar.get(Calendar.DAY_OF_MONTH) + "/"
+                + currentDateCalendar.get(Calendar.HOUR_OF_DAY) +  "/"
+                 + format(sequenceNumber);*/
+
 		File parent = new File(fileName).getParentFile();
 //        File requiredFolders = new File(fileName);
 		if(parent != null)
