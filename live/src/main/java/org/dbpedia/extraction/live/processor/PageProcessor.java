@@ -49,7 +49,8 @@ public class PageProcessor extends Thread{
             String mediaWikiPrefix = "mediawiki";
 
             GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
-
+            /*if(record.getErrors().getLength() > 0)
+                logger.info("There is an error");*/
             Document doc = record.getDocument();
             Elem element = (Elem) XML.loadString(XMLUtil.toString(doc));
             Source wikiPageSource = XMLSource.fromXML(element);
@@ -58,7 +59,7 @@ public class PageProcessor extends Thread{
 
         }
         catch(Exception exp){
-            logger.error("Error in processing page number " + pageID + ", and the reason is " + exp.getMessage());
+            logger.error("Error in processing page number " + pageID + ", and the reason is " + exp.getMessage(), exp);
         }
 
     }
@@ -69,7 +70,12 @@ public class PageProcessor extends Thread{
             if(!Main.pageQueue.isEmpty()){
                 PagePriority requiredPage = Main.pageQueue.peek();
                 System.out.println("Page # " + requiredPage + " has been removed and processed");
-                processPage(requiredPage.pageID);
+
+                //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
+                if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
+                    Main.existingPagesTree.remove(requiredPage.pageID);
+                    processPage(requiredPage.pageID);
+                }
                 Main.pageQueue.remove();
 
                 //Write response date to file in both cases of live update and mapping update
