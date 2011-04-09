@@ -37,6 +37,11 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
           pageIDs.foreach(CurrentPageID => {
             //val CurrentPageID = wikititle.toLong;
             Main.pageQueue.add(new PagePriority(CurrentPageID, true, lastResponseDate));
+
+            //We add the pageID here immediately without checking if it exist first, as put checks if it exists the old value will be replace,
+            //so if it does not exist already it will be added, if it was added with lower priority, its priority will increase, and if it already exists with
+            //with the same priority then no change
+            Main.existingPagesTree.put(CurrentPageID, true);//Also insert it into the TreeMap, so it will not be double-processed
           }
         );
         //println("The size of the pageQueue = "+ Main.pageQueue.size())
