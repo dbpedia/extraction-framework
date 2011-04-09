@@ -106,6 +106,12 @@ public class LiveUpdateFeeder extends Thread{
                 long pageID = new Long(strPageID);
 
                 Main.pageQueue.add(new PagePriority(pageID, false, startDate));
+
+                //We should check first if  pageID exists, as if it does not exist then it will be added, if it exists before either with same or higher
+                //priority then it will not be added
+                if(!Main.existingPagesTree.containsKey(pageID))
+                    Main.existingPagesTree.put(pageID, false);//Also insert it into the TreeMap, so it will not be double-processed
+
                 String lastResponseDate = XMLUtil.getPageModificationDate(doc);
 
                 //LastResponseDateManager.writeLastResponseDate(lastResponseDateFile, lastResponseDate);
