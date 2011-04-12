@@ -152,8 +152,8 @@ class MyStack(s : Stack[Node]) {
 object MyStack {
   implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
-  def fromParsedFile(name : String) : Stack[Node] = {
-    var str = Source.fromFile(name).mkString
+  def fromString(in : String) : Stack[Node] = {
+    var str = in
     str = if(str.startsWith("=")){"\n"+str} else {str} //force leading \n
     var removeLast = false
     str = if(str.endsWith("=")){removeLast = true; str+"\n"} else {str} //force trailing \n
@@ -173,6 +173,9 @@ object MyStack {
     nodes.foreach((n: Node) => println(n.dumpStrShort))
 
     nodes
+  }
+  def fromParsedFile(name : String) : Stack[Node] = {
+    fromString(Source.fromFile(name).mkString)
   }
 
 }

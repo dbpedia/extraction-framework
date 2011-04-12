@@ -9,6 +9,7 @@ import util.control.Breaks._
 import java.io.FileNotFoundException
 import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map}
 import collection.SortedSet
+import xml.{XML, Node => XMLNode}
 
 //some of my utilities
 import MyStack._
@@ -29,31 +30,20 @@ class WiktionaryPageExtractor2 extends Extractor {
   private val possibleLanguages = Set("en", "de")
   require(possibleLanguages.contains(language))
 
-  private val vars = Set("hyphenation-singular", "hyphenation-plural", "pronunciation-singular", "pronunciation-plural",
-    "audio-singular", "audio-plural")
-  private val senseVars = Set("meaning")
+  private val config = XML.loadFile("config-"+language+".xml")
 
-  private val sections = Set("hyphenation", "pronunciation", "meaning", "example", "usage", "translation", "reference", "source")
-  private val tpls = sections.map((name : String) => (name , MyStack.fromParsedFile(language+"-"+name+".tpl").filterNewLines)).toMap
+  private val vars =  (config \ "vars" \ "uniqueVars" \ "var").map(_.attribute("name"))
+  private val senseVars = (config \ "vars" \ "senseVars" \ "var").map(_.attribute("name"))
+
+  private val sections = (config \ "templates" \ "sections" \ "section").map(_.attribute("name"))
+  private val tpls = (config \ "templates" \ "sections" \ "section").map((n : XMLNode) => (n.attribute("name"), MyStack.fromString(n.text).filterNewLines)).toMap
 
   val ns = "http://wiktionary.org/" //TODO change all these uris to correct ones
   val usageProperty = ns + "hasUsage"
   val languageProperty = "http://purl.org/dc/elements/1.1/language"
   val posProperty = ns + "pos"
   val senseProperty = ns + "hasSense"
-  val varToProperty = Map[String, String](
-    "meaning"                  -> (ns + "meaning"),
-    "hyphenation-singular"     -> (ns + "hyphenation-singular"),
-    "pronunciation-singular"   -> (ns + "pronunciation-singular"),
-    "hyphenation-plural"       -> (ns + "hyphenation-plural"),
-    "pronunciation-plural"     -> (ns + "pronunciation-plural"),
-    "example"                  -> (ns + "example"),
-    "audio-singular"           -> (ns + "audio-singular"),
-    "audio-plural"             -> (ns + "audio-plural"),
-    "usage"                    -> (ns + "usage"),
-    "translation"              -> (ns + "translation"),
-    "reference"                -> (ns + "reference"),
-    "source"                   -> (ns + "source"))
+  val varToProperty = (config \ "vars" \\ "var").map((_.attribute("name"), (_ \ "property").text))
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {

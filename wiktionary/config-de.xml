@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <properties>
+
+    </properties>
+    <sense property="http://wiktionary.org/hasSense/"  name="meaning_id" />
+    <blocks>
+        <block>
+            <template name="lang-start">
+                <vars>
+                    <var name="language" property="http://purl.org/dc/elements/1.1/language"/>
+                </vars>
+                <wikiSyntax>== {{extractiontpl|var|word}} ({{Sprache|{{extractiontpl|var|language}}}}) ==</wikiSyntax>
+            </template>
+            <property uri="http://wiktionary.org/hasUsage"/>
+            <block>
+                <template name="pos-start">
+                    <vars>
+                        <var name="pos" property="http://wiktionary.org/hasPoS"/>
+                    </vars>
+                    <wikiSyntax>=== {{Wortart|{{extractiontpl|var|pos}}|{{extractiontpl|var|language}}}} ===
+</wikiSyntax>
+                 </template>
+            </block>
+        </block>
+    </blocks>
+    <templates>
+        <prologs>
+            <template name="also">
+                <vars>
+                    <var name="otherPage" format="http://de.wiktionary.org/wiki/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
+                </vars>
+                <wikiSyntax>{{Siehe auch|{{extractiontlp|var|otherPage}}}}</wikiSyntax>
+            </template>
+        </prologs>
+        <epilogs>
+            <template name="otherLanguages">
+                <vars>
+                    <var name="otherPage" format="http://de.wiktionary.org/wiki/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
+                </vars>
+                <wikiSyntax>{{extractiontpl|list-start}}{{extractiontpl|link|{{extractiontpl|var|word}}|{{extractiontpl|var|otherPage}}}}
+{{extractiontpl|list-end}}</wikiSyntax>
+            </template>
+        </epilogs>
+        <sections>
+            <template name="example">
+                <vars>
+                    <var name="example" property="http://wiktionary.org/hasExample" senseBound="true"/>
+                </vars>
+                <wikiSyntax>{{Beispiele}}
+{{extractiontpl|list-start}}:{{extractiontpl|link|{{extractiontpl|var|meaning_id}}}}{{extractiontpl|var|example}}
+{{extractiontpl|list-end}}
+</wikiSyntax>
+            </template>
+            <template name="hyphenation">
+                <vars>
+                    <var name="hyphenation-singular" property="http://wiktionary.org/hasHyphenationSingular"/>
+                    <var name="hyphenation-plural" property="http://wiktionary.org/hasHyphenationPlural"/>
+                </vars>
+                <wikiSyntax>{{Silbentrennung}}
+:{{extractiontpl|var|hyphenation-singular}}, {{Pl.}} {{extractiontpl|var|hyphenation-plural}}
+</wikiSyntax>
+            </template>
+            <template name="meaning">
+                <vars>
+                    <var name="meaning" property="http://wiktionary.org/hasMeaning" senseBound="true" />
+                </vars>
+                <wikiSyntax>{{Bedeutungen}}
+{{extractiontpl|list-start}}:{{extractiontpl|link|{{extractiontpl|var|meaning_id}}}}{{extractiontpl|var|meaning}}
+{{extractiontpl|list-end}}
+</wikiSyntax>
+            </template>
+            <template name="overview">
+                <vars>
+                </vars>
+                <wikiSyntax>{{{{extractiontpl|var|language}} {{extractiontpl|var|pos}} Übersicht|
+ Singular={{extractiontpl|var|flection-singular}}
+|Plural={{extractiontpl|var|flection-plural}}
+}}</wikiSyntax>
+            </template>
+            <template name="pronunciation">
+                <vars>
+                    <var name="audio-singular" property="http://wiktionary.org/hasAudioSingular" type="resource" format="http://uploads.wikimedia/%s"/>
+                    <var name="audio-plural" property="http://wiktionary.org/hasAudioPlural" type="resource" format="http://uploads.wikimedia/%s" />
+                    <var name="pronunciation-plural" property ="http://wiktionary.org/hasPronunciationPlural"/>
+                    <var name="pronunciation-singular" property="http://wiktionary.org/hasPronunciationSingular"/>
+                </vars>
+                <wikiSyntax>{{Aussprache}}
+:{{extractiontpl|link|Hilfe:IPA|IPA}}: {{Lautschrift|{{extractiontpl|var|pronunciation-singular}}}}, {{Pl.}} {{Lautschrift|{{extractiontpl|var|pronunciation-plural}}}}
+:{{extractiontpl|link|Hilfe:Hörbeispiele|Hörbeispiele}}: {{Audio|{{extractiontpl|var|audio-singular}}}}, {{Pl.}} {{Audio|{{extractiontpl|var|audio-plural}}}}
+
+</wikiSyntax>
+            </template>
+            <template name="reference">
+                <vars>
+                     <var name="reference" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" format="///resolveTemplateToUri" senseBound="true"/>
+                </vars>
+                <wikiSyntax>{{Referenzen}}
+{{extractiontpl|list-start}}:{{extractiontpl|link|{{extractiontpl|var|meaning_id}}}}{{extractiontpl|var|reference}}
+{{extractiontpl|list-end}}
+                </wikiSyntax>
+            </template>
+            <template name="source">
+                <vars>
+                    <var name="source" property="http://wiktionary.org/hasSource" format="///resolveTemplateToUri"/>
+                </vars>
+                <wikiSyntax>{{Quellen}}
+{{extractiontpl|list-start}}:{{extractiontpl|var|source}}
+{{extractiontpl|list-end}}</wikiSyntax>
+            </template>
+            <template name="translation">
+                <vars>
+                </vars>
+                <wikiSyntax>==== Übersetzungen ====
+{{Ü-links}}
+{{extractiontpl|list-start}}*{{extractiontpl|var|lang}}: {{extractiontpl|link|{{extractiontpl|var|meaning_id}}}} {{extractiontpl|var|translation}}{{extractiontpl|list-start}}, {{extractiontpl|link|{{extractiontpl|var|meaning_id}}}} {{extractiontpl|var|translation}} {{extractiontpl|list-end}}
+{{extractiontpl|list-end}}{{Ü-Abstand}}
+{{extractiontpl|list-start}}*{{extractiontpl|var|lang}}: {{extractiontpl|link|{{extractiontpl|var|meaning_id}}}} {{extractiontpl|var|translation}}{{extractiontpl|list-start}}, {{extractiontpl|link|{{extractiontpl|var|meaning_id}}}} {{extractiontpl|var|translation}} {{extractiontpl|list-end}}
+{{extractiontpl|list-end}}
+{{Ü-rechts}}
+</wikiSyntax>
+            </template>
+            <template name="usage">
+                <vars>
+                    <var name="usage" property="http://wiktionary.org/hasCharactisticUsage"/>
+                </vars>
+                <wikiSyntax>{{Charakteristische Wortkombinationen}}
+
+{{extractiontpl|list-start}}:{{extractiontpl|var|usage}}
+{{extractiontpl|list-end}}
+</wikiSyntax>
+            </template>
+        </sections>
+    </templates>
+</config>

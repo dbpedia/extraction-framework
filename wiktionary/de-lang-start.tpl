@@ -1,1 +1,0 @@
-== {{extractiontpl|var|word}} ({{Sprache|{{extractiontpl|var|language}}}}) ==
