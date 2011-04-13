@@ -125,8 +125,8 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                             quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             //#statistics uncomment the following 2 lines (do not delete)
-                            //quads ::= new Quad( extractionContext, DBpediaDatasets.InfoboxTest, subjectUri, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE + templateNamespace + ":" + template.title.encoded,
-                            //                    property.key, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
+                            quads ::= new Quad( extractionContext, DBpediaDatasets.InfoboxTest, subjectUri, OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language),
+                                                property.key, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
                         }
                         catch
                         {
@@ -157,7 +157,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                 }
             }
         })
-
+        
         new Graph(quads)
     }
 

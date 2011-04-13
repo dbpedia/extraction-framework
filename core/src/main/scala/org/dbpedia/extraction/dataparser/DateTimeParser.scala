@@ -21,7 +21,11 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
     		"fr" -> Map("janvier"->1,"février"->2,"mars"->3,"avril"->4,"mai"->5,"juin"->6,"juillet"->7,"août"->8,"septembre"->9,"octobre"->10,"novembre"->11,"décembre"->12),
     		"it" -> Map("gennaio"->1,"febbraio"->2,"marzo"->3,"aprile"->4,"maggio"->5,"giugno"->6,"luglio"->7,"agosto"->8,"settembre"->9,"ottobre"->10,"novembre"->11,"dicembre"->12),
     		"pl" -> Map("stycznia"->1,"lutego"->2,"marca"->3,"kwietnia"->4,"maja"->5,"czerwca"->6,"lipca"->7,"sierpnia"->8,"września"->9,"października"->10,"listopada"->11,"grudnia"->12),
-            "hr" -> Map("siječanj"->1,"veljača"->2,"ožujak"->3,"travanj"->4,"svibanj"->5,"lipanj"->6,"srpanj"->7,"kolovoz"->8,"rujan"->9,"listopad"->10,"studeni"->11,"prosinac"->12))
+        "hr" -> Map("siječanj"->1,"veljača"->2,"ožujak"->3,"travanj"->4,"svibanj"->5,"lipanj"->6,"srpanj"->7,"kolovoz"->8,"rujan"->9,"listopad"->10,"studeni"->11,"prosinac"->12),
+        "pt" -> Map("janeiro"->1,"fevereiro"->2,"março"->3,"abril"->4,"maio"->5,"junho"->6,"julho"->7,"agosto"->8,"setembro"->9,"outubro"->10,"novembro"->11,"dezembro"->12,
+                    "jan"->1,"fev"->2,"mar"->3,"abr"->4,"mai"->5,"jun"->6,"jul"->7,"ago"->8,"set"->9,"out"->10,"nov"->11,"dez"->12),
+        "es" -> Map("enero"->1,"febrero"->2,"marzo"->3,"abril"->4,"mayo"->5,"junio"->6,"julio"->7,"agosto"->8,"septiembre"->9,"octubre"->10,"noviembre"->11,"diciembre"->12)
+    )
 
     //private val supportedLanguages = Set("en", "de", "fr", "it", "el", "pl", "hr")
     private val supportedLanguages = months.keySet
@@ -30,13 +34,17 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
     //maybe add this to infobox extractor RankRegex val
     private val cardinality = Map(
         "en" -> "st|nd|rd|th",
-        "el" -> "η|ης"
+        "el" -> "η|ης",
+        "pt" -> "°|.°|°.",
+        "es" -> "°|.°|°."
     )
     // -1 is for BC
     //TODO matches anything e.g. 20 bd
     private val eraStr =  Map(
         "en" -> Map("BCE" -> 1, "BC" -> (-1), "CE"-> 1, "AD"-> 1, "AC"-> (-1), "CE"-> 1),
-        "el" -> Map("ΠΧ"-> (-1), "Π\\.Χ\\."-> (-1), "Π\\.Χ"-> (-1) , "ΜΧ"-> 1 , "Μ\\.Χ\\."-> 1, "Μ\\.Χ"-> 1)
+        "el" -> Map("ΠΧ"-> (-1), "Π\\.Χ\\."-> (-1), "Π\\.Χ"-> (-1) , "ΜΧ"-> 1 , "Μ\\.Χ\\."-> 1, "Μ\\.Χ"-> 1),
+        "pt" -> Map("AC"-> (-1), "A\\.C\\."-> (-1), "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
+        "es" -> Map("AC"-> (-1), "A\\.C\\."-> (-1), "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1)
     )
 
     private val monthRegex = months.get(language).getOrElse(months("en")).keySet.mkString("|")
@@ -66,6 +74,9 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
 
     // catch dates like: "1990 06 24", "1990-06-24", "1990/06/24" or "1977-01-01 00:00:00.000000"
     private val DateRegex6 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{3,4})[-/\s]([0-9]{1,2})[-/\s]([0-9]{1,2})(?!\d).*""").r
+
+    // catch dates like: "20 de Janeiro de 1999", "[[1º de Julho]] de [[2005]]"
+    private val DateRegex7 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*d?e?\s*(""" + monthRegex + """)\]?\]?\s*d?e?\s*\[?\[?([0-9]{0,4})\s*?\]?\]?(?!\d)""" + postfix).r
 
     private val DayMonthRegex1 = ("""(?iu)""" + prefix + """("""+monthRegex+""")\]?\]?\s*\[?\[?([1-9]|0[1-9]|[12][0-9]|3[01])(?!\d)""" + postfix).r
 
@@ -217,6 +228,62 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
 
             }
         }
+        else if (language == "pt")
+        {
+            //http://pt.wikipedia.org/wiki/Predefini%C3%A7%C3%A3o:Dni
+            // Sometimes the templates are used wrong like this:
+            // {{dni|lang=pt-br|21|2|1678}}
+
+            //TODO: improve the extraction for pt dates
+
+            if (templateName.toLowerCase == "Nascimento"  || templateName.toLowerCase == "Dni" ||
+                templateName.toLowerCase == "Dnibr" || templateName.toLowerCase == "DataExt" ||
+                templateName.toLowerCase == "Falecimento" || templateName.toLowerCase == "Morte" ||
+                templateName.toLowerCase == "Falecimento2" || templateName.toLowerCase == "Dtlink" ||
+                templateName.toLowerCase == "Dtext")
+            {
+                for (dayProperty <- node.property("1"); monthProperty <- node.property("2"); yearProperty <- node.property("3");
+                    day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption;
+                    month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
+                    year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption)
+                {
+                    try
+                    {
+                        return Some(new Date(Some(day.toInt), Some(month.toInt), Some(year.toInt), datatype))
+                    }
+                    catch
+                    {
+                        case e : IllegalArgumentException =>
+                    }
+                }
+
+            }
+        }
+        else if (language == "es")
+        {
+            //http://pt.wikipedia.org/wiki/Predefini%C3%A7%C3%A3o:Dni
+            // Sometimes the templates are used wrong like this:
+            // {{dni|lang=pt-br|21|2|1678}}
+            if (templateName.toLowerCase == "Fecha"  || templateName.toLowerCase == "Fecha de inicio" ||
+                templateName.toLowerCase == "Edad" || templateName.toLowerCase == "Fecha de lanzamiento")
+            {
+                for (dayProperty <- node.property("1"); monthProperty <- node.property("2"); yearProperty <- node.property("3");
+                    day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption;
+                    month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
+                    year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption)
+                {
+                    try
+                    {
+                        return Some(new Date(Some(day.toInt), Some(month.toInt), Some(year.toInt), datatype))
+                    }
+                    catch
+                    {
+                        case e : IllegalArgumentException =>
+                    }
+                }
+
+            }
+        }
        	logger.log(Level.FINE, "Template unknown: " + node.title);
         return None
     }
@@ -341,6 +408,11 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
         for(DateRegex6(year, month, day) <- List(input))
         {
             return new Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
+        }
+
+        for(DateRegex7(day, month,year) <- List(input))
+        {
+            return new Some(new Date(Some(day.toInt), Some(month.toInt), Some(year.toInt), datatype))
         }
 
         return None

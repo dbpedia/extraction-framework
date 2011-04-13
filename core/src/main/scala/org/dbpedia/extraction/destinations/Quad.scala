@@ -75,8 +75,8 @@ class Quad(	val extractionContext : ExtractionContext,
         else
         {
             sb append '<'
-            //escapeString(sb, value)
-            sb append value
+            escapeString(sb, value)
+            //sb append value
             sb append "> "
         }
 

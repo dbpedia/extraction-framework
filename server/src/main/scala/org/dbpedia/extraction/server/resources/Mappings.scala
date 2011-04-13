@@ -54,7 +54,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPages(language).values.map(page => <a href={"pages/" + (page.title.encodedWithNamespace).replace("/","%2F")}>{page.title}</a><br/>) }   <!-- FIXME hack by LUCAS@pt to work with ...server/mappings/pt/extractionSamples/Mapping_pt:Info/Político. Tried URLenconder.encode but it didnt work -->
           </body>
         </html>
     }
@@ -120,7 +120,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"validate/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPages(language).values.map(page => <a href={"validate/" + (page.title.encodedWithNamespace).replace("/","%2F")}>{page.title}</a><br/>) }
           </body>
         </html>
     }
@@ -178,7 +178,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"extractionSamples/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPages(language).values.map(page => <a href={"extractionSamples/" + (page.title.encodedWithNamespace).replace("/","%2F")}>{page.title}</a><br/>) }
           </body>
         </html>
     }
