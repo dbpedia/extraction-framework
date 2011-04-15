@@ -29,7 +29,9 @@
         </constructor-arg>
     </bean>
 
-    <bean id="testExtractor" class="org.dbpedia.extraction.mappings.WiktionaryPageExtractor2"/>
+    <bean id="testExtractor" class="org.dbpedia.extraction.mappings.WiktionaryPageExtractorNew">
+        <constructor-arg index="0" value="de"/>
+    </bean>
 
     <bean id="stringDestination" class="org.dbpedia.extraction.destinations.StringDestination" />
 

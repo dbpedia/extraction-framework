@@ -4,26 +4,24 @@
 
     </properties>
     <sense property="http://wiktionary.org/hasSense/"  name="meaning_id" />
-    <blocks>
+    <block>
+        <template name="lang-start">
+            <vars>
+                <var name="language" property="http://purl.org/dc/elements/1.1/language"/>
+            </vars>
+            <wikiSyntax>== {{extractiontpl|var|word}} ({{Sprache|{{extractiontpl|var|language}}}}) ==</wikiSyntax>
+        </template>
         <block>
-            <template name="lang-start">
+            <template name="pos-start">
+                <property uri="http://wiktionary.org/hasUsage"/>
                 <vars>
-                    <var name="language" property="http://purl.org/dc/elements/1.1/language"/>
+                    <var name="pos" property="http://wiktionary.org/hasPoS"/>
                 </vars>
-                <wikiSyntax>== {{extractiontpl|var|word}} ({{Sprache|{{extractiontpl|var|language}}}}) ==</wikiSyntax>
-            </template>
-            <property uri="http://wiktionary.org/hasUsage"/>
-            <block>
-                <template name="pos-start">
-                    <vars>
-                        <var name="pos" property="http://wiktionary.org/hasPoS"/>
-                    </vars>
-                    <wikiSyntax>=== {{Wortart|{{extractiontpl|var|pos}}|{{extractiontpl|var|language}}}} ===
+                <wikiSyntax>=== {{Wortart|{{extractiontpl|var|pos}}|{{extractiontpl|var|language}}}} ===
 </wikiSyntax>
-                 </template>
-            </block>
+            </template>
         </block>
-    </blocks>
+    </block>
     <templates>
         <prologs>
             <template name="also">
@@ -110,6 +108,8 @@
             </template>
             <template name="translation">
                 <vars>
+                    <var name="lang"/>
+                    <var name="translation" senseBound="true"/>
                 </vars>
                 <wikiSyntax>==== Übersetzungen ====
 {{Ü-links}}

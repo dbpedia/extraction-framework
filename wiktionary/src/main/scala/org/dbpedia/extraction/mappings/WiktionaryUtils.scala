@@ -160,7 +160,7 @@ object MyStack {
     //println("read file "+name+" >"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
-          new WikiTitle("template "+name),0,0, str
+          new WikiTitle("wiktionary extraction subtemplate"),0,0, str
         )
     )
     val nodes = new Stack[Node]()
@@ -315,4 +315,12 @@ class MyNode (val n : Node){
 object MyNode{
   implicit def Node2MyNode(node : Node) : MyNode = new MyNode(node)
   implicit def MyNode2Node(mynode : MyNode) : Node = mynode.n
+}
+
+class MyNodeList(val nl : List[Node]) {
+  def myToString : String = nl.map(_.retrieveText.getOrElse("")).mkString.trim
+}
+object MyNodeList {
+  implicit def MyNodeList2NodeList(mnl : MyNodeList) : List[Node] = mnl.nl
+  implicit def NodeList2MyNodeList(nl : List[Node]) : MyNodeList = new MyNodeList(nl)
 }
