@@ -7,6 +7,7 @@ import org.dbpedia.extraction.sources.WikiPage
 import scala.io.Source
 import util.control.Breaks._
 import java.io.FileNotFoundException
+import java.lang.StringBuffer
 import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map, Seq}
 import collection.SortedSet
 import xml.{XML, Node => XMLNode}
@@ -64,9 +65,11 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
       new Tpl((n \ "@name").text, MyStack.fromString((n \ "wikiSyntax").text).filterNewLines, (n \ "vars").map(Var.fromNode(_)), pp, ppClass, ppMethod)
     }
   }
-  case class Block (val indTpl : Tpl, var opened : Boolean, var nodes : Option[Stack[Node]], val bindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]])
+  case class Block (val indTpl : Tpl, val indBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]], var opened : Boolean, var nodes : Option[Stack[Node]], val bindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]]){
+    override def clone = new Block(indTpl, indBindings, opened, nodes, bindings)
+  }
   object Block {
-    def fromNode(n:XMLNode) = new Block(Tpl.fromNode((n \ "template").head), false, None, new ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]]())
+    def fromNode(n:XMLNode) = new Block(Tpl.fromNode((n \ "template").head), new ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]](), false, None, new ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]]())
   }
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
@@ -119,7 +122,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
             val blockIndBindings =  parseNodesWithTemplate(block.indTpl.tpl.clone, pageStack)
             //success (no exception)
             curBlock = block.clone
-            curBlock.bindings.append( (block.indTpl, blockIndBindings)  )
+            curBlock.indBindings.append( (block.indTpl, blockIndBindings)  )
 
             if(started){
               //finish a previously opened block
@@ -162,7 +165,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
                 try{
                   //println(tpls(section))
                   printFuncDump("trying subtemplate "+template.name, template.tpl, blockSt)
-                  block.bindings += (template.tpl, parseNodesWithTemplate(template.tpl.clone, blockSt))
+                  block.bindings.append( (template, parseNodesWithTemplate(template.tpl.clone, blockSt)) )
                   success = true
                   break
                 } catch {
@@ -183,17 +186,29 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
       val tripleContext = new IriRef(ns)
       pageBlocks.foreach((block : Block) => {
 
-        //generate triples that indentify the blocks and connect them to the page
-        val blockIndBindingsConverted = block.indTpl.vars.map((varr : Var) => block.indBindings.getFirstBinding(varr.name).getOrElse(List()))
+        //build a uri for the block
+        val blockIdentifier = new StringBuffer()
+        block.indBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
+          tpl.vars.foreach((varr : Var) => {
+            blockIdentifier append tplBindings.getFirstBinding(varr.name).getOrElse(List()).myToString //concatenate all binding values (?)
+          })
+        }})
+        val usageIri = new IriRef(ns + word+"-"+blockIdentifier)
 
-        val usageIri = new IriRef(ns+word+"-"+blockIndBindingsConverted.map(_.myToString).mkString("-"))
+        //generate triples that indentify the block
+        block.indBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
+          tpl.vars.foreach((varr : Var) => {
+            quads += new Quad(wiktionaryDataset, usageIri, new IriRef(varr.property), new PlainLiteral(tplBindings.getFirstBinding(varr.name).getOrElse(List()).myToString), tripleContext)
+          })
+        }})
+        //generate a triple to connect the block to the word
         quads += new Quad(wiktionaryDataset, new IriRef(subjectUri), new IriRef(usageProperty), usageIri, tripleContext)
-        block.indTpl.vars.foreach((varr : Var) => quads += new Quad(wiktionaryDataset, usageIri, new IriRef(varr.property), new PlainLiteral(block.indBindings.getFirstBinding(varr.name).getOrElse(List()).myToString), tripleContext))
+
 
         //generate triples that describe the content of the block
         println("bindings")
 
-        block.bindings.foreach((tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
+        block.bindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
           if(tpl.needsPostProcessing){
             //TODO fix this, stub
             val clazz = ClassLoader.getSystemClassLoader().loadClass(tpl.ppClass.get)
@@ -204,21 +219,19 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
             tpl.vars.foreach((varr : Var) => {
               if(varr.senseBound){
                 val bindings = tplBindings.getSenseBoundVarBinding(varr.name)
-                if(bindings.isDefined){
-                  bindings.get.foreach({case (sense : List[Node], binding : List[Node]) =>
-                    //TODO triples to connect usages to its senses
-                    quads += new Quad(wiktionaryDataset, new IriRef(sense.myToString), new IriRef(varr.property), new PlainLiteral(binding.myToString))
-                  })
-                }
+                bindings.foreach({case (sense : List[Node], binding : List[Node]) =>
+                  //TODO triples to connect usages to its senses
+                  quads += new Quad(wiktionaryDataset, new IriRef(sense.myToString), new IriRef(varr.property), new PlainLiteral(binding.myToString), tripleContext)
+                })
               } else {
                 val binding = tplBindings.getFirstBinding(varr.name)
                 if(binding.isDefined){
-                  quads += new Quad(wiktionaryDataset, usageIri, new IriRef(varr.property), new PlainLiteral(binding.get.myToString))
+                  quads += new Quad(wiktionaryDataset, usageIri, new IriRef(varr.property), new PlainLiteral(binding.get.myToString), tripleContext)
                 }
               }
             })
           }
-        })
+        }})
 
       })
     } report {
