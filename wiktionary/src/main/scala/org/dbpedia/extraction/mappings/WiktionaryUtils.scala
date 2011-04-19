@@ -153,11 +153,9 @@ object MyStack {
   implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
   def fromString(in : String) : Stack[Node] = {
-    var str = in
-    str = if(str.startsWith("=")){"\n"+str} else {str} //force leading \n
-    var removeLast = false
-    str = if(str.endsWith("=")){removeLast = true; str+"\n"} else {str} //force trailing \n
-    //println("read file "+name+" >"+str+"<")
+    val str = (if(in.startsWith("=")){"\n"} else {""}) + in + (if(in.endsWith("=")){"\n"} else {""})//force leading and trailing  \n
+    val removeLast = false
+    //println("read file >"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
           new WikiTitle("wiktionary extraction subtemplate"),0,0, str
@@ -169,8 +167,8 @@ object MyStack {
     } else {
       nodes.pushAll(page.children.reverse)
     }
-    //println("dumping subtemplate "+name)
-    nodes.foreach((n: Node) => println(n.dumpStrShort))
+    //println("dumping subtemplate ")
+    //nodes.foreach((n: Node) => println(n.dumpStrShort))
 
     nodes
   }

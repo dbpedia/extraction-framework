@@ -44,11 +44,11 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
   //val varToProperty = (config \ "vars" \\ "var").map((_.attribute("name"), (_ \ "property").text))
 
   //these classes represent configuration from the xml
-  case class Var (val name : String, val property : String, val senseBound : Boolean, val resource : Boolean)
+  class Var (val name : String, val property : String, val senseBound : Boolean, val resource : Boolean)
   object Var {
     def fromNode(n:XMLNode) = new Var((n \ "@name").text, (n \ "@property").text, n.attribute("senseBound").isDefined && (n \ "@senseBound").text.equals("true"), n.attribute("type").isDefined && (n \ "@type").text.equals("resource"))
   }
-  case class Tpl (val name : String, val tpl : Stack[Node], val vars : scala.collection.immutable.Seq[Var], var needsPostProcessing : Boolean, var ppClass : Option[String], var ppMethod : Option[String])
+  class Tpl (val name : String, val tpl : Stack[Node], val vars : scala.collection.immutable.Seq[Var], var needsPostProcessing : Boolean, var ppClass : Option[String], var ppMethod : Option[String])
   object Tpl {
     def fromNode(n:XMLNode) = {
       val pp = n.attribute("needsPostProcessing").isDefined && (n \ "@needsPostProcessing").text.equals("true")
@@ -62,10 +62,10 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
       } else {
         None
       }
-      new Tpl((n \ "@name").text, MyStack.fromString((n \ "wikiSyntax").text).filterNewLines, (n \ "vars").map(Var.fromNode(_)), pp, ppClass, ppMethod)
+      new Tpl((n \ "@name").text, MyStack.fromString((n \ "wikiSyntax").text).filterNewLines, (n \ "vars" \ "var").map(Var.fromNode(_)), pp, ppClass, ppMethod)
     }
   }
-  case class Block (val indTpl : Tpl, val indBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]], var opened : Boolean, var nodes : Option[Stack[Node]], val bindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]]){
+  class Block (val indTpl : Tpl, val indBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]], var opened : Boolean, var nodes : Option[Stack[Node]], val bindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]]){
     override def clone = new Block(indTpl, indBindings, opened, nodes, bindings)
   }
   object Block {
@@ -82,7 +82,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
       val bindings : VarBindingsHierarchical = new VarBindingsHierarchical
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse)
       //handle beginning (see also)
-      for(prolog <- config \ "templates" \ "prologs"){
+      for(prolog <- config \ "templates" \ "prologs" \ "template"){
         try {
           val prologtpl = Tpl.fromNode(prolog)
           bindings addChild parseNodesWithTemplate(prologtpl.tpl, pageStack)
@@ -93,7 +93,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
 
       //handle end (links to other languages)
       val rev = new Stack[Node] pushAll pageStack //reversed
-      for(epilog <- config \ "templates" \ "epilogs"){
+      for(epilog <- config \ "templates" \ "epilogs" \ "template"){
         try {
           val epilogtpl = Tpl.fromNode(epilog)
           bindings addChild parseNodesWithTemplate(epilogtpl.tpl, rev)
@@ -104,7 +104,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
       //apply consumed nodes to pageStack
       pageStack.clear
       pageStack pushAll rev
-      //TODO handle the bindigs from pro- and epilog
+      //TODO handle the bindings from pro- and epilog
 
       //split by blocks
       val curBlockNodes = new Stack[Node]
@@ -116,11 +116,15 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
       while(pageStack.size > 0){
         //try recognizing language block starts
         //print current node
-        println(pageStack.head.toWikiText)
+        //println(pageStack.head.dumpStrShort)
         for(block <- configuredBlocks){
           try {
+            //println("vs")
+            //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
             val blockIndBindings =  parseNodesWithTemplate(block.indTpl.tpl.clone, pageStack)
             //success (no exception)
+            println("success")
+            blockIndBindings.dump(0)
             curBlock = block.clone
             curBlock.indBindings.append( (block.indTpl, blockIndBindings)  )
 
@@ -148,13 +152,15 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
         }
       }
       //close last block
-      curBlock.nodes = Some(curBlockNodes.clone)
-      pageBlocks append curBlock
+      if(curBlock != null){
+        curBlock.nodes = Some(curBlockNodes.clone)
+        pageBlocks append curBlock
+      }
       //println(blocks.keySet)
 
       //get bindings for each block
       pageBlocks.foreach((block : Block) => {
-        val blockSt = new Stack[Node]() pushAll block.nodes.get //the nodes reversed, now we reverse them again
+        val blockSt = new Stack[Node]() pushAll block.nodes.getOrElse(List()) //the nodes reversed, now we reverse them again
         val blockBindings = new VarBindingsHierarchical()
         while(blockSt.size > 0){
           var success = false
@@ -190,10 +196,11 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
         val blockIdentifier = new StringBuffer()
         block.indBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
           tpl.vars.foreach((varr : Var) => {
+            println("blockindentifier "+tpl.name+" "+tplBindings.dump(0))
             blockIdentifier append tplBindings.getFirstBinding(varr.name).getOrElse(List()).myToString //concatenate all binding values (?)
           })
         }})
-        val usageIri = new IriRef(ns + word+"-"+blockIdentifier)
+        val usageIri = new IriRef(ns + word+"-"+blockIdentifier.toString)
 
         //generate triples that indentify the block
         block.indBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
@@ -202,12 +209,11 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
           })
         }})
         //generate a triple to connect the block to the word
-        quads += new Quad(wiktionaryDataset, new IriRef(subjectUri), new IriRef(usageProperty), usageIri, tripleContext)
+        quads += new Quad(wiktionaryDataset, new IriRef(ns+word), new IriRef(usageProperty), usageIri, tripleContext)
 
 
         //generate triples that describe the content of the block
         println("bindings")
-
         block.bindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
           if(tpl.needsPostProcessing){
             //TODO fix this, stub
@@ -221,7 +227,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
                 val bindings = tplBindings.getSenseBoundVarBinding(varr.name)
                 bindings.foreach({case (sense : List[Node], binding : List[Node]) =>
                   //TODO triples to connect usages to its senses
-                  quads += new Quad(wiktionaryDataset, new IriRef(sense.myToString), new IriRef(varr.property), new PlainLiteral(binding.myToString), tripleContext)
+                  quads += new Quad(wiktionaryDataset, new IriRef(usageIri + "-"+sense.myToString), new IriRef(varr.property), new PlainLiteral(binding.myToString), tripleContext)
                 })
               } else {
                 val binding = tplBindings.getFirstBinding(varr.name)
