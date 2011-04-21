@@ -44,8 +44,8 @@ public class PageProcessor extends Thread{
 
     private void processPage(long pageID){
         try{
-            String oaiUri = "http://en.wikipedia.org/wiki/Special:OAIRepository";
-            String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
+            String oaiUri = "http://live.dbpedia.org/syncwiki/Special:OAIRepository";
+            String oaiPrefix = "oai:live.dbpedia.org:dbpediawiki:";
             String mediaWikiPrefix = "mediawiki";
 
             GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
