@@ -33,21 +33,24 @@ public class LiveUpdateFeeder extends Thread{
 
     private static Logger logger = Logger.getLogger(LiveUpdateFeeder.class);
 
-    String oaiUri = "http://en.wikipedia.org/wiki/Special:OAIRepository";
-
+//    String oaiUri = "http://en.wikipedia.org/wiki/Special:OAIRepository";
+    String oaiUri = "http://live.dbpedia.org/syncwiki/Special:OAIRepository";
     Calendar calendar = new GregorianCalendar();
 
     //Date startDate = calendar.getTime();
-    String startDate = "2010-06-01T15:00:00Z";
+    String startDate = "2011-04-01T15:00:00Z";
 
     int pollInterval = 30;
-    int sleepInterval = 5;
+    int sleepInterval = 1;
     public static String lastResponseDateFile = "./lastResponseDate.dat";
 
     int articleDelay = 0;
     boolean articleRenewal = false;
-    String baseWikiUri = "http://en.wikipedia.org/wiki/";
-    String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
+
+//    String baseWikiUri = "http://en.wikipedia.org/wiki/";
+//    String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
+    String baseWikiUri = "http://live.dbpedia.org/syncwiki/";
+    String oaiPrefix = "oai:live.dbpedia.org:dbpediawiki:";
 
     //This parser is used to parse the XML text generated from the page, in order to get the PageID
     DOMParser parser = new DOMParser();
@@ -63,7 +66,7 @@ public class LiveUpdateFeeder extends Thread{
 
         this.setPriority(priority);
         this.setName(name);
-        calendar.set(2010, 06, 10, 22, 0, 0);
+        calendar.set(2011, 04, 01, 22, 0, 0);
 
         String proposedStartDate = LastResponseDateManager.getLastResponseDate(lastResponseDateFile);
         if(proposedStartDate != null)
@@ -104,6 +107,7 @@ public class LiveUpdateFeeder extends Thread{
                 String strPageID = strFullPageIdentifier.substring(colonPos+1);
 
                 long pageID = new Long(strPageID);
+
 
                 Main.pageQueue.add(new PagePriority(pageID, false, startDate));
 
