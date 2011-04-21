@@ -84,9 +84,16 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
             dtEndDate = new Date();
         }
 
-        //The end date should be reduced by one month, and start date will be one month prior to
+        //The end date should be reduced by one month, and start date will be one month more prior to last processing date
         calendar.setTime(dtEndDate);
         calendar.add(Calendar.MONTH, -1);
+
+        //The end date should be one month prior to the date of last processing date
+        endDate = dateFormatter.format(calendar.getTime());
+
+        //The start date will one more month prior to the last processing date
+        calendar.add(Calendar.MONTH, -1);
+
         Date dtStartDate =  calendar.getTime();
 
         //Format start date with the format suitable for Harvester
