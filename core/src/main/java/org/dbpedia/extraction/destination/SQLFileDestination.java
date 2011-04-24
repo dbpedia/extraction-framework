@@ -1,23 +1,19 @@
 package org.dbpedia.extraction.destination;
 
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.destinations.Dataset;
-import org.dbpedia.extraction.destinations.Destination;
-import org.dbpedia.extraction.destinations.Graph;
-import org.dbpedia.extraction.destinations.Quad;
+import org.dbpedia.extraction.destinations.*;
 import org.dbpedia.extraction.ontology.datatypes.Datatype;
-
-
 import org.dbpedia.helper.CoreUtil;
 import org.dbpedia.helper.Triple;
+import org.json.simple.JSONValue;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import scala.collection.JavaConversions;
-import org.json.simple.*;
 
 import java.io.FileOutputStream;
+import java.nio.channels.FileLock;
 import java.util.*;
 
 /**
@@ -31,7 +27,7 @@ import java.util.*;
 public class SQLFileDestination implements Destination {
 
     //Constants used for inserting into the table
-    private static final String FILENAME = "./SqlLog.sql";
+    private static final String FILENAME = "/home/mohamed/DBpediaDumpOutput/SqlLog.sql";
     private static Logger logger = null;
 
     static{
@@ -76,8 +72,74 @@ public class SQLFileDestination implements Destination {
 
                 newHashSet.put(tr.getMD5HashCode(), tmp);
             }
-            JSONObject.put(ds.name(), newHashSet);
+            JSONObject.put(mapDatasetToExtractorID(ds), newHashSet);
         }
+    }
+
+    private String mapDatasetToExtractorID(Dataset dataset){
+
+        String extractorID = "";
+        /*if(dataset == DBpediaDatasets.Labels())
+            extractorID = "org.dbpedia.extraction.mappings.LabelExtractor";*/
+        /*switch (dataset){
+            case DBpediaDatasets.Labels(): extractorID = "org.dbpedia.extraction.mappings.LabelExtractor";
+            break;
+            case DBpediaDatasets.LinksToWikipediaArticle(): extractorID = "org.dbpedia.extraction.mappings.WikiPageExtractor";
+            break;
+            case DBpediaDatasets.Infoboxes(): extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
+            break;
+            case DBpediaDatasets.InfoboxProperties(): extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
+            break;
+            case DBpediaDatasets.PageLinks(): extractorID = "org.dbpedia.extraction.mappings.PageLinksExtractor";
+            break;
+            case DBpediaDatasets.GeoCoordinates(): extractorID = "org.dbpedia.extraction.mappings.GeoExtractor";
+            break;
+        } */
+        if(dataset == DBpediaDatasets.Labels())
+            extractorID = "org.dbpedia.extraction.mappings.LabelExtractor";
+        else if(dataset == DBpediaDatasets.LinksToWikipediaArticle())
+             extractorID = "org.dbpedia.extraction.mappings.WikiPageExtractor";
+        else if(dataset == DBpediaDatasets.Infoboxes())
+             extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
+        else if(dataset == DBpediaDatasets.InfoboxProperties())
+             extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
+        else if(dataset == DBpediaDatasets.PageLinks())
+             extractorID = "org.dbpedia.extraction.mappings.PageLinksExtractor";
+        else if(dataset == DBpediaDatasets.GeoCoordinates())
+             extractorID = "org.dbpedia.extraction.mappings.GeoExtractor";
+        else if(dataset == DBpediaDatasets.CategoryLabels())
+             extractorID = "org.dbpedia.extraction.mappings.CategoryLabelExtractor";
+        else if(dataset == DBpediaDatasets.ArticleCategories())
+             extractorID = "org.dbpedia.extraction.mappings.ArticleCategoriesExtractor";
+        else if(dataset == DBpediaDatasets.ExternalLinks())
+             extractorID = "org.dbpedia.extraction.mappings.ExternalLinksExtractor";
+        else if(dataset == DBpediaDatasets.Homepages())
+             extractorID = "org.dbpedia.extraction.mappings.HomepageExtractor";
+        else if(dataset == DBpediaDatasets.DisambiguationLinks())
+             extractorID = "org.dbpedia.extraction.mappings.DisambiguationExtractor";
+        else if(dataset == DBpediaDatasets.Persondata())
+             extractorID = "org.dbpedia.extraction.mappings.PersondataExtractor";
+        else if(dataset == DBpediaDatasets.Pnd())
+             extractorID = "org.dbpedia.extraction.mappings.PndExtractor";
+        else if(dataset == DBpediaDatasets.SkosCategories())
+             extractorID = "org.dbpedia.extraction.mappings.SkosCategoriesExtractor";
+        else if(dataset == DBpediaDatasets.Redirects())
+             extractorID = "org.dbpedia.extraction.mappings.RedirectExtractor";
+        else if(dataset == DBpediaDatasets.PageIds())
+             extractorID = "org.dbpedia.extraction.mappings.PageIdExtractor";
+        else if(dataset == DBpediaDatasets.LongAbstracts())
+             extractorID = "org.dbpedia.extraction.mappings.AbstractExtractor";
+        else if(dataset == DBpediaDatasets.ShortAbstracts())
+             extractorID = "org.dbpedia.extraction.mappings.AbstractExtractor";
+        else if(dataset == DBpediaDatasets.Revisions())
+             extractorID = "org.dbpedia.extraction.mappings.RevisionIdExtractor";
+        else
+            extractorID = "org.dbpedia.extraction.mappings.MappingExtractor";
+
+
+
+
+        return extractorID;
     }
 
     private Value constructTripleObject(Quad quad){
@@ -114,6 +176,7 @@ public class SQLFileDestination implements Destination {
 
             //Create OutputStream and OutputStreamWriter in order to be able to write strings directly
             FileOutputStream outputStream = new FileOutputStream(FILENAME, true);
+            FileLock fl = outputStream.getChannel().lock();
 //            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "US-ASCII");
 //
 //            outputStreamWriter.write(actualInsertStatement);
@@ -125,7 +188,9 @@ public class SQLFileDestination implements Destination {
             outputStream.write(strJSONString.getBytes());
             outputStream.write(separator.getBytes());
 //            outputStream.write(actualInsertStatement.getBytes());
+            outputStream.flush();
             outputStream.close();
+            fl.release();
 //            outputStreamWriter.close();
         }
         catch (Exception exp){
