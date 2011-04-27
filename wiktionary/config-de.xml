@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <properties>
-
+        <property name="ns" uri="http://wiktionary.org/"/>
+        <property name="blockProperty" uri="http://wiktionary.org/hasUsage"/>
+        <property name="senseProperty" uri="http://wiktionary.org/hasSense"/>
     </properties>
+    <mappings>
+        <mapping from="Substantiv" to="http://wiktionary.org/Noun" toType="uri"/>
+        <mapping from="Verb" to="http://wiktionary.org/Verb" toType="uri"/>
+        <mapping from="Adjektiv" to="http://wiktionary.org/Adjektive" toType="uri"/>
+        <mapping from="Personalpronom" to="http://wiktionary.org/PersonalPronoun" toType="uri"/>
+        <mapping from="Englisch" to="http://wiktionary.org/English" toType="uri"/>
+        <mapping from="Deutsch" to="http://wiktionary.org/German" toType="uri"/>
+        <mapping from="Polnisch" to="http://wiktionary.org/Polish" toType="uri"/>
+    </mappings>
     <sense property="http://wiktionary.org/hasSense/"  name="meaning_id" />
     <block>
         <template name="lang-start">
             <vars>
-                <var name="language" property="http://purl.org/dc/elements/1.1/language"/>
+                <var name="language" property="http://purl.org/dc/elements/1.1/language" doMapping="true"/>
             </vars>
             <wikiSyntax>== {{extractiontpl|var|word}} ({{Sprache|{{extractiontpl|var|language}}}}) ==</wikiSyntax>
         </template>
@@ -15,10 +26,9 @@
             <template name="pos-start">
                 <property uri="http://wiktionary.org/hasUsage"/>
                 <vars>
-                    <var name="pos" property="http://wiktionary.org/hasPoS"/>
+                    <var name="pos" property="http://wiktionary.org/hasPoS" doMapping="true"/>
                 </vars>
-                <wikiSyntax>=== {{Wortart|{{extractiontpl|var|pos}}|{{extractiontpl|var|language}}}} ===
-</wikiSyntax>
+                <wikiSyntax>=== {{Wortart|{{extractiontpl|var|pos}}|{{extractiontpl|var|language}}}} ===</wikiSyntax>
             </template>
         </block>
     </block>

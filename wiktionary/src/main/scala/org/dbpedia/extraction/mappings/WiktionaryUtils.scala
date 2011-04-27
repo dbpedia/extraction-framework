@@ -153,8 +153,11 @@ object MyStack {
   implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
   def fromString(in : String) : Stack[Node] = {
-    val str = (if(in.startsWith("=")){"\n"} else {""}) + in + (if(in.endsWith("=")){"\n"} else {""})//force leading and trailing  \n
-    val removeLast = false
+    //fix restrictive parsing of sections (must be \n== xy ==\n - but in case start of file or end of file, the newlines are omitted)
+    var prependedNewline = false
+    var appendedNewline = false
+    val str = (if(in.startsWith("=")){prependedNewline = true; "\n"} else {""}) + in + (if(in.endsWith("=")){appendedNewline = true; "\n"} else {""})//force leading and trailing  \n
+
     //println("read file >"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
@@ -162,10 +165,14 @@ object MyStack {
         )
     )
     val nodes = new Stack[Node]()
-    if(removeLast){
+
+    if(appendedNewline && (page.children.last match {case TextNode("\n",_)=>true; case _ => false})){
       nodes.pushAll(page.children.reverse.tail) //without the last
     } else {
       nodes.pushAll(page.children.reverse)
+    }
+    if(prependedNewline && (nodes.head match {case TextNode("\n",_)=>true; case _ => false})){
+      nodes.pop
     }
     //println("dumping subtemplate ")
     //nodes.foreach((n: Node) => println(n.dumpStrShort))

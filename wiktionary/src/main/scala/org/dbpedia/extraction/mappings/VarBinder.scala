@@ -347,6 +347,7 @@ class VarBindingsHierarchical (){
     for(child <- children){
       if(child.bindings.contains(key)){
         val binding = child.bindings(key)
+        //TODO use config xml
         val sense = getFirstBinding("meaning_id");
         if(sense.isDefined){
           ret += (sense.get -> binding)
@@ -397,7 +398,7 @@ class VarBindingsHierarchical (){
   }
 }
 object VarBindingsHierarchical {
-  //TODO use config
+  //TODO use config xml
   val vars = Set("hyphenation-singular", "hyphenation-plural", "pronunciation-singular", "pronunciation-plural",
     "audio-singular", "audio-plural")
   val senseVars = Set("meaning")
