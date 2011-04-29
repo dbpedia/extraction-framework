@@ -19,6 +19,8 @@ import WiktionaryPageExtractor._ //shouldnt be the methods of the companion obje
 import WiktionaryLogging._
 
 /**
+ * deprecated
+ *
  * @author Jonas Brekle <jonas.brekle@gmail.com>
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */

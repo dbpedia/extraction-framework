@@ -15,6 +15,9 @@ import WiktionaryPageExtractor._
 case class WiktionaryException(s: String, vars : VarBindingsHierarchical, unexpectedNode : Option[Node]) extends  Exception(s) {}
 case class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
 
+/**
+ * extend the stack class (by using a wrapper and implicit conversion - scala magic)
+ */
 class MyStack(s : Stack[Node]) {
   val stack : Stack[Node] = s
   def prependString(str : String) : Unit  = {
@@ -32,11 +35,19 @@ class MyStack(s : Stack[Node]) {
     }
   }
 
+  /**
+   * reverse a stack
+   * the reverse function return (for some unknown reason) no stack, but a Seq...
+   */
   def reversed : Stack[Node]  = {
      new Stack().pushAll(stack.reverse)
   }
 
-   def getList : Stack[Node] = {
+  /**
+   * return all nodes until we see a "list-end" node
+   * if "list-start" nodes occur on the way, we need to keep track of them, so we dont see their "lower-level" "list-end" nodes as our searched list end
+   */
+  def getList : Stack[Node] = {
       val list = new ListBuffer[Node]()
       var i=0
       breakable {
@@ -68,6 +79,9 @@ class MyStack(s : Stack[Node]) {
       st
     }
 
+  /**
+   * get the next "normal" node (no var node etc.)
+   */
   def findNextNonTplNode() : Option[Node] =
     stack.find(
       node => !(node.isInstanceOf[TemplateNode] && node.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl"))
@@ -150,8 +164,15 @@ class MyStack(s : Stack[Node]) {
 }
 
 object MyStack {
+  /**
+ * these functions tell how to convert to the wrapper implicitly
+ */
   implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
+
+  /**
+   * parse a string as wikisyntax and return the nodes as a stack
+   */
   def fromString(in : String) : Stack[Node] = {
     //fix restrictive parsing of sections (must be \n== xy ==\n - but in case start of file or end of file, the newlines are omitted)
     var prependedNewline = false
@@ -179,12 +200,23 @@ object MyStack {
 
     nodes
   }
+
+  /**
+   * read a file containing wikisyntax and return the nodes as a stack
+   * currently not used
+   */
   def fromParsedFile(name : String) : Stack[Node] = {
     fromString(Source.fromFile(name).mkString)
   }
 
 }
 
+/**
+ * super cool possibility of scala to _kind of_ extend the language with own constructs:
+ * i "define" the "keywords" measure and report...
+ * code within the measure-block is executed with timekeeping (how many millisoconds the execution took)
+ * the result is handed over to the report block, which needs to be a function (which prints it or so)
+ */
 object TimeMeasurement {
   def measure(code : => Unit) = new {
     def report(reporterFunc : Long => Unit) = {
@@ -197,18 +229,23 @@ object TimeMeasurement {
   }
 }
 
-class MyStringTrimmer(val str : String){
+/**
+ * extend the string class with some "inner-trim" functionality
+ */
+class MyString(val str : String){
   //reduce multiple whitespaces and lines with only whitespaces. then trim
   def fullTrim() : String = str.replaceAll("\\r?\\n\\s{1,}\\r?\\n", "\n\n").replaceAll("^\\s{1,}\\r?\\n", "\n").replaceAll("\\r?\\n\\s{1,}$", "\n").replaceAll("\\s{2,}", " ")
 }
 
-object MyStringTrimmer {
-  implicit def String2MyStringTrimmer(s : String) : MyStringTrimmer = new MyStringTrimmer(s)
-  implicit def MyStringTrimmer2String(s : MyStringTrimmer) : String = s.str
+object MyString {
+  implicit def String2MyString(s : String) : MyString = new MyString(s)
+  implicit def MyString2String(s : MyString) : String = s.str
 }
 
 object WiktionaryLogging {
-  val enabled = false
+  val enabled = true  //TODO read from config
+
+  //print info about a function call, and the template and page (the first n nodes)
   def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node]) : Unit = {
     val st_depth = new Exception("").getStackTrace.length  - 7 //6 is the stack depth on the extract call. +1 for this func
     val prefix =  " " * st_depth
@@ -223,6 +260,7 @@ object WiktionaryLogging {
     }
   }
 
+  //print a message that is indented by it call stack depth (?) :)
   def printMsg(str : String) : Unit = {
     val st_depth = new Exception("").getStackTrace.length  - 7
     val prefix =  " " * st_depth
@@ -232,6 +270,9 @@ object WiktionaryLogging {
   }
 }
 
+/**
+ * wrapper class to extend the Node class (from dbpedia core) with some (crude) functionality
+ */
 class MyNode (val n : Node){
   def dump(depth : Int = 0) : Unit =
   {
@@ -316,6 +357,7 @@ class MyNode (val n : Node){
     return n.getClass == other.getClass
   }
 }
+
 
 object MyNode{
   implicit def Node2MyNode(node : Node) : MyNode = new MyNode(node)

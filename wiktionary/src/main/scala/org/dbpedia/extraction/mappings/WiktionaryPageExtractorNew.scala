@@ -1,40 +1,38 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.destinations.{Graph, Quad, Dataset, IriRef, PlainLiteral}
-import org.dbpedia.extraction.sources.WikiPage
-import scala.io.Source
 import util.control.Breaks._
 import java.io.FileNotFoundException
 import java.lang.StringBuffer
-import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map, Seq}
-import collection.SortedSet
+import collection.mutable.{Stack, ListBuffer, Set}
 import xml.{XML, Node => XMLNode}
-import reflect.Class
 
 //some of my utilities
 import MyStack._
-import MyNode._
 import MyNodeList._
 import TimeMeasurement._
 import VarBinder._
 import WiktionaryLogging._
 
 /**
- * parses wiktionary pages
- * is meant to be configurable for all languages
+ * parses (wiktionary) wiki pages
+ * is meant to be configurable for multiple languages
+ *
  * is even meant to be usable for non-wiktionary pages -> arbitrary wiki pages, that follow a "overall page"-schema
- * but in contrast to infobox-focused extraction, we *aim* to be more flexible
- * a page can contain information about multiple entities (sequential blocks)
+ * but in contrast to infobox-focused extraction, we *aim* to be more flexible:
+ * dbpedia core is hardcoded extraction. here we try to use a meta-language describing the information to be extracted
+ * this is done via wikisyntax snippets (called templates) containing placeholders (called variables), which are then bound
+ *
+ * we also extended this approach to match the wiktionary schema
+ * a page can contain information about multiple entities (sequential blocks), each having multiple contexts/senses
+ * other use cases (non-wiktionary), can be seen as a special case, having only one block (entity) and one sense
  *
  * @author Jonas Brekle <jonas.brekle@gmail.com>
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */
 
 class WiktionaryPageExtractorNew(val language : String) extends Extractor {
-  //private val language = extractionContext.language.wikiCode
-
   private val possibleLanguages = Set("en", "de")
   require(possibleLanguages.contains(language))
 
@@ -90,7 +88,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
   }
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
-    // avoid parallelism - otherwise debug output from different threads is mixed
+    // wait a random number of seconds. kills parallelism - otherwise debug output from different threads is mixed
     //TODO remove if in production
     val r = new scala.util.Random
     Thread sleep r.nextInt(10)*1000
@@ -98,31 +96,33 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
     val quads = new ListBuffer[Quad]()
     val word = subjectUri.split("/").last
     measure {
-      val bindings : VarBindingsHierarchical = new VarBindingsHierarchical
+      val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse)
-      //handle beginning (e.g. "see also")
+
+      //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
       for(prolog <- config \ "templates" \ "prologs" \ "template"){
-        try {
-          val prologtpl = Tpl.fromNode(prolog)
-          bindings addChild parseNodesWithTemplate(prologtpl.tpl, pageStack)
+        val prologtpl = Tpl.fromNode(prolog)
+         try {
+          proAndEpilogBindings.append( (prologtpl, parseNodesWithTemplate(prologtpl.tpl, pageStack)) )
         } catch {
-          case e : WiktionaryException =>
+          case e : WiktionaryException => proAndEpilogBindings.append( (prologtpl, e.vars) )
         }
       }
 
-      //handle end (e.g. "links to other languages") by parsing the page backwards
+      //handle epilog (ending) (e.g. "links to other languages") by parsing the page backwards
       val rev = new Stack[Node] pushAll pageStack //reversed
       for(epilog <- config \ "templates" \ "epilogs" \ "template"){
+        val epilogtpl = Tpl.fromNode(epilog)
         try {
-          val epilogtpl = Tpl.fromNode(epilog)
-          bindings addChild parseNodesWithTemplate(epilogtpl.tpl, rev)
+          proAndEpilogBindings.append( (epilogtpl, parseNodesWithTemplate(epilogtpl.tpl, rev)) )
         } catch {
-          case e : WiktionaryException => bindings addChild e.vars
+          case e : WiktionaryException => proAndEpilogBindings.append( (epilogtpl, e.vars) )
         }
       }
       //apply consumed nodes (from the reversed page) to pageStack  (unreversed)
       pageStack.clear
       pageStack pushAll rev
+
       //TODO handle the bindings from pro- and epilog
 
       //split by blocks (in wiktionary a block is a usage - "English, Verb")
@@ -192,7 +192,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
                 try{
                   //println(tpls(section))
                   printFuncDump("trying subtemplate "+template.name, template.tpl, blockSt)
-                  block.bindings.append( (template, parseNodesWithTemplate(template.tpl.clone, blockSt)) )
+                  block.bindings.append( (template, parseNodesWithTemplate(template.tpl.clone, blockSt)) )  //consumes multiple nodes
                   success = true
                   break
                 } catch {
@@ -203,12 +203,12 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
           }
           //println(success)
           if(!success){
-            blockSt.pop
+            blockSt.pop //we just skip nodes that are not the start of a template
           }
         }
       })
 
-      //generating triples
+      //generate triples from blocks
       val wiktionaryDataset : Dataset = new Dataset("wiktionary")
       val tripleContext = new IriRef(ns)
       pageBlocks.foreach((block : Block) => {
@@ -217,24 +217,26 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
         val blockIdentifier = new StringBuffer()
         block.indBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
           tpl.vars.foreach((varr : Var) => {
-            blockIdentifier append tplBindings.getFirstBinding(varr.name).getOrElse(List()).myToString //concatenate all binding values (?)
+            //concatenate all binding values of the block indicator tpl (?)
+            blockIdentifier append tplBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
           })
         }})
-        val usageIri = new IriRef(ns + word+"-"+blockIdentifier.toString)
+        val blockIri = new IriRef(ns + word+"-"+blockIdentifier.toString)
 
         //generate triples that indentify the block
         block.indBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
           tpl.vars.foreach((varr : Var) => {
             val objStr = tplBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
             val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-            quads += new Quad(wiktionaryDataset, usageIri, new IriRef(varr.property), obj, tripleContext)
+            quads += new Quad(wiktionaryDataset, blockIri, new IriRef(varr.property), obj, tripleContext)
           })
         }})
         //generate a triple to connect the block to the word
-        quads += new Quad(wiktionaryDataset, new IriRef(ns+word), new IriRef(blockProperty), usageIri, tripleContext)
+        quads += new Quad(wiktionaryDataset, new IriRef(ns+word), new IriRef(blockProperty), blockIri, tripleContext)
 
         //generate triples that describe the content of the block
         block.bindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
+          println(tpl.name +": "+ tplBindings.dump())
           if(tpl.needsPostProcessing){
             //TODO does not work yet, implement the invocation of a static method that does a transformation of the bindings
             val clazz = ClassLoader.getSystemClassLoader().loadClass(tpl.ppClass.get)
@@ -251,8 +253,8 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
                   //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
                   val objStr = binding.myToString
                   val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-                  quads += new Quad(wiktionaryDataset, new IriRef(usageIri.uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
-                  //TODO triples to connect usages to its senses
+                  quads += new Quad(wiktionaryDataset, new IriRef(blockIri.uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
+                  //TODO triples to connect blocks to its senses
                 })
               } else {
                 //handle non-sense bound vars - they are related to the whole block/usage (e.g. hyphenation)
@@ -260,7 +262,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
                 if(binding.isDefined){
                   val objStr = binding.get.myToString
                   val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-                  quads += new Quad(wiktionaryDataset, usageIri, new IriRef(varr.property), obj, tripleContext)
+                  quads += new Quad(wiktionaryDataset, blockIri, new IriRef(varr.property), obj, tripleContext)
                 }
               }
             })

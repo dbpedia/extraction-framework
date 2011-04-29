@@ -10,76 +10,50 @@ import MyStack._
 import MyNode._
 import WiktionaryLogging._
 
+/**
+ * static functions composing a mechanism to match a template (containing variables) to a actual page, and bind values to the variables
+ *
+ * entry function is parseNodesWithTemplate
+ */
 object VarBinder {
-  private val language = "de"
+  //subtemplates are somewhat deprecated, but
+  // this caches them to avoid repeated read of files
   private val subTemplateCache = scala.collection.mutable.Map[String, Stack[Node]]()
 
-  protected def recordVar(tplVarNode : TemplateNode, possibeEndMarkerNode: Option[Node], pageIt : Stack[Node]) : (String, List[Node]) = {
-    val varValue = new ListBuffer[Node]()
-    printFuncDump("recordVar", new Stack[Node](), pageIt)
-    if(possibeEndMarkerNode.isEmpty){
-      //when there is no end marker, we take everything we got
-      varValue ++=  pageIt
-      pageIt.clear
-      //println("NO ENDMARKER")
-    } else {
-      val endMarkerNode = possibeEndMarkerNode.get
-      printMsg("endmarker "+endMarkerNode.dumpStrShort)
+   /**
+   * given a template and a page, match the template to the page, return VarBindings
+   *
+   */
+  def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
+    printFuncDump("parseNodesWithTemplate", tplIt, pageIt)
+    //used as a backup (in case of a exeption when the template does not match)
+    val pageItCopy = pageIt.clone
 
-      //record from the page till we see the endmarker
-      var endMarkerFound = false
-      breakable {
-        while(pageIt.size > 0 ){
-          val curNode = pageIt.pop
-          //printMsg("curNode "+dumpStrShort(curNode))
-
-          //check for end of the var
-          if(endMarkerNode.equalsIgnoreLine(curNode)) {
-            //println("endmarker found (equal)")
-            endMarkerFound = true
-            break
-          } else if(curNode.isInstanceOf[TextNode] && endMarkerNode.isInstanceOf[TextNode]){
-            if(curNode.asInstanceOf[TextNode].text.equals(endMarkerNode.asInstanceOf[TextNode].text)){
-              //println("endmarker found (string equal)")
-              endMarkerFound = true
-              break
-            }
-            val idx = curNode.asInstanceOf[TextNode].text.indexOf(endMarkerNode.asInstanceOf[TextNode].text)
-
-            if(idx >= 0){
-              //println("endmarker found (substr)")
-              endMarkerFound = true
-              //if the end marker is __in__ the current node . we take what we need
-              val part1 =  curNode.asInstanceOf[TextNode].text.substring(0, idx)  //the endmarker is cut out and thrown away
-              val part2 =  curNode.asInstanceOf[TextNode].text.substring(idx+endMarkerNode.asInstanceOf[TextNode].text.size, curNode.asInstanceOf[TextNode].text.size)
-              if(!part1.isEmpty){
-                 printMsg("var += "+part1)
-                varValue append new TextNode(part1, curNode.line)
-              }
-              //and put the rest back
-              if(!part2.isEmpty){
-                printMsg("putting back >"+part2+"<")
-                pageIt.prependString(part2)
-              }
-              break
-            }
+    val bindings = new VarBindingsHierarchical
+    while(tplIt.size > 0 && pageIt.size > 0){
+        try {
+          //try to match node-by-node
+          bindings addChild parseNode(tplIt, pageIt)
+        } catch {
+          case e : WiktionaryException => {
+            //the template does not match the page
+            pageIt.clear
+            pageIt.pushAll(pageItCopy.reverse)  // restore the page
+            bindings addChild e.vars   // merge current bindings with previous and "return" them
+            throw e.copy(vars=bindings)
           }
-
-          //not finished, keep recording
-          varValue append curNode
-          printMsg("var += "+curNode)
         }
-      }
-      if(!endMarkerFound){
-        throw new VarException
-      }
     }
-    //return tuple consisting of var name and var value
-    return (tplVarNode.property("2").get.children(0).asInstanceOf[TextNode].text, varValue.toList)
+    //bindings.dump(0)
+    bindings
   }
 
-  //extract does one step e.g. parse a var, or a list etc and then returns
-  def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
+  /**
+   *  matches a template node to a page node
+   *  if both a normal wikisyntax nodes - check of they match: if true return, if not throw exception
+   *  if the template node is a "special node" (indicating e.g. a variable or list), trigger their handling
+   */
+  protected def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
     printFuncDump("parseNode", tplIt, pageIt)
     val bindings = new VarBindingsHierarchical
     val currNodeFromTemplate = tplIt.pop
@@ -211,11 +185,9 @@ object VarBinder {
     bindings
   }
 
-  protected def restore(st : Stack[Node], backup : Stack[Node]) : Unit = {
-    st.clear
-    st pushAll backup.reverse
-  }
-
+  /**
+   * in the template there can be defined "lists" which are repetitive parts, like in regex: tro(lo)* matches trolololo
+   */
   protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node]) : VarBindingsHierarchical = {
     //printFuncDump("parseList "+name, tplIt, pageIt)
     val bindings = new VarBindingsHierarchical
@@ -247,72 +219,112 @@ object VarBinder {
     bindings
   }
 
-  // parses the complete buffer
-  def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
-    printFuncDump("parseNodesWithTemplate", tplIt, pageIt)
-    val pageItCopy = pageIt.clone
+  /**
+   * given a var-node and a page and an optional endmarker, bind the first n nodes to the var,
+   * until the endmarker is seen or the page ends. bind means returning a tuple of varname and nodes
+   */
+  protected def recordVar(tplVarNode : TemplateNode, possibeEndMarkerNode: Option[Node], pageIt : Stack[Node]) : (String, List[Node]) = {
+    val varValue = new ListBuffer[Node]()
+    printFuncDump("recordVar", new Stack[Node](), pageIt)
+    if(possibeEndMarkerNode.isEmpty){
+      //when there is no end marker, we take everything we got
+      varValue ++=  pageIt
+      pageIt.clear
+      //println("NO ENDMARKER")
+    } else {
+      val endMarkerNode = possibeEndMarkerNode.get
+      printMsg("endmarker "+endMarkerNode.dumpStrShort)
 
-    val bindings = new VarBindingsHierarchical
-    while(tplIt.size > 0 && pageIt.size > 0){
-        try {
-            bindings addChild parseNode(tplIt, pageIt)
-        } catch {
-          case e : WiktionaryException => {
-            pageIt.clear
-            pageIt.pushAll(pageItCopy.reverse)
-            bindings addChild e.vars   // merge current bindings with previous and "return" them
-            throw e.copy(vars=bindings)
+      //record from the page till we see the endmarker
+      var endMarkerFound = false
+      breakable {
+        while(pageIt.size > 0 ){
+          val curNode = pageIt.pop
+          //printMsg("curNode "+dumpStrShort(curNode))
+
+          //check for end of the var
+          if(endMarkerNode.equalsIgnoreLine(curNode)) {
+            //println("endmarker found (equal)")
+            endMarkerFound = true
+            break
+          } else if(curNode.isInstanceOf[TextNode] && endMarkerNode.isInstanceOf[TextNode]){
+            if(curNode.asInstanceOf[TextNode].text.equals(endMarkerNode.asInstanceOf[TextNode].text)){
+              //println("endmarker found (string equal)")
+              endMarkerFound = true
+              break
+            }
+            val idx = curNode.asInstanceOf[TextNode].text.indexOf(endMarkerNode.asInstanceOf[TextNode].text)
+
+            if(idx >= 0){
+              //println("endmarker found (substr)")
+              endMarkerFound = true
+              //if the end marker is __in__ the current node . we take what we need
+              val part1 =  curNode.asInstanceOf[TextNode].text.substring(0, idx)  //the endmarker is cut out and thrown away
+              val part2 =  curNode.asInstanceOf[TextNode].text.substring(idx+endMarkerNode.asInstanceOf[TextNode].text.size, curNode.asInstanceOf[TextNode].text.size)
+              if(!part1.isEmpty){
+                 printMsg("var += "+part1)
+                varValue append new TextNode(part1, curNode.line)
+              }
+              //and put the rest back
+              if(!part2.isEmpty){
+                printMsg("putting back >"+part2+"<")
+                pageIt.prependString(part2)
+              }
+              break
+            }
           }
+
+          //not finished, keep recording
+          varValue append curNode
+          printMsg("var += "+curNode)
         }
+      }
+      if(!endMarkerFound){
+        throw new VarException
+      }
     }
-    //bindings.dump(0)
-    bindings
+    //return tuple consisting of var name and var value
+    return (tplVarNode.property("2").get.children(0).asInstanceOf[TextNode].text, varValue.toList)
+  }
+
+
+  /**
+   * silly helper function
+   */
+  protected def restore(st : Stack[Node], backup : Stack[Node]) : Unit = {
+    st.clear
+    st pushAll backup.reverse
   }
 }
 
+/**
+ * represents bound variables
+ * contains a mapping from var names to page nodes
+ * and can contain recursivly other VarBindingsHierarchical objects - forming a hierarchy that corresponds to the occurence in parsetree (somewhat strange, maybe unneccesary)
+ */
 class VarBindingsHierarchical (){
   val children  = new ListBuffer[VarBindingsHierarchical]()
   val bindings = new HashMap[String, List[Node]]()
 
+  /**
+   * add a binding
+   */
   def addBinding(name : String, value : List[Node]) : Unit = {
     bindings += (name -> value)
   }
+
+  /**
+   * add a child tree of varbindings
+   */
   def addChild(sub : VarBindingsHierarchical) : Unit = {
     if(sub.bindings.size > 0 || sub.children.size > 0){
-      children += sub.reduce
+      children += sub.reduce //avoids unbranched arms in the tree
     }
   }
   def mergeWith(other : VarBindingsHierarchical) = {
     children ++= other.children
     bindings ++= other.bindings
   }
-
-  def dump(depth : Int = 0){
-    if(WiktionaryLogging.enabled){
-      val prefix = " "*depth
-      println(prefix+"{")
-      for(key <- bindings.keySet){
-        println(prefix+key+" -> "+bindings.apply(key))
-      }
-      for(child <- children){
-        child.dump(depth + 2)
-      }
-      println(prefix+"}")
-    }
-  }
-
-  //make the structure absolutly flat, maybe this is not what you want
-  def flat : VarBindingsHierarchical = {
-    val copi = new VarBindingsHierarchical
-    for(child <- children){
-      copi addChild child.flat
-    }
-    for(key <- bindings.keySet){
-      copi.addBinding(key, bindings.apply(key))
-    }
-    copi
-  }
-
   //remove unnecessary deep paths
   def reduce : VarBindingsHierarchical = {
     val copi = new VarBindingsHierarchical
@@ -328,6 +340,9 @@ class VarBindingsHierarchical (){
     copi
   }
 
+  /**
+   * given a variable name, find the first binding in this varbindings instance
+   */
   def getFirstBinding(key : String) : Option[List[Node]] = {
     if(bindings.contains(key)){
       return Some(bindings(key))
@@ -342,12 +357,16 @@ class VarBindingsHierarchical (){
     }
   }
 
+  /**
+   * given a variable name, retrieve a mapping from sense-identifier to binding
+   */
   def getSenseBoundVarBinding(key : String) : Map[List[Node], List[Node]] = {
     val ret : Map[List[Node], List[Node]] = new HashMap()
     for(child <- children){
       if(child.bindings.contains(key)){
         val binding = child.bindings(key)
-        //TODO use config xml
+        //TODO use config xml for the "meaning_id" var-name
+        //TODO expand notations like "[1-3] xyz" to "[1] xyz\n[2] xyz\n[3} xyz"
         val sense = getFirstBinding("meaning_id");
         if(sense.isDefined){
           ret += (sense.get -> binding)
@@ -359,6 +378,40 @@ class VarBindingsHierarchical (){
     ret
   }
 
+  //everything below here is not essential
+
+  /**
+   * print for debug info
+   */
+  def dump(depth : Int = 0){
+    if(WiktionaryLogging.enabled){
+      val prefix = " "*depth
+      println(prefix+"{")
+      for(key <- bindings.keySet){
+        println(prefix+key+" -> "+bindings.apply(key))
+      }
+      for(child <- children){
+        child.dump(depth + 2)
+      }
+      println(prefix+"}")
+    }
+  }
+
+  //make the structure absolutely flat, deprecated
+  def flat : VarBindingsHierarchical = {
+    val copi = new VarBindingsHierarchical
+    for(child <- children){
+      copi addChild child.flat
+    }
+    for(key <- bindings.keySet){
+      copi.addBinding(key, bindings.apply(key))
+    }
+    copi
+  }
+
+  /**
+   * deprecated
+   */
   def flatLangPos() : Map[Tuple2[String,String], VarBindingsHierarchical] = {
     val ret : Map[Tuple2[String,String], VarBindingsHierarchical] = new HashMap()
     for(child <- children){ //assumes that this is the top level VarBindingsHierachical object and that each child represents a (lang,pos)-block
@@ -373,6 +426,9 @@ class VarBindingsHierarchical (){
     ret
   }
 
+  /**
+   * deprecated
+   */
   def sortByVars() : Tuple2[Map[String, List[Node]], Map[List[Node],Map[String, List[Node]]]] = {
     val normalBindings : Map[String, List[Node]]= new HashMap()
     //get normal var bindings out (these that are unique to a (word,lang,pos) combination)
@@ -397,8 +453,10 @@ class VarBindingsHierarchical (){
     return (normalBindings, senseBindingsConverted)
   }
 }
+
+
 object VarBindingsHierarchical {
-  //TODO use config xml
+  //TODO irgh, use config xml - then this is deprecated
   val vars = Set("hyphenation-singular", "hyphenation-plural", "pronunciation-singular", "pronunciation-plural",
     "audio-singular", "audio-plural")
   val senseVars = Set("meaning")
