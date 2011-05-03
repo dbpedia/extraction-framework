@@ -243,7 +243,7 @@ object MyString {
 }
 
 object WiktionaryLogging {
-  val enabled = true  //TODO read from config
+  val enabled = false  //TODO read from config
 
   //print info about a function call, and the template and page (the first n nodes)
   def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node]) : Unit = {

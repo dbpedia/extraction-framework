@@ -344,13 +344,14 @@ class VarBindingsHierarchical (){
    * given a variable name, find the first binding in this varbindings instance
    */
   def getFirstBinding(key : String) : Option[List[Node]] = {
+    //TODO maybe a breadth-first-search suits better
     if(bindings.contains(key)){
       return Some(bindings(key))
     } else {
       for(child <- children){
-        val possibleLang = child.getFirstBinding(key)
-        if(possibleLang.isDefined){
-          return possibleLang
+        val possibleBinding = child.getFirstBinding(key)
+        if(possibleBinding.isDefined){
+          return possibleBinding
         }
       }
       return None
@@ -358,10 +359,25 @@ class VarBindingsHierarchical (){
   }
 
   /**
-   * given a variable name, retrieve a mapping from sense-identifier to binding
+   * given a variable name, find all bindings in this varbindings instance
+   */
+  def getAllBindings(key : String) : List[List[Node]] = {
+    if(bindings.contains(key)){
+      return List(bindings(key))
+    } else {
+      val otherBindings = new ListBuffer[List[Node]]()
+      for(child <- children){
+        otherBindings appendAll child.getAllBindings(key)
+      }
+      return otherBindings.toList //to immutable
+    }
+  }
+
+  /**
+   * given a variable name of a sense-bound var, retrieve a mapping from sense-identifier to binding (distinct)
    */
   def getSenseBoundVarBinding(key : String) : Map[List[Node], List[Node]] = {
-    val ret : Map[List[Node], List[Node]] = new HashMap()
+    val ret = new HashMap[List[Node], List[Node]]()
     for(child <- children){
       if(child.bindings.contains(key)){
         val binding = child.bindings(key)
@@ -378,13 +394,43 @@ class VarBindingsHierarchical (){
     ret
   }
 
+  /**
+   * given a variable name of a sense-bound var, retrieve a mapping from sense-identifier to binding (with multiple values)
+   */
+  def getAllSenseBoundVarBindings(key : String) : Map[List[Node], ListBuffer[List[Node]]] = {
+    val ret =  new HashMap[List[Node], ListBuffer[List[Node]]]()
+    for(child <- children){
+      if(child.bindings.contains(key)){
+        val binding = child.bindings(key)
+        //TODO use config xml for the "meaning_id" var-name
+        //TODO expand notations like "[1-3] xyz" to "[1] xyz\n[2] xyz\n[3} xyz"
+        val sense = getFirstBinding("meaning_id");
+        if(sense.isDefined){
+          if(!ret.contains(sense.get)){
+            ret += (sense.get -> new ListBuffer[List[Node]]())
+          }
+          ret(sense.get).append(binding)
+        }
+      } else {
+        val childBindings = child.getAllSenseBoundVarBindings(key)
+        childBindings.foreach({case(sense, bindings) => {
+          if(!ret.contains(sense)){
+            ret += (sense -> new ListBuffer[List[Node]]())
+          }
+          ret(sense).appendAll(bindings)
+        }})
+      }
+    }
+    ret
+  }
+
   //everything below here is not essential
 
   /**
    * print for debug info
    */
   def dump(depth : Int = 0){
-    if(WiktionaryLogging.enabled){
+    if(true){
       val prefix = " "*depth
       println(prefix+"{")
       for(key <- bindings.keySet){

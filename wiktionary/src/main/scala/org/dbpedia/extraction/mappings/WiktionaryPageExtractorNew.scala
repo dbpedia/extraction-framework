@@ -48,7 +48,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
         )
       ).toMap
 
-  val ns =            (((config \ "properties" \ "property").find( {n : XMLNode => println((n \ "@name").text); (n \ "@name").text.equals("ns") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@uri").text
+  val ns =            (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("ns") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@uri").text
   val blockProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("blockProperty") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@uri").text
   val senseProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseProperty") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@uri").text
 
@@ -143,11 +143,11 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
             //println("vs")
             //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
             val blockIndBindings =  parseNodesWithTemplate(block.indTpl.tpl.clone, pageStack)
-
             //no exception -> success -> stuff below here will be executed on success
+            println("success")
             curBlock = block.clone
             curBlock.indBindings.append( (block.indTpl, blockIndBindings)  )
-
+            curBlock.indBindings.foreach({case(tpl,bindings)=>bindings.dump()})
             if(started){
               //finish a previously opened block
               curBlock.nodes = Some(curBlockNodes.clone)
@@ -181,7 +181,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
 
       //get bindings for each block
       pageBlocks.foreach((block : Block) => {
-        val blockSt = new Stack[Node]() pushAll block.nodes.getOrElse(List()) //the nodes reversed, now we reverse them again
+        val blockSt = new Stack[Node]() pushAll block.nodes.getOrElse(List()) //the nodes were reversed while collecting, now we reverse them again
         val blockBindings = new VarBindingsHierarchical()
         while(blockSt.size > 0){
           var success = false
@@ -236,7 +236,7 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
 
         //generate triples that describe the content of the block
         block.bindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
-          println(tpl.name +": "+ tplBindings.dump())
+          //println(tpl.name +": "+ tplBindings.dump())
           if(tpl.needsPostProcessing){
             //TODO does not work yet, implement the invocation of a static method that does a transformation of the bindings
             val clazz = ClassLoader.getSystemClassLoader().loadClass(tpl.ppClass.get)
@@ -248,19 +248,20 @@ class WiktionaryPageExtractorNew(val language : String) extends Extractor {
             tpl.vars.foreach((varr : Var) => {
               if(varr.senseBound){
                 //handle sense bound vars (e.g. meaning)
+                //TODO use getAllSenseBoundVarBindings function
                 val bindings = tplBindings.getSenseBoundVarBinding(varr.name)
                 bindings.foreach({case (sense : List[Node], binding : List[Node]) =>
                   //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
                   val objStr = binding.myToString
                   val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
                   quads += new Quad(wiktionaryDataset, new IriRef(blockIri.uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
-                  //TODO triples to connect blocks to its senses
+                  //TODO triples to connect blocks to its senses (maybe collect all senses here, make distinct, then build triples after normal bindingtriples)
                 })
               } else {
                 //handle non-sense bound vars - they are related to the whole block/usage (e.g. hyphenation)
-                val binding = tplBindings.getFirstBinding(varr.name)
-                if(binding.isDefined){
-                  val objStr = binding.get.myToString
+                val bindings = tplBindings.getAllBindings(varr.name)
+                for(binding <- bindings){
+                  val objStr = binding.myToString
                   val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
                   quads += new Quad(wiktionaryDataset, blockIri, new IriRef(varr.property), obj, tripleContext)
                 }
