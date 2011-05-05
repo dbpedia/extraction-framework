@@ -68,6 +68,9 @@ public class PublishingData {
 
         triplesModel = ModelFactory.createDefaultModel();
 
+        if(triplesList==null)
+            return;
+
         for(RDFTriple triple: triplesList){
             //Convert OpenRDF statement to a JENA Triple
             Triple trip = Converter.convert(triple);
