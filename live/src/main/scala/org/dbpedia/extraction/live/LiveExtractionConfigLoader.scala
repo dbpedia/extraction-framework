@@ -275,8 +275,13 @@ object LiveExtractionConfigLoader extends ActionListener
                  /*println(CurrentPageNode.title);
                  println(CurrentPageNode.title.encodedWithNamespace);*/
 
+
+                 //As the page title always starts with "en:", as it is the language of the page, and we are working only on
+                 // English language, then we should remove that part as it will repeated without any advantage.
+                 val coloPosition = CurrentPageNode.title.toString.indexOf(":");
+                 val pageNodeTitleWithoutLanguage = CurrentPageNode.title.toString.substring(coloPosition+1);
                  val strWikipage = "http://" + CurrentPageNode.title.language + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
-                 liveDest = new LiveUpdateDestination(CurrentPageNode.title.toString, language.locale.getLanguage(),
+                 liveDest = new LiveUpdateDestination(pageNodeTitleWithoutLanguage, language.locale.getLanguage(),
                                       CurrentPageNode.id.toString)
 //
 //                 println(LiveConfigReader.extractors.get(language));
