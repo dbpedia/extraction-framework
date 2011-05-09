@@ -178,6 +178,11 @@ object VarBinder {
             currNodeFromPage.asInstanceOf[SectionNode].level != currNodeFromTemplate.asInstanceOf[SectionNode].level)){
             printMsg("same class but not equal. do recursion on children")
             bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.pop.children.reverse)
+          } else {
+            //sections with different level
+            //TODO check canEqual
+            printMsg("you should not see this: shouldve been detected earlier")
+            throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
           }
         }
       }

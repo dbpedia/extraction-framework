@@ -41,25 +41,13 @@
       <configuration>
          <args>
              <arg>-g:vars</arg>
+             <arg>-deprecation</arg>
+             <arg>-unchecked</arg>
          </args>
          <launchers>
           <launcher>
-            <id>Extract</id>
-            <mainClass>org.dbpedia.extraction.wiktionary.Extract</mainClass>
-            <jvmArgs>
-              <jvmArg>-Xmx1024m</jvmArg>
-              <jvmArg>-Xdebug</jvmArg>
-              <jvmArg>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</jvmArg>
-
-            </jvmArgs>
-          </launcher>
-          <launcher>
-              <id>debug</id>
-                <mainClass>org.dbpedia.extraction.wiktionary.Extract</mainClass>
-                <jvmArgs>
-                  <jvmArg>-Xdebug</jvmArg>
-                  <jvmArg>-Xrunjdwp:transport=dt_socket,server=n,suspend=n,address=5005</jvmArg>
-                </jvmArgs>
+              <id>run</id>
+              <mainClass>org.dbpedia.extraction.wiktionary.Extract</mainClass>
           </launcher>
         </launchers>
       </configuration>

@@ -9,11 +9,9 @@ import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.sources.WikiPage
 import MyStack._
 import MyNode._
-import MyStringTrimmer._
-import WiktionaryPageExtractor._
+import MyString._
 
-case class WiktionaryException(s: String, vars : VarBindingsHierarchical, unexpectedNode : Option[Node]) extends  Exception(s) {}
-case class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
+case class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
 
 /**
  * extend the stack class (by using a wrapper and implicit conversion - scala magic)

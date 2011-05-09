@@ -1,554 +1,235 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import impl.simple.SimpleWikiParser
-import org.dbpedia.extraction.destinations.Graph
-import org.dbpedia.extraction.sources.WikiPage
-import scala.io.Source
+import org.dbpedia.extraction.destinations.{Graph, Quad, Dataset, IriRef, PlainLiteral}
 import util.control.Breaks._
 import java.io.FileNotFoundException
-import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map}
-import collection.SortedSet
+import java.lang.StringBuffer
+import xml.{XML, Node => XMLNode}
+import collection.mutable.{HashMap, Stack, ListBuffer, Set}
 
 //some of my utilities
-import MyStack._
+import MyNodeList._
 import MyNode._
 import TimeMeasurement._
-import MyStringTrimmer._
-import WiktionaryPageExtractor._ //shouldnt be the methods of the companion object available?
+import VarBinder._
 import WiktionaryLogging._
 
 /**
- * deprecated
+ * parses (wiktionary) wiki pages
+ * is meant to be configurable for multiple languages
+ *
+ * is even meant to be usable for non-wiktionary wikis -> arbitrary wikis, but where all pages follow a common schema
+ * but in contrast to infobox-focused extraction, we *aim* to be more flexible:
+ * dbpedia core is hardcoded extraction. here we try to use a meta-language describing the information to be extracted
+ * this is done via xml containing wikisyntax snippets (called templates) containing placeholders (called variables), which are then bound
+ *
+ * we also extended this approach to match the wiktionary schema
+ * a page can contain information about multiple entities (sequential blocks), each having multiple contexts/senses
+ * other use cases (non-wiktionary), can be seen as a special case, having only one block (entity) and one sense
  *
  * @author Jonas Brekle <jonas.brekle@gmail.com>
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */
 
-class WiktionaryPageExtractor extends Extractor {
-  //private val language = extractionContext.language.wikiCode
-
+class WiktionaryPageExtractor(val language : String) extends Extractor {
   private val possibleLanguages = Set("en", "de")
   require(possibleLanguages.contains(language))
 
-  //maybe we need this later, needs to be put in the tranformator class
-  private val translatePOS = Map(
-    "noun" -> Map(
-      "de" -> "Substantiv",
-      "en" -> "noun",
-      "uri"-> "http://purl.org/linguistics/gold/Noun"
-    ),
-    "verb" -> Map(
-      "de" -> "Verb",
-      "en" -> "Verb",
-      "uri"-> "http://purl.org/linguistics/gold/Verbal"    //TODO check
-    ),
-    "adverb" -> Map(
-      "de" -> "Adverb",
-      "en" -> "Adverb",
-      "uri"-> "http://purl.org/linguistics/gold/Adverbial"
-    ),
-    "adjective" -> Map(
-      "de" -> "Adjektiv",
-      "en" -> "Adjective",
-      "uri"-> "http://purl.org/linguistics/gold/Adjectival"
-    ),
-    "pronoun" -> Map(
-      "de" -> "Pronom",
-      "en" -> "Pronoun",
-      "uri"-> "http://purl.org/linguistics/gold/Pronominal"
-    ),
-    "cardinalNumber" -> Map(
-      "de" -> "Kardinalzahl",
-      "en" -> "Cardinal number",
-      "uri"-> "http://purl.org/linguistics/gold/CardinalNumeral"
-    )   //TODO complete
-  )
+  //load config from xml
+  private val config = XML.loadFile("config-"+language+".xml")
 
-  //private val translatePOSback = Map() ++ (translatePOS map {case (lang,kv) => (lang, kv map {case (k, v) => (v, k)})})
-  //TODO do this on a single line :)
-  private var translatePOSback : scala.collection.mutable.Map[String, scala.collection.mutable.Map[String,String]] =  scala.collection.mutable.Map()
-  for(lang <- possibleLanguages){
-    translatePOSback += lang -> scala.collection.mutable.Map()
-  }
-  translatePOSback += "uri" -> scala.collection.mutable.Map()
-  for(key <- translatePOS.keySet){
-    for(lang <- possibleLanguages){
-      translatePOSback.apply(lang) += translatePOS.apply(key).apply(lang) ->  key
-    }
-    translatePOSback.apply("uri") += translatePOS.apply(key).apply("uri") ->  key
-  }
+  private val templates = (config \ "templates" \ "sections" \ "template").map((n : XMLNode) =>  Tpl.fromNode(n))
 
-  private val varPropMapping = Map (
-    "pos" -> "http://example.com/pos",
-    "lang" -> "http://example.com/lang",
-    "word" -> "http://example.com/word",
-    "example" -> "http://example.com/example"
-  ) //TODO complete
+  private val mappings = (config \ "mappings" \ "mapping").map(
+      (n : XMLNode) =>
+        ( (n \ "@from").text,
+          if(n.attribute("toType").isDefined && (n \ "@toType").text.equals("uri")){new IriRef((n \ "@to").text)} else {new PlainLiteral((n \ "@to").text)}
+        )
+      ).toMap
 
+  val ns =            (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("ns") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@value").text
+  val blockProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("blockProperty") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@value").text
+  val senseProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseProperty") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@value").text
+
+  val wiktionaryDataset : Dataset = new Dataset("wiktionary")
+  val tripleContext = new IriRef(ns)
+
+  //to cache last used blockIris
+  val blockIris = new HashMap[Block, IriRef]
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
-    //for DEBUG: wait a random time (this makes threading useless, but i can read the console output better)
-    //val r = new scala.util.Random
-    //Thread sleep r.nextInt(10)*1000
+    // wait a random number of seconds. kills parallelism - otherwise debug output from different threads is mixed
+    //TODO remove if in production
+    val r = new scala.util.Random
+    Thread sleep r.nextInt(10)*1000
 
-    //
+    val quads = new ListBuffer[Quad]()
+    val word = subjectUri.split("/").last
     measure {
-      val tpl = MyStack.fromParsedFile(language+"-page.tpl").filterNewLines
-      //println("dumping page untrimmed")
-      //page.children.foreach(_.dump(0))
-      //println("abc   def\n\nxyz".fullTrim)
-      val pageSt =  new Stack[Node]().pushAll(page.children.reverse)
-      var bindings : VarBindingsHierarchical = null
-      try {
-        bindings = parseNodesWithTemplate(tpl, pageSt)
-      } catch {
-        case e : WiktionaryException => {
-          bindings = e.vars
-          println("page could not be parsed. reason:")
-          println(e.s)
-          if(e.unexpectedNode.isDefined){
-            println("unexpected node:")
-            println(e.unexpectedNode.get)
-          }
-        }
-      }
-      println("results")
-      println("before")
-      //bindings.dump(0)
-      // the hierarchical var bindings need to be normalized to be converted to rdf
-      val converted = bindings.flatLangPos
-      val converted2 : Map[Tuple2[String,String], Tuple2[Map[String, List[Node]], Map[List[Node],Map[String, List[Node]]]]] = new HashMap()
-      for (wlp <- converted){
-        val normalBindings : Map[String, List[Node]]= new HashMap()
-        //get normal var bindings out (these that are unique to a (word,lang,pos) combination)
-        for(varName <- VarBindingsHierarchical.vars){
-          val currBindings = wlp._2.getFirstBinding(varName)
-          if(currBindings.isDefined){
-            normalBindings += (varName -> currBindings.get)
-          }
-        }
-        val senseBindingsConverted : Map[List[Node],Map[String, List[Node]]] = new HashMap()
-        for(varName <- VarBindingsHierarchical.senseVars){
-          val senseBindings = wlp._2.getSenseBoundVarBinding(varName)
-          val senses = senseBindings.keySet
-          for(sense <- senses){
-             if(!senseBindingsConverted.contains(sense)){
-                senseBindingsConverted += (sense -> new HashMap())
-             }
-             senseBindingsConverted(sense) += (varName -> senseBindings(sense))
-          }
-        }
-        converted2 += (wlp._1 -> (normalBindings, senseBindingsConverted))
-      }
-      println("after")
-      //println(converted2)
-      println(subjectUri)
-      val usages = converted2.keySet
-      for(usage <- usages){
-        println("usage in language: "+usage._1+" as part of speech: "+usage._2)
-        println("normal properties:")
-        converted2(usage)._1.foreach {case (varName, binding) => println("\""+varName +"\" = "+binding)}
-        println("has "+converted2(usage)._2.size +" meanings:")
-        val meanings = converted2(usage)._2.keySet
-        for(meaning <- meanings){
-          println("  sense (name="+meaning+") has properties:")
-          converted2(usage)._2.apply(meaning).foreach {case (varName, binding) => println("    \""+varName +"\" = "+binding)}
+
+      val pageConfig = Page.fromNode((config \ "page").head)
+      blockIris(pageConfig) = new IriRef(subjectUri)
+
+      val pageStack =  new Stack[Node]().pushAll(page.children.reverse)
+
+      // val allBlocksFlat = List(pageConfig) ++ (config \ "page" \\ "block").map(Block.fromNode(_))
+      val curOpenBlocks = new ListBuffer[Block]()
+      curOpenBlocks append pageConfig
+
+      val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
+
+      //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
+      for(prolog <- config \ "templates" \ "prologs" \ "template"){
+        val prologtpl = Tpl.fromNode(prolog)
+         try {
+          proAndEpilogBindings.append( (prologtpl, parseNodesWithTemplate(prologtpl.tpl, pageStack)) )
+        } catch {
+          case e : WiktionaryException => proAndEpilogBindings.append( (prologtpl, e.vars) )
         }
       }
 
-      // for debugging
-      /*println()
-      println("parse an example page... result:")
-      //val pageStr = "[[{{tpl|var|uri}}|uriLabel]]"  //ok das hier ist wahrscheinlich ein größeres problem
-      val pageStr = "[{{tpl|var|uri}} uriLabel]"
-      val testpage : PageNode = new SimpleWikiParser()(
-        new WikiPage(
-          new WikiTitle("test"),0,0, pageStr
-        )
-      )
-      testpage.children.foreach(node => println(dumpStr(node)))
-      assert(testpage.children(0).asInstanceOf[InternalLinkNode].destinationNodes(0).isInstanceOf[TemplateNode])
-      */
+      //handle epilog (ending) (e.g. "links to other languages") by parsing the page backwards
+      val rev = new Stack[Node] pushAll pageStack //reversed
+      for(epilog <- config \ "templates" \ "epilogs" \ "template"){
+        val epilogtpl = Tpl.fromNode(epilog)
+        try {
+          proAndEpilogBindings.append( (epilogtpl, parseNodesWithTemplate(epilogtpl.tpl, rev)) )
+        } catch {
+          case e : WiktionaryException => proAndEpilogBindings.append( (epilogtpl, e.vars) )
+        }
+      }
+      //apply consumed nodes (from the reversed page) to pageStack  (unreversed)
+      pageStack.clear
+      pageStack pushAll rev
+
+      //handle the bindings from pro- and epilog
+      proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
+         quads appendAll handleBlockBinding(pageConfig, tpl, tplBindings)
+      }})
+
+      var consumed = false
+      while(pageStack.size > 0){
+        //Thread sleep 500
+        // try recognizing block starts of blocks. if recognized we go somewhere UP the hierarchy (the block ended) or one step DOWN (new sub block)
+        // each block has a "indicator-template" (indTpl)
+        // when it matches, the block starts. and from that template we get bindings that describe the block
+
+        //debug: print the page (the next 2 nodes only)
+        //println()
+
+        consumed = false
+        for(block <- curOpenBlocks ++ (if(curOpenBlocks.last.blocks.isDefined){List[Block](curOpenBlocks.last.blocks.get)} else {List[Block]()})){
+          if(block.indTpl == null){
+            //continue - the "page" block has no indicator tpl, it starts implicitly with the page
+          } else {
+            println(pageStack.take(1).map(_.dumpStrShort).mkString)
+            try {
+              //println("vs")
+              //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
+              val blockIndBindings =  parseNodesWithTemplate(block.indTpl.tpl.clone, pageStack)
+              //no exception -> success -> stuff below here will be executed on success
+              println("successfully recognized block start "+block.indTpl.name)
+              consumed = true
+              val newOpen = curOpenBlocks.takeWhile((cand : Block) => !cand.eq(block))
+              if(newOpen.size == curOpenBlocks.size){
+                //one step down/deeper
+
+                //build a uri for the block
+                val blockIdentifier = new StringBuffer(blockIris(curOpenBlocks.last).uri)
+                block.indTpl.vars.foreach((varr : Var) => {
+                  //concatenate all binding values of the block indicator tpl (sufficient?)
+                  blockIdentifier append "-"+blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
+                })
+                val blockIri = new IriRef(blockIdentifier.toString)
+                blockIris(block) = blockIri
+                println("new block "+blockIdentifier.toString)
+                //generate triples that indentify the block
+                block.indTpl.vars.foreach((varr : Var) => {
+                  val objStr = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
+                  val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
+                  quads += new Quad(wiktionaryDataset, blockIri, new IriRef(varr.property), obj, tripleContext)
+                })
+
+                //generate a triple that connects the last block to the new block
+                quads += new Quad(wiktionaryDataset, blockIris(curOpenBlocks.last), new IriRef(curOpenBlocks.last.blocks.get.property), blockIri, tripleContext)
+                curOpenBlocks append curOpenBlocks.last.blocks.get
+              } else {
+                curOpenBlocks.clear()
+                curOpenBlocks.appendAll(newOpen) // up
+              }
+            } catch {
+              case e : WiktionaryException => //did not match
+            }
+          }
+        }
+
+        val curBlock = curOpenBlocks.last
+        //try matching this blocks templates
+        for(tpl <- curBlock.templates){
+          println(pageStack.take(1).map(_.dumpStrShort).mkString)
+          try {
+            //println("vs")
+            //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
+            val blockBindings =  parseNodesWithTemplate(tpl.tpl.clone, pageStack)
+            //no exception -> success -> stuff below here will be executed on success
+            println("successfully extracted data")
+            consumed = true
+            //generate triples
+            //println(tpl.name +": "+ blockBindings.dump())
+            quads appendAll handleBlockBinding(curBlock, tpl, blockBindings)
+          } catch {
+            case e : WiktionaryException => //did not match
+          }
+        }
+
+        if(!consumed){
+          pageStack.pop
+        }
+      }
+
     } report {
       duration : Long => println("took "+ duration +"ms")
     }
-
-    //TODO build triples from bindings
-
-    new Graph()
+    println(""+quads.size+" quads extracted for "+word)
+    quads.foreach((q : Quad) => println(q.renderNTriple))
+    new Graph(quads.sortWith((q1, q2)=> q1.subject.uri.length < q2.subject.uri.length).toList)
   }
-}
 
-object WiktionaryPageExtractor {
-  private val language = "de"
-  private val subTemplateCache = scala.collection.mutable.Map[String, Stack[Node]]()
-
-
-  protected def recordVar(tplVarNode : TemplateNode, possibeEndMarkerNode: Option[Node], pageIt : Stack[Node]) : (String, List[Node]) = {
-    val varValue = new ListBuffer[Node]()
-    printFuncDump("recordVar", new Stack[Node](), pageIt)
-    if(possibeEndMarkerNode.isEmpty){
-      //when there is no end marker, we take everything we got
-      varValue ++=  pageIt
-      pageIt.clear
-      //println("NO ENDMARKER")
+  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical) : List[Quad] = {
+    val quads = new ListBuffer[Quad]
+    if(tpl.needsPostProcessing){
+      //TODO does not work yet, implement the invocation of a static method that does a transformation of the bindings
+      val clazz = ClassLoader.getSystemClassLoader().loadClass(tpl.ppClass.get)
+      val method = clazz.getDeclaredMethod(tpl.ppMethod.get, null);
+      val ret = method.invoke(blockBindings, null)
+      quads ++= ret.asInstanceOf[List[Quad]]
     } else {
-      val endMarkerNode = possibeEndMarkerNode.get
-      printMsg("endmarker "+endMarkerNode.dumpStrShort)
-
-      //record from the page till we see the endmarker
-      var endMarkerFound = false
-      breakable {
-        while(pageIt.size > 0 ){
-          val curNode = pageIt.pop
-          //printMsg("curNode "+dumpStrShort(curNode))
-
-          //check for end of the var
-          if(endMarkerNode.equalsIgnoreLine(curNode)) {
-            //println("endmarker found (equal)")
-            endMarkerFound = true
-            break
-          } else if(curNode.isInstanceOf[TextNode] && endMarkerNode.isInstanceOf[TextNode]){
-            if(curNode.asInstanceOf[TextNode].text.equals(endMarkerNode.asInstanceOf[TextNode].text)){
-              //println("endmarker found (string equal)")
-              endMarkerFound = true
-              break
-            }
-            val idx = curNode.asInstanceOf[TextNode].text.indexOf(endMarkerNode.asInstanceOf[TextNode].text)
-
-            if(idx >= 0){
-              //println("endmarker found (substr)")
-              endMarkerFound = true
-              //if the end marker is __in__ the current node . we take what we need
-              val part1 =  curNode.asInstanceOf[TextNode].text.substring(0, idx)  //the endmarker is cut out and thrown away
-              val part2 =  curNode.asInstanceOf[TextNode].text.substring(idx+endMarkerNode.asInstanceOf[TextNode].text.size, curNode.asInstanceOf[TextNode].text.size)
-              if(!part1.isEmpty){
-                 printMsg("var += "+part1)
-                varValue append new TextNode(part1, curNode.line)
-              }
-              //and put the rest back
-              if(!part2.isEmpty){
-                printMsg("putting back >"+part2+"<")
-                pageIt.prependString(part2)
-              }
-              break
-            }
-          }
-
-          //not finished, keep recording
-          varValue append curNode
-          printMsg("var += "+curNode)
-        }
-      }
-      if(!endMarkerFound){
-        throw new VarException
-      }
-    }
-    //return tuple consisting of var name and var value
-    return (tplVarNode.property("2").get.children(0).asInstanceOf[TextNode].text, varValue.toList)
-  }
-
-  //extract does one step e.g. parse a var, or a list etc and then returns
-  def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
-    printFuncDump("parseNode", tplIt, pageIt)
-    val bindings = new VarBindingsHierarchical
-    val currNodeFromTemplate = tplIt.pop
-    val currNodeFromPage = pageIt.head    // we dont consume the pagenode here - needs to be consumed after processing
-    var pageItCopy = pageIt.clone
-
-    //early detection of error or no action
-    if(currNodeFromTemplate.equalsIgnoreLine(currNodeFromPage)){
-      //simple match
-      pageIt.pop //consume page node
-      return bindings
-    } else //determine whether they CAN equal
-    if(!currNodeFromTemplate.canMatchPageNode(currNodeFromPage)){
-      println("early mismatch")
-      throw new WiktionaryException("the template does not match the page - different type", bindings, Some(currNodeFromPage))
-    }
-
-    currNodeFromTemplate match {
-      case tplNodeFromTpl : TemplateNode => {
-        if(tplNodeFromTpl.title.decoded == "Extractiontpl"){
-          val tplType = tplNodeFromTpl.property("1").get.children(0).asInstanceOf[TextNode].text
-          tplType match {
-            case "list-start" =>  {
-              //val name =  tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
-              //take everything from tpl till list is closed
-              val listTpl = tplIt.getList
-              //take the node after the list as endmarker of this list
-              val endMarkerNode = tplIt.findNextNonTplNode  //that will be the node that follows the list in the template
-              bindings addChild parseList(listTpl, pageIt, endMarkerNode)
-            }
-            case "list-end" =>    println("end list - you should not see this")
-            case "contains" =>    {
-              printMsg("include stuff")
-              val templates = ListBuffer[String]()
-              val markers  = Map[Node, Stack[Node]]()
-              //get the included templates
-              for(property <- currNodeFromTemplate.children){  // children == properties
-                val name = property.asInstanceOf[PropertyNode].children(0).asInstanceOf[TextNode].text.trim
-                if(! Set("contains", "unordered", "optional").contains(name)){
-                  val filename = language+"-"+name+".tpl"
-                  if(!subTemplateCache.contains(name)){
-                    try{
-                      val tplSt = MyStack.fromParsedFile(language+"-"+name+".tpl")
-                      tplSt.filterNewLines.filterTrimmed
-                      if(tplSt.size != 0){
-                        subTemplateCache += (name -> tplSt)
-                        val anchor = tplSt.findNextNonTplNode
-                        if(anchor.isDefined){
-                          markers += (anchor.get -> tplSt)
-                        }
-                      }
-                    } catch {
-                      case e : FileNotFoundException =>  printMsg("referenced non existant sub template "+filename+". skipped")
-                    }
-                  }
-                  templates append name
-                }
-              }
-              //apply these templates as often as possible
-              var oneHadSuccess = true
-              while(oneHadSuccess) {
-                oneHadSuccess = false
-                for(tpl <- templates){
-                  pageItCopy = pageIt.clone
-                  try{
-                    bindings addChild parseNodesWithTemplate(subTemplateCache(tpl).clone, pageIt)
-                    oneHadSuccess = true
-                  } catch {
-                    case e : WiktionaryException =>  {
-                      restore(pageIt, pageItCopy)
-                      bindings addChild e.vars
-                    }// try another template
-                  }
-                }
-              }
-              /*val endMarker = pageIt.findNextNonTplNode
-              var curPageNode : Node = null
-              while (pageIt.size > 0 && (if(endMarker.isDefined){(!endMarker.get.canMatchPageNode(pageIt.head))} else true)){
-                //seek until the next pagenode is one of the marker nodes
-                while (pageIt.size > 0 && !markers.exists({case (key, value) => key.equalsIgnoreLine(pageIt.head)})){
-                    curPageNode = pageIt.pop
-                    printMsg("dropped "+curPageNode)
-                }
-                if(pageIt.size > 0){
-                  //extract
-                  printMsg("found marker "+pageIt.head)
-                  try {
-                    bindings addChild  parseNodesWithTemplate(markers.find(_.equalsIgnoreLine(pageIt.head)).get._2, pageIt)
-                  } catch {
-                    case e : WiktionaryException => bindings addChild e.vars
-                  }
-                }
-              }*/
-            }
-            case "var" => {
-              val endMarkerNode = if(tplIt.size > 0) Some(tplIt.pop) else None
-              val binding = recordVar(currNodeFromTemplate.asInstanceOf[TemplateNode], endMarkerNode, pageIt)
-              bindings.addBinding(binding._1, binding._2)
-            }
-            case "link" => {
-              if(!currNodeFromPage.isInstanceOf[LinkNode]){
-                throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
-              }
-              val destination = currNodeFromPage match {
-                case iln : InternalLinkNode => new TextNode(iln.destination.decodedWithNamespace, 0)
-                case iwln : InterWikiLinkNode => new TextNode(iwln.destination.decodedWithNamespace, 0)
-                case eln : ExternalLinkNode => new TextNode(eln.destination.toString, 0)
-              }
-              //extract from the destination link
-              bindings addChild parseNodesWithTemplate(
-                new Stack[Node]() pushAll tplNodeFromTpl.property("2").get.children.reverse,
-                new Stack[Node]() push destination
-              )
-              if(tplNodeFromTpl.property("3").isDefined){
-                //extract from the label
-                bindings addChild parseNodesWithTemplate(
-                  new Stack[Node]() pushAll tplNodeFromTpl.property("3").get.children.reverse,
-                  new Stack[Node]() pushAll currNodeFromPage.children
-                )
-              }
-              pageIt.pop
-            }
-            case _ =>  { }
-          }
+      //generate a triple for each var binding
+      tpl.vars.foreach((varr : Var) => {
+        if(varr.senseBound){
+          //handle sense bound vars (e.g. meaning)
+          //TODO use getAllSenseBoundVarBindings function
+          val bindings = blockBindings.getSenseBoundVarBinding(varr.name)
+          bindings.foreach({case (sense, binding) =>
+            //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
+            val objStr = binding.myToString
+            val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
+            quads += new Quad(wiktionaryDataset, new IriRef(blockIris(block).uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
+            //TODO triples to connect blocks to its senses (maybe collect all senses here, make distinct, then build triples after normal bindingtriples)
+          })
         } else {
-          //both are normal template nodes
-          //parse template properties
-          currNodeFromPage match {
-            case tplNodeFromPage : TemplateNode => {
-              if(!tplNodeFromPage.title.decoded.equals(tplNodeFromTpl.title.decoded)) {
-                throw new WiktionaryException("the template does not match the page: unmatched template title", bindings, Some(currNodeFromPage))
-              }
-              breakable {
-                for(key <- tplNodeFromTpl.keySet){
-                  if(tplNodeFromTpl.property(key).isDefined && tplNodeFromPage.property(key).isDefined){
-                      bindings addChild parseNodesWithTemplate(
-                        new Stack[Node]() pushAll tplNodeFromTpl.property(key).get.children.reverse,
-                        new Stack[Node]() pushAll tplNodeFromPage.property(key).get.children.reverse
-                      )
-                  } else {
-                    break
-                  }
-                }
-              }
-              pageIt.pop
-            }
-            case _ => {
-              printMsg("you should not see this: shouldve been detected earlier")
-              throw new WiktionaryException("the template does not match the page: unmatched template property", bindings, Some(currNodeFromPage))
-            }
+          //handle non-sense bound vars - they are related to the whole block/usage (e.g. hyphenation)
+          val bindings = blockBindings.getAllBindings(varr.name)
+          for(binding <- bindings){
+            val objStr = binding.myToString
+            val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
+            quads += new Quad(wiktionaryDataset, blockIris(block), new IriRef(varr.property), obj, tripleContext)
           }
         }
-      }
-      case textNodeFromTpl : TextNode => {
-        //variables can start recording in the middle of a textnode
-        currNodeFromPage match {
-           case textNodeFromPage : TextNode => {
-              if(textNodeFromPage.text.startsWith(textNodeFromTpl.text) && !textNodeFromPage.text.equals(textNodeFromTpl.text)){
-                //consume the current node from page
-                pageIt.pop
-
-                //cut out whats left (remove what is matched by textNodeFromTpl -> the prefix)
-                val remainder = textNodeFromPage.text.substring(textNodeFromTpl.text.size, textNodeFromPage.text.size)
-
-                pageIt.prependString(remainder)
-              } else {
-                restore(pageIt, pageItCopy)  //still needed? dont think so
-                throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
-              }
-            }
-            case _ => {
-              printMsg("you should not see this: shouldve been detected earlier")
-              throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
-            }
-        }
-      }
-
-      case _ => {
-        if(currNodeFromPage.getClass != currNodeFromTemplate.getClass){
-          restore(pageIt, pageItCopy) //still needed? dont think so
-          printMsg("you should not see this: shouldve been detected earlier")
-          throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
-        } else {
-          printMsg("same class but not equal. do recursion on children")
-          bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.pop.children.reverse)
-        }
-      }
+      })
     }
-    bindings
-  }
-
-  protected def restore(st : Stack[Node], backup : Stack[Node]) : Unit = {
-    st.clear
-    st pushAll backup.reverse
-  }
-
-  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node]) : VarBindingsHierarchical = {
-    //printFuncDump("parseList "+name, tplIt, pageIt)
-    val bindings = new VarBindingsHierarchical
-
-    try {
-      breakable {
-        while(pageIt.size > 0 ){
-          //printFuncDump("parseList "+name+" item", tplIt, pageIt)
-
-          /*if(endMarkerNode.isDefined && pageIt.size > 0){
-            printMsg("check if continue list. endmarker:")
-            printMsg(dumpStrShort(endMarkerNode.get))
-            printMsg("head")
-            printMsg(dumpStrShort(pageIt.head))
-          } */
-          if(endMarkerNode.isDefined &&
-            (
-              (pageIt.size > 0 && pageIt.head.equalsIgnoreLine(endMarkerNode.get)) ||
-              (pageIt.head.isInstanceOf[TextNode] && endMarkerNode.get.isInstanceOf[TextNode] &&
-                pageIt.head.asInstanceOf[TextNode].text.startsWith(endMarkerNode.get.asInstanceOf[TextNode].text)
-              )
-            )
-          ){    //TODO liststart = endmarker
-            //printMsg("list ended by endmarker")
-            break
-          }
-
-          //recurse
-          val copyOfTpl = tplIt.clone  //the parsing consumes the template so for multiple matches we need to duplicate it
-          bindings addChild parseNodesWithTemplate(copyOfTpl, pageIt)
-        }
-      }
-    } catch {
-      case e : WiktionaryException => printMsg("parseList caught an exception - list ended "+e) // now we know the list was finished
-      bindings addChild e.vars
-    }
-    bindings
-  }
-
-  // parses the complete buffer
-  def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
-    printFuncDump("parseNodesWithTemplate", tplIt, pageIt)
-
-    // try to skip unexpected nodes at the beginning
-    /*val dropable = 0
-    var dropped = 0
-    var pageItCopy : Stack[Node] = null
-    if(!(tplIt.head.isInstanceOf[TemplateNode] && tplIt.head.asInstanceOf[TemplateNode].title.decoded.equals("Extractiontpl") && tplIt.head.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text.equals("list-start"))){
-      val startMarker = tplIt.head
-      pageItCopy = pageIt.clone
-      breakable {
-        while (pageIt.size > 0 && !startMarker.canMatchPageNode(pageIt.head)){
-          if(dropped < dropable){
-            printMsg("dropping "+pageIt.pop)
-            dropped += 1
-          } else {
-            printMsg("revert dropping")
-            pageIt.clear
-            pageIt.pushAll(pageItCopy.reverse)
-            break
-          }
-        }
-      }
-    }*/
-    val bindings = new VarBindingsHierarchical
-    while(tplIt.size > 0 && pageIt.size > 0){
-        try {
-         // try {
-            bindings addChild parseNode(tplIt, pageIt)
-          /*
-            //on success (no exception is thrown) we start counting drops from 0
-            dropped = 0
-            pageItCopy = pageIt.clone
-          }  catch {
-            case e : WiktionaryException => {
-              //skip unexpected nodes everywhere
-              if(dropped < dropable && pageIt.size > 0){
-                if(dropped == 0){
-                   pageItCopy = pageIt.clone
-                }
-                val droppedNode = pageIt.pop //drop a node and try again
-                printMsg("dropped "+droppedNode)
-                dropped += 1
-              } else {
-                //revert pageIt to the state before we tried dropping
-                printMsg("revert dropping")
-                pageIt.clear
-                pageIt.pushAll(pageItCopy.reverse)
-                throw e  //too many drops tried
-              }
-            }
-          }*/
-        } catch {
-          case e : WiktionaryException => {
-            bindings addChild e.vars   // merge current bindings with previous and "return" them
-            throw e.copy(vars=bindings)
-          }
-        }
-    }
-    //bindings.dump(0)
-    bindings
+    quads.toList
   }
 }
-
