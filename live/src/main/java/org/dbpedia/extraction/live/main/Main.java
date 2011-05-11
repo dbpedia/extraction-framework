@@ -5,8 +5,10 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
+import org.dbpedia.extraction.live.feeder.UnmodifiedPagesUpdateFeeder;
 import org.dbpedia.extraction.live.priority.PagePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
+import org.dbpedia.extraction.live.publisher.PublishedDataCompressor;
 import org.dbpedia.extraction.live.publisher.Publisher;
 import org.dbpedia.extraction.live.publisher.PublishingData;
 import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
@@ -52,6 +54,11 @@ public class Main
     //Used for publishing triples to files
     public static Queue<PublishingData> publishingDataQueue = new LinkedList<PublishingData>();
 
+    //This tree is used to avoid processing same page more than once, as it will exist in it only once,
+    //so if it exists in it it should be processed and removed from it, os if it is encountered fro another time, it will not exist in that tree, so it
+    //it will be just deleted immediately without any further processing.
+    public static TreeMap<Long, Boolean> existingPagesTree = new TreeMap<Long, Boolean>();
+
 	public static void authenticate(final String username, final String password)
 	{		
 		Authenticator.setDefault(new Authenticator() {
@@ -82,6 +89,23 @@ public class Main
 //        System.out.println(Util.getDBpediaCategoryPrefix("en"));
 
 
+        /*
+        authenticate("dbpedia", Files.readFile(new File("pw.txt")).trim());
+        Iterator<Document> myTestIterator = new OAIUnmodifiedRecordIterator(
+                "http://en.wikipedia.org/wiki/Special:OAIRepository", "2011-02-19T14:20:53Z", "2011-02-19T14:29:53Z");
+        while(myTestIterator.hasNext()){
+            Document doc = myTestIterator.next();
+
+            //Extract the page identifier from the XML returned. It is available in a tag <identifier>
+            NodeList nodes = doc.getElementsByTagName("identifier");
+            String strFullPageIdentifier = nodes.item(0).getChildNodes().item(0).getNodeValue();
+            String startDate = XMLUtil.getPageModificationDate(doc);
+
+            System.out.println(strFullPageIdentifier + "        " + startDate);
+
+        } */
+
+
         for(int i = 0; i < recentlyUpdatedInstances.length; i++)
                 recentlyUpdatedInstances[i] = new RecentlyUpdatedInstance();
 
@@ -100,10 +124,52 @@ public class Main
 
         Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
         authenticate("dbpedia", Files.readFile(new File("pw.txt")).trim());
+        Publisher publisher = new Publisher("Publisher", 4);
+
+        //All feeders, one for live update, one for mapping affected pages, and the last one is for unmodified pages
         MappingUpdateFeeder mappingFeeder = new MappingUpdateFeeder("Mapping feeder thread", 4);
         LiveUpdateFeeder liveFeeder = new LiveUpdateFeeder("Live feeder thread", 6);
+        UnmodifiedPagesUpdateFeeder unmodifiedFeeder = new UnmodifiedPagesUpdateFeeder("Unmodified pages update feeder",
+                Thread.MIN_PRIORITY);
+
         PageProcessor processor = new PageProcessor("Page processing thread", 8);
-        Publisher publisher = new Publisher("Publisher", 4);
+
+
+        PublishedDataCompressor compressor = new PublishedDataCompressor("PublishedDataCompressor", Thread.MIN_PRIORITY);
+
+
+        /*
+
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(2011, 04, 01, 22, 0, 0);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+        String str = dateFormatter.format(new Date());
+
+
+        Iterator<Document> myTestIterator = new OAIUnmodifiedRecordIterator(
+                "http://live.dbpedia.org/syncwiki/Special:OAIRepository", "2011-02-19T14:20:00Z", "2011-02-19T14:29:59Z");
+        while(myTestIterator.hasNext()){
+            Document doc = myTestIterator.next();
+            NodeList nodes = doc.getElementsByTagName("identifier");
+
+            for(int i=0; i < nodes.getLength(); i++){
+                String strFullPageIdentifier = nodes.item(i).getChildNodes().item(0).getNodeValue();
+                String startDate = XMLUtil.getPageModificationDate(doc);
+
+                System.out.println("Start date = " + startDate);
+                int colonPos = strFullPageIdentifier.lastIndexOf(":");
+                String strPageID = strFullPageIdentifier.substring(colonPos+1);
+
+                long pageID = new Long(strPageID);
+                System.out.println("Page ID = " + pageID);
+
+            }
+
+
+        }
+
+        */
 
 //        System.out.println(Util.getDBpediaCategoryPrefix("en"));
 
