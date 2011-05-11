@@ -40,8 +40,8 @@ public class LiveUpdateFeeder extends Thread{
     //Date startDate = calendar.getTime();
     String startDate = "2011-04-01T15:00:00Z";
 
-    int pollInterval = 30;
-    int sleepInterval = 1;
+    int pollInterval = 3;
+    int sleepInterval = 0;
     public static String lastResponseDateFile = "./lastResponseDate.dat";
 
     int articleDelay = 0;
@@ -66,7 +66,7 @@ public class LiveUpdateFeeder extends Thread{
 
         this.setPriority(priority);
         this.setName(name);
-        calendar.set(2011, 04, 01, 22, 0, 0);
+        calendar.set(2011, 05, 01, 22, 0, 0);
 
         String proposedStartDate = LastResponseDateManager.getLastResponseDate(lastResponseDateFile);
         if(proposedStartDate != null)
