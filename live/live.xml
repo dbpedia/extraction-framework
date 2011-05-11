@@ -42,7 +42,8 @@
 				<notice>I deactivated warning output for catchObjectDataTypeFunctions, this was for a test run only</notice>
 			</extractor>
 
-			<extractor name ="org.dbpedia.extraction.mappings.PageLinksExtractor" status="ACTIVE">
+            <!-- This extarctor is not necessary-->
+			<extractor name ="org.dbpedia.extraction.mappings.PageLinksExtractor" status="KEEP">
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
@@ -206,7 +207,7 @@
 						<o>SKOS_CONCEPT</o>
 					</matchPattern>
 				</produces>
-				
+
 				<notice>currently produces: Category, i.e. not language independent</notice>
 			</extractor>
 
@@ -221,8 +222,8 @@
 
 				<notice>currently produces: Category, i.e. not language independent</notice>
 			</extractor>
-			
-			
+
+
 			<!-- The following extractors should be considered -->
 			<extractor name ="org.dbpedia.extraction.mappings.CategoryLabelExtractor" status="ACTIVE">
 				<produces>
@@ -232,7 +233,7 @@
 						<o></o>
 					</matchPattern>
 				</produces>
-				
+
 			</extractor>
 
 			<extractor name ="org.dbpedia.extraction.mappings.ArticleCategoriesExtractor" status="ACTIVE">
