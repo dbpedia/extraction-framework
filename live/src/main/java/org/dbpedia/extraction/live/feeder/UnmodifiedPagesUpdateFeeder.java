@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
+import org.dbpedia.extraction.live.priority.Priority;
 import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.live.util.iterators.OAIUnmodifiedRecordIterator;
@@ -134,7 +135,7 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
 
                 String lastResponseDate = XMLUtil.getPageModificationDate(doc);
 
-                Main.pageQueue.add(new PagePriority(pageID, true, lastResponseDate));
+                Main.pageQueue.add(new PagePriority(pageID, Priority.UnmodifiedPagePriority, lastResponseDate));
 
                 //We should check first if  pageID exists, as if it does not exist then it will be added, if it exists before either with same or higher
                 //priority then it will not be added

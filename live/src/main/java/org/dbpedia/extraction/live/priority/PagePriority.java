@@ -9,29 +9,33 @@ import java.util.Date;
  * Date: Jul 28, 2010
  * Time: 5:00:34 PM
  * This class represents the priority of the page, because the page IDs that are extracted through live extraction
- * have higher priority than the page IDs that are extracted through mapping change.
+ * have higher priority than the page IDs that are extracted through mapping change, and also using Unmodified feeder.
+ * Basically we use priority 0 for live, 1 for mapping change, and 2 for unmodified pages
  */
 public class PagePriority implements Comparable<PagePriority>{
     public long pageID;
-    public Boolean isResultOfMappingChange;
+    public Priority pagePriority;
     public String lastResponseDate;
 
-    public PagePriority(long pageid, Boolean fromMapping, String responseDate){
+    public PagePriority(long pageid, Priority priority, String responseDate){
         pageID = pageid;
-        isResultOfMappingChange = fromMapping;
+        pagePriority = priority;
         lastResponseDate = responseDate;
     }
 
-    public PagePriority(long pageid, Boolean fromMapping){
-        this(pageid, fromMapping, "");
+    public PagePriority(long pageid, Priority priority){
+        this(pageid, priority, "");
     }
 
     //We should compare the priorities of the pages by the boolean flag, and if they have the same boolean flag
     //we use the timestamp associated with each one, in order to make sure that the one with the least timestamp
     //will be processed first. as the performnace of
     public int compareTo(PagePriority page){
-        if(this.isResultOfMappingChange != page.isResultOfMappingChange)
-            return this.isResultOfMappingChange.compareTo(page.isResultOfMappingChange);
+        if(this.pagePriority != page.pagePriority){
+//            return this.pagePriority.compareTo(page.pagePriority);
+            return this.pagePriority.compareTo(page.pagePriority);
+
+        }
         else{
             //Split the timestamp into parts i.e. year , month, day, hour, minute, second
             String [] arrThisPageParts = this.lastResponseDate.split("-|:|T|Z");
@@ -52,8 +56,7 @@ public class PagePriority implements Comparable<PagePriority>{
 
 
     public String toString(){
-        return "Page ID = " + this.pageID + ", it's affected by mapping " + isResultOfMappingChange +
-                ", and its timestamp = " + lastResponseDate;  
+        return "Page ID = " + this.pageID + ", its priority = " + pagePriority + ", and its timestamp = " + lastResponseDate;
 
     }
 }

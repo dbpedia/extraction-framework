@@ -5,14 +5,13 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
+import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
+import org.dbpedia.extraction.live.priority.Priority;
 import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.sources.Source;
 import org.dbpedia.extraction.sources.XMLSource;
-import org.dbpedia.extraction.live.main.Main;
-
-
 import org.w3c.dom.Document;
 import scala.xml.*;
 
@@ -79,10 +78,10 @@ public class PageProcessor extends Thread{
                 Main.pageQueue.remove();
 
                 //Write response date to file in both cases of live update and mapping update
-                if(requiredPage.isResultOfMappingChange)
+                if(requiredPage.pagePriority == Priority.MappingPriority)
                     LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
                             requiredPage.lastResponseDate);
-                else
+                else if(requiredPage.pagePriority == Priority.LivePriority)
                     LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
                                         requiredPage.lastResponseDate);
 
