@@ -18,7 +18,12 @@ import org.dbpedia.extraction.live.util.Files;
 import java.io.*;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.TreeMap;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.PriorityBlockingQueue;
 
 //import org.dbpedia.extraction.wikiparser.*;
@@ -52,7 +57,9 @@ public class Main
     public static PriorityBlockingQueue<PagePriority> pageQueue = new PriorityBlockingQueue<PagePriority>(1000);
 
     //Used for publishing triples to files
-    public static Queue<PublishingData> publishingDataQueue = new LinkedList<PublishingData>();
+//    public static Queue<PublishingData> publishingDataQueue = new LinkedList<PublishingData>();
+
+    public static BlockingQueue<PublishingData> publishingDataQueue = new LinkedBlockingDeque<PublishingData>();
 
     //This tree is used to avoid processing same page more than once, as it will exist in it only once,
     //so if it exists in it it should be processed and removed from it, os if it is encountered fro another time, it will not exist in that tree, so it
@@ -60,7 +67,7 @@ public class Main
     public static TreeMap<Long, Boolean> existingPagesTree = new TreeMap<Long, Boolean>();
 
 	public static void authenticate(final String username, final String password)
-	{		
+	{
 		Authenticator.setDefault(new Authenticator() {
 		    @Override
 			protected PasswordAuthentication getPasswordAuthentication() {
