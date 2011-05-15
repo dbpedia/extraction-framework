@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
+import org.dbpedia.extraction.live.priority.Priority;
 import org.dbpedia.extraction.live.record.DeletionRecord;
 import org.dbpedia.extraction.live.record.IRecord;
 import org.dbpedia.extraction.live.record.Record;
@@ -41,7 +42,7 @@ public class LiveUpdateFeeder extends Thread{
     String startDate = "2011-04-01T15:00:00Z";
 
     int pollInterval = 3;
-    int sleepInterval = 0;
+    int sleepInterval = 1;
     public static String lastResponseDateFile = "./lastResponseDate.dat";
 
     int articleDelay = 0;
@@ -109,7 +110,7 @@ public class LiveUpdateFeeder extends Thread{
                 long pageID = new Long(strPageID);
 
 
-                Main.pageQueue.add(new PagePriority(pageID, false, startDate));
+                Main.pageQueue.add(new PagePriority(pageID, Priority.LivePriority, startDate));
 
                 //We should check first if  pageID exists, as if it does not exist then it will be added, if it exists before either with same or higher
                 //priority then it will not be added

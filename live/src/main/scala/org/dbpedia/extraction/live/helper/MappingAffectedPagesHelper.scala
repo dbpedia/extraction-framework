@@ -10,6 +10,7 @@ import org.dbpedia.extraction.live.extraction.LiveExtractionManager
 import xml.{XML, Elem}
 import java.util.PriorityQueue
 import org.dbpedia.extraction.live.priority.PagePriority;
+import org.dbpedia.extraction.live.priority.Priority;
 import org.dbpedia.extraction.live.main._;
 
 /**
@@ -36,7 +37,7 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
           var NumberOfPagesToBeInvalidated = 0;
           pageIDs.foreach(CurrentPageID => {
             //val CurrentPageID = wikititle.toLong;
-            Main.pageQueue.add(new PagePriority(CurrentPageID, true, lastResponseDate));
+            Main.pageQueue.add(new PagePriority(CurrentPageID, Priority.MappingPriority, lastResponseDate));
 
             //We add the pageID here immediately without checking if it exist first, as put checks if it exists the old value will be replace,
             //so if it does not exist already it will be added, if it was added with lower priority, its priority will increase, and if it already exists with
