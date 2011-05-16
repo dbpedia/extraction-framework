@@ -385,6 +385,14 @@ public class Hash{
             if(deleteTriples == null)
                 deleteTriples = new HashMap();
 
+            //In case of Abstract extraction we should convert BLOB into string in order to decode non-English characters
+            //as they are stored as a sequence of unicode escaped characters e.g. \u664B must be converted into 晋, in order
+            //for the triple to found and renewed with the new triple value.
+            if(extractorID.toLowerCase().contains("abstractextractor")){
+                String strUnicodeDecoded = (String)((HashMap) (pairs.getValue())).get("o");
+                ((HashMap) (pairs.getValue())).put("o", strUnicodeDecoded);
+            }
+
             this.deleteTriples.put(pairs.getKey(), pairs.getValue());
             delCount++;
         }
