@@ -458,7 +458,7 @@ public class LiveUpdateDestination implements Destination{
             }
 
         }
-        sparul = "Delete From <" + this.graphURI + "> { \n  " + pattern + " }";
+        sparul = "Delete From <" + this.graphURI + "> { \n  " + pattern + " }" + " where {\n" + pattern + " }";
 
         int countbefore = 0;
         //TESTS>>>>>>>>>>>>
@@ -489,7 +489,7 @@ public class LiveUpdateDestination implements Destination{
 
                 strDeletedTriples += pattern;
 
-                sparul = "Delete From <" + this.graphURI +"> { " + pattern + " }";
+                sparul = "Delete From <" + this.graphURI +"> { " + pattern + " }" + " where {\n" + pattern + " }";
                 this._jdbc_sparul_execute(sparul);
             }
         }
