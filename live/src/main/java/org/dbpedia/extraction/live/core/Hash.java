@@ -232,7 +232,9 @@ public class Hash{
         }
 	}
 
-
+    /**
+     * Inserts a new record into dbpedia_triples table, in order to later use it to compare hashes
+     */
 	public void insertIntoDB()
     {
         if(!this.active)
@@ -267,6 +269,41 @@ public class Hash{
             logger.info(this.Subject + " inserted hashes for " + this.newJSONObject.size() + " extractors " + needed);
         }
 	}
+
+    /**
+     * Deletes a record for a specific resource from dbpedia_triples table.
+     */
+    public void deleteFromDB(){
+        if(!this.active)
+        {
+            return;
+        }
+
+        //If the application is working in multithreading mode, we must attach the thread id to the timer name
+        //to avoid the case that a thread stops the timer of another thread.
+        String timerName = "Hash::deleteFromDB" +
+                (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
+
+        Timer.start(timerName);
+
+        String sql = "DELETE FROM " + TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
+
+        PreparedStatement stmt = this.jdbc.prepare(sql , "Hash::deleteFromDB");
+
+        boolean deleteExecutedSuccessfully= jdbc.executeStatement(stmt, new String[]{} );
+
+	    String needed = Timer.stopAsString(timerName);
+
+        if(deleteExecutedSuccessfully == false)
+        {
+            logger.fatal("FAILED to delete hashes for " + this.newJSONObject.size() + " extractors ");
+        }
+        else
+        {
+            logger.info("Hashes for " + this.Subject + " has been deleted");
+        }
+    }
+
 
     private void _compareHelper(String extractorID, ArrayList triples)
     {
@@ -388,10 +425,10 @@ public class Hash{
             //In case of Abstract extraction we should convert BLOB into string in order to decode non-English characters
             //as they are stored as a sequence of unicode escaped characters e.g. \u664B must be converted into 晋, in order
             //for the triple to found and renewed with the new triple value.
-//            if(extractorID.toLowerCase().contains("abstractextractor")){
-//                String strUnicodeDecoded = new String((String)((HashMap) (pairs.getValue())).get("o"));
-//                //((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
-//            }
+            if(extractorID.toLowerCase().contains("abstractextractor")){
+                String strUnicodeDecoded = new String((String)((HashMap) (pairs.getValue())).get("o"));
+                ((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
+            }
 
             this.deleteTriples.put(pairs.getKey(), pairs.getValue());
             delCount++;

@@ -66,26 +66,33 @@ public class PageProcessor extends Thread{
 
     public void run(){
         while(true){
-            if(!Main.pageQueue.isEmpty()){
-                PagePriority requiredPage = Main.pageQueue.peek();
-                System.out.println("Page # " + requiredPage + " has been removed and processed");
+            try{
+                    if(!Main.pageQueue.isEmpty()){
+                    PagePriority requiredPage = Main.pageQueue.peek();
+                    System.out.println("Page # " + requiredPage + " has been removed and processed");
 
-                //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
-                if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
-                    Main.existingPagesTree.remove(requiredPage.pageID);
-                    processPage(requiredPage.pageID);
+                    //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
+                    if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
+                        Main.existingPagesTree.remove(requiredPage.pageID);
+                        processPage(requiredPage.pageID);
+                    }
+                    Main.pageQueue.remove();
+
+                    //Write response date to file in both cases of live update and mapping update
+                    if(requiredPage.pagePriority == Priority.MappingPriority)
+                        LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
+                                requiredPage.lastResponseDate);
+                    else if(requiredPage.pagePriority == Priority.LivePriority)
+                        LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
+                                            requiredPage.lastResponseDate);
+
                 }
-                Main.pageQueue.remove();
-
-                //Write response date to file in both cases of live update and mapping update
-                if(requiredPage.pagePriority == Priority.MappingPriority)
-                    LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
-                            requiredPage.lastResponseDate);
-                else if(requiredPage.pagePriority == Priority.LivePriority)
-                    LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
-                                        requiredPage.lastResponseDate);
 
             }
+            catch (Exception exp){
+                logger.error("Failed to process page");
+            }
+
 
         }
         

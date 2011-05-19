@@ -27,6 +27,7 @@ import scala.collection.JavaConversions;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,6 +39,9 @@ import java.util.*;
 public class LiveUpdateDestination implements Destination{
     
     private static Logger logger = Logger.getLogger(LiveUpdateDestination.class);
+
+    //This is used for placing a time limit on the execution of triples update process
+    private static final ExecutorService THREAD_POOL = Executors.newCachedThreadPool();
 
     public static Options options = new Options();
 
@@ -123,6 +127,12 @@ public class LiveUpdateDestination implements Destination{
         }
 
 
+    }
+
+
+    private static <T> T timedCall(FutureTask<T> task, long timeout, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
+        THREAD_POOL.execute(task);
+        return task.get(timeout, timeUnit);
     }
 
     /**
@@ -308,21 +318,19 @@ public class LiveUpdateDestination implements Destination{
         try{
             int abstractCount = this.countLiveAbstracts();
             if(this.hash.hasHash()){
-//                logger.info("Inside hasHash In thread "+ Thread.currentThread().getId());
+                //We should place a time limit on the extraction process, so if it doesn't stop within the allowed timeframe
+                //we should use radical strategy (deleting previously inserted triples and inserting new ones)
+                UpdateTriplesWithTimeLimit triplesUpdaterWithLimit = new UpdateTriplesWithTimeLimit();
+                FutureTask<Integer> updateExecutionTask = new FutureTask<Integer>(triplesUpdaterWithLimit);
+                try{
+                    timedCall(updateExecutionTask, 1, TimeUnit.MINUTES);
+                }
+                catch (Exception exp){
+                    //If normal update process fails with the allowed timeframe, then we should use the primary update
+                    //strategy
+                    updateTriplesPrimarily();
 
-                //If the application is working in multithreading mode, we must attach the thread id to the timer name
-                //to avoid the case that a thread stops the timer of another thread.
-                String timerName = "LiveUpdateDestination._hashedUpdate_Strategy" +
-                    (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
-                Timer.start(timerName);
-                HashMap addTriples = this.hash.getTriplesToAdd();
-                HashMap deleteTriples = this.hash.getTriplesToDelete();
-                //update db
-//                this.hash.updateDB();
-                //update triples
-                this._hashedUpdate(addTriples, deleteTriples);
-                this.hash.updateDB();
-                Timer.stop(timerName);
+                }
             }
             else {
 //                logger.info("Inside NoHash In thread "+ Thread.currentThread().getId());
@@ -357,6 +365,21 @@ public class LiveUpdateDestination implements Destination{
         catch(Exception exp){
 
         }
+    }
+
+    /**
+     * This update star
+     */
+    private void updateTriplesPrimarily(){
+        String timerName = "LiveUpdateDestination._primaryStrategy" +
+            (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
+
+        Timer.start(timerName);
+        this._primaryStrategy();
+        Timer.stop(timerName);
+
+        this.hash.deleteFromDB();
+        this.hash.insertIntoDB();
     }
 
     private void _hashedUpdate(HashMap addTriples, HashMap deleteTriples){
@@ -458,6 +481,7 @@ public class LiveUpdateDestination implements Destination{
             }
 
         }
+
         sparul = "Delete From <" + this.graphURI + "> { \n  " + pattern + " }" + " where {\n" + pattern + " }";
 
         int countbefore = 0;
@@ -1087,5 +1111,40 @@ public class LiveUpdateDestination implements Destination{
 
         System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
     }
+
+/**
+     * This class implements Callable interface, which provides the ability to place certain time limit on the execution
+     * time of a function, so it must end after a specific time limit.
+     * This helps in case of hanging while extraction from a page
+     */
+    private class UpdateTriplesWithTimeLimit implements Callable<Integer> {
+
+        public UpdateTriplesWithTimeLimit(){
+
+        }
+        public Integer call(){
+
+             logger.info("Inside hasHash In thread "+ Thread.currentThread().getId());
+
+                //If the application is working in multithreading mode, we must attach the thread id to the timer name
+                //to avoid the case that a thread stops the timer of another thread.
+                String timerName = "LiveUpdateDestination._hashedUpdate_Strategy" +
+                    (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
+                Timer.start(timerName);
+                HashMap addTriples = hash.getTriplesToAdd();
+                HashMap deleteTriples = hash.getTriplesToDelete();
+                //update db
+//                this.hash.updateDB();
+                //update triples
+                _hashedUpdate(addTriples, deleteTriples);
+                hash.updateDB();
+                Timer.stop(timerName);
+
+            return 0;
+
+        }
+
+    }
+
 
 }
