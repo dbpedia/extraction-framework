@@ -16,13 +16,14 @@ class InterLanguageLinksExtractor(extractionContext : ExtractionContext) extends
     private val interLanguageLinksProperty = "http://dbpedia.org/ontology/interLanguageLinks" // extractionContext.ontology.getProperty("interLanguageLinks")" +
         //.getOrElse(throw new NoSuchElementException("Ontology property 'interLanguageLinks' does not exist in DBpedia Ontology."))
 
-    private val sameAsMap = Map(
+    private val intLinksMap = Map(
+        "de" -> Set("en", "el"),
+        "el" -> Set("en", "de", "ru"),
         "en" -> Set("el", "de", "co"),
-        "el" -> Set("en", "de"),
-        "de" -> Set("en", "el")
+        "ru" -> Set("en", "el", "de")
     )
 
-    require( sameAsMap.keySet.contains(language), "Interlanguage Links supports the following languages: " + sameAsMap.keySet.mkString(", ")+"; not "+language)
+    require( intLinksMap.keySet.contains(language), "Interlanguage Links supports the following languages: " + intLinksMap.keySet.mkString(", ")+"; not "+language)
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -30,7 +31,7 @@ class InterLanguageLinksExtractor(extractionContext : ExtractionContext) extends
         
         var quads = List[Quad]()
 
-        retrieveTranslationTitles (node,sameAsMap(language)).foreach { tuple:(String, WikiTitle) =>
+        retrieveTranslationTitles (node,intLinksMap(language)).foreach { tuple:(String, WikiTitle) =>
             val (tlang, title) = tuple
             quads ::= new Quad(extractionContext, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
                 OntologyNamespaces.getResource(title.encodedWithNamespace,tlang), title.sourceUri, null)

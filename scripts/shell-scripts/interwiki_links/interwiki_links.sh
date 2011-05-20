@@ -21,26 +21,33 @@ LANG_TO=$2
 INTERWIKI_FROM="$OUTPUTDIR/$LANG_FROM/interlanguage_links_$LANG_FROM.nt"
 INTERWIKI_FROM_SORTED="$OUTPUTDIR/$LANG_FROM/interlanguage_links_$LANG_FROM.nt.sorted.$LANG_TO"
 
-INTERWIKI_FROM_SAMEAS="$OUTPUTDIR/$LANG_FROM/sameas_$LANG_FROM-$LANG_TO.nt"
-INTERWIKI_FROM_SEEALSO="$OUTPUTDIR/$LANG_FROM/seealso_$LANG_FROM-$LANG_TO.nt"
-
 INTERWIKI_TO="$OUTPUTDIR/$LANG_TO/interlanguage_links_$LANG_TO.nt"
 INTERWIKI_TO_REVERSED="$OUTPUTDIR/$LANG_TO/interlanguage_links_$LANG_TO.nt.reversed.$LANG_FROM"
+
+INTERWIKI_FROM_SAMEAS="$OUTPUTDIR/$LANG_FROM/sameas_$LANG_FROM-$LANG_TO.nt"
+
+#check if interlanguage links files exist
+if [ ! -f $INTERWIKI_FROM ]; then
+    echo "$INTERWIKI_FROM not found! exiting..."
+#    exit
+fi
+
+if [ ! -f $INTERWIKI_TO ]; then
+    echo "$INTERWIKI_TO not found! exiting..."
+#    exit
+fi
 
 GREP_LANG_FROM="http://$LANG_FROM.dbpedia.org"
 GREP_LANG_TO="http://$LANG_TO.dbpedia.org"
 
-echo $GREP_LANG_FROM
-echo $GREP_LANG_TO
-
 if [ "$LANG_FROM" = "en" ]
 then
-	GREP_LANG_FROM="\"http://dbpedia.org\""
+	GREP_LANG_FROM="http://dbpedia.org"
 fi
 
 if [ "$LANG_TO" = "en" ]
 then
-	GREP_LANG_TO="\"http://dbpedia.org\""
+	GREP_LANG_TO="http://dbpedia.org"
 fi
 
 echo -------------------------------------------------------------------------------
@@ -53,8 +60,4 @@ grep ${GREP_LANG_TO} $INTERWIKI_FROM | sort -u | cat > $INTERWIKI_FROM_SORTED
 #owl:sameAs (http://www.w3.org/2002/07/owl#sameAs)
 comm -12 $INTERWIKI_TO_REVERSED $INTERWIKI_FROM_SORTED > $INTERWIKI_FROM_SAMEAS
 wc -l $INTERWIKI_FROM_SAMEAS
-
-#rdfs:seeAlso (http://www.w3.org/2000/01/rdf-schema#seeAlso)
-comm -23 $INTERWIKI_TO_REVERSED $INTERWIKI_FROM_SORTED | sed 's/http\:\/\/www.w3.org\/2002\/07\/http\:\/\/www.w3.org\/owl#sameAs/2000\/01\/rdf-schema#seeAlso/g' > $INTERWIKI_FROM_SEEALSO
-wc -l $INTERWIKI_FROM_SEEALSO
 
