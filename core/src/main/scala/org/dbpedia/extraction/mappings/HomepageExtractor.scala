@@ -12,16 +12,17 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 
-    private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina")
+    private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
 
     private val externalLinkSections = Map(
-        "en" -> "External links?",
         "de" -> "Weblinks?",
         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
+        "en" -> "External links?",
+        "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo",
         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
-        "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo"
+        "ru" -> "Ссылки"
     )
 
     private val official = Map(

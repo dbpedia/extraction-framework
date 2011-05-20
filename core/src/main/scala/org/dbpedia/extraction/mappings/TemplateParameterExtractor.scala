@@ -33,7 +33,7 @@ class TemplateParameterExtractor(extractionContext : ExtractionContext) extends 
             linkParameters ::= linkTemplatePar.toWikiText
         }
 
-        val parameterRegex = """(?s)\{\{\{([^|^}^{]*)[|}]""".r
+        val parameterRegex = """(?s)\{\{\{([^|^}^{^<^>]*)[|}<>]""".r
         linkParameters.distinct.foreach( link => {
             parameterRegex findAllIn link foreach (_ match {
                 case parameterRegex (param) => parameters::= param //.replace("}","").replace("|","")

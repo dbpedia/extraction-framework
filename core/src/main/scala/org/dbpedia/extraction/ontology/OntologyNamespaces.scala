@@ -8,8 +8,8 @@ import java.net.URLEncoder
 object OntologyNamespaces
 {
     //#int
-    val specificLanguageDomain = Set("el", "de", "it")
-    val encodeAsIRI = Set("el", "de")
+    val specificLanguageDomain = Set("de", "el", "it", "ru")
+    val encodeAsIRI = Set("de", "el", "ru")
 
     val DBPEDIA_CLASS_NAMESPACE = "http://dbpedia.org/ontology/"
     val DBPEDIA_DATATYPE_NAMESPACE = "http://dbpedia.org/datatype/"
@@ -110,6 +110,7 @@ object OntologyNamespaces
         {
             //return baseUri + suffix;
             if (! encodeAsIRI.contains(lang))
+                // some bad URIs passed 
                 return baseUri + URLEncoder.encode(suffix, "UTF-8")
             else
                 return UriUtils.toIRIString(baseUri+suffix)

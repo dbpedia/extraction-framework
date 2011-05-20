@@ -33,15 +33,15 @@ GREP_LANG_TO="http://$LANG_TO.dbpedia.org"
 echo $GREP_LANG_FROM
 echo $GREP_LANG_TO
 
-if [ "$LANG_FROM" = "en" ]
-then
-	GREP_LANG_FROM="\"http://dbpedia.org\""
-fi
+#if [ "$LANG_FROM" = "en" ]
+#then
+#	GREP_LANG_FROM="\"http://dbpedia.org\""
+#fi
 
-if [ "$LANG_TO" = "en" ]
-then
-	GREP_LANG_TO="\"http://dbpedia.org\""
-fi
+#if [ "$LANG_TO" = "en" ]
+#then
+#	GREP_LANG_TO="\"http://dbpedia.org\""
+#fi
 
 echo -------------------------------------------------------------------------------
 echo "Generating interlanguage links from $LANG_FROM to $LANG_TO"

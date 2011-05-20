@@ -125,8 +125,10 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                             quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             //#statistics uncomment the following 2 lines (do not delete)
-                            quads ::= new Quad( extractionContext, DBpediaDatasets.InfoboxTest, subjectUri, OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language),
-                                                property.key, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
+                            val stat_template = OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language).replace("\n", " ").replace("\t", " ").trim
+                            val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
+                            quads ::= new Quad( extractionContext, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
+                                                stat_property, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
                         }
                         catch
                         {
