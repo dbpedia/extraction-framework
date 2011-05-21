@@ -22,18 +22,31 @@ public class LastResponseDateManager {
     public static String getLastResponseDate(String strFileName)
     {
         String strLastResponseDate = null;
+        FileInputStream fsLastResponseDateFile = null;
 
         try{
-            FileInputStream fsLastResponseDateFile = new FileInputStream(strFileName);
+            fsLastResponseDateFile = new FileInputStream(strFileName);
 
             int ch;
             strLastResponseDate="";
             while( (ch = fsLastResponseDateFile.read()) != -1)
                 strLastResponseDate += (char)ch;
 
+
         }
         catch(Exception exp){
            logger.error(ExceptionUtil.toString(exp));
+        }
+        finally {
+            try{
+                if(fsLastResponseDateFile != null)
+                    fsLastResponseDateFile.close();
+
+            }
+            catch (Exception exp){
+                logger.error("File " + strFileName + " cannot be closed due to " + exp.getMessage());
+            }
+
         }
 
         return strLastResponseDate;
@@ -42,14 +55,29 @@ public class LastResponseDateManager {
 
     public static void writeLastResponseDate(String strFileName, String strLastResponseDate)
     {
+        FileOutputStream fsLastResponseDateFile = null;
+        OutputStreamWriter osWriter = null;
+
         try{
-            FileOutputStream fsLastResponseDateFile = new FileOutputStream(strFileName);
-            OutputStreamWriter osWriter = new OutputStreamWriter(fsLastResponseDateFile);
+            fsLastResponseDateFile = new FileOutputStream(strFileName);
+            osWriter = new OutputStreamWriter(fsLastResponseDateFile);
             osWriter.write(strLastResponseDate);
-            osWriter.close();
+            osWriter.flush();
         }
         catch(Exception exp){
            logger.error(ExceptionUtil.toString(exp));
+        }
+        finally {
+            try{
+                if(osWriter != null)
+                    osWriter.close();
+
+                if(fsLastResponseDateFile != null)
+                    fsLastResponseDateFile.close();
+            }
+            catch (Exception exp){
+                logger.error("File " + strFileName + " cannot be closed due to " + exp.getMessage());
+            }
         }
     }
 }
