@@ -85,7 +85,9 @@ public class Publisher extends Thread{
 	public static void loadIniFile(File file, Map<String, String> out)
 		throws IOException
 	{
-		loadIniFile(new BufferedReader(new FileReader(file)), out);
+        BufferedReader rdr = new BufferedReader(new FileReader(file));
+		loadIniFile(rdr, out);
+        rdr.close();
 	}
 
 	public static void loadIniFile(BufferedReader reader, Map<String, String> out)

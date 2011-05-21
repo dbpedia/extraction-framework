@@ -7,20 +7,19 @@ package org.dbpedia.extraction.live.publisher;
  * This class writes the triples to a file, for live synchronization, it is originally developed by Claus Stadler
  */
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFWriter;
+import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.RDFWriter;
 
 
 public class RDFDiffWriter
@@ -170,6 +169,9 @@ public class RDFDiffWriter
 		throws IOException
 	{
         //No data to be written
+        OutputStream tmp = null;
+		OutputStream out = null;
+        try{
         if((triplesString == null) || (triplesString == ""))
             return;
 		File file = new File(baseName);
@@ -195,9 +197,9 @@ public class RDFDiffWriter
 
 		File outputFile = new File(fileName);
         System.out.println(fileName);
-		OutputStream tmp = new FileOutputStream(outputFile);
+		tmp = new FileOutputStream(outputFile);
 
-		OutputStream out;
+//		OutputStream out;
 		if(zip) {
 			out = new GzipCompressorOutputStream(tmp);
 		}
@@ -208,7 +210,17 @@ public class RDFDiffWriter
 		out.write(triplesString.getBytes());
 
 		out.flush();
-		out.close();
+//		out.close();
+        }
+        finally {
+            if(tmp != null)
+                tmp.close();
+
+            if(out != null)
+                out.close();
+
+        }
+
 
 //		String addedFileName = baseName + ".added." + fileNameExtension;
 //		write(diff.getAdded(), rdfWriter, addedFileName, zip);

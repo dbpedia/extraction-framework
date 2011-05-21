@@ -9,7 +9,6 @@ import org.dbpedia.extraction.live.core.LiveOptions;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,6 +23,7 @@ public class PublishedDataCompressor extends Thread{
     Logger logger = Logger.getLogger(PublishedDataCompressor.class);
 
     private Date lastProcessingDate = new Date();
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
 
     //This thread should have a low priority, in order not interfere with or slow down the main thread, which is responsible for handling live updates.
     public PublishedDataCompressor(String name, int priority){
@@ -54,18 +54,44 @@ public class PublishedDataCompressor extends Thread{
 //            Map<String, String> config = Publisher.loadIniFile(new File("./live/dbpedia_default.ini"));
 //            String publishBaseName = config.get("publishDiffRepoPath");
 //            compressYear("2010-04-08-11");
+
             String publishBaseName = LiveOptions.options.get("publishDiffRepoPath");
             String lastProcessingDateFilename = publishBaseName + "/lastProcessingDate.dat";
             lastProcessingDate = _readLastProcessingDateFromFile(lastProcessingDateFilename);
-            compressPublishData(lastProcessingDate);
-            _writeLastProcessingDateToFile(lastProcessingDateFilename);
+
+            while(true){
+
+                try{
+                //Prepare year, month, day, adn hour for last compression date, and current date
+                CompressionDate lastCompressionDate = new CompressionDate(lastProcessingDate);
+                CompressionDate currentCompressionDate = new CompressionDate(new Date());
+
+                if(currentCompressionDate.getYear() != lastCompressionDate.getYear())
+                    compressYear(dateFormatter.format(lastProcessingDate));
+                else if(currentCompressionDate.getMonth() != lastCompressionDate.getMonth())
+                    compressMonth(dateFormatter.format(lastProcessingDate));
+                else if(currentCompressionDate.getDay() != lastCompressionDate.getDay())
+                    compressDay(dateFormatter.format(lastProcessingDate));
+                else if(currentCompressionDate.getHour() != lastCompressionDate.getHour())
+                    compressHour(dateFormatter.format(lastProcessingDate));
+                else //No difference, so we should do nothing
+                     continue;
+//                compressPublishData(lastProcessingDate);
+                _writeLastProcessingDateToFile(lastProcessingDateFilename);
+                lastProcessingDate = _readLastProcessingDateFromFile(lastProcessingDateFilename);
+                }
+                catch (Exception compressionException){
+
+                }
+            }
+
         }
         catch(Exception exp){
             logger.error("Published data cannot be compressed due to " + exp.getMessage());
         }
         finally {
             try{
-                TimeUnit.MINUTES.sleep(60);
+//                TimeUnit.MINUTES.sleep(60);
             }
             catch(Exception exp){
                 logger.error("Thread cannot be stopped for 1 hour");
@@ -78,10 +104,11 @@ public class PublishedDataCompressor extends Thread{
      * @param lastProcessing   The date of last Processing process.
      */
     private void compressPublishData(Date lastProcessing) {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
+
         Date currentDate = new Date();
 //        int year = Calendar.getInstance().get(Calendar.YEAR);
         String strCurrentDate = dateFormatter.format(currentDate);
+
 
         //Split the two dates, to get year, month, day, and hour individually
         String []currentDateParts = strCurrentDate.split("-");
@@ -120,9 +147,10 @@ public class PublishedDataCompressor extends Thread{
      */
     private Date _readLastProcessingDateFromFile(String filename){
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
+        BufferedReader inputReader = null;
 
         try{
-            BufferedReader inputReader = new BufferedReader(new FileReader(filename));
+            inputReader = new BufferedReader(new FileReader(filename));
             String line = inputReader.readLine();
             inputReader.close();
             return dateFormatter.parse(line);
@@ -132,6 +160,16 @@ public class PublishedDataCompressor extends Thread{
                     "Assuming it is the current date");
             return new Date();
 
+        }
+        finally {
+            try{
+                if(inputReader != null)
+                    inputReader.close();
+
+            }
+            catch (Exception exp){
+                logger.error("File " + filename + " cannot be closed due to " + exp.getMessage());
+            }
         }
 
 
@@ -145,9 +183,11 @@ public class PublishedDataCompressor extends Thread{
     private void _writeLastProcessingDateToFile(String filename){
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
 
+        FileOutputStream fsLastProcessingDateFile = null;
+        OutputStreamWriter osWriter = null;
         try{
-            FileOutputStream fsLastProcessingDateFile = new FileOutputStream(filename);
-            OutputStreamWriter osWriter = new OutputStreamWriter(fsLastProcessingDateFile);
+            fsLastProcessingDateFile = new FileOutputStream(filename);
+            osWriter = new OutputStreamWriter(fsLastProcessingDateFile);
             osWriter.write(dateFormatter.format(new Date()));
             osWriter.close();
 
@@ -157,6 +197,18 @@ public class PublishedDataCompressor extends Thread{
         }
         catch (Exception exp){
             logger.warn("The date of last Processing process cannot be written to file.\n");
+        }
+        finally {
+            try{
+                if(osWriter != null)
+                    osWriter.close();
+
+                if(fsLastProcessingDateFile != null)
+                    fsLastProcessingDateFile.close();
+            }
+            catch (Exception exp){
+                logger.error("File " + filename + " cannot be closed due to " + exp.getMessage());
+            }
         }
 
 
@@ -171,8 +223,10 @@ public class PublishedDataCompressor extends Thread{
     private void writeLastProcessingDateFromFile(String filename, Date lastProcessing){
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
 
+        FileWriter writer = null;
+
         try{
-            FileWriter writer = new FileWriter(filename);
+            writer = new FileWriter(filename);
             writer.write(dateFormatter.format(lastProcessing));
             writer.flush();
             writer.close();
@@ -180,6 +234,17 @@ public class PublishedDataCompressor extends Thread{
         }
         catch (Exception exp){
             logger.warn("The date of last Processing process cannot be written to file.");
+        }
+        finally {
+            try{
+                if(writer != null)
+                    writer.close();
+
+            }
+            catch (Exception exp){
+                logger.error("File " + filename + " cannot be closed due to " + exp.getMessage());
+            }
+
         }
     }
 
@@ -333,6 +398,7 @@ public class PublishedDataCompressor extends Thread{
      */
     private static void convertToTar(File dir,TarOutputStream tos) throws IOException {
         File[] flist = dir.listFiles();
+
         int buffersize = 1024;
         byte[] buf = new byte[buffersize];
         for(int i=0; i<flist.length; i++)
@@ -369,16 +435,21 @@ public class PublishedDataCompressor extends Thread{
      * @param filename  The file the should be compressed.
      */
     private void compressFileUsingGZip(String filename){
+
+         FileInputStream in = null;
+
+         File outputFile = null;
+         OutputStream osCompressedFinal = null;
+         OutputStream out = null;
+
         try{
             //Prepare required streams
 
-            FileInputStream in = new FileInputStream(filename);
+            in = new FileInputStream(filename);
 
-
-
-            File outputFile = new File(filename + ".gz");
-		    OutputStream osCompressedFinal = new FileOutputStream(outputFile);
-            OutputStream out = new GzipCompressorOutputStream(osCompressedFinal);
+            outputFile = new File(filename + ".gz");
+		    osCompressedFinal = new FileOutputStream(outputFile);
+            out = new GzipCompressorOutputStream(osCompressedFinal);
 
             // Transfer bytes from the input file to the GZIP output stream
             byte[] buf = new byte[1024];
@@ -401,6 +472,61 @@ public class PublishedDataCompressor extends Thread{
         }
         catch(IOException exp){
             logger.error("File: " + filename + " cannot be compressed");
+        }
+
+    }
+
+    /**
+     * This class represents
+     */
+    private class CompressionDate{
+        private int _year;
+        private int _month;
+        private int _day;
+        private int _hour;
+
+        public int getYear(){
+            return _year;
+        }
+
+        public int getMonth(){
+            return _month;
+        }
+
+        public int getDay(){
+            return _day;
+        }
+
+        public int getHour(){
+            return _hour;
+        }
+
+        public CompressionDate(String requiredDate){
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
+    //        int year = Calendar.getInstance().get(Calendar.YEAR);
+//            String strCurrentDate = dateFormatter.format(requiredDate);
+
+
+            //Split the two dates, to get year, month, day, and hour individually
+            String []requiredDateParts = requiredDate.split("-");
+            _year = Integer.parseInt(requiredDateParts[0]);
+            _month = Integer.parseInt(requiredDateParts[1]);
+            _day = Integer.parseInt(requiredDateParts[2]);
+            _hour = Integer.parseInt(requiredDateParts[3]);
+        }
+
+         public CompressionDate(Date requiredDate){
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
+    //        int year = Calendar.getInstance().get(Calendar.YEAR);
+             String []requiredDateParts = dateFormatter.format(requiredDate).split("-");
+
+
+            //Split the two dates, to get year, month, day, and hour individually
+//            String []requiredDateParts = strCurrentDate.split("-");
+            _year = Integer.parseInt(requiredDateParts[0]);
+            _month = Integer.parseInt(requiredDateParts[1]);
+            _day = Integer.parseInt(requiredDateParts[2]);
+            _hour = Integer.parseInt(requiredDateParts[3]);
         }
 
     }
