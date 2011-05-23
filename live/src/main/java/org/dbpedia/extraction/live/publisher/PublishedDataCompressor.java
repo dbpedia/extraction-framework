@@ -529,6 +529,10 @@ public class PublishedDataCompressor extends Thread{
             _hour = Integer.parseInt(requiredDateParts[3]);
         }
 
+        @Override public String toString(){
+            return "Year = " + _year + ", Month = " + _month + ", Day = " + _day + ", Hour = " + _hour;
+        }
+
     }
     /*
     public File zipFolder(File inFolder, File outFile)

@@ -56,6 +56,7 @@ public class PublishingData {
     public PublishingData(String triples, boolean isAdded){
         added = isAdded;
         triplesString = triples;
+
     }
 
     /**
