@@ -213,11 +213,11 @@ public class RDFDiffWriter
 //		out.close();
         }
         finally {
-            if(tmp != null)
-                tmp.close();
-
             if(out != null)
                 out.close();
+
+            /*if((out != null) && (out != tmp))
+                out.close();*/
 
         }
 

@@ -205,11 +205,46 @@ public class LiveUpdateDestination implements Destination{
 //        while(iter.hasNext())
 //            System.out.println(iter.next());
 //        System.out.println("//////////////////////////////////////////////////////////////////////////////////");
-        PublishingData pubData = new PublishingData(addedTriplesList, true);
-//        logger.info("Inside ACCEPT");
-        Main.publishingDataQueue.add(pubData);
+
 //        logger.info("PublishingDataQueue = " + Main.publishingDataQueue.size());
         this.hash.compare(extractionResult);
+
+        HashMap hmDeletedTriples = this.hash.getTriplesToDelete();
+        Iterator deletedTriplesKeysIterator = hmDeletedTriples.keySet().iterator();
+        if(deletedTriplesString == null)
+            deletedTriplesString = "";
+        while (deletedTriplesKeysIterator.hasNext()){
+             String keyPredicateHash = (String)deletedTriplesKeysIterator.next();
+
+            deletedTriplesString += convertHashMapToString((HashMap)hmDeletedTriples.get(keyPredicateHash));
+        }
+
+        PublishingData pubData;
+        if(!Util.isStringNullOrEmpty(deletedTriplesString))
+            pubData = new PublishingData(addedTriplesList, deletedTriplesString);
+        else
+            pubData = new PublishingData(addedTriplesList, true);
+//        logger.info("Inside ACCEPT");
+        Main.publishingDataQueue.add(pubData);
+
+    }
+
+    /**
+     * Converts a triple represented as a HashMap, with S, P, and O as Keys and their values as Values for those keys
+     * @param hmTriple  Triple represented as HashMap
+     * @return  String representation of the triple
+     */
+    private String convertHashMapToString(HashMap hmTriple){
+
+        String pattern = "";
+        if(hmTriple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
+                pattern += hmTriple.get("s") + " " + hmTriple.get("p") + " " + hmTriple.get("o")+" . \n";
+        else//The statement must be converted to SPARUL
+            pattern += Util.convertToSPARULPattern(new URIImpl(hmTriple.get("s").toString()))
+                + " " + Util.convertToSPARULPattern(new URIImpl(hmTriple.get("p").toString()))
+                + " " + Util.convertToSPARULPattern(new LiteralImpl(hmTriple.get("o").toString()))+" . \n";
+
+        return pattern;
     }
 
     public void write(Graph graph){
@@ -482,7 +517,7 @@ public class LiveUpdateDestination implements Destination{
 
         }
 
-        sparul = "Delete From <" + this.graphURI + "> { \n  " + pattern + " }" + " where {\n" + pattern + " }";
+        sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
         int countbefore = 0;
         //TESTS>>>>>>>>>>>>
@@ -513,7 +548,7 @@ public class LiveUpdateDestination implements Destination{
 
                 strDeletedTriples += pattern;
 
-                sparul = "Delete From <" + this.graphURI +"> { " + pattern + " }" + " where {\n" + pattern + " }";
+                sparul = "DELETE FROM <" + this.graphURI +"> { " + pattern + " }" + " WHERE {\n" + pattern + " }";
                 this._jdbc_sparul_execute(sparul);
             }
         }
@@ -671,7 +706,7 @@ public class LiveUpdateDestination implements Destination{
         //according to the filters
         //do not delete special properties see below
         String tmpFilter = (filterWithLang.trim().length() > 0) ? "FILTER( \n" + filterWithLang + "). " : " ";
-        String sparul = "DELETE  FROM <" + this.graphURI + "> { " + this.subjectSPARULpattern + " ?p ?o } FROM <" + this.graphURI + "> ";
+        String sparul = "DELETE FROM <" + this.graphURI + "> { " + this.subjectSPARULpattern + " ?p ?o } FROM <" + this.graphURI + "> ";
         String where = " WHERE { " + subjectpattern + " ?p ?o . " + tmpFilter + '}';
         sparul += where;
             //TESTS>>>>>>>>>>>>
@@ -731,7 +766,7 @@ public class LiveUpdateDestination implements Destination{
     private void _jdbc_clean_sparul_delete_subresources(String log){
 		URI subject = this.uri;
         //TODO Make sure that this string is concatenated correctly
-		String sparul = "DELETE  FROM <" + this.graphURI + ">	{ ?subresource ?p  ?o .  } FROM <" + this.graphURI + ">";
+		String sparul = "DELETE FROM <" + this.graphURI + ">	{ ?subresource ?p  ?o .  } FROM <" + this.graphURI + ">";
         //TODO Make sure that this string is concatenated correctly
         String where = " where { " + this.subjectSPARULpattern + " ?somep ?subresource . ?subresource ?p  ?o . FILTER (?subresource LIKE <"
         + subject + "/%>)}";
