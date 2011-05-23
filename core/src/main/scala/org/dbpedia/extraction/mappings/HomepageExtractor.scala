@@ -25,29 +25,34 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
         "ru" -> Set("сайт")
     )
     
-    private val externalLinkSections = Map(
-        "de" -> "Weblinks?",
-        "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
-        "en" -> "External links?",
-        "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo)",
-        "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
-        "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
-        "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
-        "ru" -> "Ссылки"
-    )
+     private val externalLinkSections = Map(
+         "ca" -> "(?:Enllaços externs|Enllaço extern)",
+         "de" -> "Weblinks?",
+         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
+         "en" -> "External links?",
+         "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo)",
+         "eu" -> "Kanpo loturak?",
+         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
+         "ga" -> "(?:Naisc sheachtracha|Nasc sheachtrach)",
+         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
+         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
+         "ru" -> "Ссылки"
+     )
+ 
+     private val official = Map(
+       "ca" -> "oficial",
+       "en" -> "official",
+       "de" -> "offizielle",
+       "el" -> "(?:επίσημος|επίσημη)",
+       "eu" -> "ofiziala?"
+       "ga" -> "oifigiúil",
+       "fr" -> "officiel",
+       "pl" -> "oficjalna",
+       "pt" -> "oficial",
+       "es" -> "oficial"
+     )
 
-    private val official = Map(
-      "de" -> "offizielle",
-      "el" -> "(?:επίσημος|επίσημη)",
-      "en" -> "official",
-      "es" -> "oficial",
-      "fr" -> "officiel",
-      "pl" -> "oficjalna",
-      "pt" -> "oficial",
-      "ru" -> "официальный"
-    )
-
-    require(externalLinkSections.keySet.contains(language),"Homepage Extractor supports the following languages: " + externalLinkSections.keySet.mkString(", ")+"; not "+language)
+    require(propertyNames.keySet.contains(language),"Homepage Extractor supports the following languages: " + externalLinkSections.keySet.mkString(", ")+"; not "+language)
 
     private val homepageProperty = extractionContext.ontology.getProperty("foaf:homepage").get
 

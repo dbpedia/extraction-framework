@@ -12,12 +12,15 @@ class DisambiguationExtractor(extractionContext : ExtractionContext) extends Ext
     val language = extractionContext.language.wikiCode
 
     val disambiguationTitlePart = Map(
-        "de" -> " (Begriffsklärung)",
-        "el" -> " (αποσαφήνιση)",
-        "en" -> " (disambiguation)",
-        "es" -> " (desambiguación)",
-        "pt" -> " (desambiguação)",
-        "ru" -> " (значения)"
+         "ca" -> " (desambiguació)",
+         "de" -> " (Begriffsklärung)",
+         "el" -> " (αποσαφήνιση)",
+         "en" -> " (disambiguation)",
+         "es" -> " (desambiguación)",
+         "it" -> " (disambigua)",
+         "pl" -> " (ujednoznacznienie)",
+         "pt" -> " (desambiguação)",
+         "ru" -> " (значения)"
     )
 
     //require(Set("en", "el").contains(language))
