@@ -16,10 +16,10 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
     //private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
     private val propertyNames = Map(
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
-        "el" -> Set("ιστότοπος", "ιστοσελίδα", ),
+        "el" -> Set("ιστότοπος", "ιστοσελίδα"),
         "en" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),
         "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
-        "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web",),/*cleanup*/
+        "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
         "pl" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
         "ru" -> Set("сайт")
@@ -44,7 +44,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
        "en" -> "official",
        "de" -> "offizielle",
        "el" -> "(?:επίσημος|επίσημη)",
-       "eu" -> "ofiziala?"
+       "eu" -> "ofiziala?",
        "ga" -> "oifigiúil",
        "fr" -> "officiel",
        "pl" -> "oficjalna",

@@ -37,8 +37,8 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
     private val cardinality = Map(
         "en" -> "st|nd|rd|th",
         "el" -> "η|ης",
-        "pt" -> "°|.°|°.",
-        "es" -> "°|.°|°."
+        "pt" -> "°|\\.°|°\\.",
+        "es" -> "°|\\.°|°\\."
     )
     // -1 is for BC
     //TODO matches anything e.g. 20 bd

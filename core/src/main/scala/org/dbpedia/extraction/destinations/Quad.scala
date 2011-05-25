@@ -60,7 +60,7 @@ class Quad(	val extractionContext : ExtractionContext,
             if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string")
             {
             	sb append '"'
-            	escapeString(sb, value)
+            	escapeString(sb, value) //sb append value //#int escapeString(sb, value)
             	sb append "\""
 
                 sb append "@" + extractionContext.language.locale.getLanguage + " "
@@ -68,14 +68,14 @@ class Quad(	val extractionContext : ExtractionContext,
             else
             {
                 sb append '"'
-                escapeString(sb, value)
+                escapeString(sb, value) //sb append value //#int 
                 sb append "\"^^<" append datatype.uri append "> "
             }
         }
         else
         {
             sb append '<'
-            sb append value
+            sb append value //this must not be escaped, it is a URI/IRI
             sb append "> "
         }
 

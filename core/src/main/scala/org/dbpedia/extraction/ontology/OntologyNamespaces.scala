@@ -9,7 +9,7 @@ object OntologyNamespaces
 {
     //#int
     val specificLanguageDomain = Set("de", "el", "it", "ru")
-    val encodeAsIRI = Set("de", "el", "ru")
+    val encodeAsIRI = Set("de", "el", "en", "ru")
 
     val DBPEDIA_CLASS_NAMESPACE = "http://dbpedia.org/ontology/"
     val DBPEDIA_DATATYPE_NAMESPACE = "http://dbpedia.org/datatype/"
