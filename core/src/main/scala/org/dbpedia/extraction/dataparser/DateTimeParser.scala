@@ -121,171 +121,124 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
 
     private def catchTemplate(node: TemplateNode) : Option[Date] =
     {
-    	val templateName = extractionContext.redirects.resolve(node.title).decoded
+    	  val templateName = extractionContext.redirects.resolve(node.title).decoded.toLowerCase
 
-		val childrenChilds = for(child <- node.children) yield
-            { for(childrenChild @ TextNode(_, _)<- child.children) yield childrenChild }
+  		  val childrenChilds = for(child <- node.children) yield
+        { for(childrenChild @ TextNode(_, _)<- child.children) yield childrenChild }
 
-        if (language == "en")
-        {
-            if (templateName == "Birth-date")
-            {
-                for (property <- node.property("1");
-                     TextNode(text, _) <- property.children)
-                {
-                    return findDate(text)
-                }
-            }
-            // http://en.wikipedia.org/wiki/Template:Birth_date_and_age
+      	//maps template property position to year month & day (converted to lowercase)
+    	  val templateDateMapping = Map(
+    	      // http://en.wikipedia.org/wiki/Template:Birth_date_and_age
             // {{Birth date|year_of_birth|month_of_birth|day_of_birth|...}}
             // Sometimes the templates are used wrong like this:
             // {{birth date|df=yes|1833|10|21}}
             // TODO: fix problem with gYear gDate e.q. Alfred Nobel
-            else if (templateName == "Birth date and age" || templateName == "Birth date and age2" ||
-                templateName == "Death date and age" || templateName == "Birth date" ||
-                templateName == "Death date" || templateName == "Bda" || templateName == "Dob")
-            {
-                for (yearProperty <- node.property("1"); monthProperty <- node.property("2"); dayProperty <- node.property("3");
-                    year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                    month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                    day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption)
-                {
-                    try
-                    {
-                        return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
-                    }
-                    catch
-                    {
-                        case e : IllegalArgumentException =>
-                    }
-                }
-            }
-            // http://en.wikipedia.org/wiki/Template:BirthDeathAge
+    	        
+    	      // http://en.wikipedia.org/wiki/Template:BirthDeathAge
             // {{BirthDeathAge|birth_or_death_flag|year_of_birth|month_of_birth|day_of_birth|year_of_death|month_of_death|day_of_death|...}}
-            else if (templateName == "Birth Death Age")
-            {
-                // gets the text from the single textNode of the first PropertyNode
-                // {{BirthDeathAge|BIRTH_OR_DEATH_FLAG|year_of_birth|month_of_birth|day_of_birth|year_of_death|month_of_death|day_of_death|...}}
-                for (property <- node.property("1")) property.retrieveText match
+    	      //gets the text from the single textNode of the first PropertyNode
+            // {{BirthDeathAge|BIRTH_OR_DEATH_FLAG|year_of_birth|month_of_birth|day_of_birth|year_of_death|month_of_death|day_of_death|...}}
+            "en" -> Map(
+                    "birth date and age"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age"
+                    "birth date and age2" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age2"
+                    "death date and age"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date and age"
+                    "birth date"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date"
+                    "death date"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date"
+                    "bda"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Bda"
+                    "dob"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Dob"
+                    "start date"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Start date"
+                    //Contains only text, just call findDate()  "1" is the property to look up for
+                    "birth-date"          -> Map ("text" -> "1"),                              //"Birth-date"
+                    //conditional mapping .. for multiple matching ifPropertyNumHasValue could be a regex (not implemented for multiple)
+                    "birthdeathage"       -> Map ("ifPropertyNum" -> "1", "ifPropertyNumHasValue" -> "B", //"BirthDeathAge"
+                                                  "year" -> "2", "month"-> "3", "day" -> "4",
+                                                  "elseYear" -> "4", "elseMonth"-> "5", "elseDay" -> "6")
+                    ),
+            
+            //alphabetically for other languages
+            
+            "el" -> Map(
+                    "ημερομηνία γέννησης και ηλικία"-> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "ημερομηνία θανάτου και ηλικία" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "ημερομηνία γέννησης"           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "ηθηλ"                          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "ηγη"                           -> Map ("year" -> "1", "month"-> "2", "day" -> "3")            
+                    ),
+            "pt" -> Map(
+                    "Nascimento"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "Dni"         -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "Dnibr"       -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "DataExt"     -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "Falecimento" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "Morte"       -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "Falecimento2"-> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "Dtlink"      -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+                    "Dtext"       -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+                    )
+    	  )
+    	
+    	
+    	
+        if (templateDateMapping.keySet.contains(language) &&
+            templateDateMapping(language).keySet.contains(templateName))
+        {
+            val currentTemplate = templateDateMapping(language)(templateName)
+
+            //check for text template e.g. Birth-date
+            if (currentTemplate.keySet.contains("text")) {
+                // find date in "text" value property
+                for (property <- node.property(currentTemplate.getOrElse("text", ""));
+                       TextNode(text, _) <- property.children)
                 {
-                    case Some("B") =>
+                    return findDate(text)
+                }
+            }
+            else
+            {
+                var yearNum  = currentTemplate.getOrElse("year",  "")
+                var monthNum = currentTemplate.getOrElse("month", "")
+                var dayNum   = currentTemplate.getOrElse("day",   "")
+
+                //check for conditional mapping
+                if (currentTemplate.keySet.contains("ifPropertyNum"))
+                {
+                    //evaluate !if
+                    val propNum = currentTemplate.getOrElse("ifPropertyNum", "")
+                    val propVal = currentTemplate.getOrElse("ifPropertyNumHasValue", "")
+
+                    for (property <- node.property(propNum);
+                        TextNode(text, _) <- property.children)
                     {
-                        for (yearProperty <- node.property("2"); monthProperty <- node.property("3"); dayProperty <- node.property("4");
-                            year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                            month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                            day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption)
+                        if (text !=  propVal)
                         {
-                            try
-                            {
-                                return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
-                            }
-                            catch
-                            {
-                                case e : IllegalArgumentException =>
-                            }
+                            yearNum  = currentTemplate.getOrElse("elseYear",  "")
+                            monthNum = currentTemplate.getOrElse("elseMonth", "")
+                            dayNum   = currentTemplate.getOrElse("elseDay",   "")
+                        }
+
+                    }
+                }
+
+                // get values from defined year month day
+                for (yearProperty <- node.property(yearNum);
+                     monthProperty <- node.property(monthNum);
+                     dayProperty <- node.property(dayNum);
+                     year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption;
+                     month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
+                     day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption)
+                    {
+                        try
+                        {
+                            return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
+                        }
+                        catch
+                        {
+                            case e : IllegalArgumentException =>
                         }
                     }
-                    case _ =>
-                    {
-                        for (yearProperty <- node.property("5"); monthProperty <- node.property("6"); dayProperty <- node.property("7");
-                            year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                            month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                            day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption)
-                        {
-                            try
-                            {
-                                return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
-                            }
-                            catch
-                            {
-                                case e : IllegalArgumentException =>
-                            }
-                        }
-                    }
-                }
             }
         }
-        else if (language == "el")
-        {
-            //birth_year|birth_month|birth_day}} //same, parse the first 3 each time
-            //death_year|death_month|death_dat|birth_year|birth_month|birth_day}}
-            if (templateName.toLowerCase == "ηγη"  || templateName.toLowerCase == "ημερομηνία γέννησης και ηλικία" ||
-                templateName.toLowerCase == "ηθηλ" || templateName.toLowerCase == "ημερομηνία θανάτου και ηλικία" ||
-                templateName.toLowerCase == "ημερομηνία γέννησης")
-            {
-                for (yearProperty <- node.property("1"); monthProperty <- node.property("2"); dayProperty <- node.property("3");
-                    year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                    month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                    day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption)
-                {
-                    try
-                    {
-                        return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
-                    }
-                    catch
-                    {
-                        case e : IllegalArgumentException =>
-                    }
-                }
 
-            }
-        }
-        else if (language == "pt")
-        {
-            //http://pt.wikipedia.org/wiki/Predefini%C3%A7%C3%A3o:Dni
-            // Sometimes the templates are used wrong like this:
-            // {{dni|lang=pt-br|21|2|1678}}
-
-            //TODO: improve the extraction for pt dates
-
-            if (templateName.toLowerCase == "Nascimento"  || templateName.toLowerCase == "Dni" ||
-                templateName.toLowerCase == "Dnibr" || templateName.toLowerCase == "DataExt" ||
-                templateName.toLowerCase == "Falecimento" || templateName.toLowerCase == "Morte" ||
-                templateName.toLowerCase == "Falecimento2" || templateName.toLowerCase == "Dtlink" ||
-                templateName.toLowerCase == "Dtext")
-            {
-                for (dayProperty <- node.property("1"); monthProperty <- node.property("2"); yearProperty <- node.property("3");
-                    day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                    month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                    year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption)
-                {
-                    try
-                    {
-                        return Some(new Date(Some(day.toInt), Some(month.toInt), Some(year.toInt), datatype))
-                    }
-                    catch
-                    {
-                        case e : IllegalArgumentException =>
-                    }
-                }
-
-            }
-        }
-        else if (language == "es")
-        {
-            //http://pt.wikipedia.org/wiki/Predefini%C3%A7%C3%A3o:Dni
-            // Sometimes the templates are used wrong like this:
-            // {{dni|lang=pt-br|21|2|1678}}
-            if (templateName.toLowerCase == "Fecha"  || templateName.toLowerCase == "Fecha de inicio" ||
-                templateName.toLowerCase == "Edad" || templateName.toLowerCase == "Fecha de lanzamiento")
-            {
-                for (dayProperty <- node.property("1"); monthProperty <- node.property("2"); yearProperty <- node.property("3");
-                    day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                    month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                    year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption)
-                {
-                    try
-                    {
-                        return Some(new Date(Some(day.toInt), Some(month.toInt), Some(year.toInt), datatype))
-                    }
-                    catch
-                    {
-                        case e : IllegalArgumentException =>
-                    }
-                }
-
-            }
-        }
        	logger.log(Level.FINE, "Template unknown: " + node.title);
         return None
     }

@@ -159,8 +159,8 @@ object MyStack {
           new WikiTitle("test template"),0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
         )
     )
-    println("dumping subtemplate")
-    page.children.foreach(_.dump(0))
+    //println("dumping subtemplate")
+    //page.children.foreach(_.dump(0))
     new Stack[Node]().pushAll(page.children.reverse)
   }
 
@@ -178,11 +178,11 @@ object TimeMeasurement {
   }
 }
 
-class MyStringTrimmer(s : String){
-  val str = s
+class MyStringTrimmer(val str : String){
   //reduce multiple whitespaces and lines with only whitespaces. then trim
   def fullTrim() : String = str.replaceAll("\\r?\\n\\s{1,}\\r?\\n", "\n\n").replaceAll("^\\s{1,}\\r?\\n", "\n").replaceAll("\\r?\\n\\s{1,}$", "\n").replaceAll("\\s{2,}", " ")
 }
+
 object MyStringTrimmer {
   implicit def String2MyStringTrimmer(s : String) : MyStringTrimmer = new MyStringTrimmer(s)
   implicit def MyStringTrimmer2String(s : MyStringTrimmer) : String = s.str
