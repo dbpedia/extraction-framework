@@ -86,7 +86,7 @@ object VarBinder {
             }
             case "list-end" =>    println("end list - you should not see this")
             case "var" => {
-              val endMarkerNode = if(tplIt.size > 0) Some(tplIt.pop) else None
+              val endMarkerNode = tplIt.findNextNonTplNode
               val binding = recordVar(currNodeFromTemplate.asInstanceOf[TemplateNode], endMarkerNode, pageIt)
               bindings.addBinding(binding._1, binding._2)
             }
@@ -138,7 +138,7 @@ object VarBinder {
               pageIt.pop
             }
             case _ => {
-              printMsg("you should not see this: shouldve been detected earlier")
+              printMsg("you should not see this: shouldve been detected earlier (node type does not match)")
               throw new WiktionaryException("the template does not match the page: unmatched template property", bindings, Some(currNodeFromPage))
             }
           }
@@ -162,7 +162,7 @@ object VarBinder {
               }
             }
             case _ => {
-              printMsg("you should not see this: shouldve been detected earlier")
+              printMsg("you should not see this: shouldve been detected earlier (node type does not match)")
               throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
             }
         }
@@ -171,7 +171,7 @@ object VarBinder {
       case _ => {
         if(currNodeFromPage.getClass != currNodeFromTemplate.getClass){
           restore(pageIt, pageItCopy) //still needed? dont think so
-          printMsg("you should not see this: shouldve been detected earlier")
+          printMsg("you should not see this: shouldve been detected earlier (node type does not match)")
           throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
         } else {
           if(!(currNodeFromPage.isInstanceOf[SectionNode] && currNodeFromTemplate.isInstanceOf[SectionNode] &&
@@ -181,7 +181,8 @@ object VarBinder {
           } else {
             //sections with different level
             //TODO check canEqual
-            printMsg("you should not see this: shouldve been detected earlier")
+            printMsg("you should not see this: shouldve been detected earlier (section nodes with different level)")
+            restore(pageIt, pageItCopy)
             throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
           }
         }
@@ -235,7 +236,7 @@ object VarBinder {
       //when there is no end marker, we take everything we got
       varValue ++=  pageIt
       pageIt.clear
-      //println("NO ENDMARKER")
+      printMsg("no endmarker. taking all.")
     } else {
       val endMarkerNode = possibeEndMarkerNode.get
       printMsg("endmarker "+endMarkerNode.dumpStrShort)
@@ -274,6 +275,8 @@ object VarBinder {
               if(!part2.isEmpty){
                 printMsg("putting back >"+part2+"<")
                 pageIt.prependString(part2)
+              } else {
+                printMsg("putting nothing back")
               }
               break
             }
@@ -285,7 +288,9 @@ object VarBinder {
         }
       }
       if(!endMarkerFound){
-        throw new VarException
+        throw new WiktionaryException("endMarker of variable not found", new VarBindingsHierarchical, None)
+      } else {
+        pageIt push endMarkerNode
       }
     }
     //return tuple consisting of var name and var value
@@ -381,7 +386,7 @@ class VarBindingsHierarchical (){
   /**
    * given a variable name of a sense-bound var, retrieve a mapping from sense-identifier to binding (distinct)
    */
-  def getSenseBoundVarBinding(key : String) : Map[List[Node], List[Node]] = {
+  def getFirstSenseBoundVarBinding(key : String) : Map[List[Node], List[Node]] = {
     val ret = new HashMap[List[Node], List[Node]]()
     for(child <- children){
       if(child.bindings.contains(key)){
@@ -393,7 +398,7 @@ class VarBindingsHierarchical (){
           ret += (sense.get -> binding)
         }
       } else {
-        ret ++= child.getSenseBoundVarBinding(key)
+        ret ++= child.getFirstSenseBoundVarBinding(key)
       }
     }
     ret
@@ -492,7 +497,7 @@ class VarBindingsHierarchical (){
     val senseBindingsConverted : Map[List[Node],Map[String, List[Node]]] = new HashMap()
     //get the sense-bound vars (each sense can have a own binding for that var)
     for(varName <- VarBindingsHierarchical.senseVars){
-      val senseBindings = getSenseBoundVarBinding(varName)
+      val senseBindings = getFirstSenseBoundVarBinding(varName)
       val senses = senseBindings.keySet
       for(sense <- senses){
         if(!senseBindingsConverted.contains(sense)){

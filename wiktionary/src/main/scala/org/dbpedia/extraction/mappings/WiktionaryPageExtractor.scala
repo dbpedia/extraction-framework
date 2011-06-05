@@ -32,10 +32,10 @@ import WiktionaryLogging._
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */
 
-class WiktionaryPageExtractor(val language : String) extends Extractor {
+class WiktionaryPageExtractor(val language : String, val debugging : Boolean) extends Extractor {
   private val possibleLanguages = Set("en", "de")
   require(possibleLanguages.contains(language))
-
+  WiktionaryLogging.enabled = debugging
   //load config from xml
   private val config = XML.loadFile("config-"+language+".xml")
 
@@ -81,7 +81,7 @@ class WiktionaryPageExtractor(val language : String) extends Extractor {
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
 
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
-      for(prolog <- config \ "templates" \ "prologs" \ "template"){
+      for(prolog <- config \ "page" \ "prologs" \ "template"){
         val prologtpl = Tpl.fromNode(prolog)
          try {
           proAndEpilogBindings.append( (prologtpl, parseNodesWithTemplate(prologtpl.tpl, pageStack)) )
@@ -92,7 +92,7 @@ class WiktionaryPageExtractor(val language : String) extends Extractor {
 
       //handle epilog (ending) (e.g. "links to other languages") by parsing the page backwards
       val rev = new Stack[Node] pushAll pageStack //reversed
-      for(epilog <- config \ "templates" \ "epilogs" \ "template"){
+      for(epilog <- config \ "page" \ "epilogs" \ "template"){
         val epilogtpl = Tpl.fromNode(epilog)
         try {
           proAndEpilogBindings.append( (epilogtpl, parseNodesWithTemplate(epilogtpl.tpl, rev)) )
@@ -122,7 +122,7 @@ class WiktionaryPageExtractor(val language : String) extends Extractor {
         consumed = false
         for(block <- curOpenBlocks ++ (if(curOpenBlocks.last.blocks.isDefined){List[Block](curOpenBlocks.last.blocks.get)} else {List[Block]()})){
           if(block.indTpl == null){
-            //continue - the "page" block has no indicator tpl, it starts implicitly with the page
+            //continue - the "page" block has no indicator template, it starts implicitly with the page
           } else {
             println(pageStack.take(1).map(_.dumpStrShort).mkString)
             try {
@@ -168,7 +168,7 @@ class WiktionaryPageExtractor(val language : String) extends Extractor {
         val curBlock = curOpenBlocks.last
         //try matching this blocks templates
         for(tpl <- curBlock.templates){
-          println(pageStack.take(1).map(_.dumpStrShort).mkString)
+          //println(pageStack.take(1).map(_.dumpStrShort).mkString)
           try {
             //println("vs")
             //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
@@ -193,8 +193,9 @@ class WiktionaryPageExtractor(val language : String) extends Extractor {
       duration : Long => println("took "+ duration +"ms")
     }
     println(""+quads.size+" quads extracted for "+word)
-    quads.foreach((q : Quad) => println(q.renderNTriple))
-    new Graph(quads.sortWith((q1, q2)=> q1.subject.uri.length < q2.subject.uri.length).toList)
+    val quadsSortedImmutable = quads.sortWith((q1, q2)=> q1.subject.uri.compare(q2.subject.uri) < 0).toList
+    quadsSortedImmutable.foreach((q : Quad) => println(q.renderNTriple))
+    new Graph(quadsSortedImmutable)
   }
 
   def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical) : List[Quad] = {
@@ -211,13 +212,16 @@ class WiktionaryPageExtractor(val language : String) extends Extractor {
         if(varr.senseBound){
           //handle sense bound vars (e.g. meaning)
           //TODO use getAllSenseBoundVarBindings function
-          val bindings = blockBindings.getSenseBoundVarBinding(varr.name)
-          bindings.foreach({case (sense, binding) =>
-            //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
-            val objStr = binding.myToString
-            val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-            quads += new Quad(wiktionaryDataset, new IriRef(blockIris(block).uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
-            //TODO triples to connect blocks to its senses (maybe collect all senses here, make distinct, then build triples after normal bindingtriples)
+          val bindings = blockBindings.getAllSenseBoundVarBindings(varr.name)
+          bindings.foreach({case (sense, senseBindings) =>
+            senseBindings.foreach((binding)=>{
+              //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
+              val objStr = binding.myToString
+              val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
+              quads += new Quad(wiktionaryDataset, new IriRef(blockIris(block).uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
+              //TODO triples to connect blocks to its senses (maybe collect all senses here, make distinct, then build triples after normal bindingtriples)
+            })
+
           })
         } else {
           //handle non-sense bound vars - they are related to the whole block/usage (e.g. hyphenation)
