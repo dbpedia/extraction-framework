@@ -57,7 +57,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
   val tripleContext = new IriRef(ns)
 
   //to cache last used blockIris
-  val blockIris = new HashMap[Block, IriRef]
+  val blockIris = new HashMap[String, IriRef]
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
@@ -71,13 +71,9 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
     measure {
 
       val pageConfig = Page.fromNode((config \ "page").head)
-      blockIris(pageConfig) = new IriRef(subjectUri)
+      blockIris("page") = new IriRef(subjectUri)
 
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse)
-
-      // val allBlocksFlat = List(pageConfig) ++ (config \ "page" \\ "block").map(Block.fromNode(_))
-      val curOpenBlocks = new ListBuffer[Block]()
-      curOpenBlocks append pageConfig
 
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
 
@@ -110,18 +106,36 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
          quads appendAll handleBlockBinding(pageConfig, tpl, tplBindings)
       }})
 
+      //keep track where we are in the page block hierarchy
+      val curOpenBlocks = new ListBuffer[Block]()
+      curOpenBlocks append pageConfig
+
+      //keep track if we consumed at least one node in this while run - if a drop that node at the end
       var consumed = false
       while(pageStack.size > 0){
-        //Thread sleep 500
         // try recognizing block starts of blocks. if recognized we go somewhere UP the hierarchy (the block ended) or one step DOWN (new sub block)
         // each block has a "indicator-template" (indTpl)
         // when it matches, the block starts. and from that template we get bindings that describe the block
 
-        //debug: print the page (the next 2 nodes only)
-        //println()
-
         consumed = false
-        for(block <- curOpenBlocks ++ (if(curOpenBlocks.last.blocks.isDefined){List[Block](curOpenBlocks.last.blocks.get)} else {List[Block]()})){
+        println("open blocks")
+        for(block <- curOpenBlocks){
+          if(block.indTpl != null){
+            println(block.indTpl.name)
+          } else {
+            println("page block")
+          }
+        }
+        println("possible blocks")
+        val possibleBlocks = curOpenBlocks ++ (if(curOpenBlocks.last.blocks.isDefined){List[Block](curOpenBlocks.last.blocks.get)} else {List[Block]()})
+        for(block <- possibleBlocks){
+          if(block.indTpl != null){
+            println(block.indTpl.name)
+          } else {
+            println("page block")
+          }
+        }
+        for(block <- possibleBlocks){
           if(block.indTpl == null){
             //continue - the "page" block has no indicator template, it starts implicitly with the page
           } else {
@@ -133,18 +147,22 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
               //no exception -> success -> stuff below here will be executed on success
               println("successfully recognized block start "+block.indTpl.name)
               consumed = true
-              val newOpen = curOpenBlocks.takeWhile((cand : Block) => !cand.eq(block))
-              if(newOpen.size == curOpenBlocks.size){
-                //one step down/deeper
+
+              //check where in the hierarchy the new opended block is
+              if(!curOpenBlocks.exists((b:Block)=>if(b.indTpl == null || block.indTpl == null){false} else {b.indTpl.name == block.indTpl.name})){
+                //the new block is not up in the hierarchy
+                //one step down/deeper is the only possible alternative
 
                 //build a uri for the block
-                val blockIdentifier = new StringBuffer(blockIris(curOpenBlocks.last).uri)
+                val blockName = if(curOpenBlocks.last.indTpl != null){curOpenBlocks.last.indTpl.name} else {"page"}
+                val blockIdentifier = new StringBuffer(blockIris(blockName).uri)
+
                 block.indTpl.vars.foreach((varr : Var) => {
                   //concatenate all binding values of the block indicator tpl (sufficient?)
                   blockIdentifier append "-"+blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
                 })
                 val blockIri = new IriRef(blockIdentifier.toString)
-                blockIris(block) = blockIri
+                blockIris(block.indTpl.name) = blockIri
                 println("new block "+blockIdentifier.toString)
                 //generate triples that indentify the block
                 block.indTpl.vars.foreach((varr : Var) => {
@@ -154,9 +172,18 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
                 })
 
                 //generate a triple that connects the last block to the new block
-                quads += new Quad(wiktionaryDataset, blockIris(curOpenBlocks.last), new IriRef(curOpenBlocks.last.blocks.get.property), blockIri, tripleContext)
+                val lastBlockName = if(curOpenBlocks.last.indTpl != null){curOpenBlocks.last.indTpl.name} else {"page"}
+                quads += new Quad(wiktionaryDataset, blockIris(lastBlockName), new IriRef(curOpenBlocks.last.blocks.get.property), blockIri, tripleContext)
                 curOpenBlocks append curOpenBlocks.last.blocks.get
               } else {
+                //the new block is one step down the hierachy
+                val newOpen = new ListBuffer[Block]
+                println("go up - new:"+newOpen.size)
+                var seen = false
+                curOpenBlocks.foreach((b : Block) => {
+                  if(!seen){newOpen append b}
+                  if(b.indTpl != null && b.indTpl.name == block.indTpl.name){seen = true}
+                })
                 curOpenBlocks.clear()
                 curOpenBlocks.appendAll(newOpen) // up
               }
@@ -218,7 +245,8 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
               //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
               val objStr = binding.myToString
               val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-              quads += new Quad(wiktionaryDataset, new IriRef(blockIris(block).uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
+              val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
+              quads += new Quad(wiktionaryDataset, new IriRef(blockIris(blockName).uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
               //TODO triples to connect blocks to its senses (maybe collect all senses here, make distinct, then build triples after normal bindingtriples)
             })
 
@@ -229,7 +257,12 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
           for(binding <- bindings){
             val objStr = binding.myToString
             val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-            quads += new Quad(wiktionaryDataset, blockIris(block), new IriRef(varr.property), obj, tripleContext)
+            try{
+              val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
+              quads += new Quad(wiktionaryDataset, blockIris(blockName), new IriRef(varr.property), obj, tripleContext)
+            } catch {
+              case _ => println("no key for "+block.indTpl.name)
+            }
           }
         }
       })
