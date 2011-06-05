@@ -48,9 +48,10 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
         )
       ).toMap
 
-  val ns =            (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("ns") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@value").text
-  val blockProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("blockProperty") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@value").text
-  val senseProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseProperty") }).getOrElse(<propery uri="http://undefined.com/"/>)) \ "@value").text
+  val ns =            (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("ns") }).getOrElse(<propery value="http://undefined.com/"/>)) \ "@value").text
+  val blockProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("blockProperty") }).getOrElse(<propery value="http://undefined.com/"/>)) \ "@value").text
+  val senseProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseProperty") }).getOrElse(<propery value="http://undefined.com/"/>)) \ "@value").text
+  val senseIdVarName = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseVarName") }).getOrElse(<propery value="meaning_id"/>)) \ "@value").text
 
   val wiktionaryDataset : Dataset = new Dataset("wiktionary")
   val tripleContext = new IriRef(ns)
@@ -211,8 +212,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
       tpl.vars.foreach((varr : Var) => {
         if(varr.senseBound){
           //handle sense bound vars (e.g. meaning)
-          //TODO use getAllSenseBoundVarBindings function
-          val bindings = blockBindings.getAllSenseBoundVarBindings(varr.name)
+          val bindings = blockBindings.getAllSenseBoundVarBindings(varr.name, senseIdVarName)
           bindings.foreach({case (sense, senseBindings) =>
             senseBindings.foreach((binding)=>{
               //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))

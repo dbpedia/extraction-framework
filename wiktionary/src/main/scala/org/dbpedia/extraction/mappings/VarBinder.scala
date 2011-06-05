@@ -386,19 +386,18 @@ class VarBindingsHierarchical (){
   /**
    * given a variable name of a sense-bound var, retrieve a mapping from sense-identifier to binding (distinct)
    */
-  def getFirstSenseBoundVarBinding(key : String) : Map[List[Node], List[Node]] = {
+  def getFirstSenseBoundVarBinding(key : String, meaningIdVarName : String) : Map[List[Node], List[Node]] = {
     val ret = new HashMap[List[Node], List[Node]]()
     for(child <- children){
       if(child.bindings.contains(key)){
         val binding = child.bindings(key)
-        //TODO use config xml for the "meaning_id" var-name
         //TODO expand notations like "[1-3] xyz" to "[1] xyz\n[2] xyz\n[3} xyz"
-        val sense = getFirstBinding("meaning_id");
+        val sense = getFirstBinding(meaningIdVarName);
         if(sense.isDefined){
           ret += (sense.get -> binding)
         }
       } else {
-        ret ++= child.getFirstSenseBoundVarBinding(key)
+        ret ++= child.getFirstSenseBoundVarBinding(key, meaningIdVarName)
       }
     }
     ret
@@ -407,14 +406,13 @@ class VarBindingsHierarchical (){
   /**
    * given a variable name of a sense-bound var, retrieve a mapping from sense-identifier to binding (with multiple values)
    */
-  def getAllSenseBoundVarBindings(key : String) : Map[List[Node], ListBuffer[List[Node]]] = {
+  def getAllSenseBoundVarBindings(key : String, meaningIdVarName : String) : Map[List[Node], ListBuffer[List[Node]]] = {
     val ret =  new HashMap[List[Node], ListBuffer[List[Node]]]()
     for(child <- children){
       if(child.bindings.contains(key)){
         val binding = child.bindings(key)
-        //TODO use config xml for the "meaning_id" var-name
         //TODO expand notations like "[1-3] xyz" to "[1] xyz\n[2] xyz\n[3} xyz"
-        val sense = getFirstBinding("meaning_id");
+        val sense = getFirstBinding(meaningIdVarName);
         if(sense.isDefined){
           if(!ret.contains(sense.get)){
             ret += (sense.get -> new ListBuffer[List[Node]]())
@@ -422,7 +420,7 @@ class VarBindingsHierarchical (){
           ret(sense.get).append(binding)
         }
       } else {
-        val childBindings = child.getAllSenseBoundVarBindings(key)
+        val childBindings = child.getAllSenseBoundVarBindings(key, meaningIdVarName)
         childBindings.foreach({case(sense, bindings) => {
           if(!ret.contains(sense)){
             ret += (sense -> new ListBuffer[List[Node]]())
@@ -452,69 +450,6 @@ class VarBindingsHierarchical (){
       println(prefix+"}")
     }
   }
-
-  //make the structure absolutely flat, deprecated
-  def flat : VarBindingsHierarchical = {
-    val copi = new VarBindingsHierarchical
-    for(child <- children){
-      copi addChild child.flat
-    }
-    for(key <- bindings.keySet){
-      copi.addBinding(key, bindings.apply(key))
-    }
-    copi
-  }
-
-  /**
-   * deprecated
-   */
-  def flatLangPos() : Map[Tuple2[String,String], VarBindingsHierarchical] = {
-    val ret : Map[Tuple2[String,String], VarBindingsHierarchical] = new HashMap()
-    for(child <- children){ //assumes that this is the top level VarBindingsHierachical object and that each child represents a (lang,pos)-block
-      val lang = child.getFirstBinding("language")
-      val pos  = child.getFirstBinding("pos")
-      if(lang.isDefined && pos.isDefined){
-        val langStr = lang.get.apply(0).asInstanceOf[TextNode].text   //assumes that the lang var is bound to e.g. List(TextNode(english))
-        val posStr  = pos.get.apply(0).asInstanceOf[TextNode].text    //assumes that the pos  var is bound to e.g. List(TextNode(verb))
-        ret += ((langStr, posStr) -> child)
-      }
-    }
-    ret
-  }
-
-  /**
-   * deprecated
-   */
-  def sortByVars() : Tuple2[Map[String, List[Node]], Map[List[Node],Map[String, List[Node]]]] = {
-    val normalBindings : Map[String, List[Node]]= new HashMap()
-    //get normal var bindings out (these that are unique to a (word,lang,pos) combination)
-    for(varName <- VarBindingsHierarchical.vars){
-      val currBindings = getFirstBinding(varName)
-      if(currBindings.isDefined){
-        normalBindings += (varName -> currBindings.get)
-      }
-    }
-    val senseBindingsConverted : Map[List[Node],Map[String, List[Node]]] = new HashMap()
-    //get the sense-bound vars (each sense can have a own binding for that var)
-    for(varName <- VarBindingsHierarchical.senseVars){
-      val senseBindings = getFirstSenseBoundVarBinding(varName)
-      val senses = senseBindings.keySet
-      for(sense <- senses){
-        if(!senseBindingsConverted.contains(sense)){
-          senseBindingsConverted += (sense -> new HashMap())
-        }
-        senseBindingsConverted(sense) += (varName -> senseBindings(sense))
-      }
-    }
-    return (normalBindings, senseBindingsConverted)
-  }
 }
 
-
-object VarBindingsHierarchical {
-  //TODO irgh, use config xml - then this is deprecated
-  val vars = Set("hyphenation-singular", "hyphenation-plural", "pronunciation-singular", "pronunciation-plural",
-    "audio-singular", "audio-plural")
-  val senseVars = Set("meaning")
-}
 
