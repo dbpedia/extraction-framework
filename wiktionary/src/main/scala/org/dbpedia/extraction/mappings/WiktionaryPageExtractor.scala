@@ -118,46 +118,28 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
         // when it matches, the block starts. and from that template we get bindings that describe the block
 
         consumed = false
-        println("open blocks")
-        for(block <- curOpenBlocks){
-          if(block.indTpl != null){
-            println(block.indTpl.name)
-          } else {
-            println("page block")
-          }
-        }
-        println("possible blocks")
         val possibleBlocks = curOpenBlocks ++ (if(curOpenBlocks.last.blocks.isDefined){List[Block](curOpenBlocks.last.blocks.get)} else {List[Block]()})
-        for(block <- possibleBlocks){
-          if(block.indTpl != null){
-            println(block.indTpl.name)
-          } else {
-            println("page block")
-          }
-        }
+
         for(block <- possibleBlocks){
           if(block.indTpl == null){
             //continue - the "page" block has no indicator template, it starts implicitly with the page
           } else {
-            println(pageStack.take(1).map(_.dumpStrShort).mkString)
+            //println(pageStack.take(1).map(_.dumpStrShort).mkString)
             try {
               //println("vs")
               //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
               val blockIndBindings =  parseNodesWithTemplate(block.indTpl.tpl.clone, pageStack)
               //no exception -> success -> stuff below here will be executed on success
-              println("successfully recognized block start "+block.indTpl.name)
               consumed = true
 
               //check where in the hierarchy the new opended block is
               if(!curOpenBlocks.exists((b:Block)=>if(b.indTpl == null || block.indTpl == null){false} else {b.indTpl.name == block.indTpl.name})){
                 //the new block is not up in the hierarchy
                 //one step down/deeper is the only possible alternative
-
                curOpenBlocks append curOpenBlocks.last.blocks.get
               } else {
                 //the new block somewhere up the hierarchy
                 val newOpen = new ListBuffer[Block]
-                println("go up - new:"+newOpen.size)
                 var seen = false
                 curOpenBlocks.foreach((b : Block) => {
                   if(!seen){newOpen append b}
@@ -166,14 +148,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
                 curOpenBlocks.clear()
                 curOpenBlocks.appendAll(newOpen) // up
               }
-               println("open blocks")
-        for(block <- curOpenBlocks){
-          if(block.indTpl != null){
-            println(block.indTpl.name)
-          } else {
-            println("page block")
-          }
-        }
+
               //build a uri for the block
               val lastBlockName = if(curOpenBlocks.size > 2){curOpenBlocks(curOpenBlocks.size - 2).indTpl.name} else {"page"}
               val lastBlock = curOpenBlocks(curOpenBlocks.size - 2)
@@ -186,7 +161,6 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
               })
               val blockIri = new IriRef(blockIdentifier.toString)
               blockIris(block.indTpl.name) = blockIri
-              println("new block "+blockIdentifier.toString)
               //generate triples that indentify the block
               block.indTpl.vars.foreach((varr : Var) => {
                 val objStr = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
@@ -212,7 +186,6 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
             //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
             val blockBindings =  parseNodesWithTemplate(tpl.tpl.clone, pageStack)
             //no exception -> success -> stuff below here will be executed on success
-            println("successfully extracted data")
             consumed = true
             //generate triples
             //println(tpl.name +": "+ blockBindings.dump())
@@ -267,12 +240,9 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
           for(binding <- bindings){
             val objStr = binding.myToString
             val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-            try{
-              val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
-              quads += new Quad(wiktionaryDataset, blockIris(blockName), new IriRef(varr.property), obj, tripleContext)
-            } catch {
-              case _ => println("no key for "+block.indTpl.name)
-            }
+            val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
+            quads += new Quad(wiktionaryDataset, blockIris(blockName), new IriRef(varr.property), obj, tripleContext)
+
           }
         }
       })
