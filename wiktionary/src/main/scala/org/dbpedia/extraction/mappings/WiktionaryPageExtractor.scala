@@ -153,30 +153,9 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
                 //the new block is not up in the hierarchy
                 //one step down/deeper is the only possible alternative
 
-                //build a uri for the block
-                val blockName = if(curOpenBlocks.last.indTpl != null){curOpenBlocks.last.indTpl.name} else {"page"}
-                val blockIdentifier = new StringBuffer(blockIris(blockName).uri)
-
-                block.indTpl.vars.foreach((varr : Var) => {
-                  //concatenate all binding values of the block indicator tpl (sufficient?)
-                  blockIdentifier append "-"+blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
-                })
-                val blockIri = new IriRef(blockIdentifier.toString)
-                blockIris(block.indTpl.name) = blockIri
-                println("new block "+blockIdentifier.toString)
-                //generate triples that indentify the block
-                block.indTpl.vars.foreach((varr : Var) => {
-                  val objStr = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
-                  val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-                  quads += new Quad(wiktionaryDataset, blockIri, new IriRef(varr.property), obj, tripleContext)
-                })
-
-                //generate a triple that connects the last block to the new block
-                val lastBlockName = if(curOpenBlocks.last.indTpl != null){curOpenBlocks.last.indTpl.name} else {"page"}
-                quads += new Quad(wiktionaryDataset, blockIris(lastBlockName), new IriRef(curOpenBlocks.last.blocks.get.property), blockIri, tripleContext)
-                curOpenBlocks append curOpenBlocks.last.blocks.get
+               curOpenBlocks append curOpenBlocks.last.blocks.get
               } else {
-                //the new block is one step down the hierachy
+                //the new block somewhere up the hierarchy
                 val newOpen = new ListBuffer[Block]
                 println("go up - new:"+newOpen.size)
                 var seen = false
@@ -187,6 +166,37 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
                 curOpenBlocks.clear()
                 curOpenBlocks.appendAll(newOpen) // up
               }
+               println("open blocks")
+        for(block <- curOpenBlocks){
+          if(block.indTpl != null){
+            println(block.indTpl.name)
+          } else {
+            println("page block")
+          }
+        }
+              //build a uri for the block
+              val lastBlockName = if(curOpenBlocks.size > 2){curOpenBlocks(curOpenBlocks.size - 2).indTpl.name} else {"page"}
+              val lastBlock = curOpenBlocks(curOpenBlocks.size - 2)
+
+              val blockIdentifier = new StringBuffer(blockIris(lastBlockName).uri)
+
+              block.indTpl.vars.foreach((varr : Var) => {
+                //concatenate all binding values of the block indicator tpl (sufficient?)
+                blockIdentifier append "-"+blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
+              })
+              val blockIri = new IriRef(blockIdentifier.toString)
+              blockIris(block.indTpl.name) = blockIri
+              println("new block "+blockIdentifier.toString)
+              //generate triples that indentify the block
+              block.indTpl.vars.foreach((varr : Var) => {
+                val objStr = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
+                val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
+                quads += new Quad(wiktionaryDataset, blockIri, new IriRef(varr.property), obj, tripleContext)
+              })
+
+              //generate a triple that connects the parent block to the new block
+              quads += new Quad(wiktionaryDataset, blockIris(lastBlockName), new IriRef(lastBlock.blocks.get.property), blockIri, tripleContext)
+
             } catch {
               case e : WiktionaryException => //did not match
             }
