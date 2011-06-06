@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.live.core;
 
-import org.ini4j.Options;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Mohamed Morsey
@@ -26,6 +24,8 @@ public class Constants{
     public static final String DB_ONTOLOGY_NS = DBPEDIA_NS + "ontology/";
     public static final String DB_COMMUNITY_NS = DBPEDIA_NS + "ontology/";
     public static final String PAGE_ID = DB_PROPERTY_NS + "pageId";
+    public static final String WIKI_PAGE_ID = DB_ONTOLOGY_NS + "wikiPageID";
+    public static final String WIKI_PAGE_REVISION_ID = DB_ONTOLOGY_NS + "wikiPageRevisionID";
     public static final String REVISION_ID = DB_PROPERTY_NS + "revisionId";
     public static final String GML_NAMESPACE = "http://www.opengis.net/gml/";
 
@@ -39,6 +39,7 @@ public class Constants{
     public static final String DC_MODIFIED = "http://purl.org/dc/terms/modified";
     public static final String DC_DESCRIPTION = "http://purl.org/dc/elements/1.1/description";
     public static final String DC_RIGHTS = "http://purl.org/dc/terms/rights";
+    public static final String DC_LANGUAGE = "http://purl.org/dc/elements/1.1/language";
 
     public static final String FOAF_PAGE = "http://xmlns.com/foaf/0.1/page";
     public static final String FOAF_NAME = "http://xmlns.com/foaf/0.1/name";
@@ -49,6 +50,7 @@ public class Constants{
     public static final String FOAF_THUMBNAIL = "http://xmlns.com/foaf/0.1/thumbnail";
     public static final String FOAF_IMG = "http://xmlns.com/foaf/0.1/img";
     public static final String FOAF_HOMEPAGE = "http://xmlns.com/foaf/0.1/homepage";
+    public static final String FOAF_PRIMARY_TOPIC = "http://xmlns.com/foaf/0.1/primaryTopic";
 
     public static final String SKOS_SUBJECT = "http://www.w3.org/2004/02/skos/core#subject";
     public static final String SKOS_PREFLABEL = "http://www.w3.org/2004/02/skos/core#prefLabel";
@@ -83,26 +85,35 @@ public class Constants{
     * */
     public static final String DB_REDIRECT = DB_PROPERTY_NS + "redirect";
     public static final String DB_ABSTRACT = DB_ONTOLOGY_NS + "abstract";
+    public static final String DB_WIKIPAGE_EXTERNAL_LINK = DB_ONTOLOGY_NS +"wikiPageExternalLink";
+    public static final String DB_WIKIPAGE_DISAMBIGUATES = DB_ONTOLOGY_NS +"wikiPageDisambiguates";
+    public static final String DB_WIKIPAGE_WIKILINK = DB_ONTOLOGY_NS + "wikiPageWikiLink";
     public static final String DB_DISAMBIGUATES = DB_PROPERTY_NS + "disambiguates";
     public static final String DB_WIKILINK = DB_PROPERTY_NS + "wikilink";
+
     public static final String DB_WORDNET_TYPE = DB_PROPERTY_NS + "wordnet_type";
     public static final String DB_CHARACTERCOUNT = DB_PROPERTY_NS + "characterCount";
     public static final String DB_HASPHOTOCOLLECTION = DB_PROPERTY_NS + "hasPhotoCollection";
     public static final String DB_MY_CHEM_PROPERTY = DB_PROPERTY_NS + "my_chem_property";
     public static final String DB_REFERENCE = DB_PROPERTY_NS + "reference";
     public static final String DB_WIKIPAGEUSESTEMPLATE = DB_PROPERTY_NS + "wikiPageUsesTemplate";
-    public static final String DB_BIRTH = DB_PROPERTY_NS + "birth";
-    public static final String DB_BIRTHPLACE = DB_PROPERTY_NS + "birthPlace";
-    public static final String DB_DEATH = DB_PROPERTY_NS + "death";
-    public static final String DB_DEATHPLACE = DB_PROPERTY_NS + "deathPlace";
+    public static final String DB_BIRTH_ = DB_PROPERTY_NS + "birth";
+    public static final String DB_BIRTHPLACE_ = DB_PROPERTY_NS + "birthPlace";
+    public static final String DB_DEATH_ = DB_PROPERTY_NS + "death";
+    public static final String DB_DEATHPLACE_ = DB_PROPERTY_NS + "deathPlace";
     public static final String DB_CLASS_BOOK = DBPEDIA_NS + "class/Book";
     public static final String DB_WIKIPAGE_EN = DB_PROPERTY_NS + "wikipage-en";
+
+    public static final String DB_BIRTH = DB_ONTOLOGY_NS + "birthDate";
+    public static final String DB_BIRTHPLACE = DB_ONTOLOGY_NS + "birthPlace";
+    public static final String DB_DEATH = DB_ONTOLOGY_NS + "deathDate";
+    public static final String DB_DEATHPLACE = DB_ONTOLOGY_NS + "deathPlace";
 
     /*
      * Ontology Vocabulary
      * */
-    public static final String DBO_INDIVIDUALISED_PND = DB_ONTOLOGY_NS + "Person/individualisedPnd";
-    public static final String DBO_NON_INDIVIDUALISED_PND = DB_ONTOLOGY_NS + "Person/nonIndividualisedPnd";
+    public static final String DBO_INDIVIDUALISED_PND = DB_ONTOLOGY_NS + "individualisedPnd";
+    public static final String DBO_NON_INDIVIDUALISED_PND = DB_ONTOLOGY_NS + "nonIndividualisedPnd";
     public static final String DBO_THUMBNAIL = DB_ONTOLOGY_NS + "thumbnail";
     /*
      * ANNOTATION VOCABULARY:
