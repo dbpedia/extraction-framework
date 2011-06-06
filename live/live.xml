@@ -23,10 +23,15 @@
 					</matchPattern>
 					<matchPattern type="STARTSWITH" pexact ="true">
 						<s></s>
-						<p>DB_WIKIPAGE_EN</p>
+						<p>DC_LANGUAGE</p>
 						<o>http://en.wikipedia.org/wiki/</o>
 					</matchPattern>
-				</produces>
+                    <matchPattern type="STARTSWITH" pexact ="true">
+						<s></s>
+						<p>FOAF_PRIMARY_TOPIC</p>
+						<o>http://en.wikipedia.org/wiki/</o>
+					</matchPattern>
+                </produces>
 				<!--Must be set in source code-->
 				<notice>set in source code</notice>
 			</extractor>
@@ -47,7 +52,7 @@
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
-						<p>DB_WIKILINK</p>
+						<p>DB_WIKIPAGE_WIKILINK</p>
 						<o></o>
 					</matchPattern>
 				</produces>
@@ -103,7 +108,7 @@
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
-						<p>DB_REFERENCE</p>
+						<p>DB_WIKIPAGE_EXTERNAL_LINK</p>
 						<o></o>
 					</matchPattern>
 				</produces>
@@ -123,7 +128,7 @@
 				<produces>
 					<matchPattern type="EXACT">
 						<s></s>
-						<p>DB_DISAMBIGUATES</p>
+						<p>DB_WIKIPAGE_DISAMBIGUATES</p>
 						<o></o>
 					</matchPattern>
 				</produces>
@@ -316,6 +321,13 @@
 						<o></o>
 					</matchPattern>
 				</produces>
+                <produces>
+					<matchPattern type="EXACT">
+						<s></s>
+						<p>WIKI_PAGE_ID</p>
+						<o></o>
+					</matchPattern>
+				</produces>
 			</extractor>
 
 			<extractor name ="org.dbpedia.extraction.mappings.RevisionIdExtractor" status="ACTIVE">
@@ -326,6 +338,14 @@
 						<o></o>
 					</matchPattern>
 				</produces>
+                <produces>
+					<matchPattern type="EXACT">
+						<s></s>
+						<p>WIKI_PAGE_REVISION_ID</p>
+						<o></o>
+					</matchPattern>
+				</produces>
+
 			</extractor>
 
             <extractor name="org.dbpedia.extraction.mappings.AbstractExtractor" status="ACTIVE">
