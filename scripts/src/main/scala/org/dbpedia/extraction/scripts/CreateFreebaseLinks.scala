@@ -26,8 +26,25 @@ object CreateFreebaseLinks
 
     val dbpediaNamespace = "http://dbpedia.org/resource/"
     val sameAsRelation = "http://www.w3.org/2002/07/owl#sameAs"
-    val freebaseNamespace = "http://rdf.freebase.com/ns"
+    val freebaseNamespace = "http://rdf.freebase.com/ns"   //TODO decide if "http://rdf.freebase.com/rdf" is better
     val tripleStr = "<"+dbpediaNamespace+"%s> <"+sameAsRelation+"> <"+freebaseNamespace+"%s> ."
+
+
+    def main(args : Array[String])
+    {
+        val outputFileName = args(0)     // file name of dataset file (must end in '.nt')
+        val labelsFileName = args(1)     // file name of DBpedia labels dataset
+        val redirectsFileName = args(2)  // file name of DBpedia redirects dataset
+        val disambigFileName = args(3)   // file name of DBpedia disambiguations dataset
+
+        if(!outputFileName.endsWith(".nt"))
+        {
+            throw new IllegalArgumentException("file name extension must be '.nt' ("+outputFileName+")")
+        }
+
+        val conceptURIs = getConceptURIs(new File(labelsFileName), new File(redirectsFileName), new File(disambigFileName))
+        writeLinks(new File(outputFileName), conceptURIs)
+    }
 
     private def writeLinks(outputFile : File, conceptURIs : Set[String])
     {
@@ -112,23 +129,6 @@ object CreateFreebaseLinks
 //            conceptCandidates = conceptCandidates --- getShortSubjectURI(line)
 //        }
 //        conceptCandidates
-    }
-
-
-    def main(args : Array[String])
-    {
-        val outputFileName = args(0)     // file name of dataset file (must end in '.nt')
-        val labelsFileName = args(1)     // file name of DBpedia labels dataset
-        val redirectsFileName = args(2)  // file name of DBpedia redirects dataset
-        val disambigFileName = args(3)   // file name of DBpedia disambiguations dataset
-
-        if(!outputFileName.endsWith(".nt"))
-        {
-            throw new IllegalArgumentException("file name extension must be '.nt' ("+outputFileName+")")
-        }
-
-        val conceptURIs = getConceptURIs(new File(labelsFileName), new File(redirectsFileName), new File(disambigFileName))
-        writeLinks(new File(outputFileName), conceptURIs)
     }
 
 }

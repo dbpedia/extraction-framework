@@ -16,7 +16,7 @@ class RedirectExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         if(page.title.namespace == WikiTitle.Namespace.Main && page.isRedirect)
         {
-            for(destination <- page.children.collect{case InternalLinkNode(destination, _, _) => destination})
+            for(destination <- page.children.collect{case InternalLinkNode(destination, _, _, _) => destination})
             {
                 return new Graph(new Quad(extractionContext, DBpediaDatasets.Redirects, subjectUri, wikiPageRedirectsProperty,
                     OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE + destination.encodedWithNamespace, page.sourceUri))

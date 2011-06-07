@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.server.resources
 
 import _root_.org.dbpedia.extraction.util.{Language, WikiApi}
+import ontology.Ontology
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import java.util.logging.Logger

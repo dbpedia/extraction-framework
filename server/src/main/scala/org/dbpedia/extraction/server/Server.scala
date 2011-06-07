@@ -5,7 +5,7 @@ import com.sun.jersey.api.container.httpserver.HttpServerFactory
 import com.sun.jersey.api.core.ClassNamesResourceConfig
 import providers._
 import resources._
-import ontology.{Classes, Pages, Validate}
+import ontology._
 import stylesheets.{Log, TriX}
 import java.net.URI
 

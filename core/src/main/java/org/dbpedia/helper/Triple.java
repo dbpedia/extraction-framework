@@ -2,6 +2,8 @@ package org.dbpedia.helper;
 
 
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.util.Language;
+import org.dbpedia.extraction.util.WikiUtil;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -87,7 +89,7 @@ public static String getHexString(byte[] b) throws Exception {
     }
     public static URI page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
-           String encPageID = CoreUtil.wikipediaEncode(pageID);
+           String encPageID = WikiUtil.wikiEncode(pageID, Language.Default());
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
            String resourceURI = "http://dbpedia.org/resource/"+ returnPageID;
