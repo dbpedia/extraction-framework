@@ -419,8 +419,23 @@ object OntologyDatatypes
 	    builder.addUnit(new FactorUnitDatatype("horsepower", Set("hp","horsepower"), 745.72218));
 	    builder.addUnit(new FactorUnitDatatype("pferdestaerke", Set("PS","pferdestaerke"), 735.49875));
 	    builder.addUnit(new FactorUnitDatatype("brake horsepower", Set("bhp","brake horsepower"), 745.7));
+		
 	    types :::= builder.build
-
+		builder.addDimension("ElectricCurrent");
+	    builder.addUnit(new StandardUnitDatatype("ampere", Set("A","ampere")));
+	    builder.addUnit(new FactorUnitDatatype("kiloampere", Set("kA","kiloampere"), 1000.0));
+		builder.addUnit(new FactorUnitDatatype("milliampere", Set("mA","milliampere"), 0.001));
+	    builder.addUnit(new FactorUnitDatatype("microampere", Set("µA","microampere"), 1.0E-6));
+	    types :::= builder.build
+		
+		builder.addDimension("Voltage");
+	    builder.addUnit(new StandardUnitDatatype("volt", Set("V","volt")));
+		builder.addUnit(new FactorUnitDatatype("megavolt", Set("MV","megavolt"), 1000000.0));
+	    builder.addUnit(new FactorUnitDatatype("kilovolt", Set("kV","kilovolt"), 1000.0));
+		builder.addUnit(new FactorUnitDatatype("millivolt", Set("mV","millivolt"), 0.001));
+	    builder.addUnit(new FactorUnitDatatype("microvolt", Set("µV","microvolt"), 1.0E-6));
+	    
+		types :::= builder.build
 	    builder.addDimension("Pressure");
 	    builder.addUnit(new StandardUnitDatatype("pascal", Set("Pa","pascal")));
 	    builder.addUnit(new FactorUnitDatatype("millipascal", Set("mPa","millipascal"), 0.001));
