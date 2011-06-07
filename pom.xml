@@ -23,8 +23,9 @@
         <module>core</module>
         <module>dump</module>
         <module>server</module>
-        <module>live</module>
         <module>scripts</module>
+        <module>live</module>
+        <!--module>wiktionary</module-->
     </modules>
 
     <build>
@@ -286,6 +287,12 @@
             <name>Scala-tools Maven2 Repository</name>
             <url>http://scala-tools.org/repo-releases/</url>
         </repository>
+        
+        <repository>
+            <id>repository.apache.org</id>
+            <name>apache Repository</name>
+            <url>http://repository.apache.org/snapshots</url>
+        </repository>
 
         <repository>
             <id>maven.aksw.internal</id>
@@ -323,7 +330,6 @@
             <layout>default</layout>
         </repository>
     </repositories>
-
     <pluginRepositories>
         <pluginRepository>
             <id>scala-tools.org</id>

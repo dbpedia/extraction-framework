@@ -18,7 +18,7 @@ class ObjectParser(val strict : Boolean = false) extends DataParser
             for (child <- node :: node.children) child match
             {
                 //ordinary links
-                case InternalLinkNode(destination, _, _) => return Some(getUri(destination))
+                case InternalLinkNode(destination, _, _, _) => return Some(getUri(destination))
 
                 //creating links if the same string is a link on this page
                 case TextNode(text, _) => getAdditionalWikiTitle(text.trim.capitalize, pageNode) match
@@ -41,15 +41,15 @@ class ObjectParser(val strict : Boolean = false) extends DataParser
         {
             node match
             {
-                case InternalLinkNode(destination, _, _) => return Some(getUri(destination))
+                case InternalLinkNode(destination, _, _, _) => return Some(getUri(destination))
                 case _ =>
                 {
                     node.children match
                     {
-                        case InternalLinkNode(destination, _, _) :: Nil => return Some(getUri(destination))
-                        case InternalLinkNode(destination, _, _) :: TextNode(text, _) :: Nil if text.trim.isEmpty => return Some(getUri(destination))
-                        case TextNode(text, _) :: InternalLinkNode(destination, _, _) :: Nil if text.trim.isEmpty => return Some(getUri(destination))
-                        case TextNode(text1, _) ::InternalLinkNode(destination, _, _) :: TextNode(text2, _) :: Nil if (text1.trim.isEmpty && text2.trim.isEmpty) => return Some(getUri(destination))
+                        case InternalLinkNode(destination, _, _, _) :: Nil => return Some(getUri(destination))
+                        case InternalLinkNode(destination, _, _, _) :: TextNode(text, _) :: Nil if text.trim.isEmpty => return Some(getUri(destination))
+                        case TextNode(text, _) :: InternalLinkNode(destination, _, _, _) :: Nil if text.trim.isEmpty => return Some(getUri(destination))
+                        case TextNode(text1, _) ::InternalLinkNode(destination, _, _, _) :: TextNode(text2, _) :: Nil if (text1.trim.isEmpty && text2.trim.isEmpty) => return Some(getUri(destination))
                         case _ => return None
                     }
                 }

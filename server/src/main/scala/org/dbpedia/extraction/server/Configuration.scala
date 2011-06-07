@@ -6,7 +6,7 @@ import java.net.URL
 class Configuration
 {
     /** The extraction languages */
-    val languages = Set("en", "de", "fr", "pl", "it", "es", "pt", "nl", "ca", "hu", "sl", "hr", "el", "ga").flatMap(Language.fromWikiCode(_))
+    val languages = Set("en", "de", "fr", "pl", "it", "es", "ru", "pt", "nl", "ca", "hu", "tr", "sl", "hr", "el", "ga").flatMap(Language.fromWikiCode(_))
 
     /** The URL where the pages of the Mappings Wiki are located */
     val wikiPagesUrl = new URL("http://mappings.dbpedia.org/index.php")
