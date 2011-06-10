@@ -5,7 +5,8 @@ import datatypes.{DimensionDatatype, UnitDatatype}
 
 class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 {
-	private val Version = "3.5";
+
+	private val Version = "3.6";
 	
 	def write(ontology : Ontology) : scala.xml.Elem =
     {
