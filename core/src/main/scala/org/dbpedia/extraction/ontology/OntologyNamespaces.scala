@@ -24,6 +24,7 @@ object OntologyNamespaces
     val DCT_PREFIX = "dct"
     val DCTERMS_PREFIX = "dcterms"
     val SKOS_PREFIX = "skos"
+    val SCHEMA_ORG_PREFIX = "schema"
 
     val OWL_NAMESPACE = "http://www.w3.org/2002/07/owl#"
     val RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -36,6 +37,14 @@ object OntologyNamespaces
     val DC_NAMESPACE = "http://purl.org/dc/elements/1.1/"
     val DCT_NAMESPACE = "http://purl.org/dc/terms/"
     val SKOS_NAMESPACE = "http://www.w3.org/2004/02/skos/core#"
+    val SCHEMA_ORG_NAMESPACE = "http://schema.org/"
+
+    /**
+     * Set of namespace prefix for which no warning is logged if they are not found when loading/validating the ontology.
+     */
+    val nonValidatedNamespaces = Set(
+        SCHEMA_ORG_PREFIX, SCHEMA_ORG_NAMESPACE  // schema.org namespace
+    )
 
     /** 
      * Map containing all supported URI prefixes 
@@ -53,7 +62,8 @@ object OntologyNamespaces
         DC_PREFIX -> DC_NAMESPACE,
         DCT_PREFIX -> DCT_NAMESPACE,
         DCTERMS_PREFIX -> DCT_NAMESPACE,
-        SKOS_PREFIX -> SKOS_NAMESPACE
+        SKOS_PREFIX -> SKOS_NAMESPACE,
+        SCHEMA_ORG_PREFIX -> SCHEMA_ORG_NAMESPACE
     );
 
     /**
@@ -75,14 +85,14 @@ object OntologyNamespaces
             
             prefixMap.get(prefix) match
             {
-            	case Some(namespace) => return appendUri(namespace, suffix)
-            	case None => return appendUri(baseUri, name)
+            	case Some(namespace) => appendUri(namespace, suffix)
+            	case None => appendUri(baseUri, name)
             	// throw new IllegalArgumentException("Unknown prefix " + prefix + " in name " + name);
             }
         }
         else
         {
-            return appendUri(baseUri, name)
+            appendUri(baseUri, name)
         }
     }
 
@@ -90,12 +100,12 @@ object OntologyNamespaces
     {
         if (!baseUri.contains('#'))
         {
-            return baseUri + suffix;
+            baseUri + suffix;
         }
         else
         {
             // fragments must not contain ':' or '/', according to our Validate class
-            return baseUri + suffix.replace("/", "%2F").replace(":", "%3A")
+            baseUri + suffix.replace("/", "%2F").replace(":", "%3A")
         }
     }
 }

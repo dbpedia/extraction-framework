@@ -277,6 +277,11 @@ class OntologyReader
                 val equivalentClasses = for(equivalentClassName <- equivalentClassNames) yield classMap.get(equivalentClassName) match
                 {
                     case Some(equivalentClassBuilder) => equivalentClassBuilder.build(classMap)
+                    case None if OntologyNamespaces.nonValidatedNamespaces.exists(equivalentClassName.startsWith(_)) =>
+                    {
+                        logger.config("Equivalent class " + equivalentClassName + " of class " + name + " was not found but its namespace is an exception")
+                        None
+                    }
                     case None =>
                     {
                         logger.warning("Equivalent class of " + name + " (" + equivalentClassName + ") does not exist")
