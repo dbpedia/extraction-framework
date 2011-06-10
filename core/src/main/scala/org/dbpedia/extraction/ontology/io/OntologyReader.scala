@@ -33,9 +33,9 @@ class OntologyReader
         logger.info("Loading ontology")
 
         val ontologyBuilder = new OntologyBuilder()
-        
+
         ontologyBuilder.datatypes = OntologyDatatypes.load()
-        
+
         ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map("en" -> "Thing"), Map("en" -> "Base class of all ontology classes"), null, Set())
         ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map("en" -> "Property"), Map(), "owl:Thing", Set())
 
@@ -51,14 +51,14 @@ class OntologyReader
         logger.info("Ontology loaded")
         ontology
     }
-    
+
 	/**
      * Loads all classes and properties from a page.
      *
      * @param ontology The OntologyBuilder instance
      * @param pageNode The page node of the configuration page
      */
-    private def load(ontologyBuilder : OntologyBuilder, page : PageNode) : Unit =
+    private def load(ontologyBuilder : OntologyBuilder, page : PageNode)
     {
         for(node <- page.children if node.isInstanceOf[TemplateNode])
         {
@@ -87,7 +87,7 @@ class OntologyReader
             }
         }
     }
-    
+
     private def loadClass(name : String, node : TemplateNode) : ClassBuilder =
     {
         new ClassBuilder(name = name,
@@ -96,7 +96,7 @@ class OntologyReader
                          superClassName = readTemplateProperty(node, "rdfs:subClassOf").getOrElse("owl:Thing"),
                          equivalentClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
     }
-    
+
     private def loadOntologyProperty(name : String, node : TemplateNode) : Option[PropertyBuilder] =
     {
         val isObjectProperty = node.title.encoded == OntologyReader.OBJECTPROPERTY_NAME
@@ -110,12 +110,12 @@ class OntologyReader
             case Some(text) if text == "owl:FunctionalProperty" => true
             case Some(text) =>
             {
-                logger.warning("Property with an invalid type found on page " + node.root.title);
+                logger.warning(node.root.title + " - Found property with an invalid type")
                 false
             }
             case None => false
         }
-        
+
         //Domain
         val domain = readTemplateProperty(node, "rdfs:domain") match
         {
@@ -135,13 +135,13 @@ class OntologyReader
                 }
                 else
                 {
-                    logger.warning("Cannot load datatype property " + name + " because it does not define its range")
+                    logger.warning(node.root.title + " - Cannot load datatype property " + name + " because it does not define its range")
                     return None
                 }
             }
         }
-        
-        return Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range))
+
+        Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range))
     }
 
     private def loadSpecificProperties(name : String, node : TemplateNode) : List[SpecificPropertyBuilder] =
@@ -159,7 +159,7 @@ class OntologyReader
             case Some(text) => text
             case None =>
             {
-                logger.warning("SpecificProperty on " + className +" does not define a base property")
+                logger.warning(node.root.title + " - SpecificProperty on " + className +" does not define a base property")
                 return None
             }
         }
@@ -169,7 +169,7 @@ class OntologyReader
             case Some(text) => text
             case None =>
             {
-                logger.warning("SpecificProperty on " + className +" does not define a unit")
+                logger.warning(node.root.title + " - SpecificProperty on " + className +" does not define a unit")
                 return None
             }
         }
@@ -201,7 +201,7 @@ class OntologyReader
             val languageCode = property.key.split("@", 2).lift(1).getOrElse("en")
             if(!supportedLanguageCodes.contains(languageCode))
             {
-                logger.warning("Warning: Language code '" + languageCode + "' is not supported. Ignoring corresponding " + propertyName)
+                logger.warning(node.root.title + " - Language code '" + languageCode + "' is not supported. Ignoring corresponding " + propertyName)
                 None
             }
             else
@@ -214,16 +214,16 @@ class OntologyReader
             }
         }.toMap
     }
-    
+
     private class OntologyBuilder
     {
         var classes = List[ClassBuilder]()
         var properties = List[PropertyBuilder]()
         var datatypes = List[Datatype]()
         var specializedProperties = List[SpecificPropertyBuilder]()
-        
+
         def build() : Ontology  =
-        {   
+        {
             val classMap = classes.map( clazz => (clazz.name, clazz) ).toMap
             val propertyMap = properties.map( property => (property.name, property) ).toMap
             val typeMap = datatypes.map( datatype => (datatype.name, datatype) ).toMap
@@ -246,7 +246,7 @@ class OntologyReader
 
         /** Caches the class, which has been build by this builder. */
         var generatedClass : Option[OntologyClass] = None
-        
+
         /** Remembers if build has already been called on this object */
         private var buildCalled = false
 
@@ -290,14 +290,14 @@ class OntologyReader
                     case None if name == "owl:Thing" => Some(new OntologyClass(name, labels, comments, null, equivalentClasses.flatten))
                     case None => None
                 }
-                
+
                 buildCalled = true
             }
-            
-            return generatedClass
+
+            generatedClass
         }
     }
-    
+
     private class PropertyBuilder(val name : String, val labels : Map[String, String], val comments : Map[String, String],
                                   val isObjectProperty : Boolean, val isFunctional : Boolean, val domain : String, val range : String )
     {
@@ -321,7 +321,7 @@ class OntologyReader
                 }
                 case None => logger.warning("Domain of property " + name + " (" + domain + ") does not exist"); return None
             }
-             
+
             if(isObjectProperty)
             {
                 val rangeClass = classMap.get(range) match
@@ -332,7 +332,7 @@ class OntologyReader
                         case None => logger.warning("Range of property '" + name + "' (" + range + ") couldn't be loaded"); return None
                     }
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
-                }                
+                }
 
                 generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional))
             }
@@ -342,8 +342,8 @@ class OntologyReader
                 {
                     case Some(datatype) => datatype
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
-                }                
-     
+                }
+
                 generatedProperty =  Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional))
             }
 
@@ -415,7 +415,7 @@ class OntologyReader
                 return None
             }
 
-            return Some((domainClass, baseProperty), specializedRange.asInstanceOf[UnitDatatype])
+            Some((domainClass, baseProperty), specializedRange.asInstanceOf[UnitDatatype])
         }
     }
 }
