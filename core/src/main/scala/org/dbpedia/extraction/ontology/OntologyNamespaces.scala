@@ -110,8 +110,8 @@ object OntologyNamespaces
     }
 
     /**
-     * Return true if the namespace of the given URI starts with should be validated.
-     * Return false if the namespace of the given URI is known to be an exception for evaluation (e.g. http://schema.org).
+     * Return true  if the namespace of the given URI is known to be an exception for evaluation (e.g. http://schema.org).
+     * Return false if the namespace of the given URI starts with should be validated.
      */
     def skipValidation(uri : String) : Boolean =
     {
