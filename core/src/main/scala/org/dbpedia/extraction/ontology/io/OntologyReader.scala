@@ -141,7 +141,10 @@ class OntologyReader
             }
         }
 
-        Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range))
+        //Equivalent Properties
+        val equivalentProperties = readTemplatePropertyAsList(node, "owl:equivalentProperty").toSet
+
+        Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range, equivalentProperties))
     }
 
     private def loadSpecificProperties(name : String, node : TemplateNode) : List[SpecificPropertyBuilder] =
@@ -274,29 +277,30 @@ class OntologyReader
                         }
                     }
 
-                val equivalentClasses = for(equivalentClassName <- equivalentClassNames) yield classMap.get(equivalentClassName) match
+                val equivalentClasses = equivalentClassNames.map{ equivalentClassName => classMap.get(equivalentClassName) match
                 {
                     case Some(equivalentClassBuilder) => equivalentClassBuilder.build(classMap)
-                    case None if OntologyNamespaces.nonValidatedNamespaces.exists(equivalentClassName.startsWith(_)) =>
+                    case None if OntologyNamespaces.skipValidation(equivalentClassName) =>
                     {
-                        logger.config("Equivalent class " + equivalentClassName + " of class " + name + " was not found but its namespace is an exception")
-                        None
+                        logger.config("Equivalent class " + equivalentClassName + " of class " + name + " was not found but for its namespace this was expected")
+                        Some(new OntologyClass(equivalentClassName, Map(), Map(), null, Set()))
                     }
                     case None =>
                     {
                         logger.warning("Equivalent class of " + name + " (" + equivalentClassName + ") does not exist")
                         None
                     }
-                }
+                }}.flatten
 
                 generatedClass = superClass match
                 {
-                    case Some(superClass) => Some(new OntologyClass(name, labels, comments, superClass, equivalentClasses.flatten))
-                    case None if name == "owl:Thing" => Some(new OntologyClass(name, labels, comments, null, equivalentClasses.flatten))
+                    case Some(superClass) => Some(new OntologyClass(name, labels, comments, superClass, equivalentClasses))
+                    case None if name == "owl:Thing" => Some(new OntologyClass(name, labels, comments, null, equivalentClasses))
                     case None => None
                 }
 
                 buildCalled = true
+
             }
 
             generatedClass
@@ -304,13 +308,15 @@ class OntologyReader
     }
 
     private class PropertyBuilder(val name : String, val labels : Map[String, String], val comments : Map[String, String],
-                                  val isObjectProperty : Boolean, val isFunctional : Boolean, val domain : String, val range : String )
+                                  val isObjectProperty : Boolean, val isFunctional : Boolean, val domain : String, val range : String,
+                                  val equivalentPropertyNames : Set[String])
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
         require(comments != null, "comments != null")
         require(domain != null, "domain != null")
         require(range != null, "range != null")
+        require(equivalentPropertyNames != null, "equivalentPropertyNames != null")
 
         /** Caches the property, which has been build by this builder. */
         var generatedProperty : Option[OntologyProperty] = None
@@ -327,6 +333,8 @@ class OntologyReader
                 case None => logger.warning("Domain of property " + name + " (" + domain + ") does not exist"); return None
             }
 
+            val equivalentProperties = equivalentPropertyNames.map(new OntologyProperty(_, Map(), Map(), null, null, false, Set()))
+
             if(isObjectProperty)
             {
                 val rangeClass = classMap.get(range) match
@@ -339,7 +347,7 @@ class OntologyReader
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
                 }
 
-                generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional))
+                generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivalentProperties))
             }
             else
             {
@@ -349,7 +357,7 @@ class OntologyReader
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
                 }
 
-                generatedProperty =  Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional))
+                generatedProperty = Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional, equivalentProperties))
             }
 
             generatedProperty
