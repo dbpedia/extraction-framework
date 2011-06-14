@@ -40,9 +40,9 @@ class OntologyReader
         ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map("en" -> "Property"), Map(), "owl:Thing", Set())
 
         // TODO: range should be rdfs:Class
-        ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map("en" -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing")
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map("en" -> "has label"), Map(), false, false, "owl:Thing", "xsd:string")
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map("en" -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string")
+        ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map("en" -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map("en" -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map("en" -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
 
         for(page <- source.map(WikiParser()))
             load(ontologyBuilder, page)
