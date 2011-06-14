@@ -12,10 +12,12 @@ package org.dbpedia.extraction.ontology
  * A functional property is a property that can have only one (unique) value y for each instance x (see: http://www.w3.org/TR/owl-ref/#FunctionalProperty-def)
  */
 class OntologyProperty( name : String, labels : Map[String, String], comments : Map[String, String],
-                        val domain : OntologyClass, val range : OntologyType, val isFunctional : Boolean = false) extends OntologyEntity(name, labels, comments)
+                        val domain : OntologyClass, val range : OntologyType, val isFunctional : Boolean = false,
+                        val equivalentProperties : Set[OntologyProperty] = Set()) extends OntologyEntity(name, labels, comments)
 {
-    require(domain != null, "domain != null")
-    require(range != null, "range != null")
+    require(OntologyNamespaces.skipValidation(name) || domain != null, "domain != null")
+    require(OntologyNamespaces.skipValidation(name) || range != null, "range != null")
+    require(equivalentProperties != null, "equivalentPropertyNames != null")
     
     val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
     

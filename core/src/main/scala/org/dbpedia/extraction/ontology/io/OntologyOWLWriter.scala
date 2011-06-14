@@ -6,7 +6,7 @@ import datatypes.{DimensionDatatype, UnitDatatype}
 class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 {
 
-	private val Version = "3.6";
+	private val Version = "3.7";
 	
 	def write(ontology : Ontology) : scala.xml.Elem =
     {
@@ -141,6 +141,12 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
                }
             }
             case _ =>
+        }
+
+        //Equivalent Properties
+        for(prop <- property.equivalentProperties)
+        {
+            xml += <owl:equivalentProperty rdf:resource={prop.uri} />
         }
 
         //Return xml

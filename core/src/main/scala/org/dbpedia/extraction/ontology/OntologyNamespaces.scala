@@ -40,10 +40,10 @@ object OntologyNamespaces
     val SCHEMA_ORG_NAMESPACE = "http://schema.org/"
 
     /**
-     * Set of namespace prefix for which no warning is logged if they are not found when loading/validating the ontology.
+     * Set of namespaces for which existence of classes or properties is not validated.
      */
-    val nonValidatedNamespaces = Set(
-        SCHEMA_ORG_PREFIX, SCHEMA_ORG_NAMESPACE  // schema.org namespace
+    private val nonValidatedNamespaces = Set(
+        SCHEMA_ORG_NAMESPACE
     )
 
     /** 
@@ -108,4 +108,14 @@ object OntologyNamespaces
             baseUri + suffix.replace("/", "%2F").replace(":", "%3A")
         }
     }
+
+    /**
+     * Return true if the namespace of the given URI starts with should be validated.
+     * Return false if the namespace of the given URI is known to be an exception for evaluation (e.g. http://schema.org).
+     */
+    def skipValidation(uri : String) : Boolean =
+    {
+        OntologyNamespaces.nonValidatedNamespaces.exists(getUri(uri, "") startsWith _)
+    }
+
 }
