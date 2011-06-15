@@ -44,7 +44,7 @@ class PersondataExtractor(extractionContext : ExtractionContext) extends Extract
     {
         if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
 
-        val objectParser = new ObjectParser()
+        val objectParser = new ObjectParser(extractionContext)
 
         var quads = List[Quad]()
 

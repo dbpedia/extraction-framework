@@ -12,8 +12,6 @@ class ArticleCategoriesExtractor(extractionContext : ExtractionContext) extends 
 {
     private val language = extractionContext.language.wikiCode
 
-    require(Set("en").contains(language))
-
     private val dctermsSubjectProperty = extractionContext.ontology.getProperty("dct:subject").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -42,6 +40,7 @@ class ArticleCategoriesExtractor(extractionContext : ExtractionContext) extends 
     {
         val categoryNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Category)
 
-        OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, language)
     }   
 }

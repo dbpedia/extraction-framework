@@ -10,6 +10,8 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InternalLinkNode,
  */
 class PageLinksExtractor(extractionContext : ExtractionContext) extends Extractor
 {
+    private val language = extractionContext.language.wikiCode
+
     val wikiPageWikiLinkProperty = extractionContext.ontology.getProperty("wikiPageWikiLink")
                                    .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageWikiLink' does not exist in DBpedia Ontology."))
 
@@ -37,6 +39,7 @@ class PageLinksExtractor(extractionContext : ExtractionContext) extends Extracto
 
     private def getUri(destination : WikiTitle) : String =
     {
-        OntologyNamespaces.getUri(destination.encodedWithNamespace, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        OntologyNamespaces.getResource(destination.encodedWithNamespace, language)
+        //OntologyNamespaces.getUri(destination.encodedWithNamespace, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
     }
 }

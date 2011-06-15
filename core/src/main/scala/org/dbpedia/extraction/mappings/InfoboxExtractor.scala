@@ -26,7 +26,10 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
     // Configuration
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
+    private val language = extractionContext.language.wikiCode
+
+    private val usesTemplateProperty = OntologyNamespaces.getProperty("wikiPageUsesTemplate",language)
+    //private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
 
     private val templateNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Template)
 
@@ -38,7 +41,10 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
 
     private val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r)
 
-    private val ignoreProperties = Set("image", "image_photo")
+    private val ignoreProperties = Map (
+        "en"-> Set("image", "image_photo"),
+        "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
+    )
 
     private val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
     private val typeProperty = extractionContext.ontology.getProperty("rdf:type").get
@@ -71,7 +77,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
     private val dataTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
                                   .map(datatype => new DateTimeParser(extractionContext, new Datatype(datatype), true))
 
-    private val objectParser = new ObjectParser(true)
+    private val objectParser = new ObjectParser(extractionContext, true)
 
     private val linkParser = new LinkParser(true)
 
@@ -97,7 +103,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                                yield template
 
         templateList.foreach(template => {
-            val propertyList = template.children.filterNot(property => ignoreProperties.contains(property.key.toLowerCase))
+            val propertyList = template.children.filterNot(property => ignoreProperties.get(language).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
             var propertiesFound = false
 
@@ -117,6 +123,12 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                         try
                         {
                             quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+
+                            //#int #statistics uncomment the following 2 lines (do not delete)
+                            val stat_template = OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language).replace("\n", " ").replace("\t", " ").trim
+                            val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
+                            quads ::= new Quad( extractionContext, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
+                                                stat_property, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
                         }
                         catch
                         {
@@ -140,12 +152,14 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                 // TODO write only wikiPageUsesTemplate if properties extracted
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
-                    quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty, "http://dbpedia.org/resource/" + templateNamespace + ":" + template.title.encoded, template.sourceUri, null)
+                    //TODO change domain
+                    quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
+                                        OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language), template.sourceUri, null)
                     seenTemplates.add(template.title.encoded)
                 }
             }
         })
-
+        
         new Graph(quads)
     }
 
@@ -267,11 +281,13 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
         result = result.replace("%2F", "/")
         result = result.replace("%3A", ":")
 
-        result = result.replace("%", "_percent_")
+        //TODO add this as option in settings
+        //result = result.replace("%", "_percent_")
 
         // TODO maximal length of properties? (was 250)
         
-        OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + result
+        OntologyNamespaces.getProperty(result,language)
+        //OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + result
     }
 
     private def getPropertyLabel(key : String) : String =

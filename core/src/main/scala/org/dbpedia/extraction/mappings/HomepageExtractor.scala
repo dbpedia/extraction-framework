@@ -12,18 +12,48 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 
-    require(Set("en", "fr", "el", "de", "pl").contains(language))
-
-    private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona")
-
-    private val externalLinkSections = Map("en" -> "External links?",
-        "de" -> "Weblinks?",
-        "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
-        "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
-        "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)")
-
-    private val official = Map("en" -> "official", "de" -> "offizielle", "el" -> "(?:επίσημος|επίσημη)", "fr" -> "officiel", "pl" -> "oficjalna")
+    //TODO rewritten as map, need to clean up per language 
+    //private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
+    private val propertyNames = Map(
+        "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
+        "el" -> Set("ιστότοπος", "ιστοσελίδα"),
+        "en" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),
+        "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
+        "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
+        "pl" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
+        "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
+        "ru" -> Set("сайт")
+    )
     
+     private val externalLinkSections = Map(
+         "ca" -> "(?:Enllaços externs|Enllaço extern)",
+         "de" -> "Weblinks?",
+         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
+         "en" -> "External links?",
+         "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo)",
+         "eu" -> "Kanpo loturak?",
+         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
+         "ga" -> "(?:Naisc sheachtracha|Nasc sheachtrach)",
+         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
+         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
+         "ru" -> "Ссылки"
+     )
+ 
+     private val official = Map(
+       "ca" -> "oficial",
+       "en" -> "official",
+       "de" -> "offizielle",
+       "el" -> "(?:επίσημος|επίσημη)",
+       "eu" -> "ofiziala?",
+       "ga" -> "oifigiúil",
+       "fr" -> "officiel",
+       "pl" -> "oficjalna",
+       "pt" -> "oficial",
+       "es" -> "oficial"
+     )
+
+    require(propertyNames.keySet.contains(language),"Homepage Extractor supports the following languages: " + externalLinkSections.keySet.mkString(", ")+"; not "+language)
+
     private val homepageProperty = extractionContext.ontology.getProperty("foaf:homepage").get
 
     private val listItemStartRegex = ("""(?msiu).*^\s*\*\s*[^^]*(\b""" + official(language) + """\b)?[^^]*\z""").r
@@ -40,7 +70,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
         
-        val list = collectProperties(node).filter(p => propertyNames.contains(p.key.toLowerCase))
+        val list = collectProperties(node).filter(p => propertyNames(language).contains(p.key.toLowerCase))
         list.foreach((property) => {
             property.children match
             {

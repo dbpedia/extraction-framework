@@ -12,8 +12,15 @@ class DisambiguationExtractor(extractionContext : ExtractionContext) extends Ext
     val language = extractionContext.language.wikiCode
 
     val disambiguationTitlePart = Map(
-        "en" -> " (disambiguation)",
-        "el" -> " (αποσαφήνιση)"
+         "ca" -> " (desambiguació)",
+         "de" -> " (Begriffsklärung)",
+         "el" -> " (αποσαφήνιση)",
+         "en" -> " (disambiguation)",
+         "es" -> " (desambiguación)",
+         "it" -> " (disambigua)",
+         "pl" -> " (ujednoznacznienie)",
+         "pt" -> " (desambiguação)",
+         "ru" -> " (значения)"
     )
 
     //require(Set("en", "el").contains(language))
@@ -38,7 +45,8 @@ class DisambiguationExtractor(extractionContext : ExtractionContext) extends Ext
                          DBpediaDatasets.DisambiguationLinks,
                          subjectUri,
                          wikiPageDisambiguatesProperty,
-                         OntologyNamespaces.getUri(link.destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE),
+                         OntologyNamespaces.getResource(link.destination.encoded, language),
+                         //OntologyNamespaces.getUri(link.destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE),
                          link.sourceUri,
                          null)
             }
