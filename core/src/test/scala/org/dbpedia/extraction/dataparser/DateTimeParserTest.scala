@@ -364,9 +364,9 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
         parse("en", "xsd:date", "{{Death date|1993|2|4|df=yes}}") should equal (Some("1993-02-04"))
     }
 
-    "DataParser" should "return date ({{Death date and age|1916|7|3|1849|4|24|mf=y})" in
+    "DataParser" should "return date ({{Death date and age|1916|7|3|1849|4|24|mf=y}})" in
     {
-        parse("en", "xsd:date", "{{Death date and age|1916|7|3|1849|4|24|mf=y}") should equal (Some("1916-07-03"))
+        parse("en", "xsd:date", "{{Death date and age|1916|7|3|1849|4|24|mf=y}}") should equal (Some("1916-07-03"))
     }
 
     "DataParser" should "return date ({{death date and age|1966|7|19|1887|5|21}})" in
