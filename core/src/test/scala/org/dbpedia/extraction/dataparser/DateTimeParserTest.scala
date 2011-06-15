@@ -391,7 +391,7 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
 
     "DataParser" should "return date ({{BirthDeathAge|B|1976|1|1|2007|1|1}})" in
     {
-        parse("en", "xsd:date", "{{birthDeathAge|1976|1|1|2007|1|1}}") should equal (Some("2007-01-01"))
+        parse("en", "xsd:date", "{{birthDeathAge|B|1976|1|1|2007|1|1}}") should equal (Some("1976-01-01"))
     }
 
     "DataParser" should "return date ({{birthDeathAge|B|1976|1|1|2007|1|1}})" in
@@ -433,6 +433,85 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
     "DataParser" should "return date (grr10/10/2007bla)" in
     {
         parse("en", "xsd:date", "grr10/10/2007bla") should equal (Some("2007-10-10"))
+    }
+
+    //greek date tests
+
+    "DataParser" should "return date (02 Μαρτίου 151)" in
+    {
+        parse("el", "xsd:date", "02 Μαρτίου 151") should equal (Some("0151-03-02"))
+    }
+    "DataParser" should "return gYear (20 π.Χ.)" in
+    {
+        parse("el", "xsd:gYear", "20 π.Χ.") should equal (Some("-0020"))
+    }
+    "DataParser" should "return gYear (20 πΧ)" in
+    {
+        parse("el", "xsd:gYear", "20 πΧ") should equal (Some("-0020"))
+    }
+    "DataParser" should "return gYear (20 Π.Χ.)" in
+    {
+        parse("el", "xsd:gYear", "20 Π.Χ.") should equal (Some("-0020"))
+    }
+    "DataParser" should "return gYear (20 ΠΧ)" in
+    {
+        parse("el", "xsd:gYear", "20 ΠΧ") should equal (Some("-0020"))
+    }
+    "DataParser" should "return gYear (20 μ.Χ.)" in
+    {
+        parse("el", "xsd:gYear", "20 μ.Χ.") should equal (Some ("0020"))
+    }
+    "DataParser" should "return gYear (20 μΧ)" in
+    {
+        parse("el", "xsd:gYear", "20 μΧ") should equal (Some ("0020"))
+    }
+    /*"DataParser" should "return gYear (14ος αιώνας)" in
+    {
+        parse("el", "xsd:gYear", "14ος αιώνας") should equal (Some("1300"))
+    }*/
+    "DataParser" should "return gMonthDay (4η ιουλίου)" in
+    {
+        parse("el", "xsd:gMonthDay", "4η ιουλίου") should equal (Some("--07-04"))
+    }
+    "DataParser" should "return gYearMonth (σεπτέμβριος 2007)" in
+    {
+        parse("el", "xsd:gYearMonth", "σεπτέμβριος 2007") should equal (Some("2007-09"))
+    }
+    "DataParser" should "return gYearMonth (1[[429 ιανουαρίου]] [[300 μ.Χ.]])" in
+    {
+        parse("el", "xsd:gYearMonth", "1[[429 ιανουαρίου]] [[300 μ.Χ.]]") should equal (Some("0300-01"))
+    }
+    "DataParser" should "return date (ιούνιος, 21 2007 π.Χ.)" in
+    {
+        parse("el", "xsd:date", "ιούνιος, 21 2007 π.Χ.") should equal (Some("-2007-06-21"))
+    }
+    "DataParser" should "return date (1η δεκεμβρίου 2006)" in
+    {
+        parse("el", "xsd:date", "1η δεκεμβρίου 2006") should equal (Some("2006-12-01"))
+    }
+    "DataParser" should "return date ([[1η μαΐου]] [[2006]])" in
+    {
+        parse("el", "xsd:date", "[[1η μαΐου]] [[2006]]") should equal (Some("2006-05-01"))
+    }
+    "DataParser" should "return date (12 ιουνίου 2008)" in
+    {
+        parse("el", "xsd:date", "12 ιουνίου 2008") should equal (Some("2008-06-12"))
+    }
+    "DataParser" should "return date (12 ιούνιος 2008)" in
+    {
+        parse("el", "xsd:date", "12 ιούνιος 2008") should equal (Some("2008-06-12"))
+    }
+    "DataParser" should "return date ([[2 Νοεμβρίου]] [[1911]])" in
+    {
+        parse("el", "xsd:date", "[[2 Νοεμβρίου]] [[1911]]") should equal (Some("1911-11-02"))
+    }
+    "DataParser" should "return date ({{ηθηλ|1996|03|18|1911|11|2}})" in
+    {
+        parse("el", "xsd:date", "{{ηθηλ|1996|03|18|1911|11|2}}") should equal (Some("1996-03-18"))
+    }
+    "DataParser" should "return date ({{ηγη|1996|03|18}})" in
+    {
+        parse("el", "xsd:date", "{{ηθηλ|1996|03|18}}") should equal (Some("1996-03-18"))
     }
 
     private val wikiParser = WikiParser()

@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.wiktionary
 
 import _root_.org.dbpedia.extraction.destinations.Destination
 import _root_.org.dbpedia.extraction.mappings.Extractor
@@ -77,8 +77,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
         //Only extract from the following namespaces
         if(page.title.namespace != WikiTitle.Namespace.Main &&
            page.title.namespace != WikiTitle.Namespace.File &&
-           page.title.namespace != WikiTitle.Namespace.Category &&
-           page.title.namespace != WikiTitle.Namespace.Template )
+           page.title.namespace != WikiTitle.Namespace.Category)
         {
            return 
         }

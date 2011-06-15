@@ -1,16 +1,22 @@
 package org.dbpedia.extraction.ontology
 
+import org.dbpedia.extraction.util.UriUtils
+import java.net.URLEncoder
 /**
  * Manages the ontology namespaces.
  */
 object OntologyNamespaces
 {
+    //#int
+    val specificLanguageDomain = Set("de", "el", "it", "ru")
+    val encodeAsIRI = Set("de", "el", "ru")
+
     val DBPEDIA_CLASS_NAMESPACE = "http://dbpedia.org/ontology/"
     val DBPEDIA_DATATYPE_NAMESPACE = "http://dbpedia.org/datatype/"
     val DBPEDIA_PROPERTY_NAMESPACE = "http://dbpedia.org/ontology/"
     val DBPEDIA_SPECIFICPROPERTY_NAMESPACE = "http://dbpedia.org/ontology/"
-    val DBPEDIA_INSTANCE_NAMESPACE = "http://dbpedia.org/resource/"
-    val DBPEDIA_GENERAL_NAMESPACE = "http://dbpedia.org/property/"
+    //val DBPEDIA_INSTANCE_NAMESPACE = "http://de.dbpedia.org/resource/"
+    //val DBPEDIA_GENERAL_NAMESPACE = "http://de.dbpedia.org/property/"
 
     val OWL_PREFIX = "owl"
     val RDF_PREFIX = "rdf"
@@ -96,11 +102,28 @@ object OntologyNamespaces
         }
     }
 
-    private def appendUri( baseUri : String, suffix : String ) : String =
+    def getResource(name : String, lang : String) : String =
+    {
+        val domain = if ( specificLanguageDomain.contains(lang)) "http://" + lang + ".dbpedia.org/resource/" else "http://dbpedia.org/resource/"
+        appendUri(domain, name, lang)
+    }
+
+    def getProperty(name : String, lang : String) : String =
+    {
+        val domain = if ( specificLanguageDomain.contains(lang)) "http://" + lang + ".dbpedia.org/property/" else "http://dbpedia.org/property/"
+        appendUri(domain, name, lang)
+    }
+
+    private def appendUri( baseUri : String, suffix : String, lang : String = "" ) : String =
     {
         if (!baseUri.contains('#'))
         {
-            baseUri + suffix;
+            //return baseUri + suffix;
+            if (! encodeAsIRI.contains(lang))
+                // some bad URIs passed 
+                baseUri + URLEncoder.encode(suffix, "UTF-8")
+            else
+                UriUtils.toIRIString(baseUri+suffix)
         }
         else
         {

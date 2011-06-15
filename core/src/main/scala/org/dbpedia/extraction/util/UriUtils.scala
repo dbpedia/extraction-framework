@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.util
 
-import java.net.URI
+import java.net.URI;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 object UriUtils
 {
@@ -28,4 +30,13 @@ object UriUtils
         return path
     }
 
+    def toIRIString(uri:String) : String =
+    {
+        URLDecoder.decode(uri,"UTF-8").replace(">","%3E")
+    }
+
+    def toURIString(uri:String) : String =
+    {
+        URLEncoder.encode(uri,"UTF-8")
+    }
 }

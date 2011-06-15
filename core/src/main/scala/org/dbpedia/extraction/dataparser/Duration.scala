@@ -55,16 +55,22 @@ object Duration
     val timesMap = Map(
         "second" -> "second", "s" -> "second", "sec" -> "second", "seconds" -> "second", "secs" -> "second",
             "Sekunde" -> "second", "Sekunden" -> "second", "sekunde" -> "second", "sekunden" -> "second", "sek" -> "second",
+                "segundo" -> "second", "segundos" -> "second", "seg" -> "second", "segs" -> "second",
         "minute" -> "minute", "m" -> "minute", "min" -> "minute", "minutes" -> "minute", "min." -> "minute", "mins" -> "minute", "minu" -> "minute",
             "Minute" -> "minute", "Minuten" -> "minute", "minuten" -> "minute",
+                "minuto" -> "minute", "minutos" -> "minute",
         "hour" -> "hour", "h" -> "hour", "hour" -> "hour", "hr" -> "hour", "hr." -> "hour", "hrs" -> "hour", "hrs." -> "hour",
             "Stunde" -> "hour", "Stunden" -> "hour", "stunde" -> "hour", "stunden" -> "hour", "std" -> "hour", "Std" -> "hour", "std." -> "hour", "Std." -> "hour",
+            "hora" -> "hour", "horas" -> "hour",
         "day" -> "day", "d" -> "day", "d." -> "day", "days" -> "day",
             "Tag" -> "day", "Tage" -> "day", "tag" -> "day", "tage" -> "day",
+                "dia" -> "day", "dias" -> "day",
         "month" -> "month", "months" -> "month",
             "Monat" -> "month", "Monate" -> "month", "monat" -> "month", "monate" -> "month",
+                "mes" -> "month", "meses" -> "month", "mês" -> "month",
         "year" -> "year", "y" -> "year", "years" -> "year", "yr" -> "year",
-            "Jahr" -> "year", "Jahre" -> "year", "jahr" -> "year", "jahre" -> "year"
+            "Jahr" -> "year", "Jahre" -> "year", "jahr" -> "year", "jahre" -> "year",
+                "ano" -> "year", "anos" -> "year", "año" -> "year", "años" -> "year"
     )
 
     val timeUnitsRegex = timesMap.keys.toList.sortWith((a,b) => a.length > b.length).mkString("|")

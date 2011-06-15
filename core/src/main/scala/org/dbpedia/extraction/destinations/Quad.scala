@@ -28,9 +28,10 @@ class Quad(	val extractionContext : ExtractionContext,
 
     if(value.isEmpty) throw new IllegalArgumentException("Value is empty")
 
-	new URI(subject)
-	new URI(context)
-	if(datatype == null) new URI(value)
+    //TODO validate them on creation, now can be either URI/IRI
+	//new URI(subject)
+	//new URI(context)
+	//if(datatype == null) new URI(value)
 
     def this( extractionContext : ExtractionContext,
               dataset : Dataset,
@@ -41,53 +42,53 @@ class Quad(	val extractionContext : ExtractionContext,
 		      datatype : Datatype = null ) = this(extractionContext, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
 
     def renderNTriple = render(false)
-    
+
     def renderNQuad = render(true)
-    
+
     override def toString = renderNQuad
-    
+
     private def render(includeContext : Boolean) : String =
     {
     	val sb = new StringBuilder
-        
+
         sb append "<" append subject append "> "
-        
+
         sb append "<" append predicate append "> "
-        
+
         if (datatype != null)
         {
             if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string")
             {
             	sb append '"'
-            	escapeString(sb, value)
+            	escapeString(sb, value) //sb append value //#int escapeString(sb, value)
             	sb append "\""
-                
+
                 sb append "@" + extractionContext.language.locale.getLanguage + " "
             }
             else
             {
                 sb append '"'
-                escapeString(sb, value)
+                escapeString(sb, value) //sb append value //#int 
                 sb append "\"^^<" append datatype.uri append "> "
             }
         }
         else
         {
             sb append '<'
-            escapeString(sb, value)
+            sb append value //this must not be escaped, it is a URI/IRI
             sb append "> "
         }
-        
+
         if (includeContext)
         {
             sb append '<' append context append "> "
         }
-        
+
         sb append '.'
-        
+
         return sb.toString
     }
-	
+
 	/**
 	 * Escapes an unicode string according to N-Triples format
 	 */
