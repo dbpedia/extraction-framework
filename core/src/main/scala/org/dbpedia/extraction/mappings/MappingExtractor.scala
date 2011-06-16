@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
 import org.dbpedia.extraction.destinations.Graph
 import org.dbpedia.extraction.wikiparser._
 
@@ -9,16 +8,9 @@ import org.dbpedia.extraction.wikiparser._
  */
 class MappingExtractor(context : ExtractionContext) extends Extractor
 {
-    private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
 
-    private val mappings = MappingsLoader.load(context)
+    private val (templateMappings, tableMappings, conditionalMappings) = MappingsLoader.load(context)
 
-    private val templateMappings = mappings._1
-
-    private val tableMappings = mappings._2
-
-    private val conditionalMappings = mappings._3
-    
     private val resolvedMappings = context.redirects.resolveMap(templateMappings) ++ context.redirects.resolveMap(conditionalMappings)
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
