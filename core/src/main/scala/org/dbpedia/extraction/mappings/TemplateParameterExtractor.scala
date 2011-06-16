@@ -9,7 +9,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateParameter
  */
 class TemplateParameterExtractor(extractionContext : ExtractionContext) extends Extractor
 {
-    val templateParameterProperty = "http://dbpedia.org/ontology/templateUsesParameter"   // extractionContext.ontology.getProperty("tempalateUsesVariable")" +
+    val templateParameterProperty = "http://dbpedia.org/property/templateUsesParameter"   // extractionContext.ontology.getProperty("templateUsesParameter")" +
         //.getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageWikiLink' does not exist in DBpedia Ontology."))
 
     private val ignoreTemplates = Set("redirect", "seealso", "see_also", "main", "cquote", "chess diagram", "ipa", "lang")
