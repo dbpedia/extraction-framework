@@ -251,10 +251,11 @@ final class SimpleWikiParser extends WikiParser
             //Set destination
             //val destination = source.getString(startPos, source.pos - m.tag.length).trim
             val destination = parseUntil(internalLinkLabelOrEnd, source, level)
-            val destinationUri = if(destination(0).isInstanceOf[TextNode]){
+            //destination is the parsed destination (will be used by e.g. the witkionary module)
+            val destinationUri = if(destination.size == 0){""} else if(destination(0).isInstanceOf[TextNode]){
               destination(0).asInstanceOf[TextNode].text
             } else {
-              null //this should never happen except for wiktionary-extraction-template pages
+              null //has a semantic within the wiktionary module, and should never occur for wikipedia
             }
 
             //Parse label
@@ -278,10 +279,11 @@ final class SimpleWikiParser extends WikiParser
             //Set destination
             //val destinationURI = source.getString(startPos, source.pos - 1).trim
             val destination = parseUntil(externalLinkLabelOrEnd, source, level)
-            val destinationURI = if(destination(0).isInstanceOf[TextNode]){
+            //destination is the parsed destination (will be used by e.g. the witkionary module)
+            val destinationURI = if(destination.size == 0){""} else if(destination(0).isInstanceOf[TextNode]){
               destination(0).asInstanceOf[TextNode].text
             } else {
-              null //this should never happen except for wiktionary-extraction-template pages
+              null //has a semantic within the wiktionary module, and should never occur for wikipedia
             }
             //Parse label
             val nodes =
