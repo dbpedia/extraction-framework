@@ -11,7 +11,11 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
 {
     private val logger = Logger.getLogger(classOf[UnitValueParser].getName)
 
+    private val parserUtils = new ParserUtils(extractionContext)
+
     private val language = extractionContext.language.wikiCode
+
+    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or """  //TODO this split regex might not be complete
     
     private val prefix = if(strict) """\s*""" else """[\D]*?"""
 
@@ -65,7 +69,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
 
         for(parseResult <- StringParser.parse(node))
         {
-            val text = ParserUtils.convertLargeNumbers(parseResult, extractionContext.language)
+            val text = parserUtils.convertLargeNumbers(parseResult)
 
             inputDatatype match
             {
@@ -106,8 +110,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
 
     override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
     {
-        //TODO this split regex might not be complete
-        NodeUtil.splitPropertyNode(propertyNode, """<br\s*\/?>|\n| and | or """)
+        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
     }
 
     /**
