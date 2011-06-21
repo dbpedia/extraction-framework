@@ -4,19 +4,16 @@ import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
 import java.util.logging.{Level, Logger}
 import util.control.ControlThrowable
 import org.dbpedia.extraction.mappings.ExtractionContext
+import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 
 /**
  * Parses geographical coordinates.
  */
 class GeoCoordinateParser(extractionContext : ExtractionContext) extends DataParser
 {
-    private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
+    private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
-    private val coordTemplateNames = Set("coord", "coor dms", "coor dm", "coor", "location", "geocoordinate", "coords")
-                                         //"coor title dms", "coor title d", "coor title dm", "coorheader",
-                                         //"coor at dm", "coor at dms", "coor at d", "coor d/new", "coor dm/new",
-                                         //"coor dms/new", "coor dec", "coor/new", "coor dms/archive001",
-                                         //"coord/conversion", "coord/templates", "location dec"
+    private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
 
     override def parse(node : Node) : Option[GeoCoordinate] =
     {
@@ -47,7 +44,7 @@ class GeoCoordinateParser(extractionContext : ExtractionContext) extends DataPar
         node match
         {
             case templateNode : TemplateNode
-                if coordTemplateNames contains extractionContext.redirects.resolve(templateNode.title).decoded.toLowerCase =>
+                if templateNames contains extractionContext.redirects.resolve(templateNode.title).decoded.toLowerCase =>
             {
                 catchCoordTemplate(templateNode)
             }
