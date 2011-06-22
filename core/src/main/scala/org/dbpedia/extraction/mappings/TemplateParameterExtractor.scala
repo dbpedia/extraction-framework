@@ -1,26 +1,22 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateParameterNode, InternalLinkNode, Node}
+import org.dbpedia.extraction.config.mappings.TemplateParameterExtractorConfig
+import org.dbpedia.extraction.ontology.OntologyNamespaces
 
 /**
  * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
  */
 class TemplateParameterExtractor(extractionContext : ExtractionContext) extends Extractor
 {
-    val templateParameterProperty = "http://dbpedia.org/property/templateUsesParameter"   // extractionContext.ontology.getProperty("templateUsesParameter")" +
-        //.getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageWikiLink' does not exist in DBpedia Ontology."))
-
-    private val ignoreTemplates = Set("redirect", "seealso", "see_also", "main", "cquote", "chess diagram", "ipa", "lang")
-    private val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r)
-
+    private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", extractionContext.language.wikiCode)
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         if(node.title.namespace != WikiTitle.Namespace.Template ||
-            ignoreTemplates.contains(node.title.decoded) ||
-            ignoreTemplatesRegex.exists(regex => regex.unapplySeq(node.title.decoded).isDefined ||
+            TemplateParameterExtractorConfig.ignoreTemplates.contains(node.title.decoded) ||
+            TemplateParameterExtractorConfig.ignoreTemplatesRegex.exists(regex => regex.unapplySeq(node.title.decoded).isDefined ||
             node.isRedirect)
         ) return new Graph()
 

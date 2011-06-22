@@ -3,28 +3,18 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
 
 /**
  * Extracts disambiguation links.
  */
 class DisambiguationExtractor(extractionContext : ExtractionContext) extends Extractor
 {
-    val language = extractionContext.language.wikiCode
+    private val language = extractionContext.language.wikiCode
 
-    val disambiguationTitlePart = Map(
-         "ca" -> " (desambiguació)",
-         "de" -> " (Begriffsklärung)",
-         "el" -> " (αποσαφήνιση)",
-         "en" -> " (disambiguation)",
-         "es" -> " (desambiguación)",
-         "it" -> " (disambigua)",
-         "pl" -> " (ujednoznacznienie)",
-         "pt" -> " (desambiguação)",
-         "ru" -> " (значения)"
-    )
+    require(DisambiguationExtractorConfig.supportedLanguages.contains(language))
 
-    //require(Set("en", "el").contains(language))
-    require(disambiguationTitlePart.keySet.contains(language))
+    private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap.getOrElse(language, "")
 
     val wikiPageDisambiguatesProperty = extractionContext.ontology.getProperty("wikiPageDisambiguates")
                                         .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageDisambiguates' does not exist in DBpedia Ontology."))
@@ -34,7 +24,7 @@ class DisambiguationExtractor(extractionContext : ExtractionContext) extends Ext
         if (page.title.namespace == WikiTitle.Namespace.Main && page.isDisambiguation)
         {
             val allLinks = collectInternalLinks(page)
-            val cleanPageTitle = page.title.decoded.replace(disambiguationTitlePart(language), "")
+            val cleanPageTitle = page.title.decoded.replace(replaceString, "")
 
             // Extract only links that contain the page title or that spell out the acronym page title
             val disambigLinks = allLinks.filter(linkNode => linkNode.destination.decoded.contains(cleanPageTitle)

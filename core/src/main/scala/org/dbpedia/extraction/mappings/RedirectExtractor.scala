@@ -10,8 +10,9 @@ import org.dbpedia.extraction.wikiparser._
 class RedirectExtractor(extractionContext : ExtractionContext) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
-    val wikiPageRedirectsProperty = extractionContext.ontology.getProperty("wikiPageRedirects")
-                                   .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageRedirects' does not exist in DBpedia Ontology."))
+
+    private val wikiPageRedirectsProperty = extractionContext.ontology.getProperty("wikiPageRedirects")
+                                            .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageRedirects' does not exist in DBpedia Ontology."))
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

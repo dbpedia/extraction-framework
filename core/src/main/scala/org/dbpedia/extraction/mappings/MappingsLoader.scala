@@ -70,7 +70,7 @@ object MappingsLoader
             }
             catch
             {
-                case ex => logger.warning("Couldn't load " + tnode.title + " on page " + page.title + ". Details: " + ex.getMessage);
+                case ex => ex.printStackTrace(); logger.warning("Couldn't load " + tnode.title + " on page " + page.title + ". Details: " + ex.getMessage);
             }
         }
 

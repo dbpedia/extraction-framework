@@ -3,6 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.mappings.PndExtractorConfig
 
 /**
  * Extracts PND (Personennamendatei) data about a person.
@@ -13,13 +14,10 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 
-    require(Set("de", "en").contains(language))
+    require(PndExtractorConfig.supportedLanguages.contains(language))
 
-    private val pndTemplates = Set("normdaten", "pnd" /*, "PNDfehlt"*/ )
-
-    // TODO create ontology properties 
-    private val dbpediaIndividualisedPnd = "http://dbpedia.org/ontology/individualisedPnd"
-    // private val dbpediaNonIndividualisedPnd = "" // DB_ONTOLOGY_NS.'Person/nonIndividualisedPnd');
+    private val individualisedPndProperty = extractionContext.ontology.getProperty("individualisedPnd")
+                                            .getOrElse(throw new NoSuchElementException("Ontology property 'individualisedPnd' does not exist in DBpedia Ontology."))
 
     private val PndRegex = """(?i)[0-9X]+"""
 
@@ -30,7 +28,7 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
         var quads = List[Quad]()
 
         val list = collectTemplates(node).filter(template =>
-            pndTemplates.contains(template.title.decoded.toLowerCase))
+            PndExtractorConfig.pndTemplates.contains(template.title.decoded.toLowerCase))
 
         list.foreach(template => {
             template.title.decoded.toLowerCase match
@@ -42,7 +40,7 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
                     {
                         for (pnd <- getPnd(property)) 
                         {
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Pnd, subjectUri, dbpediaIndividualisedPnd, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads ::= new Quad(extractionContext, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
@@ -53,7 +51,7 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
                     {
                         for (pnd <- getPnd(property))
                         {
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Pnd, subjectUri, dbpediaIndividualisedPnd, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads ::= new Quad(extractionContext, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
