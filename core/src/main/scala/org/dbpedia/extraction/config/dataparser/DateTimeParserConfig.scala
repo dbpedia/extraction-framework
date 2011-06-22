@@ -2,9 +2,6 @@ package org.dbpedia.extraction.config.dataparser
 
 object DateTimeParserConfig
 {
-    //set of wiki codes for which this parser can be applied
-    val supportedLanguages = monthsMap.keySet
-
     //names of months; have to be in lower-case
     val monthsMap = Map(
         "de" -> Map("januar"->1,"februar"->2,"märz"->3,"maerz"->3,"april"->4,"mai"->5,"juni"->6,"juli"->7,"august"->8,"september"->9,"oktober"->10,"november"->11,"dezember"->12),
@@ -21,6 +18,9 @@ object DateTimeParserConfig
         "ru" -> Map("январь"->1,"февраль"->2,"март"->3,"апрель"->4,"май"->5,"июнь"->6,"июль"->7,"август"->8,"сентябрь"->9,"октябрь"->10,"ноябрь"->11,"декабрь"->12,
                     "янв"->1,"фев"->2,"мар"->3,"апр"->4,"май"->5,"июн"->6,"июл"->7,"авг"->8,"сен"->9,"окт"->10,"ноя"->11,"дек"->12)
     )
+
+    //set of wiki codes for which this parser can be applied
+    val supportedLanguages = monthsMap.keySet
 
     // -1 is for BC
     //TODO matches anything e.g. 20 bd

@@ -3,8 +3,6 @@ package org.dbpedia.extraction.config.mappings
 
 object DisambiguationExtractorConfig
 {
-    val supportedLanguages = disambiguationTitlePartMap.keySet
-
     val disambiguationTitlePartMap = Map(
          "ca" -> " (desambiguació)",
          "de" -> " (Begriffsklärung)",
@@ -16,4 +14,6 @@ object DisambiguationExtractorConfig
          "pt" -> " (desambiguação)",
          "ru" -> " (значения)"
     )
+
+    val supportedLanguages = disambiguationTitlePartMap.keySet
 }

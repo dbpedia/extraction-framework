@@ -4,8 +4,6 @@ package org.dbpedia.extraction.config.mappings
 object HomepageExtractorConfig
 {
 
-    val supportedLanguages = propertyNamesMap.keySet
-
     //TODO rewritten as map, need to clean up per language
     //private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
     val propertyNamesMap = Map(
@@ -18,6 +16,8 @@ object HomepageExtractorConfig
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
         "ru" -> Set("сайт")
     )
+
+    val supportedLanguages = propertyNamesMap.keySet
 
     val externalLinkSectionsMap = Map(
         "ca" -> "(?:Enllaços externs|Enllaço extern)",

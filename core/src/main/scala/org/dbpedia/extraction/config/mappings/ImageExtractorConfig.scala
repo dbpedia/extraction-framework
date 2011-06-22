@@ -3,8 +3,6 @@ package org.dbpedia.extraction.config.mappings
 
 object ImageExtractorConfig
 {
-    val supportedLanguages = NonFreeRegex.keySet
-
     val wikipediaUrlPrefix = "http://upload.wikimedia.org/wikipedia/"
 
     val NonFreeRegex = Map(
@@ -15,6 +13,8 @@ object ImageExtractorConfig
            "pt" -> """(?iu)\{\{\s?(Unknown|Noncommercial|Nonderivative|Copyrighted|Screenshot|Ordnance Survey Copyright|Fairuse|Cc-nc|cc-by-nc|cc-by-nc-2.0|cc-nc-sa|cc-by-nc-sa|Cc-by-nc-sa-1.0|cc-by-nc-sa-2.0|cc-nd-nc|cc-by-nd-nc|cc-by-nd-nc-2.0|cc-nd|cc-by-nd|cc-by-nd-2.0|TW-cc-by-nc-nd-2.0|TW-cc-by-nc-sa-2.0|Copyright by Wikimedia|CopyrightbyWikimedia)\s?\}\}""".r,
            "ru" -> """(?iu)\{\{\s?(CopyrightByWikimedia|Fairuse|несвободный файл|несвободная лицензия|запрещенная лицензия)\s?\}\}""".r
     )
+
+    val supportedLanguages = NonFreeRegex.keySet
 
     val ImageRegex = """(?i)[^\"/\*?<>|:]+\.(?:jpe?g|png|gif|svg)""".r
 
