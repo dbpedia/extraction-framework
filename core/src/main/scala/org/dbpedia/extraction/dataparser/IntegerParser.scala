@@ -9,7 +9,6 @@ import java.math.RoundingMode
 /**
  * Parses integer numbers.
  */
-//TODO test after re-factor
 class IntegerParser(extractionContext : ExtractionContext,
                     val strict : Boolean = false,
                     val validRange : Int => Boolean = (i => true)) extends DataParser
@@ -23,7 +22,7 @@ class IntegerParser(extractionContext : ExtractionContext,
 
     private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
-    private val IntegerRegex = """[\D]*?([0-9\\,\\.\\-]+).*""".r
+    private val IntegerRegex = """\D*?(\-?[0-9\-\,\.]+).*""".r
 
     override def parse(node : Node) : Option[Int] =
     {
@@ -33,7 +32,7 @@ class IntegerParser(extractionContext : ExtractionContext,
         {
             return Some(value)
         }
-        
+
         None
     }
 
@@ -41,11 +40,19 @@ class IntegerParser(extractionContext : ExtractionContext,
     {
         NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
     }
-    
+
     private def parseIntegerValue(input : String) : Option[Int] =
     {
 
-        val numberStr = if(strict) input.trim else IntegerRegex.findFirstMatchIn(input.trim).toString
+        val numberStr = if(strict) input.trim else IntegerRegex.findFirstMatchIn(input.trim) match
+        {
+            case Some(s) => s.toString()
+            case None =>
+            {
+                logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
+                return null
+            }
+        }
 
         try
         {
