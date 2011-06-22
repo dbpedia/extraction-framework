@@ -40,7 +40,7 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
                     {
                         for (pnd <- getPnd(property)) 
                         {
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
@@ -51,7 +51,7 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
                     {
                         for (pnd <- getPnd(property))
                         {
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }

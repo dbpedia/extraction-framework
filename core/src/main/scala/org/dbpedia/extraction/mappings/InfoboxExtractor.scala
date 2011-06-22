@@ -122,13 +122,13 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             //#int #statistics uncomment the following 2 lines (do not delete)
                             val stat_template = OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language).replace("\n", " ").replace("\t", " ").trim
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
-                            quads ::= new Quad( extractionContext, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                                stat_property, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
+                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
+                                               stat_property, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
                         }
                         catch
                         {
@@ -141,8 +141,8 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
                             }
                         }
                     }
@@ -153,7 +153,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
                     //TODO change domain
-                    quads ::= new Quad(extractionContext, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
+                    quads ::= new Quad(extractionContext.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
                                         OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language), template.sourceUri, null)
                     seenTemplates.add(template.title.encoded)
                 }

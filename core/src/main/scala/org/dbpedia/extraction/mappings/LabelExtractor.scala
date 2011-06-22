@@ -17,7 +17,7 @@ class LabelExtractor(extractionContext : ExtractionContext) extends Extractor
         val label = node.root.title.decoded
         if(label.isEmpty) return new Graph()
 
-        new Graph(new Quad( extractionContext, DBpediaDatasets.Labels, subjectUri, labelProperty, label,
-                            node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get ))
+        new Graph(new Quad(extractionContext.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label,
+                           node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get ))
     }
 }

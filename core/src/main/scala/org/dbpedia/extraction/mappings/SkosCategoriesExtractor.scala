@@ -25,8 +25,8 @@ class SkosCategoriesExtractor(extractionContext : ExtractionContext) extends Ext
 
         var quads = List[Quad]()
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
 
         for(link <- collectCategoryLinks(node))
         {
@@ -40,7 +40,7 @@ class SkosCategoriesExtractor(extractionContext : ExtractionContext) extends Ext
                     skosBroaderProperty
                 }
 
-            quads ::= new Quad(extractionContext, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
         }
 
         new Graph(quads)

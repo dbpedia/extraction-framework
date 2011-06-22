@@ -81,7 +81,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
         {
             for(link <- UriUtils.cleanLink(URI.create(url)))
             {
-                return new Graph(new Quad(extractionContext, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
+                return new Graph(new Quad(extractionContext.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
             }
         }
         catch

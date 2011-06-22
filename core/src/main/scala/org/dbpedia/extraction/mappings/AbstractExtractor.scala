@@ -57,8 +57,8 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
         val shortText = short(text)
 
         //Create statements
-        val quadLong = new Quad(extractionContext, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
-        val quadShort = new Quad(extractionContext, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
+        val quadLong = new Quad(extractionContext.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
+        val quadShort = new Quad(extractionContext.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
 
         if(shortText.isEmpty)
         {

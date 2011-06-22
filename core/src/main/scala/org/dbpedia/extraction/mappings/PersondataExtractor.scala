@@ -66,15 +66,15 @@ class PersondataExtractor(extractionContext : ExtractionContext) extends Extract
                             if (nameParts.size == 2)
                             {
                                 val reversedName = nameParts(1).trim + " " + nameParts(0).trim
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("xsd:string"))
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("xsd:string"))
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("xsd:string"))
                             }
                             else
                             {
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("xsd:string"))
                             }
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceUri)
+                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceUri)
                             nameFound = true
                         }
                     }
@@ -97,35 +97,35 @@ class PersondataExtractor(extractionContext : ExtractionContext) extends Extract
                         {
                             for(value <- StringParser.parse(property))
                             {
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("xsd:string"))
                             }
                         }
                         case key if key == birthDate =>
                         {
                             for ((date, datatype) <- getDate(property))
                             {
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, birthDateProperty, date, property.sourceUri, datatype)
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, birthDateProperty, date, property.sourceUri, datatype)
                             }
                         }
                         case key if key == deathDate =>
                         {
                             for ((date, datatype) <- getDate(property))
                             {
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, deathDateProperty, date, property.sourceUri, datatype)
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, deathDateProperty, date, property.sourceUri, datatype)
                             }
                         }
                         case key if key == birthPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.toString, property.sourceUri)
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.toString, property.sourceUri)
                             }
                         }
                         case key if key == deathPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
-                                quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, deathPlaceProperty, objUri.toString, property.sourceUri)
+                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.Persondata, subjectUri, deathPlaceProperty, objUri.toString, property.sourceUri)
                             }
                         }
                         case _ =>

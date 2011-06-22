@@ -114,13 +114,13 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
         {
             instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
 
-            quads ::= new Quad(extractionContext,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
+            quads ::= new Quad(extractionContext.language,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
         }
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
 
         return new Graph(quads)
     }

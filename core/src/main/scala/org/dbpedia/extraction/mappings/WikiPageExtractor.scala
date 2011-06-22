@@ -21,10 +21,10 @@ class WikiPageExtractor(extractionContext : ExtractionContext) extends Extractor
 
         val objectLink = "http://" + extractionContext.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.LinksToWikipediaArticle, subjectUri, foafPageProperty,  objectLink, node.sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.LinksToWikipediaArticle, objectLink, dcLanguageProperty,  extractionContext.language.wikiCode, node.sourceUri)
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.LinksToWikipediaArticle, subjectUri, foafPageProperty,  objectLink, node.sourceUri)
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.LinksToWikipediaArticle, objectLink, dcLanguageProperty,  extractionContext.language.wikiCode, node.sourceUri)
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.LinksToWikipediaArticle, objectLink, foafPrimaryTopicProperty, subjectUri, node.sourceUri)
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.LinksToWikipediaArticle, objectLink, foafPrimaryTopicProperty, subjectUri, node.sourceUri)
 
         new Graph(quads)
     }

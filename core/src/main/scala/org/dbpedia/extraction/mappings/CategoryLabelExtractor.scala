@@ -19,7 +19,7 @@ class CategoryLabelExtractor(extractionContext : ExtractionContext) extends Extr
 
         var quads = List[Quad]()
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.CategoryLabels, subjectUri, labelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+        quads ::= new Quad(extractionContext.language, DBpediaDatasets.CategoryLabels, subjectUri, labelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
 
         new Graph(quads)
     }
