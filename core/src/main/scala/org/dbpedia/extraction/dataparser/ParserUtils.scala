@@ -31,7 +31,7 @@ class ParserUtils(extractionContext : ExtractionContext)
             {
                 val fraction = if(fract != null) fract.substring(1) else ""
                 val trailingZeros = "0" * (scales(scale.toLowerCase) - fraction.length)
-                begin + integer.replace(thousandsSeparator, "") + fraction + trailingZeros + end
+                begin + integer/*.replace(thousandsSeparator, "")*/ + fraction + trailingZeros + end
             }
             case _ => input
         }
