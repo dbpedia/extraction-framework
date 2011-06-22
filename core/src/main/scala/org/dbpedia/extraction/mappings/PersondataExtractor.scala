@@ -4,6 +4,7 @@ import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateNode, Node}
 import org.dbpedia.extraction.dataparser.{ObjectParser, DateTimeParser, StringParser}
+import org.dbpedia.extraction.config.mappings.PersondataExtractorConfig
 
 /**
  * Extracts information about persons (date and place of birth etc.) from the English and German Wikipedia, represented using the FOAF vocabulary.
@@ -12,17 +13,16 @@ class PersondataExtractor(extractionContext : ExtractionContext) extends Extract
 {
     private val language = extractionContext.language.wikiCode
 
-    require(Set("en", "de").contains(language))
+    require(PersondataExtractorConfig.supportedLanguages.contains(language))
 
-    private val persondataTemplates = Map("en" -> "persondata", "de" -> "personendaten")
-
-    private val name = Map ("en" -> "NAME", "de" -> "NAME")
-    private val alternativeNames = Map ("en" -> "ALTERNATIVE NAMES", "de" -> "ALTERNATIVNAMEN")
-    private val description = Map ("en" -> "SHORT DESCRIPTION", "de" -> "KURZBESCHREIBUNG")
-    private val birthDate = Map ("en" -> "DATE OF BIRTH", "de" -> "GEBURTSDATUM")
-    private val birthPlace = Map ("en" -> "PLACE OF BIRTH", "de" -> "GEBURTSORT")
-    private val deathDate = Map ("en" -> "DATE OF DEATH", "de" -> "STERBEDATUM")
-    private val deathPlace = Map ("en" -> "PLACE OF DEATH", "de" -> "STERBEORT")
+    private val persondataTemplate = PersondataExtractorConfig.persondataTemplates(language)
+    private val name = PersondataExtractorConfig.name(language)
+    private val alternativeNames = PersondataExtractorConfig.alternativeNames(language)
+    private val description = PersondataExtractorConfig.description(language)
+    private val birthDate = PersondataExtractorConfig.birthDate(language)
+    private val birthPlace = PersondataExtractorConfig.birthPlace(language)
+    private val deathDate = PersondataExtractorConfig.deathDate(language)
+    private val deathPlace = PersondataExtractorConfig.deathPlace(language)
 
     private val dateParser = new DateTimeParser(extractionContext, new Datatype("xsd:date"))
     private val monthYearParser = new DateTimeParser(extractionContext, new Datatype("xsd:gMonthYear"))
@@ -49,7 +49,7 @@ class PersondataExtractor(extractionContext : ExtractionContext) extends Extract
         var quads = List[Quad]()
 
         val list = collectTemplates(node).filter(template =>
-            persondataTemplates(language).contains(template.title.decoded.toLowerCase))
+            persondataTemplate.contains(template.title.decoded.toLowerCase))
 
         list.foreach(template => {
             var nameFound = false
@@ -58,7 +58,7 @@ class PersondataExtractor(extractionContext : ExtractionContext) extends Extract
             {
                 property.key match
                 {
-                    case key if key == name(language) =>
+                    case key if key == name =>
                     {
                         for(nameValue <- StringParser.parse(property))
                         {
@@ -87,41 +87,41 @@ class PersondataExtractor(extractionContext : ExtractionContext) extends Extract
                 {
                     property.key match
                     {
-                        case key if key == alternativeNames(language) =>
+                        case key if key == alternativeNames =>
                         {
                             for(value <- StringParser.parse(property))
                             {
                             }
                         }
-                        case key if key == description(language) =>
+                        case key if key == description =>
                         {
                             for(value <- StringParser.parse(property))
                             {
                                 quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("xsd:string"))
                             }
                         }
-                        case key if key == birthDate(language) =>
+                        case key if key == birthDate =>
                         {
                             for ((date, datatype) <- getDate(property))
                             {
                                 quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, birthDateProperty, date, property.sourceUri, datatype)
                             }
                         }
-                        case key if key == deathDate(language) =>
+                        case key if key == deathDate =>
                         {
                             for ((date, datatype) <- getDate(property))
                             {
                                 quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, deathDateProperty, date, property.sourceUri, datatype)
                             }
                         }
-                        case key if key == birthPlace(language) =>
+                        case key if key == birthPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
                                 quads ::= new Quad(extractionContext, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.toString, property.sourceUri)
                             }
                         }
-                        case key if key == deathPlace(language) =>
+                        case key if key == deathPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {

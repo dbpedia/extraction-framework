@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser.Node
-import org.dbpedia.extraction.wikiparser.{Node, TextNode, TemplateNode, PropertyNode, PageNode}
+import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.destinations.Graph
 
 /**
