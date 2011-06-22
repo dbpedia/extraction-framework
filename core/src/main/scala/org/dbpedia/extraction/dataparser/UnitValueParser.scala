@@ -13,6 +13,8 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
 
     private val parserUtils = new ParserUtils(extractionContext)
 
+    private val durationParser = new DurationParser(extractionContext)
+
     private val language = extractionContext.language.wikiCode
 
     private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or """  //TODO this split regex might not be complete
@@ -319,13 +321,11 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
 
     private def catchDuration(input : String) : Option[(Double, UnitDatatype)] =
     {
-        Duration.parse(input, inputDatatype, extractionContext.language.locale) match
+        durationParser.parseToSeconds(input, inputDatatype) match
         {
-            case Some(result) => Some((result.toSeconds, extractionContext.ontology.getDatatype("second").get.asInstanceOf[UnitDatatype]))
+            case Some(result) => Some((result, extractionContext.ontology.getDatatype("second").get.asInstanceOf[UnitDatatype]))
             case None => None
         }
-
-
     }
     
     private def catchUnit(input : String) : Option[String] =
