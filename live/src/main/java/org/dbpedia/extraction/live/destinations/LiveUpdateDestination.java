@@ -432,10 +432,40 @@ public class LiveUpdateDestination implements Destination{
 		 * will do nothing if Options::getOption('debug_turn_off_insert') is true
 		 * */
         if((addTriples != null) && (addTriples.size() > 0)){
+
+            //This part of code is used to remove old comment and abstract, as there sometimes comments or abstracts
+            // that are existing in the graph but the JSON string for its' resource doesn't contain it, which sometimes
+            // cause that the resource has 2 different comments and/or abstracts. So we should make sure that the old one is removed
+            Iterator addedTriplesIterator = addTriples.keySet().iterator();
+            while (addedTriplesIterator.hasNext()){
+                String tripleHash = (String)addedTriplesIterator.next();
+                RDFTriple triple = (RDFTriple) addTriples.get(tripleHash);
+                String predicate =  triple.getPredicate().toString();
+                if((predicate.compareTo(Constants.RDFS_COMMENT) == 0) || (predicate.compareTo(Constants.DB_ABSTRACT) == 0)){
+//                    RDFTriple xyz = new RDFTriple(triple.getSubject(), triple.getPredicate(), new URIImpl("?ooooo"));
+                    removeOldRDFSAbstractOrComment(triple);
+
+                }
+            }
+
 			this._jdbc_ttlp_insert_triples(addTriples);
 		}
 
 	}
+
+
+    /**
+     * Removes the old RDFS comment or abstract for the passed triple, as the comment and abstracts caused some problems upon normal removal, i.e.
+     * sometimes they cannot be removed and so 2 different comments or abstracts may exist for the same subject
+     * @param triple    A triple containing subject, predicate, and object for which the old comment or abstract should be removed.
+     */
+    private void removeOldRDFSAbstractOrComment(RDFTriple triple){
+        String pattern = Util.convertToSPARULPattern(triple.getSubject()) + " " +
+                Util.convertToSPARULPattern(triple.getPredicate()) + " " + "?o"+" . \n";
+        String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
+
+        ResultSet result = this._jdbc_sparul_execute(sparul);
+    }
 
 
 	private void _primaryStrategy(){
