@@ -24,7 +24,7 @@ class ExternalLinksExtractor(extractionContext : ExtractionContext) extends Extr
         {
             try
             {
-                quads ::= new Quad(extractionContext, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty,
+                quads ::= new Quad(extractionContext.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty,
                     uri, link.sourceUri, null)
             }
             catch

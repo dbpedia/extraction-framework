@@ -31,7 +31,7 @@ class DisambiguationExtractor(extractionContext : ExtractionContext) extends Ext
                                                             || isAcronym(cleanPageTitle, linkNode.destination.decoded))
 
             val quads = disambigLinks.map{link =>
-                new Quad(extractionContext,
+                new Quad(extractionContext.language,
                          DBpediaDatasets.DisambiguationLinks,
                          subjectUri,
                          wikiPageDisambiguatesProperty,

@@ -22,7 +22,7 @@ class ArticleCategoriesExtractor(extractionContext : ExtractionContext) extends 
 
         val list = collectInternalLinks(node)
         list.foreach(link => {
-            quads ::= new Quad(extractionContext, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
         })
         new Graph(quads)
     }

@@ -34,9 +34,9 @@ class GeoExtractor(extractionContext : ExtractionContext) extends Extractor
 
     private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Graph =
     {
-        new Graph( new Quad(extractionContext, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri) ::
-                   new Quad(extractionContext, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri) ::
-                   new Quad(extractionContext, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri) ::
-                   new Quad(extractionContext, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri) :: Nil )
+        new Graph( new Quad(extractionContext.language, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri) ::
+                   new Quad(extractionContext.language, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri) ::
+                   new Quad(extractionContext.language, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri) ::
+                   new Quad(extractionContext.language, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri) :: Nil )
     }
 }

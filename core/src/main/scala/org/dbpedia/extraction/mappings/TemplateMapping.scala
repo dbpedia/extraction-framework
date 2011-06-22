@@ -54,7 +54,7 @@ class TemplateMapping( mapToClass : OntologyClass,
                     if(found)
                     {
                         //Connect new instance to the instance created from the root template
-                        val quad = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
+                        val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
                         graph = graph.merge(new Graph(quad))
                     }
                 }
@@ -88,9 +88,9 @@ class TemplateMapping( mapToClass : OntologyClass,
         }
 
         //Create type statements
-        val quads = for(clazz <- classes) yield new Quad( extractionContext, DBpediaDatasets.OntologyTypes, uri,
-                                                          extractionContext.ontology.getProperty("rdf:type").get,
-                                                          clazz.uri, node.sourceUri )
+        val quads = for(clazz <- classes) yield new Quad(extractionContext.language, DBpediaDatasets.OntologyTypes, uri,
+                                                         extractionContext.ontology.getProperty("rdf:type").get,
+                                                         clazz.uri, node.sourceUri )
 
         new Graph(quads)
     }

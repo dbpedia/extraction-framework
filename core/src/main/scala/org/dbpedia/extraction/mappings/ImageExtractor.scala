@@ -52,14 +52,14 @@ class ImageExtractor(extractionContext : ExtractionContext) extends Extractor
         {
             val (url, thumbnailUrl) = getImageUrl(imageFileName)
 
-            quads ::= new Quad(extractionContext, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
-            quads ::= new Quad(extractionContext, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
-            quads ::= new Quad(extractionContext, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
 
             val wikipediaImageUrl = "http://" + language + ".wikipedia.org/wiki/"+ fileNamespaceIdentifier +":" + imageFileName
 
-            quads ::= new Quad(extractionContext, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
-            quads ::= new Quad(extractionContext, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
         }
 
         new Graph(quads)

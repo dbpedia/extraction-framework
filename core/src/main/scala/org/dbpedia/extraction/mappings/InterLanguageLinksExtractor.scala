@@ -28,7 +28,7 @@ class InterLanguageLinksExtractor(extractionContext : ExtractionContext) extends
 
         retrieveTranslationTitles (node,InterLanguageLinksExtractorConfig.intLinksMap(language)).foreach { tuple:(String, WikiTitle) =>
             val (tlang, title) = tuple
-            quads ::= new Quad(extractionContext, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
                 OntologyNamespaces.getResource(title.encodedWithNamespace,tlang), title.sourceUri, null)
         }
         new Graph(quads)

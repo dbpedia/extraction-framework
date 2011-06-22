@@ -22,7 +22,7 @@ class PageLinksExtractor(extractionContext : ExtractionContext) extends Extracto
         var quads = List[Quad]()
         val list = collectInternalLinks(node)
         list.foreach(link => {
-            quads ::= new Quad(extractionContext, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty,
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty,
                 getUri(link.destination), link.sourceUri, null)
         })
         new Graph(quads)

@@ -42,7 +42,7 @@ class TemplateParameterExtractor(extractionContext : ExtractionContext) extends 
         }
 
         parameters.distinct.foreach(v => {
-            quads ::= new Quad(extractionContext, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty,v,
+            quads ::= new Quad(extractionContext.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty,v,
                             node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
         })
         new Graph(quads)

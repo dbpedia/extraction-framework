@@ -61,7 +61,7 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
         {
             val mergedDate = Date.merge(dates, datatype)
 
-            val quad = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, mergedDate.toString, node.sourceUri, datatype)
+            val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, mergedDate.toString, node.sourceUri, datatype)
 
             new Graph(quad)
         }

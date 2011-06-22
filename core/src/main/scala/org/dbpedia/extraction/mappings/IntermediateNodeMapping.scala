@@ -65,13 +65,13 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
             var currentClass = nodeClass
             while(currentClass != null)
             {
-                val quad = new Quad(extractionContext, DBpediaDatasets.OntologyTypes, instanceUri, extractionContext.ontology.getProperty("rdf:type").get, currentClass.uri, node.sourceUri)
+                val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyTypes, instanceUri, extractionContext.ontology.getProperty("rdf:type").get, currentClass.uri, node.sourceUri)
                 graph = graph.merge(new Graph(quad))
                 
                 currentClass = currentClass.subClassOf
             }
 
-            val quad2 = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+            val quad2 = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
             graph = graph.merge(new Graph(quad2))
         }
         

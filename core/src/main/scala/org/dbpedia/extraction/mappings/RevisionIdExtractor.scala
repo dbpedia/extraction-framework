@@ -16,7 +16,7 @@ class RevisionIdExtractor(extractionContext : ExtractionContext) extends Extract
     {
         val objectLink = "http://" + extractionContext.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
 
-        new Graph(new Quad(extractionContext, DBpediaDatasets.Revisions, objectLink, wikiPageRevisionIDProperty,
+        new Graph(new Quad(extractionContext.language, DBpediaDatasets.Revisions, objectLink, wikiPageRevisionIDProperty,
             node.revision.toString, node.sourceUri, extractionContext.ontology.getDatatype("xsd:integer").get ))
     }
 }

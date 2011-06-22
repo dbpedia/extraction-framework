@@ -19,7 +19,7 @@ class PageIdExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         val objectLink = "http://" + language + ".wikipedia.org/wiki/" + node.root.title.encoded
 
-        new Graph(new Quad(extractionContext, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
+        new Graph(new Quad(extractionContext.language, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
             node.id.toString, node.sourceUri, extractionContext.ontology.getDatatype("xsd:integer").get ))
     }
 }

@@ -34,7 +34,7 @@ class DateIntervalMapping( templateProperty : String,
             val startDate = startDateOpt.get
             
             //Write start date quad
-            val quad1 = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
+            val quad1 = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
 
             //Writing the end date is optional
             for(endDate <- endDateOpt)
@@ -47,7 +47,7 @@ class DateIntervalMapping( templateProperty : String,
                 }
 
                 //Write end year quad
-                val quad2 = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
+                val quad2 = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
 
                 return new Graph(quad1 :: quad2 :: Nil)
             }
