@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.config.ExtractionContext
 
 /**
  * The base class of all extractors.

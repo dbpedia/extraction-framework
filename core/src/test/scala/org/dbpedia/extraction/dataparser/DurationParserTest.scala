@@ -4,7 +4,7 @@ import org.scalatest.FlatSpec
 import org.dbpedia.extraction.ontology.OntologyDatatypes
 import org.dbpedia.extraction.util.Language
 import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
-import org.dbpedia.extraction.mappings.ExtractionContext
+import org.dbpedia.extraction.config.ExtractionContext
 
 class DurationParserTest extends FlatSpec with ShouldMatchers
 {

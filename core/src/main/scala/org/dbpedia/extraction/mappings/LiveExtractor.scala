@@ -5,6 +5,7 @@ import java.io.File
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.config.ExtractionContext
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.mappings.{Redirects, ExtractionContext}
+import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.OntologyDatatypes
 import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
 import org.dbpedia.extraction.sources.WikiPage
@@ -8,6 +8,7 @@ import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
 import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
 import scala.math._
+import org.dbpedia.extraction.config.ExtractionContext
 
 class UnitValueParserTest extends FlatSpec with ShouldMatchers
 {

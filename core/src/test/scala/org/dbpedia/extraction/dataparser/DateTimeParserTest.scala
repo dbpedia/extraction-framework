@@ -1,12 +1,13 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.mappings.{Redirects, ExtractionContext}
+import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.config.ExtractionContext
 
 class DateTimeParserTest extends FlatSpec with ShouldMatchers
 {
