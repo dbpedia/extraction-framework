@@ -9,6 +9,7 @@ import org.dbpedia.extraction.destinations.{Destination, Graph}
 import org.dbpedia.extraction.mappings._
 import xml.Elem
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.config.ExtractionContext
 
 class ExtractionManager(languages : Set[Language])
 {

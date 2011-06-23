@@ -1,8 +1,9 @@
-package org.dbpedia.extraction.mappings
+package org.dbpedia.extraction.config
 
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.mappings.Redirects
 
 // TODO: find a better solution to configure the extraction.
 // Many users of this class only need one part of it - for example,

@@ -11,6 +11,7 @@ import org.scalatest.FlatSpec
 import org.dbpedia.extraction.util.Language
 import java.util.Locale
 import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.config.ExtractionContext
 
 object AugmenterExtractorTest
 {
