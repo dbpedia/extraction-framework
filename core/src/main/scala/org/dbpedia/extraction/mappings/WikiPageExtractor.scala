@@ -2,11 +2,15 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts links to corresponding Articles in Wikipedia.
  */
-class WikiPageExtractor(extractionContext : ExtractionContext) extends Extractor
+class WikiPageExtractor( extractionContext : {
+                            val ontology : Ontology
+                            val language : Language } ) extends Extractor
 {
     private val foafPageProperty = extractionContext.ontology.getProperty("foaf:page").getOrElse(throw new Exception("Property 'foaf:page' not found"))
     private val dcLanguageProperty = extractionContext.ontology.getProperty("dc:language").getOrElse(throw new Exception("Property 'dc:language' not found"))

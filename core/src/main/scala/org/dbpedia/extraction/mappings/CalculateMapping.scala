@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
-import _root_.org.dbpedia.extraction.ontology.{OntologyNamespaces, OntologyProperty}
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.wikiparser.{TemplateNode}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces, OntologyProperty}
+import org.dbpedia.extraction.util.Language
 
 class CalculateMapping( templateProperty1 : String,
                         templateProperty2 : String,
@@ -12,7 +13,10 @@ class CalculateMapping( templateProperty1 : String,
                         unit2 : Datatype,
                         operation : String,
                         ontologyProperty : OntologyProperty,
-                        extractionContext : ExtractionContext ) extends PropertyMapping
+                        extractionContext : {
+                            val ontology : Ontology
+                            val redirects : Redirects  // redirects required by UnitValueParser
+                            val language : Language } ) extends PropertyMapping
 {
     require(operation == "add", "Operation '" + operation + "' is not supported. Supported operations: 'add'")
 

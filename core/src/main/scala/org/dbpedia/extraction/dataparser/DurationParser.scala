@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.mappings.ExtractionContext
 import java.text.NumberFormat
 import org.dbpedia.extraction.ontology.datatypes.{UnitDatatype, DimensionDatatype, Datatype}
 import org.dbpedia.extraction.config.dataparser.DurationParserConfig
+import org.dbpedia.extraction.util.Language
 
-class DurationParser(extractionContext : ExtractionContext)
+
+class DurationParser( extractionContext : { val language : Language } )
 {
     private val language = extractionContext.language.wikiCode
 

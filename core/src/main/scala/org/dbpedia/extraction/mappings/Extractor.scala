@@ -3,7 +3,6 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.Graph
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.ontology.OntologyNamespaces
-import java.io.File
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
@@ -103,7 +102,7 @@ object Extractor
         val redirects = Redirects.load(articlesSource, language)
         val context = new ExtractionContext(ontology, language, redirects, mappingsSource, commonsSource, articlesSource)
 
-        val extractorInstances = extractors.map(_.getConstructor(classOf[ExtractionContext]).newInstance(context))
+        val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
 
         new CompositeExtractor(extractorInstances)
     }

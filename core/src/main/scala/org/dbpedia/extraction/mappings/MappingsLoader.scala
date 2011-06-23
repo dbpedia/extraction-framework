@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 
 import scala.collection.mutable.HashMap
@@ -9,6 +8,9 @@ import scala.collection.mutable.ArrayBuffer
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.sources.Source
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -18,7 +20,11 @@ object MappingsLoader
 {
     private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
     
-    def load(context : ExtractionContext) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
+    def load( context : {
+                 val ontology : Ontology
+                 val language : Language
+                 val redirects : Redirects
+                 val mappingsSource : Source } ) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
     {
         logger.info("Loadings mappings ("+context.language.wikiCode+")")
 
@@ -53,9 +59,9 @@ object MappingsLoader
                 	}
                 	case "TableMapping" =>
                 	{
-                	    tableMappings += new TableMapping( loadOntologyClass(tnode, "mapToClass", true, context),
-                                                           loadOntologyClass(tnode, "correspondingClass", false, context),
-                                                           loadOntologyProperty(tnode, "correspondingProperty", false, context),
+                	    tableMappings += new TableMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
+                                                           loadOntologyClass(tnode, "correspondingClass", false, context.ontology),
+                                                           loadOntologyProperty(tnode, "correspondingProperty", false, context.ontology),
                                                            loadTemplateProperty(tnode, "keywords"),
                                                            loadTemplateProperty(tnode, "header"),
                                                            loadPropertyMappings(tnode, "mappings", context),
@@ -65,7 +71,7 @@ object MappingsLoader
                 	{
                 	    conditionalMappings(name) = loadConditionalMapping(tnode, context)
                 	}
-                	case name => //Unknown mapping element
+                	case _ => //Unknown mapping element
 		        }
             }
             catch
@@ -78,17 +84,23 @@ object MappingsLoader
 
 		(templateMappings.toMap, tableMappings.toList, conditionalMappings.toMap)
 	}
-    
-    private def loadTemplateMapping(tnode : TemplateNode, context : ExtractionContext) =
+
+    private def loadTemplateMapping(tnode : TemplateNode, context : {
+                                                            val ontology : Ontology
+                                                            val redirects : Redirects
+                                                            val language : Language } ) =
     {
-        new TemplateMapping( loadOntologyClass(tnode, "mapToClass", true, context),
-                             loadOntologyClass(tnode, "correspondingClass", false, context),
-                             loadOntologyProperty(tnode, "correspondingProperty", false, context),
+        new TemplateMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
+                             loadOntologyClass(tnode, "correspondingClass", false, context.ontology),
+                             loadOntologyProperty(tnode, "correspondingProperty", false, context.ontology),
                              loadPropertyMappings(tnode, "mappings", context),
                              context )
     }
 
-    private def loadPropertyMappings(node : TemplateNode, propertyName : String, context : ExtractionContext) : List[PropertyMapping] =
+    private def loadPropertyMappings(node : TemplateNode, propertyName : String, context : {
+                                                                                    val ontology : Ontology
+                                                                                    val redirects : Redirects
+                                                                                    val language : Language } ) : List[PropertyMapping] =
     {
         var mappings = List[PropertyMapping]()
 
@@ -108,53 +120,56 @@ object MappingsLoader
 	    mappings.reverse
 	}
 
-    private def loadPropertyMapping(tnode : TemplateNode, context : ExtractionContext) = tnode.title.decoded match
+    private def loadPropertyMapping(tnode : TemplateNode, context : {
+                                                            val ontology : Ontology
+                                                            val redirects : Redirects
+                                                            val language : Language } ) = tnode.title.decoded match
     {
         case "PropertyMapping" =>
         {
             new SimplePropertyMapping( loadTemplateProperty(tnode, "templateProperty"),
-                                       loadOntologyProperty(tnode, "ontologyProperty", true, context),
-                                       loadDatatype(tnode, "unit", false, context),
+                                       loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
+                                       loadDatatype(tnode, "unit", false, context.ontology),
                                        context )
         }
         case "IntermediateNodeMapping" =>
         {
-            new IntermediateNodeMapping( loadOntologyClass(tnode, "nodeClass", true, context),
-                                         loadOntologyProperty(tnode, "correspondingProperty", true, context),
+            new IntermediateNodeMapping( loadOntologyClass(tnode, "nodeClass", true, context.ontology),
+                                         loadOntologyProperty(tnode, "correspondingProperty", true, context.ontology),
                                          loadPropertyMappings(tnode, "mappings", context),
                                          context )
         }
         case "DateIntervalMapping" =>
         {
             new DateIntervalMapping( loadTemplateProperty(tnode, "templateProperty"),
-                                     loadOntologyProperty(tnode, "startDateOntologyProperty", true, context),
-                                     loadOntologyProperty(tnode, "endDateOntologyProperty", true, context),
+                                     loadOntologyProperty(tnode, "startDateOntologyProperty", true, context.ontology),
+                                     loadOntologyProperty(tnode, "endDateOntologyProperty", true, context.ontology),
                                      context )
         }
         case "CombineDateMapping" =>
         {
-            new CombineDateMapping( loadOntologyProperty(tnode, "ontologyProperty", true, context),
+            new CombineDateMapping( loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
                                     loadTemplateProperty(tnode, "templateProperty1"),
-                                    loadDatatype(tnode, "unit1", true, context),
+                                    loadDatatype(tnode, "unit1", true, context.ontology),
                                     loadTemplateProperty(tnode, "templateProperty2"),
-                                    loadDatatype(tnode, "unit2", true, context),
+                                    loadDatatype(tnode, "unit2", true, context.ontology),
                                     loadTemplateProperty(tnode, "templateProperty3", false),
-                                    loadDatatype(tnode, "unit3", false, context),
+                                    loadDatatype(tnode, "unit3", false, context.ontology),
                                     context )
         }
         case "CalculateMapping" =>
         {
             new CalculateMapping( loadTemplateProperty(tnode, "templateProperty1"),
                                   loadTemplateProperty(tnode, "templateProperty2"),
-                                  loadDatatype(tnode, "unit1", false, context),
-                                  loadDatatype(tnode, "unit2", false, context),
+                                  loadDatatype(tnode, "unit1", false, context.ontology),
+                                  loadDatatype(tnode, "unit2", false, context.ontology),
                                   loadTemplateProperty(tnode, "operation"),
-                                  loadOntologyProperty(tnode, "ontologyProperty", true, context),
+                                  loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
                                   context )
         }
         case "GeocoordinatesMapping" =>
         {
-            new GeoCoordinatesMapping( loadOntologyProperty(tnode, "ontologyProperty", false, context),
+            new GeoCoordinatesMapping( loadOntologyProperty(tnode, "ontologyProperty", false, context.ontology),
                                        loadTemplateProperty(tnode, "coordinates", false),
                                        loadTemplateProperty(tnode, "latitude", false),
                                        loadTemplateProperty(tnode, "longitude", false),
@@ -171,7 +186,10 @@ object MappingsLoader
         case title => throw new IllegalArgumentException("Unknown property type " + title + " on page " + tnode.root.title)
     }
 	
-    private def loadConditionalMapping(tnode : TemplateNode, context : ExtractionContext) =
+    private def loadConditionalMapping(tnode : TemplateNode,  context : {
+                                                                 val ontology : Ontology
+                                                                 val redirects : Redirects
+                                                                 val language : Language } ) =
     {
         val conditionMappings =
             for( casesProperty <- tnode.property("cases").toList;
@@ -183,7 +201,10 @@ object MappingsLoader
                                 context )
     }
     
-    private def loadConditionMapping(tnode : TemplateNode, context : ExtractionContext) =
+    private def loadConditionMapping(tnode : TemplateNode, context : {
+                                                              val ontology : Ontology
+                                                              val redirects : Redirects
+                                                              val language : Language } ) =
     {
         //Search for the template mapping in the first template node of the mapping property
         val mapping = tnode.property("mapping").flatMap(mappingNode =>
@@ -199,11 +220,11 @@ object MappingsLoader
                               context )
     }
 	
-	private def loadOntologyClass(node : TemplateNode, propertyName : String, required : Boolean, context : ExtractionContext) : OntologyClass =
+	private def loadOntologyClass(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyClass =
 	{
 	    val className = loadTemplateProperty(node, propertyName, required)
 	    
-	    context.ontology.getClass(className) match
+	    ontology.getClass(className) match
 	    {
 	        case Some(ontClass) => ontClass
             case _ =>
@@ -216,11 +237,11 @@ object MappingsLoader
 	    }
 	}
 	
-    private def loadOntologyProperty(node : TemplateNode, propertyName : String, required : Boolean, context : ExtractionContext) : OntologyProperty =
+    private def loadOntologyProperty(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyProperty =
     {
         val ontPropertyName = loadTemplateProperty(node, propertyName, required)
         
-        context.ontology.getProperty(ontPropertyName) match
+        ontology.getProperty(ontPropertyName) match
         {
             case Some(ontProperty) => ontProperty
             case _ =>
@@ -233,13 +254,13 @@ object MappingsLoader
         }
     }
     
-    private def loadDatatype(node : TemplateNode, propertyName : String, required : Boolean, context : ExtractionContext) : Datatype =
+    private def loadDatatype(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : Datatype =
     {
         val datatypeName = loadTemplateProperty(node, propertyName, required)
         
-        context.ontology.getDatatype(datatypeName) match
+        ontology.getDatatype(datatypeName) match
         {
-            case Some(datatypeName) => datatypeName
+            case Some(ontologyDatatypeName) => ontologyDatatypeName
             case _ =>
             {
                 if(required)

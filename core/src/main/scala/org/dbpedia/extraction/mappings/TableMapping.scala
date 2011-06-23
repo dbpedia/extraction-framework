@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
+import org.dbpedia.extraction.util.Language
 
 class TableMapping( mapToClass : OntologyClass,
                     correspondingClass : OntologyClass,
@@ -10,7 +11,9 @@ class TableMapping( mapToClass : OntologyClass,
                     keywords : String,
                     header : String,
                     mappings : List[PropertyMapping],
-                    extractionContext : ExtractionContext ) extends ClassMapping
+                    extractionContext : {
+                        val ontology : Ontology
+                        val language : Language }   ) extends ClassMapping
 {
     val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase) }
     
@@ -69,7 +72,7 @@ class TableMapping( mapToClass : OntologyClass,
                             .foldLeft(graph)(_ merge _)
         }
         
-        return graph
+        graph
     }
     
     /**
@@ -106,8 +109,8 @@ class TableMapping( mapToClass : OntologyClass,
 
             val previousRowIter = previousRow.iterator
             val currentRowIter = rowNode.children.iterator
-            var previousCell = if(previousRowIter.hasNext) previousRowIter.next else null
-            var currentCell = if(currentRowIter.hasNext) currentRowIter.next else null
+            var previousCell = if(previousRowIter.hasNext) previousRowIter.next() else null
+            var currentCell = if(currentRowIter.hasNext) currentRowIter.next() else null
 
             var done = false
             while(!done)
@@ -117,14 +120,14 @@ class TableMapping( mapToClass : OntologyClass,
                     previousCell.setAnnotation("rowspan", previousCell.annotation("rowspan").get.asInstanceOf[Int] - 1)
                     newRow ::= previousCell
 
-                    previousCell = if(previousRowIter.hasNext) previousRowIter.next else null
+                    previousCell = if(previousRowIter.hasNext) previousRowIter.next() else null
                 }
                 else if(currentCell != null)
                 {
                     newRow ::= currentCell
 
-                    previousCell = if(previousRowIter.hasNext) previousRowIter.next else null
-                    currentCell = if(currentRowIter.hasNext) currentRowIter.next else null
+                    previousCell = if(previousRowIter.hasNext) previousRowIter.next() else null
+                    currentCell = if(currentRowIter.hasNext) currentRowIter.next() else null
                 }
                 else
                 {
@@ -143,7 +146,7 @@ class TableMapping( mapToClass : OntologyClass,
         //Link node to the original AST
         newTableNode.parent = tableNode.parent
         
-        return newTableNode 
+        newTableNode
     }
     
     private def createTemplateNode(rowNode : TableRowNode, tableHeader : List[String]) : Option[TemplateNode] =
@@ -215,7 +218,7 @@ class TableMapping( mapToClass : OntologyClass,
         //Link node to the original AST
         templateNode.parent = rowNode.parent.parent
         
-        return Some(templateNode)
+        Some(templateNode)
     }
     
     private def findCorrespondingInstance(tableNode : TableNode) : Option[String] =
@@ -247,7 +250,7 @@ class TableMapping( mapToClass : OntologyClass,
             return Some(correspondingTemplate.annotation(TemplateMapping.INSTANCE_URI_ANNOTATION).get.asInstanceOf[String])
         }
         
-        return None
+        None
     }
     
     private class ColumnMatching( val propertyName : String,
@@ -278,7 +281,7 @@ class TableMapping( mapToClass : OntologyClass,
             }
     
             //Give up and consider this two matchings as equal
-            return 0;
+            0;
         }
     }
 }

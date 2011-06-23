@@ -1,14 +1,14 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.config.dataparser.ParserUtilsConfig
 import java.text.NumberFormat
+import org.dbpedia.extraction.util.Language
 
 /**
  * Utility functions used by the data parsers.
  */
 //TODO test after re-factor
-class ParserUtils(extractionContext : ExtractionContext)
+class ParserUtils( extractionContext : { val language : Language } )
 {
     private val scales = ParserUtilsConfig.scalesMap.getOrElse(extractionContext.language.wikiCode, ParserUtilsConfig.scalesMap("en"))
 

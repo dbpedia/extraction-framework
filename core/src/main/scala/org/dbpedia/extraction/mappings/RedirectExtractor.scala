@@ -1,13 +1,16 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts redirect links between Articles in Wikipedia.
  */
-class RedirectExtractor(extractionContext : ExtractionContext) extends Extractor
+class RedirectExtractor( extractionContext : {
+                             val ontology : Ontology
+                             val language : Language }  ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 

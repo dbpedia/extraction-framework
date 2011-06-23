@@ -3,11 +3,16 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateNode}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts geo-coodinates.
  */
-class GeoExtractor(extractionContext : ExtractionContext) extends Extractor
+class GeoExtractor( extractionContext : {
+                        val ontology : Ontology
+                        val redirects : Redirects  // redirects required by GeoCoordinateParser
+                        val language : Language } ) extends Extractor
 {
     private val geoCoordinateParser = new GeoCoordinateParser(extractionContext)
 

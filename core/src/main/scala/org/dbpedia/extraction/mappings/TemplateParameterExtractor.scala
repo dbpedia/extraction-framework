@@ -3,12 +3,15 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateParameterNode, InternalLinkNode, Node}
 import org.dbpedia.extraction.config.mappings.TemplateParameterExtractorConfig
-import org.dbpedia.extraction.ontology.OntologyNamespaces
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
  */
-class TemplateParameterExtractor(extractionContext : ExtractionContext) extends Extractor
+class TemplateParameterExtractor( extractionContext : {
+                                      val ontology : Ontology
+                                      val language : Language }  ) extends Extractor
 {
     private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", extractionContext.language.wikiCode)
 

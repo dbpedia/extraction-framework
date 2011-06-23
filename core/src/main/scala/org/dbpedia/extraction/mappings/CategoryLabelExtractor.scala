@@ -3,14 +3,16 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts labels for Categories.
  */
-class CategoryLabelExtractor(extractionContext : ExtractionContext) extends Extractor
+class CategoryLabelExtractor( extractionContext : {
+                                  val ontology : Ontology
+                                  val language : Language } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
-
     val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =

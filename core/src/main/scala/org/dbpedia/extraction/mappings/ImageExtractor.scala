@@ -8,14 +8,19 @@ import org.dbpedia.extraction.sources.{Source}
 import collection.mutable.{HashSet, Set => MutableSet}
 import java.math.BigInteger
 import java.security.MessageDigest
-import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.{Language, WikiUtil}
 
 /**
  * Extracts the first image of a Wikipedia page. Constructs a thumbnail from it, and
  * the full size image.
  */
-class ImageExtractor(extractionContext : ExtractionContext) extends Extractor
+class ImageExtractor( extractionContext : {
+                          val ontology : Ontology
+                          val language : Language
+                          val articlesSource : Source
+                          val commonsSource : Source } ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 

@@ -1,14 +1,17 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import java.util.logging.{Logger}
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
+import org.dbpedia.extraction.util.Language
 
 class IntermediateNodeMapping(nodeClass : OntologyClass,
                               correspondingProperty : OntologyProperty,
                               mappings : List[PropertyMapping],
-                              extractionContext : ExtractionContext) extends PropertyMapping
+                              extractionContext : {
+                                  val ontology : Ontology
+                                  val language : Language } ) extends PropertyMapping
 {
     private val logger = Logger.getLogger(classOf[IntermediateNodeMapping].getName)
     
@@ -51,7 +54,7 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
             logger.fine("IntermediaNodeMapping for more than one affected template property not implemented!")
         }
 
-        return graph
+        graph
     }
     
     private def createInstance(node : TemplateNode, instanceUri : String, originalSubjectUri : String, pageContext : PageContext) : Graph =
@@ -75,6 +78,6 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
             graph = graph.merge(new Graph(quad2))
         }
         
-        return graph
+        graph
     }
 }

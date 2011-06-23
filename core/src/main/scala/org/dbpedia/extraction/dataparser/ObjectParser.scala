@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.mappings.ExtractionContext
+import org.dbpedia.extraction.ontology.OntologyNamespaces
+import org.dbpedia.extraction.util.Language
 
 /**
  * Parses links to other instances.
  */
-class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean = false) extends DataParser
+
+class ObjectParser( extractionContext : { val language : Language }, val strict : Boolean = false) extends DataParser
 {
     private val flagTemplateParser = new FlagTemplateParser(extractionContext)
 
@@ -59,7 +60,7 @@ class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean =
                 }
             }
         }
-        return None
+        None
     }
 
     override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =

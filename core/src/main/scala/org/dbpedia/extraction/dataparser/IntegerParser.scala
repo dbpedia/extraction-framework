@@ -1,17 +1,15 @@
 package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, Node}
 import java.text.{NumberFormat, ParseException}
 import java.math.RoundingMode
+import org.dbpedia.extraction.util.Language
 
 /**
  * Parses integer numbers.
  */
-class IntegerParser(extractionContext : ExtractionContext,
-                    val strict : Boolean = false,
-                    val validRange : Int => Boolean = (i => true)) extends DataParser
+class IntegerParser( extractionContext : { val language : Language } , val strict : Boolean = false, val validRange : Int => Boolean = (i => true)) extends DataParser
 {
     private val numberFormat = NumberFormat.getIntegerInstance(extractionContext.language.locale)
     numberFormat.setRoundingMode(RoundingMode.HALF_UP)

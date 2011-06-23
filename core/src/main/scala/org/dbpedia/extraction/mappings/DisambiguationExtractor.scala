@@ -1,14 +1,17 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts disambiguation links.
  */
-class DisambiguationExtractor(extractionContext : ExtractionContext) extends Extractor
+class DisambiguationExtractor( extractionContext : {
+                                   val ontology : Ontology
+                                   val language : Language } ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 

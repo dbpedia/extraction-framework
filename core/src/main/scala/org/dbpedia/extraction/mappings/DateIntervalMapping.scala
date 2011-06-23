@@ -1,16 +1,19 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyProperty
 import java.util.logging.{Logger}
 import org.dbpedia.extraction.dataparser.DateTimeParser
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.OntologyProperty
+import org.dbpedia.extraction.util.Language
 
 class DateIntervalMapping( templateProperty : String,
                            startDateOntologyProperty : OntologyProperty,
                            endDateOntologyProperty : OntologyProperty,
-                           extractionContext : ExtractionContext ) extends PropertyMapping
+                           extractionContext : {
+                               val redirects : Redirects  // redirects required by DateTimeParser
+                               val language : Language } ) extends PropertyMapping
 {
     private val logger = Logger.getLogger(classOf[DateIntervalMapping].getName)
 
@@ -55,6 +58,6 @@ class DateIntervalMapping( templateProperty : String,
             return new Graph(quad1 :: Nil)
         }
         
-        return new Graph()
+        new Graph()
     }
 }

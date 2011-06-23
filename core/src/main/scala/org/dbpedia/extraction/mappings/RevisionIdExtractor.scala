@@ -2,11 +2,15 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts revision ids to articles.
  */
-class RevisionIdExtractor(extractionContext : ExtractionContext) extends Extractor
+class RevisionIdExtractor( extractionContext : {
+                               val ontology : Ontology
+                               val language : Language }  ) extends Extractor
 {
     private val wikiPageRevisionIDProperty = extractionContext.ontology.getProperty("wikiPageRevisionID")
                                              .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageRevisionID' does not exist in DBpedia Ontology."))

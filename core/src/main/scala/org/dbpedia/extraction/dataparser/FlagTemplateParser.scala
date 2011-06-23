@@ -1,15 +1,14 @@
 package org.dbpedia.extraction.dataparser
 
-import java.util.Locale
 import org.dbpedia.extraction.wikiparser.{TemplateNode, TextNode, WikiTitle}
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.config.dataparser.FlagTemplateParserConfig
+import org.dbpedia.extraction.util.Language
 
 /**
  * Handling of flag templates.
  */
 //TODO test after re-factor
-class FlagTemplateParser(extractionContext : ExtractionContext)
+class FlagTemplateParser( extractionContext : { val language : Language } )
 {
     private val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
 

@@ -2,9 +2,10 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import java.util.logging.{Logger, Level}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts geo-coodinates.
@@ -21,7 +22,10 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
                              latitudeMinutes : String,
                              latitudeSeconds : String,
                              latitudeDirection : String,
-                             extractionContext : ExtractionContext ) extends PropertyMapping
+                             extractionContext : {
+                                 val ontology : Ontology
+                                 val redirects : Redirects   // redirects required by GeoCoordinatesParser
+                                 val language : Language } ) extends PropertyMapping
 {
     private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName) 
 
