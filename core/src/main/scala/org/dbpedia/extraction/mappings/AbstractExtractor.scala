@@ -7,6 +7,8 @@ import java.net.{URLEncoder, URL}
 import xml.XML
 import io.Source
 import java.io.{InputStream, OutputStreamWriter}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts page abstracts.
@@ -14,7 +16,9 @@ import java.io.{InputStream, OutputStreamWriter}
  * DBpedia-customized MediaWiki instance is required.
  */
 
-class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
+class AbstractExtractor( extractionContext : {
+                             val ontology : Ontology
+                             val language : Language } ) extends Extractor
 {
     private val maxRetries = 2
 
@@ -92,8 +96,8 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
                 conn.setDoOutput(true)
                 val writer = new OutputStreamWriter(conn.getOutputStream)
                 writer.write(parameters)
-                writer.flush
-                writer.close
+                writer.flush()
+                writer.close()
 
                 // Read answer
                 return readInAbstract(conn.getInputStream)
@@ -134,14 +138,14 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
                 {
                     return sentence
                 }
-                return builder.toString.trim
+                return builder.toString().trim
             }
 
             size += sentence.size
             builder.append(sentence)
         }
 
-        builder.toString.trim
+        builder.toString().trim
     }
 
     /**
@@ -152,7 +156,7 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
     private def readInAbstract(inputStream : InputStream) : String =
     {
         // for XML format
-        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines.mkString("")
+        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
         (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
     }
 
@@ -193,7 +197,7 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
         }
 
         // Re-generate wiki text for found range of nodes
-        pageNode.children.slice(start, end).map(_.toWikiText).mkString("").trim
+        pageNode.children.slice(start, end).map(_.toWikiText()).mkString("").trim
     }
 
 }

@@ -1,14 +1,17 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.wikiparser.{Node, PropertyNode, TemplateNode}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
+import org.dbpedia.extraction.util.Language
 
 class TemplateMapping( mapToClass : OntologyClass,
                        correspondingClass : OntologyClass,
                        correspondingProperty : OntologyProperty,
                        mappings : List[PropertyMapping],
-                       extractionContext : ExtractionContext ) extends ClassMapping
+                       extractionContext : {
+                           val ontology : Ontology
+                           val language : Language }  ) extends ClassMapping
 {
     override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
     {

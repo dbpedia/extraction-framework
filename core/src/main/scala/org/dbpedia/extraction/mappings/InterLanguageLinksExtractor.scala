@@ -1,15 +1,18 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InterWikiLinkNode}
 import org.dbpedia.extraction.config.mappings.InterLanguageLinksExtractorConfig
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
 
 
 /**
  * Extracts interwiki links and creates owl:sameAs triples
  */
-class InterLanguageLinksExtractor(extractionContext : ExtractionContext) extends Extractor
+class InterLanguageLinksExtractor( extractionContext : {
+                                       val ontology : Ontology
+                                       val language : Language } ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 

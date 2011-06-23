@@ -2,15 +2,19 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.ontology.datatypes.{Datatype}
 import java.util.logging.{Logger, Level}
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.util.Date
 import org.dbpedia.extraction.config.dataparser.DateTimeParserConfig
+import org.dbpedia.extraction.util.{Language, Date}
+import org.dbpedia.extraction.mappings.Redirects
 
 /**
  * Parses a data time.
  */
-class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype, val strict : Boolean = false) extends DataParser
+class DateTimeParser ( extractionContext : {
+                            val language : Language
+                            val redirects : Redirects },
+                       datatype : Datatype,
+                       val strict : Boolean = false) extends DataParser
 {
     require(datatype != null, "datatype != null")
 

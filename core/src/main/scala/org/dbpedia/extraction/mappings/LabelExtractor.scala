@@ -2,11 +2,15 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts labels to articles based on their title.
  */
-class LabelExtractor(extractionContext : ExtractionContext) extends Extractor
+class LabelExtractor( extractionContext : {
+                          val ontology : Ontology
+                          val language : Language } ) extends Extractor
 {
     val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
     

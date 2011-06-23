@@ -4,12 +4,14 @@ import java.util.logging.{Logger,Level}
 import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, Node}
 import java.text.{ParseException, NumberFormat}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Parses double-precision floating-point numbers.
  */
 //TODO a lot of copied code from IntegerParser!
-class DoubleParser(extractionContext : ExtractionContext, val strict : Boolean = false) extends DataParser
+class DoubleParser( extractionContext : { val language : Language } , val strict : Boolean = false) extends DataParser
 {
     private val numberFormat = NumberFormat.getInstance(extractionContext.language.locale)
 

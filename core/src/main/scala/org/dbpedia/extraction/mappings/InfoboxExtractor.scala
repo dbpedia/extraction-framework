@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.util.UriUtils
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import collection.mutable.HashSet
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
@@ -10,6 +8,8 @@ import org.dbpedia.extraction.util.StringUtils._
 import java.net.URLEncoder
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.{Language, UriUtils}
 
 /**
  * This extractor extracts all properties from all infoboxes.
@@ -20,7 +20,10 @@ import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
  * The infobox extractor performs only a minimal amount of property value clean-up, e.g., by converting a value like “June 2009” to the XML Schema format “2009–06”.
  * You should therefore use the infobox dataset only if your application requires complete coverage of all Wikipeda properties and you are prepared to accept relatively noisy data.
  */
-class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
+class InfoboxExtractor( extractionContext : {
+                            val ontology : Ontology
+                            val language : Language
+                            val redirects : Redirects } ) extends Extractor
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Configuration
@@ -230,7 +233,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
         //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
         val splitNodes = NodeUtil.splitPropertyNode(node, "(—|–|-|&mdash;|&ndash;|,|;)")
 
-        splitNodes.flatMap(extractDate) match
+        splitNodes.flatMap(extractDate(_)) match
         {
             case dates if dates.size == splitNodes.size => dates
             case _ => List.empty
@@ -258,7 +261,7 @@ class InfoboxExtractor(extractionContext : ExtractionContext) extends Extractor
         }
         splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
         {
-            case links if links.size == splitNodes.size => return links.map(UriUtils.cleanLink).collect{case Some(link) => (link, null)}
+            case links if links.size == splitNodes.size => links.map(UriUtils.cleanLink).collect{case Some(link) => (link, null)}
             case _ => List.empty
         }
     }

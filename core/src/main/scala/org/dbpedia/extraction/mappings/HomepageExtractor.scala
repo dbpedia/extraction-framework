@@ -1,15 +1,19 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.util.UriUtils
 import java.net.URI
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.{Language, UriUtils}
 
 /**
  * Extracts links to the official homepage of an instance.
  */
-class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
+class HomepageExtractor( extractionContext : {
+                             val ontology : Ontology
+                             val language : Language
+                             val redirects : Redirects } ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 
@@ -72,7 +76,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
             }
         }
 
-        return new Graph()
+        new Graph()
     }
 
     private def generateStatement(subjectUri : String, pageContext : PageContext, url : String, node: Node) : Graph =

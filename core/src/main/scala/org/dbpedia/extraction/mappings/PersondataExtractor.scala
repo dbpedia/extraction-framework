@@ -5,11 +5,16 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateNode, Node}
 import org.dbpedia.extraction.dataparser.{ObjectParser, DateTimeParser, StringParser}
 import org.dbpedia.extraction.config.mappings.PersondataExtractorConfig
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts information about persons (date and place of birth etc.) from the English and German Wikipedia, represented using the FOAF vocabulary.
  */
-class PersondataExtractor(extractionContext : ExtractionContext) extends Extractor
+class PersondataExtractor( extractionContext : {
+                               val ontology : Ontology
+                               val redirects : Redirects  // redirects required by DateTimeParser
+                               val language : Language } ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 

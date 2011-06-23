@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
+import org.dbpedia.extraction.wikiparser.TemplateNode
 import java.util.logging.Logger
 import org.dbpedia.extraction.dataparser.DateTimeParser
-import org.dbpedia.extraction.util.Date
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
+import org.dbpedia.extraction.ontology.OntologyProperty
+import org.dbpedia.extraction.util.{Language, Date}
 
 class CombineDateMapping( ontologyProperty : OntologyProperty,
                           templateProperty1 : String,
@@ -15,7 +15,9 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
                           unit2 : Datatype,
                           templateProperty3 : String,
                           unit3 : Datatype,
-                          extractionContext : ExtractionContext ) extends PropertyMapping
+                          extractionContext : {
+                              val redirects : Redirects  // redirects required by DateTimeParser
+                              val language : Language } ) extends PropertyMapping
 {
     require(Set("xsd:date", "xsd:gDay", "xsd:gMonth", "xsd:gYear", "xsd:gMonthDay", "xsd:gYearMonth").contains(ontologyProperty.range.name),
         "ontologyProperty must be one of: xsd:date, xsd:gDay, xsd:gMonth, xsd:gYear, xsd:gMonthDay, xsd:gYearMonth")

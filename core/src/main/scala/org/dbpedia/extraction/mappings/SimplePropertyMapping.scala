@@ -3,13 +3,17 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
-import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty, OntologyNamespaces, OntologyClass, OntologyProperty}
+import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.extraction.ontology._
+import org.dbpedia.extraction.util.Language
 
 class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNodeMapping requires this to be public. Is there a better way?
                              ontologyProperty : OntologyProperty,
                              unit : Datatype,
-                             extractionContext : ExtractionContext ) extends PropertyMapping
+                             extractionContext : {
+                                 val ontology : Ontology
+                                 val redirects : Redirects  // redirects required by DateTimeParser and UnitValueParser
+                                 val language : Language }   ) extends PropertyMapping
 {
     validate()
 

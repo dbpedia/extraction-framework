@@ -1,15 +1,18 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, Node, InternalLinkNode, WikiTitle}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts information about which concept is a category and how categories are related using the SKOS Vocabulary.
  */
-class SkosCategoriesExtractor(extractionContext : ExtractionContext) extends Extractor
+class SkosCategoriesExtractor( extractionContext : {
+                                   val ontology : Ontology
+                                   val language : Language }  ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 

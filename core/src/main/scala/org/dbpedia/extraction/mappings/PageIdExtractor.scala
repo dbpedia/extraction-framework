@@ -1,13 +1,16 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser.PageNode
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts page ids to articles.
  */
-class PageIdExtractor(extractionContext : ExtractionContext) extends Extractor
+class PageIdExtractor( extractionContext : {
+                           val ontology : Ontology
+                           val language : Language }  ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 

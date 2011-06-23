@@ -2,16 +2,23 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.Graph
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.sources.Source
 
 /**
  *  Extracts structured data based on hand-generated mappings of Wikipedia infoboxes to the DBpedia ontology.
  */
-class MappingExtractor(context : ExtractionContext) extends Extractor
+class MappingExtractor( extractionContext : {
+                            val ontology : Ontology
+                            val language : Language
+                            val mappingsSource : Source
+                            val redirects : Redirects } ) extends Extractor
 {
 
-    private val (templateMappings, tableMappings, conditionalMappings) = MappingsLoader.load(context)
+    private val (templateMappings, tableMappings, conditionalMappings) = MappingsLoader.load(extractionContext)
 
-    private val resolvedMappings = context.redirects.resolveMap(templateMappings) ++ context.redirects.resolveMap(conditionalMappings)
+    private val resolvedMappings = extractionContext.redirects.resolveMap(templateMappings) ++ extractionContext.redirects.resolveMap(conditionalMappings)
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

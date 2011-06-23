@@ -1,14 +1,17 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InternalLinkNode, Node}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts internal links between DBpedia instances from the internal pagelinks between Wikipedia articles.
  * The page links might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.
  */
-class PageLinksExtractor(extractionContext : ExtractionContext) extends Extractor
+class PageLinksExtractor( extractionContext : {
+                              val ontology : Ontology
+                              val language : Language }  ) extends Extractor
 {
     private val language = extractionContext.language.wikiCode
 
