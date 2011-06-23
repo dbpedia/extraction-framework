@@ -59,7 +59,7 @@ object LiveExtractor
   def load(ontologySource : Source, mappingsSource : Source, commonsSource : Source, articlesSource : Source,
              extractors : List[Class[Extractor]], language : Language) : List[Extractor] =
     {
-      val extractorInstances = extractors.map(_.getConstructor(classOf[ExtractionContext]).newInstance(MainContext))
+      val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(MainContext))
 
       return extractorInstances;
     }
