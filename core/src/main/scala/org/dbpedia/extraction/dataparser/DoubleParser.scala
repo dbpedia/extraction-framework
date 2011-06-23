@@ -1,10 +1,8 @@
 package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, Node}
 import java.text.{ParseException, NumberFormat}
-import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 /**

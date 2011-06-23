@@ -71,7 +71,7 @@ object LiveExtractor
       //println(testlist);
 
       //val extractorInstances = extractors.map(_.getConstructor(classOf[ExtractionContext]).newInstance(context))
-      val extractorInstances = extractors.map(_.getConstructor(classOf[ExtractionContext]).newInstance(MainContext))
+      val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(MainContext))
         //println("after extractorInstances")
        //println("ExtractorList  = " + extractors);
 //        new CompositeExtractor(extractorInstances)
