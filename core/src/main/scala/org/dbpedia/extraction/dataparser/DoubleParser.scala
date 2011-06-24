@@ -46,7 +46,7 @@ class DoubleParser(extractionContext : ExtractionContext, val strict : Boolean =
             case None =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + input + "' to a floating point number, DoubleRegex did not match")
-                return null
+                ""
             }
         }
 
@@ -57,6 +57,11 @@ class DoubleParser(extractionContext : ExtractionContext, val strict : Boolean =
         catch
         {
             case ex : ParseException =>
+            {
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                None
+            }
+            case ex : NumberFormatException =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None

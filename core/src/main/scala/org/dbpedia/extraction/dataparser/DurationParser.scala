@@ -111,10 +111,14 @@ class DurationParser(extractionContext : ExtractionContext)
                 }
             }
 
-            case _ => val durationsMap = TimeValueUnitRegex.findAllIn(input).matchData.map{ m => {
-                          val unit = timeUnits.get(m.subgroups(1).replaceAll("""\W""", "")).getOrElse(return None)  // hack to deal with e.g "min)" matches
-                          val num = numberFormat.parse(m.subgroups(0).replace(" ", "")).toString
-                          (unit, num) } }.toMap
+            case _ =>
+            {
+                try {
+                    val durationsMap = TimeValueUnitRegex.findAllIn(input).matchData.map{ m => {
+                        val unit = timeUnits.get(m.subgroups(1).replaceAll("""\W""", "")).getOrElse(return None)  // hack to deal with e.g "min)" matches
+                        val num = numberFormat.parse(m.subgroups(0).replace(" ", "")).toString
+                        (unit, num) } }.toMap
+
                       if (durationsMap.isEmpty)
                           None
                       else
@@ -126,6 +130,11 @@ class DurationParser(extractionContext : ExtractionContext)
                                             seconds = (durationsMap.get("second").getOrElse("0")).toDouble
                                             //reverseDirection = (sign == "-")
                                ))
+                }
+                catch {
+                    case e : NumberFormatException => None
+                }
+            }
         }
     }
 

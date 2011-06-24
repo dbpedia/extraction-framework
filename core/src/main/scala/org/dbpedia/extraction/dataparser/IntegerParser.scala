@@ -50,7 +50,7 @@ class IntegerParser(extractionContext : ExtractionContext,
             case None =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
-                return null
+                ""
             }
         }
 
