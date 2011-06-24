@@ -88,23 +88,12 @@ object Extractor
     /**
      * Creates a new extractor.
      *
-     * @param ontologySource Source containing the ontology definitions
-     * @param mappingsSource Source containing the mapping defintions
-     * @param commonsSource Source containing the pages from Wikipedia Commons
-     * @param articlesSource Source containing all articles
      * @param extractors List of extractor classes to be instantiated
-     * @param language The language
-     * @return The extractor
+     * @param context Any type of object that implements the required parameter methods for the extractors
      */
-    def load(ontologySource : Source, mappingsSource : Source, commonsSource : Source, articlesSource : Source,
-             extractors : List[Class[Extractor]], language : Language) : Extractor =
+    def load(extractors : List[Class[Extractor]], context : AnyRef) : Extractor =
     {
-        val ontology = new OntologyReader().read(ontologySource)
-        val redirects = Redirects.load(articlesSource, language)
-        val context = new ExtractionContext(ontology, language, redirects, mappingsSource, commonsSource, articlesSource)
-
         val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
-
         new CompositeExtractor(extractorInstances)
     }
 }
