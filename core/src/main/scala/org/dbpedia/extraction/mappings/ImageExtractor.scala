@@ -38,8 +38,8 @@ class ImageExtractor( extractionContext : {
     logger.info("Loadings images")
     private val nonFreeImages = new HashSet[String]()
     private val freeWikipediaImages = new HashSet[String]()
-    ImageExtractor.loadImages(extractionContext.articlesSource, freeWikipediaImages, nonFreeImages, language)
     ImageExtractor.loadImages(extractionContext.commonsSource, null, nonFreeImages, language)
+    ImageExtractor.loadImages(extractionContext.articlesSource, freeWikipediaImages, nonFreeImages, language)
     logger.info("Images loaded from dump")
 
     private val dbpediaThumbnailProperty = extractionContext.ontology.getProperty("thumbnail").get
