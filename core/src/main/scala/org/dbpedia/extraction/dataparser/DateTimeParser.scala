@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.ontology.datatypes.{Datatype}
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.DateTimeParserConfig
@@ -10,9 +10,9 @@ import org.dbpedia.extraction.mappings.Redirects
 /**
  * Parses a data time.
  */
-class DateTimeParser ( extractionContext : {
-                            val language : Language
-                            val redirects : Redirects },
+class DateTimeParser ( context : {
+                            def language : Language
+                            def redirects : Redirects },
                        datatype : Datatype,
                        val strict : Boolean = false) extends DataParser
 {
@@ -22,7 +22,7 @@ class DateTimeParser ( extractionContext : {
 
     // language-specific configurations
 
-    private val language = if(DateTimeParserConfig.supportedLanguages.contains(extractionContext.language.wikiCode)) extractionContext.language.wikiCode else "en"
+    private val language = if(DateTimeParserConfig.supportedLanguages.contains(context.language.wikiCode)) context.language.wikiCode else "en"
 
     private val months = DateTimeParserConfig.monthsMap.getOrElse(language, DateTimeParserConfig.monthsMap("en"))
     private val eraStr = DateTimeParserConfig.eraStrMap.getOrElse(language, DateTimeParserConfig.eraStrMap("en"))
@@ -101,7 +101,7 @@ class DateTimeParser ( extractionContext : {
 
     private def catchTemplate(node: TemplateNode) : Option[Date] =
     {
-        val templateName = extractionContext.redirects.resolve(node.title).decoded.toLowerCase
+        val templateName = context.redirects.resolve(node.title).decoded.toLowerCase
 
         for(currentTemplate <- templates.get(templateName))
         {

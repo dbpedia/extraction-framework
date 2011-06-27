@@ -4,7 +4,7 @@ import java.util.logging.Logger
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
 import org.dbpedia.extraction.wikiparser._
 import impl.wikipedia.Namespaces
-import org.dbpedia.extraction.sources.{Source}
+import org.dbpedia.extraction.sources.Source
 import collection.mutable.{HashSet, Set => MutableSet}
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -16,17 +16,17 @@ import org.dbpedia.extraction.util.{Language, WikiUtil}
  * Extracts the first image of a Wikipedia page. Constructs a thumbnail from it, and
  * the full size image.
  */
-class ImageExtractor( extractionContext : {
-                          val ontology : Ontology
-                          val language : Language
-                          val articlesSource : Source
-                          val commonsSource : Source } ) extends Extractor
+class ImageExtractor( context : {
+                          def ontology : Ontology
+                          def language : Language
+                          def articlesSource : Source
+                          def commonsSource : Source } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     require(ImageExtractorConfig.supportedLanguages.contains(language), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
-    private val fileNamespaceIdentifier = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.File)
+    private val fileNamespaceIdentifier = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.File)
 
     private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + language +"/"
     private val commonsUrlPrefix = ImageExtractorConfig.wikipediaUrlPrefix + "commons/"
@@ -38,14 +38,14 @@ class ImageExtractor( extractionContext : {
     logger.info("Loadings images")
     private val nonFreeImages = new HashSet[String]()
     private val freeWikipediaImages = new HashSet[String]()
-    ImageExtractor.loadImages(extractionContext.commonsSource, null, nonFreeImages, language)
-    ImageExtractor.loadImages(extractionContext.articlesSource, freeWikipediaImages, nonFreeImages, language)
+    ImageExtractor.loadImages(context.commonsSource, null, nonFreeImages, language)
+    ImageExtractor.loadImages(context.articlesSource, freeWikipediaImages, nonFreeImages, language)
     logger.info("Images loaded from dump")
 
-    private val dbpediaThumbnailProperty = extractionContext.ontology.getProperty("thumbnail").get
-    private val foafDepictionProperty = extractionContext.ontology.getProperty("foaf:depiction").get
-    private val foafThumbnailProperty = extractionContext.ontology.getProperty("foaf:thumbnail").get
-    private val dcRightsProperty = extractionContext.ontology.getProperty("dc:rights").get
+    private val dbpediaThumbnailProperty = context.ontology.getProperty("thumbnail").get
+    private val foafDepictionProperty = context.ontology.getProperty("foaf:depiction").get
+    private val foafThumbnailProperty = context.ontology.getProperty("foaf:thumbnail").get
+    private val dcRightsProperty = context.ontology.getProperty("dc:rights").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -57,14 +57,14 @@ class ImageExtractor( extractionContext : {
         {
             val (url, thumbnailUrl) = getImageUrl(imageFileName)
 
-            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
-            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
-            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
 
             val wikipediaImageUrl = "http://" + language + ".wikipedia.org/wiki/"+ fileNamespaceIdentifier +":" + imageFileName
 
-            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
-            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
         }
 
         new Graph(quads)
@@ -72,8 +72,6 @@ class ImageExtractor( extractionContext : {
 
     private def searchImage(nodes : List[Node], sections : Int) : Option[(String, Node)] =
     {
-        import ImageExtractor._
-
         var currentSections = sections
         for (node <- nodes)
         {
@@ -90,7 +88,7 @@ class ImageExtractor( extractionContext : {
                          textNode @ TextNode(text, _) <- property.children;
                          fileName <- ImageExtractorConfig.ImageRegex.findFirstIn(text);
                          encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
-                                               WikiUtil.wikiEncode(fileName, extractionContext.language)
+                                               WikiUtil.wikiEncode(fileName, context.language)
                                            else
                                                fileName
                          if checkImageRights(encodedFileName))
@@ -129,7 +127,7 @@ class ImageExtractor( extractionContext : {
                      textNode @ TextNode(text, _) <- property.children;
                      fileName <- ImageRegex.findFirstIn(text);
                      encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
-                                           WikiUtil.wikiEncode(fileName, extractionContext.language)
+                                           WikiUtil.wikiEncode(fileName, context.language)
                                        else
                                            fileName
                      if checkImageRights(encodedFileName))
@@ -165,7 +163,7 @@ class ImageExtractor( extractionContext : {
         val urlPrefix = if(freeWikipediaImages.contains(fileName)) wikipediaUrlLangPrefix else commonsUrlPrefix
 
         val md = MessageDigest.getInstance("MD5")
-        val messageDigest = md.digest(fileName.getBytes())
+        val messageDigest = md.digest(fileName.getBytes)
         val md5 = (new BigInteger(1, messageDigest)).toString(16)
 
         val hash1 = md5.substring(0, 1)
@@ -177,7 +175,7 @@ class ImageExtractor( extractionContext : {
         val imageUrl = urlPrefix + urlPart
         val thumbnailUrl = urlPrefix + "thumb/" + urlPart + "/200px-" + fileName + ext
 
-        return (imageUrl, thumbnailUrl)
+        (imageUrl, thumbnailUrl)
     }
 }
 

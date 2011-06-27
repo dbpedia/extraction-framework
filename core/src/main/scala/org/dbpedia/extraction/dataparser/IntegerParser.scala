@@ -9,7 +9,7 @@ import org.dbpedia.extraction.util.Language
 /**
  * Parses integer numbers.
  */
-class IntegerParser( extractionContext : { val language : Language } , val strict : Boolean = false, val validRange : Int => Boolean = (i => true)) extends DataParser
+class IntegerParser( extractionContext : { def language : Language } , val strict : Boolean = false, val validRange : Int => Boolean = (i => true)) extends DataParser
 {
     private val numberFormat = NumberFormat.getIntegerInstance(extractionContext.language.locale)
     numberFormat.setRoundingMode(RoundingMode.HALF_UP)

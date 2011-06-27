@@ -8,7 +8,7 @@ import org.dbpedia.extraction.util.Language
  * Parses links to other instances.
  */
 
-class ObjectParser( extractionContext : { val language : Language }, val strict : Boolean = false) extends DataParser
+class ObjectParser( extractionContext : { def language : Language }, val strict : Boolean = false) extends DataParser
 {
     private val flagTemplateParser = new FlagTemplateParser(extractionContext)
 

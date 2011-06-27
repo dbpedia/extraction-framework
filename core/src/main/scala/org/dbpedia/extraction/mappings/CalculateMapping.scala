@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.wikiparser.{TemplateNode}
+import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces, OntologyProperty}
 import org.dbpedia.extraction.util.Language
@@ -13,27 +13,27 @@ class CalculateMapping( templateProperty1 : String,
                         unit2 : Datatype,
                         operation : String,
                         ontologyProperty : OntologyProperty,
-                        extractionContext : {
-                            val ontology : Ontology
-                            val redirects : Redirects  // redirects required by UnitValueParser
-                            val language : Language } ) extends PropertyMapping
+                        context : {
+                            def ontology : Ontology
+                            def redirects : Redirects  // redirects required by UnitValueParser
+                            def language : Language } ) extends PropertyMapping
 {
     require(operation == "add", "Operation '" + operation + "' is not supported. Supported operations: 'add'")
 
     //TODO use different parsers for unit1 and unit2
     val parser : DataParser = ontologyProperty.range match
     {
-        case dt : UnitDatatype => new UnitValueParser(extractionContext, unit1)
-        case dt : DimensionDatatype => new UnitValueParser(extractionContext, unit1)
+        case dt : UnitDatatype => new UnitValueParser(context, unit1)
+        case dt : DimensionDatatype => new UnitValueParser(context, unit1)
         case dt : Datatype => dt.name match
         {
-            case "xsd:integer" => new IntegerParser(extractionContext)
-            case "xsd:positiveInteger"    => new IntegerParser(extractionContext, validRange = (i => i > 0))
-            case "xsd:nonNegativeInteger" => new IntegerParser(extractionContext, validRange = (i => i >=0))
-            case "xsd:nonPositiveInteger" => new IntegerParser(extractionContext, validRange = (i => i <=0))
-            case "xsd:negativeInteger"    => new IntegerParser(extractionContext, validRange = (i => i < 0))
-            case "xsd:double" => new DoubleParser(extractionContext)
-            case "xsd:float" => new DoubleParser(extractionContext)
+            case "xsd:integer" => new IntegerParser(context)
+            case "xsd:positiveInteger"    => new IntegerParser(context, validRange = (i => i > 0))
+            case "xsd:nonNegativeInteger" => new IntegerParser(context, validRange = (i => i >=0))
+            case "xsd:nonPositiveInteger" => new IntegerParser(context, validRange = (i => i <=0))
+            case "xsd:negativeInteger"    => new IntegerParser(context, validRange = (i => i < 0))
+            case "xsd:double" => new DoubleParser(context)
+            case "xsd:float" => new DoubleParser(context)
             case name => throw new IllegalArgumentException("Datatype " + name + " is not supported by CalculateMapping")
         }
         case dt => throw new IllegalArgumentException("Datatype " + dt + " is not supported by CalculateMapping")
@@ -59,12 +59,12 @@ class CalculateMapping( templateProperty1 : String,
                 //DoubleParser
                 case (value1 : Double, value2 : Double) =>
                 {
-                    new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, (value1 + value2).toString, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
+                    new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, (value1 + value2).toString, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
                 }
                 //IntegerParser
                 case (value1 : Int, value2 : Int) =>
                 {
-                    new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, (value1 + value2).toString, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
+                    new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, (value1 + value2).toString, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
                 }
             }
 
@@ -80,24 +80,24 @@ class CalculateMapping( templateProperty1 : String,
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
-            val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
+            val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
             return new Graph(quad)
         }
 
         //Write generic property
         val stdValue = unit.toStandardUnit(value)
-        val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
+        val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         var graph = new Graph(quad)
 
         //Write specific properties
         var currentClass = ontologyProperty.domain
         while(currentClass != null)
         {
-            for(specificPropertyUnit <- extractionContext.ontology.specializations.get((currentClass, ontologyProperty)))
+            for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
                  val propertyUri = OntologyNamespaces.DBPEDIA_SPECIFICPROPERTY_NAMESPACE + currentClass.name + "/" + ontologyProperty.name
-                 val quad = new Quad(extractionContext.language, DBpediaDatasets.SpecificProperties, subjectUri,
+                 val quad = new Quad(context.language, DBpediaDatasets.SpecificProperties, subjectUri,
                                      propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
                  graph = graph.merge(new Graph(quad))
             }

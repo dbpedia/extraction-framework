@@ -9,17 +9,17 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts disambiguation links.
  */
-class DisambiguationExtractor( extractionContext : {
-                                   val ontology : Ontology
-                                   val language : Language } ) extends Extractor
+class DisambiguationExtractor( context : {
+                                   def ontology : Ontology
+                                   def language : Language } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     require(DisambiguationExtractorConfig.supportedLanguages.contains(language))
 
     private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap.getOrElse(language, "")
 
-    val wikiPageDisambiguatesProperty = extractionContext.ontology.getProperty("wikiPageDisambiguates")
+    val wikiPageDisambiguatesProperty = context.ontology.getProperty("wikiPageDisambiguates")
                                         .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageDisambiguates' does not exist in DBpedia Ontology."))
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -34,7 +34,7 @@ class DisambiguationExtractor( extractionContext : {
                                                             || isAcronym(cleanPageTitle, linkNode.destination.decoded))
 
             val quads = disambigLinks.map{link =>
-                new Quad(extractionContext.language,
+                new Quad(context.language,
                          DBpediaDatasets.DisambiguationLinks,
                          subjectUri,
                          wikiPageDisambiguatesProperty,

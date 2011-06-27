@@ -9,7 +9,7 @@ import org.dbpedia.extraction.util.Language
  * Parses double-precision floating-point numbers.
  */
 //TODO a lot of copied code from IntegerParser!
-class DoubleParser( extractionContext : { val language : Language } , val strict : Boolean = false) extends DataParser
+class DoubleParser( extractionContext : { def language : Language } , val strict : Boolean = false) extends DataParser
 {
     private val numberFormat = NumberFormat.getInstance(extractionContext.language.locale)
 

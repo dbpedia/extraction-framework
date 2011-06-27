@@ -8,11 +8,11 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts labels to articles based on their title.
  */
-class LabelExtractor( extractionContext : {
-                          val ontology : Ontology
-                          val language : Language } ) extends Extractor
+class LabelExtractor( context : {
+                          def ontology : Ontology
+                          def language : Language } ) extends Extractor
 {
-    val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
+    val labelProperty = context.ontology.getProperty("rdfs:label").get
     
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -21,7 +21,7 @@ class LabelExtractor( extractionContext : {
         val label = node.root.title.decoded
         if(label.isEmpty) return new Graph()
 
-        new Graph(new Quad(extractionContext.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label,
-                           node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get ))
+        new Graph(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label,
+                           node.sourceUri, context.ontology.getDatatype("xsd:string").get ))
     }
 }

@@ -20,21 +20,21 @@ import org.dbpedia.extraction.util.{Language, UriUtils}
  * The infobox extractor performs only a minimal amount of property value clean-up, e.g., by converting a value like “June 2009” to the XML Schema format “2009–06”.
  * You should therefore use the infobox dataset only if your application requires complete coverage of all Wikipeda properties and you are prepared to accept relatively noisy data.
  */
-class InfoboxExtractor( extractionContext : {
-                            val ontology : Ontology
-                            val language : Language
-                            val redirects : Redirects } ) extends Extractor
+class InfoboxExtractor( context : {
+                            def ontology : Ontology
+                            def language : Language
+                            def redirects : Redirects } ) extends Extractor
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Configuration
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     private val usesTemplateProperty = OntologyNamespaces.getProperty("wikiPageUsesTemplate",language)
     //private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
 
-    private val templateNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Template)
+    private val templateNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Template)
 
     private val MinPropertyCount = 2
 
@@ -49,9 +49,9 @@ class InfoboxExtractor( extractionContext : {
         "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
     )
 
-    private val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
-    private val typeProperty = extractionContext.ontology.getProperty("rdf:type").get
-    private val propertyClass = extractionContext.ontology.getClass("rdf:Property").get
+    private val labelProperty = context.ontology.getProperty("rdfs:label").get
+    private val typeProperty = context.ontology.getProperty("rdf:type").get
+    private val propertyClass = context.ontology.getClass("rdf:Property").get
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Regexes
@@ -69,18 +69,18 @@ class InfoboxExtractor( extractionContext : {
     // Parsers
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val unitValueParsers = extractionContext.ontology.datatypes
+    private val unitValueParsers = context.ontology.datatypes
                                    .filter(_.isInstanceOf[DimensionDatatype]).map(_.asInstanceOf[DimensionDatatype])
-                                   .map(dimension => new UnitValueParser(extractionContext, dimension, true))
+                                   .map(dimension => new UnitValueParser(context, dimension, true))
 
-    private val intParser = new IntegerParser(extractionContext, true)
+    private val intParser = new IntegerParser(context, true)
 
-    private val doubleParser = new DoubleParser(extractionContext, true)
+    private val doubleParser = new DoubleParser(context, true)
 
     private val dataTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
-                                  .map(datatype => new DateTimeParser(extractionContext, new Datatype(datatype), true))
+                                  .map(datatype => new DateTimeParser(context, new Datatype(datatype), true))
 
-    private val objectParser = new ObjectParser(extractionContext, true)
+    private val objectParser = new ObjectParser(context, true)
 
     private val linkParser = new LinkParser(true)
 
@@ -100,7 +100,7 @@ class InfoboxExtractor( extractionContext : {
 
         /** Retrieve all templates on the page which are not ignored */
         val templateList = for(template <- collectTemplates(node);
-                               resolvedTitle = extractionContext.redirects.resolve(template.title).decoded.toLowerCase;
+                               resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase;
                                if !ignoreTemplates.contains(resolvedTitle);
                                if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) )
                                yield template
@@ -125,13 +125,13 @@ class InfoboxExtractor( extractionContext : {
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             //#int #statistics uncomment the following 2 lines (do not delete)
                             val stat_template = OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language).replace("\n", " ").replace("\t", " ").trim
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
-                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                               stat_property, node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
+                            quads ::= new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
+                                               stat_property, node.sourceUri, context.ontology.getDatatype("xsd:string").get )
                         }
                         catch
                         {
@@ -144,8 +144,8 @@ class InfoboxExtractor( extractionContext : {
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads ::= new Quad(extractionContext.language, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
+                                quads ::= new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
                             }
                         }
                     }
@@ -156,7 +156,7 @@ class InfoboxExtractor( extractionContext : {
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
                     //TODO change domain
-                    quads ::= new Quad(extractionContext.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
+                    quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
                                         OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language), template.sourceUri, null)
                     seenTemplates.add(template.title.encoded)
                 }
@@ -269,8 +269,8 @@ class InfoboxExtractor( extractionContext : {
     private def getPropertyUri(key : String) : String =
     {
         // convert property key to camelCase
-        var result = key.toLowerCase(extractionContext.language.locale).trim
-        result = result.toCamelCase(SplitWordsRegex, extractionContext.language.locale)
+        var result = key.toLowerCase(context.language.locale).trim
+        result = result.toCamelCase(SplitWordsRegex, context.language.locale)
 
         // Replace digits at the beginning of a property with _. E.g. 01propertyName => _01propertyName (edited by Piet)
         result = LeadingNumberRegex.replaceFirstIn(result, "_" + result)

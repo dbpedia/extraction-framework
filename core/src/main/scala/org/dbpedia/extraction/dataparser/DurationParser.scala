@@ -6,7 +6,7 @@ import org.dbpedia.extraction.config.dataparser.DurationParserConfig
 import org.dbpedia.extraction.util.Language
 
 
-class DurationParser( extractionContext : { val language : Language } )
+class DurationParser( extractionContext : { def language : Language } )
 {
     private val language = extractionContext.language.wikiCode
 

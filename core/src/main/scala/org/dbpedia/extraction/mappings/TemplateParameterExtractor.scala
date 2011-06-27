@@ -9,11 +9,11 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
  */
-class TemplateParameterExtractor( extractionContext : {
-                                      val ontology : Ontology
-                                      val language : Language }  ) extends Extractor
+class TemplateParameterExtractor( context : {
+                                      def ontology : Ontology
+                                      def language : Language }  ) extends Extractor
 {
-    private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", extractionContext.language.wikiCode)
+    private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", context.language.wikiCode)
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -45,8 +45,8 @@ class TemplateParameterExtractor( extractionContext : {
         }
 
         parameters.distinct.foreach(v => {
-            quads ::= new Quad(extractionContext.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty,v,
-                            node.sourceUri, extractionContext.ontology.getDatatype("xsd:string").get )
+            quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty,v,
+                            node.sourceUri, context.ontology.getDatatype("xsd:string").get )
         })
         new Graph(quads)
     }

@@ -8,7 +8,7 @@ import org.dbpedia.extraction.util.Language
  * Handling of flag templates.
  */
 //TODO test after re-factor
-class FlagTemplateParser( extractionContext : { val language : Language } )
+class FlagTemplateParser( extractionContext : { def language : Language } )
 {
     private val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
 

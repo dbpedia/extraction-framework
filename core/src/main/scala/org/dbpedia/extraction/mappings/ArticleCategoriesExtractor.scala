@@ -9,13 +9,13 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts links from concepts to categories using the SKOS vocabulary.
  */
-class ArticleCategoriesExtractor( extractionContext : {
-                                      val ontology : Ontology
-                                      val language : Language } ) extends Extractor
+class ArticleCategoriesExtractor( context : {
+                                      def ontology : Ontology
+                                      def language : Language } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
-    private val dctermsSubjectProperty = extractionContext.ontology.getProperty("dct:subject").get
+    private val dctermsSubjectProperty = context.ontology.getProperty("dct:subject").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -25,7 +25,7 @@ class ArticleCategoriesExtractor( extractionContext : {
 
         val list = collectInternalLinks(node)
         list.foreach(link => {
-            quads ::= new Quad(extractionContext.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
         })
         new Graph(quads)
     }
@@ -41,7 +41,7 @@ class ArticleCategoriesExtractor( extractionContext : {
 
     private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Category)
+        val categoryNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Category)
 
         //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
         OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, language)

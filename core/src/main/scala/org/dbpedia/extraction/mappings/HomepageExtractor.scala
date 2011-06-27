@@ -10,12 +10,12 @@ import org.dbpedia.extraction.util.{Language, UriUtils}
 /**
  * Extracts links to the official homepage of an instance.
  */
-class HomepageExtractor( extractionContext : {
-                             val ontology : Ontology
-                             val language : Language
-                             val redirects : Redirects } ) extends Extractor
+class HomepageExtractor( context : {
+                             def ontology : Ontology
+                             def language : Language
+                             def redirects : Redirects } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     require(HomepageExtractorConfig.supportedLanguages.contains(language),"Homepage Extractor supports the following languages: " + HomepageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
@@ -24,7 +24,7 @@ class HomepageExtractor( extractionContext : {
     private val externalLinkSections = HomepageExtractorConfig.externalLinkSectionsMap.getOrElse(language, HomepageExtractorConfig.externalLinkSectionsMap("en"))
 
 
-    private val homepageProperty = extractionContext.ontology.getProperty("foaf:homepage").get
+    private val homepageProperty = context.ontology.getProperty("foaf:homepage").get
 
     private val listItemStartRegex = ("""(?msiu).*^\s*\*\s*[^^]*(\b""" + official + """\b)?[^^]*\z""").r
     private val officialRegex = ("(?iu)" + official).r
@@ -85,7 +85,7 @@ class HomepageExtractor( extractionContext : {
         {
             for(link <- UriUtils.cleanLink(URI.create(url)))
             {
-                return new Graph(new Quad(extractionContext.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
+                return new Graph(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
             }
         }
         catch
@@ -100,7 +100,7 @@ class HomepageExtractor( extractionContext : {
         nodes match
         {
             case (templateNode @ TemplateNode(title, _, _)) :: _
-                if ((title.encoded == "Official") || ((extractionContext.redirects.map.contains(title.decoded)) && (extractionContext.redirects.map(title.decoded) == "Official"))) =>
+                if ((title.encoded == "Official") || ((context.redirects.map.contains(title.decoded)) && (context.redirects.map(title.decoded) == "Official"))) =>
             {
                 templateNode.property("1") match
                 {
