@@ -5,7 +5,7 @@ import org.dbpedia.extraction.destinations.{Quad, Dataset, Graph}
 import collection.mutable.ListBuffer
 import org.dbpedia.extraction.util.Language
 
-class DummyExtractor(extractionContext : { val language : Language })
+class DummyExtractor(extractionContext : { def language : Language })
   extends Extractor
 {
   def extract(page: PageNode, subjectUri: String, context: PageContext) : Graph =

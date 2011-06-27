@@ -41,6 +41,15 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
     def mappingSource(language : Language) : Source = new MemorySource(mappingPages(language).values.toList)  // standard implementation
 
 
+    def extract(source : Source, destination : Destination, language : Language)
+    {
+        val graph = source.map(WikiParser())
+                          .map(extractor(language))
+                          .foldLeft(new Graph())(_ merge _)
+
+        destination.write(graph)
+    }
+
     def validateMapping(mappingsSource : Source, language : Language) : Elem =
     {
         //Register xml log hanlder
@@ -77,15 +86,6 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         logHandler.xml
     }
 
-    def extract(source : Source, destination : Destination, language : Language)
-    {
-        val graph = source.map(WikiParser())
-                          .map(extractor(language))
-                          .foldLeft(new Graph())(_ merge _)
-
-        destination.write(graph)
-    }
-
 
     protected def loadOntologyPages =
     {
@@ -104,7 +104,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
     protected def loadMappingsPages(language : Language) : Map[WikiTitle, WikiPage] =
     {
         val mappingNamespace = WikiTitle.Namespace.mappingNamespace(language)
-            .getOrElse(throw new cd IllegalArgumentException("No mapping namespace for language " + language))
+                               .getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
 
         WikiSource.fromNamespaces(namespaces = Set(mappingNamespace),
                                   url = new URL("http://mappings.dbpedia.org/api.php"),

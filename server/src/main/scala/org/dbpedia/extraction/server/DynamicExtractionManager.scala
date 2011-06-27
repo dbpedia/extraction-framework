@@ -7,7 +7,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 
 /**
- * Loads all extraction context parameters at start-up: ontology pages, mapping pages, ontology.
+ * Loads all extraction context parameters (ontology pages, mapping pages, ontology) at start-up independently of which extractors are chosen.
  * Is able to update the ontology and the mappings.
  */
 class DynamicExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]]) extends ExtractionManager(languages, extractors)
