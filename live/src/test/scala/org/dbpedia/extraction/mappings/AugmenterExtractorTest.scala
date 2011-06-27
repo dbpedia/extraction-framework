@@ -11,7 +11,6 @@ import org.scalatest.FlatSpec
 import org.dbpedia.extraction.util.Language
 import java.util.Locale
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.config.ExtractionContext
 
 object AugmenterExtractorTest
 {
@@ -40,9 +39,12 @@ class AugmenterExtractorTest extends FlatSpec with ShouldMatchers
 
     val labelToURIs = SparqlUtils.getInstancesUriAndLabels(graphDAO, "http://dbpedia.org/ontology/Country", "en")
 
-    val extractionContext = new ExtractionContext(null, new Language("en", Locale.getDefault), null, null, null, null)
+    val context = new
+    {
+        def language : Language = Language.fromWikiCode("en").get
+    }
 
-    val decoratee = new DummyExtractor(extractionContext)
+    val decoratee = new DummyExtractor(context)
 
 
 
