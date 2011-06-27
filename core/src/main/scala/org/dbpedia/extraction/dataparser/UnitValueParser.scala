@@ -5,9 +5,16 @@ import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype, U
 import org.dbpedia.extraction.wikiparser._
 import java.text.{ParseException, NumberFormat}
 import java.util.logging.{Level, Logger}
-import org.dbpedia.extraction.mappings.ExtractionContext
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.mappings.Redirects
 
-class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Datatype, strict : Boolean = false) extends DataParser
+class UnitValueParser( extractionContext : {
+                           def ontology : Ontology
+                           def language : Language
+                           def redirects : Redirects },
+                        inputDatatype : Datatype,
+                        strict : Boolean = false) extends DataParser
 {
     private val logger = Logger.getLogger(classOf[UnitValueParser].getName)
 
@@ -17,7 +24,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
 
     private val language = extractionContext.language.wikiCode
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or """  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or """  //TODO this split regex might not be complete
     
     private val prefix = if(strict) """\s*""" else """[\D]*?"""
 
@@ -107,12 +114,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
             logger.fine("Could not extract " + inputDatatype.name + " value from " + node + " on page " + node.root.title + " line " + node.line + ".\n" + e)
         }
 
-        return None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
+        None
     }
 
     /**
@@ -296,7 +298,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
             return None
         }
         
-        return generateOutput(value.get, unit, errors)
+        generateOutput(value.get, unit, errors)
     }
 
     private def catchValue(input : String) : Option[String] =

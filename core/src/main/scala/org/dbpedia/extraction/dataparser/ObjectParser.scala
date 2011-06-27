@@ -1,17 +1,18 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.mappings.ExtractionContext
+import org.dbpedia.extraction.ontology.OntologyNamespaces
+import org.dbpedia.extraction.util.Language
 
 /**
  * Parses links to other instances.
  */
-class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean = false) extends DataParser
+
+class ObjectParser( extractionContext : { def language : Language }, val strict : Boolean = false) extends DataParser
 {
     private val flagTemplateParser = new FlagTemplateParser(extractionContext)
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""  //TODO this split regex might not be complete
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
     override def parse(node : Node) : Option[String] =
@@ -59,12 +60,7 @@ class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean =
                 }
             }
         }
-        return None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
+        None
     }
 
     /**
@@ -108,7 +104,7 @@ class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean =
 
     private def resolveTemplate(templateNode : TemplateNode) : Option[WikiTitle] =
     {
-        flagTemplateParser.getDestination(templateNode).foreach(destination => return Some(destination))
+        flagTemplateParser.parse(templateNode).foreach(destination => return Some(destination))
         None
     }
 

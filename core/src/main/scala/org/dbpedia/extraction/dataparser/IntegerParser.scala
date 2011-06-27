@@ -1,17 +1,15 @@
 package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, Node}
 import java.text.{NumberFormat, ParseException}
 import java.math.RoundingMode
+import org.dbpedia.extraction.util.Language
 
 /**
  * Parses integer numbers.
  */
-class IntegerParser(extractionContext : ExtractionContext,
-                    val strict : Boolean = false,
-                    val validRange : Int => Boolean = (i => true)) extends DataParser
+class IntegerParser( extractionContext : { def language : Language } , val strict : Boolean = false, val validRange : Int => Boolean = (i => true)) extends DataParser
 {
     private val numberFormat = NumberFormat.getIntegerInstance(extractionContext.language.locale)
     numberFormat.setRoundingMode(RoundingMode.HALF_UP)
@@ -20,7 +18,7 @@ class IntegerParser(extractionContext : ExtractionContext,
 
     private val logger = Logger.getLogger(classOf[IntegerParser].getName)
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
     private val IntegerRegex = """\D*?(\-?[0-9\-\,\.]+).*""".r
 
@@ -36,11 +34,6 @@ class IntegerParser(extractionContext : ExtractionContext,
         None
     }
 
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
-    }
-
     private def parseIntegerValue(input : String) : Option[Int] =
     {
 
@@ -50,7 +43,7 @@ class IntegerParser(extractionContext : ExtractionContext,
             case None =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
-                ""
+                return null
             }
         }
 

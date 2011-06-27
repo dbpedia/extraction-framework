@@ -1,16 +1,20 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.ontology.datatypes.{Datatype}
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import java.util.logging.{Logger, Level}
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.util.Date
 import org.dbpedia.extraction.config.dataparser.DateTimeParserConfig
+import org.dbpedia.extraction.util.{Language, Date}
+import org.dbpedia.extraction.mappings.Redirects
 
 /**
  * Parses a data time.
  */
-class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype, val strict : Boolean = false) extends DataParser
+class DateTimeParser ( context : {
+                            def language : Language
+                            def redirects : Redirects },
+                       datatype : Datatype,
+                       val strict : Boolean = false) extends DataParser
 {
     require(datatype != null, "datatype != null")
 
@@ -18,7 +22,7 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
 
     // language-specific configurations
 
-    private val language = if(DateTimeParserConfig.supportedLanguages.contains(extractionContext.language.wikiCode)) extractionContext.language.wikiCode else "en"
+    private val language = if(DateTimeParserConfig.supportedLanguages.contains(context.language.wikiCode)) context.language.wikiCode else "en"
 
     private val months = DateTimeParserConfig.monthsMap.getOrElse(language, DateTimeParserConfig.monthsMap("en"))
     private val eraStr = DateTimeParserConfig.eraStrMap.getOrElse(language, DateTimeParserConfig.eraStrMap("en"))
@@ -27,7 +31,7 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
 
     // parse logic configurations
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
     private val monthRegex = months.keySet.mkString("|")
     private val eraRegex = eraStr.keySet.mkString("|")
@@ -90,14 +94,9 @@ class DateTimeParser (extractionContext : ExtractionContext, datatype : Datatype
         None
     }
 
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
-    }
-
     private def catchTemplate(node: TemplateNode) : Option[Date] =
     {
-        val templateName = extractionContext.redirects.resolve(node.title).decoded.toLowerCase
+        val templateName = context.redirects.resolve(node.title).decoded.toLowerCase
 
         for(currentTemplate <- templates.get(templateName))
         {
