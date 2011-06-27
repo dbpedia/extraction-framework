@@ -9,9 +9,9 @@ class TemplateMapping( mapToClass : OntologyClass,
                        correspondingClass : OntologyClass,
                        correspondingProperty : OntologyProperty,
                        mappings : List[PropertyMapping],
-                       extractionContext : {
-                           val ontology : Ontology
-                           val language : Language }  ) extends ClassMapping
+                       context : {
+                           def ontology : Ontology
+                           def language : Language }  ) extends ClassMapping
 {
     override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
     {
@@ -57,7 +57,7 @@ class TemplateMapping( mapToClass : OntologyClass,
                     if(found)
                     {
                         //Connect new instance to the instance created from the root template
-                        val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
+                        val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
                         graph = graph.merge(new Graph(quad))
                     }
                 }
@@ -91,8 +91,8 @@ class TemplateMapping( mapToClass : OntologyClass,
         }
 
         //Create type statements
-        val quads = for(clazz <- classes) yield new Quad(extractionContext.language, DBpediaDatasets.OntologyTypes, uri,
-                                                         extractionContext.ontology.getProperty("rdf:type").get,
+        val quads = for(clazz <- classes) yield new Quad(context.language, DBpediaDatasets.OntologyTypes, uri,
+                                                         context.ontology.getProperty("rdf:type").get,
                                                          clazz.uri, node.sourceUri )
 
         new Graph(quads)
@@ -133,7 +133,7 @@ class TemplateMapping( mapToClass : OntologyClass,
             nameProperty = properties.head
         }
 
-        return pageContext.generateUri(subjectUri, nameProperty)
+        pageContext.generateUri(subjectUri, nameProperty)
     }
 }
 

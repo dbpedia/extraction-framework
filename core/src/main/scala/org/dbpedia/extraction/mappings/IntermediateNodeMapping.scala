@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.{Logger}
+import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
@@ -9,9 +9,9 @@ import org.dbpedia.extraction.util.Language
 class IntermediateNodeMapping(nodeClass : OntologyClass,
                               correspondingProperty : OntologyProperty,
                               mappings : List[PropertyMapping],
-                              extractionContext : {
-                                  val ontology : Ontology
-                                  val language : Language } ) extends PropertyMapping
+                              context : {
+                                  def ontology : Ontology
+                                  def language : Language } ) extends PropertyMapping
 {
     private val logger = Logger.getLogger(classOf[IntermediateNodeMapping].getName)
     
@@ -68,13 +68,13 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
             var currentClass = nodeClass
             while(currentClass != null)
             {
-                val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyTypes, instanceUri, extractionContext.ontology.getProperty("rdf:type").get, currentClass.uri, node.sourceUri)
+                val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, currentClass.uri, node.sourceUri)
                 graph = graph.merge(new Graph(quad))
                 
                 currentClass = currentClass.subClassOf
             }
 
-            val quad2 = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+            val quad2 = new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
             graph = graph.merge(new Graph(quad2))
         }
         

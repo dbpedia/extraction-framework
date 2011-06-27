@@ -16,15 +16,15 @@ import org.dbpedia.extraction.util.Language
  * DBpedia-customized MediaWiki instance is required.
  */
 
-class AbstractExtractor( extractionContext : {
-                             val ontology : Ontology
-                             val language : Language } ) extends Extractor
+class AbstractExtractor( context : {
+                             def ontology : Ontology
+                             def language : Language } ) extends Extractor
 {
     private val maxRetries = 2
 
     private val timeoutMs = 5000
 
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
@@ -33,10 +33,10 @@ class AbstractExtractor( extractionContext : {
 
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
-    private val shortProperty = extractionContext.ontology.getProperty("rdfs:comment")
+    private val shortProperty = context.ontology.getProperty("rdfs:comment")
                                 .getOrElse(throw new Exception("Property 'rdfs:comment' not found"))
 
-    private val longProperty = extractionContext.ontology.getProperty("abstract")
+    private val longProperty = context.ontology.getProperty("abstract")
                                .getOrElse(throw new Exception("Property 'abstract' not found"))
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -61,8 +61,8 @@ class AbstractExtractor( extractionContext : {
         val shortText = short(text)
 
         //Create statements
-        val quadLong = new Quad(extractionContext.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
-        val quadShort = new Quad(extractionContext.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
+        val quadLong = new Quad(context.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
+        val quadShort = new Quad(context.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
 
         if(shortText.isEmpty)
         {

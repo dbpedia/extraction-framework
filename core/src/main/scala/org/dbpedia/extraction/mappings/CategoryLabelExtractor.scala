@@ -9,11 +9,11 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts labels for Categories.
  */
-class CategoryLabelExtractor( extractionContext : {
-                                  val ontology : Ontology
-                                  val language : Language } ) extends Extractor
+class CategoryLabelExtractor( context : {
+                                  def ontology : Ontology
+                                  def language : Language } ) extends Extractor
 {
-    val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
+    val labelProperty = context.ontology.getProperty("rdfs:label").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -21,7 +21,7 @@ class CategoryLabelExtractor( extractionContext : {
 
         var quads = List[Quad]()
 
-        quads ::= new Quad(extractionContext.language, DBpediaDatasets.CategoryLabels, subjectUri, labelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+        quads ::= new Quad(context.language, DBpediaDatasets.CategoryLabels, subjectUri, labelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
 
         new Graph(quads)
     }

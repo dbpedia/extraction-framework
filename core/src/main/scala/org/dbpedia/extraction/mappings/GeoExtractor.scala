@@ -9,18 +9,18 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts geo-coodinates.
  */
-class GeoExtractor( extractionContext : {
-                        val ontology : Ontology
-                        val redirects : Redirects  // redirects required by GeoCoordinateParser
-                        val language : Language } ) extends Extractor
+class GeoExtractor( context : {
+                        def ontology : Ontology
+                        def redirects : Redirects  // redirects required by GeoCoordinateParser
+                        def language : Language } ) extends Extractor
 {
-    private val geoCoordinateParser = new GeoCoordinateParser(extractionContext)
+    private val geoCoordinateParser = new GeoCoordinateParser(context)
 
-    private val typeOntProperty = extractionContext.ontology.getProperty("rdf:type").get
-    private val latOntProperty = extractionContext.ontology.getProperty("geo:lat").get
-    private val lonOntProperty = extractionContext.ontology.getProperty("geo:long").get
-    private val pointOntProperty = extractionContext.ontology.getProperty("georss:point").get
-    private val featureOntClass =  extractionContext.ontology.getClass("gml:_Feature").get
+    private val typeOntProperty = context.ontology.getProperty("rdf:type").get
+    private val latOntProperty = context.ontology.getProperty("geo:lat").get
+    private val lonOntProperty = context.ontology.getProperty("geo:long").get
+    private val pointOntProperty = context.ontology.getProperty("georss:point").get
+    private val featureOntClass =  context.ontology.getClass("gml:_Feature").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -34,14 +34,14 @@ class GeoExtractor( extractionContext : {
             return writeGeoCoordinate(coordinate, subjectUri, node.sourceUri, pageContext)
         }
 
-        return new Graph()
+        new Graph()
     }
 
     private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Graph =
     {
-        new Graph( new Quad(extractionContext.language, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri) ::
-                   new Quad(extractionContext.language, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri) ::
-                   new Quad(extractionContext.language, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri) ::
-                   new Quad(extractionContext.language, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri) :: Nil )
+        new Graph( new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri) ::
+                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri) ::
+                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri) ::
+                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri) :: Nil )
     }
 }

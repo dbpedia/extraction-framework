@@ -9,7 +9,7 @@ import org.dbpedia.extraction.mappings.Redirects
 /**
  * Parses geographical coordinates.
  */
-class GeoCoordinateParser( extractionContext : { val redirects : Redirects } ) extends DataParser
+class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) extends DataParser
 {
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 

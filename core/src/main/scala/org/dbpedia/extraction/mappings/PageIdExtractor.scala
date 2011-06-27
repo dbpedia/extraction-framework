@@ -8,13 +8,13 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts page ids to articles.
  */
-class PageIdExtractor( extractionContext : {
-                           val ontology : Ontology
-                           val language : Language }  ) extends Extractor
+class PageIdExtractor( context : {
+                           def ontology : Ontology
+                           def language : Language }  ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
-    val wikiPageIdProperty = extractionContext.ontology.getProperty("wikiPageID")
+    val wikiPageIdProperty = context.ontology.getProperty("wikiPageID")
                              .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageID' does not exist in DBpedia Ontology."))
 
 
@@ -22,7 +22,7 @@ class PageIdExtractor( extractionContext : {
     {
         val objectLink = "http://" + language + ".wikipedia.org/wiki/" + node.root.title.encoded
 
-        new Graph(new Quad(extractionContext.language, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
-            node.id.toString, node.sourceUri, extractionContext.ontology.getDatatype("xsd:integer").get ))
+        new Graph(new Quad(context.language, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
+            node.id.toString, node.sourceUri, context.ontology.getDatatype("xsd:integer").get ))
     }
 }

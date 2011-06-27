@@ -12,15 +12,15 @@ import org.dbpedia.extraction.util.Language
  * PND is published by the German National Library.
  * For each person there is a record with his name, birth and occupation connected with a unique identifier, the PND number.
  */
-class PndExtractor( extractionContext : {
-                        val ontology : Ontology
-                        val language : Language }  ) extends Extractor
+class PndExtractor( context : {
+                        def ontology : Ontology
+                        def language : Language }  ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     require(PndExtractorConfig.supportedLanguages.contains(language))
 
-    private val individualisedPndProperty = extractionContext.ontology.getProperty("individualisedPnd")
+    private val individualisedPndProperty = context.ontology.getProperty("individualisedPnd")
                                             .getOrElse(throw new NoSuchElementException("Ontology property 'individualisedPnd' does not exist in DBpedia Ontology."))
 
     private val PndRegex = """(?i)[0-9X]+"""
@@ -44,7 +44,7 @@ class PndExtractor( extractionContext : {
                     {
                         for (pnd <- getPnd(property)) 
                         {
-                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads ::= new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
@@ -55,7 +55,7 @@ class PndExtractor( extractionContext : {
                     {
                         for (pnd <- getPnd(property))
                         {
-                            quads ::= new Quad(extractionContext.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads ::= new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }

@@ -15,18 +15,18 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
                           unit2 : Datatype,
                           templateProperty3 : String,
                           unit3 : Datatype,
-                          extractionContext : {
-                              val redirects : Redirects  // redirects required by DateTimeParser
-                              val language : Language } ) extends PropertyMapping
+                          context : {
+                              def redirects : Redirects  // redirects required by DateTimeParser
+                              def language : Language } ) extends PropertyMapping
 {
     require(Set("xsd:date", "xsd:gDay", "xsd:gMonth", "xsd:gYear", "xsd:gMonthDay", "xsd:gYearMonth").contains(ontologyProperty.range.name),
         "ontologyProperty must be one of: xsd:date, xsd:gDay, xsd:gMonth, xsd:gYear, xsd:gMonthDay, xsd:gYearMonth")
 
     private val logger = Logger.getLogger(classOf[CombineDateMapping].getName)
 
-    private val parser1 = Option(unit1).map(new DateTimeParser(extractionContext, _))
-    private val parser2 = Option(unit2).map(new DateTimeParser(extractionContext, _))
-    private val parser3 = Option(unit3).map(new DateTimeParser(extractionContext, _))
+    private val parser1 = Option(unit1).map(new DateTimeParser(context, _))
+    private val parser2 = Option(unit2).map(new DateTimeParser(context, _))
+    private val parser3 = Option(unit3).map(new DateTimeParser(context, _))
 
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -63,7 +63,7 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
         {
             val mergedDate = Date.merge(dates, datatype)
 
-            val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, mergedDate.toString, node.sourceUri, datatype)
+            val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, mergedDate.toString, node.sourceUri, datatype)
 
             new Graph(quad)
         }

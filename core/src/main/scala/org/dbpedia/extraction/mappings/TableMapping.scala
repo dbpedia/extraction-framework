@@ -11,9 +11,9 @@ class TableMapping( mapToClass : OntologyClass,
                     keywords : String,
                     header : String,
                     mappings : List[PropertyMapping],
-                    extractionContext : {
-                        val ontology : Ontology
-                        val language : Language }   ) extends ClassMapping
+                    context : {
+                        def ontology : Ontology
+                        def language : Language }   ) extends ClassMapping
 {
     val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase) }
     
@@ -53,7 +53,7 @@ class TableMapping( mapToClass : OntologyClass,
             var currentClass = mapToClass
             while(currentClass != null)
             {
-                val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyTypes, instanceUri, extractionContext.ontology.getProperty("rdf:type").get, currentClass.uri, rowNode.sourceUri)
+                val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, currentClass.uri, rowNode.sourceUri)
                 graph = graph.merge(new Graph(quad))
                 
                 currentClass = currentClass.subClassOf
@@ -63,7 +63,7 @@ class TableMapping( mapToClass : OntologyClass,
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                val quad = new Quad(extractionContext.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
+                val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
                 graph = graph.merge(new Graph(quad))
             }
             

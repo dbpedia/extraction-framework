@@ -10,17 +10,17 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts interwiki links and creates owl:sameAs triples
  */
-class InterLanguageLinksExtractor( extractionContext : {
-                                       val ontology : Ontology
-                                       val language : Language } ) extends Extractor
+class InterLanguageLinksExtractor( context : {
+                                       def ontology : Ontology
+                                       def language : Language } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     require( InterLanguageLinksExtractorConfig.supportedLanguages.contains(language), "Interlanguage Links supports the following languages: " + InterLanguageLinksExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
-    private val interLanguageLinksProperty = extractionContext.ontology.getProperty("owl:sameAs")
+    private val interLanguageLinksProperty = context.ontology.getProperty("owl:sameAs")
                                              .getOrElse(throw new NoSuchElementException("Ontology property 'owl:sameAs' does not exist in DBpedia Ontology."))
-    //extractionContext.ontology.getProperty("interLanguageLinks")
+    //context.ontology.getProperty("interLanguageLinks")
 
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -31,7 +31,7 @@ class InterLanguageLinksExtractor( extractionContext : {
 
         retrieveTranslationTitles (node,InterLanguageLinksExtractorConfig.intLinksMap(language)).foreach { tuple:(String, WikiTitle) =>
             val (tlang, title) = tuple
-            quads ::= new Quad(extractionContext.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
+            quads ::= new Quad(context.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
                 OntologyNamespaces.getResource(title.encodedWithNamespace,tlang), title.sourceUri, null)
         }
         new Graph(quads)

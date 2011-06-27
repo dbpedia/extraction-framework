@@ -10,9 +10,9 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.Redirects
 
 class UnitValueParser( extractionContext : {
-                           val ontology : Ontology
-                           val language : Language
-                           val redirects : Redirects },
+                           def ontology : Ontology
+                           def language : Language
+                           def redirects : Redirects },
                         inputDatatype : Datatype,
                         strict : Boolean = false) extends DataParser
 {

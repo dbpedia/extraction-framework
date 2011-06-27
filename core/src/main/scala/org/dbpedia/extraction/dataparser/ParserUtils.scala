@@ -8,7 +8,7 @@ import org.dbpedia.extraction.util.Language
  * Utility functions used by the data parsers.
  */
 //TODO test after re-factor
-class ParserUtils( extractionContext : { val language : Language } )
+class ParserUtils( extractionContext : { def language : Language } )
 {
     private val scales = ParserUtilsConfig.scalesMap.getOrElse(extractionContext.language.wikiCode, ParserUtilsConfig.scalesMap("en"))
 
