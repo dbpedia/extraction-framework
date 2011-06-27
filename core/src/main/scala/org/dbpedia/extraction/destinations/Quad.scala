@@ -8,8 +8,6 @@ import org.dbpedia.extraction.util.Language
 /**
  * Represents a statement in the N-Quads format (see: http://sw.deri.org/2008/07/n-quads/)
  */
-
-//Max: the language is the only thing that is required from the ExtractionContext!
 class Quad(	val language : Language,
             val dataset : Dataset,
             val subject : String,
