@@ -1,15 +1,15 @@
 package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, Node}
 import java.text.{ParseException, NumberFormat}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Parses double-precision floating-point numbers.
  */
 //TODO a lot of copied code from IntegerParser!
-class DoubleParser(extractionContext : ExtractionContext, val strict : Boolean = false) extends DataParser
+class DoubleParser( extractionContext : { def language : Language } , val strict : Boolean = false) extends DataParser
 {
     private val numberFormat = NumberFormat.getInstance(extractionContext.language.locale)
 
@@ -17,7 +17,7 @@ class DoubleParser(extractionContext : ExtractionContext, val strict : Boolean =
 
     private val logger = Logger.getLogger(classOf[DoubleParser].getName)
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
     private val DoubleRegex  = """\D*?(\-?[0-9\-\,\.]+).*""".r
 
@@ -33,11 +33,6 @@ class DoubleParser(extractionContext : ExtractionContext, val strict : Boolean =
         None
     }
 
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
-    }
-
     private def parseFloatValue(input : String) : Option[Double] =
     {
         val numberStr = if(strict) input.trim else DoubleRegex.findFirstMatchIn(input.trim) match
@@ -46,7 +41,7 @@ class DoubleParser(extractionContext : ExtractionContext, val strict : Boolean =
             case None =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + input + "' to a floating point number, DoubleRegex did not match")
-                ""
+                return null
             }
         }
 
@@ -57,11 +52,6 @@ class DoubleParser(extractionContext : ExtractionContext, val strict : Boolean =
         catch
         {
             case ex : ParseException =>
-            {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
-                None
-            }
-            case ex : NumberFormatException =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None

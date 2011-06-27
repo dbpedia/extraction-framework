@@ -3,13 +3,13 @@ package org.dbpedia.extraction.dataparser
 import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
 import java.util.logging.{Level, Logger}
 import util.control.ControlThrowable
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
+import org.dbpedia.extraction.mappings.Redirects
 
 /**
  * Parses geographical coordinates.
  */
-class GeoCoordinateParser(extractionContext : ExtractionContext) extends DataParser
+class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) extends DataParser
 {
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
@@ -50,7 +50,7 @@ class GeoCoordinateParser(extractionContext : ExtractionContext) extends DataPar
             }
             case _ =>
             {
-                node.children.flatMap(catchTemplate).headOption
+                node.children.flatMap(catchTemplate(_)).headOption
             }
         }
     }
