@@ -4,7 +4,6 @@ import org.scalatest.FlatSpec
 import org.dbpedia.extraction.ontology.OntologyDatatypes
 import org.dbpedia.extraction.util.Language
 import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
-import org.dbpedia.extraction.config.ExtractionContext
 
 class DurationParserTest extends FlatSpec with ShouldMatchers
 {
@@ -142,12 +141,14 @@ class DurationParserTest extends FlatSpec with ShouldMatchers
     }
 
 
-    private val datatypes =  OntologyDatatypes.load.map(dt => (dt.name, dt)).toMap
+    private val datatypes =  OntologyDatatypes.load().map(dt => (dt.name, dt)).toMap
 
-    private def parse(language : String, datatypeName : String, input : String) : Option[Double] =
+    private def parse(lang : String, datatypeName : String, input : String) : Option[Double] =
     {
-        val lang = Language.fromWikiCode(language).get
-        val context = new ExtractionContext(null, lang, null, null, null, null)
+        val context = new
+        {
+            def language : Language = Language.fromWikiCode(lang).get
+        }
 
         val durationParser = new DurationParser(context)
 

@@ -7,7 +7,6 @@ import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.config.ExtractionContext
 
 class DateTimeParserTest extends FlatSpec with ShouldMatchers
 {
@@ -520,8 +519,11 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
     private def parse(language : String, datatype : String, input : String) : Option[String] =
     {
         val lang = Language.fromWikiCode(language).get
-        val redirects = Redirects.loadFromCache(lang)
-        val context = new ExtractionContext(null, lang, redirects, null, null, null)
+        val context = new
+        {
+            def language : Language = lang
+            def redirects : Redirects = Redirects.loadFromCache(lang)
+        }
         val dateParser = new DateTimeParser(context, new Datatype(datatype), false)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), 0, 0, input)
 

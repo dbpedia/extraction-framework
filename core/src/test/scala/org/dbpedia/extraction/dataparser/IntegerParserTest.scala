@@ -5,8 +5,6 @@ import org.dbpedia.extraction.ontology.OntologyDatatypes
 import org.dbpedia.extraction.util.Language
 import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
 import org.dbpedia.extraction.wikiparser.TextNode
-import org.dbpedia.extraction.config.ExtractionContext
-
 
 class IntegerParserTest extends FlatSpec with ShouldMatchers
 {
@@ -66,11 +64,17 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
         }
     }
 
-    private val datatypes = OntologyDatatypes.load.map(dt => (dt.name, dt)).toMap
+    private val datatypes = OntologyDatatypes.load().map(dt => (dt.name, dt)).toMap
+
+    private class TestExtractionContext(lang : Language)
+
 
     private def parse( lang : String, input : String, strict : Boolean = false, datatypeName : String = "xsd:integer" ) : Option[Int] =
     {
-        val context = new ExtractionContext(null, Language.fromWikiCode(lang).get, null, null, null, null)
+        val context = new
+        {
+            def language : Language = Language.fromWikiCode(lang).get
+        }
         val textNode = new TextNode(input, 1)
 
         val inputDatatype = datatypes(datatypeName)
