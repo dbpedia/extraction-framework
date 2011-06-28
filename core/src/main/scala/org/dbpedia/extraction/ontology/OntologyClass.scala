@@ -10,12 +10,12 @@ package org.dbpedia.extraction.ontology
  * @param equivalentClasses
  */
 class OntologyClass(name : String, labels : Map[String, String], comments : Map[String, String],
-                    val subClassOf : OntologyClass, val equivalentClasses : Set[OntologyClass]) extends OntologyType(name, labels, comments)
+                    val subClassOf : List[OntologyClass], val equivalentClasses : Set[OntologyClass]) extends OntologyType(name, labels, comments)
 {
     require(name != null, "name != null")
     require(labels != null, "labels != null")
     require(comments != null, "comments != null")
-    require(name == "owl:Thing" || OntologyNamespaces.skipValidation(name) || subClassOf != null, "subClassOf != null")
+    require(name == "owl:Thing" || OntologyNamespaces.skipValidation(name) || subClassOf.nonEmpty, "subClassOf.nonEmpty")
     require(equivalentClasses != null, "equivalentClasses != null")
 
     override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
