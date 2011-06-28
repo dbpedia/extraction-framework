@@ -9,6 +9,8 @@ import scala.collection.mutable.ArrayBuffer
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
+import java.lang.IllegalArgumentException
+import org.dbpedia.extraction.util.Language
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -115,6 +117,7 @@ object MappingsLoader
             new SimplePropertyMapping( loadTemplateProperty(tnode, "templateProperty"),
                                        loadOntologyProperty(tnode, "ontologyProperty", true, context),
                                        loadDatatype(tnode, "unit", false, context),
+                                       loadLanguage(tnode, "language", false),
                                        context )
         }
         case "IntermediateNodeMapping" =>
@@ -273,4 +276,13 @@ object MappingsLoader
 	        }
 	    }
 	}
+
+    private def loadLanguage(node : TemplateNode, propertyName : String, required : Boolean) : Language =
+    {
+        loadTemplateProperty(node, propertyName, required) match
+        {
+            case lang : String => Language.fromWikiCode(lang).getOrElse(throw new IllegalArgumentException("Language " + lang + " unknown"))
+            case null => null
+        }
+    }
 }
