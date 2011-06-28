@@ -78,14 +78,12 @@ class TemplateMapping( mapToClass : OntologyClass,
     private def createInstance(uri : String, node : Node) : Graph =
     {
         //Collect all classes
-        var classes = List[OntologyClass]()
-        var currentClass = mapToClass
-        while(currentClass != null)
+        def collectClasses(clazz : OntologyClass) : List[OntologyClass] =
         {
-            classes = currentClass :: classes
-
-            currentClass = currentClass.subClassOf
+            clazz :: clazz.subClassOf.toList.flatMap(collectClasses)
         }
+
+        val classes = collectClasses(mapToClass)
 
         //Set annotations
         node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
