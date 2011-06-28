@@ -10,10 +10,19 @@ class TemplateMapping( mapToClass : OntologyClass,
                        mappings : List[PropertyMapping],
                        extractionContext : ExtractionContext ) extends ClassMapping
 {
-    override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
+    private val (propertyMappings, constantMappings) = splitMappings
+
+    override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        case templateNode : TemplateNode => extractTemplate(templateNode, subjectUri, pageContext)
-        case _ => new Graph()
+        val graph = node match
+        {
+            case templateNode : TemplateNode => extractTemplate(templateNode, subjectUri, pageContext)
+            case _ => new Graph()
+        }
+
+        //do these only once
+        constantMappings.map(mapping => mapping.extract(node.asInstanceOf[TemplateNode], subjectUri, null))
+                                .foldRight(graph)(_ merge _)
     }
 
     def extractTemplate(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -28,8 +37,8 @@ class TemplateMapping( mapToClass : OntologyClass,
                 val typeGraph = createInstance(subjectUri, node)
 
                 //Extract properties
-                mappings.map(mapping => mapping.extract(node, subjectUri, pageContext))
-                        .foldLeft(typeGraph)(_ merge _)
+                propertyMappings.map(mapping => mapping.extract(node, subjectUri, pageContext))
+                                .foldLeft(typeGraph)(_ merge _)
             }
             case Some(pageClasses) => //This page already has a root template.
             {
@@ -60,8 +69,8 @@ class TemplateMapping( mapToClass : OntologyClass,
                 }
 
                 //Extract properties
-                mappings.map(mapping => mapping.extract(node, instanceUri, pageContext))
-                        .foldLeft(graph)(_ merge _)
+                propertyMappings.map(mapping => mapping.extract(node, instanceUri, pageContext))
+                               .foldLeft(graph)(_ merge _)
             }
         }
     }
@@ -74,7 +83,7 @@ class TemplateMapping( mapToClass : OntologyClass,
         while(currentClass != null)
         {
             classes = currentClass :: classes
-            
+
             currentClass = currentClass.subClassOf
         }
 
@@ -94,20 +103,20 @@ class TemplateMapping( mapToClass : OntologyClass,
 
         new Graph(quads)
     }
-    
+
     /**
      * Generates a new URI from a template node
-     * 
+     *
      * @param subjectUri The base string of the generated URI
      * @param templateNode The template for which the URI is to be generated
      * @param pageContext The current page context
-     * 
+     *
      * @return The generated URI
      */
     private def generateUri(subjectUri : String, templateNode : TemplateNode, pageContext : PageContext) : String =
     {
         val properties = templateNode.children
-        
+
         //Cannot generate URIs for empty templates
         if(properties.isEmpty)
         {
@@ -130,7 +139,25 @@ class TemplateMapping( mapToClass : OntologyClass,
             nameProperty = properties.head
         }
 
-        return pageContext.generateUri(subjectUri, nameProperty)
+        pageContext.generateUri(subjectUri, nameProperty)
+    }
+
+    private def splitMappings : (List[PropertyMapping],List[PropertyMapping]) =
+    {
+        var propertyMappings : List[PropertyMapping] = List()
+        var constantPropertyMappings : List[PropertyMapping] = List()
+        for(mapping <- mappings)
+        {
+            if(mapping.isInstanceOf[ConstantMapping])
+            {
+                constantPropertyMappings ::= mapping
+            }
+            else
+            {
+                propertyMappings ::= mapping
+            }
+        }
+        (propertyMappings, constantPropertyMappings)
     }
 }
 
