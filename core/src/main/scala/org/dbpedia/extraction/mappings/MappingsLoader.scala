@@ -168,9 +168,16 @@ object MappingsLoader
                                        loadTemplateProperty(tnode, "latitudeDirection", false),
                                        context )
         }
+        case "ConstantMapping" =>
+        {
+            new ConstantMapping( loadOntologyProperty(tnode, "ontologyProperty", true, context),
+                                 loadTemplateProperty(tnode, "value", true),
+                                 loadDatatype(tnode, "unit", false, context),
+                                 context )
+        }
         case title => throw new IllegalArgumentException("Unknown property type " + title + " on page " + tnode.root.title)
     }
-	
+
     private def loadConditionalMapping(tnode : TemplateNode, context : ExtractionContext) =
     {
         val conditionMappings =
