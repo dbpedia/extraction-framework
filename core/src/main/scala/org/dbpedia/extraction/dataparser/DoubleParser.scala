@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, Node}
+import org.dbpedia.extraction.wikiparser.Node
 import java.text.{ParseException, NumberFormat}
 import org.dbpedia.extraction.util.Language
 
@@ -9,7 +9,9 @@ import org.dbpedia.extraction.util.Language
  * Parses double-precision floating-point numbers.
  */
 //TODO a lot of copied code from IntegerParser!
-class DoubleParser( extractionContext : { def language : Language } , val strict : Boolean = false) extends DataParser
+class DoubleParser( extractionContext : { def language : Language },
+                    strict : Boolean = false,
+                    multiplicationFactor : Double = 1.0) extends DataParser
 {
     private val numberFormat = NumberFormat.getInstance(extractionContext.language.locale)
 
@@ -17,7 +19,7 @@ class DoubleParser( extractionContext : { def language : Language } , val strict
 
     private val logger = Logger.getLogger(classOf[DoubleParser].getName)
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
     private val DoubleRegex  = """\D*?(\-?[0-9\-\,\.]+).*""".r
 
@@ -27,15 +29,10 @@ class DoubleParser( extractionContext : { def language : Language } , val strict
              convertedText = parserUtils.convertLargeNumbers(text);
              value <- parseFloatValue(convertedText) )
         {
-            return Some(value)
+            return Some(value * multiplicationFactor)
         }
 
         None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
     }
 
     private def parseFloatValue(input : String) : Option[Double] =
@@ -46,7 +43,7 @@ class DoubleParser( extractionContext : { def language : Language } , val strict
             case None =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + input + "' to a floating point number, DoubleRegex did not match")
-                return null
+                return None
             }
         }
 

@@ -44,10 +44,12 @@ public class SQLFileDestination implements Destination {
         oaiId = oaiID;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
     public synchronized void write(Graph graph){
 
-        List tripleList = JavaConversions.asList(graph.quads());
-        Map<Dataset, scala.collection.immutable.List<Quad>> tripleWithDataset = JavaConversions.asMap(graph.quadsByDataset());
+        //List tripleList = JavaConversions.asList(graph.quads());
+        Map<Dataset, scala.collection.immutable.List<Quad>> tripleWithDataset = JavaConversions.mapAsJavaMap(graph.quadsByDataset());
 
         Set keySet = tripleWithDataset.keySet();
         Iterator keysIterator = keySet.iterator();
@@ -56,9 +58,9 @@ public class SQLFileDestination implements Destination {
             Dataset ds = (Dataset) keysIterator.next();
 
             HashMap newHashSet = new HashMap();
-            scala.collection.immutable.List<Quad> quadList = (scala.collection.immutable.List<Quad>)tripleWithDataset.get(ds);
+            scala.collection.immutable.List<Quad> quadList = tripleWithDataset.get(ds);
 
-            List<Quad> listQuads = JavaConversions.asList(quadList);
+            Iterable<Quad> listQuads = JavaConversions.asJavaIterable(quadList);
             for(Quad quad : listQuads){
 
                 HashMap tmp = new HashMap();

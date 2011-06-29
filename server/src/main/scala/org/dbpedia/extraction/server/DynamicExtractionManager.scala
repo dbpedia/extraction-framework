@@ -20,8 +20,6 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
 
     @volatile private var _extractors : Map[Language, Extractor] = loadExtractors
 
-    @volatile private lazy val _redirects = Redirects.load(new MemorySource)
-
 
     def extractor(language : Language) = _extractors(language)
 
@@ -50,5 +48,4 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
         _extractors = _extractors.updated(language, loadExtractor(language))
     }
 
-    def redirects = _redirects
 }

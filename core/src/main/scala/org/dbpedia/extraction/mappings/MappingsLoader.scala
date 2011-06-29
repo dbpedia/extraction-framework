@@ -9,6 +9,7 @@ import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
+import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.Source
 
@@ -26,7 +27,7 @@ object MappingsLoader
                  def redirects : Redirects
                  def mappingsSource : Source } ) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
     {
-        logger.info("Loadings mappings ("+context.language.wikiCode+")")
+        logger.info("Loading mappings ("+context.language.wikiCode+")")
 
 		val templateMappings = new HashMap[String, TemplateMapping]()
 		val tableMappings = new ArrayBuffer[TableMapping]()
@@ -130,6 +131,8 @@ object MappingsLoader
             new SimplePropertyMapping( loadTemplateProperty(tnode, "templateProperty"),
                                        loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
                                        loadDatatype(tnode, "unit", false, context.ontology),
+                                       loadLanguage(tnode, "language", false),
+                                       loadDouble(tnode, "factor", false),
                                        context )
         }
         case "IntermediateNodeMapping" =>
@@ -182,6 +185,13 @@ object MappingsLoader
                                        loadTemplateProperty(tnode, "latitudeSeconds", false),
                                        loadTemplateProperty(tnode, "latitudeDirection", false),
                                        context )
+        }
+        case "ConstantMapping" =>
+        {
+            new ConstantMapping( loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
+                                 loadTemplateProperty(tnode, "value", true),
+                                 loadDatatype(tnode, "unit", false, context.ontology),
+                                 context )
         }
         case title => throw new IllegalArgumentException("Unknown property type " + title + " on page " + tnode.root.title)
     }
@@ -287,4 +297,29 @@ object MappingsLoader
 	        }
 	    }
 	}
+
+    private def loadLanguage(node : TemplateNode, propertyName : String, required : Boolean) : Language =
+    {
+        loadTemplateProperty(node, propertyName, required) match
+        {
+            case lang : String => Language.fromWikiCode(lang).getOrElse(throw new IllegalArgumentException("Language " + lang + " unknown"))
+            case null => null
+        }
+    }
+
+    private def loadDouble(node : TemplateNode, propertyName : String, required : Boolean) : Double =
+    {
+        try
+        {
+            loadTemplateProperty(node, propertyName, required) match
+            {
+                case factor : String => factor.toDouble
+                case null => 1
+            }
+        }
+        catch
+        {
+            case e : NumberFormatException => throw new IllegalArgumentException("Invalid value for " + propertyName + ". Must be double.")
+        }
+    }
 }

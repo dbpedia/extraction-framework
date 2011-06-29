@@ -14,70 +14,85 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
                                   def language : Language } ) extends PropertyMapping
 {
     private val logger = Logger.getLogger(classOf[IntermediateNodeMapping].getName)
-    
+
+    private val splitRegex = """<br\s*\/?>"""
+
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         var graph = new Graph()
 
-        val affectedTemplateProperties =
-        {
-            for(propertyMapping <- mappings; if propertyMapping.isInstanceOf[SimplePropertyMapping])
-                yield propertyMapping.asInstanceOf[SimplePropertyMapping].templateProperty
-        }.toSet
-            
-        if (affectedTemplateProperties.size == 1)
-        {
-            for(affectedTemplateProperty <- affectedTemplateProperties;
-                propertyNode <- node.property(affectedTemplateProperty) )
+        val affectedTemplatePropertyNodes = mappings.flatMap(_ match
             {
-                val newPropertyNodes = NodeUtil.splitPropertyNode(propertyNode, """<br\s*\/?>""")
-                if (newPropertyNodes.size > 1)
-                {
-                    for(newPropertyNode <- newPropertyNodes)
-                    {
-                        val instanceUri = pageContext.generateUri(subjectUri, newPropertyNode)
+                case spm : SimplePropertyMapping => node.property(spm.templateProperty)
+                case _ => None
+            }).toSet //e.g. Set(leader_name, leader_title)
 
-                        graph = graph.merge(createInstance(newPropertyNode.parent.asInstanceOf[TemplateNode], instanceUri, subjectUri, pageContext))
-                    }
-                }
-                else
-                {
-                    val instanceUri = pageContext.generateUri(subjectUri, propertyNode)
+        val valueNodes = affectedTemplatePropertyNodes.map(NodeUtil.splitPropertyNode(_, splitRegex))
 
-                    graph = graph.merge(createInstance(node, instanceUri, subjectUri, pageContext))
-                }
+        //more than one template proerty is affected (e.g. leader_name, leader_title)
+        if(affectedTemplatePropertyNodes.size > 1)
+        {
+            //require their values to be all singles
+            if(valueNodes.forall(_.size == 1))
+            {
+                graph = graph.merge(createInstance(node, subjectUri, pageContext))
+            }
+            else
+            {
+                //TODO muliple properties having multiple values
+                /**
+                 * fictive example:
+                 * leader_name = Bill_Gates<br>Steve_Jobs
+                 * leader_title = Microsoft dictator<br>Apple evangelist
+                 */
+                logger.fine("IntermediateNodeMapping for muliple properties having multiple values not implemented!")
             }
         }
-        else
+        //one template property is affected (e.g. engine)
+        else if(affectedTemplatePropertyNodes.size == 1)
         {
-            //TODO
-            logger.fine("IntermediaNodeMapping for more than one affected template property not implemented!")
+            //allow multiple values in this property
+            for( valueNodesForOneProperty <- valueNodes ;
+                 value <- valueNodesForOneProperty )
+            {
+                graph = graph.merge(createInstance(value.parent.asInstanceOf[TemplateNode], subjectUri, pageContext))
+            }
         }
 
         graph
     }
-    
-    private def createInstance(node : TemplateNode, instanceUri : String, originalSubjectUri : String, pageContext : PageContext) : Graph =
+
+    private def createInstance(node : TemplateNode, originalSubjectUri : String, pageContext : PageContext) : Graph =
     {
+        val instanceUri = pageContext.generateUri(originalSubjectUri, node)
+
+        def writeTypes(clazz : OntologyClass, graph : Graph) : Graph =
+        {
+            var thisGraph = graph
+
+            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, clazz.uri, node.sourceUri)
+            thisGraph = graph.merge(new Graph(quad))
+
+            for(baseClass <- clazz.subClassOf)
+            {
+                thisGraph = writeTypes(baseClass, thisGraph)
+            }
+
+            thisGraph
+        }
+
         // extract quads
         var graph = mappings.map(propertyMapping => propertyMapping.extract(node, instanceUri, pageContext)).reduceLeft(_ merge _)
 
         // write types
         if(!graph.isEmpty)
         {
-            var currentClass = nodeClass
-            while(currentClass != null)
-            {
-                val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, currentClass.uri, node.sourceUri)
-                graph = graph.merge(new Graph(quad))
-                
-                currentClass = currentClass.subClassOf
-            }
+            graph = writeTypes(nodeClass, graph)
 
             val quad2 = new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
             graph = graph.merge(new Graph(quad2))
         }
-        
+
         graph
     }
 }

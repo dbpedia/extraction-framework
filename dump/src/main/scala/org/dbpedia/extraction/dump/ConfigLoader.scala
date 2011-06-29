@@ -8,11 +8,19 @@ import java.util.Properties
 import java.io.{FileReader, File}
 import _root_.org.dbpedia.extraction.util.StringUtils._
 import _root_.org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.WikiTitle
+import java.net.URL
+import org.dbpedia.extraction.ontology.io.OntologyReader
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.sources.{MemorySource, Source, XMLSource, WikiSource}
+
 /**
  * Loads the dump extraction configuration.
  */
 object ConfigLoader
 {
+    private var config : Config = null
+
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
      *
@@ -26,32 +34,13 @@ object ConfigLoader
         properties.load(new FileReader(configFile))
 
         //Load configuration
-        val config = new Config(properties)
+        config = new Config(properties)
 
         //Update dumps (if configured to do so)
         if(config.update) Download.download(config.dumpDir, config.languages.map(_.wikiCode))
 
         //Create a non-strict view of the extraction jobs
-        config.extractors.keySet.view.map(createExtractionJob(config))
-    }
-
-    /**
-     * Creates ab extraction job for a specific language.
-     */
-    private def createExtractionJob(config : Config)(language : Language) : ExtractionJob =
-    {
-        //Extractors
-        val extractors = config.extractors(language)
-        val context = new DumpExtractionContext(language, config.dumpDir)
-        val compositeExtractor = Extractor.load(extractors, context)
-
-        //Destination
-        val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
-        val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq")
-        val destination = new CompositeDestination(tripleDestination, quadDestination)
-
-        val jobLabel = "Extraction Job for " + language.wikiCode + " Wikipedia with " + extractors.size + " extractors"
-        new ExtractionJob(compositeExtractor, context.articlesSource, destination, jobLabel)
+        config.extractors.keySet.view.map(createExtractionJob)
     }
 
     private class Config(config : Properties)
@@ -116,5 +105,100 @@ object ConfigLoader
             .map(className => ClassLoader.getSystemClassLoader.loadClass(className))
             .map(_.asInstanceOf[Class[Extractor]])
         }
+    }
+
+
+    /**
+     * Creates ab extraction job for a specific language.
+     */
+    private def createExtractionJob(lang : Language) : ExtractionJob =
+    {
+        //Extraction Context
+        val context : DumpExtractionContext = extractionContext(lang)
+
+        //Extractors
+        val extractors = config.extractors(lang)
+        val compositeExtractor = Extractor.load(extractors, context)
+
+        //Destination
+        val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => lang.filePrefix + "/" + dataset.name + "_" + lang.filePrefix + ".nt")
+        val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir, dataset => lang.filePrefix + "/" + dataset.name + "_" + lang.filePrefix + ".nq")
+        val destination = new CompositeDestination(tripleDestination, quadDestination)
+
+        val jobLabel = "Extraction Job for " + lang.wikiCode + " Wikipedia with " + extractors.size + " extractors"
+        new ExtractionJob(compositeExtractor, context.articlesSource, destination, jobLabel)
+    }
+
+    /**
+     * Make an object that will be injected into the extractors.
+     */
+    private def extractionContext(lang : Language) : DumpExtractionContext = new DumpExtractionContext
+    {
+        def ontology : Ontology = _ontology
+
+        def commonsSource : Source = _commonsSource
+
+        def language : Language = lang
+
+        private lazy val _mappingSource =
+        {
+            WikiTitle.Namespace.mappingNamespace(language) match
+            {
+                case Some(namespace) => WikiSource.fromNamespaces(namespaces = Set(namespace),
+                                                                  url = new URL("http://mappings.dbpedia.org/api.php"),
+                                                                  language = Language.Default)
+                case None => new MemorySource
+            }
+        }
+        def mappingsSource : Source = _mappingSource
+
+        private lazy val _articlesSource =
+        {
+            XMLSource.fromFile(getDumpFile(config.dumpDir, language.wikiCode),
+                title => title.namespace == WikiTitle.Namespace.Main || title.namespace == WikiTitle.Namespace.File ||
+                         title.namespace == WikiTitle.Namespace.Category || title.namespace == WikiTitle.Namespace.Template)
+        }
+        def articlesSource : Source = _articlesSource
+
+        private lazy val _redirects =
+        {
+            Redirects.load(articlesSource, language)
+        }
+        def redirects : Redirects = _redirects
+    }
+
+    //language-independent val
+    private lazy val _ontology =
+    {
+        val ontologySource = WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
+                                                       url = new URL("http://mappings.dbpedia.org/api.php"),
+                                                       language = Language.Default )
+        new OntologyReader().read(ontologySource)
+    }
+
+    //language-independent val
+    private lazy val _commonsSource =
+    {
+        XMLSource.fromFile(getDumpFile(config.dumpDir, "commons"), _.namespace == WikiTitle.Namespace.File)
+    }
+
+    /**
+     * Retrieves the dump stream for a specific language edition.
+     */
+    private def getDumpFile(dumpDir : File, wikiPrefix : String) : File =    //wikiPrefix is language prefix (and can be 'commons')
+    {
+        val wikiDir = new File(dumpDir + "/" + wikiPrefix)
+        if(!wikiDir.isDirectory) throw new Exception("Dump directory not found: " + wikiDir)
+
+        //Find most recent dump date
+        val date = wikiDir.list()
+                   .filter(_.matches("\\d{8}"))
+                   .sortWith(_.toInt > _.toInt)
+                   .headOption.getOrElse(throw new Exception("No dump found for Wiki: " + wikiPrefix))
+
+        val articlesDump = new File(wikiDir + "/" + date + "/" + wikiPrefix.replace('-', '_') + "wiki-" + date + "-pages-articles.xml")
+        if(!articlesDump.isFile) throw new Exception("Dump not found: " + articlesDump)
+
+        articlesDump
     }
 }

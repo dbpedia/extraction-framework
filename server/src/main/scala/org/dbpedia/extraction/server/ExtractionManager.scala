@@ -36,8 +36,6 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     def removeMappingPage(title : WikiTitle, language : Language)
 
-    def redirects : Redirects
-
     def mappingSource(language : Language) : Source = new MemorySource(mappingPages(language).values.toList)  // standard implementation
 
 
