@@ -1,8 +1,9 @@
-package org.dbpedia.extraction.ontology
+package org.dbpedia.extraction.ontology.io
 
-import datatypes.Datatype
 import java.io.{OutputStreamWriter, FileOutputStream, File}
 import collection.mutable.{MultiMap, HashMap, Set}
+import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.ontology._
 
 /**
  * Writes an ontology to configuration files using the DBpedia mapping language.
@@ -10,7 +11,7 @@ import collection.mutable.{MultiMap, HashMap, Set}
 //TODO write rdfs:comment
 class OntologyWriter
 {
-    def write(ontology : Ontology, dir : File) : Unit =
+    def write(ontology : Ontology, dir : File)
     {
         //Convert specialisations from Map[(OntologyClass, OntologyProperty), Datatype)] to Map[OntologyClass, Set(OntologyProperty, Datatype)]
         val specializations = new HashMap[OntologyClass, Set[(OntologyProperty, Datatype)]] with MultiMap[OntologyClass, (OntologyProperty, Datatype)]
@@ -32,7 +33,7 @@ class OntologyWriter
         }
     }
 
-    def writeClass(clazz : OntologyClass, dir : File, specializations : HashMap[OntologyClass, Set[(OntologyProperty, Datatype)]]) : Unit =
+    def writeClass(clazz : OntologyClass, dir : File, specializations : HashMap[OntologyClass, Set[(OntologyProperty, Datatype)]])
     {
         import OntologyWriter._
 
@@ -55,7 +56,10 @@ class OntologyWriter
                 writer.write("\n| rdfs:comment@ " + language + " = " + comment)
             }
 
-            if(clazz.subClassOf.name != "owl:Thing") writer.write("\n| rdfs:subClassOf = " + clazz.subClassOf.name)
+            for(superClass <- clazz.subClassOf if superClass.name != "owl:Thing")
+            {
+                writer.write("\n| rdfs:subClassOf = " + superClass.name)
+            }
 
             writer.write("\n| owl:equivalentClass = " + clazz.equivalentClasses.map(_.name).mkString(", "))
 
@@ -75,7 +79,7 @@ class OntologyWriter
         }
     }
 
-    def writeProperty(property : OntologyProperty, dir : File) : Unit =
+    def writeProperty(property : OntologyProperty, dir : File)
     {
         import OntologyWriter._
 
@@ -127,11 +131,11 @@ private object OntologyWriter
     {
         if (name.indexOf(':') == -1)
         {
-            return "dbpedia/" + prefix + name
+            "dbpedia/" + prefix + name
         }
         else
         {
-            return name.replaceFirst(":", "/");
+            name.replaceFirst(":", "/");
         }
     }
 }

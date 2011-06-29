@@ -8,7 +8,7 @@ import org.dbpedia.extraction.wikiparser._
  */
 class LinkParser(val strict : Boolean = false) extends DataParser
 {
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |/|;|,"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |/|;|,"""  //TODO this split regex might not be complete
 
     override def parse(node : Node) : Option[URI] =
     {
@@ -45,11 +45,6 @@ class LinkParser(val strict : Boolean = false) extends DataParser
             }
         }
         None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
     }
 
     private def collectExternalLinks(node : Node) : List[ExternalLinkNode] =

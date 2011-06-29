@@ -4,8 +4,8 @@ import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.ontology.{OntologyClass, Ontology, OntologyNamespaces, OntologyProperty}
 
 class CalculateMapping( templateProperty1 : String,
                         templateProperty2 : String,
@@ -89,9 +89,15 @@ class CalculateMapping( templateProperty1 : String,
         val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         var graph = new Graph(quad)
 
+
+        //Collect all classes
+        def collectClasses(clazz : OntologyClass) : List[OntologyClass] =
+        {
+            clazz :: clazz.subClassOf.toList.flatMap(collectClasses)
+        }
+
         //Write specific properties
-        var currentClass = ontologyProperty.domain
-        while(currentClass != null)
+        for(currentClass <- collectClasses(ontologyProperty.domain))
         {
             for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {
@@ -102,7 +108,6 @@ class CalculateMapping( templateProperty1 : String,
                  graph = graph.merge(new Graph(quad))
             }
 
-            currentClass = currentClass.subClassOf
         }
 
         graph

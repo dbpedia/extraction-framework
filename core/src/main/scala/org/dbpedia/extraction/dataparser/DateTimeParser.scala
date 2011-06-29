@@ -31,7 +31,7 @@ class DateTimeParser ( context : {
 
     // parse logic configurations
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
     private val monthRegex = months.keySet.mkString("|")
     private val eraRegex = eraStr.keySet.mkString("|")
@@ -92,11 +92,6 @@ class DateTimeParser ( context : {
         }
 
         None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
     }
 
     private def catchTemplate(node: TemplateNode) : Option[Date] =

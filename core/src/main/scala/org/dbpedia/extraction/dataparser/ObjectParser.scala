@@ -12,7 +12,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
 {
     private val flagTemplateParser = new FlagTemplateParser(extractionContext)
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""  //TODO this split regex might not be complete
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
     override def parse(node : Node) : Option[String] =
@@ -63,11 +63,6 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
         None
     }
 
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
-    }
-
     /**
      * Searches on the wiki page for a link with the same name as surfaceForm and returns the destination if one is found.
      */
@@ -109,7 +104,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
 
     private def resolveTemplate(templateNode : TemplateNode) : Option[WikiTitle] =
     {
-        flagTemplateParser.getDestination(templateNode).foreach(destination => return Some(destination))
+        flagTemplateParser.parse(templateNode).foreach(destination => return Some(destination))
         None
     }
 

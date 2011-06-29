@@ -1,15 +1,17 @@
 package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, Node}
+import org.dbpedia.extraction.wikiparser.Node
 import java.text.{NumberFormat, ParseException}
 import java.math.RoundingMode
 import org.dbpedia.extraction.util.Language
-
 /**
  * Parses integer numbers.
  */
-class IntegerParser( extractionContext : { def language : Language } , val strict : Boolean = false, val validRange : Int => Boolean = (i => true)) extends DataParser
+class IntegerParser( extractionContext : { def language : Language } ,
+                     strict : Boolean = false,
+                     multiplicationFactor : Int = 1,
+                     validRange : Int => Boolean = (i => true)) extends DataParser
 {
     private val numberFormat = NumberFormat.getIntegerInstance(extractionContext.language.locale)
     numberFormat.setRoundingMode(RoundingMode.HALF_UP)
@@ -18,7 +20,7 @@ class IntegerParser( extractionContext : { def language : Language } , val stric
 
     private val logger = Logger.getLogger(classOf[IntegerParser].getName)
 
-    private val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
     private val IntegerRegex = """\D*?(\-?[0-9\-\,\.]+).*""".r
 
@@ -28,15 +30,10 @@ class IntegerParser( extractionContext : { def language : Language } , val stric
              convertedText = parserUtils.convertLargeNumbers(text);
              value <- parseIntegerValue(convertedText) )
         {
-            return Some(value)
+            return Some(value * multiplicationFactor)
         }
 
         None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
     }
 
     private def parseIntegerValue(input : String) : Option[Int] =
@@ -48,7 +45,7 @@ class IntegerParser( extractionContext : { def language : Language } , val stric
             case None =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
-                return null
+                return None
             }
         }
 
