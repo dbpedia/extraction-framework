@@ -118,6 +118,7 @@ object MappingsLoader
                                        loadOntologyProperty(tnode, "ontologyProperty", true, context),
                                        loadDatatype(tnode, "unit", false, context),
                                        loadLanguage(tnode, "language", false),
+                                       loadDouble(tnode, "factor", false),
                                        context )
         }
         case "IntermediateNodeMapping" =>
@@ -283,6 +284,22 @@ object MappingsLoader
         {
             case lang : String => Language.fromWikiCode(lang).getOrElse(throw new IllegalArgumentException("Language " + lang + " unknown"))
             case null => null
+        }
+    }
+
+    private def loadDouble(node : TemplateNode, propertyName : String, required : Boolean) : Double =
+    {
+        try
+        {
+            loadTemplateProperty(node, propertyName, required) match
+            {
+                case factor : String => factor.toDouble
+                case null => 1
+            }
+        }
+        catch
+        {
+            case e : NumberFormatException => throw new IllegalArgumentException("Invalid value for " + propertyName + ". Must be double.")
         }
     }
 }

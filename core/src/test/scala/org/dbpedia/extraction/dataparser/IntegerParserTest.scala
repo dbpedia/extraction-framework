@@ -66,7 +66,7 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
         }
     }
 
-    private val datatypes = OntologyDatatypes.load.map(dt => (dt.name, dt)).toMap
+    private val datatypes = OntologyDatatypes.load().map(dt => (dt.name, dt)).toMap
 
     private def parse( lang : String, input : String, strict : Boolean = false, datatypeName : String = "xsd:integer" ) : Option[Int] =
     {
@@ -83,7 +83,7 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
             case "xsd:negativeInteger"    => (i => i < 0)
         }
 
-        val parser = new IntegerParser(context, strict, validRange)
+        val parser = new IntegerParser(context, strict, validRange = validRange)
         parser.parse(textNode)
     }
 

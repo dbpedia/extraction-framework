@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, Node}
+import org.dbpedia.extraction.wikiparser.Node
 import java.text.{ParseException, NumberFormat}
 import org.dbpedia.extraction.util.Language
 
@@ -9,7 +9,9 @@ import org.dbpedia.extraction.util.Language
  * Parses double-precision floating-point numbers.
  */
 //TODO a lot of copied code from IntegerParser!
-class DoubleParser( extractionContext : { def language : Language } , val strict : Boolean = false) extends DataParser
+class DoubleParser( extractionContext : { def language : Language },
+                    strict : Boolean = false,
+                    multiplicationFactor : Double = 1.0) extends DataParser
 {
     private val numberFormat = NumberFormat.getInstance(extractionContext.language.locale)
 
@@ -27,7 +29,7 @@ class DoubleParser( extractionContext : { def language : Language } , val strict
              convertedText = parserUtils.convertLargeNumbers(text);
              value <- parseFloatValue(convertedText) )
         {
-            return Some(value)
+            return Some(value * multiplicationFactor)
         }
 
         None

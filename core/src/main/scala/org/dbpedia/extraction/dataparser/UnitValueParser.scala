@@ -8,13 +8,15 @@ import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.Redirects
+import java.lang.Double
 
 class UnitValueParser( extractionContext : {
                            def ontology : Ontology
                            def language : Language
                            def redirects : Redirects },
                         inputDatatype : Datatype,
-                        strict : Boolean = false) extends DataParser
+                        strict : Boolean = false,
+                        multiplicationFactor : Double = 1.0) extends DataParser
 {
     private val logger = Logger.getLogger(classOf[UnitValueParser].getName)
 
@@ -407,7 +409,7 @@ class UnitValueParser( extractionContext : {
         {
             try
             {
-                numberFormat.parse(valueString).doubleValue
+                numberFormat.parse(valueString).doubleValue * multiplicationFactor
             }
             catch
             {
