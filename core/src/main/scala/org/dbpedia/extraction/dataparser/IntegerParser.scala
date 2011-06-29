@@ -45,7 +45,7 @@ class IntegerParser( extractionContext : { def language : Language } ,
             case None =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
-                return null
+                return None
             }
         }
 
