@@ -6,11 +6,13 @@ import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology._
+import java.lang.IllegalArgumentException
 
 class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNodeMapping requires this to be public. Is there a better way?
                              ontologyProperty : OntologyProperty,
                              unit : Datatype,
                              private var language : Language,
+                             factor : Number,
                              extractionContext : ExtractionContext ) extends PropertyMapping
 {
     if(language == null) language = extractionContext.language
@@ -62,29 +64,73 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
     {
         //TODO
         case c : OntologyClass if ontologyProperty.name != "foaf:homepage" => new ObjectParser(extractionContext)
-        case c : OntologyClass => new LinkParser()
-        case dt : UnitDatatype => new UnitValueParser(extractionContext, if(unit != null) unit else dt)
-        case dt : DimensionDatatype => new UnitValueParser(extractionContext, if(unit != null) unit else dt)
-        case dt : EnumerationDatatype => new EnumerationParser(dt)
+        case c : OntologyClass =>
+        {
+            checkMultiplicationFactor("foaf:homepage")
+            new LinkParser()
+        }
+        case dt : UnitDatatype => new UnitValueParser(extractionContext, if(unit != null) unit else dt, multiplicationFactor = factor.doubleValue())
+        case dt : DimensionDatatype => new UnitValueParser(extractionContext, if(unit != null) unit else dt, multiplicationFactor = factor.doubleValue())
+        case dt : EnumerationDatatype =>
+        {
+            checkMultiplicationFactor("EnumerationDatatype")
+            new EnumerationParser(dt)
+        }
         case dt : Datatype => dt.name match
         {
-            case "xsd:integer" => new IntegerParser(extractionContext)
-            case "xsd:positiveInteger"    => new IntegerParser(extractionContext, validRange = (i => i > 0))
-            case "xsd:nonNegativeInteger" => new IntegerParser(extractionContext, validRange = (i => i >=0))
-            case "xsd:nonPositiveInteger" => new IntegerParser(extractionContext, validRange = (i => i <=0))
-            case "xsd:negativeInteger"    => new IntegerParser(extractionContext, validRange = (i => i < 0))            
-            case "xsd:double" => new DoubleParser(extractionContext)
-            case "xsd:float" => new DoubleParser(extractionContext)
-            case "xsd:string" => StringParser
-            case "xsd:anyURI" => new LinkParser(false)
-            case "xsd:date" => new DateTimeParser(extractionContext, dt)
-            case "xsd:gYear" => new DateTimeParser(extractionContext, dt)
-            case "xsd:gYearMonth" => new DateTimeParser(extractionContext, dt)
-            case "xsd:gMonthDay" => new DateTimeParser(extractionContext, dt)
-            case "xsd:boolean" => BooleanParser
+            case "xsd:integer" => new IntegerParser(extractionContext, multiplicationFactor = factor.intValue())
+            case "xsd:positiveInteger"    => new IntegerParser(extractionContext, multiplicationFactor = factor.intValue(), validRange = (i => i > 0))
+            case "xsd:nonNegativeInteger" => new IntegerParser(extractionContext, multiplicationFactor = factor.intValue(), validRange = (i => i >=0))
+            case "xsd:nonPositiveInteger" => new IntegerParser(extractionContext, multiplicationFactor = factor.intValue(), validRange = (i => i <=0))
+            case "xsd:negativeInteger"    => new IntegerParser(extractionContext, multiplicationFactor = factor.intValue(), validRange = (i => i < 0))
+            case "xsd:double" => new DoubleParser(extractionContext, multiplicationFactor = factor.doubleValue())
+            case "xsd:float" => new DoubleParser(extractionContext, multiplicationFactor = factor.doubleValue())
+            case "xsd:string" =>
+            {
+                checkMultiplicationFactor("xsd:string")
+                StringParser
+            }
+            case "xsd:anyURI" =>
+            {
+                checkMultiplicationFactor("xsd:anyURI")
+                new LinkParser(false)
+            }
+            case "xsd:date" =>
+            {
+                checkMultiplicationFactor("xsd:date")
+                new DateTimeParser(extractionContext, dt)
+            }
+            case "xsd:gYear" =>
+            {
+                checkMultiplicationFactor("xsd:gYear")
+                new DateTimeParser(extractionContext, dt)
+            }
+            case "xsd:gYearMonth" =>
+            {
+                checkMultiplicationFactor("xsd:gYearMonth")
+                new DateTimeParser(extractionContext, dt)
+            }
+            case "xsd:gMonthDay" =>
+            {
+                checkMultiplicationFactor("xsd:gMonthDay")
+                new DateTimeParser(extractionContext, dt)
+            }
+            case "xsd:boolean" =>
+            {
+                checkMultiplicationFactor("xsd:boolean")
+                BooleanParser
+            }
             case name => throw new IllegalArgumentException("Not implemented range " + name + " of property " + ontologyProperty)
         }
         case dt => throw new IllegalArgumentException("Property " + ontologyProperty + " does have invalid range " + dt)
+    }
+
+    private def checkMultiplicationFactor(datatypeName : String)
+    {
+        if(factor != 1)
+        {
+            throw new IllegalArgumentException("multiplication factor cannot be specified for " + datatypeName)
+        }
     }
     
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
