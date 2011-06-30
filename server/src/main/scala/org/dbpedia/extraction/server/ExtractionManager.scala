@@ -37,7 +37,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     def removeMappingPage(title : WikiTitle, language : Language)
 
-    def pageNodeSource(language : Language) : Traversable[PageNode]
+    def mappingPageSource(language : Language) : Traversable[PageNode]
 
 
     protected val parser = WikiParser()

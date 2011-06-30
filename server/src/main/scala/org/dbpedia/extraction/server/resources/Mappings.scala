@@ -55,7 +55,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.pageNodeSource(language).map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPageSource(language).map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }
@@ -69,7 +69,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get mappings page: " + title)
-        Server.extractor.pageNodeSource(language).find(_.title == WikiTitle.parseEncoded(title))
+        Server.extractor.mappingPageSource(language).find(_.title == WikiTitle.parseEncoded(title))
                                                  .getOrElse(throw new Exception("No mapping found for " + title)).toXML
     }
 
@@ -122,7 +122,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.pageNodeSource(language).map(page => <a href={"validate/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPageSource(language).map(page => <a href={"validate/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }
@@ -180,7 +180,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.pageNodeSource(language).map(page => <a href={"extractionSamples/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPageSource(language).map(page => <a href={"extractionSamples/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }

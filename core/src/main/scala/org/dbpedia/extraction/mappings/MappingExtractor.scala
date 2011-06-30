@@ -12,7 +12,7 @@ import org.dbpedia.extraction.sources.Source
 class MappingExtractor( context : {
                             def ontology : Ontology
                             def language : Language
-                            def mappingsSource : Source
+                            def mappingPageSource : Traversable[PageNode]
                             def redirects : Redirects } ) extends Extractor
 {
 

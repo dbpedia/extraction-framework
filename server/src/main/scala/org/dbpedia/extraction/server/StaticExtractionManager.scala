@@ -37,7 +37,7 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
         throw new Exception("removing of ontologyPages not supported with this configuration; please use DynamicExtractionManager")
     }
 
-    def pageNodeSource(language : Language) = _mappingPages(language).values
+    def mappingPageSource(language : Language) = _mappingPages(language).values
 
     def updateMappingPage(page : WikiPage, language : Language)
     {
