@@ -11,8 +11,6 @@ import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.Source
-
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
  * This should be replaced by a general loader later on, which loads the mapping objects based on the grammar (which can be defined using annotations)
@@ -25,7 +23,7 @@ object MappingsLoader
                  def ontology : Ontology
                  def language : Language
                  def redirects : Redirects
-                 def mappingsSource : Source } ) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
+                 def pageNodeSource : Traversable[PageNode] } ) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
@@ -33,9 +31,7 @@ object MappingsLoader
 		val tableMappings = new ArrayBuffer[TableMapping]()
 		val conditionalMappings = new HashMap[String, ConditionalMapping]()
 
-        val parser = WikiParser()
-
-		for ( page <- context.mappingsSource.map(parser);
+		for ( page <- context.pageNodeSource;
 		      node <- page.children if node.isInstanceOf[TemplateNode] )
         {
 		    val tnode = node.asInstanceOf[TemplateNode]

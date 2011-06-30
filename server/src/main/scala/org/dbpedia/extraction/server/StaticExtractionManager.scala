@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources._
-import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 
 /**
  * Lazily loads extraction context parameters when they are required, not before.
@@ -14,7 +14,7 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
 {
     @volatile private lazy val _ontologyPages : Map[WikiTitle, WikiPage] = loadOntologyPages
 
-    @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
+    @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
 
     @volatile private lazy val _ontology : Ontology = loadOntology
 
@@ -32,7 +32,7 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
         throw new Exception("updating of ontologyPages not supported with this configuration; please use DynamicExtractionManager")
     }
 
-    def mappingPages(language : Language) = _mappingPages(language)
+    def pageNodeSource(language : Language) = _mappingPages(language).values
 
     def updateMappingPage(page : WikiPage, language : Language)
     {

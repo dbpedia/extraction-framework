@@ -8,8 +8,9 @@ import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.destinations.{Graph, Destination}
 import org.dbpedia.extraction.sources.{WikiSource, Source, MemorySource, WikiPage}
 import java.net.URL
-import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
 import org.dbpedia.extraction.mappings._
+
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, WikiTitle}
 
 /**
  * Base class for extraction managers.
@@ -30,14 +31,14 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     def ontologyPages_= (pages : Map[WikiTitle, WikiPage])
 
-    def mappingPages(language : Language) : Map[WikiTitle, WikiPage]
-
     def updateMappingPage(page : WikiPage, language : Language)
 
     def removeMappingPage(title : WikiTitle, language : Language)
 
-    def mappingSource(language : Language) : Source = new MemorySource(mappingPages(language).values.toList)  // standard implementation
+    def pageNodeSource(language : Language) : Traversable[PageNode]
 
+
+    protected val parser = WikiParser()
 
     def extract(source : Source, destination : Destination, language : Language)
     {
@@ -56,7 +57,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         Logger.getLogger(MappingsLoader.getClass.getName).addHandler(logHandler)
 
         //Load mappings
-        MappingsLoader.load(new ServerExtractionContext(language, this))
+        MappingsLoader.load(new ServerExtractionContext(language, this))  //TODO would it help to only validate requested pages?
 
         //Unregister xml log handler
         Logger.getLogger(MappingsLoader.getClass.getName).removeHandler(logHandler)
@@ -87,7 +88,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     protected def loadOntologyPages =
     {
-        logger.info("Loading ontology pages")
+        logger.info("Loading ontology pages from wiki")
         WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
                                   url = new URL("http://mappings.dbpedia.org/api.php"),
                                   language = Language.Default )
@@ -99,7 +100,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         languages.map(lang => (lang, loadMappingsPages(lang))).toMap
     }
 
-    protected def loadMappingsPages(language : Language) : Map[WikiTitle, WikiPage] =
+    protected def loadMappingsPages(language : Language) : Map[WikiTitle, PageNode] =
     {
         val mappingNamespace = WikiTitle.Namespace.mappingNamespace(language)
                                .getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
@@ -107,6 +108,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         WikiSource.fromNamespaces(namespaces = Set(mappingNamespace),
                                   url = new URL("http://mappings.dbpedia.org/api.php"),
                                   language = Language.Default )
+        .map(parser)
         .map(page => (page.title, page)).toMap
     }
 

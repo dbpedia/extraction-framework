@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources._
-import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 
 /**
  * Loads all extraction context parameters (ontology pages, mapping pages, ontology) at start-up independently of which extractors are chosen.
@@ -14,7 +14,7 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
 {
     @volatile private var _ontologyPages : Map[WikiTitle, WikiPage] = loadOntologyPages
 
-    @volatile private var _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
+    @volatile private var _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
 
     @volatile private var _ontology : Ontology = loadOntology
 
@@ -34,11 +34,11 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
         _extractors = loadExtractors
     }
 
-    def mappingPages(language : Language) = _mappingPages(language)
+    def pageNodeSource(language : Language) = _mappingPages(language).values
 
     def updateMappingPage(page : WikiPage, language : Language)
     {
-        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, page)))
+        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, parser(page))))
         _extractors = _extractors.updated(language, loadExtractor(language))
     }
 
