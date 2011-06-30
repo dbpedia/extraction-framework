@@ -18,7 +18,8 @@ class ServerExtractionContext(lang : Language, extractionManager : ExtractionMan
 
     def redirects : Redirects = _redirects
 
-    private lazy val _redirects = Redirects.load(new MemorySource, lang)
+    // the server only loads previously cached template redirects
+    private lazy val _redirects = Redirects.load(new MemorySource(), lang)
 
     // not needed in server: commonsSource
     // not needed in server: articlesSource

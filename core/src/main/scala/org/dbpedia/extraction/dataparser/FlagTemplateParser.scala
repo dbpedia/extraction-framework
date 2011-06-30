@@ -7,18 +7,14 @@ import org.dbpedia.extraction.wikiparser.{Node, TemplateNode, TextNode, WikiTitl
 /**
  * Handling of flag templates.
  */
-//TODO test after re-factor
 class FlagTemplateParser( extractionContext : { def language : Language } ) extends DataParser
 {
-    private val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
-
     override def parse(node : Node) : Option[WikiTitle] =
     {
         node match
         {
             case templateNode : TemplateNode =>
             {
-
                 val templateName = templateNode.title.decoded
                 //getCodeMap return en if language code is not configured
 
@@ -32,6 +28,7 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                         {
                             case Some(countryCode : String) if(templateName.length == 3)&&(templateName == templateName.toUpperCase) =>
                             {
+                                val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
                                 langCodeMap.get(countryCode).foreach(countryName => return Some(new WikiTitle(countryName)))
                             }
                             case Some(countryName : String) => return Some(new WikiTitle(countryName))
@@ -43,6 +40,7 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                 //template name is actually country code for flagicon template
                 else if((templateName.length == 3) && (templateName == templateName.toUpperCase))
                 {
+                    val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
                     langCodeMap.get(templateName).foreach(countryName => return Some(new WikiTitle(countryName)))
                 }
 
