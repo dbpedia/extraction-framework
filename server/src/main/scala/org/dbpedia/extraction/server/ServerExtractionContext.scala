@@ -11,17 +11,15 @@ import org.dbpedia.extraction.wikiparser.PageNode
  */
 class ServerExtractionContext(lang : Language, extractionManager : ExtractionManager)
 {
-    def ontology : Ontology = extractionManager.ontology  //language-independent
+    def ontology : Ontology = extractionManager.ontology
 
     def language : Language = lang
-
-    //def mappingsSource : Source = extractionManager.mappingSource(lang)
 
     def redirects : Redirects = _redirects
 
     private lazy val _redirects = Redirects.load(new MemorySource(), lang)
 
-    def pageNodeSource : Traversable[PageNode] = extractionManager.pageNodeSource(lang)
+    def mappingPageSource : Traversable[PageNode] = extractionManager.mappingPageSource(lang)
 
     // not needed in server: commonsSource
     // not needed in server: articlesSource

@@ -141,7 +141,7 @@ object ConfigLoader
 
         def language : Language = lang
 
-        private lazy val _pageNodeSource =
+        private lazy val _mappingPageSource =
         {
             WikiTitle.Namespace.mappingNamespace(language) match
             {
@@ -151,7 +151,7 @@ object ConfigLoader
                 case None => new MemorySource().map(parser)
             }
         }
-        def pageNodeSource : Traversable[PageNode] = _pageNodeSource
+        def mappingPageSource : Traversable[PageNode] = _mappingPageSource
 
         private lazy val _articlesSource =
         {

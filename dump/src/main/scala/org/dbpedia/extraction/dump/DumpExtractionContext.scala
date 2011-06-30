@@ -14,7 +14,7 @@ trait DumpExtractionContext
 
     def language : Language
 
-    def pageNodeSource : Traversable[PageNode]
+    def mappingPageSource : Traversable[PageNode]
 
     def articlesSource : Source
 

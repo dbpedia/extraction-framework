@@ -23,7 +23,7 @@ object MappingsLoader
                  def ontology : Ontology
                  def language : Language
                  def redirects : Redirects
-                 def pageNodeSource : Traversable[PageNode] } ) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
+                 def mappingPageSource : Traversable[PageNode] } ) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
@@ -31,7 +31,7 @@ object MappingsLoader
 		val tableMappings = new ArrayBuffer[TableMapping]()
 		val conditionalMappings = new HashMap[String, ConditionalMapping]()
 
-		for ( page <- context.pageNodeSource;
+		for ( page <- context.mappingPageSource;
 		      node <- page.children if node.isInstanceOf[TemplateNode] )
         {
 		    val tnode = node.asInstanceOf[TemplateNode]

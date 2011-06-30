@@ -41,7 +41,7 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
         _extractors = loadExtractors
     }
 
-    def pageNodeSource(language : Language) = _mappingPages(language).values
+    def mappingPageSource(language : Language) = _mappingPages(language).values
 
     def updateMappingPage(page : WikiPage, language : Language)
     {
