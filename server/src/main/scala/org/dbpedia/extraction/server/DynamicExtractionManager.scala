@@ -12,7 +12,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
  */
 class DynamicExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]]) extends ExtractionManager(languages, extractors)
 {
-    @volatile private var _ontologyPages : Map[WikiTitle, WikiPage] = loadOntologyPages
+    @volatile private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
     @volatile private var _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
 
@@ -27,9 +27,16 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
 
     def ontologyPages = _ontologyPages
 
-    def ontologyPages_= (pages : Map[WikiTitle, WikiPage])
+    def updateOntologyPage(page : WikiPage)
     {
-        _ontologyPages = pages
+        _ontologyPages = _ontologyPages.updated(page.title, parser(page))
+        _ontology = loadOntology
+        _extractors = loadExtractors
+    }
+
+    def removeOntologyPage(title : WikiTitle)
+    {
+        _ontologyPages = _ontologyPages - title
         _ontology = loadOntology
         _extractors = loadExtractors
     }
