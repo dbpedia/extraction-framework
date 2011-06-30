@@ -15,7 +15,7 @@ object WikiUtil
      */
     def cleanSpace( string : String ) : String =
     {
-        return string.replace('_', ' ').replaceAll(" +", " ").trim
+        string.replace('_', ' ').replaceAll(" +", " ").trim
     }
     
     /**
@@ -56,7 +56,7 @@ object WikiUtil
         encoded = encoded.replace("%26", "&");
         encoded = encoded.replace("%2C", ",");
 
-        return encoded;
+        encoded;
     }
     
     /**
@@ -74,9 +74,13 @@ object WikiUtil
     {
         // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt.
         // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
-        return cleanSpace(URLDecoder.decode(name, "UTF-8")).capitalizeLocale(language.locale)
+        cleanSpace(URLDecoder.decode(name, "UTF-8")).capitalizeLocale(language.locale)
     }
-    
+
+    private val wikiEmphasisRegex1 = "(?s)'''''(.*?)'''''".r
+    private val wikiEmphasisRegex2 = "(?s)'''(.*?)'''".r
+    private val wikiEmphasisRegex3 = "(?s)''(.*?)''".r
+
     /**
      * Removes Wiki emphasis.
      *
@@ -87,10 +91,9 @@ object WikiUtil
     {
         // note: I was tempted to replace these three by a single regex,
         // but it wouldn't really work.
-        
-        var result = text.replaceAll("(?s)'''''(.*?)'''''", "$1")
-        result = result.replaceAll("(?s)'''(.*?)'''", "$1")
-        result = result.replaceAll("(?s)''(.*?)''", "$1")
-        return result
+        var result = wikiEmphasisRegex1.replaceAllIn(text, "$1")
+        result = wikiEmphasisRegex2.replaceAllIn(result, "$1")
+        result = wikiEmphasisRegex3.replaceAllIn(result, "$1")
+        result
     }
 }
