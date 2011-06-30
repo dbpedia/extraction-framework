@@ -6,7 +6,7 @@ import xml.Elem
 import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.destinations.{Graph, Destination}
-import org.dbpedia.extraction.sources.{WikiSource, Source, MemorySource, WikiPage}
+import org.dbpedia.extraction.sources.{WikiSource, Source, WikiPage}
 import java.net.URL
 import org.dbpedia.extraction.mappings._
 
@@ -27,9 +27,11 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     def ontology : Ontology
 
-    def ontologyPages : Map[WikiTitle, WikiPage]
+    def ontologyPages : Map[WikiTitle, PageNode]
 
-    def ontologyPages_= (pages : Map[WikiTitle, WikiPage])
+    def updateOntologyPage(page : WikiPage)
+
+    def removeOntologyPage(title : WikiTitle)
 
     def updateMappingPage(page : WikiPage, language : Language)
 
@@ -73,10 +75,11 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         logHandler.setLevel(Level.WARNING)
         Logger.getLogger(classOf[OntologyReader].getName).addHandler(logHandler)
 
-        val updatedOntologyPages = (ontologyPages ++ newOntologyPages.map(page => (page.title, page))).values
+        val newOntologyPagesMap = newOntologyPages.map(parser(_)).map(page => (page.title, page)).toMap
+        val updatedOntologyPages = (ontologyPages ++ newOntologyPagesMap).values
 
         //Load ontology
-        new OntologyReader().read(new MemorySource(updatedOntologyPages.toList))
+        new OntologyReader().read(updatedOntologyPages)
 
         //Unregister xml log handler
         Logger.getLogger(classOf[OntologyReader].getName).removeHandler(logHandler)
@@ -88,10 +91,11 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     protected def loadOntologyPages =
     {
-        logger.info("Loading ontology pages from wiki")
+        logger.info("Loading ontology pages")
         WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
                                   url = new URL("http://mappings.dbpedia.org/api.php"),
                                   language = Language.Default )
+        .map(parser)
         .map(page => (page.title, page)).toMap
     }
 
@@ -114,7 +118,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     protected def loadOntology : Ontology =
     {
-        new OntologyReader().read(new MemorySource(ontologyPages.values.toList))
+        new OntologyReader().read(ontologyPages.values)
     }
 
     protected def loadExtractors =

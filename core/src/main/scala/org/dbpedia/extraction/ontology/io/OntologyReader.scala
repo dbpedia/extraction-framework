@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.ontology.io
 
-import java.util.logging.{Logger}
-import org.dbpedia.extraction.sources.Source
+import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
@@ -28,7 +27,7 @@ class OntologyReader
      * @param source The source containing the ontology pages
      * @return Ontology The ontology
      */
-	def read(source : Source) : Ontology =
+	def read(pageNodeSource : Traversable[PageNode]) : Ontology =
     {
         logger.info("Loading ontology")
 
@@ -44,10 +43,12 @@ class OntologyReader
         ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map("en" -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
         ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map("en" -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
 
-        for(page <- source.map(WikiParser()))
+        for(page <- pageNodeSource)
+        {
             load(ontologyBuilder, page)
+        }
 
-        val ontology = ontologyBuilder.build
+        val ontology = ontologyBuilder.build()
         logger.info("Ontology loaded")
         ontology
     }
@@ -337,7 +338,7 @@ class OntologyReader
             {
                 case Some(domainClassBuilder) => domainClassBuilder.generatedClass match
                 {
-                    case Some(domainClass) => domainClass
+                    case Some(clazz) => clazz
                     case None => logger.warning("Domain of property " + name + " (" + domain + ") couldn't be loaded"); return None
                 }
                 case None => logger.warning("Domain of property " + name + " (" + domain + ") does not exist"); return None
@@ -351,7 +352,7 @@ class OntologyReader
                 {
                     case Some(rangeClassBuilder) => rangeClassBuilder.generatedClass match
                     {
-                        case Some(rangeClass) => rangeClass
+                        case Some(clazz) => clazz
                         case None => logger.warning("Range of property '" + name + "' (" + range + ") couldn't be loaded"); return None
                     }
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
@@ -389,7 +390,7 @@ class OntologyReader
             {
                 case Some(domainClassBuilder) => domainClassBuilder.generatedClass match
                 {
-                    case Some(domainClass) => domainClass
+                    case Some(clazz) => clazz
                     case None => logger.warning("Cannot specialize property on class '" + className + "', since the class failed to load"); return None
                 }
                 case None => logger.warning("Cannot specialize property on class '" + className + "', since the class has not been found"); return None

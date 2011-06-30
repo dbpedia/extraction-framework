@@ -12,7 +12,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
  */
 class StaticExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]]) extends ExtractionManager(languages, extractors)
 {
-    @volatile private lazy val _ontologyPages : Map[WikiTitle, WikiPage] = loadOntologyPages
+    @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
     @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
 
@@ -27,9 +27,14 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
 
     def ontologyPages = _ontologyPages
 
-    def ontologyPages_= (pages : Map[WikiTitle, WikiPage])
+    def updateOntologyPage(page : WikiPage)
     {
         throw new Exception("updating of ontologyPages not supported with this configuration; please use DynamicExtractionManager")
+    }
+
+    def removeOntologyPage(title : WikiTitle)
+    {
+        throw new Exception("removing of ontologyPages not supported with this configuration; please use DynamicExtractionManager")
     }
 
     def pageNodeSource(language : Language) = _mappingPages(language).values
