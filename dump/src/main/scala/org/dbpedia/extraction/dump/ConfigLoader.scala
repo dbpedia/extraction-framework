@@ -8,11 +8,11 @@ import java.util.Properties
 import java.io.{FileReader, File}
 import _root_.org.dbpedia.extraction.util.StringUtils._
 import _root_.org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.WikiTitle
 import java.net.URL
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.{MemorySource, Source, XMLSource, WikiSource}
+import org.dbpedia.extraction.wikiparser.{WikiParser, PageNode, WikiTitle}
 
 /**
  * Loads the dump extraction configuration.
@@ -129,6 +129,7 @@ object ConfigLoader
         new ExtractionJob(compositeExtractor, context.articlesSource, destination, jobLabel)
     }
 
+    private val parser = WikiParser()
     /**
      * Make an object that will be injected into the extractors.
      */
@@ -140,17 +141,17 @@ object ConfigLoader
 
         def language : Language = lang
 
-        private lazy val _mappingSource =
+        private lazy val _pageNodeSource =
         {
             WikiTitle.Namespace.mappingNamespace(language) match
             {
                 case Some(namespace) => WikiSource.fromNamespaces(namespaces = Set(namespace),
                                                                   url = new URL("http://mappings.dbpedia.org/api.php"),
-                                                                  language = Language.Default)
-                case None => new MemorySource
+                                                                  language = Language.Default).map(parser)
+                case None => new MemorySource().map(parser)
             }
         }
-        def mappingsSource : Source = _mappingSource
+        def pageNodeSource : Traversable[PageNode] = _pageNodeSource
 
         private lazy val _articlesSource =
         {

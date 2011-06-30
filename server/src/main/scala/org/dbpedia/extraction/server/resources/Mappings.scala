@@ -11,6 +11,7 @@ import org.dbpedia.extraction.destinations.StringDestination
 import org.dbpedia.extraction.destinations.formatters.TriXFormatter
 import java.net.{URI, URL}
 import xml.{NodeBuffer, Elem}
+import java.lang.Exception
 
 /*
  * TODO document input: http://www.mediawiki.org/xml/export-0.4
@@ -54,7 +55,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.pageNodeSource(language).map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }
@@ -68,7 +69,8 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get mappings page: " + title)
-        Server.extractor.mappingPages(language)(WikiTitle.parseEncoded(title)).toXML
+        Server.extractor.pageNodeSource(language).find(_.title == WikiTitle.parseEncoded(title))
+                                                 .getOrElse(throw new Exception("No mapping found for " + title)).toXML
     }
 
     /**
@@ -77,7 +79,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
     @PUT
     @Path("/pages/{title}")
     @Consumes(Array("application/xml"))
-    def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem) : Unit =
+    def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem)
     {
         try
         {
@@ -103,7 +105,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
     @DELETE
     @Path("/pages/{title}")
     @Consumes(Array("application/xml"))
-    def deletePage(@PathParam("title") @Encoded title : String) : Unit =
+    def deletePage(@PathParam("title") @Encoded title : String)
     {
         Server.extractor.removeMappingPage(WikiTitle.parseEncoded(title), language)
         logger.info("Deleted mapping page: " + title)
@@ -120,7 +122,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"validate/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.pageNodeSource(language).map(page => <a href={"validate/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }
@@ -178,7 +180,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"extractionSamples/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.pageNodeSource(language).map(page => <a href={"extractionSamples/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }
@@ -202,7 +204,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         val destination = new StringDestination(new TriXFormatter(new URI("../../../stylesheets/trix.xsl")))
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         Server.extractor.extract(source, destination, language)
-        destination.close
+        destination.close()
         destination.toString
     }
 }
