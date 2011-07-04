@@ -41,6 +41,9 @@ final class SimpleWikiParser extends WikiParser
     private val propertyEnd = new Matcher(List("|", "}}"), true);
     private val templateParameterEnd = new Matcher(List("|", "}}}"), true);
 
+    private val parserFunctionNameEnd = new Matcher(List(":"), false, List("=", "|", "}}"));
+    private val parserFunctionEnd = new Matcher(List("}}"), true);
+
     private val tableRowEnd1 = new Matcher(List("|}", "|+", "|-", "|", "!"));
     private val tableRowEnd2 = new Matcher(List("|}", "|-", "|", "!"));
 
@@ -210,6 +213,8 @@ final class SimpleWikiParser extends WikiParser
                         case ex : TooManyErrorsException => throw ex
                         case ex : WikiParserException =>
                         {
+                            val e = ex
+                            val msg = e.getMessage
                             logger.log(Level.FINE, "Error parsing node.", ex)
 
                             source.pos = startPos
@@ -236,13 +241,22 @@ final class SimpleWikiParser extends WikiParser
             parseLink(source, level)
         }
         else if(source.lastTag("{{"))
-        {   val nextToken = source.getString(source.pos, source.pos+1)
+        {
+            val nextToken = source.getString(source.pos, source.pos+1)
             if ( nextToken == "{")
+            {
                 return parseTemplateParameter(source, level)
+            }
             //special template code {{#if
             if ( nextToken == "#")
+            {
                 throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
-            parseTemplate(source, level)
+            }
+            parseParserFunction(source, level) match
+            {
+                case Some(node : ParserFunctionNode) => node
+                case None => parseTemplate(source, level)
+            }
         }
         else if(source.lastTag("{|"))
         {
@@ -385,19 +399,19 @@ final class SimpleWikiParser extends WikiParser
             //The first entry denotes the name of the template
             if(title == null)
             {
-                //TODO support parser functions
-                var templateName = propertyNode.children match
+                val templateName = propertyNode.children match
                 {
                     case TextNode(text, _) :: _ => text
                     case _ => throw new WikiParserException("Invalid Template name", startLine, source.findLine(startLine))
                 }
 
                 //Remove arguments of parser functions as they are not supported
-                templateName = templateName.split(":", 2) match
-                {
-                    case Array(function, name) => name
-                    case _ => templateName
-                }
+                //commented because now we have parseParserFunction
+//                templateName = templateName.split(":", 2) match
+//                {
+//                    case Array(function, name) => name
+//                    case _ => templateName
+//                }
 
                 val decodedName = WikiUtil.cleanSpace(templateName).capitalizeLocale(source.language.locale)
                 title = new WikiTitle(decodedName, WikiTitle.Namespace.Template, source.language)
@@ -421,7 +435,7 @@ final class SimpleWikiParser extends WikiParser
     	
     	throw new WikiParserException("Template not closed", startLine, source.findLine(startLine))
     }
-    
+
     private def parseProperty(source : Source, defaultKey : String, level : Int) : PropertyNode =
     {
     	val line = source.line
@@ -441,6 +455,32 @@ final class SimpleWikiParser extends WikiParser
         }
         
         PropertyNode(key, nodes, line)
+    }
+
+    private def parseParserFunction(source : Source, level : Int) : Option[ParserFunctionNode] =
+    {
+        val startLine = source.line
+        val lastPos = source.pos
+
+        val title = source.find(parserFunctionNameEnd, false) match
+        {
+            case m : MatchResult if m.matched =>
+            {
+                val decodedTitle = source.getString(lastPos, source.pos - m.tag.length)
+                new WikiTitle(decodedTitle, WikiTitle.Namespace.Template, source.language)
+            }
+            case  _ =>
+            {
+                //if no ":" was found, roll back; this is a template
+                source.line = startLine
+                source.pos = lastPos
+                return None
+            }
+        }
+
+        val children = parseUntil(parserFunctionEnd, source, level)
+
+        Some(ParserFunctionNode(title, children, startLine))
     }
     
     private def parseTable(source : Source, level : Int) : TableNode =
@@ -511,7 +551,7 @@ final class SimpleWikiParser extends WikiParser
             //Reached row end?
             if(source.lastTag("|}") || source.lastTag("|-"))
             {
-                new TableRowNode(nodes.reverse, line)
+                return new TableRowNode(nodes.reverse, line)
             }
         }
         
