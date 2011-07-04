@@ -14,6 +14,8 @@ object ResolveRedirects
 
     def main(args : Array[String])
     {
+        val start = System.currentTimeMillis()
+
         val redirectsDatasetFileName = args.head
         val datasetsToBeModified = args.tail
 
@@ -33,6 +35,8 @@ object ResolveRedirects
                 resolveRedirects(redirects, datasetFileName, namespace)
             }
         }
+
+        println("time: " + (System.currentTimeMillis()-start)/1000 + " s")
     }
 
     private def loadRedirects(fileName : String, resourceNamespacePrefix : String) : Map[String,String] =
@@ -77,17 +81,17 @@ object ResolveRedirects
             tripleSource.foreach{case (line, subj, obj) =>
             {
                 val objUri = stripUri(obj, resourceNamespacePrefix)
-                val resolved = redirects.get(objUri) match
+                redirects.get(objUri) match
                 {
                     case Some(resolvedUri) =>
                     {
                         println("  resolved "+objUri+" -> "+resolvedUri)
+                        out.println(line.replace(obj, unstripUri(resolvedUri, resourceNamespacePrefix)))
                         resolvedRedirects += 1
                         resolvedUri
                     }
-                    case None => objUri
+                    case None => out.println(line)
                 }
-                out.println(line.replace(obj, unstripUri(resolved, resourceNamespacePrefix)))
             }}
         }
         finally
@@ -114,11 +118,8 @@ object ResolveRedirects
             {
                 line match
                 {
-                    case ObjectPropertyQuadsRegex(subj, pred, obj, provenance) =>
-                    {
-                        f(line, subj, obj)
-                    }
-                    case DatatypePropertyQuadsRegex(_, _, _, _) =>
+                    case ObjectPropertyQuadsRegex(subj, pred, obj, provenance) => f(line, subj, obj)
+                    case DatatypePropertyQuadsRegex(subj, pred, obj, provenance) => f(line, subj, obj)
                     case _ if line.nonEmpty => throw new IllegalArgumentException("line did not match n-quads syntax: "+line)
                     case _ =>
                 }
