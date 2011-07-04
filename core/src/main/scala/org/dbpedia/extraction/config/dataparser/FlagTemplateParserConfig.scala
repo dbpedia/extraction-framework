@@ -7,7 +7,7 @@ object FlagTemplateParserConfig
 {
     private val langCodeMap = Map(
         //english (en) as _
-        "en" ->
+        "ca" ->
             Map(
                 "AFG"->"Afganistan",
                 "ALA"->"Illes Åland",
