@@ -134,7 +134,7 @@ object CreateMappingStats
         // resolve transitive closure
         for((source,target) <- redirects)
         {
-            var cyclePrevention : Set[String] = Set()
+            var cyclePrevention : Set[String] = Set(source)
             var closure = target
             while( redirects.contains(closure) && !cyclePrevention.contains(closure) )
             {
