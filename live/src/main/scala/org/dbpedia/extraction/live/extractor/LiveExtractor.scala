@@ -6,7 +6,6 @@ import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.mappings.{Extractor, Redirects}
-import org.dbpedia.extraction.wikiparser.WikiParser
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,9 +22,6 @@ object LiveExtractor
     private var _ontology : Ontology = null;
     private var _redirects : Redirects = null;
     private var MainContext : AnyRef = null;
-
-    private val parser = WikiParser()
-
     /**
      * Creates a new extractor.
      *
@@ -42,7 +38,7 @@ object LiveExtractor
     //@param ontologySource Source containing the ontology definitions
     def loadOntology(ontologySource: Source)
       {
-        _ontology = new OntologyReader().read(ontologySource.map(parser))
+        _ontology = new OntologyReader().read(ontologySource)
       }
 
 

@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.StringUtils._
 import java.util.Locale
+import org.dbpedia.extraction.sources.Source
 
 /**
  * Loads an ontology from configuration files using the DBpedia mapping language.
@@ -20,6 +21,13 @@ class OntologyReader
      * At the moment, all ISO 639-1 codes are supported.
      */
     private val supportedLanguageCodes = Locale.getISOLanguages.toSet
+
+    def read(source : Source) : Ontology =
+    {
+        logger.info("Loading ontology pages")
+
+        read(source.map(WikiParser()))
+    }
 
     /**
      *  Loads an ontology from configuration files using the DBpedia mapping language.

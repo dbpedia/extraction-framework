@@ -174,7 +174,7 @@ object ConfigLoader
         val ontologySource = WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
                                                        url = new URL("http://mappings.dbpedia.org/api.php"),
                                                        language = Language.Default )
-        new OntologyReader().read(ontologySource.map(parser))
+        new OntologyReader().read(ontologySource)
     }
 
     //language-independent val
