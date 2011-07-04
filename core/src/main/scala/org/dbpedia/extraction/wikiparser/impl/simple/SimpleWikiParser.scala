@@ -23,10 +23,11 @@ final class SimpleWikiParser extends WikiParser
     //TODO move matchers to companion object
 
     private val commentEnd = new Matcher(List("-->"));
-    private val refEnd = new Matcher(List("/>", "</ref>"));
-    private val mathEnd = new Matcher(List("/>", "</math>"));
-    private val codeEnd = new Matcher(List("/>", "</code>"));
-    private val sourceEnd = new Matcher(List("/>", "</source>"));
+    private val htmlTagEnd = new Matcher(List("/>"), false, disallowedTags = List("<"));
+    private val refEnd = new Matcher(List("</ref>"));
+    private val mathEnd = new Matcher(List("</math>"));
+    private val codeEnd = new Matcher(List("</code>"));
+    private val sourceEnd = new Matcher(List("</source>"));
         
     private val internalLinkLabelOrEnd = new Matcher(List("|", "]]", "\n"));
     private val internalLinkEnd = new Matcher(List("]]", "\n"), true);
@@ -71,7 +72,7 @@ final class SimpleWikiParser extends WikiParser
         val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
 
         //Return page node
-        return new PageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation, nodes)
+        new PageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation, nodes)
     }
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
@@ -151,22 +152,38 @@ final class SimpleWikiParser extends WikiParser
                 else if(source.lastTag("<ref"))
                 {
                     //Skip reference
-                    source.find(refEnd, false)
+                    source.find(htmlTagEnd, false) match
+                    {
+                        case m : MatchResult if m.matched => m
+                        case _ => source.find(refEnd, false)
+                    }
                 }
                 else if(source.lastTag("<math"))
                 {
                     //Skip math tag
-                    source.find(mathEnd, false)
+                    source.find(htmlTagEnd, false) match
+                    {
+                        case m : MatchResult if m.matched => m
+                        case _ => source.find(mathEnd, false)
+                    }
                 }
                 else if(source.lastTag("<code"))
                 {
                     //Skip code tag
-                    source.find(codeEnd, false)
+                    source.find(htmlTagEnd, false) match
+                    {
+                        case m : MatchResult if m.matched => m
+                        case _ => source.find(codeEnd, false)
+                    }
                 }
                 else if(source.lastTag("<source"))
                 {
                     //Skip source tag
-                    source.find(sourceEnd, false)
+                    source.find(htmlTagEnd, false) match
+                    {
+                        case m : MatchResult if m.matched => m
+                        case _ => source.find(sourceEnd, false)
+                    }
                 }
                 else
                 {
@@ -209,14 +226,14 @@ final class SimpleWikiParser extends WikiParser
             lastLine = source.line;
         }
         
-        return nodes.reverse
+        nodes.reverse
     }
     
     private def createNode(source : Source, level : Int) : Node =
     {
         if(source.lastTag("[") || source.lastTag("http"))
         {
-            return parseLink(source, level)
+            parseLink(source, level)
         }
         else if(source.lastTag("{{"))
         {   val nextToken = source.getString(source.pos, source.pos+1)
@@ -225,15 +242,15 @@ final class SimpleWikiParser extends WikiParser
             //special template code {{#if
             if ( nextToken == "#")
                 throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
-            return parseTemplate(source, level)
+            parseTemplate(source, level)
         }
         else if(source.lastTag("{|"))
         {
-            return parseTable(source, level)
+            parseTable(source, level)
         }
         else if(source.lastTag("\n="))
         {
-            return parseSection(source)
+            parseSection(source)
         }
         else
             throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
@@ -320,7 +337,7 @@ final class SimpleWikiParser extends WikiParser
         {
             try
             {
-        	    return ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
+        	    ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
             }
             catch
             {
@@ -333,11 +350,11 @@ final class SimpleWikiParser extends WikiParser
 
             if(destinationTitle.language == source.language)
             {
-                return InternalLinkNode(destinationTitle, nodes, line, destinationNodes)
+                InternalLinkNode(destinationTitle, nodes, line, destinationNodes)
             }
             else
             {
-                return InterWikiLinkNode(destinationTitle, nodes, line, destinationNodes)
+                 InterWikiLinkNode(destinationTitle, nodes, line, destinationNodes)
             }
         }
     }
@@ -363,7 +380,7 @@ final class SimpleWikiParser extends WikiParser
 
         while(true)
         {
-            val propertyNode = parseProperty(source, curKeyIndex.toString(), level)
+            val propertyNode = parseProperty(source, curKeyIndex.toString, level)
             
             //The first entry denotes the name of the template
             if(title == null)
@@ -389,7 +406,7 @@ final class SimpleWikiParser extends WikiParser
             {
                 properties ::= propertyNode
 
-                if(propertyNode.key == curKeyIndex.toString())
+                if(propertyNode.key == curKeyIndex.toString)
                 {
             	    curKeyIndex += 1
                 }
@@ -423,7 +440,7 @@ final class SimpleWikiParser extends WikiParser
             nodes = parseUntil(propertyEnd, source, level);
         }
         
-        return PropertyNode(key, nodes, line)
+        PropertyNode(key, nodes, line)
     }
     
     private def parseTable(source : Source, level : Int) : TableNode =
@@ -478,7 +495,7 @@ final class SimpleWikiParser extends WikiParser
             }
         }
     	
-    	return TableNode(caption, nodes.reverse, line);
+    	TableNode(caption, nodes.reverse, line);
     }
 
     private def parseTableRow(source : Source, level : Int) : TableRowNode =
@@ -494,11 +511,11 @@ final class SimpleWikiParser extends WikiParser
             //Reached row end?
             if(source.lastTag("|}") || source.lastTag("|-"))
             {
-                return new TableRowNode(nodes.reverse, line)
+                new TableRowNode(nodes.reverse, line)
             }
         }
         
-        return null
+        null
     }
 
     private def parseTableCell(source : Source, level : Int) : TableCellNode =
@@ -534,7 +551,7 @@ final class SimpleWikiParser extends WikiParser
         val node = new TableCellNode(nodes, startLine)
         node.setAnnotation("rowspan", rowspan)
         node.setAnnotation("colspan", colspan)
-        return node
+        node
     }
 
     private def parseTableParam(name : String, str : String) : Int =
@@ -565,11 +582,11 @@ final class SimpleWikiParser extends WikiParser
 
         try
         {
-        	return valueStr.toInt;
+        	valueStr.toInt;
         }
         catch
         {
-        	case _ => return 1
+        	case _ => 1
         }
     }
 
@@ -607,6 +624,6 @@ final class SimpleWikiParser extends WikiParser
           return SectionNode(name, level, cleanNodes, source.line - 1);
         }
 
-        return SectionNode(name, level, nodes, source.line - 1);
+        SectionNode(name, level, nodes, source.line - 1);
     }
 }
