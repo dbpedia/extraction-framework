@@ -45,7 +45,7 @@ object NodeUtil
                     }
                 }
 
-                nodes ::= TextNode(sb.toString, line)
+                nodes ::= TextNode(sb.toString(), line)
             }
             case _  if (parenthesesCount <= 0) => nodes ::= child
             case _ =>
@@ -56,7 +56,7 @@ object NodeUtil
         //Set link to the original AST
         propertyNode.parent = node.parent
 
-        return propertyNode
+        propertyNode
     }
 
     /**
@@ -79,8 +79,11 @@ object NodeUtil
                     {
                         if(parts(i).size > 0) currentNodes = new TextNode(parts(i), line) :: currentNodes
                         currentNodes = currentNodes.reverse
-                        propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
-                        currentNodes = List[Node]()
+                        if(currentNodes.nonEmpty)
+                        {
+                            propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+                            currentNodes = List[Node]()
+                        }
                     }
                     else
                     {
@@ -93,7 +96,10 @@ object NodeUtil
 
         //Add last property node
         currentNodes = currentNodes.reverse
-        propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+        if(currentNodes.nonEmpty)
+        {
+            propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+        }
 
         propertyNodes = propertyNodes.reverse
 
@@ -104,7 +110,7 @@ object NodeUtil
         //Set link to the original AST
         templateNodes.foreach(_.parent = inputTemplateNode.parent)
 
-        return propertyNodes
+        propertyNodes
     }
 
     /**

@@ -248,7 +248,7 @@ class InfoboxExtractor( context : {
 
     private def extractLinks(node : PropertyNode) : List[(String, Datatype)] =
     {
-        val splitNodes = NodeUtil.splitPropertyNode(node, """\s*\W+\s*""").filter(_.children.nonEmpty)
+        val splitNodes = NodeUtil.splitPropertyNode(node, """\s*\W+\s*""")
 
         splitNodes.flatMap(splitNode => objectParser.parse(splitNode)) match
         {
