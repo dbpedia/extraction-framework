@@ -143,7 +143,7 @@ final class SimpleWikiParser extends WikiParser
             //Check result of seek
             if(!m.matched)
             {
-               throw new WikiParserException("Node not closed", line, source.findLine(line));
+               throw new WikiParserException("Node not closed; expected "+matcher, line, source.findLine(line));
             }
             else
             {
@@ -155,38 +155,22 @@ final class SimpleWikiParser extends WikiParser
                 else if(source.lastTag("<ref"))
                 {
                     //Skip reference
-                    source.find(htmlTagEnd, false) match
-                    {
-                        case m : MatchResult if m.matched => m
-                        case _ => source.find(refEnd, false)
-                    }
+                    consequtiveMatch(htmlTagEnd, refEnd, source)
                 }
                 else if(source.lastTag("<math"))
                 {
                     //Skip math tag
-                    source.find(htmlTagEnd, false) match
-                    {
-                        case m : MatchResult if m.matched => m
-                        case _ => source.find(mathEnd, false)
-                    }
+                    consequtiveMatch(htmlTagEnd, mathEnd, source)
                 }
                 else if(source.lastTag("<code"))
                 {
                     //Skip code tag
-                    source.find(htmlTagEnd, false) match
-                    {
-                        case m : MatchResult if m.matched => m
-                        case _ => source.find(codeEnd, false)
-                    }
+                    consequtiveMatch(htmlTagEnd, codeEnd, source)
                 }
                 else if(source.lastTag("<source"))
                 {
                     //Skip source tag
-                    source.find(htmlTagEnd, false) match
-                    {
-                        case m : MatchResult if m.matched => m
-                        case _ => source.find(sourceEnd, false)
-                    }
+                    consequtiveMatch(htmlTagEnd, sourceEnd, source)
                 }
                 else
                 {
@@ -213,9 +197,7 @@ final class SimpleWikiParser extends WikiParser
                         case ex : TooManyErrorsException => throw ex
                         case ex : WikiParserException =>
                         {
-                            val e = ex
-                            val msg = e.getMessage
-                            logger.log(Level.FINE, "Error parsing node.", ex)
+                            logger.log(Level.FINE, "Error parsing node. "+ex.getMessage, ex)
 
                             source.pos = startPos
                             source.line = startLine
@@ -232,6 +214,26 @@ final class SimpleWikiParser extends WikiParser
         }
         
         nodes.reverse
+    }
+
+    /**
+     * Tries to match m1. If it does not match, matches m2 and returns the result.
+     */
+    private def consequtiveMatch(m1 : Matcher, m2 : Matcher, source : Source, throwIfNoMatch : Boolean = false) : MatchResult =
+    {
+        val pos = source.pos
+        val line = source.line
+        val m1Result = source.find(m1, throwIfNoMatch)
+        if(m1Result.matched)
+        {
+            m1Result
+        }
+        else
+        {
+            source.pos = pos
+            source.line = line
+            source.find(m2, throwIfNoMatch)
+        }
     }
     
     private def createNode(source : Source, level : Int) : Node =
