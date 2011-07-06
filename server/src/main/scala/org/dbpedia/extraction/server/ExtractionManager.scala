@@ -29,6 +29,8 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     def ontologyPages : Map[WikiTitle, PageNode]
 
+    def mappingPageSource(language : Language) : Traversable[PageNode]
+
     def updateOntologyPage(page : WikiPage)
 
     def removeOntologyPage(title : WikiTitle)
@@ -37,14 +39,12 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     def removeMappingPage(title : WikiTitle, language : Language)
 
-    def mappingPageSource(language : Language) : Traversable[PageNode]
-
 
     protected val parser = WikiParser()
 
     def extract(source : Source, destination : Destination, language : Language)
     {
-        val graph = source.map(WikiParser())
+        val graph = source.map(parser)
                           .map(extractor(language))
                           .foldLeft(new Graph())(_ merge _)
 
@@ -101,6 +101,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     protected def loadMappingPages =
     {
+        logger.info("Loading mapping pages")
         languages.map(lang => (lang, loadMappingsPages(lang))).toMap
     }
 
@@ -123,7 +124,9 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     protected def loadExtractors =
     {
-        languages.map(lang => (lang, loadExtractor(lang))).toMap
+        val e = languages.map(lang => (lang, loadExtractor(lang))).toMap
+        logger.info("All extractors loaded in all languages")
+        e
     }
 
     protected def loadExtractor(language : Language) =

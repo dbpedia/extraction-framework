@@ -9,6 +9,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 /**
  * Lazily loads extraction context parameters when they are required, not before.
  * Is NOT able to update the ontology or the mappings.
+ * This manager is good for testing locally.
  */
 class StaticExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]]) extends ExtractionManager(languages, extractors)
 {
@@ -27,6 +28,8 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
 
     def ontologyPages = _ontologyPages
 
+    def mappingPageSource(language : Language) = _mappingPages(language).values
+
     def updateOntologyPage(page : WikiPage)
     {
         throw new Exception("updating of ontologyPages not supported with this configuration; please use DynamicExtractionManager")
@@ -36,8 +39,6 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
     {
         throw new Exception("removing of ontologyPages not supported with this configuration; please use DynamicExtractionManager")
     }
-
-    def mappingPageSource(language : Language) = _mappingPages(language).values
 
     def updateMappingPage(page : WikiPage, language : Language)
     {

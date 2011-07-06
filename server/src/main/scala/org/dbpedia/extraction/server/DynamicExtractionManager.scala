@@ -9,6 +9,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 /**
  * Loads all extraction context parameters (ontology pages, mapping pages, ontology) at start-up independently of which extractors are chosen.
  * Is able to update the ontology and the mappings.
+ * Updates are executed in synchronized threads.
  */
 class DynamicExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]]) extends ExtractionManager(languages, extractors)
 {
@@ -27,32 +28,88 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
 
     def ontologyPages = _ontologyPages
 
+    def mappingPageSource(language : Language) = _mappingPages(language).values
+
     def updateOntologyPage(page : WikiPage)
     {
-        _ontologyPages = _ontologyPages.updated(page.title, parser(page))
-        _ontology = loadOntology
-        _extractors = loadExtractors
+        new Thread()
+        {
+            override def run()
+            {
+                _updateOntologyPage(page)
+            }
+        }.start()
+    }
+
+    private def _updateOntologyPage(page : WikiPage)
+    {
+        this.synchronized
+        {
+            _ontologyPages = _ontologyPages.updated(page.title, parser(page))
+            _ontology = loadOntology
+            _extractors = loadExtractors
+        }
     }
 
     def removeOntologyPage(title : WikiTitle)
     {
-        _ontologyPages = _ontologyPages - title
-        _ontology = loadOntology
-        _extractors = loadExtractors
+        new Thread()
+        {
+            override def run()
+            {
+                _removeOntologyPage(title)
+            }
+        }.start()
     }
 
-    def mappingPageSource(language : Language) = _mappingPages(language).values
+    private def _removeOntologyPage(title : WikiTitle)
+    {
+        this.synchronized
+        {
+            _ontologyPages = _ontologyPages - title
+            _ontology = loadOntology
+            _extractors = loadExtractors
+        }
+    }
 
     def updateMappingPage(page : WikiPage, language : Language)
     {
-        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, parser(page))))
-        _extractors = _extractors.updated(language, loadExtractor(language))
+        new Thread
+        {
+            override def run()
+            {
+                _updateMappingPage(page, language)
+            }
+        }.start()
+    }
+
+    private def _updateMappingPage(page : WikiPage, language : Language)
+    {
+        this.synchronized
+        {
+            _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, parser(page))))
+            _extractors = _extractors.updated(language, loadExtractor(language))
+        }
     }
 
     def removeMappingPage(title : WikiTitle, language : Language)
     {
-        _mappingPages = _mappingPages.updated(language, _mappingPages(language) - title)
-        _extractors = _extractors.updated(language, loadExtractor(language))
+        new Thread
+        {
+            override def run()
+            {
+                _removeMappingPage(title, language)
+            }
+        }.start()
+    }
+
+    private def _removeMappingPage(title : WikiTitle, language : Language)
+    {
+        this.synchronized
+        {
+            _mappingPages = _mappingPages.updated(language, _mappingPages(language) - title)
+            _extractors = _extractors.updated(language, loadExtractor(language))
+        }
     }
 
 }
