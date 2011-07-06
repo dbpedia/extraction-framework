@@ -112,6 +112,7 @@ public class Main
 
         } */
 
+        readOldStatistics();
 
         for(int i = 0; i < recentlyUpdatedInstances.length; i++)
                 recentlyUpdatedInstances[i] = new RecentlyUpdatedInstance();
@@ -377,6 +378,31 @@ public class Main
 
         return strLastResponseDate;
 
+    }
+
+    /**
+     * Reads the old values of statistics, in order not to initialize all statistics counters to 0
+     * @return  True if the read process was successful, and false otherwise
+     */
+    private static boolean readOldStatistics(){
+
+        try{
+            File instancesFile = new File(LiveOptions.options.get("statisticsFilePath"));
+            FileReader statsReader = new FileReader(instancesFile);
+            LineNumberReader statsLineReader = new LineNumberReader(statsReader);//Used for reading line by line from file
+
+            //The order of those items in file is "Instance updated in 1 min, 5 min, 1 Hr, 1 day, for start of database
+            instancesUpdatedInMinute = Integer.parseInt(statsLineReader.readLine());
+            instancesUpdatedIn5Minutes = Integer.parseInt(statsLineReader.readLine());
+            instancesUpdatedInHour = Integer.parseInt(statsLineReader.readLine());
+            instancesUpdatedInDay = Integer.parseInt(statsLineReader.readLine());
+            totalNumberOfUpdatedInstances = Integer.parseInt(statsLineReader.readLine());
+            statsReader.close();
+            return true;
+        }
+        catch (Exception exp){
+            return false;
+        }
     }
 
     private static void writeLastResponseDate(String strFileName, String strLastResponseDate)

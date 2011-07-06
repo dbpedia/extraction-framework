@@ -242,7 +242,8 @@ object LiveExtractionConfigLoader extends ActionListener
         Main.totalNumberOfUpdatedInstances = Main.totalNumberOfUpdatedInstances + 1;
 
         val endingSlashPos = wikipageURL.lastIndexOf("/");
-        val dbpediaPageURL = "http://dbpedia.org/page" + wikipageURL.substring(endingSlashPos);
+        //val dbpediaPageURL = "http://dbpedia.org/resource" + wikipageURL.substring(endingSlashPos);
+        val dbpediaPageURL = "http://live.dbpedia.org/resource" + wikipageURL.substring(endingSlashPos);
 
         Main.recentlyUpdatedInstances(instanceNumber) = new RecentlyUpdatedInstance(wikipageTitle, dbpediaPageURL, wikipageURL);
         instanceNumber  = (instanceNumber + 1) % Main.recentlyUpdatedInstances.length;
@@ -252,7 +253,7 @@ object LiveExtractionConfigLoader extends ActionListener
               /*println(CurrentWikiPage.title.namespace.toString)
 
               if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.UserTalk || CurrentWikiPage.title.namespace == WikiTitle.Namespace.User){
-                logger.info("User or user talk");
+                logger.info("User or user ctalk");
                 return ;
               }*/
 
