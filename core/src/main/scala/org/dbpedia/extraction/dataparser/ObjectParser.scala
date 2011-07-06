@@ -12,8 +12,20 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
 {
     private val flagTemplateParser = new FlagTemplateParser(extractionContext)
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
+
+    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
+    {
+        if(split)
+        {
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
+        }
+        else
+        {
+            parse(propertyNode).toList
+        }
+    }
 
     override def parse(node : Node) : Option[String] =
     {
