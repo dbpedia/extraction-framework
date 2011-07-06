@@ -29,21 +29,21 @@ class InterLanguageLinksExtractor( context : {
         
         var quads = List[Quad]()
 
-        retrieveTranslationTitles (node,InterLanguageLinksExtractorConfig.intLinksMap(language)).foreach { tuple:(String, WikiTitle) =>
+        retrieveTranslationTitles (node,InterLanguageLinksExtractorConfig.intLinksMap(language)).foreach { tuple:(Language, WikiTitle) =>
             val (tlang, title) = tuple
             quads ::= new Quad(context.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
-                OntologyNamespaces.getResource(title.encodedWithNamespace,tlang), title.sourceUri, null)
+                OntologyNamespaces.getResource(title.encodedWithNamespace, tlang), title.sourceUri, null)
         }
         new Graph(quads)
     }
 
-    private def retrieveTranslationTitles(page : PageNode, trans_lang : Set[String]) : Map[String, WikiTitle] =
+    private def retrieveTranslationTitles(page : PageNode, trans_lang : Set[String]) : Map[Language, WikiTitle] =
     {
-        var results = Map[String, WikiTitle]()
+        var results = Map[Language, WikiTitle]()
 
         for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && trans_lang.contains(destination.language.wikiCode) )
         {
-            results += (destination.language.wikiCode -> destination)
+            results += (destination.language -> destination)
         }
         results
     }

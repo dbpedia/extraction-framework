@@ -2,7 +2,7 @@ package org.dbpedia.extraction.util
 
 import java.net.URI;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
+
 
 object UriUtils
 {
@@ -12,7 +12,7 @@ object UriUtils
 
         val uriStr = uri.normalize.toASCIIString
 
-        return Some(uriStr)
+        Some(uriStr)
     }
 
     /**
@@ -27,7 +27,7 @@ object UriUtils
     {
         val path = parent.relativize(child)
         if (path eq child ) throw new IllegalArgumentException("["+parent+"] is not a parent directory of ["+child+"]")
-        return path
+        path
     }
 
     def toIRIString(uri:String) : String =
@@ -37,6 +37,7 @@ object UriUtils
 
     def toURIString(uri:String) : String =
     {
-        URLEncoder.encode(uri,"UTF-8")
+        //URLEncoder.encode(uri,"UTF-8")
+        WikiUtil.wikiEncode(uri)
     }
 }

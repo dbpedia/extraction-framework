@@ -26,7 +26,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
                 case InternalLinkNode(destination, _, _, _) => return Some(getUri(destination))
 
                 //creating links if the same string is a link on this page
-                case TextNode(text, _) => getAdditionalWikiTitle(text.trim.capitalize, pageNode) match
+                case TextNode(text, _) => getAdditionalWikiTitle(text, pageNode) match
                 {
                     case Some(destination) => return Some(getUri(destination))
                     case None =>
@@ -35,7 +35,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
                 //resolve templates to create links
                 case templateNode : TemplateNode if(node.children.length == 1) => resolveTemplate(templateNode) match
                 {
-                    case Some(destination) => return Some(OntologyNamespaces.getResource(destination.encoded, extractionContext.language.wikiCode))
+                    case Some(destination) => return Some(OntologyNamespaces.getResource(destination.encodedWithNamespace, extractionContext.language))
                     case None =>
                 }
 
@@ -82,7 +82,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
             case linkNode : InternalLinkNode =>
             {
                 val linkText = linkNode.children.collect{case TextNode(text, _) => text}.mkString("")
-                if(linkText.capitalize == surfaceForm)
+                if(linkText.capitalize == surfaceForm && linkNode.destination.namespace == WikiTitle.Namespace.Main)
                 {
                     return Some(linkNode.destination)
                 }
@@ -111,6 +111,6 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
     private def getUri(destination : WikiTitle) : String =
     {
         //OntologyNamespaces.getUri(destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
-        OntologyNamespaces.getResource(destination.encoded, destination.language.wikiCode)
+        OntologyNamespaces.getResource(destination.encodedWithNamespace, destination.language)
     }
 }
