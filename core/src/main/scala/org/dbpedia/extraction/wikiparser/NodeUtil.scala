@@ -79,11 +79,8 @@ object NodeUtil
                     {
                         if(parts(i).size > 0) currentNodes = new TextNode(parts(i), line) :: currentNodes
                         currentNodes = currentNodes.reverse
-                        if(currentNodes.nonEmpty)
-                        {
-                            propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
-                            currentNodes = List[Node]()
-                        }
+                        propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+                        currentNodes = List[Node]()
                     }
                     else
                     {
@@ -108,7 +105,7 @@ object NodeUtil
         val templateNodes = for(propertyNode <- propertyNodes) yield TemplateNode(inputTemplateNode.title, propertyNode :: Nil, inputTemplateNode.line)
 
         //Set link to the original AST
-        templateNodes.foreach(_.parent = inputTemplateNode.parent)
+        templateNodes.foreach(tnode => tnode.parent = inputTemplateNode.parent)
 
         propertyNodes
     }

@@ -13,8 +13,6 @@ class PageLinksExtractor( context : {
                               def ontology : Ontology
                               def language : Language }  ) extends Extractor
 {
-    private val language = context.language.wikiCode
-
     val wikiPageWikiLinkProperty = context.ontology.getProperty("wikiPageWikiLink")
                                    .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageWikiLink' does not exist in DBpedia Ontology."))
 
@@ -42,7 +40,7 @@ class PageLinksExtractor( context : {
 
     private def getUri(destination : WikiTitle) : String =
     {
-        OntologyNamespaces.getResource(destination.encodedWithNamespace, language)
+        OntologyNamespaces.getResource(destination.encodedWithNamespace, context.language)
         //OntologyNamespaces.getUri(destination.encodedWithNamespace, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
     }
 }

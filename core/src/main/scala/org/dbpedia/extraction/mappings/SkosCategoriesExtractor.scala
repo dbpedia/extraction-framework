@@ -14,8 +14,6 @@ class SkosCategoriesExtractor( context : {
                                    def ontology : Ontology
                                    def language : Language }  ) extends Extractor
 {
-    private val language = context.language.wikiCode
-
     private val rdfTypeProperty = context.ontology.getProperty("rdf:type").get
     private val skosConceptClass = context.ontology.getClass("skos:Concept").get
     private val skosPrefLabelProperty = context.ontology.getProperty("skos:prefLabel").get
@@ -62,7 +60,7 @@ class SkosCategoriesExtractor( context : {
     {
         val categoryNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Category)
         
-        OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, language)
+        OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
         //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
     }
 }

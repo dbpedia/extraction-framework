@@ -12,8 +12,6 @@ class RedirectExtractor( context : {
                              def ontology : Ontology
                              def language : Language }  ) extends Extractor
 {
-    private val language = context.language.wikiCode
-
     private val wikiPageRedirectsProperty = context.ontology.getProperty("wikiPageRedirects")
                                             .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageRedirects' does not exist in DBpedia Ontology."))
 
@@ -24,7 +22,7 @@ class RedirectExtractor( context : {
             for(destination <- page.children.collect{case InternalLinkNode(destination, _, _, _) => destination})
             {
                 return new Graph(new Quad(context.language, DBpediaDatasets.Redirects, subjectUri, wikiPageRedirectsProperty,
-                    OntologyNamespaces.getResource(destination.encodedWithNamespace, language), page.sourceUri))
+                    OntologyNamespaces.getResource(destination.encodedWithNamespace, context.language), page.sourceUri))
                     //OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE + destination.encodedWithNamespace
             }
         }

@@ -13,7 +13,7 @@ class TemplateParameterExtractor( context : {
                                       def ontology : Ontology
                                       def language : Language }  ) extends Extractor
 {
-    private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", context.language.wikiCode)
+    private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", context.language)
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
