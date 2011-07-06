@@ -58,8 +58,14 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         logHandler.setLevel(Level.WARNING)
         Logger.getLogger(MappingsLoader.getClass.getName).addHandler(logHandler)
 
+        // context object that has only this mappingSource
+        val context = new ServerExtractionContext(language, this)
+        {
+            override def mappingPageSource : Traversable[PageNode] = mappingsSource.map(parser)
+        }
+
         //Load mappings
-        MappingsLoader.load(new ServerExtractionContext(language, this))  //TODO would it help to only validate requested pages?
+        MappingsLoader.load(context)
 
         //Unregister xml log handler
         Logger.getLogger(MappingsLoader.getClass.getName).removeHandler(logHandler)
