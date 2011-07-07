@@ -35,19 +35,28 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
             for (child <- node :: node.children) child match
             {
                 //ordinary links
-                case InternalLinkNode(destination, _, _, _) => return Some(getUri(destination))
+                case InternalLinkNode(destination, _, _, _) if destination.namespace == WikiTitle.Namespace.Main =>
+                {
+                    return Some(getUri(destination))
+                }
 
                 //creating links if the same string is a link on this page
                 case TextNode(text, _) => getAdditionalWikiTitle(text, pageNode) match
                 {
-                    case Some(destination) => return Some(getUri(destination))
+                    case Some(destination) if destination.namespace == WikiTitle.Namespace.Main =>
+                    {
+                        return Some(getUri(destination))
+                    }
                     case None =>
                 }
 
                 //resolve templates to create links
                 case templateNode : TemplateNode if(node.children.length == 1) => resolveTemplate(templateNode) match
                 {
-                    case Some(destination) => return Some(OntologyNamespaces.getResource(destination.encodedWithNamespace, extractionContext.language))
+                    case Some(destination) =>  // should always be Main namespace
+                    {
+                        return Some(OntologyNamespaces.getResource(destination.encodedWithNamespace, extractionContext.language))
+                    }
                     case None =>
                 }
 
@@ -94,7 +103,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
             case linkNode : InternalLinkNode =>
             {
                 val linkText = linkNode.children.collect{case TextNode(text, _) => text}.mkString("")
-                if(linkText.capitalize == surfaceForm && linkNode.destination.namespace == WikiTitle.Namespace.Main)
+                if(linkText.capitalize == surfaceForm)
                 {
                     return Some(linkNode.destination)
                 }
