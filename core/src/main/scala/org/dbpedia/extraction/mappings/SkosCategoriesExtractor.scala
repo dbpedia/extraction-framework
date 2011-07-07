@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, Node, InternalLinkNode, WikiTitle}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
 
 /**
  * Extracts information about which concept is a category and how categories are related using the SKOS Vocabulary.
@@ -31,15 +31,11 @@ class SkosCategoriesExtractor( context : {
 
         for(link <- collectCategoryLinks(node))
         {
-            val property =
-                if(link.retrieveText.getOrElse("").startsWith(":"))
-                {
-                    skosRelatedProperty
-                }
-                else
-                {
-                    skosBroaderProperty
-                }
+            val property = link.destinationNodes match
+            {
+                case TextNode(text, _) :: Nil  if text.startsWith(":") => skosRelatedProperty
+                case _ => skosBroaderProperty
+            }
 
             quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
         }
