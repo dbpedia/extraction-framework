@@ -20,11 +20,28 @@ class CalculateMapping( templateProperty1 : String,
 {
     require(operation == "add", "Operation '" + operation + "' is not supported. Supported operations: 'add'")
 
-    //TODO use different parsers for unit1 and unit2
-    val parser : DataParser = ontologyProperty.range match
+    val parser1 : DataParser = ontologyProperty.range match
     {
         case dt : UnitDatatype => new UnitValueParser(context, unit1)
         case dt : DimensionDatatype => new UnitValueParser(context, unit1)
+        case dt : Datatype => dt.name match
+        {
+            case "xsd:integer" => new IntegerParser(context)
+            case "xsd:positiveInteger"    => new IntegerParser(context, validRange = (i => i > 0))
+            case "xsd:nonNegativeInteger" => new IntegerParser(context, validRange = (i => i >=0))
+            case "xsd:nonPositiveInteger" => new IntegerParser(context, validRange = (i => i <=0))
+            case "xsd:negativeInteger"    => new IntegerParser(context, validRange = (i => i < 0))
+            case "xsd:double" => new DoubleParser(context)
+            case "xsd:float" => new DoubleParser(context)
+            case name => throw new IllegalArgumentException("Datatype " + name + " is not supported by CalculateMapping")
+        }
+        case dt => throw new IllegalArgumentException("Datatype " + dt + " is not supported by CalculateMapping")
+    }
+
+    val parser2 : DataParser = ontologyProperty.range match
+    {
+        case dt : UnitDatatype => new UnitValueParser(context, unit2)
+        case dt : DimensionDatatype => new UnitValueParser(context, unit2)
         case dt : Datatype => dt.name match
         {
             case "xsd:integer" => new IntegerParser(context)
@@ -43,28 +60,37 @@ class CalculateMapping( templateProperty1 : String,
     {
         for( property1 <- node.property(templateProperty1);
              property2 <- node.property(templateProperty2);
-             parseResult1 <- parser.parse(property1);
-             parseResult2 <- parser.parse(property2) )
+             parseResult1 <- parser1.parse(property1);
+             parseResult2 <- parser2.parse(property2) )
         {
             val quad = (parseResult1, parseResult2) match
             {
                 //UnitValueParser
                 case((value1 : Double, unit1 : UnitDatatype), (value2 : Double, unit2 : UnitDatatype)) =>
                 {
-                    //TODO convert both units to their std unit
-                    assert(unit1.name == unit2.name, "Incompatible units")
-
-                    return writeUnitValue(value1 + value2, unit1, subjectUri, node.sourceUri)
+                    val value = operation match
+                    {
+                        case "add" => unit1.toStandardUnit(value1) + unit2.toStandardUnit(value2)
+                    }
+                    return writeUnitValue(value, unit1, subjectUri, node.sourceUri)
                 }
                 //DoubleParser
                 case (value1 : Double, value2 : Double) =>
                 {
-                    new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, (value1 + value2).toString, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
+                    val value = operation match
+                    {
+                        case "add" => (value1 + value2).toString
+                    }
+                    new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
                 }
                 //IntegerParser
                 case (value1 : Int, value2 : Int) =>
                 {
-                    new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, (value1 + value2).toString, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
+                    val value = operation match
+                    {
+                        case "add" => (value1 + value2).toString
+                    }
+                    new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value, node.sourceUri, ontologyProperty.range.asInstanceOf[Datatype])
                 }
             }
 
@@ -85,7 +111,7 @@ class CalculateMapping( templateProperty1 : String,
         }
 
         //Write generic property
-        val stdValue = unit.toStandardUnit(value)
+        val stdValue = value  //has to be converted before calling this function (convert before calculating!)
         val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         var graph = new Graph(quad)
 
