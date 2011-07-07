@@ -46,13 +46,13 @@ class Pages extends Base
     @PUT
     @Path("/{title}")
     @Consumes(Array("application/xml"))
-    def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem) : Unit =
+    def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem)
     {
         try
         {
             for(page <- XMLSource.fromXML(pageXML))
             {
-                Server.extractor.ontologyPages += ((page.title, page))
+                Server.extractor.updateOntologyPage(page)
                 logger.info("Updated ontology page: " + title)
             }
         }
@@ -72,9 +72,9 @@ class Pages extends Base
     @DELETE
     @Path("/{title}")
     @Consumes(Array("application/xml"))
-    def deletePage(@PathParam("title") @Encoded title : String) : Unit =
+    def deletePage(@PathParam("title") @Encoded title : String)
     {
-        Server.extractor.ontologyPages -= WikiTitle.parseEncoded(title)
+        Server.extractor.removeOntologyPage(WikiTitle.parseEncoded(title))
         logger.info("Deleted ontology page: " + title)
     }
 }

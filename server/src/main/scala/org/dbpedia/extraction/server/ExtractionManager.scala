@@ -1,36 +1,71 @@
 package org.dbpedia.extraction.server
 
-import org.dbpedia.extraction.ontology.io.OntologyReader
-import java.net.URL
-import org.dbpedia.extraction.sources._
-import java.util.logging.{Level, Logger}
-import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
-import org.dbpedia.extraction.destinations.{Destination, Graph}
-import org.dbpedia.extraction.mappings._
-import xml.Elem
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.ontology.Ontology
+import xml.Elem
+import java.util.logging.{Level, Logger}
+import org.dbpedia.extraction.ontology.io.OntologyReader
+import org.dbpedia.extraction.destinations.{Graph, Destination}
+import org.dbpedia.extraction.sources.{WikiSource, Source, WikiPage}
+import java.net.URL
+import org.dbpedia.extraction.mappings._
 
-class ExtractionManager(languages : Set[Language])
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, WikiTitle}
+
+/**
+ * Base class for extraction managers.
+ * Subclasses can either support updating the ontology and/or mappings,
+ * or they can support lazy loading of context parameters.
+ */
+
+abstract class ExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]])
 {
-    @volatile private var _ontologyPages : Map[WikiTitle, WikiPage] = loadOntologyPages
+    private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
-    @volatile private var _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
 
-    @volatile private var _ontology = loadOntology
+    def extractor(language : Language) : Extractor
 
-    @volatile private var _extractors : Map[Language, Extractor] = loadExtractors
+    def ontology : Ontology
+
+    def ontologyPages : Map[WikiTitle, PageNode]
+
+    def mappingPageSource(language : Language) : Traversable[PageNode]
+
+    def updateOntologyPage(page : WikiPage)
+
+    def removeOntologyPage(title : WikiTitle)
+
+    def updateMappingPage(page : WikiPage, language : Language)
+
+    def removeMappingPage(title : WikiTitle, language : Language)
+
+
+    protected val parser = WikiParser()
+
+    def extract(source : Source, destination : Destination, language : Language)
+    {
+        val graph = source.map(parser)
+                          .map(extractor(language))
+                          .foldLeft(new Graph())(_ merge _)
+
+        destination.write(graph)
+    }
 
     def validateMapping(mappingsSource : Source, language : Language) : Elem =
     {
-        val emptySource = new MemorySource()
-
         //Register xml log hanlder
         val logHandler = new XMLLogHandler()
         logHandler.setLevel(Level.WARNING)
         Logger.getLogger(MappingsLoader.getClass.getName).addHandler(logHandler)
 
+        // context object that has only this mappingSource
+        val context = new ServerExtractionContext(language, this)
+        {
+            override def mappingPageSource : Traversable[PageNode] = mappingsSource.map(parser)
+        }
+
         //Load mappings
-        MappingsLoader.load(new ExtractionContext(_ontology, language, Redirects.load(emptySource), mappingsSource, emptySource, emptySource))
+        MappingsLoader.load(context)
 
         //Unregister xml log handler
         Logger.getLogger(MappingsLoader.getClass.getName).removeHandler(logHandler)
@@ -41,17 +76,16 @@ class ExtractionManager(languages : Set[Language])
 
     def validateOntologyPages(newOntologyPages : List[WikiPage] = List()) : Elem =
     {
-        val emptySource = new MemorySource()
-
         //Register xml log hanlder
         val logHandler = new XMLLogHandler()
         logHandler.setLevel(Level.WARNING)
         Logger.getLogger(classOf[OntologyReader].getName).addHandler(logHandler)
 
-        val updatedOntologyPages = (_ontologyPages ++ newOntologyPages.map(page => (page.title, page))).values
+        val newOntologyPagesMap = newOntologyPages.map(parser(_)).map(page => (page.title, page)).toMap
+        val updatedOntologyPages = (ontologyPages ++ newOntologyPagesMap).values
 
         //Load ontology
-        new OntologyReader().read(new MemorySource(updatedOntologyPages.toList))
+        new OntologyReader().read(updatedOntologyPages)
 
         //Unregister xml log handler
         Logger.getLogger(classOf[OntologyReader].getName).removeHandler(logHandler)
@@ -60,84 +94,51 @@ class ExtractionManager(languages : Set[Language])
         logHandler.xml
     }
 
-    def extract(source : Source, destination : Destination, language : Language) : Unit =
+
+    protected def loadOntologyPages =
     {
-        val graph = source.map(WikiParser())
-                          .map(extractor(language))
-                          .foldLeft(new Graph())(_ merge _)
-
-        destination.write(graph)
-    }
-
-    def ontologyPages = _ontologyPages
-
-    def ontologyPages_=(pages : Map[WikiTitle, WikiPage]) =
-    {
-        _ontologyPages = pages
-        _ontology = loadOntology
-        _extractors = loadExtractors
-    }
-
-    def mappingPages(language : Language) = _mappingPages(language)
-
-    def updateMappingPage(page : WikiPage, language : Language)
-    {
-        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, page)))
-        _extractors = _extractors.updated(language, loadExtractor(language))
-    }
-
-    def removeMappingPage(title : WikiTitle, language : Language)
-    {
-        _mappingPages = _mappingPages.updated(language, _mappingPages(language) - title)
-        _extractors = _extractors.updated(language, loadExtractor(language))
-    }
-
-    def ontology = _ontology
-
-    def extractor(language : Language) = _extractors(language)
-
-    private def loadOntologyPages =
-    {
+        logger.info("Loading ontology pages")
         WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
                                   url = new URL("http://mappings.dbpedia.org/api.php"),
                                   language = Language.Default )
+        .map(parser)
         .map(page => (page.title, page)).toMap
     }
 
-    private def loadMappingPages =
+    protected def loadMappingPages =
     {
+        logger.info("Loading mapping pages")
         languages.map(lang => (lang, loadMappingsPages(lang))).toMap
     }
 
-    private def loadMappingsPages(language : Language) : Map[WikiTitle, WikiPage] =
+    protected def loadMappingsPages(language : Language) : Map[WikiTitle, PageNode] =
     {
         val mappingNamespace = WikiTitle.Namespace.mappingNamespace(language)
-            .getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
+                               .getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
 
         WikiSource.fromNamespaces(namespaces = Set(mappingNamespace),
                                   url = new URL("http://mappings.dbpedia.org/api.php"),
                                   language = Language.Default )
+        .map(parser)
         .map(page => (page.title, page)).toMap
     }
 
-    private def loadOntology =
+    protected def loadOntology : Ontology =
     {
-        new OntologyReader().read(new MemorySource(_ontologyPages.values.toList))
+        new OntologyReader().read(ontologyPages.values)
     }
 
-    private def loadExtractors =
+    protected def loadExtractors =
     {
-        languages.map(lang => (lang, loadExtractor(lang))).toMap
+        val e = languages.map(lang => (lang, loadExtractor(lang))).toMap
+        logger.info("All extractors loaded in all languages")
+        e
     }
 
-    private def loadExtractor(language : Language) =
+    protected def loadExtractor(language : Language) =
     {
-        val ontologySource = new MemorySource(_ontologyPages.values.toList)
-        val mappingSource = new MemorySource(_mappingPages(language).values.toList)
-        val emptySource = new MemorySource()
-
-        val extractors = List(classOf[LabelExtractor].asInstanceOf[Class[Extractor]], classOf[MappingExtractor].asInstanceOf[Class[Extractor]])
-
-        Extractor.load(ontologySource, mappingSource, emptySource, emptySource, extractors, language)
+        val context = new ServerExtractionContext(language, this)
+        Extractor.load(extractors, context)
     }
+
 }

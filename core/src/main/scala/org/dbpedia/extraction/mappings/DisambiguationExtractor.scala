@@ -1,32 +1,25 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts disambiguation links.
  */
-class DisambiguationExtractor(extractionContext : ExtractionContext) extends Extractor
+class DisambiguationExtractor( context : {
+                                   def ontology : Ontology
+                                   def language : Language } ) extends Extractor
 {
-    val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
-    val disambiguationTitlePart = Map(
-         "ca" -> " (desambiguació)",
-         "de" -> " (Begriffsklärung)",
-         "el" -> " (αποσαφήνιση)",
-         "en" -> " (disambiguation)",
-         "es" -> " (desambiguación)",
-         "it" -> " (disambigua)",
-         "pl" -> " (ujednoznacznienie)",
-         "pt" -> " (desambiguação)",
-         "ru" -> " (значения)"
-    )
+    require(DisambiguationExtractorConfig.supportedLanguages.contains(language))
 
-    //require(Set("en", "el").contains(language))
-    require(disambiguationTitlePart.keySet.contains(language))
+    private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap.getOrElse(language, "")
 
-    val wikiPageDisambiguatesProperty = extractionContext.ontology.getProperty("wikiPageDisambiguates")
+    val wikiPageDisambiguatesProperty = context.ontology.getProperty("wikiPageDisambiguates")
                                         .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageDisambiguates' does not exist in DBpedia Ontology."))
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -34,18 +27,18 @@ class DisambiguationExtractor(extractionContext : ExtractionContext) extends Ext
         if (page.title.namespace == WikiTitle.Namespace.Main && page.isDisambiguation)
         {
             val allLinks = collectInternalLinks(page)
-            val cleanPageTitle = page.title.decoded.replace(disambiguationTitlePart(language), "")
+            val cleanPageTitle = page.title.decoded.replace(replaceString, "")
 
             // Extract only links that contain the page title or that spell out the acronym page title
             val disambigLinks = allLinks.filter(linkNode => linkNode.destination.decoded.contains(cleanPageTitle)
                                                             || isAcronym(cleanPageTitle, linkNode.destination.decoded))
 
             val quads = disambigLinks.map{link =>
-                new Quad(extractionContext,
+                new Quad(context.language,
                          DBpediaDatasets.DisambiguationLinks,
                          subjectUri,
                          wikiPageDisambiguatesProperty,
-                         OntologyNamespaces.getResource(link.destination.encoded, language),
+                         OntologyNamespaces.getResource(link.destination.encodedWithNamespace, context.language),
                          //OntologyNamespaces.getUri(link.destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE),
                          link.sourceUri,
                          null)

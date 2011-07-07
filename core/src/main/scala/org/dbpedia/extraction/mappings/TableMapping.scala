@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
+import org.dbpedia.extraction.util.Language
 
 class TableMapping( mapToClass : OntologyClass,
                     correspondingClass : OntologyClass,
@@ -10,10 +11,12 @@ class TableMapping( mapToClass : OntologyClass,
                     keywords : String,
                     header : String,
                     mappings : List[PropertyMapping],
-                    extractionContext : ExtractionContext ) extends ClassMapping
+                    context : {
+                        def ontology : Ontology
+                        def language : Language }   ) extends ClassMapping
 {
     val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase) }
-    
+
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
 
     override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
@@ -21,22 +24,37 @@ class TableMapping( mapToClass : OntologyClass,
         case tableNode : TableNode => extractTable(tableNode, subjectUri, pageContext)
         case _ => new Graph()
     }
-    
+
     def extractTable(tableNode : TableNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
+        def writeType(rowNode : Node, instanceUri :String, clazz : OntologyClass, graph : Graph) : Graph =
+        {
+            var thisGraph = graph
+
+            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, clazz.uri, rowNode.sourceUri)
+            thisGraph = graph.merge(new Graph(quad))
+
+            for(baseClass <- clazz.subClassOf)
+            {
+                thisGraph = graph.merge(writeType(rowNode, instanceUri, baseClass, thisGraph))
+            }
+
+            thisGraph
+        }
+
         val tableHeader = extractTableHeader(tableNode)
-        
+
         //TODO ignore tables with less than 2 rows
 
         if(!containsKeywords(tableHeader))
         {
             return new Graph()
         }
-        
+
         val processedTableNode = preprocessTable(tableNode)
 
         var graph = new Graph()
-        
+
         for( rowNode <- processedTableNode.children.tail;
              templateNode <- createTemplateNode(rowNode, tableHeader) )
         {
@@ -47,31 +65,24 @@ class TableMapping( mapToClass : OntologyClass,
             val instanceUri = pageContext.generateUri(correspondingInstance.getOrElse(subjectUri), rowNode.children.head);
 
             //Add new ontology instance
-            var currentClass = mapToClass
-            while(currentClass != null)
-            {
-                val quad = new Quad(extractionContext, DBpediaDatasets.OntologyTypes, instanceUri, extractionContext.ontology.getProperty("rdf:type").get, currentClass.uri, rowNode.sourceUri)
-                graph = graph.merge(new Graph(quad))
-                
-                currentClass = currentClass.subClassOf
-            }
-            
+            graph = writeType(rowNode, instanceUri, mapToClass, graph)
+
             //Link new instance to the corresponding Instance
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                val quad = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
+                val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
                 graph = graph.merge(new Graph(quad))
             }
-            
+
             //Extract properties
             graph = mappings.map(mapping => mapping.extract(templateNode, instanceUri, pageContext))
-                            .foldLeft(graph)(_ merge _)
+                .foldLeft(graph)(_ merge _)
         }
-        
-        return graph
+
+        graph
     }
-    
+
     /**
      * Extracts the table header.
      */
@@ -82,9 +93,9 @@ class TableMapping( mapToClass : OntologyClass,
         for( headerRow <- node.children.headOption.toList;
              headerCell <- headerRow.children;
              text <- headerCell.retrieveText )
-             yield text.toLowerCase
+        yield text.toLowerCase
     }
-    
+
     /**
      * Checks if a table header contains the keywords of this mapping.
      */
@@ -92,13 +103,13 @@ class TableMapping( mapToClass : OntologyClass,
     {
         keywordDef.forall(_.exists(keyword =>
             tableHeader.exists(columnHeader =>
-            columnHeader.contains(keyword))))
+                columnHeader.contains(keyword))))
     }
-    
+
     private def preprocessTable(tableNode : TableNode) : TableNode =
     {
         var newRows = tableNode.children.head :: Nil
-        
+
         var previousRow = newRows.head.children
         for(rowNode <- tableNode.children.tail)
         {
@@ -106,8 +117,8 @@ class TableMapping( mapToClass : OntologyClass,
 
             val previousRowIter = previousRow.iterator
             val currentRowIter = rowNode.children.iterator
-            var previousCell = if(previousRowIter.hasNext) previousRowIter.next else null
-            var currentCell = if(currentRowIter.hasNext) currentRowIter.next else null
+            var previousCell = if(previousRowIter.hasNext) previousRowIter.next() else null
+            var currentCell = if(currentRowIter.hasNext) currentRowIter.next() else null
 
             var done = false
             while(!done)
@@ -117,35 +128,35 @@ class TableMapping( mapToClass : OntologyClass,
                     previousCell.setAnnotation("rowspan", previousCell.annotation("rowspan").get.asInstanceOf[Int] - 1)
                     newRow ::= previousCell
 
-                    previousCell = if(previousRowIter.hasNext) previousRowIter.next else null
+                    previousCell = if(previousRowIter.hasNext) previousRowIter.next() else null
                 }
                 else if(currentCell != null)
                 {
                     newRow ::= currentCell
 
-                    previousCell = if(previousRowIter.hasNext) previousRowIter.next else null
-                    currentCell = if(currentRowIter.hasNext) currentRowIter.next else null
+                    previousCell = if(previousRowIter.hasNext) previousRowIter.next() else null
+                    currentCell = if(currentRowIter.hasNext) currentRowIter.next() else null
                 }
                 else
                 {
-                    done = true    
+                    done = true
                 }
             }
-            
+
             newRow = newRow.reverse
             previousRow = newRow
             newRows ::= new TableRowNode(newRow, rowNode.line)
         }
-        
+
         //Create table node
         val newTableNode = TableNode(tableNode.caption, newRows.reverse, tableNode.line)
-        
+
         //Link node to the original AST
         newTableNode.parent = tableNode.parent
-        
-        return newTableNode 
+
+        newTableNode
     }
-    
+
     private def createTemplateNode(rowNode : TableRowNode, tableHeader : List[String]) : Option[TemplateNode] =
     {
         //Only accept rows which have the same number of cells than the header)
@@ -153,9 +164,9 @@ class TableMapping( mapToClass : OntologyClass,
         {
             return None
         }
-        
+
         var propertyNodes = List[PropertyNode]()
-        
+
         //Iterate throw all column definitions of the header definition
         for(columnDefinition <- headerDef)
         {
@@ -208,16 +219,16 @@ class TableMapping( mapToClass : OntologyClass,
                 propertyNodes ::= PropertyNode(bestMatching.propertyName, children, rowNode.line)
             }
         }
-        
+
         //Create template node
         val templateNode = TemplateNode(rowNode.root.title, propertyNodes.reverse, rowNode.line)
-        
+
         //Link node to the original AST
         templateNode.parent = rowNode.parent.parent
-        
-        return Some(templateNode)
+
+        Some(templateNode)
     }
-    
+
     private def findCorrespondingInstance(tableNode : TableNode) : Option[String] =
     {
         if(correspondingProperty == null)
@@ -243,13 +254,13 @@ class TableMapping( mapToClass : OntologyClass,
              if correspondingClass == null || templateClass.name == correspondingClass.name )
         {
             //TODO if correspondingClass == null check if templateClass subClassOf correspondingProperty.range
-            
+
             return Some(correspondingTemplate.annotation(TemplateMapping.INSTANCE_URI_ANNOTATION).get.asInstanceOf[String])
         }
-        
-        return None
+
+        None
     }
-    
+
     private class ColumnMatching( val propertyName : String,
                                   val columnIndex : Int,
                                   private val startIndex : Int,
@@ -262,7 +273,7 @@ class TableMapping( mapToClass : OntologyClass,
             {
                 return if(startIndex < that.startIndex) -1 else 1
             }
-    
+
             //Prefer matchings with property names with many conjuctive parts (e.g. 'power&kW' over 'power')
             val countA = propertyName.count(_ == '&')
             val countB = that.propertyName.count(_ == '&')
@@ -270,15 +281,15 @@ class TableMapping( mapToClass : OntologyClass,
             {
                 return if(countA > countB) -1 else 1
             }
-    
+
             //Prefer short matchings (e.g. 'power kw' (from def: 'power&kW') over  'power kW (PS)' (from def: 'power&PS'))
             if (endIndex != that.endIndex)
             {
                 return if(endIndex < that.endIndex) -1 else 1
             }
-    
+
             //Give up and consider this two matchings as equal
-            return 0;
+            0;
         }
     }
 }

@@ -3,23 +3,25 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.mappings.PndExtractorConfig
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts PND (Personennamendatei) data about a person.
  * PND is published by the German National Library.
  * For each person there is a record with his name, birth and occupation connected with a unique identifier, the PND number.
  */
-class PndExtractor(extractionContext : ExtractionContext) extends Extractor
+class PndExtractor( context : {
+                        def ontology : Ontology
+                        def language : Language }  ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
-    require(Set("de", "en").contains(language))
+    require(PndExtractorConfig.supportedLanguages.contains(language))
 
-    private val pndTemplates = Set("normdaten", "pnd" /*, "PNDfehlt"*/ )
-
-    // TODO create ontology properties 
-    private val dbpediaIndividualisedPnd = "http://dbpedia.org/ontology/individualisedPnd"
-    // private val dbpediaNonIndividualisedPnd = "" // DB_ONTOLOGY_NS.'Person/nonIndividualisedPnd');
+    private val individualisedPndProperty = context.ontology.getProperty("individualisedPnd")
+                                            .getOrElse(throw new NoSuchElementException("Ontology property 'individualisedPnd' does not exist in DBpedia Ontology."))
 
     private val PndRegex = """(?i)[0-9X]+"""
 
@@ -30,7 +32,7 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
         var quads = List[Quad]()
 
         val list = collectTemplates(node).filter(template =>
-            pndTemplates.contains(template.title.decoded.toLowerCase))
+            PndExtractorConfig.pndTemplates.contains(template.title.decoded.toLowerCase))
 
         list.foreach(template => {
             template.title.decoded.toLowerCase match
@@ -42,7 +44,7 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
                     {
                         for (pnd <- getPnd(property)) 
                         {
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Pnd, subjectUri, dbpediaIndividualisedPnd, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads ::= new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
@@ -53,7 +55,7 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
                     {
                         for (pnd <- getPnd(property))
                         {
-                            quads ::= new Quad(extractionContext, DBpediaDatasets.Pnd, subjectUri, dbpediaIndividualisedPnd, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads ::= new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
@@ -66,8 +68,8 @@ class PndExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         node.children match
         {
-            case TextNode(text, _) :: Nil if (text.trim.matches(PndRegex)) => return Some(text.trim)
-            case _ => return None
+            case TextNode(text, _) :: Nil if (text.trim.matches(PndRegex)) => Some(text.trim)
+            case _ => None
         }
     }
     
