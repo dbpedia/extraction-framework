@@ -131,7 +131,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
     protected def loadExtractors =
     {
         val e = languages.map(lang => (lang, loadExtractor(lang))).toMap
-        logger.info("All extractors loaded in all languages")
+        logger.info("All extractors loaded for languages "+languages.mkString(", "))
         e
     }
 
