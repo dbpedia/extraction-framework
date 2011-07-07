@@ -1,17 +1,32 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.mappings.ExtractionContext
-import impl.wikipedia.FlagTemplateParser
-import java.util.Locale
+import org.dbpedia.extraction.ontology.OntologyNamespaces
+import org.dbpedia.extraction.util.Language
 
 /**
  * Parses links to other instances.
  */
-class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean = false) extends DataParser
+
+class ObjectParser( extractionContext : { def language : Language }, val strict : Boolean = false) extends DataParser
 {
-    private val language = extractionContext.language.wikiCode
+    private val flagTemplateParser = new FlagTemplateParser(extractionContext)
+
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""
+    // the Template {{·}} would also be nice, but is not that easy as the regex splits
+
+    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
+    {
+        if(split)
+        {
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
+        }
+        else
+        {
+            parse(propertyNode).toList
+        }
+    }
+
     override def parse(node : Node) : Option[String] =
     {
         if (!strict)
@@ -23,7 +38,7 @@ class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean =
                 case InternalLinkNode(destination, _, _, _) => return Some(getUri(destination))
 
                 //creating links if the same string is a link on this page
-                case TextNode(text, _) => getAdditionalWikiTitle(text.trim.capitalize, pageNode) match
+                case TextNode(text, _) => getAdditionalWikiTitle(text, pageNode) match
                 {
                     case Some(destination) => return Some(getUri(destination))
                     case None =>
@@ -32,7 +47,7 @@ class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean =
                 //resolve templates to create links
                 case templateNode : TemplateNode if(node.children.length == 1) => resolveTemplate(templateNode) match
                 {
-                    case Some(destination) => return Some(OntologyNamespaces.getResource(destination.encoded, extractionContext.language.wikiCode))
+                    case Some(destination) => return Some(OntologyNamespaces.getResource(destination.encodedWithNamespace, extractionContext.language))
                     case None =>
                 }
 
@@ -57,14 +72,7 @@ class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean =
                 }
             }
         }
-        return None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        //TODO this split regex might not be complete
-        // the Template {{·}} would also be nice, but is not that easy as the regex splits
-        NodeUtil.splitPropertyNode(propertyNode, """<br\s*\/?>|\n| and | or | in |/|;|,""")
+        None
     }
 
     /**
@@ -86,7 +94,7 @@ class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean =
             case linkNode : InternalLinkNode =>
             {
                 val linkText = linkNode.children.collect{case TextNode(text, _) => text}.mkString("")
-                if(linkText.capitalize == surfaceForm)
+                if(linkText.capitalize == surfaceForm && linkNode.destination.namespace == WikiTitle.Namespace.Main)
                 {
                     return Some(linkNode.destination)
                 }
@@ -108,14 +116,13 @@ class ObjectParser(extractionContext : ExtractionContext, val strict : Boolean =
 
     private def resolveTemplate(templateNode : TemplateNode) : Option[WikiTitle] =
     {
-        FlagTemplateParser.getDestination(extractionContext,templateNode).foreach(destination => return Some(destination))
-
+        flagTemplateParser.parse(templateNode).foreach(destination => return Some(destination))
         None
     }
 
     private def getUri(destination : WikiTitle) : String =
     {
         //OntologyNamespaces.getUri(destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
-        OntologyNamespaces.getResource(destination.encoded, destination.language.wikiCode)
+        OntologyNamespaces.getResource(destination.encodedWithNamespace, destination.language)
     }
 }

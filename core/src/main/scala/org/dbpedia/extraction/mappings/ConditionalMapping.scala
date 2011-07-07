@@ -6,7 +6,7 @@ import org.dbpedia.extraction.dataparser.StringParser
 
 class ConditionalMapping( cases : List[ConditionMapping],
                           defaultMappings : List[PropertyMapping],
-                          extractionContext : ExtractionContext ) extends ClassMapping
+                          context : { } ) extends ClassMapping     //TODO remove unused argument
 {
     override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
     {
@@ -35,7 +35,7 @@ class ConditionMapping( templateProperty : String,
                         operator : String,
                         value : String,
                         mapping : TemplateMapping,
-                        extractionContext : ExtractionContext )
+                        context : { } )    //TODO remove unused argument
 {
     /** Check if templateProperty is defined */
     require(operator == "otherwise" || templateProperty != null, "templateProperty must be defined")
@@ -51,7 +51,7 @@ class ConditionMapping( templateProperty : String,
             return mapping.extract(node, subjectUri, pageContext)
         }
 
-        return new Graph()
+        new Graph()
     }
 
     private def evaluate(node : TemplateNode) : Boolean =

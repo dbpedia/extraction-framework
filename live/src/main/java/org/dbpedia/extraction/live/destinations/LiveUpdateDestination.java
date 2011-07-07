@@ -322,7 +322,7 @@ public class LiveUpdateDestination implements Destination{
         //Datatype datatype = quad.getDatatype();
 
         // EDITED by Claus
-        String Lang = quad.extractionContext().language().toString();
+        String Lang = quad.language().toString();
         Datatype datatype = quad.datatype();
         
         if (datatype != null){

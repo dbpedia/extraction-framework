@@ -1,68 +1,35 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.util.UriUtils
 import java.net.URI
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.{Language, UriUtils}
 
 /**
  * Extracts links to the official homepage of an instance.
  */
-class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
+class HomepageExtractor( context : {
+                             def ontology : Ontology
+                             def language : Language
+                             def redirects : Redirects } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
-    //TODO rewritten as map, need to clean up per language 
-    //private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
-    private val propertyNames = Map(
-        "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
-        "el" -> Set("ιστότοπος", "ιστοσελίδα"),
-        "en" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),
-        "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
-        "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
-        "pl" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
-        "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
-        "ru" -> Set("сайт")
-    )
-    
-     private val externalLinkSections = Map(
-         "ca" -> "(?:Enllaços externs|Enllaço extern)",
-         "de" -> "Weblinks?",
-         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
-         "en" -> "External links?",
-         "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo)",
-         "eu" -> "Kanpo loturak?",
-         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
-         "ga" -> "(?:Naisc sheachtracha|Nasc sheachtrach)",
-         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
-         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
-         "ru" -> "Ссылки"
-     )
- 
-     private val official = Map(
-       "ca" -> "oficial",
-       "en" -> "official",
-       "de" -> "offizielle",
-       "el" -> "(?:επίσημος|επίσημη)",
-       "eu" -> "ofiziala?",
-       "ga" -> "oifigiúil",
-       "fr" -> "officiel",
-       "pl" -> "oficjalna",
-       "pt" -> "oficial",
-       "es" -> "oficial"
-     )
+    require(HomepageExtractorConfig.supportedLanguages.contains(language),"Homepage Extractor supports the following languages: " + HomepageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
-    require(propertyNames.keySet.contains(language),"Homepage Extractor supports the following languages: " + externalLinkSections.keySet.mkString(", ")+"; not "+language)
+    private val propertyNames = HomepageExtractorConfig.propertyNamesMap.getOrElse(language, HomepageExtractorConfig.propertyNamesMap("en"))
+    private val official = HomepageExtractorConfig.officialMap.getOrElse(language, HomepageExtractorConfig.officialMap("en"))
+    private val externalLinkSections = HomepageExtractorConfig.externalLinkSectionsMap.getOrElse(language, HomepageExtractorConfig.externalLinkSectionsMap("en"))
 
-    private val homepageProperty = extractionContext.ontology.getProperty("foaf:homepage").get
 
-    private val listItemStartRegex = ("""(?msiu).*^\s*\*\s*[^^]*(\b""" + official(language) + """\b)?[^^]*\z""").r
+    private val homepageProperty = context.ontology.getProperty("foaf:homepage").get
 
-    private val officialRegex = ("(?iu)" + official(language)).r
-
-    private val officialAndLineEndRegex = ("""(?msiu)[^$]*\b""" + official(language) + """\b.*$.*""").r
-
-    private val officialAndNoLineEndRegex = ("""(?msiu)[^$]*\b""" + official(language) + """\b[^$]*""").r
+    private val listItemStartRegex = ("""(?msiu).*^\s*\*\s*[^^]*(\b""" + official + """\b)?[^^]*\z""").r
+    private val officialRegex = ("(?iu)" + official).r
+    private val officialAndLineEndRegex = ("""(?msiu)[^$]*\b""" + official + """\b.*$.*""").r
+    private val officialAndNoLineEndRegex = ("""(?msiu)[^$]*\b""" + official + """\b[^$]*""").r
 
     private val lineEndRegex = "(?ms).*$.+".r
 
@@ -70,7 +37,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
         
-        val list = collectProperties(node).filter(p => propertyNames(language).contains(p.key.toLowerCase))
+        val list = collectProperties(node).filter(p => propertyNames.contains(p.key.toLowerCase))
         list.foreach((property) => {
             property.children match
             {
@@ -109,7 +76,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
             }
         }
 
-        return new Graph()
+        new Graph()
     }
 
     private def generateStatement(subjectUri : String, pageContext : PageContext, url : String, node: Node) : Graph =
@@ -118,7 +85,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
         {
             for(link <- UriUtils.cleanLink(URI.create(url)))
             {
-                return new Graph(new Quad(extractionContext, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
+                return new Graph(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
             }
         }
         catch
@@ -133,7 +100,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
         nodes match
         {
             case (templateNode @ TemplateNode(title, _, _)) :: _
-                if ((title.encoded == "Official") || ((extractionContext.redirects.map.contains(title.decoded)) && (extractionContext.redirects.map(title.decoded) == "Official"))) =>
+                if ((title.encoded == "Official") || ((context.redirects.map.contains(title.decoded)) && (context.redirects.map(title.decoded) == "Official"))) =>
             {
                 templateNode.property("1") match
                 {
@@ -210,7 +177,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         nodes match
         {
-            case SectionNode(name, level, _, _) :: tail if name.matches(externalLinkSections(language))  => Some(collectSectionChildNodes(tail, level))
+            case SectionNode(name, level, _, _) :: tail if name.matches(externalLinkSections) => Some(collectSectionChildNodes(tail, level))
             case _ :: tail => collectExternalLinkSection(tail)
             case Nil => None
         }

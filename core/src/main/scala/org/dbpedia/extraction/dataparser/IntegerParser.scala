@@ -1,64 +1,58 @@
 package org.dbpedia.extraction.dataparser
 
-import scala.util.matching.Regex
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.mappings.ExtractionContext
-import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, Node}
+import org.dbpedia.extraction.wikiparser.Node
 import java.text.{NumberFormat, ParseException}
 import java.math.RoundingMode
-
+import org.dbpedia.extraction.util.Language
 /**
  * Parses integer numbers.
  */
-class IntegerParser(extractionContext : ExtractionContext,
-                    val strict : Boolean = false,
-                    val validRange : Int => Boolean = (i => true)) extends DataParser
+class IntegerParser( extractionContext : { def language : Language } ,
+                     strict : Boolean = false,
+                     multiplicationFactor : Int = 1,
+                     validRange : Int => Boolean = (i => true)) extends DataParser
 {
+    private val numberFormat = NumberFormat.getIntegerInstance(extractionContext.language.locale)
+    numberFormat.setRoundingMode(RoundingMode.HALF_UP)
+
+    private val parserUtils = new ParserUtils(extractionContext)
+
     private val logger = Logger.getLogger(classOf[IntegerParser].getName)
 
-    private val prefix = if(strict) """\s*""" else """[\D]*?"""
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
-    private val postfix = if(strict) """\s*""" else ".*"
-
-    private val IntRegex = new Regex(prefix + """(?<!-)([0-9\,\.\-]+)""" + postfix)
-
-    private val formatter = NumberFormat.getIntegerInstance(extractionContext.language.locale)
-    formatter.setRoundingMode(RoundingMode.HALF_UP)
+    private val IntegerRegex = """\D*?(\-?[0-9\-\,\.]+).*""".r
 
     override def parse(node : Node) : Option[Int] =
     {
         for( text <- StringParser.parse(node);
-             convertedText = ParserUtils.convertLargeNumbers(text, extractionContext.language);
+             convertedText = parserUtils.convertLargeNumbers(text);
              value <- parseIntegerValue(convertedText) )
         {
-            return Some(value)
+            return Some(value * multiplicationFactor)
         }
-        
+
         None
     }
 
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        //TODO this split regex might not be complete
-        NodeUtil.splitPropertyNode(propertyNode, """<br\s*\/?>|\n| and | or |;""")
-    }
-    
     private def parseIntegerValue(input : String) : Option[Int] =
     {
-        val numberStr = input match
+
+        val numberStr = if(strict) input.trim else IntegerRegex.findFirstMatchIn(input.trim) match
         {
-            case IntRegex(num) => num
-            case _ =>
+            case Some(s) => s.toString()
+            case None =>
             {
-                logger.fine("No integer found in '" + input + "'")
+                logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
                 return None
             }
         }
 
         try
         {
-            val resultInt = formatter.parse(numberStr).intValue
-            if ( validRange(resultInt) )
+            val resultInt = numberFormat.parse(numberStr).intValue
+            if( validRange(resultInt) )
             {
                 Some(resultInt)
             }
@@ -72,17 +66,17 @@ class IntegerParser(extractionContext : ExtractionContext,
             case ex : ParseException =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
-                return None
+                None
             }
             case ex : NumberFormatException =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
-                return None
+                None
             }
             case ex : ArrayIndexOutOfBoundsException =>
             {
                 logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
-                return None
+                None
             }
         }
     }

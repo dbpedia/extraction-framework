@@ -3,14 +3,24 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.ontology._
+import java.lang.IllegalArgumentException
+import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty, OntologyNamespaces, OntologyClass, OntologyProperty}
 
 class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNodeMapping requires this to be public. Is there a better way?
                              ontologyProperty : OntologyProperty,
                              unit : Datatype,
-                             extractionContext : ExtractionContext ) extends PropertyMapping
+                             private var language : Language,
+                             factor : Number,
+                             context : {
+                                 def ontology : Ontology
+                                 def redirects : Redirects  // redirects required by DateTimeParser and UnitValueParser
+                                 def language : Language } ) extends PropertyMapping
 {
+    if(language == null) language = context.language
+
     validate()
 
     /**
@@ -43,35 +53,88 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
             }
             case _ =>
         }
+
+        if(language != context.language)
+        {
+            require(ontologyProperty.isInstanceOf[OntologyDatatypeProperty],
+                "Language can only be specified for datatype properties")
+
+            require(ontologyProperty.range.uri == "http://www.w3.org/2001/XMLSchema#string",
+                "Language can only be specified for string datatype properties")
+        }
     }
     
     private val parser : DataParser = ontologyProperty.range match
     {
         //TODO
-        case c : OntologyClass if ontologyProperty.name != "foaf:homepage" => new ObjectParser(extractionContext)
-        case c : OntologyClass => new LinkParser()
-        case dt : UnitDatatype => new UnitValueParser(extractionContext, if(unit != null) unit else dt)
-        case dt : DimensionDatatype => new UnitValueParser(extractionContext, if(unit != null) unit else dt)
-        case dt : EnumerationDatatype => new EnumerationParser(dt)
+        case c : OntologyClass if ontologyProperty.name != "foaf:homepage" => new ObjectParser(context)
+        case c : OntologyClass =>
+        {
+            checkMultiplicationFactor("foaf:homepage")
+            new LinkParser()
+        }
+        case dt : UnitDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor.doubleValue())
+        case dt : DimensionDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor.doubleValue())
+        case dt : EnumerationDatatype =>
+        {
+            checkMultiplicationFactor("EnumerationDatatype")
+            new EnumerationParser(dt)
+        }
         case dt : Datatype => dt.name match
         {
-            case "xsd:integer" => new IntegerParser(extractionContext)
-            case "xsd:positiveInteger"    => new IntegerParser(extractionContext, validRange = (i => i > 0))
-            case "xsd:nonNegativeInteger" => new IntegerParser(extractionContext, validRange = (i => i >=0))
-            case "xsd:nonPositiveInteger" => new IntegerParser(extractionContext, validRange = (i => i <=0))
-            case "xsd:negativeInteger"    => new IntegerParser(extractionContext, validRange = (i => i < 0))            
-            case "xsd:double" => new DoubleParser(extractionContext)
-            case "xsd:float" => new DoubleParser(extractionContext)
-            case "xsd:string" => StringParser
-            case "xsd:anyURI" => new LinkParser(false)
-            case "xsd:date" => new DateTimeParser(extractionContext, dt)
-            case "xsd:gYear" => new DateTimeParser(extractionContext, dt)
-            case "xsd:gYearMonth" => new DateTimeParser(extractionContext, dt)
-            case "xsd:gMonthDay" => new DateTimeParser(extractionContext, dt)
-            case "xsd:boolean" => BooleanParser
+            case "xsd:integer" => new IntegerParser(context, multiplicationFactor = factor.intValue())
+            case "xsd:positiveInteger"    => new IntegerParser(context, multiplicationFactor = factor.intValue(), validRange = (i => i > 0))
+            case "xsd:nonNegativeInteger" => new IntegerParser(context, multiplicationFactor = factor.intValue(), validRange = (i => i >=0))
+            case "xsd:nonPositiveInteger" => new IntegerParser(context, multiplicationFactor = factor.intValue(), validRange = (i => i <=0))
+            case "xsd:negativeInteger"    => new IntegerParser(context, multiplicationFactor = factor.intValue(), validRange = (i => i < 0))
+            case "xsd:double" => new DoubleParser(context, multiplicationFactor = factor.doubleValue())
+            case "xsd:float" => new DoubleParser(context, multiplicationFactor = factor.doubleValue())
+            case "xsd:string" =>
+            {
+                checkMultiplicationFactor("xsd:string")
+                StringParser
+            }
+            case "xsd:anyURI" =>
+            {
+                checkMultiplicationFactor("xsd:anyURI")
+                new LinkParser(false)
+            }
+            case "xsd:date" =>
+            {
+                checkMultiplicationFactor("xsd:date")
+                new DateTimeParser(context, dt)
+            }
+            case "xsd:gYear" =>
+            {
+                checkMultiplicationFactor("xsd:gYear")
+                new DateTimeParser(context, dt)
+            }
+            case "xsd:gYearMonth" =>
+            {
+                checkMultiplicationFactor("xsd:gYearMonth")
+                new DateTimeParser(context, dt)
+            }
+            case "xsd:gMonthDay" =>
+            {
+                checkMultiplicationFactor("xsd:gMonthDay")
+                new DateTimeParser(context, dt)
+            }
+            case "xsd:boolean" =>
+            {
+                checkMultiplicationFactor("xsd:boolean")
+                BooleanParser
+            }
             case name => throw new IllegalArgumentException("Not implemented range " + name + " of property " + ontologyProperty)
         }
         case dt => throw new IllegalArgumentException("Property " + ontologyProperty + " does have invalid range " + dt)
+    }
+
+    private def checkMultiplicationFactor(datatypeName : String)
+    {
+        if(factor != 1)
+        {
+            throw new IllegalArgumentException("multiplication factor cannot be specified for " + datatypeName)
+        }
     }
     
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -99,24 +162,24 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
-            val quad = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
+            val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
             return new Graph(quad)
         }
 
         //Write generic property
         val stdValue = unit.toStandardUnit(value)
-        val quad = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
+        val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         var graph = new Graph(quad)
 
         //Write specific properties
         for(classAnnotation <- node.annotation(TemplateMapping.CLASS_ANNOTATION);
             currentClass <- classAnnotation.asInstanceOf[List[OntologyClass]])
         {
-            for(specificPropertyUnit <- extractionContext.ontology.specializations.get((currentClass, ontologyProperty)))
+            for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
                  val propertyUri = OntologyNamespaces.DBPEDIA_SPECIFICPROPERTY_NAMESPACE + currentClass.name + "/" + ontologyProperty.name
-                 val quad = new Quad(extractionContext, DBpediaDatasets.SpecificProperties, subjectUri,
+                 val quad = new Quad(language, DBpediaDatasets.SpecificProperties, subjectUri,
                                      propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
                  graph = graph.merge(new Graph(quad))
             }
@@ -129,8 +192,8 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
     {
         val datatype = if(ontologyProperty.range.isInstanceOf[Datatype]) ontologyProperty.range.asInstanceOf[Datatype] else null
 
-        val quad = new Quad( extractionContext, DBpediaDatasets.OntologyProperties, subjectUri,
-                             ontologyProperty, value.toString, sourceUri, datatype )
+        val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri,
+                            ontologyProperty, value.toString, sourceUri, datatype )
 
         new Graph(quad)
     }

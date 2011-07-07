@@ -5,7 +5,7 @@ import java.io.File
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.mappings.{Extractor, ExtractionContext, Redirects}
+import org.dbpedia.extraction.mappings.{Extractor, Redirects}
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,9 +19,9 @@ import org.dbpedia.extraction.mappings.{Extractor, ExtractionContext, Redirects}
 object LiveExtractor
 {
     private val redirectsCacheFile = new File("src/main/resources/redirects.cache")
-    private var ontology : Ontology = null;
-    private var redirects : Redirects = null;
-    private var MainContext : ExtractionContext = null;
+    private var _ontology : Ontology = null;
+    private var _redirects : Redirects = null;
+    private var MainContext : AnyRef = null;
     /**
      * Creates a new extractor.
      *
@@ -38,7 +38,7 @@ object LiveExtractor
     //@param ontologySource Source containing the ontology definitions
     def loadOntology(ontologySource: Source)
       {
-        ontology = new OntologyReader().read(ontologySource)
+        _ontology = new OntologyReader().read(ontologySource)
       }
 
 
@@ -46,20 +46,28 @@ object LiveExtractor
     def loadRedirects(articlesSource : Source)
       {
          //redirects = Redirects.load(redirectsCacheFile, articlesSource)
-        redirects = Redirects.loadFromSource(articlesSource)
+        _redirects = Redirects.loadFromSource(articlesSource)
       }
 
     //This function builds the extraction context in the beginning in order to speed up the process of live extraction
-    def makeExtractionContext(mappingsSource : Source, commonsSource : Source, articlesSource : Source, language : Language)
+    def makeExtractionContext(mappings : Source, commons : Source, articles : Source, lang : Language)
       {
-        MainContext = new ExtractionContext(ontology, language, redirects, mappingsSource, commonsSource, articlesSource)
+        MainContext = new
+        {
+            def ontology : Ontology = _ontology
+            def language : Language = lang
+            def redirects : Redirects = _redirects
+            def mappingsSource : Source = mappings
+            def commonsSource : Source = commons
+            def articlesSource : Source = articles
+        }
       }
 
 
   def load(ontologySource : Source, mappingsSource : Source, commonsSource : Source, articlesSource : Source,
              extractors : List[Class[Extractor]], language : Language) : List[Extractor] =
     {
-      val extractorInstances = extractors.map(_.getConstructor(classOf[ExtractionContext]).newInstance(MainContext))
+      val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(MainContext))
 
       return extractorInstances;
     }

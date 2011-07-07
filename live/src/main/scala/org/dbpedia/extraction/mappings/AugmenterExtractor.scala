@@ -91,7 +91,7 @@ class AugmenterExtractor(val decoratee : Extractor, val dataset : Dataset,
           val resources = relatedResources(categoryName, labelToURIs)
 
           resources.foreach(res => {
-            val newQuad = new Quad(quad.extractionContext, dataset, quad.subject, relationPredicate, res, quad.context, null)
+            val newQuad = new Quad(quad.language, dataset, quad.subject, relationPredicate, res, quad.context, null)
 
             newQuads.add(newQuad)
           })

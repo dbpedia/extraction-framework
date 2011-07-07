@@ -7,6 +7,8 @@ import java.net.{URLEncoder, URL}
 import xml.XML
 import io.Source
 import java.io.{InputStream, OutputStreamWriter}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts page abstracts.
@@ -14,13 +16,15 @@ import java.io.{InputStream, OutputStreamWriter}
  * DBpedia-customized MediaWiki instance is required.
  */
 
-class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
+class AbstractExtractor( context : {
+                             def ontology : Ontology
+                             def language : Language } ) extends Extractor
 {
     private val maxRetries = 2
 
     private val timeoutMs = 5000
 
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
@@ -29,10 +33,10 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
 
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
-    private val shortProperty = extractionContext.ontology.getProperty("rdfs:comment")
+    private val shortProperty = context.ontology.getProperty("rdfs:comment")
                                 .getOrElse(throw new Exception("Property 'rdfs:comment' not found"))
 
-    private val longProperty = extractionContext.ontology.getProperty("abstract")
+    private val longProperty = context.ontology.getProperty("abstract")
                                .getOrElse(throw new Exception("Property 'abstract' not found"))
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -57,8 +61,8 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
         val shortText = short(text)
 
         //Create statements
-        val quadLong = new Quad(extractionContext, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
-        val quadShort = new Quad(extractionContext, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
+        val quadLong = new Quad(context.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
+        val quadShort = new Quad(context.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
 
         if(shortText.isEmpty)
         {
@@ -92,8 +96,8 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
                 conn.setDoOutput(true)
                 val writer = new OutputStreamWriter(conn.getOutputStream)
                 writer.write(parameters)
-                writer.flush
-                writer.close
+                writer.flush()
+                writer.close()
 
                 // Read answer
                 return readInAbstract(conn.getInputStream)
@@ -134,14 +138,14 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
                 {
                     return sentence
                 }
-                return builder.toString.trim
+                return builder.toString().trim
             }
 
             size += sentence.size
             builder.append(sentence)
         }
 
-        builder.toString.trim
+        builder.toString().trim
     }
 
     /**
@@ -152,7 +156,7 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
     private def readInAbstract(inputStream : InputStream) : String =
     {
         // for XML format
-        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines.mkString("")
+        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
         (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
     }
 
@@ -193,7 +197,7 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
         }
 
         // Re-generate wiki text for found range of nodes
-        pageNode.children.slice(start, end).map(_.toWikiText).mkString("").trim
+        pageNode.children.slice(start, end).map(_.toWikiText()).mkString("").trim
     }
 
 }

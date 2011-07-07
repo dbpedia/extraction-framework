@@ -3,15 +3,17 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts labels for Categories.
  */
-class CategoryLabelExtractor(extractionContext : ExtractionContext) extends Extractor
+class CategoryLabelExtractor( context : {
+                                  def ontology : Ontology
+                                  def language : Language } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
-
-    val labelProperty = extractionContext.ontology.getProperty("rdfs:label").get
+    val labelProperty = context.ontology.getProperty("rdfs:label").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -19,7 +21,7 @@ class CategoryLabelExtractor(extractionContext : ExtractionContext) extends Extr
 
         var quads = List[Quad]()
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.CategoryLabels, subjectUri, labelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+        quads ::= new Quad(context.language, DBpediaDatasets.CategoryLabels, subjectUri, labelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
 
         new Graph(quads)
     }

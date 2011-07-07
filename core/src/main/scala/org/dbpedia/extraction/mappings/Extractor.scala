@@ -1,13 +1,8 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.Graph
-import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.ontology.OntologyNamespaces
-import java.io.File
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.util.Language
-
 /**
  * The base class of all extractors.
  * Concrete extractors override the extract() method.
@@ -26,7 +21,7 @@ trait Extractor extends (PageNode => Graph)
         //If the page is not english, retrieve the title of the corresponding english article
         val title = retrieveTitle(page).getOrElse(return new Graph())
         //Generate the page URI
-        val uri = OntologyNamespaces.getResource(title.encodedWithNamespace, page.title.language.wikiCode)
+        val uri = OntologyNamespaces.getResource(title.encodedWithNamespace, page.title.language)
         //Extract
         extract(page, uri, new PageContext())
     }
@@ -62,7 +57,6 @@ trait Extractor extends (PageNode => Graph)
                 return Some(page.title)
             }
 
-            //TODO Max modified here to fix; see if this breaks something
             for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
             {
                 if (retrieveOriginalName==false)
@@ -88,23 +82,12 @@ object Extractor
     /**
      * Creates a new extractor.
      *
-     * @param ontologySource Source containing the ontology definitions
-     * @param mappingsSource Source containing the mapping defintions
-     * @param commonsSource Source containing the pages from Wikipedia Commons
-     * @param articlesSource Source containing all articles
      * @param extractors List of extractor classes to be instantiated
-     * @param language The language
-     * @return The extractor
+     * @param context Any type of object that implements the required parameter methods for the extractors
      */
-    def load(ontologySource : Source, mappingsSource : Source, commonsSource : Source, articlesSource : Source,
-             extractors : List[Class[Extractor]], language : Language) : Extractor =
+    def load(extractors : List[Class[Extractor]], context : AnyRef) : Extractor =
     {
-        val ontology = new OntologyReader().read(ontologySource)
-        val redirects = Redirects.load(articlesSource, language)
-        val context = new ExtractionContext(ontology, language, redirects, mappingsSource, commonsSource, articlesSource)
-
-        val extractorInstances = extractors.map(_.getConstructor(classOf[ExtractionContext]).newInstance(context))
-
+        val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
         new CompositeExtractor(extractorInstances)
     }
 }
