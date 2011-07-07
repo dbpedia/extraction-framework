@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.ontology
 
 import org.dbpedia.extraction.util.{Language, UriUtils}
-import java.net.URLEncoder
-
 /**
  * Manages the ontology namespaces.
  */
@@ -129,9 +127,7 @@ object OntologyNamespaces
             }
             else
             {
-                // some bad URIs passed //TODO could you please give an example
-                // because all calls to this function pass encoded suffixes (and encoding twice is bad!)
-                baseUri + URLEncoder.encode(encodedSuffix, "UTF-8")
+                baseUri + encodedSuffix
             }
         }
     }
