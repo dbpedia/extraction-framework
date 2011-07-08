@@ -20,4 +20,6 @@ class OntologyClass(name : String, labels : Map[String, String], comments : Map[
     require(equivalentClasses != null, "equivalentClasses != null")
 
     override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
+
+    lazy val isExternalClass = !uri.startsWith(OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
 }
