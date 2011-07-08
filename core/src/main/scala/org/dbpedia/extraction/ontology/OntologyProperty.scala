@@ -20,6 +20,8 @@ class OntologyProperty( name : String, labels : Map[String, String], comments : 
     require(equivalentProperties != null, "equivalentPropertyNames != null")
     
     val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
+
+    lazy val isExternalProperty = !uri.startsWith(OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
     
     override def toString = uri
 
