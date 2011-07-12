@@ -249,19 +249,8 @@ final class SimpleWikiParser extends WikiParser
             {
                 return parseTemplateParameter(source, level)
             }
-            //special template code {{#if
-            if ( nextToken == "#")
-            {
-                throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
-            }
 
             parseTemplate(source, level)
-
-//            parseParserFunction(source, level) match
-//            {
-//                case Some(node : ParserFunctionNode) => node
-//                case None => parseTemplate(source, level)
-//            }
         }
         else if(source.lastTag("{|"))
         {
