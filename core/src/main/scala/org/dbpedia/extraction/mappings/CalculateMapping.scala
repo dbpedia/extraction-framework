@@ -7,8 +7,8 @@ import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.{OntologyClass, Ontology, OntologyNamespaces, OntologyProperty}
 
-class CalculateMapping( templateProperty1 : String,
-                        templateProperty2 : String,
+class CalculateMapping( val templateProperty1 : String,
+                        val templateProperty2 : String,
                         unit1 : Datatype,
                         unit2 : Datatype,
                         operation : String,

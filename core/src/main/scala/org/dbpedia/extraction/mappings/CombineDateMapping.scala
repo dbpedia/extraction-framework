@@ -9,11 +9,11 @@ import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.{Language, Date}
 
 class CombineDateMapping( ontologyProperty : OntologyProperty,
-                          templateProperty1 : String,
+                          val templateProperty1 : String,
                           unit1 : Datatype,
-                          templateProperty2 : String,
+                          val templateProperty2 : String,
                           unit2 : Datatype,
-                          templateProperty3 : String,
+                          val templateProperty3 : String,
                           unit3 : Datatype,
                           context : {
                               def redirects : Redirects  // redirects required by DateTimeParser

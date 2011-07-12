@@ -4,7 +4,7 @@ import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
 import org.dbpedia.extraction.destinations.Graph
 import org.dbpedia.extraction.dataparser.StringParser
 
-class ConditionalMapping( cases : List[ConditionMapping],
+case class ConditionalMapping( cases : List[ConditionMapping],
                           defaultMappings : List[PropertyMapping],
                           context : { } ) extends ClassMapping     //TODO remove unused argument
 {

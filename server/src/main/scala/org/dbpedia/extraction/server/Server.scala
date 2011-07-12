@@ -29,8 +29,8 @@ object Server
     def main(args : Array[String])
     {
         //Start the HTTP server
-        val resources = new ClassNamesResourceConfig(classOf[Root], classOf[Extraction], classOf[Mappings],
-            classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
+        val resources = new ClassNamesResourceConfig(classOf[Root], classOf[Extraction], classOf[Mappings], classOf[Statistics],
+            classOf[TemplateStatistics], classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
             classOf[XMLMessageBodyReader], classOf[XMLMessageBodyWriter], classOf[ExceptionMapper], classOf[TriX], classOf[Log])
 
         val server = HttpServerFactory.create(serverURI, resources)

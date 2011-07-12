@@ -6,7 +6,7 @@ import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 
-class IntermediateNodeMapping(nodeClass : OntologyClass,
+case class IntermediateNodeMapping(nodeClass : OntologyClass,
                               correspondingProperty : OntologyProperty,
                               mappings : List[PropertyMapping],
                               context : {

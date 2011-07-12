@@ -8,7 +8,7 @@ import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.Language
 
-class DateIntervalMapping( templateProperty : String,
+class DateIntervalMapping( val templateProperty : String,
                            startDateOntologyProperty : OntologyProperty,
                            endDateOntologyProperty : OntologyProperty,
                            context : {

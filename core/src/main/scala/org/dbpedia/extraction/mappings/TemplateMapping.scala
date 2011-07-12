@@ -5,7 +5,7 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 
-class TemplateMapping( mapToClass : OntologyClass,
+case class TemplateMapping( mapToClass : OntologyClass,
                        correspondingClass : OntologyClass,
                        correspondingProperty : OntologyProperty,
                        mappings : List[PropertyMapping],
