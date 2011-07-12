@@ -66,8 +66,7 @@ class DateTimeParser ( context : {
 
     private val MonthYearRegex = ("""(?iu)""" + prefix + """("""+monthRegex+""")\]?\]?,?\s*\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?""" + postfix).r
 
-    //added case insensitive match
-    private val YearRegexes = for(i <- (1 to 4).reverse) yield ("""(?iu)""" + prefix + """(?<![\d\pL\w])(\d{""" + i + """})(?!\d)\s*(""" + eraRegex + """)?""" + postfix).r
+    private val YearRegex = ("""(?iu)""" + prefix + """(?<![\d\pL\w])(\d{1,4})(?!\d)\s*(""" + eraRegex + """)?""" + postfix).r
 
 
     override def parse(node : Node) : Option[Date] =
@@ -321,19 +320,12 @@ class DateTimeParser ( context : {
 
     private def catchYear(input: String) : Option[Date] =
     {
-        for(yearRegex <- YearRegexes)
+        for(result <- YearRegex.findFirstMatchIn(input))
         {
-            input match
-            {
-                case yearRegex(year, era) =>
-                {
-                    val eraIdentifier = getEraSign(era)
-                    return new Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
-                }
-                case _ =>
-            }
+            val year = result.group(1)
+            val eraIdentifier = getEraSign(result.group(2))
+            return new Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
         }
-
         None
     }
 
