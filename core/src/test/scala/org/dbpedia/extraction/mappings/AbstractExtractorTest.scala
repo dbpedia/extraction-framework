@@ -1,40 +1,29 @@
 package org.dbpedia.extraction.mappings
 
-import _root_.org.scalatest.matchers.ShouldMatchers
-import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.{FileSource, WikiPage}
+import org.dbpedia.extraction.sources.FileSource
 import io.Source
 import org.dbpedia.extraction.util.Language
-import org.junit.Test
 import java.io.{FilenameFilter, File}
 import java.lang.IllegalStateException
+import org.junit.{Ignore, Test}
 
-class AbstractExtractorTest// extends FlatSpec with ShouldMatchers
+@Ignore  // uncomment to test; MediaWiki server has to be in place
+class AbstractExtractorTest
 {
-//    "AbstractExtractor" should "render nicely" in
-//    {
-//        val d = parse("AbstractExtractorTest1.wiki")
-//        val g = gold("AbstractExtractorTest1-gold.txt")
-//        d should equal (g)
-//    }
-//
-//    it should "return false" in
-//    {
-//        1 should equal (2)
-//    }
-
     private val testDataRootDir = new File("core/src/test/resources/org/dbpedia/extraction/mappings")
 
+    private val filter = new FilenameFilter
+    {
+        def accept(dir: File, name: String) = name endsWith "-gold.txt"
+    }
 
+    /**
+     * Assumes that gold standard files end in "-gold.txt" and input files end in ".wiki"
+     */
     @Test
     def testAll()
     {
-        val filter = new FilenameFilter
-        {
-            def accept(dir: File, name: String) = name endsWith "-gold.txt"
-        }
-
         for(f <- testDataRootDir.listFiles(filter) )
         {
             test(f.getName.replace("-gold.txt", ".wiki"), f.getName)
