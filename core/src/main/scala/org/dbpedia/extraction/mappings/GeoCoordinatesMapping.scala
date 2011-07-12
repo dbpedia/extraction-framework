@@ -11,17 +11,18 @@ import org.dbpedia.extraction.util.Language
  * Extracts geo-coodinates.
  */
 class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
-                             coordinates : String,
-                             latitude : String,
-                             longitude : String,
-                             longitudeDegrees : String,
-                             longitudeMinutes : String,
-                             longitudeSeconds : String,
-                             longitudeDirection : String,
-                             latitudeDegrees : String,
-                             latitudeMinutes : String,
-                             latitudeSeconds : String,
-                             latitudeDirection : String,
+                             //TODO CreateMappingStats requires this properties to be public. Is there a better way?
+                             val coordinates : String,
+                             val latitude : String,
+                             val longitude : String,
+                             val longitudeDegrees : String,
+                             val longitudeMinutes : String,
+                             val longitudeSeconds : String,
+                             val longitudeDirection : String,
+                             val latitudeDegrees : String,
+                             val latitudeMinutes : String,
+                             val latitudeSeconds : String,
+                             val latitudeDirection : String,
                              context : {
                                  def ontology : Ontology
                                  def redirects : Redirects   // redirects required by GeoCoordinatesParser

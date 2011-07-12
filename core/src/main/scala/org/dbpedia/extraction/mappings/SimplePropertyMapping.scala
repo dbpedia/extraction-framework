@@ -9,7 +9,7 @@ import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty, OntologyNamespaces, OntologyClass, OntologyProperty}
 
-class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNodeMapping requires this to be public. Is there a better way?
+class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNodeMapping and CreateMappingStats requires this to be public. Is there a better way?
                              ontologyProperty : OntologyProperty,
                              unit : Datatype,
                              private var language : Language,
