@@ -31,6 +31,8 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     def mappingPageSource(language : Language) : Traversable[PageNode]
 
+    def mappings(language : Language) : Mappings
+
     def updateOntologyPage(page : WikiPage)
 
     def removeOntologyPage(title : WikiTitle)
@@ -140,5 +142,17 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         val context = new ServerExtractionContext(language, this)
         Extractor.load(extractors, context)
     }
+
+    protected def loadMappings : Map[Language, Mappings] =
+    {
+        languages.map(lang => (lang, loadMapping(lang))).toMap
+    }
+
+    protected def loadMapping(language : Language) : Mappings =
+    {
+        val context = new ServerExtractionContext(language, this)
+        MappingsLoader.load(context)
+    }
+
 
 }

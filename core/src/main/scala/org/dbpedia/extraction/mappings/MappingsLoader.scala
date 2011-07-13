@@ -23,7 +23,7 @@ object MappingsLoader
                  def ontology : Ontology
                  def language : Language
                  def redirects : Redirects
-                 def mappingPageSource : Traversable[PageNode] } ) : (Map[String, TemplateMapping], List[TableMapping], Map[String, ConditionalMapping]) =
+                 def mappingPageSource : Traversable[PageNode] } ) : Mappings =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
@@ -79,7 +79,7 @@ object MappingsLoader
 
         logger.info("Mappings loaded ("+context.language.wikiCode+")")
 
-		(templateMappings.toMap, tableMappings.toList, conditionalMappings.toMap)
+		new Mappings(templateMappings.toMap, tableMappings.toList, conditionalMappings.toMap)
 	}
 
     private def loadTemplateMapping(tnode : TemplateNode, context : {

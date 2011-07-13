@@ -2,9 +2,9 @@ package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.sources.MemorySource
 import org.dbpedia.extraction.wikiparser.PageNode
+import org.dbpedia.extraction.mappings.{Mappings, Redirects}
 
 /**
  * Holds methods required by the extractors. This object is to be injected into the extractors as constructor argument.
@@ -20,6 +20,8 @@ class ServerExtractionContext(lang : Language, extractionManager : ExtractionMan
     private lazy val _redirects = Redirects.load(new MemorySource(), lang)
 
     def mappingPageSource : Traversable[PageNode] = extractionManager.mappingPageSource(lang)
+
+    def mappings : Mappings = extractionManager.mappings(lang)
 
     // not needed in server: commonsSource
     // not needed in server: articlesSource

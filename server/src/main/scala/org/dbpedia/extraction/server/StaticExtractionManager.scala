@@ -19,6 +19,8 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
 
     @volatile private lazy val _ontology : Ontology = loadOntology
 
+    @volatile private lazy val _mappings : Map[Language, Mappings] = loadMappings
+
     @volatile private lazy val _extractors : Map[Language, Extractor] = loadExtractors
 
 
@@ -29,6 +31,8 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
     def ontologyPages = _ontologyPages
 
     def mappingPageSource(language : Language) = _mappingPages(language).values
+
+    def mappings(language : Language) = _mappings(language)
 
     def updateOntologyPage(page : WikiPage)
     {
