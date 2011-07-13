@@ -19,6 +19,8 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
 
     @volatile private var _ontology : Ontology = loadOntology
 
+    @volatile private var _mappings : Map[Language, Mappings] = loadMappings
+
     @volatile private var _extractors : Map[Language, Extractor] = loadExtractors
 
 
@@ -29,6 +31,8 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
     def ontologyPages = _ontologyPages
 
     def mappingPageSource(language : Language) = _mappingPages(language).values
+
+    def mappings(language : Language) : Mappings = _mappings(language)
 
     def updateOntologyPage(page : WikiPage)
     {
@@ -47,6 +51,7 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
         {
             _ontologyPages = _ontologyPages.updated(page.title, parser(page))
             _ontology = loadOntology
+            _mappings = loadMappings
             _extractors = loadExtractors
         }
     }
@@ -68,6 +73,7 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
         {
             _ontologyPages = _ontologyPages - title
             _ontology = loadOntology
+            _mappings = loadMappings
             _extractors = loadExtractors
         }
     }
@@ -88,6 +94,7 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
         this.synchronized
         {
             _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, parser(page))))
+            _mappings = _mappings.updated(language, loadMapping(language))
             _extractors = _extractors.updated(language, loadExtractor(language))
         }
     }
@@ -108,6 +115,7 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
         this.synchronized
         {
             _mappingPages = _mappingPages.updated(language, _mappingPages(language) - title)
+            _mappings = _mappings.updated(language, loadMapping(language))
             _extractors = _extractors.updated(language, loadExtractor(language))
         }
     }

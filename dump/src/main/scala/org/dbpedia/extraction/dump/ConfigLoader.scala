@@ -153,6 +153,12 @@ object ConfigLoader
         }
         def mappingPageSource : Traversable[PageNode] = _mappingPageSource
 
+        private lazy val _mappings =
+        {
+            MappingsLoader.load(this)
+        }
+        def mappings : Mappings = _mappings
+
         private lazy val _articlesSource =
         {
             XMLSource.fromFile(getDumpFile(config.dumpDir, language.wikiCode),

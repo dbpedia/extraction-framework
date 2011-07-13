@@ -5,7 +5,7 @@ import java.io.File
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.mappings.{Extractor, Redirects}
+import org.dbpedia.extraction.mappings.{Mappings, MappingsLoader, Extractor, Redirects}
 
 /**
  * Created by IntelliJ IDEA.
@@ -60,6 +60,9 @@ object LiveExtractor
             def mappingsSource : Source = mappings
             def commonsSource : Source = commons
             def articlesSource : Source = articles
+
+            private lazy val _mappings = MappingsLoader.load(this)
+            def mappings : Mappings = _mappings
         }
       }
 
