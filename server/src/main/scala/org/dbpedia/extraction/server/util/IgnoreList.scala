@@ -2,11 +2,12 @@ package org.dbpedia.extraction.server.util
 
 import scala.Serializable
 import java.io.File
+import org.dbpedia.extraction.util.Language
 
 /**
  * Contains the ignored templates and properties
  */
-class IgnoreList() extends Serializable
+class IgnoreList(language : Language) extends Serializable
 {
 
     var templates = Set[String]()
@@ -69,14 +70,14 @@ class IgnoreList() extends Serializable
         else throw new IndexOutOfBoundsException(template + " not found in the ignored properties map.")
     }
 
-    def exportToTextFile()
+    def exportToTextFile(ignoreListTemplatesFileName : String, ignoreListPropertiesFileName : String)
     {
-        printToFile(new File(CreateMappingStats.ignoreListTemplatesFileName))(p =>
+        printToFile(new File(ignoreListTemplatesFileName))(p =>
         {
             templates.foreach(p.println(_))
         })
 
-        printToFile(new File(CreateMappingStats.ignoreListPropertiesFileName))(p =>
+        printToFile(new File(ignoreListPropertiesFileName))(p =>
         {
             properties.foreach(p.println(_))
         })

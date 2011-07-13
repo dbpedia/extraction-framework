@@ -10,123 +10,27 @@ import org.dbpedia.extraction.util.{WikiUtil, Language}
 import scala.Serializable
 import java.io._
 import org.dbpedia.extraction.server.Server
+import org.dbpedia.extraction.server.util.CreateMappingStats._
 
 /**
  * Script to gather statistics about mappings: how often they are used, which properties are used and for what mappings exist.
  */
-object CreateMappingStats
+class CreateMappingStats(val language : Language)
 {
 
-    val lang = "en"
-    private val language = Language.fromWikiCode(lang)  // check if language is supported
-                           .getOrElse(throw new Exception("invalid language "+lang))
+    val mappingStatsObjectFileName = "server/src/main/resources/mappingstats_"+language.wikiCode+".obj"
 
-    val mappingStatsObjectFileName = "server/src/main/resources/mappingstats_"+lang+".obj"
-
-    val ignoreListFileName = "server/src/main/resources/ignoreList.obj"
-    val ignoreListTemplatesFileName = "server/src/main/resources/ignoreListTemplates.txt"
-    val ignoreListPropertiesFileName = "server/src/main/resources/ignoreListProperties.txt"
-
-    val statsFileName = "server/src/main/resources/stats.txt"
-
+    val ignoreListFileName = "server/src/main/resources/ignoreList_"+language.wikiCode+".obj"
+    val ignoreListTemplatesFileName = "server/src/main/resources/ignoreListTemplates_"+language.wikiCode+".txt"
+    val ignoreListPropertiesFileName = "server/src/main/resources/ignoreListProperties_"+language.wikiCode+".txt"
 
     private val templateNamespacePrefix = Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":" //"%3A"
-    private val resourceNamespacePrefix = if (lang == "en") "http://dbpedia.org/resource/" else "http://" + lang + "dbpedia.org/resource/"
+    private val resourceNamespacePrefix = if (language.wikiCode == "en") "http://dbpedia.org/resource/" else "http://" + language.wikiCode + "dbpedia.org/resource/"
 
     private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> .""".r
     private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.+?)"@?\w?\w? .""".r
 
 
-
-    // Hold template statistics
-    class TemplateStats(var templateCount: Int = 0, var properties: Map[String, Int] = Map()) extends Serializable
-    {
-        override def toString = "TemplateStats[count:" + templateCount + ",properties:" + properties.mkString(",") + "]"
-    }
-
-    /**
-     * Contains the statistic of a Template
-     */
-    class MappingStats(templateStats: TemplateStats, val templateName: String) extends Ordered[MappingStats] with Serializable
-    {
-        var templateCount = templateStats.templateCount
-        var isMapped: Boolean = false
-        var properties: Map[String, (Int, Boolean)] = templateStats.properties.mapValues
-                {
-                    freq => (freq, false)
-                }.toMap
-
-        def setTemplateMapped(mapped: Boolean)
-        {
-            isMapped = mapped
-        }
-
-        def setPropertyMapped(propertyName: String, mapped: Boolean)
-        {
-            val (freq, _) = properties.getOrElse(propertyName, (-1, false)) // -1 mapped but not allowed in the template
-            properties = properties.updated(propertyName, (freq, mapped))
-        }
-
-        def getNumberOfProperties = templateStats.properties.size
-
-        def getNumberOfMappedProperties =
-        {
-            var numMPs: Int = 0
-            for ((propName, (propCount, propIsMapped)) <- properties)
-            {
-                if (propIsMapped && propCount != -1) numMPs = numMPs + 1
-            }
-            numMPs
-        }
-
-        def getRatioOfMappedProperties =
-        {
-            var mappedRatio: Double = 0
-            mappedRatio = getNumberOfMappedProperties.toDouble / getNumberOfProperties.toDouble
-            mappedRatio
-        }
-
-        def getNumberOfPropertyOccurrences =
-        {
-            var numPOs: Int = 0
-            for ((propName, (propCount, propIsMapped)) <- properties)
-            {
-                if (propCount != -1) numPOs = numPOs + propCount
-            }
-            numPOs
-        }
-
-        def getNumberOfMappedPropertyOccurrences =
-        {
-            var numMPOs: Int = 0
-            for ((propName, (propCount, propIsMapped)) <- properties)
-            {
-                if (propIsMapped && propCount != -1) numMPOs = numMPOs + propCount
-            }
-            numMPOs
-        }
-
-        def getRatioOfMappedPropertyOccurrences =
-        {
-            var mappedRatio: Double = 0
-            mappedRatio = getNumberOfMappedPropertyOccurrences.toDouble / getNumberOfPropertyOccurrences.toDouble
-            mappedRatio
-        }
-
-        def compare(that: MappingStats) =
-            this.templateCount - that.templateCount
-    }
-
-    // Hold template redirects and template statistics
-    class WikipediaStats(var redirects: Map[String, String] = Map(), var templates: Map[String, TemplateStats] = Map()) extends Serializable
-    {
-
-        def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping], lang: Language) =
-        {
-            val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, lang).substring(9)))
-            mappedRedirrects.map(_.swap)
-        }
-    }
 
     def main(args: Array[String])
     {
@@ -194,22 +98,7 @@ object CreateMappingStats
             case (key, value) => (-value, key)
         }: _*)
 
-        val out = new java.io.FileWriter(statsFileName)
-        //for (tempStat <- statistics)
-        for ((mappinsStat, counter) <- sortedStatsMap)
-        {
-            out.write(mappinsStat.templateName + ";" + counter + ";" + mappinsStat.isMapped)
-
-
-            //out.write(tempStat.templateName + ";" + tempStat.templateCount + ";" + tempStat.isMapped)
-            /**for ((prop, (count, isMapped)) <- tempStat.properties)
-            {
-                out.write(";" + prop + ";" + count + ";" + isMapped)
-            }*/
-            out.write("\n")
-        }
-        out.close()
-        Server.logger.info((System.currentTimeMillis() - startTime) / 1000 + " s")
+        Server.logger.fine("countMappedStatistics: " + (System.currentTimeMillis() - startTime) / 1000 + " s")
         //serializeStats("server/src/main/resources/serializedStats.obj", statistics)
         statistics
     }
@@ -227,7 +116,7 @@ object CreateMappingStats
         }
         else
         {
-            val ign: IgnoreList = new IgnoreList()
+            val ign: IgnoreList = new IgnoreList(language)
             ign
         }
 
@@ -238,7 +127,7 @@ object CreateMappingStats
         val output = new ObjectOutputStream(new FileOutputStream(ignoreListFileName))
         output.writeObject(ignoreList)
         output.close()
-        ignoreList.exportToTextFile()
+        ignoreList.exportToTextFile(ignoreListTemplatesFileName, ignoreListPropertiesFileName)
     }
 
     private def checkMapping(template: String, mappings: Map[String, ClassMapping]) =
@@ -298,7 +187,7 @@ object CreateMappingStats
         val redirects: Map[String, String] = loadTemplateRedirects(redirectsFile)
         println("  " + redirects.size + " redirects")
 
-        println("Using Template namespace prefix " + templateNamespacePrefix + " for language " + lang)
+        println("Using Template namespace prefix " + templateNamespacePrefix + " for language " + language.wikiCode)
         println("Counting templates in " + infoboxPropsFile)
         templatesMap = countTemplates(infoboxPropsFile, templatesMap, redirects)
         println("  " + templatesMap.size + " different templates")
@@ -474,5 +363,98 @@ object CreateMappingStats
         val output = new ObjectOutputStream(new FileOutputStream(fileName))
         output.writeObject(statistics)
         output.close()
+    }
+}
+
+object CreateMappingStats
+{
+    // Hold template statistics
+    class TemplateStats(var templateCount: Int = 0, var properties: Map[String, Int] = Map()) extends Serializable
+    {
+        override def toString = "TemplateStats[count:" + templateCount + ",properties:" + properties.mkString(",") + "]"
+    }
+
+    /**
+     * Contains the statistic of a Template
+     */
+    class MappingStats(templateStats: TemplateStats, val templateName: String) extends Ordered[MappingStats] with Serializable
+    {
+        var templateCount = templateStats.templateCount
+        var isMapped: Boolean = false
+        var properties: Map[String, (Int, Boolean)] = templateStats.properties.mapValues
+                {
+                    freq => (freq, false)
+                }.toMap
+
+        def setTemplateMapped(mapped: Boolean)
+        {
+            isMapped = mapped
+        }
+
+        def setPropertyMapped(propertyName: String, mapped: Boolean)
+        {
+            val (freq, _) = properties.getOrElse(propertyName, (-1, false)) // -1 mapped but not allowed in the template
+            properties = properties.updated(propertyName, (freq, mapped))
+        }
+
+        def getNumberOfProperties = templateStats.properties.size
+
+        def getNumberOfMappedProperties =
+        {
+            var numMPs: Int = 0
+            for ((propName, (propCount, propIsMapped)) <- properties)
+            {
+                if (propIsMapped && propCount != -1) numMPs = numMPs + 1
+            }
+            numMPs
+        }
+
+        def getRatioOfMappedProperties =
+        {
+            var mappedRatio: Double = 0
+            mappedRatio = getNumberOfMappedProperties.toDouble / getNumberOfProperties.toDouble
+            mappedRatio
+        }
+
+        def getNumberOfPropertyOccurrences =
+        {
+            var numPOs: Int = 0
+            for ((propName, (propCount, propIsMapped)) <- properties)
+            {
+                if (propCount != -1) numPOs = numPOs + propCount
+            }
+            numPOs
+        }
+
+        def getNumberOfMappedPropertyOccurrences =
+        {
+            var numMPOs: Int = 0
+            for ((propName, (propCount, propIsMapped)) <- properties)
+            {
+                if (propIsMapped && propCount != -1) numMPOs = numMPOs + propCount
+            }
+            numMPOs
+        }
+
+        def getRatioOfMappedPropertyOccurrences =
+        {
+            var mappedRatio: Double = 0
+            mappedRatio = getNumberOfMappedPropertyOccurrences.toDouble / getNumberOfPropertyOccurrences.toDouble
+            mappedRatio
+        }
+
+        def compare(that: MappingStats) =
+            this.templateCount - that.templateCount
+    }
+
+    // Hold template redirects and template statistics
+    class WikipediaStats(var redirects: Map[String, String] = Map(), var templates: Map[String, TemplateStats] = Map()) extends Serializable
+    {
+
+        def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping], lang: Language) =
+        {
+            val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, lang).substring(9)))
+            mappedRedirrects.map(_.swap)
+        }
     }
 }
