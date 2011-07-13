@@ -8,8 +8,6 @@ import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.server.util.CreateMappingStats.{WikipediaStats, MappingStats}
 import java.io.{FileNotFoundException, File}
 import org.dbpedia.extraction.server.util.{IgnoreList, CreateMappingStats}
-import org.openrdf.query.algebra.Var
-import xml.include.sax.EncodingHeuristics.EncodingNames
 
 @Path("/templatestatistics/{lang}/{template}")
 class TemplateStatistics(@PathParam("lang") langCode: String, @PathParam("template") template: String) extends Base
@@ -20,20 +18,24 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @PathParam("templa
     if (!Server.config.languages.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
 
     private var wikipediaStatistics: WikipediaStats = null
-    if (new File(CreateMappingStats.serializeFileName).isFile)
+    if (new File(CreateMappingStats.mappingStatsObjectFileName).isFile)
     {
-        println("Loading serialized object from " + CreateMappingStats.serializeFileName)
-        wikipediaStatistics = CreateMappingStats.deserialize(CreateMappingStats.serializeFileName)
+        println("Loading serialized object from " + CreateMappingStats.mappingStatsObjectFileName)
+        wikipediaStatistics = CreateMappingStats.deserialize(CreateMappingStats.mappingStatsObjectFileName)
     }
     else
     {
-        println("Can not load WikipediaStats from " + CreateMappingStats.serializeFileName)
-        throw new FileNotFoundException("Can not load WikipediaStats from " + CreateMappingStats.serializeFileName)
+        println("Can not load WikipediaStats from " + CreateMappingStats.mappingStatsObjectFileName)
+        throw new FileNotFoundException("Can not load WikipediaStats from " + CreateMappingStats.mappingStatsObjectFileName)
     }
 
-    private val mappings = getClassMappings()
+    private val mappings = getClassMappings
     private val statistics = CreateMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
     private val ignoreList: IgnoreList = CreateMappingStats.loadIgnorelist()
+
+    private val mappedColor = "#65c673"
+    private val notMappedColor = "#e05d57"
+    private val ignoreColor = "#b0b0b0"
 
     @GET
     @Produces(Array("application/xhtml+xml"))
@@ -57,53 +59,51 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                 case (key, (value1, value2)) => -value1
             }: _*)
 
-            val percentageMappedProps: String = "%2.2f".format(ms.getRatioOfMappedProperties() * 100)
-            val percentageMappedPropOccurrences: String = "%2.2f".format(ms.getRatioOfMappedPropertyOccurrences() * 100)
+            val percentageMappedProps: String = "%2.2f".format(ms.getRatioOfMappedProperties * 100)
+            val percentageMappedPropOccurrences: String = "%2.2f".format(ms.getRatioOfMappedPropertyOccurrences * 100)
             println("ratioTemp: " + percentageMappedProps)
             println("ratioTempUses: " + percentageMappedPropOccurrences)
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <body>
-                    <h2 align="center">Template Statistics (
-                        {WikiUtil.wikiDecode(template)}
-                        )</h2>
+                    <h2 align="center">Template Statistics  for <u>{WikiUtil.wikiDecode(template)}</u></h2>
                     <p align="center">
                         {percentageMappedProps}
                         % properties are mapped (
-                        {ms.getNumberOfMappedProperties()}
+                        {ms.getNumberOfMappedProperties}
                         of
-                        {ms.getNumberOfProperties()}
+                        {ms.getNumberOfProperties}
                         ).</p>
                     <p align="center">
                         {percentageMappedPropOccurrences}
                         % of all property occurrences in Wikipedia (
                         {langCode}
                         ) are mapped (
-                        {ms.getNumberOfMappedPropertyOccurrences()}
+                        {ms.getNumberOfMappedPropertyOccurrences}
                         of
-                        {ms.getNumberOfPropertyOccurrences()}
+                        {ms.getNumberOfPropertyOccurrences}
                         ).</p>
                     <table align="center">
                     <caption>The color codes:</caption>
                     <tr>
-                        <td bgcolor="#4E9258">property is mapped</td>
+                        <td bgcolor={mappedColor}>property is mapped</td>
                     </tr>
                     <tr>
-                        <td bgcolor="#C24641">property is not mapped</td>
+                        <td bgcolor={notMappedColor}>property is not mapped</td>
                     </tr>
                     </table>
                     <table align="center">
                         <tr>
-                            <td>occurrence</td> <td>property</td>
-                        </tr>{for ((name, (occurrence, isMapped)) <- sortedPropMap) yield
+                            <td>occurrences</td> <td>property</td>
+                        </tr>{for ((name, (occurrences, isMapped)) <- sortedPropMap) yield
                     {
                         var bgcolor: String = ""
                         if (isMapped)
                         {
-                            bgcolor = "#4E9258"
+                            bgcolor = mappedColor
                         }
                         else
                         {
-                            bgcolor = "#C24641"
+                            bgcolor = notMappedColor
                         }
 
                         var isIgnored: Boolean = false
@@ -112,12 +112,12 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                         {
                             isIgnored = true
                             ignoreMsg = "remove from ignore list"
-                            bgcolor = "#808080"
+                            bgcolor = ignoreColor
                         }
 
                         <tr bgcolor={bgcolor}>
                             <td align="right">
-                                {occurrence}
+                                {occurrences}
                             </td> <td>
                             {name}
                         </td>
@@ -154,7 +154,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                 <head>
                     <script type="text/javascript">
 
-                   window.location.href="http://localhost:9999/statistics/en/{template}/";
+                   window.location.href="statistics/en/{template}/";
 
                     </script>
                 </head>
@@ -178,9 +178,9 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @PathParam("templa
         mapStat
     }
 
-    def getClassMappings() =
+    def getClassMappings =
     {
-        val (templateMappings, tableMappings, conditionalMappings) = MappingsLoader.load(new ServerExtractionContext(language, Server.extractor))
+        val (templateMappings, _, conditionalMappings) = MappingsLoader.load(new ServerExtractionContext(language, Server.extractor))
         templateMappings ++ conditionalMappings
     }
 }

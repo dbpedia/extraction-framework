@@ -3,18 +3,13 @@ package org.dbpedia.extraction.server.util
 import collection.immutable.ListMap
 import io.Source
 import java.lang.IllegalArgumentException
-import java.io._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import java.net.URL
-import org.dbpedia.extraction.sources.{MemorySource, WikiSource}
-import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.{WikiUtil, Language}
-import com.sun.xml.internal.bind.v2.runtime.property.Property
-import tools.nsc.doc.model.comment.Title
-import java.util.logging.Filter
-
+import scala.Serializable
+import java.io._
+import org.dbpedia.extraction.server.Server
 
 /**
  * Script to gather statistics about mappings: how often they are used, which properties are used and for what mappings exist.
@@ -22,9 +17,29 @@ import java.util.logging.Filter
 object CreateMappingStats
 {
 
+    val lang = "en"
+    private val language = Language.fromWikiCode(lang)  // check if language is supported
+                           .getOrElse(throw new Exception("invalid language "+lang))
+
+    val mappingStatsObjectFileName = "server/src/main/resources/mappingstats_"+lang+".obj"
+
+    val ignoreListFileName = "server/src/main/resources/ignoreList.obj"
+    val ignoreListTemplatesFileName = "server/src/main/resources/ignoreListTemplates.txt"
+    val ignoreListPropertiesFileName = "server/src/main/resources/ignoreListProperties.txt"
+
+    val statsFileName = "server/src/main/resources/stats.txt"
+
+
+    private val templateNamespacePrefix = Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":" //"%3A"
+    private val resourceNamespacePrefix = if (lang == "en") "http://dbpedia.org/resource/" else "http://" + lang + "dbpedia.org/resource/"
+
+    private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> .""".r
+    private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.+?)"@?\w?\w? .""".r
+
+
+
     // Hold template statistics
-    @serializable
-    class TemplateStats(var templateCount: Int = 0, var properties: Map[String, Int] = Map())
+    class TemplateStats(var templateCount: Int = 0, var properties: Map[String, Int] = Map()) extends Serializable
     {
         override def toString = "TemplateStats[count:" + templateCount + ",properties:" + properties.mkString(",") + "]"
     }
@@ -32,8 +47,7 @@ object CreateMappingStats
     /**
      * Contains the statistic of a Template
      */
-    @serializable
-    class MappingStats(templateStats: TemplateStats, val templateName: String) extends Ordered[MappingStats]
+    class MappingStats(templateStats: TemplateStats, val templateName: String) extends Ordered[MappingStats] with Serializable
     {
         var templateCount = templateStats.templateCount
         var isMapped: Boolean = false
@@ -53,12 +67,9 @@ object CreateMappingStats
             properties = properties.updated(propertyName, (freq, mapped))
         }
 
-        def getNumberOfProperties() =
-        {
-            templateStats.properties.size
-        }
+        def getNumberOfProperties = templateStats.properties.size
 
-        def getNumberOfMappedProperties() =
+        def getNumberOfMappedProperties =
         {
             var numMPs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
@@ -68,14 +79,14 @@ object CreateMappingStats
             numMPs
         }
 
-        def getRatioOfMappedProperties() =
+        def getRatioOfMappedProperties =
         {
             var mappedRatio: Double = 0
-            mappedRatio = getNumberOfMappedProperties().toDouble / getNumberOfProperties().toDouble
+            mappedRatio = getNumberOfMappedProperties.toDouble / getNumberOfProperties.toDouble
             mappedRatio
         }
 
-        def getNumberOfPropertyOccurrences() =
+        def getNumberOfPropertyOccurrences =
         {
             var numPOs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
@@ -85,7 +96,7 @@ object CreateMappingStats
             numPOs
         }
 
-        def getNumberOfMappedPropertyOccurrences() =
+        def getNumberOfMappedPropertyOccurrences =
         {
             var numMPOs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
@@ -95,10 +106,10 @@ object CreateMappingStats
             numMPOs
         }
 
-        def getRatioOfMappedPropertyOccurrences() =
+        def getRatioOfMappedPropertyOccurrences =
         {
             var mappedRatio: Double = 0
-            mappedRatio = getNumberOfMappedPropertyOccurrences().toDouble / getNumberOfPropertyOccurrences().toDouble
+            mappedRatio = getNumberOfMappedPropertyOccurrences.toDouble / getNumberOfPropertyOccurrences.toDouble
             mappedRatio
         }
 
@@ -106,23 +117,8 @@ object CreateMappingStats
             this.templateCount - that.templateCount
     }
 
-    val lang = "en"
-    private val language = Language.fromWikiCode(lang).get
-
-    private val templateNamespacePrefix = Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + "%3A"
-    private val resourceNamespacePrefix = if (lang == "en") "http://dbpedia.org/resource/" else "http://" + lang + "dbpedia.org/resource/"
-
-    private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> .""".r
-    private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.+?)"@?\w?\w? .""".r
-    val serializeFileName = "C:\\Users\\Paul\\Documents\\mapping_stats_datasets\\serialized.obj"
-    val ignoreListFileName = "C:\\Users\\Paul\\Documents\\mapping_stats_datasets\\ignoreList.obj"
-    val ignoreListTemplatesFileName = "C:\\Users\\Paul\\Documents\\mapping_stats_datasets\\ignoreListTemplates.txt"
-    val ignoreListPropertiesFileName = "C:\\Users\\Paul\\Documents\\mapping_stats_datasets\\ignoreListProperties.txt"
-
-
     // Hold template redirects and template statistics
-    @serializable
-    class WikipediaStats(var redirects: Map[String, String] = Map(), var templates: Map[String, TemplateStats] = Map())
+    class WikipediaStats(var redirects: Map[String, String] = Map(), var templates: Map[String, TemplateStats] = Map()) extends Serializable
     {
 
         def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping], lang: Language) =
@@ -144,16 +140,16 @@ object CreateMappingStats
 
         if (new File(serializeFileName).isFile)
         {
-            println("Loading serialized object from " + serializeFileName)
+            Server.logger.info("Loading serialized object from " + serializeFileName)
             wikiStats = deserialize(serializeFileName)
         }
         else
         {
             wikiStats = getWikipediaStats(redirectsDatasetFileName, infoboxPropertiesDatasetFileName, templateParametersDatasetFileName, infoboxTestDatasetFileName)
-            println("Serializing to " + serializeFileName)
+            Server.logger.info("Serializing to " + serializeFileName)
             serialize(serializeFileName, wikiStats)
         }
-        println((System.currentTimeMillis() - startTime) / 1000 + " s")
+        Server.logger.info((System.currentTimeMillis() - startTime) / 1000 + " s")
     }
 
     def countMappedStatistics(mappings: Map[String, ClassMapping], wikipediaStatistics: WikipediaStats) =
@@ -162,8 +158,7 @@ object CreateMappingStats
 
 
         // Hold the overall statistics
-        @serializable
-        var statistics: Set[MappingStats] = Set()
+        var statistics: Set[MappingStats] = Set() // new Set() with Serializable
 
         //Thread.sleep(500)
 
@@ -199,7 +194,7 @@ object CreateMappingStats
             case (key, value) => (-value, key)
         }: _*)
 
-        val out = new java.io.FileWriter("C:/Users/Paul/Documents/mapping_stats_datasets/stats.txt")
+        val out = new java.io.FileWriter(statsFileName)
         //for (tempStat <- statistics)
         for ((mappinsStat, counter) <- sortedStatsMap)
         {
@@ -213,41 +208,18 @@ object CreateMappingStats
             }*/
             out.write("\n")
         }
-        out.close
-        println((System.currentTimeMillis() - startTime) / 1000 + " s")
-        //serializeStats("C:/Users/Paul/Documents/mapping_stats_datasets/serializedStats.obj", statistics)
+        out.close()
+        Server.logger.info((System.currentTimeMillis() - startTime) / 1000 + " s")
+        //serializeStats("server/src/main/resources/serializedStats.obj", statistics)
         statistics
     }
-
-    //TODO everything below
-
-    // load data from mappings wiki
-
-
-    // compare the result map to the output from the mappings wiki
-
-    // - mapped infobox name is not found in Wikipedia stats (name has changed)
-    //     if is redirect now -> schedule for infobox mapping renaming
-    //     else -> schedule for investigation
-
-    // - template is not mapped on the wiki
-    //     schedule for infobox mapping (sorted by templateCount)
-
-    // - missing property mappings
-    //     schedule for property mapping (sorted by propertyCount)
-
-    // - property is mapped that is not found with a template in Wikipedia stats !TemplateStats.properties.contains(mappedProperty)
-    //     schedule for property deletion
-
-
-    // produce and write out a table
 
 
     def loadIgnorelist() =
     {
         if (new File(ignoreListFileName).isFile)
         {
-            println("Loading serialized object from " + ignoreListFileName)
+            Server.logger.info("Loading serialized object from " + ignoreListFileName)
             val input = new ObjectInputStream(new FileInputStream(ignoreListFileName))
             val m = input.readObject()
             input.close()

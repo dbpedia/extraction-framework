@@ -21,7 +21,7 @@ trait Extractor extends (PageNode => Graph)
         //If the page is not english, retrieve the title of the corresponding english article
         val title = retrieveTitle(page).getOrElse(return new Graph())
         //Generate the page URI
-        val uri = OntologyNamespaces.getResource(title.encodedWithNamespace, page.title.language.wikiCode)
+        val uri = OntologyNamespaces.getResource(title.encodedWithNamespace, page.title.language)
         //Extract
         extract(page, uri, new PageContext())
     }
@@ -57,7 +57,6 @@ trait Extractor extends (PageNode => Graph)
                 return Some(page.title)
             }
 
-            //TODO Max modified here to fix; see if this breaks something
             for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
             {
                 if (retrieveOriginalName==false)

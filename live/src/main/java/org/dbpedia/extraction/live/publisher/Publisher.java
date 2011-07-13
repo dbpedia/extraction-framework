@@ -27,6 +27,9 @@ public class Publisher extends Thread{
 
 	private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
 
+    Model addedTriplesModel = ModelFactory.createDefaultModel();
+    StringBuffer deletedTriplesString = new StringBuffer();
+
 //    protected static Options cliOptions;
 
 	private Map<String, String> config;
@@ -35,6 +38,7 @@ public class Publisher extends Thread{
 
 
 	private long sequenceNumber = 0;
+    private long fileNumber = 0;
 
     //This member is used to determine whether we have advanced to another hour, so we should reset sequenceNumber
     private int hourNumber = -1;
@@ -380,13 +384,14 @@ public class Publisher extends Thread{
         {
             hourNumber = currentDateCalendar.get(Calendar.HOUR_OF_DAY);
             sequenceNumber = id = 0;
+            fileNumber = 0;
         }
 
         String fileName = publishDiffBaseName + "/" + currentDateCalendar.get(Calendar.YEAR) + "/"
                 + String.format("%02d", (currentDateCalendar.get(Calendar.MONTH)+1)) +
                 "/" + String.format("%02d",currentDateCalendar.get(Calendar.DAY_OF_MONTH)) + "/"
                 + String.format("%02d",currentDateCalendar.get(Calendar.HOUR_OF_DAY)) +  "/"
-                 + format(sequenceNumber);
+                 + format(fileNumber);
         logger.info("Publishing data path = " + fileName);
         /*String fileName = publishDiffBaseName + "/" + currentDateCalendar.get(Calendar.YEAR) + "/"
                 + (currentDateCalendar.get(Calendar.MONTH)+1) +
@@ -400,7 +405,9 @@ public class Publisher extends Thread{
 			parent.mkdirs();
 
 		RDFDiffWriter rdfDiffWriter = new RDFDiffWriter(fileName);
-        Model addedTriplesModel = ModelFactory.createDefaultModel();
+
+
+
 
         Main.publishingDataQueue.remove(null);
 
@@ -425,13 +432,72 @@ public class Publisher extends Thread{
 //        RDFDiffWriter.write(addedTriplesModel, true, fileName, true);
 //        if((pubData.triplesModel == null) || (pubData.triplesModel.size() == 0))
         if(pubData!=null){
-            RDFDiffWriter.write(pubData.triplesString, false, fileName, true);
+//            RDFDiffWriter.write(pubData.triplesString, false, fileName, true);
 //        else
-            RDFDiffWriter.write(pubData.triplesModel, true, fileName, true);
+            //addedTriplesModel.add(pubData.triplesModel);
+//            RDFDiffWriter.write(pubData.triplesModel, true, fileName, true);
+            addedTriplesModel.add(pubData.triplesModel);
+            if((pubData.triplesString != null) && (pubData.triplesString != ""))
+                deletedTriplesString.append("\n" + pubData.triplesString);
         }
+
+        if(sequenceNumber % 300 == 0){
+
+            RDFDiffWriter.write(deletedTriplesString.toString(), false, fileName, true);
+            RDFDiffWriter.write(addedTriplesModel, true, fileName, true);
+
+            addedTriplesModel = ModelFactory.createDefaultModel();
+            deletedTriplesString.delete(0, deletedTriplesString.length()) ;
+            fileNumber++;
+            writeLastPublishedFileSequence();
+        }
+
 //		rdfDiffWriter.write(diff);
 		//RDFDiffWriter.writ
 	}
+
+    /**
+     * Writes the publication date in the format Year-Month-Day-Hour-Counter, in a file called lastPublishedFile.txt
+     * near to lastProcessingDate.dat file in order to ease the process of pulling updates and synchronizing another store
+     */
+    private void writeLastPublishedFileSequence(){
+
+        Calendar  currentDateCalendar= Calendar.getInstance();
+
+        String lastPublishedFile =  currentDateCalendar.get(Calendar.YEAR) + "-"
+                + String.format("%02d", (currentDateCalendar.get(Calendar.MONTH)+1)) +
+                "-" + String.format("%02d",currentDateCalendar.get(Calendar.DAY_OF_MONTH)) + "-"
+                + String.format("%02d",currentDateCalendar.get(Calendar.HOUR_OF_DAY)) +  "-"
+                 + format(fileNumber);
+
+        FileOutputStream fsLastProcessingDateFile = null;
+        OutputStreamWriter osWriter = null;
+        try{
+            fsLastProcessingDateFile = new FileOutputStream(publishDiffBaseName + "/lastPublishedFile.txt");
+            osWriter = new OutputStreamWriter(fsLastProcessingDateFile);
+            osWriter.write(lastPublishedFile);
+            osWriter.close();
+
+//            BufferedReader inputReader = new BufferedReader(new FileReader(filename));
+//            String line = inputReader.readLine();
+//            inputReader.close();
+        }
+        catch (Exception exp){
+            logger.warn("The date of last Processing process cannot be written to file.\n");
+        }
+        finally {
+            try{
+                if(osWriter != null)
+                    osWriter.close();
+
+                if(fsLastProcessingDateFile != null)
+                    fsLastProcessingDateFile.close();
+            }
+            catch (Exception exp){
+                logger.error("File lastPublishedFile.txt cannot be closed due to " + exp.getMessage());
+            }
+        }
+    }
 
 	/*
 	private void getCurrentState() {

@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser.impl.simple
 
-private final class Matcher(userTags : List[String], matchStdTags : Boolean = false, disallowedTags : List[String] = List())
+private final class Matcher(val userTags : List[String], matchStdTags : Boolean = false)
 {
     private val stdTags = if(matchStdTags) List("[[", "[", "http", "{{", "{|", "\n=", "<!--", "<ref", "<math", "<code", "<source") else List()
 
@@ -33,20 +33,6 @@ private final class Matcher(userTags : List[String], matchStdTags : Boolean = fa
         {
             if(!onlySpecialChars || isSpecialChar(source(pos)))
             {
-                // check for disallowed tags
-                tagIndex = 0
-                for(tag <- disallowedTags)
-                {
-                    tagLength = tag.length;
-                    if(pos + tagLength <= source.length && source.regionMatches(pos, tag, 0, tagLength))
-                    {
-                        pos += tagLength;
-                        return new MatchResult(false, pos)  // if a disallowed tag matches, return non-match
-                    }
-
-                    tagIndex += 1
-                }
-
                 // check for standard tags (if set)
                 tagIndex = 0
                 for(tag <- stdTags)

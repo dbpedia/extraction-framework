@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.server.util
 
-import java.io._
+import scala.Serializable
+import java.io.File
 
 /**
  * Contains the ignored templates and properties
  */
-@serializable
-class IgnoreList()
+class IgnoreList() extends Serializable
 {
 
     var templates = Set[String]()
@@ -73,12 +73,12 @@ class IgnoreList()
     {
         printToFile(new File(CreateMappingStats.ignoreListTemplatesFileName))(p =>
         {
-            templates.foreach(p.println)
+            templates.foreach(p.println(_))
         })
 
         printToFile(new File(CreateMappingStats.ignoreListPropertiesFileName))(p =>
         {
-            properties.foreach(p.println)
+            properties.foreach(p.println(_))
         })
 
     }

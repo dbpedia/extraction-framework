@@ -12,8 +12,20 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
 {
     private val flagTemplateParser = new FlagTemplateParser(extractionContext)
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
+
+    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
+    {
+        if(split)
+        {
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
+        }
+        else
+        {
+            parse(propertyNode).toList
+        }
+    }
 
     override def parse(node : Node) : Option[String] =
     {
@@ -23,19 +35,28 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
             for (child <- node :: node.children) child match
             {
                 //ordinary links
-                case InternalLinkNode(destination, _, _, _) => return Some(getUri(destination))
+                case InternalLinkNode(destination, _, _, _) if destination.namespace == WikiTitle.Namespace.Main =>
+                {
+                    return Some(getUri(destination))
+                }
 
                 //creating links if the same string is a link on this page
-                case TextNode(text, _) => getAdditionalWikiTitle(text.trim.capitalize, pageNode) match
+                case TextNode(text, _) => getAdditionalWikiTitle(text, pageNode) match
                 {
-                    case Some(destination) => return Some(getUri(destination))
+                    case Some(destination) if destination.namespace == WikiTitle.Namespace.Main =>
+                    {
+                        return Some(getUri(destination))
+                    }
                     case None =>
                 }
 
                 //resolve templates to create links
                 case templateNode : TemplateNode if(node.children.length == 1) => resolveTemplate(templateNode) match
                 {
-                    case Some(destination) => return Some(OntologyNamespaces.getResource(destination.encoded, extractionContext.language.wikiCode))
+                    case Some(destination) =>  // should always be Main namespace
+                    {
+                        return Some(OntologyNamespaces.getResource(destination.encodedWithNamespace, extractionContext.language))
+                    }
                     case None =>
                 }
 
@@ -111,6 +132,6 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
     private def getUri(destination : WikiTitle) : String =
     {
         //OntologyNamespaces.getUri(destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
-        OntologyNamespaces.getResource(destination.encoded, destination.language.wikiCode)
+        OntologyNamespaces.getResource(destination.encodedWithNamespace, destination.language)
     }
 }

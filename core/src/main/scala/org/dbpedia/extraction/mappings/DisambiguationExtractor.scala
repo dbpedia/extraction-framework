@@ -38,7 +38,7 @@ class DisambiguationExtractor( context : {
                          DBpediaDatasets.DisambiguationLinks,
                          subjectUri,
                          wikiPageDisambiguatesProperty,
-                         OntologyNamespaces.getResource(link.destination.encoded, language),
+                         OntologyNamespaces.getResource(link.destination.encodedWithNamespace, context.language),
                          //OntologyNamespaces.getUri(link.destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE),
                          link.sourceUri,
                          null)
