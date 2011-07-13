@@ -41,6 +41,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
             <a href="pages">Source Pages</a><br/>
             <a href="validate">Validate Pages</a><br/>
             <a href="extractionSamples">Retrieve extraction samples</a><br/>
+            <a href={"../../statistics/"+language.wikiCode+"/"}>Statistics</a><br/>
           </body>
         </html>
     }
