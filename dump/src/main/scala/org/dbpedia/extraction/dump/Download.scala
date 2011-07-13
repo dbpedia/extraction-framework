@@ -5,7 +5,6 @@ import java.net.URL
 import java.io._
 import java.util.logging.Logger
 import _root_.org.dbpedia.extraction.util.StringUtils._
-import _root_.org.dbpedia.extraction.util.FileUtils._
 import io.{Codec, Source}
 import java.util.zip.GZIPInputStream
 
@@ -23,7 +22,7 @@ object Download
         DumpDownloader.downloadMWTable(dumpDir)
 
         // Download Wikipedia dumps
-        DumpDownloader.download("commons" :: wikiCodes, dumpDir)
+        DumpDownloader.download(wikiCodes ::: List("commons"), dumpDir)
     }
 
     /**
@@ -76,8 +75,8 @@ private object DumpDownloader
     private val downloadUri = "http://download.wikimedia.org"
 
     // The dump files we are interested in
-    private val dumpFiles = List("pages-articles.xml.bz2", "categorylinks.sql.gz", "image.sql.gz",
-                                 "imagelinks.sql.gz", "langlinks.sql.gz", "templatelinks.sql.gz")
+    private val dumpFiles = List("pages-articles.xml.bz2", "image.sql.gz", "imagelinks.sql.gz",
+                                 "langlinks.sql.gz", "templatelinks.sql.gz", "categorylinks.sql.gz")
 
     /**
      * Downloads MediaWiki file 'tables.sql'
@@ -96,9 +95,9 @@ private object DumpDownloader
         logger.info("Downloading tables.sql to disk")
 
         //Download files
-        Source.fromURL(url, "UTF-8").getLines.foreach(outStream.println(_))
+        Source.fromURL(url, "UTF-8").getLines().foreach(outStream.println(_))
 
-        outStream.close
+        outStream.close()
     }
 
     /**
@@ -122,11 +121,11 @@ private object DumpDownloader
         val url = downloadUri + "/" + name + "/" + date + "/"
 
         //Delete outdated dumps
-        for(subDirs <- Option(dir.listFiles()); subDir <- subDirs; if subDir.getName != date.toString && subDir.getName.matches("\\d{8}") )
-        {
-            logger.info("Deleting outdated dump " + subDir.getName)
-            subDir.deleteRecursive()
-        }
+//        for(subDirs <- Option(dir.listFiles()); subDir <- subDirs; if subDir.getName != date.toString && subDir.getName.matches("\\d{8}") )
+//        {
+//            logger.info("Deleting outdated dump " + subDir.getName)
+//            subDir.deleteRecursive()
+//        }
 
         //Generate a list of the expected links to the dump files
         val dumpLinks = dumpFiles.map(dumpFile => name + "-" + date + "-" + dumpFile)
@@ -270,7 +269,7 @@ private object WikiInfo
        try
        {
            //Each line (except the first) contains information about a Wikipedia instance
-           return source.getLines.toList.tail.filter(!_.isEmpty).map(loadWikiInfo)
+           source.getLines().toList.tail.filter(!_.isEmpty).map(loadWikiInfo)
        }
        finally
        {

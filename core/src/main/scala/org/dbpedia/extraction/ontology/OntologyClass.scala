@@ -15,8 +15,11 @@ class OntologyClass(name : String, labels : Map[String, String], comments : Map[
     require(name != null, "name != null")
     require(labels != null, "labels != null")
     require(comments != null, "comments != null")
+    require(subClassOf != null, "subClassOf != null")
     require(name == "owl:Thing" || OntologyNamespaces.skipValidation(name) || subClassOf.nonEmpty, "subClassOf.nonEmpty")
     require(equivalentClasses != null, "equivalentClasses != null")
 
     override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
+
+    lazy val isExternalClass = !uri.startsWith(OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
 }

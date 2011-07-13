@@ -5,11 +5,9 @@ import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.StringUtils._
-import java.net.URLEncoder
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
-import org.dbpedia.extraction.util.{Language, UriUtils}
+import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
 
 /**
  * This extractor extracts all properties from all infoboxes.
@@ -31,10 +29,8 @@ class InfoboxExtractor( context : {
 
     private val language = context.language.wikiCode
 
-    private val usesTemplateProperty = OntologyNamespaces.getProperty("wikiPageUsesTemplate",language)
+    private val usesTemplateProperty = OntologyNamespaces.getProperty("wikiPageUsesTemplate", context.language)
     //private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
-
-    private val templateNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Template)
 
     private val MinPropertyCount = 2
 
@@ -128,7 +124,7 @@ class InfoboxExtractor( context : {
                             quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             //#int #statistics uncomment the following 2 lines (do not delete)
-                            val stat_template = OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language).replace("\n", " ").replace("\t", " ").trim
+                            val stat_template = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language).replace("\n", " ").replace("\t", " ").trim
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
                             quads ::= new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
                                                stat_property, node.sourceUri, context.ontology.getDatatype("xsd:string").get )
@@ -152,12 +148,12 @@ class InfoboxExtractor( context : {
 
                 }
 
-                // TODO write only wikiPageUsesTemplate if properties extracted
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
-                    //TODO change domain
+                    //oldTODO change domain ????
+                    val templateUri = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language)  //templateNamespace + ":" + template.title.encoded
                     quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
-                                        OntologyNamespaces.getResource(templateNamespace + ":" + template.title.encoded, language), template.sourceUri, null)
+                                       templateUri, template.sourceUri, null)
                     seenTemplates.add(template.title.encoded)
                 }
             }
@@ -278,18 +274,14 @@ class InfoboxExtractor( context : {
         // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
         result = TrailingNumberRegex.replaceFirstIn(result, "")
 
-        result = URLEncoder.encode(result, "UTF-8")
-
-        // Decode slash "/", colon ":", as MediaWiki does not encode these
-        result = result.replace("%2F", "/")
-        result = result.replace("%3A", ":")
+        result = WikiUtil.wikiEncode(result, context.language)
 
         //TODO add this as option in settings
         //result = result.replace("%", "_percent_")
 
         // TODO maximal length of properties? (was 250)
         
-        OntologyNamespaces.getProperty(result,language)
+        OntologyNamespaces.getProperty(result, context.language)
         //OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + result
     }
 

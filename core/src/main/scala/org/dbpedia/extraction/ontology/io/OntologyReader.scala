@@ -288,7 +288,7 @@ class OntologyReader
                     case None if OntologyNamespaces.skipValidation(superClassName) =>
                     {
                         logger.config("Super class " + superClassName + " of class " + name + " was not found but for its namespace this was expected")
-                        Some(new OntologyClass(superClassName, Map(), Map(), null, Set()))
+                        Some(new OntologyClass(superClassName, Map(), Map(), List(), Set()))
                     }
                     case None =>
                     {
@@ -303,7 +303,7 @@ class OntologyReader
                     case None if OntologyNamespaces.skipValidation(equivalentClassName) =>
                     {
                         logger.config("Equivalent class " + equivalentClassName + " of class " + name + " was not found but for its namespace this was expected")
-                        Some(new OntologyClass(equivalentClassName, Map(), Map(), null, Set()))
+                        Some(new OntologyClass(equivalentClassName, Map(), Map(), List(), Set()))
                     }
                     case None =>
                     {

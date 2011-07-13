@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.server.resources
 
 import javax.ws.rs._
-import javax.ws.rs.core.MediaType;
 import org.dbpedia.extraction.server.{ServerExtractionContext, Server}
 import collection.immutable.ListMap
 import org.dbpedia.extraction.mappings._
@@ -14,26 +13,37 @@ import org.dbpedia.extraction.server.util.{CreateMappingStats, IgnoreList}
 class Statistics(@PathParam("lang") langCode: String) extends Base
 {
     private val language = Language.fromWikiCode(langCode)
-            .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
+                                   .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
-    if (!Server.config.languages.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
+    if (!Server.config.languages.contains(language))
+        throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
+
 
     private var wikipediaStatistics: WikipediaStats = null
-    if (new File(CreateMappingStats.serializeFileName).isFile)
+    if (new File(CreateMappingStats.mappingStatsObjectFileName).isFile)
     {
-        println("Loading serialized object from " + CreateMappingStats.serializeFileName)
-        wikipediaStatistics = CreateMappingStats.deserialize(CreateMappingStats.serializeFileName)
-        println("loaded!")
+        Server.logger.info("Loading serialized WikiStats object from " + CreateMappingStats.mappingStatsObjectFileName)
+        wikipediaStatistics = CreateMappingStats.deserialize(CreateMappingStats.mappingStatsObjectFileName)
+        Server.logger.info("loaded!")
     }
     else
     {
-        println("Can not load WikipediaStats from " + CreateMappingStats.serializeFileName)
-        throw new FileNotFoundException("Can not load WikipediaStats from " + CreateMappingStats.serializeFileName)
+        Server.logger.info("Can not load WikipediaStats from " + CreateMappingStats.mappingStatsObjectFileName)
+        throw new FileNotFoundException("Can not load WikipediaStats from " + CreateMappingStats.mappingStatsObjectFileName)
     }
 
-    private val mappings = getClassMappings()
+    private val mappings = getClassMappings
     private val mappingStatistics = CreateMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
     private val ignoreList: IgnoreList = CreateMappingStats.loadIgnorelist()
+
+    private val mappingUrlPrefix =
+        if (langCode == "en") "http://mappings.dbpedia.org/index.php/Mapping:"
+        else "http://mappings.dbpedia.org/index.php/Mapping_"+langCode+":"
+
+    private val mappedColor = "#65c673"
+    private val notMappedColor = "#e05d57"
+    private val renameColor = "#FFE87C"
+    private val ignoreColor = "#b0b0b0"
 
     @GET
     @Produces(Array("application/xhtml+xml"))
@@ -52,13 +62,11 @@ class Statistics(@PathParam("lang") langCode: String) extends Base
         val reversedRedirects = wikipediaStatistics.checkForRedirects(sortedStatsMap, mappings, language)
         val percentageMappedTemplates: String = "%2.2f".format(getNumberOfMappedTemplates(statsMap).toDouble / getNumberOfTemplates(statsMap).toDouble * 100)
         val percentageMappedTemplateOccurrences: String = "%2.2f".format(getRatioOfMappedTemplateOccurrences(statsMap) * 100)
-        println("ratioTemp: " + percentageMappedTemplates)
-        println("ratioTempUses: " + percentageMappedTemplateOccurrences)
+        Server.logger.info("ratioTemp: " + percentageMappedTemplates)
+        Server.logger.info("ratioTempUses: " + percentageMappedTemplateOccurrences)
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
             <body>
-                <h2 align="center">Mapping Statistics (
-                    {langCode}
-                    )</h2>
+                <h2 align="center">Mapping Statistics for <b>{langCode}</b></h2>
                 <p align="center">
                     {percentageMappedTemplates}
                     % templates are mapped (
@@ -79,48 +87,48 @@ class Statistics(@PathParam("lang") langCode: String) extends Base
                 <table align="center">
                     <caption>The color codes:</caption>
                     <tr>
-                        <td bgcolor="#4E9258">template is mapped</td>
+                        <td bgcolor={mappedColor}>template is mapped</td>
                     </tr>
                     <tr>
-                        <td bgcolor="#C24641">template is not mapped</td>
+                        <td bgcolor={notMappedColor}>template is not mapped</td>
                     </tr>
                     <tr>
-                        <td bgcolor="#FFE87C">template mapping must be renamed</td>
+                        <td bgcolor={renameColor}>template mapping must be renamed</td>
                     </tr>
                     <tr>
-                        <td bgcolor="#808080">template is on the ignorelist and does not contain relevant properties</td>
+                        <td bgcolor={ignoreColor}>template is on the ignorelist and does not contain relevant properties</td>
                     </tr>
                 </table>
 
                 <table align="center">
                     <tr>
-                        <td>occurrence</td> <td colspan="2">template (with link to property statistics)</td>
+                        <td>occurrences</td> <td colspan="2">template (with link to property statistics)</td>
                         <td>num properties</td> <td>mapped properties (%)</td>
-                        <td>num property occurrences</td> <td>mapped property occurrence (%)</td> <td></td>
-                    </tr>{for ((mappingStat, counter) <- sortedStatsMap.filter(_._1.getNumberOfProperties() > 0)) yield
+                        <td>num property occurrences</td> <td>mapped property occurrences (%)</td> <td></td>
+                    </tr>{for ((mappingStat, counter) <- sortedStatsMap.filter(_._1.getNumberOfProperties > 0)) yield
                 {
                     val encodedTemplateName = "Template%3A" + WikiUtil.wikiEncode(mappingStat.templateName, language)
                     val targetRedirect = reversedRedirects.get(encodedTemplateName)
 
-                    val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties() * 100)
-                    val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences() * 100)
+                    val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties * 100)
+                    val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences * 100)
                     if (counter > 99)
                     {
-                        var mappingsWikiLink = "http://mappings.dbpedia.org/index.php/Mapping:" + encodedTemplateName.substring(11)
+                        var mappingsWikiLink = mappingUrlPrefix + encodedTemplateName.substring(11)
                         var bgcolor: String = ""
-                        if (mappingStat.isMapped) bgcolor = "#4E9258" else bgcolor = "#C24641"
+                        if (mappingStat.isMapped) bgcolor = mappedColor else bgcolor = notMappedColor
 
                         var redirectMsg = ""
                         for (redirect <- targetRedirect)
                         {
-                            mappingsWikiLink = "http://mappings.dbpedia.org/index.php/Mapping:" + redirect.substring(11)
+                            mappingsWikiLink = mappingUrlPrefix + redirect.substring(11)
                             if (mappingStat.isMapped)
                             {
                                 //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(9) + " is redundant!"
                             }
                             else
                             {
-                                bgcolor = "#FFE87C"
+                                bgcolor = renameColor
                                 redirectMsg = WikiUtil.wikiDecode(redirect, language).substring(9) + " must be renamed to "
                             }
                         }
@@ -131,13 +139,13 @@ class Statistics(@PathParam("lang") langCode: String) extends Base
                         {
                             isIgnored = true
                             ignoreMsg = "remove from ignore list"
-                            bgcolor = "#808080"
+                            bgcolor = ignoreColor
                         }
 
                         <tr bgcolor={bgcolor}>
                             <td align="right">
                                 {counter}
-                            </td>{if (bgcolor == "#FFE87C")
+                            </td>{if (bgcolor == renameColor)
                         {
                             <td>
                                 {redirectMsg}<a href={"../../templatestatistics/" + langCode + "/" + WikiUtil.wikiEncode(mappingStat.templateName)}>
@@ -168,7 +176,7 @@ class Statistics(@PathParam("lang") langCode: String) extends Base
                                 </td> <td align="right">
                             {percentMappedPropOccur}
                         </td> <td>
-                            <a href={WikiUtil.wikiEncode(mappingStat.templateName) + "/" + isIgnored.toString()}>
+                            <a href={WikiUtil.wikiEncode(mappingStat.templateName) + "/" + isIgnored.toString}>
                                 {ignoreMsg}
                             </a>
                         </td>
@@ -214,9 +222,9 @@ class Statistics(@PathParam("lang") langCode: String) extends Base
     /**
      * @return Set[String, ClassMapping] (encoded template name with Template%3A prefix, ClassMapping)
      */
-    def getClassMappings() =
+    def getClassMappings =
     {
-        val (templateMappings, tableMappings, conditionalMappings) = MappingsLoader.load(new ServerExtractionContext(language, Server.extractor))
+        val (templateMappings, _, conditionalMappings) = MappingsLoader.load(new ServerExtractionContext(language, Server.extractor))
         templateMappings ++ conditionalMappings
     }
 
@@ -294,8 +302,8 @@ class Statistics(@PathParam("lang") langCode: String) extends Base
         var numP: Int = 0
         for ((mappingStat, templateCounter) <- stats)
         {
-            numMP = numMP + mappingStat.getNumberOfMappedProperties()
-            numP = numP + mappingStat.getNumberOfProperties()
+            numMP = numMP + mappingStat.getNumberOfMappedProperties
+            numP = numP + mappingStat.getNumberOfProperties
         }
         mappedRatio = numMP.toDouble / numP.toDouble
         mappedRatio
@@ -308,8 +316,8 @@ class Statistics(@PathParam("lang") langCode: String) extends Base
         var numPO: Int = 0
         for ((mappingStat, templateCounter) <- stats)
         {
-            numMPO = numMPO + mappingStat.getNumberOfMappedPropertyOccurrences()
-            numPO = numPO + mappingStat.getNumberOfPropertyOccurrences()
+            numMPO = numMPO + mappingStat.getNumberOfMappedPropertyOccurrences
+            numPO = numPO + mappingStat.getNumberOfPropertyOccurrences
         }
         mappedRatio = numMPO.toDouble / numPO.toDouble
         mappedRatio

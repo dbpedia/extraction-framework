@@ -33,11 +33,13 @@ class AbstractExtractor( context : {
 
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
-    private val shortProperty = context.ontology.getProperty("rdfs:comment")
-                                .getOrElse(throw new Exception("Property 'rdfs:comment' not found"))
+    // lazy so testing does not need ontology
+    private lazy val shortProperty = context.ontology.getProperty("rdfs:comment")
+                                     .getOrElse(throw new Exception("Property 'rdfs:comment' not found"))
 
-    private val longProperty = context.ontology.getProperty("abstract")
-                               .getOrElse(throw new Exception("Property 'abstract' not found"))
+    // lazy so testing does not need ontology
+    private lazy val longProperty = context.ontology.getProperty("abstract")
+                                    .getOrElse(throw new Exception("Property 'abstract' not found"))
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -160,14 +162,24 @@ class AbstractExtractor( context : {
         (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
     }
 
+    private val destinationNamespacesToRender = List(WikiTitle.Namespace.Main, WikiTitle.Namespace.Template)
+
+    private def renderNode(node : Node) = node match
+    {
+        case n : InternalLinkNode => destinationNamespacesToRender contains n.destination.namespace
+        case _ => true
+    }
+
+
     /**
      * Get the wiki text that contains the abstract text.
      */
-    private def getAbstractWikiText(pageNode : PageNode) : String =
+    def getAbstractWikiText(pageNode : PageNode) : String =
     {
         // From first TextNode
         val start = pageNode.children.indexWhere{
             case TextNode(text, _) => text.trim != ""
+            case n : InternalLinkNode => n.destination.namespace == WikiTitle.Namespace.Main
             case _ => false
         }
 
@@ -197,7 +209,10 @@ class AbstractExtractor( context : {
         }
 
         // Re-generate wiki text for found range of nodes
-        pageNode.children.slice(start, end).map(_.toWikiText()).mkString("").trim
+        pageNode.children.slice(start, end)
+                .filter(renderNode)
+                .map(_.toWikiText())
+                .mkString("").trim
     }
 
 }

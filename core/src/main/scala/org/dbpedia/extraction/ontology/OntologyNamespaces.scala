@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.ontology
 
-import org.dbpedia.extraction.util.UriUtils
-import java.net.URLEncoder
+import org.dbpedia.extraction.util.{Language, UriUtils}
 /**
  * Manages the ontology namespaces.
  */
@@ -82,53 +81,54 @@ object OntologyNamespaces
      */
     def getUri(name : String, baseUri : String) : String =
     {
-    	val parts = name.split(":", 2)
-
-        if (parts.length == 2)
+    	name.split(":", 2) match
         {
-            val prefix = parts(0);
-            val suffix = parts(1);
-            
-            prefixMap.get(prefix) match
+            case Array(prefix, suffix) => prefixMap.get(prefix) match
             {
-            	case Some(namespace) => appendUri(namespace, suffix)
-            	case None => appendUri(baseUri, name)
-            	// throw new IllegalArgumentException("Unknown prefix " + prefix + " in name " + name);
+                case Some(namespace) => appendUri(namespace, suffix)  // replace prefix
+                case None => appendUri(baseUri, name)                 // append "fall-back" baseUri
+                // throw new IllegalArgumentException("Unknown prefix " + prefix + " in name " + name);
             }
+            case _ => appendUri(baseUri, name)
+        }
+    }
+
+    def getResource(name : String, lang : Language) : String =
+    {
+        val langWikiCode = lang.wikiCode
+        val domain = if (specificLanguageDomain.contains(langWikiCode)) "http://" + langWikiCode + ".dbpedia.org/resource/"
+                     else "http://dbpedia.org/resource/"
+        appendUri(domain, name, lang)
+    }
+
+    def getProperty(name : String, lang : Language) : String =
+    {
+        val langWikiCode = lang.wikiCode
+        val domain = if (specificLanguageDomain.contains(langWikiCode)) "http://" + langWikiCode + ".dbpedia.org/property/"
+                     else "http://dbpedia.org/property/"
+        appendUri(domain, name, lang)
+    }
+
+    private def appendUri( baseUri : String, encodedSuffix : String, lang : Language = Language.Default ) : String =
+    {
+        if (baseUri.contains('#'))
+        {
+            // contains a fragment
+            // right-hand fragments must not contain ':', '/' or '&', according to our Validate class
+            baseUri + encodedSuffix.replace("/", "%2F").replace(":", "%3A").replace("&", "%26")
         }
         else
         {
-            appendUri(baseUri, name)
-        }
-    }
-
-    def getResource(name : String, lang : String) : String =
-    {
-        val domain = if ( specificLanguageDomain.contains(lang)) "http://" + lang + ".dbpedia.org/resource/" else "http://dbpedia.org/resource/"
-        appendUri(domain, name, lang)
-    }
-
-    def getProperty(name : String, lang : String) : String =
-    {
-        val domain = if ( specificLanguageDomain.contains(lang)) "http://" + lang + ".dbpedia.org/property/" else "http://dbpedia.org/property/"
-        appendUri(domain, name, lang)
-    }
-
-    private def appendUri( baseUri : String, suffix : String, lang : String = "" ) : String =
-    {
-        if (!baseUri.contains('#'))
-        {
-            //return baseUri + suffix;
-            if (! encodeAsIRI.contains(lang))
-                // some bad URIs passed 
-                baseUri + URLEncoder.encode(suffix, "UTF-8")
+            // does not contain a fragment
+            // return baseUri + encodedSuffix;
+            if (encodeAsIRI.contains(lang.wikiCode))
+            {
+                UriUtils.toIRIString(baseUri+encodedSuffix)
+            }
             else
-                UriUtils.toIRIString(baseUri+suffix)
-        }
-        else
-        {
-            // fragments must not contain ':' or '/', according to our Validate class
-            baseUri + suffix.replace("/", "%2F").replace(":", "%3A")
+            {
+                baseUri + encodedSuffix
+            }
         }
     }
 

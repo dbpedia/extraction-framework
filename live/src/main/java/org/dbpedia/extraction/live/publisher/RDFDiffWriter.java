@@ -172,7 +172,7 @@ public class RDFDiffWriter
         OutputStream tmp = null;
 		OutputStream out = null;
         try{
-        if((triplesString == null) || (triplesString == ""))
+        if((triplesString == null) || (triplesString.compareTo("") == 0))
             return;
 		File file = new File(baseName);
 		File parentDir = file.getParentFile();

@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.dataparser
 
-import java.text.NumberFormat
 import org.dbpedia.extraction.ontology.datatypes.{UnitDatatype, DimensionDatatype, Datatype}
 import org.dbpedia.extraction.config.dataparser.DurationParserConfig
 import org.dbpedia.extraction.util.Language
-
+import java.text.{ParseException, NumberFormat}
+import java.util.logging.{Logger, Level}
+import util.matching.Regex
 
 class DurationParser( extractionContext : { def language : Language } )
 {
@@ -12,6 +13,7 @@ class DurationParser( extractionContext : { def language : Language } )
 
     private val numberFormat = NumberFormat.getInstance(extractionContext.language.locale)
 
+    private val logger = Logger.getLogger(classOf[DoubleParser].getName)
 
     private val timeUnits = DurationParserConfig.timesMap.getOrElse(language, DurationParserConfig.timesMap("en"))
 
@@ -112,21 +114,54 @@ class DurationParser( extractionContext : { def language : Language } )
                 }
             }
 
-            case _ => val durationsMap = TimeValueUnitRegex.findAllIn(input).matchData.map{ m => {
-                          val unit = timeUnits.get(m.subgroups(1).replaceAll("""\W""", "")).getOrElse(return None)  // hack to deal with e.g "min)" matches
-                          val num = numberFormat.parse(m.subgroups(0).replace(" ", "")).toString
-                          (unit, num) } }.toMap
-                      if (durationsMap.isEmpty)
-                          None
-                      else
-                          Some(new Duration(years   = (durationsMap.get("year")  .getOrElse("0")).toDouble,
-                                            months  = (durationsMap.get("month") .getOrElse("0")).toDouble,
-                                            days    = (durationsMap.get("day")   .getOrElse("0")).toDouble,
-                                            hours   = (durationsMap.get("hour")  .getOrElse("0")).toDouble,
-                                            minutes = (durationsMap.get("minute").getOrElse("0")).toDouble,
-                                            seconds = (durationsMap.get("second").getOrElse("0")).toDouble
-                                            //reverseDirection = (sign == "-")
-                               ))
+            case _ =>
+            {
+                val durationsMap = TimeValueUnitRegex.findAllIn(input).matchData.map{ m =>
+                {
+                    val unit = timeUnits.get(m.subgroups(1).replaceAll("""\W""", "")).getOrElse(return None)  // hack to deal with e.g "min)" matches
+                    val num = getNum(m).getOrElse(return None)
+                    (unit, num) }
+                }.toMap
+
+                if (durationsMap.isEmpty)
+                    None
+                else
+                    Some(new Duration(years   = (durationsMap.get("year")  .getOrElse("0")).toDouble,
+                                      months  = (durationsMap.get("month") .getOrElse("0")).toDouble,
+                                      days    = (durationsMap.get("day")   .getOrElse("0")).toDouble,
+                                      hours   = (durationsMap.get("hour")  .getOrElse("0")).toDouble,
+                                      minutes = (durationsMap.get("minute").getOrElse("0")).toDouble,
+                                      seconds = (durationsMap.get("second").getOrElse("0")).toDouble
+                                      //reverseDirection = (sign == "-")
+                    ))
+            }
+        }
+    }
+
+    private def getNum(m : Regex.Match) : Option[String] =
+    {
+        val numberStr = m.subgroups(0)
+        try
+        {
+            Some(numberFormat.parse(numberStr).toString)
+        }
+        catch
+        {
+            case ex : ParseException =>
+            {
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                None
+            }
+            case ex : NumberFormatException =>
+            {
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                None
+            }
+            case ex : ArrayIndexOutOfBoundsException =>
+            {
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+                None
+            }
         }
     }
 
