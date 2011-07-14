@@ -32,31 +32,6 @@ class CreateMappingStats(val language : Language)
 
 
 
-    def main(args: Array[String])
-    {
-        val serializeFileName = args(0)
-        val redirectsDatasetFileName = args(1)
-        val infoboxPropertiesDatasetFileName = args(2)
-        val templateParametersDatasetFileName = args(3)
-        val infoboxTestDatasetFileName = args(4)
-        var wikiStats: WikipediaStats = null
-        val startTime = System.currentTimeMillis()
-
-        if (new File(serializeFileName).isFile)
-        {
-            Server.logger.fine("Loading serialized object from " + serializeFileName)
-            wikiStats = deserialize(serializeFileName)
-            Server.logger.info("done")
-        }
-        else
-        {
-            wikiStats = getWikipediaStats(redirectsDatasetFileName, infoboxPropertiesDatasetFileName, templateParametersDatasetFileName, infoboxTestDatasetFileName)
-            Server.logger.info("Serializing to " + serializeFileName)
-            serialize(serializeFileName, wikiStats)
-        }
-        Server.logger.info((System.currentTimeMillis() - startTime) / 1000 + " s")
-    }
-
     def countMappedStatistics(mappings: Map[String, ClassMapping], wikipediaStatistics: WikipediaStats) =
     {
         val startTime = System.currentTimeMillis()
@@ -129,55 +104,6 @@ class CreateMappingStats(val language : Language)
         output.writeObject(ignoreList)
         output.close()
         ignoreList.exportToTextFile(ignoreListTemplatesFileName, ignoreListPropertiesFileName)
-    }
-
-    private def checkMapping(template: String, mappings: Map[String, ClassMapping]) =
-    {
-        if (mappings.contains(template)) true
-        else false
-    }
-
-    private def checkProperty(propName: String, wikiProperties: Set[String]) =
-    {
-        if (wikiProperties.contains(propName)) true
-        else false
-    }
-
-    private def collectProperties(mapping: Object): Set[String] =
-    {
-        val properties = mapping match
-        {
-            case classMapping: ClassMapping => collectPropertiesFromClassMapping(classMapping)
-            case propertyMapping: PropertyMapping => collectPropertiesFromIntermediate(propertyMapping)
-            case _ => Set[String]()
-        }
-
-        properties.filter(_ != null)
-    }
-
-    private def collectPropertiesFromClassMapping(classMapping: ClassMapping): Set[String] = classMapping match
-    {
-        case templateMapping: TemplateMapping => templateMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-        case conditionalMapping: ConditionalMapping => conditionalMapping.defaultMappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-        case _ => Set()
-    }
-
-    private def collectPropertiesFromIntermediate(propertyMapping: PropertyMapping): Set[String] = propertyMapping match
-    {
-        case intermediateNodeMapping: IntermediateNodeMapping => intermediateNodeMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-        case _ => Set()
-    }
-
-    private def collectPropertiesFromPropertyMapping(propertyMapping: PropertyMapping): Set[String] = propertyMapping match
-    {
-        case simple: SimplePropertyMapping => Set(simple.templateProperty)
-        case coord: GeoCoordinatesMapping => Set(coord.coordinates, coord.latitude, coord.longitude, coord.longitudeDegrees,
-            coord.longitudeMinutes, coord.longitudeSeconds, coord.longitudeDirection,
-            coord.latitudeDegrees, coord.latitudeMinutes, coord.latitudeSeconds, coord.latitudeDirection)
-        case calc: CalculateMapping => Set(calc.templateProperty1, calc.templateProperty2)
-        case combine: CombineDateMapping => Set(combine.templateProperty1, combine.templateProperty2, combine.templateProperty3)
-        case interval: DateIntervalMapping => Set(interval.templateProperty)
-        case _ => Set()
     }
 
     private def getWikipediaStats(redirectsFile: String, infoboxPropsFile: String, templParsFile: String, parsUsageFile: String): WikipediaStats =
@@ -343,27 +269,41 @@ class CreateMappingStats(val language : Language)
         newResultMap
     }
 
-    private def serialize(fileName: String, wikiStats: WikipediaStats)
+    private def checkMapping(template: String, mappings: Map[String, ClassMapping]) =
     {
-        val output = new ObjectOutputStream(new FileOutputStream(fileName))
-        output.writeObject(wikiStats)
-        output.close()
+        if (mappings.contains(template)) true
+        else false
     }
 
-    def deserialize(fileName: String): WikipediaStats =
+    private def checkProperty(propName: String, wikiProperties: Set[String]) =
     {
-        val input = new ObjectInputStream(new FileInputStream(fileName))
-        val m = input.readObject()
-        input.close()
-        m.asInstanceOf[WikipediaStats]
+        if (wikiProperties.contains(propName)) true
+        else false
     }
 
-    @deprecated
-    private def serializeStats(fileName: String, statistics: Set[MappingStats])
+    private def collectProperties(mapping: Object): Set[String] =
     {
-        val output = new ObjectOutputStream(new FileOutputStream(fileName))
-        output.writeObject(statistics)
-        output.close()
+        val properties = mapping match
+        {
+            case templateMapping: TemplateMapping => templateMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
+            case conditionalMapping: ConditionalMapping => conditionalMapping.defaultMappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
+            case _ => Set[String]()
+        }
+
+        properties.filter(_ != null)
+    }
+
+    private def collectPropertiesFromPropertyMapping(propertyMapping: PropertyMapping): Set[String] = propertyMapping match
+    {
+        case simple: SimplePropertyMapping => Set(simple.templateProperty)
+        case coord: GeoCoordinatesMapping => Set(coord.coordinates, coord.latitude, coord.longitude, coord.longitudeDegrees,
+            coord.longitudeMinutes, coord.longitudeSeconds, coord.longitudeDirection,
+            coord.latitudeDegrees, coord.latitudeMinutes, coord.latitudeSeconds, coord.latitudeDirection)
+        case calc: CalculateMapping => Set(calc.templateProperty1, calc.templateProperty2)
+        case combine: CombineDateMapping => Set(combine.templateProperty1, combine.templateProperty2, combine.templateProperty3)
+        case interval: DateIntervalMapping => Set(interval.templateProperty)
+        case intermediateNodeMapping: IntermediateNodeMapping => intermediateNodeMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
+        case _ => Set()
     }
 }
 
@@ -398,49 +338,60 @@ object CreateMappingStats
             properties = properties.updated(propertyName, (freq, mapped))
         }
 
-        def getNumberOfProperties = templateStats.properties.size
+        def getNumberOfProperties(ignoreList : IgnoreList) =
+        {
+            var counter: Int = 0
+            for ((propName, _) <- templateStats.properties)
+            {
+                if (!ignoreList.isPropertyIgnored(templateName, propName))
+                {
+                    counter = counter + 1
+                }
+            }
+            counter
+        }
 
-        def getNumberOfMappedProperties =
+        def getNumberOfMappedProperties(ignoreList : IgnoreList) =
         {
             var numMPs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
             {
-                if (propIsMapped && propCount != -1) numMPs = numMPs + 1
+                if (propIsMapped && propCount != -1 && !ignoreList.isPropertyIgnored(templateName, propName)) numMPs = numMPs + 1
             }
             numMPs
         }
 
-        def getRatioOfMappedProperties =
+        def getRatioOfMappedProperties(ignoreList : IgnoreList) =
         {
             var mappedRatio: Double = 0
-            mappedRatio = getNumberOfMappedProperties.toDouble / getNumberOfProperties.toDouble
+            mappedRatio = getNumberOfMappedProperties(ignoreList).toDouble / getNumberOfProperties(ignoreList).toDouble
             mappedRatio
         }
 
-        def getNumberOfPropertyOccurrences =
+        def getNumberOfPropertyOccurrences(ignoreList : IgnoreList) =
         {
             var numPOs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
             {
-                if (propCount != -1) numPOs = numPOs + propCount
+                if (propCount != -1 && !ignoreList.isPropertyIgnored(templateName, propName)) numPOs = numPOs + propCount
             }
             numPOs
         }
 
-        def getNumberOfMappedPropertyOccurrences =
+        def getNumberOfMappedPropertyOccurrences(ignoreList : IgnoreList) =
         {
             var numMPOs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
             {
-                if (propIsMapped && propCount != -1) numMPOs = numMPOs + propCount
+                if (propIsMapped && propCount != -1 && !ignoreList.isPropertyIgnored(templateName, propName)) numMPOs = numMPOs + propCount
             }
             numMPOs
         }
 
-        def getRatioOfMappedPropertyOccurrences =
+        def getRatioOfMappedPropertyOccurrences(ignoreList : IgnoreList) =
         {
             var mappedRatio: Double = 0
-            mappedRatio = getNumberOfMappedPropertyOccurrences.toDouble / getNumberOfPropertyOccurrences.toDouble
+            mappedRatio = getNumberOfMappedPropertyOccurrences(ignoreList).toDouble / getNumberOfPropertyOccurrences(ignoreList).toDouble
             mappedRatio
         }
 
@@ -458,4 +409,49 @@ object CreateMappingStats
             mappedRedirrects.map(_.swap)
         }
     }
+
+    def main(args: Array[String])
+    {
+        val serializeFileName = args(0)
+        val redirectsDatasetFileName = args(1)
+        val infoboxPropertiesDatasetFileName = args(2)
+        val templateParametersDatasetFileName = args(3)
+        val infoboxTestDatasetFileName = args(4)
+        val language = Language.fromWikiCode(args(5)).get
+        var wikiStats: WikipediaStats = null
+        val startTime = System.currentTimeMillis()
+        val createMappingStats = new CreateMappingStats(language)
+
+        if (new File(serializeFileName).isFile)
+        {
+            Server.logger.info("Loading serialized object from " + serializeFileName)
+            wikiStats = deserialize(serializeFileName)
+        }
+        else
+        {
+            wikiStats = createMappingStats.getWikipediaStats(redirectsDatasetFileName, infoboxPropertiesDatasetFileName, templateParametersDatasetFileName, infoboxTestDatasetFileName)
+            Server.logger.info("Serializing to " + serializeFileName)
+            serialize(serializeFileName, wikiStats)
+        }
+        Server.logger.info((System.currentTimeMillis() - startTime) / 1000 + " s")
+    }
+
+
+
+    private def serialize(fileName: String, wikiStats: WikipediaStats)
+    {
+        val output = new ObjectOutputStream(new FileOutputStream(fileName))
+        output.writeObject(wikiStats)
+        output.close()
+    }
+
+    def deserialize(fileName: String): WikipediaStats =
+    {
+        val input = new ObjectInputStream(new FileInputStream(fileName))
+        val m = input.readObject()
+        input.close()
+        m.asInstanceOf[WikipediaStats]
+    }
+
+
 }

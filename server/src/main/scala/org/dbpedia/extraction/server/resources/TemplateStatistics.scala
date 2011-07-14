@@ -12,7 +12,7 @@ import org.dbpedia.extraction.server.util.{CreateMappingStats, IgnoreList}
 class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
 {
     private val language = Language.fromWikiCode(langCode)
-        .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
+                                   .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
     if (!Server.config.languages.contains(language))
         throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
@@ -23,8 +23,8 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
     if (new File(createMappingStats.mappingStatsObjectFileName).isFile)
     {
         Server.logger.info("Loading serialized WikiStats object from " + createMappingStats.mappingStatsObjectFileName)
-        wikipediaStatistics = createMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
-        Server.logger.info("done")
+        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
+		Server.logger.info("done")
     }
     else
     {
@@ -124,13 +124,13 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                         <td>occurrences</td> <td colspan="2">template (with link to property statistics)</td>
                         <td>num properties</td> <td>mapped properties (%)</td>
                         <td>num property occurrences</td> <td>mapped property occurrences (%)</td> <td></td>
-                    </tr>{for ((mappingStat, counter) <- sortedStatsMap.filter(_._1.getNumberOfProperties > 0)) yield
+                    </tr>{for ((mappingStat, counter) <- sortedStatsMap.filter(_._1.getNumberOfProperties(ignoreList) > 0)) yield
                 {
                     val encodedTemplateName = "Template%3A" + WikiUtil.wikiEncode(mappingStat.templateName, language)
                     val targetRedirect = reversedRedirects.get(encodedTemplateName)
 
-                    val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties * 100)
-                    val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences * 100)
+                    val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties(ignoreList) * 100)
+                    val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) * 100)
                     if (counter > 99)
                     {
                         var mappingsWikiLink = mappingUrlPrefix + encodedTemplateName.substring(11)
@@ -141,11 +141,11 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                             }
                             else
                             {
-                                if(mappingStat.getRatioOfMappedPropertyOccurrences > goodThreshold)
+                                if(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) > goodThreshold)
                                 {
                                     mappedGoodColor
                                 }
-                                else if(mappingStat.getRatioOfMappedPropertyOccurrences > mediumThreshold)
+                                else if(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) > mediumThreshold)
                                 {
                                     mappedMediumColor
                                 }
@@ -159,13 +159,13 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                         var redirectMsg = ""
                         for (redirect <- targetRedirect)
                         {
-                            mappingsWikiLink = mappingUrlPrefix + redirect.substring(11)
                             if (mappingStat.isMapped)
                             {
                                 //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(9) + " is redundant!"
                             }
                             else
                             {
+                                mappingsWikiLink = mappingUrlPrefix + redirect.substring(11)
                                 bgcolor = renameColor
                                 redirectMsg = WikiUtil.wikiDecode(redirect, language).substring(9) + " must be renamed to "
                             }
@@ -184,7 +184,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                             <td align="right">
                                 {counter}
                             </td>
-                            {
+                        {
                             if (bgcolor == renameColor)
                             {
                                 <td>
@@ -202,19 +202,19 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                                     </a>{redirectMsg}
                                 </td>
                             }
-                            }<td>
+                        }<td>
                             <a href={mappingsWikiLink}>
                                 Edit
                             </a>
                         </td>
-                            <td align="right">
-                                {mappingStat.getNumberOfProperties}
-                            </td> <td align="right">
+                                <td align="right">
+                                    {mappingStat.getNumberOfProperties(ignoreList)}
+                                </td> <td align="right">
                             {percentMappedProps}
                         </td>
-                            <td align="right">
-                                {mappingStat.getNumberOfPropertyOccurrences}
-                            </td> <td align="right">
+                                <td align="right">
+                                    {mappingStat.getNumberOfPropertyOccurrences(ignoreList)}
+                                </td> <td align="right">
                             {percentMappedPropOccur}
                         </td> <td>
                             <a href={WikiUtil.wikiEncode(mappingStat.templateName) + "/" + isIgnored.toString}>
@@ -344,8 +344,8 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
         var numP: Int = 0
         for ((mappingStat, templateCounter) <- stats)
         {
-            numMP = numMP + mappingStat.getNumberOfMappedProperties
-            numP = numP + mappingStat.getNumberOfProperties
+            numMP = numMP + mappingStat.getNumberOfMappedProperties(ignoreList)
+            numP = numP + mappingStat.getNumberOfProperties(ignoreList)
         }
         mappedRatio = numMP.toDouble / numP.toDouble
         mappedRatio
@@ -358,8 +358,8 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
         var numPO: Int = 0
         for ((mappingStat, templateCounter) <- stats)
         {
-            numMPO = numMPO + mappingStat.getNumberOfMappedPropertyOccurrences
-            numPO = numPO + mappingStat.getNumberOfPropertyOccurrences
+            numMPO = numMPO + mappingStat.getNumberOfMappedPropertyOccurrences(ignoreList)
+            numPO = numPO + mappingStat.getNumberOfPropertyOccurrences(ignoreList)
         }
         mappedRatio = numMPO.toDouble / numPO.toDouble
         mappedRatio
