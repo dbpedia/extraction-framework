@@ -32,7 +32,7 @@ object Server
         val resources = new ClassNamesResourceConfig(
             classOf[Root], classOf[Extraction], classOf[Mappings], classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
             classOf[TemplateStatistics], classOf[PropertyStatistics],
-            classOf[XMLMessageBodyReader], classOf[XMLMessageBodyWriter], classOf[ExceptionMapper], classOf[TriX], classOf[Log])
+            classOf[XMLMessageBodyReader], classOf[XMLMessageBodyWriter], classOf[ExceptionMapper], classOf[TriX], classOf[Log], classOf[Percentage])
 
         val server = HttpServerFactory.create(serverURI, resources)
         server.start()

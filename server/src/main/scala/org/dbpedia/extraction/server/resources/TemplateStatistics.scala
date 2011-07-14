@@ -69,6 +69,12 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
         val reversedRedirects = wikipediaStatistics.checkForRedirects(sortedStatsMap, mappings, language)
         val percentageMappedTemplates: String = "%2.2f".format(getNumberOfMappedTemplates(statsMap).toDouble / getNumberOfTemplates(statsMap).toDouble * 100)
         val percentageMappedTemplateOccurrences: String = "%2.2f".format(getRatioOfMappedTemplateOccurrences(statsMap) * 100)
+
+        // print percentage to file for Pablo's counter
+        val out = new PrintWriter(createMappingStats.percentageFileName)
+        out.write(percentageMappedTemplateOccurrences)
+        out.close()
+
         //Server.logger.info("ratioTemp: " + percentageMappedTemplates)
         //Server.logger.info("ratioTempUses: " + percentageMappedTemplateOccurrences)
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">

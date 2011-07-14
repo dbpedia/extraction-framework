@@ -24,6 +24,8 @@ class CreateMappingStats(val language : Language)
     val ignoreListTemplatesFileName = "src/main/resources/ignoreListTemplates_"+language.wikiCode+".txt"
     val ignoreListPropertiesFileName = "src/main/resources/ignoreListProperties_"+language.wikiCode+".txt"
 
+    val percentageFileName = "src/main/resources/percentage.en"
+
     private val templateNamespacePrefix = Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":" //"%3A"
     private val resourceNamespacePrefix = if (language.wikiCode == "en") "http://dbpedia.org/resource/" else "http://" + language.wikiCode + "dbpedia.org/resource/"
 
