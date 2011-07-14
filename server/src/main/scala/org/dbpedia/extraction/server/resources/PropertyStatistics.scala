@@ -23,7 +23,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
     if (new File(createMappingStats.mappingStatsObjectFileName).isFile)
     {
         Server.logger.info("Loading serialized object from " + createMappingStats.mappingStatsObjectFileName)
-        wikipediaStatistics = createMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
+        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
     }
     else
     {
@@ -38,6 +38,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
     private val mappedColor = "#65c673"
     private val notMappedColor = "#e05d57"
     private val ignoreColor = "#b0b0b0"
+    private val notDefinedColor = "#FFF8C6"
 
     @GET
     @Produces(Array("application/xhtml+xml"))
@@ -61,8 +62,8 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                 case (key, (value1, value2)) => -value1
             }: _*)
 
-            val percentageMappedProps: String = "%2.2f".format(ms.getRatioOfMappedProperties * 100)
-            val percentageMappedPropOccurrences: String = "%2.2f".format(ms.getRatioOfMappedPropertyOccurrences * 100)
+            val percentageMappedProps: String = "%2.2f".format(ms.getRatioOfMappedProperties(ignoreList) * 100)
+            val percentageMappedPropOccurrences: String = "%2.2f".format(ms.getRatioOfMappedPropertyOccurrences(ignoreList) * 100)
             Server.logger.fine("ratioTemp: " + percentageMappedProps)
             Server.logger.fine("ratioTempUses: " + percentageMappedPropOccurrences)
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -71,18 +72,18 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                     <p align="center">
                         {percentageMappedProps}
                         % properties are mapped (
-                        {ms.getNumberOfMappedProperties}
+                        {ms.getNumberOfMappedProperties(ignoreList)}
                         of
-                        {ms.getNumberOfProperties}
+                        {ms.getNumberOfProperties(ignoreList)}
                         ).</p>
                     <p align="center">
                         {percentageMappedPropOccurrences}
                         % of all property occurrences in Wikipedia (
                         {langCode}
                         ) are mapped (
-                        {ms.getNumberOfMappedPropertyOccurrences}
+                        {ms.getNumberOfMappedPropertyOccurrences(ignoreList)}
                         of
-                        {ms.getNumberOfPropertyOccurrences}
+                        {ms.getNumberOfPropertyOccurrences(ignoreList)}
                         ).</p>
                     <table align="center">
                     <caption>The color codes:</caption>
@@ -92,44 +93,61 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                     <tr>
                         <td bgcolor={notMappedColor}>property is not mapped</td>
                     </tr>
+                    <tr>
+                        <td bgcolor={notDefinedColor}>property is not in the template definition and should be checked manually for relevance</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor={ignoreColor}>property is ignored</td>
+                    </tr>
                     </table>
                     <table align="center">
                         <tr>
                             <td>occurrences</td> <td>property</td>
-                        </tr>{for ((name, (occurrences, isMapped)) <- sortedPropMap) yield
-                    {
-                        var bgcolor: String = ""
-                        if (isMapped)
-                        {
-                            bgcolor = mappedColor
-                        }
-                        else
-                        {
-                            bgcolor = notMappedColor
-                        }
-
-                        var isIgnored: Boolean = false
-                        var ignoreMsg: String = "add to ignore list"
-                        if (ignoreList.isPropertyIgnored(WikiUtil.wikiDecode(template), name))
-                        {
-                            isIgnored = true
-                            ignoreMsg = "remove from ignore list"
-                            bgcolor = ignoreColor
-                        }
-
-                        <tr bgcolor={bgcolor}>
-                            <td align="right">
-                                {occurrences}
-                            </td> <td>
-                            {name}
-                        </td>
-                            <td>
-                                <a href={URLEncoder.encode(name, "UTF-8") + "/" + isIgnored.toString}>
-                                    {ignoreMsg}
-                                </a>
-                            </td>
                         </tr>
-                    }}
+                        {
+                        for ((name, (occurrences, isMapped)) <- sortedPropMap) yield
+                        {
+                            var bgcolor: String = ""
+                            if (isMapped)
+                            {
+                                bgcolor = mappedColor
+                            }
+                            else
+                            {
+                                bgcolor = notMappedColor
+                            }
+
+                            var counter = ""
+                            if (occurrences == -1)
+                            {
+                                bgcolor = notDefinedColor
+                                counter = "na"
+                            }
+                            else counter = occurrences.toString
+
+                            var isIgnored: Boolean = false
+                            var ignoreMsg: String = "add to ignore list"
+                            if (ignoreList.isPropertyIgnored(WikiUtil.wikiDecode(template), name))
+                            {
+                                isIgnored = true
+                                ignoreMsg = "remove from ignore list"
+                                bgcolor = ignoreColor
+                            }
+
+                            <tr bgcolor={bgcolor}>
+                                <td align="right">
+                                    {counter}
+                                </td> <td>
+                                {name}
+                            </td>
+                                <td>
+                                    <a href={URLEncoder.encode(name, "UTF-8") + "/" + isIgnored.toString}>
+                                        {ignoreMsg}
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        }
                     </table>
                 </body>
             </html>
