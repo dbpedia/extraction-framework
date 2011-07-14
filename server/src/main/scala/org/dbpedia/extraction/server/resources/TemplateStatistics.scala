@@ -12,7 +12,7 @@ import org.dbpedia.extraction.server.util.{CreateMappingStats, IgnoreList}
 class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
 {
     private val language = Language.fromWikiCode(langCode)
-                                   .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
+        .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
     if (!Server.config.languages.contains(language))
         throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
@@ -24,6 +24,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
     {
         Server.logger.info("Loading serialized WikiStats object from " + createMappingStats.mappingStatsObjectFileName)
         wikipediaStatistics = createMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
+        Server.logger.info("done")
     }
     else
     {
@@ -39,10 +40,17 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
         if (langCode == "en") "http://mappings.dbpedia.org/index.php/Mapping:"
         else "http://mappings.dbpedia.org/index.php/Mapping_"+langCode+":"
 
-    private val mappedColor = "#65c673"
-    private val notMappedColor = "#e05d57"
-    private val renameColor = "#FFE87C"
-    private val ignoreColor = "#b0b0b0"
+
+    private val mappedGoodColor = "#65c673"
+    private val mappedMediumColor = "#ecea48"
+    private val mappedBadColor = "#e0ab3a"
+    private val notMappedColor = "#df5c56"
+
+    private val goodThreshold = 0.8
+    private val mediumThreshold = 0.4
+
+    private val renameColor = "#df5c56"
+    private val ignoreColor = "#cdcdcd"
 
     @GET
     @Produces(Array("application/xhtml+xml"))
@@ -86,7 +94,19 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                 <table align="center">
                     <caption>The color codes:</caption>
                     <tr>
-                        <td bgcolor={mappedColor}>template is mapped</td>
+                        <td bgcolor={mappedGoodColor}>template is mapped with more than
+                            {"%2.0f".format(goodThreshold*100)}%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor={mappedMediumColor}>template is mapped with more than
+                            {"%2.0f".format(mediumThreshold*100)}%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor={mappedBadColor}>template is mapped with less than
+                            {"%2.0f".format(mediumThreshold*100)}%
+                        </td>
                     </tr>
                     <tr>
                         <td bgcolor={notMappedColor}>template is not mapped</td>
@@ -114,8 +134,27 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                     if (counter > 99)
                     {
                         var mappingsWikiLink = mappingUrlPrefix + encodedTemplateName.substring(11)
-                        var bgcolor: String = ""
-                        if (mappingStat.isMapped) bgcolor = mappedColor else bgcolor = notMappedColor
+                        var bgcolor: String =
+                            if(!mappingStat.isMapped)
+                            {
+                                notMappedColor
+                            }
+                            else
+                            {
+                                if(mappingStat.getRatioOfMappedPropertyOccurrences > goodThreshold)
+                                {
+                                    mappedGoodColor
+                                }
+                                else if(mappingStat.getRatioOfMappedPropertyOccurrences > mediumThreshold)
+                                {
+                                    mappedMediumColor
+                                }
+                                else
+                                {
+                                    mappedBadColor
+                                }
+                            }
+
 
                         var redirectMsg = ""
                         for (redirect <- targetRedirect)
@@ -145,7 +184,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                             <td align="right">
                                 {counter}
                             </td>
-                        {
+                            {
                             if (bgcolor == renameColor)
                             {
                                 <td>
@@ -163,19 +202,19 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                                     </a>{redirectMsg}
                                 </td>
                             }
-                        }<td>
+                            }<td>
                             <a href={mappingsWikiLink}>
                                 Edit
                             </a>
                         </td>
-                                <td align="right">
-                                    {mappingStat.getNumberOfProperties}
-                                </td> <td align="right">
+                            <td align="right">
+                                {mappingStat.getNumberOfProperties}
+                            </td> <td align="right">
                             {percentMappedProps}
                         </td>
-                                <td align="right">
-                                    {mappingStat.getNumberOfPropertyOccurrences}
-                                </td> <td align="right">
+                            <td align="right">
+                                {mappingStat.getNumberOfPropertyOccurrences}
+                            </td> <td align="right">
                             {percentMappedPropOccur}
                         </td> <td>
                             <a href={WikiUtil.wikiEncode(mappingStat.templateName) + "/" + isIgnored.toString}>
@@ -189,6 +228,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
             </body>
         </html>
     }
+
 
     @GET
     @Path("/{template}/{ignorelist}")
