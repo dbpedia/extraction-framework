@@ -22,6 +22,8 @@ class AbstractExtractor( context : {
 {
     private val maxRetries = 2
 
+    private var addedTitleCounter = 0
+
     private val timeoutMs = 5000
 
     private val language = context.language.wikiCode
@@ -29,7 +31,7 @@ class AbstractExtractor( context : {
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
     //TODO make this configurable
-    private val apiUrl = "http://localhost:88/mw-modified/api.php"
+    private val apiUrl = "http://localhost/mw-modified/api.php"
 
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
@@ -41,20 +43,20 @@ class AbstractExtractor( context : {
     private lazy val longProperty = context.ontology.getProperty("abstract")
                                     .getOrElse(throw new Exception("Property 'abstract' not found"))
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         //Only extract abstracts for pages from the Main namespace
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(pageNode.title.namespace != WikiTitle.Namespace.Main) return new Graph()
 
         //Don't extract abstracts from redirect and disambiguation pages
-        if(node.isRedirect || node.isDisambiguation) return new Graph()
+        if(pageNode.isRedirect || pageNode.isDisambiguation) return new Graph()
 
         //Reproduce wiki text for abstract
-        val abstractWikiText = getAbstractWikiText(node)
+        val abstractWikiText = getAbstractWikiText(pageNode)
         if(abstractWikiText == "") return new Graph()
 
         //Retrieve page text
-        val text = retrievePage(node.root.title.encoded, abstractWikiText)
+        val text = postProcess( pageNode.title, retrievePage(pageNode.title, abstractWikiText) )
 
         //Ignore empty abstracts
         if(text.trim.isEmpty) return new Graph()
@@ -63,8 +65,16 @@ class AbstractExtractor( context : {
         val shortText = short(text)
 
         //Create statements
-        val quadLong = new Quad(context.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
-        val quadShort = new Quad(context.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
+        val quadLong = new Quad(context.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, pageNode.sourceUri)
+        val quadShort = new Quad(context.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, pageNode.sourceUri)
+
+
+
+        if(addedTitleCounter%10 == 0 && addedTitleCounter != 0)
+        {
+            println("added title: "+addedTitleCounter)
+        }
+
 
         if(shortText.isEmpty)
         {
@@ -83,7 +93,7 @@ class AbstractExtractor( context : {
      * @param pageTitle The encoded title of the page
      * @return The page as an Option
      */
-    def retrievePage(pageTitle : String, pageWikiText : String) : String =
+    def retrievePage(pageTitle : WikiTitle, pageWikiText : String) : String =
     {
         for(_ <- 0 to maxRetries)
         {
@@ -102,7 +112,7 @@ class AbstractExtractor( context : {
                 writer.close()
 
                 // Read answer
-                return readInAbstract(conn.getInputStream)
+                return postProcess(pageTitle, readInAbstract(conn.getInputStream))
             }
             catch
             {
@@ -162,11 +172,35 @@ class AbstractExtractor( context : {
         (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
     }
 
+    private def postProcess(pageTitle : WikiTitle, text : String) : String =
+    {
+        def startsWithLowercase(text : String) =
+        {
+            val firstLetter = text.substring(0,1)
+            firstLetter != firstLetter.toUpperCase(context.language.locale)
+        }
+
+        //HACK
+        if(startsWithLowercase(text))
+        {
+            val decodedTitle = pageTitle.decoded.replaceFirst(" \\(.+\\)$", "")
+
+            if(!text.toLowerCase.contains(decodedTitle.toLowerCase))
+            {
+                // happens mainly for Japanese names (abstract starts with template)
+                return decodedTitle + " " + text
+            }
+        }
+
+        text
+    }
+
     private val destinationNamespacesToRender = List(WikiTitle.Namespace.Main, WikiTitle.Namespace.Template)
 
     private def renderNode(node : Node) = node match
     {
-        case n : InternalLinkNode => destinationNamespacesToRender contains n.destination.namespace
+        case InternalLinkNode(destination, _, _, _) => destinationNamespacesToRender contains destination.namespace
+        case ParserFunctionNode(_, _, _) => false
         case _ => true
     }
 
@@ -179,7 +213,7 @@ class AbstractExtractor( context : {
         // From first TextNode
         val start = pageNode.children.indexWhere{
             case TextNode(text, _) => text.trim != ""
-            case n : InternalLinkNode => n.destination.namespace == WikiTitle.Namespace.Main
+            case InternalLinkNode(destination, _, _, _) => destination.namespace == WikiTitle.Namespace.Main
             case _ => false
         }
 
