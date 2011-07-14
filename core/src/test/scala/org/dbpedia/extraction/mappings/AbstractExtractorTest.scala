@@ -8,7 +8,7 @@ import java.io.{FilenameFilter, File}
 import java.lang.IllegalStateException
 import org.junit.{Ignore, Test}
 
-@Ignore  // uncomment to test; MediaWiki server has to be in place
+@Ignore  // unignore to test; MediaWiki server has to be in place
 class AbstractExtractorTest
 {
     private val testDataRootDir = new File("core/src/test/resources/org/dbpedia/extraction/mappings")
@@ -35,7 +35,7 @@ class AbstractExtractorTest
         println("testing wiki "+fileNameWiki+" and gold "+fileNameGold)
         val d = render(fileNameWiki)
         val g = gold(fileNameGold)
-        assert(d == g, "char-diff: " + (d.length-g.length) + "\n" + d + "\n" + g)
+        assert(d == g, "char-diff: " + (d.length-g.length) + "\ngot:  " + d + "\ngold: " + g)
     }
 
     private val context = new {
@@ -50,7 +50,7 @@ class AbstractExtractorTest
     {
         val page = new FileSource(testDataRootDir, _ endsWith fileName).head
         val generatedAbstract = extractor.getAbstractWikiText(parser(page))
-        extractor.retrievePage(page.title.encoded, generatedAbstract)
+        extractor.retrievePage(page.title, generatedAbstract)
     }
 
     private def gold(fileName : String) : String =
