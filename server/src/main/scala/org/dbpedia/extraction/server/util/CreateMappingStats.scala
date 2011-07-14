@@ -18,11 +18,11 @@ import org.dbpedia.extraction.server.util.CreateMappingStats._
 class CreateMappingStats(val language : Language)
 {
 
-    val mappingStatsObjectFileName = "server/src/main/resources/mappingstats_"+language.wikiCode+".obj"
+    val mappingStatsObjectFileName = "src/main/resources/mappingstats_"+language.wikiCode+".obj"
 
-    val ignoreListFileName = "server/src/main/resources/ignoreList_"+language.wikiCode+".obj"
-    val ignoreListTemplatesFileName = "server/src/main/resources/ignoreListTemplates_"+language.wikiCode+".txt"
-    val ignoreListPropertiesFileName = "server/src/main/resources/ignoreListProperties_"+language.wikiCode+".txt"
+    val ignoreListFileName = "src/main/resources/ignoreList_"+language.wikiCode+".obj"
+    val ignoreListTemplatesFileName = "src/main/resources/ignoreListTemplates_"+language.wikiCode+".txt"
+    val ignoreListPropertiesFileName = "src/main/resources/ignoreListProperties_"+language.wikiCode+".txt"
 
     private val templateNamespacePrefix = Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":" //"%3A"
     private val resourceNamespacePrefix = if (language.wikiCode == "en") "http://dbpedia.org/resource/" else "http://" + language.wikiCode + "dbpedia.org/resource/"
@@ -44,8 +44,9 @@ class CreateMappingStats(val language : Language)
 
         if (new File(serializeFileName).isFile)
         {
-            Server.logger.info("Loading serialized object from " + serializeFileName)
+            Server.logger.fine("Loading serialized object from " + serializeFileName)
             wikiStats = deserialize(serializeFileName)
+            Server.logger.info("done")
         }
         else
         {
@@ -108,7 +109,7 @@ class CreateMappingStats(val language : Language)
     {
         if (new File(ignoreListFileName).isFile)
         {
-            Server.logger.info("Loading serialized object from " + ignoreListFileName)
+            Server.logger.fine("Loading serialized object from " + ignoreListFileName)
             val input = new ObjectInputStream(new FileInputStream(ignoreListFileName))
             val m = input.readObject()
             input.close()
