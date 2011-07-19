@@ -10,14 +10,20 @@ import org.dbpedia.extraction.server.util.{IgnoreList, CreateMappingStats}
 import java.net.{URLEncoder, URLDecoder}
 
 @Path("/templatestatistics/{lang}/{template}/")
-class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("template") template: String) extends Base
+class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("template") temp: String) extends Base
 {
     private val language = Language.fromWikiCode(langCode)
                 .getOrElse(throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
     if (!Server.config.languages.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
 
+    private val mappingUrlPrefix =
+        if (langCode == "en") "http://mappings.dbpedia.org/index.php/Mapping:"
+        else "http://mappings.dbpedia.org/index.php/Mapping_"+langCode+":"
+
     private val createMappingStats = new CreateMappingStats(language)
+
+    var template = createMappingStats.decodeSlash(temp)
 
     private var wikipediaStatistics: WikipediaStats = null
     if (new File(createMappingStats.mappingStatsObjectFileName).isFile)
@@ -68,7 +74,8 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
             Server.logger.fine("ratioTempUses: " + percentageMappedPropOccurrences)
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <body>
-                    <h2 align="center">Template Statistics  for <u>{WikiUtil.wikiDecode(template)}</u></h2>
+
+                    <h2 align="center">Template Statistics  for <a href={mappingUrlPrefix + template}>{WikiUtil.wikiDecode(template)}</a></h2>
                     <p align="center">
                         {percentageMappedProps}
                         % properties are mapped (
@@ -94,7 +101,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                         <td bgcolor={notMappedColor}>property is not mapped</td>
                     </tr>
                     <tr>
-                        <td bgcolor={notDefinedColor}>property is not in the template definition and should be checked manually for relevance</td>
+                        <td bgcolor={notDefinedColor}>property is mapped but not found in the template definition</td>
                     </tr>
                     <tr>
                         <td bgcolor={ignoreColor}>property is ignored</td>
@@ -139,6 +146,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                                     {counter}
                                 </td> <td>
                                 {name}
+                                <!--{createMappingStats.convertFromEscapedString(name)}-->
                             </td>
                                 <td>
                                     <a href={URLEncoder.encode(name, "UTF-8") + "/" + isIgnored.toString}>

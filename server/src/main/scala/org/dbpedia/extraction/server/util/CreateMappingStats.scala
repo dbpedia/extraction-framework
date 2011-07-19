@@ -11,46 +11,91 @@ import scala.Serializable
 import java.io._
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.util.CreateMappingStats._
+import java.net.{URLDecoder, URLEncoder}
 
 /**
  * Script to gather statistics about mappings: how often they are used, which properties are used and for what mappings exist.
  */
-class CreateMappingStats(val language : Language)
+class CreateMappingStats(val language: Language)
 {
 
-    val mappingStatsObjectFileName = "src/main/resources/mappingstats_"+language.wikiCode+".obj"
+    val mappingStatsObjectFileName = "src/main/resources/mappingstats_" + language.wikiCode + ".obj"
 
-    val ignoreListFileName = "src/main/resources/ignoreList_"+language.wikiCode+".obj"
-    val ignoreListTemplatesFileName = "src/main/resources/ignoreListTemplates_"+language.wikiCode+".txt"
-    val ignoreListPropertiesFileName = "src/main/resources/ignoreListProperties_"+language.wikiCode+".txt"
+    val ignoreListFileName = "src/main/resources/ignoreList_" + language.wikiCode + ".obj"
+    val ignoreListTemplatesFileName = "src/main/resources/ignoreListTemplates_" + language.wikiCode + ".txt"
+    val ignoreListPropertiesFileName = "src/main/resources/ignoreListProperties_" + language.wikiCode + ".txt"
 
     val percentageFileName = "src/main/resources/percentage.en"
 
-    private val templateNamespacePrefix = Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":" //"%3A"
-    private val resourceNamespacePrefix = if (language.wikiCode == "en") "http://dbpedia.org/resource/" else "http://" + language.wikiCode + "dbpedia.org/resource/"
+    val encodedTemplateNamespacePrefix = doubleEncode(Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":", language)
+    private val resourceNamespacePrefix = if (language.wikiCode == "de" || language.wikiCode == "el" ||
+            language.wikiCode == "it" || language.wikiCode == "ru") "http://" + language.wikiCode + ".dbpedia.org/resource/"
+    else "http://dbpedia.org/resource/"
 
     private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> .""".r
     private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.+?)"@?\w?\w? .""".r
 
+    def doubleDecode(string: String, lang: Language): String =
+    {
+        var output = ""
+        output = URLDecoder.decode(WikiUtil.wikiDecode(string, lang), "UTF-8")
+        output
+    }
 
+    def doubleEncode(string: String, lang: Language): String =
+    {
+        var output = ""
+        output = URLEncoder.encode(WikiUtil.wikiEncode(string, lang), "UTF-8")
+        output
+    }
+
+    def isTemplateNamespaceEncoded(template: String): Int =
+    {
+        var output: Int = -1
+        if (template startsWith encodedTemplateNamespacePrefix)
+        {
+            output = 1
+        }
+        if (template startsWith doubleDecode(encodedTemplateNamespacePrefix, language))
+        {
+            output = 0
+        }
+        output
+    }
+
+    def getDecodedTemplateName(rawTemplate: String): String =
+    {
+        var templateName = ""
+        if (isTemplateNamespaceEncoded(rawTemplate) == 1)
+        {
+            templateName = doubleDecode(rawTemplate.substring(encodedTemplateNamespacePrefix.length()), language)
+        }
+        else if (isTemplateNamespaceEncoded(rawTemplate) == 0)
+        {
+            val subLength = doubleDecode(encodedTemplateNamespacePrefix, language).length()
+            templateName = rawTemplate.substring(subLength).replace("_", " ")
+        }
+        else
+        {
+            templateName = WikiUtil.wikiDecode(rawTemplate)
+        }
+        templateName
+    }
 
     def countMappedStatistics(mappings: Map[String, ClassMapping], wikipediaStatistics: WikipediaStats) =
     {
         val startTime = System.currentTimeMillis()
 
-
         // Hold the overall statistics
         var statistics: Set[MappingStats] = Set() // new Set() with Serializable
 
-        //Thread.sleep(500)
-
-        //    println("number of templates " + wikiStats.templates.size)
-
         var isMapped: Boolean = false
 
-        for ((encodedTemplateName, templateStats) <- wikipediaStatistics.templates)
+        for ((rawTemplate, templateStats) <- wikipediaStatistics.templates)
         {
-            val templateName: String = WikiUtil.wikiDecode(encodedTemplateName).substring(9)
+            val templateName: String = getDecodedTemplateName(rawTemplate)
+
+            //mappings: el, en, pt decoded templates without _
             isMapped = checkMapping(templateName, mappings)
             var mappingStats: MappingStats = new MappingStats(templateStats, templateName)
             mappingStats.setTemplateMapped(isMapped)
@@ -77,7 +122,6 @@ class CreateMappingStats(val language : Language)
         }: _*)
 
         Server.logger.fine("countMappedStatistics: " + (System.currentTimeMillis() - startTime) / 1000 + " s")
-        //serializeStats("server/src/main/resources/serializedStats.obj", statistics)
         statistics
     }
 
@@ -97,7 +141,6 @@ class CreateMappingStats(val language : Language)
             val ign: IgnoreList = new IgnoreList(language)
             ign
         }
-
     }
 
     def saveIgnorelist(ignoreList: IgnoreList)
@@ -115,8 +158,7 @@ class CreateMappingStats(val language : Language)
         println("Reading redirects from " + redirectsFile)
         val redirects: Map[String, String] = loadTemplateRedirects(redirectsFile)
         println("  " + redirects.size + " redirects")
-
-        println("Using Template namespace prefix " + templateNamespacePrefix + " for language " + language.wikiCode)
+        println("Using Template namespace prefix " + encodedTemplateNamespacePrefix + " for language " + language.wikiCode)
         println("Counting templates in " + infoboxPropsFile)
         templatesMap = countTemplates(infoboxPropsFile, templatesMap, redirects)
         println("  " + templatesMap.size + " different templates")
@@ -145,7 +187,7 @@ class CreateMappingStats(val language : Language)
                 case ObjectPropertyTripleRegex(subj, pred, obj) =>
                 {
                     val templateName = stripUri(subj)
-                    if (templateName startsWith templateNamespacePrefix)
+                    if (templateName startsWith encodedTemplateNamespacePrefix)
                     {
                         redirects = redirects.updated(templateName, stripUri(obj))
                     }
@@ -218,7 +260,7 @@ class CreateMappingStats(val language : Language)
                         case Some(stats: TemplateStats) =>
                         {
                             // add object to properties map with count 0
-                            stats.properties = stats.properties.updated(stripUri(obj), 0)
+                            stats.properties = stats.properties.updated(convertFromEscapedString(stripUri(obj)), 0)
                             newResultMap = newResultMap.updated(templateName, stats)
                         }
                         case None => //skip the templates that are not found (they don't occurr in Wikipedia)
@@ -250,12 +292,12 @@ class CreateMappingStats(val language : Language)
                         case Some(stats: TemplateStats) =>
                         {
                             // lookup *object* in the properties map
-                            stats.properties.get(stripUri(obj)) match
+                            stats.properties.get(convertFromEscapedString(stripUri(obj))) match
                             {
                                 case Some(oldCount: Int) =>
                                 {
                                     // increment count in properties map
-                                    stats.properties = stats.properties.updated(stripUri(obj), oldCount + 1)
+                                    stats.properties = stats.properties.updated(convertFromEscapedString(stripUri(obj)), oldCount + 1)
                                     newResultMap = newResultMap.updated(templateName, stats)
                                 }
                                 case None => //skip the properties that are not found with any count (they don't occurr in the template definition)
@@ -274,12 +316,6 @@ class CreateMappingStats(val language : Language)
     private def checkMapping(template: String, mappings: Map[String, ClassMapping]) =
     {
         if (mappings.contains(template)) true
-        else false
-    }
-
-    private def checkProperty(propName: String, wikiProperties: Set[String]) =
-    {
-        if (wikiProperties.contains(propName)) true
         else false
     }
 
@@ -307,10 +343,67 @@ class CreateMappingStats(val language : Language)
         case intermediateNodeMapping: IntermediateNodeMapping => intermediateNodeMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
         case _ => Set()
     }
+
+    def convertFromEscapedString(value: String): String =
+    {
+        val sb = new java.lang.StringBuilder
+
+        // iterate over code points (http://blogs.sun.com/darcy/entry/iterating_over_codepoints)
+        val inputLength = value.length
+        var offset = 0
+
+        while (offset < inputLength)
+        {
+            val c = value.charAt(offset)
+            if (c != '\\') sb append c
+            else
+            {
+                offset += 1
+                val specialChar = value.charAt(offset)
+                specialChar match
+                {
+                    case '"' => sb append '"'
+                    case 't' => sb append '\t'
+                    case 'r' => sb append '\r'
+                    case '\\' => sb append '\\'
+                    case 'n' => sb append '\n'
+                    case 'u' =>
+                    {
+                        offset += 1
+                        val codepoint = value.substring(offset, offset + 4)
+                        val character = Integer.parseInt(codepoint, 16).asInstanceOf[Char]
+                        sb append character
+                        offset += 3
+                    }
+                    case 'U' =>
+                    {
+                        offset += 1
+                        val codepoint = value.substring(offset, offset + 8)
+                        val character = Integer.parseInt(codepoint, 16)
+                        sb appendCodePoint character
+                        offset += 7
+                    }
+                }
+            }
+            offset += 1
+        }
+        sb.toString
+    }
+
+    def encodeSlash(url: String): String =
+    {
+        url.replace("/", "%2F")
+    }
+
+    def decodeSlash(url: String): String =
+    {
+        url.replace("%2F", "/")
+    }
 }
 
 object CreateMappingStats
 {
+
     // Hold template statistics
     class TemplateStats(var templateCount: Int = 0, var properties: Map[String, Int] = Map()) extends Serializable
     {
@@ -340,7 +433,7 @@ object CreateMappingStats
             properties = properties.updated(propertyName, (freq, mapped))
         }
 
-        def getNumberOfProperties(ignoreList : IgnoreList) =
+        def getNumberOfProperties(ignoreList: IgnoreList) =
         {
             var counter: Int = 0
             for ((propName, _) <- templateStats.properties)
@@ -353,7 +446,7 @@ object CreateMappingStats
             counter
         }
 
-        def getNumberOfMappedProperties(ignoreList : IgnoreList) =
+        def getNumberOfMappedProperties(ignoreList: IgnoreList) =
         {
             var numMPs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
@@ -363,14 +456,14 @@ object CreateMappingStats
             numMPs
         }
 
-        def getRatioOfMappedProperties(ignoreList : IgnoreList) =
+        def getRatioOfMappedProperties(ignoreList: IgnoreList) =
         {
             var mappedRatio: Double = 0
             mappedRatio = getNumberOfMappedProperties(ignoreList).toDouble / getNumberOfProperties(ignoreList).toDouble
             mappedRatio
         }
 
-        def getNumberOfPropertyOccurrences(ignoreList : IgnoreList) =
+        def getNumberOfPropertyOccurrences(ignoreList: IgnoreList) =
         {
             var numPOs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
@@ -380,7 +473,7 @@ object CreateMappingStats
             numPOs
         }
 
-        def getNumberOfMappedPropertyOccurrences(ignoreList : IgnoreList) =
+        def getNumberOfMappedPropertyOccurrences(ignoreList: IgnoreList) =
         {
             var numMPOs: Int = 0
             for ((propName, (propCount, propIsMapped)) <- properties)
@@ -390,7 +483,7 @@ object CreateMappingStats
             numMPOs
         }
 
-        def getRatioOfMappedPropertyOccurrences(ignoreList : IgnoreList) =
+        def getRatioOfMappedPropertyOccurrences(ignoreList: IgnoreList) =
         {
             var mappedRatio: Double = 0
             mappedRatio = getNumberOfMappedPropertyOccurrences(ignoreList).toDouble / getNumberOfPropertyOccurrences(ignoreList).toDouble
@@ -407,7 +500,8 @@ object CreateMappingStats
 
         def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping], lang: Language) =
         {
-            val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, lang).substring(9)))
+            val templateNamespacePrefix = Namespaces.getNameForNamespace(lang, WikiTitle.Namespace.Template) + ":"
+            val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, lang).substring(templateNamespacePrefix.length())))
             mappedRedirrects.map(_.swap)
         }
     }
@@ -437,7 +531,6 @@ object CreateMappingStats
         }
         Server.logger.info((System.currentTimeMillis() - startTime) / 1000 + " s")
     }
-
 
 
     private def serialize(fileName: String, wikiStats: WikipediaStats)
