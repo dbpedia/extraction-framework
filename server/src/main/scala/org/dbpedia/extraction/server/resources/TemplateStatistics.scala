@@ -265,15 +265,18 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
     @Produces(Array("application/xhtml+xml"))
     def ignoreListAction(@PathParam("template") template: String, @PathParam("ignorelist") ignored: String) =
     {
-        if (ignored == "true")
+        if (Server.adminRights)
         {
-            ignoreList.removeTemplate(createMappingStats.decodeSlash(WikiUtil.wikiDecode(template)))
-            <h2>removed from ignore list</h2>
-        }
-        else
-        {
-            ignoreList.addTemplate(createMappingStats.decodeSlash(WikiUtil.wikiDecode(template)))
-            <h2>added to ignore list</h2>
+            if (ignored == "true")
+            {
+                ignoreList.removeTemplate(createMappingStats.decodeSlash(WikiUtil.wikiDecode(template)))
+                <h2>removed from ignore list</h2>
+            }
+            else
+            {
+                ignoreList.addTemplate(createMappingStats.decodeSlash(WikiUtil.wikiDecode(template)))
+                <h2>added to ignore list</h2>
+            }
         }
         val html =
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -292,7 +295,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
     }
 
     @GET
-    @Path("/admin")
+    @Path("/ihavethepowertoignore")
     @Produces(Array("application/xhtml+xml"))
     def setAdmin() =
     {

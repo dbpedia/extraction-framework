@@ -165,15 +165,18 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
     @Produces(Array("application/xhtml+xml"))
     def ignoreListAction(@PathParam("property") property: String, @PathParam("ignorelist") ignored: String) =
     {
-        if (ignored == "true")
+        if (Server.adminRights)
         {
-            ignoreList.removeProperty(WikiUtil.wikiDecode(template), URLDecoder.decode(property, "UTF-8"))
-            <h2>removed from ignore list</h2>
-        }
-        else
-        {
-            ignoreList.addProperty(WikiUtil.wikiDecode(template), URLDecoder.decode(property, "UTF-8"))
-            <h2>added to ignore list</h2>
+            if (ignored == "true")
+            {
+                ignoreList.removeProperty(WikiUtil.wikiDecode(template), URLDecoder.decode(property, "UTF-8"))
+                <h2>removed from ignore list</h2>
+            }
+            else
+            {
+                ignoreList.addProperty(WikiUtil.wikiDecode(template), URLDecoder.decode(property, "UTF-8"))
+                <h2>added to ignore list</h2>
+            }
         }
         val html =
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
