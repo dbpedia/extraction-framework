@@ -24,6 +24,8 @@ object Server
 
     val extractor : ExtractionManager = config.extractionManager
 
+    var adminRights : Boolean = false
+
     @volatile private var running = true
 
     def main(args : Array[String])

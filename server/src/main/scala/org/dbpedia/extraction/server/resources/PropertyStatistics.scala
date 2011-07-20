@@ -50,11 +50,6 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
     @Produces(Array("application/xhtml+xml"))
     def get =
     {
-        var statsMap: Map[MappingStats, Int] = Map()
-        for (mappingStat <- statistics)
-        {
-            statsMap += ((mappingStat, mappingStat.templateCount))
-        }
         val ms: MappingStats = getMappingStats(WikiUtil.wikiDecode(template))
         if (ms.==(null))
         {
@@ -148,11 +143,14 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                                 {name}
                                 <!--{createMappingStats.convertFromEscapedString(name)}-->
                             </td>
-                                <td>
-                                    <a href={URLEncoder.encode(name, "UTF-8") + "/" + isIgnored.toString}>
-                                        {ignoreMsg}
-                                    </a>
-                                </td>
+                                {if (Server.adminRights)
+                                {
+                                    <td>
+                                        <a href={URLEncoder.encode(name, "UTF-8") + "/" + isIgnored.toString}>
+                                            {ignoreMsg}
+                                        </a>
+                                    </td>
+                                }}
                             </tr>
                         }
                         }
