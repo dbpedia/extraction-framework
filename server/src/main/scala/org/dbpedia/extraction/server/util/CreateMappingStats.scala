@@ -19,13 +19,13 @@ import java.net.{URLDecoder, URLEncoder}
 class CreateMappingStats(val language: Language)
 {
 
-    val mappingStatsObjectFileName = "src/main/resources/mappingstats_" + language.wikiCode + ".obj"
+    val mappingStatsObjectFileName = "server/src/main/resources/mappingstats_" + language.wikiCode + ".obj"
 
-    val ignoreListFileName = "src/main/resources/ignoreList_" + language.wikiCode + ".obj"
-    val ignoreListTemplatesFileName = "src/main/resources/ignoreListTemplates_" + language.wikiCode + ".txt"
-    val ignoreListPropertiesFileName = "src/main/resources/ignoreListProperties_" + language.wikiCode + ".txt"
+    val ignoreListFileName = "server/src/main/resources/ignoreList_" + language.wikiCode + ".obj"
+    val ignoreListTemplatesFileName = "server/src/main/resources/ignoreListTemplates_" + language.wikiCode + ".txt"
+    val ignoreListPropertiesFileName = "server/src/main/resources/ignoreListProperties_" + language.wikiCode + ".txt"
 
-    val percentageFileName = "src/main/resources/percentage.en"
+    val percentageFileName = "server/src/main/resources/percentage.en"
 
     val encodedTemplateNamespacePrefix = doubleEncode(Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":", language)
     private val resourceNamespacePrefix = if (language.wikiCode == "de" || language.wikiCode == "el" ||
@@ -116,10 +116,6 @@ class CreateMappingStats(val language: Language)
         {
             statsMap += ((mappingStat, mappingStat.templateCount))
         }
-        val sortedStatsMap = ListMap(statsMap.toList.sortBy
-        {
-            case (key, value) => (-value, key)
-        }: _*)
 
         Server.logger.fine("countMappedStatistics: " + (System.currentTimeMillis() - startTime) / 1000 + " s")
         statistics
@@ -390,14 +386,17 @@ class CreateMappingStats(val language: Language)
         sb.toString
     }
 
+    /**
+     * / to %2F did not work, therefore this hack.
+     */
     def encodeSlash(url: String): String =
     {
-        url.replace("/", "%2F")
+        url.replace("/", "S-L-A-S-H")
     }
 
     def decodeSlash(url: String): String =
     {
-        url.replace("%2F", "/")
+        url.replace("S-L-A-S-H", "/")
     }
 }
 
