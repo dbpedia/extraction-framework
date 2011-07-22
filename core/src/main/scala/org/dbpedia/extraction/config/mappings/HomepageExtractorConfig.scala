@@ -7,13 +7,15 @@ object HomepageExtractorConfig
     //TODO rewritten as map, need to clean up per language
     //private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
     val propertyNamesMap = Map(
+        "ca" -> Set("pàgina", "web", "lloc"),
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
-        "en" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),
-        "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
+        "en" -> Set("website", "homepage", "web", "site"),
+        "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
         "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
-        "pl" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
-        "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
+        "ga" -> Set("suíomh"),
+        "pl" -> Set("web", "strona"),
+        "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
         "ru" -> Set("сайт")
     )
 
