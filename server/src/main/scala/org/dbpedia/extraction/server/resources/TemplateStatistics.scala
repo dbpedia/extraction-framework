@@ -242,7 +242,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                                         </td> <td align="right">
                                     {percentMappedPropOccur}
                                 </td>
-                                    {if (Server.adminRights)
+                                    {if (Server.adminRights && mappingStat.getNumberOfMappedProperties(ignoreList) == 0)
                                     {
                                         <td>
                                         <a href={createMappingStats.encodeSlash(WikiUtil.wikiEncode(mappingStat.templateName)) + "/" + isIgnored.toString}>

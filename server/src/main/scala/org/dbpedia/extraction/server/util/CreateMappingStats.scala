@@ -25,7 +25,7 @@ class CreateMappingStats(val language: Language)
     val ignoreListTemplatesFileName = "src/main/resources/ignoreListTemplates_" + language.wikiCode + ".txt"
     val ignoreListPropertiesFileName = "src/main/resources/ignoreListProperties_" + language.wikiCode + ".txt"
 
-    val percentageFileName = "src/main/resources/percentage.en"
+    val percentageFileName = "src/main/resources/percentage." + language.wikiCode
 
     val encodedTemplateNamespacePrefix = doubleEncode(Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":", language)
     private val resourceNamespacePrefix = if (language.wikiCode == "de" || language.wikiCode == "el" ||
@@ -183,7 +183,17 @@ class CreateMappingStats(val language: Language)
                 case ObjectPropertyTripleRegex(subj, pred, obj) =>
                 {
                     val templateName = stripUri(subj)
-                    if (templateName startsWith encodedTemplateNamespacePrefix)
+                    //TODO: adjust depending on encoding in redirects file
+                    var templateNamespacePrefix = ""
+                    if (language.wikiCode == "de" || language.wikiCode == "el" || language.wikiCode == "ru")
+                    {
+                        templateNamespacePrefix = doubleDecode(encodedTemplateNamespacePrefix, language)
+                    }
+                    else
+                    {
+                        templateNamespacePrefix = encodedTemplateNamespacePrefix
+                    }
+                    if (templateName startsWith templateNamespacePrefix)
                     {
                         redirects = redirects.updated(templateName, stripUri(obj))
                     }
