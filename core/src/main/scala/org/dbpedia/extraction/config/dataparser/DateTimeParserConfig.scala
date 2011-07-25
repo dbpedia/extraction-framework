@@ -70,12 +70,33 @@ object DateTimeParserConfig
 
         //alphabetically for other languages
 
+        "ca" -> Map(
+            "Edat"                  -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Data naixement i edat" -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Data naixement"        -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Data defunció i edat"  -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Data defunció"         -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Data d'inici i edat"   -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
+        ),
+        "cs" -> Map(
+            "Datum narození a věk"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Datum narození"        -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Datum úmrtí a věk"     -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Datum úmrtí"           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "věk v letech a dnech"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "věk ve dnech"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "věk"                   -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
         "el" -> Map(
             "ημερομηνία γέννησης και ηλικία"-> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "ημερομηνία θανάτου και ηλικία" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "ημερομηνία γέννησης"           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "ηθηλ"                          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "ηγη"                           -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
+        "eu" -> Map(
+            "adina"                -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "adin parentesigabea"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
         ),
         "pt" -> Map(
             "Nascimento"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
@@ -87,6 +108,37 @@ object DateTimeParserConfig
             "Falecimento2"-> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "Dtlink"      -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "Dtext"       -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
+        "ru" -> Map(
+            "Возраст"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "ДатаРождения" -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "ДатаСмерти"   -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Прошло лет"   -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Умер"         -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Родился"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+
+            // English template names
+            "Start date"           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Start date and age"   -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
+        "sl" -> Map(
+            "Datum rojstva"             -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Datum rojstva in starost"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Datum rojstva in starost2" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Datum smrti"               -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Datum smrti in starost"    -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Starost na datum"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Starost v letih in dnevih" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "starost"                   -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
+        "uk" -> Map(
+            "Дата з віком"        -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Вік"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Age"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Дата смерті з віком" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Дата народження"     -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Народився"           -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Дата смерті"         -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
         )
     )
 
