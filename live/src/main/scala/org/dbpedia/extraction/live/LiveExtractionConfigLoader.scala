@@ -329,21 +329,24 @@ object LiveExtractionConfigLoader extends ActionListener
   private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[Extractor] = {
       //Load the ontology at the beginning because it is a very heavy step so it's better to perform it only once in the beginning
 //      LiveExtractor.loadOntology(config.ontologySource);
-      org.dbpedia.extraction.live.extractor.LiveExtractor.loadOntology(this.ontologySource)
+      //org.dbpedia.extraction.live.extractor.LiveExtractor.loadOntology(this.ontologySource)
 
-      val emptySource = new MemorySource();
+      //val emptySource = new MemorySource();
 
-      org.dbpedia.extraction.live.extractor.LiveExtractor.loadRedirects(articlesSource);
+      //org.dbpedia.extraction.live.extractor.LiveExtractor.loadRedirects(articlesSource);
 //      LiveExtractor.makeExtractionContext(config.mappingsSource, emptySource, articlesSource, language)
-      org.dbpedia.extraction.live.extractor.LiveExtractor.makeExtractionContext(this.mappingsSource, emptySource, articlesSource, language)
+      //org.dbpedia.extraction.live.extractor.LiveExtractor.makeExtractionContext(this.mappingsSource, emptySource, articlesSource, language)
       //println(config.extractors(language))
 //      LiveExtractor.load(config.ontologySource, config.mappingsSource, emptySource, articlesSource, config.extractors(language), language)
 
 //      LiveExtractor.load(ontologySource, mappingsSource, emptySource, articlesSource,
 //        convertExtractorListToScalaList(LiveConfigReader.extractorClasses.get(language)), language)
 
-        org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, emptySource, articlesSource,
-          convertExtractorListToScalaList(LiveConfigReader.getExtractors(language,ExtractorStatus.ACTIVE)), language)
+//        org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, emptySource, articlesSource,
+//          convertExtractorListToScalaList(LiveConfigReader.getExtractors(language,ExtractorStatus.ACTIVE)), language)
+
+      val extractorClasses = convertExtractorListToScalaList(LiveConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
+      org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, articlesSource, extractorClasses, language)
     }
 
   /**
