@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.live.extractor
 
-import org.dbpedia.extraction.sources.Source
-import java.io.File
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.mappings.{Mappings, MappingsLoader, Extractor, Redirects}
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser}
+import org.dbpedia.extraction.sources.Source
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,61 +18,47 @@ import org.dbpedia.extraction.mappings.{Mappings, MappingsLoader, Extractor, Red
 
 object LiveExtractor
 {
-    private val redirectsCacheFile = new File("src/main/resources/redirects.cache")
-    private var _ontology : Ontology = null;
-    private var _redirects : Redirects = null;
-    private var MainContext : AnyRef = null;
     /**
-     * Creates a new extractor.
+     * Returns a list of extractors.
      *
-     * @param mappingsSource Source containing the mapping definitions
-     * @param commonsSource Source containing the pages from Wikipedia Commons
-     * @param articlesSource Source containing all articles
-     * @param extractors List of extractor classes to be instantiated
-     * @param language The language
-     * @return The extractor
+     * (maybe it would be possible to return a CompositeExtractor here (and load it with Extractor.load) ?)
      */
+    def load(ontologySource : Source,
+             mappingsSource : Source,
+             articlesSource : Source,
+             extractors : List[Class[Extractor]],
+             language : Language) : List[Extractor] =
+    {
+        val context = extractionContext(language, ontologySource, mappingsSource, articlesSource)
+        extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
+    }
 
-    //This method loads the ontology, and it is placed in a separate function in order to call it only once in the
-    //the beginning of the extraction process
-    //@param ontologySource Source containing the ontology definitions
-    def loadOntology(ontologySource: Source)
-      {
-        _ontology = new OntologyReader().read(ontologySource)
-      }
-
-
-    //This function loads the redirects
-    def loadRedirects(articlesSource : Source)
-      {
-         //redirects = Redirects.load(redirectsCacheFile, articlesSource)
-        _redirects = Redirects.loadFromSource(articlesSource)
-      }
-
-    //This function builds the extraction context in the beginning in order to speed up the process of live extraction
-    def makeExtractionContext(mappings : Source, commons : Source, articles : Source, lang : Language)
-      {
-        MainContext = new
+    /**
+     * Returns an AnyRef (anonymous class) object with all necessary methods needed as extraction context.
+     * The different attributes are loaded only once and only if they are required.
+     *
+     * IMPORTANT: the context for the live extraction does not contain a commonsSource at the moment! (e.g. for ImageExtractor)
+     */
+    private def extractionContext(lang : Language, _ontologySource : Source, _mappingsSource : Source, _articlesSource : Source) =
+    {
+        new
         {
-            def ontology : Ontology = _ontology
             def language : Language = lang
-            def redirects : Redirects = _redirects
-            def mappingsSource : Source = mappings
-            def commonsSource : Source = commons
-            def articlesSource : Source = articles
+
+            private lazy val _ontology = new OntologyReader().read(_ontologySource)
+            def ontology : Ontology = _ontology
+
+            private lazy val _mappingPageSource = _mappingsSource.map(WikiParser())
+            def mappingPageSource : Traversable[PageNode] = _mappingPageSource
 
             private lazy val _mappings = MappingsLoader.load(this)
             def mappings : Mappings = _mappings
+
+            def articlesSource : Source = _articlesSource
+
+            private lazy val _redirects = Redirects.load(articlesSource, language)
+            def redirects : Redirects = _redirects
         }
-      }
-
-
-  def load(ontologySource : Source, mappingsSource : Source, commonsSource : Source, articlesSource : Source,
-             extractors : List[Class[Extractor]], language : Language) : List[Extractor] =
-    {
-      val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(MainContext))
-
-      return extractorInstances;
     }
 
 }
