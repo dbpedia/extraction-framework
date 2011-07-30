@@ -14,7 +14,7 @@ class Quad(	val language : Language,
 		    val predicate : String,
 		    val value : String,
 		    val context : String,
-		    val datatype : Datatype )
+		    var datatype : Datatype )
 {
     //Validate input
 	if(subject == null) throw new NullPointerException("subject")
@@ -35,7 +35,7 @@ class Quad(	val language : Language,
 		     predicate : OntologyProperty,
 		     value : String,
 		     context : String,
-		     datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, datatype)
+		     datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
 
 
     def renderNTriple = render(false)
