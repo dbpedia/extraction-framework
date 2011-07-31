@@ -10,13 +10,13 @@ import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.StringDestination
 import org.dbpedia.extraction.destinations.formatters.TriXFormatter
 import java.net.{URI, URL}
-import xml.{NodeBuffer, Elem}
 import java.lang.Exception
+import xml.{ProcInstr, XML, NodeBuffer, Elem}
 
 /*
- * TODO document input: http://www.mediawiki.org/xml/export-0.4
- * TODO document output: according to the DTD as provided in Appendix A of the Java Logging API specification.
- */
+* TODO document input: http://www.mediawiki.org/xml/export-0.4
+* TODO document output: according to the DTD as provided in Appendix A of the Java Logging API specification.
+*/
 @Path("mappings/{lang}")
 class Mappings(@PathParam("lang") langCode : String) extends Base
 {
@@ -66,7 +66,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Retrieves a mapping page
      */
     @GET
-    @Path("/pages/{title}")
+    @Path("/pages/{title: .+$}")
     @Produces(Array("application/xml"))
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
@@ -79,7 +79,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Writes a mapping page
      */
     @PUT
-    @Path("/pages/{title}")
+    @Path("/pages/{title: .+$}")
     @Consumes(Array("application/xml"))
     def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem)
     {
@@ -105,7 +105,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Deletes a mapping page
      */
     @DELETE
-    @Path("/pages/{title}")
+    @Path("/pages/{title: .+$}")
     @Consumes(Array("application/xml"))
     def deletePage(@PathParam("title") @Encoded title : String)
     {
@@ -134,12 +134,13 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Validates a mapping page from the Wiki.
      */
     @GET
-    @Path("/validate/{title}")
+    @Path("/validate/{title: .+$}")
     @Produces(Array("application/xml"))
     def validateExistingPage(@PathParam("title") @Encoded title : String) =
     {
         var nodes = new NodeBuffer()
-        nodes += <?xml-stylesheet type="text/xsl" href="../../../stylesheets/log.xsl"?>
+        val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
+        nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
         nodes += Server.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parseEncoded(title) :: Nil, new URL("http://mappings.dbpedia.org/api.php")), language)
         nodes
     }
@@ -148,7 +149,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Validates a mapping source.
      */
     @POST
-    @Path("/validate/{title}")
+    @Path("/validate/{title: .+$}")
     @Consumes(Array("application/xml"))
     @Produces(Array("application/xml"))
     def validatePage(@PathParam("title") @Encoded title : String, pagesXML : Elem) =
@@ -156,7 +157,8 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         try
         {
             var nodes = new NodeBuffer()
-            nodes += <?xml-stylesheet type="text/xsl" href="../../../stylesheets/log.xsl"?>
+            val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
+            nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
             nodes += Server.extractor.validateMapping(XMLSource.fromXML(pagesXML), language)
             logger.info("Validated mapping page: " + title)
             nodes
@@ -188,7 +190,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
     }
 
     @GET
-    @Path("/extractionSamples/{title}")
+    @Path("/extractionSamples/{title: .+$}")
     @Produces(Array("application/xml"))
     def getExtractionSample(@PathParam("title") @Encoded title : String) : String =
     {
@@ -203,7 +205,8 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         val pageTitles = api.retrieveTemplateUsages(templateTitle, 10)
 
         //Extract pages
-        val destination = new StringDestination(new TriXFormatter(new URI("../../../stylesheets/trix.xsl")))
+        val stylesheetUri = new URI(("../" * title.count(_ == '/')) + "../../../stylesheets/trix.xsl")  // if there are slashes in the title, the stylesheets are further up in the directory tree
+        val destination = new StringDestination(new TriXFormatter(stylesheetUri))
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         Server.extractor.extract(source, destination, language)
         destination.close()
