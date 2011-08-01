@@ -41,6 +41,14 @@ object ParserUtilsConfig
             "biliony" -> 12,
             "bilionów" -> 12,
             "bln" -> 12
+        ),
+        "es" -> Map(
+            "mil" -> 3,
+            "millón" -> 6,
+            "millardo" -> 9,
+            "billón" -> 12,
+            "trillón" -> 18,
+            "cuatrillón" -> 24
         )
     )
 

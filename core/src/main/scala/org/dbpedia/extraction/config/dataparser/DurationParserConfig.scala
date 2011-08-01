@@ -92,6 +92,26 @@ object DurationParserConfig
             "anos" -> "year",
             "año" -> "year",
             "años" -> "year"
+        ),
+        "es" -> Map(
+            "segundo" -> "second",
+            "segundos" -> "second",
+            "seg" -> "second",
+            "segs" -> "second",
+            "minuto" -> "minute",
+            "minutos" -> "minute",
+            "min" -> "minute",
+            "mins" -> "minute",
+            "hora" -> "hour",
+            "horas" -> "hour",
+            "dia" -> "day",
+            "dias" -> "day",
+            "día" -> "day",
+            "días" -> "day",
+            "mes" -> "month",
+            "meses" -> "month",
+            "año" -> "year",
+            "años" -> "year"
         )
     )
 }
