@@ -68,6 +68,9 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
             Server.logger.fine("ratioTemp: " + percentageMappedProps)
             Server.logger.fine("ratioTempUses: " + percentageMappedPropOccurrences)
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                </head>
                 <body>
 
                     <h2 align="center">Template Statistics  for <a href={mappingUrlPrefix + template}>{WikiUtil.wikiDecode(template)}</a></h2>

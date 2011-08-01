@@ -80,6 +80,9 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
         //Server.logger.info("ratioTemp: " + percentageMappedTemplates)
         //Server.logger.info("ratioTempUses: " + percentageMappedTemplateOccurrences)
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+            <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            </head>
             <body>
                 <h2 align="center">Mapping Statistics for <u>{langCode}</u></h2>
                 <p align="center">
