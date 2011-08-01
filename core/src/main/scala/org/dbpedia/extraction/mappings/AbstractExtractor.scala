@@ -20,11 +20,9 @@ class AbstractExtractor( context : {
                              def ontology : Ontology
                              def language : Language } ) extends Extractor
 {
-    private val maxRetries = 2
+    private val maxRetries = 3
 
-    private var addedTitleCounter = 0
-
-    private val timeoutMs = 5000
+    private val timeoutMs = 4000
 
     private val language = context.language.wikiCode
 
@@ -68,14 +66,6 @@ class AbstractExtractor( context : {
         val quadLong = new Quad(context.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, pageNode.sourceUri)
         val quadShort = new Quad(context.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, pageNode.sourceUri)
 
-
-
-        if(addedTitleCounter%10 == 0 && addedTitleCounter != 0)
-        {
-            println("added title: "+addedTitleCounter)
-        }
-
-
         if(shortText.isEmpty)
         {
             new Graph(List(quadLong))
@@ -95,7 +85,7 @@ class AbstractExtractor( context : {
      */
     def retrievePage(pageTitle : WikiTitle, pageWikiText : String) : String =
     {
-        for(_ <- 0 to maxRetries)
+        for(_ <- 1 to maxRetries)
         {
             try
             {
@@ -106,6 +96,8 @@ class AbstractExtractor( context : {
                 val url = new URL(apiUrl)
                 val conn = url.openConnection
                 conn.setDoOutput(true)
+                conn.setConnectTimeout(timeoutMs)
+                conn.setReadTimeout(timeoutMs)
                 val writer = new OutputStreamWriter(conn.getOutputStream)
                 writer.write(parameters)
                 writer.flush()
