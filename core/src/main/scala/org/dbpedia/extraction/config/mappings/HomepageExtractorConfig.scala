@@ -10,7 +10,7 @@ object HomepageExtractorConfig
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
         "en" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),
-        "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
+        "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
         "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
         "pl" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "strona", "página", "sitio", "pagina"),/*cleanup*/
