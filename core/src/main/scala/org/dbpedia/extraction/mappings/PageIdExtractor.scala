@@ -20,9 +20,9 @@ class PageIdExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        val objectLink = "http://" + language + ".wikipedia.org/wiki/" + node.root.title.encoded
+        val objectLink = "http://" + language + ".wikipedia.org/wiki/" + node.root.title.encodedWithNamespace
 
-        new Graph(new Quad(context.language, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
-            node.id.toString, node.sourceUri, context.ontology.getDatatype("xsd:integer").get ))
+        new Graph(new Quad( context.language, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
+                            node.id.toString, node.sourceUri, context.ontology.getDatatype("xsd:integer").get ))
     }
 }
