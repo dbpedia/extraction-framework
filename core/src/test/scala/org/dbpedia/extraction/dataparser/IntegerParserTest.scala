@@ -75,7 +75,7 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
         val textNode = new TextNode(input, 1)
 
         val inputDatatype = datatypes(datatypeName)
-        val validRange : (Int => Boolean) = inputDatatype.name match
+        val validRange : (Double => Boolean) = inputDatatype.name match
         {
             case "xsd:integer" => (i => true)
             case "xsd:positiveInteger"    => (i => i > 0)
