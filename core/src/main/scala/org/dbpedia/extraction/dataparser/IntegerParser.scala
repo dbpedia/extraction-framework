@@ -3,18 +3,17 @@ package org.dbpedia.extraction.dataparser
 import java.util.logging.{Logger,Level}
 import org.dbpedia.extraction.wikiparser.Node
 import java.text.{NumberFormat, ParseException}
-import java.math.RoundingMode
 import org.dbpedia.extraction.util.Language
+
 /**
  * Parses integer numbers.
  */
 class IntegerParser( extractionContext : { def language : Language } ,
                      strict : Boolean = false,
-                     multiplicationFactor : Int = 1,
-                     validRange : Int => Boolean = (i => true)) extends DataParser
+                     multiplicationFactor : Double = 1.0,
+                     validRange : Double => Boolean = (i => true)) extends DataParser
 {
-    private val numberFormat = NumberFormat.getIntegerInstance(extractionContext.language.locale)
-    numberFormat.setRoundingMode(RoundingMode.HALF_UP)
+    private val numberFormat = NumberFormat.getNumberInstance(extractionContext.language.locale)
 
     private val parserUtils = new ParserUtils(extractionContext)
 
@@ -28,15 +27,15 @@ class IntegerParser( extractionContext : { def language : Language } ,
     {
         for( text <- StringParser.parse(node);
              convertedText = parserUtils.convertLargeNumbers(text);
-             value <- parseIntegerValue(convertedText) )
+             value <- parseValue(convertedText) )
         {
-            return Some(value * multiplicationFactor)
+            return Some((value * multiplicationFactor).round.toInt)
         }
 
         None
     }
 
-    private def parseIntegerValue(input : String) : Option[Int] =
+    private def parseValue(input : String) : Option[Double] =   // double is returned because
     {
 
         val numberStr = if(strict) input.trim else IntegerRegex.findFirstMatchIn(input.trim) match
@@ -51,10 +50,10 @@ class IntegerParser( extractionContext : { def language : Language } ,
 
         try
         {
-            val resultInt = numberFormat.parse(numberStr).intValue
-            if( validRange(resultInt) )
+            val result = numberFormat.parse(numberStr).doubleValue
+            if( validRange(result) )
             {
-                Some(resultInt)
+                Some(result)
             }
             else
             {
