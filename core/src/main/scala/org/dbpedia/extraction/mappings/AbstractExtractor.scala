@@ -54,10 +54,12 @@ class AbstractExtractor( context : {
         if(abstractWikiText == "") return new Graph()
 
         //Retrieve page text
-        val text = postProcess( pageNode.title, retrievePage(pageNode.title, abstractWikiText) )
+        var text = retrievePage(pageNode.title, abstractWikiText)
 
         //Ignore empty abstracts
         if(text.trim.isEmpty) return new Graph()
+
+        text = postProcess(pageNode.title, text)
 
         //Create a short version of the abstract
         val shortText = short(text)
@@ -104,7 +106,7 @@ class AbstractExtractor( context : {
                 writer.close()
 
                 // Read answer
-                return postProcess(pageTitle, readInAbstract(conn.getInputStream))
+                readInAbstract(conn.getInputStream)
             }
             catch
             {
