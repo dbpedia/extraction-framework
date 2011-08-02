@@ -13,7 +13,7 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
                              ontologyProperty : OntologyProperty,
                              unit : Datatype,
                              private var language : Language,
-                             factor : Number,
+                             factor : Double,
                              context : {
                                  def ontology : Ontology
                                  def redirects : Redirects  // redirects required by DateTimeParser and UnitValueParser
@@ -73,8 +73,8 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
             checkMultiplicationFactor("foaf:homepage")
             new LinkParser()
         }
-        case dt : UnitDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor.doubleValue())
-        case dt : DimensionDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor.doubleValue())
+        case dt : UnitDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
+        case dt : DimensionDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
         case dt : EnumerationDatatype =>
         {
             checkMultiplicationFactor("EnumerationDatatype")
@@ -82,13 +82,13 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
         }
         case dt : Datatype => dt.name match
         {
-            case "xsd:integer" => new IntegerParser(context, multiplicationFactor = factor.intValue())
-            case "xsd:positiveInteger"    => new IntegerParser(context, multiplicationFactor = factor.intValue(), validRange = (i => i > 0))
-            case "xsd:nonNegativeInteger" => new IntegerParser(context, multiplicationFactor = factor.intValue(), validRange = (i => i >=0))
-            case "xsd:nonPositiveInteger" => new IntegerParser(context, multiplicationFactor = factor.intValue(), validRange = (i => i <=0))
-            case "xsd:negativeInteger"    => new IntegerParser(context, multiplicationFactor = factor.intValue(), validRange = (i => i < 0))
-            case "xsd:double" => new DoubleParser(context, multiplicationFactor = factor.doubleValue())
-            case "xsd:float" => new DoubleParser(context, multiplicationFactor = factor.doubleValue())
+            case "xsd:integer" => new IntegerParser(context, multiplicationFactor = factor)
+            case "xsd:positiveInteger"    => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i > 0))
+            case "xsd:nonNegativeInteger" => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i >=0))
+            case "xsd:nonPositiveInteger" => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i <=0))
+            case "xsd:negativeInteger"    => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i < 0))
+            case "xsd:double" => new DoubleParser(context, multiplicationFactor = factor)
+            case "xsd:float" => new DoubleParser(context, multiplicationFactor = factor)
             case "xsd:string" =>
             {
                 checkMultiplicationFactor("xsd:string")
