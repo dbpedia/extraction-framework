@@ -48,7 +48,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
                     {
                         return Some(getUri(destination, pageNode))
                     }
-                    case None =>
+                    case _ =>
                 }
 
                 //resolve templates to create links
