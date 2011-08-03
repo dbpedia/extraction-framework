@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.server.util
 
-import collection.immutable.ListMap
 import io.Source
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
@@ -15,6 +14,8 @@ import java.net.{URLDecoder, URLEncoder}
 
 /**
  * Script to gather statistics about mappings: how often they are used, which properties are used and for what mappings exist.
+ * Take care of dump encodings. I had problems with the german redirects dump and had to delete all triples with a % sign.
+ * There were only a few irrelevant templates, therefore it isn't a big deal.
  */
 class CreateMappingStats(val language: Language)
 {
