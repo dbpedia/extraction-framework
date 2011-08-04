@@ -146,6 +146,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
                         <td>num property occurrences</td> <td>mapped property occurrences (%)</td> <td></td>
                     </tr>
                     {
+                    // TODO: Solve problem of templates for which no properties are found in the template documentation (e.g. Geobox).
                     for ((mappingStat, counter) <- sortedStatsMap.filter(_._1.getNumberOfProperties(ignoreList) > 0)) yield
                         {
                             val decodedTemplateName = createMappingStats.doubleDecode(createMappingStats.encodedTemplateNamespacePrefix, language) + mappingStat.templateName
