@@ -106,7 +106,7 @@ class AbstractExtractor( context : {
                 writer.close()
 
                 // Read answer
-                readInAbstract(conn.getInputStream)
+                return readInAbstract(conn.getInputStream)
             }
             catch
             {
