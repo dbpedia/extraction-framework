@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InternalLinkNode, Node}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
 
 /**
  * Extracts links from concepts to categories using the SKOS vocabulary.
@@ -19,21 +19,27 @@ class ArticleCategoriesExtractor( context : {
     {
         if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
         
-        var quads = List[Quad]()
+        val links = collectCategoryLinks(node).filter(isCategoryForArticle(_))
 
-        val list = collectInternalLinks(node)
-        list.foreach(link => {
-            quads ::= new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
-        })
+        val quads : List[Quad] = links.map(link =>
+            new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
+        )
+
         new Graph(quads)
     }
 
-    private def collectInternalLinks(node : Node) : List[InternalLinkNode] =
+    private def isCategoryForArticle(linkNode : InternalLinkNode) = linkNode.destinationNodes match
+    {
+        case TextNode(text, _) :: Nil  => !text.startsWith(":")  // links starting wih ':' are actually only related, not the category of this article
+        case _ => true
+    }
+
+    private def collectCategoryLinks(node : Node) : List[InternalLinkNode] =
     {
         node match
         {
             case linkNode : InternalLinkNode if linkNode.destination.namespace == WikiTitle.Namespace.Category => List(linkNode)
-            case _ => node.children.flatMap(collectInternalLinks)
+            case _ => node.children.flatMap(collectCategoryLinks)
         }
     }
 
