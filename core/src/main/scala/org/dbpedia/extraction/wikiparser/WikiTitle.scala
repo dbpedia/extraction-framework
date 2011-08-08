@@ -53,7 +53,7 @@ class WikiTitle(val decoded : String, val namespace : WikiTitle.Namespace = Wiki
      */
     def sourceUri = "http://" + language.filePrefix + ".wikipedia.org/wiki/"  + encoded
     
-    override def toString() = language + ":" + decodedWithNamespace
+    override def toString = language + ":" + decodedWithNamespace
 
     override def equals(other : Any) = other match
     {
@@ -186,6 +186,12 @@ object WikiTitle
         // TODO: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
 
         var parts = link.split(":").toList
+
+        //Make Scala's split function behave like Python's: if string ends with character to split, last element is empty string
+        if(link.endsWith(":"))
+        {
+            parts = parts ::: List("")
+        }
 
         var leadingColon = false
         var isInterlanguageLink = false
