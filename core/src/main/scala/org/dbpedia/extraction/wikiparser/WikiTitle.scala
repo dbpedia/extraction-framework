@@ -185,13 +185,7 @@ object WikiTitle
     {
         // TODO: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
 
-        var parts = link.split(":").toList
-
-        //Make Scala's split function behave like Python's: if string ends with character to split, last element is empty string
-        if(link.endsWith(":"))
-        {
-            parts = parts ::: List("")
-        }
+        var parts = link.split(":", -1).toList
 
         var leadingColon = false
         var isInterlanguageLink = false
