@@ -83,10 +83,10 @@ case class TemplateMapping( mapToClass : OntologyClass,
         //Collect all classes
         def collectClasses(clazz : OntologyClass) : List[OntologyClass] =
         {
-            clazz :: clazz.subClassOf.toList.flatMap(collectClasses)
+            clazz :: clazz.subClassOf.flatMap(collectClasses) ::: clazz.equivalentClasses.flatMap(collectClasses).toList
         }
 
-        val classes = collectClasses(mapToClass)
+        val classes = collectClasses(mapToClass).distinct
 
         //Set annotations
         node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
@@ -102,7 +102,7 @@ case class TemplateMapping( mapToClass : OntologyClass,
                                                          context.ontology.getProperty("rdf:type").get,
                                                          clazz.uri, node.sourceUri )
 
-        new Graph(quads)
+        new Graph(quads.toList)
     }
 
     /**

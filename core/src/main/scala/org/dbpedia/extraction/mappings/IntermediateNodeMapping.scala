@@ -78,6 +78,11 @@ case class IntermediateNodeMapping(nodeClass : OntologyClass,
                 thisGraph = writeTypes(baseClass, thisGraph)
             }
 
+            for(eqClass <- clazz.equivalentClasses)
+            {
+                thisGraph = writeTypes(eqClass, thisGraph)
+            }
+
             thisGraph
         }
 
