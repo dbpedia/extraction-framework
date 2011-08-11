@@ -119,11 +119,11 @@ class CalculateMapping( val templateProperty1 : String,
         //Collect all classes
         def collectClasses(clazz : OntologyClass) : List[OntologyClass] =
         {
-            clazz :: clazz.subClassOf.toList.flatMap(collectClasses)
+            clazz :: clazz.subClassOf.flatMap(collectClasses) ::: clazz.equivalentClasses.flatMap(collectClasses).toList
         }
 
         //Write specific properties
-        for(currentClass <- collectClasses(ontologyProperty.domain))
+        for(currentClass <- collectClasses(ontologyProperty.domain).distinct)
         {
             for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {

@@ -39,6 +39,11 @@ class TableMapping( mapToClass : OntologyClass,
                 thisGraph = graph.merge(writeType(rowNode, instanceUri, baseClass, thisGraph))
             }
 
+            for(eqClass <- clazz.equivalentClasses)
+            {
+                thisGraph = graph.merge(writeType(rowNode, instanceUri, eqClass, thisGraph))
+            }
+
             thisGraph
         }
 
