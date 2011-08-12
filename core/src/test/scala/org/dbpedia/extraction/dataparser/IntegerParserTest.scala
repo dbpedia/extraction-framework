@@ -66,7 +66,7 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
 
     private val datatypes = OntologyDatatypes.load().map(dt => (dt.name, dt)).toMap
 
-    private def parse( lang : String, input : String, strict : Boolean = false, datatypeName : String = "xsd:integer" ) : Option[Int] =
+    private def parse( lang : String, input : String, strict : Boolean = false, datatypeName : String = "xsd:integer" ) : Option[Long] =
     {
         val context = new
         {
