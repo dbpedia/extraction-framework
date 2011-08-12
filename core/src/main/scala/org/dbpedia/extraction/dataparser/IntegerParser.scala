@@ -23,13 +23,13 @@ class IntegerParser( extractionContext : { def language : Language } ,
 
     private val IntegerRegex = """\D*?(\-?[0-9\-\,\.]+).*""".r
 
-    override def parse(node : Node) : Option[Int] =
+    override def parse(node : Node) : Option[Long] =
     {
         for( text <- StringParser.parse(node);
              convertedText = parserUtils.convertLargeNumbers(text);
              value <- parseValue(convertedText) )
         {
-            return Some((value * multiplicationFactor).round.toInt)
+            return Some((value * multiplicationFactor).round)
         }
 
         None
