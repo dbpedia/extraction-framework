@@ -30,7 +30,8 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
           val mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.title.toString, Language.Default)
           val templateTitle = new WikiTitle(mappingTitle.decoded, WikiTitle.Namespace.Template, Language.Default)
 
-          val wikiApiUrl = new URL("http://" + Language.Default.wikiCode + ".wikipedia.org/w/api.php")
+          //val wikiApiUrl = new URL("http://" + Language.Default.wikiCode + ".wikipedia.org/w/api.php")
+          val wikiApiUrl = new URL("http://live.dbpedia.org/syncw/api.php")
           val api = new WikiApi(wikiApiUrl, Language.Default)
 
           val pageIDs = api.retrieveTemplateUsageIDs(templateTitle, 500);
