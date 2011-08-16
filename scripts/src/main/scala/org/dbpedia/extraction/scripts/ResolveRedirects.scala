@@ -10,7 +10,7 @@ import java.io.{FileOutputStream, File, PrintStream}
  */
 object ResolveRedirects
 {
-    val REPLACE_ORIGINAL_FILE = false  // if set to true, the original files are renamed to "filename.unresolvedRedirects" and the resolved ones get the original name
+    val REPLACE_ORIGINAL_FILE = true  // if set to true, the original files are renamed to "filename.unresolvedRedirects" and the resolved ones get the original name
 
     def main(args : Array[String])
     {
@@ -85,7 +85,7 @@ object ResolveRedirects
                 {
                     case Some(resolvedUri) =>
                     {
-                        println("  resolved "+objUri+" -> "+resolvedUri)
+                        //println("  resolved "+objUri+" -> "+resolvedUri)
                         out.println(line.replace(obj, unstripUri(resolvedUri, resourceNamespacePrefix)))
                         resolvedRedirects += 1
                         resolvedUri
@@ -108,8 +108,8 @@ object ResolveRedirects
         println("Resolved "+resolvedRedirects+" redirects in "+resolvedFileName)
     }
 
-    private val ObjectPropertyQuadsRegex = """^(<[^>]+>) (<[^>]+>) (<[^>]+>) (<[^>]+>)?\.$""".r
-    private val DatatypePropertyQuadsRegex = """^(<[^>]+>) (<[^>]+>) (".+"\S*) (<[^>]+>)?\.$""".r
+    private val ObjectPropertyQuadsRegex = """^(<[^>]+>) (<[^>]+>) (<[^>]+>) (<[^>]+>)? ?\.$""".r
+    private val DatatypePropertyQuadsRegex = """^(<[^>]+>) (<[^>]+>) (".+"\S*) (<[^>]+>)? ?\.$""".r
     private class LineSubjectObjectSource(fileName : String) extends Traversable[(String,String,String)]
     {
         override def foreach[U](f : ((String,String,String)) => U)
