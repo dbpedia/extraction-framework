@@ -2,12 +2,12 @@ package org.dbpedia.extraction.server
 
 import _root_.org.dbpedia.extraction.util.Language
 import java.net.URL
-import org.dbpedia.extraction.mappings.{MappingExtractor, Extractor, LabelExtractor}
+import org.dbpedia.extraction.mappings._
 
 class Configuration
 {
     /** The extraction languages */
-    val languages = Set("en", "de", "fr", "pl", "it", "es", "ru", "pt", "nl", "ca", "hu", "tr", "sl", "hr", "el", "ga").flatMap(Language.fromWikiCode(_))
+    val languages = Set("en", "de", "fr", "pl", "it", "es", "ru", "pt", "nl", "ca", "hu", "ko", "tr", "sl", "hr", "el", "ga").flatMap(Language.fromWikiCode(_))
 
     /** The extractors */
     val extractors = List(
