@@ -8,6 +8,7 @@ import org.dbpedia.extraction.util.Language
 /**
  * Represents a statement in the N-Quads format (see: http://sw.deri.org/2008/07/n-quads/)
  */
+//TODO write out equivalent properties
 class Quad(	val language : Language,
             val dataset : Dataset,
             val subject : String,
@@ -66,13 +67,23 @@ class Quad(	val language : Language,
             {
                 sb append '"'
                 escapeString(sb, value) //sb append value //#int 
-                sb append "\"^^<" append datatype.uri append "> "
+                sb append "\"^^<"
+                escapeString(sb, datatype.uri)
+                sb append "> "
             }
         }
         else
         {
             sb append '<'
-            sb append value //this must not be escaped, it is a URI/IRI   //TODO URIs should be escaped if they contain unicode chars! (for example homepages) -> Max: maybe we should have DBpediaURI and OtherURI as well as Literal objects?
+
+            //HACK
+            //TODO find a good solution for this
+            //maybe we should have DBpediaURI and OtherURI as well as Literal objects?
+            if(predicate == "http://xmlns.com/foaf/0.1/homepage")
+                escapeString(sb, value) // escape unicode in homepage URI
+            else
+                sb append value //this must not be escaped, it is a URI/IRI
+
             sb append "> "
         }
 

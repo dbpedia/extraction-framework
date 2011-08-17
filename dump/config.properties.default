@@ -1,6 +1,6 @@
 dumpDir=d:/wikipediaDump
 outputDir=d:/output
-updateDumps=true
+updateDumps=false
 
 extractors=org.dbpedia.extraction.mappings.LabelExtractor \
            org.dbpedia.extraction.mappings.GeoExtractor \
@@ -11,30 +11,40 @@ extractors=org.dbpedia.extraction.mappings.LabelExtractor \
 extractors.en=org.dbpedia.extraction.mappings.MappingExtractor \
               org.dbpedia.extraction.mappings.ArticleCategoriesExtractor \
               org.dbpedia.extraction.mappings.CategoryLabelExtractor \
+              org.dbpedia.extraction.mappings.DisambiguationExtractor \
               org.dbpedia.extraction.mappings.ExternalLinksExtractor \
               org.dbpedia.extraction.mappings.HomepageExtractor \
               org.dbpedia.extraction.mappings.ImageExtractor \
+              org.dbpedia.extraction.mappings.InterLanguageLinksExtractorExtractor \
               org.dbpedia.extraction.mappings.PersondataExtractor \
-              org.dbpedia.extraction.mappings.PndExtractor \
-              org.dbpedia.extraction.mappings.SkosCategoriesExtractor \
               org.dbpedia.extraction.mappings.PageIdExtractor \
+              org.dbpedia.extraction.mappings.PndExtractor \
+              org.dbpedia.extraction.mappings.RedirectExtractor \
               org.dbpedia.extraction.mappings.RevisionIdExtractor \
-              org.dbpedia.extraction.mappings.DisambiguationExtractor \
-              org.dbpedia.extraction.mappings.RedirectExtractor
+              org.dbpedia.extraction.mappings.SkosCategoriesExtractor
 
-extractors.ca=org.dbpedia.extraction.mappings.MappingExtractor
+extractors.ca=org.dbpedia.extraction.mappings.MappingExtractor \
+              org.dbpedia.extraction.mappings.DisambiguationExtractor \
+              org.dbpedia.extraction.mappings.HomepageExtractor
 
 extractors.de=org.dbpedia.extraction.mappings.MappingExtractor \
+              org.dbpedia.extraction.mappings.DisambiguationExtractor \
               org.dbpedia.extraction.mappings.HomepageExtractor \
+              org.dbpedia.extraction.mappings.ImageExtractor \
+              org.dbpedia.extraction.mappings.InterLanguageLinksExtractorExtractor \
               org.dbpedia.extraction.mappings.PersondataExtractor \
               org.dbpedia.extraction.mappings.PndExtractor
 
 extractors.el=org.dbpedia.extraction.mappings.MappingExtractor \
+              org.dbpedia.extraction.mappings.DisambiguationExtractor \
               org.dbpedia.extraction.mappings.HomepageExtractor \
-              org.dbpedia.extraction.mappings.ImageExtractor
+              org.dbpedia.extraction.mappings.ImageExtractor \
+              org.dbpedia.extraction.mappings.InterLanguageLinksExtractorExtractor
 
 extractors.es=org.dbpedia.extraction.mappings.MappingExtractor \
-              org.dbpedia.extraction.mappings.HomepageExtractor
+              org.dbpedia.extraction.mappings.DisambiguationExtractor \
+              org.dbpedia.extraction.mappings.HomepageExtractor \
+              org.dbpedia.extraction.mappings.ImageExtractor
 
 extractors.fr=org.dbpedia.extraction.mappings.MappingExtractor \
               org.dbpedia.extraction.mappings.HomepageExtractor
@@ -46,16 +56,25 @@ extractors.hr=org.dbpedia.extraction.mappings.MappingExtractor
 
 extractors.hu=org.dbpedia.extraction.mappings.MappingExtractor
 
-extractors.it=org.dbpedia.extraction.mappings.MappingExtractor
+extractors.it=org.dbpedia.extraction.mappings.MappingExtractor \
+              org.dbpedia.extraction.mappings.DisambiguationExtractor
 
 extractors.nl=org.dbpedia.extraction.mappings.MappingExtractor
 
 extractors.pl=org.dbpedia.extraction.mappings.MappingExtractor \
-              org.dbpedia.extraction.mappings.HomepageExtractor
+              org.dbpedia.extraction.mappings.HomepageExtractor \
+              org.dbpedia.extraction.mappings.DisambiguationExtractor
 
-extractors.pt=org.dbpedia.extraction.mappings.MappingExtractor
+extractors.pt=org.dbpedia.extraction.mappings.MappingExtractor \
+              org.dbpedia.extraction.mappings.DisambiguationExtractor \
+              org.dbpedia.extraction.mappings.HomepageExtractor \
+              org.dbpedia.extraction.mappings.ImageExtractor
 
-extractors.ru=org.dbpedia.extraction.mappings.MappingExtractor
+extractors.ru=org.dbpedia.extraction.mappings.MappingExtractor \
+              org.dbpedia.extraction.mappings.DisambiguationExtractor \
+              org.dbpedia.extraction.mappings.HomepageExtractor \
+              org.dbpedia.extraction.mappings.ImageExtractor \
+              org.dbpedia.extraction.mappings.InterLanguageLinksExtractor
 
 extractors.sl=org.dbpedia.extraction.mappings.MappingExtractor
 
@@ -67,4 +86,3 @@ languages=en af an ar ast az bat-smg be be-x-old bg bn bpy br bs ca ceb cs \
           hy id io is it ja jv ka ko ksh ku la lb lmo lt lv mk ml mr ms nap \
           nds new nl nn no oc pl pms pt qu ro roa-rup ru scn sh simple sk \
           sl sq sr su sv sw ta te th tl tr uk ur vi vo wa war yo zh zh-yue
-
