@@ -274,7 +274,7 @@ class InfoboxExtractor( context : {
         // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
         result = TrailingNumberRegex.replaceFirstIn(result, "")
 
-        result = WikiUtil.wikiEncode(result, context.language)
+        result = WikiUtil.wikiEncode(result, context.language, false)  // false: do not capitalize
 
         //TODO add this as option in settings
         //result = result.replace("%", "_percent_")

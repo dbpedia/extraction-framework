@@ -89,7 +89,7 @@ public static String getHexString(byte[] b) throws Exception {
     }
     public static URI page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
-           String encPageID = WikiUtil.wikiEncode(pageID, Language.Default());
+           String encPageID = WikiUtil.wikiEncode(pageID, Language.Default(), true);
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
            //TODO make resource domain configurable
