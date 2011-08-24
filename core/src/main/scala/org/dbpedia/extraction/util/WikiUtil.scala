@@ -29,7 +29,7 @@ object WikiUtil
      * @param name Non-encoded MediaWiki page name, e.g. 'Émile Zola'.
      * Must not include the namespace (e.g. 'Template:').
      */
-    def wikiEncode(name : String, language : Language = Language.Default) : String =
+    def wikiEncode(name : String, language : Language = Language.Default, capitalize : Boolean = true) : String =
     {
         // replace spaces by underscores.
         // Note: MediaWiki apparently replaces only spaces by underscores, not other whitespace. 
@@ -47,7 +47,11 @@ object WikiUtil
         // make first character uppercase
         // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt. 
         // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
-        encoded = encoded.capitalizeLocale(language.locale)
+        // capitalize can be false for encoding property names, e.g. in the InfoboxExtractor
+        if(capitalize)
+        {
+            encoded = encoded.capitalizeLocale(language.locale)
+        }
 
         // URL-encode everything but ':' '/' '&' and ',' - just like MediaWiki
         encoded = URLEncoder.encode(encoded, "UTF-8");
@@ -70,11 +74,18 @@ object WikiUtil
      * @param name encoded MediaWiki page name, e.g. '%C3%89mile_Zola'.
      * Must not include the namespace (e.g. 'Template:').
      */
-    def wikiDecode(name : String, language : Language = Language.Default) : String =
+    def wikiDecode(name : String, language : Language = Language.Default, capitalize : Boolean = true) : String =
     {
         // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt.
         // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
-        cleanSpace(URLDecoder.decode(name, "UTF-8")).capitalizeLocale(language.locale)
+        var decoded = cleanSpace(URLDecoder.decode(name, "UTF-8"))
+
+        if(capitalize)
+        {
+            decoded = decoded.capitalizeLocale(language.locale)
+        }
+
+        decoded
     }
 
     private val wikiEmphasisRegex1 = "(?s)'''''(.*?)'''''".r
