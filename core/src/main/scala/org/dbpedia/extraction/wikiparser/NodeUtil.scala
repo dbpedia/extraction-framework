@@ -45,7 +45,7 @@ object NodeUtil
                     }
                 }
 
-                nodes ::= TextNode(sb.toString, line)
+                nodes ::= TextNode(sb.toString(), line)
             }
             case _  if (parenthesesCount <= 0) => nodes ::= child
             case _ =>
@@ -56,22 +56,25 @@ object NodeUtil
         //Set link to the original AST
         propertyNode.parent = node.parent
 
-        return propertyNode
+        propertyNode
     }
 
     /**
      * Utility function which splits a property node based on a regex
+     * If trimResults == true, the regex is extended to eat up whitespace at beginning and end when splitting.
      */
-    def splitPropertyNode(inputNode : PropertyNode, regex : String) : List[PropertyNode] =
+    def splitPropertyNode(inputNode : PropertyNode, regex : String, trimResults : Boolean = false) : List[PropertyNode] =
     {
         var propertyNodes = List[PropertyNode]()
         var currentNodes = List[Node]()
+
+        val fullRegex = if(trimResults) "\\s*(" + regex + ")\\s*" else regex
 
         for(child <- inputNode.children) child match
         {
             case TextNode(text, line) =>
             {
-                val parts = text.split(regex, -1)
+                val parts = text.split(fullRegex, -1)
 
                 for(i <- 0 until parts.size)
                 {
@@ -93,7 +96,10 @@ object NodeUtil
 
         //Add last property node
         currentNodes = currentNodes.reverse
-        propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+        if(currentNodes.nonEmpty)
+        {
+            propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+        }
 
         propertyNodes = propertyNodes.reverse
 
@@ -102,24 +108,27 @@ object NodeUtil
         val templateNodes = for(propertyNode <- propertyNodes) yield TemplateNode(inputTemplateNode.title, propertyNode :: Nil, inputTemplateNode.line)
 
         //Set link to the original AST
-        templateNodes.foreach(_.parent = inputTemplateNode.parent)
+        templateNodes.foreach(tnode => tnode.parent = inputTemplateNode.parent)
 
-        return propertyNodes
+        propertyNodes
     }
 
     /**
-     * Utility function which splits a text nodes based on a regex
+     * Utility function which splits a text nodes based on a regex  .
+     * If trimResults == true, the regex is extended to eat up whitespace at beginning and end when splitting.
      */
-    def splitNodes(inputNodes : List[Node], regex : String) : List[List[Node]] =
+    def splitNodes(inputNodes : List[Node], regex : String, trimResults : Boolean = false) : List[List[Node]] =
     {
         var splitNodes = List[List[Node]]()
         var currentNodes = List[Node]()
+
+        val fullRegex = if(trimResults) "\\s+(" + regex + ")\\s+" else regex
 
         for(child <- inputNodes) child match
         {
             case TextNode(text, line) =>
             {
-                val parts = text.split(regex, -1)
+                val parts = text.split(fullRegex, -1)
 
                 for(i <- 0 until parts.size)
                 {

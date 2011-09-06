@@ -3,15 +3,19 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.util.UriUtils
 import java.net.URI
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, IriRef}
-import org.dbpedia.extraction.destinations.{Quad}
+import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.wikiparser.{WikiTitle, PageNode, ExternalLinkNode, Node}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.{Language, UriUtils}
 
 /**
  * Extracts links to external web pages.
  */
-class ExternalLinksExtractor(extractionContext : ExtractionContext) extends Extractor
+class ExternalLinksExtractor( context : {
+                                  def ontology : Ontology
+                                  def language : Language } ) extends Extractor
 {
-    val wikiPageExternalLinkProperty = extractionContext.ontology.getProperty("wikiPageExternalLink")
+    val wikiPageExternalLinkProperty = context.ontology.getProperty("wikiPageExternalLink")
                                        .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageExternalLink' does not exist in DBpedia Ontology."))
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
@@ -24,8 +28,8 @@ class ExternalLinksExtractor(extractionContext : ExtractionContext) extends Extr
         {
             try
             {
-                quads ::= new Quad(DBpediaDatasets.ExternalLinks, new IriRef(subjectUri), new IriRef(wikiPageExternalLinkProperty),
-                    new IriRef(uri), new IriRef(link.sourceUri))
+                quads ::= new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty,
+                    uri, link.sourceUri, null)
             }
             catch
             {

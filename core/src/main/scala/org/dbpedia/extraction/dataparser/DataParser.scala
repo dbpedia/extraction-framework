@@ -1,13 +1,22 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, Node}
+import tools.nsc.doc.model.ProtectedInInstance
 
 /**
  * Extracts data from a node in the abstract syntax tree.
  * The type of the data which is extracted depends on the specific parser e.g. The IntegerParser extracts integers.
  */
-trait DataParser
+abstract class DataParser
 {
+
+    def parse( node : Node ) : Option[Any]
+
+    /**
+     * Parser dependent splitting of nodes. Default is overridden by some parsers.
+     */
+    val splitPropertyNodeRegex = """<br\s*\/?>|\n"""
+
     /**
      * (Split node and) return parse result.
      */
@@ -15,22 +24,12 @@ trait DataParser
     {
         if(split)
         {
-            splitPropertyNode(propertyNode).flatMap( node => parse(node).toList )
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => parse(node).toList )
         }
         else
         {
             parse(propertyNode).toList
         }
     }
-
-    /**
-     * Parser dependent splitting of nodes. Default implementation is overwritten by some parsers.
-     */
-    def splitPropertyNode( propertyNode : PropertyNode ) : List[Node] =
-    {
-        NodeUtil.splitPropertyNode(propertyNode, """<br\s*\/?>|\n""")
-    }
-
-    def parse( node : Node ) : Option[Any]
 
 }

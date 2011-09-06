@@ -10,21 +10,23 @@ import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.StringDestination
 import org.dbpedia.extraction.destinations.formatters.TriXFormatter
 import java.net.{URI, URL}
-import xml.{NodeBuffer, Elem}
+import java.lang.Exception
+import xml.{ProcInstr, XML, NodeBuffer, Elem}
 
 /*
- * TODO document input: http://www.mediawiki.org/xml/export-0.4
- * TODO document output: according to the DTD as provided in Appendix A of the Java Logging API specification.
- */
+* TODO document input: http://www.mediawiki.org/xml/export-0.4
+* TODO document output: according to the DTD as provided in Appendix A of the Java Logging API specification.
+*/
 @Path("mappings/{lang}")
 class Mappings(@PathParam("lang") langCode : String) extends Base
 {
     private val logger = Logger.getLogger(classOf[Ontology].getName)
 
     private val language = Language.fromWikiCode(langCode)
-        .getOrElse(throw new WebApplicationException(404))
+        .getOrElse(throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
-    if(!Server.config.languages.contains(language)) throw new WebApplicationException(404)
+    if(!Server.config.languages.contains(language))
+        throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)
 
     /**
      * Retrieves an overview page
@@ -39,6 +41,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
             <a href="pages">Source Pages</a><br/>
             <a href="validate">Validate Pages</a><br/>
             <a href="extractionSamples">Retrieve extraction samples</a><br/>
+            <a href={"../../statistics/"+language.wikiCode+"/"}>Statistics</a><br/>
           </body>
         </html>
     }
@@ -54,7 +57,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPageSource(language).map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }
@@ -63,21 +66,22 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Retrieves a mapping page
      */
     @GET
-    @Path("/pages/{title}")
+    @Path("/pages/{title: .+$}")
     @Produces(Array("application/xml"))
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get mappings page: " + title)
-        Server.extractor.mappingPages(language)(WikiTitle.parseEncoded(title)).toXML
+        Server.extractor.mappingPageSource(language).find(_.title == WikiTitle.parseEncoded(title))
+                                                 .getOrElse(throw new Exception("No mapping found for " + title)).toXML
     }
 
     /**
      * Writes a mapping page
      */
     @PUT
-    @Path("/pages/{title}")
+    @Path("/pages/{title: .+$}")
     @Consumes(Array("application/xml"))
-    def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem) : Unit =
+    def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem)
     {
         try
         {
@@ -101,9 +105,9 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Deletes a mapping page
      */
     @DELETE
-    @Path("/pages/{title}")
+    @Path("/pages/{title: .+$}")
     @Consumes(Array("application/xml"))
-    def deletePage(@PathParam("title") @Encoded title : String) : Unit =
+    def deletePage(@PathParam("title") @Encoded title : String)
     {
         Server.extractor.removeMappingPage(WikiTitle.parseEncoded(title), language)
         logger.info("Deleted mapping page: " + title)
@@ -120,7 +124,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"validate/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPageSource(language).map(page => <a href={"validate/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }
@@ -130,12 +134,13 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Validates a mapping page from the Wiki.
      */
     @GET
-    @Path("/validate/{title}")
+    @Path("/validate/{title: .+$}")
     @Produces(Array("application/xml"))
     def validateExistingPage(@PathParam("title") @Encoded title : String) =
     {
         var nodes = new NodeBuffer()
-        nodes += <?xml-stylesheet type="text/xsl" href="../../../stylesheets/log.xsl"?>
+        val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
+        nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
         nodes += Server.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parseEncoded(title) :: Nil, new URL("http://mappings.dbpedia.org/api.php")), language)
         nodes
     }
@@ -144,7 +149,7 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
      * Validates a mapping source.
      */
     @POST
-    @Path("/validate/{title}")
+    @Path("/validate/{title: .+$}")
     @Consumes(Array("application/xml"))
     @Produces(Array("application/xml"))
     def validatePage(@PathParam("title") @Encoded title : String, pagesXML : Elem) =
@@ -152,7 +157,8 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         try
         {
             var nodes = new NodeBuffer()
-            nodes += <?xml-stylesheet type="text/xsl" href="../../../stylesheets/log.xsl"?>
+            val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
+            nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
             nodes += Server.extractor.validateMapping(XMLSource.fromXML(pagesXML), language)
             logger.info("Validated mapping page: " + title)
             nodes
@@ -178,13 +184,13 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPages(language).values.map(page => <a href={"extractionSamples/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.mappingPageSource(language).map(page => <a href={"extractionSamples/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
           </body>
         </html>
     }
 
     @GET
-    @Path("/extractionSamples/{title}")
+    @Path("/extractionSamples/{title: .+$}")
     @Produces(Array("application/xml"))
     def getExtractionSample(@PathParam("title") @Encoded title : String) : String =
     {
@@ -199,10 +205,11 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         val pageTitles = api.retrieveTemplateUsages(templateTitle, 10)
 
         //Extract pages
-        val destination = new StringDestination(new TriXFormatter(new URI("../../../stylesheets/trix.xsl")))
+        val stylesheetUri = new URI(("../" * title.count(_ == '/')) + "../../../stylesheets/trix.xsl")  // if there are slashes in the title, the stylesheets are further up in the directory tree
+        val destination = new StringDestination(new TriXFormatter(stylesheetUri))
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         Server.extractor.extract(source, destination, language)
-        destination.close
+        destination.close()
         destination.toString
     }
 }
