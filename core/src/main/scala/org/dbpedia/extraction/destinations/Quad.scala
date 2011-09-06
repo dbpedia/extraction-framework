@@ -19,14 +19,14 @@ class Quad(	val dataset : Dataset,
 {
   //various constructors
   def this( dataset : Dataset,
-                subject : IriRef,
+            subject : IriRef,
             predicate : OntologyProperty,
             value : GraphNode,
             context : IriRef ) = this(dataset, subject, new IriRef(predicate.uri), value, context)
 
   //subject, predicate and context can be string because they can only be IriRefs
   def this( dataset : Dataset,
-                subject : String,
+            subject : String,
             predicate : String,
             value : GraphNode,
             context : String ) = this(dataset, new IriRef(subject), new IriRef(predicate), value, new IriRef(context))

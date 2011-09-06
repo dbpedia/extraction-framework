@@ -1,16 +1,21 @@
 package org.dbpedia.extraction.ontology
 
+import org.dbpedia.extraction.util.{Language, UriUtils}
 /**
  * Manages the ontology namespaces.
  */
 object OntologyNamespaces
 {
+    //#int
+    val specificLanguageDomain = Set("de", "el", "it", "ru")
+    val encodeAsIRI = Set("de", "el", "ru")
+
     val DBPEDIA_CLASS_NAMESPACE = "http://dbpedia.org/ontology/"
     val DBPEDIA_DATATYPE_NAMESPACE = "http://dbpedia.org/datatype/"
     val DBPEDIA_PROPERTY_NAMESPACE = "http://dbpedia.org/ontology/"
     val DBPEDIA_SPECIFICPROPERTY_NAMESPACE = "http://dbpedia.org/ontology/"
-    val DBPEDIA_INSTANCE_NAMESPACE = "http://dbpedia.org/resource/"
-    val DBPEDIA_GENERAL_NAMESPACE = "http://dbpedia.org/property/"
+    //val DBPEDIA_INSTANCE_NAMESPACE = "http://de.dbpedia.org/resource/"
+    //val DBPEDIA_GENERAL_NAMESPACE = "http://de.dbpedia.org/property/"
 
     val OWL_PREFIX = "owl"
     val RDF_PREFIX = "rdf"
@@ -24,6 +29,7 @@ object OntologyNamespaces
     val DCT_PREFIX = "dct"
     val DCTERMS_PREFIX = "dcterms"
     val SKOS_PREFIX = "skos"
+    val SCHEMA_ORG_PREFIX = "schema"
 
     val OWL_NAMESPACE = "http://www.w3.org/2002/07/owl#"
     val RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -36,6 +42,14 @@ object OntologyNamespaces
     val DC_NAMESPACE = "http://purl.org/dc/elements/1.1/"
     val DCT_NAMESPACE = "http://purl.org/dc/terms/"
     val SKOS_NAMESPACE = "http://www.w3.org/2004/02/skos/core#"
+    val SCHEMA_ORG_NAMESPACE = "http://schema.org/"
+
+    /**
+     * Set of namespaces for which existence of classes or properties is not validated.
+     */
+    private val nonValidatedNamespaces = Set(
+        SCHEMA_ORG_NAMESPACE
+    )
 
     /** 
      * Map containing all supported URI prefixes 
@@ -53,7 +67,8 @@ object OntologyNamespaces
         DC_PREFIX -> DC_NAMESPACE,
         DCT_PREFIX -> DCT_NAMESPACE,
         DCTERMS_PREFIX -> DCT_NAMESPACE,
-        SKOS_PREFIX -> SKOS_NAMESPACE
+        SKOS_PREFIX -> SKOS_NAMESPACE,
+        SCHEMA_ORG_PREFIX -> SCHEMA_ORG_NAMESPACE
     );
 
     /**
@@ -66,36 +81,64 @@ object OntologyNamespaces
      */
     def getUri(name : String, baseUri : String) : String =
     {
-    	val parts = name.split(":", 2)
-
-        if (parts.length == 2)
+    	name.split(":", 2) match
         {
-            val prefix = parts(0);
-            val suffix = parts(1);
-            
-            prefixMap.get(prefix) match
+            case Array(prefix, suffix) => prefixMap.get(prefix) match
             {
-            	case Some(namespace) => return appendUri(namespace, suffix)
-            	case None => return appendUri(baseUri, name)
-            	// throw new IllegalArgumentException("Unknown prefix " + prefix + " in name " + name);
+                case Some(namespace) => appendUri(namespace, suffix)  // replace prefix
+                case None => appendUri(baseUri, name)                 // append "fall-back" baseUri
+                // throw new IllegalArgumentException("Unknown prefix " + prefix + " in name " + name);
+            }
+            case _ => appendUri(baseUri, name)
+        }
+    }
+
+    def getResource(name : String, lang : Language) : String =
+    {
+        val langWikiCode = lang.wikiCode
+        val domain = if (specificLanguageDomain.contains(langWikiCode)) "http://" + langWikiCode + ".dbpedia.org/resource/"
+                     else "http://dbpedia.org/resource/"
+        appendUri(domain, name, lang)
+    }
+
+    def getProperty(name : String, lang : Language) : String =
+    {
+        val langWikiCode = lang.wikiCode
+        val domain = if (specificLanguageDomain.contains(langWikiCode)) "http://" + langWikiCode + ".dbpedia.org/property/"
+                     else "http://dbpedia.org/property/"
+        appendUri(domain, name, lang)
+    }
+
+    private def appendUri( baseUri : String, encodedSuffix : String, lang : Language = Language.Default ) : String =
+    {
+        if (baseUri.contains('#'))
+        {
+            // contains a fragment
+            // right-hand fragments must not contain ':', '/' or '&', according to our Validate class
+            baseUri + encodedSuffix.replace("/", "%2F").replace(":", "%3A").replace("&", "%26")
+        }
+        else
+        {
+            // does not contain a fragment
+            // return baseUri + encodedSuffix;
+            if (encodeAsIRI.contains(lang.wikiCode))
+            {
+                UriUtils.toIRIString(baseUri+encodedSuffix)
+            }
+            else
+            {
+                baseUri + encodedSuffix
             }
         }
-        else
-        {
-            return appendUri(baseUri, name)
-        }
     }
 
-    private def appendUri( baseUri : String, suffix : String ) : String =
+    /**
+     * Return true  if the namespace of the given URI is known to be an exception for evaluation (e.g. http://schema.org).
+     * Return false if the namespace of the given URI starts with should be validated.
+     */
+    def skipValidation(uri : String) : Boolean =
     {
-        if (!baseUri.contains('#'))
-        {
-            return baseUri + suffix;
-        }
-        else
-        {
-            // fragments must not contain ':' or '/', according to our Validate class
-            return baseUri + suffix.replace("/", "%2F").replace(":", "%3A")
-        }
+        OntologyNamespaces.nonValidatedNamespaces.exists(getUri(uri, "") startsWith _)
     }
+
 }

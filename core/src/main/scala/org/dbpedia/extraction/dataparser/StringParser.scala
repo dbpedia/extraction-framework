@@ -8,6 +8,9 @@ import org.dbpedia.extraction.wikiparser._
  */
 object StringParser extends DataParser
 {
+    private val smallTagRegex = """<small[^>]*>(.*?)<\/small>""".r
+    private val tagRegex = """\<.*?\>""".r
+
     override def parse(node : Node) : Option[String] =
     {
         //Build text from node
@@ -15,16 +18,21 @@ object StringParser extends DataParser
         nodeToString(node, sb)
 
         //Clean text
-        var text = sb.toString
-        text = text.replaceAll("""<small[^>]*>(.*?)<\/small>""", "")
-        text = text.replaceAll("\\<.*?\\>", "") //strip tags
+        var text = sb.toString()
+        text = smallTagRegex.replaceAllIn(text, "$1")
+        text = tagRegex.replaceAllIn(text, "") //strip tags
         text = WikiUtil.removeWikiEmphasis(text)
         text = text.replace("&nbsp;", " ")//TODO decode all html entities here
         text = text.trim
         
-        if(text.isEmpty) return None
-
-        return Some(text)
+        if(text.isEmpty)
+        {
+            None
+        }
+        else
+        {
+            Some(text)
+        }
     }
   
     private def nodeToString(node : Node, sb : StringBuilder)

@@ -2,7 +2,6 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.util.WikiUtil
 
-import scala.collection.mutable.HashMap
 import java.net.URLEncoder
 import org.dbpedia.extraction.wikiparser._
 
@@ -17,51 +16,39 @@ class PageContext()
 
 private class UriGenerator
 {
-	var uris = new HashMap[String, Int]()
+	var uris = Map[String, Int]()
 
-    //TODO forbid node==null ?
 	def generate(baseUri : String, node : Node) : String =
     {
-		//TODO This is a 1:1 port from the PHP code and needs (aesthetic) improvement
-
-		var uri : String = null
-		
-		if(node != null)
-		{
-	        //Retrieve text
-            val sb = new StringBuilder()
-	        nodeToString(node, sb)
-	
-            uri = generate(baseUri, sb.toString)
-		}
-		else
-		{
-			uri = generate(baseUri, null : String)
-		}
-
-        return uri
+        node match
+        {
+            case _ : Node =>
+            {
+                val sb = new StringBuilder()
+                nodeToString(node, sb)
+                generate(baseUri, sb.toString())
+            }
+            case null => generate(baseUri, "") //TODO forbid node==null ?
+        }
     }
 
     def generate(baseUri : String, name : String) : String =
     {
-		//TODO This is a 1:1 port from the PHP code and needs (aesthetic) improvement
+		var uri : String = baseUri
 
-		var uri : String = null
-
-		if(name != null)
+		if(name != "")
 		{
             var text = name
 
 	        //Normalize text
 	        text = WikiUtil.removeWikiEmphasis(text)
 	        text = text.replace("&nbsp;", " ")//TODO decode all html entities here
-	        text = text.replaceAll(" +", " ") //remove duplicate spaces
 	        text = text.replace('(', ' ')
 	        text = text.replace(')', ' ')
 	        text = text.replaceAll("\\<.*?\\>", "") //strip tags
+            text = text.replaceAll("\\s+", "_") //remove white space
 	        text = text.trim
 	        if(text.length > 50) text = text.substring(0, 50)
-	        text = text.replace(' ', '_')
 	        text = URLEncoder.encode(text, "UTF-8")
 
 	        //Test if the base URI ends with a prefix of text
@@ -87,26 +74,10 @@ private class UriGenerator
 	        //Generate URI
 	        uri = baseUri + "__" + text
 		}
-		else
-		{
-			uri = baseUri;
-		}
 
-        //Resolve collisions
-        if(!uris.contains(uri))
-        {
-            //No collision
-            uris(uri) = 1;
-        }
-        else
-        {
-            //Collision found
-            val index = uris(uri)
-            uris(uri) = index + 1
-            uri += "__" + index
-        }
-
-        return uri
+        val index = uris.getOrElse(uri, 0) + 1
+        uris = uris.updated(uri, index)
+        uri + "__" + index.toString
     }
 
     private def nodeToString(node : Node, sb : StringBuilder)

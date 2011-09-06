@@ -5,7 +5,10 @@ import datatypes.{DimensionDatatype, UnitDatatype}
 
 class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 {
-	private val Version = "3.5";
+
+	private val Version = "3.7";
+
+    private val EXPORT_EXTERNAL = false  // export owl, foaf, rdf, rdfs etc.
 	
 	def write(ontology : Ontology) : scala.xml.Elem =
     {
@@ -22,11 +25,11 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
         </owl:Ontology>
         {
 	        //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
-	        val classes = for(ontologyClass <- ontology.classes if !ontologyClass.name.contains(':'))
+	        val classes = for(ontologyClass <- ontology.classes if (EXPORT_EXTERNAL || !ontologyClass.isExternalClass))
 	        	yield writeClass(ontologyClass)
 
 	        //Write properties from the default namespace
-	        val properties = for(ontologyProperty <- ontology.properties if !ontologyProperty.name.contains(':'))
+	        val properties = for(ontologyProperty <- ontology.properties if (EXPORT_EXTERNAL || !ontologyProperty.isExternalProperty))
 	        	yield writeProperty(ontologyProperty)
 
             if(writeSpecificProperties)
@@ -62,9 +65,9 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 	    }
 
         //Super classes
-	    if (ontologyClass.subClassOf != null)
+        for(superClass <- ontologyClass.subClassOf)
 	    {
-	        xml += <rdfs:subClassOf rdf:resource={ontologyClass.subClassOf.uri}/>
+	        xml += <rdfs:subClassOf rdf:resource={superClass.uri}/>
 	    }
 
         //Equivalent classes
@@ -140,6 +143,12 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
                }
             }
             case _ =>
+        }
+
+        //Equivalent Properties
+        for(prop <- property.equivalentProperties)
+        {
+            xml += <owl:equivalentProperty rdf:resource={prop.uri} />
         }
 
         //Return xml
