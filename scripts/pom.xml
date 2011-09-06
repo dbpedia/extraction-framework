@@ -31,6 +31,14 @@
                            <jvmArg>-Xmx1024m</jvmArg>
                          </jvmArgs>
                        </launcher -->
+                        <launcher>
+                            <id>ResolveRedirects</id>
+                            <mainClass>org.dbpedia.extraction.scripts.ResolveRedirects</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx4096m</jvmArg>
+                            </jvmArgs>
+                            <!-- mvn scala:run -Dlauncher=ResolveRedirects "-DaddArgs=/data/en/redirects_en.nt|/data/en/mappingbased_properties_en.nt|/data/en/page_links_en.nt" -->
+                        </launcher>
                     </launchers>
                 </configuration>
 

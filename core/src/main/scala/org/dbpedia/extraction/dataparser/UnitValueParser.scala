@@ -5,13 +5,28 @@ import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype, U
 import org.dbpedia.extraction.wikiparser._
 import java.text.{ParseException, NumberFormat}
 import java.util.logging.{Level, Logger}
-import org.dbpedia.extraction.mappings.ExtractionContext
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.mappings.Redirects
+import java.lang.Double
 
-class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Datatype, strict : Boolean = false) extends DataParser
+class UnitValueParser( extractionContext : {
+                           def ontology : Ontology
+                           def language : Language
+                           def redirects : Redirects },
+                        inputDatatype : Datatype,
+                        strict : Boolean = false,
+                        multiplicationFactor : Double = 1.0) extends DataParser
 {
     private val logger = Logger.getLogger(classOf[UnitValueParser].getName)
 
+    private val parserUtils = new ParserUtils(extractionContext)
+
+    private val durationParser = new DurationParser(extractionContext)
+
     private val language = extractionContext.language.wikiCode
+
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or """  //TODO this split regex might not be complete
     
     private val prefix = if(strict) """\s*""" else """[\D]*?"""
 
@@ -24,35 +39,35 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
         case dt => throw new IllegalArgumentException("Invalid datatype: " + dt)
     })
 
-    private val ValueRegex1 = (prefix + """(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
+    private val ValueRegex1 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
 
-    private val ValueRegex2 = (prefix + """(-?[0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
+    private val ValueRegex2 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
 
-    private val UnitRegex = ("""(?<!\w)(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)(?!\d)""").r
+    private val UnitRegex = ("""(?iu)""" + """(?<!\w)(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)(?!\d)""").r
     
     /** Merging strings with feet and inches: 'x ft y in' and convert them into centimetres */
-    private val UnitValueRegex1a = (prefix + """(-?[0-9]+)\040*ft\040*([0-9]+)\040*in\b""" + postfix).r
+    private val UnitValueRegex1a = ("""(?iu)""" + prefix + """(-?[0-9]+)\040*ft\040*([0-9]+)\040*in\b""" + postfix).r
     
     /** Catches number and unit: e.q. 1.120.500,55 km */
-    private val UnitValueRegex1b = (prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
+    private val UnitValueRegex1b = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
     
     /** If different units are present, e.g.: 10 mi. (16.0934 km); the first will be returned */
     //TODO remove?
-    private val UnitValueRegex1c = (prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+    private val UnitValueRegex1c = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
                                     """)[\s]*\([\s]*(?:[0-9]+(?:\.[0-9]+)?)[\s]*(?:""" + unitRegexLabels + """)[\s]*\)[\s]*""" + postfix).r
                                    
     /** Catches number and unit: e.q. 1.120.500,55 km */
-    private val UnitValueRegex2a = (prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
+    private val UnitValueRegex2a = ("""(?iu)""" + prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
     
     /** If different units are present, e.g.: 10 mi. (16.0934 km); the first will be returned */
     //TODO remove?
-    private val UnitValueRegex2b = (prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+    private val UnitValueRegex2b = ("""(?iu)""" + prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
                                     """)[\s]*\([\s]*(?:[0-9]+(?:\,[0-9]+)?)[\s]*(?:""" + unitRegexLabels + """)[\s]*\)[\s]*""" + postfix).r
 
 
-    private val PrefixUnitValueRegex1 = (prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
+    private val PrefixUnitValueRegex1 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
 
-    private val PrefixUnitValueRegex2 = (prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
+    private val PrefixUnitValueRegex2 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
 
     override def parse(node : Node) : Option[(Double, UnitDatatype)] =
     {
@@ -65,7 +80,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
 
         for(parseResult <- StringParser.parse(node))
         {
-            val text = ParserUtils.convertLargeNumbers(parseResult, extractionContext.language)
+            val text = parserUtils.convertLargeNumbers(parseResult)
 
             inputDatatype match
             {
@@ -101,13 +116,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
             logger.fine("Could not extract " + inputDatatype.name + " value from " + node + " on page " + node.root.title + " line " + node.line + ".\n" + e)
         }
 
-        return None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        //TODO this split regex might not be complete
-        NodeUtil.splitPropertyNode(propertyNode, """<br\s*\/?>|\n| and | or """)
+        None
     }
 
     /**
@@ -291,7 +300,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
             return None
         }
         
-        return generateOutput(value.get, unit, errors)
+        generateOutput(value.get, unit, errors)
     }
 
     private def catchValue(input : String) : Option[String] =
@@ -316,13 +325,11 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
 
     private def catchDuration(input : String) : Option[(Double, UnitDatatype)] =
     {
-        Duration.parse(input, inputDatatype, extractionContext.language.locale) match
+        durationParser.parseToSeconds(input, inputDatatype) match
         {
-            case Some(result) => Some((result.toSeconds, extractionContext.ontology.getDatatype("second").get.asInstanceOf[UnitDatatype]))
+            case Some(result) => Some((result, extractionContext.ontology.getDatatype("second").get.asInstanceOf[UnitDatatype]))
             case None => None
         }
-
-
     }
     
     private def catchUnit(input : String) : Option[String] =
@@ -402,7 +409,7 @@ class UnitValueParser(extractionContext : ExtractionContext, inputDatatype : Dat
         {
             try
             {
-                numberFormat.parse(valueString).doubleValue
+                numberFormat.parse(valueString).doubleValue * multiplicationFactor
             }
             catch
             {

@@ -1,38 +1,34 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.util.UriUtils
 import java.net.URI
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.{Language, UriUtils}
 
 /**
  * Extracts links to the official homepage of an instance.
  */
-class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
+class HomepageExtractor( context : {
+                             def ontology : Ontology
+                             def language : Language
+                             def redirects : Redirects } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
-    require(Set("en", "fr", "el", "de", "pl").contains(language))
+    require(HomepageExtractorConfig.supportedLanguages.contains(language),"Homepage Extractor supports the following languages: " + HomepageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
-    private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona")
+    private val propertyNames = HomepageExtractorConfig.propertyNamesMap.getOrElse(language, HomepageExtractorConfig.propertyNamesMap("en"))
+    private val official = HomepageExtractorConfig.officialMap.getOrElse(language, HomepageExtractorConfig.officialMap("en"))
+    private val externalLinkSections = HomepageExtractorConfig.externalLinkSectionsMap.getOrElse(language, HomepageExtractorConfig.externalLinkSectionsMap("en"))
 
-    private val externalLinkSections = Map("en" -> "External links?",
-        "de" -> "Weblinks?",
-        "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
-        "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
-        "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)")
+    private val homepageProperty = context.ontology.getProperty("foaf:homepage").get
 
-    private val official = Map("en" -> "official", "de" -> "offizielle", "el" -> "(?:επίσημος|επίσημη)", "fr" -> "officiel", "pl" -> "oficjalna")
-    
-    private val homepageProperty = extractionContext.ontology.getProperty("foaf:homepage").get
-
-    private val listItemStartRegex = ("""(?msiu).*^\s*\*\s*[^^]*(\b""" + official(language) + """\b)?[^^]*\z""").r
-
-    private val officialRegex = ("(?iu)" + official(language)).r
-
-    private val officialAndLineEndRegex = ("""(?msiu)[^$]*\b""" + official(language) + """\b.*$.*""").r
-
-    private val officialAndNoLineEndRegex = ("""(?msiu)[^$]*\b""" + official(language) + """\b[^$]*""").r
+    private val listItemStartRegex = ("""(?msiu).*^\s*\*\s*[^^]*(\b""" + official + """\b)?[^^]*\z""").r
+    private val officialRegex = ("(?iu)" + official).r
+    private val officialAndLineEndRegex = ("""(?msiu)[^$]*\b""" + official + """\b.*$.*""").r
+    private val officialAndNoLineEndRegex = ("""(?msiu)[^$]*\b""" + official + """\b[^$]*""").r
 
     private val lineEndRegex = "(?ms).*$.+".r
 
@@ -79,7 +75,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
             }
         }
 
-        return new Graph()
+        new Graph()
     }
 
     private def generateStatement(subjectUri : String, pageContext : PageContext, url : String, node: Node) : Graph =
@@ -103,7 +99,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
         nodes match
         {
             case (templateNode @ TemplateNode(title, _, _)) :: _
-                if ((title.encoded == "Official") || ((extractionContext.redirects.map.contains(title.decoded)) && (extractionContext.redirects.map(title.decoded) == "Official"))) =>
+                if ((title.encoded == "Official") || ((context.redirects.map.contains(title.decoded)) && (context.redirects.map(title.decoded) == "Official"))) =>
             {
                 templateNode.property("1") match
                 {
@@ -180,7 +176,7 @@ class HomepageExtractor(extractionContext : ExtractionContext) extends Extractor
     {
         nodes match
         {
-            case SectionNode(name, level, _, _) :: tail if name.matches(externalLinkSections(language))  => Some(collectSectionChildNodes(tail, level))
+            case SectionNode(name, level, _, _) :: tail if name.matches(externalLinkSections) => Some(collectSectionChildNodes(tail, level))
             case _ :: tail => collectExternalLinkSection(tail)
             case Nil => None
         }

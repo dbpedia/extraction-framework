@@ -22,4 +22,6 @@ class Datatype(name : String, labels : Map[String, String], comments : Map[Strin
      * The URI of this datatype
      */
     override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_DATATYPE_NAMESPACE)
+
+    lazy val isExternalProperty = !uri.startsWith(OntologyNamespaces.DBPEDIA_DATATYPE_NAMESPACE)
 }
