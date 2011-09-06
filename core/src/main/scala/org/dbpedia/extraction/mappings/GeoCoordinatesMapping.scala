@@ -3,25 +3,31 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.ontology.OntologyProperty
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, PlainLiteral}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import java.util.logging.{Logger, Level}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts geo-coodinates.
  */
 class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
-                             coordinates : String,
-                             latitude : String,
-                             longitude : String,
-                             longitudeDegrees : String,
-                             longitudeMinutes : String,
-                             longitudeSeconds : String,
-                             longitudeDirection : String,
-                             latitudeDegrees : String,
-                             latitudeMinutes : String,
-                             latitudeSeconds : String,
-                             latitudeDirection : String,
-                             extractionContext : ExtractionContext ) extends PropertyMapping
+                             //TODO CreateMappingStats requires this properties to be public. Is there a better way?
+                             val coordinates : String,
+                             val latitude : String,
+                             val longitude : String,
+                             val longitudeDegrees : String,
+                             val longitudeMinutes : String,
+                             val longitudeSeconds : String,
+                             val longitudeDirection : String,
+                             val latitudeDegrees : String,
+                             val latitudeMinutes : String,
+                             val latitudeSeconds : String,
+                             val latitudeDirection : String,
+                             context : {
+                                 def ontology : Ontology
+                                 def redirects : Redirects   // redirects required by GeoCoordinatesParser
+                                 def language : Language } ) extends PropertyMapping
 {
     private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName) 
 
@@ -102,7 +108,7 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
              }
         }
 
-        return None
+        None
     }
 
     private def writeGeoCoordinate(node : TemplateNode, coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Graph =
@@ -114,14 +120,14 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
         {
             instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
 
-          quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new IriRef(instanceUri), new IriRef(sourceUri))
+            quads ::= new Quad(context.language,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
         }
-        //TODO use typed literals?
-        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(typeOntProperty), new IriRef(featureOntClass.uri), new IriRef(sourceUri))
-        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(latOntProperty), new PlainLiteral(coord.latitude.toString), new IriRef(sourceUri))
-        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(lonOntProperty), new PlainLiteral(coord.longitude.toString), new IriRef(sourceUri))
-        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(pointOntProperty), new PlainLiteral(coord.latitude + " " + coord.longitude), new IriRef(sourceUri))
 
-        return new Graph(quads)
+        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
+        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
+        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
+        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
+
+        new Graph(quads)
     }
 }

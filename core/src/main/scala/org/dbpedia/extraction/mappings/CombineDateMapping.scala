@@ -2,29 +2,33 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
+import org.dbpedia.extraction.wikiparser.TemplateNode
 import java.util.logging.Logger
 import org.dbpedia.extraction.dataparser.DateTimeParser
 import org.dbpedia.extraction.util.Date
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph, TypedLiteral, IriRef}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
+import org.dbpedia.extraction.ontology.OntologyProperty
+import org.dbpedia.extraction.util.{Language, Date}
 
 class CombineDateMapping( ontologyProperty : OntologyProperty,
-                          templateProperty1 : String,
+                          val templateProperty1 : String,
                           unit1 : Datatype,
-                          templateProperty2 : String,
+                          val templateProperty2 : String,
                           unit2 : Datatype,
-                          templateProperty3 : String,
+                          val templateProperty3 : String,
                           unit3 : Datatype,
-                          extractionContext : ExtractionContext ) extends PropertyMapping
+                          context : {
+                              def redirects : Redirects  // redirects required by DateTimeParser
+                              def language : Language } ) extends PropertyMapping
 {
     require(Set("xsd:date", "xsd:gDay", "xsd:gMonth", "xsd:gYear", "xsd:gMonthDay", "xsd:gYearMonth").contains(ontologyProperty.range.name),
         "ontologyProperty must be one of: xsd:date, xsd:gDay, xsd:gMonth, xsd:gYear, xsd:gMonthDay, xsd:gYearMonth")
 
     private val logger = Logger.getLogger(classOf[CombineDateMapping].getName)
 
-    private val parser1 = Option(unit1).map(new DateTimeParser(extractionContext, _))
-    private val parser2 = Option(unit2).map(new DateTimeParser(extractionContext, _))
-    private val parser3 = Option(unit3).map(new DateTimeParser(extractionContext, _))
+    private val parser1 = Option(unit1).map(new DateTimeParser(context, _))
+    private val parser2 = Option(unit2).map(new DateTimeParser(context, _))
+    private val parser3 = Option(unit3).map(new DateTimeParser(context, _))
 
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -61,7 +65,7 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
         {
             val mergedDate = Date.merge(dates, datatype)
 
-            val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral(mergedDate.toString, datatype), new IriRef(node.sourceUri))
+            val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, mergedDate.toString, node.sourceUri, datatype)
 
             new Graph(quad)
         }

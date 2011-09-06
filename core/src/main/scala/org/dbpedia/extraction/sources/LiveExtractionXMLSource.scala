@@ -3,7 +3,7 @@ package org.dbpedia.extraction.sources
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import java.io.{FileInputStream, File}
 import xml.Elem
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{WikiUtil, Language}
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,6 +56,7 @@ object LiveExtractionXMLSource
       //println("xml element = "+ xml + "End of xml element");
         override def foreach[U](f : WikiPage => U) : Unit =
         {
+
           //val MyPage =  xml \\ "page";
           //println("LiveExtractionXMLSource PAGE = "+ MyPage);
             //TODO set correct language
@@ -67,10 +68,25 @@ object LiveExtractionXMLSource
               //println((page \ "title").text);
               //println((page \ "id").text);
 
-                f( new WikiPage( title     = WikiTitle.parse((page \ "title").text, language),
+
+              val link = ((page \ "title").text)
+
+//              org.dbpedia.extraction.mappings.
+//              AugmenterExtractorUtils.canonicalize("")
+              /*val mytitle = WikiUtil.wikiEncode(link, language)
+              println(mytitle)*/
+
+                f( new WikiPage( title     = WikiTitle.parse(link, language),
                                  id        = (page \ "id").text.toLong,
                                  revision  = (rev \ "id").text.toLong,
                                  source    = (rev \ "text").text ) )
+
+              /*f( new WikiPage( title     = mytitle,
+                                 id        = (page \ "id").text.toLong,
+                                 revision  = (rev \ "id").text.toLong,
+                                 source    = (rev \ "text").text ) )*/
+
+
             }
         }
 
