@@ -5,7 +5,7 @@ import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.StringUtils._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, TypedLiteral, PlainLiteral}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
 
@@ -144,8 +144,14 @@ class InfoboxExtractor( context : {
 
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
-                    quads ::= new Quad(DBpediaDatasets.Infoboxes, new IriRef(subjectUri), new IriRef(usesTemplateProperty), new IriRef("http://dbpedia.org/resource/" + templateNamespace + ":" + template.title.encoded), new IriRef(template.sourceUri))
-                    seenTemplates.add(template.title.encoded)
+                  //oldTODO change domain ????
+                  val templateUri = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language)  //templateNamespace + ":" + template.title.encoded
+                  quads ::= new Quad(DBpediaDatasets.Infoboxes,
+                    new IriRef(subjectUri),
+                    new IriRef(usesTemplateProperty),
+                    new IriRef(templateUri),
+                    template.sourceUri)
+                  seenTemplates.add(template.title.encoded)
                 }
             }
         })

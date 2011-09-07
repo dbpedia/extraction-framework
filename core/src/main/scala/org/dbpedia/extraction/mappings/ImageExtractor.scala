@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph, IriRef}
 import org.dbpedia.extraction.wikiparser._
 import impl.wikipedia.Namespaces
 import org.dbpedia.extraction.sources.Source

@@ -81,7 +81,7 @@ object ConfigLoader
                     title.namespace == WikiTitle.Namespace.Category || title.namespace == WikiTitle.Namespace.Template)
 
         //Extractor
-        val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
+        val extractor = Extractor.load(config.extractors(language), language)
 
         //Destination
         val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")

@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.destination;
 
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.destinations.*;
 import org.dbpedia.extraction.ontology.datatypes.Datatype;
+import org.dbpedia.extraction.destinations.*;
 import org.dbpedia.helper.CoreUtil;
 import org.dbpedia.helper.Triple;
 import org.json.simple.JSONValue;
@@ -15,6 +15,7 @@ import scala.collection.JavaConversions;
 import java.io.FileOutputStream;
 import java.nio.channels.FileLock;
 import java.util.*;
+import java.lang.IllegalArgumentException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -65,7 +66,7 @@ public class SQLFileDestination implements Destination {
 
                 HashMap tmp = new HashMap();
 
-                Triple tr = new Triple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()),
+                Triple tr = new Triple(new URIImpl(quad.subject().uri()), new URIImpl(quad.predicate().uri()),
                                     constructTripleObject(quad));
 
                 tmp.put("s", CoreUtil.convertToSPARULPattern(tr.getSubject()));
@@ -145,24 +146,18 @@ public class SQLFileDestination implements Destination {
     }
 
     private Value constructTripleObject(Quad quad){
-
-        String Lang = "en";
-        Datatype datatype = quad.datatype();
-
-        if (datatype != null){
-            if (datatype.uri().equals("http://www.w3.org/2001/XMLSchema#string"))
-            {
-                return new LiteralImpl(quad.value(), Lang);
-            }
-            else
-            {
-                 return new LiteralImpl(quad.value(), new URIImpl(datatype.uri()));
-            }
+        if(quad.value() instanceof PlainLiteral){
+            return new LiteralImpl(((PlainLiteral)quad.value()).value());
+        }  else if(quad.value() instanceof TypedLiteral){
+            Datatype datatype = ((TypedLiteral)quad.value()).dataType();
+            return new LiteralImpl(((TypedLiteral)quad.value()).value(), new URIImpl(datatype.uri()));
+        } else if(quad.value() instanceof LanguageLiteral){
+            return new LiteralImpl(((LanguageLiteral)quad.value()).value(), ((LanguageLiteral)quad.value()).language());
+        } else if(quad.value() instanceof IriRef){
+            return new URIImpl(((IriRef)quad.value()).uri());
         }
-        else
-        {
-            return new URIImpl(quad.value());
-        }
+        throw new IllegalArgumentException("object of quad is of unkown type");
+        //return null;
     }
 
     public synchronized void close() {

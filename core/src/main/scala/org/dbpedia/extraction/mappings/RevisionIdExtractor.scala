@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, TypedLiteral}
 import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -21,6 +21,6 @@ class RevisionIdExtractor( context : {
         val objectLink = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
 
         new Graph(new Quad(DBpediaDatasets.Revisions, new IriRef(objectLink), new IriRef(wikiPageRevisionIDProperty),
-            new TypedLiteral(node.revision.toString, extractionContext.ontology.getDatatype("xsd:integer").get), new IriRef(node.sourceUri) ))
+            new TypedLiteral(node.revision.toString, context.ontology.getDatatype("xsd:integer").get), new IriRef(node.sourceUri) ))
     }
 }
