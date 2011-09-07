@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.{Node, PropertyNode, TemplateNode}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 
@@ -99,7 +99,7 @@ case class TemplateMapping( mapToClass : OntologyClass,
 
         //Create type statements
         val quads = for(clazz <- classes) yield new Quad( DBpediaDatasets.OntologyTypes, new IriRef(uri),
-                                                          new IriRef(extractionContext.ontology.getProperty("rdf:type").get),
+                                                          new IriRef(context.ontology.getProperty("rdf:type").get),
                                                           new IriRef(clazz.uri), new IriRef(node.sourceUri) )
 
         new Graph(quads.toList)

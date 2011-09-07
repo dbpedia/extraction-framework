@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.destinations.{IriRef, Graph, DBpediaDatasets, Quad}
 
 class TableMapping( mapToClass : OntologyClass,
                     correspondingClass : OntologyClass,
@@ -31,7 +31,11 @@ class TableMapping( mapToClass : OntologyClass,
         {
             var thisGraph = graph
 
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, clazz.uri, rowNode.sourceUri)
+            val quad = new Quad(DBpediaDatasets.OntologyTypes,
+              new IriRef(instanceUri),
+              new IriRef(context.ontology.getProperty("rdf:type").get),
+              new IriRef(clazz.uri),
+              rowNode.sourceUri)
             thisGraph = graph.merge(new Graph(quad))
 
             for(baseClass <- clazz.subClassOf)

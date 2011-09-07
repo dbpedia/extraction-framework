@@ -2,9 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
 import org.dbpedia.extraction.ontology.{OntologyNamespaces, OntologyProperty, OntologyObjectProperty}
 import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.destinations._
 
 /**
  * Used to map information that is only contained in the infobox template name, for example
@@ -38,7 +38,7 @@ class ConstantMapping( ontologyProperty : OntologyProperty,
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         new Graph(
-            new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value, node.sourceUri, unit)
+            new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral(value, unit), node.sourceUri)
         )
     }
 

@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateNode}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.destinations._
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 
 /**
  * Extracts geo-coodinates.
@@ -43,8 +44,8 @@ class GeoExtractor( context : {
 
       //TODO use typed literals?
         new Graph( new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(typeOntProperty), new IriRef(featureOntClass.uri), new IriRef(sourceUri)) ::
-                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(latOntProperty), new PlainLiteral(coord.latitude.toString), new IriRef(sourceUri)) ::
-                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(lonOntProperty),  new PlainLiteral(coord.longitude.toString), new IriRef(sourceUri)) ::
-                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(pointOntProperty),  new PlainLiteral(coord.latitude + " " + coord.longitude), new IriRef(sourceUri)) :: Nil )
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(latOntProperty), new TypedLiteral(coord.latitude.toString, latOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri)) ::
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(lonOntProperty),  new TypedLiteral(coord.longitude.toString, lonOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri)) ::
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(pointOntProperty),  new TypedLiteral(coord.latitude + " " + coord.longitude, pointOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri)) :: Nil )
     }
 }

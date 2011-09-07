@@ -118,7 +118,7 @@ object ConfigLoader
 
         //Extractors
         val extractors = config.extractors(lang)
-        val compositeExtractor = Extractor.load(extractors, context)
+        val compositeExtractor = Extractor.load(extractors, language)
 
         //Destination
         val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => lang.filePrefix + "/" + dataset.name + "_" + lang.filePrefix + ".nt")

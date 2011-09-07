@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, PlainLiteral, TypedLiteral}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateNode, Node}
 import org.dbpedia.extraction.dataparser.{ObjectParser, DateTimeParser, StringParser}
 import org.dbpedia.extraction.config.mappings.PersondataExtractorConfig

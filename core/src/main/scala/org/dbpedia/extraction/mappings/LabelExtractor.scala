@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, PlainLiteral}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
