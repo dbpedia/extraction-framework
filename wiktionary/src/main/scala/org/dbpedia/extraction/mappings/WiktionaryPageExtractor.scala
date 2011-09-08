@@ -25,7 +25,7 @@ import WiktionaryLogging._
  * this is done via xml containing wikisyntax snippets (called templates) containing placeholders (called variables), which are then bound
  *
  * we also extended this approach to match the wiktionary schema
- * a page can contain information about multiple entities (sequential blocks), each having multiple contexts/senses
+ * a page can contain information about multiple entities (sequential blocks), each having multiple contexts/emittedBlockSenseConnections
  * other use cases (non-wiktionary), can be seen as a special case, having only one block (entity) and one sense
  *
  * @author Jonas Brekle <jonas.brekle@gmail.com>
@@ -213,7 +213,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
     new Graph(quadsSortedImmutable)
   }
 
-  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical, senses : HashMap[String,Set[String]]) : List[Quad] = {
+  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical, emittedBlockSenseConnections : HashMap[String,Set[String]]) : List[Quad] = {
     val quads = new ListBuffer[Quad]
 
     val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
@@ -238,17 +238,17 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
               val senseUri = new IriRef(blockIris(blockName).uri + "-" + sense.myToString)
               quads += new Quad(wiktionaryDataset, senseUri, new IriRef(varr.property), obj, tripleContext)
 
-              //connect senses to their blocks (collect for distinctness)
-              var emit = false
-              if(!senses.contains(blockIris(blockName).uri)  ){
-                senses(blockIris(blockName).uri) = Set(senseUri.uri)
-                emit = true
-              } else if(!senses(blockIris(blockName).uri).contains(senseUri.uri)){
-                senses(blockIris(blockName).uri).add(senseUri.uri)
-                emit = true
+              //connect emittedBlockSenseConnections to their blocks (collect for distinctness)
+              var emitThis = false
+              if(!emittedBlockSenseConnections.contains(blockIris(blockName).uri)  ){
+                emittedBlockSenseConnections(blockIris(blockName).uri) = Set(senseUri.uri)
+                emitThis = true
+              } else if(!emittedBlockSenseConnections(blockIris(blockName).uri).contains(senseUri.uri)){
+                emittedBlockSenseConnections(blockIris(blockName).uri).add(senseUri.uri)
+                emitThis = true
               }
-              if(emit){
-                println("saved senseUri "+senseUri.render+ " size"+senses.size)
+              if(emitThis){
+                println("saved senseUri "+senseUri.render+ " size"+emittedBlockSenseConnections.size)
                 quads += new Quad(wiktionaryDataset, blockIris(blockName), senseIriRef, senseUri, tripleContext)
               }
             })
@@ -266,8 +266,8 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
       })
     }
 
-    /*//emit connections from block to its senses
-    for((parentBlock:IriRef, sense:IriRef) <- senses)  {
+    /*//emit connections from block to its emittedBlockSenseConnections
+    for((parentBlock:IriRef, sense:IriRef) <- emittedBlockSenseConnections)  {
       quads += new Quad(wiktionaryDataset, parentBlock, senseIriRef, sense, tripleContext)
     }*/
     quads.toList
