@@ -51,7 +51,7 @@ object ConfigLoader
         val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList
 
         //Load property updateDumps
-        val update = Option(config.getProperty("updateDumps")).getOrElse(return false).trim.toLowerCase match
+        val update = Option(config.getProperty("updateDumps")).getOrElse("false").trim.toLowerCase match
         {
             case BooleanLiteral(b) => b
             case _ => throw new IllegalArgumentException("Invalid value for property 'updateDumps'")

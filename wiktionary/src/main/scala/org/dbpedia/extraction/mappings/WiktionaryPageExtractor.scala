@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{Graph, Quad, Dataset, IriRef, PlainLiteral}
+import org.dbpedia.extraction.destinations.{Graph, Quad, Dataset, IriRef, PlainLiteral, GraphNode}
 import util.control.Breaks._
 import java.io.FileNotFoundException
 import java.lang.StringBuffer
@@ -41,10 +41,10 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
 
   private val templates = (config \ "templates" \ "sections" \ "template").map((n : XMLNode) =>  Tpl.fromNode(n))
 
-  private val mappings = (config \ "mappings" \ "mapping").map(
+  private val mappings : Map[String, String] = (config \ "mappings" \ "mapping").map(
       (n : XMLNode) =>
         ( (n \ "@from").text,
-          if(n.attribute("toType").isDefined && (n \ "@toType").text.equals("uri")){new IriRef((n \ "@to").text)} else {new PlainLiteral((n \ "@to").text)}
+          if(n.attribute("toType").isDefined && (n \ "@toType").text.equals("uri")){(n \ "@to").text} else {(n \ "@to").text}
         )
       ).toMap
 
@@ -55,8 +55,9 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
 
   val wiktionaryDataset : Dataset = new Dataset("wiktionary")
   val tripleContext = new IriRef(ns)
+  val senseIriRef = new IriRef(senseProperty)
 
-  //to cache last used blockIris
+  //to cache last used blockIris (from block name to its uri)
   val blockIris = new HashMap[String, IriRef]
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
@@ -68,10 +69,11 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
 
     val quads = new ListBuffer[Quad]()
     val word = subjectUri.split("/").last
-    measure {
+    val senses = HashMap[String, Set[String]]()
 
+    measure {
       val pageConfig = Page.fromNode((config \ "page").head)
-      blockIris("page") = new IriRef(subjectUri)
+      blockIris("page") = new IriRef(ns + word) //this is also the base-url (all nested blocks will get uris with this as a prefix)
 
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse)
 
@@ -103,14 +105,14 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
 
       //handle the bindings from pro- and epilog
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
-         quads appendAll handleBlockBinding(pageConfig, tpl, tplBindings)
+         quads appendAll handleBlockBinding(pageConfig, tpl, tplBindings, senses)
       }})
 
       //keep track where we are in the page block hierarchy
       val curOpenBlocks = new ListBuffer[Block]()
       curOpenBlocks append pageConfig
 
-      //keep track if we consumed at least one node in this while run - if a drop that node at the end
+      //keep track if we consumed at least one node in this while run - if not, drop one node at the end
       var consumed = false
       while(pageStack.size > 0){
         // try recognizing block starts of blocks. if recognized we go somewhere UP the hierarchy (the block ended) or one step DOWN (new sub block)
@@ -156,15 +158,17 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
               val blockIdentifier = new StringBuffer(blockIris(lastBlockName).uri)
 
               block.indTpl.vars.foreach((varr : Var) => {
-                //concatenate all binding values of the block indicator tpl (sufficient?)
-                blockIdentifier append "-"+blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
+                //concatenate all binding values of the block indicator tpl to form a proper name for the block (sufficient?)
+                val localBlockProperty = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
+                val localBlockPropertyMapped = mappings.getOrElse(localBlockProperty, localBlockProperty)
+                blockIdentifier append ("-" + localBlockPropertyMapped)
               })
               val blockIri = new IriRef(blockIdentifier.toString)
               blockIris(block.indTpl.name) = blockIri
-              //generate triples that indentify the block
+              //generate triples that identify the block
               block.indTpl.vars.foreach((varr : Var) => {
                 val objStr = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
-                val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
+                val obj = handleObjectMapping(varr, objStr)
                 quads += new Quad(wiktionaryDataset, blockIri, new IriRef(varr.property), obj, tripleContext)
               })
 
@@ -189,7 +193,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
             consumed = true
             //generate triples
             //println(tpl.name +": "+ blockBindings.dump())
-            quads appendAll handleBlockBinding(curBlock, tpl, blockBindings)
+            quads appendAll handleBlockBinding(curBlock, tpl, blockBindings, senses)
           } catch {
             case e : WiktionaryException => //did not match
           }
@@ -209,8 +213,10 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
     new Graph(quadsSortedImmutable)
   }
 
-  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical) : List[Quad] = {
+  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical, senses : HashMap[String,Set[String]]) : List[Quad] = {
     val quads = new ListBuffer[Quad]
+
+    val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
     if(tpl.needsPostProcessing){
       //TODO does not work yet, implement the invocation of a static method that does a transformation of the bindings
       val clazz = ClassLoader.getSystemClassLoader().loadClass(tpl.ppClass.get)
@@ -227,26 +233,59 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
             senseBindings.foreach((binding)=>{
               //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
               val objStr = binding.myToString
-              val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-              val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
-              quads += new Quad(wiktionaryDataset, new IriRef(blockIris(blockName).uri + "-"+sense.myToString), new IriRef(varr.property), obj, tripleContext)
-              //TODO triples to connect blocks to its senses (maybe collect all senses here, make distinct, then build triples after normal bindingtriples)
-            })
+              //map object from (language-specific) literals to (universal) URIs if possible
+              val obj = handleObjectMapping(varr, objStr)
+              val senseUri = new IriRef(blockIris(blockName).uri + "-" + sense.myToString)
+              quads += new Quad(wiktionaryDataset, senseUri, new IriRef(varr.property), obj, tripleContext)
 
+              //connect senses to their blocks (collect for distinctness)
+              var emit = false
+              if(!senses.contains(blockIris(blockName).uri)  ){
+                senses(blockIris(blockName).uri) = Set(senseUri.uri)
+                emit = true
+              } else if(!senses(blockIris(blockName).uri).contains(senseUri.uri)){
+                senses(blockIris(blockName).uri).add(senseUri.uri)
+                emit = true
+              }
+              if(emit){
+                println("saved senseUri "+senseUri.render+ " size"+senses.size)
+                quads += new Quad(wiktionaryDataset, blockIris(blockName), senseIriRef, senseUri, tripleContext)
+              }
+            })
           })
         } else {
           //handle non-sense bound vars - they are related to the whole block/usage (e.g. hyphenation)
           val bindings = blockBindings.getAllBindings(varr.name)
           for(binding <- bindings){
             val objStr = binding.myToString
-            val obj = if(varr.doMapping){mappings.getOrElse(objStr,new PlainLiteral(objStr))} else {new PlainLiteral(objStr)}
-            val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
+            val obj = handleObjectMapping(varr, objStr)
             quads += new Quad(wiktionaryDataset, blockIris(blockName), new IriRef(varr.property), obj, tripleContext)
 
           }
         }
       })
     }
+
+    /*//emit connections from block to its senses
+    for((parentBlock:IriRef, sense:IriRef) <- senses)  {
+      quads += new Quad(wiktionaryDataset, parentBlock, senseIriRef, sense, tripleContext)
+    }*/
     quads.toList
+  }
+
+  def handleObjectMapping(varr: Var, objectStr: String, toUri : Boolean = false) : GraphNode = {
+    if(varr.doMapping){
+      if(mappings.contains(objectStr)){
+        if(toUri){
+          new IriRef(ns + mappings(objectStr))
+        } else {
+          new PlainLiteral(mappings(objectStr))
+        }
+      } else {
+        new PlainLiteral(objectStr)
+      }
+    } else {
+      new PlainLiteral(objectStr)
+    }
   }
 }
