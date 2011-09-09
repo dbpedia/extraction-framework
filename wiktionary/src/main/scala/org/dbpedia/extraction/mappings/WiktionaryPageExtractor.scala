@@ -53,12 +53,9 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
   val senseProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseProperty") }).getOrElse(<propery value="http://undefined.com/"/>)) \ "@value").text
   val senseIdVarName = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseVarName") }).getOrElse(<propery value="meaning_id"/>)) \ "@value").text
 
-  val wiktionaryDataset : Dataset = new Dataset("wiktionary")
+  val wiktionaryDataset : Dataset = new Dataset("wiktionary.dbpedia.org")
   val tripleContext = new IriRef(ns)
   val senseIriRef = new IriRef(senseProperty)
-
-  //to cache last used blockIris (from block name to its uri)
-  val blockIris = new HashMap[String, IriRef]
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
@@ -70,6 +67,9 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
     val quads = new ListBuffer[Quad]()
     val word = subjectUri.split("/").last
     val senses = HashMap[String, Set[String]]()
+
+    //to cache last used blockIris (from block name to its uri)
+    val blockIris = new HashMap[String, IriRef]
 
     measure {
       val pageConfig = Page.fromNode((config \ "page").head)
@@ -105,7 +105,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
 
       //handle the bindings from pro- and epilog
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
-         quads appendAll handleBlockBinding(pageConfig, tpl, tplBindings, senses)
+         quads appendAll handleBlockBinding(pageConfig, tpl, tplBindings, senses, blockIris)
       }})
 
       //keep track where we are in the page block hierarchy
@@ -193,7 +193,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
             consumed = true
             //generate triples
             //println(tpl.name +": "+ blockBindings.dump())
-            quads appendAll handleBlockBinding(curBlock, tpl, blockBindings, senses)
+            quads appendAll handleBlockBinding(curBlock, tpl, blockBindings, senses, blockIris)
           } catch {
             case e : WiktionaryException => //did not match
           }
@@ -213,7 +213,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
     new Graph(quadsSortedImmutable)
   }
 
-  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical, emittedBlockSenseConnections : HashMap[String,Set[String]]) : List[Quad] = {
+  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical, emittedBlockSenseConnections : HashMap[String,Set[String]], blockIris : HashMap[String, IriRef]) : List[Quad] = {
     val quads = new ListBuffer[Quad]
 
     val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
@@ -252,7 +252,6 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
                   emitThis = true
                 }
                 if(emitThis){
-                  println("saved senseUri "+senseUri.render+ " size"+emittedBlockSenseConnections.size)
                   quads += new Quad(wiktionaryDataset, blockIris(blockName), senseIriRef, senseUri, tripleContext)
                 }
               }
@@ -282,8 +281,8 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
   def handleObjectMapping(varr: Var, objectStr: String, toUri : Boolean = true) : GraphNode = {
     printMsg("varr.name= "+varr.name+"varr.format="+varr.format)
     if(varr.doMapping){
-      val mapped = mappings(objectStr)
       if(mappings.contains(objectStr)){
+        val mapped = mappings(objectStr)
         if(toUri){
           if(!varr.format.equals("")){
             new IriRef(varr.format.format(mapped ) )
