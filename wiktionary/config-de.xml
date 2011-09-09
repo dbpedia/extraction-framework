@@ -21,7 +21,7 @@
         <prologs>
             <template name="also">
                 <vars>
-                    <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
+                    <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" type="resource"/>
                 </vars>
                 <wikiSyntax>{{Siehe auch|{{extractiontlp|var|otherPage}}}}</wikiSyntax>
             </template>
@@ -39,7 +39,7 @@
             <property uri="http://wiktionary.dbpedia.org/terms/hasLangUsage"/>
             <template name="lang-start">
                 <vars>
-                    <var name="language" property="http://purl.org/dc/elements/1.1/language" doMapping="true"/>
+                    <var name="language" property="http://purl.org/dc/elements/1.1/language" doMapping="true"  type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
                 </vars>
                 <wikiSyntax>== {{extractiontpl|var|word}} ({{Sprache|{{extractiontpl|var|language}}}}) ==</wikiSyntax>
             </template>
@@ -47,7 +47,7 @@
                 <property uri="http://wiktionary.dbpedia.org/terms/hasPoSUsage"/>
                 <template name="pos-start">
                     <vars>
-                        <var name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoS" doMapping="true"/>
+                        <var name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoS" doMapping="true"   type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
                     </vars>
                     <wikiSyntax>=== {{Wortart|{{extractiontpl|var|pos}}|{{extractiontpl|var|language}}}} ===</wikiSyntax>
                 </template>

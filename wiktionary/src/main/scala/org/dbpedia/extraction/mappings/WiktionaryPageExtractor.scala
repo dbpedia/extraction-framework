@@ -159,9 +159,9 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
 
               block.indTpl.vars.foreach((varr : Var) => {
                 //concatenate all binding values of the block indicator tpl to form a proper name for the block (sufficient?)
-                val localBlockProperty = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
-                val localBlockPropertyMapped = mappings.getOrElse(localBlockProperty, localBlockProperty)
-                blockIdentifier append ("-" + localBlockPropertyMapped)
+                val objStr = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
+                val localBlockPropertyMapped = handleObjectMapping(varr, objStr, false) //this false forces a literal to be returned
+                blockIdentifier append ("-" + localBlockPropertyMapped.asInstanceOf[PlainLiteral].value)
               })
               val blockIri = new IriRef(blockIdentifier.toString)
               blockIris(block.indTpl.name) = blockIri
@@ -234,8 +234,9 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
               //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
               val objStr = binding.myToString
 
+              //avoid useless triples
               if(!objStr.equals("")){
-//map object from (language-specific) literals to (universal) URIs if possible
+                //map object from (language-specific) literals to (universal) URIs if possible
                 val obj = handleObjectMapping(varr, objStr)
                 val senseUri = new IriRef(blockIris(blockName).uri + "-" + sense.myToString)
 
@@ -278,13 +279,19 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
     quads.toList
   }
 
-  def handleObjectMapping(varr: Var, objectStr: String, toUri : Boolean = false) : GraphNode = {
+  def handleObjectMapping(varr: Var, objectStr: String, toUri : Boolean = true) : GraphNode = {
+    printMsg("varr.name= "+varr.name+"varr.format="+varr.format)
     if(varr.doMapping){
+      val mapped = mappings(objectStr)
       if(mappings.contains(objectStr)){
         if(toUri){
-          new IriRef(ns + mappings(objectStr))
+          if(!varr.format.equals("")){
+            new IriRef(varr.format.format(mapped ) )
+          } else {
+            new IriRef(ns + mapped)
+          }
         } else {
-          new PlainLiteral(mappings(objectStr))
+          new PlainLiteral(mapped)
         }
       } else {
         new PlainLiteral(objectStr)
