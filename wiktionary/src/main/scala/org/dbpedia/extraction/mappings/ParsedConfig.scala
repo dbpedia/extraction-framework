@@ -15,16 +15,17 @@ import MyStack._
 
 /**
  * these classes represent configuration from the xml
- * they simple wrappers that provide a object representation to avoid xml in the extractor
+ * they are simple wrappers that provide a object representation to avoid xml in the extractor
  */
 
-class Var (val name : String, val property : String, val senseBound : Boolean, val bindsToUri : Boolean, val doMapping : Boolean)
+class Var (val name : String, val property : String, val senseBound : Boolean, val toUri : Boolean, val format : String, val doMapping : Boolean)
 object Var {
   def fromNode(n:XMLNode) = new Var(
     (n \ "@name").text,
     (n \ "@property").text,
     n.attribute("senseBound").isDefined && (n \ "@senseBound").text.equals("true"),
     n.attribute("type").isDefined && (n \ "@type").text.equals("resource"),
+    (n \ "@format").text,
     n.attribute("doMapping").isDefined && (n \ "@doMapping").text.equals("true")
   )
 }
