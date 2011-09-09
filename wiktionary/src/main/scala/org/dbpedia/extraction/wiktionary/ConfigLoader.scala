@@ -123,7 +123,7 @@ object ConfigLoader
         def getDumpFile(wikiPrefix : String) : File =
         {
           
-            val articlesDump = new File(dumpDir+"/one.xml")
+            val articlesDump = new File(dumpDir+"/example-spatenrecht.xml")
             articlesDump
         }
 

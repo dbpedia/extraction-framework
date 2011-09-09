@@ -233,23 +233,27 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
             senseBindings.foreach((binding)=>{
               //the sense identifier is mostly something like "[1]" - sense is then List(TextNode("1"))
               val objStr = binding.myToString
-              //map object from (language-specific) literals to (universal) URIs if possible
-              val obj = handleObjectMapping(varr, objStr)
-              val senseUri = new IriRef(blockIris(blockName).uri + "-" + sense.myToString)
-              quads += new Quad(wiktionaryDataset, senseUri, new IriRef(varr.property), obj, tripleContext)
 
-              //connect emittedBlockSenseConnections to their blocks (collect for distinctness)
-              var emitThis = false
-              if(!emittedBlockSenseConnections.contains(blockIris(blockName).uri)  ){
-                emittedBlockSenseConnections(blockIris(blockName).uri) = Set(senseUri.uri)
-                emitThis = true
-              } else if(!emittedBlockSenseConnections(blockIris(blockName).uri).contains(senseUri.uri)){
-                emittedBlockSenseConnections(blockIris(blockName).uri).add(senseUri.uri)
-                emitThis = true
-              }
-              if(emitThis){
-                println("saved senseUri "+senseUri.render+ " size"+emittedBlockSenseConnections.size)
-                quads += new Quad(wiktionaryDataset, blockIris(blockName), senseIriRef, senseUri, tripleContext)
+              if(!objStr.equals("")){
+//map object from (language-specific) literals to (universal) URIs if possible
+                val obj = handleObjectMapping(varr, objStr)
+                val senseUri = new IriRef(blockIris(blockName).uri + "-" + sense.myToString)
+
+                quads += new Quad(wiktionaryDataset, senseUri, new IriRef(varr.property), obj, tripleContext)
+
+                //connect emittedBlockSenseConnections to their blocks (collect for distinctness)
+                var emitThis = false
+                if(!emittedBlockSenseConnections.contains(blockIris(blockName).uri)  ){
+                  emittedBlockSenseConnections(blockIris(blockName).uri) = Set(senseUri.uri)
+                  emitThis = true
+                } else if(!emittedBlockSenseConnections(blockIris(blockName).uri).contains(senseUri.uri)){
+                  emittedBlockSenseConnections(blockIris(blockName).uri).add(senseUri.uri)
+                  emitThis = true
+                }
+                if(emitThis){
+                  println("saved senseUri "+senseUri.render+ " size"+emittedBlockSenseConnections.size)
+                  quads += new Quad(wiktionaryDataset, blockIris(blockName), senseIriRef, senseUri, tripleContext)
+                }
               }
             })
           })
@@ -258,9 +262,10 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
           val bindings = blockBindings.getAllBindings(varr.name)
           for(binding <- bindings){
             val objStr = binding.myToString
-            val obj = handleObjectMapping(varr, objStr)
-            quads += new Quad(wiktionaryDataset, blockIris(blockName), new IriRef(varr.property), obj, tripleContext)
-
+            if(!objStr.equals("")){
+              val obj = handleObjectMapping(varr, objStr)
+              quads += new Quad(wiktionaryDataset, blockIris(blockName), new IriRef(varr.property), obj, tripleContext)
+            }
           }
         }
       })

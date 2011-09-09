@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.wikiparser._
 import impl.simple.SimpleWikiParser
 import util.control.Breaks._
-import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map}
+import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map, Queue}
 import xml.{XML, Node => XMLNode}
 
 //some of my utilities
@@ -29,18 +29,36 @@ object VarBinder {
     //used as a backup (in case of a exeption when the template does not match)
     val pageItCopy = pageIt.clone
 
+    //we try to do some fuzzy parsing, we allow 1 error in a sliding window of 5 nodes
+    val lastResults = new Queue[Boolean]();
+    val windowSize = 5
+    val maxFailures = 1
+    val minCorrect = 1  //but there needs to be at least one correct, to prevent buffers of size 1 with one mismatch to count as correct
+
     val bindings = new VarBindingsHierarchical
     while(tplIt.size > 0 && pageIt.size > 0){
         try {
           //try to match node-by-node
+          if(lastResults.size == windowSize){
+            lastResults.dequeue()
+          }
           bindings addChild parseNode(tplIt, pageIt)
+          lastResults.enqueue(true)
         } catch {
           case e : WiktionaryException => {
             //the template does not match the page
-            pageIt.clear
-            pageIt.pushAll(pageItCopy.reverse)  // restore the page
-            bindings addChild e.vars   // merge current bindings with previous and "return" them
-            throw e.copy(vars=bindings)
+            lastResults.enqueue(false)
+            val failures = lastResults.count(!_)
+            val correct = lastResults.size - failures
+            printMsg("failures="+failures+" correct="+correct+" queue="+lastResults)
+            if(failures > maxFailures || correct < minCorrect){
+              //too many errors
+              printMsg("too many errors")
+              pageIt.clear
+              pageIt.pushAll(pageItCopy.reverse)  // restore the page
+              bindings addChild e.vars   // merge current bindings with previous and "return" them
+              throw e.copy(vars=bindings)
+            }
           }
         }
     }
@@ -431,8 +449,6 @@ class VarBindingsHierarchical (){
     }
     ret
   }
-
-  //everything below here is not essential
 
   /**
    * print for debug info
