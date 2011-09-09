@@ -1,14 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import java.util.logging.Logger
 import org.dbpedia.extraction.dataparser.DateTimeParser
-import org.dbpedia.extraction.util.Date
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.{Language, Date}
+import org.dbpedia.extraction.destinations.{IriRef, DBpediaDatasets, Quad, Graph, TypedLiteral}
 
 class CombineDateMapping( ontologyProperty : OntologyProperty,
                           val templateProperty1 : String,
@@ -65,7 +63,7 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
         {
             val mergedDate = Date.merge(dates, datatype)
 
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, mergedDate.toString, node.sourceUri, datatype)
+            val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral(mergedDate.toString, datatype), node.sourceUri)
 
             new Graph(quad)
         }

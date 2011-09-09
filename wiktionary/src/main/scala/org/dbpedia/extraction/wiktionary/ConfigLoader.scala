@@ -51,7 +51,7 @@ object ConfigLoader
         val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList
 
         //Load property updateDumps
-        val update = Option(config.getProperty("updateDumps")).getOrElse(return false).trim.toLowerCase match
+        val update = Option(config.getProperty("updateDumps")).getOrElse("false").trim.toLowerCase match
         {
             case BooleanLiteral(b) => b
             case _ => throw new IllegalArgumentException("Invalid value for property 'updateDumps'")
@@ -81,7 +81,7 @@ object ConfigLoader
                     title.namespace == WikiTitle.Namespace.Category || title.namespace == WikiTitle.Namespace.Template)
 
         //Extractor
-        val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
+        val extractor = Extractor.load(config.extractors(language), language)
 
         //Destination
         val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
@@ -123,7 +123,7 @@ object ConfigLoader
         def getDumpFile(wikiPrefix : String) : File =
         {
           
-            val articlesDump = new File(dumpDir+"/one.xml")
+            val articlesDump = new File(dumpDir+"/example-spatenrecht.xml")
             articlesDump
         }
 

@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph, IriRef}
 import org.dbpedia.extraction.wikiparser._
 import impl.wikipedia.Namespaces
 import org.dbpedia.extraction.sources.Source
@@ -31,16 +31,15 @@ class ImageExtractor( context : {
     private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + language +"/"
     private val commonsUrlPrefix = ImageExtractorConfig.wikipediaUrlPrefix + "commons/"
 
-    private val nonFreeImages = new HashSet[String]()
-    private val freeWikipediaImages = new HashSet[String]()
-
     private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
 
     private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
 
     logger.info("Loadings images")
-    ImageExtractor.loadImages(extractionContext.articlesSource, freeWikipediaImages, nonFreeImages, language)
-    ImageExtractor.loadImages(extractionContext.commonsSource, null, nonFreeImages, language)
+    private val nonFreeImages = new HashSet[String]()
+    private val freeWikipediaImages = new HashSet[String]()
+    ImageExtractor.loadImages(context.commonsSource, null, nonFreeImages, language)
+    ImageExtractor.loadImages(context.articlesSource, freeWikipediaImages, nonFreeImages, language)
     logger.info("Images loaded from dump")
 
     private val dbpediaThumbnailProperty = context.ontology.getProperty("thumbnail").get
@@ -58,14 +57,14 @@ class ImageExtractor( context : {
         {
             val (url, thumbnailUrl) = getImageUrl(imageFileName)
 
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(subjectUri), new IriRef(foafDepictionProperty), new IriRef(url), new IriRef(sourceNode.sourceUri))
+            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(subjectUri), new IriRef(dbpediaThumbnailProperty), new IriRef(thumbnailUrl), new IriRef(sourceNode.sourceUri))
+            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(url), new IriRef(foafThumbnailProperty), new IriRef(thumbnailUrl), new IriRef(sourceNode.sourceUri))
 
             val wikipediaImageUrl = "http://" + language + ".wikipedia.org/wiki/"+ fileNamespaceIdentifier +":" + imageFileName
 
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(url), new IriRef(dcRightsProperty), new IriRef(wikipediaImageUrl), new IriRef(sourceNode.sourceUri))
+            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(thumbnailUrl), new IriRef(dcRightsProperty), new IriRef(wikipediaImageUrl), new IriRef(sourceNode.sourceUri))
         }
 
         new Graph(quads)
@@ -73,8 +72,6 @@ class ImageExtractor( context : {
 
     private def searchImage(nodes : List[Node], sections : Int) : Option[(String, Node)] =
     {
-        import ImageExtractor._
-
         var currentSections = sections
         for (node <- nodes)
         {
@@ -184,13 +181,6 @@ class ImageExtractor( context : {
 
 private object ImageExtractor
 {
-    val NonFreeRegex = Map("en" -> """(?i)\{\{\s?non-free""".r,
-						   "el" -> """(?iu)\{\{\s?(εύλογη χρήση|σήμα|σήμα αθλητικού σωματείου|αφίσα ταινίας|σκηνή από ταινία|γραφικά υπολογιστή|εξώφυλλο άλμπουμ|εξώφυλλο βιβλίου|μη ελεύθερο έργο τέχνης|σελίδα κόμικς|σελίδα εφημερίδας|εικόνα-βιντεοπαιχνίδι|ιδιοκτησία Wikimedia)\s?\}\}""".r )
-
-    private val ImageRegex = """(?i)[^\"/\*?<>|:]+\.(?:jpe?g|png|gif|svg)""".r
-
-    private val ImageLinkRegex = """(?i).*\.(?:jpe?g|png|gif|svg)""".r
-
     private def loadImages(source : Source, freeImages : MutableSet[String], nonFreeImages : MutableSet[String], lang : String)
     {
         val logger = Logger.getLogger(classOf[ImageExtractor].getName)

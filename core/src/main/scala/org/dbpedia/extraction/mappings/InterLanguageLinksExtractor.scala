@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InterWikiLinkNode}
 import org.dbpedia.extraction.config.mappings.InterLanguageLinksExtractorConfig
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.destinations.{IriRef, Graph, DBpediaDatasets, Quad}
 
 
 /**
@@ -31,8 +31,11 @@ class InterLanguageLinksExtractor( context : {
 
         retrieveTranslationTitles (node,InterLanguageLinksExtractorConfig.intLinksMap(language)).foreach { tuple:(Language, WikiTitle) =>
             val (tlang, title) = tuple
-            quads ::= new Quad(context.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
-                OntologyNamespaces.getResource(title.encodedWithNamespace, tlang), title.sourceUri, null)
+            quads ::= new Quad( DBpediaDatasets.SameAs,
+              new IriRef(subjectUri),
+              new IriRef(interLanguageLinksProperty),
+              new IriRef(OntologyNamespaces.getResource(title.encodedWithNamespace, tlang)),
+              title.sourceUri)
         }
         new Graph(quads)
     }

@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateNode}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.destinations._
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 
 /**
  * Extracts geo-coodinates.
@@ -39,9 +40,12 @@ class GeoExtractor( context : {
 
     private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Graph =
     {
-        new Graph( new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri) ::
-                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri) ::
-                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri) ::
-                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri) :: Nil )
+      val subj = new IriRef(subjectUri)
+
+      //TODO use typed literals?
+        new Graph( new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(typeOntProperty), new IriRef(featureOntClass.uri), new IriRef(sourceUri)) ::
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(latOntProperty), new TypedLiteral(coord.latitude.toString, latOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri)) ::
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(lonOntProperty),  new TypedLiteral(coord.longitude.toString, lonOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri)) ::
+                   new Quad(DBpediaDatasets.GeoCoordinates, subj, new IriRef(pointOntProperty),  new TypedLiteral(coord.latitude + " " + coord.longitude, pointOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri)) :: Nil )
     }
 }

@@ -2,11 +2,11 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.ontology.OntologyProperty
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, TypedLiteral}
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 
 /**
  * Extracts geo-coodinates.
@@ -31,15 +31,15 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
 {
     private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName) 
 
-    private val geoCoordinateParser = new GeoCoordinateParser(extractionContext)
-    private val doubleParser = new DoubleParser(extractionContext)
+    private val geoCoordinateParser = new GeoCoordinateParser(context)
+    private val doubleParser = new DoubleParser(context)
     private val stringParser = StringParser
 
-    private val typeOntProperty = extractionContext.ontology.getProperty("rdf:type").get
-    private val latOntProperty = extractionContext.ontology.getProperty("geo:lat").get
-    private val lonOntProperty = extractionContext.ontology.getProperty("geo:long").get
-    private val pointOntProperty = extractionContext.ontology.getProperty("georss:point").get
-    private val featureOntClass =  extractionContext.ontology.getClass("gml:_Feature").get
+    private val typeOntProperty = context.ontology.getProperty("rdf:type").get
+    private val latOntProperty = context.ontology.getProperty("geo:lat").get
+    private val lonOntProperty = context.ontology.getProperty("geo:long").get
+    private val pointOntProperty = context.ontology.getProperty("georss:point").get
+    private val featureOntClass =  context.ontology.getClass("gml:_Feature").get
 
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -118,16 +118,15 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
 
         if(ontologyProperty != null)
         {
-            instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
-
-            quads ::= new Quad(context.language,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
+          instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
+          quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new IriRef(instanceUri), new IriRef(sourceUri))
         }
+        //TODO is using typed literals ok?
+        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(typeOntProperty), new IriRef(featureOntClass.uri), new IriRef(sourceUri))
+        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(latOntProperty), new TypedLiteral(coord.latitude.toString, latOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri))
+        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(lonOntProperty), new TypedLiteral(coord.longitude.toString, lonOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri))
+        quads ::= new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(pointOntProperty), new TypedLiteral(coord.latitude + " " + coord.longitude, pointOntProperty.range.asInstanceOf[Datatype]), new IriRef(sourceUri))
 
-        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
-        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
-        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
-        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
-
-        new Graph(quads)
+        return new Graph(quads)
     }
 }

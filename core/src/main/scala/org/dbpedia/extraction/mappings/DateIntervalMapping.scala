@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import java.util.logging.Logger
 import org.dbpedia.extraction.dataparser.DateTimeParser
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, TypedLiteral}
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
@@ -62,7 +62,7 @@ class DateIntervalMapping( val templateProperty : String,
             }
 
             //Write start date quad
-            val quad1 = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
+          val quad1 = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(startDateOntologyProperty), new TypedLiteral(startDate.toString, startDateOntologyProperty.range.asInstanceOf[Datatype]), propertyNode.sourceUri)
 
             //Writing the end date is optional if "until present" is specified
             for(endDate <- endDateOpt)
@@ -75,8 +75,7 @@ class DateIntervalMapping( val templateProperty : String,
                 }
 
                 //Write end year quad
-                val quad2 = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
-
+                val quad2 = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(endDateOntologyProperty), new TypedLiteral(endDate.toString, endDateOntologyProperty.range.asInstanceOf[Datatype]), new IriRef(propertyNode.sourceUri))
                 return new Graph(quad1 :: quad2 :: Nil)
             }
 

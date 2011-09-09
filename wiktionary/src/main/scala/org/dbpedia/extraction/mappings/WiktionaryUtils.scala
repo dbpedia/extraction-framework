@@ -251,9 +251,9 @@ object WiktionaryLogging {
       println(prefix + "------------")
       println(prefix + "<entering " + name +">")
       println(prefix + "<template (next 10)>")
-      println(prefix + tplIt.take(10).map(_.dumpStrShort).mkString)
+      println(prefix + tplIt.take(1).map(_.dumpStrShort).mkString)
       println(prefix + "<page (next 10)>")
-      println(prefix + pageIt.take(10).map(_.dumpStrShort).mkString)
+      println(prefix + pageIt.take(1).map(_.dumpStrShort).mkString)
       println(prefix + "------------\n\n")
     }
   }
@@ -315,7 +315,7 @@ class MyNode (val n : Node){
       case tn : TextNode => "<text>"+tn.toWikiText+"</text> "
       case ln : LinkNode => "<link>"+ln.toWikiText+"</link> "
       case sn : SectionNode=> "<section>"+sn.toWikiText+"</section> "
-      case node : Node=> "<other "+node.getClass+">"+node.retrieveText.get + "</other> "
+      case node : Node=> "<other "+node.getClass+">"+node.retrieveText.getOrElse("") + "</other> "
     }
   }
 
