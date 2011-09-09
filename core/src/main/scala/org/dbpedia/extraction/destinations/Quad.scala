@@ -19,14 +19,21 @@ class Quad(	val dataset : Dataset,
 {
   //various constructors
   def this( dataset : Dataset,
-                subject : IriRef,
-            predicate : OntologyProperty,
-            value : GraphNode,
-            context : IriRef ) = this(dataset, subject, new IriRef(predicate.uri), value, context)
+              subject : IriRef,
+              predicate : OntologyProperty,
+              value : GraphNode,
+              context : IriRef ) = this(dataset, subject, new IriRef(predicate.uri), value, context)
+
+  def this( dataset : Dataset,
+              subject : IriRef,
+              predicate : IriRef,
+              value : GraphNode,
+              context : String ) = this(dataset, subject, new IriRef(predicate.uri), value, new IriRef(context))
+
 
   //subject, predicate and context can be string because they can only be IriRefs
   def this( dataset : Dataset,
-                subject : String,
+            subject : String,
             predicate : String,
             value : GraphNode,
             context : String ) = this(dataset, new IriRef(subject), new IriRef(predicate), value, new IriRef(context))
@@ -41,19 +48,17 @@ class Quad(	val dataset : Dataset,
 	//new URI(subject)
 	//new URI(context)
 
-
-
-    def renderNTriple = render(false)
+  def renderNTriple = render(false)
     
-    def renderNQuad = render(true)
+  def renderNQuad = render(true)
     
-    override def toString = renderNQuad
+  override def toString = renderNQuad
     
-    private def render(includeContext : Boolean) : String =
-    {
-      subject.render + " " + predicate.render + " " + value.render +  " " +
-        (if (includeContext){ context.render +  " "  } else {""}) + ". "
-    }
+  private def render(includeContext : Boolean) : String =
+  {
+    subject.render + " " + predicate.render + " " + value.render +  " " +
+      (if (includeContext){ context.render +  " "  } else {""}) + ". "
+  }
 }
 
 object Quad

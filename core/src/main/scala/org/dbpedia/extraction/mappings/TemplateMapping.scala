@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.{Node, PropertyNode, TemplateNode}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 
@@ -66,7 +66,7 @@ case class TemplateMapping( mapToClass : OntologyClass,
                     if(found)
                     {
                         //Connect new instance to the instance created from the root template
-                        val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
+                        val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(instanceUri), new IriRef(correspondingProperty), new IriRef(subjectUri), new IriRef(node.sourceUri))
                         graph = graph.merge(new Graph(quad))
                     }
                 }
@@ -98,9 +98,9 @@ case class TemplateMapping( mapToClass : OntologyClass,
         }
 
         //Create type statements
-        val quads = for(clazz <- classes) yield new Quad(context.language, DBpediaDatasets.OntologyTypes, uri,
-                                                         context.ontology.getProperty("rdf:type").get,
-                                                         clazz.uri, node.sourceUri )
+        val quads = for(clazz <- classes) yield new Quad( DBpediaDatasets.OntologyTypes, new IriRef(uri),
+                                                          new IriRef(context.ontology.getProperty("rdf:type").get),
+                                                          new IriRef(clazz.uri), new IriRef(node.sourceUri) )
 
         new Graph(quads.toList)
     }

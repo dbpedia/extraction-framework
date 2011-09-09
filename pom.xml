@@ -25,7 +25,7 @@
         <module>server</module>
         <module>scripts</module>
         <module>live</module>
-        <!--module>wiktionary</module-->
+        <module>wiktionary</module>
     </modules>
 
     <build>
@@ -39,7 +39,11 @@
                 <configuration>
                     <jvmArgs>
                         <jvmArg>${scala.compiler.Xmx}</jvmArg>
+
                     </jvmArgs>
+                    <args>
+                        <arg>-deprecation</arg>
+                    </args>
                 </configuration>
 
                 <executions>
@@ -103,7 +107,7 @@
 
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.9.0</artifactId>
+            <artifactId>scalatest</artifactId>
         </dependency>
     </dependencies>
 
@@ -149,8 +153,8 @@
             </dependency>
             <dependency>
                 <groupId>org.scalatest</groupId>
-                <artifactId>scalatest_2.9.0</artifactId>
-                <version>1.6.1</version>
+                <artifactId>scalatest</artifactId>
+                <version>1.2</version>
             </dependency>
 
             <dependency>
@@ -183,7 +187,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
-                <version>1.1</version>
+                <version>1.0</version>
             </dependency>
 
             <dependency>
@@ -208,13 +212,16 @@
                 <version>0.1.12</version>
             </dependency>
 
+
+            <!-- This dependency should have scope=test rather than scope=compile -->
+            <!--
             <dependency>
               <groupId>junit</groupId>
               <artifactId>junit</artifactId>
-              <version>4.8.2</version>
+              <version>${junit.version}</version>
               <scope>test</scope>
             </dependency>
-
+            -->
 
             <!-- OMFG! This dependency is horrible - this is a dead XML api project
        from 2004. In the meanwhile, all this XML stuff is probably already part
@@ -295,25 +302,13 @@
             <id>maven.aksw.internal</id>
             <name>University Leipzig, AKSW Maven2 Repository</name>
             <url>http://db0.aksw.org:8081/archiva/repository/internal</url>
-        </repository>
+        </repository-->
 
-        <repository>
+        <!--repository>
             <id>maven.aksw.snapshots</id>
             <name>University Leipzig, AKSW Maven2 Repository</name>
             <url>http://db0.aksw.org:8081/archiva/repository/snapshots</url>
         </repository-->
-
-        <repository>
-            <id>maven.aksw.internal</id>
-            <name>University Leipzig, AKSW Maven2 Repository</name>
-            <url>http://prod1.aksw.org:8081/archiva/repository/internal</url>
-        </repository>
-
-        <repository>
-            <id>maven.aksw.snapshots</id>
-            <name>University Leipzig, AKSW Maven2 Repository</name>
-            <url>http://prod1.aksw.org:8081/archiva/repository/snapshots</url>
-        </repository>
 
         <repository>
             <snapshots>

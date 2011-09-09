@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <properties>
-        <property name="ns" value="http://wiktionary.org/"/>
-        <property name="blockProperty" value="http://wiktionary.org/hasUsage"/>
-        <property name="senseProperty" value="http://wiktionary.org/hasSense"/>
+        <property name="ns" value="http://wiktionary.dbpedia.org/resource/"/>
+        <property name="blockProperty" value="http://wiktionary.dbpedia.org/terms/hasUsage"/>
+        <property name="senseProperty" value="http://wiktionary.dbpedia.org/terms/hasSense"/>
         <property name="senseVarName" value="meaning_id"/>
     </properties>
     <mappings>
-        <mapping from="Substantiv" to="http://wiktionary.org/Noun" toType="uri"/>
-        <mapping from="Verb" to="http://wiktionary.org/Verb" toType="uri"/>
-        <mapping from="Adjektiv" to="http://wiktionary.org/Adjektive" toType="uri"/>
-        <mapping from="Personalpronom" to="http://wiktionary.org/PersonalPronoun" toType="uri"/>
-        <mapping from="Englisch" to="http://wiktionary.org/English" toType="uri"/>
-        <mapping from="Deutsch" to="http://wiktionary.org/German" toType="uri"/>
-        <mapping from="Polnisch" to="http://wiktionary.org/Polish" toType="uri"/>
+        <mapping from="Substantiv" to="Noun"/>
+        <mapping from="Verb" to="Verb"/>
+        <mapping from="Adjektiv" to="Adjective"/>
+        <mapping from="Personalpronom" to="PersonalPronoun"/>
+        <mapping from="Personalpronomen" to="PersonalPronoun"/>
+        <mapping from="Englisch" to="English"/>
+        <mapping from="Englisch" to="English"/>
+        <mapping from="Deutsch" to="German"/>
+        <mapping from="Polnisch" to="Polish" />
     </mappings>
     <page>
         <prologs>
             <template name="also">
                 <vars>
-                    <var name="otherPage" format="http://de.wiktionary.org/wiki/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
+                    <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" type="resource"/>
                 </vars>
                 <wikiSyntax>{{Siehe auch|{{extractiontlp|var|otherPage}}}}</wikiSyntax>
             </template>
@@ -27,32 +29,32 @@
         <epilogs>
             <template name="otherLanguages">
                 <vars>
-                    <var name="otherPage" format="http://de.wiktionary.org/wiki/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
+                    <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
                 </vars>
                 <wikiSyntax>{{extractiontpl|list-start}}{{extractiontpl|link|{{extractiontpl|var|word}}|{{extractiontpl|var|otherPage}}}}
 {{extractiontpl|list-end}}</wikiSyntax>
             </template>
         </epilogs>
         <block>
-            <property uri="http://wiktionary.org/hasLangUsage"/>
+            <property uri="http://wiktionary.dbpedia.org/terms/hasLangUsage"/>
             <template name="lang-start">
                 <vars>
-                    <var name="language" property="http://purl.org/dc/elements/1.1/language" doMapping="true"/>
+                    <var name="language" property="http://purl.org/dc/elements/1.1/language" doMapping="true"  type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
                 </vars>
                 <wikiSyntax>== {{extractiontpl|var|word}} ({{Sprache|{{extractiontpl|var|language}}}}) ==</wikiSyntax>
             </template>
             <block>
-                <property uri="http://wiktionary.org/hasPoSUsage"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPoSUsage"/>
                 <template name="pos-start">
                     <vars>
-                        <var name="pos" property="http://wiktionary.org/hasPoS" doMapping="true"/>
+                        <var name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoS" doMapping="true"   type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
                     </vars>
                     <wikiSyntax>=== {{Wortart|{{extractiontpl|var|pos}}|{{extractiontpl|var|language}}}} ===</wikiSyntax>
                 </template>
                 <templates>
                     <template name="example">
                         <vars>
-                            <var name="example" property="http://wiktionary.org/hasExample" senseBound="true"/>
+                            <var name="example" property="http://wiktionary.dbpedia.org/terms/hasExample" senseBound="true"/>
                         </vars>
                         <wikiSyntax>{{Beispiele}}
 {{extractiontpl|list-start}}:{{extractiontpl|link|{{extractiontpl|var|meaning_id}}}}{{extractiontpl|var|example}}
@@ -61,8 +63,8 @@
                     </template>
                     <template name="hyphenation">
                         <vars>
-                            <var name="hyphenation-singular" property="http://wiktionary.org/hasHyphenationSingular"/>
-                            <var name="hyphenation-plural" property="http://wiktionary.org/hasHyphenationPlural"/>
+                            <var name="hyphenation-singular" property="http://wiktionary.dbpedia.org/terms/hasHyphenationSingular"/>
+                            <var name="hyphenation-plural" property="http://wiktionary.dbpedia.org/terms/hasHyphenationPlural"/>
                         </vars>
                         <wikiSyntax>{{Silbentrennung}}
 :{{extractiontpl|var|hyphenation-singular}}, {{Pl.}} {{extractiontpl|var|hyphenation-plural}}
@@ -70,7 +72,7 @@
                     </template>
                     <template name="meaning">
                         <vars>
-                            <var name="meaning" property="http://wiktionary.org/hasMeaning" senseBound="true" />
+                            <var name="meaning" property="http://wiktionary.dbpedia.org/terms/hasMeaning" senseBound="true" />
                         </vars>
                         <wikiSyntax>{{Bedeutungen}}
 {{extractiontpl|list-start}}:{{extractiontpl|link|{{extractiontpl|var|meaning_id}}}}{{extractiontpl|var|meaning}}
@@ -87,10 +89,10 @@ Singular={{extractiontpl|var|flection-singular}}
                     </template>
                     <template name="pronunciation">
                         <vars>
-                            <var name="audio-singular" property="http://wiktionary.org/hasAudioSingular" type="resource" format="http://uploads.wikimedia/%s"/>
-                            <var name="audio-plural" property="http://wiktionary.org/hasAudioPlural" type="resource" format="http://uploads.wikimedia/%s" />
-                            <var name="pronunciation-plural" property ="http://wiktionary.org/hasPronunciationPlural"/>
-                            <var name="pronunciation-singular" property="http://wiktionary.org/hasPronunciationSingular"/>
+                            <var name="audio-singular" property="http://wiktionary.dbpedia.org/terms/hasAudioSingular" type="resource" format="http://uploads.wikimedia/%s"/>
+                            <var name="audio-plural" property="http://wiktionary.dbpedia.org/terms/hasAudioPlural" type="resource" format="http://uploads.wikimedia/%s" />
+                            <var name="pronunciation-plural" property ="http://wiktionary.dbpedia.org/terms/hasPronunciationPlural"/>
+                            <var name="pronunciation-singular" property="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular"/>
                         </vars>
                         <wikiSyntax>{{Aussprache}}
 :{{extractiontpl|link|Hilfe:IPA|IPA}}: {{Lautschrift|{{extractiontpl|var|pronunciation-singular}}}}, {{Pl.}} {{Lautschrift|{{extractiontpl|var|pronunciation-plural}}}}
@@ -109,7 +111,7 @@ Singular={{extractiontpl|var|flection-singular}}
                     </template>
                     <template name="source">
                         <vars>
-                            <var name="source" property="http://wiktionary.org/hasSource" format="///resolveTemplateToUri"/>
+                            <var name="source" property="http://wiktionary.dbpedia.org/terms/hasSource" format="///resolveTemplateToUri"/>
                         </vars>
                         <wikiSyntax>{{Quellen}}
 {{extractiontpl|list-start}}:{{extractiontpl|var|source}}
@@ -131,7 +133,7 @@ Singular={{extractiontpl|var|flection-singular}}
                     </template>
                     <template name="usage">
                         <vars>
-                            <var name="usage" property="http://wiktionary.org/hasCharactisticUsage"/>
+                            <var name="usage" property="http://wiktionary.dbpedia.org/terms/hasCharactisticUsage"/>
                         </vars>
                         <wikiSyntax>{{Charakteristische Wortkombinationen}}
 

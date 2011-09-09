@@ -1,14 +1,11 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.util.UriUtils
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import collection.mutable.HashSet
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.StringUtils._
-import java.net.URLEncoder
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, TypedLiteral, PlainLiteral}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
 
@@ -124,13 +121,7 @@ class InfoboxExtractor( context : {
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
-
-                            //#int #statistics uncomment the following 2 lines (do not delete)
-                            val stat_template = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language).replace("\n", " ").replace("\t", " ").trim
-                            val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
-                            quads ::= new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                               stat_property, node.sourceUri, context.ontology.getDatatype("xsd:string").get )
+                            quads ::= new Quad(DBpediaDatasets.Infoboxes, new IriRef(subjectUri), new IriRef(propertyUri), new TypedLiteral(value, datatype), new IriRef(splitNode.sourceUri))
                         }
                         catch
                         {
@@ -143,22 +134,24 @@ class InfoboxExtractor( context : {
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads ::= new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads ::= new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads ::= new Quad(DBpediaDatasets.InfoboxProperties, new IriRef(propertyUri), new IriRef(typeProperty), new IriRef(propertyClass.uri), new IriRef(splitNode.sourceUri))
+                                quads ::= new Quad(DBpediaDatasets.InfoboxProperties, new IriRef(propertyUri), new IriRef(labelProperty), new PlainLiteral(propertyLabel), new IriRef(splitNode.sourceUri))
                             }
                         }
                     }
 
                 }
 
-                // TODO write only wikiPageUsesTemplate if properties extracted
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
-                    //oldTODO change domain ????
-                    val templateUri = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language)  //templateNamespace + ":" + template.title.encoded
-                    quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
-                                       templateUri, template.sourceUri, null)
-                    seenTemplates.add(template.title.encoded)
+                  //oldTODO change domain ????
+                  val templateUri = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language)  //templateNamespace + ":" + template.title.encoded
+                  quads ::= new Quad(DBpediaDatasets.Infoboxes,
+                    new IriRef(subjectUri),
+                    new IriRef(usesTemplateProperty),
+                    new IriRef(templateUri),
+                    template.sourceUri)
+                  seenTemplates.add(template.title.encoded)
                 }
             }
         })
@@ -282,8 +275,6 @@ class InfoboxExtractor( context : {
 
         //TODO add this as option in settings
         //result = result.replace("%", "_percent_")
-
-        result = result.replace("%", "_percent_")
 
         // TODO maximal length of properties? (was 250)
         

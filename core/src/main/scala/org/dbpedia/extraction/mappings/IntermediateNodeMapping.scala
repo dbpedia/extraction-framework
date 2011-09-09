@@ -2,9 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.destinations.{IriRef, Graph, DBpediaDatasets, Quad}
 
 case class IntermediateNodeMapping(nodeClass : OntologyClass,
                               correspondingProperty : OntologyProperty,
@@ -70,7 +70,11 @@ case class IntermediateNodeMapping(nodeClass : OntologyClass,
         {
             var thisGraph = graph
 
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, clazz.uri, node.sourceUri)
+            val quad = new Quad(DBpediaDatasets.OntologyTypes,
+              new IriRef(instanceUri),
+              new IriRef(context.ontology.getProperty("rdf:type").get),
+              new IriRef(clazz.uri),
+              node.sourceUri)
             thisGraph = graph.merge(new Graph(quad))
 
             for(baseClass <- clazz.subClassOf)
@@ -94,7 +98,7 @@ case class IntermediateNodeMapping(nodeClass : OntologyClass,
         {
             graph = writeTypes(nodeClass, graph)
 
-            val quad2 = new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+            val quad2 = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(originalSubjectUri), new IriRef(correspondingProperty), new IriRef(instanceUri), new IriRef(node.sourceUri));
             graph = graph.merge(new Graph(quad2))
         }
 

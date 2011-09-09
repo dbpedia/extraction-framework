@@ -1,47 +1,53 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef}
-import org.dbpedia.extraction.ontology.OntologyNamespaces
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InternalLinkNode, Node}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
 
 /**
  * Extracts links from concepts to categories using the SKOS vocabulary.
  */
-class ArticleCategoriesExtractor(extractionContext : ExtractionContext) extends Extractor
+class ArticleCategoriesExtractor( context : {
+                                      def ontology : Ontology
+                                      def language : Language } ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
-
-    require(Set("en").contains(language))
-
-    private val dctermsSubjectProperty = extractionContext.ontology.getProperty("dct:subject").get
+    private val dctermsSubjectProperty = context.ontology.getProperty("dct:subject").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
         
-        var quads = List[Quad]()
+        val links = collectCategoryLinks(node).filter(isCategoryForArticle(_))
 
-        val list = collectInternalLinks(node)
-        list.foreach(link => {
-            quads ::= new Quad(DBpediaDatasets.ArticleCategories, new IriRef(subjectUri), new IriRef(dctermsSubjectProperty), getUri(link.destination), new IriRef(link.sourceUri))
-        })
+        val quads : List[Quad] = links.map(link =>
+            new Quad(DBpediaDatasets.ArticleCategories, new IriRef(subjectUri), new IriRef(dctermsSubjectProperty), new IriRef(getUri(link.destination)), link.sourceUri)
+        )
+
         new Graph(quads)
     }
 
-    private def collectInternalLinks(node : Node) : List[InternalLinkNode] =
+    private def isCategoryForArticle(linkNode : InternalLinkNode) = linkNode.destinationNodes match
+    {
+        case TextNode(text, _) :: Nil  => !text.startsWith(":")  // links starting wih ':' are actually only related, not the category of this article
+        case _ => true
+    }
+
+    private def collectCategoryLinks(node : Node) : List[InternalLinkNode] =
     {
         node match
         {
             case linkNode : InternalLinkNode if linkNode.destination.namespace == WikiTitle.Namespace.Category => List(linkNode)
-            case _ => node.children.flatMap(collectInternalLinks)
+            case _ => node.children.flatMap(collectCategoryLinks)
         }
     }
 
-    private def getUri(destination : WikiTitle) : IriRef =
+    private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Category)
+        val categoryNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Category)
 
-        new IriRef(OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE))
+        //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
     }   
 }

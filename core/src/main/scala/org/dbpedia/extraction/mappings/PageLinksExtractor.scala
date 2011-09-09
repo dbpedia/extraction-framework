@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InternalLinkNode, Node}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts internal links between DBpedia instances from the internal pagelinks between Wikipedia articles.
@@ -22,8 +23,8 @@ class PageLinksExtractor( context : {
         var quads = List[Quad]()
         val list = collectInternalLinks(node)
         list.foreach(link => {
-            quads ::= new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty,
-                getUri(link.destination), link.sourceUri, null)
+            quads ::= new Quad(DBpediaDatasets.PageLinks, new IriRef(subjectUri), new IriRef(wikiPageWikiLinkProperty),
+                new IriRef(getUri(link.destination)), new IriRef(link.sourceUri))
         })
         new Graph(quads)
     }
