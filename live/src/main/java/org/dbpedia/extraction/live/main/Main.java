@@ -18,6 +18,7 @@ import org.dbpedia.extraction.live.util.Files;
 import java.io.*;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -114,8 +115,8 @@ public class Main
 
         readOldStatistics();
 
-        for(int i = 0; i < recentlyUpdatedInstances.length; i++)
-                recentlyUpdatedInstances[i] = new RecentlyUpdatedInstance();
+        /*for(int i = 0; i < recentlyUpdatedInstances.length; i++)
+                recentlyUpdatedInstances[i] = new RecentlyUpdatedInstance();*/
 
         //Timers required for statistics
         Timer oneMinuteTimer = new Timer("One-Minute timer");
@@ -397,6 +398,15 @@ public class Main
             instancesUpdatedInHour = Integer.parseInt(statsLineReader.readLine());
             instancesUpdatedInDay = Integer.parseInt(statsLineReader.readLine());
             totalNumberOfUpdatedInstances = Integer.parseInt(statsLineReader.readLine());
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
+            for(int i = 0; i< recentlyUpdatedInstances.length; i++){
+                String instanceLine = statsLineReader.readLine();
+                String[] instanceParts = instanceLine.split("\t");
+                recentlyUpdatedInstances[i] = new RecentlyUpdatedInstance(instanceParts[0], instanceParts[1],
+                        instanceParts[2], formatter.parse(instanceParts[3]));
+            }
+
             statsReader.close();
             return true;
         }
