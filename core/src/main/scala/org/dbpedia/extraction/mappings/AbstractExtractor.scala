@@ -7,6 +7,8 @@ import java.net.{URLEncoder, URL}
 import xml.XML
 import io.Source
 import java.io.{InputStream, OutputStreamWriter}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts page abstracts.
@@ -14,51 +16,57 @@ import java.io.{InputStream, OutputStreamWriter}
  * DBpedia-customized MediaWiki instance is required.
  */
 
-class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
+class AbstractExtractor( context : {
+                             def ontology : Ontology
+                             def language : Language } ) extends Extractor
 {
-    private val maxRetries = 2
+    private val maxRetries = 3
 
-    private val timeoutMs = 5000
+    private val timeoutMs = 4000
 
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
     //TODO make this configurable
-    private val apiUrl = "http://localhost:88/mw-modified/api.php"
+    private val apiUrl = "http://localhost/mw-modified/api.php"
 
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
-    private val shortProperty = extractionContext.ontology.getProperty("rdfs:comment")
-                                .getOrElse(throw new Exception("Property 'rdfs:comment' not found"))
+    // lazy so testing does not need ontology
+    private lazy val shortProperty = context.ontology.getProperty("rdfs:comment")
+                                     .getOrElse(throw new Exception("Property 'rdfs:comment' not found"))
 
-    private val longProperty = extractionContext.ontology.getProperty("abstract")
-                               .getOrElse(throw new Exception("Property 'abstract' not found"))
+    // lazy so testing does not need ontology
+    private lazy val longProperty = context.ontology.getProperty("abstract")
+                                    .getOrElse(throw new Exception("Property 'abstract' not found"))
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         //Only extract abstracts for pages from the Main namespace
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(pageNode.title.namespace != WikiTitle.Namespace.Main) return new Graph()
 
         //Don't extract abstracts from redirect and disambiguation pages
-        if(node.isRedirect || node.isDisambiguation) return new Graph()
+        if(pageNode.isRedirect || pageNode.isDisambiguation) return new Graph()
 
         //Reproduce wiki text for abstract
-        val abstractWikiText = getAbstractWikiText(node)
+        val abstractWikiText = getAbstractWikiText(pageNode)
         if(abstractWikiText == "") return new Graph()
 
         //Retrieve page text
-        val text = retrievePage(node.root.title.encoded, abstractWikiText)
+        var text = retrievePage(pageNode.title, abstractWikiText)
 
         //Ignore empty abstracts
         if(text.trim.isEmpty) return new Graph()
+
+        text = postProcess(pageNode.title, text)
 
         //Create a short version of the abstract
         val shortText = short(text)
 
         //Create statements
-        val quadLong = new Quad(extractionContext, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, node.sourceUri)
-        val quadShort = new Quad(extractionContext, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, node.sourceUri)
+        val quadLong = new Quad(context.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, pageNode.sourceUri)
+        val quadShort = new Quad(context.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, pageNode.sourceUri)
 
         if(shortText.isEmpty)
         {
@@ -77,9 +85,9 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
      * @param pageTitle The encoded title of the page
      * @return The page as an Option
      */
-    def retrievePage(pageTitle : String, pageWikiText : String) : String =
+    def retrievePage(pageTitle : WikiTitle, pageWikiText : String) : String =
     {
-        for(_ <- 0 to maxRetries)
+        for(_ <- 1 to maxRetries)
         {
             try
             {
@@ -90,10 +98,12 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
                 val url = new URL(apiUrl)
                 val conn = url.openConnection
                 conn.setDoOutput(true)
+                conn.setConnectTimeout(timeoutMs)
+                conn.setReadTimeout(timeoutMs)
                 val writer = new OutputStreamWriter(conn.getOutputStream)
                 writer.write(parameters)
-                writer.flush
-                writer.close
+                writer.flush()
+                writer.close()
 
                 // Read answer
                 return readInAbstract(conn.getInputStream)
@@ -134,14 +144,14 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
                 {
                     return sentence
                 }
-                return builder.toString.trim
+                return builder.toString().trim
             }
 
             size += sentence.size
             builder.append(sentence)
         }
 
-        builder.toString.trim
+        builder.toString().trim
     }
 
     /**
@@ -152,18 +162,52 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
     private def readInAbstract(inputStream : InputStream) : String =
     {
         // for XML format
-        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines.mkString("")
+        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
         (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
     }
+
+    private def postProcess(pageTitle : WikiTitle, text : String) : String =
+    {
+        def startsWithLowercase(text : String) =
+        {
+            val firstLetter = text.substring(0,1)
+            firstLetter != firstLetter.toUpperCase(context.language.locale)
+        }
+
+        //HACK
+        if(startsWithLowercase(text))
+        {
+            val decodedTitle = pageTitle.decoded.replaceFirst(" \\(.+\\)$", "")
+
+            if(!text.toLowerCase.contains(decodedTitle.toLowerCase))
+            {
+                // happens mainly for Japanese names (abstract starts with template)
+                return decodedTitle + " " + text
+            }
+        }
+
+        text
+    }
+
+    private val destinationNamespacesToRender = List(WikiTitle.Namespace.Main, WikiTitle.Namespace.Template)
+
+    private def renderNode(node : Node) = node match
+    {
+        case InternalLinkNode(destination, _, _, _) => destinationNamespacesToRender contains destination.namespace
+        case ParserFunctionNode(_, _, _) => false
+        case _ => true
+    }
+
 
     /**
      * Get the wiki text that contains the abstract text.
      */
-    private def getAbstractWikiText(pageNode : PageNode) : String =
+    def getAbstractWikiText(pageNode : PageNode) : String =
     {
         // From first TextNode
         val start = pageNode.children.indexWhere{
             case TextNode(text, _) => text.trim != ""
+            case InternalLinkNode(destination, _, _, _) => destination.namespace == WikiTitle.Namespace.Main
             case _ => false
         }
 
@@ -193,7 +237,10 @@ class AbstractExtractor(extractionContext : ExtractionContext) extends Extractor
         }
 
         // Re-generate wiki text for found range of nodes
-        pageNode.children.slice(start, end).map(_.toWikiText).mkString("").trim
+        pageNode.children.slice(start, end)
+                .filter(renderNode)
+                .map(_.toWikiText())
+                .mkString("").trim
     }
 
 }

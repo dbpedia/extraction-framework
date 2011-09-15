@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.ontology.io
 
-import java.util.logging.{Logger}
-import org.dbpedia.extraction.sources.Source
+import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.StringUtils._
 import java.util.Locale
+import org.dbpedia.extraction.sources.Source
 
 /**
  * Loads an ontology from configuration files using the DBpedia mapping language.
@@ -22,43 +22,52 @@ class OntologyReader
      */
     private val supportedLanguageCodes = Locale.getISOLanguages.toSet
 
+    def read(source : Source) : Ontology =
+    {
+        logger.info("Loading ontology pages")
+
+        read(source.map(WikiParser()))
+    }
+
     /**
      *  Loads an ontology from configuration files using the DBpedia mapping language.
      *
      * @param source The source containing the ontology pages
      * @return Ontology The ontology
      */
-	def read(source : Source) : Ontology =
+	def read(pageNodeSource : Traversable[PageNode]) : Ontology =
     {
         logger.info("Loading ontology")
 
         val ontologyBuilder = new OntologyBuilder()
-        
+
         ontologyBuilder.datatypes = OntologyDatatypes.load()
-        
-        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map("en" -> "Thing"), Map("en" -> "Base class of all ontology classes"), null, Set())
-        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map("en" -> "Property"), Map(), "owl:Thing", Set())
+
+        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map("en" -> "Thing"), Map("en" -> "Base class of all ontology classes"), List(), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map("en" -> "Property"), Map(), List("owl:Thing"), Set())
 
         // TODO: range should be rdfs:Class
-        ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map("en" -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing")
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map("en" -> "has label"), Map(), false, false, "owl:Thing", "xsd:string")
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map("en" -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string")
+        ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map("en" -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map("en" -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map("en" -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
 
-        for(page <- source.map(WikiParser()))
+        for(page <- pageNodeSource)
+        {
             load(ontologyBuilder, page)
+        }
 
-        val ontology = ontologyBuilder.build
+        val ontology = ontologyBuilder.build()
         logger.info("Ontology loaded")
         ontology
     }
-    
+
 	/**
      * Loads all classes and properties from a page.
      *
      * @param ontology The OntologyBuilder instance
      * @param pageNode The page node of the configuration page
      */
-    private def load(ontologyBuilder : OntologyBuilder, page : PageNode) : Unit =
+    private def load(ontologyBuilder : OntologyBuilder, page : PageNode)
     {
         for(node <- page.children if node.isInstanceOf[TemplateNode])
         {
@@ -87,16 +96,16 @@ class OntologyReader
             }
         }
     }
-    
+
     private def loadClass(name : String, node : TemplateNode) : ClassBuilder =
     {
         new ClassBuilder(name = name,
                          labels = readTemplatePropertiesByLanguage(node, "rdfs:label"),
                          comments = readTemplatePropertiesByLanguage(node, "rdfs:comment"),
-                         superClassName = readTemplateProperty(node, "rdfs:subClassOf").getOrElse("owl:Thing"),
+                         superClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf") ::: List("owl:Thing"),
                          equivalentClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
     }
-    
+
     private def loadOntologyProperty(name : String, node : TemplateNode) : Option[PropertyBuilder] =
     {
         val isObjectProperty = node.title.encoded == OntologyReader.OBJECTPROPERTY_NAME
@@ -110,12 +119,12 @@ class OntologyReader
             case Some(text) if text == "owl:FunctionalProperty" => true
             case Some(text) =>
             {
-                logger.warning("Property with an invalid type found on page " + node.root.title);
+                logger.warning(node.root.title + " - Found property with an invalid type")
                 false
             }
             case None => false
         }
-        
+
         //Domain
         val domain = readTemplateProperty(node, "rdfs:domain") match
         {
@@ -135,13 +144,16 @@ class OntologyReader
                 }
                 else
                 {
-                    logger.warning("Cannot load datatype property " + name + " because it does not define its range")
+                    logger.warning(node.root.title + " - Cannot load datatype property " + name + " because it does not define its range")
                     return None
                 }
             }
         }
-        
-        return Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range))
+
+        //Equivalent Properties
+        val equivalentProperties = readTemplatePropertyAsList(node, "owl:equivalentProperty").toSet
+
+        Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range, equivalentProperties))
     }
 
     private def loadSpecificProperties(name : String, node : TemplateNode) : List[SpecificPropertyBuilder] =
@@ -159,7 +171,7 @@ class OntologyReader
             case Some(text) => text
             case None =>
             {
-                logger.warning("SpecificProperty on " + className +" does not define a base property")
+                logger.warning(node.root.title + " - SpecificProperty on " + className +" does not define a base property")
                 return None
             }
         }
@@ -169,7 +181,7 @@ class OntologyReader
             case Some(text) => text
             case None =>
             {
-                logger.warning("SpecificProperty on " + className +" does not define a unit")
+                logger.warning(node.root.title + " - SpecificProperty on " + className +" does not define a unit")
                 return None
             }
         }
@@ -201,7 +213,7 @@ class OntologyReader
             val languageCode = property.key.split("@", 2).lift(1).getOrElse("en")
             if(!supportedLanguageCodes.contains(languageCode))
             {
-                logger.warning("Warning: Language code '" + languageCode + "' is not supported. Ignoring corresponding " + propertyName)
+                logger.warning(node.root.title + " - Language code '" + languageCode + "' is not supported. Ignoring corresponding " + propertyName)
                 None
             }
             else
@@ -214,16 +226,16 @@ class OntologyReader
             }
         }.toMap
     }
-    
+
     private class OntologyBuilder
     {
         var classes = List[ClassBuilder]()
         var properties = List[PropertyBuilder]()
         var datatypes = List[Datatype]()
         var specializedProperties = List[SpecificPropertyBuilder]()
-        
+
         def build() : Ontology  =
-        {   
+        {
             val classMap = classes.map( clazz => (clazz.name, clazz) ).toMap
             val propertyMap = properties.map( property => (property.name, property) ).toMap
             val typeMap = datatypes.map( datatype => (datatype.name, datatype) ).toMap
@@ -236,17 +248,17 @@ class OntologyReader
     }
 
     private class ClassBuilder(val name : String, val labels : Map[String, String], val comments : Map[String, String],
-                               val superClassName : String, val equivalentClassNames : Set[String])
+                               val superClassNames : List[String], val equivalentClassNames : Set[String])
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
         require(comments != null, "comments != null")
-        require(name == "owl:Thing" || superClassName != null, "superClassName != null")
+        require(name == "owl:Thing" || superClassNames.nonEmpty, "superClassName.nonEmpty")
         require(equivalentClassNames != null, "equivalentClassNames != null")
 
         /** Caches the class, which has been build by this builder. */
         var generatedClass : Option[OntologyClass] = None
-        
+
         /** Remembers if build has already been called on this object */
         private var buildCalled = false
 
@@ -256,56 +268,74 @@ class OntologyReader
             {
                  //TODO check for cycles to avoid infinite recursion
 
-                val superClass =
-                    if(name == "owl:Thing")
+
+//                    else
+//                    {
+//                        classMap.get(superClassName) match
+//                        {
+//                            case Some(superClassBuilder) => superClassBuilder.build(classMap)
+//                            case None =>
+//                            {
+//                                logger.warning("Super class of " + name + " (" + superClassName + ") does not exist")
+//                                None
+//                            }
+//                        }
+//                    }
+
+                val superClasses = superClassNames.map{ superClassName => classMap.get(superClassName) match
+                {
+                    case Some(superClassBuilder) => superClassBuilder.build(classMap)
+                    case None if OntologyNamespaces.skipValidation(superClassName) =>
                     {
+                        logger.config("Super class " + superClassName + " of class " + name + " was not found but for its namespace this was expected")
+                        Some(new OntologyClass(superClassName, Map(), Map(), List(), Set()))
+                    }
+                    case None =>
+                    {
+                        logger.warning("Super class of " + name + " (" + superClassName + ") does not exist")
                         None
                     }
-                    else
-                    {
-                        classMap.get(superClassName) match
-                        {
-                            case Some(superClassBuilder) => superClassBuilder.build(classMap)
-                            case None =>
-                            {
-                                logger.warning("Super class of " + name + " (" + superClassName + ") does not exist")
-                                None
-                            }
-                        }
-                    }
+                }}.flatten
 
-                val equivalentClasses = for(equivalentClassName <- equivalentClassNames) yield classMap.get(equivalentClassName) match
+                val equivalentClasses = equivalentClassNames.map{ equivalentClassName => classMap.get(equivalentClassName) match
                 {
                     case Some(equivalentClassBuilder) => equivalentClassBuilder.build(classMap)
+                    case None if OntologyNamespaces.skipValidation(equivalentClassName) =>
+                    {
+                        logger.config("Equivalent class " + equivalentClassName + " of class " + name + " was not found but for its namespace this was expected")
+                        Some(new OntologyClass(equivalentClassName, Map(), Map(), List(), Set()))
+                    }
                     case None =>
                     {
                         logger.warning("Equivalent class of " + name + " (" + equivalentClassName + ") does not exist")
                         None
                     }
+                }}.flatten
+
+                name match
+                {
+                    case "owl:Thing" => generatedClass = Some(new OntologyClass(name, labels, comments, List(), equivalentClasses))
+                    case _ => generatedClass = Some(new OntologyClass(name, labels, comments, superClasses, equivalentClasses))
                 }
 
-                generatedClass = superClass match
-                {
-                    case Some(superClass) => Some(new OntologyClass(name, labels, comments, superClass, equivalentClasses.flatten))
-                    case None if name == "owl:Thing" => Some(new OntologyClass(name, labels, comments, null, equivalentClasses.flatten))
-                    case None => None
-                }
-                
                 buildCalled = true
+
             }
-            
-            return generatedClass
+
+            generatedClass
         }
     }
-    
+
     private class PropertyBuilder(val name : String, val labels : Map[String, String], val comments : Map[String, String],
-                                  val isObjectProperty : Boolean, val isFunctional : Boolean, val domain : String, val range : String )
+                                  val isObjectProperty : Boolean, val isFunctional : Boolean, val domain : String, val range : String,
+                                  val equivalentPropertyNames : Set[String])
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
         require(comments != null, "comments != null")
         require(domain != null, "domain != null")
         require(range != null, "range != null")
+        require(equivalentPropertyNames != null, "equivalentPropertyNames != null")
 
         /** Caches the property, which has been build by this builder. */
         var generatedProperty : Option[OntologyProperty] = None
@@ -316,25 +346,27 @@ class OntologyReader
             {
                 case Some(domainClassBuilder) => domainClassBuilder.generatedClass match
                 {
-                    case Some(domainClass) => domainClass
+                    case Some(clazz) => clazz
                     case None => logger.warning("Domain of property " + name + " (" + domain + ") couldn't be loaded"); return None
                 }
                 case None => logger.warning("Domain of property " + name + " (" + domain + ") does not exist"); return None
             }
-             
+
+            val equivalentProperties = equivalentPropertyNames.map(new OntologyProperty(_, Map(), Map(), null, null, false, Set()))
+
             if(isObjectProperty)
             {
                 val rangeClass = classMap.get(range) match
                 {
                     case Some(rangeClassBuilder) => rangeClassBuilder.generatedClass match
                     {
-                        case Some(rangeClass) => rangeClass
+                        case Some(clazz) => clazz
                         case None => logger.warning("Range of property '" + name + "' (" + range + ") couldn't be loaded"); return None
                     }
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
-                }                
+                }
 
-                generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional))
+                generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivalentProperties))
             }
             else
             {
@@ -342,9 +374,9 @@ class OntologyReader
                 {
                     case Some(datatype) => datatype
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
-                }                
-     
-                generatedProperty =  Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional))
+                }
+
+                generatedProperty = Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional, equivalentProperties))
             }
 
             generatedProperty
@@ -366,7 +398,7 @@ class OntologyReader
             {
                 case Some(domainClassBuilder) => domainClassBuilder.generatedClass match
                 {
-                    case Some(domainClass) => domainClass
+                    case Some(clazz) => clazz
                     case None => logger.warning("Cannot specialize property on class '" + className + "', since the class failed to load"); return None
                 }
                 case None => logger.warning("Cannot specialize property on class '" + className + "', since the class has not been found"); return None
@@ -415,7 +447,7 @@ class OntologyReader
                 return None
             }
 
-            return Some((domainClass, baseProperty), specializedRange.asInstanceOf[UnitDatatype])
+            Some((domainClass, baseProperty), specializedRange.asInstanceOf[UnitDatatype])
         }
     }
 }

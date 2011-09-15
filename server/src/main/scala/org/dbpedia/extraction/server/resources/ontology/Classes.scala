@@ -23,11 +23,14 @@ class Classes extends Base
         val subClassesMap = ontology.classes   //Get all classes
                 .filter(!_.name.contains(":")) //Filter non-DBpedia classes
                 .sortWith(_.name < _.name)     //Sort by name
-                .groupBy(_.subClassOf).toMap   //Group by super class
+                .groupBy(_.subClassOf.head).toMap   //Group by super class
 
         val rootClass = ontology.getClass("owl:Thing").get
 
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Ontology Classes</h2>
             {createClassHierarchy(rootClass, subClassesMap)}
@@ -49,6 +52,9 @@ class Classes extends Base
             case None =>
             {
                 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                  <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                  </head>
                   <body>
                     <strong>Class not found</strong>
                   </body>
@@ -76,6 +82,9 @@ class Classes extends Base
     private def createClassPage(ontClass : OntologyClass) =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>{ontClass.name} <span style="font-size:10pt;">(<a href={"../classes#" + ontClass.name}>Show in class hierarchy</a>)</span></h2>
             <table border="0">
@@ -100,8 +109,13 @@ class Classes extends Base
                 }
               }
               <tr>
-                <td><strong>Super class: </strong></td>
-                <td>{createLink("", ontClass.subClassOf)}</td>
+                <td><strong>Super classes:</strong></td>
+                {
+                  for(superClass <- ontClass.subClassOf) yield
+                  {
+                    <td>{createLink("", superClass, ontClass.subClassOf.size == 1)}</td>
+                  }
+                }
               </tr>
             </table>
             <br/>
@@ -114,10 +128,13 @@ class Classes extends Base
     private def createPropertiesTable(ontClass : OntologyClass) : Elem =
     {
         //Collect all properties
-        val properties = for(clazz <- Stream.iterate(ontClass)(_.subClassOf).takeWhile(_ != null);
-                             property <- ontology.properties.sortWith(_.name< _.name);
-                             if property.domain == clazz)
-                             yield property
+//        val properties = for(clazz <- Stream.iterate(ontClass)(_.subClassOf).takeWhile(_ != null);
+//                             property <- ontology.properties.sortWith(_.name< _.name);
+//                             if property.domain == clazz)
+//                             yield property
+
+        val classes = (ontClass :: ontClass.subClassOf)
+        val properties = ontology.properties.sortBy(_.name).filter(classes contains _.domain)
 
         <table border="1" cellpadding="3" cellspacing="0">
           <tr style="font-weight: bold;" bgcolor="#CCCCFF">
@@ -142,11 +159,14 @@ class Classes extends Base
         </tr>
     }
 
-    private def createLink(prefix : String, t : OntologyType) = t match
+    private def createLink(prefix : String, t : OntologyType, addOwlThing : Boolean = true) = t match
     {
-        case ontClass : OntologyClass if ontClass.name == "owl:Thing"=>
+        case ontClass : OntologyClass if ontClass.name == "owl:Thing" =>
         {
-            <em>owl:Thing</em>
+            if(addOwlThing)
+            {
+                <em>owl:Thing</em>
+            }
         }
         case ontClass : OntologyClass =>
         {

@@ -1,13 +1,8 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.Graph
-import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.ontology.OntologyNamespaces
-import java.io.File
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.util.Language
-
 /**
  * The base class of all extractors.
  * Concrete extractors override the extract() method.
@@ -24,9 +19,9 @@ trait Extractor extends (PageNode => Graph)
     final def apply(page : PageNode) : Graph =
     {
         //If the page is not english, retrieve the title of the corresponding english article
-        val enTitle = retrieveEnglishTitle(page).getOrElse(return new Graph())
+        val title = retrieveTitle(page).getOrElse(return new Graph())
         //Generate the page URI
-        val uri = OntologyNamespaces.getUri(enTitle.encodedWithNamespace, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        val uri = OntologyNamespaces.getResource(title.encodedWithNamespace, page.title.language)
         //Extract
         extract(page, uri, new PageContext())
     }
@@ -42,19 +37,37 @@ trait Extractor extends (PageNode => Graph)
     def extract(page : PageNode, subjectUri : String, context : PageContext) : Graph
 
     /**
-     * Retrieves the corresponding english title of a non-english page.
-     * If the given page is in english, its own title is returned.
+     * Retrieves the corresponding title of a page.
      */
-    private def retrieveEnglishTitle(page : PageNode) : Option[WikiTitle] =
+    private def retrieveTitle(page : PageNode) : Option[WikiTitle] =
     {
-        if(page.title.language.wikiCode == "en")
+        //#int if all titles true, original name implied true
+        val retrieveAllTitles=true
+        //#int if all titles false  option to extract with original name
+        val retrieveOriginalName=true
+
+        if (retrieveAllTitles==true)
         {
             return Some(page.title)
         }
-
-        for(InterWikiLinkNode(destination, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
+        else
         {
-            return Some(destination)
+            if(page.title.language.wikiCode == "en")
+            {
+                return Some(page.title)
+            }
+
+            for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
+            {
+                if (retrieveOriginalName==false)
+                {
+                    return Some(destination)
+                }
+                else
+                {
+                    return Some(page.title)
+                }
+            }
         }
 
         None
@@ -69,23 +82,12 @@ object Extractor
     /**
      * Creates a new extractor.
      *
-     * @param ontologySource Source containing the ontology definitions
-     * @param mappingsSource Source containing the mapping defintions
-     * @param commonsSource Source containing the pages from Wikipedia Commons
-     * @param articlesSource Source containing all articles
      * @param extractors List of extractor classes to be instantiated
-     * @param language The language
-     * @return The extractor
+     * @param context Any type of object that implements the required parameter methods for the extractors
      */
-    def load(ontologySource : Source, mappingsSource : Source, commonsSource : Source, articlesSource : Source,
-             extractors : List[Class[Extractor]], language : Language) : Extractor =
+    def load(extractors : List[Class[Extractor]], context : AnyRef) : Extractor =
     {
-        val ontology = new OntologyReader().read(ontologySource)
-        val redirects = Redirects.load(articlesSource, language)
-        val context = new ExtractionContext(ontology, language, redirects, mappingsSource, commonsSource, articlesSource)
-
-        val extractorInstances = extractors.map(_.getConstructor(classOf[ExtractionContext]).newInstance(context))
-
+        val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
         new CompositeExtractor(extractorInstances)
     }
 }

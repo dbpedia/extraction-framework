@@ -8,6 +8,8 @@ import org.dbpedia.extraction.wikiparser._
  */
 class LinkParser(val strict : Boolean = false) extends DataParser
 {
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |/|;|,"""  //TODO this split regex might not be complete
+
     override def parse(node : Node) : Option[URI] =
     {
         if (!strict)
@@ -28,27 +30,21 @@ class LinkParser(val strict : Boolean = false) extends DataParser
         {
             node match
             {
-                case ExternalLinkNode(destination, _, _) => return Some(destination)
+                case ExternalLinkNode(destination, _, _, _) => return Some(destination)
                 case _ =>
                 {
                     node.children match
                     {
-                        case ExternalLinkNode(destination, _, _) :: Nil => return Some(destination)
-                        case ExternalLinkNode(destination, _, _) :: TextNode(text, _) :: Nil if text.trim.isEmpty => return Some(destination)
-                        case TextNode(text, _) :: ExternalLinkNode(destination, _, _) :: Nil if text.trim.isEmpty => return Some(destination)
-                        case TextNode(text1, _) :: ExternalLinkNode(destination, _, _) :: TextNode(text2, _) :: Nil if (text1.trim.isEmpty && text2.trim.isEmpty) => return Some(destination)
+                        case ExternalLinkNode(destination, _, _, _) :: Nil => return Some(destination)
+                        case ExternalLinkNode(destination, _, _, _) :: TextNode(text, _) :: Nil if text.trim.isEmpty => return Some(destination)
+                        case TextNode(text, _) :: ExternalLinkNode(destination, _, _, _) :: Nil if text.trim.isEmpty => return Some(destination)
+                        case TextNode(text1, _) :: ExternalLinkNode(destination, _, _, _) :: TextNode(text2, _) :: Nil if (text1.trim.isEmpty && text2.trim.isEmpty) => return Some(destination)
                         case _ => return None
                     }
                 }
             }
         }
-        return None
-    }
-
-    override def splitPropertyNode(propertyNode : PropertyNode) : List[Node] =
-    {
-        //TODO this split regex might not be complete
-        NodeUtil.splitPropertyNode(propertyNode, """<br\s*\/?>|\n| and | or |/|;|,""")
+        None
     }
 
     private def collectExternalLinks(node : Node) : List[ExternalLinkNode] =

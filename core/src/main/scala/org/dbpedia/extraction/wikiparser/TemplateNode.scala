@@ -23,5 +23,7 @@ case class TemplateNode(title : WikiTitle, override val children : List[Property
     	return propertyMap.get(key);
     }
 
+    def keySet :  scala.collection.Set[String] = propertyMap.keySet
+
     def toWikiText() : String = "{{" + title.decoded + (if(children.isEmpty) "" else "|") + children.map(_.toWikiText).mkString("|") + "}}"
 }

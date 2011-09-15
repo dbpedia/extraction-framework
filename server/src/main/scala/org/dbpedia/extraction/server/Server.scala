@@ -5,7 +5,7 @@ import com.sun.jersey.api.container.httpserver.HttpServerFactory
 import com.sun.jersey.api.core.ClassNamesResourceConfig
 import providers._
 import resources._
-import ontology.{Classes, Pages, Validate}
+import ontology._
 import stylesheets.{Log, TriX}
 import java.net.URI
 
@@ -18,20 +18,23 @@ object Server
 
     val logger = Logger.getLogger(Server.getClass.getName)
 
-   //@volatile var currentJob : Option[ExtractionJob] = None
+    //@volatile var currentJob : Option[ExtractionJob] = None
 
     val config = new Configuration()
 
-    val extractor = new ExtractionManager(config.languages)
+    val extractor : ExtractionManager = config.extractionManager
+
+    var adminRights : Boolean = false
 
     @volatile private var running = true
 
-    def main(args : Array[String]) : Unit =
+    def main(args : Array[String])
     {
         //Start the HTTP server
-        val resources = new ClassNamesResourceConfig(classOf[Root], classOf[Extraction], classOf[Mappings],
-            classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
-            classOf[XMLMessageBodyReader], classOf[XMLMessageBodyWriter], classOf[ExceptionMapper], classOf[TriX], classOf[Log])
+        val resources = new ClassNamesResourceConfig(
+            classOf[Root], classOf[Extraction], classOf[Mappings], classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
+            classOf[TemplateStatistics], classOf[PropertyStatistics],
+            classOf[XMLMessageBodyReader], classOf[XMLMessageBodyWriter], classOf[ExceptionMapper], classOf[TriX], classOf[Log], classOf[Percentage])
 
         val server = HttpServerFactory.create(serverURI, resources)
         server.start()
@@ -41,7 +44,7 @@ object Server
         //Open browser
         try
         {
-            java.awt.Desktop.getDesktop().browse(serverURI)
+            java.awt.Desktop.getDesktop.browse(serverURI)
         }
         catch
         {
