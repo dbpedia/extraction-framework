@@ -4,6 +4,7 @@ import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.sources.LiveWikiPage
 import org.dbpedia.extraction.util.StringUtils._
 import java.net.URI
 import java.util.logging.{Level, Logger}
@@ -29,7 +30,7 @@ final class SimpleWikiParser extends WikiParser
     private val mathEnd = new Matcher(List("</math>"));
     private val codeEnd = new Matcher(List("</code>"));
     private val sourceEnd = new Matcher(List("</source>"));
-        
+
     private val internalLinkLabelOrEnd = new Matcher(List("|", "]]", "\n"));
     private val internalLinkEnd = new Matcher(List("]]", "\n"), true);
 
@@ -52,7 +53,7 @@ final class SimpleWikiParser extends WikiParser
     private val tableCellEnd3 = new Matcher(List("\n ", "\n|}", "\n|-", "\n|", "\n!", "||", "!!"), true);
 
     private val sectionEnd = new Matcher(List("=\n", "=\r", "\n"), true);
-    
+
     /**
      * Parses WikiText source and builds an Abstract Syntax Tree.
      *
@@ -73,7 +74,14 @@ final class SimpleWikiParser extends WikiParser
         //TODO resolve template titles
         val disambiguationNames = Disambiguation(page.title.language).getOrElse(Set("Disambig"))
         val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
-
+      try{
+      //println("NODECHILDREN = " +  page.asInstanceOf[LiveWikiPage].toXML);
+        return new LivePageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation,
+          page.asInstanceOf[LiveWikiPage].timestamp, nodes)
+      }
+      catch{
+        case e: Exception => ;
+      }
         //Return page node
         new PageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation, nodes)
     }
@@ -84,7 +92,7 @@ final class SimpleWikiParser extends WikiParser
         case TemplateNode(title, _, _) => false
         case _ => node.children.exists(node => findTemplate(node, names, language))
     }
-    
+
     private def  parseUntil(matcher : Matcher, source : Source, level : Int) : List[Node] =
     {
         val line = source.line
@@ -125,7 +133,7 @@ final class SimpleWikiParser extends WikiParser
             {
             	currentText = currentText.replaceAll("^\\s+", "")
             }
-            
+
             //If this text is at the end => remove trailing whitespace and return
             if((!m.matched && level == 0) || !m.isStdTag)
             {
@@ -212,7 +220,7 @@ final class SimpleWikiParser extends WikiParser
             lastPos = source.pos;
             lastLine = source.line;
         }
-        
+
         nodes.reverse
     }
 
@@ -235,7 +243,7 @@ final class SimpleWikiParser extends WikiParser
         }
         //else we found "/>"
     }
-    
+
     private def createNode(source : Source, level : Int) : Node =
     {
         if(source.lastTag("[") || source.lastTag("http"))
@@ -263,12 +271,12 @@ final class SimpleWikiParser extends WikiParser
         else
             throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
     }
-    
+
     private def parseLink(source : Source, level : Int) : LinkNode =
     {
         val startPos = source.pos
         val startLine = source.line
-        
+
         if(source.lastTag("[["))
         {
             //val m = source.find(internalLinkLabelOrEnd)
@@ -423,7 +431,7 @@ final class SimpleWikiParser extends WikiParser
                 return TemplateNode(title, properties.reverse, startLine)
             }
         }
-    	
+
     	throw new WikiParserException("Template not closed", startLine, source.findLine(startLine))
     }
 
@@ -432,19 +440,19 @@ final class SimpleWikiParser extends WikiParser
     	val line = source.line
     	var nodes = parseUntil(propertyValueOrEnd, source, level)
     	var key = defaultKey
- 
+
         if(source.lastTag("="))
         {
             //The currently parsed node is a key
         	if(nodes.size != 1 || !nodes.head.isInstanceOf[TextNode])
         		throw new WikiParserException("Template property key contains invalid elements", line, source.findLine(line))
-        	
+
             key = nodes.head.retrieveText.get.trim
 
             //Parse the corresponding value
             nodes = parseUntil(propertyEnd, source, level);
         }
-        
+
         PropertyNode(key, nodes, line)
     }
 
@@ -456,12 +464,12 @@ final class SimpleWikiParser extends WikiParser
 
         ParserFunctionNode(title, children, startLine)
     }
-    
+
     private def parseTable(source : Source, level : Int) : TableNode =
     {
     	val startPos = source.pos
     	val line = source.line
- 
+
     	var nodes = List[TableRowNode]()
     	var caption : Option[String] = None
 
@@ -489,7 +497,7 @@ final class SimpleWikiParser extends WikiParser
                 {
                     //Move to first cell
                     val m2 = source.find(tableRowEnd2) //"|}", "|-", "|", "!"
-    
+
                     if(m2.tagIndex == 0 || m2.tagIndex == 1)
                     {
                         //Empty row
@@ -497,10 +505,10 @@ final class SimpleWikiParser extends WikiParser
                         return TableNode(caption, nodes.reverse, line);
                     }
                 }
-                
+
                 //Parse row
 	            nodes ::= parseTableRow(source, level)
-	
+
 	            //Reached table end?
 	            if(source.lastTag("|}"))
 	            {
@@ -508,7 +516,7 @@ final class SimpleWikiParser extends WikiParser
 	            }
             }
         }
-    	
+
     	TableNode(caption, nodes.reverse, line);
     }
 
@@ -516,7 +524,7 @@ final class SimpleWikiParser extends WikiParser
     {
     	val line = source.line
     	var nodes = List[TableCellNode]()
-    	
+
         while(true)
         {
             //Parse table cell
@@ -528,7 +536,7 @@ final class SimpleWikiParser extends WikiParser
                 return new TableRowNode(nodes.reverse, line)
             }
         }
-        
+
         null
     }
 
@@ -561,7 +569,7 @@ final class SimpleWikiParser extends WikiParser
                 source.find(tableCellEnd2);
             }
         }
-        
+
         val node = new TableCellNode(nodes, startLine)
         node.setAnnotation("rowspan", rowspan)
         node.setAnnotation("colspan", colspan)
