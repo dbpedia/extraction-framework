@@ -78,10 +78,16 @@ object LiveExtractionSource
               val mytitle = WikiUtil.wikiEncode(link, language)
               println(mytitle)
 
-                f( new WikiPage( title     = WikiTitle.parse(link, language),
+                /*f( new WikiPage( title     = WikiTitle.parse(link, language),
                                  id        = (page \ "id").text.toLong,
                                  revision  = (rev \ "id").text.toLong,
-                                 source    = (rev \ "text").text ) )
+                                 source    = (rev \ "text").text ) )*/
+
+              f( new LiveWikiPage( title     = WikiTitle.parse(link, language),
+                                 id        = (page \ "id").text.toLong,
+                                 revision  = (rev \ "id").text.toLong,
+                                 source    = (rev \ "text").text ,
+                                 timestamp = (rev \ "timestamp").text) )
 
               /*f( new WikiPage( title     = mytitle,
                                  id        = (page \ "id").text.toLong,
