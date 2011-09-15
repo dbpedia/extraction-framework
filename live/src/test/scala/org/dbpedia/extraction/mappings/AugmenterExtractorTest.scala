@@ -1,17 +1,13 @@
 package org.dbpedia.extraction.mappings
 
 import java.lang.String
-import org.dbpedia.extraction.wikiparser.PageNode
 import collection.mutable._
-import org.dbpedia.extraction.destinations.{Graph, Dataset, Quad}
+import org.dbpedia.extraction.destinations.Dataset
 import org.dbpedia.utils.sparql.{CachingGraphDAO, HTTPGraphDAO}
 import org.dbpedia.utils.sparql.SparqlUtils
-import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
+import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.util.Language
-import java.util.Locale
-import org.dbpedia.extraction.mappings._
-
 object AugmenterExtractorTest
 {
   def main(args : Array[String]) : Unit = {
@@ -39,9 +35,12 @@ class AugmenterExtractorTest extends FlatSpec with ShouldMatchers
 
     val labelToURIs = SparqlUtils.getInstancesUriAndLabels(graphDAO, "http://dbpedia.org/ontology/Country", "en")
 
-    val extractionContext = new ExtractionContext(null, new Language("en", Locale.getDefault), null, null, null, null)
+    val context = new
+    {
+        def language : Language = Language.fromWikiCode("en").get
+    }
 
-    val decoratee = new DummyExtractor(extractionContext)
+    val decoratee = new DummyExtractor(context)
 
 
 

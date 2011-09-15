@@ -103,7 +103,7 @@ object Redirects
         }
         catch
         {
-            case ex : Exception => logger.log(Level.WARNING, "Could not load redirects from cache. Details: " + ex.getMessage)
+            case ex : Exception => logger.log(Level.WARNING, "Could not load redirects from cache ("+lang.wikiCode+"). Details: " + ex.getMessage)
         }
 
         //Load redirects from source
@@ -130,13 +130,13 @@ object Redirects
      */
     def loadFromCache(lang : Language = Language.Default) : Redirects =
     {
-        logger.info("Loading redirects from cache")
+        logger.info("Loading redirects from cache ("+lang.wikiCode+")")
         val inputStream = new ObjectInputStream(Redirects.getClass.getClassLoader.getResourceAsStream(cacheFile + "_" + lang.wikiCode))
         try
         {
             val redirects = new Redirects(inputStream.readObject().asInstanceOf[Map[String, String]])
 
-            logger.info(redirects.map.size + " redirects loaded from cache")
+            logger.info(redirects.map.size + " redirects loaded from cache ("+lang.wikiCode+")")
             redirects
         }
         finally
@@ -150,13 +150,13 @@ object Redirects
      */
     def loadFromSource(source : Source, lang : Language = Language.Default) : Redirects =
     {
-        logger.info("Loading redirects from source")
+        logger.info("Loading redirects from source ("+lang.wikiCode+")")
 
         val redirectFinder = new RedirectFinder(lang)
 
         val redirects = new Redirects(source.flatMap(redirectFinder).toMap)
 
-        logger.info("Redirects loaded from source")
+        logger.info("Redirects loaded from source ("+lang.wikiCode+")")
         redirects
     }
 

@@ -17,9 +17,10 @@ import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 class Extraction(@PathParam("lang") langCode : String) extends Base
 {
     private val language = Language.fromWikiCode(langCode)
-        .getOrElse(throw new WebApplicationException(404))
+        .getOrElse(throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
-    if(!Server.config.languages.contains(language)) throw new WebApplicationException(404)
+    if(!Server.config.languages.contains(language))
+        throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)
 
     @GET
     @Produces(Array("application/xhtml+xml"))
@@ -67,7 +68,7 @@ class Extraction(@PathParam("lang") langCode : String) extends Base
         
         val destination = new StringDestination(formatter)
         Server.extractor.extract(source, destination, language)
-        destination.close
+        destination.close()
         destination.toString
     }
 
@@ -83,7 +84,7 @@ class Extraction(@PathParam("lang") langCode : String) extends Base
         val source = XMLSource.fromXML(xml)
         val destination = new StringDestination(new TriXFormatter(new URI("../../stylesheets/trix.xsl")))
         Server.extractor.extract(source, destination, language)
-        destination.close
+        destination.close()
         destination.toString
     }
 }

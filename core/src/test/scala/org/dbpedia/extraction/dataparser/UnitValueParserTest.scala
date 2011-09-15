@@ -1,20 +1,20 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.mappings.{Redirects, ExtractionContext}
-import org.dbpedia.extraction.ontology.OntologyDatatypes
+import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
 import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
 import scala.math._
+import org.dbpedia.extraction.ontology.{Ontology, OntologyDatatypes}
 
 class UnitValueParserTest extends FlatSpec with ShouldMatchers
 {
    // Length - Positive Tests - Input is valid
    "UnitValueParser" should "return Length(10 m)" in
     {
-        parse("en", "Length", "10m") should be (approximatelyEqualTo(Some(10)))
+        parse("en", "Length", "10m") should be (approximatelyEqualTo(Some(10.0)))
     }
    "UnitValueParser" should "return Length(10 metres)" in
     {
@@ -98,7 +98,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
 
      "UnitValueParser" should "return Area({{Pop density mi2 to km2|355|precision=0|abbr=yes}})" in
     {
-        parse("en", "Area", "{{Pop density mi2 to km2|355|precision=0|abbr=yes}}") should be (approximatelyEqualTo(Some(919445779)))
+        parse("en", "Area", "{{Pop density mi2 to km2|355|precision=0|abbr=yes}}") should be (approximatelyEqualTo(Some(919445779.0)))
     }
 
     "UnitValueParser" should "return Area(10 mm²)" in
@@ -127,7 +127,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
     }
     "UnitValueParser" should "return Area(21.30 mi²)" in
     {
-        parse("en", "Area", "21.30 mi²") should be (approximatelyEqualTo(Some(55166747)))
+        parse("en", "Area", "21.30 mi²") should be (approximatelyEqualTo(Some(55166747.0)))
     }
     "UnitValueParser" should "return Area(21.30 ha)" in
     {
@@ -144,11 +144,11 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
 
     "UnitValueParser" should "return Area(344.50 acres (1.39 km²))" in
     {
-        parse("en", "Area", "344.50 acres (1.39 km²)") should be (approximatelyEqualTo(Some(1394041)))
+        parse("en", "Area", "344.50 acres (1.39 km²)") should be (approximatelyEqualTo(Some(1394041.0)))
     }
     "UnitValueParser" should "return Area({{km2 to mi2 | 77 | abbr=yes}})" in
     {
-        parse("en", "Area", "{{km2 to mi2 | 77 | abbr=yes}}") should be (approximatelyEqualTo(Some(77000000)))
+        parse("en", "Area", "{{km2 to mi2 | 77 | abbr=yes}}") should be (approximatelyEqualTo(Some(77000000.0)))
     }
     /*"UnitValueParser" should "return Volume(10 km³)" in
     {
@@ -180,7 +180,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
     }
     "UnitValueParser" should "return Volume({{convert|612000000|USgal|m3|abbr=on}})" in
     {
-        parse("en", "Volume", "{{convert|612000000|USgal|m3|abbr=on}}") should be (approximatelyEqualTo(Some(2316672)))
+        parse("en", "Volume", "{{convert|612000000|USgal|m3|abbr=on}}") should be (approximatelyEqualTo(Some(2316672.0)))
     }
     "UnitValueParser" should "return Time(5 Days)" in
     {
@@ -287,13 +287,18 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
 
 
     private val wikiParser = WikiParser()
-    private val datatypes =  OntologyDatatypes.load.map(dt => (dt.name, dt)).toMap
+    private val datatypes =  OntologyDatatypes.load().map(dt => (dt.name, dt)).toMap
 
     private def parse(language : String, datatypeName : String, input : String) : Option[Double] =
     {
         val lang = Language.fromWikiCode(language).get
-        val redirects = Redirects.loadFromCache(lang)
-        val context = new ExtractionContext(null, lang, redirects, null, null, null)
+        val red = Redirects.loadFromCache(lang)
+        val context = new
+        {
+            def ontology : Ontology = throw new Exception("please test without requiring the ontology")
+            def language : Language = lang
+            def redirects : Redirects = red
+        }
         val datatype = datatypes(datatypeName)
         val unitValueParser = new UnitValueParser(context, datatype, false)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), 0, 0, input)

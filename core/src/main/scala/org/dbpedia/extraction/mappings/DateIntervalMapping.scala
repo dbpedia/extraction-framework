@@ -1,42 +1,70 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyProperty
-import java.util.logging.{Logger}
+import java.util.logging.Logger
 import org.dbpedia.extraction.dataparser.DateTimeParser
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.OntologyProperty
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
+import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, TemplateNode}
+import java.lang.IllegalStateException
 
-class DateIntervalMapping( templateProperty : String,
+class DateIntervalMapping( val templateProperty : String,
                            startDateOntologyProperty : OntologyProperty,
                            endDateOntologyProperty : OntologyProperty,
-                           extractionContext : ExtractionContext ) extends PropertyMapping
+                           context : {
+                               def redirects : Redirects  // redirects required by DateTimeParser
+                               def language : Language } ) extends PropertyMapping
 {
     private val logger = Logger.getLogger(classOf[DateIntervalMapping].getName)
 
-    private val startDateParser = new DateTimeParser(extractionContext, startDateOntologyProperty.range.asInstanceOf[Datatype])
-    private val endDateParser = new DateTimeParser(extractionContext, endDateOntologyProperty.range.asInstanceOf[Datatype])
+    private val startDateParser = new DateTimeParser(context, startDateOntologyProperty.range.asInstanceOf[Datatype])
+    private val endDateParser = new DateTimeParser(context, endDateOntologyProperty.range.asInstanceOf[Datatype])
+
+    private val presentString = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
+
+    private val intervalSplitRegex = "(—|–|-|&mdash;|&ndash;)"
     
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         for(propertyNode <- node.property(templateProperty))
         {
             //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
-            val splitNodes = NodeUtil.splitPropertyNode(propertyNode, "(—|–|-|&mdash;|&ndash;)")
+            val splitNodes = splitPropertyNodes(propertyNode)
 
-            //Parse
-            val startDateOpt = if(splitNodes.size >= 1) startDateParser.parse(splitNodes(0)) else None
-            val endDateOpt = if (splitNodes.size >= 2) endDateParser.parse(splitNodes(1)) else None
+            //Can only map exactly two values onto an interval
+            if(splitNodes.size > 2 || splitNodes.size  <= 0)
+            {
+                return new Graph()
+            }
 
-            //Return if no start year has been found
-            if(startDateOpt.isEmpty) return new Graph()
+            //Parse start; return if no start year has been found
+            val startDate = startDateParser.parse(splitNodes(0)).getOrElse(return new Graph())
 
-            val startDate = startDateOpt.get
-            
+            //Parse end
+            val endDateOpt = splitNodes match
+            {
+                //if there were two elements found
+                case List(start, end) => end.retrieveText match
+                {
+                    //if until "present" is specified in words, don't write end triple
+                    case Some(text : String) if text.trim == presentString => None
+
+                    //normal case of specified end date
+                    case _ => endDateParser.parse(end)
+                }
+
+                //make start and end the same if there is no end specified
+                case List(start) => Some(startDate)
+
+                case _ => throw new IllegalStateException("size of split nodes must be 0 < l < 3; is " + splitNodes.size)
+            }
+
             //Write start date quad
-            val quad1 = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
+            val quad1 = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
 
-            //Writing the end date is optional
+            //Writing the end date is optional if "until present" is specified
             for(endDate <- endDateOpt)
             {
                 //Validate interval
@@ -47,7 +75,7 @@ class DateIntervalMapping( templateProperty : String,
                 }
 
                 //Write end year quad
-                val quad2 = new Quad(extractionContext, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
+                val quad2 = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
 
                 return new Graph(quad1 :: quad2 :: Nil)
             }
@@ -55,6 +83,22 @@ class DateIntervalMapping( templateProperty : String,
             return new Graph(quad1 :: Nil)
         }
         
-        return new Graph()
+        new Graph()
+    }
+
+    private def splitPropertyNodes(propertyNode : PropertyNode) : List[PropertyNode] =
+    {
+        //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
+        val splitNodes = NodeUtil.splitPropertyNode(propertyNode, intervalSplitRegex)
+
+        //Did we split a date? e.g. 2009-10-13
+        if(splitNodes.size > 2)
+        {
+            NodeUtil.splitPropertyNode(propertyNode, "\\s" + intervalSplitRegex + "\\s")
+        }
+        else
+        {
+            splitNodes
+        }
     }
 }

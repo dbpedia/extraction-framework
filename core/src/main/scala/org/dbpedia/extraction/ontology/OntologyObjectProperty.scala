@@ -12,5 +12,6 @@ package org.dbpedia.extraction.ontology
  * A functional property is a property that can have only one (unique) value y for each instance x (see: http://www.w3.org/TR/owl-ref/#FunctionalProperty-def)
  */
 class OntologyObjectProperty( name : String, labels : Map[String, String], comments : Map[String, String],
-                              domain : OntologyClass, override val range : OntologyClass, isFunctional : Boolean = false)
-    extends OntologyProperty(name, labels, comments, domain, range, isFunctional)
+                              domain : OntologyClass, override val range : OntologyClass, isFunctional : Boolean = false,
+                              equivalentProperties : Set[OntologyProperty] = Set())
+    extends OntologyProperty(name, labels, comments, domain, range, isFunctional, equivalentProperties)

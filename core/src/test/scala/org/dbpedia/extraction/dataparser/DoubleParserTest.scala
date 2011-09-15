@@ -3,7 +3,6 @@ package org.dbpedia.extraction.dataparser
 //import junit.framework.TestCase
 //import junit.framework.Assert._
 //import org.dbpedia.extraction.wikiparser._
-//import org.dbpedia.extraction.mappings.ExtractionContext
 //import java.net.URI
 //
 //class DoubleParserTest extends TestCase
@@ -25,7 +24,7 @@ package org.dbpedia.extraction.dataparser
 //
 //    private def testParse( lang : String, node : Node, expect : Option[Double] ) : Unit =
 //    {
-//      //TODO assertEquals(expect, new DoubleParser(new ExtractionContext(null, Language.fromWikiCode(lang).get, null)).parse(node))
+//      //TODO assertEquals(expect, new {def language : Language = Language.fromWikiCode(lang).get} ).parse(node))
 //    }
 //
 //}

@@ -1,25 +1,24 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, Node, InternalLinkNode, WikiTitle}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
+import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
 
 /**
  * Extracts information about which concept is a category and how categories are related using the SKOS Vocabulary.
  */
-class SkosCategoriesExtractor(extractionContext : ExtractionContext) extends Extractor
+class SkosCategoriesExtractor( context : {
+                                   def ontology : Ontology
+                                   def language : Language }  ) extends Extractor
 {
-    private val language = extractionContext.language.wikiCode
-
-    require(Set("en").contains(language))
-
-    private val rdfTypeProperty = extractionContext.ontology.getProperty("rdf:type").get
-    private val skosConceptClass = extractionContext.ontology.getClass("skos:Concept").get
-    private val skosPrefLabelProperty = extractionContext.ontology.getProperty("skos:prefLabel").get
-    private val skosBroaderProperty = extractionContext.ontology.getProperty("skos:broader").get
-    private val skosRelatedProperty = extractionContext.ontology.getProperty("skos:related").get
+    private val rdfTypeProperty = context.ontology.getProperty("rdf:type").get
+    private val skosConceptClass = context.ontology.getClass("skos:Concept").get
+    private val skosPrefLabelProperty = context.ontology.getProperty("skos:prefLabel").get
+    private val skosBroaderProperty = context.ontology.getProperty("skos:broader").get
+    private val skosRelatedProperty = context.ontology.getProperty("skos:related").get
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -27,22 +26,18 @@ class SkosCategoriesExtractor(extractionContext : ExtractionContext) extends Ext
 
         var quads = List[Quad]()
 
-        quads ::= new Quad(extractionContext, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
-        quads ::= new Quad(extractionContext, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+        quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
+        quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
 
         for(link <- collectCategoryLinks(node))
         {
-            val property =
-                if(link.retrieveText.getOrElse("").startsWith(":"))
-                {
-                    skosRelatedProperty
-                }
-                else
-                {
-                    skosBroaderProperty
-                }
+            val property = link.destinationNodes match
+            {
+                case TextNode(text, _) :: Nil  if text.startsWith(":") => skosRelatedProperty
+                case _ => skosBroaderProperty
+            }
 
-            quads ::= new Quad(extractionContext, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
         }
 
         new Graph(quads)
@@ -59,8 +54,9 @@ class SkosCategoriesExtractor(extractionContext : ExtractionContext) extends Ext
 
     private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespaces.getNameForNamespace(extractionContext.language, WikiTitle.Namespace.Category)
+        val categoryNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Category)
         
-        OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
+        //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
     }
 }

@@ -1,24 +1,21 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import java.net.URI
-import org.dbpedia.extraction.mappings.ExtractionContext
-import org.dbpedia.extraction.ontology.{OntologyProperty}
+import org.dbpedia.extraction.ontology.OntologyProperty
 import java.io.CharConversionException
+import org.dbpedia.extraction.util.Language
 
 /**
- * Represents a statement in the N-Quads format
- * see: http://sw.deri.org/2008/07/n-quads/
+ * Represents a statement in the N-Quads format (see: http://sw.deri.org/2008/07/n-quads/)
  */
- //TODO should we use URI instead of String?
-//FIXME Made the extraction Context public in order to retrieve the language - Is that a problem? - Claus
-class Quad(	val extractionContext : ExtractionContext,
+//TODO write out equivalent properties
+class Quad(	val language : Language,
             val dataset : Dataset,
             val subject : String,
 		    val predicate : String,
 		    val value : String,
 		    val context : String,
-		    val datatype : Datatype )
+		    var datatype : Datatype )
 {
     //Validate input
 	if(subject == null) throw new NullPointerException("subject")
@@ -28,66 +25,78 @@ class Quad(	val extractionContext : ExtractionContext,
 
     if(value.isEmpty) throw new IllegalArgumentException("Value is empty")
 
-	new URI(subject)
-	new URI(context)
-	if(datatype == null) new URI(value)
+    //TODO validate them on creation, now can be either URI/IRI
+	//new URI(subject)
+	//new URI(context)
+	//if(datatype == null) new URI(value)
 
-    def this( extractionContext : ExtractionContext,
-              dataset : Dataset,
-              subject : String,
-		      predicate : OntologyProperty,
-		      value : String,
-		      context : String,
-		      datatype : Datatype = null ) = this(extractionContext, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
+    def this(language : Language,
+             dataset : Dataset,
+             subject : String,
+		     predicate : OntologyProperty,
+		     value : String,
+		     context : String,
+		     datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
+
 
     def renderNTriple = render(false)
-    
+
     def renderNQuad = render(true)
-    
+
     override def toString = renderNQuad
-    
+
     private def render(includeContext : Boolean) : String =
     {
     	val sb = new StringBuilder
-        
+
         sb append "<" append subject append "> "
-        
+
         sb append "<" append predicate append "> "
-        
+
         if (datatype != null)
         {
             if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string")
             {
             	sb append '"'
-            	escapeString(sb, value)
+            	escapeString(sb, value) //sb append value //#int escapeString(sb, value)
             	sb append "\""
-                
-                sb append "@" + extractionContext.language.locale.getLanguage + " "
+
+                sb append "@" + language.locale.getLanguage + " "
             }
             else
             {
                 sb append '"'
-                escapeString(sb, value)
-                sb append "\"^^<" append datatype.uri append "> "
+                escapeString(sb, value) //sb append value //#int 
+                sb append "\"^^<"
+                escapeString(sb, datatype.uri)
+                sb append "> "
             }
         }
         else
         {
             sb append '<'
-            escapeString(sb, value)
+
+            //HACK
+            //TODO find a good solution for this
+            //maybe we should have DBpediaURI and OtherURI as well as Literal objects?
+            if(predicate == "http://xmlns.com/foaf/0.1/homepage")
+                escapeString(sb, value) // escape unicode in homepage URI
+            else
+                sb append value //this must not be escaped, it is a URI/IRI
+
             sb append "> "
         }
-        
+
         if (includeContext)
         {
             sb append '<' append context append "> "
         }
-        
+
         sb append '.'
-        
-        return sb.toString
+
+        sb.toString()
     }
-	
+
 	/**
 	 * Escapes an unicode string according to N-Triples format
 	 */
@@ -148,7 +157,7 @@ class Quad(	val extractionContext : ExtractionContext,
 				sb append hexStr
 			}
 		}
-		return sb
+		sb
 	}
 }
 

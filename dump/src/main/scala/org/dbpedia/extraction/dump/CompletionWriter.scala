@@ -2,6 +2,7 @@ package org.dbpedia.extraction.dump
 
 import java.io.{BufferedWriter, FileWriter, File}
 import _root_.org.dbpedia.extraction.wikiparser.WikiTitle
+import java.net.URLDecoder
 
 /**
  * Writes a completion log file.
@@ -14,7 +15,8 @@ class CompletionWriter(file : File)
     {
         val idStr = id.toString
         val leadingZeros = "0" * (10 - idStr.length)
-        writer.write(leadingZeros + idStr + " " + title.encodedWithNamespace + " " + success.toString)
+        //#int decode if lang is set with IRI
+        writer.write(leadingZeros + idStr + " " + URLDecoder.decode(title.encodedWithNamespace) + " " + success.toString)
         writer.newLine() 
     }
 
