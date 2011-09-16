@@ -4,6 +4,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import java.net.URI
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,19 +23,36 @@ class MetaInformationExtractor( context : {
     if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
 
         val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
-        val editlinkPredicate = "http://purl.org/dc/terms/modified"
+        val modificationDatePredicate = "http://purl.org/dc/terms/modified"
+        val editLinkPredicate = "http://dbpedia.org/meta/editlink"
+        val revisionPredicate = "http://dbpedia.org/meta/revision"
 
 
         //new Graph(quads)
     //println("NODECHILDREN = " + node.children.find(x => "timestamp"))
 //    node.children.foreach(child => println("CHILD = " + child.))
-    println("NODECHILDREN = " + node.asInstanceOf[LivePageNode].timestamp);
-    val quadEditlink = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, editlinkPredicate,
+//    try{
+    //println("NODECHILDREN = " + node.asInstanceOf[LivePageNode].timestamp);
+    val quadModificationDate = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, modificationDatePredicate,
       node.asInstanceOf[LivePageNode].timestamp, node.sourceUri,context.ontology.getDatatype("xsd:dateTime").get )
 
+    val editLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title +
+     "&action=edit";
+    val quadEditlink = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, editLinkPredicate,
+      editLink, node.sourceUri, null )
 
-    /*new Graph(new Quad(context.language, DBpediaDatasets.Revisions, "", "",
-            node.revision.toString, node.sourceUri, context.ontology.getDatatype("xsd:integer").get ))*/
-    new Graph(quadEditlink);
+    val revisionLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title +
+      "&oldid=" + node.revision;
+    println("REVISIONLINK = " + revisionLink);
+
+    //private val foafPrimaryTopicProperty = context.ontology.getProperty("foaf:primaryTopic").getOrElse(throw new Exception("Property 'foaf:primaryTopic' not found"))
+
+    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, revisionPredicate,
+      revisionLink, node.sourceUri, null )
+
+
+    new Graph(List(quadModificationDate, quadEditlink, quadRevisionlink));
+
+
   }
 }
