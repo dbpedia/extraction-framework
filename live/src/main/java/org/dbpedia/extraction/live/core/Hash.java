@@ -48,6 +48,10 @@ public class Hash{
 
     private String Subject = null; //TODO This member is not explicitly typed in the php file, so we must make sure of its type
 
+    //I managed to move this member from function _compareHelper as the variables sequences used in deleting old
+    // abstracts may coincide, so it is better to keep it as a static member and reset it from time to time.
+    private static int delCount = 0 ;
+
     static
     {
         try
@@ -310,8 +314,11 @@ public class Hash{
 
         int matchCount = 0;
         int addCount = 0;
-        int delCount = 0 ;
         int total = 0;
+
+        //reset delCount if necessary
+        if(delCount > 10000)
+            delCount = 0;
 
         //init
 
