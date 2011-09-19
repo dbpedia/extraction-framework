@@ -123,7 +123,7 @@ public class Main
         Timer fiveMinuteTimer = new Timer("Five-Minute timer");
         Timer oneHourTimer = new Timer("One-Hour timer");
         Timer oneDayTimer = new Timer("One-Day timer");
-        
+
         //Activating timers
 
         oneMinuteTimer.schedule(new TimerAction(1), 0, 60*1000); //One-Minute
