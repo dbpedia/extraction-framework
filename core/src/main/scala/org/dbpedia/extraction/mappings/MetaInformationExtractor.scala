@@ -27,21 +27,23 @@ class MetaInformationExtractor( context : {
         val editLinkPredicate = "http://dbpedia.org/meta/editlink"
         val revisionPredicate = "http://dbpedia.org/meta/revision"
 
-
         //new Graph(quads)
     //println("NODECHILDREN = " + node.children.find(x => "timestamp"))
 //    node.children.foreach(child => println("CHILD = " + child.))
 //    try{
     //println("NODECHILDREN = " + node.asInstanceOf[LivePageNode].timestamp);
+
+
+
     val quadModificationDate = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, modificationDatePredicate,
       node.asInstanceOf[LivePageNode].timestamp, node.sourceUri,context.ontology.getDatatype("xsd:dateTime").get )
 
-    val editLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title +
+    val editLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title.encoded +
      "&action=edit";
     val quadEditlink = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, editLinkPredicate,
       editLink, node.sourceUri, null )
 
-    val revisionLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title +
+    val revisionLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title.encoded +
       "&oldid=" + node.revision;
     println("REVISIONLINK = " + revisionLink);
 
