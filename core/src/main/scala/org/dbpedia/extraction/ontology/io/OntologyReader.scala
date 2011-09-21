@@ -452,7 +452,7 @@ class OntologyReader
     }
 }
 
-private object OntologyReader
+object OntologyReader
 {
     val CLASSTEMPLATE_NAME = "Class"
     val OBJECTPROPERTY_NAME = "ObjectProperty"
@@ -466,7 +466,7 @@ private object OntologyReader
      * @return class name
      * @throws IllegalArgumentException
      */
-    private def getClassName(title : WikiTitle) : String = title.encoded.split("/|:", 2) match
+    def getClassName(title : WikiTitle) : String = title.encoded.split("/|:", 2) match
     {
         case Array(name) => name.capitalizeLocale(title.language.locale)
         case Array(namespace, name) => namespace.toLowerCase(title.language.locale) + ":" + name.capitalizeLocale(title.language.locale)
@@ -480,7 +480,7 @@ private object OntologyReader
      * @return property name
      * @throws IllegalArgumentException
      */
-    private def getPropertyName(title : WikiTitle) : String = title.encoded.split("/|:", 2) match
+    def getPropertyName(title : WikiTitle) : String = title.encoded.split("/|:", 2) match
     {
         case Array(name) => name.uncapitalize(title.language.locale)
         case Array(namespace, name) => namespace.toLowerCase(title.language.locale) + ":" + name.uncapitalize(title.language.locale)
