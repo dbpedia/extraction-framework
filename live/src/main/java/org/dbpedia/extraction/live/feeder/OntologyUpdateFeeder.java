@@ -19,10 +19,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.PropertyConfigurator;
 import org.dbpedia.extraction.live.core.Util;
 import org.dbpedia.extraction.live.helper.ExtractorSpecification;
-import org.dbpedia.extraction.live.util.Files;
-import org.dbpedia.extraction.live.util.LastResponseDateManager;
-import org.dbpedia.extraction.live.util.OAIUtil;
-import org.dbpedia.extraction.live.util.XMLUtil;
+import org.dbpedia.extraction.live.util.*;
 import org.dbpedia.extraction.live.util.sparql.ISparulExecutor;
 import org.dbpedia.extraction.live.util.sparql.VirtuosoJdbcSparulExecutor;
 import org.dbpedia.extraction.ontology.Ontology;
@@ -88,7 +85,7 @@ public class OntologyUpdateFeeder extends Thread {
         ini.get("PROPERTY_DEFINITION_EXTRACTOR").to(config);
         ini.get("LOGGING").to(config);
 
-        String lastResponseDateFile = "live/mappings.dbpedia.org/last-response-date.txt";
+        File lastResponseDateFile = new File("live/cfg/mappings.dbpedia.org/last-response-date.txt");
 
         String startDate = config.isStartNow()
                 ? LastResponseDateManager.getNow()
@@ -134,7 +131,7 @@ public class OntologyUpdateFeeder extends Thread {
                 OAIUtil.createEndlessRecordIterator(mappingsOAIUri, startDate, config.getPollInterval() * 1000, config.getSleepInterval() * 1000);
 
 
-        OntologyUpdateFeeder feeder = new OntologyUpdateFeeder(recordIterator, extractor);
+        OntologyUpdateFeeder feeder = new OntologyUpdateFeeder(recordIterator, extractor, lastResponseDateFile);
 
         // Let's not run as a Thread for now
         //feeder.start();
@@ -145,11 +142,13 @@ public class OntologyUpdateFeeder extends Thread {
 
     private Iterator<Document> recordIterator;
     private TBoxExtractor2 extractor;
+    private File lastResponseDateFile;
 
 
-    public OntologyUpdateFeeder(Iterator<Document> recordIterator, TBoxExtractor2 extractor) {
+    public OntologyUpdateFeeder(Iterator<Document> recordIterator, TBoxExtractor2 extractor, File lastResponseDateFile) {
         this.recordIterator = recordIterator;
         this.extractor = extractor;
+        this.lastResponseDateFile = lastResponseDateFile;
     }
 
     public void run() {
@@ -177,6 +176,7 @@ public class OntologyUpdateFeeder extends Thread {
 
                 //NodeToRecordTransformer transformer = new NodeToRecordTransformer(baseWikiUri, mappingsOAIUri, oaiPrefix);
 
+
                 String str = XMLUtil.toString(doc);
                 if(str.contains("header status=\"deleted\"")) {
                     Matcher matcher = oaiPattern.matcher(str);
@@ -198,8 +198,9 @@ public class OntologyUpdateFeeder extends Thread {
                 //System.out.println(str);
 
 
-                //Last modification date of the mapping
-                String lastResponseDate = XMLUtil.getPageModificationDate(doc);
+                String timeStamp = XPathUtil.evalToString(doc, DBPediaXPathUtil.getDatestampExpr());
+                Files.createFile(lastResponseDateFile, timeStamp);
+                
                 //MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, lastResponseDate);
 
 
