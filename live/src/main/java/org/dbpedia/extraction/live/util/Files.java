@@ -3,17 +3,7 @@ package org.dbpedia.extraction.live.util;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -148,10 +138,11 @@ public class Files {
 	 *            Content of the file.
 	 */
 	public static synchronized void  createFile(File file, String content) {
-		
+
+        PrintWriter writer = null;
 		try {
-			FileOutputStream fos = new FileOutputStream(file);
-			fos.write(content.getBytes());
+			writer = new PrintWriter(new FileOutputStream(file));
+			writer.print(content);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -160,6 +151,12 @@ public class Files {
 			e.printStackTrace();
 			if(debug){System.exit(0);}
 		}
+        finally {
+            if(writer != null) {
+                writer.flush();
+                writer.close();
+            }
+        }
 	}
 	/**
 	 * Creates a new file with the given content or replaces the content of a

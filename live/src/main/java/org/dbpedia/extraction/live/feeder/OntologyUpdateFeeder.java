@@ -10,6 +10,7 @@ import com.hp.hpl.jena.shared.NamespaceEndsWithNameCharException;
 import com.hp.hpl.jena.shared.PrefixMapping;
 import com.hp.hpl.jena.shared.impl.PrefixMappingImpl;
 import com.hp.hpl.jena.sparql.util.PrefixMapping2;
+import com.hp.hpl.jena.util.FileUtils;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -199,6 +200,7 @@ public class OntologyUpdateFeeder extends Thread {
 
 
                 String timeStamp = XPathUtil.evalToString(doc, DBPediaXPathUtil.getDatestampExpr());
+
                 Files.createFile(lastResponseDateFile, timeStamp);
                 
                 //MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, lastResponseDate);
