@@ -28,11 +28,25 @@ public class LastResponseDateManager {
     public static String getNow() {
         return UTCHelper.transformToUTC(new Date());
     }
-    
+
+    /**
+     * Use getLastResponseDate(File file) instead.
+     *
+     * @param strFileName
+     * @return
+     */
+    @Deprecated
     public static String getLastResponseDate(String strFileName)
     {
         // TODO Actually, we should get a file-object here in the first place
         File file = new File(strFileName);
+
+        return getLastResponseDate(file);
+    }
+
+
+    public static String getLastResponseDate(File file)
+    {
         if(!file.exists()) {
             return null;
         }
@@ -42,7 +56,7 @@ public class LastResponseDateManager {
         FileInputStream fsLastResponseDateFile = null;
 
         try{
-            fsLastResponseDateFile = new FileInputStream(strFileName);
+            fsLastResponseDateFile = new FileInputStream(file);
 
             int ch;
             strLastResponseDate="";
@@ -61,7 +75,7 @@ public class LastResponseDateManager {
 
             }
             catch (Exception exp){
-                logger.error("File " + strFileName + " cannot be closed due to " + exp.getMessage());
+                logger.error("File " + file.getAbsolutePath() + " cannot be closed due to " + exp.getMessage());
             }
 
         }
