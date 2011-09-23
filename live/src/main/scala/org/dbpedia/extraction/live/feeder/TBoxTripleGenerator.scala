@@ -242,33 +242,36 @@ class TBoxTripleGenerator() {
     val result = new HashMap[Resource, Set[Model]] with MultiMap[Resource, Model]
 
 
-    for (node <- pageNode.children if node.isInstanceOf[TemplateNode]) {
-      val templateNode = node.asInstanceOf[TemplateNode]
-      val templateName = templateNode.title.encoded
+    for (node <- pageNode.children) {
+      if(node.isInstanceOf[TemplateNode]) {
 
-      //logger.info(templateName)
+        val templateNode = node.asInstanceOf[TemplateNode]
+        val templateName = templateNode.title.encoded
 
-      if (templateName == OntologyReader.CLASSTEMPLATE_NAME) {
-        val name = OntologyReader.getClassName(pageNode.title)
-        //processClass(result, root, page, templateNode)
-        processX(result, root, templateNode, classToGenerator, classDefaults, OWL.Class)
+        //logger.info(templateName)
 
-
-        /*
-        for (specificProperty <- loadSpecificProperties(name, templateNode)) {
-          ontologyBuilder.specializedProperties ::= specificProperty
-        }*/
-      }
-      else if(templateName == OntologyReader.OBJECTPROPERTY_NAME) {
-        val name = OntologyReader.getPropertyName(pageNode.title)
-
-        processX(result, root, templateNode, propertyToGenerator, objectDefaults, OWL.ObjectProperty)
+        if (templateName == OntologyReader.CLASSTEMPLATE_NAME) {
+          val name = OntologyReader.getClassName(pageNode.title)
+          //processClass(result, root, page, templateNode)
+          processX(result, root, templateNode, classToGenerator, classDefaults, OWL.Class)
 
 
-      } else if(templateName == OntologyReader.DATATYPEPROPERTY_NAME) {
-        val name = OntologyReader.getPropertyName(pageNode.title)
+          /*
+          for (specificProperty <- loadSpecificProperties(name, templateNode)) {
+            ontologyBuilder.specializedProperties ::= specificProperty
+          }*/
+        }
+        else if(templateName == OntologyReader.OBJECTPROPERTY_NAME) {
+          val name = OntologyReader.getPropertyName(pageNode.title)
 
-        processX(result, root, templateNode, dataToGenerator, dataDefaults, OWL.DatatypeProperty)
+          processX(result, root, templateNode, propertyToGenerator, objectDefaults, OWL.ObjectProperty)
+
+
+        } else if(templateName == OntologyReader.DATATYPEPROPERTY_NAME) {
+          val name = OntologyReader.getPropertyName(pageNode.title)
+
+          processX(result, root, templateNode, dataToGenerator, dataDefaults, OWL.DatatypeProperty)
+        }
       }
     }
 
