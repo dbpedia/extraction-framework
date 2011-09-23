@@ -14,7 +14,6 @@ import com.hp.hpl.jena.util.FileUtils;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-import com.sun.deploy.util.VersionID;
 import info.aduna.platform.support.MacOSXPlatform;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.PropertyConfigurator;
@@ -38,7 +37,6 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.apache.commons.collections15.MultiMap;
 import org.apache.commons.collections15.multimap.MultiHashMap;
-import sun.swing.SwingUtilities2;
 import virtuoso.jdbc4.VirtuosoDataSource;
 
 import javax.swing.plaf.metal.MetalIconFactory;
