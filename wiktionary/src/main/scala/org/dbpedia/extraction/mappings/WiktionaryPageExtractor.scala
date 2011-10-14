@@ -11,6 +11,7 @@ import collection.mutable.{HashMap, Stack, ListBuffer, Set}
 //some of my utilities
 import MyNodeList._
 import MyNode._
+import MyStack._
 import TimeMeasurement._
 import VarBinder._
 import WiktionaryLogging._
@@ -32,10 +33,14 @@ import WiktionaryLogging._
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */
 
-class WiktionaryPageExtractor(val language : String, val debugging : Boolean) extends Extractor {
+class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends Extractor {
   private val possibleLanguages = Set("en", "de")
   require(possibleLanguages.contains(language))
-  WiktionaryLogging.enabled = debugging
+
+  WiktionaryLogging.level = logLevel
+  WiktionaryLogging.printMsg("loglevel = "+logLevel,0)
+  println("loglevel = "+logLevel)
+
   //load config from xml
   private val config = XML.loadFile("config-"+language+".xml")
 
@@ -68,26 +73,27 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
     val word = subjectUri.split("/").last
     val senses = HashMap[String, Set[String]]()
 
+    WiktionaryLogging.printMsg("processing "+word, 0)
+
     //to cache last used blockIris (from block name to its uri)
     val blockIris = new HashMap[String, IriRef]
-
+    WiktionaryLogging.printMsg("c1", 0)
     measure {
-      val pageConfig = Page.fromNode((config \ "page").head)
+      val pageConfig = Page.fromNode((config \ "page")(0))
       blockIris("page") = new IriRef(ns + word) //this is also the base-url (all nested blocks will get uris with this as a prefix)
-
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse)
-
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
-
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
       for(prolog <- config \ "page" \ "prologs" \ "template"){
         val prologtpl = Tpl.fromNode(prolog)
+        WiktionaryLogging.printMsg("try "+prologtpl.name, 0)
          try {
           proAndEpilogBindings.append( (prologtpl, parseNodesWithTemplate(prologtpl.tpl, pageStack)) )
         } catch {
           case e : WiktionaryException => proAndEpilogBindings.append( (prologtpl, e.vars) )
         }
       }
+      WiktionaryLogging.printMsg(proAndEpilogBindings.size+ "prologs ", 1)
 
       //handle epilog (ending) (e.g. "links to other languages") by parsing the page backwards
       val rev = new Stack[Node] pushAll pageStack //reversed
@@ -99,6 +105,8 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
           case e : WiktionaryException => proAndEpilogBindings.append( (epilogtpl, e.vars) )
         }
       }
+      WiktionaryLogging.printMsg(proAndEpilogBindings.size+ "prologs and epilogs", 1)
+
       //apply consumed nodes (from the reversed page) to pageStack  (unreversed)
       pageStack.clear
       pageStack pushAll rev
@@ -107,6 +115,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
          quads appendAll handleBlockBinding(pageConfig, tpl, tplBindings, senses, blockIris)
       }})
+      WiktionaryLogging.printMsg("pro- and epilog bindings handled ", 1)
 
       //keep track where we are in the page block hierarchy
       val curOpenBlocks = new ListBuffer[Block]()
@@ -184,6 +193,8 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
         val curBlock = curOpenBlocks.last
         //try matching this blocks templates
         for(tpl <- curBlock.templates){
+          WiktionaryLogging.printMsg("trying template: "+tpl.tpl.myToString, 2)
+
           //println(pageStack.take(1).map(_.dumpStrShort).mkString)
           try {
             //println("vs")
@@ -200,6 +211,8 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
         }
 
         if(!consumed){
+          WiktionaryLogging.printMsg("skipping unconsumable node: "+pageStack.head.toWikiText(), 1)
+
           pageStack.pop
         }
       }
@@ -279,7 +292,7 @@ class WiktionaryPageExtractor(val language : String, val debugging : Boolean) ex
   }
 
   def handleObjectMapping(varr: Var, objectStr: String, toUri : Boolean = true) : GraphNode = {
-    printMsg("varr.name= "+varr.name+"varr.format="+varr.format)
+
     if(varr.doMapping){
       if(mappings.contains(objectStr)){
         val mapped = mappings(objectStr)

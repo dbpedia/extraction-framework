@@ -18,6 +18,7 @@ case class WiktionaryException(val s: String, val vars : VarBindingsHierarchical
  */
 class MyStack(s : Stack[Node]) {
   val stack : Stack[Node] = s
+
   def prependString(str : String) : Unit  = {
     if(stack.size == 0){
       stack push new TextNode(str,0)
@@ -31,6 +32,10 @@ class MyStack(s : Stack[Node]) {
         stack.push(newhead)
       }
     }
+  }
+
+  def myToString : String = {
+    s.map((node:Node) => node.toWikiText()).mkString(" ")
   }
 
   /**
@@ -176,13 +181,14 @@ object MyStack {
     var prependedNewline = false
     var appendedNewline = false
     val str = (if(in.startsWith("=")){prependedNewline = true; "\n"} else {""}) + in + (if(in.endsWith("=")){appendedNewline = true; "\n"} else {""})//force leading and trailing  \n
-
+    WiktionaryLogging.printMsg("before parsing", 0)
     //println("read file >"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
           new WikiTitle("wiktionary extraction subtemplate"),0,0, str
         )
     )
+    WiktionaryLogging.printMsg("after parsing", 0)
     val nodes = new Stack[Node]()
 
     if(appendedNewline && (page.children.last match {case TextNode("\n",_)=>true; case _ => false})){
@@ -241,13 +247,14 @@ object MyString {
 }
 
 object WiktionaryLogging {
-  var enabled = false  //TODO read from config
+  var level = 0  // will be read from config and then overwritten
+  val st_depth_start = new Exception("").getStackTrace.length + 1
 
   //print info about a function call, and the template and page (the first n nodes)
-  def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node]) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length  - 7 //6 is the stack depth on the extract call. +1 for this func
+  def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node], thisLevel : Int) : Unit = {
+    val st_depth = new Exception("").getStackTrace.length  - st_depth_start
     val prefix =  " " * st_depth
-    if(enabled){
+    if(thisLevel <= level){
       println(prefix + "------------")
       println(prefix + "<entering " + name +">")
       println(prefix + "<template (next 10)>")
@@ -259,10 +266,10 @@ object WiktionaryLogging {
   }
 
   //print a message that is indented by it call stack depth (?) :)
-  def printMsg(str : String) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length  - 7
+  def printMsg(str : String, thisLevel : Int) : Unit = {
+    val st_depth = new Exception("").getStackTrace.length  - st_depth_start
     val prefix =  " " * st_depth
-    if(enabled){
+    if(thisLevel <= level){
       println(prefix + str)
     }
   }
