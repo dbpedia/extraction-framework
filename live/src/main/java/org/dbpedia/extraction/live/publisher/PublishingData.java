@@ -2,11 +2,10 @@ package org.dbpedia.extraction.live.publisher;
 
 import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.rdf.model.Model;
-
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.impl.ModelCom;
 import org.dbpedia.extraction.live.core.RDFTriple;
-import org.openanzo.client.jena.Converter;
+import org.dbpedia.extraction.live.helper.SesameJenaUtilities;
 
 import java.util.ArrayList;
 
@@ -39,7 +38,9 @@ public class PublishingData {
 
         for(RDFTriple triple: triplesList){
             //Convert OpenRDF statement to a JENA Triple
-            Triple trip = Converter.convert(triple);
+//            Triple trip = Converter.convert(triple);
+              Triple trip = Triple.create(SesameJenaUtilities.makeJenaSubject(triple.getSubject()), SesameJenaUtilities.makeJenaPredicate(triple.getPredicate()),
+			 SesameJenaUtilities.makeJenaObject(triple.getObject()));
 
             //Convert JENA Triple to JENA Statement
             ModelCom com = new ModelCom(triplesModel.getGraph());
@@ -74,8 +75,9 @@ public class PublishingData {
 
         for(RDFTriple triple: triplesList){
             //Convert OpenRDF statement to a JENA Triple
-            Triple trip = Converter.convert(triple);
-
+//            Triple trip = Converter.convert(triple);
+              Triple trip = Triple.create(SesameJenaUtilities.makeJenaSubject(triple.getSubject()), SesameJenaUtilities.makeJenaPredicate(triple.getPredicate()),
+			 SesameJenaUtilities.makeJenaObject(triple.getObject()));
             //Convert JENA Triple to JENA Statement
             ModelCom com = new ModelCom(triplesModel.getGraph());
 
