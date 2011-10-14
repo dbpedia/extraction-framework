@@ -213,10 +213,28 @@ public class LiveUpdateDestination implements Destination{
         Iterator deletedTriplesKeysIterator = hmDeletedTriples.keySet().iterator();
         if(deletedTriplesString == null)
             deletedTriplesString = "";
+//        while (deletedTriplesKeysIterator.hasNext()){
+//             String keyPredicateHash = (String)deletedTriplesKeysIterator.next();
+//
+//            deletedTriplesString += convertHashMapToString((HashMap)hmDeletedTriples.get(keyPredicateHash));
+//        }
+
         while (deletedTriplesKeysIterator.hasNext()){
              String keyPredicateHash = (String)deletedTriplesKeysIterator.next();
 
-            deletedTriplesString += convertHashMapToString((HashMap)hmDeletedTriples.get(keyPredicateHash));
+            String strDeletedTriple = convertHashMapToString((HashMap)hmDeletedTriples.get(keyPredicateHash));
+		for(int i = 0; i < 2; i++){
+			int pos = strDeletedTriple.indexOf("\"");
+			if(pos < 0)
+				continue;
+			strDeletedTriple  = strDeletedTriple.substring(0,pos) + strDeletedTriple.substring(pos+1);
+
+			pos = strDeletedTriple.lastIndexOf("\"");
+			if(pos < 0)
+				continue;
+			strDeletedTriple  = strDeletedTriple.substring(0,pos) + strDeletedTriple.substring(pos+1);
+		}
+		deletedTriplesString += strDeletedTriple;
         }
 
         PublishingData pubData;
