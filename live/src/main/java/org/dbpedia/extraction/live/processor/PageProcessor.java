@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.live.processor;
 
 import ORG.oclc.oai.harvester2.verb.GetRecord;
+import ch.epfl.lamp.util.ByteArray;
+import com.hp.hpl.jena.sparql.util.Base64;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
@@ -12,8 +14,13 @@ import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.sources.Source;
 import org.dbpedia.extraction.sources.XMLSource;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.w3c.dom.Document;
 import scala.xml.*;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,10 +58,29 @@ public class PageProcessor extends Thread{
             /*if(record.getErrors().getLength() > 0)
                 logger.info("There is an error");*/
             Document doc = record.getDocument();
-            Elem element = (Elem) XML.loadString(XMLUtil.toString(doc));
-            Source wikiPageSource = XMLSource.fromXML(element);
 
-            LiveExtractionManager.extractFromPage(element);
+            /////////////////////////////////////////////////////////////
+            String strDoc = XMLUtil.toString(doc);
+            Pattern invalidCharactersPattern = Pattern.compile("&#[\\d{0-9}]+;");
+            Matcher invalidCharactersMatcher = invalidCharactersPattern.matcher(strDoc);
+            /*while (invalidCharactersMatcher.find()){
+                logger.info("START = " + invalidCharactersMatcher.start());
+                logger.info("END = " + invalidCharactersMatcher.end());
+            }*/
+
+            String resultingString = invalidCharactersMatcher.replaceAll("");
+
+            Node node = XML.loadString(resultingString);
+            Elem xmlElem = (Elem) node;
+            Source wikiPageSource = XMLSource.fromXML(xmlElem);
+            LiveExtractionManager.extractFromPage(xmlElem);
+            /////////////////////////////////////////////////////////////
+
+
+            //Elem element = (Elem) XML.loadString(XMLUtil.toString(doc));
+            //Source wikiPageSource = XMLSource.fromXML(element);
+
+            //LiveExtractionManager.extractFromPage(element);
 
         }
         catch(Exception exp){
