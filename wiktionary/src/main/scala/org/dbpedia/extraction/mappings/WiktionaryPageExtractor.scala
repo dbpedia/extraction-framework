@@ -77,7 +77,6 @@ class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends
 
     //to cache last used blockIris (from block name to its uri)
     val blockIris = new HashMap[String, IriRef]
-    WiktionaryLogging.printMsg("c1", 0)
     measure {
       val pageConfig = Page.fromNode((config \ "page")(0))
       blockIris("page") = new IriRef(ns + word) //this is also the base-url (all nested blocks will get uris with this as a prefix)
