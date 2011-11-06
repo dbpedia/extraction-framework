@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URI
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, UriUtils}
@@ -22,6 +22,7 @@ class HomepageExtractor( context : {
     private val propertyNames = HomepageExtractorConfig.propertyNamesMap.getOrElse(language, HomepageExtractorConfig.propertyNamesMap("en"))
     private val official = HomepageExtractorConfig.officialMap.getOrElse(language, HomepageExtractorConfig.officialMap("en"))
     private val externalLinkSections = HomepageExtractorConfig.externalLinkSectionsMap.getOrElse(language, HomepageExtractorConfig.externalLinkSectionsMap("en"))
+
 
     private val homepageProperty = context.ontology.getProperty("foaf:homepage").get
 
@@ -84,7 +85,7 @@ class HomepageExtractor( context : {
         {
             for(link <- UriUtils.cleanLink(URI.create(url)))
             {
-                return new Graph(new Quad(DBpediaDatasets.Homepages, new IriRef(subjectUri), new IriRef(homepageProperty), new IriRef(link), new IriRef(node.sourceUri)) :: Nil)
+                return new Graph(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
             }
         }
         catch

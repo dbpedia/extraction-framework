@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateParameterNode, InternalLinkNode, Node}
 import org.dbpedia.extraction.config.mappings.TemplateParameterExtractorConfig
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.destinations.{IriRef, Graph, DBpediaDatasets, Quad, TypedLiteral}
 
 /**
  * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
@@ -45,11 +45,8 @@ class TemplateParameterExtractor( context : {
         }
 
         parameters.distinct.foreach(v => {
-            quads ::= new Quad(DBpediaDatasets.TemplateVariables,
-              new IriRef(subjectUri),
-              new IriRef(templateParameterProperty),
-              new TypedLiteral(v, context.ontology.getDatatype("xsd:string").get),
-              node.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty,v,
+                            node.sourceUri, context.ontology.getDatatype("xsd:string").get )
         })
         new Graph(quads)
     }

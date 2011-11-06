@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, PlainLiteral}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -21,7 +21,7 @@ class LabelExtractor( context : {
         val label = node.root.title.decoded
         if(label.isEmpty) return new Graph()
 
-        new Graph(new Quad(DBpediaDatasets.Labels, new IriRef(subjectUri), new IriRef(labelProperty), new PlainLiteral(label),
-                            new IriRef(node.sourceUri) ))
+        new Graph(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label,
+                           node.sourceUri, context.ontology.getDatatype("xsd:string").get ))
     }
 }

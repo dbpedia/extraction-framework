@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad, IriRef, PlainLiteral}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.PndExtractorConfig
@@ -44,7 +44,7 @@ class PndExtractor( context : {
                     {
                         for (pnd <- getPnd(property)) 
                         {
-                            quads ::= new Quad(DBpediaDatasets.Pnd, new IriRef(subjectUri), new IriRef(individualisedPndProperty), new PlainLiteral(pnd), new IriRef(property.sourceUri))
+                            quads ::= new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
@@ -55,7 +55,7 @@ class PndExtractor( context : {
                     {
                         for (pnd <- getPnd(property))
                         {
-                            quads ::= new Quad(DBpediaDatasets.Pnd, new IriRef(subjectUri), new IriRef(individualisedPndProperty), new PlainLiteral(pnd), new IriRef(property.sourceUri))
+                            quads ::= new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }

@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph, IriRef}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
 import org.dbpedia.extraction.wikiparser._
 import impl.wikipedia.Namespaces
 import org.dbpedia.extraction.sources.Source
@@ -57,14 +57,14 @@ class ImageExtractor( context : {
         {
             val (url, thumbnailUrl) = getImageUrl(imageFileName)
 
-            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(subjectUri), new IriRef(foafDepictionProperty), new IriRef(url), new IriRef(sourceNode.sourceUri))
-            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(subjectUri), new IriRef(dbpediaThumbnailProperty), new IriRef(thumbnailUrl), new IriRef(sourceNode.sourceUri))
-            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(url), new IriRef(foafThumbnailProperty), new IriRef(thumbnailUrl), new IriRef(sourceNode.sourceUri))
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
 
             val wikipediaImageUrl = "http://" + language + ".wikipedia.org/wiki/"+ fileNamespaceIdentifier +":" + imageFileName
 
-            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(url), new IriRef(dcRightsProperty), new IriRef(wikipediaImageUrl), new IriRef(sourceNode.sourceUri))
-            quads ::= new Quad(DBpediaDatasets.Images, new IriRef(thumbnailUrl), new IriRef(dcRightsProperty), new IriRef(wikipediaImageUrl), new IriRef(sourceNode.sourceUri))
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads ::= new Quad(context.language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
         }
 
         new Graph(quads)

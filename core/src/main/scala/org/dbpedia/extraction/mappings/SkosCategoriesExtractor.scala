@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, PlainLiteral}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
@@ -26,8 +26,8 @@ class SkosCategoriesExtractor( context : {
 
         var quads = List[Quad]()
 
-        quads ::= new Quad(DBpediaDatasets.SkosCategories, new IriRef(subjectUri), new IriRef(rdfTypeProperty), new IriRef(skosConceptClass.uri), new IriRef(node.sourceUri))
-        quads ::= new Quad(DBpediaDatasets.SkosCategories, new IriRef(subjectUri), new IriRef(skosPrefLabelProperty), new PlainLiteral(node.title.decoded), new IriRef(node.sourceUri))
+        quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
+        quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
 
         for(link <- collectCategoryLinks(node))
         {
@@ -37,7 +37,7 @@ class SkosCategoriesExtractor( context : {
                 case _ => skosBroaderProperty
             }
 
-            quads ::= new Quad(DBpediaDatasets.SkosCategories, new IriRef(subjectUri), new IriRef(property), new IriRef(getUri(link.destination)), new IriRef(link.sourceUri))
+            quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
         }
 
         new Graph(quads)
