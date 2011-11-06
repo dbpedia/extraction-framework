@@ -2,7 +2,6 @@ package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import java.net.URI
-import org.dbpedia.extraction.mappings.ExtractionContext
 import org.dbpedia.extraction.ontology.{OntologyProperty}
 import java.io.CharConversionException
 
