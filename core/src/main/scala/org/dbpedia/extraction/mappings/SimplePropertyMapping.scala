@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef, TypedLiteral}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology._
 import java.lang.IllegalArgumentException
@@ -162,13 +162,13 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
-            val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral(value.toString, unit), new IriRef(sourceUri))
+            val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
             return new Graph(quad)
         }
 
         //Write generic property
         val stdValue = unit.toStandardUnit(value)
-        val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri), new IriRef(ontologyProperty), new TypedLiteral(stdValue.toString, new Datatype("xsd:double")), new IriRef(sourceUri))
+        val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         var graph = new Graph(quad)
 
         //Write specific properties
@@ -179,8 +179,8 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
                  val propertyUri = OntologyNamespaces.DBPEDIA_SPECIFICPROPERTY_NAMESPACE + currentClass.name + "/" + ontologyProperty.name
-                 val quad = new Quad(DBpediaDatasets.SpecificProperties, new IriRef(subjectUri),
-                                     new IriRef(propertyUri), new TypedLiteral(outputValue.toString, specificPropertyUnit), new IriRef(sourceUri))
+                 val quad = new Quad(language, DBpediaDatasets.SpecificProperties, subjectUri,
+                                     propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
                  graph = graph.merge(new Graph(quad))
             }
         }
@@ -192,8 +192,8 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
     {
         val datatype = if(ontologyProperty.range.isInstanceOf[Datatype]) ontologyProperty.range.asInstanceOf[Datatype] else null
 
-        val quad = new Quad(DBpediaDatasets.OntologyProperties, new IriRef(subjectUri),
-                             new IriRef(ontologyProperty), new TypedLiteral(value.toString, datatype), new IriRef(sourceUri))
+        val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri,
+                            ontologyProperty, value.toString, sourceUri, datatype )
 
         new Graph(quad)
     }

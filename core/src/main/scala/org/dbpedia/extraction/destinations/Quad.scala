@@ -1,51 +1,43 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import java.net.URI
-import org.dbpedia.extraction.ontology.{OntologyProperty}
+import org.dbpedia.extraction.ontology.OntologyProperty
 import java.io.CharConversionException
+import org.dbpedia.extraction.util.Language
 
 /**
  * Represents a statement in the N-Quads format
- * see: http://sw.deri.org/2008/07/n-quads/
+ * @see http://sw.deri.org/2008/07/n-quads/
  */
- //TODO i refactored this class: no extraction context needed anymore (was used for language tags of literals) and use meaningfull classes for s,p,o
-class Quad(	val dataset : Dataset,
-            val subject : IriRef,
-		    val predicate : IriRef,
-		    val value : GraphNode,
-		    val context : IriRef)
+//TODO write out equivalent properties
+class Quad(	val language : Language,
+val dataset : Dataset,
+val subject : String,
+val predicate : String,
+val value : String,
+val context : String,
+var datatype : Datatype )
 {
-  //various constructors
-  def this( dataset : Dataset,
-              subject : IriRef,
-              predicate : OntologyProperty,
-              value : GraphNode,
-              context : IriRef ) = this(dataset, subject, new IriRef(predicate.uri), value, context)
-
-  def this( dataset : Dataset,
-              subject : IriRef,
-              predicate : IriRef,
-              value : GraphNode,
-              context : String ) = this(dataset, subject, new IriRef(predicate.uri), value, new IriRef(context))
-
-
-  //subject, predicate and context can be string because they can only be IriRefs
-  def this( dataset : Dataset,
-            subject : String,
-            predicate : String,
-            value : GraphNode,
-            context : String ) = this(dataset, new IriRef(subject), new IriRef(predicate), value, new IriRef(context))
-
     //Validate input
 	if(subject == null) throw new NullPointerException("subject")
 	if(predicate == null) throw new NullPointerException("predicate")
 	if(value == null) throw new NullPointerException("value")
 	if(context == null) throw new NullPointerException("context")
 
-  //what does that do? is it just to trigger exceptions?
+    if(value.isEmpty) throw new IllegalArgumentException("Value is empty")
+
+	//what does that do? is it just to trigger exceptions?
 	//new URI(subject)
 	//new URI(context)
+	//if(datatype == null) new URI(value)
+
+    def this(language : Language,
+             dataset : Dataset,
+             subject : String,
+		     predicate : OntologyProperty,
+		     value : String,
+		     context : String,
+		     datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
 
   def renderNTriple = render(false)
     
@@ -55,9 +47,94 @@ class Quad(	val dataset : Dataset,
     
   private def render(includeContext : Boolean) : String =
   {
-    subject.render + " " + predicate.render + " " + value.render +  " " +
-      (if (includeContext){ context.render +  " "  } else {""}) + ". "
+    "<" + subject + "> <" + predicate + "> " +
+	  (if (datatype != null) {
+			if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string"){
+				"\"" +
+				escapeString(value) + 
+				"\"" +
+				"@" + language.locale.getLanguage
+			} else {
+				"\"" +
+				escapeString(value) + 
+				"\"" +
+				"^^<" + datatype.uri + ">"
+			}
+		} else {
+				"<" +
+				(if(predicate == "http://xmlns.com/foaf/0.1/homepage"){
+					escapeString(value) 
+				} else {
+					value
+				}) +
+				">"
+    })    +  " " +
+    (if (includeContext){ "<" + context +  "> "  } else {""}) + ". "
   }
+
+/**
+	 * Escapes an unicode string according to N-Triples format
+	 */
+	private def escapeString(input : String) : String =
+	{
+		val sb = new StringBuilder
+        // iterate over code points (http://blogs.sun.com/darcy/entry/iterating_over_codepoints)
+        val inputLength = input.length
+        var offset = 0
+
+        while (offset < inputLength)
+        {
+            val c = input.codePointAt(offset)
+            offset += Character.charCount(c)
+
+    		//Ported from Jena's NTripleWriter
+			if (c == '\\' || c == '"')
+			{
+				sb append '\\' append c.toChar
+			}
+			else if (c == '\n')
+			{
+				sb append "\\n"
+			}
+			else if (c == '\r')
+			{
+				sb append "\\r";
+			}
+			else if (c == '\t')
+			{
+				sb append "\\t"
+			}
+			else if (c >= 32 && c < 127)
+			{
+				sb append c.toChar
+			}
+			else
+			{
+				val hexStr = c.toHexString.toUpperCase
+                val hexStrLen = hexStr.length
+
+                if (c <= 0xffff)
+                {
+                    // 16-bit code point
+                    sb append "\\u"
+                    sb append "0" * (4 - hexStrLen)  // leading zeros
+                }
+                else if (c <= 0x10ffff)  // biggest representable code point
+                {
+                    // 32-bit code point
+                    sb append "\\U"
+                    sb append "0" * (8 - hexStrLen)  // leading zeros
+                }
+                else
+                {
+                    throw new CharConversionException("code point "+c+" outside of range (0x0000..0x10ffff)")
+                }
+
+				sb append hexStr
+			}
+		}
+		sb.toString
+	}
 }
 
 object Quad

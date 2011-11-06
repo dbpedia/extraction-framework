@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad, IriRef}
+import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.Language
@@ -22,7 +22,7 @@ class ArticleCategoriesExtractor( context : {
         val links = collectCategoryLinks(node).filter(isCategoryForArticle(_))
 
         val quads : List[Quad] = links.map(link =>
-            new Quad(DBpediaDatasets.ArticleCategories, new IriRef(subjectUri), new IriRef(dctermsSubjectProperty), new IriRef(getUri(link.destination)), link.sourceUri)
+            new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
         )
 
         new Graph(quads)
