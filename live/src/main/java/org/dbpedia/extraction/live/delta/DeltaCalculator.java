@@ -144,17 +144,7 @@ public class DeltaCalculator {
             //2 sets of triples, one for the latest version of the triples, and one for the previous set
             Model latestTriples = getTriples(requiredResource, TriplesType.LatestTriples);
             Model previousTriples = getTriples(requiredResource, TriplesType.PreviousTriples);
-            ////////////////////////////////////////////////////////////////////////////
 
-            previousTriples.add(ResourceFactory.createStatement(ResourceFactory.createResource(requiredResource),
-                    ResourceFactory.createProperty("http://dbpedia.org/ontology/author"),
-                    ResourceFactory.createPlainLiteral("Lionel Messi")));
-
-            latestTriples.add(ResourceFactory.createStatement(ResourceFactory.createResource(requiredResource),
-                    ResourceFactory.createProperty("http://dbpedia.org/ontology/author"),
-                    ResourceFactory.createPlainLiteral("Crestiano Ronaldo")));
-
-            ////////////////////////////////////////////////////////////////////////////
             //Diffing the latest and the previous set, gives us a list of all added and modified triples, in their new form
             Model addedAndModifiedTriples = latestTriples.difference(previousTriples);
 
