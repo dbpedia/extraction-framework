@@ -24,7 +24,7 @@ INTERWIKI_FROM_SORTED="$OUTPUTDIR/$LANG_FROM/interlanguage_links_$LANG_FROM.nt.s
 INTERWIKI_TO="$OUTPUTDIR/$LANG_TO/interlanguage_links_$LANG_TO.nt"
 INTERWIKI_TO_REVERSED="$OUTPUTDIR/$LANG_TO/interlanguage_links_$LANG_TO.nt.reversed.$LANG_FROM"
 
-INTERWIKI_FROM_SAMEAS="$OUTPUTDIR/$LANG_FROM/sameas_$LANG_FROM-$LANG_TO.nt"
+INTERWIKI_FROM_SAMEAS="$OUTPUTDIR/$LANG_FROM/sameas-$LANG_TO-$LANG_FROM.nt"
 
 #check if interlanguage links files exist
 if [ ! -f $INTERWIKI_FROM ]; then

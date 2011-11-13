@@ -60,7 +60,7 @@ echo "Creating datasets for language '$CUR_LANG'"
 echo -------------------------------------------------------------------------------
 
 
-SAMEAS_ORIGINAL_FILE="$OUTPUTDIR/$CUR_LANG/sameas_$CUR_LANG.nt"
+SAMEAS_ORIGINAL_FILE="$OUTPUTDIR/$CUR_LANG/sameas-en-$CUR_LANG.nt"
 SAMEAS_FILE=$SAMEAS_ORIGINAL_FILE.tmp
 
 #reorder sameas triples to get english link first
@@ -75,7 +75,7 @@ fi
 for LINE in `cat $LINKS $LINKSR`;do
 	DATASET_IN=$LINKSDIR\/$LINE
 	# generate dataset name with lang postfix	
-	DATASET_OUT=$(echo "$OUTLINKDIR/$LINE" | sed -e 's/.nt/_el.nt/g' )
+	DATASET_OUT=$(echo "$OUTLINKDIR/$LINE" | sed -e "s/\.nt/_$CUR_LANG.nt/g" )
 	echo "Generating $DATASET_OUT"
 	if [ -f "$DATASET_OUT" ]; then
 		rm $DATASET_OUT
