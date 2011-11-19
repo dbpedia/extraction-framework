@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.live.core;
 
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -113,8 +112,7 @@ public class JDBC{
 
             //If the application is working in multithreading mode, we must attach the thread id to the timer name
             //to avoid the case that a thread stops the timer of another thread.
-            String timerName = logComponent + "::JDBC_prepare" +
-                (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
+            String timerName = logComponent + "::JDBC_prepare" ;
 
             //Assert.assertTrue("Query cannot be null or empty", (query != null && query != ""));
 
@@ -239,8 +237,7 @@ public class JDBC{
 
             //If the application is working in multithreading mode, we must attach the thread id to the timer name
             //to avoid the case that a thread stops the timer of another thread.
-            String timerName = logComponent + "::exec query" +
-                (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
+            String timerName = logComponent + "::exec query" ;
 
             Timer.start(timerName);
             Statement requiredStatement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -368,6 +365,58 @@ public class JDBC{
             this.logger.warn(exp.getMessage());
             return null;
         }
+    }
+
+     /*
+	  * returns the JDBC callable statement, which is useful in case of calling stored procedures.
+	  * @Param requiredStatement    The statement containing the call of the stored procedure
+	  * */
+	public CallableStatement prepareCallableStatement(String requiredStatement, String logComponent)
+    {
+        try{
+
+            String timerName = logComponent + "::JDBC_prepare" ;
+
+            Timer.start(timerName);
+    	 	CallableStatement result = con.prepareCall(requiredStatement);
+
+            Timer.stop(timerName);
+            return result;
+        }
+        catch(Exception exp){
+
+            return null;
+        }
+
+	}
+
+    /**
+     * Executes a callable statement which can be used in case of calling stored procedures
+     * @param requiredStatement The statement to be executed
+     * @param parameterList The list of parameters that should be passed to the procedure
+     * @return  True if the execution was successful, and false otherwise.
+     */
+    public boolean executeCallableStatement(CallableStatement requiredStatement, String[] parameterList)
+    {
+        boolean successfulExecution = false;
+        try{
+            if((con == null) || (con.isClosed()))
+                con = DriverManager.getConnection(this.dsn, this.user, this.pw);
+
+            for(int i=0;i<parameterList.length; i++)
+            {
+                requiredStatement.setString(i+1, parameterList[i]);
+            }
+            requiredStatement.execute();
+            successfulExecution = true;
+            requiredStatement.close();
+        }
+        catch(Exception exp){
+            logger.warn(exp.getMessage() + " Function executeStatement ");
+            successfulExecution = false;
+        }
+
+        return successfulExecution;
     }
 
 
