@@ -70,7 +70,9 @@ object Block {
       Tpl.fromNode((n \ "template").head),
       if((n \ "block").size > 0){
         Some(Block.fromNode((n \ "block").head))
-      }else{None},
+      } else {
+        None
+      },
       (n \ "templates" \ "template").map(Tpl.fromNode(_)).toList,
       (n \ "property" \ "@uri").text
     )
@@ -83,11 +85,12 @@ object Page {
     val p = new Page(
     if((n \ "block").size > 0){
       Some(Block.fromNode((n \ "block")(0)))
-    }else{None},
+    } else {
+	  None
+	},
     (n \ "templates" \ "template").map((n:Node)=>Tpl.fromNode(n)).toList,
     ""
     )
-    WiktionaryLogging.printMsg("c112", 0)
     p
   }
 }

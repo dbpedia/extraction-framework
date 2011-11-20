@@ -32,8 +32,8 @@
     </bean>
 
     <bean id="testExtractor" class="org.dbpedia.extraction.mappings.WiktionaryPageExtractor">
-        <constructor-arg index="0" value="de"/>
-        <constructor-arg index="1" value="3"/>
+        <constructor-arg index="0" value="de"/>  <!-- language -> which config to load -->
+        <constructor-arg index="1" value="0"/>   <!-- log level -->
     </bean>
 
     <bean id="stringDestination" class="org.dbpedia.extraction.destinations.StringDestination" />
