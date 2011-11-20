@@ -3,6 +3,9 @@ package org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.OntologyProperty
 import java.io.CharConversionException
+import org.openrdf.model._
+import java.io.CharConversionException
+import java.io.CharConversionException
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -16,9 +19,43 @@ val subject : String,
 val predicate : String,
 val value : String,
 val context : String,
-var datatype : Datatype )
+val datatype : Datatype )
 {
-    //Validate input
+
+  //a constructor for OntologyProperty
+  def this(language : Language,
+           dataset : Dataset,
+           subject : String,
+           predicate : OntologyProperty,
+           value : String,
+           context : String,
+           datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
+
+  //a constructor for openrdf
+  def this(language : Language,
+           dataset : Dataset,
+           subject : Resource,
+           predicate : URI,
+           value : Value,
+           context : Resource) = {
+      this(
+          language, 
+          dataset, 
+          subject.stringValue, 
+          predicate.stringValue, 
+          value.stringValue, 
+          context.stringValue, 
+          if(value.isInstanceOf[Literal] && value.asInstanceOf[Literal].getDatatype != null){
+            new Datatype(value.asInstanceOf[Literal].getDatatype.toString)
+          } else if(value.isInstanceOf[Literal]) {
+            new Datatype("xsd:string")
+          } else {
+            null
+          }
+      )
+  }
+
+  //Validate input
 	if(subject == null) throw new NullPointerException("subject")
 	if(predicate == null) throw new NullPointerException("predicate")
 	if(value == null) throw new NullPointerException("value")
@@ -30,14 +67,6 @@ var datatype : Datatype )
 	//new URI(subject)
 	//new URI(context)
 	//if(datatype == null) new URI(value)
-
-    def this(language : Language,
-             dataset : Dataset,
-             subject : String,
-		     predicate : OntologyProperty,
-		     value : String,
-		     context : String,
-		     datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
 
   def renderNTriple = render(false)
     
@@ -72,9 +101,9 @@ var datatype : Datatype )
     (if (includeContext){ "<" + context +  "> "  } else {""}) + ". "
   }
 
-/**
+    /**
 	 * Escapes an unicode string according to N-Triples format
-	 */
+	*/
 	private def escapeString(input : String) : String =
 	{
 		val sb = new StringBuilder
