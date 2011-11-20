@@ -14,7 +14,7 @@ OUTPUTDIR=`sed '/^\#/d' $EXTR_DUMP/config.properties | grep 'outputDir'  | tail 
 DUMPDIR=`sed '/^\#/d' $EXTR_DUMP/config.properties | grep 'dumpDir'  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'`
 
 #download url, this is the prefix of links.txt lines
-DOWNLOAD_URL="http://downloads.dbpedia.org/3.6/links"
+DOWNLOAD_URL="http://downloads.dbpedia.org/current/links"
 
 CUR_LANG=$1
 
@@ -41,16 +41,26 @@ for LINE in `cat $LINKS`;do
 		wget -O - $DOWNLOAD_URL\/$LINE.bz2 | bzcat | sort -k 1b,1 -u -o $DATASET
 	fi		
 done
+
+# reverse links
+LINKSR="$CURRENTDIR/links-r.txt"
+for LINE in `cat $LINKSR`;do
+	DATASET="$LINKSDIR/$LINE"
+
+	if [ ! -f "$DATASET" ]; then
+		echo 'Downloading $LINE'
+		wget -O - $DOWNLOAD_URL\/$LINE.bz2 | bzcat | awk '{print $3 " " $2 " " $1 " ."}' | sort -k 1b,1 -u -o $DATASET
+	fi		
+done
 echo "OK..."
 
-
-# for lang, do actions...
+# TODO for lang, do actions...
 echo -------------------------------------------------------------------------------
 echo "Creating datasets for language '$CUR_LANG'"
 echo -------------------------------------------------------------------------------
 
 
-SAMEAS_ORIGINAL_FILE="$OUTPUTDIR/$CUR_LANG/sameas_$CUR_LANG.nt"
+SAMEAS_ORIGINAL_FILE="$OUTPUTDIR/$CUR_LANG/sameas-en-$CUR_LANG.nt"
 SAMEAS_FILE=$SAMEAS_ORIGINAL_FILE.tmp
 
 #reorder sameas triples to get english link first
@@ -62,10 +72,10 @@ if [ ! -d "$OUTLINKDIR" ]; then
 fi
 
 #join all datasets in file
-for LINE in `cat $LINKS`;do
+for LINE in `cat $LINKS $LINKSR`;do
 	DATASET_IN=$LINKSDIR\/$LINE
 	# generate dataset name with lang postfix	
-	DATASET_OUT=$(echo "$OUTLINKDIR/$LINE" | sed -e 's/.nt/_el.nt/g' )
+	DATASET_OUT=$(echo "$OUTLINKDIR/$LINE" | sed -e "s/\.nt/_$CUR_LANG.nt/g" )
 	echo "Generating $DATASET_OUT"
 	if [ -f "$DATASET_OUT" ]; then
 		rm $DATASET_OUT
