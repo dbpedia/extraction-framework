@@ -20,9 +20,9 @@
 
     <bean id="testSource" class="org.dbpedia.extraction.XMLFileSource">
         <constructor-arg index="0">
-            <!--value>file:example-one.xml</value-->
+            <value>file:example-one.xml</value>
             <!--value>file:example-spatenrecht.xml</value-->
-            <value>file:dewiktionary-subset.xml</value>
+            <!--value>file:dewiktionary-subset.xml</value-->
         </constructor-arg>
         <constructor-arg index="1">
             <list value-type="java.lang.Integer">
@@ -33,7 +33,7 @@
 
     <bean id="testExtractor" class="org.dbpedia.extraction.mappings.WiktionaryPageExtractor">
         <constructor-arg index="0" value="de"/>  <!-- language -> which config to load -->
-        <constructor-arg index="1" value="0"/>   <!-- log level -->
+        <constructor-arg index="1" value="4"/>   <!-- log level -->
     </bean>
 
     <bean id="stringDestination" class="org.dbpedia.extraction.destinations.StringDestination" />
