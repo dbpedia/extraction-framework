@@ -20,21 +20,21 @@
     </mappings>
     <page>
         <prologs>
-            <template name="also">
+            <!--template name="also">
                 <vars>
                     <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" type="resource"/>
                 </vars>
                 <wikiSyntax>{{Siehe auch|{{extractiontlp|var|otherPage}}}}</wikiSyntax>
-            </template>
+            </template-->
         </prologs>
         <epilogs>
-            <template name="otherLanguages">
+            <!--template name="otherLanguages">
                 <vars>
                     <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
                 </vars>
                 <wikiSyntax>{{extractiontpl|list-start}}{{extractiontpl|link|{{extractiontpl|var|word}}|{{extractiontpl|var|otherPage}}}}
 {{extractiontpl|list-end}}</wikiSyntax>
-            </template>
+            </template-->
         </epilogs>
         <block>
             <property uri="http://wiktionary.dbpedia.org/terms/hasLangUsage"/>
@@ -53,7 +53,7 @@
                     <wikiSyntax>=== {{Wortart|{{extractiontpl|var|pos}}|{{extractiontpl|var|language}}}} ===</wikiSyntax>
                 </template>
                 <templates>
-                    <template name="example">
+                    <!--template name="example">
                         <vars>
                             <var name="example" property="http://wiktionary.dbpedia.org/terms/hasExample" senseBound="true"/>
                         </vars>
@@ -117,7 +117,7 @@ Singular={{extractiontpl|var|flection-singular}}
                         <wikiSyntax>{{Quellen}}
 {{extractiontpl|list-start}}:{{extractiontpl|var|source}}
 {{extractiontpl|list-end}}</wikiSyntax>
-                    </template>
+                    </template-->
                     <template name="translation">
                         <vars>
                             <var name="lang"/>
@@ -132,7 +132,7 @@ Singular={{extractiontpl|var|flection-singular}}
 {{Ü-rechts}}
 </wikiSyntax>
                     </template>
-                    <template name="usage">
+                    <!--template name="usage">
                         <vars>
                             <var name="usage" property="http://wiktionary.dbpedia.org/terms/hasCharactisticUsage"/>z
                         </vars>
@@ -141,7 +141,7 @@ Singular={{extractiontpl|var|flection-singular}}
 {{extractiontpl|list-start}}:{{extractiontpl|var|usage}}
 {{extractiontpl|list-end}}
 </wikiSyntax>
-                    </template>
+                    </template-->
                 </templates>
             </block>
         </block>
