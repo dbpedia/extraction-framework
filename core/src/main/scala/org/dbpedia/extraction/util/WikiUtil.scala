@@ -48,7 +48,7 @@ object WikiUtil
         // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt. 
         // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
         // capitalize can be false for encoding property names, e.g. in the InfoboxExtractor
-        if(capitalize)
+        if(false)
         {
             encoded = encoded.capitalizeLocale(language.locale)
         }
@@ -80,7 +80,7 @@ object WikiUtil
         // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
         var decoded = cleanSpace(URLDecoder.decode(name, "UTF-8"))
 
-        if(capitalize)
+        if(false)
         {
             decoded = decoded.capitalizeLocale(language.locale)
         }

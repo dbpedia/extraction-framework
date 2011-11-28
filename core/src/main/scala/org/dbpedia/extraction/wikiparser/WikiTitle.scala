@@ -232,7 +232,7 @@ object WikiTitle
         }
 
         //Create the title name from the remaining parts
-        val decodedName = WikiUtil.cleanSpace(parts.mkString(":")).capitalizeLocale(sourceLanguage.locale)
+        val decodedName = WikiUtil.cleanSpace(parts.mkString(":"))
 
         new WikiTitle(decodedName, namespace, language, isInterlanguageLink)
     }
@@ -249,7 +249,7 @@ object WikiTitle
 
     private def getNamespace(language : Language, name : String) : Option[Namespace] =
     {
-        val normalizedName = name.capitalizeLocale(Locale.ENGLISH)
+        val normalizedName = name
 
         for(namespace <- customNamespaces.get(normalizedName))
         {
