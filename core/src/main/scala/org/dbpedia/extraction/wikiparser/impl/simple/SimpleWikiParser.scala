@@ -63,7 +63,7 @@ final class SimpleWikiParser extends WikiParser
     def apply(page : WikiPage) : PageNode =
     {
         //Parse source
-        val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
+        val nodes = parseUntil(new Matcher(List(), true), new Source(if(page.source.startsWith("==")) "\n"+page.source else page.source, page.title.language), 0)
 
         //Check if this page is a Redirect
         val redirectRegex = """(?is)\s*(?:""" + Redirect(page.title.language).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[.*"""
@@ -399,7 +399,7 @@ final class SimpleWikiParser extends WikiParser
                     case _ => throw new WikiParserException("Invalid Template name", startLine, source.findLine(startLine))
                 }
 
-                val decodedName = WikiUtil.cleanSpace(templateName).capitalizeLocale(source.language.locale)
+                val decodedName = WikiUtil.cleanSpace(templateName)
                 if(source.lastTag(":"))
                 {
                     return parseParserFunction(decodedName, source, level)
