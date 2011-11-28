@@ -4,6 +4,7 @@ import xml.Node
 import xml.NodeSeq._
 import collection.mutable.{ListBuffer, Stack}
 import xml.{XML, Node => XMLNode}
+import scala.util.matching.Regex
 
 import MyStack._
 
@@ -48,7 +49,22 @@ object Tpl {
     }
 
     val vars = (n \ "vars" \ "var").map(Var.fromNode(_))
-    val tpl =  MyStack.fromString((n \ "wikiSyntax").text).filterNewLines
+
+    val tplString = (n \ "wikiSyntax").text
+
+    // expand the terse template syntax ($var, () for repetitions, and ##link## to subsumpt the three link types)
+    val tplListExpanded = tplString.replaceAll("(?<!\\\\)\\(","{{Extractiontpl|list-start}}").replaceAll("(?<!\\\\)\\)","{{Extractiontpl|list-end}}")
+
+    val pattern = new Regex("(?<!\\\\)\\$[a-zA-Z0-9]+")
+    val tplVarsExpanded = pattern.replaceAllIn(tplListExpanded, 
+       (m) => "{{Extractiontpl|var|"+m.matched.replace("$","")+"}}")
+
+    val pattern2 = new Regex("(?<!\\\\)~~(.*?)~~")
+    val tplLinksExpanded = pattern2.replaceAllIn(tplVarsExpanded, 
+       (m) => "{{Extractiontpl|link|"+m.matched.replace("~","")+"}}")
+    val tplExpanded = tplLinksExpanded.replace("\\","")
+
+    val tpl =  MyStack.fromString(tplExpanded).filterNewLines
     val t = new Tpl(
       (n \ "@name").text,
       tpl,
