@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.mappings.WiktionaryPageExtractorConfig
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
 import java.util.Locale
@@ -8,6 +9,7 @@ import org.openrdf.model.{Literal, URI, Resource, Value}
 import org.openrdf.model.impl.ValueFactoryImpl
 import util.control.Breaks._
 import java.io.FileNotFoundException
+import java.io.FileWriter
 import java.lang.StringBuffer
 import xml.{XML, Node => XMLNode}
 import collection.mutable.{HashMap, Stack, ListBuffer, Set}
@@ -37,7 +39,11 @@ import WiktionaryLogging._
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */
 
-class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends Extractor {
+class WiktionaryPageExtractor( context : {} ) extends Extractor {
+
+  val language = WiktionaryPageExtractorConfig.language
+  val logLevel = WiktionaryPageExtractorConfig.logLevel
+
   private val possibleLanguages = Set("en", "de")
   require(possibleLanguages.contains(language))
   //todo refactor  constructor to use the new format (how to pass values like logLevel?)
@@ -45,8 +51,7 @@ class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends
 
   val vf = ValueFactoryImpl.getInstance
   WiktionaryLogging.level = logLevel
-  WiktionaryLogging.printMsg("loglevel = "+logLevel,0)
-  println("loglevel = "+logLevel)
+  WiktionaryLogging.printMsg("wiktionary loglevel = "+logLevel,0)
 
   //load config from xml
   private val config = XML.loadFile("config-"+language+".xml")
@@ -63,29 +68,42 @@ class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends
   val ns =            (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("ns") }).getOrElse(<propery value="http://undefined.com/"/>)) \ "@value").text
   val blockProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("blockProperty") }).getOrElse(<propery value="http://undefined.com/"/>)) \ "@value").text
   val senseProperty = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseProperty") }).getOrElse(<propery value="http://undefined.com/"/>)) \ "@value").text
-  val senseIdVarName = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseVarName") }).getOrElse(<propery value="meaning_id"/>)) \ "@value").text
+  val senseIdVarName = (((config \ "properties" \ "property").find( {n : XMLNode => (n \ "@name").text.equals("senseVarName") }).getOrElse(<propery value="meaningId"/>)) \ "@value").text
+
+
+  val pageConfig = Page.fromNode((config \ "page")(0))
 
   val wiktionaryDataset : Dataset = new Dataset("wiktionary.dbpedia.org")
   val tripleContext = vf.createURI(ns)
   val senseIriRef = vf.createURI(senseProperty)
+
+  val log = new FileWriter("log.txt", true)
+
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
     // wait a random number of seconds. kills parallelism - otherwise debug output from different threads is mixed
     //TODO remove if in production
-    val r = new scala.util.Random
-    Thread sleep r.nextInt(10)*1000
+    //val r = new scala.util.Random
+    //Thread sleep r.nextInt(10)*1000
 
     val quads = new ListBuffer[Quad]()
     val word = subjectUri.split("/").last
+    if(word.startsWith("Vorlage:") || word.startsWith("Wiktionary:") || word.endsWith("_(Konjugation)") || word.startsWith("Archiv_") || word.startsWith("Liste_") || word.startsWith("Datei:")){
+        return new Graph(quads.toList)
+    }
+
     val senses = HashMap[String, Set[String]]()
 
-    WiktionaryLogging.printMsg("processing "+word, 0)
+    //WiktionaryLogging.printMsg("processing "+word, 0)
 
     //to cache last used blockIris (from block name to its uri)
     val blockIris = new HashMap[String, URI]
     measure {
-      val pageConfig = Page.fromNode((config \ "page")(0))
+      
       blockIris("page") = vf.createURI(ns + word) //this is also the base-url (all nested blocks will get uris with this as a prefix)
+
+      quads append new Quad(langObj, wiktionaryDataset, blockIris("page"), vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word), tripleContext)
+
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse)
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
@@ -175,20 +193,21 @@ class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends
                 //concatenate all binding values of the block indicator tpl to form a proper name for the block (sufficient?)
                 val objStr = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
                 val localBlockPropertyMapped = handleObjectMapping(varr, objStr, false) //this false forces a literal to be returned
-                blockIdentifier append ("-" + localBlockPropertyMapped.asInstanceOf[Literal].getLabel)
+                blockIdentifier append ("-" + localBlockPropertyMapped.asInstanceOf[Literal].getLabel.toLowerCase)
               })
-              val blockIri = vf.createURI(blockIdentifier.toString)
+              val blockIri = vf.createURI(blockIdentifier.toString.replace(" ",""))
               blockIris(block.indTpl.name) = blockIri
               //generate triples that identify the block
               block.indTpl.vars.foreach((varr : Var) => {
                 val objStr = blockIndBindings.getFirstBinding(varr.name).getOrElse(List()).myToString
-                val obj = handleObjectMapping(varr, objStr)
-                quads += new Quad(langObj,wiktionaryDataset, blockIri, vf.createURI(varr.property), obj, tripleContext)
+                if(objStr != ""){
+                    val obj = handleObjectMapping(varr, objStr)
+                    quads += new Quad(langObj,wiktionaryDataset, blockIri, vf.createURI(varr.property), obj, tripleContext)
+                }
               })
 
               //generate a triple that connects the parent block to the new block
               quads += new Quad(langObj,wiktionaryDataset, blockIris(lastBlockName), vf.createURI(lastBlock.blocks.get.property), blockIri, tripleContext)
-
             } catch {
               case e : WiktionaryException => //did not match
             }
@@ -223,15 +242,15 @@ class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends
       }
 
     } report {
-      duration : Long => println("took "+ duration +"ms")
+      duration : Long => //println("took "+ duration +"ms")
     }
-    println(""+quads.size+" quads extracted for "+word)
-    val quadsSortedImmutable = quads.sortWith((q1, q2)=> q1.subject.compare(q2.subject) < 0).toList
-    quadsSortedImmutable.foreach((q : Quad) => println(q.renderNTriple))
-    new Graph(quadsSortedImmutable)
+    log.flush
+    //println(""+quads.size+" quads extracted for "+word)
+    val quadsSorted = quads.sortWith((q1, q2)=> q1.subject.compare(q2.subject) < 0).toList
+    new Graph(quadsSorted)
   }
 
-  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical, emittedBlockSenseConnections : HashMap[String,Set[String]], blockIris : HashMap[String, URI]) : List[Quad] = {
+  def handleBlockBinding(block : Block, tpl : Tpl, blockBindings : VarBindingsHierarchical, emittedBlockSenseConnections : HashMap[String, Set[String]], blockIris : HashMap[String, URI]) : List[Quad] = {
     val quads = new ListBuffer[Quad]
 
     val blockName = if(block.indTpl != null){block.indTpl.name} else {"page"}
@@ -282,7 +301,15 @@ class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends
             val objStr = binding.myToString
             if(!objStr.equals("")){
               val obj = handleObjectMapping(varr, objStr)
-              quads += new Quad(langObj, wiktionaryDataset, blockIris(blockName), vf.createURI(varr.property), obj, tripleContext)
+              if(!(varr.property == "" | varr.property == null)){
+                quads += new Quad(langObj, wiktionaryDataset, blockIris(blockName), vf.createURI(varr.property), obj, tripleContext)
+              } else {
+                log.write("empty property for var="+varr.name+" blockIri="+blockIris(blockName)+"\n")
+                //throw new Exception("property")
+              }
+            } else {
+                log.write("empty value for var="+varr.name+" blockIri="+blockIris(blockName)+"\n")
+                //throw new Exception("value")
             }
           }
         }
@@ -303,7 +330,7 @@ class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends
         val mapped = mappings(objectStr)
         if(toUri){
           if(!varr.format.equals("")){
-            vf.createURI(varr.format.format(mapped ) )
+            vf.createURI(varr.format.format(mapped) )
           } else {
             vf.createURI(ns + mapped)
           }
@@ -311,6 +338,7 @@ class WiktionaryPageExtractor(val language : String, val logLevel : Int) extends
           vf.createLiteral(mapped)
         }
       } else {
+        log.write("no mapping for "+objectStr+"\n")
         vf.createLiteral(objectStr)
       }
     } else {

@@ -11,8 +11,7 @@
     <packaging>jar</packaging>
 
     <name>Wiktionary Dump</name>
-    <url>http://maven.apache.org</url>
-
+    <url>http://dbpedia.org</url>
 
     <dependencies>
          <dependency>
@@ -22,6 +21,10 @@
         <dependency>
             <groupId>org.dbpedia.extraction</groupId>
             <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.dbpedia.extraction</groupId>
+            <artifactId>dump</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -54,7 +57,7 @@
          <launchers>
           <launcher>
               <id>run</id>
-              <mainClass>org.dbpedia.extraction.wiktionary.Extract</mainClass>
+              <mainClass>org.dbpedia.extraction.dump.Extract</mainClass>
           </launcher>
         </launchers>
       </configuration>
