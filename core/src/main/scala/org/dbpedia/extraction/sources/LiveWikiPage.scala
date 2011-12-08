@@ -18,7 +18,9 @@ import org.dbpedia.extraction.wikiparser.WikiTitle
  * @param source The WikiText source of this page
  */
 
-case class LiveWikiPage(override val title : WikiTitle, override val id : Long, override val revision : Long, override val source : String, val timestamp: String)
+case class LiveWikiPage(override val title : WikiTitle, override val id : Long, override val revision : Long,
+                        override val source : String, val timestamp: String, val contributorID: Long,
+                        val contributorName: String)
   extends WikiPage(title, id, revision, source)
 {
    override def toString = "LiveWikiPage(" + title + "," + id + "," + revision + "," + "," +
