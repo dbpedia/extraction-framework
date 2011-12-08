@@ -4,13 +4,15 @@ import java.util.logging.Logger
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
 import org.dbpedia.extraction.wikiparser._
 import impl.wikipedia.Namespaces
-import org.dbpedia.extraction.sources.Source
 import collection.mutable.{HashSet, Set => MutableSet}
 import java.math.BigInteger
 import java.security.MessageDigest
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, WikiUtil}
+import java.net.URLDecoder
+import org.dbpedia.extraction.sources.{XMLSource, Source}
+import java.io.File
 
 /**
  * Extracts the first image of a Wikipedia page. Constructs a thumbnail from it, and
@@ -163,7 +165,8 @@ class ImageExtractor( context : {
         val urlPrefix = if(freeWikipediaImages.contains(fileName)) wikipediaUrlLangPrefix else commonsUrlPrefix
 
         val md = MessageDigest.getInstance("MD5")
-        val messageDigest = md.digest(fileName.getBytes)
+        //val messageDigest = md.digest(fileName.getBytes)
+        val messageDigest = md.digest(URLDecoder.decode(fileName, "UTF-8").getBytes);
         val md5 = (new BigInteger(1, messageDigest)).toString(16)
 
         val hash1 = md5.substring(0, 1)
