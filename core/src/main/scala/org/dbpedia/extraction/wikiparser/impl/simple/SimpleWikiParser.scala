@@ -77,7 +77,8 @@ final class SimpleWikiParser extends WikiParser
       try{
       //println("NODECHILDREN = " +  page.asInstanceOf[LiveWikiPage].toXML);
         return new LivePageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation,
-          page.asInstanceOf[LiveWikiPage].timestamp, nodes)
+          page.asInstanceOf[LiveWikiPage].timestamp, page.asInstanceOf[LiveWikiPage].contributorID,
+          page.asInstanceOf[LiveWikiPage].contributorName, nodes)
       }
       catch{
         case e: Exception => ;
