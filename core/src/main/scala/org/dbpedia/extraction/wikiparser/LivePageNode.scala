@@ -18,7 +18,7 @@ package org.dbpedia.extraction.wikiparser
 
 case class LivePageNode(override val title : WikiTitle, override val id : Long, override val revision : Long,
                         override val isRedirect : Boolean, override val isDisambiguation : Boolean,
-                        val timestamp:String, override val children : List[Node] = List.empty)
+                        val timestamp: String, val contributorID: Long, val contributorName: String, override val children : List[Node] = List.empty)
   extends PageNode(title, id, revision, isRedirect, isDisambiguation, children)
 {
   override def toWikiText() : String = children.map(_.toWikiText()).mkString("")
@@ -34,6 +34,10 @@ case class LivePageNode(override val title : WikiTitle, override val id : Long, 
             <title>{title.decodedWithNamespace}</title>
             <id>{id}</id>
             <revision>
+              <contributor>
+                <username>{contributorName}</username>
+                <id>{contributorID}</id>
+              </contributor>
               <id>{revision}</id>
               <timestamp>{timestamp}</timestamp>
               <text xml:space="preserve">{toWikiText()}</text>
