@@ -16,7 +16,7 @@ import java.io.StringWriter;
  */
 public class Delta {
 
-    /*public enum DiffType{
+    public enum DiffType{
         ADDED(1), DELETED(2), MODIFIED(3);
         private int code;
 
@@ -27,7 +27,7 @@ public class Delta {
         public int getCode() {
             return code;
         }
-    }*/
+    }
 
     private String _resource;
     private Model _addedTriples;
