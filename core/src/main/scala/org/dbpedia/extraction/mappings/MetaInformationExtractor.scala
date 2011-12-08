@@ -45,7 +45,6 @@ class MetaInformationExtractor( context : {
 
     val revisionLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title.encoded +
       "&oldid=" + node.revision;
-    println("REVISIONLINK = " + revisionLink);
 
     //private val foafPrimaryTopicProperty = context.ontology.getProperty("foaf:primaryTopic").getOrElse(throw new Exception("Property 'foaf:primaryTopic' not found"))
 
