@@ -26,10 +26,11 @@ object LiveExtractor
     def load(ontologySource : Source,
              mappingsSource : Source,
              articlesSource : Source,
+             commonsSource : Source,
              extractors : List[Class[Extractor]],
              language : Language) : List[Extractor] =
     {
-        val context = extractionContext(language, ontologySource, mappingsSource, articlesSource)
+        val context = extractionContext(language, ontologySource, mappingsSource, articlesSource, commonsSource)
         extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
     }
 
@@ -39,7 +40,8 @@ object LiveExtractor
      *
      * IMPORTANT: the context for the live extraction does not contain a commonsSource at the moment! (e.g. for ImageExtractor)
      */
-    private def extractionContext(lang : Language, _ontologySource : Source, _mappingsSource : Source, _articlesSource : Source) =
+    private def extractionContext(lang : Language, _ontologySource : Source, _mappingsSource : Source, _articlesSource : Source,
+                                   _commonsSource : Source) =
     {
         new
         {
@@ -58,6 +60,8 @@ object LiveExtractor
 
             private lazy val _redirects = Redirects.load(articlesSource, language)
             def redirects : Redirects = _redirects
+
+            def commonsSource : Source = _commonsSource
         }
     }
 
