@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-    <properties>
-        <property name="ns" value="http://wiktionary.dbpedia.org/resource/"/>
-        <property name="blockProperty" value="http://wiktionary.dbpedia.org/terms/hasUsage"/>
-        <property name="senseProperty" value="http://wiktionary.dbpedia.org/terms/hasSense"/>
-        <property name="senseVarName" value="meaningId"/>
-    </properties>
+    <ignore>
+        <page startsWith="Vorlage:" />
+        <page startsWith="Wiktionary:" />
+        <page startsWith="Archiv_" />
+        <page startsWith="Liste_" />
+        <page endsWith="_(Konjugation)" />
+    </ignore>
     <mappings>
         <mapping from="Substantiv" to="Noun"/>
         <mapping from="Verb" to="Verb"/>
         <mapping from="Adjektiv" to="Adjective"/>        
-        <mapping from="Zahlzeichen" to="NumericSymbol"/>
+        <mapping from="Zahlzeichen" to="NumericSymbol"/>        
+        <mapping from="Zahl" to="NumericSymbol"/>
         <mapping from="Abkürzung" to="Abbreviation"/>
+        <mapping from="Hilfsverb" to="AuxiliaryVerb" /><mapping from="Deklinierte Form" to="DeclinedForm" />
+        <mapping from="Numerale" to="Numeral" />
         <mapping from="Personalpronom" to="PersonalPronoun"/>
         <mapping from="Personalpronomen" to="PersonalPronoun"/>
-        <mapping from="Englisch" to="english"/>
-        <mapping from="Deutsch" to="german"/>        
-        <mapping from="Japanisch" to="japanese"/>
-        <mapping from="Dänisch" to="danish"/>
-        <mapping from="Chinesisch" to="chinese"/>
-        <mapping from="Deklinierte Form" to="declinedForm"/>
+        <mapping from="Englisch" to="English"/>
+        <mapping from="Deutsch" to="German"/>        
+        <mapping from="Japanisch" to="Japanese"/>
+        <mapping from="Dänisch" to="Danish"/>
+        <mapping from="Chinesisch" to="Chinese"/>
         <mapping from="Esperanto" to="Esperanto"/>
-        <mapping from="Numerale" to="Numeral"/>
         <mapping from="Ido" to="Ido"/>
         <mapping from="Interlingue" to="Interlingue"/>
         <mapping from="Plattdeutsch" to="LowGerman"/>
-        <mapping from="Schwedisch" to="swedish"/>
+        <mapping from="Schwedisch" to="Swedish"/>
         <mapping from="Pennsylvania-Deutsch" to="PennsylvaniaGerman"/>
-        <mapping from="Hilfsverb" to="auxiliaryVerbs"/>
+       
         <mapping from="Polnisch" to="Polish" />
         <mapping from="Lateinisch" to="Latin" />
         <mapping from="Portugiesisch" to="Portuguese" />
@@ -74,7 +76,7 @@
         <mapping from="Westfriesisch" to="WestFrisian" />
         <mapping from="Interrogativpronomen" to="InterrogativePronoun" />
         <mapping from="Relativpronomen" to="IrishRelatiPronoun" />
-        <mapping from="Redewendung" to="figureOfSpeech" />
+        <mapping from="Redewendung" to="FigureOfSpeech" />
         <mapping from="Katalanisch" to="Catalan" />
         <mapping from="Toponym" to="Toponym" />
         <mapping from="Altgriechisch" to="AncientGreek" />
@@ -108,12 +110,189 @@
         <mapping from="Gotisch" to="Gothic" />
         <mapping from="Litauisch" to="Lithuanian" />
         <mapping from="Onomatopoetikum" to="Onomatopoeia" />
-        <mapping from="Litauisch" to="Lithuanian" />
-        <mapping from="Litauisch" to="Lithuanian" />
-        <mapping from="Litauisch" to="Lithuanian" />
-        <mapping from="Litauisch" to="Lithuanian" />
+        <mapping from="Nauruisch" to="Nauruan" />
+        <mapping from="Kiribati" to="Kiribati" />
+        <mapping from="Armenisch" to="Armenian" />
+        <mapping from="Fokuspartikel" to="FocusParticle" />
+        <mapping from="Suffix" to="Suffix" />
+        <mapping from="Slowakisch" to="Slovak" />
+        <mapping from="Sprichwort" to="Proverb" />
+        <mapping from="Niedersorbisch" to="LowerSorbian" />
+        <mapping from="Niueanisch" to="Niuean" />
+        <mapping from="Walisisch" to="Welsh" />
+        <mapping from="Bosnisch" to="Bosnian" />
+        <mapping from="Slowenisch" to="Slovene" />
+        <mapping from="Friaulisch" to="Friulan" />
+        <mapping from="Subjunktion" to="Subjunction" />
+        <mapping from="Thai" to="Thai" />
+        <mapping from="Negationspartikel" to="NegationParticle" />
+        <mapping from="Tok Pisin" to="TokPisin" />
+        <mapping from="Suaheli" to="Swahili" />
+        <mapping from="Nordfriesisch" to="NorthFrisian" />
+        <mapping from="Mittelhochdeutsch" to="MiddleHighGerman" />
+        <mapping from="Gebundenes Lexem" to="BoundLexem" />
+        <mapping from="Buchstabe" to="Letter" />
+        <mapping from="Malayalam" to="Malayalam" />
+        <mapping from="Hindi" to="Hindi" />
+        <mapping from="Kannada" to="Kannada" />
+        <mapping from="Urdu" to="Urdu" />
+        <mapping from="Georgisch" to="Georgian" />
+        <mapping from="Sardisch" to="Sardinian" />
+        <mapping from="Aserbaidschanisch" to="Azerbaijani" />
+        <mapping from="Krimtatarisch" to="CrimeanTatar" />
+        <mapping from="Ukrainisch" to="Ukrainian" />
+        <mapping from="Urartäisch" to="Urartian" />
+        <mapping from="Prußisch" to="Prussian" />
+        <mapping from="Malaiisch" to="Malay" />
+        <mapping from="Tuvaluisch" to="Tuvaluan" />
+        <mapping from="Schottisch-Gälisch" to="ScottishGaelic" />
+        <mapping from="Gradpartikel" to="IntensifyingParticle" />
+        <mapping from="Chakassisch" to="Khakas" />
+        <mapping from="Symbol" to="Symbol" />
+        <mapping from="Ortsnamen-Grundwort" to="ToponymLexem" />
+        <mapping from="Nahuatl" to="Nahuatl" />
+        <mapping from="Hebräisch" to="Hebrew" />
+        <mapping from="Reflexives Personalpronomen" to="ReflexivePersonalpronoun" />
+        <mapping from="Mapudungun" to="Mapuche" />
+        <mapping from="Sizilianisch" to="Sicilian" />
+        <mapping from="Hiragana" to="Hiragana" />
+        <mapping from="Postposition" to="Postposition" />
+        <mapping from="Jiddisch" to="Yiddish" />
+        <mapping from="Guanche" to="Guanche" />
+        <mapping from="Katakana" to="Katakana" />
+        <mapping from="Aromunisch" to="Aromanian" />
+        <mapping from="Aragonesisch" to="Aragonese" />
+        <mapping from="Fidschi" to="Fijian" />
+        <mapping from="Korsisch" to="Corsican" />
+        <mapping from="Bislama" to="Bislama" />
+        <mapping from="Volapük" to="Volapük" />
+        <mapping from="isiXhosa" to="Xhosa" />
+        <mapping from="Tamil" to="Tamil" />
+        <mapping from="Tschuwaschisch" to="Chuvash" />
+        <mapping from="Xitsonga" to="Tsonga" />
+        <mapping from="Sesotho" to="SouthernSotho" />
+        <mapping from="Nord-Sotho" to="NorthernSotho" />
+        <mapping from="Tswana" to="Tswana" />
+        <mapping from="Lettisch" to="Latvian" />
+        <mapping from="Ossetisch" to="Ossetian" />
+        <mapping from="Livisch" to="Livonian" />
+        <mapping from="Luganda" to="Luganda" />
+        <mapping from="Sami" to="Sami" />
+        <mapping from="Seselwa" to="SeychelloisCreole" />
+        <mapping from="Kinyarwanda" to="Kinyarwanda" />
+        <mapping from="Kornisch" to="Cornish" />
+        <mapping from="Mazedonisch" to="Macedonian" />
+        <mapping from="Interlingua" to="Interlingua" />
+        <mapping from="Serbokroatisch" to="SerboCroatian" />
+        <mapping from="Luxemburgisch" to="Luxembourgish" />
+        <mapping from="Tagalog" to="Tagalog" />
+        <mapping from="Min Nan" to="MinNan" />
+        <mapping from="Nordsamisch" to="NorthernSami" />
+        <mapping from="Tongaisch" to="Tongan" />
+        <mapping from="siSwati" to="Swazi" />
+        <mapping from="Samoanisch" to="Samoan" />
+        <mapping from="Tshivenda" to="Venda" />
+        <mapping from="isiZulu" to="Zulu" />
+        <mapping from="Asturisch" to="Asturian" />
+        <mapping from="Javanisch" to="Javanese" />
+        <mapping from="Maltesisch" to="Maltese" />
+        <mapping from="Võro" to="VõroEstonian" />
+        <mapping from="Weißrussisch" to="Belarusian" />
+        <mapping from="Venezianisch" to="Venetian" />
+        <mapping from="Neunorwegisch" to="Nynorsk" />
+        <mapping from="Kasachisch" to="Kazakh" />
+        <mapping from="Madagassisch" to="Malagasy" />
+        <mapping from="Mongolisch" to="Mongolian" />
+        <mapping from="Wallonisch" to="Walloon" />
+        <mapping from="Hanzi" to="Hanzi" />
+        <mapping from="Kanji" to="Kanji" />
+        <mapping from="Guaraní" to="Guaraní" />
+        <mapping from="Satzzeichen" to="PunctuationMarks" />
+        <mapping from="Inuktitut" to="Inuktitut" />
+        <mapping from="Merkspruch" to="Mnemonic" />
+        <mapping from="Hethitisch" to="Hittite" />
+        <mapping from="Serbisch" to="Serbian" />
+        <mapping from="Kroatisch" to="Croatian" />
+        <mapping from="Interrogativadverb" to="InterrogativeAdverb" />
+        <mapping from="Maori" to="Maori" />
+        <mapping from="Baule" to="Baoulé" />
+        <mapping from="Gerundium" to="Gerund" />
+        <mapping from="Pronominaladverb" to="PronominalAdverb" />
+        <mapping from="Kumükisch" to="Kumyk" />
+        <mapping from="Turkmenisch" to="Turkmen" />
+        <mapping from="Reflexivpronomen" to="ReflexivePronoun" />
+        <mapping from="Vergleichspartikel" to="ComparativeParticle" />
+        <mapping from="Lojban" to="Lojban" />
+        <mapping from="Tatarisch" to="Tatar" />
+        <mapping from="Kontraktion" to="Contraction" />
+        <mapping from="Komparativ" to="Comparative" />
+        <mapping from="Konjunktionaladverb" to="ConjunctionalAdverb" />
+        <mapping from="Manx" to="Manx" />
+        <mapping from="Hausa" to="Hausa" />
+        <mapping from="Kirundi" to="Kirundi" />
+        <mapping from="Somalisch" to="Somali" />
+        <mapping from="Usbekisch" to="Uzbek" />
+        <mapping from="Rätoromanisch" to="Rhaeto-Romance" />
+        <mapping from="Sindarin" to="Sindarin" />
+        <mapping from="Hurritisch" to="Hurrian" />
+        <mapping from="Luwisch" to="Luwian" />
+        <mapping from="Grönländisch" to="Greenlandic" />
+        <mapping from="Crow" to="Crow" />
+        <mapping from="Tschetschenisch" to="Chechen" />
+        <mapping from="Singularetantum" to="SingulareTantum" />
+        <mapping from="Präfixoid" to="Prefixoid" />
+        <mapping from="Scots" to="Scots" />
+        <mapping from="Papiamentu" to="Papiamento" />
+        <mapping from="Novial" to="Novial" />
+        <mapping from="Rapanui" to="Rapa_Nui" />
+        <mapping from="Telugu" to="Telugu" />
+        <mapping from="Marathi" to="Marathi" />
+        <mapping from="Quechua" to="Quechua" />
+        <mapping from="Aymara" to="Aymara" />
+        <mapping from="Norwegisch (bokmål)" to="Bokmål" />
+        <mapping from="Norwegisch (nynorsk)" to="Nynorsk" />
+        <mapping from="Superlativ" to="Superlative" />
+        <mapping from="Saterfriesisch" to="SaterlandFrisian" />
+        <mapping from="Uigurisch" to="Uyghur" />
+        <mapping from="Affix" to="Affix" />
+        <mapping from="Altirisch" to="OldIrish" />
+        <mapping from="abtrennbare Verbpartikel" to="Verbparticle" />
+        <mapping from="Reziprokpronomen" to="ReciprocalPronoun" />
+        <mapping from="Altaisch" to="Altaic" />
+        <mapping from="Karatschai-Balkarisch" to="Karachay-Balkar" />
+        <mapping from="Kirgisisch" to="Kyrgyz" />
+        <mapping from="Östliches Cham" to="EasternCham" />
+        <mapping from="Tokelauisch" to="Tokelauan" />
+        <mapping from="Swanisch" to="Svan" />
+        <mapping from="!Xóõ" to="!Xóõ" />
+        <mapping from="ǃXóõ" to="!Xóõ" />
+        <mapping from="Sebat Bet Gurage" to="SebatBetGurage" />
+        <mapping from="Tadschikisch" to="Tajik" />
+        <mapping from="Haitianisch" to="HaitianCreole" />
+        <mapping from="Assamesisch" to="Assamese" />
+        <mapping from="Burjatisch" to="Buryat" />
+        <mapping from="Panjabi" to="Punjabi" />
+        <mapping from="Baschkirisch" to="Bashkir" />
+        <mapping from="Chantisch" to="Khanty" ><mapping from="Zahladjektiv" to="NumberAdjective" /></mapping>
+        <mapping from="Dunganisch" to="Dungan" />
+        <mapping from="Mari" to="Mari" />
+        <mapping from="Tschuktschisch" to="Chukchi" />
+        <mapping from="Laotisch" to="Lao" />
+        <mapping from="Mohawk" to="Mohawk" />
+        <mapping from="Erweiterter Infinitiv" to="ExtendedInfinitive" />
+        <mapping from="Suffixoid" to="Suffixoid" />
+        <mapping from="Germanisch" to="Germanic" />
+        
+        <mapping from="Catawba" to="Catawba" />
+        <mapping from="Sanskrit" to="Sanskrit" />
+        <mapping from="Mittelgriechisch" to="MedievalGreek" />
+        <mapping from="Protogermanisch" to="Protogermanic" />
+        <mapping from="Reflexives Possessivpronomen" to="ReflexivePossessivpronoun" />
+        <mapping from="Chinalugisch" to="Khinalugh" />
+        <mapping from="Bengalisch" to="Bengali" />
+        <mapping from="Gujarati" to="Gujarati" />
     </mappings>
-    <page>
+    <page name="page">
         <prologs>
             <!--template name="also">
                 <vars>
@@ -131,16 +310,14 @@
 {{extractiontpl|list-end}}</wikiSyntax>
             </template-->
         </epilogs>
-        <block>
-            <property uri="http://wiktionary.dbpedia.org/terms/hasLangUsage"/>
+        <block name="lang" property="http://wiktionary.dbpedia.org/terms/hasLangUsage">
             <template name="lang-start">
                 <vars>
                     <var name="language" property="http://purl.org/dc/elements/1.1/language" doMapping="true" type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
                 </vars>
                 <wikiSyntax>== $word \({{Sprache|$language}}\) ==</wikiSyntax>
             </template>
-            <block>
-                <property uri="http://wiktionary.dbpedia.org/terms/hasPoSUsage"/>
+            <block name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoSUsage">
                 <template name="pos-start">
                     <vars>
                         <var name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoS" doMapping="true" type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
@@ -153,6 +330,7 @@
                             <var name="example" property="http://wiktionary.dbpedia.org/terms/hasExample" senseBound="true"/>
                         </vars>
                         <wikiSyntax>{{Beispiele}}
+
 (:~~$meaningId~~ $example
 )
 </wikiSyntax>
@@ -171,7 +349,26 @@
                             <var name="meaning" property="http://wiktionary.dbpedia.org/terms/hasMeaning" senseBound="true" />
                         </vars>
                         <wikiSyntax>{{Bedeutungen}}
+
 (:~~$meaningId~~ $meaning
+)
+</wikiSyntax>
+                    </template>
+                    <template name="etymology">
+                        <vars>
+                            <var name="etymology" property="http://wiktionary.dbpedia.org/terms/hasEtymology" />
+                        </vars>
+                        <wikiSyntax>{{Herkunft}}
+:$etymology
+</wikiSyntax>
+                    </template>
+                    <template name="proverbs">
+                        <vars>
+                            <var name="proverb" property="http://wiktionary.dbpedia.org/terms/hasProverb" />
+                        </vars>
+                        <wikiSyntax>{{Sprichwörter}}
+
+(:$proverb
 )
 </wikiSyntax>
                     </template>
@@ -191,12 +388,12 @@ Singular=$flection-singular
                             <var name="pronunciationSingular" property="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular"/>
                         </vars>
                         <wikiSyntax>{{Aussprache}}
-:~~Hilfe:IPA|IPA~~: {{Lautschrift|$pronunciationSingular}}}}, {{Pl.}} {{Lautschrift|$pronunciation-plural}}
-:~~Hilfe:Hörbeispiele|Hörbeispiele~~: {{Audio|$audioSingular}}}}, {{Pl.}} {{Audio|$audio-plural}}
+:~~Hilfe:IPA|IPA~~: {{Lautschrift|$pronunciationSingular}}, {{Pl.}} {{Lautschrift|$pronunciation-plural}}
+:~~Hilfe:Hörbeispiele|Hörbeispiele~~: {{Audio|$audioSingular}}, {{Pl.}} {{Audio|$audio-plural}}
 
 </wikiSyntax>
                     </template>
-                    <template name="reference">
+                    <!--template name="reference">
                         <vars>
                              <var name="reference" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" format="///resolveTemplateToUri" senseBound="true"/>
                         </vars>
@@ -212,7 +409,7 @@ Singular=$flection-singular
                         <wikiSyntax>{{Quellen}}
 (:$source
 )</wikiSyntax>
-                    </template>
+                    </template-->
                     <!--template name="translation">
                         <vars>
                             <var name="lang"/>
@@ -232,6 +429,7 @@ Singular=$flection-singular
                             <var name="usage" property="http://wiktionary.dbpedia.org/terms/hasCharactisticUsage" senseBound="true"/>
                         </vars>
                         <wikiSyntax>{{Charakteristische Wortkombinationen}}
+
 (:$usage
 )
 </wikiSyntax>

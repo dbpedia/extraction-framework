@@ -5,6 +5,7 @@ import xml.NodeSeq._
 import collection.mutable.{ListBuffer, Stack}
 import xml.{XML, Node => XMLNode}
 import scala.util.matching.Regex
+import org.dbpedia.extraction.wikiparser._
 
 import MyStack._
 
@@ -19,7 +20,7 @@ import MyStack._
  * they are simple wrappers that provide a object representation to avoid xml in the extractor
  */
 
-class Var (val name : String, val property : String, val senseBound : Boolean, val toUri : Boolean, val format : String, val doMapping : Boolean)
+class Var (val name : String, val property : String, val senseBound : Boolean, val toUri : Boolean, val format : String, val doMapping : Boolean, val values : List[String])
 object Var {
   def fromNode(n:XMLNode) = {
     new Var(
@@ -28,15 +29,44 @@ object Var {
       n.attribute("senseBound").isDefined && (n \ "@senseBound").text.equals("true"),
       n.attribute("type").isDefined && (n \ "@type").text.equals("resource"),
       (n \ "@format").text,
-      n.attribute("doMapping").isDefined && (n \ "@doMapping").text.equals("true")
+      n.attribute("doMapping").isDefined && (n \ "@doMapping").text.equals("true"),
+      (n \ "mapping").map((mapping:XMLNode)=>(mapping \"@from").text).asInstanceOf[List[String]]
     )
   }
 }
 
 class Tpl (val name : String, val tpl : Stack[org.dbpedia.extraction.wikiparser.Node], val vars : scala.collection.immutable.Seq[Var], var needsPostProcessing : Boolean, var ppClass : Option[String], var ppMethod : Option[String])
 object Tpl {
+  //$var, () for repetitions, and ##link## to subsumpt the three link types
+  def expandTpl(orig : String) : String = {
+    println(orig)
+    val pattern = new Regex("(?<!\\\\)\\$[a-zA-Z0-9]+")
+    val tplVarsExpanded = pattern.replaceAllIn(
+       orig, 
+       (m) => "{{Extractiontpl|var|"+m.matched.replace("$","")+"}}"
+    )
+
+    var tpl = tplVarsExpanded.replace("\\(","§$%o%$§").replace("\\)","§$%c%$§")
+    val pattern2 = new Regex("\\((([^\\(\\)])*?)\\)([\\+\\*\\?])")
+    while(pattern2.findFirstIn(tpl).isDefined){
+      tpl = pattern2.replaceAllIn(tpl, 
+           (m) => "{{Extractiontpl|list-start|"+m.group(3)+"}}"+m.group(1).replace("(","").replace(")","")+"{{Extractiontpl|list-end}}"
+      )
+    }
+    tpl = tpl.replace("§$%o%$§", "(").replace("§$%c%$§", ")")
+
+    val pattern3 = new Regex("(?<!\\\\)~~(.*?)~~")
+    val tplLinksExpanded = pattern3.replaceAllIn(tpl, 
+       (m) => "{{Extractiontpl|link|"+m.matched.replace("~","")+"}}")
+    val tplExpanded = tplLinksExpanded.replace("\\","")
+    println(tplExpanded)
+    return tplExpanded
+  }
+
   def fromNode(n:XMLNode) = {
     val pp = n.attribute("needsPostProcessing").isDefined && (n \ "@needsPostProcessing").text.equals("true")
+
+    //post prcessing: class and method names to call via reflection    
     val ppClass = if(pp){
       Some((n \ "@ppClass").text)
     } else {
@@ -49,22 +79,16 @@ object Tpl {
     }
 
     val vars = (n \ "vars" \ "var").map(Var.fromNode(_))
-
     val tplString = (n \ "wikiSyntax").text
+    // expand the terse template syntax 
+    val tplExpanded = expandTpl(tplString)
 
-    // expand the terse template syntax ($var, () for repetitions, and ##link## to subsumpt the three link types)
-    val tplListExpanded = tplString.replaceAll("(?<!\\\\)\\(","{{Extractiontpl|list-start}}").replaceAll("(?<!\\\\)\\)","{{Extractiontpl|list-end}}")
-
-    val pattern = new Regex("(?<!\\\\)\\$[a-zA-Z0-9]+")
-    val tplVarsExpanded = pattern.replaceAllIn(tplListExpanded, 
-       (m) => "{{Extractiontpl|var|"+m.matched.replace("$","")+"}}")
-
-    val pattern2 = new Regex("(?<!\\\\)~~(.*?)~~")
-    val tplLinksExpanded = pattern2.replaceAllIn(tplVarsExpanded, 
-       (m) => "{{Extractiontpl|link|"+m.matched.replace("~","")+"}}")
-    val tplExpanded = tplLinksExpanded.replace("\\","")
-
+    //println(tplExpanded);
     val tpl =  MyStack.fromString(tplExpanded).filterNewLines
+    if(tplExpanded.startsWith("\n")){
+        tpl.push(new TextNode("\n",0))
+    }
+    println(tpl)
     val t = new Tpl(
       (n \ "@name").text,
       tpl,
@@ -77,36 +101,21 @@ object Tpl {
   }
 }
 
-class Block (val indTpl : Tpl, val blocks : Option[Block], val templates : List[Tpl], val property : String){
-  override def clone = new Block(indTpl, blocks, templates, property)
-}
-object Block {
-  def fromNode(n:XMLNode) : Block = {
-    new Block(
-      Tpl.fromNode((n \ "template").head),
-      if((n \ "block").size > 0){
-        Some(Block.fromNode((n \ "block").head))
-      } else {
-        None
-      },
-      (n \ "templates" \ "template").map(Tpl.fromNode(_)).toList,
-      (n \ "property" \ "@uri").text
-    )
-  }
+class Block (n : XMLNode, val parent : Block
+//val name : String, val indTpl : Tpl, val blocks : List[Block], val templates : List[Tpl], val property : String, val parent : Block
+){
+      val name = (n \ "@name").text
+      val indTpl = if((n \ "template").size > 0) {Tpl.fromNode((n \ "template").head)} else null
+      val blocks = (n \ "block").map(b => new Block(b, this)).toList
+      val templates  = (n \ "templates" \ "template").map(t=>Tpl.fromNode(t)).toList
+      val property = (n \ "@property").text
+
+  //override def clone = new Block(name, indTpl, blocks, templates, property, parent)
 }
 
-class Page (blocks : Option[Block], templates : List[Tpl], property : String) extends Block (null, blocks, templates, property)
-object Page {
-  def fromNode(n:XMLNode) : Page =   {
-    val p = new Page(
-    if((n \ "block").size > 0){
-      Some(Block.fromNode((n \ "block")(0)))
-    } else {
-	  None
-	},
-    (n \ "templates" \ "template").map((n:Node)=>Tpl.fromNode(n)).toList,
-    ""
-    )
-    p
-  }
+class Page ( n : XMLNode
+//name : String, blocks : List[Block], templates : List[Tpl], property : String
+) extends Block (n, null
+){
+
 }
