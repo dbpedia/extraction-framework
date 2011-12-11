@@ -87,7 +87,8 @@ class MyStack(s : Stack[Node]) {
    */
   def findNextNonTplNode() : Option[Node] =
     stack.find(
-      node => !(node.isInstanceOf[TemplateNode] && node.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl"))
+      node => !(node.isInstanceOf[TemplateNode] && node.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl") && !(node.isInstanceOf[TextNode] && node.asInstanceOf[TextNode].text == "")
+    )
 
   def fullTrimmedPop() : Node = {
     if(stack.head.isInstanceOf[TextNode]){
@@ -141,23 +142,23 @@ class MyStack(s : Stack[Node]) {
    * <tpl><tn="\n"><sec><tpl>
    */
   def filterNewLines() = {
-    val otherStack = new  Stack[Node]()
+    val otherStack = new Stack[Node]()
     val list = stack.toList
     for(i <- list.indices) {
       if(i > 0 && i < list.indices.last){
-        if(!
+        if(
           (
             (
             (list(i-1).isInstanceOf[SectionNode] && list(i+1).isInstanceOf[TemplateNode] && list(i+1).asInstanceOf[TemplateNode].title.decoded == "Extractiontpl")
             ||
             (list(i+1).isInstanceOf[SectionNode] && list(i-1).isInstanceOf[TemplateNode] && list(i-1).asInstanceOf[TemplateNode].title.decoded == "Extractiontpl")
             )
-            && list(i).isInstanceOf[TextNode] && list(i).asInstanceOf[TextNode].text.equals("\n")
+            && list(i).isInstanceOf[TextNode] && list(i).asInstanceOf[TextNode].text.startsWith("\n")
           )
         ){
-           otherStack push list(i)
+           otherStack push new TextNode(list(i).asInstanceOf[TextNode].text.substring(1), list(i).line) //strip that addional newline
         } else {
-          //println("filterNewLines: leave out " +list(i) +" context: "+list(i-1)+list(i)+list(i+1))
+          otherStack push list(i) //ok
         }
       } else otherStack push list(i)
     }
@@ -197,6 +198,7 @@ object MyStack {
     if(prependedNewline && (nodes.head match {case TextNode("\n",_)=>true; case _ => false})){
       nodes.pop
     }
+
     //println("dumping subtemplate ")
     //nodes.foreach((n: Node) => println(n.dumpStrShort))
 
@@ -250,15 +252,15 @@ object WiktionaryLogging {
 
   //print info about a function call, and the template and page (the first n nodes)
   def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node], thisLevel : Int) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length  - st_depth_start
+    val st_depth = new Exception("").getStackTrace.length - st_depth_start
     val prefix =  " " * st_depth
     if(thisLevel <= level){
       println(prefix + "------------")
       println(prefix + "<entering " + name +">")
-      println(prefix + "<template (next 10)>")
-      println(prefix + tplIt.take(1).map(_.dumpStrShort).mkString)
-      println(prefix + "<page (next 10)>")
-      println(prefix + pageIt.take(1).map(_.dumpStrShort).mkString)
+      println(prefix + "<template (next 3)>")
+      println(prefix + tplIt.take(3).map(_.dumpStrShort).mkString)
+      println(prefix + "<page (next 3)>")
+      println(prefix + pageIt.take(3).map(_.dumpStrShort).mkString)
       println(prefix + "------------\n\n")
     }
   }
@@ -347,6 +349,7 @@ class MyNode (val n : Node){
   def canMatchPageNode(other : Node) : Boolean = {
     n match {
       case tplNode : TemplateNode => if(tplNode.title.decoded.equals("Extractiontpl")) return true
+      case secNode : SectionNode => if(other.isInstanceOf[SectionNode]) return other.asInstanceOf[SectionNode].level == secNode.level
       case txtNode : TextNode => {
         other match {
           case otherTxtNode  : TextNode => {

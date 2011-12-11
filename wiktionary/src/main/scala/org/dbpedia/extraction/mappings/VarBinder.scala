@@ -94,13 +94,14 @@ object VarBinder {
         if(tplNodeFromTpl.title.decoded == "Extractiontpl"){
           val tplType = tplNodeFromTpl.property("1").get.children(0).asInstanceOf[TextNode].text
           tplType match {
-            case "list-start" =>  {
+            case "list-start" => {
               //val name =  tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
               //take everything from tpl till list is closed
               val listTpl = tplIt.getList
               //take the node after the list as endmarker of this list
               val endMarkerNode = tplIt.findNextNonTplNode  //that will be the node that follows the list in the template
-              bindings addChild parseList(listTpl, pageIt, endMarkerNode)
+              val listMode = tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
+              bindings addChild parseList(listTpl, pageIt, endMarkerNode, listMode)
             }
             case "list-end" =>    printMsg("end list - you should not see this", 4)
             case "var" => {
@@ -212,10 +213,11 @@ object VarBinder {
   /**
    * in the template there can be defined "lists" which are repetitive parts, like in regex: tro(lo)* matches trolololo
    */
-  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node]) : VarBindingsHierarchical = {
+  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node], listMode : String) : VarBindingsHierarchical = {
     //printFuncDump("parseList "+name, tplIt, pageIt, 4)
     val bindings = new VarBindingsHierarchical
-
+    val pageCopy = pageIt.clone
+    var counter = 0
     try {
       breakable {
         while(pageIt.size > 0 ){
@@ -231,14 +233,21 @@ object VarBinder {
             break
           }
 
-          //recurse
-          val copyOfTpl = tplIt.clone  //the parsing consumes the template so for multiple matches we need to duplicate it
+          //try to match the list 
+          //the parsing consumes the template so for multiple matches we need to duplicate it
+          val copyOfTpl = tplIt.clone  
           bindings addChild parseNodesWithTemplate(copyOfTpl, pageIt)
+          counter += 1
         }
       }
     } catch {
       case e : WiktionaryException => printMsg("parseList caught an exception - list ended "+e, 4) // now we know the list was finished
       bindings addChild e.vars
+    }
+    if((counter == 0 && listMode == "+")|| (counter > 1 && listMode == "?")){
+        //println("list exception")
+        restore(pageIt, pageCopy)
+        throw new WiktionaryException("the list failed", bindings, None)
     }
     bindings
   }
@@ -261,6 +270,7 @@ object VarBinder {
 
       //record from the page till we see the endmarker
       var endMarkerFound = false
+      var counter = 0
       breakable {
         while(pageIt.size > 0 ){
           val curNode = pageIt.pop
@@ -272,15 +282,17 @@ object VarBinder {
             endMarkerFound = true
             break
           } else if(curNode.isInstanceOf[TextNode] && endMarkerNode.isInstanceOf[TextNode]){
+            
             if(curNode.asInstanceOf[TextNode].text.equals(endMarkerNode.asInstanceOf[TextNode].text)){
               //printMsg("endmarker found (string equal)", 4)
               endMarkerFound = true
               break
             }
+printMsg(">"+endMarkerNode.asInstanceOf[TextNode].text.replace(" ","_").replace("\n","\\n")+"< in "+curNode.asInstanceOf[TextNode].text+(curNode.asInstanceOf[TextNode].text.contains(endMarkerNode.asInstanceOf[TextNode].text)), 4)
             val idx = curNode.asInstanceOf[TextNode].text.indexOf(endMarkerNode.asInstanceOf[TextNode].text)
-
+            printMsg("idx "+idx, 4)
             if(idx >= 0){
-              //printMsg("endmarker found (substr)", 5)
+              printMsg("endmarker found (substr)", 5)
               endMarkerFound = true
               //if the end marker is __in__ the current node . we take what we need
               val part1 =  curNode.asInstanceOf[TextNode].text.substring(0, idx)  //the endmarker is cut out and thrown away
@@ -299,7 +311,10 @@ object VarBinder {
               break
             }
           }
-
+          counter += curNode.toWikiText.size
+          if(counter > 1000){
+            throw new WiktionaryException("var too big", new VarBindingsHierarchical, None)
+          }
           //not finished, keep recording
           varValue append curNode
           printMsg("var += "+curNode, 4)
