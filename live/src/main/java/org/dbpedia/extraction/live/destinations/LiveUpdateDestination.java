@@ -26,6 +26,7 @@ import scala.collection.JavaConversions;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -483,6 +484,17 @@ public class LiveUpdateDestination implements Destination{
         String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
         ResultSet result = this._jdbc_sparul_execute(sparul);
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(result!= null){
+                result.close();
+                result.getStatement().close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement of removeOldRDFSAbstractOrComment cannot be closed");
+        }
     }
 
 
@@ -597,7 +609,19 @@ public class LiveUpdateDestination implements Destination{
                 strDeletedTriples += pattern;
 
                 sparul = "DELETE FROM <" + this.graphURI +"> { " + pattern + " }" + " WHERE {\n" + pattern + " }";
-                this._jdbc_sparul_execute(sparul);
+                ResultSet sparulResults = this._jdbc_sparul_execute(sparul);
+
+                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                try{
+                    if(sparulResults!= null){
+                        sparulResults.close();
+                        sparulResults.getStatement().close();
+                    }
+                }
+                catch (SQLException sqlExp){
+                    logger.warn("SQL statement of _alt_delete_all_triples cannot be closed");
+                }
+
             }
         }
         String needed = Timer.stopAsString(timerName);
@@ -646,6 +670,17 @@ public class LiveUpdateDestination implements Destination{
             }  else{
                 logger.info("SUCCESS");
             }
+        }
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(result !=  null){
+                result.close();
+                result.getStatement().close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement of _alt_delete_all_triples cannot be closed");
         }
 
     }
@@ -1065,7 +1100,7 @@ public class LiveUpdateDestination implements Destination{
                         }
                     }
 
-                }
+                    }
                     this.counterTotalJDBCOperations+=1;
                 logger.trace(virtuosoPl);
             }

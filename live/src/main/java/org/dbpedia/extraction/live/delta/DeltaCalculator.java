@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.live.delta;
 
 import com.hp.hpl.jena.rdf.model.*;
+import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.JDBC;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -8,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.StringReader;
 import java.sql.Blob;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -19,11 +21,25 @@ import java.util.*;
  * resource
  */
 public class DeltaCalculator {
+    //Initializing the Logger
+    private static Logger logger = null;
+
     private static final String DBPEDIA_TABLENAME = "dbpedia_triples";
     private static final String DBPEDIA_DIFF_TABLENAME = "dbpedia_triples_diff";
     private static final String FIELD_OAIID = "oaiid";
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";
+
+    static
+    {
+        try
+        {
+            logger = Logger.getLogger(Class.forName("org.dbpedia.extraction.live.delta.DeltaCalculator").getName());
+        }
+        catch (Exception exp){
+
+        }
+    }
 
     public static enum TriplesType
     {
@@ -67,7 +83,15 @@ public class DeltaCalculator {
                 Temp += new String(bdata);
             }
 
-            jdbcResult.close();
+//            jdbcResult.close();
+
+            try{
+                jdbcResult.close();
+                jdbcResult.getStatement().close();
+            }
+            catch (SQLException sqlExp){
+                logger.warn("SQL statement cannot be closed");
+            }
 
             //This class is object is created to force the JSON decoder to return a HashMap, as hashesFromStore is a HashMap
             ContainerFactory containerFactory = new ContainerFactory(){

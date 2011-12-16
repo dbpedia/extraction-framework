@@ -1,26 +1,21 @@
 package org.dbpedia.extraction.live.core;
 
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
-import org.aksw.commons.collections.diff.ModelDiff;
-import org.apache.commons.collections.map.HashedMap;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import org.apache.log4j.Logger;
-import org.apache.xpath.operations.Mod;
 import org.dbpedia.extraction.live.delta.Delta;
 import org.dbpedia.extraction.live.delta.DeltaCalculator;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
+import org.dbpedia.extraction.live.main.Main;
+import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 
-import javax.xml.ws.Service;
 import java.io.StringReader;
-import java.io.StringWriter;
-import java.sql.Blob;
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 
 /**
@@ -99,6 +94,14 @@ public class Hash{
                 if(result != null)
                 {
                     logger.info("dropped hashtable");
+                    try{
+                        result.close();
+                        result.getStatement().close();
+                    }
+                    catch (SQLException sqlExp){
+                        logger.warn("SQL statement cannot be closed");
+                    }
+
                 }
             }
             //test if table exists
@@ -123,10 +126,43 @@ public class Hash{
                 {
                     logger.info("created table " + TABLENAME);
                 }
+
+                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                try{
+                    if(ResultMake != null){
+                        ResultMake.close();
+                        ResultMake.getStatement().close();
+                    }
+                }
+                catch (SQLException sqlExp){
+                    logger.warn("SQL statement cannot be closed");
+                }
+
+                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                try{
+                    if(ResultSecondTest != null){
+                        ResultSecondTest.close();
+                        ResultSecondTest.getStatement().close();
+                    }
+                }
+                catch (SQLException sqlExp){
+                    logger.warn("SQL statement cannot be closed");
+                }
+
             }
             else
             {
                 logger.info("Hash:: table " + TABLENAME + " found");
+
+                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                try{
+                    result.close();
+                    result.getStatement().close();
+                }
+                catch (SQLException sqlExp){
+                    logger.warn("SQL statement cannot be closed");
+                }
+
             }
         }
     }
@@ -186,6 +222,17 @@ public class Hash{
             }
 
             jdbcResult.close();
+            //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+            try{
+                if(jdbcResult != null){
+                    jdbcResult.close();
+                    jdbcResult.getStatement().close();
+                }
+            }
+            catch (SQLException sqlExp){
+                logger.warn("SQL statement cannot be closed");
+            }
+
             
             //This class is object is created to force the JSON decoder to return a HashMap, as hashesFromStore is a HashMap 
             ContainerFactory containerFactory = new ContainerFactory(){
@@ -278,7 +325,29 @@ public class Hash{
         }
         */
 
+         ExecutorService es = Executors.newSingleThreadExecutor();
+
+        final Future future = es.submit(new Callable() {
+                    public Object call() throws Exception {
+                        _insertNewDiffTriples();
+                        return null;
+                    }
+                });
+
+
+        try {
+            future.get(); // blocking call - the main thread blocks until task is done
+        } catch (InterruptedException e) {
+        } catch (ExecutionException e) {
+        }
+
+
+	}
+
+    private void _insertNewDiffTriples(){
         Delta delta = DeltaCalculator.calculateDiff(this.Subject, originalHashes, newJSONObject);
+
+        /*
 
         //Delete old triples of that subject
         String sparulDelete = "DELETE FROM GRAPH<" + LiveOptions.options.get("addedTriplesGraphURI") + "> { ?s ?p ?o  }\n" +
@@ -323,12 +392,10 @@ public class Hash{
         virtuosoPl = "sparql " + sparulInsert + "";
 
         jdbc.exec(virtuosoPl, "Hash::updateDB");
-
+        */
 
         //First delete old diff triples
-//        CallableStatement deleteOldDiffTriplesStsmt = jdbc.prepareCallableStatement("DELETE_ALL_RESOURCE_TRIPLESF_ROM_dbpedia_triples_diff(?)",
-//                        "Hash::updateDB");
-//        jdbc.executeCallableStatement(deleteOldDiffTriplesStsmt,new String[]{this.Subject});
+
 
 //        Model m = delta.getDeletedTriples();
 //        m.add(ResourceFactory.createStatement(ResourceFactory.createResource("http://dbpedia.org/ontology/author"),
@@ -345,24 +412,51 @@ public class Hash{
 //            logger.info(stmt2.asTriple().toString());
 //        }
 
+        /*
+        CallableStatement deleteOldDiffTriplesStsmt = jdbc.prepareCallableStatement("DELETE_ALL_RESOURCE_TRIPLES_FROM_dbpedia_triples_diff(?)",
+                        "Hash::updateDB");
+        jdbc.executeCallableStatement(deleteOldDiffTriplesStsmt,new String[]{this.Subject});
+
         //Insert the added triples as an N-Triples string
-//        CallableStatement insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)",
-//                "Hash::updateDB");
-//        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt,new String[]{this.Subject, Integer.toString(Delta.DiffType.ADDED.getCode()),
-//                delta.formulateAddedTriplesAsNTriples()});
-//
-//        //Insert the deleted triples as an N-Triples string
-//        insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)", "Hash::updateDB");
-//        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt, new String[]{this.Subject, Integer.toString(Delta.DiffType.DELETED.getCode()),
-//                delta.formulateDeletedTriplesAsNTriples()});
-//
-//        //Insert the modified triples as an N-Triples string
-//        insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)", "Hash::updateDB");
-//        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt, new String[]{this.Subject, Integer.toString(Delta.DiffType.MODIFIED.getCode()),
-//                delta.formulateModifiedTriplesAsNTriples()});
+        CallableStatement insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)",
+                "Hash::updateDB");
+        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt,new String[]{this.Subject, Integer.toString(Delta.DiffType.ADDED.getCode()),
+                delta.formulateAddedTriplesAsNTriples(true)});
+
+        //Insert the deleted triples as an N-Triples string
+        insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)", "Hash::updateDB");
+        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt, new String[]{this.Subject, Integer.toString(Delta.DiffType.DELETED.getCode()),
+                delta.formulateDeletedTriplesAsNTriples(true)});
+
+        //Insert the modified triples as an N-Triples string
+        insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)", "Hash::updateDB");
+        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt, new String[]{this.Subject, Integer.toString(Delta.DiffType.MODIFIED.getCode()),
+                delta.formulateModifiedTriplesAsNTriples(true)});
+
+        */
 
 
-	}
+        CallableStatement updateOldDiffTriplesStsmt = jdbc.prepareCallableStatement("update_dbpedia_triples_diff_for_resource(?,?,?,?)",
+                        "Hash::updateDB");
+
+        String addedTripleString = delta.formulateAddedTriplesAsNTriples(true);
+        String deletedTripleString = delta.formulateDeletedTriplesAsNTriples(true);
+        String modifiedTripleString = delta.formulateModifiedTriplesAsNTriples(true);
+
+        jdbc.executeCallableStatement(updateOldDiffTriplesStsmt,new String[]{this.Subject, addedTripleString, deletedTripleString
+        , modifiedTripleString});
+
+        boolean hasDelta = (addedTripleString.compareTo("") != 0 && deletedTripleString.compareTo("") != 0)
+                && modifiedTripleString.compareTo("") != 0;
+
+        if(hasDelta){
+
+            int itemPos = Arrays.asList(Main.recentlyUpdatedInstances).indexOf(new RecentlyUpdatedInstance(this.Subject));
+            Main.recentlyUpdatedInstances[itemPos].setHasDelta(true);
+        }
+
+    }
+
 
     /**
      * Inserts a new record into dbpedia_triples table, in order to later use it to compare hashes
@@ -422,7 +516,7 @@ public class Hash{
             logger.info(this.Subject + " inserted hashes for " + this.newJSONObject.size() + " extractors " + needed);
         }*/
 
-
+        /*
         //In that case there is no old triples, so all triples are considered new triples
         Delta delta = DeltaCalculator.calculateDiff(this.Subject, null, newJSONObject);
         ///////////////////////////////Insert  the new diff into the corresponding graph
@@ -431,6 +525,22 @@ public class Hash{
 
         String virtuosoPl = "sparql " + sparulInsert + "";
         jdbc.exec(virtuosoPl, "Hash::updateDB");
+        */
+
+        Delta delta = DeltaCalculator.calculateDiff(this.Subject, originalHashes, newJSONObject);
+        //First delete old diff triples
+        CallableStatement deleteOldDiffTriplesStsmt = jdbc.prepareCallableStatement("DELETE_ALL_RESOURCE_TRIPLES_FROM_dbpedia_triples_diff(?)",
+                        "Hash::updateDB");
+        jdbc.executeCallableStatement(deleteOldDiffTriplesStsmt,new String[]{this.Subject});
+
+        //Insert the added triples as an N-Triples string
+        CallableStatement insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)",
+                "Hash::updateDB");
+        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt,new String[]{this.Subject, Integer.toString(Delta.DiffType.ADDED.getCode()),
+                delta.formulateAddedTriplesAsNTriples(true)});
+
+        //Main.
+
 	}
 
     /**
@@ -822,7 +932,18 @@ public class Hash{
                 Temp += new String(bdata);
             }
 
-            jdbcResult.close();
+//            jdbcResult.close();
+
+            //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+            try{
+                if(jdbcResult != null){
+                    jdbcResult.close();
+                    jdbcResult.getStatement().close();
+                }
+            }
+            catch (SQLException sqlExp){
+                logger.warn("SQL statement cannot be closed");
+            }
 
             //This class is object is created to force the JSON decoder to return a HashMap, as hashesFromStore is a HashMap
             ContainerFactory containerFactory = new ContainerFactory(){
