@@ -33,7 +33,12 @@ class ContributorExtractor( context : {
 
     //Object values
     val contributorName =  node.asInstanceOf[LivePageNode].contributorName;
-    val contributorURL =  "http://dbpedia.org/contributor/" + contributorName;
+
+    //The username may contain spaces, so we should replace the spaces with underscores "_", as they ar not allowed in
+    //URLs
+    val contributorNameWithoutSpaces = contributorName.replace (" ", "_");
+    val contributorURL =  "http://dbpedia.org/contributor/" + contributorNameWithoutSpaces;
+
     val contributorID =  node.asInstanceOf[LivePageNode].contributorID;
 
 //    val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, contributorPredicate,
