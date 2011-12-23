@@ -210,6 +210,8 @@ public class JDBC{
         catch(Exception exp){
             logger.warn(exp.getMessage() + " Function executeStatement ");
             successfulExecution = false;
+            //Try to reconnect, as the number of allowed statements may be exceeded
+            reconnect();
         }
         
         return successfulExecution;
@@ -262,6 +264,8 @@ public class JDBC{
 //            System.out.println("QUERY = " + query);
 //            System.out.println("--------------------------------------------------------------------------------");
             logger.warn(exp.getMessage() + " Function executeStatement ");
+            //Try to reconnect, as the number of allowed statements may be exceeded
+            reconnect();
         }
 
 
@@ -417,6 +421,21 @@ public class JDBC{
         }
 
         return successfulExecution;
+    }
+
+    /**
+     * This function closes the connection in order to release all resources it holds, and creates a new connection  
+     */
+    private  void reconnect(){
+        try{
+            con.close();
+            con = null;
+            connect();
+        }
+        catch (SQLException exp){
+            logger.warn("Connection cannot be closed Function reconnect");
+        }
+        
     }
 
 

@@ -493,7 +493,7 @@ public class LiveUpdateDestination implements Destination{
             }
         }
         catch (SQLException sqlExp){
-            logger.warn("SQL statement of removeOldRDFSAbstractOrComment cannot be closed");
+            logger.warn("SQL statement of result cannot be closed in function removeOldRDFSAbstractOrComment");
         }
     }
 
@@ -1099,6 +1099,15 @@ public class LiveUpdateDestination implements Destination{
                             logger.info("jdbc_exec returned: " + results.getString(0));
                         }
                     }
+
+                        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                        try{
+                            results.close();
+                            results.getStatement().close();
+                        }
+                        catch (SQLException sqlExp){
+                            logger.warn("SQL statement results cannot be closed in function _jdbc_sparul_execute");
+                        }
 
                     }
                     this.counterTotalJDBCOperations+=1;

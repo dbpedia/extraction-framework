@@ -221,7 +221,7 @@ public class Hash{
                 //Temp += jdbcResult.getBlob(2);
             }
 
-            jdbcResult.close();
+            //jdbcResult.close();
             //Closing the underlying statement, in order to avoid overwhelming Virtuoso
             try{
                 if(jdbcResult != null){
@@ -301,6 +301,14 @@ public class Hash{
         else
         {
             logger.info(this.Subject + " updated hashes for " + this.newJSONObject.size() + " extractors " + needed);
+        }
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            stmt.close();
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement stmt cannot be closed in function updateDB");
         }
 
         //This code aims to update the table called "dbpedia_triples_for_diff", which enables the calculation of the diff
@@ -436,8 +444,12 @@ public class Hash{
         */
 
 
+        if(this.Subject.contains("/File:")){
+            return;
+        }
+
         CallableStatement updateOldDiffTriplesStsmt = jdbc.prepareCallableStatement("update_dbpedia_triples_diff_for_resource(?,?,?,?)",
-                        "Hash::updateDB");
+                "Hash::updateDB");
 
         String addedTripleString = delta.formulateAddedTriplesAsNTriples(true);
         String deletedTripleString = delta.formulateDeletedTriplesAsNTriples(true);
@@ -446,8 +458,20 @@ public class Hash{
         jdbc.executeCallableStatement(updateOldDiffTriplesStsmt,new String[]{this.Subject, addedTripleString, deletedTripleString
         , modifiedTripleString});
 
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(updateOldDiffTriplesStsmt != null){
+                updateOldDiffTriplesStsmt.close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement cannot be closed");
+        }
+
         boolean hasDelta = (addedTripleString.compareTo("") != 0 && deletedTripleString.compareTo("") != 0)
                 && modifiedTripleString.compareTo("") != 0;
+
+
 
         if(hasDelta){
 
@@ -495,6 +519,14 @@ public class Hash{
             logger.info(this.Subject + " inserted hashes for " + this.newJSONObject.size() + " extractors " + needed);
         }
 
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            stmt.close();
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement stmt cannot be closed in function insertIntoDB");
+        }
+
         //This code aims to update the table called "dbpedia_triples_for_diff", which enables the calculation of the diff
         //for resources in the statistics page.
 
@@ -539,6 +571,26 @@ public class Hash{
         jdbc.executeCallableStatement(insertNewDiffTriplesStsmt,new String[]{this.Subject, Integer.toString(Delta.DiffType.ADDED.getCode()),
                 delta.formulateAddedTriplesAsNTriples(true)});
 
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(deleteOldDiffTriplesStsmt != null){
+                deleteOldDiffTriplesStsmt.close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement deleteOldDiffTriplesStsmt cannot be closed in insertIntoDB");
+        }
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(insertNewDiffTriplesStsmt != null){
+                insertNewDiffTriplesStsmt.close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement insertNewDiffTriplesStsmt cannot be closed in insertIntoDB");
+        }
+
         //Main.
 
 	}
@@ -574,6 +626,14 @@ public class Hash{
         else
         {
             logger.info("Hashes for " + this.Subject + " has been deleted");
+        }
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            stmt.close();
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement stmt cannot be closed in function deleteFromDB");
         }
     }
 
