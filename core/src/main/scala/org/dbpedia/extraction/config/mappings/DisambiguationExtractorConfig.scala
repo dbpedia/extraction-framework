@@ -10,6 +10,7 @@ object DisambiguationExtractorConfig
          "en" -> " (disambiguation)",
          "es" -> " (desambiguación)",
          "it" -> " (disambigua)",
+         "ko" -> " (동음이의)",
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
          "ru" -> " (значения)"
