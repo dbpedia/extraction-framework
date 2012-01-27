@@ -310,67 +310,100 @@
 {{extractiontpl|list-end}}</wikiSyntax>
             </template-->
         </epilogs>
-        <block name="lang" property="http://wiktionary.dbpedia.org/terms/hasLangUsage">
-            <template name="lang-start">
-                <vars>
-                    <var name="language" property="http://purl.org/dc/elements/1.1/language" doMapping="true" type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
-                </vars>
-                <wikiSyntax>== $word \({{Sprache|$language}}\) ==</wikiSyntax>
-            </template>
-            <block name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoSUsage">
-                <template name="pos-start">
-                    <vars>
-                        <var name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoS" doMapping="true" type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
-                    </vars>
-                    <wikiSyntax>=== {{Wortart|$pos|$language}} ===</wikiSyntax>
-                </template>
+        <block name="lang">
+            <indicator name="lang-start">
+                <resultTemplates>
+                    <resultTemplate>
+                        <triples>
+                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-$language" oType="URI" oMapping="true" oNewBlock="true" />
+                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/$language" oType="URI" oMapping="true" />
+                        </triples>
+                    </resultTemplate>
+                </resultTemplates>
+                <wikiTemplate>== $word ({{Sprache|$language}}) ==</wikiTemplate>
+            </indicator>
+            <block name="pos">
+                <indicator name="pos-start">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-$pos" oType="URI" oMapping="true" oNewBlock="true" />
+                                <triple s="$block" p="http://purl.org/dc/elements/1.1/hasPoS" o="http://wiktionary.dbpedia.org/terms/$pos" oType="URI" oMapping="true" />
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>                    
+                    <wikiTemplate>=== {{Wortart|$pos|$language}} ===</wikiTemplate>
+                </indicator>
                 <templates>
                     <template name="example">
-                        <vars>
-                            <var name="example" property="http://wiktionary.dbpedia.org/terms/hasExample" senseBound="true"/>
-                        </vars>
-                        <wikiSyntax>{{Beispiele}}
-
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-$meaningId" oType="URI"/>
+                                    <triple s="$block-$meaningId" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>{{Beispiele}}
 (:~~$meaningId~~ $example
-)
-</wikiSyntax>
+)+
+</wikiTemplate>
                     </template>
                     <template name="hyphenation">
-                        <vars>
-                            <var name="hyphenationSingular" property="http://wiktionary.dbpedia.org/terms/hasHyphenationSingular"/>
-                            <var name="hyphenationPlural" property="http://wiktionary.dbpedia.org/terms/hasHyphenationPlural"/>
-                        </vars>
-                        <wikiSyntax>{{Silbentrennung}}
-:$hyphenationSingular, {{Pl.}} $hyphenationPlural}}
-</wikiSyntax>
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasHyphenationSingular" o="$hyphenationSingular" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasHyphenationPlural" o="$hyphenationPlural" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>{{Silbentrennung}}
+:$hyphenationSingular, {{Pl.}} $hyphenationPlural
+</wikiTemplate>
                     </template>
                     <template name="meaning">
-                        <vars>
-                            <var name="meaning" property="http://wiktionary.dbpedia.org/terms/hasMeaning" senseBound="true" />
-                        </vars>
-                        <wikiSyntax>{{Bedeutungen}}
-
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-$meaningId" oType="URI"/>
+                                    <triple s="$block-$meaningId" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>{{Bedeutungen}}
 (:~~$meaningId~~ $meaning
-)
-</wikiSyntax>
+)+
+</wikiTemplate>
                     </template>
                     <template name="etymology">
-                        <vars>
-                            <var name="etymology" property="http://wiktionary.dbpedia.org/terms/hasEtymology" />
-                        </vars>
-                        <wikiSyntax>{{Herkunft}}
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$etymology" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>{{Herkunft}}
 :$etymology
-</wikiSyntax>
+</wikiTemplate>
                     </template>
                     <template name="proverbs">
-                        <vars>
-                            <var name="proverb" property="http://wiktionary.dbpedia.org/terms/hasProverb" />
-                        </vars>
-                        <wikiSyntax>{{Sprichwörter}}
-
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasProverb" o="$proverb" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>{{Sprichwörter}}
 (:$proverb
-)
-</wikiSyntax>
+)+
+</wikiTemplate>
                     </template>
                     <!--template name="overview">
                         <vars>
@@ -381,17 +414,33 @@ Singular=$flection-singular
 }}</wikiSyntax>
                     </template-->
                     <template name="pronunciation">
-                        <vars>
-                            <var name="audioSingular" property="http://wiktionary.dbpedia.org/terms/hasAudioSingular" type="resource" format="http://uploads.wikimedia/%s"/>
-                            <var name="audioPlural" property="http://wiktionary.dbpedia.org/terms/hasAudioPlural" type="resource" format="http://uploads.wikimedia/%s" />
-                            <var name="pronunciationPlural" property ="http://wiktionary.dbpedia.org/terms/hasPronunciationPlural"/>
-                            <var name="pronunciationSingular" property="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular"/>
-                        </vars>
-                        <wikiSyntax>{{Aussprache}}
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAudioSingular" o="http://uploads.wikimedia/$audioSingular" oType="URI" />
+                                </triples>
+                            </resultTemplate>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAudioPlural" o="http://uploads.wikimedia/$audioPlural" oType="URI" />
+                                </triples>
+                            </resultTemplate>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPronunciationPlural" o="$pronunciationPlural" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular" o="$pronunciationSingular" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                       
+                        <wikiTemplate>{{Aussprache}}
 :~~Hilfe:IPA|IPA~~: {{Lautschrift|$pronunciationSingular}}, {{Pl.}} {{Lautschrift|$pronunciation-plural}}
 :~~Hilfe:Hörbeispiele|Hörbeispiele~~: {{Audio|$audioSingular}}, {{Pl.}} {{Audio|$audio-plural}}
 
-</wikiSyntax>
+</wikiTemplate>
                     </template>
                     <!--template name="reference">
                         <vars>
@@ -410,29 +459,37 @@ Singular=$flection-singular
 (:$source
 )</wikiSyntax>
                     </template-->
-                    <!--template name="translation">
-                        <vars>
-                            <var name="lang"/>
-                            <var name="translation" senseBound="true"/>
-                        </vars>
-                        <wikiSyntax>==== Übersetzungen ====
+                    <template name="translation">
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-$meaningId" oType="URI"/>
+                                    <triple s="$block-$meaningId" p="http://wiktionary.dbpedia.org/terms/hasTranslation" o="http://wiktionary.dbpedia.org/resource/$translation-$lang" oType="URI" oMapping="true"/>
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>==== Übersetzungen ====
 {{Ü-links}}
-(*$lang: ~~$meaningId~~ {{Ü|$lang|$translation}}(, ~~$meaningId~~ {{Ü|$lang|$translation}})
-){{Ü-Abstand}}
-(*$lang: ~~$meaningId~~ {{Ü|$lang|$translation}}(, ~~$meaningId~~ {{Ü|$lang|$translation}})
-)
-{{Ü-rechts}}
-</wikiSyntax>
-                    </template-->
-                    <template name="usage">
-                        <vars>
-                            <var name="usage" property="http://wiktionary.dbpedia.org/terms/hasCharactisticUsage" senseBound="true"/>
-                        </vars>
-                        <wikiSyntax>{{Charakteristische Wortkombinationen}}
+(*$lang: ~~$meaningId~~ {{Ü|$lang|$translation}}(, ~~$meaningId~~ {{Ü|$lang|$translation}})*
+)*{{Ü-Abstand}}
+(*$lang: ~~$meaningId~~ {{Ü|$lang|$translation}}(, ~~$meaningId~~ {{Ü|$lang|$translation}})*
+)*
+{{Ü-rechts}} 
 
-(:$usage
-)
-</wikiSyntax>
+</wikiTemplate>
+                    </template>
+                    <template name="relatedWords">
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasRelatedWord" o="http://wiktionary.dbpedia.org/terms/$word" oType="URI" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>{{Charakteristische Wortkombinationen}}
+(:[[$word]](, [[$word]])*
+)+
+</wikiTemplate>
                     </template>
                 </templates>
             </block>
