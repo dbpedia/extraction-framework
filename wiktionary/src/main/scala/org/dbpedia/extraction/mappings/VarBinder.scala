@@ -24,7 +24,7 @@ object VarBinder {
    * given a template and a page, match the template to the page, return VarBindings
    *
    */
-  def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
+  def parseNodesWithTemplate(tplIt : Stack[Node], pageIt : Stack[Node], varEndMarkers : List[Node] = Nil) : VarBindingsHierarchical = {
     printFuncDump("parseNodesWithTemplate", tplIt, pageIt, 4)
     //used as a backup (in case of a exeption when the template does not match)
     val pageItCopy = pageIt.clone
@@ -38,16 +38,19 @@ object VarBinder {
     val bindings = new VarBindingsHierarchical
     while(tplIt.size > 0 && pageIt.size > 0){
         try {
-          //try to match node-by-node
+          //limit the queue as slinding window
           if(lastResults.size == windowSize){
             lastResults.dequeue()
           }
-          bindings addChild parseNode(tplIt, pageIt)
+          //try to match node-by-node (here the recursion happens)
+          bindings mergeWith parseNode(tplIt, pageIt, varEndMarkers)
+          //add success value to the queue
           lastResults.enqueue(true)
         } catch {
           case e : WiktionaryException => {
             //the template does not match the page
             lastResults.enqueue(false)
+            //check if we reached the failure rate threshold
             val failures = lastResults.count(!_)
             val correct = lastResults.size - failures
             printMsg("failures="+failures+" correct="+correct+" queue="+lastResults, 2)
@@ -56,7 +59,7 @@ object VarBinder {
               printMsg("too many errors", 2)
               pageIt.clear
               pageIt.pushAll(pageItCopy.reverse)  // restore the page
-              bindings addChild e.vars   // merge current bindings with previous and "return" them
+              bindings mergeWith e.vars   // merge current bindings with previous and return them (by throwing a exception containing them)
               throw e.copy(vars=bindings)
             }
           }
@@ -71,7 +74,7 @@ object VarBinder {
    *  if both a normal wikisyntax nodes - check of they match: if true return, if not throw exception
    *  if the template node is a "special node" (indicating e.g. a variable or list), trigger their handling
    */
-  protected def parseNode(tplIt : Stack[Node], pageIt : Stack[Node]) : VarBindingsHierarchical = {
+  protected def parseNode(tplIt : Stack[Node], pageIt : Stack[Node], varEndMarkers : List[Node]) : VarBindingsHierarchical = {
     printFuncDump("parseNode", tplIt, pageIt, 4)
     val bindings = new VarBindingsHierarchical
     val currNodeFromTemplate = tplIt.pop
@@ -100,13 +103,28 @@ object VarBinder {
               val listTpl = tplIt.getList
               //take the node after the list as endmarker of this list
               val endMarkerNode = tplIt.findNextNonTplNode  //that will be the node that follows the list in the template
+              val newVarEndMarkers = ListBuffer[Node]()
+              newVarEndMarkers.appendAll(varEndMarkers)
+              if(listTpl.findNextNonTplNode.isDefined){ //first node of tpl
+                newVarEndMarkers.append(listTpl.findNextNonTplNode.get)
+              }
+              if(endMarkerNode.isDefined){
+                newVarEndMarkers.append(endMarkerNode.get)
+              }
               val listMode = tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
-              bindings addChild parseList(listTpl, pageIt, endMarkerNode, listMode)
+              bindings addChild parseList(listTpl, pageIt, endMarkerNode, listMode, newVarEndMarkers.toList)
             }
             case "list-end" =>    printMsg("end list - you should not see this", 4)
             case "var" => {
               val endMarkerNode = tplIt.findNextNonTplNode
-              val binding = recordVar(currNodeFromTemplate.asInstanceOf[TemplateNode], endMarkerNode, pageIt)
+              val endMarkers = ListBuffer[Node]()
+              if(endMarkerNode.isDefined){
+                endMarkers.append(endMarkerNode.get)
+              } else {
+                //the var has an implicit end (e.g. "(a$x)*b" -> a or b may be endmarkers)
+                endMarkers.appendAll(varEndMarkers)
+              }
+              val binding = recordVar(currNodeFromTemplate.asInstanceOf[TemplateNode], endMarkers.toList, pageIt)
               bindings.addBinding(binding._1, binding._2)
             }
             case "link" => {
@@ -119,13 +137,13 @@ object VarBinder {
                 case eln : ExternalLinkNode => new TextNode(eln.destination.toString, 0)
               }
               //extract from the destination link
-              bindings addChild parseNodesWithTemplate(
+              bindings mergeWith parseNodesWithTemplate(
                 new Stack[Node]() pushAll tplNodeFromTpl.property("2").get.children.reverse,
                 new Stack[Node]() push destination
               )
               if(tplNodeFromTpl.property("3").isDefined){
                 //extract from the label
-                bindings addChild parseNodesWithTemplate(
+                bindings mergeWith parseNodesWithTemplate(
                   new Stack[Node]() pushAll tplNodeFromTpl.property("3").get.children.reverse,
                   new Stack[Node]() pushAll currNodeFromPage.children
                 )
@@ -145,7 +163,7 @@ object VarBinder {
               breakable {
                 for(key <- tplNodeFromTpl.keySet){
                   if(tplNodeFromTpl.property(key).isDefined && tplNodeFromPage.property(key).isDefined){
-                      bindings addChild parseNodesWithTemplate(
+                      bindings mergeWith parseNodesWithTemplate(
                         new Stack[Node]() pushAll tplNodeFromTpl.property(key).get.children.reverse,
                         new Stack[Node]() pushAll tplNodeFromPage.property(key).get.children.reverse
                       )
@@ -196,7 +214,7 @@ object VarBinder {
           if(!(currNodeFromPage.isInstanceOf[SectionNode] && currNodeFromTemplate.isInstanceOf[SectionNode] &&
             currNodeFromPage.asInstanceOf[SectionNode].level != currNodeFromTemplate.asInstanceOf[SectionNode].level)){
             printMsg("same class but not equal. do recursion on children", 4)
-            bindings addChild parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.pop.children.reverse)
+            bindings mergeWith parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.pop.children.reverse)
           } else {
             //sections with different level
             //TODO check canEqual
@@ -213,7 +231,7 @@ object VarBinder {
   /**
    * in the template there can be defined "lists" which are repetitive parts, like in regex: tro(lo)* matches trolololo
    */
-  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node], listMode : String) : VarBindingsHierarchical = {
+  protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node], listMode : String, varEndMarkers : List[Node]) : VarBindingsHierarchical = {
     //printFuncDump("parseList "+name, tplIt, pageIt, 4)
     val bindings = new VarBindingsHierarchical
     val pageCopy = pageIt.clone
@@ -223,7 +241,7 @@ object VarBinder {
         while(pageIt.size > 0 ){
           if(endMarkerNode.isDefined &&
             (
-              (pageIt.size > 0 && pageIt.head.equalsIgnoreLine(endMarkerNode.get)) ||
+              (pageIt.size > 0 && pageIt.head.equalsIgnoreLine(endMarkerNode.get)) ||   
               (pageIt.head.isInstanceOf[TextNode] && endMarkerNode.get.isInstanceOf[TextNode] &&
                 pageIt.head.asInstanceOf[TextNode].text.startsWith(endMarkerNode.get.asInstanceOf[TextNode].text)
               )
@@ -236,7 +254,7 @@ object VarBinder {
           //try to match the list 
           //the parsing consumes the template so for multiple matches we need to duplicate it
           val copyOfTpl = tplIt.clone  
-          bindings addChild parseNodesWithTemplate(copyOfTpl, pageIt)
+          bindings addChild parseNodesWithTemplate(copyOfTpl, pageIt, varEndMarkers)
           counter += 1
         }
       }
@@ -247,7 +265,7 @@ object VarBinder {
     if((counter == 0 && listMode == "+")|| (counter > 1 && listMode == "?")){
         //println("list exception")
         restore(pageIt, pageCopy)
-        throw new WiktionaryException("the list failed", bindings, None)
+        throw new WiktionaryException("the list did not match", bindings, None)
     }
     bindings
   }
@@ -256,74 +274,93 @@ object VarBinder {
    * given a var-node and a page and an optional endmarker, bind the first n nodes to the var,
    * until the endmarker is seen or the page ends. bind means returning a tuple of varname and nodes
    */
-  protected def recordVar(tplVarNode : TemplateNode, possibeEndMarkerNode: Option[Node], pageIt : Stack[Node]) : (String, List[Node]) = {
+  protected def recordVar(tplVarNode : TemplateNode, varEndMarkers : List[Node], pageIt : Stack[Node]) : (String, List[Node]) = {
     val varValue = new ListBuffer[Node]()
     printFuncDump("recordVar", new Stack[Node](), pageIt, 4)
-    if(possibeEndMarkerNode.isEmpty){
+    if(varEndMarkers.isEmpty){
       //when there is no end marker, we take everything we got
-      varValue ++=  pageIt
+      varValue ++= pageIt
       pageIt.clear
       printMsg("no endmarker. taking all.", 4)
     } else {
-      val endMarkerNode = possibeEndMarkerNode.get
-      printMsg("endmarker "+endMarkerNode.dumpStrShort, 4)
+
+      printMsg("endmarkers "+varEndMarkers.map(_.dumpStrShort), 4)
 
       //record from the page till we see the endmarker
-      var endMarkerFound = false
+      var usedEndMarker : Option[Node] = None
       var counter = 0
       breakable {
         while(pageIt.size > 0 ){
           val curNode = pageIt.pop
           //printMsg("curNode "+dumpStrShort(curNode), 4)
 
-          //check for end of the var
+          varEndMarkers.foreach((endMarkerNode : Node) => {
+          //check for occurence of endmarker (end of the var)
           if(endMarkerNode.equalsIgnoreLine(curNode)) {
             //printMsg("endmarker found (equal)", 4)
-            endMarkerFound = true
+            usedEndMarker = Some(endMarkerNode)
+            pageIt push curNode
             break
           } else if(curNode.isInstanceOf[TextNode] && endMarkerNode.isInstanceOf[TextNode]){
-            
+            //this should not happend
             if(curNode.asInstanceOf[TextNode].text.equals(endMarkerNode.asInstanceOf[TextNode].text)){
               //printMsg("endmarker found (string equal)", 4)
-              endMarkerFound = true
+              usedEndMarker = Some(endMarkerNode)
+              pageIt push curNode
               break
             }
-printMsg(">"+endMarkerNode.asInstanceOf[TextNode].text.replace(" ","_").replace("\n","\\n")+"< in "+curNode.asInstanceOf[TextNode].text+(curNode.asInstanceOf[TextNode].text.contains(endMarkerNode.asInstanceOf[TextNode].text)), 4)
+          } 
+          })
+        
+        val markerPositions = varEndMarkers.map((endMarkerNode : Node) => {
+          if(curNode.isInstanceOf[TextNode] && endMarkerNode.isInstanceOf[TextNode]){
             val idx = curNode.asInstanceOf[TextNode].text.indexOf(endMarkerNode.asInstanceOf[TextNode].text)
-            printMsg("idx "+idx, 4)
-            if(idx >= 0){
-              printMsg("endmarker found (substr)", 5)
-              endMarkerFound = true
-              //if the end marker is __in__ the current node . we take what we need
-              val part1 =  curNode.asInstanceOf[TextNode].text.substring(0, idx)  //the endmarker is cut out and thrown away
-              val part2 =  curNode.asInstanceOf[TextNode].text.substring(idx+endMarkerNode.asInstanceOf[TextNode].text.size, curNode.asInstanceOf[TextNode].text.size)
-              if(!part1.isEmpty){
-                 printMsg("var += "+part1, 4)
-                varValue append new TextNode(part1, curNode.line)
-              }
-              //and put the rest back
-              if(!part2.isEmpty){
-                printMsg("putting back >"+part2+"<",4)
-                pageIt.prependString(part2)
-              } else {
-                printMsg("putting nothing back", 4)
-              }
-              break
-            }
+            (idx -> endMarkerNode)
+          }  else {
+            (-1 -> endMarkerNode)
           }
+        }).toMap
+    
+        val markerPositionsFiltered = markerPositions.filter(_._1 >= 0)
+        if(markerPositionsFiltered.size > 0){
+            //the curNode contains a endMarker
+            val endMarkerNode = markerPositionsFiltered.minBy(_._1)._2
+            //take the first occuring endmarker
+            val idx = markerPositionsFiltered.minBy(_._1)._1
+            usedEndMarker = Some(endMarkerNode)
+            printMsg("endmarker found (substr)", 5)
+            //everything until the endmarker is taken
+            val part1 =  curNode.asInstanceOf[TextNode].text.substring(0, idx)  
+            //part2 contains the endmarker followed by the remaining characters
+            val part2 =  curNode.asInstanceOf[TextNode].text.substring(idx, curNode.asInstanceOf[TextNode].text.size)
+              
+            if(!part1.isEmpty){
+              printMsg("var += "+part1, 4)
+              varValue append new TextNode(part1, curNode.line)
+            }
+            //and put the rest back
+            if(!part2.isEmpty){
+              printMsg("putting back >"+part2+"<",4)
+              pageIt.prependString(part2)
+            } 
+            break //stop recording
+        }
+        
+
+          //count how many characters we recorded 
           counter += curNode.toWikiText.size
           if(counter > 1000){
+            //limit
             throw new WiktionaryException("var too big", new VarBindingsHierarchical, None)
           }
-          //not finished, keep recording
+
+          //recording
           varValue append curNode
           printMsg("var += "+curNode, 4)
         }
       }
-      if(!endMarkerFound){
+      if(!usedEndMarker.isDefined){
         throw new WiktionaryException("endMarker of variable not found", new VarBindingsHierarchical, None)
-      } else {
-        pageIt push endMarkerNode
       }
     }
     //return tuple consisting of var name and var value
@@ -364,10 +401,12 @@ class VarBindingsHierarchical (){
       children += sub.reduce //avoids unbranched arms in the tree
     }
   }
+
   def mergeWith(other : VarBindingsHierarchical) = {
     children ++= other.children
     bindings ++= other.bindings
   }
+
   //remove unnecessary deep paths
   def reduce : VarBindingsHierarchical = {
     val copi = new VarBindingsHierarchical
@@ -481,6 +520,20 @@ class VarBindingsHierarchical (){
       println(prefix+"}")
     }
   }
+
+  def getFlat(p : HashMap[String, List[Node]]) : VarBindings = {
+    p ++= bindings //add my bindings
+    val subPaths = new ListBuffer[HashMap[String, List[Node]]]()
+    //foreach child, open a new path
+    children.map((c:VarBindingsHierarchical)=> {val cb = c.getFlat(p.clone).bindings; subPaths appendAll cb})
+
+    if(children.isEmpty){
+      subPaths.append(p)
+    }
+    new VarBindings(subPaths.toList)
+  }
+  def getFlat() : VarBindings = getFlat(new HashMap[String, List[Node]]())
 }
 
+class VarBindings (val bindings : List[HashMap[String, List[Node]]]){}
 

@@ -198,14 +198,14 @@ object ConfigLoader
     {
         val wikiDir = dumpDir
         if(!wikiDir.isDirectory) throw new Exception("Dump directory not found: " + wikiDir)
-
+        
         //Find most recent dump date
         val articlesDump = wikiDir.listFiles()
                    .filter(_.getName.endsWith("-pages-articles.xml"))
                    .sortWith(_.lastModified() > _.lastModified())
-                   .headOption.getOrElse(throw new Exception("No dump found for Wiki: " + wikiPrefix))
+                   .headOption.getOrElse(throw new Exception("No dump file in: " + wikiDir.getName))
 
-        if(!articlesDump.isFile) throw new Exception("Dump not found: " + articlesDump)
+        if(!articlesDump.isFile) throw new Exception("Dump is not a file: " + articlesDump.getName)
 
         articlesDump
     }

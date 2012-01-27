@@ -164,6 +164,10 @@ val datatype : Datatype )
 		}
 		sb.toString
 	}
+
+    override def equals(obj:Any) : Boolean = {
+        obj.isInstanceOf[Quad] && obj.asInstanceOf[Quad].renderNQuad.equals(this.renderNQuad)
+    }
 }
 
 object Quad
