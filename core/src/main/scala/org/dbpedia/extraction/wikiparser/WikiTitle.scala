@@ -167,7 +167,7 @@ object WikiTitle
         "Mapping el" -> Namespace.Mapping_el,
         "Mapping es" -> Namespace.Mapping_es,
         "Mapping fr" -> Namespace.Mapping_fr,
-        "Mapping ga" -> Namespace.Mapping_ga
+        "Mapping ga" -> Namespace.Mapping_ga,
         "Mapping hr" -> Namespace.Mapping_hr,
         "Mapping hu" -> Namespace.Mapping_hu,
         "Mapping it" -> Namespace.Mapping_it,
