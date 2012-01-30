@@ -118,6 +118,7 @@ object WikiTitle
         val Mapping_pt = Value(218)
         val Mapping_pl = Value(220)
         val Mapping_ru = Value(222)
+        val Mapping_cs = Value(224)
         val Mapping_ca = Value(226)
         val Mapping_hu = Value(238)
         val Mapping_ko = Value(242)
@@ -133,22 +134,23 @@ object WikiTitle
             language.wikiCode match
             {
                 case "en" => Some(Namespace.Mapping)
-                case "de" => Some(Namespace.Mapping_de)
-                case "fr" => Some(Namespace.Mapping_fr)
-                case "it" => Some(Namespace.Mapping_it)
-                case "es" => Some(Namespace.Mapping_es)
-                case "nl" => Some(Namespace.Mapping_nl)
-                case "pt" => Some(Namespace.Mapping_pt)
-                case "pl" => Some(Namespace.Mapping_pl)
-                case "ru" => Some(Namespace.Mapping_ru)
                 case "ca" => Some(Namespace.Mapping_ca)
-                case "hu" => Some(Namespace.Mapping_hu)
-                case "ko" => Some(Namespace.Mapping_ko)
-                case "tr" => Some(Namespace.Mapping_tr)
-                case "sl" => Some(Namespace.Mapping_sl)
-                case "hr" => Some(Namespace.Mapping_hr)
+                case "cs" => Some(Namespace.Mapping_cs)
+                case "de" => Some(Namespace.Mapping_de)
                 case "el" => Some(Namespace.Mapping_el)
+                case "es" => Some(Namespace.Mapping_es)
+                case "fr" => Some(Namespace.Mapping_fr)
                 case "ga" => Some(Namespace.Mapping_ga)
+                case "hr" => Some(Namespace.Mapping_hr)
+                case "hu" => Some(Namespace.Mapping_hu)
+                case "it" => Some(Namespace.Mapping_it)
+                case "ko" => Some(Namespace.Mapping_ko)
+                case "nl" => Some(Namespace.Mapping_nl)
+                case "pl" => Some(Namespace.Mapping_pl)
+                case "pt" => Some(Namespace.Mapping_pt)
+                case "ru" => Some(Namespace.Mapping_ru)
+                case "sl" => Some(Namespace.Mapping_sl)
+                case "tr" => Some(Namespace.Mapping_tr)
                 case _ => None
             }
         }
@@ -159,22 +161,23 @@ object WikiTitle
         "OntologyClass" -> Namespace.OntologyClass,
         "OntologyProperty" -> Namespace.OntologyProperty,
         "Mapping" -> Namespace.Mapping,
-        "Mapping de" -> Namespace.Mapping_de,
-        "Mapping fr" -> Namespace.Mapping_fr,
-        "Mapping it" -> Namespace.Mapping_it,
-        "Mapping es" -> Namespace.Mapping_es,
-        "Mapping nl" -> Namespace.Mapping_nl,
-        "Mapping pt" -> Namespace.Mapping_pt,
-        "Mapping pl" -> Namespace.Mapping_pl,
-        "Mapping ru" -> Namespace.Mapping_ru,
         "Mapping ca" -> Namespace.Mapping_ca,
-        "Mapping hu" -> Namespace.Mapping_hu,
-        "Mapping ko" -> Namespace.Mapping_ko,
-        "Mapping tr" -> Namespace.Mapping_tr,
-        "Mapping sl" -> Namespace.Mapping_sl,
-        "Mapping hr" -> Namespace.Mapping_hr,
+        "Mapping cs" -> Namespace.Mapping_cs,
+        "Mapping de" -> Namespace.Mapping_de,
         "Mapping el" -> Namespace.Mapping_el,
+        "Mapping es" -> Namespace.Mapping_es,
+        "Mapping fr" -> Namespace.Mapping_fr,
         "Mapping ga" -> Namespace.Mapping_ga
+        "Mapping hr" -> Namespace.Mapping_hr,
+        "Mapping hu" -> Namespace.Mapping_hu,
+        "Mapping it" -> Namespace.Mapping_it,
+        "Mapping ko" -> Namespace.Mapping_ko,
+        "Mapping nl" -> Namespace.Mapping_nl,
+        "Mapping pl" -> Namespace.Mapping_pl,
+        "Mapping pt" -> Namespace.Mapping_pt,
+        "Mapping ru" -> Namespace.Mapping_ru,
+        "Mapping sl" -> Namespace.Mapping_sl,
+        "Mapping tr" -> Namespace.Mapping_tr
     )
 
     private val reverseCustomNamespaces = customNamespaces.map{case (name, code) => (code, name)}.toMap
