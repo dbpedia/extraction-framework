@@ -7,7 +7,7 @@ import org.dbpedia.extraction.mappings._
 class Configuration
 {
     /** The extraction languages */
-    val languages = Set("en", "de", "fr", "pl", "it", "es", "ru", "pt", "nl", "ca", "hu", "ko", "tr", "sl", "hr", "el", "ga").flatMap(Language.fromWikiCode(_))
+    val languages = Set("en", "de", "fr", "pl", "it", "es", "ru", "pt", "nl", "ca", "hu", "ko", "tr", "sl", "hr", "el", "ga", "cs").flatMap(Language.fromWikiCode(_))
 
     /** The extractors */
     val extractors = List(
