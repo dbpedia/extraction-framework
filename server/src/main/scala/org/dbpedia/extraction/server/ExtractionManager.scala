@@ -83,7 +83,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         logHandler.setLevel(Level.WARNING)
         Logger.getLogger(classOf[OntologyReader].getName).addHandler(logHandler)
 
-        val newOntologyPagesMap = newOntologyPages.map(parser(_)).map(page => (page.title, page)).toMap
+        val newOntologyPagesMap = newOntologyPages.map(parser).map(page => (page.title, page)).toMap
         val updatedOntologyPages = (ontologyPages ++ newOntologyPagesMap).values
 
         //Load ontology
