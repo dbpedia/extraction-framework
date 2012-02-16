@@ -39,6 +39,14 @@
                             </jvmArgs>
                             <!-- mvn scala:run -Dlauncher=Compress "-DaddArgs=/data|/data-compressed" -->
                         </launcher>
+
+                        <launcher>
+                            <id>Download</id>
+                            <mainClass>org.dbpedia.extraction.dump.Download</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx1024m</jvmArg>
+                            </jvmArgs>
+                        </launcher>
                     </launchers>
                 </configuration>
 
