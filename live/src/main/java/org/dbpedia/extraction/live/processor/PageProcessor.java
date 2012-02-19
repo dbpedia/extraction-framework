@@ -104,13 +104,13 @@ public class PageProcessor extends Thread{
 
 //                    if(!Main.pageQueue.isEmpty()){
 //                    PagePriority requiredPage = Main.pageQueue.peek();
-                System.out.println("Page # " + requiredPage + " has been removed and processed");
 
                 //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
                 if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
                     Main.existingPagesTree.remove(requiredPage.pageID);
                     processPage(requiredPage.pageID);
                 }
+                System.out.println("Page # " + requiredPage + " has been removed and processed");
 //                    Main.pageQueue.remove();
 
                 //Write response date to file in both cases of live update and mapping update
