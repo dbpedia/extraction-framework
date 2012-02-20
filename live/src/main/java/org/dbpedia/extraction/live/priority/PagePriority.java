@@ -3,8 +3,8 @@ package org.dbpedia.extraction.live.priority;
 
 import org.apache.log4j.Logger;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,27 +19,41 @@ public class PagePriority implements Comparable<PagePriority>{
 
     private static Logger logger = Logger.getLogger(PagePriority.class);
 
-
     public long pageID;
     public Priority pagePriority;
-    public String lastResponseDate;
-//    private final long timestamp=0;
+//    public String lastResponseDate;
+    private long lastResponseDate = 0;
+
+
 
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-    public PagePriority(long pageid, Priority priority, String responseDate){
+    public PagePriority(long pageid, Priority priority, long responseDate){
         pageID = pageid;
         pagePriority = priority;
         lastResponseDate = responseDate;
     }
 
+    public PagePriority(long pageid, Priority priority, String responseDate){
+        pageID = pageid;
+        pagePriority = priority;
+        try{
+            lastResponseDate = dateFormatter.parse(responseDate).getTime();
+        }
+        catch (ParseException exp){
+            logger.error("Unable to parse the passed date due to " + exp.getMessage());
+        }
+
+    }
+
+
     public PagePriority(long pageid, Priority priority){
-        this(pageid, priority, "");
+        this(pageid, priority, 0);
     }
 
     //We should compare the priorities of the pages by the boolean flag, and if they have the same boolean flag
     //we use the timestamp associated with each one, in order to make sure that the one with the least timestamp
-    //will be processed first. as the performnace of
+    //will be processed first. as the performance of
     public int compareTo(PagePriority page){
         if(this.pagePriority != page.pagePriority){
 //            return this.pagePriority.compareTo(page.pagePriority);
@@ -64,16 +78,16 @@ public class PagePriority implements Comparable<PagePriority>{
                 long diff = System.nanoTime() - startTime;
                 logger.info("COMPARISON PERIOD = " + diff);*/
 
-                Date thisPageDate = dateFormatter.parse(this.lastResponseDate);
+//                Date thisPageDate = dateFormatter.parse(this.lastResponseDate);
 
-                Date requiredPageDate = dateFormatter.parse(page.lastResponseDate);
+//                Date requiredPageDate = dateFormatter.parse(page.lastResponseDate);
 
                 //compare the two dates
 
 //                int comparison = thisPageDate.compareTo(requiredPageDate);
 
 
-                return thisPageDate.compareTo(requiredPageDate);
+                return (this.lastResponseDate<page.getLastResponseDate() ? -1 : (this.lastResponseDate==page.getLastResponseDate()? 0 : 1));
 //                return page.getTimestamp() > this.timestamp:
             }
             catch (Exception exp){
@@ -84,8 +98,8 @@ public class PagePriority implements Comparable<PagePriority>{
 
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public long getLastResponseDate() {
+        return lastResponseDate;
     }
 
     public String toString(){
