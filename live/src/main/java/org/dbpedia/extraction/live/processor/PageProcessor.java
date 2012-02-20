@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.live.processor;
 
 import ORG.oclc.oai.harvester2.verb.GetRecord;
-import ch.epfl.lamp.util.ByteArray;
-import com.hp.hpl.jena.sparql.util.Base64;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
@@ -14,10 +12,11 @@ import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.sources.Source;
 import org.dbpedia.extraction.sources.XMLSource;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.w3c.dom.Document;
 import scala.xml.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,6 +32,7 @@ import java.util.regex.Pattern;
 public class PageProcessor extends Thread{
     
     private static Logger logger = Logger.getLogger(PageProcessor.class);
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     public PageProcessor(String name, int priority){
         this.setPriority(priority);
@@ -93,14 +93,8 @@ public class PageProcessor extends Thread{
     public void run(){
         while(true){
             try{
-                PagePriority requiredPage = Main.pageQueue.poll();
+                PagePriority requiredPage = Main.pageQueue.take();
 
-//                logger.info("Reached");
-                if(requiredPage == null)
-                {
-                    Thread.sleep(100);
-                    continue;
-                }
 
 //                    if(!Main.pageQueue.isEmpty()){
 //                    PagePriority requiredPage = Main.pageQueue.peek();
@@ -113,13 +107,14 @@ public class PageProcessor extends Thread{
                 System.out.println("Page # " + requiredPage + " has been removed and processed");
 //                    Main.pageQueue.remove();
 
+
                 //Write response date to file in both cases of live update and mapping update
                 if(requiredPage.pagePriority == Priority.MappingPriority)
                     LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
-                            requiredPage.lastResponseDate);
+                            dateFormatter.format(new Date(requiredPage.getLastResponseDate())));
                 else if(requiredPage.pagePriority == Priority.LivePriority)
                     LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
-                                        requiredPage.lastResponseDate);
+                            dateFormatter.format(new Date(requiredPage.getLastResponseDate())));
 
 //                }
 
