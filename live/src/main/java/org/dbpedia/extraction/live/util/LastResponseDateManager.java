@@ -1,17 +1,12 @@
 package org.dbpedia.extraction.live.util;
 
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.core.Util;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,7 +30,6 @@ public class LastResponseDateManager {
      * @param strFileName
      * @return
      */
-    @Deprecated
     public static String getLastResponseDate(String strFileName)
     {
         // TODO Actually, we should get a file-object here in the first place
