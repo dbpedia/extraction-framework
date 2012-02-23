@@ -22,7 +22,7 @@ import MyNode._
 import MyStack._
 import TimeMeasurement._
 import VarBinder._
-import WiktionaryLogging._
+import Logging._
 
 /**
  * parses (wiktionary) wiki pages
@@ -34,8 +34,7 @@ import WiktionaryLogging._
  * this is done via xml containing wikisyntax snippets (called templates) containing placeholders (called variables), which are then bound
  *
  * we also extended this approach to match the wiktionary schema
- * a page can contain information about multiple entities (sequential blocks), each having multiple contexts/emittedBlockSenseConnections
- * other use cases (non-wiktionary), can be seen as a special case, having only one block (entity) and one sense
+ * a page can contain information about multiple entities (sequential blocks)
  *
  * @author Jonas Brekle <jonas.brekle@gmail.com>
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
@@ -59,25 +58,23 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   val langObj = new Language(language, new Locale(language))
 
   val vf = ValueFactoryImpl.getInstance
-  WiktionaryLogging.level = logLevel
-  WiktionaryLogging.printMsg("wiktionary loglevel = "+logLevel,0)
+  Logging.level = logLevel
+  Logging.printMsg("wiktionary loglevel = "+logLevel,0)
 
   val ns =            properties.get("ns").getOrElse("http://undefined.com/")
   val blockProperty = properties.get("blockProperty").getOrElse("http://undefined.com/block")
-  val senseProperty = properties.get("senseProperty").getOrElse("http://undefined.com/sense")
-  val senseIdVarName = properties.get("senseVarName").getOrElse("meaningId")
   val labelProperty = properties.get("labelProperty").getOrElse("http://undefined.com/label")
   val varPattern = new Regex("\\$[a-zA-Z0-9]+")
 
   private val languageConfig = XML.loadFile("config-"+language+".xml")
 
   private val mappings : Map[String, String] = (languageConfig \\ "mapping").map(
-      (n : XMLNode) => //language specific mappings (from language to global vocabulary)
+      (n : XMLNode) => //language specific mappings (from language ("Spanisch") to global vocabulary ("spanish"))
         ( (n \ "@from").text,
           (n \ "@to").text
         )
       ).toMap ++ (config \ "mappings"\ "mapping").map(
-      (n : XMLNode) => // general mappings (from language codes to global vocabulary)
+      (n : XMLNode) => // general mappings (from language codes ("es") to global vocabulary ("spanish"))
         ( (n \ "@from").text,
           (n \ "@to").text
         )
@@ -88,9 +85,8 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
   val pageConfig = new Page((languageConfig \ "page")(0))
 
-  val wiktionaryDataset : Dataset = new Dataset("wiktionary.dbpedia.org")
+  val datasetURI : Dataset = new Dataset("wiktionary.dbpedia.org")
   val tripleContext = vf.createURI(ns.replace("http://","http://"+language+"."))
-  val senseIriRef = vf.createURI(senseProperty)
 
   val missingMappings = Set[String]()
   val usedMappings = Set[String]()
@@ -109,45 +105,43 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     counter += 1 
 
     val quads = new ListBuffer[Quad]()
-    val word = subjectUri.split("/").last
+    val entityId = subjectUri.split("/").last
 
     //skip some useless pages    
     for(start <- ignoreStart){
-        if(word.startsWith(start)){
+        if(entityId.startsWith(start)){
             return new Graph(quads.toList)
         }
     }
     for(end <- ignoreEnd){
-        if(word.endsWith(end)){
+        if(entityId.endsWith(end)){
             return new Graph(quads.toList)
         }
     }
 
-    val senses = HashMap[String, Set[String]]()
-
-    WiktionaryLogging.printMsg("processing "+word, 1)
+    Logging.printMsg("processing "+entityId, 1)
 
     //to cache last used blockIris (from block name to its uri)
     val blockIris = new HashMap[String, URI]
     measure {
       
-      blockIris("page") = vf.createURI(ns + URLEncoder.encode(word, "UTF-8")) //this is also the base-url (all nested blocks will get uris with this as a prefix)
+      blockIris("page") = vf.createURI(ns + URLEncoder.encode(entityId, "UTF-8")) //this is also the base-url (all nested blocks will get uris with this as a prefix)
 
-      quads append new Quad(langObj, wiktionaryDataset, blockIris("page"), vf.createURI(labelProperty), vf.createLiteral(word), tripleContext)
+      quads append new Quad(langObj, datasetURI, blockIris("page"), vf.createURI(labelProperty), vf.createLiteral(entityId), tripleContext)
 
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse)
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
       for(prolog <- languageConfig \ "page" \ "prologs" \ "template"){
         val prologtpl = Tpl.fromNode(prolog)
-        WiktionaryLogging.printMsg("try "+prologtpl.name, 2)
+        Logging.printMsg("try "+prologtpl.name, 2)
          try {
           proAndEpilogBindings.append( (prologtpl, parseNodesWithTemplate(prologtpl.wiki, pageStack)) )
         } catch {
           case e : WiktionaryException => proAndEpilogBindings.append( (prologtpl, e.vars) )
         }
       }
-      WiktionaryLogging.printMsg(proAndEpilogBindings.size+ " prologs configured", 2)
+      Logging.printMsg(proAndEpilogBindings.size+ " prologs configured", 2)
 
       //handle epilog (ending) (e.g. "links to other languages") by parsing the page backwards
       val rev = new Stack[Node] pushAll pageStack //reversed
@@ -159,7 +153,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           case e : WiktionaryException => proAndEpilogBindings.append( (epilogtpl, e.vars) )
         }
       }
-      WiktionaryLogging.printMsg(proAndEpilogBindings.size+ " prologs and epilogs found", 2)
+      Logging.printMsg(proAndEpilogBindings.size+ " prologs and epilogs found", 2)
 
       //apply consumed nodes (from the reversed page) to pageStack  (unreversed)
       pageStack.clear
@@ -169,7 +163,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
          quads appendAll handleFlatBindings(pageConfig, tpl, tplBindings.getFlat(), blockIris, blockIris("page").stringValue)
       }})
-      WiktionaryLogging.printMsg("pro- and epilog bindings handled", 2)
+      Logging.printMsg("pro- and epilog bindings handled", 2)
 
       //keep track where we are in the page block hierarchy
       val curOpenBlocks = new ListBuffer[Block]()
@@ -179,7 +173,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       //keep track if we consumed at least one node in this while run - if not, drop one node at the end
       var consumed = false
       while(pageStack.size > 0){
-        WiktionaryLogging.printMsg("page node: "+pageStack.head.toWikiText(), 2)
+        Logging.printMsg("page node: "+pageStack.head.toWikiText(), 2)
         consumed = false
 
         val possibleBlocks = curOpenBlocks.map(_.blocks).foldLeft(List[Block]()){ _ ::: _ } //:: pageConfig
@@ -190,7 +184,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         //try matching this blocks templates
         for(tpl <- curBlock.templates){
         //for(tpl <- possibleTemplates){
-          WiktionaryLogging.printMsg("trying template "+tpl.name, 2)
+          Logging.printMsg("trying template "+tpl.name, 2)
 
           //println(pageStack.take(1).map(_.dumpStrShort).mkString)
           try {
@@ -199,7 +193,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
             val blockBindings =  parseNodesWithTemplate(tpl.wiki.clone, pageStack)
             //no exception -> success -> stuff below here will be executed on success
             consumed = true
-            WiktionaryLogging.printMsg("finished template "+tpl.name+" successfully", 2)
+            Logging.printMsg("finished template "+tpl.name+" successfully", 2)
 
             //generate triples
             //println(tpl.name +": "+ blockBindings.dump())
@@ -214,7 +208,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           // each block has a "indicator-template" (indTpl)
           // when it matches, the block starts. and from that template we get bindings that describe the block
 
-          WiktionaryLogging.printMsg("trying block indicator templates. page node: "+pageStack.head.toWikiText, 2)
+          Logging.printMsg("trying block indicator templates. page node: "+pageStack.head.toWikiText, 2)
           breakable {
             for(block <- possibleBlocks){
               if(block.indTpl == null){
@@ -229,7 +223,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                   consumed = true
                   var oldBlockUri = blockIris(curBlock.name).stringValue
                   curBlock = block //switch to new block
-                  WiktionaryLogging.printMsg("block indicator template "+block.indTpl.name+" matched", 2)
+                  Logging.printMsg("block indicator template "+block.indTpl.name+" matched", 2)
                   
                   //check where in the hierarchy the new opended block is
                   if(!curOpenBlocks.contains(block)){
@@ -256,30 +250,29 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           }
         }
         if(!consumed){
-          WiktionaryLogging.printMsg("skipping unconsumable node ", 2)
+          Logging.printMsg("skipping unconsumable node ", 2)
           pageStack.pop
         }
       }
 
     } report {
-      duration : Long => WiktionaryLogging.printMsg("took "+ duration +"ms", 1)
+      duration : Long => Logging.printMsg("took "+ duration +"ms", 1)
     }
     
     if(missingMappings.diff(missingMappingsT).size > 0){
-      WiktionaryLogging.printMsg("missing mapping: "+missingMappings.diff(missingMappingsT).toString,1)
+      Logging.printMsg("missing mapping: "+missingMappings.diff(missingMappingsT).toString,1)
       missingMappings ++= missingMappings.diff(missingMappingsT)
     }
     missingMappings ++= missingMappingsT
 
     if(counter == 100000){
-       WiktionaryLogging.printMsg("unused mapping: "+mappings.keySet.--(usedMappings),1)
+       Logging.printMsg("unused mapping: "+mappings.keySet.--(usedMappings),1)
     }
 
-    WiktionaryLogging.printMsg(""+quads.size+" quads extracted for "+word, 1)
-    val seen : Set[Quad] = Set()
-    val quadsSorted = quads.groupBy(_.renderNTriple).map(_._2.head).toList.sortWith((q1, q2)=> q1.renderNTriple.compareTo(q2.renderNTriple) > 0)
-    quadsSorted.foreach( q => { WiktionaryLogging.printMsg(q.renderNTriple, 1) } )
-    new Graph(quadsSorted)
+    Logging.printMsg(""+quads.size+" quads extracted for "+entityId, 1)
+    val quadsSortedDistinct = quads.groupBy(_.renderNTriple).map(_._2.head).toList.sortWith((q1, q2)=> q1.renderNTriple.compareTo(q2.renderNTriple) > 0)
+    quadsSortedDistinct.foreach( q => { Logging.printMsg(q.renderNTriple, 1) } )
+    new Graph(quadsSortedDistinct)
   }
 
   def handleFlatBindings(block : Block, tpl : Tpl, blockBindings : VarBindings, blockIris : HashMap[String, URI], thisBlockIri : String) : List[Quad] = {
@@ -287,7 +280,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     val bindings = blockBindings.bindings
     var curBlockIri = thisBlockIri
     bindings.foreach( (binding : HashMap[String, List[Node]]) => {
-      WiktionaryLogging.printMsg("bindings "+binding, 2)
+      Logging.printMsg("bindings "+binding, 2)
       tpl.resultTemplates.foreach( (rt : ResultTemplate) => {
         try {
           val thisTplQuads = new ListBuffer[Quad]
@@ -326,24 +319,24 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                 } else {curBlockIri}
               }
             )
-            WiktionaryLogging.printMsg("emmiting triple "+s+" "+p+" "+o, 2)
+            Logging.printMsg("emmiting triple "+s+" "+p+" "+o, 2)
             val oObj = if(tt.oType == "URI"){
                 val blockIri = vf.createURI(o)
                 if(tt.oNewBlock){
                   blockIris(block.name) = blockIri //save for later
-                  WiktionaryLogging.printMsg("entering "+blockIri, 2)
+                  Logging.printMsg("entering "+blockIri, 2)
                   curBlockIri = o
                 }
                 blockIri
               } else {
                 vf.createLiteral(o)
               }
-            thisTplQuads += new Quad(langObj, wiktionaryDataset, vf.createURI(s), vf.createURI(p), oObj, tripleContext)
+            thisTplQuads += new Quad(langObj, datasetURI, vf.createURI(s), vf.createURI(p), oObj, tripleContext)
           })
           quads appendAll thisTplQuads //the triples are added at once after they all were created without a exception
         } catch {
-          case e1:java.util.NoSuchElementException => e1.printStackTrace
-          case e => println(e)
+          case e1:java.util.NoSuchElementException => //e1.printStackTrace
+          case e => //println(e)
         }
       })
     })

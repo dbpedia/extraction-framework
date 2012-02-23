@@ -246,7 +246,7 @@ object MyString {
   implicit def MyString2String(s : MyString) : String = s.str
 }
 
-object WiktionaryLogging {
+object Logging {
   var level = 0  // will be read from config and then overwritten
   val st_depth_start = new Exception("").getStackTrace.length + 1
 
