@@ -478,6 +478,25 @@ Singular=$flection-singular
 
 </wikiTemplate>
                     </template>
+                    <template name="translation2">
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-$meaningId" oType="URI"/>
+                                    <triple s="$block-$meaningId" p="http://wiktionary.dbpedia.org/terms/hasTranslation" o="http://wiktionary.dbpedia.org/resource/$translation-$lang" oType="URI" oMapping="true"/>
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>==== Übersetzungen ====
+{{Ü-links}}
+(*$lang: ~~$meaningId~~ {{Ü|$lang|$translation}}(, ~~$meaningId~~ {{Ü|$lang|$translation}})*
+)*{{Ü-Abstand}}
+(*$lang: ~~$meaningId~~ {{Ü|$lang|$translation}}(, ~~$meaningId~~ {{Ü|$lang|$translation}})*
+)*
+{{Ü-rechts}}
+
+</wikiTemplate>
+                    </template>
                     <template name="relatedWords">
                         <resultTemplates>
                             <resultTemplate>

@@ -8,7 +8,7 @@ import xml.{XML, Node => XMLNode}
 //some of my utilities
 import MyStack._
 import MyNode._
-import WiktionaryLogging._
+import Logging._
 
 /**
  * static functions composing a mechanism to match a template (containing variables) to a actual page, and bind values to the variables
@@ -453,55 +453,6 @@ class VarBindingsHierarchical (){
       }
       return otherBindings.toList //to immutable
     }
-  }
-
-  /**
-   * given a variable name of a sense-bound var, retrieve a mapping from sense-identifier to binding (distinct)
-   */
-  def getFirstSenseBoundVarBinding(key : String, meaningIdVarName : String) : Map[List[Node], List[Node]] = {
-    val ret = new HashMap[List[Node], List[Node]]()
-    for(child <- children){
-      if(child.bindings.contains(key)){
-        val binding = child.bindings(key)
-        //TODO expand notations like "[1-3] xyz" to "[1] xyz\n[2] xyz\n[3} xyz"
-        val sense = getFirstBinding(meaningIdVarName);
-        if(sense.isDefined){
-          ret += (sense.get -> binding)
-        }
-      } else {
-        ret ++= child.getFirstSenseBoundVarBinding(key, meaningIdVarName)
-      }
-    }
-    ret
-  }
-
-  /**
-   * given a variable name of a sense-bound var, retrieve a mapping from sense-identifier to binding (with multiple values)
-   */
-  def getAllSenseBoundVarBindings(key : String, meaningIdVarName : String) : Map[List[Node], ListBuffer[List[Node]]] = {
-    val ret =  new HashMap[List[Node], ListBuffer[List[Node]]]()
-    for(child <- children){
-      if(child.bindings.contains(key)){
-        val binding = child.bindings(key)
-        //TODO expand notations like "[1-3] xyz" to "[1] xyz\n[2] xyz\n[3} xyz"
-        val sense = getFirstBinding(meaningIdVarName);
-        if(sense.isDefined){
-          if(!ret.contains(sense.get)){
-            ret += (sense.get -> new ListBuffer[List[Node]]())
-          }
-          ret(sense.get).append(binding)
-        }
-      } else {
-        val childBindings = child.getAllSenseBoundVarBindings(key, meaningIdVarName)
-        childBindings.foreach({case(sense, bindings) => {
-          if(!ret.contains(sense)){
-            ret += (sense -> new ListBuffer[List[Node]]())
-          }
-          ret(sense).appendAll(bindings)
-        }})
-      }
-    }
-    ret
   }
 
   /**
