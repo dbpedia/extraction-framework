@@ -3,21 +3,59 @@ package org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.OntologyProperty
 import java.io.CharConversionException
+import org.openrdf.model._
+import java.io.CharConversionException
+import java.io.CharConversionException
 import org.dbpedia.extraction.util.Language
 
 /**
- * Represents a statement in the N-Quads format (see: http://sw.deri.org/2008/07/n-quads/)
+ * Represents a statement in the N-Quads format
+ * @see http://sw.deri.org/2008/07/n-quads/
  */
 //TODO write out equivalent properties
 class Quad(	val language : Language,
-            val dataset : Dataset,
-            val subject : String,
-		    val predicate : String,
-		    val value : String,
-		    val context : String,
-		    var datatype : Datatype )
+val dataset : Dataset,
+val subject : String,
+val predicate : String,
+val value : String,
+val context : String,
+val datatype : Datatype )
 {
-    //Validate input
+
+  //a constructor for OntologyProperty
+  def this(language : Language,
+           dataset : Dataset,
+           subject : String,
+           predicate : OntologyProperty,
+           value : String,
+           context : String,
+           datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
+
+  //a constructor for openrdf
+  def this(language : Language,
+           dataset : Dataset,
+           subject : Resource,
+           predicate : URI,
+           value : Value,
+           context : Resource) = {
+      this(
+          language, 
+          dataset, 
+          subject.stringValue, 
+          predicate.stringValue, 
+          value.stringValue, 
+          context.stringValue, 
+          if(value.isInstanceOf[Literal] && value.asInstanceOf[Literal].getDatatype != null){
+            new Datatype(value.asInstanceOf[Literal].getDatatype.toString)
+          } else if(value.isInstanceOf[Literal]) {
+            new Datatype("xsd:string")
+          } else {
+            null
+          }
+      )
+  }
+
+  //Validate input
 	if(subject == null) throw new NullPointerException("subject")
 	if(predicate == null) throw new NullPointerException("predicate")
 	if(value == null) throw new NullPointerException("value")
@@ -25,83 +63,50 @@ class Quad(	val language : Language,
 
     if(value.isEmpty) throw new IllegalArgumentException("Value is empty")
 
-    //TODO validate them on creation, now can be either URI/IRI
+	//what does that do? is it just to trigger exceptions?
 	//new URI(subject)
 	//new URI(context)
 	//if(datatype == null) new URI(value)
 
-    def this(language : Language,
-             dataset : Dataset,
-             subject : String,
-		     predicate : OntologyProperty,
-		     value : String,
-		     context : String,
-		     datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
+  def renderNTriple = render(false)
+    
+  def renderNQuad = render(true)
+    
+  override def toString = renderNQuad
+    
+  private def render(includeContext : Boolean) : String =
+  {
+    "<" + subject + "> <" + predicate + "> " +
+	  (if (datatype != null) {
+			if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string"){
+				"\"" +
+				escapeString(value) + 
+				"\"" +
+				"@" + language.locale.getLanguage
+			} else {
+				"\"" +
+				escapeString(value) + 
+				"\"" +
+				"^^<" + datatype.uri + ">"
+			}
+		} else {
+				"<" +
+				(if(predicate == "http://xmlns.com/foaf/0.1/homepage"){
+					escapeString(value) 
+				} else {
+					value
+				}) +
+				">"
+    })    +  " " +
+    (if (includeContext){ "<" + context +  "> "  } else {""}) + ". "
+  }
 
-
-    def renderNTriple = render(false)
-
-    def renderNQuad = render(true)
-
-    override def toString = renderNQuad
-
-    private def render(includeContext : Boolean) : String =
-    {
-    	val sb = new StringBuilder
-
-        sb append "<" append subject append "> "
-
-        sb append "<" append predicate append "> "
-
-        if (datatype != null)
-        {
-            if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string")
-            {
-            	sb append '"'
-            	escapeString(sb, value) //sb append value //#int escapeString(sb, value)
-            	sb append "\""
-
-                sb append "@" + language.locale.getLanguage + " "
-            }
-            else
-            {
-                sb append '"'
-                escapeString(sb, value) //sb append value //#int 
-                sb append "\"^^<"
-                escapeString(sb, datatype.uri)
-                sb append "> "
-            }
-        }
-        else
-        {
-            sb append '<'
-
-            //HACK
-            //TODO find a good solution for this
-            //maybe we should have DBpediaURI and OtherURI as well as Literal objects?
-            if(predicate == "http://xmlns.com/foaf/0.1/homepage")
-                escapeString(sb, value) // escape unicode in homepage URI
-            else
-                sb append value //this must not be escaped, it is a URI/IRI
-
-            sb append "> "
-        }
-
-        if (includeContext)
-        {
-            sb append '<' append context append "> "
-        }
-
-        sb append '.'
-
-        sb.toString()
-    }
-
-	/**
+    /**
 	 * Escapes an unicode string according to N-Triples format
-	 */
-	private def escapeString(sb : StringBuilder, input : String) : StringBuilder =
+	*/
+	private def escapeString(input : String) : String =
 	{
+		val sb = new StringBuilder
         // iterate over code points (http://blogs.sun.com/darcy/entry/iterating_over_codepoints)
         val inputLength = input.length
         var offset = 0
@@ -157,8 +162,12 @@ class Quad(	val language : Language,
 				sb append hexStr
 			}
 		}
-		sb
+		sb.toString
 	}
+
+    override def equals(obj:Any) : Boolean = {
+        obj.isInstanceOf[Quad] && obj.asInstanceOf[Quad].renderNQuad.equals(this.renderNQuad)
+    }
 }
 
 object Quad

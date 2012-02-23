@@ -191,20 +191,21 @@ object ConfigLoader
 
     /**
      * Retrieves the dump stream for a specific language edition.
+     *
+     * @var wikiPrefix is language prefix (and can be 'commons')
      */
-    private def getDumpFile(dumpDir : File, wikiPrefix : String) : File =    //wikiPrefix is language prefix (and can be 'commons')
+    private def getDumpFile(dumpDir : File, wikiPrefix : String) : File =    
     {
-        val wikiDir = new File(dumpDir + "/" + wikiPrefix)
+        val wikiDir = dumpDir
         if(!wikiDir.isDirectory) throw new Exception("Dump directory not found: " + wikiDir)
-
+        
         //Find most recent dump date
-        val date = wikiDir.list()
-                   .filter(_.matches("\\d{8}"))
-                   .sortWith(_.toInt > _.toInt)
-                   .headOption.getOrElse(throw new Exception("No dump found for Wiki: " + wikiPrefix))
+        val articlesDump = wikiDir.listFiles()
+                   .filter(_.getName.endsWith("-pages-articles.xml"))
+                   .sortWith(_.lastModified() > _.lastModified())
+                   .headOption.getOrElse(throw new Exception("No dump file in: " + wikiDir.getName))
 
-        val articlesDump = new File(wikiDir + "/" + date + "/" + wikiPrefix.replace('-', '_') + "wiki-" + date + "-pages-articles.xml")
-        if(!articlesDump.isFile) throw new Exception("Dump not found: " + articlesDump)
+        if(!articlesDump.isFile) throw new Exception("Dump is not a file: " + articlesDump.getName)
 
         articlesDump
     }

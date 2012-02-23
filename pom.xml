@@ -25,7 +25,7 @@
         <module>server</module>
         <module>scripts</module>
         <module>live</module>
-        <!--module>wiktionary</module-->
+        <module>wiktionary</module>
     </modules>
 
     <build>
@@ -39,7 +39,11 @@
                 <configuration>
                     <jvmArgs>
                         <jvmArg>${scala.compiler.Xmx}</jvmArg>
+
                     </jvmArgs>
+                    <args>
+                        <arg>-deprecation</arg>
+                    </args>
                 </configuration>
 
                 <executions>
@@ -315,7 +319,7 @@
             <url>http://prod1.aksw.org:8081/archiva/repository/snapshots</url>
         </repository>
 
-        <repository>
+        <!--repository>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -325,9 +329,9 @@
             <name>OpenAnzo Snapshots</name>
             <url>http://www.openanzo.org/maven-repositories/snapshot</url>
             <layout>default</layout>
-        </repository>
+        </repository-->
 
-        <repository>
+        <!--repository>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
@@ -337,7 +341,7 @@
             <name>OpenAnzo Releases</name>
             <url>http://www.openanzo.org/maven-repositories/release</url>
             <layout>default</layout>
-        </repository>
+        </repository-->
     </repositories>
     <pluginRepositories>
         <pluginRepository>

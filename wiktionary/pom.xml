@@ -11,8 +11,7 @@
     <packaging>jar</packaging>
 
     <name>Wiktionary Dump</name>
-    <url>http://maven.apache.org</url>
-
+    <url>http://dbpedia.org</url>
 
     <dependencies>
          <dependency>
@@ -24,30 +23,47 @@
             <artifactId>core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.dbpedia.extraction</groupId>
+            <artifactId>dump</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
+            <version>1.0</version>
         </dependency>
-    </dependencies>
+
+        <dependency>
+                  <groupId>org.springframework</groupId>
+                  <artifactId>spring</artifactId>
+                  <version>2.5.6</version>
+              </dependency>
+
+        <dependency>
+                <groupId>org.openrdf</groupId>
+                <artifactId>openrdf</artifactId>
+                <version>1.0</version>
+            </dependency>
+      </dependencies>
 
 
-    <build>
-	<plugins>
-	  <plugin>
+      <build>
+      <plugins>
+        <plugin>
 
-	  <groupId>org.scala-tools</groupId>
-	  <artifactId>maven-scala-plugin</artifactId>
-      <!--version>2.13.2-SNAPSHOT</version-->
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <!--version>2.13.2-SNAPSHOT</version-->
 
       <configuration>
-		<useFsc>true</useFsc>
-
-        <launchers>
+         <args>
+             <arg>-g:vars</arg>
+             <arg>-deprecation</arg>
+             <arg>-unchecked</arg>
+         </args>
+         <launchers>
           <launcher>
-            <id>Extract</id>
-            <mainClass>org.dbpedia.extraction.wiktionary.Extract</mainClass>
-            <jvmArgs>
-              <jvmArg>-Xmx1024m</jvmArg>
-            </jvmArgs>
+              <id>run</id>
+              <mainClass>org.dbpedia.extraction.dump.Extract</mainClass>
           </launcher>
         </launchers>
       </configuration>

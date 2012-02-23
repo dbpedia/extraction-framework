@@ -9,13 +9,16 @@ import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.sources.WikiPage
 import MyStack._
 import MyNode._
-import MyStringTrimmer._
+import MyString._
 
-case class WiktionaryException(s: String, vars : VarBindingsHierarchical, unexpectedNode : Option[Node]) extends  Exception(s) {}
-case class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
+case class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
 
+/**
+ * extend the stack class (by using a wrapper and implicit conversion - scala magic)
+ */
 class MyStack(s : Stack[Node]) {
   val stack : Stack[Node] = s
+
   def prependString(str : String) : Unit  = {
     if(stack.size == 0){
       stack push new TextNode(str,0)
@@ -31,11 +34,23 @@ class MyStack(s : Stack[Node]) {
     }
   }
 
+  def myToString : String = {
+    s.map((node:Node) => node.toWikiText()).mkString(" ")
+  }
+
+  /**
+   * reverse a stack
+   * the reverse function return (for some unknown reason) no stack, but a Seq...
+   */
   def reversed : Stack[Node]  = {
      new Stack().pushAll(stack.reverse)
   }
 
-   def getList : Stack[Node] = {
+  /**
+   * return all nodes until we see a "list-end" node
+   * if "list-start" nodes occur on the way, we need to keep track of them, so we dont see their "lower-level" "list-end" nodes as our searched list end
+   */
+  def getList : Stack[Node] = {
       val list = new ListBuffer[Node]()
       var i=0
       breakable {
@@ -67,9 +82,13 @@ class MyStack(s : Stack[Node]) {
       st
     }
 
+  /**
+   * get the next "normal" node (no var node etc.)
+   */
   def findNextNonTplNode() : Option[Node] =
     stack.find(
-      node => !(node.isInstanceOf[TemplateNode] && node.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl"))
+      node => !(node.isInstanceOf[TemplateNode] && node.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl") && !(node.isInstanceOf[TextNode] && node.asInstanceOf[TextNode].text == "")
+    )
 
   def fullTrimmedPop() : Node = {
     if(stack.head.isInstanceOf[TextNode]){
@@ -123,23 +142,23 @@ class MyStack(s : Stack[Node]) {
    * <tpl><tn="\n"><sec><tpl>
    */
   def filterNewLines() = {
-    val otherStack = new  Stack[Node]()
+    val otherStack = new Stack[Node]()
     val list = stack.toList
     for(i <- list.indices) {
       if(i > 0 && i < list.indices.last){
-        if(!
+        if(
           (
             (
             (list(i-1).isInstanceOf[SectionNode] && list(i+1).isInstanceOf[TemplateNode] && list(i+1).asInstanceOf[TemplateNode].title.decoded == "Extractiontpl")
             ||
             (list(i+1).isInstanceOf[SectionNode] && list(i-1).isInstanceOf[TemplateNode] && list(i-1).asInstanceOf[TemplateNode].title.decoded == "Extractiontpl")
             )
-            && list(i).isInstanceOf[TextNode] && list(i).asInstanceOf[TextNode].text.equals("\n")
+            && list(i).isInstanceOf[TextNode] && list(i).asInstanceOf[TextNode].text.startsWith("\n")
           )
         ){
-           otherStack push list(i)
+           otherStack push new TextNode(list(i).asInstanceOf[TextNode].text.substring(1), list(i).line) //strip that addional newline
         } else {
-          //println("filterNewLines: leave out " +list(i) +" context: "+list(i-1)+list(i)+list(i+1))
+          otherStack push list(i) //ok
         }
       } else otherStack push list(i)
     }
@@ -149,23 +168,59 @@ class MyStack(s : Stack[Node]) {
 }
 
 object MyStack {
+  /**
+ * these functions tell how to convert to the wrapper implicitly
+ */
   implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
-  def fromParsedFile(name : String) : Stack[Node] = {
-    val str = Source.fromFile(name).mkString
-    //println("read file "+name+">"+str+"<")
+
+  /**
+   * parse a string as wikisyntax and return the nodes as a stack
+   */
+  def fromString(in : String) : Stack[Node] = {
+    //fix restrictive parsing of sections (must be \n== xy ==\n - but in case start of file or end of file, the newlines are omitted)
+    var prependedNewline = false
+    var appendedNewline = false
+    val str = (if(in.startsWith("=")){prependedNewline = true; "\n"} else {""}) + in + (if(in.endsWith("=")){appendedNewline = true; "\n"} else {""})//force leading and trailing  \n
+    //println("read file >"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
-          new WikiTitle("test template"),0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
+          new WikiTitle("wiktionary extraction subtemplate"),0,0, str
         )
     )
-    //println("dumping subtemplate")
-    //page.children.foreach(_.dump(0))
-    new Stack[Node]().pushAll(page.children.reverse)
+    val nodes = new Stack[Node]()
+
+    if(appendedNewline && (page.children.last match {case TextNode("\n",_)=>true; case _ => false})){
+      nodes.pushAll(page.children.reverse.tail) //without the last
+    } else {
+      nodes.pushAll(page.children.reverse)
+    }
+    if(prependedNewline && (nodes.head match {case TextNode("\n",_)=>true; case _ => false})){
+      nodes.pop
+    }
+
+    //println("dumping subtemplate ")
+    //nodes.foreach((n: Node) => println(n.dumpStrShort))
+
+    nodes
+  }
+
+  /**
+   * read a file containing wikisyntax and return the nodes as a stack
+   * currently not used
+   */
+  def fromParsedFile(name : String) : Stack[Node] = {
+    fromString(Source.fromFile(name).mkString)
   }
 
 }
 
+/**
+ * super cool possibility of scala to _kind of_ extend the language with own constructs:
+ * i "define" the "keywords" measure and report...
+ * code within the measure-block is executed with timekeeping (how many millisoconds the execution took)
+ * the result is handed over to the report block, which needs to be a function (which prints it or so)
+ */
 object TimeMeasurement {
   def measure(code : => Unit) = new {
     def report(reporterFunc : Long => Unit) = {
@@ -178,36 +233,51 @@ object TimeMeasurement {
   }
 }
 
-class MyStringTrimmer(val str : String){
+/**
+ * extend the string class with some "inner-trim" functionality
+ */
+class MyString(val str : String){
   //reduce multiple whitespaces and lines with only whitespaces. then trim
   def fullTrim() : String = str.replaceAll("\\r?\\n\\s{1,}\\r?\\n", "\n\n").replaceAll("^\\s{1,}\\r?\\n", "\n").replaceAll("\\r?\\n\\s{1,}$", "\n").replaceAll("\\s{2,}", " ")
 }
 
-object MyStringTrimmer {
-  implicit def String2MyStringTrimmer(s : String) : MyStringTrimmer = new MyStringTrimmer(s)
-  implicit def MyStringTrimmer2String(s : MyStringTrimmer) : String = s.str
+object MyString {
+  implicit def String2MyString(s : String) : MyString = new MyString(s)
+  implicit def MyString2String(s : MyString) : String = s.str
 }
 
-object WiktionaryLogging {
-  def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node]) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length  - 7 //6 is the stack depth on the extract call. +1 for this func
+object Logging {
+  var level = 0  // will be read from config and then overwritten
+  val st_depth_start = new Exception("").getStackTrace.length + 1
+
+  //print info about a function call, and the template and page (the first n nodes)
+  def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node], thisLevel : Int) : Unit = {
+    val st_depth = new Exception("").getStackTrace.length - st_depth_start
     val prefix =  " " * st_depth
-    println(prefix + "------------")
-    println(prefix + "<entering " + name +">")
-    println(prefix + "<template (next 7)>")
-    println(prefix + tplIt.take(7).map(_.dumpStrShort).mkString)
-    println(prefix + "<page (next 7)>")
-    println(prefix + pageIt.take(7).map(_.dumpStrShort).mkString)
-    println(prefix + "------------\n\n")
+    if(thisLevel <= level){
+      println(prefix + "------------")
+      println(prefix + "<entering " + name +">")
+      println(prefix + "<template (next 3)>")
+      println(prefix + tplIt.take(3).map(_.dumpStrShort).mkString)
+      println(prefix + "<page (next 3)>")
+      println(prefix + pageIt.take(3).map(_.dumpStrShort).mkString)
+      println(prefix + "------------\n\n")
+    }
   }
 
-  def printMsg(str : String) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length  - 7
+  //print a message that is indented by it call stack depth (?) :)
+  def printMsg(str : String, thisLevel : Int) : Unit = {
+    val st_depth = new Exception("").getStackTrace.length  - st_depth_start
     val prefix =  " " * st_depth
-    println(prefix + str)
+    if(thisLevel <= level){
+      println(prefix + str)
+    }
   }
 }
 
+/**
+ * wrapper class to extend the Node class (from dbpedia core) with some (crude) functionality
+ */
 class MyNode (val n : Node){
   def dump(depth : Int = 0) : Unit =
   {
@@ -252,12 +322,58 @@ class MyNode (val n : Node){
       case tn : TextNode => "<text>"+tn.toWikiText+"</text> "
       case ln : LinkNode => "<link>"+ln.toWikiText+"</link> "
       case sn : SectionNode=> "<section>"+sn.toWikiText+"</section> "
-      case node : Node=> "<other "+node.getClass+">"+node.retrieveText.get + "</other> "
+      case node : Node=> "<other "+node.getClass+">"+node.retrieveText.getOrElse("") + "</other> "
     }
   }
+
+  //why are line numbers stored - this messes up the equals method,
+  //we fix this using the scala 2.8 named constructor arguments aware copy method of case classes
+  def equalsIgnoreLine(other : Node) : Boolean = {
+    if(n.getClass != other.getClass){
+      return false
+    }
+    //the copy method is not available in the implementation of the abstract node-class
+    //so we cast to all subclasses
+    n match {
+      case tn : TemplateNode => other.asInstanceOf[TemplateNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : TextNode => other.asInstanceOf[TextNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : SectionNode => other.asInstanceOf[SectionNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : ExternalLinkNode => other.asInstanceOf[ExternalLinkNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : InternalLinkNode => other.asInstanceOf[InternalLinkNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : InterWikiLinkNode => other.asInstanceOf[InterWikiLinkNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : PropertyNode => other.asInstanceOf[PropertyNode].copy(line=0).equals(tn.copy(line=0))
+      case tn : TableNode => other.asInstanceOf[TableNode].copy(line=0).equals(tn.copy(line=0))
+    }
+  }
+
+  def canMatchPageNode(other : Node) : Boolean = {
+    n match {
+      case tplNode : TemplateNode => if(tplNode.title.decoded.equals("Extractiontpl")) return true
+      case secNode : SectionNode => if(other.isInstanceOf[SectionNode]) return other.asInstanceOf[SectionNode].level == secNode.level
+      case txtNode : TextNode => {
+        other match {
+          case otherTxtNode  : TextNode => {
+            return otherTxtNode.text.startsWith(txtNode.text)
+          }
+          case _ => return false
+        }
+      }
+      case _ =>
+    }
+    return n.getClass == other.getClass
+  }
 }
+
 
 object MyNode{
   implicit def Node2MyNode(node : Node) : MyNode = new MyNode(node)
   implicit def MyNode2Node(mynode : MyNode) : Node = mynode.n
+}
+
+class MyNodeList(val nl : List[Node]) {
+  def myToString : String = nl.map(_.retrieveText.getOrElse("")).mkString.trim
+}
+object MyNodeList {
+  implicit def MyNodeList2NodeList(mnl : MyNodeList) : List[Node] = mnl.nl
+  implicit def NodeList2MyNodeList(nl : List[Node]) : MyNodeList = new MyNodeList(nl)
 }
