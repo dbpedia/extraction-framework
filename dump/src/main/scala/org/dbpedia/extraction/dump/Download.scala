@@ -177,6 +177,7 @@ private object DumpDownloader
         val overviewPage = Source.fromURL(new URL(uri)).getLines().mkString
 
         //Get available dates
+        // TODO: this finds all dates twice: once in the link, once in the text
         val availableDates = "\\d{8}".r.findAllIn(overviewPage).toList.collect{case IntLiteral(i) => i}
 
         //Find the first date for which the download page contains all requested dump files
