@@ -14,18 +14,21 @@ import java.io._
  * @param filePattern The pattern according to which the statements are split into different files by their dataset.
  * If no pattern is provided, one file for each dataset is generated. In this case the file names are generated from the name of the corresponding dataset.
  */
-class FileDestination(formatter : Formatter = new NTriplesFormatter(),
-                      baseDir : File = new File("."),
-                      filePattern : (Dataset => String) = FileDestination.defaultFilePattern, append : Boolean = false) extends Destination
+class FileDestination(
+    formatter : Formatter = new NTriplesFormatter(),
+    baseDir : File = new File("."),
+    filePattern : (Dataset => String) = FileDestination.defaultFilePattern, 
+    append : Boolean = false
+) extends Destination
 {
     baseDir.mkdirs()
 
-	private val writers = HashMap[String, Writer]()
+    private val writers = HashMap[String, Writer]()
 
     private var closed = false
 
-	override def write(graph : Graph) : Unit = synchronized
-	{
+    override def write(graph : Graph) : Unit = synchronized
+    {
         if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
         for((dataset, quads) <- graph.quadsByDataset)
