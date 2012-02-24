@@ -21,7 +21,11 @@ sealed abstract class LinkNode(override val children : List[Node], override val 
  */
 case class ExternalLinkNode(destination : URI, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) extends LinkNode(children, line)
 {
-    def toWikiText() : String = "[" + destination.toString + " " + children.map(_.toWikiText).mkString("") + "]"
+    def toWikiText() : String = {
+        val chStr = children.map(_.toWikiText).mkString("")
+        val dStr = destination.toString
+        "[" + dStr + (if(!chStr.equals(dStr)){" " + chStr} else {""}) + "]"
+    }
 }
 
 /**
