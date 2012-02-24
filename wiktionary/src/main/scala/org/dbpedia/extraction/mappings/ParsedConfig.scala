@@ -23,7 +23,7 @@ class TripleTemplate(val s : String, val p : String, val o : String, val oType :
 
 class ResultTemplate(val triples : Seq[TripleTemplate]){}
 
-class PostProcessing(var ppClass : String, var ppMethod : String){}
+class PostProcessing(var clazz : String, var parameters : Map[String, String]){}
 
 class Tpl (val name : String, val wiki : Stack[org.dbpedia.extraction.wikiparser.Node], val pp : Option[PostProcessing], val resultTemplates : Seq[ResultTemplate])
 object Tpl {
@@ -54,7 +54,7 @@ object Tpl {
   }
 
   def fromNode(n:XMLNode) = {
-    val pp = if(n.attribute("needsPostProcessing").isDefined && (n \ "@needsPostProcessing").text.equals("true")){Some(new PostProcessing((n \ "@ppClass").text, (n \ "@ppMethod").text))} else None
+    val pp = if(n.attribute("ppClass").isDefined){Some(new PostProcessing((n \ "@ppClass").text, (n \ "parameters" \ "parameter").map(n=>{ ((n \ "@name").text, (n \ "@value").text) }).toMap))} else None
 
     val tplString = (n \ "wikiTemplate").text
     // expand the terse template syntax 

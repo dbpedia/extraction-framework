@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.wikiparser._
 import impl.simple.SimpleWikiParser
 import util.control.Breaks._
-import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map, Queue}
+import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map, Queue, MutableList}
 import xml.{XML, Node => XMLNode}
 
 //some of my utilities
@@ -83,11 +83,13 @@ object VarBinder {
 
     //early detection of error or no action
     if(currNodeFromTemplate.equalsIgnoreLine(currNodeFromPage)){
+      //println("simple match")
       //simple match
       pageIt.pop //consume page node
       return bindings
     } else //determine whether they CAN equal
     if(!currNodeFromTemplate.canMatchPageNode(currNodeFromPage)){
+      //println("can not equal")
       //println("early mismatch: "+currNodeFromTemplate.dumpStrShort+" "+currNodeFromPage.dumpStrShort)
       throw new WiktionaryException("the template does not match the page - different type", bindings, Some(currNodeFromPage))
     }
@@ -185,7 +187,9 @@ object VarBinder {
         //variables can start recording in the middle of a textnode
         currNodeFromPage match {
            case textNodeFromPage : TextNode => {
+              Logging.printMsg("two text nodes",4)
               if(textNodeFromPage.text.startsWith(textNodeFromTpl.text) && !textNodeFromPage.text.equals(textNodeFromTpl.text)){
+                Logging.printMsg("consume shared prefix",4)
                 //consume the current node from page
                 pageIt.pop
 
@@ -474,17 +478,18 @@ class VarBindingsHierarchical (){
 
   def getFlat(p : HashMap[String, List[Node]]) : VarBindings = {
     p ++= bindings //add my bindings
-    val subPaths = new ListBuffer[HashMap[String, List[Node]]]()
+    val subPaths = new VarBindings
     //foreach child, open a new path
-    children.map((c:VarBindingsHierarchical)=> {val cb = c.getFlat(p.clone).bindings; subPaths appendAll cb})
+    children.map((c:VarBindingsHierarchical)=> {val cb = c.getFlat(p.clone); subPaths ++= cb})
 
     if(children.isEmpty){
-      subPaths.append(p)
+      subPaths += p
     }
-    new VarBindings(subPaths.toList)
+    subPaths
   }
   def getFlat() : VarBindings = getFlat(new HashMap[String, List[Node]]())
 }
 
-class VarBindings (val bindings : List[HashMap[String, List[Node]]]){}
+class VarBindings extends MutableList[HashMap[String, List[Node]]]
+
 

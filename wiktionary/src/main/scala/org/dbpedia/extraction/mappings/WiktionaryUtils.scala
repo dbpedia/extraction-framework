@@ -90,38 +90,6 @@ class MyStack(s : Stack[Node]) {
       node => !(node.isInstanceOf[TemplateNode] && node.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl") && !(node.isInstanceOf[TextNode] && node.asInstanceOf[TextNode].text == "")
     )
 
-  def fullTrimmedPop() : Node = {
-    if(stack.head.isInstanceOf[TextNode]){
-      var next = stack.pop
-      while(next.isInstanceOf[TextNode] && next.asInstanceOf[TextNode].text.fullTrim.equals("")){
-        next = stack.pop
-      }
-      next match {
-        case tn : TextNode => return tn.copy(text=tn.text.fullTrim)
-        case _ => return next
-      }
-    } else return stack.pop
-  }
-
-  def fullTrimmedHead() : Node = {
-    val node = stack.fullTrimmedPop
-    stack.push(node)
-    return node
-  }
-
-  def filterTrimmed = {
-    val otherStack = new  Stack[Node]()
-    while(stack.size > 0){
-      try {
-        otherStack push stack.fullTrimmedPop
-      } catch {
-        case e : NoSuchElementException =>
-      }
-    }
-    stack.clear
-    stack.pushAll(otherStack)
-  }
-
   /**
    * filters newline textnodes that come between a extractiontpl-template and a section node
    *
@@ -165,6 +133,22 @@ class MyStack(s : Stack[Node]) {
     stack.clear
     stack.pushAll(otherStack)
   }
+
+  /**
+   * filter whitespaces
+   */
+  def filterSpaces() = {
+    val otherStack = new Stack[Node]()
+    val list = stack.toList
+    stack.foreach(i=> {
+      i match {
+        case tn : TextNode => otherStack push tn.copy(text=tn.text.replace("  ", " ").replace(" \n", "\n"))
+        case _ => otherStack push i
+      }
+    })
+    stack.clear
+    stack.pushAll(otherStack)
+  }
 }
 
 object MyStack {
@@ -178,14 +162,18 @@ object MyStack {
    * parse a string as wikisyntax and return the nodes as a stack
    */
   def fromString(in : String) : Stack[Node] = {
+    //normalize
+
     //fix restrictive parsing of sections (must be \n== xy ==\n - but in case start of file or end of file, the newlines are omitted)
+    //force leading and trailing \n
     var prependedNewline = false
     var appendedNewline = false
-    val str = (if(in.startsWith("=")){prependedNewline = true; "\n"} else {""}) + in + (if(in.endsWith("=")){appendedNewline = true; "\n"} else {""})//force leading and trailing  \n
-    //println("read file >"+str+"<")
+    //and useless whitespaces
+    val str = (if(in.startsWith("=")){prependedNewline = true; "\n"} else {""}) + in + (if(in.endsWith("=")){appendedNewline = true; "\n"} else {""}).replace(" \n", "\n")//.replace("  ", " ")
+    //println("after normalizations >"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
-          new WikiTitle("wiktionary extraction subtemplate"),0,0, str
+          new WikiTitle("wiktionary extraction subtemplate"),0,0, str //parsing
         )
     )
     val nodes = new Stack[Node]()
