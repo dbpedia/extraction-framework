@@ -71,6 +71,9 @@ object WikiTitle
      * 
      * see http://en.wikipedia.org/wiki/Wikipedia:Namespace
      * and http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/includes/Defines.php
+     * and e.g. http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
+     *
+     * TODO: these don't really belong here in the code but should be in configuration files
      */
     object Namespace extends Enumeration
     {
@@ -106,7 +109,10 @@ object WikiTitle
         val BookTalk = Value(109)
 
         val Wikipedia = Value(150)
-
+        
+        // Namespaces used on http://mappings.dbpedia.org , sorted by number
+        // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
+        // TODO: these REALLY don't belong here in the code but should be in configuration files
         val OntologyClass = Value(200)
         val OntologyProperty = Value(202)
         val Mapping = Value(204)
@@ -123,6 +129,7 @@ object WikiTitle
         val Mapping_hu = Value(238)
         val Mapping_ko = Value(242)
         val Mapping_tr = Value(246)
+        val Mapping_ar = Value(250)
         val Mapping_sl = Value(268)
         val Mapping_hr = Value(284)
         val Mapping_el = Value(304)
@@ -133,7 +140,10 @@ object WikiTitle
         {
             language.wikiCode match
             {
+                // English is special
                 case "en" => Some(Namespace.Mapping)
+                // the others are sorted alphabetically
+                case "ar" => Some(Namespace.Mapping_ar)
                 case "ca" => Some(Namespace.Mapping_ca)
                 case "cs" => Some(Namespace.Mapping_cs)
                 case "de" => Some(Namespace.Mapping_de)
@@ -161,6 +171,7 @@ object WikiTitle
         "OntologyClass" -> Namespace.OntologyClass,
         "OntologyProperty" -> Namespace.OntologyProperty,
         "Mapping" -> Namespace.Mapping,
+        "Mapping ar" -> Namespace.Mapping_ar,
         "Mapping ca" -> Namespace.Mapping_ca,
         "Mapping cs" -> Namespace.Mapping_cs,
         "Mapping de" -> Namespace.Mapping_de,
