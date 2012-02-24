@@ -126,6 +126,8 @@ object WikiTitle
         val Mapping_ru = Value(222)
         val Mapping_cs = Value(224)
         val Mapping_ca = Value(226)
+        val Mapping_bn = Value(228)
+        val Mapping_hi = Value(230)
         val Mapping_hu = Value(238)
         val Mapping_ko = Value(242)
         val Mapping_tr = Value(246)
@@ -144,6 +146,7 @@ object WikiTitle
                 case "en" => Some(Namespace.Mapping)
                 // the others are sorted alphabetically
                 case "ar" => Some(Namespace.Mapping_ar)
+                case "bn" => Some(Namespace.Mapping_bn)
                 case "ca" => Some(Namespace.Mapping_ca)
                 case "cs" => Some(Namespace.Mapping_cs)
                 case "de" => Some(Namespace.Mapping_de)
@@ -151,6 +154,7 @@ object WikiTitle
                 case "es" => Some(Namespace.Mapping_es)
                 case "fr" => Some(Namespace.Mapping_fr)
                 case "ga" => Some(Namespace.Mapping_ga)
+                case "hi" => Some(Namespace.Mapping_hr)
                 case "hr" => Some(Namespace.Mapping_hr)
                 case "hu" => Some(Namespace.Mapping_hu)
                 case "it" => Some(Namespace.Mapping_it)
@@ -172,6 +176,7 @@ object WikiTitle
         "OntologyProperty" -> Namespace.OntologyProperty,
         "Mapping" -> Namespace.Mapping,
         "Mapping ar" -> Namespace.Mapping_ar,
+        "Mapping bn" -> Namespace.Mapping_bn,
         "Mapping ca" -> Namespace.Mapping_ca,
         "Mapping cs" -> Namespace.Mapping_cs,
         "Mapping de" -> Namespace.Mapping_de,
@@ -179,6 +184,7 @@ object WikiTitle
         "Mapping es" -> Namespace.Mapping_es,
         "Mapping fr" -> Namespace.Mapping_fr,
         "Mapping ga" -> Namespace.Mapping_ga,
+        "Mapping hi" -> Namespace.Mapping_hi,
         "Mapping hr" -> Namespace.Mapping_hr,
         "Mapping hu" -> Namespace.Mapping_hu,
         "Mapping it" -> Namespace.Mapping_it,
