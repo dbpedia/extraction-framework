@@ -190,7 +190,7 @@ private object DumpDownloader
             val dumpLinks = dumpFiles.map(dumpFile => name + "-" + date + "-" + dumpFile)
 
             //Check if this page contains all links
-            dumpLinks.forall(link => downloadPage.contains("<a href=\"" + uri + "/" + date + "/" + link))
+            dumpLinks.forall(link => downloadPage.contains("<a href=\"/" + name + "/" + date + "/" + link))
         })
     }
 
