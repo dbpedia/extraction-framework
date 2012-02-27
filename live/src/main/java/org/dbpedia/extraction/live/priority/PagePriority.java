@@ -58,14 +58,7 @@ public class PagePriority implements Comparable<PagePriority>{
 
         }
         else{
-            try{
-
-                return (this.lastResponseDate<page.getLastResponseDate() ? -1 : (this.lastResponseDate==page.getLastResponseDate()? 0 : 1));
-            }
-            catch (Exception exp){
-                logger.error("Failed to compare page priorities due to " + exp.getMessage());
-                return 0;
-            }
+            return (this.lastResponseDate<page.getLastResponseDate() ? -1 : (this.lastResponseDate==page.getLastResponseDate()? 0 : 1));
         }
 
     }
