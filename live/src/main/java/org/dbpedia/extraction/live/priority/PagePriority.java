@@ -51,7 +51,7 @@ public class PagePriority implements Comparable<PagePriority>{
 
     //We should compare the priorities of the pages by the boolean flag, and if they have the same boolean flag
     //we use the timestamp associated with each one, in order to make sure that the one with the least timestamp
-    //will be processed first. as the performance of
+    //will be processed first.
     public int compareTo(PagePriority page){
         if(this.pagePriority != page.pagePriority){
             return this.pagePriority.compareTo(page.pagePriority);
