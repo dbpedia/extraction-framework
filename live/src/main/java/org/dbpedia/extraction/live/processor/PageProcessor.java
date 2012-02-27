@@ -95,17 +95,12 @@ public class PageProcessor extends Thread{
             try{
                 PagePriority requiredPage = Main.pageQueue.take();
 
-
-//                    if(!Main.pageQueue.isEmpty()){
-//                    PagePriority requiredPage = Main.pageQueue.peek();
-
                 //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
                 if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
                     Main.existingPagesTree.remove(requiredPage.pageID);
                     processPage(requiredPage.pageID);
                 }
-                System.out.println("Page # " + requiredPage + " has been removed and processed");
-//                    Main.pageQueue.remove();
+                logger.info("Page # " + requiredPage + " has been removed and processed");
 
 
                 //Write response date to file in both cases of live update and mapping update
@@ -116,7 +111,6 @@ public class PageProcessor extends Thread{
                     LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
                             dateFormatter.format(new Date(requiredPage.getLastResponseDate())));
 
-//                }
 
             }
             catch (Exception exp){
