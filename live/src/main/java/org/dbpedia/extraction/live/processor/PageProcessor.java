@@ -97,7 +97,6 @@ public class PageProcessor extends Thread{
 
                 //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
                 if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
-                    Main.existingPagesTree.remove(requiredPage.pageID);
                     processPage(requiredPage.pageID);
                 }
                 logger.info("Page # " + requiredPage + " has been removed and processed");
