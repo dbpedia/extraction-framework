@@ -11,6 +11,7 @@ import java.security.MessageDigest
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, WikiUtil}
+import java.net.URLDecoder
 
 /**
  * Extracts the first image of a Wikipedia page. Constructs a thumbnail from it, and
@@ -160,22 +161,27 @@ class ImageExtractor( context : {
 
     private def getImageUrl(fileName : String) : (String, String) =
     {
-        val urlPrefix = if(freeWikipediaImages.contains(fileName)) wikipediaUrlLangPrefix else commonsUrlPrefix
+      val urlPrefix = if(freeWikipediaImages.contains(URLDecoder.decode(fileName, "UTF-8"))) wikipediaUrlLangPrefix else commonsUrlPrefix
 
-        val md = MessageDigest.getInstance("MD5")
-        val messageDigest = md.digest(fileName.getBytes)
-        val md5 = (new BigInteger(1, messageDigest)).toString(16)
+      val md = MessageDigest.getInstance("MD5")
+      val messageDigest = md.digest(URLDecoder.decode(fileName, "UTF-8").getBytes)
+      var md5 = (new BigInteger(1, messageDigest)).toString(16)
 
-        val hash1 = md5.substring(0, 1)
-        val hash2 = md5.substring(0, 2);
+      //If the lenght of the MD5 hash is less than 32, then we should pad leading zeros to it, as converting it to
+      // BigInteger will result in removing all leading zeros.
+      while (md5.length < 32)
+        md5 = "0" + md5;
 
-        val urlPart = hash1 + "/" + hash2 + "/" + fileName
-        val ext = if (fileName.toLowerCase.endsWith(".svg")) ".png" else ""
+      val hash1 = md5.substring(0, 1)
+      val hash2 = md5.substring(0, 2);
 
-        val imageUrl = urlPrefix + urlPart
-        val thumbnailUrl = urlPrefix + "thumb/" + urlPart + "/200px-" + fileName + ext
+      val urlPart = hash1 + "/" + hash2 + "/" + fileName
+      val ext = if (fileName.toLowerCase.endsWith(".svg")) ".png" else ""
 
-        (imageUrl, thumbnailUrl)
+      val imageUrl = urlPrefix + urlPart
+      val thumbnailUrl = urlPrefix + "thumb/" + urlPart + "/200px-" + fileName + ext
+
+      (imageUrl, thumbnailUrl)
     }
 }
 
