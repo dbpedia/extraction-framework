@@ -9,6 +9,7 @@ object DisambiguationExtractorConfig
          "el" -> " (αποσαφήνιση)",
          "en" -> " (disambiguation)",
          "es" -> " (desambiguación)",
+         "eu" -> " (argipena)",
          "it" -> " (disambigua)",
          "ko" -> " (동음이의)",
          "pl" -> " (ujednoznacznienie)",
