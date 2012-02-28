@@ -12,6 +12,7 @@ object HomepageExtractorConfig
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
         "en" -> Set("website", "homepage", "web", "site"),
         "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
+        "eu" -> Set("webgunea"),
         "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
         "ga" -> Set("suíomh"),
         "pl" -> Set("web", "strona"),
