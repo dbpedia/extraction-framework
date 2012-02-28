@@ -27,7 +27,9 @@
                             <id>Server</id>
                             <mainClass>org.dbpedia.extraction.server.Server</mainClass>
                             <jvmArgs>
-                                <jvmArg>-Xmx1024m</jvmArg>
+                                <!-- in the installation for mappings.dbpedia.org, the server needs a lot of space -->
+                                <jvmArg>-Xms2g</jvmArg>
+                                <jvmArg>-Xmx4g</jvmArg>
                             </jvmArgs>
                         </launcher>
                     </launchers>
