@@ -19,7 +19,7 @@ import MyStack._
  * these classes represent configuration from the xml
  * they are simple wrappers that provide a object representation to avoid xml in the extractor
  */
-class TripleTemplate(val s : String, val p : String, val o : String, val oType : String = "URI", val oMapping : Boolean = false, val oNewBlock : Boolean = false)
+class TripleTemplate(val s : String, val p : String, val o : String, val oType : String = "URI", val oNewBlock : Boolean = false)
 
 class ResultTemplate(val triples : Seq[TripleTemplate]){}
 
@@ -74,7 +74,6 @@ object Tpl {
                         (t \ "@p").text, 
                         (t \ "@o").text,
                         if(t.attribute("oType").isDefined){(t \ "@oType").text} else {"URI"} ,
-                        t.attribute("oMapping").isDefined && (t \ "@oMapping").text.equals("true") ,
                         t.attribute("oNewBlock").isDefined && (t \ "@oNewBlock").text.equals("true") 
                     ) 
                 )

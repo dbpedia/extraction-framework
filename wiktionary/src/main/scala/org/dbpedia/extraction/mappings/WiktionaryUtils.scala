@@ -111,6 +111,7 @@ class MyStack(s : Stack[Node]) {
    */
   def filterNewLines() = {
     val otherStack = new Stack[Node]()
+    //stack.foreach(n=>println(n.dumpStrShort))
     val list = stack.toList
     for(i <- list.indices) {
       if(i > 0 && i < list.indices.last){
@@ -121,10 +122,10 @@ class MyStack(s : Stack[Node]) {
             ||
             (list(i+1).isInstanceOf[SectionNode] && list(i-1).isInstanceOf[TemplateNode] && list(i-1).asInstanceOf[TemplateNode].title.decoded == "Extractiontpl")
             )
-            && list(i).isInstanceOf[TextNode] && list(i).asInstanceOf[TextNode].text.startsWith("\n")
+            && list(i).isInstanceOf[TextNode] && list(i).asInstanceOf[TextNode].text.startsWith("\n") && list(i).asInstanceOf[TextNode].text.length > 1
           )
         ){
-           otherStack push new TextNode(list(i).asInstanceOf[TextNode].text.substring(1), list(i).line) //strip that addional newline
+           otherStack push list(i).asInstanceOf[TextNode].copy(text=list(i).asInstanceOf[TextNode].text.substring(1)) //strip that addional newline
         } else {
           otherStack push list(i) //ok
         }
@@ -132,6 +133,27 @@ class MyStack(s : Stack[Node]) {
     }
     stack.clear
     stack.pushAll(otherStack)
+    //println("after")
+    //stack.foreach(n=>println(n.dumpStrShort))
+    stack
+  }
+
+  def filterEmptyTextNodes() = {
+    val otherStack = stack.reverse
+    //println("filterEmptyTextNodes called")
+    //stack.foreach(n=>println(n.dumpStrShort))
+    stack.clear
+    otherStack.foreach(i=> {
+      i match {
+        case tn : TextNode => if(!tn.text.equals("")){stack.push(i)}
+        case sn : SectionNode => stack.push(sn.copy(children=sn.children.filter((c) => !c.isInstanceOf[TextNode] || !c.asInstanceOf[TextNode].text.equals(""))))
+        case _ => stack push i
+      }
+    }
+    )
+    //println("after")
+    //stack.foreach(n=>println(n.dumpStrShort))
+    stack
   }
 
   /**
@@ -139,7 +161,8 @@ class MyStack(s : Stack[Node]) {
    */
   def filterSpaces() = {
     val otherStack = new Stack[Node]()
-    val list = stack.toList
+    //println("filter spaces called")
+    //stack.foreach(n=>println(n.dumpStrShort))
     stack.foreach(i=> {
       i match {
         case tn : TextNode => otherStack push tn.copy(text=tn.text.replace("  ", " ").replace(" \n", "\n"))
@@ -148,6 +171,9 @@ class MyStack(s : Stack[Node]) {
     })
     stack.clear
     stack.pushAll(otherStack)
+    //println("after")
+    //stack.foreach(n=>println(n.dumpStrShort))
+    stack
   }
 }
 
@@ -169,7 +195,11 @@ object MyStack {
     var prependedNewline = false
     var appendedNewline = false
     //and useless whitespaces
-    val str = (if(in.startsWith("=")){prependedNewline = true; "\n"} else {""}) + in + (if(in.endsWith("=")){appendedNewline = true; "\n"} else {""}).replace(" \n", "\n")//.replace("  ", " ")
+    val str = 
+        (if(in.startsWith("=")){prependedNewline = true; "\n"} else {""}) +
+        in +
+        (if(in.endsWith("=")){appendedNewline = true; "\n"} else {""})
+
     //println("after normalizations >"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
@@ -178,14 +208,17 @@ object MyStack {
     )
     val nodes = new Stack[Node]()
 
-    if(appendedNewline && (page.children.last match {case TextNode("\n",_)=>true; case _ => false})){
+    if(appendedNewline && (page.children.last match {case TextNode("\n", _)=>true; case _ => false})){
       nodes.pushAll(page.children.reverse.tail) //without the last
     } else {
       nodes.pushAll(page.children.reverse)
     }
-    if(prependedNewline && (nodes.head match {case TextNode("\n",_)=>true; case _ => false})){
-      nodes.pop
+    if(prependedNewline && (nodes.head match {case TextNode("\n", _)=>true; case _ => false})){
+        nodes.pop
     }
+
+    nodes.filterEmptyTextNodes
+    nodes.filterSpaces
 
     //println("dumping subtemplate ")
     //nodes.foreach((n: Node) => println(n.dumpStrShort))
@@ -240,9 +273,9 @@ object Logging {
 
   //print info about a function call, and the template and page (the first n nodes)
   def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node], thisLevel : Int) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length - st_depth_start
-    val prefix =  " " * st_depth
     if(thisLevel <= level){
+      val st_depth = new Exception("").getStackTrace.length - st_depth_start
+      val prefix =  " " * st_depth
       println(prefix + "------------")
       println(prefix + "<entering " + name +">")
       println(prefix + "<template (next 3)>")
@@ -255,9 +288,9 @@ object Logging {
 
   //print a message that is indented by it call stack depth (?) :)
   def printMsg(str : String, thisLevel : Int) : Unit = {
-    val st_depth = new Exception("").getStackTrace.length  - st_depth_start
-    val prefix =  " " * st_depth
     if(thisLevel <= level){
+      val st_depth = new Exception("").getStackTrace.length  - st_depth_start
+      val prefix =  " " * st_depth
       println(prefix + str)
     }
   }
@@ -320,6 +353,7 @@ class MyNode (val n : Node){
     if(n.getClass != other.getClass){
       return false
     }
+    
     //the copy method is not available in the implementation of the abstract node-class
     //so we cast to all subclasses
     n match {
