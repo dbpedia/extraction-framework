@@ -64,7 +64,8 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   val ns =            properties.get("ns").getOrElse("http://undefined.com/")
   val blockProperty = properties.get("blockProperty").getOrElse("http://undefined.com/block")
   val labelProperty = properties.get("labelProperty").getOrElse("http://undefined.com/label")
-  val varPattern = new Regex("\\$[a-zA-Z0-9]+")
+  val varPattern = new Regex("\\$[a-zA-Z0-9]+")  
+  val mapPattern = new Regex("map\\([^)]*\\)")
 
   private val languageConfig = XML.loadFile("config-"+language+".xml")
 
@@ -94,6 +95,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
+    println(""+Thread.currentThread().getId()+" "+subjectUri)
     // wait a random number of seconds. kills parallelism - otherwise debug output from different threads is mixed
     if(logLevel > 0){
       val r = new scala.util.Random
@@ -105,16 +107,18 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     counter += 1 
 
     val quads = new ListBuffer[Quad]()
-    val entityId = subjectUri.split("/").last
+    val entityId = page.title.decoded
 
     //skip some useless pages    
     for(start <- ignoreStart){
         if(entityId.startsWith(start)){
+            println("ignored "+entityId)
             return new Graph(quads.toList)
         }
     }
     for(end <- ignoreEnd){
         if(entityId.endsWith(end)){
+            println("ignored "+entityId)
             return new Graph(quads.toList)
         }
     }
@@ -161,7 +165,9 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
       //handle the bindings from pro- and epilog
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
-         quads appendAll handleFlatBindings(tplBindings.getFlat(), pageConfig, tpl, blockIris, blockIris("page").stringValue)
+        try {
+         quads appendAll handleFlatBindings(tplBindings.getFlat(), entityId, pageConfig, tpl, blockIris, blockIris("page").stringValue)
+        } catch { case _ => } //returned bindings are wrong
       }})
       Logging.printMsg("pro- and epilog bindings handled", 2)
 
@@ -182,25 +188,34 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         //println("possibleBlocks="+ possibleBlocks.map(_.name) )
 
         //try matching this blocks templates
+        var triedTemplatesCounter = 0
+        while(triedTemplatesCounter < curBlock.templates.size){
         for(tpl <- curBlock.templates){
-        //for(tpl <- possibleTemplates){
+          triedTemplatesCounter += 1
+          //println(""+triedTemplatesCounter+"/"+curBlock.templates.size)
+          //for(tpl <- possibleTemplates){
           Logging.printMsg("trying template "+tpl.name, 2)
-
+          var pageCopy = pageStack.clone 
           //println(pageStack.take(1).map(_.dumpStrShort).mkString)
           try {
             //println("vs")
             //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
+
             val blockBindings =  parseNodesWithTemplate(tpl.wiki.clone, pageStack)
-            //no exception -> success -> stuff below here will be executed on success
-            consumed = true
-            Logging.printMsg("finished template "+tpl.name+" successfully", 2)
 
             //generate triples
             //println(tpl.name +": "+ blockBindings.dump())
-            quads appendAll handleFlatBindings(blockBindings.getFlat(), curBlock, tpl, blockIris, blockIris(curBlock.name).stringValue)
+            quads appendAll handleFlatBindings(blockBindings.getFlat(), entityId, curBlock, tpl, blockIris, blockIris(curBlock.name).stringValue)
+
+            //no exception -> success -> stuff below here will be executed on success
+            consumed = true
+            //reset counter, so all templates need to be tried again
+            triedTemplatesCounter = 0
+            Logging.printMsg("finished template "+tpl.name+" successfully", 2)
           } catch {
-            case e : WiktionaryException => //did not match
+            case e : WiktionaryException => restore(pageStack, pageCopy) //did not match
           }
+        }
         }
 
         if(pageStack.size > 0){
@@ -215,13 +230,23 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                 //continue - the "page" block has no indicator template, it starts implicitly with the page
               } else {
                 //println(pageStack.take(1).map(_.dumpStrShort).mkString)
+                var pageCopy = pageStack.clone      
                 try {
                   //println("vs")
                   //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
                   val blockIndBindings = parseNodesWithTemplate(block.indTpl.wiki.clone, pageStack)
+
+                  val oldBlockUri = if(!curOpenBlocks.contains(block)){
+                    blockIris(curBlock.name).stringValue
+                  } else {
+                    blockIris(block.parent.name).stringValue
+                  }
+
+                  quads appendAll handleFlatBindings(blockIndBindings.getFlat(), entityId, block, block.indTpl, blockIris, oldBlockUri)
+
                   //no exception -> success -> stuff below here will be executed on success
                   consumed = true
-                  var oldBlockUri = blockIris(curBlock.name).stringValue
+
                   curBlock = block //switch to new block
                   Logging.printMsg("block indicator template "+block.indTpl.name+" matched", 2)
                   
@@ -229,21 +254,22 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                   if(!curOpenBlocks.contains(block)){
                     // the new block is not up in the hierarchy
                     // go one step down/deeper 
-                   curOpenBlocks append block
+                    //println("new block detected: "+block.name+" in curOpenBlocks= "+curOpenBlocks.map(_.name))
+                    curOpenBlocks append block
                   } else {
                     //the new block somewhere up the hierarchy
-                    val newOpen = curOpenBlocks.takeWhile(_ != block) 
-                    oldBlockUri = blockIris(newOpen.last.name).stringValue
+                    //go to the parent of that
+                    //println("parent block detected: "+block.name+" in curOpenBlocks= "+curOpenBlocks.map(_.name))
+                    val newOpen = curOpenBlocks.takeWhile(_ != block)
                     curOpenBlocks.clear()
                     curOpenBlocks.appendAll(newOpen) 
+                    //take a new turn
                     curOpenBlocks.append(block)// up
                   }
                   
-                  quads appendAll handleFlatBindings(blockIndBindings.getFlat(), block, block.indTpl, blockIris, oldBlockUri)
-                  
                   break; //dont match another block indicator template right away (continue with this blocks templates)
                 } catch {
-                  case e : WiktionaryException => //did not match
+                  case e : WiktionaryException => restore(pageStack, pageCopy) //did not match
                 }
               }
             }
@@ -251,7 +277,11 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         }
         if(!consumed){
           Logging.printMsg("skipping unconsumable node ", 2)
-          pageStack.pop
+          val unconsumeableNode = pageStack.pop
+          unconsumeableNode match {
+            case tn : TextNode => if(tn.text.size > 0){pageStack.push(tn.copy(text=tn.text.substring(1)))}
+            case _ =>
+          }
         }
       }
 
@@ -275,7 +305,15 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     new Graph(quadsSortedDistinct)
   }
 
-  def handleFlatBindings(bindings : VarBindings, block : Block, tpl : Tpl, blockIris : HashMap[String, URI], thisBlockIri : String) : List[Quad] = {
+  /**
+   * silly helper function
+   */
+  protected def restore(st : Stack[Node], backup : Stack[Node]) : Unit = {
+    st.clear
+    st pushAll backup.reverse
+  }
+
+  def handleFlatBindings(bindings : VarBindings, entityId : String, block : Block, tpl : Tpl, blockIris : HashMap[String, URI], thisBlockIri : String) : List[Quad] = {
     val quads = new ListBuffer[Quad]
     var curBlockIri = thisBlockIri
 
@@ -283,68 +321,67 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         val clazz = Class.forName("org.dbpedia.extraction.mappings."+tpl.pp.get.clazz).newInstance.asInstanceOf[PostProcessor]
         return clazz.process(bindings, block, tpl, blockIris, thisBlockIri, langObj, datasetURI, tripleContext, ns, tpl.pp.get.parameters, mappings)
     }
-    
+    var bindingsMatchedAnyResultTemplate = false
     bindings.foreach( (binding : HashMap[String, List[Node]]) => {
       Logging.printMsg("bindings "+binding, 2)
       tpl.resultTemplates.foreach( (rt : ResultTemplate) => {
         try {
           val thisTplQuads = new ListBuffer[Quad]
           rt.triples.foreach( (tt : TripleTemplate) => {
-            val s = varPattern.replaceAllIn( tt.s, 
-              (m) => {
-                val varName = m.matched.replace("$","");
-                if(!varName.equals("block")){
-                  if(!binding.contains(varName)){throw new Exception("missing binding for "+varName)};
-                  binding(varName).myToString
-                } else {curBlockIri}
-              }
-            )
-
-            val p = varPattern.replaceAllIn( tt.p, 
-              (m) => {
-                val varName = m.matched.replace("$","");
-                if(!varName.equals("block")){
-                  if(!binding.contains(varName)){throw new Exception("missing binding for "+varName)};
-                  binding(varName).myToString
-                } else {curBlockIri}
-              }
-            )
-
-            val o = varPattern.replaceAllIn( tt.o, 
-              (m) => {
-                val varName = m.matched.replace("$","");
-                if(!varName.equals("block")){
-                  if(!binding.contains(varName)){throw new Exception("missing binding for "+varName)};
-                  if(tt.oMapping){
-                    val b = binding(varName).myToString
+            //apply the same placeholder-processing to s, p and o => DRY:
+            val in = Map("s"->tt.s, "p"->tt.p, "o"->tt.o)
+            val out = in.map( kv => {
+                //println("before:"+kv._2)
+                val replacedVars = varPattern.replaceAllIn( kv._2, (m) => {
+                        val varName = m.matched.replace("$","");
+                        val replacement = if(varName.equals("block")){
+                            curBlockIri
+                        } else if(varName.equals("entityId")){
+                            entityId
+                        } else {
+                            if(!binding.contains(varName)){throw new Exception("missing binding for "+varName)};
+                            binding(varName).myToString
+                        }
+                        replacement.replace(")", "?~*#?")
+                })
+                val mapped = mapPattern.replaceAllIn(replacedVars, (m) => {
+                    val found = m.matched.replace("?~*#?", ")")
+                    val b = found.substring(4, found.length-1)
                     mappings.getOrElse(b, b)
-                  } else {
-                    binding(varName).myToString
-                  }
-                } else {curBlockIri}
-              }
-            )
+                }).replace("?~*#?", ")")
+                //println("after:"+mapped)
+                (kv._1, mapped)
+            })
+            
+            val s = out("s")
+            val p = out("p")
+            val o = out("o")
             Logging.printMsg("emmiting triple "+s+" "+p+" "+o, 2)
             val oObj = if(tt.oType == "URI"){
-                val blockIri = vf.createURI(o)
+                val oURI = vf.createURI(o)
                 if(tt.oNewBlock){
-                  blockIris(block.name) = blockIri //save for later
-                  Logging.printMsg("entering "+blockIri, 2)
+                  blockIris(block.name) = oURI //save for later
+                  //println(blockIris)
+                  Logging.printMsg("entering "+oURI, 2)
                   curBlockIri = o
                 }
-                blockIri
+                oURI
               } else {
                 vf.createLiteral(o)
               }
             thisTplQuads += new Quad(langObj, datasetURI, vf.createURI(s), vf.createURI(p), oObj, tripleContext)
           })
           quads appendAll thisTplQuads //the triples are added at once after they all were created without a exception
+          bindingsMatchedAnyResultTemplate = true
         } catch {
           case e1:java.util.NoSuchElementException => //e1.printStackTrace
-          case e => //println(e)
+          case e => //println("exception while processing bindings: "+e)
         }
       })
     })
+    if(!bindingsMatchedAnyResultTemplate){
+        throw new WiktionaryException("result templates were not satisfiable", new VarBindingsHierarchical, None)    
+    }
     quads.toList
   }
 }
@@ -367,7 +404,7 @@ trait PostProcessor {
     def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String]) : List[Quad]
 }
 
-class TranslationHelper extends PostProcessor{
+class GermanTranslationHelper extends PostProcessor{
     val vf = ValueFactoryImpl.getInstance
 
     def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String]) : List[Quad] = {
@@ -410,13 +447,48 @@ class TranslationHelper extends PostProcessor{
     }
 }
 
+
+class EnglishTranslationHelper extends PostProcessor{
+    val vf = ValueFactoryImpl.getInstance
+
+    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String]) : List[Quad] = {
+        val quads = ListBuffer[Quad]()
+        val translateProperty = vf.createURI(ns+"hasTranslation")
+        val translationSourceWord = vf.createURI(tBI)
+        i.foreach(binding=>{
+            try {
+            val langFull = binding("lang").myToString.replace("[^a-zA-Z]","")
+            val line = binding("line")
+            line.foreach(node=>{
+                try{
+                  if(node.isInstanceOf[TemplateNode]){
+                    val tplType = node.asInstanceOf[TemplateNode].title.decoded
+                    if(tplType == "t+" || tplType == "t-" || tplType == "tø" || tplType == "t"){
+                        val translationTargetLanguage = node.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text
+                        val translationTargetWord = node.asInstanceOf[TemplateNode].property("2").get.children(0).asInstanceOf[TextNode].text
+                        printMsg("translationTargetWord: "+translationTargetWord, 4)
+                       quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, vf.createURI(ns+URLEncoder.encode(translationTargetWord.trim, "UTF-8")+"-"+mappings.getOrElse(translationTargetLanguage,translationTargetLanguage)), tripleContext)
+                    }
+                  }
+                } catch {
+                   case e:Exception=> printMsg("error processing translation item: "+e.getMessage, 4)//ignore
+                }
+            })
+            } catch {
+               case e:Exception=> printMsg("error processing translation line: "+e.getMessage, 4)//ignore
+            }
+        })        
+        quads.toList
+    }
+}
+
 /**
 * a generic parser for something like 
 *[1] [house], [boat]
 *[2] [tree]
 *
 */
-class LinkListHelper extends PostProcessor{
+class SenseLinkListHelper extends PostProcessor{
     val vf = ValueFactoryImpl.getInstance
 
     def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String]) : List[Quad] = {
@@ -435,6 +507,34 @@ class LinkListHelper extends PostProcessor{
                         quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(ns+URLEncoder.encode(node.asInstanceOf[LinkNode].children(0).asInstanceOf[TextNode].text.trim, "UTF-8")), tripleContext)
                     })
                 } 
+                } catch {
+                   case e:Exception=> printMsg("error processing translation item: "+e.getMessage, 4)//ignore
+                }
+            })
+            } catch {
+               case e:Exception=> printMsg("error processing translation line: "+e.getMessage, 4)//ignore
+            }
+        })        
+        quads.toList
+    }
+}
+class LinkListHelper extends PostProcessor{
+    val vf = ValueFactoryImpl.getInstance
+
+    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String]) : List[Quad] = {
+        val quads = ListBuffer[Quad]()
+        val linkProperty = vf.createURI(parameters("linkProperty"))
+        val sourceWord = vf.createURI(tBI)
+        i.foreach(binding=>{
+            try {
+            var line = binding("line")
+            
+            line.foreach(node=>{
+                try{
+                if(node.isInstanceOf[LinkNode]){
+                    quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(ns+URLEncoder.encode(node.asInstanceOf[LinkNode].children(0).asInstanceOf[TextNode].text.trim, "UTF-8")), tripleContext)
+
+                }
                 } catch {
                    case e:Exception=> printMsg("error processing translation item: "+e.getMessage, 4)//ignore
                 }

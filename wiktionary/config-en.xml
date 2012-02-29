@@ -8,6 +8,66 @@
         <page endsWith="_(Conjugation)" />
     </ignore>
     <mappings>
+        <mapping from="Noun" to="Noun"/>
+                            <mapping from="Verb" to="Verb"/>
+                            <mapping from="Adjective" to="Adjective"/>
+                            <mapping from="NumericSymbol" to="NumericSymbol"/>        
+                            <mapping from="NumericSymbol" to="NumericSymbol"/>
+                            <mapping from="Abbreviation" to="Abbreviation"/>
+                            <mapping from="Personal pronoun" to="PersonalPronoun"/>
+                            <mapping from="English" to="English"/>
+                            <mapping from="Indefinite Pronoun" to="IndefinitePronoun" />
+                            <mapping from="Adverb" to="Adverb" />
+                            <mapping from="Declined Form" to="DeclinedForm"/>
+                            <mapping from="Numeral" to="Numeral"/>
+                            <mapping from="Auxiliary verb" to="AuxiliaryVerb"/>
+                            <mapping from="Possessive pronoun" to="PossessivePronoun" />
+                            <mapping from="Proper noun" to="ProperNoun" />
+                            <mapping from="Compound" to="Compound" />
+                            <mapping from="Interjection" to="Interjection" />
+                            <mapping from="Group Numeral" to="GroupNumeral" />
+                            <mapping from="Conjugated Form" to="ConjugatedForm" />
+                            <mapping from="Prefix" to="Prefix" />
+                            <mapping from="Particle" to="Particle" />
+                            <mapping from="Interrogative Pronoun" to="InterrogativePronoun" />
+                            <mapping from="Relative pronoun" to="RelativePronoun" />
+                            <mapping from="Figure Of Speech" to="FigureOfSpeech" />
+                            <mapping from="Forename" to="Forename" />
+                            <mapping from="Participle II" to="ParticipleII" />
+                            <mapping from="Participle I" to="ParticipleI" />
+                            <mapping from="Modalparticle" to="Modalparticle" />
+                            <mapping from="Answer Particle" to="AnswerParticle" />
+                            <mapping from="Demonstrative" to="Demonstrative" />
+                            <mapping from="Pronoun" to="Pronoun" />
+                            <mapping from="Toponym" to="Toponym" />
+                            <mapping from="Onomatopoeia" to="Onomatopoeia" />
+                            <mapping from="Focus Particle" to="FocusParticle" />
+                            <mapping from="Suffix" to="Suffix" />
+                            <mapping from="Proverb" to="Proverb" />
+                            <mapping from="Subjunction" to="Subjunction" />
+                            <mapping from="Negation Particle" to="NegationParticle" />
+                            <mapping from="Letter" to="Letter" />
+                            <mapping from="Biological Nomenclature" to="BiologicalNomenclature" />
+                            <mapping from="Bound Lexem" to="BoundLexem" />
+                            <mapping from="Intensifying Particle" to="IntensifyingParticle" />
+                            <mapping from="Symbol" to="Symbol" />
+                            <mapping from="Toponym Lexem" to="ToponymLexem" />
+                            <mapping from="Reflexive Personalpronoun" to="ReflexivePersonalpronoun" />
+                            <mapping from="Postposition" to="Postposition" />
+                            <mapping from="Punctuation Marks" to="PunctuationMarks" />
+                            <mapping from="Interrogative Adverb" to="InterrogativeAdverb" />
+                            <mapping from="Gerund" to="Gerund" />
+                            <mapping from="PronominalAdverb" to="PronominalAdverb" />
+                            <mapping from="Reflexive Pronoun" to="ReflexivePronoun" />
+                            <mapping from="Comparative Particle" to="ComparativeParticle" />
+                            <mapping from="Contraction" to="Contraction" />
+                            <mapping from="Comparative" to="Comparative" />
+                            <mapping from="Conjunctional Adverb" to="ConjunctionalAdverb" />
+                            <mapping from="ExtendedInfinitive" to="ExtendedInfinitive" />
+                            <mapping from="Reflexive Possessivpronoun" to="ReflexivePossessivpronoun" />
+                            <mapping from="Number Adjective" to="NumberAdjective" />
+                            <mapping from="Suffixoid" to="Suffixoid" />
+
         <!-- this mapping seems identic but maybe some adjustments are usefull  -->
         <mapping from="German" to="German"/>        
         <mapping from="Japanese" to="Japanese"/>
@@ -267,239 +327,331 @@
     <page name="page">
         <prologs>
             <!--template name="also">
-                <vars>
-                    <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" type="resource"/>
-                </vars>
-                <wikiSyntax>{{Siehe auch|{{extractiontlp|var|otherPage}}}}</wikiSyntax>
+                <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/$other" type="resource"/>
+                               </triple>
+                            </resultTemplate>
+                </resultTemplates>
+                <wikiTemplate>{{also|$other}}</wikiTemplate>
             </template-->
         </prologs>
         <epilogs>
-            <!--template name="otherLanguages">
-                <vars>
-                    <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
-                </vars>
-                <wikiSyntax>{{extractiontpl|list-start}}{{extractiontpl|link|{{extractiontpl|var|word}}|{{extractiontpl|var|otherPage}}}}
-{{extractiontpl|list-end}}</wikiSyntax>
-            </template-->
+            <template name="otherLanguages">
+                <resultTemplates>
+                    <resultTemplate>
+                        <triples>
+                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://$lang.wiktionary.org/wiki/$otherPage" type="resource" />
+                        </triples>
+                    </resultTemplate>
+                </resultTemplates>
+                <wikiTemplate>(~~$label|$lang:$otherPage~~
+)*</wikiTemplate>
+            </template>
         </epilogs>
         <block name="lang" property="http://wiktionary.dbpedia.org/terms/hasLangUsage" >
-            <template name="lang-start">
-                <vars>
-                    <var name="language" property="http://purl.org/dc/elements/1.1/language" doMapping="true" type="resource" format="http://wiktionary.dbpedia.org/terms/%s"/>
-                </vars>
-                <wikiSyntax>==$language==
-</wikiSyntax>
-            </template>
+            <indicator name="lang-start">
+                <resultTemplates>
+                    <resultTemplate>
+                        <triples>
+                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-map($language)" oType="URI" oNewBlock="true" />
+                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/map($language)" oType="URI"/>
+                        </triples>
+                    </resultTemplate>
+                </resultTemplates>
+                <wikiTemplate>==$language==
+</wikiTemplate>
+            </indicator>
             <templates>
                 <template name="etymology">
-                        <vars>
-                            <var name="etymology" property="http://wiktionary.dbpedia.org/terms/hasEtymology" />
-                        </vars>
-                        <wikiSyntax>===Etymology===
-
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$etymology" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===Etymology===
 $etymology
-</wikiSyntax>
+</wikiTemplate>
+                </template>
+                <template name="wikipedia">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://en.wikipedia.org/wiki/$entityId" oType="URI"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>{{slim-wikipedia}}</wikiTemplate>
                 </template>
                 <template name="pronunciation">
-                        <vars>
-                            <!--var name="pronunciation" property="http://wiktionary.dbpedia.org/terms/hasPronunciation" /-->
-                        </vars>
-                        <wikiSyntax>===Pronunciation===
-
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPronunciation" o="$pronunciation" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===Pronunciation===
 (*$pronunciation
 )+
-</wikiSyntax>
+</wikiTemplate>
                 </template>
                 <template name="anagram">
-                        <vars>
-                            <!--var name="anagram" property="http://wiktionary.dbpedia.org/terms/hasAnagram" /-->
-                        </vars>
-                        <wikiSyntax>===Anagrams===
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAnagram" o="$anagram" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===Anagrams===
 
 (* $anagram
 )+
-</wikiSyntax>
+</wikiTemplate>
                 </template>
                 <template name="quotations">
-                        <vars>
-                            <!--var name="quotations" property="http://wiktionary.dbpedia.org/terms/hasQuotation" /-->
-                        </vars>
-                        <wikiSyntax>===Quotations===
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$quotation" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===Quotations===
 
 (* $quotation
 )+
-</wikiSyntax>
+</wikiTemplate>
                 </template>
                 <template name="seealso">
-                        <vars>
-                            <!--var name="also" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" /-->
-                        </vars>
-                        <wikiSyntax>===See also===
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$also" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===See also===
 
 (* $also
 )+
-</wikiSyntax>
+</wikiTemplate>
                 </template>
                 <template name="statistic">
-                        <vars>
-                            <!--var name="statistic" property="http://wiktionary.dbpedia.org/terms/hasStatistics" /-->
-                        </vars>
-                        <wikiSyntax>===Statistics===
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasStatistics" o="$statistic" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===Statistics===
 
 (* $statistic
 )+
-</wikiSyntax>
+</wikiTemplate>
                 </template>
                 <template name="links">
-                        <vars>
-                            <!--var name="link" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" /-->
-                        </vars>
-                        <wikiSyntax>===External links===
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$link" oType="URI"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===External links===
 
 (* $link
 )+
-</wikiSyntax>
+</wikiTemplate>
                 </template>
                 <template name="alternatives">
-                        <vars>
-                            <!--var name="alternative" property="http://wiktionary.dbpedia.org/terms/hasAlternativeForm" /-->
-                        </vars>
-                        <wikiSyntax>===Alternative forms===
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAlternativeForm" o="$alternative" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===Alternative forms===
 
 (* $alternative
 )+
-</wikiSyntax>
+</wikiTemplate>
                 </template>
-                <template name="references">
-                        <vars>
-                            <!--var name="reference" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" /-->
-                        </vars>
-                        <wikiSyntax>===References===
+                  <template name="references">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$reference" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===References===
 
 (* $reference
 )+
-</wikiSyntax>
+</wikiTemplate>
                 </template>
                 <template name="references2">
-                        <vars>
-                            <!--var name="reference" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" /-->
-                        </vars>
-                        <wikiSyntax>===References===
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <!--triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$etymology" oType="literal"-->
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===References===
 
 &lt;references/&gt;
-</wikiSyntax>
+</wikiTemplate>
                 </template>
             </templates>
             <block name="etymologies" property="http://wiktionary.dbpedia.org/terms/hasEtymology">
-                <template name="etymology-start">
-                    <vars>
-                        <var name="nr" property="http://wiktionary.dbpedia.org/terms/id"/>
-                    </vars>
-                    <wikiSyntax>===Etymology $nr===</wikiSyntax>
-                </template>
+                <indicator name="etymology-start">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$block-$id" oType="URI" oMapping="true" oNewBlock="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/id" o="$id" oType="literal" />
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===Etymology $id===</wikiTemplate>
+                </indicator>
                 <block name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoSUsage">
-                <template name="pos-start">
-                    <vars>
-                        <var name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoS" doMapping="true" type="resource" format="http://wiktionary.dbpedia.org/terms/%s" />
-                    </vars>
-                    <wikiSyntax>====$pos====</wikiSyntax>
-                </template>
+                <indicator name="pos-start">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-map($pos)" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/map($pos)" oType="URI" />
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>====$pos====</wikiTemplate>
+                </indicator>
                 <templates>
                     <template name="defAndExample">
-                        <vars>
-                            <var name="example" property="http://wiktionary.dbpedia.org/terms/hasExample" />
-                            <var name="definition" property="http://wiktionary.dbpedia.org/terms/hasMeaning" />
-                        </vars>
-                        <wikiSyntax>
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasExample" o="$example" oType="literal"/>
+                                </triples>
+                            </resultTemplate>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$definition" oType="literal"/>
+                                </triples>
+                            </resultTemplate>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$quote" oType="literal"/>
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>
+                        <wikiTemplate>
 (# $definition
 (#: $example
 )?(#* $quote
 )?)*
-</wikiSyntax>
+</wikiTemplate>
+                    </template>
+                    <template name="derived" ppClass="LinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasDerivedTerm"/>                   
+                        </parameters> 
+                        <wikiTemplate>
+=====Derived Terms=====
+$note1
+{{rel-top|$note2}}
+(* $line
+)+{{rel-mid}}
+(* $line
+)+{{rel-bottom}}
+</wikiTemplate>
                     </template>
                 </templates>
             </block>
             </block>
             <block name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoSUsage">
-                <template name="pos-start">
-                    <vars>
-                        <var name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoS" doMapping="true" type="resource" format="http://wiktionary.dbpedia.org/terms/%s">
-                            <mapping from="Noun" to="Noun"/>
-                            <mapping from="Verb" to="Verb"/>
-                            <mapping from="Adjective" to="Adjective"/>
-                            <mapping from="NumericSymbol" to="NumericSymbol"/>        
-                            <mapping from="NumericSymbol" to="NumericSymbol"/>
-                            <mapping from="Abbreviation" to="Abbreviation"/>
-                            <mapping from="Personal pronoun" to="PersonalPronoun"/>
-                            <mapping from="English" to="English"/>
-                            <mapping from="Indefinite Pronoun" to="IndefinitePronoun" />
-                            <mapping from="Adverb" to="Adverb" />
-                            <mapping from="Declined Form" to="DeclinedForm"/>
-                            <mapping from="Numeral" to="Numeral"/>
-                            <mapping from="Auxiliary verb" to="AuxiliaryVerb"/>
-                            <mapping from="Possessive pronoun" to="PossessivePronoun" />
-                            <mapping from="Proper noun" to="ProperNoun" />
-                            <mapping from="Compound" to="Compound" />
-                            <mapping from="Interjection" to="Interjection" />
-                            <mapping from="Group Numeral" to="GroupNumeral" />
-                            <mapping from="Conjugated Form" to="ConjugatedForm" />
-                            <mapping from="Prefix" to="Prefix" />
-                            <mapping from="Particle" to="Particle" />
-                            <mapping from="Interrogative Pronoun" to="InterrogativePronoun" />
-                            <mapping from="Relative pronoun" to="RelativePronoun" />
-                            <mapping from="Figure Of Speech" to="FigureOfSpeech" />
-                            <mapping from="Forename" to="Forename" />
-                            <mapping from="Participle II" to="ParticipleII" />
-                            <mapping from="Participle I" to="ParticipleI" />
-                            <mapping from="Modalparticle" to="Modalparticle" />
-                            <mapping from="Answer Particle" to="AnswerParticle" />
-                            <mapping from="Demonstrative" to="Demonstrative" />
-                            <mapping from="Pronoun" to="Pronoun" />
-                            <mapping from="Toponym" to="Toponym" />
-                            <mapping from="Onomatopoeia" to="Onomatopoeia" />
-                            <mapping from="Focus Particle" to="FocusParticle" />
-                            <mapping from="Suffix" to="Suffix" />
-                            <mapping from="Proverb" to="Proverb" />
-                            <mapping from="Subjunction" to="Subjunction" />
-                            <mapping from="Negation Particle" to="NegationParticle" />
-                            <mapping from="Letter" to="Letter" />
-                            <mapping from="Biological Nomenclature" to="BiologicalNomenclature" />
-                            <mapping from="Bound Lexem" to="BoundLexem" />
-                            <mapping from="Intensifying Particle" to="IntensifyingParticle" />
-                            <mapping from="Symbol" to="Symbol" />
-                            <mapping from="Toponym Lexem" to="ToponymLexem" />
-                            <mapping from="Reflexive Personalpronoun" to="ReflexivePersonalpronoun" />
-                            <mapping from="Postposition" to="Postposition" />
-                            <mapping from="Punctuation Marks" to="PunctuationMarks" />
-                            <mapping from="Interrogative Adverb" to="InterrogativeAdverb" />
-                            <mapping from="Gerund" to="Gerund" />
-                            <mapping from="PronominalAdverb" to="PronominalAdverb" />
-                            <mapping from="Reflexive Pronoun" to="ReflexivePronoun" />
-                            <mapping from="Comparative Particle" to="ComparativeParticle" />
-                            <mapping from="Contraction" to="Contraction" />
-                            <mapping from="Comparative" to="Comparative" />
-                            <mapping from="Conjunctional Adverb" to="ConjunctionalAdverb" />
-                            <mapping from="ExtendedInfinitive" to="ExtendedInfinitive" />
-                            <mapping from="Reflexive Possessivpronoun" to="ReflexivePossessivpronoun" />
-                            <mapping from="Number Adjective" to="NumberAdjective" />
-                            <mapping from="Suffixoid" to="Suffixoid" />
-                        </var>
-                    </vars>
-                    <wikiSyntax>===$pos===</wikiSyntax>
-                </template>
+                <indicator name="pos-start">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-map($pos)" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/map($pos)" oType="URI" />
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===$pos===</wikiTemplate>
+                </indicator>
                 <templates>
+                    <template name="noun-plural">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPluralForm" o="$pl1" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>{{en-noun|$pl1|pl2=$pl2}}
+</wikiTemplate>
+                    </template>
                     <template name="defAndExample">
-                        <vars>
-                            <var name="example" property="http://wiktionary.dbpedia.org/terms/hasExample" />
-                            <var name="definition" property="http://wiktionary.dbpedia.org/terms/hasMeaning" />
-                        </vars>
-                        <wikiSyntax>
-(# $definition
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasExample" o="$example" oType="literal"/>
+                                </triples>
+                            </resultTemplate>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$definition" oType="literal"/>
+                                </triples>
+                            </resultTemplate>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$quote" oType="literal"/>
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>
+                        <wikiTemplate>(# $definition
 (#: $example
 )?(#* $quote
 )?)*
-</wikiSyntax>
+</wikiTemplate>
                     </template>
+                    <template name="anagram">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAnagram" o="$anagram" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>===Anagrams===
+
+(* $anagram
+)+
+</wikiTemplate>
+                </template>
+                <template name="translation" ppClass="EnglishTranslationHelper">
+                        <!-- no result template here - triples are generated by helper -->
+                        <wikiTemplate>====Translations====
+{{trans-top|$note}}
+(*$lang: $line
+)*{{trans-mid}}
+(*$lang: $line
+)*
+{{trans-bottom}}
+</wikiTemplate>
+                    </template>
+             
                 </templates>
             </block>
         </block>

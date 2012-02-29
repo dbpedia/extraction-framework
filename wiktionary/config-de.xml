@@ -14,7 +14,8 @@
         <mapping from="Zahlzeichen" to="NumericSymbol"/>        
         <mapping from="Zahl" to="NumericSymbol"/>
         <mapping from="Abkürzung" to="Abbreviation"/>
-        <mapping from="Hilfsverb" to="AuxiliaryVerb" /><mapping from="Deklinierte Form" to="DeclinedForm" />
+        <mapping from="Hilfsverb" to="AuxiliaryVerb" />
+        <mapping from="Deklinierte Form" to="DeclinedForm" />
         <mapping from="Numerale" to="Numeral" />
         <mapping from="Personalpronom" to="PersonalPronoun"/>
         <mapping from="Personalpronomen" to="PersonalPronoun"/>
@@ -273,7 +274,8 @@
         <mapping from="Burjatisch" to="Buryat" />
         <mapping from="Panjabi" to="Punjabi" />
         <mapping from="Baschkirisch" to="Bashkir" />
-        <mapping from="Chantisch" to="Khanty" ><mapping from="Zahladjektiv" to="NumberAdjective" /></mapping>
+        <mapping from="Chantisch" to="Khanty" />
+        <mapping from="Zahladjektiv" to="NumberAdjective" />
         <mapping from="Dunganisch" to="Dungan" />
         <mapping from="Mari" to="Mari" />
         <mapping from="Tschuktschisch" to="Chukchi" />
@@ -298,25 +300,29 @@
                 <vars>
                     <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" type="resource"/>
                 </vars>
-                <wikiSyntax>{{Siehe auch|{{extractiontlp|var|otherPage}}}}</wikiSyntax>
+                <wikiTemplate>{{Siehe auch|$otherPage}}</wikiTemplate>
             </template-->
         </prologs>
         <epilogs>
-            <!--template name="otherLanguages">
-                <vars>
-                    <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" />
-                </vars>
-                <wikiSyntax>{{extractiontpl|list-start}}{{extractiontpl|link|{{extractiontpl|var|word}}|{{extractiontpl|var|otherPage}}}}
-{{extractiontpl|list-end}}</wikiSyntax>
-            </template-->
+            <template name="otherLanguages">
+                <resultTemplates>
+                    <resultTemplate>
+                        <triples>
+                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/$other" type="resource"/>
+                        </triples>
+                    </resultTemplate>
+                </resultTemplates>
+                <wikiTemplate>(~~$word|$otherPage~~
+)*</wikiTemplate>
+            </template>
         </epilogs>
         <block name="lang">
             <indicator name="lang-start">
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
-                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-$language" oType="URI" oMapping="true" oNewBlock="true" />
-                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/$language" oType="URI" oMapping="true" />
+                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-map($language)" oType="URI" oNewBlock="true" />
+                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/map($language)" oType="URI" />
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
@@ -327,8 +333,8 @@
                     <resultTemplates>
                         <resultTemplate>
                             <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-$pos" oType="URI" oMapping="true" oNewBlock="true" />
-                                <triple s="$block" p="http://purl.org/dc/elements/1.1/hasPoS" o="http://wiktionary.dbpedia.org/terms/$pos" oType="URI" oMapping="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-map($pos)" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://purl.org/dc/elements/1.1/hasPoS" o="http://wiktionary.dbpedia.org/terms/map($pos)" oType="URI" />
                             </triples>
                         </resultTemplate>
                     </resultTemplates>                    
@@ -362,7 +368,7 @@
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>                    
-                        <wikiTemplate>{{Silbentrennung}}
+                        <wikiTemplate>{{Silbentrennung|}}
 :$hyphenationSingular, {{Pl.}} $hyphenationPlural
 </wikiTemplate>
                     </template>
@@ -408,10 +414,10 @@
                     <!--template name="overview">
                         <vars>
                         </vars>
-                        <wikiSyntax>{{$language $pos Übersicht|
+                        <wikiTemplate>{{$language $pos Übersicht|
 Singular=$flection-singular
 |Plural=$flection-plural
-}}</wikiSyntax>
+}}</wikiTemplate>
                     </template-->
                     <template name="pronunciation">
                         <resultTemplates>
@@ -446,18 +452,18 @@ Singular=$flection-singular
                         <vars>
                              <var name="reference" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" format="///resolveTemplateToUri" senseBound="true"/>
                         </vars>
-                        <wikiSyntax>{{Referenzen}}
+                        <wikiTemplate>{{Referenzen}}
 (:~~$meaningId~~ $reference
 )
-</wikiSyntax>
+</wikiTemplate>
                     </template>
                     <template name="source">
                         <vars>
                             <var name="source" property="http://wiktionary.dbpedia.org/terms/hasSource" format="///resolveTemplateToUri"/>
                         </vars>
-                        <wikiSyntax>{{Quellen}}
+                        <wikiTemplate>{{Quellen}}
 (:$source
-)</wikiSyntax>
+)</wikiTemplate>
                     </template-->
                     <template name="translation" ppClass="TranslationHelper">
                         <!-- no result template here - triples are generated by helper -->
@@ -484,7 +490,7 @@ Singular=$flection-singular
 )+
 </wikiTemplate>
                     </template>
-                    <template name="synonyms" ppClass="LinkListHelper">
+                    <template name="synonyms" ppClass="SenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
                         </parameters> 
@@ -493,7 +499,7 @@ Singular=$flection-singular
 )+
 </wikiTemplate>
                     </template>
-                    <template name="hyperonym" ppClass="LinkListHelper">
+                    <template name="hyperonym" ppClass="SenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>                   
                         </parameters> 
@@ -502,7 +508,7 @@ Singular=$flection-singular
 )+
 </wikiTemplate>
                     </template>
-                    <template name="hyponym" ppClass="LinkListHelper">
+                    <template name="hyponym" ppClass="SenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>                   
                         </parameters> 
@@ -511,7 +517,7 @@ Singular=$flection-singular
 )+
 </wikiTemplate>
                     </template>
-                    <template name="antonym" ppClass="LinkListHelper">
+                    <template name="antonym" ppClass="SenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasAntonym"/>                   
                         </parameters> 
