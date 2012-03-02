@@ -1,6 +1,8 @@
 package org.dbpedia.helper;
 
-import org.apache.log4j.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 import org.openrdf.model.BNode;
@@ -8,9 +10,6 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.rio.ntriples.NTriplesUtil;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,7 +20,7 @@ import java.net.URLEncoder;
  */
 public class CoreUtil {
     //Initialize the logger
-    private static Logger logger = Logger.getLogger(CoreUtil.class  );
+    private static Logger logger = Logger.getLogger(CoreUtil.class.getName());
 
     public static String convertToSPARULPattern(Value requiredResource)
     {
@@ -41,7 +40,7 @@ public class CoreUtil {
             return convertToSPARULPattern(valResource, storeSpecific);
         }
         catch(Exception exp){
-            logger.error("Invalid resource object is passed");
+            logger.log(Level.WARNING, "Invalid resource object is passed", exp);
             return requiredResource.toString();
         }
     }
