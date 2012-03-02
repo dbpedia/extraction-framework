@@ -24,6 +24,9 @@ import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
 import org.dbpedia.extraction.live.main.Main
 
 import scala.collection.JavaConversions;
+import org.dbpedia.extraction.sources.LiveWikiPage
+import org.dbpedia.extraction.live.core.LiveOptions
+;
 
 
 /**
@@ -56,11 +59,35 @@ object LiveExtractionConfigLoader extends ActionListener
     val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.Mapping),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
                                                         language = Language.Default );
-  
+
+    println ("COMMONS SOURCE = " +LiveOptions.options.get("commonsDumpsPath"));
+//    val commonsSource =  XMLSource.fromFile(getDumpFile(new File(LiveOptions.options.get("commonsDumpsPath")),
+//        "commons"), _.namespace == WikiTitle.Namespace.File)
+      val commonsSource = null;
 
   def actionPerformed(e: ActionEvent) =
     {
        reloadOntologyAndMapping = true;
+    }
+
+   /**
+     * Retrieves the dump stream for a specific language edition.
+     */
+    private def getDumpFile(dumpDir : File, wikiPrefix : String) : File =    //wikiPrefix is language prefix (and can be 'commons')
+    {
+        val wikiDir = new File(dumpDir + "/" + wikiPrefix)
+        if(!wikiDir.isDirectory) throw new Exception("Dump directory not found: " + wikiDir)
+
+        //Find most recent dump date
+        val date = wikiDir.list()
+                   .filter(_.matches("\\d{8}"))
+                   .sortWith(_.toInt > _.toInt)
+                   .headOption.getOrElse(throw new Exception("No dump found for Wiki: " + wikiPrefix))
+
+        val articlesDump = new File(wikiDir + "/" + date + "/" + wikiPrefix.replace('-', '_') + "wiki-" + date + "-pages-articles.xml")
+        if(!articlesDump.isFile) throw new Exception("Dump not found: " + articlesDump)
+
+        articlesDump
     }
 
 //    //This function loads the configuration from the file passed
@@ -216,7 +243,6 @@ object LiveExtractionConfigLoader extends ActionListener
         extractor = LiveExtractor.load(config.ontologySource, config.mappingsSource, emptySource, articlesSource, config.extractors(language), language)
         */
         extractors = LoadOntologyAndMappings(articlesSource, language);
-        println(extractors.length);
         logger.log(Level.INFO, "Ontology and mappings reloaded");
         reloadOntologyAndMapping = false;
       }
@@ -275,8 +301,7 @@ object LiveExtractionConfigLoader extends ActionListener
 //
                  /*println(CurrentPageNode.title);
                  println(CurrentPageNode.title.encodedWithNamespace);*/
-
-
+                 val testPage = CurrentWikiPage.asInstanceOf[LiveWikiPage];
                  //As the page title always starts with "en:", as it is the language of the page, and we are working only on
                  // English language, then we should remove that part as it will repeated without any advantage.
                  val coloPosition = CurrentPageNode.title.toString.indexOf(":");
@@ -293,6 +318,7 @@ object LiveExtractionConfigLoader extends ActionListener
 
                  //Add triples generated from active extractors
                  extractors.foreach(ext => {
+                   println(ext.getClass())
                     var RequiredGraph = ext(parser(CurrentWikiPage));
                    liveDest.write(RequiredGraph, ext.getClass().getName());
                  });
@@ -346,7 +372,7 @@ object LiveExtractionConfigLoader extends ActionListener
 //          convertExtractorListToScalaList(LiveConfigReader.getExtractors(language,ExtractorStatus.ACTIVE)), language)
 
       val extractorClasses = convertExtractorListToScalaList(LiveConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
-      org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, articlesSource, extractorClasses, language)
+      org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, articlesSource, commonsSource, extractorClasses, language)
     }
 
   /**

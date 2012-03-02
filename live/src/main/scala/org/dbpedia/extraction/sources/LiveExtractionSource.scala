@@ -64,7 +64,7 @@ object LiveExtractionSource
             //TODO set correct language
             val language = Language.Default
 
-            for(page <- xml \\ "page";
+              for(page <- xml \\ "page";
                 rev <- page \\ "revision")
             {
               //println((page \ "title").text);
@@ -76,18 +76,34 @@ object LiveExtractionSource
 
               link = link.trim().replaceAll("\\s","_")
               val mytitle = WikiUtil.wikiEncode(link, language)
-              println(mytitle)
 
                 /*f( new WikiPage( title     = WikiTitle.parse(link, language),
                                  id        = (page \ "id").text.toLong,
                                  revision  = (rev \ "id").text.toLong,
                                  source    = (rev \ "text").text ) )*/
 
+              val contrib = (rev \ "contributor");
+              var contribName:String = "";
+              var contribID = (contrib \ "id" ).text;
+              if((contribID == null) || contribID == ""){
+                contribID = "0";
+                contribName = (contrib \ "ip").text;
+              }
+              else{
+                contribName = (contrib \ "username").text;
+              }
+
               f( new LiveWikiPage( title     = WikiTitle.parse(link, language),
                                  id        = (page \ "id").text.toLong,
                                  revision  = (rev \ "id").text.toLong,
                                  source    = (rev \ "text").text ,
-                                 timestamp = (rev \ "timestamp").text) )
+                                 timestamp = (rev \ "timestamp").text,
+//                                 contributorID = (contrib \ "id" ).text.toLong,
+//                                 contributorName = (((rev \ "contributor")) \ "username" ).text
+                                 contributorID = contribID.toLong,
+                                 contributorName = contribName
+              )
+              )
 
               /*f( new WikiPage( title     = mytitle,
                                  id        = (page \ "id").text.toLong,
