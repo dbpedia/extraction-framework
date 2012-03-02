@@ -442,6 +442,7 @@ public class Publisher extends Thread{
         }
 
         if(sequenceNumber % 300 == 0){
+            String testNonduplicate = stripDuplicateDeletedTriples();
 
             RDFDiffWriter.write(deletedTriplesString.toString(), false, fileName, true);
             RDFDiffWriter.write(addedTriplesModel, true, fileName, true);
@@ -455,6 +456,33 @@ public class Publisher extends Thread{
 //		rdfDiffWriter.write(diff);
 		//RDFDiffWriter.writ
 	}
+
+    /**
+     * Removes the duplicated triples that may exist in
+     * @return  A string containing all deleted triples without any dupliactes
+     */
+    private String stripDuplicateDeletedTriples() {
+
+        String aHunk = deletedTriplesString.toString();
+
+        if(aHunk.compareTo("") == 0)
+            return "";
+
+        StringBuilder result = new StringBuilder();
+        Set<String> uniqueLines = new LinkedHashSet<String>();
+
+        String[] chunks = aHunk.split("\n");
+        uniqueLines.addAll(Arrays.asList(chunks));
+
+        for (String chunk : uniqueLines) {
+            if(chunk.compareTo("") != 0)
+                result.append(chunk).append("\n");
+        }
+
+        return result.toString();
+    }
+
+    
 
     /**
      * Writes the publication date in the format Year-Month-Day-Hour-Counter, in a file called lastPublishedFile.txt
