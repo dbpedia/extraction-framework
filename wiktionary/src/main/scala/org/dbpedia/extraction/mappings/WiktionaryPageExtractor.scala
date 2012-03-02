@@ -23,6 +23,7 @@ import MyStack._
 import TimeMeasurement._
 import VarBinder._
 import Logging._
+import WiktionaryPageExtractor._ //companion
 
 /**
  * parses (wiktionary) wiki pages
@@ -61,11 +62,15 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   Logging.level = logLevel
   Logging.printMsg("wiktionary loglevel = "+logLevel,0)
 
-  val ns =            properties.get("ns").getOrElse("http://undefined.com/")
-  val blockProperty = properties.get("blockProperty").getOrElse("http://undefined.com/block")
+  val ns = properties.get("ns").getOrElse("http://undefined.com/")
+  val resourceNS = ns +"resource/"
+  val termsNS = ns +"terms/"
+  val referenceProperty = properties.get("referenceProperty").getOrElse("http://undefined.com/see")
   val labelProperty = properties.get("labelProperty").getOrElse("http://undefined.com/label")
   val varPattern = new Regex("\\$[a-zA-Z0-9]+")  
   val mapPattern = new Regex("map\\([^)]*\\)")
+  val uriPattern = new Regex("uri\\([^)]*\\)")
+  val splitPattern = new Regex("\\W")
 
   private val languageConfig = XML.loadFile("config-"+language+".xml")
 
@@ -89,22 +94,14 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   val datasetURI : Dataset = new Dataset("wiktionary.dbpedia.org")
   val tripleContext = vf.createURI(ns.replace("http://","http://"+language+"."))
 
-  val missingMappings = Set[String]()
-  val usedMappings = Set[String]()
-  var counter = 0
-
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
-    println(""+Thread.currentThread().getId()+" "+subjectUri)
+    Logging.printMsg("start "+subjectUri+" threadID="+Thread.currentThread().getId(),1)
     // wait a random number of seconds. kills parallelism - otherwise debug output from different threads is mixed
-    if(logLevel > 0){
+    if(false && logLevel > 0){
       val r = new scala.util.Random
       Thread sleep r.nextInt(10)*1000
     }
-    val missingMappingsT = Set[String]()
-    missingMappingsT ++= missingMappings
-    missingMappings.empty
-    counter += 1 
 
     val quads = new ListBuffer[Quad]()
     val entityId = page.title.decoded
@@ -112,13 +109,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     //skip some useless pages    
     for(start <- ignoreStart){
         if(entityId.startsWith(start)){
-            println("ignored "+entityId)
+            Logging.printMsg("ignored "+entityId,1)
             return new Graph(quads.toList)
         }
     }
     for(end <- ignoreEnd){
         if(entityId.endsWith(end)){
-            println("ignored "+entityId)
+            Logging.printMsg("ignored "+entityId,1)
             return new Graph(quads.toList)
         }
     }
@@ -129,9 +126,10 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     val blockIris = new HashMap[String, URI]
     measure {
       
-      blockIris("page") = vf.createURI(ns + URLEncoder.encode(entityId, "UTF-8")) //this is also the base-url (all nested blocks will get uris with this as a prefix)
+      blockIris("page") = vf.createURI(resourceNS + urify(entityId)) //this is also the base-url (all nested blocks will get uris with this as a prefix)
 
       quads append new Quad(langObj, datasetURI, blockIris("page"), vf.createURI(labelProperty), vf.createLiteral(entityId), tripleContext)
+      quads append new Quad(langObj, datasetURI, blockIris("page"), vf.createURI(referenceProperty), vf.createURI("http://"+language+".wiktionary.org/wiki/"+ urify(entityId)), tripleContext)
 
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse).filterSpaces
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
@@ -175,10 +173,14 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       val curOpenBlocks = new ListBuffer[Block]()
       curOpenBlocks append pageConfig
       var curBlock : Block = pageConfig
-
+      var counter = 0
       //keep track if we consumed at least one node in this while run - if not, drop one node at the end
       var consumed = false
       while(pageStack.size > 0){
+        counter += 1
+        if(counter % 100 == 0){
+            Logging.printMsg(""+counter+"/"+page.children.size+" nodes inspected "+entityId,1)
+        }
         Logging.printMsg("page node: "+pageStack.head.toWikiText(), 2)
         consumed = false
 
@@ -189,13 +191,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
         //try matching this blocks templates
         var triedTemplatesCounter = 0
-        while(triedTemplatesCounter < curBlock.templates.size){
+        while(triedTemplatesCounter < curBlock.templates.size && pageStack.size > 0){
         for(tpl <- curBlock.templates){
           triedTemplatesCounter += 1
           //println(""+triedTemplatesCounter+"/"+curBlock.templates.size)
           //for(tpl <- possibleTemplates){
-          Logging.printMsg("trying template "+tpl.name, 2)
-          var pageCopy = pageStack.clone 
+          Logging.printMsg("trying template "+tpl.name, 3)
+          val pageCopy = pageStack.clone 
           //println(pageStack.take(1).map(_.dumpStrShort).mkString)
           try {
             //println("vs")
@@ -211,7 +213,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
             consumed = true
             //reset counter, so all templates need to be tried again
             triedTemplatesCounter = 0
-            Logging.printMsg("finished template "+tpl.name+" successfully", 2)
+            Logging.printMsg("finished template "+tpl.name+" successfully", 3)
           } catch {
             case e : WiktionaryException => restore(pageStack, pageCopy) //did not match
           }
@@ -223,14 +225,14 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           // each block has a "indicator-template" (indTpl)
           // when it matches, the block starts. and from that template we get bindings that describe the block
 
-          Logging.printMsg("trying block indicator templates. page node: "+pageStack.head.toWikiText, 2)
+          Logging.printMsg("trying block indicator templates. page node: "+pageStack.head.toWikiText, 3)
           breakable {
             for(block <- possibleBlocks){
               if(block.indTpl == null){
                 //continue - the "page" block has no indicator template, it starts implicitly with the page
               } else {
                 //println(pageStack.take(1).map(_.dumpStrShort).mkString)
-                var pageCopy = pageStack.clone      
+                val pageCopy = pageStack.clone      
                 try {
                   //println("vs")
                   //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
@@ -279,7 +281,9 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           Logging.printMsg("skipping unconsumable node ", 2)
           val unconsumeableNode = pageStack.pop
           unconsumeableNode match {
-            case tn : TextNode => if(tn.text.size > 0){pageStack.push(tn.copy(text=tn.text.substring(1)))}
+            case tn : TextNode => if(tn.text.startsWith(" ") || tn.text.startsWith("\n")){
+                pageStack.push(tn.copy(text=tn.text.substring(1)))
+            }
             case _ =>
           }
         }
@@ -289,19 +293,10 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       duration : Long => Logging.printMsg("took "+ duration +"ms", 1)
     }
     
-    if(missingMappings.diff(missingMappingsT).size > 0){
-      Logging.printMsg("missing mapping: "+missingMappings.diff(missingMappingsT).toString,1)
-      missingMappings ++= missingMappings.diff(missingMappingsT)
-    }
-    missingMappings ++= missingMappingsT
-
-    if(counter == 100000){
-       Logging.printMsg("unused mapping: "+mappings.keySet.--(usedMappings),1)
-    }
-
     Logging.printMsg(""+quads.size+" quads extracted for "+entityId, 1)
-    val quadsSortedDistinct = quads.groupBy(_.renderNTriple).map(_._2.head).toList.sortWith((q1, q2)=> q1.renderNTriple.compareTo(q2.renderNTriple) > 0)
+    val quadsSortedDistinct = quads.groupBy(_.renderNTriple).map(_._2.head).toList.sortWith((q1, q2)=> q1.renderNTriple.compareTo(q2.renderNTriple) < 0)
     quadsSortedDistinct.foreach( q => { Logging.printMsg(q.renderNTriple, 1) } )
+    Logging.printMsg("end "+subjectUri+" threadID="+Thread.currentThread().getId(),1)
     new Graph(quadsSortedDistinct)
   }
 
@@ -333,7 +328,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
             val out = in.map( kv => {
                 //println("before:"+kv._2)
                 val replacedVars = varPattern.replaceAllIn( kv._2, (m) => {
-                        val varName = m.matched.replace("$","");
+                        val varName = m.matched.substring(1);//exclude the $ symbol
                         val replacement = if(varName.equals("block")){
                             curBlockIri
                         } else if(varName.equals("entityId")){
@@ -342,15 +337,20 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                             if(!binding.contains(varName)){throw new Exception("missing binding for "+varName)};
                             binding(varName).myToString
                         }
-                        replacement.replace(")", "?~*#?")
+                        replacement.replace(")", "?~*#?") //to prevent, that recorded ) symbols mess up the regex of map and uri
                 })
                 val mapped = mapPattern.replaceAllIn(replacedVars, (m) => {
-                    val found = m.matched.replace("?~*#?", ")")
+                    val found = m.matched
                     val b = found.substring(4, found.length-1)
                     mappings.getOrElse(b, b)
-                }).replace("?~*#?", ")")
+                })
+                val encoded = uriPattern.replaceAllIn(mapped, (m) => {
+                    val found = m.matched
+                    val b = found.substring(4, found.length-1)
+                    urify(b)
+                })
                 //println("after:"+mapped)
-                (kv._1, mapped)
+                (kv._1, encoded.replace("?~*#?", ")"))
             })
             
             val s = out("s")
@@ -375,7 +375,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           bindingsMatchedAnyResultTemplate = true
         } catch {
           case e1:java.util.NoSuchElementException => //e1.printStackTrace
-          case e => //println("exception while processing bindings: "+e)
+          case e => Logging.printMsg("exception while processing bindings: "+e, 3)
         }
       })
     })
@@ -384,6 +384,9 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     }
     quads.toList
   }
+}
+object WiktionaryPageExtractor {
+  def urify(in:String):String = in.replace(" ", "_")//URLEncoder.encode(in.trim, "UTF-8")
 }
 
 trait PostProcessor {
@@ -409,10 +412,10 @@ class GermanTranslationHelper extends PostProcessor{
 
     def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String]) : List[Quad] = {
         val quads = ListBuffer[Quad]()
-        val translateProperty = vf.createURI(ns+"hasTranslation")
+        val translateProperty = vf.createURI(ns+"terms/hasTranslation")
         i.foreach(binding=>{
             try {
-            val lRaw = binding("lang")(0).asInstanceOf[TemplateNode].title.decoded.toLowerCase
+            val lRaw = binding("lang")(0).asInstanceOf[TemplateNode].title.decoded.capitalize
             val language = mappings.getOrElse(lRaw, lRaw)
             val line = binding("line")
             var curSense = "1"
@@ -429,9 +432,9 @@ class GermanTranslationHelper extends PostProcessor{
                             val translationSourceWord = if(sense.equals("?")){ 
                                 vf.createURI(tBI)
                             } else {
-                                vf.createURI(tBI+"-"+sense)
+                                vf.createURI(tBI+"-"+WiktionaryPageExtractor.urify(sense))
                             }
-                            quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, vf.createURI(ns+URLEncoder.encode(translationTargetWord.trim, "UTF-8")+"-"+language), tripleContext)
+                            quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, vf.createURI(ns+"terms/"+WiktionaryPageExtractor.urify(translationTargetWord)+"-"+language), tripleContext)
                         })
                     }
                 }
@@ -453,7 +456,7 @@ class EnglishTranslationHelper extends PostProcessor{
 
     def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String]) : List[Quad] = {
         val quads = ListBuffer[Quad]()
-        val translateProperty = vf.createURI(ns+"hasTranslation")
+        val translateProperty = vf.createURI(ns+"terms/hasTranslation")
         val translationSourceWord = vf.createURI(tBI)
         i.foreach(binding=>{
             try {
@@ -467,7 +470,7 @@ class EnglishTranslationHelper extends PostProcessor{
                         val translationTargetLanguage = node.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text
                         val translationTargetWord = node.asInstanceOf[TemplateNode].property("2").get.children(0).asInstanceOf[TextNode].text
                         printMsg("translationTargetWord: "+translationTargetWord, 4)
-                       quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, vf.createURI(ns+URLEncoder.encode(translationTargetWord.trim, "UTF-8")+"-"+mappings.getOrElse(translationTargetLanguage,translationTargetLanguage)), tripleContext)
+                       quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, vf.createURI(ns+"terms/"+WiktionaryPageExtractor.urify(translationTargetWord)+"-"+mappings.getOrElse(translationTargetLanguage,translationTargetLanguage)), tripleContext)
                     }
                   }
                 } catch {
@@ -504,7 +507,7 @@ class SenseLinkListHelper extends PostProcessor{
                 if(node.isInstanceOf[LinkNode]){
                     expandSense(senses).foreach(sense =>{
                         val sourceWord = vf.createURI(tBI+"-"+sense)
-                        quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(ns+URLEncoder.encode(node.asInstanceOf[LinkNode].children(0).asInstanceOf[TextNode].text.trim, "UTF-8")), tripleContext)
+                        quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(ns+"terms/"+WiktionaryPageExtractor.urify(node.asInstanceOf[LinkNode].children(0).asInstanceOf[TextNode].text)), tripleContext)
                     })
                 } 
                 } catch {
@@ -532,7 +535,7 @@ class LinkListHelper extends PostProcessor{
             line.foreach(node=>{
                 try{
                 if(node.isInstanceOf[LinkNode]){
-                    quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(ns+URLEncoder.encode(node.asInstanceOf[LinkNode].children(0).asInstanceOf[TextNode].text.trim, "UTF-8")), tripleContext)
+                    quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(ns+"terms/"+WiktionaryPageExtractor.urify(node.asInstanceOf[LinkNode].children(0).asInstanceOf[TextNode].text)), tripleContext)
 
                 }
                 } catch {

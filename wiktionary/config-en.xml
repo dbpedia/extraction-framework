@@ -355,8 +355,8 @@
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
-                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-map($language)" oType="URI" oNewBlock="true" />
-                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/map($language)" oType="URI"/>
+                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-uri(map($language))" oType="URI" oNewBlock="true" />
+                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/uri(map($language))" oType="URI"/>
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
@@ -380,7 +380,7 @@ $etymology
                     <resultTemplates>
                         <resultTemplate>
                             <triples>
-                                <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://en.wikipedia.org/wiki/$entityId" oType="URI"/>
+                                <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://en.wikipedia.org/wiki/uri($entityId)" oType="URI"/>
                             </triples>
                         </resultTemplate>
                     </resultTemplates>
@@ -422,7 +422,6 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===Quotations===
-
 (* $quotation
 )+
 </wikiTemplate>
@@ -436,7 +435,6 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===See also===
-
 (* $also
 )+
 </wikiTemplate>
@@ -450,7 +448,6 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===Statistics===
-
 (* $statistic
 )+
 </wikiTemplate>
@@ -464,7 +461,6 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===External links===
-
 (* $link
 )+
 </wikiTemplate>
@@ -478,7 +474,6 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===Alternative forms===
-
 (* $alternative
 )+
 </wikiTemplate>
@@ -506,7 +501,6 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===References===
-
 &lt;references/&gt;
 </wikiTemplate>
                 </template>
@@ -516,7 +510,7 @@ $etymology
                     <resultTemplates>
                         <resultTemplate>
                             <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$block-$id" oType="URI" oMapping="true" oNewBlock="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$block-uri($id)" oType="URI" oNewBlock="true" />
                                 <triple s="$block" p="http://wiktionary.dbpedia.org/terms/id" o="$id" oType="literal" />
                             </triples>
                         </resultTemplate>
@@ -528,8 +522,8 @@ $etymology
                     <resultTemplates>
                         <resultTemplate>
                             <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-map($pos)" oType="URI" oNewBlock="true" />
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/map($pos)" oType="URI" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map($pos))" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map($pos))" oType="URI" />
                             </triples>
                         </resultTemplate>
                     </resultTemplates>
@@ -583,8 +577,8 @@ $note1
                     <resultTemplates>
                         <resultTemplate>
                             <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-map($pos)" oType="URI" oNewBlock="true" />
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/map($pos)" oType="URI" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map($pos))" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map($pos))" oType="URI" />
                             </triples>
                         </resultTemplate>
                     </resultTemplates>
@@ -635,7 +629,6 @@ $note1
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===Anagrams===
-
 (* $anagram
 )+
 </wikiTemplate>

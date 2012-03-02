@@ -52,7 +52,7 @@ class MyStack(s : Stack[Node]) {
    */
   def getList : Stack[Node] = {
       val list = new ListBuffer[Node]()
-      var i=0
+      var i = 0
       breakable {
         while (stack.size > 0){
           val cur = stack.pop
@@ -393,7 +393,10 @@ object MyNode{
 }
 
 class MyNodeList(val nl : List[Node]) {
-  def myToString : String = nl.map(_.retrieveText.getOrElse("")).mkString.trim
+  def myToString : String = nl.map(n => { n match {
+    case tn : TemplateNode => if(tn.title.decoded.equals("term")){tn.property("1").get.retrieveText.getOrElse("") } else {""}
+    case _ => n.retrieveText.getOrElse("") 
+  }}).mkString.trim
 }
 object MyNodeList {
   implicit def MyNodeList2NodeList(mnl : MyNodeList) : List[Node] = mnl.nl
