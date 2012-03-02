@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.destination;
 
-import org.apache.log4j.Logger;
 import org.dbpedia.extraction.destinations.*;
 import org.dbpedia.extraction.ontology.datatypes.Datatype;
 import org.dbpedia.helper.CoreUtil;
@@ -15,6 +14,8 @@ import scala.collection.JavaConversions;
 import java.io.FileOutputStream;
 import java.nio.channels.FileLock;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,12 +29,7 @@ public class SQLFileDestination implements Destination {
 
     //Constants used for inserting into the table
     private static final String FILENAME = "/home/mohamed/DBpediaDumpOutput/SqlLog.sql";
-    private static Logger logger = null;
-
-    static{
-
-        logger = Logger.getLogger(SQLFileDestination.class.getName());
-    }
+    private static final Logger logger = Logger.getLogger(SQLFileDestination.class.getName());
 
     public HashMap JSONObject = new HashMap();
     private String oaiId;
@@ -196,7 +192,7 @@ public class SQLFileDestination implements Destination {
 //            outputStreamWriter.close();
         }
         catch (Exception exp){
-            logger.error("SQL statement cannot be written to file due to " + exp.getMessage());
+            logger.log(Level.WARNING, "SQL statement cannot be written to file due to " + exp.getMessage(), exp);
         }
     }
 }

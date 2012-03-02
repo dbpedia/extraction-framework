@@ -1,7 +1,6 @@
 package org.dbpedia.helper;
 
 
-import org.apache.log4j.Logger;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 import org.openrdf.model.Resource;
@@ -13,6 +12,8 @@ import org.openrdf.rio.ntriples.NTriplesUtil;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -25,20 +26,9 @@ import java.security.NoSuchAlgorithmException;
 public class Triple extends StatementImpl{
 
     //Initializing the Logger
-    private static Logger logger = null;
+    private static final Logger logger = Logger.getLogger(Triple.class.getName());
     private static String pageCacheKey = null;
     private static URI pageCacheValue = null;
-
-    static
-    {
-        try
-        {
-            logger = Logger.getLogger(Triple.class);
-        }
-        catch (Exception exp){
-
-        }
-    }
 
     public Triple(Resource subject, URI predicate, Value object)
     {
@@ -61,10 +51,10 @@ public class Triple extends StatementImpl{
 
         }
         catch(NoSuchAlgorithmException nsae){
-            logger.error("FAILED to create hash code for " + this.toNTriples());
+            logger.log(Level.WARNING, "FAILED to create hash code for " + this.toNTriples(), nsae);
         }
         catch(Exception exp){
-            logger.error(exp.getMessage());
+            logger.log(Level.WARNING, exp.getMessage(), exp);
         }
         return hashCode;
     }
