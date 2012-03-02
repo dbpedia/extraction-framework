@@ -442,9 +442,9 @@ public class Publisher extends Thread{
         }
 
         if(sequenceNumber % 300 == 0){
-            String testNonduplicate = stripDuplicateDeletedTriples();
+            String nonDuplicatedTriples = stripDuplicateDeletedTriples();
 
-            RDFDiffWriter.write(deletedTriplesString.toString(), false, fileName, true);
+            RDFDiffWriter.write(nonDuplicatedTriples, false, fileName, true);
             RDFDiffWriter.write(addedTriplesModel, true, fileName, true);
 
             addedTriplesModel = ModelFactory.createDefaultModel();
