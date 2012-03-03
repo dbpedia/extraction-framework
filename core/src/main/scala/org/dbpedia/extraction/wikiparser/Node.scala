@@ -120,20 +120,20 @@ abstract class Node(val children : List[Node], val line : Int)
         val section = this.section
 
         //Build source URI
-        var sourceURI = sourceUriPrefix
+        var sourceUri = sourceUriPrefix
 
         if(section != null)
         {
-            sourceURI += "section=" + URLEncoder.encode(section.name, "UTF-8")
-            sourceURI += "&relative-line=" + (line - section.line)
-            sourceURI += "&absolute-line=" + line
+            sourceUri += "section=" + URLEncoder.encode(section.name, "UTF-8")
+            sourceUri += "&relative-line=" + (line - section.line)
+            sourceUri += "&absolute-line=" + line
         }
         else if(line >= 1)
         {
-            sourceURI += "absolute-line=" + line
+            sourceUri += "absolute-line=" + line
         }
         
-        return sourceURI
+        return sourceUri
     }
 
     /**
