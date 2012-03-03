@@ -31,6 +31,7 @@ class InterLanguageLinksExtractor( context : {
 
         retrieveTranslationTitles (node,InterLanguageLinksExtractorConfig.intLinksMap(language)).foreach { tuple:(Language, WikiTitle) =>
             val (tlang, title) = tuple
+            // FIXME: title.sourceUri is wrong, we need the sourceUri of the InterWikiLinkNode
             quads ::= new Quad(context.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
                 OntologyNamespaces.getResource(title.encodedWithNamespace, tlang), title.sourceUri, null)
         }
