@@ -2,6 +2,7 @@ package org.dbpedia.extraction.wikiparser
 
 import impl.wikipedia.Namespaces
 import java.util.Locale
+import scala.collection.mutable.HashMap
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.util.StringUtils._
@@ -51,7 +52,7 @@ class WikiTitle(val decoded : String, val namespace : WikiTitle.Namespace = Wiki
     /**
      * Returns the full source URI.
      */
-    def sourceUri = "http://" + language.filePrefix + ".wikipedia.org/wiki/"  + encoded
+    def sourceUri = "http://" + language.wikiCode + ".wikipedia.org/wiki/"  + encodedWithNamespace
     
     override def toString = language + ":" + decodedWithNamespace
 
@@ -112,7 +113,6 @@ object WikiTitle
         
         // Namespaces used on http://mappings.dbpedia.org , sorted by number
         // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
-        // TODO: these REALLY don't belong here in the code but should be in configuration files
         val OntologyClass = Value(200)
         val OntologyProperty = Value(202)
         val Mapping = Value(204)
@@ -137,69 +137,33 @@ object WikiTitle
         val Mapping_hr = Value(284)
         val Mapping_el = Value(304)
         val Mapping_ga = Value(396)
-        
-
-        def mappingNamespace(language : Language) : Option[Namespace] =
-        {
-            language.wikiCode match
-            {
-                // English is special
-                case "en" => Some(Namespace.Mapping)
-                // the others are sorted alphabetically
-                case "ar" => Some(Namespace.Mapping_ar)
-                case "bn" => Some(Namespace.Mapping_bn)
-                case "ca" => Some(Namespace.Mapping_ca)
-                case "cs" => Some(Namespace.Mapping_cs)
-                case "de" => Some(Namespace.Mapping_de)
-                case "el" => Some(Namespace.Mapping_el)
-                case "es" => Some(Namespace.Mapping_es)
-                case "eu" => Some(Namespace.Mapping_eu)
-                case "fr" => Some(Namespace.Mapping_fr)
-                case "ga" => Some(Namespace.Mapping_ga)
-                case "hi" => Some(Namespace.Mapping_hr)
-                case "hr" => Some(Namespace.Mapping_hr)
-                case "hu" => Some(Namespace.Mapping_hu)
-                case "it" => Some(Namespace.Mapping_it)
-                case "ko" => Some(Namespace.Mapping_ko)
-                case "nl" => Some(Namespace.Mapping_nl)
-                case "pl" => Some(Namespace.Mapping_pl)
-                case "pt" => Some(Namespace.Mapping_pt)
-                case "ru" => Some(Namespace.Mapping_ru)
-                case "sl" => Some(Namespace.Mapping_sl)
-                case "tr" => Some(Namespace.Mapping_tr)
-                case _ => None
-            }
-        }
     }
+    
     type Namespace = Namespace.Value
 
-    private val customNamespaces = Map[String, Namespace] (
-        "OntologyClass" -> Namespace.OntologyClass,
-        "OntologyProperty" -> Namespace.OntologyProperty,
-        "Mapping" -> Namespace.Mapping,
-        "Mapping ar" -> Namespace.Mapping_ar,
-        "Mapping bn" -> Namespace.Mapping_bn,
-        "Mapping ca" -> Namespace.Mapping_ca,
-        "Mapping cs" -> Namespace.Mapping_cs,
-        "Mapping de" -> Namespace.Mapping_de,
-        "Mapping el" -> Namespace.Mapping_el,
-        "Mapping es" -> Namespace.Mapping_es,
-        "Mapping eu" -> Namespace.Mapping_eu,
-        "Mapping fr" -> Namespace.Mapping_fr,
-        "Mapping ga" -> Namespace.Mapping_ga,
-        "Mapping hi" -> Namespace.Mapping_hi,
-        "Mapping hr" -> Namespace.Mapping_hr,
-        "Mapping hu" -> Namespace.Mapping_hu,
-        "Mapping it" -> Namespace.Mapping_it,
-        "Mapping ko" -> Namespace.Mapping_ko,
-        "Mapping nl" -> Namespace.Mapping_nl,
-        "Mapping pl" -> Namespace.Mapping_pl,
-        "Mapping pt" -> Namespace.Mapping_pt,
-        "Mapping ru" -> Namespace.Mapping_ru,
-        "Mapping sl" -> Namespace.Mapping_sl,
-        "Mapping tr" -> Namespace.Mapping_tr
-    )
-
+    private val mappingNamespaces = new HashMap[Language, Namespace]
+    private val customNamespaces = new HashMap[String, Namespace]
+    customNamespaces.put("OntologyClass", Namespace.OntologyClass)
+    customNamespaces.put("OntologyProperty", Namespace.OntologyProperty)
+    
+    for (ns <- Namespace.values)
+    {
+      val name = ns.toString
+      if (name.equals("Mapping")) mappingNamespace(ns, "en", "Mapping")
+      else if (name.startsWith("Mapping_")) mappingNamespace(ns, name.substring(8), name.replace('_', ' '))
+    }
+    
+    private def mappingNamespace(ns : Namespace, code: String, name : String) =
+    {
+        mappingNamespaces.put(Language.fromWikiCode(code).get, ns)
+        customNamespaces.put(name, ns)
+    }
+    
+    def mappingNamespace(language : Language) : Option[Namespace] =
+    {
+        mappingNamespaces.get(language)
+    }
+    
     private val reverseCustomNamespaces = customNamespaces.map{case (name, code) => (code, name)}.toMap
 
     /**
@@ -218,7 +182,7 @@ object WikiTitle
         var language = sourceLanguage
         var namespace = Namespace.Main
 
-        //Check if this is a interlanguage link (!beginning with ':')
+        //Check if this is a interlanguage link (beginning with ':')
         if(!parts.isEmpty && parts.head == "")
         {
             leadingColon = true

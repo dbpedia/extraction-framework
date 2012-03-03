@@ -115,7 +115,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     protected def loadMappingsPages(language : Language) : Map[WikiTitle, PageNode] =
     {
-        val mappingNamespace = WikiTitle.Namespace.mappingNamespace(language)
+        val mappingNamespace = WikiTitle.mappingNamespace(language)
                                .getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
 
         WikiSource.fromNamespaces(namespaces = Set(mappingNamespace),
