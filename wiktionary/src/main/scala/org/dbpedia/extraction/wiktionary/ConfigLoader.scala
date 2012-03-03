@@ -67,7 +67,7 @@ object ConfigLoader
     private def createExtractionJob(config : Config)(language : Language) : ExtractionJob =
     {
         /** Mappings source */
-        val mappingsSource = WikiTitle.Namespace.mappingNamespace(language) match
+        val mappingsSource = WikiTitle.mappingNamespace(language) match
         {
             case Some(namespace) => WikiSource.fromNamespaces(namespaces = Set(namespace),
                                                               url = new URL("http://mappings.dbpedia.org/api.php"),

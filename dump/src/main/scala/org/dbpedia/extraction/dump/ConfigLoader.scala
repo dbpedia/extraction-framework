@@ -86,11 +86,13 @@ object ConfigLoader
             //Load language specific extractors
             val LanguageExtractor = """extractors\.(.*)""".r
 
-            for(LanguageExtractor(code) <- config.stringPropertyNames.toArray;
-                language = Language.fromISOCode(code).getOrElse(throw new IllegalArgumentException("Invalid language: " + code));
-                if extractors.contains(language))
+            for(LanguageExtractor(code) <- config.stringPropertyNames.toArray)
             {
-                extractors += ((language, stdExtractors ::: loadExtractorConfig(config.getProperty("extractors." + code))))
+                val language = Language.fromISOCode(code).getOrElse(throw new IllegalArgumentException("Invalid language: " + code))
+                if (extractors.contains(language))
+                {
+                    extractors += ((language, stdExtractors ::: loadExtractorConfig(config.getProperty("extractors." + code))))
+                }
             }
 
             extractors
@@ -143,7 +145,7 @@ object ConfigLoader
 
         private lazy val _mappingPageSource =
         {
-            WikiTitle.Namespace.mappingNamespace(language) match
+            WikiTitle.mappingNamespace(language) match
             {
                 case Some(namespace) => WikiSource.fromNamespaces(namespaces = Set(namespace),
                                                                   url = new URL("http://mappings.dbpedia.org/api.php"),
