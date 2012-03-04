@@ -782,13 +782,13 @@ public class Hash{
 
     }
 
-/*
+    /*
      * returns the diff of the extractionresult with the db
- * used for collecting triples and compare them to the hash
- * name: compare
- * @param $extractionResult
- * @return
- */
+     * used for collecting triples and compare them to the hash
+     * name: compare
+     * @param $extractionResult
+     * @return
+     */
     public void compare(ExtractionResult  extractionResult)
     {
         if(!this.active)
