@@ -155,4 +155,9 @@ public class Constants{
     //Used for CategoryLabelExtractor
     public static final String DB_CATEGORY_NS = DB_RESOURCE_NS + MW_CATEGORY_NAMESPACE + ":";
 
+    public static final String DBM_CONTRIBUTOR = DB_META_NS + "contributor";
+
+    public static final String DB_CONTRIBUTOR = DBPEDIA_NS + "contributor/";
+    public static final String DB_CONTRIBUTOR_ID = DB_CONTRIBUTOR + "contributorID";
+
 }
