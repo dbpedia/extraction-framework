@@ -364,12 +364,44 @@
              </extractor>
 
             <extractor name="org.dbpedia.extraction.mappings.MetaInformationExtractor" status="ACTIVE">
+                <matchPattern type="EXACT">
+                    <s></s>
+                    <p>DC_MODIFIED</p>
+                    <o></o>
+                </matchPattern>
+                <matchPattern type="EXACT">
+                    <s></s>
+                    <p>DBM_EDITLINK</p>
+                    <o></o>
+                </matchPattern>
+                <matchPattern type="EXACT">
+                    <s></s>
+                    <p>DBM_REVISION</p>
+                    <o></o>
+                </matchPattern>
+
                 <produces>
                 </produces>
              </extractor>
 
             <extractor name="org.dbpedia.extraction.mappings.ContributorExtractor" status="ACTIVE">
                 <produces>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>DBM_CONTRIBUTOR</p>
+                        <o></o>
+                    </matchPattern>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>DB_CONTRIBUTOR_ID</p>
+                        <o></o>
+                    </matchPattern>
+                    <matchPattern type="STARTSWITH" pexact="true">
+                        <s></s>
+                        <p>DB_CONTRIBUTOR</p>
+                        <o></o>
+                    </matchPattern>
+
                 </produces>
              </extractor>
 
