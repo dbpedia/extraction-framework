@@ -27,7 +27,7 @@ class ContributorExtractor( context : {
     val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded;
 
     //Required predicates
-    val contributorPredicate = "http://dbpedia.org/property/contributor";
+    val contributorPredicate = "http://dbpedia.org/meta/contributor";
     //val contributorNamePredicate = "http://dbpedia.org/property/contributorName";
     val contributorIDPredicate = "http://dbpedia.org/property/contributorID";
 
