@@ -765,6 +765,12 @@ public class Hash{
                 String strUnicodeDecoded = new String((String)((HashMap) (pairs.getValue())).get("o"));
                 ((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
             }
+//            else if(extractorID.toLowerCase().contains("contributorextractor")){
+//                ((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
+//            }
+            else if(extractorID.toLowerCase().contains("metainformationextractor")){
+                ((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
+            }
 
             this.deleteTriples.put(pairs.getKey(), pairs.getValue());
             delCount++;

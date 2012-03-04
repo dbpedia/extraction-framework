@@ -465,6 +465,10 @@ public class LiveUpdateDestination implements Destination{
                     removeOldRDFSAbstractOrComment(triple);
 
                 }
+                else if((predicate.compareTo(Constants.DBM_EDITLINK) == 0) || (predicate.compareTo(Constants.DBM_REVISION) == 0)
+                        || (predicate.compareTo(Constants.DC_MODIFIED) == 0)){
+                    removeOldMetaInformation(triple);
+                }
             }
 
 			this._jdbc_ttlp_insert_triples(addTriples);
@@ -496,6 +500,32 @@ public class LiveUpdateDestination implements Destination{
             logger.warn("SQL statement of result cannot be closed in function removeOldRDFSAbstractOrComment");
         }
     }
+
+
+    /**
+     * Removes the old meta information for the passed triple, sometimes the meta information cannot be removed and so
+     * multiple meta information may exist for the same page
+     * @param triple    A triple containing subject, predicate, and object for which the old meta information should be removed.
+     */
+    private void removeOldMetaInformation(RDFTriple triple){
+        String pattern = Util.convertToSPARULPattern(triple.getSubject()) + " " +
+                Util.convertToSPARULPattern(triple.getPredicate()) + " " + "?o"+" . \n";
+        String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
+
+        ResultSet result = this._jdbc_sparul_execute(sparul);
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(result!= null){
+                result.close();
+                result.getStatement().close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement of result cannot be closed in function removeOldMetaInformation");
+        }
+    }
+
 
 
 	private void _primaryStrategy(){
