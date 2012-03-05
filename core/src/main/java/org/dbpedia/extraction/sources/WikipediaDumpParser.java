@@ -24,8 +24,12 @@ public class WikipediaDumpParser
   /** the logger */
   private static final Logger logger = Logger.getLogger(WikipediaDumpParser.class.getName());
 
-  /** */
-  private static final String MEDIAWIKI_NS = null;//TODO older dumps use 0.3 format "http://www.mediawiki.org/xml/export-0.4/";
+  /** 
+   * Note: current namespace URI is "http://www.mediawiki.org/xml/export-0.4/",
+   * but older dumps use 0.3, so we just ignore the namespace URI.
+   * TODO: make this configurable, or use two different subclasses of this class.
+   */
+  private static final String MEDIAWIKI_NS = null;
   
   /** */
   private static final String ROOT_ELEM = "mediawiki";
