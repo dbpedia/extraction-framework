@@ -4,7 +4,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import java.net.URI
+import java.net.{URLEncoder, URI}
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,7 +37,7 @@ class ContributorExtractor( context : {
     //The username may contain spaces, so we should replace the spaces with underscores "_", as they ar not allowed in
     //URLs
     val contributorNameWithoutSpaces = contributorName.replace (" ", "_");
-    val contributorURL =  "http://dbpedia.org/contributor/" + contributorNameWithoutSpaces;
+    val contributorURL =  "http://dbpedia.org/contributor/" + URLEncoder.encode (contributorNameWithoutSpaces,"UTF-8");
 
     val contributorID =  node.asInstanceOf[LivePageNode].contributorID;
 
