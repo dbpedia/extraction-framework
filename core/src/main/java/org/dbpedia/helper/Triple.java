@@ -1,6 +1,7 @@
 package org.dbpedia.helper;
 
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 import org.openrdf.model.Resource;
@@ -12,8 +13,6 @@ import org.openrdf.rio.ntriples.NTriplesUtil;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -22,6 +21,7 @@ import java.util.logging.Logger;
  * Date: Jul 1, 2010
  * Time: 11:21:20 AM
  * This class constructs RDF triples.
+ * Used in org.dbpedia.extraction.destination.SQLFileDestination
  */
 public class Triple extends StatementImpl{
 
