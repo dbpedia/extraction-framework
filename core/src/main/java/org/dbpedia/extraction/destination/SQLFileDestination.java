@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.destination;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import org.dbpedia.extraction.destinations.*;
 import org.dbpedia.extraction.ontology.datatypes.Datatype;
 import org.dbpedia.helper.CoreUtil;
@@ -14,8 +16,6 @@ import scala.collection.JavaConversions;
 import java.io.FileOutputStream;
 import java.nio.channels.FileLock;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -192,7 +192,7 @@ public class SQLFileDestination implements Destination {
 //            outputStreamWriter.close();
         }
         catch (Exception exp){
-            logger.log(Level.WARNING, "SQL statement cannot be written to file due to " + exp.getMessage(), exp);
+            logger.log(Level.WARNING, "SQL statement cannot be written to file", exp);
         }
     }
 }
