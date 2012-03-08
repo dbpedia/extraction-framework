@@ -3,9 +3,9 @@
     <ignore>
         <page startsWith="Template:" />
         <page startsWith="Wiktionary:" />
-        <page startsWith="Archive_" />
-        <page startsWith="List_" />
-        <page endsWith="_(Conjugation)" />
+        <page startsWith="Archive " />
+        <page startsWith="List " />
+        <page endsWith=" (Conjugation)" />
     </ignore>
     <mappings>
         <mapping from="Noun" to="Noun"/>
@@ -326,23 +326,33 @@
     </mappings>
     <page name="page">
         <prologs>
-            <!--template name="also">
+            <template name="redirect">
+                <resultTemplates>
+                    <resultTemplate>
+                        <triples>
+                            <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://wiktionary.dbpedia.org/resource/uri($otherPage)" oType="URI"/>
+                        </triples>
+                    </resultTemplate>
+                </resultTemplates>
+                <wikiTemplate>#REDIRECT ~~$word|$otherPage~~</wikiTemplate>
+            </template>
+            <template name="also">
                 <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/$other" type="resource"/>
+                                    <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/uri($other)" oType="URI"/>
                                </triple>
                             </resultTemplate>
                 </resultTemplates>
                 <wikiTemplate>{{also|$other}}</wikiTemplate>
-            </template-->
+            </template>
         </prologs>
         <epilogs>
             <template name="otherLanguages">
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
-                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://$lang.wiktionary.org/wiki/$otherPage" type="resource" />
+                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://$lang.wiktionary.org/wiki/uri($otherPage)" type="resource" />
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
