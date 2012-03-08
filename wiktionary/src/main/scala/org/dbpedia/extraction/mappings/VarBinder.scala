@@ -9,6 +9,8 @@ import xml.{XML, Node => XMLNode}
 import MyStack._
 import MyNode._
 import Logging._
+import MyLinkNode._
+import MyNodeList._
 
 /**
  * static functions composing a mechanism to match a template (containing variables) to a actual page, and bind values to the variables
@@ -116,7 +118,7 @@ object VarBinder {
               val listMode = tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
               bindings addChild parseList(listTpl, pageIt, endMarkerNode, listMode, newVarEndMarkers.toList)
             }
-            case "list-end" =>    printMsg("end list - you should not see this", 4)
+            case "list-end" => printMsg("end list - you should not see this", 4)
             case "var" => {
               val endMarkerNode = tplIt.findNextNonTplNode
               val endMarkers = ListBuffer[Node]()
@@ -130,27 +132,31 @@ object VarBinder {
               bindings.addBinding(binding._1, binding._2)
             }
             case "link" => {
-              if(!currNodeFromPage.isInstanceOf[LinkNode]){
-                throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+              val expectedType = tplNodeFromTpl.property("2").get.children(0).asInstanceOf[TextNode].text
+              currNodeFromPage match {
+                case linkNodeFromPage : LinkNode => {
+                  if(!expectedType.equals("any") && !linkNodeFromPage.getClass.getName.equals("org.dbpedia.extraction.wikiparser."+expectedType)){
+                    //println("wrong link type. actual:"+linkNodeFromPage.getClass.getName+" expected: org.dbpedia.extraction.wikiparser."+expectedType+" ("+linkNodeFromPage.dumpStrShort+")")
+                    throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
+                  }
+                  val destination = linkNodeFromPage.getDestination
+                  val label = linkNodeFromPage.getLabel
+                  //extract from the destination link
+                  bindings mergeWith parseNodesWithTemplate(
+                    new Stack[Node]() pushAll tplNodeFromTpl.property("3").get.children.reverse,
+                    new Stack[Node]() push new TextNode(destination, 0)
+                  )
+                  if(tplNodeFromTpl.property("4").isDefined){
+                    //extract from the label
+                    bindings mergeWith parseNodesWithTemplate(
+                      new Stack[Node]() pushAll tplNodeFromTpl.property("4").get.children.reverse,
+                      new Stack[Node]() push new TextNode(label, 0)
+                    )
+                  }
+                  pageIt.pop
+                }
+                case _ => throw new WiktionaryException("the template does not match the page", bindings, Some(currNodeFromPage))
               }
-              val destination = currNodeFromPage match {
-                case iln : InternalLinkNode => new TextNode(iln.destination.decodedWithNamespace, 0)
-                case iwln : InterWikiLinkNode => new TextNode(iwln.destination.decodedWithNamespace, 0)
-                case eln : ExternalLinkNode => new TextNode(eln.destination.toString, 0)
-              }
-              //extract from the destination link
-              bindings mergeWith parseNodesWithTemplate(
-                new Stack[Node]() pushAll tplNodeFromTpl.property("2").get.children.reverse,
-                new Stack[Node]() push destination
-              )
-              if(tplNodeFromTpl.property("3").isDefined){
-                //extract from the label
-                bindings mergeWith parseNodesWithTemplate(
-                  new Stack[Node]() pushAll tplNodeFromTpl.property("3").get.children.reverse,
-                  new Stack[Node]() pushAll currNodeFromPage.children
-                )
-              }
-              pageIt.pop
             }
             case _ =>  { }
           }
@@ -218,7 +224,7 @@ object VarBinder {
           if(!(currNodeFromPage.isInstanceOf[SectionNode] && currNodeFromTemplate.isInstanceOf[SectionNode] &&
             currNodeFromPage.asInstanceOf[SectionNode].level != currNodeFromTemplate.asInstanceOf[SectionNode].level)){
             printMsg("same class but not equal. do recursion on children", 4)
-            bindings mergeWith parseNodesWithTemplate(new Stack[Node]() pushAll currNodeFromTemplate.children.reverse, new Stack[Node]() pushAll pageIt.pop.children.reverse)
+            bindings mergeWith parseNodesWithTemplate(currNodeFromTemplate.children.toStack, pageIt.pop.children.toStack)
           } else {
             //sections with different level
             //TODO check canEqual

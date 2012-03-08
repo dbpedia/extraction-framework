@@ -10,6 +10,7 @@ import org.dbpedia.extraction.sources.WikiPage
 import MyStack._
 import MyNode._
 import MyString._
+import MyNodeList._
 
 case class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
 
@@ -34,8 +35,16 @@ class MyStack(s : Stack[Node]) {
     }
   }
 
-  def myToString : String = {
-    s.map((node:Node) => node.toWikiText()).mkString(" ")
+  def toShortDumpString : String = {
+    s.toList.toShortDumpString
+  }
+
+  def toWikiText : String = {
+    s.toList.toWikiText
+  }
+
+  def toReadableString : String = {
+    s.toList.toReadableString
   }
 
   /**
@@ -58,8 +67,8 @@ class MyStack(s : Stack[Node]) {
           val cur = stack.pop
           cur match {
             case tn : TemplateNode => {
-              if(cur.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl"){
-                val tplType = cur.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text
+              if(tn.title.decoded == "Extractiontpl"){
+                val tplType = tn.property("1").get.children(0).asInstanceOf[TextNode].text
                 tplType match {
                   case "list-start" =>     i += 1
                   case "list-end" =>       {
@@ -174,6 +183,39 @@ class MyStack(s : Stack[Node]) {
     //println("after")
     //stack.foreach(n=>println(n.dumpStrShort))
     stack
+  }
+
+  def dropUntilAndPop(f : (Node) => Boolean) = {
+    stack.dropWhile(!f(_))
+    stack.pop
+  }
+
+  def reverseSwapList() = {
+    val otherStack = new Stack[Node]()
+    val thisReverse = stack.reverse.filter((n:Node)=>(n.isInstanceOf[TemplateNode] && n.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl" && (n.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "list-start" || n.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "list-end")))
+    val thisClone = stack.clone
+
+    stack.foreach(i=> {
+
+      i match {
+        case tn : TemplateNode => if(tn.title.decoded == "Extractiontpl"){
+                val tplType = tn.property("1").get.children(0).asInstanceOf[TextNode].text
+                tplType match {
+                  case "list-start" => {
+                    val correspondingEnd = thisReverse.pop
+                    otherStack push correspondingEnd
+                  }
+                  case "list-end" => {
+                    val correspondingStart = thisReverse.pop
+                    otherStack push correspondingStart
+                  }
+                  case _ => otherStack push i
+                }
+        } else {otherStack push i}
+        case _ => otherStack push i
+      }
+    })
+    otherStack
   }
 }
 
@@ -393,12 +435,37 @@ object MyNode{
 }
 
 class MyNodeList(val nl : List[Node]) {
-  def myToString : String = nl.map(n => { n match {
+
+  def toShortDumpString : String = {
+    nl.map((node:Node) => node.dumpStrShort).mkString(" ")
+  }
+
+  def toWikiText : String = {
+    nl.map((node:Node) => node.toWikiText).mkString(" ")
+  }
+
+  def toReadableString : String = nl.map(n => { n match {
     case tn : TemplateNode => if(tn.title.decoded.equals("term")){tn.property("1").get.retrieveText.getOrElse("") } else {""}
     case _ => n.retrieveText.getOrElse("") 
-  }}).mkString.trim
+  }}).mkString
+
+  def toStack = new Stack[Node]() pushAll nl.reverse
 }
 object MyNodeList {
   implicit def MyNodeList2NodeList(mnl : MyNodeList) : List[Node] = mnl.nl
   implicit def NodeList2MyNodeList(nl : List[Node]) : MyNodeList = new MyNodeList(nl)
+}
+
+object MyLinkNode{
+  implicit def LinkNode2MyLinkNode(node : LinkNode) : MyLinkNode = new MyLinkNode(node)
+  implicit def MyLinkNode2LinkNode(mynode : MyLinkNode) : LinkNode = mynode.n
+}
+
+class MyLinkNode(val n : LinkNode){
+  def getDestination : String = n match {
+            case eln : ExternalLinkNode => eln.destination.toString
+            case iln : InternalLinkNode => iln.destination.decoded
+            case iwln : InterWikiLinkNode => iwln.destination.decoded
+        }
+  def getLabel : String = n.children.toReadableString
 }
