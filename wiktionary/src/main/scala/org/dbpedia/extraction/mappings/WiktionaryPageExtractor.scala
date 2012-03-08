@@ -65,13 +65,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   val ns = properties.get("ns").getOrElse("http://undefined.com/")
   val resourceNS = ns +"resource/"
   val termsNS = ns +"terms/"
-  val referenceProperty = properties.get("referenceProperty").getOrElse("http://undefined.com/see")
-  val labelProperty = properties.get("labelProperty").getOrElse("http://undefined.com/label")
+  val referenceProperty = properties("referenceProperty")
+  val labelProperty = properties("labelProperty")
   val varPattern = new Regex("\\$[a-zA-Z0-9]+")  
   val mapPattern = new Regex("map\\([^)]*\\)")
   val uriPattern = new Regex("uri\\([^)]*\\)")
-  val splitPattern = new Regex("\\W")
-  val xmlPattern = new Regex("</?[^>]+/?>")
+  //val splitPattern = new Regex("\\W")
+  //val xmlPattern = new Regex("</?[^>]+/?>")
 
   private val languageConfig = XML.loadFile("config-"+language+".xml")
 
@@ -315,7 +315,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
     if(tpl.pp.isDefined){
         val clazz = Class.forName("org.dbpedia.extraction.mappings."+tpl.pp.get.clazz).newInstance.asInstanceOf[PostProcessor]
-        return clazz.process(bindings, block, tpl, blockIris, thisBlockIri, langObj, datasetURI, tripleContext, ns, tpl.pp.get.parameters, mappings, resourceNS)
+        return clazz.process(bindings, block, tpl, blockIris, thisBlockIri, langObj, datasetURI, tripleContext, ns, tpl.pp.get.parameters, mappings, resourceNS, termsNS)
     }
     var bindingsMatchedAnyResultTemplate = false
     bindings.foreach( (binding : HashMap[String, List[Node]]) => {
@@ -387,7 +387,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   }
 }
 object WiktionaryPageExtractor {
-  def urify(in:String):String = in.replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace(":", "")//URLEncoder.encode(in.trim, "UTF-8")
+  def urify(in:String):String = in.replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace(":", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
 }
 
 trait PostProcessor {
@@ -405,7 +405,7 @@ trait PostProcessor {
         })
         senses.toList
     }
-    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String) : List[Quad]
+    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String, termsNS : String) : List[Quad]
  
     def getDestination(ln : Node) : String = {
         ln match {
@@ -420,12 +420,12 @@ trait PostProcessor {
 class GermanTranslationHelper extends PostProcessor{
     val vf = ValueFactoryImpl.getInstance
 
-    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String) : List[Quad] = {
+    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String, termsNS : String) : List[Quad] = {
         val quads = ListBuffer[Quad]()
-        val translateProperty = vf.createURI(ns+"terms/hasTranslation")
+        val translateProperty = vf.createURI(termsNS+"hasTranslation")
         i.foreach(binding=>{
             try {
-            val lRaw = binding("lang")(0).asInstanceOf[TemplateNode].title.decoded.capitalize
+            val lRaw = binding("lang")(0).asInstanceOf[TemplateNode].title.encoded
             val language = mappings.getOrElse(lRaw, lRaw)
             val line = binding("line")
             var curSense = "1"
@@ -464,9 +464,9 @@ class GermanTranslationHelper extends PostProcessor{
 class EnglishTranslationHelper extends PostProcessor{
     val vf = ValueFactoryImpl.getInstance
 
-    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String) : List[Quad] = {
+    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String, termsNS : String) : List[Quad] = {
         val quads = ListBuffer[Quad]()
-        val translateProperty = vf.createURI(ns+"terms/hasTranslation")
+        val translateProperty = vf.createURI(termsNS+"hasTranslation")
         val translationSourceWord = vf.createURI(tBI)
         i.foreach(binding=>{
             try {
@@ -504,7 +504,7 @@ class EnglishTranslationHelper extends PostProcessor{
 class SenseLinkListHelper extends PostProcessor{
     val vf = ValueFactoryImpl.getInstance
 
-    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String) : List[Quad] = {
+    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String, termsNS : String) : List[Quad] = {
         val quads = ListBuffer[Quad]()
         val linkProperty = vf.createURI(parameters("linkProperty"))
         i.foreach(binding=>{
@@ -534,7 +534,7 @@ class SenseLinkListHelper extends PostProcessor{
 class LinkListHelper extends PostProcessor{
     val vf = ValueFactoryImpl.getInstance
 
-    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String) : List[Quad] = {
+    def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String, termsNS : String) : List[Quad] = {
         val quads = ListBuffer[Quad]()
         val linkProperty = vf.createURI(parameters("linkProperty"))
         val sourceWord = vf.createURI(tBI)

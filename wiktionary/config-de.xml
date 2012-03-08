@@ -296,23 +296,37 @@
     </mappings>
     <page name="page">
         <prologs>
-            <!--template name="also">
-                <vars>
-                    <var name="otherPage" format="http://wiktionary.dbpedia.org/resource/%s" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" type="resource"/>
-                </vars>
+            <template name="also">
+                <resultTemplates>
+                    <resultTemplate>
+                        <triples>
+                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/$otherPage" oType="URI"/>
+                        </triples>
+                    </resultTemplate>
+                </resultTemplates>
                 <wikiTemplate>{{Siehe auch|$otherPage}}</wikiTemplate>
-            </template-->
+            </template>
+            <template name="redirect">
+                <resultTemplates>
+                    <resultTemplate>
+                        <triples>
+                            <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://wiktionary.dbpedia.org/resource/$otherPage" oType="URI"/>
+                        </triples>
+                    </resultTemplate>
+                </resultTemplates>
+                <wikiTemplate>#REDIRECT ~~$word|$otherPage~~</wikiTemplate>
+            </template>
         </prologs>
         <epilogs>
             <template name="otherLanguages">
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
-                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/$other" type="resource"/>
+                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://$lang.wiktionary.org/wiki/$wordd" oType="URI"/>
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
-                <wikiTemplate>(~~$word|$otherPage~~
+                <wikiTemplate>(~~$lang:$wordd~~
 )*</wikiTemplate>
             </template>
         </epilogs>
