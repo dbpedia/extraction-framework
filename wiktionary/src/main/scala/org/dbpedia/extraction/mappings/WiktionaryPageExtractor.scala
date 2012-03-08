@@ -410,8 +410,8 @@ trait PostProcessor {
     def getDestination(ln : Node) : String = {
         ln match {
             case eln : ExternalLinkNode => eln.destination.toString
-            case iln : InternalLinkNode => iln.destination.encoded
-            case iwln : InterWikiLinkNode => iwln.destination.encoded
+            case iln : InternalLinkNode => iln.destination.decoded
+            case iwln : InterWikiLinkNode => iwln.destination.decoded
             case _ => ln.children.myToString
         }
     }
@@ -509,7 +509,7 @@ class SenseLinkListHelper extends PostProcessor{
         val linkProperty = vf.createURI(parameters("linkProperty"))
         i.foreach(binding=>{
             try {
-            val senses = binding("sense")(0).toWikiText.substring(1, binding("sense")(0).toWikiText.length-1)
+            val senses = binding("sense")(0).toWikiText.replace("\n","").replace(":", "").substring(1, binding("sense")(0).toWikiText.length-1)
             var line = binding("line")
             
             line.foreach(node=>{
