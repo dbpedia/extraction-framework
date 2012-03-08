@@ -439,10 +439,10 @@ class GermanTranslationHelper extends PostProcessor{
                         val translationTargetWord = node.asInstanceOf[TemplateNode].property("2").get.children(0).asInstanceOf[TextNode].text
                         printMsg("translationTargetWord: "+translationTargetWord, 4)
                         expandSense(curSense).foreach(sense =>{
-                            val translationSourceWord = if(sense.equals("?")){ 
-                                vf.createURI(tBI)
+                            val translationSourceWord = if(sense.forall(_.isDigit)){ 
+                                vf.createURI(tBI+"-"+WiktionaryPageExtractor.urify(sense))//if the found sense is numeric
                             } else {
-                                vf.createURI(tBI+"-"+WiktionaryPageExtractor.urify(sense))
+                                vf.createURI(tBI)
                             }
                             quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, vf.createURI(resourceNS+WiktionaryPageExtractor.urify(translationTargetWord)+"-"+language), tripleContext)
                         })
@@ -516,7 +516,12 @@ class SenseLinkListHelper extends PostProcessor{
                 try{
                 if(node.isInstanceOf[LinkNode]){
                     expandSense(senses).foreach(sense =>{
-                        val sourceWord = vf.createURI(tBI+"-"+WiktionaryPageExtractor.urify(sense))
+                        val sourceWord = if(sense.forall(_.isDigit)){
+                          vf.createURI(tBI+"-"+WiktionaryPageExtractor.urify(sense)) //if the found sense is numeric
+                        } else {
+                          vf.createURI(tBI)
+                        }
+                         
                         quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(resourceNS+WiktionaryPageExtractor.urify(getDestination(node))), tripleContext)
                     })
                 } 
