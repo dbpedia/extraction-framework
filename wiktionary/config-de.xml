@@ -3,9 +3,9 @@
     <ignore>
         <page startsWith="Vorlage:" />
         <page startsWith="Wiktionary:" />
-        <page startsWith="Archiv_" />
-        <page startsWith="Liste_" />
-        <page endsWith="_(Konjugation)" />
+        <page startsWith="Archiv " />
+        <page startsWith="Liste " />
+        <page endsWith=" (Konjugation)" />
     </ignore>
     <mappings>
         <mapping from="Substantiv" to="Noun"/>
@@ -300,7 +300,7 @@
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
-                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/$otherPage" oType="URI"/>
+                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/uri($otherPage)" oType="URI"/>
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
@@ -310,7 +310,7 @@
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
-                            <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://wiktionary.dbpedia.org/resource/$otherPage" oType="URI"/>
+                            <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://wiktionary.dbpedia.org/resource/uri($otherPage)" oType="URI"/>
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
@@ -322,12 +322,13 @@
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
-                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://$lang.wiktionary.org/wiki/$wordd" oType="URI"/>
+                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://$lang.wiktionary.org/wiki/uri($otherPage)" oType="URI"/>
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
-                <wikiTemplate>(~~$lang:$wordd~~
-)*</wikiTemplate>
+                <wikiTemplate>(~~$label|$lang:$otherPage~~
+)*
+</wikiTemplate>
             </template>
         </epilogs>
         <block name="lang">
