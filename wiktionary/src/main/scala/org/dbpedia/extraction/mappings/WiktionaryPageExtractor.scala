@@ -387,7 +387,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   }
 }
 object WiktionaryPageExtractor {
-  def urify(in:String):String = in.replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
+  def urify(in:String):String = in.replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
 }
 
 trait PostProcessor {
