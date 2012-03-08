@@ -236,7 +236,7 @@ object VarBinder {
    * in the template there can be defined "lists" which are repetitive parts, like in regex: tro(lo)* matches trolololo
    */
   protected def parseList(tplIt : Stack[Node], pageIt : Stack[Node], endMarkerNode : Option[Node], listMode : String, varEndMarkers : List[Node]) : VarBindingsHierarchical = {
-    //printFuncDump("parseList "+name, tplIt, pageIt, 4)
+    printFuncDump("parseList ", tplIt, pageIt, 4)
     val bindings = new VarBindingsHierarchical
     val pageCopy = pageIt.clone
     var counter = 0
@@ -257,7 +257,7 @@ object VarBinder {
 
           //try to match the list 
           //the parsing consumes the template so for multiple matches we need to duplicate it
-          val copyOfTpl = tplIt.clone  
+          val copyOfTpl = tplIt.clone
           bindings addChild parseNodesWithTemplate(copyOfTpl, pageIt, varEndMarkers)
           counter += 1
         }
@@ -266,6 +266,7 @@ object VarBinder {
       case e : WiktionaryException => printMsg("parseList caught an exception - list ended "+e, 4) // now we know the list was finished
       bindings addChild e.vars
     }
+    printMsg("parseList matched "+counter+" times", 4)
     if((counter == 0 && listMode == "+")|| (counter > 1 && listMode == "?")){
         //println("list exception")
         restore(pageIt, pageCopy)
