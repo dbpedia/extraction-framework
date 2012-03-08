@@ -301,6 +301,7 @@
                     <resultTemplate>
                         <triples>
                             <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/uri($otherPage)" oType="URI"/>
+                            <triple s="http://wiktionary.dbpedia.org/resource/uri($word)" p="http://www.w3.org/2000/01/rdf-schema#label" o="$word" oType="literal"/>
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
@@ -310,11 +311,12 @@
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
-                            <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://wiktionary.dbpedia.org/resource/uri($otherPage)" oType="URI"/>
+                            <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://wiktionary.dbpedia.org/resource/uri($word)" oType="URI"/>
+                            <triple s="http://wiktionary.dbpedia.org/resource/uri($word)" p="http://www.w3.org/2000/01/rdf-schema#label" o="$word" oType="literal"/>
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
-                <wikiTemplate>#REDIRECT ~~$word|$otherPage~~</wikiTemplate>
+                <wikiTemplate>#REDIRECT ~~InternalLinkNode|$word~~</wikiTemplate>
             </template>
         </prologs>
         <epilogs>
@@ -326,9 +328,8 @@
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
-                <wikiTemplate>(~~$label|$lang:$otherPage~~
-)*
-</wikiTemplate>
+                <wikiTemplate>(~~ExternalLinkNode|$lang:$otherPage|$label~~
+)*</wikiTemplate>
             </template>
         </epilogs>
         <block name="lang">
@@ -349,7 +350,7 @@
                         <resultTemplate>
                             <triples>
                                 <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-map($pos)" oType="URI" oNewBlock="true" />
-                                <triple s="$block" p="http://purl.org/dc/elements/1.1/hasPoS" o="http://wiktionary.dbpedia.org/terms/map($pos)" oType="URI" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/map($pos)" oType="URI" />
                             </triples>
                         </resultTemplate>
                     </resultTemplates>                    
@@ -360,13 +361,13 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-$meaningId" oType="URI"/>
-                                    <triple s="$block-$meaningId" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>                    
                         <wikiTemplate>{{Beispiele}}
-(:~~$meaningId~~ $example
+(:~~ExternalLinkNode|$meaningId~~ $example
 )+
 </wikiTemplate>
                     </template>
@@ -391,13 +392,13 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-$meaningId" oType="URI"/>
-                                    <triple s="$block-$meaningId" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>                    
                         <wikiTemplate>{{Bedeutungen}}
-(:~~$meaningId~~ $meaning
+(:~~ExternalLinkNode|$meaningId~~ $meaning
 )+
 </wikiTemplate>
                     </template>
@@ -438,12 +439,12 @@ Singular=$flection-singular
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAudioSingular" o="http://uploads.wikimedia/$audioSingular" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAudioSingular" o="http://uploads.wikimedia/uri($audioSingular)" oType="URI" />
                                 </triples>
                             </resultTemplate>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAudioPlural" o="http://uploads.wikimedia/$audioPlural" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAudioPlural" o="http://uploads.wikimedia/uri($audioPlural)" oType="URI" />
                                 </triples>
                             </resultTemplate>
                             <resultTemplate>
@@ -458,28 +459,37 @@ Singular=$flection-singular
                             </resultTemplate>
                         </resultTemplates>                       
                         <wikiTemplate>{{Aussprache}}
-:~~Hilfe:IPA|IPA~~: {{Lautschrift|$pronunciationSingular}}, {{Pl.}} {{Lautschrift|$pronunciation-plural}}
-:~~Hilfe:Hörbeispiele|Hörbeispiele~~: {{Audio|$audioSingular}}, {{Pl.}} {{Audio|$audio-plural}}
+:{{IPA}} {{Lautschrift|$pronunciationSingular}}, {{Pl.}} {{Lautschrift|$pronunciation-plural}}
+:{{Hörbeispiele}} {{Audio|$audioSingular}}, {{Pl.}} {{Audio|$audio-plural}}
 
 </wikiTemplate>
                     </template>
-                    <!--template name="reference">
-                        <vars>
-                             <var name="reference" property="http://www.w3.org/2000/01/rdf-schema#seeAlso" format="///resolveTemplateToUri" senseBound="true"/>
-                        </vars>
+                    <template name="reference">
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$reference" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates> 
                         <wikiTemplate>{{Referenzen}}
-(:~~$meaningId~~ $reference
+(:~~ExternalLinkNode|$meaningId~~ $reference
 )
 </wikiTemplate>
                     </template>
                     <template name="source">
-                        <vars>
-                            <var name="source" property="http://wiktionary.dbpedia.org/terms/hasSource" format="///resolveTemplateToUri"/>
-                        </vars>
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSource" o="$source" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates> 
                         <wikiTemplate>{{Quellen}}
 (:$source
 )</wikiTemplate>
-                    </template-->
+                    </template>
                     <template name="translation" ppClass="GermanTranslationHelper">
                         <!-- no result template here - triples are generated by helper -->
                         <wikiTemplate>==== Übersetzungen ====
@@ -492,16 +502,12 @@ Singular=$flection-singular
 
 </wikiTemplate>
                     </template>
-                    <template name="relatedWords">
-                        <resultTemplates>
-                            <resultTemplate>
-                                <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasRelatedWord" o="http://wiktionary.dbpedia.org/terms/$word" oType="URI" />
-                                </triples>
-                            </resultTemplate>
-                        </resultTemplates>                    
+                    <template name="relatedWords" ppClass="LinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
+                        </parameters>                   
                         <wikiTemplate>{{Charakteristische Wortkombinationen}}
-(:[[$word]](, [[$word]])*
+(:$line
 )+
 </wikiTemplate>
                     </template>

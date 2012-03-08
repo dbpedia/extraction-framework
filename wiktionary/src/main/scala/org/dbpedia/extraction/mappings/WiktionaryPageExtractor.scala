@@ -23,6 +23,7 @@ import MyStack._
 import TimeMeasurement._
 import VarBinder._
 import Logging._
+import MyLinkNode._
 import WiktionaryPageExtractor._ //companion
 
 /**
@@ -139,19 +140,21 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         val prologtpl = Tpl.fromNode(prolog)
         Logging.printMsg("try "+prologtpl.name, 2)
          try {
-          proAndEpilogBindings.append( (prologtpl, parseNodesWithTemplate(prologtpl.wiki, pageStack)) )
+          proAndEpilogBindings.append( (prologtpl, parseNodesWithTemplate(prologtpl.wiki.clone, pageStack)) )
         } catch {
           case e : WiktionaryException => proAndEpilogBindings.append( (prologtpl, e.vars) )
         }
       }
-      Logging.printMsg(proAndEpilogBindings.size+ " prologs configured", 2)
 
       //handle epilog (ending) (e.g. "links to other languages") by parsing the page backwards
       val rev = new Stack[Node] pushAll pageStack //reversed
+      if(!rev.head.isInstanceOf[TextNode] || (rev.head.isInstanceOf[TextNode] && !rev.head.asInstanceOf[TextNode].text.equals("\n"))){
+        rev.push(new TextNode("\n",0))
+      }
       for(epilog <- languageConfig \ "page" \ "epilogs" \ "template"){
         val epilogtpl = Tpl.fromNode(epilog)
         try {
-          proAndEpilogBindings.append( (epilogtpl, parseNodesWithTemplate(epilogtpl.wiki, rev)) )
+          proAndEpilogBindings.append( (epilogtpl, parseNodesWithTemplate(epilogtpl.wiki.reverseSwapList, rev)) )
         } catch {
           case e : WiktionaryException => proAndEpilogBindings.append( (epilogtpl, e.vars) )
         }
@@ -336,7 +339,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                             entityId
                         } else {
                             if(!binding.contains(varName)){throw new Exception("missing binding for "+varName)};
-                            binding(varName).myToString
+                            binding(varName).toReadableString
                         }
                         replacement.replace(")", "?~*#?") //to prevent, that recorded ) symbols mess up the regex of map and uri
                 })
@@ -407,14 +410,6 @@ trait PostProcessor {
     }
     def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String, termsNS : String) : List[Quad]
  
-    def getDestination(ln : Node) : String = {
-        ln match {
-            case eln : ExternalLinkNode => eln.destination.toString
-            case iln : InternalLinkNode => iln.destination.decoded
-            case iwln : InterWikiLinkNode => iwln.destination.decoded
-            case _ => ln.children.myToString
-        }
-    }
 }
 
 class GermanTranslationHelper extends PostProcessor{
@@ -444,7 +439,12 @@ class GermanTranslationHelper extends PostProcessor{
                             } else {
                                 vf.createURI(tBI)
                             }
-                            quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, vf.createURI(resourceNS+WiktionaryPageExtractor.urify(translationTargetWord)+"-"+language), tripleContext)
+                            val translationTargetWordObj = vf.createURI(resourceNS+WiktionaryPageExtractor.urify(translationTargetWord))
+                            val translationTargetWordLangObj = vf.createURI(resourceNS+WiktionaryPageExtractor.urify(translationTargetWord)+"-"+language)
+                            quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, translationTargetWordObj, tripleContext)
+                            quads += new Quad(langObj, datasetURI, translationTargetWordObj, translateProperty, translationSourceWord, tripleContext) //the triple inversed
+                            quads += new Quad(langObj, datasetURI, translationTargetWordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasPoSUsage"), translationTargetWordLangObj, tripleContext)
+                            quads += new Quad(langObj, datasetURI, translationTargetWordObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(translationTargetWord), tripleContext)
                         })
                     }
                 }
@@ -470,7 +470,7 @@ class EnglishTranslationHelper extends PostProcessor{
         val translationSourceWord = vf.createURI(tBI)
         i.foreach(binding=>{
             try {
-            val langFull = binding("lang").myToString.replace("[^a-zA-Z]","")
+            val langFull = binding("lang").toReadableString.replace("[^a-zA-Z]","")
             val line = binding("line")
             line.foreach(node=>{
                 try{
@@ -522,7 +522,7 @@ class SenseLinkListHelper extends PostProcessor{
                           vf.createURI(tBI)
                         }
                          
-                        quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(resourceNS+WiktionaryPageExtractor.urify(getDestination(node))), tripleContext)
+                        quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(resourceNS+WiktionaryPageExtractor.urify(node.asInstanceOf[LinkNode].getDestination)), tripleContext)
                     })
                 } 
                 } catch {
@@ -550,7 +550,7 @@ class LinkListHelper extends PostProcessor{
             line.foreach(node=>{
                 try{
                 if(node.isInstanceOf[LinkNode]){
-                    quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(resourceNS+WiktionaryPageExtractor.urify(getDestination(node))), tripleContext)
+                    quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(resourceNS+WiktionaryPageExtractor.urify(node.asInstanceOf[LinkNode].getDestination)), tripleContext)
 
                 }
                 } catch {
