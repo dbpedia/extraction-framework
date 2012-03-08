@@ -387,7 +387,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   }
 }
 object WiktionaryPageExtractor {
-  def urify(in:String):String = in.replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
+  def urify(in:String):String = in.replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
 }
 
 trait PostProcessor {
@@ -516,7 +516,7 @@ class SenseLinkListHelper extends PostProcessor{
                 try{
                 if(node.isInstanceOf[LinkNode]){
                     expandSense(senses).foreach(sense =>{
-                        val sourceWord = vf.createURI(tBI+"-"+sense)
+                        val sourceWord = vf.createURI(tBI+"-"+WiktionaryPageExtractor.urify(sense))
                         quads += new Quad(langObj, datasetURI, sourceWord, linkProperty, vf.createURI(resourceNS+WiktionaryPageExtractor.urify(getDestination(node))), tripleContext)
                     })
                 } 
