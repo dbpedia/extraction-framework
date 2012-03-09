@@ -148,7 +148,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
       //handle epilog (ending) (e.g. "links to other languages") by parsing the page backwards
       val rev = new Stack[Node] pushAll pageStack //reversed
-      if(!rev.head.isInstanceOf[TextNode] || (rev.head.isInstanceOf[TextNode] && !rev.head.asInstanceOf[TextNode].text.equals("\n"))){
+      if(rev.headOption.isDefined && (!rev.head.isInstanceOf[TextNode] || (rev.head.isInstanceOf[TextNode] && !rev.head.asInstanceOf[TextNode].text.equals("\n")))){
         rev.push(new TextNode("\n",0))
       }
       for(epilog <- languageConfig \ "page" \ "epilogs" \ "template"){
