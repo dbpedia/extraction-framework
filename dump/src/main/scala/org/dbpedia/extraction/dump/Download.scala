@@ -47,6 +47,8 @@ object Download
      */
     def main(args : Array[String])
     {
+        // TODO: display usage when arguments are invalid
+      
         val dumpDir = new File(args.head)
 
         try
@@ -120,18 +122,8 @@ private object DumpDownloader
         val date = findMostRecentDate(wikiCode).getOrElse(throw new Exception("No complete dump of " + wikiCode + " found"))
         val url = downloadUri + "/" + name + "/" + date + "/"
 
-        //Delete outdated dumps
-//        for(subDirs <- Option(dir.listFiles()); subDir <- subDirs; if subDir.getName != date.toString && subDir.getName.matches("\\d{8}") )
-//        {
-//            logger.info("Deleting outdated dump " + subDir.getName)
-//            subDir.deleteRecursive()
-//        }
-
         //Generate a list of the expected links to the dump files
         val dumpLinks = dumpFiles.map(dumpFile => name + "-" + date + "-" + dumpFile)
-
-        //Retrieve download page
-        //val downloadPage = Source.fromURL(new URL(url))   //TODO REMOOOOOOOOOOOOOOOOOOOOOOVE
 
         //Create output directory
         val outputDir = new File(dir + "/" + date)
@@ -200,50 +192,64 @@ private object DumpDownloader
      */
     private def downloadFile(url : URL, file : File)
     {
+        val conn = url.openConnection()
+        
+        val lastModified = conn.getLastModified()
+        
+        val urlStream = conn.getInputStream()
+        
         val inputStream =
-            if (url.toString.endsWith(".gz"))
-            {
-                new GZIPInputStream(url.openStream())
-            }
-            else if (url.toString.endsWith(".bz2"))
-            {
-                new BZip2CompressorInputStream(url.openStream())
-            }
-            else
-            {
-                throw new IllegalArgumentException("Unsupported extension: "+url.toString)
-            }
+        if (url.toString.endsWith(".gz"))
+        {
+            new GZIPInputStream(urlStream)
+        }
+        else if (url.toString.endsWith(".bz2"))
+        {
+            new BZip2CompressorInputStream(urlStream)
+        }
+        else
+        {
+            throw new IllegalArgumentException("Unsupported extension: "+url.toString)
+        }
 
         val outputStream = new FileOutputStream(file)
-        val buffer = new Array[Byte](65536)
-
-        var totalBytes = 0L
-        val startTime = System.nanoTime
-        var lastLogTime = 0L
 
         try
         {
-            while(true)
-            {
-                val bytesRead = inputStream.read(buffer)
-                if(bytesRead == -1) return;
-                outputStream.write(buffer)
-                totalBytes += bytesRead
-                val kb = totalBytes / 1024L
-                val time = System.nanoTime
-                if(time - lastLogTime > 1000000000L)
-                {
-                    lastLogTime = time
-                    println("Uncompressed: " + kb + " KB (" + (kb.toDouble / (time - startTime) * 1000000000.0).toLong + "kb/s)")
-                }
-            }
+          download(inputStream, outputStream)
         }
         finally
         {
             inputStream.close()
             outputStream.close()
         }
+        
+        file.setLastModified(lastModified)
     }
+  
+    private def download(inputStream: InputStream, outputStream: OutputStream) : Unit = 
+    {
+        val buffer = new Array[Byte](65536)
+        var totalBytes = 0L
+        val startTime = System.nanoTime
+        var lastLogTime = 0L
+    
+        while(true)
+        {
+            val bytesRead = inputStream.read(buffer)
+            if(bytesRead == -1) return
+            outputStream.write(buffer)
+            totalBytes += bytesRead
+            val kb = totalBytes / 1024L
+            val time = System.nanoTime
+            if(time - lastLogTime > 1000000000L)
+            {
+                lastLogTime = time
+                println("Uncompressed: " + kb + " KB (" + (kb.toDouble / (time - startTime) * 1000000000.0).toLong + "kb/s)")
+            }
+        }
+    }
+    
 }
 
 /**
