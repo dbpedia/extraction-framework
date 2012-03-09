@@ -346,7 +346,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                 val mapped = mapPattern.replaceAllIn(replacedVars, (m) => {
                     val found = m.matched
                     val b = found.substring(4, found.length-1)
-                    mappings.getOrElse(b, b)
+                    map(b)
                 })
                 val encoded = uriPattern.replaceAllIn(mapped, (m) => {
                     val found = m.matched
@@ -388,9 +388,17 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     }
     quads.toList
   }
+
+  def map(in:String):String = {
+    val clean = getCleaned(in)
+    mappings.getOrElse(clean, clean)
+  }
 }
+
 object WiktionaryPageExtractor {
   def urify(in:String):String = in.replace("	"," ").replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
+  val cleanPattern = new Regex("[^a-zA-Z]")
+  def getCleaned(dirty:String) = cleanPattern.replaceAllIn(dirty, "").trim
 }
 
 trait PostProcessor {
@@ -410,8 +418,6 @@ trait PostProcessor {
     }
     def process(i : VarBindings, context : Context, parameters : Map[String, String]) : List[Quad]
    
-    
-
     val vf = ValueFactoryImpl.getInstance
 }
 
@@ -434,10 +440,11 @@ class Context (
 trait TranslationHelper extends PostProcessor {
     val translateCleanPattern = new Regex("\\([^\\)]*\\)")
     def getCleanWord(dirty:String) = translateCleanPattern.replaceAllIn(dirty.split(",").head, "").trim
+    
     def getTranslateTriples(source : Resource, property : URI, word : String, language : String, context : Context) : List[Quad] = {
         val quads = ListBuffer[Quad]()
         val wordObj = vf.createURI(context.resourceNS+WiktionaryPageExtractor.urify(word))
-        val wordLangObj = vf.createURI(context.resourceNS+WiktionaryPageExtractor.urify(word)+"-"+language)
+        val wordLangObj = vf.createURI(context.resourceNS+WiktionaryPageExtractor.urify(word)+"-"+WiktionaryPageExtractor.urify(language))
         //main translate triple
         quads += new Quad(context.langObj, context.datasetURI, source, property, wordLangObj, context.tripleContext)
         //the triple inversed
@@ -457,7 +464,7 @@ class GermanTranslationHelper extends TranslationHelper {
         i.foreach(binding=>{
             try {
             val lRaw = binding("lang")(0).asInstanceOf[TemplateNode].title.encoded
-            val language = context.mappings.getOrElse(lRaw, lRaw)
+            val language = context.extractor.map(lRaw)
             val line = binding("line")
             var curSense = "1"
             line.foreach(node=>{
@@ -501,7 +508,7 @@ class EnglishTranslationHelper extends TranslationHelper {
         i.foreach(binding=>{
             try {
             val langRaw = binding("lang").toReadableString.trim
-            val language = context.mappings.getOrElse(langRaw, langRaw)
+            val language = context.extractor.map(langRaw)
             val line = binding("line")
             line.foreach(node=>{
                 try{
