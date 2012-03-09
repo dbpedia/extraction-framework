@@ -17,8 +17,7 @@ import com.hp.hpl.jena.n3.turtle.parser.TurtleParser;
 import org.dbpedia.extraction.live.util.ModelUtil;
 import org.dbpedia.extraction.live.util.SQLUtil;
 import org.dbpedia.extraction.live.util.iterators.SinglePrefetchIterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.log4j.Logger;
 
 import virtuoso.jdbc4.VirtuosoExtendedString;
 import virtuoso.jdbc4.VirtuosoRdfBox;
@@ -41,7 +40,7 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 public class VirtuosoJdbcSparulExecutor
 	implements ISparulExecutor
 {
-	private static final Logger logger = LoggerFactory.getLogger(VirtuosoJdbcSparulExecutor.class);
+	private static final Logger logger = Logger.getLogger(VirtuosoJdbcSparulExecutor.class);
 	
 	private Connection con;
 	private String defaultGraphName;

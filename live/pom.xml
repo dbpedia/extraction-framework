@@ -5,10 +5,8 @@
         <artifactId>main</artifactId>
         <groupId>org.dbpedia.extraction</groupId>
         <version>2.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.dbpedia.extraction</groupId>
     <artifactId>live</artifactId>
     <name>Live extraction</name>
     <!--
@@ -34,42 +32,38 @@
 
         <dependency>
             <groupId>org.dbpedia.extraction</groupId>
-            <artifactId>dump</artifactId>
+            <artifactId>core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.dbpedia.extraction</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>dump</artifactId>
+            <version>${dbpedia.framework.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.sourceforge.collections</groupId>
             <artifactId>collections-generic</artifactId>
+            <version>4.01</version>
         </dependency>
+        
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
         </dependency>
+        
+        <!-- TODO: why mod4j? why not commons-lang? -->
         <dependency>
             <groupId>org.mod4j.org.apache.commons</groupId>
             <artifactId>lang</artifactId>
+            <version>2.1.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-        
 
         <dependency>
             <groupId>org.oclc.oai</groupId>
             <artifactId>harvester2</artifactId>
+            <version>0.1.12</version>
         </dependency>
 
         <dependency>
@@ -104,32 +98,45 @@
         <dependency>
             <groupId>org.jbind</groupId>
             <artifactId>jbind</artifactId>
+            <version>1.2</version>
         </dependency>
 
         <dependency>
             <groupId>org.ini4j</groupId>
             <artifactId>ini4j</artifactId>
+            <version>0.5.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.hp.hpl.jena</groupId>
             <artifactId>jena</artifactId>
+            <version>2.6.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.hp.hpl.jena</groupId>
             <artifactId>arq</artifactId>
+            <version>2.8.3</version>
         </dependency>
 
         <!-- XStream for xml serialization (of jena result sets) -->
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
+            <version>1.3.1</version>
         </dependency>
 
         <dependency>
             <groupId>ant</groupId>
             <artifactId>ant</artifactId>
             <version>1.6.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.9.0</artifactId>
+            <version>1.6.1</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

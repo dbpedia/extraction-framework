@@ -25,7 +25,7 @@
         <module>server</module>
         <module>scripts</module>
         <module>live</module>
-        <!--module>wiktionary</module-->
+        <module>wiktionary</module>
     </modules>
 
     <build>
@@ -90,6 +90,7 @@
     </build>
 
     <dependencies>
+
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-compiler</artifactId>
@@ -101,10 +102,6 @@
             <artifactId>scala-library</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.9.0</artifactId>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -115,26 +112,6 @@
                 <artifactId>core</artifactId>
                 <version>${dbpedia.framework.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.dbpedia.extraction</groupId>
-                <artifactId>dump</artifactId>
-                <version>${dbpedia.framework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.dbpedia.extraction</groupId>
-                <artifactId>server</artifactId>
-                <version>${dbpedia.framework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.dbpedia.extraction</groupId>
-                <artifactId>scripts</artifactId>
-                <version>${dbpedia.framework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.dbpedia.extraction</groupId>
-                <artifactId>wiktionary</artifactId>
-                <version>${dbpedia.framework.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.scala-lang</groupId>
@@ -142,118 +119,35 @@
                 <version>${scala.compiler.version}</version>
                 <scope>provided</scope>
             </dependency>
+            
             <dependency>
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-library</artifactId>
                 <version>${scala.compiler.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.scalatest</groupId>
-                <artifactId>scalatest_2.9.0</artifactId>
-                <version>1.6.1</version>
-            </dependency>
 
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring</artifactId>
-                <version>2.5.6</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-                <version>1.1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.openrdf</groupId>
-                <artifactId>openrdf</artifactId>
-                <version>1.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.14</version>
-            </dependency>
-
+            <!-- dump, scripts, server, wiktionary -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
                 <version>1.1</version>
             </dependency>
 
+            <!-- core, live, scripts -->
+            <!-- TODO: find a version in a public repo. -->
             <dependency>
-                <groupId>net.sourceforge.collections</groupId>
-                <artifactId>collections-generic</artifactId>
-                <version>4.01</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.mod4j.org.apache.commons</groupId>
-                <artifactId>lang</artifactId>
-                <version>2.1.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.oclc.oai</groupId>
-                <artifactId>harvester2</artifactId>
-                <version>0.1.12</version>
-            </dependency>
-
-            <dependency>
-              <groupId>junit</groupId>
-              <artifactId>junit</artifactId>
-              <version>4.8.2</version>
-              <scope>test</scope>
-            </dependency>
-
-
-            <!-- OMFG! This dependency is horrible - this is a dead XML api project
-       from 2004. In the meanwhile, all this XML stuff is probably already part
-       of some standard java library -->
-            <dependency>
-                <groupId>org.jbind</groupId>
-                <artifactId>jbind</artifactId>
-                <version>1.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.ini4j</groupId>
-                <artifactId>ini4j</artifactId>
-                <version>0.5.1</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>com.hp.hpl.jena</groupId>
-                <artifactId>jena</artifactId>
-                <version>2.6.2</version>
-            </dependency>
-            <dependency>
-                <groupId>com.hp.hpl.jena</groupId>
-                <artifactId>arq</artifactId>
-                <version>2.8.3</version>
-            </dependency>
-
-            <!-- XStream for xml serialization (of jena result sets) -->
-            <dependency>
-                <groupId>com.thoughtworks.xstream</groupId>
-                <artifactId>xstream</artifactId>
-                <version>1.3.1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.sun.jersey</groupId>
-                <artifactId>jersey-server</artifactId>
-                <version>1.2</version>
+                <groupId>org.openrdf</groupId>
+                <artifactId>openrdf</artifactId>
+                <version>1.0</version>
             </dependency>
 
         </dependencies>
-
     </dependencyManagement>
 
     <repositories>
+        
+        <!-- repo order is important - they are checked in the order given here -->
+        
         <repository>
             <id>maven</id><!-- don't call it central, that may lead to weird effects. -->
             <url>http://repo1.maven.org/maven2</url>
@@ -273,6 +167,7 @@
             <id>aksw</id>
             <url>http://prod1.aksw.org:8081/archiva/repository/internal</url>
         </repository>
+        
     </repositories>
 
 </project>
