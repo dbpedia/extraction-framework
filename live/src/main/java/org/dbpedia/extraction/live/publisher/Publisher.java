@@ -3,8 +3,7 @@ package org.dbpedia.extraction.live.publisher;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import org.dbpedia.extraction.live.main.Main;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.log4j.Logger;
 
 import javax.xml.parsers.SAXParser;
 import java.io.*;
@@ -25,7 +24,7 @@ import java.util.regex.Pattern;
 
 public class Publisher extends Thread{
 
-	private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
+	private static final Logger logger = Logger.getLogger(Publisher.class);
 
     Model addedTriplesModel = ModelFactory.createDefaultModel();
     StringBuffer deletedTriplesString = new StringBuffer();
