@@ -334,7 +334,7 @@
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
-                <wikiTemplate>#REDIRECT ~~$word|$otherPage~~</wikiTemplate>
+                <wikiTemplate>#REDIRECT ~~InternalLinkNode|$word|$otherPage~~</wikiTemplate>
             </template>
             <template name="also">
                 <resultTemplates>
@@ -357,7 +357,7 @@
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
-                <wikiTemplate>(~~$label|$lang:$otherPage~~
+                <wikiTemplate>(~~ExternalLinkNode|$label|$lang:$otherPage~~
 )*</wikiTemplate>
             </template>
         </epilogs>
@@ -392,6 +392,7 @@ $etymology
                         <resultTemplate>
                             <triples>
                                 <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://en.wikipedia.org/wiki/uri($entityId)" oType="URI"/>
+                                <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://dbpedia.org/resource/uri($entityId)" oType="URI"/>
                             </triples>
                         </resultTemplate>
                     </resultTemplates>
@@ -601,6 +602,11 @@ $note1
                         <resultTemplate>
                             <triples>
                                 <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPluralForm" o="$pl1" oType="literal"/>
+                            </triples>
+                        </resultTemplate>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPluralForm" o="$pl2" oType="literal"/>
                             </triples>
                         </resultTemplate>
                     </resultTemplates>
