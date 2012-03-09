@@ -502,12 +502,12 @@ Singular=$flection-singular
 
 </wikiTemplate>
                     </template>
-                    <template name="relatedWords" ppClass="LinkListHelper">
+                    <template name="relatedWords" ppClass="SenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
                         </parameters>                   
                         <wikiTemplate>{{Charakteristische Wortkombinationen}}
-(:$line
+(:$sense $line
 )+
 </wikiTemplate>
                     </template>

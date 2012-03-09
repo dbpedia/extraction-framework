@@ -390,7 +390,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   }
 }
 object WiktionaryPageExtractor {
-  def urify(in:String):String = in.replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
+  def urify(in:String):String = in.replace("	"," ").replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
 }
 
 trait PostProcessor {
@@ -414,6 +414,7 @@ trait PostProcessor {
 
 class GermanTranslationHelper extends PostProcessor{
     val vf = ValueFactoryImpl.getInstance
+    val translateCleanPattern = new Regex("\\([^\\)]*\\)")
 
     def process(i:VarBindings, b : Block, t : Tpl, bI : HashMap[String, URI], tBI : String, langObj : Language, datasetURI : Dataset, tripleContext : Resource, ns : String, parameters : Map[String, String], mappings : Map[String, String], resourceNS : String, termsNS : String) : List[Quad] = {
         val quads = ListBuffer[Quad]()
@@ -431,7 +432,7 @@ class GermanTranslationHelper extends PostProcessor{
                 } else if(node.isInstanceOf[TemplateNode]){
                     val tplType = node.asInstanceOf[TemplateNode].title.decoded
                     if(tplType == "Ü" || tplType == "Üxx"){
-                        val translationTargetWord = node.asInstanceOf[TemplateNode].property("2").get.children(0).asInstanceOf[TextNode].text
+                        val translationTargetWord = translateCleanPattern.replaceAllIn(node.asInstanceOf[TemplateNode].property("2").get.children(0).asInstanceOf[TextNode].text.split(",").head, "").trim
                         printMsg("translationTargetWord: "+translationTargetWord, 4)
                         expandSense(curSense).foreach(sense =>{
                             val translationSourceWord = if(sense.forall(_.isDigit)){ 
@@ -441,8 +442,8 @@ class GermanTranslationHelper extends PostProcessor{
                             }
                             val translationTargetWordObj = vf.createURI(resourceNS+WiktionaryPageExtractor.urify(translationTargetWord))
                             val translationTargetWordLangObj = vf.createURI(resourceNS+WiktionaryPageExtractor.urify(translationTargetWord)+"-"+language)
-                            quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, translationTargetWordObj, tripleContext)
-                            quads += new Quad(langObj, datasetURI, translationTargetWordObj, translateProperty, translationSourceWord, tripleContext) //the triple inversed
+                            quads += new Quad(langObj, datasetURI, translationSourceWord, translateProperty, translationTargetWordLangObj, tripleContext)
+                            quads += new Quad(langObj, datasetURI, translationTargetWordLangObj, translateProperty, translationSourceWord, tripleContext) //the triple inversed
                             quads += new Quad(langObj, datasetURI, translationTargetWordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasPoSUsage"), translationTargetWordLangObj, tripleContext)
                             quads += new Quad(langObj, datasetURI, translationTargetWordObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(translationTargetWord), tripleContext)
                         })
