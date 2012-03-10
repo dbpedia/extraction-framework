@@ -17,7 +17,7 @@ import com.hp.hpl.jena.n3.turtle.parser.TurtleParser;
 import org.dbpedia.extraction.live.util.ModelUtil;
 import org.dbpedia.extraction.live.util.SQLUtil;
 import org.dbpedia.extraction.live.util.iterators.SinglePrefetchIterator;
-import org.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import virtuoso.jdbc4.VirtuosoExtendedString;
 import virtuoso.jdbc4.VirtuosoRdfBox;

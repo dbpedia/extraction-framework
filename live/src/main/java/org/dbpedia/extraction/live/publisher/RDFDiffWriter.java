@@ -11,7 +11,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFWriter;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
-import org.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
