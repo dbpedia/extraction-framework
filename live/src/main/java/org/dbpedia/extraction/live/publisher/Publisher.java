@@ -3,7 +3,7 @@ package org.dbpedia.extraction.live.publisher;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import org.dbpedia.extraction.live.main.Main;
-import org.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import javax.xml.parsers.SAXParser;
 import java.io.*;
