@@ -464,16 +464,12 @@ $etymology
 )+
 </wikiTemplate>
                 </template>
-                <template name="links">
-                    <resultTemplates>
-                        <resultTemplate>
-                            <triples>
-                                <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$link" oType="URI"/>
-                            </triples>
-                        </resultTemplate>
-                    </resultTemplates>
+                <template name="links" ppClass="LinkListHelper">
+                    <parameters>
+                        <parameter name="linkProperty" value="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>                   
+                    </parameters> 
                     <wikiTemplate>===External links===
-(* $link
+($line
 )+
 </wikiTemplate>
                 </template>
