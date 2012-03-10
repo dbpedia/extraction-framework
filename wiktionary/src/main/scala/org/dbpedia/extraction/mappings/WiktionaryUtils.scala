@@ -463,9 +463,9 @@ object MyLinkNode{
 
 class MyLinkNode(val n : LinkNode){
   def getDestination : String = n match {
-            case eln : ExternalLinkNode => eln.destination.toString
-            case iln : InternalLinkNode => iln.destination.decoded
-            case iwln : InterWikiLinkNode => iwln.destination.decoded
-        }
+      case eln : ExternalLinkNode => eln.destination.toString
+      case iln : InternalLinkNode => iln.destination.decoded
+      case iwln : InterWikiLinkNode => iwln.destination.decoded
+  }
   def getLabel : String = n.children.toReadableString
 }

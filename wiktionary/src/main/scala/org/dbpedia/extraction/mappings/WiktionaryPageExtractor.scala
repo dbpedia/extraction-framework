@@ -298,7 +298,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     }
     
     Logging.printMsg(""+quads.size+" quads extracted for "+entityId, 1)
-    val quadsSortedDistinct = quads.groupBy(_.renderNTriple).map(_._2.head).toList.sortWith((q1, q2)=> q1.renderNTriple.compareTo(q2.renderNTriple) < 0)
+    val quadsSortedDistinct = quads.groupBy(_.renderNTriple).map(_._2.head).toList.sortWith((q1, q2)=>{
+      val subjComp = myCompare(q1.subject.toString, q2.subject.toString)
+      if(subjComp == 0){
+        myCompare(q1.predicate.toString, q2.predicate.toString) < 0
+      } else subjComp < 0
+})
+
     quadsSortedDistinct.foreach( q => { Logging.printMsg(q.renderNTriple, 1) } )
     Logging.printMsg("end "+subjectUri+" threadID="+Thread.currentThread().getId(),1)
     new Graph(quadsSortedDistinct)
@@ -399,6 +405,15 @@ object WiktionaryPageExtractor {
   def urify(in:String):String = in.replace("	"," ").replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
   val cleanPattern = new Regex("[^a-zA-Z]")
   def getCleaned(dirty:String) = cleanPattern.replaceAllIn(dirty, "").trim
+  def myCompare(s1 : String, s2 : String) : Int = {
+      val s1l = s1.length
+      val s2l = s2.length 
+      if(s1l == s2l){
+        s1.compareTo(s2) 
+      } else {
+        s1l - s2l
+      }
+  }
 }
 
 trait PostProcessor {
@@ -584,7 +599,15 @@ class LinkListHelper extends PostProcessor{
             line.foreach(node=>{
                 try{
                 if(node.isInstanceOf[LinkNode]){
-                    quads += new Quad(context.langObj, context.datasetURI, sourceWord, linkProperty, vf.createURI(context.resourceNS+WiktionaryPageExtractor.urify(node.asInstanceOf[LinkNode].getDestination)), context.tripleContext)
+                    val rawDestination = node.asInstanceOf[LinkNode].getDestination                    
+                    val destination = if(node.isInstanceOf[ExternalLinkNode] || rawDestination.startsWith("http://")){
+                        //external link
+                        rawDestination
+                    } else {
+                        //interal link
+                        context.resourceNS+WiktionaryPageExtractor.urify(rawDestination)
+                    }
+                    quads += new Quad(context.langObj, context.datasetURI, sourceWord, linkProperty, vf.createURI(destination), context.tripleContext)
 
                 }
                 } catch {
