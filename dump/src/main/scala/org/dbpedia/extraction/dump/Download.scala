@@ -74,7 +74,7 @@ private object DumpDownloader
     private val logger = Logger.getLogger(Download.getClass.getName)
 
     // The URI where the Wikipedia dumps can be found
-    private val downloadUri = "http://download.wikimedia.org"
+    private val downloadUri = "http://dumps.wikimedia.org"
 
     // The dump files we are interested in
     private val dumpFiles = List("pages-articles.xml.bz2", "image.sql.gz", "imagelinks.sql.gz",
@@ -119,7 +119,7 @@ private object DumpDownloader
     private def downloadWiki(wikiCode : String, dir : File)
     {
         val name = wikiCode.replace('-', '_') + "wiki"
-        val date = findMostRecentDate(wikiCode).getOrElse(throw new Exception("No complete dump of " + wikiCode + " found"))
+        val date = findMostRecentDate(name).getOrElse(throw new Exception("No complete dump of " + wikiCode + " found"))
         val url = downloadUri + "/" + name + "/" + date + "/"
 
         //Generate a list of the expected links to the dump files
@@ -160,9 +160,8 @@ private object DumpDownloader
      * @param wiki The MediaWiki
      * @return The date of the found dump
      */
-    private def findMostRecentDate(wikiCode : String) : Option[Int] =
+    private def findMostRecentDate(name : String) : Option[Int] =
     {
-        val name = wikiCode.replace('-', '_') + "wiki"
         val uri = downloadUri + "/" + name
 
         //Retrieve download overview page
@@ -257,7 +256,7 @@ private object DumpDownloader
 */
 private case class WikiInfo(prefix : String, language : String, goodArticleCount : Int, totalArticleCount : Int)
 {
-    override def toString = prefix.replace('-', '_') + ".wikipedia.org"
+    override def toString = prefix + ".wikipedia.org"
 }
 
 /**
