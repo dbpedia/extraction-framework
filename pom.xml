@@ -147,9 +147,10 @@
     <repositories>
         
         <!-- repo order is important - they are checked in the order given here -->
-        
+        <!-- put maven central first so that most stuff is downloaded from there -->
+        <!-- but don't call it 'central', that may lead to weird effects... -->
         <repository>
-            <id>maven</id><!-- don't call it central, that may lead to weird effects. -->
+            <id>maven</id>
             <url>http://repo1.maven.org/maven2</url>
         </repository>
 
@@ -169,6 +170,25 @@
         </repository>
         
     </repositories>
+    
+    <!-- 
+    add the following to your settings.xml. scala-library and jersey-project add these repos 
+    and maven tries to download everything from there. mirrorOf basically deactivates them.
+    -->
+    <!--
+    <mirrors>
+        <mirror>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2</url>
+            <mirrorOf>scala-tools.org</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2</url>
+            <mirrorOf>glassfish-repository</mirrorOf>
+        </mirror>
+    </mirrors>
+    -->
 
 </project>
 
