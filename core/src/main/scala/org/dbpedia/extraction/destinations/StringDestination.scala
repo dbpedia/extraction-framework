@@ -11,15 +11,15 @@ import java.io.StringWriter
  */
 class StringDestination(formatter : Formatter) extends Destination
 {
-  def this() = this( new NTriplesFormatter )
+    def this() = this( new NTriplesFormatter )
 
-	private val stringWriter = new StringWriter()
+    private val stringWriter = new StringWriter()
 
     private var headerWritten = false
 
     private var closed = false
 
-	override def write(graph : Graph) = synchronized
+    override def write(graph : Graph) = synchronized
     {
         if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
@@ -46,5 +46,5 @@ class StringDestination(formatter : Formatter) extends Destination
      * Retrieves the formatted data as a string.
      * The returned data is only partial until the destination has been closed.
      */
-	override def toString = synchronized { stringWriter.toString }
+    override def toString = synchronized { stringWriter.toString }
 }
