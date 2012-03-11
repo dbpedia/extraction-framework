@@ -7,7 +7,7 @@ import javax.ws.rs._
 import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
-import org.dbpedia.extraction.destinations.StringDestination
+import org.dbpedia.extraction.destinations.{StringDestination,ThrottlingDestination}
 import org.dbpedia.extraction.destinations.formatters.TriXFormatter
 import java.net.{URI, URL}
 import java.lang.Exception
@@ -208,7 +208,8 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         val stylesheetUri = new URI(("../" * title.count(_ == '/')) + "../../../stylesheets/trix.xsl")  // if there are slashes in the title, the stylesheets are further up in the directory tree
         val destination = new StringDestination(new TriXFormatter(stylesheetUri))
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
-        Server.extractor.extract(source, destination, language)
+        // extract at most 1000 triples
+        Server.extractor.extract(source, new ThrottlingDestination(destination, 1000), language)
         destination.close()
         destination.toString
     }
