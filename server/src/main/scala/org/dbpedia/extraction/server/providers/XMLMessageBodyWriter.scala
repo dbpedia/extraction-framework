@@ -10,7 +10,7 @@ import java.io.{OutputStreamWriter, IOException, OutputStream}
  * Used by the server to write xml responses.
  */
 @Provider
-@Produces(Array("application/xml", "text/xml", "application/xhtml+xml", "application/rdf+xml", "application/xslt+xml"))
+@Produces(Array("application/xml", "text/xml", "text/xsl", "application/xhtml+xml", "application/rdf+xml", "application/xslt+xml"))
 class XMLMessageBodyWriter extends MessageBodyWriter[AnyRef]
 {
     override def isWriteable(_type : java.lang.Class[_], genericType : java.lang.reflect.Type,

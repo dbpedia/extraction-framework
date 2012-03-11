@@ -7,7 +7,7 @@ import javax.ws.rs.{GET, Produces, Path}
 class TriX
 {
     @GET
-    @Produces(Array("application/xslt+xml"))
+    @Produces(Array("text/xsl"))
     def get : Elem =
     {
         <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:trix="http://www.w3.org/2004/03/trix/trix-1/">
