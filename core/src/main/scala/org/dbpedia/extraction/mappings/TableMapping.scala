@@ -36,12 +36,16 @@ class TableMapping( mapToClass : OntologyClass,
 
             for(baseClass <- clazz.subClassOf)
             {
-                thisGraph = graph.merge(writeType(rowNode, instanceUri, baseClass, thisGraph))
+                // FIXME: figure out what this code is supposed to do. 
+                // too much merging leads to combinatorial memory explosion. disabled for now. 
+                // thisGraph = graph.merge(writeType(rowNode, instanceUri, baseClass, thisGraph))
             }
 
             for(eqClass <- clazz.equivalentClasses)
             {
-                thisGraph = graph.merge(writeType(rowNode, instanceUri, eqClass, thisGraph))
+                // FIXME: figure out what this code is supposed to do. 
+                // too much merging leads to combinatorial memory explosion. disabled for now. 
+                // thisGraph = graph.merge(writeType(rowNode, instanceUri, eqClass, thisGraph))
             }
 
             thisGraph
