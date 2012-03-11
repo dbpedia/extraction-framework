@@ -197,13 +197,14 @@ class Mappings(@PathParam("lang") langCode : String) extends Base
         //Get the title of the mapping as well as its corresponding template on Wikipedia
         val mappingTitle = WikiTitle.parseEncoded(title, language)
         val templateTitle = new WikiTitle(mappingTitle.decoded, WikiTitle.Namespace.Template, mappingTitle.language)
-        logger.info("Extraction of samples of '" + templateTitle.encodedWithNamespace + "' requested for language " + language)
 
         //Find pages which use this mapping
         val wikiApiUrl = new URL("http://" + language.wikiCode + ".wikipedia.org/w/api.php")
         val api = new WikiApi(wikiApiUrl, language)
         val pageTitles = api.retrieveTemplateUsages(templateTitle, 10)
 
+        logger.info("extracting sample for '" + templateTitle.encodedWithNamespace + "' language " + language + " from pages " + pageTitles)
+        
         //Extract pages
         val stylesheetUri = new URI(("../" * title.count(_ == '/')) + "../../../stylesheets/trix.xsl")  // if there are slashes in the title, the stylesheets are further up in the directory tree
         val destination = new StringDestination(new TriXFormatter(stylesheetUri))
