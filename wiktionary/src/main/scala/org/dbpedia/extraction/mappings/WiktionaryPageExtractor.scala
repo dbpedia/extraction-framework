@@ -11,6 +11,7 @@ import util.control.Breaks._
 import java.io.FileNotFoundException
 import java.io.FileWriter
 import java.net.URLEncoder
+import java.net.URL
 import java.lang.StringBuffer
 import xml.{XML, Node => XMLNode}
 import scala.util.matching.Regex
@@ -366,8 +367,14 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
             val s = out("s")
             val p = out("p")
             val o = out("o")
+            
+            //to trigger exceptions if URL doesnt start with http:// etc            
+            new URL(s)
+            new URL(p)
             Logging.printMsg("emmiting triple "+s+" "+p+" "+o, 2)
+            //determine if o is literal or URI
             val oObj = if(tt.oType == "URI"){
+                new URL(o)
                 val oURI = vf.createURI(o)
                 if(tt.oNewBlock){
                   blockIris(block.name) = oURI //save for later
@@ -572,8 +579,16 @@ class SenseLinkListHelper extends PostProcessor{
                         } else {
                           vf.createURI(context.tBI)
                         }
+                        val rawDestination = node.asInstanceOf[LinkNode].getDestination                    
+                        val destination = if(node.isInstanceOf[ExternalLinkNode] || rawDestination.startsWith("http://")){
+                            //external link
+                            rawDestination
+                        } else {
+                            //interal link
+                            context.resourceNS+WiktionaryPageExtractor.urify(rawDestination)
+                        }
                          
-                        quads += new Quad(context.langObj, context.datasetURI, sourceWord, linkProperty, vf.createURI(context.resourceNS+WiktionaryPageExtractor.urify(node.asInstanceOf[LinkNode].getDestination)), context.tripleContext)
+                        quads += new Quad(context.langObj, context.datasetURI, sourceWord, linkProperty, vf.createURI(destination), context.tripleContext)
                     })
                 } 
                 } catch {
@@ -607,6 +622,7 @@ class LinkListHelper extends PostProcessor{
                         //interal link
                         context.resourceNS+WiktionaryPageExtractor.urify(rawDestination)
                     }
+                    
                     quads += new Quad(context.langObj, context.datasetURI, sourceWord, linkProperty, vf.createURI(destination), context.tripleContext)
 
                 }
