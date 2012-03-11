@@ -8,6 +8,8 @@ import java.net.URI
 /**
  * Formats statements according to the TriX format.
  * See: http://www.hpl.hp.com/techreports/2004/HPL-2004-56.html
+ * TODO: don't pass stylesheetURI but generic header string
+ * FIXME: stylesheetURI = null leads to silly output: href="null"
  */
 class TriXFormatter(stylesheetURI : URI = null) extends Formatter
 {
@@ -24,6 +26,7 @@ class TriXFormatter(stylesheetURI : URI = null) extends Formatter
 
     override def write(quad : Quad, writer : Writer) : Unit =
     {
+        // TODO: string + is relatively inefficient
         writer.write("  <graph>\n")
         writer.write("    <uri>" + encode(quad.context) + "</uri>\n")
         writer.write("    <triple>\n")
@@ -44,5 +47,6 @@ class TriXFormatter(stylesheetURI : URI = null) extends Formatter
         writer.write("  </graph>\n")
     }
 
+    // TODO: this is probably inefficient. use Utility.escape(String, StringBuilder)
     private def encode(str : String) = str.map(c => Utility.Escapes.escMap.get(c).getOrElse(c)).mkString
 }
