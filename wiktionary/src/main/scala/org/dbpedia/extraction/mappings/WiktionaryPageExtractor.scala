@@ -368,13 +368,22 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
             val p = out("p")
             val o = out("o")
             
-            //to trigger exceptions if URL doesnt start with http:// etc            
+            //to trigger exceptions if URL doesnt start with http:// etc, i dont use a real regex because its to heavy for every URI            
             new URL(s)
+            if(s.contains(" ")){
+                throw new Exception("invalid URI")
+            }
             new URL(p)
+            if(p.contains(" ")){
+                throw new Exception("invalid URI")
+            }
             Logging.printMsg("emmiting triple "+s+" "+p+" "+o, 2)
             //determine if o is literal or URI
             val oObj = if(tt.oType == "URI"){
                 new URL(o)
+                if(o.contains(" ")){
+                    throw new Exception("invalid URI")
+                }
                 val oURI = vf.createURI(o)
                 if(tt.oNewBlock){
                   blockIris(block.name) = oURI //save for later
