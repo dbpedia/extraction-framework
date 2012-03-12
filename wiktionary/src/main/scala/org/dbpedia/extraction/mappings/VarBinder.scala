@@ -143,14 +143,14 @@ object VarBinder {
                   val label = linkNodeFromPage.getLabel
                   //extract from the destination link
                   bindings mergeWith parseNodesWithTemplate(
-                    new Stack[Node]() pushAll tplNodeFromTpl.property("3").get.children.reverse,
-                    new Stack[Node]() push new TextNode(destination, 0)
+                    tplNodeFromTpl.property("3").get.children.toStack,
+                    new Stack[Node]() push new TextNode(label, 0)
                   )
                   if(tplNodeFromTpl.property("4").isDefined){
                     //extract from the label
                     bindings mergeWith parseNodesWithTemplate(
-                      new Stack[Node]() pushAll tplNodeFromTpl.property("4").get.children.reverse,
-                      new Stack[Node]() push new TextNode(label, 0)
+                    tplNodeFromTpl.property("4").get.children.toStack,
+                      new Stack[Node]() push new TextNode(destination, 0)
                     )
                   }
                   pageIt.pop
@@ -249,7 +249,7 @@ object VarBinder {
     try {
       breakable {
         while(pageIt.size > 0 ){
-          if(endMarkerNode.isDefined &&
+          /*if(endMarkerNode.isDefined &&
             (
               (pageIt.size > 0 && pageIt.head.equalsIgnoreLine(endMarkerNode.get)) ||   
               (pageIt.head.isInstanceOf[TextNode] && endMarkerNode.get.isInstanceOf[TextNode] &&
@@ -259,7 +259,7 @@ object VarBinder {
           ){    //TODO liststart = endmarker
             //printMsg("list ended by endmarker", 4)
             break
-          }
+          }*/
 
           //try to match the list 
           //the parsing consumes the template so for multiple matches we need to duplicate it

@@ -579,15 +579,7 @@ class SenseLinkListHelper extends PostProcessor{
                         } else {
                           vf.createURI(context.tBI)
                         }
-                        val rawDestination = node.asInstanceOf[LinkNode].getDestination                    
-                        val destination = if(node.isInstanceOf[ExternalLinkNode] || rawDestination.startsWith("http://")){
-                            //external link
-                            rawDestination
-                        } else {
-                            //interal link
-                            context.resourceNS+WiktionaryPageExtractor.urify(rawDestination)
-                        }
-                         
+                        val destination = node.asInstanceOf[LinkNode].getFullDestination(context.resourceNS)
                         quads += new Quad(context.langObj, context.datasetURI, sourceWord, linkProperty, vf.createURI(destination), context.tripleContext)
                     })
                 } 
@@ -614,15 +606,7 @@ class LinkListHelper extends PostProcessor{
             line.foreach(node=>{
                 try{
                 if(node.isInstanceOf[LinkNode]){
-                    val rawDestination = node.asInstanceOf[LinkNode].getDestination                    
-                    val destination = if(node.isInstanceOf[ExternalLinkNode] || rawDestination.startsWith("http://")){
-                        //external link
-                        rawDestination
-                    } else {
-                        //interal link
-                        context.resourceNS+WiktionaryPageExtractor.urify(rawDestination)
-                    }
-                    
+                    val destination = node.asInstanceOf[LinkNode].getFullDestination(context.resourceNS)
                     quads += new Quad(context.langObj, context.datasetURI, sourceWord, linkProperty, vf.createURI(destination), context.tripleContext)
 
                 }

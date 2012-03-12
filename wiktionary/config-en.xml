@@ -347,6 +347,17 @@
                 </resultTemplates>
                 <wikiTemplate>{{also|$other}}</wikiTemplate>
             </template>
+            <template name="wikipedia2">
+                <resultTemplates>
+                    <resultTemplate>
+                        <triples>
+                            <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://en.wikipedia.org/wiki/uri($word)" oType="URI"/>
+                            <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://dbpedia.org/resource/uri($word)" oType="URI"/>
+                        </triples>
+                    </resultTemplate>
+                 </resultTemplates>
+                 <wikiTemplate>{{wikipedia|$word}}</wikiTemplate>
+            </template>
         </prologs>
         <epilogs>
             <template name="otherLanguages">
@@ -357,7 +368,8 @@
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
-                <wikiTemplate>(~~ExternalLinkNode|$label|$lang:$otherPage~~
+                <wikiTemplate>
+(~~InterWikiLinkNode|$lang:$otherPage|$label~~
 )*</wikiTemplate>
             </template>
         </epilogs>
@@ -397,6 +409,17 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>{{slim-wikipedia}}</wikiTemplate>
+                </template>
+                <template name="wikipedia2">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://en.wikipedia.org/wiki/uri($word)" oType="URI"/>
+                                <triple s="$block" p="http://www.w3.org/2002/07/owl#sameAs" o="http://dbpedia.org/resource/uri($word)" oType="URI"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>{{wikipedia|$word}}</wikiTemplate>
                 </template>
                 <template name="pronunciation">
                     <resultTemplates>

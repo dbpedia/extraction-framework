@@ -11,6 +11,7 @@ import MyStack._
 import MyNode._
 import MyString._
 import MyNodeList._
+import MyLinkNode._
 
 case class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
 
@@ -383,7 +384,9 @@ class MyNode (val n : Node){
     n match {
       case tn : TemplateNode => "<tpl>"+tn.toWikiText+"</tpl> "
       case tn : TextNode => "<text>"+tn.toWikiText+"</text> "
-      case ln : LinkNode => "<link>"+ln.toWikiText+"</link> "
+      case ln : ExternalLinkNode => "<ExternalLinkNode>"+ln.toWikiText+"</link> "
+      case ln : InternalLinkNode => "<InternalLinkNode>"+ln.toWikiText+"</link> "
+      case ln : InterWikiLinkNode => "<InterWikiLinkNode>"+ln.toWikiText+"</link> "
       case sn : SectionNode=> "<section>"+sn.toWikiText+"</section> "
       case node : Node=> "<other "+node.getClass+">"+node.retrieveText.getOrElse("") + "</other> "
     }
@@ -444,8 +447,16 @@ class MyNodeList(val nl : List[Node]) {
     nl.map((node:Node) => node.toWikiText).mkString(" ")
   }
 
+  val templateRepresentativeProperty = Map(
+    "term"      -> 1,
+    "IPA"       -> 1,
+    "SAMPA"     -> 1,
+    "rhymes"    -> 1,
+    "homophones"->1
+  )
+
   def toReadableString : String = nl.map(n => { n match {
-    case tn : TemplateNode => if(tn.title.decoded.equals("term")){tn.property("1").get.retrieveText.getOrElse("") } else {""}
+    case tn : TemplateNode => if(templateRepresentativeProperty.contains(tn.title.decoded)){tn.property(templateRepresentativeProperty(tn.title.decoded).toString).get.retrieveText.getOrElse("") } else {""}
     case _ => n.retrieveText.getOrElse("") 
   }}).mkString
 
@@ -466,6 +477,16 @@ class MyLinkNode(val n : LinkNode){
       case eln : ExternalLinkNode => eln.destination.toString
       case iln : InternalLinkNode => iln.destination.decoded
       case iwln : InterWikiLinkNode => iwln.destination.decoded
+  }
+  def getFullDestination(ns:String) : String = {
+      val rawDestination = n.getDestination                    
+      if(n.isInstanceOf[ExternalLinkNode] || rawDestination.startsWith("http://")){
+          //external link
+          rawDestination
+      } else {
+          //interal link
+          ns + WiktionaryPageExtractor.urify(rawDestination)
+      }
   }
   def getLabel : String = n.children.toReadableString
 }
