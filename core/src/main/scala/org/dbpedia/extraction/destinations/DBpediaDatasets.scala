@@ -20,6 +20,7 @@ object DBpediaDatasets
     val Revisions = new Dataset("revisions")
     val PageIds = new Dataset("page_ids")
     val SameAs = new Dataset("interlanguage_links")
+    val Genders = new Dataset("genders")
 
     /**
      * Mapping based
