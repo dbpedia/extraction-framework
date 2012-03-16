@@ -4,8 +4,8 @@ object GenderExtractorConfig
 {
 
     val pronounsMap = Map(
-        "en" -> Map("she" -> "female", "her" -> "female", "he" -> "male", "his" -> "male", "him" -> "male",
-                    "She" -> "female", "Her" -> "female", "He" -> "male", "His" -> "male"
+        "en" -> Map("she" -> "female", "her" -> "female", "he" -> "male", "his" -> "male", "him" -> "male", "herself" -> "female", "himself" -> "male",
+                    "She" -> "female", "Her" -> "female", "He" -> "male", "His" -> "male", "Him" -> "male", "Herself" -> "female", "Himself" -> "male" //TODO why not just do case insensitive matches?
         )
     )
 
