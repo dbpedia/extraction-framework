@@ -2,24 +2,35 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
-import org.dbpedia.extraction.destinations.{Dataset, Graph, Quad}
 import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.config.mappings.TopicalConceptsExtractorConfig
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Graph, Quad}
 
 /**
  * Relies on Cat main templates. Goes over all categories and extract DBpedia Resources that are the main subject of that category.
  * We are using this to infer that a resource is a Topical Concept.
  *
- * TODO we currently just assert that "?category skos:subject ?resource". Perhaps also add "?resource rdf:type dbpedia-owl:TopicalConcept". Perhaps only do that for resources that have no other ontology type.
+ * TODO only do that for resources that have no other ontology type, in post-processing
+ *
+ * TODO check if templates Cat_exp, Cat_main_section, and Cat_more also apply
  *
  * @author pablomendes
- * @blessing maxjakob
+ * @author maxjakob
  */
 class TopicalConceptsExtractor( context : {
                                    def ontology : Ontology
                                    def language : Language } ) extends Extractor
 {
-    val skosSubjectProperty = context.ontology.getProperty("skos:subject")
+    private val skosSubjectProperty = context.ontology.getProperty("skos:subject")
                               .getOrElse(throw new NoSuchElementException("Ontology property 'skos:subject' does not exist in DBpedia Ontology."))
+
+    private val rdfTypeProperty = context.ontology.getProperty("rdf:type")
+                              .getOrElse(throw new NoSuchElementException("Ontology property 'rdf:type' does not exist in DBpedia Ontology."))
+
+    private val skosSubjectClass = context.ontology.getClass("skos:Concept")
+                           .getOrElse(throw new NoSuchElementException("Ontology property 'skos:Concept' does not exist in DBpedia Ontology."))
+
+    private val catMainTemplates = TopicalConceptsExtractorConfig.catMainTemplates;
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -31,20 +42,29 @@ class TopicalConceptsExtractor( context : {
 //                println("Found more than one cat main. %s".format(page.title))
 
             try {
-
-                //TODO perhaps more useful if we constrain to only DBpedia resources that are not in any other class.
-                val quads = allTemplates.map{template =>
-                    new Quad(context.language,
-                        new Dataset("cat_mains"),
+                val quads = allTemplates.flatMap{ template =>
+                    val mainResource = OntologyNamespaces.getResource(
+                      WikiUtil.wikiEncode(template.property("1").get.retrieveText.get), context.language)
+                    (new Quad(context.language,
+                        DBpediaDatasets.TopicalConcepts,
                         subjectUri,
                         skosSubjectProperty,
-                        OntologyNamespaces.getResource(WikiUtil.wikiEncode(template.property("1").get.retrieveText.get), context.language),
+                        mainResource,
+                        template.sourceUri,
+                        null) ::
+                    new Quad(context.language,
+                        DBpediaDatasets.TopicalConcepts,
+                        mainResource,
+                        rdfTypeProperty,
+                        skosSubjectClass.uri,
                         template.sourceUri,
                         null)
+                    :: Nil)
                 }
+
                 return new Graph(quads)
             } catch {
-                case e: Exception => println("Cat main extraction failed for page %s.".format(page.title))
+                case e: Exception => println("TopicalConceptsExtractor failed for page %s.".format(page.title))
             }
 
         }
@@ -54,10 +74,8 @@ class TopicalConceptsExtractor( context : {
 
     private def collectCatMains(node : Node) : List[TemplateNode] = node match
     {
-        case catMainLinkNode : TemplateNode if catMainLinkNode.title.decoded == "Cat main" && catMainLinkNode.property("1").nonEmpty => List(catMainLinkNode)
-        case commonsCatLinkNode : TemplateNode if commonsCatLinkNode.title.decoded == "Commons cat" && commonsCatLinkNode.property("1").nonEmpty => List(commonsCatLinkNode)
+        case catMainLinkNode : TemplateNode if catMainTemplates.contains(catMainLinkNode.title.decoded) && catMainLinkNode.property("1").nonEmpty => List(catMainLinkNode)
         case _ => node.children.flatMap(collectCatMains)
     }
 
 }
-
