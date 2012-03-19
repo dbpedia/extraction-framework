@@ -2,6 +2,8 @@ package org.dbpedia.extraction.destinations
 
 /**
  * Defines the datasets which are extracted by DBpedia.
+ * TODO: use a Scala Enumeration
+ * TODO: add references to the extractor classes.
  */
 object DBpediaDatasets
 {
