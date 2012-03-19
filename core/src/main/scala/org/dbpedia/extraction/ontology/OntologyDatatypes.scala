@@ -5,7 +5,8 @@ import datatypes._
 /**
  * Loads the ontology datatypes.
  */
-// TODO: this is a hack. Data types should be configured in configuration files.
+// TODO: this is a bit of a hack. Data types should be configured in the mappings wiki.
+// TODO: add acceleration (for planet surface gravity etc)
 object OntologyDatatypes
 {
 	def load() : List[Datatype] =
