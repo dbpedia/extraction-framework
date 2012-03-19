@@ -1,8 +1,18 @@
 package org.dbpedia.extraction.destination;
 
-import java.util.logging.Logger;
+import java.io.FileOutputStream;
+import java.nio.channels.FileLock;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
-import org.dbpedia.extraction.destinations.*;
+import java.util.logging.Logger;
+
+import org.dbpedia.extraction.destinations.DBpediaDatasets;
+import org.dbpedia.extraction.destinations.Dataset;
+import org.dbpedia.extraction.destinations.Destination;
+import org.dbpedia.extraction.destinations.Graph;
+import org.dbpedia.extraction.destinations.Quad;
 import org.dbpedia.extraction.ontology.datatypes.Datatype;
 import org.dbpedia.helper.CoreUtil;
 import org.dbpedia.helper.Triple;
@@ -11,11 +21,9 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
-import scala.collection.JavaConversions;
 
-import java.io.FileOutputStream;
-import java.nio.channels.FileLock;
-import java.util.*;
+import scala.collection.JavaConversions;
+import scala.collection.immutable.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,7 +39,7 @@ public class SQLFileDestination implements Destination {
     private static final String FILENAME = "/home/mohamed/DBpediaDumpOutput/SqlLog.sql";
     private static final Logger logger = Logger.getLogger(SQLFileDestination.class.getName());
 
-    public HashMap JSONObject = new HashMap();
+    public Map<String, Map<String, Map<String, String>>> jsonObject = new HashMap<String, Map<String, Map<String, String>>>();
     private String oaiId;
     private URI uri;
 
@@ -41,25 +49,17 @@ public class SQLFileDestination implements Destination {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public synchronized void write(Graph graph){
 
-        //List tripleList = JavaConversions.asList(graph.quads());
-        Map<Dataset, scala.collection.immutable.List<Quad>> tripleWithDataset = JavaConversions.mapAsJavaMap(graph.quadsByDataset());
+        Map<Dataset, List<Quad>> datasets = JavaConversions.mapAsJavaMap(graph.quadsByDataset());
+        for (Entry<Dataset, List<Quad>> e : datasets.entrySet()) {
+            Dataset ds = e.getKey();
+            List<Quad> quads = e.getValue();
 
-        Set keySet = tripleWithDataset.keySet();
-        Iterator keysIterator = keySet.iterator();
+            Map<String, Map<String, String>> newHashSet = new HashMap<String, Map<String, String>>();
+            for(Quad quad : JavaConversions.asJavaIterable(quads)){
 
-        while(keysIterator.hasNext()){
-            Dataset ds = (Dataset) keysIterator.next();
-
-            HashMap newHashSet = new HashMap();
-            scala.collection.immutable.List<Quad> quadList = tripleWithDataset.get(ds);
-
-            Iterable<Quad> listQuads = JavaConversions.asJavaIterable(quadList);
-            for(Quad quad : listQuads){
-
-                HashMap tmp = new HashMap();
+                Map<String, String> tmp = new HashMap<String, String>();
 
                 Triple tr = new Triple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()),
                                     constructTripleObject(quad));
@@ -70,10 +70,11 @@ public class SQLFileDestination implements Destination {
 
                 newHashSet.put(tr.getMD5HashCode(), tmp);
             }
-            JSONObject.put(mapDatasetToExtractorID(ds), newHashSet);
+            jsonObject.put(mapDatasetToExtractorID(ds), newHashSet);
         }
     }
 
+    // TODO: remove this method when Dataset objects include a reference to the appropriate class
     private String mapDatasetToExtractorID(Dataset dataset){
 
         String extractorID = "";
@@ -163,7 +164,7 @@ public class SQLFileDestination implements Destination {
 
     public synchronized void close() {
         try{
-            String strJSONString = JSONValue.toJSONString(JSONObject);
+            String strJSONString = JSONValue.toJSONString(jsonObject);
 
 //            String actualInsertStatement = "INSERT INTO " + TABLENAME + "(" + FIELD_OAIID + ", " +
 //                FIELD_RESOURCE + " , " + FIELD_JSON_BLOB + " ) VALUES ("+ this.oaiId +
