@@ -59,14 +59,14 @@ public class Triple extends StatementImpl{
         return hashCode;
     }
 
-public static String getHexString(byte[] b) throws Exception {
-  String result = "";
-  for (int i=0; i < b.length; i++) {
-    result +=
-          Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
-  }
-  return result;
-}
+    public static String getHexString(byte[] b) {
+      String result = "";
+      for (int i=0; i < b.length; i++) {
+        result +=
+              Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
+      }
+      return result;
+    }
 
 
     public String toNTriples()
@@ -75,7 +75,7 @@ public static String getHexString(byte[] b) throws Exception {
             NTriplesUtil.toNTriplesString(this.getPredicate()) + " " +
             NTriplesUtil.toNTriplesString(this.getObject()) + " .\n" ;
 
-		return strNTriples;
+        return strNTriples;
     }
     public static URI page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
