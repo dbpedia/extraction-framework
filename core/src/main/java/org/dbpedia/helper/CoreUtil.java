@@ -12,6 +12,7 @@ import org.openrdf.model.Value;
 import org.openrdf.rio.ntriples.NTriplesUtil;
 
 /**
+ * TODO: why is this class necessary? Quad.render() does pretty much the same thing...
  * Created by IntelliJ IDEA.
  * User: Mohamed Morsey
  * Date: Aug 19, 2010
@@ -88,47 +89,47 @@ public class CoreUtil {
 
     private static String escapeString(String input){
         StringBuilder outputString = new StringBuilder();
-		for (char c :input.toCharArray())
-		{
-			if (c == '\\' || c == '"')
-			{
-				outputString.append('\\' + c);
-			}
-			else if (c == '\n')
-			{
-				outputString.append("\\n");
-			}
-			else if (c == '\r')
-			{
-				outputString.append("\\r");
-			}
-			else if (c == '\t')
-			{
-				outputString.append("\\t");
-			}
-			else if (c >= 32 && c < 127)
-			{
-				outputString.append(c);
-			}
-			else
-			{
-				outputString.append("\\u");
+        for (char c :input.toCharArray())
+        {
+            if (c == '\\' || c == '"')
+            {
+                outputString.append('\\' + c);
+            }
+            else if (c == '\n')
+            {
+                outputString.append("\\n");
+            }
+            else if (c == '\r')
+            {
+                outputString.append("\\r");
+            }
+            else if (c == '\t')
+            {
+                outputString.append("\\t");
+            }
+            else if (c >= 32 && c < 127)
+            {
+                outputString.append(c);
+            }
+            else
+            {
+                outputString.append("\\u");
 
-				//val hexStr = c.toHexString().toUpperCase
+                //val hexStr = c.toHexString().toUpperCase
                 String hexStr = Integer.toHexString(c).toUpperCase();
-				int pad = 4 - hexStr.length();
+                int pad = 4 - hexStr.length();
 
-				while (pad > 0)
-				{
-					outputString.append('0');
-					pad -= 1;
-				}
+                while (pad > 0)
+                {
+                    outputString.append('0');
+                    pad -= 1;
+                }
 
-				outputString.append(hexStr);
-			}
-		}
-		return outputString.toString();
-	}
+                outputString.append(hexStr);
+            }
+        }
+        return outputString.toString();
+    }
 
     /**
      * @deprecated please use WikiUtil.wikiEncode!
@@ -138,5 +139,5 @@ public class CoreUtil {
     @Deprecated
     public static String wikipediaEncode(String page_title) {
         return WikiUtil.wikiEncode(page_title, Language.Default(), true);
- 	}
+     }
 }
