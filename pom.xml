@@ -13,10 +13,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.compiler.version>1.6</java.compiler.version>
-        <maven.scala.plugin.version>2.15.2</maven.scala.plugin.version>
-        <scala.compiler.version>2.9.0</scala.compiler.version>
+        <maven.scala.version>2.9.1</maven.scala.version>
         <scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
-        <dbpedia.framework.version>2.0-SNAPSHOT</dbpedia.framework.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <modules>
@@ -30,11 +29,16 @@
 
     <build>
         <plugins>
-            <plugin>
 
+            <!-- 
+            Note: we could drop this plugin config and just use scala:compile, but then 
+            the Scala plugin doesn't understand sub-modules.
+            -->
+            <plugin>
+            
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
-                <version>${maven.scala.plugin.version}</version>
+                <version>${maven.scala.version}</version>
 
                 <configuration>
                     <jvmArgs>
@@ -66,8 +70,8 @@
                         </goals>
                         <phase>process-resources</phase>
                     </execution>
-
                 </executions>
+                
             </plugin>
 
             <plugin>
@@ -78,31 +82,8 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-compiler</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-        </dependency>
-
-    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -110,20 +91,13 @@
             <dependency>
                 <groupId>org.dbpedia.extraction</groupId>
                 <artifactId>core</artifactId>
-                <version>${dbpedia.framework.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.scala-lang</groupId>
-                <artifactId>scala-compiler</artifactId>
-                <version>${scala.compiler.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            
-            <dependency>
-                <groupId>org.scala-lang</groupId>
                 <artifactId>scala-library</artifactId>
-                <version>${scala.compiler.version}</version>
+                <version>${maven.scala.version}</version>
             </dependency>
 
             <!-- dump, scripts, server, wiktionary -->
@@ -154,16 +128,7 @@
             <url>http://repo1.maven.org/maven2</url>
         </repository>
 
-        <repository>
-            <id>aduna</id>
-            <url>http://repository.aduna-software.org/maven2</url>
-        </repository>
-
-        <repository>
-            <id>openanzo</id>
-            <url>http://www.openanzo.org/maven-repositories/release</url>
-        </repository>
-
+        <!-- for our special openrdf and json JARs -->
         <repository>
             <id>aksw</id>
             <url>http://prod1.aksw.org:8081/archiva/repository/internal</url>
