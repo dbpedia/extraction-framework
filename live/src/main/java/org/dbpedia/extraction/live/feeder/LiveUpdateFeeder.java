@@ -2,7 +2,6 @@ package org.dbpedia.extraction.live.feeder;
 
 import org.apache.commons.collections15.iterators.TransformIterator;
 import org.apache.log4j.Logger;
-import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
 import org.dbpedia.extraction.live.priority.Priority;
@@ -52,9 +51,6 @@ public class LiveUpdateFeeder extends Thread{
 //    String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
     String baseWikiUri = "http://live.dbpedia.org/syncwiki/";
     String oaiPrefix = "oai:live.dbpedia.org:dbpediawiki:";
-
-    //This parser is used to parse the XML text generated from the page, in order to get the PageID
-    DOMParser parser = new DOMParser();
 
 //    public LiveUpdateFeeder(){
 //        super("Live extraction feeder");

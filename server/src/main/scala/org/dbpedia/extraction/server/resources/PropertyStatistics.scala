@@ -3,6 +3,7 @@ package org.dbpedia.extraction.server.resources
 import javax.ws.rs._
 import org.dbpedia.extraction.server.Server
 import collection.immutable.ListMap
+import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.server.util.CreateMappingStats.{WikipediaStats, MappingStats}
 import java.io.{FileNotFoundException, File}
@@ -10,16 +11,14 @@ import org.dbpedia.extraction.server.util.{IgnoreList, CreateMappingStats}
 import java.net.{URLEncoder, URLDecoder}
 
 @Path("/templatestatistics/{lang}/{template}/")
-class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("template") temp: String) extends Base
+class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("template") temp: String)
 {
-    private val language = Language.fromWikiCode(langCode)
+    private val language = Language.tryCode(langCode)
                 .getOrElse(throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
     if (!Server.config.languages.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
 
-    private val mappingUrlPrefix =
-        if (langCode == "en") "http://mappings.dbpedia.org/index.php/Mapping:"
-        else "http://mappings.dbpedia.org/index.php/Mapping_"+langCode+":"
+    private val mappingUrlPrefix = Server.config.wikiPagesUrl + WikiTitle.mappingNamespace(language).get.toString + ":"
 
     private val createMappingStats = new CreateMappingStats(language)
 

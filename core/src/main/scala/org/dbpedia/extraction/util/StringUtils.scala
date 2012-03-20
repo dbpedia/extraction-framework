@@ -51,7 +51,7 @@ class StringUtils(str : String)
     }
 
     /**
-     * Converts this String to camel case.
+     * Converts this String to camel case. The first character is not changed.
      *
      * @param splitAt The regex used to split the string into words
      * @param locale The locale used to capitalize the words

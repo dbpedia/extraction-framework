@@ -20,39 +20,32 @@ class WikiTitle(val decoded : String, val namespace : WikiTitle.Namespace = Wiki
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
     /** Encoded page name (without namespace) e.g. Automobile_generation */
-    lazy val encoded = WikiUtil.wikiEncode(decoded, language)
+    val encoded = WikiUtil.wikiEncode(decoded, language)
 
     /** Decoded page name with namespace e.g. Template:Automobile generation */
-    def decodedWithNamespace =
-    {
-        if(namespace != WikiTitle.Namespace.Main)
-        {
-            WikiTitle.getNamespaceName(language, namespace) + ":" + decoded
-        }
-        else
-        {
-            decoded
-        }
-    }
+    val decodedWithNamespace = withNamespace(false)
 
     /** Encoded page name with namespace e.g. Template:Automobile_generation */
-    def encodedWithNamespace =
+    val encodedWithNamespace = withNamespace(true)
+    
+    private def withNamespace(encode : Boolean) : String =
     {
-        if(namespace != WikiTitle.Namespace.Main)
+        val name : String = if (encode) encoded else decoded
+        if (namespace == WikiTitle.Namespace.Main)
         {
-            val encodedNamespace = URLEncoder.encode(WikiTitle.getNamespaceName(language, namespace), "UTF-8")
-            encodedNamespace + ":" + encoded
+          name
         }
         else
         {
-            encoded
+          val ns = WikiTitle.getNamespaceName(language, namespace)
+          (if (encode) WikiUtil.wikiEncode(ns, language) else ns)+ ":" + name
         }
     }
     
     /**
      * Returns the full source URI.
      */
-    def sourceUri = "http://" + language.wikiCode + ".wikipedia.org/wiki/"  + encodedWithNamespace
+    val sourceUri = "http://" + language.wikiCode + ".wikipedia.org/wiki/"  + encodedWithNamespace
     
     override def toString = language + ":" + decodedWithNamespace
 
@@ -100,6 +93,10 @@ object WikiTitle
 
         val Portal = Value(100)
         val PortalTalk = Value(101)
+        // FIXME: at least the following are different on different language wikipedias!
+        // We need to read them from the dump files or from pages like
+        // http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
+        // http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
         val Author = Value(102)
         val AuthorTalk = Value(103)
         val Page = Value(104)
@@ -143,20 +140,18 @@ object WikiTitle
 
     private val mappingNamespaces = new HashMap[Language, Namespace]
     private val customNamespaces = new HashMap[String, Namespace]
-    customNamespaces.put("OntologyClass", Namespace.OntologyClass)
-    customNamespaces.put("OntologyProperty", Namespace.OntologyProperty)
+    private val reverseCustomNamespaces = new HashMap[Namespace, String]
     
     for (ns <- Namespace.values)
     {
-      val name = ns.toString
-      if (name.equals("Mapping")) mappingNamespace(ns, "en", "Mapping")
-      else if (name.startsWith("Mapping_")) mappingNamespace(ns, name.substring(8), name.replace('_', ' '))
-    }
-    
-    private def mappingNamespace(ns : Namespace, code: String, name : String) =
-    {
-        mappingNamespaces.put(Language.fromWikiCode(code).get, ns)
-        customNamespaces.put(name, ns)
+        if (ns.id >= 200)
+        {
+            val name = WikiUtil.wikiDecode(ns.toString)
+            if (name == "Mapping") mappingNamespaces.put(Language.Default, ns)
+            else if (name.startsWith("Mapping ")) mappingNamespaces.put(Language.forCode(name.substring(8)), ns)
+            customNamespaces.put(name, ns)
+            reverseCustomNamespaces.put(ns, name)
+        }
     }
     
     def mappingNamespace(language : Language) : Option[Namespace] =
@@ -164,8 +159,6 @@ object WikiTitle
         mappingNamespaces.get(language)
     }
     
-    private val reverseCustomNamespaces = customNamespaces.map{case (name, code) => (code, name)}.toMap
-
     /**
      * Parses a (decoded) MediaWiki link
      * @param link MediaWiki link e.g. "Template:Infobox Automobile"
@@ -192,7 +185,7 @@ object WikiTitle
         //Check if it contains a language
         if(!parts.isEmpty && !parts.tail.isEmpty)
         {
-            Language.fromWikiCode(parts.head.toLowerCase) match
+            Language.tryCode(parts.head.toLowerCase(sourceLanguage.locale)) match
             {
                 case Some(lang) =>
                 {
@@ -236,7 +229,10 @@ object WikiTitle
 
     private def getNamespace(language : Language, name : String) : Option[Namespace] =
     {
-        val normalizedName = name.capitalizeLocale(Locale.ENGLISH)
+        // Note: we used capitalizeLocale(Locale.ENGLISH) here, but that will fail
+        // for some languages, e.g. namespace "İstifadəçi" in language "az"
+        // See http://az.wikipedia.org/wiki/İstifadəçi:Chrisahn/Sandbox
+        val normalizedName = name.capitalizeLocale(language.locale)
 
         for(namespace <- customNamespaces.get(normalizedName))
         {

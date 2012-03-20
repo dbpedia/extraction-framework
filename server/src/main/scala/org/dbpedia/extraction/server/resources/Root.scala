@@ -2,9 +2,10 @@ package org.dbpedia.extraction.server.resources
 
 import _root_.org.dbpedia.extraction.server.Server
 import javax.ws.rs.{GET, Path, Produces}
+import scala.xml.Text
 
 @Path("/")
-class Root extends Base
+class Root
 {
     @GET
     @Produces(Array("application/xhtml+xml"))
@@ -15,14 +16,13 @@ class Root extends Base
           </head>
           <body>
             <h2>Server</h2>
-            <a href="ontology">Ontology</a><br/>
+            <p><a href="ontology">Ontology</a></p>
             {
-              for(lang <- Server.config.languages) yield
+              for(lang <- Server.config.languages; code = lang.wikiCode) yield
               {
-                <a href={"mappings/" + lang.wikiCode + "/"}>{"Mappings in " + lang}</a><br/>
-                <a href={"extraction/" + lang.wikiCode + "/"}>{"Extractor in " + lang}</a><br/>
+                  <p><a href={"mappings/" + code + "/"}>Mappings in {code}</a> - <a href={"extraction/" + code + "/"}>Extractor in {code}</a></p>
               }
-             }
+            }
           </body>
         </html>
     }

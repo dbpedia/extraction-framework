@@ -5,6 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.Language
 import java.util.Locale
 import org.dbpedia.extraction.sources.Source
 
@@ -14,13 +15,6 @@ import org.dbpedia.extraction.sources.Source
 class OntologyReader
 {
     private val logger = Logger.getLogger(classOf[OntologyReader].getName)
-
-    /**
-     * Set of supported language codes.
-     * These languages codes may be used for language annotations e.g. label@en
-     * At the moment, all ISO 639-1 codes are supported.
-     */
-    private val supportedLanguageCodes = Locale.getISOLanguages.toSet
 
     def read(source : Source) : Ontology =
     {
@@ -43,13 +37,13 @@ class OntologyReader
 
         ontologyBuilder.datatypes = OntologyDatatypes.load()
 
-        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map("en" -> "Thing"), Map("en" -> "Base class of all ontology classes"), List(), Set())
-        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map("en" -> "Property"), Map(), List("owl:Thing"), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map(Language.Default -> "Thing"), Map(Language.Default -> "Base class of all ontology classes"), List(), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map(Language.Default -> "Property"), Map(), List("owl:Thing"), Set())
 
         // TODO: range should be rdfs:Class
-        ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map("en" -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map("en" -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map("en" -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map(Language.Default -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map(Language.Default -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map(Language.Default -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
 
         for(page <- pageNodeSource)
         {
@@ -102,7 +96,7 @@ class OntologyReader
         new ClassBuilder(name = name,
                          labels = readTemplatePropertiesByLanguage(node, "rdfs:label"),
                          comments = readTemplatePropertiesByLanguage(node, "rdfs:comment"),
-                         superClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf") ::: List("owl:Thing"),
+                         superClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf"),
                          equivalentClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
     }
 
@@ -205,24 +199,24 @@ class OntologyReader
             yield elem.trim
     }
 
-    private def readTemplatePropertiesByLanguage(node : TemplateNode, propertyName : String) : Map[String, String]=
+    private def readTemplatePropertiesByLanguage(node : TemplateNode, propertyName : String) : Map[Language, String]=
     {
         node.children.filter(_.key.startsWith(propertyName)).flatMap
         { property =>
 
-            val languageCode = property.key.split("@", 2).lift(1).getOrElse("en")
-            if(!supportedLanguageCodes.contains(languageCode))
+            val langCode = property.key.split("@", 2).lift(1).getOrElse("en")
+            Language.tryCode(langCode) match
             {
-                logger.warning(node.root.title + " - Language code '" + languageCode + "' is not supported. Ignoring corresponding " + propertyName)
+              case Some(language) => property.retrieveText match
+              {
+                  case Some(text) if ! text.trim.isEmpty => Some(language -> text.trim)
+                  case _ => None
+              }
+              case _ =>
+              {
+                logger.warning(node.root.title + " - Language code '" + langCode + "' is not supported. Ignoring corresponding " + propertyName)
                 None
-            }
-            else
-            {
-                property.retrieveText match
-                {
-                    case Some(text) if !text.trim.isEmpty => Some(languageCode -> text.trim)
-                    case _ => None
-                }
+              }
             }
         }.toMap
     }
@@ -247,13 +241,13 @@ class OntologyReader
         }
     }
 
-    private class ClassBuilder(val name : String, val labels : Map[String, String], val comments : Map[String, String],
-                               val superClassNames : List[String], val equivalentClassNames : Set[String])
+    private class ClassBuilder(val name : String, val labels : Map[Language, String], val comments : Map[Language, String],
+                               var superClassNames : List[String], val equivalentClassNames : Set[String])
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
         require(comments != null, "comments != null")
-        require(name == "owl:Thing" || superClassNames.nonEmpty, "superClassName.nonEmpty")
+        if (name != "owl:Thing" && superClassNames.isEmpty) superClassNames = List("owl:Thing")
         require(equivalentClassNames != null, "equivalentClassNames != null")
 
         /** Caches the class, which has been build by this builder. */
@@ -267,21 +261,6 @@ class OntologyReader
             if(!buildCalled)
             {
                  //TODO check for cycles to avoid infinite recursion
-
-
-//                    else
-//                    {
-//                        classMap.get(superClassName) match
-//                        {
-//                            case Some(superClassBuilder) => superClassBuilder.build(classMap)
-//                            case None =>
-//                            {
-//                                logger.warning("Super class of " + name + " (" + superClassName + ") does not exist")
-//                                None
-//                            }
-//                        }
-//                    }
-
                 val superClasses = superClassNames.map{ superClassName => classMap.get(superClassName) match
                 {
                     case Some(superClassBuilder) => superClassBuilder.build(classMap)
@@ -326,7 +305,7 @@ class OntologyReader
         }
     }
 
-    private class PropertyBuilder(val name : String, val labels : Map[String, String], val comments : Map[String, String],
+    private class PropertyBuilder(val name : String, val labels : Map[Language, String], val comments : Map[Language, String],
                                   val isObjectProperty : Boolean, val isFunctional : Boolean, val domain : String, val range : String,
                                   val equivalentPropertyNames : Set[String])
     {

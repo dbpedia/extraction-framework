@@ -13,6 +13,7 @@ import java.net.URLEncoder
 
 /**
  * Executes a extraction.
+ * TODO: use fork-join or other java.util.concurrent tools instead of plain threads.
  *
  * @param extractor The Extractor
  * @param source The extraction source

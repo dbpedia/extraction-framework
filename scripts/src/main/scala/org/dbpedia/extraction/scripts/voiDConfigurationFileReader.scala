@@ -8,18 +8,16 @@ package org.dbpedia.extraction.scripts
  * This class reads the configuration information required for building the voiD file.
  */
 
-import scala.xml._;
-import javax.xml._;
-import scala.tools.nsc.io._;
-import scala.collection.mutable._;
-import java.util.Date;
+import scala.xml._
+import javax.xml._
+import scala.collection.mutable._
+import java.util.Date
+import java.io.File
 
 
 
 class voiDConfigurationFileReader
 {
-  private val configFileName = "void.config";
-
   //The names of the tags used in the XML configuration file
   private val namespacesTagName = "namespaces";
   private val namespaceTagName = "namespace";
@@ -82,17 +80,12 @@ class voiDConfigurationFileReader
   //var DatasetDescriptionList:List[DatasetDescription]=List();
 
   //Reads the information from the configuration file
-  def readConfigurationData():Unit=
+  def readConfigurationData(file : File):Unit=
     {
       try
       {
-        //Get the current directory in which the application resides because it also contains the configuration file
-        val strDirectoryFullPath = Directory.Current.toList(0);
-
-        val configFileFullPath = strDirectoryFullPath + "\\" + this.configFileName;
-
         //Read the XML file
-        val xmlConfigTree = XML.loadFile(configFileFullPath);
+        val xmlConfigTree = XML.loadFile(file);
         
         //Read the output filename
         var currentNode = xmlConfigTree \\ voiDFileNameTagName;
@@ -202,16 +195,12 @@ class voiDConfigurationFileReader
        RequiredDataset.DatasetDescription = "Dataset description";
     }
 
-  def readOwlDataset():DatasetDescription =
+  def readOwlDataset(file : File):DatasetDescription =
     {
         val OWLDataset = new DatasetDescription();
-       //Get the current directory in which the application resides because it also contains the configuration file
-        val strDirectoryFullPath = Directory.Current.toList(0);
-
-        val configFileFullPath = strDirectoryFullPath + "\\" + this.configFileName;
 
         //Read the XML file
-        val xmlConfigTree = XML.loadFile(configFileFullPath);
+        val xmlConfigTree = XML.loadFile(file);
 
         var currentNode = xmlConfigTree \\ datasetsTagName;
         currentNode = currentNode \\datasetTagName;
@@ -246,15 +235,9 @@ class voiDConfigurationFileReader
     //This function checks returns the sparql endpoint to which the passed dataset is loaded
     //@param DatasetName  The name of the dataset to be checked
     //@return The sparql endpoint of the dataset if it is loaded, and null otherwise 
-    def getDatasetSparqlEndPoint(DatasetName : String) : String = 
+    def getDatasetSparqlEndPoint(file : File, DatasetName : String) : String = 
       {
-
-        //Get the current directory in which the application resides because it also contains the configuration file
-        val strDirectoryFullPath = Directory.Current.toList(0);
-
-        val configFileFullPath = strDirectoryFullPath + "\\" + this.configFileName;
-        
-        val xmlConfigTree = XML.loadFile(configFileFullPath);
+        val xmlConfigTree = XML.loadFile(file);
 
         //Reading the datasets that are loaded into the sparql endpoint
         var currentNode = xmlConfigTree \\ loadedDatasetsTagName;
@@ -275,15 +258,9 @@ class voiDConfigurationFileReader
     //@param DatasetName  The name of the dataset, to which the subject belongs
     //@return A list of containing the subject and the object of the passed links dataset if they are found ,
     // and null otherwise
-    def getLinksDatasetFullInfo(DatasetName : String) : LinkSetInfo =
+    def getLinksDatasetFullInfo(file : File, DatasetName : String) : LinkSetInfo =
       {
-
-        //Get the current directory in which the application resides because it also contains the configuration file
-        val strDirectoryFullPath = Directory.Current.toList(0);
-
-        val configFileFullPath = strDirectoryFullPath + "\\" + this.configFileName;
-
-        val xmlConfigTree = XML.loadFile(configFileFullPath);
+        val xmlConfigTree = XML.loadFile(file);
 
         //Reading the datasets that are loaded into the sparql endpoint
         var currentNode = xmlConfigTree \\ loadedDatasetsTagName;
@@ -309,15 +286,9 @@ class voiDConfigurationFileReader
     //@param DatasetName  The name of the dataset, to which the subject belongs
     //@return A list of containing the subject and the object of the passed links dataset if they are found ,
     // and null otherwise
-    def getDatasetsLinkedToDBpedia() : List[DatasetLinkedToDBpedia] =
+    def getDatasetsLinkedToDBpedia(file : File) : List[DatasetLinkedToDBpedia] =
       {
-
-        //Get the current directory in which the application resides because it also contains the configuration file
-        val strDirectoryFullPath = Directory.Current.toList(0);
-
-        val configFileFullPath = strDirectoryFullPath + "\\" + this.configFileName;
-
-        val xmlConfigTree = XML.loadFile(configFileFullPath);
+        val xmlConfigTree = XML.loadFile(file);
 
         //Reading the datasets that are linked to DBpedia
         var currentNode = xmlConfigTree \\ linkedToDBpediaDatasetsTagName;
@@ -340,14 +311,9 @@ class voiDConfigurationFileReader
 
   //This function reads the information describing the main dataset from the void.config file and returns it
   //@returns  An object containing the full information about the main dataset 
-  def getMainDatasetInfo():MainDatasetInfo =
+  def getMainDatasetInfo(file : File):MainDatasetInfo =
     {
-       //Get the current directory in which the application resides because it also contains the configuration file
-        val strDirectoryFullPath = Directory.Current.toList(0);
-
-        val configFileFullPath = strDirectoryFullPath + "\\" + this.configFileName;
-
-        val xmlConfigTree = XML.loadFile(configFileFullPath);
+        val xmlConfigTree = XML.loadFile(file)
 
         //Reading the datasets that are loaded into the sparql endpoint
         val currentNode = xmlConfigTree \\ mainDatasetTagName;
@@ -398,15 +364,9 @@ class voiDConfigurationFileReader
     //as a subset of it and write the sparql endpoint in this class
     //This function returns the full information about this class
     //@returns The full information about that dataset including its name and the sparql endpoint
-    def getDBpediaSparqlEndpointDatasetInfo() : List[String] =
+    def getDBpediaSparqlEndpointDatasetInfo(file : File) : List[String] =
       {
-
-        //Get the current directory in which the application resides because it also contains the configuration file
-        val strDirectoryFullPath = Directory.Current.toList(0);
-
-        val configFileFullPath = strDirectoryFullPath + "\\" + this.configFileName;
-
-        val xmlConfigTree = XML.loadFile(configFileFullPath);
+        val xmlConfigTree = XML.loadFile(file);
 
         //Reading the datasets that are loaded into the sparql endpoint
         var currentNode = xmlConfigTree \\ dbpediaSparqlDatasetTagName;

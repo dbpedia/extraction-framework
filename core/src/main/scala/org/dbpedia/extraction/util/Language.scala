@@ -5,10 +5,16 @@ import java.util.Locale
 /**
  * Represents a Wikipedia language.
  */
-class Language(val wikiCode : String, val locale : Locale)
+class Language private(val wikiCode : String, val isoCode: String)
 {
+    val locale : Locale = new Locale(isoCode)
+    
+    /** 
+     * Note that Wikipedia dump files use this prefix (with underscores), 
+     * but Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
+     */
     val filePrefix = wikiCode.replace("-", "_")
-
+    
     override def toString() = locale.toString
 
     override def equals(other : Any) = other match
@@ -22,38 +28,42 @@ class Language(val wikiCode : String, val locale : Locale)
 
 object Language
 {
-    val Default = new Language("en", new Locale("en"))
+    private val isoCodes = Locale.getISOLanguages.toSet
 
+    val Default = forCode("en")
+    
     /**
-     * Gets a language object from a ISO-639-1 language code
+     * Gets a language object for a Wikipedia language code. For the Locale, this method uses 
+     * the given code if it is an ISO code or a different code if there is an ISO code defined 
+     * for the given code. Returns None if the given code neither is an ISO code nor has a defined ISO code.
+     * See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
+     * Throws IllegalArgumentException if language code is unknown.
      */
-    def fromISOCode(isoCode : String) : Option[Language] =
-    {
-        if(Locale.getISOLanguages.contains(isoCode))
-        {
-            Some(new Language(isoCode, new Locale(isoCode)))
-        }
-        else
-        {
-            None
-        }
-    }
-
+    def forCode( code : String ) : Language = tryCode(code).getOrElse(throw new IllegalArgumentException("unknown language code "+code))
+    
     /**
-     * Gets a language object from a Wikipedia language code
+     * Gets a language object for a Wikipedia language code. For the Locale, this method uses 
+     * the given code if it is an ISO code or a different code if there is an ISO code defined 
+     * for the given code. Returns None if the given code neither is an ISO code nor has a defined ISO code.
+     * See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
      */
-    def fromWikiCode(wikiCode : String) : Option[Language] = nonIsoWpCodes.get(wikiCode).getOrElse(wikiCode) match
+    def tryCode( code : String ) : Option[Language] =
     {
-        case isoCode : String if Locale.getISOLanguages.contains(isoCode) => Some(new Language(wikiCode, new Locale(isoCode)))
-        case _ => None
+        // first convert wiki code to iso code, or just use the wiki code if no mapping is defined
+        val isoCode = nonIsoWpCodes.get(code).getOrElse(code)
+        // now check that it actually is an iso code
+        if (isoCodes.contains(isoCode)) Some(new Language(code, isoCode))
+        else None
     }
-
+    
     /**
      * Maps Wikipedia language codes which do not follow ISO-639-1, to a related ISO-639-1 code.
      * See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
      * Mappings are mostly based on similarity of the languages and in some cases on the regions where a related language is spoken.
      */
+    // not private for NonIsoLanguagesMappingTest
     protected[util] val nonIsoWpCodes = Map(
+        "commons" -> "en",       // commons uses en, mostly
         "war" -> "tl",           // Waray-Waray language
         "new" -> "ne",           // Newar / Nepal Bhasa
         "simple" -> "en",        // simple English

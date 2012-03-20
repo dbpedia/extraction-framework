@@ -3,16 +3,17 @@ package org.dbpedia.extraction.server.resources
 import javax.ws.rs._
 import org.dbpedia.extraction.server.Server
 import collection.immutable.ListMap
+import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.server.util.CreateMappingStats._
 import java.io._
 import org.dbpedia.extraction.server.util.{CreateMappingStats, IgnoreList}
 import java.lang.Boolean
 
-@Path("/statistics/{lang}")
-class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
+@Path("/statistics/{lang}/")
+class TemplateStatistics(@PathParam("lang") langCode: String)
 {
-    private val language = Language.fromWikiCode(langCode)
+    private val language = Language.tryCode(langCode)
                                    .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
     if (!Server.config.languages.contains(language))
@@ -25,7 +26,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
     {
         Server.logger.info("Loading serialized WikiStats object from " + createMappingStats.mappingStatsObjectFileName)
         wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
-		Server.logger.info("done")
+        Server.logger.info("done")
     }
     else
     {
@@ -37,10 +38,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
     private val mappingStatistics = createMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
     private val ignoreList: IgnoreList = createMappingStats.loadIgnorelist()
 
-    private val mappingUrlPrefix =
-        if (langCode == "en") "http://mappings.dbpedia.org/index.php/Mapping:"
-        else "http://mappings.dbpedia.org/index.php/Mapping_"+langCode+":"
-
+    private val mappingUrlPrefix = Server.config.wikiPagesUrl + WikiTitle.mappingNamespace(language).get.toString + ":"
 
     private val mappedGoodColor = "#65c673"
     private val mappedMediumColor = "#ecea48"

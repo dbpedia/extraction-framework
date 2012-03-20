@@ -4,23 +4,16 @@ import _root_.org.dbpedia.extraction.util.Language
 import java.net.URL
 import org.dbpedia.extraction.mappings._
 
-class Configuration
+object Configuration
 {
-    /** The extraction languages */
-    val languages = Set("ar", "bn", "ca", "cs", "de", "el", "en", "es", "eu", "fr", "ga", "hi", "hr", "hu", "it", "ko", "nl", "pl", "pt", "ru", "sl", "tr").flatMap(Language.fromWikiCode(_))
+    /** The extraction languages. Use List (not Set) to preserve order. English first, rest sorted. */
+    val languages = List("en", "ar", "bn", "ca", "cs", "de", "el", "es", "eu", "fr", "ga", "hi", "hr", "hu", "it", "ko", "nl", "pl", "pt", "ru", "sl", "tr").map(Language.forCode)
 
     /** The extractors */
     val extractors = List(
-        classOf[LabelExtractor].asInstanceOf[Class[Extractor]],
-        classOf[MappingExtractor].asInstanceOf[Class[Extractor]]
+        classOf[LabelExtractor],
+        classOf[MappingExtractor]
     )
-
-    /**
-     * The extraction manager
-     * DynamicExtractionManager is able to update the ontology/mappings.
-     * StaticExtractionManager is NOT able to update the ontology/mappings.
-     */
-    val extractionManager = new DynamicExtractionManager(languages, extractors)  // new StaticExtractionManager(languages, extractors)
 
     /** The URL where the pages of the Mappings Wiki are located */
     val wikiPagesUrl = new URL("http://mappings.dbpedia.org/index.php")

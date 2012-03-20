@@ -16,7 +16,7 @@ class CompletionWriter(file : File)
         val idStr = id.toString
         val leadingZeros = "0" * (10 - idStr.length)
         //#int decode if lang is set with IRI
-        writer.write(leadingZeros + idStr + " " + URLDecoder.decode(title.encodedWithNamespace) + " " + success.toString)
+        writer.write(leadingZeros + idStr + " " + title.decodedWithNamespace + " " + success.toString)
         writer.newLine() 
     }
 

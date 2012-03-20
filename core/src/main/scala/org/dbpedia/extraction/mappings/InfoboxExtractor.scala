@@ -252,11 +252,14 @@ class InfoboxExtractor( context : {
 
         splitNodes.flatMap(splitNode => objectParser.parse(splitNode)) match
         {
+            // TODO: explain why we check links.size == splitNodes.size
             case links if links.size == splitNodes.size => return links.map(link => (link, null))
             case _ => List.empty
         }
+        
         splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
         {
+            // TODO: explain why we check links.size == splitNodes.size
             case links if links.size == splitNodes.size => links.map(UriUtils.cleanLink).collect{case Some(link) => (link, null)}
             case _ => List.empty
         }
@@ -269,12 +272,15 @@ class InfoboxExtractor( context : {
         result = result.toCamelCase(SplitWordsRegex, context.language.locale)
 
         // Replace digits at the beginning of a property with _. E.g. 01propertyName => _01propertyName (edited by Piet)
+        // TODO: this probably was an attempt to avoid property names that cannot be used
+        // as XML element names, but there are many other such cases. All these cases can
+        // be fixed by appending an underscore at the *end*, not in the *front*.
         result = LeadingNumberRegex.replaceFirstIn(result, "_" + result)
 
         // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
         result = TrailingNumberRegex.replaceFirstIn(result, "")
 
-        result = WikiUtil.wikiEncode(result, context.language, false)  // false: do not capitalize
+        result = WikiUtil.wikiEncode(result, context.language, capitalize = false)
 
         //TODO add this as option in settings
         //result = result.replace("%", "_percent_")
