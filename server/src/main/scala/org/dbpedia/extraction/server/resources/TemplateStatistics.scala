@@ -38,7 +38,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String)
     private val mappingStatistics = createMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
     private val ignoreList: IgnoreList = createMappingStats.loadIgnorelist()
 
-    private val mappingUrlPrefix = Server.config.wikiPagesUrl + WikiTitle.mappingNamespace(language).get.toString + ":"
+    private val mappingUrlPrefix = Server.config.wikiPagesUrl + "/" + WikiTitle.mappingNamespace(language).get.toString + ":"
 
     private val mappedGoodColor = "#65c673"
     private val mappedMediumColor = "#ecea48"
