@@ -3,7 +3,6 @@ package org.dbpedia.extraction.live.helper
 import java.net.URL
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import ORG.oclc.oai.harvester2.verb.GetRecord
 import org.dbpedia.extraction.live.util.XMLUtil
 import org.dbpedia.extraction.sources.{XMLSource, Source}
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager

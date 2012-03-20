@@ -24,7 +24,7 @@ package org.dbpedia.extraction.dataparser
 //
 //    private def testParse( lang : String, node : Node, expect : Option[Double] ) : Unit =
 //    {
-//      //TODO assertEquals(expect, new {def language : Language = Language.fromWikiCode(lang).get} ).parse(node))
+//      //TODO assertEquals(expect, new {def language : Language = Language.forCode(lang)} ).parse(node))
 //    }
 //
 //}

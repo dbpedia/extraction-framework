@@ -1,10 +1,8 @@
 package org.dbpedia.extraction.live.helper;
 
 import org.apache.log4j.Logger;
-import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.core.Constants;
 import org.dbpedia.extraction.live.core.Util;
-import org.dbpedia.extraction.live.util.UTCHelper;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
 import org.dbpedia.extraction.mappings.Extractor;
 import org.dbpedia.extraction.mappings.SkosCategoriesExtractor;
@@ -29,7 +27,6 @@ import java.util.*;
 public class LiveConfigReader {
     
     private static Logger logger = Logger.getLogger(LiveConfigReader.class); 
-    private static DOMParser parser = new DOMParser();
     private static final String liveConfigFile = "./live/live.xml";
 
     private static DocumentBuilderFactory dbFactory;
@@ -59,7 +56,7 @@ public class LiveConfigReader {
 
     public static Map<Language,List<ExtractorSpecification>>  extractors = null;
 
-    public static Map<Language,List<Class<Extractor>>> extractorClasses = null;
+    public static Map<Language,List<Class<? extends Extractor>>> extractorClasses = null;
     public static int updateOntologyAndMappingsPeriod = 5;
     public static boolean multihreadingMode = false;
 
@@ -111,14 +108,14 @@ public class LiveConfigReader {
          NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
         //iterate and build the required list of extractors
         extractors = new HashMap<Language,List<ExtractorSpecification>>();
-        extractorClasses = new HashMap<Language,List<Class<Extractor>>>();
+        extractorClasses = new HashMap<Language,List<Class<? extends Extractor>>>();
 
 
         for(int i=0; i<languageNodes.getLength(); i++){
 
             Element elemLanguage = (Element)languageNodes.item(i);
             String languageName = elemLanguage.getAttribute(NAME_ATTRIBUTENAME);
-            Language language = new Language(languageName, new Locale(languageName));
+            Language language = Language.forCode(languageName);
             readLanguageExtractors(elemLanguage, language);
         }
     }
@@ -132,7 +129,7 @@ public class LiveConfigReader {
         try{
             NodeList extractorNodes = elemLanguageExtractors.getElementsByTagName(EXTRACTOR_TAGNAME);
             ArrayList<ExtractorSpecification> langExtractors = new ArrayList<ExtractorSpecification>(10);
-            ArrayList<Class<Extractor>> langExtractorClasses = new ArrayList<Class<Extractor>>(10);
+            ArrayList<Class<? extends Extractor>> langExtractorClasses = new ArrayList<Class<? extends Extractor>>(10);
 
             //iterate and build the required list of extractors
             for(int i=0; i<extractorNodes.getLength(); i++){
@@ -141,7 +138,7 @@ public class LiveConfigReader {
                 String extractorID = elemExtractor.getAttribute(NAME_ATTRIBUTENAME);
                 ExtractorStatus status = ExtractorStatus.valueOf(elemExtractor.getAttribute(EXTRACTOR_STATUS_ATTRIBUTENAME));
                 
-                langExtractorClasses.add((Class<Extractor>)(ClassLoader.getSystemClassLoader().loadClass(extractorID)));
+                langExtractorClasses.add(ClassLoader.getSystemClassLoader().loadClass(extractorID).asSubclass(Extractor.class));
 
                 //Those types of extractors need special type of handling as we must call the function _addGenerics for
                 //them
@@ -270,9 +267,9 @@ public class LiveConfigReader {
      * @param   requiredStatus  The status of the extractors
      * @return  A list containing the extractors of the passed status 
      */
-    public static List<Class<Extractor>> getExtractors(Language lang, ExtractorStatus requiredStatus){
+    public static List<Class<? extends Extractor>> getExtractors(Language lang, ExtractorStatus requiredStatus){
 
-        List<Class<Extractor>> extractorsList = extractorClasses.get(lang);
+        List<Class<? extends Extractor>> extractorsList = extractorClasses.get(lang);
         for(ExtractorSpecification spec : extractors.get(lang)){
             if(spec.status != requiredStatus){
 

@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.ontology
 
 import org.dbpedia.extraction.util.{Language, UriUtils}
+import java.net.URLDecoder
+
 /**
  * Manages the ontology namespaces.
  */
@@ -38,6 +40,7 @@ object OntologyNamespaces
     val GEO_NAMESPACE = "http://www.w3.org/2003/01/geo/wgs84_pos#"
     val GEORSS_NAMESPACE = "http://www.georss.org/georss/"
     val GML_NAMESPACE = "http://www.opengis.net/gml/"
+    // Note: "http://www.w3.org/2001/XMLSchema#" is the RDF prefix, "http://www.w3.org/2001/XMLSchema" is the XML namespace URI.
     val XSD_NAMESPACE = "http://www.w3.org/2001/XMLSchema#"
     val DC_NAMESPACE = "http://purl.org/dc/elements/1.1/"
     val DCT_NAMESPACE = "http://purl.org/dc/terms/"
@@ -81,7 +84,7 @@ object OntologyNamespaces
      */
     def getUri(name : String, baseUri : String) : String =
     {
-    	name.split(":", 2) match
+        name.split(":", 2) match
         {
             case Array(prefix, suffix) => prefixMap.get(prefix) match
             {
@@ -115,15 +118,15 @@ object OntologyNamespaces
         {
             // contains a fragment
             // right-hand fragments must not contain ':', '/' or '&', according to our Validate class
+            // TODO: there is no Validate class. Do we still want this?
             baseUri + encodedSuffix.replace("/", "%2F").replace(":", "%3A").replace("&", "%26")
         }
         else
         {
             // does not contain a fragment
-            // return baseUri + encodedSuffix;
             if (encodeAsIRI.contains(lang.wikiCode))
             {
-                UriUtils.toIRIString(baseUri+encodedSuffix)
+                toIRIString(baseUri+encodedSuffix)
             }
             else
             {
@@ -132,6 +135,23 @@ object OntologyNamespaces
         }
     }
 
+    /**
+     * FIXME: this works for most DBpedia subject URIs, but not in many other cases.
+     * 
+     * This method exists because IRIs were added as an afterthought. If we want to generate IRIs
+     * instead of URIs we should take care of that were the URIs are generated, i.e. in the extractors.
+     * 
+     * This method currently may produce invalid IRIs. It should re-encode many other characters besides ">".
+     * 
+     * Examples URIs for which this method fails:
+     * http://en.wikipedia.org/wiki/%3F is very different from http://en.wikipedia.org/wiki/? 
+     * http://en.wikipedia.org/wiki/%23 is very different from http://en.wikipedia.org/wiki/#
+     */
+    private def toIRIString(uri:String) : String =
+    {
+        URLDecoder.decode(uri,"UTF-8").replace(">","%3E")
+    }
+    
     /**
      * Return true  if the namespace of the given URI is known to be an exception for evaluation (e.g. http://schema.org).
      * Return false if the namespace of the given URI starts with should be validated.

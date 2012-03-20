@@ -523,7 +523,7 @@ object CreateMappingStats
         val infoboxPropertiesDatasetFileName = args(2)
         val templateParametersDatasetFileName = args(3)
         val infoboxTestDatasetFileName = args(4)
-        val language = Language.fromWikiCode(args(5)).get
+        val language = Language.forCode(args(5))
         var wikiStats: WikipediaStats = null
         val startTime = System.currentTimeMillis()
         val createMappingStats = new CreateMappingStats(language)

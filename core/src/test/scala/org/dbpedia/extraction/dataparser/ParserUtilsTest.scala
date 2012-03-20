@@ -26,6 +26,6 @@ package org.dbpedia.extraction.dataparser
 //
 //  private def testConvert( lang : String, value : String, expect : String ) : Unit =
 //  {
-//    assertEquals(expect, ParserUtils.convertLargeNumbers(value, Language.fromWikiCode(lang).get))
+//    assertEquals(expect, ParserUtils.convertLargeNumbers(value, Language.forCode(lang)))
 //  }
 //}

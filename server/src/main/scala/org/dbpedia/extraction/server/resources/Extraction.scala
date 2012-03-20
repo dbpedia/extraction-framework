@@ -13,10 +13,10 @@ import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 /**
  *
  */
-@Path("/extraction/{lang}")
-class Extraction(@PathParam("lang") langCode : String) extends Base
+@Path("/extraction/{lang}/")
+class Extraction(@PathParam("lang") langCode : String)
 {
-    private val language = Language.fromWikiCode(langCode)
+    private val language = Language.tryCode(langCode)
         .getOrElse(throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
     if(!Server.config.languages.contains(language))
@@ -47,7 +47,7 @@ class Extraction(@PathParam("lang") langCode : String) extends Base
      * Extracts a MediaWiki article
      */
     @GET
-    @Path("/extract")
+    @Path("extract")
     @Produces(Array("application/xml"))
     def extract(@QueryParam("title") title : String, @DefaultValue("trix") @QueryParam("format") format : String) : String =
     {

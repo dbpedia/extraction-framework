@@ -20,25 +20,35 @@ import scala.io.Source._;
 
 object voiDFileGenerator
 {
-  val voiDrdr = new voiDConfigurationFileReader();
-  def main(args: Array[String])
+    def main(args: Array[String])
     {
-      voiDrdr.readConfigurationData();
+      require(args != null && args.length == 1, "xml config file name must be given, for example void.config")
+      new voiDFileGenerator(new File(args(0))).run
+    }
+}
 
+private class voiDFileGenerator(configFile : File)
+{
+    private val voiDrdr = new voiDConfigurationFileReader()
+    
+    def run()
+    {
+      voiDrdr.readConfigurationData(configFile)
+      
       //Construct the list dataset descriptions
       val downloadPageCreatorLines = scala.io.Source.fromFile(new java.io.File(voiDrdr.downloadPageCreatorFileName)).mkString;
       voiDrdr.DatasetDescriptionList = constructDatasetDescriptionList(partitionDownloadPageCreatorFileForCoreDatasets(downloadPageCreatorLines, true), true);
       voiDrdr.DatasetDescriptionList = voiDrdr.DatasetDescriptionList :::
-              constructDatasetDescriptionList(partitionDownloadPageCreatorFileForCoreDatasets(downloadPageCreatorLines, false), false);
-
-
+        constructDatasetDescriptionList(partitionDownloadPageCreatorFileForCoreDatasets(downloadPageCreatorLines, false), false);
+      
+      
       //Construct the list dataset file descriptions
       val coreFileLines  = scala.io.Source.fromFile(new java.io.File(voiDrdr.coreDatasetsDescriptionFileName)).mkString;
       getDatasetInfo(coreFileLines);
-
+      
       val extendedFileLines  = scala.io.Source.fromFile(new java.io.File(voiDrdr.extendedDatasetsDescriptionFileName)).mkString;
       getDatasetInfo(extendedFileLines);
-
+      
       try
       {
         writeDatasetsTovoiDFile();
@@ -46,17 +56,16 @@ object voiDFileGenerator
       catch
       {
         //case exp => println("Unable to write the voiD file");
-        case exp => println(exp.toString());
+      case exp => println(exp.toString());
       }
-
+      
       //voiDrdr.readOwlDataset();
-
     }
-
-  //This function takes the file contents (as string) as parameter and returns a list of type class DatasetFileDescription
-  //containing the description of each dataset described in that file
-  //@param  strFileContents   The contents of the file containing the description
-  private def getDatasetInfo(strFileContents: String):Unit =
+  
+    //This function takes the file contents (as string) as parameter and returns a list of type class DatasetFileDescription
+    //containing the description of each dataset described in that file
+    //@param  strFileContents   The contents of the file containing the description
+    private def getDatasetInfo(strFileContents: String):Unit =
     {
 
       var listDatasetFiles = constructDatasetFileDescriptionList(partitionDatasetsFile(strFileContents));
@@ -151,7 +160,7 @@ object voiDFileGenerator
                 CurrentDataset.NumberOfTriples = listFileParts(DatasetIndex+2);
                 CurrentDataset.FileSize = listFileParts(DatasetIndex+4);
                 CurrentDataset.DownloadFileSize = listFileParts(DatasetIndex+6);
-                CurrentDataset.SparqlEndPoint = voiDrdr.getDatasetSparqlEndPoint(CurrentDataset.DatasetFileName);
+                CurrentDataset.SparqlEndPoint = voiDrdr.getDatasetSparqlEndPoint(configFile, CurrentDataset.DatasetFileName);
 
                 //val SubjectObjectList = voiDrdr.getLinksDatasetFullInfo(CurrentDataset.DatasetFileName);
                 //println(CurrentDataset.SparqlEndPoint);
@@ -293,7 +302,7 @@ object voiDFileGenerator
              }
            );
 
-      val mainDatasetInfo = voiDrdr.getMainDatasetInfo();
+      val mainDatasetInfo = voiDrdr.getMainDatasetInfo(configFile);
 
       var MainDatasetName : URIImpl = new URIImpl(voiDrdr.uriBase + mainDatasetInfo.DatasetName);//This is the main dataset, of which
                                                         //all other datasets are subset
@@ -356,7 +365,7 @@ object voiDFileGenerator
         }
       );
 
-      val DBpediaSparqlDatasetInfo = voiDrdr.getDBpediaSparqlEndpointDatasetInfo();
+      val DBpediaSparqlDatasetInfo = voiDrdr.getDBpediaSparqlEndpointDatasetInfo(configFile);
       val DBpediaSparqlDataset = DBpediaSparqlDatasetInfo(0);
       val DBpediaSparqlDatasetEndpoint = DBpediaSparqlDatasetInfo(1);
 
@@ -397,7 +406,7 @@ object voiDFileGenerator
 
         //The owl dataset has special method of handling, so the following part is responsible for writing this special
         //dataset to the turtle file.
-        val OWLDataset = voiDrdr.readOwlDataset();
+        val OWLDataset = voiDrdr.readOwlDataset(configFile);
         datasetName = new URIImpl(voiDrdr.uriBase + OWLDataset.DatasetName);
         //Declaring that the current dataset is a subset of the main dataset
         stmt = new StatementImpl(DBPediaSparqlDatasetName, voiDPredicates.PredSubdataset, datasetName);
@@ -471,7 +480,7 @@ object voiDFileGenerator
                 {
                   //If we are handling a links dataset, we must get its subject dataset along with its object dataset
                   //from the config file
-                  val linksetInfo = voiDrdr.getLinksDatasetFullInfo(CurrentDatasetFile.DatasetFileName);
+                  val linksetInfo = voiDrdr.getLinksDatasetFullInfo(configFile, CurrentDatasetFile.DatasetFileName);
                   if(linksetInfo!=null)
                     {
                       stmt = new StatementImpl(datasetName, voiDPredicates.PredSubjectTarget, new URIImpl(linksetInfo.SubjectDataset));
@@ -610,7 +619,7 @@ object voiDFileGenerator
         });
 
       //Writing the list of datasets to which DBpedia is related to e.g. USCensus
-      val listDatasetsLinkedToDBpedia = voiDrdr.getDatasetsLinkedToDBpedia();
+      val listDatasetsLinkedToDBpedia = voiDrdr.getDatasetsLinkedToDBpedia(configFile);
       listDatasetsLinkedToDBpedia.foreach(dataset =>
         {
           //Writing the dataset name

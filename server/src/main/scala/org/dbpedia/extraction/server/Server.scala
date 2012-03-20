@@ -2,6 +2,7 @@ package org.dbpedia.extraction.server
 
 import _root_.java.util.logging.{Level, Logger}
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
+import com.sun.jersey.api.core.ResourceConfig
 import com.sun.jersey.api.core.ClassNamesResourceConfig
 import providers._
 import resources._
@@ -20,9 +21,14 @@ object Server
 
     //@volatile var currentJob : Option[ExtractionJob] = None
 
-    val config = new Configuration()
+    val config = Configuration
 
-    val extractor : ExtractionManager = config.extractionManager
+    /**
+     * The extraction manager
+     * DynamicExtractionManager is able to update the ontology/mappings.
+     * StaticExtractionManager is NOT able to update the ontology/mappings.
+     */
+    val extractor : ExtractionManager = new DynamicExtractionManager(config.languages, config.extractors)  // new StaticExtractionManager(languages, extractors)
 
     var adminRights : Boolean = false
 
@@ -35,6 +41,12 @@ object Server
             classOf[Root], classOf[Extraction], classOf[Mappings], classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
             classOf[TemplateStatistics], classOf[PropertyStatistics],
             classOf[XMLMessageBodyReader], classOf[XMLMessageBodyWriter], classOf[ExceptionMapper], classOf[TriX], classOf[Log], classOf[Percentage])
+        
+        // Jersey should redirect URLs like "/foo/../extractionSamples" to "/extractionSamples/" (with a slash at the end)
+        val features = resources.getFeatures
+        features.put(ResourceConfig.FEATURE_CANONICALIZE_URI_PATH, true)
+        features.put(ResourceConfig.FEATURE_NORMALIZE_URI, true)
+        features.put(ResourceConfig.FEATURE_REDIRECT, true)
 
         val server = HttpServerFactory.create(serverURI, resources)
         server.start()

@@ -13,7 +13,7 @@ import _root_.org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{MemorySource, WikiSource, XMLSource, Source}
 import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
 import org.dbpedia.extraction.destinations.{StringDestination, FileDestination, CompositeDestination}
-import org.dbpedia.extraction.dump.ExtractionJob
+// import org.dbpedia.extraction.dump.ExtractionJob
 import java.util.logging.{Level, Logger}
 import java.awt.event.{ActionListener, ActionEvent}
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
@@ -43,7 +43,7 @@ object LiveExtractionConfigLoader extends ActionListener
 
 //    private var config : Config = null;
     private var extractors : List[Extractor] = null;
-    private var CurrentJob : ExtractionJob = null;
+    // private var CurrentJob : ExtractionJob = null;
     private var reloadOntologyAndMapping = true;
     val logger = Logger.getLogger("LiveExtractionConfigLoader");
 
@@ -354,22 +354,22 @@ object LiveExtractionConfigLoader extends ActionListener
    * @ param  list  The required java list
    * @return  The newly generated scala list
    */
-  private def convertExtractorListToScalaList(list : java.util.List[Class[Extractor]]): List[Class[Extractor]] =
+  private def convertExtractorListToScalaList(list : java.util.List[Class[_ <: Extractor]]): List[Class[_ <: Extractor]] =
     {
-      var extractorList =  List[Class[Extractor]]();
+      var extractorList =  List[Class[_ <: Extractor]]();
 
       val listiterator = list.iterator();
       while(listiterator.hasNext){
-        extractorList = extractorList ::: List[Class[Extractor]](listiterator.next());
+        extractorList = extractorList ::: List[Class[_ <: Extractor]](listiterator.next());
       }
       println(extractorList);
       extractorList;
     }
 
-  private def convertExtractorMapToScalaMap(map: java.util.Map[Language, java.util.List[Class[Extractor]]]):
-                    Map[Language, List[Class[Extractor]]] =
+  private def convertExtractorMapToScalaMap(map: java.util.Map[Language, java.util.List[Class[_ <: Extractor]]]):
+                    Map[Language, List[Class[_ <: Extractor]]] =
     {
-      var extractorMap =  Map[Language, List[Class[Extractor]]]();
+      var extractorMap =  Map[Language, List[Class[_ <: Extractor]]]();
 
       val mapIterator = map.entrySet.iterator();
       while(mapIterator.hasNext){
@@ -401,8 +401,7 @@ object LiveExtractionConfigLoader extends ActionListener
         /** Languages */
         if(config.getProperty("languages") == null)
           throw new IllegalArgumentException("Property 'languages' is not defined.")
-        private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList
-                        .map(code => Language.fromWikiCode(code).getOrElse(throw new IllegalArgumentException("Invalid language: '" + code + "'")))
+        private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList.map(Language.forCode)
 
       /** The period of updating ontology and mappings**/
         if(config.getProperty("updateOntologyAndMappingsPeriod") == null)
@@ -468,7 +467,7 @@ object LiveExtractionConfigLoader extends ActionListener
             val LanguageExtractor = "extractors\\.(.*)".r
 
             for(LanguageExtractor(code) <- config.stringPropertyNames.toArray;
-                language = Language.fromISOCode(code).getOrElse(throw new IllegalArgumentException("Invalid language: " + code));
+                language = Language.forCode(code);
                 if extractors.contains(language))
             {
                 extractors += ((language, stdExtractors ::: loadExtractorConfig(config.getProperty("extractors." + code))))

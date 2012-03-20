@@ -298,7 +298,7 @@ object MappingsLoader
     {
         loadTemplateProperty(node, propertyName, required) match
         {
-            case lang : String => Language.fromWikiCode(lang).getOrElse(throw new IllegalArgumentException("Language " + lang + " unknown"))
+            case lang : String => Language.forCode(lang)
             case null => null
         }
     }

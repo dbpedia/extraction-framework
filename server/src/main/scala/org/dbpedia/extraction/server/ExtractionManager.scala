@@ -18,7 +18,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, WikiTitle}
  * or they can support lazy loading of context parameters.
  */
 
-abstract class ExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]])
+abstract class ExtractionManager(languages : Traversable[Language], extractors : Traversable[Class[_ <: Extractor]])
 {
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
@@ -101,7 +101,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
     {
         logger.info("Loading ontology pages")
         WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
-                                  url = new URL("http://mappings.dbpedia.org/api.php"),
+                                  url = Configuration.wikiApiUrl,
                                   language = Language.Default )
         .map(parser)
         .map(page => (page.title, page)).toMap
@@ -119,7 +119,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
                                .getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
 
         WikiSource.fromNamespaces(namespaces = Set(mappingNamespace),
-                                  url = new URL("http://mappings.dbpedia.org/api.php"),
+                                  url = Configuration.wikiApiUrl,
                                   language = Language.Default )
         .map(parser)
         .map(page => (page.title, page)).toMap

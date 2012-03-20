@@ -85,7 +85,7 @@ object Extractor
      * @param extractors List of extractor classes to be instantiated
      * @param context Any type of object that implements the required parameter methods for the extractors
      */
-    def load(extractors : List[Class[Extractor]], context : AnyRef) : Extractor =
+    def load(extractors : Traversable[Class[_ <: Extractor]], context : AnyRef) : Extractor =
     {
         val extractorInstances = extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
         new CompositeExtractor(extractorInstances)

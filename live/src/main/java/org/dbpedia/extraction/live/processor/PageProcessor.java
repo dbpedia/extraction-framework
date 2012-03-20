@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.live.processor;
 
 import ORG.oclc.oai.harvester2.verb.GetRecord;
-import ch.epfl.lamp.util.ByteArray;
-import com.hp.hpl.jena.sparql.util.Base64;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
@@ -14,7 +12,6 @@ import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.sources.Source;
 import org.dbpedia.extraction.sources.XMLSource;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.w3c.dom.Document;
 import scala.xml.*;
 

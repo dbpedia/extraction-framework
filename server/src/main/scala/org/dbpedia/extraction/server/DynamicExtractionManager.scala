@@ -11,7 +11,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
  * Is able to update the ontology and the mappings.
  * Updates are executed in synchronized threads.
  */
-class DynamicExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]]) extends ExtractionManager(languages, extractors)
+class DynamicExtractionManager(languages : Traversable[Language], extractors : List[Class[_ <: Extractor]]) extends ExtractionManager(languages, extractors)
 {
     @volatile private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
@@ -36,6 +36,7 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
 
     def updateOntologyPage(page : WikiPage)
     {
+        // TODO: could we use an Actor here?
         new Thread()
         {
             override def run()
@@ -58,6 +59,7 @@ class DynamicExtractionManager(languages : Set[Language], extractors : List[Clas
 
     def removeOntologyPage(title : WikiTitle)
     {
+        // TODO: could we use an Actor here?
         new Thread()
         {
             override def run()

@@ -6,10 +6,10 @@ import javax.ws.rs._
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.server.Server
 import java.util.logging.Logger
-import org.dbpedia.extraction.server.resources.Base
+import org.dbpedia.extraction.server.util.PageUtils
 
-@Path("/ontology/pages")
-class Pages extends Base
+@Path("/ontology/pages/")
+class Pages
 {
     val logger = Logger.getLogger(classOf[Pages].getName)
 
@@ -23,7 +23,7 @@ class Pages extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Ontology pages</h2>
-            { Server.extractor.ontologyPages.values.map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.ontologyPages.values.map(page => PageUtils.relativeLink(page) ++ <br/>) }
           </body>
         </html>
     }

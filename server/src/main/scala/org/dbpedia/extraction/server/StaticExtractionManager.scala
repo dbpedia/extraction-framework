@@ -11,7 +11,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
  * Is NOT able to update the ontology or the mappings.
  * This manager is good for testing locally.
  */
-class StaticExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]]) extends ExtractionManager(languages, extractors)
+class StaticExtractionManager(languages : Traversable[Language], extractors : Traversable[Class[_ <: Extractor]]) extends ExtractionManager(languages, extractors)
 {
     @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 

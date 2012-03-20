@@ -4,7 +4,6 @@ import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.wikiparser.WikiTitle;
 import org.dbpedia.util.Exceptions;
 import scala.Function1;
-import scala.Option;
 import scala.util.control.ControlThrowable;
 
 import javax.xml.stream.XMLInputFactory;
@@ -129,9 +128,7 @@ public class WikipediaDumpParser
       
     //Retrieve wiki code
     String wikiCode = uri.substring(uri.indexOf('/') + 2, uri.indexOf('.'));
-    Option<Language> langOpt = (wikiCode.toLowerCase().equals("commons")) ? Language.fromWikiCode("en") : Language.fromWikiCode(wikiCode);
-    if(langOpt.isEmpty()) throw new  XMLStreamException("Invalid wiki language code: '" + wikiCode + "'");
-    Language language = (Language)langOpt.get();
+    Language language = Language.forCode(wikiCode);
 
     //Consume <generator> tag
     skipElement(_reader);

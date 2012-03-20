@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.ontology
 
+import org.dbpedia.extraction.util.Language
+
 /**
  * Represents an ontology property.
  * There are 2 sub classes of this class: OntologyObjectProperty and OntologyDatatypeProperty.
@@ -11,7 +13,7 @@ package org.dbpedia.extraction.ontology
  * @param isFunctional Defines whether this is a functional property.
  * A functional property is a property that can have only one (unique) value y for each instance x (see: http://www.w3.org/TR/owl-ref/#FunctionalProperty-def)
  */
-class OntologyProperty( name : String, labels : Map[String, String], comments : Map[String, String],
+class OntologyProperty( name : String, labels : Map[Language, String], comments : Map[Language, String],
                         val domain : OntologyClass, val range : OntologyType, val isFunctional : Boolean = false,
                         val equivalentProperties : Set[OntologyProperty] = Set()) extends OntologyEntity(name, labels, comments)
 {

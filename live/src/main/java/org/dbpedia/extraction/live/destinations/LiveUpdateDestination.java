@@ -88,11 +88,11 @@ public class LiveUpdateDestination implements Destination{
     ArrayList<RDFTriple> addedTriplesList;
     String deletedTriplesString;
 
-    public LiveUpdateDestination(String pageTitle, String Language, String oaiID){
+    public LiveUpdateDestination(String pageTitle, String language, String oaiID){
 
         this.uri = RDFTriple.page(pageTitle);
-        language = Language;
-        oaiId = oaiID;
+        this.language = language;
+        this.oaiId = oaiID;
 
         this.graphURI  = LiveOptions.options.get("graphURI");
         this.annotationGraphURI = LiveOptions.options.get("annotationGraphURI");
@@ -122,7 +122,7 @@ public class LiveUpdateDestination implements Destination{
 
 
         //Add the extractors to the destination and divide them into 3 groups according to the status
-        for(ExtractorSpecification extractorSpec : LiveConfigReader.extractors.get(new Language(this.language, new Locale(this.language)))){
+        for(ExtractorSpecification extractorSpec : LiveConfigReader.extractors.get(Language.forCode(this.language))){
             addExtractor(extractorSpec);
         }
 

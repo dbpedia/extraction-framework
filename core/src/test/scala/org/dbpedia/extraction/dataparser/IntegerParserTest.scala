@@ -70,7 +70,7 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
     {
         val context = new
         {
-            def language : Language = Language.fromWikiCode(lang).get
+            def language : Language = Language.forCode(lang)
         }
         val textNode = new TextNode(input, 1)
 

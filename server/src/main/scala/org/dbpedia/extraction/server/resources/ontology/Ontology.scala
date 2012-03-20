@@ -4,10 +4,9 @@ import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import xml.Elem
 import org.dbpedia.extraction.ontology.io.OntologyOWLWriter
-import org.dbpedia.extraction.server.resources.Base
 
-@Path("/ontology")
-class Ontology extends Base
+@Path("/ontology/")
+class Ontology
 {
     /**
      * Retrieves an overview page
@@ -19,10 +18,10 @@ class Ontology extends Base
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <body>
             <h2>Ontology</h2>
-            <a href="ontology/pages">Source Pages</a><br/>
-            <a href="ontology/validate">Validate</a><br/>
-            <a href="ontology/classes">Classes</a><br/>
-            <a href="ontology/export">Ontology (OWL)</a><br/>
+            <a href="pages/">Source Pages</a><br/>
+            <a href="validate/">Validate</a><br/>
+            <a href="classes/">Classes</a><br/>
+            <a href="export">Ontology (OWL)</a><br/>
           </body>
         </html>
     }

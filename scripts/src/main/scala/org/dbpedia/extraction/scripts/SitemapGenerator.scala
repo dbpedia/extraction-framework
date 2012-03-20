@@ -2,7 +2,6 @@ package org.dbpedia.extraction.scripts
 
 import scala.collection.immutable._
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import scala.tools.nsc.io._;
 import java.io._;
 import scala.xml._;
 
@@ -17,9 +16,6 @@ import scala.xml._;
 
 object SitemapGenerator
 {
-  //Configuartion file name
-  val configFileName = "sitemap.config"
-
   //The names of the tags used in the XML configuration file
   val baseURLTagName = "baseURL";
   val baseDirectoryTagName = "baseDirectory";
@@ -60,19 +56,20 @@ object SitemapGenerator
 
   def main(args: Array[String])
     {
+      require(args != null && args.length == 1, "xml config file name must be given, for example sitemap.config")
+      val file = new File(args(0))
+      
       val xmlHandlerObj = new XMLHandler();
 
       //Read configuration data to get all required parameters
-      readConfigurationData();
+      readConfigurationData(file);
 
       //The includeLoadedDatasetsOnly is false, then populate the listFiles from the local directory 
       if(!includeLoadedDatasetsOnly)
         {
-          val f = new java.io.File(baseDirectory);
-          val dirMainDirectory = new Directory(f);
-
           //Iterate through the directories to get the files within each directory
-          for(currentDir <- dirMainDirectory.subdirs(1))
+          val f = new File(baseDirectory);
+          for(currentDir <- f.listFiles if currentDir.isDirectory)
               listFiles = listFiles ::: listDirectoryFiles(currentDir);
         }
       
@@ -109,27 +106,20 @@ object SitemapGenerator
     }
 
   //Returns a list of all files that reside in the passed folder
-  def listDirectoryFiles(requiredDirectory : Directory): List[String]=
+  def listDirectoryFiles(requiredDirectory : File): List[String]=
     {
       try
       {
-        //Split the full directory path to get only the folder name of the language
-        val strDirectoryFullPath = requiredDirectory.toString;
-        val arrDirectorySplittedPath = strDirectoryFullPath.split('\\');
-
         //Now the last item in the splitted array will contain the language folder
-        val strLanguageDirectory = arrDirectorySplittedPath(arrDirectorySplittedPath.size-1);
+        val strLanguageDirectory = requiredDirectory.getName;
 
 
         var listDirectoryFiles:List[String]=List();
-        for(file <- requiredDirectory.files)
+        for(file <- requiredDirectory.listFiles)
           {
-            //Split the full-file name to get the filename only without its full path
-            val arrSplittedFilePath = file.toString.split('\\');
-
             //Now the last item in the splitted array will contain the filename
             listDirectoryFiles = listDirectoryFiles ::: List(baseURL + "/" + strLanguageDirectory
-                    + "/" + arrSplittedFilePath(arrSplittedFilePath.size-1));
+                    + "/" + file.getName);
           }
           listDirectoryFiles;
       }
@@ -141,17 +131,12 @@ object SitemapGenerator
     }
 
   //Reads the information from the configuration file
-  def readConfigurationData():Unit=
+  def readConfigurationData(f : File):Unit=
     {
       try
       {
-        //Get the current directory in which the application resides because it also contains the configuration file
-        val strDirectoryFullPath = Directory.Current.toList(0);
-
-        val configFileFullPath = strDirectoryFullPath + "\\" + this.configFileName;
-
         //Read the XML file
-        val xmlConfigTree = XML.loadFile(configFileFullPath);
+        val xmlConfigTree = XML.loadFile(f);
         
         //Extract the value of each tag and then assign this value to the appropriate variable, corresponding to each part
         var reqNode = xmlConfigTree \\ baseURLTagName;

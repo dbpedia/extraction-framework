@@ -26,7 +26,7 @@ object LiveExtractor
     def load(ontologySource : Source,
              mappingsSource : Source,
              articlesSource : Source,
-             extractors : List[Class[Extractor]],
+             extractors : List[Class[_ <: Extractor]],
              language : Language) : List[Extractor] =
     {
         val context = extractionContext(language, ontologySource, mappingsSource, articlesSource)

@@ -1,20 +1,15 @@
 package org.dbpedia.extraction.live.core;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
-import org.dbpedia.helper.CoreUtil;
-import org.openrdf.model.BNode;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.rio.ntriples.NTriplesUtil;
-
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.dbpedia.helper.CoreUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -381,9 +376,15 @@ public class Util extends CoreUtil{
 // 	}
 
     public static String getDBpediaCategoryPrefix(String language){
- 	    return Constants.DB_RESOURCE_NS +
-                 URLEncoder.encode(_getMediaWikiNamespace(language, Constants.MW_CATEGORY_NAMESPACE))+':';
- 	}
+        try
+        {
+          return Constants.DB_RESOURCE_NS + URLEncoder.encode(_getMediaWikiNamespace(language, Constants.MW_CATEGORY_NAMESPACE), "UTF-8")+':';
+        }
+        catch (UnsupportedEncodingException e)
+        {
+          throw new RuntimeException(e);
+        }
+    }
 
  	public static String getMediaWikiCategoryNamespace(String language){
  	    return _getMediaWikiNamespace(language, Constants.MW_CATEGORY_NAMESPACE);
