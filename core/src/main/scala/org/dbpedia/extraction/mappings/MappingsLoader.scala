@@ -27,6 +27,8 @@ object MappingsLoader
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
+    // TODO: store templateMappings and conditionalMappings in one map. 
+    // MappingExtractor combines them anyway.
 		val templateMappings = new HashMap[String, TemplateMapping]()
 		val tableMappings = new ArrayBuffer[TableMapping]()
 		val conditionalMappings = new HashMap[String, ConditionalMapping]()

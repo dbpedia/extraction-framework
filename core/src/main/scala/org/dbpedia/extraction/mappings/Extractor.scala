@@ -7,6 +7,11 @@ import org.dbpedia.extraction.wikiparser._
  * The base class of all extractors.
  * Concrete extractors override the extract() method.
  * Each implementing class must be thread-safe.
+ * 
+ * TODO: improve class hierarchy and object tree. It doesn't smell right that the apply method
+ * is only called on the root of a tree of extractors, and extract is called on all others.
+ * The code that generates the subject URI should be moved to PageNode. 
+ * See Node.sourceUriPrefix which is somewhat similar to retrieveTitle below.
  */
 trait Extractor extends (PageNode => Graph)
 {
@@ -81,6 +86,8 @@ object Extractor
 {
     /**
      * Creates a new extractor.
+     * 
+     * TODO: using AnyRef here loses compile-time type safety.
      *
      * @param extractors List of extractor classes to be instantiated
      * @param context Any type of object that implements the required parameter methods for the extractors

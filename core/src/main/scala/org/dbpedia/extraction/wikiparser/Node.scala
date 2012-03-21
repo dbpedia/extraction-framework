@@ -138,7 +138,10 @@ abstract class Node(val children : List[Node], val line : Int)
 
     /**
      * Get first part of source URL.
+     * 
      * TODO: It's ugly to have such a special-purpose function here. Is there a better way?
+     * At least move this method to PageNode.
+     * 
      * @return first part of source URL, containing the page name and the separator character, 
      * but not the line number etc.
      */

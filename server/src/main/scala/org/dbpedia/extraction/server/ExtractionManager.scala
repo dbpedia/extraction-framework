@@ -63,6 +63,7 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
         // context object that has only this mappingSource
         val context = new ServerExtractionContext(language, this)
         {
+            // TODO: remove this, only used by MappingExtractor
             override def mappingPageSource : Traversable[PageNode] = mappingsSource.map(parser)
         }
 

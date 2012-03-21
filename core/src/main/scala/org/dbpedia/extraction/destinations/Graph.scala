@@ -8,6 +8,9 @@ package org.dbpedia.extraction.destinations
  * is a problem for dbpedia live, use concurrent collections or
  * synchronization, but it probably isn't - usually, a graph is 
  * extracted by one extractor and then sent to a destination.
+ * 
+ * TODO: make this a Traversable so we can use flatMap to collect all quads
+ * from many extractors.
  */
 class Graph(val quads : List[Quad] = Nil)
 {
