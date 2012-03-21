@@ -13,7 +13,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.compiler.version>1.6</java.compiler.version>
-        <maven.scala.version>2.9.1</maven.scala.version>
         <scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
         <skipTests>true</skipTests>
     </properties>
@@ -38,9 +37,13 @@
             
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
-                <version>${maven.scala.version}</version>
+                <version>2.15.2</version><!-- Note: this is not in sync with Scala version! -->
 
                 <configuration>
+                    <args>
+                        <arg>-unchecked</arg>
+                        <arg>-deprecation</arg>
+                    </args>
                     <jvmArgs>
                         <jvmArg>${scala.compiler.Xmx}</jvmArg>
                     </jvmArgs>
@@ -97,7 +100,7 @@
             <dependency>
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-library</artifactId>
-                <version>${maven.scala.version}</version>
+                <version>2.9.1</version>
             </dependency>
 
             <!-- dump, scripts, server, wiktionary -->
