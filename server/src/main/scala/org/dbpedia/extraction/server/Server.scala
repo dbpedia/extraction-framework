@@ -15,7 +15,9 @@ import java.net.URI
  */
 object Server
 {
-    val serverURI = new URI("http://localhost:9999/")
+    // Note: we use /server/ because that's what we use on http://mappings.dbpedia.org/server/
+    // It makes handling redirects easier.
+    val serverURI = new URI("http://localhost:9999/server/")
 
     val logger = Logger.getLogger(Server.getClass.getName)
 
