@@ -41,10 +41,21 @@
 
                         <launcher>
                             <id>Download</id>
-                            <mainClass>org.dbpedia.extraction.dump.Download</mainClass>
-                            <jvmArgs>
-                                <jvmArg>-Xmx1024m</jvmArg>
-                            </jvmArgs>
+                            <mainClass>org.dbpedia.extraction.dump.download.Download</mainClass>
+                            <args>
+                                <arg>config=download.cfg</arg>
+                                <!--
+                                <arg>dir=/home/release/dbpedia</arg>
+                                <arg>csv=http://s23.org/wikistats/wikipedias_csv</arg>
+                                <arg>base=http://dumps.wikimedia.org</arg>
+                                <arg>other=http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/maintenance/tables.sql</arg>
+                                <arg>dump=10000-:image.sql.gz,imagelinks.sql.gz,langlinks.sql.gz,templatelinks.sql.gz,categorylinks.sql.gz</arg>
+                                <arg>dump=commons,10000-:pages-articles.xml.bz2</arg>
+                                <arg>unzip=true</arg>
+                                <arg>retry-max=5</arg>
+                                <arg>retry-millis=10000</arg>
+                                -->
+                            </args>
                         </launcher>
                     </launchers>
                 </configuration>
