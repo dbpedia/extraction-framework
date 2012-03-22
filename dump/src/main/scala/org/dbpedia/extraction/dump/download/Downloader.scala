@@ -30,7 +30,7 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
     // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
     // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
     // these non-ASCII chars anyway, so we don't have to unescape them.
-    // TODO: if the CSV file URL is configurable, the encoding should be too.
+    // TODO: the CSV file URL is configurable, so the encoding should be too.
     println("parsing "+csvFile)
     val wikis = WikiInfo.fromFile(csvFile, Codec.UTF8)
     
@@ -67,7 +67,7 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
     
     val mainPage = new URL(baseUrl, name+"/")
     
-    // 1 - find all dates on the main page
+    // 1 - find all dates on the main page, sort them latest first
     
     // there is no mutable sorted set in Scala (yet) - use Java's TreeSet. see http://www.scala-lang.org/node/6484
     val set = new TreeSet[String](reverseOrder[String])
@@ -140,8 +140,7 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
         println("downloading '"+url+"' to '"+file+"'")
         val logger = new ByteLogger(1 << 20) // create it now to start the clock
         val getStream = { conn : URLConnection =>
-          logger.length = conn.getContentLength
-          // logger.length = conn.getContentLengthLong // JDK1.7
+          logger.length = getContentLength(conn)
           unzipper(new CountingInputStream(conn.getInputStream, logger))
         }
         val downloader = new FileDownloader(url, file, getStream)
@@ -153,14 +152,26 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
       {
         case ioe : IOException =>
           retry += 1
-          if (retry >= retryMax) throw ioe
           println(retry+" of "+retryMax+" attempts to download '"+url+"' to '"+file+"' failed - "+ioe)
+          if (retry >= retryMax) throw ioe
           Thread.sleep(retryMillis)
       }
     }
     
     throw new Exception("can't get here, but the scala compiler doesn't know")
   }
+  
+  private def getContentLength(conn : URLConnection) : Long =
+  getContentLengthMethod match
+  {
+    case Some(method) => method.invoke(conn).asInstanceOf[Long]
+    case None => conn.getContentLength
+  }
+  
+  // Mew method in JDK 7. In JDK 6, files >= 2GB show size -1
+  private lazy val getContentLengthMethod =
+  try { Some(classOf[URLConnection].getMethod("getContentLengthLong")) }
+  catch { case nme : NoSuchMethodException => None }
   
   private val unzippers = Map[String, InputStream => InputStream]("gz" -> gunzipper, "bz2" -> bunzipper)
   
