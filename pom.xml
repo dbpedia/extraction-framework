@@ -23,7 +23,7 @@
         <module>server</module>
         <module>scripts</module>
         <module>live</module>
-        <!-- module>wiktionary</module -->
+        <module>wiktionary</module>
     </modules>
 
     <build>
@@ -79,6 +79,7 @@
 
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
                     <source>${java.compiler.version}</source>
                     <target>${java.compiler.version}</target>
@@ -139,24 +140,5 @@
         
     </repositories>
     
-    <!-- 
-    add the following to your settings.xml. scala-library and jersey-project add these repos 
-    and maven tries to download everything from there. mirrorOf basically deactivates them.
-    -->
-    <!--
-    <mirrors>
-        <mirror>
-            <id>central</id>
-            <url>http://repo1.maven.org/maven2</url>
-            <mirrorOf>scala-tools.org</mirrorOf>
-        </mirror>
-        <mirror>
-            <id>central</id>
-            <url>http://repo1.maven.org/maven2</url>
-            <mirrorOf>glassfish-repository</mirrorOf>
-        </mirror>
-    </mirrors>
-    -->
-
 </project>
 
