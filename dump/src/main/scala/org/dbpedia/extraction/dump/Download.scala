@@ -10,7 +10,9 @@ import java.util.zip.GZIPInputStream
 
 /**
  * Downloads Wikipedia dumps.
+ * @deprecated see org.dbpedia.extraction.dump.download.Download
  */
+@Deprecated
 object Download
 {
     /**
