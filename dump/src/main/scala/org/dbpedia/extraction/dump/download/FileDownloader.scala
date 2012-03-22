@@ -4,7 +4,9 @@ import java.io.{File,FileOutputStream,InputStream,OutputStream}
 import java.net.{URL,URLConnection,HttpURLConnection}
 
 /**
- * @param decorate optionally decorates the InputStream. Default operation is to get the stream 
+ * Downloads a single file.
+ * 
+ * @param decorate optionally decorates the InputStream. Default operation is to get the stream
  * from the connection.
  */
 class FileDownloader( url : URL, file : File, getStream : URLConnection => InputStream = { conn => conn.getInputStream } ) 
@@ -18,17 +20,20 @@ class FileDownloader( url : URL, file : File, getStream : URLConnection => Input
    */
   def download : Boolean =
   {
-    // Note: we could cast this to HttpURLConnection and call disconnect() in the end,
-    // but then we can't use file: URLs, and it doesn't seem to make a difference.
     val conn = url.openConnection
-    
-    val lastModified = conn.getLastModified
-    
-    if (lastModified != 0 && file.lastModified == lastModified) return false
-    
-    download(conn, file)
-    
-    if (lastModified != 0) file.setLastModified(lastModified)
+    try
+    {
+      val lastModified = conn.getLastModified
+      
+      if (lastModified != 0 && file.lastModified == lastModified) return false
+      
+      download(conn, file)
+      
+      if (lastModified != 0) file.setLastModified(lastModified)
+    }
+    // http://dumps.wikimedia.org/ seems to kick us out if we don't disconnect.
+    // But only disconnect if it's a http connection. Can't do this with file:// URLs.
+    finally conn match { case conn : HttpURLConnection => conn.disconnect }
     
     return true
   }
