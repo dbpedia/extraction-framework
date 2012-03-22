@@ -18,20 +18,19 @@ class FileDownloader( url : URL, file : File, getStream : URLConnection => Input
    */
   def download : Boolean =
   {
-    val conn = url.openConnection.asInstanceOf[HttpURLConnection]
-    try
-    {
-      val lastModified = conn.getLastModified
-      
-      if (lastModified != 0 && file.lastModified == lastModified) return false
-      
-      download(conn, file)
-      
-      if (lastModified != 0) file.setLastModified(lastModified)
-      
-      return true
-    }
-    finally conn.disconnect // hope that helps... javadoc is vague.
+    // Note: we could cast this to HttpURLConnection and call disconnect() in the end,
+    // but then we can't use file: URLs, and it doesn't seem to make a difference.
+    val conn = url.openConnection
+    
+    val lastModified = conn.getLastModified
+    
+    if (lastModified != 0 && file.lastModified == lastModified) return false
+    
+    download(conn, file)
+    
+    if (lastModified != 0) file.setLastModified(lastModified)
+    
+    return true
   }
   
   private def download(conn: URLConnection, file : File): Unit = 
