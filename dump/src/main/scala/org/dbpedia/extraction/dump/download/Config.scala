@@ -180,7 +180,8 @@ class Config
   private def resolveFile(parent : File, path : String) : File =
   {
     val child = new File(path)
-    if (child.isAbsolute) child else new File(parent, path).getAbsoluteFile
+    // canonicalFile removes '/../' etc.
+    (if (child.isAbsolute) child else new File(parent, path)).getCanonicalFile
   }
 }
 
