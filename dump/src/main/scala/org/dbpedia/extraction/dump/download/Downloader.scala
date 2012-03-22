@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.download
 
-import scala.collection.mutable.{Set,Map,HashSet,Seq}
+import scala.collection.mutable.{Set,Map,HashSet,Seq,ArrayBuffer}
 import java.net.{URL,URLConnection,MalformedURLException}
 import java.io.{File,InputStream,IOException}
 import scala.io.{Source,Codec}
@@ -47,7 +47,16 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
   
   def downloadFiles(languages : Map[String, Set[String]]) : Traversable[File] =
   {
-    languages.flatMap{case (language, files) => downloadFiles(language, files)}
+    val done = new ArrayBuffer[String]
+    val result = new ArrayBuffer[File]
+    for ((language, files) <- languages)
+    {
+      println("downloaded languages: "+done.mkString(",")+" - downloading languages: "+languages.keys.mkString(","))
+      languages -= language
+      done += language
+      result ++= downloadFiles(language, files)
+    }
+    result
   }
   
   val DateLink = """<a href="(\d{8})/">""".r
