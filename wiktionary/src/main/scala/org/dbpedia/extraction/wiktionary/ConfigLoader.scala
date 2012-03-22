@@ -51,7 +51,9 @@ object ConfigLoader
         val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList
 
         //Load property updateDumps
-        val update = Option(config.getProperty("updateDumps")).getOrElse(return false).trim.toLowerCase match
+        // FIXME: I changed getOrElse(return false) to getOrElse("false"). jc@sahnwaldt.de 2012-03-22
+        // getOrElse(return false) triggered a Scala warning (ignored return value) and was probably a bug
+        val update = Option(config.getProperty("updateDumps")).getOrElse("false").trim.toLowerCase match
         {
             case BooleanLiteral(b) => b
             case _ => throw new IllegalArgumentException("Invalid value for property 'updateDumps'")
@@ -81,7 +83,9 @@ object ConfigLoader
                     title.namespace == WikiTitle.Namespace.Category || title.namespace == WikiTitle.Namespace.Template)
 
         //Extractor
-        val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
+        // val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
+        // FIXME: the following line compiles, but will crash when it is executed.
+        val extractor = Extractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } )
 
         //Destination
         val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
@@ -131,14 +135,14 @@ object ConfigLoader
          *
          * @return A Map which contains the extractor classes for each language
          */
-        private def loadExtractorClasses() : Map[Language, List[Class[Extractor]]] =
+        private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
         {
             //Load extractor classes
             if(config.getProperty("extractors") == null) throw new IllegalArgumentException("Property 'extractors' not defined.")
             val stdExtractors = loadExtractorConfig(config.getProperty("extractors"))
 
             //Create extractor map
-            var extractors = ListMap[Language, List[Class[Extractor]]]()
+            var extractors = ListMap[Language, List[Class[_ <: Extractor]]]()
             for(language <- languages) extractors += ((language, stdExtractors))
 
             //Load language specific extractors
@@ -157,11 +161,10 @@ object ConfigLoader
         /**
          * Parses a enumeration of extractor classes.
          */
-        private def loadExtractorConfig(configStr : String) : List[Class[Extractor]] =
+        private def loadExtractorConfig(configStr : String) : List[Class[_ <: Extractor]] =
         {
             configStr.split("\\s+").map(_.trim).toList
-            .map(className => ClassLoader.getSystemClassLoader().loadClass(className))
-            .map(_.asInstanceOf[Class[Extractor]])
+            .map(className => ClassLoader.getSystemClassLoader().loadClass(className).asSubclass(classOf[Extractor]))
         }
     }
 }
