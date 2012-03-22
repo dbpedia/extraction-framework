@@ -13,7 +13,7 @@ class ByteLogger( step : Long ) extends ((Long, Boolean) => Unit)
     if (close || bytes >= next)
     {
       val millis = (System.nanoTime - nanos) / 1000000
-      print("read "+formatBytes(bytes)+" of "+formatBytes(length)+" in "+formatMillis(millis)+" ("+formatRate(bytes, millis)+")                    ")
+      print("read "+formatBytes(bytes)+" of "+formatBytes(length)+" in "+formatMillis(millis)+" ("+formatRate(bytes, millis)+")                    ") // spaces at end overwrite previous line
       if (close) println // new line 
       else print('\r') // back to start of line
       next = (bytes / step + 1) * step
