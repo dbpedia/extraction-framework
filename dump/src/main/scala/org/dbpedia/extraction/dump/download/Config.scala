@@ -33,27 +33,35 @@ class Config
     if (languages.isEmpty && ranges.isEmpty && others.isEmpty) throw Usage("No files to download")
   }
 
+  /**
+   * Parse config in given file. Each line in file must be an argument as explained by usage overview.
+   */
   def parse( file : File ) : Unit =
   {
     val source = Source.fromFile(file)(Codec.UTF8)
     try
     {
-      parse(source.getLines)
+      parse(file.getParentFile, source.getLines)
     } 
     finally source.close
   }
   
-  def parse( args : TraversableOnce[String] ) : Unit =
+  /**
+   * @param dir Context directory. Config file and base dir names will be resolved relative to 
+   * this path. If this method is called for a config file, this argument should be the directory
+   * of that file. Otherwise, this argument should be the current working directory.
+   */
+  def parse( dir : File, args : TraversableOnce[String] ) : Unit =
   {
     // range, both limits optional
     val Range = """(\d*)-(\d*)""".r
     
-    for(arg <- args)
+    for(a <- args; arg = a.trim)
     {
       if (arg startsWith "config=")
       {
-        val file = new File(arg.substring("config=".length))
-        if (! file.isFile) throw Usage("Invalid file", arg)
+        val file = resolveFile(dir, arg.substring("config=".length))
+        if (! file.isFile) throw Usage("Invalid file "+file, arg)
         parse(file)
       }
       else if (arg startsWith "base=")
@@ -64,7 +72,7 @@ class Config
       }
       else if (arg startsWith "dir=")
       {
-        baseDir = new File(arg.substring("dir=".length))
+        baseDir = resolveFile(dir, arg.substring("dir=".length))
       }
       else if (arg startsWith "csv=")
       {
@@ -108,7 +116,7 @@ class Config
       {
         unzip = toBoolean(arg.substring("unzip=".length), arg)
       }
-      else if (arg nonEmpty)
+      else if (arg.nonEmpty && ! arg.startsWith("#"))
       {
         throw Usage("Invalid argument '"+arg+"'")
       }
@@ -162,6 +170,18 @@ class Config
       case mue : MalformedURLException => throw Usage("Invalid URL", arg, mue)
     }
   }
+  
+  /**
+   * If path is absolute, return it as a File. Otherwise, resolve it against parent.
+   * (This method does what the File(File, String) constructor should do. Like URL(URL, String))
+   * @param parent may be null
+   * @param path must not be null, may be empty
+   */
+  private def resolveFile(parent : File, path : String) : File =
+  {
+    val child = new File(path)
+    if (child.isAbsolute) child else new File(parent, path).getAbsoluteFile
+  }
 }
 
 
@@ -176,6 +196,8 @@ object Usage
     |Usage (with example values):
     |config=/example/path/file.cfg
     |  Path to exisiting UTF-8 text file whose lines contain arguments in the format given here.
+    |  Absolute or relative path. File paths in that config file will be interpreted relative to
+    |  the config file.
     |base=http://dumps.wikimedia.org/
     |  Base URL of dump server. Required if dump files are given.
     |dir=/example/path
@@ -185,7 +207,7 @@ object Usage
     |  third column is language code, sixth column is article count. Required if ranges are used.
     |dump=en,zh-yue,1000-2000,...:file1,file2,...
     |  Download given files for given languages from server. Each key is either a language code
-    |  or a range, in which case languages with a matching number of articles will be used. 
+    |  or a range. In the latter case, languages with a matching number of articles will be used. 
     |  If the start of the range is omitted, 0 is used. If the end of the range is omitted, 
     |  infinity is used. For each language, a new sub-directory is created in the target directory.
     |  Each file is a file name like 'pages-articles.xml.bz2', to which a prefix like 
@@ -200,6 +222,8 @@ object Usage
     |  Milliseconds between attempts if the download of a file fails. Default is 10000 ms = 10 seconds.  
     |unzip=true
     |  Should downloaded .gz and .bz2 files be unzipped on the fly? Default is false.
+    |Order is relevant - for single-value parameters, values read later overwrite earlier values.
+    |Empty arguments or arguments beginning with '#' are ignored.
     |""" /* empty line */ 
     println(usage.stripMargin)
     

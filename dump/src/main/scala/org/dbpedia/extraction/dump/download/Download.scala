@@ -13,7 +13,7 @@ object Download
   def main(args: Array[String]) : Unit =
   {
     val cfg = new Config
-    cfg.parse(args)
+    cfg.parse(null, args)
     cfg.validate
     
     val downloader = new Downloader(cfg.baseUrl, cfg.baseDir, cfg.retryMax, cfg.retryMillis, cfg.unzip)
