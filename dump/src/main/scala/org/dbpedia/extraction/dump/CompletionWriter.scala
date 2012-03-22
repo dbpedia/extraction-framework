@@ -6,6 +6,7 @@ import java.net.URLDecoder
 
 /**
  * Writes a completion log file.
+ * TODO: this class is also used by live extraction. Maybe we should move it to core?
  */
 class CompletionWriter(file : File)
 {
