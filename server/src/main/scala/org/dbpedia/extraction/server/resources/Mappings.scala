@@ -14,10 +14,9 @@ import java.net.{URI, URL}
 import java.lang.Exception
 import xml.{ProcInstr, XML, NodeBuffer, Elem}
 
-/*
-* TODO document input: http://www.mediawiki.org/xml/export-0.4
-* TODO document output: according to the DTD as provided in Appendix A of the Java Logging API specification.
-*/
+/**
+ * TODO: merge Extraction.scala and Mappings.scala
+ */
 @Path("mappings/{lang}/")
 class Mappings(@PathParam("lang") langCode : String)
 {

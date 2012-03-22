@@ -11,7 +11,7 @@ import org.dbpedia.extraction.destinations.StringDestination
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 
 /**
- *
+ * TODO: merge Extraction.scala and Mappings.scala
  */
 @Path("/extraction/{lang}/")
 class Extraction(@PathParam("lang") langCode : String)
@@ -51,7 +51,7 @@ class Extraction(@PathParam("lang") langCode : String)
     @Produces(Array("application/xml"))
     def extract(@QueryParam("title") title : String, @DefaultValue("trix") @QueryParam("format") format : String) : String =
     {
-        //TODO use different mediatype
+        //TODO return HTTP error code 400 - bad request
         if(title == null) return "<error>Title not defined</error>"
 
         val formatter = format.toLowerCase.replace("-", "") match
@@ -76,7 +76,7 @@ class Extraction(@PathParam("lang") langCode : String)
      * Extracts a MediaWiki article
      */
     @POST
-    @Path("/extract")
+    @Path("extract")
     @Consumes(Array("application/xml"))
     @Produces(Array("application/xml"))
     def extract(xml : Elem) =
