@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.dump.download
 
-import scala.collection.mutable.{Set,Map,HashSet,Seq,ArrayBuffer}
+import scala.collection.mutable.{Set,Map,HashSet,ArrayBuffer}
+import scala.collection.immutable.SortedSet
 import java.net.{URL,URLConnection,MalformedURLException}
 import java.io.{File,InputStream,IOException}
 import scala.io.{Source,Codec}
 import java.util.TreeSet
 import java.util.Collections.reverseOrder
 import scala.collection.JavaConversions.asScalaSet
-
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import java.util.zip.GZIPInputStream
 
@@ -47,16 +47,12 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
   
   def downloadFiles(languages : Map[String, Set[String]]) : Traversable[File] =
   {
-    val done = new ArrayBuffer[String]
-    val result = new ArrayBuffer[File]
-    for ((language, files) <- languages)
-    {
-      println("downloaded languages: "+done.mkString(",")+" - downloading languages: "+languages.keys.mkString(","))
-      languages -= language
-      done += language
-      result ++= downloadFiles(language, files)
+    // sort them to have reproducible behavior
+    val keys = SortedSet.empty[String] ++ languages.keys
+    keys.flatMap { key => 
+      println("done: "+keys.until(key).mkString(",")+" todo: "+keys.from(key).mkString(","))
+      downloadFiles(key,languages(key)) 
     }
-    result
   }
   
   val DateLink = """<a href="(\d{8})/">""".r
@@ -70,18 +66,13 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
     // 1 - find all dates on the main page, sort them latest first
     
     // there is no mutable sorted set in Scala (yet) - use Java's TreeSet. see http://www.scala-lang.org/node/6484
-    val set = new TreeSet[String](reverseOrder[String])
+    val dates = new TreeSet[String](reverseOrder[String])
     
-    eachLine(mainPage, line => DateLink.findAllIn(line).matchData.foreach(m => set.add(m.group(1))))
+    eachLine(mainPage, line => DateLink.findAllIn(line).matchData.foreach(m => dates.add(m.group(1))))
     
-    val dates = asScalaSet(set) // make the implicit explicit
-    
-    // println("found dates on "+mainPage+": "+dates.mkString(",")) // too many dates clutter log
-      
-    for (date <- dates)
+    // 2 - find date page that has all files we want
+    for (date <- dates) // implicit conversion
     {
-      // 2 - find date page that has all files we want
-      
       val datePage = new URL(mainPage, date+"/")
       
       // all the links we need
