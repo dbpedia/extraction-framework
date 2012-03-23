@@ -1,13 +1,5 @@
 package org.dbpedia.extraction.dump.download
 
-import scala.collection.mutable.{Set,HashSet,HashMap}
-import java.net.{URL,MalformedURLException}
-import java.io.{File,InputStream}
-import scala.io.{Source,Codec}
-import java.util.TreeSet
-import java.util.Collections.reverseOrder
-import scala.collection.JavaConversions.asScalaSet
-
 object Download
 {
   def main(args: Array[String]) : Unit =
