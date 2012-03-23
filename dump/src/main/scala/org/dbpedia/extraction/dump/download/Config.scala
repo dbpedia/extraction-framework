@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dump.download
 
 import java.io.File
 import java.net.{URL,MalformedURLException}
-import scala.collection.mutable.{Set,HashSet,HashMap}
+import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.io.{Source,Codec}
 
 class Config
@@ -25,8 +25,7 @@ class Config
   
   var unzip : Boolean = false
   
-  def validate =
-  {
+  def validate : Unit = {
     if (baseDir == null) throw Usage("No target directory")
     if ((languages.nonEmpty || ranges.nonEmpty) && baseUrl == null) throw Usage("No base URL")
     if (ranges.nonEmpty && csvUrl == null) throw Usage("No CSV file URL")
@@ -36,8 +35,7 @@ class Config
   /**
    * Parse config in given file. Each line in file must be an argument as explained by usage overview.
    */
-  def parse( file : File ) : Unit =
-  {
+  def parse( file : File ) : Unit = {
     val source = Source.fromFile(file)(Codec.UTF8)
     try
     {
@@ -56,120 +54,60 @@ class Config
     // range, both limits optional
     val Range = """(\d*)-(\d*)""".r
     
-    for(a <- args; arg = a.trim)
+    val DumpFiles = new TwoListArg("dump=", ":", ",")
+    
+    for(a <- args; arg = a.trim) arg match
     {
-      if (arg startsWith "config=")
-      {
-        val file = resolveFile(dir, arg.substring("config=".length))
+      case Arg("base", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
+      case Arg("dir", path) => baseDir = resolveFile(dir, path)
+      case Arg("csv", url) => csvUrl = toURL(url, arg)
+      case Arg("other", url) => others += toURL(url, arg)
+      case Arg("retry-max", count) => retryMax = toInt(count, 1, Int.MaxValue, arg)
+      case Arg("retry-millis", millis) => retryMillis = toInt(millis, 0, Int.MaxValue, arg)
+      case Arg("unzip", bool) => unzip = toBoolean(bool, arg)
+      case Arg("config", path) =>
+        val file = resolveFile(dir, path)
         if (! file.isFile) throw Usage("Invalid file "+file, arg)
         parse(file)
-      }
-      else if (arg startsWith "base=")
-      {
-        var url = arg.substring("base=".length)
-        if (! url.endsWith("/")) url += "/" // make sure that base URL ends with slash
-        baseUrl = toURL(url, arg)
-      }
-      else if (arg startsWith "dir=")
-      {
-        baseDir = resolveFile(dir, arg.substring("dir=".length))
-      }
-      else if (arg startsWith "csv=")
-      {
-        csvUrl = toURL(arg.substring("csv=".length), arg)
-      }
-      else if (arg startsWith "dump=")
-      {
-        val values = arg.substring("dump=".length).split(":", -1)
-        if (values.length == 1) throw Usage("No ':'", arg)
-        if (values.length > 2) throw Usage("More than one ':'", arg)
-        
-        val files = values(1).split(",", -1)
-        if (files(0).isEmpty) throw Usage("No files", arg)
-        
-        val keys = values(0).split(",", -1)
-        for (key <- keys)
-        {
-          if (key.isEmpty) throw Usage("Empty language / range", arg)
-          var set = key match
-          {
-            case Range(from, to) => ranges.getOrElseUpdate(toRange(from, to, arg), new HashSet[String])
-            case WikiInfo.Language(_) => languages.getOrElseUpdate(key, new HashSet[String])
-            case other => throw Usage("Invalid language / range '"+other+"'", arg)
-          }
-          set ++= files
-        }
-      }
-      else if (arg startsWith "other=") 
-      {
-        others += toURL(arg.substring("other=".length), arg)
-      }
-      else if (arg startsWith "retry-max=") 
-      {
-        retryMax = toInt(arg.substring("retry-max=".length), 0, Int.MaxValue, arg)
-      }
-      else if (arg startsWith "retry-millis=") 
-      {
-        retryMillis = toInt(arg.substring("retry-millis=".length), 0, Int.MaxValue, arg)
-      }
-      else if (arg startsWith "unzip=") 
-      {
-        unzip = toBoolean(arg.substring("unzip=".length), arg)
-      }
-      else if (arg.nonEmpty && ! arg.startsWith("#"))
-      {
-        throw Usage("Invalid argument '"+arg+"'")
-      }
+      case DumpFiles(keys, files) =>
+        if (files.exists(_ isEmpty)) throw Usage("Invalid file name", arg)
+        keys foreach (_ match {
+          case Range(from, to) => add(ranges, toRange(from, to, arg), files)
+          case WikiInfo.Language(language) => add(languages, language, files)
+          case other => throw Usage("Invalid language / range '"+other+"'", arg)
+        })
+      case Ignored(_) => // ignore
+      case _ => throw Usage("Invalid argument '"+arg+"'")
     }
   }
+  
+  private def add[K](map : Map[K,Set[String]], key : K, values : Array[String]) = 
+    map.getOrElseUpdate(key, new HashSet[String]) ++= values
   
   private def toBoolean(s : String, arg : String) : Boolean =
-  {
-    if (s != "true" && s != "false") throw Usage("Invalid boolean value", arg)
-    s.toBoolean
-  }
+    if (s == "true" || s == "false") s.toBoolean else throw Usage("Invalid boolean value", arg) 
   
   private def toRange(from : String, to : String, arg : String) : (Int, Int) =
-  {
-    try
-    {
-      val lo : Int = if (from isEmpty) 0 else from.toInt
-      val hi : Int = if (to isEmpty) Int.MaxValue else to.toInt
-      if (lo > hi) throw new NumberFormatException
-      (lo, hi)
-    }
-    catch
-    {
-      case nfe : NumberFormatException => throw Usage("invalid range", arg, nfe)
-    }
+  try {
+    val lo : Int = if (from isEmpty) 0 else from.toInt
+    val hi : Int = if (to isEmpty) Int.MaxValue else to.toInt
+    if (lo > hi) throw new NumberFormatException
+    (lo, hi)
   }
+  catch { case nfe : NumberFormatException => throw Usage("invalid range", arg, nfe) }
   
   private def toInt(str : String, min : Int, max : Int, arg : String) : Int =
-  {
-    try
-    {
-      val result = str.toInt
-      if (result < min) throw new NumberFormatException(str+" < "+min)
-      if (result > max) throw new NumberFormatException(str+" > "+max)
-      result
-    }
-    catch
-    {
-      case nfe : NumberFormatException => throw Usage("invalid integer", arg, nfe)
-    }
+  try {
+    val result = str.toInt
+    if (result < min) throw new NumberFormatException(str+" < "+min)
+    if (result > max) throw new NumberFormatException(str+" > "+max)
+    result
   }
+  catch { case nfe : NumberFormatException => throw Usage("invalid integer", arg, nfe) }
   
   private def toURL(s : String, arg : String) : URL =
-  {
-    try
-    {
-      new URL(s)
-    }
-    catch
-    {
-      case mue : MalformedURLException => throw Usage("Invalid URL", arg, mue)
-    }
-  }
+  try { new URL(s) }
+  catch { case mue : MalformedURLException => throw Usage("Invalid URL", arg, mue) }
   
   /**
    * If path is absolute, return it as a File. Otherwise, resolve it against parent.
@@ -177,19 +115,17 @@ class Config
    * @param parent may be null
    * @param path must not be null, may be empty
    */
-  private def resolveFile(parent : File, path : String) : File =
-  {
+  private def resolveFile(parent : File, path : String) : File = {
     val child = new File(path)
     // canonicalFile removes '/../' etc.
     (if (child.isAbsolute) child else new File(parent, path)).getCanonicalFile
   }
+  
 }
 
 
-object Usage
-{
-  def apply( msg : String, arg : String = null, cause : Throwable = null ) : Exception =
-  {
+object Usage {
+  def apply( msg : String, arg : String = null, cause : Throwable = null ) : Exception = {
     val message = if (arg == null) msg else msg+" in '"+arg+"'"
     
     println(message)
@@ -230,4 +166,26 @@ object Usage
     
     new Exception(message, cause)
   }
+}
+
+class TwoListArg(prefix : String, sep1 : String, sep2 : String)
+{
+  def unapply(arg : String) : Option[(Array[String],Array[String])] = {
+    if (! (arg startsWith prefix)) return None
+    val parts = arg.substring(prefix.length).split(sep1, -1)
+    if (parts.length == 1) throw Usage("No '"+sep1+"'", arg)
+    if (parts.length > 2) throw Usage("More than one '"+sep1+"'", arg)
+    Some(parts(0).split(sep2, -1), parts(1).split(sep2, -1))
+  }
+}
+
+object Arg {
+  def unapply(arg : String) : Option[(String, String)] =  {
+    val index = arg.indexOf('=')
+    if (index == -1) None else Some((arg.substring(0, index), arg.substring(index + 1)))
+  }
+}
+
+object Ignored {
+  def unapply(arg : String) : Option[String] = if (arg.trim.isEmpty || arg.startsWith("#")) Some(arg) else None
 }
