@@ -40,7 +40,7 @@ object Server
     {
         //Start the HTTP server
         val resources = new ClassNamesResourceConfig(
-            classOf[Root], classOf[Statistics], classOf[Extraction], classOf[Mappings], classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
+            classOf[Root], classOf[Extraction], classOf[Mappings], classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
             classOf[TemplateStatistics], classOf[PropertyStatistics],
             classOf[XMLMessageBodyReader], classOf[XMLMessageBodyWriter], classOf[ExceptionMapper], classOf[TriX], classOf[Log], classOf[Percentage])
         
