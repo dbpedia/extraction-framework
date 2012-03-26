@@ -30,7 +30,6 @@ class InfoboxExtractor( context : {
     private val language = context.language.wikiCode
 
     private val usesTemplateProperty = OntologyNamespaces.getProperty("wikiPageUsesTemplate", context.language)
-    //private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
 
     private val MinPropertyCount = 2
 
