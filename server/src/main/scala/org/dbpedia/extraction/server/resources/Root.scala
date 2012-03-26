@@ -15,6 +15,7 @@ class Root
           <body>
             <h2>Server</h2>
             <p><a href="ontology/">Ontology</a></p>
+            <p><a href="statistics/">Statistics</a></p>
             {
               for(lang <- Server.config.languages; code = lang.wikiCode) yield
               {
