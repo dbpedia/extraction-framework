@@ -25,6 +25,9 @@ object WikiUtil
      * TODO: maybe we should expect (require) the name to be normalized, e.g. with uppercase
      * first letter and without duplicate spaces or spaces at start or end? Would make this
      * method much simpler.
+     * 
+     * TODO: This method was a mistake. We should use specialized objects for resource identifiers, 
+     * not Strings, and serialize them any way we want (IRI, URI, String, whatever).
      *   
      * @param name Non-encoded MediaWiki page name, e.g. 'Émile Zola'.
      * Must not include the namespace (e.g. 'Template:').
