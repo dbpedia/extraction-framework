@@ -5,13 +5,14 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import java.io.File
 
 /**
  * Loads all extraction context parameters (ontology pages, mapping pages, ontology) at start-up independently of which extractors are chosen.
  * Is able to update the ontology and the mappings.
  * Updates are executed in synchronized threads.
  */
-class DynamicExtractionManager(languages : Traversable[Language], extractors : List[Class[_ <: Extractor]]) extends ExtractionManager(languages, extractors)
+class DynamicExtractionManager(languages : Traversable[Language], extractors : List[Class[_ <: Extractor]], ontologyFile : File, mappingsDir : File) extends ExtractionManager(languages, extractors, ontologyFile, mappingsDir)
 {
     @volatile private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 

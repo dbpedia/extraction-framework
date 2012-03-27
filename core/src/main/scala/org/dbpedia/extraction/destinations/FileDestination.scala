@@ -12,20 +12,19 @@ import java.io._
  * @param formatter The formatter used to serialize the statements. If no formatter is provided, the statements are written using the N-Triples format.
  * @param baseDir The base directory of the output files. If no base directory is provided, the output is written to current directory.
  * @param filePattern The pattern according to which the statements are split into different files by their dataset.
- * If no pattern is provided, one file for each dataset is generated. In this case the file names are generated from the name of the corresponding dataset.
  */
 class FileDestination(formatter : Formatter = new NTriplesFormatter(),
                       baseDir : File = new File("."),
-                      filePattern : (Dataset => String) = FileDestination.defaultFilePattern, append : Boolean = false) extends Destination
+                      filePattern : (Dataset => String), append : Boolean = false) extends Destination
 {
-    baseDir.mkdirs()
+    if (! baseDir.isDirectory() && ! baseDir.mkdirs()) throw new IOException("cannot create base dir "+baseDir)
 
-	private val writers = HashMap[String, Writer]()
+    private val writers = HashMap[String, Writer]()
 
     private var closed = false
 
-	override def write(graph : Graph) : Unit = synchronized
-	{
+    override def write(graph : Graph) : Unit = synchronized
+    {
         if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
         for((dataset, quads) <- graph.quadsByDataset)
@@ -55,31 +54,24 @@ class FileDestination(formatter : Formatter = new NTriplesFormatter(),
     private def getWriter(dataset : Dataset) : Writer =
     {
         val fileName = filePattern(dataset)
-
-        writers.get(fileName) match
-        {
-            case Some(writer) => writer
-            case None =>
-            {
-                val file = new File(baseDir + "/" + fileName)
-                file.getParentFile.mkdirs
-
-                val stream = new FileOutputStream(file, append)
-                val writer = new OutputStreamWriter(stream, "UTF-8")
-                formatter.writeHeader(writer)
-                writers(fileName) = writer
-
-                writer
-            }
-        }
-
+        writers.getOrElseUpdate(fileName, createWriter(fileName))
     }
-}
-
-private object FileDestination
-{
-    private def defaultFilePattern(dataset : Dataset) : String =
+    
+    private def createWriter(fileName : String) : Writer=
     {
-         URLEncoder.encode(dataset.name, "UTF-8") + ".nq"
+        val file = new File(baseDir, fileName)
+        mkdirs(file.getParentFile)
+    
+        val stream = new FileOutputStream(file, append)
+        val writer = new OutputStreamWriter(stream, "UTF-8")
+        formatter.writeHeader(writer)
+    
+        writer
     }
+    
+    private def mkdirs(dir : File) : Unit =
+    {
+      if (! dir.isDirectory && ! dir.mkdirs) throw new IOException("directory "+dir+" does not exist and cannot be created")
+    }
+      
 }

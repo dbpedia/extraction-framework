@@ -419,7 +419,7 @@ object OntologyDatatypes
 	    builder.addUnit(new FactorUnitDatatype("gigawatt", Set("GW","gigawatt"), 1000000000.0));
 	    builder.addUnit(new FactorUnitDatatype("horsepower", Set("hp","horsepower","ίπποι"), 745.72218));
 	    builder.addUnit(new FactorUnitDatatype("pferdestaerke", Set("PS","pferdestaerke"), 735.49875));
-	    builder.addUnit(new FactorUnitDatatype("brake horsepower", Set("bhp","brake horsepower"), 745.7));
+	    builder.addUnit(new FactorUnitDatatype("brakeHorsepower", Set("bhp","brake horsepower"), 745.7));
 		
 	    types :::= builder.build
 		builder.addDimension("ElectricCurrent");

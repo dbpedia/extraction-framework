@@ -185,29 +185,21 @@ object WikiTitle
         //Check if it contains a language
         if(!parts.isEmpty && !parts.tail.isEmpty)
         {
-            Language.tryCode(parts.head.toLowerCase(sourceLanguage.locale)) match
+            for (lang <- Language.tryCode(parts.head.toLowerCase(sourceLanguage.locale)))
             {
-                case Some(lang) =>
-                {
-                     language = lang
-                     isInterlanguageLink = !leadingColon
-                     parts = parts.tail
-                }
-                case None =>
+                 language = lang
+                 isInterlanguageLink = !leadingColon
+                 parts = parts.tail
             }
         }
 
         //Check if it contains a namespace
         if(!parts.isEmpty && !parts.tail.isEmpty)
         {
-            getNamespace(language, parts.head) match
+            for (ns <- getNamespace(language, parts.head))
             {
-                case Some(ns) =>
-                {
-                     namespace = ns
-                     parts = parts.tail
-                }
-                case None =>
+                 namespace = ns
+                 parts = parts.tail
             }
         }
 

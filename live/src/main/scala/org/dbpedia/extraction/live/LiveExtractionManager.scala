@@ -136,8 +136,7 @@ object LiveExtractionManager
         private def loadExtractorConfig(configStr : String) : scala.collection.immutable.List[Class[Extractor]] =
         {
             configStr.split("\\s+").map(_.trim).toList
-            .map(className => ClassLoader.getSystemClassLoader().loadClass(className))
-            .map(_.asInstanceOf[Class[Extractor]])
+            .map(className => ClassLoader.getSystemClassLoader().loadClass(className).asSubClass(classOf[Extractor]))
         }
     }*/
 }

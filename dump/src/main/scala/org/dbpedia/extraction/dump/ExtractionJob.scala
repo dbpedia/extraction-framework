@@ -3,9 +3,9 @@ package org.dbpedia.extraction.dump
 import _root_.org.dbpedia.extraction.destinations.Destination
 import _root_.org.dbpedia.extraction.mappings.Extractor
 import _root_.org.dbpedia.extraction.sources.{Source, WikiPage}
-
-import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
-import java.util.concurrent.{ArrayBlockingQueue}
+import _root_.org.dbpedia.extraction.wikiparser.WikiParser
+import _root_.org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import java.util.concurrent.{ArrayBlockingQueue, TimeUnit}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable
 import java.io.File
@@ -36,13 +36,18 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
 
     private val completionWriter = new CompletionWriter(new File("./" + URLEncoder.encode(label, "UTF-8") + ".tmp"))
 
+    // only accessed by the thread that reads the source, no need to sync / use atomic
     private var currentID = 0
 
     override def run() : Unit =
     {
         logger.info(label + " started")
+        
+        // one thread per core sounds good. availableProcessors returns logical processors, 
+        // not physical, which is good for us.
+        val cpus = java.lang.Runtime.getRuntime.availableProcessors
 
-        val extractionJobs = for(_ <- 1 to 4) yield new ExtractionThread()
+        val extractionJobs = for(_ <- 1 to cpus) yield new ExtractionThread()
 
         try
         {
@@ -63,7 +68,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
         finally
         {
             //Stop extraction jobs
-            extractionJobs.foreach(_.interrupt)
+            extractionJobs.foreach(_.done)
             extractionJobs.foreach(_.join)
 
             completionWriter.close()
@@ -72,29 +77,28 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
             logger.info(label + " finished")
         }
     }
+    
+    // Only extract from the following namespaces
+    private val namespaces = Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
 
     private def queuePage(page : WikiPage)
     {
-        //Only extract from the following namespaces
-        if(page.title.namespace != WikiTitle.Namespace.Main &&
-           page.title.namespace != WikiTitle.Namespace.File &&
-           page.title.namespace != WikiTitle.Namespace.Category &&
-           page.title.namespace != WikiTitle.Namespace.Template )
-        {
-           return 
-        }
+        // If we use XMLSource, we probably checked this already, but anyway... 
+        if (! namespaces.contains(page.title.namespace)) return 
 
         try
         {
+            // check if page has been extracted in a previous (aborted) run
             val done = completionReader.read(currentID, page.title)
-            if(!done) pageQueue.put((currentID, page))
+            if(done) completionWriter.write(currentID, page.title, true) // copy to new file
+            else pageQueue.put((currentID, page))
             currentID += 1
         }
         catch
         {
             case ex =>
             {
-                logger.log(Level.SEVERE, "Inconsistet completion log. Shutting down...", ex)
+                logger.log(Level.SEVERE, "Inconsistent completion log. Shutting down...", ex)
                 throw new RuntimeException with ControlThrowable
             }
         }
@@ -108,20 +112,24 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
     {
         @volatile private var running = true
 
-        override def interrupt()
+        def done()
         {
             running = false
         }
 
         override def run() : Unit =
         {
-            //Extract remaining pages
-            while(running || !pageQueue.isEmpty)
+            // Extract remaining pages:
+            // - If the whole show is running, we wait for pages as long as we want
+            // - If the master thread said we're done, we still keep going until the queue is empty
+            while(running || ! pageQueue.isEmpty)
             {
-                val page = pageQueue.poll
+                // Note: it would be nice if we could just take() and wait forever, but then
+                // we might be left sleeping at the end when the queue becomes empty.
+                val page = pageQueue.poll(100, TimeUnit.MILLISECONDS)
                 if(page != null)
                 {
-                    extract(page)
+                    extractPage(page._1, page._2)
                 }
                 else
                 {
@@ -129,8 +137,6 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                 }
             }
         }
-
-        private def extract(page : (Int, WikiPage)) = extractPage(page._1, page._2) 
 
         private def extractPage(id : Int, page : WikiPage) : Unit =
         {
@@ -154,7 +160,9 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                     }
                 }
 
-            //Write the extraction success
+            // Write the extraction success
+            // FIXME: if we let the worker threads write the completion log, they may
+            // shuffle the IDs, which will upset CompletionReader.read().
             completionWriter.write(id, page.title, success)
         }
     }

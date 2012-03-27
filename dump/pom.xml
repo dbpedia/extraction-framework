@@ -22,16 +22,21 @@
 
                 <configuration>
                     <launchers>
+
                         <launcher>
-                            <id>Extract</id>
+                            <id>extract</id>
                             <mainClass>org.dbpedia.extraction.dump.Extract</mainClass>
                             <jvmArgs>
+                                <jvmArg>-server</jvmArg>
                                 <jvmArg>-Xmx1024m</jvmArg>
                             </jvmArgs>
+                            <args>
+                                <arg>extraction.properties</arg>
+                            </args>
                         </launcher>
 
                         <launcher>
-                            <id>Compress</id>
+                            <id>compress</id>
                             <mainClass>org.dbpedia.extraction.dump.Compress</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xmx1024m</jvmArg>
@@ -40,10 +45,10 @@
                         </launcher>
 
                         <launcher>
-                            <id>Download</id>
+                            <id>download</id>
                             <mainClass>org.dbpedia.extraction.dump.download.Download</mainClass>
                             <args>
-                                <arg>config=download.cfg</arg>
+                                <arg>config=download.properties</arg>
                                 <!--
                                 <arg>dir=/home/release/dbpedia</arg>
                                 <arg>csv=http://s23.org/wikistats/wikipedias_csv</arg>
@@ -57,6 +62,15 @@
                                 -->
                             </args>
                         </launcher>
+
+                        <launcher>
+                            <id>ontology</id>
+                            <mainClass>org.dbpedia.extraction.dump.DownloadOntology</mainClass>
+                            <args>
+                                <arg>src/main/resources/ontology.xml</arg>
+                            </args>
+                        </launcher>
+
                     </launchers>
                 </configuration>
 

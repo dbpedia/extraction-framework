@@ -7,7 +7,8 @@ import org.dbpedia.extraction.mappings._
 object Configuration
 {
     /** The extraction languages. Use List (not Set) to preserve order. English first, rest sorted. */
-    val languages = List("en", "ar", "bn", "ca", "cs", "de", "el", "es", "eu", "fr", "ga", "hi", "hr", "hu", "it", "ko", "nl", "pl", "pt", "ru", "sl", "tr").map(Language.forCode)
+    val languages = List("en", "ar", "bn", "ca", "cs", "de", "el", "es", "eu", "fr", "ga", "hi", "hr", "hu", "it", "ko", "nl", "pl", "pt", "ru", "sl", "tr")
+      .map(Language.forCode)
 
     /** The extractors */
     val extractors = List(
@@ -20,4 +21,5 @@ object Configuration
 
     /** The URL of the MediaWiki API of the Mappings Wiki */
     val wikiApiUrl = new URL("http://mappings.dbpedia.org/api.php")
+    
 }

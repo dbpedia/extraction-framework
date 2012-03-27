@@ -1,17 +1,19 @@
 package org.dbpedia.extraction.server.resources
 
 import javax.ws.rs._
+import javax.ws.rs.core.Response
 import org.dbpedia.extraction.server.Server
 import collection.immutable.ListMap
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.server.util.CreateMappingStats._
 import java.io._
+import java.net.URI
 import org.dbpedia.extraction.server.util.{CreateMappingStats, IgnoreList}
 import java.lang.Boolean
 
 @Path("/statistics/{lang}/")
-class TemplateStatistics(@PathParam("lang") langCode: String)
+class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String)
 {
     private val language = Language.tryCode(langCode)
                                    .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
@@ -22,16 +24,16 @@ class TemplateStatistics(@PathParam("lang") langCode: String)
     private val createMappingStats = new CreateMappingStats(language)
 
     private var wikipediaStatistics: WikipediaStats = null
-    if (new File(createMappingStats.mappingStatsObjectFileName).isFile)
+    if (createMappingStats.mappingStatsObjectFile.isFile)
     {
-        Server.logger.info("Loading serialized WikiStats object from " + createMappingStats.mappingStatsObjectFileName)
-        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
+        Server.logger.info("Loading serialized WikiStats object from " + createMappingStats.mappingStatsObjectFile)
+        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFile)
         Server.logger.info("done")
     }
     else
     {
-        Server.logger.info("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFileName)
-        throw new FileNotFoundException("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFileName)
+        Server.logger.info("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFile)
+        throw new FileNotFoundException("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFile)
     }
 
     private val mappings = getClassMappings
@@ -48,7 +50,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String)
     private val goodThreshold = 0.8
     private val mediumThreshold = 0.4
 
-    private val renameColor = "#df5c56"
+    private val renameColor = "#b03060"
     private val ignoreColor = "#cdcdcd"
 
     @GET
@@ -215,7 +217,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String)
                                     if (mustRenamed)
                                     {
                                         <td>
-                                            {redirectMsg}<a href={"../../templatestatistics/" + langCode + "/" + createMappingStats.encodeSlash(WikiUtil.wikiEncode(mappingStat.templateName)) + "/"}>
+                                            {redirectMsg}<a href={"../../templatestatistics/" + langCode + "/" + WikiUtil.wikiEncode(mappingStat.templateName)}>
                                             {WikiUtil.wikiDecode(mappingStat.templateName, language)}
                                         </a>
                                         </td>
@@ -224,7 +226,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String)
                                     {
 
                                         <td>
-                                            <a href={"../../templatestatistics/" + langCode + "/" + createMappingStats.encodeSlash(WikiUtil.wikiEncode(mappingStat.templateName)) + "/"}>
+                                            <a href={"../../templatestatistics/" + langCode + "/" + WikiUtil.wikiEncode(mappingStat.templateName)}>
                                                 {WikiUtil.wikiDecode(mappingStat.templateName, language)}
                                             </a>{redirectMsg}
                                         </td>
@@ -244,10 +246,10 @@ class TemplateStatistics(@PathParam("lang") langCode: String)
                                         </td> <td align="right">
                                     {percentMappedPropOccur}
                                 </td>
-                                    {if (Server.adminRights && mappingStat.getNumberOfMappedProperties(ignoreList) == 0)
+                                    {if (Server.adminRights(password) && mappingStat.getNumberOfMappedProperties(ignoreList) == 0)
                                     {
                                         <td>
-                                        <a href={createMappingStats.encodeSlash(WikiUtil.wikiEncode(mappingStat.templateName)) + "/" + isIgnored.toString}>
+                                        <a href={"ignore/" + (! isIgnored).toString + "/" + WikiUtil.wikiEncode(mappingStat.templateName)+"?p="+password}>
                                             {ignoreMsg}
                                         </a>
                                         </td>
@@ -263,65 +265,24 @@ class TemplateStatistics(@PathParam("lang") langCode: String)
 
 
     @GET
-    @Path("/{template}/{ignorelist}")
+    @Path("ignore/{ignore}/{template: .+$}")
     @Produces(Array("application/xhtml+xml"))
-    def ignoreListAction(@PathParam("template") template: String, @PathParam("ignorelist") ignored: String) =
+    def ignoreListAction(@PathParam("template") template: String, @PathParam("ignore") ignore: String) =
     {
-        if (Server.adminRights)
+        if (Server.adminRights(password))
         {
-            if (ignored == "true")
+            if (ignore == "true")
             {
-                ignoreList.removeTemplate(createMappingStats.decodeSlash(WikiUtil.wikiDecode(template)))
-                <h2>removed from ignore list</h2>
+                ignoreList.addTemplate(WikiUtil.wikiDecode(template))
             }
             else
             {
-                ignoreList.addTemplate(createMappingStats.decodeSlash(WikiUtil.wikiDecode(template)))
-                <h2>added to ignore list</h2>
+                ignoreList.removeTemplate(WikiUtil.wikiDecode(template))
             }
+            createMappingStats.saveIgnorelist(ignoreList)
         }
-        val html =
-            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-                <head>
-                    <script type="text/javascript">
-                        <!--
-                        window.location="../";
-                        //-->
-                    </script>
-                </head>
-                <body>
-                </body>
-            </html>
-        createMappingStats.saveIgnorelist(ignoreList)
-        html
-    }
-
-    @GET
-    @Path("/ihavethepowertoignore")
-    @Produces(Array("application/xhtml+xml"))
-    def setAdmin() =
-    {
-        if (Server.adminRights == true)
-        {
-            Server.adminRights = false
-        }
-        else
-        {
-            Server.adminRights = true
-        }
-        val html =
-            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-                <head>
-                    <script type="text/javascript">
-                        <!--
-                        window.location="../";
-                        //-->
-                    </script>
-                </head>
-                <body>
-                </body>
-            </html>
-        html
+        
+        Response.temporaryRedirect(new URI("statistics/"+langCode+"/?p="+password)).build
     }
 
     /**

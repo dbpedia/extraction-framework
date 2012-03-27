@@ -21,13 +21,13 @@ class XMLFileSource(resource: Resource, filter: (WikiTitle => Boolean)) extends 
   }
 
 
-  override def foreach[U](f: WikiPage => U): Unit =
+  override def foreach[U](proc: WikiPage => U): Unit =
   {
-    val javaFilter = {
+    val jfilter = {
       title: WikiTitle => filter(title): java.lang.Boolean
     }
     val stream = resource.getInputStream
-    new WikipediaDumpParser(stream, f, javaFilter).run()
+    new WikipediaDumpParser(stream, null, null, jfilter, proc).run()
     stream.close()
   }
 

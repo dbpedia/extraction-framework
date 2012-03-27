@@ -14,6 +14,41 @@
     <artifactId>core</artifactId>
     <name>DBpedia Core Libraries</name>
 
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+
+                <configuration>
+                    <launchers>
+                    
+                        <launcher>
+                            <id>download-ontology</id>
+                            <mainClass>org.dbpedia.extraction.util.OntologyDownloader</mainClass>
+                            <args>
+                                <!-- use a path that is convenient for all modules -->
+                                <arg>../ontology.xml</arg> 
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>download-mappings</id>
+                            <mainClass>org.dbpedia.extraction.util.MappingsDownloader</mainClass>
+                            <args>
+                                <!-- use a path that is convenient for all modules -->
+                                <arg>../mappings</arg> 
+                            </args>
+                        </launcher>
+
+                    </launchers>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
 
         <dependency>

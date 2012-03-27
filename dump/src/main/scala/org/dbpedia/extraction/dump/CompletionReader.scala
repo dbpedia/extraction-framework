@@ -34,11 +34,12 @@ class CompletionReader(file : File)
         if(line == null) return false
 
         //Parse the line
-        val IntLiteral(id) :: title :: BooleanLiteral(success) :: Nil = line.split(' ').toList
+        val IntLiteral(id) :: title :: BooleanLiteral(success) :: Nil = line.split("\\|").toList
+        
 
         //Check if page matches expected page
         if(id != expectedID) throw new Exception("Invalid id: " + id + " (Expected: " + expectedID + ")")
-        if(title != expectedTitle.encodedWithNamespace) throw new Exception("Invalid title: " + title + " (Expected: " + expectedTitle.encodedWithNamespace + ")")
+        if(title != expectedTitle.decodedWithNamespace) throw new Exception("Invalid title: " + title + " (Expected: " + expectedTitle.decodedWithNamespace + ")")
 
         success
     }

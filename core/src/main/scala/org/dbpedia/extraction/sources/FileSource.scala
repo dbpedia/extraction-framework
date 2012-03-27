@@ -43,7 +43,7 @@ class FileSource(baseDir : File, filter : (String => Boolean) = (path => !path.s
             {
             	val title = WikiTitle.parse(pageName, language)
 
-            	f(new WikiPage(title, 0, 0, source))
+            	f(new WikiPage(title, null, 0, 0, source))
             }
             catch
             {

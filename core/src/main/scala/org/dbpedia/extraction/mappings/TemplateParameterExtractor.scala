@@ -15,6 +15,8 @@ class TemplateParameterExtractor( context : {
 {
     private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", context.language)
 
+    val parameterRegex = """(?s)\{\{\{([^|^}^{^<^>]*)[|}<>]""".r
+    
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         if(node.title.namespace != WikiTitle.Namespace.Template ||
@@ -32,11 +34,10 @@ class TemplateParameterExtractor( context : {
             linkParameters ::= linkTemplatePar.toWikiText
         }
 
-        val parameterRegex = """(?s)\{\{\{([^|^}^{^<^>]*)[|}<>]""".r
         linkParameters.distinct.foreach( link => {
             parameterRegex findAllIn link foreach (_ match {
                 case parameterRegex (param) => parameters::= param //.replace("}","").replace("|","")
-                case _ => parameters
+                case _ => parameters // FIXME: this is useless, isn't it? there's no yield.
             })
         })
 
@@ -44,10 +45,9 @@ class TemplateParameterExtractor( context : {
             parameters ::= templatePar.parameter
         }
 
-        parameters.distinct.foreach(v => {
-            quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty,v,
-                            node.sourceUri, context.ontology.getDatatype("xsd:string").get )
-        })
+        for (parameter <- parameters.distinct) 
+            quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty, 
+                parameter, node.sourceUri, context.ontology.getDatatype("xsd:string").get )
         new Graph(quads)
     }
 

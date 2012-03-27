@@ -9,8 +9,9 @@ package org.dbpedia.extraction.dump
  */
 class ExtractionProgress(@volatile var startTime : Long = 0, @volatile var extractedPages : Int = 0, @volatile var failedPages : Int = 0)
 {
-    override def clone = synchronized
-    {
-        new ExtractionProgress(startTime, extractedPages, failedPages)
-    }
+//    why should we override this? Just to make it synchronized?
+//    override def clone = synchronized
+//    {
+//        new ExtractionProgress(startTime, extractedPages, failedPages)
+//    }
 }

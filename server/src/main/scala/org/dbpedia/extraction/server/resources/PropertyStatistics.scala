@@ -10,8 +10,8 @@ import java.io.{FileNotFoundException, File}
 import org.dbpedia.extraction.server.util.{IgnoreList, CreateMappingStats}
 import java.net.{URLEncoder, URLDecoder}
 
-@Path("/templatestatistics/{lang}/{template}/")
-class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("template") temp: String)
+@Path("/templatestatistics/{lang}/{template: .+$}")
+class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("template") template: String, @QueryParam("p") password: String)
 {
     private val language = Language.tryCode(langCode)
                 .getOrElse(throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
@@ -22,18 +22,16 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
 
     private val createMappingStats = new CreateMappingStats(language)
 
-    var template = createMappingStats.decodeSlash(temp)
-
     private var wikipediaStatistics: WikipediaStats = null
-    if (new File(createMappingStats.mappingStatsObjectFileName).isFile)
+    if (createMappingStats.mappingStatsObjectFile.isFile)
     {
-        Server.logger.info("Loading serialized object from " + createMappingStats.mappingStatsObjectFileName)
-        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
+        Server.logger.info("Loading serialized object from " + createMappingStats.mappingStatsObjectFile)
+        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFile)
     }
     else
     {
-        Server.logger.info("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFileName)
-        throw new FileNotFoundException("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFileName)
+        Server.logger.info("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFile)
+        throw new FileNotFoundException("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFile)
     }
 
     private val mappings = getClassMappings
@@ -145,7 +143,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
                                 {name}
                                 <!--{createMappingStats.convertFromEscapedString(name)}-->
                             </td>
-                                {if (Server.adminRights)
+                                {if (Server.adminRights(password))
                                 {
                                     <td>
                                         <a href={URLEncoder.encode(name, "UTF-8") + "/" + isIgnored.toString}>
@@ -167,7 +165,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
     @Produces(Array("application/xhtml+xml"))
     def ignoreListAction(@PathParam("property") property: String, @PathParam("ignorelist") ignored: String) =
     {
-        if (Server.adminRights)
+        if (Server.adminRights(password))
         {
             if (ignored == "true")
             {

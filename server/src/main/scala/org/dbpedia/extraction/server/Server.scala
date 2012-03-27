@@ -9,6 +9,7 @@ import resources._
 import ontology._
 import stylesheets.{Log, TriX}
 import java.net.URI
+import java.io.File
 
 /**
  * The DBpedia server.
@@ -24,20 +25,34 @@ object Server
     //@volatile var currentJob : Option[ExtractionJob] = None
 
     val config = Configuration
-
+    
     /**
      * The extraction manager
      * DynamicExtractionManager is able to update the ontology/mappings.
      * StaticExtractionManager is NOT able to update the ontology/mappings.
      */
-    val extractor : ExtractionManager = new DynamicExtractionManager(config.languages, config.extractors)  // new StaticExtractionManager(languages, extractors)
+    def extractor : ExtractionManager = _extractor
 
-    var adminRights : Boolean = false
+    private var _extractor : ExtractionManager = null
+
+    private var password : String = null
+
+    def adminRights(pass : String) : Boolean = password == pass
 
     @volatile private var running = true
 
     def main(args : Array[String])
     {
+        require(args != null && args.length >= 1, "need password for template ignore list")
+        require(args(0).length >= 4, "password for template ignore list must be at least four characters long, got ["+args(0)+"]")
+        
+        password = args(0)
+
+        var ontologyFile = if (args.length >= 2 && args(1).nonEmpty) new File(args(1)) else null
+        var mappingsDir = if (args.length >= 3 && args(2).nonEmpty) new File(args(2)) else null
+        
+        _extractor = new DynamicExtractionManager(config.languages, config.extractors, ontologyFile, mappingsDir)
+        
         //Start the HTTP server
         val resources = new ClassNamesResourceConfig(
             classOf[Root], classOf[Extraction], classOf[Mappings], classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],

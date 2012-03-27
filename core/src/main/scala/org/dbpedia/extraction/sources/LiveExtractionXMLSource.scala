@@ -35,12 +35,14 @@ object LiveExtractionXMLSource
      */
     private class MyXMLFileSource(file : File, filter : (WikiTitle => Boolean)) extends Source
     {
-        override def foreach[U](f : WikiPage => U) : Unit =
+        override def foreach[U](proc : WikiPage => U) : Unit =
         {
-            val javaFilter = { title : WikiTitle => filter(title) : java.lang.Boolean }
+            val jfilter = { title : WikiTitle => filter(title) : java.lang.Boolean }
             val stream = new FileInputStream(file)
 
-            new WikipediaDumpParser(stream, f, javaFilter).run()
+            // namespace = null -> ignore namespace
+            // language = null -> read language from file
+            new WikipediaDumpParser(stream, null, null, jfilter, proc).run()
 
             stream.close()
         }
@@ -62,31 +64,28 @@ object LiveExtractionXMLSource
             //TODO set correct language
             val language = Language.Default
 
-            for(page <- xml \\ "page";
-                rev <- page \\ "revision")
+            for(page <- xml \\ "page")
             {
-              //println((page \ "title").text);
-              //println((page \ "id").text);
-
-
-              val link = ((page \ "title").text)
-
-//              org.dbpedia.extraction.mappings.
-//              AugmenterExtractorUtils.canonicalize("")
-              /*val mytitle = WikiUtil.wikiEncode(link, language)
-              println(mytitle)*/
-
+                // TODO: read content of <redirect> element, if it exists
+                for(rev <- page \\ "revision")
+                {
+                  //println((page \ "title").text);
+                  //println((page \ "id").text);
+    
+    
+                val link = ((page \ "title").text)
+    
+    //              org.dbpedia.extraction.mappings.
+    //              AugmenterExtractorUtils.canonicalize("")
+                  /*val mytitle = WikiUtil.wikiEncode(link, language)
+                  println(mytitle)*/
+    
                 f( new WikiPage( title     = WikiTitle.parse(link, language),
-                                 id        = (page \ "id").text.toLong,
-                                 revision  = (rev \ "id").text.toLong,
-                                 source    = (rev \ "text").text ) )
-
-              /*f( new WikiPage( title     = mytitle,
-                                 id        = (page \ "id").text.toLong,
-                                 revision  = (rev \ "id").text.toLong,
-                                 source    = (rev \ "text").text ) )*/
-
-
+                                     null, // TODO: read redirect from XML
+                                     id        = (page \ "id").text.toLong,
+                                     revision  = (rev \ "id").text.toLong,
+                                     source    = (rev \ "text").text ) )
+                }
             }
         }
 

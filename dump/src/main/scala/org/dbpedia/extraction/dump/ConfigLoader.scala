@@ -36,12 +36,12 @@ object ConfigLoader
         //Load configuration
         config = new Config(properties)
 
-        //Update dumps (if configured to do so)
-        if(config.update) Download.download(config.dumpDir, config.languages.map(_.wikiCode))
-
         //Create a non-strict view of the extraction jobs
+        // TODO: why non-strict?
         config.extractors.keySet.view.map(createExtractionJob)
     }
+    
+    private var ontologyFile : File = null
 
     private class Config(config : Properties)
     {
@@ -53,16 +53,13 @@ object ConfigLoader
         if(config.getProperty("outputDir") == null) throw new IllegalArgumentException("Property 'outputDir' not defined.")
         val outputDir = new File(config.getProperty("outputDir"))
 
-        //** Update dumps boolean */
-        val update = Option(config.getProperty("updateDumps")).getOrElse("false").trim.toLowerCase match
-        {
-            case BooleanLiteral(b) => b
-            case _ => throw new IllegalArgumentException("Invalid value for property 'updateDumps'")
-        }
+        /** Local ontology file, downloaded for speed and reproducibility */
+        if(config.getProperty("ontologyFile") != null)
+          ontologyFile = new File(config.getProperty("ontologyFile"))
 
         /** Languages */
         if(config.getProperty("languages") == null) throw new IllegalArgumentException("Property 'languages' not defined.")
-        val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList.map(Language.forCode)
+        val languages = config.getProperty("languages").split("[,\\s]+").map(_.trim).toList.map(Language.forCode)
 
         /** Extractor classes */
         val extractors = loadExtractorClasses()
@@ -72,14 +69,14 @@ object ConfigLoader
          *
          * @return A Map which contains the extractor classes for each language
          */
-        private def loadExtractorClasses() : Map[Language, List[Class[Extractor]]] =
+        private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
         {
             //Load extractor classes
             if(config.getProperty("extractors") == null) throw new IllegalArgumentException("Property 'extractors' not defined.")
             val stdExtractors = loadExtractorConfig(config.getProperty("extractors"))
 
             //Create extractor map
-            var extractors = ListMap[Language, List[Class[Extractor]]]()
+            var extractors = ListMap[Language, List[Class[_ <: Extractor]]]()
             for(language <- languages) extractors += ((language, stdExtractors))
 
             //Load language specific extractors
@@ -100,11 +97,10 @@ object ConfigLoader
         /**
          * Parses a enumeration of extractor classes.
          */
-        private def loadExtractorConfig(configStr : String) : List[Class[Extractor]] =
+        private def loadExtractorConfig(configStr : String) : List[Class[_ <: Extractor]] =
         {
-            configStr.split("\\s+").map(_.trim).toList
-            .map(className => ClassLoader.getSystemClassLoader.loadClass(className))
-            .map(_.asInstanceOf[Class[Extractor]])
+            configStr.split("[,\\s]+").map(_.trim).toList
+            .map(className => ClassLoader.getSystemClassLoader.loadClass(className).asSubclass(classOf[Extractor]))
         }
     }
 
@@ -162,7 +158,7 @@ object ConfigLoader
 
         private lazy val _articlesSource =
         {
-            XMLSource.fromFile(getDumpFile(config.dumpDir, language.wikiCode),
+            XMLSource.fromFile(getDumpFile(config.dumpDir, language),
                 title => title.namespace == WikiTitle.Namespace.Main || title.namespace == WikiTitle.Namespace.File ||
                          title.namespace == WikiTitle.Namespace.Category || title.namespace == WikiTitle.Namespace.Template)
         }
@@ -178,33 +174,43 @@ object ConfigLoader
     //language-independent val
     private lazy val _ontology =
     {
-        val ontologySource = WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
-                                                       url = new URL("http://mappings.dbpedia.org/api.php"),
-                                                       language = Language.Default )
+        val ontologySource = if (ontologyFile != null && ontologyFile.isFile) 
+        {
+          XMLSource.fromFile(ontologyFile, language = Language.Default)
+        } 
+        else 
+        {
+          val namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty)
+          val url = new URL("http://mappings.dbpedia.org/api.php")
+          val language = Language.Default
+          WikiSource.fromNamespaces(namespaces, url, language)
+        }
+      
         new OntologyReader().read(ontologySource)
     }
 
     //language-independent val
     private lazy val _commonsSource =
     {
-        XMLSource.fromFile(getDumpFile(config.dumpDir, "commons"), _.namespace == WikiTitle.Namespace.File)
+        XMLSource.fromFile(getDumpFile(config.dumpDir, Language.forCode("commons")), _.namespace == WikiTitle.Namespace.File)
     }
 
     /**
      * Retrieves the dump stream for a specific language edition.
      */
-    private def getDumpFile(dumpDir : File, wikiPrefix : String) : File =    //wikiPrefix is language prefix (and can be 'commons')
+    private def getDumpFile(dumpDir : File, language : Language) : File =
     {
-        val wikiDir = new File(dumpDir + "/" + wikiPrefix)
+        val wikiDir = new File(dumpDir + "/" + language.filePrefix+"wiki")
         if(!wikiDir.isDirectory) throw new Exception("Dump directory not found: " + wikiDir)
 
         //Find most recent dump date
         val date = wikiDir.list()
                    .filter(_.matches("\\d{8}"))
                    .sortWith(_.toInt > _.toInt)
-                   .headOption.getOrElse(throw new Exception("No dump found for Wiki: " + wikiPrefix))
+                   .headOption.getOrElse(throw new Exception("No dump found in " +wikiDir))
 
-        val articlesDump = new File(wikiDir + "/" + date + "/" + wikiPrefix.replace('-', '_') + "wiki-" + date + "-pages-articles.xml")
+        val dateDir = new File(wikiDir, date)
+        val articlesDump = new File(dateDir, language.filePrefix + "wiki-" + date + "-pages-articles.xml")
         if(!articlesDump.isFile) throw new Exception("Dump not found: " + articlesDump)
 
         articlesDump
