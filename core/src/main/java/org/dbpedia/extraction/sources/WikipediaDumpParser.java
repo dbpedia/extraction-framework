@@ -190,7 +190,10 @@ public class WikipediaDumpParser
     nextTag();
     
     //Read title
-    WikiTitle title = parseTitle(TITLE_ELEM, true);
+    requireStartElement(TITLE_ELEM);
+    WikiTitle title = parseTitle(_reader.getElementText());
+    _reader.nextTag();
+    // now after </title>
 
     //Skip filtered pages
     if(title == null || ! _filter.apply(title))
@@ -202,7 +205,8 @@ public class WikipediaDumpParser
     long nsId = requireLong(NS_ELEM, true);
     // now after </ns>
     
-    if (title.namespace().id() != nsId) {
+    if (title.namespace().id() != nsId)
+    {
       logger.log(Level.WARNING, "Error parsing title: found wrong namespace "+title.namespace()+" in title "+title);
     }
 
@@ -217,12 +221,16 @@ public class WikipediaDumpParser
     {
       if (isStartElement(REDIRECT_ELEM))
       {
-        redirect = parseTitle(REDIRECT_ELEM, false);
+//        if (_reader.getAttributeCount() != 1) 
+//          logger.log(Level.WARNING, "Error parsing rediret ["+title+"] - "+_reader.getAttributeCount()+" attrs");
+        redirect = parseTitle(_reader.getAttributeValue(null, TITLE_ELEM));
+        nextTag();
+        // now at </redirect>
       }
       else if (isStartElement(REVISION_ELEM))
       {
         page = readRevision(title, redirect, pageId);
-        // Note: we're now at </revision>
+        // now at </revision>
       }
       else
       {
@@ -290,19 +298,15 @@ public class WikipediaDumpParser
    * @return null if title cannot be parsed for some reason
    * @throws XMLStreamException
    */
-  private WikiTitle parseTitle( String name, boolean nextTag ) throws XMLStreamException
+  private WikiTitle parseTitle( String titleString )
   {
-    XMLStreamUtils.requireStartElement(_reader, _namespace, name);
-    String titleString = _reader.getElementText();
-    if (nextTag) _reader.nextTag();
-    
     try
     {
         return WikiTitle.parse(titleString, _language);
     }
     catch (Exception e)
     {
-      logger.log(Level.WARNING, "Error parsing title: " + titleString, e);
+      logger.log(Level.WARNING, "Error parsing page title ["+titleString+"]", e);
       return null;
     }
   }

@@ -43,6 +43,8 @@ object ConfigLoader
     
     private var ontologyFile : File = null
 
+    private var mappingsDir : File = null
+
     private class Config(config : Properties)
     {
         /** Dump directory */
@@ -56,6 +58,10 @@ object ConfigLoader
         /** Local ontology file, downloaded for speed and reproducibility */
         if(config.getProperty("ontologyFile") != null)
           ontologyFile = new File(config.getProperty("ontologyFile"))
+
+        /** Local mappings files, downloaded for speed and reproducibility */
+        if(config.getProperty("mappingsDir") != null)
+          mappingsDir = new File(config.getProperty("mappingsDir"))
 
         /** Languages */
         if(config.getProperty("languages") == null) throw new IllegalArgumentException("Property 'languages' not defined.")
@@ -142,12 +148,23 @@ object ConfigLoader
         {
             WikiTitle.mappingNamespace(language) match
             {
-                case Some(namespace) => WikiSource.fromNamespaces(namespaces = Set(namespace),
-                                                                  url = new URL("http://mappings.dbpedia.org/api.php"),
-                                                                  language = Language.Default).map(parser)
+                case Some(namespace) =>
+                  if (mappingsDir != null && mappingsDir.isDirectory)
+                  {
+                      val file = new File(mappingsDir, namespace.toString+".xml")
+                      XMLSource.fromFile(file, language = language).map(parser)
+                  }
+                  else
+                  {
+                      val namespaces = Set(namespace)
+                      val url = new URL("http://mappings.dbpedia.org/api.php")
+                      val language = Language.Default
+                      WikiSource.fromNamespaces(namespaces,url,language).map(parser)
+                  }
                 case None => new MemorySource().map(parser)
             }
         }
+        
         def mappingPageSource : Traversable[PageNode] = _mappingPageSource
 
         private lazy val _mappings =
