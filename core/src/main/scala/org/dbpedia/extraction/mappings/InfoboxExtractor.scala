@@ -94,13 +94,12 @@ class InfoboxExtractor( context : {
         val seenTemplates = new HashSet[String]()
 
         /** Retrieve all templates on the page which are not ignored */
-        val templateList = for(template <- collectTemplates(node);
-                               resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase;
-                               if !ignoreTemplates.contains(resolvedTitle);
-                               if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) )
-                               yield template
-
-        templateList.foreach(template => {
+        for { template <- collectTemplates(node)
+          resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
+          if !ignoreTemplates.contains(resolvedTitle)
+          if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
+        }
+        {
             val propertyList = template.children.filterNot(property => ignoreProperties.get(language).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
             var propertiesFound = false
@@ -123,6 +122,9 @@ class InfoboxExtractor( context : {
                             quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             //#int #statistics uncomment the following 2 lines (do not delete)
+                            // FIXME: why replace \n and \t by space? A URI containing spaces is invalid.
+                            // If it's just about \n and \t at the end, that's unnecessary - 
+                            // trim removes all whitespace, not just " ".
                             val stat_template = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language).replace("\n", " ").replace("\t", " ").trim
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
                             quads ::= new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
@@ -156,7 +158,7 @@ class InfoboxExtractor( context : {
                     seenTemplates.add(template.title.encoded)
                 }
             }
-        })
+        }
         
         new Graph(quads)
     }

@@ -8,7 +8,6 @@ import org.dbpedia.extraction.util.Language
 /**
  * Represents a statement in the N-Quads format (see: http://sw.deri.org/2008/07/n-quads/)
  */
-//TODO write out equivalent properties
 class Quad(    val language : Language,
             val dataset : Dataset,
             val subject : String,
@@ -47,60 +46,61 @@ class Quad(    val language : Language,
 
     private def render(includeContext : Boolean) : String =
     {
-        val sb = new StringBuilder
+        val sb = new NTriplesBuilder
 
-        sb append "<" append subject append "> "
+        sb append "<" escape subject append "> "
 
-        sb append "<" append predicate append "> "
+        sb append "<" escape predicate append "> "
 
         if (datatype != null)
         {
             if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string")
             {
-                sb append '"'
-                escapeString(sb, value) //sb append value //#int escapeString(sb, value)
-                sb append "\""
+                sb append '"' escape value append "\""
 
-                sb append "@" + language.locale.getLanguage + " "
+                sb append "@" + language.isoCode + " "
             }
             else
             {
-                sb append '"'
-                escapeString(sb, value) //sb append value //#int 
-                sb append "\"^^<"
-                escapeString(sb, datatype.uri)
-                sb append "> "
+                sb append '"' escape value append "\"^^<" escape datatype.uri append "> "
             }
         }
         else
         {
-            sb append '<'
-
-            //HACK
-            //TODO find a good solution for this
-            //maybe we should have DBpediaURI and OtherURI as well as Literal objects?
-            if(predicate == "http://xmlns.com/foaf/0.1/homepage")
-                escapeString(sb, value) // escape unicode in homepage URI
-            else
-                sb append value //this must not be escaped, it is a URI/IRI
-
-            sb append "> "
+            sb append '<' escape value append "> "
         }
 
         if (includeContext)
         {
-            sb append '<' append context append "> "
+            sb append '<' escape context append "> "
         }
 
         sb append '.'
 
         sb.toString()
     }
+}
 
+class NTriplesBuilder
+{
+    private val sb = new StringBuilder
+    
+    def append(s : String) : NTriplesBuilder =
+    {
+      sb append s
+      this
+    }
+    
+    def append(c : Char) : NTriplesBuilder = 
+    {
+      sb append c
+      this
+    }
+    
     /**
      * Escapes an unicode string according to N-Triples format
      */
-    private def escapeString(sb : StringBuilder, input : String) : StringBuilder =
+    def escape(input : String) : NTriplesBuilder =
     {
         // iterate over code points (http://blogs.sun.com/darcy/entry/iterating_over_codepoints)
         val inputLength = input.length
@@ -157,8 +157,11 @@ class Quad(    val language : Language,
                 sb append hexStr
             }
         }
-        sb
+        
+        this
     }
+    
+    override def toString = sb toString
 }
 
 object Quad

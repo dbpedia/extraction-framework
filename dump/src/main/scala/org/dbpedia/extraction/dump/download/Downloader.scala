@@ -11,6 +11,9 @@ import scala.collection.JavaConversions.asScalaSet
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import java.util.zip.GZIPInputStream
 
+/**
+ * TODO: this class is too big. Move the unzip and retry concerns to separate classes.
+ */
 class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : Int, unzip : Boolean)
 {
   def init : Unit =
@@ -164,7 +167,7 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
   try { Some(classOf[URLConnection].getMethod("getContentLengthLong")) }
   catch { case nme : NoSuchMethodException => None }
   
-  private val unzippers = Map[String, InputStream => InputStream]("gz" -> gunzipper, "bz2" -> bunzipper)
+  private val unzippers = Map[String, InputStream => InputStream]("gz" -> { in => in }, "bz2" -> bunzipper)
   
   private def gunzipper( in : InputStream ) : InputStream =
   {

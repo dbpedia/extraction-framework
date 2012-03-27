@@ -24,12 +24,26 @@
                 <configuration>
                     <launchers>
                         <launcher>
-                            <id>Server</id>
+                            <id>server</id>
                             <mainClass>org.dbpedia.extraction.server.Server</mainClass>
+                            <args>
+                                <arg>PASSWORD</arg>
+                                <arg>../ontology.xml</arg>
+                                <arg>../mappings</arg>
+                            </args>
                             <jvmArgs>
                                 <jvmArg>-Xms1g</jvmArg>
                                 <jvmArg>-Xmx2g</jvmArg>
                             </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>stats</id>
+                            <mainClass>org.dbpedia.extraction.server.util.CreateMappingStats</mainClass>
+                            <args>
+                                <arg>/home/release/dbpedia</arg>
+                                <arg>src/main/resources</arg>
+                                <arg>tr</arg>
+                            </args>
                         </launcher>
                     </launchers>
                 </configuration>

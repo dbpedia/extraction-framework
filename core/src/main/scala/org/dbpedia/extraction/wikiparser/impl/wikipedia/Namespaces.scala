@@ -1585,13 +1585,13 @@ object Namespaces
             "Usapang_kategorya" -> 15
         ),
         "tr" -> Map(
-            "Wikipedia" -> 4,
             "Medya" -> -2,
             "Özel" -> -1,
             "Tartışma" -> 1,
             "Kullanıcı" -> 2,
             "Kullanıcı_mesaj" -> 3,
-            "Wikipedia_tartışma" -> 5,
+            "Vikipedi" -> 4,
+            "Vikipedi_tartışma" -> 5,
             "Dosya" -> 6,
             "Dosya_tartışma" -> 7,
             "MediaWiki" -> 8,
@@ -1601,7 +1601,9 @@ object Namespaces
             "Yardım" -> 12,
             "Yardım_tartışma" -> 13,
             "Kategori" -> 14,
-            "Kategori_tartışma" -> 15
+            "Kategori_tartışma" -> 15,
+            "Portal" -> 100,
+            "Portal_tartışma" -> 101
         ),
         "uk" -> Map(
             "Wikipedia" -> 4,

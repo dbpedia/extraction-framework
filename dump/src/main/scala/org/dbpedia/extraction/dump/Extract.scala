@@ -10,21 +10,23 @@ object Extract
 {
     def main(args : Array[String]) : Unit =
     {
+        require(args != null && args.length == 1 && args(0).nonEmpty, "missing argument: config file name")
+        
         val logHandler = new FileHandler("./log.xml")
         Logger.getLogger("org.dbpedia.extraction").addHandler(logHandler)
 
-        val extraction = new ExtractionThread()
+        val extraction = new ExtractionThread(args(0))
         extraction.start()
         extraction.join()
     }
 
-    private class ExtractionThread extends Thread
+    private class ExtractionThread(fileName : String) extends Thread
     {
         override def run
         {
             val logger = Logger.getLogger("org.dbpedia.extraction");
 
-            val configFile = new File("./config.properties");
+            val configFile = new File(fileName);
             logger.info("Loading config from '" + configFile.getCanonicalPath + "'");
 
             //Load extraction jobs from configuration
@@ -33,12 +35,15 @@ object Extract
             //Execute the extraction jobs one by one and print the progress to the console
             for(extractionJob <- extractionJobs)
             {
+                // TODO: why this check? who should interrupt this thread?
                 if(isInterrupted) return
 
                 extractionJob.start()
 
                 try
                 {
+                    // FIXME: why use a thread when we just wait here for it to finish?
+                  
                     while(extractionJob.isAlive)
                     {
                         val progress = extractionJob.progress
@@ -48,8 +53,9 @@ object Extract
                             println("Extracted " + progress.extractedPages + " pages (Per page: " + (time / progress.extractedPages) + " ms; Failed pages: " + progress.failedPages + ").")
                         }
 
-                        Thread.sleep(1000L)
+                        Thread.sleep(2000L)
                     }
+                    println
                 }
                 catch
                 {

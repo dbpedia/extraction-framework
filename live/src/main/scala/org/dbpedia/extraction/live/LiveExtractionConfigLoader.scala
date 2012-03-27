@@ -453,14 +453,14 @@ object LiveExtractionConfigLoader extends ActionListener
          *
          * @return A Map which contains the extractor classes for each language
          */
-        private def loadExtractorClasses() : Map[Language, List[Class[Extractor]]] =
+        private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
         {
             //Load extractor classes
             if(config.getProperty("extractors") == null) throw new IllegalArgumentException("Property 'extractors' not defined.")
             val stdExtractors = loadExtractorConfig(config.getProperty("extractors"))
 
             //Create extractor map
-            var extractors = ListMap[Language, List[Class[Extractor]]]()
+            var extractors = ListMap[Language, List[Class[_ <: Extractor]]]()
             for(language <- languages) extractors += ((language, stdExtractors))
 
             //Load language specific extractors
@@ -479,11 +479,10 @@ object LiveExtractionConfigLoader extends ActionListener
         /**
          * Parses a enumeration of extractor classes.
          */
-        private def loadExtractorConfig(configStr : String) : List[Class[Extractor]] =
+        private def loadExtractorConfig(configStr : String) : List[Class[_ <: Extractor]] =
         {
             configStr.split("\\s+").map(_.trim).toList
-            .map(className => ClassLoader.getSystemClassLoader().loadClass(className))
-            .map(_.asInstanceOf[Class[Extractor]])
+            .map(className => ClassLoader.getSystemClassLoader().loadClass(className).asSubclass(classOf[Extractor]))
         }
     }
 

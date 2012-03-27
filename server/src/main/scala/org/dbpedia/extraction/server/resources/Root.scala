@@ -37,13 +37,13 @@ class Root
     private def list(title : String, header : String, prefix : String) =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head><title>DBpedia Test Extractor</title></head>
+          <head><title>{title}</title></head>
           <body>
-            <h2>Extractors</h2>
+            <h2>{header}</h2>
             {
               for(lang <- Server.config.languages; code = lang.wikiCode) yield
               {
-                  <p><a href={code + "/"}>Extractor in {code}</a></p>
+                  <p><a href={code + "/"}>{prefix} {code}</a></p>
               }
             }
           </body>

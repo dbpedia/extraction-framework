@@ -28,7 +28,9 @@ class Language private(val wikiCode : String, val isoCode: String)
 
 object Language
 {
-    private val isoCodes = Locale.getISOLanguages.toSet
+    // Locale defines some languages that Wikipedia doesn't know, so we remove them.
+    // TODO: get list of language codes from some Wikipedia source, not from Locale
+    private val isoCodes = Locale.getISOLanguages.toSet &~ Set("nd")
 
     /**
      * Maps Wikipedia language codes which do not follow ISO-639-1, to a related ISO-639-1 code.

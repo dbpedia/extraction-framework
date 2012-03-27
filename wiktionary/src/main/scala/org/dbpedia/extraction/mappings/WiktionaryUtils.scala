@@ -156,7 +156,7 @@ object MyStack {
     //println("read file "+name+">"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
-          new WikiTitle("test template"),0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
+          new WikiTitle("test template"),null,0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
         )
     )
     //println("dumping subtemplate")

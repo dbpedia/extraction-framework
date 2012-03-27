@@ -6,11 +6,12 @@ import xml.Elem
 import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.destinations.{Graph, Destination}
-import org.dbpedia.extraction.sources.{WikiSource, Source, WikiPage}
+import org.dbpedia.extraction.sources.{XMLSource, WikiSource, Source, WikiPage}
 import java.net.URL
 import org.dbpedia.extraction.mappings._
-
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, WikiTitle}
+import org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import java.io.File
 
 /**
  * Base class for extraction managers.
@@ -18,7 +19,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, WikiTitle}
  * or they can support lazy loading of context parameters.
  */
 
-abstract class ExtractionManager(languages : Traversable[Language], extractors : Traversable[Class[_ <: Extractor]])
+abstract class ExtractionManager(languages : Traversable[Language], extractors : Traversable[Class[_ <: Extractor]], ontologyFile : File, mappingsDir : File)
 {
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
@@ -100,12 +101,22 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
 
     protected def loadOntologyPages =
     {
-        logger.info("Loading ontology pages")
-        WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
-                                  url = Configuration.wikiApiUrl,
-                                  language = Language.Default )
-        .map(parser)
-        .map(page => (page.title, page)).toMap
+        val source = if (ontologyFile != null && ontologyFile.isFile)
+        {
+            // The file may be outdated, so we print a warning
+            logger.warning("Loading ontology pages from file ["+ontologyFile+"] - ONLY FOR TESTING")
+            XMLSource.fromFile(ontologyFile, language = Language.Default)
+        }
+        else 
+        {
+            val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
+            val url = Configuration.wikiApiUrl
+            val language = Language.Default
+            logger.info("Loading ontology pages from URL ["+url+"]")
+            WikiSource.fromNamespaces(namespaces, url, language)
+        }
+        
+        source.map(parser).map(page => (page.title, page)).toMap
     }
 
     protected def loadMappingPages =
@@ -116,14 +127,21 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
 
     protected def loadMappingsPages(language : Language) : Map[WikiTitle, PageNode] =
     {
-        val mappingNamespace = WikiTitle.mappingNamespace(language)
-                               .getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
-
-        WikiSource.fromNamespaces(namespaces = Set(mappingNamespace),
-                                  url = Configuration.wikiApiUrl,
-                                  language = Language.Default )
-        .map(parser)
-        .map(page => (page.title, page)).toMap
+        val namespace = WikiTitle.mappingNamespace(language).getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
+        
+        val source = if (mappingsDir != null && mappingsDir.isDirectory)
+        {
+            val file = new File(mappingsDir, namespace.toString+".xml")
+            XMLSource.fromFile(file, language = language)
+        }
+        else
+        {
+            val url = Configuration.wikiApiUrl
+            val language = Language.Default
+            WikiSource.fromNamespaces(Set(namespace), url, language)
+        }
+        
+        source.map(parser).map(page => (page.title, page)).toMap
     }
 
     protected def loadOntology : Ontology =

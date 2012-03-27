@@ -37,10 +37,7 @@ class Config
    */
   def parse( file : File ) : Unit = {
     val source = Source.fromFile(file)(Codec.UTF8)
-    try
-    {
-      parse(file.getParentFile, source.getLines)
-    } 
+    try parse(file.getParentFile, source.getLines) 
     finally source.close
   }
   
@@ -49,15 +46,15 @@ class Config
    * this path. If this method is called for a config file, this argument should be the directory
    * of that file. Otherwise, this argument should be the current working directory.
    */
-  def parse( dir : File, args : TraversableOnce[String] ) : Unit =
-  {
+  def parse( dir : File, args : TraversableOnce[String] ) : Unit = {
     // range, both limits optional
     val Range = """(\d*)-(\d*)""".r
     
-    val DumpFiles = new TwoListArg("dump=", ":", ",")
+    val DumpFiles = new TwoListArg("dump", ":", ",")
     
     for(a <- args; arg = a.trim) arg match
     {
+      case Ignored(_) => // ignore
       case Arg("base", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
       case Arg("dir", path) => baseDir = resolveFile(dir, path)
       case Arg("csv", url) => csvUrl = toURL(url, arg)
@@ -71,12 +68,11 @@ class Config
         parse(file)
       case DumpFiles(keys, files) =>
         if (files.exists(_ isEmpty)) throw Usage("Invalid file name", arg)
-        keys foreach (_ match {
+        for (key <- keys) key match {
           case Range(from, to) => add(ranges, toRange(from, to, arg), files)
           case WikiInfo.Language(language) => add(languages, language, files)
           case other => throw Usage("Invalid language / range '"+other+"'", arg)
-        })
-      case Ignored(_) => // ignore
+        }
       case _ => throw Usage("Invalid argument '"+arg+"'")
     }
   }
@@ -106,7 +102,7 @@ class Config
   catch { case nfe : NumberFormatException => throw Usage("invalid integer", arg, nfe) }
   
   private def toURL(s : String, arg : String) : URL =
-  try { new URL(s) }
+  try new URL(s)
   catch { case mue : MalformedURLException => throw Usage("Invalid URL", arg, mue) }
   
   /**
@@ -117,12 +113,12 @@ class Config
    */
   private def resolveFile(parent : File, path : String) : File = {
     val child = new File(path)
+    val file = if (child.isAbsolute) child else new File(parent, path)
     // canonicalFile removes '/../' etc.
-    (if (child.isAbsolute) child else new File(parent, path)).getCanonicalFile
+    file.getCanonicalFile
   }
   
 }
-
 
 object Usage {
   def apply( msg : String, arg : String = null, cause : Throwable = null ) : Exception = {
@@ -168,24 +164,24 @@ object Usage {
   }
 }
 
-class TwoListArg(prefix : String, sep1 : String, sep2 : String)
+class TwoListArg(key : String, sep1 : String, sep2 : String)
 {
   def unapply(arg : String) : Option[(Array[String],Array[String])] = {
-    if (! (arg startsWith prefix)) return None
-    val parts = arg.substring(prefix.length).split(sep1, -1)
-    if (parts.length == 1) throw Usage("No '"+sep1+"'", arg)
-    if (parts.length > 2) throw Usage("More than one '"+sep1+"'", arg)
-    Some(parts(0).split(sep2, -1), parts(1).split(sep2, -1))
+    val index = arg.indexOf('=')
+    if (index == -1 || arg.substring(0, index).trim != key) return None
+    val parts = arg.substring(index + 1).trim.split(sep1, -1)
+    if (parts.length != 2) return None
+    Some(parts(0).split(sep2, -1).map(_.trim), parts(1).split(sep2, -1).map(_.trim))
   }
 }
 
 object Arg {
   def unapply(arg : String) : Option[(String, String)] =  {
     val index = arg.indexOf('=')
-    if (index == -1) None else Some((arg.substring(0, index), arg.substring(index + 1)))
+    if (index == -1) None else Some((arg.substring(0, index).trim, arg.substring(index + 1).trim))
   }
 }
 
 object Ignored {
-  def unapply(arg : String) : Option[String] = if (arg.trim.isEmpty || arg.startsWith("#")) Some(arg) else None
+  def unapply(arg : String) : Option[String] = if (arg.trim.isEmpty || arg.trim.startsWith("#")) Some(arg) else None
 }

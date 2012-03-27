@@ -5,13 +5,14 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import java.io.File
 
 /**
  * Lazily loads extraction context parameters when they are required, not before.
  * Is NOT able to update the ontology or the mappings.
  * This manager is good for testing locally.
  */
-class StaticExtractionManager(languages : Traversable[Language], extractors : Traversable[Class[_ <: Extractor]]) extends ExtractionManager(languages, extractors)
+class StaticExtractionManager(languages : Traversable[Language], extractors : Traversable[Class[_ <: Extractor]], ontologyFile : File, mappingsDir : File) extends ExtractionManager(languages, extractors, ontologyFile, mappingsDir)
 {
     @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 

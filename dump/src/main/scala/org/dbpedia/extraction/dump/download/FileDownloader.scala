@@ -6,7 +6,11 @@ import java.net.{URL,URLConnection,HttpURLConnection}
 /**
  * Downloads a single file.
  * 
- * @param decorate optionally decorates the InputStream. Default operation is to get the stream
+ * TODO: the decoration could probably be done by a mixin.
+ * 
+ * TODO: move last-modified handling to its own class.
+ * 
+ * @param getStream optionally decorates the InputStream. Default operation is to get the stream
  * from the connection.
  */
 class FileDownloader( url : URL, file : File, getStream : URLConnection => InputStream = { conn => conn.getInputStream } ) 
@@ -55,7 +59,7 @@ class FileDownloader( url : URL, file : File, getStream : URLConnection => Input
   
   private def copy(in : InputStream, out : OutputStream) : Unit =
   {
-    val buf = new Array[Byte](2 << 20) // 1 MB
+    val buf = new Array[Byte](1 << 20) // 1 MB
     while (true)
     {
       val read = in.read(buf)
