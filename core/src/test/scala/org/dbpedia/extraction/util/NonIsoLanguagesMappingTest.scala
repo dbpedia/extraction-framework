@@ -21,10 +21,7 @@ object NonIsoLanguagesMappingTest
             {
                 source.getLines.toList.tail.filter(!_.isEmpty)
             }
-            finally
-            {
-               source.close
-            }
+            finally source.close
         }
         val wikiLanguageCodes = wikiInfoLines.map{ line =>
         {
@@ -41,25 +38,27 @@ object NonIsoLanguagesMappingTest
         val isoLanguageCodes = Locale.getISOLanguages
 
         // get all Wikipedia language codes that are not ISO 639-1 language codes
-        val wpNonIsoLanguageCodes = wikiLanguageCodes.filterNot(code => isoLanguageCodes contains code)
+        val wpNonIsoLanguageCodes = wikiLanguageCodes.toSet &~ isoLanguageCodes.toSet
         
         var errorCount = 0
         for (wpNonIsoCode <- wpNonIsoLanguageCodes) {
-            Language.nonIsoWpCodes.get(wpNonIsoCode) match {
+            try {
                 // check if this Wikipedia language code already has a mapping in the nonIsoWpCodes map
-                case None => {
+                val language = Language.forCode(wpNonIsoCode) 
+                // if a mapping exists, check if the mapping points to a ISO 639-1 language code
+                if (! isoLanguageCodes.contains(language.isoCode)) {
+                    println("* mapping to non-ISO code: '"+wpNonIsoCode+"' -> '"+language.isoCode+"'")
+                    errorCount += 1
+                }
+            }
+            catch {
+                case _ : IllegalArgumentException => 
                     println("* no mapping for non-ISO code '"+wpNonIsoCode+"'")
                     errorCount += 1
-                }
-                // if a mapping exists, check if the mapping points to a ISO 639-1 language code
-                case Some(mappedCode : String) if (!(isoLanguageCodes contains mappedCode)) => {
-                    println("* mapping to non-ISO code: '"+wpNonIsoCode+"' -> '"+mappedCode+"'")
-                    errorCount += 1
-                }
-                case _ =>
             }
         }
-        println("\nTest finished. "+errorCount+"/"+wpNonIsoLanguageCodes.length+" failed.")
+        
+        println("\nTest finished. "+errorCount+"/"+wpNonIsoLanguageCodes.size+" failed.")
         if (errorCount == 0) {
             println("Non-iso languages map is complete.")
         }
