@@ -5,7 +5,7 @@ import xml.Elem
 import java.util.Properties;
 import java.io.File
 
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser._
 
 import java.io._
 import org.dbpedia.extraction.sources.{LiveExtractionSource, XMLSource, WikiSource, LiveExtractionXMLSource}
@@ -74,17 +74,17 @@ object LiveExtractionManager
         val extractors = loadExtractorClasses()
 
         /** Ontology source */
-        val ontologySource = WikiSource.fromNamespaces(namespaces = scala.collection.immutable.Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
+        val ontologySource = WikiSource.fromNamespaces(namespaces = scala.collection.immutable.Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                                        url = new URL("http://mappings.dbpedia.org/api.php"),
                                                        language = Language.Default )
 
         /** Mappings source */
-        val mappingsSource =  WikiSource.fromNamespaces(namespaces = scala.collection.immutable.Set(WikiTitle.Namespace.Mapping),
+        val mappingsSource =  WikiSource.fromNamespaces(namespaces = scala.collection.immutable.Set(Namespace.Mapping),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
                                                         language = Language.Default )
 
         /** Commons source */
-        val commonsSource = XMLSource.fromFile(getDumpFile("commons"), _.namespace == WikiTitle.Namespace.File)
+        val commonsSource = XMLSource.fromFile(getDumpFile("commons"), _.namespace == Namespace.File)
 
         /**
          * Retrieves the dump stream for a specific language edition.

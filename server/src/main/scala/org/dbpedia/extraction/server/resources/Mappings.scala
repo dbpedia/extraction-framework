@@ -5,7 +5,7 @@ import ontology.Ontology
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import java.util.logging.Logger
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser.{Namespace,WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.{StringDestination,ThrottlingDestination}
@@ -195,7 +195,7 @@ class Mappings(@PathParam("lang") langCode : String)
     {
         //Get the title of the mapping as well as its corresponding template on Wikipedia
         val mappingTitle = WikiTitle.parseEncoded(title, language)
-        val templateTitle = new WikiTitle(mappingTitle.decoded, WikiTitle.Namespace.Template, mappingTitle.language)
+        val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, mappingTitle.language)
 
         //Find pages which use this mapping
         val wikiApiUrl = new URL("http://" + language.wikiCode + ".wikipedia.org/w/api.php")

@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.config.dataparser.FlagTemplateParserConfig
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{Node, TemplateNode, TextNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
 
 /**
  * Handling of flag templates.

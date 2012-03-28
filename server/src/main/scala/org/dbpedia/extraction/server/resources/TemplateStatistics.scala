@@ -4,7 +4,7 @@ import javax.ws.rs._
 import javax.ws.rs.core.Response
 import org.dbpedia.extraction.server.Server
 import collection.immutable.ListMap
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.server.util.CreateMappingStats._
 import java.io._
@@ -39,7 +39,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     private val mappingStatistics = createMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
     private val ignoreList: IgnoreList = createMappingStats.loadIgnorelist()
 
-    private val mappingUrlPrefix = Server.config.wikiPagesUrl + "/" + WikiTitle.mappingNamespace(language).get.toString + ":"
+    private val mappingUrlPrefix = Server.config.wikiPagesUrl + "/" + Namespace.mappingNamespace(language).get.toString + ":"
 
     private val mappedGoodColor = "#65c673"
     private val mappedMediumColor = "#ecea48"

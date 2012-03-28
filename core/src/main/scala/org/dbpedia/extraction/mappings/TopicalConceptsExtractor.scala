@@ -34,7 +34,7 @@ class TopicalConceptsExtractor( context : {
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if (page.title.namespace == WikiTitle.Namespace.Category)
+        if (page.title.namespace == Namespace.Category)
         {
             val allTemplates = collectCatMains(page)
 

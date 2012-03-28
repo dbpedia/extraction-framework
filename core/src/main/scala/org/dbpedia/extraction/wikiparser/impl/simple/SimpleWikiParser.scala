@@ -404,7 +404,7 @@ final class SimpleWikiParser extends WikiParser
                 {
                     return parseParserFunction(decodedName, source, level)
                 }
-                title = new WikiTitle(decodedName, WikiTitle.Namespace.Template, source.language)
+                title = new WikiTitle(decodedName, Namespace.Template, source.language)
             }
             else
             {
@@ -450,7 +450,7 @@ final class SimpleWikiParser extends WikiParser
 
     private def parseParserFunction(decodedName : String, source : Source, level : Int) : ParserFunctionNode =
     {
-        val title = new WikiTitle(decodedName + ":", WikiTitle.Namespace.Template, source.language)
+        val title = new WikiTitle(decodedName + ":", Namespace.Template, source.language)
         val children = parseUntil(parserFunctionEnd, source, level)
         val startLine = source.line
 

@@ -4,7 +4,7 @@ import _root_.org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter,
 import _root_.org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
 import _root_.org.dbpedia.extraction.mappings._
 import java.net.URL
-import _root_.org.dbpedia.extraction.wikiparser.WikiTitle
+import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.{FileReader, File}
@@ -69,7 +69,7 @@ object ConfigLoader
     private def createExtractionJob(config : Config)(language : Language) : ExtractionJob =
     {
         /** Mappings source */
-        val mappingsSource = WikiTitle.mappingNamespace(language) match
+        val mappingsSource = Namespace.mappingNamespace(language) match
         {
             case Some(namespace) => WikiSource.fromNamespaces(namespaces = Set(namespace),
                                                               url = new URL("http://mappings.dbpedia.org/api.php"),
@@ -79,8 +79,8 @@ object ConfigLoader
 
         //Articles source
         val articlesSource = XMLSource.fromFile(config.getDumpFile(language.wikiCode),
-            title => title.namespace == WikiTitle.Namespace.Main || title.namespace == WikiTitle.Namespace.File ||
-                    title.namespace == WikiTitle.Namespace.Category || title.namespace == WikiTitle.Namespace.Template)
+            title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
+                    title.namespace == Namespace.Category || title.namespace == Namespace.Template)
 
         //Extractor
         // val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
@@ -113,12 +113,12 @@ object ConfigLoader
         val extractors = loadExtractorClasses()
 
         /** Ontology source */
-        val ontologySource = null//WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
+        val ontologySource = null//WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                    //                    url = new URL("http://mappings.dbpedia.org/api.php"),
                                      //                  language = Language.Default )
 
         /** Commons source */
-        val commonsSource = null //XMLSource.fromFile(getDumpFile("commons"), _.namespace == WikiTitle.Namespace.File)
+        val commonsSource = null //XMLSource.fromFile(getDumpFile("commons"), _.namespace == Namespace.File)
 
         /**
          * Retrieves the dump stream for a specific language edition.

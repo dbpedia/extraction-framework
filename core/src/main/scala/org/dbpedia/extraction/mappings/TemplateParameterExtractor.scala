@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateParameterNode, InternalLinkNode, Node}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.TemplateParameterExtractorConfig
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.Language
@@ -19,7 +19,7 @@ class TemplateParameterExtractor( context : {
     
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Template ||
+        if(node.title.namespace != Namespace.Template ||
             TemplateParameterExtractorConfig.ignoreTemplates.contains(node.title.decoded) ||
             TemplateParameterExtractorConfig.ignoreTemplatesRegex.exists(regex => regex.unapplySeq(node.title.decoded).isDefined ||
             node.isRedirect)

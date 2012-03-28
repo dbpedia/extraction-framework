@@ -36,7 +36,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
             for (child <- node :: node.children) child match
             {
                 //ordinary links
-                case InternalLinkNode(destination, _, _, _) if destination.namespace == WikiTitle.Namespace.Main =>
+                case InternalLinkNode(destination, _, _, _) if destination.namespace == Namespace.Main =>
                 {
                     return Some(getUri(destination, pageNode))
                 }
@@ -44,7 +44,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
                 //creating links if the same string is a link on this page
                 case TextNode(text, _) => getAdditionalWikiTitle(text, pageNode) match
                 {
-                    case Some(destination) if destination.namespace == WikiTitle.Namespace.Main =>
+                    case Some(destination) if destination.namespace == Namespace.Main =>
                     {
                         return Some(getUri(destination, pageNode))
                     }

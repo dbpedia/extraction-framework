@@ -4,7 +4,7 @@ import java.io.File
 
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
  * Download mapping pages for all namespaces from http://mappings.dbpedia.org/ and transform 

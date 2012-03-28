@@ -8,7 +8,7 @@ import scala.collection.Iterator.empty
 import scala.collection.Iterator.single
 import scala.collection.JavaConversions.asJavaIterator
 
-import org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import org.dbpedia.extraction.wikiparser.Namespace
 
 import javax.xml.namespace.QName
 import javax.xml.stream.events.{Attribute,StartDocument,StartElement}

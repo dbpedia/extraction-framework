@@ -12,7 +12,7 @@ import java.net.URL
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.{MemorySource, Source, XMLSource, WikiSource}
-import org.dbpedia.extraction.wikiparser.{WikiParser, PageNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
 
 /**
  * Loads the dump extraction configuration.
@@ -147,7 +147,7 @@ object ConfigLoader
 
         private lazy val _mappingPageSource =
         {
-            WikiTitle.mappingNamespace(language) match
+            Namespace.mappingNamespace(language) match
             {
                 case Some(namespace) =>
                   if (mappingsDir != null && mappingsDir.isDirectory)
@@ -177,8 +177,8 @@ object ConfigLoader
         private lazy val _articlesSource =
         {
             XMLSource.fromFile(getDumpFile(config.dumpDir, language),
-                title => title.namespace == WikiTitle.Namespace.Main || title.namespace == WikiTitle.Namespace.File ||
-                         title.namespace == WikiTitle.Namespace.Category || title.namespace == WikiTitle.Namespace.Template)
+                title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
+                         title.namespace == Namespace.Category || title.namespace == Namespace.Template)
         }
         def articlesSource : Source = _articlesSource
 
@@ -198,7 +198,7 @@ object ConfigLoader
         } 
         else 
         {
-          val namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty)
+          val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
           val url = new URL("http://mappings.dbpedia.org/api.php")
           val language = Language.Default
           WikiSource.fromNamespaces(namespaces, url, language)
@@ -210,7 +210,7 @@ object ConfigLoader
     //language-independent val
     private lazy val _commonsSource =
     {
-        XMLSource.fromFile(getDumpFile(config.dumpDir, Language("commons")), _.namespace == WikiTitle.Namespace.File)
+        XMLSource.fromFile(getDumpFile(config.dumpDir, Language("commons")), _.namespace == Namespace.File)
     }
 
     /**

@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.resources
 import javax.ws.rs._
 import org.dbpedia.extraction.server.Server
 import collection.immutable.ListMap
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.server.util.CreateMappingStats.{WikipediaStats, MappingStats}
 import java.io.{FileNotFoundException, File}
@@ -17,7 +17,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
 
     if (!Server.config.languages.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
 
-    private val mappingUrlPrefix = Server.config.wikiPagesUrl + WikiTitle.mappingNamespace(language).get.toString + ":"
+    private val mappingUrlPrefix = Server.config.wikiPagesUrl + Namespace.mappingNamespace(language).get.toString + ":"
 
     private val createMappingStats = new CreateMappingStats(language)
 

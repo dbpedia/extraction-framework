@@ -17,7 +17,7 @@ class ArticleCategoriesExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return new Graph()
         
         val links = collectCategoryLinks(node).filter(isCategoryForArticle(_))
 
@@ -38,14 +38,14 @@ class ArticleCategoriesExtractor( context : {
     {
         node match
         {
-            case linkNode : InternalLinkNode if linkNode.destination.namespace == WikiTitle.Namespace.Category => List(linkNode)
+            case linkNode : InternalLinkNode if linkNode.destination.namespace == Namespace.Category => List(linkNode)
             case _ => node.children.flatMap(collectCategoryLinks)
         }
     }
 
     private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Category)
+        val categoryNamespace = Namespaces.getNameForNamespace(context.language, Namespace.Category)
 
         //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
         OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
