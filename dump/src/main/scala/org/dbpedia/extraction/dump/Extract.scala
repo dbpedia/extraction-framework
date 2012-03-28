@@ -47,10 +47,10 @@ object Extract
                     while(extractionJob.isAlive)
                     {
                         val progress = extractionJob.progress
-                        if(progress.startTime > 0)
+                        if(progress.startTime.get > 0)
                         {
-                            val time = (System.currentTimeMillis - progress.startTime).toDouble
-                            println("Extracted " + progress.extractedPages + " pages (Per page: " + (time / progress.extractedPages) + " ms; Failed pages: " + progress.failedPages + ").")
+                            val time = (System.currentTimeMillis - progress.startTime.get).toDouble
+                            println("Extracted " + progress.extractedPages.get + " pages (Per page: " + (time / progress.extractedPages.get) + " ms; Failed pages: " + progress.failedPages.get + ").")
                         }
 
                         Thread.sleep(2000L)

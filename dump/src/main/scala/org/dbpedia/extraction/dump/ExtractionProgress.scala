@@ -1,14 +1,28 @@
 package org.dbpedia.extraction.dump
 
+import java.util.concurrent.atomic.AtomicInteger
+import java.util.concurrent.atomic.AtomicLong
+
 /**
- * Takes track of the extraction progress.
- *
- * @param startTime The time when the page extraction has been started. Milliseconds since midnight, January 1, 1970 UTC.
- * @param pageCount The number of pages which have been extracted successfully
- * @param failedPages The number of pages for which the extraction failed
+ * Keeps track of the extraction progress.
  */
-class ExtractionProgress(@volatile var startTime : Long = 0, @volatile var extractedPages : Int = 0, @volatile var failedPages : Int = 0)
+class ExtractionProgress()
 {
+  /**
+   * The time when the page extraction was started. Milliseconds since midnight, January 1, 1970 UTC.
+   */
+  val startTime = new AtomicLong()
+  
+  /**
+   * The number of pages which have been extracted successfully
+   */
+  val extractedPages = new AtomicInteger()
+  
+  /**
+   * The number of pages for which the extraction failed
+   */
+  val failedPages = new AtomicInteger()
+  
 //    why should we override this? Just to make it synchronized?
 //    override def clone = synchronized
 //    {

@@ -9,7 +9,6 @@ import java.util.concurrent.{ArrayBlockingQueue, TimeUnit}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable
 import java.io.File
-import java.net.URLEncoder
 
 /**
  * Executes a extraction.
@@ -18,7 +17,7 @@ import java.net.URLEncoder
  * @param extractor The Extractor
  * @param source The extraction source
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
- * @param label A user readable label of this extraction job
+ * @param label user readable label of this extraction job. Also used as file name, but space is replaced by underscores.
  */
 class ExtractionJob(extractor : Extractor, source : Source, destination : Destination, val label : String = "Extraction Job") extends Thread
 {
@@ -26,17 +25,15 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
 
     private val parser = WikiParser()
 
-    private val _progress = new ExtractionProgress()
-
-    def progress = _progress
+    val progress = new ExtractionProgress()
 
     private val pageQueue = new ArrayBlockingQueue[(Int, WikiPage)](20)
+    
+    private val completionReader = new CompletionReader(new File(label.replace(' ', '_')+".log"))
+    
+    private val completionWriter = new CompletionWriter(new File(label.replace(' ', '_')+".log.tmp"))
 
-    private val completionReader = new CompletionReader(new File("./" + URLEncoder.encode(label, "UTF-8")))
-
-    private val completionWriter = new CompletionWriter(new File("./" + URLEncoder.encode(label, "UTF-8") + ".tmp"))
-
-    // only accessed by the thread that reads the source, no need to sync / use atomic
+    // only accessed by the thread that reads the source, no need to sync or use atomic
     private var currentID = 0
 
     override def run() : Unit =
@@ -51,7 +48,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
 
         try
         {
-            _progress.startTime = System.currentTimeMillis
+            progress.startTime.set(System.currentTimeMillis)
 
             //Start extraction jobs
             extractionJobs.foreach(_.start)
@@ -146,7 +143,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                 {
                     val graph = extractor(parser(page))
                     destination.write(graph)
-                    _progress.synchronized(_progress.extractedPages +=1)
+                    progress.extractedPages.incrementAndGet
 
                     true
                 }
@@ -154,7 +151,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                 {
                     case ex : Exception =>
                     {
-                        _progress.synchronized(_progress.failedPages += 1)
+                        progress.failedPages.incrementAndGet
                         logger.log(Level.INFO, "Error processing page '" + page.title + "'", ex)
                         false
                     }
