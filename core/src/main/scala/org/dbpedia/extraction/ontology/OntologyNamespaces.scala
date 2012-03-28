@@ -1,16 +1,22 @@
 package org.dbpedia.extraction.ontology
 
 import org.dbpedia.extraction.util.{Language, UriUtils}
-import java.net.URLDecoder
+import java.net.URLDecoder.decode
+import scala.collection.mutable.HashMap
 
 /**
  * Manages the ontology namespaces.
  */
 object OntologyNamespaces
 {
+    // TODO: These config settings have nothing to do with ontology namespaces.
+    // Move them to some other class.
+  
     //#int
-    val specificLanguageDomain = Set("de", "el", "it", "ru")
-    val encodeAsIRI = Set("de", "el", "ru")
+    val genericDomain = Set[String]("en")
+    
+    val encodeAsURI = Set[String]()
+
 
     val DBPEDIA_CLASS_NAMESPACE = "http://dbpedia.org/ontology/"
     val DBPEDIA_DATATYPE_NAMESPACE = "http://dbpedia.org/datatype/"
@@ -96,20 +102,13 @@ object OntologyNamespaces
         }
     }
 
-    def getResource(name : String, lang : Language) : String =
-    {
-        val langWikiCode = lang.wikiCode
-        val domain = if (specificLanguageDomain.contains(langWikiCode)) "http://" + langWikiCode + ".dbpedia.org/resource/"
-                     else "http://dbpedia.org/resource/"
-        appendUri(domain, name, lang)
-    }
+    def getResource(name : String, lang : Language) : String = appendUri(baseUri(lang, "resource"), name, lang)
 
-    def getProperty(name : String, lang : Language) : String =
-    {
-        val langWikiCode = lang.wikiCode
-        val domain = if (specificLanguageDomain.contains(langWikiCode)) "http://" + langWikiCode + ".dbpedia.org/property/"
-                     else "http://dbpedia.org/property/"
-        appendUri(domain, name, lang)
+    def getProperty(name : String, lang : Language) : String = appendUri(baseUri(lang, "property"), name, lang)
+    
+    private def baseUri(lang : Language, path : String) : String = {
+        if (genericDomain.contains(lang.wikiCode)) "http://dbpedia.org/"+path+"/" 
+        else "http://"+lang.wikiCode+".dbpedia.org/"+path+"/"
     }
 
     private def appendUri( baseUri : String, encodedSuffix : String, lang : Language = Language.Default ) : String =
@@ -119,38 +118,38 @@ object OntologyNamespaces
             // contains a fragment
             // right-hand fragments must not contain ':', '/' or '&', according to our Validate class
             // TODO: there is no Validate class. Do we still want this?
-            baseUri + encodedSuffix.replace("/", "%2F").replace(":", "%3A").replace("&", "%26")
+            baseUri + escape(encodedSuffix, "/:&")
         }
         else
         {
             // does not contain a fragment
-            if (encodeAsIRI.contains(lang.wikiCode))
+            if (encodeAsURI.contains(lang.wikiCode))
             {
-                toIRIString(baseUri+encodedSuffix)
+                baseUri + encodedSuffix
             }
             else
             {
-                baseUri + encodedSuffix
+                toIRIString(baseUri+encodedSuffix)
             }
         }
     }
 
     /**
-     * FIXME: this works for most DBpedia subject URIs, but not in many other cases.
-     * 
-     * This method exists because IRIs were added as an afterthought. If we want to generate IRIs
-     * instead of URIs we should take care of that were the URIs are generated, i.e. in the extractors.
-     * 
-     * This method currently may produce invalid IRIs. It should re-encode many other characters besides ">".
-     * 
-     * Examples URIs for which this method fails:
-     * http://en.wikipedia.org/wiki/%3F is very different from http://en.wikipedia.org/wiki/? 
-     * http://en.wikipedia.org/wiki/%23 is very different from http://en.wikipedia.org/wiki/#
+     * FIXME: this method can not really work. There is no way to encode/decode a complete URI. 
+     * Only parts of a URI can be encoded and then combined. At this point, it's too late.
      */
-    private def toIRIString(uri:String) : String =
-    {
-        URLDecoder.decode(uri,"UTF-8").replace(">","%3E")
-    }
+    // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
+    private def toIRIString(uri:String) = escape(decode(uri, "UTF-8"), "\"#%<>?[\\]^`{|}")
+    
+    /**
+     * @param str string to process
+     * @param chars list of characters that should be percent-encoded if they occur in the string
+     */
+    private def escape(str : String, chars : String) : String = {
+        val sb = new StringBuilder
+        for (c <- str) if (chars.indexOf(c) == -1) sb append c else sb append "%" append c.toInt.toHexString
+        sb.toString
+    }      
     
     /**
      * Return true  if the namespace of the given URI is known to be an exception for evaluation (e.g. http://schema.org).
@@ -158,7 +157,7 @@ object OntologyNamespaces
      */
     def skipValidation(uri : String) : Boolean =
     {
-        OntologyNamespaces.nonValidatedNamespaces.exists(getUri(uri, "") startsWith _)
+        nonValidatedNamespaces.exists(getUri(uri, "") startsWith _)
     }
 
 }
