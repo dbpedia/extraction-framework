@@ -3,8 +3,7 @@ package org.dbpedia.extraction.util
 import java.util.logging.Logger
 import java.io.IOException
 import xml.{XML, Elem}
-import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import org.dbpedia.extraction.sources.WikiPage
 import java.net.{URLEncoder, URL}
 import runtime.Long
@@ -118,7 +117,7 @@ class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language
 
         for(page <- response \ "query" \ "embeddedin" \ "ei";
             title <- page \ "@title" )
-            yield new WikiTitle(title.text)
+            yield new WikiTitle(title.text, Namespace.Main, language)
     }
 
   /**
