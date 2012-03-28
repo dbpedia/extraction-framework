@@ -17,7 +17,7 @@ import javax.xml.stream.{XMLEventFactory,XMLEventReader,XMLEventWriter,XMLInputF
 
 /**
  * Downloads all pages for a given list of namespaces from api.php and transforms them
- * into the format of the dump files (because XMLSource understands that format). 
+ * into the format of the dump files (because XMLSource understands that format).
  */
 class WikiDownloader(val apiUrl : String) {
   
@@ -105,6 +105,12 @@ class WikiDownloader(val apiUrl : String) {
       finally in.close
     } while (gapfrom != null)
   }
+  
+  // TODO: move all the low-level XML stuff to its own class. First figure out a way
+  // that still allows the transformation code to be as readable as it is. Well, we could
+  // just use objects on which methods like readDocument() and getElement() are executed.
+  // If the object is called 'read' and the method names are changed, that reads well: 
+  // read.document(), read.element().
   
   /**
    * generate document, callback descends into it.
