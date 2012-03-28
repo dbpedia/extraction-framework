@@ -103,8 +103,7 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
     {
         val source = if (ontologyFile != null && ontologyFile.isFile)
         {
-            // The file may be outdated, so we print a warning
-            logger.warning("Loading ontology pages from file ["+ontologyFile+"] - ONLY FOR TESTING")
+            logger.warning("LOADING ONTOLOGY NOT FROM SERVER, BUT FROM LOCAL FILE ["+ontologyFile+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(ontologyFile, language = Language.Default)
         }
         else 
@@ -132,6 +131,7 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
         val source = if (mappingsDir != null && mappingsDir.isDirectory)
         {
             val file = new File(mappingsDir, namespace.toString+".xml")
+            logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(file, language = language)
         }
         else
