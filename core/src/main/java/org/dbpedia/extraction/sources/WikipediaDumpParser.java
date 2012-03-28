@@ -151,7 +151,7 @@ public class WikipediaDumpParser
     //Read contents of <base>: http://xx.wikipedia.org/wiki/...
     String uri = _reader.getElementText();
     String wikiCode = uri.substring(uri.indexOf("://") + 3, uri.indexOf('.'));
-    Language language = Language.forCode(wikiCode);
+    Language language = Language.apply(wikiCode);
     nextTag();
 
     //Consume <generator> tag

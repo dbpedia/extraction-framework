@@ -147,7 +147,7 @@ class DurationParserTest extends FlatSpec with ShouldMatchers
     {
         val context = new
         {
-            def language : Language = Language.forCode(lang)
+            def language : Language = Language(lang)
         }
 
         val durationParser = new DurationParser(context)

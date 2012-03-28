@@ -44,7 +44,7 @@ object NonIsoLanguagesMappingTest
         for (wpNonIsoCode <- wpNonIsoLanguageCodes) {
             try {
                 // check if this Wikipedia language code already has a mapping in the nonIsoWpCodes map
-                val language = Language.forCode(wpNonIsoCode) 
+                val language = Language(wpNonIsoCode) 
                 // if a mapping exists, check if the mapping points to a ISO 639-1 language code
                 if (! isoLanguageCodes.contains(language.isoCode)) {
                     println("* mapping to non-ISO code: '"+wpNonIsoCode+"' -> '"+language.isoCode+"'")

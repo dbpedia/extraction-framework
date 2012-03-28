@@ -165,7 +165,7 @@ object WikiTitle
         {
             val name = WikiUtil.wikiDecode(ns.toString)
             if (name == "Mapping") mappingNamespaces.put(Language.Default, ns)
-            else if (name.startsWith("Mapping ")) mappingNamespaces.put(Language.forCode(name.substring(8)), ns)
+            else if (name.startsWith("Mapping ")) mappingNamespaces.put(Language(name.substring(8)), ns)
             customNamespaces.put(name, ns)
             reverseCustomNamespaces.put(ns, name)
         }
@@ -202,7 +202,7 @@ object WikiTitle
         //Check if it contains a language
         if(!parts.isEmpty && !parts.tail.isEmpty)
         {
-            for (lang <- Language.tryCode(parts.head.toLowerCase(sourceLanguage.locale)))
+            for (lang <- Language.get(parts.head.toLowerCase(sourceLanguage.locale)))
             {
                  language = lang
                  isInterlanguageLink = !leadingColon

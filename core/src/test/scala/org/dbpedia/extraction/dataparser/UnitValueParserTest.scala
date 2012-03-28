@@ -291,7 +291,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
 
     private def parse(language : String, datatypeName : String, input : String) : Option[Double] =
     {
-        val lang = Language.forCode(language)
+        val lang = Language(language)
         val red = Redirects.loadFromCache(lang)
         val context = new
         {

@@ -115,7 +115,7 @@ public class LiveConfigReader {
 
             Element elemLanguage = (Element)languageNodes.item(i);
             String languageName = elemLanguage.getAttribute(NAME_ATTRIBUTENAME);
-            Language language = Language.forCode(languageName);
+            Language language = Language.apply(languageName);
             readLanguageExtractors(elemLanguage, language);
         }
     }

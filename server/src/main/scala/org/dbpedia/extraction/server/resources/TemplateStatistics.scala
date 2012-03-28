@@ -15,8 +15,7 @@ import java.lang.Boolean
 @Path("/statistics/{lang}/")
 class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String)
 {
-    private val language = Language.tryCode(langCode)
-                                   .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
+    private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
     if (!Server.config.languages.contains(language))
         throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
@@ -67,7 +66,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
             case (key, value) => (-value, key)
         }: _*)
 
-        val reversedRedirects = wikipediaStatistics.checkForRedirects(sortedStatsMap, mappings, language)
+        val reversedRedirects = wikipediaStatistics.checkForRedirects(sortedStatsMap, mappings)
         val percentageMappedTemplates: String = "%2.2f".format(getNumberOfMappedTemplates(statsMap).toDouble / getNumberOfTemplates(statsMap).toDouble * 100)
         val percentageMappedTemplateOccurrences: String = "%2.2f".format(getRatioOfMappedTemplateOccurrences(statsMap) * 100)
         val percentageMappedPropertyOccurrences: String = "%2.2f".format(getRatioOfAllMappedPropertyOccurrences(statsMap) * 100)
