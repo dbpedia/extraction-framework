@@ -5,8 +5,9 @@ import java.util.Locale
 /**
  * Represents a Wikipedia language. For each language, there is only one instance of this class. 
  */
-class Language private(val wikiCode : String, val isoCode: String)
+class Language private(val wikiCode : String, val isoCode: String) extends Serializable
 {
+    // TODO: make this transient and add a readResolve method
     val locale : Locale = new Locale(isoCode)
     
     /** 
