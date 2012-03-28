@@ -22,8 +22,7 @@ class Mappings(@PathParam("lang") langCode : String)
 {
     private val logger = Logger.getLogger(classOf[Ontology].getName)
 
-    private val language = Language.tryCode(langCode)
-        .getOrElse(throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
+    private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
     if(!Server.config.languages.contains(language))
         throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)

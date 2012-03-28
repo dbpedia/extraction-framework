@@ -16,8 +16,7 @@ import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 @Path("/extraction/{lang}/")
 class Extraction(@PathParam("lang") langCode : String)
 {
-    private val language = Language.tryCode(langCode)
-        .getOrElse(throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
+    private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
     if(!Server.config.languages.contains(language))
         throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)

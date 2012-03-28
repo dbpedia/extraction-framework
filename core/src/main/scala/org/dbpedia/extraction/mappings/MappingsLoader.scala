@@ -300,7 +300,7 @@ object MappingsLoader
     {
         loadTemplateProperty(node, propertyName, required) match
         {
-            case lang : String => Language.forCode(lang)
+            case lang : String => Language(lang)
             case null => null
         }
     }

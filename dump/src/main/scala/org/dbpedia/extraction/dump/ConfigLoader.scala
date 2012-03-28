@@ -65,7 +65,7 @@ object ConfigLoader
 
         /** Languages */
         if(config.getProperty("languages") == null) throw new IllegalArgumentException("Property 'languages' not defined.")
-        val languages = config.getProperty("languages").split("[,\\s]+").map(_.trim).toList.map(Language.forCode)
+        val languages = config.getProperty("languages").split("[,\\s]+").map(_.trim).toList.map(Language)
 
         /** Extractor classes */
         val extractors = loadExtractorClasses()
@@ -90,7 +90,7 @@ object ConfigLoader
 
             for(LanguageExtractor(code) <- config.stringPropertyNames.toArray)
             {
-                val language = Language.forCode(code)
+                val language = Language(code)
                 if (extractors.contains(language))
                 {
                     extractors += ((language, stdExtractors ::: loadExtractorConfig(config.getProperty("extractors." + code))))
@@ -210,7 +210,7 @@ object ConfigLoader
     //language-independent val
     private lazy val _commonsSource =
     {
-        XMLSource.fromFile(getDumpFile(config.dumpDir, Language.forCode("commons")), _.namespace == WikiTitle.Namespace.File)
+        XMLSource.fromFile(getDumpFile(config.dumpDir, Language("commons")), _.namespace == WikiTitle.Namespace.File)
     }
 
     /**

@@ -205,7 +205,7 @@ class OntologyReader
         { property =>
 
             val langCode = property.key.split("@", 2).lift(1).getOrElse("en")
-            Language.tryCode(langCode) match
+            Language.get(langCode) match
             {
               case Some(language) => property.retrieveText match
               {

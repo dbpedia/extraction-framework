@@ -107,7 +107,7 @@ object ConfigLoader
 
         /** Languages */
         if(config.getProperty("languages") == null) throw new IllegalArgumentException("Property 'languages' not defined.")
-        private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList.map(Language.forCode)
+        private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList.map(Language)
 
         /** Extractor classes */
         val extractors = loadExtractorClasses()
@@ -149,7 +149,7 @@ object ConfigLoader
             val LanguageExtractor = "extractors\\.(.*)".r
 
             for(LanguageExtractor(code) <- config.stringPropertyNames.toArray;
-                language = Language.forCode(code)
+                language = Language(code)
                 if extractors.contains(language))
             {
                 extractors += ((language, stdExtractors ::: loadExtractorConfig(config.getProperty("extractors." + code))))

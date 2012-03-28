@@ -23,12 +23,12 @@ class Language private(val wikiCode : String, val isoCode: String)
      */
     override def toString() = locale.toString
     
-    // no need to override equals() and hashCode() - there is only one object for each value, so equality is identity. 
+    // no need to override equals() and hashCode() - there is only one object for each value, so equality means identity. 
 }
 
-object Language
+object Language extends (String => Language)
 {
-    val values =
+    val Values =
     {
       val languages = new collection.mutable.HashMap[String,Language]
       
@@ -150,22 +150,21 @@ object Language
       languages.toMap // toMap makes immutable
     }
     
-    val Default = forCode("en")
+    val Default = Values("en")
     
     /**
-     * Gets a language object for a Wikipedia language code. For the Locale, this method uses 
-     * the given code if it is an ISO code or a different code if there is an ISO code defined 
-     * for the given code. Returns None if the given code neither is an ISO code nor has a defined ISO code.
-     * See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
+     * Gets a language object for a Wikipedia language code.
      * Throws IllegalArgumentException if language code is unknown.
      */
-    def forCode( code : String ) : Language = values.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
+    def apply( code : String ) : Language = Values.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
     
     /**
-     * Gets a language object for a Wikipedia language code. For the Locale, this method uses 
-     * the given code if it is an ISO code or a different code if there is an ISO code defined 
-     * for the given code. Returns None if the given code neither is an ISO code nor has a defined ISO code.
-     * See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
+     * Gets a language object for a Wikipedia language code, or None if given code is unknown.
      */
-    def tryCode( code : String ) : Option[Language] = values.get(code)
+    def get(code : String) : Option[Language] = Values.get(code)
+    
+    /**
+     * Gets a language object for a Wikipedia language code, or the default if the given code is unknown.
+     */
+    def getOrElse(code : String, default : => Language) : Language = Values.getOrElse(code, default)
 }

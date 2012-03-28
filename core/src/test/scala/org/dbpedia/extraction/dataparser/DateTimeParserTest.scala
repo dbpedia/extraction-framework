@@ -518,7 +518,7 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
 
     private def parse(language : String, datatype : String, input : String) : Option[String] =
     {
-        val lang = Language.forCode(language)
+        val lang = Language(language)
         val context = new
         {
             def language : Language = lang
