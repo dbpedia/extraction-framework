@@ -128,7 +128,8 @@ object ConfigLoader
         val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir, dataset => lang.filePrefix + "/" + dataset.name + "_" + lang.filePrefix + ".nq")
         val destination = new CompositeDestination(tripleDestination, quadDestination)
 
-        val jobLabel = "Extraction Job for " + lang.wikiCode + " Wikipedia with " + extractors.size + " extractors"
+        // Note: label is also used as file name
+        val jobLabel = "extraction_job_"+lang.wikiCode+"_with_"+extractors.size+"_extractors"
         new ExtractionJob(compositeExtractor, context.articlesSource, destination, jobLabel)
     }
 
