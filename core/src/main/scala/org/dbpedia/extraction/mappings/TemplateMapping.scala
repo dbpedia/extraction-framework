@@ -13,7 +13,7 @@ case class TemplateMapping( mapToClass : OntologyClass,
                            def ontology : Ontology
                            def language : Language }  ) extends ClassMapping
 {
-    private val (propertyMappings, constantMappings) = splitMappings
+    private val (constantMappings, propertyMappings) = mappings.partition(_.isInstanceOf[ConstantMapping])
 
     override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -141,24 +141,6 @@ case class TemplateMapping( mapToClass : OntologyClass,
         }
 
         pageContext.generateUri(subjectUri, nameProperty)
-    }
-
-    private def splitMappings : (List[PropertyMapping],List[PropertyMapping]) =
-    {
-        var propertyMappings : List[PropertyMapping] = List()
-        var constantPropertyMappings : List[PropertyMapping] = List()
-        for(mapping <- mappings)
-        {
-            if(mapping.isInstanceOf[ConstantMapping])
-            {
-                constantPropertyMappings ::= mapping
-            }
-            else
-            {
-                propertyMappings ::= mapping
-            }
-        }
-        (propertyMappings, constantPropertyMappings)
     }
 }
 
