@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -27,22 +26,28 @@
                             <id>server</id>
                             <mainClass>org.dbpedia.extraction.server.Server</mainClass>
                             <args>
-                                <arg>PASSWORD</arg>
+                                <!-- password for statistics ignore list -->
+                                <arg>CHANGE-THIS-PASSWORD</arg>
+                                <!-- ontology file. if not given or not existing, server downloads ontology from mappings.dbpedia.org -->
                                 <arg>../ontology.xml</arg>
+                                <!-- mappings dir. if not given or not existing, server downloads mappings from mappings.dbpedia.org -->
                                 <arg>../mappings</arg>
                             </args>
                             <jvmArgs>
-                                <jvmArg>-Xms1g</jvmArg>
-                                <jvmArg>-Xmx2g</jvmArg>
+                                <jvmArg>-Xms512m</jvmArg>
+                                <jvmArg>-Xmx1536m</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>stats</id>
                             <mainClass>org.dbpedia.extraction.server.util.CreateMappingStats</mainClass>
                             <args>
+                                <!-- source dir contains folder for each language with extraction results -->
                                 <arg>/home/release/dbpedia</arg>
+                                <!-- target dir -->
                                 <arg>src/main/resources</arg>
-                                <arg>tr</arg>
+                                <!-- languages (comma or space separated). if none given, use all languages that are hard-coded in the server -->
+                                <arg></arg>
                             </args>
                         </launcher>
                     </launchers>
