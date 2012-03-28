@@ -9,7 +9,6 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import scala.Serializable
 import scala.collection.mutable
-import scala.collection.mutable.HashMap
 import java.io._
 import org.dbpedia.extraction.server.Configuration
 import org.dbpedia.extraction.ontology.OntologyNamespaces
@@ -173,7 +172,7 @@ class CreateMappingStats(val language: Language)
 
     private def getWikipediaStats(redirectsFile: File, infoboxPropsFile: File, templParamsFile: File, paramsUsageFile: File): WikipediaStats =
     {
-        var templatesMap: mutable.Map[String, TemplateStats] = new HashMap() // "templateName" -> TemplateStats
+        var templatesMap: mutable.Map[String, TemplateStats] = new mutable.HashMap() // "templateName" -> TemplateStats
         
         println("Reading redirects from " + redirectsFile)
         val redirects: Map[String, String] = loadTemplateRedirects(redirectsFile)
@@ -202,7 +201,7 @@ class CreateMappingStats(val language: Language)
 
     private def loadTemplateRedirects(fileName: File): Map[String, String] =
     {
-        var redirects: mutable.Map[String, String] = new HashMap()
+        var redirects: mutable.Map[String, String] = new mutable.HashMap()
         for (line <- Source.fromFile(fileName, "UTF-8").getLines())
         {
             line match
@@ -428,7 +427,7 @@ object CreateMappingStats
      * the template multiple times is counted only once.
      * TODO: objects of this class should be immutable.
      */
-    class TemplateStats(var templateCount: Int = 0, val properties: mutable.Map[String, Int] = new HashMap()) extends Serializable
+    class TemplateStats(var templateCount: Int = 0, val properties: mutable.Map[String, Int] = new mutable.HashMap()) extends Serializable
     {
         override def toString = "TemplateStats[count:" + templateCount + ",properties:" + properties.mkString(",") + "]"
     }
@@ -516,13 +515,13 @@ object CreateMappingStats
 
     // Hold template redirects and template statistics
     // TODO: objects of this class should be immutable, including parts like TemplateStats
-    class WikipediaStats(val lang : Language, val redirects: Map[String, String] = Map(), val templates: Map[String, TemplateStats] = Map()) extends Serializable
+    class WikipediaStats(val language : Language, val redirects: Map[String, String] = Map(), val templates: Map[String, TemplateStats] = Map()) extends Serializable
     {
 
         def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping]) =
         {
-            val templateNamespacePrefix = Namespaces.getNameForNamespace(lang, WikiTitle.Namespace.Template) + ":"
-            val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, lang).substring(templateNamespacePrefix.length())))
+            val templateNamespacePrefix = Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":"
+            val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, language).substring(templateNamespacePrefix.length())))
             mappedRedirrects.map(_.swap)
         }
     }
