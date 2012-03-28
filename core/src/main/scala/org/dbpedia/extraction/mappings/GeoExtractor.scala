@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateNode}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
@@ -24,7 +24,7 @@ class GeoExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return new Graph()
         
         // Iterate through all root templates.
         // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).

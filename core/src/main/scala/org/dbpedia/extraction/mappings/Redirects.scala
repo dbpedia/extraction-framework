@@ -5,7 +5,7 @@ import org.dbpedia.extraction.sources.{WikiPage, Source}
 import collection.mutable.{HashSet, HashMap}
 import java.io._
 import util.control.ControlThrowable
-import org.dbpedia.extraction.wikiparser.{WikiParserException, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect
 
@@ -39,7 +39,7 @@ class Redirects private(val map : Map[String, String])
             map.get(currentTitle) match
             {
                 case Some(destinationTitle) => currentTitle = destinationTitle
-                case None => return new WikiTitle(currentTitle, WikiTitle.Namespace.Template, title.language)
+                case None => return new WikiTitle(currentTitle, Namespace.Template, title.language)
             }
         }
 
@@ -174,7 +174,7 @@ object Redirects
                    {
                        val destinationTitle = WikiTitle.parse(destination, page.title.language)
 
-                       if(destinationTitle.namespace == WikiTitle.Namespace.Template)
+                       if(destinationTitle.namespace == Namespace.Template)
                        {
                            List((page.title.decoded, destinationTitle.decoded))
                        }

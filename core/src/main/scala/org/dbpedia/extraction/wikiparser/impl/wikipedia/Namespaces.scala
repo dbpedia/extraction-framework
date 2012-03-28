@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.wikiparser.impl.wikipedia
 
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
  * Holds the namespace names of all Wikipedia languages.
@@ -2418,7 +2418,7 @@ object Namespaces
         case (lang,languageMap) => (lang, languageMap.map{case (name, code) => (code, name)}.toMap)
     }.toMap
 
-    def getNameForNamespace(language : Language, ns : WikiTitle.Namespace) : String =
+    def getNameForNamespace(language : Language, ns : Namespace) : String =
     {
         reverseMap.get(language.wikiCode) match
         {

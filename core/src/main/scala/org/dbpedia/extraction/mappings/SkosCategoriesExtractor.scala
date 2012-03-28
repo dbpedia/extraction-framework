@@ -22,7 +22,7 @@ class SkosCategoriesExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Category) return new Graph()
+        if(node.title.namespace != Namespace.Category) return new Graph()
 
         var quads = List[Quad]()
 
@@ -47,14 +47,14 @@ class SkosCategoriesExtractor( context : {
     {
         node match
         {
-            case linkNode : InternalLinkNode if linkNode.destination.namespace == WikiTitle.Namespace.Category => List(linkNode)
+            case linkNode : InternalLinkNode if linkNode.destination.namespace == Namespace.Category => List(linkNode)
             case _ => node.children.flatMap(collectCategoryLinks)
         }
     }
 
     private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Category)
+        val categoryNamespace = Namespaces.getNameForNamespace(context.language, Namespace.Category)
         
         OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
         //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)

@@ -4,7 +4,7 @@ import _root_.org.dbpedia.extraction.destinations.Destination
 import _root_.org.dbpedia.extraction.mappings.Extractor
 import _root_.org.dbpedia.extraction.sources.{Source, WikiPage}
 
-import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
+import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser, Namespace}
 import java.util.concurrent.{ArrayBlockingQueue}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable
@@ -93,9 +93,9 @@ class LiveExtractionJob(extractor : Extractor, source : Source, language : Langu
     private def queuePage(page : WikiPage)
     {
         //Only extract from the following namespaces
-        if(page.title.namespace != WikiTitle.Namespace.Main &&
-           page.title.namespace != WikiTitle.Namespace.File &&
-           page.title.namespace != WikiTitle.Namespace.Category)
+        if(page.title.namespace != Namespace.Main &&
+           page.title.namespace != Namespace.File &&
+           page.title.namespace != Namespace.Category)
         {
            return
         }

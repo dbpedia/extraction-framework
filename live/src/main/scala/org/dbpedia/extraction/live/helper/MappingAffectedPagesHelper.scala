@@ -2,7 +2,7 @@ package org.dbpedia.extraction.live.helper
 
 import java.net.URL
 import org.dbpedia.extraction.util.{Language, WikiApi}
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.live.util.XMLUtil
 import org.dbpedia.extraction.sources.{XMLSource, Source}
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager
@@ -27,7 +27,7 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
     src.foreach(CurrentWikiPage =>
       {
           val mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.title.toString, Language.Default)
-          val templateTitle = new WikiTitle(mappingTitle.decoded, WikiTitle.Namespace.Template, Language.Default)
+          val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, Language.Default)
 
           //val wikiApiUrl = new URL("http://" + Language.Default.wikiCode + ".wikipedia.org/w/api.php")
           val wikiApiUrl = new URL("http://live.dbpedia.org/syncw/api.php")

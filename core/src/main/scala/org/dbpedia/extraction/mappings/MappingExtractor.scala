@@ -20,7 +20,7 @@ class MappingExtractor( context : {
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(page.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(page.title.namespace != Namespace.Main) return new Graph()
 
         extractNode(page, subjectUri, pageContext)
     }

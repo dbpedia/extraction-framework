@@ -35,7 +35,7 @@ class HomepageExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return new Graph()
         
         val list = collectProperties(node).filter(p => propertyNames.contains(p.key.toLowerCase))
         list.foreach((property) => {

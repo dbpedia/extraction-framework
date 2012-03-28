@@ -73,12 +73,12 @@ public class LiveConfigReader {
 
             
             /** Ontology source */
-//            JavaConversions.asEnumeration(WikiTitle.Namespace());
-//    Source ontologySource = WikiSource.fromNamespaces(Set(WikiTitle.Namespace().OntologyClass, WikiTitle.Namespace.OntologyProperty),
+//            JavaConversions.asEnumeration(Namespace());
+//    Source ontologySource = WikiSource.fromNamespaces(Set(Namespace.OntologyClass, Namespace.OntologyProperty),
 //                                                   new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
 //
 //    /** Mappings source */
-//    Source mappingsSource =  WikiSource.fromNamespaces(Set(WikiTitle.Namespace.Mapping),
+//    Source mappingsSource =  WikiSource.fromNamespaces(Set(Namespace.Mapping),
 //                                                    new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
         }
         catch(Exception exp){

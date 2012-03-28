@@ -4,7 +4,7 @@ import _root_.java.util.logging.Logger
 import io.Source
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import scala.Serializable
@@ -40,8 +40,8 @@ import java.net.{URLDecoder, URLEncoder}
  * and match it against regexes etc. But: doesn't work because of \" in string values.
  * 
  * TODO: even better - the extraction framework should be flexible and configurable enough that
- * it can write simpler formats besides N-Triples. This class would be MUCH simpler if it had
- * to read simple text files without N-Triples and URI-encoding.
+ * it can write simpler formats besides N-Triples. This class would be MUCH simpler and faster
+ * if it had to read simple text files without N-Triples and URI-encoding.
  */
 class CreateMappingStats(val language: Language)
 {
@@ -55,7 +55,7 @@ class CreateMappingStats(val language: Language)
 
     val percentageFileName = "src/main/resources/percentage." + language.wikiCode
 
-    val encodedTemplateNamespacePrefix = doubleEncode(Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":", language)
+    val encodedTemplateNamespacePrefix = doubleEncode(Namespaces.getNameForNamespace(language, Namespace.Template) + ":", language)
     private val resourceNamespacePrefix = OntologyNamespaces.getResource("", language)
 
     private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> \.""".r
@@ -219,6 +219,7 @@ class CreateMappingStats(val language: Language)
                     {
                         templateNamespacePrefix = encodedTemplateNamespacePrefix
                     }
+                    
                     if (templateName startsWith templateNamespacePrefix)
                     {
                         redirects = redirects.updated(templateName, stripUri(obj))
@@ -307,6 +308,7 @@ class CreateMappingStats(val language: Language)
     private def countProperties(fileName: File, resultMap: mutable.Map[String, TemplateStats], redirects: Map[String, String]) : Unit =
     {
         // iterate through infobox test
+        // FIXME: close the source
         for (line <- Source.fromFile(fileName, "UTF-8").getLines())
         {
             line match
@@ -520,7 +522,7 @@ object CreateMappingStats
 
         def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping]) =
         {
-            val templateNamespacePrefix = Namespaces.getNameForNamespace(language, WikiTitle.Namespace.Template) + ":"
+            val templateNamespacePrefix = Namespaces.getNameForNamespace(language, Namespace.Template) + ":"
             val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, language).substring(templateNamespacePrefix.length())))
             mappedRedirrects.map(_.swap)
         }

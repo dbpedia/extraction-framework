@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.sources;
 
 import org.dbpedia.extraction.util.Language;
-import org.dbpedia.extraction.wikiparser.WikiTitle;
+import org.dbpedia.extraction.wikiparser.*;
 import org.dbpedia.util.Exceptions;
 import org.dbpedia.util.text.xml.XMLStreamUtils;
 
+import scala.Enumeration;
 import scala.Function1;
 import scala.util.control.ControlThrowable;
 
@@ -191,7 +192,8 @@ public class WikipediaDumpParser
     
     //Read title
     requireStartElement(TITLE_ELEM);
-    WikiTitle title = parseTitle(_reader.getElementText());
+    String titleStr = _reader.getElementText();
+    WikiTitle title = parseTitle(titleStr);
     _reader.nextTag();
     // now after </title>
 
@@ -207,7 +209,10 @@ public class WikipediaDumpParser
     
     if (title.namespace().id() != nsId)
     {
-      logger.log(Level.WARNING, "Error parsing title: found wrong namespace "+title.namespace()+" in title "+title);
+      // Emulate Scala call Namespace(nsId) Not as bad as it looks.
+      // But let's hope the Scala compiler doesn't change its naming pattern...
+      Enumeration.Value expected = org.dbpedia.extraction.wikiparser.package$Namespace$.MODULE$.apply((int)nsId);
+      logger.log(Level.WARNING, "Error parsing title: found namespace "+title.namespace().id()+", expected "+expected+" in title "+titleStr);
     }
 
     //Read page id

@@ -4,6 +4,7 @@ import collection.mutable.{ListBuffer, Stack}
 import io.{Source}
 import util.control.Breaks._
 import java.util.regex.Pattern
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.sources.WikiPage
@@ -156,7 +157,7 @@ object MyStack {
     //println("read file "+name+">"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
-          new WikiTitle("test template"),null,0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
+          new WikiTitle("test template", Namespace.Main, Language.Default),null,0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
         )
     )
     //println("dumping subtemplate")

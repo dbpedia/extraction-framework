@@ -11,7 +11,7 @@ import java.io.{FileReader, File}
 import _root_.org.dbpedia.extraction.util.StringUtils._
 import _root_.org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{MemorySource, WikiSource, XMLSource, Source}
-import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{StringDestination, FileDestination, CompositeDestination}
 // import org.dbpedia.extraction.dump.ExtractionJob
 import java.util.logging.{Level, Logger}
@@ -48,12 +48,12 @@ object LiveExtractionConfigLoader extends ActionListener
     val logger = Logger.getLogger("LiveExtractionConfigLoader");
 
    /** Ontology source */
-    val ontologySource = WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
+    val ontologySource = WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                                    url = new URL("http://mappings.dbpedia.org/api.php"),
                                                    language = Language.Default );
 
     /** Mappings source */
-    val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.Mapping),
+    val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.Mapping),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
                                                         language = Language.Default );
   
@@ -144,9 +144,9 @@ object LiveExtractionConfigLoader extends ActionListener
       val parser = WikiParser()
         articlesSource.foreach(CurrentWikiPage =>
                 {
-                 if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.Main ||
-                    CurrentWikiPage.title.namespace == WikiTitle.Namespace.File ||
-                    CurrentWikiPage.title.namespace == WikiTitle.Namespace.Category)
+                 if(CurrentWikiPage.title.namespace == Namespace.Main ||
+                    CurrentWikiPage.title.namespace == Namespace.File ||
+                    CurrentWikiPage.title.namespace == Namespace.Category)
                    {
                       val TempDest = new  StringDestination();
                       //println(CurrentWikiPage.title.namespace);
@@ -252,14 +252,14 @@ object LiveExtractionConfigLoader extends ActionListener
             {
               /*println(CurrentWikiPage.title.namespace.toString)
 
-              if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.UserTalk || CurrentWikiPage.title.namespace == WikiTitle.Namespace.User){
+              if(CurrentWikiPage.title.namespace == Namespace.UserTalk || CurrentWikiPage.title.namespace == Namespace.User){
                 logger.info("User or user ctalk");
                 return ;
               }*/
 
-             if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.Main ||
-                CurrentWikiPage.title.namespace == WikiTitle.Namespace.File ||
-                CurrentWikiPage.title.namespace == WikiTitle.Namespace.Category)
+             if(CurrentWikiPage.title.namespace == Namespace.Main ||
+                CurrentWikiPage.title.namespace == Namespace.File ||
+                CurrentWikiPage.title.namespace == Namespace.Category)
                {
                  val TempDest = new  StringDestination();
                  val CurrentPageNode = parser(CurrentWikiPage)
@@ -416,12 +416,12 @@ object LiveExtractionConfigLoader extends ActionListener
         val extractors = loadExtractorClasses()
 
         /** Ontology source */
-        val ontologySource = WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
+        val ontologySource = WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                                        url = new URL("http://mappings.dbpedia.org/api.php"),
                                                        language = Language.Default );
 
         /** Mappings source */
-        val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.Mapping),
+        val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.Mapping),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
                                                         language = Language.Default );
 //        var pagecount :Long = 0;
@@ -442,7 +442,7 @@ object LiveExtractionConfigLoader extends ActionListener
 //      println(pagecount);
 
         /** Commons source */
-//        val commonsSource = XMLSource.fromFile(getDumpFile("commons"), _.namespace == WikiTitle.Namespace.File)
+//        val commonsSource = XMLSource.fromFile(getDumpFile("commons"), _.namespace == Namespace.File)
 
         /**
          * Retrieves the dump stream for a specific language edition.

@@ -3,8 +3,7 @@ package org.dbpedia.extraction.dump
 import _root_.org.dbpedia.extraction.destinations.Destination
 import _root_.org.dbpedia.extraction.mappings.Extractor
 import _root_.org.dbpedia.extraction.sources.{Source, WikiPage}
-import _root_.org.dbpedia.extraction.wikiparser.WikiParser
-import _root_.org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import org.dbpedia.extraction.wikiparser.{Namespace,WikiParser}
 import java.util.concurrent.{ArrayBlockingQueue, TimeUnit}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable

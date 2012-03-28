@@ -9,8 +9,7 @@ import org.dbpedia.extraction.destinations.{Graph, Destination}
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource, Source, WikiPage}
 import java.net.URL
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, WikiTitle}
-import org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import org.dbpedia.extraction.wikiparser._
 import java.io.File
 
 /**
@@ -126,7 +125,7 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
 
     protected def loadMappingsPages(language : Language) : Map[WikiTitle, PageNode] =
     {
-        val namespace = WikiTitle.mappingNamespace(language).getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
+        val namespace = Namespace.mappingNamespace(language).getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
         
         val source = if (mappingsDir != null && mappingsDir.isDirectory)
         {
