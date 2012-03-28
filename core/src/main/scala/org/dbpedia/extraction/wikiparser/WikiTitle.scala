@@ -47,15 +47,32 @@ class WikiTitle(val decoded : String, val namespace : WikiTitle.Namespace = Wiki
      */
     val sourceUri = "http://" + language.wikiCode + ".wikipedia.org/wiki/"  + encodedWithNamespace
     
-    override def toString = language + ":" + decodedWithNamespace
+    /**
+     * TODO: the string is confusing. For a half hour I thought that the titles I saw in a log file
+     * were the ones used by Wikipedia and was baffled. I think we should change this method to
+     * return something like decodedWithNamespace+" ["+language+"]".
+     * 
+     * Problem: find out if some code relies on the current result format of this method 
+     * and fix that code. Then change this method.
+     */
+    override def toString() = language + ":" + decodedWithNamespace
 
+    /**
+     * FIXME: this method must also take into account the language. Problem: find out if some code 
+     * relies on the current behavior of this method and fix that code. Then change this method.
+     * Also change hashCode.
+     */
     override def equals(other : Any) = other match
     {
         case otherTitle : WikiTitle => (namespace == otherTitle.namespace && decoded == otherTitle.decoded)
         case _ => false
     }
 
-    override def hashCode = decoded.hashCode
+    /**
+     * TODO: when equals() is fixed, also use language here.
+     * TODO: do as Josh says in Effective Java, chapter 3.
+     */
+    override def hashCode() = decoded.hashCode ^ namespace.hashCode
 }
 
 object WikiTitle
