@@ -289,19 +289,70 @@
         <mapping from="Sanskrit" to="Sanskrit" />
         <mapping from="Mittelgriechisch" to="MedievalGreek" />
         <mapping from="Protogermanisch" to="Protogermanic" />
-        <mapping from="Reflexives Possessivpronomen" to="ReflexivePossessivpronoun" />
+        <mapping from="Reflexives Possessivpronomen" to="ReflexivePossessivepronoun" />
         <mapping from="Chinalugisch" to="Khinalugh" />
         <mapping from="Bengalisch" to="Bengali" />
         <mapping from="Gujarati" to="Gujarati" />
     </mappings>
+    <postprocessing enabled="true" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.postprocessor.LemonOverlay">
+        <config>
+            <blockProperty uri="http://www.monnet-project.eu/lemon#sense" />
+            <inputTargetClass uri="http://wiktionary.dbpedia.org/terms/Sense" />
+            <followProperties>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPoSUsage"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasLangUsage"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSense"/>
+            </followProperties>
+            <collectProperties>
+                <property uri="http://purl.org/dc/elements/1.1/language"/>
+                <property uri="http://www.w3.org/2000/01/rdf-schema#label"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPoS"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasMeaning"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasTranslation"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasExampleSentence"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasProverb"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPronunciationPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAntonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAudioSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAudioPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasCollocation"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasEtymology"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyphenationSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyphenationPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyponym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSynonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSource"/>
+                <property uri="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+                <property uri="http://www.w3.org/2002/07/owl#sameAs"/>
+            </collectProperties>
+            <outputStartClass uri="http://www.monnet-project.eu/lemon#LexicalEntry" />
+            <outputAggregatedClass uri="http://www.monnet-project.eu/lemon#LexicalSense" />
+        </config>
+    </postprocessing>
+    <saveVars>
+        <var name="pos" />
+        <var name="language" />
+    </saveVars>
     <page name="page">
+        <triples>
+            <!-- a label -->
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/2000/01/rdf-schema#label" o="$entityId" oType="literal"/>
+            <!-- a link to the wiktionary page -->
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://de.wiktionary.org/wiki/uri($entityId)" oType="URI"/>
+            <!-- provenance: list of authors -->
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://usefulinc.com/ns/doap#creator" o="http://de.wiktionary.org/w/index.php?title=uri($entityId)&amp;action=history" oType="URI"/>
+            <!-- a type declaration -->
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/LexicalEntity" oType="URI"/>
+        </triples>
         <prologs>
             <template name="also">
                 <resultTemplates>
                     <resultTemplate>
                         <triples>
                             <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wiktionary.dbpedia.org/resource/uri($otherPage)" oType="URI"/>
-                            <triple s="http://wiktionary.dbpedia.org/resource/uri($word)" p="http://www.w3.org/2000/01/rdf-schema#label" o="$word" oType="literal"/>
+                            <triple s="http://wiktionary.dbpedia.org/resource/uri($word)" p="http://www.w3.org/2000/01/rdf-schema#label" o="$otherPage" oType="literal"/>
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
@@ -361,7 +412,8 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI" />
+                                    <triple s="$block-uri($meaningId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
                                     <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
                                 </triples>
                             </resultTemplate>
@@ -393,6 +445,7 @@
                             <resultTemplate>
                                 <triples>
                                     <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)" p="www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
                                     <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
                                 </triples>
                             </resultTemplate>
@@ -490,7 +543,7 @@ Singular=$flection-singular
 (:$source
 )</wikiTemplate>
                     </template>
-                    <template name="translation" ppClass="GermanTranslationHelper">
+                    <template name="translation" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.GermanTranslationHelper">
                         <!-- no result template here - triples are generated by helper -->
                         <wikiTemplate>==== Übersetzungen ====
 {{Ü-links}}
@@ -502,7 +555,7 @@ Singular=$flection-singular
 
 </wikiTemplate>
                     </template>
-                    <template name="relatedWords" ppClass="SenseLinkListHelper">
+                    <template name="relatedWords" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
                         </parameters>                   
@@ -511,7 +564,7 @@ Singular=$flection-singular
 )+
 </wikiTemplate>
                     </template>
-                    <template name="synonyms" ppClass="SenseLinkListHelper">
+                    <template name="synonyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
                         </parameters> 
@@ -520,7 +573,7 @@ Singular=$flection-singular
 )+
 </wikiTemplate>
                     </template>
-                    <template name="hyperonym" ppClass="SenseLinkListHelper">
+                    <template name="hyperonym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>                   
                         </parameters> 
@@ -529,7 +582,7 @@ Singular=$flection-singular
 )+
 </wikiTemplate>
                     </template>
-                    <template name="hyponym" ppClass="SenseLinkListHelper">
+                    <template name="hyponym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>                   
                         </parameters> 
@@ -538,7 +591,7 @@ Singular=$flection-singular
 )+
 </wikiTemplate>
                     </template>
-                    <template name="antonym" ppClass="SenseLinkListHelper">
+                    <template name="antonym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasAntonym"/>                   
                         </parameters> 

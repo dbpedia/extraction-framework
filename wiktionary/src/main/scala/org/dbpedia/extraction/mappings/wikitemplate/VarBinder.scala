@@ -1,4 +1,5 @@
-package org.dbpedia.extraction.mappings
+package org.dbpedia.extraction.mappings.wikitemplate
+
 import org.dbpedia.extraction.wikiparser._
 import impl.simple.SimpleWikiParser
 import util.control.Breaks._

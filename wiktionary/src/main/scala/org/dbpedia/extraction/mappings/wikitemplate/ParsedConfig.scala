@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.mappings
+package org.dbpedia.extraction.mappings.wikitemplate
 
 import xml.Node
 import xml.NodeSeq._
@@ -19,7 +19,15 @@ import MyStack._
  * these classes represent configuration from the xml
  * they are simple wrappers that provide a object representation to avoid xml in the extractor
  */
-class TripleTemplate(val s : String, val p : String, val o : String, val oType : String = "URI", val oNewBlock : Boolean = false)
+class TripleTemplate(t : XMLNode)  {
+
+val s : String = (t \ "@s").text
+val p : String = (t \ "@p").text
+val o : String = (t \ "@o").text
+val oType : String = if(t.attribute("oType").isDefined){(t \ "@oType").text} else {"URI"}
+val oNewBlock : Boolean =t.attribute("oNewBlock").isDefined && (t \ "@oNewBlock").text.equals("true") 
+
+}
 
 class ResultTemplate(val triples : Seq[TripleTemplate]){}
 
@@ -69,13 +77,7 @@ object Tpl {
     val rt = (n \ "resultTemplates" \ "resultTemplate").map(
             rtn => new ResultTemplate(
                 (rtn \ "triples" \ "triple").map(
-                    t => new TripleTemplate( 
-                        (t \ "@s").text, 
-                        (t \ "@p").text, 
-                        (t \ "@o").text,
-                        if(t.attribute("oType").isDefined){(t \ "@oType").text} else {"URI"} ,
-                        t.attribute("oNewBlock").isDefined && (t \ "@oNewBlock").text.equals("true") 
-                    ) 
+                    t => new TripleTemplate(t) 
                 )
             )
    )
@@ -90,21 +92,16 @@ object Tpl {
   }
 }
 
-class Block (n : XMLNode, val parent : Block
-//val name : String, val indTpl : Tpl, val blocks : List[Block], val templates : List[Tpl], val property : String, val parent : Block
-){
+class Block (n : XMLNode, val parent : Block){
       val name = (n \ "@name").text
       val indTpl = if((n \ "indicator").size > 0) {Tpl.fromNode((n \ "indicator").head)} else null
       val blocks = (n \ "block").map(b => new Block(b, this)).toList
       val templates  = (n \ "templates" \ "template").map(t=>Tpl.fromNode(t)).toList
       val property = (n \ "@property").text
-
-  //override def clone = new Block(name, indTpl, blocks, templates, property, parent)
+      val rt = new ResultTemplate((n \ "triples" \ "triple").map(t=>new TripleTemplate(t) ).toList)
 }
 
-class Page ( n : XMLNode
-//name : String, blocks : List[Block], templates : List[Tpl], property : String
-) extends Block (n, null
+class Page ( n : XMLNode ) extends Block (n, null
 ){
 
 }
