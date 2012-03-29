@@ -324,7 +324,59 @@
         <mapping from="AngloNorman" to="AngloNorman" />
         <mapping from="AngloNorman" to="AngloNorman" />
     </mappings>
+    <postprocessing enabled="true" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.postprocessor.LemonOverlay">
+        <config>
+            <blockProperty uri="http://www.monnet-project.eu/lemon#sense" />
+            <inputTargetClass uri="http://wiktionary.dbpedia.org/terms/Sense" />
+            <followProperties>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPoSUsage"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasLangUsage"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSense"/>
+            </followProperties>
+            <collectProperties>
+                <property uri="http://purl.org/dc/elements/1.1/language"/>
+                <property uri="http://www.w3.org/2000/01/rdf-schema#label"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPoS"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasMeaning"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasTranslation"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasExampleSentence"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasProverb"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPronunciationPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAntonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAudioSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAudioPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasCollocation"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasEtymology"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyphenationSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyphenationPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyponym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSynonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSource"/>
+                <property uri="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+                <property uri="http://www.w3.org/2002/07/owl#sameAs"/>
+            </collectProperties>
+            <outputStartClass uri="http://www.monnet-project.eu/lemon#LexicalEntry" />
+            <outputAggregatedClass uri="http://www.monnet-project.eu/lemon#LexicalSense" />
+        </config>
+    </postprocessing>
+    <saveVars>
+        <var name="pos" />
+        <var name="language" />
+        <var name="definition" />
+    </saveVars>
     <page name="page">
+        <triples>
+            <!-- a label -->
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/2000/01/rdf-schema#label" o="$entityId" oType="literal"/>
+            <!-- a link to the wiktionary page -->
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://en.wiktionary.org/wiki/uri($entityId)" oType="URI"/>
+            <!-- provenance: list of authors -->
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://usefulinc.com/ns/doap#creator" o="http://en.wiktionary.org/w/index.php?title=uri($entityId)&amp;action=history" oType="URI"/>
+            <!-- a type declaration -->
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/LexicalEntity" oType="URI"/>
+        </triples>
         <prologs>
             <template name="redirect">
                 <resultTemplates>
@@ -461,7 +513,7 @@ $etymology
 )+
 </wikiTemplate>
                 </template>
-                <template name="seealso" ppClass="LinkListHelper">
+                <template name="seealso" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                     <parameters>
                         <parameter name="linkProperty" value="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>                   
                     </parameters> 
@@ -483,7 +535,7 @@ $etymology
 )+
 </wikiTemplate>
                 </template>
-                <template name="links" ppClass="LinkListHelper">
+                <template name="links" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                     <parameters>
                         <parameter name="linkProperty" value="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>                   
                     </parameters> 
@@ -561,28 +613,35 @@ $etymology
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasExample" o="$example" oType="literal"/>
+                                    <triple s="$block-makeId($definition)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$definition" oType="literal"/>
+                                    <triple s="$block-getId($definition)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($definition)" oType="URI"/>
                                 </triples>
                             </resultTemplate>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$definition" oType="literal"/>
+                                    <triple s="$block-getId($DEFINITION)" p="http://wiktionary.dbpedia.org/terms/hasExample" o="$example" oType="literal"/>
+                                    <triple s="$block-getId($DEFINITION)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($DEFINITION)" oType="URI"/>
                                 </triples>
                             </resultTemplate>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$quote" oType="literal"/>
+                                    <triple s="$block-getId($DEFINITION)" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$source: $quote" oType="literal"/>
+                                    <triple s="$block-getId($DEFINITION)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($DEFINITION)" oType="URI"/>
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>
                         <wikiTemplate>
 (# $definition
 (#: $example
-)?(#* $quote
-)?)*
+)?(#* $source
+(#*: $quote
+)*)?)*
 </wikiTemplate>
                     </template>
-                    <template name="derived" ppClass="LinkListHelper">
+                    <template name="derived" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasDerivedTerm"/>                   
                         </parameters> 
@@ -632,17 +691,23 @@ $note1
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasExample" o="$example" oType="literal"/>
+                                    <triple s="$block-makeId($definition)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$definition" oType="literal"/>
+                                    <triple s="$block-getId($definition)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($definition)" oType="URI"/>
                                 </triples>
                             </resultTemplate>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$definition" oType="literal"/>
+                                    <triple s="$block-getId($DEFINITION)" p="http://wiktionary.dbpedia.org/terms/hasExample" o="$example" oType="literal"/>
+                                    <triple s="$block-getId($definition)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($DEFINITION)" oType="URI"/>
                                 </triples>
                             </resultTemplate>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$quote" oType="literal"/>
+                                    <triple s="$block-getId($DEFINITION)" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$quote" oType="literal"/>
+                                    <triple s="$block-getId($DEFINITION)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($DEFINITION)" oType="URI"/>
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>
@@ -665,7 +730,7 @@ $note1
 )+
 </wikiTemplate>
                 </template>
-                <template name="translation" ppClass="EnglishTranslationHelper">
+                <template name="translation" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.EnglishTranslationHelper">
                         <!-- no result template here - triples are generated by helper -->
                         <wikiTemplate>====Translations====
 {{trans-top|$note}}
@@ -676,7 +741,7 @@ $note1
 {{trans-bottom}}
 </wikiTemplate>
                     </template>
-                    <template name="links" ppClass="LinkListHelper">
+                    <template name="links" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>                   
                         </parameters> 
@@ -685,11 +750,47 @@ $note1
 )+
 </wikiTemplate>
                     </template>
-                    <template name="seealso" ppClass="LinkListHelper">
+                    <template name="seealso" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>                   
                         </parameters> 
                         <wikiTemplate>===See also===
+(* $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="synonyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Synonyms=====
+(* $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="coordinateTerms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCoordinateTerm"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Coordinate terms=====
+(* $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="hyponyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Hyponyms=====
+(* $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="hypernyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Hypernyms=====
 (* $line
 )+
 </wikiTemplate>

@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.mappings
+package org.dbpedia.extraction.mappings.wikitemplate
 
 import collection.mutable.{ListBuffer, Stack}
 import io.{Source}
@@ -7,6 +7,8 @@ import java.util.regex.Pattern
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
+
 import MyStack._
 import MyNode._
 import MyString._
