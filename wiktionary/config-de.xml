@@ -2,10 +2,17 @@
 <config>
     <ignore>
         <page startsWith="Vorlage:" />
+        <page startsWith="de:Vorlage:" />
+        <page startsWith="de:Kategorie:" />
+        <page startsWith="Kategorie:" />
         <page startsWith="Wiktionary:" />
         <page startsWith="Archiv " />
         <page startsWith="Liste " />
+        <page startsWith="Datei:" />
+        <page startsWith="Verzeichnis:" />
+        <page startsWith="de:Verzeichnis:" />
         <page endsWith=" (Konjugation)" />
+        <page endsWith=" (Deklination)" />
     </ignore>
     <mappings>
         <mapping from="Substantiv" to="Noun"/>
@@ -445,7 +452,7 @@
                             <resultTemplate>
                                 <triples>
                                     <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)" p="www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
                                     <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
                                 </triples>
                             </resultTemplate>
