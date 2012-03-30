@@ -48,21 +48,23 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
     }
   }
   
-  def downloadFiles(languages : Map[String, Set[String]]) : Traversable[File] = {
+  def downloadFiles(languages : Map[String, Set[String]]) : Traversable[File] =
+  {
     // sort them to have reproducible behavior
     val keys = SortedSet.empty[String] ++ languages.keys
-    for (key <- keys) {
+    keys.flatMap { key => 
       done = keys.until(key)
       todo = keys.from(key)
       println("done: "+done.size+" - "+done.mkString(","))
       println("todo: "+todo.size+" - "+keys.from(key).mkString(","))
-      yield downloadFiles(key,languages(key)) 
+      downloadFiles(key,languages(key)) 
     }
   }
   
   val DateLink = """<a href="(\d{8})/">""".r
   
-  private def downloadFiles(language : String, files : Set[String]) : Traversable[File] = {
+  private def downloadFiles(language : String, files : Set[String]) : Traversable[File] =
+  {
     val name = dumpName(language)
     
     val mainPage = new URL(baseUrl, name+"/")
