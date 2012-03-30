@@ -212,7 +212,7 @@ public class WikipediaDumpParser
       // Emulate Scala call Namespace(nsId) Not as bad as it looks.
       // But let's hope the Scala compiler doesn't change its naming pattern...
       Enumeration.Value expected = org.dbpedia.extraction.wikiparser.package$Namespace$.MODULE$.apply((int)nsId);
-      logger.log(Level.WARNING, "Error parsing title: found namespace "+title.namespace().id()+", expected "+expected+" in title "+titleStr);
+      logger.log(Level.WARNING, "Error parsing title: found namespace "+title.namespace()+", expected "+expected+" in title "+titleStr);
     }
 
     //Read page id
