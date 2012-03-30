@@ -53,8 +53,8 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
     // sort them to have reproducible behavior
     val keys = SortedSet.empty[String] ++ languages.keys
     keys.flatMap { key => 
-      done = keys.until(key)
-      todo = keys.from(key)
+      val done = keys.until(key)
+      val todo = keys.from(key)
       println("done: "+done.size+" - "+done.mkString(","))
       println("todo: "+todo.size+" - "+keys.from(key).mkString(","))
       downloadFiles(key,languages(key)) 
