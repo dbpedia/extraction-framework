@@ -4,17 +4,19 @@ $query = "
 PREFIX terms:<http://wiktionary.dbpedia.org/terms/>
 PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dc:<http://purl.org/dc/elements/1.1/>
-SELECT ?sword ?slang ?spos ?ssense ?twordRes ?tword ?tlang
+SELECT ?swordRes ?sword ?slang ?spos ?ssense ?twordRes ?tword ?tlang
 FROM <http://wiktionary.dbpedia.org/>
 WHERE {
     ?swordRes terms:hasTranslation ?twordRes .
-    ?swordRes rdfs:label ?sword .
-    ?swordRes dc:language ?slang .
-    ?swordRes terms:hasPoS ?spos .
+    OPTIONAL {
+        ?swordRes rdfs:label ?sword .
+        ?swordRes dc:language ?slang .
+        ?swordRes terms:hasPoS ?spos .
+    }
     OPTIONAL { ?swordRes terms:hasMeaning ?ssense . }
     OPTIONAL { 
-           ?twordBaseRes terms:hasLangUsage ?twordRes . 
-           ?twordBaseRes rdfs:label ?tword .
+        ?twordBaseRes terms:hasLangUsage ?twordRes . 
+        ?twordBaseRes rdfs:label ?tword .
     }
     OPTIONAL { ?twordRes dc:language ?tlang . }
 }
@@ -24,6 +26,7 @@ function stripNS($s){
   return substr($s, 36);
 }
 function startWithUpper($str){
+  if(strlen($str)==0) return false;
   return $str{0} === strtoupper($str{0});
 }
 
@@ -40,6 +43,22 @@ if($conn){
             echo "error";
         } else {
             while ($row = odbc_fetch_array($result)){
+                if(empty($row['sword']) || empty($row['slang'])  || empty($row['spos']) ){
+                    $swordRes = $row['swordRes'];
+                    $tail = array_pop(explode('/', $twordRes)); 
+                    $parts = explode('-', $tail);
+                    if(count($parts)==2) continue;
+                    $sword = array_shift($parts); //first
+                    $spos = array_pop($parts); //last
+                    if(is_numeric($spos)){
+                        $spos = array_pop($parts); //last
+                    }
+                    $slang = implode('-', $parts); //rest
+                } else {
+                    $sword = $row['sword'];
+                    $spos = stripNS($row['spos']);
+                    $slang = stripNS($row['slang']);
+                }
                 if(empty($row['tword']) || empty($row['tlang']) ){
                     $twordRes = $row['twordRes'];
                     $tail = array_pop(explode('/', $twordRes)); 
@@ -66,7 +85,7 @@ if($conn){
                     $tword = $row['tword'];
                     $tlang = $row['tword'];
                 }
-                $line = '"'.addslashes(trim($row['sword'])).'","'.addslashes(stripNS($row['slang'])).'","'.addslashes(stripNS($row['spos'])).'","'.addslashes(trim($row['ssense'])).'","'.addslashes(trim($tword)).'","'.addslashes(trim($tlang)).'"'.PHP_EOL; 
+                $line = '"'.addslashes(trim($sword)).'","'.addslashes(trim($slang)).'","'.addslashes(trim($spos)).'","'.addslashes(trim($row['ssense'])).'","'.addslashes(trim($tword)).'","'.addslashes(trim($tlang)).'"'.PHP_EOL; 
                 fwrite($f, $line);
                 $ok = true;
             }
