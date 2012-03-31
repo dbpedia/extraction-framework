@@ -11,16 +11,22 @@ WHERE {
     ?swordRes rdfs:label ?sword .
     ?swordRes dc:language ?slang .
     ?swordRes terms:hasPoS ?spos .
-    ?swordRes terms:hasMeaning ?ssense .
+    OPTIONAL { ?swordRes terms:hasMeaning ?ssense . }
     ?twordBaseRes terms:hasLangUsage ?twordRes . 
     ?twordRes dc:language ?tlang .
     ?twordBaseRes rdfs:label ?tword .
 }
 ";
+
+function stripNS($s){
+  return substr($s, 36);
+}
+
 $conn   = @odbc_connect('VOS', 'dba', 'dba');
 if($conn){
     $ok = true;
     $i = 0;
+    $f = fopen("translations.csv", "w");
     while($ok){
         $t1 = microtime();
         $ok = false;
@@ -29,12 +35,14 @@ if($conn){
             echo "error";
         } else {
             while ($row = odbc_fetch_array($result)){
-                echo '"'.addslashes($row['sword']).'","'.addslashes($row['slang']).'","'.addslashes($row['spos']).'","'.addslashes($row['ssense']).'","'.addslashes($row['tword']).'","'.addslashes($row['tlang']).'"'.PHP_EOL; 
+                $line = '"'.addslashes(trim($row['sword'])).'","'.addslashes(stripNS($row['slang'])).'","'.addslashes(stripNS($row['spos'])).'","'.addslashes(trim($row['ssense'])).'","'.addslashes(trim($row['tword'])).'","'.addslashes(stripNS($row['tlang'])).'"'.PHP_EOL; 
+                fwrite($f, $line);
                 $ok = true;
             }
         }
         //echo "took ".(microtime()-$t1)."ms";
         $i += 100;
     }
-} else echo "no virtuoso connection <br/><br/>";
+    fclose($f);
+} else echo "no virtuoso connection".PHP_EOL;
 ?>
