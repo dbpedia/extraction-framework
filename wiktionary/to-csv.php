@@ -29,23 +29,71 @@ function startWithUpper($str){
   if(strlen($str)==0) return false;
   return $str{0} === strtoupper($str{0});
 }
-
-$conn   = @odbc_connect('VOS', 'dba', 'dba');
-if($conn){
+function request($url){
+ 
+   // is curl installed?
+   if (!function_exists('curl_init')){ 
+      die('CURL is not installed!');
+   }
+ 
+   // get curl handle
+   $ch= curl_init();
+ 
+   // set request url
+   curl_setopt($ch, 
+      CURLOPT_URL, 
+      $url);
+ 
+   // return response, don't print/echo
+   curl_setopt($ch, 
+      CURLOPT_RETURNTRANSFER, 
+      true);
+ 
+   /*
+   Here you find more options for curl:
+   http://www.php.net/curl_setopt
+   */		
+ 
+   $response = curl_exec($ch);
+ 
+   curl_close($ch);
+ 
+   return $response;
+}
+function jsonRemoveUnicodeSequences($json) {
+   return str_replace("\\U", "\\u", $json);
+}
+//$conn   = @odbc_connect('VOS', 'dba', 'dba');
+if(true){
     $ok = true;
+    $stepping = 10000	;
     $i = 0;
     $f = fopen("translations.csv", "w");
     while($ok){
-        $t1 = microtime();
+        $t1 = microtime(true);
         $ok = false;
-        $result = odbc_exec($conn, 'CALL DB.DBA.SPARQL_EVAL(\'' . $query.' LIMIT 100 OFFSET '.$i . '\', NULL, 0)');
+        $url = "http://wiktionary.dbpedia.org/sparql?query=".urlencode($query." LIMIT $stepping OFFSET ".($i))."&format=json";
+        $result = request($url);
+        $resClean = jsonRemoveUnicodeSequences($result);
         if(!$result){
-            echo "error";
+            echo "error".PHP_EOL;
         } else {
-            while ($row = odbc_fetch_array($result)){
-                if(empty($row['sword']) || empty($row['slang'])  || empty($row['spos']) ){
-                    $swordRes = $row['swordRes'];
-                    $tail = array_pop(explode('/', $twordRes)); 
+            $rows = json_decode($resClean, true);
+            //var_dump($rows);
+            if(count($rows['results']['bindings']) == $stepping){
+                $ok = true;
+            } else {
+                echo "last round".PHP_EOL;
+            } 
+            if($rows == NULL || !is_array($rows['results']['bindings'])){
+                echo "invalid json".PHP_EOL;
+                var_dump($rows);
+                echo "sparql endpoint returned: ".$resClean.PHP_EOL;
+            }
+            foreach($rows['results']['bindings'] as $row){
+                if(!isset($row['sword']) || !isset($row['slang'])  || !isset($row['spos']) ){
+                    $swordRes = $row['swordRes']['value'];
+                    $tail = array_pop(explode('/', $swordRes)); 
                     $parts = explode('-', $tail);
                     if(count($parts)==2) continue;
                     $sword = array_shift($parts); //first
@@ -55,12 +103,12 @@ if($conn){
                     }
                     $slang = implode('-', $parts); //rest
                 } else {
-                    $sword = $row['sword'];
-                    $spos = stripNS($row['spos']);
-                    $slang = stripNS($row['slang']);
+                    $sword = $row['sword']['value'];
+                    $spos = stripNS($row['spos']['value']);
+                    $slang = stripNS($row['slang']['value']);
                 }
-                if(empty($row['tword']) || empty($row['tlang']) ){
-                    $twordRes = $row['twordRes'];
+                if(!isset($row['tword']) || !isset($row['tlang']) ){
+                    $twordRes = $row['twordRes']['value'];
                     $tail = array_pop(explode('/', $twordRes)); 
                     $parts = explode('-', $tail);
                     $numParts = count($parts);
@@ -71,28 +119,33 @@ if($conn){
                         $firstUpper++;
                     }
                     
-                    if(empty($row['tword'])){
+                    if(!isset($row['tword'])){
                         $tword = implode('-', array_slice($parts, 0, $firstUpper));
                     } else {
-                        $tword = $row['tword'];
+                        $tword = $row['tword']['value'];
                     }
-                    if(empty($row['tlang'])){
+                    if(!isset($row['tlang'])){
                         $tlang = implode('-', array_slice($parts, $firstUpper, count($parts) - $firstUpper));
                     } else {
-                        $tlang = $row['tlang'];
+                        $tlang = $row['tlang']['value'];
                     }
                 } else {
-                    $tword = $row['tword'];
-                    $tlang = $row['tword'];
+                    $tword = $row['tword']['value'];
+                    $tlang = stripNS($row['tlang']['value']);
                 }
-                $line = '"'.addslashes(trim($sword)).'","'.addslashes(trim($slang)).'","'.addslashes(trim($spos)).'","'.addslashes(trim($row['ssense'])).'","'.addslashes(trim($tword)).'","'.addslashes(trim($tlang)).'"'.PHP_EOL; 
+                $ssense = "";
+                if(isset($row['ssense'])){
+                    $ssense = $row['ssense']['value'];
+                }
+                $line = '"'.addslashes(trim($sword)).'","'.addslashes(trim($slang)).'","'.addslashes(trim($spos)).'","'.addslashes(trim($ssense)).'","'.addslashes(trim($tword)).'","'.addslashes(trim($tlang)).'"'.PHP_EOL; 
                 fwrite($f, $line);
-                $ok = true;
+
             }
         }
-        //echo "took ".(microtime()-$t1)."ms";
-        $i += 100;
+        $i += $stepping;
+        echo "$i done. last $stepping took ".(microtime(true)-$t1)."s".PHP_EOL;
     }
+    echo "finished";
     fclose($f);
 } else echo "no virtuoso connection".PHP_EOL;
 ?>
