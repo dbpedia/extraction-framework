@@ -8,7 +8,11 @@ import org.dbpedia.extraction.util.Language
 /**
  *  Loads wiki pages from an XML stream using the MediaWiki export format.
  * 
- *  The MediaWiki export format is specified by http://www.mediawiki.org/xml/export-0.4
+ *  The MediaWiki export format is specified by 
+ *  http://www.mediawiki.org/xml/export-0.4
+ *  http://www.mediawiki.org/xml/export-0.5
+ *  http://www.mediawiki.org/xml/export-0.6
+ *  etc.
  */
 object XMLSource
 {
