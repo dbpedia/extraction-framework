@@ -171,7 +171,7 @@ object Redirects
 
     private class RedirectFinder(lang : Language) extends (WikiPage => Traversable[(String, String)])
     {
-        val regex = ("""(?is)\s*(?:""" + Redirect(lang).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[([^\]]+)\]\].*""").r
+        val regex = ("""(?is)\s*(?:""" + Redirect(lang).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[([^\]\n]+)\]\].*""").r
 
         override def apply(page : WikiPage) : List[(String, String)]=
         {
