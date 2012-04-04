@@ -34,7 +34,9 @@ object Language extends (String => Language)
       val languages = new collection.mutable.HashMap[String,Language]
       
       // Locale defines some languages that Wikipedia doesn't know, so we remove them.
-      // TODO: get list of language codes from some Wikipedia source, not from Locale
+      // TODO: get list of language codes from a source like these:
+      // http://noc.wikimedia.org/conf/langlist
+      // http://noc.wikimedia.org/conf/all.dblist
       val isoCodes = Locale.getISOLanguages.toSet &~ Set("nd")
       
       // Maps Wikipedia language codes which do not follow ISO-639-1, to a related ISO-639-1 code.
@@ -151,6 +153,7 @@ object Language extends (String => Language)
       languages.toMap // toMap makes immutable
     }
     
+    // TODO: remove this. It is too often used in error.
     val Default = Values("en")
     
     /**
