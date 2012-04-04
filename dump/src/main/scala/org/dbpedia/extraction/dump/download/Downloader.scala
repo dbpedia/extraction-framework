@@ -1,13 +1,11 @@
 package org.dbpedia.extraction.dump.download
 
-import scala.collection.mutable.{Set,Map,HashSet,ArrayBuffer}
+import scala.collection.mutable.{Set,Map,HashSet}
 import scala.collection.immutable.SortedSet
 import java.net.{URL,URLConnection,MalformedURLException}
 import java.io.{File,InputStream,IOException}
 import scala.io.{Source,Codec}
-import java.util.TreeSet
-import java.util.Collections.reverseOrder
-import scala.collection.JavaConversions.asScalaSet
+
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import java.util.zip.GZIPInputStream
 
@@ -63,69 +61,87 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
   
   val DateLink = """<a href="(\d{8})/">""".r
   
-  private def downloadFiles(language : String, files : Set[String]) : Traversable[File] =
+  private def downloadFiles(language : String, fileNames : Set[String]) : Traversable[File] =
   {
-    val name = dumpName(language)
+    val dumpName = getDumpName(language)
     
-    val mainPage = new URL(baseUrl, name+"/")
-    
-    // 1 - find all dates on the main page, sort them latest first
-    
-    // there is no mutable sorted set in Scala (yet) - use Java's TreeSet. see http://www.scala-lang.org/node/6484
-    val dates = new TreeSet[String](reverseOrder[String])
-    
-    eachLine(mainPage, line => DateLink.findAllIn(line).matchData.foreach(m => dates.add(m.group(1))))
-    
-    // 2 - find date page that has all files we want
-    for (date <- dates) // implicit conversion
+    val mainPage = new URL(baseUrl, dumpName+"/") // here the server does NOT use index.html 
+    val mainDir = new File(baseDir, dumpName)
+    if (! mainDir.exists && ! mainDir.mkdirs) throw new Exception("Target directory '"+mainDir+"' does not exist and cannot be created")
+    val running = new File(mainDir, "running")
+    if (! running.createNewFile) throw new Exception("Another process is downloading files to '"+mainDir+"' - stop that process and remove '"+running+"'")
+    try
     {
-      val datePage = new URL(mainPage, date+"/")
+      // 1 - find all dates on the main page, sort them latest first
+      var dates = SortedSet.empty(Ordering.ordered[String].reverse)
       
-      // all the links we need
-      val links = files.map("<a href=\"/"+name+"/"+date+"/"+name+"-"+date+"-"+_+"\">")
+      download(mainPage, mainDir) // creates index.html, although it does not exist on the server
+      eachLine(new File(mainDir, "index.html"), line => DateLink.findAllIn(line).matchData.foreach(dates += _.group(1)))
       
-      // Note: removing elements while iterating is scary but seems to work...
-      eachLine(datePage, line => links.foreach(link => if (line contains link) links -= link))
-      
-      // did we find them all?
-      if (links.isEmpty)
+      // 2 - find date page that has all files we want
+      for (date <- dates) // implicit conversion
       {
-        // 3 - download all files
-        println("date page '"+datePage+"' has all files ["+files.mkString(",")+"]")
-        return downloadFiles(language, date, files)
+        val datePage = new URL(mainPage, date+"/index.html") // here the server uses index.html
+        val dateDir = new File(mainDir, date)
+        if (! dateDir.exists && ! dateDir.mkdirs) throw new Exception("Target directory '"+dateDir+"' does not exist and cannot be created")
+        
+        val complete = new File(dateDir, "complete")
+        
+        var files = for (fileName <- fileNames) yield new File(dateDir, dumpName+"-"+date+"-"+unzipped(fileName)._1)
+        if (complete.exists) {  // previous download process said that this dir is complete
+          if (files.forall(_.exists)) {
+            println("did not download any files to '"+dateDir+"' - all files already complete")
+            return files // yes, all files are there
+          } 
+          complete.delete  // some files missing. maybe previous process was configured for different files?
+        }
+        
+        // all the links we need
+        val links = fileNames.map("<a href=\"/"+dumpName+"/"+date+"/"+dumpName+"-"+date+"-"+_+"\">")
+        
+        download(datePage, dateDir)
+        // Note: removing elements while iterating is scary but seems to work...
+        eachLine(new File(dateDir, "index.html"), line => links.foreach(link => if (line contains link) links -= link))
+        
+        // did we find them all?
+        if (links.isEmpty)
+        {
+          // 3 - download all files
+          println("date page '"+datePage+"' has all files ["+fileNames.mkString(",")+"]")
+          
+          files = for (fileName <- fileNames) yield download(new URL(baseUrl, dumpName+"/"+date+"/"+dumpName+"-"+date+"-"+fileName), dateDir)
+          complete.createNewFile
+          
+          return files
+        }
+        
+        println("date page '"+datePage+"' has no links to ["+links.mkString(",")+"]")
       }
-      
-      println("date page '"+datePage+"' has no links to ["+links.mkString(",")+"]")
     }
+    finally running.delete
     
-    throw new Exception("found no date in "+mainPage+" with files "+files.mkString(","))
+    throw new Exception("found no date in "+mainPage+" with files "+fileNames.mkString(","))
   }
   
-  private def downloadFiles(language : String, date : String, files : Set[String]) : Traversable[File] =
+  private def unzipped(name : String) : (String, InputStream => InputStream) = 
   {
-    val name = dumpName(language)
-    val dir = new File(baseDir, "/"+name+"/"+date)
-    if (! dir.exists && ! dir.mkdirs) throw new Exception("Target directory '"+dir+"' does not exist and cannot be created")
-    files.map(file => download(new URL(baseUrl, name+"/"+date+"/"+name+"-"+date+"-"+file), dir))
+    if (unzip) 
+    {
+      val dot = name.lastIndexOf('.')
+      val ext = name.substring(dot + 1)
+      if(unzippers.contains(ext)) return (name.substring(0, dot), unzippers(ext))
+    }
+    
+    (name, identity)
   }
   
   private def download(url : URL, dir : File) : File =
   {
     val path = url.getPath
-    var name = path.substring(path.lastIndexOf('/') + 1)
-    if (name.isEmpty) throw Usage("cannot download '"+url+"' to a file")
+    var part = path.substring(path.lastIndexOf('/') + 1)
+    if (part.isEmpty) part = "index.html"
     
-    var unzipper : InputStream => InputStream = identity
-    if (unzip)
-    {
-      val dot = name.lastIndexOf('.')
-      val ext = name.substring(dot + 1)
-      if(unzippers.contains(ext))
-      {
-        name = name.substring(0, dot)
-        unzipper = unzippers(ext)
-      }
-    }
+    var (name, unzipper) = unzipped(part)
     
     val file = new File(dir, name)
     
@@ -170,21 +186,14 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
   try { Some(classOf[URLConnection].getMethod("getContentLengthLong")) }
   catch { case nme : NoSuchMethodException => None }
   
-  private val unzippers = Map[String, InputStream => InputStream]("gz" -> { in => in }, "bz2" -> bunzipper)
+  private val unzippers = Map[String, InputStream => InputStream] (
+      "gz" -> { in => new GZIPInputStream(in) }, 
+      "bz2" -> { in => new BZip2CompressorInputStream(in) } 
+  )
   
-  private def gunzipper( in : InputStream ) : InputStream =
+  private def eachLine( file : File, f : String => Unit ) : Unit =
   {
-    new GZIPInputStream(in)
-  }
-  
-  private def bunzipper( in : InputStream ) : InputStream =
-  {
-    new BZip2CompressorInputStream(in)
-  }
-  
-  private def eachLine( url : URL, f : String => Unit ) : Unit =
-  {
-    val source = Source.fromURL(url)(Codec.UTF8)
+    val source = Source.fromFile(file)(Codec.UTF8)
     try
     {
       for (line <- source.getLines) f(line)
@@ -192,6 +201,6 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
     finally source.close
   }
   
-  private def dumpName(language: String) = language.replace('-', '_') + "wiki"
+  private def getDumpName(language: String) = language.replace('-', '_') + "wiki"
   
 }
