@@ -6,9 +6,9 @@ package org.dbpedia.extraction.dump
  * CompletionWriter.write() receives lines with ids. The lines may not be quite in the correct
  * order (because they are written by multiple threads), but must be written in the correct order
  * (otherwise, CompletionReader does not work). This queue helps: it stores elements by their id.
- * CompletionWriter simply adds elements to this queue and calls foreach(). foreach() iterates only
- * over complete ranges and stops at the first gap. At a later point, CompletionWriter will fill
- * that gap.
+ * CompletionWriter simply inserts elements into this queue and calls foreach(). foreach() iterates 
+ * only over complete ranges and stops at the first gap. At a later point, CompletionWriter will 
+ * fill that gap.
  * 
  * Not thread-safe! Use external synchronization.
  * 
