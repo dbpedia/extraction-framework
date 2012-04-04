@@ -35,6 +35,7 @@ object GenerateWikiConfig {
       }
     }
     
+    // pattern for insertion point lines
     val Insert = """// @ insert (\w+) here @ //""".r
   
     val nsSrc = Source.fromFile("src/test/resources/org/dbpedia/extraction/wikiparser/impl/wikipedia/Namespaces.scala.txt")(Codec.UTF8)
@@ -43,10 +44,10 @@ object GenerateWikiConfig {
       try
       {
         for (line <- nsSrc.getLines) line match {
-          case Insert("namespaces") => insertNamespaces(nsDst, namespaceMap)
-          case Insert("aliases") => insertNamespaces(nsDst, aliasMap)
+          case Insert("namespaces") => insertNamespaces(nsDst, "namespaces", namespaceMap)
+          case Insert("aliases") => insertNamespaces(nsDst, "aliases", aliasMap)
           case Insert("errors") => insertErrors(nsDst, errors)
-          case Insert(_) => throw new Exception(line)
+          case Insert(_) => throw new Exception("unknown insertion point "+line)
           case _ => nsDst.write(line); nsDst.write('\n')
         }
       } finally nsDst.close
@@ -60,7 +61,7 @@ object GenerateWikiConfig {
       {
         for (line <- reSrc.getLines) line match {
           case Insert("redirects") => insertRedirects(reDst, redirectMap)
-          case Insert(_) => throw new Exception(line)
+          case Insert(_) => throw new Exception("unknown insertion point "+line)
           case _ => reDst.write(line); reDst.write('\n')
         }
       } finally reDst.close
@@ -69,22 +70,31 @@ object GenerateWikiConfig {
   }
   
   def getLanguages() : List[String] = {
-    val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.ISO8859)
+    val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
     try source.getLines.toList finally source.close
   }
 
-  private def insertNamespaces(dst : Writer, map : mutable.Map[String, mutable.Map[String, Int]] ) : Unit = {
+  private def insertNamespaces(dst : Writer, suffix : String, map : mutable.Map[String, mutable.Map[String, Int]] ) : Unit = {
+    
     var firstLang = true
+    dst.write("    Map(\n")
     for ((language, namespaces) <- map) {
       if (firstLang) firstLang = false else dst.write(",\n") 
-      dst.write("        \""); dst.write(language); dst.write("\" -> Map(\n")
+      dst.write("        \""+language+"\" -> "+language.replace('-', '_')+'_'+suffix)
+    }
+    dst.write("\n    )\n")
+    
+    for ((language, namespaces) <- map) {
+      // We used to generate the map as one huge value, but then constructor code is generated 
+      // that is so long that the JVM  doesn't load it. So we have to use separate functions.
+      dst.write("\n    private def "+language.replace('-','_')+'_'+suffix+" = Map(\n")
       var firstNS = true
       for ((name, code) <- namespaces) {
         if (firstNS) firstNS = false else dst.write(",\n")
         if (name.isEmpty) dst.write("//")
-        dst.write("            \""); dst.write(name); dst.write("\" -> "); dst.write(code.toString);
+        dst.write("        \""+name+"\" -> "+code);
       }
-      dst.write("\n        )")
+      dst.write("\n    )\n")
     }
     dst.write("\n")
   }
