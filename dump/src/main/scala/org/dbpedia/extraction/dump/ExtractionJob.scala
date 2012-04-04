@@ -122,6 +122,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
             {
                 // Note: it would be nice if we could just take() and wait forever, but then
                 // we might be left sleeping at the end when the queue becomes empty.
+                // TODO: use interrupt(), but do it correctly this time
                 val page = pageQueue.poll(100, TimeUnit.MILLISECONDS)
                 if(page != null)
                 {
@@ -157,8 +158,6 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                 }
 
             // Write the extraction success
-            // FIXME: if we let the worker threads write the completion log, they may
-            // shuffle the IDs, which will upset CompletionReader.read().
             completionWriter.write(id, page.title, success)
         }
     }
