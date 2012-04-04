@@ -5,7 +5,7 @@ import _root_.org.dbpedia.extraction.destinations.{FileDestination, CompositeDes
 import _root_.org.dbpedia.extraction.mappings._
 import collection.immutable.ListMap
 import java.util.Properties
-import java.io.{FileReader, File}
+import java.io.{FileInputStream, InputStreamReader, File}
 import _root_.org.dbpedia.extraction.util.StringUtils._
 import _root_.org.dbpedia.extraction.util.Language
 import java.net.URL
@@ -31,7 +31,7 @@ object ConfigLoader
     {
         //Load properties
         val properties = new Properties()
-        properties.load(new FileReader(configFile))
+        properties.load(new InputStreamReader(new FileInputStream(configFile), "UTF-8"))
 
         //Load configuration
         config = new Config(properties)
