@@ -9,6 +9,9 @@ import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
 /**
  * Downloads namespace names, namespace alias names and redirect magic words for a wikipedia 
  * language edition via api.php.
+ * FIXME: This should be used to download the data for just one language and maybe store it in a file 
+ * or simply in memory. (Loading the stuff only takes between .2 and 2 seconds per language.) 
+ * Currently this class is used to generate code for all languages. That's not good.
  */
 class WikiConfigDownloader(language : String) {
   
@@ -45,8 +48,8 @@ private class WikiConfigReader(in : XMLEventAnalyzer) {
     in.document { _ =>
       in.element("api") { _ =>
         in.element("query") { _ => 
-          namespaces = readNS("namespaces")
-          aliases = readNS("namespacealiases")
+          namespaces = readNamespaces("namespaces", true)
+          aliases = readNamespaces("namespacealiases", false)
           redirects = readRedirects()
         }
       }
@@ -55,14 +58,17 @@ private class WikiConfigReader(in : XMLEventAnalyzer) {
     (namespaces, aliases, redirects)
   }
   
-  private def readNS(tag : String ) : mutable.Map[String, Int] = 
+  private def readNamespaces(tag : String, canonical : Boolean) : mutable.Map[String, Int] = 
   {
     val namespaces = mutable.LinkedHashMap[String, Int]()
     in.element(tag) { _ =>
       in.elements("ns") { ns =>
-        val id = ns getAttr "id"
+        val id = (ns getAttr "id").toInt
         in.text { text => 
-          namespaces.put(text, id.toInt)
+          // order is important here - canonical first, because in the reverse map 
+          // it must be overwritten by the localized value.
+          if (canonical && id != 0) namespaces.put(ns getAttr "canonical", id)
+          namespaces.put(text, id)
         }
       }
     }
