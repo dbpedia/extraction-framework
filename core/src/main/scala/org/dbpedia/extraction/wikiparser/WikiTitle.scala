@@ -79,11 +79,15 @@ object WikiTitle
 {
 
     /**
+     * FIXME: parsing mediawiki links correctly cannot be done without a lot of configuration.
+     * Therefore, this method must not be static. It must be part of an object that is instatiated
+     * for each mediawiki instance.
+     * 
      * Parses a (decoded) MediaWiki link
      * @param link MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
      */
-    def parse(link : String, sourceLanguage : Language = Language.Default) =
+    def parse(link : String, sourceLanguage : Language) =
     {
         // TODO: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
 
