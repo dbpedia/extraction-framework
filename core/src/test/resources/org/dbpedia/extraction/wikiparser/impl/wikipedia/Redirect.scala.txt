@@ -1,0 +1,16 @@
+package org.dbpedia.extraction.wikiparser.impl.wikipedia
+
+import org.dbpedia.extraction.util.Language
+
+/**
+ * Holds the redirect identifiers of the different Wikipedia languages. Do not edit Redirect.scala!
+ * GenerateWikiConfig.scala uses the template file Redirect.scala.txt to generate Redirect.scala.
+ */
+object Redirect
+{
+    private val map = Map(
+// @ insert redirects here @ //
+    )
+
+    def apply(language : Language) = map.get(language.wikiCode)
+}

@@ -1,0 +1,48 @@
+package org.dbpedia.extraction.wikiparser.impl.wikipedia
+
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.Namespace
+
+/**
+ * Holds the namespace and alias names of all Wikipedia languages. Do not edit Namespaces.scala!
+ * GenerateNamespaces.scala uses the template file Namespaces.scala.txt to generate Namespaces.scala.
+ */
+object Namespaces
+{
+    private val languageNamespaceMap = Map(
+// @ insert namespaces here @ //
+    )
+
+    private val aliasMap = Map(
+// @ insert aliases here @ //
+    )
+
+// @ insert errors here @ //
+
+    private val reverseMap = languageNamespaceMap.map{
+        case (lang,languageMap) => (lang, languageMap.map{case (name, code) => (code, name)}.toMap)
+    }.toMap
+
+    def getNameForNamespace(language : Language, ns : Namespace) : String =
+    {
+        reverseMap.get(language.wikiCode) match
+        {
+            case Some(m) => m.get(ns.id) match
+            {
+                case Some(namespace) => namespace
+                case None => throw new IllegalArgumentException("namespace number "+ns.id+" not found for language '"+language.wikiCode+"'")
+            }
+            case None => throw new IllegalArgumentException("no namespace identifiers found for language '"+language.wikiCode+"'")
+        }
+    }
+
+    def apply(language : Language, namespace : String) : Option[Int] =
+    {
+        languageNamespaceMap.get(language.wikiCode).getOrElse(Map()).get(namespace) match
+        {
+            case Some(ns) => Some(ns)
+            case None => aliasMap.get(language.wikiCode).getOrElse(Map()).get(namespace)
+        }
+    }
+
+}
