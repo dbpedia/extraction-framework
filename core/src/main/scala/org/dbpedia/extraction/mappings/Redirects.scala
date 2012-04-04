@@ -15,9 +15,12 @@ import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect
  *
  * @param map Redirect map. Contains decoded template titles.
  */
+// FIXME: this class is a hack. Resolving redirects is a central part of DBpedia and should be done
+// right and more explicitly. This class is trying to do too much under the hood.
+// FIXME: this class does basically the same thing as RedirectExtractor, just differently.
 //TODO make map private?
 //TODO language dependent
-class Redirects private(val map : Map[String, String])
+class Redirects(val map : Map[String, String])
 {
     /**
      * Resolves a redirect.
@@ -28,6 +31,9 @@ class Redirects private(val map : Map[String, String])
      */
     def resolve(title : WikiTitle) : WikiTitle =
     {
+        // if there is no redirect for given title, just return same object
+        if (! map.contains(title.decoded)) return title
+        
         //Remember already visited pages to avoid cycles
         val visited = new HashSet[String]()
 
@@ -47,6 +53,9 @@ class Redirects private(val map : Map[String, String])
         title
     }
 
+    /**
+     * TODO: comment. What does this method do?
+     */
     def resolveMap[T](mappings : Map[String, T]) : Map[String, T] =
     {
         val resolvedMappings = new HashMap[String, T]()
@@ -94,7 +103,7 @@ object Redirects
      * If not successful, loads the redirects from a source.
      * Updates the cache after loading the redirects from the source.
      */
-    def load(source : Source, lang : Language = Language.Default) : Redirects =
+    def load(source : Source, lang : Language) : Redirects =
     {
         //Try to load redirects from the cache
         try
@@ -103,7 +112,7 @@ object Redirects
         }
         catch
         {
-            case ex : Exception => logger.log(Level.WARNING, "Could not load redirects from cache ("+lang.wikiCode+"). Details: " + ex.getMessage)
+            case ex : Exception => logger.log(Level.WARNING, "Could not load redirects from cache ("+lang.wikiCode+").", ex)
         }
 
         //Load redirects from source
@@ -128,7 +137,7 @@ object Redirects
     /**
      * Loads the redirects from a cache file.
      */
-    def loadFromCache(lang : Language = Language.Default) : Redirects =
+    private def loadFromCache(lang : Language) : Redirects =
     {
         logger.info("Loading redirects from cache ("+lang.wikiCode+")")
         val inputStream = new ObjectInputStream(Redirects.getClass.getClassLoader.getResourceAsStream(cacheFile + "_" + lang.wikiCode))
@@ -148,7 +157,7 @@ object Redirects
     /**
      * Loads the redirects from a source.
      */
-    def loadFromSource(source : Source, lang : Language = Language.Default) : Redirects =
+    private def loadFromSource(source : Source, lang : Language) : Redirects =
     {
         logger.info("Loading redirects from source ("+lang.wikiCode+")")
 
@@ -164,36 +173,46 @@ object Redirects
     {
         val regex = ("""(?is)\s*(?:""" + Redirect(lang).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[([^\]]+)\]\].*""").r
 
-        override def apply(page : WikiPage) =
+        override def apply(page : WikiPage) : List[(String, String)]=
         {
-            page.source match
-            {
-                case regex(destination) =>
-                {
-                   try
-                   {
-                       val destinationTitle = WikiTitle.parse(destination, page.title.language)
-
-                       if(destinationTitle.namespace == Namespace.Template)
-                       {
-                           List((page.title.decoded, destinationTitle.decoded))
-                       }
-                       else
-                       {
-                           Nil
-                       }
-                   }
-                   catch
-                   {
-                       case ex : WikiParserException =>
-                       {
-                           Logger.getLogger(Redirects.getClass.getName).log(Level.WARNING, "Couldn't parse redirect destination", ex)
-                           Nil
-                       }
-                   }
+            var destinationTitle : WikiTitle = 
+            page.source match {
+                case regex(destination) => {
+                  try {
+                      
+                      WikiTitle.parse(trim(destination, "|#"), page.title.language)
+                  }
+                  catch {
+                      case ex : WikiParserException => {
+                          Logger.getLogger(Redirects.getClass.getName).log(Level.WARNING, "Couldn't parse redirect destination", ex)
+                          null
+                      }
+                  }
                 }
-                case _ => Nil
+                case _ => null 
+            }
+            
+            if (destinationTitle != page.redirect) {
+                Logger.getLogger(Redirects.getClass.getName).log(Level.WARNING, "wrong redirect. page: ["+page.title+"]. found by parser: ["+destinationTitle+"]. found by wikipedia: ["+page.redirect+"]")
+            }
+                       
+            if(destinationTitle != null && page.title.namespace == Namespace.Template && destinationTitle.namespace == Namespace.Template)
+            {
+                List((page.title.decoded, destinationTitle.decoded))
+            }
+            else
+            {
+                Nil
             }
         }
+        
+        private def trim(link : String, chars : String) : String = {
+          var result = link
+          for (char <- chars) {
+            val index = result.indexOf(char)
+            if (index != -1) result = result.substring(0, index)
+          }
+          result
+        } 
     }
 }
