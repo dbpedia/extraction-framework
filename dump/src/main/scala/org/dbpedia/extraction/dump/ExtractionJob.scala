@@ -28,10 +28,6 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
 
     private val pageQueue = new ArrayBlockingQueue[(Int, WikiPage)](20)
     
-    private val completionReader = new CompletionReader(new File(label.replace(' ', '_')+".log"))
-    
-    private val completionWriter = new CompletionWriter(new File(label.replace(' ', '_')+".log.tmp"))
-
     // only accessed by the thread that reads the source, no need to sync or use atomic
     private var currentID = 0
 
@@ -67,7 +63,6 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
             extractionJobs.foreach(_.done)
             extractionJobs.foreach(_.join)
 
-            completionWriter.close()
             destination.close()
 
             logger.info(label + " finished")
@@ -82,22 +77,8 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
         // If we use XMLSource, we probably checked this already, but anyway... 
         if (! namespaces.contains(page.title.namespace)) return 
 
-        try
-        {
-            // check if page has been extracted in a previous (aborted) run
-            val done = completionReader.read(currentID, page.title)
-            if(done) completionWriter.write(currentID, page.title, true) // copy to new file
-            else pageQueue.put((currentID, page))
-            currentID += 1
-        }
-        catch
-        {
-            case ex =>
-            {
-                logger.log(Level.SEVERE, "Inconsistent completion log. Shutting down...", ex)
-                throw new RuntimeException with ControlThrowable
-            }
-        }
+        pageQueue.put((currentID, page))
+        currentID += 1
     }
 
     /**
@@ -156,9 +137,6 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                         false
                     }
                 }
-
-            // Write the extraction success
-            completionWriter.write(id, page.title, success)
         }
     }
 }
