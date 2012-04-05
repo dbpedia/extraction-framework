@@ -124,6 +124,7 @@ abstract class Node(val children : List[Node], val line : Int)
 
         if(section != null)
         {
+            // TODO: URLEncoder is way too much, we want to use IRIs
             sourceUri += "section=" + URLEncoder.encode(section.name, "UTF-8")
             sourceUri += "&relative-line=" + (line - section.line)
             sourceUri += "&absolute-line=" + line
