@@ -70,16 +70,16 @@ class IgnoreList(language : Language) extends Serializable
         else throw new IndexOutOfBoundsException(template + " not found in the ignored properties map.")
     }
 
-    def exportToTextFile(ignoreListTemplatesFileName : String, ignoreListPropertiesFileName : String)
+    def exportToTextFile(ignoreListTemplatesFile : File, ignoreListPropertiesFile : File)
     {
-        printToFile(new File(ignoreListTemplatesFileName))(p =>
+        printToFile(ignoreListTemplatesFile)(p =>
         {
-            templates.foreach(p.println(_))
+            templates.foreach(p.println)
         })
 
-        printToFile(new File(ignoreListPropertiesFileName))(p =>
+        printToFile(ignoreListPropertiesFile)(p =>
         {
-            properties.foreach(p.println(_))
+            properties.foreach(p.println)
         })
 
     }
