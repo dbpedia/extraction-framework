@@ -10,7 +10,7 @@ import java.io.File
 /**
  * Loads all extraction context parameters (ontology pages, mapping pages, ontology) at start-up independently of which extractors are chosen.
  * Is able to update the ontology and the mappings.
- * Updates are executed in synchronized threads.
+ * Updates are executed in synchronized threads. TODO: find nicer solution for the parallelized access. Use a thread-pool. Or actors?
  */
 class DynamicExtractionManager(languages : Traversable[Language], extractors : List[Class[_ <: Extractor]], ontologyFile : File, mappingsDir : File) extends ExtractionManager(languages, extractors, ontologyFile, mappingsDir)
 {
@@ -37,7 +37,6 @@ class DynamicExtractionManager(languages : Traversable[Language], extractors : L
 
     def updateOntologyPage(page : WikiPage)
     {
-        // TODO: could we use an Actor here?
         new Thread()
         {
             override def run()
@@ -60,7 +59,6 @@ class DynamicExtractionManager(languages : Traversable[Language], extractors : L
 
     def removeOntologyPage(title : WikiTitle)
     {
-        // TODO: could we use an Actor here?
         new Thread()
         {
             override def run()
