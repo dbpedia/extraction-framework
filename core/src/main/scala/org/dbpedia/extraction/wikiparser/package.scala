@@ -28,9 +28,11 @@ package object wikiparser {
  * http://noc.wikimedia.org/conf/InitialiseSettings.php.txt // WikiMedia namespace aliases
  * ??? // InterWiki prefixes
  *
- * TODO: we probably only need six of these as constants: 
+ * TODO: we only need six of these as constants: 
  * - Main, File, Template, Category
  * - OntologyClass, OntologyProperty
+ * (- Mapping is used in one class in live)
+ * 
  * The rest are
  * - not used as constants, but retrieved from a language map (mappings)
  * - only used by the title parser and also retrieved from a map
@@ -77,22 +79,21 @@ object Namespace extends Enumeration
     val Category = Value(14)
     val CategoryTalk = Value(15)
 
-    val Portal = Value(100)
-    val PortalTalk = Value(101)
-    // FIXME: at least the following are different on different language wikipedias!
-    // We need to read them from the dump files or from pages like
-    // http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
-    // http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
-    val Author = Value(102)
-    val AuthorTalk = Value(103)
-    val Page = Value(104)
-    val PageTalk = Value(105)
-    val Index = Value(106)
-    val IndexTalk = Value(107)
-    val Book = Value(108)
-    val BookTalk = Value(109)
-    
-    val Wikipedia = Value(150)
+    // the following are used quite differently on different wikipedias, so we use generic names
+    val Namespace100 = Value(100)
+    val Namespace101 = Value(101)
+    val Namespace102 = Value(102)
+    val Namespace103 = Value(103)
+    val Namespace104 = Value(104)
+    val Namespace105 = Value(105)
+    val Namespace106 = Value(106)
+    val Namespace107 = Value(107)
+    val Namespace108 = Value(108)
+    val Namespace109 = Value(109)
+    val Namespace110 = Value(110)
+    val Namespace111 = Value(111)
+    val Namespace112 = Value(112)
+    val Namespace113 = Value(113)
     
     // Namespaces used on http://mappings.dbpedia.org , sorted by number
     // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
