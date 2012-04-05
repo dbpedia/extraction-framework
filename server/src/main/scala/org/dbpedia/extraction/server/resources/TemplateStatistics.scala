@@ -148,10 +148,9 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                     // TODO: Solve problem of templates for which no properties are found in the template documentation (e.g. Geobox).
                     for ((mappingStat, counter) <- sortedStatsMap.filter(_._1.getNumberOfProperties(ignoreList) > 0)) yield
                         {
-                            val decodedTemplateName = createMappingStats.doubleDecode(createMappingStats.encodedTemplateNamespacePrefix, language) + mappingStat.templateName
-                            val encodedTemplateName = createMappingStats.doubleEncode(decodedTemplateName, language)
+                            val templateName = createMappingStats.templateNamespacePrefix + mappingStat.templateName
                             // de and el aren't encoded
-                            val targetRedirect = reversedRedirects.get(encodedTemplateName)
+                            val targetRedirect = reversedRedirects.get(templateName)
 
                             val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties(ignoreList) * 100)
                             val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) * 100)
@@ -159,7 +158,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                             if (langCode != "en") minTempOccurToShow = 49
                             if (counter > minTempOccurToShow)
                             {
-                                var mappingsWikiLink = mappingUrlPrefix + decodedTemplateName.substring(createMappingStats.doubleDecode(createMappingStats.encodedTemplateNamespacePrefix, language).length())
+                                var mappingsWikiLink = mappingUrlPrefix + templateName.substring(createMappingStats.templateNamespacePrefix.length)
                                 var bgcolor: String =
                                     if(!mappingStat.isMapped)
                                     {
@@ -192,10 +191,10 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                                     }
                                     else
                                     {
-                                        mappingsWikiLink = mappingUrlPrefix + redirect.substring(createMappingStats.encodedTemplateNamespacePrefix.length())
+                                        mappingsWikiLink = mappingUrlPrefix + redirect.substring(createMappingStats.templateNamespacePrefix.length)
                                         bgcolor = renameColor
                                         mustRenamed = true
-                                        redirectMsg = "Mapping of " + createMappingStats.doubleDecode(redirect.substring(createMappingStats.encodedTemplateNamespacePrefix.length()), language) + " must be renamed to "
+                                        redirectMsg = "Mapping of " + redirect.substring(createMappingStats.templateNamespacePrefix.length) + " must be renamed to "
                                     }
                                 }
 
