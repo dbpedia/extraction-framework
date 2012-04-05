@@ -55,48 +55,18 @@ class CreateMappingStats(val language: Language)
 
     val percentageFileName = "src/main/resources/percentage." + language.wikiCode
 
-    val encodedTemplateNamespacePrefix = doubleEncode(Namespaces.getName(language, Namespace.Template) + ":", language)
+    val templateNamespacePrefix = Namespaces.getName(language, Namespace.Template) + ":"
     private val resourceNamespacePrefix = OntologyNamespaces.getResource("", language)
 
     private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> \.""".r
     private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.*)"\S* \.""".r
 
-    /**
-     * FIXME: A method like this should be shot. Just kill it. Delete all traces of its existence. JC 2012-03-25
-     */
-    def doubleDecode(string: String, lang: Language): String =
-    {
-        WikiUtil.wikiDecode(string, lang)
-        // URLDecoder.decode(WikiUtil.wikiDecode(string, lang), "UTF-8")
-    }
-
-    /**
-     * FIXME: A method like this should be shot. Just kill it. Delete all traces of its existence. JC 2012-03-25
-     */
-    def doubleEncode(string: String, lang: Language): String =
-    {
-        WikiUtil.wikiEncode(string, lang)
-        // URLEncoder.encode(WikiUtil.wikiEncode(string, lang), "UTF-8")
-    }
-
-    def isTemplateNamespaceEncoded(template: String): Int =
-    {
-        if (template startsWith encodedTemplateNamespacePrefix) 1
-        else if (template startsWith doubleDecode(encodedTemplateNamespacePrefix, language)) 0
-        else -1
-    }
-
     def getDecodedTemplateName(rawTemplate: String): String =
     {
         var templateName = ""
-        if (isTemplateNamespaceEncoded(rawTemplate) == 1)
+        if (rawTemplate startsWith templateNamespacePrefix)
         {
-            templateName = doubleDecode(rawTemplate.substring(encodedTemplateNamespacePrefix.length()), language)
-        }
-        else if (isTemplateNamespaceEncoded(rawTemplate) == 0)
-        {
-            val subLength = doubleDecode(encodedTemplateNamespacePrefix, language).length()
-            templateName = rawTemplate.substring(subLength).replace("_", " ")
+            templateName = rawTemplate.substring(templateNamespacePrefix.length)
         }
         else
         {
@@ -178,7 +148,7 @@ class CreateMappingStats(val language: Language)
         val redirects: Map[String, String] = loadTemplateRedirects(redirectsFile)
         println("  " + redirects.size + " redirects")
         
-        println("Using Template namespace prefix " + encodedTemplateNamespacePrefix + " for language " + language.wikiCode)
+        println("Using Template namespace prefix " + templateNamespacePrefix + " for language " + language.wikiCode)
         
         println("Counting templates in " + infoboxPropsFile)
         countTemplates(infoboxPropsFile, templatesMap, redirects)
@@ -210,16 +180,6 @@ class CreateMappingStats(val language: Language)
                 {
                     val templateName = stripUri(subj)
                     //TODO: adjust depending on encoding in redirects file
-                    var templateNamespacePrefix = ""
-                    if (language.wikiCode == "de" || language.wikiCode == "el" || language.wikiCode == "ru")
-                    {
-                        templateNamespacePrefix = doubleDecode(encodedTemplateNamespacePrefix, language)
-                    }
-                    else
-                    {
-                        templateNamespacePrefix = encodedTemplateNamespacePrefix
-                    }
-                    
                     if (templateName startsWith templateNamespacePrefix)
                     {
                         redirects = redirects.updated(templateName, stripUri(obj))
@@ -585,15 +545,13 @@ object CreateMappingStats
     private def serialize(file: File, wikiStats: WikipediaStats)
     {
         val output = new ObjectOutputStream(new FileOutputStream(file))
-        output.writeObject(wikiStats)
-        output.close()
+        try output.writeObject(wikiStats) finally output.close()
     }
 
     def deserialize(file: File): WikipediaStats =
     {
         val input = new ObjectInputStream(new FileInputStream(file))
-        val m = input.readObject()
-        input.close()
+        val m = try input.readObject() finally input.close()
         m.asInstanceOf[WikipediaStats]
     }
 
