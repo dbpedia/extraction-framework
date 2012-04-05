@@ -35,21 +35,24 @@ object Server
 
     private var _extractor : ExtractionManager = null
 
-    private var password : String = null
+    def statsDir : File = _statsDir
+    
+    private var _statsDir : File = null
 
-    def adminRights(pass : String) : Boolean = password == pass
+    def adminRights(pass : String) : Boolean = _password == pass
+
+    private var _password : String = null
 
     @volatile private var running = true
 
     def main(args : Array[String])
     {
-        require(args != null && args.length >= 1, "need password for template ignore list")
-        require(args(0).length >= 4, "password for template ignore list must be at least four characters long, got ["+args(0)+"]")
-        
-        password = args(0)
+        require(args != null && args.length >= 2, "need at least two args: password for template ignore list and base dir for statistics")
+        _password = args(0)
+        _statsDir = new File(args(1))
 
-        var ontologyFile = if (args.length >= 2 && args(1).nonEmpty) new File(args(1)) else null
-        var mappingsDir = if (args.length >= 3 && args(2).nonEmpty) new File(args(2)) else null
+        var ontologyFile = if (args.length >= 3 && args(2).nonEmpty) new File(args(2)) else null
+        var mappingsDir = if (args.length >= 4 && args(3).nonEmpty) new File(args(3)) else null
         
         _extractor = new DynamicExtractionManager(config.languages, config.extractors, ontologyFile, mappingsDir)
         
