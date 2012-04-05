@@ -80,6 +80,17 @@ object Namespace extends Enumeration
     val CategoryTalk = Value(15)
 
     // the following are used quite differently on different wikipedias, so we use generic names
+    // most languages use 100-113, but hu uses 90-99.
+    val Namespace90 = Value(90)
+    val Namespace91 = Value(91)
+    val Namespace92 = Value(92)
+    val Namespace93 = Value(93)
+    val Namespace94 = Value(94)
+    val Namespace95 = Value(95)
+    val Namespace96 = Value(96)
+    val Namespace97 = Value(97)
+    val Namespace98 = Value(98)
+    val Namespace99 = Value(99)
     val Namespace100 = Value(100)
     val Namespace101 = Value(101)
     val Namespace102 = Value(102)
