@@ -9,7 +9,6 @@ import java.util.concurrent.{ArrayBlockingQueue}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable
 import java.net.URLEncoder
-import org.dbpedia.extraction.dump.{CompletionWriter, CompletionReader}
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
 import java.io.{InvalidClassException, File}
 import org.dbpedia.extraction.util.Language
@@ -34,10 +33,6 @@ class LiveExtractionJob(extractor : Extractor, source : Source, language : Langu
     //def progress = _progress
 
     private val pageQueue = new ArrayBlockingQueue[(Int, WikiPage, LiveUpdateDestination)](20)
-
-    private val completionReader = new CompletionReader(new File("./live/" + URLEncoder.encode(label, "UTF-8")))
-
-    //private val completionWriter = new CompletionWriter(new File("./" + URLEncoder.encode(label, "UTF-8") + ".tmp"))
 
     private var currentID = 0
 
@@ -102,9 +97,8 @@ class LiveExtractionJob(extractor : Extractor, source : Source, language : Langu
 
         try
         {
-            val done = completionReader.read(currentID, page.title)
             destination = new LiveUpdateDestination(page.title.toString, language.locale.getLanguage, page.id.toString);
-            if(!done) pageQueue.put((currentID, page, destination))
+            pageQueue.put((currentID, page, destination))
             currentID += 1
         }
         catch
