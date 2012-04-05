@@ -9,7 +9,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Information about a Wikipedia.
  */
-case class WikiInfo(language : String, pages : Int)
+class WikiInfo(val language : String, val pages : Int)
 
 /**
  * Helper methods to create WikiInfo objects.
@@ -25,14 +25,12 @@ object WikiInfo
     
   def fromFile( file : File, codec : Codec ) : Seq[WikiInfo] = {
     val source = Source.fromFile(file)(codec)
-    try fromSource(source)
-    finally source.close
+    try fromSource(source) finally source.close
   }
   
   def fromURL( url : URL, codec : Codec ) : Seq[WikiInfo] = {
     val source = Source.fromURL(url)(codec)
-    try fromSource(source)
-    finally source.close
+    try fromSource(source) finally source.close
   }
   
   def fromSource( source : Source ) : Seq[WikiInfo] = { 
@@ -40,7 +38,7 @@ object WikiInfo
   }
   
   /**
-  * Retrieves a list of all available Wikipedias from a CSV file like
+  * Retrieves a list of all available Wikipedias from a CSV file like http://s23.org/wikistats/wikipedias_csv
   * 
   */
   def fromLines( lines : Iterator[String] ) : Seq[WikiInfo] = {    
@@ -63,7 +61,7 @@ object WikiInfo
       if (fields.length != 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
       
       val pages = try fields(5).toInt
-        catch { case nfe : NumberFormatException => throw new Exception("expected page count in field with index [5], found line ["+line+"]") }
+      catch { case nfe : NumberFormatException => throw new Exception("expected page count in field with index [5], found line ["+line+"]") }
       
       val wikiCode = fields(2)
       if (! Language.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
