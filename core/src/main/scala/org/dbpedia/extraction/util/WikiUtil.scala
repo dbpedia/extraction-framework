@@ -64,6 +64,7 @@ object WikiUtil
         // See http://svn.wikimedia.org/viewvc/mediawiki/trunk/phase3/includes/GlobalFunctions.php?r1=38683&r2=38908
         // I think we're free to do as we choose as long as we produce valid URIs.
         // jc@sahnwaldt.de 2012-03-05
+        // TODO: use IRIs, remove these lines
         encoded = URLEncoder.encode(encoded, "UTF-8");
         encoded = encoded.replace("%3A", ":");
         encoded = encoded.replace("%2F", "/");
