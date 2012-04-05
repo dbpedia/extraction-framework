@@ -10,12 +10,15 @@ import org.dbpedia.extraction.util.StringUtils._
 object WikiUtil
 {
     /**
-     * replace underscores by spaces, normalize duplicate spaces, trim spaces from start and end
-     * @param string string using '_' instead of ' '
+     * replace underscores by spaces, replace non-breaking space by normal space, 
+     * normalize duplicate spaces, trim spaces from start and end
+     * TODO: also remove exotic whitespace like \u200C\u200E\u200F\u2028
+     * See WikiTitle.replace() and its use in WikiTitle.parse().
+     * @param string string possibly using '_' instead of ' '
      */
     def cleanSpace( string : String ) : String =
     {
-        string.replace('_', ' ').replaceAll(" +", " ").trim
+        string.replace('_', ' ').replace('\u00A0','\u0020').replaceAll(" +", " ").trim
     }
     
     /**
