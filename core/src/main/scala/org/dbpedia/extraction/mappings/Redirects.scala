@@ -160,15 +160,21 @@ object Redirects
 
         val redirectFinder = new RedirectFinder(lang)
 
+        // TODO: usually, flatMap can be applied to Option, but not here. That's why
+        // RedirectFinder.apply returns a List, not an Option. Some implicit missing?
         val redirects = new Redirects(source.flatMap(redirectFinder).toMap)
 
         logger.info("Redirects loaded from source ("+lang.wikiCode+")")
         redirects
     }
 
-    private class RedirectFinder(lang : Language) extends (WikiPage => Traversable[(String, String)])
+    private class RedirectFinder(lang : Language) extends (WikiPage => List[(String, String)])
     {
-        val regex = ("""(?is)\s*(?:""" + Redirect(lang).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[([^\]\n]+)\]\].*""").r
+        // (?ius) enables CASE_INSENSITIVE UNICODE_CASE DOTALL
+        // case insensitive and unicode are important - that's what mediawiki does.
+        // DOTALL means that . also matches line terminators.
+        // Note: Although we do not specify a Locale, UNICODE_CASE does mostly the right thing.
+        val regex = ("""(?ius)\s*(?:""" + Redirect(lang).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[([^\]\n]+)\]\].*""").r
 
         override def apply(page : WikiPage) : List[(String, String)]=
         {
@@ -190,7 +196,7 @@ object Redirects
             }
             
             if (destinationTitle != page.redirect) {
-                Logger.getLogger(Redirects.getClass.getName).log(Level.WARNING, "wrong redirect. page: ["+page.title+"]. found by parser: ["+destinationTitle+"]. found by wikipedia: ["+page.redirect+"]")
+                Logger.getLogger(Redirects.getClass.getName).log(Level.WARNING, "wrong redirect. page: ["+page.title+"].\nfound by parser:    ["+destinationTitle+"].\nfound by wikipedia: ["+page.redirect+"]")
             }
                        
             if(destinationTitle != null && page.title.namespace == Namespace.Template && destinationTitle.namespace == Namespace.Template)
