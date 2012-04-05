@@ -13,26 +13,9 @@ object NonIsoLanguagesMappingTest
     //TODO make this a proper Scala Test class
     def main(args : Array[String])
     {
-        // get all existing language codes for which a Wikipedia exists from s23.org
-        val source = Source.fromURL("http://s23.org/wikistats/wikipedias_csv.php")(Codec.UTF8)
-        val wikiInfoLines =
-        {
-            try
-            {
-                source.getLines.toList.tail.filter(!_.isEmpty)
-            }
-            finally source.close
-        }
-        val wikiLanguageCodes = wikiInfoLines.map{ line =>
-        {
-            line.split(',').map(_.trim).toList match
-            {
-               case rank :: id :: prefix :: language :: loclang :: good :: total :: edits :: views :: admins :: users ::
-                       activeusers :: images :: stubratio :: timestamp :: Nil => prefix
-               case _ => throw new IllegalArgumentException("Unexpected format in line '" + line + "'")
-            }
-        }}
-
+        // get all existing language codes for which a Wikipedia exists
+        val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
+        val wikiLanguageCodes = try source.getLines.toList finally source.close
 
         // get all ISO 639-1 language codes
         val isoLanguageCodes = Locale.getISOLanguages

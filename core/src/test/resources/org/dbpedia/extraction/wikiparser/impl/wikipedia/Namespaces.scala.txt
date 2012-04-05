@@ -2,6 +2,8 @@ package org.dbpedia.extraction.wikiparser.impl.wikipedia
 
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
+import scala.collection.mutable.LinkedHashMap
+import scala.collection.Map
 
 /**
  * Holds the namespace and alias names of all Wikipedia languages. Do not edit Namespaces.scala!
@@ -9,38 +11,39 @@ import org.dbpedia.extraction.wikiparser.Namespace
  */
 object Namespaces
 {
-    private val languageNamespaceMap : Map[String, Map[String, Int]] = 
+    private def namespaces : Map[String, Map[String, Int]] = 
 // @ insert namespaces here @ //
-
-    private val aliasMap : Map[String, Map[String, Int]] =
-// @ insert aliases here @ //
 
 // @ insert errors here @ //
 
-    private val reverseMap = languageNamespaceMap.map{
-        case (lang,languageMap) => (lang, languageMap.map{case (name, code) => (code, name)}.toMap)
-    }.toMap
-
-    def getNameForNamespace(language : Language, ns : Namespace) : String =
+    private val (names, codes) =
     {
-        reverseMap.get(language.wikiCode) match
-        {
-            case Some(m) => m.get(ns.id) match
-            {
-                case Some(namespace) => namespace
-                case None => throw new IllegalArgumentException("namespace number "+ns.id+" not found for language '"+language.wikiCode+"'")
-            }
-            case None => throw new IllegalArgumentException("no namespace identifiers found for language '"+language.wikiCode+"'")
+        val ns = namespaces
+        
+        val names = for ((wiki, spaces) <- ns) yield {
+            val rev = for ((name, code) <- spaces) yield (code, name)
+            (wiki, rev.toMap)
         }
+        
+        val codes = for ((wiki, spaces) <- ns) yield {
+            val locale = Language(wiki).locale
+            val low = for ((name, code) <- spaces) yield (name.toLowerCase(locale), code)
+            (wiki, low.toMap)
+        }
+        
+        (names.toMap, codes.toMap)
     }
 
-    def apply(language : Language, namespace : String) : Option[Int] =
+    def getName(lang : Language, ns : Namespace) : String =
     {
-        languageNamespaceMap.get(language.wikiCode).getOrElse(Map()).get(namespace) match
-        {
-            case Some(ns) => Some(ns)
-            case None => aliasMap.get(language.wikiCode).getOrElse(Map()).get(namespace)
-        }
+        val n = names.getOrElse(lang.wikiCode, throw new IllegalArgumentException("no namespace names found for language '"+lang.wikiCode+"'"))
+        n.getOrElse(ns.id, throw new IllegalArgumentException("namespace number "+ns.id+" not found for language '"+lang.wikiCode+"'")) 
+    }
+
+    def getCode(lang : Language, ns : String) : Option[Int] =
+    {
+        val c = codes.getOrElse(lang.wikiCode, throw new IllegalArgumentException("no namespace codes found for language '"+lang.wikiCode+"'"))
+        c.get(ns.toLowerCase(lang.locale))
     }
 
 }

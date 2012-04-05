@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.wikiparser
 
 import java.util.Locale
-import scala.collection.mutable.HashMap
+import java.lang.StringBuilder
+
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.util.StringUtils._
-import java.net.URLEncoder
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
+import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+import org.dbpedia.util.text.ParseExceptionIgnorer
+import org.dbpedia.util.text.uri.UriDecoder
 
 /**
  * Represents a page title.
@@ -15,7 +17,7 @@ import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
  * @param namespace Namespace used to be optional, but that leads to mistakes
  * @param language Language used to be optional, but that leads to mistakes
  */
-class WikiTitle(val decoded : String, val namespace : Namespace, val language : Language, val isInterlanguageLink : Boolean = false)
+class WikiTitle (val decoded : String, val namespace : Namespace, val language : Language, val isInterlanguageLink : Boolean = false, val fragment : String = null)
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
@@ -35,7 +37,7 @@ class WikiTitle(val decoded : String, val namespace : Namespace, val language : 
         {
           name
         }
-        else
+        else 
         {
           val ns = Namespace.getNamespaceName(language, namespace)
           (if (encode) WikiUtil.wikiEncode(ns, language) else ns)+ ":" + name
@@ -48,50 +50,67 @@ class WikiTitle(val decoded : String, val namespace : Namespace, val language : 
     val sourceUri = "http://" + language.wikiCode + ".wikipedia.org/wiki/"  + encodedWithNamespace
     
     /**
-     * TODO: the string is confusing. For a half hour I thought that the titles I saw in a log file
-     * were the ones used by Wikipedia and was baffled. I think we should change this method to
-     * return something like decodedWithNamespace+" ["+language+"]".
-     * 
-     * Problem: find out if some code relies on the current result format of this method 
-     * and fix that code. Then change this method.
+     * Returns useful info.
      */
-    override def toString() = language + ":" + decodedWithNamespace
+    override def toString() = {
+      val frag = if (fragment == null) "" else ";fragment='"+fragment+"'"
+      "title='"+decoded+"';ns="+namespace.id+"/"+namespace+"/"+Namespace.getNamespaceName(language, namespace)+";language:"+language+frag;
+    }
 
     /**
-     * FIXME: this method must also take into account the language. Problem: find out if some code 
-     * relies on the current behavior of this method and fix that code. Then change this method.
-     * Also change hashCode.
+     * TODO: also use fragment?
      */
     override def equals(other : Any) = other match
     {
-        case otherTitle : WikiTitle => (namespace == otherTitle.namespace && decoded == otherTitle.decoded)
+        case title : WikiTitle => (language == title.language && namespace == title.namespace && decoded == title.decoded)
         case _ => false
     }
 
     /**
-     * TODO: when equals() is fixed, also use language here.
      * TODO: do as Josh says in Effective Java, chapter 3.
+     * TODO: also use fragment?
      */
-    override def hashCode() = decoded.hashCode ^ namespace.hashCode
+    override def hashCode() = language.hashCode ^ decoded.hashCode ^ namespace.hashCode
 }
     
 object WikiTitle
 {
-
     /**
+     * Parses a MediaWiki link or title.
+     * 
      * FIXME: parsing mediawiki links correctly cannot be done without a lot of configuration.
      * Therefore, this method must not be static. It must be part of an object that is instatiated
      * for each mediawiki instance.
      * 
-     * Parses a (decoded) MediaWiki link
+     * FIXME: rules for links are different from those for titles. We should have distinct methods
+     * for these two use cases.
+     * 
      * @param link MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
      */
-    def parse(link : String, sourceLanguage : Language) =
+    def parse(title : String, sourceLanguage : Language) =
     {
+        val coder = new HtmlCoder(XmlCodes.NONE)
+        coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
+        var decoded = coder.code(title)
+        // Note: Maybe the following line decodes too much, but it seems to be 
+        // quite close to what MediaWiki does.
+        decoded = UriDecoder.decode(decoded)
+        
+        // replace NBSP by SPACE, remove exotic whitespace
+        decoded = replace(decoded, "\u00A0\u200E\u2028", " ")
+        
+        var fragment : String = null
+        
+        val hash = decoded.indexOf('#')
+        if (hash != -1) {
+          fragment = decoded.substring(hash + 1)
+          decoded = decoded.substring(0, hash)
+        }
+        
         // TODO: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
 
-        var parts = link.split(":", -1).toList
+        var parts = decoded.split(":", -1).toList
 
         var leadingColon = false
         var isInterlanguageLink = false
@@ -119,7 +138,7 @@ object WikiTitle
         //Check if it contains a namespace
         if(!parts.isEmpty && !parts.tail.isEmpty)
         {
-            for (ns <- Namespace.getNamespace(language, parts.head))
+            for (ns <- Namespace.get(language, parts.head))
             {
                  namespace = ns
                  parts = parts.tail
@@ -127,19 +146,40 @@ object WikiTitle
         }
 
         //Create the title name from the remaining parts
+        // FIXME: MediaWiki doesn't capitalize links to other wikis
         val decodedName = WikiUtil.cleanSpace(parts.mkString(":")).capitalizeLocale(sourceLanguage.locale)
 
-        new WikiTitle(decodedName, namespace, language, isInterlanguageLink)
+        new WikiTitle(decodedName, namespace, language, isInterlanguageLink, fragment)
     }
-
+    
     /**
-     * Parses an encoded MediaWiki link
-     * @param link encoded MediaWiki link e.g. "Template:Infobox_Automobile"
-     * @param sourceLanguage The source language of this link
+     * return a copy of the first string in which all occurrences of chars from the second string
+     * have been replaced by the corresponding char from the third string. If there is no
+     * corresponding char (i.e. the third string is shorter than the second one), the affected
+     * char is removed.
      */
-    def parseEncoded(encodedLink : String, sourceLanguage : Language = Language.Default) : WikiTitle =
+    private def replace(str : String, chars : String, replace : String) : String = 
     {
-        parse(WikiUtil.wikiDecode(encodedLink, sourceLanguage), sourceLanguage)
+      var sb : StringBuilder = null
+      var last = 0
+      var pos = 0
+      
+      while (pos < str.length)
+      {
+        val index = chars.indexOf(str.charAt(pos))
+        if (index != -1)
+        {
+          if (sb == null) sb = new StringBuilder()
+          sb.append(str, last, pos)
+          if (index < replace.length) sb.append(replace.charAt(index))
+          last = pos + 1
+        }
+        
+        pos += 1
+      }
+      
+      if (sb != null) sb.append(str, last, str.length)
+      if (sb == null) str else sb.toString
     }
 
 }

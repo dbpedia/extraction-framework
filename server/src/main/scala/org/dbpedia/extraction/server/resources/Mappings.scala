@@ -70,7 +70,7 @@ class Mappings(@PathParam("lang") langCode : String)
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get mappings page: " + title)
-        Server.extractor.mappingPageSource(language).find(_.title == WikiTitle.parseEncoded(title))
+        Server.extractor.mappingPageSource(language).find(_.title == WikiTitle.parse(title, language))
                                                  .getOrElse(throw new Exception("No mapping found for " + title)).toXML
     }
 
@@ -108,7 +108,7 @@ class Mappings(@PathParam("lang") langCode : String)
     @Consumes(Array("application/xml"))
     def deletePage(@PathParam("title") @Encoded title : String)
     {
-        Server.extractor.removeMappingPage(WikiTitle.parseEncoded(title), language)
+        Server.extractor.removeMappingPage(WikiTitle.parse(title, language), language)
         logger.info("Deleted mapping page: " + title)
     }
 
@@ -140,7 +140,7 @@ class Mappings(@PathParam("lang") langCode : String)
         var nodes = new NodeBuffer()
         val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
         nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
-        nodes += Server.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parseEncoded(title) :: Nil, Server.config.wikiApiUrl), language)
+        nodes += Server.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parse(title, language) :: Nil, Server.config.wikiApiUrl), language)
         nodes
     }
 
@@ -194,7 +194,7 @@ class Mappings(@PathParam("lang") langCode : String)
     def getExtractionSample(@PathParam("title") @Encoded title : String) : String =
     {
         //Get the title of the mapping as well as its corresponding template on Wikipedia
-        val mappingTitle = WikiTitle.parseEncoded(title, language)
+        val mappingTitle = WikiTitle.parse(title, language)
         val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, mappingTitle.language)
 
         //Find pages which use this mapping

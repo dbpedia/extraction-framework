@@ -18,7 +18,7 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
     
     /**
      */
-    override def toString() = "wiki: ["+wikiCode+"] locale: ["+locale+"]"
+    override def toString() = "wiki="+wikiCode+",locale="+locale.getLanguage
     
     // no need to override equals() and hashCode() - there is only one object for each value, so equality means identity. 
 }
@@ -135,7 +135,25 @@ object Language extends (String => Language)
           "chy" -> "en",           // Cheyenne
           "cho" -> "en",           // Choctaw
           "mus" -> "en",           // Muscogee / Creek
-          "nan" -> "zh"            // redirect to zh-min-nan
+          "nan" -> "zh",           // redirect to zh-min-nan
+          "xmf" -> "ka",
+          "rue" -> "uk",
+          "pfl" -> "de",
+          "vep" -> "fi",
+          "nso" -> "st",
+          "epo" -> "eo",
+          "dk"  -> "da",
+          "cz"  -> "cs",
+          "ltg" -> "lv",
+          "gag" -> "tr",
+          "bjn" -> "id",
+          "zh-cfr" -> "zh",
+          "lez" -> "ru",
+          "mrj" -> "ru",
+          "jp"  -> "ja",
+          "kbd" -> "ru",
+          "minnan" -> "zh",
+          "koi" -> "ru"
       )
       
       for (iso <- isoCodes) languages(iso) = new Language(iso, iso)

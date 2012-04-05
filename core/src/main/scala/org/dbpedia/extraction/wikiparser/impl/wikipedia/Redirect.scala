@@ -9,6 +9,7 @@ import org.dbpedia.extraction.util.Language
 object Redirect
 {
     private val map = Map(
+        "commons" -> Set("#REDIRECT"),
         "aa" -> Set("#REDIRECT"),
         "ab" -> Set("#перенаправление","#перенапр","#REDIRECT"),
         "ace" -> Set("#ALIH","#REDIRECT"),

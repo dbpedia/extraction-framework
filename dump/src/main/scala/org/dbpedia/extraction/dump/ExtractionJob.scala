@@ -152,7 +152,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                     case ex : Exception =>
                     {
                         progress.failedPages.incrementAndGet
-                        logger.log(Level.INFO, "Error processing page '" + page.title + "'", ex)
+                        logger.log(Level.WARNING, "Error processing page '" + page.title + "'", ex)
                         false
                     }
                 }

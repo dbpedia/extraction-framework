@@ -522,7 +522,7 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
         val context = new
         {
             def language : Language = lang
-            def redirects : Redirects = Redirects.load(new MemorySource(), lang)
+            def redirects : Redirects = new Redirects(Map())
         }
         val dateParser = new DateTimeParser(context, new Datatype(datatype), false)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), null, 0, 0, input)

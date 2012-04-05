@@ -292,7 +292,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
     private def parse(language : String, datatypeName : String, input : String) : Option[Double] =
     {
         val lang = Language(language)
-        val red = Redirects.load(new MemorySource(), lang)
+        val red = new Redirects(Map())
         val context = new
         {
             def ontology : Ontology = throw new Exception("please test without requiring the ontology")

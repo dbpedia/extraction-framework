@@ -15,7 +15,10 @@ import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
  */
 class WikiConfigDownloader(language : String) {
   
-  val url = new URL("http://"+language+".wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords")
+  val url = new URL("http://"+host(language)+"/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords")
+  
+  private def host(language : String) : String =
+    language+"."+(if (language == "commons") "wikimedia" else "wikipedia")+".org"
     
   /**
    * @return namespaces (name -> code), namespace aliases (name -> code), redirect tags

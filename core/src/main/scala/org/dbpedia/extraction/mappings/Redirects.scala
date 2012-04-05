@@ -95,20 +95,17 @@ object Redirects
 {
     private val logger = Logger.getLogger(classOf[Redirects].getName)
 
-    //TODO find a general solution for caches
-    private val cacheFile = "redirects"
-
     /**
      * Tries to load the redirects from a cache file.
      * If not successful, loads the redirects from a source.
      * Updates the cache after loading the redirects from the source.
      */
-    def load(source : Source, lang : Language) : Redirects =
+    def load(source : Source, cache : File, lang : Language) : Redirects =
     {
         //Try to load redirects from the cache
         try
         {
-           return loadFromCache(lang)
+           return loadFromCache(cache)
         }
         catch
         {
@@ -117,19 +114,19 @@ object Redirects
 
         //Load redirects from source
         val redirects = loadFromSource(source, lang)
-
-        //TODO Write redirects to the cache
-        //new File(cacheFile).getParentFile.mkdirs()
-//        val outputStream = new ObjectOutputStream(new FileOutputStream(cacheFile + "_" + lang.wikiCode))
-//        try
-//        {
-//            outputStream.writeObject(redirects.map)
-//        }
-//        finally
-//        {
-//            outputStream.close()
-//        }
-//        logger.info(redirects.map.size + " redirects written to cache")
+        
+        val dir = cache.getParentFile
+        if (! dir.exists && ! dir.mkdir) throw new IOException("cache dir ["+dir+"] does not exist and cannot be created")
+        val outputStream = new ObjectOutputStream(new FileOutputStream(cache))
+        try
+        {
+            outputStream.writeObject(redirects.map)
+        }
+        finally
+        {
+            outputStream.close()
+        }
+        logger.info(redirects.map.size + " redirects written to cache file "+cache)
 
         redirects
     }
@@ -137,15 +134,15 @@ object Redirects
     /**
      * Loads the redirects from a cache file.
      */
-    private def loadFromCache(lang : Language) : Redirects =
+    private def loadFromCache(cache : File) : Redirects =
     {
-        logger.info("Loading redirects from cache ("+lang.wikiCode+")")
-        val inputStream = new ObjectInputStream(Redirects.getClass.getClassLoader.getResourceAsStream(cacheFile + "_" + lang.wikiCode))
+        logger.info("Loading redirects from cache file "+cache)
+        val inputStream = new ObjectInputStream(new FileInputStream(cache))
         try
         {
             val redirects = new Redirects(inputStream.readObject().asInstanceOf[Map[String, String]])
 
-            logger.info(redirects.map.size + " redirects loaded from cache ("+lang.wikiCode+")")
+            logger.info(redirects.map.size + " redirects loaded from cache file "+cache)
             redirects
         }
         finally
@@ -180,7 +177,7 @@ object Redirects
                 case regex(destination) => {
                   try {
                       
-                      WikiTitle.parse(trim(destination, "|#"), page.title.language)
+                      WikiTitle.parse(trim(destination, "|"), page.title.language)
                   }
                   catch {
                       case ex : WikiParserException => {
