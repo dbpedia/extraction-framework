@@ -7,7 +7,7 @@ import java.util.Locale
  */
 class Language private(val wikiCode : String, val isoCode: String) extends Serializable
 {
-    // TODO: make this transient and add a readResolve method
+    // TODO: make this transient and add a readObject method
     val locale : Locale = new Locale(isoCode)
     
     /** 
@@ -17,12 +17,8 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
     val filePrefix = wikiCode.replace("-", "_")
     
     /**
-     * TODO: this method should return the wikiCode AND the locale, e.g. "wiki: ["+wikiCode+"] locale: ["+locale+"]"
-     * 
-     * Problem: find out if some code relies on the result of this method and fix that code.
-     * Then change this method.
      */
-    override def toString() = locale.toString
+    override def toString() = "wiki: ["+wikiCode+"] locale: ["+locale+"]"
     
     // no need to override equals() and hashCode() - there is only one object for each value, so equality means identity. 
 }
