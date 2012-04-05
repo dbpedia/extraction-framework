@@ -55,7 +55,7 @@ class CreateMappingStats(val language: Language)
 
     val percentageFileName = "src/main/resources/percentage." + language.wikiCode
 
-    val encodedTemplateNamespacePrefix = doubleEncode(Namespaces.getNameForNamespace(language, Namespace.Template) + ":", language)
+    val encodedTemplateNamespacePrefix = doubleEncode(Namespaces.getName(language, Namespace.Template) + ":", language)
     private val resourceNamespacePrefix = OntologyNamespaces.getResource("", language)
 
     private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> \.""".r
@@ -522,7 +522,7 @@ object CreateMappingStats
 
         def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping]) =
         {
-            val templateNamespacePrefix = Namespaces.getNameForNamespace(language, Namespace.Template) + ":"
+            val templateNamespacePrefix = Namespaces.getName(language, Namespace.Template) + ":"
             val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, language).substring(templateNamespacePrefix.length())))
             mappedRedirrects.map(_.swap)
         }

@@ -147,7 +147,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                     case ex : Exception =>
                     {
                         _progress.synchronized(_progress.failedPages += 1)
-                        logger.log(Level.INFO, "Error processing page '" + page.title + "'", ex)
+                        logger.log(Level.WARNING, "Error processing page '" + page.title + "'", ex)
                         false
                     }
                 }

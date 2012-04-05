@@ -26,7 +26,7 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
 
     src.foreach(CurrentWikiPage =>
       {
-          val mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.title.toString, Language.Default)
+          val mappingTitle = WikiTitle.parse(CurrentWikiPage.title.toString, Language.Default)
           val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, Language.Default)
 
           //val wikiApiUrl = new URL("http://" + Language.Default.wikiCode + ".wikipedia.org/w/api.php")

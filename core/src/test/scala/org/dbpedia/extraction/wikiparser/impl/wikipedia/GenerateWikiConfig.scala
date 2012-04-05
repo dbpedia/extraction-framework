@@ -14,17 +14,17 @@ object GenerateWikiConfig {
     
     val namespaceMap = mutable.LinkedHashMap[String, mutable.Map[String, Int]]()
     
-    val aliasMap = mutable.LinkedHashMap[String, mutable.Map[String, Int]]()
-    
     val redirectMap = mutable.LinkedHashMap[String, mutable.Set[String]]()
     
-    for (language <- getLanguages) {
+    val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
+    val languages = try source.getLines.toList finally source.close
+    
+    for (language <- "commons" :: languages) {
       print(language)
       try
       {
         val (namespaces, aliases, redirects) = new WikiConfigDownloader(language).download()
-        namespaceMap.put(language, namespaces)
-        aliasMap.put(language, aliases)
+        namespaceMap.put(language, aliases ++ namespaces) // order is important - aliases first
         redirectMap.put(language, redirects)
         println(" - OK")
       } catch {
@@ -44,8 +44,7 @@ object GenerateWikiConfig {
       try
       {
         for (line <- nsSrc.getLines) line match {
-          case Insert("namespaces") => insertNamespaces(nsDst, "namespaces", namespaceMap)
-          case Insert("aliases") => insertNamespaces(nsDst, "aliases", aliasMap)
+          case Insert("namespaces") => insertNamespaces(nsDst, namespaceMap)
           case Insert("errors") => insertErrors(nsDst, errors)
           case Insert(_) => throw new Exception("unknown insertion point "+line)
           case _ => nsDst.write(line); nsDst.write('\n')
@@ -69,32 +68,26 @@ object GenerateWikiConfig {
     finally reSrc.close
   }
   
-  def getLanguages() : List[String] = {
-    val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
-    try source.getLines.toList finally source.close
-  }
-
-  private def insertNamespaces(dst : Writer, suffix : String, map : mutable.Map[String, mutable.Map[String, Int]] ) : Unit = {
+  private def insertNamespaces(dst : Writer, map : mutable.Map[String, mutable.Map[String, Int]] ) : Unit = {
     
     var firstLang = true
-    dst.write("    Map(\n")
+    dst.write("    Map(")
     for ((language, namespaces) <- map) {
-      if (firstLang) firstLang = false else dst.write(",\n") 
-      dst.write("        \""+language+"\" -> "+language.replace('-', '_')+'_'+suffix)
+      if (firstLang) firstLang = false else dst.write(",") 
+      dst.write("\""+language+"\" -> "+language.replace('-', '_')+"_namespaces")
     }
-    dst.write("\n    )\n")
+    dst.write(")\n")
     
     for ((language, namespaces) <- map) {
       // We used to generate the map as one huge value, but then constructor code is generated 
       // that is so long that the JVM  doesn't load it. So we have to use separate functions.
-      dst.write("\n    private def "+language.replace('-','_')+'_'+suffix+" = Map(\n")
+      dst.write("    private def "+language.replace('-','_')+"_namespaces = LinkedHashMap(")
       var firstNS = true
       for ((name, code) <- namespaces) {
-        if (firstNS) firstNS = false else dst.write(",\n")
-        if (name.isEmpty) dst.write("//")
-        dst.write("        \""+name+"\" -> "+code);
+        if (firstNS) firstNS = false else dst.write(",")
+        dst.write("\""+name+"\" -> "+code);
       }
-      dst.write("\n    )\n")
+      dst.write(")\n")
     }
     dst.write("\n")
   }
@@ -113,7 +106,7 @@ object GenerateWikiConfig {
       var firstRe = true
       for (name : String <- redirects) {
         if (firstRe) firstRe = false else dst.write(",")
-        dst.write("\""); dst.write(name); dst.write("\"");
+        dst.write("\""+name+"\"");
       }
       dst.write(")")
     }

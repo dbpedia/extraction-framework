@@ -27,7 +27,7 @@ class ImageExtractor( context : {
 
     require(ImageExtractorConfig.supportedLanguages.contains(language), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
-    private val fileNamespaceIdentifier = Namespaces.getNameForNamespace(context.language, Namespace.File)
+    private val fileNamespaceIdentifier = Namespaces.getName(context.language, Namespace.File)
 
     private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + language +"/"
     private val commonsUrlPrefix = ImageExtractorConfig.wikipediaUrlPrefix + "commons/"

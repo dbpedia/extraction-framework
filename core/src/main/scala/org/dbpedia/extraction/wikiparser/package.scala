@@ -123,37 +123,20 @@ object Namespace extends Enumeration
     val Mapping_ga = Value(396)
     
     
-    def getNamespace(language : Language, name : String) : Option[Namespace] =
+    def get(lang : Language, name : String) : Option[Namespace] =
     {
-        // Note: we used capitalizeLocale(Locale.ENGLISH) here, but that will fail
-        // for some languages, e.g. namespace "İstifadəçi" in language "az"
-        // See http://az.wikipedia.org/wiki/İstifadəçi:Chrisahn/Sandbox
-        val normalizedName = name.capitalizeLocale(language.locale)
-    
-        for(namespace <- customNamespaces.get(normalizedName))
-        {
-            return Some(namespace)
-        }
-    
-        for(namespace <- Namespaces(language, normalizedName))
-        {
-            return Some(Namespace(namespace))
-        }
-    
-        None
+        for (namespace <- customNamespaces.get(name.toLowerCase(Language.Default.locale))) return Some(namespace)
+        for (code <- Namespaces.getCode(lang, name)) return Some(Namespace(code))
+        return None
     }
     
     /**
      * 
      */
-    def getNamespaceName(language : Language, code : Namespace) : String =
+    def getNamespaceName(lang : Language, code : Namespace) : String =
     {
-        for(name <- reverseCustomNamespaces.get(code))
-        {
-            return name
-        }
-    
-        Namespaces.getNameForNamespace(language, code)
+        for(name <- reverseCustomNamespaces.get(code)) return name
+        Namespaces.getName(lang, code)
     }
     
     private val mappingNamespaces = new HashMap[Language, Namespace]
@@ -167,7 +150,7 @@ object Namespace extends Enumeration
             val name = WikiUtil.wikiDecode(ns.toString)
             if (name == "Mapping") mappingNamespaces.put(Language.Default, ns)
             else if (name.startsWith("Mapping ")) mappingNamespaces.put(Language(name.substring(8)), ns)
-            customNamespaces.put(name, ns)
+            customNamespaces.put(name.toLowerCase(Language.Default.locale), ns)
             reverseCustomNamespaces.put(ns, name)
         }
     }

@@ -7,6 +7,7 @@ import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.server.Server
 import java.util.logging.Logger
 import org.dbpedia.extraction.server.util.PageUtils
+import org.dbpedia.extraction.util.Language
 
 @Path("/ontology/pages/")
 class Pages
@@ -37,7 +38,7 @@ class Pages
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get ontology page: " + title)
-        Server.extractor.ontologyPages(WikiTitle.parseEncoded(title)).toXML
+        Server.extractor.ontologyPages(WikiTitle.parse(title, Language.Default)).toXML
     }
 
     /**
@@ -74,7 +75,7 @@ class Pages
     @Consumes(Array("application/xml"))
     def deletePage(@PathParam("title") @Encoded title : String)
     {
-        Server.extractor.removeOntologyPage(WikiTitle.parseEncoded(title))
+        Server.extractor.removeOntologyPage(WikiTitle.parse(title, Language.Default))
         logger.info("Deleted ontology page: " + title)
     }
 }

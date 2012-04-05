@@ -174,7 +174,7 @@ object ConfigLoader
         }
         def mappings : Mappings = _mappings
 
-        private lazy val _articlesSource =
+        private val _articlesSource =
         {
             XMLSource.fromFile(getDumpFile(config.dumpDir, language),
                 title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
@@ -182,9 +182,10 @@ object ConfigLoader
         }
         def articlesSource : Source = _articlesSource
 
-        private lazy val _redirects =
+        private val _redirects =
         {
-            Redirects.load(articlesSource, language)
+            val cache = new File(config.outputDir, language.filePrefix + "/redirects_" + lang.filePrefix + ".obj")
+            Redirects.load(articlesSource, cache, language)
         }
         def redirects : Redirects = _redirects
     }

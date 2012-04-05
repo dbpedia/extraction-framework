@@ -45,7 +45,7 @@ class ArticleCategoriesExtractor( context : {
 
     private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespaces.getNameForNamespace(context.language, Namespace.Category)
+        val categoryNamespace = Namespaces.getName(context.language, Namespace.Category)
 
         //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
         OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
