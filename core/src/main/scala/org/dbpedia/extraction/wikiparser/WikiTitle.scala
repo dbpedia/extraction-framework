@@ -93,12 +93,15 @@ object WikiTitle
         val coder = new HtmlCoder(XmlCodes.NONE)
         coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
         var decoded = coder.code(title)
+        
         // Note: Maybe the following line decodes too much, but it seems to be 
         // quite close to what MediaWiki does.
         decoded = UriDecoder.decode(decoded)
         
         // replace NBSP by SPACE, remove exotic whitespace
-        decoded = replace(decoded, "\u00A0\u200E\u2028", " ")
+        decoded = replace(decoded, "\u00A0\u200C\u200E\u200F\u2028", " ")
+        // TODO: combine last line and following line
+        decoded = WikiUtil.cleanSpace(decoded)
         
         var fragment : String = null
         
@@ -147,7 +150,7 @@ object WikiTitle
 
         //Create the title name from the remaining parts
         // FIXME: MediaWiki doesn't capitalize links to other wikis
-        val decodedName = WikiUtil.cleanSpace(parts.mkString(":")).capitalizeLocale(sourceLanguage.locale)
+        val decodedName = parts.mkString(":").capitalizeLocale(sourceLanguage.locale)
 
         new WikiTitle(decodedName, namespace, language, isInterlanguageLink, fragment)
     }
