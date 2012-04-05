@@ -2,6 +2,7 @@ package org.dbpedia.util.text.nt;
 
 /**
  * see <a href="http://www.w3.org/TR/rdf-testcases/#ntrip_strings">N-Triples Strings</a>
+ * FIXME: tons of common code with NtCharsDecoder. Refactor into one configurable class.
  */
 public class NtDecoder
 {
