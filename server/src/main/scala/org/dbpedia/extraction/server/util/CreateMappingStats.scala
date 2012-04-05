@@ -43,17 +43,17 @@ import java.net.{URLDecoder, URLEncoder}
  * it can write simpler formats besides N-Triples. This class would be MUCH simpler and faster
  * if it had to read simple text files without N-Triples and URI-encoding.
  */
-class CreateMappingStats(val language: Language)
+class CreateMappingStats(val statsDir : File, val language: Language)
 {
     val logger = Logger.getLogger(classOf[CreateMappingStats].getName)
 
-    val mappingStatsObjectFile = outputFile(new File("src/main/resources"), language)
+    val mappingStatsObjectFile = new File(statsDir, "mappingstats_" + language.filePrefix + ".obj")
 
-    val ignoreListFileName = "src/main/resources/ignoreList_" + language.wikiCode + ".obj"
-    val ignoreListTemplatesFileName = "src/main/resources/ignoreListTemplates_" + language.wikiCode + ".txt"
-    val ignoreListPropertiesFileName = "src/main/resources/ignoreListProperties_" + language.wikiCode + ".txt"
+    val ignoreListFile = new File(statsDir, "ignoreList_" + language.wikiCode + ".obj")
+    val ignoreListTemplatesFile = new File(statsDir, "ignoreListTemplates_" + language.wikiCode + ".txt")
+    val ignoreListPropertiesFile = new File(statsDir, "ignoreListProperties_" + language.wikiCode + ".txt")
 
-    val percentageFileName = "src/main/resources/percentage." + language.wikiCode
+    val percentageFile = new File(statsDir, "percentage." + language.wikiCode)
 
     val templateNamespacePrefix = Namespaces.getName(language, Namespace.Template) + ":"
     private val resourceNamespacePrefix = OntologyNamespaces.getResource("", language)
@@ -117,30 +117,27 @@ class CreateMappingStats(val language: Language)
 
     def loadIgnorelist() =
     {
-        if (new File(ignoreListFileName).isFile)
+        if (ignoreListFile.isFile)
         {
-            logger.fine("Loading serialized object from " + ignoreListFileName)
-            val input = new ObjectInputStream(new FileInputStream(ignoreListFileName))
-            val m = input.readObject()
-            input.close()
+            logger.fine("Loading serialized object from " + ignoreListFile)
+            val input = new ObjectInputStream(new FileInputStream(ignoreListFile))
+            val m = try input.readObject() finally input.close()
             m.asInstanceOf[IgnoreList]
         }
         else
         {
-            val ign: IgnoreList = new IgnoreList(language)
-            ign
+            new IgnoreList(language)
         }
     }
 
     def saveIgnorelist(ignoreList: IgnoreList)
     {
-        val output = new ObjectOutputStream(new FileOutputStream(ignoreListFileName))
-        output.writeObject(ignoreList)
-        output.close()
-        ignoreList.exportToTextFile(ignoreListTemplatesFileName, ignoreListPropertiesFileName)
+        val output = new ObjectOutputStream(new FileOutputStream(ignoreListFile))
+        try output.writeObject(ignoreList) finally output.close()
+        ignoreList.exportToTextFile(ignoreListTemplatesFile, ignoreListPropertiesFile)
     }
 
-    private def getWikipediaStats(redirectsFile: File, infoboxPropsFile: File, templParamsFile: File, paramsUsageFile: File): WikipediaStats =
+    private def buildWikipediaStats(redirectsFile: File, infoboxPropsFile: File, templParamsFile: File, paramsUsageFile: File): Unit =
     {
         var templatesMap: mutable.Map[String, TemplateStats] = new mutable.HashMap() // "templateName" -> TemplateStats
         
@@ -161,7 +158,19 @@ class CreateMappingStats(val language: Language)
         println("Counting properties in " + paramsUsageFile)
         countProperties(paramsUsageFile, templatesMap, redirects)
 
-        new WikipediaStats(language, redirects, templatesMap.toMap) // toMap makes it immutable
+        val wikiStats = new WikipediaStats(language, redirects, templatesMap.toMap) // toMap makes it immutable
+        
+        logger.info("Serializing "+language.wikiCode+" wiki statistics to " + mappingStatsObjectFile)
+        val output = new ObjectOutputStream(new FileOutputStream(mappingStatsObjectFile))
+        try output.writeObject(wikiStats) finally output.close()
+    }
+
+    def loadStats(): WikipediaStats =
+    {
+        logger.info("Loading "+language.wikiCode+" wiki statistics from "+mappingStatsObjectFile)
+        val input = new ObjectInputStream(new FileInputStream(mappingStatsObjectFile))
+        val m = try input.readObject() finally input.close()
+        m.asInstanceOf[WikipediaStats]
     }
 
     private def stripUri(fullUri: String): String =
@@ -171,25 +180,34 @@ class CreateMappingStats(val language: Language)
 
     private def loadTemplateRedirects(fileName: File): Map[String, String] =
     {
-        var redirects: mutable.Map[String, String] = new mutable.HashMap()
-        for (line <- Source.fromFile(fileName, "UTF-8").getLines())
+        var count = 0
+        var redirects = new mutable.HashMap[String, String]()
+        val source = Source.fromFile(fileName, "UTF-8")
+        try
         {
-            line match
-            {
-                case ObjectPropertyTripleRegex(subj, pred, obj) =>
-                {
-                    val templateName = stripUri(subj)
-                    //TODO: adjust depending on encoding in redirects file
-                    if (templateName startsWith templateNamespacePrefix)
-                    {
-                        redirects = redirects.updated(templateName, stripUri(obj))
-                    }
-                }
-                case _ if line.nonEmpty => throw new IllegalArgumentException("line did not match redirects syntax: " + line)
-                case _ =>
-            }
+          for (line <- Source.fromFile(fileName, "UTF-8").getLines())
+          {
+              line match
+              {
+                  case ObjectPropertyTripleRegex(subj, pred, obj) =>
+                  {
+                      val templateName = stripUri(unescapeNtriple(subj))
+                      //TODO: adjust depending on encoding in redirects file
+                      if (templateName startsWith templateNamespacePrefix)
+                      {
+                          redirects(templateName) = stripUri(unescapeNtriple(obj))
+                      }
+                  }
+                  case _ => if (line.nonEmpty) throw new IllegalArgumentException("line did not match redirects syntax: " + line)
+              }
+              count += 1
+              print(count+" lines\r")
+          }
         }
-
+        finally source.close
+        println
+        
+        println("resolving "+redirects.size+" redirects")
         // resolve transitive closure
         for ((source, target) <- redirects)
         {
@@ -200,10 +218,26 @@ class CreateMappingStats(val language: Language)
                 closure = redirects.get(closure).get
                 cyclePrevention += closure
             }
-            redirects = redirects.updated(source, closure)
+            redirects(source) = closure
         }
 
         redirects.toMap // toMap makes immutable
+    }
+    
+    // TODO: use this instead of regex, may be faster
+    private def splitObjectLine(line : String) : (String, String, String) = {
+      if (! line.startsWith("<")) throw new Exception(line)
+      val subEnd = line.indexOf('>')
+      if (subEnd == -1) throw new Exception(line)
+      val preStart = line.indexOf('<', subEnd)
+      if (preStart == -1) throw new Exception(line)
+      val preEnd = line.indexOf('>', preStart)
+      if (preEnd == -1) throw new Exception(line)
+      val obStart = line.indexOf('<', preEnd)
+      if (obStart == -1) throw new Exception(line)
+      val obEnd = line.indexOf('>', obStart)
+      if (obEnd == -1) throw new Exception(line)
+      return (line.substring(1, subEnd), line.substring(preStart + 1, preEnd), line.substring(obStart + 1, obEnd))
     }
 
     /**
@@ -218,9 +252,9 @@ class CreateMappingStats(val language: Language)
             line match
             {
                 // if there is a wikiPageUsesTemplate relation
-                case ObjectPropertyTripleRegex(subj, pred, obj) => if (pred contains "wikiPageUsesTemplate")
+                case ObjectPropertyTripleRegex(subj, pred, obj) => if (unescapeNtriple(pred) contains "wikiPageUsesTemplate")
                 {
-                    val objName = stripUri(obj)
+                    val objName = stripUri(unescapeNtriple(obj))
                     
                     // resolve redirect for *object*
                     val templateName = redirects.getOrElse(objName, objName)
@@ -245,7 +279,7 @@ class CreateMappingStats(val language: Language)
             {
                 case DatatypePropertyTripleRegex(subj, pred, obj) =>
                 {
-                    val subjName = stripUri(subj)
+                    val subjName = stripUri(unescapeNtriple(subj))
                     val objName = unescapeNtriple(obj)
                     
                     // resolve redirect for *subject*
@@ -275,7 +309,7 @@ class CreateMappingStats(val language: Language)
             {
                 case DatatypePropertyTripleRegex(subj, pred, obj) =>
                 {
-                    val predName = stripUri(pred)
+                    val predName = stripUri(unescapeNtriple(pred))
                     val objName = unescapeNtriple(obj)
                     
                     // resolve redirect for *predicate*
@@ -495,7 +529,7 @@ object CreateMappingStats
         
         val inputDir = new File(args(0))
         
-        val outputDir = new File(args(1))
+        val statsDir = new File(args(1))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
         var languages : Seq[Language] = for(arg <- args.slice(2, args.length); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) 
@@ -510,7 +544,6 @@ object CreateMappingStats
             
             logger.info("creating statistics for "+language.wikiCode)
             
-            val serializeFile = outputFile(outputDir, language)
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
             val redirectsDatasetFile = inputFile(inputDir, language, DBpediaDatasets.Redirects)
@@ -521,11 +554,9 @@ object CreateMappingStats
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
             val infoboxTestDatasetFile = inputFile(inputDir, language, DBpediaDatasets.InfoboxTest)
             
-            val createMappingStats = new CreateMappingStats(language)
+            val createMappingStats = new CreateMappingStats(statsDir, language)
     
-            var wikiStats = createMappingStats.getWikipediaStats(redirectsDatasetFile, infoboxPropertiesDatasetFile, templateParametersDatasetFile, infoboxTestDatasetFile)
-            logger.info("Serializing to " + serializeFile)
-            serialize(serializeFile, wikiStats)
+            createMappingStats.buildWikipediaStats(redirectsDatasetFile, infoboxPropertiesDatasetFile, templateParametersDatasetFile, infoboxTestDatasetFile)
             
             logger.info("created statistics for "+language.wikiCode+" in "+(System.currentTimeMillis() - startTime) / 1000 + " s")
         }
@@ -536,24 +567,5 @@ object CreateMappingStats
       val langDir = new File(baseDir, language.filePrefix)
       new File(langDir, dataset.name + "_" + language.filePrefix + ".nt")
     }
-
-    private def outputFile(baseDir : File, language : Language) : File = {
-      new File(baseDir, "mappingstats_" + language.filePrefix + ".obj")
-    }
-
-
-    private def serialize(file: File, wikiStats: WikipediaStats)
-    {
-        val output = new ObjectOutputStream(new FileOutputStream(file))
-        try output.writeObject(wikiStats) finally output.close()
-    }
-
-    def deserialize(file: File): WikipediaStats =
-    {
-        val input = new ObjectInputStream(new FileInputStream(file))
-        val m = try input.readObject() finally input.close()
-        m.asInstanceOf[WikipediaStats]
-    }
-
 
 }
