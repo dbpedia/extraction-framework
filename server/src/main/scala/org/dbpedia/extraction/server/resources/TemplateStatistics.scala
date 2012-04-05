@@ -20,20 +20,9 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     if (!Server.config.languages.contains(language))
         throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
 
-    private val createMappingStats = new CreateMappingStats(language)
+    private val createMappingStats = new CreateMappingStats(Server.statsDir, language)
 
-    private var wikipediaStatistics: WikipediaStats = null
-    if (createMappingStats.mappingStatsObjectFile.isFile)
-    {
-        Server.logger.info("Loading serialized WikiStats object from " + createMappingStats.mappingStatsObjectFile)
-        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFile)
-        Server.logger.info("done")
-    }
-    else
-    {
-        Server.logger.info("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFile)
-        throw new FileNotFoundException("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFile)
-    }
+    private var wikipediaStatistics = createMappingStats.loadStats()
 
     private val mappings = getClassMappings
     private val mappingStatistics = createMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
@@ -72,15 +61,14 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
         val percentageMappedPropertyOccurrences: String = "%2.2f".format(getRatioOfAllMappedPropertyOccurrences(statsMap) * 100)
 
         // print percentage to file for Pablo's counter
-        val out = new PrintWriter(createMappingStats.percentageFileName)
-        out.write(percentageMappedTemplateOccurrences)
-        out.close()
+        val out = new PrintWriter(createMappingStats.percentageFile)
+        try out.write(percentageMappedTemplateOccurrences) finally out.close()
 
         //Server.logger.info("ratioTemp: " + percentageMappedTemplates)
         //Server.logger.info("ratioTempUses: " + percentageMappedTemplateOccurrences)
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
             <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             </head>
             <body>
                 <h2 align="center">Mapping Statistics for <u>{langCode}</u></h2>

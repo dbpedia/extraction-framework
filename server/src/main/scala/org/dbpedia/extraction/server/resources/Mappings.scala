@@ -35,6 +35,9 @@ class Mappings(@PathParam("lang") langCode : String)
     def get : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Mappings</h2>
             <a href="pages/">Source Pages</a><br/>
@@ -54,6 +57,9 @@ class Mappings(@PathParam("lang") langCode : String)
     def getPages : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Mapping pages</h2>
             { Server.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
@@ -121,6 +127,9 @@ class Mappings(@PathParam("lang") langCode : String)
     def validate : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Mapping pages</h2>
             { Server.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
@@ -181,6 +190,9 @@ class Mappings(@PathParam("lang") langCode : String)
     def extractionSamples : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Mapping pages</h2>
             { Server.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }

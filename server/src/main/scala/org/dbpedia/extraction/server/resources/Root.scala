@@ -10,7 +10,9 @@ class Root
     def get =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head></head>
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Server</h2>
             <p><a href="ontology/">Ontology</a></p>
@@ -37,7 +39,10 @@ class Root
     private def list(title : String, header : String, prefix : String) =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head><title>{title}</title></head>
+          <head>
+            <title>{title}</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>{header}</h2>
             {

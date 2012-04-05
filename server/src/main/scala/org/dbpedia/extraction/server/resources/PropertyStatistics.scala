@@ -17,21 +17,11 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
 
     if (!Server.config.languages.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
 
-    private val mappingUrlPrefix = Server.config.wikiPagesUrl + Namespace.mappingNamespace(language).get.toString + ":"
+    private val mappingUrlPrefix = Server.config.wikiPagesUrl+"/"+Namespace.mappingNamespace(language).get.toString + ":"
 
-    private val createMappingStats = new CreateMappingStats(language)
+    private val createMappingStats = new CreateMappingStats(Server.statsDir, language)
 
-    private var wikipediaStatistics: WikipediaStats = null
-    if (createMappingStats.mappingStatsObjectFile.isFile)
-    {
-        Server.logger.info("Loading serialized object from " + createMappingStats.mappingStatsObjectFile)
-        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFile)
-    }
-    else
-    {
-        Server.logger.info("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFile)
-        throw new FileNotFoundException("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFile)
-    }
+    private var wikipediaStatistics = createMappingStats.loadStats()
 
     private val mappings = getClassMappings
     private val statistics = createMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
@@ -65,7 +55,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
             Server.logger.fine("ratioTempUses: " + percentageMappedPropOccurrences)
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                 </head>
                 <body>
 
@@ -180,6 +170,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
         val html =
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                     <script type="text/javascript">
                     <!--
                         window.location="..";

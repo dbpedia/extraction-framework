@@ -13,6 +13,9 @@ class TriX
         <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:trix="http://www.w3.org/2004/03/trix/trix-1/">
           <xsl:template match="/trix:TriX">
             <html>
+              <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              </head>
               <body>
                 <h2>DBpedia Extraction Results</h2>
                   <table border="1" cellpadding="3" cellspacing="0">
