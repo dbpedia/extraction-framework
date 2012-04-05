@@ -9,7 +9,9 @@ import org.dbpedia.extraction.util.Language
  */
 class IgnoreList(language : Language) extends Serializable
 {
-
+    /** for backwards compatibility */
+    private val serialVersionUID = -8153347725542465170L
+  
     var templates = Set[String]()
     var properties = Map[String, Set[String]]()
 
