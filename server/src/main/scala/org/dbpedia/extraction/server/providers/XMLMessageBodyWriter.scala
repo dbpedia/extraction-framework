@@ -5,6 +5,7 @@ import javax.ws.rs.ext.{Provider, MessageBodyWriter}
 import javax.ws.rs.{Produces, WebApplicationException}
 import xml.{NodeBuffer, Utility, NodeSeq, Node}
 import java.io.{OutputStreamWriter, IOException, OutputStream}
+import java.util.Collections.singletonList
 
 /**
  * Used by the server to write xml responses.
@@ -34,14 +35,14 @@ class XMLMessageBodyWriter extends MessageBodyWriter[AnyRef]
         val writer = new OutputStreamWriter(entityStream, "UTF-8")
         writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
 
-        if(mediaType.getSubtype == "xhtml+xml")
-        {
-            // IE cannot handle application/xhtml+xml directly
-            val contentType : java.util.List[java.lang.Object] = new java.util.ArrayList[java.lang.Object]()
-            contentType.add("text/html")
-            httpHeaders.put("Content-Type", contentType)
-        }
+        var main = mediaType.getType
+        var sub = mediaType.getSubtype
         
+        // IE cannot handle application/xhtml+xml directly
+        if(main == "application" && sub == "xhtml+xml") { main = "text"; sub = "html" }
+        
+        httpHeaders.put("Content-Type", singletonList(main+"/"+sub+"; charset=UTF-8"))
+            
         xml match
         {
             case node : NodeBuffer => writer.write(toString(node))

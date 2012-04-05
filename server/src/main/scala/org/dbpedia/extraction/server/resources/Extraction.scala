@@ -4,7 +4,8 @@ import _root_.java.net.{URL, URI}
 import _root_.org.dbpedia.extraction.destinations.formatters.{NQuadsFormatter, NTriplesFormatter, TriXFormatter}
 import _root_.org.dbpedia.extraction.util.Language
 import javax.ws.rs._
-import xml.Elem
+import scala.xml.Elem
+import scala.io.{Source,Codec}
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.destinations.StringDestination
@@ -20,17 +21,38 @@ class Extraction(@PathParam("lang") langCode : String)
 
     if(!Server.config.languages.contains(language))
         throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)
+    
+    private def getTitle() : String = 
+    {
+      val default = "Berlin"
+      val prefix = langCode+":"
+      try
+      {
+        val in = getClass.getResourceAsStream("/extractionPageTitles.txt")
+        try
+        {
+          val lines = Source.fromInputStream(in)(Codec.UTF8).getLines
+          // just use get(), exception will be caught below
+          lines.find(_.startsWith(prefix)).get.substring(prefix.length)
+        } 
+        finally in.close
+      }
+      catch { case e : Exception => default }
+    }
 
     @GET
     @Produces(Array("application/xhtml+xml"))
     def get = 
     {
        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+         <head>
+           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+         </head>
          <body>
            <h2>Extract a page</h2>
            <form action="extract" method="get">
              Title:
-             <input type="text" name="title" value="Berlin"/>
+             <input type="text" name="title" value={ getTitle }/>
              <select name="format">
                <option value="Trix">Trix</option>
                <option value="N-Triples">N-Triples</option>

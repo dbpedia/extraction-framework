@@ -16,6 +16,9 @@ class Ontology
     def get : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Ontology</h2>
             <a href="pages/">Source Pages</a><br/>
