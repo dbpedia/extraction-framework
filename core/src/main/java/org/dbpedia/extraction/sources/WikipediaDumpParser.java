@@ -14,6 +14,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -103,17 +104,18 @@ public class WikipediaDumpParser
   throws IOException, XMLStreamException, InterruptedException
   {
     XMLInputFactory factory = XMLInputFactory.newInstance();
-
-      _reader = factory.createXMLStreamReader(_stream, "UTF-8");
-      try
-      {
-        readDump();
-      }
-      finally
-      {
-        _reader.close();
-        _reader = null;
-      }
+    // we have to use a Reader instead of an InputStream because of this bug:
+    // https://issues.apache.org/jira/browse/XERCESJ-1257
+    _reader = factory.createXMLStreamReader(new InputStreamReader(_stream, "UTF-8"));
+    try
+    {
+      readDump();
+    }
+    finally
+    {
+      _reader.close();
+      _reader = null;
+    }
   }
 
   private void readDump()
@@ -226,8 +228,6 @@ public class WikipediaDumpParser
     {
       if (isStartElement(REDIRECT_ELEM))
       {
-//        if (_reader.getAttributeCount() != 1) 
-//          logger.log(Level.WARNING, "Error parsing rediret ["+title+"] - "+_reader.getAttributeCount()+" attrs");
         redirect = parseTitle(_reader.getAttributeValue(null, TITLE_ELEM));
         nextTag();
         // now at </redirect>
