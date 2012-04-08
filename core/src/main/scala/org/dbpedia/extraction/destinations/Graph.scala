@@ -11,6 +11,9 @@ package org.dbpedia.extraction.destinations
  * 
  * TODO: make this a Traversable so we can use flatMap to collect all quads
  * from many extractors.
+ * 
+ * TODO: just remove this class. It offers no advantage over List[Quad] except quadsByDataset,
+ * which can easily be inlined.
  */
 class Graph(val quads : List[Quad] = Nil)
 {
