@@ -8,9 +8,10 @@ import org.dbpedia.extraction.util.Language
  */
 object Redirect
 {
-    private val map = Map(
+    private val map : Map[String, Set[String]] =
 // @ insert redirects here @ //
-    )
+
+// @ insert errors here @ //
 
     def apply(language : Language) = map.get(language.wikiCode)
 }

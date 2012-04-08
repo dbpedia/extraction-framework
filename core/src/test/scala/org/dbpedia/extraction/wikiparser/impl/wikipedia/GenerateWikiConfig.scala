@@ -5,6 +5,7 @@ import javax.xml.stream.XMLInputFactory
 import scala.collection.mutable
 import org.dbpedia.extraction.util.WikiConfigDownloader
 import java.io.{File, IOException, OutputStreamWriter, FileOutputStream, Writer}
+import java.net.HttpRetryException
 
 /**
  * Generates Namespaces.scala and Redirect.scala. Must be run with core/ as the current directory.
@@ -20,32 +21,70 @@ object GenerateWikiConfig {
     
     val errors = mutable.LinkedHashMap[String, String]()
     
+    // (language -> (namespace name or alias -> code))
     val namespaceMap = mutable.LinkedHashMap[String, mutable.Map[String, Int]]()
     
+    // (language -> redirect magic word aliases)
     val redirectMap = mutable.LinkedHashMap[String, mutable.Set[String]]()
+    
+    // (old language code -> new language code)
+    val languageMap = mutable.LinkedHashMap[String, String]()
     
     val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
     val languages = try source.getLines.toList finally source.close
     
-    for (language <- "commons" :: languages) {
+    for (language <- "commons" :: languages)
+    {
       print(language)
       try
       {
-        val (namespaces, aliases, redirects) = new WikiConfigDownloader(language).download()
-        namespaceMap.put(language, aliases ++ namespaces) // order is important - aliases first
-        redirectMap.put(language, redirects)
+        val downloader = new WikiConfigDownloader(language, followRedirects = false)
+        val (namespaces, aliases, magicwords) = downloader.download()
+        namespaceMap(language) = aliases ++ namespaces // order is important - aliases first
+        redirectMap(language) = magicwords("redirect")
         println(" - OK")
       } catch {
+        case hrex : HttpRetryException => {
+          languageMap(language) = hrex.getMessage 
+          println(" - redirected to "+hrex.getMessage)
+        }
         case ioex : IOException => {
-          errors.put(language, ioex.getMessage)
+          errors(language) = ioex.getMessage
           println(" - "+ioex.getMessage)
         }
       }
     }
     
-    generate("Namespaces.scala", Map("namespaces" -> buildNamespaces(namespaceMap), "errors" -> buildErrors(errors)))
+    val namespaceStr =
+    build("namespaces", languageMap, namespaceMap) { (language, namespaces, s) =>
+      // LinkedHashMap to preserve order, which is important because in the reverse map 
+      // in Namespaces.scala the canonical name must be overwritten by the localized value.
+      s +"    private def "+language.replace('-','_')+"_namespaces = LinkedHashMap("
+      var firstNS = true
+      for ((name, code) <- namespaces) {
+        if (firstNS) firstNS = false else s +","
+        s +"\""+name+"\" -> "+code
+      }
+      s +")\n"
+    }
     
-    generate("Redirect.scala", Map("redirects" -> buildRedirects(redirectMap)))
+    val redirectStr =
+    build("redirects", languageMap, redirectMap) { (language, redirects, s) =>
+      s +"    private def "+language.replace('-','_')+"_redirects = Set("
+      var firstRe = true
+      for (name : String <- redirects) {
+        if (firstRe) firstRe = false else s +","
+        s +"\""+name+"\""
+      }
+      s +")\n"
+    }
+
+    var s = new StringPlusser
+    for ((language, message) <- errors) s +"// "+language+" - "+message+"\n"
+    val errorStr = s toString
+    
+    generate("Namespaces.scala", Map("namespaces" -> namespaceStr, "errors" -> errorStr))
+    generate("Redirect.scala", Map("redirects" -> redirectStr, "errors" -> errorStr))
   }
   
   /**
@@ -66,61 +105,33 @@ object GenerateWikiConfig {
     } finally source.close
   }
   
-  private def buildNamespaces(map : mutable.Map[String, mutable.Map[String, Int]]) : String = 
+  private def build[V](tag : String, languages : mutable.Map[String, String], values : mutable.Map[String, V])
+    (append : (String, V, StringPlusser) => Unit) : String =
   {
-    var sb = new StringPlusser
+    var s = new StringPlusser
     
     // We used to generate the map as one huge value, but then constructor code is generated
     // that is so long that the JVM  doesn't load it. So we have to use separate functions.
     var firstLang = true
-    sb + "    Map("
-    for ((language, namespaces) <- map) {
-      if (firstLang) firstLang = false else sb + "," 
-      sb + "\"" + language + "\" -> " + language.replace('-', '_') + "_namespaces"
+    s +"    Map("
+    
+    for (language <- values.keys) {
+      if (firstLang) firstLang = false else s + "," 
+      s +"\""+language+"\"->"+language.replace('-', '_')+"_"+tag
     }
-    sb + ")\n"
     
-    for ((language, namespaces) <- map) {
-      // LinkedHashMap to preserve order, which is important because in the reverse map 
-      // in Namespaces.scala the canonical name must be overwritten by the localized value.
-      sb + "    private def " + language.replace('-','_') + "_namespaces = LinkedHashMap("
-      var firstNS = true
-      for ((name, code) <- namespaces) {
-        if (firstNS) firstNS = false else sb + ","
-        sb + "\"" + name + "\" -> " + code
-      }
-      sb + ")\n"
+    for ((from, to) <- languages) {
+      if (firstLang) firstLang = false else s +"," 
+      s +"\""+from+"\"->"+to.replace('-', '_')+"_"+tag
     }
-    sb + "\n"
     
-    sb toString
-  }
-  
-  private def buildErrors(map : mutable.Map[String, String]) : String = 
-  {
-    var sb = new StringPlusser
-    for ((language, message) <- map) sb + "// " + language + " - " + message + "\n"
-    sb toString
-  }
-  
-  private def buildRedirects(map : mutable.Map[String, mutable.Set[String]]) : String = 
-  {
-    var sb = new StringPlusser
+    s +")\n"
     
-    var firstLang = true
-    for ((language, redirects) <- map) {
-      if (firstLang) firstLang = false else sb + ",\n"
-      sb + "        \"" + language + "\" -> Set("
-      var firstRe = true
-      for (name : String <- redirects) {
-        if (firstRe) firstRe = false else sb + ","
-        sb + "\"" + name + "\""
-      }
-      sb + ")"
-    }
-    sb + "\n"
+    for ((language, value) <- values) append(language, value, s)
     
-    sb toString
+    s +"\n"
+    
+    s toString
   }
   
 }
