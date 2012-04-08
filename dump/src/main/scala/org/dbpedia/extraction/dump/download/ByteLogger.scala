@@ -30,9 +30,10 @@ class ByteLogger( step : Long ) extends ((Long, Boolean) => Unit)
   
   private def formatMillis( millis : Long ) : String =
   {
-    if (millis < 60000) millis / 1000F+" seconds"
-    else if (millis < 3600000) zeros(millis / 60000)+":"+zeros(millis % 60000 / 1000)+" minutes"
-    else zeros(millis / 3600000)+":"+zeros(millis % 3600000 / 60000)+":"+zeros(millis % 60000 / 1000)+" hours"
+    val secs = millis / 1000
+    if (secs < 60) millis / 1000F+" seconds"
+    else if (secs < 3600) zeros(secs / 60)+":"+zeros(secs % 60)+" minutes"
+    else zeros(secs / 3600)+":"+zeros(secs % 3600 / 60)+":"+zeros(secs % 60)+" hours"
   }
   
   private def formatRate(bytes : Long, millis : Long) : String =
