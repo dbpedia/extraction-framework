@@ -2,13 +2,13 @@ package org.dbpedia.extraction.wikiparser
 
 import java.util.Locale
 import java.lang.StringBuilder
-
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.uri.UriDecoder
+import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a page title.
@@ -99,7 +99,7 @@ object WikiTitle
         decoded = UriDecoder.decode(decoded)
         
         // replace NBSP by SPACE, remove exotic whitespace
-        decoded = replace(decoded, "\u00A0\u200C\u200E\u200F\u2028", " ")
+        decoded = replace(decoded, "\u00A0\u200C\u200E\u200F\u2028\u202B\u202C", " ")
         
         var fragment : String = null
         
@@ -119,35 +119,35 @@ object WikiTitle
         // http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&format=xml
         // etc. Almost identical, except for stuff like q => en.wikiquote.org, de.wikiquote.org
 
-        var parts = decoded.split(":", -1).toList
+        var parts = decoded.split(":", -1)
 
         var leadingColon = false
         var isInterlanguageLink = false
         var language = sourceLanguage
         var namespace = Namespace.Main
 
-        //Check if this is a interlanguage link (beginning with ':')
-        if(!parts.isEmpty && parts.head == "")
+        //Check if this is an interlanguage link (beginning with ':')
+        if(parts.length > 0 && parts.head == "")
         {
             leadingColon = true
             parts = parts.tail
         }
 
         //Check if it contains a language
-        if(!parts.isEmpty && !parts.tail.isEmpty)
+        if (parts.length > 1)
         {
-            for (lang <- Language.get(parts.head.toLowerCase(sourceLanguage.locale)))
+            for (lang <- Language.get(parts(0).trim.toLowerCase(sourceLanguage.locale)))
             {
                  language = lang
-                 isInterlanguageLink = !leadingColon
+                 isInterlanguageLink = ! leadingColon
                  parts = parts.tail
             }
         }
 
         //Check if it contains a namespace
-        if(!parts.isEmpty && !parts.tail.isEmpty)
+        if (parts.length > 1)
         {
-            for (ns <- Namespace.get(language, parts.head))
+            for (ns <- Namespace.get(language, parts(0).trim))
             {
                  namespace = ns
                  parts = parts.tail
@@ -156,7 +156,7 @@ object WikiTitle
 
         //Create the title name from the remaining parts
         // FIXME: MediaWiki doesn't capitalize links to other wikis
-        val decodedName = parts.mkString(":").capitalizeLocale(sourceLanguage.locale)
+        val decodedName = parts.mkString(":").trim.capitalizeLocale(sourceLanguage.locale)
 
         new WikiTitle(decodedName, namespace, language, isInterlanguageLink, fragment)
     }
