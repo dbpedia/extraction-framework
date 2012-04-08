@@ -33,12 +33,12 @@ object Language extends (String => Language)
       // TODO: get list of language codes from a source like these:
       // http://noc.wikimedia.org/conf/langlist
       // http://noc.wikimedia.org/conf/all.dblist
-      val isoCodes = Locale.getISOLanguages.toSet &~ Set("nd")
+      val isoCodes = Locale.getISOLanguages.toSet &~ Set("ae", "in", "iw", "nr", "nd", "oj", "ji", "lu")
       
       // Maps Wikipedia language codes which do not follow ISO-639-1, to a related ISO-639-1 code.
       // See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
       // Mappings are mostly based on similarity of the languages and in some cases on the regions where a related language is spoken.
-      // See NonIsoLanguagesMappingTest and run it regularly. As of 2012-03-28, there are 11 wiki codes we haven't mapped yet.
+      // See NonIsoLanguagesMappingTest and run it regularly.
       val nonIsoCodes = Map(
           "commons" -> "en",       // commons uses en, mostly
           "war" -> "tl",           // Waray-Waray language
