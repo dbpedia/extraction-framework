@@ -25,7 +25,7 @@ class Graph(val quads : List[Quad] = Nil)
      * a read-only view of a private map . When a quad is added 
      * to the list, it must also be added to a private map.
      */
-    lazy val quadsByDataset : scala.collection.Map[Dataset, List[Quad]] = quads.groupBy(quad => quad.dataset)
+    lazy val quadsByDataset : scala.collection.Map[Dataset, List[Quad]] = quads.groupBy(_.dataset)
 
     /**
      * Tests if this graph is empty.
