@@ -6,8 +6,8 @@ import org.dbpedia.extraction.mappings._
 
 object Configuration
 {
-    /** The extraction languages. Use List (not Set) to preserve order. English first, rest sorted. */
-    val languages = List("en", "ar", "bn", "ca", "cs", "de", "el", "es", "eu", "fr", "ga", "hi", "hr", "hu", "it", "ko", "nl", "pl", "pt", "ru", "sl", "tr")
+    /** The extraction languages. Use List (not Set) to preserve order. */
+    val languages = List("ar", "bn", "ca", "cs", "de", "el", "en", "es", "eu", "fr", "ga", "hi", "hr", "hu", "it", "ko", "nl", "pl", "pt", "ru", "sl", "tr")
       .map(Language)
 
     /** The extractors */

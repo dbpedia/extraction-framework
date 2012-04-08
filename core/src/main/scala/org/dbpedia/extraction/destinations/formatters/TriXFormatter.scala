@@ -2,20 +2,18 @@ package org.dbpedia.extraction.destinations.formatters
 
 import java.io.Writer
 import org.dbpedia.extraction.destinations.{Quad, Formatter}
-import scala.xml.Utility
+import scala.xml.Utility.escape
 import java.net.URI
 
 /**
  * Formats statements according to the TriX format.
  * See: http://www.hpl.hp.com/techreports/2004/HPL-2004-56.html
- * TODO: don't pass stylesheetURI but generic header string
- * FIXME: stylesheetURI = null leads to silly output: href="null"
  */
-class TriXFormatter(stylesheetURI : URI = null) extends Formatter
+class TriXFormatter(header : String = null) extends Formatter
 {
     override def writeHeader(writer : Writer) : Unit =
     {
-        writer.write("<?xml-stylesheet type=\"text/xsl\" href=\"" + stylesheetURI + "\"?>\n")
+        if (header != null) writer.write(header)
         writer.write("<TriX xmlns=\"http://www.w3.org/2004/03/trix/trix-1/\">\n")
     }
 
@@ -28,25 +26,22 @@ class TriXFormatter(stylesheetURI : URI = null) extends Formatter
     {
         // TODO: string + is relatively inefficient
         writer.write("  <graph>\n")
-        writer.write("    <uri>" + encode(quad.context) + "</uri>\n")
+        writer.write("    <uri>" + escape(quad.context) + "</uri>\n")
         writer.write("    <triple>\n")
 
-        writer.write("      <uri>" + encode(quad.subject) + "</uri>\n")
-        writer.write("      <uri>" + encode(quad.predicate) + "</uri>\n")
+        writer.write("      <uri>" + escape(quad.subject) + "</uri>\n")
+        writer.write("      <uri>" + escape(quad.predicate) + "</uri>\n")
 
         if(quad.datatype != null)
         {
-            writer.write("      <typedLiteral datatype=\"" + encode(quad.datatype.uri) + "\">" + encode(quad.value) + "</typedLiteral>\n")
+            writer.write("      <typedLiteral datatype=\"" + escape(quad.datatype.uri) + "\">" + escape(quad.value) + "</typedLiteral>\n")
         }
         else
         {
-            writer.write("      <uri>" + encode(quad.value) + "</uri>\n")
+            writer.write("      <uri>" + escape(quad.value) + "</uri>\n")
         }
 
         writer.write("    </triple>\n")
         writer.write("  </graph>\n")
     }
-
-    // TODO: this is probably inefficient. use Utility.escape(String, StringBuilder)
-    private def encode(str : String) = str.map(c => Utility.Escapes.escMap.get(c).getOrElse(c)).mkString
 }

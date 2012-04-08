@@ -414,7 +414,7 @@ class CreateMappingStats(val statsDir : File, val language: Language)
 
 object CreateMappingStats
 {
-    val logger = Logger.getLogger(classOf[CreateMappingStats].getName)
+    val logger = Logger.getLogger(getClass.getName)
 
     /**
      * Hold template statistics
@@ -544,15 +544,16 @@ object CreateMappingStats
             
             logger.info("creating statistics for "+language.wikiCode)
             
+            val finder = new FileFinder(inputDir, language)
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
-            val redirectsDatasetFile = inputFile(inputDir, language, DBpediaDatasets.Redirects)
+            val redirectsDatasetFile = finder.inputFile(DBpediaDatasets.Redirects, "nt")
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxPropertiesDatasetFile = inputFile(inputDir, language, DBpediaDatasets.Infoboxes)
+            val infoboxPropertiesDatasetFile = finder.inputFile(DBpediaDatasets.Infoboxes, "nt")
             // extracted by org.dbpedia.extraction.mappings.TemplateParameterExtractor
-            val templateParametersDatasetFile = inputFile(inputDir, language, DBpediaDatasets.TemplateVariables)
+            val templateParametersDatasetFile = finder.inputFile(DBpediaDatasets.TemplateVariables, "nt")
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxTestDatasetFile = inputFile(inputDir, language, DBpediaDatasets.InfoboxTest)
+            val infoboxTestDatasetFile = finder.inputFile(DBpediaDatasets.InfoboxTest, "nt")
             
             val createMappingStats = new CreateMappingStats(statsDir, language)
     
@@ -562,10 +563,31 @@ object CreateMappingStats
         }
         
     }
-    
-    private def inputFile(baseDir : File, language : Language, dataset : Dataset) : File = {
-      val langDir = new File(baseDir, language.filePrefix)
-      new File(langDir, dataset.name + "_" + language.filePrefix + ".nt")
-    }
+}
 
+/**
+ * Get input file path in baseDir.
+ * FIXME: the same algorithm is used by the download and extraction code. We should share the code. 
+ * Polish this class and move it to core. Introduce a strategy interface.
+ */
+class FileFinder(baseDir : File, language : Language) {
+    
+    /**
+     * Get input file path in baseDir.
+     */
+    def inputFile(dataset : Dataset, suffix : String) : File = 
+    {
+      val wiki = language.filePrefix+"wiki"
+      
+      val wikiDir = new File(baseDir, wiki)
+      if(! wikiDir.isDirectory) throw new Exception("directory '"+wikiDir+"' for language '"+language.wikiCode+"' not found")
+      
+      // Find the name (which is a date in format YYYYMMDD) of the newest directory
+      val date = wikiDir.list.filter(_.matches("\\d{8}")).sortBy(_.toInt).lastOption.getOrElse(throw new Exception("No dump found in " +wikiDir))
+      // TODO: check that directory contains the file named 'complete' written by downloader
+      
+      val dateDir = new File(baseDir, date)
+      
+      new File(dateDir, wiki+"-"+date+"-"+dataset.name+"."+suffix)
+    }
 }

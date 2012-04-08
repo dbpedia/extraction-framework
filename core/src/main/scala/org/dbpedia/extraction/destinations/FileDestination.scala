@@ -4,22 +4,19 @@ import formatters.NTriplesFormatter
 import java.net.URLEncoder
 import collection.mutable.HashMap
 import java.io._
+import java.nio.charset.Charset
 
 /**
  * A destination which writes all statements to files.
  * This class is thread-safe.
- *
+ * 
  * @param formatter The formatter used to serialize the statements. If no formatter is provided, the statements are written using the N-Triples format.
  * @param baseDir The base directory of the output files. If no base directory is provided, the output is written to current directory.
  * @param filePattern The pattern according to which the statements are split into different files by their dataset.
  */
-class FileDestination(formatter : Formatter = new NTriplesFormatter(),
-                      baseDir : File = new File("."),
-                      filePattern : (Dataset => String), append : Boolean = false) extends Destination
+class FileDestination(formatter : Formatter, filePattern : Dataset => File) extends Destination
 {
-    if (! baseDir.isDirectory() && ! baseDir.mkdirs()) throw new IOException("cannot create base dir "+baseDir)
-
-    private val writers = HashMap[String, Writer]()
+    private val writers = HashMap[Dataset, Writer]()
 
     private var closed = false
 
@@ -29,7 +26,7 @@ class FileDestination(formatter : Formatter = new NTriplesFormatter(),
 
         for((dataset, quads) <- graph.quadsByDataset)
         {
-            val writer = getWriter(dataset)
+            val writer = writers.getOrElseUpdate(dataset, createWriter(dataset))
 
             for(quad <- quads)
             {
@@ -51,18 +48,12 @@ class FileDestination(formatter : Formatter = new NTriplesFormatter(),
         }
     }
 
-    private def getWriter(dataset : Dataset) : Writer =
+    private def createWriter(dataset : Dataset) : Writer=
     {
-        val fileName = filePattern(dataset)
-        writers.getOrElseUpdate(fileName, createWriter(fileName))
-    }
-    
-    private def createWriter(fileName : String) : Writer=
-    {
-        val file = new File(baseDir, fileName)
+        val file = filePattern(dataset)
         mkdirs(file.getParentFile)
     
-        val stream = new FileOutputStream(file, append)
+        val stream = new FileOutputStream(file)
         val writer = new OutputStreamWriter(stream, "UTF-8")
         formatter.writeHeader(writer)
     

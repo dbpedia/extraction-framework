@@ -116,7 +116,7 @@ object Redirects
         val redirects = loadFromSource(source, lang)
         
         val dir = cache.getParentFile
-        if (! dir.exists && ! dir.mkdir) throw new IOException("cache dir ["+dir+"] does not exist and cannot be created")
+        if (! dir.exists && ! dir.mkdirs) throw new IOException("cache dir ["+dir+"] does not exist and cannot be created")
         val outputStream = new ObjectOutputStream(new FileOutputStream(cache))
         try
         {

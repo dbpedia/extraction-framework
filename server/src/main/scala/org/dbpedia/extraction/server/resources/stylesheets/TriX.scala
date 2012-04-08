@@ -2,6 +2,19 @@ package org.dbpedia.extraction.server.resources.stylesheets
 
 import xml.Elem
 import javax.ws.rs.{GET, Produces, Path}
+import org.dbpedia.extraction.destinations.Formatter
+import org.dbpedia.extraction.destinations.formatters.TriXFormatter
+
+object TriX
+{
+    /**
+     * @param number of "../" steps to prepend to the path to "stylesheets/trix.xsl"
+     */
+    def formatter(parents : Int) : Formatter = 
+    {
+      new TriXFormatter("<?xml-stylesheet type=\"text/xsl\" href=\""+("../"*parents)+"stylesheets/trix.xsl\"?>\n")
+    }
+}
 
 @Path("/stylesheets/trix.xsl")
 class TriX

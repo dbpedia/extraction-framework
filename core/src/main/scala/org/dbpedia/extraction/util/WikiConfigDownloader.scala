@@ -9,16 +9,26 @@ import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
 /**
  * Downloads namespace names, namespace alias names and redirect magic words for a wikipedia 
  * language edition via api.php.
- * FIXME: This should be used to download the data for just one language and maybe store it in a file 
- * or simply in memory. (Loading the stuff only takes between .2 and 2 seconds per language.) 
- * Currently this class is used to generate code for all languages. That's not good.
+ * 
+ * FIXME: This should be used to download the data for just one language and maybe store it in a 
+ * text file or simply in memory. (Loading the stuff only takes between .2 and 2 seconds per language.) 
+ * Currently this class is used to generate one huge configuration class for all languages. 
+ * That's not good.
+ * 
+ * FIXME: also use
+ * http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap
+ * http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap
+ * which are identical except for stuff like q => en.wikiquote.org / de.wikiquote.org etc.
+ * 
+ * TODO: error handling. So far, it didn't seem necessary. api.php seems to work, and this
+ * class is used with direct human supervision.
  */
 class WikiConfigDownloader(language : String) {
   
-  val url = new URL("http://"+host(language)+"/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords")
+  val url = new URL(api(language)+"?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords")
   
-  private def host(language : String) : String =
-    language+"."+(if (language == "commons") "wikimedia" else "wikipedia")+".org"
+  private def api(language : String) : String =
+    "http://"+language+"."+(if (language == "commons") "wikimedia" else "wikipedia")+".org/w/api.php"
     
   /**
    * @return namespaces (name -> code), namespace aliases (name -> code), redirect tags
@@ -50,10 +60,10 @@ private class WikiConfigReader(in : XMLEventAnalyzer) {
     
     in.document { _ =>
       in.element("api") { _ =>
-        in.element("query") { _ => 
+        in.element("query") { _ =>
           namespaces = readNamespaces("namespaces", true)
           aliases = readNamespaces("namespacealiases", false)
-          redirects = readRedirects()
+          redirects = readMagicWords()("redirect")
         }
       }
     }
@@ -63,13 +73,14 @@ private class WikiConfigReader(in : XMLEventAnalyzer) {
   
   private def readNamespaces(tag : String, canonical : Boolean) : mutable.Map[String, Int] = 
   {
+    // LinkedHashMap to preserve order
     val namespaces = mutable.LinkedHashMap[String, Int]()
     in.element(tag) { _ =>
       in.elements("ns") { ns =>
         val id = (ns getAttr "id").toInt
         in.text { text => 
           // order is important here - canonical first, because in the reverse map 
-          // it must be overwritten by the localized value.
+          // in Namespaces.scala it must be overwritten by the localized value.
           if (canonical && id != 0) namespaces.put(ns getAttr "canonical", id)
           namespaces.put(text, id)
         }
@@ -78,22 +89,27 @@ private class WikiConfigReader(in : XMLEventAnalyzer) {
     namespaces 
   }
     
-  private def readRedirects() : mutable.Set[String] = 
+  /**
+   * @return map from magic word name to aliases
+   */
+  private def readMagicWords() : mutable.Map[String, mutable.Set[String]] =
   {
-    val redirects = mutable.LinkedHashSet[String]()
+    // LinkedHashMap to preserve order (although it's probably not important)
+    val magic = mutable.LinkedHashMap[String, mutable.Set[String]]()
     in.element("magicwords") { _ =>
       in.elements("magicword") { mw =>
-        val name = mw getAttr "name"
+        // LinkedHashSet to preserve order (although it's probably not important)
+        val aliases = magic.getOrElseUpdate(mw getAttr "name", mutable.LinkedHashSet[String]())
         in.elements("aliases") { _ =>
           in.elements("alias") { _ =>
             in.text { text => 
-              if (name == "redirect") redirects.add(text)
+              aliases += text
             }
           }
         }
       }
     }
-    redirects 
+    magic
   }
     
 }

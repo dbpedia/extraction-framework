@@ -88,8 +88,8 @@ object ConfigLoader
         val extractor = Extractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } )
 
         //Destination
-        val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
-        val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq")
+        val tripleDestination = new FileDestination(new NTriplesFormatter(), dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt"))
+        val quadDestination = new FileDestination(new NQuadsFormatter(), dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq"))
         val destination = new CompositeDestination(tripleDestination, quadDestination)
 
         new ExtractionJob(extractor, articlesSource, destination, "Extraction Job for " + language.wikiCode + " Wikipedia")

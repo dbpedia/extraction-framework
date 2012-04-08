@@ -100,18 +100,24 @@ object WikiTitle
         
         // replace NBSP by SPACE, remove exotic whitespace
         decoded = replace(decoded, "\u00A0\u200C\u200E\u200F\u2028", " ")
-        // TODO: combine last line and following line
-        decoded = WikiUtil.cleanSpace(decoded)
         
         var fragment : String = null
         
+        // we can look for hash signs after we decode - that's what MediaWiki does
         val hash = decoded.indexOf('#')
         if (hash != -1) {
-          fragment = decoded.substring(hash + 1)
+          // TODO: check if we treat fragments correctly
+          fragment = WikiUtil.cleanSpace(decoded.substring(hash + 1))
           decoded = decoded.substring(0, hash)
         }
         
-        // TODO: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
+        decoded = WikiUtil.cleanSpace(decoded)
+        
+        // FIXME: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
+        // get them live from 
+        // http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&format=xml
+        // http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&format=xml
+        // etc. Almost identical, except for stuff like q => en.wikiquote.org, de.wikiquote.org
 
         var parts = decoded.split(":", -1).toList
 
