@@ -170,11 +170,23 @@ object Redirects
 
     private class RedirectFinder(lang : Language) extends (WikiPage => List[(String, String)])
     {
-        // (?ius) enables CASE_INSENSITIVE UNICODE_CASE DOTALL
-        // case insensitive and unicode are important - that's what mediawiki does.
-        // DOTALL means that . also matches line terminators.
-        // Note: Although we do not specify a Locale, UNICODE_CASE does mostly the right thing.
-        val regex = ("""(?ius)\s*(?:""" + Redirect(lang).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[([^\]\n]+)\]\].*""").r
+        val regex = buildRegex
+        
+        private def buildRegex = {
+            val redirects = Redirect(lang).getOrElse(Set("#redirect")).mkString("|")
+            // (?ius) enables CASE_INSENSITIVE UNICODE_CASE DOTALL
+            // case insensitive and unicode are important - that's what mediawiki does.
+            // Note: Although we do not specify a Locale, UNICODE_CASE does mostly the right thing.
+            // DOTALL means that '.' also matches line terminators.
+            // Reminder: (?:...) are non-capturing groups, '*?' is a reluctant qualifier.
+            // (?:#[^\n]*?)? is an optional (the last '?') non-capturing group meaning: there may
+            // be a '#' after which everything but line breaks is allowed ('[]{}|<>' are not allowed 
+            // before the '#'). The match is reluctant ('*?'), which means that we recognize ']]' 
+            // as early as possible.
+            // (?:\|[^\n]*?)? is another optional non-capturing group that reluctantly consumes 
+            // a '|' character and everything but line breaks after it.
+            ("""(?ius)\s*(?:"""+redirects+""")\s*:?\s*\[\[([^\[\]{}|<>\n]+(?:#[^\n]*?)?)(?:\|[^\n]*?)?\]\].*""").r
+        } 
 
         override def apply(page : WikiPage) : List[(String, String)]=
         {
@@ -183,7 +195,7 @@ object Redirects
                 case regex(destination) => {
                   try {
                       
-                      WikiTitle.parse(trim(destination, "|"), page.title.language)
+                      WikiTitle.parse(destination, page.title.language)
                   }
                   catch {
                       case ex : WikiParserException => {
@@ -196,7 +208,7 @@ object Redirects
             }
             
             if (destinationTitle != page.redirect) {
-                Logger.getLogger(Redirects.getClass.getName).log(Level.WARNING, "wrong redirect. page: ["+page.title+"].\nfound by parser:    ["+destinationTitle+"].\nfound by wikipedia: ["+page.redirect+"]")
+                Logger.getLogger(Redirects.getClass.getName).log(Level.WARNING, "wrong redirect. page: ["+page.title+"].\nfound by dbpedia:   ["+destinationTitle+"].\nfound by wikipedia: ["+page.redirect+"]")
             }
                        
             if(destinationTitle != null && page.title.namespace == Namespace.Template && destinationTitle.namespace == Namespace.Template)
@@ -208,14 +220,5 @@ object Redirects
                 Nil
             }
         }
-        
-        private def trim(link : String, chars : String) : String = {
-          var result = link
-          for (char <- chars) {
-            val index = result.indexOf(char)
-            if (index != -1) result = result.substring(0, index)
-          }
-          result
-        } 
     }
 }
