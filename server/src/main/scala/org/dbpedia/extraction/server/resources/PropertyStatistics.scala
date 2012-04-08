@@ -25,7 +25,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
 
     private val mappings = getClassMappings
     private val statistics = createMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
-    private val ignoreList: IgnoreList = createMappingStats.loadIgnorelist()
+    private val ignoreList = createMappingStats.loadIgnorelist()
 
     private val mappedColor = "#65c673"
     private val notMappedColor = "#e05d57"
@@ -37,7 +37,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @PathParam("templa
     def get =
     {
         val ms: MappingStats = getMappingStats(WikiUtil.wikiDecode(template))
-        if (ms.==(null))
+        if (ms == null)
         {
             throw new IllegalArgumentException("Could not find template: " + WikiUtil.wikiDecode(template))
         }

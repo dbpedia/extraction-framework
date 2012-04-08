@@ -27,7 +27,7 @@ class Pages
           </head>
           <body>
             <h2>Ontology pages</h2>
-            { Server.extractor.ontologyPages.values.map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            { Server.extractor.ontologyPages.values.toArray.sortBy(_.title.decodedWithNamespace).map(PageUtils.relativeLink(_) ++ <br/>) }
           </body>
         </html>
     }

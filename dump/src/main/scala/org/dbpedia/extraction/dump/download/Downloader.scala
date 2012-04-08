@@ -88,12 +88,20 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
         val complete = new File(dateDir, "complete")
         
         var files = for (fileName <- fileNames) yield new File(dateDir, dumpName+"-"+date+"-"+unzipped(fileName)._1)
-        if (complete.exists) {  // previous download process said that this dir is complete
+        if (complete.exists) {
+          // Previous download process said that this dir is complete. Note that we MUST check the
+          // 'complete' file - the previous download may have crashed before all files were fully
+          // downloaded. Checking that the downloaded files exist is necessary but not enough.
+          
           if (files.forall(_.exists)) {
             println("did not download any files to '"+dateDir+"' - all files already complete")
             return files // yes, all files are there
           } 
-          complete.delete  // some files missing. maybe previous process was configured for different files?
+          
+          // Some files are missing. Maybe previous process was configured for different files.
+          // Download the files that are missing or have the wrong timestamp. Delete 'complete' 
+          // file first in case this download crashes. 
+          complete.delete 
         }
         
         // all the links we need

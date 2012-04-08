@@ -14,20 +14,6 @@ package object wikiparser {
 /**
  * Namespaces
  * 
- * FIXME: get them from
- * http://meta.wikimedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap (probably the same for all WikiMedia wikis)
- * http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces|namespacealiases
- * http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces|namespacealiases
- * etc. and store them in (human-readable) config files, not in class files.
- *  
- * The api.php approach is probably simpler and more stable than getting them from
- * PHP and other config files. PHP files in SVN may not yet be installed in Wikipedia instances.
- * For that 'static' approach we would need to parse:
- * http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/includes/Defines.php // NS_ constants
- * http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/languages/messages/MessagesEn.php // MediaWiki namespace names
- * http://noc.wikimedia.org/conf/InitialiseSettings.php.txt // WikiMedia namespace aliases
- * ??? // InterWiki prefixes
- *
  * TODO: we only need six of these as constants: 
  * - Main, File, Template, Category
  * - OntologyClass, OntologyProperty
@@ -79,8 +65,8 @@ object Namespace extends Enumeration
     val Category = Value(14)
     val CategoryTalk = Value(15)
 
-    // the following are used quite differently on different wikipedias, so we use generic names
-    // most languages use 100-113, but hu uses 90-99.
+    // The following are used quite differently on different wikipedias, so we use generic names.
+    // Most languages use 100-113, but hu uses 90-99.
     val Namespace90 = Value(90)
     val Namespace91 = Value(91)
     val Namespace92 = Value(92)

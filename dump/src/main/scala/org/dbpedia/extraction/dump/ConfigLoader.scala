@@ -13,6 +13,7 @@ import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.{MemorySource, Source, XMLSource, WikiSource}
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.destinations.Dataset
 
 /**
  * Loads the dump extraction configuration.
@@ -50,10 +51,12 @@ object ConfigLoader
         /** Dump directory */
         if(config.getProperty("dumpDir") == null) throw new IllegalArgumentException("Property 'dumpDir' not defined.")
         val dumpDir = new File(config.getProperty("dumpDir"))
+        if (! dumpDir.exists) throw new IllegalArgumentException("dump dir "+dumpDir+" does not exist")
 
         /** Output directory */
         if(config.getProperty("outputDir") == null) throw new IllegalArgumentException("Property 'outputDir' not defined.")
         val outputDir = new File(config.getProperty("outputDir"))
+        if (! outputDir.exists) throw new IllegalArgumentException("output dir "+outputDir+" does not exist")
 
         /** Local ontology file, downloaded for speed and reproducibility */
         if(config.getProperty("ontologyFile") != null)
@@ -124,8 +127,8 @@ object ConfigLoader
         val compositeExtractor = Extractor.load(extractors, context)
 
         //Destination
-        val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => lang.filePrefix + "/" + dataset.name + "_" + lang.filePrefix + ".nt")
-        val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir, dataset => lang.filePrefix + "/" + dataset.name + "_" + lang.filePrefix + ".nq")
+        val tripleDestination = new FileDestination(new NTriplesFormatter(), targetFile(lang, dumpDate(lang), "nt"))
+        val quadDestination = new FileDestination(new NQuadsFormatter(), targetFile(lang, dumpDate(lang), "nq"))
         val destination = new CompositeDestination(tripleDestination, quadDestination)
 
         // Note: label is also used as file name, but space is replaced by underscores
@@ -176,7 +179,7 @@ object ConfigLoader
 
         private val _articlesSource =
         {
-            XMLSource.fromFile(getDumpFile(config.dumpDir, language),
+            XMLSource.fromFile(dumpFile(language),
                 title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
                          title.namespace == Namespace.Category || title.namespace == Namespace.Template)
         }
@@ -184,7 +187,7 @@ object ConfigLoader
 
         private val _redirects =
         {
-            val cache = new File(config.outputDir, language.filePrefix + "/redirects_" + lang.filePrefix + ".obj")
+            val cache = targetFile(language, dumpDate(language), "obj")(new Dataset("redirects-cache"))
             Redirects.load(articlesSource, cache, language)
         }
         def redirects : Redirects = _redirects
@@ -211,27 +214,61 @@ object ConfigLoader
     //language-independent val
     private lazy val _commonsSource =
     {
-        XMLSource.fromFile(getDumpFile(config.dumpDir, Language("commons")), _.namespace == Namespace.File)
+        XMLSource.fromFile(dumpFile(Language("commons")), _.namespace == Namespace.File)
     }
 
     /**
      * Retrieves the dump stream for a specific language edition.
+     * FIXME: the same algorithm is used by the download code, mapping stats creator and in other 
+     * places. We should share the code. Use a configurable strategy object that returns the paths etc.
      */
-    private def getDumpFile(dumpDir : File, language : Language) : File =
+    private def dumpFile(language : Language) : File =
     {
-        val wikiDir = new File(dumpDir + "/" + language.filePrefix+"wiki")
-        if(!wikiDir.isDirectory) throw new Exception("Dump directory not found: " + wikiDir)
-
         //Find most recent dump date
-        val date = wikiDir.list()
-                   .filter(_.matches("\\d{8}"))
-                   .sortWith(_.toInt > _.toInt)
-                   .headOption.getOrElse(throw new Exception("No dump found in " +wikiDir))
-
-        val dateDir = new File(wikiDir, date)
+        val date = dumpDate(language)
+        val dateDir = new File(wikiDir(language), date)
         val articlesDump = new File(dateDir, language.filePrefix + "wiki-" + date + "-pages-articles.xml")
         if(!articlesDump.isFile) throw new Exception("Dump not found: " + articlesDump)
 
         articlesDump
     }
+    
+    /**
+     * Download directory for a language, e.g. "download/enwiki"
+     * FIXME: the same algorithm is used by the download code, mapping stats creator and in other 
+     * places. We should share the code. Use a configurable strategy object that returns the paths etc.
+     */
+    private def wikiDir(language : Language) : File =
+    {
+        val wiki = language.filePrefix+"wiki"
+        val wikiDir = new File(config.dumpDir, wiki)
+        if(! wikiDir.isDirectory) throw new Exception("Dump directory not found: " + wikiDir)
+        wikiDir
+    }
+    
+    /**
+     * Finds the name (which is a date in format YYYYMMDD) of the latest wikipedia dump 
+     * directory for the given language.
+     * FIXME: the same algorithm is used by the download code, mapping stats creator and in other 
+     * places. We should share the code. Use a configurable strategy object that returns the paths etc.
+     */
+    private def dumpDate(language : Language) : String = 
+    {
+        val dir = wikiDir(language)
+        //Find most recent dump date
+        dir.list().filter(_.matches("\\d{8}")).sortBy(_.toInt).lastOption.getOrElse(throw new Exception("No dump found in " +dir))
+    }
+    
+    /**
+     * Get target file path in config.outputDir. Note that this function should be fast and not 
+     * access the file system - it is called not only in this class, but later during the 
+     * extraction process for each dataset.
+     * FIXME: the same algorithm is used by the download code, mapping stats creator and in other 
+     * places. We should share the code. Use a configurable strategy object that returns the paths etc.
+     */
+    private def targetFile(language : Language, date : String, suffix : String)(dataset : Dataset) : File = {
+        val wiki = language.filePrefix+"wiki"
+        new File(config.outputDir, wiki+"/"+date+"/"+wiki+"-"+date+"-"+dataset.name+"."+suffix)
+    }
+
 }

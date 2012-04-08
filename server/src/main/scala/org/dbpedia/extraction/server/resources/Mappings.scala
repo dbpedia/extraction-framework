@@ -1,15 +1,14 @@
 package org.dbpedia.extraction.server.resources
 
-import _root_.org.dbpedia.extraction.util.{Language, WikiApi}
-import ontology.Ontology
+import org.dbpedia.extraction.util.{Language, WikiApi}
+import stylesheets.TriX
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
-import java.util.logging.Logger
+import java.util.logging.{Logger,Level}
 import org.dbpedia.extraction.wikiparser.{Namespace,WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.{StringDestination,ThrottlingDestination}
-import org.dbpedia.extraction.destinations.formatters.TriXFormatter
 import java.net.{URI, URL}
 import java.lang.Exception
 import xml.{ProcInstr, XML, NodeBuffer, Elem}
@@ -20,7 +19,7 @@ import xml.{ProcInstr, XML, NodeBuffer, Elem}
 @Path("mappings/{lang}/")
 class Mappings(@PathParam("lang") langCode : String)
 {
-    private val logger = Logger.getLogger(classOf[Ontology].getName)
+    private val logger = Logger.getLogger(classOf[Mappings].getName)
 
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
@@ -100,7 +99,7 @@ class Mappings(@PathParam("lang") langCode : String)
         {
             case ex : Exception =>
             {
-                logger.warning("Error updating mapping page: " + title + ". Details: " + ex.getMessage)
+                logger.log(Level.WARNING, "Error updating mapping page: " + title, ex)
                 throw ex
             }
         }
@@ -175,7 +174,7 @@ class Mappings(@PathParam("lang") langCode : String)
         {
             case ex : Exception =>
             {
-                logger.warning("Error validating mapping page: " + title + ". Details: " + ex.getMessage)
+                logger.log(Level.WARNING, "Error validating mapping page: " + title, ex)
                 throw ex
             }
         }
@@ -216,9 +215,9 @@ class Mappings(@PathParam("lang") langCode : String)
 
         logger.info("extracting sample for '" + templateTitle.encodedWithNamespace + "' language " + language)
         
-        //Extract pages
-        val stylesheetUri = new URI(("../" * title.count(_ == '/')) + "../../../stylesheets/trix.xsl")  // if there are slashes in the title, the stylesheets are further up in the directory tree
-        val destination = new StringDestination(new TriXFormatter(stylesheetUri))
+        // Extract pages
+        // if there are slashes in the title, the stylesheets are further up in the directory tree
+        val destination = new StringDestination(TriX.formatter(title.count(_ == '/')+3))
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         // extract at most 1000 triples
         Server.extractor.extract(source, new ThrottlingDestination(destination, 1000), language)
