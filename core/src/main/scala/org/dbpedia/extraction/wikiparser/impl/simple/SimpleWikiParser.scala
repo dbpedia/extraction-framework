@@ -244,6 +244,7 @@ final class SimpleWikiParser extends WikiParser
         }
         else if(source.lastTag("{{"))
         {
+            // FIXME: source.pos+1 is invalid if we're at the end of the text
             val nextToken = source.getString(source.pos, source.pos+1)
             if ( nextToken == "{")
             {
