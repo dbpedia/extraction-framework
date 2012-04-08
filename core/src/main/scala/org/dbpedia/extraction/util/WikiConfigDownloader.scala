@@ -1,7 +1,9 @@
 package org.dbpedia.extraction.util
 
 import java.io.IOException
-import java.net.{URL, HttpURLConnection}
+import java.net.{URL,URLDecoder,HttpRetryException,HttpURLConnection}
+import java.net.URLDecoder.decode
+import java.net.HttpURLConnection.{HTTP_OK,HTTP_MOVED_PERM,HTTP_MOVED_TEMP}
 import javax.xml.stream.XMLInputFactory
 import scala.collection.mutable
 import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
@@ -21,9 +23,12 @@ import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
  * which are identical except for stuff like q => en.wikiquote.org / de.wikiquote.org etc.
  * 
  * TODO: error handling. So far, it didn't seem necessary. api.php seems to work, and this
- * class is used with direct human supervision.
+ * class is so far used with direct human supervision.
+ * 
+ * @param followRedirects if true, follow HTTP redirects for languages that have been renamed,
+ * e.g. dk.wikipedia.org -> da.wikipedia.org. If false, throw a useful exception on redirects. 
  */
-class WikiConfigDownloader(language : String) {
+class WikiConfigDownloader(language : String, followRedirects : Boolean) {
   
   val url = new URL(api(language)+"?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords")
   
@@ -31,16 +36,16 @@ class WikiConfigDownloader(language : String) {
     "http://"+language+"."+(if (language == "commons") "wikimedia" else "wikipedia")+".org/w/api.php"
     
   /**
-   * @return namespaces (name -> code), namespace aliases (name -> code), redirect tags
+   * @return namespaces (name -> code), namespace aliases (name -> code), magic words (name -> aliases)
+   * @throws HttpRetryException if followRedirects is false and this language is redirected to another 
+   * language. The message of the HttpRetryException is the target language.
+   * @throws IOException if another error occurs
    */
-  def download() : (mutable.Map[String, Int], mutable.Map[String, Int], mutable.Set[String]) = 
+  def download() : (mutable.Map[String, Int], mutable.Map[String, Int], mutable.Map[String, mutable.Set[String]]) = 
   {
     val conn = url.openConnection.asInstanceOf[HttpURLConnection]
     try {
-      conn.setInstanceFollowRedirects(false)
-      val response = conn.getResponseCode
-      if (response != HttpURLConnection.HTTP_OK) throw new IOException("URL '"+url+"' replied '"+conn.getResponseMessage+"' - Location: '"+conn.getHeaderField("Location"))
-        
+      checkResponse(conn)
       val factory = XMLInputFactory.newInstance
       val stream = conn.getInputStream
       try new WikiConfigReader(new XMLEventAnalyzer(factory.createXMLEventReader(stream))).read()
@@ -48,58 +53,91 @@ class WikiConfigDownloader(language : String) {
     }
     finally conn.disconnect
   }
+  
+  /**
+   * @throws HttpRetryException if this language is redirected to another language. 
+   * The message of the HttpRetryException is the target language, e.g. "da".
+   * @throws IOException if another error occurred
+   */
+  private def checkResponse(conn : HttpURLConnection) : Unit = {
+    conn.setInstanceFollowRedirects(followRedirects)
+    val code = conn.getResponseCode
+    if (code != HTTP_OK) {
+      
+      var location = conn.getHeaderField("Location")
+      if (location != null) {
+        // Of course we should not decode the whole URL, but in this case, it's ok. We're doing
+        // a very strict equality test below, so any mixup caused by decoding will be detected.
+        val url2 = new URL(decode(location, "UTF-8"))
+        location = url2.toString // use decoded form in IOException below
+        
+        if (! followRedirects && (code == HTTP_MOVED_PERM || code == HTTP_MOVED_TEMP) && (url2.getPath == url.getPath && url2.getQuery == url.getQuery))
+        {
+          // Note: we use toSeq because array equality doesn't work in Scala.
+          val parts = url.getHost.split("\\.").toSeq
+          val parts2 = url2.getHost.split("\\.").toSeq
+          // if everything else matches, the first part of the host name is the target language
+          if (parts.tail == parts2.tail) throw new HttpRetryException(parts2.head, code, location)
+        }
+      }
+      
+      throw new IOException("URL '"+url+"' replied "+code+" ("+conn.getResponseMessage+") - Location: '"+location+"'")
+    }
+  }
+  
 }
 
 private class WikiConfigReader(in : XMLEventAnalyzer) {
   
-  def read() : (mutable.Map[String, Int], mutable.Map[String, Int], mutable.Set[String]) = 
+  /**
+   * @return namespaces (name -> code), namespace aliases (name -> code), magic words (name -> aliases)
+   */
+  def read() : (mutable.Map[String, Int], mutable.Map[String, Int], mutable.Map[String, mutable.Set[String]]) = 
   {
-    var namespaces : mutable.Map[String, Int] = null
-    var aliases : mutable.Map[String, Int] = null
-    var redirects : mutable.Set[String] = null
-    
     in.document { _ =>
       in.element("api") { _ =>
         in.element("query") { _ =>
-          namespaces = readNamespaces("namespaces", true)
-          aliases = readNamespaces("namespacealiases", false)
-          redirects = readMagicWords()("redirect")
+          val namespaces = readNamespaces("namespaces", true)
+          val aliases = readNamespaces("namespacealiases", false)
+          val magicwords = readMagicWords()
+          (namespaces, aliases, magicwords)
         }
       }
     }
-    
-    (namespaces, aliases, redirects)
   }
   
+  /**
+   * @return namespaces or aliases (name -> code)
+   */
   private def readNamespaces(tag : String, canonical : Boolean) : mutable.Map[String, Int] = 
   {
-    // LinkedHashMap to preserve order
-    val namespaces = mutable.LinkedHashMap[String, Int]()
     in.element(tag) { _ =>
+      // LinkedHashMap to preserve order
+      val namespaces = mutable.LinkedHashMap[String, Int]()
       in.elements("ns") { ns =>
         val id = (ns getAttr "id").toInt
         in.text { text => 
           // order is important here - canonical first, because in the reverse map 
           // in Namespaces.scala it must be overwritten by the localized value.
-          if (canonical && id != 0) namespaces.put(ns getAttr "canonical", id)
-          namespaces.put(text, id)
+          if (canonical && id != 0) namespaces(ns getAttr "canonical") = id
+          namespaces(text) = id
         }
       }
+      namespaces 
     }
-    namespaces 
   }
     
   /**
-   * @return map from magic word name to aliases
+   * @return magic words (name -> aliases)
    */
   private def readMagicWords() : mutable.Map[String, mutable.Set[String]] =
   {
-    // LinkedHashMap to preserve order (although it's probably not important)
-    val magic = mutable.LinkedHashMap[String, mutable.Set[String]]()
     in.element("magicwords") { _ =>
+      // LinkedHashMap to preserve order (although it's probably not important)
+      val magicwords = mutable.LinkedHashMap[String, mutable.Set[String]]()
       in.elements("magicword") { mw =>
         // LinkedHashSet to preserve order (although it's probably not important)
-        val aliases = magic.getOrElseUpdate(mw getAttr "name", mutable.LinkedHashSet[String]())
+        val aliases = magicwords.getOrElseUpdate(mw getAttr "name", mutable.LinkedHashSet[String]())
         in.elements("aliases") { _ =>
           in.elements("alias") { _ =>
             in.text { text => 
@@ -108,8 +146,8 @@ private class WikiConfigReader(in : XMLEventAnalyzer) {
           }
         }
       }
+      magicwords
     }
-    magic
   }
     
 }
