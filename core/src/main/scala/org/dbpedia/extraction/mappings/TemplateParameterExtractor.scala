@@ -37,7 +37,7 @@ class TemplateParameterExtractor( context : {
         linkParameters.distinct.foreach( link => {
             parameterRegex findAllIn link foreach (_ match {
                 case parameterRegex (param) => parameters::= param //.replace("}","").replace("|","")
-                case _ => parameters // FIXME: this is useless, isn't it? there's no yield.
+                case _ => parameters // FIXME: this is useless, isn't it? there's no yield and no assignment
             })
         })
 
@@ -45,7 +45,7 @@ class TemplateParameterExtractor( context : {
             parameters ::= templatePar.parameter
         }
 
-        for (parameter <- parameters.distinct) 
+        for (parameter <- parameters.distinct if parameter.nonEmpty) 
             quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty, 
                 parameter, node.sourceUri, context.ontology.getDatatype("xsd:string").get )
         new Graph(quads)
