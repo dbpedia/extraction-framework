@@ -61,20 +61,6 @@ class CreateMappingStats(val statsDir : File, val language: Language)
     private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> \.""".r
     private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.*)"\S* \.""".r
 
-    def getDecodedTemplateName(rawTemplate: String): String =
-    {
-        var templateName = ""
-        if (rawTemplate startsWith templateNamespacePrefix)
-        {
-            templateName = rawTemplate.substring(templateNamespacePrefix.length)
-        }
-        else
-        {
-            templateName = WikiUtil.wikiDecode(rawTemplate)
-        }
-        templateName
-    }
-
     def countMappedStatistics(mappings: Map[String, ClassMapping], wikipediaStatistics: WikipediaStats) =
     {
         val startTime = System.currentTimeMillis()
@@ -86,7 +72,8 @@ class CreateMappingStats(val statsDir : File, val language: Language)
 
         for ((rawTemplate, templateStats) <- wikipediaStatistics.templates)
         {
-            val templateName: String = getDecodedTemplateName(rawTemplate)
+            if (! rawTemplate.startsWith(templateNamespacePrefix)) throw new Exception(rawTemplate)
+            val templateName = rawTemplate.substring(templateNamespacePrefix.length)
 
             //mappings: el, en, pt decoded templates without _
             isMapped = checkMapping(templateName, mappings)
@@ -142,7 +129,7 @@ class CreateMappingStats(val statsDir : File, val language: Language)
         var templatesMap: mutable.Map[String, TemplateStats] = new mutable.HashMap() // "templateName" -> TemplateStats
         
         println("Reading redirects from " + redirectsFile)
-        val redirects: Map[String, String] = loadTemplateRedirects(redirectsFile)
+        val redirects = loadTemplateRedirects(redirectsFile)
         println("  " + redirects.size + " redirects")
         
         println("Using Template namespace prefix " + templateNamespacePrefix + " for language " + language.wikiCode)
@@ -175,7 +162,8 @@ class CreateMappingStats(val statsDir : File, val language: Language)
 
     private def stripUri(fullUri: String): String =
     {
-        fullUri.substring(resourceNamespacePrefix.length)
+        if (! fullUri.startsWith(resourceNamespacePrefix)) throw new Exception(fullUri)
+        WikiUtil.wikiDecode(fullUri.substring(resourceNamespacePrefix.length))
     }
 
     private def loadTemplateRedirects(fileName: File): Map[String, String] =
@@ -192,11 +180,7 @@ class CreateMappingStats(val statsDir : File, val language: Language)
                   case ObjectPropertyTripleRegex(subj, pred, obj) =>
                   {
                       val templateName = stripUri(unescapeNtriple(subj))
-                      //TODO: adjust depending on encoding in redirects file
-                      if (templateName startsWith templateNamespacePrefix)
-                      {
-                          redirects(templateName) = stripUri(unescapeNtriple(obj))
-                      }
+                      redirects(templateName) = stripUri(unescapeNtriple(obj))
                   }
                   case _ => if (line.nonEmpty) throw new IllegalArgumentException("line did not match redirects syntax: " + line)
               }
@@ -286,7 +270,7 @@ class CreateMappingStats(val statsDir : File, val language: Language)
                     val templateName = redirects.getOrElse(subjName, subjName)
 
                     // lookup the *subject* in the resultMap
-                    //skip the templates that are not found (they don't occurr in Wikipedia)
+                    //skip the templates that are not found (they don't occur in Wikipedia)
                     for (stats <- resultMap.get(templateName))
                     {
                         // add object to properties map with count 0
@@ -517,8 +501,8 @@ object CreateMappingStats
         def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping]) =
         {
             val templateNamespacePrefix = Namespaces.getName(language, Namespace.Template) + ":"
-            val mappedRedirrects = redirects.filterKeys(title => mappings.contains(WikiUtil.wikiDecode(title, language).substring(templateNamespacePrefix.length())))
-            mappedRedirrects.map(_.swap)
+            val mappedRedirects = redirects.filterKeys(title => mappings.contains(title))
+            mappedRedirects.map(_.swap)
         }
     }
     
@@ -586,7 +570,7 @@ class FileFinder(baseDir : File, language : Language) {
       val date = wikiDir.list.filter(_.matches("\\d{8}")).sortBy(_.toInt).lastOption.getOrElse(throw new Exception("No dump found in " +wikiDir))
       // TODO: check that directory contains the file named 'complete' written by downloader
       
-      val dateDir = new File(baseDir, date)
+      val dateDir = new File(wikiDir, date)
       
       new File(dateDir, wiki+"-"+date+"-"+dataset.name+"."+suffix)
     }
