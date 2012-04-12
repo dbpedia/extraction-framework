@@ -27,23 +27,22 @@ class FileDownloader( url : URL, file : File, getStream : URLConnection => Input
     val conn = url.openConnection
     try
     {
-      val lastModified = conn.getLastModified
-      
-      if (lastModified != 0 && file.lastModified == lastModified) return false
-      
       download(conn, file)
-      
-      if (lastModified != 0) file.setLastModified(lastModified)
     }
     // http://dumps.wikimedia.org/ seems to kick us out if we don't disconnect.
-    // But only disconnect if it's a http connection. Can't do this with file:// URLs.
+    // But: only disconnect if it's a http connection. Can't do this with file:// URLs.
     finally conn match { case conn : HttpURLConnection => conn.disconnect }
-    
-    return true
   }
   
-  private def download(conn: URLConnection, file : File): Unit = 
+  /**
+   * @return true if file was downloaded, false if it was already up to date, 
+   * i.e. existed and had the same timestamp as the URL resource.
+   */
+  def download(conn: URLConnection, file : File): Boolean = 
   {
+    val lastModified = conn.getLastModified
+    if (lastModified != 0 && file.lastModified == lastModified) return false
+    
     val in = getStream(conn)
     try
     {
@@ -55,9 +54,13 @@ class FileDownloader( url : URL, file : File, getStream : URLConnection => Input
       finally out.close
     }
     finally in.close
+      
+    if (lastModified != 0) file.setLastModified(lastModified)
+    
+    return true
   }
   
-  private def copy(in : InputStream, out : OutputStream) : Unit =
+  def copy(in : InputStream, out : OutputStream) : Unit =
   {
     val buf = new Array[Byte](1 << 20) // 1 MB
     while (true)
