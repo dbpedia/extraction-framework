@@ -12,7 +12,7 @@ import java.util.zip.GZIPInputStream
 /**
  * TODO: this class is too big. Move the unzip and retry concerns to separate classes.
  */
-class Downloader(baseUrl : URL, baseDir : File, retry : Retry, unzip : Boolean)
+class DumpDownloader(baseUrl : URL, baseDir : File, retry : Retry, unzip : Boolean)
 {
   def init : Unit =
   {
@@ -22,28 +22,6 @@ class Downloader(baseUrl : URL, baseDir : File, retry : Retry, unzip : Boolean)
   def download(urls : Traversable[URL]) : Traversable[File] =
   {
     urls.map(download(_, baseDir))
-  }
-  
-  def resolveRanges(csvUrl : URL, ranges : Map[(Int,Int), Set[String]], languages : Map[String, Set[String]]) : Unit =
-  {
-    val csvFile = download(csvUrl, baseDir)
-    
-    // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
-    // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
-    // these non-ASCII chars anyway, so we don't have to unescape them.
-    // TODO: the CSV file URL is configurable, so the encoding should be too.
-    println("parsing "+csvFile)
-    val wikis = WikiInfo.fromFile(csvFile, Codec.UTF8)
-    
-    // Note: we don't have to download the file, but it seems nicer.
-    // val wikis = WikiInfo.fromURL(csvUrl, Codec.UTF8)
-    
-    // for all wikis in one of the desired ranges...
-    for (((from, to), files) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
-    {
-      // ...add files for this range to files for this language
-      languages.getOrElseUpdate(wiki.language, new HashSet[String]) ++= files
-    }
   }
   
   def downloadFiles(languages : Map[String, Set[String]]) : Traversable[File] =
@@ -145,7 +123,7 @@ class Downloader(baseUrl : URL, baseDir : File, retry : Retry, unzip : Boolean)
     (name, identity)
   }
   
-  private def download(url : URL, dir : File) : File =
+  def download(url : URL, dir : File) : File =
   {
     val path = url.getPath
     var part = path.substring(path.lastIndexOf('/') + 1)
