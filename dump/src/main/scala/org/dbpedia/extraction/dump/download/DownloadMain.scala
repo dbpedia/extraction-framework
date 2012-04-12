@@ -17,7 +17,8 @@ object DownloadMain extends DownloadConfig
     
     class Decorator extends FileDownload with Counter with LastModified with Retry {
       val buffer = 1 << 20 // one MB byte array buffer
-      val step = 1L << 20 // count each MB 
+      val step = 1L << 20 // count each MB
+      val pretty = progressPretty
       val max = retryMax
       val millis = retryMillis
     }

@@ -9,9 +9,11 @@ trait Counter extends Download {
    * After how many bytes should download progress be logged?
    */
   val step : Long
+  
+  val pretty : Boolean
 
   protected abstract override def inputStream(conn: URLConnection): InputStream = {
-    val logger = new ByteLogger(getContentLength(conn), step)
+    val logger = new ByteLogger(getContentLength(conn), step, ! pretty)
     new CountingInputStream(super.inputStream(conn), logger)
   }
   

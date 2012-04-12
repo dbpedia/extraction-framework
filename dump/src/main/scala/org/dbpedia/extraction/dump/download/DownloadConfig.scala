@@ -25,6 +25,8 @@ class DownloadConfig
   
   var unzip = false
   
+  var progressPretty = false
+  
   /**
    * Parse config in given file. Each line in file must be an argument as explained by usage overview.
    */
@@ -56,6 +58,7 @@ class DownloadConfig
       case Arg("retry-max", count) => retryMax = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-millis", millis) => retryMillis = toInt(millis, 0, Int.MaxValue, arg)
       case Arg("unzip", bool) => unzip = toBoolean(bool, arg)
+      case Arg("pretty", bool) => progressPretty = toBoolean(bool, arg)
       case Arg("config", path) =>
         val file = resolveFile(dir, path)
         if (! file.isFile) throw Usage("Invalid file "+file, arg)
@@ -149,6 +152,8 @@ object Usage {
     |  Milliseconds between attempts if the download of a file fails. Default is 10000 ms = 10 seconds.  
     |unzip=true
     |  Should downloaded .gz and .bz2 files be unzipped on the fly? Default is false.
+    |pretty=true
+    |  Should progress printer reuse one line? Default is false (doesn't work with log files).
     |Order is relevant - for single-value parameters, values read later overwrite earlier values.
     |Empty arguments or arguments beginning with '#' are ignored.
     |""" /* empty line */ 

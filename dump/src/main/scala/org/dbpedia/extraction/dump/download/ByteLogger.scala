@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.download
 
-class ByteLogger(length : Long, step : Long) extends ((Long, Boolean) => Unit)
+class ByteLogger(length : Long, step : Long, ugly : Boolean) extends ((Long, Boolean) => Unit)
 {
   private var nanos = System.nanoTime
   
@@ -12,7 +12,7 @@ class ByteLogger(length : Long, step : Long) extends ((Long, Boolean) => Unit)
     {
       val millis = (System.nanoTime - nanos) / 1000000
       print("read "+formatBytes(bytes)+" of "+formatBytes(length)+" in "+formatMillis(millis)+" ("+formatRate(bytes, millis)+")                    ") // spaces at end overwrite previous line
-      if (close) println // new line 
+      if (close || ugly) println // new line 
       else print('\r') // back to start of line
       next = (bytes / step + 1) * step
     }
