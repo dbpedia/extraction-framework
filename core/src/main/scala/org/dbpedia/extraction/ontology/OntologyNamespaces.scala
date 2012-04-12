@@ -3,6 +3,7 @@ package org.dbpedia.extraction.ontology
 import org.dbpedia.extraction.util.{Language, UriUtils}
 import java.net.URLDecoder.decode
 import scala.collection.mutable.HashMap
+import java.util.Locale
 
 /**
  * Manages the ontology namespaces.
@@ -10,7 +11,7 @@ import scala.collection.mutable.HashMap
 object OntologyNamespaces
 {
     // TODO: These config settings have nothing to do with ontology namespaces.
-    // Move them to some other class.
+    // Move them to some other class. No, better make them configuration parameters. 
   
     //#int
     val genericDomain = Set[String]("en")
@@ -62,7 +63,7 @@ object OntologyNamespaces
 
     /** 
      * Map containing all supported URI prefixes 
-     * TODO: make these configurable. 
+     * TODO: make these configurable.
      */
     private def prefixMap = Map(
         OWL_PREFIX -> OWL_NAMESPACE,
@@ -116,9 +117,7 @@ object OntologyNamespaces
         if (baseUri.contains('#'))
         {
             // contains a fragment
-            // right-hand fragments must not contain ':', '/' or '&', according to our Validate class
-            // TODO: there is no Validate class. Do we still want this?
-            baseUri + escape(encodedSuffix, "/:&")
+            baseUri + encodedSuffix
         }
         else
         {
@@ -129,25 +128,26 @@ object OntologyNamespaces
             }
             else
             {
-                toIRIString(baseUri+encodedSuffix)
+                /**
+                 * FIXME: this can not really work. It's very hard and almost impossible to correctly
+                 * encode/decode a complete URI. Only parts of a URI can be encoded and then combined. 
+                 * At this point, it's too late.
+                 */
+                // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
+                escape(decode(baseUri+encodedSuffix, "UTF-8"), "\"#%<>?[\\]^`{|}")
             }
         }
     }
 
     /**
-     * FIXME: this method can not really work. There is no way to encode/decode a complete URI. 
-     * Only parts of a URI can be encoded and then combined. At this point, it's too late.
-     */
-    // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
-    private def toIRIString(uri:String) = escape(decode(uri, "UTF-8"), "\"#%<>?[\\]^`{|}")
-    
-    /**
      * @param str string to process
-     * @param chars list of characters that should be percent-encoded if they occur in the string
+     * @param chars list of characters that should be percent-encoded if they occur in the string.
+     * Must be ASCII characters, i.e. Unicode code points from U+0020 to U+007F (inclusive).
+     * This method does not correctly escape characters outside that range.
      */
     private def escape(str : String, chars : String) : String = {
         val sb = new StringBuilder
-        for (c <- str) if (chars.indexOf(c) == -1) sb append c else sb append "%" append c.toInt.toHexString
+        for (c <- str) if (chars.indexOf(c) == -1) sb append c else sb append "%" append c.toInt.toHexString.toUpperCase(Locale.ENGLISH)
         sb.toString
     }      
     
@@ -155,9 +155,10 @@ object OntologyNamespaces
      * Return true  if the namespace of the given URI is known to be an exception for evaluation (e.g. http://schema.org).
      * Return false if the namespace of the given URI starts with should be validated.
      */
-    def skipValidation(uri : String) : Boolean =
+    def skipValidation(name : String) : Boolean =
     {
-        nonValidatedNamespaces.exists(getUri(uri, "") startsWith _)
+        val uri = getUri(name, "")
+        nonValidatedNamespaces.exists(uri startsWith _)
     }
 
 }
