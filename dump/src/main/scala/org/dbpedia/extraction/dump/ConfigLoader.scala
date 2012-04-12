@@ -187,7 +187,7 @@ object ConfigLoader
 
         private val _redirects =
         {
-            val cache = targetFile(language, dumpDate(language), "obj")(new Dataset("redirects-cache"))
+            val cache = targetFile(language, dumpDate(language), "obj")(new Dataset("template-redirects"))
             Redirects.load(articlesSource, cache, language)
         }
         def redirects : Redirects = _redirects
@@ -268,7 +268,7 @@ object ConfigLoader
      */
     private def targetFile(language : Language, date : String, suffix : String)(dataset : Dataset) : File = {
         val wiki = language.filePrefix+"wiki"
-        new File(config.outputDir, wiki+"/"+date+"/"+wiki+"-"+date+"-"+dataset.name+"."+suffix)
+        new File(config.outputDir, wiki+"/"+date+"/"+wiki+"-"+date+"-"+dataset.name.replace('_','-')+"."+suffix)
     }
 
 }

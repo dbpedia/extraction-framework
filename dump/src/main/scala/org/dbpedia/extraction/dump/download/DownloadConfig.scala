@@ -5,7 +5,7 @@ import java.net.{URL,MalformedURLException}
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.io.{Source,Codec}
 
-class Config
+class DownloadConfig
 {
   var baseUrl : URL = null
   
@@ -25,13 +25,6 @@ class Config
   
   var unzip = false
   
-  def validate : Unit = {
-    if (baseDir == null) throw Usage("No target directory")
-    if ((languages.nonEmpty || ranges.nonEmpty) && baseUrl == null) throw Usage("No base URL")
-    if (ranges.nonEmpty && csvUrl == null) throw Usage("No CSV file URL")
-    if (languages.isEmpty && ranges.isEmpty && others.isEmpty) throw Usage("No files to download")
-  }
-
   /**
    * Parse config in given file. Each line in file must be an argument as explained by usage overview.
    */
