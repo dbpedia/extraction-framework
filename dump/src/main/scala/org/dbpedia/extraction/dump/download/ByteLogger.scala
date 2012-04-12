@@ -1,12 +1,10 @@
 package org.dbpedia.extraction.dump.download
 
-class ByteLogger( step : Long ) extends ((Long, Boolean) => Unit)
+class ByteLogger(length : Long, step : Long) extends ((Long, Boolean) => Unit)
 {
   private var nanos = System.nanoTime
   
   private var next : Long = step
-  
-  var length : Long = 0
   
   def apply( bytes : Long, close : Boolean = false ) : Unit =
   {
