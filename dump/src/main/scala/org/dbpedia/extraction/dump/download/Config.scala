@@ -23,7 +23,7 @@ class Config
   
   var retryMillis = 10000
   
-  var unzip : Boolean = false
+  var unzip = false
   
   def validate : Unit = {
     if (baseDir == null) throw Usage("No target directory")
@@ -44,7 +44,8 @@ class Config
   /**
    * @param dir Context directory. Config file and base dir names will be resolved relative to 
    * this path. If this method is called for a config file, this argument should be the directory
-   * of that file. Otherwise, this argument should be the current working directory.
+   * of that file. Otherwise, this argument should be the current working directory (or null,
+   * which has the same effect).
    */
   def parse( dir : File, args : TraversableOnce[String] ) : Unit = {
     // range, both limits optional
