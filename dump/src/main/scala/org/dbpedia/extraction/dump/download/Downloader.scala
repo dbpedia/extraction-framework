@@ -12,7 +12,7 @@ import java.util.zip.GZIPInputStream
 /**
  * TODO: this class is too big. Move the unzip and retry concerns to separate classes.
  */
-class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : Int, unzip : Boolean)
+class Downloader(baseUrl : URL, baseDir : File, retry : Retry, unzip : Boolean)
 {
   def init : Unit =
   {
@@ -63,17 +63,19 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
   
   private def downloadFiles(language : String, fileNames : Set[String]) : Traversable[File] =
   {
-    val dumpName = getDumpName(language)
+    import Downloader._
+    
+    val dumpName = Downloader.dumpName(language)
     
     val mainPage = new URL(baseUrl, dumpName+"/") // here the server does NOT use index.html 
     val mainDir = new File(baseDir, dumpName)
     if (! mainDir.exists && ! mainDir.mkdirs) throw new Exception("Target directory '"+mainDir+"' does not exist and cannot be created")
-    val running = new File(mainDir, "running")
+    val running = runningFile(baseDir, language)
     if (! running.createNewFile) throw new Exception("Another process is downloading files to '"+mainDir+"' - stop that process and remove '"+running+"'")
     try
     {
       // 1 - find all dates on the main page, sort them latest first
-      var dates = SortedSet.empty(Ordering.ordered[String].reverse)
+      var dates = SortedSet.empty(Ordering[String].reverse)
       
       download(mainPage, mainDir) // creates index.html, although it does not exist on the server
       eachLine(new File(mainDir, "index.html"), line => DateLink.findAllIn(line).matchData.foreach(dates += _.group(1)))
@@ -85,7 +87,7 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
         val dateDir = new File(mainDir, date)
         if (! dateDir.exists && ! dateDir.mkdirs) throw new Exception("Target directory '"+dateDir+"' does not exist and cannot be created")
         
-        val complete = new File(dateDir, "complete")
+        val complete = completeFile(baseDir, language, date)
         
         var files = for (fileName <- fileNames) yield new File(dateDir, dumpName+"-"+date+"-"+unzipped(fileName)._1)
         if (complete.exists) {
@@ -153,33 +155,21 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
     
     val file = new File(dir, name)
     
-    var retry = 0
-    while (true)
-    {
-      try
-      {
-        println("downloading '"+url+"' to '"+file+"'")
-        val logger = new ByteLogger(1 << 20) // create it now to start the clock
-        val getStream = { conn : URLConnection =>
-          logger.length = getContentLength(conn)
-          unzipper(new CountingInputStream(conn.getInputStream, logger))
-        }
-        val downloader = new FileDownloader(url, file, getStream)
-        if (! downloader.download) println("did not download '"+url+"' to '"+file+"' - file is up to date")
-        
-        return file
+    retry {
+      println("downloading '"+url+"' to '"+file+"'")
+      val logger = new ByteLogger(1 << 20) // create it now to start the clock
+      val getStream = { conn : URLConnection =>
+        logger.length = getContentLength(conn)
+        unzipper(new CountingInputStream(conn.getInputStream, logger))
       }
-      catch
-      {
-        case ioe : IOException =>
-          retry += 1
-          println(retry+" of "+retryMax+" attempts to download '"+url+"' to '"+file+"' failed - "+ioe)
-          if (retry >= retryMax) throw ioe
-          Thread.sleep(retryMillis)
-      }
+      val downloader = new FileDownloader(url, file, getStream)
+      if (! downloader.download) println("did not download '"+url+"' to '"+file+"' - file is up to date")
+      
+      return file
+    } log { (attempt, max, ioex) =>
+      if (! ioex.isInstanceOf[IOException]) throw ioex
+      println(attempt+" of "+max+" attempts to download '"+url+"' to '"+file+"' failed - "+ioex)
     }
-    
-    throw new Exception("can't get here, but the scala compiler doesn't know")
   }
   
   private def getContentLength(conn : URLConnection) : Long =
@@ -195,8 +185,8 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
   catch { case nme : NoSuchMethodException => None }
   
   private val unzippers = Map[String, InputStream => InputStream] (
-      "gz" -> { in => new GZIPInputStream(in) }, 
-      "bz2" -> { in => new BZip2CompressorInputStream(in) } 
+      "gz" -> { new GZIPInputStream(_) }, 
+      "bz2" -> { new BZip2CompressorInputStream(_) } 
   )
   
   private def eachLine( file : File, f : String => Unit ) : Unit =
@@ -209,6 +199,31 @@ class Downloader(baseUrl : URL, baseDir : File, retryMax : Int, retryMillis : In
     finally source.close
   }
   
-  private def getDumpName(language: String) = language.replace('-', '_') + "wiki"
+}
+
+object Downloader {
   
+  def dumpName(language: String) = language.replace('-', '_') + "wiki"
+  
+  /**
+   * Suffix of the file that indicates that a download of the Wikipedia dump files in the
+   * directory containing this file is running. Note that this file may also have been left
+   * over by a previous crashed download process. TODO: use file locks etc.
+   */
+  def runningFile (baseDir : File, language : String) : File = {
+    val name = dumpName(language)
+    new File(baseDir, name+"/"+name+"-download-running")
+  }
+  
+  /**
+   * File that indicates that a download of the Wikipedia dump files in the directory containing 
+   * this file is complete. Note that this does not mean that all possible files have been downloaded, 
+   * only those that a certain download process was supposed to download.
+   */
+  def completeFile(baseDir : File, language : String, date : String) : File = {
+    val name = dumpName(language)
+    new File(baseDir, name+"/"+date+"/"+name+"-"+date+"-download-complete")
+  }
+        
+
 }
