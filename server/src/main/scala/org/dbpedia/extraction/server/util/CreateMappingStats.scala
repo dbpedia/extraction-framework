@@ -185,11 +185,11 @@ class CreateMappingStats(val statsDir : File, val language: Language)
                   case _ => if (line.nonEmpty) throw new IllegalArgumentException("line did not match redirects syntax: " + line)
               }
               count += 1
-              print(count+" lines\r")
+              if (count % 1000 == 0) print(count+" lines\r")
           }
         }
         finally source.close
-        println
+        println(count+" lines")
         
         println("resolving "+redirects.size+" redirects")
         // resolve transitive closure
