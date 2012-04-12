@@ -137,7 +137,6 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                     for ((mappingStat, counter) <- sortedStatsMap.filter(_._1.getNumberOfProperties(ignoreList) > 0)) yield
                         {
                             val templateName = createMappingStats.templateNamespacePrefix + mappingStat.templateName
-                            // de and el aren't encoded
                             val targetRedirect = reversedRedirects.get(templateName)
 
                             val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties(ignoreList) * 100)
