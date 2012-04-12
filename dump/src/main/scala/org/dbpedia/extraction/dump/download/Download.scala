@@ -8,7 +8,7 @@ object Download
     cfg.parse(null, args)
     cfg.validate
     
-    val downloader = new Downloader(cfg.baseUrl, cfg.baseDir, cfg.retryMax, cfg.retryMillis, cfg.unzip)
+    val downloader = new Downloader(cfg.baseUrl, cfg.baseDir, new Retry(cfg.retryMax, cfg.retryMillis), cfg.unzip)
     
     downloader.init
     
