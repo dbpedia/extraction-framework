@@ -26,30 +26,26 @@
                             <id>server</id>
                             <mainClass>org.dbpedia.extraction.server.Server</mainClass>
                             <args>
-                                <!-- password for statistics ignore list -->
-                                <arg>CHANGE-THIS-PASSWORD</arg>
-                                <!-- statistics dir -->
-                                <arg>src/main/statistics</arg>
-                                <!-- ontology file. if not given or not existing, server downloads ontology from mappings.dbpedia.org -->
-                                <arg>../ontology.xml</arg>
-                                <!-- mappings dir. if not given or not existing, server downloads mappings from mappings.dbpedia.org -->
-                                <arg>../mappings</arg>
+                                <arg>CHANGE-THIS-PASSWORD</arg><!-- statistics ignore list password -->
+                                <arg>src/main/statistics</arg><!-- statistics files dir -->
+                                <arg>../ontology.xml</arg><!-- ontology file. if it doesn't exist, load from server -->
+                                <arg>../mappings</arg><!-- mappings dir. if it doesn't exist, load from server -->
+                                <!-- all additional args are languages, comma or whitespace separated -->
+                                <arg>ar,bn,ca,cs,de,el,en,es,eu,fr,ga,hi,hr,hu,it,ko,nl,pl,pt,ru,sl,tr</arg>
                             </args>
                             <jvmArgs>
                                 <jvmArg>-Xms512m</jvmArg>
-                                <jvmArg>-Xmx1536m</jvmArg>
+                                <jvmArg>-Xmx6g</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>stats</id>
                             <mainClass>org.dbpedia.extraction.server.util.CreateMappingStats</mainClass>
                             <args>
-                                <!-- source dir contains folder for each language with extraction results -->
-                                <arg>/home/release/dbpedia</arg>
-                                <!-- target dir -->
-                                <arg>src/main/statistics</arg>
-                                <!-- languages (comma or space separated). if none given, use all languages that are hard-coded in the server -->
-                                <arg></arg>
+                                <arg>/home/release/dbpedia</arg><!-- dbpedia files dir -->
+                                <arg>src/main/statistics</arg><!-- statistics files dir -->
+                                <!-- all additional args are languages, comma or whitespace separated -->
+                                <arg>ar,bn,ca,cs,de,el,en,es,eu,fr,ga,hi,hr,hu,it,ko,nl,pl,pt,ru,sl,tr</arg>
                             </args>
                         </launcher>
                     </launchers>

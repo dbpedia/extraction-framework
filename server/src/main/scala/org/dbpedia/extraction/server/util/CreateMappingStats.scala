@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.server.util
 
-import _root_.java.util.logging.Logger
+import java.util.logging.Logger
 import io.Source
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
@@ -8,13 +8,15 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import scala.Serializable
+import scala.collection
 import scala.collection.mutable
 import java.io._
-import org.dbpedia.extraction.server.Configuration
+import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
 import org.dbpedia.extraction.server.util.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}
+import org.dbpedia.extraction.server.util.StringUtils.prettyMillis
 
 /**
  * Script to gather statistics about mappings: how often they are used, which properties are used and for what mappings exist.
@@ -33,479 +35,13 @@ import java.net.{URLDecoder, URLEncoder}
  * org.dbpedia.extraction.mappings.InfoboxExtractor
  * org.dbpedia.extraction.mappings.TemplateParameterExtractor
  * 
- * Take care of dump encodings. I had problems with the german redirects dump and had to delete all 
- * triples with a % sign. There were only a few irrelevant templates, therefore it isn't a big deal. (Paul 2011)
- * 
- * It would be nice to unescape N-Triple encoding like \u1234 first, then use the string
- * and match it against regexes etc. But: doesn't work because of \" in string values.
- * 
- * TODO: even better - the extraction framework should be flexible and configurable enough that
+ * TODO: The extraction framework should be flexible and configurable enough that
  * it can write simpler formats besides N-Triples. This class would be MUCH simpler and faster
  * if it had to read simple text files without N-Triples and URI-encoding.
  */
-class CreateMappingStats(val statsDir : File, val language: Language)
-{
-    val logger = Logger.getLogger(classOf[CreateMappingStats].getName)
-
-    val mappingStatsObjectFile = new File(statsDir, "mappingstats_" + language.filePrefix + ".obj")
-
-    val ignoreListFile = new File(statsDir, "ignoreList_" + language.wikiCode + ".obj")
-    val ignoreListTemplatesFile = new File(statsDir, "ignoreListTemplates_" + language.wikiCode + ".txt")
-    val ignoreListPropertiesFile = new File(statsDir, "ignoreListProperties_" + language.wikiCode + ".txt")
-
-    val percentageFile = new File(statsDir, "percentage." + language.wikiCode)
-
-    val templateNamespacePrefix = Namespaces.getName(language, Namespace.Template) + ":"
-    private val resourceNamespacePrefix = OntologyNamespaces.getResource("", language)
-
-    private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> \.""".r
-    private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.*)"\S* \.""".r
-
-    def countMappedStatistics(mappings: Map[String, ClassMapping], wikipediaStatistics: WikipediaStats) =
-    {
-        val startTime = System.currentTimeMillis()
-
-        // Hold the overall statistics
-        var statistics: Set[MappingStats] = Set() // new Set() with Serializable
-
-        var isMapped: Boolean = false
-
-        for ((rawTemplate, templateStats) <- wikipediaStatistics.templates)
-        {
-            if (! rawTemplate.startsWith(templateNamespacePrefix)) throw new Exception(rawTemplate)
-            val templateName = rawTemplate.substring(templateNamespacePrefix.length)
-
-            //mappings: el, en, pt decoded templates without _
-            isMapped = checkMapping(templateName, mappings)
-            var mappingStats: MappingStats = new MappingStats(templateStats, templateName)
-            mappingStats.setTemplateMapped(isMapped)
-
-            if (isMapped)
-            {
-                val mappedProperties = collectProperties(mappings.get(templateName).get)
-                for (propName <- mappedProperties)
-                {
-                    mappingStats.setPropertyMapped(propName, true)
-                }
-            }
-            statistics += mappingStats
-        }
-
-        var statsMap: Map[MappingStats, Int] = Map()
-        for (mappingStat <- statistics)
-        {
-            statsMap += ((mappingStat, mappingStat.templateCount))
-        }
-
-        logger.fine("countMappedStatistics: " + (System.currentTimeMillis() - startTime) / 1000 + " s")
-        statistics
-    }
-
-
-    def loadIgnorelist() =
-    {
-        if (ignoreListFile.isFile)
-        {
-            logger.fine("Loading serialized object from " + ignoreListFile)
-            val input = new ObjectInputStream(new FileInputStream(ignoreListFile))
-            val m = try input.readObject() finally input.close()
-            m.asInstanceOf[IgnoreList]
-        }
-        else
-        {
-            new IgnoreList(language)
-        }
-    }
-
-    def saveIgnorelist(ignoreList: IgnoreList)
-    {
-        val output = new ObjectOutputStream(new FileOutputStream(ignoreListFile))
-        try output.writeObject(ignoreList) finally output.close()
-        ignoreList.exportToTextFile(ignoreListTemplatesFile, ignoreListPropertiesFile)
-    }
-
-    private def buildWikipediaStats(redirectsFile: File, infoboxPropsFile: File, templParamsFile: File, paramsUsageFile: File): Unit =
-    {
-        var templatesMap: mutable.Map[String, TemplateStats] = new mutable.HashMap() // "templateName" -> TemplateStats
-        
-        println("Reading redirects from " + redirectsFile)
-        val redirects = loadTemplateRedirects(redirectsFile)
-        println("  " + redirects.size + " redirects")
-        
-        println("Using Template namespace prefix " + templateNamespacePrefix + " for language " + language.wikiCode)
-        
-        println("Counting templates in " + infoboxPropsFile)
-        countTemplates(infoboxPropsFile, templatesMap, redirects)
-        println("  " + templatesMap.size + " different templates")
-
-
-        println("Loading property definitions from " + templParamsFile)
-        propertyDefinitions(templParamsFile, templatesMap, redirects)
-
-        println("Counting properties in " + paramsUsageFile)
-        countProperties(paramsUsageFile, templatesMap, redirects)
-
-        val wikiStats = new WikipediaStats(language, redirects, templatesMap.toMap) // toMap makes it immutable
-        
-        logger.info("Serializing "+language.wikiCode+" wiki statistics to " + mappingStatsObjectFile)
-        val output = new ObjectOutputStream(new FileOutputStream(mappingStatsObjectFile))
-        try output.writeObject(wikiStats) finally output.close()
-    }
-
-    def loadStats(): WikipediaStats =
-    {
-        logger.info("Loading "+language.wikiCode+" wiki statistics from "+mappingStatsObjectFile)
-        val input = new ObjectInputStream(new FileInputStream(mappingStatsObjectFile))
-        val m = try input.readObject() finally input.close()
-        m.asInstanceOf[WikipediaStats]
-    }
-
-    private def stripUri(fullUri: String): String =
-    {
-        if (! fullUri.startsWith(resourceNamespacePrefix)) throw new Exception(fullUri)
-        WikiUtil.wikiDecode(fullUri.substring(resourceNamespacePrefix.length))
-    }
-
-    private def loadTemplateRedirects(fileName: File): Map[String, String] =
-    {
-        var count = 0
-        var redirects = new mutable.HashMap[String, String]()
-        val source = Source.fromFile(fileName, "UTF-8")
-        try
-        {
-          for (line <- Source.fromFile(fileName, "UTF-8").getLines())
-          {
-              line match
-              {
-                  case ObjectPropertyTripleRegex(subj, pred, obj) =>
-                  {
-                      val templateName = stripUri(unescapeNtriple(subj))
-                      redirects(templateName) = stripUri(unescapeNtriple(obj))
-                  }
-                  case _ => if (line.nonEmpty) throw new IllegalArgumentException("line did not match redirects syntax: " + line)
-              }
-              count += 1
-              if (count % 1000 == 0) print(count+" lines\r")
-          }
-        }
-        finally source.close
-        println(count+" lines")
-        
-        println("resolving "+redirects.size+" redirects")
-        // resolve transitive closure
-        for ((source, target) <- redirects)
-        {
-            var cyclePrevention: Set[String] = Set()
-            var closure = target
-            while (redirects.contains(closure) && !cyclePrevention.contains(closure))
-            {
-                closure = redirects.get(closure).get
-                cyclePrevention += closure
-            }
-            redirects(source) = closure
-        }
-
-        redirects.toMap // toMap makes immutable
-    }
-    
-    // TODO: use this instead of regex, may be faster
-    private def splitObjectLine(line : String) : (String, String, String) = {
-      if (! line.startsWith("<")) throw new Exception(line)
-      val subEnd = line.indexOf('>')
-      if (subEnd == -1) throw new Exception(line)
-      val preStart = line.indexOf('<', subEnd)
-      if (preStart == -1) throw new Exception(line)
-      val preEnd = line.indexOf('>', preStart)
-      if (preEnd == -1) throw new Exception(line)
-      val obStart = line.indexOf('<', preEnd)
-      if (obStart == -1) throw new Exception(line)
-      val obEnd = line.indexOf('>', obStart)
-      if (obEnd == -1) throw new Exception(line)
-      return (line.substring(1, subEnd), line.substring(preStart + 1, preEnd), line.substring(obStart + 1, obEnd))
-    }
-
-    /**
-     * @param fileName name of file generated by InfoboxExtractor, e.g. infobox_properties_en.nt
-     */
-    private def countTemplates( fileName: File, resultMap: mutable.Map[String, TemplateStats], redirects: Map[String, String]): Unit =
-    {
-        // iterate through infobox properties
-        // FIXME: close the source
-        for (line <- Source.fromFile(fileName, "UTF-8").getLines())
-        {
-            line match
-            {
-                // if there is a wikiPageUsesTemplate relation
-                case ObjectPropertyTripleRegex(subj, pred, obj) => if (unescapeNtriple(pred) contains "wikiPageUsesTemplate")
-                {
-                    val objName = stripUri(unescapeNtriple(obj))
-                    
-                    // resolve redirect for *object*
-                    val templateName = redirects.getOrElse(objName, objName)
-
-                    // lookup the *object* in the resultMap, create a new TemplateStats object if not found,
-                    // and increment templateCount
-                    resultMap.getOrElseUpdate(templateName, new TemplateStats).templateCount += 1
-                }
-                case DatatypePropertyTripleRegex(_,_,_) => // ignore
-                case _ if line.nonEmpty => throw new IllegalArgumentException("line did not match property syntax: " + line)
-            }
-        }
-    }
-
-    private def propertyDefinitions(templParamsFile: File, resultMap: mutable.Map[String, TemplateStats], redirects: Map[String, String]): Unit =
-    {
-        // iterate through template parameters
-        // FIXME: close the source
-        for (line <- Source.fromFile(templParamsFile, "UTF-8").getLines())
-        {
-            line match
-            {
-                case DatatypePropertyTripleRegex(subj, pred, obj) =>
-                {
-                    val subjName = stripUri(unescapeNtriple(subj))
-                    val objName = unescapeNtriple(obj)
-                    
-                    // resolve redirect for *subject*
-                    val templateName = redirects.getOrElse(subjName, subjName)
-
-                    // lookup the *subject* in the resultMap
-                    //skip the templates that are not found (they don't occur in Wikipedia)
-                    for (stats <- resultMap.get(templateName))
-                    {
-                        // add object to properties map with count 0
-                        stats.properties.put(objName, 0)
-                    }
-                }
-                case _ if line.nonEmpty => throw new IllegalArgumentException("line did not match property syntax: " + line)
-                case _ =>
-            }
-        }
-    }
-
-    private def countProperties(fileName: File, resultMap: mutable.Map[String, TemplateStats], redirects: Map[String, String]) : Unit =
-    {
-        // iterate through infobox test
-        // FIXME: close the source
-        for (line <- Source.fromFile(fileName, "UTF-8").getLines())
-        {
-            line match
-            {
-                case DatatypePropertyTripleRegex(subj, pred, obj) =>
-                {
-                    val predName = stripUri(unescapeNtriple(pred))
-                    val objName = unescapeNtriple(obj)
-                    
-                    // resolve redirect for *predicate*
-                    val templateName = redirects.getOrElse(predName, predName)
-
-                    // lookup the *predicate* in the resultMap
-                    // skip the templates that are not found (they don't occur in Wikipedia)
-                    for(stats <- resultMap.get(templateName))
-                    {
-                        // lookup *object* in the properties map
-                        //skip the properties that are not found with any count (they don't occurr in the template definition)
-                        if (stats.properties.contains(objName))
-                        {
-                            // increment count in properties map
-                            stats.properties.put(objName, stats.properties(objName) + 1)
-                        }
-                    }
-                }
-                case _ if line.nonEmpty => throw new IllegalArgumentException("line did not match countProperties syntax: " + line)
-                case _ =>
-            }
-        }
-    }
-
-    private def checkMapping(template: String, mappings: Map[String, ClassMapping]) =
-    {
-        if (mappings.contains(template)) true
-        else false
-    }
-
-    private def collectProperties(mapping: Object): Set[String] =
-    {
-        val properties = mapping match
-        {
-            case templateMapping: TemplateMapping => templateMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-            case conditionalMapping: ConditionalMapping => conditionalMapping.defaultMappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-            case _ => Set[String]()
-        }
-
-        properties.filter(_ != null)
-    }
-
-    private def collectPropertiesFromPropertyMapping(propertyMapping: PropertyMapping): Set[String] = propertyMapping match
-    {
-        case simple: SimplePropertyMapping => Set(simple.templateProperty)
-        case coord: GeoCoordinatesMapping => Set(coord.coordinates, coord.latitude, coord.longitude, coord.longitudeDegrees,
-            coord.longitudeMinutes, coord.longitudeSeconds, coord.longitudeDirection,
-            coord.latitudeDegrees, coord.latitudeMinutes, coord.latitudeSeconds, coord.latitudeDirection)
-        case calc: CalculateMapping => Set(calc.templateProperty1, calc.templateProperty2)
-        case combine: CombineDateMapping => Set(combine.templateProperty1, combine.templateProperty2, combine.templateProperty3)
-        case interval: DateIntervalMapping => Set(interval.templateProperty)
-        case intermediateNodeMapping: IntermediateNodeMapping => intermediateNodeMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-        case _ => Set()
-    }
-
-    def unescapeNtriple(value: String): String =
-    {
-        val sb = new java.lang.StringBuilder
-
-        val inputLength = value.length
-        var offset = 0
-
-        while (offset < inputLength)
-        {
-            val c = value.charAt(offset)
-            if (c != '\\') sb append c
-            else
-            {
-                offset += 1
-                val specialChar = value.charAt(offset)
-                specialChar match
-                {
-                    case '"' => sb append '"'
-                    case 't' => sb append '\t'
-                    case 'r' => sb append '\r'
-                    case '\\' => sb append '\\'
-                    case 'n' => sb append '\n'
-                    case 'u' =>
-                    {
-                        offset += 1
-                        val codepoint = value.substring(offset, offset + 4)
-                        val character = Integer.parseInt(codepoint, 16).asInstanceOf[Char]
-                        sb append character
-                        offset += 3
-                    }
-                    case 'U' =>
-                    {
-                        offset += 1
-                        val codepoint = value.substring(offset, offset + 8)
-                        val character = Integer.parseInt(codepoint, 16)
-                        sb appendCodePoint character
-                        offset += 7
-                    }
-                }
-            }
-            offset += 1
-        }
-        sb.toString
-    }
-
-}
-
 object CreateMappingStats
 {
     val logger = Logger.getLogger(getClass.getName)
-
-    /**
-     * Hold template statistics
-     * TODO: comment
-     * @param templateCount apparently the number of pages that use the template. a page that uses
-     * the template multiple times is counted only once.
-     * TODO: objects of this class should be immutable.
-     */
-    class TemplateStats(var templateCount: Int = 0, val properties: mutable.Map[String, Int] = new mutable.HashMap()) extends Serializable
-    {
-        override def toString = "TemplateStats[count:" + templateCount + ",properties:" + properties.mkString(",") + "]"
-    }
-
-    /**
-     * Contains the statistic of a Template
-     */
-    class MappingStats(templateStats: TemplateStats, val templateName: String) extends Ordered[MappingStats] with Serializable
-    {
-        var templateCount = templateStats.templateCount
-        var isMapped: Boolean = false
-        var properties: Map[String, (Int, Boolean)] = templateStats.properties.mapValues{freq => (freq, false)}.toMap
-
-        def setTemplateMapped(mapped: Boolean)
-        {
-            isMapped = mapped
-        }
-
-        def setPropertyMapped(propertyName: String, mapped: Boolean)
-        {
-            val (freq, _) = properties.getOrElse(propertyName, (-1, false)) // -1 mapped but not allowed in the template
-            properties = properties.updated(propertyName, (freq, mapped))
-        }
-
-        def getNumberOfProperties(ignoreList: IgnoreList) =
-        {
-            var counter: Int = 0
-            for ((propName, _) <- templateStats.properties)
-            {
-                if (!ignoreList.isPropertyIgnored(templateName, propName))
-                {
-                    counter = counter + 1
-                }
-            }
-            counter
-        }
-
-        def getNumberOfMappedProperties(ignoreList: IgnoreList) =
-        {
-            var numMPs: Int = 0
-            for ((propName, (propCount, propIsMapped)) <- properties)
-            {
-                if (propIsMapped && propCount != -1 && !ignoreList.isPropertyIgnored(templateName, propName)) numMPs = numMPs + 1
-            }
-            numMPs
-        }
-
-        def getRatioOfMappedProperties(ignoreList: IgnoreList) =
-        {
-            var mappedRatio: Double = 0
-            mappedRatio = getNumberOfMappedProperties(ignoreList).toDouble / getNumberOfProperties(ignoreList).toDouble
-            mappedRatio
-        }
-
-        def getNumberOfPropertyOccurrences(ignoreList: IgnoreList) =
-        {
-            var numPOs: Int = 0
-            for ((propName, (propCount, propIsMapped)) <- properties)
-            {
-                if (propCount != -1 && !ignoreList.isPropertyIgnored(templateName, propName)) numPOs = numPOs + propCount
-            }
-            numPOs
-        }
-
-        def getNumberOfMappedPropertyOccurrences(ignoreList: IgnoreList) =
-        {
-            var numMPOs: Int = 0
-            for ((propName, (propCount, propIsMapped)) <- properties)
-            {
-                if (propIsMapped && propCount != -1 && !ignoreList.isPropertyIgnored(templateName, propName)) numMPOs = numMPOs + propCount
-            }
-            numMPOs
-        }
-
-        def getRatioOfMappedPropertyOccurrences(ignoreList: IgnoreList) =
-        {
-            var mappedRatio: Double = 0
-            mappedRatio = getNumberOfMappedPropertyOccurrences(ignoreList).toDouble / getNumberOfPropertyOccurrences(ignoreList).toDouble
-            mappedRatio
-        }
-
-        def compare(that: MappingStats) =
-            this.templateCount - that.templateCount
-    }
-
-    // Hold template redirects and template statistics
-    // TODO: objects of this class should be immutable, including parts like TemplateStats
-    class WikipediaStats(val language : Language, val redirects: Map[String, String] = Map(), val templates: Map[String, TemplateStats] = Map()) extends Serializable
-    {
-
-        def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping]) =
-        {
-            val templateNamespacePrefix = Namespaces.getName(language, Namespace.Template) + ":"
-            val mappedRedirects = redirects.filterKeys(title => mappings.contains(title))
-            mappedRedirects.map(_.swap)
-        }
-    }
-    
     
     def main(args: Array[String])
     {
@@ -516,15 +52,13 @@ object CreateMappingStats
         val statsDir = new File(args(1))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var languages : Seq[Language] = for(arg <- args.slice(2, args.length); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) 
-          yield Language(lang)
+        var languages = for(arg <- args.slice(2, args.length); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
           
-        // if no languages given, use all we know
-        if (languages isEmpty) languages = Configuration.languages
+        require (languages nonEmpty, "need languages for which to generate statistics files") 
         
         for (language <- languages) {
           
-            val startTime = System.currentTimeMillis()
+            val millis = System.currentTimeMillis()
             
             logger.info("creating statistics for "+language.wikiCode)
             
@@ -539,13 +73,15 @@ object CreateMappingStats
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
             val infoboxTestDatasetFile = finder.inputFile(DBpediaDatasets.InfoboxTest, "nt")
             
-            val createMappingStats = new CreateMappingStats(statsDir, language)
+            val builder = new MappingStatsBuilder(statsDir, language)
     
-            createMappingStats.buildWikipediaStats(redirectsDatasetFile, infoboxPropertiesDatasetFile, templateParametersDatasetFile, infoboxTestDatasetFile)
+            builder.buildStats(redirectsDatasetFile, infoboxPropertiesDatasetFile, templateParametersDatasetFile, infoboxTestDatasetFile)
             
-            logger.info("created statistics for "+language.wikiCode+" in "+(System.currentTimeMillis() - startTime) / 1000 + " s")
+            // load them right back to check that the format is ok
+            new MappingStatsManager(statsDir, language)
+            
+            logger.info("created statistics for "+language.wikiCode+" in "+prettyMillis(System.currentTimeMillis - millis))
         }
-        
     }
 }
 
@@ -553,6 +89,7 @@ object CreateMappingStats
  * Get input file path in baseDir.
  * FIXME: the same algorithm is used by the download and extraction code. We should share the code. 
  * Polish this class and move it to core. Introduce a strategy interface.
+ * FIXME: check files that indicate that download is complete.
  */
 class FileFinder(baseDir : File, language : Language) {
     
@@ -568,7 +105,7 @@ class FileFinder(baseDir : File, language : Language) {
       
       // Find the name (which is a date in format YYYYMMDD) of the newest directory
       val date = wikiDir.list.filter(_.matches("\\d{8}")).sortBy(_.toInt).lastOption.getOrElse(throw new Exception("No dump found in " +wikiDir))
-      // TODO: check that directory contains the file named 'complete' written by downloader
+      // TODO: check that directory contains the file named '...-download-complete' written by downloader
       
       val dateDir = new File(wikiDir, date)
       

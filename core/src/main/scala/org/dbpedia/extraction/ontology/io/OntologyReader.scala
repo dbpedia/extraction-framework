@@ -447,8 +447,8 @@ private object OntologyReader
      */
     private def getClassName(title : WikiTitle) : String = title.encoded.split("/|:", 2) match
     {
-        case Array(name) => name.capitalizeLocale(title.language.locale)
-        case Array(namespace, name) => namespace.toLowerCase(title.language.locale) + ":" + name.capitalizeLocale(title.language.locale)
+        case Array(name) => name.capitalize(title.language.locale)
+        case Array(namespace, name) => namespace.toLowerCase(title.language.locale) + ":" + name.capitalize(title.language.locale)
         case _ => throw new IllegalArgumentException("Invalid name: " + title)
     }
 

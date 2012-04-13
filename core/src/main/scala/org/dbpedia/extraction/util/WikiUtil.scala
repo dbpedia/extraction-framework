@@ -35,7 +35,7 @@ object WikiUtil
      * @param name Non-encoded MediaWiki page name, e.g. 'Émile Zola'.
      * Must not include the namespace (e.g. 'Template:').
      */
-    def wikiEncode(name : String, language : Language = Language.Default, capitalize : Boolean = true) : String =
+    def wikiEncode(name : String, language : Language, capitalize : Boolean) : String =
     {
         // replace spaces by underscores.
         // Note: MediaWiki apparently replaces only spaces by underscores, not other whitespace. 
@@ -56,7 +56,7 @@ object WikiUtil
         // capitalize can be false for encoding property names, e.g. in the InfoboxExtractor
         if(capitalize)
         {
-            encoded = encoded.capitalizeLocale(language.locale)
+            encoded = encoded.capitalize(language.locale)
         }
 
         // URL-encode everything but ':' '/' '&' and ',' - just like MediaWiki
@@ -85,7 +85,7 @@ object WikiUtil
      * @param name encoded MediaWiki page name, e.g. '%C3%89mile_Zola'.
      * Must not include the namespace (e.g. 'Template:').
      */
-    def wikiDecode(name : String, language : Language = Language.Default, capitalize : Boolean = true) : String =
+    def wikiDecode(name : String, language : Language, capitalize : Boolean) : String =
     {
         // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt.
         // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
@@ -93,7 +93,7 @@ object WikiUtil
 
         if(capitalize)
         {
-            decoded = decoded.capitalizeLocale(language.locale)
+            decoded = decoded.capitalize(language.locale)
         }
 
         decoded

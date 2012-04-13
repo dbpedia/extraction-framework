@@ -35,7 +35,7 @@ class StringUtils(str : String)
      *
      * @param locale The locale used to capitalize the String
      */
-    def capitalizeLocale(locale : Locale) : String =
+    def capitalize(locale : Locale) : String =
     {
         if (!str.isEmpty) str.head.toString.toUpperCase(locale) + str.tail else ""
     }
@@ -62,6 +62,6 @@ class StringUtils(str : String)
 
         if (words.isEmpty) return ""
 
-        words.head + words.tail.map(word => new StringUtils(word).capitalizeLocale(locale)).mkString
+        words.head + words.tail.map(word => new StringUtils(word).capitalize(locale)).mkString
     }
 }

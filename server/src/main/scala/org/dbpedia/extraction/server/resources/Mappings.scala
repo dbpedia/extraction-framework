@@ -23,7 +23,7 @@ class Mappings(@PathParam("lang") langCode : String)
 
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
-    if(!Server.config.languages.contains(language))
+    if(!Server.languages.contains(language))
         throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)
 
     /**
@@ -148,7 +148,7 @@ class Mappings(@PathParam("lang") langCode : String)
         var nodes = new NodeBuffer()
         val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
         nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
-        nodes += Server.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parse(title, language) :: Nil, Server.config.wikiApiUrl), language)
+        nodes += Server.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parse(title, language) :: Nil, Server.wikiApiUrl), language)
         nodes
     }
 

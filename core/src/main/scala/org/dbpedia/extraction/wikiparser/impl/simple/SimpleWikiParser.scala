@@ -400,7 +400,7 @@ final class SimpleWikiParser extends WikiParser
                     case _ => throw new WikiParserException("Invalid Template name", startLine, source.findLine(startLine))
                 }
 
-                val decodedName = WikiUtil.cleanSpace(templateName).capitalizeLocale(source.language.locale)
+                val decodedName = WikiUtil.cleanSpace(templateName).capitalize(source.language.locale)
                 if(source.lastTag(":"))
                 {
                     return parseParserFunction(decodedName, source, level)

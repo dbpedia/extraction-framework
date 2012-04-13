@@ -1,51 +1,42 @@
 package org.dbpedia.extraction.server.util
 
 import scala.Serializable
-import java.io.File
+import java.io.{File,PrintWriter}
 import org.dbpedia.extraction.util.Language
 
 /**
  * Contains the ignored templates and properties
+ * TODO: write proper text files, read text files, drop serialization
+ * TODO: then switch to mutable collections 
  */
 class IgnoreList(language : Language) extends Serializable
 {
     /** for backwards compatibility */
     private val serialVersionUID = -8153347725542465170L
   
-    var templates = Set[String]()
-    var properties = Map[String, Set[String]]()
+    private var templates = Set[String]()
+    private var properties = Map[String, Set[String]]()
 
-    def isTemplateIgnored(template: String) =
-    {
-        if (templates.contains(template)) true else false
+    def isTemplateIgnored(template: String) : Boolean = synchronized {
+      templates.contains(template)
     }
 
-    def isPropertyIgnored(template: String, property: String) =
-    {
-        if (properties.contains(template))
-        {
-            if (properties(template).contains(property)) true else false
-        }
-        else false
+    def isPropertyIgnored(template: String, property: String) : Boolean = synchronized {
+      properties.contains(template) && properties(template).contains(property)
     }
 
-    def addTemplate(template: String)
-    {
-        if (!templates.contains(template)) templates += template
+    def addTemplate(template: String) : Unit = synchronized {
+        templates += template
     }
 
-    def removeTemplate(template: String)
-    {
-        if (templates.contains(template)) templates -= template
+    def removeTemplate(template: String) : Unit = synchronized {
+        templates -= template
     }
 
-    def addProperty(template: String, property: String)
-    {
-        if (properties.contains(template))
-        {
+    def addProperty(template: String, property: String) : Unit = synchronized {
+        if (properties.contains(template)) {
             var ignoredProps: Set[String] = properties(template)
-            if (!ignoredProps.contains(property))
-            {
+            if (! ignoredProps.contains(property)) {
                 ignoredProps += property
                 properties = properties.updated(template, ignoredProps)
             }
@@ -57,10 +48,8 @@ class IgnoreList(language : Language) extends Serializable
         }
     }
 
-    def removeProperty(template: String, property: String)
-    {
-        if (properties.contains(template))
-        {
+    def removeProperty(template: String, property: String) {
+        if (properties.contains(template)) {
             var ignoredProps: Set[String] = properties(template)
             if (ignoredProps.contains(property))
             {
@@ -74,28 +63,24 @@ class IgnoreList(language : Language) extends Serializable
 
     def exportToTextFile(ignoreListTemplatesFile : File, ignoreListPropertiesFile : File)
     {
-        printToFile(ignoreListTemplatesFile)(p =>
-        {
-            templates.foreach(p.println)
-        })
-
-        printToFile(ignoreListPropertiesFile)(p =>
-        {
-            properties.foreach(p.println)
-        })
-
+        printToFile(ignoreListTemplatesFile) { writer =>
+          for (template <- templates) writer.println(template)
+        }
+        
+        printToFile(ignoreListPropertiesFile) { writer =>
+          for ((template, templateProperties) <- properties) {
+            writer.println(template)
+            for (templateProperty <- templateProperties) {
+              writer.println(templateProperty)
+            }
+            writer.println()
+          }
+        }
     }
 
-    def printToFile(f: java.io.File)(op: java.io.PrintWriter => Unit)
-    {
-        val p = new java.io.PrintWriter(f)
-        try
-        {
-            op(p)
-        } finally
-        {
-            p.close()
-        }
+    def printToFile(file: File)(use: PrintWriter => Unit) {
+        val writer = new PrintWriter(file, "UTF-8")
+        try use(writer) finally writer.close
     }
 
 }

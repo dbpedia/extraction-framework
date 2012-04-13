@@ -144,7 +144,7 @@ object Namespace extends Enumeration
     {
         if (ns.id >= 200)
         {
-            val name = WikiUtil.wikiDecode(ns.toString)
+            val name = WikiUtil.wikiDecode(ns.toString, Language.Default, false)
             if (name == "Mapping") mappingNamespaces.put(Language.Default, ns)
             else if (name.startsWith("Mapping ")) mappingNamespaces.put(Language(name.substring(8)), ns)
             customNamespaces.put(name.toLowerCase(Language.Default.locale), ns)
