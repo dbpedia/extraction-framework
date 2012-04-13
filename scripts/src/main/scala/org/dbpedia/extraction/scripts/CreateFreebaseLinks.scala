@@ -5,7 +5,7 @@ import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
 import io.Source
 import java.io.{FileOutputStream, PrintStream, File}
 import java.net.URL
-import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.extraction.util.{Language,WikiUtil}
 
 /**
  * Created by IntelliJ IDEA.
@@ -99,7 +99,8 @@ object CreateFreebaseLinks
             val codePoint = codePointMatch.subgroups(0)
             uri = uri.replace("$"+codePoint, Integer.parseInt(codePoint, 16).toChar.toString)
         }
-        WikiUtil.wikiEncode(uri)
+        // TODO: which language?
+        WikiUtil.wikiEncode(uri, Language.Default, capitalize=true)
     }
 
     private def loadURIs(dbpediaDataset : File) : Set[String] =

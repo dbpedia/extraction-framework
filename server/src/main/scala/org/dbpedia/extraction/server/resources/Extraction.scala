@@ -50,7 +50,7 @@ class Extraction(@PathParam("lang") langCode : String)
 {
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
-    if(!Server.config.languages.contains(language))
+    if(!Server.languages.contains(language))
         throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)
     
     private def getTitle : String = Extraction.lines.getOrElse(langCode, "Berlin")

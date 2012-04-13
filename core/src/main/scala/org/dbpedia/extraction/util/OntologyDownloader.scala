@@ -19,6 +19,7 @@ object OntologyDownloader {
     require(args != null && args.length == 1, "expected one argument for ontology target file")
     val file = new File(args(0))
     download(file)
+    // load it to test it
     load(file)
   }
   

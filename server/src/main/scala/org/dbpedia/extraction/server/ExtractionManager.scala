@@ -108,7 +108,7 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
         else 
         {
             val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
-            val url = Configuration.wikiApiUrl
+            val url = Server.wikiApiUrl
             val language = Language.Default
             logger.info("Loading ontology pages from URL ["+url+"]")
             WikiSource.fromNamespaces(namespaces, url, language)
@@ -135,7 +135,7 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
         }
         else
         {
-            val url = Configuration.wikiApiUrl
+            val url = Server.wikiApiUrl
             val language = Language.Default
             WikiSource.fromNamespaces(Set(namespace), url, language)
         }

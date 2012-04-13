@@ -22,7 +22,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
     /** Encoded page name (without namespace) e.g. Automobile_generation */
-    val encoded = WikiUtil.wikiEncode(decoded, language)
+    val encoded = WikiUtil.wikiEncode(decoded, language, capitalize=true)
 
     /** Decoded page name with namespace e.g. Template:Automobile generation */
     val decodedWithNamespace = withNamespace(false)
@@ -40,7 +40,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
         else 
         {
           val ns = Namespace.getNamespaceName(language, namespace)
-          (if (encode) WikiUtil.wikiEncode(ns, language) else ns)+ ":" + name
+          (if (encode) WikiUtil.wikiEncode(ns, language, capitalize=true) else ns)+ ":" + name
         }
     }
     
@@ -156,7 +156,7 @@ object WikiTitle
 
         //Create the title name from the remaining parts
         // FIXME: MediaWiki doesn't capitalize links to other wikis
-        val decodedName = parts.mkString(":").trim.capitalizeLocale(sourceLanguage.locale)
+        val decodedName = parts.mkString(":").trim.capitalize(sourceLanguage.locale)
 
         new WikiTitle(decodedName, namespace, language, isInterlanguageLink, fragment)
     }

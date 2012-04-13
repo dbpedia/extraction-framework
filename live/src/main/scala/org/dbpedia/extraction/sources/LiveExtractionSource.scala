@@ -75,7 +75,7 @@ object LiveExtractionSource
 
 
               link = link.trim().replaceAll("\\s","_")
-              val mytitle = WikiUtil.wikiEncode(link, language)
+              val mytitle = WikiUtil.wikiEncode(link, language, capitalize=true)
               println(mytitle)
 
                 f( new WikiPage( title     = WikiTitle.parse(link, language),

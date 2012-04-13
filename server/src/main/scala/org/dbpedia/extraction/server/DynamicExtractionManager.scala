@@ -12,7 +12,8 @@ import java.io.File
  * Is able to update the ontology and the mappings.
  * Updates are executed in synchronized threads. TODO: find nicer solution for the parallelized access. Use a thread-pool. Or actors?
  */
-class DynamicExtractionManager(languages : Traversable[Language], extractors : List[Class[_ <: Extractor]], ontologyFile : File, mappingsDir : File) extends ExtractionManager(languages, extractors, ontologyFile, mappingsDir)
+class DynamicExtractionManager(languages : Traversable[Language], extractors : List[Class[_ <: Extractor]], ontologyFile : File, mappingsDir : File) 
+extends ExtractionManager(languages, extractors, ontologyFile, mappingsDir)
 {
     @volatile private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 

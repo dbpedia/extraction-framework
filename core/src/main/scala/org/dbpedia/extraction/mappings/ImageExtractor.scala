@@ -89,7 +89,7 @@ class ImageExtractor( context : {
                          textNode @ TextNode(text, _) <- property.children;
                          fileName <- ImageExtractorConfig.ImageRegex.findFirstIn(text);
                          encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
-                                               WikiUtil.wikiEncode(fileName, context.language)
+                                               WikiUtil.wikiEncode(fileName, context.language, true)
                                            else
                                                fileName
                          if checkImageRights(encodedFileName))
