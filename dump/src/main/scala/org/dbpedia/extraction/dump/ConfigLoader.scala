@@ -150,22 +150,19 @@ object ConfigLoader
 
         private lazy val _mappingPageSource =
         {
-            Namespace.mappingNamespace(language) match
+            val namespace = Namespace.mappingNamespace(language).getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
+            
+            if (mappingsDir != null && mappingsDir.isDirectory)
             {
-                case Some(namespace) =>
-                  if (mappingsDir != null && mappingsDir.isDirectory)
-                  {
-                      val file = new File(mappingsDir, namespace.toString+".xml")
-                      XMLSource.fromFile(file, language = language).map(parser)
-                  }
-                  else
-                  {
-                      val namespaces = Set(namespace)
-                      val url = new URL("http://mappings.dbpedia.org/api.php")
-                      val language = Language.Default
-                      WikiSource.fromNamespaces(namespaces,url,language).map(parser)
-                  }
-                case None => new MemorySource().map(parser)
+                val file = new File(mappingsDir, namespace.toString+".xml")
+                XMLSource.fromFile(file, language = language).map(parser)
+            }
+            else
+            {
+                val namespaces = Set(namespace)
+                val url = new URL("http://mappings.dbpedia.org/api.php")
+                val language = Language.Default
+                WikiSource.fromNamespaces(namespaces,url,language).map(parser)
             }
         }
         
