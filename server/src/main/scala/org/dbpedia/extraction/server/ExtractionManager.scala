@@ -129,7 +129,7 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
         
         val source = if (mappingsDir != null && mappingsDir.isDirectory)
         {
-            val file = new File(mappingsDir, namespace.toString+".xml")
+            val file = new File(mappingsDir, namespace.name.replace(' ', '_')+".xml")
             logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(file, language = language)
         }
