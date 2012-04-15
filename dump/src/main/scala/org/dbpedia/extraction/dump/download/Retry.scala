@@ -11,12 +11,12 @@ trait Retry extends Download {
   /**
    * Total number of attempts.
    */
-  val max : Int
+  val retryMax : Int
   
   /**
    * Milliseconds delay between attempts.
    */
-  val millis : Int
+  val retryMillis : Int
   
   /**
    * Try several times to download file.
@@ -30,9 +30,9 @@ trait Retry extends Download {
       } catch {
         case ioex : IOException => {
           retry += 1
-          println(retry+" of "+max+" attempts to download '"+url+"' to '"+file+"' failed - "+ioex)
-          if (retry >= max) throw ioex
-          Thread.sleep(millis)
+          println(retry+" of "+retryMax+" attempts to download '"+url+"' to '"+file+"' failed - "+ioex)
+          if (retry >= retryMax) throw ioex
+          Thread.sleep(retryMillis)
         }
       }
     }

@@ -2,17 +2,13 @@ package org.dbpedia.extraction.dump.download
 
 import java.io.{File,FileOutputStream,InputStream,OutputStream}
 import java.net.{URL,URLConnection,HttpURLConnection}
+import org.dbpedia.extraction.util.IOUtils.copy
 
 /**
  * Downloads a single file.
  */
 trait FileDownload extends Download
 {
-  /**
-   * buffer size in bytes
-   */
-  val buffer : Int
-  
   /**
    * Use "index.html" if URL ends with "/"
    */
@@ -69,22 +65,5 @@ trait FileDownload extends Download
    * Get output stream. Mixins may decorate the stream or open a different stream.
    */
   protected def outputStream(file: File) : OutputStream = new FileOutputStream(file)
-  
-  /**
-   * Do the actual work.
-   */
-  private def copy(in : InputStream, out : OutputStream) : Unit = {
-    val buf = new Array[Byte](buffer)
-    while (true)
-    {
-      val read = in.read(buf)
-      if (read == -1)
-      {
-        out.flush
-        return
-      }
-      out.write(buf, 0, read)
-    }
-  }
   
 }
