@@ -5,6 +5,12 @@ import scala.collection.mutable.HashSet
 
 object Download extends DownloadConfig
 {
+  /** name of marker file in wiki directory */
+  val Running = "download-running"
+  
+  /** name of marker file in wiki date directory */
+  val Complete = "download-complete"
+    
   def main(args: Array[String]) : Unit =
   {
     parse(null, args)
