@@ -34,16 +34,6 @@ object Namespaces
         (names.toMap, codes.toMap)
     }
 
-    def getName(lang : Language, ns : Namespace) : String =
-    {
-        val n = names.getOrElse(lang.wikiCode, throw new IllegalArgumentException("no namespace names found for language '"+lang.wikiCode+"'"))
-        n.getOrElse(ns.id, throw new IllegalArgumentException("namespace number "+ns.id+" not found for language '"+lang.wikiCode+"'")) 
-    }
-
-    def getCode(lang : Language, ns : String) : Option[Int] =
-    {
-        val c = codes.getOrElse(lang.wikiCode, throw new IllegalArgumentException("no namespace codes found for language '"+lang.wikiCode+"'"))
-        c.get(ns.toLowerCase(lang.locale))
-    }
-
+    def names(lang : Language) : Map[Int, String] = names.getOrElse(lang.wikiCode, throw new IllegalArgumentException("no namespace names found for language '"+lang.wikiCode+"'"))
+    def codes(lang : Language) : Map[String, Int] = codes.getOrElse(lang.wikiCode, throw new IllegalArgumentException("no namespace codes found for language '"+lang.wikiCode+"'"))
 }

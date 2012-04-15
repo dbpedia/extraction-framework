@@ -3,9 +3,11 @@ package org.dbpedia.extraction.wikiparser.impl.wikipedia
 import scala.io.{Source, Codec}
 import javax.xml.stream.XMLInputFactory
 import scala.collection.mutable
-import org.dbpedia.extraction.util.WikiConfigDownloader
-import java.io.{File, IOException, OutputStreamWriter, FileOutputStream, Writer}
+import org.dbpedia.extraction.util.{Language,WikiConfigDownloader,StringUtils}
+import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
 import java.net.HttpRetryException
+import java.text.SimpleDateFormat
+import java.util.Date
 
 /**
  * Generates Namespaces.scala and Redirect.scala. Must be run with core/ as the current directory.
@@ -18,6 +20,11 @@ object GenerateWikiConfig {
   val Insert = """// @ insert (\w+) here @ //""".r
   
   def main(args: Array[String]) : Unit = {
+    
+    val millis = System.currentTimeMillis
+    
+    val baseDir = if (args != null && args.length > 0 && args(0) != null) new File(args(0)) else null
+    if (baseDir != null && ! baseDir.isDirectory) throw new IOException("["+baseDir+"] is not an existing directory")
     
     val errors = mutable.LinkedHashMap[String, String]()
     
@@ -33,23 +40,30 @@ object GenerateWikiConfig {
     val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
     val languages = try source.getLines.toList finally source.close
     
-    for (language <- "commons" :: languages)
+    val factory = XMLInputFactory.newInstance
+    
+    // languages.length + 1 = languages + commons
+    println("generating wiki config for "+(languages.length+1)+" languages")
+    
+    for (code <- "commons" :: languages)
     {
-      print(language)
+      print(code)
+      val language = Language(code)
+      val file = if (baseDir == null) null else findFile(baseDir, language)
       try
       {
         val downloader = new WikiConfigDownloader(language, followRedirects = false)
-        val (namespaces, aliases, magicwords) = downloader.download()
-        namespaceMap(language) = aliases ++ namespaces // order is important - aliases first
-        redirectMap(language) = magicwords("redirect")
+        val (namespaces, aliases, magicwords) = downloader.download(factory, file)
+        namespaceMap(code) = aliases ++ namespaces // order is important - aliases first
+        redirectMap(code) = magicwords("redirect")
         println(" - OK")
       } catch {
         case hrex : HttpRetryException => {
-          languageMap(language) = hrex.getMessage 
+          languageMap(code) = hrex.getMessage 
           println(" - redirected to "+hrex.getMessage)
         }
         case ioex : IOException => {
-          errors(language) = ioex.getMessage
+          errors(code) = ioex.getMessage
           println(" - "+ioex.getMessage)
         }
       }
@@ -63,7 +77,7 @@ object GenerateWikiConfig {
       var firstNS = true
       for ((name, code) <- namespaces) {
         if (firstNS) firstNS = false else s +","
-        s +"\""+name+"\" -> "+code
+        s +"\""+name+"\"->"+(if (code < 0) " " else "")+code
       }
       s +")\n"
     }
@@ -85,6 +99,17 @@ object GenerateWikiConfig {
     
     generate("Namespaces.scala", Map("namespaces" -> namespaceStr, "errors" -> errorStr))
     generate("Redirect.scala", Map("redirects" -> redirectStr, "errors" -> errorStr))
+    
+    // languages.length + 1 = languages + commons
+    println("generated wiki config for "+(languages.length+1)+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
+  }
+  
+  def findFile(baseDir: File, language: Language) : File = {
+    val name = language.wikiCode+"wiki"
+    val wikiDir = new File(baseDir, name)
+    if (! wikiDir.exists && ! wikiDir.mkdir) throw new IOException("directory ["+wikiDir+"] does not exist and cannot be created")
+    val date = new SimpleDateFormat("yyyyMMdd").format(new Date)
+    new File(wikiDir, name+'-'+date+"-configuration.xml")
   }
   
   /**

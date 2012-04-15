@@ -5,7 +5,6 @@ import org.dbpedia.extraction.wikiparser.*;
 import org.dbpedia.util.Exceptions;
 import org.dbpedia.util.text.xml.XMLStreamUtils;
 
-import scala.Enumeration;
 import scala.Function1;
 import scala.util.control.ControlThrowable;
 
@@ -206,14 +205,12 @@ public class WikipediaDumpParser
         return;
     }
 
-    long nsId = requireLong(NS_ELEM, true);
+    int nsCode = (int)requireLong(NS_ELEM, true);
     // now after </ns>
     
-    if (title.namespace().id() != nsId)
+    if (title.namespace().code() != nsCode)
     {
-      // Emulate Scala call Namespace(nsId) Not as bad as it looks.
-      // But let's hope the Scala compiler doesn't change its naming pattern...
-      Enumeration.Value expected = org.dbpedia.extraction.wikiparser.package$Namespace$.MODULE$.apply((int)nsId);
+      Namespace expected = Namespace.values().apply(nsCode);
       logger.log(Level.WARNING, "Error parsing title: found namespace "+title.namespace()+", expected "+expected+" in title "+titleStr);
     }
 

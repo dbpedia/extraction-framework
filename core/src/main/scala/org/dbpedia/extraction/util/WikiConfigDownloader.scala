@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.util
 
-import java.io.IOException
+import java.io.{File,InputStream,FileInputStream,FileOutputStream,IOException}
 import java.net.{URL,URLDecoder,HttpRetryException,HttpURLConnection}
 import java.net.URLDecoder.decode
 import java.net.HttpURLConnection.{HTTP_OK,HTTP_MOVED_PERM,HTTP_MOVED_TEMP}
@@ -14,13 +14,13 @@ import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
  * 
  * FIXME: This should be used to download the data for just one language and maybe store it in a 
  * text file or simply in memory. (Loading the stuff only takes between .2 and 2 seconds per language.) 
- * Currently this class is used to generate one huge configuration class for all languages. 
+ * Currently this class is used to generate two huge configuration classes for all languages. 
  * That's not good.
  * 
  * FIXME: also use
  * http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap
  * http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap
- * which are identical except for stuff like q => en.wikiquote.org / de.wikiquote.org etc.
+ * which are identical for all languages except for stuff like q => en.wikiquote.org / de.wikiquote.org etc.
  * 
  * TODO: error handling. So far, it didn't seem necessary. api.php seems to work, and this
  * class is so far used with direct human supervision.
@@ -28,12 +28,12 @@ import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
  * @param followRedirects if true, follow HTTP redirects for languages that have been renamed,
  * e.g. dk.wikipedia.org -> da.wikipedia.org. If false, throw a useful exception on redirects. 
  */
-class WikiConfigDownloader(language : String, followRedirects : Boolean) {
+class WikiConfigDownloader(language: Language, followRedirects: Boolean) {
   
   val url = new URL(api(language)+"?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords")
   
-  private def api(language : String) : String =
-    "http://"+language+"."+(if (language == "commons") "wikimedia" else "wikipedia")+".org/w/api.php"
+  private def api(language : Language) : String =
+    "http://"+language.wikiCode+"."+(if (language.wikiCode == "commons") "wikimedia" else "wikipedia")+".org/w/api.php"
     
   /**
    * @return namespaces (name -> code), namespace aliases (name -> code), magic words (name -> aliases)
@@ -41,17 +41,35 @@ class WikiConfigDownloader(language : String, followRedirects : Boolean) {
    * language. The message of the HttpRetryException is the target language.
    * @throws IOException if another error occurs
    */
-  def download() : (mutable.Map[String, Int], mutable.Map[String, Int], mutable.Map[String, mutable.Set[String]]) = 
+  def download(factory: XMLInputFactory, file: File = null) : 
+  (mutable.Map[String, Int], mutable.Map[String, Int], mutable.Map[String, mutable.Set[String]]) = 
   {
+    if (file == null) {
+      withConnection { in => read(in, factory) }
+    } else {
+      if (! file.exists) {
+        withConnection { in => 
+          val out = new FileOutputStream(file)
+          try IOUtils.copy(in, out) finally out.close 
+        } 
+      }
+      val in = new FileInputStream(file)
+      try read(in, factory) finally in.close
+    }
+  }
+  
+  private def withConnection[R](process: InputStream => R) : R = {
     val conn = url.openConnection.asInstanceOf[HttpURLConnection]
     try {
       checkResponse(conn)
-      val factory = XMLInputFactory.newInstance
-      val stream = conn.getInputStream
-      try new WikiConfigReader(new XMLEventAnalyzer(factory.createXMLEventReader(stream))).read()
-      finally stream.close
+      val in = conn.getInputStream
+      try process(in) finally in.close
     }
     finally conn.disconnect
+  }
+  
+  private def read(stream: InputStream, factory: XMLInputFactory) = {
+    new WikiConfigReader(new XMLEventAnalyzer(factory.createXMLEventReader(stream))).read()
   }
   
   /**
@@ -71,11 +89,10 @@ class WikiConfigDownloader(language : String, followRedirects : Boolean) {
         val url2 = new URL(decode(location, "UTF-8"))
         location = url2.toString // use decoded form in IOException below
         
-        if (! followRedirects && (code == HTTP_MOVED_PERM || code == HTTP_MOVED_TEMP) && (url2.getPath == url.getPath && url2.getQuery == url.getQuery))
-        {
-          // Note: we use toSeq because array equality doesn't work in Scala.
-          val parts = url.getHost.split("\\.").toSeq
-          val parts2 = url2.getHost.split("\\.").toSeq
+        if (! followRedirects && (code == HTTP_MOVED_PERM || code == HTTP_MOVED_TEMP) && (url2.getPath == url.getPath && url2.getQuery == url.getQuery)) {
+          // Note: we use toSeq because array equality doesn't work
+          val parts = url.getHost.split("\\.", -1).toSeq
+          val parts2 = url2.getHost.split("\\.", -1).toSeq
           // if everything else matches, the first part of the host name is the target language
           if (parts.tail == parts2.tail) throw new HttpRetryException(parts2.head, code, location)
         }
