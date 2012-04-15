@@ -65,7 +65,7 @@ class InfoboxExtractor( context : {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private val unitValueParsers = context.ontology.datatypes
-                                   .filter(_.isInstanceOf[DimensionDatatype]).map(_.asInstanceOf[DimensionDatatype])
+                                   .filter(_.isInstanceOf[DimensionDatatype])
                                    .map(dimension => new UnitValueParser(context, dimension, true))
 
     private val intParser = new IntegerParser(context, true)
