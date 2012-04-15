@@ -125,7 +125,7 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
 
     protected def loadMappingsPages(language : Language) : Map[WikiTitle, PageNode] =
     {
-        val namespace = Namespace.mappingNamespace(language).getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
+        val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
         
         val source = if (mappingsDir != null && mappingsDir.isDirectory)
         {

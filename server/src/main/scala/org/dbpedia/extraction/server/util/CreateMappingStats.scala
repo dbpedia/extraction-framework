@@ -16,7 +16,7 @@ import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
 import org.dbpedia.extraction.server.util.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}
-import org.dbpedia.extraction.server.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
 /**
  * Script to gather statistics about mappings: how often they are used, which properties are used and for what mappings exist.
