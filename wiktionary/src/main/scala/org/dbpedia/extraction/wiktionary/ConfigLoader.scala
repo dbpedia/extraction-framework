@@ -69,13 +69,9 @@ object ConfigLoader
     private def createExtractionJob(config : Config)(language : Language) : ExtractionJob =
     {
         /** Mappings source */
-        val mappingsSource = Namespace.mappingNamespace(language) match
-        {
-            case Some(namespace) => WikiSource.fromNamespaces(namespaces = Set(namespace),
+        val mappingsSource = WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))),
                                                               url = new URL("http://mappings.dbpedia.org/api.php"),
-                                                              language = Language.Default)
-            case None => new MemorySource()
-        }
+                                                              language = language)
 
         //Articles source
         val articlesSource = XMLSource.fromFile(config.getDumpFile(language.wikiCode),
