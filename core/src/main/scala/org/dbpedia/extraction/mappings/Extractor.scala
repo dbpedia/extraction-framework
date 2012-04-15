@@ -48,31 +48,18 @@ trait Extractor extends (PageNode => Graph)
     {
         //#int if all titles true, original name implied true
         val retrieveAllTitles=true
-        //#int if all titles false  option to extract with original name
+        
+        //#int if all titles false option to extract with original name
         val retrieveOriginalName=true
 
-        if (retrieveAllTitles==true)
-        {
-            return Some(page.title)
-        }
-        else
-        {
-            if(page.title.language.wikiCode == "en")
-            {
-                return Some(page.title)
-            }
+        if (retrieveAllTitles || page.title.language.wikiCode == "en") return Some(page.title)
 
-            for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
-            {
-                if (retrieveOriginalName==false)
-                {
-                    return Some(destination)
-                }
-                else
-                {
-                    return Some(page.title)
-                }
-            }
+        // TODO comment: why reverse? probably just a performance thing. interwiki links are usually at the end.
+        // TODO: are InterWikiLinkNode always top-level children? 
+        for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
+        {
+            if (retrieveOriginalName) return Some(page.title)
+            else return Some(destination)
         }
 
         None
