@@ -37,6 +37,7 @@ object GenerateWikiConfig {
     // (old language code -> new language code)
     val languageMap = mutable.LinkedHashMap[String, String]()
     
+    // Note: langlist is sometimes not correctly sorted (done by hand), but no problem for us.
     val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
     val languages = try source.getLines.toList finally source.close
     
