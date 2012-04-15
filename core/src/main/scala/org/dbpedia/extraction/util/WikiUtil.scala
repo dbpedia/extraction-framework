@@ -2,7 +2,7 @@ package org.dbpedia.extraction.util
 
 import java.net.URLEncoder
 import java.net.URLDecoder
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.toRichString
 
 /**
  * Contains several utility functions related to WikiText.

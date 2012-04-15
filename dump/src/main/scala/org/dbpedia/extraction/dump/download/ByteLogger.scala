@@ -9,6 +9,8 @@ package org.dbpedia.extraction.dump.download
  */
 class ByteLogger(length : Long, step : Long, pretty : Boolean) extends ((Long, Boolean) => Unit)
 {
+  require(step > 0, "step must be > 0 but is "+step)
+  
   private var nanos = System.nanoTime
   
   private var next : Long = step
@@ -19,9 +21,9 @@ class ByteLogger(length : Long, step : Long, pretty : Boolean) extends ((Long, B
     {
       val millis = (System.nanoTime - nanos) / 1000000
       // TODO: add percentage and ETA
-      print("read "+formatBytes(bytes)+" of "+formatBytes(length)+" in "+formatMillis(millis)+" ("+formatRate(bytes, millis)+")                    ") // spaces at end overwrite previous line
+      print("read "+formatBytes(bytes)+" of "+formatBytes(length)+" in "+formatMillis(millis)+" ("+formatRate(bytes, millis)+")")
       if (close || ! pretty) println // new line 
-      else print('\r') // back to start of line
+      else print("                    \r") // spaces to overwrite previous line, back to start of line
       next = (bytes / step + 1) * step
     }
   }
@@ -44,8 +46,9 @@ class ByteLogger(length : Long, step : Long, pretty : Boolean) extends ((Long, B
   
   private def formatRate(bytes : Long, millis : Long) : String =
   {
-    if (bytes / millis > 1024) (bytes / 1048.576F / millis)+" MB/s"
-    else (bytes / 1.024F / millis)+" KB/s"
+    if (millis == 0) "? B/s"
+    else if (bytes / millis < 1024) (bytes / 1.024F / millis)+" KB/s"
+    else (bytes / 1048.576F / millis)+" MB/s"
   }
   
   private def zeros( num : Long ) : String = if (num < 10) "0"+num else num.toString

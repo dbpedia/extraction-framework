@@ -11,7 +11,7 @@ import java.util.zip.GZIPInputStream
 
 /**
  */
-class DumpDownload(baseUrl : URL, baseDir : File, download : Download)
+class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
 {
   def downloadFiles(languages : Map[String, Set[String]]) : Unit =
   {
@@ -44,7 +44,7 @@ class DumpDownload(baseUrl : URL, baseDir : File, download : Download)
       // 1 - find all dates on the main page, sort them latest first
       var dates = SortedSet.empty(Ordering[String].reverse)
       
-      download.downloadTo(mainPage, mainDir) // creates index.html, although it does not exist on the server
+      downloader.downloadTo(mainPage, mainDir) // creates index.html, although it does not exist on the server
       eachLine(new File(mainDir, "index.html"), line => DateLink.findAllIn(line).matchData.foreach(dates += _.group(1)))
       
       // 2 - find date page that has all files we want
@@ -63,7 +63,7 @@ class DumpDownload(baseUrl : URL, baseDir : File, download : Download)
           // downloaded. Checking that the downloaded files exist is necessary but not enough.
           
           
-          if (urls.forall(url => new File(dateDir, download.targetName(url)).exists)) {
+          if (urls.forall(url => new File(dateDir, downloader.targetName(url)).exists)) {
             println("did not download any files to '"+dateDir+"' - all files already complete")
             return
           } 
@@ -77,7 +77,7 @@ class DumpDownload(baseUrl : URL, baseDir : File, download : Download)
         // all the links we need
         val links = fileNames.map("<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+_+"\">")
         
-        download.downloadTo(datePage, dateDir) // creates index.html
+        downloader.downloadTo(datePage, dateDir) // creates index.html
         eachLine(new File(dateDir, "index.html"), line => links.foreach(link => if (line contains link) links -= link))
         
         // did we find them all?
@@ -86,7 +86,7 @@ class DumpDownload(baseUrl : URL, baseDir : File, download : Download)
           // 3 - download all files
           println("date page '"+datePage+"' has all files ["+fileNames.mkString(",")+"]")
           
-          for (url <- urls) download.downloadTo(url, dateDir)
+          for (url <- urls) downloader.downloadTo(url, dateDir)
           
           complete.createNewFile
           

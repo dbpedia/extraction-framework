@@ -8,7 +8,7 @@ import java.net.{URL,URLConnection}
 /**
  * Download decorator that renames and unzips zipped files.
  */
-trait Unzip extends Download {
+trait Unzip extends Downloader {
   
   /**
    * Strip extension if file name of URL indicates zipped file.

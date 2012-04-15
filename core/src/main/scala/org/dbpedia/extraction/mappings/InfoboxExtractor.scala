@@ -4,7 +4,7 @@ import collection.mutable.HashSet
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}

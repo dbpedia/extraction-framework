@@ -25,7 +25,7 @@
 
                         <launcher>
                             <id>extract</id>
-                            <mainClass>org.dbpedia.extraction.dump.Extract</mainClass>
+                            <mainClass>org.dbpedia.extraction.dump.extract.Extract</mainClass>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-Xmx1024m</jvmArg>
@@ -38,7 +38,7 @@
 
                         <launcher>
                             <id>compress</id>
-                            <mainClass>org.dbpedia.extraction.dump.Compress</mainClass>
+                            <mainClass>org.dbpedia.extraction.dump.compress.Compress</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xmx1024m</jvmArg>
                             </jvmArgs>
@@ -47,12 +47,12 @@
 
                         <launcher>
                             <id>download</id>
-                            <mainClass>org.dbpedia.extraction.dump.download.DownloadMain</mainClass>
+                            <mainClass>org.dbpedia.extraction.dump.download.Download</mainClass>
                             <args>
                                 <arg>config=download.properties</arg>
                                 <!--
                                 <arg>progress-pretty=true</arg>
-                                <arg>dir=/home/release/dbpedia</arg>
+                                <arg>dir=/home/release/wikipedia</arg>
                                 <arg>csv=http://s23.org/wikistats/wikipedias_csv</arg>
                                 <arg>base=http://dumps.wikimedia.org</arg>
                                 <arg>other=http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/maintenance/tables.sql</arg>
@@ -62,6 +62,16 @@
                                 <arg>retry-max=5</arg>
                                 <arg>retry-millis=10000</arg>
                                 -->
+                            </args>
+                        </launcher>
+                        
+                        <launcher>
+                            <id>clean</id>
+                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>2</arg><!-- keep two dumps -->
+                                <arg>*.sql,*-pages-articles.xml,*-download-complete,index.html</arg><!-- delete these files -->
                             </args>
                         </launcher>
 

@@ -7,7 +7,7 @@ import org.dbpedia.extraction.util.IOUtils.copy
 /**
  * Downloads a single file.
  */
-trait FileDownload extends Download
+trait FileDownloader extends Downloader
 {
   /**
    * Use "index.html" if URL ends with "/"
