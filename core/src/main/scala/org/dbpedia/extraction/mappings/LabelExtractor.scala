@@ -18,6 +18,7 @@ class LabelExtractor( context : {
     {
         if(node.title.namespace != Namespace.Main) return new Graph()
 
+        // TODO: use templates like {{lowercase}}, remove stuff like "(1999 film)" from title...
         val label = node.root.title.decoded
         if(label.isEmpty) return new Graph()
 
