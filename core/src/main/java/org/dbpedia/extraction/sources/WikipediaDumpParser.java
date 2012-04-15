@@ -62,11 +62,10 @@ public class WikipediaDumpParser
   private XMLStreamReader _reader;
   
   /** 
-   * Note: current namespace URI is "http://www.mediawiki.org/xml/export-0.6/",
-   * but older dumps use 0.3, so we just ignore the namespace URI.
-   * TODO: make this configurable, or use two different subclasses of this class.
+   * This parser is currently only compatible with the 0.6 format.
+   * TODO: make the parser smarter, ignore elements that are not present in older formats.
    */
-  private final String _namespace;
+  private final String _namespace = "http://www.mediawiki.org/xml/export-0.6/";
   
   /**
    * Language used to parse page titles. If null, get language from siteinfo.
@@ -94,7 +93,8 @@ public class WikipediaDumpParser
     if (processor == null) throw new NullPointerException("processor");
     
     _stream = stream;
-    _namespace = namespace;
+    if (namespace != null && ! namespace.equals(_namespace)) throw new IllegalArgumentException("namespace must be ["+_namespace+"] or null, but is ["+namespace+"]");
+    // _namespace = namespace;
     _language = language;
     _filter = filter;
     _processor = processor;
