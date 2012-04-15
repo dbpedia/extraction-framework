@@ -1,13 +1,15 @@
 package org.dbpedia.extraction.util
 
-import java.nio.file.Path
-import java.nio.file.Files
+import java.nio.file.{Path,Files}
+import scala.collection.JavaConversions.iterableAsScalaIterable
 
 object RichPath {
   implicit def toRichPath(path: Path) = new RichPath(path)
 }
 
-class RichPath(path: Path) {
+import RichPath.toRichPath
+
+class RichPath(path: Path) extends FileLike[Path] {
   
   /**
    * @throws NotDirectoryException if the path is not a directory
@@ -19,10 +21,22 @@ class RichPath(path: Path) {
   
   def delete = Files.delete(path)
   
+  def resolve(name: String) = path.resolve(name)
+  
   def exists = Files.exists(path)
   
-  def list(glob: String) = Files.newDirectoryStream(path, glob)
+  def list = list("*")
+
+  def list(glob: String) : List[String] = { 
+    val stream = Files.newDirectoryStream(path, glob)
+    try stream.toList.map(_.getFileName.toString) finally stream.close
+  }
   
-  def list = Files.newDirectoryStream(path)
+  def listPaths : List[Path] = listPaths("*")
+    
+  def listPaths(glob: String) : List[Path] = { 
+    val stream = Files.newDirectoryStream(path, glob)
+    try stream.toList finally stream.close
+  }
   
 }

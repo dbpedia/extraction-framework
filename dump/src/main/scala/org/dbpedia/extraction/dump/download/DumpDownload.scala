@@ -5,7 +5,8 @@ import scala.collection.immutable.SortedSet
 import java.net.{URL,URLConnection}
 import java.io.{File,InputStream,IOException}
 import scala.io.{Source,Codec}
-
+import org.dbpedia.extraction.util.Finder
+import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import java.util.zip.GZIPInputStream
 
@@ -30,15 +31,15 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
   
   private def downloadFiles(language : String, fileNames : Set[String]) : Unit =
   {
-    import DumpDownload._
+    val finder = new Finder[File](baseDir, language)
     
-    val wiki = dumpName(language)
+    val wiki = finder.wikiName
     
     val mainPage = new URL(baseUrl, wiki+"/") // here the server does NOT use index.html 
     val mainDir = new File(baseDir, wiki)
-    if (! mainDir.exists && ! mainDir.mkdirs) throw new Exception("Target directory '"+mainDir+"' does not exist and cannot be created")
-    val running = runningFile(baseDir, language)
-    if (! running.createNewFile) throw new Exception("Another process is downloading files to '"+mainDir+"' - stop that process and remove '"+running+"'")
+    if (! mainDir.exists && ! mainDir.mkdirs) throw new Exception("Target directory ["+mainDir+"] does not exist and cannot be created")
+    val running = finder.file(Download.Running)
+    if (! running.createNewFile) throw new Exception("Another process is downloading files to ["+mainDir+"] - stop that process and remove ["+running+"]")
     try
     {
       // 1 - find all dates on the main page, sort them latest first
@@ -54,14 +55,15 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
         val dateDir = new File(mainDir, date)
         if (! dateDir.exists && ! dateDir.mkdirs) throw new Exception("Target directory '"+dateDir+"' does not exist and cannot be created")
         
-        val complete = completeFile(baseDir, language, date)
+        val complete = finder.file(date, Download.Complete)
         
         val urls = fileNames.map(fileName => new URL(baseUrl, wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName))
+        
         if (complete.exists) {
           // Previous download process said that this dir is complete. Note that we MUST check the
           // 'complete' file - the previous download may have crashed before all files were fully
-          // downloaded. Checking that the downloaded files exist is necessary but not enough.
-          
+          // downloaded. Checking that the downloaded files exist is necessary but not sufficient.
+          // Checking the timestamps is sufficient but not efficient.
           
           if (urls.forall(url => new File(dateDir, downloader.targetName(url)).exists)) {
             println("did not download any files to '"+dateDir+"' - all files already complete")
@@ -111,31 +113,4 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
     finally source.close
   }
   
-}
-
-object DumpDownload {
-  
-  def dumpName(language: String) = language.replace('-', '_') + "wiki"
-  
-  /**
-   * Suffix of the file that indicates that a download of the Wikipedia dump files in the
-   * directory containing this file is running. Note that this file may also have been left
-   * over by a previous crashed download process. TODO: use file locks etc.
-   */
-  def runningFile (baseDir : File, language : String) : File = {
-    val name = dumpName(language)
-    new File(baseDir, name+"/"+name+"-download-running")
-  }
-  
-  /**
-   * File that indicates that a download of the Wikipedia dump files in the directory containing 
-   * this file is complete. Note that this does not mean that all possible files have been downloaded, 
-   * only those that a certain download process was supposed to download.
-   */
-  def completeFile(baseDir : File, language : String, date : String) : File = {
-    val name = dumpName(language)
-    new File(baseDir, name+"/"+date+"/"+name+"-"+date+"-download-complete")
-  }
-        
-
 }
