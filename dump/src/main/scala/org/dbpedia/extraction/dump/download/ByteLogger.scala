@@ -1,18 +1,26 @@
 package org.dbpedia.extraction.dump.download
 
-class ByteLogger(length : Long, step : Long, ugly : Boolean) extends ((Long, Boolean) => Unit)
+/**
+ * Logs read bytes.
+ * @length length of input
+ * @step approximante number of bytes read between progress logs
+ * @pretty if true, re-use one line for output, otherwise use a new line for each log. 
+ * Pretty printing works when logging to a console, but usuaully not in files.
+ */
+class ByteLogger(length : Long, step : Long, pretty : Boolean) extends ((Long, Boolean) => Unit)
 {
   private var nanos = System.nanoTime
   
   private var next : Long = step
   
-  def apply( bytes : Long, close : Boolean = false ) : Unit =
+  def apply( bytes : Long, close : Boolean ) : Unit =
   {
     if (close || bytes >= next)
     {
       val millis = (System.nanoTime - nanos) / 1000000
+      // TODO: add percentage and ETA
       print("read "+formatBytes(bytes)+" of "+formatBytes(length)+" in "+formatMillis(millis)+" ("+formatRate(bytes, millis)+")                    ") // spaces at end overwrite previous line
-      if (close || ugly) println // new line 
+      if (close || ! pretty) println // new line 
       else print('\r') // back to start of line
       next = (bytes / step + 1) * step
     }

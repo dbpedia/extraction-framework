@@ -13,7 +13,7 @@ trait Counter extends Download {
   val progressPretty : Boolean
 
   protected abstract override def inputStream(conn: URLConnection): InputStream = {
-    val logger = new ByteLogger(getContentLength(conn), progressStep, ! progressPretty)
+    val logger = new ByteLogger(getContentLength(conn), progressStep, progressPretty)
     new CountingInputStream(super.inputStream(conn), logger)
   }
   

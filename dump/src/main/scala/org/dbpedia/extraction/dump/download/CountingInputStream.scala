@@ -10,7 +10,7 @@ import java.io.IOException
  */
 class CountingInputStream(in : InputStream, log : (Long, Boolean) => Unit ) extends InputStream 
 {
-  // TODO: also implement mark(), reset(), markSupported()
+  // TODO: also implement mark(), reset(), markSupported()?
   
   private var bytes : Long = 0
   
