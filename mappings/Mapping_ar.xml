@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping ar:تجمع سكاني</title><ns>250</ns><id>5085</id><revision><id>16718</id><text>{{ ConditionalMapping | cases = 
+    {{ Condition | templateProperty = settlement_type | operator = contains | value = Metropolis | mapping = 
+        {{ TemplateMapping | mapToClass = City }} }}
+    {{ Condition | templateProperty = settlement_type | operator = contains | value = City | mapping = 
+        {{ TemplateMapping | mapToClass = City }} }}
+    {{ Condition | templateProperty = settlement_type | operator = contains | value = Town | mapping = 
+        {{ TemplateMapping | mapToClass = Town }} }}
+    {{ Condition | templateProperty = settlement_type | operator = contains | value = Village | mapping = 
+        {{ TemplateMapping | mapToClass = Village }} }}
+    {{ Condition | templateProperty = settlement_type | operator = contains | value = Municipality | mapping = 
+        {{ TemplateMapping | mapToClass = Settlement }} }}
+    {{ Condition | templateProperty = settlement_type | operator = contains | value = Administrative | mapping = 
+        {{ TemplateMapping | mapToClass = AdministrativeRegion }} }}
+    {{ Condition | operator = otherwise | mapping = 
+        {{ TemplateMapping | mapToClass = Settlement }} }} | defaultMappings = 
+    {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = official_name | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = other_name | ontologyProperty = synonym }}
+    {{ PropertyMapping | templateProperty = native_name | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = nickname | ontologyProperty = foaf:nick }}
+    {{ PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
+    {{ PropertyMapping | templateProperty = anthem | ontologyProperty = anthem }}
+    {{ PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin8 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin9 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = twin2_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = twin3_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = twin4_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = twin5_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = twin6_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = twin7_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = twin8_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = twin9_country | ontologyProperty = twinCountry }}
+    {{ PropertyMapping | templateProperty = area_magnitude | ontologyProperty = area | unit = squareMetre }}
+    {{ PropertyMapping | templateProperty = area_total_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
+    {{ PropertyMapping | templateProperty = area_total_sq_mi | ontologyProperty = areaTotal | unit = squareMile }}
+   {{ PropertyMapping | templateProperty = TotalArea_sq_mi | ontologyProperty = areaTotal | unit = squareMile }}    
+   {{ PropertyMapping | templateProperty = area_total | ontologyProperty = areaTotal | unit = area}}
+   {{ PropertyMapping | templateProperty = area_land_km2 | ontologyProperty = areaLand | unit = squareKilometre }}
+   {{ PropertyMapping | templateProperty = area_land_sq_mi | ontologyProperty = areaLand | unit = squareMile }}
+   {{ PropertyMapping | templateProperty = LandArea_sq_mi | ontologyProperty = areaLand | unit = squareMile }}   
+   {{ PropertyMapping | templateProperty = area_land | ontologyProperty = areaLand | unit = area }}
+    {{ PropertyMapping | templateProperty = area_water_km2 | ontologyProperty = areaWater | unit = squareKilometre }}
+   {{ PropertyMapping | templateProperty = WaterArea_sq_mi | ontologyProperty = areaWater | unit = squareMile }}   
+    {{ PropertyMapping | templateProperty = area_water_sq_mi | ontologyProperty = areaWater | unit = squareMile }}
+   {{ PropertyMapping | templateProperty = area_water | ontologyProperty = areaWater | unit = area }}   
+    {{ PropertyMapping | templateProperty = area_water_percent | ontologyProperty = percentageOfAreaWater }}
+    {{ PropertyMapping | templateProperty = area_urban_km2 | ontologyProperty = areaUrban | unit = squareKilometre }}
+    {{ PropertyMapping | templateProperty = area_urban_sq_mi | ontologyProperty = areaUrban | unit = squareMile }}
+   {{ PropertyMapping | templateProperty = UrbanArea_sq_mi | ontologyProperty = areaUrban | unit = squareMile }}   
+   {{ PropertyMapping | templateProperty = area_urban | ontologyProperty = areaUrban | unit = area }}   
+    {{ PropertyMapping | templateProperty = area_metro_km2 | ontologyProperty = areaMetro | unit = squareKilometre }}
+    {{ PropertyMapping | templateProperty = area_metro_sq_mi | ontologyProperty = areaMetro | unit = squareMile }}
+   {{ PropertyMapping | templateProperty = MetroArea_sq_mi | ontologyProperty = areaMetro | unit = squareMile }}  
+   {{ PropertyMapping | templateProperty = area_metro | ontologyProperty = areaMetro | unit = area }}    
+    {{ PropertyMapping | templateProperty = area_rural_km2 | ontologyProperty = areaRural | unit = squareKilometre }}
+    {{ PropertyMapping | templateProperty = area_rural_sq_mi | ontologyProperty = areaRural | unit = squareMile }}
+    {{ PropertyMapping | templateProperty = leader_title | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = leader_name | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = leader_title1 | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = leader_name1 | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = leader_title2 | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = leader_name2 | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = leader_title3 | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = leader_name3 | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = leader_title4 | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = leader_name4 | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = leader_party | ontologyProperty = leaderParty }}
+    {{ PropertyMapping | templateProperty = government_type | ontologyProperty = governmentType }}
+    {{ PropertyMapping | templateProperty = governing_body | ontologyProperty = governingBody }}
+    {{ PropertyMapping | templateProperty = established_date | ontologyProperty = foundingDate }}
+    {{ PropertyMapping | templateProperty = established_date1 | ontologyProperty = foundingDate }}
+    {{ PropertyMapping | templateProperty = established_date2 | ontologyProperty = foundingDate }}
+    {{ PropertyMapping | templateProperty = established_date3 | ontologyProperty = foundingDate }}
+    {{ PropertyMapping | templateProperty = founder | ontologyProperty = foundingPerson }}
+    {{ PropertyMapping | templateProperty = elevation_m | ontologyProperty = elevation | unit = metre }}
+    {{ PropertyMapping | templateProperty = elevation_ft | ontologyProperty = elevation | unit = foot }}
+    {{ PropertyMapping | templateProperty = elevation_max_m | ontologyProperty = maximumElevation | unit = metre }}
+    {{ PropertyMapping | templateProperty = elevation_max_ft | ontologyProperty = maximumElevation | unit = foot }}
+    {{ PropertyMapping | templateProperty = elevation_min_m | ontologyProperty = minimumElevation | unit = metre }}
+    {{ PropertyMapping | templateProperty = elevation_min_ft | ontologyProperty = minimumElevation | unit = foot }}
+    {{ PropertyMapping | templateProperty = population_as_of | ontologyProperty = populationAsOf }}
+    {{ PropertyMapping | templateProperty = population_total | ontologyProperty = populationTotal }}
+    {{ PropertyMapping | templateProperty = pop_est_as_of | ontologyProperty = populationAsOf }}
+    {{ PropertyMapping | templateProperty = pop_est | ontologyProperty = populationTotal }}
+    {{ PropertyMapping | templateProperty = population_rank | ontologyProperty = populationTotalRanking }}
+    {{ PropertyMapping | templateProperty = population_density | ontologyProperty = populationDensity | unit = PopulationDensity }}
+    {{ PropertyMapping | templateProperty = population_density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
+    {{ PropertyMapping | templateProperty = population_density_sq_mi | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
+    {{ PropertyMapping | templateProperty = population_density_mi2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
+    {{ PropertyMapping | templateProperty = population_metro | ontologyProperty = populationMetro }}
+    {{ PropertyMapping | templateProperty = population_density_metro_km2 | ontologyProperty = populationMetroDensity | unit = inhabitantsPerSquareKilometre }}
+    {{ PropertyMapping | templateProperty = population_density_metro_sq_mi | ontologyProperty = populationMetroDensity | unit = inhabitantsPerSquareMile }}
+    {{ PropertyMapping | templateProperty = population_density_metro_mi2 | ontologyProperty = populationMetroDensity | unit = inhabitantsPerSquareMile }}
+    {{ PropertyMapping | templateProperty = population_urban | ontologyProperty = populationUrban }}
+    {{ PropertyMapping | templateProperty = population_density_urban_km2 | ontologyProperty = populationUrbanDensity | unit = inhabitantsPerSquareKilometre }}
+    {{ PropertyMapping | templateProperty = population_density_urban_sq_mi | ontologyProperty = populationUrbanDensity | unit = inhabitantsPerSquareMile }}
+    {{ PropertyMapping | templateProperty = population_density_urban_mi2 | ontologyProperty = populationUrbanDensity | unit = inhabitantsPerSquareMile }}
+    {{ PropertyMapping | templateProperty = population_rural | ontologyProperty = populationRural }}
+    {{ PropertyMapping | templateProperty = population_density_rural_km2 | ontologyProperty = populationRuralDensity | unit = inhabitantsPerSquareKilometre }}
+    {{ PropertyMapping | templateProperty = population_density_rural_sq_mi | ontologyProperty = populationRuralDensity | unit = inhabitantsPerSquareMile }}
+    {{ PropertyMapping | templateProperty = postal_code | ontologyProperty = postalCode }}
+    {{ PropertyMapping | templateProperty = postal2_code | ontologyProperty = postalCode }}
+    {{ PropertyMapping | templateProperty = area_code | ontologyProperty = areaCode }}
+    {{ PropertyMapping | templateProperty = iso_code | ontologyProperty = isoCodeRegion }}
+    {{ PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+    {{ PropertyMapping | templateProperty = subdivision_name | ontologyProperty = country }}
+    {{ PropertyMapping | templateProperty = subdivision_name1 | ontologyProperty = isPartOf }}
+    {{ PropertyMapping | templateProperty = subdivision_name2 | ontologyProperty = isPartOf }}
+    {{ PropertyMapping | templateProperty = subdivision_name3 | ontologyProperty = isPartOf }}
+    {{ PropertyMapping | templateProperty = subdivision_name4 | ontologyProperty = isPartOf }}
+    {{ PropertyMapping | templateProperty = subdivision_name5 | ontologyProperty = isPartOf }}
+    {{ PropertyMapping | templateProperty = subdivision_name6 | ontologyProperty = isPartOf }}
+    {{ PropertyMapping | templateProperty = p1 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p2 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p3 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p4 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p5 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p6 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p7 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p8 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p9 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p11 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p12 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p13 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p14 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p15 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p16 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p17 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p18 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p19 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p10 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p21 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p22 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p23 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p24 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p25 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p26 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p27 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p28 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p29 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p20 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p31 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p32 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p33 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p34 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p35 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p36 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p37 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p38 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p39 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p30 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p41 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p42 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p43 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p44 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p45 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p46 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p47 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p48 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p49 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p40 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = p50 | ontologyProperty = part }}
+    {{ PropertyMapping | templateProperty = settlement_type | ontologyProperty = type }}
+    {{ PropertyMapping | templateProperty = timezone | ontologyProperty = timeZone }}
+    {{ PropertyMapping | templateProperty = utc_offset | ontologyProperty = utcOffset }}
+    {{ PropertyMapping | templateProperty = timezone1 | ontologyProperty = timeZone }}
+    {{ PropertyMapping | templateProperty = utc_offset1 | ontologyProperty = utcOffset }}
+    {{ PropertyMapping | templateProperty = timezone2 | ontologyProperty = timeZone }}
+    {{ PropertyMapping | templateProperty = utc_offset2 | ontologyProperty = utcOffset }}
+    {{ PropertyMapping | templateProperty = timezone_DST | ontologyProperty = timeZone }}
+    {{ PropertyMapping | templateProperty = utc_offset_DST | ontologyProperty = utcOffset }}
+    {{ PropertyMapping | templateProperty = timezone1_DST | ontologyProperty = timeZone }}
+    {{ PropertyMapping | templateProperty = utc_offset1_DST | ontologyProperty = utcOffset }}
+    {{ PropertyMapping | templateProperty = timezone2_DST | ontologyProperty = timeZone }}
+    {{ PropertyMapping | templateProperty = utc_offset2_DST | ontologyProperty = utcOffset }}
+    {{ GeocoordinatesMapping | latitudeDegrees = latd | latitudeMinutes = latm | latitudeSeconds = lats | latitudeDirection = latNS | longitudeDegrees = longd | longitudeMinutes = longm | longitudeSeconds = longs | longitudeDirection = longEW }} }}</text></revision></page><page><title>Mapping ar:ص.م مبنى تاريخي</title><ns>250</ns><id>5105</id><revision><id>16801</id><text>{{TemplateMapping
+| mapToClass = Museum
+| mappings =
+	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = native_name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = native_name_lang | ontologyProperty = language }}
+	{{PropertyMapping | templateProperty = location | ontologyProperty = location }}
+
+}}</text></revision></page><page><title>Mapping ar:فيلم</title><ns>250</ns><id>5135</id><revision><id>17003</id><text>{{ TemplateMapping | mapToClass = Film | mappings = 
+    {{ PropertyMapping | templateProperty = مخرج   | ontologyProperty = director }}
+    {{ PropertyMapping | templateProperty = منتج | ontologyProperty = producer }}
+    {{ PropertyMapping | templateProperty = كاتب | ontologyProperty = writer }}
+    {{ PropertyMapping | templateProperty = بطولة | ontologyProperty = starring }}
+    {{ PropertyMapping | templateProperty = موسيقى  | ontologyProperty = musicComposer }}
+    {{ PropertyMapping | templateProperty = سينماتوغرافيا | ontologyProperty = cinematography }}
+    {{ PropertyMapping | templateProperty = مونتاج  | ontologyProperty = editing }}
+    {{ PropertyMapping | templateProperty = موزع | ontologyProperty = distributor }}
+    {{ PropertyMapping | templateProperty = البلد | ontologyProperty = country }}
+    {{ PropertyMapping | templateProperty = ميزانية   | ontologyProperty = budget | unit = Currency }}
+    {{ PropertyMapping | templateProperty = الإيرادات| ontologyProperty = gross | unit = Currency }}
+    {{ PropertyMapping | templateProperty = اسم الفيلم | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = تاريخ الصدور | ontologyProperty = releaseDate }}
+    {{ PropertyMapping | templateProperty = مدة الفيلم | ontologyProperty = runtime | unit = Time }}
+    {{ PropertyMapping | templateProperty = لغة الفيلم | ontologyProperty = language }}
+    {{ PropertyMapping | templateProperty = الموقع الرسمي | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping ar:متحف</title><ns>250</ns><id>5116</id><revision><id>16840</id><text>{{TemplateMapping
+| mapToClass = Museum
+| mappings =
+	{{PropertyMapping | templateProperty = اسم  | ontologyProperty = foaf:name }}	
+	{{PropertyMapping | templateProperty = بلد | ontologyProperty = location }}
+        {{GeocoordinatesMapping | دائرة العرض = latitude | خط الطول = longitude}}
+	{{PropertyMapping | templateProperty = افتتاح | ontologyProperty = foundingDate }}	
+	{{PropertyMapping | templateProperty = مجموعات | ontologyProperty = collection }}	
+	{{PropertyMapping | templateProperty =زوار | ontologyProperty = numberOfVisitors }}	
+	{{PropertyMapping | templateProperty = موقع  | ontologyProperty = foaf:homepage }}
+
+
+}}</text></revision></page></mediawiki>
