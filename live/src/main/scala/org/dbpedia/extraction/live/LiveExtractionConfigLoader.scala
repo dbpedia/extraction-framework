@@ -53,7 +53,7 @@ object LiveExtractionConfigLoader extends ActionListener
                                                    language = Language.Default );
 
     /** Mappings source */
-    val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.Mapping),
+    val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.Default)),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
                                                         language = Language.Default );
   
@@ -421,7 +421,7 @@ object LiveExtractionConfigLoader extends ActionListener
                                                        language = Language.Default );
 
         /** Mappings source */
-        val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.Mapping),
+        val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.Default)),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
                                                         language = Language.Default );
 //        var pagecount :Long = 0;

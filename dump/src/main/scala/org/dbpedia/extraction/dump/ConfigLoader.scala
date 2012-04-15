@@ -150,7 +150,7 @@ object ConfigLoader
 
         private lazy val _mappingPageSource =
         {
-            val namespace = Namespace.mappingNamespace(language).getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
+            val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
             
             if (mappingsDir != null && mappingsDir.isDirectory)
             {
@@ -264,6 +264,7 @@ object ConfigLoader
      * places. We should share the code. Use a configurable strategy object that returns the paths etc.
      */
     private def targetFile(language : Language, date : String, suffix : String)(dataset : Dataset) : File = {
+        // Don't call dumpDate() here, use date parameter. See method comment.
         val wiki = language.filePrefix+"wiki"
         new File(config.outputDir, wiki+"/"+date+"/"+wiki+"-"+date+"-"+dataset.name.replace('_','-')+"."+suffix)
     }

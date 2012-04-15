@@ -17,7 +17,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
     if (!Server.languages.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
 
-    private val mappingUrlPrefix = Server.wikiPagesUrl+"/"+Namespace.mappingNamespace(language).get.toString + ":"
+    private val mappingUrlPrefix = Server.wikiPagesUrl+"/"+Namespace.mappings(language).toString + ":"
 
     private val manager = Server.statsManager(language)
 

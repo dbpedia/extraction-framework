@@ -129,7 +129,7 @@ class WikipediaStats(val language : Language, val redirects: mutable.Map[String,
 {
     def checkForRedirects(mappingStats: Map[MappingStats, Int], mappings: Map[String, ClassMapping]) =
     {
-        val templateNamespacePrefix = Namespaces.getName(language, Namespace.Template) + ":"
+        val templateNamespacePrefix = Namespace.Template.getName(language) + ":"
         val mappedRedirects = redirects.filterKeys(title => mappings.contains(title))
         mappedRedirects.map(_.swap)
     }

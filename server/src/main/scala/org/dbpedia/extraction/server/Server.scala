@@ -9,7 +9,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.server.util.MappingStatsManager
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
 import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
-import org.dbpedia.extraction.server.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
 /**
  * The DBpedia server.
