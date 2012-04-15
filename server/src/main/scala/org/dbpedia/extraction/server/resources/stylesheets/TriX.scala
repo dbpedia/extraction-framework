@@ -51,13 +51,13 @@ class TriX
                       <xsl:for-each select="trix:triple">
                         <tr>
                           <td>
-                            <xsl:value-of select="*[position()=1]"/>
+                            <xsl:value-of select="*[1]"/>
                           </td>
                           <td>
-                            <xsl:value-of select="*[position()=2]"/>
+                            <xsl:value-of select="*[2]"/>
                           </td>
                           <td>
-                            <xsl:value-of select="*[position()=3]"/>
+                            <xsl:value-of select="*[3]"/>
                           </td>
                           <td>
                             <a>
