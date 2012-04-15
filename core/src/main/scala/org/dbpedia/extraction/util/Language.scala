@@ -3,12 +3,15 @@ package org.dbpedia.extraction.util
 import java.util.Locale
 
 /**
- * Represents a Wikipedia language. For each language, there is only one instance of this class. 
+ * Represents a MediaWiki instance and the language used on it. Initially, this class was
+ * only used for xx.wikipedia.org instances, but now we also use it for mappings.dbpedia.org.
+ * For each language, there is only one instance of this class.
+ * TODO: rename this class to WikiCode or so, add a value for mappings.dbpedia.org.
  */
 class Language private(val wikiCode : String, val isoCode: String) extends Serializable
 {
-    // TODO: make this transient and add a readObject method
-    val locale : Locale = new Locale(isoCode)
+    // TODO: make this transient and add a readObject method. Better yet: never use Serializable
+    val locale = new Locale(isoCode)
     
     /** 
      * Note that Wikipedia dump files use this prefix (with underscores), 
@@ -18,7 +21,7 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
     
     /**
      */
-    override def toString() = "wiki="+wikiCode+",locale="+locale.getLanguage
+    override def toString = "wiki="+wikiCode+",locale="+locale.getLanguage
     
     // no need to override equals() and hashCode() - there is only one object for each value, so equality means identity. 
 }
@@ -124,7 +127,7 @@ object Language extends (String => Language)
           "mdf" -> "ru",           // Moksha
           "kaa" -> "uz",           // Karakalpak
           "tet" -> "id",           // Tetum
-          "got" -> "it",           // Gothic  --- Italian???
+          "got" -> "it",           // Gothic --- Italian???
           "pih" -> "en",           // Norfuk
           "pnt" -> "el",           // Pontic Greek
           "chr" -> "en",           // Cherokee
