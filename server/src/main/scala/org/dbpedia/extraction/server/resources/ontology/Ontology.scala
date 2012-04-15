@@ -24,18 +24,18 @@ class Ontology
             <a href="pages/">Source Pages</a><br/>
             <a href="validate/">Validate</a><br/>
             <a href="classes/">Classes</a><br/>
-            <a href="export">Ontology (OWL)</a><br/>
+            <a href="dbpedia.owl">Ontology (OWL)</a><br/>
           </body>
         </html>
     }
 
     /**
-     * Exports the ontology as OWL.
+     * Exports the ontology as OWL. Also match "export" for backwards compatibility with old links.
      */
     @GET
-    @Path("/export")
+    @Path("{dummy:dbpedia.owl|export}")
     @Produces(Array("application/rdf+xml"))
-    def export =
+    def ontology =
     {
         new OntologyOWLWriter().write(Server.extractor.ontology)
     }
