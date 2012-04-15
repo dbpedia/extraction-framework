@@ -14,7 +14,7 @@ object OntologyNamespaces
     // Move them to some other class. No, better make them configuration parameters. 
   
     //#int
-    val genericDomain = Set[String]("en")
+    val genericDomain = Set[String]() // ("en")
     
     val encodeAsURI = Set[String]()
 
@@ -123,22 +123,17 @@ object OntologyNamespaces
 
     private def appendUri(baseUri : String, encodedSuffix : String, language : Language) : String =
     {
-        var result = baseUri + encodedSuffix
+        var uri = baseUri + encodedSuffix
         
-        if (! baseUri.contains('#') && ! encodeAsURI.contains(language.wikiCode)) {
-            /**
-             * FIXME: this can not really work. It's very hard to correctly encode/decode 
-             * a complete URI. Only parts of a URI can be encoded and then combined. 
-             * See http://tools.ietf.org/html/rfc2396#section-2.4.2 
-             * At this point, it's too late. Known problems:
-             * - no distinction between "#" and "%23" - input "http://foo/my%231#bar" becomes "http://foo/my%231%23bar"
-             * - no distinction between "/" and "%2F" - input "http://foo/a%2Fb/c" becomes "http://foo/a/b/c"
-             */
-            // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
-            escape(decode(result, "UTF-8"), "\"#%<>?[\\]^`{|}")
-        }
-        
-        result
+        if (baseUri.contains('#') || encodeAsURI.contains(language.wikiCode)) uri
+        // FIXME: this cannot really work. It's very hard to correctly encode/decode 
+        // a complete URI. Only parts of a URI can be encoded and then combined. 
+        // See http://tools.ietf.org/html/rfc2396#section-2.4.2 
+        // At this point, it's too late. Known problems:
+        // - no distinction between "#" and "%23" - input "http://foo/my%231#bar" becomes "http://foo/my%231%23bar"
+        // - no distinction between "/" and "%2F" - input "http://foo/a%2Fb/c" becomes "http://foo/a/b/c"
+        // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
+        else escape(decode(uri, "UTF-8"), "\"#%<>?[\\]^`{|}")
     }
 
     /**
