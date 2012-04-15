@@ -8,6 +8,7 @@ object UriUtils
     
     /**
      * TODO: comment
+     * FIXME: toASCIIString converts IRIs to URIs
      */
     def cleanLink( uri : URI ) : Option[String] =
     {
