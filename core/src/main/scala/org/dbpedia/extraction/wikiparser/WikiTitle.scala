@@ -39,7 +39,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
         }
         else 
         {
-          val ns = Namespace.getNamespaceName(language, namespace)
+          val ns = namespace.getName(language)
           (if (encode) WikiUtil.wikiEncode(ns, language, capitalize=true) else ns)+ ":" + name
         }
     }
@@ -54,7 +54,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
      */
     override def toString() = {
       val frag = if (fragment == null) "" else ";fragment='"+fragment+"'"
-      "title='"+decoded+"';ns="+namespace.id+"/"+namespace+"/"+Namespace.getNamespaceName(language, namespace)+";language:"+language+frag;
+      "title="+decoded+";ns="+namespace+"/"+namespace.getName(language)+";language:"+language+frag;
     }
 
     /**

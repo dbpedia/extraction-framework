@@ -22,7 +22,7 @@ object MappingsDownloader {
     // don't use mkdirs, that often masks mistakes. 
     require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
     
-    for (namespace <- Namespace.values if (namespace.toString.startsWith("Mapping"))) {
+    for (namespace <- Namespace.mappings.values) {
       val file = new File(dir, namespace.toString+".xml")
       val nanos = System.nanoTime
       println("downloading mappings from "+apiUrl+" to "+file)

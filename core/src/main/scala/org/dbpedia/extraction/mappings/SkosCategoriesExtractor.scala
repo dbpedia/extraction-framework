@@ -54,7 +54,7 @@ class SkosCategoriesExtractor( context : {
 
     private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespaces.getName(context.language, Namespace.Category)
+        val categoryNamespace = Namespace.Category.getName(context.language)
         
         OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
         //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
