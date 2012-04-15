@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dump.download
 import java.io.{File,InputStream}
 import java.net.URLConnection
 
-trait Counter extends Download {
+trait Counter extends Downloader {
   
   /**
    * After how many bytes should download progress be logged?

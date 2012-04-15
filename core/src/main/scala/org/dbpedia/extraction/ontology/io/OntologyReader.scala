@@ -4,7 +4,7 @@ import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.extraction.util.Language
 import java.util.Locale
 import org.dbpedia.extraction.sources.Source

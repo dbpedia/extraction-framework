@@ -6,7 +6,7 @@ import java.net.URL
 /**
  * Retry download if it fails.
  */
-trait Retry extends Download {
+trait Retry extends Downloader {
   
   /**
    * Total number of attempts.

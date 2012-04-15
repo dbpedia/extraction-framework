@@ -4,7 +4,7 @@ import java.util.Locale
 import java.lang.StringBuilder
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.uri.UriDecoder

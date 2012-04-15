@@ -62,7 +62,7 @@ object Server
         val mappingsDir = new File(args(3))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        _languages = for(arg <- args.slice(4, args.length); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        _languages = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
         
         _managers = _languages.map(language => (language -> new MappingStatsManager(statsDir, language))).toMap
         

@@ -6,7 +6,7 @@ import java.net.{URL,URLConnection,HttpURLConnection}
 /**
  * Mixin that does not download a file if it has the same timestamp as the file on the server.
  */
-trait LastModified extends Download {
+trait LastModified extends Downloader {
   
   /**
    * Check server timestamp, don't do anything if not necessary.
