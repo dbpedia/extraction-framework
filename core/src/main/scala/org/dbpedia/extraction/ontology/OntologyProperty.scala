@@ -21,9 +21,10 @@ class OntologyProperty( name : String, labels : Map[Language, String], comments 
     require(OntologyNamespaces.skipValidation(name) || range != null, "range != null")
     require(equivalentProperties != null, "equivalentPropertyNames != null")
     
-    val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
+    // FIXME: the last parameter selects IRI or URI format. This is the wrong place for that choice.
+    val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE, Language.Default)
 
-    lazy val isExternalProperty = !uri.startsWith(OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
+    val isExternalProperty = ! uri.startsWith(OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
     
     override def toString = uri
 

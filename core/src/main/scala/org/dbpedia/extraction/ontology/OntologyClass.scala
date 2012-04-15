@@ -22,7 +22,8 @@ class OntologyClass(name : String, labels : Map[Language, String], comments : Ma
     require(name == "owl:Thing" || subClassOf.nonEmpty || OntologyNamespaces.skipValidation(name), "subClassOf.nonEmpty")
     require(equivalentClasses != null, "equivalentClasses != null")
 
-    override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
+    // FIXME: the last parameter selects IRI or URI format. This is the wrong place for that choice.
+    override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE, Language.Default)
 
-    lazy val isExternalClass = !uri.startsWith(OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
+    val isExternalClass = ! uri.startsWith(OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
 }

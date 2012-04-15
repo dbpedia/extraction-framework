@@ -83,7 +83,7 @@ class HomepageExtractor( context : {
     {
         try
         {
-            for(link <- UriUtils.cleanLink(URI.create(url)))
+            for(link <- UriUtils.cleanLink(URI.create(url))) // FIXME: cleanLink converts IRIs to URIs
             {
                 return new Graph(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
             }

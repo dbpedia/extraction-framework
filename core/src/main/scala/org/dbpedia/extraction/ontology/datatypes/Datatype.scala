@@ -22,7 +22,8 @@ class Datatype(name : String, labels : Map[Language, String], comments : Map[Lan
     /**
      * The URI of this datatype
      */
-    override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_DATATYPE_NAMESPACE)
+    // FIXME: the last parameter selects IRI or URI format. This is the wrong place for that choice.
+    override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_DATATYPE_NAMESPACE, Language.Default)
 
-    lazy val isExternalProperty = !uri.startsWith(OntologyNamespaces.DBPEDIA_DATATYPE_NAMESPACE)
+    val isExternalProperty = ! uri.startsWith(OntologyNamespaces.DBPEDIA_DATATYPE_NAMESPACE)
 }

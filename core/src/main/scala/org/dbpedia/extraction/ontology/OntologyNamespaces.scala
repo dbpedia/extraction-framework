@@ -84,59 +84,61 @@ object OntologyNamespaces
     /**
      * Determines the full URI of a name.
      * e.g. foaf:name will be mapped to http://xmlns.com/foaf/0.1/name
-     *
+     * 
+     * FIXME: the language parameter is used to choose between URI/IRI. This is the wrong place for that.
+     * 
      * @param The name must be URI-encoded
      * @param $baseUri The base URI which will be used if no prefix (e.g. foaf:) has been found in the given name
+     * @param language needed to chose wether a URI or IRI is generated. FIXME: this is the wrong place for that choice.
      * @return string The URI
      */
-    def getUri(name : String, baseUri : String) : String =
+    def getUri(name : String, baseUri : String, language : Language) : String =
     {
         name.split(":", 2) match
         {
             case Array(prefix, suffix) => prefixMap.get(prefix) match
             {
-                case Some(namespace) => appendUri(namespace, suffix)  // replace prefix
-                case None => appendUri(baseUri, name)                 // append "fall-back" baseUri
+                case Some(namespace) => appendUri(namespace, suffix, language)  // replace prefix
+                case None => appendUri(baseUri, name, language)                 // append "fall-back" baseUri
                 // throw new IllegalArgumentException("Unknown prefix " + prefix + " in name " + name);
             }
-            case _ => appendUri(baseUri, name)
+            case _ => appendUri(baseUri, name, language)
         }
     }
 
-    def getResource(name : String, lang : Language) : String = appendUri(baseUri(lang, "resource"), name, lang)
+    /**
+     * FIXME: the language parameter is used to choose between URI/IRI. This is the wrong place for that.
+     */
+    def getResource(name : String, language : Language) : String = appendUri(baseUri(language, "resource"), name, language)
 
-    def getProperty(name : String, lang : Language) : String = appendUri(baseUri(lang, "property"), name, lang)
+    /**
+     * FIXME: the language parameter is used to choose between URI/IRI. This is the wrong place for that.
+     */
+    def getProperty(name : String, language : Language) : String = appendUri(baseUri(language, "property"), name, language)
     
     private def baseUri(lang : Language, path : String) : String = {
         if (genericDomain.contains(lang.wikiCode)) "http://dbpedia.org/"+path+"/" 
         else "http://"+lang.wikiCode+".dbpedia.org/"+path+"/"
     }
 
-    private def appendUri( baseUri : String, encodedSuffix : String, lang : Language = Language.Default ) : String =
+    private def appendUri(baseUri : String, encodedSuffix : String, language : Language) : String =
     {
-        if (baseUri.contains('#'))
-        {
-            // contains a fragment
-            baseUri + encodedSuffix
+        var result = baseUri + encodedSuffix
+        
+        if (! baseUri.contains('#') && ! encodeAsURI.contains(language.wikiCode)) {
+            /**
+             * FIXME: this can not really work. It's very hard to correctly encode/decode 
+             * a complete URI. Only parts of a URI can be encoded and then combined. 
+             * See http://tools.ietf.org/html/rfc2396#section-2.4.2 
+             * At this point, it's too late. Known problems:
+             * - no distinction between "#" and "%23" - input "http://foo/my%231#bar" becomes "http://foo/my%231%23bar"
+             * - no distinction between "/" and "%2F" - input "http://foo/a%2Fb/c" becomes "http://foo/a/b/c"
+             */
+            // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
+            escape(decode(result, "UTF-8"), "\"#%<>?[\\]^`{|}")
         }
-        else
-        {
-            // does not contain a fragment
-            if (encodeAsURI.contains(lang.wikiCode))
-            {
-                baseUri + encodedSuffix
-            }
-            else
-            {
-                /**
-                 * FIXME: this can not really work. It's very hard and almost impossible to correctly
-                 * encode/decode a complete URI. Only parts of a URI can be encoded and then combined. 
-                 * At this point, it's too late.
-                 */
-                // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
-                escape(decode(baseUri+encodedSuffix, "UTF-8"), "\"#%<>?[\\]^`{|}")
-            }
-        }
+        
+        result
     }
 
     /**
@@ -144,6 +146,8 @@ object OntologyNamespaces
      * @param chars list of characters that should be percent-encoded if they occur in the string.
      * Must be ASCII characters, i.e. Unicode code points from U+0020 to U+007F (inclusive).
      * This method does not correctly escape characters outside that range.
+     * TODO: this method is pretty inefficient. It is used with the same chars all the time, 
+     * so we should have an array containing their escaped values and use a lookup table.
      */
     private def escape(str : String, chars : String) : String = {
         val sb = new StringBuilder
@@ -157,7 +161,8 @@ object OntologyNamespaces
      */
     def skipValidation(name : String) : Boolean =
     {
-        val uri = getUri(name, "")
+        // FIXME: the language parameter is used to choose between URI/IRI. This is the wrong place for that.
+        val uri = getUri(name, "", Language.Default)
         nonValidatedNamespaces.exists(uri startsWith _)
     }
 
