@@ -7,20 +7,87 @@ import scala.collection.mutable
 import java.io._
 import scala.io.Source
 
+object IgnoreList
+{
+  val TemplatesTag = "templates|"
+  val TemplateTag = "template|"
+  val PropertiesTag = "properties|"
+}
+
+import IgnoreList._
+
 /**
  * Contains the ignored templates and properties
  */
 class IgnoreList(file: File)
 {
-  private val templates = new mutable.HashSet[String]
-  private val properties = new mutable.HashMap[String, mutable.Set[String]]
+  private val templates = new mutable.LinkedHashSet[String]
+  private val properties = new mutable.LinkedHashMap[String, mutable.Set[String]]
 
-  val source = Source.fromFile(file, "UTF-8")
-  try {
+  if (file.exists) {
+    val source = Source.fromFile(file, "UTF-8")
+    try {
+      val reader = new CollectionReader(source.getLines)
+      val templateCount = reader.readCount(TemplatesTag)
+      var templateIndex = 0
+      while(templateIndex < templateCount) {
+        templates += reader.readLine
+        templateIndex += 1
+      }
+      reader.readEmpty
+      
+      val propertiesCount = reader.readCount(PropertiesTag)
+      reader.readEmpty
+      
+      var propertiesIndex = 0
+      while(propertiesIndex < propertiesCount) {
+        val template = reader.readTag(TemplateTag)
+        val props = properties.getOrElseUpdate(template, new mutable.LinkedHashSet[String])
+        val propsCount = reader.readCount(PropertiesTag)
+        var propsIndex = 0
+        while(propsIndex < propsCount) {
+          props += reader.readLine
+          propsIndex += 1
+        }
+        reader.readEmpty
+        propertiesIndex += 1
+      }
+      reader.readEnd
+    } 
+    finally source.close
+  }
     
-  } 
-  finally source.close
-    
+  /**
+   * Must only be called from synchronized blocks.
+   */
+  // package-private for IgnoreListTest
+  private[util] def save() {
+    val out = new FileOutputStream(file)
+    try {
+      val writer = new OutputStreamWriter(out, "UTF-8")
+      writer.write(TemplatesTag+templates.size+'\n')
+      for (template <- templates) {
+        writer.write(template+'\n')
+      }
+      writer.write('\n')
+      
+      writer.write(PropertiesTag+properties.size+'\n')
+      
+      writer.write('\n')
+      for ((template, props) <- properties) {
+        writer.write(TemplateTag+template+"\n")
+        writer.write(PropertiesTag+props.size+"\n")
+        for (prop <- props) {
+          writer.write(prop+'\n')
+        }
+        writer.write('\n')
+      }
+      
+      writer.close
+    } 
+    finally out.close
+  }
+  
   def isTemplateIgnored(template: String) : Boolean = synchronized {
     templates.contains(template)
   }
@@ -43,34 +110,6 @@ class IgnoreList(file: File)
 
   def removeProperty(template: String, property: String) = synchronized {
     if (properties.contains(template) && properties(template).remove(property)) save()
-  }
-
-  private def save() {
-    val out = new FileOutputStream(file)
-    try {
-      val writer = new OutputStreamWriter(out, "UTF-8")
-      writer.write("templates|"+templates.size+'\n')
-      for (template <- templates) {
-        writer.write(template+'\n')
-      }
-      writer.write('\n')
-      
-      writer.write("properties|"+properties.size+'\n')
-      
-      writer.write('\n')
-      for ((template, props) <- properties) {
-        writer.write("template|"+template+"\n")
-        writer.write("properties|"+props.size+"\n")
-        for (prop <- props) {
-          writer.write(prop+'\n')
-        }
-        writer.write('\n')
-      }
-      writer.write('\n')
-      
-      writer.close
-    } 
-    finally out.close
   }
   
 }
