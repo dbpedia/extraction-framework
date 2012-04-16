@@ -132,6 +132,7 @@ object OntologyNamespaces
         // At this point, it's too late. Known problems:
         // - no distinction between "#" and "%23" - input "http://foo/my%231#bar" becomes "http://foo/my%231%23bar"
         // - no distinction between "/" and "%2F" - input "http://foo/a%2Fb/c" becomes "http://foo/a/b/c"
+        // - similar for all other characters in the list below
         // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
         else escape(decode(uri, "UTF-8"), "\"#%<>?[\\]^`{|}")
     }
