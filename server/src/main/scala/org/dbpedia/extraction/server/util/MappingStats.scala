@@ -19,7 +19,7 @@ import java.net.{URLDecoder, URLEncoder}
 /**
  * Contains the statistic of a Template
  */
-class MappingStats(templateStats: TemplateStats, val templateName: String) extends Ordered[MappingStats]
+class MappingStats(templateStats: TemplateStats, val templateName: String, ignoreList: IgnoreList) extends Ordered[MappingStats]
 {
     var templateCount = templateStats.templateCount
     var isMapped: Boolean = false
@@ -36,7 +36,7 @@ class MappingStats(templateStats: TemplateStats, val templateName: String) exten
         properties(propertyName) = (freq, mapped)
     }
 
-    def getNumberOfProperties(ignoreList: IgnoreList) =
+    def getNumberOfProperties =
     {
         var counter: Int = 0
         for ((propName, _) <- templateStats.properties)
@@ -49,7 +49,7 @@ class MappingStats(templateStats: TemplateStats, val templateName: String) exten
         counter
     }
 
-    def getNumberOfMappedProperties(ignoreList: IgnoreList) =
+    def getNumberOfMappedProperties =
     {
         var numMPs: Int = 0
         for ((propName, (propCount, propIsMapped)) <- properties)
@@ -59,14 +59,14 @@ class MappingStats(templateStats: TemplateStats, val templateName: String) exten
         numMPs
     }
 
-    def getRatioOfMappedProperties(ignoreList: IgnoreList) =
+    def getRatioOfMappedProperties =
     {
         var mappedRatio: Double = 0
-        mappedRatio = getNumberOfMappedProperties(ignoreList).toDouble / getNumberOfProperties(ignoreList).toDouble
+        mappedRatio = getNumberOfMappedProperties.toDouble / getNumberOfProperties.toDouble
         mappedRatio
     }
 
-    def getNumberOfPropertyOccurrences(ignoreList: IgnoreList) =
+    def getNumberOfPropertyOccurrences =
     {
         var numPOs: Int = 0
         for ((propName, (propCount, propIsMapped)) <- properties)
@@ -76,7 +76,7 @@ class MappingStats(templateStats: TemplateStats, val templateName: String) exten
         numPOs
     }
 
-    def getNumberOfMappedPropertyOccurrences(ignoreList: IgnoreList) =
+    def getNumberOfMappedPropertyOccurrences =
     {
         var numMPOs: Int = 0
         for ((propName, (propCount, propIsMapped)) <- properties)
@@ -86,10 +86,10 @@ class MappingStats(templateStats: TemplateStats, val templateName: String) exten
         numMPOs
     }
 
-    def getRatioOfMappedPropertyOccurrences(ignoreList: IgnoreList) =
+    def getRatioOfMappedPropertyOccurrences =
     {
         var mappedRatio: Double = 0
-        mappedRatio = getNumberOfMappedPropertyOccurrences(ignoreList).toDouble / getNumberOfPropertyOccurrences(ignoreList).toDouble
+        mappedRatio = getNumberOfMappedPropertyOccurrences.toDouble / getNumberOfPropertyOccurrences.toDouble
         mappedRatio
     }
 

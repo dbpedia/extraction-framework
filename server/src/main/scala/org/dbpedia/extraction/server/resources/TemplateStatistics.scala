@@ -25,7 +25,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
     private val mappings = getClassMappings
     private val mappingStatistics = manager.countMappedStatistics(mappings, wikiStats)
-    private val ignoreList = manager.loadIgnorelist()
+    private val ignoreList = manager.ignoreList
 
     private val mappingUrlPrefix = Server.wikiPagesUrl + "/" + Namespace.mappings(language).toString + ":"
 
@@ -58,8 +58,8 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
     @GET
     @Produces(Array("application/xhtml+xml"))
-    def get =
-    {
+    def get = {
+      
         val minCounter = minCount(language.wikiCode)
         
         var statsMap = new mutable.HashMap[MappingStats, Int]
@@ -146,14 +146,14 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                     </tr>
                     {
                     // TODO: Solve problem of templates for which no properties are found in the template documentation (e.g. Geobox).
-                    for ((mappingStat, counter) <- sortedStatsMap; if mappingStat.getNumberOfProperties(ignoreList) > 0) yield
+                    for ((mappingStat, counter) <- sortedStatsMap; if mappingStat.getNumberOfProperties > 0) yield
                     {
                         if (all || counter >= minCounter || mappingStat.isMapped) { 
                             val templateName = manager.templateNamespacePrefix + mappingStat.templateName
                             val targetRedirect = reversedRedirects.get(templateName)
 
-                            val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties(ignoreList) * 100)
-                            val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) * 100)
+                            val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties * 100)
+                            val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences * 100)
                             var mappingsWikiLink = mappingUrlPrefix + mappingStat.templateName
                             var bgcolor: String =
                                 if(!mappingStat.isMapped)
@@ -162,11 +162,11 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                                 }
                                 else
                                 {
-                                    if(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) > goodThreshold)
+                                    if(mappingStat.getRatioOfMappedPropertyOccurrences > goodThreshold)
                                     {
                                         mappedGoodColor
                                     }
-                                    else if(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) > mediumThreshold)
+                                    else if(mappingStat.getRatioOfMappedPropertyOccurrences > mediumThreshold)
                                     {
                                         mappedMediumColor
                                     }
@@ -232,16 +232,16 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                                     </a>
                                 </td>
                                         <td align="right">
-                                            {mappingStat.getNumberOfProperties(ignoreList)}
+                                            {mappingStat.getNumberOfProperties}
                                         </td> <td align="right">
                                     {percentMappedProps}
                                 </td>
                                         <td align="right">
-                                            {mappingStat.getNumberOfPropertyOccurrences(ignoreList)}
+                                            {mappingStat.getNumberOfPropertyOccurrences}
                                         </td> <td align="right">
                                     {percentMappedPropOccur}
                                 </td>
-                                    {if (Server.adminRights(password) && mappingStat.getNumberOfMappedProperties(ignoreList) == 0)
+                                    {if (Server.adminRights(password) && mappingStat.getNumberOfMappedProperties == 0)
                                 {
                                     <td>
                                         <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+mappingStat.templateName+cookieQuery('&')}>
@@ -334,8 +334,8 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
         var numP: Int = 0
         for ((mappingStat, templateCounter) <- stats)
         {
-            numMP = numMP + mappingStat.getNumberOfMappedProperties(ignoreList)
-            numP = numP + mappingStat.getNumberOfProperties(ignoreList)
+            numMP = numMP + mappingStat.getNumberOfMappedProperties
+            numP = numP + mappingStat.getNumberOfProperties
         }
         mappedRatio = numMP.toDouble / numP.toDouble
         mappedRatio
@@ -355,7 +355,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
         {
             if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
             {
-                counter = counter + mappingStat.getNumberOfPropertyOccurrences(ignoreList)
+                counter = counter + mappingStat.getNumberOfPropertyOccurrences
             }
         }
         counter
@@ -368,7 +368,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
         {
             if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
             {
-                counter = counter + mappingStat.getNumberOfMappedPropertyOccurrences(ignoreList)
+                counter = counter + mappingStat.getNumberOfMappedPropertyOccurrences
             }
         }
         counter
