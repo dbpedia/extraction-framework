@@ -22,9 +22,7 @@ extends MappingStatsConfig(statsDir, language)
 {
     private val logger = Logger.getLogger(getClass.getName)
 
-    private val ignoreListFile = new File(statsDir, "ignoreList_" + language.wikiCode + ".obj")
-    private val ignoreListTemplatesFile = new File(statsDir, "ignoreListTemplates_" + language.wikiCode + ".txt")
-    private val ignoreListPropertiesFile = new File(statsDir, "ignoreListProperties_" + language.wikiCode + ".txt")
+    val ignoreList = new IgnoreList(new File(statsDir, "ignorelist_"+language.wikiCode+".txt"))
 
     val percentageFile = new File(statsDir, "percentage." + language.wikiCode)
 
@@ -47,7 +45,7 @@ extends MappingStatsConfig(statsDir, language)
               val templateName = rawTemplate.substring(templateNamespacePrefix.length)
               
               isMapped = mappings.contains(templateName)
-              var mappingStats = new MappingStats(templateStats, templateName)
+              var mappingStats = new MappingStats(templateStats, templateName, ignoreList)
               mappingStats.setTemplateMapped(isMapped)
               
               if (isMapped)
@@ -69,28 +67,6 @@ extends MappingStatsConfig(statsDir, language)
         statistics
     }
     
-    def loadIgnorelist() =
-    {
-        if (ignoreListFile.isFile)
-        {
-            logger.fine("Loading serialized object from " + ignoreListFile)
-            val input = new ObjectInputStream(new FileInputStream(ignoreListFile))
-            val m = try input.readObject() finally input.close()
-            m.asInstanceOf[IgnoreList]
-        }
-        else
-        {
-            new IgnoreList(language)
-        }
-    }
-
-    def saveIgnorelist(ignoreList: IgnoreList)
-    {
-        val output = new ObjectOutputStream(new FileOutputStream(ignoreListFile))
-        try output.writeObject(ignoreList) finally output.close()
-        ignoreList.exportToTextFile(ignoreListTemplatesFile, ignoreListPropertiesFile)
-    }
-
     private def loadStats(): WikipediaStats =
     {
         val millis = System.currentTimeMillis

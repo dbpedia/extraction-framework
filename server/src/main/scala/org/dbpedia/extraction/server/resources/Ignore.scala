@@ -16,7 +16,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
 
     private val manager = Server.statsManager(language)
 
-    private val ignoreList = manager.loadIgnorelist()
+    private val ignoreList = manager.ignoreList
     
     private def cookieQuery(sep: Char, all: Boolean = false) : String = {
       val sb = new StringBuilder
@@ -41,7 +41,6 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
         {
             if (ignore == "true") ignoreList.addTemplate(WikiUtil.wikiDecode(template,language,false))
             else ignoreList.removeTemplate(WikiUtil.wikiDecode(template, language,false))
-            manager.saveIgnorelist(ignoreList)
         }
         
         Response.temporaryRedirect(new URI("/statistics/"+langCode+"/"+cookieQuery('?', all)+"#"+urlEncode(template))).build
@@ -57,7 +56,6 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
             // Note: do NOT wikiDecode property names - space and underscore are NOT equivalent for them
             if (ignore == "true") ignoreList.addProperty(WikiUtil.wikiDecode(template,language,false), property)
             else ignoreList.removeProperty(WikiUtil.wikiDecode(template,language,false), property)
-            manager.saveIgnorelist(ignoreList)
         }
         
         Response.temporaryRedirect(new URI("/templatestatistics/"+language.wikiCode+"/?template="+template+cookieQuery('&')+"#"+urlEncode(property))).build

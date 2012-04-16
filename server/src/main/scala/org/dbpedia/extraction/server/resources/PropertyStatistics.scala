@@ -25,7 +25,6 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
     private val mappings = getClassMappings
     private val statistics = manager.countMappedStatistics(mappings, wikipediaStatistics)
-    private val ignoreList = manager.loadIgnorelist()
 
     private val mappedColor = "#65c673"
     private val notMappedColor = "#e05d57"
@@ -53,8 +52,8 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 case (key, (value1, value2)) => -value1
             }: _*)
 
-            val percentageMappedProps: String = "%2.2f".format(ms.getRatioOfMappedProperties(ignoreList) * 100)
-            val percentageMappedPropOccurrences: String = "%2.2f".format(ms.getRatioOfMappedPropertyOccurrences(ignoreList) * 100)
+            val percentageMappedProps: String = "%2.2f".format(ms.getRatioOfMappedProperties * 100)
+            val percentageMappedPropOccurrences: String = "%2.2f".format(ms.getRatioOfMappedPropertyOccurrences * 100)
             Server.logger.fine("ratioTemp: " + percentageMappedProps)
             Server.logger.fine("ratioTempUses: " + percentageMappedPropOccurrences)
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -67,18 +66,18 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                     <p align="center">
                         {percentageMappedProps}
                         % properties are mapped (
-                        {ms.getNumberOfMappedProperties(ignoreList)}
+                        {ms.getNumberOfMappedProperties}
                         of
-                        {ms.getNumberOfProperties(ignoreList)}
+                        {ms.getNumberOfProperties}
                         ).</p>
                     <p align="center">
                         {percentageMappedPropOccurrences}
                         % of all property occurrences in Wikipedia (
                         {langCode}
                         ) are mapped (
-                        {ms.getNumberOfMappedPropertyOccurrences(ignoreList)}
+                        {ms.getNumberOfMappedPropertyOccurrences}
                         of
-                        {ms.getNumberOfPropertyOccurrences(ignoreList)}
+                        {ms.getNumberOfPropertyOccurrences}
                         ).</p>
                     <table align="center">
                     <caption>The color codes:</caption>
@@ -122,7 +121,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
                             var isIgnored: Boolean = false
                             var ignoreMsg: String = "add to ignore list"
-                            if (ignoreList.isPropertyIgnored(wikiDecode(template), name))
+                            if (manager.ignoreList.isPropertyIgnored(wikiDecode(template), name))
                             {
                                 isIgnored = true
                                 ignoreMsg = "remove from ignore list"
