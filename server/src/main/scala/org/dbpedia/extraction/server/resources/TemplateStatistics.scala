@@ -67,7 +67,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
         
         val sortedStatsMap = ListMap(statsMap.toList.sortBy(statsInt => (-statsInt._2, statsInt._1)): _*)
 
-        val reversedRedirects = wikiStats.checkForRedirects(sortedStatsMap, mappings)
+        val reversedRedirects = wikiStats.checkForRedirects(mappings)
         val percentageMappedTemplates: String = "%2.2f".format(getNumberOfMappedTemplates(statsMap).toDouble / getNumberOfTemplates(statsMap).toDouble * 100)
         val percentageMappedTemplateOccurrences: String = "%2.2f".format(getRatioOfMappedTemplateOccurrences(statsMap) * 100)
         val percentageMappedPropertyOccurrences: String = "%2.2f".format(getRatioOfAllMappedPropertyOccurrences(statsMap) * 100)
