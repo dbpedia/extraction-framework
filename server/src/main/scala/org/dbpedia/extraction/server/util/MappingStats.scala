@@ -136,54 +136,49 @@ class WikipediaStats(val language : Language, val redirects: mutable.Map[String,
     
     def write(writer : Writer) : Unit = {
       
-        writer.write(WikiStatsTag)
-        writer.write(language.wikiCode)
+      writer.write(WikiStatsTag)
+      writer.write(language.wikiCode)
+      writer.write('\n')
+      
+      writer.write('\n')
+      
+      writer.write(RedirectsTag)
+      writer.write(redirects.size.toString)
+      writer.write('\n')
+      for ((from, to) <- redirects) { 
+        writer.write(RedirectTag)
+        writer.write(from)
+        writer.write('|')
+        writer.write(to)
         writer.write('\n')
-        
+      }
+      
+      writer.write('\n')
+      
+      writer.write(TemplatesTag)
+      writer.write(templates.size.toString)
+      writer.write('\n')
+      writer.write('\n')
+      for ((name, stats) <- templates) {
+        writer.write(TemplateTag)
+        writer.write(name)
         writer.write('\n')
-        
-        writer.write(RedirectsTag)
-        writer.write(redirects.size.toString)
+        writer.write(CountTag)
+        writer.write(stats.templateCount.toString)
         writer.write('\n')
-        for ((from, to) <- redirects) { 
-            writer.write(RedirectTag)
-            writer.write(from)
-            writer.write('|')
-            writer.write(to)
-            writer.write('\n')
-        }
-        
+        writer.write(PropertiesTag)
+        writer.write(stats.properties.size.toString)
         writer.write('\n')
-        
-        // don't save templates that are rarely used to keep stats files at a manageable size
-        val minCount = 0 // if (language.wikiCode == "en") 100 else 50
-
-        writer.write(TemplatesTag)
-        writer.write(templates.count(_._2.templateCount >= minCount).toString)
-        writer.write('\n')
-        writer.write('\n')
-        for ((name, stats) <- templates) {
-            if (stats.templateCount >= minCount) {
-                writer.write(TemplateTag)
-                writer.write(name)
-                writer.write('\n')
-                writer.write(CountTag)
-                writer.write(stats.templateCount.toString)
-                writer.write('\n')
-                writer.write(PropertiesTag)
-                writer.write(stats.properties.size.toString)
-                writer.write('\n')
-                for ((property,count) <- stats.properties) {
-                  writer.write(PropertyTag)
-                  writer.write(property)
-                  writer.write('|')
-                  writer.write(count.toString)
-                  writer.write('\n')
-                }
-                writer.write('\n')
-            }
+        for ((property,count) <- stats.properties) {
+          writer.write(PropertyTag)
+          writer.write(property)
+          writer.write('|')
+          writer.write(count.toString)
+          writer.write('\n')
         }
         writer.write('\n')
+      }
+      writer.write('\n')
     }
 }
 
