@@ -4,14 +4,14 @@
 # This script works with directory structure produced by dump/Download.scala and reads the  
 
 #scripts directory, in case it is called from elsewhere
-CURRENTDIR=$( cd "$( dirname "$0" )" && pwd )
+CURRENTDIR="$( cd "$( dirname "$0" )" && pwd )"
 
 #Dump directory, where the config.properties is kept
-EXTR_DUMP="$CURRENTDIR/../../../dump"
+EXTRACTOR_CONFIG="${CURRENTDIR}/../../../dump/extraction.properties"
 
 #Get outputDir and DumpDir from config.properties
-OUTPUTDIR=`sed '/^\#/d' $EXTR_DUMP/config.properties | grep 'outputDir'  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'`
-DUMPDIR=`sed '/^\#/d' $EXTR_DUMP/config.properties | grep 'dumpDir'  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'`
+OUTPUTDIR=`sed '/^\#/d' "${EXTRACTOR_CONFIG}" | grep 'outputDir'  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'`
+DUMPDIR=`sed '/^\#/d' "${EXTRACTOR_CONFIG}" | grep 'dumpDir'  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'`
 
 #download url, this is the prefix of links.txt lines
 DOWNLOAD_URL="http://downloads.dbpedia.org/current/links"
