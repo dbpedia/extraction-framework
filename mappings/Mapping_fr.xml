@@ -10,6 +10,83 @@
 	{{PropertyMapping | templateProperty = ebullition | ontologyProperty = boilingPoint | unit = temperature}}
 	{{PropertyMapping | templateProperty = PubChem | ontologyProperty = pubchem }}
         {{PropertyMapping | templateProperty = DCI | ontologyProperty = Inn}}
+}}</text></revision></page><page><title>Mapping fr:Infobox Artiste</title><ns>210</ns><id>5212</id><revision><id>17326</id><text>{{ConditionalMapping
+| cases =
+ {{Condition
+    | templateProperty = activités
+    | operator = contains
+    | value = acteur
+    | mapping = {{TemplateMapping
+                | mapToClass = Actor
+                }}
+ }}
+
+ &lt;!--{{Condition
+    | templateProperty = activités
+    | operator = contains
+    | value = Peinture
+    | mapping = {{TemplateMapping
+                | mapToClass = Painter
+                }}
+ }}
+ {{Condition
+    | templateProperty = activités
+    | operator = contains
+    | value = Artiste_peintre
+    | mapping = {{TemplateMapping
+                | mapToClass = Painter
+                }}
+ }}--&gt;
+
+ &lt;!--{{Condition
+    | templateProperty = activités
+    | operator = contains
+    | value = singer
+    | mapping = {{TemplateMapping
+                | mapToClass = MusicalArtist
+                }}
+ }}
+
+ {{Condition
+    | templateProperty = occupation
+    | operator = contains
+    | value = songwriter
+    | mapping = {{TemplateMapping
+                | mapToClass = MusicalArtist
+                }}
+ }}--&gt;
+
+ {{Condition
+    | operator = otherwise
+    | mapping = {{TemplateMapping
+                | mapToClass = Artist
+                }}
+ }}
+
+| defaultMappings =
+	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = nom_de_naissance | ontologyProperty = birthName }}
+	{{PropertyMapping | templateProperty = nom_alias | ontologyProperty = alias }}
+	{{PropertyMapping | templateProperty = date_de_naissance | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = lieu_de_naissance | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = date_de_décès | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = lieu_de_décès | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = nationalité | ontologyProperty = nationality }}
+	{{PropertyMapping | templateProperty = mouvement | ontologyProperty = movement }}
+	&lt;!--{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}--&gt;
+	&lt;!--{{PropertyMapping | templateProperty = field | ontologyProperty = field }}--&gt;
+	&lt;!--{{PropertyMapping | templateProperty = activité | ontologyProperty = occupation }}--&gt;
+	{{PropertyMapping | templateProperty = distinctions | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = récompenses  | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = 	œuvres | ontologyProperty = creator }}
+
+	{{PropertyMapping | templateProperty = influencé_par | ontologyProperty = influencedBy }}
+	&lt;!--{{PropertyMapping | templateProperty = influenced | ontologyProperty = influenced }}--&gt;
+	&lt;!--{{GeocoordinatesMapping | ontologyProperty = restingPlacePosition  | coordinates = restingplacecoordinates }}--&gt;
+	&lt;!--{{DateIntervalMapping | templateProperty = yearsactive | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}--&gt;
+
+	&lt;!--{{PropertyMapping | templateProperty = influences | ontologyProperty = influencedBy }}--&gt;
+	&lt;!--{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}--&gt;
 }}</text></revision></page><page><title>Mapping fr:Infobox Bande dessinée</title><ns>210</ns><id>5103</id><revision><id>16791</id><text>{{TemplateMapping
 | mapToClass = ComicBook
 }}</text></revision></page><page><title>Mapping fr:Infobox Biographie</title><ns>210</ns><id>4401</id><revision><id>14902</id><text>{{TemplateMapping
@@ -137,7 +214,7 @@
         {{PropertyMapping | templateProperty = rég | ontologyProperty = isoCodeRegion }}
         {{PropertyMapping | templateProperty = prov | ontologyProperty = isoCodeRegion }}
        {{PropertyMapping | templateProperty = logo | ontologyProperty = foaf:logo }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Communes de France</title><ns>210</ns><id>4381</id><revision><id>15160</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Commune de France</title><ns>210</ns><id>4381</id><revision><id>17342</id><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
         {{ConstantMapping | ontologyProperty = country | value = France }}
@@ -148,6 +225,7 @@
         {{PropertyMapping | templateProperty = canton | ontologyProperty = canton }}
         {{PropertyMapping | templateProperty = intercomm | ontologyProperty = intercommunality }}        
         {{PropertyMapping | templateProperty = maire | ontologyProperty = mayor }}
+        {{PropertyMapping | templateProperty = km² | ontologyProperty = area | unit = squareKilometre  }}
         {{PropertyMapping | templateProperty = alt maxi | ontologyProperty = maximumElevation | unit = metre }}
 	{{PropertyMapping | templateProperty = alt min  | ontologyProperty = minimumElevation | unit = metre }}
         {{PropertyMapping | templateProperty = sans | ontologyProperty = populationTotal }}
@@ -156,7 +234,7 @@
         {{PropertyMapping | templateProperty = insee | ontologyProperty = inseeCode }}
         {{PropertyMapping | templateProperty = siteweb | ontologyProperty = foaf:homepage }}
 	{{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Compétition sportive</title><ns>210</ns><id>4389</id><revision><id>14847</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Communes de France</title><ns>210</ns><id>5217</id><revision><id>17341</id><text>#REDIRECT [[Mapping fr:Infobox Commune de France]]</text></revision></page><page><title>Mapping fr:Infobox Compétition sportive</title><ns>210</ns><id>4389</id><revision><id>14847</id><text>{{TemplateMapping
 | mapToClass = SportsEvent
 | mappings =
 
@@ -403,6 +481,35 @@
 	{{PropertyMapping | templateProperty = label | ontologyProperty = recordLabel }}
 	{{PropertyMapping | templateProperty = album précédent  | ontologyProperty = previousWork }}
 	{{PropertyMapping | templateProperty = album suivant | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Musée</title><ns>210</ns><id>5214</id><revision><id>17335</id><text>{{TemplateMapping
+| mapToClass = Museum
+| mappings =
+	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = nommusée | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = adresse | ontologyProperty = address }}
+	{{PropertyMapping | templateProperty = ville | ontologyProperty = city }}
+	{{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = collections | ontologyProperty = collection }}
+	{{PropertyMapping | templateProperty = site | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = visiteurs | ontologyProperty = numberOfVisitors }}
+	{{PropertyMapping | templateProperty = conservateur | ontologyProperty = curator }}
+	{{PropertyMapping | templateProperty = dateouverture | ontologyProperty = openingDate }}
+	{{PropertyMapping | templateProperty = ouverture | ontologyProperty = openingDate }}
+	{{PropertyMapping | templateProperty = fermeture | ontologyProperty = closingDate }}
+
+{{GeocoordinatesMapping | latitude = latitude | longitude = longitude 
+| latitudeDirection  = lat_dir | latitudeDegrees    = lat_deg | latitudeMinutes    = lat_min | latitudeSeconds    = lat_sec
+| longitudeDirection = lon_dir | longitudeDegrees   = lon_deg | longitudeMinutes   = lon_min | longitudeSeconds   = lon_sec
+}}
+
+	&lt;!--{{PropertyMapping | templateProperty = location | ontologyProperty = location }}
+	
+	{{PropertyMapping | templateProperty = established | ontologyProperty = foundingDate }}
+	{{PropertyMapping | templateProperty = dissolved | ontologyProperty = dissolved }}
+
+	{{PropertyMapping | templateProperty = type | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = network | ontologyProperty = network }}
+	--&gt;
 }}</text></revision></page><page><title>Mapping fr:Infobox Ouvrage</title><ns>210</ns><id>4385</id><revision><id>14826</id><text></text></revision></page><page><title>Mapping fr:Infobox Pays</title><ns>210</ns><id>5095</id><revision><id>16800</id><text>{{TemplateMapping
 | mapToClass = Country
 | mappings =
