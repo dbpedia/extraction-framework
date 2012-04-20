@@ -3064,6 +3064,11 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:domain = Instrument
 | rdfs:range = xsd:string
 | rdfs:comment@en = 
+}}</text></revision></page><page><title>OntologyProperty:Classis</title><ns>202</ns><id>5202</id><revision><id>17243</id><text>{{ObjectProperty
+| rdfs:domain = Species
+| rdfs:range = owl:Thing
+| rdfs:label@en = classis
+| rdfs:comment@en = the living thing class (from the Latin "classis"), according to the biological taxonomy
 }}</text></revision></page><page><title>OntologyProperty:Climate</title><ns>202</ns><id>3802</id><revision><id>13305</id><text>{{ObjectProperty
 | rdfs:label@en = climate
 | rdfs:label@pt = clima
@@ -3072,9 +3077,10 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:label@en = closed
 | rdfs:domain = EducationalInstitution
 | rdfs:range = xsd:date
-}}</text></revision></page><page><title>OntologyProperty:ClosingDate</title><ns>202</ns><id>685</id><revision><id>11249</id><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:ClosingDate</title><ns>202</ns><id>685</id><revision><id>17337</id><text>{{DatatypeProperty
 | rdfs:label@en = closing date
 | rdfs:label@el = ημερομηνία κλεισίματος
+| rdfs:label@fr = date de fermeture
 | rdfs:range = xsd:date
 }}</text></revision></page><page><title>OntologyProperty:ClosingFilm</title><ns>202</ns><id>686</id><revision><id>8521</id><text>{{ObjectProperty
 | rdfs:label@en = closing film
@@ -3759,15 +3765,21 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:domain = AutomobileEngine
 | rdfs:range = Volume
 | rdf:type = owl:FunctionalProperty
-}}</text></revision></page><page><title>OntologyProperty:DissolutionDate</title><ns>202</ns><id>2318</id><revision><id>8390</id><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:DissolutionDate</title><ns>202</ns><id>2318</id><revision><id>17270</id><text>{{merge|dissolved|dissolutionYear}}
+
+{{DatatypeProperty
 | rdfs:label@en = dissolution date
 | rdfs:domain = PopulatedPlace
 | rdfs:range = xsd:date
-}}</text></revision></page><page><title>OntologyProperty:DissolutionYear</title><ns>202</ns><id>2316</id><revision><id>8389</id><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:DissolutionYear</title><ns>202</ns><id>2316</id><revision><id>17271</id><text>{{merge|dissolved|dissolutionDate}}
+
+{{DatatypeProperty
 | rdfs:label@en = dissolution year
 | rdfs:domain = PopulatedPlace
 | rdfs:range = xsd:gYear
-}}</text></revision></page><page><title>OntologyProperty:Dissolved</title><ns>202</ns><id>797</id><revision><id>7973</id><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Dissolved</title><ns>202</ns><id>797</id><revision><id>17268</id><text>{{merge|dissolutionDate|dissolutionYear}}
+
+{{DatatypeProperty
 | rdfs:label@en = dissolved
 | rdfs:domain = SoccerClub
 | rdfs:range = xsd:date
@@ -3897,6 +3909,11 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:label@en = dry cargo
 | rdfs:domain = Spacecraft
 | rdfs:range = Mass
+}}</text></revision></page><page><title>OntologyProperty:Dubber</title><ns>202</ns><id>5204</id><revision><id>17248</id><text>{{ObjectProperty
+| rdfs:range = Person
+| rdfs:domain = Person
+| rdfs:label@en = dubber
+| rdfs:comment@en = the person who dubs another person e.g. an actor or a fictional character in movies
 }}</text></revision></page><page><title>OntologyProperty:ETeatrId</title><ns>202</ns><id>2470</id><revision><id>9164</id><text>{{DatatypeProperty
 | rdfs:label@en = e-teatr.pl id
 | rdfs:domain = Film
@@ -4062,9 +4079,10 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 }}</text></revision></page><page><title>OntologyProperty:Era</title><ns>202</ns><id>2309</id><revision><id>9003</id><text>{{ObjectProperty
 |rdfs:label@en	= era
 |rdfs:domain	= owl:Thing
-}}</text></revision></page><page><title>OntologyProperty:EruptionYear</title><ns>202</ns><id>2418</id><revision><id>9053</id><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:EruptionYear</title><ns>202</ns><id>2418</id><revision><id>17300</id><text>{{DatatypeProperty
 | rdfs:label@en = eruption date
-| rdfs:domain = Mountain
+| rdfs:label@de = Jahr des letzten Ausbruchs
+| rdfs:domain = Volcano
 | rdfs:range = xsd:gYear
 }}</text></revision></page><page><title>OntologyProperty:EscapeVelocity</title><ns>202</ns><id>4359</id><revision><id>14675</id><text>{{DatatypeProperty
  |rdfs:label@en=escape velocity
@@ -6655,9 +6673,10 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:range = xsd:string
 | rdfs:comment@en = Availability of open access content.
 | rdfs:comment@de = Verfügbarkeit von frei zugänglichem Inhalten.
-}}</text></revision></page><page><title>OntologyProperty:OpeningDate</title><ns>202</ns><id>1226</id><revision><id>12188</id><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:OpeningDate</title><ns>202</ns><id>1226</id><revision><id>17336</id><text>{{DatatypeProperty
 | rdfs:label@en = opening date
 | rdfs:label@el = ημερομηνία ανοίγματος
+| rdfs:label@fr = date d'ouverture
 | rdfs:domain = ArchitecturalStructure
 | rdfs:range = xsd:date
 }}</text></revision></page><page><title>OntologyProperty:OpeningFilm</title><ns>202</ns><id>1227</id><revision><id>8777</id><text>{{ObjectProperty
