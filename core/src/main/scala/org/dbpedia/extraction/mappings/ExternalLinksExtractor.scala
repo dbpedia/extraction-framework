@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph}
 import org.dbpedia.extraction.destinations.Quad
-import org.dbpedia.extraction.wikiparser.{WikiTitle, PageNode, ExternalLinkNode, Node}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, UriUtils}
 
@@ -18,11 +18,11 @@ class ExternalLinksExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return new Graph()
 
         var quads = List[Quad]()
         for(link <- collectExternalLinks(node);
-            uri <- UriUtils.cleanLink(link.destination))
+            uri <- UriUtils.cleanLink(link.destination)) // FIXME: cleanLink converts IRIs to URIs
         {
             try
             {

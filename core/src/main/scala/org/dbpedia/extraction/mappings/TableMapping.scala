@@ -15,7 +15,7 @@ class TableMapping( mapToClass : OntologyClass,
                         def ontology : Ontology
                         def language : Language }   ) extends ClassMapping
 {
-    val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase) }
+    val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase(context.language.locale)) }
 
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
 
@@ -102,7 +102,7 @@ class TableMapping( mapToClass : OntologyClass,
         for( headerRow <- node.children.headOption.toList;
              headerCell <- headerRow.children;
              text <- headerCell.retrieveText )
-        yield text.toLowerCase
+        yield text.toLowerCase(context.language.locale)
     }
 
     /**

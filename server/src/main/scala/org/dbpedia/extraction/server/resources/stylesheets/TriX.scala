@@ -2,6 +2,19 @@ package org.dbpedia.extraction.server.resources.stylesheets
 
 import xml.Elem
 import javax.ws.rs.{GET, Produces, Path}
+import org.dbpedia.extraction.destinations.Formatter
+import org.dbpedia.extraction.destinations.formatters.TriXFormatter
+
+object TriX
+{
+    /**
+     * @param number of "../" steps to prepend to the path to "stylesheets/trix.xsl"
+     */
+    def formatter(parents : Int) : Formatter = 
+    {
+      new TriXFormatter("<?xml-stylesheet type=\"text/xsl\" href=\""+("../"*parents)+"stylesheets/trix.xsl\"?>\n")
+    }
+}
 
 @Path("/stylesheets/trix.xsl")
 class TriX
@@ -13,6 +26,9 @@ class TriX
         <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:trix="http://www.w3.org/2004/03/trix/trix-1/">
           <xsl:template match="/trix:TriX">
             <html>
+              <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              </head>
               <body>
                 <h2>DBpedia Extraction Results</h2>
                   <table border="1" cellpadding="3" cellspacing="0">
@@ -35,13 +51,13 @@ class TriX
                       <xsl:for-each select="trix:triple">
                         <tr>
                           <td>
-                            <xsl:value-of select="*[position()=1]"/>
+                            <xsl:value-of select="*[1]"/>
                           </td>
                           <td>
-                            <xsl:value-of select="*[position()=2]"/>
+                            <xsl:value-of select="*[2]"/>
                           </td>
                           <td>
-                            <xsl:value-of select="*[position()=3]"/>
+                            <xsl:value-of select="*[3]"/>
                           </td>
                           <td>
                             <a>

@@ -3,6 +3,10 @@ package org.dbpedia.extraction.destinations
 /**
  * Passes quads through to the target destination until a maximum number of
  * quads is reached. After that, additional quads are ignored.
+ * 
+ * TODO: This should be a mixin trait.
+ * 
+ * TODO: Rename. LimitingDestination might be better.
  */
 class ThrottlingDestination( destination : Destination, limit : Int ) extends Destination
 {

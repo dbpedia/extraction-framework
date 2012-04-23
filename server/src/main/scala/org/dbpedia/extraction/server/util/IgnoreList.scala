@@ -1,99 +1,115 @@
 package org.dbpedia.extraction.server.util
 
 import scala.Serializable
-import java.io.File
+import java.io.{File,PrintWriter}
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable
+import java.io._
+import scala.io.Source
+
+object IgnoreList
+{
+  val TemplatesTag = "templates|"
+  val TemplateTag = "template|"
+  val PropertiesTag = "properties|"
+}
+
+import IgnoreList._
 
 /**
  * Contains the ignored templates and properties
  */
-class IgnoreList(language : Language) extends Serializable
+class IgnoreList(file: File)
 {
+  private val templates = new mutable.LinkedHashSet[String]
+  private val properties = new mutable.LinkedHashMap[String, mutable.Set[String]]
 
-    var templates = Set[String]()
-    var properties = Map[String, Set[String]]()
-
-    def isTemplateIgnored(template: String) =
-    {
-        if (templates.contains(template)) true else false
-    }
-
-    def isPropertyIgnored(template: String, property: String) =
-    {
-        if (properties.contains(template))
-        {
-            if (properties(template).contains(property)) true else false
+  if (file.exists) {
+    val source = Source.fromFile(file, "UTF-8")
+    try {
+      val reader = new CollectionReader(source.getLines)
+      val templateCount = reader.readCount(TemplatesTag)
+      var templateIndex = 0
+      while(templateIndex < templateCount) {
+        templates += reader.readLine
+        templateIndex += 1
+      }
+      reader.readEmpty
+      
+      val propertiesCount = reader.readCount(PropertiesTag)
+      reader.readEmpty
+      
+      var propertiesIndex = 0
+      while(propertiesIndex < propertiesCount) {
+        val template = reader.readTag(TemplateTag)
+        val props = properties.getOrElseUpdate(template, new mutable.LinkedHashSet[String])
+        val propsCount = reader.readCount(PropertiesTag)
+        var propsIndex = 0
+        while(propsIndex < propsCount) {
+          props += reader.readLine
+          propsIndex += 1
         }
-        else false
-    }
-
-    def addTemplate(template: String)
-    {
-        if (!templates.contains(template)) templates += template
-    }
-
-    def removeTemplate(template: String)
-    {
-        if (templates.contains(template)) templates -= template
-    }
-
-    def addProperty(template: String, property: String)
-    {
-        if (properties.contains(template))
-        {
-            var ignoredProps: Set[String] = properties(template)
-            if (!ignoredProps.contains(property))
-            {
-                ignoredProps += property
-                properties = properties.updated(template, ignoredProps)
-            }
+        reader.readEmpty
+        propertiesIndex += 1
+      }
+      reader.readEnd
+    } 
+    finally source.close
+  }
+    
+  /**
+   * Must only be called from synchronized blocks.
+   */
+  // package-private for IgnoreListTest
+  private[util] def save() {
+    val out = new FileOutputStream(file)
+    try {
+      val writer = new OutputStreamWriter(out, "UTF-8")
+      writer.write(TemplatesTag+templates.size+'\n')
+      for (template <- templates) {
+        writer.write(template+'\n')
+      }
+      writer.write('\n')
+      
+      writer.write(PropertiesTag+properties.size+'\n')
+      
+      writer.write('\n')
+      for ((template, props) <- properties) {
+        writer.write(TemplateTag+template+"\n")
+        writer.write(PropertiesTag+props.size+"\n")
+        for (prop <- props) {
+          writer.write(prop+'\n')
         }
-        else
-        {
-            val ignoredProps: Set[String] = Set(property)
-            properties = properties.updated(template, ignoredProps)
-        }
-    }
+        writer.write('\n')
+      }
+      
+      writer.close
+    } 
+    finally out.close
+  }
+  
+  def isTemplateIgnored(template: String) : Boolean = synchronized {
+    templates.contains(template)
+  }
 
-    def removeProperty(template: String, property: String)
-    {
-        if (properties.contains(template))
-        {
-            var ignoredProps: Set[String] = properties(template)
-            if (ignoredProps.contains(property))
-            {
-                ignoredProps -= property
-                properties = properties.updated(template, ignoredProps)
-            }
-            else throw new IndexOutOfBoundsException(property + " not found in " + template)
-        }
-        else throw new IndexOutOfBoundsException(template + " not found in the ignored properties map.")
-    }
+  def isPropertyIgnored(template: String, property: String) : Boolean = synchronized {
+    properties.contains(template) && properties(template).contains(property)
+  }
 
-    def exportToTextFile(ignoreListTemplatesFileName : String, ignoreListPropertiesFileName : String)
-    {
-        printToFile(new File(ignoreListTemplatesFileName))(p =>
-        {
-            templates.foreach(p.println(_))
-        })
+  def addTemplate(template: String) = synchronized {
+    if (templates.add(template)) save()
+  }
 
-        printToFile(new File(ignoreListPropertiesFileName))(p =>
-        {
-            properties.foreach(p.println(_))
-        })
+  def removeTemplate(template: String) = synchronized {
+    if (templates.remove(template)) save()
+  }
 
-    }
+  def addProperty(template: String, property: String) = synchronized {
+    if (properties.getOrElseUpdate(template, new mutable.HashSet[String]).add(property)) save()
+  }
 
-    def printToFile(f: java.io.File)(op: java.io.PrintWriter => Unit)
-    {
-        val p = new java.io.PrintWriter(f)
-        try
-        {
-            op(p)
-        } finally
-        {
-            p.close()
-        }
-    }
-
+  def removeProperty(template: String, property: String) = synchronized {
+    if (properties.contains(template) && properties(template).remove(property)) save()
+  }
+  
 }

@@ -6,11 +6,11 @@ import xml.Elem
 import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.destinations.{Graph, Destination}
-import org.dbpedia.extraction.sources.{WikiSource, Source, WikiPage}
+import org.dbpedia.extraction.sources.{XMLSource, WikiSource, Source, WikiPage}
 import java.net.URL
 import org.dbpedia.extraction.mappings._
-
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
+import java.io.File
 
 /**
  * Base class for extraction managers.
@@ -18,7 +18,7 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, WikiTitle}
  * or they can support lazy loading of context parameters.
  */
 
-abstract class ExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]])
+abstract class ExtractionManager(languages : Traversable[Language], extractors : Traversable[Class[_ <: Extractor]], ontologyFile : File, mappingsDir : File)
 {
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
@@ -63,6 +63,7 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
         // context object that has only this mappingSource
         val context = new ServerExtractionContext(language, this)
         {
+            // TODO: remove this, only used by MappingExtractor
             override def mappingPageSource : Traversable[PageNode] = mappingsSource.map(parser)
         }
 
@@ -99,12 +100,21 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     protected def loadOntologyPages =
     {
-        logger.info("Loading ontology pages")
-        WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
-                                  url = new URL("http://mappings.dbpedia.org/api.php"),
-                                  language = Language.Default )
-        .map(parser)
-        .map(page => (page.title, page)).toMap
+        val source = if (ontologyFile != null && ontologyFile.isFile)
+        {
+            logger.warning("LOADING ONTOLOGY NOT FROM SERVER, BUT FROM LOCAL FILE ["+ontologyFile+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
+            XMLSource.fromFile(ontologyFile, language = Language.Default)
+        }
+        else 
+        {
+            val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
+            val url = Server.wikiApiUrl
+            val language = Language.Default
+            logger.info("Loading ontology pages from URL ["+url+"]")
+            WikiSource.fromNamespaces(namespaces, url, language)
+        }
+        
+        source.map(parser).map(page => (page.title, page)).toMap
     }
 
     protected def loadMappingPages =
@@ -115,14 +125,22 @@ abstract class ExtractionManager(languages : Set[Language], extractors : List[Cl
 
     protected def loadMappingsPages(language : Language) : Map[WikiTitle, PageNode] =
     {
-        val mappingNamespace = WikiTitle.mappingNamespace(language)
-                               .getOrElse(throw new IllegalArgumentException("No mapping namespace for language " + language))
-
-        WikiSource.fromNamespaces(namespaces = Set(mappingNamespace),
-                                  url = new URL("http://mappings.dbpedia.org/api.php"),
-                                  language = Language.Default )
-        .map(parser)
-        .map(page => (page.title, page)).toMap
+        val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
+        
+        val source = if (mappingsDir != null && mappingsDir.isDirectory)
+        {
+            val file = new File(mappingsDir, namespace.name.replace(' ', '_')+".xml")
+            logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
+            XMLSource.fromFile(file, language = language)
+        }
+        else
+        {
+            val url = Server.wikiApiUrl
+            val language = Language.Default
+            WikiSource.fromNamespaces(Set(namespace), url, language)
+        }
+        
+        source.map(parser).map(page => (page.title, page)).toMap
     }
 
     protected def loadOntology : Ontology =

@@ -4,6 +4,7 @@ package org.dbpedia.util.text.nt;
  * see <a href="http://www.w3.org/TR/rdf-testcases/#ntrip_strings">N-Triples Strings</a>
  * Decodes only Unicode encoded chars. Escapes special chars like lines breaks,
  * whether they were Unicode encoded or backslash escaped or plain. 
+ * FIXME: tons of common code with NtDecoder. Refactor into one configurable class.
  */
 public class NtCharsDecoder
 {

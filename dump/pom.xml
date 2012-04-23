@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.dbpedia.extraction</groupId>
-        <artifactId>main</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <groupId>org.dbpedia</groupId>
+        <artifactId>extraction</artifactId>
+        <version>3.8-SNAPSHOT</version>
     </parent>
 
+    <groupId>org.dbpedia.extraction</groupId>
     <artifactId>dump</artifactId>
     <name>DBpedia Dump Extraction</name>
 
@@ -22,17 +22,23 @@
 
                 <configuration>
                     <launchers>
+
                         <launcher>
-                            <id>Extract</id>
-                            <mainClass>org.dbpedia.extraction.dump.Extract</mainClass>
+                            <id>extract</id>
+                            <mainClass>org.dbpedia.extraction.dump.extract.Extract</mainClass>
                             <jvmArgs>
+                                <jvmArg>-server</jvmArg>
                                 <jvmArg>-Xmx1024m</jvmArg>
                             </jvmArgs>
+                            <args>
+                                <arg>extraction.properties</arg>
+                                <arg>extraction.log</arg>
+                            </args>
                         </launcher>
 
                         <launcher>
-                            <id>Compress</id>
-                            <mainClass>org.dbpedia.extraction.dump.Compress</mainClass>
+                            <id>compress</id>
+                            <mainClass>org.dbpedia.extraction.dump.compress.Compress</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xmx1024m</jvmArg>
                             </jvmArgs>
@@ -40,12 +46,35 @@
                         </launcher>
 
                         <launcher>
-                            <id>Download</id>
-                            <mainClass>org.dbpedia.extraction.dump.Download</mainClass>
-                            <jvmArgs>
-                                <jvmArg>-Xmx1024m</jvmArg>
-                            </jvmArgs>
+                            <id>download</id>
+                            <mainClass>org.dbpedia.extraction.dump.download.Download</mainClass>
+                            <args>
+                                <arg>config=download.properties</arg>
+                                <!--
+                                <arg>progress-pretty=true</arg>
+                                <arg>dir=/home/release/wikipedia</arg>
+                                <arg>csv=http://s23.org/wikistats/wikipedias_csv</arg>
+                                <arg>base=http://dumps.wikimedia.org</arg>
+                                <arg>other=http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/maintenance/tables.sql</arg>
+                                <arg>dump=10000-:image.sql.gz,imagelinks.sql.gz,langlinks.sql.gz,templatelinks.sql.gz,categorylinks.sql.gz</arg>
+                                <arg>dump=commons,10000-:pages-articles.xml.bz2</arg>
+                                <arg>unzip=true</arg>
+                                <arg>retry-max=5</arg>
+                                <arg>retry-millis=10000</arg>
+                                -->
+                            </args>
                         </launcher>
+                        
+                        <launcher>
+                            <id>clean</id>
+                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>2</arg><!-- keep two dumps -->
+                                <arg>*.sql,*-pages-articles.xml,*-download-complete,index.html</arg><!-- delete these files -->
+                            </args>
+                        </launcher>
+
                     </launchers>
                 </configuration>
 

@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.dbpedia.extraction</groupId>
-        <artifactId>main</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <groupId>org.dbpedia</groupId>
+        <artifactId>extraction</artifactId>
+        <version>3.8-SNAPSHOT</version>
     </parent>
 
+    <groupId>org.dbpedia.extraction</groupId>
     <artifactId>scripts</artifactId>
     <name>DBpedia Scripts</name>
 
@@ -52,14 +53,16 @@
             <artifactId>core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-        </dependency>
-
+        <!-- TODO: find a version in a public repo. -->
         <dependency>
             <groupId>org.openrdf</groupId>
             <artifactId>openrdf</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
         </dependency>
 
     </dependencies>

@@ -55,13 +55,13 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
         //Labels
 	    for((language, label) <- ontologyClass.labels)
 	    {
-	        xml += <rdfs:label xml:lang={language}>{label}</rdfs:label>
+	        xml += <rdfs:label xml:lang={language.isoCode}>{label}</rdfs:label>
 	    }
 
         //Comments
 	    for((language, comment) <- ontologyClass.comments)
 	    {
-	        xml += <rdfs:comment xml:lang={language}>{comment}</rdfs:comment>
+	        xml += <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment>
 	    }
 
         //Super classes
@@ -112,13 +112,13 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 
 	    for((language, label) <- property.labels)
 	    {
-	        xml += <rdfs:label xml:lang={language}>{label + labelPostfix}</rdfs:label>
+	        xml += <rdfs:label xml:lang={language.isoCode}>{label + labelPostfix}</rdfs:label>
 	    }
 
         //Comments
 	    for((language, comment) <- property.comments)
 	    {
-	        xml += <rdfs:comment xml:lang={language}>{comment}</rdfs:comment>
+	        xml += <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment>
 	    }
 
         //Domain
@@ -177,8 +177,8 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
         val labelPostfix = " (" + unit.unitLabels.toList.sortWith(_.size < _.size).headOption.getOrElse("") + ")"
 
         <owl:DatatypeProperty rdf:about={propertyUri}>
-            { for((language, label) <- property.labels) yield <rdfs:label xml:lang={language}>{label + labelPostfix}</rdfs:label> }
-            { for((language, comment) <- property.comments) yield <rdfs:comment xml:lang={language}>{comment}</rdfs:comment> }
+            { for((language, label) <- property.labels) yield <rdfs:label xml:lang={language.isoCode}>{label + labelPostfix}</rdfs:label> }
+            { for((language, comment) <- property.comments) yield <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment> }
             <rdfs:domain rdf:resource={clazz.uri} />
             <rdfs:range rdf:resource={unit.uri} />
         </owl:DatatypeProperty>

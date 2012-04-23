@@ -6,11 +6,10 @@ import java.net.URL
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import javax.ws.rs._
 import java.util.logging.Logger
-import org.dbpedia.extraction.server.resources.Base
 import xml.{NodeBuffer, Elem}
 
-@Path("/ontology/validate")
-class Validate extends Base
+@Path("/ontology/validate/")
+class Validate
 {
     val logger = Logger.getLogger(classOf[Validate].getName)
 
@@ -22,7 +21,7 @@ class Validate extends Base
     def validate =
     {
         var nodes = new NodeBuffer()
-        nodes += <?xml-stylesheet type="text/xsl" href="../stylesheets/log.xsl"?>
+        nodes += <?xml-stylesheet type="text/xsl" href="../../stylesheets/log.xsl"?>
         nodes += Server.extractor.validateOntologyPages()
         nodes
     }
@@ -39,7 +38,7 @@ class Validate extends Base
         try
         {
             var nodes = new NodeBuffer()
-            nodes += <?xml-stylesheet type="text/xsl" href="../stylesheets/log.xsl"?>
+            nodes += <?xml-stylesheet type="text/xsl" href="../../stylesheets/log.xsl"?>
             nodes += Server.extractor.validateOntologyPages(XMLSource.fromXML(pagesXML).toList)
             logger.info("Validated ontology page: " + title)
             nodes

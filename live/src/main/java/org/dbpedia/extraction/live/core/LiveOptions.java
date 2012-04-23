@@ -2,7 +2,6 @@ package org.dbpedia.extraction.live.core;
 
 import org.apache.log4j.Logger;
 import org.ini4j.*;
-import scala.tools.nsc.io.Directory;
 
 import java.io.File;
 import java.io.IOException;

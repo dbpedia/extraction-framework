@@ -4,7 +4,7 @@ import _root_.org.dbpedia.extraction.destinations.Destination
 import _root_.org.dbpedia.extraction.mappings.Extractor
 import _root_.org.dbpedia.extraction.sources.{Source, WikiPage}
 
-import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
+import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser, Namespace}
 import java.util.concurrent.{ArrayBlockingQueue}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable
@@ -75,9 +75,9 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
     private def queuePage(page : WikiPage)
     {
         //Only extract from the following namespaces
-        if(page.title.namespace != WikiTitle.Namespace.Main &&
-           page.title.namespace != WikiTitle.Namespace.File &&
-           page.title.namespace != WikiTitle.Namespace.Category)
+        if(page.title.namespace != Namespace.Main &&
+           page.title.namespace != Namespace.File &&
+           page.title.namespace != Namespace.Category)
         {
            return 
         }
@@ -147,7 +147,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                     case ex : Exception =>
                     {
                         _progress.synchronized(_progress.failedPages += 1)
-                        logger.log(Level.INFO, "Error processing page '" + page.title + "'", ex)
+                        logger.log(Level.WARNING, "Error processing page '" + page.title + "'", ex)
                         false
                     }
                 }

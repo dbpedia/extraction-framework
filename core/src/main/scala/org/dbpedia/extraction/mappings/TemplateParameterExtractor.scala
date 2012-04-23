@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, TemplateParameterNode, InternalLinkNode, Node}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.TemplateParameterExtractorConfig
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.Language
@@ -15,9 +15,11 @@ class TemplateParameterExtractor( context : {
 {
     private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", context.language)
 
+    val parameterRegex = """(?s)\{\{\{([^|^}^{^<^>]*)[|}<>]""".r
+    
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Template ||
+        if(node.title.namespace != Namespace.Template ||
             TemplateParameterExtractorConfig.ignoreTemplates.contains(node.title.decoded) ||
             TemplateParameterExtractorConfig.ignoreTemplatesRegex.exists(regex => regex.unapplySeq(node.title.decoded).isDefined ||
             node.isRedirect)
@@ -32,11 +34,10 @@ class TemplateParameterExtractor( context : {
             linkParameters ::= linkTemplatePar.toWikiText
         }
 
-        val parameterRegex = """(?s)\{\{\{([^|^}^{^<^>]*)[|}<>]""".r
         linkParameters.distinct.foreach( link => {
             parameterRegex findAllIn link foreach (_ match {
                 case parameterRegex (param) => parameters::= param //.replace("}","").replace("|","")
-                case _ => parameters
+                case _ => parameters // FIXME: this is useless, isn't it? there's no yield and no assignment
             })
         })
 
@@ -44,10 +45,9 @@ class TemplateParameterExtractor( context : {
             parameters ::= templatePar.parameter
         }
 
-        parameters.distinct.foreach(v => {
-            quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty,v,
-                            node.sourceUri, context.ontology.getDatatype("xsd:string").get )
-        })
+        for (parameter <- parameters.distinct if parameter.nonEmpty) 
+            quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty, 
+                parameter, node.sourceUri, context.ontology.getDatatype("xsd:string").get )
         new Graph(quads)
     }
 

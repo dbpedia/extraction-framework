@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
 import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
 import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
@@ -291,8 +291,8 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
 
     private def parse(language : String, datatypeName : String, input : String) : Option[Double] =
     {
-        val lang = Language.fromWikiCode(language).get
-        val red = Redirects.loadFromCache(lang)
+        val lang = Language(language)
+        val red = new Redirects(Map())
         val context = new
         {
             def ontology : Ontology = throw new Exception("please test without requiring the ontology")
@@ -301,7 +301,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
         }
         val datatype = datatypes(datatypeName)
         val unitValueParser = new UnitValueParser(context, datatype, false)
-        val page = new WikiPage(WikiTitle.parse("TestPage", lang), 0, 0, input)
+        val page = new WikiPage(WikiTitle.parse("TestPage", lang), null, 0, 0, input)
 
         unitValueParser.parse(wikiParser(page)).map{case (value, dt) => dt.toStandardUnit(value)}
     }

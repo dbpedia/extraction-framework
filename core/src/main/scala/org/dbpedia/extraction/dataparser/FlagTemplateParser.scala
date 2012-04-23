@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.config.dataparser.FlagTemplateParserConfig
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{Node, TemplateNode, TextNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
 
 /**
  * Handling of flag templates.
@@ -29,9 +29,9 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                             case Some(countryCode : String) if(templateName.length == 3)&&(templateName == templateName.toUpperCase) =>
                             {
                                 val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
-                                langCodeMap.get(countryCode).foreach(countryName => return Some(new WikiTitle(countryName)))
+                                langCodeMap.get(countryCode).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
                             }
-                            case Some(countryName : String) => return Some(new WikiTitle(countryName))
+                            case Some(countryName : String) => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language))
                             case _ =>
                         }
                     }
@@ -41,7 +41,7 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                 else if((templateName.length == 3) && (templateName == templateName.toUpperCase))
                 {
                     val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
-                    langCodeMap.get(templateName).foreach(countryName => return Some(new WikiTitle(countryName)))
+                    langCodeMap.get(templateName).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
                 }
 
                 None

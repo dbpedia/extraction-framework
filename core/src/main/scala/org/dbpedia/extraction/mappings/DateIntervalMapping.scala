@@ -10,7 +10,7 @@ import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
 import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, TemplateNode}
 import java.lang.IllegalStateException
 
-class DateIntervalMapping( val templateProperty : String,
+class DateIntervalMapping( val templateProperty : String, //TODO CreateMappingStats requires this to be public. Is there a better way?
                            startDateOntologyProperty : OntologyProperty,
                            endDateOntologyProperty : OntologyProperty,
                            context : {

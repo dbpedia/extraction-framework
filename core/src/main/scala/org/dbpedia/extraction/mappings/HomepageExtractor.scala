@@ -35,7 +35,7 @@ class HomepageExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return new Graph()
         
         val list = collectProperties(node).filter(p => propertyNames.contains(p.key.toLowerCase))
         list.foreach((property) => {
@@ -83,7 +83,7 @@ class HomepageExtractor( context : {
     {
         try
         {
-            for(link <- UriUtils.cleanLink(URI.create(url)))
+            for(link <- UriUtils.cleanLink(URI.create(url))) // FIXME: cleanLink converts IRIs to URIs
             {
                 return new Graph(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
             }

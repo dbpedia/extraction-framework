@@ -44,7 +44,7 @@ class AbstractExtractor( context : {
     override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         //Only extract abstracts for pages from the Main namespace
-        if(pageNode.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(pageNode.title.namespace != Namespace.Main) return new Graph()
 
         //Don't extract abstracts from redirect and disambiguation pages
         if(pageNode.isRedirect || pageNode.isDisambiguation) return new Graph()
@@ -189,7 +189,7 @@ class AbstractExtractor( context : {
         text
     }
 
-    private val destinationNamespacesToRender = List(WikiTitle.Namespace.Main, WikiTitle.Namespace.Template)
+    private val destinationNamespacesToRender = List(Namespace.Main, Namespace.Template)
 
     private def renderNode(node : Node) = node match
     {
@@ -207,7 +207,7 @@ class AbstractExtractor( context : {
         // From first TextNode
         val start = pageNode.children.indexWhere{
             case TextNode(text, _) => text.trim != ""
-            case InternalLinkNode(destination, _, _, _) => destination.namespace == WikiTitle.Namespace.Main
+            case InternalLinkNode(destination, _, _, _) => destination.namespace == Namespace.Main
             case _ => false
         }
 

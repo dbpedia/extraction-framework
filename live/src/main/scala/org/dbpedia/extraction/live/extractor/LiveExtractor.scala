@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.mappings.{Mappings, MappingsLoader, Extractor, Redirects}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser}
 import org.dbpedia.extraction.sources.Source
+import java.io.File
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,7 +27,7 @@ object LiveExtractor
     def load(ontologySource : Source,
              mappingsSource : Source,
              articlesSource : Source,
-             extractors : List[Class[Extractor]],
+             extractors : List[Class[_ <: Extractor]],
              language : Language) : List[Extractor] =
     {
         val context = extractionContext(language, ontologySource, mappingsSource, articlesSource)
@@ -56,7 +57,8 @@ object LiveExtractor
 
             def articlesSource : Source = _articlesSource
 
-            private lazy val _redirects = Redirects.load(articlesSource, language)
+            // just cache them in the current directory. TODO: find solution appropriate for live extraction.
+            private lazy val _redirects = Redirects.load(articlesSource, new File("redirects_"+language.filePrefix+".obj"), language)
             def redirects : Redirects = _redirects
         }
     }

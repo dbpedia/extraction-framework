@@ -23,7 +23,7 @@ class XMLLogHandler extends Handler
     def xml : Elem = synchronized
     {
         val f = new XMLFormatter()
-        val logXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<log>\n" + list.map(f.format(_)).mkString + "</log>"
+        val logXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<log>\n" + list.map(f.format).mkString + "</log>"
         XML.loadString(logXML)
     }
 }

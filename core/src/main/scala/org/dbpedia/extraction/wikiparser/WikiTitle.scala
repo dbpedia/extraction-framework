@@ -1,263 +1,194 @@
 package org.dbpedia.extraction.wikiparser
 
-import impl.wikipedia.Namespaces
 import java.util.Locale
-import scala.collection.mutable.HashMap
+import java.lang.StringBuilder
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil
-import org.dbpedia.extraction.util.StringUtils._
-import java.net.URLEncoder
+import org.dbpedia.extraction.util.RichString.toRichString
+import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+import org.dbpedia.util.text.ParseExceptionIgnorer
+import org.dbpedia.util.text.uri.UriDecoder
+import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a page title.
  *
  * @param decoded Encoded page name. URL-decoded, using normalized spaces (not underscores), first letter uppercase.
- * @param namespace Namespace
- * @param language Language
+ * @param namespace Namespace used to be optional, but that leads to mistakes
+ * @param language Language used to be optional, but that leads to mistakes
  */
-class WikiTitle(val decoded : String, val namespace : WikiTitle.Namespace = WikiTitle.Namespace.Main, val language : Language = Language.Default, val isInterlanguageLink : Boolean = false)
+class WikiTitle (val decoded : String, val namespace : Namespace, val language : Language, val isInterlanguageLink : Boolean = false, val fragment : String = null)
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
     /** Encoded page name (without namespace) e.g. Automobile_generation */
-    lazy val encoded = WikiUtil.wikiEncode(decoded, language)
+    val encoded = WikiUtil.wikiEncode(decoded, language, capitalize=true)
 
     /** Decoded page name with namespace e.g. Template:Automobile generation */
-    def decodedWithNamespace =
-    {
-        if(namespace != WikiTitle.Namespace.Main)
-        {
-            WikiTitle.getNamespaceName(language, namespace) + ":" + decoded
-        }
-        else
-        {
-            decoded
-        }
-    }
+    val decodedWithNamespace = withNamespace(false)
 
     /** Encoded page name with namespace e.g. Template:Automobile_generation */
-    def encodedWithNamespace =
+    val encodedWithNamespace = withNamespace(true)
+    
+    private def withNamespace(encode : Boolean) : String =
     {
-        if(namespace != WikiTitle.Namespace.Main)
+        val name : String = if (encode) encoded else decoded
+        if (namespace == Namespace.Main)
         {
-            val encodedNamespace = URLEncoder.encode(WikiTitle.getNamespaceName(language, namespace), "UTF-8")
-            encodedNamespace + ":" + encoded
+          name
         }
-        else
+        else 
         {
-            encoded
+          val ns = namespace.getName(language)
+          (if (encode) WikiUtil.wikiEncode(ns, language, capitalize=true) else ns)+ ":" + name
         }
     }
     
     /**
      * Returns the full source URI.
      */
-    def sourceUri = "http://" + language.wikiCode + ".wikipedia.org/wiki/"  + encodedWithNamespace
+    val sourceUri = "http://" + language.wikiCode + ".wikipedia.org/wiki/"  + encodedWithNamespace
     
-    override def toString = language + ":" + decodedWithNamespace
+    /**
+     * Returns useful info.
+     */
+    override def toString() = {
+      val frag = if (fragment == null) "" else ";fragment='"+fragment+"'"
+      "title="+decoded+";ns="+namespace+"/"+namespace.getName(language)+";language:"+language+frag;
+    }
 
+    /**
+     * TODO: also use fragment?
+     */
     override def equals(other : Any) = other match
     {
-        case otherTitle : WikiTitle => (namespace == otherTitle.namespace && decoded == otherTitle.decoded)
+        case title : WikiTitle => (language == title.language && namespace == title.namespace && decoded == title.decoded)
         case _ => false
     }
 
-    override def hashCode = decoded.hashCode
+    /**
+     * TODO: do as Josh says in Effective Java, chapter 3.
+     * TODO: also use fragment?
+     */
+    override def hashCode() = language.hashCode ^ decoded.hashCode ^ namespace.hashCode
 }
-
+    
 object WikiTitle
 {
     /**
-     * Namespaces
+     * Parses a MediaWiki link or title.
      * 
-     * see http://en.wikipedia.org/wiki/Wikipedia:Namespace
-     * and http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/includes/Defines.php
-     * and e.g. http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
-     *
-     * TODO: these don't really belong here in the code but should be in configuration files
-     */
-    object Namespace extends Enumeration
-    {
-        val Special = Value(-1)
-        val Media = Value(-2)
-  
-        val Main = Value(0)
-        val Talk = Value(1)
-        val User = Value(2)
-        val UserTalk = Value(3)
-        val Project = Value(4)
-        val ProjectTalk = Value(5)
-        val File = Value(6)
-        val FileTalk = Value(7)
-        val MediaWiki = Value(8)
-        val MediaWikiTalk = Value(9)
-        val Template = Value(10)
-        val TemplateTalk = Value(11)
-        val Help = Value(12)
-        val HelpTalk = Value(13)
-        val Category = Value(14)
-        val CategoryTalk = Value(15)
-
-        val Portal = Value(100)
-        val PortalTalk = Value(101)
-        val Author = Value(102)
-        val AuthorTalk = Value(103)
-        val Page = Value(104)
-        val PageTalk = Value(105)
-        val Index = Value(106)
-        val IndexTalk = Value(107)
-        val Book = Value(108)
-        val BookTalk = Value(109)
-
-        val Wikipedia = Value(150)
-        
-        // Namespaces used on http://mappings.dbpedia.org , sorted by number
-        // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
-        val OntologyClass = Value(200)
-        val OntologyProperty = Value(202)
-        val Mapping = Value(204)
-        val Mapping_de = Value(208)
-        val Mapping_fr = Value(210)
-        val Mapping_it = Value(212)
-        val Mapping_es = Value(214)
-        val Mapping_nl = Value(216)
-        val Mapping_pt = Value(218)
-        val Mapping_pl = Value(220)
-        val Mapping_ru = Value(222)
-        val Mapping_cs = Value(224)
-        val Mapping_ca = Value(226)
-        val Mapping_bn = Value(228)
-        val Mapping_hi = Value(230)
-        val Mapping_hu = Value(238)
-        val Mapping_ko = Value(242)
-        val Mapping_tr = Value(246)
-        val Mapping_ar = Value(250)
-        val Mapping_sl = Value(268)
-        val Mapping_eu = Value(272)
-        val Mapping_hr = Value(284)
-        val Mapping_el = Value(304)
-        val Mapping_ga = Value(396)
-    }
-    
-    type Namespace = Namespace.Value
-
-    private val mappingNamespaces = new HashMap[Language, Namespace]
-    private val customNamespaces = new HashMap[String, Namespace]
-    customNamespaces.put("OntologyClass", Namespace.OntologyClass)
-    customNamespaces.put("OntologyProperty", Namespace.OntologyProperty)
-    
-    for (ns <- Namespace.values)
-    {
-      val name = ns.toString
-      if (name.equals("Mapping")) mappingNamespace(ns, "en", "Mapping")
-      else if (name.startsWith("Mapping_")) mappingNamespace(ns, name.substring(8), name.replace('_', ' '))
-    }
-    
-    private def mappingNamespace(ns : Namespace, code: String, name : String) =
-    {
-        mappingNamespaces.put(Language.fromWikiCode(code).get, ns)
-        customNamespaces.put(name, ns)
-    }
-    
-    def mappingNamespace(language : Language) : Option[Namespace] =
-    {
-        mappingNamespaces.get(language)
-    }
-    
-    private val reverseCustomNamespaces = customNamespaces.map{case (name, code) => (code, name)}.toMap
-
-    /**
-     * Parses a (decoded) MediaWiki link
+     * FIXME: parsing mediawiki links correctly cannot be done without a lot of configuration.
+     * Therefore, this method must not be static. It must be part of an object that is instatiated
+     * for each mediawiki instance.
+     * 
+     * FIXME: rules for links are different from those for titles. We should have distinct methods
+     * for these two use cases.
+     * 
      * @param link MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
      */
-    def parse(link : String, sourceLanguage : Language = Language.Default) =
+    def parse(title : String, sourceLanguage : Language) =
     {
-        // TODO: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
+        val coder = new HtmlCoder(XmlCodes.NONE)
+        coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
+        var decoded = coder.code(title)
+        
+        // Note: Maybe the following line decodes too much, but it seems to be 
+        // quite close to what MediaWiki does.
+        decoded = UriDecoder.decode(decoded)
+        
+        // replace NBSP by SPACE, remove exotic whitespace
+        decoded = replace(decoded, "\u00A0\u200C\u200E\u200F\u2028\u202B\u202C\u3000", " ")
+        
+        var fragment : String = null
+        
+        // we can look for hash signs after we decode - that's what MediaWiki does
+        val hash = decoded.indexOf('#')
+        if (hash != -1) {
+          // TODO: check if we treat fragments correctly
+          fragment = WikiUtil.cleanSpace(decoded.substring(hash + 1))
+          decoded = decoded.substring(0, hash)
+        }
+        
+        decoded = WikiUtil.cleanSpace(decoded)
+        
+        // FIXME: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
+        // get them live from 
+        // http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&format=xml
+        // http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&format=xml
+        // etc. Almost identical, except for stuff like q => en.wikiquote.org, de.wikiquote.org
 
-        var parts = link.split(":", -1).toList
+        var parts = decoded.split(":", -1)
 
         var leadingColon = false
         var isInterlanguageLink = false
         var language = sourceLanguage
         var namespace = Namespace.Main
 
-        //Check if this is a interlanguage link (beginning with ':')
-        if(!parts.isEmpty && parts.head == "")
+        //Check if this is an interlanguage link (beginning with ':')
+        if(parts.length > 0 && parts.head == "")
         {
             leadingColon = true
             parts = parts.tail
         }
 
         //Check if it contains a language
-        if(!parts.isEmpty && !parts.tail.isEmpty)
+        if (parts.length > 1)
         {
-            Language.fromWikiCode(parts.head.toLowerCase) match
+            for (lang <- Language.get(parts(0).trim.toLowerCase(sourceLanguage.locale)))
             {
-                case Some(lang) =>
-                {
-                     language = lang
-                     isInterlanguageLink = !leadingColon
-                     parts = parts.tail
-                }
-                case None =>
+                 language = lang
+                 isInterlanguageLink = ! leadingColon
+                 parts = parts.tail
             }
         }
 
         //Check if it contains a namespace
-        if(!parts.isEmpty && !parts.tail.isEmpty)
+        if (parts.length > 1)
         {
-            getNamespace(language, parts.head) match
+            for (ns <- Namespace.get(language, parts(0).trim))
             {
-                case Some(ns) =>
-                {
-                     namespace = ns
-                     parts = parts.tail
-                }
-                case None =>
+                 namespace = ns
+                 parts = parts.tail
             }
         }
 
         //Create the title name from the remaining parts
-        val decodedName = WikiUtil.cleanSpace(parts.mkString(":")).capitalizeLocale(sourceLanguage.locale)
+        // FIXME: MediaWiki doesn't capitalize links to other wikis
+        val decodedName = parts.mkString(":").trim.capitalize(sourceLanguage.locale)
 
-        new WikiTitle(decodedName, namespace, language, isInterlanguageLink)
+        new WikiTitle(decodedName, namespace, language, isInterlanguageLink, fragment)
     }
-
+    
     /**
-     * Parses an encoded MediaWiki link
-     * @param link encoded MediaWiki link e.g. "Template:Infobox_Automobile"
-     * @param sourceLanguage The source language of this link
+     * return a copy of the first string in which all occurrences of chars from the second string
+     * have been replaced by the corresponding char from the third string. If there is no
+     * corresponding char (i.e. the third string is shorter than the second one), the affected
+     * char is removed.
      */
-    def parseEncoded(encodedLink : String, sourceLanguage : Language = Language.Default) : WikiTitle =
+    private def replace(str : String, chars : String, replace : String) : String = 
     {
-        parse(WikiUtil.wikiDecode(encodedLink, sourceLanguage), sourceLanguage)
+      var sb : StringBuilder = null
+      var last = 0
+      var pos = 0
+      
+      while (pos < str.length)
+      {
+        val index = chars.indexOf(str.charAt(pos))
+        if (index != -1)
+        {
+          if (sb == null) sb = new StringBuilder()
+          sb.append(str, last, pos)
+          if (index < replace.length) sb.append(replace.charAt(index))
+          last = pos + 1
+        }
+        
+        pos += 1
+      }
+      
+      if (sb != null) sb.append(str, last, str.length)
+      if (sb == null) str else sb.toString
     }
 
-    private def getNamespace(language : Language, name : String) : Option[Namespace] =
-    {
-        val normalizedName = name.capitalizeLocale(Locale.ENGLISH)
-
-        for(namespace <- customNamespaces.get(normalizedName))
-        {
-            return Some(namespace)
-        }
-
-        for(namespace <- Namespaces(language, normalizedName))
-        {
-            return Some(Namespace(namespace))
-        }
-
-        None
-    }
-
-    private def getNamespaceName(language : Language, code : Namespace) : String =
-    {
-        for(name <- reverseCustomNamespaces.get(code))
-        {
-            return name
-        }
-
-        Namespaces.getNameForNamespace(language, code)
-    }
 }

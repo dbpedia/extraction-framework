@@ -34,7 +34,7 @@ class TopicalConceptsExtractor( context : {
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if (page.title.namespace == WikiTitle.Namespace.Category)
+        if (page.title.namespace == Namespace.Category)
         {
             val allTemplates = collectCatMains(page)
 
@@ -44,7 +44,7 @@ class TopicalConceptsExtractor( context : {
             try {
                 val quads = allTemplates.flatMap{ template =>
                     val mainResource = OntologyNamespaces.getResource(
-                      WikiUtil.wikiEncode(template.property("1").get.retrieveText.get), context.language)
+                      WikiUtil.wikiEncode(template.property("1").get.retrieveText.get, context.language, capitalize=false), context.language)
                     (new Quad(context.language,
                         DBpediaDatasets.TopicalConcepts,
                         subjectUri,

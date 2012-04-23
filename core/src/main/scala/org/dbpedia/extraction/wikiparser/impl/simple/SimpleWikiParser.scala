@@ -4,7 +4,7 @@ import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.toRichString
 import java.net.URI
 import java.util.logging.{Level, Logger}
 import java.lang.IllegalArgumentException
@@ -244,6 +244,7 @@ final class SimpleWikiParser extends WikiParser
         }
         else if(source.lastTag("{{"))
         {
+            // FIXME: source.pos+1 is invalid if we're at the end of the text
             val nextToken = source.getString(source.pos, source.pos+1)
             if ( nextToken == "{")
             {
@@ -399,12 +400,12 @@ final class SimpleWikiParser extends WikiParser
                     case _ => throw new WikiParserException("Invalid Template name", startLine, source.findLine(startLine))
                 }
 
-                val decodedName = WikiUtil.cleanSpace(templateName).capitalizeLocale(source.language.locale)
+                val decodedName = WikiUtil.cleanSpace(templateName).capitalize(source.language.locale)
                 if(source.lastTag(":"))
                 {
                     return parseParserFunction(decodedName, source, level)
                 }
-                title = new WikiTitle(decodedName, WikiTitle.Namespace.Template, source.language)
+                title = new WikiTitle(decodedName, Namespace.Template, source.language)
             }
             else
             {
@@ -450,7 +451,7 @@ final class SimpleWikiParser extends WikiParser
 
     private def parseParserFunction(decodedName : String, source : Source, level : Int) : ParserFunctionNode =
     {
-        val title = new WikiTitle(decodedName + ":", WikiTitle.Namespace.Template, source.language)
+        val title = new WikiTitle(decodedName + ":", Namespace.Template, source.language)
         val children = parseUntil(parserFunctionEnd, source, level)
         val startLine = source.line
 

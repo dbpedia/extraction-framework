@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Shortcut for mvn scala:run -Dlauncher=... -DaddArgs=...
+# Must be called with one of the modules (core/, dump/, ...) as current directory.
+# Example:
+# extraction_framework/core> ../run LAUNCHER ARG1 ARG2 ARG3
+# is equivalent to
+# extraction_framework/core> mvn scala:run "-Dlauncher=LAUNCHER" "-DaddArgs=ARG1|ARG2|ARG3"
+
+LAUNCHER="$1"
+
+ADD_ARGS="$2"
+for ARG in ${@:3}
+do
+  ADD_ARGS="$ADD_ARGS|$ARG"
+done
+
+mvn scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS" 

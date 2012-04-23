@@ -3,8 +3,9 @@ package org.dbpedia.extraction.server.providers
 import javax.ws.rs.core.{MediaType, MultivaluedMap}
 import javax.ws.rs.ext.{Provider, MessageBodyWriter}
 import javax.ws.rs.{Produces, WebApplicationException}
-import xml.{NodeBuffer, PrettyPrinter, NodeSeq}
+import xml.{NodeBuffer, Utility, NodeSeq, Node}
 import java.io.{OutputStreamWriter, IOException, OutputStream}
+import java.util.Collections.singletonList
 
 /**
  * Used by the server to write xml responses.
@@ -16,7 +17,7 @@ class XMLMessageBodyWriter extends MessageBodyWriter[AnyRef]
     override def isWriteable(_type : java.lang.Class[_], genericType : java.lang.reflect.Type,
                              annotations : Array[java.lang.annotation.Annotation], mediaType : MediaType) : Boolean =
     {
-        _type.getName == classOf[scala.xml.Elem].getName || _type.getName == classOf[scala.xml.NodeBuffer].getName
+        (classOf[NodeSeq] isAssignableFrom _type) || (classOf[NodeBuffer] isAssignableFrom _type)
     }
 
     override def getSize(xml : AnyRef, _type : java.lang.Class[_], genericType : java.lang.reflect.Type,
@@ -34,44 +35,27 @@ class XMLMessageBodyWriter extends MessageBodyWriter[AnyRef]
         val writer = new OutputStreamWriter(entityStream, "UTF-8")
         writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
 
-        if(mediaType.getSubtype == "xhtml+xml")
+        var main = mediaType.getType
+        var sub = mediaType.getSubtype
+        
+        // IE cannot handle application/xhtml+xml directly
+        if(main == "application" && sub == "xhtml+xml") { main = "text"; sub = "html" }
+        
+        httpHeaders.put("Content-Type", singletonList(main+"/"+sub+"; charset=UTF-8"))
+            
+        xml match
         {
-            //TODO IE cannot handle application/xhtml+xml directly
-            val contentType : java.util.List[java.lang.Object] = new java.util.ArrayList[java.lang.Object]()
-            contentType.add("text/html")
-            httpHeaders.put("Content-Type", contentType)
-
-            xml match
-            {
-                case buffer : NodeBuffer => for(node <- buffer) writer.write(node.toString)
-                case node : NodeSeq => writer.write(node.toString)
-            }
-
-            writer.flush()
+            case node : NodeBuffer => writer.write(toString(node))
+            case node : NodeSeq => writer.write(toString(node))
         }
-        else
-        {
-//TODO pretty printing disabled, since PrettyPrinter hangs for some cases (notably when formatting the ontology)
-//            val formatter = new PrettyPrinter(width = 300, step = 2)
-//
-//            val text = xml match
-//            {
-//                case buffer : NodeBuffer => formatter.formatNodes(buffer)
-//                case node : NodeSeq =>
-//                {
-//                    formatter.format(node)
-//                }
-//            }
-//
-//            writer.write(text)
 
-            xml match
-            {
-                case buffer : NodeBuffer => for(node <- buffer) writer.write(node.toString)
-                case node : NodeSeq => writer.write(node.toString)
-            }
-
-            writer.flush()
-        }
+        writer.flush()
+    }
+    
+    private def toString( node : Seq[Node] ) : String =
+    {
+        val sb = new StringBuilder
+        Utility.sequenceToXML(node, sb = sb, minimizeTags = true)
+        sb.toString
     }
 }

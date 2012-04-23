@@ -1,40 +1,81 @@
 package org.dbpedia.extraction.server
 
-import _root_.java.util.logging.{Level, Logger}
+import java.io.File
+import java.net.{URI,URL}
+import java.util.logging.{Level,Logger}
+import scala.collection.mutable
+import org.dbpedia.extraction.mappings.{LabelExtractor,MappingExtractor}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.server.util.MappingStatsManager
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
-import com.sun.jersey.api.core.ClassNamesResourceConfig
-import providers._
-import resources._
-import ontology._
-import stylesheets.{Log, TriX}
-import java.net.URI
+import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
+import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
 /**
  * The DBpedia server.
+ * FIXME: more flexible configuration.
  */
 object Server
 {
-    val serverURI = new URI("http://localhost:9999/")
+    val logger = Logger.getLogger(getClass.getName)
 
-    val logger = Logger.getLogger(Server.getClass.getName)
+    // Note: we use /server/ because that's what we use on http://mappings.dbpedia.org/server/
+    // It makes handling redirects easier.
+    val serverURI = new URI("http://localhost:9999/server/")
 
-    //@volatile var currentJob : Option[ExtractionJob] = None
+    def languages = _languages
+    private var _languages : Seq[Language] = null
 
-    val config = new Configuration()
+    /**
+     * The extraction manager
+     * DynamicExtractionManager is able to update the ontology/mappings.
+     * StaticExtractionManager is NOT able to update the ontology/mappings.
+     */
+    def extractor : ExtractionManager = _extractor
+    private var _extractor : ExtractionManager = null
 
-    val extractor : ExtractionManager = config.extractionManager
+    private var _managers : Map[Language, MappingStatsManager] = null
+    
+    def statsManager(language: Language) : MappingStatsManager = _managers(language)
 
-    var adminRights : Boolean = false
+    private var _password : String = null
+    
+    def adminRights(pass : String) : Boolean = _password == pass
 
-    @volatile private var running = true
+    /** The URL where the pages of the Mappings Wiki are located */
+    val wikiPagesUrl = new URL("http://mappings.dbpedia.org/index.php")
 
+    /** The URL of the MediaWiki API of the Mappings Wiki */
+    val wikiApiUrl = new URL("http://mappings.dbpedia.org/api.php")
+    
     def main(args : Array[String])
     {
-        //Start the HTTP server
-        val resources = new ClassNamesResourceConfig(
-            classOf[Root], classOf[Extraction], classOf[Mappings], classOf[Ontology], classOf[Classes], classOf[Pages], classOf[Validate],
-            classOf[TemplateStatistics], classOf[PropertyStatistics],
-            classOf[XMLMessageBodyReader], classOf[XMLMessageBodyWriter], classOf[ExceptionMapper], classOf[TriX], classOf[Log], classOf[Percentage])
+        val millis = System.currentTimeMillis
+        
+        logger.info("DBpedia server starting")
+        
+        require(args != null && args.length >= 5, "need at least five args: password for template ignore list, base dir for statistics, ontology file, mappings dir, languages")
+        _password = args(0)
+        val statsDir = new File(args(1))
+
+        val ontologyFile = new File(args(2))
+        val mappingsDir = new File(args(3))
+        
+        // Use all remaining args as language codes or comma or whitespace separated lists of codes
+        _languages = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        
+        _managers = _languages.map(language => (language -> new MappingStatsManager(statsDir, language))).toMap
+        
+        _extractor = new DynamicExtractionManager(_languages, List(classOf[LabelExtractor],classOf[MappingExtractor]), ontologyFile, mappingsDir)
+        
+        // Configure the HTTP server
+        val resources = new PackagesResourceConfig("org.dbpedia.extraction.server.resources", "org.dbpedia.extraction.server.providers")
+        
+        // redirect URLs like "/foo/../extractionSamples" to "/extractionSamples/" (with a slash at the end)
+        val features = resources.getFeatures
+        features.put(ResourceConfig.FEATURE_CANONICALIZE_URI_PATH, true)
+        features.put(ResourceConfig.FEATURE_NORMALIZE_URI, true)
+        features.put(ResourceConfig.FEATURE_REDIRECT, true)
 
         val server = HttpServerFactory.create(serverURI, resources)
         server.start()
@@ -50,24 +91,7 @@ object Server
         {
             case ex : Exception => logger.log(Level.WARNING, "Could not open browser.", ex)
         }
-
-        /*
-        //Load Extraction jobs from configuration
-        val extractionJobs = ConfigLoader.load(new File("./config.properties"))
-
-        //Execute the Extraction jobs one by one
-        for(extractionJob <- extractionJobs)
-        {
-           currentJob = Some(extractionJob)
-           extractionJob.start()
-           extractionJob.join()
-        }
-        currentJob = None
-        */
-
-        while(running) Thread.sleep(100)
-
-        //Stop the HTTP server
-        server.stop(0)
-   }
+        
+        logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis))
+    }
 }

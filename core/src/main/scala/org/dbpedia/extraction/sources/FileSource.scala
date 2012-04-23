@@ -21,12 +21,12 @@ import org.dbpedia.extraction.util.{WikiUtil, FileProcessor}
 class FileSource(baseDir : File, filter : (String => Boolean) = (path => !path.startsWith(".") && !path.contains("/.")), language : Language = Language.Default) extends Source
 {
     private val logger = Logger.getLogger(classOf[FileSource].getName)
-	private val fileProcessor = new FileProcessor(baseDir, filter)
+    private val fileProcessor = new FileProcessor(baseDir, filter)
 
     override def foreach[U](f : WikiPage => U) : Unit =
-	{
-		fileProcessor.processFiles((path : String, source: String) =>
-		{
+    {
+        fileProcessor.processFiles((path : String, source: String) =>
+        {
             // cut off '#1.txt' or '.txt' if necessary
             var sep = path.lastIndexOf('#')
             if (sep == -1)
@@ -37,13 +37,13 @@ class FileSource(baseDir : File, filter : (String => Boolean) = (path => !path.s
             val slash = path.indexOf('/');
             
             var pageName = if(sep > slash) path.substring(0, sep) else path
-            pageName = WikiUtil.wikiDecode(pageName, language)
+            pageName = WikiUtil.wikiDecode(pageName, language, false)
                 
             try
             {
             	val title = WikiTitle.parse(pageName, language)
 
-            	f(new WikiPage(title, 0, 0, source))
+            	f(new WikiPage(title, null, 0, 0, source))
             }
             catch
             {

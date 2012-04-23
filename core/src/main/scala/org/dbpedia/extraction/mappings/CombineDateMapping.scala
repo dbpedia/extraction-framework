@@ -9,7 +9,7 @@ import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.{Language, Date}
 
 class CombineDateMapping( ontologyProperty : OntologyProperty,
-                          val templateProperty1 : String,
+                          val templateProperty1 : String,  //TODO CreateMappingStats requires these to be public. Is there a better way?
                           unit1 : Datatype,
                           val templateProperty2 : String,
                           unit2 : Datatype,

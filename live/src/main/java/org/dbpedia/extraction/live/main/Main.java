@@ -305,7 +305,7 @@ public class Main
 //                SimpleWikiParser parser = new SimpleWikiParser();
 //                PageNode pageNode = parser.apply(p);
 //
-//                //System.out.println(WikiTitle.Namespace);
+//                //System.out.println(Namespace);
 //                //AbstractExtractor extra = new AbstractExtractor(null);
 //                //extra.apply(parser.apply(p));
 //                //new AbstractExtractor(parser.apply(p));

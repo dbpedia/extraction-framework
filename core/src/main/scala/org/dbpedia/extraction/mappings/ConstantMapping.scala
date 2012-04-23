@@ -31,7 +31,7 @@ class ConstantMapping( ontologyProperty : OntologyProperty,
 
         require(!value.matches(encodedUriRegex), "URI value must be decoded (must not contain any %XX)")
 
-        val encodedUri = WikiUtil.wikiEncode(value, context.language)
+        val encodedUri = WikiUtil.wikiEncode(value, context.language, false)
         value = OntologyNamespaces.getResource(encodedUri, context.language)
     }
 

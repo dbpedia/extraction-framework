@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.Graph
 import org.dbpedia.extraction.wikiparser.{PageNode}
 
-class CompositeExtractor(extractors : List[Extractor]) extends Extractor
+class CompositeExtractor(extractors : Traversable[Extractor]) extends Extractor
 {
     require(!extractors.isEmpty, "!extractors.isEmpty")
     

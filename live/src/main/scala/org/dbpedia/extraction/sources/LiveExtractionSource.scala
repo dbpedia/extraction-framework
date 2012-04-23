@@ -42,7 +42,7 @@ object LiveExtractionSource
             val javaFilter = { title : WikiTitle => filter(title) : java.lang.Boolean }
             val stream = new FileInputStream(file)
 
-            new WikipediaDumpParser(stream, f, javaFilter).run()
+            new WikipediaDumpParser(stream, null, null, javaFilter, f).run()
 
             stream.close()
         }
@@ -75,10 +75,11 @@ object LiveExtractionSource
 
 
               link = link.trim().replaceAll("\\s","_")
-              val mytitle = WikiUtil.wikiEncode(link, language)
+              val mytitle = WikiUtil.wikiEncode(link, language, capitalize=true)
               println(mytitle)
 
                 f( new WikiPage( title     = WikiTitle.parse(link, language),
+                                 redirect  = null, // TODO: read redirect title from XML
                                  id        = (page \ "id").text.toLong,
                                  revision  = (rev \ "id").text.toLong,
                                  source    = (rev \ "text").text ) )

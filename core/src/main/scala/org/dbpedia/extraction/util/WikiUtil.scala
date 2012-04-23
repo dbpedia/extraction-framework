@@ -2,7 +2,7 @@ package org.dbpedia.extraction.util
 
 import java.net.URLEncoder
 import java.net.URLDecoder
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.toRichString
 
 /**
  * Contains several utility functions related to WikiText.
@@ -10,12 +10,15 @@ import org.dbpedia.extraction.util.StringUtils._
 object WikiUtil
 {
     /**
-     * replace underscores by spaces, normalize duplicate spaces, trim spaces from start and end
-     * @param string string using '_' instead of ' '
+     * replace underscores by spaces, replace non-breaking space by normal space, 
+     * normalize duplicate spaces, trim spaces from start and end
+     * TODO: also remove exotic whitespace like \u200C\u200E\u200F\u2028
+     * See WikiTitle.replace() and its use in WikiTitle.parse().
+     * @param string string possibly using '_' instead of ' '
      */
     def cleanSpace( string : String ) : String =
     {
-        string.replace('_', ' ').replaceAll(" +", " ").trim
+        string.replace('_', ' ').replace('\u00A0','\u0020').replaceAll(" +", " ").trim
     }
     
     /**
@@ -25,11 +28,14 @@ object WikiUtil
      * TODO: maybe we should expect (require) the name to be normalized, e.g. with uppercase
      * first letter and without duplicate spaces or spaces at start or end? Would make this
      * method much simpler.
+     * 
+     * TODO: This method was a mistake. We should use specialized objects for resource identifiers, 
+     * not Strings, and serialize them any way we want (IRI, URI, String, whatever).
      *   
      * @param name Non-encoded MediaWiki page name, e.g. 'Émile Zola'.
      * Must not include the namespace (e.g. 'Template:').
      */
-    def wikiEncode(name : String, language : Language = Language.Default, capitalize : Boolean = true) : String =
+    def wikiEncode(name : String, language : Language, capitalize : Boolean) : String =
     {
         // replace spaces by underscores.
         // Note: MediaWiki apparently replaces only spaces by underscores, not other whitespace. 
@@ -50,7 +56,7 @@ object WikiUtil
         // capitalize can be false for encoding property names, e.g. in the InfoboxExtractor
         if(capitalize)
         {
-            encoded = encoded.capitalizeLocale(language.locale)
+            encoded = encoded.capitalize(language.locale)
         }
 
         // URL-encode everything but ':' '/' '&' and ',' - just like MediaWiki
@@ -58,6 +64,7 @@ object WikiUtil
         // See http://svn.wikimedia.org/viewvc/mediawiki/trunk/phase3/includes/GlobalFunctions.php?r1=38683&r2=38908
         // I think we're free to do as we choose as long as we produce valid URIs.
         // jc@sahnwaldt.de 2012-03-05
+        // TODO: use IRIs, remove these lines
         encoded = URLEncoder.encode(encoded, "UTF-8");
         encoded = encoded.replace("%3A", ":");
         encoded = encoded.replace("%2F", "/");
@@ -78,7 +85,7 @@ object WikiUtil
      * @param name encoded MediaWiki page name, e.g. '%C3%89mile_Zola'.
      * Must not include the namespace (e.g. 'Template:').
      */
-    def wikiDecode(name : String, language : Language = Language.Default, capitalize : Boolean = true) : String =
+    def wikiDecode(name : String, language : Language, capitalize : Boolean) : String =
     {
         // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt.
         // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
@@ -86,7 +93,7 @@ object WikiUtil
 
         if(capitalize)
         {
-            decoded = decoded.capitalizeLocale(language.locale)
+            decoded = decoded.capitalize(language.locale)
         }
 
         decoded
