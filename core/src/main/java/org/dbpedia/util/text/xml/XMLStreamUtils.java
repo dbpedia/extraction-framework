@@ -78,7 +78,7 @@ public class XMLStreamUtils
   public static void requireStartElement( XMLStreamReader reader, String uri, String name ) 
   throws XMLStreamException
   {
-    requireElement(reader, START_ELEMENT, uri, name, "start");
+    requireElement(reader, START_ELEMENT, uri, name, "");
   }
 
   /**
@@ -93,7 +93,7 @@ public class XMLStreamUtils
   public static void requireEndElement( XMLStreamReader reader, String uri, String name ) 
   throws XMLStreamException
   {
-    requireElement(reader, END_ELEMENT, uri, name, "end");
+    requireElement(reader, END_ELEMENT, uri, name, "/");
   }
 
   /**
@@ -104,26 +104,26 @@ public class XMLStreamUtils
    * @param event START_ELEMENT or END_ELEMENT
    * @param uri the namespace URI of the element, may be null
    * @param name the local name of the element, may be null
-   * @param tag "start" or "end", for error message
+   * @param slash "" or "/", for error message
    * @throws XMLStreamException if the required values are not matched.
    */
-  private static void requireElement( XMLStreamReader reader, int event, String uri, String name, String tag )
+  private static void requireElement( XMLStreamReader reader, int event, String uri, String name, String slash )
   throws XMLStreamException
   {
     // Note: reader.require(event, uri, name) has a lousy error message
     
-    if (reader.getEventType() != event) throw new XMLStreamException("expected "+tag+" of element ["+name+"]", reader.getLocation());
+    if (reader.getEventType() != event) throw new XMLStreamException("expected <"+slash+name+">", reader.getLocation());
     
     if (uri != null)
     {
       String found = reader.getNamespaceURI();
-      if (! found.equals(uri)) throw new XMLStreamException("expected "+tag+" of element with namespace ["+uri+"], found ["+found+"]", reader.getLocation());
+      if (! found.equals(uri)) throw new XMLStreamException("expected <"+slash+name+"> with namespace ["+uri+"], found ["+found+"]", reader.getLocation());
     }
     
     if (name != null)
     {
       String found = reader.getLocalName();
-      if (! found.equals(name)) throw new XMLStreamException("expected "+tag+" of element ["+name+"], found ["+found+"]", reader.getLocation());
+      if (! found.equals(name)) throw new XMLStreamException("expected <"+slash+name+">, found <"+slash+found+">", reader.getLocation());
     }
   }
 
@@ -131,6 +131,7 @@ public class XMLStreamUtils
    * Skip current element, including all its content.
    * Precondition: the current event is START_ELEMENT.
    * Postcondition: the current event is the corresponding END_ELEMENT.
+   * Similar to {@link XMLStreamReader#nextTag()}, but also skips text content.
    * @param reader must not be {@code null}
    * @throws XMLStreamException if the current event is not START_ELEMENT or there is an error processing the underlying XML source
    */

@@ -2,13 +2,13 @@ package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.ontology.datatypes.{Datatype}
 
-import javax.xml.datatype.{XMLGregorianCalendar, DatatypeFactory}
+import javax.xml.datatype.DatatypeFactory
 import java.lang.{IllegalArgumentException}
 
 class Date (val year: Option[Int] = None, val month: Option[Int] = None, val day: Option[Int] = None, val datatype : Datatype)
      extends Ordered[Date]
 {
-    private val calendar : XMLGregorianCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar()
+    private val calendar = DatatypeFactory.newInstance().newXMLGregorianCalendar()
 
     require(year.isEmpty || year.get != 0, "year must not be 0")
     require(month.isEmpty || month.get != 0, "month must not be 0")
@@ -52,10 +52,15 @@ class Date (val year: Option[Int] = None, val month: Option[Int] = None, val day
          }
          case _ => throw new IllegalArgumentException("Unsupported datatype: "+datatype)
     }
+    
+    // calendar.toXMLFormat happily returns strings like 2012-02-31
+    require(calendar.isValid, "invalid date "+year.getOrElse("")+"-"+month.getOrElse("")+"-"+day.getOrElse(""))
+    // FIXME: this "xsd:" thing is ugly. Datatype should contain its base uri.
+    require("xsd:" + calendar.getXMLSchemaType.getLocalPart == datatype.name, "invalid date "+year.getOrElse("")+"-"+month.getOrElse("")+"-"+day.getOrElse(""))
 
     override def compare(that : Date) : Int = calendar.compare(that.calendar)
     
-    override def toString = calendar.toXMLFormat()
+    override def toString = calendar.toXMLFormat
 }
 
 object Date

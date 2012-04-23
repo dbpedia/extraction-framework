@@ -6,10 +6,11 @@ import javax.ws.rs._
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.server.Server
 import java.util.logging.Logger
-import org.dbpedia.extraction.server.resources.Base
+import org.dbpedia.extraction.server.util.PageUtils
+import org.dbpedia.extraction.util.Language
 
-@Path("/ontology/pages")
-class Pages extends Base
+@Path("/ontology/pages/")
+class Pages
 {
     val logger = Logger.getLogger(classOf[Pages].getName)
 
@@ -21,9 +22,12 @@ class Pages extends Base
     def getPages : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Ontology pages</h2>
-            { Server.extractor.ontologyPages.values.map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.extractor.ontologyPages.values.toArray.sortBy(_.title.decodedWithNamespace).map(PageUtils.relativeLink(_) ++ <br/>) }
           </body>
         </html>
     }
@@ -37,7 +41,7 @@ class Pages extends Base
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get ontology page: " + title)
-        Server.extractor.ontologyPages(WikiTitle.parseEncoded(title)).toXML
+        Server.extractor.ontologyPages(WikiTitle.parse(title, Language.Default)).toXML
     }
 
     /**
@@ -74,7 +78,7 @@ class Pages extends Base
     @Consumes(Array("application/xml"))
     def deletePage(@PathParam("title") @Encoded title : String)
     {
-        Server.extractor.removeOntologyPage(WikiTitle.parseEncoded(title))
+        Server.extractor.removeOntologyPage(WikiTitle.parse(title, Language.Default))
         logger.info("Deleted ontology page: " + title)
     }
 }

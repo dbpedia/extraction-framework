@@ -5,10 +5,10 @@ import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import org.dbpedia.extraction.ontology.{OntologyType, OntologyProperty, OntologyClass}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.server.resources.Base
+import org.dbpedia.extraction.util.Language
 
-@Path("/ontology/classes")
-class Classes extends Base
+@Path("/ontology/classes/")
+class Classes
 {
     private val ontology = Server.extractor.ontology
 
@@ -33,7 +33,9 @@ class Classes extends Base
           </head>
           <body>
             <h2>Ontology Classes</h2>
+            <ul>
             {createClassHierarchy(rootClass, subClassesMap)}
+            </ul>
           </body>
         </html>
     }
@@ -65,18 +67,18 @@ class Classes extends Base
 
     private def createClassHierarchy(baseClass : OntologyClass, subClassesMap : Map[OntologyClass, List[OntologyClass]]) : Elem =
     {
+        <li>
+        <a name={baseClass.name}/>
+        {createLink(baseClass)} {createEditLink(baseClass)}
         <ul>
         {
-            for(subClass <- subClassesMap.get(baseClass).getOrElse(List())) yield
+            for(subClass <- subClassesMap.get(baseClass).getOrElse(List.empty)) yield
             {
-                <li>
-                  <a name={subClass.name}/>
-                  {createLink("classes/", subClass)} {createEditLink(subClass)}<br/>
-                  {createClassHierarchy(subClass, subClassesMap)}
-                </li>
+                {createClassHierarchy(subClass, subClassesMap)}
             }
         }
         </ul>
+        </li>
     }
 
     private def createClassPage(ontClass : OntologyClass) =
@@ -113,7 +115,7 @@ class Classes extends Base
                 {
                   for(superClass <- ontClass.subClassOf) yield
                   {
-                    <td>{createLink("", superClass, ontClass.subClassOf.size == 1)}</td>
+                    <td>{createLink(superClass)}</td>
                   }
                 }
               </tr>
@@ -133,6 +135,7 @@ class Classes extends Base
 //                             if property.domain == clazz)
 //                             yield property
 
+        // TODO: why show only this class and its direct base classes?
         val classes = (ontClass :: ontClass.subClassOf)
         val properties = ontology.properties.sortBy(_.name).filter(classes contains _.domain)
 
@@ -152,25 +155,19 @@ class Classes extends Base
     {
         <tr>
           <td bgcolor="#EEEEFF">{property.name} {createEditLink(property)}</td>
-          <td>{property.labels.get("en").getOrElse("undefined")}</td>
-          <td>{createLink("", property.domain)}</td>
-          <td>{createLink("", property.range)}</td>
-          <td>{property.comments.get("en").getOrElse("")}</td>
+          <td>{property.labels.get(Language.Default).getOrElse("undefined")}</td>
+          <td>{createLink(property.domain)}</td>
+          <td>{createLink(property.range)}</td>
+          <td>{property.comments.get(Language.Default).getOrElse("")}</td>
         </tr>
     }
 
-    private def createLink(prefix : String, t : OntologyType, addOwlThing : Boolean = true) = t match
+    private def createLink(t : OntologyType) = t match
     {
-        case ontClass : OntologyClass if ontClass.name == "owl:Thing" =>
-        {
-            if(addOwlThing)
-            {
-                <em>owl:Thing</em>
-            }
-        }
         case ontClass : OntologyClass =>
         {
-            <a href={prefix + ontClass.name} title={ontClass.labels.get("en").getOrElse(ontClass.name)}>{ontClass.name}</a>
+            // escape colon in names like owl:Thing - otherwise browser thinks the namespace as a protocol.
+            <a href={ontClass.name.replace(":", "%3A")} title={ontClass.labels.get(Language.Default).getOrElse(ontClass.name)}>{ontClass.name}</a>
         }
         case datatype : Datatype =>
         {
@@ -186,17 +183,16 @@ class Classes extends Base
     {
         case ontClass : OntologyClass if ontClass.name != "owl:Thing" =>
         {
-            <small>(<a href={Server.config.wikiPagesUrl + "/OntologyClass:" + ontClass.name} title="Edit this class on the Wiki">edit</a>)</small>
+            <small>(<a href={Server.wikiPagesUrl + "/OntologyClass:" + ontClass.name} title="Edit this class on the Wiki">edit</a>)</small>
         }
         case _ =>
         {
-            //No edit link
-            Elem
+            // No edit link
         }
     }
 
     private def createEditLink(p : OntologyProperty) =
     {
-        <small>(<a href={Server.config.wikiPagesUrl + "/OntologyProperty:" + p.name} title="Edit this property on the Wiki">edit</a>)</small>
+        <small>(<a href={Server.wikiPagesUrl + "/OntologyProperty:" + p.name} title="Edit this property on the Wiki">edit</a>)</small>
     }
 }

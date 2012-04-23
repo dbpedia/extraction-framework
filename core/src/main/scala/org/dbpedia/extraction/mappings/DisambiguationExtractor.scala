@@ -24,7 +24,7 @@ class DisambiguationExtractor( context : {
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if (page.title.namespace == WikiTitle.Namespace.Main && page.isDisambiguation)
+        if (page.title.namespace == Namespace.Main && page.isDisambiguation)
         {
             val allLinks = collectInternalLinks(page)
             val cleanPageTitle = page.title.decoded.replace(replaceString, "")

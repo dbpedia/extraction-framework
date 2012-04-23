@@ -1,32 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <artifactId>main</artifactId>
-        <groupId>org.dbpedia.extraction</groupId>
-        <version>2.0-SNAPSHOT</version>
+        <groupId>org.dbpedia</groupId>
+        <artifactId>extraction</artifactId>
+        <version>3.8-SNAPSHOT</version>
     </parent>
 
+    <groupId>org.dbpedia.extraction</groupId>
     <artifactId>live</artifactId>
     <name>Live extraction</name>
-    <!--
-      <properties>
-        <junit.version>4.8.1</junit.version>
-      </properties>
-    -->
-    <!--
-	<build>
-	  <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <skipTests>false</skipTests>
-            </configuration>
-          </plugin>
-		</plugins>
-	</build>
-	-->
 
     <dependencies>
 
@@ -38,7 +22,7 @@
         <dependency>
             <groupId>org.dbpedia.extraction</groupId>
             <artifactId>dump</artifactId>
-            <version>${dbpedia.framework.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -66,9 +50,11 @@
             <version>0.1.12</version>
         </dependency>
 
+        <!-- TODO: find a version in a public repo. -->
         <dependency>
             <groupId>org.openrdf</groupId>
             <artifactId>openrdf</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
@@ -90,33 +76,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.openanzo</groupId>
-            <artifactId>anzo-client-jena</artifactId>
-            <version>2.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jbind</groupId>
-            <artifactId>jbind</artifactId>
-            <version>1.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.ini4j</groupId>
             <artifactId>ini4j</artifactId>
             <version>0.5.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hp.hpl.jena</groupId>
-            <artifactId>jena</artifactId>
-            <version>2.6.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hp.hpl.jena</groupId>
-            <artifactId>arq</artifactId>
-            <version>2.8.3</version>
         </dependency>
 
         <!-- XStream for xml serialization (of jena result sets) -->
@@ -124,6 +86,13 @@
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.3.1</version>
+        </dependency>
+
+        <!-- TODO: find a version in a public repo. -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>1.1</version>
         </dependency>
 
         <dependency>
@@ -134,12 +103,11 @@
 
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.9.0</artifactId>
-            <version>1.6.1</version>
+            <artifactId>scalatest_2.9.1</artifactId>
+            <version>1.7.1</version>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
-
 
 </project>

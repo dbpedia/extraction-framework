@@ -17,10 +17,12 @@ class ServerExtractionContext(lang : Language, extractionManager : ExtractionMan
 
     def redirects : Redirects = _redirects
 
-    private lazy val _redirects = Redirects.load(new MemorySource(), lang)
+    private lazy val _redirects = new Redirects(Map())
 
+    // TODO: remove this, only used by MappingExtractor
     def mappingPageSource : Traversable[PageNode] = extractionManager.mappingPageSource(lang)
 
+    // TODO: remove this, only used by MappingExtractor
     def mappings : Mappings = extractionManager.mappings(lang)
 
     // not needed in server: commonsSource

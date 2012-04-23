@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping nl:Infobox acteur</title><ns>216</ns><id>2915</id><revision><id>10755</id><text>{{TemplateMapping
+| mapToClass = Actor
+| mappings =
+        {{PropertyMapping | templateProperty = naam | ontologyProperty = foaf:name}}
+        {{PropertyMapping | templateProperty = geboren | ontologyProperty = birthDate }}
+        {{PropertyMapping | templateProperty = beroep | ontologyProperty = occupation }}
+}}</text></revision></page><page><title>Mapping nl:Infobox ambtsbekleder</title><ns>216</ns><id>4105</id><revision><id>14005</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+        {{PropertyMapping | templateProperty = naam | ontologyProperty = foaf:name}}
+        {{PropertyMapping | templateProperty = geboren | ontologyProperty = birthDate }}
+}}</text></revision></page><page><title>Mapping nl:Infobox federaal minister België</title><ns>216</ns><id>2911</id><revision><id>10740</id><text>{{TemplateMapping
+| mapToClass = Politician
+| mappings =
+	{{PropertyMapping | templateProperty = naam | ontologyProperty = foaf:name}}
+	{{PropertyMapping | templateProperty = geboren | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = geboren_in | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = gestorven | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = gestorven_in | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = religie | ontologyProperty = religion }}
+	{{PropertyMapping | templateProperty = beroep | ontologyProperty = occupation }}
+	{{PropertyMapping | templateProperty = partner | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = partij | ontologyProperty = party }}
+	{{PropertyMapping | templateProperty = opvolger | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger1 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger2 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger3 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger4 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger5 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger6 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger7 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger8 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger9 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = voorganger | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger1 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger2 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger3 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger4 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger5 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger6 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger7 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger8 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger9 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = start_periode | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode1 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode2 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode3 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode4 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode5 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode6 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode7 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode8 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode9 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = eind_periode | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode1 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode2 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode3 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode4 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode5 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode6 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode7 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode8 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode9 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = monarch | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = vice-premier | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier1 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier2 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier3 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier4 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier5 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier6 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier7 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier8 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier9 | ontologyProperty = vicePrimeMinister }}
+
+}}</text></revision></page><page><title>Mapping nl:Infobox gemeente België</title><ns>216</ns><id>2913</id><revision><id>10742</id><text>{{ConditionalMapping
+ | cases =
+  {{Condition
+    | templateProperty = soort
+    | operator = equals
+    | value = Stad
+    | mapping = {{TemplateMapping
+                   | mapToClass = Town
+                }}
+  }}
+
+  {{Condition
+    | operator = otherwise
+    | mapping = {{TemplateMapping
+                   | mapToClass = Settlement
+                }}
+  }}
+
+  | defaultMappings =
+&lt;!-- Dutch properties --&gt;
+	{{PropertyMapping | templateProperty = naam | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = provincie | ontologyProperty = department }}
+	{{PropertyMapping | templateProperty = provincie | ontologyProperty = administrativeDistrict }}
+	{{PropertyMapping | templateProperty = burgemeester | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = postcode | ontologyProperty = postalCode }}
+	{{PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = netnummer | ontologyProperty = areaCode }}
+}}</text></revision></page><page><title>Mapping nl:Infobox minister Vlaanderen</title><ns>216</ns><id>2912</id><revision><id>10741</id><text>{{TemplateMapping
+| mapToClass = Politician
+| mappings =
+	{{PropertyMapping | templateProperty = naam | ontologyProperty = foaf:name}}
+	{{PropertyMapping | templateProperty = geboren | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = geboren_in | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = gestorven | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = gestorven_in | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = religie | ontologyProperty = religion }}
+	{{PropertyMapping | templateProperty = beroep | ontologyProperty = occupation }}
+	{{PropertyMapping | templateProperty = partner | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = partij | ontologyProperty = party }}
+	{{PropertyMapping | templateProperty = opvolger | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger1 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger2 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger3 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger4 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger5 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger6 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger7 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger8 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = opvolger9 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = voorganger | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger1 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger2 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger3 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger4 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger5 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger6 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger7 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger8 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = voorganger9 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = start_periode | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode1 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode2 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode3 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode4 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode5 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode6 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode7 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode8 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = start_periode9 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = eind_periode | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode1 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode2 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode3 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode4 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode5 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode6 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode7 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode8 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = eind_periode9 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = monarch | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = vice-premier | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier1 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier2 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier3 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier4 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier5 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier6 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier7 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier8 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = vice-premier9 | ontologyProperty = vicePrimeMinister }}
+
+}}</text></revision></page><page><title>Mapping nl:Infobox software</title><ns>216</ns><id>2910</id><revision><id>10738</id><text>{{TemplateMapping
+| mapToClass = Software
+| mappings =
+	{{PropertyMapping | templateProperty = naam | ontologyProperty = foaf:name}}
+	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:page}}
+	{{PropertyMapping | templateProperty = licentie | ontologyProperty = license}}
+	{{PropertyMapping | templateProperty = categorie | ontologyProperty = category}}
+	{{PropertyMapping | templateProperty = besturingssysteem | ontologyProperty = operatingSystem}}
+}}</text></revision></page></mediawiki>

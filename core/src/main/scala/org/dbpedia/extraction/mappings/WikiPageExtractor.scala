@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
@@ -19,7 +19,7 @@ class WikiPageExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return new Graph()
         
         var quads = List[Quad]()
 

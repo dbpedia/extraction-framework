@@ -3,152 +3,199 @@ package org.dbpedia.extraction.util
 import java.util.Locale
 
 /**
- * Represents a Wikipedia language.
+ * Represents a MediaWiki instance and the language used on it. Initially, this class was
+ * only used for xx.wikipedia.org instances, but now we also use it for mappings.dbpedia.org.
+ * For each language, there is only one instance of this class.
+ * TODO: rename this class to WikiCode or so, add a value for mappings.dbpedia.org.
  */
-class Language(val wikiCode : String, val locale : Locale)
+class Language private(val wikiCode : String, val isoCode: String) extends Serializable
 {
+    // TODO: make this transient and add a readObject method. Better yet: never use Serializable
+    val locale = new Locale(isoCode)
+    
+    /** 
+     * Note that Wikipedia dump files use this prefix (with underscores), 
+     * but Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
+     */
     val filePrefix = wikiCode.replace("-", "_")
-
-    override def toString() = locale.toString
-
-    override def equals(other : Any) = other match
-    {
-        case otherLang : Language => (wikiCode == otherLang.wikiCode)
-        case _ => false
-    }
-
-    override def hashCode = wikiCode.hashCode
+    
+    /**
+     */
+    override def toString = "wiki="+wikiCode+",locale="+locale.getLanguage
+    
+    // no need to override equals() and hashCode() - there is only one object for each value, so equality means identity. 
 }
 
-object Language
+object Language extends (String => Language)
 {
-    val Default = new Language("en", new Locale("en"))
-
-    /**
-     * Gets a language object from a ISO-639-1 language code
-     */
-    def fromISOCode(isoCode : String) : Option[Language] =
-    {
-        if(Locale.getISOLanguages.contains(isoCode))
-        {
-            Some(new Language(isoCode, new Locale(isoCode)))
-        }
-        else
-        {
-            None
-        }
-    }
-
-    /**
-     * Gets a language object from a Wikipedia language code
-     */
-    def fromWikiCode(wikiCode : String) : Option[Language] = nonIsoWpCodes.get(wikiCode).getOrElse(wikiCode) match
-    {
-        case isoCode : String if Locale.getISOLanguages.contains(isoCode) => Some(new Language(wikiCode, new Locale(isoCode)))
-        case _ => None
-    }
-
-    /**
-     * Maps Wikipedia language codes which do not follow ISO-639-1, to a related ISO-639-1 code.
-     * See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
-     * Mappings are mostly based on similarity of the languages and in some cases on the regions where a related language is spoken.
-     */
-    protected[util] val nonIsoWpCodes = Map(
-        "war" -> "tl",           // Waray-Waray language
-        "new" -> "ne",           // Newar / Nepal Bhasa
-        "simple" -> "en",        // simple English
-        "roa-rup" -> "ro",       // Aromanian
-        "ceb" -> "tl",           // Cebuano
-        "sh" -> "hr",            // Serbo-Croatian (could also be sr)
-        "pms" -> "it",           // Piedmontese
-        "be-x-old" -> "be",      // Belarusian (Taraskievica)
-        "bpy" -> "bn",           // Bishnupriya Manipuri
-        "ksh" -> "de",           // Ripuarian
-        "lmo" -> "it",           // Lombard
-        "nds" -> "de",           // Low Saxon
-        "scn" -> "it",           // Sicilian
-        "zh-yue" -> "zh",        // Cantonese
-        "ast" -> "es",           // Asturian
-        "nap" -> "it",           // Neapolitan
-        "bat-smg" -> "lt",       // Samogitian
-        "roa-tara" -> "it",      // Tarantino
-        "vec" -> "it",           // Venetian
-        "pnb" -> "pa",           // Western Panjabi
-        "zh-min-nan" -> "zh",    // Minnan
-        "pam" -> "tl",           // Kapampangan
-        "sah" -> "ru",           // Sakha
-        "als" -> "sq",           // Tosk Albanian
-        "arz" -> "ar",           // Egyptian Arabic
-        "nah" -> "es",           // Nahuatl
-        "hsb" -> "pl",           // Upper Sorbian
-        "glk" -> "fa",           // Gilaki
-        "gan" -> "zh",           // Gan Chinese
-        "bcl" -> "tl",           // Central Bicolano
-        "fiu-vro" -> "et",       // Voro
-        "nds-nl" -> "de",        // Dutch Low Saxon
-        "vls" -> "nl",           // West Flemish
-        "sco" -> "en",           // Scots
-        "bar" -> "de",           // Bavarian
-        "nrm" -> "fr",           // Norman
-        "pag" -> "tl",           // Pangasinan
-        "map-bms" -> "jv",       // Banyumasan
-        "diq" -> "tr",           // Zazaki
-        "ckb" -> "ku",           // Sorani
-        "wuu" -> "zh",           // Wu Chinese
-        "mzn" -> "fa",           // Mazandarani
-        "fur" -> "it",           // Friulian
-        "lij" -> "it",           // Ligurian
-        "nov" -> "ia",           // Novial
-        "csb" -> "pl",           // Kashubian
-        "ilo" -> "tl",           // Ilokano
-        "zh-classical" -> "zh",  // Classical Chinese
-        "lad" -> "he",           // Judaeo-Spanish
-        "ang" -> "en",           // Anglo-Saxon / Old English
-        "cbk-zam" -> "es",       // Zamboanga Chavacano
-        "frp" -> "it",           // Franco-Provencal
-        "hif" -> "hi",           // Fiji Hindi
-        "hak" -> "zh",           // Hakka Chinese
-        "xal" -> "ru",           // Kalmyk
-        "pdc" -> "de",           // Pennsylvania German
-        "szl" -> "pl",           // Silesian
-        "haw" -> "en",           // Hawaiian
-        "stq" -> "de",           // Saterland Frisian
-        "crh" -> "tr",           // Crimean Tatar
-        "ace" -> "id",           // Acehnese
-        "myv" -> "ru",           // Erzya
-        "krc" -> "ru",           // Karachay-Balkar
-        "ext" -> "es",           // Extremaduran
-        "mhr" -> "ru",           // Mari
-        "arc" -> "tr",           // Assyrian Neo-Aramaic
-        "eml" -> "it",           // Emilian-Romagnol
-        "jbo" -> "en",           // Lojban
-        "pcd" -> "fr",           // Picard
-        "kab" -> "ar",           // Kabyle
-        "frr" -> "de",           // North Frisian
-        "tpi" -> "en",           // Tok Pisin
-        "pap" -> "pt",           // Papiamento
-        "zea" -> "nl",           // Zeelandic
-        "srn" -> "nl",           // Sranan Tongo
-        "udm" -> "ru",           // Udmurt
-        "dsb" -> "pl",           // Lower Sorbian
-        "tum" -> "ny",           // Tumbuka
-        "rmy" -> "ro",           // Romani
-        "mwl" -> "pt",           // Mirandese
-        "mdf" -> "ru",           // Moksha
-        "kaa" -> "uz",           // Karakalpak
-        "tet" -> "id",           // Tetum
-        "got" -> "it",           // Gothic
-        "pih" -> "en",           // Norfuk
-        "pnt" -> "el",           // Pontic Greek
-        "chr" -> "en",           // Cherokee
-        "cdo" -> "zh",           // Min Dong
-        "bug" -> "id",           // Buginese
-        "bxr" -> "ru",           // Buryat
-        "lbe" -> "ru",           // Lak
-        "chy" -> "en",           // Cheyenne
-        "cho" -> "en",           // Choctaw
-        "mus" -> "en",           // Muscogee / Creek
-        "nan" -> "zh"            // redirect to zh-min-nan
+  val Values =
+  {
+    val languages = new collection.mutable.HashMap[String,Language]
+    
+    // All two-letter codes from http://noc.wikimedia.org/conf/langlist as of 2012-04-15,
+    // minus the redirected codes cz,dk,jp,sh (they are in the nonIsoCodes map below)
+    // TODO: Automate this process. Or rather, download this list dynamically. Don't generate code.
+    val isoCodes = Set(
+      "aa","ab","af","ak","am","an","ar","as","av","ay","az","ba","be","bg","bh","bi","bm","bn",
+      "bo","br","bs","ca","ce","ch","co","cr","cs","cu","cv","cy","da","de","dv","dz","ee","el",
+      "en","eo","es","et","eu","fa","ff","fi","fj","fo","fr","fy","ga","gd","gl","gn","gu","gv",
+      "ha","he","hi","ho","hr","ht","hu","hy","hz","ia","id","ie","ig","ii","ik","io","is","it",
+      "iu","ja","jv","ka","kg","ki","kj","kk","kl","km","kn","ko","kr","ks","ku","kv","kw","ky",
+      "la","lb","lg","li","ln","lo","lt","lv","mg","mh","mi","mk","ml","mn","mo","mr","ms","mt",
+      "my","na","nb","ne","ng","nl","nn","no","nv","ny","oc","om","or","os","pa","pi","pl","ps",
+      "pt","qu","rm","rn","ro","ru","rw","sa","sc","sd","se","sg","si","sk","sl","sm","sn","so",
+      "sq","sr","ss","st","su","sv","sw","ta","te","tg","th","ti","tk","tl","tn","to","tr","ts",
+      "tt","tw","ty","ug","uk","ur","uz","ve","vi","vo","wa","wo","xh","yi","yo","za","zh","zu"
     )
+    
+    // Maps Wikipedia language codes which do not follow ISO-639-1, to a related ISO-639-1 code.
+    // See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
+    // Mappings are mostly based on similarity of the languages and in some cases on the regions where a related language is spoken.
+    // See NonIsoLanguagesMappingTest and run it regularly.
+    val nonIsoCodes = Map(
+      "ace" -> "id",           // Acehnese
+      "als" -> "sq",           // Tosk Albanian
+      "ang" -> "en",           // Anglo-Saxon / Old English
+      "arc" -> "tr",           // Assyrian Neo-Aramaic
+      "arz" -> "ar",           // Egyptian Arabic
+      "ast" -> "es",           // Asturian
+      "bar" -> "de",           // Bavarian
+      "bat-smg" -> "lt",       // Samogitian
+      "bcl" -> "tl",           // Central Bicolano
+      "be-x-old" -> "be",      // Belarusian (Taraskievica)
+      "bjn" -> "id",
+      "bpy" -> "bn",           // Bishnupriya Manipuri
+      "bug" -> "id",           // Buginese
+      "bxr" -> "ru",           // Buryat
+      "cbk-zam" -> "es",       // Zamboanga Chavacano
+      "cdo" -> "zh",           // Min Dong
+      "ceb" -> "tl",           // Cebuano
+      "cho" -> "en",           // Choctaw
+      "chr" -> "en",           // Cherokee
+      "chy" -> "en",           // Cheyenne
+      "ckb" -> "ku",           // Sorani
+      "commons" -> "en",       // commons uses en, mostly
+      "crh" -> "tr",           // Crimean Tatar
+      "csb" -> "pl",           // Kashubian
+      "cz"  -> "cs",
+      "diq" -> "tr",           // Zazaki
+      "dk"  -> "da",
+      "dsb" -> "pl",           // Lower Sorbian
+      "eml" -> "it",           // Emilian-Romagnol
+      "epo" -> "eo",
+      "ext" -> "es",           // Extremaduran
+      "fiu-vro" -> "et",       // Voro
+      "frp" -> "it",           // Franco-Provencal
+      "frr" -> "de",           // North Frisian
+      "fur" -> "it",           // Friulian
+      "gag" -> "tr",
+      "gan" -> "zh",           // Gan Chinese
+      "glk" -> "fa",           // Gilaki
+      "got" -> "it",           // Gothic --- Italian???
+      "hak" -> "zh",           // Hakka Chinese
+      "haw" -> "en",           // Hawaiian
+      "hif" -> "hi",           // Fiji Hindi
+      "hsb" -> "pl",           // Upper Sorbian
+      "ilo" -> "tl",           // Ilokano
+      "jbo" -> "en",           // Lojban
+      "jp"  -> "ja",
+      "kaa" -> "uz",           // Karakalpak
+      "kab" -> "ar",           // Kabyle
+      "kbd" -> "ru",
+      "koi" -> "ru",
+      "krc" -> "ru",           // Karachay-Balkar
+      "ksh" -> "de",           // Ripuarian
+      "lad" -> "he",           // Judaeo-Spanish
+      "lbe" -> "ru",           // Lak
+      "lez" -> "ru",
+      "lij" -> "it",           // Ligurian
+      "lmo" -> "it",           // Lombard
+      "ltg" -> "lv",
+      "map-bms" -> "jv",       // Banyumasan
+      "mdf" -> "ru",           // Moksha
+      "mhr" -> "ru",           // Mari
+      "minnan" -> "zh",
+      "mrj" -> "ru",
+      "mus" -> "en",           // Muscogee / Creek
+      "mwl" -> "pt",           // Mirandese
+      "myv" -> "ru",           // Erzya
+      "mzn" -> "fa",           // Mazandarani
+      "nah" -> "es",           // Nahuatl
+      "nan" -> "zh",           // redirect to zh-min-nan
+      "nap" -> "it",           // Neapolitan
+      "nds" -> "de",           // Low Saxon
+      "nds-nl" -> "de",        // Dutch Low Saxon  --- should probably map to nl
+      "new" -> "ne",           // Newar / Nepal Bhasa
+      "nov" -> "ia",           // Novial
+      "nrm" -> "fr",           // Norman
+      "nso" -> "st",
+      "pag" -> "tl",           // Pangasinan
+      "pam" -> "tl",           // Kapampangan
+      "pap" -> "pt",           // Papiamento
+      "pcd" -> "fr",           // Picard
+      "pdc" -> "de",           // Pennsylvania German
+      "pfl" -> "de",
+      "pih" -> "en",           // Norfuk
+      "pms" -> "it",           // Piedmontese
+      "pnb" -> "pa",           // Western Panjabi
+      "pnt" -> "el",           // Pontic Greek
+      "rmy" -> "ro",           // Romani
+      "roa-rup" -> "ro",       // Aromanian
+      "roa-tara" -> "it",      // Tarantino
+      "rue" -> "uk",
+      "sah" -> "ru",           // Sakha
+      "scn" -> "it",           // Sicilian
+      "sco" -> "en",           // Scots
+      "sh" -> "hr",            // Serbo-Croatian (could also be sr)
+      "simple" -> "en",        // simple English
+      "srn" -> "nl",           // Sranan Tongo
+      "stq" -> "de",           // Saterland Frisian
+      "szl" -> "pl",           // Silesian
+      "tet" -> "id",           // Tetum
+      "tpi" -> "en",           // Tok Pisin
+      "tum" -> "ny",           // Tumbuka
+      "udm" -> "ru",           // Udmurt
+      "vec" -> "it",           // Venetian
+      "vep" -> "fi",
+      "vls" -> "nl",           // West Flemish
+      "war" -> "tl",           // Waray-Waray language
+      "wuu" -> "zh",           // Wu Chinese
+      "xal" -> "ru",           // Kalmyk
+      "xmf" -> "ka",
+      "zea" -> "nl",           // Zeelandic
+      "zh-cfr" -> "zh",
+      "zh-classical" -> "zh",  // Classical Chinese
+      "zh-min-nan" -> "zh",    // Minnan
+      "zh-yue" -> "zh"         // Cantonese
+    )
+    
+    for (iso <- isoCodes) languages(iso) = new Language(iso, iso)
 
+    // We could throw an exception if the mapped ISO code is not in the set of ISO codes, but then 
+    // this class (and thus the whole system) wouldn't load, and that set may change depending on 
+    // JDK version, and the affected wiki code may not even be used. Just silently ignore it. 
+    // TODO: let this loop build a list of codes with bad mappings and throw the exception later.
+    for ((code, iso) <- nonIsoCodes; if (isoCodes.contains(iso))) languages(code) = new Language(code, iso)
+    
+    languages.toMap // toMap makes immutable
+  }
+  
+  // TODO: remove this. It is too often used in error.
+  val Default = Values("en")
+  
+  /**
+   * Gets a language object for a Wikipedia language code.
+   * Throws IllegalArgumentException if language code is unknown.
+   */
+  def apply( code: String ) : Language = Values.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
+  
+  /**
+   * Gets a language object for a Wikipedia language code, or None if given code is unknown.
+   */
+  def get(code: String) : Option[Language] = Values.get(code)
+  
+  /**
+   * Gets a language object for a Wikipedia language code, or the default if the given code is unknown.
+   */
+  def getOrElse(code: String, default: => Language) : Language = Values.getOrElse(code, default)
 }

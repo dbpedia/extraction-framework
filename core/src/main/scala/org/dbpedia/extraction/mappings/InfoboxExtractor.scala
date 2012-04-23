@@ -4,7 +4,7 @@ import collection.mutable.HashSet
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
@@ -30,7 +30,6 @@ class InfoboxExtractor( context : {
     private val language = context.language.wikiCode
 
     private val usesTemplateProperty = OntologyNamespaces.getProperty("wikiPageUsesTemplate", context.language)
-    //private val usesTemplateProperty = OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + "wikiPageUsesTemplate"
 
     private val MinPropertyCount = 2
 
@@ -66,7 +65,7 @@ class InfoboxExtractor( context : {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private val unitValueParsers = context.ontology.datatypes
-                                   .filter(_.isInstanceOf[DimensionDatatype]).map(_.asInstanceOf[DimensionDatatype])
+                                   .filter(_.isInstanceOf[DimensionDatatype])
                                    .map(dimension => new UnitValueParser(context, dimension, true))
 
     private val intParser = new IntegerParser(context, true)
@@ -88,20 +87,19 @@ class InfoboxExtractor( context : {
     
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return new Graph()
         
         var quads = List[Quad]()
 
         val seenTemplates = new HashSet[String]()
 
         /** Retrieve all templates on the page which are not ignored */
-        val templateList = for(template <- collectTemplates(node);
-                               resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase;
-                               if !ignoreTemplates.contains(resolvedTitle);
-                               if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) )
-                               yield template
-
-        templateList.foreach(template => {
+        for { template <- collectTemplates(node)
+          resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
+          if !ignoreTemplates.contains(resolvedTitle)
+          if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
+        }
+        {
             val propertyList = template.children.filterNot(property => ignoreProperties.get(language).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
             var propertiesFound = false
@@ -124,6 +122,9 @@ class InfoboxExtractor( context : {
                             quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             //#int #statistics uncomment the following 2 lines (do not delete)
+                            // FIXME: why replace \n and \t by space? A URI containing spaces is invalid.
+                            // If it's just about \n and \t at the end, that's unnecessary - 
+                            // trim removes all whitespace, not just " ".
                             val stat_template = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language).replace("\n", " ").replace("\t", " ").trim
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
                             quads ::= new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
@@ -157,7 +158,7 @@ class InfoboxExtractor( context : {
                     seenTemplates.add(template.title.encoded)
                 }
             }
-        })
+        }
         
         new Graph(quads)
     }
@@ -252,11 +253,15 @@ class InfoboxExtractor( context : {
 
         splitNodes.flatMap(splitNode => objectParser.parse(splitNode)) match
         {
+            // TODO: explain why we check links.size == splitNodes.size
             case links if links.size == splitNodes.size => return links.map(link => (link, null))
             case _ => List.empty
         }
+        
         splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
         {
+            // TODO: explain why we check links.size == splitNodes.size
+            // FIXME: cleanLink converts IRIs to URIs
             case links if links.size == splitNodes.size => links.map(UriUtils.cleanLink).collect{case Some(link) => (link, null)}
             case _ => List.empty
         }
@@ -269,12 +274,15 @@ class InfoboxExtractor( context : {
         result = result.toCamelCase(SplitWordsRegex, context.language.locale)
 
         // Replace digits at the beginning of a property with _. E.g. 01propertyName => _01propertyName (edited by Piet)
+        // TODO: this probably was an attempt to avoid property names that cannot be used
+        // as XML element names, but there are many other such cases. All these cases can
+        // be fixed by appending an underscore at the *end*, not in the *front*.
         result = LeadingNumberRegex.replaceFirstIn(result, "_" + result)
 
         // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
         result = TrailingNumberRegex.replaceFirstIn(result, "")
 
-        result = WikiUtil.wikiEncode(result, context.language, false)  // false: do not capitalize
+        result = WikiUtil.wikiEncode(result, context.language, capitalize = false)
 
         //TODO add this as option in settings
         //result = result.replace("%", "_percent_")

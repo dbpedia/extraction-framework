@@ -11,9 +11,9 @@ import java.io.{FileReader, File}
 import _root_.org.dbpedia.extraction.util.StringUtils._
 import _root_.org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{MemorySource, WikiSource, XMLSource, Source}
-import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{StringDestination, FileDestination, CompositeDestination}
-import org.dbpedia.extraction.dump.ExtractionJob
+// import org.dbpedia.extraction.dump.ExtractionJob
 import java.util.logging.{Level, Logger}
 import java.awt.event.{ActionListener, ActionEvent}
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
@@ -43,17 +43,17 @@ object LiveExtractionConfigLoader extends ActionListener
 
 //    private var config : Config = null;
     private var extractors : List[Extractor] = null;
-    private var CurrentJob : ExtractionJob = null;
+    // private var CurrentJob : ExtractionJob = null;
     private var reloadOntologyAndMapping = true;
     val logger = Logger.getLogger("LiveExtractionConfigLoader");
 
    /** Ontology source */
-    val ontologySource = WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
+    val ontologySource = WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                                    url = new URL("http://mappings.dbpedia.org/api.php"),
                                                    language = Language.Default );
 
     /** Mappings source */
-    val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.Mapping),
+    val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.Default)),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
                                                         language = Language.Default );
   
@@ -144,9 +144,9 @@ object LiveExtractionConfigLoader extends ActionListener
       val parser = WikiParser()
         articlesSource.foreach(CurrentWikiPage =>
                 {
-                 if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.Main ||
-                    CurrentWikiPage.title.namespace == WikiTitle.Namespace.File ||
-                    CurrentWikiPage.title.namespace == WikiTitle.Namespace.Category)
+                 if(CurrentWikiPage.title.namespace == Namespace.Main ||
+                    CurrentWikiPage.title.namespace == Namespace.File ||
+                    CurrentWikiPage.title.namespace == Namespace.Category)
                    {
                       val TempDest = new  StringDestination();
                       //println(CurrentWikiPage.title.namespace);
@@ -252,14 +252,14 @@ object LiveExtractionConfigLoader extends ActionListener
             {
               /*println(CurrentWikiPage.title.namespace.toString)
 
-              if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.UserTalk || CurrentWikiPage.title.namespace == WikiTitle.Namespace.User){
+              if(CurrentWikiPage.title.namespace == Namespace.UserTalk || CurrentWikiPage.title.namespace == Namespace.User){
                 logger.info("User or user ctalk");
                 return ;
               }*/
 
-             if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.Main ||
-                CurrentWikiPage.title.namespace == WikiTitle.Namespace.File ||
-                CurrentWikiPage.title.namespace == WikiTitle.Namespace.Category)
+             if(CurrentWikiPage.title.namespace == Namespace.Main ||
+                CurrentWikiPage.title.namespace == Namespace.File ||
+                CurrentWikiPage.title.namespace == Namespace.Category)
                {
                  val TempDest = new  StringDestination();
                  val CurrentPageNode = parser(CurrentWikiPage)
@@ -354,22 +354,22 @@ object LiveExtractionConfigLoader extends ActionListener
    * @ param  list  The required java list
    * @return  The newly generated scala list
    */
-  private def convertExtractorListToScalaList(list : java.util.List[Class[Extractor]]): List[Class[Extractor]] =
+  private def convertExtractorListToScalaList(list : java.util.List[Class[_ <: Extractor]]): List[Class[_ <: Extractor]] =
     {
-      var extractorList =  List[Class[Extractor]]();
+      var extractorList =  List[Class[_ <: Extractor]]();
 
       val listiterator = list.iterator();
       while(listiterator.hasNext){
-        extractorList = extractorList ::: List[Class[Extractor]](listiterator.next());
+        extractorList = extractorList ::: List[Class[_ <: Extractor]](listiterator.next());
       }
       println(extractorList);
       extractorList;
     }
 
-  private def convertExtractorMapToScalaMap(map: java.util.Map[Language, java.util.List[Class[Extractor]]]):
-                    Map[Language, List[Class[Extractor]]] =
+  private def convertExtractorMapToScalaMap(map: java.util.Map[Language, java.util.List[Class[_ <: Extractor]]]):
+                    Map[Language, List[Class[_ <: Extractor]]] =
     {
-      var extractorMap =  Map[Language, List[Class[Extractor]]]();
+      var extractorMap =  Map[Language, List[Class[_ <: Extractor]]]();
 
       val mapIterator = map.entrySet.iterator();
       while(mapIterator.hasNext){
@@ -401,8 +401,7 @@ object LiveExtractionConfigLoader extends ActionListener
         /** Languages */
         if(config.getProperty("languages") == null)
           throw new IllegalArgumentException("Property 'languages' is not defined.")
-        private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList
-                        .map(code => Language.fromWikiCode(code).getOrElse(throw new IllegalArgumentException("Invalid language: '" + code + "'")))
+        private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList.map(Language)
 
       /** The period of updating ontology and mappings**/
         if(config.getProperty("updateOntologyAndMappingsPeriod") == null)
@@ -417,12 +416,12 @@ object LiveExtractionConfigLoader extends ActionListener
         val extractors = loadExtractorClasses()
 
         /** Ontology source */
-        val ontologySource = WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
+        val ontologySource = WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                                        url = new URL("http://mappings.dbpedia.org/api.php"),
                                                        language = Language.Default );
 
         /** Mappings source */
-        val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.Mapping),
+        val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.Default)),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
                                                         language = Language.Default );
 //        var pagecount :Long = 0;
@@ -443,7 +442,7 @@ object LiveExtractionConfigLoader extends ActionListener
 //      println(pagecount);
 
         /** Commons source */
-//        val commonsSource = XMLSource.fromFile(getDumpFile("commons"), _.namespace == WikiTitle.Namespace.File)
+//        val commonsSource = XMLSource.fromFile(getDumpFile("commons"), _.namespace == Namespace.File)
 
         /**
          * Retrieves the dump stream for a specific language edition.
@@ -454,21 +453,21 @@ object LiveExtractionConfigLoader extends ActionListener
          *
          * @return A Map which contains the extractor classes for each language
          */
-        private def loadExtractorClasses() : Map[Language, List[Class[Extractor]]] =
+        private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
         {
             //Load extractor classes
             if(config.getProperty("extractors") == null) throw new IllegalArgumentException("Property 'extractors' not defined.")
             val stdExtractors = loadExtractorConfig(config.getProperty("extractors"))
 
             //Create extractor map
-            var extractors = ListMap[Language, List[Class[Extractor]]]()
+            var extractors = ListMap[Language, List[Class[_ <: Extractor]]]()
             for(language <- languages) extractors += ((language, stdExtractors))
 
             //Load language specific extractors
             val LanguageExtractor = "extractors\\.(.*)".r
 
             for(LanguageExtractor(code) <- config.stringPropertyNames.toArray;
-                language = Language.fromISOCode(code).getOrElse(throw new IllegalArgumentException("Invalid language: " + code));
+                language = Language(code);
                 if extractors.contains(language))
             {
                 extractors += ((language, stdExtractors ::: loadExtractorConfig(config.getProperty("extractors." + code))))
@@ -480,11 +479,10 @@ object LiveExtractionConfigLoader extends ActionListener
         /**
          * Parses a enumeration of extractor classes.
          */
-        private def loadExtractorConfig(configStr : String) : List[Class[Extractor]] =
+        private def loadExtractorConfig(configStr : String) : List[Class[_ <: Extractor]] =
         {
             configStr.split("\\s+").map(_.trim).toList
-            .map(className => ClassLoader.getSystemClassLoader().loadClass(className))
-            .map(_.asInstanceOf[Class[Extractor]])
+            .map(className => ClassLoader.getSystemClassLoader().loadClass(className).asSubclass(classOf[Extractor]))
         }
     }
 

@@ -4,6 +4,7 @@ import _root_.org.dbpedia.extraction.sources.WikiPage
 import _root_.org.scalatest.matchers.ShouldMatchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.util.Language
 
 class BooleanParserTest extends FlatSpec with ShouldMatchers
 {
@@ -30,7 +31,7 @@ class BooleanParserTest extends FlatSpec with ShouldMatchers
 
     private def parse(input : String) : Option[Boolean] =
     {
-        val page = new WikiPage(WikiTitle.parse("TestPage"), 0, 0, input)
+        val page = new WikiPage(WikiTitle.parse("TestPage", Language.Default), null, 0, 0, input)
         
         BooleanParser.parse(parser(page))
     }

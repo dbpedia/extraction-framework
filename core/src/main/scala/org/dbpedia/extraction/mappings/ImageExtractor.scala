@@ -27,7 +27,7 @@ class ImageExtractor( context : {
 
     require(ImageExtractorConfig.supportedLanguages.contains(language), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
-    private val fileNamespaceIdentifier = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.File)
+    private val fileNamespaceIdentifier = Namespace.File.getName(context.language)
 
     private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + language +"/"
     private val commonsUrlPrefix = ImageExtractorConfig.wikipediaUrlPrefix + "commons/"
@@ -50,7 +50,7 @@ class ImageExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return new Graph()
         
         var quads = List[Quad]()
 
@@ -89,7 +89,7 @@ class ImageExtractor( context : {
                          textNode @ TextNode(text, _) <- property.children;
                          fileName <- ImageExtractorConfig.ImageRegex.findFirstIn(text);
                          encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
-                                               WikiUtil.wikiEncode(fileName, context.language)
+                                               WikiUtil.wikiEncode(fileName, context.language, true)
                                            else
                                                fileName
                          if checkImageRights(encodedFileName))
@@ -98,7 +98,7 @@ class ImageExtractor( context : {
                     }
                     searchImage(children, sections).foreach(s => return Some(s))
                 }
-                case (linkNode @ InternalLinkNode(destination, _, _, _)) if destination.namespace == WikiTitle.Namespace.File =>
+                case (linkNode @ InternalLinkNode(destination, _, _, _)) if destination.namespace == Namespace.File =>
                 {
                     for (fileName <- ImageExtractorConfig.ImageLinkRegex.findFirstIn(destination.encoded);
                          if checkImageRights(fileName))
@@ -138,7 +138,7 @@ class ImageExtractor( context : {
                 searchImage(children, sections).foreach(s => return Some(s))
                 return searchImage(tail, sections)
             }
-            case (linkNode @ InternalLinkNode(destination, _, _)) :: tail if destination.namespace == WikiTitle.Namespace.File =>
+            case (linkNode @ InternalLinkNode(destination, _, _)) :: tail if destination.namespace == Namespace.File =>
             {
                 for (fileName <- ImageLinkRegex.findFirstIn(destination.encoded);
                      if checkImageRights(fileName))
@@ -192,7 +192,7 @@ private object ImageExtractor
         val logger = Logger.getLogger(classOf[ImageExtractor].getName)
         val startTime = System.nanoTime
 
-        for(page <- source if page.title.namespace == WikiTitle.Namespace.File;
+        for(page <- source if page.title.namespace == Namespace.File;
             ImageExtractorConfig.ImageLinkRegex <- List(page.title.encoded) )
         {
             ImageExtractorConfig.NonFreeRegex(lang).findFirstIn(page.source) match
