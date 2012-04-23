@@ -21,5 +21,5 @@
 <body>
 <div class="menu">[ <a href="index.php">Current Statistics</a> | <a href="progression.php">Race Progression</a> | <a href="http://mappings.dbpedia.org/index.php/Mapping_Statistics">I want to race!</a> ]</div>
 <h1>DBpedia Mapping Sprint, Spring 2012 - Language Race</h1>
-<p>These statistics are gathered daily and displayed as percentages.</p>
+<p>These statistics are gathered 3x daily and displayed as percentages.</p>
 

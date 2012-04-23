@@ -1,5 +1,6 @@
 <?php require_once("header.php"); ?>
 
+
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
  
    <script type="text/javascript">
@@ -76,6 +77,7 @@ Object.size = function(obj) {
   </head>
 
   <body>
+    <p>Mouse over a line in that chart to see the language code, the date (year-month-date-hour) and the percentage of mappings for each category.</p>
     <div id="chart_div_property_occurrences"></div>
     <div id="chart_div_template_occurrences"></div>
     <div id="chart_div_templates"></div>
