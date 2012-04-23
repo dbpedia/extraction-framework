@@ -13,7 +13,7 @@ import java.net.URI
 import java.io.PrintWriter
 
 @Path("/statistics/{lang}/")
-class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String, @QueryParam("all") all: Boolean)
+class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String, @QueryParam("show") @DefaultValue("20") show: Int)
 {
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
@@ -40,28 +40,28 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     private val renameColor = "#b03060"
     private val ignoreColor = "#cdcdcd"
 
-    private def cookieQuery(sep: Char, all: Boolean = all) : String = {
+    private def cookieQuery(sep: Char, show: Int = show) : String = {
+      var vsep = sep
+      
       val sb = new StringBuilder
       
-      var vsep = sep
       if (Server.adminRights(password)) {
-        sb append sep append "p=" append password
+        sb append vsep append "p=" append password
         vsep = '&'
       }
       
-      if (all) sb append vsep append "all=true"
+      if (show != 20) { 
+        sb append vsep append "show=" append show
+        vsep = '&' // for future additions below
+      }
       
       sb toString
     }
       
-    private val minCount = Map("ar"->50,"bn"->50,"ca"->100,"cs"->100,"de"->100,"el"->50,"en"->500,"es"->100,"eu"->50,"fr"->200,"ga"->50,"hi"->50,"hr"->50,"hu"->50,"it"->100,"ko"->50,"nl"->200,"pl"->50,"pt"->50,"ru"->100,"sl"->10,"tr"->10)
-
     @GET
     @Produces(Array("application/xhtml+xml"))
     def get = {
       
-        val minCounter = minCount(language.wikiCode)
-        
         var statsMap = new mutable.HashMap[MappingStats, Int]
         for (mappingStat <- mappingStatistics) statsMap(mappingStat) = mappingStat.templateCount
         
@@ -137,7 +137,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                         <td bgcolor={ignoreColor}>template is on the ignorelist (is not an infobox that contains relevant properties)</td>
                     </tr>
                 </table>
-
+                <p align="center">View <a href={cookieQuery('?', 20)}>20</a><a href={cookieQuery('?', 100)}>100</a><a href={cookieQuery('?', 100000)}>all</a></p>
                 <table align="center">
                     <tr>
                         <td>occurrences</td> <td colspan="2">template (with link to property statistics)</td>
@@ -145,88 +145,89 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                         <td>num property occurrences</td> <td>mapped property occurrences (%)</td> <td></td>
                     </tr>
                     {
+                    var shown = 0
                     // TODO: Solve problem of templates for which no properties are found in the template documentation (e.g. Geobox).
-                    for ((mappingStat, counter) <- sortedStatsMap; if mappingStat.getNumberOfProperties > 0) yield
+                    for ((mappingStat, counter) <- sortedStatsMap if mappingStat.getNumberOfProperties > 0 && shown < show) yield
                     {
-                        if (all || counter >= minCounter || mappingStat.isMapped) { 
-                            val templateName = manager.templateNamespacePrefix + mappingStat.templateName
-                            val targetRedirect = reversedRedirects.get(templateName)
+                        shown += 1
+                        val templateName = manager.templateNamespacePrefix + mappingStat.templateName
+                        val targetRedirect = reversedRedirects.get(templateName)
 
-                            val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties * 100)
-                            val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences * 100)
-                            var mappingsWikiLink = mappingUrlPrefix + mappingStat.templateName
-                            var bgcolor: String =
-                                if(!mappingStat.isMapped)
+                        val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties * 100)
+                        val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences * 100)
+                        var mappingsWikiLink = mappingUrlPrefix + mappingStat.templateName
+                        var bgcolor: String =
+                            if(!mappingStat.isMapped)
+                            {
+                                notMappedColor
+                            }
+                            else
+                            {
+                                if(mappingStat.getRatioOfMappedPropertyOccurrences > goodThreshold)
                                 {
-                                    notMappedColor
+                                    mappedGoodColor
+                                }
+                                else if(mappingStat.getRatioOfMappedPropertyOccurrences > mediumThreshold)
+                                {
+                                    mappedMediumColor
                                 }
                                 else
                                 {
-                                    if(mappingStat.getRatioOfMappedPropertyOccurrences > goodThreshold)
-                                    {
-                                        mappedGoodColor
-                                    }
-                                    else if(mappingStat.getRatioOfMappedPropertyOccurrences > mediumThreshold)
-                                    {
-                                        mappedMediumColor
-                                    }
-                                    else
-                                    {
-                                        mappedBadColor
-                                    }
-                                }
-
-
-                            var mustRenamed : Boolean = false
-                            var redirectMsg = ""
-                            for (redirect <- targetRedirect)
-                            {
-                                if (mappingStat.isMapped)
-                                {
-                                    //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(createMappingStats.templateNamespacePrefix.length()) + " is redundant!"
-                                }
-                                else
-                                {
-                                    mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespacePrefix.length)
-                                    bgcolor = renameColor
-                                    mustRenamed = true
-                                    redirectMsg = "Mapping of " + redirect.substring(manager.templateNamespacePrefix.length) + " must be renamed to "
+                                    mappedBadColor
                                 }
                             }
 
-                            var isIgnored: Boolean = false
-                            var ignoreMsg: String = "add to ignore list"
-                            if (ignoreList.isTemplateIgnored(mappingStat.templateName))
-                            {
-                                isIgnored = true
-                                ignoreMsg = "remove from ignore list"
-                                bgcolor = ignoreColor
-                            }
 
-                            <tr bgcolor={bgcolor}>
+                        var mustRenamed : Boolean = false
+                        var redirectMsg = ""
+                        for (redirect <- targetRedirect)
+                        {
+                            if (mappingStat.isMapped)
+                            {
+                                //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(createMappingStats.templateNamespacePrefix.length()) + " is redundant!"
+                            }
+                            else
+                            {
+                                mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespacePrefix.length)
+                                bgcolor = renameColor
+                                mustRenamed = true
+                                redirectMsg = "Mapping of " + redirect.substring(manager.templateNamespacePrefix.length) + " must be renamed to "
+                            }
+                        }
+
+                        var isIgnored: Boolean = false
+                        var ignoreMsg: String = "add to ignore list"
+                        if (ignoreList.isTemplateIgnored(mappingStat.templateName))
+                        {
+                            isIgnored = true
+                            ignoreMsg = "remove from ignore list"
+                            bgcolor = ignoreColor
+                        }
+
+                        <tr bgcolor={bgcolor}>
                                     <td align="right">
                                     <a name={urlEncode(mappingStat.templateName)}/>
                                         {counter}
                                     </td>
                                 {
-                                if (mustRenamed)
-                                {
-                                    <td>
+                            if (mustRenamed)
+                            {
+                                <td>
                                             {redirectMsg}<a href={"../../templatestatistics/"+langCode+"/?template="+mappingStat.templateName+cookieQuery('&')}>
                                             {mappingStat.templateName}
                                         </a>
                                         </td>
-                                }
-                                else
-                                {
+                            }
+                            else
+                            {
 
-                                    <td>
+                                <td>
                                             <a href={"../../templatestatistics/"+langCode+"/?template="+mappingStat.templateName+cookieQuery('&')}>
                                                 {mappingStat.templateName}
                                             </a>{redirectMsg}
                                         </td>
-                                }
-                            }<td>
+                            }
+                        }<td>
                                     <a href={mappingsWikiLink}>
                                         Edit
                                     </a>
@@ -242,19 +243,18 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                                     {percentMappedPropOccur}
                                 </td>
                                     {if (Server.adminRights(password) && mappingStat.getNumberOfMappedProperties == 0)
-                                {
-                                    <td>
+                            {
+                                <td>
                                         <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+mappingStat.templateName+cookieQuery('&')}>
                                             {ignoreMsg}
                                         </a>
                                         </td>
-                                }}
+                            }}
                                 </tr>
-                            }
                         }
                     }
                 </table>
-                { if (! all) { <p align="center"><a href={cookieQuery('?', true)}>View all</a></p> } }
+                <p align="center">View <a href={cookieQuery('?', 20)}>20</a><a href={cookieQuery('?', 100)}>100</a><a href={cookieQuery('?', 100000)}>all</a></p>
             </body>
         </html>
     }
