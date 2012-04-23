@@ -1,0 +1,71 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DBpedia Mapping Sprint</title>
+<head>
+<style>
+@import "jquery.countdown.css";
+
+#intro {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  align: center;
+  text-align: center;
+}
+
+#main {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+#percentage {
+  font-size: 100pt;
+}
+#timeleft { width: 240px; height: 45px; }
+
+#percentage a {
+  color: black;
+  text-decoration: none;
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="jquery.countdown.js"></script>
+
+<script>
+window.onload = function() {
+
+  $.ajax({
+    url: "percentage.php",
+    success: function(data) { $('#percentage').html("<a href='http://mappings.dbpedia.org/server/statistics/en/'>"+$.parseJSON(data).percentage+"%</a>") }
+  });
+
+  var deadline = new Date(2012, 4, 28);    
+  $('#timeleft').countdown({until: deadline}); 
+
+  
+}
+</script>
+</head>
+<body>
+<div id=intro>
+<div>The LOD Community has been <a href="https://sourceforge.net/mailarchive/message.php?msg_id=29145274">challenged</a>:<br/> cover 90% of the template occurrences in the English Wikipedia by April 28th, 2012 - in time for the next DBpedia release.</div>
+<p>&nbsp;</p>
+</div>
+<div id=main>
+We have already mapped
+<div id="percentage">XX</div>
+of <a href="http://mappings.dbpedia.org/server/statistics/en/">Wikipedia template occurrences</a>.
+<p>&nbsp;</p>
+Time left:
+<center>
+<div id="timeleft"></div>
+</center>
+<p>&nbsp;</p>
+<div>Can we do it? Come help at <a href="http://mappings.dbpedia.org">mappings.dbpedia.org</a>.</div>
+</div>
+</span>
+</body>
+
