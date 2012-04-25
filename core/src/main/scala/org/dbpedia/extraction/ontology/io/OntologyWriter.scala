@@ -21,13 +21,13 @@ class OntologyWriter
         }
 
         //Write classes
-        for(clazz <- ontology.classes if clazz.name.indexOf(':') == -1)
+        for(clazz <- ontology.classes.values if clazz.name.indexOf(':') == -1)
         {
             writeClass(clazz, dir, specializations)
         }
 
         //Write properties
-        for(property <- ontology.properties if property.name.indexOf(':') == -1)
+        for(property <- ontology.properties.values if property.name.indexOf(':') == -1)
         {
             writeProperty(property, dir)
         }

@@ -14,15 +14,13 @@ class PageIdExtractor( context : {
 {
     private val language = context.language.wikiCode
 
-    val wikiPageIdProperty = context.ontology.getProperty("wikiPageID")
-                             .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageID' does not exist in DBpedia Ontology."))
-
+    val wikiPageIdProperty = context.ontology.properties("wikiPageID")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         val objectLink = "http://" + language + ".wikipedia.org/wiki/" + node.root.title.encodedWithNamespace
 
         new Graph(new Quad( context.language, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
-                            node.id.toString, node.sourceUri, context.ontology.getDatatype("xsd:integer").get ))
+                            node.id.toString, node.sourceUri, context.ontology.datatypes("xsd:integer")))
     }
 }

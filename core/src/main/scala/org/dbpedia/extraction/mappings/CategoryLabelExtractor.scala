@@ -13,7 +13,7 @@ class CategoryLabelExtractor( context : {
                                   def ontology : Ontology
                                   def language : Language } ) extends Extractor
 {
-    val labelProperty = context.ontology.getProperty("rdfs:label").get
+    val labelProperty = context.ontology.properties("rdfs:label")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

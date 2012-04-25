@@ -82,15 +82,15 @@ object Server
 
         logger.info("Server started in " + System.getProperty("user.dir") + " listening on " + serverURI)
 
-        //Open browser
-        try
-        {
-            java.awt.Desktop.getDesktop.browse(serverURI)
-        }
-        catch
-        {
-            case ex : Exception => logger.log(Level.WARNING, "Could not open browser.", ex)
-        }
+//        //Open browser
+//        try
+//        {
+//            java.awt.Desktop.getDesktop.browse(serverURI)
+//        }
+//        catch
+//        {
+//            case ex : Exception => logger.log(Level.WARNING, "Could not open browser.", ex)
+//        }
         
         logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis))
     }

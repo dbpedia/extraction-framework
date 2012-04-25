@@ -12,8 +12,14 @@ import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.net.URI
 import java.io.PrintWriter
 
+/**
+ * Displays the statistics for all templates of a language.
+ * 
+ * TODO: Some URLs contain spaces. We should convert spaces to underscores in most cases, but in
+ * some cases we have to use %20.
+ */
 @Path("/statistics/{lang}/")
-class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String, @QueryParam("show") @DefaultValue("20") show: Int)
+class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String, @QueryParam("show") @DefaultValue("20") show: Int = 20)
 {
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
@@ -24,10 +30,44 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     private var wikiStats = manager.wikiStats
 
     private val mappings = getClassMappings
-    private val mappingStatistics = manager.countMappedStatistics(mappings, wikiStats)
+    private val stats = manager.countMappedStatistics(mappings, wikiStats)
     private val ignoreList = manager.ignoreList
+    
+    private val sortedStats = stats.sortBy(ms => (- ms.templateCount, ms.templateName))
 
-    private val mappingUrlPrefix = Server.wikiPagesUrl + "/" + Namespace.mappings(language).toString + ":"
+    private def countTemplates(all: Boolean, count: MappingStats => Int): Int = {
+      var sum = 0
+      for (ms <- stats) {
+        if (all || ms.isMapped) {
+          if (! ignoreList.isTemplateIgnored(ms.templateName)) {
+            sum += count(ms)
+          }
+        }
+      }
+      sum
+    }
+
+    private def countAllTemplates(count: MappingStats => Int): Int = countTemplates(true, count)
+    private def countMappedTemplates(count: MappingStats => Int): Int = countTemplates(false, count)
+      
+    private val templateCount : Int = countAllTemplates(_ => 1)
+    private val mappedTemplateCount = countMappedTemplates(_ => 1)
+
+    private val templateUseCount = countAllTemplates(_.templateCount)
+    private val mappedTemplateUseCount = countMappedTemplates(_.templateCount)
+
+    private val propertyUseCount = countAllTemplates(_.propertyUseCount)
+    private val mappedPropertyUseCount = countMappedTemplates(_.mappedPropertyUseCount)
+    
+    private val mappedTemplateUseRatio = mappedTemplateUseCount.toDouble / templateUseCount.toDouble
+    private val mappedPropertyUseRatio = mappedPropertyUseCount.toDouble / propertyUseCount.toDouble
+    
+    private val reversedRedirects = wikiStats.checkForRedirects(mappings)
+    private val percentageMappedTemplates: String = "%2.2f".format(mappedTemplateCount.toDouble / templateCount.toDouble * 100)
+    private val percentageMappedTemplateOccurrences: String = "%2.2f".format(mappedTemplateUseRatio * 100)
+    private val percentageMappedPropertyOccurrences: String = "%2.2f".format(mappedPropertyUseRatio * 100)
+
+    private val mappingUrlPrefix = Server.wikiPagesUrl+"/"+Namespace.mappings(language).getName(Language.Default).replace(' ','_')+":"
 
     private val mappedGoodColor = "#65c673"
     private val mappedMediumColor = "#ecea48"
@@ -40,7 +80,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     private val renameColor = "#b03060"
     private val ignoreColor = "#cdcdcd"
 
-    private def cookieQuery(sep: Char, show: Int = show) : String = {
+    private def cookieQuery(sep: Char, show: Int = -1) : String = {
       var vsep = sep
       
       val sb = new StringBuilder
@@ -50,7 +90,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
         vsep = '&'
       }
       
-      if (show != 20) { 
+      if (show != -1) { 
         sb append vsep append "show=" append show
         vsep = '&' // for future additions below
       }
@@ -62,16 +102,6 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     @Produces(Array("application/xhtml+xml"))
     def get = {
       
-        var statsMap = new mutable.HashMap[MappingStats, Int]
-        for (mappingStat <- mappingStatistics) statsMap(mappingStat) = mappingStat.templateCount
-        
-        val sortedStatsMap = ListMap(statsMap.toList.sortBy(statsInt => (-statsInt._2, statsInt._1)): _*)
-
-        val reversedRedirects = wikiStats.checkForRedirects(mappings)
-        val percentageMappedTemplates: String = "%2.2f".format(getNumberOfMappedTemplates(statsMap).toDouble / getNumberOfTemplates(statsMap).toDouble * 100)
-        val percentageMappedTemplateOccurrences: String = "%2.2f".format(getRatioOfMappedTemplateOccurrences(statsMap) * 100)
-        val percentageMappedPropertyOccurrences: String = "%2.2f".format(getRatioOfAllMappedPropertyOccurrences(statsMap) * 100)
-
         // print percentage to file for Pablo's counter
         val out = new PrintWriter(manager.percentageFile)
         try out.write(percentageMappedTemplateOccurrences) finally out.close()
@@ -87,27 +117,27 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                 <p align="center">
                     {percentageMappedTemplates}
                     % templates are mapped (
-                    {getNumberOfMappedTemplates(statsMap)}
+                    {mappedTemplateCount}
                     of
-                    {getNumberOfTemplates(statsMap)}
+                    {templateCount}
                     ).</p>
                 <p align="center">
                     {percentageMappedTemplateOccurrences}
                     % of all template occurrences in Wikipedia (
                     {langCode}
                     ) are mapped (
-                    {getNumberOfMappedTemplateOccurrences(statsMap)}
+                    {mappedTemplateUseCount}
                     of
-                    {getNumberOfTemplateOccurrences(statsMap)}
+                    {templateUseCount}
                     ).</p>
                 <p align="center">
                     {percentageMappedPropertyOccurrences}
                     % of all property occurrences in Wikipedia (
                     {langCode}
                     ) are mapped (
-                    {getAllMappedPropertyOccurrences(statsMap)}
+                    {mappedPropertyUseCount}
                     of
-                    {getAllPropertyOccurrences(statsMap)}
+                    {propertyUseCount}
                     ).</p>
 
                 <table align="center">
@@ -137,7 +167,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                         <td bgcolor={ignoreColor}>template is on the ignorelist (is not an infobox that contains relevant properties)</td>
                     </tr>
                 </table>
-                <p align="center">View <a href={cookieQuery('?', 20)}>20</a><a href={cookieQuery('?', 100)}>100</a><a href={cookieQuery('?', 100000)}>all</a></p>
+                <p align="center">View <a href={cookieQuery('?', 20)}>20</a>&nbsp;<a href={cookieQuery('?', 100)}>100</a>&nbsp;<a href={cookieQuery('?', 100000)}>all</a></p>
                 <table align="center">
                     <tr>
                         <td>occurrences</td> <td colspan="2">template (with link to property statistics)</td>
@@ -147,14 +177,14 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                     {
                     var shown = 0
                     // TODO: Solve problem of templates for which no properties are found in the template documentation (e.g. Geobox).
-                    for ((mappingStat, counter) <- sortedStatsMap if mappingStat.getNumberOfProperties > 0 && shown < show) yield
+                    for (mappingStat <- sortedStats if mappingStat.propertyCount > 0 && shown < show) yield
                     {
                         shown += 1
                         val templateName = manager.templateNamespacePrefix + mappingStat.templateName
                         val targetRedirect = reversedRedirects.get(templateName)
 
-                        val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties * 100)
-                        val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences * 100)
+                        val percentMappedProps: String = "%2.2f".format(mappingStat.mappedPropertyRatio * 100)
+                        val percentMappedPropOccur: String = "%2.2f".format(mappingStat.mappedPropertyUseRatio * 100)
                         var mappingsWikiLink = mappingUrlPrefix + mappingStat.templateName
                         var bgcolor: String =
                             if(!mappingStat.isMapped)
@@ -163,11 +193,11 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                             }
                             else
                             {
-                                if(mappingStat.getRatioOfMappedPropertyOccurrences > goodThreshold)
+                                if(mappingStat.mappedPropertyUseRatio > goodThreshold)
                                 {
                                     mappedGoodColor
                                 }
-                                else if(mappingStat.getRatioOfMappedPropertyOccurrences > mediumThreshold)
+                                else if(mappingStat.mappedPropertyUseRatio > mediumThreshold)
                                 {
                                     mappedMediumColor
                                 }
@@ -207,7 +237,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                         <tr bgcolor={bgcolor}>
                                     <td align="right">
                                     <a name={urlEncode(mappingStat.templateName)}/>
-                                        {counter}
+                                        {mappingStat.templateCount}
                                     </td>
                                 {
                             if (mustRenamed)
@@ -233,19 +263,19 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                                     </a>
                                 </td>
                                         <td align="right">
-                                            {mappingStat.getNumberOfProperties}
+                                            {mappingStat.propertyCount}
                                         </td> <td align="right">
                                     {percentMappedProps}
                                 </td>
                                         <td align="right">
-                                            {mappingStat.getNumberOfPropertyOccurrences}
+                                            {mappingStat.propertyUseCount}
                                         </td> <td align="right">
                                     {percentMappedPropOccur}
                                 </td>
-                                    {if (Server.adminRights(password) && mappingStat.getNumberOfMappedProperties == 0)
+                                    {if (Server.adminRights(password) && mappingStat.mappedPropertyCount == 0)
                             {
                                 <td>
-                                        <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+mappingStat.templateName+cookieQuery('&')}>
+                                        <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+mappingStat.templateName+cookieQuery('&', show)}>
                                             {ignoreMsg}
                                         </a>
                                         </td>
@@ -254,7 +284,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                         }
                     }
                 </table>
-                <p align="center">View <a href={cookieQuery('?', 20)}>20</a><a href={cookieQuery('?', 100)}>100</a><a href={cookieQuery('?', 100000)}>all</a></p>
+                <p align="center">View <a href={cookieQuery('?', 20)}>20</a>&nbsp;<a href={cookieQuery('?', 100)}>100</a>&nbsp;<a href={cookieQuery('?', 100000)}>all</a></p>
             </body>
         </html>
     }
@@ -262,115 +292,10 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     /**
      * @return Set[String, ClassMapping] (encoded template name with Template%3A prefix, ClassMapping)
      */
-    def getClassMappings =
+    private def getClassMappings =
     {
         val mappings = Server.extractor.mappings(language)
         mappings.templateMappings ++ mappings.conditionalMappings
     }
 
-    def getRatioOfMappedTemplateOccurrences(stats: mutable.Map[MappingStats, Int]) =
-    {
-        var mappedRatio: Double = 0
-        mappedRatio = getNumberOfMappedTemplateOccurrences(stats).toDouble / getNumberOfTemplateOccurrences(stats).toDouble
-        mappedRatio
-    }
-
-    def getNumberOfTemplates(stats: mutable.Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + 1
-            }
-        }
-        counter
-    }
-
-    def getNumberOfTemplateOccurrences(stats: mutable.Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + templateCounter
-            }
-        }
-        counter
-    }
-
-    def getNumberOfMappedTemplateOccurrences(stats: mutable.Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (mappingStat.isMapped && !ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + templateCounter
-            }
-        }
-        counter
-    }
-
-    def getNumberOfMappedTemplates(stats: mutable.Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (mappingStat.isMapped && !ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + 1
-            }
-        }
-        counter
-    }
-
-    def getRatioOfAllMappedProperties(stats: Map[MappingStats, Int]) =
-    {
-        var mappedRatio: Double = 0
-        var numMP: Int = 0
-        var numP: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            numMP = numMP + mappingStat.getNumberOfMappedProperties
-            numP = numP + mappingStat.getNumberOfProperties
-        }
-        mappedRatio = numMP.toDouble / numP.toDouble
-        mappedRatio
-    }
-
-    def getRatioOfAllMappedPropertyOccurrences(stats: mutable.Map[MappingStats, Int]) =
-    {
-        var mappedRatio: Double = 0
-        mappedRatio = getAllMappedPropertyOccurrences(stats).toDouble / getAllPropertyOccurrences(stats).toDouble
-        mappedRatio
-    }
-
-    def getAllPropertyOccurrences(stats: mutable.Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + mappingStat.getNumberOfPropertyOccurrences
-            }
-        }
-        counter
-    }
-
-    def getAllMappedPropertyOccurrences(stats: mutable.Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + mappingStat.getNumberOfMappedPropertyOccurrences
-            }
-        }
-        counter
-    }
 }

@@ -31,7 +31,7 @@ class TableMapping( mapToClass : OntologyClass,
         {
             var thisGraph = graph
 
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, clazz.uri, rowNode.sourceUri)
+            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), clazz.uri, rowNode.sourceUri)
             thisGraph = graph.merge(new Graph(quad))
 
             for(baseClass <- clazz.subClassOf)

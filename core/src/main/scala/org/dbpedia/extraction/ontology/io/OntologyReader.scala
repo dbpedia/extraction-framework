@@ -234,9 +234,9 @@ class OntologyReader
             val propertyMap = properties.map( property => (property.name, property) ).toMap
             val typeMap = datatypes.map( datatype => (datatype.name, datatype) ).toMap
 
-            new Ontology( classes.flatMap(_.build(classMap)),
-                          properties.flatMap(_.build(classMap, typeMap)),
-                          datatypes,
+            new Ontology( classes.flatMap(_.build(classMap)).map(c => (c.name, c)).toMap,
+                          properties.flatMap(_.build(classMap, typeMap)).map(p => (p.name, p)).toMap,
+                          datatypes.map(t => (t.name, t)).toMap,
                           specializedProperties.flatMap(_.build(classMap, propertyMap, typeMap)).toMap )
         }
     }

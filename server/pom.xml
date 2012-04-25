@@ -35,7 +35,13 @@
                             </args>
                             <jvmArgs>
                                 <jvmArg>-Xms512m</jvmArg>
-                                <jvmArg>-Xmx6g</jvmArg>
+                                <jvmArg>-Xmx4096m</jvmArg><!-- w/ CMS, 4G is ok. w/o CMS, use >= 4.5G -->
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <!-- <jvmArg>-XX:+UseG1GC</jvmArg> --><!-- ~20% slower than CMS --> 
+                                <!-- <jvmArg>-XX:+PrintGCDetails</jvmArg> --><!-- not necessary with CMS, annoying with G1 -->
                             </jvmArgs>
                         </launcher>
                         <launcher>
