@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.dump.extract
 
 import java.util.logging.{Logger, FileHandler}
 import java.io.File
