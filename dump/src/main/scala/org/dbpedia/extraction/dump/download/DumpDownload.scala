@@ -29,8 +29,8 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
   
   val DateLink = """<a href="(\d{8})/">""".r
   
-  private def downloadFiles(language : String, fileNames : Set[String]) : Unit =
-  {
+  private def downloadFiles(language : String, fileNames : Set[String]) : Unit = {
+    
     val finder = new Finder[File](baseDir, language)
     
     val wiki = finder.wikiName
@@ -38,19 +38,21 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
     val mainPage = new URL(baseUrl, wiki+"/") // here the server does NOT use index.html 
     val mainDir = new File(baseDir, wiki)
     if (! mainDir.exists && ! mainDir.mkdirs) throw new Exception("Target directory ["+mainDir+"] does not exist and cannot be created")
+    
     val running = finder.file(Download.Running)
     if (! running.createNewFile) throw new Exception("Another process is downloading files to ["+mainDir+"] - stop that process and remove ["+running+"]")
-    try
-    {
+    try {
+      
       // 1 - find all dates on the main page, sort them latest first
       var dates = SortedSet.empty(Ordering[String].reverse)
       
       downloader.downloadTo(mainPage, mainDir) // creates index.html, although it does not exist on the server
-      eachLine(new File(mainDir, "index.html"), line => DateLink.findAllIn(line).matchData.foreach(dates += _.group(1)))
+      forEachLine(new File(mainDir, "index.html")) { line => 
+        DateLink.findAllIn(line).matchData.foreach(dates += _.group(1))
+      }
       
       // 2 - find date page that has all files we want
-      for (date <- dates) // implicit conversion
-      {
+      for (date <- dates) {
         val datePage = new URL(mainPage, date+"/") // here we could use index.html
         val dateDir = new File(mainDir, date)
         if (! dateDir.exists && ! dateDir.mkdirs) throw new Exception("Target directory '"+dateDir+"' does not exist and cannot be created")
@@ -80,11 +82,12 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
         val links = fileNames.map("<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+_+"\">")
         
         downloader.downloadTo(datePage, dateDir) // creates index.html
-        eachLine(new File(dateDir, "index.html"), line => links.foreach(link => if (line contains link) links -= link))
+        forEachLine(new File(dateDir, "index.html")) { line => 
+          links.foreach(link => if (line contains link) links -= link)
+        }
         
         // did we find them all?
-        if (links.isEmpty)
-        {
+        if (links.isEmpty) {
           // 3 - download all files
           println("date page '"+datePage+"' has all files ["+fileNames.mkString(",")+"]")
           
@@ -103,13 +106,9 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
     throw new Exception("found no date in "+mainPage+" with files "+fileNames.mkString(","))
   }
   
-  private def eachLine(file : File, f : String => Unit) : Unit =
-  {
+  private def forEachLine(file : File)(process : String => Unit) : Unit = {
     val source = Source.fromFile(file)(Codec.UTF8)
-    try
-    {
-      for (line <- source.getLines) f(line)
-    }
+    try for (line <- source.getLines) process(line)
     finally source.close
   }
   
