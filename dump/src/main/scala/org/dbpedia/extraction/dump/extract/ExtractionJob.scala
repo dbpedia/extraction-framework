@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.dump.extract
 
 import _root_.org.dbpedia.extraction.destinations.Destination
 import _root_.org.dbpedia.extraction.mappings.Extractor

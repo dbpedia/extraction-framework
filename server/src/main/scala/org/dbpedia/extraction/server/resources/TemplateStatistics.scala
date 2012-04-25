@@ -1,16 +1,14 @@
 package org.dbpedia.extraction.server.resources
 
 import javax.ws.rs._
-import javax.ws.rs.core.Response
 import org.dbpedia.extraction.server.Server
-import scala.collection.mutable
-import scala.collection.immutable.ListMap
 import org.dbpedia.extraction.wikiparser.Namespace
-import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.server.util.MappingStats
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.net.URI
 import java.io.PrintWriter
+import scala.xml.Elem
 
 /**
  * Displays the statistics for all templates of a language.
@@ -167,7 +165,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                         <td bgcolor={ignoreColor}>template is on the ignorelist (is not an infobox that contains relevant properties)</td>
                     </tr>
                 </table>
-                <p align="center">View <a href={cookieQuery('?', 20)}>20</a>&nbsp;<a href={cookieQuery('?', 100)}>100</a>&nbsp;<a href={cookieQuery('?', 100000)}>all</a></p>
+                { templateCountLinks }
                 <table align="center">
                     <tr>
                         <td>occurrences</td> <td colspan="2">template (with link to property statistics)</td>
@@ -284,9 +282,17 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                         }
                     }
                 </table>
-                <p align="center">View <a href={cookieQuery('?', 20)}>20</a>&nbsp;<a href={cookieQuery('?', 100)}>100</a>&nbsp;<a href={cookieQuery('?', 100000)}>all</a></p>
+                { templateCountLinks }
             </body>
         </html>
+    }
+    
+    private def templateCountLinks: Elem = {
+      <p align="center">Show 
+        <a href={cookieQuery('?', 20)}>top&nbsp;20</a> |
+        <a href={cookieQuery('?', 100)}>top&nbsp;100</a> |
+        <a href={cookieQuery('?', 100000)}>all&nbsp;templates</a>
+      </p>
     }
     
     /**
