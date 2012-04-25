@@ -24,7 +24,7 @@ class HomepageExtractor( context : {
     private val externalLinkSections = HomepageExtractorConfig.externalLinkSectionsMap.getOrElse(language, HomepageExtractorConfig.externalLinkSectionsMap("en"))
 
 
-    private val homepageProperty = context.ontology.getProperty("foaf:homepage").get
+    private val homepageProperty = context.ontology.properties("foaf:homepage")
 
     private val listItemStartRegex = ("""(?msiu).*^\s*\*\s*[^^]*(\b""" + official + """\b)?[^^]*\z""").r
     private val officialRegex = ("(?iu)" + official).r

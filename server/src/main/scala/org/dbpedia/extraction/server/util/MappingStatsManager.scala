@@ -28,43 +28,36 @@ extends MappingStatsConfig(statsDir, language)
 
     val wikiStats = loadStats
     
-    def countMappedStatistics(mappings: Map[String, ClassMapping], wikipediaStatistics: WikipediaStats) : mutable.Set[MappingStats] =
+    def countMappedStatistics(mappings: Map[String, ClassMapping], wikiStats: WikipediaStats) : Seq[MappingStats] =
     {
-        logger.info("count mapped statistics "+language.wikiCode+" start")
-        
-        val millis = System.currentTimeMillis()
+      var statistics = new mutable.ArrayBuffer[MappingStats]()
 
-        // Hold the overall statistics
-        var statistics = mutable.Set[MappingStats]()
-
-        var isMapped: Boolean = false
-
-        for ((rawTemplate, templateStats) <- wikipediaStatistics.templates)
-        {
-            if (rawTemplate startsWith templateNamespacePrefix) {
-              val templateName = rawTemplate.substring(templateNamespacePrefix.length)
-              
-              isMapped = mappings.contains(templateName)
-              var mappingStats = new MappingStats(templateStats, templateName, ignoreList)
-              mappingStats.setTemplateMapped(isMapped)
-              
-              if (isMapped)
-              {
-                val mappedProperties = collectProperties(mappings(templateName))
-                for (propName <- mappedProperties)
-                {
-                  mappingStats.setPropertyMapped(propName, true)
-                }
-              }
-              statistics += mappingStats
-            } else {
-              logger.warning("unknown "+language.wikiCode+" template '"+rawTemplate+"'")
-            }
+      for ((rawTemplate, templateStats) <- wikiStats.templates)
+      {
+        if (rawTemplate startsWith templateNamespacePrefix) {
+          
+          val templateName = rawTemplate.substring(templateNamespacePrefix.length)
+          val isMapped = mappings.contains(templateName)
+          val mappedProps = if (isMapped) new PropertyCollector(mappings(templateName)).properties else Set.empty[String]
+          
+          var properties = new mutable.HashMap[String, (Int, Boolean)]
+          
+          for ((name, count) <- templateStats.properties) {
+            properties(name) = (count, mappedProps.contains(name))
+          }
+          
+          for (name <- mappedProps) {
+            if (! properties.contains(name)) properties(name) = (-1, true) // -1 means mapped in dbpedia but not found in wikipedia
+          }
+            
+          statistics += new MappingStats(templateStats, templateName, isMapped, properties.toMap, ignoreList)
+          
+        } else {
+          logger.warning(language.wikiCode+" template '"+rawTemplate+"' does not start with '"+templateNamespacePrefix+"'")
         }
+      }
 
-        logger.info("count mapped statistics "+language.wikiCode+" done - " + prettyMillis(System.currentTimeMillis - millis))
-        
-        statistics
+      statistics
     }
     
     private def loadStats(): WikipediaStats =
@@ -76,30 +69,36 @@ extends MappingStatsConfig(statsDir, language)
         logger.info("Loaded "+language.wikiCode+" wiki statistics from " + mappingStatsFile+" in "+prettyMillis(System.currentTimeMillis - millis))
         wikiStats
     }
+}
 
-    private def collectProperties(mapping: Object): Set[String] =
-    {
-        val properties = mapping match
-        {
-            case templateMapping: TemplateMapping => templateMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-            case conditionalMapping: ConditionalMapping => conditionalMapping.defaultMappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-            case _ => Set[String]()
-        }
-
-        properties.filter(_ != null)
-    }
-
-    private def collectPropertiesFromPropertyMapping(propertyMapping: PropertyMapping): Set[String] = propertyMapping match
-    {
-        case simple: SimplePropertyMapping => Set(simple.templateProperty)
-        case coord: GeoCoordinatesMapping => Set(coord.coordinates, coord.latitude, coord.longitude, coord.longitudeDegrees,
-            coord.longitudeMinutes, coord.longitudeSeconds, coord.longitudeDirection,
-            coord.latitudeDegrees, coord.latitudeMinutes, coord.latitudeSeconds, coord.latitudeDirection)
-        case calc: CalculateMapping => Set(calc.templateProperty1, calc.templateProperty2)
-        case combine: CombineDateMapping => Set(combine.templateProperty1, combine.templateProperty2, combine.templateProperty3)
-        case interval: DateIntervalMapping => Set(interval.templateProperty)
-        case intermediateNodeMapping: IntermediateNodeMapping => intermediateNodeMapping.mappings.toSet.flatMap(collectPropertiesFromPropertyMapping)
-        case _ => Set()
-    }
-
+class PropertyCollector(mapping: ClassMapping) {
+  
+  val properties = new mutable.HashSet[String]
+  
+  classMapping(mapping)
+  
+  private def classMapping(mapping: ClassMapping) : Unit = mapping match {
+    case tm: TemplateMapping => tm.mappings.foreach(propertyMapping)
+    case cm: ConditionalMapping =>
+      cm.cases.foreach(conditionMapping)
+      cm.defaultMappings.foreach(propertyMapping)
+  }
+  
+  private def conditionMapping(mapping: ConditionMapping) : Unit = 
+    classMapping(mapping.mapping)
+  
+  private def propertyMapping(mapping: PropertyMapping) : Unit = mapping match {
+    case m: SimplePropertyMapping => this + m.templateProperty
+    case m: GeoCoordinatesMapping => this + m.coordinates + m.latitude + m.longitude + m.longitudeDegrees + m.longitudeMinutes + m.longitudeSeconds + m.longitudeDirection + m.latitudeDegrees + m.latitudeMinutes + m.latitudeSeconds + m.latitudeDirection
+    case m: CalculateMapping => this + m.templateProperty1 + m.templateProperty2
+    case m: CombineDateMapping => this + m.templateProperty1 + m.templateProperty2 + m.templateProperty3
+    case m: DateIntervalMapping => this + m.templateProperty
+    case m: IntermediateNodeMapping => m.mappings.foreach(propertyMapping)
+    case m: ConstantMapping => // ignore
+  }
+  
+  private def +(name: String) : PropertyCollector = {
+    if (name != null) properties.add(name)
+    this
+  }
 }

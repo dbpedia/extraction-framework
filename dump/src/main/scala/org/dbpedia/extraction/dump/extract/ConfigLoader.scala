@@ -154,7 +154,7 @@ object ConfigLoader
             
             if (mappingsDir != null && mappingsDir.isDirectory)
             {
-                val file = new File(mappingsDir, namespace.name.replace(' ','_')+".xml")
+                val file = new File(mappingsDir, namespace.getName(Language.Default).replace(' ','_')+".xml")
                 XMLSource.fromFile(file, language = language).map(parser)
             }
             else

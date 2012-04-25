@@ -13,8 +13,7 @@ class PageLinksExtractor( context : {
                               def ontology : Ontology
                               def language : Language }  ) extends Extractor
 {
-    val wikiPageWikiLinkProperty = context.ontology.getProperty("wikiPageWikiLink")
-                                   .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageWikiLink' does not exist in DBpedia Ontology."))
+    val wikiPageWikiLinkProperty = context.ontology.properties("wikiPageWikiLink")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

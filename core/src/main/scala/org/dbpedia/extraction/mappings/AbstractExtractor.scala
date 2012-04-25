@@ -34,12 +34,10 @@ class AbstractExtractor( context : {
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
     // lazy so testing does not need ontology
-    private lazy val shortProperty = context.ontology.getProperty("rdfs:comment")
-                                     .getOrElse(throw new Exception("Property 'rdfs:comment' not found"))
+    private lazy val shortProperty = context.ontology.properties("rdfs:comment")
 
     // lazy so testing does not need ontology
-    private lazy val longProperty = context.ontology.getProperty("abstract")
-                                    .getOrElse(throw new Exception("Property 'abstract' not found"))
+    private lazy val longProperty = context.ontology.properties("abstract")
 
     override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

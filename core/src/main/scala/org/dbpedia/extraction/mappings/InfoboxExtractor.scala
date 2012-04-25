@@ -44,9 +44,9 @@ class InfoboxExtractor( context : {
         "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
     )
 
-    private val labelProperty = context.ontology.getProperty("rdfs:label").get
-    private val typeProperty = context.ontology.getProperty("rdf:type").get
-    private val propertyClass = context.ontology.getClass("rdf:Property").get
+    private val labelProperty = context.ontology.properties("rdfs:label")
+    private val typeProperty = context.ontology.properties("rdf:type")
+    private val propertyClass = context.ontology.classes("rdf:Property")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Regexes
@@ -64,7 +64,7 @@ class InfoboxExtractor( context : {
     // Parsers
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val unitValueParsers = context.ontology.datatypes
+    private val unitValueParsers = context.ontology.datatypes.values
                                    .filter(_.isInstanceOf[DimensionDatatype])
                                    .map(dimension => new UnitValueParser(context, dimension, true))
 
@@ -128,7 +128,7 @@ class InfoboxExtractor( context : {
                             val stat_template = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language).replace("\n", " ").replace("\t", " ").trim
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
                             quads ::= new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                               stat_property, node.sourceUri, context.ontology.getDatatype("xsd:string").get )
+                                               stat_property, node.sourceUri, context.ontology.datatypes("xsd:string"))
                         }
                         catch
                         {

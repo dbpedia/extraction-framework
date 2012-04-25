@@ -12,7 +12,7 @@ class LabelExtractor( context : {
                           def ontology : Ontology
                           def language : Language } ) extends Extractor
 {
-    val labelProperty = context.ontology.getProperty("rdfs:label").get
+    val labelProperty = context.ontology.properties("rdfs:label")
     
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -23,6 +23,6 @@ class LabelExtractor( context : {
         if(label.isEmpty) return new Graph()
 
         new Graph(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label,
-                           node.sourceUri, context.ontology.getDatatype("xsd:string").get ))
+                           node.sourceUri, context.ontology.datatypes("xsd:string")))
     }
 }
