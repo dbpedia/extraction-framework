@@ -1,8 +1,8 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.dump.compress
 
-import _root_.org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
-import java.io.{FileInputStream, FileOutputStream, File}
-import _root_.org.dbpedia.extraction.util.RichFile.toRichFile
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
+import java.io.{FileInputStream,FileOutputStream,File}
+import org.dbpedia.extraction.util.RichFile.toRichFile
 import java.util.concurrent.{Executor, Executors}
 
 /**

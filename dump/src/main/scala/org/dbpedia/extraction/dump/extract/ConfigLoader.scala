@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
 import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
