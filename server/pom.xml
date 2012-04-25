@@ -35,7 +35,7 @@
                             </args>
                             <jvmArgs>
                                 <jvmArg>-Xms512m</jvmArg>
-                                <jvmArg>-Xmx4096m</jvmArg><!-- w/ CMS, 4G is ok. w/o CMS, use >= 4.5G -->
+                                <jvmArg>-Xmx4096m</jvmArg><!-- 4G is ok with CMS or G1, other GCs need >= 4.5G -->
                                 <jvmArg>-XX:+PrintGC</jvmArg>
                                 <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
