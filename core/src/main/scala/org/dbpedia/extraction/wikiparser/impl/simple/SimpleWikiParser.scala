@@ -66,7 +66,15 @@ final class SimpleWikiParser extends WikiParser
         val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
 
         //Check if this page is a Redirect
+        // TODO: the regex used in org.dbpedia.extraction.mappings.Redirects.scala is probably a bit better
         val redirectRegex = """(?is)\s*(?:""" + Redirect(page.title.language).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[.*"""
+        // TODO: also extract the redirect target.
+        // TODO: compare extracted redirect target to the one found by Wikipedia (stored in the WikiPage object).
+        // Problems:
+        // - if the WikiPage object was not read from XML dump or api.php, redirect may not be set in WikiPage
+        // - generating the XML dump files takes several days, and the wikitext is obviously not generated at the
+        //   same time as the redirect target, so sometimes they do not match.
+        // In a nutshell: if the redirect in WikiPage is different from what we find, we're probably correct.
         val isRedirect = page.source.matches(redirectRegex)
 
         //Check if this page is a Disambiguation
@@ -75,7 +83,7 @@ final class SimpleWikiParser extends WikiParser
         val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
 
         //Return page node
-        new PageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation, nodes)
+        new PageNode(page.title, page.id, page.revision, page.timestamp, isRedirect, isDisambiguation, nodes)
     }
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
