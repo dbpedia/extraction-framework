@@ -20,6 +20,7 @@ case class WikiPage(val title : WikiTitle, val redirect : WikiTitle, val id : Lo
      * Serializes this page to XML using the MediaWiki export format.
      * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.4.
      */
+    // FIXME: copy and paste from PageNode.scala
     def toXML =
     {
         <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"
