@@ -16,6 +16,9 @@ class PageNode(val title : WikiTitle, val id : Long, val revision : Long, val ti
     def toWikiText() : String = children.map(_.toWikiText).mkString
 
     // FIXME: copy and paste from WikiPage.scala
+    // TODO: this is the XML format used in the dump files, but the format used by api.php is different.
+    // We should move this method to a utility class that also has a method generating XML in api.php format.
+    // TODO: make sure that XML is valid according to the schema. If not, add dummy elements / attributes where required.
     def toXML =
     {
         <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"
