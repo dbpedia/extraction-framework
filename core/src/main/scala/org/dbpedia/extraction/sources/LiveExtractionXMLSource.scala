@@ -84,6 +84,7 @@ object LiveExtractionXMLSource
                                      null, // TODO: read redirect from XML
                                      id        = (page \ "id").text.toLong,
                                      revision  = (rev \ "id").text.toLong,
+                                     timestamp = (rev \ "timestamp").text,
                                      source    = (rev \ "text").text ) )
                 }
             }

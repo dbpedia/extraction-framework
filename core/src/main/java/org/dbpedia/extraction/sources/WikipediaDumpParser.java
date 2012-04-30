@@ -53,6 +53,8 @@ public class WikipediaDumpParser
   
   /** */
   private static final String TEXT_ELEM = "text";
+  
+  private static final String TIMESTAMP_ELEM = "timestamp";
 
   /** the raw input stream */
   private final InputStream _stream;
@@ -263,6 +265,7 @@ public class WikipediaDumpParser
   throws XMLStreamException
   {
     String text = null;
+    String timestamp = null;
     long revisionId = -1;
     
     while (nextTag() == START_ELEMENT)
@@ -271,6 +274,11 @@ public class WikipediaDumpParser
       {
         text = _reader.getElementText();
         // now at </text>
+      }
+      else if (isStartElement(TIMESTAMP_ELEM))
+      {
+        timestamp = _reader.getElementText();
+        // now at </timestamp>
       }
       else if (isStartElement(ID_ELEM))
       {
@@ -287,7 +295,7 @@ public class WikipediaDumpParser
     requireEndElement(REVISION_ELEM);
     // now at </revision>
     
-    return new WikiPage(title, redirect, pageId, revisionId, text);
+    return new WikiPage(title, redirect, pageId, revisionId, timestamp, text);
   }
   
   /* Methods for low-level work. Ideally, only these methods would access _reader while the

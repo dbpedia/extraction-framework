@@ -97,10 +97,12 @@ class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language
         for(page <- response \ "query" \ "pages" \ "page";
             rev <- page \ "revisions" \ "rev" )
         {
+            // TODO: we don't need .head here, do we?
             proc( new WikiPage( title     = WikiTitle.parse((page \ "@title").head.text, language),
                              redirect  = null, // TODO: read redirect from XML
                              id        = (page \ "@pageid").head.text.toLong,
                              revision  = (rev \ "@revid").head.text.toLong,
+                             timestamp = (rev \ "@timestamp").head.text,
                              source    = rev.text ) )
         }
     }
