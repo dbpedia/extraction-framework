@@ -12,7 +12,7 @@ import org.dbpedia.extraction.util.Language
  * need them.
  * 
  * FIXME: separate Wikipedia and DBpedia namespaces. We cannot even be sure that there
- * are no name clashes. "Mapping de" may mean "Template talk" in some language...
+ * are no name clashes. "Mapping ko" may mean "Template talk" in some language...
  */
 class Namespace private[wikiparser](val code: Int, name: String, dbpedia: Boolean) {
   
@@ -26,34 +26,43 @@ class Namespace private[wikiparser](val code: Int, name: String, dbpedia: Boolea
  */
 private class NamespaceBuilder {
   
+  // map from namespace code to namespace (all namespaces)
   val values = new HashMap[Int, Namespace]
+  
+  // map from language to mapping namespace (only mapping namespaces)
   val mappings = new HashMap[Language, Namespace]
+  
+  // map from namespace name to namespace (only dbpedia namespaces)
   val dbpedias = new HashMap[String, Namespace]
     
   def ns(code: Int, name: String, dbpedia: Boolean) : Namespace = {
-    val namespace : Namespace = new Namespace(code, name, dbpedia)
-    values(code) = namespace
+    // also create 'talk'namespace, except for the first few namespaces, they are special
+    if (code % 2 == 0 && code >= 2) create(code + 1, name+" talk", dbpedia)
+    create(code, name, dbpedia)
+  }
+  
+  def create(code: Int, name: String, dbpedia: Boolean) : Namespace = {
+    val namespace = new Namespace(code, name, dbpedia)
+    // put() returns the previous value as an option. if there was one, throw an exception
+    values.put(code, namespace).foreach(previous => throw new IllegalArgumentException("duplicate namespace: ["+previous+"] and ["+namespace+"]"))
     if (dbpedia) dbpedias(name.toLowerCase(Language.Default.locale)) = namespace
     namespace
   }
 
   // Default MediaWiki namespaces
-  val mediawiki = Map(
-    "Media"-> -2,"Special"-> -1,"Main"->0,"Talk"->1,"User"->2,"User talk"->3,"Project"->4,"Project talk"->5,
-    "File"->6,"File talk"->7,"MediaWiki"->8,"MediaWiki talk"->9,"Template"->10,"Template talk"->11,"Help"->12,
-    "Help talk"->13,"Category"->14,"Category talk"->15
-  )
+  val mediawiki = Map("Media"-> -2,"Special"-> -1,"Main"->0,"Talk"->1,"User"->2,"Project"->4,"File"->6,"MediaWiki"->8,"Template"->10,"Help"->12,"Category"->14)
   
   for ((name,code) <- mediawiki) ns(code, name, false)
   
   // The following are used quite differently on different wikipedias, so we use generic names.
   // Most languages use 100-113, but hu uses 90-99.
-  for (code <- (90 to 113)) ns(code, "Namespace "+code, false)
+  for (code <- (90 to (112, step = 2))) ns(code, "Namespace "+code, false)
     
   // Namespaces used on http://mappings.dbpedia.org, sorted by number. 
   // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
   ns(200, "OntologyClass", true)
   ns(202, "OntologyProperty", true)
+  ns(206, "Datatype", true)
   
   val map = Map(
     "en"->204,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,"ru"->222,
@@ -68,12 +77,11 @@ private class NamespaceBuilder {
 
 /**
  * Helper class that lets us build the namespace objects without retaining any references 
- * to temporary data. "private[this] val" does the trick.
+ * to the builder or other temporary data. Using the builder as constructor parameter instead 
+ * of val does the trick.
  */
-private[wikiparser] class NamespaceBuilderDisposer(private[this] val builder: NamespaceBuilder) {
+private[wikiparser] class NamespaceBuilderDisposer(builder: NamespaceBuilder) {
   
-  def this() = this(new NamespaceBuilder)
-
   /**
    * Immutable map containing all MediaWiki and DBpedia namespaces.
    */
@@ -90,7 +98,7 @@ private[wikiparser] class NamespaceBuilderDisposer(private[this] val builder: Na
   protected val dbpedias = builder.dbpedias.toMap // toMap makes immutable
 }
 
-object Namespace extends NamespaceBuilderDisposer {
+object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
   
   val Main = values(0)
   val File = values(6)
