@@ -3,13 +3,14 @@ package org.dbpedia.extraction.server
 import java.io.File
 import java.net.{URI,URL}
 import java.util.logging.{Level,Logger}
-import scala.collection.mutable
+import scala.collection.immutable.SortedSet
 import org.dbpedia.extraction.mappings.{LabelExtractor,MappingExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.server.util.MappingStatsManager
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
 import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
  * The DBpedia server.
@@ -24,7 +25,7 @@ object Server
     val serverURI = new URI("http://localhost:9999/server/")
 
     def languages = _languages
-    private var _languages : Seq[Language] = null
+    private var _languages : Set[Language] = null
 
     /**
      * The extraction manager
@@ -42,10 +43,16 @@ object Server
     
     def adminRights(pass : String) : Boolean = _password == pass
 
-    /** The URL where the pages of the Mappings Wiki are located */
+    /** 
+     * The URL where the pages of the Mappings Wiki are located
+     * TODO: make this configurable 
+     */
     val wikiPagesUrl = new URL("http://mappings.dbpedia.org/index.php")
 
-    /** The URL of the MediaWiki API of the Mappings Wiki */
+    /** 
+     * The URL of the MediaWiki API of the Mappings Wiki 
+     * TODO: make this configurable 
+     */
     val wikiApiUrl = new URL("http://mappings.dbpedia.org/api.php")
     
     def main(args : Array[String])
@@ -62,7 +69,12 @@ object Server
         val mappingsDir = new File(args(3))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        _languages = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        var langs : Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        
+        // if no languages are given, use all languages for which a mapping namespace is defined
+        if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq
+        
+        _languages = SortedSet(langs: _*)(Language.wikiCodeOrdering)
         
         _managers = _languages.map(language => (language -> new MappingStatsManager(statsDir, language))).toMap
         
