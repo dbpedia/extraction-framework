@@ -28,6 +28,8 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
 
 object Language extends (String => Language)
 {
+  implicit val wikiCodeOrdering = Ordering.by[Language, String](_.wikiCode)
+  
   val Values =
   {
     val languages = new collection.mutable.HashMap[String,Language]
