@@ -1,4 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping de:Infobox Alpiner Skirennläufer</title><ns>208</ns><id>3441</id><revision><id>12559</id><text>{{ TemplateMapping
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping de:Coordinate</title><ns>208</ns><id>5232</id><revision><id>17438</id><text>{{ConditionalMapping
+| cases =
+
+{{Condition
+    | templateProperty = type
+    | operator = contains
+    | value = mountain
+    | mapping = {{TemplateMapping
+                | mapToClass = Mountain
+                }}
+ }}
+
+{{Condition
+    | templateProperty = type
+    | operator = contains
+    | value = country
+    | mapping = {{TemplateMapping
+                | mapToClass = Country
+                }}
+ }}
+
+ {{Condition
+    | templateProperty = type
+    | operator = contains
+    | value = landmark
+    | mapping = {{TemplateMapping
+                | mapToClass = Place
+                }}
+ }}
+ {{Condition
+    | operator = otherwise
+    | mapping = {{TemplateMapping
+                | mapToClass = Place
+                }}
+ }}
+
+| defaultMappings = 
+ {{ GeocoordinatesMapping | latitude =  NS | longitude = EW }}
+}}</text></revision></page><page><title>Mapping de:Infobox Alpiner Skirennläufer</title><ns>208</ns><id>3441</id><revision><id>12559</id><text>{{ TemplateMapping
    | mapToClass = Person
    | mappings =
        {{ PropertyMapping | templateProperty = kurzname | ontologyProperty = foaf:name }}
@@ -778,13 +816,35 @@ Noch nicht gemappt:
        {{ PropertyMapping | templateProperty = EP | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = SDName | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = RE | ontologyProperty = }}
---&gt;</text></revision></page><page><title>Mapping de:Infobox Film</title><ns>208</ns><id>2502</id><revision><id>16669</id><text>{{TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Film</title><ns>208</ns><id>2502</id><revision><id>17381</id><text>{{TemplateMapping
 | mapToClass = Film
 | mappings =
-	{{PropertyMapping | templateProperty = MUSIK | ontologyProperty = musicComposer }}
-        {{ PropertyMapping | templateProperty = PRO| ontologyProperty = producer }}
-        {{ PropertyMapping | templateProperty = Produzent| ontologyProperty = producer }}
-        {{ PropertyMapping | templateProperty = REG | ontologyProperty = director }}
+  {{ PropertyMapping | templateProperty = Produzent| ontologyProperty = producer }}
+  {{ PropertyMapping | templateProperty = PRO| ontologyProperty = producer }}
+  {{ PropertyMapping | templateProperty = Regie | ontologyProperty = director }}
+  {{ PropertyMapping | templateProperty = REG | ontologyProperty = director }}
+  {{ PropertyMapping | templateProperty = Drehbuch | ontologyProperty = writer }}
+  {{ PropertyMapping | templateProperty = DRB | ontologyProperty = writer }}
+  {{ PropertyMapping | templateProperty = Kamera | ontologyProperty = cinematography }}
+  {{ PropertyMapping | templateProperty = KAMERA | ontologyProperty = cinematography }}
+  {{ PropertyMapping | templateProperty = Schnitt | ontologyProperty = editing }}
+  {{ PropertyMapping | templateProperty = SCHNITT | ontologyProperty = editing }}
+  {{ PropertyMapping | templateProperty = Länge | ontologyProperty = runtime | unit = Time }}
+  {{ PropertyMapping | templateProperty = LEN | ontologyProperty = runtime | unit = Time }}
+  {{ PropertyMapping | templateProperty = Musik | ontologyProperty = musicComposer }}
+  {{ PropertyMapping | templateProperty = MUSIK | ontologyProperty = musicComposer }}
+  {{ PropertyMapping | templateProperty = Erscheinungsjahr | ontologyProperty = releaseDate }}
+  {{ PropertyMapping | templateProperty = PJ | ontologyProperty = releaseDate }}
+  {{ PropertyMapping | templateProperty = Originalsprache | ontologyProperty = language }}
+  {{ PropertyMapping | templateProperty = OS | ontologyProperty = language }}
+  {{ PropertyMapping | templateProperty = Produktionsland | ontologyProperty = country }}
+  {{ PropertyMapping | templateProperty = PL | ontologyProperty = country }}
+  {{ PropertyMapping | templateProperty = Besetzung | ontologyProperty = starring }}
+  {{ PropertyMapping | templateProperty = DS | ontologyProperty = starring }}
+  {{ PropertyMapping | templateProperty = Originaltitel | ontologyProperty = foaf:name }}
+  {{ PropertyMapping | templateProperty = OT | ontologyProperty = foaf:name }}
+  {{ PropertyMapping | templateProperty = Deutscher Titel | ontologyProperty = foaf:name }}
+  {{ PropertyMapping | templateProperty = DT | ontologyProperty = foaf:name }}
 }}</text></revision></page><page><title>Mapping de:Infobox Fluggesellschaft</title><ns>208</ns><id>3562</id><revision><id>13677</id><text>{{ TemplateMapping
    | mapToClass = Airline
    | mappings =
@@ -1047,9 +1107,12 @@ Noch nicht gemappt:
        {{ PropertyMapping | templateProperty = wctop3halfpipe | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = wctop3ballett | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = wctop3kombi | ontologyProperty = }}
---&gt;</text></revision></page><page><title>Mapping de:Infobox Fußballspieler</title><ns>208</ns><id>3461</id><revision><id>12526</id><text>{{ TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Fußballspieler</title><ns>208</ns><id>3461</id><revision><id>17758</id><text>{{ TemplateMapping
    | mapToClass = SoccerPlayer
    | mappings =
+       {{ PropertyMapping | templateProperty = jahre | ontologyProperty = years }}
+       {{ PropertyMapping | templateProperty = jugendjahre | ontologyProperty = youthYears }}
+       {{ PropertyMapping | templateProperty = nationaljahre | ontologyProperty = nationalYears }}
        {{ PropertyMapping | templateProperty = kurzname | ontologyProperty = foaf:name }}
        {{ PropertyMapping | templateProperty = langname | ontologyProperty = foaf:name }}
        {{ PropertyMapping | templateProperty = geburtstag | ontologyProperty = birthDate }}
@@ -1074,15 +1137,11 @@ Noch nicht gemappt:
        {{ PropertyMapping | templateProperty = nmupdate | ontologyProperty = }}
 
       Maybe useful properties but without a counterpart so far:
-       {{ PropertyMapping | templateProperty = jahre | ontologyProperty = }}
-       {{ PropertyMapping | templateProperty = spiele (tore) | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = trainervereine | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = trainerjahre | ontologyProperty = }}
        The assignment to the specific national clubs gets lost when used:
+       {{ PropertyMapping | templateProperty = spiele (tore) | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = länderspiele (tore) | ontologyProperty = }}
-       youthYears and nationalYears have the wrong data type!
-       {{ PropertyMapping | templateProperty = jugendjahre | ontologyProperty = }}
-       {{ PropertyMapping | templateProperty = nationaljahre | ontologyProperty = }}
 --&gt;</text></revision></page><page><title>Mapping de:Infobox Fußballverband</title><ns>208</ns><id>4083</id><revision><id>13932</id><text>{{ TemplateMapping
    | mapToClass = Organisation
    | mappings =
