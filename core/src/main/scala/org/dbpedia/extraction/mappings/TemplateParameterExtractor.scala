@@ -15,7 +15,7 @@ class TemplateParameterExtractor( context : {
 {
     private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", context.language)
 
-    val parameterRegex = """(?s)\{\{\{([^|^}^{^<^>]*)[|}<>]""".r
+    val parameterRegex = """(?s)\{\{\{([^|}{<>]*)[|}<>]""".r
     
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
