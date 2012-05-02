@@ -433,7 +433,7 @@
 	{{PropertyMapping | templateProperty = route | ontologyProperty = isPartOfRoute }}
 	{{PropertyMapping | templateProperty = exits | ontologyProperty = routeJunction }}
 	{{PropertyMapping | templateProperty = mapa | ontologyProperty = map }}
-}}</text></revision></page><page><title>Mapping pl:Duchowny infobox</title><ns>220</ns><id>3397</id><revision><id>18029</id><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping pl:Duchowny infobox</title><ns>220</ns><id>3397</id><revision><id>18078</id><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = tytuł
@@ -477,6 +477,7 @@
 	{{PropertyMapping | templateProperty = data śmierci | ontologyProperty = deathDate }}
 	{{PropertyMapping | templateProperty = miejsce śmierci | ontologyProperty = deathPlace }}
 	{{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = tytuł | ontologyProperty = title }}
 &lt;!--	{{PropertyMapping | templateProperty = 1. funkcja | ontologyProperty =  }} --&gt;
 &lt;!--	{{PropertyMapping | templateProperty = 1. funkcja  - okres | ontologyProperty =  }} --&gt;
 &lt;!--	{{PropertyMapping | templateProperty = 2. funkcja | ontologyProperty =  }} --&gt;
@@ -657,6 +658,11 @@
 	{{PropertyMapping | templateProperty = język | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = previousWork }}
 	{{PropertyMapping | templateProperty = kontynuacja | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping pl:Galaktyka infobox</title><ns>220</ns><id>5661</id><revision><id>18077</id><text>{{TemplateMapping 
+| mapToClass = Galaxy
+| mappings = 
+   {{ PropertyMapping | templateProperty = nazwa | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = gwiazdozbiór | ontologyProperty = constellation }}
 }}</text></revision></page><page><title>Mapping pl:Generałowie zakonu jezuitów</title><ns>220</ns><id>5519</id><revision><id>17893</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
@@ -2169,6 +2175,31 @@
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
 	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
 	{{PropertyMapping | templateProperty = funkcja | ontologyProperty = title }}
+}}</text></revision></page><page><title>Mapping pl:POL miasto infobox</title><ns>220</ns><id>5662</id><revision><id>18085</id><text>{{TemplateMapping
+| mapToClass = City
+| mappings =
+	{{ConstantMapping  | ontologyProperty = country | value = Polska }}
+        {{PropertyMapping | templateProperty = nazwa | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = dopełniacz miasta | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = populacja | ontologyProperty = populationTotal }}
+        {{PropertyMapping | templateProperty = zarządzający | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = powierzchnia | ontologyProperty = areaTotal | unit = squareKilometre }}
+	{{PropertyMapping | templateProperty = gęstość | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
+	{{PropertyMapping | templateProperty = tablice rejestracyjne | ontologyProperty = vehicleCode }}
+        {{PropertyMapping | templateProperty = strefa numeracyjna | ontologyProperty = areaCode }}
+        {{PropertyMapping | templateProperty = SIMC | ontologyProperty = simcCode }}
+        {{PropertyMapping | templateProperty = TERYT | ontologyProperty = terytCode }}
+        {{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
+        {{GeocoordinatesMapping
+          | latitudeDegrees    = stopniN
+          | latitudeMinutes    = minutN
+          | latitudeSeconds    = sekundN
+          | longitudeDegrees   = stopniE
+          | longitudeMinutes   = minutE
+          | longitudeSeconds   = sekundE
+          | latitudeDirection = długość
+          | longitudeDirection = szerokość
+        }}
 }}</text></revision></page><page><title>Mapping pl:PRT gmina infobox</title><ns>220</ns><id>4254</id><revision><id>14396</id><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
@@ -3593,7 +3624,7 @@
 	{{PropertyMapping | templateProperty = populacja | ontologyProperty = populationTotal }}
 	{{PropertyMapping | templateProperty = gęstość | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping pl:USA miasto infobox</title><ns>220</ns><id>4309</id><revision><id>14478</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping pl:USA miasto infobox</title><ns>220</ns><id>4309</id><revision><id>18084</id><text>{{TemplateMapping
 | mapToClass = City
 | mappings =
 	{{ConstantMapping  | ontologyProperty = country | value = Stany Zjednoczone }}
@@ -3609,9 +3640,9 @@
 	{{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
         {{PropertyMapping | templateProperty = województwo | ontologyProperty = province }}
         {{PropertyMapping | templateProperty = gmina | ontologyProperty = municipality }}
+        {{PropertyMapping | templateProperty = miasta partnerskie | ontologyProperty = twinCity }}
         {{PropertyMapping | templateProperty = rodzaj_gminy | ontologyProperty = municipalityType }}
-        {{PropertyMapping | templateProperty = powiat | ontologyProperty = county }}
-        {{PropertyMapping | templateProperty = strefa numeracyjna | ontologyProperty = areaCode }}
+        {{PropertyMapping | templateProperty = hrabstwo | ontologyProperty = county }}
         {{PropertyMapping | templateProperty = SIMC | ontologyProperty = simcCode }}
         {{PropertyMapping | templateProperty = TERYT | ontologyProperty = terytCode }}
 	{{PropertyMapping | templateProperty = tablica_rej | ontologyProperty = vehicleCode }}
@@ -3622,12 +3653,22 @@
 	{{PropertyMapping | templateProperty = powierzchnia | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = gęstość | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
         {{GeocoordinatesMapping
-          | latitudeDegrees    = stopniE
-          | latitudeMinutes    = minutE
-          | latitudeSeconds    = sekundE
-          | longitudeDegrees   = stopniN
-          | longitudeMinutes   = minutN
-          | longitudeSeconds   = sekundN
+          | latitudeDegrees    = stopniN
+          | latitudeMinutes    = minutN
+          | latitudeSeconds    = sekundN
+          | longitudeDegrees   = stopniE
+          | longitudeMinutes   = minutE
+          | longitudeSeconds   = sekundE
+          | latitudeDirection = długość
+          | longitudeDirection = szerokość
+        }}
+        {{GeocoordinatesMapping
+          | latitudeDegrees    = stopniS
+          | latitudeMinutes    = minutS
+          | latitudeSeconds    = sekundS
+          | longitudeDegrees   = stopniW
+          | longitudeMinutes   = minutW
+          | longitudeSeconds   = sekundW
           | latitudeDirection = długość
           | longitudeDirection = szerokość
         }}
@@ -3728,7 +3769,7 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
-}}</text></revision></page><page><title>Mapping pl:Wieś infobox</title><ns>220</ns><id>3401</id><revision><id>14271</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping pl:Wieś infobox</title><ns>220</ns><id>3401</id><revision><id>18074</id><text>{{TemplateMapping
 | mapToClass = Village
 | mappings =
 	{{PropertyMapping | templateProperty = nazwa | ontologyProperty = foaf:name }}
@@ -3743,7 +3784,7 @@
         {{PropertyMapping | templateProperty = SIMC | ontologyProperty = simcCode }}
 	{{PropertyMapping | templateProperty = tablice rejestracyjne | ontologyProperty = vehicleCode }}
 	{{PropertyMapping | templateProperty = nr kier | ontologyProperty = areaCode }}
-	{{PropertyMapping | templateProperty = sołtys | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = sołectwo | ontologyProperty = leaderName }}
 	{{PropertyMapping | templateProperty = powierzchnia | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = gęstość | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
         {{GeocoordinatesMapping
@@ -3753,6 +3794,16 @@
           | longitudeDegrees   = stopniN
           | longitudeMinutes   = minutN
           | longitudeSeconds   = sekundN
+          | latitudeDirection = długość
+          | longitudeDirection = szerokość
+        }}
+        {{GeocoordinatesMapping
+          | latitudeDegrees    = stopniW
+          | latitudeMinutes    = minutW
+          | latitudeSeconds    = sekundW
+          | longitudeDegrees   = stopniS
+          | longitudeMinutes   = minutS
+          | longitudeSeconds   = sekundS
           | latitudeDirection = długość
           | longitudeDirection = szerokość
         }}
@@ -6106,7 +6157,7 @@
 	{{PropertyMapping | templateProperty = Dzień | ontologyProperty = date }}
 	{{PropertyMapping | templateProperty = Typ święta | ontologyProperty = type }}
 	{{PropertyMapping | templateProperty = Podobne | ontologyProperty = similar }}
-}}</text></revision></page><page><title>Mapping pl:Święty infobox</title><ns>220</ns><id>4199</id><revision><id>14265</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping pl:Święty infobox</title><ns>220</ns><id>4199</id><revision><id>18079</id><text>{{TemplateMapping
 | mapToClass = Saint
 | mappings =
 	{{PropertyMapping | templateProperty = Data_beatyfikacji | ontologyProperty = beatifiedDate }}
@@ -6124,6 +6175,7 @@
 	{{PropertyMapping | templateProperty = Data_śmierci | ontologyProperty = birthPlace }}
 	{{PropertyMapping | templateProperty = Miejsce_śmierci | ontologyProperty = deathPlace }}
 	{{PropertyMapping | templateProperty = Tytuły | ontologyProperty = title }}
+	{{PropertyMapping | templateProperty = Wspomnienie | ontologyProperty = feastDay }}
 }}</text></revision></page><page><title>Mapping pl:Żołnierz infobox</title><ns>220</ns><id>4135</id><revision><id>14163</id><text>{{TemplateMapping
 | mapToClass = MilitaryPerson
 | mappings =
