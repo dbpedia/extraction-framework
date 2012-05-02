@@ -37,6 +37,8 @@ object Clean {
             dir.delete
             println("deleted dir  ["+dir+"]")
             dirs += 1
+          } else {
+            println("could not delete dir ["+dir+"] - not empty")
           }
           
         }
