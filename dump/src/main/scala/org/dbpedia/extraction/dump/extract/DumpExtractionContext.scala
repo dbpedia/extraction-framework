@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language

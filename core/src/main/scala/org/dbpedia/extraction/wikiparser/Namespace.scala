@@ -14,7 +14,7 @@ import org.dbpedia.extraction.util.Language
  * FIXME: separate Wikipedia and DBpedia namespaces. We cannot even be sure that there
  * are no name clashes. "Mapping de" may mean "Template talk" in some language...
  */
-class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Boolean) {
+class Namespace private[wikiparser](val code: Int, name: String, dbpedia: Boolean) {
   
   def getName(lang : Language) = if (dbpedia) name else Namespaces.names(lang).getOrElse(code, throw new IllegalArgumentException("namespace number "+code+" not found for language '"+lang.wikiCode+"'")) 
   
@@ -56,8 +56,9 @@ private class NamespaceBuilder {
   ns(202, "OntologyProperty", true)
   
   val map = Map(
-    "en"->204,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,"ru"->222,"cs"->224,"ca"->226,
-    "bn"->228,"hi"->230,"hu"->238,"ko"->242,"tr"->246,"ar"->250,"sl"->268,"eu"->272,"hr"->284,"el"->304,"ga"->396
+    "en"->204,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,"ru"->222,
+    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"hu"->238,"ko"->242,"tr"->246,"ar"->250,"bg"->264,
+    "sl"->268,"eu"->272,"hr"->284,"el"->304,"ga"->396
   )
   
   for ((lang,code) <- map) {

@@ -31,21 +31,27 @@
                                 <arg>../ontology.xml</arg><!-- ontology file. if it doesn't exist, load from server -->
                                 <arg>../mappings</arg><!-- mappings dir. if it doesn't exist, load from server -->
                                 <!-- all additional args are languages, comma or whitespace separated -->
-                                <arg>ar,bn,ca,cs,de,el,en,es,eu,fr,ga,hi,hr,hu,it,ko,nl,pl,pt,ru,sl,tr</arg>
+                                <arg>ar,bg,bn,ca,cs,de,el,en,es,eu,fr,ga,hi,hr,hu,it,ko,nl,pl,pt,ru,sl,tr</arg>
                             </args>
                             <jvmArgs>
                                 <jvmArg>-Xms512m</jvmArg>
-                                <jvmArg>-Xmx6g</jvmArg>
+                                <jvmArg>-Xmx4096m</jvmArg><!-- 4G is ok with CMS or G1, other GCs need >= 4.5G -->
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <!-- <jvmArg>-XX:+UseG1GC</jvmArg> --><!-- ~20% slower than CMS --> 
+                                <!-- <jvmArg>-XX:+PrintGCDetails</jvmArg> --><!-- not necessary with CMS, annoying with G1 -->
                             </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>stats</id>
                             <mainClass>org.dbpedia.extraction.server.util.CreateMappingStats</mainClass>
                             <args>
-                                <arg>/home/release/dbpedia</arg><!-- dbpedia files dir -->
+                                <arg>/home/release/wikipedia</arg><!-- base dir -->
                                 <arg>src/main/statistics</arg><!-- statistics files dir -->
                                 <!-- all additional args are languages, comma or whitespace separated -->
-                                <arg>ar,bn,ca,cs,de,el,en,es,eu,fr,ga,hi,hr,hu,it,ko,nl,pl,pt,ru,sl,tr</arg>
+                                <arg>ar,bg,bn,ca,cs,de,el,en,es,eu,fr,ga,hi,hr,hu,it,ko,nl,pl,pt,ru,sl,tr</arg>
                             </args>
                         </launcher>
                     </launchers>

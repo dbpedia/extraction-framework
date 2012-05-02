@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.server.util
 
 import io.Source
-import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.mappings.ClassMapping
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable
@@ -39,9 +38,7 @@ class WikipediaStats(val language : Language, val redirects: mutable.Map[String,
 {
     def checkForRedirects(mappings: Map[String, ClassMapping]) =
     {
-        val templateNamespacePrefix = Namespace.Template.getName(language) + ":"
-        val mappedRedirects = redirects.filterKeys(title => mappings.contains(title))
-        mappedRedirects.map(_.swap)
+      redirects.filterKeys(title => mappings.contains(title)).map(_.swap)
     }
     
     def write(writer : Writer) : Unit = {

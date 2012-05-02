@@ -25,11 +25,11 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
         </owl:Ontology>
         {
 	        //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
-	        val classes = for(ontologyClass <- ontology.classes if (EXPORT_EXTERNAL || !ontologyClass.isExternalClass))
+	        val classes = for(ontologyClass <- ontology.classes.values if (EXPORT_EXTERNAL || !ontologyClass.isExternalClass))
 	        	yield writeClass(ontologyClass)
 
 	        //Write properties from the default namespace
-	        val properties = for(ontologyProperty <- ontology.properties if (EXPORT_EXTERNAL || !ontologyProperty.isExternalProperty))
+	        val properties = for(ontologyProperty <- ontology.properties.values if (EXPORT_EXTERNAL || !ontologyProperty.isExternalProperty))
 	        	yield writeProperty(ontologyProperty)
 
             if(writeSpecificProperties)

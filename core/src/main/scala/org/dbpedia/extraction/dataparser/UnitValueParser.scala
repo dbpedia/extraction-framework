@@ -327,7 +327,7 @@ class UnitValueParser( extractionContext : {
     {
         durationParser.parseToSeconds(input, inputDatatype) match
         {
-            case Some(result) => Some((result, extractionContext.ontology.getDatatype("second").get.asInstanceOf[UnitDatatype]))
+            case Some(result) => Some((result, extractionContext.ontology.datatypes("second").asInstanceOf[UnitDatatype]))
             case None => None
         }
     }

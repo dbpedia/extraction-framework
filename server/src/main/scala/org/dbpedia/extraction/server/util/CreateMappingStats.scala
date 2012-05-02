@@ -6,10 +6,9 @@ import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.util.{WikiUtil,Language,Finder}
+import org.dbpedia.extraction.util.RichFile.toRichFile
 import scala.Serializable
-import scala.collection
-import scala.collection.mutable
 import java.io._
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.ontology.OntologyNamespaces
@@ -62,16 +61,24 @@ object CreateMappingStats
             
             logger.info("creating statistics for "+language.wikiCode)
             
-            val finder = new FileFinder(inputDir, language)
+            val finder = new Finder[File](inputDir, language)
+            
+            // Note: org.dbpedia.extraction.dump.download.Download.Complete = "download-complete"
+            // TODO: move that constant to core, or use config value
+            val date = finder.dates("download-complete").last
+            
+            def inputFile(dataset: Dataset): File = {
+              finder.file(date, dataset.name.replace('_','-')+".nt")
+            }
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
-            val redirectsDatasetFile = finder.inputFile(DBpediaDatasets.Redirects, "nt")
+            val redirectsDatasetFile = inputFile(DBpediaDatasets.Redirects)
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxPropertiesDatasetFile = finder.inputFile(DBpediaDatasets.Infoboxes, "nt")
+            val infoboxPropertiesDatasetFile = inputFile(DBpediaDatasets.Infoboxes)
             // extracted by org.dbpedia.extraction.mappings.TemplateParameterExtractor
-            val templateParametersDatasetFile = finder.inputFile(DBpediaDatasets.TemplateVariables, "nt")
+            val templateParametersDatasetFile = inputFile(DBpediaDatasets.TemplateVariables)
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxTestDatasetFile = finder.inputFile(DBpediaDatasets.InfoboxTest, "nt")
+            val infoboxTestDatasetFile = inputFile(DBpediaDatasets.InfoboxTest)
             
             val builder = new MappingStatsBuilder(statsDir, language)
     
@@ -82,33 +89,5 @@ object CreateMappingStats
             
             logger.info("created statistics for "+language.wikiCode+" in "+prettyMillis(System.currentTimeMillis - millis))
         }
-    }
-}
-
-/**
- * Get input file path in baseDir.
- * FIXME: the same algorithm is used by the download and extraction code. We should share the code. 
- * Polish this class and move it to core. Introduce a strategy interface.
- * FIXME: check files that indicate that download is complete.
- */
-class FileFinder(baseDir : File, language : Language) {
-    
-    /**
-     * Get input file path in baseDir.
-     */
-    def inputFile(dataset : Dataset, suffix : String) : File = 
-    {
-      val wiki = language.filePrefix+"wiki"
-      
-      val wikiDir = new File(baseDir, wiki)
-      if(! wikiDir.isDirectory) throw new Exception("directory '"+wikiDir+"' for language '"+language.wikiCode+"' not found")
-      
-      // Find the name (which is a date in format YYYYMMDD) of the newest directory
-      val date = wikiDir.list.filter(_.matches("\\d{8}")).sortBy(_.toInt).lastOption.getOrElse(throw new Exception("No dump found in " +wikiDir))
-      // TODO: check that directory contains the file named '...-download-complete' written by downloader
-      
-      val dateDir = new File(wikiDir, date)
-      
-      new File(dateDir, wiki+"-"+date+"-"+dataset.name+"."+suffix)
     }
 }

@@ -12,15 +12,13 @@ class RevisionIdExtractor( context : {
                                def ontology : Ontology
                                def language : Language }  ) extends Extractor
 {
-    private val wikiPageRevisionIDProperty = context.ontology.getProperty("wikiPageRevisionID")
-                                             .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageRevisionID' does not exist in DBpedia Ontology."))
-
+    private val wikiPageRevisionIDProperty = context.ontology.properties("wikiPageRevisionID")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
         val objectLink = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
 
         new Graph(new Quad(context.language, DBpediaDatasets.Revisions, objectLink, wikiPageRevisionIDProperty,
-            node.revision.toString, node.sourceUri, context.ontology.getDatatype("xsd:integer").get ))
+            node.revision.toString, node.sourceUri, context.ontology.datatypes("xsd:integer")))
     }
 }

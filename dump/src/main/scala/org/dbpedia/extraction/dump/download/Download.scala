@@ -9,6 +9,8 @@ object Download extends DownloadConfig
   val Running = "download-running"
   
   /** name of marker file in wiki date directory */
+  // Note: also used in CreateMappingStats.scala
+  // TODO: move this constant to core, or use config value
   val Complete = "download-complete"
     
   def main(args: Array[String]) : Unit =

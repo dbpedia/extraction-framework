@@ -13,8 +13,7 @@ class ExternalLinksExtractor( context : {
                                   def ontology : Ontology
                                   def language : Language } ) extends Extractor
 {
-    val wikiPageExternalLinkProperty = context.ontology.getProperty("wikiPageExternalLink")
-                                       .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageExternalLink' does not exist in DBpedia Ontology."))
+    val wikiPageExternalLinkProperty = context.ontology.properties("wikiPageExternalLink")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

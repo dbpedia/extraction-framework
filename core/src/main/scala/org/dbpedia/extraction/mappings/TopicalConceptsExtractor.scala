@@ -21,14 +21,11 @@ class TopicalConceptsExtractor( context : {
                                    def ontology : Ontology
                                    def language : Language } ) extends Extractor
 {
-    private val skosSubjectProperty = context.ontology.getProperty("skos:subject")
-                              .getOrElse(throw new NoSuchElementException("Ontology property 'skos:subject' does not exist in DBpedia Ontology."))
+    private val skosSubjectProperty = context.ontology.properties("skos:subject")
 
-    private val rdfTypeProperty = context.ontology.getProperty("rdf:type")
-                              .getOrElse(throw new NoSuchElementException("Ontology property 'rdf:type' does not exist in DBpedia Ontology."))
+    private val rdfTypeProperty = context.ontology.properties("rdf:type")
 
-    private val skosSubjectClass = context.ontology.getClass("skos:Concept")
-                           .getOrElse(throw new NoSuchElementException("Ontology property 'skos:Concept' does not exist in DBpedia Ontology."))
+    private val skosSubjectClass = context.ontology.classes("skos:Concept")
 
     private val catMainTemplates = TopicalConceptsExtractorConfig.catMainTemplates;
 

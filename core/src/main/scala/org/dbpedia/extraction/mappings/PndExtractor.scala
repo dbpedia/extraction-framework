@@ -20,8 +20,7 @@ class PndExtractor( context : {
 
     require(PndExtractorConfig.supportedLanguages.contains(language))
 
-    private val individualisedPndProperty = context.ontology.getProperty("individualisedPnd")
-                                            .getOrElse(throw new NoSuchElementException("Ontology property 'individualisedPnd' does not exist in DBpedia Ontology."))
+    private val individualisedPndProperty = context.ontology.properties("individualisedPnd")
 
     private val PndRegex = """(?i)[0-9X]+"""
 

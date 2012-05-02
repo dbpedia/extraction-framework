@@ -16,11 +16,11 @@ class GeoExtractor( context : {
 {
     private val geoCoordinateParser = new GeoCoordinateParser(context)
 
-    private val typeOntProperty = context.ontology.getProperty("rdf:type").get
-    private val latOntProperty = context.ontology.getProperty("geo:lat").get
-    private val lonOntProperty = context.ontology.getProperty("geo:long").get
-    private val pointOntProperty = context.ontology.getProperty("georss:point").get
-    private val featureOntClass =  context.ontology.getClass("gml:_Feature").get
+    private val typeOntProperty = context.ontology.properties("rdf:type")
+    private val latOntProperty = context.ontology.properties("geo:lat")
+    private val lonOntProperty = context.ontology.properties("geo:long")
+    private val pointOntProperty = context.ontology.properties("georss:point")
+    private val featureOntClass =  context.ontology.classes("gml:_Feature")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

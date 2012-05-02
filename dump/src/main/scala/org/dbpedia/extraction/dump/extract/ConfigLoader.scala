@@ -1,19 +1,21 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.dump.extract
 
-import _root_.org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
-import _root_.org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
-import _root_.org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
+import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
+import org.dbpedia.extraction.mappings._
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.{FileInputStream, InputStreamReader, File}
-import _root_.org.dbpedia.extraction.util.StringUtils._
-import _root_.org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.{Language,Finder}
+import org.dbpedia.extraction.util.RichFile.toRichFile
 import java.net.URL
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.{MemorySource, Source, XMLSource, WikiSource}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.Dataset
+import org.dbpedia.extraction.dump.download.Download
 
 /**
  * Loads the dump extraction configuration.
@@ -52,11 +54,6 @@ object ConfigLoader
         if(config.getProperty("dumpDir") == null) throw new IllegalArgumentException("Property 'dumpDir' not defined.")
         val dumpDir = new File(config.getProperty("dumpDir"))
         if (! dumpDir.exists) throw new IllegalArgumentException("dump dir "+dumpDir+" does not exist")
-
-        /** Output directory */
-        if(config.getProperty("outputDir") == null) throw new IllegalArgumentException("Property 'outputDir' not defined.")
-        val outputDir = new File(config.getProperty("outputDir"))
-        if (! outputDir.exists) throw new IllegalArgumentException("output dir "+outputDir+" does not exist")
 
         /** Local ontology file, downloaded for speed and reproducibility */
         if(config.getProperty("ontologyFile") != null)
@@ -114,80 +111,90 @@ object ConfigLoader
     }
 
 
+    private val parser = WikiParser()
+    
     /**
      * Creates ab extraction job for a specific language.
      */
     private def createExtractionJob(lang : Language) : ExtractionJob =
     {
+        val finder = new Finder[File](config.dumpDir, lang)
+        val date = finder.dates(Download.Complete).last
+
         //Extraction Context
-        val context : DumpExtractionContext = extractionContext(lang)
+        val context = new DumpExtractionContext
+        {
+            def ontology : Ontology = _ontology
+    
+            def commonsSource : Source = _commonsSource
+    
+            def language : Language = lang
+    
+            private lazy val _mappingPageSource =
+            {
+                val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
+                
+                if (mappingsDir != null && mappingsDir.isDirectory)
+                {
+                    val file = new File(mappingsDir, namespace.getName(Language.Default).replace(' ','_')+".xml")
+                    XMLSource.fromFile(file, language = language).map(parser)
+                }
+                else
+                {
+                    val namespaces = Set(namespace)
+                    val url = new URL("http://mappings.dbpedia.org/api.php")
+                    val language = Language.Default
+                    WikiSource.fromNamespaces(namespaces,url,language).map(parser)
+                }
+            }
+            
+            def mappingPageSource : Traversable[PageNode] = _mappingPageSource
+    
+            private lazy val _mappings =
+            {
+                MappingsLoader.load(this)
+            }
+            def mappings : Mappings = _mappings
+    
+            private val _articlesSource =
+            {
+                XMLSource.fromFile(finder.file(date, "pages-articles.xml"),
+                    title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
+                             title.namespace == Namespace.Category || title.namespace == Namespace.Template)
+            }
+            
+            def articlesSource : Source = _articlesSource
+    
+            private val _redirects =
+            {
+              val cache = finder.file(date, "template-redirects.obj")
+              Redirects.load(articlesSource, cache, language)
+            }
+            
+            def redirects : Redirects = _redirects
+        }
 
         //Extractors
         val extractors = config.extractors(lang)
         val compositeExtractor = Extractor.load(extractors, context)
+        
+        /**
+         * Get target file path in config.dumpDir. Note that this function should be fast and not 
+         * access the file system - it is called not only in this class, but later during the 
+         * extraction process for each dataset.
+         */
+        def targetFile(suffix : String)(dataset : Dataset) : File = {
+          finder.file(date, dataset.name.replace('_','-')+"."+suffix)
+        }
 
         //Destination
-        val tripleDestination = new FileDestination(new NTriplesFormatter(), targetFile(lang, dumpDate(lang), "nt"))
-        val quadDestination = new FileDestination(new NQuadsFormatter(), targetFile(lang, dumpDate(lang), "nq"))
+        val tripleDestination = new FileDestination(new NTriplesFormatter(), targetFile("nt"))
+        val quadDestination = new FileDestination(new NQuadsFormatter(), targetFile("nq"))
         val destination = new CompositeDestination(tripleDestination, quadDestination)
 
         // Note: label is also used as file name, but space is replaced by underscores
         val jobLabel = "extraction job "+lang.wikiCode+" with "+extractors.size+" extractors"
         new ExtractionJob(compositeExtractor, context.articlesSource, destination, jobLabel)
-    }
-
-    private val parser = WikiParser()
-    /**
-     * Make an object that will be injected into the extractors.
-     */
-    private def extractionContext(lang : Language) : DumpExtractionContext = new DumpExtractionContext
-    {
-        def ontology : Ontology = _ontology
-
-        def commonsSource : Source = _commonsSource
-
-        def language : Language = lang
-
-        private lazy val _mappingPageSource =
-        {
-            val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
-            
-            if (mappingsDir != null && mappingsDir.isDirectory)
-            {
-                val file = new File(mappingsDir, namespace.name.replace(' ','_')+".xml")
-                XMLSource.fromFile(file, language = language).map(parser)
-            }
-            else
-            {
-                val namespaces = Set(namespace)
-                val url = new URL("http://mappings.dbpedia.org/api.php")
-                val language = Language.Default
-                WikiSource.fromNamespaces(namespaces,url,language).map(parser)
-            }
-        }
-        
-        def mappingPageSource : Traversable[PageNode] = _mappingPageSource
-
-        private lazy val _mappings =
-        {
-            MappingsLoader.load(this)
-        }
-        def mappings : Mappings = _mappings
-
-        private val _articlesSource =
-        {
-            XMLSource.fromFile(dumpFile(language),
-                title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
-                         title.namespace == Namespace.Category || title.namespace == Namespace.Template)
-        }
-        def articlesSource : Source = _articlesSource
-
-        private val _redirects =
-        {
-            val cache = targetFile(language, dumpDate(language), "obj")(new Dataset("template-redirects"))
-            Redirects.load(articlesSource, cache, language)
-        }
-        def redirects : Redirects = _redirects
     }
 
     //language-independent val
@@ -211,62 +218,10 @@ object ConfigLoader
     //language-independent val
     private lazy val _commonsSource =
     {
-        XMLSource.fromFile(dumpFile(Language("commons")), _.namespace == Namespace.File)
-    }
-
-    /**
-     * Retrieves the dump stream for a specific language edition.
-     * FIXME: the same algorithm is used by the download code, mapping stats creator and in other 
-     * places. We should share the code. Use a configurable strategy object that returns the paths etc.
-     */
-    private def dumpFile(language : Language) : File =
-    {
-        //Find most recent dump date
-        val date = dumpDate(language)
-        val dateDir = new File(wikiDir(language), date)
-        val articlesDump = new File(dateDir, language.filePrefix + "wiki-" + date + "-pages-articles.xml")
-        if(!articlesDump.isFile) throw new Exception("Dump not found: " + articlesDump)
-
-        articlesDump
+      val finder = new Finder[File](config.dumpDir, Language("commons"))
+      val date = finder.dates(Download.Complete).last
+      val file = finder.file(date, "pages-articles.xml")
+      XMLSource.fromFile(file, _.namespace == Namespace.File)
     }
     
-    /**
-     * Download directory for a language, e.g. "download/enwiki"
-     * FIXME: the same algorithm is used by the download code, mapping stats creator and in other 
-     * places. We should share the code. Use a configurable strategy object that returns the paths etc.
-     */
-    private def wikiDir(language : Language) : File =
-    {
-        val wiki = language.filePrefix+"wiki"
-        val wikiDir = new File(config.dumpDir, wiki)
-        if(! wikiDir.isDirectory) throw new Exception("Dump directory not found: " + wikiDir)
-        wikiDir
-    }
-    
-    /**
-     * Finds the name (which is a date in format YYYYMMDD) of the latest wikipedia dump 
-     * directory for the given language.
-     * FIXME: the same algorithm is used by the download code, mapping stats creator and in other 
-     * places. We should share the code. Use a configurable strategy object that returns the paths etc.
-     */
-    private def dumpDate(language : Language) : String = 
-    {
-        val dir = wikiDir(language)
-        //Find most recent dump date
-        dir.list().filter(_.matches("\\d{8}")).sortBy(_.toInt).lastOption.getOrElse(throw new Exception("No dump found in " +dir))
-    }
-    
-    /**
-     * Get target file path in config.outputDir. Note that this function should be fast and not 
-     * access the file system - it is called not only in this class, but later during the 
-     * extraction process for each dataset.
-     * FIXME: the same algorithm is used by the download code, mapping stats creator and in other 
-     * places. We should share the code. Use a configurable strategy object that returns the paths etc.
-     */
-    private def targetFile(language : Language, date : String, suffix : String)(dataset : Dataset) : File = {
-        // Don't call dumpDate() here, use date parameter. See method comment.
-        val wiki = language.filePrefix+"wiki"
-        new File(config.outputDir, wiki+"/"+date+"/"+wiki+"-"+date+"-"+dataset.name.replace('_','-')+"."+suffix)
-    }
-
 }

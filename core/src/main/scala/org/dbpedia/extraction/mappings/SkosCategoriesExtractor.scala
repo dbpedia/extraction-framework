@@ -14,11 +14,11 @@ class SkosCategoriesExtractor( context : {
                                    def ontology : Ontology
                                    def language : Language }  ) extends Extractor
 {
-    private val rdfTypeProperty = context.ontology.getProperty("rdf:type").get
-    private val skosConceptClass = context.ontology.getClass("skos:Concept").get
-    private val skosPrefLabelProperty = context.ontology.getProperty("skos:prefLabel").get
-    private val skosBroaderProperty = context.ontology.getProperty("skos:broader").get
-    private val skosRelatedProperty = context.ontology.getProperty("skos:related").get
+    private val rdfTypeProperty = context.ontology.properties("rdf:type")
+    private val skosConceptClass = context.ontology.classes("skos:Concept")
+    private val skosPrefLabelProperty = context.ontology.properties("skos:prefLabel")
+    private val skosBroaderProperty = context.ontology.properties("skos:broader")
+    private val skosRelatedProperty = context.ontology.properties("skos:related")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

@@ -19,8 +19,7 @@ class DisambiguationExtractor( context : {
 
     private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap.getOrElse(language, "")
 
-    val wikiPageDisambiguatesProperty = context.ontology.getProperty("wikiPageDisambiguates")
-                                        .getOrElse(throw new NoSuchElementException("Ontology property 'wikiPageDisambiguates' does not exist in DBpedia Ontology."))
+    val wikiPageDisambiguatesProperty = context.ontology.properties("wikiPageDisambiguates")
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

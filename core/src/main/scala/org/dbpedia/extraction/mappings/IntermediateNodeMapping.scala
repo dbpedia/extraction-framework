@@ -6,9 +6,9 @@ import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 
-case class IntermediateNodeMapping(nodeClass : OntologyClass,
+class IntermediateNodeMapping(nodeClass : OntologyClass,
                               correspondingProperty : OntologyProperty,
-                              mappings : List[PropertyMapping],
+                              val mappings : List[PropertyMapping], // must be public val for statistics
                               context : {
                                   def ontology : Ontology
                                   def language : Language } ) extends PropertyMapping
@@ -70,7 +70,7 @@ case class IntermediateNodeMapping(nodeClass : OntologyClass,
         {
             var thisGraph = graph
 
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, clazz.uri, node.sourceUri)
+            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), clazz.uri, node.sourceUri)
             thisGraph = graph.merge(new Graph(quad))
 
             for(baseClass <- clazz.subClassOf)
