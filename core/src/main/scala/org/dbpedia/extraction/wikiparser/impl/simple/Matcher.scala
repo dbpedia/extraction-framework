@@ -2,7 +2,7 @@ package org.dbpedia.extraction.wikiparser.impl.simple
 
 private final class Matcher(val userTags : List[String], matchStdTags : Boolean = false)
 {
-    private val stdTags = if(matchStdTags) List("[[", "[", "http", "{{", "{|", "\n=", "<!--", "<ref", "<math", "<code", "<source") else List()
+    private val stdTags = if(matchStdTags) List("[[", "[", "http", "{{{", "{{", "{|", "\n=", "<!--", "<ref", "<math", "<code", "<source") else List()
 
     /** Indicates whether all tags start with a special char (see: isSpecialChar) */
     private val onlySpecialChars = (stdTags ::: userTags).map(tag => tag(0)).forall(isSpecialChar)
