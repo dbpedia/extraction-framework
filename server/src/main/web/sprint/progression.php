@@ -38,7 +38,7 @@ Object.size = function(obj) {
         $.each(stats[last], function(l, numbers) {                        
              languages.push(l);
         })
-        console.log(languages);
+        //console.log(languages);
         return languages;
       }  
 
