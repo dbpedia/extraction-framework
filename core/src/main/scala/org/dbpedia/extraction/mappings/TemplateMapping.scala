@@ -5,10 +5,10 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 
-case class TemplateMapping( mapToClass : OntologyClass,
+class TemplateMapping( mapToClass : OntologyClass,
                        correspondingClass : OntologyClass,
                        correspondingProperty : OntologyProperty,
-                       mappings : List[PropertyMapping],
+                       val mappings : List[PropertyMapping], // must be public val for statistics
                        context : {
                            def ontology : Ontology
                            def language : Language }  ) extends ClassMapping
@@ -99,7 +99,7 @@ case class TemplateMapping( mapToClass : OntologyClass,
 
         //Create type statements
         val quads = for(clazz <- classes) yield new Quad(context.language, DBpediaDatasets.OntologyTypes, uri,
-                                                         context.ontology.getProperty("rdf:type").get,
+                                                         context.ontology.properties("rdf:type"),
                                                          clazz.uri, node.sourceUri )
 
         new Graph(quads.toList)

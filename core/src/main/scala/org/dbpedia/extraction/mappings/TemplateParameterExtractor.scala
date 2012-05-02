@@ -47,7 +47,7 @@ class TemplateParameterExtractor( context : {
 
         for (parameter <- parameters.distinct if parameter.nonEmpty) 
             quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty, 
-                parameter, node.sourceUri, context.ontology.getDatatype("xsd:string").get )
+                parameter, node.sourceUri, context.ontology.datatypes("xsd:string"))
         new Graph(quads)
     }
 

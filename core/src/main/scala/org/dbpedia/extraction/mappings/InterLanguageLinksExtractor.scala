@@ -18,8 +18,7 @@ class InterLanguageLinksExtractor( context : {
 
     require( InterLanguageLinksExtractorConfig.supportedLanguages.contains(language), "Interlanguage Links supports the following languages: " + InterLanguageLinksExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
-    private val interLanguageLinksProperty = context.ontology.getProperty("owl:sameAs")
-                                             .getOrElse(throw new NoSuchElementException("Ontology property 'owl:sameAs' does not exist in DBpedia Ontology."))
+    private val interLanguageLinksProperty = context.ontology.properties("owl:sameAs")
     //context.ontology.getProperty("interLanguageLinks")
 
 

@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.dump.extract
 
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong

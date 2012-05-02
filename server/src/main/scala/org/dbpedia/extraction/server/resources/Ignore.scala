@@ -18,16 +18,23 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
 
     private val ignoreList = manager.ignoreList
     
-    private def cookieQuery(sep: Char, all: Boolean = false) : String = {
+    private def wikiDecode(name: String) : String = WikiUtil.wikiDecode(name, language, capitalize=false)
+
+    private def cookieQuery(sep: Char, show: Int = -1) : String = {
+      var vsep = sep
+      
       val sb = new StringBuilder
       
-      var vsep = sep
       if (Server.adminRights(password)) {
-        sb append sep append "p=" append password
+        // TODO: URL encode password
+        sb append vsep append "p=" append password
         vsep = '&'
       }
       
-      if (all) sb append vsep append "all=true"
+      if (show != -1) { 
+        sb append vsep append "show=" append show
+        vsep = '&' // for future additions below
+      }
       
       sb toString
     }
@@ -35,15 +42,15 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
     @GET
     @Path("template/")
     @Produces(Array("application/xhtml+xml"))
-    def ignoreTemplate(@QueryParam("template") template: String, @QueryParam("ignore") ignore: String, @QueryParam("all") all: Boolean) =
+    def ignoreTemplate(@QueryParam("template") template: String, @QueryParam("ignore") ignore: String, @QueryParam("show") @DefaultValue("20") show: Int = 20) =
     {
         if (Server.adminRights(password))
         {
-            if (ignore == "true") ignoreList.addTemplate(WikiUtil.wikiDecode(template,language,false))
-            else ignoreList.removeTemplate(WikiUtil.wikiDecode(template, language,false))
+            if (ignore == "true") ignoreList.addTemplate(wikiDecode(template))
+            else ignoreList.removeTemplate(wikiDecode(template))
         }
         
-        Response.temporaryRedirect(new URI("/statistics/"+langCode+"/"+cookieQuery('?', all)+"#"+urlEncode(template))).build
+        Response.temporaryRedirect(new URI("/statistics/"+langCode+"/"+cookieQuery('?', show)+"#"+urlEncode(template))).build
     }
 
     @GET
@@ -54,11 +61,11 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
         if (Server.adminRights(password))
         {
             // Note: do NOT wikiDecode property names - space and underscore are NOT equivalent for them
-            if (ignore == "true") ignoreList.addProperty(WikiUtil.wikiDecode(template,language,false), property)
-            else ignoreList.removeProperty(WikiUtil.wikiDecode(template,language,false), property)
+            if (ignore == "true") ignoreList.addProperty(wikiDecode(template), property)
+            else ignoreList.removeProperty(wikiDecode(template), property)
         }
         
-        Response.temporaryRedirect(new URI("/templatestatistics/"+language.wikiCode+"/?template="+template+cookieQuery('&')+"#"+urlEncode(property))).build
+        Response.temporaryRedirect(new URI("/templatestatistics/"+language.wikiCode+"/?template="+template.replace(' ', '_')+cookieQuery('&')+"#"+urlEncode(property))).build
     }
 
 }

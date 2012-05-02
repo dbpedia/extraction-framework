@@ -1,7 +1,9 @@
 package org.dbpedia.extraction.server.resources
 
 import javax.ws.rs.{Produces, GET, PathParam, Path}
-import io.Source
+import scala.io.Source
+import org.dbpedia.extraction.server.Server
+import org.dbpedia.extraction.util.Language
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,6 +14,7 @@ import io.Source
  */
 @Path("/p")
 class Percentage {
+  
     @GET
     @Produces(Array("application/xhtml+xml"))
     def get =
@@ -21,7 +24,10 @@ class Percentage {
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
           </head>
           <body>
-              {   Source.fromFile("src/main/resources/percentage.en").getLines().mkString }
+            {   
+              val source = Source.fromFile(Server.statsManager(Language.Default).percentageFile);
+              try source.getLines.mkString finally source.close
+            }
           </body>
         </html>
     }

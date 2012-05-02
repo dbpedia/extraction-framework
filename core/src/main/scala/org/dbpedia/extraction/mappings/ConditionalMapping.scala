@@ -4,8 +4,8 @@ import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
 import org.dbpedia.extraction.destinations.Graph
 import org.dbpedia.extraction.dataparser.StringParser
 
-case class ConditionalMapping( cases : List[ConditionMapping],
-                          defaultMappings : List[PropertyMapping],
+class ConditionalMapping( val cases : List[ConditionMapping], // must be public val for statistics
+                          val defaultMappings : List[PropertyMapping], // must be public val for statistics
                           context : { } ) extends ClassMapping     //TODO remove unused argument
 {
     override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
@@ -34,7 +34,7 @@ case class ConditionalMapping( cases : List[ConditionMapping],
 class ConditionMapping( templateProperty : String,
                         operator : String,
                         value : String,
-                        mapping : TemplateMapping,
+                        val mapping : TemplateMapping, // must be public val for statistics
                         context : { } )    //TODO remove unused argument
 {
     /** Check if templateProperty is defined */

@@ -33,17 +33,17 @@ class PersondataExtractor( context : {
     private val monthYearParser = new DateTimeParser(context, new Datatype("xsd:gMonthYear"))
     private val monthDayParser = new DateTimeParser(context, new Datatype("xsd:gMonthDay"))
 
-    private val birthDateProperty = context.ontology.getProperty("birthDate").get
-    private val birthPlaceProperty = context.ontology.getProperty("birthPlace").get
-    private val deathDateProperty = context.ontology.getProperty("deathDate").get
-    private val deathPlaceProperty = context.ontology.getProperty("deathPlace").get
+    private val birthDateProperty = context.ontology.properties("birthDate")
+    private val birthPlaceProperty = context.ontology.properties("birthPlace")
+    private val deathDateProperty = context.ontology.properties("deathDate")
+    private val deathPlaceProperty = context.ontology.properties("deathPlace")
 
-    private val rdfTypeProperty = context.ontology.getProperty("rdf:type").get
-    private val foafNameProperty = context.ontology.getProperty("foaf:name").get
-    private val foafSurNameProperty = context.ontology.getProperty("foaf:surname").get
-    private val foafGivenNameProperty = context.ontology.getProperty("foaf:givenName").get
-    private val foafPersonClass = context.ontology.getClass("foaf:Person").get
-    private val dcDescriptionProperty = context.ontology.getProperty("dc:description").get
+    private val rdfTypeProperty = context.ontology.properties("rdf:type")
+    private val foafNameProperty = context.ontology.properties("foaf:name")
+    private val foafSurNameProperty = context.ontology.properties("foaf:surname")
+    private val foafGivenNameProperty = context.ontology.properties("foaf:givenName")
+    private val foafPersonClass = context.ontology.classes("foaf:Person")
+    private val dcDescriptionProperty = context.ontology.properties("dc:description")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

@@ -13,7 +13,7 @@ class ArticleCategoriesExtractor( context : {
                                       def ontology : Ontology
                                       def language : Language } ) extends Extractor
 {
-    private val dctermsSubjectProperty = context.ontology.getProperty("dct:subject").get
+    private val dctermsSubjectProperty = context.ontology.properties("dct:subject")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

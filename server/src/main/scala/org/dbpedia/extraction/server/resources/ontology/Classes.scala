@@ -20,12 +20,12 @@ class Classes
     def get : Elem =
     {
         //Map each class to a list of its sub classes
-        val subClassesMap = ontology.classes   //Get all classes
+        val subClassesMap = ontology.classes.values.toList   //Get all classes
                 .filter(!_.name.contains(":")) //Filter non-DBpedia classes
                 .sortWith(_.name < _.name)     //Sort by name
                 .groupBy(_.subClassOf.head).toMap   //Group by super class
 
-        val rootClass = ontology.getClass("owl:Thing").get
+        val rootClass = ontology.classes("owl:Thing")
 
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <head>
@@ -46,23 +46,20 @@ class Classes
     @GET
     @Path("/{name}")
     @Produces(Array("application/xhtml+xml"))
-    def getClass(@PathParam("name") name : String) : Elem =
-    {
-        ontology.getClass(name) match
-        {
-            case Some(ontClass) => createClassPage(ontClass)
-            case None =>
-            {
-                <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-                  <head>
-                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                  </head>
-                  <body>
-                    <strong>Class not found</strong>
-                  </body>
-                </html>
-            }
-        }
+    def getClass(@PathParam("name") name : String) : Elem = ontology.classes.get(name) match {
+      case Some(cls) => createClassPage(cls)
+      case None => createUnknownClass
+    }
+
+    private def createUnknownClass : Elem = {
+      <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      </head>
+      <body>
+        <strong>Class not found</strong>
+      </body>
+      </html>
     }
 
     private def createClassHierarchy(baseClass : OntologyClass, subClassesMap : Map[OntologyClass, List[OntologyClass]]) : Elem =
@@ -95,7 +92,7 @@ class Classes
                 for((language, label) <- ontClass.labels) yield
                 {
                   <tr>
-                    <td><strong>{"Label (" + language + "): "}</strong></td>
+                    <td><strong>{"Label (" + language.wikiCode + "): "}</strong></td>
                     <td>{label}</td>
                   </tr>
                 }
@@ -105,7 +102,7 @@ class Classes
                 for((language, comment) <- ontClass.comments) yield
                 {
                   <tr>
-                    <td><strong>{"Comment (" + language + "): "}</strong></td>
+                    <td><strong>{"Comment (" + language.wikiCode + "): "}</strong></td>
                     <td>{comment}</td>
                   </tr>
                 }
@@ -137,7 +134,7 @@ class Classes
 
         // TODO: why show only this class and its direct base classes?
         val classes = (ontClass :: ontClass.subClassOf)
-        val properties = ontology.properties.sortBy(_.name).filter(classes contains _.domain)
+        val properties = ontology.properties.values.toList.sortBy(_.name).filter(classes contains _.domain)
 
         <table border="1" cellpadding="3" cellspacing="0">
           <tr style="font-weight: bold;" bgcolor="#CCCCFF">

@@ -109,7 +109,7 @@ object Redirects
         }
         catch
         {
-            case ex : Exception => logger.log(Level.WARNING, "Could not load redirects from cache ("+lang.wikiCode+").", ex)
+            case ex : Exception => logger.log(Level.INFO, "Will extract redirects from source for "+lang.wikiCode+" wiki, could not load cache file '"+cache+"': "+ex)
         }
 
         //Load redirects from source

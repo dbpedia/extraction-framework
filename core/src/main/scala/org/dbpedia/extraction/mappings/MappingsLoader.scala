@@ -228,60 +228,27 @@ object MappingsLoader
                               context )
     }
 	
-	private def loadOntologyClass(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyClass =
-	{
-	    val className = loadTemplateProperty(node, propertyName, required)
-	    
-	    ontology.getClass(className) match
-	    {
-	        case Some(ontClass) => ontClass
-            case _ =>
-            {
-                if(required)
-                    throw new IllegalArgumentException("Ontology class " + className + " not found.")
-                else
-                    null
-            }
-	    }
+	private def loadOntologyClass(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyClass = {
+	  loadOntologyValue(node, propertyName, ontology.classes, required, "Ontology class not found: ")
 	}
 	
-    private def loadOntologyProperty(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyProperty =
-    {
-        val ontPropertyName = loadTemplateProperty(node, propertyName, required)
-        
-        ontology.getProperty(ontPropertyName) match
-        {
-            case Some(ontProperty) => ontProperty
-            case _ =>
-            {
-                if(required)
-                    throw new IllegalArgumentException("Ontology property " + ontPropertyName + " not found.")
-                else
-                    null
-            }
-        }
-    }
-    
-    private def loadDatatype(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : Datatype =
-    {
-        val datatypeName = loadTemplateProperty(node, propertyName, required)
-        
-        ontology.getDatatype(datatypeName) match
-        {
-            case Some(ontologyDatatypeName) => ontologyDatatypeName
-            case _ =>
-            {
-                if(required)
-                    throw new IllegalArgumentException("Datatype " + datatypeName + " not found.")
-                else
-                    null
-            }
-        } 
-    }
+  private def loadOntologyProperty(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyProperty = {
+    loadOntologyValue(node, propertyName, ontology.properties, required, "Ontology property not found: ")
+  }
+  
+  private def loadDatatype(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : Datatype = {
+    loadOntologyValue(node, propertyName, ontology.datatypes, required, "Datatype not found: ")
+  }
+  
+  private def loadOntologyValue[T](node : TemplateNode, propertyName : String, map: Map[String, T], required: Boolean, msg: String) : T = {
+    val name = loadTemplateProperty(node, propertyName, required)
+    map.getOrElse(name, if (! required) null.asInstanceOf[T] else throw new IllegalArgumentException(msg+name))
+  }
+      
 	
 	private def loadTemplateProperty(node : TemplateNode, propertyName : String, required : Boolean = true) : String = 
 	{
-        val value = node.property(propertyName).flatMap(propertyNode => StringParser.parse(propertyNode))
+      val value = node.property(propertyName).flatMap(propertyNode => StringParser.parse(propertyNode))
 
 	    value match
 	    {

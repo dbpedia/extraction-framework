@@ -43,10 +43,10 @@ class ImageExtractor( context : {
     ImageExtractor.loadImages(context.articlesSource, freeWikipediaImages, nonFreeImages, language)
     logger.info("Images loaded from dump")
 
-    private val dbpediaThumbnailProperty = context.ontology.getProperty("thumbnail").get
-    private val foafDepictionProperty = context.ontology.getProperty("foaf:depiction").get
-    private val foafThumbnailProperty = context.ontology.getProperty("foaf:thumbnail").get
-    private val dcRightsProperty = context.ontology.getProperty("dc:rights").get
+    private val dbpediaThumbnailProperty = context.ontology.properties("thumbnail")
+    private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
+    private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
+    private val dcRightsProperty = context.ontology.properties("dc:rights")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {

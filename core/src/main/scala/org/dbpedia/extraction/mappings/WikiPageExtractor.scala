@@ -12,10 +12,9 @@ class WikiPageExtractor( context : {
                             def ontology : Ontology
                             def language : Language } ) extends Extractor
 {
-    private val foafPageProperty = context.ontology.getProperty("foaf:page").getOrElse(throw new Exception("Property 'foaf:page' not found"))
-    private val dcLanguageProperty = context.ontology.getProperty("dc:language").getOrElse(throw new Exception("Property 'dc:language' not found"))
-
-    private val foafPrimaryTopicProperty = context.ontology.getProperty("foaf:primaryTopic").getOrElse(throw new Exception("Property 'foaf:primaryTopic' not found"))
+    private val foafPageProperty = context.ontology.properties("foaf:page")
+    private val dcLanguageProperty = context.ontology.properties("dc:language")
+    private val foafPrimaryTopicProperty = context.ontology.properties("foaf:primaryTopic")
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
