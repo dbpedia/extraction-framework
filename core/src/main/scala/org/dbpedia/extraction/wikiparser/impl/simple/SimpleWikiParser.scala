@@ -252,6 +252,11 @@ final class SimpleWikiParser extends WikiParser
         {
             parseLink(source, level)
         }
+        // FIXME: four opening braces are two nested template or magic word invocations.
+        // FIXME: five opening braces can mean "{{{ {{" or "{{ {{{"
+        // FIXME: and so on...
+        // FIXME: rewrite the parser. What opening braces mean can only be discerned
+        // when the matching closing braces are found.
         else if(source.lastTag("{{{"))
         {
             parseTemplateParameter(source, level)
@@ -285,7 +290,9 @@ final class SimpleWikiParser extends WikiParser
             //val destination = source.getString(startPos, source.pos - m.tag.length).trim
             val destination = parseUntil(internalLinkLabelOrEnd, source, level)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
-            val destinationUri = if(destination.size == 0){""} else if(destination(0).isInstanceOf[TextNode]){
+            val destinationUri = if(destination.size == 0) {
+              ""
+            } else if(destination(0).isInstanceOf[TextNode]) {
               destination(0).asInstanceOf[TextNode].text
             } else {
               null //has a semantic within the wiktionary module, and should never occur for wikipedia
