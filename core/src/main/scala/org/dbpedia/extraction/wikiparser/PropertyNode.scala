@@ -9,17 +9,20 @@ package org.dbpedia.extraction.wikiparser
  */
 case class PropertyNode(key : String, override val children : List[Node], override val line : Int) extends Node(children, line)
 {
-    def toWikiText() : String =
+    def toWikiText(): String =
     {
-        try
-        {
-            // if key is a number, it did not have a key in the original wiki text
-            key.toInt
-            children.map(_.toWikiText).mkString("")
-        }
-        catch
-        {
-            case e : NumberFormatException => key + "=" + children.map(_.toWikiText).mkString("")
-        }
+      // named arguments prefix name and "=", positional arguments use only the value
+      val prefix = 
+      try 
+      { 
+        key.toInt
+        "" 
+      } 
+      catch 
+      { 
+        case e : NumberFormatException => key+"=" 
+      }
+        
+      prefix+children.map(_.toWikiText).mkString("")
     }
 }
