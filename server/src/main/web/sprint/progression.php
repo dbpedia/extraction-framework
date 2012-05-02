@@ -30,16 +30,15 @@ Object.size = function(obj) {
       }
 
       function getLanguages(stats) {
-        var first = "";
+        var last = "";
         for (e in stats) {
-	   first = e; 
-	   break;
+	   last = e; 
         }
         var languages = new Array();	
-        $.each(stats[first], function(l, numbers) {                        
+        $.each(stats[last], function(l, numbers) {                        
              languages.push(l);
         })
-        console.log(languages);
+        //console.log(languages);
         return languages;
       }  
 
@@ -62,7 +61,9 @@ Object.size = function(obj) {
           data.setValue(dIndex, 0, formatted);          
 	  $.each(languages, function(l) {
             var numbers = langStats[languages[l]];                        
-            var value = parseFloat(numbers[field]);
+            var value = 0;
+            if(numbers!=undefined)
+               value =  parseFloat(numbers[field]);
             //console.log(dIndex,lIndex,value);
 	    data.setValue(dIndex,lIndex,value);
             lIndex++; 
