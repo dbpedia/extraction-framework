@@ -3,7 +3,7 @@ package org.dbpedia.extraction.wikiparser.impl.wikipedia
 import scala.io.{Source, Codec}
 import javax.xml.stream.XMLInputFactory
 import scala.collection.mutable
-import org.dbpedia.extraction.util.{Language,WikiConfigDownloader,StringUtils}
+import org.dbpedia.extraction.util.{Language,WikiSettingsDownloader,StringUtils}
 import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
 import java.net.HttpRetryException
 import java.text.SimpleDateFormat
@@ -12,7 +12,7 @@ import java.util.Date
 /**
  * Generates Namespaces.scala and Redirect.scala. Must be run with core/ as the current directory.
  */
-object GenerateWikiConfig {
+object GenerateWikiSettings {
   
   private val inputDir = new File("src/test/resources/org/dbpedia/extraction/wikiparser/impl/wikipedia")
   private val outputDir = new File("src/main/scala/org/dbpedia/extraction/wikiparser/impl/wikipedia")
@@ -59,7 +59,7 @@ object GenerateWikiConfig {
       val file = new File(baseDir, language.wikiCode+"wiki-configuration.xml")
       try
       {
-        val downloader = new WikiConfigDownloader(language, followRedirects, overwrite)
+        val downloader = new WikiSettingsDownloader(language, followRedirects, overwrite)
         val (namespaces, aliases, magicwords) = downloader.download(factory, file)
         namespaceMap(code) = aliases ++ namespaces // order is important - aliases first
         redirectMap(code) = magicwords("redirect")
