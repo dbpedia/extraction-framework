@@ -28,7 +28,7 @@ import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
  * @param followRedirects if true, follow HTTP redirects for languages that have been renamed,
  * e.g. dk.wikipedia.org -> da.wikipedia.org. If false, throw a useful exception on redirects. 
  */
-class WikiConfigDownloader(language: Language, followRedirects: Boolean, overwrite: Boolean) {
+class WikiSettingsDownloader(language: Language, followRedirects: Boolean, overwrite: Boolean) {
   
   val url = new URL(api(language)+"?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords")
   
