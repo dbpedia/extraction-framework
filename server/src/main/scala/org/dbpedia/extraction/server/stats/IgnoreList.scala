@@ -1,8 +1,9 @@
-package org.dbpedia.extraction.server.util
+package org.dbpedia.extraction.server.stats
 
 import scala.Serializable
 import java.io.{File,PrintWriter}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.server.util.CollectionReader
 import scala.collection.mutable
 import java.io._
 import scala.io.Source
@@ -61,7 +62,7 @@ class IgnoreList(file: File)
    * Must only be called from synchronized blocks.
    */
   // package-private for IgnoreListTest
-  private[util] def save() {
+  private[stats] def save() {
     val out = new FileOutputStream(file)
     try {
       val writer = new OutputStreamWriter(out, "UTF-8")

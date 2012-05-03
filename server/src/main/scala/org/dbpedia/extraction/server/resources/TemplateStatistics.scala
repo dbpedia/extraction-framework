@@ -4,7 +4,7 @@ import javax.ws.rs._
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.server.util.MappingStats
+import org.dbpedia.extraction.server.stats.MappingStats
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.net.URI
 import java.io.PrintWriter

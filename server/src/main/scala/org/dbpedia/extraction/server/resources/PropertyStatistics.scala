@@ -6,7 +6,7 @@ import collection.immutable.ListMap
 import scala.collection.mutable
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.{WikiUtil, Language}
-import org.dbpedia.extraction.server.util.MappingStats
+import org.dbpedia.extraction.server.stats.MappingStats
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.io.{FileNotFoundException, File}
 
