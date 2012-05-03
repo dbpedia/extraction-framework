@@ -12,7 +12,10 @@ import scala.actors.Actor
  * Loads all extraction context parameters (ontology pages, mapping pages, ontology) at start-up independently of which extractors are chosen.
  * Is able to update the ontology and the mappings.
  * Updates are executed in synchronized threads.
- * TODO: the synchronized blocks are too big and take too long.
+ * TODO: the synchronized blocks are too big and take too long. The computation can be done 
+ * unsynchronized, just the assignment must be synchronized, and the assignment should preferably
+ * be atomic, i.e. client code that uses the different fields should atomically get a holder object
+ * that holds all the values. 
  */
 class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Traversable[Language], files: FileParams) 
 extends ExtractionManager(languages, files)
