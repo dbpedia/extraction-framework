@@ -105,6 +105,7 @@ object GenerateWikiConfig {
     println("generated wiki config for "+(languages.length+1)+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
   }
   
+  // TODO: use org.dbpedia.extraction.util.Finder[File]
   def findFile(baseDir: File, language: Language) : File = {
     val name = language.wikiCode+"wiki"
     val wikiDir = new File(baseDir, name)
