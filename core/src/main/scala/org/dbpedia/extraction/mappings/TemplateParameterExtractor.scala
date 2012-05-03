@@ -2,52 +2,48 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.config.mappings.TemplateParameterExtractorConfig
 import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
 import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
  */
-class TemplateParameterExtractor( context : {
-                                      def ontology : Ontology
-                                      def language : Language }  ) extends Extractor
+class TemplateParameterExtractor(context: { def ontology : Ontology; def language : Language } ) extends Extractor
 {
     private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", context.language)
 
     val parameterRegex = """(?s)\{\{\{([^|}{<>]*)[|}<>]""".r
     
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
-        if(node.title.namespace != Namespace.Template ||
-            TemplateParameterExtractorConfig.ignoreTemplates.contains(node.title.decoded) ||
-            TemplateParameterExtractorConfig.ignoreTemplatesRegex.exists(regex => regex.unapplySeq(node.title.decoded).isDefined ||
-            node.isRedirect)
-        ) return new Graph()
+        if (page.title.namespace != Namespace.Template || page.isRedirect) return new Graph()
 
         var quads = List[Quad]()
         var parameters = List[String]()
         var linkParameters = List[String]()
 
         //try to get parameters inside internal links
-        for (linkTemplatePar <- collectInternalLinks(node) )  {
+        for (linkTemplatePar <- collectInternalLinks(page) )  {
             linkParameters ::= linkTemplatePar.toWikiText
         }
 
         linkParameters.distinct.foreach( link => {
             parameterRegex findAllIn link foreach (_ match {
-                case parameterRegex (param) => parameters::= param //.replace("}","").replace("|","")
-                case _ => parameters // FIXME: this is useless, isn't it? there's no yield and no assignment
+                case parameterRegex (param) => parameters ::= param
+                case _ => // ignore
             })
         })
 
-        for (templatePar <- collectTemplateParameters(node) )  {
+        for (templatePar <- collectTemplateParameters(page) )  {
             parameters ::= templatePar.parameter
         }
 
-        for (parameter <- parameters.distinct if parameter.nonEmpty) 
+        for (parameter <- parameters.distinct if parameter.nonEmpty) {
+            // TODO: page.sourceUri does not include the line number
             quads ::= new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty, 
-                parameter, node.sourceUri, context.ontology.datatypes("xsd:string"))
+                parameter, page.sourceUri, context.ontology.datatypes("xsd:string"))
+        }
+        
         new Graph(quads)
     }
 

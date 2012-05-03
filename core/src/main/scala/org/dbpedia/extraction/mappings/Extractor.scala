@@ -3,6 +3,8 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.Graph
 import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.util.Language
+
 /**
  * The base class of all extractors.
  * Concrete extractors override the extract() method.
@@ -56,7 +58,7 @@ trait Extractor extends (PageNode => Graph)
 
         // TODO comment: why reverse? probably just a performance thing. interwiki links are usually at the end.
         // TODO: are InterWikiLinkNode always top-level children? 
-        for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && destination.language.wikiCode == "en")
+        for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterLanguageLink && destination.language == Language.Default)
         {
             if (retrieveOriginalName) return Some(page.title)
             else return Some(destination)

@@ -77,7 +77,7 @@ private final class Source(source : String, val language : Language)
 
         if(!result.matched && throwIfNoMatch)
         {
-            throw new WikiParserException("Closing tag not found")
+            throw new WikiParserException("Closing tag not found", line, findLine(line))
         }
 
         return result

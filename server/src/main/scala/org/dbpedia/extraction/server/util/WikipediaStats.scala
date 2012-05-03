@@ -7,16 +7,26 @@ import scala.collection.mutable
 import java.io.Writer
 
 /**
+ * Builds template statistics
+ * TODO: comment
+ * @param templateCount apparently the number of pages that use the template. a page that uses
+ * the template multiple times is counted only once.
+ */
+class TemplateStatsBuilder 
+{
+    var templateCount = 0
+    val properties = new mutable.HashMap[String, Int]
+    def build = new TemplateStats(templateCount, properties.toMap)
+}
+
+/**
  * Hold template statistics
  * TODO: comment
  * @param templateCount apparently the number of pages that use the template. a page that uses
  * the template multiple times is counted only once.
  */
-class TemplateStats
-{
-    var templateCount = 0
-    val properties = new mutable.HashMap[String, Int]
-    
+class TemplateStats(var templateCount : Int, val properties: Map[String, Int]) {
+  
     override def toString = "TemplateStats[count:" + templateCount + ",properties:" + properties.mkString(",") + "]"
 }
 
@@ -34,13 +44,8 @@ object WikipediaStatsFormat {
 import WikipediaStatsFormat._
 
 // Hold template redirects and template statistics
-class WikipediaStats(val language : Language, val redirects: mutable.Map[String, String], val templates: mutable.Map[String, TemplateStats])
+class WikipediaStats(val language : Language, val redirects: Map[String, String], val templates: Map[String, TemplateStats])
 {
-    def checkForRedirects(mappings: Map[String, ClassMapping]) =
-    {
-      redirects.filterKeys(title => mappings.contains(title)).map(_.swap)
-    }
-    
     def write(writer : Writer) : Unit = {
       
       writer.write(WikiStatsTag)
@@ -112,8 +117,8 @@ class WikipediaStatsReader(lines : Iterator[String]) extends CollectionReader(li
     val templates = new mutable.HashMap[String, TemplateStats]()
     var templateIndex = 0
     while(templateIndex < templateCount) {
-      val templateStats = new TemplateStats
-      templates(readTag(TemplateTag)) = templateStats
+      val templateStats = new TemplateStatsBuilder
+      val templateName = readTag(TemplateTag)
       templateStats.templateCount = readCount(CountTag)
       val propCount = readCount(PropertiesTag)
       var propIndex = 0
@@ -121,12 +126,13 @@ class WikipediaStatsReader(lines : Iterator[String]) extends CollectionReader(li
         templateStats.properties += readProperty
         propIndex += 1
       }
+      templates(templateName) = templateStats.build
       templateIndex += 1
       readEmpty
     }
     readEmpty
     
-    new WikipediaStats(language, redirects, templates)
+    new WikipediaStats(language, redirects.toMap, templates.toMap)
   }
   
   private def readRedirect : (String, String) = {

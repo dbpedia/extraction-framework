@@ -1,21 +1,13 @@
 package org.dbpedia.extraction.server.util
 
 import java.util.logging.Logger
-import io.Source
-import java.lang.IllegalArgumentException
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import org.dbpedia.extraction.wikiparser._
+import scala.io.Source
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.{WikiUtil, Language}
-import scala.Serializable
-import scala.collection
+import org.dbpedia.extraction.util.Language
 import scala.collection.mutable
-import java.io._
-import org.dbpedia.extraction.ontology.OntologyNamespaces
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
-import org.dbpedia.extraction.server.util.CreateMappingStats._
-import java.net.{URLDecoder, URLEncoder}
+import java.io.File
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import MappingStats.InvalidTarget
 
 class MappingStatsManager(statsDir : File, language: Language)
 extends MappingStatsConfig(statsDir, language)
@@ -28,17 +20,26 @@ extends MappingStatsConfig(statsDir, language)
 
     val wikiStats = loadStats
     
-    def countMappedStatistics(mappings: Map[String, ClassMapping], wikiStats: WikipediaStats) : Seq[MappingStats] =
-    {
+    @volatile var holder: MappingStatsHolder = null
+    
+    def updateMappings(all: Mappings) = {
+      
+      val millis = System.currentTimeMillis
+      logger.info("Updating "+language.wikiCode+" mapped statistics")
+      
+      val mappings = all.templateMappings ++ all.conditionalMappings
+      
       var statistics = new mutable.ArrayBuffer[MappingStats]()
 
       for ((rawTemplate, templateStats) <- wikiStats.templates)
       {
-        if (rawTemplate startsWith templateNamespacePrefix) {
+        if (rawTemplate startsWith templateNamespace) {
           
-          val templateName = rawTemplate.substring(templateNamespacePrefix.length)
+          val templateName = rawTemplate.substring(templateNamespace.length)
           val isMapped = mappings.contains(templateName)
-          val mappedProps = if (isMapped) new PropertyCollector(mappings(templateName)).properties else Set.empty[String]
+          val mappedProps = 
+            if (isMapped) new PropertyCollector(mappings(templateName)).properties 
+            else Set.empty[String]
           
           var properties = new mutable.HashMap[String, (Int, Boolean)]
           
@@ -47,19 +48,24 @@ extends MappingStatsConfig(statsDir, language)
           }
           
           for (name <- mappedProps) {
-            if (! properties.contains(name)) properties(name) = (-1, true) // -1 means mapped in dbpedia but not found in wikipedia
+            if (! properties.contains(name)) properties(name) = (InvalidTarget, true)
           }
             
           statistics += new MappingStats(templateStats, templateName, isMapped, properties.toMap, ignoreList)
           
         } else {
-          logger.warning(language.wikiCode+" template '"+rawTemplate+"' does not start with '"+templateNamespacePrefix+"'")
+          logger.warning(language.wikiCode+" template '"+rawTemplate+"' does not start with '"+templateNamespace+"'")
         }
       }
-
-      statistics
+      
+      val redirects = wikiStats.redirects.filterKeys(title => mappings.contains(title)).map(_.swap)
+      
+      // computation is done - set all values in one atomic action
+      holder = new MappingStatsHolder(statistics.toList, redirects)
+      
+      logger.info("Updated "+language.wikiCode+" mapped statistics in "+prettyMillis(System.currentTimeMillis - millis))
     }
-    
+
     private def loadStats(): WikipediaStats =
     {
         val millis = System.currentTimeMillis
@@ -75,7 +81,7 @@ class PropertyCollector(mapping: ClassMapping) {
   
   val properties = new mutable.HashSet[String]
   
-  classMapping(mapping)
+  classMapping(mapping) // go get'em!
   
   private def classMapping(mapping: ClassMapping) : Unit = mapping match {
     case tm: TemplateMapping => tm.mappings.foreach(propertyMapping)

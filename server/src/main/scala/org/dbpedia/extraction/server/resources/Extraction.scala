@@ -50,7 +50,7 @@ class Extraction(@PathParam("lang") langCode : String)
 {
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
-    if(!Server.languages.contains(language))
+    if(!Server.instance.languages.contains(language))
         throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)
     
     private def getTitle : String = Extraction.lines.getOrElse(langCode, "Berlin")
@@ -103,7 +103,7 @@ class Extraction(@PathParam("lang") langCode : String)
             language)
         
         val destination = new StringDestination(formatter)
-        Server.extractor.extract(source, destination, language)
+        Server.instance.extractor.extract(source, destination, language)
         destination.close()
         destination.toString
     }
@@ -119,7 +119,7 @@ class Extraction(@PathParam("lang") langCode : String)
     {
         val source = XMLSource.fromXML(xml)
         val destination = new StringDestination(TriX.formatter(2))
-        Server.extractor.extract(source, destination, language)
+        Server.instance.extractor.extract(source, destination, language)
         destination.close()
         destination.toString
     }

@@ -6,11 +6,23 @@ import java.util.logging.{Level,Logger}
 import scala.collection.immutable.SortedSet
 import org.dbpedia.extraction.mappings.{LabelExtractor,MappingExtractor}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.mappings.Mappings
 import org.dbpedia.extraction.server.util.MappingStatsManager
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
 import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.Namespace
+
+class Server(private val password : String, val languages : Set[Language], files: FileParams) 
+{
+    val managers = languages.map(language => (language -> new MappingStatsManager(files.statsDir, language))).toMap
+        
+    val extractor = new DynamicExtractionManager(managers(_).updateMappings(_), languages, files)
+    
+    extractor.updateAll
+        
+    def adminRights(pass : String) : Boolean = password == pass
+}
 
 /**
  * The DBpedia server.
@@ -22,26 +34,7 @@ object Server
 
     // Note: we use /server/ because that's what we use on http://mappings.dbpedia.org/server/
     // It makes handling redirects easier.
-    val serverURI = new URI("http://localhost:9999/server/")
-
-    def languages = _languages
-    private var _languages : Set[Language] = null
-
-    /**
-     * The extraction manager
-     * DynamicExtractionManager is able to update the ontology/mappings.
-     * StaticExtractionManager is NOT able to update the ontology/mappings.
-     */
-    def extractor : ExtractionManager = _extractor
-    private var _extractor : ExtractionManager = null
-
-    private var _managers : Map[Language, MappingStatsManager] = null
-    
-    def statsManager(language: Language) : MappingStatsManager = _managers(language)
-
-    private var _password : String = null
-    
-    def adminRights(pass : String) : Boolean = _password == pass
+    val serverURI = new URI("http://localhost:9998/server/")
 
     /** 
      * The URL where the pages of the Mappings Wiki are located
@@ -55,18 +48,20 @@ object Server
      */
     val wikiApiUrl = new URL("http://mappings.dbpedia.org/api.php")
     
+    private var _instance: Server = null
+    
+    def instance = _instance
+    
     def main(args : Array[String])
     {
         val millis = System.currentTimeMillis
         
         logger.info("DBpedia server starting")
         
-        require(args != null && args.length >= 5, "need at least five args: password for template ignore list, base dir for statistics, ontology file, mappings dir, languages")
-        _password = args(0)
-        val statsDir = new File(args(1))
-
-        val ontologyFile = new File(args(2))
-        val mappingsDir = new File(args(3))
+        require(args != null && args.length >= 4, "need at least four args: password for template ignore list, base dir for statistics, ontology file, mappings dir. Additional args are wiki codes for languages.")
+        val password = args(0)
+        
+        val files = new FileParams(new File(args(1)), new File(args(2)), new File(args(3)))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
         var langs : Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
@@ -74,11 +69,9 @@ object Server
         // if no languages are given, use all languages for which a mapping namespace is defined
         if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq
         
-        _languages = SortedSet(langs: _*)(Language.wikiCodeOrdering)
+        val languages = SortedSet(langs: _*)(Language.wikiCodeOrdering)
         
-        _managers = _languages.map(language => (language -> new MappingStatsManager(statsDir, language))).toMap
-        
-        _extractor = new DynamicExtractionManager(_languages, List(classOf[LabelExtractor],classOf[MappingExtractor]), ontologyFile, mappingsDir)
+        _instance = new Server(password, languages, files)
         
         // Configure the HTTP server
         val resources = new PackagesResourceConfig("org.dbpedia.extraction.server.resources", "org.dbpedia.extraction.server.providers")
@@ -89,21 +82,8 @@ object Server
         features.put(ResourceConfig.FEATURE_NORMALIZE_URI, true)
         features.put(ResourceConfig.FEATURE_REDIRECT, true)
 
-        val server = HttpServerFactory.create(serverURI, resources)
-        server.start()
+        HttpServerFactory.create(serverURI, resources).start()
 
-        logger.info("Server started in " + System.getProperty("user.dir") + " listening on " + serverURI)
-
-//        //Open browser
-//        try
-//        {
-//            java.awt.Desktop.getDesktop.browse(serverURI)
-//        }
-//        catch
-//        {
-//            case ex : Exception => logger.log(Level.WARNING, "Could not open browser.", ex)
-//        }
-        
-        logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis))
+        logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis) + " listening on " + serverURI)
     }
 }

@@ -21,14 +21,15 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 {
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
-    if (! Server.languages.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
+    if (! Server.instance.languages.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
 
-    private val manager = Server.statsManager(language)
+    private val manager = Server.instance.managers(language)
 
     private var wikiStats = manager.wikiStats
 
-    private val mappings = getClassMappings
-    private val stats = manager.countMappedStatistics(mappings, wikiStats)
+    private val statsHolder = manager.holder
+    
+    private val stats = statsHolder.mappedStatistics
     private val ignoreList = manager.ignoreList
     
     private val sortedStats = stats.sortBy(ms => (- ms.templateCount, ms.templateName))
@@ -60,7 +61,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     private val mappedTemplateUseRatio = mappedTemplateUseCount.toDouble / templateUseCount.toDouble
     private val mappedPropertyUseRatio = mappedPropertyUseCount.toDouble / propertyUseCount.toDouble
     
-    private val reversedRedirects = wikiStats.checkForRedirects(mappings)
+    private val reversedRedirects = statsHolder.reversedRedirects
     private val percentageMappedTemplates: String = "%2.2f".format(mappedTemplateCount.toDouble / templateCount.toDouble * 100)
     private val percentageMappedTemplateOccurrences: String = "%2.2f".format(mappedTemplateUseRatio * 100)
     private val percentageMappedPropertyOccurrences: String = "%2.2f".format(mappedPropertyUseRatio * 100)
@@ -83,7 +84,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
       
       val sb = new StringBuilder
       
-      if (Server.adminRights(password)) {
+      if (Server.instance.adminRights(password)) {
         sb append vsep append "p=" append password
         vsep = '&'
       }
@@ -175,10 +176,10 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                     {
                     var shown = 0
                     // TODO: Solve problem of templates for which no properties are found in the template documentation (e.g. Geobox).
-                    for (mappingStat <- sortedStats if mappingStat.propertyCount > 0 && shown < show) yield
+                    for (mappingStat <- sortedStats if /* mappingStat.propertyCount > 0 && */ shown < show) yield
                     {
                         shown += 1
-                        val templateName = manager.templateNamespacePrefix + mappingStat.templateName
+                        val templateName = manager.templateNamespace + mappingStat.templateName
                         val targetRedirect = reversedRedirects.get(templateName)
 
                         val percentMappedProps: String = "%2.2f".format(mappingStat.mappedPropertyRatio * 100)
@@ -212,14 +213,14 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                         {
                             if (mappingStat.isMapped)
                             {
-                                //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(createMappingStats.templateNamespacePrefix.length()) + " is redundant!"
+                                //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(createMappingStats.templateNamespace.length()) + " is redundant!"
                             }
                             else
                             {
-                                mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespacePrefix.length)
+                                mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespace.length)
                                 bgcolor = renameColor
                                 mustRenamed = true
-                                redirectMsg = "Mapping of " + redirect.substring(manager.templateNamespacePrefix.length) + " must be renamed to "
+                                redirectMsg = "Mapping of " + redirect.substring(manager.templateNamespace.length) + " must be renamed to "
                             }
                         }
 
@@ -270,7 +271,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                                         </td> <td align="right">
                                     {percentMappedPropOccur}
                                 </td>
-                                    {if (Server.adminRights(password) && mappingStat.mappedPropertyCount == 0)
+                                    {if (Server.instance.adminRights(password))
                             {
                                 <td>
                                         <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+mappingStat.templateName+cookieQuery('&', show)}>
@@ -295,13 +296,4 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
       </p>
     }
     
-    /**
-     * @return Set[String, ClassMapping] (encoded template name with Template%3A prefix, ClassMapping)
-     */
-    private def getClassMappings =
-    {
-        val mappings = Server.extractor.mappings(language)
-        mappings.templateMappings ++ mappings.conditionalMappings
-    }
-
 }

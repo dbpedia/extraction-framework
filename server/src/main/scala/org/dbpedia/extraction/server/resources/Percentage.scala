@@ -25,7 +25,7 @@ class Percentage {
           </head>
           <body>
             {   
-              val source = Source.fromFile(Server.statsManager(Language.Default).percentageFile);
+              val source = Source.fromFile(Server.instance.managers(Language.Default).percentageFile);
               try source.getLines.mkString finally source.close
             }
           </body>

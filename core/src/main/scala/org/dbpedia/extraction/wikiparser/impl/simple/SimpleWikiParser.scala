@@ -38,14 +38,12 @@ final class SimpleWikiParser extends WikiParser
 
     private val linkEnd = new Matcher(List(" ", "{","}", "[", "]", "\n", "\t"));
 
-    private val propertyValueOrEnd = new Matcher(List("=", "|", "}}"), true)
-    private val propertyEnd = new Matcher(List("|", "}}"), true)
-    private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true)
-    private val parserFunctionEnd = new Matcher(List("}}"), true)
+    private val propertyValueOrEnd = new Matcher(List("=", "|", "}}"), true);
+    private val propertyEnd = new Matcher(List("|", "}}"), true);
+    private val templateParameterEnd = new Matcher(List("|", "}}}"), true);
+    private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true);
+    private val parserFunctionEnd = new Matcher(List("}}"), true);
 
-    private val templateParameterNameOrEnd = new Matcher(List("|", "}}}"), true)
-    private val templateParameterEnd = new Matcher(List("}}}"), true)
-    
     private val tableRowEnd1 = new Matcher(List("|}", "|+", "|-", "|", "!"));
     private val tableRowEnd2 = new Matcher(List("|}", "|-", "|", "!"));
 
@@ -111,7 +109,7 @@ final class SimpleWikiParser extends WikiParser
             throw new TooManyErrorsException(line, source.findLine(line))
         }
 
-    	var nodes = List[Node]()
+        var nodes = List[Node]()
         var lastPos = source.pos
         var lastLine = source.line
         var currentText = ""
@@ -153,7 +151,8 @@ final class SimpleWikiParser extends WikiParser
             //Check result of seek
             if(!m.matched)
             {
-               throw new WikiParserException("Node not closed; expected "+matcher, line, source.findLine(line));
+                // FIXME: matcher.toString is not defined, message will be useless
+                throw new WikiParserException("Node not closed; expected "+matcher, line, source.findLine(line));
             }
             else
             {
@@ -252,17 +251,14 @@ final class SimpleWikiParser extends WikiParser
         {
             parseLink(source, level)
         }
-        // FIXME: four opening braces are two nested template or magic word invocations.
-        // FIXME: five opening braces can mean "{{{ {{" or "{{ {{{"
-        // FIXME: and so on...
-        // FIXME: rewrite the parser. What opening braces mean can only be discerned
-        // when the matching closing braces are found.
-        else if(source.lastTag("{{{"))
-        {
-            parseTemplateParameter(source, level)
-        }
         else if(source.lastTag("{{"))
         {
+            if (source.pos < source.length && source.getString(source.pos, source.pos+1) == "{")
+            {
+                source.pos = source.pos+1   //advance 1 char
+                return parseTemplateParameter(source, level)
+            }
+
             parseTemplate(source, level)
         }
         else if(source.lastTag("{|"))
@@ -284,18 +280,24 @@ final class SimpleWikiParser extends WikiParser
         
         if(source.lastTag("[["))
         {
+            // FIXME: this block is a 98% copy of the next block
+          
             //val m = source.find(internalLinkLabelOrEnd)
 
             //Set destination
             //val destination = source.getString(startPos, source.pos - m.tag.length).trim
             val destination = parseUntil(internalLinkLabelOrEnd, source, level)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
-            val destinationUri = if(destination.size == 0) {
+            val destinationUri =
+            if(destination.size == 0) {
               ""
             } else if(destination(0).isInstanceOf[TextNode]) {
               destination(0).asInstanceOf[TextNode].text
             } else {
-              null //has a semantic within the wiktionary module, and should never occur for wikipedia
+              // The following line didn't make sense. createInternalLinkNode() will simply throw a NullPointerException.
+              // null // has a semantic within the wiktionary module, and should never occur for wikipedia
+              
+              throw new WikiParserException("Failed to parse internal link: " + destination, startLine, source.findLine(startLine))
             }
 
             //Parse label
@@ -310,21 +312,30 @@ final class SimpleWikiParser extends WikiParser
                     List(new TextNode(destinationUri, source.line))
                 }
 
-            createLinkNode(source, destinationUri, nodes, startLine, false, destination)
+            createInternalLinkNode(source, destinationUri, nodes, startLine, destination)
         }
         else if(source.lastTag("["))
         {
+            // FIXME: this block is a 98% copy of the previous block
+          
             //val tag = source.find(externalLinkLabelOrEnd)
 
             //Set destination
             //val destinationURI = source.getString(startPos, source.pos - 1).trim
             val destination = parseUntil(externalLinkLabelOrEnd, source, level)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
-            val destinationURI = if(destination.size == 0){""} else if(destination(0).isInstanceOf[TextNode]){
+            val destinationURI = 
+            if (destination.size == 0) {
+              ""
+            } else if(destination(0).isInstanceOf[TextNode]) {
               destination(0).asInstanceOf[TextNode].text
             } else {
-              null //has a semantic within the wiktionary module, and should never occur for wikipedia
+              // The following line didn't make sense. createExternalLinkNode() will simply throw a NullPointerException.
+              // null // has a semantic within the wiktionary module, and should never occur for wikipedia
+              
+              throw new WikiParserException("Failed to parse external link: " + destination, startLine, source.findLine(startLine))
             }
+            
             //Parse label
             val nodes =
                 if(source.lastTag(" "))
@@ -337,7 +348,7 @@ final class SimpleWikiParser extends WikiParser
                     List(new TextNode(destinationURI, source.line))
                 }
 
-            createLinkNode(source, destinationURI, nodes, startLine, true, destination)
+            createExternalLinkNode(source, destinationURI, nodes, startLine, destination)
         }
         else
         {
@@ -350,52 +361,53 @@ final class SimpleWikiParser extends WikiParser
             //Use destination as label
             val nodes = List(new TextNode(destinationURI, source.line))
 
-            createLinkNode(source, destinationURI, nodes, startLine, true, nodes)
+            createExternalLinkNode(source, destinationURI, nodes, startLine, nodes)
         }
     }
 
-    private def createLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, external : Boolean, destinationNodes : List[Node]) : LinkNode =
+    private def createExternalLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, destinationNodes : List[Node]) : LinkNode =
     {
-        if(external)
+        try
         {
-            try
-            {
-        	    ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
-            }
-            catch
-            {
-                case _ : IllegalArgumentException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
-            }
+            ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
+        }
+        catch
+        {
+            case _ : IllegalArgumentException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+        }
+    }
+    
+    private def createInternalLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, destinationNodes : List[Node]) : LinkNode =
+    {
+        val destinationTitle = WikiTitle.parse(destination, source.language)
+
+        if(destinationTitle.language == source.language)
+        {
+            InternalLinkNode(destinationTitle, nodes, line, destinationNodes)
         }
         else
         {
-            val destinationTitle = WikiTitle.parse(destination, source.language)
-
-            if(destinationTitle.language == source.language)
-            {
-                InternalLinkNode(destinationTitle, nodes, line, destinationNodes)
-            }
-            else
-            {
-                 InterWikiLinkNode(destinationTitle, nodes, line, destinationNodes)
-            }
+            InterWikiLinkNode(destinationTitle, nodes, line, destinationNodes)
         }
     }
 
     private def parseTemplateParameter(source : Source, level : Int) : TemplateParameterNode =
     {
         val line = source.line
-        val keyNodes = parseUntil(templateParameterNameOrEnd , source, level)
+        val keyNodes = parseUntil(templateParameterEnd , source, level)
 
         if(keyNodes.size != 1 || ! keyNodes.head.isInstanceOf[TextNode])
                 throw new WikiParserException("Template variable contains invalid elements", line, source.findLine(line))
         
-        val nodes = if (source.lastTag("}}}")) List.empty else parseUntil(templateParameterEnd, source, level)
-
         // FIXME: removing "<includeonly>" here is a hack.
         // We need a preprocessor that resolves stuff like <includeonly>...</includeonly> 
         // based on configuration flags.
-        val key = keyNodes.head.toWikiText().replace("<includeonly>", "")
+        val key = keyNodes.head.toWikiText().replace("<includeonly>", "").replace("<noinclude>", "")
+
+        // FIXME: parseUntil(templateParameterEnd) should be correct. Without it, we don't actually 
+        // consume the source until the end of the template parameter. But if we use it, the parser
+        // fails for roughly twice as many pages, so for now we deactivate it with "if (true)".
+        val nodes = if (true || source.lastTag("}}}")) List.empty else parseUntil(templateParameterEnd, source, level)
 
         new TemplateParameterNode(key, nodes, line)
     }

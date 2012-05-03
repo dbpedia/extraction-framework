@@ -72,17 +72,17 @@ object CreateMappingStats
             }
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
-            val redirectsDatasetFile = inputFile(DBpediaDatasets.Redirects)
+            val redirects = inputFile(DBpediaDatasets.Redirects)
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxPropertiesDatasetFile = inputFile(DBpediaDatasets.Infoboxes)
+            val infoboxProperties = inputFile(DBpediaDatasets.Infoboxes)
             // extracted by org.dbpedia.extraction.mappings.TemplateParameterExtractor
-            val templateParametersDatasetFile = inputFile(DBpediaDatasets.TemplateVariables)
+            val templateParameters = inputFile(DBpediaDatasets.TemplateVariables)
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxTestDatasetFile = inputFile(DBpediaDatasets.InfoboxTest)
+            val infoboxTest = inputFile(DBpediaDatasets.InfoboxTest)
             
             val builder = new MappingStatsBuilder(statsDir, language)
     
-            builder.buildStats(redirectsDatasetFile, infoboxPropertiesDatasetFile, templateParametersDatasetFile, infoboxTestDatasetFile)
+            builder.buildStats(redirects, infoboxProperties, templateParameters, infoboxTest)
             
             // load them right back to check that the format is ok
             new MappingStatsManager(statsDir, language)

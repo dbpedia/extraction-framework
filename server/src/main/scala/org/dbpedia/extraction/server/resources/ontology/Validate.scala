@@ -22,7 +22,7 @@ class Validate
     {
         var nodes = new NodeBuffer()
         nodes += <?xml-stylesheet type="text/xsl" href="../../stylesheets/log.xsl"?>
-        nodes += Server.extractor.validateOntologyPages()
+        nodes += Server.instance.extractor.validateOntologyPages()
         nodes
     }
 
@@ -39,7 +39,7 @@ class Validate
         {
             var nodes = new NodeBuffer()
             nodes += <?xml-stylesheet type="text/xsl" href="../../stylesheets/log.xsl"?>
-            nodes += Server.extractor.validateOntologyPages(XMLSource.fromXML(pagesXML).toList)
+            nodes += Server.instance.extractor.validateOntologyPages(XMLSource.fromXML(pagesXML).toList)
             logger.info("Validated ontology page: " + title)
             nodes
         }

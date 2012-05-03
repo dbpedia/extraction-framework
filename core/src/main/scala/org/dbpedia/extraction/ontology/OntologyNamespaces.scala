@@ -5,6 +5,8 @@ import java.net.URLDecoder.decode
 import scala.collection.mutable.HashMap
 import java.util.Locale
 
+import org.dbpedia.extraction.util.RichString.toRichString // implicit
+
 /**
  * Manages the ontology namespaces.
  */
@@ -134,23 +136,9 @@ object OntologyNamespaces
         // - no distinction between "/" and "%2F" - input "http://foo/a%2Fb/c" becomes "http://foo/a/b/c"
         // - similar for all other characters in the list below
         // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
-        else escape(decode(uri, "UTF-8"), "\"#%<>?[\\]^`{|}")
+        else decode(uri, "UTF-8").uriEscape("\"#%<>?[\\]^`{|}")
     }
 
-    /**
-     * @param str string to process
-     * @param chars list of characters that should be percent-encoded if they occur in the string.
-     * Must be ASCII characters, i.e. Unicode code points from U+0020 to U+007F (inclusive).
-     * This method does not correctly escape characters outside that range.
-     * TODO: this method is pretty inefficient. It is used with the same chars all the time, 
-     * so we should have an array containing their escaped values and use a lookup table.
-     */
-    private def escape(str : String, chars : String) : String = {
-        val sb = new StringBuilder
-        for (c <- str) if (chars.indexOf(c) == -1) sb append c else sb append "%" append c.toInt.toHexString.toUpperCase(Locale.ENGLISH)
-        sb.toString
-    }      
-    
     /**
      * Return true  if the namespace of the given URI is known to be an exception for evaluation (e.g. http://schema.org).
      * Return false if the namespace of the given URI starts with should be validated.
