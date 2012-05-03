@@ -20,6 +20,12 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
     val filePrefix = wikiCode.replace("-", "_")
     
     /**
+     * URI prefix for this wiki, e.g. http://be-x-old.wikipedia.org/wiki/
+     */
+    // FIXME: make URL pattern configurable. This is wrong for mappings.dbpedia.org.
+    val uriPrefix = "http://"+wikiCode+".wikipedia.org/wiki/"
+    
+    /**
      */
     override def toString = "wiki="+wikiCode+",locale="+locale.getLanguage
     
