@@ -1,8 +1,9 @@
-package org.dbpedia.extraction.server.util
+package org.dbpedia.extraction.server.stats
 
 import io.Source
 import org.dbpedia.extraction.mappings.ClassMapping
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.server.util.CollectionReader
 import scala.collection.mutable
 import java.io.Writer
 

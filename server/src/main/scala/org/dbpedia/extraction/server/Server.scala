@@ -7,7 +7,7 @@ import scala.collection.immutable.SortedSet
 import org.dbpedia.extraction.mappings.{LabelExtractor,MappingExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.Mappings
-import org.dbpedia.extraction.server.util.MappingStatsManager
+import org.dbpedia.extraction.server.stats.MappingStatsManager
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
 import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis

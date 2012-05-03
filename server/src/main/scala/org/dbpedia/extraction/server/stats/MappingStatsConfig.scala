@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.server.util
+package org.dbpedia.extraction.server.stats
 
 import java.io.File
 

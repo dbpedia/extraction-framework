@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.server.util
+package org.dbpedia.extraction.server.stats
 
 import java.util.logging.Logger
 import io.Source
@@ -13,7 +13,7 @@ import java.io._
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
-import org.dbpedia.extraction.server.util.CreateMappingStats._
+import org.dbpedia.extraction.server.stats.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
