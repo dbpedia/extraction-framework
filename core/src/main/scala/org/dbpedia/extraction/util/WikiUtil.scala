@@ -18,7 +18,7 @@ object WikiUtil
      */
     def cleanSpace( string : String ) : String =
     {
-        string.replace('_', ' ').replace('\u00A0','\u0020').replaceAll(" +", " ").trim
+        string.replaceChars("_\u00A0", " \u0020").replaceAll(" +", " ").trim
     }
     
     /**
@@ -59,19 +59,7 @@ object WikiUtil
             encoded = encoded.capitalize(language.locale)
         }
 
-        // URL-encode everything but ':' '/' '&' and ',' - just like MediaWiki
-        // TODO: MediaWiki probably never did it like that, don't know where I got that from.
-        // See http://svn.wikimedia.org/viewvc/mediawiki/trunk/phase3/includes/GlobalFunctions.php?r1=38683&r2=38908
-        // I think we're free to do as we choose as long as we produce valid URIs.
-        // jc@sahnwaldt.de 2012-03-05
-        // TODO: use IRIs, remove these lines
-        encoded = URLEncoder.encode(encoded, "UTF-8");
-        encoded = encoded.replace("%3A", ":");
-        encoded = encoded.replace("%2F", "/");
-        encoded = encoded.replace("%26", "&");
-        encoded = encoded.replace("%2C", ",");
-
-        encoded;
+        encoded.uriEscape("\"#%<>?[\\]^`{|}")
     }
     
     /**

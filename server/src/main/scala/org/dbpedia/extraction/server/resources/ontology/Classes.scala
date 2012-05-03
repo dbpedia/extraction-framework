@@ -10,7 +10,7 @@ import org.dbpedia.extraction.util.Language
 @Path("/ontology/classes/")
 class Classes
 {
-    private val ontology = Server.extractor.ontology
+    private val ontology = Server.instance.extractor.ontology
 
     /**
      * Retrieves an overview page

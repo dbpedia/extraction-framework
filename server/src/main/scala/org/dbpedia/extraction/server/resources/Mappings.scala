@@ -23,7 +23,7 @@ class Mappings(@PathParam("lang") langCode : String)
 
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
-    if(!Server.languages.contains(language))
+    if(!Server.instance.languages.contains(language))
         throw new WebApplicationException(new Exception("language "+langCode+" not configured in server"), 404)
 
     /**
@@ -61,7 +61,7 @@ class Mappings(@PathParam("lang") langCode : String)
           </head>
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
           </body>
         </html>
     }
@@ -76,7 +76,7 @@ class Mappings(@PathParam("lang") langCode : String)
     {
         logger.info("Get mappings page: " + title)
         val parsed = WikiTitle.parse(title, Language.Default)
-        val pages = Server.extractor.mappingPageSource(language)
+        val pages = Server.instance.extractor.mappingPageSource(language)
         pages.find(_.title == parsed).getOrElse(throw new Exception("No mapping found for " + parsed)).toXML
     }
 
@@ -92,7 +92,7 @@ class Mappings(@PathParam("lang") langCode : String)
         {
             for(page <- XMLSource.fromXML(pageXML))
             {
-                Server.extractor.updateMappingPage(page, language)
+                Server.instance.extractor.updateMappingPage(page, language)
                 logger.info("Updated mapping page: " + page.title)
             }
         }
@@ -114,7 +114,7 @@ class Mappings(@PathParam("lang") langCode : String)
     @Consumes(Array("application/xml"))
     def deletePage(@PathParam("title") @Encoded title : String)
     {
-        Server.extractor.removeMappingPage(WikiTitle.parse(title, Language.Default), language)
+        Server.instance.extractor.removeMappingPage(WikiTitle.parse(title, Language.Default), language)
         logger.info("Deleted mapping page: " + title)
     }
 
@@ -132,7 +132,7 @@ class Mappings(@PathParam("lang") langCode : String)
           </head>
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
           </body>
         </html>
     }
@@ -149,7 +149,7 @@ class Mappings(@PathParam("lang") langCode : String)
         var nodes = new NodeBuffer()
         val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
         nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
-        nodes += Server.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parse(title, Language.Default) :: Nil, Server.wikiApiUrl), language)
+        nodes += Server.instance.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parse(title, Language.Default) :: Nil, Server.wikiApiUrl), language)
         nodes
     }
 
@@ -167,7 +167,7 @@ class Mappings(@PathParam("lang") langCode : String)
             var nodes = new NodeBuffer()
             val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
             nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
-            nodes += Server.extractor.validateMapping(XMLSource.fromXML(pagesXML), language)
+            nodes += Server.instance.extractor.validateMapping(XMLSource.fromXML(pagesXML), language)
             logger.info("Validated mapping page: " + title)
             nodes
         }
@@ -195,7 +195,7 @@ class Mappings(@PathParam("lang") langCode : String)
           </head>
           <body>
             <h2>Mapping pages</h2>
-            { Server.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
           </body>
         </html>
     }
@@ -221,7 +221,7 @@ class Mappings(@PathParam("lang") langCode : String)
         val destination = new StringDestination(TriX.formatter(title.count(_ == '/')+3))
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         // extract at most 1000 triples
-        Server.extractor.extract(source, new ThrottlingDestination(destination, 1000), language)
+        Server.instance.extractor.extract(source, new ThrottlingDestination(destination, 1000), language)
         destination.close()
         destination.toString
     }

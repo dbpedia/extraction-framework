@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
+import org.dbpedia.extraction.destinations.formatters._
 import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
 import org.dbpedia.extraction.mappings._
 import collection.immutable.ListMap
@@ -188,9 +188,11 @@ object ConfigLoader
         }
 
         //Destination
-        val tripleDestination = new FileDestination(new NTriplesFormatter(), targetFile("nt"))
-        val quadDestination = new FileDestination(new NQuadsFormatter(), targetFile("nq"))
-        val destination = new CompositeDestination(tripleDestination, quadDestination)
+        val ntDest = new FileDestination(new NTriplesFormatter(), targetFile("nt"))
+        val nqDest = new FileDestination(new NQuadsFormatter(), targetFile("nq"))
+        val ttlDest = new FileDestination(new TurtleTriplesFormatter(), targetFile("ttl"))
+        val tqlDest = new FileDestination(new TurtleQuadsFormatter(), targetFile("tql"))
+        val destination = new CompositeDestination(ntDest, nqDest, ttlDest, tqlDest)
 
         // Note: label is also used as file name, but space is replaced by underscores
         val jobLabel = "extraction job "+lang.wikiCode+" with "+extractors.size+" extractors"

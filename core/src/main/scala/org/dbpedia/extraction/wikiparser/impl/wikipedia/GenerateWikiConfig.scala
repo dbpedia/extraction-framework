@@ -23,8 +23,14 @@ object GenerateWikiConfig {
     
     val millis = System.currentTimeMillis
     
-    val baseDir = if (args != null && args.length > 0 && args(0) != null) new File(args(0)) else null
-    if (baseDir != null && ! baseDir.isDirectory) throw new IOException("["+baseDir+"] is not an existing directory")
+    require(args != null && args.length == 2 && args(0) != null && args(1) != null, "need two arguments: base dir, overwrite flag (true/false)")
+    
+    val baseDir = new File(args(0))
+    if (! baseDir.isDirectory) throw new IOException("["+baseDir+"] is not an existing directory")
+    
+    val overwrite = args(1).toBoolean
+    
+    val followRedirects = false
     
     val errors = mutable.LinkedHashMap[String, String]()
     
@@ -50,10 +56,10 @@ object GenerateWikiConfig {
     {
       print(code)
       val language = Language(code)
-      val file = if (baseDir == null) null else findFile(baseDir, language)
+      val file = new File(baseDir, language.wikiCode+"wiki-configuration.xml")
       try
       {
-        val downloader = new WikiConfigDownloader(language, followRedirects = false)
+        val downloader = new WikiConfigDownloader(language, followRedirects, overwrite)
         val (namespaces, aliases, magicwords) = downloader.download(factory, file)
         namespaceMap(code) = aliases ++ namespaces // order is important - aliases first
         redirectMap(code) = magicwords("redirect")
@@ -103,15 +109,6 @@ object GenerateWikiConfig {
     
     // languages.length + 1 = languages + commons
     println("generated wiki config for "+(languages.length+1)+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
-  }
-  
-  // TODO: use org.dbpedia.extraction.util.Finder[File]
-  def findFile(baseDir: File, language: Language) : File = {
-    val name = language.wikiCode+"wiki"
-    val wikiDir = new File(baseDir, name)
-    if (! wikiDir.exists && ! wikiDir.mkdir) throw new IOException("directory ["+wikiDir+"] does not exist and cannot be created")
-    val date = new SimpleDateFormat("yyyyMMdd").format(new Date)
-    new File(wikiDir, name+'-'+date+"-configuration.xml")
   }
   
   /**

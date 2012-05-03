@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
 import java.util.Locale
-import java.lang.StringBuilder
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.util.RichString.toRichString
@@ -9,6 +8,7 @@ import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.uri.UriDecoder
 import scala.collection.mutable.ListBuffer
+import org.dbpedia.extraction.ontology.OntologyNamespaces.encodeAsURI
 
 /**
  * Represents a page title.
@@ -17,7 +17,7 @@ import scala.collection.mutable.ListBuffer
  * @param namespace Namespace used to be optional, but that leads to mistakes
  * @param language Language used to be optional, but that leads to mistakes
  */
-class WikiTitle (val decoded : String, val namespace : Namespace, val language : Language, val isInterlanguageLink : Boolean = false, val fragment : String = null)
+class WikiTitle (val decoded : String, val namespace : Namespace, val language : Language, val isInterLanguageLink : Boolean = false, val fragment : String = null)
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
@@ -30,24 +30,15 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     /** Encoded page name with namespace e.g. Template:Automobile_generation */
     val encodedWithNamespace = withNamespace(true)
     
+    /** source uri for this page title */
+    val sourceUri = language.uriPrefix + withNamespace(encodeAsURI.contains(language.wikiCode))
+    
     private def withNamespace(encode : Boolean) : String =
     {
-        val name : String = if (encode) encoded else decoded
-        if (namespace == Namespace.Main)
-        {
-          name
-        }
-        else 
-        {
-          val ns = namespace.getName(language)
-          (if (encode) WikiUtil.wikiEncode(ns, language, capitalize=true) else ns)+ ":" + name
-        }
+      var ns = namespace.getName(language)
+      if (encode) ns = WikiUtil.wikiEncode(ns, language, capitalize=true)
+      (if (ns isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
     }
-    
-    /**
-     * Returns the full source URI.
-     */
-    val sourceUri = "http://" + language.wikiCode + ".wikipedia.org/wiki/"  + encodedWithNamespace
     
     /**
      * Returns useful info.
@@ -99,7 +90,7 @@ object WikiTitle
         decoded = UriDecoder.decode(decoded)
         
         // replace NBSP by SPACE, remove exotic whitespace
-        decoded = replace(decoded, "\u00A0\u200C\u200E\u200F\u2028\u202B\u202C\u3000", " ")
+        decoded = decoded.replaceChars("\u00A0\u200C\u200E\u200F\u2028\u202B\u202C\u3000", " ")
         
         var fragment : String = null
         
@@ -122,7 +113,7 @@ object WikiTitle
         var parts = decoded.split(":", -1)
 
         var leadingColon = false
-        var isInterlanguageLink = false
+        var isInterLanguageLink = false
         var language = sourceLanguage
         var namespace = Namespace.Main
 
@@ -139,7 +130,7 @@ object WikiTitle
             for (lang <- Language.get(parts(0).trim.toLowerCase(sourceLanguage.locale)))
             {
                  language = lang
-                 isInterlanguageLink = ! leadingColon
+                 isInterLanguageLink = ! leadingColon
                  parts = parts.tail
             }
         }
@@ -158,37 +149,7 @@ object WikiTitle
         // FIXME: MediaWiki doesn't capitalize links to other wikis
         val decodedName = parts.mkString(":").trim.capitalize(sourceLanguage.locale)
 
-        new WikiTitle(decodedName, namespace, language, isInterlanguageLink, fragment)
+        new WikiTitle(decodedName, namespace, language, isInterLanguageLink, fragment)
     }
     
-    /**
-     * return a copy of the first string in which all occurrences of chars from the second string
-     * have been replaced by the corresponding char from the third string. If there is no
-     * corresponding char (i.e. the third string is shorter than the second one), the affected
-     * char is removed.
-     */
-    private def replace(str : String, chars : String, replace : String) : String = 
-    {
-      var sb : StringBuilder = null
-      var last = 0
-      var pos = 0
-      
-      while (pos < str.length)
-      {
-        val index = chars.indexOf(str.charAt(pos))
-        if (index != -1)
-        {
-          if (sb == null) sb = new StringBuilder()
-          sb.append(str, last, pos)
-          if (index < replace.length) sb.append(replace.charAt(index))
-          last = pos + 1
-        }
-        
-        pos += 1
-      }
-      
-      if (sb != null) sb.append(str, last, str.length)
-      if (sb == null) str else sb.toString
-    }
-
 }

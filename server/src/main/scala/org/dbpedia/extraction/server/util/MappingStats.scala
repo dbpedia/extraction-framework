@@ -1,8 +1,21 @@
 package org.dbpedia.extraction.server.util
 
+import MappingStats.InvalidTarget
+
 /**
  * Contains the statistic of a Template
  */
+
+object MappingStats {
+  
+  /**
+   * Signals that a template or property is mapped but not used in Wikipedia.
+   * Currently only used for properties. TODO: also use for templates.
+   * We use Int.MaxValue because that means that invalid mappings or sorted first.
+   */
+  val InvalidTarget = Int.MaxValue
+}
+
 class MappingStats(templateStats: TemplateStats, val templateName: String, val isMapped: Boolean, val properties: Map[String, (Int, Boolean)], ignoreList: IgnoreList)
 {
   val templateCount = templateStats.templateCount
@@ -15,7 +28,7 @@ class MappingStats(templateStats: TemplateStats, val templateName: String, val i
     var sum = 0
     for ((name, (count, mapped)) <- properties) {
       if (all || mapped) {
-        if (count != -1 && ! ignoreList.isPropertyIgnored(templateName, name)) {
+        if (count != InvalidTarget && ! ignoreList.isPropertyIgnored(templateName, name)) {
           sum += (if (use) count else 1)
         }
       }

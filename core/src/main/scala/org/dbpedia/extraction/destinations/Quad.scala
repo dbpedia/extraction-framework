@@ -2,13 +2,13 @@ package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.OntologyProperty
-import java.io.CharConversionException
 import org.dbpedia.extraction.util.Language
 
 /**
- * Represents a statement in the N-Quads format (see: http://sw.deri.org/2008/07/n-quads/)
+ * Represents a statement.
  */
-class Quad(    val language : Language,
+// FIXME Handle URI vs IRI stuff only in this class. Use IRIs everywhere else.
+class Quad( val language : Language,
             val dataset : Dataset,
             val subject : String,
             val predicate : String,
@@ -17,181 +17,132 @@ class Quad(    val language : Language,
             var datatype : Datatype )
 {
     //Validate input
-    if(subject == null) throw new NullPointerException("subject")
-    if(predicate == null) throw new NullPointerException("predicate")
-    if(value == null) throw new NullPointerException("value")
-    if(context == null) throw new NullPointerException("context")
+    if (subject == null) throw new NullPointerException("subject")
+    if (predicate == null) throw new NullPointerException("predicate")
+    if (value == null) throw new NullPointerException("value")
+    if (context == null) throw new NullPointerException("context")
 
-    if(value.isEmpty) throw new IllegalArgumentException("Value is empty")
+    if (value.isEmpty) throw new IllegalArgumentException("Value is empty")
 
-    //TODO validate them on creation, now can be either URI/IRI
-    //new URI(subject)
-    //new URI(context)
-    //if(datatype == null) new URI(value)
-
+    // TODO validate?
+    // new URI(subject)
+    // new URI(context)
+    // if (datatype == null) new URI(value)
+    
     def this(language : Language,
              dataset : Dataset,
              subject : String,
              predicate : OntologyProperty,
              value : String,
              context : String,
-             datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
+             datatype : Datatype = null) = this(language, dataset, subject, predicate.uri, value, context, Quad.getType(datatype, predicate))
 
+    def renderNTriple = render(false, false)
 
-    def renderNTriple = render(false)
+    def renderNQuad = render(false, true)
 
-    def renderNQuad = render(true)
+    def renderTurtleTriple = render(true, false)
 
-    override def toString = renderNQuad
+    def renderTurtleQuad = render(true, true)
 
-    private def render(includeContext : Boolean) : String =
+    override def toString = renderTurtleQuad
+
+    private def render(turtle: Boolean, quad: Boolean) : String =
     {
-        val sb = new NTriplesBuilder
-
-        sb append "<" escape subject append "> "
-
-        sb append "<" escape predicate append "> "
-
-        if (datatype != null)
-        {
-            if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string")
-            {
-                sb append '"' escape value append "\""
-
-                sb append "@" + language.isoCode + " "
-            }
-            else
-            {
-                sb append '"' escape value append "\"^^<" escape datatype.uri append "> "
-            }
-        }
-        else
-        {
-            sb append '<' escape value append "> "
-        }
-
-        if (includeContext)
-        {
-            sb append '<' escape context append "> "
-        }
-
-        sb append '.'
-
-        sb.toString()
+      val triple = new TripleBuilder(turtle)
+      triple.uri(subject).uri(predicate).value(value, datatype, language)
+      if (quad) triple.uri(context)
+      triple.close().toString()
     }
 }
 
-class NTriplesBuilder
+class TripleBuilder(turtle: Boolean)
 {
-    private val sb = new StringBuilder
+    // Scala's StringBuilder doesn't have appendCodePoint
+    private val sb = new java.lang.StringBuilder
     
-    def append(s : String) : NTriplesBuilder =
-    {
-      sb append s
+    // FIXME Handle URI vs IRI stuff only in this method. Use IRIs in all other classes and methods.
+    def uri(uri: String): TripleBuilder = {
+      this append '<' escape uri append "> "
       this
     }
     
-    def append(c : Char) : NTriplesBuilder = 
-    {
-      sb append c
+    def value(value: String, datatype: Datatype, language: Language): TripleBuilder = {
+      if (datatype == null) this uri value
+      else {
+        this append '"' escape value append '"' 
+        if (datatype.name == "xsd:string") this append '@' append language.isoCode append ' '
+        else this append "^^" uri datatype.uri
+      }
       this
+    }
+    
+    def close(): TripleBuilder = {
+      // use UNIX EOL. N-Triples and Turtle don't care:
+      // http://www.w3.org/TR/rdf-testcases/#eoln and http://www.w3.org/TR/turtle/#term-turtle2-WS
+      // and it's probably better to be consistent instead of using the EOL of the platform
+      // where the file was generated. These files are moved around a lot anyway.
+      sb append ".\n"
+      this
+    }
+      
+    override def toString: String = {
+      sb toString
+    }
+    
+    private def append(s: String) = { 
+      sb append s
+      this 
+    }
+    
+    private def append(c: Char) = { 
+      sb append c
+      this 
     }
     
     /**
-     * Escapes an unicode string according to N-Triples format
+     * Escapes an unicode string according to N-Triples / Turtle format
      */
-    def escape(input : String) : NTriplesBuilder =
+    private def escape(input: String): TripleBuilder =
     {
-        // iterate over code points (http://blogs.sun.com/darcy/entry/iterating_over_codepoints)
-        val inputLength = input.length
-        var offset = 0
+      val length = input.length
+      
+      var offset = 0
+      while (offset < length)
+      {
+        val c = input.codePointAt(offset)
+        offset += Character.charCount(c)
 
-        while (offset < inputLength)
-        {
-            val c = input.codePointAt(offset)
-            offset += Character.charCount(c)
-
-            //Ported from Jena's NTripleWriter
-            if (c == '\\' || c == '"')
-            {
-                sb append '\\' append c.toChar
-            }
-            else if (c == '\n')
-            {
-                sb append "\\n"
-            }
-            else if (c == '\r')
-            {
-                sb append "\\r";
-            }
-            else if (c == '\t')
-            {
-                sb append "\\t"
-            }
-            else if (c >= 32 && c < 127)
-            {
-                sb append c.toChar
-            }
-            else
-            {
-                val hexStr = c.toHexString.toUpperCase
-                val hexStrLen = hexStr.length
-
-                if (c <= 0xffff)
-                {
-                    // 16-bit code point
-                    sb append "\\u"
-                    sb append "0" * (4 - hexStrLen)  // leading zeros
-                }
-                else if (c <= 0x10ffff)  // biggest representable code point
-                {
-                    // 32-bit code point
-                    sb append "\\U"
-                    sb append "0" * (8 - hexStrLen)  // leading zeros
-                }
-                else
-                {
-                    throw new CharConversionException("code point "+c+" outside of range (0x0000..0x10ffff)")
-                }
-
-                sb append hexStr
-            }
-        }
-        
-        this
+        if (c == '\\' || c == '"') sb append '\\' append c.toChar
+        else if (c == '\n') sb append "\\n"
+        else if (c == '\r') sb append "\\r";
+        else if (c == '\t') sb append "\\t"
+        else if (c >= 0x0020 && c < 0x00FF) sb append c.toChar
+        else if (turtle && c >= 0x00A0 && c <= 0xFFFF) sb append c.toChar
+        else if (turtle && c >= 0x10000) sb appendCodePoint c
+        else this appendHex c
+      }
+      
+      this
     }
     
-    override def toString = sb toString
+    private def appendHex(c: Int) {
+      val hex = c.toHexString.toUpperCase
+      if (c <= 0xFFFF) sb append "\\u" append "0" * (4 - hex.length)
+      else sb append "\\U" append "0" * (8 - hex.length)
+      sb append hex
+    }
+    
 }
 
 object Quad
 {
-    private def validatePredicate(predicate : OntologyProperty, datatype : Datatype) : String = predicate.uri //TODO
-
-    // TODO: why check this special case here, but not others? We should
-    // check that the given type is a sub type of the predicate range.
-    //    if ($this->predicate instanceof \dbpedia\ontology\OntologyDataTypeProperty)
-    //    {
-    //        if (($this->type instanceof \dbpedia\ontology\dataTypes\DimensionDataType))
-    //        {
-    //            $this->validationErrors[] = "- Ontology Property Range is not a Unit: '".$this->type->getName()."'";
-    //            $valid = false;
-    //        }
-    //    }
-
-    private def getType(predicate : OntologyProperty, datatype : Datatype) : Datatype =
-    {
-        if(datatype != null)
-        {
-             datatype
-        }
-        else
-        {
-            predicate.range match
-            {
-                case dt : Datatype => dt
-                case _ => null
-            }
-        }
+  private def getType(datatype : Datatype, predicate : OntologyProperty): Datatype =
+  {
+    if (datatype != null) datatype
+    else predicate.range match {
+      case datatype: Datatype => datatype
+      case _ => null
     }
+  }
 }
