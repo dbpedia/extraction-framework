@@ -47,6 +47,8 @@ object ConfigLoader
     private var ontologyFile : File = null
 
     private var mappingsDir : File = null
+    
+    private var requireComplete = true
 
     private class Config(config : Properties)
     {
@@ -54,6 +56,9 @@ object ConfigLoader
         if(config.getProperty("dumpDir") == null) throw new IllegalArgumentException("Property 'dumpDir' not defined.")
         val dumpDir = new File(config.getProperty("dumpDir"))
         if (! dumpDir.exists) throw new IllegalArgumentException("dump dir "+dumpDir+" does not exist")
+        
+        if(config.getProperty("require-download-complete") != null)
+          requireComplete = config.getProperty("require-download-complete").toBoolean
 
         /** Local ontology file, downloaded for speed and reproducibility */
         if(config.getProperty("ontologyFile") != null)
@@ -119,8 +124,9 @@ object ConfigLoader
     private def createExtractionJob(lang : Language) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang)
-        val date = finder.dates(Download.Complete).last
 
+        val date = latestDate(finder)
+        
         //Extraction Context
         val context = new DumpExtractionContext
         {
@@ -221,9 +227,16 @@ object ConfigLoader
     private lazy val _commonsSource =
     {
       val finder = new Finder[File](config.dumpDir, Language("commons"))
-      val date = finder.dates(Download.Complete).last
+      val date = latestDate(finder)
       val file = finder.file(date, "pages-articles.xml")
       XMLSource.fromFile(file, _.namespace == Namespace.File)
+    }
+    
+    private def latestDate(finder: Finder[_]): String = {
+      val fileName = if (requireComplete) Download.Complete else "pages-articles.xml"
+      val dates = finder.dates(fileName)
+      if (dates.isEmpty) throw new IllegalArgumentException("found no directory with file '"+finder.wikiName+"-[YYYYMMDD]-"+fileName+"'")
+      dates.last
     }
     
 }
