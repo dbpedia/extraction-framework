@@ -20,10 +20,15 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
     val filePrefix = wikiCode.replace("-", "_")
     
     /**
-     * URI prefix for this wiki, e.g. "http://be-x-old.wikipedia.org"
+     * URI prefix for this wiki, e.g. "http://be-x-old.wikipedia.org", "http://commons.wikimedia.org",
+     * "http://mappings.dbpedia.org".
      */
-    // FIXME: make URL pattern configurable. This is wrong for mappings.dbpedia.org.
-    val baseUri = "http://"+wikiCode+'.'+(if (wikiCode == "commons") "wikimedia" else "wikipedia")+".org"
+    // TODO: this should not be hard-coded.
+    val baseUri = wikiCode match {
+      case "commons" => "http://commons.wikimedia.org"
+      case "mappings" => "http://mappings.dbpedia.org"
+      case _ => "http://"+wikiCode+".wikipedia.org"
+    }
     
     /**
      */
@@ -60,6 +65,7 @@ object Language extends (String => Language)
     // See: http://s23.org/wikistats/wikipedias_html.php (and http://en.wikipedia.org/wiki/List_of_Wikipedias)
     // Mappings are mostly based on similarity of the languages and in some cases on the regions where a related language is spoken.
     // See NonIsoLanguagesMappingTest and run it regularly.
+    // TODO: move these to a config file
     val nonIsoCodes = Map(
       "ace" -> "id",           // Acehnese
       "als" -> "sq",           // Tosk Albanian
@@ -120,6 +126,7 @@ object Language extends (String => Language)
       "lmo" -> "it",           // Lombard
       "ltg" -> "lv",
       "map-bms" -> "jv",       // Banyumasan
+      "mappings" -> "en",      // mappings wiki uses en, mostly
       "mdf" -> "ru",           // Moksha
       "mhr" -> "ru",           // Mari
       "minnan" -> "zh",
