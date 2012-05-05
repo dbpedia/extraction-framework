@@ -110,13 +110,14 @@ abstract class Node(val children : List[Node], val line : Int)
     }
     
     /**
-     * URL of source page and line number.
+     * IRI of source page and line number.
+     * TODO: rename to sourceIri.
      */
     def sourceUri : String =
     {
         val sb = new StringBuilder
         
-        sb append root.title.sourceUri
+        sb append root.title.pageIri
 
         if (section != null)
         {
