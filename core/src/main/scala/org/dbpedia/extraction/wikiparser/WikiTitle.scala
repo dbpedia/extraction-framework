@@ -13,7 +13,7 @@ import org.dbpedia.extraction.ontology.OntologyNamespaces.encodeAsURI
 /**
  * Represents a page title.
  *
- * @param decoded Encoded page name. URL-decoded, using normalized spaces (not underscores), first letter uppercase.
+ * @param decoded Canonical page name: URL-decoded, using normalized spaces (not underscores), first letter uppercase.
  * @param namespace Namespace used to be optional, but that leads to mistakes
  * @param language Language used to be optional, but that leads to mistakes
  */
@@ -21,17 +21,17 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
-    /** Encoded page name (without namespace) e.g. Automobile_generation */
+    /** Wiki-encoded page name (without namespace) e.g. Automobile_generation */
     val encoded = WikiUtil.wikiEncode(decoded, language, capitalize=true)
 
-    /** Decoded page name with namespace e.g. Template:Automobile generation */
+    /** Canonical page name with namespace e.g. "Template talk:Automobile generation" */
     val decodedWithNamespace = withNamespace(false)
 
-    /** Encoded page name with namespace e.g. Template:Automobile_generation */
+    /** Wiki-encoded page name with namespace e.g. "Template_talk:Automobile_generation" */
     val encodedWithNamespace = withNamespace(true)
     
-    /** source uri for this page title */
-    val sourceUri = language.uriPrefix + withNamespace(encodeAsURI.contains(language.wikiCode))
+    /** source IRI for this page title */
+    val sourceUri = language.uriPrefix + encodedWithNamespace
     
     private def withNamespace(encode : Boolean) : String =
     {
@@ -104,11 +104,7 @@ object WikiTitle
         
         decoded = WikiUtil.cleanSpace(decoded)
         
-        // FIXME: handle special prefixes, e.g. [[q:Foo]] links to WikiQuotes
-        // get them live from 
-        // http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&format=xml
-        // http://de.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&format=xml
-        // etc. Almost identical, except for stuff like q => en.wikiquote.org, de.wikiquote.org
+        // FIXME: use interwiki prefixes from WikiSettingsDownloader.scala, e.g. [[q:Foo]] links to wikiquotes
 
         var parts = decoded.split(":", -1)
 
