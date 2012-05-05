@@ -26,10 +26,10 @@ class Quad( val language : Language,
     if (value.isEmpty) throw new IllegalArgumentException("Value is empty")
 
     // Validate URIs
-    new URI(subject)
-    new URI(predicate)
-    new URI(context)
-    if (datatype == null) new URI(value)
+//    new URI(subject)
+//    new URI(predicate)
+//    new URI(context)
+//    if (datatype == null) new URI(value)
     
     def this(language : Language,
              dataset : Dataset,
