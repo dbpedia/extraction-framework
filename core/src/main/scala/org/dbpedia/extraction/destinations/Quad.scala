@@ -3,6 +3,7 @@ package org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.Language
+import java.net.URI
 
 /**
  * Represents a statement.
@@ -24,10 +25,11 @@ class Quad( val language : Language,
 
     if (value.isEmpty) throw new IllegalArgumentException("Value is empty")
 
-    // TODO validate?
-    // new URI(subject)
-    // new URI(context)
-    // if (datatype == null) new URI(value)
+    // Validate URIs
+    new URI(subject)
+    new URI(predicate)
+    new URI(context)
+    if (datatype == null) new URI(value)
     
     def this(language : Language,
              dataset : Dataset,
