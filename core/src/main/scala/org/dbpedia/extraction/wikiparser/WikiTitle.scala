@@ -30,8 +30,8 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     /** Wiki-encoded page name with namespace e.g. "Template_talk:Automobile_generation" */
     val encodedWithNamespace = withNamespace(true)
     
-    /** source IRI for this page title */
-    val sourceUri = language.uriPrefix + encodedWithNamespace
+    /** page IRI for this page title */
+    val pageIri = language.baseUri+"/wiki/"+encodedWithNamespace
     
     private def withNamespace(encode : Boolean) : String =
     {

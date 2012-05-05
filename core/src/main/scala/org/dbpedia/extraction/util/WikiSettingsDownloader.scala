@@ -6,17 +6,8 @@ import java.net.URLDecoder.decode
 import java.net.HttpURLConnection.{HTTP_OK,HTTP_MOVED_PERM,HTTP_MOVED_TEMP}
 import javax.xml.stream.XMLInputFactory
 import scala.collection.{Map,Set}
-import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
-import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
 
-class WikiSettings (
-  val namespaces: Map[String, Int], 
-  val aliases: Map[String, Int], 
-  val magicwords: Map[String, Set[String]], 
-  val interwikis: Map[String, String]
-)
-
-  /**
+/**
  * Downloads namespace names, namespace alias names and redirect magic words for a wikipedia 
  * language edition via api.php.
  * 
@@ -33,15 +24,12 @@ class WikiSettings (
  */
 class WikiSettingsDownloader(language: Language, followRedirects: Boolean, overwrite: Boolean) {
   
-  val url = new URL(api(language)+"?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords|interwikimap")
+  val url = new URL(language.baseUri+"/w/api.php?"+WikiSettingsReader.query)
   
-  private def api(language : Language) : String =
-    "http://"+language.wikiCode+"."+(if (language.wikiCode == "commons") "wikimedia" else "wikipedia")+".org/w/api.php"
-    
   /**
-   * @return namespaces (name -> code), namespace aliases (name -> code), magic words (name -> aliases)
-   * @throws HttpRetryException if followRedirects is false and this language is redirected to another 
-   * language. The message of the HttpRetryException is the target language.
+   * @return 
+   * @throws HttpRetryException if followRedirects is false and this language is redirected 
+   * to another language. The message of the HttpRetryException is the target language.
    * @throws IOException if another error occurs
    */
   def download(factory: XMLInputFactory, file: File = null): WikiSettings = 
@@ -71,7 +59,7 @@ class WikiSettingsDownloader(language: Language, followRedirects: Boolean, overw
   }
   
   private def read(stream: InputStream, factory: XMLInputFactory) = {
-    new WikiSettingsReader(new XMLEventAnalyzer(factory.createXMLEventReader(stream))).read()
+    new WikiSettingsReader(factory.createXMLEventReader(stream)).read()
   }
   
   /**
@@ -106,85 +94,4 @@ class WikiSettingsDownloader(language: Language, followRedirects: Boolean, overw
     }
   }
   
-}
-
-/**
- * Note: we use linked sets and maps to preserve order. Scala currently has no immutable linked 
- * collections, so we use mutable ones (which should also improve performance). Calling .toMap
- * to make them immutable would destroy the order, so we simply return them, but as an immutable
- * interface. Malicious users could still downcast and mutate.
- */
-class WikiSettingsReader(in : XMLEventAnalyzer) {
-  
-  /**
-   * @return namespaces (name -> code), namespace aliases (name -> code), magic words (name -> aliases)
-   */
-  def read(): WikiSettings = {
-    in.document { _ =>
-      in.element("api") { _ =>
-        in.element("query") { _ =>
-          val namespaces = readNamespaces("namespaces", true)
-          val aliases = readNamespaces("namespacealiases", false)
-          val magicwords = readMagicWords()
-          val interwikis = readInterwikiMap()
-          new WikiSettings(namespaces, aliases, magicwords, interwikis)
-        }
-      }
-    }
-  }
-  
-  /**
-   * @return namespaces or aliases (name -> code)
-   */
-  private def readNamespaces(tag : String, canonical : Boolean) : Map[String, Int] = {
-    in.element(tag) { _ =>
-      // LinkedHashMap to preserve order
-      val namespaces = new LinkedHashMap[String, Int]
-      in.elements("ns") { ns =>
-        val id = (ns getAttr "id").toInt
-        in.text { text => 
-          // order is important here - canonical first, because in the reverse map 
-          // in Namespaces.scala it must be overwritten by the localized value.
-          if (canonical && id != 0) namespaces(ns getAttr "canonical") = id
-          namespaces(text) = id
-        }
-      }
-      namespaces
-    }
-  }
-    
-  /**
-   * @return magic words (name -> aliases)
-   */
-  private def readMagicWords() : Map[String, Set[String]] = {
-    in.element("magicwords") { _ =>
-      // LinkedHashMap to preserve order (although it's probably not important)
-      val magicwords = new LinkedHashMap[String, Set[String]]
-      in.elements("magicword") { mw =>
-        // LinkedHashSet to preserve order (although it's probably not important)
-        val aliases = new LinkedHashSet[String]
-        in.elements("aliases") { _ =>
-          in.elements("alias") { _ =>
-            in.text { text => 
-              aliases += text
-            }
-          }
-        }
-        magicwords.put(mw getAttr "name", aliases)
-      }
-      magicwords
-    }
-  }
-  
-  private def readInterwikiMap(): Map[String, String] = {
-    in.element("interwikimap") { _ =>
-      // LinkedHashMap to preserve order (although it's probably not important)
-      val interwikis = new LinkedHashMap[String, String]
-      in.elements("iw") { iw =>
-        interwikis(iw getAttr "prefix") = iw getAttr "url"
-      }
-      interwikis
-    }
-  }
-
 }
