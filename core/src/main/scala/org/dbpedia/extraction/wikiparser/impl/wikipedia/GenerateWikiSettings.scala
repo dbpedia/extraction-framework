@@ -2,7 +2,8 @@ package org.dbpedia.extraction.wikiparser.impl.wikipedia
 
 import scala.io.{Source, Codec}
 import javax.xml.stream.XMLInputFactory
-import scala.collection.mutable
+import scala.collection.{Map,Set}
+import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
 import org.dbpedia.extraction.util.{Language,WikiSettingsDownloader,StringUtils}
 import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
 import java.net.HttpRetryException
@@ -32,16 +33,16 @@ object GenerateWikiSettings {
     
     val followRedirects = false
     
-    val errors = mutable.LinkedHashMap[String, String]()
+    val errors = LinkedHashMap[String, String]()
     
     // (language -> (namespace name or alias -> code))
-    val namespaceMap = mutable.LinkedHashMap[String, mutable.Map[String, Int]]()
+    val namespaceMap = LinkedHashMap[String, Map[String, Int]]()
     
     // (language -> redirect magic word aliases)
-    val redirectMap = mutable.LinkedHashMap[String, mutable.Set[String]]()
+    val redirectMap = LinkedHashMap[String, Set[String]]()
     
     // (old language code -> new language code)
-    val languageMap = mutable.LinkedHashMap[String, String]()
+    val languageMap = LinkedHashMap[String, String]()
     
     // Note: langlist is sometimes not correctly sorted (done by hand), but no problem for us.
     val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
@@ -60,9 +61,10 @@ object GenerateWikiSettings {
       try
       {
         val downloader = new WikiSettingsDownloader(language, followRedirects, overwrite)
-        val (namespaces, aliases, magicwords) = downloader.download(factory, file)
-        namespaceMap(code) = aliases ++ namespaces // order is important - aliases first
-        redirectMap(code) = magicwords("redirect")
+        val settings = downloader.download(factory, file)
+        namespaceMap(code) = settings.aliases ++ settings.namespaces // order is important - aliases first
+        redirectMap(code) = settings.magicwords("redirect")
+        // TODO: also use interwikis
         println(" - OK")
       } catch {
         case hrex : HttpRetryException => {
@@ -129,7 +131,7 @@ object GenerateWikiSettings {
     } finally source.close
   }
   
-  private def build[V](tag : String, languages : mutable.Map[String, String], values : mutable.Map[String, V])
+  private def build[V](tag : String, languages : Map[String, String], values : Map[String, V])
     (append : (String, V, StringPlusser) => Unit) : String =
   {
     var s = new StringPlusser
