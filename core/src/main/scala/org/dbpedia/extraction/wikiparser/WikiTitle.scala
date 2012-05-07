@@ -22,7 +22,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
     /** Wiki-encoded page name (without namespace) e.g. Automobile_generation */
-    val encoded = WikiUtil.wikiEncode(decoded, language, capitalize=true)
+    val encoded = WikiUtil.wikiEncode(decoded).capitalize(language.locale)
 
     /** Canonical page name with namespace e.g. "Template talk:Automobile generation" */
     val decodedWithNamespace = withNamespace(false)
@@ -36,7 +36,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     private def withNamespace(encode : Boolean) : String =
     {
       var ns = namespace.getName(language)
-      if (encode) ns = WikiUtil.wikiEncode(ns, language, capitalize=true)
+      if (encode) ns = WikiUtil.wikiEncode(ns).capitalize(language.locale)
       (if (ns isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
     }
     

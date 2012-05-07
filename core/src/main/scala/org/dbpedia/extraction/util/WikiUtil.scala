@@ -40,10 +40,9 @@ object WikiUtil
      * TODO: a canonical MediaWiki page name does not contain multiple spaces. We should not
      * clean spaces but simply throw an exception if the name is not canonical.
      * 
-     * @param name Canonical MediaWiki page name, e.g. 'Émile Zola'. If capitalize is true,
-     * this must not include the namespace (e.g. 'Template:').
+     * @param name Canonical MediaWiki page name, e.g. 'Émile Zola'
      */
-    def wikiEncode(name : String, language : Language, capitalize : Boolean) : String =
+    def wikiEncode(name : String) : String =
     {
         // TODO: all this replacing is inefficient, one loop over the string would be nicer.
         
@@ -60,34 +59,17 @@ object WikiUtil
         // trim underscores from end 
         encoded = encoded.replaceAll("_$", "");
 
-        // make first character uppercase
-        // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt. 
-        // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
-        // capitalize can be false for encoding property names, e.g. in the InfoboxExtractor
-        if(capitalize)
-        {
-            encoded = encoded.capitalize(language.locale)
-        }
-
         encoded.uriEscape("\"#%<>?[\\]^`{|}")
     }
     
+        
     /**
      * @param name encoded MediaWiki page name, e.g. '%C3%89mile_Zola'.
      * Must not include the namespace (e.g. 'Template:').
      */
-    def wikiDecode(name : String, language : Language, capitalize : Boolean) : String =
+    def wikiDecode(name : String) : String =
     {
-        var decoded = cleanSpace(URLDecoder.decode(name, "UTF-8"))
-
-        // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt.
-        // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
-        if(capitalize)
-        {
-            decoded = decoded.capitalize(language.locale)
-        }
-
-        decoded
+        cleanSpace(URLDecoder.decode(name, "UTF-8"))
     }
 
     private val wikiEmphasisRegex1 = "(?s)'''''(.*?)'''''".r

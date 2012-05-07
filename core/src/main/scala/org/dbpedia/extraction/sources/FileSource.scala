@@ -37,7 +37,7 @@ class FileSource(baseDir : File, filter : (String => Boolean) = (path => !path.s
             val slash = path.indexOf('/');
             
             var pageName = if(sep > slash) path.substring(0, sep) else path
-            pageName = WikiUtil.wikiDecode(pageName, language, false)
+            pageName = WikiUtil.wikiDecode(pageName)
                 
             try
             {

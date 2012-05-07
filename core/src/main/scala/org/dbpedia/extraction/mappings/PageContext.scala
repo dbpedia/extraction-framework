@@ -49,7 +49,7 @@ private class UriGenerator
             text = text.replaceAll("\\s+", "_") //remove white space
 	        text = text.trim
 	        if(text.length > 50) text = text.substring(0, 50)
-	        text = URLEncoder.encode(text, "UTF-8")
+	        text = WikiUtil.wikiEncode(text)
 
 	        //Test if the base URI ends with a prefix of text
 	        var i = baseUri.length - 1

@@ -32,7 +32,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
     private val ignoreColor = "#b0b0b0"
     private val notDefinedColor = "#FFF8C6"
 
-    private def wikiDecode(name: String) : String = WikiUtil.wikiDecode(name, language, capitalize=false)
+    private def wikiDecode(name: String) : String = WikiUtil.wikiDecode(name)
 
     private def passwordQuery : String = if (Server.instance.adminRights(password)) "?p="+password else ""
 

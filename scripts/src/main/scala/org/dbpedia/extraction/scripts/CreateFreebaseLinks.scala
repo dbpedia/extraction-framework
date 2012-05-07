@@ -6,6 +6,7 @@ import io.Source
 import java.io.{FileOutputStream, PrintStream, File}
 import java.net.URL
 import org.dbpedia.extraction.util.{Language,WikiUtil}
+import org.dbpedia.extraction.util.RichString.toRichString
 
 /**
  * Created by IntelliJ IDEA.
@@ -100,7 +101,7 @@ object CreateFreebaseLinks
             uri = uri.replace("$"+codePoint, Integer.parseInt(codePoint, 16).toChar.toString)
         }
         // TODO: which language?
-        WikiUtil.wikiEncode(uri, Language.Default, capitalize=true)
+        WikiUtil.wikiEncode(uri).capitalize(Language.Default.locale)
     }
 
     private def loadURIs(dbpediaDataset : File) : Set[String] =

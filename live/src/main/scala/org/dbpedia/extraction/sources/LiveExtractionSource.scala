@@ -6,6 +6,7 @@ import java.io.{File,FileInputStream,InputStreamReader}
 import xml.Elem
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.mappings.AugmenterExtractorUtils
+import org.dbpedia.extraction.util.RichString.toRichString
 
 /**
  * Created by IntelliJ IDEA.
@@ -75,7 +76,7 @@ object LiveExtractionSource
 
 
               link = link.trim().replaceAll("\\s","_")
-              val mytitle = WikiUtil.wikiEncode(link, language, capitalize=true)
+              val mytitle = WikiUtil.wikiEncode(link).capitalize(language.locale)
               println(mytitle)
 
                 f( new WikiPage( title     = WikiTitle.parse(link, language),
