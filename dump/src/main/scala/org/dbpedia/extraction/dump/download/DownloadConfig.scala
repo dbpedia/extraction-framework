@@ -11,13 +11,11 @@ class DownloadConfig
   
   var baseDir : File = null
   
-  var csvUrl : URL = null
+  var listUrl : URL = null
   
   val languages = new HashMap[String, Set[String]]
   
   val ranges = new HashMap[(Int,Int), Set[String]]
-  
-  val others = new HashSet[URL]
   
   var retryMax = 0
   
@@ -53,8 +51,7 @@ class DownloadConfig
       case Ignored(_) => // ignore
       case Arg("base", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
       case Arg("dir", path) => baseDir = resolveFile(dir, path)
-      case Arg("csv", url) => csvUrl = toURL(url, arg)
-      case Arg("other", url) => others += toURL(url, arg)
+      case Arg("wikilist", url) => listUrl = toURL(url, arg)
       case Arg("retry-max", count) => retryMax = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-millis", millis) => retryMillis = toInt(millis, 0, Int.MaxValue, arg)
       case Arg("unzip", bool) => unzip = toBoolean(bool, arg)
