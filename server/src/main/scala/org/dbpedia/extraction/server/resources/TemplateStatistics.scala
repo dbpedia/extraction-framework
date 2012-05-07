@@ -66,7 +66,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     private val percentageMappedTemplateOccurrences: String = "%2.2f".format(mappedTemplateUseRatio * 100)
     private val percentageMappedPropertyOccurrences: String = "%2.2f".format(mappedPropertyUseRatio * 100)
 
-    private val mappingUrlPrefix = Server.instance.wikiPagesUrl+"/"+Namespace.mappings(language).getName(Language.Default).replace(' ','_')+":"
+    private val mappingUrlPrefix = Server.instance.paths.pagesUrl+"/"+Namespace.mappings(language).getName(Language.Default).replace(' ','_')+":"
 
     private val mappedGoodColor = "#65c673"
     private val mappedMediumColor = "#ecea48"

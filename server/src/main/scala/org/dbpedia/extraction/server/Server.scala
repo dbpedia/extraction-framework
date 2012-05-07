@@ -13,21 +13,14 @@ import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.Namespace
 
-class Server(private val password : String, wikiUri: URL, languages : Seq[Language], files: FileParams) 
+class Server(private val password : String, langs : Seq[Language], val paths: Paths) 
 {
-    /** 
-     * The URL where the pages of the Mappings Wiki are located
-     */
-    val wikiPagesUrl = new URL(wikiUri, "index.php")
-
-    /** 
-     * The URL of the MediaWiki API of the Mappings Wiki 
-     */
-    val wikiApiUrl = new URL(wikiUri, "api.php")
-    
-    val managers = SortedMap(languages.map(lang => (lang -> new MappingStatsManager(files.statsDir, lang))): _*)(Language.wikiCodeOrdering)
+    val managers = {
+      val tuples = langs.map(lang => lang -> new MappingStatsManager(paths.statsDir, lang))
+      SortedMap(tuples: _*)(Language.wikiCodeOrdering)
+    }
         
-    val extractor = new DynamicExtractionManager(managers(_).updateMappings(_), languages, files)
+    val extractor = new DynamicExtractionManager(managers(_).updateMappings(_), langs, paths)
     
     extractor.updateAll
         
@@ -60,7 +53,7 @@ object Server
         
         val password = args(2)
         
-        val files = new FileParams(new File(args(3)), new File(args(4)), new File(args(5)))
+        val paths = new Paths(new URL(wikiUri, "index.php"), new URL(wikiUri, "api.php"), new File(args(3)), new File(args(4)), new File(args(5)))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
         var langs : Seq[Language] = for(arg <- args.drop(6); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
@@ -68,7 +61,7 @@ object Server
         // if no languages are given, use all languages for which a mapping namespace is defined
         if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq
         
-        _instance = new Server(password, wikiUri, langs, files)
+        _instance = new Server(password, langs, paths)
         
         // Configure the HTTP server
         val resources = new PackagesResourceConfig("org.dbpedia.extraction.server.resources", "org.dbpedia.extraction.server.providers")

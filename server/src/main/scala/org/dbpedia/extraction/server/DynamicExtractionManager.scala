@@ -17,8 +17,8 @@ import scala.actors.Actor
  * be atomic, i.e. client code that uses the different fields should atomically get a holder object
  * that holds all the values. 
  */
-class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Traversable[Language], files: FileParams) 
-extends ExtractionManager(languages, files)
+class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Traversable[Language], paths: Paths) 
+extends ExtractionManager(languages, paths)
 {
     private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
