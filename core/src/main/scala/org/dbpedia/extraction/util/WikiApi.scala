@@ -71,7 +71,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(ids <- pageIds.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&pageids=" + ids.mkString("|") + "&rvprop=ids|content")
+                val response = query("?action=query&format=xml&prop=revisions&pageids=" + ids.mkString("|") + "&rvprop=ids|content|timestamp")
                 processPages(response, proc)
             }
         }
