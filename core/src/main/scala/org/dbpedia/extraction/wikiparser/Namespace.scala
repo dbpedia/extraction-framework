@@ -81,19 +81,19 @@ private class NamespaceBuilder {
 private[wikiparser] class NamespaceBuilderDisposer(builder: NamespaceBuilder) {
   
   /**
-   * Immutable map containing all MediaWiki and DBpedia namespaces.
+   * Immutable map from namespace code to namespace containing all MediaWiki and DBpedia namespaces.
    */
-  val values = builder.values.toMap // toMap makes immutable
+  val values: Map[Int, Namespace] = builder.values.toMap // toMap makes immutable
 
   /**
-   * Immutable map containing the mapping namespaces on http://mappings.dbpedia.org.
+   * Immutable map from language to namespace containing only the mapping namespaces on http://mappings.dbpedia.org.
    */
-  val mappings = builder.mappings.toMap // toMap makes immutable
+  val mappings: Map[Language, Namespace]  = builder.mappings.toMap // toMap makes immutable
   
   /**
-   * Immutable map containing the DBpedia namespaces.
+   * Immutable map from namespace name to namespace containing only the DBpedia namespaces.
    */
-  protected val dbpedias = builder.dbpedias.toMap // toMap makes immutable
+  val dbpedias: Map[String, Namespace] = builder.dbpedias.toMap // toMap makes immutable
 }
 
 object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
