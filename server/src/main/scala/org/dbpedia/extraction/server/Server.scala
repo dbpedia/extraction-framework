@@ -32,10 +32,6 @@ object Server
 {
     val logger = Logger.getLogger(getClass.getName)
 
-    // Note: we use /server/ because that's what we use on http://mappings.dbpedia.org/server/
-    // It makes handling redirects easier.
-    val serverURI = new URI("http://localhost:9998/server/")
-
     /** 
      * The URL where the pages of the Mappings Wiki are located
      * TODO: make this configurable 
@@ -58,10 +54,13 @@ object Server
         
         logger.info("DBpedia server starting")
         
-        require(args != null && args.length >= 4, "need at least four args: password for template ignore list, base dir for statistics, ontology file, mappings dir. Additional args are wiki codes for languages.")
-        val password = args(0)
+        require(args != null && args.length >= 5, "need at least five args: URL, password for template ignore list, base dir for statistics, ontology file, mappings dir. Additional args are wiki codes for languages.")
         
-        val files = new FileParams(new File(args(1)), new File(args(2)), new File(args(3)))
+        val uri = args(0)
+        
+        val password = args(1)
+        
+        val files = new FileParams(new File(args(2)), new File(args(3)), new File(args(4)))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
         var langs : Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
@@ -82,8 +81,8 @@ object Server
         features.put(ResourceConfig.FEATURE_NORMALIZE_URI, true)
         features.put(ResourceConfig.FEATURE_REDIRECT, true)
 
-        HttpServerFactory.create(serverURI, resources).start()
+        HttpServerFactory.create(new URI(uri), resources).start()
 
-        logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis) + " listening on " + serverURI)
+        logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis) + " listening on " + uri)
     }
 }
