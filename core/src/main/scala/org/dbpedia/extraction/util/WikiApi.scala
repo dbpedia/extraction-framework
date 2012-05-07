@@ -100,7 +100,6 @@ class WikiApi(url: URL, language: Language)
         for(page <- response \ "query" \ "pages" \ "page";
             rev <- page \ "revisions" \ "rev" )
         {
-            // TODO: we don't need .head here, do we?
             proc( new WikiPage( title     = WikiTitle.parse((page \ "@title").head.text, language),
                              redirect  = null, // TODO: read redirect from XML
                              id        = (page \ "@pageid").head.text.toLong,
