@@ -152,7 +152,7 @@ class Mappings(@PathParam("lang") langCode : String)
     def validateExistingPage(@PathParam("title") @Encoded title : String) =
     {
         val titles = List(WikiTitle.parse(title, Language.Default))
-        val source = WikiSource.fromTitles(titles, Server.instance.wikiApiUrl, Language.Default)
+        val source = WikiSource.fromTitles(titles, Server.instance.paths.apiUrl, Language.Default)
         var nodes = new NodeBuffer()
         val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
         nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>

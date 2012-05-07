@@ -12,8 +12,8 @@ import java.io.File
  * Is NOT able to update the ontology or the mappings.
  * This manager is good for testing locally.
  */
-class StaticExtractionManager(languages : Traversable[Language], files: FileParams)
-extends ExtractionManager(languages, files)
+class StaticExtractionManager(languages : Traversable[Language], paths: Paths)
+extends ExtractionManager(languages, paths)
 {
     @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
