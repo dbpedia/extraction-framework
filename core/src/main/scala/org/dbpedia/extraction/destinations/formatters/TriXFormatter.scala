@@ -38,4 +38,13 @@ object TriXFormatter {
   def QuadsUris(header: String = null) = new TriXFormatter(false, true, header)
   def TriplesIris(header: String = null) = new TriXFormatter(true, false, header)
   def TriplesUris(header: String = null) = new TriXFormatter(false, false, header)
+
+  /** suffix must start with "iri" or "uri", have "quads" or "triples" in the middle, and end with "trix" */
+  val Suffix = """(iri|uri)\.(quads|triples)\.trix""".r
+  
+  def forSuffix(suffix: String, header: String = null): Option[TriXFormatter] = suffix match {
+    case Suffix(i, q) => Some(new TriXFormatter(i == "iri", q == "quads", header))
+    case _ => None
+  }
+  
 }
