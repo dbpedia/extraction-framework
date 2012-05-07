@@ -8,7 +8,7 @@ import java.io.File
 import org.dbpedia.extraction.wikiparser._
 
 import java.io._
-import org.dbpedia.extraction.sources.{LiveExtractionSource, XMLSource, WikiSource, LiveExtractionXMLSource}
+import org.dbpedia.extraction.sources.{LiveExtractionSource,XMLSource,WikiSource}
 ;
 
 /**
