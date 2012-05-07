@@ -10,38 +10,35 @@ import java.io.StringWriter
  */
 class StringDestination(formatter : Formatter) extends Destination
 {
-    private val stringWriter = new StringWriter()
+    private val writer = new StringWriter()
 
-    private var headerWritten = false
+    private var header = false
 
     private var closed = false
 
-    override def write(graph : Graph) = synchronized
-    {
-        if(closed) throw new IllegalStateException("Trying to write to a closed destination")
+    override def write(graph : Graph) = synchronized {
+      
+      if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
-        if(!headerWritten)
-        {
-            formatter.writeHeader(stringWriter)
-            headerWritten = true
-        }
+      if(! header) {
+        formatter.writeHeader(writer)
+        header = true
+      }
 
-        for(quad <- graph.quads)
-        {
-            formatter.write(quad, stringWriter)
-        }
+      for(quad <- graph.quads) {
+        formatter.write(writer, quad)
+      }
     }
 
-    override def close() = synchronized
-    {
-        if(!headerWritten) formatter.writeHeader(stringWriter)
-        formatter.writeFooter(stringWriter)
-        closed = true
+    override def close() = synchronized {
+      if (! header) formatter.writeHeader(writer)
+      formatter.writeFooter(writer)
+      closed = true
     }
 
     /**
      * Retrieves the formatted data as a string.
      * The returned data is only partial until the destination has been closed.
      */
-    override def toString = synchronized { stringWriter.toString }
+    override def toString = synchronized { writer.toString }
 }
