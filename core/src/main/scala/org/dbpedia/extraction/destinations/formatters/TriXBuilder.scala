@@ -29,12 +29,14 @@ class TriXBuilder(iri: Boolean, quads: Boolean) extends UriTripleBuilder(iri) {
   
   override def badUri(badUris: Int): Unit = {
     // TODO: we could exclude the whole triple (insert <!-- at start and append --> at end, 
-    // but take care that we do it only once), but currently this class is only used during testing 
-    // and it's probably better to have these errors visible
+    // but take care that we do it only once), but currently this class is only used during 
+    // testing and it's probably better to have these errors visible
   }
   
   override def string(value: String, lang: String): Unit = {
-    this add spaces(depth) add ("<plainLiteral xml:lang=\"") add(lang) add("\">") add ("</plainLiteral>\n")
+    this add spaces(depth) add ("<plainLiteral xml:lang=\"") add(lang) add("\">")
+    escape(value, sb) 
+    add ("</plainLiteral>\n")
   }
   
   override def value(value: String, datatype: String): Unit = {
