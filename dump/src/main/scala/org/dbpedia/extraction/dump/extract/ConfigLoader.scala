@@ -119,7 +119,7 @@ object ConfigLoader
     private def createExtractionJob(lang : Language) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang)
-        val date = finder.dates(Download.Complete).last
+        val date = finder.dates(Download.Complete).reverse.head
 
         //Extraction Context
         val context = new DumpExtractionContext
@@ -219,7 +219,7 @@ object ConfigLoader
     private lazy val _commonsSource =
     {
       val finder = new Finder[File](config.dumpDir, Language("commons"))
-      val date = finder.dates(Download.Complete).last
+      val date = finder.dates(Download.Complete).reverse.head
       val file = finder.file(date, "pages-articles.xml")
       XMLSource.fromFile(file, _.namespace == Namespace.File)
     }

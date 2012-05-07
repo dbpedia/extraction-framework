@@ -7,8 +7,10 @@ package org.dbpedia.extraction.wikiparser
  * @param children The contents of the value of this property
  * @param line The source line number of this property
  */
-case class TemplateParameterNode(parameter : String, opt : Boolean, override val line : Int) extends Node(List.empty, line)
+case class TemplateParameterNode(parameter : String, override val children : List[Node], override val line : Int) extends Node(children, line)
 {
-    def toWikiText() : String = "{{{" + parameter + (if (opt == true) "|" else "") + "}}}"
-
+    def toWikiText(): String = {
+      val rest = if (children.isEmpty) "" else "|"+children.map(_.toWikiText).mkString("")
+      "{{{"+parameter+rest+"}}}"
+    }
 }

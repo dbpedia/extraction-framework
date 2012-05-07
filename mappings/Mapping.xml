@@ -122,7 +122,7 @@
 	{{PropertyMapping | templateProperty = team_owners | ontologyProperty = owner }}
 	{{PropertyMapping | templateProperty = team_ presidents | ontologyProperty = president }}
 	{{PropertyMapping | templateProperty = nicknames | ontologyProperty = foaf:name }}
-}}</text></revision></page><page><title>Mapping:Chembox</title><ns>204</ns><id>6</id><revision><id>11143</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping:Chembox</title><ns>204</ns><id>6</id><revision><id>17506</id><text>{{TemplateMapping
 | mapToClass = ChemicalCompound
 | correspondingClass = ChemicalCompound
 | mappings =
@@ -209,11 +209,11 @@
   {{PropertyMapping | templateProperty = name | ontologyProperty = currentMember }}
   {{PropertyMapping | templateProperty = no | ontologyProperty = squadNumber }}
   {{PropertyMapping | templateProperty = pos | ontologyProperty = position }}
-}}</text></revision></page><page><title>Mapping:GNF Protein box</title><ns>204</ns><id>5035</id><revision><id>16630</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping:GNF Protein box</title><ns>204</ns><id>5035</id><revision><id>18070</id><text>{{TemplateMapping
 | mapToClass = HumanGene
 | mappings = 
 {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
-&lt;!--{{ PropertyMapping | templateProperty = image | ontologyProperty = geneImage }}--&gt;
+{{ PropertyMapping | templateProperty = image | ontologyProperty = foaf:image }}
 {{ PropertyMapping | templateProperty = HGNCid | ontologyProperty = hgncid }}
 {{ PropertyMapping | templateProperty = MGIid | ontologyProperty = mgiid }}
 {{ PropertyMapping | templateProperty = Symbol | ontologyProperty = symbol }}
@@ -244,7 +244,7 @@
    }}
    {{ PropertyMapping | templateProperty = Mm_Uniprot | ontologyProperty = uniprot }}
 }}
-}}</text></revision></page><page><title>Mapping:Geobox</title><ns>204</ns><id>12</id><revision><id>10625</id><text>&lt;!-- For an overview over all known types see: http://en.wikipedia.org/wiki/Template:Geobox/type --&gt;
+}}</text></revision></page><page><title>Mapping:Geobox</title><ns>204</ns><id>12</id><revision><id>17490</id><text>&lt;!-- For an overview over all known types see: http://en.wikipedia.org/wiki/Template:Geobox/type --&gt;
 {{ConditionalMapping
 | cases =
 &lt;!-- Buildings, human creations --&gt;
@@ -252,7 +252,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Building
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Building
                 }}
   }}
@@ -261,7 +261,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Bridge
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Bridge
                 }}
   }}
@@ -270,7 +270,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Monument
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Monument
                 }}
   }}
@@ -280,7 +280,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Mountain
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Mountain
                 }}
   }}
@@ -289,7 +289,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Mountain range
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = MountainRange
                 }}
   }}
@@ -298,7 +298,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Range
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = MountainRange
                 }}
   }}
@@ -307,7 +307,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Valley
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Valley
                 }}
   }}
@@ -316,7 +316,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Cave
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Cave
                 }}
 }}
@@ -325,7 +325,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Island
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Island
                 }}
   }}
@@ -334,7 +334,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Pass
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = MountainPass
                 }}
   }}
@@ -345,7 +345,7 @@
     | templateProperty = 1
     | operator = equals
     | value = National park
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Park
                 }}
   }}
@@ -354,7 +354,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Protected area
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = ProtectedArea
                 }}
   }}
@@ -363,7 +363,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Reserve
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = ProtectedArea
                 }}
   }}
@@ -374,7 +374,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Region
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = AdministrativeRegion
                 }}
   }}
@@ -385,7 +385,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Settlement
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Settlement
                 }}
   }}
@@ -394,7 +394,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Borough
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = AdministrativeRegion
                 }}
   }}
@@ -403,7 +403,7 @@
     | templateProperty = 1
     | operator = equals
     | value = City
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = City
                 }}
   }}
@@ -412,7 +412,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Town
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Town
                 }}
   }}
@@ -421,7 +421,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Township
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Settlement 
                 }}
   }}
@@ -430,7 +430,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Village
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Village
                 }}
   }}
@@ -441,7 +441,7 @@
     | templateProperty = 1
     | operator = equals
     | value = River
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = River
                 }}
   }}
@@ -450,7 +450,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Lake
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Lake
                 }}
   }}
@@ -459,7 +459,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Reservoir
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = BodyOfWater 
                 }}
   }}
@@ -468,7 +468,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Creek
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Stream
                 }}
   }}
@@ -477,7 +477,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Stream
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Stream
                 }}
   }}
@@ -486,7 +486,7 @@
     | templateProperty = 1
     | operator = equals
     | value = Water
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = BodyOfWater
                 }}
   }}
@@ -495,7 +495,7 @@
 
 {{Condition
     | operator = otherwise
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Place
                 }}
  }}
@@ -549,7 +549,7 @@
      {{PropertyMapping | templateProperty = areaWater | ontologyProperty = areaWater | unit = Area }}
      {{PropertyMapping | templateProperty = areaWaterPercentage | ontologyProperty = percentageOfAreaWater }}
      {{PropertyMapping | templateProperty = area_water_percentage | ontologyProperty = percentageOfAreaWater }}
-     {{PropertyMapping | templateProperty = area_water_percentage_round | ontologyProperty = percentageOfAreaWaterRound }}
+     {{PropertyMapping | templateProperty = area_water_percentage_round | comment = please do not map this property - it does not contain data, only a formatting hint. See [http://en.wikipedia.org/wiki/Template:Geobox/legend#Units Template:Geobox/legend#Units]}}
                          
      {{PropertyMapping | templateProperty = area_urban | ontologyProperty =  areaUrban | unit = Area }}
      {{PropertyMapping | templateProperty = area_urban_imperial | ontologyProperty =  areaUrban | unit = Area }}
@@ -872,7 +872,7 @@
     {{PropertyMapping | templateProperty = code | ontologyProperty =   code}}
 
     {{PropertyMapping | templateProperty = part | ontologyProperty =  part }}
-    {{PropertyMapping | templateProperty = parent | ontologyProperty = parent}}
+    {{PropertyMapping | templateProperty = parent | comment = ontologyProperty = parent is wrong, it is used for persons. }}
     {{PropertyMapping | templateProperty = category | ontologyProperty = type }}
     {{PropertyMapping | templateProperty = category_local | ontologyProperty = type }}
     {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
@@ -1361,13 +1361,13 @@
 	{{PropertyMapping | templateProperty = minority_floor_leader7 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader8 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader9 | ontologyProperty = minorityFloorLeader }}
-}}</text></revision></page><page><title>Mapping:Infobox Australian place</title><ns>204</ns><id>31</id><revision><id>14576</id><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping:Infobox Australian place</title><ns>204</ns><id>31</id><revision><id>17499</id><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = type
     | operator = equals
     | value = city
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = City
                 }}
  }}
@@ -1376,7 +1376,7 @@
     | templateProperty = type
     | operator = equals
     | value = city
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Town
                 }}
  }}
@@ -1385,14 +1385,14 @@
     | templateProperty = type
     | operator = equals
     | value = suburb
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Settlement
                 }}
  }}
 
  {{Condition
     | operator = otherwise
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = AdministrativeRegion
                 }}
  }}
@@ -14241,37 +14241,7 @@
 	{{PropertyMapping | templateProperty = weight | ontologyProperty = weight }}
 	{{PropertyMapping | templateProperty = ethnicity | ontologyProperty = ethnicity }}
 	{{PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping:Infobox adult female</title><ns>204</ns><id>1657</id><revision><id>7484</id><text>{{TemplateMapping
-| mapToClass = AdultActor
-| mappings =
-	{{PropertyMapping | templateProperty = number of films | ontologyProperty = numberOfFilms }}
-	{{PropertyMapping | templateProperty = films | ontologyProperty = numberOfFilms }}
-	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = birth | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = location | ontologyProperty = birthPlace }}
-	{{PropertyMapping | templateProperty = birthname | ontologyProperty = birthName }}
-	{{PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = death | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = height | ontologyProperty = height }}
-	{{PropertyMapping | templateProperty = weight | ontologyProperty = weight }}
-	{{PropertyMapping | templateProperty = ethnicity | ontologyProperty = ethnicity }}
-	{{PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping:Infobox adult male</title><ns>204</ns><id>1658</id><revision><id>7485</id><text>{{TemplateMapping
-| mapToClass = AdultActor
-| mappings =
-	{{PropertyMapping | templateProperty = number of films | ontologyProperty = numberOfFilms }}
-	{{PropertyMapping | templateProperty = films | ontologyProperty = numberOfFilms }}
-	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = birth | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = location | ontologyProperty = birthPlace }}
-	{{PropertyMapping | templateProperty = birthname | ontologyProperty = birthName }}
-	{{PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = death | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = height | ontologyProperty = height }}
-	{{PropertyMapping | templateProperty = weight | ontologyProperty = weight }}
-	{{PropertyMapping | templateProperty = ethnicity | ontologyProperty = ethnicity }}
-	{{PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping:Infobox aircraft type</title><ns>204</ns><id>19</id><revision><id>14149</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping:Infobox adult female</title><ns>204</ns><id>1657</id><revision><id>17495</id><text>#REDIRECT [[Mapping:Infobox adult biography]]</text></revision></page><page><title>Mapping:Infobox adult male</title><ns>204</ns><id>1658</id><revision><id>17496</id><text>#REDIRECT [[Mapping:Infobox adult biography]]</text></revision></page><page><title>Mapping:Infobox aircraft type</title><ns>204</ns><id>19</id><revision><id>14149</id><text>{{TemplateMapping
 | mapToClass = Aircraft
 | mappings =
 	{{PropertyMapping | templateProperty = type | ontologyProperty = type }}
@@ -14439,12 +14409,12 @@
 	{{PropertyMapping | templateProperty = DorlandsPre | ontologyProperty = dorlandsPrefix }}
 	{{PropertyMapping | templateProperty = DorlandsSuf | ontologyProperty = dorlandsSuffix }}
 	{{PropertyMapping | templateProperty = Precursor | ontologyProperty = precursor }}
-}}</text></revision></page><page><title>Mapping:Infobox artist</title><ns>204</ns><id>28</id><revision><id>14717</id><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping:Infobox artist</title><ns>204</ns><id>28</id><revision><id>17498</id><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = currentmembers
     | operator = isSet
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Band
                 }}
  }}
@@ -14452,7 +14422,7 @@
  {{Condition
     | templateProperty = pastmembers
     | operator = isSet
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Band
                 }}
  }}
@@ -14461,7 +14431,7 @@
     | templateProperty = occupation
     | operator = contains
     | value = actor
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Actor
                 }}
  }}
@@ -14470,7 +14440,7 @@
     | templateProperty = occupation
     | operator = contains
     | value = actress
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Actor
                 }}
  }}
@@ -14479,7 +14449,7 @@
     | templateProperty = occupation
     | operator = contains
     | value = singer
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = MusicalArtist
                 }}
  }}
@@ -14488,14 +14458,14 @@
     | templateProperty = occupation
     | operator = contains
     | value = songwriter
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = MusicalArtist
                 }}
  }}
 
  {{Condition
     | operator = otherwise
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Artist
                 }}
  }}
@@ -15901,31 +15871,31 @@
 	{{PropertyMapping | templateProperty = date | ontologyProperty = endDate }}
 	{{PropertyMapping | templateProperty = location | ontologyProperty = location }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping:Infobox football biography</title><ns>204</ns><id>98</id><revision><id>16617</id><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping:Infobox football biography</title><ns>204</ns><id>98</id><revision><id>17500</id><text>{{ConditionalMapping
 | cases =
 	{{Condition
 	| templateProperty = manageryears
 	| operator = isSet
-	| mapping = {{TemplateMapping | mapToClass = SoccerManager }}
+	| mapping = {{TemplateMapping | header = 0 | mapToClass = SoccerManager }}
 	}}
 	{{Condition
 	| templateProperty = manageryears1
 	| operator = isSet
-	| mapping = {{TemplateMapping | mapToClass = SoccerManager }}
+	| mapping = {{TemplateMapping | header = 0 | mapToClass = SoccerManager }}
 	}}
 	{{Condition
 	| templateProperty = managerclubs
 	| operator = isSet
-	| mapping = {{TemplateMapping | mapToClass = SoccerManager }}
+	| mapping = {{TemplateMapping | header = 0 | mapToClass = SoccerManager }}
 	}}
 	{{Condition
 	| templateProperty = managerclubs1
 	| operator = isSet
-	| mapping = {{TemplateMapping | mapToClass = SoccerManager }}
+	| mapping = {{TemplateMapping | header = 0 | mapToClass = SoccerManager }}
 	}}
 	{{Condition
 	| operator = otherwise
-	| mapping = {{TemplateMapping | mapToClass = SoccerPlayer }}
+	| mapping = {{TemplateMapping | header = 0 | mapToClass = SoccerPlayer }}
 	}}
 
 | defaultMappings =
@@ -17242,7 +17212,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = place of birth | ontologyProperty = birthPlace }}
 	{{PropertyMapping | templateProperty = date of death | ontologyProperty = deathDate }}
 	{{PropertyMapping | templateProperty = place of death | ontologyProperty = deathPlace }}
-}}</text></revision></page><page><title>Mapping:Infobox mountain</title><ns>204</ns><id>150</id><revision><id>17200</id><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping:Infobox mountain</title><ns>204</ns><id>150</id><revision><id>17430</id><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = type
@@ -17261,6 +17231,16 @@ Template Properties not mapped yet:
                 | mapToClass = Volcano
                 }}
  }}
+
+{{Condition
+    | templateProperty = type
+    | operator = contains
+    | value = Stratovolcano
+    | mapping = {{TemplateMapping
+                | mapToClass = Volcano
+                }}
+ }}
+
 
  {{Condition
     | operator = otherwise

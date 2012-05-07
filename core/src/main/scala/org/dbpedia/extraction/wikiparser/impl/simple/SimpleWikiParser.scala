@@ -38,12 +38,14 @@ final class SimpleWikiParser extends WikiParser
 
     private val linkEnd = new Matcher(List(" ", "{","}", "[", "]", "\n", "\t"));
 
-    private val propertyValueOrEnd = new Matcher(List("=", "|", "}}"), true);
-    private val propertyEnd = new Matcher(List("|", "}}"), true);
-    private val templateParameterEnd = new Matcher(List("|", "}}}"), true);
-    private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true);
-    private val parserFunctionEnd = new Matcher(List("}}"), true);
+    private val propertyValueOrEnd = new Matcher(List("=", "|", "}}"), true)
+    private val propertyEnd = new Matcher(List("|", "}}"), true)
+    private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true)
+    private val parserFunctionEnd = new Matcher(List("}}"), true)
 
+    private val templateParameterNameOrEnd = new Matcher(List("|", "}}}"), true)
+    private val templateParameterEnd = new Matcher(List("}}}"), true)
+    
     private val tableRowEnd1 = new Matcher(List("|}", "|+", "|-", "|", "!"));
     private val tableRowEnd2 = new Matcher(List("|}", "|-", "|", "!"));
 
@@ -250,15 +252,17 @@ final class SimpleWikiParser extends WikiParser
         {
             parseLink(source, level)
         }
+        // FIXME: four opening braces are two nested template or magic word invocations.
+        // FIXME: five opening braces can mean "{{{ {{" or "{{ {{{"
+        // FIXME: and so on...
+        // FIXME: rewrite the parser. What opening braces mean can only be discerned
+        // when the matching closing braces are found.
+        else if(source.lastTag("{{{"))
+        {
+            parseTemplateParameter(source, level)
+        }
         else if(source.lastTag("{{"))
         {
-            // FIXME: source.pos+1 is invalid if we're at the end of the text
-            val nextToken = source.getString(source.pos, source.pos+1)
-            if ( nextToken == "{")
-            {
-                return parseTemplateParameter(source, level)
-            }
-
             parseTemplate(source, level)
         }
         else if(source.lastTag("{|"))
@@ -286,7 +290,9 @@ final class SimpleWikiParser extends WikiParser
             //val destination = source.getString(startPos, source.pos - m.tag.length).trim
             val destination = parseUntil(internalLinkLabelOrEnd, source, level)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
-            val destinationUri = if(destination.size == 0){""} else if(destination(0).isInstanceOf[TextNode]){
+            val destinationUri = if(destination.size == 0) {
+              ""
+            } else if(destination(0).isInstanceOf[TextNode]) {
               destination(0).asInstanceOf[TextNode].text
             } else {
               null //has a semantic within the wiktionary module, and should never occur for wikipedia
@@ -379,13 +385,19 @@ final class SimpleWikiParser extends WikiParser
     private def parseTemplateParameter(source : Source, level : Int) : TemplateParameterNode =
     {
         val line = source.line
-        source.pos = source.pos+1   //advance 1 char
-        val nodes = parseUntil(templateParameterEnd , source, level)
+        val keyNodes = parseUntil(templateParameterNameOrEnd , source, level)
 
-        if(nodes.size != 1 || !nodes.head.isInstanceOf[TextNode])
+        if(keyNodes.size != 1 || ! keyNodes.head.isInstanceOf[TextNode])
                 throw new WikiParserException("Template variable contains invalid elements", line, source.findLine(line))
+        
+        val nodes = if (source.lastTag("}}}")) List.empty else parseUntil(templateParameterEnd, source, level)
 
-        new TemplateParameterNode( nodes.head.toWikiText(), source.lastTag("|"), line)
+        // FIXME: removing "<includeonly>" here is a hack.
+        // We need a preprocessor that resolves stuff like <includeonly>...</includeonly> 
+        // based on configuration flags.
+        val key = keyNodes.head.toWikiText().replace("<includeonly>", "")
+
+        new TemplateParameterNode(key, nodes, line)
     }
 
     private def parseTemplate(source : Source, level : Int) : Node =
@@ -459,11 +471,10 @@ final class SimpleWikiParser extends WikiParser
 
     private def parseParserFunction(decodedName : String, source : Source, level : Int) : ParserFunctionNode =
     {
-        val title = new WikiTitle(decodedName + ":", Namespace.Template, source.language)
         val children = parseUntil(parserFunctionEnd, source, level)
         val startLine = source.line
 
-        ParserFunctionNode(title, children, startLine)
+        ParserFunctionNode(decodedName, children, startLine)
     }
     
     private def parseTable(source : Source, level : Int) : TableNode =
