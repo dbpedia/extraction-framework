@@ -10,11 +10,13 @@ import runtime.Long
 
 /**
  * Executes queries to the MediaWiki API.
+ * 
+ * TODO: replace this class by code adapted from WikiDownloader. 
  *
- * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php. Default: english Wikipedia
+ * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php.
  * @param language The language of the MediaWiki.
  */
-class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language : Language = Language.Default)
+class WikiApi(url: URL, language: Language)
 {
     private val logger = Logger.getLogger(classOf[WikiApi].getName)
 
@@ -52,6 +54,7 @@ class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language
         //Retrieve remaining pages
         for(continuePage <- response \ "query-continue" \ "allpages" \ "@apfrom" headOption)
         {
+            // TODO: use iteration instead of recursion
             retrievePagesByNamespace(namespace, f, continuePage.text)
         }
     }
@@ -86,7 +89,7 @@ class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language
         {
             for(titleGroup <- titles.toIterable.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(_.encodedWithNamespace).mkString("|") + "&rvprop=ids|content")
+                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(_.encodedWithNamespace).mkString("|") + "&rvprop=ids|content|timestamp")
                 processPages(response, proc)
             }
         }
