@@ -85,7 +85,7 @@ object ConfigLoader
 
         //Destination
         val formatters = List(TerseFormatter.NTriplesIris, TerseFormatter.NQuadsIris)
-        val destinations = for (formatter <- formatters) yield new FileDestination(formatter, dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + formatter.fileSuffix))
+        val destinations = for (formatter <- formatters) yield new FileDestination(formatter, dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + '.' + formatter.fileSuffix))
         val destination = new CompositeDestination(destinations)
 
         new ExtractionJob(extractor, articlesSource, destination, "Extraction Job for " + language.wikiCode + " Wikipedia")
