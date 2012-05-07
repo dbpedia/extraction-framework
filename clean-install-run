@@ -8,4 +8,5 @@
 # is equivalent to
 # extraction_framework/core> mvn -f ../pom.xml clean install && mvn scala:run "-Dlauncher=LAUNCHER" "-DaddArgs=ARG1|ARG2|ARG3"
 
-mvn -f ../pom.xml clean install && . ../run "$@"
+[ ! -t 1 ] && BATCH="-B"
+mvn $BATCH -f ../pom.xml clean install && . ../run "$@"
