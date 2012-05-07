@@ -12,7 +12,7 @@ final class TerseFormatter(iri: Boolean, quads: Boolean, turtle: Boolean) extend
 
   override val fileSuffix = {
     val qt = if (quads) 'q' else 't'
-    (if (iri) "iri" else "uri") + '.' + (if (turtle) 't'+qt+'l' else 'n'+qt)
+    (if (iri) "iri" else "uri") + '.' + (if (turtle) "t"+qt+"l" else "n"+qt) // use strings here, don't add chars... :-)
   }
 
   override def writeHeader(writer : Writer) = {
