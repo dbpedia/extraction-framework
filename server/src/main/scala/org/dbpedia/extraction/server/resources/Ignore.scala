@@ -12,7 +12,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
   
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
-    if (! Server.instance.languages.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
+    if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
 
     private val manager = Server.instance.managers(language)
 
