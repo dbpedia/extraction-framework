@@ -40,4 +40,13 @@ object TerseFormatter {
   def NQuadsUris = new TerseFormatter(false, true, false)
   def NTriplesIris = new TerseFormatter(true, false, false)
   def NTriplesUris = new TerseFormatter(false, false, false)
+  
+  /** suffix must start with "iri" or "uri" and end with "tql", "nq", "ttl" or "nt". */
+  val Suffix = """(iri|uri)\.(tql|nq|ttl|nt)""".r
+  
+  def forSuffix(suffix: String): Option[TerseFormatter] = suffix match {
+    case Suffix(i,qt) =>
+      Some(new TerseFormatter(i == "iri", qt == "tql" || qt == "nq", qt == "tql" || qt == "ttl"))
+    case _ => None
+  }
 }
