@@ -12,7 +12,7 @@ object TriX
      */
     def formatter(parents : Int) : Formatter = 
     {
-      new TriXFormatter("<?xml-stylesheet type=\"text/xsl\" href=\""+("../"*parents)+"stylesheets/trix.xsl\"?>\n")
+      TriXFormatter.QuadsIris("<?xml-stylesheet type=\"text/xsl\" href=\""+("../"*parents)+"stylesheets/trix.xsl\"?>\n")
     }
 }
 

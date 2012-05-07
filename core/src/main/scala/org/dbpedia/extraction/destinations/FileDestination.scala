@@ -11,7 +11,8 @@ import java.nio.charset.Charset
  * 
  * @param formatter The formatter used to serialize the statements. If no formatter is provided, the statements are written using the N-Triples format.
  * @param baseDir The base directory of the output files. If no base directory is provided, the output is written to current directory.
- * @param filePattern The pattern according to which the statements are split into different files by their dataset.
+ * @param filePattern The pattern according to which the statements are split into different files by their dataset. If the pattern returns null
+ * for a certain dataset, quads from that dataset will be ignored.
  */
 class FileDestination(formatter : Formatter, filePattern : Dataset => File) extends Destination
 {
@@ -19,44 +20,43 @@ class FileDestination(formatter : Formatter, filePattern : Dataset => File) exte
 
     private var closed = false
 
-    override def write(graph : Graph) : Unit = synchronized
-    {
-        if(closed) throw new IllegalStateException("Trying to write to a closed destination")
+    override def write(graph : Graph) : Unit = synchronized {
+      if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
-        for((dataset, quads) <- graph.quads.groupBy(_.dataset))
-        {
-            val writer = writers.getOrElseUpdate(dataset, createWriter(dataset))
-
-            for(quad <- quads)
-            {
-                formatter.write(quad, writer)
-            }
+      for((dataset, quads) <- graph.quads.groupBy(_.dataset)) {
+        val writer = writers.getOrElseUpdate(dataset, createWriter(dataset))
+        if (writer != null) {
+          for(quad <- quads)
+          {
+            formatter.write(writer, quad)
+          }
         }
+      }
     }
 
-    override def close() = synchronized
-    {
-        if(!closed)
-        {
-            for(writer <- writers.values)
-            {
-                formatter.writeFooter(writer)
-                writer.close()
-            }
-            closed = true
+    override def close() = synchronized {
+      if(! closed) {
+        for(writer <- writers.values) {
+          formatter.writeFooter(writer)
+          writer.close()
         }
+        closed = true
+      }
     }
 
-    private def createWriter(dataset : Dataset) : Writer=
-    {
-        val file = filePattern(dataset)
+    private def createWriter(dataset : Dataset): Writer = {
+      val file = filePattern(dataset)
+      if (file == null) {
+        null
+      } else {
         mkdirs(file.getParentFile)
-    
+        
         val stream = new FileOutputStream(file)
         val writer = new OutputStreamWriter(stream, "UTF-8")
         formatter.writeHeader(writer)
-    
+        
         writer
+      }
     }
     
     private def mkdirs(dir : File) : Unit =

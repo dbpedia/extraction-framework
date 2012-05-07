@@ -3,8 +3,6 @@ package org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.Language
-import java.net.URI
-import org.dbpedia.extraction.destinations.formatters.TriXBuilder
 
 /**
  * Represents a statement.
