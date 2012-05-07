@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.util
 
-import java.io.{File, FileNotFoundException}
 import scala.io.{Source, Codec}
 import org.dbpedia.extraction.util.RichFile._
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
+import java.io.{FileInputStream, File, FileNotFoundException}
 
 /**
  * Recursively iterates through a directory and calls a user-defined function on each file. 
@@ -60,7 +61,7 @@ class FileProcessor(baseDir : File, filter : (String => Boolean))
     
     private def readFileContents(file : File)(implicit codec : scala.io.Codec = Codec.UTF8) : String =
     {
-      // TODO: this decodes the file one character at a time, which may be inefficient 
-      Source.fromFile(file, 65536)(codec).mkString
+        val inputStream = if (file.getName.endsWith("bz2")) new BZip2CompressorInputStream(new FileInputStream(file)) else new FileInputStream(file)
+        Source.fromInputStream(inputStream)(codec).mkString
     }
 }
