@@ -1,28 +1,26 @@
 package org.dbpedia.extraction.live.extraction
 
-import _root_.org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
-import _root_.org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.mappings.CompositeExtractor
 import java.net.URL
 import collection.immutable.ListMap
 import java.util.Properties
 import javax.swing.Timer
 import java.io.{FileReader, File}
-import _root_.org.dbpedia.extraction.util.StringUtils._
-import _root_.org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{MemorySource, WikiSource, XMLSource, Source}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{StringDestination, FileDestination, CompositeDestination}
-// import org.dbpedia.extraction.dump.ExtractionJob
 import java.util.logging.{Level, Logger}
 import java.awt.event.{ActionListener, ActionEvent}
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
 import org.dbpedia.extraction.live.job.LiveExtractionJob
 import xml.XML
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
-import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
+import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance
 import org.dbpedia.extraction.live.main.Main
-
 import scala.collection.JavaConversions;
 
 
@@ -191,7 +189,7 @@ object LiveExtractionConfigLoader extends ActionListener
 //          dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq", true)
 //        val destination = new CompositeDestination(tripleDestination, quadDestination)
         //println("Article source = " + articlesSource.size);
-        val TempDest = new  StringDestination();
+        val TempDest = new  StringDestination(TerseFormatter.NTriplesIris);
         //val liveDest = new LiveUpdateDestination();
       
         //new ExtractionJob(extractor, articlesSource, tripleDestination, "Extraction Job for " + language.wikiCode + " Wikipedia");
@@ -261,7 +259,7 @@ object LiveExtractionConfigLoader extends ActionListener
                 CurrentWikiPage.title.namespace == Namespace.File ||
                 CurrentWikiPage.title.namespace == Namespace.Category)
                {
-                 val TempDest = new  StringDestination();
+                 val TempDest = new StringDestination(TerseFormatter.NTriplesIris);
                  val CurrentPageNode = parser(CurrentWikiPage)
 
 

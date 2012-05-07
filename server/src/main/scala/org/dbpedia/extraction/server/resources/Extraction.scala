@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server.resources
 
 import java.net.{URL, URI}
-import org.dbpedia.extraction.destinations.formatters.{NQuadsFormatter, NTriplesFormatter, TriXFormatter}
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.util.Language
 import javax.ws.rs._
 import java.util.logging.{Logger,Level}
@@ -92,8 +92,8 @@ class Extraction(@PathParam("lang") langCode : String)
 
         val formatter = format.toLowerCase.replace("-", "") match
         {
-            case "ntriples" => new NTriplesFormatter()
-            case "nquads" => new NQuadsFormatter()
+            case "ntriples" => TerseFormatter.NTriplesIris
+            case "nquads" => TerseFormatter.NQuadsIris
             case _ => TriX.formatter(2)
         }
 

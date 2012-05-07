@@ -1,16 +1,16 @@
 package org.dbpedia.extraction.wiktionary
 
-import _root_.org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
-import _root_.org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
-import _root_.org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
+import org.dbpedia.extraction.mappings._
 import java.net.URL
-import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
+import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.{FileReader, File}
-import _root_.org.dbpedia.extraction.util.StringUtils._
-import _root_.org.dbpedia.extraction.util.Language
-import _root_.org.dbpedia.extraction.sources.{WikiSource, MemorySource, XMLSource}
+import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.sources.{WikiSource, MemorySource, XMLSource}
 
 /**
  * Loads the dump extraction configuration.
@@ -84,9 +84,9 @@ object ConfigLoader
         val extractor = Extractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } )
 
         //Destination
-        val tripleDestination = new FileDestination(new NTriplesFormatter(), dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt"))
-        val quadDestination = new FileDestination(new NQuadsFormatter(), dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq"))
-        val destination = new CompositeDestination(tripleDestination, quadDestination)
+        val formatters = List(TerseFormatter.NTriplesIris, TerseFormatter.NQuadsIris)
+        val destinations = for (formatter <- formatters) yield new FileDestination(formatter, dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + '.' + formatter.fileSuffix))
+        val destination = new CompositeDestination(destinations)
 
         new ExtractionJob(extractor, articlesSource, destination, "Extraction Job for " + language.wikiCode + " Wikipedia")
     }

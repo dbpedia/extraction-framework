@@ -23,7 +23,8 @@ object Clean {
     for (language <- Language.Values.values) {
       val finder = new Finder[Path](baseDir, language)
       if (finder.wikiDir.exists) {
-        for (date <- finder.dates(Download.Complete).dropRight(newDirs)) {
+        // TODO: maybe we should look for a specific file - but which one?
+        for (date <- finder.dates().dropRight(newDirs)) {
           
           val dir = finder.directory(date)
           
