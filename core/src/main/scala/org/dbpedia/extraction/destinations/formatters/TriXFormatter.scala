@@ -2,8 +2,6 @@ package org.dbpedia.extraction.destinations.formatters
 
 import java.io.Writer
 import org.dbpedia.extraction.destinations.{Quad, Formatter}
-import scala.xml.Utility.escape
-import java.net.URI
 
 /**
  * Formats statements according to the TriX format.
@@ -11,10 +9,7 @@ import java.net.URI
  */
 class TriXFormatter(iri: Boolean, quads: Boolean, header: String = null) extends Formatter
 {
-  
-  override val fileSuffix = {
-    (if (iri) "iri" else "uri") + '.' + (if (quads) "quads" else "triples") + ".trix"
-  }
+  override val fileSuffix = TriXFormatter.fileSuffix(iri, quads)
 
   override def writeHeader(writer : Writer): Unit = {
     if (header != null) writer.write(header)
@@ -32,18 +27,33 @@ class TriXFormatter(iri: Boolean, quads: Boolean, header: String = null) extends
 
 object TriXFormatter {
   
-  def all = for (iri <- 0 to 1; quads <- 0 to 1) yield new TriXFormatter(iri == 0, quads == 0)
-  
-  def QuadsIris(header: String = null) = new TriXFormatter(true, true, header)
-  def QuadsUris(header: String = null) = new TriXFormatter(false, true, header)
-  def TriplesIris(header: String = null) = new TriXFormatter(true, false, header)
-  def TriplesUris(header: String = null) = new TriXFormatter(false, false, header)
+  def QuadsIris(header: String = null) = formatter(true, true, header)
+  def QuadsUris(header: String = null) = formatter(false, true, header)
+  def TriplesIris(header: String = null) = formatter(true, false, header)
+  def TriplesUris(header: String = null) = formatter(false, false, header)
 
+  def formatter(iri: Boolean, quads: Boolean, header: String = null): TriXFormatter =
+    new TriXFormatter(iri, quads, header)
+  
+  def all = for (iri <- 0 to 1; quads <- 0 to 1) yield formatter(iri == 0, quads == 0)
+  
+  def fileSuffix(iri: Boolean, quads: Boolean) = {
+    (if (iri) "iri" else "uri") + '.' + (if (quads) "quads" else "triples") + ".trix"
+  }
+
+  def suffixes: Seq[String] = 
+    for (iri <- 0 to 1; quads <- 0 to 1) yield
+      fileSuffix(iri == 0, quads == 0)
+  
   /** suffix must start with "iri" or "uri", have "quads" or "triples" in the middle, and end with "trix" */
   val Suffix = """(iri|uri)\.(quads|triples)\.trix""".r
   
-  def forSuffix(suffix: String, header: String = null): Option[TriXFormatter] = suffix match {
-    case Suffix(i, q) => Some(new TriXFormatter(i == "iri", q == "quads", header))
+  /**
+   * @return formatter for the given file suffix, or None if there is no formatter for the suffix.
+   * TODO: add header parameter? Probably not needed.
+   */
+  def forSuffix(suffix: String): Option[TriXFormatter] = suffix match {
+    case Suffix(i, q) => Some(formatter(i == "iri", q == "quads"))
     case _ => None
   }
   
