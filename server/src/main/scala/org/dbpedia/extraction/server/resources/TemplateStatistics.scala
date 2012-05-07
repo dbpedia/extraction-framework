@@ -21,7 +21,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 {
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
-    if (! Server.instance.languages.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
+    if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
 
     private val manager = Server.instance.managers(language)
 
@@ -66,7 +66,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     private val percentageMappedTemplateOccurrences: String = "%2.2f".format(mappedTemplateUseRatio * 100)
     private val percentageMappedPropertyOccurrences: String = "%2.2f".format(mappedPropertyUseRatio * 100)
 
-    private val mappingUrlPrefix = Server.wikiPagesUrl+"/"+Namespace.mappings(language).getName(Language.Default).replace(' ','_')+":"
+    private val mappingUrlPrefix = Server.instance.wikiPagesUrl+"/"+Namespace.mappings(language).getName(Language.Default).replace(' ','_')+":"
 
     private val mappedGoodColor = "#65c673"
     private val mappedMediumColor = "#ecea48"

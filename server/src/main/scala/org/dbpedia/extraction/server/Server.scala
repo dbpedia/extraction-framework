@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server
 import java.io.File
 import java.net.{URI,URL}
 import java.util.logging.{Level,Logger}
-import scala.collection.immutable.SortedSet
+import scala.collection.immutable.SortedMap
 import org.dbpedia.extraction.mappings.{LabelExtractor,MappingExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.Mappings
@@ -13,9 +13,19 @@ import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.Namespace
 
-class Server(private val password : String, val languages : Set[Language], files: FileParams) 
+class Server(private val password : String, wikiUri: URL, languages : Seq[Language], files: FileParams) 
 {
-    val managers = languages.map(language => (language -> new MappingStatsManager(files.statsDir, language))).toMap
+    /** 
+     * The URL where the pages of the Mappings Wiki are located
+     */
+    val wikiPagesUrl = new URL(wikiUri, "index.php")
+
+    /** 
+     * The URL of the MediaWiki API of the Mappings Wiki 
+     */
+    val wikiApiUrl = new URL(wikiUri, "api.php")
+    
+    val managers = SortedMap(languages.map(lang => (lang -> new MappingStatsManager(files.statsDir, lang))): _*)(Language.wikiCodeOrdering)
         
     val extractor = new DynamicExtractionManager(managers(_).updateMappings(_), languages, files)
     
@@ -32,18 +42,6 @@ object Server
 {
     val logger = Logger.getLogger(getClass.getName)
 
-    /** 
-     * The URL where the pages of the Mappings Wiki are located
-     * TODO: make this configurable 
-     */
-    val wikiPagesUrl = new URL("http://mappings.dbpedia.org/index.php")
-
-    /** 
-     * The URL of the MediaWiki API of the Mappings Wiki 
-     * TODO: make this configurable 
-     */
-    val wikiApiUrl = new URL("http://mappings.dbpedia.org/api.php")
-    
     private var _instance: Server = null
     
     def instance = _instance
@@ -54,23 +52,23 @@ object Server
         
         logger.info("DBpedia server starting")
         
-        require(args != null && args.length >= 5, "need at least five args: URL, password for template ignore list, base dir for statistics, ontology file, mappings dir. Additional args are wiki codes for languages.")
+        require(args != null && args.length >= 6, "need at least six args: server URL, mappings wiki base URL, password for template ignore list, base dir for statistics, ontology file, mappings dir. Additional args are wiki codes for languages.")
         
-        val uri = args(0)
+        val wikiUri = new URL(args(0))
         
-        val password = args(1)
+        val uri = new URI(args(1))
         
-        val files = new FileParams(new File(args(2)), new File(args(3)), new File(args(4)))
+        val password = args(2)
+        
+        val files = new FileParams(new File(args(3)), new File(args(4)), new File(args(5)))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var langs : Seq[Language] = for(arg <- args.drop(5); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        var langs : Seq[Language] = for(arg <- args.drop(6); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
         
         // if no languages are given, use all languages for which a mapping namespace is defined
-        if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq.sorted
+        if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq
         
-        val languages = SortedSet(langs: _*)(Language.wikiCodeOrdering)
-        
-        _instance = new Server(password, languages, files)
+        _instance = new Server(password, wikiUri, langs, files)
         
         // Configure the HTTP server
         val resources = new PackagesResourceConfig("org.dbpedia.extraction.server.resources", "org.dbpedia.extraction.server.providers")
@@ -82,7 +80,7 @@ object Server
         features.put(ResourceConfig.FEATURE_REDIRECT, true)
         features.put(ResourceConfig.FEATURE_TRACE, true)
 
-        HttpServerFactory.create(new URI(uri), resources).start()
+        HttpServerFactory.create(uri, resources).start()
 
         logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis) + " listening on " + uri)
     }
