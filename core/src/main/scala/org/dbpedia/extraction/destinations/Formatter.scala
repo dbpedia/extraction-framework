@@ -8,7 +8,7 @@ import java.io.Writer
 trait Formatter
 {
   /**
-   * recommended suffix for files written in this format
+   * Recommended suffix for files written in this format. Starts with a letter, not with a dot. 
    */
   val fileSuffix: String
   

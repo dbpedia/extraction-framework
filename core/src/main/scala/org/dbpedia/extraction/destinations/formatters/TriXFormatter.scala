@@ -13,7 +13,7 @@ class TriXFormatter(iri: Boolean, quads: Boolean, header: String = null) extends
 {
   
   override val fileSuffix = {
-    '.' + (if (iri) "iri" else "uri") + '.' + (if (quads) "quads" else "triples") + ".trix"
+    (if (iri) "iri" else "uri") + '.' + (if (quads) "quads" else "triples") + ".trix"
   }
 
   override def writeHeader(writer : Writer): Unit = {

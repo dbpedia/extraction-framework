@@ -190,7 +190,7 @@ object ConfigLoader
          * extraction process for each dataset.
          */
         def targetFile(suffix : String)(dataset : Dataset) : File = {
-          finder.file(date, dataset.name.replace('_','-')+"."+suffix)
+          finder.file(date, dataset.name.replace('_','-')+'.'+suffix)
         }
 
         val formatters = TerseFormatter.all ++ TriXFormatter.all
