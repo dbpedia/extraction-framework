@@ -9,7 +9,6 @@ import org.dbpedia.extraction.wikiparser._
 
 import java.io._
 import org.dbpedia.extraction.sources.{LiveExtractionSource,XMLSource,WikiSource}
-;
 
 /**
  * Created by IntelliJ IDEA.
