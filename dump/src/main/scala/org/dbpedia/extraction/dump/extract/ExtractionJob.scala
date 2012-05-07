@@ -26,11 +26,9 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
 
     val progress = new ExtractionProgress()
 
-    private val pageQueue = new ArrayBlockingQueue[(Int, WikiPage)](20)
+    // TODO: make size depend on CPUs?
+    private val pageQueue = new ArrayBlockingQueue[WikiPage](20)
     
-    // only accessed by the thread that reads the source, no need to sync or use atomic
-    private var currentID = 0
-
     override def run() : Unit =
     {
         logger.info(label + " started")
@@ -77,8 +75,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
         // If we use XMLSource, we probably checked this already, but anyway... 
         if (! namespaces.contains(page.title.namespace)) return 
 
-        pageQueue.put((currentID, page))
-        currentID += 1
+        pageQueue.put(page)
     }
 
     /**
@@ -107,7 +104,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                 val page = pageQueue.poll(100, TimeUnit.MILLISECONDS)
                 if(page != null)
                 {
-                    extractPage(page._1, page._2)
+                    extractPage(page)
                 }
                 else
                 {
@@ -116,7 +113,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
             }
         }
 
-        private def extractPage(id : Int, page : WikiPage) : Unit =
+        private def extractPage(page : WikiPage) : Unit =
         {
             //Extract the page
             val success =

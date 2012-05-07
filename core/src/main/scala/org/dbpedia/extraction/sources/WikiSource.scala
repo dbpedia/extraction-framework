@@ -21,9 +21,8 @@ object WikiSource
      * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php
      * @param language The language of the MediaWiki
      */
-    def fromTitles(titles : Traversable[WikiTitle],
-                   url : URL = new URL("http://en.wikipedia.org/w/api.php"),
-                   language : Language = Language.Default ) : Source = new Source
+    def fromTitles(titles: Traversable[WikiTitle], url: URL, language: Language): Source =
+    new Source
     {
         private val api = new WikiApi(url, language)
 
@@ -42,9 +41,8 @@ object WikiSource
      * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php
      * @param language The language of the MediaWiki
      */
-    def fromNamespaces(namespaces : Set[Namespace] = Set(Namespace.Main),
-                       url : URL = new URL("http://en.wikipedia.org/w/api.php"),
-                       language : Language = Language.Default) : Source = new Source
+    def fromNamespaces(namespaces: Set[Namespace], url: URL, language: Language): Source =
+    new Source
     {
         private val api = new WikiApi(url, language)
 

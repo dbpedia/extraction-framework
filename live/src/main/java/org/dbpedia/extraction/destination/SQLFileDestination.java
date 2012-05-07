@@ -13,6 +13,8 @@ import org.dbpedia.extraction.destinations.Dataset;
 import org.dbpedia.extraction.destinations.Destination;
 import org.dbpedia.extraction.destinations.Graph;
 import org.dbpedia.extraction.destinations.Quad;
+import scala.Function1;
+import scala.runtime.AbstractFunction1;
 import org.dbpedia.extraction.ontology.datatypes.Datatype;
 import org.dbpedia.helper.CoreUtil;
 import org.dbpedia.helper.Triple;
@@ -51,7 +53,10 @@ public class SQLFileDestination implements Destination {
     @Override
     public synchronized void write(Graph graph){
 
-        Map<Dataset, List<Quad>> datasets = JavaConversions.mapAsJavaMap(graph.quadsByDataset());
+        Function1<Quad,Dataset> quadDataset = new AbstractFunction1<Quad,Dataset>() {
+          public Dataset apply(Quad quad) { return quad.dataset(); }
+        };
+        Map<Dataset, List<Quad>> datasets = JavaConversions.mapAsJavaMap(graph.quads().groupBy(quadDataset));
         for (Entry<Dataset, List<Quad>> e : datasets.entrySet()) {
             Dataset ds = e.getKey();
             List<Quad> quads = e.getValue();

@@ -11,6 +11,6 @@ class NQuadsFormatter extends TextFormatter
 {
     override def write(quad : Quad, writer : Writer) : Unit =
     {
-        writer.write(quad.renderNQuad)
+        writer.write(quad.render(turtle=false, quad=true))
     }
 }

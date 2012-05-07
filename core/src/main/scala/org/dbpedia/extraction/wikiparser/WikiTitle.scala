@@ -90,7 +90,8 @@ object WikiTitle
         decoded = UriDecoder.decode(decoded)
         
         // replace NBSP by SPACE, remove exotic whitespace
-        decoded = decoded.replaceChars("\u00A0\u200C\u200E\u200F\u2028\u202B\u202C\u3000", " ")
+        // TODO: better treatment of U+20xx: remove some, replace some by space, others by LF
+        decoded = decoded.replaceChars("\u00A0\u200C\u200D\u200E\u200F\u2028\u202A\u202B\u202C\u3000", " ")
         
         var fragment : String = null
         

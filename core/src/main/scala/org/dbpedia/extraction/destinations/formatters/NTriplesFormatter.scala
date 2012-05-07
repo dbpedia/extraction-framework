@@ -11,6 +11,6 @@ class NTriplesFormatter extends TextFormatter
 {
     override def write(quad : Quad, writer : Writer) : Unit =
     {
-        writer.write(quad.renderNTriple)
+        writer.write(quad.render(turtle=false, quad=false))
     }
 }

@@ -70,9 +70,7 @@ private class NamespaceBuilder {
     "sl"->268,"eu"->272,"hr"->284,"el"->304,"ga"->396
   )
   
-  for ((lang,code) <- map) {
-    mappings(Language(lang)) = ns(code, if (lang == "en") "Mapping" else "Mapping "+lang, true)
-  }
+  for ((lang,code) <- map) mappings(Language(lang)) = ns(code, "Mapping "+lang, true)
 }
 
 /**
