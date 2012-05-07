@@ -48,7 +48,7 @@ object ConfigLoader
 
     private var mappingsDir : File = null
     
-    private var requireComplete = true
+    private var requireComplete = false
 
     private class Config(config : Properties)
     {
@@ -69,8 +69,10 @@ object ConfigLoader
           mappingsDir = new File(config.getProperty("mappingsDir"))
 
         /** Languages */
-        if(config.getProperty("languages") == null) throw new IllegalArgumentException("Property 'languages' not defined.")
-        val languages = config.getProperty("languages").split("[,\\s]+").map(_.trim).toList.map(Language)
+         
+        val languages = 
+          if(config.getProperty("languages") == null) Namespace.mappings.keys
+          else config.getProperty("languages").split("[,\\s]+").map(_.trim).toList.map(Language)
 
         /** Extractor classes */
         val extractors = loadExtractorClasses()
@@ -110,8 +112,13 @@ object ConfigLoader
          */
         private def loadExtractorConfig(configStr : String) : List[Class[_ <: Extractor]] =
         {
-            configStr.split("[,\\s]+").map(_.trim).toList
-            .map(className => ClassLoader.getSystemClassLoader.loadClass(className).asSubclass(classOf[Extractor]))
+            configStr.split("[,\\s]+",-1).map(_.trim).filter(_.nonEmpty).toList.map(loadExtractorClass)
+        }
+        
+        private def loadExtractorClass(name: String): Class[_ <: Extractor] = {
+          val className = if (! name.contains(".")) classOf[Extractor].getPackage.getName+'.'+name else name
+          // TODO: class loader of Extractor.class is probably wrong for some users.
+          classOf[Extractor].getClassLoader.loadClass(className).asSubclass(classOf[Extractor])
         }
     }
 
