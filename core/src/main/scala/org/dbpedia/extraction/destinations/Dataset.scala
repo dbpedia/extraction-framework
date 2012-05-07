@@ -8,10 +8,9 @@ class Dataset(val name : String)
 {
     override def toString = name
 
-    override def equals(other : Any) = other match
-    {
-        case otherDataset : Dataset => (name == otherDataset.name)
-        case _ => false
+    override def equals(other : Any) = other match {
+      case that : Dataset => (this.name == that.name)
+      case _ => false
     }
 
     override def hashCode = name.hashCode
