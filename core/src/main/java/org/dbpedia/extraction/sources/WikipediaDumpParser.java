@@ -56,7 +56,7 @@ public class WikipediaDumpParser
   private static final String TIMESTAMP_ELEM = "timestamp";
 
   /** the character stream */
-  private final Reader _stream;
+  private Reader _stream;
 
   /** the reader, null before and after run() */
   private XMLStreamReader _reader;
