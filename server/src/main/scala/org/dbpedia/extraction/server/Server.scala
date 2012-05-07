@@ -66,7 +66,7 @@ object Server
         var langs : Seq[Language] = for(arg <- args.drop(5); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
         
         // if no languages are given, use all languages for which a mapping namespace is defined
-        if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq
+        if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq.sorted
         
         val languages = SortedSet(langs: _*)(Language.wikiCodeOrdering)
         
@@ -80,6 +80,7 @@ object Server
         features.put(ResourceConfig.FEATURE_CANONICALIZE_URI_PATH, true)
         features.put(ResourceConfig.FEATURE_NORMALIZE_URI, true)
         features.put(ResourceConfig.FEATURE_REDIRECT, true)
+        features.put(ResourceConfig.FEATURE_TRACE, true)
 
         HttpServerFactory.create(new URI(uri), resources).start()
 
