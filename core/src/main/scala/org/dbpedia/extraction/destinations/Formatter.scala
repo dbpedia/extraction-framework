@@ -7,8 +7,7 @@ import java.io.Writer
  */
 trait Formatter
 {
-    def writeHeader(writer : Writer) : Unit = {}
-    def writeFooter(writer : Writer) : Unit = {}
-
+    def writeHeader(writer : Writer) : Unit
+    def writeFooter(writer : Writer) : Unit
     def write(quad : Quad, writer : Writer) : Unit
 }

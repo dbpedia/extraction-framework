@@ -39,6 +39,15 @@
                             </args>
                         </launcher>
 
+                        <launcher>
+                            <id>generate-settings</id>
+                            <mainClass>org.dbpedia.extraction.wikiparser.impl.wikipedia.GenerateWikiSettings</mainClass>
+                            <args>
+                                <arg>src/main/settings</arg><!-- wiki config xml files folder -->
+                                <arg>true</arg><!-- download info again and overwrite existing files? -->
+                            </args>
+                        </launcher>
+
                     </launchers>
                 </configuration>
 
@@ -55,8 +64,8 @@
 
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.9.1</artifactId>
-            <version>1.7.1</version>
+            <artifactId>scalatest_2.9.2</artifactId>
+            <version>1.7.2</version>
             <scope>test</scope>
         </dependency>
 

@@ -10,7 +10,7 @@ import org.dbpedia.extraction.util.Language
 @Path("/ontology/classes/")
 class Classes
 {
-    private val ontology = Server.extractor.ontology
+    private val ontology = Server.instance.extractor.ontology
 
     /**
      * Retrieves an overview page
@@ -180,7 +180,7 @@ class Classes
     {
         case ontClass : OntologyClass if ontClass.name != "owl:Thing" =>
         {
-            <small>(<a href={Server.wikiPagesUrl + "/OntologyClass:" + ontClass.name} title="Edit this class on the Wiki">edit</a>)</small>
+            <small>(<a href={Server.instance.paths.pagesUrl + "/OntologyClass:" + ontClass.name} title="Edit this class on the Wiki">edit</a>)</small>
         }
         case _ =>
         {
@@ -190,6 +190,6 @@ class Classes
 
     private def createEditLink(p : OntologyProperty) =
     {
-        <small>(<a href={Server.wikiPagesUrl + "/OntologyProperty:" + p.name} title="Edit this property on the Wiki">edit</a>)</small>
+        <small>(<a href={Server.instance.paths.pagesUrl + "/OntologyProperty:" + p.name} title="Edit this property on the Wiki">edit</a>)</small>
     }
 }

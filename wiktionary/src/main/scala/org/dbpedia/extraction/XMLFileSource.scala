@@ -1,10 +1,10 @@
 package org.dbpedia.extraction
 
-
 import collection.JavaConversions._
 import sources.{WikiPage, WikipediaDumpParser, Source}
 import wikiparser.WikiTitle
 import org.springframework.core.io.Resource
+import java.io.InputStreamReader
 
 /**
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
@@ -27,7 +27,7 @@ class XMLFileSource(resource: Resource, filter: (WikiTitle => Boolean)) extends 
       title: WikiTitle => filter(title): java.lang.Boolean
     }
     val stream = resource.getInputStream
-    new WikipediaDumpParser(stream, null, null, jfilter, proc).run()
+    new WikipediaDumpParser(new InputStreamReader(stream, "UTF-8"), null, null, jfilter, proc).run()
     stream.close()
   }
 

@@ -18,7 +18,7 @@ class Root
             <p><a href="ontology/">Ontology</a></p>
             <p><a href="statistics/">Statistics</a> - <a href="mappings/">Mappings</a> - <a href="extraction/">Extractors</a></p>
             {
-              for(lang <- Server.languages; code = lang.wikiCode) yield
+              for(lang <- Server.instance.managers.keys; code = lang.wikiCode) yield
               {
                   <p><a href={"statistics/" + code + "/"}>Statistics for {code}</a> - <a href={"mappings/" + code + "/"}>Mappings in {code}</a> - <a href={"extraction/" + code + "/"}>Extractor in {code}</a></p>
               }
@@ -46,7 +46,7 @@ class Root
           <body>
             <h2>{header}</h2>
             {
-              for(lang <- Server.languages; code = lang.wikiCode) yield
+              for(lang <- Server.instance.managers.keys; code = lang.wikiCode) yield
               {
                   <p><a href={code + "/"}>{prefix} {code}</a></p>
               }

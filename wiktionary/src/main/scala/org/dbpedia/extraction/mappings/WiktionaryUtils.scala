@@ -13,7 +13,7 @@ import MyNode._
 import MyStringTrimmer._
 
 case class WiktionaryException(s: String, vars : VarBindingsHierarchical, unexpectedNode : Option[Node]) extends  Exception(s) {}
-case class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
+class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
 
 class MyStack(s : Stack[Node]) {
   val stack : Stack[Node] = s

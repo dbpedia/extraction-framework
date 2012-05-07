@@ -23,6 +23,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import scala.collection.JavaConversions;
+import scala.runtime.AbstractFunction1;
+import scala.Function1;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -267,18 +269,20 @@ public class LiveUpdateDestination implements Destination{
 
     public void write(Graph graph){
 
-        List tripleList = JavaConversions.asList(graph.quads());
-        Map<Dataset, scala.collection.immutable.List<Quad>> tripleWithDataset = JavaConversions.asMap(graph.quadsByDataset());
+        Function1<Quad,Dataset> quadDataset = new AbstractFunction1<Quad,Dataset>() {
+          public Dataset apply(Quad quad) { return quad.dataset(); }
+        };
+        Map<Dataset, scala.collection.immutable.List<Quad>> tripleWithDataset = JavaConversions.mapAsJavaMap(graph.quads().groupBy(quadDataset));
 
-        Set keySet = tripleWithDataset.keySet();
-        Iterator keysIterator = keySet.iterator();
+        Set<Dataset> keySet = tripleWithDataset.keySet();
+        Iterator<Dataset> keysIterator = keySet.iterator();
         //for(Object obj : tripleList){
         while(keysIterator.hasNext()){
             Dataset dsKey = (Dataset) keysIterator.next();
             scala.collection.immutable.List<Quad> quadList = (scala.collection.immutable.List<Quad>)tripleWithDataset.get(dsKey);
             ExtractionResult rs = new ExtractionResult(pageId, language, dsKey.name());
 
-            List<Quad> listQuads = JavaConversions.asList(quadList);
+            List<Quad> listQuads = JavaConversions.seqAsJavaList(quadList);
             for(Quad quad : listQuads){
                 rs.addTriple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
             }

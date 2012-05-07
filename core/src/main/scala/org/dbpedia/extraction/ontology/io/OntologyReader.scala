@@ -6,7 +6,6 @@ import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.extraction.util.Language
-import java.util.Locale
 import org.dbpedia.extraction.sources.Source
 
 /**
@@ -29,7 +28,7 @@ class OntologyReader
      * @param source The source containing the ontology pages
      * @return Ontology The ontology
      */
-	def read(pageNodeSource : Traversable[PageNode]) : Ontology =
+    def read(pageNodeSource : Traversable[PageNode]) : Ontology =
     {
         logger.info("Loading ontology")
 
@@ -55,7 +54,7 @@ class OntologyReader
         ontology
     }
 
-	/**
+    /**
      * Loads all classes and properties from a page.
      *
      * @param ontology The OntologyBuilder instance
@@ -70,7 +69,7 @@ class OntologyReader
 
             if(templateName == OntologyReader.CLASSTEMPLATE_NAME)
             {
-                val name = OntologyReader.getClassName(page.title)
+                val name = getName(page.title, _.capitalize(page.title.language.locale))
 
                 ontologyBuilder.classes ::= loadClass(name, templateNode)
 
@@ -81,7 +80,7 @@ class OntologyReader
             }
             else if(templateName == OntologyReader.OBJECTPROPERTY_NAME || templateName == OntologyReader.DATATYPEPROPERTY_NAME)
             {
-                val name = OntologyReader.getPropertyName(page.title)
+                val name = getName(page.title, _.uncapitalize(page.title.language.locale))
 
                 for(property <- loadOntologyProperty(name, templateNode))
                 {
@@ -91,6 +90,23 @@ class OntologyReader
         }
     }
 
+    /**
+     * Generates the name of an ontology class or property based on the article title.
+     * A namespace like "Foaf:" is always converted to lowercase. The local name (the part
+     * after the namespace prefix) is cleaned using the given function.
+     *
+     * @param name page title
+     * @param clean used to process the local name
+     * @return clean name, including lower-case namespace and clean local name
+     * @throws IllegalArgumentException
+     */
+    private def getName(title : WikiTitle, clean: String => String): String = title.encoded.split("/|:", 2) match
+    {
+        case Array(name) => clean(name)
+        case Array(namespace, name) => namespace.toLowerCase(title.language.locale) + ":" + clean(name)
+        case _ => throw new IllegalArgumentException("Invalid name: " + title)
+    }
+    
     private def loadClass(name : String, node : TemplateNode) : ClassBuilder =
     {
         new ClassBuilder(name = name,
@@ -437,32 +453,4 @@ private object OntologyReader
     val OBJECTPROPERTY_NAME = "ObjectProperty"
     val DATATYPEPROPERTY_NAME = "DatatypeProperty"
     val SPECIFICPROPERTY_NAME = "SpecificProperty"
-
-    /**
-     * Generates the name of an ontology class based on the article title e.g. 'Foaf/Person' becomes 'foaf:Person'.
-     *
-     * @param name page title
-     * @return class name
-     * @throws IllegalArgumentException
-     */
-    private def getClassName(title : WikiTitle) : String = title.encoded.split("/|:", 2) match
-    {
-        case Array(name) => name.capitalize(title.language.locale)
-        case Array(namespace, name) => namespace.toLowerCase(title.language.locale) + ":" + name.capitalize(title.language.locale)
-        case _ => throw new IllegalArgumentException("Invalid name: " + title)
-    }
-
-    /**
-     * Generates the name of an ontology property based on the article title Foaf/name' becomes 'foaf:name'.
-     *
-     * @param name page title
-     * @return property name
-     * @throws IllegalArgumentException
-     */
-    private def getPropertyName(title : WikiTitle) : String = title.encoded.split("/|:", 2) match
-    {
-        case Array(name) => name.uncapitalize(title.language.locale)
-        case Array(namespace, name) => namespace.toLowerCase(title.language.locale) + ":" + name.uncapitalize(title.language.locale)
-        case _ => throw new IllegalArgumentException("Invalid name: " + title)
-    }
 }

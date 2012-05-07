@@ -10,17 +10,13 @@ import org.dbpedia.extraction.util.Language
 /**
  * Extracts interwiki links and creates owl:sameAs triples
  */
-class InterLanguageLinksExtractor( context : {
-                                       def ontology : Ontology
-                                       def language : Language } ) extends Extractor
+class InterLanguageLinksExtractor(context: { def ontology : Ontology; def language : Language }) extends Extractor
 {
-    private val language = context.language.wikiCode
+    private val intLinksSet = InterLanguageLinksExtractorConfig.intLinksMap(context.language.wikiCode)
 
-    require( InterLanguageLinksExtractorConfig.supportedLanguages.contains(language), "Interlanguage Links supports the following languages: " + InterLanguageLinksExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
-
+    // FIXME: owl:sameAs is too strong, many linked pages are about very different subjects
     private val interLanguageLinksProperty = context.ontology.properties("owl:sameAs")
     //context.ontology.getProperty("interLanguageLinks")
-
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
@@ -28,23 +24,21 @@ class InterLanguageLinksExtractor( context : {
         
         var quads = List[Quad]()
 
-        retrieveTranslationTitles (node,InterLanguageLinksExtractorConfig.intLinksMap(language)).foreach { tuple:(Language, WikiTitle) =>
-            val (tlang, title) = tuple
-            // FIXME: title.sourceUri is wrong, we need the sourceUri of the InterWikiLinkNode
-            quads ::= new Quad(context.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
-                OntologyNamespaces.getResource(title.encodedWithNamespace, tlang), title.sourceUri, null)
+        for(node <- node.children.reverse)
+        {
+          node match {
+            case link: InterWikiLinkNode =>
+              val dst = link.destination
+              if (dst.isInterLanguageLink && intLinksSet.contains(dst.language.wikiCode)) {
+                val lang = dst.language
+                quads ::= new Quad(context.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
+                  OntologyNamespaces.getResource(dst.encodedWithNamespace, lang), link.sourceUri, null)
+              }
+            case _ => // ignore
+          }
         }
+        
         new Graph(quads)
     }
 
-    private def retrieveTranslationTitles(page : PageNode, trans_lang : Set[String]) : Map[Language, WikiTitle] =
-    {
-        var results = Map[Language, WikiTitle]()
-
-        for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && trans_lang.contains(destination.language.wikiCode) )
-        {
-            results += (destination.language -> destination)
-        }
-        results
-    }
 }

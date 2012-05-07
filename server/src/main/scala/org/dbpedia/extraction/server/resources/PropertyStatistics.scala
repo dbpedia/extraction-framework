@@ -6,7 +6,7 @@ import collection.immutable.ListMap
 import scala.collection.mutable
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.{WikiUtil, Language}
-import org.dbpedia.extraction.server.util.MappingStats
+import org.dbpedia.extraction.server.stats.MappingStats
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.io.{FileNotFoundException, File}
 
@@ -21,16 +21,11 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 {
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
-    if (!Server.languages.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
+    if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
 
-    private val mappingUrlPrefix = Server.wikiPagesUrl+"/"+Namespace.mappings(language).getName(Language.Default).replace(' ','_')+":"
+    private val mappingUrlPrefix = Server.instance.paths.pagesUrl+"/"+Namespace.mappings(language).getName(Language.Default).replace(' ','_')+":"
 
-    private val manager = Server.statsManager(language)
-
-    private var wikipediaStatistics = manager.wikiStats
-
-    private val mappings = getClassMappings
-    private val statistics = manager.countMappedStatistics(mappings, wikipediaStatistics)
+    private val manager = Server.instance.managers(language)
 
     private val mappedColor = "#65c673"
     private val notMappedColor = "#e05d57"
@@ -39,7 +34,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
     private def wikiDecode(name: String) : String = WikiUtil.wikiDecode(name, language, capitalize=false)
 
-    private def passwordQuery : String = if (Server.adminRights(password)) "?p="+password else ""
+    private def passwordQuery : String = if (Server.instance.adminRights(password)) "?p="+password else ""
 
     @GET
     @Produces(Array("application/xhtml+xml"))
@@ -106,7 +101,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 }
 
                 var counter = ""
-                if (count == -1)
+                if (count == MappingStats.InvalidTarget)
                 {
                     bgcolor = notDefinedColor
                     counter = "na"
@@ -129,7 +124,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                         </td> <td>
                         {name}
                     </td>
-                        {if (Server.adminRights(password))
+                        {if (Server.instance.adminRights(password))
                     {
                         <td>
                         <a href={"../../ignore/"+langCode+"/property/"+passwordQuery+"&ignore="+(! isIgnored)+"&template="+template+"&property="+name}>
@@ -147,13 +142,8 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
     
     def getMappingStats(templateName: String) : MappingStats =
     {
+        val statistics = manager.holder.mappedStatistics
         for (mappingStat <- statistics) if (mappingStat.templateName == templateName) return mappingStat
         throw new IllegalArgumentException("Could not find template: " + templateName)
-    }
-
-    def getClassMappings =
-    {
-        val mappings = Server.extractor.mappings(language)
-        mappings.templateMappings ++ mappings.conditionalMappings
     }
 }

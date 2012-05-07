@@ -4,6 +4,8 @@ import scala.collection.mutable.HashMap
 import scala.collection.mutable.SynchronizedMap
 import java.net.URLEncoder
 
+import org.dbpedia.extraction.util.RichString.toRichString // implicit
+
 /**
  * Base class of all nodes in the abstract syntax tree.
  * This class is thread-safe.
@@ -35,24 +37,29 @@ abstract class Node(val children : List[Node], val line : Int)
      *
      * @return The root Node
      */
-    def root : PageNode =
+    lazy val root : PageNode =
     {
         var node = this
+        
         while(node.parent != null)
         {
             node = node.parent;
         }
-        return node.asInstanceOf[PageNode];
+        
+        node.asInstanceOf[PageNode];
     }
    
     /**
      * Retrieves the section of this node
      * 
-     * @return The section of this node
+     * @return The section of this node, may be null
      */
-    def section : SectionNode =
-    {
+    lazy val section : SectionNode = findSection
+    
+    private def findSection : SectionNode = {
+      
         var section : SectionNode = null;
+        
         for(node <- root.children)
         {
             if(node.line > line)
@@ -65,31 +72,22 @@ abstract class Node(val children : List[Node], val line : Int)
                 section = node.asInstanceOf[SectionNode];
             }
         }
-        return section
+        
+        section
     }
 
     /**
      * Retrieves the text denoted by this node.
      * Only works on nodes that only contain text.
-     * Returns null if this node contains child nodes other than TextNode.
+     * Returns None if this node contains child nodes other than TextNode.
      */
-    def retrieveText : Option[String] =
-    {
-    	if(isInstanceOf[TextNode])
-    	{
-    		return Some(asInstanceOf[TextNode].text)
-    	}
-    	else if(children.length == 1 && children(0).isInstanceOf[TextNode])
-        {
-            return Some(children(0).asInstanceOf[TextNode].text)
-        }
-        else
-        {
-            return None
-        }
+    final def retrieveText: Option[String] = retrieveText(true)
+
+    protected def retrieveText(recurse: Boolean): Option[String] = {
+      if (recurse && children.length == 1) children(0).retrieveText(false) else None
     }
 
-    /*
+    /**
      * Returns an annotation.
      *
      * @param key key of the annotation
@@ -112,45 +110,28 @@ abstract class Node(val children : List[Node], val line : Int)
     }
     
     /**
-     * URL of source page and line number.
+     * IRI of source page and line number.
+     * TODO: rename to sourceIri.
      */
     def sourceUri : String =
     {
-        //Get current section
-        val section = this.section
+        val sb = new StringBuilder
+        
+        sb append root.title.pageIri
 
-        //Build source URI
-        var sourceUri = sourceUriPrefix
-
-        if(section != null)
+        if (section != null)
         {
-            // TODO: URLEncoder is way too much, we want to use IRIs
-            sourceUri += "section=" + URLEncoder.encode(section.name, "UTF-8")
-            sourceUri += "&relative-line=" + (line - section.line)
-            sourceUri += "&absolute-line=" + line
+            // TODO: is section name escaping correct?
+            sb append '#' append "section=" append section.name.replace(' ', '_').dotEscape("\"#%<>?[\\]^`{|}")
+            sb append "&relative-line=" append (line - section.line)
+            sb append "&absolute-line=" append line
         }
-        else if(line >= 1)
+        else if (line >= 1)
         {
-            sourceUri += "absolute-line=" + line
+            sb append '#' append "absolute-line=" append line
         }
         
-        return sourceUri
+        sb.toString
     }
 
-    /**
-     * Get first part of source URL.
-     * 
-     * TODO: It's ugly to have such a special-purpose function here. Is there a better way?
-     * At least move this method to PageNode.
-     * 
-     * @return first part of source URL, containing the page name and the separator character, 
-     * but not the line number etc.
-     */
-    private def sourceUriPrefix : String =
-    {
-        val page = root
-
-        // TODO: make base URI configurable
-        "http://" + page.title.language.wikiCode + ".wikipedia.org/wiki/" + page.title.encodedWithNamespace + '#'
-    }
 }
