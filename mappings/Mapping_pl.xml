@@ -213,6 +213,17 @@
           | longitudeMinutes   = minutN
           | longitudeSeconds   = sekundN
         }}
+}}</text></revision></page><page><title>Mapping pl:Burmistrz Wadowic</title><ns>220</ns><id>5566</id><revision><id>18025</id><text>{{TemplateMapping
+| mapToClass = Mayor
+| mappings =
+	{{PropertyMapping | templateProperty = pop | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = nast | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:CVG infobox</title><ns>220</ns><id>4206</id><revision><id>14276</id><text>{{TemplateMapping
 | mapToClass = VideoGame
 | mappings =
@@ -358,6 +369,49 @@
           | longitudeMinutes   = minutN
           | longitudeSeconds   = sekundN
         }}
+}}</text></revision></page><page><title>Mapping pl:Dowódca 8FOW</title><ns>220</ns><id>5586</id><revision><id>17960</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Dowódca BLMW</title><ns>220</ns><id>5587</id><revision><id>17961</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Dowódca MW</title><ns>220</ns><id>5407</id><revision><id>17780</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Dowódca Wojsk Lądowych RP</title><ns>220</ns><id>5388</id><revision><id>17761</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Droga infobox</title><ns>220</ns><id>4250</id><revision><id>14385</id><text>{{TemplateMapping
 | mapToClass = Road
 | mappings =
@@ -379,7 +433,7 @@
 	{{PropertyMapping | templateProperty = route | ontologyProperty = isPartOfRoute }}
 	{{PropertyMapping | templateProperty = exits | ontologyProperty = routeJunction }}
 	{{PropertyMapping | templateProperty = mapa | ontologyProperty = map }}
-}}</text></revision></page><page><title>Mapping pl:Duchowny infobox</title><ns>220</ns><id>3397</id><revision><id>12365</id><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping pl:Duchowny infobox</title><ns>220</ns><id>3397</id><revision><id>18078</id><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = tytuł
@@ -387,6 +441,14 @@
     | value = biskup
     | mapping = {{TemplateMapping
                 | mapToClass = ChristianBishop
+                }}
+ }}
+ {{Condition
+    | templateProperty = tytuł
+    | operator = contains
+    | value = patriarcha Aleksandrii
+    | mapping = {{TemplateMapping
+                | mapToClass = ChristianPatriarch
                 }}
  }}
  {{Condition
@@ -415,11 +477,22 @@
 	{{PropertyMapping | templateProperty = data śmierci | ontologyProperty = deathDate }}
 	{{PropertyMapping | templateProperty = miejsce śmierci | ontologyProperty = deathPlace }}
 	{{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = tytuł | ontologyProperty = title }}
 &lt;!--	{{PropertyMapping | templateProperty = 1. funkcja | ontologyProperty =  }} --&gt;
 &lt;!--	{{PropertyMapping | templateProperty = 1. funkcja  - okres | ontologyProperty =  }} --&gt;
 &lt;!--	{{PropertyMapping | templateProperty = 2. funkcja | ontologyProperty =  }} --&gt;
 &lt;!--	{{PropertyMapping | templateProperty = 2. funkcja  - okres | ontologyProperty =  }} --&gt;
 &lt;!--	{{PropertyMapping | templateProperty = herb | ontologyProperty =  }} --&gt;
+}}</text></revision></page><page><title>Mapping pl:Dyrektor-Biblioteki-Aleksandryjskiej</title><ns>220</ns><id>5387</id><revision><id>17760</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Dzielnica infobox</title><ns>220</ns><id>4303</id><revision><id>14467</id><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
@@ -556,6 +629,10 @@
         {{PropertyMapping | templateProperty = województwo | ontologyProperty = province }}
         {{PropertyMapping | templateProperty = powiat | ontologyProperty = administrativeDistrict }}
 --&gt;
+}}</text></revision></page><page><title>Mapping pl:Fashionmodel</title><ns>220</ns><id>5615</id><revision><id>17989</id><text>{{TemplateMapping
+| mapToClass = Model
+| mappings =
+	{{PropertyMapping | templateProperty = imię | ontologyProperty = foaf:name }}
 }}</text></revision></page><page><title>Mapping pl:Film infobox</title><ns>220</ns><id>2985</id><revision><id>14333</id><text>{{TemplateMapping
 | mapToClass = Film
 | mappings =
@@ -581,6 +658,22 @@
 	{{PropertyMapping | templateProperty = język | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = previousWork }}
 	{{PropertyMapping | templateProperty = kontynuacja | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping pl:Galaktyka infobox</title><ns>220</ns><id>5661</id><revision><id>18077</id><text>{{TemplateMapping 
+| mapToClass = Galaxy
+| mappings = 
+   {{ PropertyMapping | templateProperty = nazwa | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = gwiazdozbiór | ontologyProperty = constellation }}
+}}</text></revision></page><page><title>Mapping pl:Generałowie zakonu jezuitów</title><ns>220</ns><id>5519</id><revision><id>17893</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Gmina infobox</title><ns>220</ns><id>3666</id><revision><id>14344</id><text>{{ TemplateMapping
    | mapToClass = AdministrativeRegion
    | mappings =
@@ -632,6 +725,28 @@
         {{PropertyMapping | templateProperty = pierwsze wejście | ontologyProperty = firstAscentPerson }}
         {{PropertyMapping | templateProperty = data zdobycia zimą | ontologyProperty = firstAscentYear }}
         {{PropertyMapping | templateProperty = pierwsze wejście zimą | ontologyProperty = firstAscentPerson }}
+}}</text></revision></page><page><title>Mapping pl:Hrabia-Burgundia</title><ns>220</ns><id>5619</id><revision><id>17993</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Hrabia kłodzki</title><ns>220</ns><id>5541</id><revision><id>17915</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:ISR wieś infobox</title><ns>220</ns><id>4262</id><revision><id>14407</id><text>{{TemplateMapping
 | mapToClass = Village
 | mappings =
@@ -925,7 +1040,29 @@
  |                       data1 =
  |                       data2 =
 }}
---&gt;</text></revision></page><page><title>Mapping pl:Książka infobox</title><ns>220</ns><id>2990</id><revision><id>13355</id><text>{{TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping pl:Król Izraela</title><ns>220</ns><id>5384</id><revision><id>17756</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Królowa Włoch</title><ns>220</ns><id>5572</id><revision><id>17946</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książka infobox</title><ns>220</ns><id>2990</id><revision><id>13355</id><text>{{TemplateMapping
 | mapToClass = Book
 | mappings = 
  {{PropertyMapping | templateProperty = tytuł | ontologyProperty = foaf:name }}
@@ -943,6 +1080,652 @@
  {{PropertyMapping | templateProperty = data_I_wyd_pol | ontologyProperty = publicationDate }}
  {{PropertyMapping | templateProperty = poprzednia | ontologyProperty = previousWork }}
  {{PropertyMapping | templateProperty = następna | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping pl:Książę-Asturia</title><ns>220</ns><id>5606</id><revision><id>17980</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę-Asturia (1388-1516)</title><ns>220</ns><id>5511</id><revision><id>17885</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę-Asturia (1527-1580)</title><ns>220</ns><id>5403</id><revision><id>17776</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę-Asturia (1580-1700)</title><ns>220</ns><id>5415</id><revision><id>17788</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę-Asturia (1700-1761)</title><ns>220</ns><id>5594</id><revision><id>17968</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę-Asturia (1761-1931)</title><ns>220</ns><id>5547</id><revision><id>17921</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę-Asturia (Księżna Mercedes)</title><ns>220</ns><id>5607</id><revision><id>17981</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę Francuski-Andora</title><ns>220</ns><id>5442</id><revision><id>17815</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę Przewoza</title><ns>220</ns><id>5395</id><revision><id>17768</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę Raciborsko-Opawski</title><ns>220</ns><id>5397</id><revision><id>17770</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę Viseu</title><ns>220</ns><id>5396</id><revision><id>17769</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę bełski</title><ns>220</ns><id>5542</id><revision><id>17916</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę brzeski</title><ns>220</ns><id>5453</id><revision><id>17827</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę brzesko-kujawski</title><ns>220</ns><id>5571</id><revision><id>17945</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę bytomski</title><ns>220</ns><id>5452</id><revision><id>17826</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę ciechanowski</title><ns>220</ns><id>5543</id><revision><id>17917</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę cieszyński</title><ns>220</ns><id>5443</id><revision><id>17816</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę czerski</title><ns>220</ns><id>5461</id><revision><id>17835</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę dobrzyński</title><ns>220</ns><id>5544</id><revision><id>17918</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę gdański</title><ns>220</ns><id>5507</id><revision><id>17881</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę gniewkowski</title><ns>220</ns><id>5406</id><revision><id>17779</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę gnieźnieński</title><ns>220</ns><id>5545</id><revision><id>17919</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę głogowski</title><ns>220</ns><id>5437</id><revision><id>17810</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę halicko-wołyński</title><ns>220</ns><id>5386</id><revision><id>17759</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę inowrocławski</title><ns>220</ns><id>5531</id><revision><id>17905</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę jaworski</title><ns>220</ns><id>5530</id><revision><id>17904</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę kaliski</title><ns>220</ns><id>5476</id><revision><id>17850</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę karniowski</title><ns>220</ns><id>5470</id><revision><id>17844</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę kozielski</title><ns>220</ns><id>5477</id><revision><id>17851</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę kujawski</title><ns>220</ns><id>5588</id><revision><id>17962</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę legnicki</title><ns>220</ns><id>5449</id><revision><id>17822</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę lwówecki</title><ns>220</ns><id>5546</id><revision><id>17920</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę namysłowski</title><ns>220</ns><id>5508</id><revision><id>17882</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę niemodliński</title><ns>220</ns><id>5471</id><revision><id>17845</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę nyski</title><ns>220</ns><id>5430</id><revision><id>17803</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę oleśnicki</title><ns>220</ns><id>5445</id><revision><id>17818</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę opawski</title><ns>220</ns><id>5459</id><revision><id>17833</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę opolski</title><ns>220</ns><id>5463</id><revision><id>17837</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę opolsko-raciborski</title><ns>220</ns><id>5529</id><revision><id>17903</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę oświęcimski</title><ns>220</ns><id>5509</id><revision><id>17883</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę podlaski</title><ns>220</ns><id>5589</id><revision><id>17963</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę poznański</title><ns>220</ns><id>5528</id><revision><id>17902</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę płocki</title><ns>220</ns><id>5451</id><revision><id>17825</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę rawski</title><ns>220</ns><id>5510</id><revision><id>17884</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę rudzki (wieluński)</title><ns>220</ns><id>5398</id><revision><id>17771</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę sambijski</title><ns>220</ns><id>5375</id><revision><id>17747</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę serbski</title><ns>220</ns><id>5553</id><revision><id>17927</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę sieradzki</title><ns>220</ns><id>5399</id><revision><id>17772</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę siewierski</title><ns>220</ns><id>5416</id><revision><id>17789</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę strzelecki</title><ns>220</ns><id>5478</id><revision><id>17852</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę warszawski</title><ns>220</ns><id>5618</id><revision><id>17992</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę wiski</title><ns>220</ns><id>5517</id><revision><id>17891</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę zatorski</title><ns>220</ns><id>5400</id><revision><id>17773</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę ziębicki</title><ns>220</ns><id>5374</id><revision><id>17746</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę łomżyński</title><ns>220</ns><id>5405</id><revision><id>17778</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę łęczycki</title><ns>220</ns><id>5404</id><revision><id>17777</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę ścinawski</title><ns>220</ns><id>5424</id><revision><id>17797</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę świdnicki</title><ns>220</ns><id>5554</id><revision><id>17928</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Książę żagański</title><ns>220</ns><id>5460</id><revision><id>17834</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:LUX gmina infobox</title><ns>220</ns><id>4259</id><revision><id>14402</id><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
@@ -1088,6 +1871,39 @@
     {{ PropertyMapping | templateProperty = wysokość | ontologyProperty = elevation | unit = metre }}
     {{ GeocoordinatesMapping | coordinates = położenie }}
     {{ PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping pl:Marszałek Krajowy</title><ns>220</ns><id>5520</id><revision><id>17894</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Marszałek Sejmu-Krona Polska</title><ns>220</ns><id>5402</id><revision><id>17775</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Matka Ksieni - Zakonu Ubogich Sióstr Świętej Klary w Polsce</title><ns>220</ns><id>5567</id><revision><id>17941</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = Pop | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = Nast | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Mecz piłkarski</title><ns>220</ns><id>4308</id><revision><id>14475</id><text>{{TemplateMapping
 | mapToClass = FootballMatch
 | mappings =
@@ -1169,6 +1985,49 @@
           | longitudeDirection = szerokość
         }}
 	 {{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping pl:Minister Generalny Zakonu Braci Mniejszych</title><ns>220</ns><id>5533</id><revision><id>17907</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = Pop | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = Nast | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Ministrowie prowincjalni – Prowincja Wniebowzięcia NMP Zakonu Braci Mniejszych w Polsce</title><ns>220</ns><id>5429</id><revision><id>17823</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = Pop | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = Nast | ontologyProperty = successor }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Ministrowie prowincjalni – Prowincja św. Jadwigi Zakonu Braci Mniejszych w Polsce</title><ns>220</ns><id>5595</id><revision><id>17969</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = Pop | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = Nast | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Mistrz w szachach</title><ns>220</ns><id>5516</id><revision><id>17890</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = pop | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = nast | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = nazwa | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Most infobox</title><ns>220</ns><id>4272</id><revision><id>14430</id><text>{{TemplateMapping
 | mapToClass = Bridge
 | mappings =
@@ -1316,6 +2175,31 @@
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
 	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
 	{{PropertyMapping | templateProperty = funkcja | ontologyProperty = title }}
+}}</text></revision></page><page><title>Mapping pl:POL miasto infobox</title><ns>220</ns><id>5662</id><revision><id>18085</id><text>{{TemplateMapping
+| mapToClass = City
+| mappings =
+	{{ConstantMapping  | ontologyProperty = country | value = Polska }}
+        {{PropertyMapping | templateProperty = nazwa | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = dopełniacz miasta | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = populacja | ontologyProperty = populationTotal }}
+        {{PropertyMapping | templateProperty = zarządzający | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = powierzchnia | ontologyProperty = areaTotal | unit = squareKilometre }}
+	{{PropertyMapping | templateProperty = gęstość | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
+	{{PropertyMapping | templateProperty = tablice rejestracyjne | ontologyProperty = vehicleCode }}
+        {{PropertyMapping | templateProperty = strefa numeracyjna | ontologyProperty = areaCode }}
+        {{PropertyMapping | templateProperty = SIMC | ontologyProperty = simcCode }}
+        {{PropertyMapping | templateProperty = TERYT | ontologyProperty = terytCode }}
+        {{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
+        {{GeocoordinatesMapping
+          | latitudeDegrees    = stopniN
+          | latitudeMinutes    = minutN
+          | latitudeSeconds    = sekundN
+          | longitudeDegrees   = stopniE
+          | longitudeMinutes   = minutE
+          | longitudeSeconds   = sekundE
+          | latitudeDirection = długość
+          | longitudeDirection = szerokość
+        }}
 }}</text></revision></page><page><title>Mapping pl:PRT gmina infobox</title><ns>220</ns><id>4254</id><revision><id>14396</id><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
@@ -1350,6 +2234,17 @@
         {{PropertyMapping | templateProperty = województwo | ontologyProperty = province }}
         {{PropertyMapping | templateProperty = powiat | ontologyProperty = administrativeDistrict }}
 --&gt;
+}}</text></revision></page><page><title>Mapping pl:Panama-Władca</title><ns>220</ns><id>5597</id><revision><id>17971</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Parafia infobox</title><ns>220</ns><id>4237</id><revision><id>14351</id><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
@@ -1394,6 +2289,17 @@
 	{{ PropertyMapping | templateProperty = organizacja młodzieżowa | ontologyProperty = youthWing }}
 	{{ PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
 	{{ PropertyMapping | templateProperty = kod_państwa | ontologyProperty = country }}
+}}</text></revision></page><page><title>Mapping pl:Patriarcha Aleksandrii</title><ns>220</ns><id>5620</id><revision><id>18028</id><text>{{TemplateMapping
+| mapToClass = ChristianPatriarch
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Państwo infobox</title><ns>220</ns><id>4219</id><revision><id>14295</id><text>{{TemplateMapping
 | mapToClass = Country
 | mappings =
@@ -1435,6 +2341,17 @@
 	{{PropertyMapping | templateProperty = population_density_sq_mi | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeDirection = longEW }}
 --&gt;
+}}</text></revision></page><page><title>Mapping pl:Pierwszy minister Królestwa Portugalii</title><ns>220</ns><id>5548</id><revision><id>17922</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Pisarz infobox</title><ns>220</ns><id>4263</id><revision><id>14410</id><text>{{TemplateMapping
 | mapToClass = Writer
 | mappings = 
@@ -1572,6 +2489,134 @@
        {{ PropertyMapping | templateProperty = starosta | ontologyProperty = leaderName }}
        {{ PropertyMapping | templateProperty = strona_www_powiat | ontologyProperty = foaf:homepage }}
        {{ PropertyMapping | templateProperty = stolica_powiat | ontologyProperty = capital }}
+}}</text></revision></page><page><title>Mapping pl:Premier-powstanie listopadowe</title><ns>220</ns><id>5413</id><revision><id>17786</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Premier Wysp Owczych</title><ns>220</ns><id>5512</id><revision><id>17886</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Premier Włoch</title><ns>220</ns><id>5513</id><revision><id>17887</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Prezydenci Argentyny</title><ns>220</ns><id>5573</id><revision><id>17947</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Prezydenci Francji</title><ns>220</ns><id>5385</id><revision><id>17757</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Prezydenci Poznania</title><ns>220</ns><id>5617</id><revision><id>18022</id><text>{{TemplateMapping
+| mapToClass = President
+| mappings =
+	{{PropertyMapping | templateProperty = Pop | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = Nast | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = Pocz | ontologyProperty = activeYearsStartYear }}
+	{{PropertyMapping | templateProperty = Kon | ontologyProperty = activeYearsEndYear }}
+}}</text></revision></page><page><title>Mapping pl:Prezydent-Boliwia</title><ns>220</ns><id>5414</id><revision><id>17787</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Prezydent-Peru</title><ns>220</ns><id>5518</id><revision><id>17892</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Prezydent-SFRJ</title><ns>220</ns><id>5598</id><revision><id>17972</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Prezydent Kielc</title><ns>220</ns><id>5401</id><revision><id>17774</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Prezydent Palau</title><ns>220</ns><id>5596</id><revision><id>17970</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = funkcja | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Prezydent Wrocławia</title><ns>220</ns><id>5565</id><revision><id>17939</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = pop | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = nast | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Przedsiębiorstwo infobox</title><ns>220</ns><id>4215</id><revision><id>14290</id><text>{{ TemplateMapping | mapToClass = Company | mappings = 
     {{ PropertyMapping | templateProperty = nazwa | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = forma prawna | ontologyProperty = type }}
@@ -1642,6 +2687,22 @@
           | latitudeDirection = długość
           | longitudeDirection = szerokość
         }}
+}}</text></revision></page><page><title>Mapping pl:Rugbysta infobox</title><ns>220</ns><id>5363</id><revision><id>17730</id><text>{{TemplateMapping
+| mapToClass = RugbyPlayer
+| mappings =
+	{{PropertyMapping | templateProperty = imię i nazwisko | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = pełne imię i nazwisko | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = imię i nazwisko org | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = ru pozycja | ontologyProperty = position }}
+	{{PropertyMapping | templateProperty = rl pozycja | ontologyProperty = position }}
+	{{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = data urodzenia | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = miejsce urodzenia | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = data śmierci  | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = miejsce śmierci | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = wzrost | ontologyProperty = height | unit = metre }}
+	{{PropertyMapping | templateProperty = masa ciała | ontologyProperty = weight | unit = kilogram }}
+	{{PropertyMapping | templateProperty = pseudonim | ontologyProperty = foaf:nick}}
 }}</text></revision></page><page><title>Mapping pl:Rzeka infobox</title><ns>220</ns><id>3695</id><revision><id>13030</id><text>{{TemplateMapping
 | mapToClass = River
 | mappings =
@@ -2563,7 +3624,7 @@
 	{{PropertyMapping | templateProperty = populacja | ontologyProperty = populationTotal }}
 	{{PropertyMapping | templateProperty = gęstość | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping pl:USA miasto infobox</title><ns>220</ns><id>4309</id><revision><id>14478</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping pl:USA miasto infobox</title><ns>220</ns><id>4309</id><revision><id>18084</id><text>{{TemplateMapping
 | mapToClass = City
 | mappings =
 	{{ConstantMapping  | ontologyProperty = country | value = Stany Zjednoczone }}
@@ -2579,9 +3640,9 @@
 	{{PropertyMapping | templateProperty = www | ontologyProperty = foaf:homepage }}
         {{PropertyMapping | templateProperty = województwo | ontologyProperty = province }}
         {{PropertyMapping | templateProperty = gmina | ontologyProperty = municipality }}
+        {{PropertyMapping | templateProperty = miasta partnerskie | ontologyProperty = twinCity }}
         {{PropertyMapping | templateProperty = rodzaj_gminy | ontologyProperty = municipalityType }}
-        {{PropertyMapping | templateProperty = powiat | ontologyProperty = county }}
-        {{PropertyMapping | templateProperty = strefa numeracyjna | ontologyProperty = areaCode }}
+        {{PropertyMapping | templateProperty = hrabstwo | ontologyProperty = county }}
         {{PropertyMapping | templateProperty = SIMC | ontologyProperty = simcCode }}
         {{PropertyMapping | templateProperty = TERYT | ontologyProperty = terytCode }}
 	{{PropertyMapping | templateProperty = tablica_rej | ontologyProperty = vehicleCode }}
@@ -2592,12 +3653,22 @@
 	{{PropertyMapping | templateProperty = powierzchnia | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = gęstość | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
         {{GeocoordinatesMapping
-          | latitudeDegrees    = stopniE
-          | latitudeMinutes    = minutE
-          | latitudeSeconds    = sekundE
-          | longitudeDegrees   = stopniN
-          | longitudeMinutes   = minutN
-          | longitudeSeconds   = sekundN
+          | latitudeDegrees    = stopniN
+          | latitudeMinutes    = minutN
+          | latitudeSeconds    = sekundN
+          | longitudeDegrees   = stopniE
+          | longitudeMinutes   = minutE
+          | longitudeSeconds   = sekundE
+          | latitudeDirection = długość
+          | longitudeDirection = szerokość
+        }}
+        {{GeocoordinatesMapping
+          | latitudeDegrees    = stopniS
+          | latitudeMinutes    = minutS
+          | latitudeSeconds    = sekundS
+          | longitudeDegrees   = stopniW
+          | longitudeMinutes   = minutW
+          | longitudeSeconds   = sekundW
           | latitudeDirection = długość
           | longitudeDirection = szerokość
         }}
@@ -2687,7 +3758,18 @@
           | latitudeDirection = długość
           | longitudeDirection = szerokość
         }}
-}}</text></revision></page><page><title>Mapping pl:Wieś infobox</title><ns>220</ns><id>3401</id><revision><id>14271</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping pl:Wielcy książęta Luksemburga</title><ns>220</ns><id>5521</id><revision><id>17895</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Wieś infobox</title><ns>220</ns><id>3401</id><revision><id>18074</id><text>{{TemplateMapping
 | mapToClass = Village
 | mappings =
 	{{PropertyMapping | templateProperty = nazwa | ontologyProperty = foaf:name }}
@@ -2702,7 +3784,7 @@
         {{PropertyMapping | templateProperty = SIMC | ontologyProperty = simcCode }}
 	{{PropertyMapping | templateProperty = tablice rejestracyjne | ontologyProperty = vehicleCode }}
 	{{PropertyMapping | templateProperty = nr kier | ontologyProperty = areaCode }}
-	{{PropertyMapping | templateProperty = sołtys | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = sołectwo | ontologyProperty = leaderName }}
 	{{PropertyMapping | templateProperty = powierzchnia | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = gęstość | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
         {{GeocoordinatesMapping
@@ -2712,6 +3794,16 @@
           | longitudeDegrees   = stopniN
           | longitudeMinutes   = minutN
           | longitudeSeconds   = sekundN
+          | latitudeDirection = długość
+          | longitudeDirection = szerokość
+        }}
+        {{GeocoordinatesMapping
+          | latitudeDegrees    = stopniW
+          | latitudeMinutes    = minutW
+          | latitudeSeconds    = sekundW
+          | longitudeDegrees   = stopniS
+          | longitudeMinutes   = minutS
+          | longitudeSeconds   = sekundS
           | latitudeDirection = długość
           | longitudeDirection = szerokość
         }}
@@ -2761,7 +3853,18 @@
  |powód zniszczenia    = 
  |obecnie              = 
  |pozycja_napisu       = 
---&gt;</text></revision></page><page><title>Mapping pl:Wojna infobox</title><ns>220</ns><id>4114</id><revision><id>14079</id><text>{{TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping pl:Wojewoda inflancki</title><ns>220</ns><id>5578</id><revision><id>17952</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Wojna infobox</title><ns>220</ns><id>4114</id><revision><id>14079</id><text>{{TemplateMapping
 | mapToClass = MilitaryConflict
 | mappings =
 	{{PropertyMapping | templateProperty = nazwa | ontologyProperty = foaf:name }}
@@ -2813,11 +3916,110 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Achaja</title><ns>220</ns><id>5550</id><revision><id>17924</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Akwitania</title><ns>220</ns><id>4281</id><revision><id>14439</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
 	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Albania</title><ns>220</ns><id>5555</id><revision><id>17929</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Alcantara</title><ns>220</ns><id>5549</id><revision><id>17923</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Andegawenia</title><ns>220</ns><id>5418</id><revision><id>17791</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Angielskie królowe</title><ns>220</ns><id>5380</id><revision><id>17752</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Anglia</title><ns>220</ns><id>5368</id><revision><id>17737</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Anglia Wschodnia</title><ns>220</ns><id>5552</id><revision><id>17926</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Anhalt</title><ns>220</ns><id>5608</id><revision><id>17982</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Aragonia</title><ns>220</ns><id>5427</id><revision><id>17800</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
 	{{DateIntervalMapping 
           | templateProperty = lata 
           | startDateOntologyProperty = activeYearsStartYear 
@@ -2834,7 +4036,84 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-ArcybiskupA</title><ns>220</ns><id>5438</id><revision><id>17811</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Artois</title><ns>220</ns><id>5522</id><revision><id>17896</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Asturia</title><ns>220</ns><id>5494</id><revision><id>17868</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Asyria</title><ns>220</ns><id>5366</id><revision><id>17735</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Austria</title><ns>220</ns><id>5446</id><revision><id>17819</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Babilon</title><ns>220</ns><id>4293</id><revision><id>14453</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Badenia</title><ns>220</ns><id>5514</id><revision><id>17888</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Barcelona</title><ns>220</ns><id>5599</id><revision><id>17973</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -2856,6 +4135,17 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Belgia</title><ns>220</ns><id>5575</id><revision><id>17949</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Biskup</title><ns>220</ns><id>4249</id><revision><id>14384</id><text>{{TemplateMapping
 | mapToClass = ChristianBishop
 | mappings =
@@ -2867,7 +4157,128 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-BiskupA</title><ns>220</ns><id>5468</id><revision><id>17842</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Blois</title><ns>220</ns><id>5515</id><revision><id>17889</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Bonaparte</title><ns>220</ns><id>5502</id><revision><id>17876</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Bożogrobcy</title><ns>220</ns><id>5556</id><revision><id>17930</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Brabancja</title><ns>220</ns><id>5389</id><revision><id>17762</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Brandenburgia</title><ns>220</ns><id>5425</id><revision><id>17798</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Bretania</title><ns>220</ns><id>5369</id><revision><id>17738</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Burgundia</title><ns>220</ns><id>5419</id><revision><id>17792</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Bułgaria</title><ns>220</ns><id>4290</id><revision><id>14450</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Bułgarskie caryce</title><ns>220</ns><id>5469</id><revision><id>17843</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzedniczka | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następczyni | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Calatrava</title><ns>220</ns><id>5381</id><revision><id>17753</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Cesarstwo Łacińskie</title><ns>220</ns><id>5495</id><revision><id>17869</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -2900,6 +4311,28 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Charolais</title><ns>220</ns><id>5563</id><revision><id>17937</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Cypr</title><ns>220</ns><id>5467</id><revision><id>17841</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Czechy</title><ns>220</ns><id>4291</id><revision><id>14451</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
@@ -2922,7 +4355,238 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Delfinat</title><ns>220</ns><id>5450</id><revision><id>17824</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Duńskie królowe</title><ns>220</ns><id>5367</id><revision><id>17736</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Finlandia</title><ns>220</ns><id>5390</id><revision><id>17763</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Flandria</title><ns>220</ns><id>5428</id><revision><id>17801</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Florencja</title><ns>220</ns><id>5501</id><revision><id>17875</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Francja</title><ns>220</ns><id>4283</id><revision><id>14446</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Francja-Cesarstwo</title><ns>220</ns><id>5600</id><revision><id>17974</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Francuskie królowe</title><ns>220</ns><id>5371</id><revision><id>17741</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Galicia</title><ns>220</ns><id>5564</id><revision><id>17938</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Galicja</title><ns>220</ns><id>5391</id><revision><id>17764</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Geldria</title><ns>220</ns><id>5576</id><revision><id>17950</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Grecja</title><ns>220</ns><id>5557</id><revision><id>17931</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Habsburg</title><ns>220</ns><id>5551</id><revision><id>17925</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Hainaut</title><ns>220</ns><id>5500</id><revision><id>17874</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Hanower</title><ns>220</ns><id>5523</id><revision><id>17897</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Hiszpania</title><ns>220</ns><id>5577</id><revision><id>17951</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Hiszpania (1516-1556)</title><ns>220</ns><id>5609</id><revision><id>17983</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Hiszpania (1516-1700)</title><ns>220</ns><id>5593</id><revision><id>17967</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Hiszpania (1700-1759)</title><ns>220</ns><id>5579</id><revision><id>17953</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Hiszpania (1759-1931, Burbonowie)</title><ns>220</ns><id>5393</id><revision><id>17766</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Hiszpania (Józef Bonaparte)</title><ns>220</ns><id>5610</id><revision><id>17984</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Holandia</title><ns>220</ns><id>5482</id><revision><id>17856</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -2944,7 +4608,392 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Indie Brytyjskie</title><ns>220</ns><id>5412</id><revision><id>17785</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Irlandia</title><ns>220</ns><id>5439</id><revision><id>17812</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Islandia</title><ns>220</ns><id>5601</id><revision><id>17975</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Jakobiccy pretendenci do tronu Anglii i Szkocji</title><ns>220</ns><id>5503</id><revision><id>17877</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Japonia</title><ns>220</ns><id>4298</id><revision><id>14458</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Jerozolima</title><ns>220</ns><id>5431</id><revision><id>17804</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Jugosławia</title><ns>220</ns><id>5580</id><revision><id>17954</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-KSM</title><ns>220</ns><id>5527</id><revision><id>17901</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Kalif</title><ns>220</ns><id>5483</id><revision><id>17857</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Kamerling</title><ns>220</ns><id>5534</id><revision><id>17908</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Karlistowscy pretendenci do tronu Hiszpanii</title><ns>220</ns><id>5524</id><revision><id>17898</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Kastylia i León</title><ns>220</ns><id>5382</id><revision><id>17754</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Koguryŏ</title><ns>220</ns><id>5411</id><revision><id>17784</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Kongresówka</title><ns>220</ns><id>5535</id><revision><id>17909</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Król Macedonii</title><ns>220</ns><id>5423</id><revision><id>17796</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Król Macedonii2</title><ns>220</ns><id>5499</id><revision><id>17873</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Królestwo Obojga Sycylii</title><ns>220</ns><id>5481</id><revision><id>17855</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Książę Condé</title><ns>220</ns><id>5525</id><revision><id>17899</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Książę Conti</title><ns>220</ns><id>5558</id><revision><id>17932</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Książę Warszawy</title><ns>220</ns><id>5364</id><revision><id>17733</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Książę Yorku</title><ns>220</ns><id>5498</id><revision><id>17872</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Kurlandia i Semigalia</title><ns>220</ns><id>5526</id><revision><id>17900</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Larsa</title><ns>220</ns><id>5484</id><revision><id>17858</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Lazaryci</title><ns>220</ns><id>5472</id><revision><id>17846</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Lazaryci2</title><ns>220</ns><id>5602</id><revision><id>17976</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Lazaryci3</title><ns>220</ns><id>5410</id><revision><id>17783</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-León</title><ns>220</ns><id>5465</id><revision><id>17839</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Liechtenstein</title><ns>220</ns><id>5479</id><revision><id>17853</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Limburg</title><ns>220</ns><id>5611</id><revision><id>17985</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Litwa</title><ns>220</ns><id>5454</id><revision><id>17828</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Litwa Nowoczesna</title><ns>220</ns><id>5592</id><revision><id>17966</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Longobardia</title><ns>220</ns><id>5383</id><revision><id>17755</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Lord Marszałek</title><ns>220</ns><id>5612</id><revision><id>17986</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Lotaryngia</title><ns>220</ns><id>5378</id><revision><id>17750</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Luksemburg</title><ns>220</ns><id>5457</id><revision><id>17831</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Maine</title><ns>220</ns><id>5420</id><revision><id>17793</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -2966,7 +5015,117 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Mazowsze</title><ns>220</ns><id>5473</id><revision><id>17847</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Mediolan</title><ns>220</ns><id>5462</id><revision><id>17836</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Metropolita</title><ns>220</ns><id>5591</id><revision><id>17965</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Morawy</title><ns>220</ns><id>5392</id><revision><id>17765</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Moskwa</title><ns>220</ns><id>5497</id><revision><id>17871</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Mołdawia</title><ns>220</ns><id>4297</id><revision><id>14457</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Namur</title><ns>220</ns><id>5581</id><revision><id>17955</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Nawarra</title><ns>220</ns><id>5373</id><revision><id>17743</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Neapol</title><ns>220</ns><id>5491</id><revision><id>17865</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Nevers</title><ns>220</ns><id>5559</id><revision><id>17933</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Niderlandy</title><ns>220</ns><id>5486</id><revision><id>17860</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -2988,7 +5147,73 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Niemcy-Cesarstwo</title><ns>220</ns><id>5582</id><revision><id>17956</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Normandia</title><ns>220</ns><id>5487</id><revision><id>17861</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Norwegia</title><ns>220</ns><id>4285</id><revision><id>14443</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Norweskie królowe</title><ns>220</ns><id>5377</id><revision><id>17749</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Orania</title><ns>220</ns><id>5536</id><revision><id>17910</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Orlean</title><ns>220</ns><id>5474</id><revision><id>17848</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Owernia</title><ns>220</ns><id>5496</id><revision><id>17870</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -3009,6 +5234,171 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Papież Aleksandrii</title><ns>220</ns><id>5455</id><revision><id>17829</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Parma</title><ns>220</ns><id>5485</id><revision><id>17859</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Patriarcha</title><ns>220</ns><id>5432</id><revision><id>17805</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Patriarcha Aleksandrii</title><ns>220</ns><id>5603</id><revision><id>17977</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Patriarcha Konstantynopola</title><ns>220</ns><id>5417</id><revision><id>17790</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Pergamon</title><ns>220</ns><id>5394</id><revision><id>17767</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Poitiers</title><ns>220</ns><id>5504</id><revision><id>17878</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Polska</title><ns>220</ns><id>5537</id><revision><id>17911</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Polska2</title><ns>220</ns><id>5480</id><revision><id>17854</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Polskie królowe</title><ns>220</ns><id>5376</id><revision><id>17748</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Portugalia</title><ns>220</ns><id>5370</id><revision><id>17739</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Premier Rumunii</title><ns>220</ns><id>5440</id><revision><id>17813</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Pretendenci do tronu Francji</title><ns>220</ns><id>5458</id><revision><id>17832</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Prowansja</title><ns>220</ns><id>5488</id><revision><id>17862</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Prusy</title><ns>220</ns><id>5489</id><revision><id>17863</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Prymas</title><ns>220</ns><id>4292</id><revision><id>14459</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
@@ -3021,7 +5411,227 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Przedstawiciele Stolicy Apostolskiej</title><ns>220</ns><id>5447</id><revision><id>17820</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-RLDS</title><ns>220</ns><id>5613</id><revision><id>17987</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Racibórz</title><ns>220</ns><id>5492</id><revision><id>17866</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Rethel</title><ns>220</ns><id>5583</id><revision><id>17957</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Rosja</title><ns>220</ns><id>5426</id><revision><id>17799</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Rothesay</title><ns>220</ns><id>5490</id><revision><id>17864</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Rumunia</title><ns>220</ns><id>5590</id><revision><id>17964</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Ruś Kijowska</title><ns>220</ns><id>5466</id><revision><id>17840</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-SEgipt</title><ns>220</ns><id>4299</id><revision><id>14460</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Sabaudia</title><ns>220</ns><id>5434</id><revision><id>17807</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Saksonia</title><ns>220</ns><id>5372</id><revision><id>17742</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-San Marino</title><ns>220</ns><id>5532</id><revision><id>17906</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Santiago</title><ns>220</ns><id>5560</id><revision><id>17934</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Seleucydzi</title><ns>220</ns><id>5441</id><revision><id>17814</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Serbia</title><ns>220</ns><id>5436</id><revision><id>17809</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Siedmiogród</title><ns>220</ns><id>5444</id><revision><id>17817</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Sycylia</title><ns>220</ns><id>5435</id><revision><id>17808</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Syrakuzy</title><ns>220</ns><id>5568</id><revision><id>17942</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Szampania</title><ns>220</ns><id>5475</id><revision><id>17849</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Szkocja</title><ns>220</ns><id>5421</id><revision><id>17794</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Szwabia</title><ns>220</ns><id>5505</id><revision><id>17879</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -3043,7 +5653,84 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Szwedzkie królowe</title><ns>220</ns><id>5433</id><revision><id>17806</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Templar</title><ns>220</ns><id>5448</id><revision><id>17821</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Teuton</title><ns>220</ns><id>4284</id><revision><id>14442</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Tuluza</title><ns>220</ns><id>5538</id><revision><id>17912</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Turcja</title><ns>220</ns><id>5422</id><revision><id>17795</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Turkmeńska SRR</title><ns>220</ns><id>5365</id><revision><id>17734</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Vermandois</title><ns>220</ns><id>5604</id><revision><id>17978</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Walia</title><ns>220</ns><id>5456</id><revision><id>17830</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -3065,6 +5752,39 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Wielka Brytania</title><ns>220</ns><id>5569</id><revision><id>17943</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Wielkie Księstwo Krakowskie</title><ns>220</ns><id>5584</id><revision><id>17958</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Wielkopolska</title><ns>220</ns><id>5409</id><revision><id>17782</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Wołoszczyzna</title><ns>220</ns><id>4295</id><revision><id>14455</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
@@ -3077,6 +5797,116 @@
           | endDateOntologyProperty = activeYearsEndYear
         }}
 }}</text></revision></page><page><title>Mapping pl:Władca-Węgry</title><ns>220</ns><id>4287</id><revision><id>14445</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Włodzimierz</title><ns>220</ns><id>5506</id><revision><id>17880</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-ZKMiW</title><ns>220</ns><id>5614</id><revision><id>17988</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Zjednoczone Królestwo</title><ns>220</ns><id>5539</id><revision><id>17913</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-arcybiskup gnieźnieński</title><ns>220</ns><id>5493</id><revision><id>17867</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-arcybiskup lwowski</title><ns>220</ns><id>5570</id><revision><id>17944</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-cesarz Rzymski Narodu Niemieckiego</title><ns>220</ns><id>5408</id><revision><id>17781</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-cesarz Rzymski Narodu Niemieckiego 2</title><ns>220</ns><id>5379</id><revision><id>17751</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-księstwo sandomierskie</title><ns>220</ns><id>5561</id><revision><id>17935</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca-Śląsk</title><ns>220</ns><id>5562</id><revision><id>17936</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władca Egiptu</title><ns>220</ns><id>5574</id><revision><id>17948</id><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
@@ -3188,6 +6018,61 @@
           | startDateOntologyProperty = activeYearsStartYear 
           | endDateOntologyProperty = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping pl:Władcy Austrii</title><ns>220</ns><id>5605</id><revision><id>17979</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Władcy Narnii</title><ns>220</ns><id>5540</id><revision><id>17914</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Właściciel Szydłowca</title><ns>220</ns><id>5464</id><revision><id>17838</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Włodarz-Szydłowiec</title><ns>220</ns><id>5585</id><revision><id>17959</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
+}}</text></revision></page><page><title>Mapping pl:Zwierzchnik PNKK</title><ns>220</ns><id>5616</id><revision><id>17990</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = poprzednik | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = następca | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = urząd | ontologyProperty = title }}
+	{{DateIntervalMapping 
+          | templateProperty = lata 
+          | startDateOntologyProperty = activeYearsStartYear 
+          | endDateOntologyProperty = activeYearsEndYear
+        }}
 }}</text></revision></page><page><title>Mapping pl:Zwierzę infobox</title><ns>220</ns><id>2983</id><revision><id>14326</id><text>{{ConditionalMapping
 | cases =
 {{Condition
@@ -3272,7 +6157,7 @@
 	{{PropertyMapping | templateProperty = Dzień | ontologyProperty = date }}
 	{{PropertyMapping | templateProperty = Typ święta | ontologyProperty = type }}
 	{{PropertyMapping | templateProperty = Podobne | ontologyProperty = similar }}
-}}</text></revision></page><page><title>Mapping pl:Święty infobox</title><ns>220</ns><id>4199</id><revision><id>14265</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping pl:Święty infobox</title><ns>220</ns><id>4199</id><revision><id>18079</id><text>{{TemplateMapping
 | mapToClass = Saint
 | mappings =
 	{{PropertyMapping | templateProperty = Data_beatyfikacji | ontologyProperty = beatifiedDate }}
@@ -3290,6 +6175,7 @@
 	{{PropertyMapping | templateProperty = Data_śmierci | ontologyProperty = birthPlace }}
 	{{PropertyMapping | templateProperty = Miejsce_śmierci | ontologyProperty = deathPlace }}
 	{{PropertyMapping | templateProperty = Tytuły | ontologyProperty = title }}
+	{{PropertyMapping | templateProperty = Wspomnienie | ontologyProperty = feastDay }}
 }}</text></revision></page><page><title>Mapping pl:Żołnierz infobox</title><ns>220</ns><id>4135</id><revision><id>14163</id><text>{{TemplateMapping
 | mapToClass = MilitaryPerson
 | mappings =

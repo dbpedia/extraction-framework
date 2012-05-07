@@ -10,8 +10,8 @@ package org.dbpedia.extraction.wikiparser
  * @param isDisambiguation True, if this is a Disambiguation page
  * @param children The contents of this page
  */
-class PageNode(val title : WikiTitle, val id : Long, val revision : Long, val timestamp: String, val isRedirect: Boolean, val isDisambiguation : Boolean,
-                    override val children : List[Node] = List.empty) extends Node(children, 0)
+case class PageNode(title : WikiTitle, id : Long, revision : Long, timestamp: String, isRedirect: Boolean, isDisambiguation : Boolean,
+                    override val children: List[Node] = List.empty) extends Node(children, 0)
 {
     def toWikiText() : String = children.map(_.toWikiText).mkString
 
