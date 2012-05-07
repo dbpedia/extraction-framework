@@ -34,9 +34,12 @@ trait FileDownloader extends Downloader
     val conn = url.openConnection
     try {
       downloadFile(conn, file)
-    } finally conn match { case conn : HttpURLConnection => conn.disconnect }
-    // http://dumps.wikimedia.org/ seems to kick us out if we don't disconnect.
-    // But only disconnect if it's a http connection. Can't do this with file:// URLs.
+    } finally conn match { 
+      // http://dumps.wikimedia.org/ seems to kick us out if we don't disconnect.
+      case conn: HttpURLConnection => conn.disconnect
+      // But only disconnect if it's a http connection. Can't do this with file:// URLs.
+      case _ =>
+    }
   }
   
   /**
