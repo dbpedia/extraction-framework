@@ -10,6 +10,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.rio.ntriples.NTriplesUtil;
+import static org.dbpedia.extraction.util.RichString.toRichString;
 
 /**
  * TODO: why is this class necessary? Quad.render() does pretty much the same thing...
@@ -138,6 +139,6 @@ public class CoreUtil {
      */
     @Deprecated
     public static String wikipediaEncode(String page_title) {
-        return WikiUtil.wikiEncode(page_title, Language.Default(), true);
+        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.Default().locale());
      }
 }

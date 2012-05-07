@@ -41,7 +41,7 @@ class TopicalConceptsExtractor( context : {
             try {
                 val quads = allTemplates.flatMap{ template =>
                     val mainResource = OntologyNamespaces.getResource(
-                      WikiUtil.wikiEncode(template.property("1").get.retrieveText.get, context.language, capitalize=false), context.language)
+                      WikiUtil.wikiEncode(template.property("1").get.retrieveText.get), context.language)
                     (new Quad(context.language,
                         DBpediaDatasets.TopicalConcepts,
                         subjectUri,

@@ -18,7 +18,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
 
     private val ignoreList = manager.ignoreList
     
-    private def wikiDecode(name: String) : String = WikiUtil.wikiDecode(name, language, capitalize=false)
+    private def wikiDecode(name: String) : String = WikiUtil.wikiDecode(name)
 
     private def cookieQuery(sep: Char, show: Int = -1) : String = {
       var vsep = sep

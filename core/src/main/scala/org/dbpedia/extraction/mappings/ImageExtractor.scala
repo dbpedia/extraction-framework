@@ -12,6 +12,7 @@ import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, WikiUtil}
 import java.net.URLDecoder
+import org.dbpedia.extraction.util.RichString.toRichString
 
 /**
  * Extracts the first image of a Wikipedia page. Constructs a thumbnail from it, and
@@ -89,7 +90,7 @@ class ImageExtractor( context : {
                          textNode @ TextNode(text, _) <- property.children;
                          fileName <- ImageExtractorConfig.ImageRegex.findFirstIn(text);
                          encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
-                                               WikiUtil.wikiEncode(fileName, context.language, true)
+                                               WikiUtil.wikiEncode(fileName).capitalize(context.language.locale)
                                            else
                                                fileName
                          if checkImageRights(encodedFileName))

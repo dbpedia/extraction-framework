@@ -185,7 +185,7 @@ extends MappingStatsConfig(statsDir, language)
     
     private def stripUri(uri: String): String = {
         if (! uri.startsWith(resourceUriPrefix)) throw new Exception(uri)
-        WikiUtil.wikiDecode(uri.substring(resourceUriPrefix.length), language, capitalize=false)
+        WikiUtil.wikiDecode(uri.substring(resourceUriPrefix.length))
     }
     
     private def cleanUri(uri: String) : String = cleanName(stripUri(unescape(uri)))
