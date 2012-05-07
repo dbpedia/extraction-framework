@@ -8,7 +8,6 @@ import java.net.URI
 /**
  * Represents a statement.
  */
-// FIXME Handle URI vs IRI stuff only in this class. Use IRIs everywhere else.
 class Quad( val language : Language,
             val dataset : Dataset,
             val subject : String,
@@ -26,10 +25,10 @@ class Quad( val language : Language,
     if (value.isEmpty) throw new IllegalArgumentException("Value is empty")
 
     // Validate URIs
-//    new URI(subject)
-//    new URI(predicate)
-//    new URI(context)
-//    if (datatype == null) new URI(value)
+    // new URI(subject)
+    // new URI(predicate)
+    // new URI(context)
+    // if (datatype == null) new URI(value)
     
     def this(language : Language,
              dataset : Dataset,
@@ -39,17 +38,9 @@ class Quad( val language : Language,
              context : String,
              datatype : Datatype = null) = this(language, dataset, subject, predicate.uri, value, context, Quad.getType(datatype, predicate))
 
-    def renderNTriple = render(false, false)
+    override def toString = render(true, true)
 
-    def renderNQuad = render(false, true)
-
-    def renderTurtleTriple = render(true, false)
-
-    def renderTurtleQuad = render(true, true)
-
-    override def toString = renderTurtleQuad
-
-    private def render(turtle: Boolean, quad: Boolean) : String =
+    def render(turtle: Boolean, quad: Boolean) : String =
     {
       val triple = new TripleBuilder(turtle)
       triple.uri(subject).uri(predicate).value(value, datatype, language)

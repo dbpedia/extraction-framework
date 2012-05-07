@@ -123,6 +123,8 @@ object OntologyNamespaces
         else "http://"+lang.wikiCode+".dbpedia.org/"+path+"/"
     }
 
+    private val iriEscapeChars = ('\u0000' to '\u0020').mkString + "\"#%<>?[\\]^`{|}" + ('\u007F' to '\u009F').mkString
+
     private def appendUri(baseUri : String, encodedSuffix : String, language : Language) : String =
     {
         var uri = baseUri + encodedSuffix
@@ -134,9 +136,9 @@ object OntologyNamespaces
         // At this point, it's too late. Known problems:
         // - no distinction between "#" and "%23" - input "http://foo/my%231#bar" becomes "http://foo/my%231%23bar"
         // - no distinction between "/" and "%2F" - input "http://foo/a%2Fb/c" becomes "http://foo/a/b/c"
-        // - similar for all other characters in the list below
+        // - similar for all other characters in iriEscapeChars
         // see https://sourceforge.net/mailarchive/message.php?msg_id=28982391 for this list of characters
-        else decode(uri, "UTF-8").uriEscape("\"#%<>?[\\]^`{|}")
+        else decode(uri, "UTF-8").uriEscape(iriEscapeChars)
     }
 
     /**

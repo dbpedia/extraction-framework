@@ -2,7 +2,7 @@ package org.dbpedia.extraction.sources
 
 
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import java.io.{FileInputStream, File}
+import java.io.{File,FileInputStream,InputStreamReader}
 import xml.Elem
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.mappings.AugmenterExtractorUtils
@@ -42,7 +42,7 @@ object LiveExtractionSource
             val javaFilter = { title : WikiTitle => filter(title) : java.lang.Boolean }
             val stream = new FileInputStream(file)
 
-            new WikipediaDumpParser(stream, null, null, javaFilter, f).run()
+            new WikipediaDumpParser(new InputStreamReader(stream, "UTF-8"), null, null, javaFilter, f).run()
 
             stream.close()
         }

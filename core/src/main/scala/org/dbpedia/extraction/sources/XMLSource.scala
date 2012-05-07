@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.sources
 
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import java.io.{FileInputStream, File}
-import xml.Elem
+import java.io.{File,FileInputStream,InputStreamReader}
+import scala.xml.Elem
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -38,16 +38,16 @@ object XMLSource
     /**
      * XML source which reads from a file
      */
-    private class XMLFileSource(file : File, filter : (WikiTitle => Boolean), language : Language = null, namespaceUri : String = null) extends Source
+    private class XMLFileSource(file: File, filter: (WikiTitle => Boolean), language: Language = null, namespaceUri: String = null) extends Source
     {
-        override def foreach[U](proc : WikiPage => U) : Unit =
-        {
+        override def foreach[U](proc : WikiPage => U) : Unit = {
             val jfilter = { title : WikiTitle => filter(title) : java.lang.Boolean }
             val stream = new FileInputStream(file)
-
-            new WikipediaDumpParser(stream, namespaceUri, language, jfilter, proc).run()
-
-            stream.close()
+            try {
+              val reader = new InputStreamReader(stream, "UTF-8")
+              new WikipediaDumpParser(reader, namespaceUri, language, jfilter, proc).run()
+            }
+            finally stream.close()
         }
 
         override def hasDefiniteSize = true

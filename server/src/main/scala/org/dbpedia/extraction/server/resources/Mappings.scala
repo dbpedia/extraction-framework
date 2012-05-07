@@ -72,6 +72,7 @@ class Mappings(@PathParam("lang") langCode : String)
     @GET
     @Path("pages/{title: .+$}")
     @Produces(Array("application/xml"))
+    // FIXME: Why not @Encoded? This method is probably correct, the others are probably wrong.
     def getPage(@PathParam("title") title : String) : Elem =
     {
         logger.info("Get mappings page: " + title)
@@ -86,6 +87,7 @@ class Mappings(@PathParam("lang") langCode : String)
     @PUT
     @Path("pages/{title: .+$}")
     @Consumes(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
     def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem)
     {
         try
@@ -112,6 +114,7 @@ class Mappings(@PathParam("lang") langCode : String)
     @DELETE
     @Path("pages/{title: .+$}")
     @Consumes(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
     def deletePage(@PathParam("title") @Encoded title : String)
     {
         Server.instance.extractor.removeMappingPage(WikiTitle.parse(title, Language.Default), language)
@@ -144,12 +147,16 @@ class Mappings(@PathParam("lang") langCode : String)
     @GET
     @Path("validate/{title: .+$}")
     @Produces(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
+    // TODO: change to @QueryParam, avoid the count(_ == '/') trick
     def validateExistingPage(@PathParam("title") @Encoded title : String) =
     {
+        val titles = List(WikiTitle.parse(title, Language.Default))
+        val source = WikiSource.fromTitles(titles, Server.wikiApiUrl, Language.Default)
         var nodes = new NodeBuffer()
         val stylesheetUri = "../" * title.count(_ == '/') + "../../../stylesheets/log.xsl"  // if there are slashes in the title, the stylesheets are further up in the directory tree
         nodes += new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")  // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
-        nodes += Server.instance.extractor.validateMapping(WikiSource.fromTitles(WikiTitle.parse(title, Language.Default) :: Nil, Server.wikiApiUrl), language)
+        nodes += Server.instance.extractor.validateMapping(source, language)
         nodes
     }
 
@@ -160,6 +167,8 @@ class Mappings(@PathParam("lang") langCode : String)
     @Path("validate/{title: .+$}")
     @Consumes(Array("application/xml"))
     @Produces(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
+    // TODO: change to @QueryParam, avoid the count(_ == '/') trick
     def validatePage(@PathParam("title") @Encoded title : String, pagesXML : Elem) =
     {
         try
@@ -203,6 +212,8 @@ class Mappings(@PathParam("lang") langCode : String)
     @GET
     @Path("extractionSamples/{title: .+$}")
     @Produces(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
+    // TODO: change to @QueryParam, avoid the count(_ == '/') trick
     def getExtractionSample(@PathParam("title") @Encoded title : String) : String =
     {
         //Get the title of the mapping as well as its corresponding template on Wikipedia

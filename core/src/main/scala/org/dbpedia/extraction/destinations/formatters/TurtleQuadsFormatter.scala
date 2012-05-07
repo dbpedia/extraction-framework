@@ -11,6 +11,6 @@ class TurtleQuadsFormatter extends TextFormatter
 {
     override def write(quad : Quad, writer : Writer) : Unit =
     {
-        writer.write(quad.renderTurtleQuad)
+        writer.write(quad.render(turtle=true, quad=true))
     }
 }

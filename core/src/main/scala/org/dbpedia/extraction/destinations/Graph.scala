@@ -23,14 +23,6 @@ class Graph(val quads : List[Quad] = Nil)
     def this(quad : Quad) = this(List(quad))
 
     /**
-     * Retrieves all statements, grouped by their dataset.
-     * TODO: if this class is made mutable, this should return
-     * a read-only view of a private map . When a quad is added 
-     * to the list, it must also be added to a private map.
-     */
-    lazy val quadsByDataset : scala.collection.Map[Dataset, List[Quad]] = quads.groupBy(_.dataset)
-
-    /**
      * Tests if this graph is empty.
      */
     def isEmpty = quads.isEmpty

@@ -16,11 +16,15 @@ object WikiUtil
      * TODO: remove or replace exotic whitespace like U+200C, U+200E, U+200F, U+2028?
      * 
      * See WikiTitle.replace() and its use in WikiTitle.parse().
+     * 
+     * FIXME: There is no logic to our decoding / encoding of strings, URIs, etc. It's done 
+     * in too many places. We must set a policy and use distinct classes, not generic strings.
+     * 
      * @param string string possibly using '_' instead of ' '
      */
-    def cleanSpace( string : String ) : String =
+    def cleanSpace(string: String): String =
     {
-        string.replaceChars("_\u00A0", " \u0020").replaceAll(" +", " ").trim
+        string.replaceChars("_\u00A0", "  ").replaceAll(" +", " ").trim
     }
     
     /**
