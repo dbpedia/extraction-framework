@@ -19,8 +19,8 @@ object Download extends DownloadConfig
     
     if (baseDir == null) throw Usage("No target directory")
     if ((languages.nonEmpty || ranges.nonEmpty) && baseUrl == null) throw Usage("No base URL")
-    if (ranges.nonEmpty && csvUrl == null) throw Usage("No CSV file URL")
-    if (languages.isEmpty && ranges.isEmpty && others.isEmpty) throw Usage("No files to download")
+    if (ranges.nonEmpty && listUrl == null) throw Usage("No wikilist CSV file URL")
+    if (languages.isEmpty && ranges.isEmpty) throw Usage("No files to download")
     if (! baseDir.exists && ! baseDir.mkdir) throw Usage("Target directory '"+baseDir+"' does not exist and cannot be created")
     
     class Decorator extends FileDownloader with Counter with LastModified with Retry {
@@ -32,26 +32,22 @@ object Download extends DownloadConfig
     
     val download = if (unzip) new Decorator with Unzip else new Decorator 
     
-    // download other files, may be none
-    if (others.nonEmpty)
-    {
-      others.map(download.downloadTo(_, baseDir))
-    }
-    
     // resolve page count ranges to languages
     if (ranges.nonEmpty)
     {
-      val csvFile = download.downloadTo(csvUrl, baseDir)
+      val listFile = download.downloadTo(listUrl, baseDir)
       
       // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
       // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
       // these non-ASCII chars anyway, so we don't have to unescape them.
       // TODO: the CSV file URL is configurable, so the encoding should be too.
-      println("parsing "+csvFile)
-      val wikis = WikiInfo.fromFile(csvFile, Codec.UTF8)
+      println("parsing "+listFile)
+      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
       
-      // Note: we don't have to download the file, but it seems nicer.
-      // val wikis = WikiInfo.fromURL(csvUrl, Codec.UTF8)
+      // Note: downloading the file adds retry, logging etc and may aid debugging, 
+      // but we could do without:
+      // println("parsing "+listUrl)
+      // val wikis = WikiInfo.fromURL(listUrl, Codec.UTF8)
       
       // for all wikis in one of the desired ranges...
       for (((from, to), files) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
