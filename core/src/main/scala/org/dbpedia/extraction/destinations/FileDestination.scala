@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.destinations
 
-import formatters.NTriplesFormatter
 import java.net.URLEncoder
 import collection.mutable.HashMap
 import java.io._

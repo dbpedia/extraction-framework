@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.destinations
 
-import formatters.NTriplesFormatter
 import java.io.StringWriter
 
 /**
@@ -11,8 +10,6 @@ import java.io.StringWriter
  */
 class StringDestination(formatter : Formatter) extends Destination
 {
-    def this() = this( new NTriplesFormatter )
-
     private val stringWriter = new StringWriter()
 
     private var headerWritten = false
