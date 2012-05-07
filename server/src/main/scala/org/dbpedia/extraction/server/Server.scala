@@ -63,7 +63,7 @@ object Server
         val files = new FileParams(new File(args(2)), new File(args(3)), new File(args(4)))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var langs : Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        var langs : Seq[Language] = for(arg <- args.drop(5); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
         
         // if no languages are given, use all languages for which a mapping namespace is defined
         if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq
