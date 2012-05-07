@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters._
+import org.dbpedia.extraction.destinations.formatters.{TerseFormatter,TriXFormatter}
 import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
 import org.dbpedia.extraction.mappings._
 import collection.immutable.ListMap
@@ -56,6 +56,9 @@ object ConfigLoader
         if(config.getProperty("dumpDir") == null) throw new IllegalArgumentException("Property 'dumpDir' not defined.")
         val dumpDir = new File(config.getProperty("dumpDir"))
         if (! dumpDir.exists) throw new IllegalArgumentException("dump dir "+dumpDir+" does not exist")
+        
+        if(config.getProperty("require-download-complete") != null)
+          requireComplete = config.getProperty("require-download-complete").toBoolean
 
         /** Local ontology file, downloaded for speed and reproducibility */
         if(config.getProperty("ontologyFile") != null)
@@ -121,8 +124,9 @@ object ConfigLoader
     private def createExtractionJob(lang : Language) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang)
-        val date = finder.dates(Download.Complete).reverse.head
 
+        val date = latestDate(finder)
+        
         //Extraction Context
         val context = new DumpExtractionContext
         {
@@ -186,13 +190,12 @@ object ConfigLoader
          * extraction process for each dataset.
          */
         def targetFile(suffix : String)(dataset : Dataset) : File = {
-          finder.file(date, dataset.name.replace('_','-')+"."+suffix)
+          finder.file(date, dataset.name.replace('_','-')+'.'+suffix)
         }
 
-        //Destination
-        val tripleDestination = new FileDestination(new NTriplesFormatter(), targetFile("nt"))
-        val quadDestination = new FileDestination(new NQuadsFormatter(), targetFile("nq"))
-        val destination = new CompositeDestination(tripleDestination, quadDestination)
+        val formatters = TerseFormatter.all ++ TriXFormatter.all
+        val destinations = for (formatter <- formatters) yield new FileDestination(formatter, targetFile(formatter.fileSuffix))
+        val destination = new CompositeDestination(destinations)
 
         // Note: label is also used as file name, but space is replaced by underscores
         val jobLabel = "extraction job "+lang.wikiCode+" with "+extractors.size+" extractors"
@@ -221,9 +224,16 @@ object ConfigLoader
     private lazy val _commonsSource =
     {
       val finder = new Finder[File](config.dumpDir, Language("commons"))
-      val date = finder.dates(Download.Complete).reverse.head
+      val date = latestDate(finder)
       val file = finder.file(date, "pages-articles.xml")
       XMLSource.fromFile(file, _.namespace == Namespace.File)
+    }
+    
+    private def latestDate(finder: Finder[_]): String = {
+      val fileName = if (requireComplete) Download.Complete else "pages-articles.xml"
+      val dates = finder.dates(fileName)
+      if (dates.isEmpty) throw new IllegalArgumentException("found no directory with file '"+finder.wikiName+"-[YYYYMMDD]-"+fileName+"'")
+      dates.last
     }
     
 }

@@ -65,12 +65,23 @@
                         </launcher>
                         
                         <launcher>
-                            <id>clean</id>
+                            <id>purge-download</id>
                             <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
                             <args>
                                 <arg>/home/release/wikipedia</arg>
-                                <arg>2</arg><!-- keep two dumps -->
-                                <arg>*.sql,*-pages-articles.xml,*-download-complete,index.html</arg><!-- delete these files -->
+                                <arg>1</arg><!-- keep latest download -->
+                                <arg>*.gz,*.bz2,*.sql,*-pages-articles.xml,*-download-complete,index.html</arg><!-- delete these files -->
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>purge-extract</id>
+                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>2</arg><!-- keep two extractions -->
+                                <arg>*.nt,*.nq,*.tql,*.ttl,*.trix</arg><!-- delete these extracted files -->
+                                <arg>*-redirects.obj</arg><!-- delete these files -->
                             </args>
                         </launcher>
 

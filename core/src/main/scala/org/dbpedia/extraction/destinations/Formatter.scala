@@ -7,7 +7,14 @@ import java.io.Writer
  */
 trait Formatter
 {
-    def writeHeader(writer : Writer) : Unit
-    def writeFooter(writer : Writer) : Unit
-    def write(quad : Quad, writer : Writer) : Unit
+  /**
+   * Recommended suffix for files written in this format. Starts with a letter, not with a dot. 
+   */
+  val fileSuffix: String
+  
+  def writeHeader(writer : Writer) : Unit
+  
+  def writeFooter(writer : Writer) : Unit
+  
+  def write(writer : Writer, quad : Quad) : Unit
 }

@@ -97,6 +97,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
       sb toString
     }
       
+    // TODO: stream xml to browser. We produce up to 10MB HTML. XML in memory is even bigger.
     @GET
     @Produces(Array("application/xhtml+xml"))
     def get = {
