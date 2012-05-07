@@ -123,41 +123,41 @@ object Usage {
     
     println(message)
     val usage = /* empty line */ """
-    |Usage (with example values):
-    |config=/example/path/file.cfg
-    |  Path to exisiting UTF-8 text file whose lines contain arguments in the format given here.
-    |  Absolute or relative path. File paths in that config file will be interpreted relative to
-    |  the config file.
-    |base=http://dumps.wikimedia.org/
-    |  Base URL of dump server. Required if dump files are given.
-    |dir=/example/path
-    |  Path to existing target directory. Required.
-    |csv=http://s23.org/wikistats/wikipedias_csv.php
-    |  URL of csv file containing list of wikipedias with article count. First line is header,
-    |  third column is language code, sixth column is article count. Required if ranges are used.
-    |dump=en,zh-yue,1000-2000,...:file1,file2,...
-    |  Download given files for given languages from server. Each key is either a language code
-    |  or a range. In the latter case, languages with a matching number of articles will be used. 
-    |  If the start of the range is omitted, 0 is used. If the end of the range is omitted, 
-    |  infinity is used. For each language, a new sub-directory is created in the target directory.
-    |  Each file is a file name like 'pages-articles.xml.bz2', to which a prefix like 
-    |  'enwiki-20120307-' will be added. This argument can be used multiple times, for example 
-    |  'dump=en:foo.xml dump=de:bar.xml'
-    |other=http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/maintenance/tables.sql
-    |  URL of other file to download to the target directory. Optional. This argument can be used 
-    |  multiple times, for example 'other=http://a.b/c.de other=http://f.g/h.ij'
-    |retry-max=5
-    |  Number of total attempts if the download of a file fails. Default is no retries.
-    |retry-millis=1000
-    |  Milliseconds between attempts if the download of a file fails. Default is 10000 ms = 10 seconds.  
-    |unzip=true
-    |  Should downloaded .gz and .bz2 files be unzipped on the fly? Default is false.
-    |pretty=true
-    |  Should progress printer reuse one line? Default is false (doesn't work with log files).
-    |Order is relevant - for single-value parameters, values read later overwrite earlier values.
-    |Empty arguments or arguments beginning with '#' are ignored.
-    |""" /* empty line */ 
-    println(usage.stripMargin)
+Usage (with example values):
+config=/example/path/file.cfg
+  Path to exisiting UTF-8 text file whose lines contain arguments in the format given here.
+  Absolute or relative path. File paths in that config file will be interpreted relative to
+  the config file.
+base=http://dumps.wikimedia.org/
+  Base URL of dump server. Required if dump files are given.
+dir=/example/path
+  Path to existing target directory. Required.
+csv=http://s23.org/wikistats/wikipedias_csv.php
+  URL of csv file containing list of wikipedias with article count. First line is header,
+  third column is language code, sixth column is article count. Required if ranges are used.
+dump=en,zh-yue,1000-2000,...:file1,file2,...
+  Download given files for given languages from server. Each key is either a language code
+  or a range. In the latter case, languages with a matching number of articles will be used. 
+  If the start of the range is omitted, 0 is used. If the end of the range is omitted, 
+  infinity is used. For each language, a new sub-directory is created in the target directory.
+  Each file is a file name like 'pages-articles.xml.bz2', to which a prefix like 
+  'enwiki-20120307-' will be added. This argument can be used multiple times, for example 
+  'dump=en:foo.xml dump=de:bar.xml'
+other=http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/maintenance/tables.sql
+  URL of other file to download to the target directory. Optional. This argument can be used 
+  multiple times, for example 'other=http://a.b/c.de other=http://f.g/h.ij'
+retry-max=5
+  Number of total attempts if the download of a file fails. Default is no retries.
+retry-millis=1000
+  Milliseconds between attempts if the download of a file fails. Default is 10000 ms = 10 seconds.  
+unzip=true
+  Should downloaded .gz and .bz2 files be unzipped on the fly? Default is false.
+pretty=true
+  Should progress printer reuse one line? Doesn't work with log files, so default is false.
+Order is relevant - for single-value parameters, values read later overwrite earlier values.
+Empty arguments or arguments beginning with '#' are ignored.
+""" /* empty line */ 
+    println(usage)
     
     new Exception(message, cause)
   }

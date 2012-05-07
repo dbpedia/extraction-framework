@@ -24,7 +24,7 @@ class FileDestination(formatter : Formatter, filePattern : Dataset => File) exte
     {
         if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
-        for((dataset, quads) <- graph.quadsByDataset)
+        for((dataset, quads) <- graph.quads.groupBy(_.dataset))
         {
             val writer = writers.getOrElseUpdate(dataset, createWriter(dataset))
 

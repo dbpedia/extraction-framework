@@ -12,9 +12,9 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
   
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
-    if (! Server.languages.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
+    if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
 
-    private val manager = Server.statsManager(language)
+    private val manager = Server.instance.managers(language)
 
     private val ignoreList = manager.ignoreList
     
@@ -25,7 +25,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
       
       val sb = new StringBuilder
       
-      if (Server.adminRights(password)) {
+      if (Server.instance.adminRights(password)) {
         // TODO: URL encode password
         sb append vsep append "p=" append password
         vsep = '&'
@@ -44,7 +44,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
     @Produces(Array("application/xhtml+xml"))
     def ignoreTemplate(@QueryParam("template") template: String, @QueryParam("ignore") ignore: String, @QueryParam("show") @DefaultValue("20") show: Int = 20) =
     {
-        if (Server.adminRights(password))
+        if (Server.instance.adminRights(password))
         {
             if (ignore == "true") ignoreList.addTemplate(wikiDecode(template))
             else ignoreList.removeTemplate(wikiDecode(template))
@@ -58,7 +58,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
     @Produces(Array("application/xhtml+xml"))
     def ignoreProperty(@QueryParam("template") template: String, @QueryParam("property") property: String, @QueryParam("ignore") ignore: String) =
     {
-        if (Server.adminRights(password))
+        if (Server.instance.adminRights(password))
         {
             // Note: do NOT wikiDecode property names - space and underscore are NOT equivalent for them
             if (ignore == "true") ignoreList.addProperty(wikiDecode(template), property)

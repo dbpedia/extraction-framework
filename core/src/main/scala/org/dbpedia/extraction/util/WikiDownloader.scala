@@ -14,6 +14,8 @@ import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
 /**
  * Downloads all pages for a given list of namespaces from api.php and transforms them
  * into the format of the dump files (because XMLSource understands that format).
+ * 
+ * TODO: extend this class a bit and replace the XML-handling code in WikiApi.
  */
 class WikiDownloader(val apiUrl : String) {
   
@@ -78,13 +80,13 @@ class WikiDownloader(val apiUrl : String) {
             in.ifElement("query") { _ => // note: empty namespace returns no <query> 
               in.element("pages") { _ =>
                 in.elements("page") { page =>
-                  out.element("page") {
-                    out.element("title") { out.text( page getAttr "title" ) }
-                    out.element("ns") { out.text( page getAttr "ns" ) }
-                    out.element("id") { out.text( page getAttr "pageid" ) }
-                    in.element("revisions") { _ =>
-                      in.element("rev") { rev =>
-                      in.text { text =>
+                  in.element("revisions") { _ =>
+                    in.element("rev") { rev =>
+                    in.text { text =>
+                      out.element("page") {
+                        out.element("title") { out.text( page getAttr "title" ) }
+                        out.element("ns") { out.text( page getAttr "ns" ) }
+                        out.element("id") { out.text( page getAttr "pageid" ) }
                         out.element ("revision") {
                           out.element ("id") { out.text( rev getAttr "revid" ) }
                             out.element ("text") { out.text(text) }

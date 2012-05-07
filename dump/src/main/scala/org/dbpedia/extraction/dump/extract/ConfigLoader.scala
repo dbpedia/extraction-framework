@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
+import org.dbpedia.extraction.destinations.formatters._
 import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
 import org.dbpedia.extraction.mappings._
 import collection.immutable.ListMap
@@ -47,6 +47,8 @@ object ConfigLoader
     private var ontologyFile : File = null
 
     private var mappingsDir : File = null
+    
+    private var requireComplete = true
 
     private class Config(config : Properties)
     {

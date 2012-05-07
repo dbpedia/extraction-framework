@@ -12,8 +12,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,8 +55,8 @@ public class WikipediaDumpParser
   
   private static final String TIMESTAMP_ELEM = "timestamp";
 
-  /** the raw input stream */
-  private final InputStream _stream;
+  /** the character stream */
+  private Reader _stream;
 
   /** the reader, null before and after run() */
   private XMLStreamReader _reader;
@@ -81,14 +80,15 @@ public class WikipediaDumpParser
   private final Function1<WikiPage, ?> _processor;
 
   /**
-   * @param stream The input stream. Will be closed after reading.
+   * @param stream The character stream. Will be closed after reading. We have to use a Reader instead 
+   * of an InputStream because of this bug: https://issues.apache.org/jira/browse/XERCESJ-1257
    * @param namespace expected namespace. If null, namespace is not checked, only local element names.
    * @param language language used to parse page titles. If null, get language from siteinfo.
-   * If given, ignore siteinfo element.
+   * If given, ignore siteinfo element. TODO: use a boolean parameter instead to decide if siteinfo should be used.
    * @param filter page filter. Only matching pages will be processed.
    * @param processor page processor
    */
-  public WikipediaDumpParser(InputStream stream, String namespace, Language language, Function1<WikiTitle, Boolean> filter, Function1<WikiPage, ?> processor)
+  public WikipediaDumpParser(Reader stream, String namespace, Language language, Function1<WikiTitle, Boolean> filter, Function1<WikiPage, ?> processor)
   {
     if (stream == null) throw new NullPointerException("file");
     if (processor == null) throw new NullPointerException("processor");
@@ -105,15 +105,15 @@ public class WikipediaDumpParser
   throws IOException, XMLStreamException, InterruptedException
   {
     XMLInputFactory factory = XMLInputFactory.newInstance();
-    // we have to use a Reader instead of an InputStream because of this bug:
-    // https://issues.apache.org/jira/browse/XERCESJ-1257
-    _reader = factory.createXMLStreamReader(new InputStreamReader(_stream, "UTF-8"));
+    _reader = factory.createXMLStreamReader(_stream);
     try
     {
       readDump();
     }
     finally
     {
+      _stream.close();
+      _stream = null;
       _reader.close();
       _reader = null;
     }

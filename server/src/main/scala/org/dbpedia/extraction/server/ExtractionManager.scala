@@ -18,10 +18,11 @@ import java.io.File
  * or they can support lazy loading of context parameters.
  */
 
-abstract class ExtractionManager(languages : Traversable[Language], extractors : Traversable[Class[_ <: Extractor]], ontologyFile : File, mappingsDir : File)
+abstract class ExtractionManager(languages : Traversable[Language], paths: Paths)
 {
+    private val extractors = List(classOf[LabelExtractor],classOf[MappingExtractor])
+    
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
-
 
     def extractor(language : Language) : Extractor
 
@@ -63,7 +64,6 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
         // context object that has only this mappingSource
         val context = new ServerExtractionContext(language, this)
         {
-            // TODO: remove this, only used by MappingExtractor
             override def mappingPageSource : Traversable[PageNode] = mappingsSource.map(parser)
         }
 
@@ -100,15 +100,15 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
 
     protected def loadOntologyPages =
     {
-        val source = if (ontologyFile != null && ontologyFile.isFile)
+        val source = if (paths.ontologyFile != null && paths.ontologyFile.isFile)
         {
-            logger.warning("LOADING ONTOLOGY NOT FROM SERVER, BUT FROM LOCAL FILE ["+ontologyFile+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
-            XMLSource.fromFile(ontologyFile, language = Language.Default)
+            logger.warning("LOADING ONTOLOGY NOT FROM SERVER, BUT FROM LOCAL FILE ["+paths.ontologyFile+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
+            XMLSource.fromFile(paths.ontologyFile, language = Language.Default)
         }
         else 
         {
             val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
-            val url = Server.wikiApiUrl
+            val url = paths.apiUrl
             val language = Language.Default
             logger.info("Loading ontology pages from URL ["+url+"]")
             WikiSource.fromNamespaces(namespaces, url, language)
@@ -127,15 +127,15 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
     {
         val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
         
-        val source = if (mappingsDir != null && mappingsDir.isDirectory)
+        val source = if (paths.mappingsDir != null && paths.mappingsDir.isDirectory)
         {
-            val file = new File(mappingsDir, namespace.getName(Language.Default).replace(' ','_')+".xml")
+            val file = new File(paths.mappingsDir, namespace.getName(Language.Default).replace(' ','_')+".xml")
             logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(file, language = language)
         }
         else
         {
-            val url = Server.wikiApiUrl
+            val url = paths.apiUrl
             val language = Language.Default
             WikiSource.fromNamespaces(Set(namespace), url, language)
         }
@@ -148,25 +148,24 @@ abstract class ExtractionManager(languages : Traversable[Language], extractors :
         new OntologyReader().read(ontologyPages.values)
     }
 
-    protected def loadExtractors =
+    protected def loadExtractors(): Map[Language, Extractor] =
     {
-        val e = languages.map(lang => (lang, loadExtractor(lang))).toMap
-        logger.info("All extractors loaded for languages "+languages.mkString(", "))
-        e
+        try languages.map(lang => (lang, loadExtractors(lang))).toMap
+        finally logger.info("All extractors loaded for languages "+languages.mkString(", "))
     }
 
-    protected def loadExtractor(language : Language) =
+    protected def loadExtractors(language : Language): Extractor =
     {
         val context = new ServerExtractionContext(language, this)
         Extractor.load(extractors, context)
     }
 
-    protected def loadMappings : Map[Language, Mappings] =
+    protected def loadMappings() : Map[Language, Mappings] =
     {
-        languages.map(lang => (lang, loadMapping(lang))).toMap
+        languages.map(lang => (lang, loadMappings(lang))).toMap
     }
 
-    protected def loadMapping(language : Language) : Mappings =
+    protected def loadMappings(language : Language) : Mappings =
     {
         val context = new ServerExtractionContext(language, this)
         MappingsLoader.load(context)

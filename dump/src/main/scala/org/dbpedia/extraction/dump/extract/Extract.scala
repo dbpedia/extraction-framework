@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
-import java.util.logging.{Logger, FileHandler}
 import java.io.File
-import java.util.logging.SimpleFormatter
 
 /**
  * Dump extraction script.
@@ -11,12 +9,8 @@ object Extract
 {
     def main(args : Array[String]) : Unit =
     {
-        require(args != null && args.length == 2 && args(0).nonEmpty && args(1).nonEmpty, "missing arguments: config file name and log file name")
+        require(args != null && args.length == 1 && args(0).nonEmpty, "missing argument: config file name")
         
-        val logHandler = new FileHandler(args(1))
-        logHandler.setFormatter(new SimpleFormatter())
-        Logger.getLogger("org.dbpedia.extraction").addHandler(logHandler)
-
         val extraction = new ExtractionThread(args(0))
         extraction.start()
         extraction.join()
@@ -26,10 +20,7 @@ object Extract
     {
         override def run
         {
-            val logger = Logger.getLogger("org.dbpedia.extraction");
-
             val configFile = new File(fileName);
-            logger.info("Loading config from '" + configFile.getCanonicalPath + "'");
 
             //Load extraction jobs from configuration
             val extractionJobs = ConfigLoader.load(configFile)

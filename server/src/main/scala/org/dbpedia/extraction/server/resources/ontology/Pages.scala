@@ -27,7 +27,7 @@ class Pages
           </head>
           <body>
             <h2>Ontology pages</h2>
-            { Server.extractor.ontologyPages.values.toArray.sortBy(_.title.decodedWithNamespace).map(PageUtils.relativeLink(_) ++ <br/>) }
+            { Server.instance.extractor.ontologyPages.values.toArray.sortBy(_.title.decodedWithNamespace).map(PageUtils.relativeLink(_) ++ <br/>) }
           </body>
         </html>
     }
@@ -41,7 +41,7 @@ class Pages
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get ontology page: " + title)
-        Server.extractor.ontologyPages(WikiTitle.parse(title, Language.Default)).toXML
+        Server.instance.extractor.ontologyPages(WikiTitle.parse(title, Language.Default)).toXML
     }
 
     /**
@@ -56,7 +56,7 @@ class Pages
         {
             for(page <- XMLSource.fromXML(pageXML))
             {
-                Server.extractor.updateOntologyPage(page)
+                Server.instance.extractor.updateOntologyPage(page)
                 logger.info("Updated ontology page: " + title)
             }
         }
@@ -78,7 +78,7 @@ class Pages
     @Consumes(Array("application/xml"))
     def deletePage(@PathParam("title") @Encoded title : String)
     {
-        Server.extractor.removeOntologyPage(WikiTitle.parse(title, Language.Default))
+        Server.instance.extractor.removeOntologyPage(WikiTitle.parse(title, Language.Default))
         logger.info("Deleted ontology page: " + title)
     }
 }
