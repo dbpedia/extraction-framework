@@ -4,7 +4,7 @@ import scala.io.{Source, Codec}
 import javax.xml.stream.XMLInputFactory
 import scala.collection.{Map,Set}
 import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
-import org.dbpedia.extraction.util.{Language,WikiSettingsDownloader,StringUtils}
+import org.dbpedia.extraction.util.{Language,WikiSettingsDownloader,StringUtils,StringPlusser}
 import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
 import java.net.HttpRetryException
 import java.text.SimpleDateFormat
@@ -161,12 +161,3 @@ object GenerateWikiSettings {
   }
   
 }
-
-private class StringPlusser {
-  private val sb = new java.lang.StringBuilder // use Java StringBuilder directly, not through Scala wrapper 
-  def + (value : AnyRef): this.type = { sb append value; this }
-  def + (value : Int): this.type = { sb append value; this }
-  // TODO: add specialized + methods for other value types
-  override def toString = sb toString
-}
-
