@@ -71,7 +71,9 @@ object Server
         features.put(ResourceConfig.FEATURE_CANONICALIZE_URI_PATH, true)
         features.put(ResourceConfig.FEATURE_NORMALIZE_URI, true)
         features.put(ResourceConfig.FEATURE_REDIRECT, true)
-        features.put(ResourceConfig.FEATURE_TRACE, true)
+        // When trace is on, Jersey includes "X-Trace" headers in the HTTP response.
+        // But when it receives a bad URI (e.g. by Apache), Jersey does no tracing. :-( 
+        // features.put(ResourceConfig.FEATURE_TRACE, true)
 
         HttpServerFactory.create(uri, resources).start()
 
