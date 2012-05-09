@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.destinations
 
 /**
- * Holds a set of statements, organized in different datasets.
+ * Holds a set of statements.
  * 
  * TODO: make this mutable - allow adding quads to an existing graph. 
  * There are hundreds of places where we need this. If concurrency
@@ -9,11 +9,7 @@ package org.dbpedia.extraction.destinations
  * synchronization, but it probably isn't - usually, a graph is 
  * extracted by one extractor and then sent to a destination.
  * 
- * TODO: make this a Traversable so we can use flatMap to collect all quads
- * from many extractors.
- * 
- * TODO: just remove this class. It offers no advantage over List[Quad] except quadsByDataset,
- * which can easily be inlined.
+ * TODO: remove this class. It offers no advantage over List[Quad].
  */
 class Graph(val quads : List[Quad] = Nil)
 {
@@ -29,6 +25,7 @@ class Graph(val quads : List[Quad] = Nil)
 
     /**
      * Merges this graph with another graph and returns the result.
+     * TODO: remove this method. Use flatMap instead.
      */
     def merge(graph : Graph) : Graph = new Graph(quads ::: graph.quads)
 }
