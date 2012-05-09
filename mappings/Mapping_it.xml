@@ -41,7 +41,7 @@
     {{PropertyMapping | templateProperty = note | ontologyProperty = notes }}
     {{PropertyMapping | templateProperty = copertina | ontologyProperty = foaf:depiction }}
     {{PropertyMapping | templateProperty = copertina alternativa | ontologyProperty = foaf:depiction }}
-}}</text></revision></page><page><title>Mapping it:Artista musicale</title><ns>212</ns><id>5197</id><revision><id>17233</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping it:Artista musicale</title><ns>212</ns><id>5197</id><revision><id>18237</id><text>{{TemplateMapping
 | mapToClass = MusicalArtist
 | mappings =
 &lt;!-- Missing mappings: didascalia, band precedenti (is formerBandMember of), band attuale --&gt;
@@ -140,10 +140,9 @@
     {{PropertyMapping | templateProperty = successivo11 | ontologyProperty = successor }}
     {{PropertyMapping | templateProperty = successivo12 | ontologyProperty = successor }}
     {{PropertyMapping | templateProperty = successivo13 | ontologyProperty = successor }}
-}}</text></revision></page><page><title>Mapping it:Cita libro</title><ns>212</ns><id>5201</id><revision><id>17242</id><text>{{TemplateMapping
-| mapToClass = Book
+}}</text></revision></page><page><title>Mapping it:Cita libro</title><ns>212</ns><id>5201</id><revision><id>18180</id><text>{{TemplateMapping
 | mappings =
-&lt;!-- Missing mappings: edizione, curatore, capitolo, ed, volume --&gt;
+&lt;!-- Missing mappings: edizione, curatore, capitolo, ed, volume, cid --&gt;
 	{{PropertyMapping | templateProperty = titolo | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = editore | ontologyProperty = publisher }}
 	{{PropertyMapping | templateProperty = anno | ontologyProperty = releaseDate }}
@@ -153,7 +152,6 @@
 	{{PropertyMapping | templateProperty = nome | ontologyProperty = author }}
 	{{PropertyMapping | templateProperty = autore | ontologyProperty = author }}
 	{{PropertyMapping | templateProperty = pagine | ontologyProperty = numberOfPages }}
-	{{PropertyMapping | templateProperty = cid | ontologyProperty = isbn }}
 	{{PropertyMapping | templateProperty = lingua | ontologyProperty = originalLanguage }}
 	{{PropertyMapping | templateProperty = url | ontologyProperty = foaf:homepage }}
 	{{PropertyMapping | templateProperty = coautori | ontologyProperty = author }}
@@ -341,6 +339,31 @@
 	&lt;!-- {{PropertyMapping | templateProperty = slogan | ontologyProperty =  }} --&gt;
 	&lt;!-- {{PropertyMapping | templateProperty = note | ontologyProperty =  }} --&gt;
 	{{PropertyMapping | templateProperty = sito | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping it:Libro</title><ns>212</ns><id>5691</id><revision><id>18168</id><text>{{TemplateMapping
+| mapToClass = Book
+| mappings =
+    &lt;!-- Missing mappings: forza_cat_anno, tipo --&gt;
+    {{PropertyMapping | templateProperty = titolo           | ontologyProperty = foaf:name       }}
+    {{PropertyMapping | templateProperty = titoloorig       | ontologyProperty = foaf:name       }}
+    {{PropertyMapping | templateProperty = titolialt        | ontologyProperty = foaf:name       }}
+    {{PropertyMapping | templateProperty = titoloalfa       | ontologyProperty = foaf:name       }}
+    {{PropertyMapping | templateProperty = immagine         | ontologyProperty = coverArtist     }}
+    {{PropertyMapping | templateProperty = didascalia       | ontologyProperty = description     }}
+    {{PropertyMapping | templateProperty = autore           | ontologyProperty = author          }}
+    {{PropertyMapping | templateProperty = annoorig         | ontologyProperty = publicationDate }}
+    {{PropertyMapping | templateProperty = annoita          | ontologyProperty = publicationDate }}
+    {{PropertyMapping | templateProperty = genere           | ontologyProperty = literaryGenre   }}
+    {{PropertyMapping | templateProperty = sottogenere      | ontologyProperty = literaryGenre   }}
+    {{PropertyMapping | templateProperty = ambientazione    | ontologyProperty = settingOfPlay   }}
+    {{PropertyMapping | templateProperty = lingua           | ontologyProperty = language        }}
+    {{PropertyMapping | templateProperty = personaggi       | ontologyProperty = characterInPlay }}
+    {{PropertyMapping | templateProperty = protagonista     | ontologyProperty = characterInPlay }}
+    {{PropertyMapping | templateProperty = coprotagonista   | ontologyProperty = characterInPlay }}
+    {{PropertyMapping | templateProperty = antagonista      | ontologyProperty = characterInPlay }}
+    {{PropertyMapping | templateProperty = altri_personaggi | ontologyProperty = characterInPlay }}
+    {{PropertyMapping | templateProperty = serie            | ontologyProperty = series          }}
+    {{PropertyMapping | templateProperty = preceduto        | ontologyProperty = previousWork    }}
+    {{PropertyMapping | templateProperty = seguito          | ontologyProperty = subsequentWork  }}
 }}</text></revision></page><page><title>Mapping it:Lingua</title><ns>212</ns><id>3707</id><revision><id>13936</id><text>{{TemplateMapping
 | mapToClass = Language
 | mappings =
@@ -354,6 +377,33 @@
 	{{PropertyMapping | templateProperty = iso2 | ontologyProperty = iso6392Code }}
 	{{PropertyMapping | templateProperty = iso3 | ontologyProperty = iso6393Code }}
 	{{PropertyMapping | templateProperty = sil | ontologyProperty = silCode }}
+}}</text></revision></page><page><title>Mapping it:Montagna</title><ns>212</ns><id>5699</id><revision><id>18177</id><text>{{TemplateMapping
+| mapToClass = Mountain
+| mappings =
+    &lt;!-- Missing mappings: image_text, diametrocratere, primaeruzione, ultimaeruzione,  --&gt;
+    {{PropertyMapping | templateProperty = nomemontagna | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = nomemontagna | ontologyProperty = foaf:depiction }}
+    {{PropertyMapping | templateProperty = sigla_paese | ontologyProperty = iso31661Code }}
+    {{PropertyMapping | templateProperty = sigla_paese_2 | ontologyProperty = iso31661Code }}
+    {{PropertyMapping | templateProperty = sigla_paese_3 | ontologyProperty = iso31661Code }}
+    {{PropertyMapping | templateProperty = sigla_paese_4 | ontologyProperty = iso31661Code }}
+    {{PropertyMapping | templateProperty = regione | ontologyProperty = region }}
+    {{PropertyMapping | templateProperty = provincia | ontologyProperty = province }}
+    {{PropertyMapping | templateProperty = altezza | ontologyProperty = elevation | unit = metre }}
+    {{PropertyMapping | templateProperty = catenamontuosa | ontologyProperty = mountainRange }}
+    {{GeocoordinatesMapping | latitude = latitudine_d | longitude = longitudine_d }}
+    {{PropertyMapping | templateProperty = altrinomi | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = dataprimasalita | ontologyProperty = firstAscentYear }}
+    {{PropertyMapping | templateProperty = alpinistaprimasalita | ontologyProperty = firstAscentPerson }}
+&lt;!-- Alps-specific part --&gt;
+    {{PropertyMapping | templateProperty = grandeparte | ontologyProperty = alpsMainPart }}
+    {{PropertyMapping | templateProperty = grandesettore | ontologyProperty = alpsMajorSector }}
+    {{PropertyMapping | templateProperty = sezione | ontologyProperty = alpsSection }}
+    {{PropertyMapping | templateProperty = sottosezione | ontologyProperty = alpsSubsection }}
+    {{PropertyMapping | templateProperty = supergruppo | ontologyProperty = alpsSupergroup }}
+    {{PropertyMapping | templateProperty = gruppo | ontologyProperty = alpsGroup }}
+    {{PropertyMapping | templateProperty = sottogruppo | ontologyProperty = alpsSubgroup }}
+    {{PropertyMapping | templateProperty = codice | ontologyProperty = alpsSoiusaCode }}
 }}</text></revision></page><page><title>Mapping it:Opera d'arte</title><ns>212</ns><id>5198</id><revision><id>17237</id><text>{{TemplateMapping
 | mapToClass = Artwork
 | mappings =

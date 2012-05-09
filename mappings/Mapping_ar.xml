@@ -1,187 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping ar:تجمع سكاني</title><ns>250</ns><id>5085</id><revision><id>16718</id><text>{{ ConditionalMapping | cases = 
-    {{ Condition | templateProperty = settlement_type | operator = contains | value = Metropolis | mapping = 
-        {{ TemplateMapping | mapToClass = City }} }}
-    {{ Condition | templateProperty = settlement_type | operator = contains | value = City | mapping = 
-        {{ TemplateMapping | mapToClass = City }} }}
-    {{ Condition | templateProperty = settlement_type | operator = contains | value = Town | mapping = 
-        {{ TemplateMapping | mapToClass = Town }} }}
-    {{ Condition | templateProperty = settlement_type | operator = contains | value = Village | mapping = 
-        {{ TemplateMapping | mapToClass = Village }} }}
-    {{ Condition | templateProperty = settlement_type | operator = contains | value = Municipality | mapping = 
-        {{ TemplateMapping | mapToClass = Settlement }} }}
-    {{ Condition | templateProperty = settlement_type | operator = contains | value = Administrative | mapping = 
-        {{ TemplateMapping | mapToClass = AdministrativeRegion }} }}
-    {{ Condition | operator = otherwise | mapping = 
-        {{ TemplateMapping | mapToClass = Settlement }} }} | defaultMappings = 
-    {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-    {{ PropertyMapping | templateProperty = official_name | ontologyProperty = foaf:name }}
-    {{ PropertyMapping | templateProperty = other_name | ontologyProperty = synonym }}
-    {{ PropertyMapping | templateProperty = native_name | ontologyProperty = foaf:name }}
-    {{ PropertyMapping | templateProperty = nickname | ontologyProperty = foaf:nick }}
-    {{ PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
-    {{ PropertyMapping | templateProperty = anthem | ontologyProperty = anthem }}
-    {{ PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin8 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin9 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = twin2_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = twin3_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = twin4_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = twin5_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = twin6_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = twin7_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = twin8_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = twin9_country | ontologyProperty = twinCountry }}
-    {{ PropertyMapping | templateProperty = area_magnitude | ontologyProperty = area | unit = squareMetre }}
-    {{ PropertyMapping | templateProperty = area_total_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
-    {{ PropertyMapping | templateProperty = area_total_sq_mi | ontologyProperty = areaTotal | unit = squareMile }}
-   {{ PropertyMapping | templateProperty = TotalArea_sq_mi | ontologyProperty = areaTotal | unit = squareMile }}    
-   {{ PropertyMapping | templateProperty = area_total | ontologyProperty = areaTotal | unit = area}}
-   {{ PropertyMapping | templateProperty = area_land_km2 | ontologyProperty = areaLand | unit = squareKilometre }}
-   {{ PropertyMapping | templateProperty = area_land_sq_mi | ontologyProperty = areaLand | unit = squareMile }}
-   {{ PropertyMapping | templateProperty = LandArea_sq_mi | ontologyProperty = areaLand | unit = squareMile }}   
-   {{ PropertyMapping | templateProperty = area_land | ontologyProperty = areaLand | unit = area }}
-    {{ PropertyMapping | templateProperty = area_water_km2 | ontologyProperty = areaWater | unit = squareKilometre }}
-   {{ PropertyMapping | templateProperty = WaterArea_sq_mi | ontologyProperty = areaWater | unit = squareMile }}   
-    {{ PropertyMapping | templateProperty = area_water_sq_mi | ontologyProperty = areaWater | unit = squareMile }}
-   {{ PropertyMapping | templateProperty = area_water | ontologyProperty = areaWater | unit = area }}   
-    {{ PropertyMapping | templateProperty = area_water_percent | ontologyProperty = percentageOfAreaWater }}
-    {{ PropertyMapping | templateProperty = area_urban_km2 | ontologyProperty = areaUrban | unit = squareKilometre }}
-    {{ PropertyMapping | templateProperty = area_urban_sq_mi | ontologyProperty = areaUrban | unit = squareMile }}
-   {{ PropertyMapping | templateProperty = UrbanArea_sq_mi | ontologyProperty = areaUrban | unit = squareMile }}   
-   {{ PropertyMapping | templateProperty = area_urban | ontologyProperty = areaUrban | unit = area }}   
-    {{ PropertyMapping | templateProperty = area_metro_km2 | ontologyProperty = areaMetro | unit = squareKilometre }}
-    {{ PropertyMapping | templateProperty = area_metro_sq_mi | ontologyProperty = areaMetro | unit = squareMile }}
-   {{ PropertyMapping | templateProperty = MetroArea_sq_mi | ontologyProperty = areaMetro | unit = squareMile }}  
-   {{ PropertyMapping | templateProperty = area_metro | ontologyProperty = areaMetro | unit = area }}    
-    {{ PropertyMapping | templateProperty = area_rural_km2 | ontologyProperty = areaRural | unit = squareKilometre }}
-    {{ PropertyMapping | templateProperty = area_rural_sq_mi | ontologyProperty = areaRural | unit = squareMile }}
-    {{ PropertyMapping | templateProperty = leader_title | ontologyProperty = leaderTitle }}
-    {{ PropertyMapping | templateProperty = leader_name | ontologyProperty = leaderName }}
-    {{ PropertyMapping | templateProperty = leader_title1 | ontologyProperty = leaderTitle }}
-    {{ PropertyMapping | templateProperty = leader_name1 | ontologyProperty = leaderName }}
-    {{ PropertyMapping | templateProperty = leader_title2 | ontologyProperty = leaderTitle }}
-    {{ PropertyMapping | templateProperty = leader_name2 | ontologyProperty = leaderName }}
-    {{ PropertyMapping | templateProperty = leader_title3 | ontologyProperty = leaderTitle }}
-    {{ PropertyMapping | templateProperty = leader_name3 | ontologyProperty = leaderName }}
-    {{ PropertyMapping | templateProperty = leader_title4 | ontologyProperty = leaderTitle }}
-    {{ PropertyMapping | templateProperty = leader_name4 | ontologyProperty = leaderName }}
-    {{ PropertyMapping | templateProperty = leader_party | ontologyProperty = leaderParty }}
-    {{ PropertyMapping | templateProperty = government_type | ontologyProperty = governmentType }}
-    {{ PropertyMapping | templateProperty = governing_body | ontologyProperty = governingBody }}
-    {{ PropertyMapping | templateProperty = established_date | ontologyProperty = foundingDate }}
-    {{ PropertyMapping | templateProperty = established_date1 | ontologyProperty = foundingDate }}
-    {{ PropertyMapping | templateProperty = established_date2 | ontologyProperty = foundingDate }}
-    {{ PropertyMapping | templateProperty = established_date3 | ontologyProperty = foundingDate }}
-    {{ PropertyMapping | templateProperty = founder | ontologyProperty = foundingPerson }}
-    {{ PropertyMapping | templateProperty = elevation_m | ontologyProperty = elevation | unit = metre }}
-    {{ PropertyMapping | templateProperty = elevation_ft | ontologyProperty = elevation | unit = foot }}
-    {{ PropertyMapping | templateProperty = elevation_max_m | ontologyProperty = maximumElevation | unit = metre }}
-    {{ PropertyMapping | templateProperty = elevation_max_ft | ontologyProperty = maximumElevation | unit = foot }}
-    {{ PropertyMapping | templateProperty = elevation_min_m | ontologyProperty = minimumElevation | unit = metre }}
-    {{ PropertyMapping | templateProperty = elevation_min_ft | ontologyProperty = minimumElevation | unit = foot }}
-    {{ PropertyMapping | templateProperty = population_as_of | ontologyProperty = populationAsOf }}
-    {{ PropertyMapping | templateProperty = population_total | ontologyProperty = populationTotal }}
-    {{ PropertyMapping | templateProperty = pop_est_as_of | ontologyProperty = populationAsOf }}
-    {{ PropertyMapping | templateProperty = pop_est | ontologyProperty = populationTotal }}
-    {{ PropertyMapping | templateProperty = population_rank | ontologyProperty = populationTotalRanking }}
-    {{ PropertyMapping | templateProperty = population_density | ontologyProperty = populationDensity | unit = PopulationDensity }}
-    {{ PropertyMapping | templateProperty = population_density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
-    {{ PropertyMapping | templateProperty = population_density_sq_mi | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
-    {{ PropertyMapping | templateProperty = population_density_mi2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
-    {{ PropertyMapping | templateProperty = population_metro | ontologyProperty = populationMetro }}
-    {{ PropertyMapping | templateProperty = population_density_metro_km2 | ontologyProperty = populationMetroDensity | unit = inhabitantsPerSquareKilometre }}
-    {{ PropertyMapping | templateProperty = population_density_metro_sq_mi | ontologyProperty = populationMetroDensity | unit = inhabitantsPerSquareMile }}
-    {{ PropertyMapping | templateProperty = population_density_metro_mi2 | ontologyProperty = populationMetroDensity | unit = inhabitantsPerSquareMile }}
-    {{ PropertyMapping | templateProperty = population_urban | ontologyProperty = populationUrban }}
-    {{ PropertyMapping | templateProperty = population_density_urban_km2 | ontologyProperty = populationUrbanDensity | unit = inhabitantsPerSquareKilometre }}
-    {{ PropertyMapping | templateProperty = population_density_urban_sq_mi | ontologyProperty = populationUrbanDensity | unit = inhabitantsPerSquareMile }}
-    {{ PropertyMapping | templateProperty = population_density_urban_mi2 | ontologyProperty = populationUrbanDensity | unit = inhabitantsPerSquareMile }}
-    {{ PropertyMapping | templateProperty = population_rural | ontologyProperty = populationRural }}
-    {{ PropertyMapping | templateProperty = population_density_rural_km2 | ontologyProperty = populationRuralDensity | unit = inhabitantsPerSquareKilometre }}
-    {{ PropertyMapping | templateProperty = population_density_rural_sq_mi | ontologyProperty = populationRuralDensity | unit = inhabitantsPerSquareMile }}
-    {{ PropertyMapping | templateProperty = postal_code | ontologyProperty = postalCode }}
-    {{ PropertyMapping | templateProperty = postal2_code | ontologyProperty = postalCode }}
-    {{ PropertyMapping | templateProperty = area_code | ontologyProperty = areaCode }}
-    {{ PropertyMapping | templateProperty = iso_code | ontologyProperty = isoCodeRegion }}
-    {{ PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-    {{ PropertyMapping | templateProperty = subdivision_name | ontologyProperty = country }}
-    {{ PropertyMapping | templateProperty = subdivision_name1 | ontologyProperty = isPartOf }}
-    {{ PropertyMapping | templateProperty = subdivision_name2 | ontologyProperty = isPartOf }}
-    {{ PropertyMapping | templateProperty = subdivision_name3 | ontologyProperty = isPartOf }}
-    {{ PropertyMapping | templateProperty = subdivision_name4 | ontologyProperty = isPartOf }}
-    {{ PropertyMapping | templateProperty = subdivision_name5 | ontologyProperty = isPartOf }}
-    {{ PropertyMapping | templateProperty = subdivision_name6 | ontologyProperty = isPartOf }}
-    {{ PropertyMapping | templateProperty = p1 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p2 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p3 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p4 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p5 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p6 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p7 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p8 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p9 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p11 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p12 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p13 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p14 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p15 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p16 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p17 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p18 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p19 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p10 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p21 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p22 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p23 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p24 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p25 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p26 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p27 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p28 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p29 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p20 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p31 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p32 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p33 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p34 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p35 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p36 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p37 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p38 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p39 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p30 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p41 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p42 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p43 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p44 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p45 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p46 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p47 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p48 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p49 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p40 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = p50 | ontologyProperty = part }}
-    {{ PropertyMapping | templateProperty = settlement_type | ontologyProperty = type }}
-    {{ PropertyMapping | templateProperty = timezone | ontologyProperty = timeZone }}
-    {{ PropertyMapping | templateProperty = utc_offset | ontologyProperty = utcOffset }}
-    {{ PropertyMapping | templateProperty = timezone1 | ontologyProperty = timeZone }}
-    {{ PropertyMapping | templateProperty = utc_offset1 | ontologyProperty = utcOffset }}
-    {{ PropertyMapping | templateProperty = timezone2 | ontologyProperty = timeZone }}
-    {{ PropertyMapping | templateProperty = utc_offset2 | ontologyProperty = utcOffset }}
-    {{ PropertyMapping | templateProperty = timezone_DST | ontologyProperty = timeZone }}
-    {{ PropertyMapping | templateProperty = utc_offset_DST | ontologyProperty = utcOffset }}
-    {{ PropertyMapping | templateProperty = timezone1_DST | ontologyProperty = timeZone }}
-    {{ PropertyMapping | templateProperty = utc_offset1_DST | ontologyProperty = utcOffset }}
-    {{ PropertyMapping | templateProperty = timezone2_DST | ontologyProperty = timeZone }}
-    {{ PropertyMapping | templateProperty = utc_offset2_DST | ontologyProperty = utcOffset }}
-    {{ GeocoordinatesMapping | latitudeDegrees = latd | latitudeMinutes = latm | latitudeSeconds = lats | latitudeDirection = latNS | longitudeDegrees = longd | longitudeMinutes = longm | longitudeSeconds = longs | longitudeDirection = longEW }} }}</text></revision></page><page><title>Mapping ar:ص.م مبنى تاريخي</title><ns>250</ns><id>5105</id><revision><id>16801</id><text>{{TemplateMapping
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping ar:تجمع سكاني</title><ns>250</ns><id>5085</id><revision><id>18189</id><text>{{ TemplateMapping | mapToClass = Settlement | mappings = 
+
+    {{ PropertyMapping | templateProperty = الاسم الرسمي | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = اللقب | ontologyProperty = foaf:nick }}
+    {{ PropertyMapping | templateProperty = شعار | ontologyProperty = motto }}   
+   {{ PropertyMapping | templateProperty = المساحة الكلية | ontologyProperty = areaTotal | unit = area}}
+   {{ PropertyMapping | templateProperty = مساحة الأرض | ontologyProperty = areaLand | unit = squareKilometre }} 
+    {{ PropertyMapping | templateProperty = مساحة المياه | ontologyProperty = areaWater | unit = squareKilometre }}   
+    {{ PropertyMapping | templateProperty = المسؤول الاعلى | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = اسم المسؤول | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = المسؤول الثاني  | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = اسم المسؤول الثاني | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = المسؤول الثالث  | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = اسم المسؤول الثالث | ontologyProperty = leaderName }}   
+    {{ PropertyMapping | templateProperty = تاريخ التأسيس | ontologyProperty = foundingDate }}   
+    {{ PropertyMapping | templateProperty = ارتفاع | ontologyProperty = elevation | unit = metre }}   
+    {{ PropertyMapping | templateProperty = سنة التعداد  | ontologyProperty = populationAsOf }}
+    {{ PropertyMapping | templateProperty = إجمالي السكان | ontologyProperty = populationTotal }}    
+    {{ PropertyMapping | templateProperty = الرمز البريدي  | ontologyProperty = postalCode }}    
+    {{ PropertyMapping | templateProperty = موقع | ontologyProperty = foaf:homepage }}   
+    {{ PropertyMapping | templateProperty = التوقيت | ontologyProperty = timeZone }}
+    
+   }}</text></revision></page><page><title>Mapping ar:جدول عملة</title><ns>250</ns><id>5738</id><revision><id>18246</id><text>{{TemplateMapping
+| mapToClass = Currency
+| mappings =
+	{{PropertyMapping | templateProperty = دولة | ontologyProperty = usingCountry }}
+	{{PropertyMapping | templateProperty = اسم العملة بالعربية | ontologyProperty = foaf:name }}
+}}</text></revision></page><page><title>Mapping ar:ص.م قناة تلفزية</title><ns>250</ns><id>5736</id><revision><id>18243</id><text>{{TemplateMapping
+| mapToClass = TelevisionStation
+| mappings =
+{{PropertyMapping | templateProperty = اسم | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = رمز | ontologyProperty = foaf:logo}}
+{{PropertyMapping | templateProperty = انطلاق | ontologyProperty = firstAirDate }}
+{{PropertyMapping | templateProperty = توقف | ontologyProperty = lastAirDate }}
+{{PropertyMapping | templateProperty = صورة| ontologyProperty = pictureFormat }}
+{{PropertyMapping | templateProperty = مالك | ontologyProperty = owningCompany }}
+{{PropertyMapping | templateProperty = شعار | ontologyProperty = slogan }}
+{{PropertyMapping | templateProperty = شعار | ontologyProperty = motto }}
+{{PropertyMapping | templateProperty = بلد | ontologyProperty = locationCountry }}
+{{PropertyMapping | templateProperty = بلد | ontologyProperty = country }}
+{{PropertyMapping | templateProperty = لغة | ontologyProperty = language }}
+{{PropertyMapping | templateProperty = مقر | ontologyProperty = headquarter }}
+{{PropertyMapping | templateProperty = اسم قديم | ontologyProperty = formerName }}
+{{PropertyMapping | templateProperty = موقع | ontologyProperty = foaf:homepage }}
+
+
+&lt;!-- Props need an extension of the intermediate node mapping --&gt;
+&lt;!--
+{{PropertyMapping | templateProperty = terr serv 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = terr chan 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = sat serv 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = ساتل 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = cable serv 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = كابل | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = sat radio serv 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = sat radio chan 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = iptv serv 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = iptv chan 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = online serv 1 | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = نت | ontologyProperty =  }}
+{{PropertyMapping | templateProperty = 3gmobile serv 1 | ontologyProperty =  }}
+--&gt;
+
+
+
+}}</text></revision></page><page><title>Mapping ar:ص.م مبنى تاريخي</title><ns>250</ns><id>5105</id><revision><id>16801</id><text>{{TemplateMapping
 | mapToClass = Museum
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -189,6 +71,80 @@
 	{{PropertyMapping | templateProperty = native_name_lang | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = location | ontologyProperty = location }}
 
+}}</text></revision></page><page><title>Mapping ar:صندوق مدينة يابانية</title><ns>250</ns><id>5727</id><revision><id>18227</id><text>{{TemplateMapping
+| mapToClass = City
+| mappings =
+	
+
+	{{PropertyMapping | templateProperty = منطقة | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = مقاطعة | ontologyProperty = province }}
+	{{PropertyMapping | templateProperty = اسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = عمدة | ontologyProperty = leaderTitle }}
+	{{PropertyMapping | templateProperty = مساحة_كم_مربع | ontologyProperty = areaTotal | unit = squareKilometre }}	
+	{{PropertyMapping | templateProperty = عدد_السكان | ontologyProperty = populationTotal }}
+	{{PropertyMapping | templateProperty = كثافة_السكان | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}	
+	{{PropertyMapping | templateProperty = رمز بريدي_مبنى البلدية | ontologyProperty = postalCode }}	
+	{{PropertyMapping | templateProperty = رقم_هاتف_بلدية | ontologyProperty = areaCode }}	
+	{{PropertyMapping | templateProperty = الاسم_الياباني | ontologyProperty = foaf:name }}	
+	{{GeocoordinatesMapping | درجات_العرض =latitude   | درجات_الطول = longitude  | ثواني_العرض = lat_sec  | longitudeDegrees = lon_deg  | دقائق_الطول = lon_min  | ثواني_الطول = lon_sec  | ثواني_الطول = longs  | longitudeDirection = longEW }}
+}}</text></revision></page><page><title>Mapping ar:صندوق معلومات جريدة</title><ns>250</ns><id>5735</id><revision><id>18242</id><text>{{TemplateMapping
+| mapToClass = Newspaper
+| mappings =
+	{{PropertyMapping | templateProperty = نوع | ontologyProperty = format }}
+	{{PropertyMapping | templateProperty = نوع | ontologyProperty = type }}
+        {{PropertyMapping | templateProperty =  سنة التأسيس | ontologyProperty = foundingDate }}        
+	{{PropertyMapping | templateProperty = المالك | ontologyProperty = owner }}
+	{{PropertyMapping | templateProperty = المحررون | ontologyProperty = editor }}
+	{{PropertyMapping | templateProperty = رئيس التحرير | ontologyProperty = chiefEditor }}
+	{{PropertyMapping | templateProperty = نائب رئيس التحرير | ontologyProperty = associateEditor }}
+	{{PropertyMapping | templateProperty = المدير العام | ontologyProperty = managingEditor }}
+	{{PropertyMapping | templateProperty = التوزيع | ontologyProperty = circulation }}
+	{{PropertyMapping | templateProperty = المقر الرئيسي | ontologyProperty = headquarter }}
+	{{PropertyMapping | templateProperty = الملاحق | ontologyProperty = sisterNewspaper }}
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = الناشر | ontologyProperty = publisher }}
+	{{PropertyMapping | templateProperty = اللغة | ontologyProperty = language }}
+	{{PropertyMapping | templateProperty = الموقع على الويب | ontologyProperty = foaf:homepage }}
+}}
+
+محرر الافتتاحية</text></revision></page><page><title>Mapping ar:صندوق معلومات سيرة ذاتية للاعب كرة قدم/قديم</title><ns>250</ns><id>5725</id><revision><id>18225</id><text>{{TemplateMapping
+| mapToClass = SoccerPlayer
+| mappings = 
+
+	
+	{{PropertyMapping | templateProperty = اسم اللاعب | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = الاسم الكامل | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = صورة | ontologyProperty = picture }}
+	{{PropertyMapping | templateProperty = تاريخ الولادة  | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = مدينة الولادة | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = دولة الولادة | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = تاريخ الوفاة | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = مدينة الوفاة | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = دولة الوفاة | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = النادي الحالي | ontologyProperty = team }}
+	{{PropertyMapping | templateProperty = الرقم بالنادي | ontologyProperty = number }}
+	{{PropertyMapping | templateProperty = الطول | ontologyProperty = height | unit = Length}}
+	{{PropertyMapping | templateProperty = المركز  | ontologyProperty = position }}
+	{{PropertyMapping | templateProperty = أندية الشباب | ontologyProperty = team }}	
+	{{PropertyMapping | templateProperty = الأندية  | ontologyProperty = team }}	
+	{{PropertyMapping | templateProperty = المنتخب | ontologyProperty = team }}
+	
+
+}}</text></revision></page><page><title>Mapping ar:صندوق معلومات شخصية عسكرية</title><ns>250</ns><id>5741</id><revision><id>18250</id><text>{{TemplateMapping
+| mapToClass = MilitaryPerson
+| mappings =
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = تاريخ_الميلاد | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = تاريخ_الوفاة | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = مكان_الدفن | ontologyProperty = restingPlace }}	
+	{{PropertyMapping | templateProperty = مكان_الميلاد | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = مكان_الوفاة | ontologyProperty = deathPlace }}
+        {{PropertyMapping | templateProperty = لقب | ontologyProperty = foaf:nick}}
+        {{PropertyMapping | templateProperty = الانتماء | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = خدم في | ontologyProperty = militaryBranch }}	
+	{{PropertyMapping | templateProperty = معارك | ontologyProperty = battle }}
+	{{PropertyMapping | templateProperty =أوسمة | ontologyProperty = award }}	
+	{{PropertyMapping | templateProperty = آخر_رتبة | ontologyProperty = occupation }}
 }}</text></revision></page><page><title>Mapping ar:صندوق معلومات فنان موسيقي</title><ns>250</ns><id>5673</id><revision><id>18112</id><text>{{TemplateMapping
 | mapToClass = MusicalArtist
 | mappings = 
@@ -207,6 +163,107 @@
 	{{PropertyMapping | templateProperty = موقع واب  | ontologyProperty = foaf:homepage }}
 	{{PropertyMapping | templateProperty = ألات مميزة | ontologyProperty = instrument }}
 	
+}}</text></revision></page><page><title>Mapping ar:صندوق معلومات كاتب</title><ns>250</ns><id>5710</id><revision><id>18191</id><text>{{ TemplateMapping | mapToClass = Writer | mappings =   
+    {{ PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = الاسم_الأدبي | ontologyProperty = pseudonym }}   
+    {{ PropertyMapping | templateProperty = اسم_الميلاد | ontologyProperty = birthName }}
+    {{ PropertyMapping | templateProperty = تاريخ_الميلاد | ontologyProperty = birthDate }}    
+    {{ PropertyMapping | templateProperty = مكان_الميلاد | ontologyProperty = birthPlace }}    
+    {{ PropertyMapping | templateProperty = تاريخ_الوفاة | ontologyProperty = deathDate }} 
+    {{ PropertyMapping | templateProperty = مكان_الوفاة | ontologyProperty = deathPlace }}  
+    {{ PropertyMapping | templateProperty = الوظيفة | ontologyProperty = occupation }}  
+    {{ PropertyMapping | templateProperty = الجنسية | ontologyProperty = nationality }}
+    {{ PropertyMapping | templateProperty = الإثنية  | ontologyProperty = ethnicity }}
+    {{ PropertyMapping | templateProperty = المواطنة | ontologyProperty = citizenship }}    
+    {{ DateIntervalMapping | templateProperty = الفترة | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
+    {{ PropertyMapping | templateProperty = النوع | ontologyProperty = genre }}
+    {{ PropertyMapping | templateProperty = الموضوع | ontologyProperty = skos:subject }}
+    {{ PropertyMapping | templateProperty = الحركة | ontologyProperty = movement }}
+    {{ PropertyMapping | templateProperty = تزوج | ontologyProperty = spouse }}
+    {{ PropertyMapping | templateProperty = شريك | ontologyProperty = partner }}
+    {{ PropertyMapping | templateProperty = أطفال | ontologyProperty = child }}
+    {{ PropertyMapping | templateProperty = أقارب | ontologyProperty = relative }}
+    {{ PropertyMapping | templateProperty = أثر | ontologyProperty = influencedBy }}
+    {{ PropertyMapping | templateProperty = تأثر | ontologyProperty = influenced }}
+    {{ PropertyMapping | templateProperty = جوائز | ontologyProperty = award }}
+    {{ PropertyMapping | templateProperty = بوابة | ontologyProperty = foaf:homepage }} }}</text></revision></page><page><title>Mapping ar:صندوق معلومات كتاب</title><ns>250</ns><id>5708</id><revision><id>18188</id><text>{{TemplateMapping
+| mapToClass = Book
+| mappings = 
+ {{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+ {{PropertyMapping | templateProperty = العنوان الأصلي | ontologyProperty = foaf:name }}
+ {{PropertyMapping | templateProperty = مترجم | ontologyProperty = translator }}
+ {{PropertyMapping | templateProperty = مؤلف | ontologyProperty = author }}
+ {{PropertyMapping | templateProperty =  محقق| ontologyProperty = illustrator }}
+ {{PropertyMapping | templateProperty = فنان الغلاف | ontologyProperty = coverArtist }}
+ {{PropertyMapping | templateProperty = البلد  | ontologyProperty = country }}
+ {{PropertyMapping | templateProperty = لغة  | ontologyProperty = language }}
+ {{PropertyMapping | templateProperty = سلسلة  | ontologyProperty = series }}
+ {{PropertyMapping | templateProperty = موضوع  | ontologyProperty = nonFictionSubject }}
+ {{PropertyMapping | templateProperty = نوع أدبي | ontologyProperty = literaryGenre }}
+ &lt;!-- use dc:publisher instead --&gt;
+ {{PropertyMapping | templateProperty = ناشر | ontologyProperty = publisher }}
+ {{PropertyMapping | templateProperty = تاريخ_الإصدار | ontologyProperty = publicationDate }}
+ {{PropertyMapping | templateProperty = تاريخ_الإصدار المترجم | ontologyProperty = publicationDate }}
+ {{PropertyMapping | templateProperty = نوع الطباعة | ontologyProperty = mediaType }}
+ {{PropertyMapping | templateProperty = عدد_الصفحات | ontologyProperty = numberOfPages }}
+ {{PropertyMapping | templateProperty = سبقه | ontologyProperty = previousWork }}
+ {{PropertyMapping | templateProperty = تبعه | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping ar:صندوق معلومات لغة</title><ns>250</ns><id>5728</id><revision><id>18228</id><text>{{TemplateMapping
+| mapToClass = Language
+| mappings =
+	{{PropertyMapping | templateProperty = دول | ontologyProperty = spokenIn }}
+	{{PropertyMapping | templateProperty = منطقة | ontologyProperty = spokenIn }}
+	{{PropertyMapping | templateProperty = اسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = ناطقون | ontologyProperty = foaf:name }}	
+}}</text></revision></page><page><title>Mapping ar:صندوق معلومات نادي كرة قدم</title><ns>250</ns><id>5702</id><revision><id>18182</id><text>{{TemplateMapping
+| mapToClass = SoccerClub
+| mappings =
+	{{PropertyMapping | templateProperty = اسم النادي | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = الاسم الكامل | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = اللقب | ontologyProperty = foaf:nick }}	
+	{{PropertyMapping | templateProperty = الاسم المختصر | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = أسس عام | ontologyProperty = formationDate }}
+        {{PropertyMapping | templateProperty = انحل عام | ontologyProperty = dissolved }}
+        {{PropertyMapping | templateProperty =  الأرض| ontologyProperty = ground }}
+        {{PropertyMapping | templateProperty = السعة | ontologyProperty = capacity }}
+        {{PropertyMapping | templateProperty = المسمى الوظيفي للمالك | ontologyProperty = title }}	
+	{{PropertyMapping | templateProperty = المالك | ontologyProperty = owner }}
+        {{PropertyMapping | templateProperty = المسمى الوظيفي للرئيس | ontologyProperty = chairmanTitle }}
+	{{PropertyMapping | templateProperty = الرئيس | ontologyProperty = chairman }}
+	{{PropertyMapping | templateProperty = المسؤول التنفيذي | ontologyProperty = ceo }}
+	{{PropertyMapping | templateProperty = المسمى الوظيفي للمدير | ontologyProperty = managerTitle }}
+	{{PropertyMapping | templateProperty = المدير | ontologyProperty = manager }}
+        {{PropertyMapping | templateProperty = الدوري | ontologyProperty = league }}   
+	{{PropertyMapping | templateProperty = الموسم | ontologyProperty = season }}    
+        {{PropertyMapping | templateProperty = الترتيب | ontologyProperty = position }}
+	{{PropertyMapping | templateProperty = أول مباراة | ontologyProperty = firstGame }}
+	{{PropertyMapping | templateProperty = أكبر فوز | ontologyProperty = largestWin }}
+	{{PropertyMapping | templateProperty = أكبر خسارة  | ontologyProperty = worstDefeat }}
+	{{PropertyMapping | templateProperty = اللاعب الأكثر مشاركة | ontologyProperty = clubsRecordGoalscorer }}
+	{{PropertyMapping | templateProperty = مجموعة معجبين | ontologyProperty = fansgroup }}
+	{{PropertyMapping | templateProperty = الألقاب | ontologyProperty = honours }}
+        {{PropertyMapping | templateProperty = الموقع الرسمي | ontologyProperty = foaf:homepage }}   
+}}</text></revision></page><page><title>Mapping ar:صندوق معلومات وكالة حكومية</title><ns>250</ns><id>5747</id><revision><id>18256</id><text>{{TemplateMapping
+| mapToClass = GovernmentAgency
+| mappings =
+	{{ PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}	
+	{{ PropertyMapping | templateProperty = شعار | ontologyProperty = foaf:logo }}
+	{{ PropertyMapping | templateProperty = الختم | ontologyProperty = foaf:logo }}
+	{{ PropertyMapping | templateProperty = الاسم المختصر| ontologyProperty = foaf:name }}
+	{{ PropertyMapping | templateProperty = الاسم المختصر_بلغته_الأصل | ontologyProperty = foaf:name }}
+	{{ PropertyMapping | templateProperty = الاسم الكامل | ontologyProperty = foaf:name }}
+	{{ PropertyMapping | templateProperty = تأسست | ontologyProperty = formationDate }}
+	{{ PropertyMapping | templateProperty = أنهيت | ontologyProperty = extinctionDate }}	
+	{{ PropertyMapping | templateProperty = إدارات سابقة | ontologyProperty = predecessor }}
+	{{ PropertyMapping | templateProperty = الإدارة التالية | ontologyProperty = successor }}
+	{{ PropertyMapping | templateProperty = الصلاحيات | ontologyProperty = jurisdiction }}
+	{{ PropertyMapping | templateProperty = المركز | ontologyProperty = headquarter }}	
+	{{ PropertyMapping | templateProperty = اسم_وزير1  | ontologyProperty = leader }}
+	{{ PropertyMapping | templateProperty = اسم_رئيس1 | ontologyProperty = leader }}	
+	{{ PropertyMapping | templateProperty = الأصل | ontologyProperty = parentOrganisation }}
+	{{ PropertyMapping | templateProperty = فرع1  | ontologyProperty = childOrganisation }}
+	{{ PropertyMapping | templateProperty = فرع2 | ontologyProperty = childOrganisation }}	
+	{{ PropertyMapping | templateProperty = الموقع | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping ar:فنان موسيقي</title><ns>250</ns><id>5671</id><revision><id>18111</id><text>{{TemplateMapping
 | mapToClass = MusicalArtist
 | mappings = 
@@ -254,7 +311,820 @@
 	{{PropertyMapping | templateProperty = موقع  | ontologyProperty = foaf:homepage }}
 
 
-}}</text></revision></page><page><title>Mapping ar:معلومات فنان</title><ns>250</ns><id>5674</id><revision><id>18115</id><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping ar:معلومات أغنية منفردة</title><ns>250</ns><id>5724</id><revision><id>18224</id><text>{{TemplateMapping
+| mapToClass = Single
+| mappings =
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty =  الألبوم| ontologyProperty = album }}
+	{{PropertyMapping | templateProperty = الوجه الأول | ontologyProperty = aSide }}
+	{{PropertyMapping | templateProperty = الوجه الثاني | ontologyProperty = bSide }}
+	{{PropertyMapping | templateProperty = الشكل | ontologyProperty = format }}
+	{{PropertyMapping | templateProperty = الكاتب | ontologyProperty = writer }}
+	{{PropertyMapping | templateProperty = المنتج | ontologyProperty = producer }}
+	{{PropertyMapping | templateProperty = العلامة التجارية | ontologyProperty = certification }}	
+	{{PropertyMapping | templateProperty = الفنان | ontologyProperty = musicalArtist }}
+	{{PropertyMapping | templateProperty = الفنان | ontologyProperty = musicalBand }}
+	{{PropertyMapping | templateProperty = الإصدار | ontologyProperty = releaseDate }}	
+	{{PropertyMapping | templateProperty = التسجيل | ontologyProperty = recordedIn }}
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = genre }}
+	{{PropertyMapping | templateProperty = المدة | ontologyProperty = runtime | unit = minute }}
+	{{PropertyMapping | templateProperty = الغلاف | ontologyProperty = recordLabel }}
+	{{PropertyMapping | templateProperty = الأغنية السابقة| ontologyProperty = previousWork }}
+	{{PropertyMapping | templateProperty = الأغنية التالية | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping ar:معلومات ألبوم</title><ns>250</ns><id>5745</id><revision><id>18254</id><text>{{TemplateMapping
+| mapToClass = Album
+| mappings =
+	{{PropertyMapping | templateProperty = المدة | ontologyProperty = longtype }}	
+	{{PropertyMapping | templateProperty = المنتج  | ontologyProperty = producer }}
+	{{PropertyMapping | templateProperty = المراجعات | ontologyProperty = review }}	
+	{{PropertyMapping | templateProperty = الإسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = الفنان | ontologyProperty = artist }}
+        {{PropertyMapping | templateProperty = الغلاف | ontologyProperty = picture }}
+	{{PropertyMapping | templateProperty = الإصدار| ontologyProperty = releaseDate }}
+	{{PropertyMapping | templateProperty = التسجيل | ontologyProperty = recordDate }}
+	{{PropertyMapping | templateProperty = التسجيل | ontologyProperty = recordedIn }}
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = genre }}
+	{{PropertyMapping | templateProperty = المدة | ontologyProperty = runtime | unit = minute }}
+	{{PropertyMapping | templateProperty = اللغة | ontologyProperty = language }}
+	{{PropertyMapping | templateProperty = العلامة التجارية | ontologyProperty = recordLabel }}
+	{{PropertyMapping | templateProperty = الألبوم السابق | ontologyProperty = previousWork }}
+	{{PropertyMapping | templateProperty = الألبوم التالي | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping ar:معلومات الألبوم</title><ns>250</ns><id>5732</id><revision><id>18239</id><text>{{TemplateMapping
+| mapToClass = Album
+| mappings =
+	{{PropertyMapping | templateProperty = المدة | ontologyProperty = longtype }}	
+	{{PropertyMapping | templateProperty = المنتج  | ontologyProperty = producer }}
+	{{PropertyMapping | templateProperty = المراجعات | ontologyProperty = review }}	
+	{{PropertyMapping | templateProperty = الإسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = الفنان | ontologyProperty = artist }}
+        {{PropertyMapping | templateProperty = الغلاف | ontologyProperty = picture }}
+	{{PropertyMapping | templateProperty = الإصدار| ontologyProperty = releaseDate }}
+	{{PropertyMapping | templateProperty = التسجيل | ontologyProperty = recordDate }}
+	{{PropertyMapping | templateProperty = التسجيل | ontologyProperty = recordedIn }}
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = genre }}
+	{{PropertyMapping | templateProperty = المدة | ontologyProperty = runtime | unit = minute }}
+	{{PropertyMapping | templateProperty = اللغة | ontologyProperty = language }}
+	{{PropertyMapping | templateProperty = العلامة التجارية | ontologyProperty = recordLabel }}
+	{{PropertyMapping | templateProperty = الألبوم السابق | ontologyProperty = previousWork }}
+	{{PropertyMapping | templateProperty = الألبوم التالي | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping ar:معلومات برمجية</title><ns>250</ns><id>5721</id><revision><id>18219</id><text>{{TemplateMapping
+| mapToClass = Software
+| mappings =
+	{{PropertyMapping | templateProperty = المطور | ontologyProperty = developer }}
+	{{PropertyMapping | templateProperty = آخر إصدار تجريبي | ontologyProperty = latestReleaseVersion }}
+        {{PropertyMapping | templateProperty = آخر إصدار | ontologyProperty = latestReleaseVersion }}
+	{{PropertyMapping | templateProperty = تاريخ آخر إصدار  | ontologyProperty = latestReleaseDate }}
+        {{PropertyMapping | templateProperty = تاريخ آخر إصدار تجريبي | ontologyProperty = latestReleaseDate }}	
+	{{PropertyMapping | templateProperty = لغة البرمجة  | ontologyProperty = programmingLanguage }}
+	{{PropertyMapping | templateProperty = نظام التشغيل | ontologyProperty = operatingSystem }}
+	{{PropertyMapping | templateProperty = المنصة | ontologyProperty = computingPlatform }}
+	{{PropertyMapping | templateProperty = الحجم | ontologyProperty = fileSize | unit = megabyte }}
+	{{PropertyMapping | templateProperty = الحالة | ontologyProperty = status }}
+	{{PropertyMapping | templateProperty = الترخيص | ontologyProperty = license }}
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = المؤلف | ontologyProperty = author }}
+	{{PropertyMapping | templateProperty = الإصدار | ontologyProperty = releaseDate }}
+	{{PropertyMapping | templateProperty = اللغة | ontologyProperty = language }}
+	{{PropertyMapping | templateProperty = النوعية  | ontologyProperty = genre }}
+	{{PropertyMapping | templateProperty = الموقع | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping ar:معلومات بلد</title><ns>250</ns><id>5711</id><revision><id>18192</id><text>{{TemplateMapping
+| mapToClass = Country
+| mappings =
+	{{PropertyMapping | templateProperty = النشيد الوطني | ontologyProperty = anthem }}	
+	{{PropertyMapping | templateProperty = نظام الحكم | ontologyProperty = governmentType }}
+	{{PropertyMapping | templateProperty = العملة | ontologyProperty = currency }}
+	{{PropertyMapping | templateProperty = اسم الدولة | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = الاسم الرسمي | ontologyProperty = longName }}
+	{{PropertyMapping | templateProperty = الاسم العام | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = الشعار الوطني | ontologyProperty = motto }}
+	{{PropertyMapping | templateProperty = العاصمة | ontologyProperty = capital }}
+	{{PropertyMapping | templateProperty = أكبر مدينة | ontologyProperty = largestCity }}
+	{{PropertyMapping | templateProperty = أكبر مدينة | ontologyProperty = largestSettlement }}
+	{{PropertyMapping | templateProperty = لغة رسمية | ontologyProperty = officialLanguage }}
+	{{PropertyMapping | templateProperty = لغة محلية | ontologyProperty = regionalLanguage }}	
+	{{PropertyMapping | templateProperty = لغات  | ontologyProperty = language }}	
+	{{PropertyMapping | templateProperty = لقب الحاكم 1  | ontologyProperty = leaderTitle }}
+	{{PropertyMapping | templateProperty = اسم الحاكم 1 | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = لقب الحاكم 2 | ontologyProperty = leaderTitle }}
+	{{PropertyMapping | templateProperty = اسم الحاكم 2  | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = لقب الحاكم 3   | ontologyProperty = leaderTitle }}
+	{{PropertyMapping | templateProperty = اسم الحاكم 3  | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = لقب الحاكم 4 | ontologyProperty = leaderTitle }}
+	{{PropertyMapping | templateProperty = اسم الحاكم 4 | ontologyProperty = leaderName }}	
+	{{PropertyMapping | templateProperty = مساحة كم2  | ontologyProperty = areaTotal | unit = squareKilometre }}
+	{{PropertyMapping | templateProperty = مساحة ميل مربع | ontologyProperty = areaTotal | unit = squareMile }}
+	{{PropertyMapping | templateProperty = نسبة المياه | ontologyProperty = percentageOfAreaWater }}
+	{{PropertyMapping | templateProperty = كثافة السكان كم2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
+	{{PropertyMapping | templateProperty = كثافة السكان ميل مربع | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
+	
+}}</text></revision></page><page><title>Mapping ar:معلومات بلدة إيطالية</title><ns>250</ns><id>5717</id><revision><id>18215</id><text>{{TemplateMapping
+| mapToClass = Settlement
+| mappings =
+	
+	{{PropertyMapping | templateProperty = الإقليم | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = الولاية | ontologyProperty = province }}	
+	{{PropertyMapping | templateProperty = الرمز البريدي | ontologyProperty = postalCode }}
+	
+
+}}</text></revision></page><page><title>Mapping ar:معلومات تلفاز</title><ns>250</ns><id>5733</id><revision><id>18240</id><text>{{TemplateMapping
+| mapToClass = TelevisionShow
+| mappings =
+	{{PropertyMapping | templateProperty = اسم البرنامج | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = أيضاً معروف باسم | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = النوع | ontologyProperty = genre }}
+        {{PropertyMapping | templateProperty = صيغة | ontologyProperty = format }}
+        {{PropertyMapping | templateProperty = صناعة | ontologyProperty = creator }}
+	{{PropertyMapping | templateProperty = تطوير | ontologyProperty = developer }}	
+	{{PropertyMapping | templateProperty = كتابة | ontologyProperty = author }}
+        {{PropertyMapping | templateProperty = إخراج | ontologyProperty = director }}
+	{{PropertyMapping | templateProperty = المخرج الإبداعي | ontologyProperty = creativeDirector }}
+        {{PropertyMapping | templateProperty = قام بعرضه | ontologyProperty = presenter }}
+	{{PropertyMapping | templateProperty = بطولة | ontologyProperty = starring }}
+	{{PropertyMapping | templateProperty =  أصوات | ontologyProperty = voice }}
+        {{PropertyMapping | templateProperty = التعليق | ontologyProperty = narrator }}	
+        {{PropertyMapping | templateProperty = حكام | ontologyProperty = showJudge }}
+        {{PropertyMapping | templateProperty = مؤلف موسيقى البرنامج | ontologyProperty = composer }}
+        {{PropertyMapping | templateProperty = الموسيقى الإفتتاحية | ontologyProperty = openingTheme }}
+	{{PropertyMapping | templateProperty = الموسيقى الختامية | ontologyProperty = endingTheme }}
+	{{PropertyMapping | templateProperty = التأليف الموسيقي | ontologyProperty = composer }}
+	{{PropertyMapping | templateProperty = بلد الأصل | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = عدد المواسم | ontologyProperty = numberOfSeasons }}
+	
+	{{PropertyMapping | templateProperty = عدد الحلقات | ontologyProperty = numberOfEpisodes }}	
+	{{PropertyMapping | templateProperty = اللغة | ontologyProperty = language }}
+&lt;!--  End of standard properties --&gt;
+
+&lt;!-- Start of production-specific properties --&gt;
+	{{PropertyMapping | templateProperty = المنتج المنفذ | ontologyProperty = executiveProducer }}
+	{{PropertyMapping | templateProperty = المنتج | ontologyProperty = producer }}
+	{{PropertyMapping | templateProperty = المونتاج | ontologyProperty = editor }}
+	{{PropertyMapping | templateProperty = بلد البث | ontologyProperty = location }}
+        {{PropertyMapping | templateProperty =  الكاميرا | ontologyProperty = person }}
+
+	{{PropertyMapping | templateProperty = مدة العرض | ontologyProperty = runtime | unit = Time }}
+        {{PropertyMapping | templateProperty = شركة الإنتاج | ontologyProperty = company }}
+	{{PropertyMapping | templateProperty = الموزع | ontologyProperty = distributor }}        
+&lt;!-- End of production-specific properties --&gt;
+
+&lt;!-- Start of broadcast-specific properties --&gt;
+	{{PropertyMapping | templateProperty = القناة | ontologyProperty = channel }}
+	{{PropertyMapping | templateProperty = الشبكة | ontologyProperty = network }}        
+        {{PropertyMapping | templateProperty = صيغة الصورة  | ontologyProperty = format }}
+        {{PropertyMapping | templateProperty = صيغة الصوت | ontologyProperty = format }}
+	{{PropertyMapping | templateProperty = عرض لأول مرة في | ontologyProperty = releaseDate }}
+	{{PropertyMapping | templateProperty = بث لأول مرة في | ontologyProperty = releaseDate }}
+	{{PropertyMapping | templateProperty = بث لآخر مرة في | ontologyProperty = completionDate }}       
+        {{PropertyMapping | templateProperty = الحالة | ontologyProperty = status }}         
+&lt;!-- end of broadcast-specific properties --&gt;        
+        {{PropertyMapping | templateProperty = المحرر | ontologyProperty = storyEditor }}
+
+	{{PropertyMapping | templateProperty = متعلق بـ | ontologyProperty = related }}
+	
+
+&lt;!-- start of external links  --&gt;
+	{{PropertyMapping | templateProperty = الموقع الرسمي | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = الموقع الرسمي للإنتاج | ontologyProperty = foaf:homepage }}
+  
+        {{PropertyMapping | templateProperty = معلومات من IMDb  | ontologyProperty = imdbId }} 
+        {{PropertyMapping | templateProperty = معلومات من TV.com | ontologyProperty = tvComId }} 
+
+}}</text></revision></page><page><title>Mapping ar:معلومات جامعة</title><ns>250</ns><id>5707</id><revision><id>18187</id><text>{{TemplateMapping
+| mapToClass = University
+| mappings =
+	{{PropertyMapping | templateProperty = الإسم | ontologyProperty = foaf:name }}	
+	{{PropertyMapping | templateProperty = الشعار  | ontologyProperty = motto }}	
+	{{PropertyMapping | templateProperty = التأسيس | ontologyProperty = foundingDate }}	
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = type }}       
+	{{PropertyMapping | templateProperty = الرئيس | ontologyProperty = chairman }}
+	{{PropertyMapping | templateProperty = الناظر | ontologyProperty = chancellor }}
+	{{PropertyMapping | templateProperty = المدير | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = النائب | ontologyProperty = vicePresident }}		
+	{{PropertyMapping | templateProperty = العميد | ontologyProperty = dean }}
+        {{PropertyMapping | templateProperty = الكليات | ontologyProperty = facultySize }}
+	{{PropertyMapping | templateProperty = أساتذة | ontologyProperty = staff }}
+	{{PropertyMapping | templateProperty = الطلاب | ontologyProperty = numberOfStudents }}
+	{{PropertyMapping | templateProperty = المقاعد الطلابية  | ontologyProperty = numberOfUndergraduateStudents }}
+	{{PropertyMapping | templateProperty = طلاب الدراسات العليا | ontologyProperty = numberOfPostgraduateStudents }}
+	{{PropertyMapping | templateProperty = المدينة | ontologyProperty = city }}
+	{{PropertyMapping | templateProperty = المكان | ontologyProperty = state }}	
+	{{PropertyMapping | templateProperty = البلد | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = المعاهد | ontologyProperty = campus }}
+	{{PropertyMapping | templateProperty = اسم سابق | ontologyProperty = formerName }}	
+	{{PropertyMapping | templateProperty = الموقع على الإنترنت | ontologyProperty = foaf:homepage }}
+
+}}</text></revision></page><page><title>Mapping ar:معلومات جبل</title><ns>250</ns><id>5744</id><revision><id>18253</id><text>{{TemplateMapping
+| mapToClass = Mountain
+| mappings =
+
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}       
+	{{PropertyMapping | templateProperty = الارتفاع | ontologyProperty = elevation | unit = Length }}
+	{{PropertyMapping | templateProperty = الارتفاع متر  | ontologyProperty = elevation | unit = metre }}
+	{{PropertyMapping | templateProperty = الارتفاع قدم | ontologyProperty = elevation | unit = foot }}	
+	{{PropertyMapping | templateProperty = نتوء | ontologyProperty = prominence | unit = Length }}
+	{{PropertyMapping | templateProperty = نتوء متر | ontologyProperty = prominence | unit = metre }}
+	{{PropertyMapping | templateProperty = نتوء قدم | ontologyProperty = prominence | unit = foot }}
+	{{PropertyMapping | templateProperty = القمة الأم | ontologyProperty = parentMountainPeak }}
+
+	
+}}</text></revision></page><page><title>Mapping ar:معلومات جزيرة</title><ns>250</ns><id>5743</id><revision><id>18252</id><text>{{ TemplateMapping | mapToClass = Island | mappings = 
+    {{ PropertyMapping | templateProperty = الأرخبيل | ontologyProperty = archipelago }}
+    {{ PropertyMapping | templateProperty = مجموع_الجزر | ontologyProperty = numberOfIslands }}
+    {{ PropertyMapping | templateProperty = الجزر_الرئيسية | ontologyProperty = majorIsland }}
+    {{ PropertyMapping | templateProperty = الدولة | ontologyProperty = country }}   
+    {{ PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = الاسم_الوطني | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = الاسم_العام | ontologyProperty = foaf:nick }}
+    {{ PropertyMapping | templateProperty = الموقع | ontologyProperty = location }}
+    {{ GeocoordinatesMapping | مصدر الإحداثيات = coordinates }}
+    {{ PropertyMapping | templateProperty = المساحة | ontologyProperty = areaTotal | unit = Area }}   
+    {{ PropertyMapping | templateProperty = الارتفاع | ontologyProperty = elevation | unit = metre }}   
+    {{ PropertyMapping | templateProperty = المدينة_الرئيسية | ontologyProperty = capital }}
+    {{ PropertyMapping | templateProperty = المدينة_الأكبر | ontologyProperty = largestCity }}
+    {{ PropertyMapping | templateProperty = عدد_السكان | ontologyProperty = populationTotal }}
+    {{ PropertyMapping | templateProperty = تعداد | ontologyProperty = populationAsOf }}
+    {{ PropertyMapping | templateProperty = الكثافة | ontologyProperty = populationDensity | unit = PopulationDensity }}
+    }}</text></revision></page><page><title>Mapping ar:معلومات سلاح</title><ns>250</ns><id>5729</id><revision><id>18229</id><text>{{TemplateMapping
+| mapToClass = Weapon
+| mappings =
+	{{PropertyMapping | templateProperty = بلد_الأصل | ontologyProperty = origin }}
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = الحروب | ontologyProperty = usedInWar }}
+	{{PropertyMapping | templateProperty = الوزن | ontologyProperty = weight | unit = Mass }}
+	{{PropertyMapping | templateProperty = الطول | ontologyProperty = length | unit = Length }}
+	{{PropertyMapping | templateProperty =  طول_القطعة| ontologyProperty = width | unit = Length }}
+	{{PropertyMapping | templateProperty = الارتفاع | ontologyProperty = height | unit = Length }}
+	{{PropertyMapping | templateProperty = القطر | ontologyProperty = diameter | unit = kilometre }}
+	{{PropertyMapping | templateProperty = الاسم  | ontologyProperty = foaf:name }}
+}}</text></revision></page><page><title>Mapping ar:معلومات سيارة</title><ns>250</ns><id>5737</id><revision><id>18245</id><text>{{TemplateMapping
+|mapToClass = Automobile
+|correspondingClass = Automobile
+|correspondingProperty = variantOf
+|mappings =
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = المصنع | ontologyProperty = manufacturer }}
+	{{PropertyMapping | templateProperty = الشركة_الأم | ontologyProperty = parentCompany }}	
+	{{PropertyMapping | templateProperty = التجميع | ontologyProperty = assembly}}
+	{{PropertyMapping | templateProperty = سبقها | ontologyProperty = predecessor}}
+	{{PropertyMapping | templateProperty = يليها | ontologyProperty = successor}}
+	{{PropertyMapping | templateProperty = الفئة | ontologyProperty = class}}
+	{{PropertyMapping | templateProperty = شكل_الهيكل | ontologyProperty = bodyStyle }}
+	
+
+    &lt;!-- Produces wrong results in many cases
+	{{PropertyMapping | templateProperty =المحرك | ontologyProperty = engine}}
+     --&gt;
+  
+	}}
+	{{PropertyMapping | templateProperty =ناقل_الحركة | ontologyProperty = transmission}}
+	{{PropertyMapping | templateProperty = قاعدة_الإطارات | ontologyProperty = wheelbase | unit = millimetre}}
+	{{PropertyMapping | templateProperty = الطول | ontologyProperty = length | unit = Length}}
+	{{PropertyMapping | templateProperty = العرض | ontologyProperty = width | unit = Length}}
+	{{PropertyMapping | templateProperty = الإرتفاع | ontologyProperty = height | unit = Length}}
+	{{PropertyMapping | templateProperty = الوزن | ontologyProperty = weight | unit = Mass}}	
+	{{PropertyMapping | templateProperty = خزان_الوقود | ontologyProperty = fuelCapacity | unit = Volume }}
+	
+	
+}}</text></revision></page><page><title>Mapping ar:معلومات شخصية</title><ns>250</ns><id>5704</id><revision><id>18184</id><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+&lt;!-- basic parameter --&gt;
+	{{PropertyMapping | templateProperty = اسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = تاريخ الولادة | ontologyProperty = birthDate }}	
+	{{PropertyMapping | templateProperty = مكان الولادة | ontologyProperty = birthPlace }}	
+	{{PropertyMapping | templateProperty = تاريخ الوفاة | ontologyProperty = deathDate }}	
+	{{PropertyMapping | templateProperty = مكان الوفاة | ontologyProperty = deathPlace }}	
+	{{PropertyMapping | templateProperty = الجنسية | ontologyProperty = nationality }}
+	{{PropertyMapping | templateProperty = الأصل | ontologyProperty = stateOfOrigin}}
+	{{PropertyMapping | templateProperty = اللقب | ontologyProperty = alias }}
+	{{PropertyMapping | templateProperty = اشتهر بـ | ontologyProperty = knownFor }}
+	{{PropertyMapping | templateProperty = المهنة | ontologyProperty = occupation }}
+	{{PropertyMapping | templateProperty = الاسم عند الولادة | ontologyProperty = birthName }}	
+	{{PropertyMapping | templateProperty = الإقامة | ontologyProperty = residence }}	
+	{{PropertyMapping | templateProperty = الجنسية | ontologyProperty = citizenship }}
+	{{PropertyMapping | templateProperty = التعليم | ontologyProperty = education }}	
+	{{PropertyMapping | templateProperty = الطول | ontologyProperty = height | unit = Length }}	
+	{{PropertyMapping | templateProperty = الديانة | ontologyProperty = religion }}
+	{{PropertyMapping | templateProperty = الزوج | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = الأبناء | ontologyProperty = child }}	
+	{{PropertyMapping | templateProperty = الأهل | ontologyProperty = relative }}
+	
+}}</text></revision></page><page><title>Mapping ar:معلومات شخصية كرة قدم</title><ns>250</ns><id>5706</id><revision><id>18186</id><text>{{TemplateMapping
+| mapToClass = SoccerPlayer
+| mappings = 
+
+	
+	{{PropertyMapping | templateProperty = اسم اللاعب | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = الاسم الكامل | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = صورة | ontologyProperty = picture }}
+	{{PropertyMapping | templateProperty = تاريخ الولادة  | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = مدينة الولادة | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = دولة الولادة | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = تاريخ الوفاة | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = مدينة الوفاة | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = دولة الوفاة | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = النادي الحالي | ontologyProperty = team }}
+	{{PropertyMapping | templateProperty = الرقم بالنادي | ontologyProperty = number }}
+	{{PropertyMapping | templateProperty = الطول | ontologyProperty = height | unit = Length}}
+	{{PropertyMapping | templateProperty = المركز  | ontologyProperty = position }}
+	{{PropertyMapping | templateProperty = أندية الشباب | ontologyProperty = team }}	
+	{{PropertyMapping | templateProperty = الأندية  | ontologyProperty = team }}	
+	{{PropertyMapping | templateProperty = المنتخب | ontologyProperty = team }}
+	
+
+}}</text></revision></page><page><title>Mapping ar:معلومات شركة</title><ns>250</ns><id>5705</id><revision><id>18185</id><text>{{ TemplateMapping 
+| mapToClass = Company 
+| mappings = 
+    {{ PropertyMapping | templateProperty = اسم_الشركة | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = نوع_الشركة | ontologyProperty = type }}    
+    {{ PropertyMapping | templateProperty = مصير | ontologyProperty = fate }}
+    {{ PropertyMapping | templateProperty = سابقا | ontologyProperty = predecessor }}
+    {{ PropertyMapping | templateProperty = لاحقا | ontologyProperty = successor }}
+    {{ PropertyMapping | templateProperty = تاريخ_التأسيس | ontologyProperty = foundingDate }}    
+    {{ PropertyMapping | templateProperty = المؤسس | ontologyProperty = foundedBy }}
+    {{ PropertyMapping | templateProperty = تاريخ_الإختفاء | ontologyProperty = extinctionDate }}   
+    {{ PropertyMapping | templateProperty = المقر_الرئيسي | ontologyProperty = locationCity }}
+    {{ PropertyMapping | templateProperty = مناطق_الخدمة | ontologyProperty = regionServed }}
+    {{ PropertyMapping | templateProperty = أهم_الشخصيات | ontologyProperty = keyPerson }}
+    {{ PropertyMapping | templateProperty = الصناعة | ontologyProperty = industry }}
+    {{ PropertyMapping | templateProperty = المنتجات | ontologyProperty = product }}
+    {{ PropertyMapping | templateProperty = النشاط | ontologyProperty = service }}
+    {{ PropertyMapping | templateProperty = الأرباح | ontologyProperty = revenue | unit = Currency }}
+    {{ PropertyMapping | templateProperty = الدخل التشغيلي| ontologyProperty = operatingIncome | unit = Currency }}
+    {{ PropertyMapping | templateProperty = العائدات | ontologyProperty = netIncome | unit = Currency }} 
+    {{ PropertyMapping | templateProperty = الأصول | ontologyProperty = assets | unit = Currency }}
+    {{ PropertyMapping | templateProperty = الرمز في البورصة | ontologyProperty = equity | unit = Currency }}
+    {{ PropertyMapping | templateProperty = المالك | ontologyProperty = owner }}   
+    {{ PropertyMapping | templateProperty = عدد_الموظفين | ontologyProperty = numberOfEmployees }}
+    {{ PropertyMapping | templateProperty = الشركة_الأم | ontologyProperty = parentCompany }}
+    {{ PropertyMapping | templateProperty = عدد_الفروع | ontologyProperty = division }}
+    {{ PropertyMapping | templateProperty = الشركات_التابعة | ontologyProperty = subsidiary }}
+    {{ PropertyMapping | templateProperty = الموقع_الإلكتروني | ontologyProperty = foaf:homepage }}
+
+ 
+ }}</text></revision></page><page><title>Mapping ar:معلومات شركة طيران</title><ns>250</ns><id>5734</id><revision><id>18241</id><text>{{TemplateMapping
+| mapToClass = Airline
+| mappings =
+	{{PropertyMapping | templateProperty =  مطارات رئيسية| ontologyProperty = hubAirport }}
+	{{PropertyMapping | templateProperty = مطارات ثانوية | ontologyProperty = hubAirport }}
+	{{PropertyMapping | templateProperty = مدن التركيز | ontologyProperty = targetAirport }}
+	{{PropertyMapping | templateProperty = صالة | ontologyProperty = lounge }}
+	{{PropertyMapping | templateProperty = تحالف | ontologyProperty = alliance }}
+	{{PropertyMapping | templateProperty = وجهات | ontologyProperty = destination }}
+	{{PropertyMapping | templateProperty = المقرات | ontologyProperty = headquarter }}
+	{{PropertyMapping | templateProperty = اسم الشركة | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = تاريخ الإنشاء | ontologyProperty = formationDate }}
+	{{PropertyMapping | templateProperty = بداية | ontologyProperty = openingDate }}
+	{{PropertyMapping | templateProperty = نهاية | ontologyProperty = closingDate }}
+	{{PropertyMapping | templateProperty = الشركة الأم | ontologyProperty = parentCompany }}
+	{{PropertyMapping | templateProperty = الموقع | ontologyProperty = foaf:homepage }}
+       
+}}</text></revision></page><page><title>Mapping ar:معلومات صاحب منصب</title><ns>250</ns><id>5719</id><revision><id>18217</id><text>{{TemplateMapping
+| mapToClass = OfficeHolder
+| mappings =
+	{{PropertyMapping | templateProperty = otherparty | ontologyProperty = otherParty }}
+	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = birth_date | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = death_date | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = death_place | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = restingplace | ontologyProperty = restingPlace }}
+	{{GeocoordinatesMapping | ontologyProperty = restingPlacePosition | coordinates = restingplacecoordinates }}
+	{{PropertyMapping | templateProperty = birthname | ontologyProperty = birthName }}
+	{{PropertyMapping | templateProperty = nationality | ontologyProperty = nationality }}
+	{{PropertyMapping | templateProperty = party | ontologyProperty = party }}
+	{{PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = awards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = award | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = partner | ontologyProperty = partner }}
+	{{PropertyMapping | templateProperty = relations | ontologyProperty = relation }}
+	{{PropertyMapping | templateProperty = children | ontologyProperty = child }}
+	{{PropertyMapping | templateProperty = residence | ontologyProperty = residence }}
+	{{PropertyMapping | templateProperty = alma_mater | ontologyProperty = almaMater }}
+	{{PropertyMapping | templateProperty = occupation | ontologyProperty = occupation }}
+	{{PropertyMapping | templateProperty = religion | ontologyProperty = religion }}
+	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = cabinet | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = committees | ontologyProperty = committee }}
+	{{PropertyMapping | templateProperty = portfolio | ontologyProperty = portfolio }}
+	{{PropertyMapping | templateProperty = profession | ontologyProperty = profession }}
+	{{PropertyMapping | templateProperty = religion | ontologyProperty = religion }}
+	{{PropertyMapping | templateProperty = nickname | ontologyProperty = foaf:nick }}
+	{{PropertyMapping | templateProperty = allegiance | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = branch | ontologyProperty = militaryBranch }}
+	{{DateIntervalMapping 
+          | templateProperty = serviceyears 
+          | startDateOntologyProperty = serviceStartYear 
+          | endDateOntologyProperty = serviceEndYear
+        }}
+	{{PropertyMapping | templateProperty = rank | ontologyProperty = militaryRank }}
+	{{PropertyMapping | templateProperty = unit | ontologyProperty = militaryUnit }}
+	{{PropertyMapping | templateProperty = commands | ontologyProperty = militaryCommand }}
+	{{PropertyMapping | templateProperty = battles | ontologyProperty = battle }}
+	{{PropertyMapping | templateProperty = taoiseach | ontologyProperty = taoiseach }}
+	{{PropertyMapping | templateProperty = chancellor | ontologyProperty = chancellor }}
+	{{PropertyMapping | templateProperty = governor-general | ontologyProperty = governorGeneral }}
+	{{PropertyMapping | templateProperty = governor_general | ontologyProperty = governorGeneral }}
+	{{PropertyMapping | templateProperty = appointed | ontologyProperty = appointer }}
+	{{PropertyMapping | templateProperty = appointer | ontologyProperty = appointer }}
+	{{PropertyMapping | templateProperty = successor | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor1 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor2 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor3 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor4 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor5 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor6 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor7 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor8 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = successor9 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = order | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order1 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order2 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order3 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order4 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order5 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order6 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order7 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order8 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = order9 | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = office | ontologyProperty = orderInOffice }}
+	{{PropertyMapping | templateProperty = office1 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = office2 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = office3 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = office4 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = office5 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = office6 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = office7 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = office8 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = office9 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = term_start | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start1 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start2 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start3 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start4 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start5 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start6 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start7 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start8 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_start9 | ontologyProperty = activeYearsStartDate }}
+	{{PropertyMapping | templateProperty = term_end | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end1 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end2 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end3 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end4 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end5 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end6 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end7 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end8 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = term_end9 | ontologyProperty = activeYearsEndDate }}
+	{{PropertyMapping | templateProperty = alongside | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside1 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside2 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside3 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside4 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside5 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside6 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside7 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside8 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = alongside9 | ontologyProperty = associate }}
+	{{PropertyMapping | templateProperty = vicepresident | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident1 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident2 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident3 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident4 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident5 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident6 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident7 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident8 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = vicepresident9 | ontologyProperty = vicePresident }}
+	{{PropertyMapping | templateProperty = viceprimeminister | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister1 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister2 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister3 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister4 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister5 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister6 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister7 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister8 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = viceprimeminister9 | ontologyProperty = vicePrimeMinister }}
+	{{PropertyMapping | templateProperty = deputy | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy1 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy2 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy3 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy4 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy5 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy6 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy7 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy8 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = deputy9 | ontologyProperty = deputy }}
+	{{PropertyMapping | templateProperty = lieutenant | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant1 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant2 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant3 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant4 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant5 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant6 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant7 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant8 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = lieutenant9 | ontologyProperty = lieutenant }}
+	{{PropertyMapping | templateProperty = monarch | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch1 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch2 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch3 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch4 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch5 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch6 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch7 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch8 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = monarch9 | ontologyProperty = monarch }}
+	{{PropertyMapping | templateProperty = president | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president1 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president2 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president3 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president4 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president5 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president6 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president7 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president8 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = president9 | ontologyProperty = president }}
+	{{PropertyMapping | templateProperty = primeminister | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister1 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister2 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister3 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister4 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister5 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister6 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister7 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister8 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = primeminister9 | ontologyProperty = primeMinister }}
+	{{PropertyMapping | templateProperty = governor | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor1 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor2 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor3 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor4 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor5 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor6 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor7 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor8 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = governor9 | ontologyProperty = governor }}
+	{{PropertyMapping | templateProperty = preceding | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding1 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding2 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding3 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding4 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding5 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding6 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding7 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding8 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = preceding9 | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = succeeding | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding1 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding2 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding3 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding4 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding5 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding6 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding7 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding8 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = succeeding9 | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = constituency | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = majority | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority1 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority2 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority3 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority4 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority5 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority6 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority7 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority8 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = majority9 | ontologyProperty = electionMajority }}
+	{{PropertyMapping | templateProperty = assembly | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly1 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly2 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly3 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly4 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly5 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly6 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly7 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly8 | ontologyProperty = office }}
+	{{PropertyMapping | templateProperty = assembly9 | ontologyProperty = office }}	
+	{{PropertyMapping | templateProperty = ambassador_from | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from1 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from2 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from3 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from4 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from5 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from6 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from7 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from8 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = ambassador_from9 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country1 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country2 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country3 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country4 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country5 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country6 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country7 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country8 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = country9 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = constituency_AM | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_AM9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = election_date | ontologyProperty = electionDate }}
+	{{PropertyMapping | templateProperty = runningmate | ontologyProperty = runningMate }}
+	{{PropertyMapping | templateProperty = opponent | ontologyProperty = opponent }}
+	{{PropertyMapping | templateProperty = incumbent | ontologyProperty = incumbent }}
+	{{PropertyMapping | templateProperty = nominee | ontologyProperty = nominee }}
+	{{PropertyMapping | templateProperty = party_election | ontologyProperty = party }}
+	{{PropertyMapping | templateProperty = parliament1 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = parliament2 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = parliament3 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = parliament4 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = parliament5 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = parliament6 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = parliament7 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = parliament8 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = parliament9 | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = constituency_MP | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = constituency_MP9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = speaker | ontologyProperty = speaker }}
+	{{PropertyMapping | templateProperty = state1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = district9 | ontologyProperty = region }}	
+	{{PropertyMapping | templateProperty = state_house1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_house2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_house3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_house4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_house5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_house6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_house7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_house8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_house9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_assembly9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_delegate1 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_delegate2 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_delegate3 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_delegate4 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_delegate5 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_delegate6 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_delegate7 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_delegate8 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_delegate9 | ontologyProperty = stateDelegate }}
+	{{PropertyMapping | templateProperty = state_senate1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_senate9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature1 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature2 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature3 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature4 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature5 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature6 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature7 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature8 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = state_legislature9 | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = jr/sr1 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = jr/sr2 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = jr/sr3 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = jr/sr4 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = jr/sr5 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = jr/sr6 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = jr/sr7 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = jr/sr8 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = jr/sr9 | ontologyProperty = seniority }}
+	{{PropertyMapping | templateProperty = majorityleader1 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader2 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader3 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader4 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader5 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader6 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader7 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader8 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader9 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = majorityleader9 | ontologyProperty = majorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader1 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader2 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader3 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader4 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader5 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader6 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader7 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader8 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = minority_leader9 | ontologyProperty = minorityLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader1 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader2 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader3 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader4 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader5 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader6 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader7 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader8 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = majority_floor_leader9 | ontologyProperty = majorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader1 | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader2 | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader3 | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader4 | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader5 | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader6 | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader7 | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader8 | ontologyProperty = minorityFloorLeader }}
+	{{PropertyMapping | templateProperty = minority_floor_leader9 | ontologyProperty = minorityFloorLeader }}
+}}</text></revision></page><page><title>Mapping ar:معلومات طائرة</title><ns>250</ns><id>5731</id><revision><id>18238</id><text>{{TemplateMapping
+| mapToClass = Aircraft
+| mappings =
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = بلد الأصل | ontologyProperty = origin }}	
+	{{PropertyMapping | templateProperty = رقم التصنيع | ontologyProperty = numberBuilt }}
+	{{PropertyMapping | templateProperty = تكلفة المشروع | ontologyProperty = programCost | unit = Currency }}
+	{{PropertyMapping | templateProperty = سعر الوحدة | ontologyProperty = unitCost | unit = Currency }}
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = الصانع | ontologyProperty = manufacturer }}
+	{{PropertyMapping | templateProperty = دخول الخدمة | ontologyProperty = introductionDate }}
+	{{PropertyMapping | templateProperty = انتهاء الخدمة | ontologyProperty = retired }}	
+	{{PropertyMapping | templateProperty = المصمم | ontologyProperty = designer }}
+}}</text></revision></page><page><title>Mapping ar:معلومات عالم</title><ns>250</ns><id>5720</id><revision><id>18218</id><text>{{ TemplateMapping | mapToClass = Scientist | mappings = 
+    {{ PropertyMapping | templateProperty = doctoral_advisor | ontologyProperty = doctoralAdvisor }}
+    {{ PropertyMapping | templateProperty = academic_advisors | ontologyProperty = academicAdvisor }}
+    {{ PropertyMapping | templateProperty = doctoral_students | ontologyProperty = doctoralStudent }}
+    {{ PropertyMapping | templateProperty = notable_students | ontologyProperty = notableStudent }}
+    {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = birth_date | ontologyProperty = birthDate }}
+    {{ PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
+    {{ PropertyMapping | templateProperty = birth_name | ontologyProperty = birthName }}
+    {{ PropertyMapping | templateProperty = death_date | ontologyProperty = deathDate }}
+    {{ PropertyMapping | templateProperty = death_place | ontologyProperty = deathPlace }}
+    {{ PropertyMapping | templateProperty = death_cause | ontologyProperty = deathCause }}
+    {{ PropertyMapping | templateProperty = residence | ontologyProperty = residence }}
+    {{ PropertyMapping | templateProperty = citizenship | ontologyProperty = citizenship }}
+    {{ PropertyMapping | templateProperty = nationality | ontologyProperty = nationality }}
+    {{ PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
+    {{ PropertyMapping | templateProperty = alma_mater | ontologyProperty = almaMater }}
+    {{ PropertyMapping | templateProperty = field | ontologyProperty = field }}
+    {{ PropertyMapping | templateProperty = fields | ontologyProperty = field }}
+    {{ PropertyMapping | templateProperty = known_for | ontologyProperty = knownFor }}
+    {{ PropertyMapping | templateProperty = influences | ontologyProperty = influencedBy }}
+    {{ PropertyMapping | templateProperty = influenced | ontologyProperty = influenced }}
+    {{ PropertyMapping | templateProperty = awards | ontologyProperty = award }}
+    {{ PropertyMapping | templateProperty = prizes | ontologyProperty = award }} }}</text></revision></page><page><title>Mapping ar:معلومات فنان</title><ns>250</ns><id>5674</id><revision><id>18115</id><text>{{TemplateMapping
 | mapToClass = Actor
 | mappings = 
        
@@ -275,6 +1145,24 @@
 	{{PropertyMapping | templateProperty = صفحة_شخصية | ontologyProperty = foaf:homepage }}
 
 	
+}}</text></revision></page><page><title>Mapping ar:معلومات فنان موسيقي</title><ns>250</ns><id>5700</id><revision><id>18179</id><text>{{TemplateMapping
+| mapToClass = MusicalArtist
+| mappings = 
+        {{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}	
+	{{PropertyMapping | templateProperty = لون خلفي | ontologyProperty = background }}
+	{{PropertyMapping | templateProperty = الاسم عند الولادة | ontologyProperty = foaf:givenName }}	
+	{{PropertyMapping | templateProperty = اسم مستعار | ontologyProperty = alias }}
+	{{PropertyMapping | templateProperty = الولادة | ontologyProperty = birthDate }}	
+	{{PropertyMapping | templateProperty = الوفاة | ontologyProperty = deathDate }}	
+	{{PropertyMapping | templateProperty = الأصل | ontologyProperty = hometown }}
+	{{PropertyMapping | templateProperty = ألات | ontologyProperty = instrument }}	
+	{{PropertyMapping | templateProperty = النوع | ontologyProperty = genre }}	
+	{{PropertyMapping | templateProperty = المهنة | ontologyProperty = occupation }}        
+	{{PropertyMapping | templateProperty = Label | ontologyProperty = recordLabel}}
+	{{PropertyMapping | templateProperty = label | ontologyProperty = recordLabel}}	
+	{{PropertyMapping | templateProperty = موقع واب  | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = ألات مميزة | ontologyProperty = instrument }}
+	
 }}</text></revision></page><page><title>Mapping ar:معلومات فيلم</title><ns>250</ns><id>5677</id><revision><id>18118</id><text>{{ TemplateMapping | mapToClass = Film | mappings = 
     {{ PropertyMapping | templateProperty = مخرج   | ontologyProperty = director }}
     {{ PropertyMapping | templateProperty = منتج | ontologyProperty = producer }}
@@ -292,6 +1180,226 @@
     {{ PropertyMapping | templateProperty = مدة الفيلم | ontologyProperty = runtime | unit = Time }}
     {{ PropertyMapping | templateProperty = لغة الفيلم | ontologyProperty = language }}
     {{ PropertyMapping | templateProperty = الموقع الرسمي | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping ar:معلومات لعبة فيديو</title><ns>250</ns><id>5722</id><revision><id>18220</id><text>{{TemplateMapping
+| mapToClass = VideoGame
+| mappings =
+
+	{{PropertyMapping | templateProperty = عنوان اللعبة | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = نسبة باعية | ontologyProperty = aspectRatio }}
+        {{PropertyMapping | templateProperty = دقة تفاصيل الصورة | ontologyProperty = resolution }}	        
+        {{PropertyMapping | templateProperty = مطور | ontologyProperty = developer }}
+	{{PropertyMapping | templateProperty = ناشر | ontologyProperty = publisher }}
+	{{PropertyMapping | templateProperty = موزع | ontologyProperty = distributor }}
+	{{PropertyMapping | templateProperty = رخصة | ontologyProperty = license }}        
+	{{PropertyMapping | templateProperty = سلسلة | ontologyProperty = series }}      
+	{{PropertyMapping | templateProperty = محرك | ontologyProperty = gameEngine }}
+	{{PropertyMapping | templateProperty = نسخة | ontologyProperty = latestReleaseVersion }}       
+	{{PropertyMapping | templateProperty = إصدر | ontologyProperty = releaseDate }}        
+	{{PropertyMapping | templateProperty = نوع | ontologyProperty = genre }}   
+        {{PropertyMapping | templateProperty = أنظمة | ontologyProperty = computingPlatform }}
+        {{PropertyMapping | templateProperty = وسائط | ontologyProperty = computingMedia }}  
+        {{PropertyMapping | templateProperty = متطلبات | ontologyProperty = requirement }}       
+        {{PropertyMapping | templateProperty = مخرج | ontologyProperty = director }}       
+	{{PropertyMapping | templateProperty = منتج | ontologyProperty = producer }}        
+	{{PropertyMapping | templateProperty = مصمم  | ontologyProperty = designer }}       
+	{{PropertyMapping | templateProperty = فنان | ontologyProperty = gameArtist}}
+	{{PropertyMapping | templateProperty = كاتب | ontologyProperty = writer }}
+	{{PropertyMapping | templateProperty = مؤلف الموسيقى | ontologyProperty = composer }}
+        {{PropertyMapping | templateProperty = معالج | ontologyProperty = cpu }}         
+&lt;!--    {{PropertyMapping | templateProperty = صوت | ontologyProperty = sound }}    --&gt;  
+        
+}}</text></revision></page><page><title>Mapping ar:معلومات مؤلف</title><ns>250</ns><id>5746</id><revision><id>18255</id><text>{{ TemplateMapping | mapToClass = Writer | mappings =   
+    {{ PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = الاسم_الأدبي | ontologyProperty = pseudonym }}   
+    {{ PropertyMapping | templateProperty = اسم_الميلاد | ontologyProperty = birthName }}
+    {{ PropertyMapping | templateProperty = تاريخ_الميلاد | ontologyProperty = birthDate }}    
+    {{ PropertyMapping | templateProperty = مكان_الميلاد | ontologyProperty = birthPlace }}    
+    {{ PropertyMapping | templateProperty = تاريخ_الوفاة | ontologyProperty = deathDate }} 
+    {{ PropertyMapping | templateProperty = مكان_الوفاة | ontologyProperty = deathPlace }}  
+    {{ PropertyMapping | templateProperty = الوظيفة | ontologyProperty = occupation }}  
+    {{ PropertyMapping | templateProperty = الجنسية | ontologyProperty = nationality }}
+    {{ PropertyMapping | templateProperty = الإثنية  | ontologyProperty = ethnicity }}
+    {{ PropertyMapping | templateProperty = المواطنة | ontologyProperty = citizenship }}    
+    {{ DateIntervalMapping | templateProperty = الفترة | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
+    {{ PropertyMapping | templateProperty = النوع | ontologyProperty = genre }}
+    {{ PropertyMapping | templateProperty = الموضوع | ontologyProperty = skos:subject }}
+    {{ PropertyMapping | templateProperty = الحركة | ontologyProperty = movement }}
+    {{ PropertyMapping | templateProperty = تزوج | ontologyProperty = spouse }}
+    {{ PropertyMapping | templateProperty = شريك | ontologyProperty = partner }}
+    {{ PropertyMapping | templateProperty = أطفال | ontologyProperty = child }}
+    {{ PropertyMapping | templateProperty = أقارب | ontologyProperty = relative }}
+    {{ PropertyMapping | templateProperty = أثر | ontologyProperty = influencedBy }}
+    {{ PropertyMapping | templateProperty = تأثر | ontologyProperty = influenced }}
+    {{ PropertyMapping | templateProperty = جوائز | ontologyProperty = award }}
+    {{ PropertyMapping | templateProperty = بوابة | ontologyProperty = foaf:homepage }} }}</text></revision></page><page><title>Mapping ar:معلومات مدينة</title><ns>250</ns><id>5709</id><revision><id>18190</id><text>{{ TemplateMapping | mapToClass = Settlement | mappings = 
+
+    {{ PropertyMapping | templateProperty = الاسم الرسمي | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = اللقب | ontologyProperty = foaf:nick }}
+    {{ PropertyMapping | templateProperty = شعار | ontologyProperty = motto }}   
+   {{ PropertyMapping | templateProperty = المساحة الكلية | ontologyProperty = areaTotal | unit = area}}
+   {{ PropertyMapping | templateProperty = مساحة الأرض | ontologyProperty = areaLand | unit = squareKilometre }} 
+    {{ PropertyMapping | templateProperty = مساحة المياه | ontologyProperty = areaWater | unit = squareKilometre }}   
+    {{ PropertyMapping | templateProperty = المسؤول الاعلى | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = اسم المسؤول | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = المسؤول الثاني  | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = اسم المسؤول الثاني | ontologyProperty = leaderName }}
+    {{ PropertyMapping | templateProperty = المسؤول الثالث  | ontologyProperty = leaderTitle }}
+    {{ PropertyMapping | templateProperty = اسم المسؤول الثالث | ontologyProperty = leaderName }}   
+    {{ PropertyMapping | templateProperty = تاريخ التأسيس | ontologyProperty = foundingDate }}   
+    {{ PropertyMapping | templateProperty = ارتفاع | ontologyProperty = elevation | unit = metre }}   
+    {{ PropertyMapping | templateProperty = سنة التعداد  | ontologyProperty = populationAsOf }}
+    {{ PropertyMapping | templateProperty = إجمالي السكان | ontologyProperty = populationTotal }}    
+    {{ PropertyMapping | templateProperty = الرمز البريدي  | ontologyProperty = postalCode }}    
+    {{ PropertyMapping | templateProperty = موقع | ontologyProperty = foaf:homepage }}   
+    {{ PropertyMapping | templateProperty = التوقيت | ontologyProperty = timeZone }}
+    
+   }}</text></revision></page><page><title>Mapping ar:معلومات مرض</title><ns>250</ns><id>5739</id><revision><id>18247</id><text>{{TemplateMapping
+| mapToClass = Disease
+| mappings =
+	{{PropertyMapping | templateProperty = ق.ب.الأمراض  | ontologyProperty = diseasesdb }}
+	{{PropertyMapping | templateProperty = ت.د.أ.10  | ontologyProperty = icd10 }}
+	{{PropertyMapping | templateProperty = ت.د.أ.9 | ontologyProperty = icd9 }}
+	{{PropertyMapping | templateProperty = ت.د.أ.أ  | ontologyProperty = icdo }}	
+	{{PropertyMapping | templateProperty =مدلاين بلس | ontologyProperty = medlineplus }}
+	{{PropertyMapping | templateProperty = مادة إي ميديسين | ontologyProperty = emedicineSubject }}
+	{{PropertyMapping | templateProperty = موضوع إي ميديسين | ontologyProperty = emedicineTopic }}	
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+}}</text></revision></page><page><title>Mapping ar:معلومات مطار</title><ns>250</ns><id>5723</id><revision><id>18223</id><text>{{ TemplateMapping | mapToClass = Airport | mappings = 
+    {{ PropertyMapping | templateProperty =اسم | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = الاسم باللغة الأصلية | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = الاسم باللغة الأصلية-ش | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = الاسم باللغة الأصلية-خ | ontologyProperty = foaf:name }}
+    &lt;!-- Airportidentifier --&gt;
+
+    {{ PropertyMapping | templateProperty = إياتا | ontologyProperty = iataLocationIdentifier }}
+    {{ PropertyMapping | templateProperty = ايكاو | ontologyProperty = icaoLocationIdentifier }}
+    {{ PropertyMapping | templateProperty = إف إيه إيه | ontologyProperty = faaLocationIdentifier }}
+    {{ PropertyMapping | templateProperty = إل أي دي | ontologyProperty = locationIdentifier }}
+    &lt;!-- Airport summary --&gt;
+
+    {{ PropertyMapping | templateProperty = النوع | ontologyProperty = type }}
+    {{ PropertyMapping | templateProperty = مالك | ontologyProperty = owner }}
+    {{ PropertyMapping | templateProperty = مشغل | ontologyProperty = operator }}
+    {{ PropertyMapping | templateProperty = مالك-مشغل | ontologyProperty = owner }}
+    {{ PropertyMapping | templateProperty = مالك-مشغل | ontologyProperty = operator }}
+    {{ PropertyMapping | templateProperty = يخدم-مدن | ontologyProperty = city }}
+    {{ PropertyMapping | templateProperty = الموقع | ontologyProperty = location }}
+    {{ PropertyMapping | templateProperty = الارتفاع-قدم | ontologyProperty = elevation | unit = foot }}
+    {{ PropertyMapping | templateProperty = ارتفاع-بالمتر | ontologyProperty = elevation | unit = metre }}
+
+    {{ PropertyMapping | templateProperty = رقم-مدرج1| ontologyProperty = runwayDesignation }}
+    {{ PropertyMapping | templateProperty = طول-مدرج1-قدم | ontologyProperty = runwayLength | unit = foot }}
+    {{ PropertyMapping | templateProperty = طول-مدرج1-م | ontologyProperty = runwayLength | unit = metre }}
+    {{ PropertyMapping | templateProperty = نوع-مدرج1 | ontologyProperty = runwaySurface }}
+
+ {{ PropertyMapping | templateProperty = رقم-مدرج2| ontologyProperty = runwayDesignation }}
+    {{ PropertyMapping | templateProperty = طول-مدرج2-قدم | ontologyProperty = runwayLength | unit = foot }}
+    {{ PropertyMapping | templateProperty = طول-مدرج2-م | ontologyProperty = runwayLength | unit = metre }}
+    {{ PropertyMapping | templateProperty = نوع-مدرج2 | ontologyProperty = runwaySurface }}
+
+ {{ PropertyMapping | templateProperty = رقم-مدرج3| ontologyProperty = runwayDesignation }}
+    {{ PropertyMapping | templateProperty = طول-مدرج3-قدم | ontologyProperty = runwayLength | unit = foot }}
+    {{ PropertyMapping | templateProperty = طول-مدرج3-م | ontologyProperty = runwayLength | unit = metre }}
+    {{ PropertyMapping | templateProperty = نوع-مدرج3 | ontologyProperty = runwaySurface }}
+
+ {{ PropertyMapping | templateProperty = رقم-مدرج4| ontologyProperty = runwayDesignation }}
+    {{ PropertyMapping | templateProperty = طول-مدرج4-قدم | ontologyProperty = runwayLength | unit = foot }}
+    {{ PropertyMapping | templateProperty = طول-مدرج4-م | ontologyProperty = runwayLength | unit = metre }}
+    {{ PropertyMapping | templateProperty = نوع-مدرج4 | ontologyProperty = runwaySurface }}
+
+ {{ PropertyMapping | templateProperty = رقم-مدرج5| ontologyProperty = runwayDesignation }}
+    {{ PropertyMapping | templateProperty = طول-مدرج5-قدم | ontologyProperty = runwayLength | unit = foot }}
+    {{ PropertyMapping | templateProperty = طول-مدرج5-م | ontologyProperty = runwayLength | unit = metre }}
+    {{ PropertyMapping | templateProperty = نوع-مدرج5 | ontologyProperty = runwaySurface }}
+
+ {{ PropertyMapping | templateProperty = رقم-مدرج6| ontologyProperty = runwayDesignation }}
+    {{ PropertyMapping | templateProperty = طول-مدرج6-قدم | ontologyProperty = runwayLength | unit = foot }}
+    {{ PropertyMapping | templateProperty = طول-مدرج6-م | ontologyProperty = runwayLength | unit = metre }}
+    {{ PropertyMapping | templateProperty = نوع-مدرج6 | ontologyProperty = runwaySurface }}
+
+ {{ PropertyMapping | templateProperty = رقم-مدرج7| ontologyProperty = runwayDesignation }}
+    {{ PropertyMapping | templateProperty = طول-مدرج7-قدم | ontologyProperty = runwayLength | unit = foot }}
+    {{ PropertyMapping | templateProperty = طول-مدرج7-م | ontologyProperty = runwayLength | unit = metre }}
+    {{ PropertyMapping | templateProperty = نوع-مدرج7 | ontologyProperty = runwaySurface }}
+
+ {{ PropertyMapping | templateProperty = رقم-مدرج8| ontologyProperty = runwayDesignation }}
+    {{ PropertyMapping | templateProperty = طول-مدرج8-قدم | ontologyProperty = runwayLength | unit = foot }}
+    {{ PropertyMapping | templateProperty = طول-مدرج8-م | ontologyProperty = runwayLength | unit = metre }}
+    {{ PropertyMapping | templateProperty = نوع-مدرج8 | ontologyProperty = runwaySurface }}
+ 
+
+
+ 
+     }}</text></revision></page><page><title>Mapping ar:معلومات مقاطعة أمريكية</title><ns>250</ns><id>5718</id><revision><id>18216</id><text>{{TemplateMapping
+| mapToClass = AdministrativeRegion
+| mappings =
+	{{ConstantMapping | ontologyProperty = country | value = United_States }}
+	{{PropertyMapping | templateProperty = county | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = state | ontologyProperty = state }}
+	{{PropertyMapping | templateProperty = founded year | ontologyProperty = foundingYear }}
+	{{PropertyMapping | templateProperty = founded date | ontologyProperty = foundingDate }}
+	{{PropertyMapping | templateProperty = founded | ontologyProperty = foundingDate }}
+	{{PropertyMapping | templateProperty = seat | ontologyProperty = countySeat }}
+	{{PropertyMapping | templateProperty = seat wl | ontologyProperty = countySeat }}
+	{{PropertyMapping | templateProperty = largest city wl | ontologyProperty = largestCity }}
+	{{PropertyMapping | templateProperty = largest city | ontologyProperty = largestCity }}
+	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
+	{{PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
+	{{PropertyMapping | templateProperty = area_total_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
+	{{PropertyMapping | templateProperty = area_land_km2 | ontologyProperty = areaLand | unit = squareKilometre }}
+	{{PropertyMapping | templateProperty = area_water_km2 | ontologyProperty = areaWater | unit = squareKilometre }}
+	{{PropertyMapping | templateProperty = area_total_sq_mi | ontologyProperty = areaTotal | unit = squareMile }}
+	{{PropertyMapping | templateProperty = area_land_sq_mi | ontologyProperty = areaLand | unit = squareMile }}
+	{{PropertyMapping | templateProperty = area_water_sq_mi | ontologyProperty = areaWater | unit = squareMile }}
+	{{PropertyMapping | templateProperty = area percentage | ontologyProperty = percentageOfAreaWater }}
+	{{PropertyMapping | templateProperty = pop | ontologyProperty = populationTotal }}
+	{{PropertyMapping | templateProperty = census yr | ontologyProperty = censusYear }}
+	{{PropertyMapping | templateProperty = census estimate yr | ontologyProperty = censusYear }}
+	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
+	{{PropertyMapping | templateProperty = density_sq_mi | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
+	{{PropertyMapping | templateProperty = time zone | ontologyProperty = timeZone }}
+	{{PropertyMapping | templateProperty = district | ontologyProperty = congressionalDistrict }}
+	{{PropertyMapping | templateProperty = district2 | ontologyProperty = congressionalDistrict }}
+	{{PropertyMapping | templateProperty = district3 | ontologyProperty = congressionalDistrict }}
+	{{PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
+	{{GeocoordinatesMapping | latitudeDegrees = lat deg  | latitudeMinutes = lat min  |  longitudeDegrees = long deg  | longitudeMinutes = long min }}
+}}</text></revision></page><page><title>Mapping ar:معلومات ملعب</title><ns>250</ns><id>5740</id><revision><id>18248</id><text>{{ TemplateMapping | mapToClass = Stadium | mappings = 
+    {{ PropertyMapping | templateProperty = اسم_الملعب  | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = اسم_الشهرة | ontologyProperty = foaf:nick }}
+    {{ PropertyMapping | templateProperty = الاسم_الكامل | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = الموقع | ontologyProperty = location }}
+
+   
+   
+ {{ PropertyMapping | templateProperty = حجر_الأساس | ontologyProperty = buildingStartDate }}
+    {{ PropertyMapping | templateProperty = إنشاء | ontologyProperty = buildingEndDate }}
+    {{ PropertyMapping | templateProperty = افتتاح | ontologyProperty = openingDate }}
+    {{ PropertyMapping | templateProperty = تجديد | ontologyProperty = rebuildingDate }}
+    {{ PropertyMapping | templateProperty = إغلاق | ontologyProperty = dateOfAbandonment }}
+    {{ PropertyMapping | templateProperty = هدم | ontologyProperty = demolitionDate }}
+    {{ PropertyMapping | templateProperty = المالك | ontologyProperty = owner }}
+    {{ PropertyMapping | templateProperty = المصمم_المعماري | ontologyProperty = architect }}
+
+  
+
+    {{ PropertyMapping | ontologyProperty = الأسماء_السابقة | templateProperty = former names }}
+    {{ PropertyMapping | ontologyProperty = الأسماء_السابقة | templateProperty = former_names }}
+    {{ PropertyMapping | ontologyProperty = المتعهد_العام | templateProperty = general contractor }}
+    {{ PropertyMapping | ontologyProperty = المتعهد_العام | templateProperty = general_contractor }}
+    {{ PropertyMapping | ontologyProperty = المتعهد_الرئيسي | templateProperty = main contractors }}
+    {{ PropertyMapping | ontologyProperty = المتعهدون الأساسيون | templateProperty = main_contractors }}
+
+  
+
+    {{ PropertyMapping | ontologyProperty = عدد_المقاعد | templateProperty = capacity }}
+    {{ PropertyMapping | ontologyProperty = حجر_الأساس | templateProperty = broke ground }}
+    {{ PropertyMapping | ontologyProperty = حجر_الأساس | templateProperty = broke_ground }}
+    
+    {{ PropertyMapping | ontologyProperty = المهندس_الإنشائي | templateProperty = structural engineer }}
+    {{ PropertyMapping | ontologyProperty = مهندس_الخدمات | templateProperty = services engineer }}
+    {{ PropertyMapping | ontologyProperty = المشغل | templateProperty = operator }}
+  
+
 }}</text></revision></page><page><title>Mapping ar:معلومات ممثل</title><ns>250</ns><id>5676</id><revision><id>18117</id><text>{{TemplateMapping
 | mapToClass = Actor
 | mappings = 
@@ -334,4 +1442,52 @@
 	{{PropertyMapping | templateProperty = صفحة_شخصية | ontologyProperty = foaf:homepage }}
 
 	
+}}</text></revision></page><page><title>Mapping ar:معلومات موقع ويب</title><ns>250</ns><id>5730</id><revision><id>18230</id><text>{{TemplateMapping
+| mapToClass = Website
+| mappings =
+	{{PropertyMapping | templateProperty = مالك | ontologyProperty = owner }}
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = نوع | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = لغة | ontologyProperty = language }}
+	{{PropertyMapping | templateProperty = مؤلف | ontologyProperty = author }}
+}}</text></revision></page><page><title>Mapping ar:معلومات نادي كرة قدم</title><ns>250</ns><id>5726</id><revision><id>18226</id><text>{{TemplateMapping
+| mapToClass = SoccerClub
+| mappings =
+	{{PropertyMapping | templateProperty = اسم النادي | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = الاسم الكامل | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = اللقب | ontologyProperty = foaf:nick }}	
+	{{PropertyMapping | templateProperty = الاسم المختصر | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = أسس عام | ontologyProperty = formationDate }}
+        {{PropertyMapping | templateProperty = انحل عام | ontologyProperty = dissolved }}
+        {{PropertyMapping | templateProperty =  الأرض| ontologyProperty = ground }}
+        {{PropertyMapping | templateProperty = السعة | ontologyProperty = capacity }}
+        {{PropertyMapping | templateProperty = المسمى الوظيفي للمالك | ontologyProperty = title }}	
+	{{PropertyMapping | templateProperty = المالك | ontologyProperty = owner }}
+        {{PropertyMapping | templateProperty = المسمى الوظيفي للرئيس | ontologyProperty = chairmanTitle }}
+	{{PropertyMapping | templateProperty = الرئيس | ontologyProperty = chairman }}
+	{{PropertyMapping | templateProperty = المسؤول التنفيذي | ontologyProperty = ceo }}
+	{{PropertyMapping | templateProperty = المسمى الوظيفي للمدير | ontologyProperty = managerTitle }}
+	{{PropertyMapping | templateProperty = المدير | ontologyProperty = manager }}
+        {{PropertyMapping | templateProperty = الدوري | ontologyProperty = league }}   
+	{{PropertyMapping | templateProperty = الموسم | ontologyProperty = season }}    
+        {{PropertyMapping | templateProperty = الترتيب | ontologyProperty = position }}
+	{{PropertyMapping | templateProperty = أول مباراة | ontologyProperty = firstGame }}
+	{{PropertyMapping | templateProperty = أكبر فوز | ontologyProperty = largestWin }}
+	{{PropertyMapping | templateProperty = أكبر خسارة  | ontologyProperty = worstDefeat }}
+	{{PropertyMapping | templateProperty = اللاعب الأكثر مشاركة | ontologyProperty = clubsRecordGoalscorer }}
+	{{PropertyMapping | templateProperty = مجموعة معجبين | ontologyProperty = fansgroup }}
+	{{PropertyMapping | templateProperty = الألقاب | ontologyProperty = honours }}
+        {{PropertyMapping | templateProperty = الموقع الرسمي | ontologyProperty = foaf:homepage }}   
+}}</text></revision></page><page><title>Mapping ar:نظام تشغيل</title><ns>250</ns><id>5742</id><revision><id>18251</id><text>{{TemplateMapping
+| mapToClass = Software
+| mappings =
+	{{PropertyMapping | templateProperty = مطور | ontologyProperty = developer }}
+	{{PropertyMapping | templateProperty = حالة العمل | ontologyProperty = status }}
+	{{PropertyMapping | templateProperty = رقم آخر إصدار | ontologyProperty = latestReleaseVersion }}       
+	{{PropertyMapping | templateProperty = تاريخ آخر إصدار | ontologyProperty = latestReleaseDate }}	
+	{{PropertyMapping | templateProperty = نموذج التحديث | ontologyProperty = frequentlyUpdated }}	
+	{{PropertyMapping | templateProperty = لغة البرمجة | ontologyProperty = programmingLanguage }}	
+	{{PropertyMapping | templateProperty = ترخيص | ontologyProperty = license }}
+	{{PropertyMapping | templateProperty = الاسم | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = موقع إنترنت | ontologyProperty = foaf:homepage }}
 }}</text></revision></page></mediawiki>
