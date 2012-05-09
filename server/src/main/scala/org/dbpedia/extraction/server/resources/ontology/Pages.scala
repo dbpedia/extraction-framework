@@ -17,6 +17,8 @@ class Pages
     /**
      * Retrieves an overview page
      */
+    // TODO: remove this method. Clients should get the ontology pages directly from the
+    // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
     @GET
     @Produces(Array("application/xhtml+xml"))
     def getPages : Elem =
@@ -35,6 +37,8 @@ class Pages
     /**
      * Retrieves an ontology page
      */
+    // TODO: remove this method. Clients should get the ontology pages directly from the
+    // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
     @GET
     @Path("/{title}")
     @Produces(Array("application/xml"))
