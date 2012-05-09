@@ -5,7 +5,9 @@ import org.dbpedia.extraction.wikiparser.{PageNode}
 
 class CompositeExtractor(extractors : Traversable[Extractor]) extends Extractor
 {
-    require(!extractors.isEmpty, "!extractors.isEmpty")
+    def this(extractors : Extractor*) = this(extractors)
+    
+    require(extractors.nonEmpty, "no extractors")
     
     override def extract(node : PageNode, subjectUri : String, context : PageContext) : Graph =
     {
