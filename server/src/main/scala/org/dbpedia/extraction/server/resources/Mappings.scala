@@ -29,6 +29,8 @@ class Mappings(@PathParam("lang") langCode : String)
     /**
      * Retrieves an overview page
      */
+    // TODO: remove this method. Clients should get the mapping pages directly from the
+    // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
     @GET
     @Produces(Array("application/xhtml+xml"))
     def get : Elem =
@@ -50,6 +52,8 @@ class Mappings(@PathParam("lang") langCode : String)
     /**
      * Retrieves a mapping page
      */
+    // TODO: remove this method. Clients should get the mapping pages directly from the
+    // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
     @GET
     @Path("pages/")
     @Produces(Array("application/xhtml+xml"))

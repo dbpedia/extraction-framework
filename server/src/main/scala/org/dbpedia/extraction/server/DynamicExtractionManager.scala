@@ -23,10 +23,14 @@ import scala.actors.Actor
 class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Traversable[Language], paths: Paths) 
 extends ExtractionManager(languages, paths)
 {
+    // TODO: remove this field. Clients should get the ontology pages directly from the
+    // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
     private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
     private var _ontology : Ontology = loadOntology
 
+    // TODO: remove this field. Clients should get the mapping pages directly from the
+    // mappings wiki, not from here. We don't want to keep all mapping pages in memory.
     private var _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
 
     private var _mappings : Map[Language, Mappings] = loadMappings
@@ -37,8 +41,12 @@ extends ExtractionManager(languages, paths)
 
     def ontology = synchronized { _ontology }
 
+    // TODO: remove this method, refactor base class. Clients should get the ontology pages directly 
+    // from the mappings wiki, not from here. We don't want to keep all ontology pages in memory.
     def ontologyPages = synchronized { _ontologyPages }
 
+    // TODO: remove this method, refactor base class. Clients should get the mapping pages directly 
+    // from the mappings wiki, not from here. We don't want to keep all mapping pages in memory.
     def mappingPageSource(language : Language) = synchronized { _mappingPages(language).values }
 
     def mappings(language : Language) : Mappings = synchronized { _mappings(language) }
