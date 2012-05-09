@@ -14,6 +14,8 @@ extends MappingStatsConfig(statsDir, language)
 {
     private val logger = Logger.getLogger(getClass.getName)
 
+    // TODO: call updateMappings when the ignoreList changes. 
+    // Problem: we don't keep a reference to the mappings.
     val ignoreList = new IgnoreList(new File(statsDir, "ignorelist_"+language.wikiCode+".txt"))
 
     val percentageFile = new File(statsDir, "percentage." + language.wikiCode)
