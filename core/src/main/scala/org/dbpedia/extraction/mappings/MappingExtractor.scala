@@ -14,9 +14,8 @@ class MappingExtractor( context : {
 {
     private val templateMappings = context.mappings.templateMappings
     private val tableMappings = context.mappings.tableMappings
-    private val conditionalMappings = context.mappings.conditionalMappings
 
-    private val resolvedMappings = context.redirects.resolveMap(templateMappings) ++ context.redirects.resolveMap(conditionalMappings)
+    private val resolvedMappings = context.redirects.resolveMap(templateMappings)
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
     {
