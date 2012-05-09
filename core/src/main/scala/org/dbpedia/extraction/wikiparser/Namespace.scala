@@ -66,8 +66,8 @@ private class NamespaceBuilder {
   
   val map = Map(
     "en"->204,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,"ru"->222,
-    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"hu"->238,"ko"->242,"tr"->246,"ar"->250,"bg"->264,
-    "sl"->268,"eu"->272,"hr"->284,"el"->304,"ga"->396
+    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"ja"->232,"hu"->238,"ko"->242,"tr"->246,"ar"->250,
+    "bg"->264,"sl"->268,"eu"->272,"hr"->284,"el"->304,"ga"->396
   )
   
   for ((lang,code) <- map) mappings(Language(lang)) = ns(code, "Mapping "+lang, true)
