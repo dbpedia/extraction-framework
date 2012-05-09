@@ -29,7 +29,7 @@ extends MappingStatsConfig(statsDir, language)
       val millis = System.currentTimeMillis
       logger.info("Updating "+language.wikiCode+" mapped statistics")
       
-      val mappings = all.templateMappings ++ all.conditionalMappings
+      val mappings = all.templateMappings
       
       var statistics = new mutable.ArrayBuffer[MappingStats]()
 

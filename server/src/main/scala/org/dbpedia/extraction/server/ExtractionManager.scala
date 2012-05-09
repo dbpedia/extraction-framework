@@ -56,10 +56,12 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
 
     def validateMapping(mappingsSource: Source, lang: Language) : Elem =
     {
+        val logger = Logger.getLogger(MappingsLoader.getClass.getName)
+        
         //Register xml log hanlder
         val logHandler = new XMLLogHandler()
         logHandler.setLevel(Level.WARNING)
-        Logger.getLogger(MappingsLoader.getClass.getName).addHandler(logHandler)
+        logger.addHandler(logHandler)
 
         // context object that has only this mappingSource
         val context = new {
@@ -70,10 +72,13 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
         }
 
         //Load mappings
-        MappingsLoader.load(context)
+        val mappings = MappingsLoader.load(context)
+        
+        if (mappings.templateMappings.isEmpty && mappings.tableMappings.isEmpty)
+          logger.severe("no mappings found")
 
         //Unregister xml log handler
-        Logger.getLogger(MappingsLoader.getClass.getName).removeHandler(logHandler)
+        logger.removeHandler(logHandler)
 
         //Return xml
         logHandler.xml
