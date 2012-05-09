@@ -71,6 +71,7 @@ extends ExtractionManager(languages, paths)
         updateAll
     }
 
+    // TODO: throw exception if page did not exist?
     def removeOntologyPage(title : WikiTitle) = asynchronous("removeOntologyPage") {
         _ontologyPages = _ontologyPages - title
         _ontology = loadOntology
@@ -80,6 +81,7 @@ extends ExtractionManager(languages, paths)
     }
 
     def updateMappingPage(page : WikiPage, language : Language) = asynchronous("updateMappingPage") {
+        // TODO: use mutable maps. makes the next line simpler, and we need synchronization anyway.
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, parser(page))))
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
@@ -87,7 +89,9 @@ extends ExtractionManager(languages, paths)
         update(language, mappings)
     }
 
+    // TODO: throw exception if page did not exist?
     def removeMappingPage(title : WikiTitle, language : Language) = asynchronous("removeMappingPage") {
+        // TODO: use mutable maps. makes the next line simpler, and we need synchronization anyway.
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) - title)
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)

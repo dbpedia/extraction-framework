@@ -42,6 +42,7 @@ class Pages
     @GET
     @Path("/{title}")
     @Produces(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get ontology page: " + title)
@@ -54,6 +55,7 @@ class Pages
     @PUT
     @Path("/{title}")
     @Consumes(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
     def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem)
     {
         try
@@ -80,6 +82,7 @@ class Pages
     @DELETE
     @Path("/{title}")
     @Consumes(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
     def deletePage(@PathParam("title") @Encoded title : String)
     {
         Server.instance.extractor.removeOntologyPage(WikiTitle.parse(title, Language.Default))
