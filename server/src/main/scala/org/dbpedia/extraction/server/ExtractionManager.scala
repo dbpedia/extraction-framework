@@ -8,7 +8,7 @@ import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.destinations.{Graph, Destination}
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource, Source, WikiPage}
 import java.net.URL
-import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.mappings.{Extractor,LabelExtractor,MappingExtractor,CompositeExtractor,Mappings,MappingsLoader,Redirects}
 import org.dbpedia.extraction.wikiparser._
 import java.io.File
 
@@ -20,7 +20,7 @@ import java.io.File
 
 abstract class ExtractionManager(languages : Traversable[Language], paths: Paths)
 {
-    private val extractors = List(classOf[LabelExtractor],classOf[MappingExtractor])
+  self =>
     
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
@@ -54,7 +54,7 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
         destination.write(graph)
     }
 
-    def validateMapping(mappingsSource : Source, language : Language) : Elem =
+    def validateMapping(mappingsSource: Source, lang: Language) : Elem =
     {
         //Register xml log hanlder
         val logHandler = new XMLLogHandler()
@@ -62,9 +62,11 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
         Logger.getLogger(MappingsLoader.getClass.getName).addHandler(logHandler)
 
         // context object that has only this mappingSource
-        val context = new ServerExtractionContext(language, this)
-        {
-            override def mappingPageSource : Traversable[PageNode] = mappingsSource.map(parser)
+        val context = new {
+          val ontology = self.ontology
+          val language = lang
+          val redirects: Redirects = new Redirects(Map())
+          val mappingPageSource = mappingsSource.map(parser)
         }
 
         //Load mappings
@@ -154,10 +156,12 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
         finally logger.info("All extractors loaded for languages "+languages.mkString(", "))
     }
 
-    protected def loadExtractors(language : Language): Extractor =
+    protected def loadExtractors(lang : Language): Extractor =
     {
-        val context = new ServerExtractionContext(language, this)
-        Extractor.load(extractors, context)
+        new CompositeExtractor(
+          new LabelExtractor(new {val ontology = self.ontology; val language = lang}), 
+          new MappingExtractor(new {val mappings = self.mappings(lang); val redirects = new Redirects(Map())})
+        )
     }
 
     protected def loadMappings() : Map[Language, Mappings] =
@@ -165,9 +169,15 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
         languages.map(lang => (lang, loadMappings(lang))).toMap
     }
 
-    protected def loadMappings(language : Language) : Mappings =
+    protected def loadMappings(lang : Language) : Mappings =
     {
-        val context = new ServerExtractionContext(language, this)
+        val context = new {
+          val ontology = self.ontology
+          val language = lang
+          val redirects: Redirects = new Redirects(Map())
+          val mappingPageSource = self.mappingPageSource(lang)
+        }
+
         MappingsLoader.load(context)
     }
 
