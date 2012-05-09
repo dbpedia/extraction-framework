@@ -9,22 +9,25 @@ import java.io.File
 import scala.actors.Actor
 
 /**
- * Loads all extraction context parameters (ontology pages, mapping pages, ontology) at start-up independently of which extractors are chosen.
+ * Loads all extraction context parameters (ontology pages, mapping pages, ontology, extractors).
  * Is able to update the ontology and the mappings.
  * Updates are executed in synchronized threads.
+ * 
  * TODO: the synchronized blocks are too big and take too long. The computation can be done 
  * unsynchronized, just the assignment must be synchronized, and the assignment should preferably
  * be atomic, i.e. client code that uses the different fields should atomically get a holder object
- * that holds all the values. 
+ * that holds all the values. Problem: the current class structure hardly allows this -
+ * mappingPageSource is called by loadMappings in the base class, 
+ * ontologyPages is called by loadOntology in the base class.
  */
 class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Traversable[Language], paths: Paths) 
 extends ExtractionManager(languages, paths)
 {
     private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
-    private var _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
-
     private var _ontology : Ontology = loadOntology
+
+    private var _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
 
     private var _mappings : Map[Language, Mappings] = loadMappings
 
@@ -40,6 +43,8 @@ extends ExtractionManager(languages, paths)
 
     def mappings(language : Language) : Mappings = synchronized { _mappings(language) }
 
+    // TODO: don't start a new actor for each call, start one actor when this object is loaded
+    // and send messages to it.
     private def asynchronous(name: String)(body: => Unit) = Actor actor synchronized { 
       val millis = System.currentTimeMillis
       body
