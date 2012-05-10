@@ -21,7 +21,7 @@ class ExternalLinksExtractor( context : {
 
         var quads = List[Quad]()
         for(link <- collectExternalLinks(node);
-            uri <- UriUtils.cleanLink(link.destination)) // FIXME: cleanLink converts IRIs to URIs
+            uri <- UriUtils.cleanLink(link.destination))
         {
             try
             {

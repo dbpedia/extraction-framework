@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import java.net.URI
+import java.net.{URI,URISyntaxException}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
@@ -83,14 +83,14 @@ class HomepageExtractor( context : {
     {
         try
         {
-            for(link <- UriUtils.cleanLink(URI.create(url))) // FIXME: cleanLink converts IRIs to URIs
+            for(link <- UriUtils.cleanLink(new URI(url)))
             {
                 return new Graph(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
             }
         }
         catch
         {
-            case ex: IllegalArgumentException =>
+            case ex: URISyntaxException =>
         }
         new Graph()
     }
