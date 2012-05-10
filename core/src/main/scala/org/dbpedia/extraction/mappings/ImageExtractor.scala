@@ -17,6 +17,8 @@ import org.dbpedia.extraction.util.RichString.toRichString
 /**
  * Extracts the first image of a Wikipedia page. Constructs a thumbnail from it, and
  * the full size image.
+ * 
+ * FIXME: we're sometimes dealing with encoded links, sometimes with decoded links. It's quite a mess.
  */
 class ImageExtractor( context : {
                           def ontology : Ontology
