@@ -50,21 +50,8 @@ class TriX
                       </xsl:if>
                       <xsl:for-each select="trix:triple">
                         <tr>
-                          <td>
-                            <xsl:value-of select="*[1]"/>
-                          </td>
-                          <td>
-                            <xsl:value-of select="*[2]"/>
-                          </td>
-                          <td>
-                            <xsl:value-of select="*[3]"/>
-                          </td>
-                          <td>
-                            <a>
-                              <xsl:attribute name="href"><xsl:value-of select="substring-before($context, '#')"/></xsl:attribute>
-                              <xsl:value-of select="$context"/>
-                            </a>
-                          </td>
+                          <xsl:apply-templates/>
+                          <td><a href="{$context}"><xsl:value-of select="$context"/></a></td>
                         </tr>
                       </xsl:for-each>
                   </xsl:for-each>
@@ -72,6 +59,17 @@ class TriX
               </body>
             </html>
           </xsl:template>
+
+          <!-- generate links from <uri> elements -->
+          <xsl:template match="trix:uri">
+            <td><a href="{.}"><xsl:value-of select="."/></a></td>
+          </xsl:template>
+
+          <!-- just display text for other elements -->
+          <xsl:template match="*">
+            <td><xsl:value-of select="."/></td>
+          </xsl:template>
+
         </xsl:stylesheet>
     }
 }

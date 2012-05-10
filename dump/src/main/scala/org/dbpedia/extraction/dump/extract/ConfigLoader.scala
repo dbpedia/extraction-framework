@@ -85,7 +85,8 @@ object ConfigLoader
         // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
         // extract=mapped:MappingExtractor means all languages with a mapping namespace
         var languages = getValues("languages").map(Language)
-        if (languages.isEmpty) Namespace.mappings.keys
+        if (languages.isEmpty) languages = Namespace.mappings.keySet.toList
+        languages = languages.sorted(Language.wikiCodeOrdering)
 
         /** Extractor classes */
         val extractors = loadExtractorClasses()
@@ -161,18 +162,18 @@ object ConfigLoader
     
             private lazy val _mappingPageSource =
             {
-                val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
+                val namespace = Namespace.mappings(language)
                 
                 if (mappingsDir != null && mappingsDir.isDirectory)
                 {
-                    val file = new File(mappingsDir, namespace.getName(Language.Default).replace(' ','_')+".xml")
-                    XMLSource.fromFile(file, language = language).map(parser)
+                    val file = new File(mappingsDir, namespace.getName(Language.Mappings).replace(' ','_')+".xml")
+                    XMLSource.fromFile(file, language).map(parser) // TODO: use Language.Mappings instead?
                 }
                 else
                 {
                     val namespaces = Set(namespace)
                     val url = new URL("http://mappings.dbpedia.org/api.php")
-                    val language = Language.Default
+                    // TODO: use Language.Mappings instead?
                     WikiSource.fromNamespaces(namespaces,url,language).map(parser)
                 }
             }
@@ -187,7 +188,7 @@ object ConfigLoader
     
             private val _articlesSource =
             {
-                XMLSource.fromFile(finder.file(date, "pages-articles.xml"),
+                XMLSource.fromFile(finder.file(date, "pages-articles.xml"), language,                    
                     title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
                              title.namespace == Namespace.Category || title.namespace == Namespace.Template)
             }
@@ -242,13 +243,13 @@ object ConfigLoader
     {
         val ontologySource = if (ontologyFile != null && ontologyFile.isFile) 
         {
-          XMLSource.fromFile(ontologyFile, language = Language.Default)
+          XMLSource.fromFile(ontologyFile, Language.Mappings)
         } 
         else 
         {
           val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
           val url = new URL("http://mappings.dbpedia.org/api.php")
-          val language = Language.Default
+          val language = Language.Mappings
           WikiSource.fromNamespaces(namespaces, url, language)
         }
       
@@ -261,7 +262,7 @@ object ConfigLoader
       val finder = new Finder[File](config.dumpDir, Language("commons"))
       val date = latestDate(finder)
       val file = finder.file(date, "pages-articles.xml")
-      XMLSource.fromFile(file, _.namespace == Namespace.File)
+      XMLSource.fromFile(file, Language.Commons, _.namespace == Namespace.File)
     }
     
     private def latestDate(finder: Finder[_]): String = {

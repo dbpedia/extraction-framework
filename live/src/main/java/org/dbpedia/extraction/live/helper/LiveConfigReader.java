@@ -75,11 +75,11 @@ public class LiveConfigReader {
             /** Ontology source */
 //            JavaConversions.asEnumeration(Namespace());
 //    Source ontologySource = WikiSource.fromNamespaces(Set(Namespace.OntologyClass, Namespace.OntologyProperty),
-//                                                   new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
+//                                                   new URL("http://mappings.dbpedia.org/api.php"), Language.English() );
 //
 //    /** Mappings source */
 //    Source mappingsSource =  WikiSource.fromNamespaces(Set(Namespace.Mapping),
-//                                                    new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
+//                                                    new URL("http://mappings.dbpedia.org/api.php"), Language.English() );
         }
         catch(Exception exp){
             logger.error(exp.getMessage());

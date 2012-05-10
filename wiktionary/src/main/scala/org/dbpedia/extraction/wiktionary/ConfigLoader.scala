@@ -74,7 +74,7 @@ object ConfigLoader
                                                               language = language)
 
         //Articles source
-        val articlesSource = XMLSource.fromFile(config.getDumpFile(language.wikiCode),
+        val articlesSource = XMLSource.fromFile(config.getDumpFile(language.wikiCode), language,
             title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
                     title.namespace == Namespace.Category || title.namespace == Namespace.Template)
 
@@ -111,7 +111,7 @@ object ConfigLoader
         /** Ontology source */
         val ontologySource = null//WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                    //                    url = new URL("http://mappings.dbpedia.org/api.php"),
-                                     //                  language = Language.Default )
+                                     //                  language = Language.English )
 
         /** Commons source */
         val commonsSource = null //XMLSource.fromFile(getDumpFile("commons"), _.namespace == Namespace.File)

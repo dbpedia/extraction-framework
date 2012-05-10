@@ -152,10 +152,10 @@ class Classes
     {
         <tr>
           <td bgcolor="#EEEEFF">{property.name} {createEditLink(property)}</td>
-          <td>{property.labels.get(Language.Default).getOrElse("undefined")}</td>
+          <td>{property.labels.get(Language.English).getOrElse("undefined")}</td>
           <td>{createLink(property.domain)}</td>
           <td>{createLink(property.range)}</td>
-          <td>{property.comments.get(Language.Default).getOrElse("")}</td>
+          <td>{property.comments.get(Language.English).getOrElse("")}</td>
         </tr>
     }
 
@@ -164,7 +164,7 @@ class Classes
         case ontClass : OntologyClass =>
         {
             // escape colon in names like owl:Thing - otherwise browser thinks the namespace as a protocol.
-            <a href={ontClass.name.replace(":", "%3A")} title={ontClass.labels.get(Language.Default).getOrElse(ontClass.name)}>{ontClass.name}</a>
+            <a href={ontClass.name.replace(":", "%3A")} title={ontClass.labels.get(Language.English).getOrElse(ontClass.name)}>{ontClass.name}</a>
         }
         case datatype : Datatype =>
         {

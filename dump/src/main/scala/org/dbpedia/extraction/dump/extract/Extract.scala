@@ -20,7 +20,7 @@ object Extract
     {
         override def run
         {
-            val configFile = new File(fileName);
+            val configFile = new File(fileName)
 
             //Load extraction jobs from configuration
             val extractionJobs = ConfigLoader.load(configFile)

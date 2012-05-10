@@ -50,11 +50,12 @@ object CreateMappingStats
         val statsDir = new File(args(1))
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var languages = for(arg <- args.slice(2, args.length); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        var languages: Seq[Language] = for(arg <- args.slice(2, args.length); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
           
-        require (languages nonEmpty, "need languages for which to generate statistics files") 
+        // if no languages are given, use all languages for which a mapping namespace is defined
+        if (languages.isEmpty) languages = Namespace.mappings.keySet.toSeq
         
-        for (language <- languages) {
+        for (language <- languages.sorted(Language.wikiCodeOrdering)) {
           
             val millis = System.currentTimeMillis()
             

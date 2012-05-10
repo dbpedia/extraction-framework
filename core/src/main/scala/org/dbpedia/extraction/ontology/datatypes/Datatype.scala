@@ -17,7 +17,7 @@ class Datatype(name : String, labels : Map[Language, String], comments : Map[Lan
      *
      * @param name The name of this datatype
      */
-    def this(name : String) = this(name, Map(Language.Default -> name), Map())
+    def this(name : String) = this(name, Map(Language.English -> name), Map())
 
     /**
      * The URI of this datatype

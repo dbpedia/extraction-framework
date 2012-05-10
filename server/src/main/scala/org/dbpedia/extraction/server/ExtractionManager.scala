@@ -110,13 +110,13 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
         val source = if (paths.ontologyFile != null && paths.ontologyFile.isFile)
         {
             logger.warning("LOADING ONTOLOGY NOT FROM SERVER, BUT FROM LOCAL FILE ["+paths.ontologyFile+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
-            XMLSource.fromFile(paths.ontologyFile, language = Language.Default)
+            XMLSource.fromFile(paths.ontologyFile, language = Language.Mappings)
         }
         else 
         {
             val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
             val url = paths.apiUrl
-            val language = Language.Default
+            val language = Language.Mappings
             logger.info("Loading ontology pages from URL ["+url+"]")
             WikiSource.fromNamespaces(namespaces, url, language)
         }
@@ -136,15 +136,14 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
         
         val source = if (paths.mappingsDir != null && paths.mappingsDir.isDirectory)
         {
-            val file = new File(paths.mappingsDir, namespace.getName(Language.Default).replace(' ','_')+".xml")
+            val file = new File(paths.mappingsDir, namespace.getName(Language.Mappings).replace(' ','_')+".xml")
             logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
-            XMLSource.fromFile(file, language = language)
+            XMLSource.fromFile(file, language) // TODO: use Language.Mappings?
         }
         else
         {
             val url = paths.apiUrl
-            val language = Language.Default
-            WikiSource.fromNamespaces(Set(namespace), url, language)
+            WikiSource.fromNamespaces(Set(namespace), url, language) // TODO: use Language.Mappings?
         }
         
         source.map(parser).map(page => (page.title, page)).toMap

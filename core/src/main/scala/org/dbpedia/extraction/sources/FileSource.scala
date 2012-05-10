@@ -18,7 +18,7 @@ import org.dbpedia.extraction.util.{WikiUtil, FileProcessor}
  * @param language The Language of the sources.
  * @throws FileNotFoundException if the given base could not be found
  */
-class FileSource(baseDir : File, filter : (String => Boolean) = (path => !path.startsWith(".") && !path.contains("/.")), language : Language = Language.Default) extends Source
+class FileSource(baseDir : File, language : Language, filter : (String => Boolean) = (path => !path.startsWith(".") && !path.contains("/."))) extends Source
 {
     private val logger = Logger.getLogger(classOf[FileSource].getName)
     private val fileProcessor = new FileProcessor(baseDir, filter)

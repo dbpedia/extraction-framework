@@ -24,8 +24,8 @@ object XMLSource
      * @param language if given, parser expects file to be in this language and doesn't read language from siteinfo element
      * @param namespaceUri expected mediawiki dump file namespace URI, e.g. "http://www.mediawiki.org/xml/export-0.6/"
      */
-    def fromFile(file : File, filter : (WikiTitle => Boolean) = (title => true), language : Language = null, namespaceUri : String = null) : Source = {
-      new XMLFileSource(file, filter, language, namespaceUri)
+    def fromFile(file : File, language : Language, filter : (WikiTitle => Boolean) = (title => true), namespaceUri : String = null) : Source = {
+      new XMLFileSource(file, language, filter, namespaceUri)
     }
 
     /**
@@ -33,12 +33,12 @@ object XMLSource
      *
      * @param xml The xml which contains the pages
      */
-    def fromXML(xml : Elem) : Source  = new XMLSource(xml)
+    def fromXML(xml : Elem, language: Language) : Source  = new XMLSource(xml, language)
 
     /**
      * XML source which reads from a file
      */
-    private class XMLFileSource(file: File, filter: (WikiTitle => Boolean), language: Language = null, namespaceUri: String = null) extends Source
+    private class XMLFileSource(file: File, language: Language, filter: (WikiTitle => Boolean), namespaceUri: String = null) extends Source
     {
         override def foreach[U](proc : WikiPage => U) : Unit = {
             val jfilter = { title : WikiTitle => filter(title) : java.lang.Boolean }
@@ -56,13 +56,10 @@ object XMLSource
     /**
      * XML source which reads from a parsed XML tree.
      */
-    private class XMLSource(xml : Elem) extends Source
+    private class XMLSource(xml : Elem, language: Language) extends Source
     {
         override def foreach[U](f : WikiPage => U) : Unit =
         {
-            //TODO set correct language
-            val language = Language.Default
-
             for(page <- xml \ "page";
                 rev <- page \ "revision")
             {

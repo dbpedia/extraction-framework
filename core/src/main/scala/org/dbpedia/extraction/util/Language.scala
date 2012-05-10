@@ -218,7 +218,13 @@ object Language extends (String => Language)
   }
   
   // TODO: remove this. It is too often used in error.
-  val Default = Values("en")
+  val English = Values("en")
+  
+  // FIXME: without namespace names in Namespaces.scala, Language("mappings") is not usable.
+  // val Mappings = Values("mappings")
+  val Mappings = Values("en")
+  
+  val Commons = Values("commons")
   
   /**
    * Gets a language object for a Wikipedia language code.

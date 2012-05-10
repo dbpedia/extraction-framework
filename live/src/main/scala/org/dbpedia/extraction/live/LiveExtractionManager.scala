@@ -38,7 +38,7 @@ object LiveExtractionManager
   def extractFromPage(Element :scala.xml.Elem)
     {
       val articlesSource = LiveExtractionSource.fromXML(Element);
-      //val extractor = Extractor.startExtraction(config.ontologySource, config.mappingsSource, emptySource, articlesSource, config.extractors(Language.Default), Language.Default)
+      //val extractor = Extractor.startExtraction(config.ontologySource, config.mappingsSource, emptySource, articlesSource, config.extractors(Language.English), Language.English)
 
       LiveExtractionConfigLoader.startExtraction(articlesSource);
       /*val extractionJobs = LiveExtractionConfigLoader.startExtraction(articlesSource);
@@ -75,12 +75,12 @@ object LiveExtractionManager
         /** Ontology source */
         val ontologySource = WikiSource.fromNamespaces(namespaces = scala.collection.immutable.Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                                        url = new URL("http://mappings.dbpedia.org/api.php"),
-                                                       language = Language.Default )
+                                                       language = Language.English )
 
         /** Mappings source */
         val mappingsSource =  WikiSource.fromNamespaces(namespaces = scala.collection.immutable.Set(Namespace.Mapping),
                                                         url = new URL("http://mappings.dbpedia.org/api.php"),
-                                                        language = Language.Default )
+                                                        language = Language.English )
 
         /** Commons source */
         val commonsSource = XMLSource.fromFile(getDumpFile("commons"), _.namespace == Namespace.File)

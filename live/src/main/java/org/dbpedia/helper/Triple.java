@@ -80,7 +80,7 @@ public class Triple extends StatementImpl{
     }
     public static URI page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
-           String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.Default().locale());
+           String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.English().locale());
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
            //TODO make resource domain configurable

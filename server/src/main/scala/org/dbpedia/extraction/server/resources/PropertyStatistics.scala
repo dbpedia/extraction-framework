@@ -23,7 +23,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
     if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
 
-    private val mappingUrlPrefix = Server.instance.paths.pagesUrl+"/"+Namespace.mappings(language).getName(Language.Default).replace(' ','_')+":"
+    private val mappingUrlPrefix = Server.instance.paths.pagesUrl+"/"+Namespace.mappings(language).getName(language).replace(' ','_')+":"
 
     private val manager = Server.instance.managers(language)
 

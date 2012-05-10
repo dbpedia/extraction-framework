@@ -26,12 +26,12 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
 
     src.foreach(CurrentWikiPage =>
       {
-          val mappingTitle = WikiTitle.parse(CurrentWikiPage.title.toString, Language.Default)
-          val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, Language.Default)
+          val mappingTitle = WikiTitle.parse(CurrentWikiPage.title.toString, Language.English)
+          val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, Language.English)
 
-          //val wikiApiUrl = new URL("http://" + Language.Default.wikiCode + ".wikipedia.org/w/api.php")
+          //val wikiApiUrl = new URL("http://" + Language.English.wikiCode + ".wikipedia.org/w/api.php")
           val wikiApiUrl = new URL("http://live.dbpedia.org/syncw/api.php")
-          val api = new WikiApi(wikiApiUrl, Language.Default)
+          val api = new WikiApi(wikiApiUrl, Language.English)
 
           val pageIDs = api.retrieveTemplateUsageIDs(templateTitle, 500);
           var NumberOfPagesToBeInvalidated = 0;

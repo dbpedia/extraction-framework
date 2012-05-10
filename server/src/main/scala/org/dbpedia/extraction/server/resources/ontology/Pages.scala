@@ -46,7 +46,7 @@ class Pages
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get ontology page: " + title)
-        Server.instance.extractor.ontologyPages(WikiTitle.parse(title, Language.Default)).toXML
+        Server.instance.extractor.ontologyPages(WikiTitle.parse(title, Language.Mappings)).toXML
     }
 
     /**
@@ -60,7 +60,7 @@ class Pages
     {
         try
         {
-            for(page <- XMLSource.fromXML(pageXML))
+            for(page <- XMLSource.fromXML(pageXML, Language.Mappings))
             {
                 Server.instance.extractor.updateOntologyPage(page)
                 logger.info("Updated ontology page: " + title)
@@ -85,7 +85,7 @@ class Pages
     // FIXME: Why @Encoded? Probably wrong.
     def deletePage(@PathParam("title") @Encoded title : String)
     {
-        Server.instance.extractor.removeOntologyPage(WikiTitle.parse(title, Language.Default))
+        Server.instance.extractor.removeOntologyPage(WikiTitle.parse(title, Language.Mappings))
         logger.info("Deleted ontology page: " + title)
     }
 }

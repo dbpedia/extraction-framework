@@ -139,6 +139,6 @@ public class CoreUtil {
      */
     @Deprecated
     public static String wikipediaEncode(String page_title) {
-        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.Default().locale());
+        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
      }
 }

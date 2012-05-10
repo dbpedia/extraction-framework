@@ -2,6 +2,7 @@ package org.dbpedia.extraction.server.resources.ontology
 
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
+import org.dbpedia.extraction.util.Language
 import java.net.URL
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import javax.ws.rs._
@@ -39,7 +40,7 @@ class Validate
         {
             var nodes = new NodeBuffer()
             nodes += <?xml-stylesheet type="text/xsl" href="../../stylesheets/log.xsl"?>
-            nodes += Server.instance.extractor.validateOntologyPages(XMLSource.fromXML(pagesXML).toList)
+            nodes += Server.instance.extractor.validateOntologyPages(XMLSource.fromXML(pagesXML, Language.Mappings).toList)
             logger.info("Validated ontology page: " + title)
             nodes
         }
