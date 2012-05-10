@@ -45,7 +45,7 @@ class UriTriple(uris: Int) {
         end += 1
         if (end >= line.length) return None
       } 
-      triple(3) = line.substring(index + 1, end)
+      triple(2) = line.substring(index + 1, end)
       index = end + 1
       if (index == line.length) return None
       val ch = line.charAt(index)
