@@ -2,6 +2,7 @@ package org.dbpedia.extraction.destinations.formatters
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.NumberUtils.toHex
 import java.net.{URI,URISyntaxException}
 
 /**
@@ -78,7 +79,7 @@ class TerseBuilder(iri: Boolean, quads: Boolean, turtle: Boolean) extends UriTri
       val c = input.codePointAt(offset)
       offset += Character.charCount(c)
 
-      // TODO: use a lookup table for c < 0x80
+      // TODO: use a lookup table for c <= 0xA0? c <= 0xFF?
            if (c == '\\') sb append "\\\\"
       else if (c == '\"') sb append "\\\""
       else if (c == '\n') sb append "\\n"
@@ -87,19 +88,16 @@ class TerseBuilder(iri: Boolean, quads: Boolean, turtle: Boolean) extends UriTri
       else if (c >= 0x0020 && c < 0x007F) sb append c.toChar
       else if (turtle && c >= 0x00A0 && c <= 0xFFFF) sb append c.toChar
       else if (turtle && c >= 0x10000) sb appendCodePoint c
-      else this appendHex c
+      else if (c <= 0xFFFF) appendHex(c, 'u', 4)
+      else appendHex(c, 'U', 8)
     }
     
     this
   }
   
-  private def appendHex(c: Int) {
-    // TODO: use something faster than c.toHexString.toUpperCase and "0" *.
-    // Append chars to the string buffer directly. 
-    val hex = c.toHexString.toUpperCase
-    if (c <= 0xFFFF) sb append "\\u" append "0" * (4 - hex.length)
-    else sb append "\\U" append "0" * (8 - hex.length)
-    sb append hex
+  private def appendHex(c: Int, u: Char, d: Int) {
+    sb append "\\" append u
+    toHex(sb, c, d) 
   }
   
 }
