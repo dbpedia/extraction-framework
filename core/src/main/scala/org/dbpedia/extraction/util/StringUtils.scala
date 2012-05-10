@@ -4,7 +4,6 @@ import java.lang.StringBuilder
 import org.dbpedia.extraction.util.NumberUtils.toHex
 
 /**
- * Defines additional methods on strings, which are missing in the standard library.
  */
 object StringUtils
 {
@@ -27,26 +26,27 @@ object StringUtils
      * 
      * TODO: This method cannot replace code points > 0xFFFF.
      * 
-     * @param chars list of characters that should be escaped if they occur in the string.
+     * @param rep list of replaced characters that should be escaped if they occur in the string.
      * @param target If null, the method may return null or a new StringBuilder. 
      * Otherwise, the method will return the given target.
      * @return null if target was null and no characters had to be escaped
      */
-    def escape(target: StringBuilder, str: String, esc: Char, chars: String): StringBuilder = {
+    def escape(target: StringBuilder, str: String, esc: Char, replace: String): StringBuilder = {
       
       var sb = target
+      val chars = str.toCharArray
       
       var last = 0
       var pos = 0
       
-      while (pos < str.length)
+      while (pos < chars.length)
       {
-        val c = str.charAt(pos)
+        val c = chars(pos)
         
-        if (chars.indexOf(c) != -1) {
+        if (replace.indexOf(c) != -1) {
           
           if (sb == null) sb = new StringBuilder
-          sb.append(str, last, pos)
+          sb.append(chars, last, pos - last)
           last = pos + 1
           
           if (c < 0x80) {
@@ -64,7 +64,7 @@ object StringUtils
         pos += 1
       }
       
-      if (sb != null) sb.append(str, last, str.length)
+      if (sb != null) sb.append(chars, last, chars.length - last)
       
       sb
     }
@@ -131,7 +131,7 @@ object StringUtils
           val rep = replace(c)
           if (rep != null) {
             if (sb == null) sb = new StringBuilder
-            sb.append(str, last, pos)
+            sb.append(chars, last, pos - last)
             last = pos + 1
             sb.append(rep)
           }
@@ -139,7 +139,7 @@ object StringUtils
         pos += 1
       }
       
-      if (sb != null) sb.append(chars, last, chars.length)
+      if (sb != null) sb.append(chars, last, chars.length - last)
       
       sb
     }
@@ -152,33 +152,36 @@ object StringUtils
      * 
      * TODO: This method cannot replace code points > 0xFFFF.
      * 
-     * @param chars list of characters that should be replaced if they occur in the string.
+     * @param rep list of replaced characters
+     * @param by list of replacement characters
      * @param target If null, the method may return null or a new StringBuilder. 
      * Otherwise, the method will return the given target.
      * @return null if target was null and no characters had to be escaped
      */
-    def replaceChars(target: StringBuilder, str: String, chars : String, rep : String) : StringBuilder = {
+    def replaceChars(target: StringBuilder, str: String, replace: String, by: String) : StringBuilder = {
       
       var sb = target
+      val chars = str.toCharArray
+      
       var last = 0
       var pos = 0
       
-      while (pos < str.length)
+      while (pos < chars.length)
       {
-        val ch = str.charAt(pos)
-        val index = chars.indexOf(ch)
+        val ch = chars(pos)
+        val index = replace.indexOf(ch)
         if (index != -1)
         {
           if (sb == null) sb = new StringBuilder()
-          sb.append(str, last, pos)
-          if (index < rep.length) sb.append(rep.charAt(index))
+          sb.append(chars, last, pos - last)
+          if (index < by.length) sb.append(by.charAt(index))
           last = pos + 1
         }
         
         pos += 1
       }
       
-      if (sb != null) sb.append(str, last, str.length)
+      if (sb != null) sb.append(chars, last, chars.length - last)
       
       sb
     }
