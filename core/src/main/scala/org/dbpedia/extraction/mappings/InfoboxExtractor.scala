@@ -144,12 +144,12 @@ class InfoboxExtractor( context : {
 
                 }
 
-                if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
+                if (propertiesFound && (!seenTemplates.contains(template.title.decoded)))
                 {
                     val templateUri = context.language.resourceUri.append(template.title.decodedWithNamespace)
                     quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
                                        templateUri, template.sourceUri, null)
-                    seenTemplates.add(template.title.encoded)
+                    seenTemplates.add(template.title.decoded)
                 }
             }
         }
