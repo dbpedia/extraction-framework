@@ -2,9 +2,8 @@ package org.dbpedia.extraction.wikiparser
 
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.SynchronizedMap
-import java.net.URLEncoder
-
-import org.dbpedia.extraction.util.RichString.toRichString // implicit
+import java.lang.StringBuilder
+import org.dbpedia.extraction.util.StringUtils.{escape,replacements}
 
 /**
  * Base class of all nodes in the abstract syntax tree.
@@ -109,6 +108,17 @@ abstract class Node(val children : List[Node], val line : Int)
     	annotations(key) = value
     }
     
+    // For this list of characters, see ifragment in RFC 3987 and 
+    // https://sourceforge.net/mailarchive/message.php?msg_id=28982391
+    // Only difference to ipchar: don't escape '?'. We don't escape '/' anyway.
+    private val iriEscapes = {
+      val chars = ('\u0000' to '\u001F').mkString + "\"#%<>[\\]^`{|}" + ('\u007F' to '\u009F').mkString
+      val replace = replacements('%', chars)
+      // don't escape space, replace it by underscore
+      replace(' ') = "_"
+      replace
+    }
+
     /**
      * IRI of source page and line number.
      * TODO: rename to sourceIri.
@@ -121,8 +131,8 @@ abstract class Node(val children : List[Node], val line : Int)
 
         if (section != null)
         {
-            // FIXME: section name escaping is incorrect. We need to escape at least control chars.
-            sb append '#' append "section=" append section.name.replace(' ', '_').escape('.', "\"#%<>?[\\]^`{|}")
+            sb append '#' append "section="
+            escape(sb, section.name, iriEscapes)
             sb append "&relative-line=" append (line - section.line)
             sb append "&absolute-line=" append line
         }
