@@ -37,7 +37,7 @@ class AugmenterExtractorTest extends FlatSpec with ShouldMatchers
 
     val context = new
     {
-        def language : Language = Language.Default
+        def language : Language = Language.English
     }
 
     val decoratee = new DummyExtractor(context)

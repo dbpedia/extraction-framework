@@ -36,13 +36,13 @@ class OntologyReader
 
         ontologyBuilder.datatypes = OntologyDatatypes.load()
 
-        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map(Language.Default -> "Thing"), Map(Language.Default -> "Base class of all ontology classes"), List(), Set())
-        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map(Language.Default -> "Property"), Map(), List("owl:Thing"), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map(Language.Mappings -> "Thing"), Map(Language.Mappings -> "Base class of all ontology classes"), List(), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map(Language.Mappings -> "Property"), Map(), List("owl:Thing"), Set())
 
         // TODO: range should be rdfs:Class
-        ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map(Language.Default -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map(Language.Default -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map(Language.Default -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map(Language.Mappings -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map(Language.Mappings -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map(Language.Mappings -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
 
         for(page <- pageNodeSource)
         {
@@ -110,8 +110,8 @@ class OntologyReader
     private def loadClass(name : String, node : TemplateNode) : ClassBuilder =
     {
         new ClassBuilder(name = name,
-                         labels = readTemplatePropertiesByLanguage(node, "rdfs:label"),
-                         comments = readTemplatePropertiesByLanguage(node, "rdfs:comment"),
+                         labels = readTemplatePropertiesByLanguage(node, "rdfs:label") ++ readPropertyTemplatesByLanguage(node, "label"),
+                         comments = readTemplatePropertiesByLanguage(node, "rdfs:comment") ++ readPropertyTemplatesByLanguage(node, "comment"),
                          superClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf"),
                          equivalentClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
     }
@@ -120,8 +120,8 @@ class OntologyReader
     {
         val isObjectProperty = node.title.encoded == OntologyReader.OBJECTPROPERTY_NAME
 
-        val labels = readTemplatePropertiesByLanguage(node, "rdfs:label")
-        val comments = readTemplatePropertiesByLanguage(node, "rdfs:comment")
+        val labels = readTemplatePropertiesByLanguage(node, "rdfs:label") ++ readPropertyTemplatesByLanguage(node, "label")
+        val comments = readTemplatePropertiesByLanguage(node, "rdfs:comment") ++ readPropertyTemplatesByLanguage(node, "comment")
 
         //Type
         val isFunctional = readTemplateProperty(node, "rdf:type") match
@@ -215,28 +215,81 @@ class OntologyReader
             yield elem.trim
     }
 
-    private def readTemplatePropertiesByLanguage(node : TemplateNode, propertyName : String) : Map[Language, String]=
+    private def readTemplatePropertiesByLanguage(node: TemplateNode, propertyName: String) : Map[Language, String]=
     {
-        node.children.filter(_.key.startsWith(propertyName)).flatMap
-        { property =>
-
-            val langCode = property.key.split("@", 2).lift(1).getOrElse("en")
-            Language.get(langCode) match
+      val prefix = propertyName+'@'
+      node.children.filter(_.key.startsWith(prefix)).flatMap
+      { property =>
+        property.key.split("@", 2) match
+        {
+          case Array(prefix, langCode) => Language.get(langCode) match
+          {
+            case Some(language) => property.retrieveText match
             {
-              case Some(language) => property.retrieveText match
-              {
-                  case Some(text) if ! text.trim.isEmpty => Some(language -> text.trim)
-                  case _ => None
-              }
-              case _ =>
-              {
-                logger.warning(node.root.title + " - Language code '" + langCode + "' is not supported. Ignoring corresponding " + propertyName)
-                None
-              }
+              case Some(text) if ! text.trim.isEmpty => Some(language -> text.trim)
+              case _ => None
             }
-        }.toMap
+            case _ =>
+            {
+              logger.warning(node.root.title + " - Language code '" + langCode + "' is not supported. Ignoring corresponding " + propertyName)
+              None
+            }
+          }
+          case _ =>
+          {
+            logger.warning(node.root.title + " - Property '" + property.key + "' could not be parsed. Ignoring corresponding " + propertyName)
+            None
+          }
+        }
+      }.toMap
+    }
+    
+    /**
+     * TODO: this seems to work, but I find it unreadable and ugly. Maybe more procedural, 
+     * less Scala-ish code would be easier to read and actually simpler?
+     */
+    private def readPropertyTemplatesByLanguage(node: TemplateNode, templateName: String) : Map[Language, String] =
+    {
+      val propertyName = templateName + 's' // label -> labels
+      node.children.filter(_.key.equals(propertyName)).flatMap { property =>
+        for (child <- property.children) yield child match {
+          case template @ TemplateNode(title, _, _) if title.decoded equalsIgnoreCase templateName => {
+            readPropertyTemplate(template)
+          }
+          case text: TextNode if text.retrieveText.get.trim.isEmpty => {
+            None // ignore
+          }
+          case _ => {
+            logger.warning(node.root.title+" - Ignoring invalid node '"+child.toWikiText+"' in value of property '"+propertyName+"'.")
+            None
+          }
+        }
+      }.flatten.toMap
     }
 
+    /**
+     * TODO: this seems to work, but I find it unreadable and ugly. Maybe more procedural, 
+     * less Scala-ish code would be easier to read and actually simpler?
+     */
+    private def readPropertyTemplate(template: TemplateNode) : Option[(Language, String)] = {
+      template.children match {
+        case List(lang, text) if lang.key == "1" && text.key == "2" => lang.retrieveText match {
+          case Some(langCode) if ! langCode.trim.isEmpty => Language.get(langCode.trim) match {
+            case Some(language) => text.retrieveText match {
+              case Some(text) if ! text.trim.isEmpty =>
+                return Some(language -> text.trim)
+              case _ => // no text
+            }
+            case _ => // bad language
+          }
+          case _ => // no language
+        }
+        case _ => // bad children
+      }
+      logger.warning(template.root.title+" - Ignoring invalid template "+template.toWikiText)
+      None
+    }
+    
     private class OntologyBuilder
     {
         var classes = List[ClassBuilder]()
@@ -344,6 +397,7 @@ class OntologyReader
                     case Some(clazz) => clazz
                     case None => logger.warning("Domain of property " + name + " (" + domain + ") couldn't be loaded"); return None
                 }
+                // TODO: check RdfNamespace.validate(domain)?
                 case None => logger.warning("Domain of property " + name + " (" + domain + ") does not exist"); return None
             }
 
@@ -361,6 +415,7 @@ class OntologyReader
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
                 }
 
+                // TODO: check RdfNamespace.validate(range)?
                 generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivalentProperties))
             }
             else

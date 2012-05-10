@@ -86,7 +86,7 @@ public class MappingUpdateFeeder extends Thread{
 //                Traversable<WikiPage> trav = wikiPageSource;
 //                Iterable<WikiPage> iter = JavaConversions.asIterable(trav);
 //                for(WikiPage CurrentWikiPage :iter){
-//                    WikiTitle mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.toString(), Language.Default);
+//                    WikiTitle mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.toString(), Language.English);
 //                    System.out.println(mappingTitle);
 //                }
                 

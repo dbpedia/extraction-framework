@@ -117,7 +117,7 @@ class Extraction(@PathParam("lang") langCode : String)
     @Produces(Array("application/xml"))
     def extract(xml : Elem) =
     {
-        val source = XMLSource.fromXML(xml)
+        val source = XMLSource.fromXML(xml, language)
         val destination = new StringDestination(TriX.formatter(2))
         Server.instance.extractor.extract(source, destination, language)
         destination.close()

@@ -63,7 +63,7 @@ object LiveExtractionSource
           //val MyPage =  xml \\ "page";
           //println("LiveExtractionXMLSource PAGE = "+ MyPage);
             //TODO set correct language
-            val language = Language.Default
+            val language = Language.English
 
             for(page <- xml \\ "page";
                 rev <- page \\ "revision")

@@ -12,6 +12,7 @@ import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.sources.Source;
 import org.dbpedia.extraction.sources.XMLSource;
+import org.dbpedia.extraction.util.Language;
 import org.w3c.dom.Document;
 import scala.xml.*;
 
@@ -69,7 +70,7 @@ public class PageProcessor extends Thread{
 
             Node node = XML.loadString(resultingString);
             Elem xmlElem = (Elem) node;
-            Source wikiPageSource = XMLSource.fromXML(xmlElem);
+            Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.English());
             LiveExtractionManager.extractFromPage(xmlElem);
             /////////////////////////////////////////////////////////////
 

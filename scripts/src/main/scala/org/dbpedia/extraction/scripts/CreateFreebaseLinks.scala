@@ -101,7 +101,7 @@ object CreateFreebaseLinks
             uri = uri.replace("$"+codePoint, Integer.parseInt(codePoint, 16).toChar.toString)
         }
         // TODO: which language?
-        WikiUtil.wikiEncode(uri).capitalize(Language.Default.locale)
+        WikiUtil.wikiEncode(uri).capitalize(Language.English.locale)
     }
 
     private def loadURIs(dbpediaDataset : File) : Set[String] =

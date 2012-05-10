@@ -35,7 +35,7 @@ object OntologyDownloader {
   {
     val nanos = System.nanoTime
     println("loading ontology from "+file)
-    new OntologyReader().read(XMLSource.fromFile(file, language = Language.Default))
+    new OntologyReader().read(XMLSource.fromFile(file, Language.Mappings))
     println("loaded ontology from "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
   }
   

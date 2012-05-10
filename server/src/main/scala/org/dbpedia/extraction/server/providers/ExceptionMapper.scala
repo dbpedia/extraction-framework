@@ -17,8 +17,8 @@ class ExceptionMapper extends javax.ws.rs.ext.ExceptionMapper[Throwable]
                 <h2>Error</h2>
                 <table>
                   <tr>
-                    <td valign="top"><strong>Messsage: </strong></td>
-                    <td>{exception.getMessage}</td>
+                    <td valign="top"><strong>Exception: </strong></td>
+                    <td>{exception}</td>
                   </tr>
                   <tr>
                     <td valign="top"><strong>Stacktrace: </strong></td>

@@ -31,7 +31,7 @@ class BooleanParserTest extends FlatSpec with ShouldMatchers
 
     private def parse(input : String) : Option[Boolean] =
     {
-        val page = new WikiPage(WikiTitle.parse("TestPage", Language.Default), null, 0, 0, "1970-01-01T00:00:00Z", input)
+        val page = new WikiPage(WikiTitle.parse("TestPage", Language.English), null, 0, 0, "1970-01-01T00:00:00Z", input)
         
         BooleanParser.parse(parser(page))
     }

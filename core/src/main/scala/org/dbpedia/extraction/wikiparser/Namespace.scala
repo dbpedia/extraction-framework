@@ -45,7 +45,7 @@ private class NamespaceBuilder {
     val namespace = new Namespace(code, name, dbpedia)
     // put() returns the previous value as an option. if there was one, throw an exception
     values.put(code, namespace).foreach(previous => throw new IllegalArgumentException("duplicate namespace: ["+previous+"] and ["+namespace+"]"))
-    if (dbpedia) dbpedias(name.toLowerCase(Language.Default.locale)) = namespace
+    if (dbpedia) dbpedias(name.toLowerCase(Language.Mappings.locale)) = namespace
     namespace
   }
 
@@ -107,7 +107,7 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
   val OntologyProperty = values(202)
   
   def get(lang : Language, name : String) : Option[Namespace] = {
-    dbpedias.get(name.toLowerCase(Language.Default.locale)) match {
+    dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
       case None => Namespaces.codes(lang).get(name.toLowerCase(lang.locale)) match {
         case None => None
         case Some(code) => values.get(code)
