@@ -79,7 +79,7 @@ extends MappingStatsConfig(statsDir, language)
               redirects(templateName) = cleanUri(obj)
             }
           }
-          case _ => if (line.nonEmpty) throw new IllegalArgumentException("line did not match object property triple syntax: " + line)
+          case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match object property triple syntax: " + line)
         }
       }
       
@@ -121,7 +121,7 @@ extends MappingStatsConfig(statsDir, language)
                     resultMap.getOrElseUpdate(templateName, new TemplateStatsBuilder).templateCount += 1
                 }
                 case DatatypePropertyTripleRegex(_,_,_) => // ignore
-                case _ if line.nonEmpty => throw new IllegalArgumentException("line did not match object property triple syntax: " + line)
+                case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match object property triple syntax: " + line)
             }
         }
     }
@@ -147,8 +147,7 @@ extends MappingStatsConfig(statsDir, language)
                         stats.properties.put(propertyName, 0)
                     }
                 }
-                case _ if line.nonEmpty => throw new IllegalArgumentException("line did not match datatype property triple syntax: " + line)
-                case _ =>
+                case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match datatype property triple syntax: " + line)
             }
         }
     }
@@ -176,8 +175,7 @@ extends MappingStatsConfig(statsDir, language)
                         }
                     }
                 }
-                case _ if line.nonEmpty => throw new IllegalArgumentException("line did not match datatype property triple syntax: " + line)
-                case _ =>
+                case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match datatype property triple syntax: " + line)
             }
         }
     }
