@@ -23,7 +23,9 @@ class TerseBuilder(iri: Boolean, quads: Boolean, turtle: Boolean) extends UriTri
   }
   
   override def uri(str: String): Unit = {
-    this add '<' escape(parseUri(str), true) add "> "
+    // Note: If a bad uri contains ">", the line cannot be parsed - but it's broken anyway.
+    // For Turtle, we could fix this by escaping ">" as "\>", but for N-Triples, we can't.
+    this add '<' escape parseUri(str) add "> "
   }
   
   /**
@@ -67,7 +69,7 @@ class TerseBuilder(iri: Boolean, quads: Boolean, turtle: Boolean) extends UriTri
   /**
    * Escapes a Unicode string according to N-Triples / Turtle format.
    */
-  private def escape(input: String, uri: Boolean = false): TerseBuilder =
+  private def escape(input: String): TerseBuilder =
   {
     val length = input.length
     
@@ -83,7 +85,6 @@ class TerseBuilder(iri: Boolean, quads: Boolean, turtle: Boolean) extends UriTri
       else if (c == '\n') sb append "\\n"
       else if (c == '\r') sb append "\\r";
       else if (c == '\t') sb append "\\t"
-      else if (uri && c == '>') sb append "\\>"
       else if (c >= 0x0020 && c < 0x007F) sb append c.toChar
       else if (turtle && c >= 0x00A0 && c <= 0xFFFF) sb append c.toChar
       else if (turtle && c >= 0x10000) sb appendCodePoint c
