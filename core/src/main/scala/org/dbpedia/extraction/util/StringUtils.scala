@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.util
 
 import java.lang.StringBuilder
+import org.dbpedia.extraction.util.NumberUtils.toHex
 
 /**
  * Defines additional methods on strings, which are missing in the standard library.
@@ -21,6 +22,8 @@ object StringUtils
      * 
      * This method is pretty inefficient. If it is repeatedly used with the same chars, 
      * you should use replacements() and escape() below.
+     * 
+     * TODO: don't double-escape existing escape sequences
      * 
      * TODO: This method cannot replace code points > 0xFFFF.
      * 
@@ -48,12 +51,12 @@ object StringUtils
           
           if (c < 0x80) {
             sb append esc
-            NumberUtils.toHex(sb, c, 2)
+            toHex(sb, c, 2)
           } else {
             val bytes = new String(Array(c)).getBytes("UTF-8")
             for (b <- bytes) {
               sb append esc
-              NumberUtils.toHex(sb, b, 2)
+              toHex(sb, b, 2)
             }
           }
           
@@ -83,12 +86,13 @@ object StringUtils
           val sb = new StringBuilder
           if (c < 0x80) {
             sb append esc
-            NumberUtils.toHex(sb, c, 2)
+            toHex(sb, c, 2)
           } else {
+            // TODO: do it like java.net.URI.encode(), probably faster
             val bytes = new String(Array(c)).getBytes("UTF-8")
             for (b <- bytes) {
               sb append esc
-              NumberUtils.toHex(sb, b, 2)
+              toHex(sb, b, 2)
             }
           }
           replace(c) = sb.toString
@@ -102,6 +106,8 @@ object StringUtils
      * Build a copy of the given string, replacing some chars by replacement strings. 
      * The replacement array is indexed by character value. Only characters for which
      * the replacement array contains a non-null value will be replaced.
+     * 
+     * TODO: don't double-escape existing escape sequences
      * 
      * TODO: This method cannot replace code points > 0xFFFF.
      * 
