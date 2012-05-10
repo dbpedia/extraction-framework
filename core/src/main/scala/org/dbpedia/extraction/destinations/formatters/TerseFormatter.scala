@@ -19,7 +19,7 @@ final class TerseFormatter(iri: Boolean, quads: Boolean, turtle: Boolean) extend
   }
   
   override def write(writer : Writer, quad : Quad) = {
-    writer.write(new TerseBuilder(iri, turtle, quads).render(quad))
+    writer.write(new TerseBuilder(iri, quads, turtle).render(quad))
   }
 }
 
