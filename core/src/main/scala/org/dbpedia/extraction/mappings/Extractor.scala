@@ -11,8 +11,6 @@ import org.dbpedia.extraction.util.Language
  * 
  * TODO: improve class hierarchy and object tree. It doesn't smell right that the apply method
  * is only called on the root of a tree of extractors, and extract is called on all others.
- * The code that generates the subject URI should be moved to PageNode. 
- * See Node.sourceUriPrefix which is somewhat similar to retrieveTitle below.
  */
 trait Extractor extends (PageNode => Graph)
 {
@@ -24,12 +22,11 @@ trait Extractor extends (PageNode => Graph)
      */
     final def apply(page : PageNode) : Graph =
     {
-        //If the page is not english, retrieve the title of the corresponding english article
-        val title = retrieveTitle(page).getOrElse(return new Graph())
-        //Generate the page URI
-        val uri = page.title.language.resourceUri.append(title.decodedWithNamespace)
-        //Extract
-        extract(page, uri, new PageContext())
+      //Generate the page URI
+      val uri = page.title.language.resourceUri.append(page.title.decodedWithNamespace)
+      
+      //Extract
+      extract(page, uri, new PageContext())
     }
 
     /**
@@ -42,29 +39,6 @@ trait Extractor extends (PageNode => Graph)
      */
     def extract(page : PageNode, subjectUri : String, context : PageContext) : Graph
 
-    /**
-     * Retrieves the corresponding title of a page.
-     */
-    private def retrieveTitle(page : PageNode) : Option[WikiTitle] =
-    {
-        //#int if all titles true, original name implied true
-        val retrieveAllTitles=true
-        
-        //#int if all titles false option to extract with original name
-        val retrieveOriginalName=true
-
-        if (retrieveAllTitles || page.title.language.wikiCode == "en") return Some(page.title)
-
-        // TODO comment: why reverse? probably just a performance thing. interwiki links are usually at the end.
-        // TODO: are InterWikiLinkNode always top-level children? 
-        for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterLanguageLink && destination.language == Language.Default)
-        {
-            if (retrieveOriginalName) return Some(page.title)
-            else return Some(destination)
-        }
-
-        None
-    }
 }
 
 /**
