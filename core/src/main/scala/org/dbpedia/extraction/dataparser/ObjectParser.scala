@@ -30,7 +30,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
     {
         val pageNode = node.root
 
-        if (!strict)
+        if (! strict)
         {
             for (child <- node :: node.children) child match
             {
@@ -89,10 +89,10 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
      */
     private def getAdditionalWikiTitle(surfaceForm : String, pageNode : PageNode) : Option[WikiTitle] =
     {
-        surfaceForm.trim.capitalize match
+        surfaceForm.trim.toLowerCase(context.language.locale) match
         {
             case "" => None
-            case sf : String => getTitleForSurfaceForm(sf, pageNode)
+            case sf: String => getTitleForSurfaceForm(sf, pageNode)
         }
     }
 
@@ -102,8 +102,9 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         {
             case linkNode : InternalLinkNode =>
             {
+                // TODO: Here we match the link label. Should we also match the link target?
                 val linkText = linkNode.children.collect{case TextNode(text, _) => text}.mkString("")
-                if(linkText.capitalize == surfaceForm)
+                if(linkText.toLowerCase(context.language.locale) == surfaceForm)
                 {
                     return Some(linkNode.destination)
                 }
