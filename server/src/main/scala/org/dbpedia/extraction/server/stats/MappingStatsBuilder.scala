@@ -16,41 +16,76 @@ import org.dbpedia.extraction.server.stats.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
-object UriAndMore {
-  def unapply(in: String) : Option[(String, String)] =  {
-    val str = in.trim
-    if (str.charAt(0) != '<') None
-    else {
-      val close = str.indexOf('>')
-      if (close == -1) None
-      else Some(str.substring(1,close), str.substring(close + 1))
+class UriTriple(uris: Int) {
+  /** @param line must not start or end with whitespace - use line.trim. */
+  def unapplySeq(line: String) : Option[Seq[String]] =  {
+    var count = 0
+    var index = 0
+    val triple = new Array[String](3)
+    while (count < uris) {
+      if (index == line.length || line.charAt(index) != '<') return None
+      var end = index
+      do {
+        end += 1
+        if (end == line.length) return None
+      } while (line.charAt(end) != '>')
+      triple(count) = line.substring(index + 1, end)
+      count += 1
+      index = end + 1
+      while (index < line.length && line.charAt(index) == ' ') {
+        index += 1 // skip space
+      } 
     }
-  }
-}
-
-object ObjectTriple {
-  def unapply(line: String) : Option[(String, String, String)] =  {
-    line match {
-      case UriAndMore(subj, rest) => rest match {
-        case UriAndMore(pred, rest) => rest match {
-          case UriAndMore(obj, rest) => rest.trim match {
-            case "." => Some((subj, pred, obj))
-            case _ => None
-          }
-          case _ => None
-        }
-        case _ => None
+    
+    if (uris == 2) { // literal
+      if (index == line.length || line.charAt(index) != '"') return None
+      var end = index + 1
+      while (line.charAt(end) != '"') {
+        if (line.charAt(end) == '\\') end += 1
+        end += 1
+        if (end >= line.length) return None
+      } 
+      triple(3) = line.substring(index + 1, end)
+      index = end + 1
+      if (index == line.length) return None
+      val ch = line.charAt(index)
+      if (ch == '@') { // lang: @[a-zA-Z][a-zA-Z0-9-]*
+        index += 1 // skip '@'
+        if (index == line.length) return None
+        var c = line.charAt(index)
+        if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z')) return None
+        do {
+          index += 1 // skip last lang char
+          if (index == line.length) return None
+          c = line.charAt(index)
+        } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
       }
-      case _ => None
+      else if (ch == '^') { // type uri: ^^<...>
+        index += 1 // skip '^'
+        if (index == line.length || line.charAt(index) != '^') return None
+        index += 1 // skip '^'
+        if (index == line.length || line.charAt(index) != '<') return None
+        do {
+          index += 1
+          if (index == line.length) return None
+        } while (line.charAt(index) != '>')
+        index += 1 // skip '>'
+      } else {
+        return None
+      }
+      while (index < line.length && line.charAt(index) == ' ') {
+        index += 1 // skip space
+      } 
     }
+    if (index + 1 != line.length || line.charAt(index) != '.') return None
+    Some(triple)
   }
+  
 }
+    
+object ObjectTriple extends UriTriple(3)
 
-object DatatypeTriple {
-  def unapply(line: String) : Option[(String, String, String)] =  {
-    None
-  }
-}
+object DatatypeTriple extends UriTriple(2)
 
 class MappingStatsBuilder(statsDir : File, language: Language)
 extends MappingStatsConfig(statsDir, language)
@@ -105,14 +140,14 @@ extends MappingStatsConfig(statsDir, language)
     {
       val redirects = new mutable.HashMap[String, String]()
       eachLine(file) {
-        line => line match {
+        line => line.trim match {
           case ObjectTriple(subj, pred, obj) => {
             val templateName = cleanUri(subj)
             if (templateName.startsWith(templateNamespace)) {
               redirects(templateName) = cleanUri(obj)
             }
           }
-          case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match object property triple syntax: " + line)
+          case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
         }
       }
       
@@ -140,7 +175,7 @@ extends MappingStatsConfig(statsDir, language)
     {
         // iterate through infobox properties
         eachLine(file) {
-            line => line match {
+            line => line.trim match {
                 // if there is a wikiPageUsesTemplate relation
                 case ObjectTriple(subj, pred, obj) => if (unescape(pred) contains "wikiPageUsesTemplate")
                 {
@@ -154,7 +189,7 @@ extends MappingStatsConfig(statsDir, language)
                     resultMap.getOrElseUpdate(templateName, new TemplateStatsBuilder).templateCount += 1
                 }
                 case DatatypeTriple(_,_,_) => // ignore
-                case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match object property triple syntax: " + line)
+                case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object or datatype triple syntax: " + line)
             }
         }
     }
@@ -163,7 +198,7 @@ extends MappingStatsConfig(statsDir, language)
     {
         // iterate through template parameters
         eachLine(file) {
-            line => line match {
+            line => line.trim match {
                 case DatatypeTriple(subj, pred, obj) =>
                 {
                     var templateName = cleanUri(subj)
@@ -180,7 +215,7 @@ extends MappingStatsConfig(statsDir, language)
                         stats.properties.put(propertyName, 0)
                     }
                 }
-                case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match datatype property triple syntax: " + line)
+                case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match datatype triple syntax: " + line)
             }
         }
     }
@@ -189,7 +224,7 @@ extends MappingStatsConfig(statsDir, language)
     {
         // iterate through infobox test
         eachLine(file) {
-            line => line match {
+            line => line.trim match {
                 case DatatypeTriple(subj, pred, obj) => {
                     var templateName = cleanUri(pred)
                     val propertyName = cleanValue(obj)
@@ -208,7 +243,7 @@ extends MappingStatsConfig(statsDir, language)
                         }
                     }
                 }
-                case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match datatype property triple syntax: " + line)
+                case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match datatype triple syntax: " + line)
             }
         }
     }
@@ -238,6 +273,7 @@ extends MappingStatsConfig(statsDir, language)
             else
             {
                 offset += 1
+                // FIXME: check string length 
                 val specialChar = value.charAt(offset)
                 specialChar match
                 {
@@ -249,6 +285,7 @@ extends MappingStatsConfig(statsDir, language)
                     case 'u' =>
                     {
                         offset += 1
+                        // FIXME: check string length 
                         val codepoint = value.substring(offset, offset + 4)
                         val character = Integer.parseInt(codepoint, 16).asInstanceOf[Char]
                         sb append character
@@ -257,6 +294,7 @@ extends MappingStatsConfig(statsDir, language)
                     case 'U' =>
                     {
                         offset += 1
+                        // FIXME: check string length 
                         val codepoint = value.substring(offset, offset + 8)
                         val character = Integer.parseInt(codepoint, 16)
                         sb appendCodePoint character
