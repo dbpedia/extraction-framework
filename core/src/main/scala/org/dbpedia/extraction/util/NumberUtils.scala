@@ -7,10 +7,10 @@ import java.lang.StringBuilder
  */
 object NumberUtils {
   
-  def toHex(num: Int, digits: Int): String = toHex(new StringBuilder, num, digits).toString
-  
   private val chars = "0123456789ABCDEF".toCharArray
     
+  def toHex(num: Int, digits: Int): String = toHex(new StringBuilder, num, digits).toString
+  
   /**
    * Appends hex digits for number to string builder. Number is treated as unsigned number.
    * @digits must be >= 0 and <= 8
