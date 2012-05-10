@@ -17,14 +17,13 @@ class OntologyProperty( name : String, labels : Map[Language, String], comments 
                         val domain : OntologyClass, val range : OntologyType, val isFunctional : Boolean = false,
                         val equivalentProperties : Set[OntologyProperty] = Set()) extends OntologyEntity(name, labels, comments)
 {
-    require(OntologyNamespaces.skipValidation(name) || domain != null, "domain != null")
-    require(OntologyNamespaces.skipValidation(name) || range != null, "range != null")
+    require(! RdfNamespace.validate(name) || domain != null, "domain != null")
+    require(! RdfNamespace.validate(name) || range != null, "range != null")
     require(equivalentProperties != null, "equivalentPropertyNames != null")
     
-    // FIXME: the last parameter selects IRI or URI format. This is the wrong place for that choice.
-    val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE, Language.Default)
+    val uri = RdfNamespace.fullUri(name, DBpediaNamespace.ONTOLOGY)
 
-    val isExternalProperty = ! uri.startsWith(OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
+    val isExternalProperty = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)
     
     override def toString = uri
 

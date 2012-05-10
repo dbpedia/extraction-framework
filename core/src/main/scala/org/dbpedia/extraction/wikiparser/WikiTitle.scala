@@ -8,7 +8,6 @@ import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.uri.UriDecoder
 import scala.collection.mutable.ListBuffer
-import org.dbpedia.extraction.ontology.OntologyNamespaces.encodeAsURI
 
 /**
  * Represents a page title.

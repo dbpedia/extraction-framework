@@ -6,7 +6,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
 
 /**
@@ -29,7 +29,7 @@ class InfoboxExtractor( context : {
 
     private val language = context.language.wikiCode
 
-    private val usesTemplateProperty = OntologyNamespaces.getProperty("wikiPageUsesTemplate", context.language)
+    private val usesTemplateProperty = context.language.propertyUri.append("wikiPageUsesTemplate")
 
     private val MinPropertyCount = 2
 
@@ -52,11 +52,10 @@ class InfoboxExtractor( context : {
     // Regexes
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // TODO: i18n
     private val RankRegex = """(?i)([0-9]+)\s?(?:st|nd|rd|th)""".r
 
     private val SplitWordsRegex = """_+|\s+|\-|:+""".r
-
-    private val LeadingNumberRegex = """^[0-9]+.*""".r
 
     private val TrailingNumberRegex = """[0-9]+$""".r
 
@@ -121,11 +120,7 @@ class InfoboxExtractor( context : {
                         {
                             quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
-                            //#int #statistics uncomment the following 2 lines (do not delete)
-                            // FIXME: why replace \n and \t by space? A URI containing spaces is invalid.
-                            // If it's just about \n and \t at the end, that's unnecessary - 
-                            // trim removes all whitespace, not just " ".
-                            val stat_template = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language).replace("\n", " ").replace("\t", " ").trim
+                            val stat_template = context.language.resourceUri.append(template.title.decodedWithNamespace)
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
                             quads ::= new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
                                                stat_property, node.sourceUri, context.ontology.datatypes("xsd:string"))
@@ -151,8 +146,7 @@ class InfoboxExtractor( context : {
 
                 if (propertiesFound && (!seenTemplates.contains(template.title.encoded)))
                 {
-                    //oldTODO change domain ????
-                    val templateUri = OntologyNamespaces.getResource(template.title.encodedWithNamespace, context.language)  //templateNamespace + ":" + template.title.encoded
+                    val templateUri = context.language.resourceUri.append(template.title.decodedWithNamespace)
                     quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
                                        templateUri, template.sourceUri, null)
                     seenTemplates.add(template.title.encoded)
@@ -273,24 +267,12 @@ class InfoboxExtractor( context : {
         var result = key.toLowerCase(context.language.locale).trim
         result = result.toCamelCase(SplitWordsRegex, context.language.locale)
 
-        // Replace digits at the beginning of a property with _. E.g. 01propertyName => _01propertyName (edited by Piet)
-        // TODO: this probably was an attempt to avoid property names that cannot be used
-        // as XML element names, but there are many other such cases. All these cases can
-        // be fixed by appending an underscore at the *end*, not in the *front*.
-        result = LeadingNumberRegex.replaceFirstIn(result, "_" + result)
-
         // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
         result = TrailingNumberRegex.replaceFirstIn(result, "")
 
-        result = WikiUtil.wikiEncode(result)
+        result = WikiUtil.cleanSpace(result)
 
-        //TODO add this as option in settings
-        //result = result.replace("%", "_percent_")
-
-        // TODO maximal length of properties? (was 250)
-        
-        OntologyNamespaces.getProperty(result, context.language)
-        //OntologyNamespaces.DBPEDIA_GENERAL_NAMESPACE + result
+        context.language.propertyUri.append(result)
     }
 
     private def getPropertyLabel(key : String) : String =

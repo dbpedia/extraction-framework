@@ -122,7 +122,7 @@ abstract class Node(val children : List[Node], val line : Int)
         if (section != null)
         {
             // TODO: is section name escaping correct?
-            sb append '#' append "section=" append section.name.replace(' ', '_').dotEscape("\"#%<>?[\\]^`{|}")
+            sb append '#' append "section=" append section.name.replace(' ', '_').escape('.', "\"#%<>?[\\]^`{|}")
             sb append "&relative-line=" append (line - section.line)
             sb append "&absolute-line=" append line
         }

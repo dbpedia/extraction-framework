@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -10,7 +10,7 @@ import org.dbpedia.extraction.util.Language
  */
 class TemplateParameterExtractor(context: { def ontology : Ontology; def language : Language } ) extends Extractor
 {
-    private val templateParameterProperty = OntologyNamespaces.getProperty("templateUsesParameter", context.language)
+    private val templateParameterProperty = context.language.propertyUri.append("templateUsesParameter")
 
     val parameterRegex = """(?s)\{\{\{([^|}{<>]*)[|}<>]""".r
     

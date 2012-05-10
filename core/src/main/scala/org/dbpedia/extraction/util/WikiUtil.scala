@@ -59,7 +59,8 @@ object WikiUtil
         // trim underscores from end 
         encoded = encoded.replaceAll("_$", "");
 
-        encoded.uriEscape("\"#%<>?[\\]^`{|}")
+        // TODO: use StringUtils.replacements
+        encoded.escape('%', "\"#%<>?[\\]^`{|}")
     }
     
         

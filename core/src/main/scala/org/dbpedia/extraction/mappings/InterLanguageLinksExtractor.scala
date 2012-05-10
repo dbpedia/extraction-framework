@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.InterLanguageLinksExtractorConfig
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 
@@ -32,7 +32,7 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
               if (dst.isInterLanguageLink && intLinksSet.contains(dst.language.wikiCode)) {
                 val lang = dst.language
                 quads ::= new Quad(context.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
-                  OntologyNamespaces.getResource(dst.encodedWithNamespace, lang), link.sourceUri, null)
+                  lang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri, null)
               }
             case _ => // ignore
           }

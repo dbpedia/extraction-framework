@@ -5,7 +5,7 @@ import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.ontology.{OntologyClass, Ontology, OntologyNamespaces, OntologyProperty}
+import org.dbpedia.extraction.ontology.{OntologyClass, Ontology, DBpediaNamespace, OntologyProperty}
 
 class CalculateMapping( val templateProperty1 : String,
                         val templateProperty2 : String,
@@ -128,7 +128,7 @@ class CalculateMapping( val templateProperty1 : String,
             for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
-                 val propertyUri = OntologyNamespaces.DBPEDIA_SPECIFICPROPERTY_NAMESPACE + currentClass.name + "/" + ontologyProperty.name
+                 val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)
                  val quad = new Quad(context.language, DBpediaDatasets.SpecificProperties, subjectUri,
                                      propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
                  graph = graph.merge(new Graph(quad))

@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.Graph
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
 
@@ -28,7 +27,7 @@ trait Extractor extends (PageNode => Graph)
         //If the page is not english, retrieve the title of the corresponding english article
         val title = retrieveTitle(page).getOrElse(return new Graph())
         //Generate the page URI
-        val uri = OntologyNamespaces.getResource(title.encodedWithNamespace, page.title.language)
+        val uri = page.title.language.resourceUri.append(title.decodedWithNamespace)
         //Extract
         extract(page, uri, new PageContext())
     }

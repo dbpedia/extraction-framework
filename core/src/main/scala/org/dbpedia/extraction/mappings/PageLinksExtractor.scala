@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -39,7 +39,6 @@ class PageLinksExtractor( context : {
 
     private def getUri(destination : WikiTitle) : String =
     {
-        OntologyNamespaces.getResource(destination.encodedWithNamespace, context.language)
-        //OntologyNamespaces.getUri(destination.encodedWithNamespace, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        context.language.resourceUri.append(destination.decodedWithNamespace)
     }
 }

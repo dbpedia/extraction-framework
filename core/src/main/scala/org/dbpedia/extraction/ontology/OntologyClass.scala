@@ -19,11 +19,10 @@ class OntologyClass(name : String, labels : Map[Language, String], comments : Ma
     require(labels != null, "labels != null")
     require(comments != null, "comments != null")
     require(subClassOf != null, "subClassOf != null")
-    require(name == "owl:Thing" || subClassOf.nonEmpty || OntologyNamespaces.skipValidation(name), "subClassOf.nonEmpty")
+    require(name == "owl:Thing" || subClassOf.nonEmpty || ! RdfNamespace.validate(name), "subClassOf.nonEmpty")
     require(equivalentClasses != null, "equivalentClasses != null")
 
-    // FIXME: the last parameter selects IRI or URI format. This is the wrong place for that choice.
-    override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE, Language.Default)
+    override val uri = RdfNamespace.fullUri(name, DBpediaNamespace.ONTOLOGY)
 
-    val isExternalClass = ! uri.startsWith(OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
+    val isExternalClass = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)
 }

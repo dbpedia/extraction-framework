@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.config.mappings.TopicalConceptsExtractorConfig
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Graph, Quad}
@@ -40,8 +40,7 @@ class TopicalConceptsExtractor( context : {
 
             try {
                 val quads = allTemplates.flatMap{ template =>
-                    val mainResource = OntologyNamespaces.getResource(
-                      WikiUtil.wikiEncode(template.property("1").get.retrieveText.get), context.language)
+                    val mainResource = context.language.resourceUri.append(template.property("1").get.retrieveText.get)
                     (new Quad(context.language,
                         DBpediaDatasets.TopicalConcepts,
                         subjectUri,
