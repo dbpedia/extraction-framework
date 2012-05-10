@@ -63,8 +63,7 @@ object Language extends (String => Language)
     // TODO: this should not be hard-coded.
     val generic = Set[String]() // Set("en")
     
-    def language(code : String, iso: String): Language =
-      new Language(code, iso, generic.contains(code))
+    def language(code : String, iso: String): Language = new Language(code, iso, generic.contains(code))
     
     val languages = new HashMap[String,Language]
     
