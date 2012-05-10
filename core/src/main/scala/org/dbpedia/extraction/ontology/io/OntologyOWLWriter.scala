@@ -171,7 +171,7 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 
     private def writeSpecificProperty(clazz : OntologyClass, property : OntologyProperty, unit : UnitDatatype) : scala.xml.Elem =
     {
-        val propertyUri = OntologyNamespaces.DBPEDIA_SPECIFICPROPERTY_NAMESPACE + clazz.name + "/" + property.name
+        val propertyUri = DBpediaNamespace.ONTOLOGY.append(clazz.name+'/'+property.name)
 
         //Append the unit to the label
         val labelPostfix = " (" + unit.unitLabels.toList.sortWith(_.size < _.size).headOption.getOrElse("") + ")"

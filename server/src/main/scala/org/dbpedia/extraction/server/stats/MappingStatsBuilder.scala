@@ -11,7 +11,6 @@ import scala.Serializable
 import scala.collection
 import scala.collection.mutable
 import java.io._
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
 import org.dbpedia.extraction.server.stats.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}
@@ -22,7 +21,7 @@ extends MappingStatsConfig(statsDir, language)
 {
     private val logger = Logger.getLogger(getClass.getName)
 
-    private val resourceUriPrefix = OntologyNamespaces.getResource("", language)
+    private val resourceUriPrefix = language.resourceUri.append("")
 
     private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> \.""".r
     private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.*)"\S* \.""".r

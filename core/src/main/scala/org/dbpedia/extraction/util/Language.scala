@@ -1,14 +1,16 @@
 package org.dbpedia.extraction.util
 
 import java.util.Locale
+import scala.collection.mutable.HashMap
+import org.dbpedia.extraction.ontology.DBpediaNamespace
 
 /**
  * Represents a MediaWiki instance and the language used on it. Initially, this class was
  * only used for xx.wikipedia.org instances, but now we also use it for mappings.dbpedia.org.
  * For each language, there is only one instance of this class.
- * TODO: rename this class to WikiCode or so, add a value for mappings.dbpedia.org.
+ * TODO: rename this class to WikiCode or so.
  */
-class Language private(val wikiCode : String, val isoCode: String) extends Serializable
+class Language private(val wikiCode : String, val isoCode: String, generic: Boolean) extends Serializable
 {
     // TODO: make this transient and add a readObject method. Better yet: never use Serializable
     val locale = new Locale(isoCode)
@@ -18,6 +20,21 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
      * but Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
      */
     val filePrefix = wikiCode.replace("-", "_")
+    
+    /**
+     * DBpedia base URI for this language, e.g. "http://de.dbpedia.org", "http://dbpedia.org"
+     */
+    private def dbpedia = "http://"+(if (generic) "" else wikiCode+'.')+"dbpedia.org"
+    
+    /**
+     * DBpedia resource namespace for this language, e.g. "http://de.dbpedia.org/resource" or "http://dbpedia.org/resource"
+     */
+    val resourceUri = new DBpediaNamespace(dbpedia+"/resource/")
+    
+    /**
+     * DBpedia property namespace for this language, e.g. "http://de.dbpedia.org/property" or "http://dbpedia.org/property"
+     */
+    val propertyUri = new DBpediaNamespace(dbpedia+"/property/")
     
     /**
      * URI prefix for this wiki, e.g. "http://be-x-old.wikipedia.org", "http://commons.wikimedia.org",
@@ -41,9 +58,15 @@ object Language extends (String => Language)
 {
   implicit val wikiCodeOrdering = Ordering.by[Language, String](_.wikiCode)
   
-  val Values =
-  {
-    val languages = new collection.mutable.HashMap[String,Language]
+  val Values = locally {
+    
+    // TODO: this should not be hard-coded.
+    val generic = Set[String]() // Set("en")
+    
+    def language(code : String, iso: String): Language =
+      new Language(code, iso, generic.contains(code))
+    
+    val languages = new HashMap[String,Language]
     
     // All two-letter codes from http://noc.wikimedia.org/conf/langlist as of 2012-04-15,
     // minus the redirected codes cz,dk,jp,sh (they are in the nonIsoCodes map below)
@@ -184,13 +207,13 @@ object Language extends (String => Language)
       "zh-yue" -> "zh"         // Cantonese
     )
     
-    for (iso <- isoCodes) languages(iso) = new Language(iso, iso)
+    for (iso <- isoCodes) languages(iso) = language(iso, iso)
 
     // We could throw an exception if the mapped ISO code is not in the set of ISO codes, but then 
     // this class (and thus the whole system) wouldn't load, and that set may change depending on 
     // JDK version, and the affected wiki code may not even be used. Just silently ignore it. 
     // TODO: let this loop build a list of codes with bad mappings and throw the exception later.
-    for ((code, iso) <- nonIsoCodes; if (isoCodes.contains(iso))) languages(code) = new Language(code, iso)
+    for ((code, iso) <- nonIsoCodes) if (isoCodes.contains(iso)) languages(code) = language(code, iso)
     
     languages.toMap // toMap makes immutable
   }

@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
@@ -55,8 +55,6 @@ class SkosCategoriesExtractor( context : {
     private def getUri(destination : WikiTitle) : String =
     {
         val categoryNamespace = Namespace.Category.getName(context.language)
-        
-        OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
-        //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
+        context.language.resourceUri.append(categoryNamespace+':'+destination.decoded)
     }
 }

@@ -7,7 +7,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology._
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.TemplateNode
-import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty, OntologyNamespaces, OntologyClass, OntologyProperty}
+import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty,OntologyClass,OntologyProperty,DBpediaNamespace}
 
 class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNodeMapping and CreateMappingStats requires this to be public. Is there a better way?
                              ontologyProperty : OntologyProperty,
@@ -178,7 +178,7 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
             for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
-                 val propertyUri = OntologyNamespaces.DBPEDIA_SPECIFICPROPERTY_NAMESPACE + currentClass.name + "/" + ontologyProperty.name
+                 val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)
                  val quad = new Quad(language, DBpediaDatasets.SpecificProperties, subjectUri,
                                      propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
                  graph = graph.merge(new Graph(quad))

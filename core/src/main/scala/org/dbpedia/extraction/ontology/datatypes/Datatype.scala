@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.ontology.datatypes
 
-import org.dbpedia.extraction.ontology.{OntologyType, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.{OntologyType,RdfNamespace,DBpediaNamespace}
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -22,8 +22,7 @@ class Datatype(name : String, labels : Map[Language, String], comments : Map[Lan
     /**
      * The URI of this datatype
      */
-    // FIXME: the last parameter selects IRI or URI format. This is the wrong place for that choice.
-    override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_DATATYPE_NAMESPACE, Language.Default)
+    override val uri = RdfNamespace.fullUri(name, DBpediaNamespace.DATATYPE)
 
-    val isExternalProperty = ! uri.startsWith(OntologyNamespaces.DBPEDIA_DATATYPE_NAMESPACE)
+    val isExternalProperty = ! uri.startsWith(DBpediaNamespace.DATATYPE.namespace)
 }

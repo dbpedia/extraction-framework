@@ -49,30 +49,21 @@ class RichString(str : String)
     }
     
     /**
-     * @param chars list of characters that should be percent-encoded if they occur in the string.
-     * Must be ASCII characters, i.e. Unicode code points from U+0020 to U+007F (inclusive).
-     * This method does not correctly escape characters outside that range.
-     * TODO: this method is pretty inefficient. It is used with the same chars all the time, 
-     * so we should have an array containing their escaped values and use a lookup table.
+     * Return a copy of this string in which all occurrences of chars from the given string
+     * have been converted to UTF-8 hex representation where each two-digit hex byte is prefixed
+     * by the given escape character.
+     * 
+     * TODO: This method does not work for code points > 0xFFFF.
+     * 
+     * @param chars list of characters that should be escaped if they occur in the string.
+     * 
+     * TODO: this method is pretty inefficient. It is usually used with the same chars all the 
+     * time, so we should have an array containing their escaped values and use a lookup table.
      */
-    def uriEscape(chars : String) : String = {
-        val sb = new StringBuilder
-        for (c <- str) if (chars.indexOf(c) == -1) sb append c else sb append '%' append c.toInt.toHexString.toUpperCase(Locale.ENGLISH)
-        sb.toString
-    }      
-    
-    /**
-     * @param chars list of characters that should be percent-encoded if they occur in the string.
-     * Must be ASCII characters, i.e. Unicode code points from U+0020 to U+007F (inclusive).
-     * This method does not correctly escape characters outside that range.
-     * TODO: this method is pretty inefficient. It is used with the same chars all the time, 
-     * so we should have an array containing their escaped values and use a lookup table.
-     */
-    def dotEscape(chars : String) : String = {
-        val sb = new StringBuilder
-        for (c <- str) if (chars.indexOf(c) == -1) sb append c else sb append '.' append c.toInt.toHexString.toUpperCase(Locale.ENGLISH)
-        sb.toString
-    }      
+    def escape(esc: Char, chars : String): String = {
+      val sb = StringUtils.escape(null, str, esc, chars)
+      if (sb == null) str else sb.toString
+    }
     
     /**
      * return a copy of this string in which all occurrences of chars from the first string
@@ -80,52 +71,12 @@ class RichString(str : String)
      * corresponding char (i.e. the second string is shorter than the first one), the affected
      * char is removed.
      * 
-     * This method does not work for code points > 0xFFFF.
+     * TODO: This method does not work for code points > 0xFFFF.
+     * 
+     * @param chars list of characters that should be replaced if they occur in the string.
      */
-    def replaceChars(chars : String, rep : String) : String = {
-      replace(chars, (sb, index, ch) => if (index < rep.length) sb.append(rep.charAt(index)) )
-    }
-
-    /**
-     * @param chars list of characters that should be percent-encoded if they occur in the string.
-     * Must be ASCII characters, i.e. Unicode code points from U+0020 to U+007F (inclusive).
-     * This method does not correctly escape characters outside that range.
-     * TODO: this method is pretty inefficient. It is used with the same chars all the time, 
-     * so we should have an array containing their escaped values and use a lookup table.
-     */
-    def escape(esc: Char, chars : String) : String = {
-      replace(chars, (sb, index, ch) => sb append esc append ch.toInt.toHexString.toUpperCase(Locale.ENGLISH))
-    }
-    
-    /**
-     * @param chars list of characters that should be percent-encoded if they occur in the string.
-     * Must be ASCII characters, i.e. Unicode code points from U+0020 to U+007F (inclusive).
-     * This method does not correctly escape characters outside that range.
-     * TODO: this method is pretty inefficient. It is used with the same chars all the time, 
-     * so we should have an array containing their escaped values and use a lookup table.
-     */
-    private def replace(chars : String, append: (StringBuilder, Int, Char) => Unit ) : String = {
-      
-      var sb : StringBuilder = null
-      var last = 0
-      var pos = 0
-      
-      while (pos < str.length)
-      {
-        val ch = str.charAt(pos)
-        val index = chars.indexOf(ch)
-        if (index != -1)
-        {
-          if (sb == null) sb = new StringBuilder()
-          sb.append(str, last, pos)
-          append(sb, index, ch)
-          last = pos + 1
-        }
-        
-        pos += 1
-      }
-      
-      if (sb != null) sb.append(str, last, str.length)
+    def replaceChars(chars: String, replace: String) : String = {
+      val sb = StringUtils.replaceChars(null, str, chars, replace)
       if (sb == null) str else sb.toString
     }
     

@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -37,8 +37,7 @@ class DisambiguationExtractor( context : {
                          DBpediaDatasets.DisambiguationLinks,
                          subjectUri,
                          wikiPageDisambiguatesProperty,
-                         OntologyNamespaces.getResource(link.destination.encodedWithNamespace, context.language),
-                         //OntologyNamespaces.getUri(link.destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE),
+                         context.language.resourceUri.append(link.destination.decodedWithNamespace),
                          link.sourceUri,
                          null)
             }

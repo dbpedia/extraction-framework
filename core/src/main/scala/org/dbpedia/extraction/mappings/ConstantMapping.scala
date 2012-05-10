@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
-import org.dbpedia.extraction.ontology.{OntologyNamespaces, OntologyProperty, OntologyObjectProperty}
+import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyObjectProperty}
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 
 /**
@@ -23,16 +23,10 @@ class ConstantMapping( ontologyProperty : OntologyProperty,
                        context : {
                           def language : Language } ) extends PropertyMapping
 {
-    private val encodedUriRegex = "^.*%[0-9a-fA-F][0-9a-fA-F].*$"
-
     if(ontologyProperty.isInstanceOf[OntologyObjectProperty])
     {
         require(unit == null, "unit == null if ontologyProperty.isInstanceOf[OntologyObjectProperty]")
-
-        require(!value.matches(encodedUriRegex), "URI value must be decoded (must not contain any %XX)")
-
-        val encodedUri = WikiUtil.wikiEncode(value)
-        value = OntologyNamespaces.getResource(encodedUri, context.language)
+        value = context.language.resourceUri.append(value)
     }
 
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =

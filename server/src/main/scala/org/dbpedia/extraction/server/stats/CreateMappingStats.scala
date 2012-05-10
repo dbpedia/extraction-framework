@@ -11,7 +11,6 @@ import org.dbpedia.extraction.util.RichFile.toRichFile
 import scala.Serializable
 import java.io._
 import org.dbpedia.extraction.server.Server
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
 import org.dbpedia.extraction.server.stats.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}

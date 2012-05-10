@@ -280,7 +280,7 @@ class OntologyReader
                 val superClasses = superClassNames.map{ superClassName => classMap.get(superClassName) match
                 {
                     case Some(superClassBuilder) => superClassBuilder.build(classMap)
-                    case None if OntologyNamespaces.skipValidation(superClassName) =>
+                    case None if ! RdfNamespace.validate(superClassName) =>
                     {
                         logger.config("Super class " + superClassName + " of class " + name + " was not found but for its namespace this was expected")
                         Some(new OntologyClass(superClassName, Map(), Map(), List(), Set()))
@@ -295,7 +295,7 @@ class OntologyReader
                 val equivalentClasses = equivalentClassNames.map{ equivalentClassName => classMap.get(equivalentClassName) match
                 {
                     case Some(equivalentClassBuilder) => equivalentClassBuilder.build(classMap)
-                    case None if OntologyNamespaces.skipValidation(equivalentClassName) =>
+                    case None if ! RdfNamespace.validate(equivalentClassName) =>
                     {
                         logger.config("Equivalent class " + equivalentClassName + " of class " + name + " was not found but for its namespace this was expected")
                         Some(new OntologyClass(equivalentClassName, Map(), Map(), List(), Set()))
