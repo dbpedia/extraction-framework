@@ -28,6 +28,12 @@ class Root
         </html>
     }
     
+    /**
+     * List of all languages. Currently for the sprint code, may be useful for others.
+     */
+    @GET @Path("languages/") @Produces(Array("text/plain"))
+    def languages = Server.instance.managers.keys.mkString(" ")
+    
     @GET @Path("statistics/") @Produces(Array("application/xhtml+xml"))
     def statistics = list("DBpedia Mapping Statistics", "Statistics", "Mapping Statistics for")
 
