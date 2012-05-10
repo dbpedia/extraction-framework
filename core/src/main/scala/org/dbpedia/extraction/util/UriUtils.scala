@@ -8,11 +8,10 @@ object UriUtils
     
     /**
      * TODO: comment
-     * FIXME: toASCIIString converts IRIs to URIs
      */
     def cleanLink( uri : URI ) : Option[String] =
     {
-      if (knownSchemes.contains(uri.getScheme)) Some(uri.normalize.toASCIIString) 
+      if (knownSchemes.contains(uri.getScheme)) Some(uri.normalize.toString) 
       else None
     }
 
@@ -27,7 +26,7 @@ object UriUtils
     def relativize( parent : URI, child : URI ) : URI =
     {
         val path = parent.relativize(child)
-        if (path eq child ) throw new IllegalArgumentException("["+parent+"] is not a parent directory of ["+child+"]")
+        if (path eq child) throw new IllegalArgumentException("["+parent+"] is not a parent directory of ["+child+"]")
         path
     }
 }

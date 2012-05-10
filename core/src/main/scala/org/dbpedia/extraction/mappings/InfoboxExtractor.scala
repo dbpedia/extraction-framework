@@ -255,7 +255,6 @@ class InfoboxExtractor( context : {
         splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
-            // FIXME: cleanLink converts IRIs to URIs
             case links if links.size == splitNodes.size => links.map(UriUtils.cleanLink).collect{case Some(link) => (link, null)}
             case _ => List.empty
         }
