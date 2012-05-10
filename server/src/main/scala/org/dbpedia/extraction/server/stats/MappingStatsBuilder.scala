@@ -16,6 +16,42 @@ import org.dbpedia.extraction.server.stats.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
+object UriAndMore {
+  def unapply(in: String) : Option[(String, String)] =  {
+    val str = in.trim
+    if (str.charAt(0) != '<') None
+    else {
+      val close = str.indexOf('>')
+      if (close == -1) None
+      else Some(str.substring(1,close), str.substring(close + 1))
+    }
+  }
+}
+
+object ObjectTriple {
+  def unapply(line: String) : Option[(String, String, String)] =  {
+    line match {
+      case UriAndMore(subj, rest) => rest match {
+        case UriAndMore(pred, rest) => rest match {
+          case UriAndMore(obj, rest) => rest.trim match {
+            case "." => Some((subj, pred, obj))
+            case _ => None
+          }
+          case _ => None
+        }
+        case _ => None
+      }
+      case _ => None
+    }
+  }
+}
+
+object DatatypeTriple {
+  def unapply(line: String) : Option[(String, String, String)] =  {
+    None
+  }
+}
+
 class MappingStatsBuilder(statsDir : File, language: Language)
 extends MappingStatsConfig(statsDir, language)
 {
@@ -23,9 +59,6 @@ extends MappingStatsConfig(statsDir, language)
 
     private val resourceUriPrefix = language.resourceUri.append("")
 
-    private val ObjectPropertyTripleRegex = """<([^>]+)> <([^>]+)> <([^>]+)> \.""".r
-    private val DatatypePropertyTripleRegex = """<([^>]+)> <([^>]+)> "(.*)"\S* \.""".r
-    
     def buildStats(redirectsFile: File, infoboxPropsFile: File, templParamsFile: File, paramsUsageFile: File): Unit =
     {
         var templatesMap = new mutable.HashMap[String, TemplateStatsBuilder]()
@@ -73,7 +106,7 @@ extends MappingStatsConfig(statsDir, language)
       val redirects = new mutable.HashMap[String, String]()
       eachLine(file) {
         line => line match {
-          case ObjectPropertyTripleRegex(subj, pred, obj) => {
+          case ObjectTriple(subj, pred, obj) => {
             val templateName = cleanUri(subj)
             if (templateName.startsWith(templateNamespace)) {
               redirects(templateName) = cleanUri(obj)
@@ -109,7 +142,7 @@ extends MappingStatsConfig(statsDir, language)
         eachLine(file) {
             line => line match {
                 // if there is a wikiPageUsesTemplate relation
-                case ObjectPropertyTripleRegex(subj, pred, obj) => if (unescape(pred) contains "wikiPageUsesTemplate")
+                case ObjectTriple(subj, pred, obj) => if (unescape(pred) contains "wikiPageUsesTemplate")
                 {
                     var templateName = cleanUri(obj)
                     
@@ -120,7 +153,7 @@ extends MappingStatsConfig(statsDir, language)
                     // and increment templateCount
                     resultMap.getOrElseUpdate(templateName, new TemplateStatsBuilder).templateCount += 1
                 }
-                case DatatypePropertyTripleRegex(_,_,_) => // ignore
+                case DatatypeTriple(_,_,_) => // ignore
                 case _ => if (line.trim.nonEmpty && ! line.trim.startsWith("#")) throw new IllegalArgumentException("line did not match object property triple syntax: " + line)
             }
         }
@@ -131,7 +164,7 @@ extends MappingStatsConfig(statsDir, language)
         // iterate through template parameters
         eachLine(file) {
             line => line match {
-                case DatatypePropertyTripleRegex(subj, pred, obj) =>
+                case DatatypeTriple(subj, pred, obj) =>
                 {
                     var templateName = cleanUri(subj)
                     val propertyName = cleanValue(obj)
@@ -157,7 +190,7 @@ extends MappingStatsConfig(statsDir, language)
         // iterate through infobox test
         eachLine(file) {
             line => line match {
-                case DatatypePropertyTripleRegex(subj, pred, obj) => {
+                case DatatypeTriple(subj, pred, obj) => {
                     var templateName = cleanUri(pred)
                     val propertyName = cleanValue(obj)
                     
