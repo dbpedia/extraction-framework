@@ -68,7 +68,7 @@ object CreateMappingStats
             val date = finder.dates("download-complete").last
             
             def inputFile(dataset: Dataset): File = {
-              finder.file(date, dataset.name.replace('_','-')+".nt")
+              finder.file(date, dataset.name.replace('_','-')+".iri.ttl")
             }
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
