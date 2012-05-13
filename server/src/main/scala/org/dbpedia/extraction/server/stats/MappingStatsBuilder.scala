@@ -16,25 +16,34 @@ import org.dbpedia.extraction.server.stats.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
+/**
+ * TODO: Clean up this code a bit. Fix the worst deviations from Turtle/N-Triples spec, 
+ * clearly document the others. Unescape \U stuff while parsing the line. Return Quad objects 
+ * instead of arrays. Move to its own class.
+ */
 class UriTriple(uris: Int) {
+  
+  def skipSpace(line: String, start: Int): Int = {
+    var index = start
+    while (index < line.length && line.charAt(index) == ' ') {
+      index += 1 // skip space
+    } 
+    index
+  }
+  
   /** @param line must not start or end with whitespace - use line.trim. */
   def unapplySeq(line: String) : Option[Seq[String]] =  {
     var count = 0
     var index = 0
     val triple = new Array[String](3)
+    
     while (count < uris) {
       if (index == line.length || line.charAt(index) != '<') return None
-      var end = index
-      do {
-        end += 1
-        if (end == line.length) return None
-      } while (line.charAt(end) != '>')
+      val end = line.indexOf('>', index + 1)
+      if (end == -1) return None
       triple(count) = line.substring(index + 1, end)
       count += 1
-      index = end + 1
-      while (index < line.length && line.charAt(index) == ' ') {
-        index += 1 // skip space
-      } 
+      index = skipSpace(line, end + 1)
     }
     
     if (uris == 2) { // literal
@@ -61,23 +70,18 @@ class UriTriple(uris: Int) {
         } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
       }
       else if (ch == '^') { // type uri: ^^<...>
-        index += 1 // skip '^'
-        if (index == line.length || line.charAt(index) != '^') return None
-        index += 1 // skip '^'
-        if (index == line.length || line.charAt(index) != '<') return None
-        do {
-          index += 1
-          if (index == line.length) return None
-        } while (line.charAt(index) != '>')
+        if (! line.startsWith("^^<", index)) return None
+        index = line.indexOf('>', index + 3)
+        if (index == -1) return None
         index += 1 // skip '>'
       } else {
         return None
       }
-      while (index < line.length && line.charAt(index) == ' ') {
-        index += 1 // skip space
-      } 
+      index = skipSpace(line, index)
     }
-    if (index + 1 != line.length || line.charAt(index) != '.') return None
+    if (line.charAt(index) != '.') return None
+    index = skipSpace(line, index + 1)
+    if (index != line.length) return None
     Some(triple)
   }
   
