@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.dump.download
 
+import java.io.File
 import scala.io.Codec
 import scala.collection.mutable.HashSet
 
@@ -19,7 +20,6 @@ object Download extends DownloadConfig
     
     if (baseDir == null) throw Usage("No target directory")
     if ((languages.nonEmpty || ranges.nonEmpty) && baseUrl == null) throw Usage("No base URL")
-    if (ranges.nonEmpty && listUrl == null) throw Usage("No wikilist CSV file URL")
     if (languages.isEmpty && ranges.isEmpty) throw Usage("No files to download")
     if (! baseDir.exists && ! baseDir.mkdir) throw Usage("Target directory '"+baseDir+"' does not exist and cannot be created")
     
@@ -30,17 +30,19 @@ object Download extends DownloadConfig
       val retryMillis = Download.this.retryMillis
     }
     
-    val download = if (unzip) new Decorator with Unzip else new Decorator 
+    val download = 
+      if (unzip) new Decorator with Unzip 
+      else new Decorator 
     
     // resolve page count ranges to languages
     if (ranges.nonEmpty)
     {
-      val listFile = download.downloadTo(listUrl, baseDir)
+      val listFile = new File(baseDir, listName)
+      download.downloadFile(listUrl, listFile)
       
       // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
       // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
       // these non-ASCII chars anyway, so we don't have to unescape them.
-      // TODO: the CSV file URL is configurable, so the encoding should be too.
       println("parsing "+listFile)
       val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
       
@@ -57,11 +59,7 @@ object Download extends DownloadConfig
       }
     }
     
-    // download the dump files, if any
-    if (languages.nonEmpty)
-    {
-      new DumpDownload(baseUrl, baseDir, download).downloadFiles(languages)
-    }
+    new DumpDownload(baseUrl, baseDir, download).downloadFiles(languages)
   }
   
 }
