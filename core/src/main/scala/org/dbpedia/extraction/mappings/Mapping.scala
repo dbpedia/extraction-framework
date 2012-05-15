@@ -4,8 +4,9 @@ import org.dbpedia.extraction.wikiparser.Node
 import org.dbpedia.extraction.destinations.Quad
 
 /**
+ * TODO: generic type may not be optimal.
  */
-trait Mapping[N <: Node] {
+trait Mapping[-N <: Node] {
   
     /**
      * @param page The source node
