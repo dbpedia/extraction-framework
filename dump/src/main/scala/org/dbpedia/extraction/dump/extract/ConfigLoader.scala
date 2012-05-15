@@ -205,8 +205,8 @@ object ConfigLoader
         }
 
         //Extractors
-        val extractors = config.extractors(lang)
-        val compositeExtractor = CompositeExtractor.load(extractors, context)
+        val extractorClasses = config.extractors(lang)
+        val extractor = new RootExtractor(CompositeExtractor.load(extractorClasses, context))
         
         def getFormatter(suffix: String): Formatter = {
           TerseFormatter.forSuffix(suffix).getOrElse( 
@@ -234,8 +234,8 @@ object ConfigLoader
         val destination = new CompositeDestination(destinations: _*)
 
         // Note: label is also used as file name, but space is replaced by underscores
-        val jobLabel = "extraction job "+lang.wikiCode+" with "+extractors.size+" extractors"
-        new ExtractionJob(compositeExtractor, context.articlesSource, destination, jobLabel)
+        val jobLabel = "extraction job "+lang.wikiCode+" with "+extractorClasses.size+" extractors"
+        new ExtractionJob(extractor, context.articlesSource, destination, jobLabel)
     }
 
     //language-independent val

@@ -2,7 +2,6 @@ package org.dbpedia.extraction.live.extraction
 
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.mappings.CompositeExtractor
 import java.net.URL
 import collection.immutable.ListMap
 import java.util.Properties
@@ -40,7 +39,7 @@ object LiveExtractionConfigLoader extends ActionListener
     private var instanceNumber = 0;
 
 //    private var config : Config = null;
-    private var extractors : List[Extractor] = null;
+    private var extractors : List[RootExtractor] = null;
     // private var CurrentJob : ExtractionJob = null;
     private var reloadOntologyAndMapping = true;
     val logger = Logger.getLogger("LiveExtractionConfigLoader");
@@ -324,7 +323,7 @@ object LiveExtractionConfigLoader extends ActionListener
     //@param  articlesSource  The source of the wikipage article
     //@param  language  The required language
 //    private def LoadOntologyAndMappings(articlesSource: Source, language: Language): Extractor = {
-  private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[Extractor] = {
+  private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[RootExtractor] = {
       //Load the ontology at the beginning because it is a very heavy step so it's better to perform it only once in the beginning
 //      LiveExtractor.loadOntology(config.ontologySource);
       //org.dbpedia.extraction.live.extractor.LiveExtractor.loadOntology(this.ontologySource)

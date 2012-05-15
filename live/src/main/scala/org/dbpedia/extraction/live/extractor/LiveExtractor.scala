@@ -7,6 +7,7 @@ import org.dbpedia.extraction.mappings.{Mappings, MappingsLoader, Extractor, Red
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser}
 import org.dbpedia.extraction.sources.Source
 import java.io.File
+import org.dbpedia.extraction.mappings.RootExtractor
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,10 +29,10 @@ object LiveExtractor
              mappingsSource : Source,
              articlesSource : Source,
              extractors : List[Class[_ <: Extractor]],
-             language : Language) : List[Extractor] =
+             language : Language) : List[RootExtractor] =
     {
         val context = extractionContext(language, ontologySource, mappingsSource, articlesSource)
-        extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
+        extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context)).map(new RootExtractor(_))
     }
 
     /**

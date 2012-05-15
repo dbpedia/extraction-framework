@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser.Node
+import org.dbpedia.extraction.wikiparser.{TemplateNode,TableNode}
 
 /**
  */
-class Mappings( 
-  val templateMappings : Map[String, ClassMapping[Node]],
-  val tableMappings : List[TableMapping] 
+class Mappings ( 
+  val templateMappings : Map[String, Mapping[TemplateNode]],
+  val tableMappings : List[Mapping[TableNode]] 
 )

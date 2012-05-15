@@ -23,7 +23,7 @@ extends ExtractionManager(languages, paths)
 
     @volatile private lazy val _mappings : Map[Language, Mappings] = loadMappings
 
-    @volatile private lazy val _extractors : Map[Language, Extractor] = loadExtractors
+    @volatile private lazy val _extractors : Map[Language, RootExtractor] = loadExtractors
 
 
     def extractor(language : Language) = _extractors(language)
