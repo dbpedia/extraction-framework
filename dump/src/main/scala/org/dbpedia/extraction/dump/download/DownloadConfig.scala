@@ -7,11 +7,16 @@ import scala.io.{Source,Codec}
 
 class DownloadConfig
 {
+  // hard-coded - there probably is no mirror, and the format is very specific.
+  // TODO: user might want to use a local file...
+  val listUrl = new URL("http://s23.org/wikistats/wikipedias_csv.php")
+  
+  // Most browsers would save the file with this name, because s23.org returns it in a http header.
+  val listName = "wikipedias.csv"
+  
   var baseUrl : URL = null
   
   var baseDir : File = null
-  
-  var listUrl : URL = null
   
   val languages = new HashMap[String, Set[String]]
   
@@ -51,7 +56,6 @@ class DownloadConfig
       case Ignored(_) => // ignore
       case Arg("base", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
       case Arg("dir", path) => baseDir = resolveFile(dir, path)
-      case Arg("wikilist", url) => listUrl = toURL(url, arg)
       case Arg("retry-max", count) => retryMax = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-millis", millis) => retryMillis = toInt(millis, 0, Int.MaxValue, arg)
       case Arg("unzip", bool) => unzip = toBoolean(bool, arg)
@@ -129,9 +133,6 @@ base=http://dumps.wikimedia.org/
   Base URL of dump server. Required if dump files are given.
 dir=/example/path
   Path to existing target directory. Required.
-csv=http://s23.org/wikistats/wikipedias_csv.php
-  URL of csv file containing list of wikipedias with article count. First line is header,
-  third column is language code, sixth column is article count. Required if ranges are used.
 dump=en,zh-yue,1000-2000,...:file1,file2,...
   Download given files for given languages from server. Each key is either a language code
   or a range. In the latter case, languages with a matching number of articles will be used. 
