@@ -4,7 +4,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.config.mappings.TopicalConceptsExtractorConfig
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 
 /**
  * Relies on Cat main templates. Goes over all categories and extract DBpedia Resources that are the main subject of that category.
@@ -29,7 +29,7 @@ class TopicalConceptsExtractor( context : {
 
     private val catMainTemplates = TopicalConceptsExtractorConfig.catMainTemplates;
 
-    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         if (page.title.namespace == Namespace.Category)
         {
@@ -58,14 +58,14 @@ class TopicalConceptsExtractor( context : {
                     :: Nil)
                 }
 
-                return new Graph(quads)
+                return quads
             } catch {
                 case e: Exception => println("TopicalConceptsExtractor failed for page %s.".format(page.title))
             }
 
         }
 
-        new Graph()
+        Seq.empty
     }
 
     private def collectCatMains(node : Node) : List[TemplateNode] = node match

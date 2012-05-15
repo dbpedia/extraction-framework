@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph}
+import org.dbpedia.extraction.destinations.DBpediaDatasets
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, UriUtils}
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Extracts links to external web pages.
@@ -15,25 +16,25 @@ class ExternalLinksExtractor( context : {
 {
     val wikiPageExternalLinkProperty = context.ontology.properties("wikiPageExternalLink")
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return Seq.empty
 
-        var quads = List[Quad]()
+        var quads = new ArrayBuffer[Quad]()
         for(link <- collectExternalLinks(node);
             uri <- UriUtils.cleanLink(link.destination))
         {
             try
             {
-                quads ::= new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty,
-                    uri, link.sourceUri, null)
+                quads += new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty, uri, link.sourceUri, null)
             }
             catch
             {
                 case e : Exception => //TODO log
             }
         }
-        new Graph(quads)
+        
+        quads
     }
 
     private def collectExternalLinks(node : Node) : List[ExternalLinkNode] =

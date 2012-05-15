@@ -5,7 +5,7 @@ import org.dbpedia.extraction.config.mappings.GenderExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import util.matching.Regex
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 
 /**
@@ -23,18 +23,24 @@ class GenderExtractor( context : {
 
     private val pronounMap: Map[String, String] = GenderExtractorConfig.pronounsMap.getOrElse(language, GenderExtractorConfig.pronounsMap("en"))
 
+    // FIXME: don't use string constant, use RdfNamespace.FOAF
     private val genderProperty = "http://xmlns.com/foaf/0.1/gender"
-
+    // FIXME: don't use string constant, use RdfNamespace.RDF
     private val typeProperty = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    // FIXME: don't use string constant, use DBpediaNamespace.ONTOLOGY
     private val personUri = "http://dbpedia.org/ontology/Person"
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         // apply mappings
+        // FIXME: what a waste! we extract all mapped properties a second time and throw them away.
+        // Find a better solution. For example: Make sure that this extractor runs after the 
+        // MappingExtractor. In the MappingExtractor, set the page type as an attriute.
+        // Even better: in the first extraction pass, extract all types. Use them in the second pass.
         val mappingGraph = super.extract(node, subjectUri, pageContext)
 
         // if this page is mapped onto Person
-        if (mappingGraph.quads.exists((q: Quad) => q.predicate == typeProperty && q.value == personUri))
+        if (mappingGraph.exists(q => q.predicate == typeProperty && q.value == personUri))
         {
             // get the page text
             val wikiText: String = node.toWikiText()
@@ -66,11 +72,11 @@ class GenderExtractor( context : {
             // output triple for maximum gender
             if (maxGender != "" && maxCount > GenderExtractorConfig.minCount && maxCount/secondCount > GenderExtractorConfig.minDifference)
             {
-                return new Graph(new Quad(context.language, DBpediaDatasets.Genders, subjectUri, genderProperty, maxGender, node.sourceUri, new Datatype("xsd:string")) :: Nil)
+                return Seq(new Quad(context.language, DBpediaDatasets.Genders, subjectUri, genderProperty, maxGender, node.sourceUri, new Datatype("xsd:string")))
             }
         }
 
-        new Graph()
+        Seq.empty
     }
 
 }

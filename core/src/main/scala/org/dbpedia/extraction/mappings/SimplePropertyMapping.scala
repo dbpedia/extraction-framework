@@ -2,12 +2,13 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology._
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty,OntologyClass,OntologyProperty,DBpediaNamespace}
+import scala.collection.mutable.ArrayBuffer
 
 class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNodeMapping and CreateMappingStats requires this to be public. Is there a better way?
                              ontologyProperty : OntologyProperty,
@@ -137,9 +138,9 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
         }
     }
     
-    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
-        var graph = new Graph()
+        val graph = new ArrayBuffer[Quad]
 
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.size > 0)
         {
@@ -150,27 +151,29 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
                     case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri)
                     case value => writeValue(value, subjectUri, propertyNode.sourceUri)
                 }
-                graph = graph.merge(g)
+                graph ++= g
             }
         }
         
         graph
     }
 
-    private def writeUnitValue(node : TemplateNode, value : Double, unit : UnitDatatype, subjectUri : String, sourceUri : String) : Graph =
+    private def writeUnitValue(node : TemplateNode, value : Double, unit : UnitDatatype, subjectUri : String, sourceUri : String): Seq[Quad] =
     {
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
             val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
-            return new Graph(quad)
+            return Seq(quad)
         }
 
         //Write generic property
         val stdValue = unit.toStandardUnit(value)
-        val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
-        var graph = new Graph(quad)
+        
+        val graph = new ArrayBuffer[Quad]
 
+        graph += new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
+        
         //Write specific properties
         for(classAnnotation <- node.annotation(TemplateMapping.CLASS_ANNOTATION);
             currentClass <- classAnnotation.asInstanceOf[List[OntologyClass]])
@@ -181,20 +184,17 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
                  val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)
                  val quad = new Quad(language, DBpediaDatasets.SpecificProperties, subjectUri,
                                      propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
-                 graph = graph.merge(new Graph(quad))
+                 graph += quad
             }
         }
 
         graph
     }
 
-    private def writeValue(value : Any, subjectUri : String, sourceUri : String) : Graph =
+    private def writeValue(value : Any, subjectUri : String, sourceUri : String): Seq[Quad] =
     {
         val datatype = if(ontologyProperty.range.isInstanceOf[Datatype]) ontologyProperty.range.asInstanceOf[Datatype] else null
 
-        val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri,
-                            ontologyProperty, value.toString, sourceUri, datatype )
-
-        new Graph(quad)
+        Seq(new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, datatype))
     }
 }

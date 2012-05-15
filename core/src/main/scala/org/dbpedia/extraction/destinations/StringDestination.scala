@@ -16,7 +16,7 @@ class StringDestination(formatter : Formatter) extends Destination
 
     private var closed = false
 
-    override def write(graph : Graph) = synchronized {
+    override def write(graph : Seq[Quad]) = synchronized {
       
       if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
@@ -25,7 +25,7 @@ class StringDestination(formatter : Formatter) extends Destination
         header = true
       }
 
-      for(quad <- graph.quads) {
+      for(quad <- graph) {
         formatter.write(writer, quad)
       }
     }

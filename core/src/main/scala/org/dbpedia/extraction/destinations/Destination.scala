@@ -12,7 +12,7 @@ trait Destination
     /**
      * Writes a new statement to this destination.
      */
-    def write(graph : Graph): Unit
+    def write(graph : Seq[Quad]): Unit
 
     /**
      * Closes this destination.

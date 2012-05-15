@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
 import impl.simple.SimpleWikiParser
-import org.dbpedia.extraction.destinations.Graph
+import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.sources.WikiPage
 import scala.io.Source
 import util.control.Breaks._
@@ -88,7 +88,7 @@ class WiktionaryPageExtractor extends Extractor {
   ) //TODO complete
 
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
+  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {
     //for DEBUG: wait a random time (this makes threading useless, but i can read the console output better)
     //val r = new scala.util.Random
@@ -177,7 +177,7 @@ class WiktionaryPageExtractor extends Extractor {
 
     //TODO build triples from bindings
 
-    new Graph()
+    Seq.empty
   }
 }
 

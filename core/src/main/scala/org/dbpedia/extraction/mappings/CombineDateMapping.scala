@@ -4,7 +4,7 @@ import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import java.util.logging.Logger
 import org.dbpedia.extraction.dataparser.DateTimeParser
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.{Language, Date}
 
@@ -28,7 +28,7 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
     private val parser2 = Option(unit2).map(new DateTimeParser(context, _))
     private val parser3 = Option(unit3).map(new DateTimeParser(context, _))
 
-    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         var dates = List[Date]()
         for( parser <- parser1;
@@ -62,14 +62,11 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
         try
         {
             val mergedDate = Date.merge(dates, datatype)
-
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, mergedDate.toString, node.sourceUri, datatype)
-
-            new Graph(quad)
+            Seq(new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, mergedDate.toString, node.sourceUri, datatype))
         }
         catch
         {
-            case ex : Exception => new Graph()
+            case ex : Exception => Seq.empty
         }
     }
 }

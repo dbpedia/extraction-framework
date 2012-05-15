@@ -12,12 +12,12 @@ class ThrottlingDestination( destination : Destination, limit : Int ) extends De
 {
     private var count = 0
     
-    override def write( g : Graph ) = if (count < limit)
+    override def write(g : Seq[Quad]) = if (count < limit)
     {
       var graph = g
-      if (count + graph.quads.length > limit) graph = new Graph(graph.quads.take(limit - count))
+      if (count + graph.length > limit) graph = graph.take(limit - count)
       destination.write(graph)
-      count += graph.quads.length
+      count += graph.length
     }
 
     override def close = destination.close

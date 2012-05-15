@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -15,17 +15,13 @@ class PageLinksExtractor( context : {
 {
     val wikiPageWikiLinkProperty = context.ontology.properties("wikiPageWikiLink")
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return Seq.empty
         
-        var quads = List[Quad]()
         val list = collectInternalLinks(node)
-        list.foreach(link => {
-            quads ::= new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty,
-                getUri(link.destination), link.sourceUri, null)
-        })
-        new Graph(quads)
+        
+        list.map(link => new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty, getUri(link.destination), link.sourceUri, null))
     }
 
     private def collectInternalLinks(node : Node) : List[InternalLinkNode] =

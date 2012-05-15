@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.lang.String
 import org.dbpedia.extraction.wikiparser.PageNode
-import org.dbpedia.extraction.destinations.{Dataset, Quad, Graph}
+import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import collection.mutable.{HashSet, Set, MultiMap, HashMap}
 import com.hp.hpl.jena.query.QuerySolution
 import io.Source
@@ -77,13 +77,13 @@ class AugmenterExtractor(val decoratee : Extractor, val dataset : Dataset,
         val labelToURIs : MultiMap[String, String], val relationPredicate : String)
   extends Extractor
 {
-  def extract(page: PageNode, subjectUri: String, context: PageContext) : Graph = {
+  def extract(page: PageNode, subjectUri: String, context: PageContext) : Seq[Quad] = {
 
     val base = decoratee.extract(page, subjectUri, context)
 
     val newQuads = new HashSet[Quad]
 
-    base.quads.foreach(quad => {
+    base.foreach(quad => {
       extractCategoryName(quad) match {
         case None =>
         case Some(categoryName) => {
@@ -100,7 +100,7 @@ class AugmenterExtractor(val decoratee : Extractor, val dataset : Dataset,
       }
     })
 
-    return new Graph(newQuads.toList)
+    return newQuads.toList
     //val result = base.merge(new Graph(newQuads.toList))
 
 

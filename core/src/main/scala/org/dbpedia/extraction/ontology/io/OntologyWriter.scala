@@ -56,9 +56,9 @@ class OntologyWriter
                 writer.write("\n| rdfs:comment@ " + language + " = " + comment)
             }
 
-            for(superClass <- clazz.subClassOf if superClass.name != "owl:Thing")
+            for(baseClass <- clazz.baseClasses if baseClass.name != "owl:Thing")
             {
-                writer.write("\n| rdfs:subClassOf = " + superClass.name)
+                writer.write("\n| rdfs:subClassOf = " + baseClass.name)
             }
 
             writer.write("\n| owl:equivalentClass = " + clazz.equivalentClasses.map(_.name).mkString(", "))

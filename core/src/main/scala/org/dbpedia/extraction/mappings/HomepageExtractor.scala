@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.{URI,URISyntaxException}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, UriUtils}
@@ -33,9 +33,9 @@ class HomepageExtractor( context : {
 
     private val lineEndRegex = "(?ms).*$.+".r
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return Seq.empty
         
         val list = collectProperties(node).filter(p => propertyNames.contains(p.key.toLowerCase))
         list.foreach((property) => {
@@ -76,23 +76,23 @@ class HomepageExtractor( context : {
             }
         }
 
-        new Graph()
+        Seq.empty
     }
 
-    private def generateStatement(subjectUri : String, pageContext : PageContext, url : String, node: Node) : Graph =
+    private def generateStatement(subjectUri : String, pageContext : PageContext, url : String, node: Node) : Seq[Quad] =
     {
         try
         {
             for(link <- UriUtils.cleanLink(new URI(url)))
             {
-                return new Graph(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri) :: Nil)
+                return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri))
             }
         }
         catch
         {
             case ex: URISyntaxException =>
         }
-        new Graph()
+        Seq.empty
     }
 
     private def findLinkTemplateInSection(nodes : List[Node]) : Option[(String, Node)] =

@@ -1,14 +1,16 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
-import org.dbpedia.extraction.destinations.Graph
+import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.dataparser.StringParser
 
-class ConditionalMapping( val cases : List[ConditionMapping], // must be public val for statistics
-                          val defaultMappings : List[PropertyMapping], // must be public val for statistics
-                          context : { } ) extends ClassMapping     //TODO remove unused argument
+class ConditionalMapping( 
+  val cases : List[ConditionMapping], // must be public val for statistics
+  val defaultMappings : List[PropertyMapping] // must be public val for statistics
+)
+extends ClassMapping[Node]
 {
-    override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
+    override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Seq[Quad] = node match
     {
         case templateNode : TemplateNode =>
         {
@@ -19,23 +21,23 @@ class ConditionalMapping( val cases : List[ConditionMapping], // must be public 
                 {
                     case Some(instanceURI : String) =>
                     {
-                        return defaultMappings.map(mapping => mapping.extract(templateNode, instanceURI, pageContext))
-                                              .foldLeft(graph)(_ merge _)
+                        return graph ++ defaultMappings.flatMap(_.extract(templateNode, instanceURI, pageContext))
                     }
                     case _ =>
                 }
             }
-            new Graph()
+            Seq.empty
         }
-        case _ => new Graph()
+        case _ => Seq.empty
     }
 }
 
 class ConditionMapping( templateProperty : String,
                         operator : String,
                         value : String,
-                        val mapping : TemplateMapping, // must be public val for statistics
-                        context : { } )    //TODO remove unused argument
+                        val mapping : TemplateMapping // must be public val for statistics
+) 
+extends Mapping[TemplateNode]
 {
     /** Check if templateProperty is defined */
     require(operator == "otherwise" || templateProperty != null, "templateProperty must be defined")
@@ -44,14 +46,14 @@ class ConditionMapping( templateProperty : String,
     /** Check if value is defined */
     require(operator == "otherwise" || operator == "isSet" || value != null, "Value must be defined")
 
-    def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
+    def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         if(operator == "otherwise" || evaluate(node))
         {
             return mapping.extract(node, subjectUri, pageContext)
         }
 
-        new Graph()
+        Seq.empty
     }
 
     private def evaluate(node : TemplateNode) : Boolean =

@@ -27,7 +27,7 @@ object MappingsLoader
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
-        val classMappings = new HashMap[String, ClassMapping]()
+        val classMappings = new HashMap[String, ClassMapping[Node]]()
         val tableMappings = new ArrayBuffer[TableMapping]()
 
         for ( page <- context.mappingPageSource;
@@ -206,9 +206,7 @@ object MappingsLoader
                  conditionNode @ TemplateNode(_,_,_) <- casesProperty.children ) 
             yield loadConditionMapping(conditionNode, context)
         
-        new ConditionalMapping( conditionMappings,
-                                loadPropertyMappings(tnode, "defaultMappings", context),
-                                context )
+        new ConditionalMapping(conditionMappings, loadPropertyMappings(tnode, "defaultMappings", context))
     }
     
     private def loadConditionMapping(tnode : TemplateNode, context : {
@@ -226,8 +224,7 @@ object MappingsLoader
         new ConditionMapping( loadTemplateProperty(tnode, "templateProperty", false),
                               loadTemplateProperty(tnode, "operator", false),
                               loadTemplateProperty(tnode, "value", false),
-                              loadTemplateMapping(mapping, context),
-                              context )
+                              loadTemplateMapping(mapping, context))
     }
     
     private def loadOntologyClass(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyClass = {

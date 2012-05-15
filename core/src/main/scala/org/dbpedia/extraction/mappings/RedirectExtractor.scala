@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -14,17 +14,17 @@ class RedirectExtractor( context : {
 {
     private val wikiPageRedirectsProperty = context.ontology.properties("wikiPageRedirects")
 
-    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         if((page.title.namespace == Namespace.Main || page.title.namespace == Namespace.Template ) && page.isRedirect)
         {
             for(destination <- page.children.collect{case InternalLinkNode(destination, _, _, _) => destination})
             {
-                return new Graph(new Quad(context.language, DBpediaDatasets.Redirects, subjectUri, wikiPageRedirectsProperty,
+                return Seq(new Quad(context.language, DBpediaDatasets.Redirects, subjectUri, wikiPageRedirectsProperty,
                     context.language.resourceUri.append(destination.decodedWithNamespace), page.sourceUri))
             }
         }
 
-        new Graph()
+        Seq.empty
     }
 }
