@@ -19,7 +19,7 @@ import org.dbpedia.extraction.util.StringUtils.prettyMillis
 /**
  * TODO: Clean up this code a bit. Fix the worst deviations from Turtle/N-Triples spec, 
  * clearly document the others. Unescape \U stuff while parsing the line. Return Quad objects 
- * instead of arrays. Move to its own class.
+ * instead of arrays. Throw exceptions instead of returning None. Move to its own class.
  */
 class UriTriple(uris: Int) {
   
@@ -58,23 +58,24 @@ class UriTriple(uris: Int) {
       index = end + 1
       if (index == line.length) return None
       val ch = line.charAt(index)
-      if (ch == '@') { // lang: @[a-zA-Z][a-zA-Z0-9-]*
+      if (ch == '@') { // FIXME: this code: @[a-z][a-z0-9-]* / NT spec: '@' [a-z]+ ('-' [a-z0-9]+ )* / Turtle spec: "@" [a-zA-Z]+ ( "-" [a-zA-Z0-9]+ )* 
         index += 1 // skip '@'
         if (index == line.length) return None
         var c = line.charAt(index)
-        if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z')) return None
+        if (c < 'a' || c > 'z') return None
         do {
           index += 1 // skip last lang char
           if (index == line.length) return None
           c = line.charAt(index)
-        } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+        } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'))
       }
       else if (ch == '^') { // type uri: ^^<...>
         if (! line.startsWith("^^<", index)) return None
         index = line.indexOf('>', index + 3)
         if (index == -1) return None
         index += 1 // skip '>'
-      } else {
+      } 
+      else if (ch != ' ' && ch != '.') {
         return None
       }
       index = skipSpace(line, index)
