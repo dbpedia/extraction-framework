@@ -1,12 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.Node
-import org.dbpedia.extraction.destinations.Graph
 
 /**
- * Base class of all mappings which map to a specific class
+ * Marker trait for mappings which map to a specific class
+ * TODO: remove?
  */
-trait ClassMapping
-{
-    def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph
-}
+trait ClassMapping[N <: Node] extends Mapping[N]

@@ -5,9 +5,10 @@ import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.RichString.toRichString
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * This extractor extracts all properties from all infoboxes.
@@ -84,11 +85,11 @@ class InfoboxExtractor( context : {
 
     private val seenProperties = HashSet[String]()
     
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return Seq.empty
         
-        var quads = List[Quad]()
+        var quads = new ArrayBuffer[Quad]()
 
         val seenTemplates = new HashSet[String]()
 
@@ -118,11 +119,11 @@ class InfoboxExtractor( context : {
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads += new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             val stat_template = context.language.resourceUri.append(template.title.decodedWithNamespace)
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
-                            quads ::= new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
+                            quads += new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
                                                stat_property, node.sourceUri, context.ontology.datatypes("xsd:string"))
                         }
                         catch
@@ -136,8 +137,8 @@ class InfoboxExtractor( context : {
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads ::= new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads ::= new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
+                                quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
                             }
                         }
                     }
@@ -147,14 +148,14 @@ class InfoboxExtractor( context : {
                 if (propertiesFound && (!seenTemplates.contains(template.title.decoded)))
                 {
                     val templateUri = context.language.resourceUri.append(template.title.decodedWithNamespace)
-                    quads ::= new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
+                    quads += new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
                                        templateUri, template.sourceUri, null)
                     seenTemplates.add(template.title.decoded)
                 }
             }
         }
         
-        new Graph(quads)
+        quads
     }
 
     private def extractValue(node : PropertyNode) : List[(String, Datatype)] =

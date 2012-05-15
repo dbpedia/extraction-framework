@@ -23,7 +23,7 @@ class Classes
         val subClassesMap = ontology.classes.values.toList   //Get all classes
                 .filter(!_.name.contains(":")) //Filter non-DBpedia classes
                 .sortWith(_.name < _.name)     //Sort by name
-                .groupBy(_.subClassOf.head).toMap   //Group by super class
+                .groupBy(_.baseClasses.head).toMap   //Group by super class
 
         val rootClass = ontology.classes("owl:Thing")
 
@@ -110,9 +110,9 @@ class Classes
               <tr>
                 <td><strong>Super classes:</strong></td>
                 {
-                  for(superClass <- ontClass.subClassOf) yield
+                  for(baseClass <- ontClass.baseClasses) yield
                   {
-                    <td>{createLink(superClass)}</td>
+                    <td>{createLink(baseClass)}</td>
                   }
                 }
               </tr>
@@ -133,7 +133,7 @@ class Classes
 //                             yield property
 
         // TODO: why show only this class and its direct base classes?
-        val classes = (ontClass :: ontClass.subClassOf)
+        val classes = (ontClass :: ontClass.baseClasses)
         val properties = ontology.properties.values.toList.sortBy(_.name).filter(classes contains _.domain)
 
         <table border="1" cellpadding="3" cellspacing="0">

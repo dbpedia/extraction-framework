@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Extracts information about which concept is a category and how categories are related using the SKOS Vocabulary.
@@ -20,14 +21,14 @@ class SkosCategoriesExtractor( context : {
     private val skosBroaderProperty = context.ontology.properties("skos:broader")
     private val skosRelatedProperty = context.ontology.properties("skos:related")
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Category) return new Graph()
+        if(node.title.namespace != Namespace.Category) return Seq.empty
 
-        var quads = List[Quad]()
+        var quads = new ArrayBuffer[Quad]()
 
-        quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
-        quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+        quads += new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
+        quads += new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
 
         for(link <- collectCategoryLinks(node))
         {
@@ -37,10 +38,10 @@ class SkosCategoriesExtractor( context : {
                 case _ => skosBroaderProperty
             }
 
-            quads ::= new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
+            quads += new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
         }
 
-        new Graph(quads)
+        quads
     }
 
     private def collectCategoryLinks(node : Node) : List[InternalLinkNode] =

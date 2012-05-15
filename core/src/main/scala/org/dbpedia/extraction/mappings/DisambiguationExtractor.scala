@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
@@ -21,7 +21,7 @@ class DisambiguationExtractor( context : {
 
     val wikiPageDisambiguatesProperty = context.ontology.properties("wikiPageDisambiguates")
 
-    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         if (page.title.namespace == Namespace.Main && page.isDisambiguation)
         {
@@ -32,7 +32,7 @@ class DisambiguationExtractor( context : {
             val disambigLinks = allLinks.filter(linkNode => linkNode.destination.decoded.contains(cleanPageTitle)
                                                             || isAcronym(cleanPageTitle, linkNode.destination.decoded))
 
-            val quads = disambigLinks.map{link =>
+            return disambigLinks.map{link =>
                 new Quad(context.language,
                          DBpediaDatasets.DisambiguationLinks,
                          subjectUri,
@@ -41,11 +41,9 @@ class DisambiguationExtractor( context : {
                          link.sourceUri,
                          null)
             }
-
-            return new Graph(quads)
         }
 
-        new Graph()
+        Seq.empty
     }
 
     private def collectInternalLinks(node : Node) : List[InternalLinkNode] = node match

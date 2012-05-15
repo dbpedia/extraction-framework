@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, Graph}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import impl.wikipedia.Namespaces
 import org.dbpedia.extraction.sources.Source
@@ -13,6 +13,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, WikiUtil}
 import java.net.URLDecoder
 import org.dbpedia.extraction.util.RichString.toRichString
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Extracts the first image of a Wikipedia page. Constructs a thumbnail from it, and
@@ -51,27 +52,27 @@ class ImageExtractor( context : {
     private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
     private val dcRightsProperty = context.ontology.properties("dc:rights")
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return Seq.empty
         
-        var quads = List[Quad]()
+        var quads = new ArrayBuffer[Quad]()
 
         for ((imageFileName, sourceNode) <- searchImage(node.children, 0) if !imageFileName.toLowerCase.startsWith("replace_this_image"))
         {
             val (url, thumbnailUrl) = getImageUrl(imageFileName)
 
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads += new Quad(context.language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
+            quads += new Quad(context.language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads += new Quad(context.language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
 
             val wikipediaImageUrl = "http://" + language + ".wikipedia.org/wiki/"+ fileNamespaceIdentifier +":" + imageFileName
 
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
-            quads ::= new Quad(context.language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads += new Quad(context.language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads += new Quad(context.language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
         }
 
-        new Graph(quads)
+        quads
     }
 
     private def searchImage(nodes : List[Node], sections : Int) : Option[(String, Node)] =

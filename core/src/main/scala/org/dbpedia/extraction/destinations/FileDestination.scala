@@ -20,10 +20,10 @@ class FileDestination(formatter : Formatter, filePattern : Dataset => File) exte
 
     private var closed = false
 
-    override def write(graph : Graph) : Unit = synchronized {
+    override def write(graph : Seq[Quad]) : Unit = synchronized {
       if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
-      for((dataset, quads) <- graph.quads.groupBy(_.dataset)) {
+      for((dataset, quads) <- graph.groupBy(_.dataset)) {
         val writer = writers.getOrElseUpdate(dataset, createWriter(dataset))
         if (writer != null) {
           for(quad <- quads)

@@ -2,9 +2,10 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.{Buffer,ArrayBuffer}
 
 class IntermediateNodeMapping(nodeClass : OntologyClass,
                               correspondingProperty : OntologyProperty,
@@ -17,9 +18,9 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
 
     private val splitRegex = """<br\s*\/?>"""
 
-    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        var graph = new Graph()
+        var graph = new ArrayBuffer[Quad]()
 
         val affectedTemplatePropertyNodes = mappings.flatMap(_ match
             {
@@ -35,7 +36,7 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
             //require their values to be all singles
             if(valueNodes.forall(_.size == 1))
             {
-                graph = graph.merge(createInstance(node, subjectUri, pageContext))
+                createInstance(graph, node, subjectUri, pageContext)
             }
             else
             {
@@ -45,59 +46,36 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
                  * leader_name = Bill_Gates<br>Steve_Jobs
                  * leader_title = Microsoft dictator<br>Apple evangelist
                  */
-                logger.fine("IntermediateNodeMapping for muliple properties having multiple values not implemented!")
+                logger.warning("IntermediateNodeMapping for muliple properties having multiple values not implemented!")
             }
         }
         //one template property is affected (e.g. engine)
         else if(affectedTemplatePropertyNodes.size == 1)
         {
             //allow multiple values in this property
-            for( valueNodesForOneProperty <- valueNodes ;
-                 value <- valueNodesForOneProperty )
+            for(valueNodesForOneProperty <- valueNodes; value <- valueNodesForOneProperty)
             {
-                graph = graph.merge(createInstance(value.parent.asInstanceOf[TemplateNode], subjectUri, pageContext))
+                createInstance(graph, value.parent.asInstanceOf[TemplateNode], subjectUri, pageContext)
             }
         }
 
         graph
     }
 
-    private def createInstance(node : TemplateNode, originalSubjectUri : String, pageContext : PageContext) : Graph =
+    private def createInstance(graph: Buffer[Quad], node : TemplateNode, originalSubjectUri : String, pageContext : PageContext): Unit =
     {
         val instanceUri = pageContext.generateUri(originalSubjectUri, node)
-
-        def writeTypes(clazz : OntologyClass, graph : Graph) : Graph =
-        {
-            var thisGraph = graph
-
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), clazz.uri, node.sourceUri)
-            thisGraph = graph.merge(new Graph(quad))
-
-            for(baseClass <- clazz.subClassOf)
-            {
-                thisGraph = writeTypes(baseClass, thisGraph)
-            }
-
-            for(eqClass <- clazz.equivalentClasses)
-            {
-                thisGraph = writeTypes(eqClass, thisGraph)
-            }
-
-            thisGraph
-        }
-
+        
         // extract quads
-        var graph = mappings.map(propertyMapping => propertyMapping.extract(node, instanceUri, pageContext)).reduceLeft(_ merge _)
+        graph ++= mappings.flatMap(_.extract(node, instanceUri, pageContext))
 
         // write types
-        if(!graph.isEmpty)
+        if(! graph.isEmpty)
         {
-            graph = writeTypes(nodeClass, graph)
-
-            val quad2 = new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
-            graph = graph.merge(new Graph(quad2))
+            for (cls <- nodeClass.relatedClasses)
+              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+            
+            graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
         }
-
-        graph
     }
 }

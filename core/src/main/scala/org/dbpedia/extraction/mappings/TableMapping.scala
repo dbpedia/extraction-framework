@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.ArrayBuffer
 
 class TableMapping( mapToClass : OntologyClass,
                     correspondingClass : OntologyClass,
@@ -13,56 +14,32 @@ class TableMapping( mapToClass : OntologyClass,
                     mappings : List[PropertyMapping],
                     context : {
                         def ontology : Ontology
-                        def language : Language }   ) extends ClassMapping
+                        def language : Language }   ) extends ClassMapping[Node]
 {
     val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase(context.language.locale)) }
 
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
 
-    override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
+    override def extract(node : Node, subjectUri : String, pageContext : PageContext): Seq[Quad] = node match
     {
         case tableNode : TableNode => extractTable(tableNode, subjectUri, pageContext)
-        case _ => new Graph()
+        case _ => Seq.empty
     }
 
-    def extractTable(tableNode : TableNode, subjectUri : String, pageContext : PageContext) : Graph =
+    def extractTable(tableNode : TableNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
-        def writeType(rowNode : Node, instanceUri :String, clazz : OntologyClass, graph : Graph) : Graph =
-        {
-            var thisGraph = graph
-
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), clazz.uri, rowNode.sourceUri)
-            thisGraph = graph.merge(new Graph(quad))
-
-            for(baseClass <- clazz.subClassOf)
-            {
-                // FIXME: figure out what this code is supposed to do. 
-                // too much merging leads to combinatorial memory explosion. disabled for now. 
-                // thisGraph = graph.merge(writeType(rowNode, instanceUri, baseClass, thisGraph))
-            }
-
-            for(eqClass <- clazz.equivalentClasses)
-            {
-                // FIXME: figure out what this code is supposed to do. 
-                // too much merging leads to combinatorial memory explosion. disabled for now. 
-                // thisGraph = graph.merge(writeType(rowNode, instanceUri, eqClass, thisGraph))
-            }
-
-            thisGraph
-        }
-
         val tableHeader = extractTableHeader(tableNode)
 
         //TODO ignore tables with less than 2 rows
 
         if(!containsKeywords(tableHeader))
         {
-            return new Graph()
+            return Seq.empty
         }
 
         val processedTableNode = preprocessTable(tableNode)
 
-        var graph = new Graph()
+        var graph = new ArrayBuffer[Quad]()
 
         for( rowNode <- processedTableNode.children.tail;
              templateNode <- createTemplateNode(rowNode, tableHeader) )
@@ -74,19 +51,18 @@ class TableMapping( mapToClass : OntologyClass,
             val instanceUri = pageContext.generateUri(correspondingInstance.getOrElse(subjectUri), rowNode.children.head);
 
             //Add new ontology instance
-            graph = writeType(rowNode, instanceUri, mapToClass, graph)
+            for (cls <- mapToClass.relatedClasses)
+              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, rowNode.sourceUri)
 
             //Link new instance to the corresponding Instance
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
-                graph = graph.merge(new Graph(quad))
+                graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
             }
 
             //Extract properties
-            graph = mappings.map(mapping => mapping.extract(templateNode, instanceUri, pageContext))
-                .foldLeft(graph)(_ merge _)
+            graph ++= mappings.flatMap(_.extract(templateNode, instanceUri, pageContext))
         }
 
         graph

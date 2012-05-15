@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Extracts geo-coodinates.
@@ -22,9 +23,9 @@ class GeoExtractor( context : {
     private val pointOntProperty = context.ontology.properties("georss:point")
     private val featureOntClass =  context.ontology.classes("gml:_Feature")
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return Seq.empty
         
         // Iterate through all root templates.
         // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).
@@ -34,14 +35,16 @@ class GeoExtractor( context : {
             return writeGeoCoordinate(coordinate, subjectUri, node.sourceUri, pageContext)
         }
 
-        new Graph()
+        Seq.empty
     }
 
-    private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Graph =
+    private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        new Graph( new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri) ::
-                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri) ::
-                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri) ::
-                   new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri) :: Nil )
+      val quads = new ArrayBuffer[Quad]()
+      quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri)
+      quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri)
+      quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri)
+      quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
+      quads
     }
 }

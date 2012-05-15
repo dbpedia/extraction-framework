@@ -5,7 +5,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import xml.Elem
 import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.destinations.{Graph, Destination}
+import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource, Source, WikiPage}
 import java.net.URL
 import org.dbpedia.extraction.mappings.{Extractor,LabelExtractor,MappingExtractor,CompositeExtractor,Mappings,MappingsLoader,Redirects}
@@ -45,13 +45,9 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
 
     protected val parser = WikiParser()
 
-    def extract(source : Source, destination : Destination, language : Language)
-    {
-        val graph = source.map(parser)
-                          .map(extractor(language))
-                          .foldLeft(new Graph())(_ merge _)
-
-        destination.write(graph)
+    def extract(source: Source, destination: Destination, language: Language): Unit = {
+      val extract = extractor(language)
+      for (page <- source.map(parser)) destination.write(extract(page))
     }
 
     def validateMapping(mappingsSource: Source, lang: Language) : Elem =

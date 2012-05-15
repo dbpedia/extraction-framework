@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.wikiparser.TemplateNode
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.{OntologyClass, Ontology, DBpediaNamespace, OntologyProperty}
 
@@ -56,7 +57,7 @@ class CalculateMapping( val templateProperty1 : String,
         case dt => throw new IllegalArgumentException("Datatype " + dt + " is not supported by CalculateMapping")
     }
     
-    def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
+    def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         for( property1 <- node.property(templateProperty1);
              property2 <- node.property(templateProperty2);
@@ -94,46 +95,37 @@ class CalculateMapping( val templateProperty1 : String,
                 }
             }
 
-            return new Graph(quad)
+            return Seq(quad)
         }
         
-        new Graph()
+        Seq.empty
     }
 
     //TODO duplicated from SimplePropertyMapping
-    private def writeUnitValue(value : Double, unit : UnitDatatype, subjectUri : String, sourceUri : String) : Graph =
+    private def writeUnitValue(value : Double, unit : UnitDatatype, subjectUri : String, sourceUri : String) : Seq[Quad] =
     {
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
             val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
-            return new Graph(quad)
+            return Seq(quad)
         }
 
+        var graph = new ArrayBuffer[Quad]
+        
         //Write generic property
-        val stdValue = value  //has to be converted before calling this function (convert before calculating!)
-        val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
-        var graph = new Graph(quad)
-
-
-        //Collect all classes
-        def collectClasses(clazz : OntologyClass) : List[OntologyClass] =
-        {
-            clazz :: clazz.subClassOf.flatMap(collectClasses) ::: clazz.equivalentClasses.flatMap(collectClasses).toList
-        }
+        graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, new Datatype("xsd:double"))
 
         //Write specific properties
-        for(currentClass <- collectClasses(ontologyProperty.domain).distinct)
+        for(cls <- ontologyProperty.domain.relatedClasses)
         {
-            for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
+            for(specificPropertyUnit <- context.ontology.specializations.get((cls, ontologyProperty)))
             {
-                 val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
-                 val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)
-                 val quad = new Quad(context.language, DBpediaDatasets.SpecificProperties, subjectUri,
+                 val outputValue = specificPropertyUnit.fromStandardUnit(value)
+                 val propertyUri = DBpediaNamespace.ONTOLOGY.append(cls.name+'/'+ontologyProperty.name)
+                 graph += new Quad(context.language, DBpediaDatasets.SpecificProperties, subjectUri,
                                      propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
-                 graph = graph.merge(new Graph(quad))
             }
-
         }
 
         graph

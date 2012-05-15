@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.ontology
 
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable
 
 /**
  * Represents an ontology class.
@@ -13,14 +14,35 @@ import org.dbpedia.extraction.util.Language
  * @param equivalentClasses
  */
 class OntologyClass(name : String, labels : Map[Language, String], comments : Map[Language, String],
-                    val subClassOf : List/*TODO:ListSet?*/[OntologyClass], val equivalentClasses : Set[OntologyClass]) extends OntologyType(name, labels, comments)
+                    val baseClasses : List/*TODO:ListSet?*/[OntologyClass], val equivalentClasses : Set[OntologyClass]) extends OntologyType(name, labels, comments)
 {
-    require(name != null, "name != null")
-    require(labels != null, "labels != null")
-    require(comments != null, "comments != null")
-    require(subClassOf != null, "subClassOf != null")
-    require(name == "owl:Thing" || subClassOf.nonEmpty || ! RdfNamespace.validate(name), "subClassOf.nonEmpty")
-    require(equivalentClasses != null, "equivalentClasses != null")
+    require(name != null, "name is null")
+    require(labels != null, "labels is null")
+    require(comments != null, "comments is null")
+    require(baseClasses != null, "baseClasses is null")
+    require(baseClasses.nonEmpty || name == "owl:Thing" || ! RdfNamespace.validate(name), "baseClasses is empty, although this class is not the root and it should be validated")
+    require(equivalentClasses != null, "equivalentClasses is null")
+    
+    /**
+     * Transitive closure of sub-class and equivalent-class relations, including this class.
+     */
+    lazy val relatedClasses: Set[OntologyClass] = {
+      val classes = new mutable.HashSet[OntologyClass]()
+      collectClasses(classes)
+      classes.toSet
+    }
+    
+    private def collectClasses(classes: mutable.Set[OntologyClass]): Unit = {
+      // Note: If this class was already collected, classes.add() returns false and we 
+      // do nothing, so we silently skip cycles in class relations here. Some cycles 
+      // are allowed (for example between equivalent classes, but there are other cases), 
+      // others aren't. At this point, it's not easy to distinguish valid and invalid cycles, 
+      // so we ignore them all. Cycles should be checked when classes are loaded.
+      if (classes.add(this)) {
+        baseClasses.foreach(_.collectClasses(classes))
+        equivalentClasses.foreach(_.collectClasses(classes))
+      }
+    } 
 
     override val uri = RdfNamespace.fullUri(name, DBpediaNamespace.ONTOLOGY)
 

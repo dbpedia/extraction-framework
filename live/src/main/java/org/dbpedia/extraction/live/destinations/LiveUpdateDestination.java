@@ -3,7 +3,6 @@ package org.dbpedia.extraction.live.destinations;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.destinations.Dataset;
 import org.dbpedia.extraction.destinations.Destination;
-import org.dbpedia.extraction.destinations.Graph;
 import org.dbpedia.extraction.destinations.Quad;
 import org.dbpedia.extraction.live.core.*;
 import org.dbpedia.extraction.live.core.Timer;
@@ -23,6 +22,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import scala.collection.JavaConversions;
+import scala.collection.Seq;
+import scala.collection.Traversable;
 import scala.runtime.AbstractFunction1;
 import scala.Function1;
 
@@ -267,12 +268,12 @@ public class LiveUpdateDestination implements Destination{
         return pattern;
     }
 
-    public void write(Graph graph){
+    public void write(Seq<Quad> graph){
 
         Function1<Quad,Dataset> quadDataset = new AbstractFunction1<Quad,Dataset>() {
           public Dataset apply(Quad quad) { return quad.dataset(); }
         };
-        Map<Dataset, scala.collection.immutable.List<Quad>> tripleWithDataset = JavaConversions.mapAsJavaMap(graph.quads().groupBy(quadDataset));
+        Map<Dataset, Traversable<Quad>> tripleWithDataset = JavaConversions.mapAsJavaMap(graph.groupBy(quadDataset));
 
         Set<Dataset> keySet = tripleWithDataset.keySet();
         Iterator<Dataset> keysIterator = keySet.iterator();
@@ -308,13 +309,11 @@ public class LiveUpdateDestination implements Destination{
 //        }
     }
 
-    public void write(Graph graph, String extr){
+    public void write(Seq<Quad> graph, String extr){
 
         ExtractionResult rs = new ExtractionResult(pageId, language, extr);
 
-        scala.collection.immutable.List<Quad> quadList = (scala.collection.immutable.List<Quad>)graph.quads();
-        List<Quad> listQuads = JavaConversions.asList(quadList);
-        for(Quad quad : listQuads){
+        for(Quad quad : JavaConversions.asJavaIterable(graph)){
             rs.addTriple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
         }
 

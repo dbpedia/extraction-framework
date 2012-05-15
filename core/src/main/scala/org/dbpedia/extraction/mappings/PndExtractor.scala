@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.PndExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Extracts PND (Personennamendatei) data about a person.
@@ -24,11 +25,11 @@ class PndExtractor( context : {
 
     private val PndRegex = """(?i)[0-9X]+"""
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return Seq.empty
         
-        var quads = List[Quad]()
+        var quads = new ArrayBuffer[Quad]()
 
         val list = collectTemplates(node).filter(template =>
             PndExtractorConfig.pndTemplates.contains(template.title.decoded.toLowerCase))
@@ -43,7 +44,7 @@ class PndExtractor( context : {
                     {
                         for (pnd <- getPnd(property)) 
                         {
-                            quads ::= new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
@@ -54,13 +55,14 @@ class PndExtractor( context : {
                     {
                         for (pnd <- getPnd(property))
                         {
-                            quads ::= new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                            quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
                         }
                     }
                 }
             }
         })
-        new Graph(quads)
+        
+        quads
     }
 
     private def getPnd(node : PropertyNode) : Option[String] =

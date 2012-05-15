@@ -65,9 +65,9 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 	    }
 
         //Super classes
-        for(superClass <- ontologyClass.subClassOf)
+        for(baseClass <- ontologyClass.baseClasses)
 	    {
-	        xml += <rdfs:subClassOf rdf:resource={superClass.uri}/>
+	        xml += <rdfs:subClassOf rdf:resource={baseClass.uri}/>
 	    }
 
         //Equivalent classes

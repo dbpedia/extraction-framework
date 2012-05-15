@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -14,11 +14,11 @@ class RevisionIdExtractor( context : {
 {
     private val wikiPageRevisionIDProperty = context.ontology.properties("wikiPageRevisionID")
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         val objectLink = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
 
-        new Graph(new Quad(context.language, DBpediaDatasets.Revisions, objectLink, wikiPageRevisionIDProperty,
+        Seq(new Quad(context.language, DBpediaDatasets.Revisions, objectLink, wikiPageRevisionIDProperty,
             node.revision.toString, node.sourceUri, context.ontology.datatypes("xsd:integer")))
     }
 }

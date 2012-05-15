@@ -206,7 +206,7 @@ object ConfigLoader
 
         //Extractors
         val extractors = config.extractors(lang)
-        val compositeExtractor = Extractor.load(extractors, context)
+        val compositeExtractor = CompositeExtractor.load(extractors, context)
         
         def getFormatter(suffix: String): Formatter = {
           TerseFormatter.forSuffix(suffix).getOrElse( 
@@ -231,7 +231,7 @@ object ConfigLoader
           // TODO: use two to four default formats instead of all twelve?
           else TerseFormatter.all ++ TriXFormatter.all
         val destinations = for (formatter <- formatters) yield new FileDestination(formatter, targetFile(formatter.fileSuffix))
-        val destination = new CompositeDestination(destinations)
+        val destination = new CompositeDestination(destinations: _*)
 
         // Note: label is also used as file name, but space is replaced by underscores
         val jobLabel = "extraction job "+lang.wikiCode+" with "+extractors.size+" extractors"

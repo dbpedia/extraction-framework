@@ -53,7 +53,7 @@ class AugmenterExtractorTest extends FlatSpec with ShouldMatchers
 
     val graph = extractor.extract(null, "http://subjectPageURI", null)
 
-    println(graph.quads)
+    println(graph)
   }
 
 

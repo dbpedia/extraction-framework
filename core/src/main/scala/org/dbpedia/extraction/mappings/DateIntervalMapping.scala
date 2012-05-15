@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import java.util.logging.Logger
 import org.dbpedia.extraction.dataparser.DateTimeParser
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
@@ -24,9 +24,10 @@ class DateIntervalMapping( val templateProperty : String, //TODO CreateMappingSt
 
     private val presentString = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
 
+    // TODO: the parser should resolve HTML entities
     private val intervalSplitRegex = "(—|–|-|&mdash;|&ndash;)"
     
-    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : TemplateNode, subjectUri: String, pageContext : PageContext) : Seq[Quad] =
     {
         for(propertyNode <- node.property(templateProperty))
         {
@@ -36,11 +37,11 @@ class DateIntervalMapping( val templateProperty : String, //TODO CreateMappingSt
             //Can only map exactly two values onto an interval
             if(splitNodes.size > 2 || splitNodes.size  <= 0)
             {
-                return new Graph()
+                return Seq.empty
             }
 
             //Parse start; return if no start year has been found
-            val startDate = startDateParser.parse(splitNodes(0)).getOrElse(return new Graph())
+            val startDate = startDateParser.parse(splitNodes(0)).getOrElse(return Seq.empty)
 
             //Parse end
             val endDateOpt = splitNodes match
@@ -71,19 +72,19 @@ class DateIntervalMapping( val templateProperty : String, //TODO CreateMappingSt
                 if(startDate > endDate)
                 {
                     logger.fine("startDate > endDate")
-                    return new Graph(quad1 :: Nil)
+                    return Seq(quad1)
                 }
 
                 //Write end year quad
                 val quad2 = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
 
-                return new Graph(quad1 :: quad2 :: Nil)
+                return Seq(quad1, quad2)
             }
 
-            return new Graph(quad1 :: Nil)
+            return Seq(quad1)
         }
         
-        new Graph()
+        Seq.empty
     }
 
     private def splitPropertyNodes(propertyNode : PropertyNode) : List[PropertyNode] =

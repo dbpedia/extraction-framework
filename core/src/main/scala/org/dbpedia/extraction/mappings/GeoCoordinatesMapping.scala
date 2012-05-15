@@ -2,10 +2,11 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Extracts geo-coodinates.
@@ -40,12 +41,12 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
     private val pointOntProperty = context.ontology.properties("georss:point")
     private val featureOntClass =  context.ontology.classes("gml:_Feature")
 
-    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         extractGeoCoordinate(node) match
         {
             case Some(coord) => writeGeoCoordinate(node, coord, subjectUri, node.sourceUri, pageContext)
-            case None => new Graph()
+            case None => Seq.empty
         }
     }
 
@@ -110,23 +111,24 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
         None
     }
 
-    private def writeGeoCoordinate(node : TemplateNode, coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Graph =
+    private def writeGeoCoordinate(node : TemplateNode, coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        var quads = List[Quad]()
+        var quads = new ArrayBuffer[Quad]()
+        
         var instanceUri = subjectUri
 
         if(ontologyProperty != null)
         {
             instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
 
-            quads ::= new Quad(context.language,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
+            quads += new Quad(context.language,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
         }
 
-        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
-        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
-        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
-        quads ::= new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
+        quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
+        quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
+        quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
+        quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
 
-        new Graph(quads)
+        quads
     }
 }

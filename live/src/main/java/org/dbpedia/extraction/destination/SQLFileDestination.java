@@ -11,7 +11,8 @@ import java.util.logging.Logger;
 import org.dbpedia.extraction.destinations.DBpediaDatasets;
 import org.dbpedia.extraction.destinations.Dataset;
 import org.dbpedia.extraction.destinations.Destination;
-import org.dbpedia.extraction.destinations.Graph;
+import scala.collection.Seq;
+import scala.collection.Traversable;
 import org.dbpedia.extraction.destinations.Quad;
 import scala.Function1;
 import scala.runtime.AbstractFunction1;
@@ -51,18 +52,18 @@ public class SQLFileDestination implements Destination {
     }
 
     @Override
-    public synchronized void write(Graph graph){
+    public synchronized void write(Seq<Quad> graph){
 
         Function1<Quad,Dataset> quadDataset = new AbstractFunction1<Quad,Dataset>() {
           public Dataset apply(Quad quad) { return quad.dataset(); }
         };
-        Map<Dataset, List<Quad>> datasets = JavaConversions.mapAsJavaMap(graph.quads().groupBy(quadDataset));
-        for (Entry<Dataset, List<Quad>> e : datasets.entrySet()) {
+        Map<Dataset, Traversable<Quad>> datasets = JavaConversions.mapAsJavaMap(graph.groupBy(quadDataset));
+        for (Entry<Dataset, Traversable<Quad>> e : datasets.entrySet()) {
             Dataset ds = e.getKey();
-            List<Quad> quads = e.getValue();
+            Traversable<Quad> quads = e.getValue();
 
             Map<String, Map<String, String>> newHashSet = new HashMap<String, Map<String, String>>();
-            for(Quad quad : JavaConversions.asJavaIterable(quads)){
+            for(Quad quad : JavaConversions.asJavaIterable(quads.toSeq())){
 
                 Map<String, String> tmp = new HashMap<String, String>();
 

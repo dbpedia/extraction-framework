@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.{Logger, Level}
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import java.net.{URLEncoder, URL}
 import xml.XML
@@ -39,23 +39,23 @@ class AbstractExtractor( context : {
     // lazy so testing does not need ontology
     private lazy val longProperty = context.ontology.properties("abstract")
 
-    override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         //Only extract abstracts for pages from the Main namespace
-        if(pageNode.title.namespace != Namespace.Main) return new Graph()
+        if(pageNode.title.namespace != Namespace.Main) return Seq.empty
 
         //Don't extract abstracts from redirect and disambiguation pages
-        if(pageNode.isRedirect || pageNode.isDisambiguation) return new Graph()
+        if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
 
         //Reproduce wiki text for abstract
         val abstractWikiText = getAbstractWikiText(pageNode)
-        if(abstractWikiText == "") return new Graph()
+        if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
         var text = retrievePage(pageNode.title, abstractWikiText)
 
         //Ignore empty abstracts
-        if(text.trim.isEmpty) return new Graph()
+        if(text.trim.isEmpty) return Seq.empty
 
         text = postProcess(pageNode.title, text)
 
@@ -68,11 +68,11 @@ class AbstractExtractor( context : {
 
         if(shortText.isEmpty)
         {
-            new Graph(List(quadLong))
+            Seq(quadLong)
         }
         else
         {
-            new Graph(List(quadLong, quadShort))
+            Seq(quadLong, quadShort)
         }
     }
 
