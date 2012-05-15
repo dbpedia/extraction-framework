@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.stats
 import java.util.logging.Logger
 import scala.io.Source
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.wikiparser.Node
+import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable
 import java.io.File
@@ -80,13 +80,13 @@ extends MappingStatsConfig(statsDir, language)
     }
 }
 
-class PropertyCollector(mapping: ClassMapping[Node]) {
+class PropertyCollector(mapping: Mapping[TemplateNode]) {
   
   val properties = new mutable.HashSet[String]
   
   classMapping(mapping) // go get'em!
   
-  private def classMapping(mapping: ClassMapping[Node]) : Unit = mapping match {
+  private def classMapping(mapping: Mapping[TemplateNode]) : Unit = mapping match {
     case tm: TemplateMapping => tm.mappings.foreach(propertyMapping)
     case cm: ConditionalMapping =>
       cm.cases.foreach(conditionMapping)

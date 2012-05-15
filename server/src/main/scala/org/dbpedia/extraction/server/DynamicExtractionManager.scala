@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.mappings.{Mappings,Extractor}
+import org.dbpedia.extraction.mappings.{Mappings,RootExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
@@ -35,7 +35,7 @@ extends ExtractionManager(languages, paths)
 
     private var _mappings : Map[Language, Mappings] = loadMappings
 
-    private var _extractors : Map[Language, Extractor] = loadExtractors
+    private var _extractors : Map[Language, RootExtractor] = loadExtractors
 
     def extractor(language : Language) = synchronized { _extractors(language) }
 

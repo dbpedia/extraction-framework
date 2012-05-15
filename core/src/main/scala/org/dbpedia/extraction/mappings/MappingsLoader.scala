@@ -27,7 +27,7 @@ object MappingsLoader
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
-        val classMappings = new HashMap[String, ClassMapping[Node]]()
+        val classMappings = new HashMap[String, Mapping[TemplateNode]]()
         val tableMappings = new ArrayBuffer[TableMapping]()
 
         for ( page <- context.mappingPageSource;
@@ -224,6 +224,8 @@ object MappingsLoader
         new ConditionMapping( loadTemplateProperty(tnode, "templateProperty", false),
                               loadTemplateProperty(tnode, "operator", false),
                               loadTemplateProperty(tnode, "value", false),
+                              // TODO: allow nested ConditionalMapping - don't use loadTemplateMapping() 
+                              // here, move the switch block in load() to its own method and use that
                               loadTemplateMapping(mapping, context))
     }
     

@@ -6,27 +6,25 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyPropert
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
 
-class TableMapping( mapToClass : OntologyClass,
-                    correspondingClass : OntologyClass,
-                    correspondingProperty : OntologyProperty,
-                    keywords : String,
-                    header : String,
-                    mappings : List[PropertyMapping],
-                    context : {
-                        def ontology : Ontology
-                        def language : Language }   ) extends ClassMapping[Node]
+class TableMapping( 
+  mapToClass : OntologyClass,
+  correspondingClass : OntologyClass,
+  correspondingProperty : OntologyProperty,
+  keywords : String,
+  header : String,
+  mappings : List[PropertyMapping],
+  context : {
+    def ontology : Ontology
+    def language : Language 
+  }
+) 
+extends Mapping[TableNode]
 {
     val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase(context.language.locale)) }
 
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
 
-    override def extract(node : Node, subjectUri : String, pageContext : PageContext): Seq[Quad] = node match
-    {
-        case tableNode : TableNode => extractTable(tableNode, subjectUri, pageContext)
-        case _ => Seq.empty
-    }
-
-    def extractTable(tableNode : TableNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(tableNode : TableNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         val tableHeader = extractTableHeader(tableNode)
 

@@ -6,6 +6,7 @@ import org.dbpedia.extraction.destinations.Quad
 /**
  */
 trait Mapping[N <: Node] {
+  
     /**
      * @param page The source node
      * @param subjectUri The subject URI of the generated triples

@@ -81,7 +81,7 @@ object ConfigLoader
         //Extractor
         // val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
         // FIXME: the following line compiles, but will crash when it is executed.
-        val extractor = CompositeExtractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } )
+        val extractor = new RootExtractor(CompositeExtractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } ))
 
         //Destination
         val formatters = List(TerseFormatter.NTriplesIris, TerseFormatter.NQuadsIris)

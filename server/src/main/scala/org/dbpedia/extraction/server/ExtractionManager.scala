@@ -2,15 +2,15 @@ package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
-import xml.Elem
+import scala.xml.Elem
 import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource, Source, WikiPage}
-import java.net.URL
-import org.dbpedia.extraction.mappings.{Extractor,LabelExtractor,MappingExtractor,CompositeExtractor,Mappings,MappingsLoader,Redirects}
+import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.wikiparser._
 import java.io.File
+import java.net.URL
 
 /**
  * Base class for extraction managers.
@@ -24,7 +24,7 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
     
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
-    def extractor(language : Language) : Extractor
+    def extractor(language : Language) : RootExtractor
 
     def ontology : Ontology
 
@@ -150,18 +150,21 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
         new OntologyReader().read(ontologyPages.values)
     }
 
-    protected def loadExtractors(): Map[Language, Extractor] =
+    protected def loadExtractors(): Map[Language, RootExtractor] =
     {
-        try languages.map(lang => (lang, loadExtractors(lang))).toMap
-        finally logger.info("All extractors loaded for languages "+languages.mkString(", "))
+        val extractors = languages.map(lang => (lang, loadExtractors(lang))).toMap
+        logger.info("All extractors loaded for languages "+languages.mkString(", ")) // TODO: log lang.wikiCode, not lang.toString
+        extractors
     }
 
-    protected def loadExtractors(lang : Language): Extractor =
+    protected def loadExtractors(lang : Language): RootExtractor =
     {
+      new RootExtractor(
         new CompositeExtractor(
           new LabelExtractor(new {val ontology = self.ontology; val language = lang}), 
           new MappingExtractor(new {val mappings = self.mappings(lang); val redirects = new Redirects(Map())})
         )
+      )
     }
 
     protected def loadMappings() : Map[Language, Mappings] =

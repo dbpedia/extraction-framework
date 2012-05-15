@@ -3,7 +3,6 @@ package org.dbpedia.extraction.live.job
 import _root_.org.dbpedia.extraction.destinations.Destination
 import _root_.org.dbpedia.extraction.mappings.Extractor
 import _root_.org.dbpedia.extraction.sources.{Source, WikiPage}
-
 import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser, Namespace}
 import java.util.concurrent.{ArrayBlockingQueue}
 import java.util.logging.{Level, Logger}
@@ -12,6 +11,7 @@ import java.net.URLEncoder
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
 import java.io.{InvalidClassException, File}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.mappings.RootExtractor
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,7 +21,7 @@ import org.dbpedia.extraction.util.Language
  * To change this template use File | Settings | File Templates.
  */
 
-class LiveExtractionJob(extractor : Extractor, source : Source, language : Language, val label : String = "Extraction Job") extends Thread
+class LiveExtractionJob(extractor : RootExtractor, source : Source, language : Language, val label : String = "Extraction Job") extends Thread
 {
     private val logger = Logger.getLogger(classOf[LiveExtractionJob].getName)
 
