@@ -10,7 +10,7 @@ import org.dbpedia.extraction.ontology.DBpediaNamespace
  * For each language, there is only one instance of this class.
  * TODO: rename this class to WikiCode or so.
  */
-class Language private(val wikiCode : String, val isoCode: String, generic: Boolean) extends Serializable
+class Language private(val wikiCode : String, val isoCode: String) extends Serializable
 {
     // TODO: make this transient and add a readObject method. Better yet: never use Serializable
     val locale = new Locale(isoCode)
@@ -22,17 +22,17 @@ class Language private(val wikiCode : String, val isoCode: String, generic: Bool
     val filePrefix = wikiCode.replace("-", "_")
     
     /**
-     * DBpedia base URI for this language, e.g. "http://de.dbpedia.org", "http://dbpedia.org"
+     * DBpedia base URI for this language, e.g. "http://en.dbpedia.org"
      */
-    private def dbpedia = "http://"+(if (generic) "" else wikiCode+'.')+"dbpedia.org"
+    private def dbpedia = "http://"+wikiCode+".dbpedia.org"
     
     /**
-     * DBpedia resource namespace for this language, e.g. "http://de.dbpedia.org/resource" or "http://dbpedia.org/resource"
+     * DBpedia resource namespace for this language, e.g. "http://en.dbpedia.org/resource/"
      */
     val resourceUri = new DBpediaNamespace(dbpedia+"/resource/")
     
     /**
-     * DBpedia property namespace for this language, e.g. "http://de.dbpedia.org/property" or "http://dbpedia.org/property"
+     * DBpedia property namespace for this language, e.g. "http://en.dbpedia.org/property/"
      */
     val propertyUri = new DBpediaNamespace(dbpedia+"/property/")
     
@@ -60,10 +60,7 @@ object Language extends (String => Language)
   
   val Values = locally {
     
-    // TODO: this should not be hard-coded.
-    val generic = Set[String]() // Set("en")
-    
-    def language(code : String, iso: String): Language = new Language(code, iso, generic.contains(code))
+    def language(code : String, iso: String): Language = new Language(code, iso)
     
     val languages = new HashMap[String,Language]
     
