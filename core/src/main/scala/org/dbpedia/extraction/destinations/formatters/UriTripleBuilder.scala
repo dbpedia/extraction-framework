@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import org.dbpedia.extraction.destinations.TripleBuilder
 import java.net.{URI,URISyntaxException}
 
 abstract class UriTripleBuilder(iri: Boolean) extends TripleBuilder {

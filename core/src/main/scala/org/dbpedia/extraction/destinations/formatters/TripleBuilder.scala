@@ -1,5 +1,6 @@
-package org.dbpedia.extraction.destinations
+package org.dbpedia.extraction.destinations.formatters
 
+import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
 import java.net.{URI,URISyntaxException}
