@@ -82,13 +82,14 @@ class WikiDownloader(val apiUrl : String) {
                 in.elements("page") { page =>
                   in.element("revisions") { _ =>
                     in.element("rev") { rev =>
-                    in.text { text =>
-                      out.element("page") {
-                        out.element("title") { out.text( page getAttr "title" ) }
-                        out.element("ns") { out.text( page getAttr "ns" ) }
-                        out.element("id") { out.text( page getAttr "pageid" ) }
-                        out.element ("revision") {
-                          out.element ("id") { out.text( rev getAttr "revid" ) }
+                      in.text { text =>
+                        out.element("page") {
+                          out.element("title") { out.text( page getAttr "title" ) }
+                          out.element("ns") { out.text( page getAttr "ns" ) }
+                          out.element("id") { out.text( page getAttr "pageid" ) }
+                          out.element ("revision") {
+                            out.element ("id") { out.text( rev getAttr "revid" ) }
+                            out.element ("timestamp") { out.text( rev getAttr "timestamp" ) }
                             out.element ("text") { out.text(text) }
                           }
                         }
