@@ -27,12 +27,6 @@ class TriXBuilder(iri: Boolean, quads: Boolean) extends UriTripleBuilder(iri) {
     this add spaces(depth) add ("<uri>") escapeUri(value) add ("</uri>\n")
   }
   
-  override def badUri(badUris: Int): Unit = {
-    // TODO: we could exclude the whole triple (insert <!-- at start and append --> at end, 
-    // but take care that we do it only once), but currently this class is only used during 
-    // testing and it's probably better to have these errors visible
-  }
-  
   override def string(value: String, lang: String): Unit = {
     this add spaces(depth) add ("<plainLiteral xml:lang=\"") add(lang) add("\">")
     escape(value, sb) 
@@ -53,7 +47,11 @@ class TriXBuilder(iri: Boolean, quads: Boolean) extends UriTripleBuilder(iri) {
   override def toString: String = sb.toString
   
   private def escapeUri(str: String): TriXBuilder = {
-    escape(parseUri(str), sb)    
+    val uri = parseUri(str)
+    // TODO: check if uri starts with badUri. If yes, wrap the whole triple in <!-- and --> 
+    // (but take care that we do it only once). But currently this class is only used during 
+    // testing, so it's probably better to have these errors visible.
+    escape(uri, sb)    
     this
   }
       

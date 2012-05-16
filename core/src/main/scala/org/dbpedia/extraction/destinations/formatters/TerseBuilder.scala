@@ -17,15 +17,13 @@ class TerseBuilder(iri: Boolean, quads: Boolean, turtle: Boolean) extends UriTri
     /* nothing to do */ 
   }
   
-  override def badUri(badUris: Int): Unit = {
-    // this triple is unusable, comment it out (but only once)
-    if (badUris == 1) sb.insert(0, "# ")
-  }
-  
   override def uri(str: String): Unit = {
+    // If URI is bad, comment out whole triple (may happen multiple times)
     // Note: If a bad uri contains ">", the line cannot be parsed - but it's broken anyway.
     // For Turtle, we could fix this by escaping ">" as "\>", but for N-Triples, we can't.
-    this add '<' escape parseUri(str) add "> "
+    val uri = parseUri(str)
+    if (uri.startsWith(badUri)) sb.insert(0, "# ")
+    this add '<' escape uri add "> "
   }
   
   /**
