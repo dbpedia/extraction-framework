@@ -92,7 +92,7 @@ object ObjectTriple extends UriTriple(3)
 
 object DatatypeTriple extends UriTriple(2)
 
-class MappingStatsBuilder(statsDir : File, language: Language)
+class MappingStatsBuilder(statsDir : File, language: Language, pretty: Boolean)
 extends MappingStatsConfig(statsDir, language)
 {
     private val logger = Logger.getLogger(getClass.getName)
@@ -135,7 +135,10 @@ extends MappingStatsConfig(statsDir, language)
             for (line <- source.getLines()) {
                 process(line)
                 count += 1
-                if (count % 10000 == 0) print(count+" lines\r")
+                if (count % 1000000 == 0) {
+                    if (pretty) print(count+" lines\r")
+                    else println(count+" lines")
+                }
             }
         } finally source.close
         println(count+" lines - "+prettyMillis(System.currentTimeMillis - millis))
@@ -234,14 +237,14 @@ extends MappingStatsConfig(statsDir, language)
                     var templateName = cleanUri(pred)
                     val propertyName = cleanValue(obj)
                     
-                    // resolve redirect for *predicate*
+                    // resolve redirect for template
                     templateName = redirects.getOrElse(templateName, templateName)
 
-                    // lookup the *predicate* in the resultMap
+                    // lookup the template in the resultMap
                     // skip the templates that are not found (they don't occur in Wikipedia)
                     for(stats <- resultMap.get(templateName)) {
-                        // lookup *object* in the properties map
-                        //skip the properties that are not found with any count (they don't occurr in the template definition)
+                        // lookup property in the properties map
+                        // skip the properties that are not found with any count (they don't occur in the template definition)
                         if (stats.properties.contains(propertyName)) {
                             // increment count in properties map
                             stats.properties.put(propertyName, stats.properties(propertyName) + 1)
