@@ -1,4 +1,5 @@
 package org.dbpedia.extraction.wikiparser
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Represents a page.
@@ -16,26 +17,5 @@ case class PageNode(title : WikiTitle, id : Long, revision : Long, timestamp: Lo
 {
     def toWikiText() : String = children.map(_.toWikiText).mkString
 
-    // FIXME: copy and paste from WikiPage.scala
-    // TODO: this is the XML format used in the dump files, but the format used by api.php is different.
-    // We should move this method to a utility class that also has a method generating XML in api.php format.
-    // TODO: make sure that XML is valid according to the schema. If not, add dummy elements / attributes where required.
-    def toXML =
-    {
-        <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.6/ http://www.mediawiki.org/xml/export-0.6.xsd"
-                   version="0.6"
-                   xml:lang={title.language.isoCode}>
-          <page>
-            <title>{title.decodedWithNamespace}</title>
-            <id>{id}</id>
-            <revision>
-              <id>{revision}</id>
-              <timestamp>{timestamp}</timestamp>
-              <text xml:space="preserve">{toWikiText()}</text>
-            </revision>
-          </page>
-        </mediawiki>
-    }
+    def toXML = WikiPage.toDumpXML(title, id, revision, timestamp, toWikiText())
 }
