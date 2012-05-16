@@ -117,6 +117,7 @@ abstract class Node(val children : List[Node], val line : Int)
         val sb = new StringBuilder
         
         sb append root.title.pageIri
+        if (root.revision >= 0) sb append "?oldid=" append root.revision
 
         if (section != null)
         {
