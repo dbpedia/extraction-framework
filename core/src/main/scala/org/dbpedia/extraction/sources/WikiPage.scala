@@ -30,7 +30,7 @@ case class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long,
      * Serializes this page to XML using the MediaWiki export format.
      * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.6.
      */
-    def toXML = WikiPage.toDumpXML(title, id, revision, timestamp, source)
+    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, source)
 }
 
 object WikiPage {
