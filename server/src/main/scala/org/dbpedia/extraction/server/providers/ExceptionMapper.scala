@@ -6,7 +6,7 @@ import javax.ws.rs.core.Response
 @Provider
 class ExceptionMapper extends javax.ws.rs.ext.ExceptionMapper[Throwable]
 {
-   	override def toResponse(exception : Throwable) : Response =
+       override def toResponse(exception : Throwable) : Response =
     {
         val html =
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">

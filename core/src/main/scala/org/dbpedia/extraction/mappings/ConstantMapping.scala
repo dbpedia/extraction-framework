@@ -13,7 +13,7 @@ import org.dbpedia.extraction.util.{WikiUtil, Language}
  * {{TemplateMapping
  *    | mapToClass = Road
  *    | mappings =
- *	     {{ConstantMapping | ontologyProperty = country | value = Australia }}
+ *         {{ConstantMapping | ontologyProperty = country | value = Australia }}
  *   ...
  * }}
  */

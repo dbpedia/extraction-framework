@@ -6,31 +6,31 @@ import datatypes.{DimensionDatatype, UnitDatatype}
 class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 {
 
-	private val Version = "3.7";
+    private val Version = "3.7";
 
     private val EXPORT_EXTERNAL = false  // export owl, foaf, rdf, rdfs etc.
-	
-	def write(ontology : Ontology) : scala.xml.Elem =
+    
+    def write(ontology : Ontology) : scala.xml.Elem =
     {
         <rdf:RDF
-        	xmlns = "http://dbpedia.org/ontology/"
-        	xml:base="http://dbpedia.org/ontology/"
-        	xmlns:owl="http://www.w3.org/2002/07/owl#"
-        	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-        	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+            xmlns = "http://dbpedia.org/ontology/"
+            xml:base="http://dbpedia.org/ontology/"
+            xmlns:owl="http://www.w3.org/2002/07/owl#"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
         <owl:Ontology rdf:about="">
           <owl:versionInfo xml:lang="en">{"Version " + Version}</owl:versionInfo>
         </owl:Ontology>
         {
-	        //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
-	        val classes = for(ontologyClass <- ontology.classes.values if (EXPORT_EXTERNAL || !ontologyClass.isExternalClass))
-	        	yield writeClass(ontologyClass)
+            //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
+            val classes = for(ontologyClass <- ontology.classes.values if (EXPORT_EXTERNAL || !ontologyClass.isExternalClass))
+                yield writeClass(ontologyClass)
 
-	        //Write properties from the default namespace
-	        val properties = for(ontologyProperty <- ontology.properties.values if (EXPORT_EXTERNAL || !ontologyProperty.isExternalProperty))
-	        	yield writeProperty(ontologyProperty)
+            //Write properties from the default namespace
+            val properties = for(ontologyProperty <- ontology.properties.values if (EXPORT_EXTERNAL || !ontologyProperty.isExternalProperty))
+                yield writeProperty(ontologyProperty)
 
             if(writeSpecificProperties)
             {
@@ -50,40 +50,40 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 
     private def writeClass(ontologyClass : OntologyClass) : scala.xml.Elem =
     {
-    	val xml = new scala.xml.NodeBuffer()
+        val xml = new scala.xml.NodeBuffer()
 
         //Labels
-	    for((language, label) <- ontologyClass.labels)
-	    {
-	        xml += <rdfs:label xml:lang={language.isoCode}>{label}</rdfs:label>
-	    }
+        for((language, label) <- ontologyClass.labels)
+        {
+            xml += <rdfs:label xml:lang={language.isoCode}>{label}</rdfs:label>
+        }
 
         //Comments
-	    for((language, comment) <- ontologyClass.comments)
-	    {
-	        xml += <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment>
-	    }
+        for((language, comment) <- ontologyClass.comments)
+        {
+            xml += <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment>
+        }
 
         //Super classes
         for(baseClass <- ontologyClass.baseClasses)
-	    {
-	        xml += <rdfs:subClassOf rdf:resource={baseClass.uri}/>
-	    }
+        {
+            xml += <rdfs:subClassOf rdf:resource={baseClass.uri}/>
+        }
 
         //Equivalent classes
-	    for(equivalentClass <- ontologyClass.equivalentClasses)
-	    {
-	        xml += <owl:equivalentClass rdf:resource={equivalentClass.uri}/>
-	    }
+        for(equivalentClass <- ontologyClass.equivalentClasses)
+        {
+            xml += <owl:equivalentClass rdf:resource={equivalentClass.uri}/>
+        }
 
-    	<owl:Class rdf:about={ontologyClass.uri}>
-    	{xml}
-    	</owl:Class>
+        <owl:Class rdf:about={ontologyClass.uri}>
+        {xml}
+        </owl:Class>
     }
 
     private def writeProperty(property : OntologyProperty) : scala.xml.Elem =
     {
-    	val xml = new scala.xml.NodeBuffer()
+        val xml = new scala.xml.NodeBuffer()
 
         //Type
         if (property.isFunctional)
@@ -110,16 +110,16 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
             case _ => ""
         }
 
-	    for((language, label) <- property.labels)
-	    {
-	        xml += <rdfs:label xml:lang={language.isoCode}>{label + labelPostfix}</rdfs:label>
-	    }
+        for((language, label) <- property.labels)
+        {
+            xml += <rdfs:label xml:lang={language.isoCode}>{label + labelPostfix}</rdfs:label>
+        }
 
         //Comments
-	    for((language, comment) <- property.comments)
-	    {
-	        xml += <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment>
-	    }
+        for((language, comment) <- property.comments)
+        {
+            xml += <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment>
+        }
 
         //Domain
         if (property.domain.name != "owl:Thing")

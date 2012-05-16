@@ -108,7 +108,7 @@ private final class Source(source : String, val language : Language)
         }
         else
         {
-        	return source.substring(startPos, endPos);
+            return source.substring(startPos, endPos);
         }
     }
 
@@ -121,17 +121,17 @@ private final class Source(source : String, val language : Language)
     def findLine(lineNumber : Int) : String = 
     {
         //Find line beginning
-    	var curLine = lineNumber
-    	var begin = 0
-    	while(begin < source.length - 1 && curLine > 1)
-    	{
-    		if(source(begin) == '\n')
+        var curLine = lineNumber
+        var begin = 0
+        while(begin < source.length - 1 && curLine > 1)
+        {
+            if(source(begin) == '\n')
             {
                 curLine -= 1
             }
 
-    		begin += 1
-    	}
+            begin += 1
+        }
 
         //Find line ending
         var end = begin;

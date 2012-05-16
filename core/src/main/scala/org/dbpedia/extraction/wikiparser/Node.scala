@@ -94,7 +94,7 @@ abstract class Node(val children : List[Node], val line : Int)
      */
     def annotation(key : String) : Option[Any] =
     {
-    	return annotations.get(key)
+        return annotations.get(key)
     }
 
     /**
@@ -105,7 +105,7 @@ abstract class Node(val children : List[Node], val line : Int)
      */
     def setAnnotation(key : String, value : Any)
     {
-    	annotations(key) = value
+        annotations(key) = value
     }
     
     /**

@@ -20,7 +20,7 @@ case class TemplateNode(title : WikiTitle, override val children : List[Property
      */
     def property(key : String) : Option[PropertyNode] =
     {
-    	return propertyMap.get(key);
+        return propertyMap.get(key);
     }
 
     def keySet :  scala.collection.Set[String] = propertyMap.keySet

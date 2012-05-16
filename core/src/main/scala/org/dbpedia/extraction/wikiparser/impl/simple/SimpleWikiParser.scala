@@ -131,21 +131,21 @@ final class SimpleWikiParser extends WikiParser
             //If this text is at the beginning => remove leading whitespace
             if(nodes.isEmpty)
             {
-            	currentText = currentText.replaceAll("^\\s+", "")
+                currentText = currentText.replaceAll("^\\s+", "")
             }
             
             //If this text is at the end => remove trailing whitespace and return
             if((!m.matched && level == 0) || !m.isStdTag)
             {
-            	if(currentText.isEmpty)
-            	{
-            		return nodes.reverse
-            	}
-            	else
-            	{
+                if(currentText.isEmpty)
+                {
+                    return nodes.reverse
+                }
+                else
+                {
                 nodes ::= TextNode(currentText, lastLine)
-            		return nodes.reverse
-            	}
+                    return nodes.reverse
+                }
             }
 
             //Check result of seek
@@ -414,10 +414,10 @@ final class SimpleWikiParser extends WikiParser
 
     private def parseTemplate(source : Source, level : Int) : Node =
     {
-    	val startLine = source.line
-    	var title : WikiTitle = null;
-    	var properties = List[PropertyNode]()
-    	var curKeyIndex = 1
+        val startLine = source.line
+        var title : WikiTitle = null;
+        var properties = List[PropertyNode]()
+        var curKeyIndex = 1
 
         while(true)
         {
@@ -446,7 +446,7 @@ final class SimpleWikiParser extends WikiParser
 
                 if(propertyNode.key == curKeyIndex.toString)
                 {
-            	    curKeyIndex += 1
+                    curKeyIndex += 1
                 }
             }
 
@@ -456,22 +456,22 @@ final class SimpleWikiParser extends WikiParser
                 return TemplateNode(title, properties.reverse, startLine)
             }
         }
-    	
-    	throw new WikiParserException("Template not closed", startLine, source.findLine(startLine))
+        
+        throw new WikiParserException("Template not closed", startLine, source.findLine(startLine))
     }
 
     private def parseProperty(source : Source, defaultKey : String, level : Int) : PropertyNode =
     {
-    	val line = source.line
-    	var nodes = parseUntil(propertyValueOrEnd, source, level)
-    	var key = defaultKey
+        val line = source.line
+        var nodes = parseUntil(propertyValueOrEnd, source, level)
+        var key = defaultKey
  
         if(source.lastTag("="))
         {
             //The currently parsed node is a key
-        	if(nodes.size != 1 || !nodes.head.isInstanceOf[TextNode])
-        		throw new WikiParserException("Template property key contains invalid elements", line, source.findLine(line))
-        	
+            if(nodes.size != 1 || !nodes.head.isInstanceOf[TextNode])
+                throw new WikiParserException("Template property key contains invalid elements", line, source.findLine(line))
+            
             key = nodes.head.retrieveText.get.trim
 
             //Parse the corresponding value
@@ -491,11 +491,11 @@ final class SimpleWikiParser extends WikiParser
     
     private def parseTable(source : Source, level : Int) : TableNode =
     {
-    	val startPos = source.pos
-    	val line = source.line
+        val startPos = source.pos
+        val line = source.line
  
-    	var nodes = List[TableRowNode]()
-    	var caption : Option[String] = None
+        var nodes = List[TableRowNode]()
+        var caption : Option[String] = None
 
         //Parse rows
         var done = false
@@ -531,24 +531,24 @@ final class SimpleWikiParser extends WikiParser
                 }
                 
                 //Parse row
-	            nodes ::= parseTableRow(source, level)
-	
-	            //Reached table end?
-	            if(source.lastTag("|}"))
-	            {
-	                done = true
-	            }
+                nodes ::= parseTableRow(source, level)
+    
+                //Reached table end?
+                if(source.lastTag("|}"))
+                {
+                    done = true
+                }
             }
         }
-    	
-    	TableNode(caption, nodes.reverse, line);
+        
+        TableNode(caption, nodes.reverse, line);
     }
 
     private def parseTableRow(source : Source, level : Int) : TableRowNode =
     {
-    	val line = source.line
-    	var nodes = List[TableCellNode]()
-    	
+        val line = source.line
+        var nodes = List[TableCellNode]()
+        
         while(true)
         {
             //Parse table cell
@@ -567,9 +567,9 @@ final class SimpleWikiParser extends WikiParser
     private def parseTableCell(source : Source, level : Int) : TableCellNode =
     {
         val startPos = source.pos
-    	val startLine = source.line
-    	var rowspan = 1
-    	var colspan = 1
+        val startLine = source.line
+        var rowspan = 1
+        var colspan = 1
         var nodes = parseUntil(tableCellEnd1, source, level)
 
         val lookBack = source.getString(source.pos - 2, source.pos)
@@ -628,11 +628,11 @@ final class SimpleWikiParser extends WikiParser
 
         try
         {
-        	valueStr.toInt;
+            valueStr.toInt;
         }
         catch
         {
-        	case _ => 1
+            case _ => 1
         }
     }
 

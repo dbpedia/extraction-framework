@@ -199,14 +199,14 @@ class OntologyReader
         new Some(new SpecificPropertyBuilder(className, property, unit))
     }
 
-	private def readTemplateProperty(node : TemplateNode, propertyName : String) : Option[String] =
-	{
-	    node.property(propertyName) match
-	    {
-	        case Some(PropertyNode(_, TextNode(text, _) :: Nil, _)) if !text.trim.isEmpty => Some(text.trim)
-	        case _ => None
-	    }
-	}
+    private def readTemplateProperty(node : TemplateNode, propertyName : String) : Option[String] =
+    {
+        node.property(propertyName) match
+        {
+            case Some(PropertyNode(_, TextNode(text, _) :: Nil, _)) if !text.trim.isEmpty => Some(text.trim)
+            case _ => None
+        }
+    }
 
     private def readTemplatePropertyAsList(node : TemplateNode, propertyName : String) : List[String] =
     {

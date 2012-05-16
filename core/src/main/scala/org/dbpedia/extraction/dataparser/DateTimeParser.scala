@@ -203,9 +203,9 @@ class DateTimeParser ( context : {
      * Provided Data might be a Date like: [[January 20]] [[2001]], [[1991-10-25]] or 3 June 1981
      * Returns a normalized Date value (eg: 1984-01-29) if a Date is found in the string, NULL otherwise.
      *
-     * @param	string	$input	Literaltext, that matched to be a Date
-     * 			string	$language language of Literaltext, eg: 'en' or 'de'
-     * @return 	string	Date or NULL
+     * @param    string    $input    Literaltext, that matched to be a Date
+     *             string    $language language of Literaltext, eg: 'en' or 'de'
+     * @return     string    Date or NULL
      */
     private def catchDate(input: String) : Option[Date] =
     {
