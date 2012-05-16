@@ -82,7 +82,7 @@ class Mappings(@PathParam("lang") langCode : String)
         logger.info("Get mappings page: " + title)
         val parsed = WikiTitle.parse(title, language)
         val pages = Server.instance.extractor.mappingPageSource(language)
-        pages.find(_.title == parsed).getOrElse(throw new Exception("No mapping found for " + parsed)).toXML
+        pages.find(_.title == parsed).getOrElse(throw new Exception("No mapping found for " + parsed)).toDumpXML
     }
 
     /**

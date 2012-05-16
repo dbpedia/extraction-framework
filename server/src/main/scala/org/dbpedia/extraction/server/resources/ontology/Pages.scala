@@ -46,7 +46,7 @@ class Pages
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get ontology page: " + title)
-        Server.instance.extractor.ontologyPages(WikiTitle.parse(title, Language.Mappings)).toXML
+        Server.instance.extractor.ontologyPages(WikiTitle.parse(title, Language.Mappings)).toDumpXML
     }
 
     /**
