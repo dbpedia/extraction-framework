@@ -148,24 +148,23 @@ public class WikipediaDumpParser
     requireStartElement(SITEINFO_ELEM);
     nextTag();
 
-    //Consume <sitename> tag
+    // Consume <sitename> tag
     skipElement("sitename", true);
 
-    requireStartElement(BASE_ELEM);
-    //Read contents of <base>: http://xx.wikipedia.org/wiki/...
-    String uri = _reader.getElementText();
+    // Read contents of <base>: http://xx.wikipedia.org/wiki/...
+    String uri = readString(BASE_ELEM, true);
     String wikiCode = uri.substring(uri.indexOf("://") + 3, uri.indexOf('.'));
     Language language = Language.apply(wikiCode);
-    nextTag();
 
-    //Consume <generator> tag
+    // Consume <generator> tag
+    // TODO: read MediaWiki version from generator element
     skipElement("generator", true);
 
-    //Consume <case> tag
+    // Consume <case> tag
     skipElement("case", true);
 
-    //Consume <namespaces> tag
-    // TODO: read namespaces, use them to parse page titles
+    // Consume <namespaces> tag
+    // TODO: read namespaces, use them to parse page titles?
     skipElement("namespaces", true);
 
     requireEndElement(SITEINFO_ELEM);
@@ -194,10 +193,8 @@ public class WikipediaDumpParser
     nextTag();
     
     //Read title
-    requireStartElement(TITLE_ELEM);
-    String titleStr = _reader.getElementText();
+    String titleStr = readString(TITLE_ELEM, true);
     WikiTitle title = parseTitle(titleStr);
-    _reader.nextTag();
     // now after </title>
 
     //Skip filtered pages
@@ -207,7 +204,16 @@ public class WikipediaDumpParser
         return;
     }
 
-    int nsCode = (int)requireLong(NS_ELEM, true);
+    int nsCode;
+    try
+    {
+      nsCode = Integer.parseInt(readString(NS_ELEM, true));
+    }
+    catch (NumberFormatException e)
+    {
+      throw new IllegalArgumentException("cannot parse content of element ["+NS_ELEM+"] as int", e);
+    }
+
     // now after </ns>
     
     if (title.namespace().code() != nsCode)
@@ -217,7 +223,7 @@ public class WikipediaDumpParser
     }
 
     //Read page id
-    long pageId = requireLong(ID_ELEM, false);
+    String pageId = readString(ID_ELEM, false);
     // now at </id>
 
     //Read page
@@ -261,28 +267,28 @@ public class WikipediaDumpParser
     requireEndElement(PAGE_ELEM);
   }
 
-  private WikiPage readRevision(WikiTitle title, WikiTitle redirect, long pageId)
+  private WikiPage readRevision(WikiTitle title, WikiTitle redirect, String pageId)
   throws XMLStreamException
   {
     String text = null;
     String timestamp = null;
-    long revisionId = -1;
+    String revisionId = null;
     
     while (nextTag() == START_ELEMENT)
     {
       if (isStartElement(TEXT_ELEM))
       {
-        text = _reader.getElementText();
+        text = readString(TEXT_ELEM, false);
         // now at </text>
       }
       else if (isStartElement(TIMESTAMP_ELEM))
       {
-        timestamp = _reader.getElementText();
+        timestamp = readString(TIMESTAMP_ELEM, false);
         // now at </timestamp>
       }
       else if (isStartElement(ID_ELEM))
       {
-        revisionId = requireLong(ID_ELEM, false);
+        revisionId = readString(ID_ELEM, false);
         // now at </id>
       }
       else
@@ -312,7 +318,7 @@ public class WikipediaDumpParser
   {
     try
     {
-        return WikiTitle.parse(titleString, _language);
+      return WikiTitle.parse(titleString, _language);
     }
     catch (Exception e)
     {
@@ -328,19 +334,12 @@ public class WikipediaDumpParser
    * @throws XMLStreamException
    * @throws IllegalArgumentException if element content cannot be parsed as long
    */
-  private long requireLong( String name, boolean nextTag ) throws XMLStreamException
+  private String readString( String name, boolean nextTag ) throws XMLStreamException
   {
     XMLStreamUtils.requireStartElement(_reader, _namespace, name);
-    try
-    {
-      long result = Long.parseLong(_reader.getElementText());
-      if (nextTag) _reader.nextTag();
-      return result;
-    }
-    catch (NumberFormatException e)
-    {
-      throw new IllegalArgumentException("cannot parse content of element ["+name+"] as long", e);
-    }
+    String text = _reader.getElementText();
+    if (nextTag) _reader.nextTag();
+    return text;
   }
   
   private void skipElement(String name, boolean nextTag) throws XMLStreamException

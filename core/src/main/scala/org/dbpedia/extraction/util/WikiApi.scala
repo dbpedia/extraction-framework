@@ -102,8 +102,8 @@ class WikiApi(url: URL, language: Language)
         {
             proc( new WikiPage( title     = WikiTitle.parse((page \ "@title").head.text, language),
                              redirect  = null, // TODO: read redirect from XML
-                             id        = (page \ "@pageid").head.text.toLong,
-                             revision  = (rev \ "@revid").head.text.toLong,
+                             id        = (page \ "@pageid").head.text,
+                             revision  = (rev \ "@revid").head.text,
                              timestamp = (rev \ "@timestamp").head.text,
                              source    = rev.text ) )
         }

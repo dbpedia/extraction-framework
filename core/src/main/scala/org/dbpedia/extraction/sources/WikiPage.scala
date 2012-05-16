@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.sources
 
 import org.dbpedia.extraction.wikiparser.WikiTitle
+import java.text.{DateFormat,SimpleDateFormat}
+import org.dbpedia.extraction.sources.WikiPage._
 
 /**
  * Represents a wiki page
@@ -10,12 +12,19 @@ import org.dbpedia.extraction.wikiparser.WikiTitle
  * @param title The title of this page
  * @param id The page ID
  * @param revision The revision of this page
+ * @param timestamp The timestamp of the revision, in milliseconds since 1970-01-01 00:00:00 UTC
  * @param source The WikiText source of this page
  */
-case class WikiPage(val title : WikiTitle, val redirect : WikiTitle, val id : Long, val revision : Long, val timestamp: String, val source : String)
+case class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val revision: Long, val timestamp: Long, val source : String)
 {
+    def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, source : String) =
+      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), source)
+    
+    def this(title: WikiTitle, source : String) =
+      this(title, null, -1, -1, -1, source)
+    
     override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + source + ")"
-
+    
     /**
      * Serializes this page to XML using the MediaWiki export format.
      * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.6.
@@ -33,13 +42,41 @@ case class WikiPage(val title : WikiTitle, val redirect : WikiTitle, val id : Lo
                    xml:lang={title.language.isoCode}>
           <page>
             <title>{title.decodedWithNamespace}</title>
-            <id>{id}</id>
+            <id>{formatLong(id)}</id>
             <revision>
-              <id>{revision}</id>
-              <timestamp>{timestamp}</timestamp>
+              <id>{formatLong(revision)}</id>
+              <timestamp>{formatTimestamp(timestamp)}</timestamp>
               <text xml:space="preserve">{source}</text>
             </revision>
           </page>
         </mediawiki>
     }
+}
+
+object WikiPage {
+  
+  def parseLong(str: String): Long = {
+    if (str == null || str.isEmpty) -1
+    else str.toLong
+  }
+  
+  def formatLong(id: Long): String = {
+    if (id == -1) ""
+    else id.toString
+  }
+  
+  // SimpleDateFormat is expensive but not thread-safe
+  private val timestampParser = new ThreadLocal[DateFormat] {
+    override def initialValue() = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
+  }
+  
+  def parseTimestamp(str: String): Long = {
+    if (str == null || str.isEmpty) -1
+    else timestampParser.get.parse(str).getTime
+  }
+  
+  def formatTimestamp(timestamp: Long): String = {
+    if (timestamp < 0) ""
+    else timestampParser.get.format(timestamp)
+  }
 }

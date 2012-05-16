@@ -64,9 +64,9 @@ object XMLSource
                 rev <- page \ "revision")
             {
                 f( new WikiPage( title     = WikiTitle.parse((page \ "title").text, language),
-                                 null, // TODO: read redirect title from XML 
-                                 id        = (page \ "id").text.toLong,
-                                 revision  = (rev \ "id").text.toLong,
+                                 redirect  = null, // TODO: read redirect title from XML 
+                                 id        = (page \ "id").text,
+                                 revision  = (rev \ "id").text,
                                  timestamp = (rev \ "timestamp").text,
                                  source    = (rev \ "text").text ) )
             }
