@@ -16,7 +16,7 @@ import java.io.File
  * @param extractor The Extractor
  * @param source The extraction source
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
- * @param label user readable label of this extraction job. Also used as file name, but space is replaced by underscores.
+ * @param label user readable label of this extraction job.
  */
 class ExtractionJob(extractor : RootExtractor, source : Source, destination : Destination, val label : String = "Extraction Job") extends Thread
 {
