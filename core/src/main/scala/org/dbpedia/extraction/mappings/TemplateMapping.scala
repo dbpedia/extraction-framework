@@ -127,7 +127,7 @@ extends Mapping[TemplateNode]
 
 private object TemplateMapping
 {
-    // value has type Set[OntologyClass]
+    // value has type Seq[OntologyClass]
     val CLASS_ANNOTATION = "TemplateMapping.class";
     // value has type String
     val INSTANCE_URI_ANNOTATION = "TemplateMapping.uri";

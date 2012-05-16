@@ -176,7 +176,7 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
         
         //Write specific properties
         for(classAnnotation <- node.annotation(TemplateMapping.CLASS_ANNOTATION);
-            currentClass <- classAnnotation.asInstanceOf[List[OntologyClass]])
+            currentClass <- classAnnotation.asInstanceOf[Seq[OntologyClass]])
         {
             for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {
