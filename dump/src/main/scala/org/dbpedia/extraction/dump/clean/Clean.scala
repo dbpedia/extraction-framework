@@ -10,7 +10,7 @@ object Clean {
 
   def main(args: Array[String]) {
     
-    require(args != null && args.length >= 4, "deletes files from old download directories. need at least four arguments: base dir, number of latest directories per language to leave untouched, marker file to look for, following arguments are patterns of files to be deleted from older directories")
+    require(args != null && args.length >= 4, "deletes files from old download directories. need at least four arguments: base dir, marker file to look for, number of latest directories per language to leave untouched, following arguments are patterns of files to be deleted from older directories")
     
     val baseDir = Paths.get(args(0))
     val markerFile = args(1)
