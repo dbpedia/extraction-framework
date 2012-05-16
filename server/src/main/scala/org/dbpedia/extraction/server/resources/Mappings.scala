@@ -227,7 +227,7 @@ class Mappings(@PathParam("lang") langCode : String)
         val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
 
         //Find pages which use this mapping
-        val wikiApiUrl = new URL("http://" + language.wikiCode + ".wikipedia.org/w/api.php")
+        val wikiApiUrl = new URL(language.apiUri)
         val api = new WikiApi(wikiApiUrl, language)
         val pageTitles = api.retrieveTemplateUsages(templateTitle, 10)
 

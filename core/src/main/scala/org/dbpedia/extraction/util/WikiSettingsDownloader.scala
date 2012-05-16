@@ -24,7 +24,7 @@ import scala.collection.{Map,Set}
  */
 class WikiSettingsDownloader(language: Language, followRedirects: Boolean, overwrite: Boolean) {
   
-  val url = new URL(language.baseUri+"/w/api.php?"+WikiSettingsReader.query)
+  val url = new URL(language.apiUri+"?"+WikiSettingsReader.query)
   
   /**
    * @return 

@@ -99,7 +99,7 @@ class Extraction(@PathParam("lang") langCode : String)
 
         val source = WikiSource.fromTitles(
             WikiTitle.parse(title, language) :: Nil,
-            new URL("http://" + language.wikiCode + ".wikipedia.org/w/api.php"),
+            new URL(language.apiUri),
             language)
         
         val destination = new StringDestination(formatter)
