@@ -3,6 +3,7 @@ package org.dbpedia.extraction.sources
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import java.text.{DateFormat,SimpleDateFormat}
 import org.dbpedia.extraction.sources.WikiPage._
+import java.util.TimeZone
 
 /**
  * Represents a wiki page
@@ -67,7 +68,11 @@ object WikiPage {
   
   // SimpleDateFormat is expensive but not thread-safe
   private val timestampParser = new ThreadLocal[DateFormat] {
-    override def initialValue() = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
+    override def initialValue() = {
+      val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
+      format.setTimeZone(TimeZone.getTimeZone("UTC"))
+      format
+    }
   }
   
   def parseTimestamp(str: String): Long = {
