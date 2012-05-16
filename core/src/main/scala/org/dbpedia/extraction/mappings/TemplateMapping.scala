@@ -18,7 +18,7 @@ class TemplateMapping(
 ) 
 extends Mapping[TemplateNode]
 {
-    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(node: TemplateNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
     {
         val pageNode = node.root
         val graph = new ArrayBuffer[Quad]
@@ -31,7 +31,7 @@ extends Mapping[TemplateNode]
                 createInstance(graph, subjectUri, node)
 
                 //Extract properties
-                graph ++ mappings.flatMap(_.extract(node, subjectUri, pageContext))
+                graph ++= mappings.flatMap(_.extract(node, subjectUri, pageContext))
             }
             case Some(pageClasses) => //This page already has a root template.
             {
@@ -45,7 +45,7 @@ extends Mapping[TemplateNode]
                 if (correspondingClass != null && correspondingProperty != null)
                 {
                     var found = false;
-                    for(pageClass <- pageClasses.asInstanceOf[Set[OntologyClass]])
+                    for(pageClass <- pageClasses.asInstanceOf[Seq[OntologyClass]])
                     {
                         if(correspondingClass.name == pageClass.name)
                         {

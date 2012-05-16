@@ -67,15 +67,17 @@ class IntermediateNodeMapping(nodeClass : OntologyClass,
         val instanceUri = pageContext.generateUri(originalSubjectUri, node)
         
         // extract quads
-        graph ++= mappings.flatMap(_.extract(node, instanceUri, pageContext))
+        val values = mappings.flatMap(_.extract(node, instanceUri, pageContext))
 
-        // write types
-        if(! graph.isEmpty)
+        // only generate triples if we actually extracted some values
+        if(! values.isEmpty)
         {
+            graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+            
             for (cls <- nodeClass.relatedClasses)
               graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
             
-            graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+            graph ++= values
         }
     }
 }
