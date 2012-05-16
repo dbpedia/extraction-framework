@@ -223,7 +223,7 @@ extends Mapping[TableNode]
         var lastPageTemplate : Option[Node] = None
         for(pageTemplate <- tableNode.root.children; if pageTemplate.isInstanceOf[TemplateNode] )
         {
-            if(pageTemplate.line < tableNode.line && !pageTemplate.annotation(TemplateMapping.CLASS_ANNOTATION).isEmpty)
+            if(pageTemplate.line < tableNode.line && pageTemplate.annotation(TemplateMapping.CLASS_ANNOTATION).isDefined)
             {
                 lastPageTemplate = Some(pageTemplate)
             }
@@ -233,7 +233,7 @@ extends Mapping[TableNode]
         var correspondingInstance : Option[String] = None
         for( correspondingTemplate <- lastPageTemplate;
              templateClasses <- correspondingTemplate.annotation(TemplateMapping.CLASS_ANNOTATION);
-             templateClass <- templateClasses.asInstanceOf[List[OntologyClass]];
+             templateClass <- templateClasses.asInstanceOf[Seq[OntologyClass]];
              if correspondingClass == null || templateClass.name == correspondingClass.name )
         {
             //TODO if correspondingClass == null check if templateClass subClassOf correspondingProperty.range

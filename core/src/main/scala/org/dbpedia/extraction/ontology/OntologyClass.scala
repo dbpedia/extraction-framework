@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.ontology
 
 import org.dbpedia.extraction.util.Language
-import scala.collection.mutable
+import scala.collection.mutable.{Buffer,ArrayBuffer}
 
 /**
  * Represents an ontology class.
@@ -26,19 +26,20 @@ class OntologyClass(name : String, labels : Map[Language, String], comments : Ma
     /**
      * Transitive closure of sub-class and equivalent-class relations, including this class.
      */
-    lazy val relatedClasses: Set[OntologyClass] = {
-      val classes = new mutable.HashSet[OntologyClass]()
+    lazy val relatedClasses: Seq[OntologyClass] = {
+      val classes = new ArrayBuffer[OntologyClass]()
       collectClasses(classes)
-      classes.toSet
+      classes
     }
     
-    private def collectClasses(classes: mutable.Set[OntologyClass]): Unit = {
-      // Note: If this class was already collected, classes.add() returns false and we 
-      // do nothing, so we silently skip cycles in class relations here. Some cycles 
-      // are allowed (for example between equivalent classes, but there are other cases), 
-      // others aren't. At this point, it's not easy to distinguish valid and invalid cycles, 
-      // so we ignore them all. Cycles should be checked when classes are loaded.
-      if (classes.add(this)) {
+    private def collectClasses(classes: Buffer[OntologyClass]): Unit = {
+      // Note: If this class was already collected, we do nothing, so we silently skip cycles in 
+      // class relations here. Some cycles are allowed (for example between equivalent classes, 
+      // but there are other cases), others aren't. At this point, it's not easy to distinguish valid 
+      // and invalid cycles, so we ignore them all. Cycles should be checked when classes are loaded.
+      // Note: set would be nicer than buffer to check contains(), but we want to keep the order.
+      if (! classes.contains(this)) {
+        classes += this
         baseClasses.foreach(_.collectClasses(classes))
         equivalentClasses.foreach(_.collectClasses(classes))
       }
