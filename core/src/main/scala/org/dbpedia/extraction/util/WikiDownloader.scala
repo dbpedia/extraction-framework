@@ -31,7 +31,7 @@ class WikiDownloader(val apiUrl : String) {
   {
     var sb = new StringBuilder
     sb append apiUrl
-    sb append "?action=query&generator=allpages&prop=revisions&rvprop=ids|content&format=xml"
+    sb append "?action=query&generator=allpages&prop=revisions&rvprop=ids|content|timestamp&format=xml"
     sb append "&gapnamespace=" append namespace.code append "&gaplimit=50"
     if (gapfrom != null) sb append "&gapfrom=" append gapfrom.replace(' ', '_')
     // I'm not sure what kind of escaping URL is doing. Seems ok if we just replace spaces.
