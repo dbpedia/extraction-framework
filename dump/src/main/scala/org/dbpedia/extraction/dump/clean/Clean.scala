@@ -10,21 +10,21 @@ object Clean {
 
   def main(args: Array[String]) {
     
-    require(args != null && args.length >= 3, "deletes files from old download directories. need at least two arguments: base dir, number of latest directories per language to leave untouched, following arguments are patterns of files to be deleted from older directories")
+    require(args != null && args.length >= 4, "deletes files from old download directories. need at least four arguments: base dir, number of latest directories per language to leave untouched, marker file to look for, following arguments are patterns of files to be deleted from older directories")
     
     val baseDir = Paths.get(args(0))
-    val newDirs = args(1).toInt
+    val markerFile = args(1)
+    val newDirs = args(2).toInt
     
     // all other args are glob patterns. create one big glob "{pat1,pat2,...}"
-    val filter = args.drop(2).flatMap(_.split("[,\\s]")).mkString("{",",","}")
+    val filter = args.drop(3).flatMap(_.split("[,\\s]")).mkString("{",",","}")
     
     var dirs, files = 0
     
     for (language <- Language.Values.values) {
       val finder = new Finder[Path](baseDir, language)
       if (finder.wikiDir.exists) {
-        // TODO: maybe we should look for a specific file - but which one?
-        for (date <- finder.dates().dropRight(newDirs)) {
+        for (date <- finder.dates(markerFile).dropRight(newDirs)) {
           
           val dir = finder.directory(date)
           
