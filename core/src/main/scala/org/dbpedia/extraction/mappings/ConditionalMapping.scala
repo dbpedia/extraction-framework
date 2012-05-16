@@ -6,7 +6,7 @@ import org.dbpedia.extraction.dataparser.StringParser
 
 class ConditionalMapping( 
   val cases : List[ConditionMapping], // must be public val for statistics
-  val defaultMappings : List[PropertyMapping] // must be public val for statistics,
+  val defaultMappings : List[PropertyMapping] // must be public val for statistics
 )
 extends Mapping[TemplateNode]
 {

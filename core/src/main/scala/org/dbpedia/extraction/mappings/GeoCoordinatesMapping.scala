@@ -72,7 +72,7 @@ class GeoCoordinatesMapping( ontologyProperty : OntologyProperty,
            {
                try
                {
-                   return Some(new GeoCoordinate(latDeg = lat.toDouble, lonDeg = lon.toDouble))
+                   return Some(new GeoCoordinate(latDeg = lat, lonDeg = lon))
                }
                catch
                {
