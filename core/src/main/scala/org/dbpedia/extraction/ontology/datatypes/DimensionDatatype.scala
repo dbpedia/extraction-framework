@@ -8,9 +8,9 @@ package org.dbpedia.extraction.ontology.datatypes
  */
 class DimensionDatatype(name : String, val units : List[UnitDatatype]) extends Datatype(name)
 {
-	for(unit <- units) unit._dimension = this
+    for(unit <- units) unit._dimension = this
 
-	private val labelMap = (for(unit <- units; label <- unit.unitLabels) yield (label -> unit)).toMap
+    private val labelMap = (for(unit <- units; label <- unit.unitLabels) yield (label -> unit)).toMap
 
     /**
      * Retrieves a unit of this dimension by its label.

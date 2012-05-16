@@ -41,17 +41,17 @@ class FileSource(baseDir : File, language : Language, filter : (String => Boolea
                 
             try
             {
-            	val title = WikiTitle.parse(pageName, language)
+                val title = WikiTitle.parse(pageName, language)
 
-            	f(new WikiPage(title, null, 0, 0, "1970-01-01T00:00:00Z", source))
+                f(new WikiPage(title, null, 0, 0, "1970-01-01T00:00:00Z", source))
             }
             catch
             {
                 case ex : ControlThrowable => throw ex
-            	case ex : Exception => logger.log(Level.WARNING, "Error processing page  " + pageName, ex)
+                case ex : Exception => logger.log(Level.WARNING, "Error processing page  " + pageName, ex)
             }
         })
-	}
+    }
 
     override def hasDefiniteSize = true
 }
