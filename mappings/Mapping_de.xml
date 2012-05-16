@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping de:Coordinate</title><ns>208</ns><id>5232</id><revision><id>18167</id><timestamp>2012-05-07T05:20:17Z</timestamp><text>{{ConditionalMapping
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping de:Coordinate</title><ns>208</ns><id>5232</id><revision><id>18400</id><timestamp>2012-05-16T06:33:58Z</timestamp><text>{{ConditionalMapping
 | cases =
 
 {{Condition
     | templateProperty = type
     | operator = contains
     | value = mountain
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Mountain
                 }}
  }}
@@ -14,7 +14,7 @@
     | templateProperty = type
     | operator = contains
     | value = country
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Country
                 }}
  }}
@@ -23,13 +23,13 @@
     | templateProperty = type
     | operator = contains
     | value = landmark
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Place
                 }}
  }}
  {{Condition
     | operator = otherwise
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Place
                 }}
  }}
