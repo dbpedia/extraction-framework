@@ -29,31 +29,31 @@ case class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long,
      * Serializes this page to XML using the MediaWiki export format.
      * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.6.
      */
-    // FIXME: copy and paste from PageNode.scala
-    // TODO: this is the XML format used in the dump files, but the format used by api.php is different.
-    // We should move this method to a utility class that also has a method generating XML in api.php format.
-    // TODO: make sure that XML is valid according to the schema. If not, add dummy elements / attributes where required.
-    def toXML =
-    {
-        <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.6/ http://www.mediawiki.org/xml/export-0.6.xsd"
-                   version="0.6"
-                   xml:lang={title.language.isoCode}>
-          <page>
-            <title>{title.decodedWithNamespace}</title>
-            <id>{formatLong(id)}</id>
-            <revision>
-              <id>{formatLong(revision)}</id>
-              <timestamp>{formatTimestamp(timestamp)}</timestamp>
-              <text xml:space="preserve">{source}</text>
-            </revision>
-          </page>
-        </mediawiki>
-    }
+    def toXML = WikiPage.toDumpXML(title, id, revision, timestamp, source)
 }
 
 object WikiPage {
+  
+  // TODO: this is the XML format used in the dump files, but the format used by api.php is different.
+  // TODO: make sure that XML is valid according to the schema. If not, add dummy elements / attributes where required.
+  // TODO: use redirect
+  def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source : String) = {
+    <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.6/ http://www.mediawiki.org/xml/export-0.6.xsd"
+      version="0.6"
+      xml:lang={title.language.isoCode}>
+      <page>
+        <title>{title.decodedWithNamespace}</title>
+        <id>{formatLong(id)}</id>
+        <revision>
+          <id>{formatLong(revision)}</id>
+          <timestamp>{formatTimestamp(timestamp)}</timestamp>
+          <text xml:space="preserve">{source}</text>
+        </revision>
+      </page>
+    </mediawiki>
+  }
   
   def parseLong(str: String): Long = {
     if (str == null || str.isEmpty) -1
@@ -61,7 +61,7 @@ object WikiPage {
   }
   
   def formatLong(id: Long): String = {
-    if (id == -1) ""
+    if (id < 0) ""
     else id.toString
   }
   
