@@ -48,6 +48,16 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
     }
     
     /**
+     * API URI for this wiki, e.g. "http://be-x-old.wikipedia.org/w/api.php", "http://commons.wikimedia.org/w/api.php",
+     * "http://mappings.dbpedia.org/api.php".
+     */
+    // TODO: this should not be hard-coded.
+    val apiUri = wikiCode match {
+      case "mappings" => baseUri+"/api.php"
+      case _ => baseUri+"/w/api.php"
+    }
+    
+    /**
      */
     override def toString = "wiki="+wikiCode+",locale="+locale.getLanguage
     

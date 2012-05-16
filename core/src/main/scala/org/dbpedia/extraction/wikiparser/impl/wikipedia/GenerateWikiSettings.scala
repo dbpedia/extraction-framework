@@ -50,10 +50,10 @@ object GenerateWikiSettings {
     
     val factory = XMLInputFactory.newInstance
     
-    // languages.length + 1 = languages + commons
-    println("generating wiki config for "+(languages.length+1)+" languages")
+    // languages.length + 2 = languages + commons + mappings
+    println("generating wiki config for "+(languages.length + 2)+" languages")
     
-    for (code <- "commons" :: languages)
+    for (code <- "mappings" :: "commons" :: languages)
     {
       print(code)
       val language = Language(code)
@@ -109,8 +109,8 @@ object GenerateWikiSettings {
     generate("Namespaces.scala", Map("namespaces" -> namespaceStr, "errors" -> errorStr))
     generate("Redirect.scala", Map("redirects" -> redirectStr, "errors" -> errorStr))
     
-    // languages.length + 1 = languages + commons
-    println("generated wiki config for "+(languages.length+1)+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
+    // languages.length + 2 = languages + commons + mappings
+    println("generated wiki config for "+(languages.length + 2)+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
   }
   
   /**

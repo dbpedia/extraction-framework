@@ -18,7 +18,7 @@ class PageIdExtractor( context : {
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        val objectLink = language.baseUri+"/wiki/"+node.root.title.encodedWithNamespace
+        val objectLink = node.root.title.pageIri
 
         Seq(new Quad(context.language, DBpediaDatasets.PageIds, objectLink, wikiPageIdProperty,
                             node.id.toString, node.sourceUri, context.ontology.datatypes("xsd:integer")))

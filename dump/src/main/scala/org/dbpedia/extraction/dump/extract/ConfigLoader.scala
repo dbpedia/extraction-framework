@@ -167,14 +167,13 @@ object ConfigLoader
                 if (mappingsDir != null && mappingsDir.isDirectory)
                 {
                     val file = new File(mappingsDir, namespace.getName(Language.Mappings).replace(' ','_')+".xml")
-                    XMLSource.fromFile(file, language).map(parser) // TODO: use Language.Mappings instead?
+                    XMLSource.fromFile(file, Language.Mappings).map(parser)
                 }
                 else
                 {
                     val namespaces = Set(namespace)
-                    val url = new URL("http://mappings.dbpedia.org/api.php")
-                    // TODO: use Language.Mappings instead?
-                    WikiSource.fromNamespaces(namespaces,url,language).map(parser)
+                    val url = new URL(Language.Mappings.apiUri)
+                    WikiSource.fromNamespaces(namespaces,url,Language.Mappings).map(parser)
                 }
             }
             
@@ -248,7 +247,7 @@ object ConfigLoader
         else 
         {
           val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
-          val url = new URL("http://mappings.dbpedia.org/api.php")
+          val url = new URL(Language.Mappings.apiUri)
           val language = Language.Mappings
           WikiSource.fromNamespaces(namespaces, url, language)
         }

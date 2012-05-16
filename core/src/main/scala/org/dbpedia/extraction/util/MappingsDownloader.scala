@@ -12,7 +12,7 @@ import org.dbpedia.extraction.wikiparser.Namespace
  */
 object MappingsDownloader {
   
-  val apiUrl = "http://mappings.dbpedia.org/api.php"
+  val apiUrl = Language.Mappings.apiUri
     
   def main(args: Array[String]) : Unit =
   {
