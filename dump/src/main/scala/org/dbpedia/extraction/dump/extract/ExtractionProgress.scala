@@ -23,9 +23,4 @@ class ExtractionProgress()
    */
   val failedPages = new AtomicInteger()
   
-//    why should we override this? Just to make it synchronized?
-//    override def clone = synchronized
-//    {
-//        new ExtractionProgress(startTime, extractedPages, failedPages)
-//    }
 }
