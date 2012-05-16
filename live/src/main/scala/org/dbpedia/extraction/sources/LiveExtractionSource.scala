@@ -81,14 +81,14 @@ object LiveExtractionSource
 
                 f( new WikiPage( title     = WikiTitle.parse(link, language),
                                  redirect  = null, // TODO: read redirect title from XML
-                                 id        = (page \ "id").text.toLong,
-                                 revision  = (rev \ "id").text.toLong,
+                                 id        = (page \ "id").text,
+                                 revision  = (rev \ "id").text,
                                  timestamp = (rev \ "timestamp").text,
                                  source    = (rev \ "text").text ) )
 
               /*f( new WikiPage( title     = mytitle,
-                                 id        = (page \ "id").text.toLong,
-                                 revision  = (rev \ "id").text.toLong,
+                                 id        = (page \ "id").text,
+                                 revision  = (rev \ "id").text,
                                  source    = (rev \ "text").text ) )*/
 
 

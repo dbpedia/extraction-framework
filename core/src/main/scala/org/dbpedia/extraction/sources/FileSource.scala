@@ -43,7 +43,7 @@ class FileSource(baseDir : File, language : Language, filter : (String => Boolea
             {
                 val title = WikiTitle.parse(pageName, language)
 
-                f(new WikiPage(title, null, 0, 0, "1970-01-01T00:00:00Z", source))
+                f(new WikiPage(title, source))
             }
             catch
             {

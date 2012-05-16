@@ -301,7 +301,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
         }
         val datatype = datatypes(datatypeName)
         val unitValueParser = new UnitValueParser(context, datatype, false)
-        val page = new WikiPage(WikiTitle.parse("TestPage", lang), null, 0, 0, "1970-01-01T00:00:00Z", input)
+        val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
         unitValueParser.parse(wikiParser(page)).map{case (value, dt) => dt.toStandardUnit(value)}
     }
