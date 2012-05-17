@@ -7,8 +7,6 @@ import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
 import org.dbpedia.extraction.util.{Language,WikiSettingsDownloader,StringUtils,StringPlusser}
 import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
 import java.net.HttpRetryException
-import java.text.SimpleDateFormat
-import java.util.Date
 
 /**
  * Generates Namespaces.scala and Redirect.scala. Must be run with core/ as the current directory.
