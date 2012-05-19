@@ -87,6 +87,7 @@ class OntologyReader
                     ontologyBuilder.properties ::= property
                 }
             }
+            // TODO: read datatypes
         }
     }
 
@@ -257,7 +258,7 @@ class OntologyReader
             readPropertyTemplate(template)
           }
           case text: TextNode if text.retrieveText.get.trim.isEmpty => {
-            None // ignore
+            None // ignore space between templates
           }
           case _ => {
             logger.warning(node.root.title+" - Ignoring invalid node '"+child.toWikiText+"' in value of property '"+propertyName+"'.")
@@ -275,6 +276,8 @@ class OntologyReader
       template.children match {
         case List(lang, text) if lang.key == "1" && text.key == "2" => lang.retrieveText match {
           case Some(langCode) if ! langCode.trim.isEmpty => Language.get(langCode.trim) match {
+            // FIXME: text.retrieveText is empty if there are some non-text nodes, 
+            // e.g. for {{comment|en|Inverse of [[OntologyProperty:Foaf:page|foaf:page]].}}
             case Some(language) => text.retrieveText match {
               case Some(text) if ! text.trim.isEmpty =>
                 return Some(language -> text.trim)
