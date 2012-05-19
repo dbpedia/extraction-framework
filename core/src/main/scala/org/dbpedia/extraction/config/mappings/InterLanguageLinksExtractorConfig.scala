@@ -12,6 +12,7 @@ object InterLanguageLinksExtractorConfig
         // TODO: the Set for "en" once included "co", but that's Corsican.
         // I think that was a bug and removed it, but what's correct? "ca"? "ko"?
         "en" -> Set("el", "de", "pt", "ru"),
-        "ru" -> Set("en", "el", "de", "pt")
+        "ru" -> Set("en", "el", "de", "pt"),
+        "fr" -> Set("en", "el", "de", "pt", "ru")
     )
 }
