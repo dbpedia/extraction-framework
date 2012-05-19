@@ -13,11 +13,8 @@ class WikiPageExtractor( context : {
                             def ontology : Ontology
                             def language : Language } ) extends Extractor
 {
-    // FIXME: the combination of foaf:page and foaf:primaryTopic is probably wrong
-    // http://xmlns.com/foaf/spec/#term_page says: foaf:page is inverse of foaf:topic
-    // http://xmlns.com/foaf/spec/#term_primaryTopic says: foaf:primaryTopic is inverse of foaf:isPrimaryTopicOf
-    // foaf:primaryTopic and foaf:isPrimaryTopicOf would probably be correct.
-    private val foafPageProperty = context.ontology.properties("foaf:page")
+    // We used foaf:page here, but foaf:isPrimaryTopicOf is probably better.
+    private val foafPageProperty = context.ontology.properties("foaf:isPrimaryTopicOf")
     private val foafPrimaryTopicProperty = context.ontology.properties("foaf:primaryTopic")
     private val dcLanguageProperty = context.ontology.properties("dc:language")
 
