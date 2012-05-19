@@ -14,7 +14,8 @@ object DisambiguationExtractorConfig
          "ko" -> " (동음이의)",
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
-         "ru" -> " (значения)"
+         "ru" -> " (значения)",
+         "fr" -> " (homonymie)"
     )
 
     val supportedLanguages = disambiguationTitlePartMap.keySet
