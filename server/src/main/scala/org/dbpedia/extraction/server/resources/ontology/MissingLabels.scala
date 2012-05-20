@@ -6,43 +6,19 @@ import org.dbpedia.extraction.ontology.OntologyEntity
 import scala.xml.{Elem,Text,NodeBuffer}
 import javax.ws.rs._
 
-@Path("/ontology/labels/missing/")
-class MissingLabels {
+@Path("/ontology/labels/missing/{lang}/")
+class MissingLabels(@PathParam("lang") langCode : String) {
   
   private val ontology = Server.instance.extractor.ontology
+
+  // TODO: use ISO codes? Language uses wiki codes.
+  private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
   private val pagesUrl = Server.instance.paths.pagesUrl
 
   @GET
   @Produces(Array("application/xhtml+xml"))
-  def get: Elem =
-  {
-    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-    <head>
-      <title>Missing labels</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
-    <body>
-      <h2>Missing labels</h2>
-      {
-        // we need toArray here to keep languages ordered.
-        for(lang <- Server.instance.managers.keys.toArray; code = lang.wikiCode) yield
-        {
-          <p><a href={code + "/"}>Missing labels for {code}</a></p>
-        }
-      }
-    </body>
-    </html>
-  }
-
-@GET
-  @Path("/{lang}/")
-  @Produces(Array("application/xhtml+xml"))
-  def forLanguage(@PathParam("lang") langCode : String): Elem = {
-    
-    // TODO: use ISO codes, not wiki codes.
-    val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
-
+  def get: Elem = {
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
       <title>Missing labels for language { langCode }</title>
