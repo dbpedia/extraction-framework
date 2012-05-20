@@ -34,13 +34,13 @@ class Validate
     @Path("/{title}")
     @Consumes(Array("application/xml"))
     @Produces(Array("application/xml"))
-    def validatePage(@PathParam("title") @Encoded title : String, pagesXML : Elem) =
+    def validatePage(@PathParam("title") @Encoded title : String, pageXML : Elem) =
     {
         try
         {
             var nodes = new NodeBuffer()
             nodes += <?xml-stylesheet type="text/xsl" href="../../stylesheets/log.xsl"?>
-            nodes += Server.instance.extractor.validateOntologyPages(XMLSource.fromXML(pagesXML, Language.Mappings).toList)
+            nodes += Server.instance.extractor.validateOntologyPages(XMLSource.fromXML(pageXML, Language.Mappings).toList)
             logger.info("Validated ontology page: " + title)
             nodes
         }
