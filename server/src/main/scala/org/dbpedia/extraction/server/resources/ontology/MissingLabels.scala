@@ -46,7 +46,7 @@ class MissingLabels {
     { 
       val nodes = new NodeBuffer()
       var count = 0
-      for (item <- items.values.toSeq.sortBy(_.name) if ! item.labels.contains(language)) {
+      for (item <- items.values.toArray.sortBy(_.name) if ! item.labels.contains(language)) {
         if (count > 0) nodes += Text(" - ")
         nodes += <a href={pagesUrl+"/"+namespace+":"+item.name}>{item.name}</a>
         count += 1
