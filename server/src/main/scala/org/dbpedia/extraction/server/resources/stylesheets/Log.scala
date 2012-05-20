@@ -1,7 +1,20 @@
 package org.dbpedia.extraction.server.resources.stylesheets
 
 import javax.ws.rs.{Produces, GET, Path}
-import xml.Elem
+import scala.xml.{Node,Elem,ProcInstr}
+
+object Log
+{
+  /**
+   * @param number of "../" steps to prepend to the path to "stylesheets/log.xsl"
+   */
+  def header(parents : Int): Node = {
+    // if there are slashes in the title, the stylesheets are further up in the directory tree
+    val stylesheetUri = "../" * parents + "stylesheets/log.xsl"
+    // <?xml-stylesheet type="text/xsl" href="{logUri}"?>
+    new ProcInstr("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheetUri + "\"")
+  }
+}
 
 @Path("/stylesheets/log.xsl")
 class Log

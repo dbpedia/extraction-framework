@@ -54,7 +54,7 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
       for (page <- source.map(parser)) destination.write(extract(page))
     }
 
-    def validateMapping(mappingsSource: Source, lang: Language) : Elem =
+    def validateMapping(mappingsPages: Traversable[PageNode], lang: Language) : Elem =
     {
         val logger = Logger.getLogger(MappingsLoader.getClass.getName)
         
@@ -68,7 +68,7 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
           val ontology = self.ontology
           val language = lang
           val redirects: Redirects = new Redirects(Map())
-          val mappingPageSource = mappingsSource.map(parser)
+          val mappingPageSource = mappingsPages
         }
 
         //Load mappings
