@@ -3,6 +3,7 @@ package org.dbpedia.extraction.server.util
 import org.dbpedia.extraction.server.Server
 import scala.xml.Elem
 import org.dbpedia.extraction.wikiparser.PageNode
+import org.dbpedia.extraction.util.Language
 
 object PageUtils
 {
@@ -15,8 +16,16 @@ object PageUtils
       <a href={page.title.encodedWithNamespace.replace(":", "%3A")}>{page.title.decodedWithNamespace}</a>
   }
   
-  def languageList(title: String, header: String, prefix: String): Elem =
-  {
+  def languageList(title: String, header: String, prefix: String): Elem = {
+    // we need toSeq here to keep languages ordered.
+    val links = Server.instance.managers.keys.toSeq.map(lang => (lang.wikiCode+"/", prefix + " " + lang.wikiCode))
+    linkList(title: String, header: String, links)
+  }
+  
+  /**
+   * @param links url -> text
+   */
+  def linkList(title: String, header: String, links: Seq[(String, String)]): Elem = {
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
       <title>{title}</title>
@@ -25,10 +34,9 @@ object PageUtils
     <body>
       <h2>{header}</h2>
       {
-        // we need toArray here to keep languages ordered.
-        for(lang <- Server.instance.managers.keys.toArray; code = lang.wikiCode) yield
+        for((url, text) <- links) yield
         {
-          <p><a href={code + "/"}>{prefix} {code}</a></p>
+          <p><a href={url}>{text}</a></p>
         }
       }
     </body>
