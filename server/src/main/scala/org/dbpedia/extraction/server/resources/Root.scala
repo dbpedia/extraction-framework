@@ -2,7 +2,9 @@ package org.dbpedia.extraction.server.resources
 
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs.{GET, Path, Produces}
-import org.dbpedia.extraction.server.util.PageUtils.languageList
+import org.dbpedia.extraction.server.util.PageUtils._
+import scala.xml.Elem
+import org.dbpedia.extraction.util.Language
 
 @Path("/")
 class Root
@@ -49,7 +51,12 @@ class Root
     def languages = Server.instance.managers.keys.toArray.map(_.wikiCode).mkString(" ")
     
     @GET @Path("statistics/") @Produces(Array("application/xhtml+xml"))
-    def statistics = languageList("DBpedia Mapping Statistics", "Statistics", "Mapping Statistics for")
+    def statistics: Elem = {
+      // we need toBuffer here to keep languages ordered.
+      val links = Server.instance.managers.keys.toBuffer[Language].map(lang => (lang.wikiCode+"/", "Mapping Statistics for "+lang.wikiCode))
+      links.insert(0, ("*/", "Mapping Statistics for all languages"))
+      linkList("DBpedia Mapping Statistics", "Statistics", links)
+    }
 
     @GET @Path("mappings/") @Produces(Array("application/xhtml+xml"))
     def mappings = languageList("DBpedia Template Mappings", "Mappings", "Mappings for")
