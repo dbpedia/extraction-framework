@@ -16,8 +16,15 @@ class Root
           </head>
           <body>
             <h2>DBpedia Server</h2>
-            <p><a href="ontology/">Ontology</a></p>
-            <p><a href="statistics/">Statistics</a> - <a href="mappings/">Mappings</a> - <a href="extraction/">Extractors</a></p>
+            <p>
+            <a href="ontology/">Ontology</a>
+            </p>
+            <p>
+            <a href="statistics/">Statistics</a> - 
+            <a href="mappings/">Mappings</a> - 
+            <a href="extraction/">Extractors</a> - 
+            <a href="ontology/labels/missing/">Missing labels</a>
+            </p>
             {
               // we need toArray here to keep languages ordered.
               for(lang <- Server.instance.managers.keys.toArray; code = lang.wikiCode) yield
@@ -25,7 +32,8 @@ class Root
                 <p>
                 <a href={"statistics/" + code + "/"}>Statistics for {code}</a> - 
                 <a href={"mappings/" + code + "/"}>Mappings in {code}</a> - 
-                <a href={"extraction/" + code + "/"}>Extractor in {code}</a>
+                <a href={"extraction/" + code + "/"}>Extractor in {code}</a> - 
+                <a href={"ontology/labels/missing/" + code + "/"}>Missing labels for {code}</a>
                 </p>
               }
             }
