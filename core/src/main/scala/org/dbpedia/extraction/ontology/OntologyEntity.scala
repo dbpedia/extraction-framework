@@ -27,7 +27,7 @@ abstract class OntologyEntity(val name : String, val labels : Map[Language, Stri
 
     override def equals(other : Any) = other match
     {
-        case otherType : OntologyType => (name == otherType.name)
+        case that: OntologyEntity => (this.getClass == that.getClass && this.name == that.name)
         case _ => false
     }
 
