@@ -42,7 +42,11 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
 
     def removeMappingPage(title : WikiTitle, language : Language)
 
-
+    /**
+     * Called by server to update all users of this extraction manager.
+     */
+    def updateAll
+    
     protected val parser = WikiParser()
 
     def extract(source: Source, destination: Destination, language: Language): Unit = {

@@ -12,7 +12,7 @@ import java.io.File
  * Is NOT able to update the ontology or the mappings.
  * This manager is good for testing locally.
  */
-class StaticExtractionManager(languages : Traversable[Language], paths: Paths)
+class StaticExtractionManager(update: (Language, Mappings) => Unit, languages : Traversable[Language], paths: Paths)
 extends ExtractionManager(languages, paths)
 {
     @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
@@ -36,6 +36,13 @@ extends ExtractionManager(languages, paths)
 
     def mappings(language : Language) = _mappings(language)
 
+    /**
+     * Called on startup to initialize all mapping stats managers.
+     */
+    def updateAll = {
+      for ((language, mappings) <- _mappings) update(language, mappings)
+    }
+        
     def updateOntologyPage(page : WikiPage)
     {
         throw new Exception("updating of ontologyPages not supported with this configuration; please use DynamicExtractionManager")

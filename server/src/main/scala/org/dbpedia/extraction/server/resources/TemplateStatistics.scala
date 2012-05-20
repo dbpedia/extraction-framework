@@ -25,46 +25,14 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
     private val manager = Server.instance.managers(language)
 
-    private var wikiStats = manager.wikiStats
-
     private val statsHolder = manager.holder
     
-    private val stats = statsHolder.mappedStatistics
-    private val ignoreList = manager.ignoreList
-    
-    private val sortedStats = stats.sortBy(ms => (- ms.templateCount, ms.templateName))
+    private val sortedStats = statsHolder.mappedStatistics.sortBy(ms => (- ms.templateCount, ms.templateName))
 
-    private def countTemplates(all: Boolean, count: MappingStats => Int): Int = {
-      var sum = 0
-      for (ms <- stats) {
-        if (all || ms.isMapped) {
-          if (! ignoreList.isTemplateIgnored(ms.templateName)) {
-            sum += count(ms)
-          }
-        }
-      }
-      sum
-    }
-
-    private def countAllTemplates(count: MappingStats => Int): Int = countTemplates(true, count)
-    private def countMappedTemplates(count: MappingStats => Int): Int = countTemplates(false, count)
-      
-    private val templateCount : Int = countAllTemplates(_ => 1)
-    private val mappedTemplateCount = countMappedTemplates(_ => 1)
-
-    private val templateUseCount = countAllTemplates(_.templateCount)
-    private val mappedTemplateUseCount = countMappedTemplates(_.templateCount)
-
-    private val propertyUseCount = countAllTemplates(_.propertyUseCount)
-    private val mappedPropertyUseCount = countMappedTemplates(_.mappedPropertyUseCount)
-    
-    private val mappedTemplateUseRatio = mappedTemplateUseCount.toDouble / templateUseCount.toDouble
-    private val mappedPropertyUseRatio = mappedPropertyUseCount.toDouble / propertyUseCount.toDouble
-    
     private val reversedRedirects = statsHolder.reversedRedirects
-    private val percentageMappedTemplates: String = "%2.2f".format(mappedTemplateCount.toDouble / templateCount.toDouble * 100)
-    private val percentageMappedTemplateOccurrences: String = "%2.2f".format(mappedTemplateUseRatio * 100)
-    private val percentageMappedPropertyOccurrences: String = "%2.2f".format(mappedPropertyUseRatio * 100)
+    private val percentageMappedTemplates: String = "%2.2f".format(statsHolder.mappedTemplateRatio * 100)
+    private val percentageMappedTemplateOccurrences: String = "%2.2f".format(statsHolder.mappedTemplateUseRatio * 100)
+    private val percentageMappedPropertyOccurrences: String = "%2.2f".format(statsHolder.mappedPropertyUseRatio * 100)
 
     private val mappingUrlPrefix = Server.instance.paths.pagesUrl+"/"+Namespace.mappings(language).getName(Language.Mappings).replace(' ','_')+":"
 
@@ -117,27 +85,27 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                 <p align="center">
                     {percentageMappedTemplates}
                     % templates are mapped (
-                    {mappedTemplateCount}
+                    {statsHolder.mappedTemplateCount}
                     of
-                    {templateCount}
+                    {statsHolder.templateCount}
                     ).</p>
                 <p align="center">
                     {percentageMappedTemplateOccurrences}
                     % of all template occurrences in Wikipedia (
                     {langCode}
                     ) are mapped (
-                    {mappedTemplateUseCount}
+                    {statsHolder.mappedTemplateUseCount}
                     of
-                    {templateUseCount}
+                    {statsHolder.templateUseCount}
                     ).</p>
                 <p align="center">
                     {percentageMappedPropertyOccurrences}
                     % of all property occurrences in Wikipedia (
                     {langCode}
                     ) are mapped (
-                    {mappedPropertyUseCount}
+                    {statsHolder.mappedPropertyUseCount}
                     of
-                    {propertyUseCount}
+                    {statsHolder.propertyUseCount}
                     ).</p>
 
                 <table align="center">
@@ -227,7 +195,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
                         var isIgnored: Boolean = false
                         var ignoreMsg: String = "add to ignore list"
-                        if (ignoreList.isTemplateIgnored(mappingStat.templateName))
+                        if (manager.ignoreList.isTemplateIgnored(mappingStat.templateName))
                         {
                             isIgnored = true
                             ignoreMsg = "remove from ignore list"
