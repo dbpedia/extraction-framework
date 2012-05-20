@@ -20,7 +20,7 @@ class Server(private val password : String, langs : Seq[Language], val paths: Pa
       SortedMap(tuples: _*)(Language.wikiCodeOrdering)
     }
         
-    val extractor = new DynamicExtractionManager(managers(_).updateMappings(_), langs, paths)
+    val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), langs, paths)
     
     extractor.updateAll
         

@@ -20,7 +20,7 @@ import IgnoreList._
 /**
  * Contains the ignored templates and properties
  */
-class IgnoreList(file: File)
+class IgnoreList(file: File, update: () => Unit)
 {
   private val templates = new mutable.LinkedHashSet[String]
   private val properties = new mutable.LinkedHashMap[String, mutable.Set[String]]
@@ -63,6 +63,9 @@ class IgnoreList(file: File)
    */
   // package-private for IgnoreListTest
   private[stats] def save() {
+    
+    update()
+    
     val out = new FileOutputStream(file)
     try {
       val writer = new OutputStreamWriter(out, "UTF-8")

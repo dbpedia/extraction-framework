@@ -2,6 +2,7 @@ package org.dbpedia.extraction.server.stats
 
 import java.io._
 import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
  * Read ignorelist files, write them back out.
@@ -9,12 +10,12 @@ import org.dbpedia.extraction.util.RichFile.toRichFile
 object IgnoreListTest {
   
   def main(args: Array[String]) : Unit = {
-    val dir = new File("../extraction_framework/server/src/main/statistics/")
-    val langs = List("ar","bn","ca","cs","de","el","en","es","eu","fr","ga","hi","hr","hu","it","ko","nl","pl","pt","ru","sl","tr")
+    val dir = new File("src/main/statistics/")
+    val langs = Namespace.mappings.keys
     println(langs.size)
     for (lang <- langs) {
-      val file = dir.resolve("ignorelist_"+lang+".txt")
-      val ignoreList = new IgnoreList(file)
+      val file = dir.resolve("ignorelist_"+lang.wikiCode+".txt")
+      val ignoreList = new IgnoreList(file, () => ())
       ignoreList.save()
       println(file)
     }
