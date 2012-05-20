@@ -35,9 +35,11 @@ case class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long,
 
 object WikiPage {
   
-  // TODO: this is the XML format used in the dump files, but the format used by api.php is different.
-  // TODO: make sure that XML is valid according to the schema. If not, add dummy elements / attributes where required.
-  // TODO: use redirect
+  /**
+   * XML for one page, Wikipedia dump format.
+   * TODO: make sure that XML is valid according to the schema. If not, add dummy elements / attributes where required.
+   * TODO: use redirect
+   */
   def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source : String) = {
     <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -46,6 +48,7 @@ object WikiPage {
       xml:lang={title.language.isoCode}>
       <page>
         <title>{title.decodedWithNamespace}</title>
+        <ns>{formatInt(title.namespace.code)}</ns>
         <id>{formatLong(id)}</id>
         <revision>
           <id>{formatLong(revision)}</id>
@@ -54,6 +57,34 @@ object WikiPage {
         </revision>
       </page>
     </mediawiki>
+  }
+  
+  /**
+   * XML for one page, api.php format.
+   * TODO: use redirect
+   */
+  def toApiXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source : String) = {
+    <api>
+      <query>
+        <pages>
+          <page pageid={formatLong(id)} ns={formatInt(title.namespace.code)} title={title.decodedWithNamespace} >
+            <revisions>
+              <rev revid={formatLong(revision)} timestamp={formatTimestamp(timestamp)} xml:space="preserve">{source}</rev> 
+            </revisions>
+          </page>
+        </pages>
+      </query>
+    </api>
+  }
+  
+  def parseInt(str: String): Int = {
+    if (str == null || str.isEmpty) -1
+    else str.toInt
+  }
+  
+  def formatInt(id: Int): String = {
+    if (id < 0) ""
+    else id.toString
   }
   
   def parseLong(str: String): Long = {
