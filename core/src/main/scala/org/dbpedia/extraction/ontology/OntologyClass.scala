@@ -40,8 +40,8 @@ class OntologyClass(name : String, labels : Map[Language, String], comments : Ma
       // Note: set would be nicer than buffer to check contains(), but we want to keep the order.
       if (! classes.contains(this)) {
         classes += this
-        baseClasses.foreach(_.collectClasses(classes))
         equivalentClasses.foreach(_.collectClasses(classes))
+        baseClasses.foreach(_.collectClasses(classes))
       }
     } 
 
