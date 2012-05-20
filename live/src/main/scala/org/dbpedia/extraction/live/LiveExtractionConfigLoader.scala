@@ -11,7 +11,7 @@ import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{MemorySource, WikiSource, XMLSource, Source}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{StringDestination, FileDestination, CompositeDestination}
+import org.dbpedia.extraction.destinations.{WriterDestination, FileDestination, CompositeDestination}
 import java.util.logging.{Level, Logger}
 import java.awt.event.{ActionListener, ActionEvent}
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
@@ -21,6 +21,7 @@ import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
 import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance
 import org.dbpedia.extraction.live.main.Main
 import scala.collection.JavaConversions;
+import java.io.StringWriter
 
 
 /**
@@ -145,7 +146,8 @@ object LiveExtractionConfigLoader extends ActionListener
                     CurrentWikiPage.title.namespace == Namespace.File ||
                     CurrentWikiPage.title.namespace == Namespace.Category)
                    {
-                      val TempDest = new  StringDestination();
+                      val writer = new StringWriter
+                      val TempDest = new  WriterDestination(writer);
                       //println(CurrentWikiPage.title.namespace);
                       val CurrentPageNode = parser(CurrentWikiPage)
                       println("The Current page id = "+ CurrentPageNode.id)
@@ -153,7 +155,7 @@ object LiveExtractionConfigLoader extends ActionListener
                       val RequiredGraph = extractor(parser(CurrentWikiPage));
 
                       tripleDestination.write(RequiredGraph)
-                      //println(TempDest);
+                      //println(writer);
                       //println("The end of the loop");
                    }
 
@@ -188,7 +190,8 @@ object LiveExtractionConfigLoader extends ActionListener
 //          dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq", true)
 //        val destination = new CompositeDestination(tripleDestination, quadDestination)
         //println("Article source = " + articlesSource.size);
-        val TempDest = new  StringDestination(TerseFormatter.NTriplesIris);
+        val writer = new StringWriter()
+        val TempDest = new WriterDestination(writer, TerseFormatter.NTriplesIris);
         //val liveDest = new LiveUpdateDestination();
       
         //new ExtractionJob(extractor, articlesSource, tripleDestination, "Extraction Job for " + language.wikiCode + " Wikipedia");
@@ -258,7 +261,8 @@ object LiveExtractionConfigLoader extends ActionListener
                 CurrentWikiPage.title.namespace == Namespace.File ||
                 CurrentWikiPage.title.namespace == Namespace.Category)
                {
-                 val TempDest = new StringDestination(TerseFormatter.NTriplesIris);
+                 val writer = new StringWriter()
+                 val TempDest = new WriterDestination(writer, TerseFormatter.NTriplesIris);
                  val CurrentPageNode = parser(CurrentWikiPage)
 
 
