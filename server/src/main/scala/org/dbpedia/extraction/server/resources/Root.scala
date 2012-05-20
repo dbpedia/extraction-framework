@@ -2,6 +2,7 @@ package org.dbpedia.extraction.server.resources
 
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs.{GET, Path, Produces}
+import org.dbpedia.extraction.server.util.PageUtils.languageList
 
 @Path("/")
 class Root
@@ -48,31 +49,11 @@ class Root
     def languages = Server.instance.managers.keys.toArray.map(_.wikiCode).mkString(" ")
     
     @GET @Path("statistics/") @Produces(Array("application/xhtml+xml"))
-    def statistics = list("DBpedia Mapping Statistics", "Statistics", "Mapping Statistics for")
+    def statistics = languageList("DBpedia Mapping Statistics", "Statistics", "Mapping Statistics for")
 
     @GET @Path("mappings/") @Produces(Array("application/xhtml+xml"))
-    def mappings = list("DBpedia Template Mappings", "Mappings", "Mappings for")
+    def mappings = languageList("DBpedia Template Mappings", "Mappings", "Mappings for")
     
     @GET @Path("extraction/") @Produces(Array("application/xhtml+xml"))
-    def extraction = list("DBpedia Test Extractors", "Extractors", "Extractor for")
-    
-    private def list(title : String, header : String, prefix : String) =
-    {
-        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <title>{title}</title>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
-          <body>
-            <h2>{header}</h2>
-            {
-              // we need toArray here to keep languages ordered.
-              for(lang <- Server.instance.managers.keys.toArray; code = lang.wikiCode) yield
-              {
-                  <p><a href={code + "/"}>{prefix} {code}</a></p>
-              }
-            }
-          </body>
-        </html>
-    }
+    def extraction = languageList("DBpedia Test Extractors", "Extractors", "Extractor for")
 }
