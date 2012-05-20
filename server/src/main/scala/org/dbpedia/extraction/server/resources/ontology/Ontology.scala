@@ -4,7 +4,6 @@ import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import xml.Elem
 import org.dbpedia.extraction.ontology.io.OntologyOWLWriter
-import org.dbpedia.extraction.server.util.PageUtils.languageList
 
 @Path("/ontology/")
 class Ontology
@@ -31,9 +30,6 @@ class Ontology
         </html>
     }
 
-    @GET @Path("labels/missing/") @Produces(Array("application/xhtml+xml"))
-    def missingLabels = languageList("DBpedia Missing Ontology Labels", "Missing Ontology labels", "Missing labels for")
-    
     /**
      * Exports the ontology as OWL. Also match "export" for backwards compatibility with old links.
      */
