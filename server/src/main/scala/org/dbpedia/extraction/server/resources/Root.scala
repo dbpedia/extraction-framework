@@ -11,17 +11,22 @@ class Root
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <head>
+            <title>DBpedia Server</title>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
           </head>
           <body>
-            <h2>Server</h2>
+            <h2>DBpedia Server</h2>
             <p><a href="ontology/">Ontology</a></p>
             <p><a href="statistics/">Statistics</a> - <a href="mappings/">Mappings</a> - <a href="extraction/">Extractors</a></p>
             {
               // we need toArray here to keep languages ordered.
               for(lang <- Server.instance.managers.keys.toArray; code = lang.wikiCode) yield
               {
-                <p><a href={"statistics/" + code + "/"}>Statistics for {code}</a> - <a href={"mappings/" + code + "/"}>Mappings in {code}</a> - <a href={"extraction/" + code + "/"}>Extractor in {code}</a></p>
+                <p>
+                <a href={"statistics/" + code + "/"}>Statistics for {code}</a> - 
+                <a href={"mappings/" + code + "/"}>Mappings in {code}</a> - 
+                <a href={"extraction/" + code + "/"}>Extractor in {code}</a>
+                </p>
               }
             }
           </body>
