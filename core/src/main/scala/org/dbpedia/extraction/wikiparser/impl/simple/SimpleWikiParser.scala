@@ -9,18 +9,14 @@ import java.net.URI
 import java.util.logging.{Level, Logger}
 import java.lang.IllegalArgumentException
 
-/**
- * Port of the DBpedia WikiParser for PHP.
- */
-//TODO section names should only contain the contents of the TextNodes
-final class SimpleWikiParser extends WikiParser
+import SimpleWikiParser._
+
+object SimpleWikiParser
 {
     private val logger = Logger.getLogger(classOf[SimpleWikiParser].getName)
 
     private val MaxNestingLevel = 10
     private val MaxErrors = 1000
-
-    //TODO move matchers to companion object
 
     private val commentEnd = new Matcher(List("-->"));
 
@@ -52,7 +48,14 @@ final class SimpleWikiParser extends WikiParser
     private val tableCellEnd3 = new Matcher(List("\n ", "\n|}", "\n|-", "\n|", "\n!", "||", "!!"), true);
 
     private val sectionEnd = new Matcher(List("=\n", "=\r", "\n"), true);
-    
+}
+
+/**
+ * Port of the DBpedia WikiParser for PHP.
+ */
+//TODO section names should only contain the contents of the TextNodes
+final class SimpleWikiParser extends WikiParser
+{
     /**
      * Parses WikiText source and builds an Abstract Syntax Tree.
      *
@@ -352,7 +355,7 @@ final class SimpleWikiParser extends WikiParser
         }
         else
         {
-            val result = source.find(this.linkEnd)
+            val result = source.find(linkEnd)
             //The end tag (e.g. ' ') is not part of the link itself
             source.seek(-result.tag.length)
 
