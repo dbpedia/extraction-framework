@@ -1,17 +1,16 @@
 package org.dbpedia.extraction.destinations
 
-import java.io.StringWriter
+import java.io.Writer
 
 /**
- * Writes all statements to a string.
+ * Writes all statements to a writer.
+ *
  * This class is thread-safe.
  *
- * @param formatter The formatter used to serialize the statements. If no formatter is provided, the statements are written using the N-Triples format.
+ * @param formatter The formatter used to serialize the statements.
  */
-class StringDestination(formatter : Formatter) extends Destination
+class WriterDestination(writer: Writer, formatter : Formatter) extends Destination
 {
-    private val writer = new StringWriter()
-
     private var header = false
 
     private var closed = false
@@ -35,10 +34,4 @@ class StringDestination(formatter : Formatter) extends Destination
       formatter.writeFooter(writer)
       closed = true
     }
-
-    /**
-     * Retrieves the formatted data as a string.
-     * The returned data is only partial until the destination has been closed.
-     */
-    override def toString = synchronized { writer.toString }
 }

@@ -8,10 +8,11 @@ import java.util.logging.{Logger,Level}
 import org.dbpedia.extraction.wikiparser.{Namespace,WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
-import org.dbpedia.extraction.destinations.{StringDestination,ThrottlingDestination}
+import org.dbpedia.extraction.destinations.{WriterDestination,LimitingDestination}
 import java.net.{URI, URL}
 import java.lang.Exception
 import xml.{ProcInstr, XML, NodeBuffer, Elem}
+import java.io.StringWriter
 
 /**
  * TODO: merge Extraction.scala and Mappings.scala
@@ -235,11 +236,14 @@ class Mappings(@PathParam("lang") langCode : String)
         
         // Extract pages
         // if there are slashes in the title, the stylesheets are further up in the directory tree
-        val destination = new StringDestination(TriX.formatter(title.count(_ == '/')+3))
+        val writer = new StringWriter
+        val formatter = TriX.writeHeader(writer, title.count(_ == '/')+3)
+        val destination = new WriterDestination(writer, formatter)
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         // extract at most 1000 triples
-        Server.instance.extractor.extract(source, new ThrottlingDestination(destination, 1000), language)
+        Server.instance.extractor.extract(source, new LimitingDestination(destination, 1000), language)
         destination.close()
-        destination.toString
+        
+        writer.toString
     }
 }

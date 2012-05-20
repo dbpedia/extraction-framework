@@ -9,9 +9,10 @@ import scala.xml.Elem
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.extraction.destinations.StringDestination
+import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 import stylesheets.TriX
+import java.io.StringWriter
 
 object Extraction
 {
@@ -89,12 +90,14 @@ class Extraction(@PathParam("lang") langCode : String)
     {
         //TODO return HTTP error code 400 - bad request
         if (title == null) return "<error>Title not defined</error>"
+        
+        val writer = new StringWriter
 
         val formatter = format.toLowerCase.replace("-", "") match
         {
             case "ntriples" => TerseFormatter.NTriplesIris
             case "nquads" => TerseFormatter.NQuadsIris
-            case _ => TriX.formatter(2)
+            case _ => TriX.writeHeader(writer, 2)
         }
 
         val source = WikiSource.fromTitles(
@@ -102,10 +105,11 @@ class Extraction(@PathParam("lang") langCode : String)
             new URL(language.apiUri),
             language)
         
-        val destination = new StringDestination(formatter)
+        val destination = new WriterDestination(writer, formatter)
         Server.instance.extractor.extract(source, destination, language)
         destination.close()
-        destination.toString
+        
+        writer.toString
     }
 
     /**
@@ -117,10 +121,14 @@ class Extraction(@PathParam("lang") langCode : String)
     @Produces(Array("application/xml"))
     def extract(xml : Elem) =
     {
+        val writer = new StringWriter
+        val formatter = TriX.writeHeader(writer, 2)
         val source = XMLSource.fromXML(xml, language)
-        val destination = new StringDestination(TriX.formatter(2))
+        val destination = new WriterDestination(writer, formatter)
+        
         Server.instance.extractor.extract(source, destination, language)
         destination.close()
-        destination.toString
+        
+        writer.toString
     }
 }
