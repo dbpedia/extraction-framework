@@ -98,8 +98,9 @@ object WikiPage {
   }
   
   // SimpleDateFormat is expensive but not thread-safe
-  private val timestampParser = new ThreadLocal[DateFormat] {
+  private val timestampFormat = new ThreadLocal[DateFormat] {
     override def initialValue() = {
+      // Note: the 'X' at the end of the format string and timezone "UTC" are important
       val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
       format.setTimeZone(TimeZone.getTimeZone("UTC"))
       format
@@ -108,11 +109,11 @@ object WikiPage {
   
   def parseTimestamp(str: String): Long = {
     if (str == null || str.isEmpty) -1
-    else timestampParser.get.parse(str).getTime
+    else timestampFormat.get.parse(str).getTime
   }
   
   def formatTimestamp(timestamp: Long): String = {
     if (timestamp < 0) ""
-    else timestampParser.get.format(timestamp)
+    else timestampFormat.get.format(timestamp)
   }
 }
