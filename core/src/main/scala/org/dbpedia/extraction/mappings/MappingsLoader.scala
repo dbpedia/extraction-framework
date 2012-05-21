@@ -17,6 +17,7 @@ import org.dbpedia.extraction.util.Language
  */
 object MappingsLoader
 {
+    // Note: we pass the encoded page title as log parameter so we can render a link on the server
     private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
     
     def load( context : {
@@ -48,7 +49,7 @@ object MappingsLoader
                         }
                         else
                         {
-                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "'")
+                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
                         }
                     }
                     case "TableMapping" =>
@@ -69,15 +70,15 @@ object MappingsLoader
                         }
                         else
                         {
-                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "'")
+                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
                         }
                     }
-                    case _ => //Unknown mapping element
+                    case _ => throw new IllegalArgumentException("Unknown mapping element "+tnode.title.decoded)
                 }
             }
             catch
             {
-                case ex => ex.printStackTrace(); logger.warning("Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage);
+                case ex => logger.log(Level.WARNING, "Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage, page.title.encodedWithNamespace)
             }
         }
 
@@ -114,7 +115,7 @@ object MappingsLoader
             }
             catch
             {
-                case ex : Exception => logger.warning("Couldn't load property mapping on page " + node.root.title + ". Details: " + ex.getMessage)
+                case ex : Exception => logger.log(Level.WARNING, "Couldn't load property mapping on page " + node.root.title.decodedWithNamespace + ". Details: " + ex.getMessage, node.root.title.encodedWithNamespace)
             }
         }
 
