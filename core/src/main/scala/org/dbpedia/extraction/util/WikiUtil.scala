@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.util
 
-import java.net.URLEncoder
-import java.net.URLDecoder
 import org.dbpedia.extraction.util.RichString.toRichString
+import org.dbpedia.util.text.uri.UriDecoder
 
 /**
  * Contains several utility functions related to WikiText.
@@ -27,11 +26,13 @@ object WikiUtil
         string.replaceChars("_\u00A0", "  ").replaceAll(" +", " ").trim
     }
     
+    private val iriReplacements = StringUtils.replacements('%', "\"#%&<>?[\\]^`{|}")
+    
     /**
      * Replaces multiple spaces (U+0020) by one, removes spaces from start and end, 
      * replaces spaces by underscores, and percent-encodes the following characters:
      * 
-     * "#%<>?[\\]^`{|}
+     * "#%&<>?[\\]^`{|}
      *
      * The result is usable in any part of a IRI.
      * 
@@ -42,25 +43,26 @@ object WikiUtil
      * 
      * @param name Canonical MediaWiki page name, e.g. 'Émile Zola'
      */
-    def wikiEncode(name : String) : String =
+    def wikiEncode(name : String): String =
     {
-        // TODO: all this replacing is inefficient, one loop over the string would be nicer.
-        
-        // replace spaces by underscores.
-        // Note: MediaWiki apparently replaces only spaces by underscores, not other whitespace.
-        var encoded = name.replace(' ', '_');
-        
-        // normalize duplicate underscores
-        encoded = encoded.replaceAll("_+", "_");
-        
-        // trim underscores from start 
-        encoded = encoded.replaceAll("^_", "");
-        
-        // trim underscores from end 
-        encoded = encoded.replaceAll("_$", "");
+      // TODO: all this replacing is inefficient, one loop over the string would be nicer.
+      
+      // replace spaces by underscores.
+      // Note: MediaWiki apparently replaces only spaces by underscores, not other whitespace.
+      var encoded = name.replace(' ', '_');
+      
+      // normalize duplicate underscores
+      encoded = encoded.replaceAll("_+", "_");
+      
+      // trim underscores from start 
+      encoded = encoded.replaceAll("^_", "");
+      
+      // trim underscores from end 
+      encoded = encoded.replaceAll("_$", "");
 
-        // TODO: use StringUtils.replacements
-        encoded.escape('%', "\"#%<>?[\\]^`{|}")
+      val sb = StringUtils.escape(null, encoded, iriReplacements)
+      
+      if (sb == null) encoded else sb.toString
     }
     
         
@@ -70,7 +72,7 @@ object WikiUtil
      */
     def wikiDecode(name : String) : String =
     {
-        cleanSpace(URLDecoder.decode(name, "UTF-8"))
+        cleanSpace(UriDecoder.decode(name))
     }
 
     private val wikiEmphasisRegex1 = "(?s)'''''(.*?)'''''".r
