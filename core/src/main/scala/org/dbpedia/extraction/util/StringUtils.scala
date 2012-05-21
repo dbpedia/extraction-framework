@@ -50,9 +50,11 @@ object StringUtils
           last = pos + 1
           
           if (c < 0x80) {
+            // ASCII chars need no expensive UTF-8 encoding
             sb append esc
             toHex(sb, c, 2)
           } else {
+            // TODO: do it like java.net.URI.encode(), probably faster
             val bytes = new String(Array(c)).getBytes("UTF-8")
             for (b <- bytes) {
               sb append esc
@@ -72,12 +74,16 @@ object StringUtils
     /**
      * Produces a replacement array that can be used for escape() below. Call this method once,
      * save its result and use it to call escape() below repeatedly.
+     * @param limit highest allowed code point. Safety catch - if someone gave us a string 
+     * containing a very high code point, we would allocate an array whose length is that 
+     * code point. If that is desired, at least force the user to make it explicit.
      */
-    def replacements(esc: Char, chars: String): Array[String] = {
+    def replacements(esc: Char, chars: String, limit: Int = 256): Array[String] = {
       if (chars.isEmpty) {
         new Array[String](0)
       } else {
         var max = chars.max(Ordering.Char)
+        if (max >= limit) throw new IllegalArgumentException("highest code point "+max.toInt+" exceeds limit "+limit)
         val replace = new Array[String](max + 1)
         var pos = 0
         while (pos < chars.length)
@@ -85,6 +91,7 @@ object StringUtils
           val c = chars.charAt(pos)
           val sb = new StringBuilder
           if (c < 0x80) {
+            // ASCII chars need no expensive UTF-8 encoding
             sb append esc
             toHex(sb, c, 2)
           } else {
@@ -152,7 +159,7 @@ object StringUtils
      * 
      * TODO: This method cannot replace code points > 0xFFFF.
      * 
-     * @param rep list of replaced characters
+     * @param replace list of replaced characters
      * @param by list of replacement characters
      * @param target If null, the method may return null or a new StringBuilder. 
      * Otherwise, the method will return the given target.
