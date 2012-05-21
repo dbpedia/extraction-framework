@@ -21,7 +21,8 @@ class IntegerParser( extractionContext : { def language : Language } ,
 
     override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
-    private val IntegerRegex = """\D*?(\-?[0-9\-\,\.]+).*""".r
+    // we allow digits, minus, comma, dot and space in numbers
+    private val IntegerRegex = """\D*?(-?[0-9-,. ]+).*""".r
 
     override def parse(node : Node) : Option[Long] =
     {
