@@ -10,12 +10,12 @@ object DisambiguationExtractorConfig
          "en" -> " (disambiguation)",
          "es" -> " (desambiguación)",
          "eu" -> " (argipena)",
+         "fr" -> " (homonymie)",
          "it" -> " (disambigua)",
          "ko" -> " (동음이의)",
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
-         "ru" -> " (значения)",
-         "fr" -> " (homonymie)"
+         "ru" -> " (значения)"
     )
 
     val supportedLanguages = disambiguationTitlePartMap.keySet
