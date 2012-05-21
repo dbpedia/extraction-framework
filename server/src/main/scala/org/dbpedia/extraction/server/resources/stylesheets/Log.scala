@@ -2,6 +2,7 @@ package org.dbpedia.extraction.server.resources.stylesheets
 
 import javax.ws.rs.{Produces, GET, Path}
 import scala.xml.{Node,Elem,ProcInstr}
+import org.dbpedia.extraction.server.Server
 
 object Log
 {
@@ -36,9 +37,15 @@ class Log
                       <span style="color:#04B404">no validation errors</span>
                     </xsl:when>
                     <xsl:otherwise>
+                      <span style="color:#B40404"><xsl:value-of select="count(record)"/> validation error(s)</span>
                       <ul>
                         <xsl:for-each select="record">
-                          <li><xsl:value-of select="message"/></li>
+                          <li>
+                          <xsl:if test="param">
+                            <a href={"{concat('"+Server.instance.paths.pagesUrl+"/', param)}"}><xsl:value-of select="param"/></a>: 
+                          </xsl:if>
+                          <xsl:value-of select="message"/>
+                          </li>
                         </xsl:for-each>
                       </ul>
                     </xsl:otherwise>
