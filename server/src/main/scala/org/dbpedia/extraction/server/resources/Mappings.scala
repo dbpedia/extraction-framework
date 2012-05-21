@@ -137,7 +137,8 @@ class Mappings(@PathParam("lang") langCode : String)
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
           </head>
           <body>
-            <h2>Mapping pages</h2>
+            <h2>Validate Mappings</h2>
+            <p><a href="*">Validate all mappings</a></p>
             { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
           </body>
         </html>
