@@ -244,7 +244,7 @@
    }}
    {{ PropertyMapping | templateProperty = Mm_Uniprot | ontologyProperty = uniprot }}
 }}
-}}</text></revision></page><page><title>Mapping en:Geobox</title><ns>204</ns><id>12</id><revision><id>17490</id><timestamp>2012-04-28T00:21:36Z</timestamp><text>&lt;!-- For an overview over all known types see: http://en.wikipedia.org/wiki/Template:Geobox/type --&gt;
+}}</text></revision></page><page><title>Mapping en:Geobox</title><ns>204</ns><id>12</id><revision><id>18596</id><timestamp>2012-05-21T01:36:06Z</timestamp><text>&lt;!-- For an overview over all known types see: http://en.wikipedia.org/wiki/Template:Geobox/type --&gt;
 {{ConditionalMapping
 | cases =
 &lt;!-- Buildings, human creations --&gt;
@@ -549,7 +549,7 @@
      {{PropertyMapping | templateProperty = areaWater | ontologyProperty = areaWater | unit = Area }}
      {{PropertyMapping | templateProperty = areaWaterPercentage | ontologyProperty = percentageOfAreaWater }}
      {{PropertyMapping | templateProperty = area_water_percentage | ontologyProperty = percentageOfAreaWater }}
-     {{PropertyMapping | templateProperty = area_water_percentage_round | comment = please do not map this property - it does not contain data, only a formatting hint. See [http://en.wikipedia.org/wiki/Template:Geobox/legend#Units Template:Geobox/legend#Units]}}
+&lt;!--     {{PropertyMapping | templateProperty = area_water_percentage_round | comment = please do not map this property - it does not contain data, only a formatting hint. See [http://en.wikipedia.org/wiki/Template:Geobox/legend#Units Template:Geobox/legend#Units]}} --&gt;
                          
      {{PropertyMapping | templateProperty = area_urban | ontologyProperty =  areaUrban | unit = Area }}
      {{PropertyMapping | templateProperty = area_urban_imperial | ontologyProperty =  areaUrban | unit = Area }}
@@ -872,7 +872,7 @@
     {{PropertyMapping | templateProperty = code | ontologyProperty =   code}}
 
     {{PropertyMapping | templateProperty = part | ontologyProperty =  part }}
-    {{PropertyMapping | templateProperty = parent | comment = ontologyProperty = parent is wrong, it is used for persons. }}
+&lt;!--    {{PropertyMapping | templateProperty = parent | comment = ontologyProperty = parent is wrong, it is used for persons. }} --&gt;
     {{PropertyMapping | templateProperty = category | ontologyProperty = type }}
     {{PropertyMapping | templateProperty = category_local | ontologyProperty = type }}
     {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
@@ -21031,7 +21031,7 @@ Template Properties not mapped yet:
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeSeconds = lats  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeSeconds = longs  | longitudeDirection = longEW }}
         &lt;!-- also used in some infoboxes --&gt;
 	{{GeocoordinatesMapping | latitudeDegrees = lat_degrees  | latitudeMinutes = lat_minutes  | latitudeSeconds = lat_seconds  | latitudeDirection = lat_direction  | longitudeDegrees = long_degrees  | longitudeMinutes = long_minutes  | longitudeSeconds = long_seconds  | longitudeDirection = long_direction }}
-}}</text></revision></page><page><title>Mapping en:Infobox skyscraper</title><ns>204</ns><id>244</id><revision><id>15215</id><timestamp>2011-09-20T22:01:12Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox skyscraper</title><ns>204</ns><id>244</id><revision><id>18595</id><timestamp>2012-05-21T01:33:03Z</timestamp><text>{{TemplateMapping
 | mapToClass = Skyscraper
 | mappings =
 	{{PropertyMapping | templateProperty = year_highest | ontologyProperty = highestBuildingInYear }}
@@ -21048,7 +21048,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = opening | ontologyProperty = openingDate }}
 	{{PropertyMapping | templateProperty = demolished | ontologyProperty = demolitionDate }}
 	{{PropertyMapping | templateProperty = destroyed | ontologyProperty = destructionDate }}
-	{{PropertyMapping | templateProperty = floor_count | ontologyProperty = countOfFloor }}
+	{{PropertyMapping | templateProperty = floor_count | ontologyProperty = floorCount }}
 	{{PropertyMapping | templateProperty = cost | ontologyProperty = cost | unit = Currency }}
 	{{PropertyMapping | templateProperty = floor_area | ontologyProperty = floorArea | unit = Area }}
 	{{PropertyMapping | templateProperty = architect | ontologyProperty = architect }}
@@ -22223,13 +22223,13 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = sales&amp;united states | ontologyProperty = usSales}}
 	{{PropertyMapping | templateProperty = american&amp;sales | ontologyProperty = usSales}}
 	{{PropertyMapping | templateProperty = year | ontologyProperty = year}}
-}}</text></revision></page><page><title>Mapping en:Taxobox</title><ns>204</ns><id>285</id><revision><id>13127</id><timestamp>2011-05-23T10:59:55Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping en:Taxobox</title><ns>204</ns><id>285</id><revision><id>18585</id><timestamp>2012-05-21T01:06:39Z</timestamp><text>{{ConditionalMapping
 | cases =
 {{Condition
     | templateProperty = divisio
     | operator = contains
     | value = Magnoliophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = FloweringPlant
                 }}
  }}
@@ -22238,7 +22238,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = flowering plant
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = FloweringPlant
                 }}
  }}
@@ -22247,7 +22247,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Angiosperms
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = FloweringPlant
                 }}
  }}
@@ -22256,7 +22256,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Angiospermae
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = FloweringPlant
                 }}
  }}
@@ -22265,7 +22265,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Chlorophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = GreenAlga
                 }}
  }}
@@ -22274,7 +22274,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Charophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = GreenAlga
                 }}
  }}
@@ -22283,7 +22283,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Marchantiophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Moss
                 }}
  }}
@@ -22292,7 +22292,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Anthocerotophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Moss
                 }}
  }}
@@ -22301,7 +22301,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Bryophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Moss
                 }}
  }}
@@ -22310,7 +22310,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Moss
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Moss
                 }}
  }}
@@ -22319,7 +22319,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Lycopodiophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = ClubMoss
                 }}
  }}
@@ -22328,7 +22328,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Pteridophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Fern
                 }}
   }}
@@ -22337,7 +22337,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Cycadophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Cycad
                 }}
  }}
@@ -22347,7 +22347,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Ginkgophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Ginkgo
                 }}
  }}
@@ -22356,7 +22356,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Pinophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Conifer
                 }}
  }}
@@ -22366,7 +22366,7 @@ Template Properties not mapped yet:
     | templateProperty = divisio
     | operator = contains
     | value = Gnetophyta
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Gnetophytes
                 }}
  }}
@@ -22375,7 +22375,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Chondrichthyes
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22384,7 +22384,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Elasmobranchii
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22393,7 +22393,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Holocephali
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22402,7 +22402,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Osteichthyes
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22411,7 +22411,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Osteostraci
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22420,7 +22420,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Actinopterygii
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22429,7 +22429,7 @@ Template Properties not mapped yet:
     | templateProperty = class
     | operator = contains
     | value = Actinoptergii
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22438,7 +22438,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = ray-finned fish
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22447,7 +22447,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Sarcopterygii
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22456,7 +22456,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Pisces
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22465,7 +22465,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Cephalaspidomorphi
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fish
                 }}
  }}
@@ -22474,7 +22474,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Amphib
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Amphibian
                 }}
  }}
@@ -22483,7 +22483,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Lissamphib
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Amphibian
                 }}
  }}
@@ -22493,7 +22493,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Reptil
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Reptile
                 }}
  }}
@@ -22502,7 +22502,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Sauropsid
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Reptile
                 }}
  }}
@@ -22511,7 +22511,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Anapsid
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Reptile
                 }}
  }}
@@ -22520,7 +22520,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Synapsid
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Reptile
                 }}
  }}
@@ -22529,7 +22529,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Diapsid
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Reptile
                 }}
  }}
@@ -22538,7 +22538,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Aves
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Bird
                 }}
  }}
@@ -22547,7 +22547,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = bird
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Bird
                 }}
  }}
@@ -22557,7 +22557,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Mammal
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Mammal
                 }}
  }}
@@ -22566,7 +22566,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Insect
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Insect
                 }}
  }}
@@ -22575,7 +22575,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Arachnid
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Arachnid
                 }}
  }}
@@ -22584,7 +22584,7 @@ Template Properties not mapped yet:
     | templateProperty = subphylum
     | operator = contains
     | value = Crustacea
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Crustacean
                 }}
  }}
@@ -22593,7 +22593,7 @@ Template Properties not mapped yet:
     | templateProperty = classis
     | operator = contains
     | value = Malacostraca
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Crustacean
                 }}
  }}
@@ -22602,7 +22602,7 @@ Template Properties not mapped yet:
     | templateProperty = phylum
     | operator = contains
     | value = Mollus
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Mollusca
                 }}
  }}
@@ -22612,7 +22612,7 @@ Template Properties not mapped yet:
     | templateProperty = regnum
     | operator = contains
     | value = Plant
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Plant
                 }}
  }}
@@ -22621,7 +22621,7 @@ Template Properties not mapped yet:
     | templateProperty = regnum
     | operator = contains
     | value = Animal
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Animal
                 }}
  }}
@@ -22630,7 +22630,7 @@ Template Properties not mapped yet:
     | templateProperty = regnum
     | operator = contains
     | value = Fungi
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Fungus
                 }}
  }}
@@ -22639,7 +22639,7 @@ Template Properties not mapped yet:
     | templateProperty = regnum
     | operator = contains
     | value = Fungus
-    | mapping =  {{TemplateMapping
+    | mapping =  {{TemplateMapping | header = 0
                    | mapToClass = Fungus
                  }}
  }}
@@ -22650,7 +22650,7 @@ Template Properties not mapped yet:
     | templateProperty = domain
     | operator = contains
     | value = Eukaryota
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Eukaryote
                 }}
  }}
@@ -22659,7 +22659,7 @@ Template Properties not mapped yet:
     | templateProperty = domain
     | operator = contains
     | value = Eukarya
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Eukaryote
                 }}
  }}
@@ -22668,7 +22668,7 @@ Template Properties not mapped yet:
     | templateProperty = domain
     | operator = contains
     | value = Eukaryote
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Eukaryote
                 }}
  }}
@@ -22677,7 +22677,7 @@ Template Properties not mapped yet:
     | templateProperty = domain
     | operator = contains
     | value = Eukaryotic
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Eukaryote
                 }}
  }}
@@ -22686,7 +22686,7 @@ Template Properties not mapped yet:
     | templateProperty = domain
     | operator = contains
     | value = Archaea
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Archaea
                 }}
  }}
@@ -22695,7 +22695,7 @@ Template Properties not mapped yet:
     | templateProperty = domain
     | operator = contains
     | value = Bacteria
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Bacteria
                 }}
  }}
@@ -22704,7 +22704,7 @@ Template Properties not mapped yet:
     | templateProperty = domain
     | operator = contains
     | value = Bacteriumv
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                    | mapToClass = Bacteria
                 }}
  }}
@@ -22712,71 +22712,71 @@ Template Properties not mapped yet:
 
  {{Condition
     | operator = otherwise
-    | mapping = {{TemplateMapping
+    | mapping = {{TemplateMapping | header = 0
                 | mapToClass = Species
                 }}
  }}
 
 | defaultMappings =
-	{{PropertyMapping | templateProperty = domain | ontologyProperty = domain }}
-	{{PropertyMapping | templateProperty = superregnum | ontologyProperty = domain }}
-	{{PropertyMapping | templateProperty = regnum | ontologyProperty = kingdom }}
-	{{PropertyMapping | templateProperty = color | ontologyProperty = colourName }}
-	{{PropertyMapping | templateProperty = color | ontologyProperty = colour }}
-	{{PropertyMapping | templateProperty = subregnum | ontologyProperty = kingdom }}
-	{{PropertyMapping | templateProperty = divisio | ontologyProperty = division }}
-	{{PropertyMapping | templateProperty = subdivisio | ontologyProperty = division }}
-	{{PropertyMapping | templateProperty = unranked_divisio | ontologyProperty = division }}
-	{{PropertyMapping | templateProperty = phylum | ontologyProperty = phylum }}
-	{{PropertyMapping | templateProperty = subphylum | ontologyProperty = phylum }}
-	{{PropertyMapping | templateProperty = infraphylum | ontologyProperty = phylum }}
-	{{PropertyMapping | templateProperty = microphylum | ontologyProperty = phylum }}
-	{{PropertyMapping | templateProperty = nanophylum | ontologyProperty = phylum }}
-	{{PropertyMapping | templateProperty = classis | ontologyProperty = class }}
-	{{PropertyMapping | templateProperty = class | ontologyProperty = class }}
-	{{PropertyMapping | templateProperty = unranked_subclassis | ontologyProperty = class }}
-	{{PropertyMapping | templateProperty = subclassis | ontologyProperty = class }}
-	{{PropertyMapping | templateProperty = unranked_infraclassis | ontologyProperty = class }}
-	{{PropertyMapping | templateProperty = infraclassis | ontologyProperty = class }}
-	{{PropertyMapping | templateProperty = ordo | ontologyProperty = order }}
-	{{PropertyMapping | templateProperty = subordo | ontologyProperty = order }}
-	{{PropertyMapping | templateProperty = infraordo | ontologyProperty = order }}
-	{{PropertyMapping | templateProperty = parvordo | ontologyProperty = order }}
-	{{PropertyMapping | templateProperty = familia | ontologyProperty = family }}
-	{{PropertyMapping | templateProperty = subfamilia | ontologyProperty = family }}
-	{{PropertyMapping | templateProperty = supertribus | ontologyProperty = family }}
-	{{PropertyMapping | templateProperty = tribus | ontologyProperty = family }}
-	{{PropertyMapping | templateProperty = subtribus | ontologyProperty = family }}
-	{{PropertyMapping | templateProperty = alliance | ontologyProperty = family }}
-	{{PropertyMapping | templateProperty = genus | ontologyProperty = genus }}
-	{{PropertyMapping | templateProperty = subgenus | ontologyProperty = genus }}
-	{{PropertyMapping | templateProperty = species | ontologyProperty = species }}
-	{{PropertyMapping | templateProperty = subspecies | ontologyProperty = species }}
-	{{PropertyMapping | templateProperty = variety | ontologyProperty = species }}
-	{{PropertyMapping | templateProperty = binomial | ontologyProperty = binomial }}
-	{{PropertyMapping | templateProperty = binomial_authority | ontologyProperty = binomialAuthority }}
-	{{PropertyMapping | templateProperty = status | ontologyProperty = conservationStatus }}
-	{{PropertyMapping | templateProperty = status_system | ontologyProperty = conservationStatusSystem }}
-	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = unranked_superdomain | ontologyProperty = domain }}
-	{{PropertyMapping | templateProperty = superdomain | ontologyProperty = domain }}
-	{{PropertyMapping | templateProperty = unranked_regnum | ontologyProperty = kingdom }}
-	{{PropertyMapping | templateProperty = superdivisio | ontologyProperty = division }}
-	{{PropertyMapping | templateProperty = unranked_phylum | ontologyProperty = phylum }}
-	{{PropertyMapping | templateProperty = superphylum | ontologyProperty = phylum }}
-	{{PropertyMapping | templateProperty = unranked_classis | ontologyProperty = class }}
-	{{PropertyMapping | templateProperty = superclassis | ontologyProperty = class }}
-	{{PropertyMapping | templateProperty = unranked_ordo | ontologyProperty = order }}
-	{{PropertyMapping | templateProperty = magnordo | ontologyProperty = order }}
-	{{PropertyMapping | templateProperty = superordo | ontologyProperty = order }}
-	{{PropertyMapping | templateProperty = unranked_familia | ontologyProperty = family }}
-	{{PropertyMapping | templateProperty = superfamilia | ontologyProperty = family }}
-	{{PropertyMapping | templateProperty = unranked_genus | ontologyProperty = genus }}
-	{{PropertyMapping | templateProperty = species_group | ontologyProperty = species }}
-	{{PropertyMapping | templateProperty = species_subgroup | ontologyProperty = species }}
-	{{PropertyMapping | templateProperty = species_complex | ontologyProperty = species }}
+    {{PropertyMapping | templateProperty = domain | ontologyProperty = domain }}
+    {{PropertyMapping | templateProperty = superregnum | ontologyProperty = domain }}
+    {{PropertyMapping | templateProperty = regnum | ontologyProperty = kingdom }}
+    {{PropertyMapping | templateProperty = color | ontologyProperty = colourName }}
+    {{PropertyMapping | templateProperty = color | ontologyProperty = colour }}
+    {{PropertyMapping | templateProperty = subregnum | ontologyProperty = kingdom }}
+    {{PropertyMapping | templateProperty = divisio | ontologyProperty = division }}
+    {{PropertyMapping | templateProperty = subdivisio | ontologyProperty = division }}
+    {{PropertyMapping | templateProperty = unranked_divisio | ontologyProperty = division }}
+    {{PropertyMapping | templateProperty = phylum | ontologyProperty = phylum }}
+    {{PropertyMapping | templateProperty = subphylum | ontologyProperty = phylum }}
+    {{PropertyMapping | templateProperty = infraphylum | ontologyProperty = phylum }}
+    {{PropertyMapping | templateProperty = microphylum | ontologyProperty = phylum }}
+    {{PropertyMapping | templateProperty = nanophylum | ontologyProperty = phylum }}
+    {{PropertyMapping | templateProperty = classis | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = class | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = unranked_subclassis | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = subclassis | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = unranked_infraclassis | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = infraclassis | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = ordo | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = subordo | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = infraordo | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = parvordo | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = familia | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = subfamilia | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = supertribus | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = tribus | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = subtribus | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = alliance | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = genus | ontologyProperty = genus }}
+    {{PropertyMapping | templateProperty = subgenus | ontologyProperty = genus }}
+    {{PropertyMapping | templateProperty = species | ontologyProperty = species }}
+    {{PropertyMapping | templateProperty = subspecies | ontologyProperty = species }}
+    {{PropertyMapping | templateProperty = variety | ontologyProperty = species }}
+    {{PropertyMapping | templateProperty = binomial | ontologyProperty = binomial }}
+    {{PropertyMapping | templateProperty = binomial_authority | ontologyProperty = binomialAuthority }}
+    {{PropertyMapping | templateProperty = status | ontologyProperty = conservationStatus }}
+    {{PropertyMapping | templateProperty = status_system | ontologyProperty = conservationStatusSystem }}
+    {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = unranked_superdomain | ontologyProperty = domain }}
+    {{PropertyMapping | templateProperty = superdomain | ontologyProperty = domain }}
+    {{PropertyMapping | templateProperty = unranked_regnum | ontologyProperty = kingdom }}
+    {{PropertyMapping | templateProperty = superdivisio | ontologyProperty = division }}
+    {{PropertyMapping | templateProperty = unranked_phylum | ontologyProperty = phylum }}
+    {{PropertyMapping | templateProperty = superphylum | ontologyProperty = phylum }}
+    {{PropertyMapping | templateProperty = unranked_classis | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = superclassis | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = unranked_ordo | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = magnordo | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = superordo | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = unranked_familia | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = superfamilia | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = unranked_genus | ontologyProperty = genus }}
+    {{PropertyMapping | templateProperty = species_group | ontologyProperty = species }}
+    {{PropertyMapping | templateProperty = species_subgroup | ontologyProperty = species }}
+    {{PropertyMapping | templateProperty = species_complex | ontologyProperty = species }}
 
-	{{PropertyMapping | templateProperty = synonyms | ontologyProperty = synonym }}
+    {{PropertyMapping | templateProperty = synonyms | ontologyProperty = synonym }}
 }}</text></revision></page><page><title>Mapping en:Year dab</title><ns>204</ns><id>4816</id><revision><id>16265</id><timestamp>2011-11-22T18:41:43Z</timestamp><text>{{TemplateMapping
 | mapToClass = Year
 | mappings =
