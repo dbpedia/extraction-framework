@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.resources.ontology
 import scala.xml.Elem
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
-import org.dbpedia.extraction.ontology.{OntologyType, OntologyProperty, OntologyClass}
+import org.dbpedia.extraction.ontology.{OntologyType,OntologyProperty,OntologyClass}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
 
@@ -23,6 +23,8 @@ class Classes
         val subClassesMap = ontology.classes.values.toList   //Get all classes
                 // Don't filter non-DBpedia classes - it's useful to see foaf:Document etc
                 // .filter(! _.name.contains(":")) //Filter non-DBpedia classes
+                // Do filter classes that do not have a base class
+                .filter(_.baseClasses.nonEmpty)
                 .sortWith(_.name < _.name)     //Sort by name
                 .groupBy(_.baseClasses.head).toMap   //Group by super class
 
