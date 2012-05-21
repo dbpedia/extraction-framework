@@ -6,6 +6,18 @@ import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichPath.toRichPath
 import org.dbpedia.extraction.dump.download.Download
 
+/**
+ * This class requires the java.nio.file package, which is available since JDK 7.
+ *  
+ * If you want to compile and run DBpedia with an earlier JDK version,
+ * delete or blank these two files:
+ * 
+ * core/src/main/scala/org/dbpedia/extraction/util/RichPath.scala
+ * dump/src/main/scala/org/dbpedia/extraction/dump/clean/Clean.scala
+ * 
+ * The launchers 'purge-download' and 'purge-extract' in the dump/ module won't work, 
+ * but they are not vitally necessary.
+ */
 object Clean {
 
   def main(args: Array[String]) {
