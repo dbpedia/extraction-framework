@@ -18,7 +18,7 @@ import java.net.URL
  * or they can support lazy loading of context parameters.
  */
 
-abstract class ExtractionManager(languages : Traversable[Language], paths: Paths)
+abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
 {
   self =>
     
@@ -157,7 +157,7 @@ abstract class ExtractionManager(languages : Traversable[Language], paths: Paths
     protected def loadExtractors(): Map[Language, RootExtractor] =
     {
         val extractors = languages.map(lang => (lang, loadExtractors(lang))).toMap
-        logger.info("All extractors loaded for languages "+languages.mkString(", ")) // TODO: log lang.wikiCode, not lang.toString
+        logger.info("All extractors loaded for languages "+languages.map(_.wikiCode).sorted.mkString(","))
         extractors
     }
 

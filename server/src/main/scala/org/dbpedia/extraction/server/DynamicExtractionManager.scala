@@ -20,7 +20,7 @@ import scala.actors.Actor
  * mappingPageSource is called by loadMappings in the base class, 
  * ontologyPages is called by loadOntology in the base class.
  */
-class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Traversable[Language], paths: Paths) 
+class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths) 
 extends ExtractionManager(languages, paths)
 {
     // TODO: remove this field. Clients should get the ontology pages directly from the
