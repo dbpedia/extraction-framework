@@ -1,21 +1,23 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter}
+import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter,UriPolicy}
 import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
 import org.dbpedia.extraction.mappings._
 import collection.immutable.ListMap
+import collection.mutable.HashMap
 import java.util.Properties
 import java.io.{FileInputStream, InputStreamReader, File}
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichFile.toRichFile
-import java.net.URL
+import java.net.{URI,URL}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.{MemorySource, Source, XMLSource, WikiSource}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.Dataset
 import org.dbpedia.extraction.dump.download.Download
+import scala.collection.JavaConversions.asScalaSet // implicit
 
 /**
  * Loads the dump extraction configuration.
@@ -44,7 +46,7 @@ object ConfigLoader
 
         //Create a non-strict view of the extraction jobs
         // TODO: why non-strict?
-        config.extractors.keySet.view.map(createExtractionJob)
+        config.extractorClasses.keySet.view.map(createExtractionJob)
     }
     
     private var ontologyFile : File = null
@@ -76,30 +78,53 @@ object ConfigLoader
 
         /** Local mappings files, downloaded for speed and reproducibility */
         mappingsDir = getFile("mappings")
+        
+        val formatters = Map[String, ((URI, Int) => URI) => Formatter] (
+          "trix-triples" -> { new TriXFormatter(false, _) },
+          "trix-quads" -> { new TriXFormatter(true, _) },
+          "turtle-triples" -> { new TerseFormatter(false, true, _) },
+          "turtle-quads" -> { new TerseFormatter(true, true, _) },
+          "n-triples" -> { new TerseFormatter(false, false, _) },
+          "n-quads" -> { new TerseFormatter(true, false, _) }
+        )
 
-        /** Result formats */
-        formats = getValues("formats")
+        val formats = new HashMap[String, Formatter]()
+        for (key <- config.stringPropertyNames) {
+          if (key.startsWith("format.")) {
+            
+            val suffix = key.substring("format.".length)
+            
+            val settings = splitValue(key, ';')
+            require(settings.length != 1 && settings.length != 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy")
+            
+            // FIXME: read uri-policy parameter
+            val policy = UriPolicy.identity
+            
+            val formatter = formatters.get(settings(0))
+            require(formatter.isDefined, "first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString(","))
+            formats(suffix) = formatter.get(policy)
+          }
+        }
 
         /** Languages */
         // TODO: add special parameters, similar to download: 
         // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
         // extract=mapped:MappingExtractor means all languages with a mapping namespace
-        var languages = getValues("languages").map(Language)
+        var languages = splitValue("languages", ',').map(Language)
         if (languages.isEmpty) languages = Namespace.mappings.keySet.toList
         languages = languages.sorted(Language.wikiCodeOrdering)
 
-        /** Extractor classes */
-        val extractors = loadExtractorClasses()
+        val extractorClasses = loadExtractorClasses()
         
         private def getFile(key: String): File = {
           val value = config.getProperty(key)
           if (value == null) null else new File(value)
         }
         
-        private def getValues(key: String): List[String] = {
+        private def splitValue(key: String, sep: Char): List[String] = {
           val values = config.getProperty(key)
           if (values == null) List.empty
-          else values.split("[,\\s]+", -1).map(_.trim).filter(_.nonEmpty).toList
+          else values.split("["+sep+"\\s]+", -1).map(_.trim).filter(_.nonEmpty).toList
         }
 
         /**
@@ -111,7 +136,7 @@ object ConfigLoader
         {
             //Load extractor classes
             if(config.getProperty("extractors") == null) throw new IllegalArgumentException("Property 'extractors' not defined.")
-            val stdExtractors = getValues("extractors").map(loadExtractorClass)
+            val stdExtractors = splitValue("extractors", ',').map(loadExtractorClass)
 
             //Create extractor map
             var extractors = ListMap[Language, List[Class[_ <: Extractor]]]()
@@ -125,7 +150,7 @@ object ConfigLoader
                 val language = Language(code)
                 if (extractors.contains(language))
                 {
-                    extractors += language -> (stdExtractors ::: getValues("extractors."+code).map(loadExtractorClass))
+                    extractors += language -> (stdExtractors ::: splitValue("extractors."+code, ',').map(loadExtractorClass))
                 }
             }
 
@@ -204,7 +229,7 @@ object ConfigLoader
         }
 
         //Extractors
-        val extractorClasses = config.extractors(lang)
+        val extractorClasses = config.extractorClasses(lang)
         val extractor = new RootExtractor(CompositeExtractor.load(extractorClasses, context))
         
         /**
