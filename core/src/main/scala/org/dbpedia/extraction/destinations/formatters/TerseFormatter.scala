@@ -4,6 +4,7 @@ import java.io.Writer
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import java.net.URI
+import UriPolicy._
 
 /**
  * TODO: add functionality - the comments could contain more useful info
@@ -13,7 +14,7 @@ class TerseFormatter(render: Quad => String) extends Formatter
   def this(builder: => TripleBuilder) = 
     this(new TripleRenderer(builder))
   
-  def this(quads: Boolean, turtle: Boolean, policy: (URI, Int) => URI = UriPolicy.identity) =
+  def this(quads: Boolean, turtle: Boolean, policy: Policy = identity) =
     this(new TerseBuilder(quads, turtle, policy))
 
   override def writeHeader(writer : Writer) = {

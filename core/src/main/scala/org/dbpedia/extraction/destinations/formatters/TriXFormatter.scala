@@ -3,6 +3,7 @@ package org.dbpedia.extraction.destinations.formatters
 import java.io.Writer
 import org.dbpedia.extraction.destinations.Quad
 import java.net.URI
+import UriPolicy._
 
 /**
  * Formats statements according to the TriX format.
@@ -13,7 +14,7 @@ class TriXFormatter(render: Quad => String) extends Formatter
   def this(builder: => TripleBuilder) =
     this(new TripleRenderer(builder))
 
-  def this(quads: Boolean, policy: (URI, Int) => URI = UriPolicy.identity) =
+  def this(quads: Boolean, policy: Policy = identity) =
     this(new TriXBuilder(quads, policy))
 
   override def writeHeader(writer : Writer): Unit = {

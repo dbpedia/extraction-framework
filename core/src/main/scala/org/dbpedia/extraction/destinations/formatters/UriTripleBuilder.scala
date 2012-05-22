@@ -3,7 +3,7 @@ package org.dbpedia.extraction.destinations.formatters
 import java.net.{URI,URISyntaxException}
 import UriPolicy._
 
-abstract class UriTripleBuilder(policy: (URI, Int) => URI) extends TripleBuilder {
+abstract class UriTripleBuilder(policy: Policy) extends TripleBuilder {
   
   protected val badUri = "BAD URI: "
   
