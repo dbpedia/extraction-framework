@@ -3,8 +3,8 @@ package org.dbpedia.extraction.dump.extract
 import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter,UriPolicy}
 import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
 import org.dbpedia.extraction.mappings._
-import collection.immutable.ListMap
-import collection.mutable.HashMap
+import scala.collection.immutable.ListMap
+import scala.collection.mutable.{HashMap,ArrayBuffer,HashSet}
 import java.util.Properties
 import java.io.{FileInputStream, InputStreamReader, File}
 import org.dbpedia.extraction.util.StringUtils._
@@ -79,6 +79,60 @@ object ConfigLoader
         /** Local mappings files, downloaded for speed and reproducibility */
         mappingsDir = getFile("mappings")
         
+        private val policyFunctions = Map[String, Set[String] => ((URI, Int) => URI)] (
+          "uris" -> UriPolicy.uris,
+          "generic" -> UriPolicy.generic
+        )
+
+        /**
+         * Parses a list of languages like "en,fr" or "*" or even "en,*,fr"
+         */
+        private def parseLanguages(langs: String): Set[String] = {
+          val domains = new HashSet[String]()
+          for (code <- split(langs, ',')) {
+            if (code == "*") return Set("*") // matches all, look no further
+            else domains += Language(code).dbpediaDomain
+          }
+          domains.toSet
+        }
+        
+        /**
+         * Parses a single policy like "uris:en,fr"
+         */
+        private def parsePolicy(policy: String): (URI, Int) => URI = {
+          split(policy, ':') match {
+            case List(key, langs) => policyFunctions(key)(parseLanguages(langs))
+            case _ => throw new IllegalArgumentException("invalid format: '"+policy+"'")
+          }
+        }
+        
+        /**
+         * Parses a policy line like "uris:en,fr; generic:en"
+         */
+        private def parsePolicies(key: String): (URI, Int) => URI = {
+          
+          val policies = new ArrayBuffer[(URI, Int) => URI]()
+          for (part <- splitValue(key, ';')) {
+            policies += parsePolicy(part)
+          }
+          
+          require(policies.nonEmpty, "found no URI policies")
+
+          (iri, pos) => {
+            var result = iri
+            for (policy <- policies) result = policy(result, pos)
+            result
+          }
+        }
+        
+        val policies = new HashMap[String, (URI, Int) => URI]()
+        for (key <- config.stringPropertyNames) {
+          if (key.startsWith("uri-policy")) {
+            try policies(key) = parsePolicies(key)
+            catch { case e: Exception => throw new IllegalArgumentException("invalid URI policy: '"+key+"="+config.getProperty(key)+"'", e) }
+          }
+        }
+        
         private val formatters = Map[String, ((URI, Int) => URI) => Formatter] (
           "trix-triples" -> { new TriXFormatter(false, _) },
           "trix-quads" -> { new TriXFormatter(true, _) },
@@ -97,11 +151,17 @@ object ConfigLoader
             val settings = splitValue(key, ';')
             require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy")
             
-            // FIXME: read uri-policy parameter
-            val policy = UriPolicy.identity
-            
             val formatter = formatters.get(settings(0))
-            require(formatter.isDefined, "first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString(","))
+            require(formatter.isDefined, "first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString("'","','","'"))
+            
+            val policy =
+              if (settings.length == 1) {
+                UriPolicy.identity
+              }
+              else {
+                policies.getOrElse(settings(1), throw new IllegalArgumentException("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
+              }
+            
             formats(suffix) = formatter.get.apply(policy)
           }
         }
@@ -124,7 +184,11 @@ object ConfigLoader
         private def splitValue(key: String, sep: Char): List[String] = {
           val values = config.getProperty(key)
           if (values == null) List.empty
-          else values.split("["+sep+"\\s]+", -1).map(_.trim).filter(_.nonEmpty).toList
+          else split(values, sep)
+        }
+
+        private def split(value: String, sep: Char): List[String] = {
+          value.split("["+sep+"\\s]+", -1).map(_.trim).filter(_.nonEmpty).toList
         }
 
         /**

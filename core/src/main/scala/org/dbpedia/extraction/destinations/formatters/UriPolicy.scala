@@ -13,13 +13,17 @@ object UriPolicy {
   
   val identity: (URI, Int) => URI = { (iri, pos) => iri }
 
-  val uris: (URI, Int) => URI = { (iri, pos) => new URI(iri.toASCIIString) }
-
-  def generic(languages: Language*): (URI, Int) => URI = {
-    val generic = languages.map(_.dbpediaDomain).toSet
-    
+  def uris(domains: Set[String]): (URI, Int) => URI = {
+    val all = domains.contains("*")
     (iri, pos) => 
-      if (generic.contains(iri.getHost)) copy(iri, "dbpedia.org", iri.getRawPath)
+      if (all || domains.contains(iri.getHost)) new URI(iri.toASCIIString)
+      else iri
+  }
+
+  def generic(domains: Set[String]): (URI, Int) => URI = {
+    val all = domains.contains("*")
+    (iri, pos) =>
+      if (all || domains.contains(iri.getHost)) copy(iri, "dbpedia.org", iri.getRawPath)
       else iri
   }
   
