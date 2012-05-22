@@ -328,7 +328,7 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:label@fr = os
 | rdfs:label@pt = osso
 | rdfs:subClassOf = AnatomicalStructure
-}}</text></revision></page><page><title>OntologyClass:Book</title><ns>200</ns><id>318</id><revision><id>16830</id><timestamp>2012-03-13T07:55:02Z</timestamp><text>{{Class
+}}</text></revision></page><page><title>OntologyClass:Book</title><ns>200</ns><id>318</id><revision><id>18632</id><timestamp>2012-05-22T05:38:25Z</timestamp><text>{{Class
 | rdfs:label@de = Buch
 | rdfs:label@en = book
 | rdfs:label@ca = llibre
@@ -338,8 +338,7 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:label@ko = 책
 | rdfs:label@bn = বই
 | rdfs:subClassOf = WrittenWork
-| owl:equivalentClass = bibo:Book
-| owl:equivalentClass = schema:Book
+| owl:equivalentClass = schema:Book, bibo:Book
 }}</text></revision></page><page><title>OntologyClass:BowlingLeague</title><ns>200</ns><id>2165</id><revision><id>9751</id><timestamp>2010-10-05T08:15:14Z</timestamp><text>{{Class
 | rdfs:label@en = bowling league
 | rdfs:label@fr = ligue de bowling
@@ -1336,7 +1335,7 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:label@el = φιλόσοφος
 | rdfs:label@ko = 철학자
 | rdfs:subClassOf = Person
-}}</text></revision></page><page><title>OntologyClass:Place</title><ns>200</ns><id>432</id><revision><id>18618</id><timestamp>2012-05-22T01:39:43Z</timestamp><text>{{Class
+}}</text></revision></page><page><title>OntologyClass:Place</title><ns>200</ns><id>432</id><revision><id>18634</id><timestamp>2012-05-22T06:11:04Z</timestamp><text>{{Class
 | labels =
 {{label|en|place}}
 {{label|de|Ort}}
@@ -1346,8 +1345,7 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | comments =
 {{comment|en|Immobile things or locations.}}
 {{comment|pt|uma localização}}
-| owl:equivalentClass = dct:Location
-| owl:equivalentClass = schema:Place
+| owl:equivalentClass = schema:Place, dct:Location
 }}</text></revision></page><page><title>OntologyClass:Planet</title><ns>200</ns><id>433</id><revision><id>18593</id><timestamp>2012-05-21T01:30:52Z</timestamp><text>{{Class
 | rdfs:label@ca = planeta
 | rdfs:label@de = Planet
@@ -4166,7 +4164,17 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:domain = Person
 | rdfs:label@en = dubber
 | rdfs:comment@en = the person who dubs another person e.g. an actor or a fictional character in movies
-}}</text></revision></page><page><title>OntologyProperty:Dynasty</title><ns>202</ns><id>5636</id><revision><id>18013</id><timestamp>2012-04-30T11:10:02Z</timestamp><text>{{ DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Duration</title><ns>202</ns><id>5670</id><revision><id>18631</id><timestamp>2012-05-22T04:47:09Z</timestamp><text>{{Merge|runtime}}
+
+{{DatatypeProperty
+| rdfs:label@en = duration
+| rdfs:comment@en = The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format&lt;ref name="schema:duration"&gt;http://schema.org/Event&lt;/ref&gt;
+| rdfs:domain = schema:Event
+| rdfs:range = Time
+| owl:equivalentProperty = schema:duration
+}}
+==References==
+&lt;references/&gt;</text></revision></page><page><title>OntologyProperty:Dynasty</title><ns>202</ns><id>5636</id><revision><id>18013</id><timestamp>2012-04-30T11:10:02Z</timestamp><text>{{ DatatypeProperty
 
 	| rdfs:label@en = dynasty
 	| rdfs:domain = Monarch
@@ -5948,13 +5956,12 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:domain = Place
 | rdfs:range = Place
 | owl:equivalentProperty = schema:containedIn
-}}</text></revision></page><page><title>OntologyProperty:Location</title><ns>202</ns><id>1059</id><revision><id>17584</id><timestamp>2012-04-28T18:28:10Z</timestamp><text>{{ObjectProperty
+}}</text></revision></page><page><title>OntologyProperty:Location</title><ns>202</ns><id>1059</id><revision><id>18620</id><timestamp>2012-05-22T04:21:35Z</timestamp><text>{{ObjectProperty
 | rdfs:label@en = location
 | rdfs:label@el = τοποθεσία
 | rdfs:label@pt = localização
 | rdfs:range = Place
-| owl:equivalentProperty = dct:spatial
-| owl:equivalentProperty = schema:location
+| owl:equivalentProperty = dct:spatial, schema:location
 }}</text></revision></page><page><title>OntologyProperty:LocationCity</title><ns>202</ns><id>1060</id><revision><id>13865</id><timestamp>2011-06-24T11:34:27Z</timestamp><text>{{ObjectProperty
 | rdfs:label@en = location city
 | rdfs:domain = Organisation
@@ -6239,16 +6246,7 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:label@en = maximum inclination
 | rdfs:domain = LaunchPad
 | rdfs:range = xsd:float
-}}</text></revision></page><page><title>OntologyProperty:MaximumSpeed</title><ns>202</ns><id>5631</id><revision><id>18005</id><timestamp>2012-04-30T09:43:16Z</timestamp><text>{{ DatatypeProperty
-
-	| rdfs:label@en = maximum speed
-	| rdfs:domain = MeanOfTransportation
-	| rdfs:range = Speed
-	| rdf:type = owl:FunctionalProperty
-
-}}
-
-&lt;!-- rdfs:equivalentProperty topSpeed --&gt;</text></revision></page><page><title>OntologyProperty:MaximumTemperature</title><ns>202</ns><id>1115</id><revision><id>11288</id><timestamp>2011-03-30T09:59:10Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:MaximumSpeed</title><ns>202</ns><id>5631</id><revision><id>18622</id><timestamp>2012-05-22T04:31:03Z</timestamp><text>#REDIRECT: [[OntologyProperty:TopSpeed]]</text></revision></page><page><title>OntologyProperty:MaximumTemperature</title><ns>202</ns><id>1115</id><revision><id>11288</id><timestamp>2011-03-30T09:59:10Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = maximum temperature
 | rdfs:label@el = μέγιστη θερμοκρασία
 | rdfs:domain = Planet
@@ -8314,7 +8312,9 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 }}</text></revision></page><page><title>OntologyProperty:RunningMate</title><ns>202</ns><id>2355</id><revision><id>9022</id><timestamp>2010-05-28T16:45:53Z</timestamp><text>{{ObjectProperty
 | rdfs:label@en = running mate
 | rdfs:range = Person
-}}</text></revision></page><page><title>OntologyProperty:Runtime</title><ns>202</ns><id>1390</id><revision><id>13513</id><timestamp>2011-06-09T14:20:31Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Runtime</title><ns>202</ns><id>1390</id><revision><id>18630</id><timestamp>2012-05-22T04:45:58Z</timestamp><text>{{Merge|duration}}
+
+{{DatatypeProperty
 | rdfs:label@en = runtime
 | rdfs:label@el = διάρκεια
 | rdfs:label@fr = temps d'exécution
@@ -8367,15 +8367,7 @@ http://purl.org/ontology/bibo/Book from the [http://en.wikipedia.org/wiki/Biblio
 | rdfs:label@en = satellites deployed
 | rdfs:domain = SpaceShuttle
 | rdfs:range = xsd:nonNegativeInteger
-}}</text></revision></page><page><title>OntologyProperty:Schema:duration</title><ns>202</ns><id>5670</id><revision><id>18121</id><timestamp>2012-05-04T09:18:27Z</timestamp><text>{{DatatypeProperty
-| rdfs:label@en = duration
-| rdfs:comment@en = The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format&lt;ref name="schema:duration"&gt;http://schema.org/Event&lt;/ref&gt;
-| rdfs:domain = schema:Event
-| rdfs:range = schema:Duration
-| owl:equivalentProperty = runtime
-}}
-==References==
-&lt;references/&gt;</text></revision></page><page><title>OntologyProperty:School</title><ns>202</ns><id>1396</id><revision><id>10795</id><timestamp>2011-01-14T23:05:39Z</timestamp><text>{{ObjectProperty
+}}</text></revision></page><page><title>OntologyProperty:Schema:duration</title><ns>202</ns><id>5761</id><revision><id>18624</id><timestamp>2012-05-22T04:42:17Z</timestamp><text>#REDIRECT [[OntologyProperty:Duration]]</text></revision></page><page><title>OntologyProperty:School</title><ns>202</ns><id>1396</id><revision><id>10795</id><timestamp>2011-01-14T23:05:39Z</timestamp><text>{{ObjectProperty
 | rdfs:label@en = school
 | rdfs:label@fr = école
 | rdfs:domain = Person
