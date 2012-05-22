@@ -10,7 +10,9 @@ import org.dbpedia.util.text.uri.UriDecoder
 import scala.collection.mutable.ListBuffer
 
 /**
- * Represents a page title.
+ * Represents a page title. Or a link to a page.
+ * 
+ * FIXME: a link is different from a title and should be represented by a different class.
  *
  * @param decoded Canonical page name: URL-decoded, using normalized spaces (not underscores), first letter uppercase.
  * @param namespace Namespace used to be optional, but that leads to mistakes
