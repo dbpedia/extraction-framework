@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.util
 
-import org.dbpedia.extraction.ontology.datatypes.{Datatype}
-
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import javax.xml.datatype.DatatypeFactory
-import java.lang.{IllegalArgumentException}
+import org.dbpedia.extraction.ontology.RdfNamespace
 
 class Date (val year: Option[Int] = None, val month: Option[Int] = None, val day: Option[Int] = None, val datatype : Datatype)
      extends Ordered[Date]
@@ -56,7 +55,7 @@ class Date (val year: Option[Int] = None, val month: Option[Int] = None, val day
     // calendar.toXMLFormat happily returns strings like 2012-02-31
     require(calendar.isValid, "invalid date "+year.getOrElse("")+"-"+month.getOrElse("")+"-"+day.getOrElse(""))
     // FIXME: this "xsd:" thing is ugly. Datatype should contain its base uri.
-    require("xsd:" + calendar.getXMLSchemaType.getLocalPart == datatype.name, "invalid date "+year.getOrElse("")+"-"+month.getOrElse("")+"-"+day.getOrElse(""))
+    require(RdfNamespace.XSD.prefix+":"+calendar.getXMLSchemaType.getLocalPart == datatype.name, "invalid date "+year.getOrElse("")+"-"+month.getOrElse("")+"-"+day.getOrElse("")+" for "+datatype.name)
 
     override def compare(that : Date) : Int = calendar.compare(that.calendar)
     
@@ -67,7 +66,7 @@ object Date
 {
     def merge(dates : List[Date], datatype : Datatype) : Date =
     {
-        require(!dates.isEmpty, "!dates.isEmpty")
+        require(! dates.isEmpty, "dates are required")
 
         val year  = dates.map(_.year).reduceLeft(_ orElse _)
         val month = dates.map(_.month).reduceLeft(_ orElse _)
