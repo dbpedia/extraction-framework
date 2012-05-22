@@ -10,7 +10,7 @@ import UriPolicy._
  * 
  * Objects of this class are not re-usable - create a new object for each triple.
  */
-class TriXBuilder(quads: Boolean, process: (URI, Int) => URI) 
+class TriXBuilder(quads: Boolean, process: Policy) 
 extends UriTripleBuilder(process) {
   
   private var depth = 0

@@ -11,7 +11,7 @@ import UriPolicy._
  * 
  * Objects of this class are not re-usable - create a new object for each triple.
  */
-class TerseBuilder(quads: Boolean, turtle: Boolean, policy: (URI, Int) => URI) 
+class TerseBuilder(quads: Boolean, turtle: Boolean, policy: Policy) 
 extends UriTripleBuilder(policy) {
   
   // Scala's StringBuilder doesn't have appendCodePoint

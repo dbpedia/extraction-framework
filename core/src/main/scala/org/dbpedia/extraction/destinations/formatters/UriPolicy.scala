@@ -1,9 +1,22 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import java.net.{URI,URISyntaxException}
+import java.net.URI
 import org.dbpedia.extraction.util.Language
+import scala.xml.Utility.{isNameChar,isNameStart}
 
 object UriPolicy {
+  
+  /**
+   * A policy takes a URI and its position in the quad and may return the given URI 
+   * or a transformed version of it. Human-readable type alias.
+   */
+  type Policy = (URI, Int) => URI
+    
+  /**
+   * A predicate decides if a policy should be applied for the given DBpedia URI.
+   * Human-readable type alias.
+   */
+  type Predicate = URI => Boolean
   
   val SUBJECT = 1
   val PREDICATE = 2
@@ -11,30 +24,125 @@ object UriPolicy {
   val DATATYPE = 4
   val CONTEXT = 5
   
-  val identity: (URI, Int) => URI = { (iri, pos) => iri }
+  val identity: Policy = { (iri, _) => iri }
 
-  def uris(domains: Set[String]): (URI, Int) => URI = {
-    val all = domains.contains("*")
-    (iri, pos) => 
-      if (all || domains.contains(iri.getHost)) new URI(iri.toASCIIString)
-      else iri
+  def uris(activeFor: Predicate): Policy = {
+    
+    (iri, _) => 
+    if (activeFor(iri)) {
+      new URI(iri.toASCIIString)
+    }
+    else {
+      iri
+    }
   }
 
-  def generic(domains: Set[String]): (URI, Int) => URI = {
-    val all = domains.contains("*")
-    (iri, pos) =>
-      if (all || domains.contains(iri.getHost)) copy(iri, "dbpedia.org", iri.getRawPath)
-      else iri
+  def generic(activeFor: Predicate): Policy = {
+    
+    (iri, _) =>
+    if (activeFor(iri)) {
+      
+      val scheme = iri.getScheme
+      val user = iri.getRawUserInfo
+      val host = "dbpedia.org"
+      val port = iri.getPort
+      var path = iri.getRawPath
+      var query = iri.getRawQuery
+      var frag = iri.getRawFragment
+      
+      uri(scheme, user, host, port, path, query, frag)
+    }
+    else {
+      iri
+    }
   }
   
-  // throws URISyntaxException 
-  private def copy(uri: URI, host: String, path: String): URI = {
+  /**
+   * Check if the tail of the URI could be used as an XML element name. If not, attach an
+   * underscore (which is a valid XML name). The resulting URI is guaranteed to be usable
+   * as a predicate in RDF/XML - it can be split into a valid namespace URI and a valid XML name.
+   * 
+   * Examples:
+   * 
+   * original URI       xml safe URI (may be equal)   possible namespace and name in RDF/XML
+   * 
+   * http://foo/bar          http://foo/bar           http://foo/           bar
+   * http://foo/123          http://foo/123_          http://foo/123        _
+   * http://foo/%22          http://foo/%22_          http://foo/%22        _
+   * http://foo/%C3%BC       http://foo/%C3%BC_       http://foo/%C3%BC     _
+   * http://foo/%C3%BCD      http://foo/%C3%BCD       http://foo/%C3%BC     D
+   * http://foo/%            http://foo/%22_          http://foo/%22        _
+   * http://foo/bar_(fub)    http://foo/bar_(fub)_    http://foo/bar_(fub)  _
+   * http://foo/bar#a123     http://foo/bar#a123      http://foo/bar#       a123
+   * http://foo/bar#123      http://foo/bar#123_      http://foo/bar#123    _
+   * http://foo/bar#         http://foo/bar#_         http://foo/bar#       _
+   * http://foo/bar?a123     http://foo/bar?a123      http://foo/bar?       a123
+   * http://foo/bar?a=       http://foo/bar?a=_       http://foo/bar?a=     _
+   * http://foo/bar?a=b      http://foo/bar?a=b       http://foo/bar?a=     b
+   * http://foo/bar?123      http://foo/bar?123_      http://foo/bar?123    _
+   * http://foo/bar?         http://foo/bar?_         http://foo/bar?       _
+   * http://foo/             http://foo/_             http://foo/           _
+   * http://foo              http://foo/_             http://foo/           _
+   * http://foo/:            http://foo/:_            http://foo/:          _
+   * http://foo/a:           http://foo/a:_           http://foo/a:         _
+   * http://foo/a:b          http://foo/a:b           http://foo/a:         b
+   */
+  def xmlSafe(activeFor: Predicate): Policy = {
     
-    val scheme = uri.getScheme
-    val user = uri.getRawUserInfo
-    val port = uri.getPort
-    val query = uri.getRawQuery
-    val fragment = uri.getRawFragment
+    (iri, pos) =>
+    if (pos == PREDICATE && activeFor(iri)) {
+      
+      val scheme = iri.getScheme
+      val user = iri.getRawUserInfo
+      val host = iri.getHost
+      val port = iri.getPort
+      var path = iri.getRawPath
+      var query = iri.getRawQuery
+      var frag = iri.getRawFragment
+      
+      if (frag != null) frag = xmlSafe(frag)
+      else if (query != null) query = xmlSafe(query)
+      else if (path != null && path.nonEmpty) path = xmlSafe(path)
+      else path = "/_" // convert empty path to "/_"
+      
+      uri(scheme, user, host, port, path, query, frag)
+    }
+    else {
+      iri
+    }
+  }
+  
+  /**
+   * Check if the tail of the string could be used as an XML element name. 
+   * If not, attach an underscore (which is a valid XML name).
+   */
+  private def xmlSafe(tail: String): String = {
+    
+    // Go through tail from back to front, find minimal safe part.
+    var index = tail.length
+    while (index > 0) {
+      
+      index -= 1
+      
+      // If char is part of a %XX sequence, we can't split the URI into a namespace and a name.
+      // Note: We know it's a valid IRI. Otherwise we'd need more checks here. 
+      if (index >= 2 && tail.charAt(index - 2) == '%') return tail+'_'
+      
+      val ch = tail.charAt(index)
+      
+      // If char is not valid as part of a name, we can't use the tail as a name.
+      // Note: isNameChar allows ':', but we're stricter.
+      if (ch == ':' || ! isNameChar(ch)) return tail+'_'
+      
+      // If char is valid as start of a name, we can use this part as a name. 
+      if (isNameStart(ch)) return tail
+    }
+    
+    // We can't use the string as an XML name.
+    return tail+'_'
+  }
+  
+  private def uri(scheme: String, user: String, host: String, port: Int, path: String, query: String, frag: String): URI = {
     
     val sb = new StringBuilder
     
@@ -49,7 +157,7 @@ object UriPolicy {
     
     if (path != null) sb.append(path);
     if (query != null) sb.append('?').append(query);
-    if (fragment != null) sb.append('#').append(fragment);
+    if (frag != null) sb.append('#').append(frag);
     
     new URI(sb.toString)
   }

@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter,UriPolicy}
+import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter}
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.destinations.{Destination,FileDestination,CompositeDestination}
 import org.dbpedia.extraction.mappings._
 import scala.collection.immutable.ListMap
@@ -68,8 +69,8 @@ object ConfigLoader
       
         /** Dump directory */
         val dumpDir = getFile("dir")
-        if (dumpDir == null) throw new IllegalArgumentException("property 'dir' not defined.")
-        if (! dumpDir.exists) throw new IllegalArgumentException("dir "+dumpDir+" does not exist")
+        if (dumpDir == null) throw error("property 'dir' not defined.")
+        if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
         
         if(config.getProperty("require-download-complete") != null)
           requireComplete = config.getProperty("require-download-complete").toBoolean
@@ -80,45 +81,65 @@ object ConfigLoader
         /** Local mappings files, downloaded for speed and reproducibility */
         mappingsDir = getFile("mappings")
         
-        private val policyFunctions = Map[String, Set[String] => ((URI, Int) => URI)] (
-          "uris" -> UriPolicy.uris,
-          "generic" -> UriPolicy.generic
+        /**
+         * Order is important here: First convert IRI to URI, then append '_' if necessary,
+         * then convert specific domain to generic domain. The second step must happen 
+         * after URI conversion (because a URI may need an underscore where a IRI doesn't), 
+         * and before the third step (because we need the specific domain to decide which 
+         * URIs should be made xml-safe).
+         * 
+         * In each tuple, the key is the policy name. The value is a policy-factory that
+         * takes a predicate. The predicate decides for which DBpedia URIs a policy
+         * should be applied. We pass a predicate to the policy-factory to get the policy.
+         */
+        private val policyFactories = Seq[(String, Predicate => Policy)] (
+          "uris" -> uris,
+          "xml-safe" -> xmlSafe,
+          "generic" -> generic
         )
 
         /**
          * Parses a list of languages like "en,fr" or "*" or even "en,*,fr"
          */
-        private def parseLanguages(langs: String): Set[String] = {
-          val domains = new HashSet[String]()
-          for (code <- split(langs, ',')) {
-            if (code == "*") return Set("*") // matches all, look no further
-            else domains += Language(code).dbpediaDomain
-          }
-          domains.toSet
+        private def parsePredicate(languages: String): Predicate = {
+          
+          val codes = split(languages, ',').toSet
+          val domains = codes.map { code => if (code == "*") "*" else Language(code).dbpediaDomain }
+          
+          if (domains("*")) { uri => uri.getHost.equals("dbpedia.org") || uri.getHost.endsWith(".dbpedia.org") }
+          else { uri => domains(uri.getHost) }
         }
         
         /**
-         * Parses a single policy like "uris:en,fr"
+         * Parses a policy line like "uri-policy.main=uris:en,fr; generic:en"
          */
-        private def parsePolicy(policy: String): (URI, Int) => URI = {
-          split(policy, ':') match {
-            case List(key, langs) => policyFunctions(key)(parseLanguages(langs))
-            case _ => throw new IllegalArgumentException("invalid format: '"+policy+"'")
-          }
-        }
-        
-        /**
-         * Parses a policy line like "uris:en,fr; generic:en"
-         */
-        private def parsePolicies(key: String): (URI, Int) => URI = {
+        private def parsePolicy(key: String): Policy = {
           
-          val policies = new ArrayBuffer[(URI, Int) => URI]()
-          for (part <- splitValue(key, ';')) {
-            policies += parsePolicy(part)
+          val predicates = new HashMap[String, Predicate]()
+          
+          // parse all predicates
+          for (policy <- splitValue(key, ';')) {
+            split(policy, ':') match {
+              case List(key, languages) => {
+                require(! predicates.contains(key), "duplicate policy '"+key+"'")
+                predicates(key) = parsePredicate(languages)
+              }
+              case _ => throw error("invalid format: '"+policy+"'")
+            }
           }
           
-          require(policies.nonEmpty, "found no URI policies")
-
+          require(predicates.nonEmpty, "found no URI policies")
+          
+          val policies = new ArrayBuffer[Policy]()
+          
+          // go through known policies in correct order, get predicate, and create policy
+          for ((key, factory) <- policyFactories; predicate <- predicates.remove(key)) {
+            policies += factory(predicate)
+          }
+          
+          require(predicates.isEmpty, "unknown URI policies "+predicates.keys.mkString("'","','","'"))
+          
+          // The resulting policy is the concatenation of all policies.
           (iri, pos) => {
             var result = iri
             for (policy <- policies) result = policy(result, pos)
@@ -126,15 +147,16 @@ object ConfigLoader
           }
         }
         
-        val policies = new HashMap[String, (URI, Int) => URI]()
+        // parse all URI policy lines
+        val policies = new HashMap[String, Policy]()
         for (key <- config.stringPropertyNames) {
           if (key.startsWith("uri-policy")) {
-            try policies(key) = parsePolicies(key)
-            catch { case e: Exception => throw new IllegalArgumentException("invalid URI policy: '"+key+"="+config.getProperty(key)+"'", e) }
+            try policies(key) = parsePolicy(key)
+            catch { case e: Exception => throw error("invalid URI policy: '"+key+"="+config.getProperty(key)+"'", e) }
           }
         }
         
-        private val formatters = Map[String, ((URI, Int) => URI) => Formatter] (
+        private val formatters = Map[String, Policy => Formatter] (
           "trix-triples" -> { new TriXFormatter(false, _) },
           "trix-quads" -> { new TriXFormatter(true, _) },
           "turtle-triples" -> { new TerseFormatter(false, true, _) },
@@ -143,6 +165,7 @@ object ConfigLoader
           "n-quads" -> { new TerseFormatter(true, false, _) }
         )
 
+        // parse all format lines
         val formats = new HashMap[String, Formatter]()
         for (key <- config.stringPropertyNames) {
           if (key.startsWith("format.")) {
@@ -152,18 +175,13 @@ object ConfigLoader
             val settings = splitValue(key, ';')
             require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy")
             
-            val formatter = formatters.get(settings(0))
-            require(formatter.isDefined, "first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString("'","','","'"))
+            val formatter = formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString("'","','","'")))
             
             val policy =
-              if (settings.length == 1) {
-                UriPolicy.identity
-              }
-              else {
-                policies.getOrElse(settings(1), throw new IllegalArgumentException("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
-              }
+              if (settings.length == 1) identity
+              else policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
             
-            formats(suffix) = formatter.get.apply(policy)
+            formats(suffix) = formatter.apply(policy)
           }
         }
 
@@ -200,7 +218,7 @@ object ConfigLoader
         private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
         {
             //Load extractor classes
-            if(config.getProperty("extractors") == null) throw new IllegalArgumentException("Property 'extractors' not defined.")
+            if(config.getProperty("extractors") == null) throw error("Property 'extractors' not defined.")
             val stdExtractors = splitValue("extractors", ',').map(loadExtractorClass)
 
             //Create extractor map
@@ -346,8 +364,12 @@ object ConfigLoader
     private def latestDate(finder: Finder[_]): String = {
       val fileName = if (requireComplete) Download.Complete else "pages-articles.xml"
       val dates = finder.dates(fileName)
-      if (dates.isEmpty) throw new IllegalArgumentException("found no directory with file '"+finder.wikiName+"-[YYYYMMDD]-"+fileName+"'")
+      if (dates.isEmpty) throw error("found no directory with file '"+finder.wikiName+"-[YYYYMMDD]-"+fileName+"'")
       dates.last
+    }
+    
+    private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
+      new IllegalArgumentException(message, cause)
     }
     
 }
