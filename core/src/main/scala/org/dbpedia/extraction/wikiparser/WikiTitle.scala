@@ -90,10 +90,6 @@ object WikiTitle
         // quite close to what MediaWiki does.
         decoded = UriDecoder.decode(decoded)
         
-        // replace NBSP by SPACE, remove exotic whitespace
-        // TODO: better treatment of U+20xx: remove some, replace some by space, others by LF
-        decoded = decoded.replaceChars("\u00A0\u200C\u200D\u200E\u200F\u2028\u202A\u202B\u202C\u3000", " ")
-        
         var fragment : String = null
         
         // we can look for hash signs after we decode - that's what MediaWiki does

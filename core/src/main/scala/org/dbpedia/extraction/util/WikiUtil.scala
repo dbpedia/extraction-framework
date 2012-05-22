@@ -9,12 +9,13 @@ import org.dbpedia.util.text.uri.UriDecoder
 object WikiUtil
 {
     /**
-     * replace underscores by spaces, replace non-breaking space by normal space, 
-     * normalize duplicate spaces, trim whitespace (any char <= U+0020) from start and end.
+     * replace underscores by spaces, replace non-breaking space by normal space, remove 
+     * exotic whitespace, normalize duplicate spaces, trim whitespace (any char <= U+0020) 
+     * from start and end.
      * 
-     * TODO: remove or replace exotic whitespace like U+200C, U+200E, U+200F, U+2028?
+     * Also see WikiTitle.parse().
      * 
-     * See WikiTitle.replace() and its use in WikiTitle.parse().
+     * TODO: better treatment of U+20xx: remove some, replace some by space, others by LF
      * 
      * FIXME: There is no logic to our decoding / encoding of strings, URIs, etc. It's done 
      * in too many places. We must set a policy and use distinct classes, not generic strings.
@@ -23,7 +24,7 @@ object WikiUtil
      */
     def cleanSpace(string: String): String =
     {
-        string.replaceChars("_\u00A0", "  ").replaceAll(" +", " ").trim
+        string.replaceChars("_\u00A0\u200C\u200D\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "  ").replaceAll(" +", " ").trim
     }
     
     private val iriReplacements = StringUtils.replacements('%', "\"#%<>?[\\]^`{|}")
