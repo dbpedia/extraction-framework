@@ -4,6 +4,7 @@ import java.net.{URL, URI}
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.util.Language
 import javax.ws.rs._
+import javax.ws.rs.core.Response
 import java.util.logging.{Logger,Level}
 import scala.xml.Elem
 import scala.io.{Source,Codec}
@@ -67,13 +68,15 @@ class Extraction(@PathParam("lang") langCode : String)
          <body>
            <h2>Extract a page</h2>
            <form action="extract" method="get">
-             Title:
-             <input type="text" name="title" value={ getTitle }/>
+             Title<br/>
+             <input type="text" name="title" value={ getTitle }/><br/>
+             Revision ID (optional, overrides title)<br/>
+             <input type="text" name="revid"/><br/>
              <select name="format">
-               <option value="Trix">Trix</option>
-               <option value="N-Triples">N-Triples</option>
-               <option value="N-Quads">N-Quads</option>
-             </select>
+               <option value="trix">Trix</option>
+               <option value="n-triples">N-Triples</option>
+               <option value="n-quads">N-Quads</option>
+             </select><br/>
              <input type="submit" value="Extract" />
            </form>
          </body>
@@ -86,24 +89,22 @@ class Extraction(@PathParam("lang") langCode : String)
     @GET
     @Path("extract")
     @Produces(Array("application/xml"))
-    def extract(@QueryParam("title") title : String, @DefaultValue("trix") @QueryParam("format") format : String) : String =
+    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String) : String =
     {
-        //TODO return HTTP error code 400 - bad request
-        if (title == null) return "<error>Title not defined</error>"
+        if (title == null && revid < 0) throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
         
         val writer = new StringWriter
 
-        val formatter = format.toLowerCase.replace("-", "") match
+        val formatter = format match
         {
-            case "ntriples" => TerseFormatter.NTriplesIris
-            case "nquads" => TerseFormatter.NQuadsIris
+            case "n-triples" => TerseFormatter.NTriplesIris
+            case "n-quads" => TerseFormatter.NQuadsIris
             case _ => TriX.writeHeader(writer, 2)
         }
 
-        val source = WikiSource.fromTitles(
-            WikiTitle.parse(title, language) :: Nil,
-            new URL(language.apiUri),
-            language)
+        val source = 
+          if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
+          else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
         
         val destination = new WriterDestination(writer, formatter)
         Server.instance.extractor.extract(source, destination, language)
