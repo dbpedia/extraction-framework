@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dataparser
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype, UnitDatatype}
 
 import org.dbpedia.extraction.wikiparser._
-import java.text.{ParseException, NumberFormat}
+import java.text.ParseException
 import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -39,9 +39,9 @@ class UnitValueParser( extractionContext : {
         case dt => throw new IllegalArgumentException("Invalid datatype: " + dt)
     })
 
-    private val ValueRegex1 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
+    private val ValueRegex1 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
 
-    private val ValueRegex2 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
+    private val ValueRegex2 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
 
     private val UnitRegex = ("""(?iu)""" + """(?<!\w)(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)(?!\d)""").r
     
@@ -49,19 +49,19 @@ class UnitValueParser( extractionContext : {
     private val UnitValueRegex1a = ("""(?iu)""" + prefix + """(-?[0-9]+)\040*ft\040*([0-9]+)\040*in\b""" + postfix).r
     
     /** Catches number and unit: e.q. 1.120.500,55 km */
-    private val UnitValueRegex1b = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
+    private val UnitValueRegex1b = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
     
     /** If different units are present, e.g.: 10 mi. (16.0934 km); the first will be returned */
     //TODO remove?
-    private val UnitValueRegex1c = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+    private val UnitValueRegex1c = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
                                     """)[\s]*\([\s]*(?:[0-9]+(?:\.[0-9]+)?)[\s]*(?:""" + unitRegexLabels + """)[\s]*\)[\s]*""" + postfix).r
                                    
     /** Catches number and unit: e.q. 1.120.500,55 km */
-    private val UnitValueRegex2a = ("""(?iu)""" + prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
+    private val UnitValueRegex2b = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
     
     /** If different units are present, e.g.: 10 mi. (16.0934 km); the first will be returned */
     //TODO remove?
-    private val UnitValueRegex2b = ("""(?iu)""" + prefix + """(?<!-)(-?[\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+    private val UnitValueRegex2c = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
                                     """)[\s]*\([\s]*(?:[0-9]+(?:\,[0-9]+)?)[\s]*(?:""" + unitRegexLabels + """)[\s]*\)[\s]*""" + postfix).r
 
 
@@ -360,6 +360,7 @@ class UnitValueParser( extractionContext : {
 
         // english, japanese and chinese Wikipedia articles
         // numbers with a . as decimal separator and a , as thousand separator
+        // FIXME: this must not be hard-coded. Use NumberFormat for language locale.
         if (language == "en" || language == "ja" || language == "zh")
         {
             input match
@@ -390,8 +391,8 @@ class UnitValueParser( extractionContext : {
         {
             input match
             {
-                case UnitValueRegex2a(value, unit) => generateOutput(value, Some(unit), errors)
                 case UnitValueRegex2b(value, unit) => generateOutput(value, Some(unit), errors)
+                case UnitValueRegex2c(value, unit) => generateOutput(value, Some(unit), errors)
                 case PrefixUnitValueRegex2(unit, value) if catchPrefixedUnit => generateOutput(value, Some(unit), errors)
                 case _ => None
             }
@@ -403,13 +404,11 @@ class UnitValueParser( extractionContext : {
      */
     private def generateOutput(valueString : String, unitString : Option[String] = None, errors : Option[ParsingErrors]) : Option[(Double, UnitDatatype)] =
     {
-        val numberFormat = NumberFormat.getNumberInstance(extractionContext.language.locale)
-        
         val value = 
         {
             try
             {
-                numberFormat.parse(valueString).doubleValue * multiplicationFactor
+                parserUtils.parse(valueString).doubleValue * multiplicationFactor
             }
             catch
             {
