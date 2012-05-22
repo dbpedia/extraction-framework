@@ -113,8 +113,8 @@ class OntologyReader
         new ClassBuilder(name = name,
                          labels = readTemplatePropertiesByLanguage(node, "rdfs:label") ++ readPropertyTemplatesByLanguage(node, "label"),
                          comments = readTemplatePropertiesByLanguage(node, "rdfs:comment") ++ readPropertyTemplatesByLanguage(node, "comment"),
-                         superClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf"),
-                         equivalentClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
+                         baseClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf"),
+                         equivClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
     }
 
     private def loadOntologyProperty(name : String, node : TemplateNode) : Option[PropertyBuilder] =
@@ -162,9 +162,9 @@ class OntologyReader
         }
 
         //Equivalent Properties
-        val equivalentProperties = readTemplatePropertyAsList(node, "owl:equivalentProperty").toSet
+        val equivProperties = readTemplatePropertyAsList(node, "owl:equivalentProperty").toSet
 
-        Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range, equivalentProperties))
+        Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range, equivProperties))
     }
 
     private def loadSpecificProperties(name : String, node : TemplateNode) : List[SpecificPropertyBuilder] =
@@ -312,13 +312,13 @@ class OntologyReader
     }
 
     private class ClassBuilder(val name : String, val labels : Map[Language, String], val comments : Map[Language, String],
-                               var superClassNames : List[String], val equivalentClassNames : Set[String])
+                               var baseClassNames : List[String], val equivClassNames : Set[String])
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
         require(comments != null, "comments != null")
-        if (name != "owl:Thing" && superClassNames.isEmpty) superClassNames = List("owl:Thing")
-        require(equivalentClassNames != null, "equivalentClassNames != null")
+        if (name != "owl:Thing" && baseClassNames.isEmpty) baseClassNames = List("owl:Thing")
+        require(equivClassNames != null, "equivClassNames != null")
 
         /** Caches the class, which has been build by this builder. */
         var generatedClass : Option[OntologyClass] = None
@@ -331,40 +331,40 @@ class OntologyReader
             if(!buildCalled)
             {
                  //TODO check for cycles to avoid infinite recursion
-                val superClasses = superClassNames.map{ superClassName => classMap.get(superClassName) match
+                val baseClasses = baseClassNames.map{ baseClassName => classMap.get(baseClassName) match
                 {
-                    case Some(superClassBuilder) => superClassBuilder.build(classMap)
-                    case None if ! RdfNamespace.validate(superClassName) =>
+                    case Some(baseClassBuilder) => baseClassBuilder.build(classMap)
+                    case None if ! RdfNamespace.validate(baseClassName) =>
                     {
-                        logger.config("Super class " + superClassName + " of class " + name + " was not found but for its namespace this was expected")
-                        Some(new OntologyClass(superClassName, Map(), Map(), List(), Set()))
+                        logger.config("base class '"+baseClassName+"' of class '"+name+"' was not found, but for its namespace this was expected")
+                        Some(new OntologyClass(baseClassName, Map(), Map(), List(), Set()))
                     }
                     case None =>
                     {
-                        logger.warning("Super class of " + name + " (" + superClassName + ") does not exist")
+                        logger.warning("base class '"+baseClassName+"' of class '"+name+"' not found")
                         None
                     }
                 }}.flatten
 
-                val equivalentClasses = equivalentClassNames.map{ equivalentClassName => classMap.get(equivalentClassName) match
+                val equivClasses = equivClassNames.map{ equivClassName => classMap.get(equivClassName) match
                 {
-                    case Some(equivalentClassBuilder) => equivalentClassBuilder.build(classMap)
-                    case None if ! RdfNamespace.validate(equivalentClassName) =>
+                    case Some(equivClassBuilder) => equivClassBuilder.build(classMap)
+                    case None if ! RdfNamespace.validate(equivClassName) =>
                     {
-                        logger.config("Equivalent class " + equivalentClassName + " of class " + name + " was not found but for its namespace this was expected")
-                        Some(new OntologyClass(equivalentClassName, Map(), Map(), List(), Set()))
+                        logger.config("equivalent class '"+equivClassName+"' of class '"+name+"' was not found, but for its namespace this was expected")
+                        Some(new OntologyClass(equivClassName, Map(), Map(), List(), Set()))
                     }
                     case None =>
                     {
-                        logger.warning("Equivalent class of " + name + " (" + equivalentClassName + ") does not exist")
+                        logger.warning("equivalent class '"+equivClassName+"' of class '"+name+"' not found")
                         None
                     }
                 }}.flatten
 
                 name match
                 {
-                    case "owl:Thing" => generatedClass = Some(new OntologyClass(name, labels, comments, List(), equivalentClasses))
-                    case _ => generatedClass = Some(new OntologyClass(name, labels, comments, superClasses, equivalentClasses))
+                    case "owl:Thing" => generatedClass = Some(new OntologyClass(name, labels, comments, List(), equivClasses))
+                    case _ => generatedClass = Some(new OntologyClass(name, labels, comments, baseClasses, equivClasses))
                 }
 
                 buildCalled = true
@@ -377,14 +377,14 @@ class OntologyReader
 
     private class PropertyBuilder(val name : String, val labels : Map[Language, String], val comments : Map[Language, String],
                                   val isObjectProperty : Boolean, val isFunctional : Boolean, val domain : String, val range : String,
-                                  val equivalentPropertyNames : Set[String])
+                                  val equivPropertyNames : Set[String])
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
         require(comments != null, "comments != null")
         require(domain != null, "domain != null")
         require(range != null, "range != null")
-        require(equivalentPropertyNames != null, "equivalentPropertyNames != null")
+        require(equivPropertyNames != null, "equivPropertyNames != null")
 
         /** Caches the property, which has been build by this builder. */
         var generatedProperty : Option[OntologyProperty] = None
@@ -395,23 +395,23 @@ class OntologyReader
             {
                 case Some(domainClassBuilder) => domainClassBuilder.generatedClass match
                 {
-                    case Some(clazz) => clazz
-                    case None => logger.warning("Domain of property " + name + " (" + domain + ") couldn't be loaded"); return None
+                    case Some(cls) => cls
+                    case None => logger.warning("domain '"+domain+"' of property '"+name+"' could not be loaded"); return None
                 }
                 // TODO: do we want this? Maybe we should disallow external domain types.
                 case None if ! RdfNamespace.validate(domain) =>
                 {
-                    logger.config("Domain of property " + name + " (" + domain + ") was not found but for its namespace this was expected")
+                    logger.config("domain '"+domain+"' of property '"+name+"' was not found, but for its namespace this was expected")
                     new OntologyClass(domain, Map(), Map(), List(), Set())
                 }
-                case None => logger.warning("Domain of property " + name + " (" + domain + ") does not exist"); return None
+                case None => logger.warning("domain '"+domain+"' of property '"+name+"' not found"); return None
             }
 
-            var equivalentProperties = Set.empty[OntologyProperty]
-            for (name <- equivalentPropertyNames) {
+            var equivProperties = Set.empty[OntologyProperty]
+            for (name <- equivPropertyNames) {
               // FIXME: handle equivalent properties in namespaces that we validate
               if (RdfNamespace.validate(name)) logger.warning("Cannot use equivalent property '"+name+"'")
-              else equivalentProperties += new OntologyProperty(name, Map(), Map(), null, null, false, Set())
+              else equivProperties += new OntologyProperty(name, Map(), Map(), null, null, false, Set())
             }
 
             if(isObjectProperty)
@@ -421,28 +421,28 @@ class OntologyReader
                     case Some(rangeClassBuilder) => rangeClassBuilder.generatedClass match
                     {
                         case Some(clazz) => clazz
-                        case None => logger.warning("Range of property '" + name + "' (" + range + ") couldn't be loaded"); return None
+                        case None => logger.warning("range '"+range+"' of property '"+name+"' could not be loaded"); return None
                     }
                     // TODO: do we want this? Maybe we should disallow external range types.
                     case None if ! RdfNamespace.validate(range) =>
                     {
-                        logger.config("Range of property " + name + " (" + range + ") was not found but for its namespace this was expected")
+                        logger.config("range '"+range+"' of property '"+name+"' was not found, but for its namespace this was expected")
                         new OntologyClass(range, Map(), Map(), List(), Set())
                     }
-                    case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
+                    case None => logger.warning("range '"+range+"' of property '"+name+"' not found"); return None
                 }
 
-                generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivalentProperties))
+                generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivProperties))
             }
             else
             {
                 val rangeType = typeMap.get(range) match
                 {
                     case Some(datatype) => datatype
-                    case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
+                    case None => logger.warning("range '"+range+"' of property '"+name+"' not found"); return None
                 }
 
-                generatedProperty = Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional, equivalentProperties))
+                generatedProperty = Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional, equivProperties))
             }
 
             generatedProperty
