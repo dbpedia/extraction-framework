@@ -24,14 +24,14 @@
                     <launchers>
 
                         <launcher>
-                            <id>extract</id>
-                            <mainClass>org.dbpedia.extraction.dump.extract.Extract</mainClass>
+                            <id>extraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-Xmx1024m</jvmArg>
                             </jvmArgs>
                             <args>
-                                <arg>extract.properties</arg>
+                                <arg>extraction.properties</arg>
                             </args>
                         </launcher>
 
@@ -71,19 +71,18 @@
                                 <arg>/home/release/wikipedia</arg>
                                 <arg>download-complete</arg>
                                 <arg>1</arg><!-- keep only one latest download -->
-                                <arg>*.gz,*.bz2,*.sql,*-pages-articles.xml,*-download-complete,index.html</arg><!-- delete these files -->
+                                <arg>*.gz,*.bz2,*.sql,*-pages-articles.xml,index.html</arg><!-- delete these files -->
                             </args>
                         </launcher>
 
                         <launcher>
-                            <id>purge-extract</id>
+                            <id>purge-extraction</id>
                             <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
                             <args>
                                 <arg>/home/release/wikipedia</arg>
                                 <arg>extraction-complete</arg>
                                 <arg>2</arg><!-- keep two extractions -->
-                                <arg>*.nt,*.nq,*.tql,*.ttl,*.trix</arg><!-- delete these extracted files -->
-                                <arg>*-redirects.obj</arg><!-- delete these files -->
+                                <arg>*.nt,*.nq,*.tql,*.ttl,*.trix,*-redirects.obj</arg><!-- delete these files -->
                             </args>
                         </launcher>
 

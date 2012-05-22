@@ -19,14 +19,20 @@ import org.dbpedia.extraction.dump.download.Download
  * but they are not vitally necessary.
  */
 object Clean {
+  
+  val usage = """
+Deletes files from old download directories. Need at least four arguments:
+base dir, marker file to look for, number of latest directories per language 
+to leave untouched. All following arguments are patterns of files to be deleted 
+from older directories. If marker file name is empty or "-", check all directories."""
 
   def main(args: Array[String]) {
     
-    require(args != null && args.length >= 4, "deletes files from old download directories. need at least four arguments: base dir, marker file to look for, number of latest directories per language to leave untouched, following arguments are patterns of files to be deleted from older directories")
+    require(args != null && args.length >= 4, usage)
     
-    val baseDir = Paths.get(args(0))
-    val markerFile = args(1)
-    val newDirs = args(2).toInt
+    val baseDir = Paths.get(args(0).trim)
+    val markerFile = if (args(1).trim.isEmpty || args(1).trim == "-") null else args(1).trim
+    val newDirs = args(2).trim.toInt
     
     // all other args are glob patterns. create one big glob "{pat1,pat2,...}"
     val filter = args.drop(3).flatMap(_.split("[,\\s]")).mkString("{",",","}")

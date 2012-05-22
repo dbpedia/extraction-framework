@@ -5,9 +5,11 @@ import java.io.File
 /**
  * Dump extraction script.
  */
-object Extract
+object Extraction
 {
-    def main(args : Array[String]) : Unit =
+    val Complete = "extraction-complete"
+
+    def main(args : Array[String]): Unit =
     {
         require(args != null && args.length == 1 && args(0).nonEmpty, "missing argument: config file name")
         

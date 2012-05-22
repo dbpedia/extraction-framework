@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter,UriPolicy}
-import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
+import org.dbpedia.extraction.destinations.{Destination,FileDestination,CompositeDestination}
 import org.dbpedia.extraction.mappings._
 import scala.collection.immutable.ListMap
 import scala.collection.mutable.{HashMap,ArrayBuffer,HashSet}
@@ -18,6 +18,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.Dataset
 import org.dbpedia.extraction.dump.download.Download
 import scala.collection.JavaConversions.asScalaSet // implicit
+import org.dbpedia.extraction.destinations.MarkerDestination
 
 /**
  * Loads the dump extraction configuration.
@@ -304,8 +305,13 @@ object ConfigLoader
         def targetFile(suffix : String)(dataset: Dataset) =
           finder.file(date, dataset.fileName+'.'+suffix)
 
-        val destinations = config.formats.map{ case (suffix, format) => new FileDestination(format, targetFile(suffix)) }
-
+        var destinations = new ArrayBuffer[Destination]()
+        for ((suffix, format) <- config.formats) { 
+          destinations += new FileDestination(format, targetFile(suffix)) 
+        }
+        
+        destinations += new MarkerDestination(finder.file(date, Extraction.Complete), false, true)
+        
         val jobLabel = "extraction job "+lang.wikiCode+" with "+extractorClasses.size+" extractors"
         new ExtractionJob(extractor, context.articlesSource, new CompositeDestination(destinations.toSeq: _*), jobLabel)
     }
