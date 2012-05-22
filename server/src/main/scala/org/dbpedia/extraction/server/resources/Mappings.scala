@@ -228,21 +228,23 @@ class Mappings(@PathParam("lang") langCode : String)
     def getExtractionSample(@PathParam("title") @Encoded title : String) : String =
     {
         //Get the title of the mapping as well as its corresponding template on Wikipedia
-        val mappingTitle = WikiTitle.parse(title, language)
+        val mappingTitle = WikiTitle.parse(title, language) // TODO: use Language.Mappings?
         val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
 
         //Find pages which use this mapping
         val wikiApiUrl = new URL(language.apiUri)
         val api = new WikiApi(wikiApiUrl, language)
+        // TODO: one call to api.php is probably enough - get content of pages, not just titles
         val pageTitles = api.retrieveTemplateUsages(templateTitle, 10)
 
-        logger.info("extracting sample for '" + templateTitle.encodedWithNamespace + "' language " + language)
+        logger.info("extracting "+pageTitles.size+" pages for '" + templateTitle.encodedWithNamespace + "' language " + language)
         
         // Extract pages
         // if there are slashes in the title, the stylesheets are further up in the directory tree
         val writer = new StringWriter
         val formatter = TriX.writeHeader(writer, title.count(_ == '/')+3)
         val destination = new WriterDestination(writer, formatter)
+        // TODO: one call to api.php is probably enough
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         // extract at most 1000 triples
         Server.instance.extractor.extract(source, new LimitingDestination(destination, 1000), language)
