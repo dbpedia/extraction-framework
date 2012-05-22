@@ -68,10 +68,11 @@ class Extraction(@PathParam("lang") langCode : String)
          <body>
            <h2>Extract a page</h2>
            <form action="extract" method="get">
-             Title<br/>
+             Page title<br/>
              <input type="text" name="title" value={ getTitle }/><br/>
              Revision ID (optional, overrides title)<br/>
              <input type="text" name="revid"/><br/>
+             Output format<br/>
              <select name="format">
                <option value="trix">Trix</option>
                <option value="n-triples">N-Triples</option>
