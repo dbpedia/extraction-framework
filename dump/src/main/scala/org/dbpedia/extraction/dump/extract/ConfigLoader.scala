@@ -79,7 +79,7 @@ object ConfigLoader
         /** Local mappings files, downloaded for speed and reproducibility */
         mappingsDir = getFile("mappings")
         
-        val formatters = Map[String, ((URI, Int) => URI) => Formatter] (
+        private val formatters = Map[String, ((URI, Int) => URI) => Formatter] (
           "trix-triples" -> { new TriXFormatter(false, _) },
           "trix-quads" -> { new TriXFormatter(true, _) },
           "turtle-triples" -> { new TerseFormatter(false, true, _) },
@@ -95,19 +95,19 @@ object ConfigLoader
             val suffix = key.substring("format.".length)
             
             val settings = splitValue(key, ';')
-            require(settings.length != 1 && settings.length != 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy")
+            require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy")
             
             // FIXME: read uri-policy parameter
             val policy = UriPolicy.identity
             
             val formatter = formatters.get(settings(0))
             require(formatter.isDefined, "first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString(","))
-            formats(suffix) = formatter.get(policy)
+            formats(suffix) = formatter.get.apply(policy)
           }
         }
 
         /** Languages */
-        // TODO: add special parameters, similar to download: 
+        // TODO: add special parameters, similar to download:
         // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
         // extract=mapped:MappingExtractor means all languages with a mapping namespace
         var languages = splitValue("languages", ',').map(Language)
@@ -237,21 +237,13 @@ object ConfigLoader
          * access the file system - it is called not only in this class, but later during the 
          * extraction process for each dataset.
          */
-        def targetFile(suffix : String)(dataset: Dataset): File = {
+        def targetFile(suffix : String)(dataset: Dataset) =
           finder.file(date, dataset.name.replace('_','-')+'.'+suffix)
-        }
 
-        def destination(quads: Boolean, fileSuffix: String) = {
-          val formatter = new TerseFormatter(quads, true)
-          new FileDestination(formatter, targetFile(fileSuffix))
-        }
+        val destinations = config.formats.map{ case (suffix, format) => new FileDestination(format, targetFile(suffix)) }
 
-        //Destination
-        val destinations = new CompositeDestination(destination(false, "ttl"), destination(true, "tql"))
-
-        // Note: label is also used as file name, but space is replaced by underscores
         val jobLabel = "extraction job "+lang.wikiCode+" with "+extractorClasses.size+" extractors"
-        new ExtractionJob(extractor, context.articlesSource, destinations, jobLabel)
+        new ExtractionJob(extractor, context.articlesSource, new CompositeDestination(destinations.toSeq: _*), jobLabel)
     }
 
     //language-independent val
