@@ -26,15 +26,15 @@ object WikiUtil
         string.replaceChars("_\u00A0", "  ").replaceAll(" +", " ").trim
     }
     
-    private val iriReplacements = StringUtils.replacements('%', "\"#%&<>?[\\]^`{|}")
+    private val iriReplacements = StringUtils.replacements('%', "\"#%<>?[\\]^`{|}")
     
     /**
      * Replaces multiple spaces (U+0020) by one, removes spaces from start and end, 
      * replaces spaces by underscores, and percent-encodes the following characters:
      * 
-     * "#%&<>?[\\]^`{|}
+     * "#%<>?[\\]^`{|}
      *
-     * The result is usable in any part of a IRI.
+     * The result is usable in most parts of a IRI. The ampersand '&' is not escaped though.
      * 
      * Should only be used for canonical MediaWiki page names. Not for fragments, not for queries.
      * 
