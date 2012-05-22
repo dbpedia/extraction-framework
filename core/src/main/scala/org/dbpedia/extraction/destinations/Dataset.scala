@@ -7,6 +7,8 @@ package org.dbpedia.extraction.destinations
 class Dataset(val name : String)
 {
     override def toString = name
+    
+    val fileName = name.replace('_', '-')
 
     override def equals(other : Any) = other match {
       case that : Dataset => (this.name == that.name)
