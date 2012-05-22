@@ -2,8 +2,7 @@ package org.dbpedia.extraction.server.resources.stylesheets
 
 import xml.Elem
 import javax.ws.rs.{GET, Produces, Path}
-import org.dbpedia.extraction.destinations.Formatter
-import org.dbpedia.extraction.destinations.formatters.TriXFormatter
+import org.dbpedia.extraction.destinations.formatters.{Formatter,TriXFormatter}
 import java.io.Writer
 
 object TriX
@@ -14,7 +13,7 @@ object TriX
     def writeHeader(writer: Writer, parents : Int): Formatter = 
     {
       writer.write("<?xml-stylesheet type=\"text/xsl\" href=\""+("../"*parents)+"stylesheets/trix.xsl\"?>\n")
-      TriXFormatter.QuadsIris
+      new TriXFormatter(true)
     }
 }
 

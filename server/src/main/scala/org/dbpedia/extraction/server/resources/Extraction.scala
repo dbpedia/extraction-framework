@@ -75,6 +75,8 @@ class Extraction(@PathParam("lang") langCode : String)
              Output format<br/>
              <select name="format">
                <option value="trix">Trix</option>
+               <option value="turtle-triples">Turtle-Triples</option>
+               <option value="turtle-quads">Turtle-Quads</option>
                <option value="n-triples">N-Triples</option>
                <option value="n-quads">N-Quads</option>
              </select><br/>
@@ -98,8 +100,10 @@ class Extraction(@PathParam("lang") langCode : String)
 
         val formatter = format match
         {
-            case "n-triples" => TerseFormatter.NTriplesIris
-            case "n-quads" => TerseFormatter.NQuadsIris
+            case "turtle-triples" => new TerseFormatter(false, true)
+            case "turtle-quads" => new TerseFormatter(true, true)
+            case "n-triples" => new TerseFormatter(false, false)
+            case "n-quads" => new TerseFormatter(true, false)
             case _ => TriX.writeHeader(writer, 2)
         }
 

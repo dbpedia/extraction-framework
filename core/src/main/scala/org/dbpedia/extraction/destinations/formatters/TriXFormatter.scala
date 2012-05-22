@@ -1,15 +1,20 @@
 package org.dbpedia.extraction.destinations.formatters
 
 import java.io.Writer
-import org.dbpedia.extraction.destinations.{Quad, Formatter}
+import org.dbpedia.extraction.destinations.Quad
+import java.net.URI
 
 /**
  * Formats statements according to the TriX format.
  * See: http://www.hpl.hp.com/techreports/2004/HPL-2004-56.html
  */
-class TriXFormatter(iri: Boolean, quads: Boolean) extends Formatter
+class TriXFormatter(render: Quad => String) extends Formatter
 {
-  override val fileSuffix = TriXFormatter.fileSuffix(iri, quads)
+  def this(builder: => TripleBuilder) =
+    this(new TripleRenderer(builder))
+
+  def this(quads: Boolean, policy: (URI, Int) => URI = UriPolicy.identity) =
+    this(new TriXBuilder(quads, policy))
 
   override def writeHeader(writer : Writer): Unit = {
     writer.write("<TriX xmlns=\"http://www.w3.org/2004/03/trix/trix-1/\">\n")
@@ -20,40 +25,6 @@ class TriXFormatter(iri: Boolean, quads: Boolean) extends Formatter
   }
 
   override def write(writer : Writer, quad : Quad) : Unit = {
-    writer.write(new TriXBuilder(iri, quads).render(quad))
+    writer.write(render(quad))
   }
-}
-
-object TriXFormatter {
-  
-  def QuadsIris = formatter(true, true)
-  def QuadsUris = formatter(false, true)
-  def TriplesIris = formatter(true, false)
-  def TriplesUris = formatter(false, false)
-
-  def formatter(iri: Boolean, quads: Boolean): TriXFormatter =
-    new TriXFormatter(iri, quads)
-  
-  def all = for (iri <- 0 to 1; quads <- 0 to 1) yield formatter(iri == 0, quads == 0)
-  
-  def fileSuffix(iri: Boolean, quads: Boolean) = {
-    (if (iri) "iri" else "uri") + '.' + (if (quads) "quads" else "triples") + ".trix"
-  }
-
-  def suffixes: Seq[String] = 
-    for (iri <- 0 to 1; quads <- 0 to 1) yield
-      fileSuffix(iri == 0, quads == 0)
-  
-  /** suffix must start with "iri" or "uri", have "quads" or "triples" in the middle, and end with "trix" */
-  val Suffix = """(iri|uri)\.(quads|triples)\.trix""".r
-  
-  /**
-   * @return formatter for the given file suffix, or None if there is no formatter for the suffix.
-   * TODO: add header parameter? Probably not needed.
-   */
-  def forSuffix(suffix: String): Option[TriXFormatter] = suffix match {
-    case Suffix(i, q) => Some(formatter(i == "iri", q == "quads"))
-    case _ => None
-  }
-  
 }

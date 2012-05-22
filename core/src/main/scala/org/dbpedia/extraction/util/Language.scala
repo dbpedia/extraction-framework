@@ -22,19 +22,24 @@ class Language private(val wikiCode : String, val isoCode: String) extends Seria
     val filePrefix = wikiCode.replace("-", "_")
     
     /**
-     * DBpedia base URI for this language, e.g. "http://en.dbpedia.org"
+     * Specific DBpedia domain for this language, e.g. "en.dbpedia.org"
      */
-    private def dbpedia = "http://"+wikiCode+".dbpedia.org"
+    val dbpediaDomain = wikiCode+".dbpedia.org"
     
     /**
-     * DBpedia resource namespace for this language, e.g. "http://en.dbpedia.org/resource/"
+     * Specific DBpedia base URI for this language, e.g. "http://en.dbpedia.org"
      */
-    val resourceUri = new DBpediaNamespace(dbpedia+"/resource/")
+    val dbpediaUri = "http://"+dbpediaDomain
     
     /**
-     * DBpedia property namespace for this language, e.g. "http://en.dbpedia.org/property/"
+     * Specific DBpedia resource namespace for this language, e.g. "http://en.dbpedia.org/resource/"
      */
-    val propertyUri = new DBpediaNamespace(dbpedia+"/property/")
+    val resourceUri = new DBpediaNamespace(dbpediaUri+"/resource/")
+    
+    /**
+     * Specific DBpedia property namespace for this language, e.g. "http://en.dbpedia.org/property/"
+     */
+    val propertyUri = new DBpediaNamespace(dbpediaUri+"/property/")
     
     /**
      * URI prefix for this wiki, e.g. "http://be-x-old.wikipedia.org", "http://commons.wikimedia.org",
