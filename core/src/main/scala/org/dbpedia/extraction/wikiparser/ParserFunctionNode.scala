@@ -9,5 +9,9 @@ package org.dbpedia.extraction.wikiparser
  */
 case class ParserFunctionNode(title : String, override val children : List[Node], override val line : Int) extends Node(children, line)
 {
-    def toWikiText() : String = "{{" + title + ":" + children.map(_.toWikiText()) + "}}"
+    // TODO: check that separating children by pipe is correct
+    def toWikiText = "{{" + title + ":" + children.map(_.toWikiText).mkString("|") + "}}"
+    
+    // parser functions are skipped for plain text
+    def toPlainText = ""
 }

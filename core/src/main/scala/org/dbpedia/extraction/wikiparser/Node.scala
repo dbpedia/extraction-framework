@@ -25,7 +25,13 @@ abstract class Node(val children : List[Node], val line : Int)
     /**
      * Convert back to original (or equivalent) wiki markup string.
      */
-    def toWikiText() : String
+    def toWikiText: String
+
+    /**
+     * Get plain text content of this node and all child nodes, without markup. Since templates
+     * are not expanded, this will not work well for templates.
+     */
+    def toPlainText: String
 
     /**
      *  Retrieves the root node of this AST.
@@ -72,9 +78,12 @@ abstract class Node(val children : List[Node], val line : Int)
     }
 
     /**
-     * Retrieves the text denoted by this node.
-     * Only works on nodes that only contain text.
-     * Returns None if this node contains child nodes other than TextNode.
+     * Retrieves some text from this node. Only works on a TextNode or a Node that has 
+     * a single TextNode child. Returns None iff this node is not a TextNode and contains 
+     * child nodes other than a single TextNode.
+     * 
+     * TODO: the behavior of this method is weird, but I don't dare to change it because existing
+     * code may rely on its current behavior. New code should probably use toPlainText.
      */
     final def retrieveText: Option[String] = retrieveText(true)
 

@@ -9,8 +9,11 @@ package org.dbpedia.extraction.wikiparser
  */
 case class TemplateParameterNode(parameter : String, override val children : List[Node], override val line : Int) extends Node(children, line)
 {
-    def toWikiText(): String = {
-      val rest = if (children.isEmpty) "" else "|"+children.map(_.toWikiText).mkString("")
+    def toWikiText = {
+      val rest = if (children.isEmpty) "" else "|"+children.map(_.toWikiText).mkString
       "{{{"+parameter+rest+"}}}"
     }
+    
+    // template parameters are skipped for plain text
+    def toPlainText = ""
 }
