@@ -407,9 +407,12 @@ class OntologyReader
                 case None => logger.warning("Domain of property " + name + " (" + domain + ") does not exist"); return None
             }
 
-            // FIXME: passing null for domain and range only works for 
-            // external properties whose values we don't check.
-            val equivalentProperties = equivalentPropertyNames.map(new OntologyProperty(_, Map(), Map(), null, null, false, Set()))
+            var equivalentProperties = Set.empty[OntologyProperty]
+            for (name <- equivalentPropertyNames) {
+              // FIXME: handle equivalent properties in namespaces that we validate
+              if (RdfNamespace.validate(name)) logger.warning("Cannot use equivalent property '"+name+"'")
+              else equivalentProperties += new OntologyProperty(name, Map(), Map(), null, null, false, Set())
+            }
 
             if(isObjectProperty)
             {
