@@ -45,7 +45,7 @@ class OntologyClass(name : String, labels : Map[Language, String], comments : Ma
       }
     } 
 
-    override val uri = RdfNamespace.fullUri(name, DBpediaNamespace.ONTOLOGY)
+    override val uri = RdfNamespace.fullUri(DBpediaNamespace.ONTOLOGY, name)
 
     val isExternalClass = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)
 }

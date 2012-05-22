@@ -22,7 +22,7 @@ class Datatype(name : String, labels : Map[Language, String], comments : Map[Lan
     /**
      * The URI of this datatype
      */
-    override val uri = RdfNamespace.fullUri(name, DBpediaNamespace.DATATYPE)
+    override val uri = RdfNamespace.fullUri(DBpediaNamespace.DATATYPE, name)
 
     val isExternalProperty = ! uri.startsWith(DBpediaNamespace.DATATYPE.namespace)
 }

@@ -21,7 +21,7 @@ class OntologyProperty( name : String, labels : Map[Language, String], comments 
     require(! RdfNamespace.validate(name) || range != null, "missing range for property "+name)
     require(equivalentProperties != null, "equivalent properties are null for property "+name)
     
-    val uri = RdfNamespace.fullUri(name, DBpediaNamespace.ONTOLOGY)
+    val uri = RdfNamespace.fullUri(DBpediaNamespace.ONTOLOGY, name)
 
     val isExternalProperty = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)
     
