@@ -151,7 +151,7 @@ class WikipediaStatsReader(lines : Iterator[String]) extends CollectionReader(li
       try { return (pair(0), pair(1).toInt) }
       catch { case nfe : NumberFormatException => /* fall through, throw below */ }
     }
-    throw new Exception("expected line starting with '"+PropertyTag+"' followed by two strings, found '"+PropertyTag+tail+"'")
+    throw new Exception("expected line starting with '"+PropertyTag+"' followed by a string and an integer, found '"+PropertyTag+tail+"'")
   }
   
 }
