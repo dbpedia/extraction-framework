@@ -7,7 +7,7 @@ import scala.xml.Utility.{isNameChar,isNameStart}
 object UriPolicy {
   
   /**
-   * A policy takes a URI and its position in the quad and may return the given URI 
+   * A policy takes a URI and its position in the quad and may return the given URI
    * or a transformed version of it. Human-readable type alias.
    */
   type Policy = (URI, Int) => URI
@@ -134,12 +134,43 @@ object UriPolicy {
       // Note: isNameChar allows ':', but we're stricter.
       if (ch == ':' || ! isNameChar(ch)) return tail+'_'
       
-      // If char is valid as start of a name, we can use this part as a name. 
+      // If char is valid as start of a name, we can use this part as a name.
       if (isNameStart(ch)) return tail
     }
     
     // We can't use the string as an XML name.
     return tail+'_'
+  }
+  
+  def xmlName(tail: String): String = {
+    tail.substring(xmlNameStart(tail))
+  }
+    
+  private def xmlNameStart(tail: String): Int = {
+    
+    // Go through tail from back to front, find minimal safe part.
+    var index = tail.length
+    var start = index 
+    while (index > 0) {
+      
+      index -= 1
+      
+      // If char is part of a %XX sequence, we can't split the URI into a namespace and a name.
+      // Note: We know it's a valid IRI. Otherwise we'd need more checks here. 
+      if (index >= 2 && tail.charAt(index - 2) == '%') return start
+      
+      val ch = tail.charAt(index)
+      
+      // If char is not valid as part of a name, we can't use the tail as a name.
+      // Note: isNameChar allows ':', but we're stricter.
+      if (ch == ':' || ! isNameChar(ch)) return start
+      
+      // If char is valid as start of a name, we can use this part as a name.
+      if (isNameStart(ch)) start = index
+    }
+    
+    // We can't use the string as an XML name.
+    return start
   }
   
   private def uri(scheme: String, user: String, host: String, port: Int, path: String, query: String, frag: String): URI = {
