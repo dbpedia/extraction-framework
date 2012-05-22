@@ -302,7 +302,7 @@ object ConfigLoader
          * extraction process for each dataset.
          */
         def targetFile(suffix : String)(dataset: Dataset) =
-          finder.file(date, dataset.name.replace('_','-')+'.'+suffix)
+          finder.file(date, dataset.fileName+'.'+suffix)
 
         val destinations = config.formats.map{ case (suffix, format) => new FileDestination(format, targetFile(suffix)) }
 
