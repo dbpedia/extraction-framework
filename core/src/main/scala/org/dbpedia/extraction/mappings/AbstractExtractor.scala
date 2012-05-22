@@ -237,7 +237,7 @@ class AbstractExtractor( context : {
         // Re-generate wiki text for found range of nodes
         pageNode.children.slice(start, end)
                 .filter(renderNode)
-                .map(_.toWikiText())
+                .map(_.toWikiText)
                 .mkString("").trim
     }
 

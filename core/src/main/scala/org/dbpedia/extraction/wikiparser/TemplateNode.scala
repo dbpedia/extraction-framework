@@ -25,5 +25,8 @@ case class TemplateNode(title : WikiTitle, override val children : List[Property
 
     def keySet :  scala.collection.Set[String] = propertyMap.keySet
 
-    def toWikiText() : String = "{{" + title.decoded + (if(children.isEmpty) "" else "|") + children.map(_.toWikiText).mkString("|") + "}}"
+    def toWikiText = "{{" + title.decoded + (if(children.isEmpty) "" else "|") + children.map(_.toWikiText).mkString("|") + "}}"
+    
+    // templates are skipped for plain text
+    def toPlainText = ""
 }

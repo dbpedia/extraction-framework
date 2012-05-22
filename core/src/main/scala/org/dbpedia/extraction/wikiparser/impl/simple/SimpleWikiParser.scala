@@ -405,7 +405,7 @@ final class SimpleWikiParser extends WikiParser
         // FIXME: removing "<includeonly>" here is a hack.
         // We need a preprocessor that resolves stuff like <includeonly>...</includeonly> 
         // based on configuration flags.
-        val key = keyNodes.head.toWikiText().replace("<includeonly>", "").replace("</includeonly>", "").replace("<noinclude>", "").replace("</noinclude>", "")
+        val key = keyNodes.head.toWikiText.replace("<includeonly>", "").replace("</includeonly>", "").replace("<noinclude>", "").replace("</noinclude>", "")
 
         // FIXME: parseUntil(templateParameterEnd) should be correct. Without it, we don't actually 
         // consume the source until the end of the template parameter. But if we use it, the parser

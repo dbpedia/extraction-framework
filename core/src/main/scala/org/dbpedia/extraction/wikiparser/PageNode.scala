@@ -23,7 +23,9 @@ case class PageNode (
 ) 
 extends Node(children, 0)
 {
-    def toWikiText() : String = children.map(_.toWikiText).mkString
+    def toWikiText = children.map(_.toWikiText).mkString
 
-    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, toWikiText())
+    def toPlainText = children.map(_.toPlainText).mkString
+
+    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, toWikiText)
 }

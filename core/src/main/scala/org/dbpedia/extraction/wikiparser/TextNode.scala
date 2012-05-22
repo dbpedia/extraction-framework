@@ -8,7 +8,9 @@ package org.dbpedia.extraction.wikiparser
  */
 case class TextNode(text : String, override val line : Int) extends Node(List.empty, line)
 {
-    def toWikiText() : String = text
+    def toWikiText = text
+    
+    def toPlainText = text
     
     /**
      * Returns the text denoted by this node.

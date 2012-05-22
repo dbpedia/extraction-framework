@@ -43,7 +43,7 @@ class GenderExtractor( context : {
         if (mappingGraph.exists(q => q.predicate == typeProperty && q.value == personUri))
         {
             // get the page text
-            val wikiText: String = node.toWikiText()
+            val wikiText: String = node.toWikiText
 
             // count gender pronouns
             var genderCounts: Map[String, Int] = Map()
