@@ -257,7 +257,7 @@ class OntologyReader
           case template @ TemplateNode(title, _, _) if title.decoded equalsIgnoreCase templateName => {
             readPropertyTemplate(template)
           }
-          case text: TextNode if text.retrieveText.get.trim.isEmpty => {
+          case TextNode(text, _) if text.trim.isEmpty => {
             None // ignore space between templates
           }
           case _ => {
@@ -276,12 +276,10 @@ class OntologyReader
       template.children match {
         case List(lang, text) if lang.key == "1" && text.key == "2" => lang.retrieveText match {
           case Some(langCode) if ! langCode.trim.isEmpty => Language.get(langCode.trim) match {
-            // FIXME: text.retrieveText is empty if there are some non-text nodes, 
-            // e.g. for {{comment|en|Inverse of [[OntologyProperty:Foaf:page|foaf:page]].}}
-            case Some(language) => text.retrieveText match {
-              case Some(text) if ! text.trim.isEmpty =>
-                return Some(language -> text.trim)
-              case _ => // no text
+            case Some(language) => { 
+              val content = text.children.map(_.toPlainText).mkString.trim
+              if (content.nonEmpty) return Some(language -> content)
+              // no text content
             }
             case _ => // bad language
           }
@@ -400,10 +398,17 @@ class OntologyReader
                     case Some(clazz) => clazz
                     case None => logger.warning("Domain of property " + name + " (" + domain + ") couldn't be loaded"); return None
                 }
-                // TODO: check RdfNamespace.validate(domain)?
+                // TODO: do we want this? Maybe we should disallow external domain types.
+                case None if ! RdfNamespace.validate(domain) =>
+                {
+                    logger.config("Domain of property " + name + " (" + domain + ") was not found but for its namespace this was expected")
+                    new OntologyClass(domain, Map(), Map(), List(), Set())
+                }
                 case None => logger.warning("Domain of property " + name + " (" + domain + ") does not exist"); return None
             }
 
+            // FIXME: passing null for domain and range only works for 
+            // external properties whose values we don't check.
             val equivalentProperties = equivalentPropertyNames.map(new OntologyProperty(_, Map(), Map(), null, null, false, Set()))
 
             if(isObjectProperty)
@@ -415,10 +420,15 @@ class OntologyReader
                         case Some(clazz) => clazz
                         case None => logger.warning("Range of property '" + name + "' (" + range + ") couldn't be loaded"); return None
                     }
+                    // TODO: do we want this? Maybe we should disallow external range types.
+                    case None if ! RdfNamespace.validate(range) =>
+                    {
+                        logger.config("Range of property " + name + " (" + range + ") was not found but for its namespace this was expected")
+                        new OntologyClass(range, Map(), Map(), List(), Set())
+                    }
                     case None => logger.warning("Range of property '" + name + "' (" + range + ") does not exist"); return None
                 }
 
-                // TODO: check RdfNamespace.validate(range)?
                 generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivalentProperties))
             }
             else
