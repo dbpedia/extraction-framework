@@ -148,7 +148,7 @@ object UriPolicy {
     
   private def xmlNameStart(tail: String): Int = {
     
-    // Go through tail from back to front, find minimal safe part.
+    // Go through tail from back to front, find maximum safe part.
     var index = tail.length
     var start = index 
     while (index > 0) {
