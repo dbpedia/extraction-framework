@@ -7,24 +7,20 @@ import org.dbpedia.extraction.util.StringUtils.{escape,replacements}
 
 /**
  * Base class of all nodes in the abstract syntax tree.
- * This class is thread-safe.
+ * 
+ * This class is NOT thread-safe.
  */
 abstract class Node(val children : List[Node], val line : Int)
 {
-    @volatile private var _parent : Node = null
+    /**
+     * CAUTION: code outside this class should change the parent only under very rare circumstances.
+     */
+    var parent: Node = null
     
     //Set the parent of all children
-    for(child <- children) child._parent = this
+    for(child <- children) child.parent = this
 
-    /**
-     * The parent node.
-     */
-    def parent = _parent
-
-    //TODO hack until a better way is found to replace TableMappings by TemplateMappings and append them to the original AST
-    def parent_=(n : Node) = _parent = n
-
-    private val annotations = new HashMap[String, Any]() with SynchronizedMap[String, Any]
+    private val annotations = new HashMap[String, Any]()
 
     /**
      * Convert back to original (or equivalent) wiki markup string.
