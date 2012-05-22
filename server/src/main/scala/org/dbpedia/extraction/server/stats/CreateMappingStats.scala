@@ -69,12 +69,12 @@ object CreateMappingStats
             
             val finder = new Finder[File](inputDir, language)
             
-            // Note: org.dbpedia.extraction.dump.download.Download.Complete = "download-complete"
+            // Note: org.dbpedia.extraction.dump.extract.Extraction.Complete = "extraction-complete"
             // TODO: move that constant to core, or use config value
-            val date = finder.dates("download-complete").last
+            val date = finder.dates("extraction-complete").last
             
             def inputFile(dataset: Dataset): File = {
-              finder.file(date, dataset.fileName+".iri.ttl")
+              finder.file(date, dataset.fileName+".ttl")
             }
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
