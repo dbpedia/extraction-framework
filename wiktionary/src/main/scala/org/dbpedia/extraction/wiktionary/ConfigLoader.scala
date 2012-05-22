@@ -82,13 +82,16 @@ object ConfigLoader
         // val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
         // FIXME: the following line compiles, but will crash when it is executed.
         val extractor = new RootExtractor(CompositeExtractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } ))
+        
+        def destination(quads: Boolean, fileSuffix: String) = {
+          val formatter = new TerseFormatter(quads, false)
+          new FileDestination(formatter, dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + '.' + fileSuffix))
+        }
 
         //Destination
-        val formatters = List(TerseFormatter.NTriplesIris, TerseFormatter.NQuadsIris)
-        val destinations = for (formatter <- formatters) yield new FileDestination(formatter, dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + '.' + formatter.fileSuffix))
-        val destination = new CompositeDestination(destinations: _*)
+        val destinations = new CompositeDestination(destination(false, "nt"), destination(true, "nq"))
 
-        new ExtractionJob(extractor, articlesSource, destination, "Extraction Job for " + language.wikiCode + " Wikipedia")
+        new ExtractionJob(extractor, articlesSource, destinations, "Extraction Job for " + language.wikiCode + " Wikipedia")
     }
 
     private class Config(config : Properties)

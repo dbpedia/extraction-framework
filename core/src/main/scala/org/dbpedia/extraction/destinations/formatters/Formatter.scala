@@ -1,17 +1,13 @@
-package org.dbpedia.extraction.destinations
+package org.dbpedia.extraction.destinations.formatters
 
 import java.io.Writer
+import org.dbpedia.extraction.destinations.Quad
 
 /**
  * Serializes statements.
  */
 trait Formatter
 {
-  /**
-   * Recommended suffix for files written in this format. Starts with a letter, not with a dot. 
-   */
-  val fileSuffix: String
-  
   def writeHeader(writer : Writer) : Unit
   
   def writeFooter(writer : Writer) : Unit

@@ -4,6 +4,7 @@ import java.net.URLEncoder
 import collection.mutable.HashMap
 import java.io._
 import java.nio.charset.Charset
+import org.dbpedia.extraction.destinations.formatters.Formatter
 
 /**
  * A destination which writes all statements to files.

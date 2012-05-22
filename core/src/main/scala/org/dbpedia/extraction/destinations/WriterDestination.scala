@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.destinations
 
 import java.io.Writer
+import org.dbpedia.extraction.destinations.formatters.Formatter
 
 /**
  * Writes all statements to a writer.

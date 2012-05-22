@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters.{TerseFormatter,TriXFormatter}
-import org.dbpedia.extraction.destinations.{Formatter,FileDestination, CompositeDestination}
+import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter}
+import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
 import org.dbpedia.extraction.mappings._
 import collection.immutable.ListMap
 import java.util.Properties
@@ -207,15 +207,6 @@ object ConfigLoader
         val extractorClasses = config.extractors(lang)
         val extractor = new RootExtractor(CompositeExtractor.load(extractorClasses, context))
         
-        def getFormatter(suffix: String): Formatter = {
-          TerseFormatter.forSuffix(suffix).getOrElse( 
-            TriXFormatter.forSuffix(suffix).getOrElse(
-              throw new IllegalArgumentException("unknown file format suffix '"+suffix+"'."+
-                " Known formats: "+(TerseFormatter.suffixes++TriXFormatter.suffixes).mkString(","))
-            )
-          )
-        }
-        
         /**
          * Get target file path in config.dumpDir. Note that this function should be fast and not 
          * access the file system - it is called not only in this class, but later during the 
@@ -225,16 +216,17 @@ object ConfigLoader
           finder.file(date, dataset.name.replace('_','-')+'.'+suffix)
         }
 
-        val formatters =
-          if (formats.nonEmpty) formats.map(getFormatter)
-          // TODO: use two to four default formats instead of all twelve?
-          else TerseFormatter.all ++ TriXFormatter.all
-        val destinations = for (formatter <- formatters) yield new FileDestination(formatter, targetFile(formatter.fileSuffix))
-        val destination = new CompositeDestination(destinations: _*)
+        def destination(quads: Boolean, fileSuffix: String) = {
+          val formatter = new TerseFormatter(quads, true)
+          new FileDestination(formatter, targetFile(fileSuffix))
+        }
+
+        //Destination
+        val destinations = new CompositeDestination(destination(false, "ttl"), destination(true, "tql"))
 
         // Note: label is also used as file name, but space is replaced by underscores
         val jobLabel = "extraction job "+lang.wikiCode+" with "+extractorClasses.size+" extractors"
-        new ExtractionJob(extractor, context.articlesSource, destination, jobLabel)
+        new ExtractionJob(extractor, context.articlesSource, destinations, jobLabel)
     }
 
     //language-independent val
