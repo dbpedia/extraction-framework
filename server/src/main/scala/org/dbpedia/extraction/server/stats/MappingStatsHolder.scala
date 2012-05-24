@@ -65,8 +65,9 @@ object MappingStatsHolder {
 }
 
 /**
- * This class holds on to the mappings to make synchronization in MappingStatsManager easier. 
- * TODO: better solution?
+ * Contains statistics data computed from Wikipedia statistics numbers and template mappings.
+ * Also holds on to the mappings to make synchronization in MappingStatsManager easier. 
+ * TODO: better solution for mappings?
  */
 class MappingStatsHolder(val mappings: Mappings, val mappedStatistics: List[MappingStats], val reversedRedirects: Map[String, String], ignoreList: IgnoreList) {
 
