@@ -17,9 +17,13 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
  * @author pablomendes
  * @author maxjakob
  */
-class TopicalConceptsExtractor( context : {
-                                   def ontology : Ontology
-                                   def language : Language } ) extends Extractor
+class TopicalConceptsExtractor(
+  context : {
+    def ontology : Ontology
+    def language : Language
+  }
+)
+extends Extractor
 {
     private val skosSubjectProperty = context.ontology.properties("skos:subject")
 
@@ -28,6 +32,8 @@ class TopicalConceptsExtractor( context : {
     private val skosSubjectClass = context.ontology.classes("skos:Concept")
 
     private val catMainTemplates = TopicalConceptsExtractorConfig.catMainTemplates;
+
+    override val datasets = Set(DBpediaDatasets.TopicalConcepts)
 
     override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
@@ -46,15 +52,13 @@ class TopicalConceptsExtractor( context : {
                         subjectUri,
                         skosSubjectProperty,
                         mainResource,
-                        template.sourceUri,
-                        null) ::
+                        template.sourceUri) ::
                     new Quad(context.language,
                         DBpediaDatasets.TopicalConcepts,
                         mainResource,
                         rdfTypeProperty,
                         skosSubjectClass.uri,
-                        template.sourceUri,
-                        null)
+                        template.sourceUri)
                     :: Nil)
                 }
 

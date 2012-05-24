@@ -10,71 +10,70 @@ import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty,OntologyClass,OntologyProperty,DBpediaNamespace}
 import scala.collection.mutable.ArrayBuffer
 
-class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNodeMapping and CreateMappingStats requires this to be public. Is there a better way?
-                             ontologyProperty : OntologyProperty,
-                             unit : Datatype,
-                             private var language : Language,
-                             factor : Double,
-                             context : {
-                                 def ontology : Ontology
-                                 def redirects : Redirects  // redirects required by DateTimeParser and UnitValueParser
-                                 def language : Language } ) extends PropertyMapping
+class SimplePropertyMapping (
+  val templateProperty : String, // IntermediaNodeMapping and CreateMappingStats requires this to be public
+  ontologyProperty : OntologyProperty,
+  unit : Datatype,
+  private var language : Language,
+  factor : Double,
+  context : {
+    def ontology : Ontology
+    def redirects : Redirects  // redirects required by DateTimeParser and UnitValueParser
+    def language : Language
+  }
+)
+extends PropertyMapping
 {
     if(language == null) language = context.language
 
-    validate()
-
-    /**
-     * Validates the mapping
-     */
-    private def validate()
+    ontologyProperty match
     {
-        ontologyProperty match
+        case datatypeProperty : OntologyDatatypeProperty =>
         {
-            case datatypeProperty : OntologyDatatypeProperty =>
+            //Check if unit is compatible to the range of the ontology property
+            (unit, datatypeProperty.range) match
             {
-                //Check if unit is compatible to the range of the ontology property
-                (unit, datatypeProperty.range) match
-                {
-                    case (dt1 : UnitDatatype, dt2 : UnitDatatype) => require(dt1.dimension == dt2.dimension,
-                        "Unit must conform to the dimension of the range of the ontology property")
+                case (dt1 : UnitDatatype, dt2 : UnitDatatype) => require(dt1.dimension == dt2.dimension,
+                    "Unit must conform to the dimension of the range of the ontology property")
 
-                    case (dt1 : UnitDatatype, dt2 : DimensionDatatype) => require(dt1.dimension == dt2,
-                        "Unit must conform to the dimension of the range of the ontology property")
+                case (dt1 : UnitDatatype, dt2 : DimensionDatatype) => require(dt1.dimension == dt2,
+                    "Unit must conform to the dimension of the range of the ontology property")
 
-                    case (dt1 : DimensionDatatype, dt2 : UnitDatatype) => require(dt1 == dt2.dimension,
-                        "The dimension of unit must match the range of the ontology property")
+                case (dt1 : DimensionDatatype, dt2 : UnitDatatype) => require(dt1 == dt2.dimension,
+                    "The dimension of unit must match the range of the ontology property")
 
-                    case (dt1 : DimensionDatatype, dt2 : DimensionDatatype) => require(dt1 == dt2,
-                        "Unit must match the range of the ontology property")
+                case (dt1 : DimensionDatatype, dt2 : DimensionDatatype) => require(dt1 == dt2,
+                    "Unit must match the range of the ontology property")
 
-                    case _ if unit != null => require(unit == ontologyProperty.range, "Unit must be compatible to the range of the ontology property")
-                    case _ =>
-                }
+                case _ if unit != null => require(unit == ontologyProperty.range, "Unit must be compatible to the range of the ontology property")
+                case _ =>
             }
-            case _ =>
         }
+        case _ =>
+    }
 
-        if(language != context.language)
-        {
-            require(ontologyProperty.isInstanceOf[OntologyDatatypeProperty],
-                "Language can only be specified for datatype properties")
+    if(language != context.language)
+    {
+      require(ontologyProperty.isInstanceOf[OntologyDatatypeProperty],
+        "Language can only be specified for datatype properties")
 
-            require(ontologyProperty.range.uri == "http://www.w3.org/2001/XMLSchema#string",
-                "Language can only be specified for string datatype properties")
-        }
+      // TODO: don't use string constant, use RdfNamespace
+      require(ontologyProperty.range.uri == "http://www.w3.org/2001/XMLSchema#string",
+        "Language can only be specified for string datatype properties")
     }
     
     private val parser : DataParser = ontologyProperty.range match
     {
         //TODO
-        case c : OntologyClass if ontologyProperty.name != "foaf:homepage" => new ObjectParser(context)
         case c : OntologyClass =>
-        {
+          if (ontologyProperty.name == "foaf:homepage") {
             checkMultiplicationFactor("foaf:homepage")
             new LinkParser()
-        }
-        case dt : UnitDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
+          } 
+          else {
+            new ObjectParser(context)
+          }
+        case dt : UnitDatatype      => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
         case dt : DimensionDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
         case dt : EnumerationDatatype =>
         {
@@ -127,7 +126,7 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
             }
             case name => throw new IllegalArgumentException("Not implemented range " + name + " of property " + ontologyProperty)
         }
-        case dt => throw new IllegalArgumentException("Property " + ontologyProperty + " does have invalid range " + dt)
+        case other => throw new IllegalArgumentException("Property " + ontologyProperty + " does have invalid range " + other)
     }
 
     private def checkMultiplicationFactor(datatypeName : String)
@@ -138,6 +137,8 @@ class SimplePropertyMapping( val templateProperty : String, //TODO IntermediaNod
         }
     }
     
+    override val datasets = Set(DBpediaDatasets.OntologyProperties,DBpediaDatasets.SpecificProperties)
+
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         val graph = new ArrayBuffer[Quad]

@@ -77,6 +77,8 @@ class AugmenterExtractor(val decoratee : Extractor, val dataset : Dataset,
         val labelToURIs : MultiMap[String, String], val relationPredicate : String)
   extends Extractor
 {
+  override val datasets = scala.collection.immutable.Set(dataset)
+  
   def extract(page: PageNode, subjectUri: String, context: PageContext) : Seq[Quad] = {
 
     val base = decoratee.extract(page, subjectUri, context)

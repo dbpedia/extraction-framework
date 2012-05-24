@@ -12,23 +12,28 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Extracts information about persons (date and place of birth etc.) from the English and German Wikipedia, represented using the FOAF vocabulary.
  */
-class PersondataExtractor( context : {
-                               def ontology : Ontology
-                               def redirects : Redirects  // redirects required by DateTimeParser
-                               def language : Language } ) extends Extractor
+class PersondataExtractor(
+  context : {
+    def ontology : Ontology
+    def redirects : Redirects // redirects required by DateTimeParser
+    def language : Language 
+  }
+)
+extends Extractor
 {
-    private val language = context.language.wikiCode
+    private val language = context.language
+    private val wikiCode = language.wikiCode
 
-    require(PersondataExtractorConfig.supportedLanguages.contains(language))
+    require(PersondataExtractorConfig.supportedLanguages.contains(wikiCode))
 
-    private val persondataTemplate = PersondataExtractorConfig.persondataTemplates(language)
-    private val name = PersondataExtractorConfig.name(language)
-    private val alternativeNames = PersondataExtractorConfig.alternativeNames(language)
-    private val description = PersondataExtractorConfig.description(language)
-    private val birthDate = PersondataExtractorConfig.birthDate(language)
-    private val birthPlace = PersondataExtractorConfig.birthPlace(language)
-    private val deathDate = PersondataExtractorConfig.deathDate(language)
-    private val deathPlace = PersondataExtractorConfig.deathPlace(language)
+    private val persondataTemplate = PersondataExtractorConfig.persondataTemplates(wikiCode)
+    private val name = PersondataExtractorConfig.name(wikiCode)
+    private val alternativeNames = PersondataExtractorConfig.alternativeNames(wikiCode)
+    private val description = PersondataExtractorConfig.description(wikiCode)
+    private val birthDate = PersondataExtractorConfig.birthDate(wikiCode)
+    private val birthPlace = PersondataExtractorConfig.birthPlace(wikiCode)
+    private val deathDate = PersondataExtractorConfig.deathDate(wikiCode)
+    private val deathPlace = PersondataExtractorConfig.deathPlace(wikiCode)
 
     private val dateParser = new DateTimeParser(context, new Datatype("xsd:date"))
     private val monthYearParser = new DateTimeParser(context, new Datatype("xsd:gMonthYear"))
@@ -45,6 +50,8 @@ class PersondataExtractor( context : {
     private val foafGivenNameProperty = context.ontology.properties("foaf:givenName")
     private val foafPersonClass = context.ontology.classes("foaf:Person")
     private val dcDescriptionProperty = context.ontology.properties("dc:description")
+
+    override val datasets = Set(DBpediaDatasets.Persondata)
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
@@ -72,15 +79,15 @@ class PersondataExtractor( context : {
                             if (nameParts.size == 2)
                             {
                                 val reversedName = nameParts(1).trim + " " + nameParts(0).trim
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("xsd:string"))
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("xsd:string"))
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("xsd:string"))
                             }
                             else
                             {
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("xsd:string"))
                             }
-                            quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceUri)
+                            quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceUri)
                             nameFound = true
                         }
                     }
@@ -103,35 +110,35 @@ class PersondataExtractor( context : {
                         {
                             for(value <- StringParser.parse(property))
                             {
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("xsd:string"))
                             }
                         }
                         case key if key == birthDate =>
                         {
                             for ((date, datatype) <- getDate(property))
                             {
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, birthDateProperty, date, property.sourceUri, datatype)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, birthDateProperty, date, property.sourceUri, datatype)
                             }
                         }
                         case key if key == deathDate =>
                         {
                             for ((date, datatype) <- getDate(property))
                             {
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, deathDateProperty, date, property.sourceUri, datatype)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, deathDateProperty, date, property.sourceUri, datatype)
                             }
                         }
                         case key if key == birthPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.toString, property.sourceUri)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.toString, property.sourceUri)
                             }
                         }
                         case key if key == deathPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
-                                quads += new Quad(context.language, DBpediaDatasets.Persondata, subjectUri, deathPlaceProperty, objUri.toString, property.sourceUri)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, deathPlaceProperty, objUri.toString, property.sourceUri)
                             }
                         }
                         case _ =>

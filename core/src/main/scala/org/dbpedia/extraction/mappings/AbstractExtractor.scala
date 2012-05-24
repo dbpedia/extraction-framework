@@ -16,9 +16,13 @@ import org.dbpedia.extraction.util.Language
  * DBpedia-customized MediaWiki instance is required.
  */
 
-class AbstractExtractor( context : {
-                             def ontology : Ontology
-                             def language : Language } ) extends Extractor
+class AbstractExtractor(
+  context : {
+    def ontology : Ontology
+    def language : Language
+  }
+)
+extends Extractor
 {
     private val maxRetries = 3
 
@@ -38,6 +42,8 @@ class AbstractExtractor( context : {
 
     // lazy so testing does not need ontology
     private lazy val longProperty = context.ontology.properties("abstract")
+    
+    override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
     override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {

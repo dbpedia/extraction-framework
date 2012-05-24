@@ -28,6 +28,8 @@ class CombineDateMapping( ontologyProperty : OntologyProperty,
     private val parser2 = Option(unit2).map(new DateTimeParser(context, _))
     private val parser3 = Option(unit3).map(new DateTimeParser(context, _))
 
+    override val datasets = Set(DBpediaDatasets.OntologyProperties)
+
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         var dates = List[Date]()

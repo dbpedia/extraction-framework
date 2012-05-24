@@ -17,6 +17,4 @@ object DisambiguationExtractorConfig
          "pt" -> " (desambiguação)",
          "ru" -> " (значения)"
     )
-
-    val supportedLanguages = disambiguationTitlePartMap.keySet
 }
