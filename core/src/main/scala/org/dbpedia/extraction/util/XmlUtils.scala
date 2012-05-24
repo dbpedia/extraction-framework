@@ -18,6 +18,10 @@ object XmlUtils {
     escapes
   }
   
+  /**
+   * Does the same thing as scala.xml.Utility.escape, but probably faster.
+   * TODO: micro-benchmark to check if and how much this method actually is faster. 
+   */
   def escape(target: StringBuilder, str: String) = StringUtils.escape(target, str, escapes)
     
 }
