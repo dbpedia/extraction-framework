@@ -19,10 +19,14 @@ import scala.collection.mutable.ArrayBuffer
  * The infobox extractor performs only a minimal amount of property value clean-up, e.g., by converting a value like “June 2009” to the XML Schema format “2009–06”.
  * You should therefore use the infobox dataset only if your application requires complete coverage of all Wikipeda properties and you are prepared to accept relatively noisy data.
  */
-class InfoboxExtractor( context : {
-                            def ontology : Ontology
-                            def language : Language
-                            def redirects : Redirects } ) extends Extractor
+class InfoboxExtractor(
+  context : {
+    def ontology : Ontology
+    def language : Language
+    def redirects : Redirects 
+  } 
+) 
+extends Extractor
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Configuration
@@ -85,6 +89,8 @@ class InfoboxExtractor( context : {
 
     private val seenProperties = HashSet[String]()
     
+    override val datasets = Set(DBpediaDatasets.Infoboxes,DBpediaDatasets.InfoboxTest,DBpediaDatasets.InfoboxProperties)
+
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main) return Seq.empty

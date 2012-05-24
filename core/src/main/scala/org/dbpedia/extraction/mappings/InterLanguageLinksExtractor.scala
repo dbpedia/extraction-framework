@@ -7,7 +7,6 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
 
-
 /**
  * Extracts interwiki links and creates owl:sameAs triples
  */
@@ -19,6 +18,8 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
     private val interLanguageLinksProperty = context.ontology.properties("owl:sameAs")
     //context.ontology.getProperty("interLanguageLinks")
 
+    override val datasets = Set(DBpediaDatasets.SameAs)
+      
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main) return Seq.empty

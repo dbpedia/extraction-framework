@@ -15,6 +15,8 @@ class ArticleCategoriesExtractor( context : {
 {
     private val dctermsSubjectProperty = context.ontology.properties("dct:subject")
 
+    override val datasets = Set(DBpediaDatasets.ArticleCategories)
+
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main) return Seq.empty

@@ -57,6 +57,8 @@ class CalculateMapping( val templateProperty1 : String,
         case dt => throw new IllegalArgumentException("Datatype " + dt + " is not supported by CalculateMapping")
     }
     
+    override val datasets = Set(DBpediaDatasets.OntologyProperties, DBpediaDatasets.SpecificProperties)
+
     def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         for( property1 <- node.property(templateProperty1);

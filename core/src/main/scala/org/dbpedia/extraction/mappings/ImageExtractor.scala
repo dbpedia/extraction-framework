@@ -21,36 +21,42 @@ import scala.collection.mutable.ArrayBuffer
  * 
  * FIXME: we're sometimes dealing with encoded links, sometimes with decoded links. It's quite a mess.
  */
-class ImageExtractor( context : {
-                          def ontology : Ontology
-                          def language : Language
-                          def articlesSource : Source
-                          def commonsSource : Source } ) extends Extractor
+class ImageExtractor( 
+  context : {
+    def ontology : Ontology
+    def language : Language
+    def articlesSource : Source
+    def commonsSource : Source 
+  } 
+) 
+extends Extractor
 {
-    private val language = context.language.wikiCode
+  private val language = context.language.wikiCode
 
-    require(ImageExtractorConfig.supportedLanguages.contains(language), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
+  require(ImageExtractorConfig.supportedLanguages.contains(language), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
 
-    private val fileNamespaceIdentifier = Namespace.File.getName(context.language)
+  private val fileNamespaceIdentifier = Namespace.File.getName(context.language)
 
-    private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + language +"/"
-    private val commonsUrlPrefix = ImageExtractorConfig.wikipediaUrlPrefix + "commons/"
+  private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + language +"/"
+  private val commonsUrlPrefix = ImageExtractorConfig.wikipediaUrlPrefix + "commons/"
 
-    private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
+  private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
 
-    private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
+  private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
 
-    logger.info("Loadings images")
-    private val nonFreeImages = new HashSet[String]()
-    private val freeWikipediaImages = new HashSet[String]()
-    ImageExtractor.loadImages(context.commonsSource, null, nonFreeImages, language)
-    ImageExtractor.loadImages(context.articlesSource, freeWikipediaImages, nonFreeImages, language)
-    logger.info("Images loaded from dump")
+  logger.info("Loadings images")
+  private val nonFreeImages = new HashSet[String]()
+  private val freeWikipediaImages = new HashSet[String]()
+  ImageExtractor.loadImages(context.commonsSource, null, nonFreeImages, language)
+  ImageExtractor.loadImages(context.articlesSource, freeWikipediaImages, nonFreeImages, language)
+  logger.info("Images loaded from dump")
 
-    private val dbpediaThumbnailProperty = context.ontology.properties("thumbnail")
-    private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
-    private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
-    private val dcRightsProperty = context.ontology.properties("dc:rights")
+  private val dbpediaThumbnailProperty = context.ontology.properties("thumbnail")
+  private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
+  private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
+  private val dcRightsProperty = context.ontology.properties("dc:rights")
+
+  override val datasets = Set(DBpediaDatasets.Images)
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
@@ -171,7 +177,7 @@ class ImageExtractor( context : {
       val messageDigest = md.digest(URLDecoder.decode(fileName, "UTF-8").getBytes)
       var md5 = (new BigInteger(1, messageDigest)).toString(16)
 
-      //If the lenght of the MD5 hash is less than 32, then we should pad leading zeros to it, as converting it to
+      // If the lenght of the MD5 hash is less than 32, then we should pad leading zeros to it, as converting it to
       // BigInteger will result in removing all leading zeros.
       while (md5.length < 32)
         md5 = "0" + md5;

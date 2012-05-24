@@ -16,6 +16,8 @@ class CategoryLabelExtractor( context : {
 {
     val labelProperty = context.ontology.properties("rdfs:label")
 
+    override val datasets = Set(DBpediaDatasets.CategoryLabels)
+
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Category) Seq.empty

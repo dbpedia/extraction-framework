@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
 import impl.simple.SimpleWikiParser
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.destinations.{Quad,Dataset}
 import org.dbpedia.extraction.sources.WikiPage
 import scala.io.Source
 import util.control.Breaks._
@@ -87,6 +87,8 @@ class WiktionaryPageExtractor extends Extractor {
     "example" -> "http://example.com/example"
   ) //TODO complete
 
+
+  override val datasets = scala.collection.immutable.Set.empty[Dataset]
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {

@@ -10,6 +10,8 @@ class ConditionalMapping(
 )
 extends Mapping[TemplateNode]
 {
+    override val datasets = cases.flatMap(_.datasets).toSet ++ defaultMappings.flatMap(_.datasets).toSet
+
     override def extract(node: TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
       for(condition <- cases)
@@ -41,6 +43,8 @@ extends Mapping[TemplateNode]
     require(List("isSet", "equals", "contains", "otherwise").contains(operator), "Invalid operator: " + operator +". Supported operators: isSet, equals, contains, otherwise")
     /** Check if value is defined */
     require(operator == "otherwise" || operator == "isSet" || value != null, "Value must be defined")
+
+    override val datasets = mapping.datasets
 
     def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {

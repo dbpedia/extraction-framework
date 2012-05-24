@@ -24,6 +24,8 @@ extends Mapping[TableNode]
 
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
 
+    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyProperties,DBpediaDatasets.OntologyTypes)
+
     override def extract(tableNode : TableNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         val tableHeader = extractTableHeader(tableNode)

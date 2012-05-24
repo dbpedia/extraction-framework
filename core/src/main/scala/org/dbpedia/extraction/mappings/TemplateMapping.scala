@@ -18,6 +18,8 @@ class TemplateMapping(
 ) 
 extends Mapping[TemplateNode]
 {
+    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
+
     override def extract(node: TemplateNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
     {
         val pageNode = node.root
