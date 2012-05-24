@@ -21,18 +21,18 @@ class WriterDestination(writer: Writer, formatter : Formatter) extends Destinati
       if(closed) throw new IllegalStateException("Trying to write to a closed destination")
 
       if(! header) {
-        formatter.writeHeader(writer)
+        writer.write(formatter.header)
         header = true
       }
 
       for(quad <- graph) {
-        formatter.write(writer, quad)
+        writer.write(formatter.render(quad))
       }
     }
 
     override def close() = synchronized {
-      if (! header) formatter.writeHeader(writer)
-      formatter.writeFooter(writer)
+      if (! header) writer.write(formatter.header)
+      writer.write(formatter.footer)
       closed = true
     }
 }

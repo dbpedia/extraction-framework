@@ -30,7 +30,7 @@ class FileDestination(formatter : Formatter, filePattern : Dataset => File) exte
         if (writer != null) {
           for(quad <- quads)
           {
-            formatter.write(writer, quad)
+            writer.write(formatter.render(quad))
           }
         }
       }
@@ -39,7 +39,7 @@ class FileDestination(formatter : Formatter, filePattern : Dataset => File) exte
     override def close() = synchronized {
       if(! closed) {
         for(writer <- writers.values) {
-          formatter.writeFooter(writer)
+          writer.write(formatter.footer)
           writer.close()
         }
         closed = true
@@ -55,7 +55,7 @@ class FileDestination(formatter : Formatter, filePattern : Dataset => File) exte
         
         val stream = new FileOutputStream(file)
         val writer = new OutputStreamWriter(stream, "UTF-8")
-        formatter.writeHeader(writer)
+        writer.write(formatter.header)
         
         writer
       }

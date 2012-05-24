@@ -3,6 +3,11 @@ package org.dbpedia.extraction.destinations.formatters
 import org.dbpedia.extraction.util.XmlUtils.escape
 import java.net.URI
 import UriPolicy._
+import TriXBuilder._
+
+object TriXBuilder {
+  private val spaces = (2 to (6, step = 2)).map(" " * _)
+}
 
 /**
  * Formats statements according to the TriX format.
@@ -10,12 +15,10 @@ import UriPolicy._
  * 
  * Objects of this class are not re-usable - create a new object for each triple.
  */
-class TriXBuilder(quads: Boolean, process: Policy) 
+class TriXBuilder(quads: Boolean, process: Policy)
 extends UriTripleBuilder(process) {
   
   private var depth = 0
-  
-  private val spaces = (2 to (6, step = 2)).map(" " * _)
   
   private val sb = new java.lang.StringBuilder
   
