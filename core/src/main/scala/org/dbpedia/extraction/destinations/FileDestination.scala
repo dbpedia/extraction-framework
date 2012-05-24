@@ -8,12 +8,13 @@ import org.dbpedia.extraction.destinations.formatters.Formatter
 
 /**
  * A destination which writes all statements to files.
+ * 
  * This class is thread-safe.
  * 
- * @param formatter The formatter used to serialize the statements. If no formatter is provided, the statements are written using the N-Triples format.
- * @param baseDir The base directory of the output files. If no base directory is provided, the output is written to current directory.
- * @param filePattern The pattern according to which the statements are split into different files by their dataset. If the pattern returns null
- * for a certain dataset, quads from that dataset will be ignored.
+ * @param formatter The formatter used to serialize the statements.
+ * @param filePattern The pattern according to which the statements are split into different 
+ * files by their dataset. If the pattern returns null for a certain dataset, quads from that 
+ * dataset will be ignored.
  */
 class FileDestination(formatter : Formatter, filePattern : Dataset => File) extends Destination
 {
