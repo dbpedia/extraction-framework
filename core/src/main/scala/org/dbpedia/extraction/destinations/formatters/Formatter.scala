@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import java.io.Writer
 import org.dbpedia.extraction.destinations.Quad
 
 /**
@@ -8,9 +7,9 @@ import org.dbpedia.extraction.destinations.Quad
  */
 trait Formatter
 {
-  def writeHeader(writer : Writer) : Unit
+  def header: String
   
-  def writeFooter(writer : Writer) : Unit
+  def footer: String
   
-  def write(writer : Writer, quad : Quad) : Unit
+  def render(quad: Quad): String
 }

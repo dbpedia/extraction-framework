@@ -1,15 +1,13 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import java.io.Writer
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
-import java.net.URI
 import UriPolicy._
 
 /**
  * TODO: add functionality - the comments could contain more useful info
  */
-class TerseFormatter(render: Quad => String) extends Formatter
+class TerseFormatter(renderer: Quad => String) extends Formatter
 {
   def this(builder: => TripleBuilder) = 
     this(new TripleRenderer(builder))
@@ -17,15 +15,9 @@ class TerseFormatter(render: Quad => String) extends Formatter
   def this(quads: Boolean, turtle: Boolean, policy: Policy = identity) =
     this(new TerseBuilder(quads, turtle, policy))
 
-  override def writeHeader(writer : Writer) = {
-    writer.write("# started "+formatCurrentTimestamp+"\n")
-  }
+  override def header = "# started "+formatCurrentTimestamp+"\n"
   
-  override def writeFooter(writer : Writer) = {
-    writer.write("# completed "+formatCurrentTimestamp+"\n")
-  }
+  override def footer = "# completed "+formatCurrentTimestamp+"\n"
   
-  override def write(writer : Writer, quad : Quad) = {
-    writer.write(render(quad))
-  }
+  override def render(quad: Quad) = renderer(quad)
 }
