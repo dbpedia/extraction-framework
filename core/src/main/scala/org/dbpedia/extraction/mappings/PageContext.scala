@@ -5,6 +5,9 @@ import org.dbpedia.extraction.util.WikiUtil
 import java.net.URLEncoder
 import org.dbpedia.extraction.wikiparser._
 
+/**
+ * TODO: move this to PageNode?
+ */
 class PageContext()
 {
     private val uriGenerator = new UriGenerator()
