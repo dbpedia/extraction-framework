@@ -15,14 +15,27 @@ import collection.mutable.HashMap
 class DemuxDestination(factory: Dataset => Destination) 
 extends Destination
 {
-  private val destinations = new HashMap[Dataset, Destination]()
+  /**
+   * This is basically an extension of .withDefault(factory): don't just return the default value,
+   * also remember it. It allows us to avoid calling getOrElseUpdate() below, which is a bit 
+   * unwieldy and creates a new function object for every call (just to wrap the dataset argument).
+   * BUT: This code is unwieldy too, and I don't know enough about the Scala collections
+   * to actually use it. I'll just save it here for posteriority.
+   */
+  private val destinations = new HashMap[Dataset, Destination]() {
+    override def default(dataset: Dataset): Destination = {
+      val destination = factory(dataset)
+      addEntry(new Entry(dataset, destination))
+      destination
+    }
+  }
 
   private var closed = false
 
   override def write(graph : Seq[Quad]) : Unit = synchronized {
     if (closed) throw new IllegalStateException("Trying to write to a closed destination")
     for((dataset, quads) <- graph.groupBy(_.dataset)) {
-      val destination = destinations.getOrElseUpdate(dataset, factory(dataset))
+      val destination = destinations(dataset)
       if (destination != null) destination.write(quads)
     }
   }
