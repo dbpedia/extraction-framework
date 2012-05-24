@@ -70,7 +70,7 @@ final class SimpleWikiParser extends WikiParser
 
         //Check if this page is a Redirect
         // TODO: the regex used in org.dbpedia.extraction.mappings.Redirects.scala is probably a bit better
-        val redirectRegex = """(?is)\s*(?:""" + Redirect(page.title.language).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[.*"""
+        val redirectRegex = """(?is)\s*(?:""" + Redirect(page.title.language).mkString("|") + """)\s*:?\s*\[\[.*"""
         // TODO: also extract the redirect target.
         // TODO: compare extracted redirect target to the one found by Wikipedia (stored in the WikiPage object).
         // Problems:

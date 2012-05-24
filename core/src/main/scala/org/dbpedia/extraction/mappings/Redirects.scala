@@ -173,7 +173,7 @@ object Redirects
         val regex = buildRegex
         
         private def buildRegex = {
-            val redirects = Redirect(lang).getOrElse(Set("#redirect")).mkString("|")
+            val redirects = Redirect(lang).mkString("|")
             // (?ius) enables CASE_INSENSITIVE UNICODE_CASE DOTALL
             // case insensitive and unicode are important - that's what mediawiki does.
             // Note: Although we do not specify a Locale, UNICODE_CASE does mostly the right thing.

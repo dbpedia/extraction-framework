@@ -300,5 +300,5 @@ object Redirect
 
 
 
-    def apply(language : Language) = map.get(language.wikiCode)
+    def apply(language : Language) = map(language.wikiCode)
 }
