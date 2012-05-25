@@ -175,7 +175,8 @@ extends PropertyMapping
 
         graph += new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         
-        //Write specific properties
+        // Write specific properties
+        // FIXME: copy-and-paste in CalculateMapping
         for(classAnnotation <- node.annotation(TemplateMapping.CLASS_ANNOTATION);
             currentClass <- classAnnotation.asInstanceOf[Seq[OntologyClass]])
         {
