@@ -15,22 +15,25 @@ object UriPolicy {
   /**
    * A predicate decides if a policy should be applied for the given DBpedia URI.
    * Human-readable type alias.
-   * TOOD: change type to (URI, Int) => Boolean.
    */
-  type Predicate = URI => Boolean
+  type Predicate = (URI, Int) => Boolean
   
+  // codes for URI positions
   val SUBJECT = 1
   val PREDICATE = 2
-  val OBJECT = 3
-  val DATATYPE = 4
-  val CONTEXT = 5
+  val OBJECT = 4
+  val DATATYPE = 8
+  val CONTEXT = 16
+  
+  // indicates that a predicate matches all positions
+  val ALL = -1
   
   val identity: Policy = { (iri, _) => iri }
 
-  def uris(activeFor: Predicate): Policy = {
+  def uri(activeFor: Predicate): Policy = {
     
-    (iri, _) => 
-    if (activeFor(iri)) {
+    (iri, pos) => 
+    if (activeFor(iri, pos)) {
       new URI(iri.toASCIIString)
     }
     else {
@@ -40,8 +43,8 @@ object UriPolicy {
 
   def generic(activeFor: Predicate): Policy = {
     
-    (iri, _) =>
-    if (activeFor(iri)) {
+    (iri, pos) => 
+    if (activeFor(iri, pos)) {
       
       val scheme = iri.getScheme
       val user = iri.getRawUserInfo
@@ -90,8 +93,8 @@ object UriPolicy {
    */
   def xmlSafe(activeFor: Predicate): Policy = {
     
-    (iri, pos) =>
-    if (pos == PREDICATE && activeFor(iri)) {
+    (iri, pos) => 
+    if (activeFor(iri, pos)) {
       
       val scheme = iri.getScheme
       val user = iri.getRawUserInfo
