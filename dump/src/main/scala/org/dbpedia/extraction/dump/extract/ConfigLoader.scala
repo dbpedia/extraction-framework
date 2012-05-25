@@ -1,17 +1,20 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.{Dataset,Destination,FileDestination,CompositeDestination,MarkerDestination}
-import org.dbpedia.extraction.mappings.{Mappings,MappingsLoader,Redirects,RootExtractor,CompositeExtractor}
-import scala.collection.mutable.ArrayBuffer
-import java.util.Properties
-import java.io.{FileInputStream, InputStreamReader, File}
-import org.dbpedia.extraction.util.{Language,Finder}
-import org.dbpedia.extraction.util.RichFile.toRichFile
-import java.net.URL
+import org.dbpedia.extraction.destinations._
+import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{XMLSource,WikiSource}
 import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser}
 import org.dbpedia.extraction.dump.download.Download
+import org.dbpedia.extraction.util.{Language,Finder}
+import org.dbpedia.extraction.util.RichFile.toRichFile
+import scala.collection.mutable.{ArrayBuffer,HashMap}
+import java.util.Properties
+import java.io._
+import java.nio.charset.Charset
+import java.net.URL
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
+import java.util.zip.GZIPOutputStream
 
 /**
  * Loads the dump extraction configuration.
@@ -19,28 +22,19 @@ import org.dbpedia.extraction.dump.download.Download
  * TODO: clean up. The relations between the objects, classes and methods have become a bit chaotic.
  * There is no clean separation of concerns.
  */
-object ConfigLoader
+class ConfigLoader(config: Config)
 {
-    private var config: Config = null
-
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
      *
      * @param configFile The configuration file
      * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
      */
-    def load(configFile : File) : Traversable[ExtractionJob] =
+    def getExtractionJobs(): Traversable[ExtractionJob] =
     {
-        //Load properties
-        val properties = new Properties()
-        properties.load(new InputStreamReader(new FileInputStream(configFile), "UTF-8"))
-
-        //Load configuration
-        config = new Config(properties)
-
-        //Create a non-strict view of the extraction jobs
-        // TODO: why non-strict?
-        config.extractorClasses.keySet.view.map(createExtractionJob)
+      // Create a non-strict view of the extraction jobs
+      // non-strict because we want to create the extraction job when it is needed, not earlier
+      config.extractorClasses.keySet.view.map(createExtractionJob)
     }
     
     private val parser = WikiParser()
@@ -108,27 +102,49 @@ object ConfigLoader
 
         //Extractors
         val extractorClasses = config.extractorClasses(lang)
-        val extractor = new RootExtractor(CompositeExtractor.load(extractorClasses, context))
+        val extractor = CompositeExtractor.load(extractorClasses, context)
+        val datasets = extractor.datasets
         
-        /**
-         * Get target file path in config.dumpDir. Note that this function should be fast and not 
-         * access the file system - it is called not only in this class, but later during the 
-         * extraction process for each dataset.
-         */
-        def targetFile(suffix : String)(dataset: Dataset) =
-          finder.file(date, dataset.fileName+'.'+suffix)
-
-        var destinations = new ArrayBuffer[Destination]()
-        for ((suffix, format) <- config.formats) { 
-          destinations += new FileDestination(format, targetFile(suffix)) 
+        val charset = Charset.forName("UTF-8")
+        
+        var formats = new ArrayBuffer[Destination]()
+        for ((suffix, format) <- config.formats) {
+          
+          val destinations = new HashMap[Dataset, Destination]()
+          for (dataset <- datasets) {
+            val file = finder.file(date, dataset.fileName+'.'+suffix)
+            val zip = zipper(suffix)
+            val open = () => new OutputStreamWriter(zip(new FileOutputStream(file)), charset)
+            destinations(dataset) = new WriterDestination(open, format)
+          }
+          
+          formats += new DatasetDestination(destinations)
         }
         
-        destinations += new MarkerDestination(finder.file(date, Extraction.Complete), false, true)
+        var destination: Destination = new CompositeDestination(formats.toSeq: _*)
+        destination = new MarkerDestination(destination, finder.file(date, Extraction.Complete), false)
         
-        val jobLabel = "extraction job "+lang.wikiCode+" with "+extractorClasses.size+" extractors"
-        new ExtractionJob(extractor, context.articlesSource, new CompositeDestination(destinations.toSeq: _*), jobLabel)
+        val jobLabel = lang.wikiCode+" ("+extractorClasses.size+" extractors, "+datasets.size+" datasets)"
+        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, destination, jobLabel)
     }
 
+    /**
+     * @return stream zipper function
+     */
+    private def zipper(suffix: String): OutputStream => OutputStream = {
+      val dot = suffix.lastIndexOf('.')
+      val ext = suffix.substring(dot + 1)
+      zippers.get(ext) match {
+        case Some(zipper) => zipper
+        case None => identity
+      }
+    }
+    
+    private val zippers = Map[String, OutputStream => OutputStream] (
+      "gz" -> { new GZIPOutputStream(_) }, 
+      "bz2" -> { new BZip2CompressorOutputStream(_) } 
+    )
+    
     //language-independent val
     private lazy val _ontology =
     {

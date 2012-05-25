@@ -11,7 +11,7 @@ import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{MemorySource, WikiSource, XMLSource, Source}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{WriterDestination, FileDestination, CompositeDestination}
+import org.dbpedia.extraction.destinations.{WriterDestination,CompositeDestination}
 import java.util.logging.{Level, Logger}
 import java.awt.event.{ActionListener, ActionEvent}
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
@@ -190,8 +190,7 @@ object LiveExtractionConfigLoader extends ActionListener
 //          dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq", true)
 //        val destination = new CompositeDestination(tripleDestination, quadDestination)
         //println("Article source = " + articlesSource.size);
-        val writer = new StringWriter()
-        val TempDest = new WriterDestination(writer, new TerseFormatter(false, false));
+        val TempDest = new WriterDestination(() => new StringWriter(), new TerseFormatter(false, false));
         //val liveDest = new LiveUpdateDestination();
       
         //new ExtractionJob(extractor, articlesSource, tripleDestination, "Extraction Job for " + language.wikiCode + " Wikipedia");
@@ -261,8 +260,7 @@ object LiveExtractionConfigLoader extends ActionListener
                 CurrentWikiPage.title.namespace == Namespace.File ||
                 CurrentWikiPage.title.namespace == Namespace.Category)
                {
-                 val writer = new StringWriter()
-                 val TempDest = new WriterDestination(writer, new TerseFormatter(false, false));
+                 val TempDest = new WriterDestination(() => new StringWriter(), new TerseFormatter(false, false));
                  val CurrentPageNode = parser(CurrentWikiPage)
 
 

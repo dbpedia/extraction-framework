@@ -1,16 +1,21 @@
 package org.dbpedia.extraction.wiktionary
 
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
-import org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
+import org.dbpedia.extraction.destinations.{CompositeDestination,Dataset,Destination,DatasetDestination}
 import org.dbpedia.extraction.mappings._
 import java.net.URL
 import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import collection.immutable.ListMap
+import collection.mutable.HashMap
 import java.util.Properties
 import java.io.{FileReader, File}
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{WikiSource, MemorySource, XMLSource}
+import java.io.OutputStreamWriter
+import org.dbpedia.extraction.destinations.WriterDestination
+import java.io.FileOutputStream
+import java.nio.charset.Charset
 
 /**
  * Loads the dump extraction configuration.
@@ -81,17 +86,25 @@ object ConfigLoader
         //Extractor
         // val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
         // FIXME: the following line compiles, but will crash when it is executed.
-        val extractor = new RootExtractor(CompositeExtractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } ))
+        val extractor = CompositeExtractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } )
+        val datasets = extractor.datasets
         
+        val charset = Charset.forName("UTF-8")
         def destination(quads: Boolean, fileSuffix: String) = {
           val formatter = new TerseFormatter(quads, false)
-          new FileDestination(formatter, dataset => new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + '.' + fileSuffix))
+          val destinations = new HashMap[Dataset, Destination]()
+          for (dataset <- datasets) {
+            val file = new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + '.' + fileSuffix)
+            val open = () => new OutputStreamWriter(new FileOutputStream(file), charset)
+            destinations(dataset) = new WriterDestination(open, formatter)
+          }
+          new DatasetDestination(destinations)
         }
 
         //Destination
         val destinations = new CompositeDestination(destination(false, "nt"), destination(true, "nq"))
 
-        new ExtractionJob(extractor, articlesSource, destinations, "Extraction Job for " + language.wikiCode + " Wikipedia")
+        new ExtractionJob(new RootExtractor(extractor), articlesSource, destinations, "Extraction Job for " + language.wikiCode + " Wikipedia")
     }
 
     private class Config(config : Properties)

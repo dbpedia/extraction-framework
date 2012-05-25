@@ -1,69 +1,29 @@
 package org.dbpedia.extraction.dump.extract
 
-import java.io.File
+import java.util.Properties
+import java.io.{FileInputStream, InputStreamReader}
 
 /**
  * Dump extraction script.
  */
 object Extraction
 {
-    val Complete = "extraction-complete"
+  val Started = "extraction-started"
 
-    def main(args : Array[String]): Unit =
-    {
-        require(args != null && args.length == 1 && args(0).nonEmpty, "missing argument: config file name")
-        
-        val extraction = new ExtractionThread(args(0))
-        extraction.start()
-        extraction.join()
-    }
+  val Complete = "extraction-complete"
 
-    private class ExtractionThread(fileName : String) extends Thread
-    {
-        override def run
-        {
-            val configFile = new File(fileName)
+  def main(args : Array[String]): Unit =
+  {
+    require(args != null && args.length == 1 && args(0).nonEmpty, "missing argument: config file name")
+    
+    // Load properties
+    val properties = new Properties()
+    properties.load(new InputStreamReader(new FileInputStream(args(0)), "UTF-8"))
 
-            //Load extraction jobs from configuration
-            val extractionJobs = ConfigLoader.load(configFile)
+    //Load extraction jobs from configuration
+    val jobs = new ConfigLoader(new Config(properties)).getExtractionJobs()
 
-            //Execute the extraction jobs one by one and print the progress to the console
-            for(extractionJob <- extractionJobs)
-            {
-                // TODO: why this check? who should interrupt this thread?
-                if(isInterrupted) return
-
-                extractionJob.start()
-
-                try
-                {
-                    // FIXME: why use a thread when we just wait here for it to finish?
-                  
-                    while(extractionJob.isAlive)
-                    {
-                        val progress = extractionJob.progress
-                        if(progress.startTime.get > 0)
-                        {
-                            val time = (System.currentTimeMillis - progress.startTime.get).toDouble
-                            println("Extracted " + progress.extractedPages.get + " pages (Per page: " + (time / progress.extractedPages.get) + " ms; Failed pages: " + progress.failedPages.get + ").")
-                        }
-
-                        Thread.sleep(2000L)
-                    }
-                    println
-                }
-                catch
-                {
-                    case _ : InterruptedException =>
-                    {
-                        println("Shutting down...")
-                        extractionJob.interrupt()
-                        extractionJob.join()
-                        return
-                    }
-                }
-
-            }
-        }
-    }
+    //Execute the extraction jobs one by one
+    for (job <- jobs) job.run()
+  }
 }

@@ -1,26 +1,50 @@
 package org.dbpedia.extraction.dump.extract
 
+import java.util.logging.{Level, Logger}
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
+import org.dbpedia.extraction.util.StringUtils
 
 /**
  * Keeps track of the extraction progress.
  */
-class ExtractionProgress()
+class ExtractionProgress(label: String)
 {
+  private val logger = Logger.getLogger(getClass.getName)
+
   /**
    * The time when the page extraction was started. Milliseconds since midnight, January 1, 1970 UTC.
    */
-  val startTime = new AtomicLong()
+  private val startTime = new AtomicLong()
   
   /**
    * The number of pages which have been extracted successfully
    */
-  val extractedPages = new AtomicInteger()
+  private val allPages = new AtomicInteger()
   
   /**
    * The number of pages for which the extraction failed
    */
-  val failedPages = new AtomicInteger()
+  private val failedPages = new AtomicInteger()
+  
+  def start() {
+    startTime.set(System.currentTimeMillis)
+    logger.info(label + " started")
+  }
+  
+  def countPage(success: Boolean) {
+    if (! success) failedPages.incrementAndGet
+    if (allPages.incrementAndGet % 2000 == 0) log()
+  }
+  
+  def end() {
+    log()
+    logger.info(label + " finished")
+  }
+  
+  def log() {
+    val time = (System.currentTimeMillis - startTime.get)
+    println(label+" extracted "+allPages.get+" pages in "+StringUtils.prettyMillis(time)+" (per page: " + (time.toDouble / allPages.get) + " ms; failed pages: "+failedPages.get+").")
+  }
   
 }

@@ -1,139 +1,92 @@
 package org.dbpedia.extraction.dump.extract
 
+import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.RootExtractor
-import org.dbpedia.extraction.sources.{Source, WikiPage}
+import org.dbpedia.extraction.sources.{Source,WikiPage}
 import org.dbpedia.extraction.wikiparser.{Namespace,WikiParser}
-import java.util.concurrent.{ArrayBlockingQueue, TimeUnit}
-import java.util.logging.{Level, Logger}
-import scala.util.control.ControlThrowable
-import java.io.File
+import java.util.concurrent.{ExecutorService,ThreadPoolExecutor,ArrayBlockingQueue,TimeUnit}
 
 /**
  * Executes a extraction.
- * TODO: use fork-join or other java.util.concurrent tools instead of plain threads.
  *
  * @param extractor The Extractor
  * @param source The extraction source
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
  * @param label user readable label of this extraction job.
  */
-class ExtractionJob(extractor : RootExtractor, source : Source, destination : Destination, val label : String = "Extraction Job") extends Thread
+class ExtractionJob(extractor: RootExtractor, source: Source, destination: Destination, label: String)
 {
-    private val logger = Logger.getLogger(classOf[ExtractionJob].getName)
+  private val logger = Logger.getLogger(getClass.getName)
 
-    private val parser = WikiParser()
-
-    val progress = new ExtractionProgress()
-
-    // TODO: make size depend on CPUs?
-    private val pageQueue = new ArrayBlockingQueue[WikiPage](20)
+  private val progress = new ExtractionProgress(label)
+  
+  private def createExecutor(): ExecutorService = {
+  
+    // availableProcessors returns logical processors, not physical
+    val cpus = Runtime.getRuntime.availableProcessors
     
-    override def run() : Unit =
-    {
-        logger.info(label + " started")
-        
-        // one thread per core sounds good. availableProcessors returns logical processors, 
-        // not physical, which is good for us.
-        val cpus = java.lang.Runtime.getRuntime.availableProcessors
+    // The following is similar to Executors.newFixedThreadPool(cpus), but with added features.
+    // CallerRunsPolicy means that if all threads are busy, the master thread will extract pages. 
+    // But that means that it will not add pages to the queue for a while, so to make sure that
+    // the queue does not become empty, it must be large. Let's use 10 pages per thread.
+    
+    val policy = new ThreadPoolExecutor.CallerRunsPolicy()
+    val queue = new ArrayBlockingQueue[Runnable](cpus * 10)
+    
+    new ThreadPoolExecutor(cpus, cpus, 0L, TimeUnit.MILLISECONDS, queue, policy)
+  }
+    
+  private def shutdownExecutor(pool: ExecutorService): Unit = {
+    pool.shutdown()
+    while (! pool.awaitTermination(1L, TimeUnit.MINUTES)) {
+      // should never happen
+      logger.log(Level.SEVERE, "extraction did not terminate - waiting one more minute")
+    }
+  }
+  
+  def run(): Unit =
+  {
+    progress.start()
+    
+    destination.open()
 
-        val extractionJobs = for(_ <- 1 to cpus) yield new ExtractionThread()
+    val executor = createExecutor()
+    
+    for (page <- source) extractPage(executor, page)
+    
+    shutdownExecutor(executor)
+    
+    destination.close()
+    
+    progress.end()
+  }
+  
+  // Only extract from the following namespaces
+  private val namespaces = Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
 
-        try
-        {
-            progress.startTime.set(System.currentTimeMillis)
+  private def extractPage(executor: ExecutorService, page : WikiPage)
+  {
+    // If we use XMLSource, we probably checked this already, but anyway...
+    if (! namespaces.contains(page.title.namespace)) return
+    
+    executor.execute(new Runnable() { def run() { extractPage(page) } } )
+  }
+  
+  private val parser = WikiParser()
 
-            //Start extraction jobs
-            extractionJobs.foreach(_.start)
-
-            //Start loading pages
-            source.foreach(queuePage)
-        }
-        catch
-        {
-            case ex : ControlThrowable =>
-            case ex : InterruptedException =>
-            case ex => logger.log(Level.SEVERE, "Error reading pages. Shutting down...", ex)
-        }
-        finally
-        {
-            //Stop extraction jobs
-            extractionJobs.foreach(_.done)
-            extractionJobs.foreach(_.join)
-
-            destination.close()
-
-            logger.info(label + " finished")
-        }
+  private def extractPage(page : WikiPage)
+  {
+    var success = false
+    try {
+      val graph = extractor(parser(page))
+      destination.write(graph)
+      success = true
+    } catch {
+      case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"'", ex)
     }
     
-    // Only extract from the following namespaces
-    private val namespaces = Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
-
-    private def queuePage(page : WikiPage)
-    {
-        // If we use XMLSource, we probably checked this already, but anyway... 
-        if (! namespaces.contains(page.title.namespace)) return 
-
-        pageQueue.put(page)
-    }
-
-    /**
-     * An extraction thread.
-     * Takes pages from a queue and extracts them.
-     */
-    private class ExtractionThread() extends Thread
-    {
-        @volatile private var running = true
-
-        def done()
-        {
-            running = false
-        }
-
-        override def run() : Unit =
-        {
-            // Extract remaining pages:
-            // - If the whole show is running, we wait for pages as long as we want
-            // - If the master thread said we're done, we still keep going until the queue is empty
-            while(running || ! pageQueue.isEmpty)
-            {
-                // Note: it would be nice if we could just take() and wait forever, but then
-                // we might be left sleeping at the end when the queue becomes empty.
-                // TODO: use interrupt(), but do it correctly this time
-                val page = pageQueue.poll(100, TimeUnit.MILLISECONDS)
-                if(page != null)
-                {
-                    extractPage(page)
-                }
-                else
-                {
-                    Thread.sleep(10)
-                }
-            }
-        }
-
-        private def extractPage(page : WikiPage) : Unit =
-        {
-            //Extract the page
-            val success =
-                try
-                {
-                    val graph = extractor(parser(page))
-                    destination.write(graph)
-                    progress.extractedPages.incrementAndGet
-
-                    true
-                }
-                catch
-                {
-                    case ex : Exception =>
-                    {
-                        progress.failedPages.incrementAndGet
-                        logger.log(Level.WARNING, "Error processing page '" + page.title + "'", ex)
-                        false
-                    }
-                }
-        }
-    }
+    progress.countPage(success)
+  }
+    
 }
