@@ -7,7 +7,7 @@ import scala.collection.mutable.HashSet
 object Download extends DownloadConfig
 {
   /** name of marker file in wiki directory */
-  val Running = "download-running"
+  val Started = "download-started"
   
   /** name of marker file in wiki date directory */
   // Note: also used in CreateMappingStats.scala

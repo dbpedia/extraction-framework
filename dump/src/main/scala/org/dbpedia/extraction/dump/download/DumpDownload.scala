@@ -39,8 +39,8 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
     val mainDir = new File(baseDir, wiki)
     if (! mainDir.exists && ! mainDir.mkdirs) throw new Exception("Target directory ["+mainDir+"] does not exist and cannot be created")
     
-    val running = finder.file(Download.Running)
-    if (! running.createNewFile) throw new Exception("Another process is downloading files to ["+mainDir+"] - stop that process and remove ["+running+"]")
+    val started = finder.file(Download.Started)
+    if (! started.createNewFile) throw new Exception("Another process may be downloading files to ["+mainDir+"] - stop that process and remove ["+started+"]")
     try {
       
       // 1 - find all dates on the main page, sort them latest first
@@ -101,7 +101,7 @@ class DumpDownload(baseUrl : URL, baseDir : File, downloader : Downloader)
         println("date page '"+datePage+"' has no links to ["+links.mkString(",")+"]")
       }
     }
-    finally running.delete
+    finally started.delete
     
     throw new Exception("found no date in "+mainPage+" with files "+fileNames.mkString(","))
   }
