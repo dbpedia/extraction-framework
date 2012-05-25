@@ -24,6 +24,7 @@ object DBpediaDatasets
     val InterLanguageLinks = new Dataset("interlanguage_links")
     val Genders = new Dataset("genders")
     val TopicalConcepts = new Dataset("cat_mains")
+    val IriSameAsUri = new Dataset("iri_sameas_uri")
 
     /**
      * Mapping based
