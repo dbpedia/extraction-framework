@@ -9,7 +9,13 @@ import org.dbpedia.extraction.util.Language
  */
 object QuadBuilder {
 
-  def apply(language: Language, dataset: Dataset, predicate: OntologyProperty, datatype: Datatype = null)(subject: String, value: String, context: String) =
+  def apply(language: Language, dataset: Dataset, predicate: OntologyProperty, datatype: Datatype) (subject: String, value: String, context: String) =
+    new Quad(language, dataset, subject, predicate, value, context, datatype)
+  
+  def apply(language: Language, dataset: Dataset, predicate: OntologyProperty) (subject: String, value: String, context: String, datatype: Datatype) =
+    new Quad(language, dataset, subject, predicate, value, context, datatype)
+  
+  def apply(language: Language, dataset: Dataset) (subject: String, predicate: String, value: String, context: String, datatype: Datatype) =
     new Quad(language, dataset, subject, predicate, value, context, datatype)
   
 }

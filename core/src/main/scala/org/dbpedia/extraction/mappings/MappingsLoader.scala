@@ -1,16 +1,15 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
-
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
+
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
  * This should be replaced by a general loader later on, which loads the mapping objects based on the grammar (which can be defined using annotations)
@@ -152,14 +151,12 @@ object MappingsLoader
         }
         case "CombineDateMapping" =>
         {
-            new CombineDateMapping( loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
-                                    loadTemplateProperty(tnode, "templateProperty1"),
-                                    loadDatatype(tnode, "unit1", true, context.ontology),
-                                    loadTemplateProperty(tnode, "templateProperty2"),
-                                    loadDatatype(tnode, "unit2", true, context.ontology),
-                                    loadTemplateProperty(tnode, "templateProperty3", false),
-                                    loadDatatype(tnode, "unit3", false, context.ontology),
-                                    context )
+					// TODO: change the syntax on the mappings wiki to allow an arbitrary number of template properties.
+          val templateProperties = new HashMap[String, Datatype]()
+          templateProperties(loadTemplateProperty(tnode, "templateProperty1")) = loadDatatype(tnode, "unit1", true, context.ontology)
+          templateProperties(loadTemplateProperty(tnode, "templateProperty2")) = loadDatatype(tnode, "unit2", true, context.ontology)
+          templateProperties(loadTemplateProperty(tnode, "templateProperty3")) = loadDatatype(tnode, "unit3", true, context.ontology)
+          new CombineDateMapping(loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology), templateProperties, context)
         }
         case "CalculateMapping" =>
         {

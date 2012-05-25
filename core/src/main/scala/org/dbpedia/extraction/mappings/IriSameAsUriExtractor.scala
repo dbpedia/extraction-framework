@@ -22,7 +22,7 @@ extends Extractor
 
   val sameAsProperty = context.ontology.properties("owl:sameAs")
   
-  val quad = QuadBuilder(context.language, DBpediaDatasets.IriSameAsUri, sameAsProperty) _
+  val quad = QuadBuilder(context.language, DBpediaDatasets.IriSameAsUri, sameAsProperty, null) _
 
   override val datasets = Set(DBpediaDatasets.IriSameAsUri)
 
