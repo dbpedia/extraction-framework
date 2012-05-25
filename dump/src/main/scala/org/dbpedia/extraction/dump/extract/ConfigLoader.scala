@@ -3,8 +3,8 @@ package org.dbpedia.extraction.dump.extract
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{XMLSource,WikiSource}
-import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser}
+import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
+import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser,WikiTitle}
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichFile.toRichFile
@@ -13,8 +13,8 @@ import java.util.Properties
 import java.io._
 import java.nio.charset.Charset
 import java.net.URL
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
-import java.util.zip.GZIPOutputStream
+import org.apache.commons.compress.compressors.bzip2._
+import java.util.zip._
 
 /**
  * Loads the dump extraction configuration.
@@ -24,6 +24,8 @@ import java.util.zip.GZIPOutputStream
  */
 class ConfigLoader(config: Config)
 {
+     private val Utf8 = Charset.forName("UTF-8")
+        
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
      *
@@ -84,7 +86,7 @@ class ConfigLoader(config: Config)
     
             private val _articlesSource =
             {
-                XMLSource.fromFile(finder.file(date, config.source), language,                    
+                XMLSource.fromReader(reader(finder.file(date, config.source)), language,                    
                     title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
                              title.namespace == Namespace.Category || title.namespace == Namespace.Template)
             }
@@ -104,17 +106,13 @@ class ConfigLoader(config: Config)
         val extractor = CompositeExtractor.load(extractorClasses, context)
         val datasets = extractor.datasets
         
-        val charset = Charset.forName("UTF-8")
-        
         var formats = new ArrayBuffer[Destination]()
         for ((suffix, format) <- config.formats) {
           
           val destinations = new HashMap[Dataset, Destination]()
           for (dataset <- datasets) {
             val file = finder.file(date, dataset.fileName+'.'+suffix)
-            val zip = zipper(suffix)
-            val open = () => new OutputStreamWriter(zip(new FileOutputStream(file)), charset)
-            destinations(dataset) = new WriterDestination(open, format)
+            destinations(dataset) = new WriterDestination(writer(file), format)
           }
           
           formats += new DatasetDestination(destinations)
@@ -126,22 +124,46 @@ class ConfigLoader(config: Config)
         val jobLabel = lang.wikiCode+" ("+extractorClasses.size+" extractors, "+datasets.size+" datasets)"
         new ExtractionJob(new RootExtractor(extractor), context.articlesSource, destination, jobLabel)
     }
+    
+    private def writer(file: File): () => Writer = {
+      val zip = zipper(file.getName)
+      () => new OutputStreamWriter(zip(new FileOutputStream(file)), Utf8)
+    }
+
+    private def reader(file: File): () => Reader = {
+      val unzip = unzipper(file.getName)
+      () => new InputStreamReader(unzip(new FileInputStream(file)), Utf8)
+    }
 
     /**
      * @return stream zipper function
      */
-    private def zipper(suffix: String): OutputStream => OutputStream = {
-      val dot = suffix.lastIndexOf('.')
-      val ext = suffix.substring(dot + 1)
-      zippers.get(ext) match {
-        case Some(zipper) => zipper
-        case None => identity
-      }
+    private def zipper(name: String): OutputStream => OutputStream = {
+      zippers.getOrElse(suffix(name), identity)
+    }
+    
+    /**
+     * @return stream zipper function
+     */
+    private def unzipper(name: String): InputStream => InputStream = {
+      unzippers.getOrElse(suffix(name), identity)
+    }
+    
+    /**
+     * @return file suffix
+     */
+    private def suffix(name: String): String = {
+      name.substring(name.lastIndexOf('.') + 1)
     }
     
     private val zippers = Map[String, OutputStream => OutputStream] (
       "gz" -> { new GZIPOutputStream(_) }, 
       "bz2" -> { new BZip2CompressorOutputStream(_) } 
+    )
+    
+    private val unzippers = Map[String, InputStream => InputStream] (
+      "gz" -> { new GZIPInputStream(_) }, 
+      "bz2" -> { new BZip2CompressorInputStream(_) } 
     )
     
     //language-independent val
@@ -168,7 +190,7 @@ class ConfigLoader(config: Config)
       val finder = new Finder[File](config.dumpDir, Language("commons"))
       val date = latestDate(finder)
       val file = finder.file(date, config.source)
-      XMLSource.fromFile(file, Language.Commons, _.namespace == Namespace.File)
+      XMLSource.fromReader(reader(file), Language.Commons, _.namespace == Namespace.File)
     }
     
     private def latestDate(finder: Finder[_]): String = {
