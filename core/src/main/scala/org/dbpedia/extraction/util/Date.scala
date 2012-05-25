@@ -9,6 +9,7 @@ extends Ordered[Date]
 {
     private val calendar = Date.datatypeFactory.newXMLGregorianCalendar()
 
+    // Year '0000' will soon be allowed. See http://www.w3.org/TR/xmlschema-2/#year-zero
     require(year.isEmpty || year.get != 0, "year must not be 0")
     require(month.isEmpty || month.get != 0, "month must not be 0")
     require(day.isEmpty || day.get != 0, "day must not be 0")
