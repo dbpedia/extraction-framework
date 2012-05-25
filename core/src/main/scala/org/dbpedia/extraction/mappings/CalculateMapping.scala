@@ -118,7 +118,8 @@ class CalculateMapping( val templateProperty1 : String,
         //Write generic property
         graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, new Datatype("xsd:double"))
 
-        //Write specific properties
+        // Write specific properties
+        // FIXME: copy-and-paste in SimplePropertyMapping
         for(cls <- ontologyProperty.domain.relatedClasses)
         {
             for(specificPropertyUnit <- context.ontology.specializations.get((cls, ontologyProperty)))
