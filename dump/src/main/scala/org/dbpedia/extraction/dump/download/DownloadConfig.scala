@@ -11,7 +11,7 @@ class DownloadConfig
   // TODO: user might want to use a local file...
   val listUrl = new URL("http://s23.org/wikistats/wikipedias_csv.php")
   
-  // Most browsers would save the file with this name, because s23.org returns it in a http header.
+  // Most browsers would save the file with this name (which s23.org returns in a http header).
   val listName = "wikipedias.csv"
   
   var baseUrl : URL = null

@@ -46,11 +46,6 @@ object Download extends DownloadConfig
       println("parsing "+listFile)
       val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
       
-      // Note: downloading the file adds retry, logging etc and may aid debugging, 
-      // but we could do without:
-      // println("parsing "+listUrl)
-      // val wikis = WikiInfo.fromURL(listUrl, Codec.UTF8)
-      
       // for all wikis in one of the desired ranges...
       for (((from, to), files) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
       {
