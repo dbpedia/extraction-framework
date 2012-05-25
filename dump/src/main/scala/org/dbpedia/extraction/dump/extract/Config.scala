@@ -1,11 +1,13 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.mappings.Extractor
-import scala.collection.immutable.ListMap
+import scala.collection.mutable.HashMap
 import java.util.Properties
 import java.io.File
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
+import scala.collection.JavaConversions.asScalaSet // implicit
+import scala.collection.immutable.SortedMap
 
 private class Config(config: Properties)
 extends ConfigParser(config)
@@ -21,8 +23,7 @@ extends ConfigParser(config)
   if (dumpDir == null) throw error("property 'dir' not defined.")
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
-  val requireComplete = config.getProperty("require-download-complete") != null &&
-    config.getProperty("require-download-complete").toBoolean
+  val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
   /** Local ontology file, downloaded for speed and reproducibility */
   val ontologyFile = getFile("ontology")
@@ -31,14 +32,6 @@ extends ConfigParser(config)
   val mappingsDir = getFile("mappings")
   
   val formats = new PolicyParser(config).parseFormats()
-
-  /** Languages */
-  // TODO: add special parameters, similar to download:
-  // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
-  // extract=mapped:MappingExtractor means all languages with a mapping namespace
-  var languages = splitValue("languages", ',').map(Language)
-  if (languages.isEmpty) languages = Namespace.mappings.keySet.toList
-  languages = languages.sorted(Language.wikiCodeOrdering)
 
   val extractorClasses = loadExtractorClasses()
   
@@ -54,27 +47,34 @@ extends ConfigParser(config)
    */
   private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
   {
+    /** Languages */
+    // TODO: add special parameters, similar to download:
+    // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
+    // extract=mapped:MappingExtractor means all languages with a mapping namespace
+    var languages = splitValue("languages", ',').map(Language)
+    if (languages.isEmpty) languages = Namespace.mappings.keySet.toList
+    languages = languages.sorted(Language.wikiCodeOrdering)
+
     //Load extractor classes
     if(config.getProperty("extractors") == null) throw error("Property 'extractors' not defined.")
+    
     val stdExtractors = splitValue("extractors", ',').map(loadExtractorClass)
 
     //Create extractor map
-    var extractors = ListMap[Language, List[Class[_ <: Extractor]]]()
-    for(language <- languages) extractors += ((language, stdExtractors))
-
-    //Load language specific extractors
-    val LanguageExtractor = """extractors\.(.*)""".r
-
-    for(LanguageExtractor(code) <- config.stringPropertyNames.toArray)
-    {
-        val language = Language(code)
-        if (extractors.contains(language))
-        {
-            extractors += language -> (stdExtractors ::: splitValue("extractors."+code, ',').map(loadExtractorClass))
-        }
+    val classes = new HashMap[Language, List[Class[_ <: Extractor]]]()
+    
+    for(language <- languages) {
+      classes(language) = stdExtractors
     }
 
-    extractors
+    for (key <- config.stringPropertyNames) {
+      if (key.startsWith("extractors.")) {
+        val language = Language(key.substring("extractors.".length()))
+        classes(language) = stdExtractors ++ splitValue(key, ',').map(loadExtractorClass)
+      }
+    }
+
+    SortedMap(classes.toSeq: _*)(Language.wikiCodeOrdering)
   }
 
   private def loadExtractorClass(name: String): Class[_ <: Extractor] = {

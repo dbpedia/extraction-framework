@@ -34,7 +34,7 @@ class ConfigLoader(config: Config)
     {
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
-      config.extractorClasses.keySet.view.map(createExtractionJob)
+      config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2))
     }
     
     private val parser = WikiParser()
@@ -42,7 +42,7 @@ class ConfigLoader(config: Config)
     /**
      * Creates ab extraction job for a specific language.
      */
-    private def createExtractionJob(lang : Language) : ExtractionJob =
+    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: Extractor]]) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang)
 
@@ -101,7 +101,6 @@ class ConfigLoader(config: Config)
         }
 
         //Extractors
-        val extractorClasses = config.extractorClasses(lang)
         val extractor = CompositeExtractor.load(extractorClasses, context)
         val datasets = extractor.datasets
         
