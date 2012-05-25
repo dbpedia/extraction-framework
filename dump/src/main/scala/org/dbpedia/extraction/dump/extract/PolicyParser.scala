@@ -125,8 +125,10 @@ extends ConfigParser(config)
     
     // "*" matches all dbpedia domains
     if (codes("*")) {
-      uri => 
-        uri.getHost.equals("dbpedia.org") || uri.getHost.endsWith(".dbpedia.org") 
+      uri =>
+        // host can be null for some URIs, e.g. java.net.URI doesn't understand IDN
+        val host = uri.getHost
+        host != null && (host.equals("dbpedia.org") || host.endsWith(".dbpedia.org")) 
     }
     else { 
       val domains = codes.map(Language(_).dbpediaDomain)
