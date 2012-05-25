@@ -10,7 +10,7 @@ import java.io.InputStreamReader
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */
 
-class XMLFileSource(resource: Resource, filter: (WikiTitle => Boolean)) extends Source
+class XMLFileSource(resource: Resource, filter: WikiTitle => Boolean) extends Source
 {
   def this(resource: Resource, namespaceNumbers: java.util.List[java.lang.Integer]) = {
     this (resource, title => {
@@ -23,12 +23,9 @@ class XMLFileSource(resource: Resource, filter: (WikiTitle => Boolean)) extends 
 
   override def foreach[U](proc: WikiPage => U): Unit =
   {
-    val jfilter = {
-      title: WikiTitle => filter(title): java.lang.Boolean
-    }
-    val stream = resource.getInputStream
-    new WikipediaDumpParser(new InputStreamReader(stream, "UTF-8"), null, null, jfilter, proc).run()
-    stream.close()
+    val stream = new InputStreamReader(resource.getInputStream, "UTF-8")
+    try new WikipediaDumpParser(stream, null, filter.asInstanceOf[WikiTitle => java.lang.Boolean], proc).run()
+    finally stream.close()
   }
 
   override def hasDefiniteSize = true

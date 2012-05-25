@@ -82,20 +82,17 @@ public class WikipediaDumpParser
   /**
    * @param stream The character stream. Will be closed after reading. We have to use a Reader instead 
    * of an InputStream because of this bug: https://issues.apache.org/jira/browse/XERCESJ-1257
-   * @param namespace expected namespace. If null, namespace is not checked, only local element names.
    * @param language language used to parse page titles. If null, get language from siteinfo.
    * If given, ignore siteinfo element. TODO: use a boolean parameter instead to decide if siteinfo should be used.
    * @param filter page filter. Only matching pages will be processed.
    * @param processor page processor
    */
-  public WikipediaDumpParser(Reader stream, String namespace, Language language, Function1<WikiTitle, Boolean> filter, Function1<WikiPage, ?> processor)
+  public WikipediaDumpParser(Reader stream, Language language, Function1<WikiTitle, Boolean> filter, Function1<WikiPage, ?> processor)
   {
     if (stream == null) throw new NullPointerException("file");
     if (processor == null) throw new NullPointerException("processor");
     
     _stream = stream;
-    if (namespace != null && ! namespace.equals(_namespace)) throw new IllegalArgumentException("namespace must be ["+_namespace+"] or null, but is ["+namespace+"]");
-    // _namespace = namespace;
     _language = language;
     _filter = filter;
     _processor = processor;

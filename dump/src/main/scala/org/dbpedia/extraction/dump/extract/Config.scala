@@ -24,6 +24,8 @@ extends ConfigParser(config)
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
+  
+  val source = config.getProperty("source", "pages-articles.xml")
 
   /** Local ontology file, downloaded for speed and reproducibility */
   val ontologyFile = getFile("ontology")
