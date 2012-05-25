@@ -22,6 +22,7 @@ abstract class UriTripleBuilder(policies: Array[Policy] = null) extends TripleBu
   protected def parseUri(str: String, pos: Int): String = {
     try {
       var uri = new URI(str)
+      if (! uri.isAbsolute()) throw new URISyntaxException(str, "URI is not absolute (but must be in RDF)")
       if (policies != null) uri = policies(pos)(uri)
       uri.toString
     } catch {
