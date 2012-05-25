@@ -40,12 +40,9 @@ object LiveExtractionSource
     {
         override def foreach[U](f : WikiPage => U) : Unit =
         {
-            val javaFilter = { title : WikiTitle => filter(title) : java.lang.Boolean }
-            val stream = new FileInputStream(file)
-
-            new WikipediaDumpParser(new InputStreamReader(stream, "UTF-8"), null, null, javaFilter, f).run()
-
-            stream.close()
+            val stream = new InputStreamReader(new FileInputStream(file), "UTF-8")
+            try new WikipediaDumpParser(stream, null, filter.asInstanceOf[WikiTitle => java.lang.Boolean], f).run()
+            finally stream.close()
         }
 
         override def hasDefiniteSize = true

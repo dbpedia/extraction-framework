@@ -84,7 +84,7 @@ class ConfigLoader(config: Config)
     
             private val _articlesSource =
             {
-                XMLSource.fromFile(finder.file(date, "pages-articles.xml"), language,                    
+                XMLSource.fromFile(finder.file(date, config.source), language,                    
                     title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
                              title.namespace == Namespace.Category || title.namespace == Namespace.Template)
             }
@@ -167,12 +167,12 @@ class ConfigLoader(config: Config)
     {
       val finder = new Finder[File](config.dumpDir, Language("commons"))
       val date = latestDate(finder)
-      val file = finder.file(date, "pages-articles.xml")
+      val file = finder.file(date, config.source)
       XMLSource.fromFile(file, Language.Commons, _.namespace == Namespace.File)
     }
     
     private def latestDate(finder: Finder[_]): String = {
-      val fileName = if (config.requireComplete) Download.Complete else "pages-articles.xml"
+      val fileName = if (config.requireComplete) Download.Complete else config.source
       val dates = finder.dates(fileName)
       if (dates.isEmpty) throw new IllegalArgumentException("found no directory with file '"+finder.wikiName+"-[YYYYMMDD]-"+fileName+"'")
       dates.last
