@@ -75,7 +75,7 @@ object Date
     // store the result of this expensive call
     private val datatypeFactory = DatatypeFactory.newInstance()
     
-    def merge(dates : List[Date], datatype : Datatype) : Date =
+    def merge(dates : Seq[Date], datatype : Datatype) : Date =
     {
         require(! dates.isEmpty, "dates are required")
         

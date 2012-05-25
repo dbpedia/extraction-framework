@@ -125,7 +125,7 @@ class PropertyCollector(mapping: Mapping[TemplateNode]) {
     case m: SimplePropertyMapping => this + m.templateProperty
     case m: GeoCoordinatesMapping => this + m.coordinates + m.latitude + m.longitude + m.longitudeDegrees + m.longitudeMinutes + m.longitudeSeconds + m.longitudeDirection + m.latitudeDegrees + m.latitudeMinutes + m.latitudeSeconds + m.latitudeDirection
     case m: CalculateMapping => this + m.templateProperty1 + m.templateProperty2
-    case m: CombineDateMapping => this + m.templateProperty1 + m.templateProperty2 + m.templateProperty3
+    case m: CombineDateMapping => m.templateProperties.keys.foreach(this + _)
     case m: DateIntervalMapping => this + m.templateProperty
     case m: IntermediateNodeMapping => m.mappings.foreach(propertyMapping)
     case m: ConstantMapping => // ignore

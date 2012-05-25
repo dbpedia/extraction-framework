@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.{Logger, Level}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import java.net.{URLEncoder, URL}
 import xml.XML
@@ -43,6 +43,9 @@ extends Extractor
     // lazy so testing does not need ontology
     private lazy val longProperty = context.ontology.properties("abstract")
     
+    private lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null) _
+    private lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _
+    
     override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
     override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
@@ -69,8 +72,8 @@ extends Extractor
         val shortText = short(text)
 
         //Create statements
-        val quadLong = new Quad(context.language, DBpediaDatasets.LongAbstracts, subjectUri, longProperty, text, pageNode.sourceUri)
-        val quadShort = new Quad(context.language, DBpediaDatasets.ShortAbstracts, subjectUri, shortProperty, shortText, pageNode.sourceUri)
+        val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
+        val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
 
         if(shortText.isEmpty)
         {
