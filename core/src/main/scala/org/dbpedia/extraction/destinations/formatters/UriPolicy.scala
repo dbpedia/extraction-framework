@@ -15,6 +15,7 @@ object UriPolicy {
   /**
    * A predicate decides if a policy should be applied for the given DBpedia URI.
    * Human-readable type alias.
+   * TOOD: change type to (URI, Int) => Boolean.
    */
   type Predicate = URI => Boolean
   
