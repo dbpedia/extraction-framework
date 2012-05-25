@@ -111,7 +111,7 @@ class Extraction(@PathParam("lang") langCode : String)
           if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
           else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
         
-        val destination = new WriterDestination(writer, formatter)
+        val destination = new WriterDestination(() => writer, formatter)
         Server.instance.extractor.extract(source, destination, language)
         destination.close()
         
@@ -130,7 +130,7 @@ class Extraction(@PathParam("lang") langCode : String)
         val writer = new StringWriter
         val formatter = TriX.writeHeader(writer, 2)
         val source = XMLSource.fromXML(xml, language)
-        val destination = new WriterDestination(writer, formatter)
+        val destination = new WriterDestination(() => writer, formatter)
         
         Server.instance.extractor.extract(source, destination, language)
         destination.close()

@@ -132,7 +132,8 @@ public class LiveUpdateDestination implements Destination{
 
     }
 
-
+    public void open() {}
+    
     private static <T> T timedCall(FutureTask<T> task, long timeout, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
         THREAD_POOL.execute(task);
         return task.get(timeout, timeUnit);

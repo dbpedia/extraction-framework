@@ -52,6 +52,9 @@ public class SQLFileDestination implements Destination {
     }
 
     @Override
+    public void open() {}
+    
+    @Override
     public synchronized void write(Seq<Quad> graph){
 
         Function1<Quad,Dataset> quadDataset = new AbstractFunction1<Quad,Dataset>() {

@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.destinations.formatters
 
 import org.dbpedia.extraction.util.XmlUtils.escape
-import java.net.URI
 import UriPolicy._
 import TriXBuilder._
 
@@ -22,34 +21,38 @@ extends UriTripleBuilder(process) {
   
   private val sb = new java.lang.StringBuilder
   
+  // public methods implementing TripleBuilder
+  
   override def start(context: String): Unit = { 
-    startTag("graph")
+    this startTag "graph"
     if (quads) uri(context, CONTEXT)
-    startTag("triple")
+    this startTag "triple"
   }
   
   override def uri(value: String, pos: Int): Unit = {
-    this add spaces(depth) add ("<uri>") escapeUri(value, pos) add ("</uri>\n")
+    this add spaces(depth) add "<uri>" escapeUri(value, pos) add "</uri>\n"
   }
   
   override def plainLiteral(value: String, lang: String): Unit = {
-    this add spaces(depth) add ("<plainLiteral xml:lang=\"") add(lang) add("\">")
+    this add spaces(depth) add "<plainLiteral xml:lang=\"" add(lang) add "\">"
     escape(sb, value)
-    add ("</plainLiteral>\n")
+    this add "</plainLiteral>\n"
   }
   
   override def typedLiteral(value: String, datatype: String): Unit = {
-    this add spaces(depth) add ("<typedLiteral datatype=\"") escapeUri(datatype, DATATYPE) add("\">")
+    this add spaces(depth) add "<typedLiteral datatype=\"" escapeUri(datatype, DATATYPE) add "\">"
     escape(sb, value)
-    this add ("</typedLiteral>\n")
+    this add "</typedLiteral>\n"
   }
   
   override def end(context: String): Unit = {
-    endTag("triple")
-    endTag("graph")
+    this endTag "triple"
+    this endTag "graph" 
   }
   
-  override def toString: String = sb.toString
+  override def result = sb.toString
+  
+  // private helper methods
   
   private def escapeUri(str: String, pos: Int): TriXBuilder = {
     val uri = parseUri(str, pos)

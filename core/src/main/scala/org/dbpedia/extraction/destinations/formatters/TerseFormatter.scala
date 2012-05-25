@@ -7,17 +7,10 @@ import UriPolicy._
 /**
  * TODO: add functionality - the comments could contain more useful info
  */
-class TerseFormatter(renderer: Quad => String) extends Formatter
+class TerseFormatter(quads: Boolean, turtle: Boolean, policy: Policy = identity)
+extends TripleFormatter(() => new TerseBuilder(quads, turtle, policy))
 {
-  def this(builder: => TripleBuilder) = 
-    this(new TripleRenderer(builder))
-  
-  def this(quads: Boolean, turtle: Boolean, policy: Policy = identity) =
-    this(new TerseBuilder(quads, turtle, policy))
-
   override def header = "# started "+formatCurrentTimestamp+"\n"
   
   override def footer = "# completed "+formatCurrentTimestamp+"\n"
-  
-  override def render(quad: Quad) = renderer(quad)
 }

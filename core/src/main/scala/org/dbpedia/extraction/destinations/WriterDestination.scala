@@ -4,35 +4,33 @@ import java.io.Writer
 import org.dbpedia.extraction.destinations.formatters.Formatter
 
 /**
- * Writes all statements to a writer.
- *
- * This class is thread-safe.
- *
- * @param formatter The formatter used to serialize the statements.
+ * Writes quads to a writer.
+ * 
+ * @param called in open() to obtain the writer.
  */
-class WriterDestination(writer: Writer, formatter : Formatter) extends Destination
+class WriterDestination(factory: () => Writer, formatter : Formatter)
+extends Destination
 {
-    private var header = false
-
-    private var closed = false
-
-    override def write(graph : Seq[Quad]) = synchronized {
-      
-      if(closed) throw new IllegalStateException("Trying to write to a closed destination")
-
-      if(! header) {
-        writer.write(formatter.header)
-        header = true
-      }
-
-      for(quad <- graph) {
-        writer.write(formatter.render(quad))
-      }
+  private var writer: Writer = null
+  
+  override def open() = {
+    writer = factory()
+    writer.write(formatter.header)
+  }
+  
+  /**
+   * Note: using synchronization here is not strictly necessary (writers should be thread-safe),
+   * but without it, different sequences of quads will be interleaved, which is harder to read
+   * and makes certain parsing optimizations impossible.
+   */
+  override def write(graph : Seq[Quad]) = synchronized {
+    for(quad <- graph) {
+      writer.write(formatter.render(quad))
     }
+  }
 
-    override def close() = synchronized {
-      if (! header) writer.write(formatter.header)
-      writer.write(formatter.footer)
-      closed = true
-    }
+  override def close() = {
+    writer.write(formatter.footer)
+    writer.close()
+  }
 }

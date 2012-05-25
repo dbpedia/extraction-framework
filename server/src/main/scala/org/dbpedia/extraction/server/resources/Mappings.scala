@@ -243,7 +243,7 @@ class Mappings(@PathParam("lang") langCode : String)
         // if there are slashes in the title, the stylesheets are further up in the directory tree
         val writer = new StringWriter
         val formatter = TriX.writeHeader(writer, title.count(_ == '/')+3)
-        val destination = new WriterDestination(writer, formatter)
+        val destination = new WriterDestination(() => writer, formatter)
         // TODO: one call to api.php is probably enough
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         // extract at most 1000 triples

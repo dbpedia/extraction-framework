@@ -22,10 +22,10 @@ extends UriTripleBuilder(policy) {
   }
   
   override def uri(str: String, pos: Int): Unit = {
+    val uri = parseUri(str, pos)
     // If URI is bad, comment out whole triple (may happen multiple times)
     // Note: If a bad uri contains ">", the line cannot be parsed - but it's broken anyway.
     // For Turtle, we could fix this by escaping ">" as "\>", but for N-Triples, we can't.
-    val uri = parseUri(str, pos)
     if (uri.startsWith(badUri)) sb.insert(0, "# ")
     this add '<' escape uri add "> "
   }
@@ -54,9 +54,7 @@ extends UriTripleBuilder(policy) {
     this add ".\n"
   }
   
-  override def toString: String = {
-    sb toString
-  }
+  override def result = sb.toString
   
   private def add(s: String): TerseBuilder = { 
     sb append s
