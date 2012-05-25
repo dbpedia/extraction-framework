@@ -4,9 +4,64 @@ import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.{HashMap,ArrayBuffer}
+import scala.collection.immutable.ListMap
 import scala.collection.Map
-import scala.collection.JavaConversions.asScalaSet // implicit
+import scala.collection.JavaConversions.asScalaSet
 import java.util.Properties
+
+import PolicyParser._
+
+object PolicyParser {
+  
+  /**
+   * Key is full policy name, value is tuple of priority, position code and factory.
+   */
+  val policies: Map[String, (Int, Int, Predicate => Policy)] = locally {
+    
+    /**
+     * Triples of prefix, priority and factory.
+     * 
+     * Priority is important: First convert IRI to URI, then append '_' if necessary,
+     * then convert specific domain to generic domain. The second step must happen 
+     * after URI conversion (because a URI may need an underscore where a IRI doesn't), 
+     * and before the third step (because we need the specific domain to decide which 
+     * URIs should be made xml-safe).
+     */
+    val policies = Seq[(String, Int, Predicate => Policy)] (
+      ("uri", 1, uri),
+      ("xml-safe", 2, xmlSafe),
+      ("generic", 3, generic)
+    )
+    
+    /**
+     * Tuples of suffix and position code.
+     */
+    val positions = Seq[(String, Int)] (
+      ("", ALL),
+      ("-subjects", SUBJECT),
+      ("-predicates", PREDICATE),
+      ("-objects", OBJECT),
+      ("-datatypes", DATATYPE),
+      ("-contexts", CONTEXT)
+    )
+    
+    val product = for ((prefix, prio, factory) <- policies; (suffix, position) <- positions) yield {
+      prefix+suffix -> (prio, position, factory)
+    }
+    
+    product.toMap
+  }
+  
+  val formatters = Map[String, Array[Policy] => Formatter] (
+    "trix-triples" -> { new TriXFormatter(false, _) },
+    "trix-quads" -> { new TriXFormatter(true, _) },
+    "turtle-triples" -> { new TerseFormatter(false, true, _) },
+    "turtle-quads" -> { new TerseFormatter(true, true, _) },
+    "n-triples" -> { new TerseFormatter(false, false, _) },
+    "n-quads" -> { new TerseFormatter(true, false, _) }
+  )
+
+}
 
 class PolicyParser(config : Properties)
 extends ConfigParser(config)
@@ -19,9 +74,9 @@ extends ConfigParser(config)
   /**
    * parse all URI policy lines
    */
-  private def parsePolicies(): Map[String, Policy] = {
+  private def parsePolicies(): Map[String, Array[Policy]] = {
     
-    val policies = new HashMap[String, Policy]()
+    val policies = new HashMap[String, Array[Policy]]()
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("uri-policy")) {
         try policies(key) = parsePolicy(key)
@@ -35,7 +90,7 @@ extends ConfigParser(config)
   /**
    * Parse all format lines.
    */
-  private def parseFormats(policies: Map[String, Policy]): Map[String, Formatter] = {
+  private def parseFormats(policies: Map[String, Array[Policy]]): Map[String, Formatter] = {
     
     val formats = new HashMap[String, Formatter]()
     
@@ -51,7 +106,7 @@ extends ConfigParser(config)
         val formatter = formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString("'","','","'")))
         
         val policy =
-          if (settings.length == 1) identity
+          if (settings.length == 1) null
           else policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
         
         formats(suffix) = formatter.apply(policy)
@@ -60,80 +115,61 @@ extends ConfigParser(config)
     
     formats
   }
-    
-  /**
-   * Order is important here: First convert IRI to URI, then append '_' if necessary,
-   * then convert specific domain to generic domain. The second step must happen 
-   * after URI conversion (because a URI may need an underscore where a IRI doesn't), 
-   * and before the third step (because we need the specific domain to decide which 
-   * URIs should be made xml-safe).
-   * 
-   * In each tuple, the key is the policy name. The value is a policy-factory that
-   * takes a predicate. The predicate decides for which DBpedia URIs a policy
-   * should be applied. We pass a predicate to the policy-factory to get the policy.
-   */
-  private val policyFactories = Seq[(String, Predicate => Policy)] (
-    "uris" -> uris,
-    "xml-safe" -> xmlSafe,
-    "generic" -> generic
-  )
-
-  private val formatters = Map[String, Policy => Formatter] (
-    "trix-triples" -> { new TriXFormatter(false, _) },
-    "trix-quads" -> { new TriXFormatter(true, _) },
-    "turtle-triples" -> { new TerseFormatter(false, true, _) },
-    "turtle-quads" -> { new TerseFormatter(true, true, _) },
-    "n-triples" -> { new TerseFormatter(false, false, _) },
-    "n-quads" -> { new TerseFormatter(true, false, _) }
-  )
-
+  
   /**
    * Parses a list of languages like "en,fr" or "*" or even "en,*,fr"
    */
   private def parsePredicate(languages: String): Predicate = {
     
     val codes = split(languages, ',').toSet
-    val domains = codes.map { code => if (code == "*") "*" else Language(code).dbpediaDomain }
     
-    if (domains("*")) { uri => uri.getHost.equals("dbpedia.org") || uri.getHost.endsWith(".dbpedia.org") }
-    else { uri => domains(uri.getHost) }
+    // "*" matches all dbpedia domains
+    if (codes("*")) {
+      uri => 
+        uri.getHost.equals("dbpedia.org") || uri.getHost.endsWith(".dbpedia.org") 
+    }
+    else { 
+      val domains = codes.map(Language(_).dbpediaDomain)
+      uri =>
+        domains(uri.getHost) 
+    }
   }
   
   /**
-   * Parses a policy line like "uri-policy.main=uris:en,fr; generic:en"
+   * Parses a policy line like "uri-policy.main=uri:en,fr; generic:en"
    */
-  private def parsePolicy(key: String): Policy = {
+  private def parsePolicy(key: String): Array[Policy] = {
     
-    val predicates = new HashMap[String, Predicate]()
+    val predicates = Array.fill(POSITIONS)(new ArrayBuffer[(Int, Policy)])
     
-    // parse all predicates
+    // parse a value like "uri:en,fr; xml-safe-predicates:*"
     for (policy <- splitValue(key, ';')) {
+      // parse a part like "uri:en,fr" or "xml-safe-predicates:*"
       split(policy, ':') match {
-        case List(key, languages) => {
-          require(! predicates.contains(key), "duplicate policy '"+key+"'")
-          predicates(key) = parsePredicate(languages)
-        }
-        case _ => throw error("invalid format: '"+policy+"'")
+        case List(name, languages) =>
+          // get factory for a name like "xml-safe-predicates"
+          policies.get(name) match {
+            case Some((prio, position, factory)) => {
+              // parse a predicate like "en,fr" or "*", add position
+              val predicate = parsePredicate(languages)
+              val entry = (prio -> factory(predicate))
+              if (position == ALL) predicates.foreach(_ += entry)
+              else predicates(position) += entry
+            }
+            case None => throw error("unknown policy name in '"+policy+"'")
+          }
+        case _ => throw error("invalid format in '"+policy+"'")
       }
     }
     
-    require(predicates.nonEmpty, "found no URI policies")
+    // order by priority and drop priority
+    val ordered = predicates.map(_.sortBy(_._1).map(_._2))
     
-    val policies = new ArrayBuffer[Policy]()
+    // replace empty policy lists by identity
+    ordered.foreach(list => if (list.isEmpty) list += identity)
     
-    // go through known policies in correct order, get predicate, and create policy
-    for ((key, factory) <- policyFactories; predicate <- predicates.remove(key)) {
-      policies += factory(predicate)
-    }
-    
-    require(predicates.isEmpty, "unknown URI policies "+predicates.keys.mkString("'","','","'"))
-    
-    // The resulting policy is the concatenation of all policies.
-    (iri, pos) => {
-      var result = iri
-      for (policy <- policies) result = policy(result, pos)
-      result
-    }
+    // concatenate policy lists into one policy
+    ordered.map(_.reduceLeft(_ andThen _))
   }
   
 }

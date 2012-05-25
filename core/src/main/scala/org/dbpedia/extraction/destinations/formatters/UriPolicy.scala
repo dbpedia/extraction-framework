@@ -7,33 +7,34 @@ import scala.xml.Utility.{isNameChar,isNameStart}
 object UriPolicy {
   
   /**
-   * A policy takes a URI and its position in the quad and may return the given URI
-   * or a transformed version of it. Human-readable type alias.
+   * A policy takes a URI and may return the given URI or a transformed version of it. 
+   * Human-readable type alias.
    */
-  type Policy = (URI, Int) => URI
+  type Policy = URI => URI
     
   /**
    * A predicate decides if a policy should be applied for the given DBpedia URI.
    * Human-readable type alias.
    */
-  type Predicate = (URI, Int) => Boolean
+  type Predicate = URI => Boolean
   
   // codes for URI positions
-  val SUBJECT = 1
-  val PREDICATE = 2
-  val OBJECT = 4
-  val DATATYPE = 8
-  val CONTEXT = 16
+  val SUBJECT = 0
+  val PREDICATE = 1
+  val OBJECT = 2
+  val DATATYPE = 3
+  val CONTEXT = 4
+  
+  // total number of URI positions
+  val POSITIONS = 5
   
   // indicates that a predicate matches all positions
   val ALL = -1
   
-  val identity: Policy = { (iri, _) => iri }
-
   def uri(activeFor: Predicate): Policy = {
     
-    (iri, pos) => 
-    if (activeFor(iri, pos)) {
+    iri => 
+    if (activeFor(iri)) {
       new URI(iri.toASCIIString)
     }
     else {
@@ -43,8 +44,8 @@ object UriPolicy {
 
   def generic(activeFor: Predicate): Policy = {
     
-    (iri, pos) => 
-    if (activeFor(iri, pos)) {
+    iri => 
+    if (activeFor(iri)) {
       
       val scheme = iri.getScheme
       val user = iri.getRawUserInfo
@@ -93,8 +94,8 @@ object UriPolicy {
    */
   def xmlSafe(activeFor: Predicate): Policy = {
     
-    (iri, pos) => 
-    if (activeFor(iri, pos)) {
+    iri => 
+    if (activeFor(iri)) {
       
       val scheme = iri.getScheme
       val user = iri.getRawUserInfo

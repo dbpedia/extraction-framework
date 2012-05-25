@@ -10,9 +10,12 @@ import UriPolicy._
  * Helps to build one triple/quad line in Turtle/Turtle-Quads/N-Triples/N-Quads format.
  * 
  * Objects of this class are not re-usable - create a new object for each triple.
- */
-class TerseBuilder(quads: Boolean, turtle: Boolean, policy: Policy) 
-extends UriTripleBuilder(policy) {
+ * 
+ * @param policies Mapping from URI positions (as defined in UriPolicy) to URI policy functions.
+ * Must have five (UriPolicy.POSITIONS) elements. If null, URIs will not be modified.
+*/
+class TerseBuilder(quads: Boolean, turtle: Boolean, policies: Array[Policy] = null) 
+extends UriTripleBuilder(policies) {
   
   // Scala's StringBuilder doesn't have appendCodePoint
   private val sb = new java.lang.StringBuilder
