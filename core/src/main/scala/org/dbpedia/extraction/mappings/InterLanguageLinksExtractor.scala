@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
  */
 class InterLanguageLinksExtractor(context: { def ontology : Ontology; def language : Language }) extends Extractor
 {
-  private val interLanguageLinksProperty = context.ontology.properties("interLanguageLinks")
+  private val interLanguageLinksProperty = context.ontology.properties("wikiPageInterLanguageLink")
 
   override val datasets = Set(DBpediaDatasets.InterLanguageLinks)
 
