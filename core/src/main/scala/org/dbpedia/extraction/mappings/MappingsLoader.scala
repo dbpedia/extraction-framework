@@ -153,9 +153,12 @@ object MappingsLoader
         {
 					// TODO: change the syntax on the mappings wiki to allow an arbitrary number of template properties.
           val templateProperties = new HashMap[String, Datatype]()
-          templateProperties(loadTemplateProperty(tnode, "templateProperty1")) = loadDatatype(tnode, "unit1", true, context.ontology)
-          templateProperties(loadTemplateProperty(tnode, "templateProperty2")) = loadDatatype(tnode, "unit2", true, context.ontology)
-          templateProperties(loadTemplateProperty(tnode, "templateProperty3")) = loadDatatype(tnode, "unit3", true, context.ontology)
+          val templateProperty1 = loadTemplateProperty(tnode, "templateProperty1", true)
+          templateProperties(templateProperty1) = loadDatatype(tnode, "unit1", true, context.ontology)
+          val templateProperty2 = loadTemplateProperty(tnode, "templateProperty2", true)
+          templateProperties(templateProperty2) = loadDatatype(tnode, "unit2", true, context.ontology)
+          val templateProperty3 = loadTemplateProperty(tnode, "templateProperty3", false)
+          if (templateProperty3 != null) templateProperties(templateProperty3) = loadDatatype(tnode, "unit3", true, context.ontology)
           new CombineDateMapping(loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology), templateProperties, context)
         }
         case "CalculateMapping" =>
