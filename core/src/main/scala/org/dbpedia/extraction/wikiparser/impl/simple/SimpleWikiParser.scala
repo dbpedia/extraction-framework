@@ -597,10 +597,7 @@ final class SimpleWikiParser extends WikiParser
             }
         }
         
-        val node = new TableCellNode(nodes, startLine)
-        node.setAnnotation("rowspan", rowspan)
-        node.setAnnotation("colspan", colspan)
-        node
+        new TableCellNode(nodes, startLine, rowspan, colspan)
     }
 
     private def parseTableParam(name : String, str : String) : Int =

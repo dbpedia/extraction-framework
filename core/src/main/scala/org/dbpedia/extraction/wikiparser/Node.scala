@@ -20,7 +20,7 @@ abstract class Node(val children : List[Node], val line : Int)
     //Set the parent of all children
     for(child <- children) child.parent = this
 
-    private val annotations = new HashMap[String, Any]()
+    private val annotations = new HashMap[AnnotationKey[_], Any]()
 
     /**
      * Convert back to original (or equivalent) wiki markup string.
@@ -97,9 +97,9 @@ abstract class Node(val children : List[Node], val line : Int)
      * @param key key of the annotation
      * @return The value of the annotation as an option if an annotation with the given key exists. None, otherwise.
      */
-    def annotation(key : String) : Option[Any] =
-    {
-        return annotations.get(key)
+    @unchecked // we know the type is ok - setAnnotation doesn't allow any other type
+    def getAnnotation[T](key: AnnotationKey[T]): Option[T] = {
+      annotations.get(key).asInstanceOf[Option[T]]
     }
 
     /**
@@ -108,9 +108,8 @@ abstract class Node(val children : List[Node], val line : Int)
      * @param key The key of the annotation
      * @param value The value of the annotation
      */
-    def setAnnotation(key : String, value : Any)
-    {
-        annotations(key) = value
+    def setAnnotation[T](key: AnnotationKey[T], value: T): Unit = {
+      annotations(key) = value
     }
     
     /**
