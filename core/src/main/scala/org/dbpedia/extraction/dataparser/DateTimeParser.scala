@@ -18,7 +18,7 @@ class DateTimeParser ( context : {
 {
     require(datatype != null, "datatype != null")
 
-    private val logger = Logger.getLogger(classOf[UnitValueParser].getName)
+    private val logger = Logger.getLogger(getClass.getName)
 
     // language-specific configurations
 

@@ -18,7 +18,7 @@ class UnitValueParser( extractionContext : {
                         strict : Boolean = false,
                         multiplicationFactor : Double = 1.0) extends DataParser
 {
-    private val logger = Logger.getLogger(classOf[UnitValueParser].getName)
+    private val logger = Logger.getLogger(getClass.getName)
 
     private val parserUtils = new ParserUtils(extractionContext)
 

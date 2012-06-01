@@ -15,7 +15,7 @@ class IntegerParser( context : { def language : Language } ,
 {
     private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(classOf[IntegerParser].getName)
+    private val logger = Logger.getLogger(getClass.getName)
 
     override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 

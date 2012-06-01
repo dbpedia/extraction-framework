@@ -13,7 +13,7 @@ class DurationParser( context : { def language : Language } )
 
     private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(classOf[DoubleParser].getName)
+    private val logger = Logger.getLogger(getClass.getName)
 
     private val timeUnits = DurationParserConfig.timesMap.getOrElse(language, DurationParserConfig.timesMap("en"))
 
