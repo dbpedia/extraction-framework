@@ -37,7 +37,7 @@ extends MappingExtractor(context)
   override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
     // apply mappings
-    // FIXME: what a waste! we extract all mapped properties a second time and throw them away.
+    // FIXME: To find out if it's a person, we extract all mapped properties a second time and throw them away.
     // Find a better solution. For example: Make sure that this extractor runs after the 
     // MappingExtractor. In the MappingExtractor, set the page type as an attriute.
     // Even better: in the first extraction pass, extract all types. Use them in the second pass.
