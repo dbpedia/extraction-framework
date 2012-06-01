@@ -100,8 +100,8 @@ class OntologyReader
     private def loadClass(name : String, node : TemplateNode) : ClassBuilder =
     {
         new ClassBuilder(name = name,
-                         labels = readTemplatePropertiesByLanguage(node, "rdfs:label"),
-                         comments = readTemplatePropertiesByLanguage(node, "rdfs:comment"),
+                         labels = readTemplatePropertiesByLanguage(node, "rdfs:label") ++ readPropertyTemplatesByLanguage(node, "label"),
+                         comments = readTemplatePropertiesByLanguage(node, "rdfs:comment") ++ readPropertyTemplatesByLanguage(node, "comment"),
                          superClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf") ::: List("owl:Thing"),
                          equivalentClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
     }
@@ -227,6 +227,50 @@ class OntologyReader
         }.toMap
     }
 
+    /**
+     * TODO: this seems to work, but I find it unreadable and ugly. Maybe more procedural, 
+     * less Scala-ish code would be easier to read and actually simpler?
+     */
+    private def readPropertyTemplatesByLanguage(node: TemplateNode, templateName: String) : Map[String, String] =
+    {
+      val propertyName = templateName + 's' // label -> labels
+      node.children.filter(_.key.equals(propertyName)).flatMap { property =>
+        for (child <- property.children) yield child match {
+          case template @ TemplateNode(title, _, _) if title.decoded equalsIgnoreCase templateName => {
+            readPropertyTemplate(template)
+          }
+          case TextNode(text, _) if text.trim.isEmpty => {
+            None // ignore space between templates
+          }
+          case _ => {
+            logger.warning(node.root.title+" - Ignoring invalid node '"+child.toWikiText+"' in value of property '"+propertyName+"'.")
+            None
+          }
+        }
+      }.flatten.toMap
+    }
+
+    /**
+     * TODO: this seems to work, but I find it unreadable and ugly. Maybe more procedural, 
+     * less Scala-ish code would be easier to read and actually simpler?
+     */
+    private def readPropertyTemplate(template: TemplateNode) : Option[(String, String)] = {
+      template.children match {
+        case List(lang, text) if lang.key == "1" && text.key == "2" => lang.retrieveText match {
+          case Some(langCode) if supportedLanguageCodes.contains(langCode.trim) => {
+            // Note: retrieveText fails if text has multiple nodes
+            val content = text.retrieveText.getOrElse("").trim
+            if (content.nonEmpty) return Some(langCode.trim -> content)
+            // no text content
+          }
+          case _ => // invalid language
+        }
+        case _ => // bad children
+      }
+      logger.warning(template.root.title+" - Ignoring invalid template "+template.toWikiText)
+      None
+    }
+    
     private class OntologyBuilder
     {
         var classes = List[ClassBuilder]()
