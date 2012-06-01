@@ -93,11 +93,13 @@ extends Mapping[TableNode]
 
     private def preprocessTable(tableNode : TableNode) : TableNode =
     {
+        // TODO: use mutable List (or Seq) and += instead of ::=, get rid of .reverse below
         var newRows = tableNode.children.head :: Nil
 
         var previousRow = newRows.head.children
         for(rowNode <- tableNode.children.tail)
         {
+            // TODO: use mutable List (or Seq) and += instead of ::=, get rid of .reverse below
             var newRow = List[TableCellNode]()
 
             val previousRowIter = previousRow.iterator
@@ -108,9 +110,10 @@ extends Mapping[TableNode]
             var done = false
             while(!done)
             {
-                if(previousCell != null && previousCell.annotation("rowspan").get.asInstanceOf[Int] > 1)
+                if(previousCell != null && previousCell.rowSpan > 1)
                 {
-                    previousCell.setAnnotation("rowspan", previousCell.annotation("rowspan").get.asInstanceOf[Int] - 1)
+                    // TODO: make a copy of previousCell, don't modify it
+                    previousCell.rowSpan -= 1
                     newRow ::= previousCell
 
                     previousCell = if(previousRowIter.hasNext) previousRowIter.next() else null
@@ -225,7 +228,7 @@ extends Mapping[TableNode]
         var lastPageTemplate : Option[Node] = None
         for(pageTemplate <- tableNode.root.children; if pageTemplate.isInstanceOf[TemplateNode] )
         {
-            if(pageTemplate.line < tableNode.line && pageTemplate.annotation(TemplateMapping.CLASS_ANNOTATION).isDefined)
+            if(pageTemplate.line < tableNode.line && pageTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION).isDefined)
             {
                 lastPageTemplate = Some(pageTemplate)
             }
@@ -234,13 +237,13 @@ extends Mapping[TableNode]
         //Check if found template has been mapped to corresponding Class
         var correspondingInstance : Option[String] = None
         for( correspondingTemplate <- lastPageTemplate;
-             templateClasses <- correspondingTemplate.annotation(TemplateMapping.CLASS_ANNOTATION);
-             templateClass <- templateClasses.asInstanceOf[Seq[OntologyClass]];
+             templateClasses <- correspondingTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
+             templateClass <- templateClasses;
              if correspondingClass == null || templateClass.name == correspondingClass.name )
         {
             //TODO if correspondingClass == null check if templateClass subClassOf correspondingProperty.range
 
-            return Some(correspondingTemplate.annotation(TemplateMapping.INSTANCE_URI_ANNOTATION).get.asInstanceOf[String])
+            return Some(correspondingTemplate.getAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION).get)
         }
 
         None

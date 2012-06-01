@@ -5,6 +5,7 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.{Buffer,ArrayBuffer}
+import org.dbpedia.extraction.wikiparser.AnnotationKey
 
 class TemplateMapping( 
   mapToClass : OntologyClass,
@@ -25,7 +26,7 @@ extends Mapping[TemplateNode]
         val pageNode = node.root
         val graph = new ArrayBuffer[Quad]
 
-        pageNode.annotation(TemplateMapping.CLASS_ANNOTATION) match
+        pageNode.getAnnotation(TemplateMapping.CLASS_ANNOTATION) match
         {
             case None => //So far, no template has been mapped on this page
             {
@@ -47,7 +48,7 @@ extends Mapping[TemplateNode]
                 if (correspondingClass != null && correspondingProperty != null)
                 {
                     var found = false;
-                    for(pageClass <- pageClasses.asInstanceOf[Seq[OntologyClass]])
+                    for(pageClass <- pageClasses)
                     {
                         if(correspondingClass.name == pageClass.name)
                         {
@@ -78,7 +79,7 @@ extends Mapping[TemplateNode]
         node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
         node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
 
-        if(node.root.annotation(TemplateMapping.CLASS_ANNOTATION).isEmpty)
+        if(node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION).isEmpty)
         {
             node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
         }
@@ -129,8 +130,7 @@ extends Mapping[TemplateNode]
 
 private object TemplateMapping
 {
-    // value has type Seq[OntologyClass]
-    val CLASS_ANNOTATION = "TemplateMapping.class";
-    // value has type String
-    val INSTANCE_URI_ANNOTATION = "TemplateMapping.uri";
+    val CLASS_ANNOTATION = new AnnotationKey[Seq[OntologyClass]]
+    
+    val INSTANCE_URI_ANNOTATION = new AnnotationKey[String]
 }

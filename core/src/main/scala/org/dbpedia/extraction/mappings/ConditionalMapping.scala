@@ -19,9 +19,7 @@ extends Mapping[TemplateNode]
       if (condition.matches(node)) {
         val graph = condition.extract(node, subjectUri, pageContext)
         // template mapping sets instance URI
-        val instanceURI = node.annotation(TemplateMapping.INSTANCE_URI_ANNOTATION)
-          .getOrElse(throw new IllegalArgumentException("missing instance URI"))
-          .asInstanceOf[String]
+        val instanceURI = node.getAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION).getOrElse(throw new IllegalArgumentException("missing instance URI"))
         return graph ++ defaultMappings.flatMap(_.extract(node, instanceURI, pageContext))
       }
     }

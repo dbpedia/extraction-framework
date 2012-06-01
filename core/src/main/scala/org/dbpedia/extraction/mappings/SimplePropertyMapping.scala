@@ -177,8 +177,8 @@ extends PropertyMapping
         
         // Write specific properties
         // FIXME: copy-and-paste in CalculateMapping
-        for(classAnnotation <- node.annotation(TemplateMapping.CLASS_ANNOTATION);
-            currentClass <- classAnnotation.asInstanceOf[Seq[OntologyClass]])
+        for(classes <- node.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
+            currentClass <- classes)
         {
             for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {
