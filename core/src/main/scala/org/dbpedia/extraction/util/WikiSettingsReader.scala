@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.util
 
-import javax.xml.stream.XMLInputFactory
 import scala.collection.{Map,Set}
 import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
 import org.dbpedia.extraction.util.RichStartElement.richStartElement
@@ -20,7 +19,7 @@ class WikiSettings (
 object WikiSettingsReader {
   
   /**
-   * The query for api.php, without the leading '?'. 
+   * The query for api.php, without the leading '?'.
    * Order of namespaces|namespacealiases|magicwords|interwikimap is important.
    */
   val query = "action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords|interwikimap"
@@ -68,7 +67,7 @@ class WikiSettingsReader(in: XMLEventAnalyzer) {
       val namespaces = new LinkedHashMap[String, Int]
       in.elements("ns") { ns =>
         val id = (ns attr "id").toInt
-        in.text { text => 
+        in.text { text =>
           // order is important here - canonical first, because in the reverse map 
           // in Namespaces.scala it must be overwritten by the localized value.
           if (canonical && id != 0) namespaces(ns attr "canonical") = id
