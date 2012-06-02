@@ -4,7 +4,7 @@ import scala.io.{Source, Codec}
 import javax.xml.stream.XMLInputFactory
 import scala.collection.{Map,Set}
 import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
-import org.dbpedia.extraction.util.{Language,WikiCaller,WikiSettingsReader,StringUtils,StringPlusser}
+import org.dbpedia.extraction.util.{Language,LazyWikiCaller,WikiSettingsReader,StringUtils,StringPlusser}
 import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
 import java.net.{URL,HttpRetryException}
 
@@ -68,8 +68,8 @@ object GenerateWikiSettings {
       try
       {
         val url = new URL(language.apiUri+"?"+WikiSettingsReader.query)
-        val downloader = new WikiCaller(url, followRedirects)
-        val settings = downloader.download(file, overwrite) { stream =>
+        val downloader = new LazyWikiCaller(url, followRedirects, file, overwrite)
+        val settings = downloader.download { stream =>
           new WikiSettingsReader(factory.createXMLEventReader(stream)).read()
         }
         namespaceMap(code) = settings.aliases ++ settings.namespaces // order is important - aliases first

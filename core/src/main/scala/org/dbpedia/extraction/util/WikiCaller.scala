@@ -7,37 +7,27 @@ import java.net.HttpURLConnection.{HTTP_OK,HTTP_MOVED_PERM,HTTP_MOVED_TEMP}
 import scala.collection.{Map,Set}
 
 /**
- * Calls a Wikipedia URL, handles redirects to a different language version, processes 
- * the response and optionally saves it in a file.
- * 
- * @param followRedirects if true, follow HTTP redirects for languages that have been renamed
- * and call the new URL, e.g. dk.wikipedia.org -> da.wikipedia.org. If false, throw a useful 
- * exception on redirects.
+ * @param file Target file. If file exists and overwrite is false, do not call url, 
+ * just use current file. If file does not exist or overwrite is true, call url, save
+ * result in file, and process file. If null, just call url, don't store result.
  */
-class WikiCaller(url: URL, followRedirects: Boolean) {
+class LazyWikiCaller(url: URL, followRedirects: Boolean, file: File, overwrite: Boolean) 
+extends WikiCaller(url, followRedirects)
+{
   
   /**
-   * @param file Target file. If file exists and overwrite is false, do not call api.php, 
-   * just use current file. If file does not exist or overwrite is true, call api.php, save
-   * result in file, and process file. If null, just call api.php, don't store result.
    * @param process Processor for result of call to api.php.
    * @return result of processing
    * @throws HttpRetryException if followRedirects is false and this language is redirected 
    * to another language. The message of the HttpRetryException is the target language.
    * @throws IOException if another error occurs
    */
-  def download[R](file: File, overwrite: Boolean)(process: InputStream => R): R = 
-  {
+  override def download[R](process: InputStream => R): R = {
     if (file == null) {
-      withConnection(process)
+      super.download(process)
     } else {
-      // TODO: find a good way to move this code to its own class. Problem: it needs to call
-      // a method like withConnection. If we rename withConnection to apply, then we could let
-      // this class extend ((InputStream => _) => R), which is an awkward type, and it doesn't
-      // work: we need a type parameter on withConnection() aka apply(), but we can't do that
-      // if this class extends ((InputStream => _) => R)...
       if (overwrite || ! file.exists) {
-        withConnection { in => 
+        super.download { in => 
           val out = new FileOutputStream(file)
           try IOUtils.copy(in, out) finally out.close 
         } 
@@ -46,8 +36,25 @@ class WikiCaller(url: URL, followRedirects: Boolean) {
       try process(in) finally in.close
     }
   }
+}
   
-  def withConnection[R](process: InputStream => R): R = {
+/**
+ * Calls a Wikipedia URL, handles redirects to a different language version, processes the response.
+ * 
+ * @param followRedirects if true, follow HTTP redirects for languages that have been renamed
+ * and call the new URL, e.g. dk.wikipedia.org -> da.wikipedia.org. If false, throw a useful 
+ * exception on redirects.
+ */
+class WikiCaller(url: URL, followRedirects: Boolean) {
+  
+  /**
+   * @param process Processor for result of call.
+   * @return result of processing
+   * @throws HttpRetryException if followRedirects is false and this language is redirected 
+   * to another language. The message of the HttpRetryException is the target language.
+   * @throws IOException if another error occurs
+   */
+  def download[R](process: InputStream => R): R = { 
     val conn = url.openConnection.asInstanceOf[HttpURLConnection]
     try {
       checkResponse(conn)
