@@ -242,5 +242,5 @@ object Disambiguation
       "zh-sg" -> Set("disambig", "消含糊", "消除含糊", "消歧义", "消除歧义", "消歧義", "消除歧義"),
       "zh-yue" -> Set("disambig", "搞清楚"))
 
-    def apply(language : Language) : Option[Set[String]] = map.get(language.wikiCode).map(_.map(_.capitalize(language.locale)))
+    def get(language : Language) : Option[Set[String]] = map.get(language.wikiCode).map(_.map(_.capitalize(language.locale)))
 }
