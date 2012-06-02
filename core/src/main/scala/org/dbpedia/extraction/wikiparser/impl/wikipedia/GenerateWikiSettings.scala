@@ -4,12 +4,21 @@ import scala.io.{Source, Codec}
 import javax.xml.stream.XMLInputFactory
 import scala.collection.{Map,Set}
 import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
-import org.dbpedia.extraction.util.{Language,WikiSettingsDownloader,StringUtils,StringPlusser}
+import org.dbpedia.extraction.util.{Language,WikiCaller,WikiSettingsReader,StringUtils,StringPlusser}
 import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
-import java.net.HttpRetryException
+import java.net.{URL,HttpRetryException}
 
 /**
  * Generates Namespaces.scala and Redirect.scala. Must be run with core/ as the current directory.
+ * 
+ * FIXME: This should be used to download the data for just one language and maybe store it in a 
+ * text file or simply in memory. (Loading the stuff only takes between .2 and 2 seconds per language.) 
+ * Currently this class is used to generate two huge configuration classes for all languages. 
+ * That's not good.
+ * 
+ * TODO: error handling. So far, it didn't seem necessary. api.php seems to work, and this
+ * class is so far used with direct human supervision.
+ * 
  */
 object GenerateWikiSettings {
   
@@ -34,13 +43,13 @@ object GenerateWikiSettings {
     val errors = LinkedHashMap[String, String]()
     
     // (language -> (namespace name or alias -> code))
-    val namespaceMap = LinkedHashMap[String, Map[String, Int]]()
+    val namespaceMap = new LinkedHashMap[String, Map[String, Int]]()
     
     // (language -> redirect magic word aliases)
-    val redirectMap = LinkedHashMap[String, Set[String]]()
+    val redirectMap = new LinkedHashMap[String, Set[String]]()
     
     // (old language code -> new language code)
-    val languageMap = LinkedHashMap[String, String]()
+    val languageMap = new LinkedHashMap[String, String]()
     
     // Note: langlist is sometimes not correctly sorted (done by hand), but no problem for us.
     val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
@@ -58,18 +67,21 @@ object GenerateWikiSettings {
       val file = new File(baseDir, language.wikiCode+"wiki-configuration.xml")
       try
       {
-        val downloader = new WikiSettingsDownloader(language, followRedirects, overwrite)
-        val settings = downloader.download(factory, file)
+        val url = new URL(language.apiUri+"?"+WikiSettingsReader.query)
+        val downloader = new WikiCaller(url, followRedirects)
+        val settings = downloader.download(file, overwrite) { stream =>
+          new WikiSettingsReader(factory.createXMLEventReader(stream)).read()
+        }
         namespaceMap(code) = settings.aliases ++ settings.namespaces // order is important - aliases first
         redirectMap(code) = settings.magicwords("redirect")
         // TODO: also use interwikis
         println(" - OK")
       } catch {
-        case hrex : HttpRetryException => {
+        case hrex: HttpRetryException => {
           languageMap(code) = hrex.getMessage 
           println(" - redirected to "+hrex.getMessage)
         }
-        case ioex : IOException => {
+        case ioex: IOException => {
           errors(code) = ioex.getMessage
           println(" - "+ioex.getMessage)
         }
