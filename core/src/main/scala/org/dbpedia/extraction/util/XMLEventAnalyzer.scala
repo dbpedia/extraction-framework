@@ -99,7 +99,7 @@ class XMLEventAnalyzer(private val xmlIn : XMLEventReader) {
 object RichStartElement {
   
   /**
-   * implicit wrapper for StartElement so we can use attr.
+   * implicit wrapper for StartElement so we can use attr and getAttr.
    */
   implicit def richStartElement (element : StartElement) : RichStartElement = { 
     new RichStartElement(element)
@@ -108,7 +108,7 @@ object RichStartElement {
 }
 
 /**
- * Wrapper class for StartElement so we can use attr.
+ * Wrapper class for StartElement so we can use attr and getAttr.
  */
 class RichStartElement(val element: StartElement)
 {
