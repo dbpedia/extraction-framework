@@ -4,39 +4,38 @@ import java.io.{File,InputStream,FileInputStream,FileOutputStream,IOException}
 import java.net.{URL,HttpRetryException,HttpURLConnection}
 import java.net.URLDecoder.decode
 import java.net.HttpURLConnection.{HTTP_OK,HTTP_MOVED_PERM,HTTP_MOVED_TEMP}
-import javax.xml.stream.XMLInputFactory
 import scala.collection.{Map,Set}
 
 /**
- * Downloads namespace names, namespace alias names and redirect magic words for a wikipedia 
- * language edition via api.php.
+ * Calls a Wikipedia URL, handles redirects to a different language version, processes 
+ * the response and optionally saves it in a file.
  * 
- * FIXME: This should be used to download the data for just one language and maybe store it in a 
- * text file or simply in memory. (Loading the stuff only takes between .2 and 2 seconds per language.) 
- * Currently this class is used to generate two huge configuration classes for all languages. 
- * That's not good.
- * 
- * TODO: error handling. So far, it didn't seem necessary. api.php seems to work, and this
- * class is so far used with direct human supervision.
- * 
- * @param followRedirects if true, follow HTTP redirects for languages that have been renamed,
- * e.g. dk.wikipedia.org -> da.wikipedia.org. If false, throw a useful exception on redirects. 
+ * @param followRedirects if true, follow HTTP redirects for languages that have been renamed
+ * and call the new URL, e.g. dk.wikipedia.org -> da.wikipedia.org. If false, throw a useful 
+ * exception on redirects.
  */
-class WikiSettingsDownloader(language: Language, followRedirects: Boolean, overwrite: Boolean) {
-  
-  val url = new URL(language.apiUri+"?"+WikiSettingsReader.query)
+class WikiCaller(url: URL, followRedirects: Boolean) {
   
   /**
-   * @return 
+   * @param file Target file. If file exists and overwrite is false, do not call api.php, 
+   * just use current file. If file does not exist or overwrite is true, call api.php, save
+   * result in file, and process file. If null, just call api.php, don't store result.
+   * @param process Processor for result of call to api.php.
+   * @return result of processing
    * @throws HttpRetryException if followRedirects is false and this language is redirected 
    * to another language. The message of the HttpRetryException is the target language.
    * @throws IOException if another error occurs
    */
-  def download(factory: XMLInputFactory, file: File = null): WikiSettings = 
+  def download[R](file: File, overwrite: Boolean)(process: InputStream => R): R = 
   {
     if (file == null) {
-      withConnection { in => read(in, factory) }
+      withConnection(process)
     } else {
+      // TODO: find a good way to move this code to its own class. Problem: it needs to call
+      // a method like withConnection. If we rename withConnection to apply, then we could let
+      // this class extend ((InputStream => _) => R), which is an awkward type, and it doesn't
+      // work: we need a type parameter on withConnection() aka apply(), but we can't do that
+      // if this class extends ((InputStream => _) => R)...
       if (overwrite || ! file.exists) {
         withConnection { in => 
           val out = new FileOutputStream(file)
@@ -44,11 +43,11 @@ class WikiSettingsDownloader(language: Language, followRedirects: Boolean, overw
         } 
       }
       val in = new FileInputStream(file)
-      try read(in, factory) finally in.close
+      try process(in) finally in.close
     }
   }
   
-  private def withConnection[R](process: InputStream => R) : R = {
+  def withConnection[R](process: InputStream => R): R = {
     val conn = url.openConnection.asInstanceOf[HttpURLConnection]
     try {
       checkResponse(conn)
@@ -58,16 +57,12 @@ class WikiSettingsDownloader(language: Language, followRedirects: Boolean, overw
     finally conn.disconnect
   }
   
-  private def read(stream: InputStream, factory: XMLInputFactory) = {
-    new WikiSettingsReader(factory.createXMLEventReader(stream)).read()
-  }
-  
   /**
    * @throws HttpRetryException if this language is redirected to another language. 
    * The message of the HttpRetryException is the target language, e.g. "da".
    * @throws IOException if another error occurred
    */
-  private def checkResponse(conn : HttpURLConnection) : Unit = {
+  private def checkResponse(conn: HttpURLConnection): Unit = {
     conn.setInstanceFollowRedirects(followRedirects)
     val code = conn.getResponseCode
     if (code != HTTP_OK) {
