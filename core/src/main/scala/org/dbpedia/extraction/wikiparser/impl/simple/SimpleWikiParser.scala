@@ -82,7 +82,7 @@ final class SimpleWikiParser extends WikiParser
 
         //Check if this page is a Disambiguation
         //TODO resolve template titles
-        val disambiguationNames = Disambiguation(page.title.language).getOrElse(Set("Disambig"))
+        val disambiguationNames = Disambiguation.get(page.title.language).getOrElse(Set("Disambig"))
         val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
 
         //Return page node
