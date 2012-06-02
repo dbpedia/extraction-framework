@@ -98,9 +98,9 @@ object GenerateWikiSettings {
       // LinkedHashMap to preserve order, which is important because in the reverse map 
       // in Namespaces.scala the canonical name must be overwritten by the localized value.
       s +"    private def "+language.replace('-','_')+"_namespaces = LinkedHashMap("
-      var firstNS = true
+      var first = true
       for ((name, code) <- namespaces) {
-        if (firstNS) firstNS = false else s +","
+        if (first) first = false else s +","
         s +"\""+name+"\"->"+(if (code < 0) " " else "")+code
       }
       s +")\n"
@@ -109,9 +109,9 @@ object GenerateWikiSettings {
     val redirectStr =
     build("redirects", languageMap, redirectMap) { (language, redirects, s) =>
       s +"    private def "+language.replace('-','_')+"_redirects = Set("
-      var firstRe = true
+      var first = true
       for (name : String <- redirects) {
-        if (firstRe) firstRe = false else s +","
+        if (first) first = false else s +","
         s +"\""+name+"\""
       }
       s +")\n"
@@ -152,16 +152,16 @@ object GenerateWikiSettings {
     
     // We used to generate the map as one huge value, but then constructor code is generated
     // that is so long that the JVM  doesn't load it. So we have to use separate functions.
-    var firstLang = true
+    var first = true
     s +"    Map("
     
     for (language <- values.keys) {
-      if (firstLang) firstLang = false else s + "," 
+      if (first) first = false else s + "," 
       s +"\""+language+"\"->"+language.replace('-', '_')+"_"+tag
     }
     
     for ((from, to) <- languages) {
-      if (firstLang) firstLang = false else s +"," 
+      if (first) first = false else s +"," 
       s +"\""+from+"\"->"+to.replace('-', '_')+"_"+tag
     }
     
