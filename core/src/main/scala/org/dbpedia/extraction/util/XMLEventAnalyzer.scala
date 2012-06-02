@@ -110,9 +110,14 @@ object RichStartElement {
 /**
  * Wrapper class for StartElement so we can use attr.
  */
-class RichStartElement(val element : StartElement)
+class RichStartElement(val element: StartElement)
 {
-  def attr(name : String) : String = {
+  def getAttr(name : String): Option[String] = {
+    val attr = element.getAttributeByName(new QName(name))
+    if (attr == null) None else Some(attr.getValue)
+  }
+  
+  def attr(name: String): String = {
     val attr = element.getAttributeByName(new QName(name))
     require(attr != null, "expected @"+name+", found nothing")
     attr.getValue
