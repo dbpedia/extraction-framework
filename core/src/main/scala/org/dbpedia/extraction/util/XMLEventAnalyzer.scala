@@ -96,10 +96,10 @@ class XMLEventAnalyzer(private val xmlIn : XMLEventReader) {
   
 }
 
-object XMLEventAnalyzer {
+object RichStartElement {
   
   /**
-   * implicit wrapper for StartElement so we can use getAttr.
+   * implicit wrapper for StartElement so we can use attr.
    */
   implicit def richStartElement (element : StartElement) : RichStartElement = { 
     new RichStartElement(element)
@@ -108,11 +108,11 @@ object XMLEventAnalyzer {
 }
 
 /**
- * Wrapper class for StartElement so we can use getAttr.
+ * Wrapper class for StartElement so we can use attr.
  */
 class RichStartElement(val element : StartElement)
 {
-  def getAttr(name : String) : String = {
+  def attr(name : String) : String = {
     val attr = element.getAttributeByName(new QName(name))
     require(attr != null, "expected @"+name+", found nothing")
     attr.getValue

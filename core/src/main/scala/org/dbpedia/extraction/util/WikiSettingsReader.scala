@@ -3,7 +3,7 @@ package org.dbpedia.extraction.util
 import javax.xml.stream.XMLInputFactory
 import scala.collection.{Map,Set}
 import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
-import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
+import org.dbpedia.extraction.util.RichStartElement.richStartElement
 import javax.xml.stream.XMLEventReader
 
 class WikiSettings (
@@ -63,11 +63,11 @@ class WikiSettingsReader(in : XMLEventAnalyzer) {
       // LinkedHashMap to preserve order
       val namespaces = new LinkedHashMap[String, Int]
       in.elements("ns") { ns =>
-        val id = (ns getAttr "id").toInt
+        val id = (ns attr "id").toInt
         in.text { text => 
           // order is important here - canonical first, because in the reverse map 
           // in Namespaces.scala it must be overwritten by the localized value.
-          if (canonical && id != 0) namespaces(ns getAttr "canonical") = id
+          if (canonical && id != 0) namespaces(ns attr "canonical") = id
           namespaces(text) = id
         }
       }
@@ -92,7 +92,7 @@ class WikiSettingsReader(in : XMLEventAnalyzer) {
             }
           }
         }
-        magicwords.put(mw getAttr "name", aliases)
+        magicwords.put(mw attr "name", aliases)
       }
       magicwords
     }
@@ -103,7 +103,7 @@ class WikiSettingsReader(in : XMLEventAnalyzer) {
       // LinkedHashMap to preserve order (although it's probably not important)
       val interwikis = new LinkedHashMap[String, String]
       in.elements("iw") { iw =>
-        interwikis(iw getAttr "prefix") = iw getAttr "url"
+        interwikis(iw attr "prefix") = iw attr "url"
       }
       interwikis
     }

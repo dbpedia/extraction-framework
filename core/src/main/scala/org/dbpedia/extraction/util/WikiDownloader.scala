@@ -9,7 +9,7 @@ import org.dbpedia.extraction.wikiparser.Namespace
 import javax.xml.namespace.QName
 import javax.xml.stream.{XMLEventFactory,XMLEventReader,XMLInputFactory,XMLOutputFactory}
 
-import org.dbpedia.extraction.util.XMLEventAnalyzer.richStartElement
+import org.dbpedia.extraction.util.RichStartElement.richStartElement
 
 /**
  * Downloads all pages for a given list of namespaces from api.php and transforms them
@@ -73,9 +73,9 @@ class WikiDownloader(val apiUrl : String) {
         val in = new XMLEventAnalyzer(xmlIn)
         in.document { _ =>
           in.element("api") { _ =>
-            in.ifElement("error") { error => throw new IOException(error getAttr "info") }
+            in.ifElement("error") { error => throw new IOException(error attr "info") }
             in.ifElement("query-continue") { _ =>
-              in.element("allpages") { allpages => gapfrom = allpages getAttr "gapfrom" } 
+              in.element("allpages") { allpages => gapfrom = allpages attr "gapfrom" } 
             }
             in.ifElement("query") { _ => // note: empty namespace returns no <query> 
               in.element("pages") { _ =>
@@ -84,12 +84,12 @@ class WikiDownloader(val apiUrl : String) {
                     in.element("rev") { rev =>
                       in.text { text =>
                         out.element("page") {
-                          out.element("title") { out.text( page getAttr "title" ) }
-                          out.element("ns") { out.text( page getAttr "ns" ) }
-                          out.element("id") { out.text( page getAttr "pageid" ) }
+                          out.element("title") { out.text( page attr "title" ) }
+                          out.element("ns") { out.text( page attr "ns" ) }
+                          out.element("id") { out.text( page attr "pageid" ) }
                           out.element ("revision") {
-                            out.element ("id") { out.text( rev getAttr "revid" ) }
-                            out.element ("timestamp") { out.text( rev getAttr "timestamp" ) }
+                            out.element ("id") { out.text( rev attr "revid" ) }
+                            out.element ("timestamp") { out.text( rev attr "timestamp" ) }
                             out.element ("text") { out.text(text) }
                           }
                         }
