@@ -24,6 +24,10 @@ object WikiSettingsReader {
    * Order of namespaces|namespacealiases|magicwords|interwikimap is important.
    */
   val query = "action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords|interwikimap"
+    
+  def read(xml: XMLEventReader): WikiSettings = new WikiSettingsReader(xml).read()
+
+  def read(xml: XMLEventAnalyzer): WikiSettings = new WikiSettingsReader(xml).read()
 }
 
 /**
@@ -34,7 +38,7 @@ object WikiSettingsReader {
  * to make them immutable would destroy the order, so we simply return them, but as an immutable
  * interface. Malicious users could still downcast and mutate. Meh.
  */
-class WikiSettingsReader(in : XMLEventAnalyzer) {
+class WikiSettingsReader(in: XMLEventAnalyzer) {
   
   def this(reader: XMLEventReader) = this(new XMLEventAnalyzer(reader))
   

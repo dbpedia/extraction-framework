@@ -9,12 +9,11 @@ import scala.collection.{Map,Set}
 /**
  * @param file Target file. If file exists and overwrite is false, do not call url, 
  * just use current file. If file does not exist or overwrite is true, call url, save
- * result in file, and process file. If null, just call url, don't store result.
+ * result in file, and process file. Must not be null.
  */
 class LazyWikiCaller(url: URL, followRedirects: Boolean, file: File, overwrite: Boolean) 
 extends WikiCaller(url, followRedirects)
 {
-  
   /**
    * @param process Processor for result of call to api.php.
    * @return result of processing
@@ -22,19 +21,15 @@ extends WikiCaller(url, followRedirects)
    * to another language. The message of the HttpRetryException is the target language.
    * @throws IOException if another error occurs
    */
-  override def download[R](process: InputStream => R): R = {
-    if (file == null) {
-      super.download(process)
-    } else {
-      if (overwrite || ! file.exists) {
-        super.download { in => 
-          val out = new FileOutputStream(file)
-          try IOUtils.copy(in, out) finally out.close 
-        } 
-      }
-      val in = new FileInputStream(file)
-      try process(in) finally in.close
+  override def execute[R](process: InputStream => R): R = {
+    if (overwrite || ! file.exists) {
+      super.execute { in => 
+        val out = new FileOutputStream(file)
+        try IOUtils.copy(in, out) finally out.close 
+      } 
     }
+    val in = new FileInputStream(file)
+    try process(in) finally in.close
   }
 }
   
@@ -54,7 +49,7 @@ class WikiCaller(url: URL, followRedirects: Boolean) {
    * to another language. The message of the HttpRetryException is the target language.
    * @throws IOException if another error occurs
    */
-  def download[R](process: InputStream => R): R = { 
+  def execute[R](process: InputStream => R): R = { 
     val conn = url.openConnection.asInstanceOf[HttpURLConnection]
     try {
       checkResponse(conn)
