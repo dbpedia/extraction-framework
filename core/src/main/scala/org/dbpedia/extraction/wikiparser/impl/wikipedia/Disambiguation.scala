@@ -2,7 +2,6 @@ package org.dbpedia.extraction.wikiparser.impl.wikipedia
 
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.RichString.toRichString
-import scala.collection.SortedMap
 
 /**
  * Holds the redirect identifiers of the different Wikipedia languages.
@@ -16,7 +15,7 @@ import scala.collection.SortedMap
  */
 object Disambiguation
 {
-    val map = SortedMap(
+    private val map = Map(
       "ab" -> Set("Неоднозначность"),
       "ace" -> Set("Disambig"),
       "af" -> Set("Dubbelsinnig"),
