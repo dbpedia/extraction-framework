@@ -93,28 +93,18 @@ object GenerateWikiSettings {
       }
     }
     
+    // LinkedHashMap to preserve order, which is important because in the reverse map 
+    // in Namespaces.scala the canonical name must be overwritten by the localized value.
     val namespaceStr =
-    build("namespaces", languageMap, namespaceMap) { (language, namespaces, s) =>
-      // LinkedHashMap to preserve order, which is important because in the reverse map 
-      // in Namespaces.scala the canonical name must be overwritten by the localized value.
-      s +"    private def "+language.replace('-','_')+"_namespaces = LinkedHashMap("
-      var first = true
-      for ((name, code) <- namespaces) {
-        if (first) first = false else s +","
-        s +"\""+name+"\"->"+(if (code < 0) " " else "")+code
-      }
-      s +")\n"
+    build("namespaces", "LinkedHashMap", languageMap, namespaceMap) { (s, entry) =>
+      val (name, code) = entry
+      s +"\""+name+"\"->"+(if (code < 0) " " else "")+code
     }
     
     val redirectStr =
-    build("redirects", languageMap, redirectMap) { (language, redirects, s) =>
-      s +"    private def "+language.replace('-','_')+"_redirects = Set("
-      var first = true
-      for (name : String <- redirects) {
-        if (first) first = false else s +","
-        s +"\""+name+"\""
-      }
-      s +")\n"
+    build("redirects", "Set", languageMap, redirectMap) { (s, entry) =>
+      val name = entry
+      s +"\""+name+"\""
     }
 
     var s = new StringPlusser
@@ -145,8 +135,8 @@ object GenerateWikiSettings {
     } finally source.close
   }
   
-  private def build[V](tag : String, languages : Map[String, String], values : Map[String, V])
-    (append : (String, V, StringPlusser) => Unit) : String =
+  private def build[V](tag : String, coll: String, languages : Map[String, String], values : Map[String, Iterable[V]])
+    (append : (StringPlusser, V) => Unit) : String =
   {
     var s = new StringPlusser
     
@@ -167,7 +157,15 @@ object GenerateWikiSettings {
     
     s +")\n"
     
-    for ((language, value) <- values) append(language, value, s)
+    for ((language, iterable) <- values) {
+      s +"    private def "+language.replace('-','_')+"_"+tag+" = "+coll+"("
+      first = true
+      for (item <- iterable) {
+        if (first) first = false else s +","
+        append(s, item)
+      }
+      s +")\n"
+    }
     
     s +"\n"
     
