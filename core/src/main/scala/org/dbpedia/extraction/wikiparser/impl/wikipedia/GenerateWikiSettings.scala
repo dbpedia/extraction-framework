@@ -40,27 +40,29 @@ object GenerateWikiSettings {
     
     val followRedirects = false
     
+    // language -> error message
     val errors = LinkedHashMap[String, String]()
     
-    // (language -> (namespace name or alias -> code))
+    // language -> (namespace name or alias -> code)
     val namespaceMap = new LinkedHashMap[String, Map[String, Int]]()
     
-    // (language -> redirect magic word aliases)
+    // language -> redirect aliases
     val redirectMap = new LinkedHashMap[String, Set[String]]()
     
-    // (old language code -> new language code)
+    // old language code -> new language code
     val languageMap = new LinkedHashMap[String, String]()
     
     // Note: langlist is sometimes not correctly sorted (done by hand), but no problem for us.
     val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
-    val languages = try source.getLines.toList finally source.close
+    var languages = try source.getLines.toList finally source.close
+    languages = "mappings" :: "commons" :: languages
     
+    // newInstance is expensive, call it only once
     val factory = XMLInputFactory.newInstance
     
-    // languages.length + 2 = languages + commons + mappings
-    println("generating wiki config for "+(languages.length + 2)+" languages")
+    println("generating wiki config for "+languages.length+" languages")
     
-    for (code <- "mappings" :: "commons" :: languages)
+    for (code <- languages)
     {
       print(code)
       val language = Language(code)
@@ -68,9 +70,10 @@ object GenerateWikiSettings {
       try
       {
         val url = new URL(language.apiUri+"?"+WikiSettingsReader.query)
-        val downloader = new LazyWikiCaller(url, followRedirects, file, overwrite)
-        val settings = downloader.download { stream =>
-          new WikiSettingsReader(factory.createXMLEventReader(stream)).read()
+        val caller = new LazyWikiCaller(url, followRedirects, file, overwrite)
+        val settings = caller.execute { stream =>
+          val xml = factory.createXMLEventReader(stream)
+          WikiSettingsReader.read(xml)
         }
         namespaceMap(code) = settings.aliases ++ settings.namespaces // order is important - aliases first
         redirectMap(code) = settings.magicwords("redirect")
@@ -78,12 +81,14 @@ object GenerateWikiSettings {
         println(" - OK")
       } catch {
         case hrex: HttpRetryException => {
-          languageMap(code) = hrex.getMessage 
-          println(" - redirected to "+hrex.getMessage)
+          val target = hrex.getMessage
+          languageMap(code) = target
+          println(" - redirected to "+target)
         }
         case ioex: IOException => {
-          errors(code) = ioex.getMessage
-          println(" - "+ioex.getMessage)
+          val error = ioex.getMessage
+          errors(code) = error
+          println(" - "+error)
         }
       }
     }
@@ -119,8 +124,7 @@ object GenerateWikiSettings {
     generate("Namespaces.scala", Map("namespaces" -> namespaceStr, "errors" -> errorStr))
     generate("Redirect.scala", Map("redirects" -> redirectStr, "errors" -> errorStr))
     
-    // languages.length + 2 = languages + commons + mappings
-    println("generated wiki config for "+(languages.length + 2)+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
+    println("generated wiki config for "+languages.length+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
   }
   
   /**
