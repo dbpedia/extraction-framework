@@ -24,7 +24,7 @@ object Download extends DownloadConfig
     if (! baseDir.exists && ! baseDir.mkdir) throw Usage("Target directory '"+baseDir+"' does not exist and cannot be created")
     
     class Decorator extends FileDownloader with Counter with LastModified with Retry {
-      val progressStep = 1L << 20 // count each MB
+      val progressStep = 1L << 21 // 2M
       val progressPretty = Download.this.progressPretty
       val retryMax = Download.this.retryMax
       val retryMillis = Download.this.retryMillis
