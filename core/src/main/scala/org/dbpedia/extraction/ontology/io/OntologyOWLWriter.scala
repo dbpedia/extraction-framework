@@ -6,7 +6,7 @@ import datatypes.{DimensionDatatype, UnitDatatype}
 class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
 {
 
-    private val Version = "3.7";
+    private val Version = "3.8";
 
     private val EXPORT_EXTERNAL = false  // export owl, foaf, rdf, rdfs etc.
     
