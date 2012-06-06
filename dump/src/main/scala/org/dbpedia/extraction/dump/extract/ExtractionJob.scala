@@ -23,13 +23,21 @@ class ExtractionJob(extractor: RootExtractor, source: Source, destination: Desti
   
   private def createExecutor(): ExecutorService = {
   
+    // We want to distribute work to several threads, without complex locks, waits and signals. 
+    // In JDK 6, this seems to be the simplest way. In JDK 7, we might use fork-join.
+    // TODO: Maybe Scala actors would be more concise?
+    
     // availableProcessors returns logical processors, not physical
     val cpus = Runtime.getRuntime.availableProcessors
     
     // The following is similar to Executors.newFixedThreadPool(cpus), but with added features.
     // CallerRunsPolicy means that if all threads are busy, the master thread will extract pages. 
     // But that means that it will not add pages to the queue for a while, so to make sure that
-    // the queue does not become empty, it must be large. Let's use 10 pages per thread.
+    // the queue does not become empty, it must be large. Let's use 10 pages per thread. This
+    // should be enough even if the master happens to be processing a very large page while all
+    // other threads process very small pages.
+    // It would be nice to re-use the pool across ExtractionJob instances, but shutdown seems 
+    // to be the only way to wait for all currently working threads to finish. 
     
     val policy = new ThreadPoolExecutor.CallerRunsPolicy()
     val queue = new ArrayBlockingQueue[Runnable](cpus * 10)
