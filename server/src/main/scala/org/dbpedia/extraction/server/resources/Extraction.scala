@@ -113,7 +113,6 @@ class Extraction(@PathParam("lang") langCode : String)
         
         val destination = new WriterDestination(() => writer, formatter)
         Server.instance.extractor.extract(source, destination, language)
-        destination.close()
         
         writer.toString
     }
@@ -133,7 +132,6 @@ class Extraction(@PathParam("lang") langCode : String)
         val destination = new WriterDestination(() => writer, formatter)
         
         Server.instance.extractor.extract(source, destination, language)
-        destination.close()
         
         writer.toString
     }

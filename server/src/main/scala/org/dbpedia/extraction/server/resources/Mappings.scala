@@ -248,7 +248,6 @@ class Mappings(@PathParam("lang") langCode : String)
         val source = WikiSource.fromTitles(pageTitles, wikiApiUrl, language)
         // extract at most 1000 triples
         Server.instance.extractor.extract(source, new LimitingDestination(destination, 1000), language)
-        destination.close()
         
         writer.toString
     }
