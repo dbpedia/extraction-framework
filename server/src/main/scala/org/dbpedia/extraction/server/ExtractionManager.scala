@@ -51,7 +51,9 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
 
     def extract(source: Source, destination: Destination, language: Language): Unit = {
       val extract = extractor(language)
+      destination.open()
       for (page <- source.map(parser)) destination.write(extract(page))
+      destination.close()
     }
 
     def validateMapping(mappingsPages: Traversable[PageNode], lang: Language) : Elem =
