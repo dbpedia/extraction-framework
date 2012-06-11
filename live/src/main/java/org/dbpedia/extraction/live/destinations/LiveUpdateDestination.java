@@ -132,6 +132,7 @@ public class LiveUpdateDestination implements Destination{
 
     }
 
+    @Override
     public void open() {}
     
     private static <T> T timedCall(FutureTask<T> task, long timeout, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
@@ -371,6 +372,7 @@ public class LiveUpdateDestination implements Destination{
         return se.executeCount(testquery, this.getClass(), this.graphURI);
     }
     
+    @Override
     public void close() {
         try{
             int abstractCount = this.countLiveAbstracts();

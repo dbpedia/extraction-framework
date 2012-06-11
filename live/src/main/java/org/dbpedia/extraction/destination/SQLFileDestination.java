@@ -171,6 +171,7 @@ public class SQLFileDestination implements Destination {
         }
     }
 
+    @Override
     public synchronized void close() {
         try{
             String strJSONString = JSONValue.toJSONString(jsonObject);
