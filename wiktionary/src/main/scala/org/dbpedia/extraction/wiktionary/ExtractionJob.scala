@@ -45,6 +45,8 @@ class ExtractionJob(extractor : RootExtractor, source : Source, destination : De
         try
         {
             _progress.startTime = System.currentTimeMillis
+            
+            destination.open()
 
             //Start extraction jobs
             extractionJobs.foreach(_.start)

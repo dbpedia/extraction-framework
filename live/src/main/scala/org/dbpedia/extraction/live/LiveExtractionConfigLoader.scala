@@ -283,6 +283,7 @@ object LiveExtractionConfigLoader extends ActionListener
                  val strWikipage = "http://" + CurrentPageNode.title.language + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
                  liveDest = new LiveUpdateDestination(pageNodeTitleWithoutLanguage, language.locale.getLanguage(),
                                       CurrentPageNode.id.toString)
+                 liveDest.open()
 //
 //                 println(LiveConfigReader.extractors.get(language));
 //
