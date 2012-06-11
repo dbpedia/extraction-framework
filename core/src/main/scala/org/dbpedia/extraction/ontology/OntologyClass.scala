@@ -13,15 +13,18 @@ import scala.collection.mutable.{Buffer,ArrayBuffer}
  * namespaces that we don't validate. See OntologyNamespaces.skipValidation() TODO: use type ListSet, not List?
  * @param equivalentClasses
  */
-class OntologyClass(name : String, labels : Map[Language, String], comments : Map[Language, String],
-                    val baseClasses : List/*TODO:ListSet?*/[OntologyClass], val equivalentClasses : Set[OntologyClass]) extends OntologyType(name, labels, comments)
+class OntologyClass(
+  name : String, 
+  labels : Map[Language, String], 
+  comments : Map[Language, String],
+  val baseClasses : List/*TODO:ListSet?*/[OntologyClass], 
+  val equivalentClasses : Set[OntologyClass]
+) 
+extends OntologyType(name, labels, comments)
 {
-    require(name != null, "name is null")
-    require(labels != null, "labels is null")
-    require(comments != null, "comments is null")
-    require(baseClasses != null, "baseClasses is null")
-    require(baseClasses.nonEmpty || name == "owl:Thing" || ! RdfNamespace.validate(name), "baseClasses is empty, although this class is not the root and it should be validated")
-    require(equivalentClasses != null, "equivalentClasses is null")
+    require(baseClasses != null, "missing base classes for class "+name)
+    require(baseClasses.nonEmpty || name == "owl:Thing" || ! RdfNamespace.validate(name), "missing base classes for class "+name+", although this class is not the root and it should be validated")
+    require(equivalentClasses != null, "missing equivalent classes for class "+name)
     
     /**
      * Transitive closure of sub-class and equivalent-class relations, including this class.
@@ -37,7 +40,7 @@ class OntologyClass(name : String, labels : Map[Language, String], comments : Ma
       // class relations here. Some cycles are allowed (for example between equivalent classes, 
       // but there are other cases), others aren't. At this point, it's not easy to distinguish valid 
       // and invalid cycles, so we ignore them all. Cycles should be checked when classes are loaded.
-      // Note: set would be nicer than buffer to check contains(), but we want to keep the order.
+      // Note: a set would be nicer than a buffer to check contains(), but we want to keep the order.
       if (! classes.contains(this)) {
         classes += this
         equivalentClasses.foreach(_.collectClasses(classes))
