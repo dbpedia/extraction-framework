@@ -155,6 +155,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
                     //liveDest = new LiveUpdateDestination(CurrentPageNode.title.toString, language.locale.getLanguage(), CurrentPageNode.id.toString)
                     //var actualDestination = destination.asInstanceOf[LiveUpdateDestination];
 
+                    destination.open();
                     destination.write(graph);
                     destination.close();
                     //_progress.synchronized(_progress.extractedPages +=1);
