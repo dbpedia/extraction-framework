@@ -42,6 +42,8 @@ object RdfNamespace {
     ns
   }
   
+  // FIXME: move these to mappings wiki
+  
   val OWL = ns("owl", "http://www.w3.org/2002/07/owl#")
   val RDF = ns("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
   val RDFS = ns("rdfs", "http://www.w3.org/2000/01/rdf-schema#")
