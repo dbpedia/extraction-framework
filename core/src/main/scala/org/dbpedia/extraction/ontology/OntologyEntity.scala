@@ -14,9 +14,9 @@ import org.dbpedia.extraction.util.Language
  */
 abstract class OntologyEntity(val name : String, val labels : Map[Language, String], val comments : Map[Language, String])
 {
-    require(name != null, "name != null")
-    require(labels != null, "labels != null")
-    require(comments != null, "comments != null")
+    require(name != null, "name of ontology entity is null")
+    require(labels != null, "missing labels for ontology entity "+name)
+    require(comments != null, "missing comments for ontology entity "+name)
 
     /**
      * The URI of this entity.

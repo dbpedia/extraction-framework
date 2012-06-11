@@ -13,13 +13,20 @@ import org.dbpedia.extraction.util.Language
  * @param isFunctional Defines whether this is a functional property.
  * A functional property is a property that can have only one (unique) value y for each instance x (see: http://www.w3.org/TR/owl-ref/#FunctionalProperty-def)
  */
-class OntologyProperty( name : String, labels : Map[Language, String], comments : Map[Language, String],
-                        val domain : OntologyClass, val range : OntologyType, val isFunctional : Boolean = false,
-                        val equivalentProperties : Set[OntologyProperty] = Set()) extends OntologyEntity(name, labels, comments)
+class OntologyProperty(
+  name: String,
+  labels: Map[Language, String],
+  comments: Map[Language, String],
+  val domain: OntologyClass,
+  val range: OntologyType,
+  val isFunctional: Boolean,
+  val equivalentProperties: Set[OntologyProperty]
+)
+extends OntologyEntity(name, labels, comments)
 {
     require(! RdfNamespace.validate(name) || domain != null, "missing domain for property "+name)
     require(! RdfNamespace.validate(name) || range != null, "missing range for property "+name)
-    require(equivalentProperties != null, "equivalent properties are null for property "+name)
+    require(equivalentProperties != null, "missing equivalent properties for property "+name)
     
     val uri = RdfNamespace.fullUri(DBpediaNamespace.ONTOLOGY, name)
 
