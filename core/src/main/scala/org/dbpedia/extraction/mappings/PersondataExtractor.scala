@@ -24,7 +24,7 @@ extends Extractor
     private val language = context.language
     private val wikiCode = language.wikiCode
 
-    require(PersondataExtractorConfig.supportedLanguages.contains(wikiCode))
+    require(PersondataExtractorConfig.supportedLanguages.contains(wikiCode), getClass.getSimpleName+" is not configured for language "+wikiCode)
 
     private val persondataTemplate = PersondataExtractorConfig.persondataTemplates(wikiCode)
     private val name = PersondataExtractorConfig.name(wikiCode)
