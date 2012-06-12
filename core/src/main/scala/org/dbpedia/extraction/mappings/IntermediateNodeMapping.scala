@@ -46,13 +46,16 @@ extends PropertyMapping
       }
       else
       {
-        //TODO muliple properties having multiple values
+        // TODO muliple properties having multiple values
+        // happens about 7000 times in the extraction of about 15 languages.
         /**
          * fictive example:
          * leader_name = Bill_Gates<br>Steve_Jobs
          * leader_title = Microsoft dictator<br>Apple evangelist
          */
-        logger.warning("IntermediateNodeMapping for muliple properties having multiple values not implemented!")
+        // TODO: better logging. include page name, template name and maybe even values in log message.
+        // But first, improve the logging configuration. Most log output should not go to stdout/stderr. 
+        // logger.warning("IntermediateNodeMapping for muliple properties having multiple values not implemented!")
       }
     }
     //one template property is affected (e.g. engine)
