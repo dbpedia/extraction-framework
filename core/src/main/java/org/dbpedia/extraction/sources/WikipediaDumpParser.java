@@ -194,7 +194,7 @@ public class WikipediaDumpParser
     WikiTitle title = parseTitle(titleStr);
     // now after </title>
 
-    //Skip filtered pages
+    //Skip bad titles and filtered pages
     if(title == null || ! _filter.apply(title))
     {
         while(! isEndElement(PAGE_ELEM)) _reader.next();
