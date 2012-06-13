@@ -20,11 +20,15 @@ class RichString(str : String)
 {
     /**
      * Converts the first character in this String to upper case using the rules of the given Locale.
-     *
+     * Does not convert a 'ß' at the start of the string to 'SS'.
+     * TODO: there are probably other cases like 'ß' that should not be capitalized
+     * 
      * @param locale The locale used to capitalize the String
      */
     def capitalize(locale : Locale) : String = {
-        if (! str.isEmpty) str.head.toString.toUpperCase(locale) + str.tail else ""
+      if (str.isEmpty) "" 
+      else if (str.startsWith("ß")) str 
+      else str.head.toString.toUpperCase(locale) + str.tail
     }
 
     /**
