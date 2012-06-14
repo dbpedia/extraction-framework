@@ -99,7 +99,7 @@ class HomepageExtractor( context : {
     {
         nodes match
         {
-            case (templateNode @ TemplateNode(title, _, _)) :: _
+            case (templateNode @ TemplateNode(title, _, _, _)) :: _
                 if ((title.encoded == "Official") || ((context.redirects.map.contains(title.decoded)) && (context.redirects.map(title.decoded) == "Official"))) =>
             {
                 templateNode.property("1") match

@@ -82,7 +82,7 @@ class ImageExtractor( context : {
                     if (currentSections > 1) return None
                     currentSections += 1
                 }
-                case TemplateNode(_, children, _) =>
+                case TemplateNode(_, children, _, _) =>
                 {
                     for (property <- children;
                          textNode @ TextNode(text, _) <- property.children;

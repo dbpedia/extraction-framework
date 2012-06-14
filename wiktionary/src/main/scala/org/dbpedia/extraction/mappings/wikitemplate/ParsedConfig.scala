@@ -26,7 +26,7 @@ val p : String = (t \ "@p").text
 val o : String = (t \ "@o").text
 val oType : String = if(t.attribute("oType").isDefined){(t \ "@oType").text} else {"URI"}
 val oNewBlock : Boolean =t.attribute("oNewBlock").isDefined && (t \ "@oNewBlock").text.equals("true") 
-
+val optional : Boolean = t.attribute("optional").isDefined && (t \ "@optional").text.equals("true") 
 }
 
 class ResultTemplate(val triples : Seq[TripleTemplate]){}

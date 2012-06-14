@@ -7,7 +7,7 @@ package org.dbpedia.extraction.wikiparser
  * @param children The properties of this template
  * @param line The source line number of this property
  */
-case class TemplateNode(title : WikiTitle, override val children : List[PropertyNode], override val line : Int) extends Node(children, line)
+case class TemplateNode(title : WikiTitle, override val children : List[PropertyNode], override val line : Int, titleParsed : List[Node] = List()) extends Node(children, line)
 {
     private val propertyMap : Map[String, PropertyNode] = Map.empty ++ (for(property <- children) yield (property.key, property))
     

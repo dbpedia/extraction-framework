@@ -80,8 +80,8 @@ final class SimpleWikiParser extends WikiParser
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
     {
-        case TemplateNode(title, _, _) if names.contains(title.decoded) => true
-        case TemplateNode(title, _, _) => false
+        case TemplateNode(title, _, _, _) if names.contains(title.decoded) => true
+        case TemplateNode(title, _, _, _) => false
         case _ => node.children.exists(node => findTemplate(node, names, language))
     }
     
@@ -383,6 +383,7 @@ final class SimpleWikiParser extends WikiParser
     {
     	val startLine = source.line
     	var title : WikiTitle = null;
+        var titleParsed : List[Node] = List();
     	var properties = List[PropertyNode]()
     	var curKeyIndex = 1
 
@@ -392,7 +393,7 @@ final class SimpleWikiParser extends WikiParser
             if(title == null)
             {
                 val nodes = parseUntil(propertyEndOrParserFunctionNameEnd, source, level)
-
+                titleParsed = nodes
                 val templateName = nodes match
                 {
                     case TextNode(text, _) :: _ => text
@@ -420,7 +421,7 @@ final class SimpleWikiParser extends WikiParser
             //Reached template end?
             if(source.lastTag("}}"))
             {
-                return TemplateNode(title, properties.reverse, startLine)
+                return TemplateNode(title, properties.reverse, startLine, titleParsed)
             }
         }
     	

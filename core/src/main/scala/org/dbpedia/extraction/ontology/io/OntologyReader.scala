@@ -159,7 +159,7 @@ class OntologyReader
     private def loadSpecificProperties(name : String, node : TemplateNode) : List[SpecificPropertyBuilder] =
     {
         for(PropertyNode(_, children, _) <- node.property("specificProperties").toList;
-            templateNode @ TemplateNode(title, _, _) <- children if title.decoded == OntologyReader.SPECIFICPROPERTY_NAME;
+            templateNode @ TemplateNode(title, _, _, _) <- children if title.decoded == OntologyReader.SPECIFICPROPERTY_NAME;
             specificProperty <- loadSpecificProperty(name, templateNode))
             yield specificProperty
     }
