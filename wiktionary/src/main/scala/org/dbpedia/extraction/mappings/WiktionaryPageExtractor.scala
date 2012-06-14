@@ -91,7 +91,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       }
 
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse).filterSpaces
-      println(pageStack.toShortDumpString)
+
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
       for(prolog <- languageConfig \ "page" \ "prologs" \ "template"){
@@ -342,7 +342,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                         } else if(!tt.optional){ 
                             throw new Exception("missing binding for "+varName)
                         } else {
-                            println("continue")
+                            //println("continue")
                             throw new ContinueException("skip optional triple")
                         }
                         //to prevent, that recorded ) symbols mess up the regex of map and uri
