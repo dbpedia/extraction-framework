@@ -5,7 +5,7 @@ import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.RootExtractor
 import org.dbpedia.extraction.sources.{Source,WikiPage}
 import org.dbpedia.extraction.wikiparser.{Namespace,WikiParser}
-import org.dbpedia.extraction.util.Runner
+import org.dbpedia.extraction.util.Workers
 
 /**
  * Executes a extraction.
@@ -21,39 +21,18 @@ class ExtractionJob(extractor: RootExtractor, source: Source, destination: Desti
 
   private val progress = new ExtractionProgress(label)
   
+  private val parser = WikiParser()
+
+  // Only extract from the following namespaces
+  private val namespaces = Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
+
   def run(): Unit =
   {
     progress.start()
     
     destination.open()
 
-    // If all slave threads are busy, the master thread will extract pages. But that means 
-    // that it will not add pages to the queue for a while, so to make sure that the queue 
-    // does not become empty, it must be large. Let's use 10 pages per thread. This should 
-    // be enough even if the master happens to be processing a very large page while all 
-    // other threads process very small pages.
-    val runner = new Runner(10)
-    
-    for (page <- source) extractPage(runner, page)
-    
-    runner.shutdown()
-    
-    destination.close()
-    
-    progress.end()
-  }
-  
-  private val parser = WikiParser()
-
-  // Only extract from the following namespaces
-  private val namespaces = Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
-
-  private def extractPage(runner: Runner, page : WikiPage): Unit = {
-    
-    // If we use XMLSource, we probably checked this already, but anyway...
-    if (! namespaces.contains(page.title.namespace)) return
-    
-    runner.run {
+    val workers = Workers { page: WikiPage =>
       var success = false
       try {
         val graph = extractor(parser(page))
@@ -62,9 +41,23 @@ class ExtractionJob(extractor: RootExtractor, source: Source, destination: Desti
       } catch {
         case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"'", ex)
       }
-      
       progress.countPage(success)
     }
-  }
     
+    workers.start()
+    
+    for (page <- source) {
+      // If we use XMLSource, we probably checked this already, but anyway...
+      if (namespaces.contains(page.title.namespace)) {
+        workers.process(page)
+      }
+    }
+    
+    workers.stop()
+    
+    destination.close()
+    
+    progress.end()
+  }
+  
 }

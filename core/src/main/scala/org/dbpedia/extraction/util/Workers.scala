@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.util
 
-import scala.collection.mutable.ArrayBuffer
 import java.util.concurrent.ArrayBlockingQueue
 import Workers._
 
@@ -11,25 +10,26 @@ trait Worker[T <: AnyRef] {
 }
 
 object Workers {
+  
   private[util] val sentinel = new Object()
   private[util] val defaultThreads = Runtime.getRuntime().availableProcessors()
-}
-
-abstract class SimpleWorkers[T <: AnyRef](threads: Int, queueLength: Int)
-extends Workers[T](threads, queueLength) {
   
-  def this(queueDepth: Int) = this(defaultThreads, defaultThreads * queueDepth)
-  
-  def this() = this(1)
-  
-  override def worker() = new Worker[T]() {
-    def process(value: T) = SimpleWorkers.this.process(value)
+  def apply[T <: AnyRef](threads: Int, queueLength: Int)(proc: T => Unit): Workers[T] = {
+    new Workers[T](threads, queueLength) {
+      override def doProcess(value: T) = proc(value)
+    }
   }
   
-  def process(value: T) 
-}
+  def apply[T <: AnyRef](queueDepth: Int)(proc: T => Unit): Workers[T] = {
+    apply(defaultThreads, defaultThreads * queueDepth)(proc)
+  }
   
-abstract class Workers[T <: AnyRef](threads: Int, queueLength: Int) {
+  def apply[T <: AnyRef](proc: T => Unit): Workers[T] = {
+    apply(1)(proc)
+  }
+}
+
+class Workers[T <: AnyRef](threads: Int, queueLength: Int) {
   
   def this(queueDepth: Int) = this(defaultThreads, defaultThreads * queueDepth)
   
@@ -55,18 +55,22 @@ abstract class Workers[T <: AnyRef](threads: Int, queueLength: Int) {
     }
   }
   
-  def worker(): Worker[T]
+  protected def worker() = new Worker[T]() {
+    def process(value: T) = Workers.this.doProcess(value)
+  }
   
-  def start(): Unit = {
+  protected def doProcess(value: T) = {}
+  
+  final def start(): Unit = {
     for (worker <- workers) worker.start()
   }
   
-  def process(value: T): Unit = {
+  final def process(value: T): Unit = {
     if (value == null) throw new NullPointerException("value")
     queue.put(value)
   }
   
-  def stop(): Unit = {
+  final def stop(): Unit = {
     for (worker <- workers) queue.put(sentinel)
     for (worker <- workers) worker.join()
   }
