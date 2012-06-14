@@ -1,4 +1,7 @@
 package org.dbpedia.extraction.mappings
+import sys.process._
+import org.dbpedia.extraction.dump.Extract
+
 object Starter {
   def main(args:Array[String]) = {
     if(args.size != 3){
@@ -9,7 +12,9 @@ object Starter {
       val outputFile = args(2)
       println("called Wiktionary Extraction Starter with args "+lang+" "+dumpFile+" "+outputFile)
 
-      //todo invoke extraction framework
+      //invoke mvn
+      //todo inject above properties
+      Extract.main(Array())
     }
   }
 }
