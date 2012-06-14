@@ -17,6 +17,7 @@ import MyLinkNode._
 
 case class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
 
+case class ContinueException(val s: String) extends Exception(s) {}
 /**
  * extend the stack class (by using a wrapper and implicit conversion - scala magic)
  */

@@ -91,6 +91,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       }
 
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse).filterSpaces
+      println(pageStack.toShortDumpString)
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
       for(prolog <- languageConfig \ "page" \ "prologs" \ "template"){
@@ -328,6 +329,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   def makeTriples(rt : ResultTemplate, binding : HashMap[String, List[Node]], blockName : String, cache : Cache) : List[Quad] = {
           val quads = new ListBuffer[Quad]
           rt.triples.foreach( (tt : TripleTemplate) => {
+            try{
             //apply the same placeholder-processing to s, p and o => DRY:
             val in = Map("s"->tt.s, "p"->tt.p, "o"->tt.o)
             val out = in.map( kv => {
@@ -337,11 +339,14 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                             binding(varName).toReadableString
                         } else if(cache.savedVars.contains(varName)){
                             cache.savedVars(varName)
-                        } else { 
+                        } else if(!tt.optional){ 
                             throw new Exception("missing binding for "+varName)
+                        } else {
+                            println("continue")
+                            throw new ContinueException("skip optional triple")
                         }
                         //to prevent, that recorded ) symbols mess up the regex of map and uri
-                        val varValue = replacement//.replace(")", escapeSeq+")").replace("(", escapeSeq+"(")
+                        val varValue = replacement.replace(")", escapeSeq2).replace("(", escapeSeq1)
                         if(saveVars.contains(varName)){
                             cache.savedVars(varName.toUpperCase) = varValue
                         }
@@ -350,7 +355,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                 var functionsResolved = replacedVars
                 var matched = false
                 var i = 0
-                do{ //replace functin calls inside out (the pattern each time only matches the innermost fun)
+                do{ //replace function calls inside out (the pattern each time only matches the innermost fun)
                     i += 1
                     matched = false                    
                     functionsResolved = funPattern.replaceAllIn(functionsResolved, (m) => {
@@ -360,6 +365,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                         val res = funName match {
                             case "uri" => urify(funArg)
                             case "map" => map(funArg)
+                            case "assertMapped" => if(!(mappings.contains(funArg))){throw new Exception("assertion failed: existing key in mapings for "+funArg)} else {funArg}
                             case "getId" => cache.matcher.getId(funArg)
                             case "makeId" => cache.matcher.makeId(funArg)
                             case "getOrMakeId" => cache.matcher.getOrMakeId(funArg)
@@ -368,7 +374,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                         res
                     }) 
                 } while (matched && i < 10)
-                (kv._1, functionsResolved.replace(escapeSeq+")", ")").replace(escapeSeq+"(", "("))
+                (kv._1, functionsResolved.replace(escapeSeq2, ")").replace(escapeSeq1, "("))
             })
             
             val s = out("s")
@@ -400,9 +406,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                 }
                 oURI
               } else {
-                vf.createLiteral(o)
+                vf.createLiteral(o.trim)
               }
             quads += new Quad(langObj, datasetURI, vf.createURI(s), vf.createURI(p), oObj, tripleContext)
+            } catch {
+              case ce : ContinueException => //skip
+              case e : Exception => throw e //propagate
+            }
           })
     quads.toList
   }
@@ -436,7 +446,8 @@ object WiktionaryPageExtractor {
   //val mapPattern = new Regex("map\\([^)]*\\)")
   //val uriPattern = new Regex("uri\\([^)]*\\)")
   val funPattern = new Regex("([a-zA-Z0-9]+)\\(([^)(]*)\\)")
-  val escapeSeq = "%#*+~" //an unlikely sequence of characters (duh)
+  val escapeSeq1 = "%#*+~" //an unlikely sequence of characters (duh)
+  val escapeSeq2 = "%#*+~" //an unlikely sequence of characters (duh)
   //val splitPattern = new Regex("\\W")
   //val xmlPattern = new Regex("</?[^>]+/?>")
 

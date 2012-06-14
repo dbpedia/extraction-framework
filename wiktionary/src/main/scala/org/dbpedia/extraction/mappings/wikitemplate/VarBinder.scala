@@ -166,9 +166,11 @@ object VarBinder {
           //parse template properties
           currNodeFromPage match {
             case tplNodeFromPage : TemplateNode => {
-              if(!tplNodeFromPage.title.decoded.equals(tplNodeFromTpl.title.decoded)) {
-                throw new WiktionaryException("the template does not match the page: unmatched template title", bindings, Some(currNodeFromPage))
-              }
+              //extract from template title
+              bindings mergeWith parseNodesWithTemplate(
+                  new Stack[Node]() pushAll tplNodeFromTpl.titleParsed.reverse,
+                  new Stack[Node]() pushAll tplNodeFromPage.titleParsed.reverse
+              ) 
               breakable {
                 for(key <- tplNodeFromTpl.keySet){
                   if(tplNodeFromTpl.property(key).isDefined && tplNodeFromPage.property(key).isDefined){

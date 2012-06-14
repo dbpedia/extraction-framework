@@ -199,7 +199,7 @@ object MappingsLoader
     {
         val conditionMappings =
             for( casesProperty <- tnode.property("cases").toList;
-                 conditionNode @ TemplateNode(_,_,_) <- casesProperty.children ) 
+                 conditionNode @ TemplateNode(_,_,_,_) <- casesProperty.children ) 
             yield loadConditionMapping(conditionNode, context)
         
         new ConditionalMapping( conditionMappings,

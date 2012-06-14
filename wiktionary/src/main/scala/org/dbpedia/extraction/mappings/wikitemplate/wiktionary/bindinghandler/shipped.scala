@@ -81,7 +81,8 @@ class GermanTranslationHelper extends TranslationHelper {
 
 
 class EnglishTranslationHelper extends TranslationHelper {
-
+    //todo make configurabel. problem: multiple values for one property
+    val targetTemplates = List("t", "t+","t-", "tø", "trad+", "trad-")
     def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad] = {
         val quads = ListBuffer[Quad]()
         val translateProperty = vf.createURI(WiktionaryPageExtractor.termsNS+"hasTranslation")
@@ -95,7 +96,7 @@ class EnglishTranslationHelper extends TranslationHelper {
                 try{
                   if(node.isInstanceOf[TemplateNode]){
                     val tplType = node.asInstanceOf[TemplateNode].title.decoded
-                    if(tplType == "t+" || tplType == "t-" || tplType == "tø" || tplType == "t"){
+                    if(targetTemplates.contains(tplType)){
                         val translationTargetLanguage = node.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text
                         val translationTargetWord = getCleanWord(node.asInstanceOf[TemplateNode].property("2").get.children(0).asInstanceOf[TextNode].text)
                         Logging.printMsg("translationTargetWord: "+translationTargetWord, 4)

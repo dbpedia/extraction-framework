@@ -28,7 +28,7 @@ class GeoExtractor( context : {
         
         // Iterate through all root templates.
         // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).
-        for( templateNode @ TemplateNode(_, _, _) <- node.children;
+        for( templateNode @ TemplateNode(_, _, _, _) <- node.children;
              coordinate <- geoCoordinateParser.parse(templateNode) )
         {
             return writeGeoCoordinate(coordinate, subjectUri, node.sourceUri, pageContext)
