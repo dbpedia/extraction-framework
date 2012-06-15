@@ -5,7 +5,7 @@ import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.RootExtractor
 import org.dbpedia.extraction.sources.{Source,WikiPage}
 import org.dbpedia.extraction.wikiparser.{Namespace,WikiParser}
-import org.dbpedia.extraction.util.Workers
+import org.dbpedia.extraction.util.SimpleWorkers
 
 /**
  * Executes a extraction.
@@ -26,24 +26,24 @@ class ExtractionJob(extractor: RootExtractor, source: Source, destination: Desti
   // Only extract from the following namespaces
   private val namespaces = Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
 
+  private val workers = SimpleWorkers { page: WikiPage =>
+    var success = false
+    try {
+      val graph = extractor(parser(page))
+      destination.write(graph)
+      success = true
+    } catch {
+      case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"'", ex)
+    }
+    progress.countPage(success)
+  }
+  
   def run(): Unit =
   {
     progress.start()
     
     destination.open()
 
-    val workers = Workers { page: WikiPage =>
-      var success = false
-      try {
-        val graph = extractor(parser(page))
-        destination.write(graph)
-        success = true
-      } catch {
-        case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"'", ex)
-      }
-      progress.countPage(success)
-    }
-    
     workers.start()
     
     for (page <- source) {

@@ -4,36 +4,103 @@ import java.util.concurrent.ArrayBlockingQueue
 import Workers._
 
 trait Worker[T <: AnyRef] {
-  def init(): Unit = {}
+  def init(): Unit
   def process(value: T): Unit
-  def destroy(): Unit = {}
+  def destroy(): Unit
 }
 
-object Workers {
+object SimpleWorkers {
   
-  private[util] val sentinel = new Object()
-  private[util] val defaultThreads = Runtime.getRuntime().availableProcessors()
-  
+  /**
+   * Convenience 'constructor'. Allows very concise syntax:
+   * val workers = SimpleWorkers(threads, queueLength) { foo: Foo =>
+   *   // do something with foo...
+   * }
+   */
   def apply[T <: AnyRef](threads: Int, queueLength: Int)(proc: T => Unit): Workers[T] = {
-    new Workers[T](threads, queueLength) {
-      override def doProcess(value: T) = proc(value)
-    }
+    new Workers[T](threads, queueLength, new Worker[T]() {
+      def init() = {}
+      def process(value: T) = proc(value)
+      def destroy() = {}
+    })
   }
   
+  /**
+   * Convenience 'constructor'. Allows very concise syntax:
+   * val workers = SimpleWorkers(queueDepth) { foo: Foo =>
+   *   // do something with foo...
+   * }
+   */
   def apply[T <: AnyRef](queueDepth: Int)(proc: T => Unit): Workers[T] = {
     apply(defaultThreads, defaultThreads * queueDepth)(proc)
   }
   
+  /**
+   * Convenience 'constructor'. Allows very concise syntax:
+   * val workers = SimpleWorkers { foo: Foo =>
+   *   // do something with foo...
+   * }
+   */
   def apply[T <: AnyRef](proc: T => Unit): Workers[T] = {
     apply(1)(proc)
   }
 }
+  
+object ResourceWorkers {
+  
+  /**
+   * Convenience 'constructor'. Allows very concise syntax:
+   * val workers = ResourceWorkers(threads, queueLength) {
+   *   new Worker[Foo] {
+   *     def init() = { /* init... */ }
+   *     def process(value: T) = { /* work... */ }
+   *     def destroy() = { /* destroy... */ }
+   *   }
+   * }
+   */
+  def apply[T <: AnyRef](threads: Int, queueLength: Int)(factory: => Worker[T]): Workers[T] = {
+    new Workers[T](threads, queueLength, factory)
+  }
+  
+  /**
+   * Convenience 'constructor'. Allows very concise syntax:
+   * val workers = ResourceWorkers(queueDepth) {
+   *   new Worker[Foo] {
+   *     def init() = { /* init... */ }
+   *     def process(value: T) = { /* work... */ }
+   *     def destroy() = { /* destroy... */ }
+   *   }
+   * }
+   */
+  def apply[T <: AnyRef](queueDepth: Int)(factory: => Worker[T]): Workers[T] = {
+    apply(defaultThreads, defaultThreads * queueDepth)(factory)
+  }
+  
+  /**
+   * Convenience 'constructor'. Allows very concise syntax:
+   * val workers = ResourceWorkers {
+   *   new Worker[Foo] {
+   *     def init() = { /* init... */ }
+   *     def process(value: T) = { /* work... */ }
+   *     def destroy() = { /* destroy... */ }
+   *   }
+   * }
+   */
+  def apply[T <: AnyRef](factory: => Worker[T]): Workers[T] = {
+    apply(1)(factory)
+  }
+}
 
-class Workers[T <: AnyRef](threads: Int, queueLength: Int) {
+object Workers {
+  private[util] val sentinel = new Object()
+  private[util] val defaultThreads = Runtime.getRuntime().availableProcessors()
+}
   
-  def this(queueDepth: Int) = this(defaultThreads, defaultThreads * queueDepth)
+class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]) {
   
-  def this() = this(1)
+  def this(queueDepth: Int, factory: => Worker[T]) = this(defaultThreads, defaultThreads * queueDepth, factory)
+  
+  def this(factory: => Worker[T]) = this(1, factory)
   
   private val queue = new ArrayBlockingQueue[AnyRef](queueLength)
   
@@ -41,7 +108,7 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int) {
   for (i <- 0 until threads) yield
   new Thread(getClass.getName+"-thread-"+i) {
     override def run(): Unit = {
-      val worker = Workers.this.worker()
+      val worker = factory
       worker.init()
       try {
         while(true) {
@@ -54,12 +121,6 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int) {
       }
     }
   }
-  
-  protected def worker() = new Worker[T]() {
-    def process(value: T) = Workers.this.doProcess(value)
-  }
-  
-  protected def doProcess(value: T) = {}
   
   final def start(): Unit = {
     for (worker <- workers) worker.start()
