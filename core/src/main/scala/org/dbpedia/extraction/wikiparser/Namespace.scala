@@ -16,8 +16,8 @@ import org.dbpedia.extraction.util.Language
  */
 class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Boolean) {
   
-  def getName(lang : Language) = 
-    if (dbpedia) name 
+  def name(lang : Language): String = 
+    if (dbpedia) name
     else Namespaces.names(lang).getOrElse(code, throw new IllegalArgumentException("namespace number "+code+" not found for language '"+lang.wikiCode+"'")) 
   
   override def toString = code+"/"+name

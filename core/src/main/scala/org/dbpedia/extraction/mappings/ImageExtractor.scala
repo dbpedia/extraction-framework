@@ -22,22 +22,23 @@ import scala.collection.mutable.ArrayBuffer
  * FIXME: we're sometimes dealing with encoded links, sometimes with decoded links. It's quite a mess.
  */
 class ImageExtractor( 
-  context : {
-    def ontology : Ontology
-    def language : Language
-    def articlesSource : Source
-    def commonsSource : Source 
+  context: {
+    def ontology: Ontology
+    def language: Language
+    def articlesSource: Source
+    def commonsSource: Source 
   } 
 ) 
 extends Extractor
 {
-  private val language = context.language.wikiCode
+  private val wikiCode = context.language.wikiCode
+  private val language = context.language
 
-  require(ImageExtractorConfig.supportedLanguages.contains(language), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
+  require(ImageExtractorConfig.supportedLanguages.contains(wikiCode), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+wikiCode)
 
-  private val fileNamespaceIdentifier = Namespace.File.getName(context.language)
+  private val fileNamespaceIdentifier = Namespace.File.name(language)
 
-  private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + language +"/"
+  private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + wikiCode +"/"
   private val commonsUrlPrefix = ImageExtractorConfig.wikipediaUrlPrefix + "commons/"
 
   private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
@@ -47,8 +48,8 @@ extends Extractor
   logger.info("Loadings images")
   private val nonFreeImages = new HashSet[String]()
   private val freeWikipediaImages = new HashSet[String]()
-  ImageExtractor.loadImages(context.commonsSource, null, nonFreeImages, language)
-  ImageExtractor.loadImages(context.articlesSource, freeWikipediaImages, nonFreeImages, language)
+  ImageExtractor.loadImages(context.commonsSource, null, nonFreeImages, wikiCode)
+  ImageExtractor.loadImages(context.articlesSource, freeWikipediaImages, nonFreeImages, wikiCode)
   logger.info("Images loaded from dump")
 
   private val dbpediaThumbnailProperty = context.ontology.properties("thumbnail")
@@ -58,7 +59,7 @@ extends Extractor
 
   override val datasets = Set(DBpediaDatasets.Images)
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main) return Seq.empty
         
@@ -68,20 +69,20 @@ extends Extractor
         {
             val (url, thumbnailUrl) = getImageUrl(imageFileName)
 
-            quads += new Quad(context.language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
-            quads += new Quad(context.language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
-            quads += new Quad(context.language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
+            quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
 
-            val wikipediaImageUrl = "http://" + language + ".wikipedia.org/wiki/"+ fileNamespaceIdentifier +":" + imageFileName
+            val wikipediaImageUrl = "http://" + wikiCode + ".wikipedia.org/wiki/"+ fileNamespaceIdentifier +":" + imageFileName
 
-            quads += new Quad(context.language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
-            quads += new Quad(context.language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+            quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
         }
 
         quads
     }
 
-    private def searchImage(nodes : List[Node], sections : Int) : Option[(String, Node)] =
+    private def searchImage(nodes: List[Node], sections: Int): Option[(String, Node)] =
     {
         var currentSections = sections
         for (node <- nodes)
@@ -99,7 +100,7 @@ extends Extractor
                          textNode @ TextNode(text, _) <- property.children;
                          fileName <- ImageExtractorConfig.ImageRegex.findFirstIn(text);
                          encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
-                                               WikiUtil.wikiEncode(fileName).capitalize(context.language.locale)
+                                               WikiUtil.wikiEncode(fileName).capitalize(language.locale)
                                            else
                                                fileName
                          if checkImageRights(encodedFileName))
@@ -138,7 +139,7 @@ extends Extractor
                      textNode @ TextNode(text, _) <- property.children;
                      fileName <- ImageRegex.findFirstIn(text);
                      encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
-                                           WikiUtil.wikiEncode(fileName, context.language)
+                                           WikiUtil.wikiEncode(fileName, language)
                                        else
                                            fileName
                      if checkImageRights(encodedFileName))
@@ -167,9 +168,9 @@ extends Extractor
         */
     }
 
-    private def checkImageRights(fileName : String) = (!nonFreeImages.contains(fileName))
+    private def checkImageRights(fileName: String) = (!nonFreeImages.contains(fileName))
 
-    private def getImageUrl(fileName : String) : (String, String) =
+    private def getImageUrl(fileName: String): (String, String) =
     {
       val urlPrefix = if(freeWikipediaImages.contains(URLDecoder.decode(fileName, "UTF-8"))) wikipediaUrlLangPrefix else commonsUrlPrefix
 
@@ -197,7 +198,7 @@ extends Extractor
 
 private object ImageExtractor
 {
-    private def loadImages(source : Source, freeImages : MutableSet[String], nonFreeImages : MutableSet[String], lang : String)
+    private def loadImages(source: Source, freeImages: MutableSet[String], nonFreeImages: MutableSet[String], wikiCode: String)
     {
         val logger = Logger.getLogger(classOf[ImageExtractor].getName)
         val startTime = System.nanoTime
@@ -205,7 +206,7 @@ private object ImageExtractor
         for(page <- source if page.title.namespace == Namespace.File;
             ImageExtractorConfig.ImageLinkRegex <- List(page.title.encoded) )
         {
-            ImageExtractorConfig.NonFreeRegex(lang).findFirstIn(page.source) match
+            ImageExtractorConfig.NonFreeRegex(wikiCode).findFirstIn(page.source) match
             {
                 case Some(_) => nonFreeImages += page.title.encoded
                 case None => if (freeImages != null) freeImages += page.title.encoded

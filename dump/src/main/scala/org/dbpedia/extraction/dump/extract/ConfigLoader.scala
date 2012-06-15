@@ -66,7 +66,7 @@ class ConfigLoader(config: Config)
                 
                 if (config.mappingsDir != null && config.mappingsDir.isDirectory)
                 {
-                    val file = new File(config.mappingsDir, namespace.getName(Language.Mappings).replace(' ','_')+".xml")
+                    val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
                     XMLSource.fromFile(file, Language.Mappings).map(parser)
                 }
                 else

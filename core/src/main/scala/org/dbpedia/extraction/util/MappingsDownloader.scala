@@ -23,7 +23,7 @@ object MappingsDownloader {
     require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
     
     for (namespace <- Namespace.mappings.values) {
-      val file = new File(dir, namespace.getName(Language.Mappings).replace(' ','_')+".xml")
+      val file = new File(dir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
       val nanos = System.nanoTime
       println("downloading mappings from "+apiUrl+" to "+file)
       new WikiDownloader(apiUrl).download(file, namespace)
