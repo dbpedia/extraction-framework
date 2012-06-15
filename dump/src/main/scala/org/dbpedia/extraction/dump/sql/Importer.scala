@@ -5,6 +5,8 @@ import org.dbpedia.extraction.util.StringUtils
 import scala.collection.mutable.HashMap
 import java.lang.StringBuilder
 import java.sql.Connection
+import java.sql.SQLException
+import scala.util.control.ControlThrowable
 
 /**
  * This class is basically mwdumper's SqlWriter ported to Scala.
@@ -129,9 +131,13 @@ class Importer(conn: Connection) {
   private def flush(table: String): Unit = {
     val sql = builders.remove(table).get.toString
     val stmt = conn.createStatement()
+    stmt.setEscapeProcessing(false)
     try {
-      stmt.setEscapeProcessing(false)
       stmt.execute(sql)
+    }
+    catch {
+      // throw our own exception that our XML parser won't catch
+      case sqle: SQLException => throw new ImporterException(sqle)
     }
     finally stmt.close
   }
@@ -142,3 +148,10 @@ class Importer(conn: Connection) {
   }
   
 }
+
+/**
+ * An exception that our XML parser won't catch - it does't catch ControlThrowable.
+ */
+class ImporterException(cause: SQLException)
+extends SQLException(cause.getMessage(), cause.getSQLState(), cause.getErrorCode(), cause)
+with ControlThrowable
