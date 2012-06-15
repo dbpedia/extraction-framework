@@ -24,6 +24,21 @@
                     <launchers>
 
                         <launcher>
+                            <id>import</id>
+                            <mainClass>org.dbpedia.extraction.dump.sql.Import</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                            </jvmArgs>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>/home/release/data/projects/mediawiki/core/maintenance/tables.sql</arg>
+                                <arg>localhost</arg><!-- MySQL host:port -->
+                                <arg>true</arg><!-- require-download-complete -->
+                                <arg>pt</arg><!-- languages and article count ranges, comma-separated -->
+                            </args>
+                        </launcher>
+
+                        <launcher>
                             <id>extraction</id>
                             <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
                             <jvmArgs>
