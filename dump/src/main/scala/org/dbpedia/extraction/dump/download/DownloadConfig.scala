@@ -4,20 +4,13 @@ import java.io.File
 import java.net.{URL,MalformedURLException}
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.io.{Source,Codec}
-import org.dbpedia.extraction.dump.util.WikiInfo
+import org.dbpedia.extraction.dump.util.ConfigUtils
 
 class DownloadConfig
 {
-  // hard-coded - there probably is no mirror, and the format is very specific.
-  // TODO: user might want to use a local file...
-  val listUrl = new URL("http://s23.org/wikistats/wikipedias_csv.php")
+  var baseUrl: URL = null
   
-  // Most browsers would save the file with this name (which s23.org returns in a http header).
-  val listName = "wikipedias.csv"
-  
-  var baseUrl : URL = null
-  
-  var baseDir : File = null
+  var baseDir: File = null
   
   val languages = new HashMap[String, Set[String]]
   
@@ -34,7 +27,7 @@ class DownloadConfig
   /**
    * Parse config in given file. Each line in file must be an argument as explained by usage overview.
    */
-  def parse( file : File ) : Unit = {
+  def parse(file: File): Unit = {
     val source = Source.fromFile(file)(Codec.UTF8)
     try parse(file.getParentFile, source.getLines) 
     finally source.close
@@ -46,9 +39,7 @@ class DownloadConfig
    * of that file. Otherwise, this argument should be the current working directory (or null,
    * which has the same effect).
    */
-  def parse( dir : File, args : TraversableOnce[String] ) : Unit = {
-    // range, both limits optional
-    val Range = """(\d*)-(\d*)""".r
+  def parse(dir: File, args: TraversableOnce[String]): Unit = {
     
     val DumpFiles = new TwoListArg("dump", ":", ",")
     
@@ -68,41 +59,38 @@ class DownloadConfig
       case DumpFiles(keys, files) =>
         if (files.exists(_ isEmpty)) throw Usage("Invalid file name", arg)
         for (key <- keys) key match {
-          case Range(from, to) => add(ranges, toRange(from, to, arg), files)
-          case WikiInfo.Language(language) => add(languages, language, files)
+          case ConfigUtils.Range(from, to) => add(ranges, toRange(from, to, arg), files)
+          case ConfigUtils.Language(language) => add(languages, language, files)
           case other => throw Usage("Invalid language / range '"+other+"'", arg)
         }
       case _ => throw Usage("Invalid argument '"+arg+"'")
     }
   }
   
-  private def add[K](map : Map[K,Set[String]], key : K, values : Array[String]) = 
+  private def add[K](map: Map[K,Set[String]], key: K, values: Array[String]) = 
     map.getOrElseUpdate(key, new HashSet[String]) ++= values
   
-  private def toBoolean(s : String, arg : String) : Boolean =
+  private def toBoolean(s: String, arg: String): Boolean =
     if (s == "true" || s == "false") s.toBoolean else throw Usage("Invalid boolean value", arg) 
   
-  private def toRange(from : String, to : String, arg : String) : (Int, Int) =
+  private def toRange(from: String, to: String, arg: String): (Int, Int) =
   try {
-    val lo : Int = if (from isEmpty) 0 else from.toInt
-    val hi : Int = if (to isEmpty) Int.MaxValue else to.toInt
-    if (lo > hi) throw new NumberFormatException
-    (lo, hi)
+    ConfigUtils.toRange(from, to)
   }
-  catch { case nfe : NumberFormatException => throw Usage("invalid range", arg, nfe) }
+  catch { case nfe: NumberFormatException => throw Usage("invalid range", arg, nfe) }
   
-  private def toInt(str : String, min : Int, max : Int, arg : String) : Int =
+  private def toInt(str: String, min: Int, max: Int, arg: String): Int =
   try {
     val result = str.toInt
     if (result < min) throw new NumberFormatException(str+" < "+min)
     if (result > max) throw new NumberFormatException(str+" > "+max)
     result
   }
-  catch { case nfe : NumberFormatException => throw Usage("invalid integer", arg, nfe) }
+  catch { case nfe: NumberFormatException => throw Usage("invalid integer", arg, nfe) }
   
-  private def toURL(s : String, arg : String) : URL =
+  private def toURL(s: String, arg: String): URL =
   try new URL(s)
-  catch { case mue : MalformedURLException => throw Usage("Invalid URL", arg, mue) }
+  catch { case mue: MalformedURLException => throw Usage("Invalid URL", arg, mue) }
   
   /**
    * If path is absolute, return it as a File. Otherwise, resolve it against parent.
@@ -110,7 +98,7 @@ class DownloadConfig
    * @param parent may be null
    * @param path must not be null, may be empty
    */
-  private def resolveFile(parent : File, path : String) : File = {
+  private def resolveFile(parent: File, path: String): File = {
     val child = new File(path)
     val file = if (child.isAbsolute) child else new File(parent, path)
     // canonicalFile removes '/../' etc.
@@ -120,7 +108,7 @@ class DownloadConfig
 }
 
 object Usage {
-  def apply( msg : String, arg : String = null, cause : Throwable = null ) : Exception = {
+  def apply(msg: String, arg: String = null, cause: Throwable = null): Exception = {
     val message = if (arg == null) msg else msg+" in '"+arg+"'"
     
     println(message)
@@ -162,9 +150,9 @@ Empty arguments or arguments beginning with '#' are ignored.
   }
 }
 
-class TwoListArg(key : String, sep1 : String, sep2 : String)
+class TwoListArg(key: String, sep1: String, sep2: String)
 {
-  def unapply(arg : String) : Option[(Array[String],Array[String])] = {
+  def unapply(arg: String): Option[(Array[String],Array[String])] = {
     val index = arg.indexOf('=')
     if (index == -1 || arg.substring(0, index).trim != key) return None
     val parts = arg.substring(index + 1).trim.split(sep1, -1)
@@ -174,12 +162,12 @@ class TwoListArg(key : String, sep1 : String, sep2 : String)
 }
 
 object Arg {
-  def unapply(arg : String) : Option[(String, String)] =  {
+  def unapply(arg: String): Option[(String, String)] =  {
     val index = arg.indexOf('=')
     if (index == -1) None else Some((arg.substring(0, index).trim, arg.substring(index + 1).trim))
   }
 }
 
 object Ignored {
-  def unapply(arg : String) : Option[String] = if (arg.trim.isEmpty || arg.trim.startsWith("#")) Some(arg) else None
+  def unapply(arg: String): Option[String] = if (arg.trim.isEmpty || arg.trim.startsWith("#")) Some(arg) else None
 }

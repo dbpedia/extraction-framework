@@ -3,7 +3,6 @@ package org.dbpedia.extraction.dump.util
 import java.net.URL
 import scala.io.{Source, Codec}
 import java.io.File
-import scala.collection.Seq
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -16,13 +15,13 @@ class WikiInfo(val language: String, val pages: Int)
  */
 object WikiInfo
 {
-  /**
-   * Simple regex matching Wikipedia language codes.
-   * Language codes have at least two characters, start with a lower-case letter and contain only 
-   * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
-   */
-  val Language = """([a-z][a-z0-9-]+)""".r
-    
+  // hard-coded - there probably is no mirror, and the format is very specific.
+  // TODO: user might want to use a local file...
+  val URL = new URL("http://s23.org/wikistats/wikipedias_csv.php")
+  
+  // Most browsers would save the file with this name, because s23.org returns it in a http header.
+  val FileName = "wikipedias.csv"
+  
   def fromFile(file: File, codec: Codec): Seq[WikiInfo] = {
     val source = Source.fromFile(file)(codec)
     try fromSource(source) finally source.close
@@ -64,7 +63,7 @@ object WikiInfo
       catch { case nfe: NumberFormatException => throw new Exception("expected page count in field with index [5], found line ["+line+"]") }
       
       val wikiCode = fields(2)
-      if (! Language.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
+      if (! ConfigUtils.Language.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
       
       new WikiInfo(wikiCode, pages)
   }
