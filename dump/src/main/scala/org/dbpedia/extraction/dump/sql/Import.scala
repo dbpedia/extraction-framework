@@ -61,7 +61,7 @@ object Import {
     finally source.close()
     
     val namespaces = Set(Namespace.Template)
-    val namespaceList = namespaces.map(_.name).mkString("(",",",")")
+    val namespaceList = namespaces.map(_.name).mkString("[",",","]")
     
     val info = new Properties()
     info.setProperty("allowMultiQueries", "true")
