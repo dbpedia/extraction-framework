@@ -162,7 +162,7 @@ object Disambiguation
       "nb" -> Set("Peker"),
       "nds" -> Set("Mehrdüdig_Begreep"),
       "nds-nl" -> Set("Dv"),
-      "nl" -> Set("Doorverwijspagina"),
+      "nl" -> Set("Dp", "Dpintro"),
       "nn" -> Set("Fleirtyding"),
       "no" -> Set("Peker"),
       "oc" -> Set("Omonimia"),
@@ -242,5 +242,6 @@ object Disambiguation
       "zh-tw" -> Set("disambig", "消含糊", "消除含糊", "消歧义", "消除歧义", "消歧義", "消除歧義"),
       "zh-yue" -> Set("disambig", "搞清楚"))
 
+    // TODO: capitalize the values in the source code, not each time they are requested
     def get(language : Language) : Option[Set[String]] = map.get(language.wikiCode).map(_.map(_.capitalize(language.locale)))
 }
