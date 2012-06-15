@@ -138,7 +138,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
         
         val source = if (paths.mappingsDir != null && paths.mappingsDir.isDirectory)
         {
-            val file = new File(paths.mappingsDir, namespace.getName(Language.Mappings).replace(' ','_')+".xml")
+            val file = new File(paths.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
             logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(file, language) // TODO: use Language.Mappings?
         }

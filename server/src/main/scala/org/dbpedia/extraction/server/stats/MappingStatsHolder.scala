@@ -24,7 +24,7 @@ object MappingStatsHolder {
       
       var statistics = new mutable.ArrayBuffer[MappingStats]()
 
-      val templateNamespace = Namespace.Template.getName(language) + ":"
+      val templateNamespace = Namespace.Template.name(language) + ":"
       
       for ((rawTemplate, templateStats) <- wikiStats.templates)
       {
