@@ -30,7 +30,7 @@ class Importer(conn: Connection) {
       insert(new Revision(page.id, page.revision, length))
       insert(new Text(page.revision, page.source))
       
-      if (pages % 10000 == 0) logPages()
+      if (pages % 2000 == 0) logPages()
     }
     
     flush()
@@ -127,7 +127,6 @@ class Importer(conn: Connection) {
   }
   
   private def flush(table: String): Unit = {
-    logFlush(table)
     val sql = builders.remove(table).get.toString
     val stmt = conn.createStatement()
     try {
@@ -137,14 +136,9 @@ class Importer(conn: Connection) {
     finally stmt.close
   }
   
-  private def logFlush(table: String): Unit = {
-    val millis = System.currentTimeMillis - time
-    println("flushing table "+table+" at "+pages+" pages / "+millis+" millis ("+(millis.toDouble/pages)+" millis per page)")
-  }
-  
   private def logPages(): Unit = {
     val millis = System.currentTimeMillis - time
-    println("inserted "+pages+" pages in "+millis+" millis ("+(millis.toDouble/pages)+" millis per page)")
+    println("imported "+pages+" pages in "+millis+" millis ("+(millis.toDouble/pages)+" millis per page)")
   }
   
 }
