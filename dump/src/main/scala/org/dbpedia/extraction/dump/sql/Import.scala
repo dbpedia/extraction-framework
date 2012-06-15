@@ -8,6 +8,7 @@ import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.dump.util.WikiInfo
 import scala.io.Codec
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
+import scala.collection.immutable.SortedSet
 import org.dbpedia.extraction.dump.util.ConfigUtils
 import org.dbpedia.extraction.dump.download.Download
 import java.util.Properties
@@ -25,7 +26,7 @@ object Import {
     // Use all remaining args as keys or comma or whitespace separated lists of keys
     var keys: Seq[String] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield lang
         
-    val languages = new HashSet[Language]
+    var languages = SortedSet[Language]()(Language.wikiCodeOrdering)
     
     val ranges = new HashSet[(Int,Int)]
   
