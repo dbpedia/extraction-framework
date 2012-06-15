@@ -22,7 +22,7 @@ extends Extractor
 
   override def extract(node : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
   {
-    val objectLink = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
+    val objectLink = node.root.title.pageIri
 
     Seq(new Quad(context.language, DBpediaDatasets.Revisions, objectLink, wikiPageRevisionIDProperty,
         node.revision.toString, node.sourceUri, context.ontology.datatypes("xsd:integer")))
