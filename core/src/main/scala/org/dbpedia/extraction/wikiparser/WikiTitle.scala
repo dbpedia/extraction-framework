@@ -36,7 +36,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     
     private def withNamespace(encode : Boolean) : String =
     {
-      var ns = namespace.getName(language)
+      var ns = namespace.name(language)
       if (encode) ns = WikiUtil.wikiEncode(ns).capitalize(language.locale)
       (if (ns isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
     }
@@ -46,7 +46,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
      */
     override def toString() = {
       val frag = if (fragment == null) "" else ";fragment='"+fragment+"'"
-      "title="+decoded+";ns="+namespace+"/"+namespace.getName(language)+";language:"+language+frag;
+      "title="+decoded+";ns="+namespace+"/"+namespace.name(language)+";language:"+language+frag;
     }
 
     /**

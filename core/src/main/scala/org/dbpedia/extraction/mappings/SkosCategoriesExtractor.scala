@@ -61,7 +61,7 @@ extends Extractor
 
   private def getUri(destination : WikiTitle) : String =
   {
-    val categoryNamespace = Namespace.Category.getName(context.language)
+    val categoryNamespace = Namespace.Category.name(context.language)
     context.language.resourceUri.append(categoryNamespace+':'+destination.decoded)
   }
 }
