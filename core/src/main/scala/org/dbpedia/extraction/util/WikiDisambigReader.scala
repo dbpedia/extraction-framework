@@ -10,6 +10,10 @@ import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
 object WikiDisambigReader {
   
+  // TODO: also read action=query&format=xml&meta=allmessages&ammessages=disambiguationspage
+  // If the page MediaWiki:Disambiguationspage doesn't exist, this query should return the 
+  // template(s) set in languages/messages/MessagesXyz.php.
+  
   /**
    * The query for api.php, without the leading '?'.
    */
