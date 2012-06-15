@@ -59,21 +59,26 @@ object Import {
     try source.getLines.mkString("\n")
     finally source.close()
     
+    val namespaces = Set(Namespace.Template)
+    val namespaceList = namespaces.map(_.name).mkString("(",",",")")
+    
     val info = new Properties()
     info.setProperty("allowMultiQueries", "true")
     val conn = new com.mysql.jdbc.Driver().connect("jdbc:mysql://"+server+"/", info)
     try {
       for (language <- languages) {
-        println("importing "+language.wikiCode)
         
         val finder = new Finder[File](baseDir, language)
         val tagFile = if (requireComplete) Download.Complete else "pages-articles.xml"
         val date = ConfigUtils.latestDate(finder, tagFile)
         val file = finder.file(date, "pages-articles.xml")
         
-        val source = XMLSource.fromFile(file, language, _.namespace == Namespace.Template)
-        
         val database = finder.wikiName
+        
+        println("importing pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server "+server)
+        
+        val source = XMLSource.fromFile(file, language, title => namespaces.contains(title.namespace))
+        
         val stmt = conn.createStatement()
         try {
           stmt.execute("DROP DATABASE IF EXISTS "+database+"; CREATE DATABASE "+database+"; USE "+database)
@@ -83,7 +88,7 @@ object Import {
         
         new Importer(conn).process(source)
         
-        println("imported "+language.wikiCode)
+        println("imported  pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server "+server)
       }
     }
     finally conn.close()
