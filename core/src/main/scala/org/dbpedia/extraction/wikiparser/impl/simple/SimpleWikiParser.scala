@@ -91,8 +91,7 @@ final class SimpleWikiParser extends WikiParser
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
     {
-        case TemplateNode(title, _, _) if names.contains(title.decoded) => true
-        case TemplateNode(title, _, _) => false
+        case TemplateNode(title, _, _) => names.contains(title.decoded)
         case _ => node.children.exists(node => findTemplate(node, names, language))
     }
     
