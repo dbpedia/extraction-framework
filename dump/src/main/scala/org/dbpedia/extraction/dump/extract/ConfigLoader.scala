@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
 import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser,WikiTitle}
 import org.dbpedia.extraction.dump.download.Download
+import org.dbpedia.extraction.dump.util.ConfigUtils
 import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
@@ -195,9 +196,7 @@ class ConfigLoader(config: Config)
     
     private def latestDate(finder: Finder[_]): String = {
       val fileName = if (config.requireComplete) Download.Complete else config.source
-      val dates = finder.dates(fileName)
-      if (dates.isEmpty) throw new IllegalArgumentException("found no directory with file '"+finder.wikiName+"-[YYYYMMDD]-"+fileName+"'")
-      dates.last
+      ConfigUtils.latestDate(finder, fileName)
     }
     
 }

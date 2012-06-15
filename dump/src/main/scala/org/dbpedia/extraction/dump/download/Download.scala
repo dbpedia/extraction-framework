@@ -38,8 +38,8 @@ object Download extends DownloadConfig
     // resolve page count ranges to languages
     if (ranges.nonEmpty)
     {
-      val listFile = new File(baseDir, listName)
-      download.downloadFile(listUrl, listFile)
+      val listFile = new File(baseDir, WikiInfo.FileName)
+      download.downloadFile(WikiInfo.URL, listFile)
       
       // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
       // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
