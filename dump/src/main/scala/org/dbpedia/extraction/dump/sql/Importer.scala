@@ -91,11 +91,14 @@ class Importer(conn: Connection) {
   }
   
   private val replacements = {
-    val rep = StringUtils.replacements('\\', "\"\'\\")
+    val rep = new Array[String](128)
     rep(0) = "\\0"
     rep('\n') = "\\n"
     rep('\r') = "\\r"
     rep(27) = "\\Z" // ESC
+    rep('\"') = "\\\""
+    rep('\'') = "\\\'"
+    rep('\\') = "\\\\"
     rep
   }
   
