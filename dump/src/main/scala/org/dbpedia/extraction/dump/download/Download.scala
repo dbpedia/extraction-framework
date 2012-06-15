@@ -3,6 +3,7 @@ package org.dbpedia.extraction.dump.download
 import java.io.File
 import scala.io.Codec
 import scala.collection.mutable.HashSet
+import org.dbpedia.extraction.dump.util.WikiInfo
 
 object Download extends DownloadConfig
 {

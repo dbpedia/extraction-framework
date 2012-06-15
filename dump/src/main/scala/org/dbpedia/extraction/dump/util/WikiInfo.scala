@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dump.download
+package org.dbpedia.extraction.dump.util
 
 import java.net.URL
 import scala.io.{Source, Codec}
