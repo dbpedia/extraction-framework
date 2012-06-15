@@ -64,6 +64,7 @@ object Import {
     
     val info = new Properties()
     info.setProperty("allowMultiQueries", "true")
+    info.setProperty("characterEncoding", "UTF-8")
     val conn = new com.mysql.jdbc.Driver().connect("jdbc:mysql://"+server+"/", info)
     try {
       for (language <- languages) {
@@ -81,7 +82,7 @@ object Import {
         
         val stmt = conn.createStatement()
         try {
-          stmt.execute("DROP DATABASE IF EXISTS "+database+"; CREATE DATABASE "+database+"; USE "+database)
+          stmt.execute("DROP DATABASE IF EXISTS "+database+"; CREATE DATABASE "+database+" CHARACTER SET binary; USE "+database+";")
           stmt.execute(tables)
         }
         finally stmt.close()
