@@ -26,7 +26,7 @@ object WikiUtil
     {
       // FIXME: removing these chars may avoid some errors, but also introduces others. 
       // For example, the local name of the 'Project' namespace on fa wikipedia contains U+200C.
-      string.replaceChars("_\u00A0\u200C\u200D\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "  ").replaceAll(" +", " ").trim
+      string.replaceChars("_\u00A0\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "  ").replaceAll(" +", " ").trim
     }
     
     private val iriReplacements = StringUtils.replacements('%', "\"#%<>?[\\]^`{|}")
