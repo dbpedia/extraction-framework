@@ -16,7 +16,9 @@
     </ignore>
 	<mappings>
 		<mapping from="сущ" to="Noun"/>
+		  <mapping from="Семантические свойства" to="Noun"/>
 		<mapping from="гл" to="Verb"/>
+		  <mapping from="Морфологические и синтаксические свойства" to="Verb"/>
 		<mapping from="прил" to="Adjective"/>        
 		<mapping from="цифра" to="NumericSymbol"/>        
 		<mapping from="число" to="NumericSymbol"/>
@@ -1091,10 +1093,6 @@
 		<mapping from="-moh-" to="Mohawk"/>
 	</mappings>			
 
-
-
-
-  
     <saveVars>
         <var name="pos" />
         <var name="language" />
@@ -1112,7 +1110,20 @@
             <!-- a type declaration -->
             <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/LexicalEntity" oType="URI"/>
         </triples>
-       
+
+       <templates>
+            <template name="also">
+                <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://wikipedia.org/wiki/uri($entityId)" oType="URI"/>
+                               </triples>
+                            
+                            </resultTemplate>
+                </resultTemplates>
+                <wikiTemplate>{{wikipedia}}</wikiTemplate>
+            </template>
+       </templates>
             
            <prologs>       
 			  <template name="redirect">
@@ -1171,7 +1182,7 @@
                         </triples>
                     </resultTemplate>
                 </resultTemplates>
-                <wikiTemplate>= {{ $language }} =
+                <wikiTemplate>= {{-$language-}} =
 </wikiTemplate>
             </indicator>
 	        
@@ -1182,14 +1193,14 @@
                     <resultTemplates>
                         <resultTemplate>
                             <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map($pos))" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
                                 <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map($pos))" oType="URI" />
-				<triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasHyphenationSingular" o="$hyphenationSingular" oType="literal"/>
                             </triples>
                         </resultTemplate>
                     </resultTemplates>
-                    <wikiTemplate>=== Морфологические и синтаксические свойства ===
-{{$pos $language | |слоги = {{по слогам|$hyphenationSingular}} }}</wikiTemplate>
+                    <wikiTemplate>===$any4===
+{{ $pos $any0|$any1|$any2|$any3}}
+</wikiTemplate>
                 </indicator>
 
             <templates>
@@ -1203,7 +1214,7 @@
                         </resultTemplates>                    
                         <wikiTemplate>=== Этимология ===
 Происходит от {{этимология:$etymology}}
-					</wikiTemplate>
+</wikiTemplate>
                     </template>
 
 
@@ -1226,7 +1237,7 @@
                             </resultTemplate>
                         </resultTemplates>                       
                         <wikiTemplate>{{transcriptions|$pronunciationSingular|$pronunciation-plural}} {{медиа|$audioSingular}}
-						</wikiTemplate>
+</wikiTemplate>
                 </template>
 
                 
@@ -1247,24 +1258,25 @@
 </wikiTemplate>
                     </template>
                     
-					<template name="synonyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.">
+					<template name="synonyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
                         </parameters> 
                         <wikiTemplate>==== Синонимы ====
-(# $sense $line)+
-
+(# $line
+)+
 </wikiTemplate>
                     </template>
 
 
-				                    <template name="antonym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
+				                    <template name="antonym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasAntonym"/>                   
                         </parameters> 
                         <wikiTemplate>==== Антонимы ====
-(# $line)+	
-						</wikiTemplate>
+(# $line
+)+	
+</wikiTemplate>
                     </template>
 
 
@@ -1273,7 +1285,8 @@
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>                   
                         </parameters> 
                         <wikiTemplate>==== Гиперонимы ====
-						(# $line)+
+(# $line
+)+
 						</wikiTemplate>
                     </template>
 
@@ -1283,8 +1296,9 @@
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>                   
                         </parameters> 
                         <wikiTemplate>{{==== Гипонимы ====}}
-						(# $line)+	
-						</wikiTemplate>
+(# $line
+)+	
+</wikiTemplate>
                     </template>
                    
                    <template name="meaning">
@@ -1299,8 +1313,9 @@
                             </resultTemplate>
                         </resultTemplates>                    
                         <wikiTemplate>====Значение====
-(# ({{~~ExternalLinkNode}})+ $meaning ($meaningId~~)+ {{пример|$example}})*
-						</wikiTemplate>
+(# ({{~~ExternalLinkNode}})+ $meaning ($meaningId~~)+ {{пример|$example}}
+)*
+</wikiTemplate>
                     </template>
 
 			<template name="relatedWords" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
@@ -1308,7 +1323,8 @@
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
                         </parameters>                   
                         <wikiTemplate>=== Фразеологизмы и устойчивые сочетания ===
-(* $line)+
+(* $line
+)+
 </wikiTemplate>
                     </template>
 					
@@ -1321,7 +1337,8 @@
                             </resultTemplate>
                         </resultTemplates>                    
                         <wikiTemplate>==== Пословицы и поговорки ====
-(* $proverb)+
+(* $proverb
+)+
 </wikiTemplate>
                     </template>
 					
@@ -1336,7 +1353,8 @@
                             </resultTemplate>
                         </resultTemplates> 
                         <wikiTemplate>=== Библиография ===
-(* $source)
+(* $source
+)
 </wikiTemplate>
                     </template>
 	                </templates>
@@ -1344,5 +1362,3 @@
 	        </block>
 	</page>
 </config>
-
-
