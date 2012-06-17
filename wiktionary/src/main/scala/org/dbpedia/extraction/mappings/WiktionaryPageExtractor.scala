@@ -365,7 +365,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                         val res = funName match {
                             case "uri" => urify(funArg)
                             case "map" => map(funArg)
-                            case "assertMapped" => if(!(mappings.contains(funArg))){throw new Exception("assertion failed: existing key in mapings for "+funArg)} else {funArg}
+                            case "assertMapped" => if(!hasMapping(funArg)){throw new Exception("assertion failed: existing key in mapings for "+funArg)} else {funArg}
                             case "getId" => cache.matcher.getId(funArg)
                             case "makeId" => cache.matcher.makeId(funArg)
                             case "getOrMakeId" => cache.matcher.getOrMakeId(funArg)
@@ -506,7 +506,7 @@ object WiktionaryPageExtractor {
   */
   def urify(in:String):String = in.replace("	"," ").replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
 
-  val cleanPattern = new Regex("[^a-zA-Z]")
+  val cleanPattern = new Regex("[^\\p{L} ]")
   def getCleaned(dirty:String) = cleanPattern.replaceAllIn(dirty, "").trim
   def myCompare(s1 : String, s2 : String) : Int = {
       val s1l = s1.length
@@ -516,6 +516,11 @@ object WiktionaryPageExtractor {
       } else {
         s1l - s2l
       }
+  }
+
+  def hasMapping(in:String):Boolean = {
+    val clean = getCleaned(in)
+    mappings.contains(clean)
   }
 
   def map(in:String):String = {
