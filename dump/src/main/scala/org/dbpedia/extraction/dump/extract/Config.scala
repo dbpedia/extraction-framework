@@ -6,8 +6,10 @@ import java.util.Properties
 import java.io.File
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
-import scala.collection.JavaConversions.asScalaSet // implicit
-import scala.collection.immutable.SortedMap
+import scala.collection.JavaConversions.asScalaSet
+import scala.collection.immutable.{SortedSet,SortedMap}
+import org.dbpedia.extraction.dump.util.{ConfigUtils,WikiInfo}
+import scala.io.Codec
 
 private class Config(config: Properties)
 extends ConfigParser(config)
@@ -49,13 +51,7 @@ extends ConfigParser(config)
    */
   private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
   {
-    /** Languages */
-    // TODO: add special parameters, similar to download:
-    // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
-    // extract=mapped:MappingExtractor means all languages with a mapping namespace
-    var languages = splitValue("languages", ',').map(Language)
-    if (languages.isEmpty) languages = Namespace.mappings.keySet.toList
-    languages = languages.sorted(Language.wikiCodeOrdering)
+    val languages = loadLanguages()
 
     //Load extractor classes
     if(config.getProperty("extractors") == null) throw error("Property 'extractors' not defined.")
@@ -78,6 +74,51 @@ extends ConfigParser(config)
 
     SortedMap(classes.toSeq: _*)(Language.wikiCodeOrdering)
   }
+  
+  private def loadLanguages(): Set[Language] = {
+    
+    /** Languages */
+    // TODO: add special parameters, similar to download:
+    // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
+    // extract=mapped:MappingExtractor means all languages with a mapping namespace
+    
+    var keys = splitValue("languages", ',')
+        
+    var languages = Set[Language]()
+    
+    var ranges = Set[(Int,Int)]()
+  
+    // FIXME: copy & paste in DownloadConfig and Import
+    
+    for (key <- keys) key match {
+      case ConfigUtils.Range(from, to) => ranges += ConfigUtils.toRange(from, to)
+      case ConfigUtils.Language(language) => languages += Language(language)
+      case other => throw new Exception("Invalid language / range '"+other+"'")
+    }
+    
+    // resolve page count ranges to languages
+    if (ranges.nonEmpty)
+    {
+      val listFile = new File(dumpDir, WikiInfo.FileName)
+      
+      // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
+      // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
+      // these non-ASCII chars anyway, so we don't have to unescape them.
+      println("parsing "+listFile)
+      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
+      
+      // for all wikis in one of the desired ranges...
+      for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
+      {
+        // ...add its language
+        languages += Language(wiki.language)
+      }
+    }
+    
+    if (languages.isEmpty) languages = Namespace.mappings.keySet
+
+    SortedSet[Language](languages.toSeq: _*)(Language.wikiCodeOrdering)
+  }
 
   private def loadExtractorClass(name: String): Class[_ <: Extractor] = {
     val className = if (! name.contains(".")) classOf[Extractor].getPackage.getName+'.'+name else name
@@ -86,4 +127,3 @@ extends ConfigParser(config)
   }
   
 }
-
