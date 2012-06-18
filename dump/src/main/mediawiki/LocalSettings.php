@@ -15,10 +15,15 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
-if ( !isset( $_REQUEST['uselang'] ) ) {
-        die( "Missing request parameter 'uselang'\n" );
+if ( isset( $_REQUEST['uselang'] ) ) {
+	$languageCode = $_REQUEST['uselang'];
+} else if ( isset( $_REQUEST['lang'] ) ) {
+	# used for script and css URLs
+	$languageCode = $_REQUEST['lang'];
+} else {
+	die( "Missing request parameter 'uselang' or 'lang'\n" );
 }
-$languageCode = $_REQUEST['uselang'];
+
 $underscoreLanguageCode = str_replace('-', '_', $languageCode);
 
 ## Uncomment this to disable output compression
@@ -71,7 +76,7 @@ $wgDBprefix         = "";
 $wgDBTableOptions   = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
 
 # Experimental charset support for MySQL 5.0.
-$wgDBmysql5 = false;
+$wgDBmysql5 = true;
 
 ## Shared memory settings
 $wgMainCacheType    = CACHE_ACCEL;
@@ -141,7 +146,8 @@ require_once( "$IP/extensions/CategoryTree/CategoryTree.php" );
 require_once( "$IP/extensions/CharInsert/CharInsert.php" );
 require_once( "$IP/extensions/Cite/Cite.php" );
 require_once( "$IP/extensions/ExpandTemplates/ExpandTemplates.php" );
-require_once( "$IP/extensions/FlaggedRevs/FlaggedRevs.php" );
+# FlaggedRevs needs a new table, and it only adds the rare parser function pagesusingpendingchanges
+# require_once( "$IP/extensions/FlaggedRevs/FlaggedRevs.php" );
 require_once( "$IP/extensions/ImageMap/ImageMap.php" );
 require_once( "$IP/extensions/InputBox/InputBox.php" );
 require_once( "$IP/extensions/Interwiki/Interwiki.php" );
@@ -153,7 +159,7 @@ require_once( "$IP/extensions/StringFunctionsEscaped/StringFunctionsEscaped.php"
 require_once( "$IP/extensions/SyntaxHighlight_GeSHi/SyntaxHighlight_GeSHi.php" );
 require_once( "$IP/extensions/timeline/Timeline.php" );
 require_once( "$IP/extensions/wikihiero/wikihiero.php" );
-require_once( "DBpediaFunctions.php" );
+require_once( "$IP/DBpediaFunctions.php" );
 
 # End of automatically generated settings.
 # Add more configuration options below.
