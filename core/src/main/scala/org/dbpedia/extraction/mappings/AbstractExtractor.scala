@@ -1,14 +1,16 @@
 package org.dbpedia.extraction.mappings
 
+import scala.xml.XML
+import scala.io.Source
+import java.io.{InputStream, OutputStreamWriter}
+import java.net.{URLEncoder, URL}
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
-import java.net.{URLEncoder, URL}
-import xml.XML
-import io.Source
-import java.io.{InputStream, OutputStreamWriter}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+import org.dbpedia.util.text.ParseExceptionIgnorer
 
 /**
  * Extracts page abstracts.
@@ -33,7 +35,7 @@ extends Extractor
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
     //TODO make this configurable
-    private val apiUrl = "http://localhost/mw-modified/api.php"
+    private val apiUrl = "http://localhost/mediawiki/api.php"
 
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
@@ -58,13 +60,13 @@ extends Extractor
 
         //Reproduce wiki text for abstract
         val abstractWikiText = getAbstractWikiText(pageNode)
-        if(abstractWikiText == "") return Seq.empty
+        // if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
         var text = retrievePage(pageNode.title, abstractWikiText)
 
         //Ignore empty abstracts
-        if(text.trim.isEmpty) return Seq.empty
+        // if(text.trim.isEmpty) return Seq.empty
 
         text = postProcess(pageNode.title, text)
 
@@ -75,7 +77,7 @@ extends Extractor
         val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
         val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
 
-        if(shortText.isEmpty)
+        if (false) // (shortText.isEmpty)
         {
             Seq(quadLong)
         }
@@ -173,27 +175,29 @@ extends Extractor
         (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
     }
 
-    private def postProcess(pageTitle : WikiTitle, text : String) : String =
+    private def postProcess(pageTitle: WikiTitle, text: String): String =
     {
-        def startsWithLowercase(text : String) =
+      val startsWithLowercase =
+      if (text.isEmpty) {
+        false
+      } else {
+        val firstLetter = text.substring(0,1)
+        firstLetter != firstLetter.toUpperCase(context.language.locale)
+      }
+
+      //HACK
+      if (startsWithLowercase)
+      {
+        val decodedTitle = pageTitle.decoded.replaceFirst(" \\(.+\\)$", "")
+
+        if (! text.toLowerCase.contains(decodedTitle.toLowerCase))
         {
-            val firstLetter = text.substring(0,1)
-            firstLetter != firstLetter.toUpperCase(context.language.locale)
+          // happens mainly for Japanese names (abstract starts with template)
+          return decodedTitle + " " + text
         }
+      }
 
-        //HACK
-        if(startsWithLowercase(text))
-        {
-            val decodedTitle = pageTitle.decoded.replaceFirst(" \\(.+\\)$", "")
-
-            if(!text.toLowerCase.contains(decodedTitle.toLowerCase))
-            {
-                // happens mainly for Japanese names (abstract starts with template)
-                return decodedTitle + " " + text
-            }
-        }
-
-        text
+      text
     }
 
     private val destinationNamespacesToRender = List(Namespace.Main, Namespace.Template)
@@ -244,10 +248,16 @@ extends Extractor
         }
 
         // Re-generate wiki text for found range of nodes
-        pageNode.children.slice(start, end)
+        val text = pageNode.children.slice(start, end)
                 .filter(renderNode)
                 .map(_.toWikiText)
                 .mkString("").trim
+        
+        // decode HTML entities - the result is plain text
+        val coder = new HtmlCoder(XmlCodes.NONE)
+        coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
+        coder.code(text)
+        // TODO: do we need double decode?
     }
 
 }
