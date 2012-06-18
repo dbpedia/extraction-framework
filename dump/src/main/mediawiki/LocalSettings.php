@@ -135,6 +135,7 @@ require_once( "$IP/extensions/CategoryTree/CategoryTree.php" );
 require_once( "$IP/extensions/CharInsert/CharInsert.php" );
 require_once( "$IP/extensions/Cite/Cite.php" );
 require_once( "$IP/extensions/ExpandTemplates/ExpandTemplates.php" );
+require_once( "$IP/extensions/FlaggedRevs/FlaggedRevs.php" );
 require_once( "$IP/extensions/ImageMap/ImageMap.php" );
 require_once( "$IP/extensions/InputBox/InputBox.php" );
 require_once( "$IP/extensions/Interwiki/Interwiki.php" );
@@ -144,7 +145,8 @@ require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
 require_once( "$IP/extensions/Poem/Poem.php" );
 require_once( "$IP/extensions/StringFunctionsEscaped/StringFunctionsEscaped.php" );
 require_once( "$IP/extensions/SyntaxHighlight_GeSHi/SyntaxHighlight_GeSHi.php" );
-
+require_once( "$IP/extensions/timeline/Timeline.php" );
+require_once( "$IP/extensions/wikihiero/wikihiero.php" );
 
 # End of automatically generated settings.
 # Add more configuration options below.
