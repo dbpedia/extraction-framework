@@ -118,7 +118,7 @@ $wgUpgradeKey = "0ee77c3c683fc7c9";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'standard', 'nostalgia', 'cologneblue', 'monobook', 'vector':
-$wgDefaultSkin = "monobook";
+$wgDefaultSkin = "vector";
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -146,7 +146,6 @@ require_once( "$IP/extensions/CategoryTree/CategoryTree.php" );
 require_once( "$IP/extensions/CharInsert/CharInsert.php" );
 require_once( "$IP/extensions/Cite/Cite.php" );
 require_once( "$IP/extensions/ExpandTemplates/ExpandTemplates.php" );
-# FlaggedRevs needs a new table, and it only adds the rare parser function pagesusingpendingchanges
 # require_once( "$IP/extensions/FlaggedRevs/FlaggedRevs.php" );
 require_once( "$IP/extensions/ImageMap/ImageMap.php" );
 require_once( "$IP/extensions/InputBox/InputBox.php" );

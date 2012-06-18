@@ -46,7 +46,7 @@ ob_implicit_flush(1);
 		
 		if (! self::CLEAN) return;
 		
-		wfProfileIn( __METHOD__ );
+		// wfProfileIn( __METHOD__ );
 		
 		$html = $wgOut->getHTML();
 		$html = self::cleanHtml($html);
@@ -54,7 +54,7 @@ ob_implicit_flush(1);
 		$wgOut->clearHTML();
 		$wgOut->addHTML($html);
 		
-		wfProfileOut( __METHOD__ );
+		// wfProfileOut( __METHOD__ );
 	}
 	
 	/**
