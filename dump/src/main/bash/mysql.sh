@@ -48,7 +48,7 @@ case "$COMMAND" in
 install)
     ./scripts/mysql_install_db --no-defaults --character-set-server=utf8 --datadir="$MYDIR/data"
     
-    ./bin/mysqld_safe --no-defaults --character-set-server=utf8 --socket="$MYDIR/mysql.sock" --bind-address=localhost --datadir="$MYDIR/data" --max_allowed_packet=1G --key_buffer_size=1G >>"$MYDIR/mysql.log" 2>&1 &
+    ./bin/mysqld_safe --no-defaults --character-set-server=utf8 --socket="$MYDIR/mysql.sock" --bind-address=localhost --datadir="$MYDIR/data" --max_allowed_packet=1G --key_buffer_size=1G --query_cache_size=1G >>"$MYDIR/mysql.log" 2>&1 &
     
     # wait for server to start
     sleep 5
@@ -56,7 +56,7 @@ install)
     ./bin/mysql --no-defaults --default-character-set=utf8 --socket="$MYDIR/mysql.sock" -u root -e "GRANT ALL ON *.* TO ''@'localhost'" mysql
 ;;
 start)
-    ./bin/mysqld_safe --no-defaults --character-set-server=utf8 --socket="$MYDIR/mysql.sock" --bind-address=localhost --datadir="$MYDIR/data" --max_allowed_packet=1G --key_buffer_size=1G >>"$MYDIR/mysql.log" 2>&1 &
+    ./bin/mysqld_safe --no-defaults --character-set-server=utf8 --socket="$MYDIR/mysql.sock" --bind-address=localhost --datadir="$MYDIR/data" --max_allowed_packet=1G --key_buffer_size=1G --query_cache_size=1G >>"$MYDIR/mysql.log" 2>&1 &
 ;;
 stop)
     ./bin/mysqladmin --no-defaults --default-character-set=utf8 --socket="$MYDIR/mysql.sock" shutdown
