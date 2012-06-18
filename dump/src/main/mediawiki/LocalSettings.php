@@ -132,6 +132,7 @@ $wgResourceLoaderMaxQueryLength = -1;
 # The following extensions were automatically enabled:
 require_once( "$IP/extensions/Babel/Babel.php" );
 require_once( "$IP/extensions/CategoryTree/CategoryTree.php" );
+require_once( "$IP/extensions/CharInsert/CharInsert.php" );
 require_once( "$IP/extensions/Cite/Cite.php" );
 require_once( "$IP/extensions/ExpandTemplates/ExpandTemplates.php" );
 require_once( "$IP/extensions/ImageMap/ImageMap.php" );
