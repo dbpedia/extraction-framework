@@ -15,10 +15,16 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
+if ( !isset( $_REQUEST['uselang'] ) ) {
+        die( "Missing request parameter 'uselang'\n" );
+}
+$languageCode = $_REQUEST['uselang'];
+$underscoreLanguageCode = str_replace('-', '_', $languageCode);
+
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
-$wgSitename      = "DBpediaMediaWiki";
+$wgSitename      = "Wikipedia_".$underscoreLanguageCode;
 $wgMetaNamespace = "Project";
 
 ## The URL base path to the directory containing the wiki;
@@ -54,7 +60,7 @@ $wgEmailAuthentication = false;
 ## Database settings
 $wgDBtype           = "mysql";
 $wgDBserver         = "127.0.0.1";
-$wgDBname           = "wawiki";
+$wgDBname           = $underscoreLanguageCode."wiki";
 $wgDBuser           = "root";
 $wgDBpassword       = "";
 
@@ -97,7 +103,7 @@ $wgShellLocale = "en_US.utf8";
 #$wgCacheDirectory = "$IP/cache";
 
 # Site language code, should be one of the list in ./languages/Names.php
-$wgLanguageCode = "en";
+$wgLanguageCode = $languageCode;
 
 $wgSecretKey = "dcabe10fcebec12b7c974d155e1e4fa14039e7b7b1efc6832f6abc925cf5192b";
 
@@ -107,7 +113,7 @@ $wgUpgradeKey = "0ee77c3c683fc7c9";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'standard', 'nostalgia', 'cologneblue', 'monobook', 'vector':
-$wgDefaultSkin = "vector";
+$wgDefaultSkin = "monobook";
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -147,6 +153,7 @@ require_once( "$IP/extensions/StringFunctionsEscaped/StringFunctionsEscaped.php"
 require_once( "$IP/extensions/SyntaxHighlight_GeSHi/SyntaxHighlight_GeSHi.php" );
 require_once( "$IP/extensions/timeline/Timeline.php" );
 require_once( "$IP/extensions/wikihiero/wikihiero.php" );
+require_once( "DBpediaFunctions.php" );
 
 # End of automatically generated settings.
 # Add more configuration options below.
