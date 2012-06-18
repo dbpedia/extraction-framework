@@ -64,7 +64,7 @@ $wgEmailAuthentication = false;
 
 ## Database settings
 $wgDBtype           = "mysql";
-$wgDBserver         = "127.0.0.1";
+$wgDBserver         = ":/fastone/release/data/mysql/mysql.sock";
 $wgDBname           = $underscoreLanguageCode."wiki";
 $wgDBuser           = "root";
 $wgDBpassword       = "";
@@ -80,6 +80,7 @@ $wgDBmysql5 = true;
 
 ## Shared memory settings
 $wgMainCacheType    = CACHE_ACCEL;
+$wgEnableParserCache = true;
 $wgMemCachedServers = array();
 
 ## To enable image uploads, make sure the 'images' directory
