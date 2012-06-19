@@ -29,7 +29,7 @@ extends Extractor
   
   override val datasets = Set(DBpediaDatasets.FlickrWrapprLinks)
   
-  private val quad = QuadBuilder(language, DBpediaDatasets.FlickrWrapprLinks, hasPhotoCollectionProperty) _
+  private val quad = QuadBuilder.stringPredicate(language, DBpediaDatasets.FlickrWrapprLinks, hasPhotoCollectionProperty) _
   
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {

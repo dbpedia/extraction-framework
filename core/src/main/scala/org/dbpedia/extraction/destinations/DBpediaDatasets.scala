@@ -25,6 +25,7 @@ object DBpediaDatasets
     val Genders = new Dataset("genders")
     val TopicalConcepts = new Dataset("cat_mains")
     val IriSameAsUri = new Dataset("iri_sameas_uri")
+    val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
 
     /**
      * Mapping based
