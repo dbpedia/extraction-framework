@@ -15,7 +15,9 @@ object QuadBuilder {
   def apply(language: Language, dataset: Dataset, predicate: OntologyProperty) (subject: String, value: String, context: String, datatype: Datatype) =
     new Quad(language, dataset, subject, predicate, value, context, datatype)
   
-  def apply(language: Language, dataset: Dataset) (subject: String, predicate: String, value: String, context: String, datatype: Datatype) =
+  def stringPredicate(language: Language, dataset: Dataset, predicate: String) (subject: String, value: String, context: String, datatype: Datatype) =
     new Quad(language, dataset, subject, predicate, value, context, datatype)
   
+  def apply(language: Language, dataset: Dataset) (subject: String, predicate: String, value: String, context: String, datatype: Datatype) =
+    new Quad(language, dataset, subject, predicate, value, context, datatype)
 }
