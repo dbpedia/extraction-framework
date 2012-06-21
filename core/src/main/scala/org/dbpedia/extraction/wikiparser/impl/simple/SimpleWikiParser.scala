@@ -227,7 +227,7 @@ final class SimpleWikiParser extends WikiParser
             if(source.nextTag(endString))
             {
                 source.seek(endString.length())
-            }
+            }	
             else
             {
                 source.find(matcher, false)
@@ -245,10 +245,11 @@ final class SimpleWikiParser extends WikiParser
         else if(source.lastTag("{{"))
         {
             val nextToken = source.getString(source.pos, source.pos+1)
-            if ( nextToken == "{")
+            val nextAfterNextToken = source.getString(source.pos+1, source.pos+2)
+            if ( nextToken == "{" && nextAfterNextToken != "{")
             {
                 return parseTemplateParameter(source, level)
-            }
+            } 
 
             parseTemplate(source, level)
         }
@@ -260,8 +261,9 @@ final class SimpleWikiParser extends WikiParser
         {
             parseSection(source)
         }
-        else
-            throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
+        else {
+            throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line))
+        }
     }
     
     private def parseLink(source : Source, level : Int) : LinkNode =
