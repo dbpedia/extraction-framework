@@ -272,18 +272,18 @@ public class LiveUpdateDestination implements Destination{
 
     public void write(Seq<Quad> graph){
 
-        Function1<Quad,Dataset> quadDataset = new AbstractFunction1<Quad,Dataset>() {
-          public Dataset apply(Quad quad) { return quad.dataset(); }
+        Function1<Quad,String> quadDataset = new AbstractFunction1<Quad,String>() {
+          public String apply(Quad quad) { return quad.dataset(); }
         };
-        Map<Dataset, Traversable<Quad>> tripleWithDataset = JavaConversions.mapAsJavaMap(graph.groupBy(quadDataset));
+        Map<String, Traversable<Quad>> tripleWithDataset = JavaConversions.mapAsJavaMap(graph.groupBy(quadDataset));
 
-        Set<Dataset> keySet = tripleWithDataset.keySet();
-        Iterator<Dataset> keysIterator = keySet.iterator();
+        Set<String> keySet = tripleWithDataset.keySet();
+        Iterator<String> keysIterator = keySet.iterator();
         //for(Object obj : tripleList){
         while(keysIterator.hasNext()){
-            Dataset dsKey = (Dataset) keysIterator.next();
+            String dsKey = keysIterator.next();
             scala.collection.immutable.List<Quad> quadList = (scala.collection.immutable.List<Quad>)tripleWithDataset.get(dsKey);
-            ExtractionResult rs = new ExtractionResult(pageId, language, dsKey.name());
+            ExtractionResult rs = new ExtractionResult(pageId, language, dsKey);
 
             List<Quad> listQuads = JavaConversions.seqAsJavaList(quadList);
             for(Quad quad : listQuads){
@@ -346,16 +346,16 @@ public class LiveUpdateDestination implements Destination{
 
         // EDITED by Claus
         String Lang = quad.language().toString();
-        Datatype datatype = quad.datatype();
+        String datatype = quad.datatype();
         
         if (datatype != null){
-            if (datatype.uri().equals("http://www.w3.org/2001/XMLSchema#string"))
+            if (datatype.equals("http://www.w3.org/2001/XMLSchema#string"))
             {
                 return new LiteralImpl(quad.value(), Lang);
             }
             else
             {
-                 return new LiteralImpl(quad.value(), new URIImpl(datatype.uri()));
+                 return new LiteralImpl(quad.value(), new URIImpl(datatype));
             }
         }
         else

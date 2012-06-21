@@ -92,11 +92,11 @@ object ConfigLoader
         val charset = Charset.forName("UTF-8")
         def destination(quads: Boolean, fileSuffix: String) = {
           val formatter = new TerseFormatter(quads, false)
-          val destinations = new HashMap[Dataset, Destination]()
+          val destinations = new HashMap[String, Destination]()
           for (dataset <- datasets) {
             val file = new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + '.' + fileSuffix)
             val open = () => new OutputStreamWriter(new FileOutputStream(file), charset)
-            destinations(dataset) = new WriterDestination(open, formatter)
+            destinations(dataset.name) = new WriterDestination(open, formatter)
           }
           new DatasetDestination(destinations)
         }

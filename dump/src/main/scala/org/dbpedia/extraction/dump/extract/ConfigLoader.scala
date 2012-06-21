@@ -110,10 +110,10 @@ class ConfigLoader(config: Config)
         var formats = new ArrayBuffer[Destination]()
         for ((suffix, format) <- config.formats) {
           
-          val destinations = new HashMap[Dataset, Destination]()
+          val destinations = new HashMap[String, Destination]()
           for (dataset <- datasets) {
             val file = finder.file(date, dataset.fileName+'.'+suffix)
-            destinations(dataset) = new WriterDestination(writer(file), format)
+            destinations(dataset.name) = new WriterDestination(writer(file), format)
           }
           
           formats += new DatasetDestination(destinations)

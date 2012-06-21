@@ -57,12 +57,12 @@ public class SQLFileDestination implements Destination {
     @Override
     public synchronized void write(Seq<Quad> graph){
 
-        Function1<Quad,Dataset> quadDataset = new AbstractFunction1<Quad,Dataset>() {
-          public Dataset apply(Quad quad) { return quad.dataset(); }
+        Function1<Quad,String> quadDataset = new AbstractFunction1<Quad,String>() {
+          public String apply(Quad quad) { return quad.dataset(); }
         };
-        Map<Dataset, Traversable<Quad>> datasets = JavaConversions.mapAsJavaMap(graph.groupBy(quadDataset));
-        for (Entry<Dataset, Traversable<Quad>> e : datasets.entrySet()) {
-            Dataset ds = e.getKey();
+        Map<String, Traversable<Quad>> datasets = JavaConversions.mapAsJavaMap(graph.groupBy(quadDataset));
+        for (Entry<String, Traversable<Quad>> e : datasets.entrySet()) {
+            String ds = e.getKey();
             Traversable<Quad> quads = e.getValue();
 
             Map<String, Map<String, String>> newHashSet = new HashMap<String, Map<String, String>>();
@@ -84,7 +84,7 @@ public class SQLFileDestination implements Destination {
     }
 
     // TODO: remove this method when Dataset objects include a reference to the appropriate class
-    private String mapDatasetToExtractorID(Dataset dataset){
+    private String mapDatasetToExtractorID(String dataset){
 
         String extractorID = "";
         /*if(dataset == DBpediaDatasets.Labels())
@@ -103,43 +103,43 @@ public class SQLFileDestination implements Destination {
             case DBpediaDatasets.GeoCoordinates(): extractorID = "org.dbpedia.extraction.mappings.GeoExtractor";
             break;
         } */
-        if(dataset == DBpediaDatasets.Labels())
+        if(dataset.equals(DBpediaDatasets.Labels().name()))
             extractorID = "org.dbpedia.extraction.mappings.LabelExtractor";
-        else if(dataset == DBpediaDatasets.LinksToWikipediaArticle())
+        else if(dataset.equals(DBpediaDatasets.LinksToWikipediaArticle().name()))
              extractorID = "org.dbpedia.extraction.mappings.WikiPageExtractor";
-        else if(dataset == DBpediaDatasets.Infoboxes())
+        else if(dataset.equals(DBpediaDatasets.Infoboxes().name()))
              extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
-        else if(dataset == DBpediaDatasets.InfoboxProperties())
+        else if(dataset.equals(DBpediaDatasets.InfoboxProperties().name()))
              extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
-        else if(dataset == DBpediaDatasets.PageLinks())
+        else if(dataset.equals(DBpediaDatasets.PageLinks().name()))
              extractorID = "org.dbpedia.extraction.mappings.PageLinksExtractor";
-        else if(dataset == DBpediaDatasets.GeoCoordinates())
+        else if(dataset.equals(DBpediaDatasets.GeoCoordinates().name()))
              extractorID = "org.dbpedia.extraction.mappings.GeoExtractor";
-        else if(dataset == DBpediaDatasets.CategoryLabels())
+        else if(dataset.equals(DBpediaDatasets.CategoryLabels().name()))
              extractorID = "org.dbpedia.extraction.mappings.CategoryLabelExtractor";
-        else if(dataset == DBpediaDatasets.ArticleCategories())
+        else if(dataset.equals(DBpediaDatasets.ArticleCategories().name()))
              extractorID = "org.dbpedia.extraction.mappings.ArticleCategoriesExtractor";
-        else if(dataset == DBpediaDatasets.ExternalLinks())
+        else if(dataset.equals(DBpediaDatasets.ExternalLinks().name()))
              extractorID = "org.dbpedia.extraction.mappings.ExternalLinksExtractor";
-        else if(dataset == DBpediaDatasets.Homepages())
+        else if(dataset.equals(DBpediaDatasets.Homepages().name()))
              extractorID = "org.dbpedia.extraction.mappings.HomepageExtractor";
-        else if(dataset == DBpediaDatasets.DisambiguationLinks())
+        else if(dataset.equals(DBpediaDatasets.DisambiguationLinks().name()))
              extractorID = "org.dbpedia.extraction.mappings.DisambiguationExtractor";
-        else if(dataset == DBpediaDatasets.Persondata())
+        else if(dataset.equals(DBpediaDatasets.Persondata().name()))
              extractorID = "org.dbpedia.extraction.mappings.PersondataExtractor";
-        else if(dataset == DBpediaDatasets.Pnd())
+        else if(dataset.equals(DBpediaDatasets.Pnd().name()))
              extractorID = "org.dbpedia.extraction.mappings.PndExtractor";
-        else if(dataset == DBpediaDatasets.SkosCategories())
+        else if(dataset.equals(DBpediaDatasets.SkosCategories().name()))
              extractorID = "org.dbpedia.extraction.mappings.SkosCategoriesExtractor";
-        else if(dataset == DBpediaDatasets.Redirects())
+        else if(dataset.equals(DBpediaDatasets.Redirects().name()))
              extractorID = "org.dbpedia.extraction.mappings.RedirectExtractor";
-        else if(dataset == DBpediaDatasets.PageIds())
+        else if(dataset.equals(DBpediaDatasets.PageIds().name()))
              extractorID = "org.dbpedia.extraction.mappings.PageIdExtractor";
-        else if(dataset == DBpediaDatasets.LongAbstracts())
+        else if(dataset.equals(DBpediaDatasets.LongAbstracts().name()))
              extractorID = "org.dbpedia.extraction.mappings.AbstractExtractor";
-        else if(dataset == DBpediaDatasets.ShortAbstracts())
+        else if(dataset.equals(DBpediaDatasets.ShortAbstracts().name()))
              extractorID = "org.dbpedia.extraction.mappings.AbstractExtractor";
-        else if(dataset == DBpediaDatasets.Revisions())
+        else if(dataset.equals(DBpediaDatasets.Revisions().name()))
              extractorID = "org.dbpedia.extraction.mappings.RevisionIdExtractor";
         else
             extractorID = "org.dbpedia.extraction.mappings.MappingExtractor";
@@ -153,16 +153,16 @@ public class SQLFileDestination implements Destination {
     private Value constructTripleObject(Quad quad){
 
         String Lang = "en";
-        Datatype datatype = quad.datatype();
+        String datatype = quad.datatype();
 
         if (datatype != null){
-            if (datatype.uri().equals("http://www.w3.org/2001/XMLSchema#string"))
+            if (datatype.equals("http://www.w3.org/2001/XMLSchema#string"))
             {
                 return new LiteralImpl(quad.value(), Lang);
             }
             else
             {
-                 return new LiteralImpl(quad.value(), new URIImpl(datatype.uri()));
+                 return new LiteralImpl(quad.value(), new URIImpl(datatype));
             }
         }
         else
