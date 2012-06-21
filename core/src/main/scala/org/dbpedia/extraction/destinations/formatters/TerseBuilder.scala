@@ -2,7 +2,7 @@ package org.dbpedia.extraction.destinations.formatters
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.NumberUtils.toHex
+import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
 import java.net.URI
 import UriPolicy._
 
@@ -72,35 +72,9 @@ extends UriTripleBuilder(policies) {
   /**
    * Escapes a Unicode string according to N-Triples / Turtle format.
    */
-  private def escape(input: String): TerseBuilder =
-  {
-    val length = input.length
-    
-    var offset = 0
-    while (offset < length)
-    {
-      val c = input.codePointAt(offset)
-      offset += Character.charCount(c)
-
-      // TODO: use a lookup table for c <= 0xA0? c <= 0xFF?
-           if (c == '\\') sb append "\\\\"
-      else if (c == '\"') sb append "\\\""
-      else if (c == '\n') sb append "\\n"
-      else if (c == '\r') sb append "\\r";
-      else if (c == '\t') sb append "\\t"
-      else if (c >= 0x0020 && c < 0x007F) sb append c.toChar
-      else if (turtle && c >= 0x00A0 && c <= 0xFFFF) sb append c.toChar
-      else if (turtle && c >= 0x10000) sb appendCodePoint c
-      else if (c <= 0xFFFF) appendHex(c, 'u', 4)
-      else appendHex(c, 'U', 8)
-    }
-    
+  private def escape(input: String): TerseBuilder = {
+    escapeTurtle(sb, input, turtle)
     this
-  }
-  
-  private def appendHex(c: Int, u: Char, d: Int) {
-    sb append "\\" append u
-    toHex(sb, c, d) 
   }
   
 }
