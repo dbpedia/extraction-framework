@@ -11,7 +11,7 @@ import scala.collection.Map
  * @param destinations All quads for a dataset are written to the destination given in this map. 
  * If the map contains no destination for a dataset, all quads for that dataset will be ignored.
  */
-class DatasetDestination(destinations: Map[Dataset, Destination]) 
+class DatasetDestination(destinations: Map[String, Destination]) 
 extends Destination
 {
   override def open() = destinations.values.foreach(_.open())
