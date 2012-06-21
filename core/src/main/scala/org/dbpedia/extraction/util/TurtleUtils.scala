@@ -6,15 +6,25 @@ object TurtleUtils {
   
   /**
    * Escapes a Unicode string according to Turtle / N-Triples format.
+   * @param input must not be null
+   * @param turtle if true, non-ASCII characters are not escaped (allowed by Turtle); 
+   * if false, non-ASCII characters are escaped (required by N-Triples / N-Quads).
+   */
+  def escapeTurtle(input: String, turtle: Boolean): String = {
+    escapeTurtle(new StringBuilder, input, turtle).toString
+  }
+  
+  /**
+   * Escapes a Unicode string according to Turtle / N-Triples format.
    * @param sb must not be null
    * @param input must not be null
    * @param turtle if true, non-ASCII characters are not escaped (allowed by Turtle); 
    * if false, non-ASCII characters are escaped (required by N-Triples / N-Quads).
    */
-  def escapeTurtle(sb: StringBuilder, input: String, turtle: Boolean): StringBuilder =
-  {
+  def escapeTurtle(sb: StringBuilder, input: String, turtle: Boolean): StringBuilder = {
+
     val length = input.length
-    
+
     var offset = 0
     while (offset < length)
     {
