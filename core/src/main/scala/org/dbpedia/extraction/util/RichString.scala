@@ -4,6 +4,7 @@ import java.util.Locale
 import java.lang.StringBuilder
 import scala.util.matching.Regex
 import RichString.toRichString
+import java.util.regex.{Pattern,Matcher}
 
 /**
  * Defines additional methods on strings, which are missing in the standard library.
@@ -82,6 +83,24 @@ class RichString(str : String)
     def replaceChars(chars: String, replace: String) : String = {
       val sb = StringUtils.replaceChars(null, str, chars, replace)
       if (sb == null) str else sb.toString
+    }
+    
+    /**
+     * Similar to java.lang.String.replaceAll() and scala.util.matching.Regex.replaceAllIn(),
+     * but the replacement is a literal string and this method should be more efficient.
+     */
+    def replaceLiteral(pattern: Pattern, replacer: Matcher => String): String = {
+      val matcher = pattern.matcher(str)
+      if (! matcher.find()) return str
+      val sb = new StringBuilder
+      var last = 0
+      do {
+        sb.append(str, last, matcher.start)
+        sb.append(replacer(matcher))
+        last = matcher.end
+      } while (matcher.find())
+      sb.append(str, last, str.length)
+      sb.toString
     }
     
 
