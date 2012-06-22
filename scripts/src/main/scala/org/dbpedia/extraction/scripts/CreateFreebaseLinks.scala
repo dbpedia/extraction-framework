@@ -70,7 +70,7 @@ object CreateFreebaseLinks
     // do the DBpedia files use Turtle or N-Triples escaping?
     val turtle = args(2).toBoolean
     
-    val start = System.currentTimeMillis
+    val start = System.nanoTime
     println("Searching for Freebase links in "+inFile+"...")
     var lines = 0
     var links = 0
@@ -100,8 +100,8 @@ object CreateFreebaseLinks
   }
   
   private def log(lines: Int, links: Int, start: Long): Unit = {
-    val millis = System.currentTimeMillis - start
-    println("processed "+lines+" lines, found "+links+" links to Freebase in "+StringUtils.prettyMillis(millis)+" ("+(millis.toFloat/lines)+" millis per line)")
+    val nanos = System.nanoTime - start
+    println("processed "+lines+" lines, found "+links+" links to Freebase in "+StringUtils.prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
 
   /**
