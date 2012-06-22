@@ -1,136 +1,120 @@
 package org.dbpedia.extraction.scripts
 
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
-import io.Source
-import java.io.{FileOutputStream, PrintStream, File}
+import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
+import java.util.zip.{GZIPInputStream,GZIPOutputStream}
+import scala.io.{Source,Codec}
+import java.io.{OutputStream,InputStream,FileOutputStream,OutputStreamWriter,File}
 import java.net.URL
 import org.dbpedia.extraction.util.{Language,WikiUtil}
 import org.dbpedia.extraction.util.RichString.toRichString
+import scala.collection.mutable.{Set,HashSet}
+import java.io.FileInputStream
+import org.dbpedia.extraction.util.{StringUtils,TurtleUtils}
 
 /**
- * Created by IntelliJ IDEA.
- * User: Max Jakob
- * Date: 17.11.10
- * Time: 14:52
  * Create a dataset file with owl:sameAs links to Freebase.
- * In order to *not* create sameAs links between DBpedia redirects and "real" Freebase entities
- * that are the target of a redirect, this script needs the DBpedia redirects and disambiguations datasets as input.
  */
-
 object CreateFreebaseLinks
 {
-    // change this URL to the dump that is closest to the dump date of the DBpedia release
-    val freebaseDumpUrl = "http://download.freebase.com/datadumps/latest/freebase-datadump-quadruples.tsv.bz2"
-
-    val freebaseRelationRegex = "^([^\\s]+)\\t[^\\s]+\\t/wikipedia/en\\t([^\\s]+)$".r
-
-    val dbpediaNamespace = "http://dbpedia.org/resource/"
-    val sameAsRelation = "http://www.w3.org/2002/07/owl#sameAs"
-    val freebaseNamespace = "http://rdf.freebase.com/ns"   //TODO decide if "http://rdf.freebase.com/rdf" is better
-    val tripleStr = "<"+dbpediaNamespace+"%s> <"+sameAsRelation+"> <"+freebaseNamespace+"%s> ."
-
-
-    def main(args : Array[String])
-    {
-        val outputFileName = args(0)     // file name of dataset file (must end in '.nt')
-        val labelsFileName = args(1)     // file name of DBpedia labels dataset
-        val redirectsFileName = args(2)  // file name of DBpedia redirects dataset
-        val disambigFileName = args(3)   // file name of DBpedia disambiguations dataset
-
-        if(!outputFileName.endsWith(".nt"))
-        {
-            throw new IllegalArgumentException("file name extension must be '.nt' ("+outputFileName+")")
-        }
-
-        val conceptURIs = getConceptURIs(new File(labelsFileName), new File(redirectsFileName), new File(disambigFileName))
-        writeLinks(new File(outputFileName), conceptURIs)
+  /**
+   * We look for lines that contain wikipedia key entries.
+   * Freebase calls these four columns source, property, destination and value. 
+   */
+  val WikipediaKey = """^([^\s]+)\t/type/object/key\t/wikipedia/en\t([^\s]+)$""".r
+  
+  val DBpediaNamespace = "http://dbpedia.org/resource/"
+    
+  val SameAsUri = "http://www.w3.org/2002/07/owl#sameAs"
+    
+  /**
+   * The page http://rdf.freebase.com says that Freebase RDF IDs look like
+   * http://rdf.freebase.com/ns/en.steve_martin 
+   * On the other hand, the explanations on http://wiki.freebase.com/wiki/Mid and 
+   * http://wiki.freebase.com/wiki/Id seem to state that mids like '/m/0p_47' are 
+   * more stable than ids like 'steve_martin', and while all topics have a mid,
+   * some don't have an id. So it seems best to use URIs like 
+   * http://rdf.freebase.com/ns/m.0p_47
+   * Freebase RDF also uses this URI syntax for resources that do not have an id.
+   */
+  val FreebaseNamespace = "http://rdf.freebase.com/ns/"
+    
+  private val zippers = Map[String, OutputStream => OutputStream] (
+    "gz" -> { new GZIPOutputStream(_) }, 
+    "bz2" -> { new BZip2CompressorOutputStream(_) } 
+  )
+  
+  private val unzippers = Map[String, InputStream => InputStream] (
+    "gz" -> { new GZIPInputStream(_) }, 
+    "bz2" -> { new BZip2CompressorInputStream(_) } 
+  )
+  
+  private def wrap[T](stream: T, file: File, wrappers: Map[String, T => T]): T = {
+    val name = file.getName
+    val suffix = name.substring(name.lastIndexOf('.') + 1)
+    wrappers.get(suffix) match {
+      case Some(wrapper) => wrapper(stream)
+      case None => stream
     }
-
-    private def writeLinks(outputFile : File, conceptURIs : Set[String])
-    {
-        val uncompressOutStream = new PrintStream(outputFile, "UTF-8")
-        val bz2compressorOutStream = new BZip2CompressorOutputStream(new FileOutputStream(outputFile+".bz2"))
-        val compressedOutStream = new PrintStream(bz2compressorOutStream, true, "UTF-8")
-
-        println("Searching for Freebase links in "+freebaseDumpUrl+"...")
-        val bz2compressorInStream = new BZip2CompressorInputStream(new URL(freebaseDumpUrl).openStream)
-        var count = 0
-        for (line <- Source.fromInputStream(bz2compressorInStream, "UTF-8").getLines)
-        {
-            for (linkString <- getLink(line, conceptURIs))
-            {
-                uncompressOutStream.println(linkString)
-                compressedOutStream.println(linkString)
-                count += 1
-                if(count%10000 == 0)
-                {
-                    println("  found "+count+" links to Freebase")
-                }
+  }
+  
+  def main(args : Array[String]) {
+    
+    // Freebase input file, may be .gz or .bz2 zipped 
+    // must have the format described on http://wiki.freebase.com/wiki/Data_dumps#Quad_dump
+    // Latest: http://download.freebase.com/datadumps/latest/freebase-datadump-quadruples.tsv.bz2      
+    val inFile = new File(args(0))
+    
+    // output file, may be .gz or .bz2 zipped 
+    val outFile = new File(args(1))
+    
+    // do the DBpedia files use Turtle or N-Triples escaping?
+    val turtle = args(2).toBoolean
+    
+    val start = System.currentTimeMillis
+    println("Searching for Freebase links in "+inFile+"...")
+    var count = 0
+    val out = new FileOutputStream(outFile)
+    try {
+      val writer = new OutputStreamWriter(wrap(out, outFile, zippers), "UTF-8")
+      
+      val in = new FileInputStream(inFile)
+      try {
+        for (line <- Source.fromInputStream(wrap(in, inFile, unzippers), "UTF-8").getLines) {
+          line match {
+            case WikipediaKey(mid, title) => {
+              writer.write("<"+DBpediaNamespace+recode(title, turtle)+"> <"+SameAsUri+"> <"+FreebaseNamespace+mid+"> .\n")
+              count += 1
+              if (count % 10000 == 0) log(count, start)
             }
-
+            case _ => // ignore all other lines
+          }
         }
-        bz2compressorInStream.close
-        compressedOutStream.close
-        bz2compressorOutStream.close
-        uncompressOutStream.close
-        println("Done. Found "+count+" links to Freebase.")
+      }
+      finally in.close()
+      writer.close()
     }
+    finally out.close()
+    log(count, start)
+  }
+  
+  private def log(count: Int, start: Long): Unit = {
+    val millis = System.currentTimeMillis - start
+    println("found "+count+" links to Freebase in "+StringUtils.prettyMillis(millis))
+  }
 
-    private def getLink(line : String, conceptURIs : Set[String]) : Option[String] =
-    {
-        for (relationMatch <- freebaseRelationRegex.findFirstMatchIn(line))
-        {
-            val dbpediaUri = getDBpediaResourceUri(relationMatch.subgroups(1))
-            if(conceptURIs contains dbpediaUri)
-            {
-                val freebaseUri = relationMatch.subgroups(0)
-                return Some(tripleStr.format(dbpediaUri, freebaseUri))
-            }
-        }
-        None
-    }
+  /**
+   * Freebase escapes most non-alphanumeric characters in keys by a dollar sign followed
+   * by the UTF-16 code of the character. See http://wiki.freebase.com/wiki/MQL_key_escaping .
+   */
+  private val KeyEscape = """\$(\p{XDigit}{4})""".r
 
-    private def getDBpediaResourceUri(wikipediaLabel : String) : String =
-    {
-        var uri = wikipediaLabel
-        // Freebase encodes Wikipedia pages titles with unicode points that are marked by a dollar sign
-        for(codePointMatch <- "\\$(\\w\\w\\w\\w)".r.findAllIn(wikipediaLabel).matchData)
-        {
-            val codePoint = codePointMatch.subgroups(0)
-            uri = uri.replace("$"+codePoint, Integer.parseInt(codePoint, 16).toChar.toString)
-        }
-        // TODO: which language?
-        WikiUtil.wikiEncode(uri).capitalize(Language.English.locale)
-    }
-
-    private def loadURIs(dbpediaDataset : File) : Set[String] =
-    {
-        println("Reading subject URIs from "+dbpediaDataset+"...")
-        val lexicon = Source.fromFile(dbpediaDataset).getLines.map(getShortSubjectURI(_)).toSet
-        println("Done.")
-        lexicon
-    }
-
-    private def getShortSubjectURI(ntLine : String) : String =
-    {
-        ntLine.substring(0, ntLine.indexOf(">")).replace("<http://dbpedia.org/resource/", "").trim
-    }
-
-    private def getConceptURIs(labelsFile : File, redirectsFile : File, disambiguationsFile : File) : Set[String] =
-    {
-        (loadURIs(labelsFile) -- loadURIs(redirectsFile)) -- loadURIs(disambiguationsFile)
-
-//        var conceptCandidates = loadURIs(labelsFile)
-//        for(line <- Source.fromFile(redirectsFile, "UTF-8"))
-//        {
-//            conceptCandidates = conceptCandidates --- getShortSubjectURI(line)
-//        }
-//        for(line <- Source.fromFile(disambiguationsFile, "UTF-8"))
-//        {
-//            conceptCandidates = conceptCandidates --- getShortSubjectURI(line)
-//        }
-//        conceptCandidates
-    }
+  /**
+   * Undo Freebase key encoding, do URI escaping and Turtle / N-Triple escaping. 
+   */
+  private def recode(freebase: String, turtle: Boolean): String = {
+    val plain = freebase.replaceLiteral(KeyEscape.pattern, m => Integer.parseInt(m.group(1), 16).toChar.toString)
+    val wikiEncoded = WikiUtil.wikiEncode(plain)
+    TurtleUtils.escapeTurtle(wikiEncoded, turtle)
+  }
 
 }
