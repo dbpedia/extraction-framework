@@ -34,9 +34,16 @@
                             <id>CreateFreebaseLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.CreateFreebaseLinks</mainClass>
                             <jvmArgs>
-                                <jvmArg>-Xmx4096m</jvmArg>
+                                <jvmArg>-Xms512m</jvmArg>
+                                <jvmArg>-Xmx4096m</jvmArg><!-- 4G is ok with CMS or G1, other GCs need >= 4.5G -->
+                                <!-- <jvmArg>-XX:+PrintGC</jvmArg> -->
+                                <!-- <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <!-- <jvmArg>-XX:+UseG1GC</jvmArg> --><!-- ~20% slower than CMS --> 
+                                <!-- <jvmArg>-XX:+PrintGCDetails</jvmArg> --><!-- not necessary with CMS, annoying with G1 -->
                             </jvmArgs>
-                            <!-- ../run CreateFreebaseLinks false false /data/dbpedia nt.gz freebase-links.nt.bz2 freebase-datadump-quadruples.tsv.bz2 -->
+                            <!-- ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-links.nt.bz2 freebase-datadump-quadruples.tsv.bz2 -->
                         </launcher>
                     </launchers>
                 </configuration>
