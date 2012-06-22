@@ -72,7 +72,8 @@ object CreateFreebaseLinks
     
     val start = System.currentTimeMillis
     println("Searching for Freebase links in "+inFile+"...")
-    var count = 0
+    var lines = 0
+    var links = 0
     val out = new FileOutputStream(outFile)
     try {
       val writer = new OutputStreamWriter(wrap(out, outFile, zippers), "UTF-8")
@@ -80,26 +81,27 @@ object CreateFreebaseLinks
       val in = new FileInputStream(inFile)
       try {
         for (line <- Source.fromInputStream(wrap(in, inFile, unzippers), "UTF-8").getLines) {
+          lines += 1
           line match {
             case WikipediaKey(mid, title) => {
+              links += 1
               writer.write("<"+DBpediaNamespace+recode(title, turtle)+"> <"+SameAsUri+"> <"+FreebaseNamespace+mid+"> .\n")
-              count += 1
-              if (count % 10000 == 0) log(count, start)
             }
             case _ => // ignore all other lines
           }
+          if (lines % 1000000 == 0) log(lines, links, start)
         }
       }
       finally in.close()
       writer.close()
     }
     finally out.close()
-    log(count, start)
+    log(lines, links, start)
   }
   
-  private def log(count: Int, start: Long): Unit = {
+  private def log(lines: Int, links: Int, start: Long): Unit = {
     val millis = System.currentTimeMillis - start
-    println("found "+count+" links to Freebase in "+StringUtils.prettyMillis(millis))
+    println("processed "+lines+" lines, found "+links+" links to Freebase in "+StringUtils.prettyMillis(millis)+" ("+(millis.toFloat/lines)+" millis per line)")
   }
 
   /**
