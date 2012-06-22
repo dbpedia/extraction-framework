@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -24,20 +22,21 @@
                 <configuration>
                     <!-- TODO configure a launcher for each script -->
                     <launchers>
-                        <!-- launcher>
-                         <id>MyScript</id>
-                         <mainClass>org.dbpedia.extraction.scripts.MyScript</mainClass>
-                         <jvmArgs>
-                           <jvmArg>-Xmx1024m</jvmArg>
-                         </jvmArgs>
-                       </launcher -->
                         <launcher>
                             <id>ResolveRedirects</id>
                             <mainClass>org.dbpedia.extraction.scripts.ResolveRedirects</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xmx4096m</jvmArg>
                             </jvmArgs>
-                            <!-- mvn scala:run -Dlauncher=ResolveRedirects "-DaddArgs=/data/en/redirects_en.nt|/data/en/mappingbased_properties_en.nt|/data/en/page_links_en.nt" -->
+                            <!-- ../run  ResolveRedirects /data/en/redirects_en.nt /data/en/mappingbased_properties_en.nt /data/en/page_links_en.nt -->
+                        </launcher>
+                        <launcher>
+                            <id>CreateFreebaseLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CreateFreebaseLinks</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx4096m</jvmArg>
+                            </jvmArgs>
+                            <!-- ../run CreateFreebaseLinks freebase-datadump-quadruples.tsv.bz2 freebase-links.ttl.bz2 true -->
                         </launcher>
                     </launchers>
                 </configuration>
