@@ -24,4 +24,3 @@ trait BindingHandler {
    
     val vf = ValueFactoryImpl.getInstance
 }
-

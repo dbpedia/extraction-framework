@@ -50,7 +50,8 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
     val cache = new Cache
-
+    println(page.children)
+    return new Graph()
     Logging.printMsg("start "+subjectUri+" threadID="+Thread.currentThread().getId(),2)
     // wait a random number of seconds. kills parallelism - otherwise debug output from different threads is mixed
     if(logLevel > 0){
@@ -59,10 +60,12 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     }
 
     val quads = new ListBuffer[Quad]()
+
     val entityId = page.title.decoded
     cache.savedVars("entityId") = entityId
 
     //skip some useless pages
+    //println(entityId)
     for(start <- ignoreStart){
         if(entityId.startsWith(start)){
             Logging.printMsg("ignored "+entityId,1)
@@ -91,6 +94,12 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       }
 
       val pageStack =  new Stack[Node]().pushAll(page.children.reverse).filterSpaces
+      //apply "first" nodehandlers
+      pageStack.filter( (n: Node) => {
+        !nodeHandlers("first").map((nh : NodeHandler) => {
+            val res = nh.process(n, cache.blockURIs("page").stringValue, cache, Map())
+            quads appendAll res._1; res._2}).exists(_ == true)
+      })
 
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
@@ -484,6 +493,27 @@ object WiktionaryPageExtractor {
   * a optional PostProcessor instance, it can transform the generated Quads 
   */
   val postprocessor : Option[PostProcessor] = if((languageConfig \ "postprocessing" \ "@enabled").text.equals("true")){Some(Class.forName((languageConfig \ "postprocessing" \ "@ppClass").text).getConstructor(classOf[NodeSeq]).newInstance((languageConfig \ "postprocessing" \ "config")).asInstanceOf[PostProcessor])} else None
+
+  /**
+  * load nodeHandlers from config
+  */
+  val nodeHandlers = (languageConfig \ "nodeHandlers" \ "nodeHandler").map(_.head).toList.groupBy((n : XMLNode) => (n \ "@order").text).mapValues( (configs : List[XMLNode]) => { 
+    configs.map( (n : XMLNode) => {
+
+    if(n.attribute("nhClass").isDefined){
+        Class.forName((n \ "@nhClass").text).getConstructor(classOf[NodeSeq]).newInstance((n \ "parameters")).asInstanceOf[NodeHandler]
+    } else {
+        if(n.attribute("builtin").isDefined){
+            (n \ "@builtin").text match {
+             case "skipAny" => new SkipAny(scala.xml.NodeSeq.Empty)
+             case _ => throw new Exception("unknown nodeHandler. builtin type unknown.")
+            }
+        } else {
+            throw new Exception("unknown nodeHandler. use nhClass or builtin attributes.")
+        }
+    }
+}) 
+})
   
   /**
   * the root of the config
