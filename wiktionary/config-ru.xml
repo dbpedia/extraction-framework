@@ -1302,15 +1302,14 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal"/>
-									<triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal"/>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-makeId($meaning)" oType="URI"/>
+                                    <triple s="$block-getId($meaning)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
+                                    <triple s="$block-getId($meaning)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal"/>
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>                    
-                        <wikiTemplate>====Значение====
-(# ({{~~ExternalLinkNode}})+ $meaning ($meaningId~~)+ {{пример|$example}}
+                        <wikiTemplate>==== Значение ====
+(# $meaning
 )*
 </wikiTemplate>
                     </template>
