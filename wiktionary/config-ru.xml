@@ -62,7 +62,7 @@
 		<mapping from="суффикс" to="Suffix"/>
 		<mapping from="префиксоид" to="Prefixoid"/>
 		<mapping from="суффиксоид" to="Suffixoid"/>
-		<mapping from="Устойчивые сочетания" to="FigureOfSpeech"/>
+		<mapping from="Устойчивые сочетания" to="   "/>
 		<mapping from="Пословицы и поговорки‎" to="Proverb"/>
 		<mapping from="Имя собственное" to="ProperNoun"/>
 		<mapping from="Имя собственное." to="ProperNoun"/>
@@ -91,7 +91,6 @@
 		<mapping from="Датский язык" to="Danish"/>
 		<mapping from="Датский_язык" to="Danish"/>
 		<mapping from="Датский" to="Danish"/>
-		<mapping from="-da-" to="Danish"/>
 		<mapping from="da" to="Danish"/>
 
 		<mapping from="Китайский язык" to="Chinese"/>
@@ -1189,20 +1188,18 @@
 
 
 			<block name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoSUsage">
-                <indicator name="pos-start">
-                    <resultTemplates>
-                        <resultTemplate>
-                            <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map($pos))" oType="URI" />
-                            </triples>
-                        </resultTemplate>
-                    </resultTemplates>
-                    <wikiTemplate>===$any4===
-{{ $pos $any0|$any1|$any2|$any3}}
+                    <indicator name="pos-start">
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-Noun" oType="URI" oNewBlock="true" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map(assertMapped($pos)))" oType="URI" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>
+                        <wikiTemplate>{{$pos $any}}
 </wikiTemplate>
-                </indicator>
-
+                    </indicator>
             <templates>
                 <template name="etymology">
                         <resultTemplates>
@@ -1269,7 +1266,7 @@
                     </template>
 
 
-				                    <template name="antonym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
+				    <template name="antonym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasAntonym"/>                   
                         </parameters> 
@@ -1318,12 +1315,21 @@
 </wikiTemplate>
                     </template>
 
-			<template name="relatedWords" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
+			<template name="relatedWords" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
                         </parameters>                   
                         <wikiTemplate>=== Фразеологизмы и устойчивые сочетания ===
 (* $line
+)+
+</wikiTemplate>
+                    </template>			
+                    <template name="relatedWords" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
+                        </parameters>                   
+                        <wikiTemplate>=== устойчивые сочетания ===
+($line
 )+
 </wikiTemplate>
                     </template>
@@ -1361,4 +1367,11 @@
 	            </block>
 	        </block>
 	</page>
+    <nodeHandlers>
+        <nodeHandler builtin="skipAny" order="last"/>
+        <nodeHandler nhClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.nodehandler.SkipUseless" order="first" >
+            <parameters>
+            </parameters>
+</nodeHandler>
+    </nodeHandlers>
 </config>
