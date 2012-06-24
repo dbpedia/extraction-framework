@@ -18,7 +18,9 @@ import org.sweble.wikitext.`lazy`.utils.AstPrinter
 import org.sweble.wikitext.`lazy`.parser._
 import org.sweble.wikitext.`lazy`.preprocessor._
 import org.sweble.wikitext.`lazy`.postprocessor.AstCompressor
+import org.sweble.wikitext.`lazy`.encval.IllegalCodePoint
 
+import de.fau.cs.osr.ptk.common.ast.ContentNode
 import de.fau.cs.osr.ptk.common.ast.AstNode
 import de.fau.cs.osr.ptk.common.ast.NodeList
 import de.fau.cs.osr.ptk.common.ast.Text
@@ -113,17 +115,19 @@ final class SwebleWrapper extends WikiParser
             }
             case p : Paragraph => transformNodes(p.getContent)
             case t : Template => {
-                var i = -1
+                var i = 0
                 val properties = t.getArgs.iterator.toList.map( (n:AstNode) => {
                     i = i+1
                     n match {
-                        case ta : TemplateArgument => new PropertyNode(if(ta.getHasName){ta.getName} else {i.toString}, transformNodes(parse(pageId, PreprocessorToParserTransformer.transform(new LazyPreprocessedPage(ta.getValue, new ArrayList[Warning]()), new EntityMap()).getWikitext()).getContent), line) 
+                        case ta : TemplateArgument => new PropertyNode(if(ta.getHasName){ta.getName} else {i.toString}, transformNodes(parse(pageId, nodeList2string(ta.getValue)).getContent), line) 
                         case _ => throw new Exception("expected TemplateArgument as template child")
                     }
                 })
-                val name : String = t.getName //implicit conversion
-                val title = new WikiTitle(WikiUtil.cleanSpace(name), WikiTitle.Namespace.Template)
-                List(new TemplateNode(title, properties, line, transformNodes(t.getName)))
+                val name : String = nodeList2string(t.getName) 
+                val nameClean = WikiUtil.cleanSpace(name)
+                val title = new WikiTitle(nameClean, WikiTitle.Namespace.Template)
+                val tpl = new TemplateNode(title, properties, line, transformNodes(t.getName))
+                List(tpl)
             }
             case tn : Text => List(new TextNode(tn.getContent, line))
             case ws : Whitespace => List(new TextNode(ws.getContent.get(0).asInstanceOf[Text].getContent, line)) //as text
@@ -160,6 +164,12 @@ final class SwebleWrapper extends WikiParser
                     case _ => throw new Exception("expected EnumerationItem as Enumeration child")
                 }
             }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {lb add new TextNode("#", line); lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
+            case definitions : DefinitionList => definitions.getContent.iterator.toList.map( (n:AstNode) => {
+                n match {   
+                    case item : DefinitionDefinition => transformNodes(parse(pageId, nodeList2string(item.getContent)).getContent)
+                    case _ => throw new Exception("expected EnumerationItem as Enumeration child")
+                }
+            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {lb add new TextNode(":", line); lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
             case b : Bold => transformNodes(b.getContent) // ignore style
             case i : Italics => transformNodes(i.getContent) // ignore style
             case tplParam : TemplateParameter => List(new TemplateParameterNode(tplParam.getName, tplParam.getDefaultValue != null, line))
@@ -182,18 +192,16 @@ final class SwebleWrapper extends WikiParser
                     })
                 List(new TableNode(caption, rows, line))
             }
+            case icp : IllegalCodePoint => List(new TextNode(icp.getCodePoint(), line))
+            case xml : XmlElement => List() //drop xml nodes - are they needed?
+            case cn : ContentNode => transformNodes(cn.getContent)
             //else
-            case _ => List(new TextNode("else:"+node.getClass.getName+": "+node.toString, line))
+            case _ => List(new TextNode(/*"else:"+node.getClass.getName+": "+*/nodeList2string(new NodeList(node)), line))
         }
     }
 
-    implicit def nodeList2humanString(nl:NodeList) : String = {
-        transformNodes(nl).map( (n:Node)=>
-            n match {
-                case sn : TextNode => sn.text 
-                case _ => ""
-            }
-        ).mkString
+    implicit def nodeList2string(nl:NodeList) : String = {
+        PreprocessorToParserTransformer.transform(new LazyPreprocessedPage(nl, new ArrayList[Warning]()), new EntityMap()).getWikitext()
     }
 
     implicit def url2string(url:Url) : String = {

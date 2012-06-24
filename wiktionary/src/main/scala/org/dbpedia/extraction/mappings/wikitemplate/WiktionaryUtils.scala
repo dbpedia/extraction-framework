@@ -196,7 +196,14 @@ class MyStack(s : Stack[Node]) {
 
   def reverseSwapList() = {
     val otherStack = new Stack[Node]()
-    val thisReverse = stack.reverse.filter((n:Node)=>(n.isInstanceOf[TemplateNode] && n.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl" && (n.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "list-start" || n.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "list-end")))
+    val thisReverse = stack.reverse.filter( (n : Node)=>
+        n.isInstanceOf[TemplateNode] && 
+        n.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl" && 
+        (
+            n.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "list-start" || 
+            n.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "list-end"
+        )
+    )
     val thisClone = stack.clone
 
     stack.foreach(i=> {
@@ -230,6 +237,7 @@ object MyStack {
   implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
 
+  val parser = WikiParser()
   /**
    * parse a string as wikisyntax and return the nodes as a stack
    */
@@ -247,7 +255,7 @@ object MyStack {
         (if(in.endsWith("=")){appendedNewline = true; "\n"} else {""})
 
     //println("after normalizations >"+str+"<")
-    val page : PageNode = new SimpleWikiParser().apply(
+    val page : PageNode = parser(
         new WikiPage(
           new WikiTitle("wiktionary extraction subtemplate"),0,0, str //parsing
         )

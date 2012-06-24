@@ -50,8 +50,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
     val cache = new Cache
-    println(page.children)
-    return new Graph()
+    
     Logging.printMsg("start "+subjectUri+" threadID="+Thread.currentThread().getId(),2)
     // wait a random number of seconds. kills parallelism - otherwise debug output from different threads is mixed
     if(logLevel > 0){
@@ -268,7 +267,9 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           val unconsumeableNode = pageStack.pop
           unconsumeableNode match {
             case tn : TextNode => if(tn.text.startsWith(" ") || tn.text.startsWith("\n")){
-                pageStack.push(tn.copy(text=tn.text.substring(1)))
+                if(tn.text.substring(1).length != 0){
+                    pageStack.push(tn.copy(text=tn.text.substring(1)))
+                }
             }
             case _ => 
           }
