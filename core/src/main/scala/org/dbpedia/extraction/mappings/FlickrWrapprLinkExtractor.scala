@@ -35,6 +35,8 @@ extends Extractor
   {
     if (page.title.namespace != Namespace.Main) return Seq.empty
     
+    // TODO: exclude redirect and disambig pages
+    
     // Note: subjectUri is probably identical to the URI we use here, but we want to be sure. 
     Seq(quad(language.resourceUri.append(page.title.encoded), flickrWrapprUrlPrefix+page.title.encoded, page.sourceUri, null))
   }
