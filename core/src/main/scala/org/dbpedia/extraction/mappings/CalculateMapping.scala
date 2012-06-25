@@ -48,8 +48,8 @@ extends PropertyMapping
 
   private val staticType = QuadBuilder(context.language, DBpediaDatasets.OntologyProperties, ontologyProperty, ontologyProperty.range.asInstanceOf[Datatype]) _
   private val genericType = QuadBuilder(context.language, DBpediaDatasets.OntologyProperties, ontologyProperty, new Datatype("xsd:double")) _
-  private val dynamicType = QuadBuilder(context.language, DBpediaDatasets.OntologyProperties, ontologyProperty) _
-  private val specificType = QuadBuilder(context.language, DBpediaDatasets.SpecificProperties) _
+  private val dynamicType = QuadBuilder.dynamicType(context.language, DBpediaDatasets.OntologyProperties, ontologyProperty) _
+  private val specificType = QuadBuilder.dynamicPredicate(context.language, DBpediaDatasets.SpecificProperties) _
   
   override val datasets = Set(DBpediaDatasets.OntologyProperties, DBpediaDatasets.SpecificProperties)
 
