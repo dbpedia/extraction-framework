@@ -207,7 +207,7 @@ extends Extractor
 
     private def extractNumber(node : PropertyNode) : Option[(String, Datatype)] =
     {
-        intParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:int"))))
+        intParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:integer"))))
         doubleParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:double"))))
         None
     }
@@ -216,7 +216,7 @@ extends Extractor
     {
         StringParser.parse(node) match
         {
-            case Some(RankRegex(number)) => Some((number, new Datatype("xsd:int")))
+            case Some(RankRegex(number)) => Some((number, new Datatype("xsd:integer")))
             case _ => None
         }
     }
