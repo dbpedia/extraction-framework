@@ -49,6 +49,7 @@ import WiktionaryPageExtractor._ //companion
 class WiktionaryPageExtractor( context : {} ) extends Extractor {
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
   {
+    //return new Graph()
     val cache = new Cache
     
     Logging.printMsg("start "+subjectUri+" threadID="+Thread.currentThread().getId(),2)
