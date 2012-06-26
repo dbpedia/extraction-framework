@@ -272,7 +272,7 @@
             <dependency>
               <groupId>org.sweble.wikitext</groupId>
               <artifactId>swc-engine</artifactId>
-              <version>1.0.0</version>
+              <version>1.1.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -346,9 +346,19 @@
         </repository-->
 
         <repository>
-          <id>osr-public-releases</id>
-          <name>OSR Public Releases</name>
-          <url>http://mojo.informatik.uni-erlangen.de/nexus/content/repositories/public-releases</url>
+            <releases>
+            <enabled>false</enabled>
+            </releases>
+            <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>daily</updatePolicy>
+            <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+            <id>osr-public-snapshots-repo</id>
+            <name>OSR Public Snapshots Repository</name>
+            <url>
+            http://mojo.informatik.uni-erlangen.de/nexus/content/repositories/public
+            </url>
         </repository>
 
     </repositories>

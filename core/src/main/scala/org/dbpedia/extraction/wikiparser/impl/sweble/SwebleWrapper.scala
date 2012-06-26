@@ -19,9 +19,11 @@ import org.sweble.wikitext.`lazy`.parser._
 import org.sweble.wikitext.`lazy`.preprocessor._
 import org.sweble.wikitext.`lazy`.postprocessor.AstCompressor
 import org.sweble.wikitext.`lazy`.encval.IllegalCodePoint
+import org.sweble.wikitext.`lazy`.AstNodeTypes
 
 import de.fau.cs.osr.ptk.common.ast.ContentNode
 import de.fau.cs.osr.ptk.common.ast.AstNode
+import de.fau.cs.osr.ptk.common.AstVisitor
 import de.fau.cs.osr.ptk.common.ast.NodeList
 import de.fau.cs.osr.ptk.common.ast.Text
 import de.fau.cs.osr.ptk.common.ast.StringContentNode
@@ -37,6 +39,11 @@ import org.dbpedia.extraction.util.Language
 
 final class SwebleWrapper extends WikiParser
 {
+    /*    val n = new NodeList(new Template(new NodeList(new Text("tplname")), new NodeList(new TemplateArgument(new NodeList(new Text("val")), false))))
+        println(n)
+        val t = PreprocessorToParserTransformer.transform(new LazyPreprocessedPage(n, new ArrayList[Warning]()), new EntityMap()).getWikitext()
+        println("t="+t)*/
+ 
     var lastLine = 0
     var language : Language = null
     var pageId : PageId = null
@@ -48,7 +55,8 @@ final class SwebleWrapper extends WikiParser
 	
 	// Instantiate a compiler for wiki pages
 	val compiler = new Compiler(config)
-		
+    var entityMap : EntityMap = new EntityMap()
+
     def apply(page : WikiPage) : PageNode =
     {
         //TODO refactor, not safe
@@ -66,25 +74,32 @@ final class SwebleWrapper extends WikiParser
         //print sweble AST for debugging
         //val w = new StringWriter()
 		//val p = new AstPrinter(w)
-        //p.go(cp.getPage())
+        //p.go(parsed)
 		//println(w.toString())
     
-        //TODO dont transform, refactor all usages instead
+        //TODO dont transform, refactor all extractors instead
         transformAST(page, false, false, parsed)
     }
 
     def parse(pageId : PageId, wikitext : String) : Page = {
         // Compile the retrieved page
-		compiler.postprocess(pageId, wikitext, null).getPage
+		val cp = compiler.postprocess(pageId, wikitext, null)
+        //entityMap = cp.getEntityMap
+        //println("after parsing "+entityMap)
+        cp.getPage
     }
+
 
     def transformAST(page: WikiPage, isRedirect : Boolean, isDisambiguation : Boolean, swebleTree : Page) : PageNode = {
         //merge fragmented Text nodes
         new AstCompressor().go(swebleTree)
+        //parse template arguments
+         new ParameterToDefaultValueResolver(pageId).go(swebleTree)
         //transform sweble nodes to DBpedia nodes
         val nodes = transformNodes(swebleTree.getContent)
         //merge fragmented TextNodes (again... this time the DBpedia nodes)
         val nodesClean = mergeConsecutiveTextNodes(nodes)
+        //println(nodesClean)
         new PageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation, nodesClean)
     }
 
@@ -107,7 +122,7 @@ final class SwebleWrapper extends WikiParser
         node match {
             case s : Section => {
                 val nl = ListBuffer[Node]()
-                nl append new SectionNode(s.getTitle, s.getLevel, transformNodes(s.getTitle), line)
+                nl append new SectionNode(s.getTitle, s.getLevel, transformNodes(new NodeList(s.iterator.toList.head)), line)
                 // add the children of this section
                 // makes it flat
                 nl appendAll transformNodes(s.iterator.toList.tail) //first NodeList is the section title again
@@ -119,7 +134,7 @@ final class SwebleWrapper extends WikiParser
                 val properties = t.getArgs.iterator.toList.map( (n:AstNode) => {
                     i = i+1
                     n match {
-                        case ta : TemplateArgument => new PropertyNode(if(ta.getHasName){ta.getName} else {i.toString}, transformNodes(parse(pageId, nodeList2string(ta.getValue)).getContent), line) 
+                        case ta : TemplateArgument => new PropertyNode(if(ta.getHasName){ta.getName} else {i.toString}, transformNodes(ta.getValue), line) 
                         case _ => throw new Exception("expected TemplateArgument as template child")
                     }
                 })
@@ -158,12 +173,16 @@ final class SwebleWrapper extends WikiParser
                     case _ => throw new Exception("expected ItemizationItem as Itemization child")
                 }
             }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {lb add new TextNode("*", line); lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
-            case items : Enumeration => items.getContent.iterator.toList.map( (n:AstNode) => {
+            case items : Enumeration => {
+                var i = 0
+                items.getContent.iterator.toList.map( (n:AstNode) => {
+                
                 n match {   
                     case item : EnumerationItem => transformNodes(item.getContent)
                     case _ => throw new Exception("expected EnumerationItem as Enumeration child")
                 }
-            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {lb add new TextNode("#", line); lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
+            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {i = i+1; lb add new TextNode("#", line); lb add new TemplateNode(new WikiTitle("enum-expanded"), List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line, List(new TextNode("enum-expanded", line))); lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
+            }
             case definitions : DefinitionList => definitions.getContent.iterator.toList.map( (n:AstNode) => {
                 n match {   
                     case item : DefinitionDefinition => transformNodes(parse(pageId, nodeList2string(item.getContent)).getContent)
@@ -200,8 +219,19 @@ final class SwebleWrapper extends WikiParser
         }
     }
 
+    implicit def nodeList2prepocessedPage(nl:NodeList) : PreprocessedWikitext = {
+        //println(entityMap)
+        val t = PreprocessorToParserTransformer.transform(new LazyPreprocessedPage(nl, new ArrayList[Warning]()), entityMap)
+        t
+    }
+
+    implicit def preprocessedPage2string(p:PreprocessedWikitext) : String = {
+        val t = p.getWikitext()
+        t
+    }
+
     implicit def nodeList2string(nl:NodeList) : String = {
-        PreprocessorToParserTransformer.transform(new LazyPreprocessedPage(nl, new ArrayList[Warning]()), new EntityMap()).getWikitext()
+        preprocessedPage2string(nodeList2prepocessedPage(nl))
     }
 
     implicit def url2string(url:Url) : String = {
@@ -236,6 +266,58 @@ final class SwebleWrapper extends WikiParser
         })
         ret.toList
     }
+
+    class ParameterToDefaultValueResolver(pageId : PageId) extends AstVisitor {
+
+		var entityMap : EntityMap = null
+		
+		var warnings : java.util.List[Warning] = null
+		
+		def visit(n : AstNode) : AstNode =
+		{
+			mapInPlace(n)
+			return n
+		}
+		
+		def  visit(n : CompiledPage) : AstNode =
+		{
+			this.warnings = n.getWarnings()
+			this.entityMap = n.getEntityMap()
+			mapInPlace(n)
+			return n
+		}
+		
+		def visit(n : TemplateParameter) : AstNode = 
+		{
+			val defValArg = n.getDefaultValue()
+			if (defValArg == null)
+				return n
+			
+			val defVal = defValArg.getValue();
+			
+			// Shortcut for all those empty default values
+			if (defVal.isEmpty())
+				return defValArg
+			
+			val pprAst = new LazyPreprocessedPage(
+					defVal, warnings, entityMap
+            )
+			
+			val parsed = compiler.postprocessPpOrExpAst(pageId, pprAst);
+			
+			val content = parsed.getPage().getContent()
+			
+			// The parser of course thinks that the given wikitext is a 
+			// individual page and will wrap even single line text into a 
+			// paragraph node. We try to catch at least simple cases to improve
+			// the resulting AST
+			val contentClean = if (content.size() == 1 && content.get(0).getNodeType() == AstNodeTypes.NT_PARAGRAPH)    
+				content.get(0).asInstanceOf[Paragraph].getContent()
+            else content
+			
+			content
+		}
+	}
 }
 
 
