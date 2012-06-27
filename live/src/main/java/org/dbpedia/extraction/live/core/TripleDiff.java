@@ -1,14 +1,14 @@
 package org.dbpedia.extraction.live.core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
+import com.hp.hpl.jena.rdf.model.Resource;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.dbpedia.extraction.live.helper.MatchPattern;
 import org.dbpedia.extraction.live.helper.MatchType;
-import org.openrdf.model.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+//import org.openrdf.model.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,12 +20,12 @@ import org.openrdf.model.*;
 public class TripleDiff {
 
     private static Logger logger ;
-    private URI resource;
+    private Resource resource;
     private String language;
     private ArrayList<MatchPattern> producesFilterList = new ArrayList();
     private SPARQLToRDFTriple store;
 
-    public TripleDiff(URI Resource, String Language,  ArrayList<MatchPattern> ProducesFilterList, SPARQLToRDFTriple Store){
+    public TripleDiff(Resource Resource, String Language,  ArrayList<MatchPattern> ProducesFilterList, SPARQLToRDFTriple Store){
         try{
             logger = Logger.getLogger(Class.forName("TripleDiff").getName());
             this.resource = Resource;
@@ -66,7 +66,7 @@ public class TripleDiff {
 			//filter all which do not have resource as subject
 			if(!this.resource.equals( triple.getSubject())){
 				filteredoutExtractor.add(triple);
-			}else if((triple.getObject() instanceof URI) && (isSubstring(this.resource.toString(),triple.getObject().toString()))) {
+			}else if((triple.getObject() instanceof Resource) && (isSubstring(this.resource.toString(),triple.getObject().toString()))) {
 				filteredoutExtractor.add(triple);
 			}else {
 				remainderExtractor.add(triple);
@@ -76,7 +76,7 @@ public class TripleDiff {
 		for (Object objTriplesFromStore :triplesFromStore) {
             RDFTriple triple = (RDFTriple) objTriplesFromStore;
 			//filter all which do not have resource as subject
-			if((triple.getObject() instanceof URI) && (isSubstring(this.resource.toString(),triple.getObject().toString()))){
+			if((triple.getObject() instanceof Resource) && (isSubstring(this.resource.toString(),triple.getObject().toString()))){
 				filteredoutStore.add(triple);
 			}else {
 				remainderStore.add(triple);
@@ -242,7 +242,7 @@ public class TripleDiff {
 			if(!this.resource.equals( triple.getSubject())){
 				differentSubjectExtractor.add(triple);
 			// filter out London/review/rating in Object
-			}else if((triple.getObject() instanceof URI) && isSubstring(this.resource.toString(),triple.getObject().toString())) {
+			}else if((triple.getObject() instanceof Resource) && isSubstring(this.resource.toString(),triple.getObject().toString())) {
 				subResourceAsObjectExtractor.add(triple);
 			}else {
 				remainderExtractor.add(triple);
@@ -253,7 +253,7 @@ public class TripleDiff {
 		for(Object obTtriplesFromStore :  triplesFromStore){
             RDFTriple triple = (RDFTriple) obTtriplesFromStore;
 			//filter all which do not have resource as subject
-			if((triple.getObject() instanceof URI) && isSubstring(this.resource.toString(),triple.getObject().toString())){
+			if((triple.getObject() instanceof Resource) && isSubstring(this.resource.toString(),triple.getObject().toString())){
 				subResourceAsObjectStore.add(triple);
 			}else {
 				remainderStore.add(triple);
