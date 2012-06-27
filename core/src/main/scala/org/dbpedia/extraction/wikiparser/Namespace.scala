@@ -107,6 +107,7 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
 
   val OntologyClass = values(200)
   val OntologyProperty = values(202)
+  val Mapping = values(204)
   
   def get(lang : Language, name : String) : Option[Namespace] = {
     dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
