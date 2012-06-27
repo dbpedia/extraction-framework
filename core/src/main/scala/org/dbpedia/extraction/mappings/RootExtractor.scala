@@ -17,8 +17,13 @@ class RootExtractor(extractor: Mapping[PageNode])
     {
       //Generate the page URI
       val uri = page.title.language.resourceUri.append(page.title.decodedWithNamespace)
-      
+
       //Extract
       extractor.extract(page, uri, new PageContext())
+    }
+
+    def getExtractor: Mapping[PageNode] =
+    {
+      extractor
     }
 }
