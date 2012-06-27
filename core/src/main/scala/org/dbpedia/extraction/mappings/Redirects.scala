@@ -154,7 +154,7 @@ object Redirects
     /**
      * Loads the redirects from a source.
      */
-    private def loadFromSource(source : Source, lang : Language) : Redirects =
+    def loadFromSource(source : Source, lang : Language) : Redirects =
     {
         logger.info("Loading redirects from source ("+lang.wikiCode+")")
 
