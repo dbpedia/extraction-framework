@@ -1,19 +1,26 @@
 package org.dbpedia.helper;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
+
+import java.io.StringWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static org.dbpedia.extraction.util.RichString.toRichString;
+
+/*
+import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.model.impl.URIImpl;
-import org.openrdf.rio.ntriples.NTriplesUtil;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import static org.dbpedia.extraction.util.RichString.toRichString;
+import org.openrdf.rio.ntriples.NTriplesUtil;*/
 
 
 /**
@@ -24,14 +31,14 @@ import static org.dbpedia.extraction.util.RichString.toRichString;
  * This class constructs RDF triples.
  * Used in org.dbpedia.extraction.destination.SQLFileDestination
  */
-public class Triple extends StatementImpl{
+public class Triple extends StatementImpl {
 
     //Initializing the Logger
     private static final Logger logger = Logger.getLogger(Triple.class.getName());
     private static String pageCacheKey = null;
-    private static URI pageCacheValue = null;
+    private static Resource pageCacheValue = null;
 
-    public Triple(Resource subject, URI predicate, Value object)
+    public Triple(Resource subject, Property predicate, RDFNode object)
     {
         super(subject, predicate, object);
     }
@@ -72,20 +79,27 @@ public class Triple extends StatementImpl{
 
     public String toNTriples()
     {
-        String strNTriples = NTriplesUtil.toNTriplesString(this.getSubject()) + " " +
+        StringWriter out = new StringWriter();
+        /*String strNTriples = NTriplesUtil.toNTriplesString(this.getSubject()) + " " +
             NTriplesUtil.toNTriplesString(this.getPredicate()) + " " +
-            NTriplesUtil.toNTriplesString(this.getObject()) + " .\n" ;
+            NTriplesUtil.toNTriplesString(this.getObject()) + " .\n" ;*/
 
-        return strNTriples;
+        Model ntriplesModel = ModelFactory.createDefaultModel();
+
+        ntriplesModel.add(ResourceFactory.createStatement(this.getSubject(), this.getPredicate(), this.getObject()));
+        ntriplesModel.write(out, "N-TRIPLE");
+
+
+        return out.toString();
     }
-    public static URI page(String pageID) {
+    public static Resource page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
            String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.English().locale());
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
            //TODO make resource domain configurable
            String resourceURI = "http://dbpedia.org/resource/"+ returnPageID;
-           URI uri = new URIImpl(resourceURI);
+           Resource uri = ResourceFactory.createResource(resourceURI);
            pageCacheKey = pageID;
            pageCacheValue = uri;
        }

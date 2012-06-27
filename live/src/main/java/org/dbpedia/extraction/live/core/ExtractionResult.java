@@ -1,18 +1,22 @@
 package org.dbpedia.extraction.live.core;
 
-import org.openrdf.model.Resource;
+/*import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
+*/
 
+import com.hp.hpl.jena.rdf.model.*;
+
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.regex.*;
-import java.net.URLDecoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by IntelliJ IDEA.
@@ -73,25 +77,28 @@ public class ExtractionResult{
          //foreach ( this.predicates as subject => bool )
          {
              String subject = ((Map.Entry)predicatesIterator.next()).getKey().toString();
-             
-             predicateTriples.addTriple(new URIImpl(subject), new URIImpl(Constants.RDF_TYPE), new URIImpl(Constants.RDF_PROPERTY));
-			 predicateTriples.addTriple(new URIImpl(subject), new URIImpl(Constants.RDFS_LABEL),
-                            new LiteralImpl(this.getPredicateLabel(subject)));
+
+             Model tmpModel = ModelFactory.createDefaultModel();
+
+             predicateTriples.addTriple(ResourceFactory.createResource(subject),
+                     ResourceFactory.createProperty(Constants.RDF_TYPE), ResourceFactory.createResource(Constants.RDF_PROPERTY));
+			 predicateTriples.addTriple(ResourceFactory.createResource(subject),ResourceFactory.createProperty(Constants.RDFS_LABEL),
+                     tmpModel.createLiteral(this.getPredicateLabel(subject)));
          }
         return predicateTriples;
     }
 
-    public void addTripleObject(Statement triple)
+    public void addTripleObject(RDFTriple triple)
     {
 		this._addToTripleArray(triple);
     }
 
-	public void addTriple(Resource s, URI p, Value o)
+	public void addTriple(Resource s, Property p, RDFNode o)
     {
 		this._addToTripleArray(new RDFTriple(s, p, o));
     }
 
-	private void _addToTripleArray(Statement triple)
+	private void _addToTripleArray(RDFTriple triple)
     {
         //TODO we should call the validation of RDFTriple
         //TODO We can depend now only on the validation provided by org.openrdf
@@ -102,7 +109,7 @@ public class ExtractionResult{
 		}
 	}
 
-    public void addMetadataTriple(Resource s, URI p, Value o) 
+    public void addMetadataTriple(Resource s, Property p, RDFNode o)
     {
         //this.metadataTriples = new ArrayList();
         this.metadataTriples.add(new RDFTriple(s, p, o));

@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.live.helper;
 
 import org.apache.log4j.Logger;
+import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.core.Constants;
 import org.dbpedia.extraction.live.core.Util;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
@@ -14,7 +15,10 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -25,8 +29,9 @@ import java.util.*;
  * This class reads the configuration file of the live extraction.
  */
 public class LiveConfigReader {
-    
-    private static Logger logger = Logger.getLogger(LiveConfigReader.class); 
+
+    private static Logger logger = Logger.getLogger(LiveConfigReader.class);
+    private static DOMParser parser = new DOMParser();
     private static final String liveConfigFile = "./live/live.xml";
 
     private static DocumentBuilderFactory dbFactory;
@@ -56,14 +61,14 @@ public class LiveConfigReader {
 
     public static Map<Language,List<ExtractorSpecification>>  extractors = null;
 
-    public static Map<Language,List<Class<? extends Extractor>>> extractorClasses = null;
+    public static Map<Language,List<Class<Extractor>>> extractorClasses = null;
     public static int updateOntologyAndMappingsPeriod = 5;
     public static boolean multihreadingMode = false;
 
     //Initialize the static members
     static{
         try{
-            
+
             dbFactory = DocumentBuilderFactory.newInstance();
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(new File(liveConfigFile));
@@ -71,15 +76,15 @@ public class LiveConfigReader {
             readMultihreadingMode();
             readUpdateOntologyAndMappingsPeriod();
 
-            
+
             /** Ontology source */
-//            JavaConversions.asEnumeration(Namespace());
-//    Source ontologySource = WikiSource.fromNamespaces(Set(Namespace.OntologyClass, Namespace.OntologyProperty),
-//                                                   new URL("http://mappings.dbpedia.org/api.php"), Language.English() );
+//            JavaConversions.asEnumeration(WikiTitle.Namespace());
+//    Source ontologySource = WikiSource.fromNamespaces(Set(WikiTitle.Namespace().OntologyClass, WikiTitle.Namespace.OntologyProperty),
+//                                                   new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
 //
 //    /** Mappings source */
-//    Source mappingsSource =  WikiSource.fromNamespaces(Set(Namespace.Mapping),
-//                                                    new URL("http://mappings.dbpedia.org/api.php"), Language.English() );
+//    Source mappingsSource =  WikiSource.fromNamespaces(Set(WikiTitle.Namespace.Mapping),
+//                                                    new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
         }
         catch(Exception exp){
             logger.error(exp.getMessage());
@@ -105,10 +110,10 @@ public class LiveConfigReader {
      * Reads each langauge along with its set of extractors
      */
     private static void readExtractors(){
-         NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
+        NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
         //iterate and build the required list of extractors
         extractors = new HashMap<Language,List<ExtractorSpecification>>();
-        extractorClasses = new HashMap<Language,List<Class<? extends Extractor>>>();
+        extractorClasses = new HashMap<Language,List<Class<Extractor>>>();
 
 
         for(int i=0; i<languageNodes.getLength(); i++){
@@ -129,7 +134,7 @@ public class LiveConfigReader {
         try{
             NodeList extractorNodes = elemLanguageExtractors.getElementsByTagName(EXTRACTOR_TAGNAME);
             ArrayList<ExtractorSpecification> langExtractors = new ArrayList<ExtractorSpecification>(10);
-            ArrayList<Class<? extends Extractor>> langExtractorClasses = new ArrayList<Class<? extends Extractor>>(10);
+            ArrayList<Class<Extractor>> langExtractorClasses = new ArrayList<Class<Extractor>>(10);
 
             //iterate and build the required list of extractors
             for(int i=0; i<extractorNodes.getLength(); i++){
@@ -137,8 +142,8 @@ public class LiveConfigReader {
                 Element elemExtractor = (Element)extractorNodes.item(i);
                 String extractorID = elemExtractor.getAttribute(NAME_ATTRIBUTENAME);
                 ExtractorStatus status = ExtractorStatus.valueOf(elemExtractor.getAttribute(EXTRACTOR_STATUS_ATTRIBUTENAME));
-                
-                langExtractorClasses.add(ClassLoader.getSystemClassLoader().loadClass(extractorID).asSubclass(Extractor.class));
+
+                langExtractorClasses.add((Class<Extractor>)(ClassLoader.getSystemClassLoader().loadClass(extractorID)));
 
                 //Those types of extractors need special type of handling as we must call the function _addGenerics for
                 //them
@@ -220,7 +225,7 @@ public class LiveConfigReader {
 
                 try{
                     if(Constants.class.getField(predicate).get(Constants.class) != null)
-                        predicate = Constants.class.getField(predicate).get(Constants.class).toString(); 
+                        predicate = Constants.class.getField(predicate).get(Constants.class).toString();
                 }
                 catch(Exception exp){}
 
@@ -240,7 +245,7 @@ public class LiveConfigReader {
         }
 
 
-        
+
         return patterns.size()>0? patterns : null;
     }
 
@@ -267,9 +272,9 @@ public class LiveConfigReader {
      * @param   requiredStatus  The status of the extractors
      * @return  A list containing the extractors of the passed status 
      */
-    public static List<Class<? extends Extractor>> getExtractors(Language lang, ExtractorStatus requiredStatus){
+    public static List<Class<Extractor>> getExtractors(Language lang, ExtractorStatus requiredStatus){
 
-        List<Class<? extends Extractor>> extractorsList = extractorClasses.get(lang);
+        List<Class<Extractor>> extractorsList = extractorClasses.get(lang);
         for(ExtractorSpecification spec : extractors.get(lang)){
             if(spec.status != requiredStatus){
 

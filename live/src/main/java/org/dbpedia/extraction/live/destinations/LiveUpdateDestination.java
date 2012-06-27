@@ -1,7 +1,9 @@
 package org.dbpedia.extraction.live.destinations;
 
+import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
+import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.destinations.Dataset;
 import org.dbpedia.extraction.destinations.Destination;
 import org.dbpedia.extraction.destinations.Quad;
 import org.dbpedia.extraction.live.core.*;
@@ -12,25 +14,24 @@ import org.dbpedia.extraction.live.helper.LiveConfigReader;
 import org.dbpedia.extraction.live.helper.MatchPattern;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.publisher.PublishingData;
-import org.dbpedia.extraction.ontology.datatypes.Datatype;
 import org.dbpedia.extraction.util.Language;
 import org.ini4j.Options;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.model.impl.LiteralImpl;
-import org.openrdf.model.impl.URIImpl;
+import scala.Function1;
 import scala.collection.JavaConversions;
 import scala.collection.Seq;
 import scala.collection.Traversable;
 import scala.runtime.AbstractFunction1;
-import scala.Function1;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
 import java.util.concurrent.*;
+
+/*import org.openrdf.model.URI;
+import org.openrdf.model.impl.LiteralImpl;
+import org.openrdf.model.impl.URIImpl;*/
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,7 +58,7 @@ public class LiveUpdateDestination implements Destination{
 	 * Options they should be initiialized
 	 * only once at the beginning
 	 * */
-	private URI uri;
+	private Resource uri;
 	private String language;
 	private String oaiId;
     private long pageId;
@@ -93,7 +94,8 @@ public class LiveUpdateDestination implements Destination{
 
     public LiveUpdateDestination(String pageTitle, String language, String oaiID){
 
-        this.uri = RDFTriple.page(pageTitle);
+//        this.uri = RDFTriple.page(pageTitle);
+        this.uri =   ResourceFactory.createResource(Constants.DB_RESOURCE_NS + pageTitle);
         this.language = language;
         this.oaiId = oaiID;
 
@@ -258,14 +260,15 @@ public class LiveUpdateDestination implements Destination{
      * @return  String representation of the triple
      */
     private String convertHashMapToString(HashMap hmTriple){
+        Model tmpModel = ModelFactory.createDefaultModel();
 
         String pattern = "";
         if(hmTriple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
                 pattern += hmTriple.get("s") + " " + hmTriple.get("p") + " " + hmTriple.get("o")+" . \n";
         else//The statement must be converted to SPARUL
-            pattern += Util.convertToSPARULPattern(new URIImpl(hmTriple.get("s").toString()))
-                + " " + Util.convertToSPARULPattern(new URIImpl(hmTriple.get("p").toString()))
-                + " " + Util.convertToSPARULPattern(new LiteralImpl(hmTriple.get("o").toString()))+" . \n";
+            pattern += Util.convertToSPARULPattern(ResourceFactory.createResource(hmTriple.get("s").toString()))
+                + " " + Util.convertToSPARULPattern(ResourceFactory.createProperty(hmTriple.get("p").toString()))
+                + " " + Util.convertToSPARULPattern(tmpModel.createLiteral(hmTriple.get("o").toString()))+" . \n";
 
         return pattern;
     }
@@ -287,7 +290,8 @@ public class LiveUpdateDestination implements Destination{
 
             List<Quad> listQuads = JavaConversions.seqAsJavaList(quadList);
             for(Quad quad : listQuads){
-                rs.addTriple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
+                rs.addTriple(ResourceFactory.createResource(quad.subject()), ResourceFactory.createProperty(quad.predicate()),
+                        constructTripleObject(quad));
             }
 
             accept(rs);
@@ -314,9 +318,11 @@ public class LiveUpdateDestination implements Destination{
     public void write(Seq<Quad> graph, String extr){
 
         ExtractionResult rs = new ExtractionResult(pageId, language, extr);
+        Model tmpModel = ModelFactory.createDefaultModel();
 
         for(Quad quad : JavaConversions.asJavaIterable(graph)){
-            rs.addTriple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
+            rs.addTriple(ResourceFactory.createResource(quad.subject()), ResourceFactory.createProperty(quad.predicate()),
+                    constructTripleObject(quad));
         }
 
         accept(rs);
@@ -340,28 +346,23 @@ public class LiveUpdateDestination implements Destination{
     }
 
 
-    private Value constructTripleObject(Quad quad){
+    private RDFNode constructTripleObject(Quad quad){
         //String Lang = quad.getLanguage();
         //Datatype datatype = quad.getDatatype();
 
         // EDITED by Claus
         String Lang = quad.language().toString();
         String datatype = quad.datatype();
-        
+        Model tmpModel = ModelFactory.createDefaultModel();
+
         if (datatype != null){
             if (datatype.equals("http://www.w3.org/2001/XMLSchema#string"))
-            {
-                return new LiteralImpl(quad.value(), Lang);
-            }
+                return tmpModel.createLiteral(quad.value(), Lang);
             else
-            {
-                 return new LiteralImpl(quad.value(), new URIImpl(datatype));
-            }
+                 return tmpModel.createTypedLiteral(quad.value(), datatype);
         }
         else
-        {
-            return new URIImpl(quad.value());
-        }
+            return ResourceFactory.createResource(quad.value());
     }
 
     public int countLiveAbstracts(){
@@ -544,6 +545,7 @@ public class LiveUpdateDestination implements Destination{
         String sparul = "";
         String pattern = "";
         int directCount = 0;
+        Model tmpModel = ModelFactory.createDefaultModel();
 //         Iterator predicatesIterator = this.predicates.entrySet().iterator();
         Iterator fromStoreIterator = fromStore.entrySet().iterator();
         while(fromStoreIterator.hasNext()){
@@ -556,9 +558,9 @@ public class LiveUpdateDestination implements Destination{
             if(triple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
                     pattern += triple.get("s") + " " + triple.get("p") + " " + triple.get("o")+" . \n";
             else//The statement must be converted to SPARUL
-                pattern += Util.convertToSPARULPattern(new URIImpl(triple.get("s").toString()))
-                    + " " + Util.convertToSPARULPattern(new URIImpl(triple.get("p").toString()))
-                    + " " + Util.convertToSPARULPattern(new LiteralImpl(triple.get("o").toString()))+" . \n";
+                pattern += Util.convertToSPARULPattern(new ResourceImpl(triple.get("s").toString()))
+                    + " " + Util.convertToSPARULPattern(new PropertyImpl(triple.get("p").toString()))
+                    + " " + Util.convertToSPARULPattern(tmpModel.createLiteral(triple.get("o").toString()))+" . \n";
 
             strDeletedTriples += pattern;
 //            (new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
@@ -596,9 +598,9 @@ public class LiveUpdateDestination implements Destination{
                 if(triple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
                     pattern = triple.get("s") + " " + triple.get("p") + " " + triple.get("o")+" . \n";
                 else//The statement must be converted to SPARUL
-                    pattern += Util.convertToSPARULPattern(new URIImpl(triple.get("s").toString()))
-                        + " " + Util.convertToSPARULPattern(new URIImpl(triple.get("p").toString()))
-                        + " " + Util.convertToSPARULPattern(new LiteralImpl(triple.get("o").toString()))+" . \n";
+                    pattern += Util.convertToSPARULPattern(new ResourceImpl(triple.get("s").toString()))
+                        + " " + Util.convertToSPARULPattern(new PropertyImpl(triple.get("p").toString()))
+                        + " " + Util.convertToSPARULPattern(tmpModel.createLiteral(triple.get("o").toString()))+" . \n";
 
                 strDeletedTriples += pattern;
 
@@ -818,7 +820,7 @@ public class LiveUpdateDestination implements Destination{
 
 
     private void _jdbc_clean_sparul_delete_subresources(String log){
-		URI subject = this.uri;
+		Resource subject = this.uri;
         //TODO Make sure that this string is concatenated correctly
 		String sparul = "DELETE FROM <" + this.graphURI + ">	{ ?subresource ?p  ?o .  } FROM <" + this.graphURI + ">";
         //TODO Make sure that this string is concatenated correctly
