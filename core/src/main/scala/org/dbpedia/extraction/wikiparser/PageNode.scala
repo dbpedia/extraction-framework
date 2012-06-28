@@ -12,13 +12,13 @@ import org.dbpedia.extraction.sources.WikiPage
  * @param isDisambiguation True, if this is a Disambiguation page
  * @param children The contents of this page
  */
-case class PageNode (
-  title: WikiTitle, 
-  id: Long, 
-  revision: Long, 
-  timestamp: Long, 
-  isRedirect: Boolean, 
-  isDisambiguation: Boolean,
+class PageNode (
+  val title: WikiTitle, 
+  val id: Long, 
+  val revision: Long, 
+  val timestamp: Long, 
+  val isRedirect: Boolean, 
+  val isDisambiguation: Boolean,
   override val children: List[Node] = List.empty
 ) 
 extends Node(children, 0)
