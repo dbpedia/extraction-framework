@@ -21,20 +21,28 @@ import org.dbpedia.extraction.util.Language
  * because the WackoWiki cannot cope with wiki pages being too long.
  */
 
-class DatasetInfo(val dataset: String, val title: String, val description: String) {
-  def this(dataset: Dataset, title: String, description: String) =
-    this(dataset.name, title, description)
-}
-
 object CreateDownloadPage {
   
-  val version = 3
-  val subversion = 8
+  val major = 3
+  val minor = 8
+  val version = major+'.'+minor
 
-  val linkprefix = "http://downloads.dbpedia.org/"+version+"."+subversion+"/"
+  val linkprefix = "http://downloads.dbpedia.org/"+version
   
   val filetypes= Array("nt", "nq") // possible Filetypes for Download Table
-    
+  
+  val languages = Seq[Language]() // TODO: arg
+  
+  val allLanguages = Seq[Language]() // TODO: parse wikipedias.csv
+  
+  /**
+   * 
+   */
+  class DatasetInfo(val dataset: String, val title: String, val description: String) {
+    def this(dataset: Dataset, title: String, description: String) =
+      this(dataset.name, title, description)
+  }
+
   def main(args: Array[String]) {
     val localDir = args(0) // Path where all the DBpedia extraction files can be found
     
@@ -104,147 +112,151 @@ new DatasetInfo("yago_", "Links to YAGO2", "Dataset containing links between DBp
 new DatasetInfo("wordnet_", "WordNet Classes", "Classification links to ((http://www.w3.org/TR/wordnet-rdf/ RDF representations)) of ((http://wordnet.princeton.edu/ WordNet)) classes. Update mechanism: unclear/copy over from previous release.")
 )
 
-}
-/*
-function createWikiTable($header,$filelist,$filespecs, $languages) {
-	global $linkprefix;
-    global $version;
-    global $subversion;
-    //Get the DBpedia Version Number for Preview File
-	preg_match('~/([0-9]+\.[0-9]+)/~',$linkprefix,$matches);
-	echo "===".$header."===\n";
-    echo "**NOTE: You can find DBpedia dumps in 97 languages at our ((http://downloads.dbpedia.org/".$version.".".$subversion."/ DBpedia download server)).**\n\n";
-	echo "//Click on the dataset names to obtain additional information.//\n";
-	echo "#||\n||**Dataset**|**" . implode('**|**', $languages) . "**||\n";
-        if ($header == "Core Datasets") {
-            echo "||((#dbpediaontology DBpedia Ontology)) ++(<# <a href=\"http://downloads.dbpedia.org/preview.php?file=".$version.".".$subversion."_sl_dbpedia_".$version.".".$subversion.".owl.bz2\">preview</a> #>)++|++<# <a href=\"http://downloads.dbpedia.org/".$version.".".$subversion."/dbpedia_".$version.".".$subversion.".owl.bz2\" title=\"Triples: unknown; Filesize(download): unknown; Filesize(unpacked): unknown\">owl</a> #>++|++--++|++--++|++--++|++--++|++--++|++--++|++--++|++--++|++--++|++--++|++--++||";
-        }
-        foreach ($filelist as $name) {
-		foreach ($languages as $index => $lang) {
-			if ($index === 0) {
-				echo '||((#'.str_replace(" ","",strtolower($name['title'])).' '.$name['title'].')) ++(<# <a href="http://downloads.dbpedia.org/preview.php?file='.$matches[1].'_sl_'.$lang.'_sl_'.$name['file'].$lang.'.nt.bz2">preview</a> #>)++|';
-			}
-			
-			echo '++'.lookup($name['file'],$lang,$filespecs).'++|';
-		}
-		echo "|\n";
-	}
-	echo "||# \n";
+def createWikiTable(header: String, datasets: Seq[DatasetInfo], filespecs: String) {
+  
+  print("==="+header+"===\n")
+  print("**NOTE: You can find DBpedia dumps in "+allLanguages.size+" languages at our ((http://downloads.dbpedia.org/"+version+"/ DBpedia download server)).**\n\n")
+  print("//Click on the dataset names to obtain additional information.//\n")
+  print("#||\n")
+  print("||**Dataset**|"+languages.map(_.wikiCode).mkString("**","**|**","**")+"||\n")
+  
+  if (header == "Core Datasets") {
+    print("||((#dbpediaontology DBpedia Ontology)) "+preview(version+"/dbpedia_"+version+".owl.bz2")+"|++<# <a href=\"http://downloads.dbpedia.org/"+version+"/dbpedia_"+version+".owl.bz2\" title=\"Triples: unknown; Filesize(download): unknown; Filesize(unpacked): unknown\">owl</a> #>++|++--++|++--++|++--++|++--++|++--++|++--++|++--++|++--++|++--++|++--++|++--++||")
+  }
+  
+  for (dataset <- datasets) {
+    var first = true
+    for (language <- languages) {
+      if (first) {
+        print("||((#"+dataset.title.replaceAll(" ","")+' '+dataset.title+")) ++(<# <a href=\"http://downloads.dbpedia.org/preview.php?file="+version+"_sl_"+language+"_sl_"+$name["file"]+$lang+".nt.bz2\">preview</a> #>)++|")
+        first = false
+      }
+      
+      print("++"+lookup($name["file"],$lang,$filespecs)+"++|";
+    }
+    print("|\n";
+  }
+  print("||# \n";
 }
 
+def preview(path: String): String = "++(<# <a href=\"http://downloads.dbpedia.org/preview.php?file="+path.replace("/", "_sl_")+"\">preview</a> #>)++"
+
+}
+
+/*
 function lookup($file,$lang,$filespecs) {
-	global $localpackdirectory;
-	global $linkprefix;
-	global $filetypes;
-		
-	foreach ($filetypes as $filetype) {
-		if (is_file($localpackdirectory.$lang.'/'.$file.$lang.'.'.$filetype.'.bz2')) {
-			$return.='<# <a href="'.$linkprefix.$lang.'/'.$file.$lang.'.'.$filetype.'.bz2" title="Triples: '.$filespecs[$file.$lang.'.nt']['lines'].'; Filesize(download): '.$filespecs[$file.$lang.'.'.$filetype]['bzip2'].'; Filesize(unpacked): '.$filespecs[$file.$lang.'.'.$filetype]['filesize'].'">'.$filetype.'</a> #>';
-		}
-	else
-		$return.='-';
-	}
-	return $return;
+  global $localpackdirectory;
+  global $linkprefix;
+  global $filetypes;
+    
+  foreach ($filetypes as $filetype) {
+    if (is_file($localpackdirectory.$lang.'/'.$file.$lang.'.'.$filetype.'.bz2')) {
+      $return.='<# <a href="'.$linkprefix.$lang.'/'.$file.$lang.'.'.$filetype.'.bz2" title="Triples: '.$filespecs[$file.$lang.'.nt']['lines'].'; Filesize(download): '.$filespecs[$file.$lang.'.'.$filetype]['bzip2'].'; Filesize(unpacked): '.$filespecs[$file.$lang.'.'.$filetype]['filesize'].'">'.$filetype.'</a> #>';
+    }
+  else
+    $return.='-';
+  }
+  return $return;
 }
 function createDescriptions($filelist) {
-	foreach ($filelist as $file) {
-		echo "{{a name=\"".str_replace(" ","",strtolower($file['title']))."\"}}\n";
-		echo "==== ".$file['title']." ====\n";
-		echo "//".$file['description']."//\n";
-	}
+  foreach ($filelist as $file) {
+    echo "{{a name=\"".str_replace(" ","",strtolower($file['title']))."\"}}\n";
+    echo "==== ".$file['title']." ====\n";
+    echo "//".$file['description']."//\n";
+  }
 }
 
 //prepare Data for Files
 function getFileSpecifications($directories, $filelist, $filetypes) {
-	global $localdirectory, $localpackdirectory;
-		
-	foreach ($directories as $dir) {
-		foreach ($filelist as $file) {
-			foreach ($filetypes as $filetype) {
-				$name = $file['file'].$dir.'.'.$filetype;
-				$plain = $localdirectory.$dir.'/'.$name;
-				$pack = $localpackdirectory.$dir.'/'.$name.'.bz2';
+  global $localdirectory, $localpackdirectory;
+    
+  foreach ($directories as $dir) {
+    foreach ($filelist as $file) {
+      foreach ($filetypes as $filetype) {
+        $name = $file['file'].$dir.'.'.$filetype;
+        $plain = $localdirectory.$dir.'/'.$name;
+        $pack = $localpackdirectory.$dir.'/'.$name.'.bz2';
                                 if (is_file($plain) && is_file($pack))
-				{
-					//error_log('getting specs for ' . $name . ' and ' . $name . '.bz2');
-					$resultarray[$name]=array('lines'=> getFileLines($plain), 'filesize' => getFilesize($plain), 'bzip2' => getFilesize($pack));
-				}
-				else
-				{
-					//error_log('WARNING: cannot get specs for ' . $plain . ' and ' . $pack);
-				}
-			}
-		}
-	}
-	return $resultarray;
+        {
+          //error_log('getting specs for ' . $name . ' and ' . $name . '.bz2');
+          $resultarray[$name]=array('lines'=> getFileLines($plain), 'filesize' => getFilesize($plain), 'bzip2' => getFilesize($pack));
+        }
+        else
+        {
+          //error_log('WARNING: cannot get specs for ' . $plain . ' and ' . $pack);
+        }
+      }
+    }
+  }
+  return $resultarray;
 }
 function getFilesize($filelocation) {
-	if (is_file($filelocation)) {
-		//$filesizecmd='du -b '.$filelocation;
-		$filesizecmd='for %I in ("'.$filelocation.'") do @echo %~zI';
+  if (is_file($filelocation)) {
+    //$filesizecmd='du -b '.$filelocation;
+    $filesizecmd='for %I in ("'.$filelocation.'") do @echo %~zI';
 
                 exec($filesizecmd,$returnfilesize);
-		preg_match('/^[0-9]* /',$returnfilesize[0],$matchesB);
-		if ($matchesB[0] > 1024)
-			if (($matchesB[0]/1024) > 1024)
-				if ($matchesB[0]/(1024*1024) > 1024)
-					$matchesB[0]=round($matchesB[0]/(1024*1024*1024),1).'GB';
-				else
-					$matchesB[0]=round($matchesB[0]/(1024*1024),1).'MB';
-			else
-				$matchesB[0]=round($matchesB[0]/1024,1).'KB';
-		else
-			$matchesB[0]=$matchesB[0].'Bytes';
-		$returnfilesize=array();
-		return $matchesB[0];
-	}
-	else
-		return null;
+    preg_match('/^[0-9]* /',$returnfilesize[0],$matchesB);
+    if ($matchesB[0] > 1024)
+      if (($matchesB[0]/1024) > 1024)
+        if ($matchesB[0]/(1024*1024) > 1024)
+          $matchesB[0]=round($matchesB[0]/(1024*1024*1024),1).'GB';
+        else
+          $matchesB[0]=round($matchesB[0]/(1024*1024),1).'MB';
+      else
+        $matchesB[0]=round($matchesB[0]/1024,1).'KB';
+    else
+      $matchesB[0]=$matchesB[0].'Bytes';
+    $returnfilesize=array();
+    return $matchesB[0];
+  }
+  else
+    return null;
 }
 function getFileLines($filelocation) {
-	if (is_file($filelocation)) {
-		//$filelinescmd='wc -l '.$filelocation;
+  if (is_file($filelocation)) {
+    //$filelinescmd='wc -l '.$filelocation;
                 $filelinescmd='find /c " " '.$filelocation;
-		exec($filelinescmd,$returnfilelines);	
-		preg_match('/[0-9]*$/',$returnfilelines[1],$matchesA);
-		if ($matchesA[0] > 1000)
-			if (($matchesA[0]/1000) > 1000)
-				$matchesA[0]=round($matchesA[0]/1000000,1).'M';
-			else
-				$matchesA[0]=round($matchesA[0]/1000,1).'K';
-		$returnfilelines=array();	
-		return $matchesA[0];
-	}
-	else 
-		return null;
+    exec($filelinescmd,$returnfilelines);  
+    preg_match('/[0-9]*$/',$returnfilelines[1],$matchesA);
+    if ($matchesA[0] > 1000)
+      if (($matchesA[0]/1000) > 1000)
+        $matchesA[0]=round($matchesA[0]/1000000,1).'M';
+      else
+        $matchesA[0]=round($matchesA[0]/1000,1).'K';
+    $returnfilelines=array();  
+    return $matchesA[0];
+  }
+  else 
+    return null;
 }
 
 function countTriples($specs) {
-	$count=0;
-	$countpagelink=0;
-	#$abk=array("K","M");
-	#$cou=array("000","000000");
-	foreach (array_keys($specs) as $file) {
-		if (preg_match('/.\.csv/',$file))
-			continue;
-		else {
-			if (preg_match('/K/',$specs[$file]['lines'])) {
-				if (preg_match('/page_link/',$file))
-					$countpagelink=$countpagelink+(str_replace("K","",$specs[$file]['lines'])*1000);
-				else
-					$count=$count+(str_replace("K","",$specs[$file]['lines'])*1000);
-			}
-			if (preg_match('/M/',$specs[$file]['lines'])) {
-				if (preg_match('/page_link/',$file))
-					$countpagelink=$countpagelink+(str_replace("M","",$specs[$file]['lines'])*1000000);
-				else
-					$count=$count+(str_replace("M","",$specs[$file]['lines'])*1000000);
-			}
-		}
-			#$count=$count+str_replace($abk,$cou,$specs[$file]['lines']);
-	}
-	$countfull=array(0 => $count, 1 => $countpagelink);
-	return $countfull;		
+  $count=0;
+  $countpagelink=0;
+  #$abk=array("K","M");
+  #$cou=array("000","000000");
+  foreach (array_keys($specs) as $file) {
+    if (preg_match('/.\.csv/',$file))
+      continue;
+    else {
+      if (preg_match('/K/',$specs[$file]['lines'])) {
+        if (preg_match('/page_link/',$file))
+          $countpagelink=$countpagelink+(str_replace("K","",$specs[$file]['lines'])*1000);
+        else
+          $count=$count+(str_replace("K","",$specs[$file]['lines'])*1000);
+      }
+      if (preg_match('/M/',$specs[$file]['lines'])) {
+        if (preg_match('/page_link/',$file))
+          $countpagelink=$countpagelink+(str_replace("M","",$specs[$file]['lines'])*1000000);
+        else
+          $count=$count+(str_replace("M","",$specs[$file]['lines'])*1000000);
+      }
+    }
+      #$count=$count+str_replace($abk,$cou,$specs[$file]['lines']);
+  }
+  $countfull=array(0 => $count, 1 => $countpagelink);
+  return $countfull;    
 }
 /*****
 * 0. Prepare Directories (create all directories for languages)
