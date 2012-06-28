@@ -19,7 +19,7 @@ class PageNode (
   val timestamp: Long, 
   val isRedirect: Boolean, 
   val isDisambiguation: Boolean,
-  override val children: List[Node] = List.empty
+  children: List[Node] = List.empty
 ) 
 extends Node(children, 0)
 {
