@@ -25,6 +25,7 @@ public class PagePriority implements Comparable<PagePriority>{
     public String lastResponseDate;
 //    private final long timestamp=0;
 
+    // TODO: SimpleDateFormat is not thread-safe
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     public PagePriority(long pageid, Priority priority, String responseDate){
