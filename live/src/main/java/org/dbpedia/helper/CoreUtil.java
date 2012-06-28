@@ -1,16 +1,22 @@
 package org.dbpedia.helper;
 
+import com.bbn.parliament.jena.joseki.bridge.util.NTriplesUtil;
+import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import org.dbpedia.extraction.util.Language;
+import org.dbpedia.extraction.util.WikiUtil;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.dbpedia.extraction.util.Language;
-import org.dbpedia.extraction.util.WikiUtil;
-import org.openrdf.model.BNode;
+import static org.dbpedia.extraction.util.RichString.toRichString;
+
+/*import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
-import org.openrdf.rio.ntriples.NTriplesUtil;
-import static org.dbpedia.extraction.util.RichString.toRichString;
+import org.openrdf.rio.ntriples.NTriplesUtil;*/
 
 /**
  * TODO: why is this class necessary? Quad.render() does pretty much the same thing...
@@ -24,7 +30,7 @@ public class CoreUtil {
     //Initialize the logger
     private static Logger logger = Logger.getLogger(CoreUtil.class.getName());
 
-    public static String convertToSPARULPattern(Value requiredResource)
+    public static String convertToSPARULPattern(RDFNode requiredResource)
     {
         String storeSpecific = "VIRTUOSO";
         return convertToSPARULPattern(requiredResource, storeSpecific);
@@ -38,7 +44,7 @@ public class CoreUtil {
     private static String convertToSPARULPattern(Object requiredResource, String storeSpecific)
     {
         try{
-            Value valResource = (Value) requiredResource;
+            RDFNode valResource = (RDFNode) requiredResource;
             return convertToSPARULPattern(valResource, storeSpecific);
         }
         catch(Exception exp){
@@ -47,20 +53,21 @@ public class CoreUtil {
         }
     }
 
-    public static String convertToSPARULPattern(Value requiredResource, String storeSpecific)
+    public static String convertToSPARULPattern(RDFNode requiredResource, String storeSpecific)
     {
         String strSPARULPattern = "";
-        if(requiredResource instanceof URI){
+        if(requiredResource instanceof Resource){
 
+            //strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
             strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
 
         }
-        else if(requiredResource instanceof BNode){
+        /*else if(requiredResource instanceof BNode){
 
             strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
             strSPARULPattern = strSPARULPattern.replace("%", "_");
 
-        }
+        }*/
         else if(requiredResource instanceof Literal){
 
             /*if((storeSpecific == null) || (storeSpecific.equals("")))
@@ -76,12 +83,12 @@ public class CoreUtil {
                 quotes = "\"";
 
             if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
-                strSPARULPattern = quotes + escapeString( requiredResource.stringValue()) + quotes;
+                strSPARULPattern = quotes + escapeString( requiredResource.toString()) + quotes;
             else if(((Literal) requiredResource).getDatatype() == null)
-                strSPARULPattern = quotes + escapeString(requiredResource.stringValue()) + quotes +
+                strSPARULPattern = quotes + escapeString(requiredResource.toString() ) + quotes +
                         "@" + ((Literal) requiredResource).getLanguage();
             else
-                strSPARULPattern = quotes + escapeString(requiredResource.stringValue()) + quotes + "^^<" +
+                strSPARULPattern = quotes + escapeString(requiredResource.toString()) + quotes + "^^<" +
                         ((Literal) requiredResource).getDatatype() + ">";
 
         }

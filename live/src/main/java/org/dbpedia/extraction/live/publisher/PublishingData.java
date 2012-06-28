@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.live.publisher;
 
-import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.impl.ModelCom;
 import org.dbpedia.extraction.live.core.RDFTriple;
-import org.dbpedia.extraction.live.helper.SesameJenaUtilities;
 
 import java.util.ArrayList;
 
@@ -39,13 +39,15 @@ public class PublishingData {
         for(RDFTriple triple: triplesList){
             //Convert OpenRDF statement to a JENA Triple
 //            Triple trip = Converter.convert(triple);
-              Triple trip = Triple.create(SesameJenaUtilities.makeJenaSubject(triple.getSubject()), SesameJenaUtilities.makeJenaPredicate(triple.getPredicate()),
-			 SesameJenaUtilities.makeJenaObject(triple.getObject()));
+              /*Triple trip = Triple.create(SesameJenaUtilities.makeJenaSubject(triple.getSubject()), SesameJenaUtilities.makeJenaPredicate(triple.getPredicate()),
+			 SesameJenaUtilities.makeJenaObject(triple.getObject()));*/
+            Statement stmt = ResourceFactory.createStatement(triple.getSubject(), triple.getPredicate(), triple.getObject());
+
 
             //Convert JENA Triple to JENA Statement
             ModelCom com = new ModelCom(triplesModel.getGraph());
 
-            triplesModel.add(com.asStatement(trip));
+            triplesModel.add(stmt);
         }
     }
 
@@ -76,12 +78,15 @@ public class PublishingData {
         for(RDFTriple triple: triplesList){
             //Convert OpenRDF statement to a JENA Triple
 //            Triple trip = Converter.convert(triple);
-              Triple trip = Triple.create(SesameJenaUtilities.makeJenaSubject(triple.getSubject()), SesameJenaUtilities.makeJenaPredicate(triple.getPredicate()),
-			 SesameJenaUtilities.makeJenaObject(triple.getObject()));
+              /*Triple trip = Triple.create(SesameJenaUtilities.makeJenaSubject(triple.getSubject()), SesameJenaUtilities.makeJenaPredicate(triple.getPredicate()),
+			 SesameJenaUtilities.makeJenaObject(triple.getObject()));*/
+
+            Statement stmt = ResourceFactory.createStatement(triple.getSubject(), triple.getPredicate(), triple.getObject());
+
             //Convert JENA Triple to JENA Statement
             ModelCom com = new ModelCom(triplesModel.getGraph());
 
-            triplesModel.add(com.asStatement(trip));
+            triplesModel.add(stmt);
         }
     }
 
