@@ -23,6 +23,7 @@ public class PublishedDataCompressor extends Thread{
     Logger logger = Logger.getLogger(PublishedDataCompressor.class);
 
     private Date lastProcessingDate = new Date();
+    // TODO: SimpleDateFormat is not thread-safe
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
 
     //This thread should have a low priority, in order not interfere with or slow down the main thread, which is responsible for handling live updates.
