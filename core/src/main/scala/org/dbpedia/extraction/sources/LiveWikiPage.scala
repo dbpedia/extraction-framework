@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.sources
 
 import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.util.StringUtils._
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,10 +19,10 @@ import org.dbpedia.extraction.wikiparser.WikiTitle
  * @param source The WikiText source of this page
  */
 
-case class LiveWikiPage(override val title : WikiTitle, override val id : Long, override val revision : Long,
+class LiveWikiPage(override val title : WikiTitle, override val id : Long, override val revision : Long,
                         override val source : String, val revisionTimestamp: String, val contributorID: Long,
                         val contributorName: String)
-  extends WikiPage(title, null, id, revision, -1, source)
+  extends WikiPage(title, null, id, revision, parseTimestamp(revisionTimestamp), source)
   //extends WikiPage(title, id, revision, source)
 //WikiPage(WikiTitle, WikiTitle, Long, Long,Long, String)
 {
@@ -32,6 +33,7 @@ case class LiveWikiPage(override val title : WikiTitle, override val id : Long, 
    * Serializes this page to XML using the MediaWiki export format.
    * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.4.
    */
+  // TODO: see WikiPage.toDumpXML(): use formatInt, formatLong, formatTimestamp
   def toXML =
   {
     <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/"

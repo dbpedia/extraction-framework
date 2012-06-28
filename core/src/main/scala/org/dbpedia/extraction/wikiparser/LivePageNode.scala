@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import java.text.SimpleDateFormat
+import org.dbpedia.extraction.util.StringUtils._
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,10 +21,11 @@ import java.text.SimpleDateFormat
 case class LivePageNode(override val title : WikiTitle, override val id : Long, override val revision : Long,
                         override val isRedirect : Boolean, override val isDisambiguation : Boolean,
                         val nodeTimestamp: String, val contributorID: Long, val contributorName: String, override val children : List[Node] = List.empty)
-  extends PageNode(title, id, revision, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(nodeTimestamp).getTime,  isRedirect, isDisambiguation, children)
+  extends PageNode(title, id, revision, parseTimestamp(nodeTimestamp), isRedirect, isDisambiguation, children)
 {
   override def toWikiText() : String = children.map(_.toWikiText).mkString("")
 
+  // TODO: see WikiPage.toDumpXML(): use formatInt, formatLong, formatTimestamp
   override def toDumpXML =
   {
     <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/"
