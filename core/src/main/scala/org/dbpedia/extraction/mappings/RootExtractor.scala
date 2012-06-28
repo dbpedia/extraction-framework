@@ -5,7 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 
 /**
  */
-class RootExtractor(extractor: Mapping[PageNode])
+class RootExtractor(val extractor: Mapping[PageNode])
 {
     /**
      * Processes a wiki page and returns the extracted data.
@@ -20,10 +20,5 @@ class RootExtractor(extractor: Mapping[PageNode])
 
       //Extract
       extractor.extract(page, uri, new PageContext())
-    }
-
-    def getExtractor: Mapping[PageNode] =
-    {
-      extractor
     }
 }
