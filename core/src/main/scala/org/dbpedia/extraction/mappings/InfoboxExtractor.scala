@@ -89,7 +89,7 @@ extends Extractor
 
     private val seenProperties = HashSet[String]()
     
-    override val datasets = Set(DBpediaDatasets.Infoboxes,DBpediaDatasets.InfoboxTest,DBpediaDatasets.InfoboxProperties)
+    override val datasets = Set(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxTest, DBpediaDatasets.InfoboxPropertyDefinitions)
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
@@ -125,7 +125,7 @@ extends Extractor
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads += new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
                             val stat_template = context.language.resourceUri.append(template.title.decodedWithNamespace)
                             val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
@@ -143,8 +143,8 @@ extends Extractor
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(context.language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
+                                quads += new Quad(context.language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
                             }
                         }
                     }
@@ -154,7 +154,7 @@ extends Extractor
                 if (propertiesFound && (!seenTemplates.contains(template.title.decoded)))
                 {
                     val templateUri = context.language.resourceUri.append(template.title.decodedWithNamespace)
-                    quads += new Quad(context.language, DBpediaDatasets.Infoboxes, subjectUri, usesTemplateProperty,
+                    quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, subjectUri, usesTemplateProperty,
                                        templateUri, template.sourceUri, null)
                     seenTemplates.add(template.title.decoded)
                 }
