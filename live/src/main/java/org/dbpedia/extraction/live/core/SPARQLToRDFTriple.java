@@ -1,17 +1,21 @@
 package org.dbpedia.extraction.live.core;
 
+import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
+import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
-import org.openrdf.model.Literal;
+
+import java.util.*;
+
+/*import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
-import org.openrdf.rio.ntriples.NTriplesUtil;
-
-import java.util.*;
+import org.openrdf.rio.ntriples.NTriplesUtil;*/
 
 
 /**
@@ -25,13 +29,13 @@ public class SPARQLToRDFTriple {
     //Initializing the Logger
     private Logger logger = Logger.getLogger(this.getClass().getName());
     
-    private URI subject;
+    private Resource subject;
 	private String language;
 	private SPARQLEndpoint sparqlEndpoint;
 	private JDBC jdbc;
 	private String use = null;
 
-	public SPARQLToRDFTriple(URI Subject, String Language){
+	public SPARQLToRDFTriple(Resource Subject, String Language){
         subject = Subject;
         language = Language;
         this.use = LiveOptions.options.get("Sparql.use");
@@ -60,16 +64,16 @@ public class SPARQLToRDFTriple {
     public ArrayList getRDFTriples(String query, HashMap subject, HashMap predicate, HashMap object, boolean filterlanguage){
 
         if(subject.get("action").toString().equals("fix")){
-            URI s = new URIImpl(subject.get("value").toString());
+            Resource s = new ResourceImpl(subject.get("value").toString());
         }else if(subject.get("action").equals("classattribute")){
-            URI s = this.subject;
+            Resource s = this.subject;
         }
         if(predicate.get("action").equals("fix")){
-            URI p = new URIImpl(predicate.get("value").toString());
+            Resource p = new ResourceImpl(predicate.get("value").toString());
         }
         if(object.get("action").equals("fix")){
             try {
-            URI o = new URIImpl(object.get("value").toString());
+                Resource o = new ResourceImpl(object.get("value").toString());
             }catch(Exception exp) {
                 logger.warn("object = fix only for uris currently");
             return new ArrayList();
@@ -128,8 +132,9 @@ public class SPARQLToRDFTriple {
             Timer.stop(timerName);
         }
 
-        URI s = null, p = null;
-        Value o = null;
+        Resource s = null;
+        Property p = null;
+        RDFNode o = null;
 
         //print_r($result);
         if(jarr.get("bindings")!=null ){
@@ -143,7 +148,7 @@ public class SPARQLToRDFTriple {
                             }
                         else if(subject.get("action").toString().equals("variable")){
                             HashMap subHashmap = (HashMap)one.get(subject.get("value"));
-                            s = new URIImpl(subHashmap.get("value").toString());
+                            s = new ResourceImpl(subHashmap.get("value").toString());
                             }
                         else if(subject.get("action").toString().equals("classattribute")){
                             //$s is already set
@@ -155,7 +160,7 @@ public class SPARQLToRDFTriple {
                             }
                         else if(predicate.get("action").toString().equals("variable")){
                             HashMap predHashmap = (HashMap)one.get(predicate.get("value"));
-                            p = new URIImpl(predHashmap.get("value").toString());
+                            p = new PropertyImpl(predHashmap.get("value").toString());
                             }
                     }
                     if(!Util.isStringNullOrEmpty(object.get("action").toString())){
@@ -169,11 +174,9 @@ public class SPARQLToRDFTriple {
                             }
                     }
 
-                    this.logger.info("*******************");
-
-                    this.logger.info(NTriplesUtil.toNTriplesString(s));
-                    this.logger.info(NTriplesUtil.toNTriplesString(p));
-                    this.logger.info(NTriplesUtil.toNTriplesString(o));
+                    this.logger.info(s);
+                    this.logger.info(p);
+                    this.logger.info(o);
                     result.add(new RDFTriple(s, p, o));
                     //$this->log(DEBUG, $t->getObject()->toNTriples());
                 }catch(Exception exp){
@@ -187,7 +190,7 @@ public class SPARQLToRDFTriple {
    }
 
     public  ArrayList getRDFTriples(String query){
-        URI s = this.subject;
+        Resource s = this.subject;
         ArrayList result = new ArrayList();
 
         //If the application is working in multithreading mode, we must attach the thread id to the timer name
@@ -230,17 +233,17 @@ public class SPARQLToRDFTriple {
             for(Object objBinding : bindings){
                 HashMap one = (HashMap)objBinding;
                 try{
-                URI p = new URIImpl(((HashMap)one.get("p")).get("value").toString());
+                Property p = new PropertyImpl(((HashMap)one.get("p")).get("value").toString());
                 HashMap unknown = (HashMap)one.get("o");
                 Object o = this.toObject(unknown);
                 if(o == null) {
                     continue;
                 }
 
-                this.logger.info(NTriplesUtil.toNTriplesString(s));
-                this.logger.info(NTriplesUtil.toNTriplesString(p));
-                this.logger.info(NTriplesUtil.toNTriplesString(new URIImpl(o.toString())));
-                result.add(new RDFTriple(s, p, new URIImpl(o.toString())));
+                this.logger.info(s);
+                this.logger.info(p);
+                this.logger.info(o);
+                result.add(new RDFTriple(s, p, new ResourceImpl(o.toString())));
                 }catch(Exception ex){
                     this.logger.warn("found invalid URI: " + ex.getMessage());
                     }
@@ -250,37 +253,39 @@ public class SPARQLToRDFTriple {
     }
 
 
-    public Value toObject(HashMap unknown){
+    public RDFNode toObject(HashMap unknown){
         
         return toObject(unknown, true);
     }
 
-    public Value toObject(HashMap unknown, boolean filterlanguage){
-			if(unknown.get("type").equals("uri")){
-				return new URIImpl(unknown.get("value").toString());
-			}else if (unknown.get("type").equals("literal")){
-				if(unknown.get("xml:lang") != null){
-					if(unknown.get("xml:lang").equals(this.language)){
-                        return new LiteralImpl(unknown.get("value").toString(), unknown.get("xml:lang").toString());
-						//return new RDFliteral(unknown["value"], null,unknown["xml:lang"] );
-					}else if(!filterlanguage) {
-                        return new LiteralImpl(unknown.get("value").toString(), unknown.get("xml:lang").toString());
-						//return new RDFliteral(unknown["value"], null,unknown["xml:lang"] );
-					}
-				}else {
-                    return new LiteralImpl(unknown.get("value").toString());
-					//return new RDFliteral(	unknown["value"],  null,  null);
-				}
-			}else if (unknown.get("type").equals("typed-literal")){
-                return new LiteralImpl(unknown.get("value").toString(), new URIImpl(unknown.get("datatype").toString()));
-				//return new RDFliteral(unknown["value"], unknown["datatype"], null );
-			}else{
-				System.out.println("tail in SPARQLToRDFTriple.toObject ");
-                System.exit(1);
+    public RDFNode toObject(HashMap unknown, boolean filterlanguage){
+        Model tmpModel = ModelFactory.createDefaultModel();
 
-				}
-            return null;
-		}
+        if(unknown.get("type").equals("uri")){
+            return new ResourceImpl(unknown.get("value").toString());
+        }else if (unknown.get("type").equals("literal")){
+            if(unknown.get("xml:lang") != null){
+                if(unknown.get("xml:lang").equals(this.language)){
+                    return tmpModel.createLiteral(unknown.get("value").toString(), unknown.get("xml:lang").toString());
+                    //return new RDFliteral(unknown["value"], null,unknown["xml:lang"] );
+                }else if(!filterlanguage) {
+                    return tmpModel.createLiteral(unknown.get("value").toString(), unknown.get("xml:lang").toString());
+                    //return new RDFliteral(unknown["value"], null,unknown["xml:lang"] );
+                }
+            }else {
+                return tmpModel.createLiteral(unknown.get("value").toString());
+                //return new RDFliteral(	unknown["value"],  null,  null);
+            }
+        }else if (unknown.get("type").equals("typed-literal")){
+            return tmpModel.createLiteral(unknown.get("value").toString(), unknown.get("datatype").toString());
+            //return new RDFliteral(unknown["value"], unknown["datatype"], null );
+        }else{
+            System.out.println("tail in SPARQLToRDFTriple.toObject ");
+            System.exit(1);
+
+            }
+        return null;
+    }
 
 //	public  function log(lvl, message){
 //

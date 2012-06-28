@@ -1,5 +1,23 @@
 package org.dbpedia.extraction.destination;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
+import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
+import org.dbpedia.extraction.destinations.DBpediaDatasets;
+import org.dbpedia.extraction.destinations.Destination;
+import org.dbpedia.extraction.destinations.Quad;
+import org.dbpedia.helper.CoreUtil;
+import org.dbpedia.helper.Triple;
+import org.json.simple.JSONValue;
+import scala.Function1;
+import scala.collection.JavaConversions;
+import scala.collection.Seq;
+import scala.collection.Traversable;
+import scala.runtime.AbstractFunction1;
+
 import java.io.FileOutputStream;
 import java.nio.channels.FileLock;
 import java.util.HashMap;
@@ -8,25 +26,10 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.dbpedia.extraction.destinations.DBpediaDatasets;
-import org.dbpedia.extraction.destinations.Dataset;
-import org.dbpedia.extraction.destinations.Destination;
-import scala.collection.Seq;
-import scala.collection.Traversable;
-import org.dbpedia.extraction.destinations.Quad;
-import scala.Function1;
-import scala.runtime.AbstractFunction1;
-import org.dbpedia.extraction.ontology.datatypes.Datatype;
-import org.dbpedia.helper.CoreUtil;
-import org.dbpedia.helper.Triple;
-import org.json.simple.JSONValue;
-import org.openrdf.model.URI;
+/*import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
-import org.openrdf.model.impl.URIImpl;
-
-import scala.collection.JavaConversions;
-import scala.collection.immutable.List;
+import org.openrdf.model.impl.URIImpl;*/
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,7 +47,7 @@ public class SQLFileDestination implements Destination {
 
     public Map<String, Map<String, Map<String, String>>> jsonObject = new HashMap<String, Map<String, Map<String, String>>>();
     private String oaiId;
-    private URI uri;
+    private Resource uri;
 
     public SQLFileDestination(String pageTitle, String oaiID){
         this.uri = Triple.page(pageTitle);
@@ -70,7 +73,7 @@ public class SQLFileDestination implements Destination {
 
                 Map<String, String> tmp = new HashMap<String, String>();
 
-                Triple tr = new Triple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()),
+                Triple tr = new Triple(new ResourceImpl(quad.subject()), new PropertyImpl(quad.predicate()),
                                     constructTripleObject(quad));
 
                 tmp.put("s", CoreUtil.convertToSPARULPattern(tr.getSubject()));
@@ -150,24 +153,24 @@ public class SQLFileDestination implements Destination {
         return extractorID;
     }
 
-    private Value constructTripleObject(Quad quad){
-
+    private RDFNode constructTripleObject(Quad quad){
+        Model tmpModel = ModelFactory.createDefaultModel();
         String Lang = "en";
         String datatype = quad.datatype();
 
         if (datatype != null){
             if (datatype.equals("http://www.w3.org/2001/XMLSchema#string"))
             {
-                return new LiteralImpl(quad.value(), Lang);
+                return tmpModel.createLiteral(quad.value(), Lang);
             }
             else
             {
-                 return new LiteralImpl(quad.value(), new URIImpl(datatype));
+                 return tmpModel.createLiteral(quad.value(), datatype);
             }
         }
         else
         {
-            return new URIImpl(quad.value());
+            return new ResourceImpl(quad.value());
         }
     }
 

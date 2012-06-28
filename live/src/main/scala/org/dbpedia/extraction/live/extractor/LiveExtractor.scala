@@ -3,11 +3,10 @@ package org.dbpedia.extraction.live.extractor
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.mappings.{Mappings, MappingsLoader, Extractor, Redirects}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser}
 import org.dbpedia.extraction.sources.Source
-import java.io.File
-import org.dbpedia.extraction.mappings.RootExtractor
+import org.dbpedia.extraction.mappings._
+import collection.mutable.ListBuffer
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,48 +19,59 @@ import org.dbpedia.extraction.mappings.RootExtractor
 
 object LiveExtractor
 {
-    /**
-     * Returns a list of extractors.
-     *
-     * (maybe it would be possible to return a CompositeExtractor here (and load it with Extractor.load) ?)
-     */
-    def load(ontologySource : Source,
-             mappingsSource : Source,
-             articlesSource : Source,
-             extractors : List[Class[_ <: Extractor]],
-             language : Language) : List[RootExtractor] =
-    {
-        val context = extractionContext(language, ontologySource, mappingsSource, articlesSource)
-        extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context)).map(new RootExtractor(_))
-    }
+  /**
+   * Returns a list of extractors.
+   *
+   * (maybe it would be possible to return a CompositeExtractor here (and load it with Extractor.load) ?)
+   */
+  def load(ontologySource : Source,
+           mappingsSource : Source,
+           articlesSource : Source,
+           commonsSource : Source,
+           extractors : List[Class[Extractor]],
+           language : Language) : List[RootExtractor] =
+  {
+    val context = extractionContext(language, ontologySource, mappingsSource, articlesSource, commonsSource)
+    //extractors.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
 
-    /**
-     * Returns an AnyRef (anonymous class) object with all necessary methods needed as extraction context.
-     * The different attributes are loaded only once and only if they are required.
-     *
-     * IMPORTANT: the context for the live extraction does not contain a commonsSource at the moment! (e.g. for ImageExtractor)
-     */
-    private def extractionContext(lang : Language, _ontologySource : Source, _mappingsSource : Source, _articlesSource : Source) =
-    {
-        new
-        {
-            def language : Language = lang
+    val rootExtractorList = new ListBuffer[RootExtractor]
 
-            private lazy val _ontology = new OntologyReader().read(_ontologySource)
-            def ontology : Ontology = _ontology
+    extractors.map(extractor => {
+      println("EXTRACTOR  = " + extractor)
+      rootExtractorList += new RootExtractor(extractor.getConstructor(classOf[AnyRef]).newInstance(context));}
+    );
+    rootExtractorList.toList
+  }
 
-            private lazy val _mappingPageSource = _mappingsSource.map(WikiParser())
-            def mappingPageSource : Traversable[PageNode] = _mappingPageSource
+  /**
+   * Returns an AnyRef (anonymous class) object with all necessary methods needed as extraction context.
+   * The different attributes are loaded only once and only if they are required.
+   *
+   * IMPORTANT: the context for the live extraction does not contain a commonsSource at the moment! (e.g. for ImageExtractor)
+   */
+  private def extractionContext(lang : Language, _ontologySource : Source, _mappingsSource : Source, _articlesSource : Source,
+                                _commonsSource : Source) =
+  {
+    new
+      {
+        def language : Language = lang
 
-            private lazy val _mappings = MappingsLoader.load(this)
-            def mappings : Mappings = _mappings
+        private lazy val _ontology = new OntologyReader().read(_ontologySource)
+        def ontology : Ontology = _ontology
 
-            def articlesSource : Source = _articlesSource
+        private lazy val _mappingPageSource = _mappingsSource.map(WikiParser())
+        def mappingPageSource : Traversable[PageNode] = _mappingPageSource
 
-            // just cache them in the current directory. TODO: find solution appropriate for live extraction.
-            private lazy val _redirects = Redirects.load(articlesSource, new File("redirects_"+language.filePrefix+".obj"), language)
-            def redirects : Redirects = _redirects
-        }
-    }
+        private lazy val _mappings = MappingsLoader.load(this)
+        def mappings : Mappings = _mappings
+
+        def articlesSource : Source = _articlesSource
+
+        private lazy val _redirects = Redirects.loadFromSource(articlesSource, language)
+        def redirects : Redirects = _redirects
+
+        def commonsSource : Source = _commonsSource
+      }
+  }
 
 }

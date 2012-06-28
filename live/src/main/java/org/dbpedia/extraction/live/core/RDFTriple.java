@@ -1,18 +1,16 @@
 package org.dbpedia.extraction.live.core;
 
 
-import org.apache.commons.lang.StringUtils;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import org.apache.log4j.Logger;
 import org.dbpedia.helper.Triple;
-import org.openrdf.model.impl.*;
-import org.openrdf.model.*;
-import org.openrdf.rio.ntriples.NTriplesUtil;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+/*import org.openrdf.model.Resource;
+import org.openrdf.model.URI;
+import org.openrdf.model.Value;
+import org.openrdf.model.impl.URIImpl;*/
 
 
 /**
@@ -27,7 +25,7 @@ public class RDFTriple extends Triple {
     //Initializing the Logger
     private static Logger logger = null;
     private static String pageCacheKey = null;
-    private static URI pageCacheValue = null;
+    private static Resource pageCacheValue = null;
 
     private String SPARULPattern = null;
 
@@ -43,7 +41,7 @@ public class RDFTriple extends Triple {
         }
     }
 
-    public RDFTriple(Resource subject, URI predicate, Value object)
+    public RDFTriple(Resource subject, Property predicate, RDFNode object)
     {
         super(subject, predicate, object);
     }
@@ -117,23 +115,24 @@ public class RDFTriple extends Triple {
         //init
         if(this.SPARULPattern == null)
         {
-            this.SPARULPattern = Util.convertToSPARULPattern(this.getSubject()) + " " +
-            Util.convertToSPARULPattern(this.getPredicate()) + " " +
-            Util.convertToSPARULPattern(this.getObject()) + " . ";
+
+            this.SPARULPattern = org.dbpedia.extraction.live.core.Util.convertToSPARULPattern(this.getSubject()) + " " +
+                    org.dbpedia.extraction.live.core.Util.convertToSPARULPattern(this.getPredicate()) + " " +
+                    org.dbpedia.extraction.live.core.Util.convertToSPARULPattern(this.getObject()) + " . ";
         }
         return this.SPARULPattern;
    }
 
-   public static URI page(String pageID) {
+   public static Resource page(String pageID) {
 
        //Assert.assertTrue("PageID cannot be null or empty", (pageID != null && pageID != ""));
        if(!pageID.equals(pageCacheKey)){
-           String encPageID = Util.wikipediaEncode(pageID);
+           String encPageID = org.dbpedia.extraction.live.core.Util.wikipediaEncode(pageID);
            String strSubstring = encPageID.substring(0,1);
            //strSubstring = strSubstring.toUpperCase() + encPageID.substring(1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
            String resourceURI = Constants.DB_RESOURCE_NS + returnPageID;
-           URI uri = new URIImpl(resourceURI);
+           Resource uri = ResourceFactory.createResource(resourceURI);
            pageCacheKey = pageID;
            pageCacheValue = uri;
        }
