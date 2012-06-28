@@ -9,9 +9,9 @@ import org.dbpedia.extraction.util.StringUtils._
  * Date: 9/14/11
  * Time: 1:22 PM
  *
- * Represents a live wiki page, as in WikiPage class the timestamp of a revision is not represented by a member,
- * and we need it to create the a triple for predicate <http://purl.org/dc/terms/modified>, which indicates the
- * modification date of a page
+ * Represents a live wiki page.
+ * 
+ * TODO: remove this class, add fields for contributor to base class.
  *
  * @param title The title of this page
  * @param id The page ID
