@@ -1,0 +1,7 @@
+# copy (and re-compress) all .gz files to .bz2 files
+{ for file in $(find -name *.gz) ; do echo $file ; gzip --decompress <$file | bzip2 --compress >${file/%.gz/.bz2} ; done } >compress.log &
+
+# split a triples file (must be sorted by property name) into separate files for each property
+# 29 is the length of the string '<http://dbpedia.org/property/'
+# 50 is an arbitrary cutoff to avoid overly long file names
+awk '{if ($1 != "#") { if ($2 != last) {last = $2; close(file); counter++; len = length($2) - 29; if (len > 50) len = 50; name = substr($2, 29, len); gsub(/\//, "", name); file = "split-by-property/" sprintf("%.6d", counter) "-" name ".ttl" } print >> file } }' enwiki-20120601-infobox-properties.sorted.ttl
