@@ -15,7 +15,7 @@ import org.dbpedia.extraction.util.StringUtils._
  * @param timestamp The timestamp of the revision, in milliseconds since 1970-01-01 00:00:00 UTC
  * @param source The WikiText source of this page
  */
-case class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val revision: Long, val timestamp: Long, val source : String)
+class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val revision: Long, val timestamp: Long, val source : String)
 {
     def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, source : String) =
       this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), source)
