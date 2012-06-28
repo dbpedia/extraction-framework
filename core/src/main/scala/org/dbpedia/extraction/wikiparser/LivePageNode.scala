@@ -8,9 +8,9 @@ import org.dbpedia.extraction.util.StringUtils._
  * Date: 9/14/11
  * Time: 4:09 PM
  *
- * Represents a page for live extraction, as live extraction needs more meta-data e.g. timestamp of last change.
+ * Represents a page for live extraction.
  * 
- * 
+ * TODO: remove this class, add fields for contributor to base class.
  *
  * @param title The title of this page
  * @param id The page ID
