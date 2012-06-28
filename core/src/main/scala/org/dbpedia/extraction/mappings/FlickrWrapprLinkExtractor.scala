@@ -33,9 +33,7 @@ extends Extractor
   
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {
-    if (page.title.namespace != Namespace.Main) return Seq.empty
-    
-    // TODO: exclude redirect and disambig pages
+    if (page.title.namespace != Namespace.Main || page.isRedirect || page.isDisambiguation) return Seq.empty
     
     // Note: subjectUri is probably identical to the URI we use here, but we want to be sure. 
     Seq(quad(language.resourceUri.append(page.title.encoded), flickrWrapprUrlPrefix+page.title.encoded, page.sourceUri, null))
