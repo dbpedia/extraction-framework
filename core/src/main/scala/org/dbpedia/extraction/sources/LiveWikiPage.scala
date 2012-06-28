@@ -19,8 +19,8 @@ import org.dbpedia.extraction.util.StringUtils._
  * @param source The WikiText source of this page
  */
 
-class LiveWikiPage(override val title : WikiTitle, override val id : Long, override val revision : Long,
-                        override val source : String, val revisionTimestamp: String, val contributorID: Long,
+class LiveWikiPage(title : WikiTitle, id : Long, revision : Long,
+                        source : String, revisionTimestamp: String, val contributorID: Long,
                         val contributorName: String)
   extends WikiPage(title, null, id, revision, parseTimestamp(revisionTimestamp), source)
   //extends WikiPage(title, id, revision, source)
