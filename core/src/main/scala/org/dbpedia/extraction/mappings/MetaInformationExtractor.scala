@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.net.URI
@@ -40,7 +41,7 @@ class MetaInformationExtractor( context : {
 
 
     val quadModificationDate = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, modificationDatePredicate,
-      node.asInstanceOf[LivePageNode].nodeTimestamp, node.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
+      formatTimestamp(node.timestamp), node.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
 
     val editLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title.encoded +
       "&action=edit";

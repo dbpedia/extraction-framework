@@ -9,6 +9,8 @@ import org.dbpedia.extraction.util.StringUtils._
  * Time: 4:09 PM
  *
  * Represents a page for live extraction, as live extraction needs more meta-data e.g. timestamp of last change.
+ * 
+ * 
  *
  * @param title The title of this page
  * @param id The page ID
@@ -18,9 +20,9 @@ import org.dbpedia.extraction.util.StringUtils._
  * @param children The contents of this page
  */
 
-case class LivePageNode(override val title : WikiTitle, override val id : Long, override val revision : Long,
-                        override val isRedirect : Boolean, override val isDisambiguation : Boolean,
-                        val nodeTimestamp: String, val contributorID: Long, val contributorName: String, override val children : List[Node] = List.empty)
+class LivePageNode(title : WikiTitle, id : Long, revision : Long,
+                        isRedirect : Boolean, isDisambiguation : Boolean,
+                        nodeTimestamp: String, val contributorID: Long, val contributorName: String, children : List[Node] = List.empty)
   extends PageNode(title, id, revision, parseTimestamp(nodeTimestamp), isRedirect, isDisambiguation, children)
 {
   override def toWikiText() : String = children.map(_.toWikiText).mkString("")
