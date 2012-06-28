@@ -317,7 +317,7 @@ object LiveExtractionConfigLoader extends ActionListener
 
           //When the DBpedia framework is updated, there is a class called "RootExtractor", which contain internally the
           // required extractor, so we should get it from inside
-          liveDest.write(RequiredGraph, extractor.getExtractor.getClass().getName());
+          liveDest.write(RequiredGraph, extractor.extractor.getClass().getName());
         });
 
         //Remove triples generated from purge extractors
