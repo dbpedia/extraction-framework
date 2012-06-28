@@ -1,5 +1,9 @@
-# copy (and re-compress) all .gz files to .bz2 files
-{ for file in $(find -name *.gz) ; do echo $file ; gzip --decompress <$file | bzip2 --compress >${file/%.gz/.bz2} ; done } >compress.log &
+# copy (and re-compress) all .gz files to .bz2 files in background process, write log output to compress.log
+{ for file in $(find -name *.gz) ; do echo $file ; gzip --decompress <$file | bzip2 --compress >${file/%.gz/.bz2} ; done } &>compress.log &
+
+# sort a triples file by property (field 2)
+# -s means 'stable' - without it, other fields are also sorted, which is a waste of time
+sort -s -k 2,2 enwiki-20120601-infobox-properties.ttl >enwiki-20120601-infobox-properties.sorted.ttl
 
 # split a triples file (must be sorted by property name) into separate files for each property
 # 29 is the length of the string '<http://dbpedia.org/property/'
