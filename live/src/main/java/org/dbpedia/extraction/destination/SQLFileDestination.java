@@ -110,9 +110,9 @@ public class SQLFileDestination implements Destination {
             extractorID = "org.dbpedia.extraction.mappings.LabelExtractor";
         else if(dataset.equals(DBpediaDatasets.LinksToWikipediaArticle().name()))
              extractorID = "org.dbpedia.extraction.mappings.WikiPageExtractor";
-        else if(dataset.equals(DBpediaDatasets.Infoboxes().name()))
-             extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
         else if(dataset.equals(DBpediaDatasets.InfoboxProperties().name()))
+             extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
+        else if(dataset.equals(DBpediaDatasets.InfoboxPropertyDefinitions().name()))
              extractorID = "org.dbpedia.extraction.mappings.InfoboxExtractor";
         else if(dataset.equals(DBpediaDatasets.PageLinks().name()))
              extractorID = "org.dbpedia.extraction.mappings.PageLinksExtractor";

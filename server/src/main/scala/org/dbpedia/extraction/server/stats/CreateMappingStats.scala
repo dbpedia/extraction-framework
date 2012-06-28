@@ -82,7 +82,7 @@ object CreateMappingStats
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
             val redirects = inputFile(DBpediaDatasets.Redirects)
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxProperties = inputFile(DBpediaDatasets.Infoboxes)
+            val infoboxProperties = inputFile(DBpediaDatasets.InfoboxProperties)
             // extracted by org.dbpedia.extraction.mappings.TemplateParameterExtractor
             val templateParameters = inputFile(DBpediaDatasets.TemplateVariables)
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor

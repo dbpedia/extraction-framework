@@ -37,8 +37,8 @@ object DBpediaDatasets
     /**
      *  Infobox
      */
-    val Infoboxes = new Dataset("infobox_properties")
-    val InfoboxProperties = new Dataset("infobox_property_definitions")
+    val InfoboxProperties = new Dataset("infobox_properties")
+    val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions")
     val TemplateVariables = new Dataset("template_parameters")
     val InfoboxTest = new Dataset("infobox_test")
 
