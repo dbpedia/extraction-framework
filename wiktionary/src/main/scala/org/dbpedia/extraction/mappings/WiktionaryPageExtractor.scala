@@ -377,7 +377,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                         }
                         varValue
                 })
-                println("replacedVars: "+replacedVars)
+                //println("replacedVars: "+replacedVars)
                 var functionsResolved = replacedVars
                 var matched = false
                 var i = 0
@@ -396,7 +396,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                             case "getId" => cache.matcher.getId(funArg)
                             case "makeId" => cache.matcher.makeId(funArg)
                             case "getOrMakeId" => cache.matcher.getOrMakeId(funArg)
-                            case "saveId" => {val args = funArgEscaped.split(", "); val str = args(0); val id = args(1); cache.matcher.saveId(id, str); println("saveId: str="+str+" id="+id); id}
+                            case "saveId" => {val args = funArgEscaped.split(", "); val str = args(0); val id = args(1); cache.matcher.saveId(id, str); id}
                             case _ =>  {matched = false; funArg} // if unknown keep arg only
                         }
                         res
