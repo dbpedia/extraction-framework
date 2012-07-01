@@ -144,9 +144,8 @@ final class SwebleWrapper extends WikiParser
             case il : InternalLink => {
                 val destinationURL = WikiTitle.parse(il.getTarget(), language)
                 val destinationNodes = List[Node](new TextNode(il.getTarget, line)) //parsing of target not yet supported
-                println("convert link: ")
-                val titleNodes = if(!il.getTitle.getContent.isEmpty){println("titlenodes plain "+il.getTitle.getContent); transformNodes(il.getTitle.getContent)} else {List(new TextNode(il.getTarget, line))}
-                println("titleNodes: "+titleNodes)
+                val titleNodes = if(!il.getTitle.getContent.isEmpty){transformNodes(il.getTitle.getContent)} else {List(new TextNode(il.getTarget, line))}
+
                 if (destinationURL.language == language) {
                     List(new InternalLinkNode(destinationURL, titleNodes, line, destinationNodes))
                 } else {

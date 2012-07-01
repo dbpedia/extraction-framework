@@ -93,7 +93,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         case e : WiktionaryException => Logging.printMsg("#error generating page triples: "+e.toString, 2)
       }
       
-      println(page.children)
+      //println(page.children)
 
       val pageStack = new Stack[Node]().pushAll(page.children.reverse).filterSpaces
       //apply "first" nodehandlers
