@@ -613,23 +613,12 @@ $etymology
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block-makeId($definition)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$definition" oType="literal"/>
-                                    <triple s="$block-getId($definition)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($definition)" oType="URI"/>
-                                </triples>
-                            </resultTemplate>
-                            <resultTemplate>
-                                <triples>
-                                    <triple s="$block-getId($DEFINITION)" p="http://wiktionary.dbpedia.org/terms/hasExample" o="$example" oType="literal"/>
-                                    <triple s="$block-getId($DEFINITION)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($DEFINITION)" oType="URI"/>
-                                </triples>
-                            </resultTemplate>
-                            <resultTemplate>
-                                <triples>
-                                    <triple s="$block-getId($DEFINITION)" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$source: $quote" oType="literal"/>
-                                    <triple s="$block-getId($DEFINITION)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($DEFINITION)" oType="URI"/>
+                                    
+                                    <triple s="$block-getId($definition)en" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-getId($definition)en" oType="URI"/>
+                                    <triple s="$block-makeId($definition)en" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$definition" oType="literal"/>
+                                    <triple s="$block-getId($DEFINITION)en" p="http://wiktionary.dbpedia.org/terms/hasExample" o="$example" oType="literal" optional="true"/>
+                                    <triple s="$block-getId($DEFINITION)en" p="http://wiktionary.dbpedia.org/terms/hasQuotation" o="$source: $quote" oType="literal" optional="true"/>
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>

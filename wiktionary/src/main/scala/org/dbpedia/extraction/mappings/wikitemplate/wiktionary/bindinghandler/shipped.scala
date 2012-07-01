@@ -167,7 +167,7 @@ class ExplicitSenseLinkListHelper extends BindingHandler {
                 if(node.isInstanceOf[LinkNode]){
                     expandSense(senses).foreach(sense =>{
                         val sourceWord = if(sense.forall(_.isDigit)){
-                          vf.createURI(thisBlockURI+"-"+WiktionaryPageExtractor.urify(sense)) //if the found sense is numeric
+                          vf.createURI(thisBlockURI+"-"+WiktionaryPageExtractor.urify(sense)+WiktionaryPageExtractor.language) //if the found sense is numeric
                         } else {
                           vf.createURI(thisBlockURI)
                         }
@@ -199,14 +199,18 @@ class MatchedSenseLinkListHelper extends BindingHandler {
         i.foreach(binding=>{
             try {
             val senseRawOption = binding("line").find( (n : Node) => {n.isInstanceOf[TemplateNode] && n.asInstanceOf[TemplateNode].title.decoded.equals("sense")})
-            val senseOption = if(senseRawOption.isDefined){Some(cache.matcher.getId(senseRawOption.get.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text))} else {None}
+            val senseOption = if(binding.contains("sense")){
+                Some(cache.matcher.getId(binding("sense").toReadableString))
+            } else if(senseRawOption.isDefined){
+                Some(cache.matcher.getId(senseRawOption.get.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text))
+            } else {None}
             var line = binding("line")
             
             line.foreach(node=>{
                 try{
                     if(node.isInstanceOf[LinkNode]){
                         val sourceWord = if(senseOption.isDefined){
-                          vf.createURI(thisBlockURI+"-"+senseOption.get) //if the found sense is numeric
+                          vf.createURI(thisBlockURI+"-"+senseOption.get+WiktionaryPageExtractor.language)
                         } else {
                           vf.createURI(thisBlockURI)
                         }
