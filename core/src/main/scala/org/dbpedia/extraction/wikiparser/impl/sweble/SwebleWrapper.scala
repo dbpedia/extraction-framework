@@ -303,7 +303,7 @@ final class SwebleWrapper extends WikiParser
 
     class ParameterToDefaultValueResolver(pageId : PageId) extends AstVisitor {
 
-		var entityMap : EntityMap = null
+		var entityMap : EntityMap = new EntityMap()
 		
 		var warnings : java.util.List[Warning] = new ArrayList[Warning]()
 		
