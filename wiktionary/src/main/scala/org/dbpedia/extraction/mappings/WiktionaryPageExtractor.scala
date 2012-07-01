@@ -92,15 +92,16 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       } catch {
         case e : WiktionaryException => Logging.printMsg("#error generating page triples: "+e.toString, 2)
       }
+      
+      println(page.children)
 
-      val pageStack =  new Stack[Node]().pushAll(page.children.reverse).filterSpaces
+      val pageStack = new Stack[Node]().pushAll(page.children.reverse).filterSpaces
       //apply "first" nodehandlers
-      pageStack.filter( (n: Node) => {
-        !nodeHandlers("first").map((nh : NodeHandler) => {
-            val res = nh.process(n, cache.blockURIs("page").stringValue, cache, Map())
-            quads appendAll res._1; res._2}).exists(_ == true)
-      })
-
+      if(nodeHandlers.contains("first")){
+          nodeHandlers("first").foreach((nh : NodeHandler) => {
+                nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map())
+          })
+      }
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
       for(prolog <- languageConfig \ "page" \ "prologs" \ "template"){
@@ -268,8 +269,16 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           val unconsumeableNode = pageStack.pop
           unconsumeableNode match {
             case tn : TextNode => if(tn.text.startsWith(" ") || tn.text.startsWith("\n")){
-                if(tn.text.substring(1).length != 0){
-                    pageStack.push(tn.copy(text=tn.text.substring(1)))
+                val afterSpace = tn.text.substring(1)
+                if(afterSpace.length != 0){
+                    pageStack.push(tn.copy(text=afterSpace))
+                }
+            } else {
+                //skip this line
+                val lineEnd = tn.text.indexOf("\n")
+                val afterFirstBreak = tn.text.substring(tn.text.indexOf("\n")+1)
+                if(lineEnd >= 0 && afterFirstBreak.length != 0){
+                    pageStack.push(tn.copy(text=afterFirstBreak))
                 }
             }
             case _ => 
@@ -321,6 +330,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     var bindingsMatchedAnyResultTemplate = false
     bindings.foreach( (binding : HashMap[String, List[Node]]) => {
       Logging.printMsg("bindings "+binding, 2)
+      Logging.printMsg("", 2)
       tpl.resultTemplates.foreach( (rt : ResultTemplate) => {
         try {
           quads appendAll makeTriples(rt, binding, block.name, cache) 
@@ -337,7 +347,11 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     quads.toList
   }
 
+  def escape(s:String) : String = s.replace("(", escapeSeqOpenBrace).replace(")", escapeSeqCloseBrace).replace(",", escapeSeqComma)
+  def unescape(s:String) : String = s.replace(escapeSeqOpenBrace, "(").replace(escapeSeqCloseBrace, ")").replace(escapeSeqComma, ",")
+
   def makeTriples(rt : ResultTemplate, binding : HashMap[String, List[Node]], blockName : String, cache : Cache) : List[Quad] = {
+          Logging.printMsg("bindings "+binding, 2)
           val quads = new ListBuffer[Quad]
           rt.triples.foreach( (tt : TripleTemplate) => {
             try{
@@ -357,12 +371,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                             throw new ContinueException("skip optional triple")
                         }
                         //to prevent, that recorded ) symbols mess up the regex of map and uri
-                        val varValue = replacement.replace(")", escapeSeq2).replace("(", escapeSeq1)
+                        val varValue = escape(replacement)
                         if(saveVars.contains(varName)){
                             cache.savedVars(varName.toUpperCase) = varValue
                         }
                         varValue
                 })
+                println("replacedVars: "+replacedVars)
                 var functionsResolved = replacedVars
                 var matched = false
                 var i = 0
@@ -372,7 +387,8 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                     functionsResolved = funPattern.replaceAllIn(functionsResolved, (m) => {
                         matched = true
                         val funName = m.group(1)
-                        val funArg = m.group(2)
+                        val funArgEscaped = m.group(2)
+                        val funArg = unescape(funArgEscaped)
                         val res = funName match {
                             case "uri" => urify(funArg)
                             case "map" => map(funArg)
@@ -380,12 +396,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                             case "getId" => cache.matcher.getId(funArg)
                             case "makeId" => cache.matcher.makeId(funArg)
                             case "getOrMakeId" => cache.matcher.getOrMakeId(funArg)
-                            case _ =>  {matched = false; funArg} // if unknown keep arg
+                            case "saveId" => {val args = funArgEscaped.split(", "); val str = args(0); val id = args(1); cache.matcher.saveId(id, str); println("saveId: str="+str+" id="+id); id}
+                            case _ =>  {matched = false; funArg} // if unknown keep arg only
                         }
                         res
                     }) 
                 } while (matched && i < 10)
-                (kv._1, functionsResolved.replace(escapeSeq2, ")").replace(escapeSeq1, "("))
+                (kv._1, unescape(functionsResolved))
             })
             
             val s = out("s")
@@ -401,7 +418,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
             if(p.contains(" ")){
                 throw new Exception("invalid predicate URI <"+p+">")
             }
-            Logging.printMsg("emmiting triple "+s+" "+p+" "+o, 2)
+            Logging.printMsg("emmiting triple <"+s+"> <"+p+"> /"+o+"/", 2)
             //determine if o is literal or URI
             val oObj = if(tt.oType == "URI"){
                 new URL(o)
@@ -454,13 +471,12 @@ object WiktionaryPageExtractor {
   val termsNS = ns +"terms/"
 
   val varPattern = new Regex("\\$[a-zA-Z0-9]+")  
-  //val mapPattern = new Regex("map\\([^)]*\\)")
-  //val uriPattern = new Regex("uri\\([^)]*\\)")
+
   val funPattern = new Regex("([a-zA-Z0-9]+)\\(([^)(]*)\\)")
-  val escapeSeq1 = "%#*+~" //an unlikely sequence of characters (duh)
-  val escapeSeq2 = "%#*+~" //an unlikely sequence of characters (duh)
-  //val splitPattern = new Regex("\\W")
-  //val xmlPattern = new Regex("</?[^>]+/?>")
+
+  val escapeSeqOpenBrace = "%#*+~&" //an unlikely sequence of characters (duh)
+  val escapeSeqCloseBrace = "%#*+~/" //an unlikely sequence of characters (duh)
+  val escapeSeqComma = "%#*+~§" //an unlikely sequence of characters (duh)
 
   private val languageConfig = XML.loadFile("config-"+language+".xml")
 
@@ -603,11 +619,19 @@ class Matcher {
 
   def makeId(in : String) : String = {
     val id = (ids.size + 1).toString
-    val values = new ListBuffer[String]()
-    values.append(in)
-    ids(id) = values
-    cache(in) = id
+    saveId(id, in)
     id
+  }
+
+  def saveId(id : String, in : String) : Unit = {
+    val values = if(ids.contains(id))
+        ids(id)
+     else 
+      new ListBuffer[String]()
+    values.append(in)
+    if(!ids.contains(id))
+        ids(id) = values
+    cache(in) = id
   }
 
   def sim(s1 : String, s2 : String) : Float = {
@@ -620,9 +644,11 @@ class Matcher {
       levenshtein(s1, s2)
     }
   }
+
   def ngrams(s:String, n:Int) : Set[String] = {
     (("#"*(n-1))+s+("#"*(n-1))).sliding(n).toSet
   }
+
   def jaccard(s1ngrams : Set[String], s2ngrams: Set[String]) : Float = {
     val intersectSize = s1ngrams.intersect(s2ngrams).size
     val unionSize = s1ngrams.union(s2ngrams).size

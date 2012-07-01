@@ -39,11 +39,6 @@ import org.dbpedia.extraction.util.Language
 
 final class SwebleWrapper extends WikiParser
 {
-    /*    val n = new NodeList(new Template(new NodeList(new Text("tplname")), new NodeList(new TemplateArgument(new NodeList(new Text("val")), false))))
-        println(n)
-        val t = PreprocessorToParserTransformer.transform(new LazyPreprocessedPage(n, new ArrayList[Warning]()), new EntityMap()).getWikitext()
-        println("t="+t)*/
- 
     var lastLine = 0
     var language : Language = null
     var pageId : PageId = null
@@ -149,7 +144,9 @@ final class SwebleWrapper extends WikiParser
             case il : InternalLink => {
                 val destinationURL = WikiTitle.parse(il.getTarget(), language)
                 val destinationNodes = List[Node](new TextNode(il.getTarget, line)) //parsing of target not yet supported
-                val titleNodes = transformNodes(il.getTitle.getContent) 
+                println("convert link: ")
+                val titleNodes = if(!il.getTitle.getContent.isEmpty){println("titlenodes plain "+il.getTitle.getContent); transformNodes(il.getTitle.getContent)} else {List(new TextNode(il.getTarget, line))}
+                println("titleNodes: "+titleNodes)
                 if (destinationURL.language == language) {
                     List(new InternalLinkNode(destinationURL, titleNodes, line, destinationNodes))
                 } else {
@@ -170,25 +167,60 @@ final class SwebleWrapper extends WikiParser
             case items : Itemization => items.getContent.iterator.toList.map( (n:AstNode) => {
                 n match {   
                     case item : ItemizationItem => transformNodes(item.getContent)
+                    case item : Text => List(new TextNode(item.getContent, line))
                     case _ => throw new Exception("expected ItemizationItem as Itemization child")
                 }
-            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {lb add new TextNode("*", line); lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
+            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {
+                val sp = (nodes(0).isInstanceOf[TextNode] && nodes(0).asInstanceOf[TextNode].text == "#"); 
+                if(!sp){
+                    lb add new TextNode("*", line)
+                } 
+                lb addAll nodes
+                if(!sp){
+                    lb add new TextNode("\n", line)
+                }
+                lb
+            }).toList
             case items : Enumeration => {
                 var i = 0
                 items.getContent.iterator.toList.map( (n:AstNode) => {
-                
+                //TODO a EnumerationItem can contain Itemization - needs to be emitted as #* 
                 n match {   
-                    case item : EnumerationItem => transformNodes(item.getContent)
-                    case _ => throw new Exception("expected EnumerationItem as Enumeration child")
+                    case item : EnumerationItem => transformNodes(
+                        item.getContent.iterator.toList.map( (m:AstNode) => {
+                            if(m.isInstanceOf[Itemization]){
+                                m.asInstanceOf[Itemization].setContent(
+                                    m.asInstanceOf[Itemization].getContent.iterator.toList.map( (o:AstNode) => {
+                                        if(o.isInstanceOf[ItemizationItem]){
+                                            List[AstNode](new Text("#"), o)
+                                        } else {
+                                            List[AstNode](o)
+                                        }
+                                    }).flatten.init //without last linebreak
+                                )
+                                List[AstNode](new Text("\n"), m)
+                            } else {
+                                List[AstNode](m)
+                            }
+                        }).flatten
+                    )
+                    case _ => throw new Exception("expected EnumerationItem as Enumeration child. found "+n.getClass.getName+" instead")
                 }
-            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {i = i+1; lb add new TextNode("#", line); lb add new TemplateNode(new WikiTitle("enum-expanded"), List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line, List(new TextNode("enum-expanded", line))); lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
+            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {
+                i = i+1; 
+                lb add new TextNode("#", line); 
+                lb add new TemplateNode(
+                    new WikiTitle("enum-expanded"), 
+                    List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line, List(new TextNode("enum-expanded", line)));
+                lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
             }
             case definitions : DefinitionList => definitions.getContent.iterator.toList.map( (n:AstNode) => {
                 n match {   
-                    case item : DefinitionDefinition => transformNodes(parse(pageId, nodeList2string(item.getContent)).getContent)
-                    case _ => throw new Exception("expected EnumerationItem as Enumeration child")
+                    case item : DefinitionDefinition => List(new TextNode(":", line)) ++transformNodes(item.getContent)
+                    case item : DefinitionTerm => List(new TextNode(";", line)) ++ transformNodes(item.getContent)
+                    case _ => throw new Exception("expected DefinitionDefinition as DefinitionList child. found "+n.getClass.getName+" instead")
                 }
-            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {lb add new TextNode(":", line); lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
+            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => { lb addAll nodes; lb add new TextNode("\n", line); lb} ).init.toList
             case b : Bold => transformNodes(b.getContent) // ignore style
             case i : Italics => transformNodes(i.getContent) // ignore style
             case tplParam : TemplateParameter => List(new TemplateParameterNode(tplParam.getName, tplParam.getDefaultValue != null, line))
@@ -238,6 +270,9 @@ final class SwebleWrapper extends WikiParser
         url.getProtocol +":"+ url.getPath
     }
 
+    implicit def nodes2nodeList(l : List[AstNode]) : NodeList = new NodeList(l.toSeq)
+    implicit def nodeList2nodes(l : NodeList) : List[AstNode] = l.iterator.toList
+
     def mergeConsecutiveTextNodes(nodes:List[Node]):List[Node] = {
         val ret = new ListBuffer[Node]()
         nodes.indices.foreach( (i:Int) => {
@@ -271,7 +306,7 @@ final class SwebleWrapper extends WikiParser
 
 		var entityMap : EntityMap = null
 		
-		var warnings : java.util.List[Warning] = null
+		var warnings : java.util.List[Warning] = new ArrayList[Warning]()
 		
 		def visit(n : AstNode) : AstNode =
 		{

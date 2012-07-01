@@ -468,6 +468,7 @@ class MyNodeList(val nl : List[Node]) {
 
   def toReadableString : String = nl.map(n => { n match {
     case tn : TemplateNode => if(templateRepresentativeProperty.contains(tn.title.decoded)){tn.property(templateRepresentativeProperty(tn.title.decoded).toString).get.retrieveText.getOrElse("") } else {""}
+    case ln : LinkNode => ln.children.toReadableString
     case _ => n.retrieveText.getOrElse("") 
   }}).mkString
 
