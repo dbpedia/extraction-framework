@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -15,6 +15,8 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
   private val interLanguageLinksProperty = context.ontology.properties("wikiPageInterLanguageLink")
 
   override val datasets = Set(DBpediaDatasets.InterLanguageLinks)
+  
+  private val quad = QuadBuilder.apply(context.language, DBpediaDatasets.InterLanguageLinks, interLanguageLinksProperty, null) _
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
@@ -28,7 +30,7 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
           val dst = link.destination
           if (dst.isInterLanguageLink) {
             val dstLang = dst.language
-            quads += new Quad(context.language, DBpediaDatasets.InterLanguageLinks, subjectUri, interLanguageLinksProperty, dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri)
+            quads += quad(subjectUri, dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri)
           }
         }
         case _ => // ignore
