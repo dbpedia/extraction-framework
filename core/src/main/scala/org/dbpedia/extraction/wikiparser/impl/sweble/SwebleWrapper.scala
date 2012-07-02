@@ -170,7 +170,7 @@ final class SwebleWrapper extends WikiParser
                     case _ => throw new Exception("expected ItemizationItem as Itemization child")
                 }
             }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {
-                val sp = (nodes(0).isInstanceOf[TextNode] && nodes(0).asInstanceOf[TextNode].text == "#"); 
+                val sp = (nodes.size > 0 && nodes(0).isInstanceOf[TextNode] && nodes(0).asInstanceOf[TextNode].text == "#"); 
                 if(!sp){
                     lb add new TextNode("*", line)
                 } 
