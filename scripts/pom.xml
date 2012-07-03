@@ -49,6 +49,8 @@
                                 <jvmArg>-Xmx4096m</jvmArg><!-- we load all interlanguage links for all languages - we need lots of space -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                             </jvmArgs>
                             <!-- ../run ProcessInterLanguageLinks /data/dbpedia .ttl.gz en,de --><!-- for specific languages -->
                             <!-- ../run ProcessInterLanguageLinks /data/dbpedia .ttl.gz 10000- --><!-- for languages by article count range -->
