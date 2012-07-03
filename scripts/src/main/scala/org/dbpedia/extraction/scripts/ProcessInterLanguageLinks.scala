@@ -11,7 +11,8 @@ import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{HashSet,HashMap}
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
-import java.util.concurrent.ConcurrentHashMap
+
+private class Title(val language: Language, val title: String)
 
 object ProcessInterLanguageLinks {
   
@@ -83,11 +84,11 @@ object ProcessInterLanguageLinks {
     
     val infix = "/resource/"
     
-    def parseUri(uri: String): (Language, String) = {
+    def parseUri(uri: String): Title = {
       val slash = uri.indexOf('/', prefix.length)
       val domain = uri.substring(prefix.length, slash)
       domains.get(domain) match {
-        case Some(language) => (language, uri.substring(slash + infix.length))
+        case Some(language) => new Title(language, uri.substring(slash + infix.length))
         case None => null
       }
     }
@@ -96,7 +97,7 @@ object ProcessInterLanguageLinks {
     var allLines = 0L
     var allLinks = 0L
     
-    val names = new ConcurrentHashMap[String, String]()
+    val names = new HashMap[String, String]()
     
     for (language <- languages) {
       val finder = new Finder[File](baseDir, language)
@@ -115,11 +116,10 @@ object ProcessInterLanguageLinks {
               val subj = parseUri(subjUri)
               val obj = parseUri(objUri)
               if (subj != null && obj != null) {
+                if (subj.language != language) throw new Exception("subject with wrong language: " + line)
                 links += 1
-//                names.getOrElseUpdate(subj._2, subj._2)
-//                names.getOrElseUpdate(obj._2, obj._2)
-                names.putIfAbsent(subj._2, subj._2)
-                names.putIfAbsent(obj._2, obj._2)
+                names.getOrElseUpdate(subj.title, subj.title)
+                names.getOrElseUpdate(obj.title, obj.title)
               }
             }
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
