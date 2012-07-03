@@ -11,6 +11,7 @@ import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{HashSet,HashMap}
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
+import java.util.concurrent.ConcurrentHashMap
 
 object ProcessInterLanguageLinks {
   
@@ -95,7 +96,7 @@ object ProcessInterLanguageLinks {
     var allLines = 0L
     var allLinks = 0L
     
-    val names = new HashMap[String, String]()
+    val names = new ConcurrentHashMap[String, String]()
     
     for (language <- languages) {
       val finder = new Finder[File](baseDir, language)
@@ -115,27 +116,30 @@ object ProcessInterLanguageLinks {
               val obj = parseUri(objUri)
               if (subj != null && obj != null) {
                 links += 1
-                names.update(subj._2, "")
-                names.update(obj._2, "")
+//                names.getOrElseUpdate(subj._2, subj._2)
+//                names.getOrElseUpdate(obj._2, obj._2)
+                names.putIfAbsent(subj._2, subj._2)
+                names.putIfAbsent(obj._2, obj._2)
               }
             }
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
           }
           lines += 1
-          if (lines % 1000000 == 0) log(lines, links, start)
+          if (lines % 1000000 == 0) log(language.wikiCode, lines, links, start)
         }
       }
       finally in.close()
-      log(lines, links, start)
+      log(language.wikiCode, lines, links, start)
       allLines += lines
       allLinks += links
-      log(allLines, allLinks, allStart)
+      log("total", allLines, allLinks, allStart)
+      println(names.size+" unique names")
     }
   }
   
-  private def log(lines: Long, links: Long, start: Long): Unit = {
+  private def log(name: String, lines: Long, links: Long, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println("processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat/lines)+" micros per line)")
+    println(name+": processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat/lines)+" micros per line)")
   }
   
 }
