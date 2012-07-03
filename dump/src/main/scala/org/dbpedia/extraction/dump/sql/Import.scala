@@ -21,8 +21,10 @@ object Import {
     val server = args(2)
     val requireComplete = args(3).toBoolean
     
+    // TODO: next 30 lines copy & paste in InterLanguageLinks, Download, dump.extract.Config
+    
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    var keys: Seq[String] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield lang
+    var keys = for(arg <- args.drop(4); key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
         
     var languages = SortedSet[Language]()(Language.wikiCodeOrdering)
     
@@ -93,10 +95,6 @@ object Import {
     }
     finally conn.close()
     
-  }
-  
-  private def add[K](map: Map[K,Set[String]], key: K, values: Array[String]) = {
-    map.getOrElseUpdate(key, new HashSet[String]) ++= values
   }
   
 }
