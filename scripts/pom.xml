@@ -35,15 +35,23 @@
                             <mainClass>org.dbpedia.extraction.scripts.CreateFreebaseLinks</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xms512m</jvmArg>
-                                <jvmArg>-Xmx4096m</jvmArg><!-- 4G is ok with CMS or G1, other GCs need >= 4.5G -->
-                                <!-- <jvmArg>-XX:+PrintGC</jvmArg> -->
-                                <!-- <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> -->
+                                <jvmArg>-Xmx4096m</jvmArg><!-- we load all DBpedia titles, so we need some space. Didn't test how much is actually necessary, 4G is probably too much. -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                                <!-- <jvmArg>-XX:+UseG1GC</jvmArg> --><!-- ~20% slower than CMS --> 
-                                <!-- <jvmArg>-XX:+PrintGCDetails</jvmArg> --><!-- not necessary with CMS, annoying with G1 -->
                             </jvmArgs>
                             <!-- ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-links.nt.bz2 freebase-datadump-quadruples.tsv.bz2 -->
+                        </launcher>
+                        <launcher>
+                            <id>ProcessInterLanguageLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.ProcessInterLanguageLinks</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms512m</jvmArg>
+                                <jvmArg>-Xmx4096m</jvmArg><!-- we load all interlanguage links for all languages - we need lots of space -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia en,de --><!-- for specific languages -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia 10000- --><!-- for languages by article count range -->
                         </launcher>
                     </launchers>
                 </configuration>
