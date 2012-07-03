@@ -1,6 +1,4 @@
-package org.dbpedia.extraction.dump.util
-
-import org.dbpedia.extraction.util.Finder
+package org.dbpedia.extraction.util
 
 object ConfigUtils {
   /**

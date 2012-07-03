@@ -6,8 +6,7 @@ import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
 import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser,WikiTitle}
 import org.dbpedia.extraction.dump.download.Download
-import org.dbpedia.extraction.dump.util.ConfigUtils
-import org.dbpedia.extraction.util.{Language,Finder}
+import org.dbpedia.extraction.util.{Language,Finder,ConfigUtils}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
 import java.util.Properties

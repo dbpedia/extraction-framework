@@ -4,7 +4,7 @@ import java.io.File
 import java.net.{URL,MalformedURLException}
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.io.{Source,Codec}
-import org.dbpedia.extraction.dump.util.ConfigUtils
+import org.dbpedia.extraction.util.ConfigUtils
 
 class DownloadConfig
 {
