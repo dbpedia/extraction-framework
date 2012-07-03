@@ -73,11 +73,11 @@ object ProcessInterLanguageLinks {
       }
     }
     
-    val domains = new HashMap[String, Language]()
+    val domains = new java.util.HashMap[String, Language]()
     for (language <- languages) {
       // TODO: make configurable which languages use generic domain?
       val domain = if (language == Language.English) "dbpedia.org" else language.dbpediaDomain
-      domains(domain) = language
+      domains.put(domain, language)
     }
     
     val prefix = "http://"
@@ -87,10 +87,8 @@ object ProcessInterLanguageLinks {
     def parseUri(uri: String): Title = {
       val slash = uri.indexOf('/', prefix.length)
       val domain = uri.substring(prefix.length, slash)
-      domains.get(domain) match {
-        case Some(language) => new Title(language, uri.substring(slash + infix.length))
-        case None => null
-      }
+      val language = domains.get(domain) 
+      if (language == null) null else new Title(language, uri.substring(slash + infix.length))
     }
   
     val allStart = System.nanoTime
@@ -135,6 +133,17 @@ object ProcessInterLanguageLinks {
       log("total", allLines, allLinks, allStart)
       println(names.size+" unique names")
     }
+    
+    val out = open(new File("unique-names.txt.gz"), new FileOutputStream(_), zippers)
+    try {
+      val writer = new OutputStreamWriter(out, "UTF-8")
+      for (name <- names.keysIterator) {
+        writer.write(name)
+        writer.write('\n')
+      }
+      writer.close()
+    }
+    finally out.close()
   }
   
   private def log(name: String, lines: Long, links: Long, start: Long): Unit = {
