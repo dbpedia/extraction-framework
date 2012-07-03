@@ -52,11 +52,22 @@ object CreateFreebaseLinks
   private val Suffix = "> .\n"
     
   /**
-   * Freebase escapes most non-alphanumeric characters in keys by a dollar sign followed
-   * by the UTF-16 code of the character. See http://wiki.freebase.com/wiki/MQL_key_escaping .
+   * Freebase escapes most non-alphanumeric characters in keys by a dollar sign followed by the 
+   * hexadecimal UTF-16 code of the character. See http://wiki.freebase.com/wiki/MQL_key_escaping .
    */
   private val KeyEscape = """\$(\p{XDigit}{4})""".r
 
+  /**
+   * Append character for hexadecimal UTF-16 code to given string builder.
+   */
+  private def unescapeKey(sb: StringBuilder, matcher: Matcher): Unit = {
+    sb.append(Integer.parseInt(matcher.group(1), 16).toChar)
+  }
+  
+  private def unescapeKey(key: String): String = {
+    key.replaceBy(KeyEscape.pattern, unescapeKey)
+  }
+  
   private val zippers = Map[String, OutputStream => OutputStream] (
     "gz" -> { new GZIPOutputStream(_) }, 
     "bz2" -> { new BZip2CompressorOutputStream(_) } 
@@ -202,12 +213,12 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
    * to IRI and in the end cut off the prefix again.
    */
   private val Dummy = "dummy:///"
-  
+    
   /**
    * Undo Freebase key encoding, do URI escaping and Turtle / N-Triple escaping. 
    */
   private def recode(key: String): String = {
-    val plain = key.replaceBy(KeyEscape.pattern, (b: StringBuilder, m: Matcher) => b.append(Integer.parseInt(m.group(1), 16).toChar))
+    val plain = unescapeKey(key)
     var uri = wikiEncode(cleanSpace(plain))
     if (! iris) uri = new URI(Dummy+uri).toASCIIString.substring(Dummy.length)
     TurtleUtils.escapeTurtle(uri, turtle)
