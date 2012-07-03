@@ -2,14 +2,12 @@ package org.dbpedia.extraction.dump.sql
 
 import java.io.File
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.{Finder,Language}
+import org.dbpedia.extraction.util.{Finder,Language,WikiInfo,ConfigUtils}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.wikiparser.Namespace
-import org.dbpedia.extraction.dump.util.WikiInfo
 import scala.io.Codec
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.collection.immutable.SortedSet
-import org.dbpedia.extraction.dump.util.ConfigUtils
 import org.dbpedia.extraction.dump.download.Download
 import java.util.Properties
 import scala.io.Source

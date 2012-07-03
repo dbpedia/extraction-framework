@@ -4,11 +4,10 @@ import org.dbpedia.extraction.mappings.Extractor
 import scala.collection.mutable.HashMap
 import java.util.Properties
 import java.io.File
-import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.immutable.{SortedSet,SortedMap}
-import org.dbpedia.extraction.dump.util.{ConfigUtils,WikiInfo}
+import org.dbpedia.extraction.util.{Language,ConfigUtils,WikiInfo}
 import scala.io.Codec
 
 private class Config(config: Properties)
