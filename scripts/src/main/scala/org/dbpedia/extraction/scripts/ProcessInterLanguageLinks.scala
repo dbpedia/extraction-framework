@@ -73,6 +73,8 @@ object ProcessInterLanguageLinks {
       }
     }
     
+    val titles = new HashMap[String, String]()
+    
     val domains = new HashMap[String, Language]()
     for (language <- languages) {
       // TODO: make configurable which languages use generic domain?
@@ -88,16 +90,21 @@ object ProcessInterLanguageLinks {
       val slash = uri.indexOf('/', prefix.length)
       val domain = uri.substring(prefix.length, slash)
       domains.get(domain) match {
-        case Some(language) => new Title(language, uri.substring(slash + infix.length))
+        case Some(language) => {
+          var title = uri.substring(slash + infix.length)
+          title = titles.getOrElseUpdate(title, title)
+          new Title(language, title)
+        }
         case None => null
       }
     }
+    
+    // language -> title -> language -> title
+    val map = new HashMap[Language, HashMap[String, HashMap[Language, String]]]()
   
     val allStart = System.nanoTime
     var allLines = 0L
     var allLinks = 0L
-    
-    val names = new HashMap[String, String]()
     
     for (language <- languages) {
       val finder = new Finder[File](baseDir, language)
@@ -117,9 +124,8 @@ object ProcessInterLanguageLinks {
               val obj = parseUri(objUri)
               if (subj != null && obj != null) {
                 if (subj.language != language) throw new Exception("subject with wrong language: " + line)
+                map.getOrElseUpdate(subj.language, new HashMap()).getOrElseUpdate(subj.title, new HashMap()).update(obj.language, obj.title)
                 links += 1
-                names.getOrElseUpdate(subj.title, subj.title)
-                names.getOrElseUpdate(obj.title, obj.title)
               }
             }
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
@@ -133,14 +139,13 @@ object ProcessInterLanguageLinks {
       allLines += lines
       allLinks += links
       log("total", allLines, allLinks, allStart)
-      println(names.size+" unique names")
     }
     
   }
   
   private def log(name: String, lines: Long, links: Long, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(name+": processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat/lines)+" micros per line)")
+    println(name+": processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
 }
