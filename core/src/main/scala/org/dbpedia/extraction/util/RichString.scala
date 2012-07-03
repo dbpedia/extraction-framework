@@ -89,7 +89,7 @@ class RichString(str : String)
      * Similar to java.lang.String.replaceAll() and scala.util.matching.Regex.replaceAllIn(),
      * but the replacement can be chosen more flexibly and this method should be more efficient.
      */
-    def replaceBy(pattern: Pattern, append: (StringBuilder, Matcher) => _): String = {
+    def replaceBy(pattern: Pattern, append: (StringBuilder, Matcher) => Unit): String = {
       val matcher = pattern.matcher(str)
       if (! matcher.find()) return str
       val sb = new StringBuilder
