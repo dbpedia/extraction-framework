@@ -11,6 +11,7 @@ import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{HashSet,HashMap}
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
+import java.util.{HashMap => JavaMap}
 
 private class Title(val language: Language, val title: String)
 
@@ -100,7 +101,7 @@ object ProcessInterLanguageLinks {
     }
     
     // language -> title -> language -> title
-    val map = new HashMap[Language, HashMap[String, HashMap[Language, String]]]()
+    val map = new JavaMap[Language, JavaMap[String, JavaMap[Language, String]]]()
   
     val allStart = System.nanoTime
     var allLines = 0L
@@ -124,7 +125,23 @@ object ProcessInterLanguageLinks {
               val obj = parseUri(objUri)
               if (subj != null && obj != null) {
                 if (subj.language != language) throw new Exception("subject with wrong language: " + line)
-                map.getOrElseUpdate(subj.language, new HashMap()).getOrElseUpdate(subj.title, new HashMap()).update(obj.language, obj.title)
+                
+                // map.getOrElseUpdate(subj.language, new HashMap()).getOrElseUpdate(subj.title, new HashMap()).update(obj.language, obj.title)
+                
+                var titles = map.get(subj.language)
+                if (titles == null) {
+                  titles = new JavaMap()
+                  map.put(subj.language, titles)
+                }
+                
+                var targets = titles.get(subj.title)
+                if (targets == null) {
+                  targets = new JavaMap()
+                  titles.put(subj.title, targets)
+                }
+                
+                targets.put(obj.language, obj.title)
+                
                 links += 1
               }
             }
