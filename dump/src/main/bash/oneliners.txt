@@ -1,4 +1,5 @@
 # copy (and re-compress) all .gz files to .bz2 files in background process, write log output to compress.log
+# NOTE: I haven't tried it, but pbzip2 should be much faster with multiple cores / CPUs.
 { for file in $(find -name *.gz) ; do echo $file ; gzip --decompress <$file | bzip2 --compress >${file/%.gz/.bz2} ; done } &>compress.log &
 
 # sort a triples file by property (field 2)
