@@ -8,7 +8,7 @@ import org.dbpedia.extraction.util.ConfigUtils.latestDate
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import scala.collection.immutable.SortedSet
-import scala.collection.mutable.HashSet
+import scala.collection.mutable.{HashSet,HashMap}
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
 
@@ -71,34 +71,71 @@ object ProcessInterLanguageLinks {
       }
     }
     
+    val domains = new HashMap[String, Language]()
+    for (language <- languages) {
+      // TODO: make configurable which languages use generic domain?
+      val domain = if (language == Language.English) "dbpedia.org" else language.dbpediaDomain
+      domains(domain) = language
+    }
+    
+    val prefix = "http://"
+    
+    val infix = "/resource/"
+    
+    def parseUri(uri: String): (Language, String) = {
+      val slash = uri.indexOf('/', prefix.length)
+      val domain = uri.substring(prefix.length, slash)
+      domains.get(domain) match {
+        case Some(language) => (language, uri.substring(slash + infix.length))
+        case None => null
+      }
+    }
+  
+    val allStart = System.nanoTime
+    var allLines = 0L
+    var allLinks = 0L
+    
+    val names = new HashMap[String, String]()
+    
     for (language <- languages) {
       val finder = new Finder[File](baseDir, language)
-      val name = DBpediaDatasets.InterLanguageLinks+suffix
+      val name = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-') + suffix
       val file = finder.file(latestDate(finder, name), name)
       
       val start = System.nanoTime
-      println("reading "+file+"...")
+      println("reading "+file+" ...")
       var lines = 0
+      var links = 0
       val in = open(file, new FileInputStream(_), unzippers)
       try {
         for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
           line match {
-            case ObjectTriple(subj, pred, obj) => {
-              
+            case ObjectTriple(subjUri, predUri, objUri) => {
+              val subj = parseUri(subjUri)
+              val obj = parseUri(objUri)
+              if (subj != null && obj != null) {
+                links += 1
+                names.update(subj._2, "")
+                names.update(obj._2, "")
+              }
             }
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
           }
           lines += 1
-          if (lines % 1000000 == 0) log(lines, start)
+          if (lines % 1000000 == 0) log(lines, links, start)
         }
       }
       finally in.close()
+      log(lines, links, start)
+      allLines += lines
+      allLinks += links
+      log(allLines, allLinks, allStart)
     }
   }
   
-  private def log(lines: Int, start: Long): Unit = {
-    val nanos = System.nanoTime - start
-    println("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+  private def log(lines: Long, links: Long, start: Long): Unit = {
+    val micros = (System.nanoTime - start) / 1000
+    println("processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat/lines)+" micros per line)")
   }
   
 }
