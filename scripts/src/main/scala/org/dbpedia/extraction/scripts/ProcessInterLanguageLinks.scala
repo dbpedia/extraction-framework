@@ -1,23 +1,46 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.File
-import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo}
+import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
+import java.util.zip.{GZIPInputStream,GZIPOutputStream}
+import java.io.{File,InputStream,OutputStream,FileInputStream,FileOutputStream,OutputStreamWriter,FileNotFoundException}
+import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectTriple}
 import org.dbpedia.extraction.util.ConfigUtils.latestDate
 import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable.HashSet
-import scala.io.Codec
+import scala.io.{Source,Codec}
+import org.dbpedia.extraction.destinations.DBpediaDatasets
 
 object ProcessInterLanguageLinks {
+  
+  private val zippers = Map[String, OutputStream => OutputStream] (
+    "gz" -> { new GZIPOutputStream(_) }, 
+    "bz2" -> { new BZip2CompressorOutputStream(_) } 
+  )
+  
+  private val unzippers = Map[String, InputStream => InputStream] (
+    "gz" -> { new GZIPInputStream(_) }, 
+    "bz2" -> { new BZip2CompressorInputStream(_) } 
+  )
+  
+  private def open[T](file: File, opener: File => T, wrappers: Map[String, T => T]): T = {
+    val name = file.getName
+    val suffix = name.substring(name.lastIndexOf('.') + 1)
+    wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
+  }
   
   def main(args: Array[String]) {
     
     val baseDir = new File(args(0))
     
+    // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
+    val suffix = args(1)
+    
     // TODO: next 30 lines copy & paste in org.dbpedia.extraction.dump.sql.Import, org.dbpedia.extraction.dump.download.Download, org.dbpedia.extraction.dump.extract.Config
     
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    var keys = for(arg <- args.drop(1); key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
+    var keys = for(arg <- args.drop(2); key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
         
     var languages = SortedSet[Language]()(Language.wikiCodeOrdering)
     
@@ -50,8 +73,32 @@ object ProcessInterLanguageLinks {
     
     for (language <- languages) {
       val finder = new Finder[File](baseDir, language)
-      val date = latestDate(finder, "interlanguage-links.ttl.gz")
-      println(date)
+      val name = DBpediaDatasets.InterLanguageLinks+suffix
+      val file = finder.file(latestDate(finder, name), name)
+      
+      val start = System.nanoTime
+      println("reading "+file+"...")
+      var lines = 0
+      val in = open(file, new FileInputStream(_), unzippers)
+      try {
+        for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
+          line match {
+            case ObjectTriple(subj, pred, obj) => {
+              
+            }
+            case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
+          }
+          lines += 1
+          if (lines % 1000000 == 0) log(lines, start)
+        }
+      }
+      finally in.close()
     }
   }
+  
+  private def log(lines: Int, start: Long): Unit = {
+    val nanos = System.nanoTime - start
+    println("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+  }
+  
 }
