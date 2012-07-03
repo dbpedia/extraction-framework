@@ -6,7 +6,7 @@ import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.util.{WikiUtil,Language,ObjectTriple,DatatypeTriple}
 import scala.Serializable
 import scala.collection
 import scala.collection.mutable
@@ -15,82 +15,6 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
 import org.dbpedia.extraction.server.stats.CreateMappingStats._
 import java.net.{URLDecoder, URLEncoder}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-
-/**
- * TODO: Clean up this code a bit. Fix the worst deviations from Turtle/N-Triples spec, 
- * clearly document the others. Unescape \U stuff while parsing the line. Return Quad objects 
- * instead of arrays. Throw exceptions instead of returning None. Move to its own class.
- */
-class UriTriple(uris: Int) {
-  
-  def skipSpace(line: String, start: Int): Int = {
-    var index = start
-    while (index < line.length && line.charAt(index) == ' ') {
-      index += 1 // skip space
-    } 
-    index
-  }
-  
-  /** @param line must not start or end with whitespace - use line.trim. */
-  def unapplySeq(line: String) : Option[Seq[String]] =  {
-    var count = 0
-    var index = 0
-    val triple = new Array[String](3)
-    
-    while (count < uris) {
-      if (index == line.length || line.charAt(index) != '<') return None
-      val end = line.indexOf('>', index + 1)
-      if (end == -1) return None
-      triple(count) = line.substring(index + 1, end)
-      count += 1
-      index = skipSpace(line, end + 1)
-    }
-    
-    if (uris == 2) { // literal
-      if (index == line.length || line.charAt(index) != '"') return None
-      var end = index + 1
-      while (line.charAt(end) != '"') {
-        if (line.charAt(end) == '\\') end += 1
-        end += 1
-        if (end >= line.length) return None
-      } 
-      triple(2) = line.substring(index + 1, end)
-      index = end + 1
-      if (index == line.length) return None
-      val ch = line.charAt(index)
-      if (ch == '@') { // FIXME: this code: @[a-z][a-z0-9-]* / NT spec: '@' [a-z]+ ('-' [a-z0-9]+ )* / Turtle spec: "@" [a-zA-Z]+ ( "-" [a-zA-Z0-9]+ )* 
-        index += 1 // skip '@'
-        if (index == line.length) return None
-        var c = line.charAt(index)
-        if (c < 'a' || c > 'z') return None
-        do {
-          index += 1 // skip last lang char
-          if (index == line.length) return None
-          c = line.charAt(index)
-        } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'))
-      }
-      else if (ch == '^') { // type uri: ^^<...>
-        if (! line.startsWith("^^<", index)) return None
-        index = line.indexOf('>', index + 3)
-        if (index == -1) return None
-        index += 1 // skip '>'
-      } 
-      else if (ch != ' ' && ch != '.') {
-        return None
-      }
-      index = skipSpace(line, index)
-    }
-    if (line.charAt(index) != '.') return None
-    index = skipSpace(line, index + 1)
-    if (index != line.length) return None
-    Some(triple)
-  }
-  
-}
-    
-object ObjectTriple extends UriTriple(3)
-
-object DatatypeTriple extends UriTriple(2)
 
 class MappingStatsBuilder(statsDir : File, language: Language, pretty: Boolean)
 extends MappingStatsConfig(statsDir, language)
