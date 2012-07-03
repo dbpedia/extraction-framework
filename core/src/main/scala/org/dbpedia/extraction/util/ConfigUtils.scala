@@ -20,6 +20,9 @@ object ConfigUtils {
     (lo, hi)
   }
   
+  /**
+   * TODO: move this method to Finder?
+   */
   def latestDate(finder: Finder[_], fileName: String): String = {
     val dates = finder.dates(fileName)
     if (dates.isEmpty) throw new IllegalArgumentException("found no directory with file '"+finder.wikiName+"-[YYYYMMDD]-"+fileName+"'")
