@@ -12,6 +12,8 @@ import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
 import CreateFreebaseLinks._
+import java.util.regex.Matcher
+import java.lang.StringBuilder
 
 /**
  * Create a dataset file with owl:sameAs links to Freebase.
@@ -39,6 +41,8 @@ object CreateFreebaseLinks
    * some don't have an id. So it seems best to use URIs like 
    * http://rdf.freebase.com/ns/m.0p_47
    * Freebase RDF also uses this URI syntax for resources that do not have an id.
+   * Besides, finding the id for a DBpedia title would require more code, since the mid 
+   * is on the same line as the Wikipedia title, but the id is on a different line.
    */
   private val Infix = "> <http://www.w3.org/2002/07/owl#sameAs> <http://rdf.freebase.com/ns/"
     
@@ -203,7 +207,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
    * Undo Freebase key encoding, do URI escaping and Turtle / N-Triple escaping. 
    */
   private def recode(key: String): String = {
-    val plain = key.replaceLiteral(KeyEscape.pattern, m => Integer.parseInt(m.group(1), 16).toChar.toString)
+    val plain = key.replaceBy(KeyEscape.pattern, (b: StringBuilder, m: Matcher) => b.append(Integer.parseInt(m.group(1), 16).toChar))
     var uri = wikiEncode(cleanSpace(plain))
     if (! iris) uri = new URI(Dummy+uri).toASCIIString.substring(Dummy.length)
     TurtleUtils.escapeTurtle(uri, turtle)
