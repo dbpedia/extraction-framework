@@ -45,13 +45,17 @@
                             <id>ProcessInterLanguageLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.ProcessInterLanguageLinks</mainClass>
                             <jvmArgs>
-                                <jvmArg>-Xms512m</jvmArg>
-                                <jvmArg>-Xmx4096m</jvmArg><!-- we load all interlanguage links for all languages - we need lots of space -->
+                                <jvmArg>-Xms5632m</jvmArg>
+                                <jvmArg>-Xmx5632m</jvmArg><!-- 5.5 GB - enough for all languages with 10000+ articles-->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <!-- <jvmArg>-XX:+PrintGC</jvmArg> -->
+                                <!-- <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> -->
                             </jvmArgs>
-                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia .ttl.gz en,de --><!-- for specific languages -->
-                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia .ttl.gz 10000- --><!-- for languages by article count range -->
+                            <!-- for languages by article count range, en uses generic domain -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia .ttl.gz en 10000- -->
+                            <!-- for specific languages, - means no language uses generic domain -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia .ttl.gz - en,de -->
                         </launcher>
                     </launchers>
                 </configuration>
