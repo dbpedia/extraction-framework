@@ -72,6 +72,37 @@ object ProcessInterLanguageLinks {
   
   def main(args: Array[String]) {
     
+    /*
+    
+    Algorithm:
+    
+    Each URI is a combination of language code and title string. There are only ~9 million 
+    unique title strings in the top ~100 languages, so we save space by building an index of title 
+    strings and using 24 bits (enough for 16 million titles) of the index number instead of the 
+    title string. We use 8 bits (enough for 256 languages) of the language index instead of the
+    language code. Taken together, these 32 bits fit into an Int. The upper 8 bits are the language
+    code, the lower 24 bits the title code.
+    
+    A link from a page to another page is represented by a Long value which contains the
+    concatenation of the Int values for the page titles: the upper 32 bits contain the 'from'
+    title, the lower 32 bits contain the 'to' title. All links are stored in one huge array.
+    To find an inverse link, we simply swap the upper and lower 32 bits and search the array 
+    for the result. To speed up this search, we sort the array and use binary search.
+    
+    Limitations caused by this bit layout:
+    - at most 256 languages (2^8). We currently use 111.
+    - at most ~16 million unique titles (2^24). There currently are ~9 million.
+    
+    If we use more languages and break these limits, we'll probably need to change the algorithm,
+    which won't be easy without letting the memory requirements explode.
+    
+    Arbitrary limitations:
+    - at most ~270 million links (2^28). There currently are ~200 million.
+    
+    If we break that limit, we can simply increase the array size below and give the JVM more heap.
+    
+    */
+    
     val baseDir = new File(args(0))
     
     // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
@@ -83,10 +114,12 @@ object ProcessInterLanguageLinks {
     // Use all remaining args as keys or comma or whitespace separated lists of keys
     val languages = getLanguages(baseDir, args.drop(3)).toArray
     
+    val domains = new Array[String](1 << 8)
     val domainKeys = new HashMap[String, Int]()
     for (index <- 0 until languages.length) {
       val language = languages(index)
       val domain = if (language == generic) "dbpedia.org" else language.dbpediaDomain
+      domains(index) = domain
       domainKeys(domain) = index
     }
     
@@ -108,15 +141,18 @@ object ProcessInterLanguageLinks {
           var key = titleKeys.getOrElse(title, -1)
           if (key == -1) {
             key = titleKey
-            titleKey += 1
-            titleKeys(title) = key
+            
+            // Note: If there are more than 2^24 titles, this will throw an ArrayIndexOutOfBoundsException
             titles(key) = title
+            titleKeys(title) = key
+            
+            titleKey += 1
           }
           
-          // language key in high 8 bits, title key in low 24 bits
+          // language key in high bits, title key in low bits
           language << 24 | key
         }
-        case None => -1
+        case None => -1 // ignore this uri
       }
     }
     
@@ -125,6 +161,7 @@ object ProcessInterLanguageLinks {
     var allLinks = 0
     
     var linkKey = 0
+    // Enough space for ~270 million links. All languages with 10000+ articles contain about 200 million links.
     val links = new Array[Long](1 << 28)
     
     for (index <- 0 until languages.length) {
@@ -144,7 +181,10 @@ object ProcessInterLanguageLinks {
             case ObjectTriple(subjUri, predUri, objUri) => {
               
               val subj = parseUri(subjUri)
-              if (subj >>> 24 != index) throw new Exception("subject with wrong language: " + line)
+              if (subj >>> 24 != index) {
+                val found = subj >>> 24
+                throw new Exception("subject has wrong language - expected "+languages(index).wikiCode+", found "+(if (found < languages.length) languages(found).wikiCode else "none")+": " + line)
+              }
               
               // TODO: check that predUri is correct
               
@@ -153,6 +193,8 @@ object ProcessInterLanguageLinks {
               if (obj != -1) {
                 // subject in high 32 bits, object in low 32 bits
                 val link = subj.toLong << 32 | obj.toLong
+                
+                // Note: If there are more than 2^28 links, this will throw an ArrayIndexOutOfBoundsException                
                 links(linkKey) = link
                 linkKey += 1
                 
@@ -162,14 +204,14 @@ object ProcessInterLanguageLinks {
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
           }
           langLines += 1
-          if (langLines % 1000000 == 0) logLoad(language.wikiCode, langLines, langLinks, langStart)
+          if (langLines % 1000000 == 0) logRead(language.wikiCode, langLines, langLinks, langStart)
         }
       }
       finally in.close()
-      logLoad(language.wikiCode, langLines, langLinks, langStart)
+      logRead(language.wikiCode, langLines, langLinks, langStart)
       allLines += langLines
       allLinks += langLinks
-      logLoad("total", allLines, allLinks, allStart)
+      logRead("total", allLines, allLinks, allStart)
     }
     
     var start = System.nanoTime
@@ -185,17 +227,17 @@ object ProcessInterLanguageLinks {
       val inverse = link >>> 32 | link << 32
       if (binarySearch(links, 0, linkKey, inverse) >= 0) sameAs += 1
       index += 1
-      if (index % 10000000 == 0) logSearch(index, sameAs, start)
+      if (index % 10000000 == 0) logWrite(index, sameAs, start)
     }
-    logSearch(index, sameAs, start)
+    logWrite(index, sameAs, start)
   }
   
-  private def logLoad(name: String, lines: Int, links: Int, start: Long): Unit = {
+  private def logRead(name: String, lines: Int, links: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
     println(name+": processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
-  private def logSearch(links: Int, found: Int, start: Long): Unit = {
+  private def logWrite(links: Int, found: Int, start: Long): Unit = {
     println("tested "+links+" links, found "+found+" inverse links in "+prettyMillis((System.nanoTime - start) / 1000000))
   }
   
