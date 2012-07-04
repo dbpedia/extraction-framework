@@ -162,14 +162,14 @@ object ProcessInterLanguageLinks {
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
           }
           langLines += 1
-          if (langLines % 1000000 == 0) log(language.wikiCode, langLines, langLinks, langStart)
+          if (langLines % 1000000 == 0) logLoad(language.wikiCode, langLines, langLinks, langStart)
         }
       }
       finally in.close()
-      log(language.wikiCode, langLines, langLinks, langStart)
+      logLoad(language.wikiCode, langLines, langLinks, langStart)
       allLines += langLines
       allLinks += langLinks
-      log("total", allLines, allLinks, allStart)
+      logLoad("total", allLines, allLinks, allStart)
     }
     
     var start = System.nanoTime
@@ -178,19 +178,25 @@ object ProcessInterLanguageLinks {
     println("sorted "+linkKey+" links in "+prettyMillis((System.nanoTime - start) / 1000000))
     
     start = System.nanoTime
-    println("testing "+linkKey+" links for inverse links...")
+    var index = 0
     var sameAs = 0
-    for (index <- 0 until linkKey) {
+    while (index < linkKey) {
       val link = links(index)
       val inverse = link >>> 32 | link << 32
-      if (binarySearch(links, 0, linkKey, inverse) >= 0) sameAs += 0
+      if (binarySearch(links, 0, linkKey, inverse) >= 0) sameAs += 1
+      index += 1
+      if (index % 10000000 == 0) logSearch(index, sameAs, start)
     }
-    println("sound "+sameAs+" links with inverse links in "+prettyMillis((System.nanoTime - start) / 1000000))
+    logSearch(index, sameAs, start)
   }
   
-  private def log(name: String, lines: Int, links: Int, start: Long): Unit = {
+  private def logLoad(name: String, lines: Int, links: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
     println(name+": processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+  }
+  
+  private def logSearch(links: Int, found: Int, start: Long): Unit = {
+    println("tested "+links+" links, found "+found+" inverse links in "+prettyMillis((System.nanoTime - start) / 1000000))
   }
   
 }
