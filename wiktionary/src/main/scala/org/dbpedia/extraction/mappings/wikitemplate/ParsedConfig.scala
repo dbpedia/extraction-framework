@@ -94,7 +94,7 @@ object Tpl {
 
 class Block (n : XMLNode, val parent : Block){
       val name = (n \ "@name").text
-      val indTpl = if((n \ "indicator").size > 0) {Tpl.fromNode((n \ "indicator").head)} else null
+      val indTpl = (n \ "indicators" \ "indicator").map(indTpl => Tpl.fromNode(indTpl))
       val blocks = (n \ "block").map(b => new Block(b, this)).toList
       val templates  = (n \ "templates" \ "template").map(t=>Tpl.fromNode(t)).toList
       val property = (n \ "@property").text

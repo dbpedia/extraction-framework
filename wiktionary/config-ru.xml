@@ -2,48 +2,42 @@
 <config>
     <ignore>
         <page startsWith="Шаблон:" />
-        <page startsWith="ru:Шаблон:" />
         <page startsWith="Template:" />
-        <page startsWith="ru:Template:"/>
-        <page startsWith="ru:Категория:" />
         <page startsWith="Категория:" />
         <page startsWith="Викисловарь:" />
-        <page startsWith="Индекс " />
+        <page startsWith="Индекс:" />
         <page startsWith="Служебная " />
         <page startsWith="Файл:" />
-        <page startsWith="Медиа" />
-        <page startsWith="Служебная" />
-        <page startsWith="Обсуждение" />
-        <page startsWith="Участник" />
-        <page startsWith="Обсуждение участника" />
-        <page startsWith="Викисловарь" />
-        <page startsWith="Обсуждение Викисловаря" />
-        <page startsWith="Файл" />
-        <page startsWith="Обсуждение файла" />
-        <page startsWith="MediaWiki" />
-        <page startsWith="Обсуждение MediaWiki" />
-        <page startsWith="Шаблон" />
-        <page startsWith="Обсуждение шаблона" />
-        <page startsWith="Справка" />
-        <page startsWith="Обсуждение справки" />
-        <page startsWith="Категория" />
-        <page startsWith="Обсуждение категории" />
-        <page startsWith="Приложение" />
-        <page startsWith="Обсуждение приложения" />
-        <page startsWith="Конкорданс" />
-        <page startsWith="Обсуждение конкорданса" />
-        <page startsWith="Индекс" />
-        <page startsWith="Обсуждение индекса" />
-        <page startsWith="Рифмы" />
-        <page startsWith="Обсуждение рифм" />
-	<page startsWith="Файл" />
-	<page startsWith="Новая: "/>
+        <page startsWith="Медиа:" />
+        <page startsWith="Служебная:" />
+        <page startsWith="Обсуждение:" />
+        <page startsWith="Участник:" />
+        <page startsWith="Обсуждение участника:" />
+        <page startsWith="Викисловарь:" />
+        <page startsWith="Обсуждение Викисловаря:" />
+        <page startsWith="Файл:" />
+        <page startsWith="Обсуждение файла:" />
+        <page startsWith="MediaWiki:" />
+        <page startsWith="Обсуждение MediaWiki:" />
+        <page startsWith="Шаблон:" />
+        <page startsWith="Обсуждение шаблона:" />
+        <page startsWith="Справка:" />
+        <page startsWith="Обсуждение справки:" />
+        <page startsWith="Категория:" />
+        <page startsWith="Обсуждение категории:" />
+        <page startsWith="Приложение:" />
+        <page startsWith="Обсуждение приложения." />
+        <page startsWith="Конкорданс:" />
+        <page startsWith="Обсуждение конкорданса:" />
+        <page startsWith="Индекс:" />
+        <page startsWith="Обсуждение индекса:" />
+        <page startsWith="Рифмы:" />
+        <page startsWith="Обсуждение рифм:" />
+	    <page startsWith="Новая: "/>
     </ignore>
 	<mappings>
 		<mapping from="сущ" to="Noun"/>
-		  <mapping from="Семантические свойства" to="Noun"/>
 		<mapping from="гл" to="Verb"/>
-		  <mapping from="Морфологические и синтаксические свойства" to="Verb"/>
 		<mapping from="прил" to="Adjective"/>        
 		<mapping from="цифра" to="NumericSymbol"/>        
 		<mapping from="число" to="NumericSymbol"/>
@@ -53,6 +47,7 @@
 		<mapping from="фамилия" to="FamilyName"/>
 		<mapping from="Аббревиатура" to="Abbreviation"/>
 		<mapping from="аббр." to="Abbreviation"/>
+		<mapping from="abbrev" to="Abbreviation"/>
 		<mapping from="Вспомогательный глагол" to="AuxiliaryVerb"/>
 		<mapping from="мест" to="Pronoun"/>
 		<mapping from="adv" to="Adverb"/>
@@ -1122,6 +1117,12 @@
         <var name="language" />
         <var name="definition" />
     </saveVars>
+
+    <templateRepresentativeProperties>
+        <templateRepresentativeProperty tplName="сокр." pKey="2" />
+        <templateRepresentativeProperty tplName="помета" pKey="1" />
+    </templateRepresentativeProperties>
+
     <page name="page">
         
 		<triples>
@@ -1197,34 +1198,48 @@
 
 
 		<block name="lang">
-            <indicator name="lang-start">
-                <resultTemplates>
-                    <resultTemplate>
-                        <triples>
-                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-uri(map($language))" oType="URI" oNewBlock="true" />
-                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/uri(map($language))" oType="URI"/>
-                        </triples>
-                    </resultTemplate>
-                </resultTemplates>
-                <wikiTemplate>= {{-$language-}} =
-</wikiTemplate>
-            </indicator>
+            <indicators>            
+                <indicator name="lang-start">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-uri(map($language))" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/uri(map($language))" oType="URI"/>
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>= {{-$language-}} =
+    </wikiTemplate>
+                </indicator>
+            </indicators>
 	        
-
-
 			<block name="pos" property="http://wiktionary.dbpedia.org/terms/hasPoSUsage">
-                    <indicator name="pos-start">
-                        <resultTemplates>
-                            <resultTemplate>
-                                <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-Noun" oType="URI" oNewBlock="true" />
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map(assertMapped($pos)))" oType="URI" />
-                                </triples>
-                            </resultTemplate>
-                        </resultTemplates>
-                        <wikiTemplate>{{$pos $any}}
+                    <indicators>
+                        <indicator name="pos-start1">
+                            <resultTemplates>
+                                <resultTemplate>
+                                    <triples>
+                                        <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
+                                        <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map(assertMapped($pos)))" oType="URI" />
+                                    </triples>
+                                </resultTemplate>
+                            </resultTemplates>
+                            <wikiTemplate>{{$pos $any}}
 </wikiTemplate>
-                    </indicator>
+                        </indicator>
+                        <indicator name="pos-start2">
+                            <resultTemplates>
+                                <resultTemplate>
+                                    <triples>
+                                        <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
+                                        <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map(assertMapped($pos)))" oType="URI" />
+                                    </triples>
+                                </resultTemplate>
+                            </resultTemplates>
+                            <wikiTemplate>{{$pos|$any}}
+</wikiTemplate>
+                        </indicator>
+                    </indicators>
             <templates>
                 <template name="etymology">
                         <resultTemplates>
@@ -1275,8 +1290,7 @@
                 <template name="translation" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.EnglishTranslationHelper">
                         <!-- no result template here - triples are generated by helper -->
                         <wikiTemplate>=== Перевод ===
-{{перев-блок|$note
-|(|$lang=$line)+}}
+{{перев-блок|$note}}
 </wikiTemplate>
                     </template>
                     
@@ -1327,9 +1341,9 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal"/>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)ru" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)ru" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)ru" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal"/>
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>                    
@@ -1353,7 +1367,7 @@
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
                         </parameters>                   
                         <wikiTemplate>=== устойчивые сочетания ===
-($line
+(* $line
 )+
 </wikiTemplate>
                     </template>
