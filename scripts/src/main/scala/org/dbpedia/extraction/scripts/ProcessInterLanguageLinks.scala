@@ -72,11 +72,11 @@ object ProcessInterLanguageLinks {
   }
   
   // value copied from InterLanguageLinksExtractor.scala
-  private val interLanguageLink = DBpediaNamespace.ONTOLOGY.append("wikiPageInterLanguageLink")
+  private val interLinkUri = DBpediaNamespace.ONTOLOGY.append("wikiPageInterLanguageLink")
   
-  private val sameAs = RdfNamespace.OWL.append("sameAs")
+  private val sameAsUri = RdfNamespace.OWL.append("sameAs")
   
-  private val seeAlso = RdfNamespace.RDFS.append("seeAlso")
+  private val seeAlsoUri = RdfNamespace.RDFS.append("seeAlso")
   
   def main(args: Array[String]) {
     
@@ -87,9 +87,9 @@ object ProcessInterLanguageLinks {
     Each URI is a combination of language code and title string. There are only ~9 million 
     unique title strings in the top ~100 languages, so we save space by building an index of title 
     strings and using 24 bits (enough for 16 million titles) of the index number instead of the 
-    title string. We use 8 bits (enough for 256 languages) of the language index instead of the
+    title string. We use 8 bits (enough for 255 languages) of the language index instead of the
     language code. Taken together, these 32 bits fit into an Int. The upper 8 bits are the language
-    code, the lower 24 bits the title code.
+    code, the lower 24 bits the title code. -1 is used as the null value.
     
     A link from a page to another page is represented by a Long value which contains the
     concatenation of the Int values for the page titles: the upper 32 bits contain the 'from'
@@ -189,9 +189,10 @@ object ProcessInterLanguageLinks {
             case ObjectTriple(subjUri, predUri, objUri) => {
               
               val subj = parseUri(subjUri)
+              // subj is -1 if its domain was not recognized (generic vs specific?)
               require (subj >>> 24 == index, "subject has wrong language - expected "+languages(index).wikiCode+", found "+(if (subj >>> 24 < languages.length) languages(subj >>> 24).wikiCode else "none")+": "+line)
               
-              require (predUri == interLanguageLink, "wrong property - expected "+interLanguageLink+", found "+predUri+": "+line)
+              require (predUri == interLinkUri, "wrong property - expected "+interLinkUri+", found "+predUri+": "+line)
               
               val obj = parseUri(objUri)
               // obj is -1 if its language is not used in this run
