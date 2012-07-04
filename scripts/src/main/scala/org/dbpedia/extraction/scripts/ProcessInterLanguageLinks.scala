@@ -11,6 +11,7 @@ import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{HashSet,HashMap}
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
+import java.util.Arrays.{sort,binarySearch}
 
 private class Title(val language: Language, val title: String)
 
@@ -32,17 +33,10 @@ object ProcessInterLanguageLinks {
     wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
   }
   
-  def main(args: Array[String]) {
+  // TODO: copy & paste in org.dbpedia.extraction.dump.sql.Import, org.dbpedia.extraction.dump.download.Download, org.dbpedia.extraction.dump.extract.Config
+  private def getLanguages(baseDir: File, args: Array[String]): Set[Language] = {
     
-    val baseDir = new File(args(0))
-    
-    // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
-    val suffix = args(1)
-    
-    // TODO: next 30 lines copy & paste in org.dbpedia.extraction.dump.sql.Import, org.dbpedia.extraction.dump.download.Download, org.dbpedia.extraction.dump.extract.Config
-    
-    // Use all remaining args as keys or comma or whitespace separated lists of keys
-    var keys = for(arg <- args.drop(2); key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
+    var keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
         
     var languages = SortedSet[Language]()(Language.wikiCodeOrdering)
     
@@ -73,77 +67,128 @@ object ProcessInterLanguageLinks {
       }
     }
     
-    val titles = new HashMap[String, String]()
+    languages
+  }
+  
+  def main(args: Array[String]) {
     
-    val domains = new HashMap[String, Language]()
-    for (language <- languages) {
-      // TODO: make configurable which languages use generic domain?
-      val domain = if (language == Language.English) "dbpedia.org" else language.dbpediaDomain
-      domains(domain) = language
+    val baseDir = new File(args(0))
+    
+    // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
+    val suffix = args(1)
+    
+    // language using generic domain (usually en)
+    val generic = Language.getOrElse(args(2), null)
+    
+    // Use all remaining args as keys or comma or whitespace separated lists of keys
+    val languages = getLanguages(baseDir, args.drop(3)).toArray
+    
+    val domainKeys = new HashMap[String, Int]()
+    for (index <- 0 until languages.length) {
+      val language = languages(index)
+      val domain = if (language == generic) "dbpedia.org" else language.dbpediaDomain
+      domainKeys(domain) = index
     }
+    
+    var titleKey = 0
+    val titles = new Array[String](1 << 24)
+    val titleKeys = new HashMap[String, Int]()
     
     val prefix = "http://"
     
     val infix = "/resource/"
     
-    def parseUri(uri: String): Title = {
+    def parseUri(uri: String): Int = {
       val slash = uri.indexOf('/', prefix.length)
       val domain = uri.substring(prefix.length, slash)
-      domains.get(domain) match {
+      domainKeys.get(domain) match {
         case Some(language) => {
-          var title = uri.substring(slash + infix.length)
-          title = titles.getOrElseUpdate(title, title)
-          new Title(language, title)
+          val title = uri.substring(slash + infix.length)
+          
+          var key = titleKeys.getOrElse(title, -1)
+          if (key == -1) {
+            key = titleKey
+            titleKey += 1
+            titleKeys(title) = key
+            titles(key) = title
+          }
+          
+          // language key in high 8 bits, title key in low 24 bits
+          language << 24 | key
         }
-        case None => null
+        case None => -1
       }
     }
     
-    // language -> title -> language -> title
-    val map = new HashMap[Language, HashMap[String, HashMap[Language, String]]]()
-  
     val allStart = System.nanoTime
-    var allLines = 0L
-    var allLinks = 0L
+    var allLines = 0
+    var allLinks = 0
     
-    for (language <- languages) {
+    var linkKey = 0
+    val links = new Array[Long](1 << 28)
+    
+    for (index <- 0 until languages.length) {
+      val language = languages(index)
       val finder = new Finder[File](baseDir, language)
       val name = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-') + suffix
       val file = finder.file(latestDate(finder, name), name)
       
-      val start = System.nanoTime
       println("reading "+file+" ...")
-      var lines = 0
-      var links = 0
+      val langStart = System.nanoTime
+      var langLines = 0
+      var langLinks = 0
       val in = open(file, new FileInputStream(_), unzippers)
       try {
         for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
           line match {
             case ObjectTriple(subjUri, predUri, objUri) => {
+              
               val subj = parseUri(subjUri)
+              if (subj >>> 24 != index) throw new Exception("subject with wrong language: " + line)
+              
+              // TODO: check that predUri is correct
+              
               val obj = parseUri(objUri)
-              if (subj != null && obj != null) {
-                if (subj.language != language) throw new Exception("subject with wrong language: " + line)
-                map.getOrElseUpdate(subj.language, new HashMap()).getOrElseUpdate(subj.title, new HashMap()).update(obj.language, obj.title)
-                links += 1
+              // obj is -1 if its language is not used in this run
+              if (obj != -1) {
+                // subject in high 32 bits, object in low 32 bits
+                val link = subj.toLong << 32 | obj.toLong
+                links(linkKey) = link
+                linkKey += 1
+                
+                langLinks += 1
               }
             }
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
           }
-          lines += 1
-          if (lines % 1000000 == 0) log(language.wikiCode, lines, links, start)
+          langLines += 1
+          if (langLines % 1000000 == 0) log(language.wikiCode, langLines, langLinks, langStart)
         }
       }
       finally in.close()
-      log(language.wikiCode, lines, links, start)
-      allLines += lines
-      allLinks += links
+      log(language.wikiCode, langLines, langLinks, langStart)
+      allLines += langLines
+      allLinks += langLinks
       log("total", allLines, allLinks, allStart)
     }
     
+    var start = System.nanoTime
+    println("sorting "+linkKey+" links...")
+    sort(links, 0, linkKey)
+    println("sorted "+linkKey+" links in "+prettyMillis((System.nanoTime - start) / 1000000))
+    
+    start = System.nanoTime
+    println("testing "+linkKey+" links for inverse links...")
+    var sameAs = 0
+    for (index <- 0 until linkKey) {
+      val link = links(index)
+      val inverse = link >>> 32 | link << 32
+      if (binarySearch(links, 0, linkKey, inverse) >= 0) sameAs += 0
+    }
+    println("sound "+sameAs+" links with inverse links in "+prettyMillis((System.nanoTime - start) / 1000000))
   }
   
-  private def log(name: String, lines: Long, links: Long, start: Long): Unit = {
+  private def log(name: String, lines: Int, links: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
     println(name+": processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
