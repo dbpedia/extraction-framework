@@ -7,10 +7,11 @@ import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectT
 import org.dbpedia.extraction.util.ConfigUtils.latestDate
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.destinations.DBpediaDatasets
+import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{HashSet,HashMap}
 import scala.io.{Source,Codec}
-import org.dbpedia.extraction.destinations.DBpediaDatasets
 import java.util.Arrays.{sort,binarySearch}
 
 private class Title(val language: Language, val title: String)
@@ -70,6 +71,13 @@ object ProcessInterLanguageLinks {
     languages
   }
   
+  // value copied from InterLanguageLinksExtractor.scala
+  private val interLanguageLink = DBpediaNamespace.ONTOLOGY.append("wikiPageInterLanguageLink")
+  
+  private val sameAs = RdfNamespace.OWL.append("sameAs")
+  
+  private val seeAlso = RdfNamespace.RDFS.append("seeAlso")
+  
   def main(args: Array[String]) {
     
     /*
@@ -90,7 +98,7 @@ object ProcessInterLanguageLinks {
     for the result. To speed up this search, we sort the array and use binary search.
     
     Limitations caused by this bit layout:
-    - at most 256 languages (2^8). We currently use 111.
+    - at most 255 languages (2^8 - 1). We currently use 111.
     - at most ~16 million unique titles (2^24). There currently are ~9 million.
     
     If we use more languages and break these limits, we'll probably need to change the algorithm,
@@ -181,12 +189,9 @@ object ProcessInterLanguageLinks {
             case ObjectTriple(subjUri, predUri, objUri) => {
               
               val subj = parseUri(subjUri)
-              if (subj >>> 24 != index) {
-                val found = subj >>> 24
-                throw new Exception("subject has wrong language - expected "+languages(index).wikiCode+", found "+(if (found < languages.length) languages(found).wikiCode else "none")+": " + line)
-              }
+              require (subj >>> 24 == index, "subject has wrong language - expected "+languages(index).wikiCode+", found "+(if (subj >>> 24 < languages.length) languages(subj >>> 24).wikiCode else "none")+": "+line)
               
-              // TODO: check that predUri is correct
+              require (predUri == interLanguageLink, "wrong property - expected "+interLanguageLink+", found "+predUri+": "+line)
               
               val obj = parseUri(objUri)
               // obj is -1 if its language is not used in this run
