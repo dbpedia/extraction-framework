@@ -93,7 +93,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         case e : WiktionaryException => Logging.printMsg("#error generating page triples: "+e.toString, 2)
       }
       
-      println(page.children)
+      //println(page.children)
 
       val pageStack = new Stack[Node]().pushAll(page.children.reverse).filterSpaces
       //apply "first" nodehandlers
@@ -200,17 +200,16 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           Logging.printMsg("trying block indicator templates. page node: "+pageStack.head.toWikiText, 3)
           breakable {
             for(block <- possibleBlocks){
-              if(block.indTpl == null){
-                //continue - the "page" block has no indicator template, it starts implicitly with the page
-              } else {
+              for(blockIndTpl <- block.indTpl){
+                //println("name="+blockIndTpl.name)
                 //these two are need in case of exeption to undo stuff
                 val pageCopy = pageStack.clone
                 val blockURICopy = cache.savedVars("block")
                 val consumedCopy = consumed
                 try {
                   //println("vs")
-                  //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
-                  val blockIndBindings = VarBinder.parseNodesWithTemplate(block.indTpl.wiki.clone, pageStack)
+                  //println(blockIndTpl.tpl.map(_.dumpStrShort).mkString )
+                  val blockIndBindings = VarBinder.parseNodesWithTemplate(blockIndTpl.wiki.clone, pageStack)
 
                   val parentBlockUri = if(!curOpenBlocks.contains(block)){
                     cache.blockURIs(curBlock.name).stringValue
@@ -219,13 +218,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                   }
                   cache.savedVars("block") = parentBlockUri
 
-                  quads appendAll handleFlatBindings(blockIndBindings.getFlat(), block, block.indTpl, cache, parentBlockUri)
+                  quads appendAll handleFlatBindings(blockIndBindings.getFlat(), block, blockIndTpl, cache, parentBlockUri)
 
                   //no exception -> success -> stuff below here will be executed on success
                   consumed = true
 
                   curBlock = block //switch to new block
-                  Logging.printMsg("block indicator template "+block.indTpl.name+" matched", 2)
+                  Logging.printMsg("block indicator template "+blockIndTpl.name+" matched", 2)
                   
                   //check where in the hierarchy the new opended block is
                   if(!curOpenBlocks.contains(block)){
@@ -532,6 +531,7 @@ object WiktionaryPageExtractor {
     }
 }) 
 })
+  val templateRepresentativeProperty = (languageConfig \ "templateRepresentativeProperties" \ "templateRepresentativeProperty").map(n=> ((n \ "@tplName").text, (n \ "@pKey").text) ).toMap
   
   /**
   * the root of the config

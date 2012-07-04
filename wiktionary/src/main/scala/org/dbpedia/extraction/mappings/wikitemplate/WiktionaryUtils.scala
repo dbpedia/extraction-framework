@@ -458,16 +458,18 @@ class MyNodeList(val nl : List[Node]) {
     nl.map((node:Node) => node.toWikiText).mkString(" ")
   }
 
-  val templateRepresentativeProperty = Map(
-    "term"      -> 1,
-    "IPA"       -> 1,
-    "SAMPA"     -> 1,
-    "rhymes"    -> 1,
-    "homophones"->1
-  )
-
   def toReadableString : String = nl.map(n => { n match {
-    case tn : TemplateNode => if(templateRepresentativeProperty.contains(tn.title.decoded)){tn.property(templateRepresentativeProperty(tn.title.decoded).toString).get.retrieveText.getOrElse("") } else {""}
+    case tn : TemplateNode => if(WiktionaryPageExtractor.templateRepresentativeProperty.contains(tn.title.decoded)){
+        val pKey = WiktionaryPageExtractor.templateRepresentativeProperty(tn.title.decoded)
+        val p = tn.property(pKey)
+        if(p.isDefined){
+            p.get.retrieveText.getOrElse("") 
+        } else {
+            ""
+        }        
+    } else {
+        ""
+    }
     case ln : LinkNode => ln.children.toReadableString
     case _ => n.retrieveText.getOrElse("") 
   }}).mkString
