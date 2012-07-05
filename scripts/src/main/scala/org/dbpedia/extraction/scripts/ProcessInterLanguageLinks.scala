@@ -129,13 +129,18 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   If we use more languages and break these limits, we'll probably need to change the algorithm,
   which won't be easy without letting the memory requirements explode.
   
+  The current code throws ArrayIndexOutOfBoundsExceptions if there are more than 2^8 languages
+  or more than 2^24 titles.
+  
   Arbitrary limitations:
   - at most ~270 million links (2^28). There currently are ~200 million.
   
   If we break that limit, we can simply increase the array size below and give the JVM more heap.
   
-  FIXME: if there are exactly 2^8 languages and exactly 2^24 titles, the 'last' URI will be 
-  coded as -1, but -1 is also used as the null value.
+  The current code throws an ArrayIndexOutOfBoundsException if there are more than 2^28 links.
+  
+  Note: In the extremely unlikely case that there are exactly 2^8 languages and exactly 2^24 titles, 
+  the 'last' URI will be coded as -1, but -1 is also used as the null value. Strange errors will occur.
   
   */
   
@@ -157,6 +162,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     for (index <- 0 until languages.length) {
       val language = languages(index)
       val domain = if (language == generic) "dbpedia.org" else language.dbpediaDomain
+      // Note: If there are more than 2^8 languages, this will throw an ArrayIndexOutOfBoundsException                
       domains(index) = domain
       domainKeys(domain) = index
     }
