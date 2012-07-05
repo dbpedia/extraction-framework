@@ -355,19 +355,19 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     var lastLang = -1
     
-    var nanos = System.nanoTime // all languages
-    var nanosStart = 0L // current language
+    var nanos = System.nanoTime  // all languages
+    var nanosStart = 0L          // current language
     
-    var sameAsCount = 0 // all languages
-    var sameAsStart = 0 // current language
+    var sameAsCount = 0  // all languages
+    var sameAsStart = 0  // current language
     var sameAs: Writer = null
     
-    var seeAlsoCount = 0 // all languages
-    var seeAlsoStart = 0 // current language
+    var seeAlsoCount = 0  // all languages
+    var seeAlsoStart = 0  // current language
     var seeAlso: Writer = null
     
-    var index = 0 // all languages
-    var indexStart = 0 // current language
+    var index = 0       // all languages
+    var indexStart = 0  // current language
     while (true) {
       
       var link = -1L
