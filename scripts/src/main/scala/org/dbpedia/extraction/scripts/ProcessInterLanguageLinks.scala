@@ -150,8 +150,10 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   var linkCount = 0
   
   def resetDomains(generic: Language) {
+    
     domains = new Array[String](1 << 8)
     domainKeys = new HashMap[String, Int]()
+    
     for (index <- 0 until languages.length) {
       val language = languages(index)
       val domain = if (language == generic) "dbpedia.org" else language.dbpediaDomain
@@ -171,9 +173,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     links = new Array[Long](1 << 28)
     linkCount = 0
     
-    val allStart = System.nanoTime
-    var allLines = 0
-    var allLinks = 0
+    var lineCount = 0
+    val start = System.nanoTime
     
     for (index <- 0 until languages.length) {
       val language = languages(index)
@@ -183,8 +184,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       
       println(language.wikiCode+": reading "+file+" ...")
       val langStart = System.nanoTime
-      var langLines = 0
-      var langLinks = 0
+      var langLineCount = lineCount
+      var langLinkCount = linkCount
       val in = input(file)
       try {
         for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
@@ -206,21 +207,17 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
                 // Note: If there are more than 2^28 links, this will throw an ArrayIndexOutOfBoundsException                
                 links(linkCount) = link
                 linkCount += 1
-                
-                langLinks += 1
               }
             }
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
           }
-          langLines += 1
-          if (langLines % 1000000 == 0) logRead(language.wikiCode, langLines, langLinks, langStart)
+          lineCount += 1
+          if ((lineCount - langLineCount) % 1000000 == 0) logRead(language.wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
         }
       }
       finally in.close()
-      logRead(language.wikiCode, langLines, langLinks, langStart)
-      allLines += langLines
-      allLinks += langLinks
-      logRead("total", allLines, allLinks, allStart)
+      logRead(language.wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
+      logRead("total", lineCount, linkCount, start)
     }
   }
 
