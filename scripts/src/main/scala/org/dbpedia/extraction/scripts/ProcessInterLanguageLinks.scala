@@ -31,7 +31,7 @@ object ProcessInterLanguageLinks {
     for (key <- keys) key match {
       case ConfigUtils.Range(from, to) => ranges += ConfigUtils.toRange(from, to)
       case ConfigUtils.Language(language) => languages += Language(language)
-      case other => throw new Exception("Invalid language / range '"+other+"'")
+      case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
     }
     
     // resolve page count ranges to languages
@@ -58,36 +58,33 @@ object ProcessInterLanguageLinks {
   
   def main(args: Array[String]) {
     
-    require(args != null && (args.length == 5 || args.length >= 7), "need at least five args: base dir, dump file (relative to base dir, use '-' to disable), sameAs dataset name, seeAlso dataset name, triples file suffix; optional: generic domain language (use '-' to disable), link languages")
+    require(args != null && (args.length == 4 || args.length >= 6), "need at least four args: base dir, dump file (relative to base dir, use '-' to disable), dataset name extension (e.g. '-chapters', use '' for empty string), triples file suffix; optional: generic domain language (use '-' to disable), link languages")
     
     val baseDir = new File(args(0))
     
     val dumpFile = if (args(1) == "-") null else new File(baseDir, args(1))
     
-    val sameAsDataset = args(2)
-    val seeAlsoDataset = args(3)
+    val extension = if (args(2) == "-") "" else args(2)
     
     // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .ttl and .nt files that use IRIs or URIs.
     // WARNING: DOES NOT WORK WITH .nq OR .tql.
-    val fileSuffix = args(4)
+    val fileSuffix = args(3)
     
-    var processor: ProcessInterLanguageLinks = null
+    val processor = new ProcessInterLanguageLinks(baseDir, dumpFile, fileSuffix, extension)
     
     // if no languages are given, read dump file
-    if (args.length == 5) {
+    if (args.length == 4) {
       require(dumpFile != null, "no dump file and no languages given")
-      processor = new ProcessInterLanguageLinks(baseDir, dumpFile, fileSuffix, sameAsDataset, seeAlsoDataset)
       processor.readDump()
     }
     else {
       // Language using generic domain (usually en)
-      val generic = if (args(5) == "-") null else Language(args(5))
+      val generic = if (args(4) == "-") null else Language(args(4))
       
       // Use all remaining args as keys or comma or whitespace separated lists of keys
-      val languages = getLanguages(baseDir, args.drop(6))
+      val languages = getLanguages(baseDir, args.drop(5))
       
-      processor = new ProcessInterLanguageLinks(baseDir, dumpFile, fileSuffix, sameAsDataset, seeAlsoDataset)
       processor.setLanguages(languages, generic)
       processor.readLinks()
       processor.sortLinks()
@@ -96,19 +93,23 @@ object ProcessInterLanguageLinks {
     
     processor.writeLinks()
   }
+  
 }
 
-class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: String, sameAsDataset: String, seeAlsoDataset: String) {
+class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: String, extension: String) {
 
   val uriPrefix = "http://"
   val uriPath = "/resource/"
 
   // value copied from InterLanguageLinksExtractor.scala
   val interLinkUri = DBpediaNamespace.ONTOLOGY.append("wikiPageInterLanguageLink")
-  
   val sameAsUri = RdfNamespace.OWL.append("sameAs")
   val seeAlsoUri = RdfNamespace.RDFS.append("seeAlso")
 
+  val interLinkExtension = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-')
+  val sameAsExtension = interLinkExtension+"-same-as"+extension
+  val seeAlsoExtension = interLinkExtension+"-see-also"+extension
+    
   /*
   
   Algorithm:
@@ -121,8 +122,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   code, the lower 24 bits the title code. -1 is used as the null value.
   
   A link from a page to another page is represented by a Long value which contains the
-  concatenation of the Int values for the page titles: the upper 32 bits contain the 'from'
-  title, the lower 32 bits contain the 'to' title. All links are stored in one huge array.
+  concatenation of the Int values for the page URIs: the upper 32 bits contain the 'from'
+  URI, the lower 32 bits contain the 'to' URI. All links are stored in one huge array.
   To find an inverse link, we simply swap the upper and lower 32 bits and search the array 
   for the result. To speed up this search, we sort the array and use binary search.
   
@@ -204,9 +205,9 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   /**
    * side effect: find date for given language if not already set in dates array and auto is true
    */
-  private def find(langCode: Int, dataset: String, auto: Boolean = false): File = {
+  private def find(langCode: Int, extension: String, auto: Boolean = false): File = {
     val finder = new Finder[File](baseDir, languages(langCode))
-    val name = dataset.replace('_', '-') + fileSuffix
+    val name = extension+fileSuffix
     var date = dates(langCode)
     if (date == null) {
       if (! auto) throw new IllegalStateException("date unknown for language "+languages(langCode).wikiCode)
@@ -232,7 +233,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     for (langCode <- 0 until languages.length) {
       val wikiCode = languages(langCode).wikiCode
-      val file = find(langCode, DBpediaDatasets.InterLanguageLinks.name, true)
+      val file = find(langCode, interLinkExtension, true)
       
       println(wikiCode+": reading "+file+" ...")
       val langStart = System.nanoTime
@@ -312,7 +313,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     println("sorted "+linkCount+" links in "+prettyMillis((System.nanoTime - sortStart) / 1000000))
   }
   
-  private def switchDataset(writer: Writer, langCode: Int = -1, dataset: String = null): Writer = {
+  private def switchDataset(writer: Writer, langCode: Int, extension: String): Writer = {
     
     if (writer != null) {
       // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.header
@@ -321,7 +322,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     }
     
     if (langCode != -1) {
-      val writer = write(find(langCode, dataset))
+      val writer = write(find(langCode, extension))
       // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
       writer.write("# started "+formatCurrentTimestamp+"\n")
       writer
@@ -375,7 +376,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       
       if (index < linkCount) {
         link = links(index)
-        // get subject language from upper 8 bits
+        // get subject language from top 8 bits
         subjLang = (link >>> 56).toInt
       }
       
@@ -385,8 +386,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
           logWrite(languages(lastLang).wikiCode, index - indexStart, sameAsCount - sameAsStart, seeAlsoCount - seeAlsoStart, nanosStart)
         }
         
-        sameAs = switchDataset(sameAs, subjLang, sameAsDataset)
-        seeAlso = switchDataset(seeAlso, subjLang, seeAlsoDataset)
+        sameAs = switchDataset(sameAs, subjLang, sameAsExtension)
+        seeAlso = switchDataset(seeAlso, subjLang, seeAlsoExtension)
         
         if (subjLang == -1) {
           logWrite("total", index, sameAsCount, seeAlsoCount, nanos)
