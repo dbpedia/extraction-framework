@@ -12,6 +12,7 @@ object DateTimeParserConfig
         "fr" -> Map("janvier"->1,"février"->2,"mars"->3,"avril"->4,"mai"->5,"juin"->6,"juillet"->7,"août"->8,"septembre"->9,"octobre"->10,"novembre"->11,"décembre"->12),
         "hr" -> Map("siječanj"->1,"veljača"->2,"ožujak"->3,"travanj"->4,"svibanj"->5,"lipanj"->6,"srpanj"->7,"kolovoz"->8,"rujan"->9,"listopad"->10,"studeni"->11,"prosinac"->12),
         "it" -> Map("gennaio"->1,"febbraio"->2,"marzo"->3,"aprile"->4,"maggio"->5,"giugno"->6,"luglio"->7,"agosto"->8,"settembre"->9,"ottobre"->10,"novembre"->11,"dicembre"->12),
+        "nl" -> Map("januari"->1,"februari"->2,"maart"->3,"april"->4,"mei"->5,"juni"->6,"juli"->7,"augustus"->8,"september"->9,"oktober"->10,"november"->11,"december"->12),
         "pl" -> Map("stycznia"->1,"lutego"->2,"marca"->3,"kwietnia"->4,"maja"->5,"czerwca"->6,"lipca"->7,"sierpnia"->8,"września"->9,"października"->10,"listopada"->11,"grudnia"->12),
         "pt" -> Map("janeiro"->1,"fevereiro"->2,"março"->3,"abril"->4,"maio"->5,"junho"->6,"julho"->7,"agosto"->8,"setembro"->9,"outubro"->10,"novembro"->11,"dezembro"->12,
                     "jan"->1,"fev"->2,"mar"->3,"abr"->4,"mai"->5,"jun"->6,"jul"->7,"ago"->8,"set"->9,"out"->10,"nov"->11,"dez"->12),
@@ -28,6 +29,7 @@ object DateTimeParserConfig
         "en" -> Map("BCE" -> -1, "BC" -> -1, "CE"-> 1, "AD"-> 1, "AC"-> -1, "CE"-> 1),
         "el" -> Map("ΠΧ"-> -1, "Π\\.Χ\\."-> -1, "Π\\.Χ"-> -1 , "ΜΧ"-> 1 , "Μ\\.Χ\\."-> 1, "Μ\\.Χ"-> 1),
         "it" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "PEV"-> -1, "P\\.E\\.V\\."-> -1, "EV"-> 1, "E\\.V\\." -> 1),
+        "nl" -> Map("v\\.Chr\\." -> -1, "n\\.C\\."-> 1, "v\\.C\\." -> -1, "n\\.Chr\\."-> 1, "voor Chr\\." -> -1, "na Chr\\."-> 1), 
         "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
         "es" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1)
     )
@@ -37,6 +39,7 @@ object DateTimeParserConfig
         "en" -> "st|nd|rd|th",
         "el" -> "η|ης",
         "it" -> "°|\\.°|°\\.",
+        "nl" -> "ste|de|e",
         "pt" -> "°|\\.°|°\\.",
         "es" -> "°|\\.°|°\\."
     )
@@ -111,6 +114,21 @@ object DateTimeParserConfig
             "nascita giorno"      -> Map ("day" -> "1"),
             "data di morte"       -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "Morte"               -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
+        ),
+        "nl" -> Map(
+            "geboren"  			    -> Map ("year" -> "3", "month"-> "2", "day" -> "1"), 
+            "geboortedatum" 		-> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "overleden" 		    -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "sterfdatum" 		    -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "overlijdensdatum" 	-> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "overlijddatum" 		-> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "datumbegin"     		-> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "begindatum" 		    -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "einddatum" 		    -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "datumeind" 		    -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "datum begin" 	   	-> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "datum eind" 		    -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "datum afbeelding"	-> Map ("year" -> "3", "month"-> "2", "day" -> "1")
         ),
         "pt" -> Map(
             "Nascimento"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
