@@ -2,9 +2,9 @@ package org.dbpedia.extraction.scripts
 
 import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
 import java.util.zip.{GZIPInputStream,GZIPOutputStream}
-import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,FileNotFoundException}
+import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
 import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectTriple}
-import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex}
+import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
 import org.dbpedia.extraction.util.ConfigUtils.latestDate
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
@@ -35,9 +35,9 @@ object ProcessInterLanguageLinks {
     wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
   }
   
-  private def getOutputStream(file: File) = open(file, new FileOutputStream(_), zippers)
+  private def output(file: File) = open(file, new FileOutputStream(_), zippers)
   
-  private def getInputStream(file: File) = open(file, new FileInputStream(_), unzippers)
+  private def input(file: File) = open(file, new FileInputStream(_), unzippers)
   
   // TODO: copy & paste in org.dbpedia.extraction.dump.sql.Import, org.dbpedia.extraction.dump.download.Download, org.dbpedia.extraction.dump.extract.Config
   private def getLanguages(baseDir: File, args: Array[String]): Set[Language] = {
@@ -114,6 +114,9 @@ object ProcessInterLanguageLinks {
     
     If we break that limit, we can simply increase the array size below and give the JVM more heap.
     
+    FIXME: if there are exactly 2^8 languages and exactly 2^24 titles, the 'last' URI will be 
+    coded as -1, but -1 is also used as the null value.
+    
     */
     
     val uriPrefix = "http://"
@@ -133,6 +136,12 @@ object ProcessInterLanguageLinks {
     val fileSuffix = args(2)
     
     if (args.length == 3) {
+      
+      val dump = readDump(dumpFile)
+      domains = dump._1
+      titles = dump._2
+      links = dump._3
+      linkCount = links.length
       
     }
     else {
@@ -197,11 +206,11 @@ object ProcessInterLanguageLinks {
         val name = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-') + fileSuffix
         val file = finder.file(latestDate(finder, name), name)
         
-        println("reading "+file+" ...")
+        println(language.wikiCode+": reading "+file+" ...")
         val langStart = System.nanoTime
         var langLines = 0
         var langLinks = 0
-        val in = getInputStream(file)
+        val in = input(file)
         try {
           for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
             line match {
@@ -248,6 +257,7 @@ object ProcessInterLanguageLinks {
     }
     
     var writeStart = System.nanoTime
+    println("writing "+linkCount+" links...")
     var index = 0
     var sameAs = 0
     while (index < linkCount) {
@@ -266,21 +276,39 @@ object ProcessInterLanguageLinks {
   }
   
   private def logWrite(links: Int, found: Int, start: Long): Unit = {
-    println("tested "+links+" links, found "+found+" inverse links in "+prettyMillis((System.nanoTime - start) / 1000000))
+    println("wrote "+links+" links, found "+found+" inverse links in "+prettyMillis((System.nanoTime - start) / 1000000))
   }
   
   private def writeDump(dumpFile: File, domains: Array[String], titles: Array[String], links: Array[Long], linkCount: Int): Unit = {
-    val out = getOutputStream(dumpFile)
+    val writeStart = System.nanoTime
+    println("writing dump file...")
+    val out = output(dumpFile)
     try {
       val writer = new OutputStreamWriter(out, Codec.UTF8)
+      
+      println("writing domains...")
       writeStrings(writer, domains)
+      
+      println("writing titles...")
       writeStrings(writer, titles)
-      writeLongs(writer, links, linkCount)
+      
+      val linkStart = System.nanoTime
+      println("writing "+linkCount+" links...")
+      writer.write(intToHex(linkCount, 8)+"\n")
+      var index = 0
+      while (index < linkCount) {
+        writer.write(longToHex(links(index), 16)+"\n")
+        index += 1
+        if (index % 10000000 == 0) logLinks("wrote", index, linkCount, linkStart)
+      }
+      logLinks("wrote", index, linkCount, linkStart)
+      
       writer.close()
     }
     finally out.close()
+    println("wrote dump file in "+prettyMillis((System.nanoTime - writeStart) / 1000000))
   }
-
+  
   private def writeStrings(writer: Writer, array: Array[String]): Unit = {
     var length = 0
     for (string <- array) if (string != null) length += 1
@@ -288,9 +316,57 @@ object ProcessInterLanguageLinks {
     for (string <- array) if (string != null) writer.write(string+"\n")
   }
 
-  private def writeLongs(writer: Writer, array: Array[Long], length: Int): Unit = {
-    writer.write(intToHex(length, 8)+"\n")
-    for (number <- array) writer.write(longToHex(number, 16)+"\n")
+  private def readDump(dumpFile: File): (Array[String], Array[String], Array[Long]) = {
+    
+    var domains, titles: Array[String] = null
+    var links: Array[Long] = null
+      
+    val readStart = System.nanoTime
+    println("reading dump file...")
+    val in = input(dumpFile)
+    try {
+      val reader = new BufferedReader(new InputStreamReader(in, Codec.UTF8))
+      
+      println("reading domains...")
+      domains = readStrings(reader)
+      
+      println("reading titles...")
+      titles = readStrings(reader)
+      
+      val linkStart = System.nanoTime
+      val linkCount = hexToInt(reader.readLine())
+      println("reading "+linkCount+" links...")
+      links = new Array[Long](linkCount)
+      var index = 0
+      while (index < linkCount) {
+        links(index) = hexToLong(reader.readLine())
+        index += 1
+        if (index % 10000000 == 0) logLinks("read", index, linkCount, linkStart)
+      }
+      logLinks("read", index, linkCount, linkStart)
+      
+      reader.close()
+    }
+    finally in.close()
+    println("read dump file in "+prettyMillis((System.nanoTime - readStart) / 1000000))
+    
+    (domains, titles, links)
+  }
+  
+  private def readStrings(reader: BufferedReader): Array[String] = {
+    val length = hexToInt(reader.readLine())
+    val array = new Array[String](length)
+    var index = 0
+    while (index < length) {
+      array(index) = reader.readLine()
+      index += 1
+    }
+    array
+  }
+  
+  private def logLinks(did: String, index: Int, count: Int, start: Long): Unit = {
+    val micros = (System.nanoTime - start) / 1000
+    println(did+" "+index+" of "+count+" links ("+(100F * index / count)+" %) in "+prettyMillis(micros / 1000))
   }
 
 }
