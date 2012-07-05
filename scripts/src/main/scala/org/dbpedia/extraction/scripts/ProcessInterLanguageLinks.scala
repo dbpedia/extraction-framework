@@ -334,7 +334,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       writer.write(intToHex(titleCount, 8)+"\n")
       index = 0
       while (index < titleCount) {
-        writer.write(titles(titleCount)+"\n")
+        writer.write(titles(index)+"\n")
         index += 1
       }
       
