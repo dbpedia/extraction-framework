@@ -6,7 +6,8 @@ import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputS
 import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectTriple}
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
 import org.dbpedia.extraction.util.RichFile.toRichFile
-import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.util.RichBufferedReader.toRichBufferedReader
+import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
 import scala.collection.immutable.SortedSet
@@ -57,44 +58,47 @@ object ProcessInterLanguageLinks {
   
   def main(args: Array[String]) {
     
-    require(args != null && (args.length == 3 || args.length >= 5), "need at least three args: base dir, dump file (relative to base dir, use '-' to disable), triples file suffix; optional: generic domain language (use '-' to disable), link languages")
+    require(args != null && (args.length == 5 || args.length >= 7), "need at least five args: base dir, dump file (relative to base dir, use '-' to disable), sameAs dataset name, seeAlso dataset name, triples file suffix; optional: generic domain language (use '-' to disable), link languages")
     
     val baseDir = new File(args(0))
     
     val dumpFile = if (args(1) == "-") null else new File(baseDir, args(1))
     
+    val sameAsDataset = args(2)
+    val seeAlsoDataset = args(3)
+    
     // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .ttl and .nt files that use IRIs or URIs.
-    // DOES NOT work with .nq or .tql.
-    val fileSuffix = args(2)
+    // WARNING: DOES NOT WORK WITH .nq OR .tql.
+    val fileSuffix = args(4)
     
     var processor: ProcessInterLanguageLinks = null
     
     // if no languages are given, read dump file
-    if (args.length == 3) {
+    if (args.length == 5) {
       require(dumpFile != null, "no dump file and no languages given")
-      processor = new ProcessInterLanguageLinks(baseDir, dumpFile, fileSuffix)
+      processor = new ProcessInterLanguageLinks(baseDir, dumpFile, fileSuffix, sameAsDataset, seeAlsoDataset)
       processor.readDump()
     }
     else {
       // Language using generic domain (usually en)
-      val generic = if (args(3) == "-") null else Language(args(3))
+      val generic = if (args(5) == "-") null else Language(args(5))
       
       // Use all remaining args as keys or comma or whitespace separated lists of keys
-      val languages = getLanguages(baseDir, args.drop(4))
+      val languages = getLanguages(baseDir, args.drop(6))
       
-      processor = new ProcessInterLanguageLinks(baseDir, dumpFile, fileSuffix)
+      processor = new ProcessInterLanguageLinks(baseDir, dumpFile, fileSuffix, sameAsDataset, seeAlsoDataset)
       processor.setLanguages(languages, generic)
-      processor.loadLinks()
+      processor.readLinks()
       processor.sortLinks()
       if (dumpFile != null) processor.writeDump()
     }
     
-    processor.processLinks()
+    processor.writeLinks()
   }
 }
 
-class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: String) {
+class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: String, sameAsDataset: String, seeAlsoDataset: String) {
 
   val uriPrefix = "http://"
   val uriPath = "/resource/"
@@ -145,6 +149,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   */
   
   var languages: Array[Language] = null
+  var dates: Array[String] = null
   
   var domains: Array[String] = null
   var domainKeys: Map[String, Int] = null
@@ -160,6 +165,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     if (languages.length > (1 << 8)) throw new ArrayIndexOutOfBoundsException("got "+languages.length+" languages, can't handle more than "+(1 << 8))
     this.languages = languages
+    dates = new Array[String](languages.length)
     domains = new Array[String](languages.length)
     domainKeys = new HashMap[String, Int]()
     
@@ -171,7 +177,46 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     }
   }
   
-  def loadLinks(): Unit = {
+  private val zippers = Map[String, OutputStream => OutputStream] (
+    "gz" -> { new GZIPOutputStream(_) }, 
+    "bz2" -> { new BZip2CompressorOutputStream(_) } 
+  )
+  
+  private val unzippers = Map[String, InputStream => InputStream] (
+    "gz" -> { new GZIPInputStream(_) }, 
+    "bz2" -> { new BZip2CompressorInputStream(_) } 
+  )
+  
+  private def open[T](file: File, opener: File => T, wrappers: Map[String, T => T]): T = {
+    val name = file.getName
+    val suffix = name.substring(name.lastIndexOf('.') + 1)
+    wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
+  }
+  
+  private def output(file: File) = open(file, new FileOutputStream(_), zippers)
+  
+  private def input(file: File) = open(file, new FileInputStream(_), unzippers)
+  
+  private def write(file: File) = new OutputStreamWriter(output(file), Codec.UTF8)
+  
+  private def read(file: File) = new BufferedReader(new InputStreamReader(input(file), Codec.UTF8))
+  
+  /**
+   * side effect: find date for given language if not already set in dates array and auto is true
+   */
+  private def find(langCode: Int, dataset: String, auto: Boolean = false): File = {
+    val finder = new Finder[File](baseDir, languages(langCode))
+    val name = dataset.replace('_', '-') + fileSuffix
+    var date = dates(langCode)
+    if (date == null) {
+      if (! auto) throw new IllegalStateException("date unknown for language "+languages(langCode).wikiCode)
+      date = finder.dates(name).last
+      dates(langCode) = date
+    }
+    finder.file(date, name)
+  }
+  
+  def readLinks(): Unit = {
     
     // Enough space for ~16 million titles. The languages with 10000+ articles have ~9 million titles.
     titles = new Array[String](1 << 24)
@@ -186,24 +231,22 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     val start = System.nanoTime
     
     for (langCode <- 0 until languages.length) {
-      val language = languages(langCode)
-      val finder = new Finder[File](baseDir, language)
-      val name = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-') + fileSuffix
-      val file = finder.files(name).last
+      val wikiCode = languages(langCode).wikiCode
+      val file = find(langCode, DBpediaDatasets.InterLanguageLinks.name, true)
       
-      println(language.wikiCode+": reading "+file+" ...")
+      println(wikiCode+": reading "+file+" ...")
       val langStart = System.nanoTime
       var langLineCount = lineCount
       var langLinkCount = linkCount
-      val in = input(file)
+      val reader = read(file)
       try {
-        for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
+        for (line <- reader) {
           line match {
             case ObjectTriple(subjUri, predUri, objUri) => {
               
               val subj = parseUri(subjUri)
               // subj is -1 if its domain was not recognized (generic vs specific?)
-              require (subj != -1 && subj >>> 24 == langCode, "subject has wrong language - expected "+language.wikiCode+", found "+(if (subj == -1) "none" else languages(subj >>> 24).wikiCode)+": "+line)
+              require (subj != -1 && subj >>> 24 == langCode, "subject has wrong language - expected "+wikiCode+", found "+(if (subj == -1) "none" else languages(subj >>> 24).wikiCode)+": "+line)
               
               require (predUri == interLinkUri, "wrong property - expected "+interLinkUri+", found "+predUri+": "+line)
               
@@ -221,11 +264,11 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
             case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
           }
           lineCount += 1
-          if ((lineCount - langLineCount) % 1000000 == 0) logRead(language.wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
+          if ((lineCount - langLineCount) % 1000000 == 0) logRead(wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
         }
       }
-      finally in.close()
-      logRead(language.wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
+      finally reader.close()
+      logRead(wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
       logRead("total", lineCount, linkCount, start)
     }
   }
@@ -269,64 +312,128 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     println("sorted "+linkCount+" links in "+prettyMillis((System.nanoTime - sortStart) / 1000000))
   }
   
-  def processLinks() {
-    var writeStart = System.nanoTime
+  private def switchDataset(writer: Writer, langCode: Int = -1, dataset: String = null): Writer = {
+    
+    if (writer != null) {
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.header
+      writer.write("# completed "+formatCurrentTimestamp+"\n")
+      writer.close()
+    }
+    
+    if (langCode != -1) {
+      val writer = write(find(langCode, dataset))
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
+      writer.write("# started "+formatCurrentTimestamp+"\n")
+      writer
+    }
+    else {
+      null
+    }
+  }
+  
+  private def writeTriple(writer: Writer, predUri: String, link: Long): Unit = {
+    
+    // get subject from upper 32 bits
+    val subj = (link >>> 32).toInt
+    // get domain from upper 8 bits
+    val subjDomain = domains(subj >>> 24)
+    // get title from lower 24 bits
+    val subjTitle = titles(subj & 0xFFFFFF)
+    
+    // get object from lower 32 bits
+    val obj = (link & 0xFFFFFFFFL).toInt
+    // get domain from upper 8 bits
+    val objDomain = domains(obj >>> 24)
+    // get title from lower 24 bits
+    val objTitle = titles(obj & 0xFFFFFF)
+    
+    writer.write("<"+uriPrefix+subjDomain+uriPath+subjTitle+"> <"+predUri+"> <"+uriPrefix+objDomain+uriPath+objTitle+">\n")
+  }
+  
+  def writeLinks() {
     println("writing "+linkCount+" links...")
-    var index = 0
-    var sameAs = 0
-    var seeAlso = 0
-    while (index < linkCount) {
+    
+    var lastLang = -1
+    
+    var nanos = System.nanoTime // all languages
+    var nanosStart = 0L // current language
+    
+    var sameAsCount = 0 // all languages
+    var sameAsStart = 0 // current language
+    var sameAs: Writer = null
+    
+    var seeAlsoCount = 0 // all languages
+    var seeAlsoStart = 0 // current language
+    var seeAlso: Writer = null
+    
+    var index = 0 // all languages
+    var indexStart = 0 // current language
+    while (true) {
       
-      val link = links(index)
+      var link = -1L
+      var subjLang = -1
       
-      // get subject from the upper 32 bits
-      val subj = (link >>> 32).toInt
-      // get title from the lower 24 bits
-      val subjTitle = titles(subj & 0xFFFFFF)
-      // get language from the upper 8 bits
-      val subjDomain = domains(subj >>> 24)
-      // get language from the upper 8 bits
-      val subjLanguage = languages(subj >>> 24)
+      if (index < linkCount) {
+        link = links(index)
+        // get subject language from upper 8 bits
+        subjLang = (link >>> 56).toInt
+      }
       
-      // get object from the lower 32 bits
-      val obj = (link & 0xFFFFFFFFL).toInt
-      // get title from the lower 24 bits
-      val objTitle = titles(obj & 0xFFFFFF)
-      // get language from the upper 8 bits
-      val objDomain = domains(obj >>> 24)
+      if (subjLang != lastLang) {
+        
+        if (lastLang != -1) {
+          logWrite(languages(lastLang).wikiCode, index - indexStart, sameAsCount - sameAsStart, seeAlsoCount - seeAlsoStart, nanosStart)
+        }
+        
+        sameAs = switchDataset(sameAs, subjLang, sameAsDataset)
+        seeAlso = switchDataset(seeAlso, subjLang, seeAlsoDataset)
+        
+        if (subjLang == -1) {
+          logWrite("total", index, sameAsCount, seeAlsoCount, nanos)
+          return
+        }
+        
+        lastLang = subjLang
+        nanosStart = System.nanoTime
+        indexStart = index
+        sameAsStart = sameAsCount
+        seeAlsoStart = seeAlsoCount
+      }
       
-      val inverse = link << 32 | link >>> 32
-      if (binarySearch(links, 0, linkCount, inverse) >= 0) {
-        sameAs += 1
+      // look for inverse link (subject and object bits switched)
+      val bidi = binarySearch(links, 0, linkCount, link << 32 | link >>> 32) >= 0
+      if (bidi) {
+        writeTriple(sameAs, sameAsUri, link)
+        sameAsCount += 1
       }
       else {
-        seeAlso += 1
+        writeTriple(seeAlso, seeAlsoUri, link)
+        seeAlsoCount += 1
       }
         
       index += 1
-      if (index % 10000000 == 0) logWrite(index, sameAs, seeAlso, writeStart)
+      if (index % 10000000 == 0) logWrite("total", index, sameAsCount, seeAlsoCount, nanos)
     }
-    logWrite(index, sameAs, seeAlso, writeStart)
   }
   
-  private def logWrite(links: Int, sameAs: Int, seeAlso: Int, start: Long): Unit = {
-    println("wrote "+links+" links, found "+sameAs+" sameAs ("+(100F*sameAs/links)+"%) and "+seeAlso+" seeAlso ("+(100F*seeAlso/links)+"%) links in "+prettyMillis((System.nanoTime - start) / 1000000))
+  private def logWrite(name: String, total: Int, sameAs: Int, seeAlso: Int, start: Long): Unit = {
+    println(name+": wrote "+total+" links, "+sameAs+" sameAs ("+(100F*sameAs/total)+"%), "+seeAlso+" seeAlso ("+(100F*seeAlso/total)+"%) in "+prettyMillis((System.nanoTime - start) / 1000000))
   }
   
   private def writeDump(): Unit = {
+    
     val writeStart = System.nanoTime
     println("writing dump file "+dumpFile+" ...")
-    val out = output(dumpFile)
+    val writer = write(dumpFile)
     try {
-      val writer = new OutputStreamWriter(out, Codec.UTF8)
       var index = 0
       
-      println("writing languages and domains...")
+      println("writing languages, dates and domains...")
       val count = languages.length
       writer.write(intToHex(count, 8)+"\n")
       index = 0
       while (index < count) {
-        writer.write(languages(index).wikiCode+" "+domains(index)+"\n")
+        writer.write(languages(index).wikiCode+"\t"+dates(index)+"\t"+domains(index)+"\n")
         index += 1
       }
       
@@ -348,10 +455,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         if (index % 10000000 == 0) logDumpLinks("wrote", index, linkCount, linkStart)
       }
       logDumpLinks("wrote", index, linkCount, linkStart)
-      
-      writer.close()
     }
-    finally out.close()
+    finally writer.close()
     println("wrote dump file "+dumpFile+" in "+prettyMillis((System.nanoTime - writeStart) / 1000000))
   }
   
@@ -359,21 +464,22 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     val readStart = System.nanoTime
     println("reading dump file "+dumpFile+" ...")
-    val in = input(dumpFile)
+    val reader = read(dumpFile)
     try {
-      val reader = new BufferedReader(new InputStreamReader(in, Codec.UTF8))
       var index = 0
       
-      println("reading languages and domains...")
+      println("reading languages, dates  and domains...")
       val count = hexToInt(reader.readLine())
       domains = new Array[String](count)
       languages = new Array[Language](count)
+      dates = new Array[String](count)
       index = 0
       while (index < count) {
         val line = reader.readLine()
-        val parts = line.split(" ", 2)
+        val parts = line.split("\t", 3)
         languages(index) = Language(parts(0))
-        domains(index) = parts(1)
+        dates(index) = parts(1)
+        domains(index) = parts(2)
         index += 1
       }
       
@@ -397,36 +503,14 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         if (index % 10000000 == 0) logDumpLinks("read", index, linkCount, linkStart)
       }
       logDumpLinks("read", index, linkCount, linkStart)
-      
-      reader.close()
     }
-    finally in.close()
+    finally reader.close()
     println("read dump file "+dumpFile+" in "+prettyMillis((System.nanoTime - readStart) / 1000000))
   }
   
   private def logDumpLinks(did: String, index: Int, count: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(did+" "+index+" of "+count+" links ("+(100F * index / count)+" %) in "+prettyMillis(micros / 1000))
+    println(did+" "+index+" of "+count+" links ("+(100F * index / count)+"%) in "+prettyMillis(micros / 1000))
   }
 
-  private val zippers = Map[String, OutputStream => OutputStream] (
-    "gz" -> { new GZIPOutputStream(_) }, 
-    "bz2" -> { new BZip2CompressorOutputStream(_) } 
-  )
-  
-  private val unzippers = Map[String, InputStream => InputStream] (
-    "gz" -> { new GZIPInputStream(_) }, 
-    "bz2" -> { new BZip2CompressorInputStream(_) } 
-  )
-  
-  private def open[T](file: File, opener: File => T, wrappers: Map[String, T => T]): T = {
-    val name = file.getName
-    val suffix = name.substring(name.lastIndexOf('.') + 1)
-    wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
-  }
-  
-  private def output(file: File) = open(file, new FileOutputStream(_), zippers)
-  
-  private def input(file: File) = open(file, new FileInputStream(_), unzippers)
-  
 }
