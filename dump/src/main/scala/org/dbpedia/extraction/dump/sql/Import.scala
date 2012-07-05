@@ -72,7 +72,7 @@ object Import {
         
         val finder = new Finder[File](baseDir, language)
         val tagFile = if (requireComplete) Download.Complete else "pages-articles.xml"
-        val date = ConfigUtils.latestDate(finder, tagFile)
+        val date = finder.dates(tagFile).last
         val file = finder.file(date, "pages-articles.xml")
         
         val database = finder.wikiName

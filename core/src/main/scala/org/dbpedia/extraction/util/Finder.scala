@@ -33,13 +33,26 @@ class Finder[T <% FileLike[T]](baseDir: T, language: Language) {
   
   /**
    * Finds the names (which are dates in format YYYYMMDD) of dump directories for the language.
-   * @tagFile Return only directories that contain a file with this suffix, 
-   * e.g. "download-complete" -> "baseDir/enwiki/20120403/enwiki-20120403-download-complete". May be null.
+   * @suffix Return only directories that contain a file with this suffix, 
+   * e.g. "download-complete" -> "baseDir/enwiki/20120403/enwiki-20120403-download-complete". 
+   * May be null, in which case we just look for date directories.
    * @return dates in ascending order
    */
-  def dates(suffix: String = null) : List[String] = {
-    val suffixFilter = if (suffix == null) {date: String => true} else {date: String => file(date, suffix).exists}
-    wikiDir.list.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
+  def dates(suffix: String = null, required: Boolean = true) : List[String] = {
+    
+    val suffixFilter = 
+      if (suffix == null) {date: String => true} 
+      else {date: String => file(date, suffix).exists}
+    
+    val dates = wikiDir.list.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
+    
+    if (required && dates.isEmpty) {
+      var msg = "found no directory "+wikiDir+"/[YYYYMMDD]"
+      if (suffix != null) msg += " containing file "+wikiName+"-[YYYYMMDD]-"+suffix
+      throw new IllegalArgumentException(msg)
+    }
+    
+    dates
   }
     
   /**
