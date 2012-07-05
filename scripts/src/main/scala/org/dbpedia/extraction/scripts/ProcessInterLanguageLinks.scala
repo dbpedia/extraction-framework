@@ -5,7 +5,6 @@ import java.util.zip.{GZIPInputStream,GZIPOutputStream}
 import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
 import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectTriple}
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
-import org.dbpedia.extraction.util.ConfigUtils.latestDate
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.destinations.DBpediaDatasets
@@ -129,13 +128,16 @@ object ProcessInterLanguageLinks {
     
     val baseDir = new File(args(0))
     
-    val dumpFile = new File(baseDir, args(1))
+    val dumpFile = if (args(1) == "-") null else new File(baseDir, args(1))
     
     // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
-    // This script works with .ttl files. Should work for .nt as well. Does NOT work with .nq or .tql.
+    // This script WORKS with .ttl files, SHOULD work with .nt, DOES NOT work with .nq or .tql.
     val fileSuffix = args(2)
     
+    // if no languages are given, read dump file
     if (args.length == 3) {
+      
+      require(dumpFile != null, "no dump file and no languages given")
       
       val dump = readDump(dumpFile)
       domains = dump._1
@@ -147,7 +149,7 @@ object ProcessInterLanguageLinks {
     else {
       
       // Language using generic domain (usually en)
-      val generic = Language.getOrElse(args(3), null)
+      val generic = if (args(3) == "-") null else Language(args(3))
       
       // Use all remaining args as keys or comma or whitespace separated lists of keys
       val languages = getLanguages(baseDir, args.drop(4)).toArray
@@ -204,7 +206,7 @@ object ProcessInterLanguageLinks {
         val language = languages(index)
         val finder = new Finder[File](baseDir, language)
         val name = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-') + fileSuffix
-        val file = finder.file(latestDate(finder, name), name)
+        val file = finder.file(finder.dates(name).last, name)
         
         println(language.wikiCode+": reading "+file+" ...")
         val langStart = System.nanoTime
@@ -253,7 +255,7 @@ object ProcessInterLanguageLinks {
       sort(links, 0, linkCount)
       println("sorted "+linkCount+" links in "+prettyMillis((System.nanoTime - sortStart) / 1000000))
       
-      writeDump(dumpFile, domains, titles, links, linkCount)
+      if (dumpFile != null) writeDump(dumpFile, domains, titles, links, linkCount)
     }
     
     var writeStart = System.nanoTime
@@ -299,9 +301,9 @@ object ProcessInterLanguageLinks {
       while (index < linkCount) {
         writer.write(longToHex(links(index), 16)+"\n")
         index += 1
-        if (index % 10000000 == 0) logLinks("wrote", index, linkCount, linkStart)
+        if (index % 10000000 == 0) logDumpLinks("wrote", index, linkCount, linkStart)
       }
-      logLinks("wrote", index, linkCount, linkStart)
+      logDumpLinks("wrote", index, linkCount, linkStart)
       
       writer.close()
     }
@@ -341,9 +343,9 @@ object ProcessInterLanguageLinks {
       while (index < linkCount) {
         links(index) = hexToLong(reader.readLine())
         index += 1
-        if (index % 10000000 == 0) logLinks("read", index, linkCount, linkStart)
+        if (index % 10000000 == 0) logDumpLinks("read", index, linkCount, linkStart)
       }
-      logLinks("read", index, linkCount, linkStart)
+      logDumpLinks("read", index, linkCount, linkStart)
       
       reader.close()
     }
@@ -364,7 +366,7 @@ object ProcessInterLanguageLinks {
     array
   }
   
-  private def logLinks(did: String, index: Int, count: Int, start: Long): Unit = {
+  private def logDumpLinks(did: String, index: Int, count: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
     println(did+" "+index+" of "+count+" links ("+(100F * index / count)+" %) in "+prettyMillis(micros / 1000))
   }

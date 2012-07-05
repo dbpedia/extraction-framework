@@ -195,7 +195,7 @@ class ConfigLoader(config: Config)
     
     private def latestDate(finder: Finder[_]): String = {
       val fileName = if (config.requireComplete) Download.Complete else config.source
-      ConfigUtils.latestDate(finder, fileName)
+      finder.dates(fileName).last
     }
     
 }
