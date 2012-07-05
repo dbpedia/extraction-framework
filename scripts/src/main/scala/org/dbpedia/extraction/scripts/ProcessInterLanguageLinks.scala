@@ -57,14 +57,15 @@ object ProcessInterLanguageLinks {
   
   def main(args: Array[String]) {
     
-    require(args != null && args.length >= 3, "need at least three args: base dir, dump file (relative to base dir), triples file suffix")
+    require(args != null && (args.length == 3 || args.length >= 5), "need at least three args: base dir, dump file (relative to base dir, use '-' to disable), triples file suffix; optional: generic domain language (use '-' to disable), link languages")
     
     val baseDir = new File(args(0))
     
     val dumpFile = if (args(1) == "-") null else new File(baseDir, args(1))
     
-    // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
-    // This script WORKS with .ttl files, SHOULD work with .nt, DOES NOT work with .nq or .tql.
+    // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
+    // This script works with .ttl and .nt files that use IRIs or URIs.
+    // DOES NOT work with .nq or .tql.
     val fileSuffix = args(2)
     
     var processor: ProcessInterLanguageLinks = null
@@ -122,7 +123,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   for the result. To speed up this search, we sort the array and use binary search.
   
   Limitations caused by this bit layout:
-  - at most 256 languages (2^8 - 1). We currently use 111.
+  - at most 256 languages (2^8). We currently use 111.
   - at most ~16 million unique titles (2^24). There currently are ~9 million.
   
   If we use more languages and break these limits, we'll probably need to change the algorithm,
@@ -283,7 +284,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   private def writeDump(): Unit = {
     val writeStart = System.nanoTime
-    println("writing dump file...")
+    println("writing dump file "+dumpFile+" ...")
     val out = output(dumpFile)
     try {
       val writer = new OutputStreamWriter(out, Codec.UTF8)
@@ -308,7 +309,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       writer.close()
     }
     finally out.close()
-    println("wrote dump file in "+prettyMillis((System.nanoTime - writeStart) / 1000000))
+    println("wrote dump file "+dumpFile+" in "+prettyMillis((System.nanoTime - writeStart) / 1000000))
   }
   
   private def writeStrings(writer: Writer, array: Array[String]): Unit = {
@@ -321,7 +322,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   private def readDump(): Unit = {
     
     val readStart = System.nanoTime
-    println("reading dump file...")
+    println("reading dump file "+dumpFile+" ...")
     val in = input(dumpFile)
     try {
       val reader = new BufferedReader(new InputStreamReader(in, Codec.UTF8))
@@ -347,7 +348,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       reader.close()
     }
     finally in.close()
-    println("read dump file in "+prettyMillis((System.nanoTime - readStart) / 1000000))
+    println("read dump file "+dumpFile+" in "+prettyMillis((System.nanoTime - readStart) / 1000000))
   }
   
   private def readStrings(reader: BufferedReader): Array[String] = {
