@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.util
 
 import java.lang.StringBuilder
-import org.dbpedia.extraction.util.NumberUtils.toHex
+import org.dbpedia.extraction.util.NumberUtils.intToHex
 import java.text.{DateFormat,SimpleDateFormat}
 import java.util.TimeZone
 
@@ -91,13 +91,13 @@ object StringUtils
         if (c < 0x80) {
           // ASCII chars need no expensive UTF-8 encoding
           sb append esc
-          toHex(sb, c, 2)
+          intToHex(sb, c, 2)
         } else {
           // TODO: do it like java.net.URI.encode(), probably faster
           val bytes = new String(Array(c)).getBytes("UTF-8")
           for (b <- bytes) {
             sb append esc
-            toHex(sb, b, 2)
+            intToHex(sb, b, 2)
           }
         }
         
@@ -132,13 +132,13 @@ object StringUtils
         if (c < 0x80) {
           // ASCII chars need no expensive UTF-8 encoding
           sb append esc
-          toHex(sb, c, 2)
+          intToHex(sb, c, 2)
         } else {
           // TODO: do it like java.net.URI.encode(), probably faster
           val bytes = new String(Array(c)).getBytes("UTF-8")
           for (b <- bytes) {
             sb append esc
-            toHex(sb, b, 2)
+            intToHex(sb, b, 2)
           }
         }
         replace(c) = sb.toString
