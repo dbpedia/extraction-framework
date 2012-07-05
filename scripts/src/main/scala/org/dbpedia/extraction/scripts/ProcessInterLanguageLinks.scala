@@ -464,7 +464,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   private def logWrite(name: String, total: Int, sameAs: Int, seeAlso: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(name+": wrote "+total+" links, "+sameAs+" sameAs ("+(100F*sameAs/total)+"%), "+seeAlso+" seeAlso ("+(100F*seeAlso/total)+"%) in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / total)+" micros per link)")
+    println(name+": wrote "+total+" links: "+sameAs+" sameAs ("+(100F*sameAs/total)+"%), "+seeAlso+" seeAlso ("+(100F*seeAlso/total)+"%) in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / total)+" micros per link)")
   }
   
   /**
