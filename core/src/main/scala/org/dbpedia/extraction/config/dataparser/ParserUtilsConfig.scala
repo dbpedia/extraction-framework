@@ -34,6 +34,19 @@ object ParserUtilsConfig
             "τρισεκατομμυρια" -> 12,
             "τετράκις εκατομμύρια" -> 15
         ),
+        
+        "nl" -> Map(
+            "honderd" -> 2,
+            "duizend" -> 3,
+            "miljoen" -> 6,
+            "mio" -> 6,
+            "mln" -> 6,
+            "miljard" -> 9,
+            "milj." -> 9,
+            "mrd" -> 9,
+            "biljard" -> 12,
+            "triljoen" -> 15
+        ),
         "pl" -> Map(
             "tysiąc" -> 3,
             "tysiące" -> 3,
