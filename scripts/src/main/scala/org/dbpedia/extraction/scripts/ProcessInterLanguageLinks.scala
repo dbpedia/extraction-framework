@@ -206,7 +206,7 @@ object ProcessInterLanguageLinks {
         val language = languages(index)
         val finder = new Finder[File](baseDir, language)
         val name = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-') + fileSuffix
-        val file = finder.file(finder.dates(name).last, name)
+        val file = finder.files(name).last
         
         println(language.wikiCode+": reading "+file+" ...")
         val langStart = System.nanoTime

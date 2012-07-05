@@ -38,7 +38,7 @@ class Finder[T <% FileLike[T]](baseDir: T, language: Language) {
    * May be null, in which case we just look for date directories.
    * @return dates in ascending order
    */
-  def dates(suffix: String = null, required: Boolean = true) : List[String] = {
+  def dates(suffix: String = null, required: Boolean = true): List[String] = {
     
     val suffixFilter = 
       if (suffix == null) {date: String => true} 
@@ -56,13 +56,20 @@ class Finder[T <% FileLike[T]](baseDir: T, language: Language) {
   }
     
   /**
+   * @return files in ascending date order
+   */
+  def files(suffix: String, required: Boolean = true): List[T] = {
+    dates(suffix, required).map(file(_, suffix))
+  }
+    
+  /**
    * File with given name suffix in main directory for language, e.g. "download-running" ->
    * "baseDir/enwiki/enwiki-download-running"
    */
   def file(suffix: String) = wikiDir.resolve(wikiName+'-'+suffix)
   
   /**
-   * File with given name suffix in latest directory for language, e.g. "pages-articles.xml" ->
+   * File with given name suffix in date directory for language, e.g. "pages-articles.xml" ->
    * "baseDir/enwiki/20120403/enwiki-20120403-pages-articles.xml"
    */
   def file(date: String, suffix: String) = directory(date).resolve(wikiName+'-'+date+'-'+suffix)
