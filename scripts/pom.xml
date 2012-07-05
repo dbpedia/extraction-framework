@@ -52,10 +52,14 @@
                                 <!-- <jvmArg>-XX:+PrintGC</jvmArg> -->
                                 <!-- <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> -->
                             </jvmArgs>
-                            <!-- for languages by article count range, en uses generic domain -->
-                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links.txt.gz .ttl.gz en 10000- -->
-                            <!-- for specific languages, - means no language uses generic domain -->
-                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links.txt.gz .ttl.gz - en,de -->
+                            <!-- 'en,de' for specific languages. 'en' uses generic domain. -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links.txt.gz .ttl.gz en en,de -->
+                            <!-- '10000-' for languages by article count range. '-' means no language uses generic domain. -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links.txt.gz .ttl.gz - 10000- -->
+                            <!-- '-' means don't write dump file. -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia - .ttl.gz - en,de -->
+                            <!-- if no languages are given, read links from dump file, not from triple files. -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links.txt.gz .ttl.gz -->
                         </launcher>
                     </launchers>
                 </configuration>
