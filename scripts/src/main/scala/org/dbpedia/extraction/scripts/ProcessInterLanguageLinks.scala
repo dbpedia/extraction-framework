@@ -302,7 +302,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   private def logRead(name: String, lines: Int, links: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(name+": processed "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    println(name+": read "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
   def sortLinks() {
@@ -417,7 +417,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   }
   
   private def logWrite(name: String, total: Int, sameAs: Int, seeAlso: Int, start: Long): Unit = {
-    println(name+": wrote "+total+" links, "+sameAs+" sameAs ("+(100F*sameAs/total)+"%), "+seeAlso+" seeAlso ("+(100F*seeAlso/total)+"%) in "+prettyMillis((System.nanoTime - start) / 1000000))
+    val micros = (System.nanoTime - start) / 1000
+    println(name+": wrote "+total+" links, "+sameAs+" sameAs ("+(100F*sameAs/total)+"%), "+seeAlso+" seeAlso ("+(100F*seeAlso/total)+"%) in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / total)+" micros per link)")
   }
   
   private def writeDump(): Unit = {
