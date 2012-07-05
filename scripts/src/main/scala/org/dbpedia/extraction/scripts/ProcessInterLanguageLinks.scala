@@ -2,8 +2,9 @@ package org.dbpedia.extraction.scripts
 
 import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
 import java.util.zip.{GZIPInputStream,GZIPOutputStream}
-import java.io.{File,InputStream,OutputStream,FileInputStream,FileOutputStream,OutputStreamWriter,FileNotFoundException}
+import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,FileNotFoundException}
 import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectTriple}
+import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex}
 import org.dbpedia.extraction.util.ConfigUtils.latestDate
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
@@ -33,6 +34,10 @@ object ProcessInterLanguageLinks {
     val suffix = name.substring(name.lastIndexOf('.') + 1)
     wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
   }
+  
+  private def getOutputStream(file: File) = open(file, new FileOutputStream(_), zippers)
+  
+  private def getInputStream(file: File) = open(file, new FileInputStream(_), unzippers)
   
   // TODO: copy & paste in org.dbpedia.extraction.dump.sql.Import, org.dbpedia.extraction.dump.download.Download, org.dbpedia.extraction.dump.extract.Config
   private def getLanguages(baseDir: File, args: Array[String]): Set[Language] = {
@@ -86,8 +91,8 @@ object ProcessInterLanguageLinks {
     
     Each URI is a combination of language code and title string. There are only ~9 million 
     unique title strings in the top ~100 languages, so we save space by building an index of title 
-    strings and using 24 bits (enough for 16 million titles) of the index number instead of the 
-    title string. We use 8 bits (enough for 255 languages) of the language index instead of the
+    strings and using 24 bits (enough for ~16 million titles) of the index number instead of the 
+    title string. We use 8 bits (enough for 256 languages) of the language index instead of the
     language code. Taken together, these 32 bits fit into an Int. The upper 8 bits are the language
     code, the lower 24 bits the title code. -1 is used as the null value.
     
@@ -98,7 +103,7 @@ object ProcessInterLanguageLinks {
     for the result. To speed up this search, we sort the array and use binary search.
     
     Limitations caused by this bit layout:
-    - at most 255 languages (2^8 - 1). We currently use 111.
+    - at most 256 languages (2^8 - 1). We currently use 111.
     - at most ~16 million unique titles (2^24). There currently are ~9 million.
     
     If we use more languages and break these limits, we'll probably need to change the algorithm,
@@ -111,131 +116,148 @@ object ProcessInterLanguageLinks {
     
     */
     
+    val uriPrefix = "http://"
+    val uriPath = "/resource/"
+    
+    var domains: Array[String] = null
+    var titles: Array[String] = null
+    var links: Array[Long] = null
+    var linkCount = 0
+    
     val baseDir = new File(args(0))
     
-    // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
-    val suffix = args(1)
+    val dumpFile = new File(baseDir, args(1))
     
-    // language using generic domain (usually en)
-    val generic = Language.getOrElse(args(2), null)
+    // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
+    // This script works with .ttl files. Should work for .nt as well. Does NOT work with .nq or .tql.
+    val fileSuffix = args(2)
     
-    // Use all remaining args as keys or comma or whitespace separated lists of keys
-    val languages = getLanguages(baseDir, args.drop(3)).toArray
-    
-    val domains = new Array[String](1 << 8)
-    val domainKeys = new HashMap[String, Int]()
-    for (index <- 0 until languages.length) {
-      val language = languages(index)
-      val domain = if (language == generic) "dbpedia.org" else language.dbpediaDomain
-      domains(index) = domain
-      domainKeys(domain) = index
-    }
-    
-    var titleKey = 0
-    val titles = new Array[String](1 << 24)
-    val titleKeys = new HashMap[String, Int]()
-    
-    val prefix = "http://"
-    
-    val infix = "/resource/"
-    
-    def parseUri(uri: String): Int = {
-      val slash = uri.indexOf('/', prefix.length)
-      val domain = uri.substring(prefix.length, slash)
-      domainKeys.get(domain) match {
-        case Some(language) => {
-          val title = uri.substring(slash + infix.length)
-          
-          var key = titleKeys.getOrElse(title, -1)
-          if (key == -1) {
-            key = titleKey
-            
-            // Note: If there are more than 2^24 titles, this will throw an ArrayIndexOutOfBoundsException
-            titles(key) = title
-            titleKeys(title) = key
-            
-            titleKey += 1
-          }
-          
-          // language key in high bits, title key in low bits
-          language << 24 | key
-        }
-        case None => -1 // ignore this uri
-      }
-    }
-    
-    val allStart = System.nanoTime
-    var allLines = 0
-    var allLinks = 0
-    
-    var linkKey = 0
-    // Enough space for ~270 million links. All languages with 10000+ articles contain about 200 million links.
-    val links = new Array[Long](1 << 28)
-    
-    for (index <- 0 until languages.length) {
-      val language = languages(index)
-      val finder = new Finder[File](baseDir, language)
-      val name = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-') + suffix
-      val file = finder.file(latestDate(finder, name), name)
+    if (args.length == 3) {
       
-      println("reading "+file+" ...")
-      val langStart = System.nanoTime
-      var langLines = 0
-      var langLinks = 0
-      val in = open(file, new FileInputStream(_), unzippers)
-      try {
-        for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
-          line match {
-            case ObjectTriple(subjUri, predUri, objUri) => {
+    }
+    else {
+      
+      // Language using generic domain (usually en)
+      val generic = Language.getOrElse(args(3), null)
+      
+      // Use all remaining args as keys or comma or whitespace separated lists of keys
+      val languages = getLanguages(baseDir, args.drop(4)).toArray
+      
+      domains = new Array[String](1 << 8)
+      val domainKeys = new HashMap[String, Int]()
+      for (index <- 0 until languages.length) {
+        val language = languages(index)
+        val domain = if (language == generic) "dbpedia.org" else language.dbpediaDomain
+        domains(index) = domain
+        domainKeys(domain) = index
+      }
+      
+      // Enough space for ~16 million titles. All languages with 10000+ articles contain about 9 million unique titles.
+      titles = new Array[String](1 << 24)
+      val titleKeys = new HashMap[String, Int]()
+      var titleKey = 0
+      
+      def parseUri(uri: String): Int = {
+        val slash = uri.indexOf('/', uriPrefix.length)
+        require(uri.startsWith(uriPath, slash), "bad URI, expected path '"+uriPath+"': "+uri)
+        val domain = uri.substring(uriPrefix.length, slash)
+        domainKeys.get(domain) match {
+          case Some(language) => {
+            val title = uri.substring(slash + uriPath.length)
+            
+            var key = titleKeys.getOrElse(title, -1)
+            if (key == -1) {
+              key = titleKey
               
-              val subj = parseUri(subjUri)
-              // subj is -1 if its domain was not recognized (generic vs specific?)
-              require (subj >>> 24 == index, "subject has wrong language - expected "+languages(index).wikiCode+", found "+(if (subj >>> 24 < languages.length) languages(subj >>> 24).wikiCode else "none")+": "+line)
+              // Note: If there are more than 2^24 titles, this will throw an ArrayIndexOutOfBoundsException
+              titles(key) = title
+              titleKeys(title) = key
               
-              require (predUri == interLinkUri, "wrong property - expected "+interLinkUri+", found "+predUri+": "+line)
-              
-              val obj = parseUri(objUri)
-              // obj is -1 if its language is not used in this run
-              if (obj != -1) {
-                // subject in high 32 bits, object in low 32 bits
-                val link = subj.toLong << 32 | obj.toLong
-                
-                // Note: If there are more than 2^28 links, this will throw an ArrayIndexOutOfBoundsException                
-                links(linkKey) = link
-                linkKey += 1
-                
-                langLinks += 1
-              }
+              titleKey += 1
             }
-            case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
+            
+            // Language key in high bits, title key in low bits. 
+            // No need to mask title key - it is less than 2^24.
+            language << 24 | key
           }
-          langLines += 1
-          if (langLines % 1000000 == 0) logRead(language.wikiCode, langLines, langLinks, langStart)
+          case None => -1 // language not in list, ignore this uri
         }
       }
-      finally in.close()
-      logRead(language.wikiCode, langLines, langLinks, langStart)
-      allLines += langLines
-      allLinks += langLinks
-      logRead("total", allLines, allLinks, allStart)
+      
+      val allStart = System.nanoTime
+      var allLines = 0
+      var allLinks = 0
+      
+      // Enough space for ~270 million links. All languages with 10000+ articles contain about 200 million links.
+      links = new Array[Long](1 << 28)
+      
+      for (index <- 0 until languages.length) {
+        val language = languages(index)
+        val finder = new Finder[File](baseDir, language)
+        val name = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-') + fileSuffix
+        val file = finder.file(latestDate(finder, name), name)
+        
+        println("reading "+file+" ...")
+        val langStart = System.nanoTime
+        var langLines = 0
+        var langLinks = 0
+        val in = getInputStream(file)
+        try {
+          for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
+            line match {
+              case ObjectTriple(subjUri, predUri, objUri) => {
+                
+                val subj = parseUri(subjUri)
+                // subj is -1 if its domain was not recognized (generic vs specific?)
+                require (subj != -1 && subj >>> 24 == index, "subject has wrong language - expected "+languages(index).wikiCode+", found "+(if (subj == -1) "none" else languages(subj >>> 24).wikiCode)+": "+line)
+                
+                require (predUri == interLinkUri, "wrong property - expected "+interLinkUri+", found "+predUri+": "+line)
+                
+                val obj = parseUri(objUri)
+                // obj is -1 if its language is not used in this run
+                if (obj != -1) {
+                  // subject in high 32 bits, object in low 32 bits
+                  val link = subj.toLong << 32 | obj.toLong
+                  
+                  // Note: If there are more than 2^28 links, this will throw an ArrayIndexOutOfBoundsException                
+                  links(linkCount) = link
+                  linkCount += 1
+                  
+                  langLinks += 1
+                }
+              }
+              case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
+            }
+            langLines += 1
+            if (langLines % 1000000 == 0) logRead(language.wikiCode, langLines, langLinks, langStart)
+          }
+        }
+        finally in.close()
+        logRead(language.wikiCode, langLines, langLinks, langStart)
+        allLines += langLines
+        allLinks += langLinks
+        logRead("total", allLines, allLinks, allStart)
+      }
+      
+      var sortStart = System.nanoTime
+      println("sorting "+linkCount+" links...")
+      sort(links, 0, linkCount)
+      println("sorted "+linkCount+" links in "+prettyMillis((System.nanoTime - sortStart) / 1000000))
+      
+      writeDump(dumpFile, domains, titles, links, linkCount)
     }
     
-    var start = System.nanoTime
-    println("sorting "+linkKey+" links...")
-    sort(links, 0, linkKey)
-    println("sorted "+linkKey+" links in "+prettyMillis((System.nanoTime - start) / 1000000))
-    
-    start = System.nanoTime
+    var writeStart = System.nanoTime
     var index = 0
     var sameAs = 0
-    while (index < linkKey) {
+    while (index < linkCount) {
       val link = links(index)
       val inverse = link >>> 32 | link << 32
-      if (binarySearch(links, 0, linkKey, inverse) >= 0) sameAs += 1
+      if (binarySearch(links, 0, linkCount, inverse) >= 0) sameAs += 1
       index += 1
-      if (index % 10000000 == 0) logWrite(index, sameAs, start)
+      if (index % 10000000 == 0) logWrite(index, sameAs, writeStart)
     }
-    logWrite(index, sameAs, start)
+    logWrite(index, sameAs, writeStart)
   }
   
   private def logRead(name: String, lines: Int, links: Int, start: Long): Unit = {
@@ -247,4 +269,28 @@ object ProcessInterLanguageLinks {
     println("tested "+links+" links, found "+found+" inverse links in "+prettyMillis((System.nanoTime - start) / 1000000))
   }
   
+  private def writeDump(dumpFile: File, domains: Array[String], titles: Array[String], links: Array[Long], linkCount: Int): Unit = {
+    val out = getOutputStream(dumpFile)
+    try {
+      val writer = new OutputStreamWriter(out, Codec.UTF8)
+      writeStrings(writer, domains)
+      writeStrings(writer, titles)
+      writeLongs(writer, links, linkCount)
+      writer.close()
+    }
+    finally out.close()
+  }
+
+  private def writeStrings(writer: Writer, array: Array[String]): Unit = {
+    var length = 0
+    for (string <- array) if (string != null) length += 1
+    writer.write(intToHex(length, 8)+"\n")
+    for (string <- array) if (string != null) writer.write(string+"\n")
+  }
+
+  private def writeLongs(writer: Writer, array: Array[Long], length: Int): Unit = {
+    writer.write(intToHex(length, 8)+"\n")
+    for (number <- array) writer.write(longToHex(number, 16)+"\n")
+  }
+
 }
