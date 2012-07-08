@@ -11,9 +11,10 @@ import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimest
 import org.dbpedia.extraction.destinations.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
 import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{Map,HashSet,HashMap}
-import scala.io.{Source,Codec}
+import scala.io.Codec
 import java.util.Arrays.{sort,binarySearch}
 
 private class Title(val language: Language, val title: String)
@@ -191,30 +192,6 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       domainKeys(domain) = langCode
     }
   }
-  
-  private val zippers = Map[String, OutputStream => OutputStream] (
-    "gz" -> { new GZIPOutputStream(_) }, 
-    "bz2" -> { new BZip2CompressorOutputStream(_) } 
-  )
-  
-  private val unzippers = Map[String, InputStream => InputStream] (
-    "gz" -> { new GZIPInputStream(_) }, 
-    "bz2" -> { new BZip2CompressorInputStream(_) } 
-  )
-  
-  private def open[T](file: File, opener: File => T, wrappers: Map[String, T => T]): T = {
-    val name = file.getName
-    val suffix = name.substring(name.lastIndexOf('.') + 1)
-    wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
-  }
-  
-  private def output(file: File) = open(file, new FileOutputStream(_), zippers)
-  
-  private def input(file: File) = open(file, new FileInputStream(_), unzippers)
-  
-  private def write(file: File) = new OutputStreamWriter(output(file), Codec.UTF8)
-  
-  private def read(file: File) = new InputStreamReader(input(file), Codec.UTF8)
   
   /**
    * Find file in dump directories. Side effect: store date for given language in dates array
