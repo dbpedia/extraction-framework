@@ -8,21 +8,21 @@ import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.mutable.HashMap
 import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
 
-class MapSubjectUris {
+object MapSubjectUris {
   
   private def split(arg: String): Array[String] = { 
     arg.split(",").map(_.trim).filter(_.nonEmpty)
   }
   
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length == 5, 
+    require(args != null && args.length == 7, 
       "need at least seven args: " +
       "base dir, " +
       "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'interlanguage-links-same-as,interlanguage-links-see-also'), "+
-      "comma-separated names of input datasets (e.g. 'labels,short-abstracts,long-abstracts'),"+
+      "comma-separated names of input datasets (e.g. 'labels,short-abstracts,long-abstracts'), "+
       "result dataset name extension (e.g. '-en-uris'), "+
-      "triples file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2')," +
+      "triples file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
       "new URI domain (e.g. 'en.dbpedia.org', 'dbpedia.org'), " +
       "languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
@@ -43,7 +43,7 @@ class MapSubjectUris {
     val domain = "http://"+args(5)+"/"
     require(! domain.equals("http:///"), "no new domain")
     
-    val languages = ConfigUtils.languages(baseDir, args.drop(5))
+    val languages = ConfigUtils.languages(baseDir, args.drop(6))
     require(languages.nonEmpty, "no languages")
     
     for (language <- languages) {
