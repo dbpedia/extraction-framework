@@ -318,7 +318,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     val subj = (link >>> 32).toInt
     // get object from lower 32 bits
     val obj = (link & 0xFFFFFFFFL).toInt
-    writer.write("<"+uriPrefix+domain(subj)+uriPath+title(subj)+"> <"+predUri+"> <"+uriPrefix+domain(obj)+uriPath+title(obj)+">\n")
+    writer.write("<"+uriPrefix+domain(subj)+uriPath+title(subj)+"> <"+predUri+"> <"+uriPrefix+domain(obj)+uriPath+title(obj)+"> .\n")
   }
   
   /** get domain from upper 8 bits of uri. */
