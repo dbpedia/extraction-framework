@@ -1,6 +1,9 @@
 #!/bin/bash
 #Author: Dimitris Kontokostas (jimkont [at] gmail . com)
- 
+
+# Note: ProcessInterLanguageLinks.scala does pretty much the same thing as this script, 
+# but for many languages at once and probably faster (~20  minutes for ~100 languages).
+
 # This script works with directory structure produced by dump/Download.scala and reads the  
 #scripts directory, in case it is called from elsewhere
 CURRENTDIR=$( cd "$( dirname "$0" )" && pwd )
