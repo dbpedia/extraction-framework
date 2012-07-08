@@ -8,7 +8,7 @@ import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.mutable.HashMap
 import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
 
-class MapSubjectUri {
+class MapSubjectUris {
   
   private def split(arg: String): Array[String] = { 
     arg.split(",").map(_.trim).filter(_.nonEmpty)
