@@ -74,6 +74,14 @@
                             <!-- '-mapped' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-mapped.ttl.gz -->
                             <!-- ../run ProcessInterLanguageLinks /data/dbpedia/ interlanguage-links-mapped-nt.txt.gz -mapped .nt.gz en @mappings -->
                         </launcher>
+                        <launcher>
+                            <id>MapSubjectUris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.MapSubjectUris</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
                     </launchers>
                 </configuration>
 
