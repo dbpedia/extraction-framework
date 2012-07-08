@@ -6,7 +6,7 @@ import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputS
 import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectTriple}
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
 import org.dbpedia.extraction.util.RichFile.toRichFile
-import org.dbpedia.extraction.util.RichBufferedReader.toRichBufferedReader
+import org.dbpedia.extraction.util.RichReader.toRichReader
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
@@ -214,7 +214,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   private def write(file: File) = new OutputStreamWriter(output(file), Codec.UTF8)
   
-  private def read(file: File) = new BufferedReader(new InputStreamReader(input(file), Codec.UTF8))
+  private def read(file: File) = new InputStreamReader(input(file), Codec.UTF8)
   
   /**
    * Find file in dump directories. Side effect: store date for given language in dates array
@@ -519,7 +519,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     val readStart = System.nanoTime
     println("reading dump file "+dumpFile+" ...")
-    val reader = read(dumpFile)
+    val reader = new BufferedReader(read(dumpFile))
     try {
       var index = 0
       
