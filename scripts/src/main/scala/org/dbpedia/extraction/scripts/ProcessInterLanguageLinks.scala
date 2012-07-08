@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
-import java.util.zip.{GZIPInputStream,GZIPOutputStream}
-import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
+import java.io.{File,Writer,BufferedReader}
 import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectTriple}
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
 import org.dbpedia.extraction.util.RichFile.toRichFile
@@ -16,8 +14,6 @@ import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{Map,HashSet,HashMap}
 import scala.io.Codec
 import java.util.Arrays.{sort,binarySearch}
-
-private class Title(val language: Language, val title: String)
 
 object ProcessInterLanguageLinks {
   
@@ -61,7 +57,7 @@ object ProcessInterLanguageLinks {
   
   def main(args: Array[String]) {
     
-    require(args != null && (args.length == 4 || args.length >= 6), "need at least four args: base dir, dump file (relative to base dir, use '-' to disable), dataset name extension (e.g. '-chapters', use '' for empty string), triples file suffix; optional: generic domain language (use '-' to disable), link languages")
+    require(args != null && (args.length == 4 || args.length >= 6), "need at least four args: base dir, dump file (relative to base dir, use '-' to disable), result dataset name extension (e.g. '-chapters', use '-' for empty string), triples file suffix (e.g. '.nt.gz'); optional: generic domain language (e.g. 'en', use '-' to disable), link languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))
     
@@ -194,7 +190,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   }
   
   /**
-   * Find file in dump directories. Side effect: store date for given language in dates array
+   * Find file in dump directories. Side effect: store date for given language in dates array,
    * if not already set and auto is true.
    * @param part file name part, e.g. interlanguage-links-see-also-chapters
    */
