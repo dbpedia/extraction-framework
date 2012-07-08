@@ -94,7 +94,7 @@ sealed class UriTriple private[util](uris: Int) {
       index = skipSpace(line, index)
     }
     
-    if (line.charAt(index) != '.') return None
+    if (index == line.length || line.charAt(index) != '.') return None
     index = skipSpace(line, index + 1)
     if (index != line.length) return None
     Some(triple)
