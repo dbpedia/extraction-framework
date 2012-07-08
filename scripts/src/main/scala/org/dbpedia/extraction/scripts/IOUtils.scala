@@ -4,6 +4,7 @@ import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream
 import java.util.zip.{GZIPInputStream,GZIPOutputStream}
 import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader}
 import scala.io.Codec
+import org.dbpedia.extraction.util.RichReader.toRichReader
 
 /**
  * TODO: move this class to core, but modify the code such that there are no run-time dependencies
@@ -36,4 +37,13 @@ object IOUtils {
   
   def read(file: File) = new InputStreamReader(input(file), Codec.UTF8)
   
+  def readLines[U](file: File)(proc: String => U): Unit = {
+    val reader = read(file)
+    try {
+      for (line <- reader) {
+        proc(line)
+      }
+    }
+    finally reader.close()
+  }
 }

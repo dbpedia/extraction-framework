@@ -1,63 +1,30 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.{File,Writer,BufferedReader}
-import org.dbpedia.extraction.util.{Finder,Language,ConfigUtils,WikiInfo,ObjectTriple}
+import org.dbpedia.extraction.util.{Finder,Language,ObjectTriple,ConfigUtils}
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.RichReader.toRichReader
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
-import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{Map,HashSet,HashMap}
-import scala.io.Codec
 import java.util.Arrays.{sort,binarySearch}
 
 object ProcessInterLanguageLinks {
   
-  // TODO: copy & paste in org.dbpedia.extraction.dump.sql.Import, org.dbpedia.extraction.dump.download.Download, org.dbpedia.extraction.dump.extract.Config
-  private def getLanguages(baseDir: File, args: Array[String]): Array[Language] = {
-    
-    var keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
-        
-    var languages = SortedSet[Language]()(Language.wikiCodeOrdering)
-    
-    val ranges = new HashSet[(Int,Int)]
-  
-    for (key <- keys) key match {
-      case "@mappings" => languages ++= Namespace.mappings.keySet
-      case ConfigUtils.Range(from, to) => ranges += ConfigUtils.toRange(from, to)
-      case ConfigUtils.Language(language) => languages += Language(language)
-      case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
-    }
-    
-    // resolve page count ranges to languages
-    if (ranges.nonEmpty)
-    {
-      val listFile = new File(baseDir, WikiInfo.FileName)
-      
-      // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
-      // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
-      // these non-ASCII chars anyway, so we don't have to unescape them.
-      println("parsing "+listFile)
-      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
-      
-      // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
-      {
-        // ...add its language
-        languages += Language(wiki.language)
-      }
-    }
-    
-    languages.toArray
-  }
-  
   def main(args: Array[String]) {
     
-    require(args != null && (args.length == 4 || args.length >= 6), "need at least four args: base dir, dump file (relative to base dir, use '-' to disable), result dataset name extension (e.g. '-chapters', use '-' for empty string), triples file suffix (e.g. '.nt.gz'); optional: generic domain language (e.g. 'en', use '-' to disable), link languages or article count ranges (e.g. 'en,fr' or '10000-')")
+    require(args != null && (args.length == 4 || args.length >= 6), 
+      "need at least four args: " +
+      "base dir, " +
+      "dump file (relative to base dir, use '-' to disable), " +
+      "result dataset name extension (e.g. '-chapters', use '-' for empty string), " +
+      "triples file suffix (e.g. '.nt.gz'); " +
+      "optional: generic domain language (e.g. 'en', use '-' to disable), " +
+      "link languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))
     
@@ -82,7 +49,7 @@ object ProcessInterLanguageLinks {
       val generic = if (args(4) == "-") null else Language(args(4))
       
       // Use all remaining args as keys or comma or whitespace separated lists of keys
-      val languages = getLanguages(baseDir, args.drop(5))
+      val languages = ConfigUtils.languages(baseDir, args.drop(5))
       
       processor.setLanguages(languages, generic)
       processor.readTriples()
@@ -235,36 +202,32 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       val langStart = System.nanoTime
       var langLineCount = lineCount
       var langLinkCount = linkCount
-      val reader = read(file)
-      try {
-        for (line <- reader) {
-          line match {
-            case ObjectTriple(subjUri, predUri, objUri) => {
+      readLines(file) { line =>
+        line match {
+          case ObjectTriple(subjUri, predUri, objUri) => {
+            
+            val subj = parseUri(subjUri)
+            // subj is -1 if its domain was not recognized (generic vs specific?)
+            require (subj != -1 && subj >>> 24 == langCode, "subject has wrong language - expected "+wikiCode+", found "+(if (subj == -1) "none" else languages(subj >>> 24).wikiCode)+": "+line)
+            
+            require (predUri == interLinkUri, "wrong property - expected "+interLinkUri+", found "+predUri+": "+line)
+            
+            val obj = parseUri(objUri)
+            // obj is -1 if its language is not used in this run
+            if (obj != -1) {
+              // subject in high 32 bits, object in low 32 bits
+              val link = subj.toLong << 32 | obj.toLong
               
-              val subj = parseUri(subjUri)
-              // subj is -1 if its domain was not recognized (generic vs specific?)
-              require (subj != -1 && subj >>> 24 == langCode, "subject has wrong language - expected "+wikiCode+", found "+(if (subj == -1) "none" else languages(subj >>> 24).wikiCode)+": "+line)
-              
-              require (predUri == interLinkUri, "wrong property - expected "+interLinkUri+", found "+predUri+": "+line)
-              
-              val obj = parseUri(objUri)
-              // obj is -1 if its language is not used in this run
-              if (obj != -1) {
-                // subject in high 32 bits, object in low 32 bits
-                val link = subj.toLong << 32 | obj.toLong
-                
-                // Note: If there are more than 2^28 links, this will throw an ArrayIndexOutOfBoundsException                
-                links(linkCount) = link
-                linkCount += 1
-              }
+              // Note: If there are more than 2^28 links, this will throw an ArrayIndexOutOfBoundsException                
+              links(linkCount) = link
+              linkCount += 1
             }
-            case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
           }
-          lineCount += 1
-          if ((lineCount - langLineCount) % 1000000 == 0) logRead(wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
+          case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
         }
+        lineCount += 1
+        if ((lineCount - langLineCount) % 1000000 == 0) logRead(wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
       }
-      finally reader.close()
       logRead(wikiCode, lineCount - langLineCount, linkCount - langLinkCount, langStart)
       logRead("total", lineCount, linkCount, start)
     }

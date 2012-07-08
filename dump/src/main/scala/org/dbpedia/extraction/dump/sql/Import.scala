@@ -21,39 +21,8 @@ object Import {
     val server = args(2)
     val requireComplete = args(3).toBoolean
     
-    // TODO: next 30 lines copy & paste in InterLanguageLinks, Download, dump.extract.Config
-    
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    var keys = for(arg <- args.drop(4); key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
-        
-    var languages = SortedSet[Language]()(Language.wikiCodeOrdering)
-    
-    val ranges = new HashSet[(Int,Int)]
-  
-    for (key <- keys) key match {
-      case ConfigUtils.Range(from, to) => ranges += ConfigUtils.toRange(from, to)
-      case ConfigUtils.Language(language) => languages += Language(language)
-      case other => throw new Exception("Invalid language / range '"+other+"'")
-    }
-    
-    // resolve page count ranges to languages
-    if (ranges.nonEmpty)
-    {
-      val listFile = new File(baseDir, WikiInfo.FileName)
-      
-      // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
-      // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
-      // these non-ASCII chars anyway, so we don't have to unescape them.
-      println("parsing "+listFile)
-      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
-      
-      // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
-      {
-        // ...add its language
-        languages += Language(wiki.language)
-      }
-    }
+    var languages = ConfigUtils.languages(baseDir, args.drop(4))
     
     val source = Source.fromFile(tablesFile)(Codec.UTF8)
     val tables =
