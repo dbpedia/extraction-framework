@@ -121,7 +121,7 @@ class ConfigLoader(config: Config)
         var destination: Destination = new CompositeDestination(formats.toSeq: _*)
         destination = new MarkerDestination(destination, finder.file(date, Extraction.Complete), false)
         
-        val description = lang.wikiCode+" - "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
+        val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
         new ExtractionJob(new RootExtractor(extractor), context.articlesSource, destination, lang.wikiCode, description)
     }
     
