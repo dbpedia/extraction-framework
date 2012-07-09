@@ -122,7 +122,7 @@ class ConfigLoader(config: Config)
         destination = new MarkerDestination(destination, finder.file(date, Extraction.Complete), false)
         
         val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
-        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, destination, lang.wikiCode, description)
+        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description)
     }
     
     private def writer(file: File): () => Writer = {
