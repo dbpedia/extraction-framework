@@ -115,6 +115,7 @@ class MapSubjectUris(baseDir: File, language: Language, suffix: String) {
                 for (mapUri <- mapUris) {
                   // To change the subject URI, just drop everything up to the first '>'.
                   // Ugly, but simple and efficient.
+                  // Multiple calls to write() are slightly faster than building a new string.
                   writer.write('<')
                   writer.write(mapUri)
                   writer.write(line, index, line.length - index)
