@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Finder,ConfigUtils,ObjectTriple,Language}
+import org.dbpedia.extraction.util.{Finder,ConfigUtils,ObjectTriple,DatatypeTriple,Language}
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.RichReader.toRichReader
@@ -49,6 +49,7 @@ object MapSubjectUris {
     for (language <- languages) {
       val mapper = new MapSubjectUris(baseDir, language, suffix)
       mapper.readMaps(maps, domain)
+      mapper.mapInputs(inputs, extension)
     }
     
   }
@@ -88,21 +89,50 @@ class MapSubjectUris(baseDir: File, language: Language, suffix: String) {
           case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
         }
         lineCount += 1
-        if (lineCount % 2000000 == 0) logRead(language.wikiCode, lineCount, start)
+        if (lineCount % 1000000 == 0) logRead(language.wikiCode, lineCount, start)
       }
       logRead(language.wikiCode, lineCount, start)
       println(language.wikiCode+": found "+mapCount+" URI mappings")
     }
-    
-    val file = find("bla")
-    println("writing "+file+" ...")
-    val writer = write(file)
-    try {
-      for ((subjUri, objUri) <- uriMap) {
-        writer.write("<"+subjUri+"> <http://www.w3.org/2002/07/owl#sameAs> <"+objUri+"> .\n")
+  }
+  
+  def mapInputs(inputs: Array[String], extension: String): Unit = {
+    for (input <- inputs) {
+      val inFile = find(input)
+      val outFile = find(input+extension)
+      println(language.wikiCode+": reading "+inFile+" ...")
+      println(language.wikiCode+": writing "+outFile+" ...")
+      var lineCount = 0
+      var mapCount = 0
+      val start = System.nanoTime
+      val writer = write(outFile)
+      try {
+        readLines(inFile) { line =>
+          line match {
+            case DatatypeTriple(subjUri, predUri, value) => {
+              for (mapUris <- uriMap.get(subjUri)) {
+                val index = line.indexOf('>')
+                for (mapUri <- mapUris) {
+                  // To change the subject URI, just drop everything up to the first '>'.
+                  // Ugly, but simple and efficient.
+                  writer.write('<')
+                  writer.write(mapUri)
+                  writer.write(line, index, line.length - index)
+                  writer.write('\n')
+                  mapCount += 1
+                }
+              }
+            }
+            case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match datatype triple syntax: " + line)
+          }
+          lineCount += 1
+          if (lineCount % 1000000 == 0) logRead(language.wikiCode, lineCount, start)
+        }
       }
+      finally writer.close()
+      logRead(language.wikiCode, lineCount, start)
+      println(language.wikiCode+": found "+mapCount+" URI mappings")
     }
-    finally writer.close()
   }
   
   private def logRead(name: String, lines: Int, start: Long): Unit = {
