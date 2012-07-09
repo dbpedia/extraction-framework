@@ -1,11 +1,11 @@
 # copy (and re-compress) all .gz files to .bz2 files in background process, write log output to compress.log
-{ for file in $(find -name *.gz) ; do echo $file ; gzip -d <$file | bzip2 -c >${file/%.gz/.bz2} ; done } &>compress.log &
+{ for file in $(find -name '*.gz') ; do echo $file ; gzip -d <$file | bzip2 -c >${file/%.gz/.bz2} ; done } &>compress.log &
 
 # pbzip2 is much faster with multiple cores / CPUs
-{ for file in $(find -name *.gz) ; do echo $file ; gzip -d <$file | pbzip2 -c >${file/%.gz/.bz2} ; fi ; done } &>compress.log &
+{ for file in $(find -name '*.gz') ; do echo $file ; gzip -d <$file | pbzip2 -c >${file/%.gz/.bz2} ; fi ; done } &>compress.log &
 
 # Don't overwrite existing non-empty .bz2 files.
-{ for file in $(find -name *.gz) ; do copy=${file/%.gz/.bz2} ; if [[ ! -s $copy ]] ; then echo $file ; gzip -d <$file | pbzip2 -c >$copy ; fi ; done } &>compress.log &
+{ for file in $(find -name '*.gz') ; do copy=${file/%.gz/.bz2} ; if [[ ! -s $copy ]] ; then echo $file ; gzip -d <$file | pbzip2 -c >$copy ; fi ; done } &>compress.log &
 
 
 # sort a triples file by property (field 2)
