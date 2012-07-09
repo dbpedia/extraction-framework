@@ -8,7 +8,7 @@ import org.dbpedia.extraction.util.StringUtils
 /**
  * Keeps track of the extraction progress.
  */
-class ExtractionProgress(label: String)
+class ExtractionProgress(label: String, description: String)
 {
   private val logger = Logger.getLogger(getClass.getName)
 
@@ -29,7 +29,7 @@ class ExtractionProgress(label: String)
   
   def start() {
     startTime.set(System.currentTimeMillis)
-    logger.info(label + " started")
+    logger.info("started: "+description)
   }
   
   def countPage(success: Boolean) {
@@ -39,12 +39,12 @@ class ExtractionProgress(label: String)
   
   def end() {
     log()
-    logger.info(label + " finished")
+    logger.info("finished: "+description)
   }
   
   def log() {
     val time = (System.currentTimeMillis - startTime.get)
-    println(label+" extracted "+allPages.get+" pages in "+StringUtils.prettyMillis(time)+" (per page: " + (time.toDouble / allPages.get) + " ms; failed pages: "+failedPages.get+").")
+    println(label+": extracted "+allPages.get+" pages in "+StringUtils.prettyMillis(time)+" (per page: " + (time.toDouble / allPages.get) + " ms; failed pages: "+failedPages.get+").")
   }
   
 }
