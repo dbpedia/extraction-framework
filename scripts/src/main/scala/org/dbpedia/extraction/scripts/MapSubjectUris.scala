@@ -103,6 +103,8 @@ class MapSubjectUris(baseDir: File, language: Language, suffix: String) {
     val start = System.nanoTime
     val writer = write(outFile)
     try {
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
+      writer.write("# started "+formatCurrentTimestamp+"\n")
       readLines(inFile) { line =>
         line match {
           case DatatypeTriple(subjUri, predUri, value) => {
@@ -123,6 +125,8 @@ class MapSubjectUris(baseDir: File, language: Language, suffix: String) {
         lineCount += 1
         if (lineCount % 1000000 == 0) logRead(language.wikiCode, lineCount, start)
       }
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.header
+      writer.write("# completed "+formatCurrentTimestamp+"\n")
     }
     finally writer.close()
     logRead(language.wikiCode, lineCount, start)
