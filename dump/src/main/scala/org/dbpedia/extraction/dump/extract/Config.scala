@@ -38,9 +38,17 @@ extends ConfigParser(config)
 
   val extractorClasses = loadExtractorClasses()
   
+  val namespaces = loadNamespaces()
+  
   private def getFile(key: String): File = {
     val value = config.getProperty(key)
     if (value == null) null else new File(value)
+  }
+  
+  private def loadNamespaces(): Set[Namespace] = {
+    val names = splitValue("namespaces", ',')
+    if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
+    else names.map(name => Namespace(Language.English, name)).toSet
   }
   
   /**

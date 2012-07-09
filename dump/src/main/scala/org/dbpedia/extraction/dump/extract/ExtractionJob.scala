@@ -24,13 +24,15 @@ class ExtractionJob(extractor: RootExtractor, source: Source, destination: Desti
   private val parser = WikiParser()
 
   // Only extract from the following namespaces
-  private val namespaces = Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
+  private val namespaces = Set(Namespace.Category)
 
   private val workers = SimpleWorkers { page: WikiPage =>
     var success = false
     try {
-      val graph = extractor(parser(page))
-      destination.write(graph)
+      if (namespaces.contains(page.title.namespace)) {
+        val graph = extractor(parser(page))
+        destination.write(graph)
+      }
       success = true
     } catch {
       case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"'", ex)
@@ -46,12 +48,7 @@ class ExtractionJob(extractor: RootExtractor, source: Source, destination: Desti
 
     workers.start()
     
-    for (page <- source) {
-      // If we use XMLSource, we probably checked this already, but anyway...
-      if (namespaces.contains(page.title.namespace)) {
-        workers.process(page)
-      }
-    }
+    for (page <- source) workers.process(page)
     
     workers.stop()
     
