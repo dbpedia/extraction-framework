@@ -29,7 +29,7 @@ class ExtractionProgress(label: String, description: String)
   
   def start() {
     startTime.set(System.currentTimeMillis)
-    logger.info("started: "+description)
+    logger.info(description+" started")
   }
   
   def countPage(success: Boolean) {
@@ -39,7 +39,7 @@ class ExtractionProgress(label: String, description: String)
   
   def end() {
     log()
-    logger.info("finished: "+description)
+    logger.info(description+" finished")
   }
   
   def log() {
