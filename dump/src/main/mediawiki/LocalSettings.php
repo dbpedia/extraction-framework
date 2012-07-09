@@ -141,7 +141,6 @@ $wgResourceLoaderMaxQueryLength = -1;
 
 # Enabled Extensions. Most extensions are enabled by including the base extension file here
 # but check specific extension documentation for more details
-# The following extensions were automatically enabled:
 require_once( "$IP/extensions/Babel/Babel.php" );
 require_once( "$IP/extensions/CategoryTree/CategoryTree.php" );
 require_once( "$IP/extensions/CharInsert/CharInsert.php" );
@@ -160,7 +159,3 @@ require_once( "$IP/extensions/SyntaxHighlight_GeSHi/SyntaxHighlight_GeSHi.php" )
 require_once( "$IP/extensions/timeline/Timeline.php" );
 require_once( "$IP/extensions/wikihiero/wikihiero.php" );
 require_once( "$IP/DBpediaFunctions.php" );
-
-# End of automatically generated settings.
-# Add more configuration options below.
-
