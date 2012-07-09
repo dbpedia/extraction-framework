@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Finder,ConfigUtils,ObjectTriple}
+import org.dbpedia.extraction.util.{Finder,ConfigUtils,ObjectTriple,Language}
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.RichReader.toRichReader
 import org.dbpedia.extraction.scripts.IOUtils._
-import scala.collection.mutable.HashMap
+import scala.collection.mutable.{Map,Set,HashMap,HashSet}
 import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
 
 object MapSubjectUris {
@@ -47,30 +47,62 @@ object MapSubjectUris {
     require(languages.nonEmpty, "no languages")
     
     for (language <- languages) {
-      val finder = new Finder[File](baseDir, language)
-      
-      val uriMap = new HashMap[String, String]()
-      
-      for (map <- maps) {
-        val name = map + suffix
-        val file = finder.files(name).last
-        println(language.wikiCode+": reading "+file+" ...")
-        var lineCount = 0
-        val start = System.nanoTime
-        readLines(file) { line =>
-          line match {
-            case ObjectTriple(subjUri, predUri, objUri) => {
-              if (objUri.startsWith(domain)) uriMap(subjUri) = objUri
-            }
-            case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
-          }
-          lineCount += 1
-          if (lineCount % 1000000 == 0) logRead(language.wikiCode, lineCount, start)
-        }
-        logRead(language.wikiCode, lineCount, start)
-      }
+      val mapper = new MapSubjectUris(baseDir, language, suffix)
+      mapper.readMaps(maps, domain)
     }
     
+  }
+  
+}
+
+class MapSubjectUris(baseDir: File, language: Language, suffix: String) {
+  
+  private val finder = new Finder[File](baseDir, language)
+  
+  private var date: String = null
+  
+  private var uriMap: Map[String, Set[String]] = null
+  
+  private def find(part: String): File = {
+    val name = part + suffix
+    if (date == null) date = finder.dates(name).last
+    finder.file(date, name)
+  }
+      
+  def readMaps(maps: Array[String], domain: String): Unit = {
+    uriMap = new HashMap[String, Set[String]]()
+    for (map <- maps) {
+      val file = find(map)
+      println(language.wikiCode+": reading "+file+" ...")
+      var lineCount = 0
+      var mapCount = 0
+      val start = System.nanoTime
+      readLines(file) { line =>
+        line match {
+          case ObjectTriple(subjUri, predUri, objUri) => {
+            if (objUri.startsWith(domain)) {
+              uriMap.getOrElseUpdate(subjUri, new HashSet[String]()) += objUri
+              mapCount += 1
+            }
+          }
+          case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
+        }
+        lineCount += 1
+        if (lineCount % 2000000 == 0) logRead(language.wikiCode, lineCount, start)
+      }
+      logRead(language.wikiCode, lineCount, start)
+      println(language.wikiCode+": found "+mapCount+" URI mappings")
+    }
+    
+    val file = find("bla")
+    println("writing "+file+" ...")
+    val writer = write(file)
+    try {
+      for ((subjUri, objUri) <- uriMap) {
+        writer.write("<"+subjUri+"> <http://www.w3.org/2002/07/owl#sameAs> <"+objUri+"> .\n")
+      }
+    }
+    finally writer.close()
   }
   
   private def logRead(name: String, lines: Int, start: Long): Unit = {
