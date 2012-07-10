@@ -42,7 +42,7 @@ object MapSubjectUris {
     require(suffix.nonEmpty, "no file suffix")
     
     val domain = "http://"+args(5)+"/"
-    require(! domain.equals("http:///"), "no new domain")
+    require(domain != "http:///", "no new domain")
     
     val languages = parseLanguages(baseDir, args.drop(6))
     require(languages.nonEmpty, "no languages")
