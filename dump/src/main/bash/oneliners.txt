@@ -16,3 +16,8 @@ sort -s -k 2,2 enwiki-20120601-infobox-properties.ttl >enwiki-20120601-infobox-p
 # 29 is the length of the string '<http://dbpedia.org/property/'
 # 50 is an arbitrary cutoff to avoid overly long file names
 awk '{if ($1 != "#") { if ($2 != last) {last = $2; close(file); counter++; len = length($2) - 29; if (len > 50) len = 50; name = substr($2, 29, len); gsub(/\//, "", name); file = "split-by-property/" sprintf("%.6d", counter) "-" name ".ttl" } print >> file } }' enwiki-20120601-infobox-properties.sorted.ttl
+
+# delete all but the latest directory for each language and print how many GB were freed / kept
+# assumes that the shell sorts the result of */* alphabetically
+# run this script in base dir of all languages!
+du -B 1 -s */* | awk '{split($2, arr, "/"); if (arr[2] != "index.html") { if (name == arr[1]) { system("rm -fr " dir); print dir " <<< gone"; gone += size } else if (name != "") { print dir " <<< kept"; kept += size } name = arr[1]; size = $1; dir = $2 } } END {print dir " <<< kept"; print gone / 1024 / 1024 / 1024; print kept / 1024 / 1024 / 1024 }'
