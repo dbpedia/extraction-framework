@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.{File,Writer,BufferedReader}
-import org.dbpedia.extraction.util.{Finder,Language,ObjectTriple}
+import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
 import org.dbpedia.extraction.util.RichFile.toRichFile
@@ -217,15 +218,15 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       var langLinkCount = linkCount
       readLines(file) { line =>
         line match {
-          case ObjectTriple(subjUri, predUri, objUri) => {
+          case Quad(quad) if (quad.datatype == null) => {
             
-            val subj = parseUri(subjUri)
+            val subj = parseUri(quad.subject)
             // subj is -1 if its domain was not recognized (generic vs specific?)
             require (subj != -1 && subj >>> 24 == langCode, "subject has wrong language - expected "+wikiCode+", found "+(if (subj == -1) "none" else languages(subj >>> 24).wikiCode)+": "+line)
             
-            require (predUri == interLinkUri, "wrong property - expected "+interLinkUri+", found "+predUri+": "+line)
+            require (quad.predicate == interLinkUri, "wrong property - expected "+interLinkUri+", found "+quad.predicate+": "+line)
             
-            val obj = parseUri(objUri)
+            val obj = parseUri(quad.value)
             // obj is -1 if its language is not used in this run
             if (obj != -1) {
               // subject in high 32 bits, object in low 32 bits
