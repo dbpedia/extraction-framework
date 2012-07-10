@@ -109,7 +109,12 @@ object Quad
    * WARNING: there are several deviations from the N-Triples / Turtle specifications.
    * 
    * TODO: Clean up this code a bit. Fix the worst deviations from Turtle/N-Triples spec, 
-   * clearly document the others. Unescape \U stuff while parsing the line.
+   * clearly document the others. Unescape \U stuff while parsing the line?
+   * 
+   * TODO: Move this to its own TerseParser class, make it configurable:
+   * - N-Triples or Turtle syntax?
+   * - Unescape \U stuff or not?
+   * - triples or quads?
    */
   def unapply(line: String): Option[Quad] =  {
     val length = line.length
