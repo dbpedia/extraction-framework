@@ -19,12 +19,12 @@ object ProcessInterLanguageLinks {
     
     require(args != null && (args.length == 4 || args.length >= 6), 
       "need at least four args: " +
-      "base dir, " +
-      "dump file (relative to base dir, use '-' to disable), " +
-      "result dataset name extension (e.g. '-chapters', use '-' for empty string), " +
-      "triples file suffix (e.g. '.nt.gz'); " +
-      "optional: generic domain language (e.g. 'en', use '-' to disable), " +
-      "link languages or article count ranges (e.g. 'en,fr' or '10000-')")
+      /*0*/ "base dir, " +
+      /*1*/ "dump file (relative to base dir, use '-' to disable), " +
+      /*2*/ "result dataset name extension (e.g. '-chapters', use '-' for empty string), " +
+      /*3*/ "triples file suffix (e.g. '.nt.gz'); " +
+      /*4*/ "optional: generic domain language (e.g. 'en', use '-' to disable), " +
+      /*5*/ "link languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))
     
@@ -33,7 +33,7 @@ object ProcessInterLanguageLinks {
     val extension = if (args(2) == "-") "" else args(2)
     
     // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
-    // This script works with .ttl and .nt files that use IRIs or URIs.
+    // This script works with .ttl or .nt files, using IRIs or URIs.
     // WARNING: DOES NOT WORK WITH .nq OR .tql.
     val fileSuffix = args(3)
     
