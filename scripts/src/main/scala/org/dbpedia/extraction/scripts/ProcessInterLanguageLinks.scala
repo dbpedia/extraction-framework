@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.{File,Writer,BufferedReader}
-import org.dbpedia.extraction.util.{Finder,Language,ObjectTriple,ConfigUtils}
+import org.dbpedia.extraction.util.{Finder,Language,ObjectTriple}
+import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.RichReader.toRichReader
@@ -49,7 +50,7 @@ object ProcessInterLanguageLinks {
       val generic = if (args(4) == "-") null else Language(args(4))
       
       // Use all remaining args as keys or comma or whitespace separated lists of keys
-      val languages = ConfigUtils.languages(baseDir, args.drop(5))
+      val languages = parseLanguages(baseDir, args.drop(5))
       
       processor.setLanguages(languages, generic)
       processor.readTriples()

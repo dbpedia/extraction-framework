@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Finder,ConfigUtils,ObjectTriple,DatatypeTriple,Language}
+import org.dbpedia.extraction.util.{Finder,ObjectTriple,DatatypeTriple,Language}
+import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.RichReader.toRichReader
@@ -43,7 +44,7 @@ object MapSubjectUris {
     val domain = "http://"+args(5)+"/"
     require(! domain.equals("http:///"), "no new domain")
     
-    val languages = ConfigUtils.languages(baseDir, args.drop(6))
+    val languages = parseLanguages(baseDir, args.drop(6))
     require(languages.nonEmpty, "no languages")
     
     for (language <- languages) {
