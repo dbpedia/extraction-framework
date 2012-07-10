@@ -8,16 +8,6 @@ import Quad._
 /**
  * Represents a statement.
  * 
- * TODO: the order of the parameters is confusing. As in triples/quads, it should be
- * 
- * dataset
- * subject
- * predicate
- * value
- * language
- * datatype
- * context
- * 
  * @param language ISO code, may be null
  * @param dataset DBpedia dataset name, may be null
  * @param subject URI/IRI, must not be null
@@ -25,6 +15,16 @@ import Quad._
  * @param value URI/IRI or literal, must not be null
  * @param context URI/IRI, may be null
  * @param datatype may be null, which means that value is a URI/IRI
+ * 
+ * TODO: the order of the parameters is confusing. As in triples/quads, it should be
+ * 
+ * dataset
+ * subject
+ * predicate
+ * value
+ * datatype
+ * language
+ * context
  */
 class Quad(
   val language: String,
@@ -123,11 +123,13 @@ object Quad
     if (subject != null) index += subject.length + 2
     else return None
     
+    // TODO: N-Triples requires space here. Not sure about Turtle.
     index = skipSpace(line, index)
     val predicate = findUri(line, index)
     if (predicate != null) index += predicate.length + 2
     else return None
     
+    // TODO: N-Triples requires space here. Not sure about Turtle.
     index = skipSpace(line, index)
     var value = findUri(line, index)
     if (value != null) index += value.length + 2
