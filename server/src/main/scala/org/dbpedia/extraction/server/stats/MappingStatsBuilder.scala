@@ -6,7 +6,8 @@ import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.{WikiUtil,Language,ObjectTriple,DatatypeTriple}
+import org.dbpedia.extraction.util.{WikiUtil,Language}
+import org.dbpedia.extraction.destinations.Quad
 import scala.Serializable
 import scala.collection
 import scala.collection.mutable
@@ -73,10 +74,10 @@ extends MappingStatsConfig(statsDir, language)
       val redirects = new mutable.HashMap[String, String]()
       eachLine(file) {
         line => line.trim match {
-          case ObjectTriple(subj, pred, obj) => {
-            val templateName = cleanUri(subj)
+          case Quad(quad) if (quad.datatype == null) => {
+            val templateName = cleanUri(quad.subject)
             if (templateName.startsWith(templateNamespace)) {
-              redirects(templateName) = cleanUri(obj)
+              redirects(templateName) = cleanUri(quad.value)
             }
           }
           case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
@@ -109,9 +110,9 @@ extends MappingStatsConfig(statsDir, language)
         eachLine(file) {
             line => line.trim match {
                 // if there is a wikiPageUsesTemplate relation
-                case ObjectTriple(subj, pred, obj) => if (unescape(pred) contains "wikiPageUsesTemplate")
+                case Quad(quad) => if (quad.datatype == null && unescape(quad.predicate).contains("wikiPageUsesTemplate"))
                 {
-                    var templateName = cleanUri(obj)
+                    var templateName = cleanUri(quad.value)
                     
                     // resolve redirect for *object*
                     templateName = redirects.getOrElse(templateName, templateName)
@@ -120,7 +121,6 @@ extends MappingStatsConfig(statsDir, language)
                     // and increment templateCount
                     resultMap.getOrElseUpdate(templateName, new TemplateStatsBuilder).templateCount += 1
                 }
-                case DatatypeTriple(_,_,_) => // ignore
                 case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object or datatype triple syntax: " + line)
             }
         }
@@ -131,10 +131,10 @@ extends MappingStatsConfig(statsDir, language)
         // iterate through template parameters
         eachLine(file) {
             line => line.trim match {
-                case DatatypeTriple(subj, pred, obj) =>
+                case Quad(quad) if (quad.datatype != null) =>
                 {
-                    var templateName = cleanUri(subj)
-                    val propertyName = cleanValue(obj)
+                    var templateName = cleanUri(quad.subject)
+                    val propertyName = cleanValue(quad.value)
                     
                     // resolve redirect for *subject*
                     templateName = redirects.getOrElse(templateName, templateName)
@@ -157,9 +157,9 @@ extends MappingStatsConfig(statsDir, language)
         // iterate through infobox test
         eachLine(file) {
             line => line.trim match {
-                case DatatypeTriple(subj, pred, obj) => {
-                    var templateName = cleanUri(pred)
-                    val propertyName = cleanValue(obj)
+                case Quad(quad) if (quad.datatype != null) => {
+                    var templateName = cleanUri(quad.predicate)
+                    val propertyName = cleanValue(quad.value)
                     
                     // resolve redirect for template
                     templateName = redirects.getOrElse(templateName, templateName)

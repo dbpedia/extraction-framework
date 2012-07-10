@@ -1,11 +1,22 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.ontology.OntologyProperty
+import org.dbpedia.extraction.ontology.{OntologyProperty,OntologyType}
 import org.dbpedia.extraction.util.Language
+import Quad._
 
 /**
  * Represents a statement.
+ * 
+ * TODO: the order of the parameters is confusing. As in triples/quads, it should be
+ * 
+ * dataset
+ * subject
+ * predicate
+ * value
+ * language
+ * datatype
+ * context
  */
 class Quad(
   val language: String,
@@ -18,13 +29,13 @@ class Quad(
 )
 {
   def this(
-    language : Language,
-    dataset : Dataset,
-    subject : String,
-    predicate : String,
-    value : String,
-    context : String,
-    datatype : Datatype
+    language: Language,
+    dataset: Dataset,
+    subject: String,
+    predicate: String,
+    value: String,
+    context: String,
+    datatype: Datatype
   ) = this(
       language.isoCode,
       dataset.name,
@@ -36,13 +47,13 @@ class Quad(
     )
 
   def this(
-    language : Language,
-    dataset : Dataset,
-    subject : String,
-    predicate : OntologyProperty,
-    value : String,
-    context : String,
-    datatype : Datatype = null
+    language: Language,
+    dataset: Dataset,
+    subject: String,
+    predicate: OntologyProperty,
+    value: String,
+    context: String,
+    datatype: Datatype = null
   ) = this(
       language,
       dataset,
@@ -50,24 +61,129 @@ class Quad(
       predicate.uri,
       value,
       context,
-      Quad.getType(datatype, predicate)
+      findType(datatype, predicate.range)
     )
 
   // Validate input
   if (subject == null) throw new NullPointerException("subject")
   if (predicate == null) throw new NullPointerException("predicate")
   if (value == null) throw new NullPointerException("value")
-  if (context == null) throw new NullPointerException("context")
 }
 
 object Quad
 {
-  private def getType(datatype : Datatype, predicate : OntologyProperty): Datatype =
+  private def findType(datatype: Datatype, range: OntologyType): Datatype =
   {
     if (datatype != null) datatype
-    else predicate.range match {
-      case datatype: Datatype => datatype
-      case _ => null
-    }
+    else if (range.isInstanceOf[Datatype]) range.asInstanceOf[Datatype]
+    else null
   }
+
+/**
+ * Matches a line containing three URIs. Usage example:
+ * 
+ * line.trim match {
+ *   case ObjectTriple(subj, pred, obj) => { ... }
+ * }
+ * 
+ * WARNING: there are several deviations from the N-Triples / Turtle specifications.
+ */
+ * 
+ * TODO: Clean up this code a bit. Fix the worst deviations from Turtle/N-Triples spec, 
+ * clearly document the others. Unescape \U stuff while parsing the line. Return Quad objects 
+ * instead of arrays. Throw exceptions instead of returning None.
+  /**
+   */
+  def unapply(line: String): Option[Quad] =  {
+    val length = line.length
+    var index = 0
+    
+    var language: String = null
+    var datatype: String = null
+    
+    index = skipSpace(line, index)
+    val subject = findUri(line, index)
+    if (subject != null) index += subject.length + 2
+    else return None
+    
+    index = skipSpace(line, index)
+    val predicate = findUri(line, index)
+    if (predicate != null) index += predicate.length + 2
+    else return None
+    
+    index = skipSpace(line, index)
+    var value = findUri(line, index)
+    if (value != null) index += value.length + 2
+    else { // literal
+      if (index == length || line.charAt(index) != '"') return None
+      index += 1 // skip "
+      if (index == length) return None
+      var start = index
+      while (line.charAt(index) != '"') {
+        if (line.charAt(index) == '\\') index += 1
+        index += 1
+        if (index >= length) return None
+      } 
+      value = line.substring(start, index)
+      index += 1 // skip "
+      if (index == length) return None
+      val ch = line.charAt(index)
+      if (ch == '@') {
+        // FIXME: This code matches: @[a-z][a-z0-9-]*
+        // NT spec says: '@' [a-z]+ ('-' [a-z0-9]+ )*
+        // Turtle spec says: "@" [a-zA-Z]+ ( "-" [a-zA-Z0-9]+ )*
+        index += 1 // skip @
+        start = index
+        if (index == length) return None
+        var c = line.charAt(index)
+        if (c < 'a' || c > 'z') return None
+        do {
+          index += 1 // skip last lang char
+          if (index == length) return None
+          c = line.charAt(index)
+        } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'))
+        language = line.substring(start, index)
+        datatype = "http://www.w3.org/2001/XMLSchema#string"
+      }
+      else if (ch == '^') { // type uri: ^^<...>
+        if (! line.startsWith("^^<", index)) return None
+        start = index + 3 // skip ^^<
+        index = line.indexOf('>', start)
+        if (index == -1) return None
+        datatype = line.substring(start, index)
+        index += 1 // skip '>'
+      } 
+      else if (ch != ' ' && ch != '.') {
+        return None
+      }
+    }
+    
+    index = skipSpace(line, index)
+    val context = findUri(line, index)
+    if (context != null) index += context.length + 2
+    
+    index = skipSpace(line, index)
+    if (index == length || line.charAt(index) != '.') return None
+    
+    index = skipSpace(line, index + 1)
+    if (index != length) return None
+    
+    Some(new Quad(language, null, subject, predicate, value, context, datatype))
+  }
+  
+  private def skipSpace(line: String, start: Int): Int = {
+    val length = line.length
+    var index = start
+    while (index < length && (line.charAt(index) == ' ' || line.charAt(index) == '\t')) {
+      index += 1 // skip space or tab
+    } 
+    index
+  }
+  
+  private def findUri(line: String, start: Int): String = {
+    if (start == line.length || line.charAt(start) != '<') return null
+    val end = line.indexOf('>', start + 1) // TODO: turtle allows escaping > as \>
+    if (end == -1) null else line.substring(start + 1, end)
+  }
+  
 }

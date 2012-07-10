@@ -59,7 +59,7 @@ extends UriTripleBuilder(policies) {
   
   private def escapeUri(str: String, pos: Int): TriXBuilder = {
     val uri = parseUri(str, pos)
-    // TODO: check if uri starts with badUri. If yes, wrap the whole triple in <!-- and --> 
+    // TODO: check if uri starts with BadUri. If yes, wrap the whole triple in <!-- and --> 
     // (but take care that we do it only once). But currently this class is only used during 
     // testing, so it's probably better to have these errors visible.
     escape(sb, uri)
