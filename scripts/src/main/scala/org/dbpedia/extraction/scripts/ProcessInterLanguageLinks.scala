@@ -98,7 +98,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   - at most ~16 million unique titles (2^24). There currently are ~9 million.
   
   If we use more languages and break these limits, we'll probably need to change the algorithm,
-  which won't be easy without letting the memory requirements explode.
+  which won't be easy without letting the memory requirements explode. See below.
   
   The current code throws ArrayIndexOutOfBoundsExceptions if there are more than 2^8 languages
   or more than 2^24 titles.
@@ -112,6 +112,14 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   Note: In the extremely unlikely case that there are exactly 2^8 languages and exactly 2^24 titles, 
   the 'last' URI will be coded as -1, but -1 is also used as the null value. Strange errors will occur.
+  
+  ==================================================================================================
+  
+  Possible data structure for up to 1024 (2^10) languages and ~130 million (2^27) unique titles:
+  
+  Each 'from' language has its own link array. Each link still takes 64 bits, but the top 27 bits 
+  are the 'from' title, the middle 10 bits are the 'to' language, and the bottom 27 bits are the 
+  'to' title. 
   
   */
   
@@ -188,6 +196,10 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     titleCount = 0
     
     // Enough space for ~270 million links. The languages with 10000+ articles have ~200 million links.
+    // TODO: either grow the array as needed, or use a list of arrays with e.g. 2^20 items each and
+    // create a new array when needed. The single growing array is simpler, but it means that while
+    // copying from the old to the new array we need twice the space. With the list of arrays, 
+    // there is no copying, but access is slower, and we have to re-implement sort and binary search.
     links = new Array[Long](1 << 28)
     linkCount = 0
     
