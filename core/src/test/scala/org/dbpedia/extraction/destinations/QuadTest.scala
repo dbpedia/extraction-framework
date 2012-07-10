@@ -42,9 +42,21 @@ object QuadTest {
     good("""<> <> < <>.""", "", "", " <", null, null, null) // unclosed value
     bad ("""<> <> <> <.""") // unclosed value
     good("""<s> <p> "v"@en--us <c>. """, "s", "p", "v", string, "en--us", "c") // multiple -- should not be allowed
+    good("""<s> <p> "v"@en- <c>. """, "s", "p", "v", string, "en-", "c") // trailing - should not be allowed
+    
+    // these should probably be good...
+    bad("""<s> <p> "v"@en-US <c>. """) // we don't allow uppercase in language tag
     
     bad("") // empty line
     bad("# <> <> <> .") // comment line
+    bad("""<""") // missing value
+    bad("""<> <""") // missing value
+    bad("""<> <> <""") // missing value
+    bad("""<> <> """") // missing value
+    bad("""<> <> <> <""") // missing value
+    bad("""<> <> "" <""") // missing value
+    bad("""<> <> <> <> <> .""") // too many values
+    bad("""<> <> "" <> <> .""") // too many values
     bad("""<> <> .""") // missing value
     bad("""<> "" .""") // missing predicate
     bad("""<> <> <>""") // missing dot
@@ -54,9 +66,13 @@ object QuadTest {
     bad("""<> <> " . """) // unclosed value
     bad("""<> <> < . """) // unclosed value
     bad("""<> <> "\\"" . """) // wrong escape sequence
+    bad("""<s> <p> "v"@""") // missing language tag
+    bad("""<s> <p> "v"@ . """) // missing language tag
+    bad("""<s> <p> "v"^^<""") // missing datatype
+    bad("""<s> <p> "v"^^< . """) // missing datatype
+    bad("""<s> <p> "v"^<t> . """) // broken datatype syntax
     bad("""<s> <p> "v"@l^^<t> <c>. """) // language and datatype must not both be present
     bad("""<s> <p> "v"^^<t>@l <c>. """) // language and datatype must not both be present
-    bad("""<s> <p> "v"@en-US <c>. """) // we don't allow uppercase in language tag
   }
   
   def good(line: String, subject: String, predicate: String, value: String, datatype: String, language: String, context: String): Unit = {
