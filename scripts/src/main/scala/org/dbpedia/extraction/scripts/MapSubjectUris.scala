@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Finder,ObjectTriple,DatatypeTriple,Language}
+import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.util.RichFile.toRichFile
