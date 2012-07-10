@@ -17,6 +17,14 @@ import Quad._
  * language
  * datatype
  * context
+ * 
+ * @param language ISO code, may be null
+ * @param dataset DBpedia dataset name, may be null
+ * @param subject URI/IRI, must not be null
+ * @param predicate URI/IRI, must not be null
+ * @param value URI/IRI or literal, must not be null
+ * @param context URI/IRI, may be null
+ * @param datatype may be null, which means that value is a URI/IRI
  */
 class Quad(
   val language: String,
@@ -68,6 +76,18 @@ class Quad(
   if (subject == null) throw new NullPointerException("subject")
   if (predicate == null) throw new NullPointerException("predicate")
   if (value == null) throw new NullPointerException("value")
+  
+  override def toString() = {
+   "Quad("+
+   "dataset="+dataset+","+
+   "subject="+subject+","+
+   "predicate="+predicate+","+
+   "value="+value+","+
+   "language="+language+","+
+   "datatype="+datatype+","+
+   "context="+context+
+   ")"
+  }
 }
 
 object Quad
@@ -79,20 +99,17 @@ object Quad
     else null
   }
 
-/**
- * Matches a line containing three URIs. Usage example:
- * 
- * line.trim match {
- *   case ObjectTriple(subj, pred, obj) => { ... }
- * }
- * 
- * WARNING: there are several deviations from the N-Triples / Turtle specifications.
- */
- * 
- * TODO: Clean up this code a bit. Fix the worst deviations from Turtle/N-Triples spec, 
- * clearly document the others. Unescape \U stuff while parsing the line. Return Quad objects 
- * instead of arrays. Throw exceptions instead of returning None.
   /**
+   * Matches a line containing a triple or quad. Usage example:
+   * 
+   * line.trim match {
+   *   case Quad(quad) => { ... }
+   * }
+   * 
+   * WARNING: there are several deviations from the N-Triples / Turtle specifications.
+   * 
+   * TODO: Clean up this code a bit. Fix the worst deviations from Turtle/N-Triples spec, 
+   * clearly document the others. Unescape \U stuff while parsing the line.
    */
   def unapply(line: String): Option[Quad] =  {
     val length = line.length
@@ -127,15 +144,16 @@ object Quad
       value = line.substring(start, index)
       index += 1 // skip "
       if (index == length) return None
-      val ch = line.charAt(index)
-      if (ch == '@') {
+      datatype = "http://www.w3.org/2001/XMLSchema#string" // set default type
+      var c = line.charAt(index)
+      if (c == '@') {
         // FIXME: This code matches: @[a-z][a-z0-9-]*
         // NT spec says: '@' [a-z]+ ('-' [a-z0-9]+ )*
         // Turtle spec says: "@" [a-zA-Z]+ ( "-" [a-zA-Z0-9]+ )*
         index += 1 // skip @
         start = index
         if (index == length) return None
-        var c = line.charAt(index)
+        c = line.charAt(index)
         if (c < 'a' || c > 'z') return None
         do {
           index += 1 // skip last lang char
@@ -143,9 +161,8 @@ object Quad
           c = line.charAt(index)
         } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'))
         language = line.substring(start, index)
-        datatype = "http://www.w3.org/2001/XMLSchema#string"
       }
-      else if (ch == '^') { // type uri: ^^<...>
+      else if (c == '^') { // type uri: ^^<...>
         if (! line.startsWith("^^<", index)) return None
         start = index + 3 // skip ^^<
         index = line.indexOf('>', start)
@@ -153,9 +170,6 @@ object Quad
         datatype = line.substring(start, index)
         index += 1 // skip '>'
       } 
-      else if (ch != ' ' && ch != '.') {
-        return None
-      }
     }
     
     index = skipSpace(line, index)
@@ -164,8 +178,9 @@ object Quad
     
     index = skipSpace(line, index)
     if (index == length || line.charAt(index) != '.') return None
+    index += 1 // skip .
     
-    index = skipSpace(line, index + 1)
+    index = skipSpace(line, index)
     if (index != length) return None
     
     Some(new Quad(language, null, subject, predicate, value, context, datatype))
@@ -174,8 +189,10 @@ object Quad
   private def skipSpace(line: String, start: Int): Int = {
     val length = line.length
     var index = start
-    while (index < length && (line.charAt(index) == ' ' || line.charAt(index) == '\t')) {
-      index += 1 // skip space or tab
+    while (index < length) {
+      val c = line.charAt(index)
+      if (c != ' ' && c != '\t') return index
+      index += 1
     } 
     index
   }
