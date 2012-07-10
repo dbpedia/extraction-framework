@@ -15,7 +15,7 @@ object ConfigUtils {
    * @return languages, sorted by language code
    */
   // TODO: copy & paste in org.dbpedia.extraction.dump.download.Download, org.dbpedia.extraction.dump.extract.Config
-  def languages(baseDir: File, args: Array[String]): Array[util.Language] = {
+  def parseLanguages(baseDir: File, args: Array[String]): Array[util.Language] = {
     
     var keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
         

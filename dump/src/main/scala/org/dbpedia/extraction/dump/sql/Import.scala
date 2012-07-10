@@ -2,7 +2,8 @@ package org.dbpedia.extraction.dump.sql
 
 import java.io.File
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.{Finder,Language,WikiInfo,ConfigUtils}
+import org.dbpedia.extraction.util.{Finder,Language,WikiInfo}
+import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.io.Codec
@@ -22,7 +23,7 @@ object Import {
     val requireComplete = args(3).toBoolean
     
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    var languages = ConfigUtils.languages(baseDir, args.drop(4))
+    var languages = parseLanguages(baseDir, args.drop(4))
     
     val source = Source.fromFile(tablesFile)(Codec.UTF8)
     val tables =
