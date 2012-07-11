@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -16,18 +16,21 @@ class RedirectExtractor (
 )
 extends Extractor
 {
+  private val language = context.language
+  
   private val wikiPageRedirectsProperty = context.ontology.properties("wikiPageRedirects")
 
   override val datasets = Set(DBpediaDatasets.Redirects)
+  
+  private val namespaces = Set(Namespace.Main, Namespace.Template, Namespace.Category)
+  
+  private val quad = QuadBuilder(language, DBpediaDatasets.Redirects, wikiPageRedirectsProperty, null) _
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
   {
-    if((page.title.namespace == Namespace.Main || page.title.namespace == Namespace.Template) && page.isRedirect)
-    {
-      for (InternalLinkNode(destination, _, _, _) <- page.children)
-      {
-        return Seq(new Quad(context.language, DBpediaDatasets.Redirects, subjectUri, wikiPageRedirectsProperty,
-            context.language.resourceUri.append(destination.decodedWithNamespace), page.sourceUri))
+    if (page.isRedirect && namespaces.contains(page.title.namespace)) {
+      for (InternalLinkNode(destination, _, _, _) <- page.children) {
+        return Seq(quad(subjectUri, language.resourceUri.append(destination.decodedWithNamespace), page.sourceUri))
       }
     }
 
