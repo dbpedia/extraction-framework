@@ -20,8 +20,8 @@ extends ConfigParser(config)
   // - allow multiple config files, given on command line
 
   /** Dump directory */
-  val dumpDir = getFile("dir")
-  if (dumpDir == null) throw error("property 'dir' not defined.")
+  val dumpDir = getFile("base-dir")
+  if (dumpDir == null) throw error("property 'base-dir' not defined.")
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
