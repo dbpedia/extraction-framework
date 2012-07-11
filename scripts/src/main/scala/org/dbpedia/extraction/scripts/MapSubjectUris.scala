@@ -58,7 +58,7 @@ object MapSubjectUris {
     
     for (language <- languages) {
       val mapper = new MapUris(baseDir, language, suffix)
-      for (map <- maps) mapper.readMap(map, (subjUri, predUri, objUri) => objUri.startsWith(domain))
+      for (map <- maps) mapper.readMap(map, (subj, pred, obj) => obj.startsWith(domain))
       for (input <- inputs) mapper.mapInput(input, input+extension, DISCARD_UNKNOWN, DONT_MAP)
     }
     
