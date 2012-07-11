@@ -1,17 +1,13 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.File
-import org.dbpedia.extraction.destinations.Quad
-import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
-import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.mutable.HashMap
-import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
+import java.io.File
 
 /**
- * Replace triples in a dataset by their transitive closure. All triples must use the same
- * property. Cycles are removed.
+ * Replace triples in a dataset by their transitive closure.
+ * All triples must use the same property. Cycles are removed.
  */
 object ResolveTransitiveLinks {
   
@@ -35,92 +31,47 @@ object ResolveTransitiveLinks {
     require(output != input, "output dataset name must different from input dataset name ")
     
     // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
-    // This script works with .ttl and .nt files that use IRIs or URIs.
-    // WARNING: DOES NOT WORK WITH .nq OR .tql.
-    val fileSuffix = args(3)
-    require(fileSuffix.nonEmpty, "no file suffix")
+    // This script works with .nt or .ttl files, using IRIs or URIs.
+    // Does NOT work with .nq or .tql files. (Preserving the context wouldn't make sense.)
+    val suffix = args(3)
+    require(suffix.nonEmpty, "no file suffix")
     
     // Use all remaining args as keys or comma or whitespace separated lists of keys
     val languages = parseLanguages(baseDir, args.drop(4))
     require(languages.nonEmpty, "no languages")
     
     for (language <- languages) {
-      val resolver = new ResolveTransitiveLinks(baseDir, language, fileSuffix)
-      resolver.readLinks(input)
-      resolver.resolveLinks()
-      resolver.writeLinks(output)
-    }
       
-  }
-
-}
-
-class ResolveTransitiveLinks(baseDir: File, language: Language, suffix: String) {
-
-  private val finder = new Finder[File](baseDir, language)
-  
-  private val uriMap = new HashMap[String, String]()
-  
-  private var date: String = null
-  
-  private var predicate: String = null
-  
-  private def find(part: String): File = {
-    val name = part + suffix
-    if (date == null) date = finder.dates(name).last
-    finder.file(date, name)
-  }
+      val map = new HashMap[String, String]()
       
-  /**
-   * @param map file name part, e.g. redirects
-   */
-  def readLinks(map: String): Unit = {
-    val file = find(map)
-    println(language.wikiCode+": reading "+file+" ...")
-    var lineCount = 0
-    var mapCount = 0
-    val start = System.nanoTime
-    readLines(file) { line =>
-      line match {
-        case Quad(quad) if (quad.datatype == null) => {
-          if (predicate == null) predicate = quad.predicate
-          else if (predicate != quad.predicate) throw new IllegalArgumentException("expected predicate "+predicate+", found "+quad.predicate+": "+line)
-          uriMap(quad.subject) = quad.value
-          mapCount += 1
+      var predicate: String = null
+      val reader = new QuadReader(baseDir, language, suffix)
+      reader.readQuads(input) { quad =>
+        if (quad.context != null) throw new IllegalArgumentException("expected triple, found quad: "+quad)
+        if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+        if (predicate == null) predicate = quad.predicate
+        else if (predicate != quad.predicate) throw new IllegalArgumentException("expected predicate "+predicate+", found "+quad.predicate+": "+quad)
+        map(quad.subject) = quad.value
+      }
+
+      println("resolving "+map.size+" links...")
+      val cycles = new TransitiveClosure(map).resolve()
+      println("found "+cycles.size+" cycles:")
+      for (cycle <- cycles.sortBy(- _.size)) {
+        println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
+      }
+      
+      val file = reader.find(output)
+      println(language.wikiCode+": writing "+file+" ...")
+      val writer = write(file)
+      try {
+        for ((subjUri, objUri) <- map) {
+          writer.write("<"+subjUri+"> <"+predicate+"> <"+objUri+"> .\n")
         }
-        case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: "+line)
       }
-      lineCount += 1
-      if (lineCount % 1000000 == 0) logRead(language.wikiCode, lineCount, start)
+      finally writer.close
     }
-    logRead(language.wikiCode, lineCount, start)
-    println(language.wikiCode+": found "+mapCount+" URI mappings")
+      
   }
-  
-  private def logRead(name: String, lines: Int, start: Long): Unit = {
-    val micros = (System.nanoTime - start) / 1000
-    println(name+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
-  }
-  
-  def resolveLinks(): Unit = {
-    println("resolving "+uriMap.size+" links...")
-    val cycles = new TransitiveClosure(uriMap).resolve()
-    println("found "+cycles.size+" cycles:")
-    for (cycle <- cycles.sortBy(- _.size)) {
-      println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
-    }
-  }
-  
-  def writeLinks(output: String): Unit = {
-    val file = find(output)
-    println(language.wikiCode+": writing "+file+" ...")
-    val writer = write(file)
-    try {
-      for ((subjUri, objUri) <- uriMap) {
-        writer.write("<"+subjUri+"> <"+predicate+"> <"+objUri+"> .\n")
-      }
-    }
-    finally writer.close
-  }
-  
+
 }
