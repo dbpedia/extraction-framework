@@ -13,7 +13,7 @@ import java.io.File
  *   - the predicate is ignored
  *   - literal values and quads without are copied
  * 
- * Usually, redirects should be resolved in the following datasets:
+ * Redirects SHOULD be resolved in the following datasets:
  * 
  * article-categories
  * disambiguations
@@ -24,6 +24,25 @@ import java.io.File
  * persondata
  * skos-categories
  * topical-concepts
+ * 
+ * The following datasets DO NOT have object URIs that can be redirected:
+ * 
+ * category-labels
+ * external-links
+ * flickr-wrappr-links
+ * geo-coordinates
+ * homepages
+ * images
+ * infobox-property-definitions
+ * infobox-test
+ * instance-types
+ * iri-same-as-uri
+ * labels
+ * 
+ * Maybe we should resolve redirects in interlanguage-links, but we would have to integrate
+ * redirect resolution into interlanguage link resolution. We're pretty strict when we generate
+ * interlanguage-links-same-as. If we resolve redirects in interlanguage-links, we would probably
+ * gain a few interlanguage-links (tenths of a percent), but we would not eliminate errors.
  */
 object MapObjectUris {
   
