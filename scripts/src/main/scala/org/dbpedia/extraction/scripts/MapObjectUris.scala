@@ -56,7 +56,7 @@ object MapObjectUris {
       "need at least six args: " +
       /*0*/ "base dir, " +
       /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'transitive-redirects'), "+
-      /*2*/ "comma-separated names of input datasets (e.g. 'infobox-properties'), "+
+      /*2*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), "+
       /*3*/ "result dataset name extension (e.g. '-redirected'), "+
       /*4*/ "triples file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
       /*5*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
