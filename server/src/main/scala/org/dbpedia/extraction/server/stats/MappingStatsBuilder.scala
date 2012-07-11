@@ -1,21 +1,12 @@
 package org.dbpedia.extraction.server.stats
 
+import java.io.{File,FileOutputStream,OutputStreamWriter}
 import java.util.logging.Logger
-import io.Source
-import java.lang.IllegalArgumentException
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.{WikiUtil,Language}
-import org.dbpedia.extraction.destinations.Quad
-import scala.Serializable
-import scala.collection
 import scala.collection.mutable
-import java.io._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
-import org.dbpedia.extraction.server.stats.CreateMappingStats._
-import java.net.{URLDecoder, URLEncoder}
+import scala.io.Source
+import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.util.{Language,WikiUtil}
 
 class MappingStatsBuilder(statsDir : File, language: Language, pretty: Boolean)
 extends MappingStatsConfig(statsDir, language)
