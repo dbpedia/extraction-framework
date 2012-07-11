@@ -39,7 +39,10 @@
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
+                            <!-- URIs and N-Triple escaping -->
                             <!-- ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-links.nt.bz2 freebase-datadump-quadruples.tsv.bz2 -->
+                            <!-- IRIs and Turtle escaping -->
+                            <!-- ../run CreateFreebaseLinks true true /data/dbpedia .ttl.gz freebase-links.nt.bz2 freebase-datadump-quadruples.tsv.bz2 -->
                         </launcher>
                         <launcher>
                             <id>ProcessInterLanguageLinks</id>
@@ -91,6 +94,15 @@
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
                             <!-- ../run ResolveTransitiveLinks /home/dbpedia redirects transitive-redirects .nt.gz 10000- -->
+                        </launcher>
+                        <launcher>
+                            <id>MapObjectUris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.MapSubjectUris</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                            <!-- ../run MapObjectUris /home/dbpedia transitive-redirects infobox-properties,mappingbased-properties,specific-mappingbased-properties,... -redirected .nt.gz 10000- -->
                         </launcher>
                     </launchers>
                 </configuration>
