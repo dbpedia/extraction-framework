@@ -19,9 +19,18 @@ class QuadMapper(reader: QuadReader) {
    * @param subjects
    * @param objects
    */
-  def mapQuads(input: String, output: String)(map: Quad => Traversable[Quad]): Unit = {
+  def mapQuads(input: String, output: String, required: Boolean = true)(map: Quad => Traversable[Quad]): Unit = {
+    val wikiCode = reader.language.wikiCode
+    
+    val inFile = reader.find(input)
+    if (! inFile.exists()) {
+      if (required) throw new IllegalArgumentException(wikiCode+": file "+inFile+" does not exist")
+      println(wikiCode+": WARNING - file "+inFile+" does not exist")
+      return
+    }
+
     val outFile = reader.find(output)
-    println(reader.language.wikiCode+": writing "+outFile+" ...")
+    println(wikiCode+": writing "+outFile+" ...")
     var mapCount = 0
     val writer = write(outFile)
     try {
@@ -50,7 +59,7 @@ class QuadMapper(reader: QuadReader) {
       writer.write("# completed "+formatCurrentTimestamp+"\n")
     }
     finally writer.close()
-    println(reader.language.wikiCode+": found "+mapCount+" URI mappings")
+    println(wikiCode+": found "+mapCount+" URI mappings")
   }
   
 }
