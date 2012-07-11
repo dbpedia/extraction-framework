@@ -9,27 +9,26 @@ import java.io.File
  * Maps old URIs in triple files to new URIs:
  * - read one or more triple files that contain the URI mapping:
  *   - the predicate is ignored
- *   - only triples whose object URI has a certain domain are used
- * - read one or more files that need their subject URI changed
+ * - read one or more files that need their object URI changed:
  *   - the predicate is ignored
+ *   - literal values and quads without are copied
  */
-object MapSubjectUris {
+object MapObjectUris {
   
-  private def split(arg: String): Array[String] = { 
+  private def split(arg: String): Array[String] = {
     arg.split(",").map(_.trim).filter(_.nonEmpty)
   }
   
   def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length == 7, 
-      "need at least seven args: " +
+    require(args != null && args.length == 6, 
+      "need at least six args: " +
       /*0*/ "base dir, " +
-      /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'interlanguage-links-same-as,interlanguage-links-see-also'), "+
-      /*2*/ "comma-separated names of input datasets (e.g. 'labels,short-abstracts,long-abstracts'), "+
-      /*3*/ "result dataset name extension (e.g. '-en-uris'), "+
+      /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'transitive-redirects'), "+
+      /*2*/ "comma-separated names of input datasets (e.g. 'infobox-properties'), "+
+      /*3*/ "result dataset name extension (e.g. '-redirected'), "+
       /*4*/ "triples file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-      /*5*/ "new URI domain (e.g. 'en.dbpedia.org', 'dbpedia.org'), " +
-      /*6*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
+      /*5*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))
     
@@ -42,13 +41,13 @@ object MapSubjectUris {
     val extension = args(3)
     require(extension.nonEmpty, "no result name extension")
     
+    // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
+    // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
     val suffix = args(4)
     require(suffix.nonEmpty, "no file suffix")
     
-    val domain = "http://"+args(5)+"/"
-    require(domain != "http:///", "no new domain")
-    
-    val languages = parseLanguages(baseDir, args.drop(6))
+    // Use all remaining args as keys or comma or whitespace separated lists of keys
+    val languages = parseLanguages(baseDir, args.drop(5))
     require(languages.nonEmpty, "no languages")
     
     for (language <- languages) {
@@ -60,10 +59,8 @@ object MapSubjectUris {
         var count = 0
         reader.readQuads(mappping) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
-          if (quad.value.startsWith(domain)) {
-            map(quad.subject) = quad.value
-            count += 1
-          }
+          map(quad.subject) = quad.value
+          count += 1
         }
         println("found "+count+" mappings")
       }
@@ -71,9 +68,10 @@ object MapSubjectUris {
       val mapper = new QuadMapper(reader)
       for (input <- inputs) {
         mapper.mapQuads(input, input + extension) { quad =>
-          map.get(quad.subject) match {
-            case Some(uri) => Some(quad.copy(subject = uri)) // change subject URI
-            case None => None // no mapping for this subject URI - discard the quad
+          if (quad.datatype == null) Some(quad) // just copy quad with literal values
+          else map.get(quad.value) match {
+            case Some(uri) => Some(quad.copy(value = uri)) // change object URI
+            case None => Some(quad) // just copy quad without mapping for object URI
           }
         }
       }
