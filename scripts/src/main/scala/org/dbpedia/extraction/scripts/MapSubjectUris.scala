@@ -28,7 +28,7 @@ object MapSubjectUris {
       /*2*/ "comma-separated names of input datasets (e.g. 'labels,short-abstracts,long-abstracts'), "+
       /*3*/ "result dataset name extension (e.g. '-en-uris'), "+
       /*4*/ "triples file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-      /*5*/ "new URI domain (e.g. 'en.dbpedia.org', 'dbpedia.org'), " +
+      /*5*/ "new URI domain (e.g. 'en.dbpedia.org' or 'dbpedia.org'), " +
       /*6*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))
@@ -42,6 +42,8 @@ object MapSubjectUris {
     val extension = args(3)
     require(extension.nonEmpty, "no result name extension")
     
+    // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
+    // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
     val suffix = args(4)
     require(suffix.nonEmpty, "no file suffix")
     
