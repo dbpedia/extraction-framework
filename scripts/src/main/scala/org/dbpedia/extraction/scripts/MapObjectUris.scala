@@ -12,6 +12,18 @@ import java.io.File
  * - read one or more files that need their object URI changed:
  *   - the predicate is ignored
  *   - literal values and quads without are copied
+ * 
+ * Usually, redirects should be resolved in the following datasets:
+ * 
+ * article-categories
+ * disambiguations
+ * infobox-properties
+ * mappingbased-properties
+ * specific-mappingbased-properties
+ * page-links
+ * persondata
+ * skos-categories
+ * topical-concepts
  */
 object MapObjectUris {
   
@@ -67,7 +79,7 @@ object MapObjectUris {
       
       val mapper = new QuadMapper(reader)
       for (input <- inputs) {
-        mapper.mapQuads(input, input + extension) { quad =>
+        mapper.mapQuads(input, input + extension, required = false) { quad =>
           if (quad.datatype == null) Some(quad) // just copy quad with literal values
           else map.get(quad.value) match {
             case Some(uri) => Some(quad.copy(value = uri)) // change object URI
