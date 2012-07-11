@@ -6,7 +6,7 @@ import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.scripts.IOUtils._
-import scala.collection.mutable.{Map,HashMap,Set,HashSet,ArrayBuffer}
+import scala.collection.mutable.HashMap
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 
 /**
@@ -32,6 +32,7 @@ object ResolveTransitiveLinks {
     
     val output = args(2)
     require(output.nonEmpty, "no output dataset name")
+    require(output != input, "output dataset name must different from input dataset name ")
     
     // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .ttl and .nt files that use IRIs or URIs.
@@ -44,6 +45,10 @@ object ResolveTransitiveLinks {
     require(languages.nonEmpty, "no languages")
     
     for (language <- languages) {
+      val resolver = new ResolveTransitiveLinks(baseDir, language, fileSuffix)
+      resolver.readLinks(input)
+      resolver.resolveLinks()
+      resolver.writeLinks(input)
     }
       
   }
@@ -54,9 +59,11 @@ class ResolveTransitiveLinks(baseDir: File, language: Language, suffix: String) 
 
   private val finder = new Finder[File](baseDir, language)
   
+  private val uriMap = new HashMap[String, String]()
+  
   private var date: String = null
   
-  private val uriMap = new HashMap[String, String]()
+  private var predicate: String = null
   
   private def find(part: String): File = {
     val name = part + suffix
@@ -67,13 +74,12 @@ class ResolveTransitiveLinks(baseDir: File, language: Language, suffix: String) 
   /**
    * @param map file name part, e.g. redirects
    */
-  def readMap(map: String): Unit = {
+  def readLinks(map: String): Unit = {
     val file = find(map)
     println(language.wikiCode+": reading "+file+" ...")
     var lineCount = 0
     var mapCount = 0
     val start = System.nanoTime
-    var predicate: String = null
     readLines(file) { line =>
       line match {
         case Quad(quad) if (quad.datatype == null) => {
@@ -96,16 +102,23 @@ class ResolveTransitiveLinks(baseDir: File, language: Language, suffix: String) 
     println(name+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
-  def resolve(): Unit = {
+  def resolveLinks(): Unit = {
+    println("resolving "+uriMap.size+" links...")
+    val cycles = new TransitiveClosure(uriMap).resolve()
+    println("found "+cycles.size+" cycles:")
+    for (cycle <- cycles.sortBy(- _.size)) {
+      println("length "+cycle.size+": "+cycle.mkString("->"))
+    }
   }
   
-  def writeTriples(output: String): Unit = {
+  def writeLinks(output: String): Unit = {
     val file = finder.file(date, output)
     println(language.wikiCode+": writing "+file+" ...")
     val writer = write(file)
-    try
-    {
-      
+    try {
+      for ((subjUri, objUri) <- uriMap) {
+        writer.write("<"+subjUri+"> <"+predicate+"> <"+objUri+"> .\n")
+      }
     }
     finally writer.close
   }
