@@ -16,6 +16,8 @@ class DownloadConfig
   
   val ranges = new HashMap[(Int,Int), Set[String]]
   
+  var dumpRange = (1,1)
+  
   var retryMax = 0
   
   var retryMillis = 10000
@@ -48,6 +50,7 @@ class DownloadConfig
       case Ignored(_) => // ignore
       case Arg("base-url", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
       case Arg("base-dir", path) => baseDir = resolveFile(dir, path)
+      case Arg("download-dumps", range) => dumpRange = parseDumpRange(range, arg)
       case Arg("retry-max", count) => retryMax = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-millis", millis) => retryMillis = toInt(millis, 0, Int.MaxValue, arg)
       case Arg("unzip", bool) => unzip = toBoolean(bool, arg)
@@ -78,6 +81,25 @@ class DownloadConfig
     ConfigUtils.toRange(from, to)
   }
   catch { case nfe: NumberFormatException => throw Usage("invalid range", arg, nfe) }
+  
+  private val DumpRange = """(\d*)(?:-(\d*))?""".r
+  
+  private def parseDumpRange(range: String, arg: String): (Int, Int) = {
+    range match {
+      case DumpRange(from, to) =>
+        try {
+          // "" and "-" are invalid
+          if (from.isEmpty && (to == null || to.isEmpty)) throw new NumberFormatException
+          // "-to" means "min-to"
+          var lo = if (from.isEmpty) 1 else toInt(from, 1, Int.MaxValue, arg)
+          // "from" means "from-from", "from-" means "from-max"
+          var hi = if (to == null) lo else if (to.isEmpty) Int.MaxValue else toInt(to, lo, Int.MaxValue, arg)
+          (lo, hi)
+        }
+        catch { case nfe: NumberFormatException => throw Usage("invalid range", arg, nfe) }
+      case _ => throw Usage("invalid range", arg)
+    }
+  }
   
   private def toInt(str: String, min: Int, max: Int, arg: String): Int =
   try {

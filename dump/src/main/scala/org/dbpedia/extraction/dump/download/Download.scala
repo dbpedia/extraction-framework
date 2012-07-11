@@ -24,22 +24,22 @@ object Download extends DownloadConfig
     if (languages.isEmpty && ranges.isEmpty) throw Usage("No files to download")
     if (! baseDir.exists && ! baseDir.mkdir) throw Usage("Target directory '"+baseDir+"' does not exist and cannot be created")
     
-    class Decorator extends FileDownloader with Counter with LastModified with Retry {
+    class Downloader extends FileDownloader with Counter with LastModified with Retry {
       val progressStep = 1L << 21 // 2M
       val progressPretty = Download.this.progressPretty
       val retryMax = Download.this.retryMax
       val retryMillis = Download.this.retryMillis
     }
     
-    val download = 
-      if (unzip) new Decorator with Unzip 
-      else new Decorator 
+    val downloader = 
+      if (unzip) new Downloader with Unzip 
+      else new Downloader 
     
     // resolve page count ranges to languages
     if (ranges.nonEmpty)
     {
       val listFile = new File(baseDir, WikiInfo.FileName)
-      download.downloadFile(WikiInfo.URL, listFile)
+      downloader.downloadFile(WikiInfo.URL, listFile)
       
       // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
       // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
@@ -55,7 +55,7 @@ object Download extends DownloadConfig
       }
     }
     
-    new DumpDownload(baseUrl, baseDir, download).downloadFiles(languages)
+    new DumpDownload(baseUrl, baseDir, dumpRange, downloader).downloadFiles(languages)
   }
   
 }
