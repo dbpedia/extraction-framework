@@ -6,12 +6,12 @@ import scala.collection.mutable.HashMap
 import java.io.File
 
 /**
- * Maps old URIs in triple files to new URIs:
+ * Maps old object URIs in triple files to new object URIs:
  * - read one or more triple files that contain the URI mapping:
  *   - the predicate is ignored
  * - read one or more files that need their object URI changed:
  *   - the predicate is ignored
- *   - literal values and quads without are copied
+ *   - literal values and quads without mapping for object URI are copied unchanged
  * 
  * Redirects SHOULD be resolved in the following datasets:
  * 
