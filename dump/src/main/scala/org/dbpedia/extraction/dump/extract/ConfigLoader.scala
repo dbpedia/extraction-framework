@@ -4,17 +4,16 @@ import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
-import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser,WikiTitle}
+import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser}
 import org.dbpedia.extraction.dump.download.Download
-import org.dbpedia.extraction.util.{Language,Finder,ConfigUtils}
+import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
-import java.util.Properties
 import java.io._
-import java.nio.charset.Charset
 import java.net.URL
 import org.apache.commons.compress.compressors.bzip2._
 import java.util.zip._
+import scala.io.Codec.UTF8
 
 /**
  * Loads the dump extraction configuration.
@@ -24,8 +23,6 @@ import java.util.zip._
  */
 class ConfigLoader(config: Config)
 {
-     private val Utf8 = Charset.forName("UTF-8")
-        
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
      *
@@ -127,12 +124,12 @@ class ConfigLoader(config: Config)
     
     private def writer(file: File): () => Writer = {
       val zip = zipper(file.getName)
-      () => new OutputStreamWriter(zip(new FileOutputStream(file)), Utf8)
+      () => new OutputStreamWriter(zip(new FileOutputStream(file)), UTF8)
     }
 
     private def reader(file: File): () => Reader = {
       val unzip = unzipper(file.getName)
-      () => new InputStreamReader(unzip(new FileInputStream(file)), Utf8)
+      () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8)
     }
 
     /**
