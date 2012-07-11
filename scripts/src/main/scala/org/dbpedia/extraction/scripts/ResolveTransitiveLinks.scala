@@ -48,7 +48,7 @@ object ResolveTransitiveLinks {
       val resolver = new ResolveTransitiveLinks(baseDir, language, fileSuffix)
       resolver.readLinks(input)
       resolver.resolveLinks()
-      resolver.writeLinks(input)
+      resolver.writeLinks(output)
     }
       
   }
@@ -107,12 +107,12 @@ class ResolveTransitiveLinks(baseDir: File, language: Language, suffix: String) 
     val cycles = new TransitiveClosure(uriMap).resolve()
     println("found "+cycles.size+" cycles:")
     for (cycle <- cycles.sortBy(- _.size)) {
-      println("length "+cycle.size+": "+cycle.mkString("->"))
+      println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
     }
   }
   
   def writeLinks(output: String): Unit = {
-    val file = finder.file(date, output)
+    val file = find(output)
     println(language.wikiCode+": writing "+file+" ...")
     val writer = write(file)
     try {
