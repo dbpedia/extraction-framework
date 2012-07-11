@@ -12,6 +12,7 @@ import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
 import CreateFreebaseLinks._
+import IOUtils._
 import java.util.regex.Matcher
 import java.lang.StringBuilder
 
@@ -66,22 +67,6 @@ object CreateFreebaseLinks
   
   private def unescapeKey(key: String): String = {
     key.replaceBy(KeyEscape.pattern, unescapeKey)
-  }
-  
-  private val zippers = Map[String, OutputStream => OutputStream] (
-    "gz" -> { new GZIPOutputStream(_) }, 
-    "bz2" -> { new BZip2CompressorOutputStream(_) } 
-  )
-  
-  private val unzippers = Map[String, InputStream => InputStream] (
-    "gz" -> { new GZIPInputStream(_) }, 
-    "bz2" -> { new BZip2CompressorInputStream(_) } 
-  )
-  
-  private def open[T](file: File, opener: File => T, wrappers: Map[String, T => T]): T = {
-    val name = file.getName
-    val suffix = name.substring(name.lastIndexOf('.') + 1)
-    wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
   }
   
   def main(args : Array[String]) {
@@ -163,42 +148,35 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
     println("Searching for Freebase links in "+inFile+"...")
     var lines = 0
     var links = 0
-    val out = open(outFile, new FileOutputStream(_), zippers)
+    val writer = write(outFile)
     try {
-      val writer = new OutputStreamWriter(out, "UTF-8")
-      
-      val in = open(inFile, new FileInputStream(_), unzippers)
-      try {
-        for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
-          line match {
-            case WikipediaKey(mid, key) => {
-              
-              val rdfKey = 
-              try recode(key)
-              catch {
-                case ex => {
-                  println("BAD LINE: ["+line+"]: "+ex)
-                  ""
-                }
-              }
-              
-              if (! mid.startsWith("/m/")) throw new IllegalArgumentException(line)
-              val rdfMid = "m."+mid.substring(3)
-              if (dbpedia.contains(rdfKey)) {
-                writer.write(Prefix+rdfKey+Infix+rdfMid+Suffix)
-                links += 1
+      readLines(inFile) { line =>
+        line match {
+          case WikipediaKey(mid, key) => {
+            
+            val rdfKey = 
+            try recode(key)
+            catch {
+              case ex => {
+                println("BAD LINE: ["+line+"]: "+ex)
+                ""
               }
             }
-            case _ => // ignore all other lines
+            
+            if (! mid.startsWith("/m/")) throw new IllegalArgumentException(line)
+            val rdfMid = "m."+mid.substring(3)
+            if (dbpedia.contains(rdfKey)) {
+              writer.write(Prefix+rdfKey+Infix+rdfMid+Suffix)
+              links += 1
+            }
           }
-          lines += 1
-          if (lines % 1000000 == 0) log(lines, links, start)
+          case _ => // ignore all other lines
         }
+        lines += 1
+        if (lines % 1000000 == 0) log(lines, links, start)
       }
-      finally in.close()
-      writer.close()
     }
-    finally out.close()
+    finally writer.close()
     log(lines, links, start)
   }
   
