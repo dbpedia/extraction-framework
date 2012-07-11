@@ -95,9 +95,10 @@ extends ConfigParser(config)
     
     var ranges = Set[(Int,Int)]()
   
-    // FIXME: copy & paste in DownloadConfig and Import
+    // FIXME: copy & paste in DownloadConfig and ConfigUtils
     
     for (key <- keys) key match {
+      case "@mappings" => languages ++= Namespace.mappings.keySet
       case ConfigUtils.Range(from, to) => ranges += ConfigUtils.toRange(from, to)
       case ConfigUtils.Language(language) => languages += Language(language)
       case other => throw new Exception("Invalid language / range '"+other+"'")
@@ -122,8 +123,6 @@ extends ConfigParser(config)
       }
     }
     
-    if (languages.isEmpty) languages = Namespace.mappings.keySet
-
     SortedSet[Language](languages.toSeq: _*)(Language.wikiCodeOrdering)
   }
 

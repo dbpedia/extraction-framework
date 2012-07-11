@@ -5,6 +5,7 @@ import java.net.{URL,MalformedURLException}
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.util.ConfigUtils
+import org.dbpedia.extraction.wikiparser.Namespace
 
 class DownloadConfig
 {
@@ -47,7 +48,7 @@ class DownloadConfig
     
     val DownloadFiles = new TwoListArg("download", ":", ",")
     
-    for(a <- args; arg = a.trim) arg match
+    for (a <- args; arg = a.trim) arg match
     {
       case Ignored(_) => // ignore
       case Arg("base-url", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
@@ -65,6 +66,8 @@ class DownloadConfig
       case DownloadFiles(keys, files) =>
         if (files.exists(_ isEmpty)) throw Usage("Invalid file name", arg)
         for (key <- keys) key match {
+          // FIXME: copy & paste in ConfigUtils and extract.Config
+          case "@mappings" => for (language <- Namespace.mappings.keySet) add(languages, language.wikiCode, files)
           case ConfigUtils.Range(from, to) => add(ranges, toRange(from, to, arg), files)
           case ConfigUtils.Language(language) => add(languages, language, files)
           case other => throw Usage("Invalid language / range '"+other+"'", arg)
