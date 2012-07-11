@@ -2,7 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.scripts.IOUtils._
-import scala.collection.mutable.HashMap
+import scala.collection.mutable.LinkedHashMap
 import java.io.File
 
 /**
@@ -42,7 +42,8 @@ object ResolveTransitiveLinks {
     
     for (language <- languages) {
       
-      val map = new HashMap[String, String]()
+      // use LinkedHashMap to preserve order
+      val map = new LinkedHashMap[String, String]()
       
       var predicate: String = null
       val reader = new QuadReader(baseDir, language, suffix)
