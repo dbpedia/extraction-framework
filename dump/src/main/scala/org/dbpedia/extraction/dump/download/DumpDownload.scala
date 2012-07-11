@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.download
 
-import scala.collection.mutable.{Set,Map,HashSet}
+import scala.collection.mutable.{Set,Map,HashMap}
 import scala.collection.immutable.SortedSet
 import java.net.{URL,URLConnection}
 import java.io.{File,InputStream,IOException}
@@ -14,10 +14,6 @@ import java.util.zip.GZIPInputStream
  */
 class DumpDownload(baseUrl: URL, baseDir: File, dateRange: (String, String), dumpCount: Int, downloader: Downloader)
 {
-  private val firstDate = dateRange._1
-  
-  private val lastDate = dateRange._2
-
   /**
    * @param files language code -> file names
    */
@@ -30,7 +26,7 @@ class DumpDownload(baseUrl: URL, baseDir: File, dateRange: (String, String), dum
       val todo = keys.from(key)
       println("done: "+done.size+" - "+done.mkString(","))
       println("todo: "+todo.size+" - "+keys.from(key).mkString(","))
-      new LanguageDownload(key, files(key)).downloadDates()
+      new LanguageDownload(key, files(key)).downloadDates(dateRange)
     }
   }
   
@@ -46,7 +42,10 @@ class DumpDownload(baseUrl: URL, baseDir: File, dateRange: (String, String), dum
     val mainDir = new File(baseDir, wiki)
     if (! mainDir.exists && ! mainDir.mkdirs) throw new Exception("Target directory ["+mainDir+"] does not exist and cannot be created")
     
-    def downloadDates(): Unit = {
+    def downloadDates(dateRange: (String, String)): Unit = {
+      
+      val firstDate = dateRange._1
+      val lastDate = dateRange._2
       
       val started = finder.file(Download.Started)
       if (! started.createNewFile) throw new Exception("Another process may be downloading files to ["+mainDir+"] - stop that process and remove ["+started+"]")
@@ -63,8 +62,8 @@ class DumpDownload(baseUrl: URL, baseDir: File, dateRange: (String, String), dum
         var count = 0
       
         // find date pages that have all files we want
-        for (date <- dates; count < dumpCount) {
-          if (downloadDate(date)) count += 1 
+        for (date <- dates) {
+          if (count < dumpCount && date >= firstDate && date <= lastDate && downloadDate(date)) count += 1 
         }
       
         if (count == 0) throw new Exception("found no date on "+mainPage+" in range "+firstDate+"-"+lastDate+" with files "+fileNames.mkString(","))
@@ -100,35 +99,25 @@ class DumpDownload(baseUrl: URL, baseDir: File, dateRange: (String, String), dum
       }
       
       // all the links we need
-      val links = fileNames.map("<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+_+"\">")
+      val links = new HashMap[String, String]()
+      for (fileName <- fileNames) links(fileName) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
       
       downloader.downloadTo(datePage, dateDir) // creates index.html
       forEachLine(new File(dateDir, "index.html")) { line => 
-        links.foreach(link => if (line contains link) links -= link)
+        links.foreach{ case (fileName, link) => if (line contains link) links -= fileName }
       }
       
       // did we find them all?
-      if (! links.isEmpty) {
-        println("date page '"+datePage+"' has no links to ["+links.mkString(",")+"]")
+      if (links.nonEmpty) {
+        println("date page '"+datePage+"' has no links to ["+links.keys.mkString(",")+"]")
         false
       }
       else {
-        val msg = "date page '"+datePage+"' has all files ["+fileNames.mkString(",")+"]"
-        if (date < firstDate) {
-          println(msg+", but we download only newer dumps")
-          false
-        }
-        else if (date > lastDate) {
-          println(msg+", but we download only older dumps")
-          false
-        }
-        else {
-          println(msg)
-          // download all files
-          for (url <- urls) downloader.downloadTo(url, dateDir)
-          complete.createNewFile
-          true
-        }
+        println("date page '"+datePage+"' has all files ["+fileNames.mkString(",")+"]")
+        // download all files
+        for (url <- urls) downloader.downloadTo(url, dateDir)
+        complete.createNewFile
+        true
       }
     }
     
