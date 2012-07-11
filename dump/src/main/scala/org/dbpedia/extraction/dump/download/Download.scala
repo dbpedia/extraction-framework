@@ -4,6 +4,7 @@ import java.io.File
 import scala.io.Codec
 import scala.collection.mutable.HashSet
 import org.dbpedia.extraction.util.WikiInfo
+import scala.collection.immutable.SortedSet
 
 object Download extends DownloadConfig
 {
@@ -55,7 +56,15 @@ object Download extends DownloadConfig
       }
     }
     
-    new DumpDownload(baseUrl, baseDir, dateRange, dumpCount, downloader).downloadFiles(languages)
+    // sort them to have reproducible behavior
+    val keys = SortedSet.empty[String] ++ languages.keys
+    keys.foreach { key => 
+      val done = keys.until(key)
+      val todo = keys.from(key)
+      println("done: "+done.size+" - "+done.mkString(","))
+      println("todo: "+todo.size+" - "+keys.from(key).mkString(","))
+      new LanguageDownloader(baseUrl, baseDir, key, languages(key), downloader).downloadDates(dateRange, dumpCount)
+    }
   }
   
 }
