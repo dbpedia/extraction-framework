@@ -68,11 +68,11 @@
                             
                             <!-- generate links for all DBpedia I18N chapters in nt format -->
                             <!-- '-chapters' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-chapters.ttl.gz -->
-                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia/ interlanguage-links-chapters-nt.txt.gz -chapters .nt.gz en cs,en,fr,de,el,it,ja,ko,pl,pt,ru,es -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-chapters-nt.txt.gz -chapters .nt.gz en cs,en,fr,de,el,it,ja,ko,pl,pt,ru,es -->
                             
                             <!-- generate links for all languages that have a namespace on mappings.dbpedia.org in nt format -->
                             <!-- '-mapped' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-mapped.ttl.gz -->
-                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia/ interlanguage-links-mapped-nt.txt.gz -mapped .nt.gz en @mappings -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-mapped-nt.txt.gz -mapped .nt.gz en @mappings -->
                         </launcher>
                         <launcher>
                             <id>MapSubjectUris</id>
@@ -81,6 +81,7 @@
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
+                            <!-- ../run MapSubjectUris /home/dbpedia interlanguage-links-same-as labels,short-abstracts,long-abstracts -en-uris .nt.gz dbpedia.org 10000- -->
                         </launcher>
                         <launcher>
                             <id>ResolveTransitiveLinks</id>
@@ -89,6 +90,7 @@
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
+                            <!-- ../run ResolveTransitiveLinks /home/dbpedia redirects transitive-redirects .nt.gz 10000- -->
                         </launcher>
                     </launchers>
                 </configuration>
