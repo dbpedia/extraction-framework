@@ -154,13 +154,14 @@ download-dates=20120530-20120610
 download-count=1
   Max number of dumps to download. Default is 1.
 download=en,zh-yue,1000-2000,...:file1,file2,...
-  Download given files for given languages from server. Each key is either a language code
-  or a range. In the latter case, languages with a matching number of articles will be used. 
+  Download given files for given languages from server. Each key is either '@mappings', a language 
+  code, or a range. In the latter case, languages with a matching number of articles will be used. 
   If the start of the range is omitted, 0 is used. If the end of the range is omitted, 
   infinity is used. For each language, a new sub-directory is created in the target directory.
   Each file is a file name like 'pages-articles.xml.bz2', to which a prefix like 
   'enwiki-20120307-' will be added. This argument can be used multiple times, for example 
-  'download=en:foo.xml download=de:bar.xml'
+  'download=en:foo.xml download=de:bar.xml'. '@mappings' means all languages that have a 
+   mapping namespace on http://mappings.dbpedia.org.
 retry-max=5
   Number of total attempts if the download of a file fails. Default is no retries.
 retry-millis=1000
