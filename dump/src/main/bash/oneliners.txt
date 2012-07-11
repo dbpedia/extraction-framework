@@ -20,4 +20,6 @@ awk '{if ($1 != "#") { if ($2 != last) {last = $2; close(file); counter++; len =
 # delete all but the latest directory for each language and print how many GB were freed / kept
 # assumes that the shell sorts the result of */* alphabetically
 # run this script in base dir of all languages!
+# WARNING: even if the latest directory for a language is empty or almost empty, all other directories 
+# for this language will be deleted! You probably don't want this. I sure didn't... :-(
 du -B 1 -s */* | awk '{split($2, arr, "/"); if (arr[2] != "index.html") { if (name == arr[1]) { system("rm -fr " dir); print dir " <<< gone"; gone += size } else if (name != "") { print dir " <<< kept"; kept += size } name = arr[1]; size = $1; dir = $2 } } END {print dir " <<< kept"; print gone / 1024 / 1024 / 1024; print kept / 1024 / 1024 / 1024 }'
