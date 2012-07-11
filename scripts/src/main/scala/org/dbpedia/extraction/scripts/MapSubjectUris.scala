@@ -8,6 +8,7 @@ import org.dbpedia.extraction.util.RichReader.toRichReader
 import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.mutable.{Map,Set,HashMap,MultiMap}
 import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
+import MapUris._
 
 /**
  * Maps old URIs in triple files to new URIs:
@@ -58,7 +59,7 @@ object MapSubjectUris {
     for (language <- languages) {
       val mapper = new MapUris(baseDir, language, suffix)
       for (map <- maps) mapper.readMap(map, (subjUri, predUri, objUri) => objUri.startsWith(domain))
-      for (input <- inputs) mapper.mapInput(input, extension)
+      for (input <- inputs) mapper.mapInput(input, input+extension, DISCARD_UNKNOWN, DONT_MAP)
     }
     
   }

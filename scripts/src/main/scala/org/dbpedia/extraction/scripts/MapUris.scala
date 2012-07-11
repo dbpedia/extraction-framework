@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Finder,Language}
+import org.dbpedia.extraction.util.{Finder,Language,StringPlusser}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.util.RichFile.toRichFile
@@ -9,6 +9,20 @@ import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.mutable.{Map,Set,HashMap,MultiMap}
 import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
 import org.dbpedia.extraction.destinations.Quad
+import java.lang.StringBuilder
+import MapUris._
+
+object MapUris {
+  
+  /** do not map URIs, just copy them */
+  val DONT_MAP = 0
+  
+  /** map URIs, just copy the ones that do not have a mapping */
+  val KEEP_UNKNOWN = 1
+  
+  /** map URIs, discard triples that do not have a mapping */
+  val DISCARD_UNKNOWN = 2
+}
 
 /**
  * Maps old URIs in triple files to new URIs:
@@ -57,9 +71,15 @@ class MapUris(baseDir: File, language: Language, suffix: String) {
     println(language.wikiCode+": found "+mapCount+" URI mappings")
   }
   
-  def mapInput(input: String, extension: String): Unit = {
+  /**
+   * @param input dataset name
+   * @param output dataset name
+   * @param subjectConf one of DONT_MAP, KEEP_UNKNOWN, DISCARD_UNKNOWN
+   * @param objectConf one of DONT_MAP, KEEP_UNKNOWN, DISCARD_UNKNOWN
+   */
+  def mapInput(input: String, output: String, subjects: Int, objects: Int): Unit = {
     val inFile = find(input)
-    val outFile = find(input+extension)
+    val outFile = find(output)
     println(language.wikiCode+": reading "+inFile+" ...")
     println(language.wikiCode+": writing "+outFile+" ...")
     var lineCount = 0
@@ -70,21 +90,30 @@ class MapUris(baseDir: File, language: Language, suffix: String) {
       // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
       writer.write("# started "+formatCurrentTimestamp+"\n")
       readLines(inFile) { line =>
-        line match {
-          case Quad(quad) if (quad.datatype != null) =>  {
-            for (mapUris <- uriMap.get(quad.subject); mapUri <- mapUris) {
-              // To change the subject URI, just drop everything up to the first '>'.
-              // Ugly, but simple and efficient.
-              // Multiple calls to write() are slightly faster than building a new string.
-              val index = line.indexOf('>')
-              writer.write('<')
-              writer.write(mapUri)
-              writer.write(line, index, line.length - index)
-              writer.write('\n')
+        line.trim match {
+          case Quad(quad) => {
+            val subjUris = getUris(quad.subject, subjects)
+            val objUris = if (quad.datatype == null) getUris(quad.value, objects) else List(null) // null won't be used
+            for (subjUri <- subjUris; objUri <- objUris) {
+              
+              val sb = new StringBuilder
+              sb append '<' append subjUri append "> <" append quad.predicate append "> "
+              if (quad.datatype == null) {
+                sb append '<' append objUri append "> "
+              }
+              else {
+                sb  append '"' append quad.value append '"'
+                if (quad.language != null) sb append '@' append quad.language append ' '
+                else if (quad.datatype != "http://www.w3.org/2001/XMLSchema#string") sb append "^^<" append quad.datatype append "> "
+              }
+              if (quad.context != null) sb append '<' append quad.context append "> "
+              sb append ".\n"
+              writer.write(sb.toString)
+              
               mapCount += 1
             }
           }
-          case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match datatype triple syntax: " + line)
+          case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match triple / quad syntax: " + line)
         }
         lineCount += 1
         if (lineCount % 1000000 == 0) logRead(language.wikiCode, lineCount, start)
@@ -95,6 +124,14 @@ class MapUris(baseDir: File, language: Language, suffix: String) {
     finally writer.close()
     logRead(language.wikiCode, lineCount, start)
     println(language.wikiCode+": found "+mapCount+" URI mappings")
+  }
+  
+  private def getUris(uri: String, conf: Int): Traversable[String] = {
+    if (conf == DONT_MAP) return List(uri)
+    val uris = uriMap.get(uri)
+    if (uris.isDefined) uris.get
+    else if (conf == KEEP_UNKNOWN) List(uri)
+    else List()
   }
   
   private def logRead(name: String, lines: Int, start: Long): Unit = {
