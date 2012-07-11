@@ -41,13 +41,13 @@ class DownloadConfig
    */
   def parse(dir: File, args: TraversableOnce[String]): Unit = {
     
-    val DumpFiles = new TwoListArg("dump", ":", ",")
+    val DownloadFiles = new TwoListArg("download", ":", ",")
     
     for(a <- args; arg = a.trim) arg match
     {
       case Ignored(_) => // ignore
-      case Arg("base", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
-      case Arg("dir", path) => baseDir = resolveFile(dir, path)
+      case Arg("base-url", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
+      case Arg("base-dir", path) => baseDir = resolveFile(dir, path)
       case Arg("retry-max", count) => retryMax = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-millis", millis) => retryMillis = toInt(millis, 0, Int.MaxValue, arg)
       case Arg("unzip", bool) => unzip = toBoolean(bool, arg)
@@ -56,7 +56,7 @@ class DownloadConfig
         val file = resolveFile(dir, path)
         if (! file.isFile) throw Usage("Invalid file "+file, arg)
         parse(file)
-      case DumpFiles(keys, files) =>
+      case DownloadFiles(keys, files) =>
         if (files.exists(_ isEmpty)) throw Usage("Invalid file name", arg)
         for (key <- keys) key match {
           case ConfigUtils.Range(from, to) => add(ranges, toRange(from, to, arg), files)
@@ -118,21 +118,18 @@ config=/example/path/file.cfg
   Path to exisiting UTF-8 text file whose lines contain arguments in the format given here.
   Absolute or relative path. File paths in that config file will be interpreted relative to
   the config file.
-base=http://dumps.wikimedia.org/
+base-url=http://dumps.wikimedia.org/
   Base URL of dump server. Required if dump files are given.
-dir=/example/path
+base-dir=/example/path
   Path to existing target directory. Required.
-dump=en,zh-yue,1000-2000,...:file1,file2,...
+download=en,zh-yue,1000-2000,...:file1,file2,...
   Download given files for given languages from server. Each key is either a language code
   or a range. In the latter case, languages with a matching number of articles will be used. 
   If the start of the range is omitted, 0 is used. If the end of the range is omitted, 
   infinity is used. For each language, a new sub-directory is created in the target directory.
   Each file is a file name like 'pages-articles.xml.bz2', to which a prefix like 
   'enwiki-20120307-' will be added. This argument can be used multiple times, for example 
-  'dump=en:foo.xml dump=de:bar.xml'
-other=http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/maintenance/tables.sql
-  URL of other file to download to the target directory. Optional. This argument can be used 
-  multiple times, for example 'other=http://a.b/c.de other=http://f.g/h.ij'
+  'download=en:foo.xml download=de:bar.xml'
 retry-max=5
   Number of total attempts if the download of a file fails. Default is no retries.
 retry-millis=1000
