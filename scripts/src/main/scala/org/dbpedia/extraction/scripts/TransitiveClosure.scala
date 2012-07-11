@@ -1,11 +1,13 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
+import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.scripts.IOUtils._
-import scala.collection.mutable.{Map,HashMap}
+import scala.collection.mutable.{Map,HashMap,Set,HashSet,ArrayBuffer}
+import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 
 /**
  * Replace triples in a dataset by their transitive closure. All triples must use the same
@@ -56,17 +58,45 @@ class TransitiveClosure(baseDir: File, language: Language, suffix: String) {
   
   private val uriMap = new HashMap[String, String]()
   
-  def readTriples(input: String): Unit = {
-    date = finder.dates(input).last
-    val file = finder.file(date, input)
-    println(language.wikiCode+": reading "+file+" ...")
-    readLines(file) { line =>
+  private def find(part: String): File = {
+    val name = part + suffix
+    if (date == null) date = finder.dates(name).last
+    finder.file(date, name)
+  }
       
+  /**
+   * @param map file name part, e.g. interlanguage-links-same-as
+   */
+  def readMap(map: String): Unit = {
+    val file = find(map)
+    println(language.wikiCode+": reading "+file+" ...")
+    var lineCount = 0
+    var mapCount = 0
+    val start = System.nanoTime
+    var predicate: String = null
+    readLines(file) { line =>
+      line match {
+        case Quad(quad) if (quad.datatype == null) => {
+          if (predicate == null) predicate = quad.predicate
+          else if (predicate != quad.predicate) throw new IllegalArgumentException("expected predicate "+predicate+", found "+quad.predicate+": "+line)
+          uriMap(quad.subject) = quad.value
+          mapCount += 1
+        }
+        case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: "+line)
+      }
+      lineCount += 1
+      if (lineCount % 1000000 == 0) logRead(language.wikiCode, lineCount, start)
     }
+    logRead(language.wikiCode, lineCount, start)
+    println(language.wikiCode+": found "+mapCount+" URI mappings")
+  }
+  
+  private def logRead(name: String, lines: Int, start: Long): Unit = {
+    val micros = (System.nanoTime - start) / 1000
+    println(name+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
   def resolve(): Unit = {
-    
   }
   
   def writeTriples(output: String): Unit = {
@@ -78,6 +108,64 @@ class TransitiveClosure(baseDir: File, language: Language, suffix: String) {
       
     }
     finally writer.close
+  }
+  
+}
+
+class Resolver(val graph: Map[String, String]) {
+  
+  /**
+   * stores all found cycles.
+   */
+  private val cycleList = new ArrayBuffer[Set[String]]()
+  
+  /**
+   * map from node to the cycle this node is part of
+   */
+  private val cycleMap = new HashMap[String, Set[String]]()
+  
+  def resolve(): Seq[Set[String]] = {
+    for (node <- graph.keys) resolve(node)
+    cycleList
+  }
+  
+  private def resolve(node: String): Unit = {
+    var current = node
+    val seen = new HashSet[String]()
+    while (true) {
+      graph.get(current) match {
+        case None => {
+          cycleMap.get(current) match {
+            // we found an old cycle. mark all seen nodes as cyclic.
+            case Some(cycle) => addCycle(seen, cycle)
+            // we found a target. resolve all seen nodes.
+            case None => for (key <- seen) graph(key) = current
+          }
+          return
+        }
+        case Some(next) => {
+          if (! seen.add(current)) {
+            // we found a new cycle. mark all seen nodes as cyclic.
+            addCycle(seen)
+            return
+          }
+          current = next
+        }
+      }
+    }
+  }
+  
+  private def addCycle(seen: Set[String], old: Set[String] = null): Unit = {
+    var cycle = old 
+    if (cycle == null) {
+      cycle = new HashSet[String]()
+      cycleList += cycle
+    }
+    cycle ++= seen
+    for (node <- seen) {
+      cycleMap(node) = cycle
+      graph.remove(node)
+    }
   }
   
 }
