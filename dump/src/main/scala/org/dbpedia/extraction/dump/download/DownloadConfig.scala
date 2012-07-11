@@ -16,7 +16,9 @@ class DownloadConfig
   
   val ranges = new HashMap[(Int,Int), Set[String]]
   
-  var dumpRange = (1,1)
+  var dateRange = ("00000000","99999999")
+  
+  var dumpCount = 1
   
   var retryMax = 0
   
@@ -50,7 +52,8 @@ class DownloadConfig
       case Ignored(_) => // ignore
       case Arg("base-url", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
       case Arg("base-dir", path) => baseDir = resolveFile(dir, path)
-      case Arg("download-dumps", range) => dumpRange = parseDumpRange(range, arg)
+      case Arg("download-dates", range) => dateRange = parseDateRange(range, arg)
+      case Arg("download-count", count) => dumpCount = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-max", count) => retryMax = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-millis", millis) => retryMillis = toInt(millis, 0, Int.MaxValue, arg)
       case Arg("unzip", bool) => unzip = toBoolean(bool, arg)
@@ -82,22 +85,20 @@ class DownloadConfig
   }
   catch { case nfe: NumberFormatException => throw Usage("invalid range", arg, nfe) }
   
-  private val DumpRange = """(\d*)(?:-(\d*))?""".r
+  private val DateRange = """(\d{8})?(?:-(\d{8})?)?""".r
   
-  private def parseDumpRange(range: String, arg: String): (Int, Int) = {
+  private def parseDateRange(range: String, arg: String): (String, String) = {
     range match {
-      case DumpRange(from, to) =>
-        try {
-          // "" and "-" are invalid
-          if (from.isEmpty && (to == null || to.isEmpty)) throw new NumberFormatException
-          // "-to" means "min-to"
-          var lo = if (from.isEmpty) 1 else toInt(from, 1, Int.MaxValue, arg)
-          // "from" means "from-from", "from-" means "from-max"
-          var hi = if (to == null) lo else if (to.isEmpty) Int.MaxValue else toInt(to, lo, Int.MaxValue, arg)
-          (lo, hi)
-        }
-        catch { case nfe: NumberFormatException => throw Usage("invalid range", arg, nfe) }
-      case _ => throw Usage("invalid range", arg)
+      case DateRange(from, to) =>
+        // "" and "-" are invalid
+        if (from.isEmpty && (to == null || to.isEmpty)) throw Usage("invalid date range", arg)
+        // "-to" means "min-to"
+        var lo = if (from.isEmpty) "00000000" else from
+        // "from" means "from-from", "from-" means "from-max"
+        var hi = if (to == null) lo else if (to.isEmpty) "99999999" else to
+        if (lo > hi) throw Usage("invalid date range", arg)
+        (lo, hi)
+      case _ => throw Usage("invalid date range", arg)
     }
   }
   
@@ -144,6 +145,11 @@ base-url=http://dumps.wikimedia.org/
   Base URL of dump server. Required if dump files are given.
 base-dir=/example/path
   Path to existing target directory. Required.
+download-dates=20120530-20120610
+  Only dumps whose page date is in this range will be downloaded. By default, all dumps are 
+  included, starting with the newest. Open ranges like 20120530- or -20120610 are allowed.
+download-count=1
+  Max number of dumps to download. Default is 1.
 download=en,zh-yue,1000-2000,...:file1,file2,...
   Download given files for given languages from server. Each key is either a language code
   or a range. In the latter case, languages with a matching number of articles will be used. 

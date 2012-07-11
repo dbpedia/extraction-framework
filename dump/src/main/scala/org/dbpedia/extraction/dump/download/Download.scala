@@ -55,7 +55,7 @@ object Download extends DownloadConfig
       }
     }
     
-    new DumpDownload(baseUrl, baseDir, dumpRange, downloader).downloadFiles(languages)
+    new DumpDownload(baseUrl, baseDir, dateRange, dumpCount, downloader).downloadFiles(languages)
   }
   
 }
