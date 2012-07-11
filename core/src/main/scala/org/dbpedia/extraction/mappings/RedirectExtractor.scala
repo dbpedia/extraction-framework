@@ -29,6 +29,7 @@ extends Extractor
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
   {
     if (page.isRedirect && namespaces.contains(page.title.namespace)) {
+      // TODO: copy redirect target from WikiPage to PageNode and use it here?
       for (InternalLinkNode(destination, _, _, _) <- page.children) {
         return Seq(quad(subjectUri, language.resourceUri.append(destination.decodedWithNamespace), page.sourceUri))
       }
