@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.server.stats
 
-import io.Source
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.server.util.CollectionReader
-import scala.collection.mutable
 import java.io.Writer
+import scala.collection.mutable
+import org.dbpedia.extraction.server.util.CollectionReader
+import org.dbpedia.extraction.util.Language
+import WikipediaStatsFormat._
 
 /**
  * Builds template statistics
@@ -41,7 +41,7 @@ object WikipediaStatsFormat {
     val PropertyTag = "p|" // tag is used ~10^5 times - use short tag to save space
 }
 
-import WikipediaStatsFormat._
+
 
 // Hold template redirects and template statistics
 class WikipediaStats(val language : Language, val redirects: Map[String, String], val templates: Map[String, TemplateStats])

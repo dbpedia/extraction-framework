@@ -1,20 +1,13 @@
 package org.dbpedia.extraction.server.stats
 
+import java.io.File
 import java.util.logging.Logger
-import io.Source
-import java.lang.IllegalArgumentException
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.{WikiUtil,Language,Finder}
+
+import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
 import org.dbpedia.extraction.util.RichFile.toRichFile
-import scala.Serializable
-import java.io._
-import org.dbpedia.extraction.server.Server
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
-import org.dbpedia.extraction.server.stats.CreateMappingStats._
-import java.net.{URLDecoder, URLEncoder}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.util.{Finder,Language}
+import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
  * Script to gather statistics about templates and properties:

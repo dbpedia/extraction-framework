@@ -1,13 +1,11 @@
 package org.dbpedia.extraction.server.stats
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.mappings._
 import scala.collection.mutable
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.Namespace
-import MappingStats.InvalidTarget
+import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.extraction.wikiparser.{Namespace,TemplateNode}
+import MappingStats.InvalidTarget
 
 object MappingStatsHolder {
   
