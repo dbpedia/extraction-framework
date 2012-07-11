@@ -10,13 +10,12 @@ import org.dbpedia.extraction.ontology.DBpediaNamespace
  * For each language, there is only one instance of this class.
  * TODO: rename this class to WikiCode or so.
  */
-class Language private(val wikiCode : String, val isoCode: String) extends Serializable
+class Language private(val wikiCode : String, val isoCode: String)
 {
-    // TODO: make this transient and add a readObject method. Better yet: never use Serializable
     val locale = new Locale(isoCode)
     
     /** 
-     * Note that Wikipedia dump files use this prefix (with underscores), 
+     * Note that Wikipedia dump files use this prefix (with underscores), e.g. be_x_old,
      * but Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
      */
     val filePrefix = wikiCode.replace("-", "_")
@@ -229,18 +228,26 @@ object Language extends (String => Language)
     languages.toMap // toMap makes immutable
   }
   
-  // TODO: remove this. It is too often used in error.
+  /**
+   * English Wikipedia
+   */
   val English = Values("en")
   
+  /**
+   * DBpedia mappings wiki
+   */
   val Mappings = Values("mappings")
   
+  /**
+   * Wikimedia commons
+   */
   val Commons = Values("commons")
   
   /**
    * Gets a language object for a Wikipedia language code.
    * Throws IllegalArgumentException if language code is unknown.
    */
-  def apply( code: String ) : Language = Values.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
+  def apply(code: String) : Language = Values.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
   
   /**
    * Gets a language object for a Wikipedia language code, or None if given code is unknown.
