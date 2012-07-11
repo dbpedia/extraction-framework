@@ -16,7 +16,7 @@ import Quad._
  * @param context URI/IRI, may be null
  * @param datatype may be null, which means that value is a URI/IRI
  * 
- * TODO: the order of the parameters is confusing. As in triples/quads, it should be
+ * TODO: the order of the parameters is confusing. As in Turtle/N-Triple/N-Quad files, it should be
  * 
  * dataset
  * subject
@@ -76,6 +76,24 @@ class Quad(
   if (subject == null) throw new NullPointerException("subject")
   if (predicate == null) throw new NullPointerException("predicate")
   if (value == null) throw new NullPointerException("value")
+  
+  def copy(
+    dataset: String = this.dataset,
+    subject: String = this.subject,
+    predicate: String = this.predicate,
+    value: String = this.value,
+    datatype: String = this.datatype,
+    language: String = this.language,
+    context: String = this.context
+  ) = new Quad(
+    language,
+    dataset,
+    subject,
+    predicate,
+    value,
+    context,
+    datatype
+  )
   
   override def toString() = {
    "Quad("+
