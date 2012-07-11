@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import org.dbpedia.extraction.util.XmlUtils.escape
+import org.dbpedia.extraction.util.XmlUtils
 import UriPolicy._
 import TriXBuilder._
 
@@ -36,16 +36,24 @@ extends UriTripleBuilder(policies) {
     this add spaces(depth) add "<uri>" escapeUri(value, pos) add "</uri>\n"
   }
   
+  /**
+   * @param value must not be null
+   * @param lang may be null
+   */
   override def plainLiteral(value: String, lang: String): Unit = {
-    this add spaces(depth) add "<plainLiteral xml:lang=\"" add(lang) add "\">"
-    escape(sb, value)
-    this add "</plainLiteral>\n"
+    this add spaces(depth) add "<plainLiteral" 
+    if (lang != null) this add " xml:lang=" add '"' add(lang) add '"' 
+    this add '>' escape value add "</plainLiteral>\n"
   }
   
+  /**
+   * @param value must not be null
+   * @param datatype must not be null
+   */
   override def typedLiteral(value: String, datatype: String): Unit = {
-    this add spaces(depth) add "<typedLiteral datatype=\"" escapeUri(datatype, DATATYPE) add "\">"
-    escape(sb, value)
-    this add "</typedLiteral>\n"
+    this add spaces(depth) add "<typedLiteral" +
+    this add " datatype=" add '"' escapeUri(datatype, DATATYPE) add '"'
+    this add '>' escape value add "</typedLiteral>\n"
   }
   
   override def end(context: String): Unit = {
@@ -57,15 +65,19 @@ extends UriTripleBuilder(policies) {
   
   // private helper methods
   
+  private def escape(str: String): TriXBuilder = {
+    XmlUtils.escape(sb, str)
+    this
+  }
+  
   private def escapeUri(str: String, pos: Int): TriXBuilder = {
     val uri = parseUri(str, pos)
     // TODO: check if uri starts with BadUri. If yes, wrap the whole triple in <!-- and --> 
     // (but take care that we do it only once). But currently this class is only used during 
     // testing, so it's probably better to have these errors visible.
-    escape(sb, uri)
-    this
+    escape(uri)
   }
-      
+  
   /**
    * print spaces, print tag, increase depth
    */

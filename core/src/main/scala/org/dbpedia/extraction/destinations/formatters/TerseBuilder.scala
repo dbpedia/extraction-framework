@@ -32,17 +32,22 @@ extends UriTripleBuilder(policies) {
   }
   
   /**
-   * @param datatype must not be null
+   * @param value must not be null
+   * @param lang may be null
    */
   override def plainLiteral(value: String, lang: String): Unit = {
-    this add '"' escape value add '"' add '@' add lang add ' '
+    this add '"' escape value add '"'
+    if (lang != null) this add '@' add lang
+    this add ' '
   }
   
   /**
+   * @param value must not be null
    * @param datatype must not be null
    */
   override def typedLiteral(value: String, datatype: String): Unit = {
-    this add '"' escape value add '"' add "^^" uri(datatype, DATATYPE)
+    this add '"' escape value add '"'
+    this add "^^" uri(datatype, DATATYPE)
   }
   
   override def end(context: String): Unit = {
