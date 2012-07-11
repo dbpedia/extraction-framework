@@ -25,8 +25,8 @@ object ConfigUtils {
   
     for (key <- keys) key match {
       case "@mappings" => languages ++= Namespace.mappings.keySet
-      case Range(from, to) => ranges += ((from, to))
-      case Language(language) => languages += language
+      case Range(from, to) => ranges += toRange(from, to)
+      case Language(language) => languages += util.Language(language)
       case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
     }
     
@@ -52,45 +52,23 @@ object ConfigUtils {
     languages.toArray
   }
   
-  object Language {
-      
-    /**
-     * Simple regex matching Wikipedia language codes.
-     * Language codes have at least two characters, start with a lower-case letter and contain only 
-     * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
-     */
-    private val Regex = """([a-z][a-z0-9-]+)""".r
+  /**
+   * Simple regex matching Wikipedia language codes.
+   * Language codes have at least two characters, start with a lower-case letter and contain only 
+   * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
+   */
+  val Language = """([a-z][a-z0-9-]+)""".r
     
-    def unapply(str: String): Option[Language] = {
-      str match {
-        case Regex(language) => {
-          Some(util.Language(language))
-        }
-        case _ => None
-      }
-    }
-  }
-    
-  object Range {
-    
-    /**
-     * Regex for numeric range, both limits optional
-     */
-    private val Regex = """(\d*)-(\d*)""".r
+  /**
+   * Regex for numeric range, both limits optional
+   */
+  val Range = """(\d*)-(\d*)""".r
   
-    def unapply(str: String): Option[(Int, Int)] = {
-      str match {
-        case Regex(from, to) => {
-          // "-" is invalid
-          if (from.isEmpty && to.isEmpty) throw new NumberFormatException
-          val lo = if (from isEmpty) 0 else from.toInt
-          val hi = if (to isEmpty) Int.MaxValue else to.toInt
-          if (lo > hi) throw new NumberFormatException
-          Some(lo, hi)
-        }
-        case _ => None
-      }
-    }
-  } 
+  def toRange(from: String, to: String): (Int, Int) = {
+    val lo: Int = if (from isEmpty) 0 else from.toInt
+    val hi: Int = if (to isEmpty) Int.MaxValue else to.toInt
+    if (lo > hi) throw new NumberFormatException
+    (lo, hi)
+  }
   
 }
