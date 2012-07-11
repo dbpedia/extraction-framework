@@ -26,12 +26,12 @@ class TransitiveClosure[T](val graph: Map[T, T]) {
   }
   
   /**
-   * Resolve relation of current node.
-   * 
-   * To speed things up, we remove cyclic nodes from the graph as soon as possible and remember
-   * their cycle in the cycle map. This means that this method may be called for a node that no
-   * longer exists in the map. It also means that if the map contains no mapping for a node,
-   * we either found a target node, or we found a node that was in a cycle.
+   * Resolve relations of current node and all its descendants. To speed things up and to avoid
+   * duplicate work, we resolve all transitive relations, not just the one for the current node,
+   * and we remove cyclic nodes from the graph as soon as possible and remember their cycle in
+   * the cycle map. This means that this method may be called for a node that no longer exists
+   * in the map. It also means that if the map contains no mapping for a node, we either found
+   * a target node, or we found a node that was in a cycle.
    */
   private def resolve(node: T): Unit = {
     var current = node
