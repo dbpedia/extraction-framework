@@ -1,12 +1,9 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
-import org.dbpedia.extraction.util.RichFile.toRichFile
-import org.dbpedia.extraction.scripts.IOUtils._
-import org.dbpedia.extraction.destinations.Quad
-import java.io.File
 import java.lang.StringBuilder
+import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
+import IOUtils._
 
 /**
  * Maps old quads/triples to new quads/triples.
