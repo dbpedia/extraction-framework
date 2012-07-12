@@ -1,16 +1,11 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Finder,Language,StringPlusser}
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
-import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
-import org.dbpedia.extraction.util.RichFile.toRichFile
-import org.dbpedia.extraction.util.RichReader.toRichReader
-import org.dbpedia.extraction.scripts.IOUtils._
-import scala.collection.mutable.{Set,Map}
-import scala.collection.mutable.{HashMap,MultiMap}
-import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader,BufferedReader,FileNotFoundException}
+import java.io.File
 import org.dbpedia.extraction.destinations.Quad
-import java.lang.StringBuilder
+import org.dbpedia.extraction.util.{Finder,Language}
+import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import IOUtils._
 
 /**
  */
