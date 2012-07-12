@@ -37,11 +37,13 @@ class QuadReader(baseDir: File, val language: Language, suffix: String) {
     val start = System.nanoTime
     readLines(file) { line =>
       line match {
-        case Quad(quad) => proc(quad)
+        case Quad(quad) => {
+          proc(quad)
+          lineCount += 1
+          if (lineCount % 1000000 == 0) logRead(lineCount, start)
+        }
         case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match quad or triple syntax: " + line)
       }
-      lineCount += 1
-      if (lineCount % 1000000 == 0) logRead(lineCount, start)
     }
     logRead(lineCount, start)
   }
