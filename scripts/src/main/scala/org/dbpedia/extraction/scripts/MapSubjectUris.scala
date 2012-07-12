@@ -71,7 +71,7 @@ object MapSubjectUris {
       
       val mapper = new QuadMapper(reader)
       for (input <- inputs) {
-        mapper.mapQuads(input, input + extension) { quad =>
+        mapper.mapQuads(input, input + extension, required = false) { quad =>
           map.get(quad.subject) match {
             case Some(uri) => Some(quad.copy(subject = uri)) // change subject URI
             case None => None // no mapping for this subject URI - discard the quad
