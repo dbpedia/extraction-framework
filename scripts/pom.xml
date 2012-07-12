@@ -61,7 +61,7 @@
                             
                             <!-- '10000-' means languages by article count range. 'en' uses generic domain. -->
                             <!-- '-' means no file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as.ttl.gz -->
-                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links.txt.gz - .ttl.gz en 10000- -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-ttl.txt.gz - .ttl.gz en 10000- -->
                             
                             <!-- '-' means don't write dump file. -->
                             <!-- ../run ProcessInterLanguageLinks /data/dbpedia - -fr-de .ttl.gz - fr,de -->
@@ -97,14 +97,14 @@
                         </launcher>
                         <launcher>
                             <id>MapObjectUris</id>
-                            <mainClass>org.dbpedia.extraction.scripts.MapSubjectUris</mainClass>
+                            <mainClass>org.dbpedia.extraction.scripts.MapObjectUris</mainClass>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
-                            <!-- ../run MapObjectUris /home/dbpedia transitive-redirects infobox-properties,mappingbased-properties,specific-mappingbased-properties,... -redirected .nt.gz 10000- -->
+                            <!-- ../run MapObjectUris /home/dbpedia transitive-redirects infobox-properties,mappingbased-properties,... -redirected .nt.gz 10000- -->
                             <!-- the following should be redirected (as of 2012-07-11) -->
-                            <!-- article-categories,disambiguations,infobox-properties,mappingbased-properties,specific-mappingbased-properties,page-links,persondata,skos-categories,topical-concepts -->
+                            <!-- disambiguations,infobox-properties,mappingbased-properties,page-links,persondata,topical-concepts -->
                         </launcher>
                     </launchers>
                 </configuration>

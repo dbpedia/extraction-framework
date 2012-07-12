@@ -14,15 +14,17 @@ import java.io.File
  * 
  * Redirects SHOULD be resolved in the following datasets:
  * 
- * article-categories
  * disambiguations
  * infobox-properties
  * mappingbased-properties
- * specific-mappingbased-properties
  * page-links
  * persondata
- * skos-categories
  * topical-concepts
+ * 
+ * Redirects seem to be so rare in categories that it doesn't make sense to resolve these:
+ * 
+ * article-categories
+ * skos-categories
  * 
  * The following datasets DO NOT have object URIs that can be redirected:
  * 
@@ -37,6 +39,7 @@ import java.io.File
  * instance-types
  * iri-same-as-uri
  * labels
+ * specific-mappingbased-properties
  * 
  * Maybe we should resolve redirects in interlanguage-links, but we would have to integrate
  * redirect resolution into interlanguage link resolution. We're pretty strict when we generate
@@ -98,7 +101,7 @@ object MapObjectUris {
       val mapper = new QuadMapper(reader)
       for (input <- inputs) {
         mapper.mapQuads(input, input + extension, required = false) { quad =>
-          if (quad.datatype == null) Some(quad) // just copy quad with literal values
+          if (quad.datatype != null) Some(quad) // just copy quad with literal values
           else map.get(quad.value) match {
             case Some(uri) => Some(quad.copy(value = uri)) // change object URI
             case None => Some(quad) // just copy quad without mapping for object URI
