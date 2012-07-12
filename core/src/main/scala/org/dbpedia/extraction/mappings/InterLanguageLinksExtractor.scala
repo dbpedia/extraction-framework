@@ -16,11 +16,13 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
 
   override val datasets = Set(DBpediaDatasets.InterLanguageLinks)
   
+  private val namespaces = Set(Namespace.Main, Namespace.Template, Namespace.Category)
+  
   private val quad = QuadBuilder.apply(context.language, DBpediaDatasets.InterLanguageLinks, interLanguageLinksProperty, null) _
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    if (page.title.namespace != Namespace.Main) return Seq.empty
+    if (! namespaces.contains(page.title.namespace)) return Seq.empty
     
     var quads = new ArrayBuffer[Quad]()
 
