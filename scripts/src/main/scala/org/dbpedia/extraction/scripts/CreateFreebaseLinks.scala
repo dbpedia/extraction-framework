@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.scripts
 
-import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
-import java.util.zip.{GZIPInputStream,GZIPOutputStream}
-import scala.io.{Source,Codec}
 import scala.collection.mutable.{Set,HashSet}
-import java.io.{File,InputStream,OutputStream,FileInputStream,FileOutputStream,OutputStreamWriter,FileNotFoundException}
-import java.net.{URI,URISyntaxException}
-import org.dbpedia.extraction.util.{Finder,Language,StringUtils,TurtleUtils}
-import org.dbpedia.extraction.util.WikiUtil._
+import java.io.{File,FileNotFoundException}
+import java.net.URI
+import org.dbpedia.extraction.util.{Finder,Language}
+import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
+import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
+import org.dbpedia.extraction.util.NumberUtils.hexToInt
+import org.dbpedia.extraction.util.WikiUtil.{wikiEncode,cleanSpace}
 import org.dbpedia.extraction.util.RichString.toRichString
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
@@ -62,7 +62,8 @@ object CreateFreebaseLinks
    * Append character for hexadecimal UTF-16 code to given string builder.
    */
   private def unescapeKey(sb: StringBuilder, matcher: Matcher): Unit = {
-    sb.append(Integer.parseInt(matcher.group(1), 16).toChar)
+    sb.append(hexToInt(matcher.group(1)).toChar) // may be faster than Integer.parseInt
+    // sb.append(Integer.parseInt(matcher.group(1), 16).toChar)
   }
   
   private def unescapeKey(key: String): String = {
@@ -117,26 +118,22 @@ object CreateFreebaseLinks
     val start = System.nanoTime
     println((if (add) "Add" else "Subtract")+"ing DBpedia URIs in "+file+"...")
     var lines = 0
-    val in = open(file, new FileInputStream(_), unzippers)
-    try {
-      for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
-        if (line.nonEmpty && line.charAt(0) != '#') {
-          val close = line.indexOf('>', Prefix.length)
-          if (! line.startsWith(Prefix) || close == -1) throw new IllegalArgumentException(line)
-          val rdfKey = line.substring(Prefix.length, close)
-          if (add) set += rdfKey else set -= rdfKey
-          lines += 1
-          if (lines % 1000000 == 0) log(lines, start)
-        }
+    readLines(file) { line =>
+      if (line.nonEmpty && line.charAt(0) != '#') {
+        val close = line.indexOf('>', Prefix.length)
+        if (! line.startsWith(Prefix) || close == -1) throw new IllegalArgumentException(line)
+        val rdfKey = line.substring(Prefix.length, close)
+        if (add) set += rdfKey else set -= rdfKey
+        lines += 1
+        if (lines % 1000000 == 0) log(lines, start)
       }
     }
-    finally in.close()
     log(lines, start)
   }
   
   private def log(lines: Int, start: Long): Unit = {
     val nanos = System.nanoTime - start
-    println("processed "+lines+" lines in "+StringUtils.prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+    println("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
 }
@@ -150,6 +147,8 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
     var links = 0
     val writer = write(outFile)
     try {
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
+      writer.write("# started "+formatCurrentTimestamp+"\n")
       readLines(inFile) { line =>
         line match {
           case WikipediaKey(mid, key) => {
@@ -175,6 +174,8 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
         lines += 1
         if (lines % 1000000 == 0) log(lines, links, start)
       }
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.header
+      writer.write("# completed "+formatCurrentTimestamp+"\n")
     }
     finally writer.close()
     log(lines, links, start)
@@ -182,7 +183,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
   
   private def log(lines: Int, links: Int, start: Long): Unit = {
     val nanos = System.nanoTime - start
-    println("processed "+lines+" lines, found "+links+" Freebase links in "+StringUtils.prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+    println("processed "+lines+" lines, found "+links+" Freebase links in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
   /**
@@ -199,7 +200,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
     val plain = unescapeKey(key)
     var uri = wikiEncode(cleanSpace(plain))
     if (! iris) uri = new URI(Dummy+uri).toASCIIString.substring(Dummy.length)
-    TurtleUtils.escapeTurtle(uri, turtle)
+    escapeTurtle(uri, turtle)
   }
 
 }
