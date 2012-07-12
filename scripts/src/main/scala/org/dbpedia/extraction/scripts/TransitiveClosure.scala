@@ -59,6 +59,9 @@ class TransitiveClosure[T](val graph: Map[T, T]) {
     }
   }
   
+  /**
+   * Remember that the seen nodes are part of a cycle, either an old or a new cycle.
+   */
   private def addCycle(seen: Set[T], old: Set[T] = null): Unit = {
     var cycle = old 
     if (cycle == null) {
