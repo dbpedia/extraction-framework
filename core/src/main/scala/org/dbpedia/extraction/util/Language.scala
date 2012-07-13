@@ -72,7 +72,7 @@ object Language extends (String => Language)
 {
   implicit val wikiCodeOrdering = Ordering.by[Language, String](_.wikiCode)
   
-  val Values = locally {
+  val map: Map[String, Language] = locally {
     
     def language(code : String, iso: String): Language = new Language(code, iso)
     
@@ -231,31 +231,31 @@ object Language extends (String => Language)
   /**
    * English Wikipedia
    */
-  val English = Values("en")
+  val English = map("en")
   
   /**
    * DBpedia mappings wiki
    */
-  val Mappings = Values("mappings")
+  val Mappings = map("mappings")
   
   /**
    * Wikimedia commons
    */
-  val Commons = Values("commons")
+  val Commons = map("commons")
   
   /**
    * Gets a language object for a Wikipedia language code.
    * Throws IllegalArgumentException if language code is unknown.
    */
-  def apply(code: String) : Language = Values.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
+  def apply(code: String) : Language = map.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
   
   /**
    * Gets a language object for a Wikipedia language code, or None if given code is unknown.
    */
-  def get(code: String) : Option[Language] = Values.get(code)
+  def get(code: String) : Option[Language] = map.get(code)
   
   /**
    * Gets a language object for a Wikipedia language code, or the default if the given code is unknown.
    */
-  def getOrElse(code: String, default: => Language) : Language = Values.getOrElse(code, default)
+  def getOrElse(code: String, default: => Language) : Language = map.getOrElse(code, default)
 }
