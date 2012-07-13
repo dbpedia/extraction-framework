@@ -39,7 +39,7 @@ from older directories. If marker file name is empty or "-", check all directori
     
     var dirs, files = 0
     
-    for (language <- Language.Values.values) {
+    for (language <- Language.map.values) {
       val finder = new Finder[Path](baseDir, language)
       if (finder.wikiDir.exists) {
         for (date <- finder.dates(markerFile).dropRight(newDirs)) {
