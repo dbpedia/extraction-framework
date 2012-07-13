@@ -20,7 +20,7 @@ object IOUtils {
   
   val unzippers = Map[String, InputStream => InputStream] (
     "gz" -> { new GZIPInputStream(_) }, 
-    "bz2" -> { new BZip2CompressorInputStream(_) } 
+    "bz2" -> { new BZip2CompressorInputStream(_, true) } 
   )
   
   def open[T](file: File, opener: File => T, wrappers: Map[String, T => T]): T = {

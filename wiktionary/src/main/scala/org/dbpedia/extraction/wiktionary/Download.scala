@@ -147,7 +147,7 @@ private object DumpDownloader
     {
         require(url.toString.endsWith(".bz2"), "Unsupported extension")
 
-        val inputStream = new BZip2CompressorInputStream(url.openStream())
+        val inputStream = new BZip2CompressorInputStream(url.openStream(), true)
         val outputStream = new FileOutputStream(file)
         val buffer = new Array[Byte](65536)
 
