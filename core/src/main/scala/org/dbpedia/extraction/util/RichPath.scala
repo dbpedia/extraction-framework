@@ -1,7 +1,11 @@
 package org.dbpedia.extraction.util
 
-import java.nio.file.{Path,Files}
+import java.io.IOException
+import java.nio.file.{Path,Files,SimpleFileVisitor,FileVisitResult}
+import java.nio.file.attribute.BasicFileAttributes
 import scala.collection.JavaConversions.iterableAsScalaIterable
+import RichPath._
+
 
 /**
  * This class requires the java.nio.file package, which is available since JDK 7.
@@ -16,39 +20,61 @@ import scala.collection.JavaConversions.iterableAsScalaIterable
  * but they are not vitally necessary.
  */
 object RichPath {
+  
   implicit def toRichPath(path: Path) = new RichPath(path)
+  
+  val DeletionVisitor = new SimpleFileVisitor[Path] {
+    
+    override def visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult = {
+      Files.delete(file)
+      FileVisitResult.CONTINUE
+    }
+    
+    override def postVisitDirectory(dir: Path, e: IOException): FileVisitResult = {
+      if (e != null) throw e
+      Files.delete(dir)
+      FileVisitResult.CONTINUE
+    }
+  }
+  
 }
-
-import RichPath.toRichPath
 
 class RichPath(path: Path) extends FileLike[Path] {
   
   /**
    * @throws NotDirectoryException if the path is not a directory
    */
-  def isEmpty : Boolean = {
+  def hasFiles: Boolean = {
     val stream = Files.newDirectoryStream(path)
-    try ! stream.iterator.hasNext finally stream.close
+    try stream.iterator.hasNext finally stream.close
   }
   
-  def delete = Files.delete(path)
+  def delete(recursive: Boolean = false): Unit = {
+    if (recursive && Files.isDirectory(path)) Files.walkFileTree(path, DeletionVisitor)
+    else Files.delete(path)
+  }
   
-  def resolve(name: String) = path.resolve(name)
+  def resolve(name: String): Path = path.resolve(name)
   
-  def exists = Files.exists(path)
+  def exists: Boolean = Files.exists(path)
   
-  def list = list("*")
+  // TODO: more efficient type than List?
+  def names: List[String] = names("*")
 
-  def list(glob: String) : List[String] = { 
-    val stream = Files.newDirectoryStream(path, glob)
-    try stream.toList.map(_.getFileName.toString) finally stream.close
-  }
+  // TODO: more efficient type than List?
+  def names(glob: String): List[String] = list(glob).map(_.getFileName.toString) 
   
-  def listPaths : List[Path] = listPaths("*")
+  // TODO: more efficient type than List?
+  def list: List[Path] = list("*")
     
-  def listPaths(glob: String) : List[Path] = { 
+  // TODO: more efficient type than List?
+  def list(glob: String): List[Path] = { 
     val stream = Files.newDirectoryStream(path, glob)
     try stream.toList finally stream.close
   }
+  
+  def isFile: Boolean = Files.isRegularFile(path)
+  
+  def isDirectory: Boolean = Files.isDirectory(path)
   
 }

@@ -70,7 +70,7 @@ private object DumpDownloader
         for(subDirs <- Option(dir.listFiles()); subDir <- subDirs; if subDir.getName != date.toString && subDir.getName.matches("\\d{8}") )
         {
             logger.info("Deleting outdated dump " + subDir.getName)
-            subDir.deleteRecursive()
+            subDir.delete(true)
         }
 
         //Generate a list of the expected links to the dump files
