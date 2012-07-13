@@ -3,7 +3,8 @@ package org.dbpedia.extraction.dump.download
 import java.io.File
 import scala.io.Codec
 import scala.collection.mutable.HashSet
-import org.dbpedia.extraction.util.WikiInfo
+import org.dbpedia.extraction.util.{WikiInfo,Language}
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import scala.collection.immutable.SortedSet
 
 object Download extends DownloadConfig
@@ -57,7 +58,7 @@ object Download extends DownloadConfig
     }
     
     // sort them to have reproducible behavior
-    val keys = SortedSet.empty[String] ++ languages.keys
+    val keys = SortedSet.empty[Language] ++ languages.keys
     keys.foreach { key => 
       val done = keys.until(key)
       val todo = keys.from(key)

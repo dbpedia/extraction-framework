@@ -4,7 +4,7 @@ import java.io.File
 import java.net.{URL,MalformedURLException}
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.io.{Source,Codec}
-import org.dbpedia.extraction.util.ConfigUtils
+import org.dbpedia.extraction.util.{ConfigUtils,Language}
 import org.dbpedia.extraction.wikiparser.Namespace
 
 class DownloadConfig
@@ -13,7 +13,7 @@ class DownloadConfig
   
   var baseDir: File = null
   
-  val languages = new HashMap[String, Set[String]]
+  val languages = new HashMap[Language, Set[String]]
   
   val ranges = new HashMap[(Int,Int), Set[String]]
   
@@ -67,9 +67,9 @@ class DownloadConfig
         if (files.exists(_ isEmpty)) throw Usage("Invalid file name", arg)
         for (key <- keys) key match {
           // FIXME: copy & paste in ConfigUtils and extract.Config
-          case "@mappings" => for (language <- Namespace.mappings.keySet) add(languages, language.wikiCode, files)
-          case ConfigUtils.Range(from, to) => add(ranges, toRange(from, to, arg), files)
-          case ConfigUtils.Language(language) => add(languages, language, files)
+          case "@mappings" => for (language <- Namespace.mappings.keySet) add(languages, language, files)
+          case ConfigUtils.RangeRegex(from, to) => add(ranges, toRange(from, to, arg), files)
+          case ConfigUtils.LanguageRegex(code) => add(languages, Language(code), files)
           case other => throw Usage("Invalid language / range '"+other+"'", arg)
         }
       case _ => throw Usage("Invalid argument '"+arg+"'")

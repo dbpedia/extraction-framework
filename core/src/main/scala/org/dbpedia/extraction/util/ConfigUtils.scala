@@ -3,9 +3,10 @@ package org.dbpedia.extraction.util
 import java.io.File
 import scala.collection.immutable.SortedSet
 import scala.io.Codec
-import org.dbpedia.extraction.util
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.mutable.{HashSet,HashMap}
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
+
 
 object ConfigUtils {
   
@@ -15,18 +16,18 @@ object ConfigUtils {
    * @return languages, sorted by language code
    */
   // TODO: copy & paste in org.dbpedia.extraction.dump.download.DownloadConfig, org.dbpedia.extraction.dump.extract.Config
-  def parseLanguages(baseDir: File, args: Array[String]): Array[util.Language] = {
+  def parseLanguages(baseDir: File, args: Array[String]): Array[Language] = {
     
     var keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
         
-    var languages = SortedSet[Language]()(util.Language.wikiCodeOrdering)
+    var languages = SortedSet[Language]()
     
     val ranges = new HashSet[(Int,Int)]
   
     for (key <- keys) key match {
       case "@mappings" => languages ++= Namespace.mappings.keySet
-      case Range(from, to) => ranges += toRange(from, to)
-      case Language(language) => languages += util.Language(language)
+      case RangeRegex(from, to) => ranges += toRange(from, to)
+      case LanguageRegex(language) => languages += Language(language)
       case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
     }
     
@@ -45,7 +46,7 @@ object ConfigUtils {
       for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
       {
         // ...add its language
-        languages += util.Language(wiki.language)
+        languages += wiki.language
       }
     }
     
@@ -57,12 +58,12 @@ object ConfigUtils {
    * Language codes have at least two characters, start with a lower-case letter and contain only 
    * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
    */
-  val Language = """([a-z][a-z0-9-]+)""".r
+  val LanguageRegex = """([a-z][a-z0-9-]+)""".r
     
   /**
    * Regex for numeric range, both limits optional
    */
-  val Range = """(\d*)-(\d*)""".r
+  val RangeRegex = """(\d*)-(\d*)""".r
   
   def toRange(from: String, to: String): (Int, Int) = {
     val lo: Int = if (from isEmpty) 0 else from.toInt

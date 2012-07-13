@@ -5,12 +5,12 @@ import java.io.File
 import scala.collection.mutable.{Set,HashMap}
 import scala.collection.immutable.SortedSet
 import scala.io.{Source,Codec}
-import org.dbpedia.extraction.util.Finder
+import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 
 /**
  */
-class LanguageDownloader(baseUrl: URL, baseDir: File, language: String, fileNames: Set[String], downloader: Downloader)
+class LanguageDownloader(baseUrl: URL, baseDir: File, language: Language, fileNames: Set[String], downloader: Downloader)
 {
   private val DateLink = """<a href="(\d{8})/">""".r
   

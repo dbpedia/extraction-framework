@@ -8,7 +8,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Information about a Wikipedia.
  */
-class WikiInfo(val language: String, val pages: Int)
+class WikiInfo(val language: Language, val pages: Int)
 
 /**
  * Helper methods to create WikiInfo objects.
@@ -63,8 +63,8 @@ object WikiInfo
       catch { case nfe: NumberFormatException => throw new Exception("expected page count in field with index [5], found line ["+line+"]") }
       
       val wikiCode = fields(2)
-      if (! ConfigUtils.Language.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
+      if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
       
-      new WikiInfo(wikiCode, pages)
+      new WikiInfo(Language(wikiCode), pages)
   }
 }

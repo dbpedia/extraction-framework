@@ -7,7 +7,9 @@ import java.io.File
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.immutable.{SortedSet,SortedMap}
-import org.dbpedia.extraction.util.{Language,ConfigUtils,WikiInfo}
+import org.dbpedia.extraction.util.{Language,WikiInfo}
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
+import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange}
 import scala.io.Codec
 
 private class Config(config: Properties)
@@ -79,7 +81,7 @@ extends ConfigParser(config)
       }
     }
 
-    SortedMap(classes.toSeq: _*)(Language.wikiCodeOrdering)
+    SortedMap(classes.toSeq: _*)
   }
   
   private def loadLanguages(): Set[Language] = {
@@ -99,8 +101,8 @@ extends ConfigParser(config)
     
     for (key <- keys) key match {
       case "@mappings" => languages ++= Namespace.mappings.keySet
-      case ConfigUtils.Range(from, to) => ranges += ConfigUtils.toRange(from, to)
-      case ConfigUtils.Language(language) => languages += Language(language)
+      case RangeRegex(from, to) => ranges += toRange(from, to)
+      case LanguageRegex(language) => languages += Language(language)
       case other => throw new Exception("Invalid language / range '"+other+"'")
     }
     
@@ -119,11 +121,11 @@ extends ConfigParser(config)
       for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
       {
         // ...add its language
-        languages += Language(wiki.language)
+        languages += wiki.language
       }
     }
     
-    SortedSet[Language](languages.toSeq: _*)(Language.wikiCodeOrdering)
+    SortedSet[Language](languages.toSeq: _*)
   }
 
   private def loadExtractorClass(name: String): Class[_ <: Extractor] = {
