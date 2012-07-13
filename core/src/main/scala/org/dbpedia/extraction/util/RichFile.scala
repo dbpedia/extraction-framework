@@ -78,8 +78,8 @@ class RichFile(file: File) extends FileLike[File] {
   
   def hasFiles: Boolean = file.list().length > 0
   
-  def newInputStream(): InputStream = new FileInputStream(file)
+  def inputStream(): InputStream = new FileInputStream(file)
   
-  def newOutputStream(append: Boolean = false): OutputStream = new FileOutputStream(file, append)
+  def outputStream(append: Boolean = false): OutputStream = new FileOutputStream(file, append)
   
 }

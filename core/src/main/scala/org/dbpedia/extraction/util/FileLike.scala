@@ -23,8 +23,8 @@ abstract class FileLike[T <% FileLike[T]] {
   
   def hasFiles: Boolean
   
-  def newInputStream(): InputStream
+  def inputStream(): InputStream
   
-  def newOutputStream(append: Boolean = false): OutputStream
+  def outputStream(append: Boolean = false): OutputStream
   
 }
