@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.util
 
-import java.io.IOException
-import java.nio.file.{Path,Files,SimpleFileVisitor,FileVisitResult}
+import java.io.{IOException,InputStream,OutputStream}
+import java.nio.file.{Path,Paths,Files,SimpleFileVisitor,FileVisitResult}
+import java.nio.file.StandardOpenOption.{CREATE,APPEND}
 import java.nio.file.attribute.BasicFileAttributes
 import scala.collection.JavaConversions.iterableAsScalaIterable
 import RichPath._
@@ -22,6 +23,8 @@ import RichPath._
 object RichPath {
   
   implicit def toRichPath(path: Path) = new RichPath(path)
+  
+  implicit def toPath(path: String) = Paths.get(path)
   
   val DeletionVisitor = new SimpleFileVisitor[Path] {
     
@@ -76,5 +79,12 @@ class RichPath(path: Path) extends FileLike[Path] {
   def isFile: Boolean = Files.isRegularFile(path)
   
   def isDirectory: Boolean = Files.isDirectory(path)
+  
+  def newInputStream(): InputStream = Files.newInputStream(path)
+  
+  def newOutputStream(append: Boolean = false): OutputStream = {
+    if (append) Files.newOutputStream(path, APPEND, CREATE) // mimic behavior of new FileOutputStream(file, true)
+    else Files.newOutputStream(path)
+  }
   
 }
