@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
-import scala.collection.mutable.HashMap
+import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 
 /**
@@ -54,7 +54,11 @@ object MapSubjectUris {
     
     for (language <- languages) {
       
-      val map = new HashMap[String, String]()
+      // inter language links can link multiple articles between two languages, for example
+      // http://de.wikipedia.org/wiki/Prostitution_in_der_Antike -> http://en.wikipedia.org/wiki/Prostitution_in_ancient_Rome
+      // http://de.wikipedia.org/wiki/Prostitution_in_der_Antike -> http://en.wikipedia.org/wiki/Prostitution_in_ancient_Greece
+      // TODO: in other cases, we probably want to treat multiple values as errors. Make this configurable.
+      val map = new HashMap[String, Set[String]] with MultiMap[String, String]
       
       val reader = new QuadReader(baseDir, language, suffix)
       for (mappping <- mappings) {
@@ -62,7 +66,7 @@ object MapSubjectUris {
         reader.readQuads(mappping) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           if (quad.value.startsWith(domain)) {
-            map(quad.subject) = quad.value
+            map.addBinding(quad.value, quad.subject)
             count += 1
           }
         }
@@ -73,8 +77,8 @@ object MapSubjectUris {
       for (input <- inputs) {
         mapper.mapQuads(input, input + extension, required = false) { quad =>
           map.get(quad.subject) match {
-            case Some(uri) => Some(quad.copy(subject = uri)) // change subject URI
-            case None => None // no mapping for this subject URI - discard the quad
+            case Some(uris) => for (uri <- uris) yield quad.copy(subject = uri) // change subject URI
+            case None => List() // no mapping for this subject URI - discard the quad. TODO: make this configurable
           }
         }
       }

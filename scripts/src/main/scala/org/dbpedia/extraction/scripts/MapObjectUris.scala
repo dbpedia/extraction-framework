@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
-import scala.collection.mutable.HashMap
+import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 
 /**
@@ -85,14 +85,16 @@ object MapObjectUris {
     
     for (language <- languages) {
       
-      val map = new HashMap[String, String]()
+      // Redirects can have only one target, so we don't really need a MultiMap here.
+      // But MapSubjectUris also uses a MultiMap... TODO: Make this configurable.
+      val map = new HashMap[String, Set[String]] with MultiMap[String, String]
       
       val reader = new QuadReader(baseDir, language, suffix)
       for (mappping <- mappings) {
         var count = 0
         reader.readQuads(mappping) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
-          map(quad.subject) = quad.value
+          map.addBinding(quad.subject, quad.value)
           count += 1
         }
         println("found "+count+" mappings")
@@ -101,10 +103,10 @@ object MapObjectUris {
       val mapper = new QuadMapper(reader)
       for (input <- inputs) {
         mapper.mapQuads(input, input + extension, required = false) { quad =>
-          if (quad.datatype != null) Some(quad) // just copy quad with literal values
+          if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
           else map.get(quad.value) match {
-            case Some(uri) => Some(quad.copy(value = uri)) // change object URI
-            case None => Some(quad) // just copy quad without mapping for object URI
+            case Some(uris) => for (uri <- uris) yield quad.copy(value = uri) // change object URI
+            case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
           }
         }
       }
