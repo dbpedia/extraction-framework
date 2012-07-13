@@ -6,7 +6,7 @@ import scala.collection.mutable.{Set,HashMap}
 import scala.collection.immutable.SortedSet
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichFile.wrapFile
 
 /**
  */

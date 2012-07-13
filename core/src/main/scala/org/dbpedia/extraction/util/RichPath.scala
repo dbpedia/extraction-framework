@@ -22,7 +22,7 @@ import RichPath._
  */
 object RichPath {
   
-  implicit def toRichPath(path: Path) = new RichPath(path)
+  implicit def wrapPath(path: Path) = new RichPath(path)
   
   implicit def toPath(path: String) = Paths.get(path)
   

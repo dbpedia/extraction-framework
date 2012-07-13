@@ -5,7 +5,7 @@ import java.net.URL
 import java.io._
 import java.util.logging.Logger
 import org.dbpedia.extraction.util.StringUtils._
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import io.{Codec, Source}
 
 /**

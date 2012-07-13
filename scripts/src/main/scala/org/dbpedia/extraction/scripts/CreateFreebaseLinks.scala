@@ -8,8 +8,8 @@ import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.util.NumberUtils.hexToInt
 import org.dbpedia.extraction.util.WikiUtil.{wikiEncode,cleanSpace}
-import org.dbpedia.extraction.util.RichString.toRichString
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichString.wrapString
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
 import CreateFreebaseLinks._
 import IOUtils._
