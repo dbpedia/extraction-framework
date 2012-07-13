@@ -160,7 +160,7 @@ class ConfigLoader(config: Config)
     
     private val unzippers = Map[String, InputStream => InputStream] (
       "gz" -> { new GZIPInputStream(_) }, 
-      "bz2" -> { new BZip2CompressorInputStream(_) } 
+      "bz2" -> { new BZip2CompressorInputStream(_, true) } 
     )
     
     //language-independent val
