@@ -80,9 +80,9 @@ class RichPath(path: Path) extends FileLike[Path] {
   
   def isDirectory: Boolean = Files.isDirectory(path)
   
-  def newInputStream(): InputStream = Files.newInputStream(path)
+  def inputStream(): InputStream = Files.newInputStream(path)
   
-  def newOutputStream(append: Boolean = false): OutputStream = {
+  def outputStream(append: Boolean = false): OutputStream = {
     if (append) Files.newOutputStream(path, APPEND, CREATE) // mimic behavior of new FileOutputStream(file, true)
     else Files.newOutputStream(path)
   }
