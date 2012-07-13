@@ -7,6 +7,7 @@ import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
 import org.dbpedia.extraction.util.RichFile.toRichFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.{Finder,Language}
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
@@ -58,7 +59,7 @@ object CreateMappingStats
         // if no languages are given, use all languages for which a mapping namespace is defined
         if (languages.isEmpty) languages = Namespace.mappings.keySet.toSeq
         
-        for (language <- languages.sorted(Language.wikiCodeOrdering)) {
+        for (language <- languages.sorted) {
           
             val millis = System.currentTimeMillis()
             
