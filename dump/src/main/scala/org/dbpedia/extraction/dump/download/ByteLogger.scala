@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dump.download
 /**
  * Logs read bytes.
  * @length length of input
- * @step approximante number of bytes read between progress logs
+ * @step approximate number of bytes read between progress logs
  * @pretty if true, re-use one line for output, otherwise use a new line for each log. 
  * Pretty printing works when logging to a console, but usuaully not in files.
  */
@@ -23,14 +23,15 @@ class ByteLogger(length : Long, step : Long, pretty : Boolean) extends ((Long, B
       // TODO: add percentage and ETA
       print("read "+formatBytes(bytes)+" of "+formatBytes(length)+" in "+formatMillis(millis)+" ("+formatRate(bytes, millis)+")")
       if (close || ! pretty) println // new line 
-      else print("                    \r") // spaces to overwrite previous line, back to start of line
+      else print("                    \r") // spaces to overwrite end of previous line, back to start of line
       next = (bytes / step + 1) * step
     }
   }
   
   private def formatBytes( bytes : Long ) : String =
   {
-    if (bytes < 1024) bytes+" B"
+    if (bytes <  0) "? B"
+    else if (bytes < 1024) bytes+" B"
     else if (bytes < 1048576) (bytes / 1024F)+" KB"
     else if (bytes < 1073741824) (bytes / 1048576F)+" MB"
     else (bytes / 1073741824F)+" GB"
