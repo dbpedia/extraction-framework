@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.util
 
-import java.io.{IOException,File,FilenameFilter}
+import java.io.{IOException,File,FilenameFilter,InputStream,FileInputStream,OutputStream,FileOutputStream}
 import java.util.regex.Pattern
 import RichFile._
 
 object RichFile {
-  
+
   implicit def toRichFile(file: File) = new RichFile(file)
+  
+  implicit def toFile(file: String) = new File(file)
   
   def filenameFilter(pattern: Pattern): FilenameFilter = {
     if (pattern == null) return null
@@ -75,5 +77,9 @@ class RichFile(file: File) extends FileLike[File] {
   def isDirectory: Boolean = file.isDirectory
   
   def hasFiles: Boolean = file.list().length > 0
+  
+  def newInputStream(): InputStream = new FileInputStream(file)
+  
+  def newOutputStream(append: Boolean = false): OutputStream = new FileOutputStream(file, append)
   
 }
