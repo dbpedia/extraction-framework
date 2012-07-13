@@ -46,14 +46,14 @@ from older directories. If marker file name is empty or "-", check all directori
           
           val dir = finder.directory(date)
           
-          for (path <- dir.listPaths(filter)) {
-            path.delete
+          for (path <- dir.list(filter)) {
+            path.delete()
             println("deleted file ["+path+"]")
             files += 1
           }
           
-          if (dir.isEmpty) {
-            dir.delete
+          if (! dir.hasFiles) {
+            dir.delete()
             println("deleted dir  ["+dir+"]")
             dirs += 1
           } else {

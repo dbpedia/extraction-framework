@@ -44,7 +44,7 @@ class Finder[T <% FileLike[T]](baseDir: T, language: Language) {
       if (suffix == null) {date: String => true} 
       else {date: String => file(date, suffix).exists}
     
-    val dates = wikiDir.list.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
+    val dates = wikiDir.names.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
     
     if (required && dates.isEmpty) {
       var msg = "found no directory "+wikiDir+"/[YYYYMMDD]"

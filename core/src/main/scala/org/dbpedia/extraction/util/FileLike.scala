@@ -7,8 +7,17 @@ abstract class FileLike[T <% FileLike[T]] {
   
   def resolve(name: String) : T
   
-  def list: List[String]
+  def names: List[String]
+  
+  def list: List[T]
   
   def exists: Boolean
+  
+  def delete(recursive: Boolean = false): Unit
 
+  def isFile: Boolean
+
+  def isDirectory: Boolean
+  
+  def hasFiles: Boolean
 }
