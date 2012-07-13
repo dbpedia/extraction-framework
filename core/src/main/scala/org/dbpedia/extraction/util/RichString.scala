@@ -3,7 +3,7 @@ package org.dbpedia.extraction.util
 import java.util.Locale
 import java.lang.StringBuilder
 import scala.util.matching.Regex
-import RichString.toRichString
+import RichString.wrapString
 import java.util.regex.{Pattern,Matcher}
 
 /**
@@ -11,7 +11,7 @@ import java.util.regex.{Pattern,Matcher}
  */
 object RichString
 {
-    implicit def toRichString(str : String) = new RichString(str)
+    implicit def wrapString(str : String) = new RichString(str)
 }
 
 /**

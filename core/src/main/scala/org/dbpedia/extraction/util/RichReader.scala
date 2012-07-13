@@ -4,9 +4,9 @@ import java.io.{Reader,BufferedReader}
 
 object RichReader
 {
-  implicit def toRichReader(reader: BufferedReader) = new RichReader(reader)
+  implicit def wrapReader(reader: BufferedReader) = new RichReader(reader)
   
-  implicit def toRichReader(reader: Reader) = new RichReader(reader)
+  implicit def wrapReader(reader: Reader) = new RichReader(reader)
 }
 
 

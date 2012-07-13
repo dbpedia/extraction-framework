@@ -4,7 +4,7 @@ import java.io.File
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering

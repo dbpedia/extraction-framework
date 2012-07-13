@@ -5,8 +5,8 @@ import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
-import org.dbpedia.extraction.util.RichFile.toRichFile
-import org.dbpedia.extraction.util.RichReader.toRichReader
+import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util.RichReader.wrapReader
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
 import org.dbpedia.extraction.destinations.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}

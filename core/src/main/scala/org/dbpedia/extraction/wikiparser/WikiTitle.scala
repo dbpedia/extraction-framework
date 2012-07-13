@@ -3,7 +3,7 @@ package org.dbpedia.extraction.wikiparser
 import java.util.Locale
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil
-import org.dbpedia.extraction.util.RichString.toRichString
+import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.uri.UriDecoder

@@ -6,7 +6,7 @@ import RichFile._
 
 object RichFile {
 
-  implicit def toRichFile(file: File) = new RichFile(file)
+  implicit def wrapFile(file: File) = new RichFile(file)
   
   implicit def toFile(file: String) = new File(file)
   

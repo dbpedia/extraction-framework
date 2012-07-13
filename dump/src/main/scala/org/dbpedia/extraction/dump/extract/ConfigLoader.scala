@@ -7,7 +7,7 @@ import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
 import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser}
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.util.{Language,Finder}
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
 import java.io._
 import java.net.URL

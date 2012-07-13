@@ -10,7 +10,7 @@ import org.dbpedia.extraction.util.WikiUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.dbpedia.extraction.util.RichString.toRichString;
+import static org.dbpedia.extraction.util.RichString.wrapString;
 
 /*import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
@@ -146,6 +146,6 @@ public class CoreUtil {
      */
     @Deprecated
     public static String wikipediaEncode(String page_title) {
-        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
+        return wrapString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
      }
 }

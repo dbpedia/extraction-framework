@@ -4,7 +4,7 @@ import java.io.File
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util.{Finder,Language,WikiInfo}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.io.Codec
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}

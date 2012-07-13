@@ -4,7 +4,7 @@ import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.util.RichString.toRichString
+import org.dbpedia.extraction.util.RichString.wrapString
 import java.net.URI
 import java.util.logging.{Level, Logger}
 import java.lang.IllegalArgumentException
