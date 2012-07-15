@@ -278,9 +278,9 @@ object LiveExtractionConfigLoader extends ActionListener
         return ;
       }*/
 
-      if(CurrentWikiPage.title.namespace == Namespace.Main) //||
-//        CurrentWikiPage.title.namespace == Namespace.File ||
-//        CurrentWikiPage.title.namespace == Namespace.Category)
+      if(CurrentWikiPage.title.namespace == Namespace.Main ||
+        CurrentWikiPage.title.namespace == Namespace.File ||
+        CurrentWikiPage.title.namespace == Namespace.Category)
       {
         val CurrentPageNode = parser(CurrentWikiPage)
 
@@ -301,7 +301,7 @@ object LiveExtractionConfigLoader extends ActionListener
 //        val semicolonPosition = CurrentPageNode.title.decodedWithNamespace.indexOf(";");
 //        val pageNodeTitleWithoutLanguage = CurrentPageNode.title.toString.substring(0, semicolonPosition)
         val strWikipage = "http://" + CurrentPageNode.title.language + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
-        liveDest = new LiveUpdateDestination(CurrentPageNode.title.encoded, language.locale.getLanguage(),
+        liveDest = new LiveUpdateDestination(CurrentPageNode.title, language.locale.getLanguage(),
           CurrentPageNode.id.toString)
         //
         //                 println(LiveConfigReader.extractors.get(language));

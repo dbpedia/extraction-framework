@@ -82,14 +82,23 @@ public class CoreUtil {
             else
                 quotes = "\"";
 
-            if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
+            /*if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
                 strSPARULPattern = quotes + escapeString( requiredResource.toString()) + quotes;
             else if(((Literal) requiredResource).getDatatype() == null)
                 strSPARULPattern = quotes + escapeString(requiredResource.toString() ) + quotes +
                         "@" + ((Literal) requiredResource).getLanguage();
             else
                 strSPARULPattern = quotes + escapeString(requiredResource.toString()) + quotes + "^^<" +
-                        ((Literal) requiredResource).getDatatype() + ">";
+                        ((Literal) requiredResource).getDatatype() + ">";*/
+
+            if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
+                strSPARULPattern = quotes + escapeString( ((Literal) requiredResource).getValue().toString()) + quotes;
+            else if(((Literal) requiredResource).getDatatype() == null)
+                strSPARULPattern = quotes + escapeString(((Literal) requiredResource).getValue().toString() ) + quotes +
+                        "@" + ((Literal) requiredResource).getLanguage();
+            else
+                strSPARULPattern = quotes + escapeString(((Literal) requiredResource).getValue().toString()) + quotes + "^^<" +
+                        ((Literal) requiredResource).getDatatype().getURI() + ">";
 
         }
         return strSPARULPattern;
@@ -140,11 +149,9 @@ public class CoreUtil {
     }
 
     /**
-     * @deprecated please use WikiUtil.wikiEncode!
      * @param page_title: decoded page title
      * @return encoded page title
      */
-    @Deprecated
     public static String wikipediaEncode(String page_title) {
         return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
      }
