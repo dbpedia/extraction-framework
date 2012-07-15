@@ -12,6 +12,58 @@
     <artifactId>live</artifactId>
     <name>Live extraction</name>
 
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <!--version>2.13.2-SNAPSHOT</version-->
+
+                <configuration>
+                    <launchers>
+                        <launcher>
+                            <id>Extract</id>
+                            <mainClass>org.dbpedia.extraction.live.main.Main</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx4096m</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                    </launchers>
+                </configuration>
+                <executions>
+
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+
+                    <execution>
+                        <id>test-compile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <phase>test-compile</phase>
+                    </execution>
+
+                    <execution>
+                        <id>process-resources</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                    </execution>
+
+                </executions>
+
+
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>xalan</groupId>
