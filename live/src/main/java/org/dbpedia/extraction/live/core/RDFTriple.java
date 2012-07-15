@@ -7,6 +7,9 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import org.apache.log4j.Logger;
 import org.dbpedia.helper.Triple;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 /*import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -126,15 +129,21 @@ public class RDFTriple extends Triple {
    public static Resource page(String pageID) {
 
        //Assert.assertTrue("PageID cannot be null or empty", (pageID != null && pageID != ""));
+       String encPageID = "";
        if(!pageID.equals(pageCacheKey)){
-           String encPageID = org.dbpedia.extraction.live.core.Util.wikipediaEncode(pageID);
-           String strSubstring = encPageID.substring(0,1);
-           //strSubstring = strSubstring.toUpperCase() + encPageID.substring(1);
-           String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
-           String resourceURI = Constants.DB_RESOURCE_NS + returnPageID;
-           Resource uri = ResourceFactory.createResource(resourceURI);
-           pageCacheKey = pageID;
-           pageCacheValue = uri;
+           try{
+               encPageID = URLEncoder.encode(org.dbpedia.extraction.live.core.Util.wikipediaEncode(pageID), "UTF-8");
+               String strSubstring = encPageID.substring(0,1);
+               //strSubstring = strSubstring.toUpperCase() + encPageID.substring(1);
+               String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
+               String resourceURI = Constants.DB_RESOURCE_NS + returnPageID;
+               Resource uri = ResourceFactory.createResource(resourceURI);
+               pageCacheKey = pageID;
+               pageCacheValue = uri;
+           }
+           catch (UnsupportedEncodingException exp){
+               logger.error("Unsupported encoding is used in encoding the page title");
+           }
        }
        //Assert.assertNotNull("PageID cannot be null", pageCacheValue);
        return pageCacheValue;

@@ -10,6 +10,7 @@ import org.openrdf.model.impl.URIImpl;
 
 import com.hp.hpl.jena.rdf.model.*;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,8 +131,12 @@ public class ExtractionResult{
 
         resultingString = resultingString.toLowerCase();
 
-        //TODO it is better to use decode with the parameter of encoding too
-        return URLDecoder.decode(resultingString);
+        try{
+            return URLDecoder.decode(resultingString, "UTF-8");
+        }
+        catch (UnsupportedEncodingException exp){
+            return "";
+        }
     	//return urldecode( strtolower( preg_replace("/[A-Z]/",' \\0',p)) );
     }
 

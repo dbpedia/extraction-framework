@@ -15,6 +15,7 @@ import org.dbpedia.extraction.live.helper.MatchPattern;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.publisher.PublishingData;
 import org.dbpedia.extraction.util.Language;
+import org.dbpedia.extraction.wikiparser.WikiTitle;
 import org.ini4j.Options;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -24,6 +25,8 @@ import scala.collection.Seq;
 import scala.collection.Traversable;
 import scala.runtime.AbstractFunction1;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
@@ -92,13 +95,23 @@ public class LiveUpdateDestination implements Destination{
     ArrayList<RDFTriple> addedTriplesList;
     String deletedTriplesString;
 
-    public LiveUpdateDestination(String pageTitle, String language, String oaiID){
+    public LiveUpdateDestination(String pageURI, String language, String oaiID){
 
 //        this.uri = RDFTriple.page(pageTitle);
-        this.uri =   ResourceFactory.createResource(Constants.DB_RESOURCE_NS + pageTitle);
+//        this.uri =   RDFTriple.page(pageTitle);
+        this.uri =  ResourceFactory.createResource(pageURI);
         this.language = language;
         this.oaiId = oaiID;
 
+        initDestination();
+
+
+    }
+
+    /**
+     * Initializes the destination variables
+     */
+    private void initDestination() {
         this.graphURI  = LiveOptions.options.get("graphURI");
         this.annotationGraphURI = LiveOptions.options.get("annotationGraphURI");
         this.generateOWLAxiomAnnotations = LiveOptions.options.get("generateOWLAxiomAnnotations");
@@ -130,8 +143,31 @@ public class LiveUpdateDestination implements Destination{
         for(ExtractorSpecification extractorSpec : LiveConfigReader.extractors.get(Language.apply(this.language))){
             addExtractor(extractorSpec);
         }
+    }
 
+    public LiveUpdateDestination(WikiTitle pageWikiTitle, String language, String oaiID){
+        String pageWikiEncodedTitle = pageWikiTitle.encoded().toString();
+        try{
+            String pageURLEncodedTitle = URLEncoder.encode(pageWikiEncodedTitle, "UTF-8");
 
+            String resourceURI;
+
+            if(pageWikiTitle.namespace().code() == 0)//Name space 0 is the Main namespace, so we don't need a prefix like in case of File:...
+                resourceURI = Constants.DB_RESOURCE_NS + pageURLEncodedTitle;
+            else
+                resourceURI = Constants.DB_RESOURCE_NS + pageWikiTitle.namespace().name() + ":" + pageURLEncodedTitle;
+
+            this.uri =  ResourceFactory.createResource(resourceURI);
+            this.language = language;
+            this.oaiId = oaiID;
+
+            initDestination();
+
+        }
+        catch (UnsupportedEncodingException exp){
+            logger.error("Page \"" + pageWikiEncodedTitle + "\" cannot be encoded");
+        }
+        
     }
 
     @Override
