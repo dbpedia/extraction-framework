@@ -20,7 +20,7 @@ import org.dbpedia.extraction.util.StringUtils._
  */
 
 class LiveWikiPage(title : WikiTitle, id : Long, revision : Long,
-                        source : String, revisionTimestamp: String, val contributorID: Long,
+                        source : String, val revisionTimestamp: String, val contributorID: Long,
                         val contributorName: String)
   extends WikiPage(title, null, id, revision, parseTimestamp(revisionTimestamp), source)
   //extends WikiPage(title, id, revision, source)
