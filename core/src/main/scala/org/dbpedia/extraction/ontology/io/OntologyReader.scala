@@ -518,7 +518,7 @@ class OntologyReader
     }
 }
 
-private object OntologyReader
+object OntologyReader
 {
     val CLASSTEMPLATE_NAME = "Class"
     val OBJECTPROPERTY_NAME = "ObjectProperty"
