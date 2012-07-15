@@ -2,9 +2,11 @@ package org.dbpedia.extraction.live.util;
 
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,14 +20,37 @@ public class LastResponseDateManager {
 
     private static Logger logger = Logger.getLogger(LastResponseDateManager.class);
 
-    
+    public static String getNow() {
+        return UTCHelper.transformToUTC(new Date());
+    }
+
+    /**
+     * Use getLastResponseDate(File file) instead.
+     *
+     * @param strFileName
+     * @return
+     */
     public static String getLastResponseDate(String strFileName)
     {
+        // TODO Actually, we should get a file-object here in the first place
+        File file = new File(strFileName);
+
+        return getLastResponseDate(file);
+    }
+
+
+    public static String getLastResponseDate(File file)
+    {
+        if(!file.exists()) {
+            return null;
+        }
+
+
         String strLastResponseDate = null;
         FileInputStream fsLastResponseDateFile = null;
 
         try{
-            fsLastResponseDateFile = new FileInputStream(strFileName);
+            fsLastResponseDateFile = new FileInputStream(file);
 
             int ch;
             strLastResponseDate="";
@@ -35,7 +60,7 @@ public class LastResponseDateManager {
 
         }
         catch(Exception exp){
-           logger.error(ExceptionUtil.toString(exp));
+            logger.error(ExceptionUtil.toString(exp));
         }
         finally {
             try{
@@ -44,7 +69,7 @@ public class LastResponseDateManager {
 
             }
             catch (Exception exp){
-                logger.error("File " + strFileName + " cannot be closed due to " + exp.getMessage());
+                logger.error("File " + file.getAbsolutePath() + " cannot be closed due to " + exp.getMessage());
             }
 
         }
