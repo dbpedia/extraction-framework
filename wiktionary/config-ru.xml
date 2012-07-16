@@ -1341,14 +1341,14 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)ru" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)ru" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)ru" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal"/>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($id)ru" oType="URI"/>
+                                    <triple s="$block-uri($id)ru" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
+                                    <triple s="$block-uri(saveId($definition, $id))ru" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal"/>
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>                    
                         <wikiTemplate>==== Значение ====
-(#{{enum-expanded|$meaningId}} $meaning
+(#{{enum-expanded|$id}} $meaning
 )*
 </wikiTemplate>
                     </template>

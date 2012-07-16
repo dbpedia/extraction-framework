@@ -79,7 +79,8 @@ final class SwebleWrapper extends WikiParser
     def parse(pageId : PageId, wikitext : String) : Page = {
         // Compile the retrieved page
 		val cp = compiler.postprocess(pageId, wikitext, null)
-        //entityMap = cp.getEntityMap
+        if(cp.getEntityMap != null)
+            entityMap = cp.getEntityMap
         //println("after parsing "+entityMap)
         cp.getPage
     }
@@ -165,61 +166,35 @@ final class SwebleWrapper extends WikiParser
             }
             case items : Itemization => items.getContent.iterator.toList.map( (n:AstNode) => {
                 n match {   
-                    case item : ItemizationItem => transformNodes(item.getContent)
+                    case item : ItemizationItem => wrap(item, line)
                     case item : Text => List(new TextNode(item.getContent, line))
                     case _ => throw new Exception("expected ItemizationItem as Itemization child")
                 }
-            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {
-                val sp = (nodes.size > 0 && nodes(0).isInstanceOf[TextNode] && nodes(0).asInstanceOf[TextNode].text == "#"); 
-                if(!sp){
-                    lb add new TextNode("*", line)
-                } 
-                lb addAll nodes
-                if(!sp){
-                    lb add new TextNode("\n", line)
-                }
-                lb
-            }).toList
+            }).flatten
             case items : Enumeration => {
                 var i = 0
                 items.getContent.iterator.toList.map( (n:AstNode) => {
                 //TODO a EnumerationItem can contain Itemization - needs to be emitted as #* 
                 n match {   
-                    case item : EnumerationItem => transformNodes(
-                        item.getContent.iterator.toList.map( (m:AstNode) => {
-                            if(m.isInstanceOf[Itemization]){
-                                m.asInstanceOf[Itemization].setContent(
-                                    m.asInstanceOf[Itemization].getContent.iterator.toList.map( (o:AstNode) => {
-                                        if(o.isInstanceOf[ItemizationItem]){
-                                            List[AstNode](new Text("#"), o)
-                                        } else {
-                                            List[AstNode](o)
-                                        }
-                                    }).flatten.init //without last linebreak
-                                )
-                                List[AstNode](new Text("\n"), m)
-                            } else {
-                                List[AstNode](m)
-                            }
-                        }).flatten
-                    )
+                    case item : EnumerationItem => wrap(item, line)
                     case _ => throw new Exception("expected EnumerationItem as Enumeration child. found "+n.getClass.getName+" instead")
                 }
             }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {
                 i = i+1; 
-                lb add new TextNode("#", line); 
+                lb add nodes.head; //the # symbol hopefully :)
                 lb add new TemplateNode(
                     new WikiTitle("enum-expanded"), 
                     List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line, List(new TextNode("enum-expanded", line)));
-                lb addAll nodes; lb add new TextNode("\n", line); lb} ).toList
+                lb addAll nodes.tail; 
+                lb} ).toList
             }
             case definitions : DefinitionList => definitions.getContent.iterator.toList.map( (n:AstNode) => {
                 n match {   
-                    case item : DefinitionDefinition => List(new TextNode(":", line)) ++transformNodes(item.getContent)
-                    case item : DefinitionTerm => List(new TextNode(";", line)) ++ transformNodes(item.getContent)
-                    case _ => throw new Exception("expected DefinitionDefinition as DefinitionList child. found "+n.getClass.getName+" instead")
+                    case item : DefinitionDefinition => wrap(item, line)
+                    case item : DefinitionTerm => wrap(item, line)
+                    case a : AstNode =>  transformNodes(List(a))//throw new Exception("expected DefinitionDefinition as DefinitionList child. found "+n.getClass.getName+" instead")
                 }
-            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => { lb addAll nodes; lb add new TextNode("\n", line); lb} ).init.toList
+            }).flatten
             case b : Bold => transformNodes(b.getContent) // ignore style
             case i : Italics => transformNodes(i.getContent) // ignore style
             case tplParam : TemplateParameter => List(new TemplateParameterNode(tplParam.getName, tplParam.getDefaultValue != null, line))
@@ -352,6 +327,42 @@ final class SwebleWrapper extends WikiParser
 			content
 		}
 	}
+
+    def getWrap(node : AstNode) : Tuple2[String, String]= {
+        val rtd = node.getAttribute("RTD").asInstanceOf[RtData]
+
+        val start = if(rtd != null && rtd.getRts() != null){
+                        val rts = rtd.getRts()
+                        if(rts.length > 0  && rts(0) != null && rts(0).length > 0){
+                            rts(0)(0).asInstanceOf[String]
+                        } else defaultStart(node)
+                    } else defaultStart(node)
+
+
+        val end = if(rtd != null && rtd.getRts() != null){
+                        val rts = rtd.getRts()
+                        if(rts.length > 1 && rts(1) != null && rts(1).length > 0){
+                            rtd.getRts()(1)(0).asInstanceOf[String]
+                        } else ""
+                    } else ""
+
+        (start, end)
+    }
+
+    def defaultStart(node : AstNode) : String = node match {
+        case i : ItemizationItem => "*"
+        case i : EnumerationItem => "#"
+        case i : DefinitionDefinition => ":"
+        case i : DefinitionTerm => ":"
+        case _ => ""
+    }
+
+    def wrap(node : ContentNode, line : Int) : List[Node] = {
+        val w = getWrap(node)
+        var hasExtraNL = false
+        val c = node.getContent.map((a:AstNode)=>{if(a.isInstanceOf[Enumeration] || a.isInstanceOf[Itemization] || a.isInstanceOf[DefinitionList]){hasExtraNL = true; List(new Text("\n"), a)} else {List(a)}}).flatten
+        List(new TextNode(w._1, line)) ++ transformNodes(c) ++ (if(!hasExtraNL){List(new TextNode(w._2, line))} else {List()})
+    }
 }
 
 

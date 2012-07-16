@@ -29,9 +29,9 @@ trait TranslationHelper extends BindingHandler {
         //main translate triple
         quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, source, property, wordLangObj, WiktionaryPageExtractor.tripleContext)
         //the triple inversed
-        quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordLangObj, property, source, WiktionaryPageExtractor.tripleContext) 
+        //quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordLangObj, property, source, WiktionaryPageExtractor.tripleContext) 
         //a triple about the target word
-        quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasPoSUsage"), wordLangObj, WiktionaryPageExtractor.tripleContext)
+        //quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasPoSUsage"), wordLangObj, WiktionaryPageExtractor.tripleContext)
         //a label for the target word
         quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word), WiktionaryPageExtractor.tripleContext)
         quads.toList
@@ -59,7 +59,7 @@ class GermanTranslationHelper extends TranslationHelper {
                         Logging.printMsg("translationTargetWord: "+translationTargetWord, 4)
                         expandSense(curSense).foreach(sense =>{
                             val translationSourceWord = if(sense.forall(_.isDigit)){ 
-                                vf.createURI(thisBlockURI+"-"+WiktionaryPageExtractor.urify(sense))//if the found sense is numeric
+                                vf.createURI(thisBlockURI+"-"+WiktionaryPageExtractor.urify(sense+WiktionaryPageExtractor.language))//if the found sense is numeric
                             } else {
                                 vf.createURI(thisBlockURI)
                             }
@@ -86,12 +86,16 @@ class EnglishTranslationHelper extends TranslationHelper {
     def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad] = {
         val quads = ListBuffer[Quad]()
         val translateProperty = vf.createURI(WiktionaryPageExtractor.termsNS+"hasTranslation")
-        val translationSourceWord = vf.createURI(thisBlockURI)
-        i.foreach(binding=>{
+        
+        i.foreach( binding => {
             try {
             val langRaw = binding("lang").toReadableString.trim
             val language = WiktionaryPageExtractor.map(langRaw)
             val line = binding("line")
+            val senseGloss = binding("sense").toReadableString.trim
+            val sense = cache.matcher.getIdOption(senseGloss)
+
+            val translationSourceWord = vf.createURI(thisBlockURI+(if(sense.isDefined){"-"+WiktionaryPageExtractor.urify(sense.get+WiktionaryPageExtractor.language)} else {""}))
             line.foreach(node=>{
                 try{
                   if(node.isInstanceOf[TemplateNode]){
