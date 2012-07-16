@@ -578,15 +578,36 @@ object WiktionaryPageExtractor {
 }
 
 class Matcher {
+  /**
+   * a map from id to used glosses for that id
+   */
   val ids = new HashMap[String, ListBuffer[String]]()
+
+  /**
+   * a map from gloss to id
+   */
   val cache = new HashMap[String, String]()
 
-  def matchId(in:String) : Tuple2[String, Float] = {
+  /**
+   * threshold for glosses to match
+   * sim(glossA, glossB) >= threshold => id(glossA) := id(glossB)
+   */
+  val threshold = 0.5
+    
+  def clean(in:String) = in.toLowerCase
+
+  /**
+   * find best id for gloss
+   * may return ("", 0) if all glosses are equally bad
+   */
+  def matchId(gloss:String) : Tuple2[String, Float] = {
     var max = 0.0f
     var maxId = ""
+    val glossCleaned = clean(gloss)
+
     for(id <- ids.keySet){
       for(source <- ids(id)){
-        val cur = sim(in, source)
+        val cur = sim(glossCleaned, source)
         if(cur > max){
           max = cur
           maxId = id
@@ -596,50 +617,85 @@ class Matcher {
     (maxId, max)
   }
 
-  def getId(in : String) : String = {
-    if(cache.contains(in)){return cache(in)}
-    val matched = matchId(in)
-    if(matched._1.equals("")){
-      makeId(in)
-    } else {
-      ids(matched._1).append(in)
-      matched._1
+  /**
+   * get best id for gloss, None if below threshold
+   */
+  def getIdOption(gloss : String) : Option[String] = {
+    val glossCleaned = clean(gloss)
+    if(cache.contains(glossCleaned)){return Some(cache(glossCleaned))}
+    val matched = matchId(gloss)
+    if(matched._2 < threshold)
+        None
+    else {
+        saveId(matched._1, gloss)
+        Some(matched._1)
     }
   }
 
-  def getOrMakeId(in : String) : String = {
-    val matched = matchId(in)
-    if(matched._1.equals("") || matched._2 < 0.5){
-      makeId(in)
+  /**
+   * find best id for gloss, make one if all equally bad
+   */
+  def getId(gloss : String) : String = {
+    val idOption = getIdOption(gloss)
+    if(!idOption.isDefined){
+      makeId(gloss)
     } else {
-      ids(matched._1).append(in)
-      matched._1
+      idOption.get
     }
   }
 
-  def makeId(in : String) : String = {
+  /**
+   * get id if one exists that matches over threshold, create new if not
+   */
+  def getOrMakeId(gloss : String) : String = {
+    val glossCleaned = clean(gloss)
+    if(cache.contains(glossCleaned)){return cache(glossCleaned)}
+    val id = getIdOption(gloss)
+    if(!id.isDefined){
+      makeId(gloss)
+    } else {
+      saveId(id.get, gloss)
+      id.get
+    }
+  }
+
+  /**
+   * create new (incremental) id
+   */
+  def makeId(gloss : String) : String = {
     val id = (ids.size + 1).toString
-    saveId(id, in)
+    saveId(id, gloss)
     id
   }
 
-  def saveId(id : String, in : String) : Unit = {
-    val values = if(ids.contains(id))
-        ids(id)
-     else 
-      new ListBuffer[String]()
-    values.append(in)
-    if(!ids.contains(id))
-        ids(id) = values
-    cache(in) = id
+  /**
+   * add gloss for id, create id if not exists yet
+   */
+  def saveId(id : String, gloss : String) : Unit = {
+    val glossCleaned = clean(gloss)
+    if(!ids.contains(id)){
+       ids(id) = new ListBuffer[String]() //create
+    }
+    //avoid double add, but should be harmless
+    if(!ids(id).contains(glossCleaned)){
+        //add
+        ids(id).append(glossCleaned) 
+    }
+    cache(glossCleaned) = id
   }
 
   def sim(s1 : String, s2 : String) : Float = {
     if(s1.equals(s2)){
+      //equal match
       1.0f
     } else if (s1.containsSlice(s2) || s2.containsSlice(s1)){
+      //substring match
       0.9f
     } else {
+      //harder to computer similarity
+
+      //dice(ngrams(s1,3), ngrams(s2,3))
+      //jaccard(ngrams(s1,3), ngrams(s2,3))
       //overlap(ngrams(s1,3), ngrams(s2,3))
       levenshtein(s1, s2)
     }

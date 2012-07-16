@@ -407,7 +407,7 @@
                     <resultTemplates>
                         <resultTemplate>
                             <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map($pos))" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
                                 <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map($pos))" oType="URI" />
                             </triples>
                         </resultTemplate>
@@ -419,9 +419,7 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI" />
-                                    <triple s="$block-uri($meaningId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI" />
-                                    <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
+                                    <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>                    
@@ -451,9 +449,9 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)de" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)de" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>                    
@@ -528,8 +526,8 @@ Singular=$flection-singular
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$reference" oType="literal" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)de" oType="URI"/>
+                                    <triple s="$block-uri($meaningId)de" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$reference" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates> 
@@ -562,7 +560,7 @@ Singular=$flection-singular
 
 </wikiTemplate>
                     </template>
-                    <template name="relatedWords" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
+                    <template name="collocation" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
                         </parameters>                   
