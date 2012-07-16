@@ -4,8 +4,10 @@ import com.bbn.parliament.jena.joseki.bridge.util.NTriplesUtil;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
+import org.openrdf.model.impl.URIImpl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +61,8 @@ public class CoreUtil {
         if(requiredResource instanceof Resource){
 
             //strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
+//            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
+            strSPARULPattern = org.openrdf.rio.ntriples.NTriplesUtil.toNTriplesString(new URIImpl(requiredResource.asResource().getURI()));
 
         }
         /*else if(requiredResource instanceof BNode){
