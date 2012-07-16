@@ -62,7 +62,7 @@ public class CoreUtil {
 
             //strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
 //            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-            strSPARULPattern = org.openrdf.rio.ntriples.NTriplesUtil.toNTriplesString(new URIImpl(requiredResource.asResource().getURI()));
+            strSPARULPattern = org.openrdf.rio.ntriples.NTriplesUtil.toNTriplesString(new URIImpl(((Resource) requiredResource).getURI()));
 
         }
         /*else if(requiredResource instanceof BNode){
