@@ -29,6 +29,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -44,7 +45,7 @@ import org.openrdf.model.impl.URIImpl;*/
  * This class represents the destination that should be updated when live data is extracted i.e. Virtuoso server
  */
 public class LiveUpdateDestination implements Destination{
-    
+
     private static Logger logger = Logger.getLogger(LiveUpdateDestination.class);
 
     //This is used for placing a time limit on the execution of triples update process
@@ -167,12 +168,12 @@ public class LiveUpdateDestination implements Destination{
         catch (UnsupportedEncodingException exp){
             logger.error("Page \"" + pageWikiEncodedTitle + "\" cannot be encoded");
         }
-        
+
     }
 
     @Override
     public void open() {}
-    
+
     private static <T> T timedCall(FutureTask<T> task, long timeout, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
         THREAD_POOL.execute(task);
         return task.get(timeout, timeUnit);
@@ -180,7 +181,7 @@ public class LiveUpdateDestination implements Destination{
 
     /**
      * Handles the extractor according to its status, so it can be added to active, purge or keep extractors
-     * @param extractorSpec The specification of the extractor 
+     * @param extractorSpec The specification of the extractor
      */
     private void addExtractor(ExtractorSpecification extractorSpec){
         switch(extractorSpec.status){
@@ -216,14 +217,14 @@ public class LiveUpdateDestination implements Destination{
 //                String one = (String)objFilter;
 //                this.producesFilterList.add(one);
 //                }
-        producesFilterList = filter; 
+        producesFilterList = filter;
     }
 
     private void _prepare(String languageProperties){
-        } 
+        }
 
     public void start() { }
-    
+
     public void accept(ExtractionResult extractionResult) {
 //        Model addedTriplesModel = ModelFactory.createDefaultModel();
 
@@ -408,7 +409,7 @@ public class LiveUpdateDestination implements Destination{
         SPARQLEndpoint se = SPARQLEndpoint.getDefaultEndpoint();
         return se.executeCount(testquery, this.getClass(), this.graphURI);
     }
-    
+
     @Override
     public void close() {
         try{
@@ -456,7 +457,7 @@ public class LiveUpdateDestination implements Destination{
             logger.fatal(" abstracts before/after: " + abstractCount +" / " +abstractCountAfter);
         else
             logger.info(" abstracts before/after: " + abstractCount +" / " +abstractCountAfter);
-            
+
         }
         catch(Exception exp){
 
@@ -503,9 +504,12 @@ public class LiveUpdateDestination implements Destination{
                 RDFTriple triple = (RDFTriple) addTriples.get(tripleHash);
                 String predicate =  triple.getPredicate().toString();
                 if((predicate.compareTo(Constants.RDFS_COMMENT) == 0) || (predicate.compareTo(Constants.DB_ABSTRACT) == 0)){
-//                    RDFTriple xyz = new RDFTriple(triple.getSubject(), triple.getPredicate(), new URIImpl("?ooooo"));
                     removeOldRDFSAbstractOrComment(triple);
 
+                }
+                else if((predicate.compareTo(Constants.DBM_EDITLINK) == 0) || (predicate.compareTo(Constants.DBM_REVISION) == 0)
+                        || (predicate.compareTo(Constants.DC_MODIFIED) == 0)){
+                    removeOldMetaInformation(triple);
                 }
             }
 
@@ -526,8 +530,42 @@ public class LiveUpdateDestination implements Destination{
         String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
         ResultSet result = this._jdbc_sparul_execute(sparul);
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(result!= null){
+                result.close();
+                result.getStatement().close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement of result cannot be closed in function removeOldRDFSAbstractOrComment");
+        }
     }
 
+    /**
+     * Removes the old meta information for the passed triple, sometimes the meta information cannot be removed and so
+     * multiple meta information may exist for the same page
+     * @param triple    A triple containing subject, predicate, and object for which the old meta information should be removed.
+     */
+    private void removeOldMetaInformation(RDFTriple triple){
+        String pattern = Util.convertToSPARULPattern(triple.getSubject()) + " " +
+                Util.convertToSPARULPattern(triple.getPredicate()) + " " + "?o"+" . \n";
+        String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
+
+        ResultSet result = this._jdbc_sparul_execute(sparul);
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(result!= null){
+                result.close();
+                result.getStatement().close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement of result cannot be closed in function removeOldMetaInformation");
+        }
+    }
 
 	private void _primaryStrategy(){
 		/*
@@ -641,7 +679,19 @@ public class LiveUpdateDestination implements Destination{
                 strDeletedTriples += pattern;
 
                 sparul = "DELETE FROM <" + this.graphURI +"> { " + pattern + " }" + " WHERE {\n" + pattern + " }";
-                this._jdbc_sparul_execute(sparul);
+                ResultSet sparulResults = this._jdbc_sparul_execute(sparul);
+
+                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                try{
+                    if(sparulResults!= null){
+                        sparulResults.close();
+                        sparulResults.getStatement().close();
+                    }
+                }
+                catch (SQLException sqlExp){
+                    logger.warn("SQL statement of _alt_delete_all_triples cannot be closed");
+                }
+
             }
         }
         String needed = Timer.stopAsString(timerName);
@@ -655,7 +705,7 @@ public class LiveUpdateDestination implements Destination{
                 Thread.sleep(TEST_DELAY);
             }
             catch (Exception exp){
-                
+
             }
 
 
@@ -690,6 +740,17 @@ public class LiveUpdateDestination implements Destination{
             }  else{
                 logger.info("SUCCESS");
             }
+        }
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(result !=  null){
+                result.close();
+                result.getStatement().close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement of _alt_delete_all_triples cannot be closed");
         }
 
     }
@@ -864,7 +925,7 @@ public class LiveUpdateDestination implements Destination{
         + subject + "/%>)}";
 		sparul += where ;
 
-        int countbefore = 0, countafter = 0; 
+        int countbefore = 0, countafter = 0;
 
 		//TESTS>>>>>>>>>>>>
 		if(debug_run_tests){
@@ -904,7 +965,7 @@ public class LiveUpdateDestination implements Destination{
         }
 		//TESTS<<<<<<<<<<<<
 	}
-    
+
     public void _jdbc_ttlp_insert_triples(HashMap triplesToAdd){
         if(this.debug_turn_off_insert){
             return;
@@ -1109,9 +1170,19 @@ public class LiveUpdateDestination implements Destination{
                         }
                     }
 
+                    //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                    try{
+                        results.close();
+                        results.getStatement().close();
+                    }
+                    catch (SQLException sqlExp){
+                        logger.warn("SQL statement results cannot be closed in function _jdbc_sparul_execute");
+                    }
                 }
-                    this.counterTotalJDBCOperations+=1;
+
+                this.counterTotalJDBCOperations+=1;
                 logger.trace(virtuosoPl);
+
             }
             return results;
 
