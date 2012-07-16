@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <ignore>
-        <page startsWith="Vorlage:" />
-        <page startsWith="de:Vorlage:" />
-        <page startsWith="de:Kategorie:" />
-        <page startsWith="Kategorie:" />
-        <page startsWith="Wiktionary:" />
         <page startsWith="Archiv " />
         <page startsWith="Liste " />
-        <page startsWith="Datei:" />
-        <page startsWith="Verzeichnis:" />
-        <page startsWith="de:Verzeichnis:" />
         <page endsWith=" (Konjugation)" />
         <page endsWith=" (Deklination)" />
+
+        <page startsWith="Medium:" />
+        <page startsWith="Spezial:" />
+        <page startsWith="Diskussion:" />
+        <page startsWith="Benutzer:" />
+        <page startsWith="Benutzer Diskussion:" />
+        <page startsWith="Wiktionary:" />
+        <page startsWith="Wiktionary Diskussion:" />
+        <page startsWith="Datei:" />
+        <page startsWith="Datei Diskussion:" />
+        <page startsWith="MediaWiki:" />
+        <page startsWith="MediaWiki Diskussion:" />
+        <page startsWith="Vorlage:" />
+        <page startsWith="Vorlage Diskussion:" />
+        <page startsWith="Hilfe:" />
+        <page startsWith="Hilfe Diskussion:" />
+        <page startsWith="Kategorie:" />
+        <page startsWith="Kategorie Diskussion:" />
+        <page startsWith="Verzeichnis:" />
+        <page startsWith="Verzeichnis Diskussion:" />
+        <page startsWith="Thesaurus:" />
+        <page startsWith="Thesaurus Diskussion:" />
     </ignore>
     <mappings>
         <mapping from="Substantiv" to="Noun"/>
@@ -391,29 +405,33 @@
             </template>
         </epilogs>
         <block name="lang">
-            <indicator name="lang-start">
-                <resultTemplates>
-                    <resultTemplate>
-                        <triples>
-                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-uri(map($language))" oType="URI" oNewBlock="true" />
-                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/uri(map($language))" oType="URI" />
-                        </triples>
-                    </resultTemplate>
-                </resultTemplates>
-                <wikiTemplate>== $word ({{Sprache|$language}}) ==</wikiTemplate>
-            </indicator>
-            <block name="pos">
-                <indicator name="pos-start">
+            <indicators>
+                <indicator name="lang-start">
                     <resultTemplates>
                         <resultTemplate>
                             <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map($pos))" oType="URI" />
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-uri(map($language))" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/uri(map($language))" oType="URI" />
                             </triples>
                         </resultTemplate>
-                    </resultTemplates>                    
-                    <wikiTemplate>=== {{Wortart|$pos|$language}} ===</wikiTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>== $word ({{Sprache|$language}}) ==</wikiTemplate>
                 </indicator>
+            </indicators>
+            <block name="pos">
+                <indicators>
+                    <indicator name="pos-start">
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map($pos))" oType="URI" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>=== {{Wortart|$pos|$language}} ===</wikiTemplate>
+                    </indicator>
+                </indicators>
                 <templates>
                     <template name="example">
                         <resultTemplates>
