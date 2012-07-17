@@ -1,30 +1,33 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 /**
- * Extracts revision ids to articles.
+ * Extracts revision ids to articles, e.g.
+ * <http://en.wikipedia.org/wiki/Foo> <http://dbpedia.org/ontology/wikiPageRevisionID> "123456"^^<xsd:integer> .
+ * 
+ * FIXME: this doesn't make sense.
+ * 
  */
 class RevisionIdExtractor (
-  context : {
-    def ontology : Ontology
-    def language : Language
+  context: {
+    def ontology: Ontology
+    def language: Language
   }
 )
 extends Extractor
 {
   private val wikiPageRevisionIDProperty = context.ontology.properties("wikiPageRevisionID")
 
-  override val datasets = Set(DBpediaDatasets.Revisions)
+  override val datasets = Set(DBpediaDatasets.RevisionIds)
+  
+  private val quad = QuadBuilder(context.language, DBpediaDatasets.RevisionIds, wikiPageRevisionIDProperty, context.ontology.datatypes("xsd:integer")) _
 
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
-  {
+  override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     val objectLink = node.root.title.pageIri
-
-    Seq(new Quad(context.language, DBpediaDatasets.Revisions, objectLink, wikiPageRevisionIDProperty,
-        node.revision.toString, node.sourceUri, context.ontology.datatypes("xsd:integer")))
+    Seq(quad(objectLink, node.revision.toString, node.sourceUri))
   }
 }
