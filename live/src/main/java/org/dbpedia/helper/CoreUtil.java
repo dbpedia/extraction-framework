@@ -4,8 +4,10 @@ import com.bbn.parliament.jena.joseki.bridge.util.NTriplesUtil;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
+import org.openrdf.model.impl.URIImpl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +61,8 @@ public class CoreUtil {
         if(requiredResource instanceof Resource){
 
             //strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
+//            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
+            strSPARULPattern = org.openrdf.rio.ntriples.NTriplesUtil.toNTriplesString(new URIImpl(((Resource) requiredResource).getURI()));
 
         }
         /*else if(requiredResource instanceof BNode){
@@ -82,14 +85,23 @@ public class CoreUtil {
             else
                 quotes = "\"";
 
-            if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
+            /*if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
                 strSPARULPattern = quotes + escapeString( requiredResource.toString()) + quotes;
             else if(((Literal) requiredResource).getDatatype() == null)
                 strSPARULPattern = quotes + escapeString(requiredResource.toString() ) + quotes +
                         "@" + ((Literal) requiredResource).getLanguage();
             else
                 strSPARULPattern = quotes + escapeString(requiredResource.toString()) + quotes + "^^<" +
-                        ((Literal) requiredResource).getDatatype() + ">";
+                        ((Literal) requiredResource).getDatatype() + ">";*/
+
+            if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
+                strSPARULPattern = quotes + escapeString( ((Literal) requiredResource).getValue().toString()) + quotes;
+            else if(((Literal) requiredResource).getDatatype() == null)
+                strSPARULPattern = quotes + escapeString(((Literal) requiredResource).getValue().toString() ) + quotes +
+                        "@" + ((Literal) requiredResource).getLanguage();
+            else
+                strSPARULPattern = quotes + escapeString(((Literal) requiredResource).getValue().toString()) + quotes + "^^<" +
+                        ((Literal) requiredResource).getDatatype().getURI() + ">";
 
         }
         return strSPARULPattern;
@@ -140,11 +152,9 @@ public class CoreUtil {
     }
 
     /**
-     * @deprecated please use WikiUtil.wikiEncode!
      * @param page_title: decoded page title
      * @return encoded page title
      */
-    @Deprecated
     public static String wikipediaEncode(String page_title) {
         return wrapString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
      }
