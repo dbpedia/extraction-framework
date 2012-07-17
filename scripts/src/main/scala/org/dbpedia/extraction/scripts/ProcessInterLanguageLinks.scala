@@ -99,8 +99,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   - at most 256 languages (2^8). We currently use 111.
   - at most ~16 million unique titles (2^24). There currently are ~9 million.
   
-  If we use more languages and break these limits, we'll probably need to change the algorithm,
-  which won't be easy without letting the memory requirements explode. See below.
+  If we use more languages and break these limits, we'll need to change the algorithm. See below.
   
   The current code throws ArrayIndexOutOfBoundsExceptions if there are more than 2^8 languages
   or more than 2^24 titles.
@@ -121,8 +120,10 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   Each 'from' language has its own link array. Each link still takes 64 bits, but the top 27 bits 
   are the 'from' title, the middle 10 bits are the 'to' language, and the bottom 27 bits are the 
-  'to' title. 
-  
+  'to' title. For each language, first create an array with 2^24 elements (~16 million elements,
+  128MB, enough for the 'largest' language (English) with ~11 million links) and when all links 
+  are found copy it to a new array with the size actually needed. Minor improvement: re-use the 
+  2^24 element array, no need to create a new one for each language.
   */
   
   /** language code -> language. built in setLanguages() or readDump(), used everywhere. */
@@ -198,10 +199,6 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     titleCount = 0
     
     // Enough space for ~270 million links. The languages with 10000+ articles have ~200 million links.
-    // TODO: either grow the array as needed, or use a list of arrays with e.g. 2^20 items each and
-    // create a new array when needed. The single growing array is simpler, but it means that while
-    // copying from the old to the new array we need twice the space. With the list of arrays, 
-    // there is no copying, but access is slower, and we have to re-implement sort and binary search.
     links = new Array[Long](1 << 28)
     linkCount = 0
     
