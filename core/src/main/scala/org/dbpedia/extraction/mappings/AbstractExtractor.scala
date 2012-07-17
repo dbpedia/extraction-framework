@@ -96,36 +96,42 @@ extends Extractor
      */
     def retrievePage(pageTitle : WikiTitle, pageWikiText : String) : String =
     {
-        for(_ <- 1 to maxRetries)
+      // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
+      // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
+      // TODO: there may be other characters that need to be escaped.
+      val titleParam = pageTitle.encodedWithNamespace.replace("&", "%26")
+      
+      // Fill parameters
+      val parameters = apiParametersFormat.format(titleParam, URLEncoder.encode(pageWikiText, "UTF-8"))
+
+      val url = new URL(apiUrl)
+      
+      for(_ <- 1 to maxRetries)
+      {
+        try
         {
-            try
-            {
-                // Fill parameters
-                val parameters = apiParametersFormat.format(pageTitle, URLEncoder.encode(pageWikiText, "UTF-8"))
+          // Send data
+          val conn = url.openConnection
+          conn.setDoOutput(true)
+          conn.setConnectTimeout(timeoutMs)
+          conn.setReadTimeout(timeoutMs)
+          val writer = new OutputStreamWriter(conn.getOutputStream)
+          writer.write(parameters)
+          writer.flush()
+          writer.close()
 
-                // Send data
-                val url = new URL(apiUrl)
-                val conn = url.openConnection
-                conn.setDoOutput(true)
-                conn.setConnectTimeout(timeoutMs)
-                conn.setReadTimeout(timeoutMs)
-                val writer = new OutputStreamWriter(conn.getOutputStream)
-                writer.write(parameters)
-                writer.flush()
-                writer.close()
-
-                // Read answer
-                return readInAbstract(conn.getInputStream)
-            }
-            catch
-            {
-                case ex  : Exception => logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying...", ex)
-            }
-
-            //Thread.sleep(1000)
+          // Read answer
+          return readInAbstract(conn.getInputStream)
+        }
+        catch
+        {
+          case ex  : Exception => logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying...", ex)
         }
 
-        throw new Exception("Could not retrieve abstract for page: " + pageTitle)
+        //Thread.sleep(1000)
+      }
+
+      throw new Exception("Could not retrieve abstract for page: " + pageTitle)
     }
 
     /**
