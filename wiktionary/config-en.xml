@@ -405,6 +405,9 @@
         <templateRepresentativeProperty tplName="SAMPA" pKey="1" />
         <templateRepresentativeProperty tplName="rhymes" pKey="1" />
         <templateRepresentativeProperty tplName="homophones" pKey="1" />
+        <templateRepresentativeProperty tplName="l" pKey="2" />
+        <templateRepresentativeProperty tplName="head" pKey="4" />
+        <templateRepresentativeProperty tplName="proto" pKey="2" />
     </templateRepresentativeProperties>
     <page name="page">
         <triples>
@@ -537,7 +540,6 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===Anagrams===
-
 (* $anagram
 )+
 </wikiTemplate>
@@ -608,7 +610,6 @@ $etymology
                         </resultTemplate>
                     </resultTemplates>
                     <wikiTemplate>===References===
-
 (* $reference
 )+
 </wikiTemplate>
@@ -668,8 +669,7 @@ $etymology
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>
-                        <wikiTemplate>
-(#{{enum-expanded|$id}}$definition
+                        <wikiTemplate>(#{{enum-expanded|$id}}$definition
 (#: $example
 )?(#* $source
 (#*: $quote
@@ -680,8 +680,7 @@ $etymology
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasDerivedTerm"/>                   
                         </parameters> 
-                        <wikiTemplate>
-=====Derived Terms=====
+                        <wikiTemplate>=====Derived Terms=====
 {{rel-top|$note2}}
 (* $line
 )+{{rel-mid}}
@@ -693,13 +692,75 @@ $etymology
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasDerivedTerm"/>                   
                         </parameters> 
-                        <wikiTemplate>
-=====Derived Terms=====
+                        <wikiTemplate>=====Derived Terms=====
 {{rel-top4|$note2}}
 (* $line
 )+{{rel-mid4}}
 (* $line
 )+{{rel-bottom}}
+</wikiTemplate>
+                    </template>
+                    <template name="derived3" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasDerivedTerm"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Derived Terms=====
+(* $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="synonyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Synonyms=====
+(* {{sense|$sense}}$line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="synonyms2" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Synonyms=====
+(* $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="antonyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasAntonym"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Antonyms=====
+(* {{sense|$sense}}$line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="coordinateTerms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCoordinateTerm"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Coordinate terms=====
+(* {{sense|$sense}}$line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="hyponyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Hyponyms=====
+(* {{sense|$sense}}$line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="hypernyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>                   
+                        </parameters> 
+                        <wikiTemplate>=====Hypernyms=====
+(* {{sense|$sense}}$line
+)+
 </wikiTemplate>
                     </template>
                 </templates>
@@ -757,19 +818,19 @@ $etymology
 </wikiTemplate>
                     </template>
                     <template name="anagram">
-                    <resultTemplates>
-                        <resultTemplate>
-                            <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAnagram" o="$anagram" oType="literal"/>
-                            </triples>
-                        </resultTemplate>
-                    </resultTemplates>
-                    <wikiTemplate>===Anagrams===
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasAnagram" o="$anagram" oType="literal"/>
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>
+                        <wikiTemplate>===Anagrams===
 (* $anagram
 )+
 </wikiTemplate>
-                </template>
-                <template name="translation" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.EnglishTranslationHelper">
+                    </template>
+                    <template name="translation" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.EnglishTranslationHelper">
                         <!-- no result template here - triples are generated by helper -->
                         <wikiTemplate>====Translations====
 ({{trans-top|$sense}}
@@ -786,7 +847,7 @@ $etymology
                             <parameter name="linkProperty" value="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>                   
                         </parameters> 
                         <wikiTemplate>===External links===
-($line
+(* $line
 )+
 </wikiTemplate>
                     </template>
@@ -812,8 +873,26 @@ $etymology
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
                         </parameters> 
-                        <wikiTemplate>=====Synonyms=====
+                        <wikiTemplate>====Synonyms====
+(* {{sense|$sense}}$line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="synonyms2" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.LinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
+                        </parameters> 
+                        <wikiTemplate>====Synonyms====
 (* $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="antonyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasAntonym"/>                   
+                        </parameters> 
+                        <wikiTemplate>====Antonyms====
+(* {{sense|$sense}}$line
 )+
 </wikiTemplate>
                     </template>
@@ -821,8 +900,8 @@ $etymology
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCoordinateTerm"/>                   
                         </parameters> 
-                        <wikiTemplate>=====Coordinate terms=====
-(* $line
+                        <wikiTemplate>====Coordinate terms====
+(* {{sense|$sense}}$line
 )+
 </wikiTemplate>
                     </template>
@@ -830,8 +909,8 @@ $etymology
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>                   
                         </parameters> 
-                        <wikiTemplate>=====Hyponyms=====
-(* $line
+                        <wikiTemplate>====Hyponyms====
+(* {{sense|$sense}}$line
 )+
 </wikiTemplate>
                     </template>
@@ -839,8 +918,8 @@ $etymology
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>                   
                         </parameters> 
-                        <wikiTemplate>=====Hypernyms=====
-(* $line
+                        <wikiTemplate>====Hypernyms====
+(* {{sense|$sense}}$line
 )+
 </wikiTemplate>
                     </template>

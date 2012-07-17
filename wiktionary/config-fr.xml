@@ -197,17 +197,19 @@
             </template>
         </epilogs>
         <block name="lang">
-            <indicator name="lang-start">
-                <resultTemplates>
-                    <resultTemplate>
-                        <triples>
-                            <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-uri(map($language))" oType="URI" oNewBlock="true" />
-                            <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/uri(map($language))" oType="URI" />
-                        </triples>
-                    </resultTemplate>
-                </resultTemplates>
-                <wikiTemplate>== {{=$language=}} ==</wikiTemplate>
-            </indicator>
+            <indicators>
+                <indicator name="lang-start">
+                    <resultTemplates>
+                        <resultTemplate>
+                            <triples>
+                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasLangUsage" o="$block-uri(map($language))" oType="URI" oNewBlock="true" />
+                                <triple s="$block" p="http://purl.org/dc/elements/1.1/language" o="http://wiktionary.dbpedia.org/terms/uri(map($language))" oType="URI" />
+                            </triples>
+                        </resultTemplate>
+                    </resultTemplates>
+                    <wikiTemplate>== {{=$language=}} ==</wikiTemplate>
+                </indicator>
+            </indicators>
             <templates>
                  <template name="etymology">
                         <resultTemplates>
@@ -223,17 +225,19 @@
                 </template>
             </templates>
             <block name="pos">
-                <indicator name="pos-start">
-                    <resultTemplates>
-                        <resultTemplate>
-                            <triples>
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
-                                <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map(assertMapped($pos)))" oType="URI" />
-                            </triples>
-                        </resultTemplate>
-                    </resultTemplates>                    
-                    <wikiTemplate>{{-$pos-|$language}}</wikiTemplate>
-                </indicator>
+                <indicators>
+                    <indicator name="pos-start">
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoSUsage" o="$block-uri(map(assertMapped($pos)))" oType="URI" oNewBlock="true" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map(assertMapped($pos)))" oType="URI" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>                    
+                        <wikiTemplate>{{-$pos-|$language}}</wikiTemplate>
+                    </indicator>
+                </indicators>
                 <templates>
                     <!--template name="example">
                         <resultTemplates>
