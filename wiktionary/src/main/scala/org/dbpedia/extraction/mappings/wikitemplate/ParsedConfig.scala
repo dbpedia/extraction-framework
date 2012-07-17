@@ -73,7 +73,7 @@ object Tpl {
     if(tplExpanded.startsWith("\n")){
         tpl.push(new TextNode("\n",0))
     }
-    
+    //println((n \ "@name").text + tpl)
     val rt = (n \ "resultTemplates" \ "resultTemplate").map(
             rtn => new ResultTemplate(
                 (rtn \ "triples" \ "triple").map(

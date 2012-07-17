@@ -31,7 +31,7 @@ trait TranslationHelper extends BindingHandler {
         //the triple inversed
         //quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordLangObj, property, source, WiktionaryPageExtractor.tripleContext) 
         //a triple about the target word
-        //quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasPoSUsage"), wordLangObj, WiktionaryPageExtractor.tripleContext)
+        quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasLangUsage"), wordLangObj, WiktionaryPageExtractor.tripleContext)
         //a label for the target word
         quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word), WiktionaryPageExtractor.tripleContext)
         quads.toList
@@ -39,6 +39,7 @@ trait TranslationHelper extends BindingHandler {
 }
 
 class GermanTranslationHelper extends TranslationHelper {
+    val sensePattern = "\\[(\\d+)\\]".r
     def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad] = {
         val quads = ListBuffer[Quad]()
         val translateProperty = vf.createURI(WiktionaryPageExtractor.termsNS+"hasTranslation")
@@ -50,8 +51,11 @@ class GermanTranslationHelper extends TranslationHelper {
             var curSense = "1"
             line.foreach(node=>{
                 try{
-                if(node.isInstanceOf[LinkNode]){
-                   curSense = node.toWikiText.substring(1, node.toWikiText.length-1)
+                if(node.isInstanceOf[TextNode]){
+                    val matchOption = sensePattern.findFirstIn(node.asInstanceOf[TextNode].text)
+                    if(matchOption.isDefined){
+                        curSense = matchOption.get.drop(1).dropRight(1) // drop the brackets
+                    }
                 } else if(node.isInstanceOf[TemplateNode]){
                     val tplType = node.asInstanceOf[TemplateNode].title.decoded
                     if(tplType == "Ü" || tplType == "Üxx"){

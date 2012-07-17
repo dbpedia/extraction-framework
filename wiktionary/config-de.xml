@@ -352,6 +352,10 @@
             <outputAggregatedClass uri="http://www.monnet-project.eu/lemon#LexicalSense" />
         </config>
     </postprocessing>
+    <templateRepresentativeProperties>
+        <templateRepresentativeProperty tplName="Ü" pKey="2" />
+        <templateRepresentativeProperty tplName="Üxx" pKey="2" />
+    </templateRepresentativeProperties>
     <saveVars>
         <var name="pos" />
         <var name="language" />
@@ -428,8 +432,8 @@
                                     <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPoS" o="http://wiktionary.dbpedia.org/terms/uri(map($pos))" oType="URI" />
                                 </triples>
                             </resultTemplate>
-                        </resultTemplates>                    
-                        <wikiTemplate>=== {{Wortart|$pos|$language}} ===</wikiTemplate>
+                        </resultTemplates>
+                        <wikiTemplate>=== {{Wortart|$pos|$language}}$any===</wikiTemplate>
                     </indicator>
                 </indicators>
                 <templates>
@@ -440,7 +444,7 @@
                                     <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
                                 </triples>
                             </resultTemplate>
-                        </resultTemplates>                    
+                        </resultTemplates> 
                         <wikiTemplate>{{Beispiele}}
 (:~~ExternalLinkNode|$meaningId~~ $example
 )+
@@ -458,7 +462,7 @@
                                     <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasHyphenationPlural" o="$hyphenationPlural" oType="literal" />
                                 </triples>
                             </resultTemplate>
-                        </resultTemplates>                    
+                        </resultTemplates>
                         <wikiTemplate>{{Silbentrennung|}}
 :$hyphenationSingular, {{Pl.}} $hyphenationPlural
 </wikiTemplate>
@@ -472,22 +476,34 @@
                                     <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
                                 </triples>
                             </resultTemplate>
-                        </resultTemplates>                    
+                        </resultTemplates>
                         <wikiTemplate>{{Bedeutungen}}
-(:~~ExternalLinkNode|$meaningId~~ $meaning
+(:[$meaningId] $meaning
 )+
 </wikiTemplate>
                     </template>
-                    <template name="etymology">
+                    <template name="etymology2">
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
                                     <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$etymology" oType="literal" />
                                 </triples>
                             </resultTemplate>
-                        </resultTemplates>                    
+                        </resultTemplates>
                         <wikiTemplate>{{Herkunft}}
 :$etymology
+</wikiTemplate>
+                    </template>
+                    <template name="etymology1">
+                        <resultTemplates>
+                            <resultTemplate>
+                                <triples>
+                                    <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$etymology" oType="literal" />
+                                </triples>
+                            </resultTemplate>
+                        </resultTemplates>
+                        <wikiTemplate>{{Herkunft}}
+:[$meaningId] $etymology
 </wikiTemplate>
                     </template>
                     <template name="proverbs">
@@ -497,7 +513,7 @@
                                     <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasProverb" o="$proverb" oType="literal" />
                                 </triples>
                             </resultTemplate>
-                        </resultTemplates>                    
+                        </resultTemplates>
                         <wikiTemplate>{{Sprichwörter}}
 (:$proverb
 )+
@@ -533,27 +549,26 @@ Singular=$flection-singular
                                     <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular" o="$pronunciationSingular" oType="literal" />
                                 </triples>
                             </resultTemplate>
-                        </resultTemplates>                       
+                        </resultTemplates>
                         <wikiTemplate>{{Aussprache}}
 :{{IPA}} {{Lautschrift|$pronunciationSingular}}, {{Pl.}} {{Lautschrift|$pronunciation-plural}}
 :{{Hörbeispiele}} {{Audio|$audioSingular}}, {{Pl.}} {{Audio|$audio-plural}}
 
 </wikiTemplate>
                     </template>
-                    <template name="reference">
+                    <!--template name="reference">
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)de" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)de" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="$reference" oType="literal" />
+                                    <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasReference" o="$reference" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates> 
                         <wikiTemplate>{{Referenzen}}
-(:~~ExternalLinkNode|$meaningId~~ $reference
-)
+(:[$meaningId] $reference
+)+
 </wikiTemplate>
-                    </template>
+                    </template-->
                     <template name="source">
                         <resultTemplates>
                             <resultTemplate>
@@ -564,7 +579,7 @@ Singular=$flection-singular
                         </resultTemplates> 
                         <wikiTemplate>{{Quellen}}
 (:$source
-)</wikiTemplate>
+)+</wikiTemplate>
                     </template>
                     <template name="translation" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.GermanTranslationHelper">
                         <!-- no result template here - triples are generated by helper -->
@@ -580,46 +595,73 @@ Singular=$flection-singular
                     </template>
                     <template name="collocation" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
-                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>                   
-                        </parameters>                   
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCollocation"/>
+                        </parameters>
                         <wikiTemplate>{{Charakteristische Wortkombinationen}}
-(:$sense $line
+(:[$meaningId] $line
 )+
 </wikiTemplate>
                     </template>
                     <template name="synonyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
-                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>                   
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasSynonym"/>
                         </parameters> 
                         <wikiTemplate>{{Synonyme}}
-(:$sense $line
+(:[$meaningId] $line
 )+
 </wikiTemplate>
                     </template>
                     <template name="hyperonym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
-                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>                   
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>
                         </parameters> 
                         <wikiTemplate>{{Oberbegriffe}}
-(:$sense $line
+(:[$meaningId] $line
 )+
 </wikiTemplate>
                     </template>
                     <template name="hyponym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
-                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>                   
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>
                         </parameters> 
                         <wikiTemplate>{{Unterbegriffe}}
-(:$sense $line
+(:[$meaningId] $line
 )+
 </wikiTemplate>
                     </template>
                     <template name="antonym" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
-                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasAntonym"/>                   
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasAntonym"/>
                         </parameters> 
                         <wikiTemplate>{{Gegenwörter}}
-(:$sense $line
+(:[$meaningId] $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="relatedWords" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCoordinateTerm"/>
+                        </parameters> 
+                        <wikiTemplate>{{Sinnverwandte Wörter}}
+(:[$meaningId] $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="femaleVersions" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasFemaleForm"/>
+                        </parameters> 
+                        <wikiTemplate>{{Weibliche Wortformen}}
+(:[$meaningId] $line
+)+
+</wikiTemplate>
+                    </template>
+                    <template name="smaller" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
+                        <parameters>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasDiminutive"/>
+                        </parameters> 
+                        <wikiTemplate>{{Verkleinerungsformen}}
+(:[$meaningId] $line
 )+
 </wikiTemplate>
                     </template>

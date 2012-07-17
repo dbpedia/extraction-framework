@@ -463,7 +463,8 @@ class MyNodeList(val nl : List[Node]) {
         val pKey = WiktionaryPageExtractor.templateRepresentativeProperty(tn.title.decoded)
         val p = tn.property(pKey)
         if(p.isDefined){
-            p.get.retrieveText.getOrElse("") 
+            println("tpl="+p.get.children)
+            p.get.children.toReadableString
         } else {
             ""
         }        

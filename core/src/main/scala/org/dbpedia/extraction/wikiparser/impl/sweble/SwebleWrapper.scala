@@ -147,10 +147,14 @@ final class SwebleWrapper extends WikiParser
                 val destinationNodes = List[Node](new TextNode(il.getTarget, line)) //parsing of target not yet supported
                 val titleNodes = if(!il.getTitle.getContent.isEmpty){transformNodes(il.getTitle.getContent)} else {List(new TextNode(il.getTarget, line))}
 
+                val postfix : List[Node] = if(il.getPostfix != null && il.getPostfix != ""){
+                    List(new TextNode(il.getPostfix, line))
+                } else List()
+
                 if (destinationURL.language == language) {
-                    List(new InternalLinkNode(destinationURL, titleNodes, line, destinationNodes))
+                    List(new InternalLinkNode(destinationURL, titleNodes, line, destinationNodes)) ++ postfix
                 } else {
-                    List(new InterWikiLinkNode(destinationURL, titleNodes, line, destinationNodes))
+                    List(new InterWikiLinkNode(destinationURL, titleNodes, line, destinationNodes)) ++ postfix
                 }
             }
             case el : ExternalLink => {
@@ -325,6 +329,36 @@ final class SwebleWrapper extends WikiParser
             else content
 			
 			content
+		}
+		def visit(n : TemplateArgument) : AstNode = 
+		{
+			val value = n.getValue()
+			if (value == null)
+				return n
+		
+			
+			// Shortcut for all those empty default values
+			if (value.isEmpty())
+				return n
+			
+			val pprAst = new LazyPreprocessedPage(
+					value, warnings, entityMap
+            )
+			
+			val parsed = compiler.postprocessPpOrExpAst(pageId, pprAst);
+			
+			val content = parsed.getPage().getContent()
+			
+			// The parser of course thinks that the given wikitext is a 
+			// individual page and will wrap even single line text into a 
+			// paragraph node. We try to catch at least simple cases to improve
+			// the resulting AST
+			val contentClean = if (content.size() == 1 && content.get(0).getNodeType() == AstNodeTypes.NT_PARAGRAPH)    
+				content.get(0).asInstanceOf[Paragraph].getContent()
+            else content
+			
+			n.setValue(contentClean)
+            n
 		}
 	}
 

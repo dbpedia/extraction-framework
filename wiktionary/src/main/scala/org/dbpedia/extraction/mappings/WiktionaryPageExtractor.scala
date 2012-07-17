@@ -392,6 +392,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                             case "uri" => urify(funArg)
                             case "map" => map(funArg)
                             case "assertMapped" => if(!hasMapping(funArg)){throw new Exception("assertion failed: existing key in mapings for "+funArg)} else {funArg}
+                            case "assertNumeric" => if(!funArg.forall(_.isDigit)){throw new Exception("assertion failed: numeric "+funArg)} else {funArg}
                             case "getId" => cache.matcher.getId(funArg)
                             case "makeId" => cache.matcher.makeId(funArg)
                             case "getOrMakeId" => cache.matcher.getOrMakeId(funArg)
