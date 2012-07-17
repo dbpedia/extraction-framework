@@ -22,8 +22,6 @@
         <module>server</module>
         <module>dump</module>
         <module>scripts</module>
-        <module>live</module>
-        <module>wiktionary</module>
     </modules>
 
     <build>
@@ -104,7 +102,7 @@
                 <version>2.9.2</version>
             </dependency>
 
-            <!-- dump, scripts, wiktionary -->
+            <!-- dump, scripts -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
@@ -120,26 +118,5 @@
         </dependencies>
     </dependencyManagement>
 
-    <repositories>
-        
-        <!-- repo order is important - they are checked in the order given here -->
-        <!-- put maven central first so that most stuff is downloaded from there -->
-        <!-- but don't call it 'central', that may lead to weird effects... -->
-        <repository>
-            <id>maven</id>
-            <url>http://repo1.maven.org/maven2</url>
-        </repository>
-
-        <!-- for our special openrdf and json JARs -->
-        <repository>
-            <id>aksw</id>
-            <url>http://prod1.aksw.org:8081/archiva/repository/internal</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        
-    </repositories>
-    
 </project>
 
