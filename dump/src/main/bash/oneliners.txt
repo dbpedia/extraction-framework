@@ -1,14 +1,18 @@
 # copy (and re-compress) all .gz files to .bz2 files in background process, write log output to compress.log
-{ for file in $(find -name '*.gz') ; do echo $file ; gzip -d <$file | bzip2 -c >${file/%.gz/.bz2} ; done } &>compress.log &
+for file in $(find -name '*.gz' | sort) ; do echo $file ; gzip -d <$file | bzip2 -c >${file/%.gz/.bz2} ; done &>compress.log &
 
 # pbzip2 is much faster with multiple cores / CPUs
-{ for file in $(find -name '*.gz') ; do echo $file ; gzip -d <$file | pbzip2 -c >${file/%.gz/.bz2} ; fi ; done } &>compress.log &
+for file in $(find -name '*.gz' | sort) ; do echo $file ; gzip -d <$file | pbzip2 -c >${file/%.gz/.bz2} ; fi ; done &>compress.log &
 
 # Don't overwrite existing non-empty .bz2 files.
-{ for file in $(find -name '*.gz') ; do copy=${file/%.gz/.bz2} ; if [[ ! -s $copy ]] ; then echo $file ; gzip -d <$file | pbzip2 -c >$copy ; fi ; done } &>compress.log &
+for file in $(find -name '*.gz' | sort) ; do copy=${file/%.gz/.bz2} ; if [[ ! -s $copy ]] ; then echo $file ; gzip -d <$file | pbzip2 -c >$copy ; fi ; done &>compress.log &
 
 # Only generate .bz2 file if it doesn't exist or is older than .gz file.
-{ for file in $(find -name '*.gz') ; do copy=${file/%.gz/.bz2} ; if [[ "$file" -nt "$copy" ]] ; then echo $file ; gzip -d <$file | pbzip2 -c >$copy ; fi ; done } &>compress.log &
+for file in $(find -name '*.gz' | sort) ; do copy=${file/%.gz/.bz2} ; if [[ "$file" -nt "$copy" ]] ; then echo $file ; gzip -d <$file | pbzip2 -c >$copy ; fi ; done &>compress.log &
+
+# Vice versa: 'copy' all .bz2 files whose .gz companion doesn't exist or is empty 
+# using pigz (parallel gzip), in background process, write log output to compress.log
+for file in $(find -name '*.bz2' | sort) ; do copy=${file/%.bz2/.gz} ; if [[ ! -s "$copy" ]] ; then echo $file ; bzip2 -d <$file | pigz -c >$copy ; fi ; done &>compress.log &
 
 # sort a triples file by property (field 2)
 # -s means 'stable' - without it, other fields are also sorted, which is a waste of time
