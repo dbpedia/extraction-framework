@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -62,9 +63,19 @@ public class SPARQLEndpoint {
     private String _getDefaultGraphURI(String DefaultGraphURI){
         
         if((!Util.isStringNullOrEmpty(this.defaultGraphURI))&& DefaultGraphURI == null){
-			return "&default-graph-uri=" + URLEncoder.encode(this.defaultGraphURI);
+            try{
+                return "&default-graph-uri=" + URLEncoder.encode(this.defaultGraphURI, "UTF-8");
+            }
+            catch (UnsupportedEncodingException exp){
+                return "";
+            }
 		} else if(!Util.isStringNullOrEmpty(DefaultGraphURI)){
-			return "&default-graph-uri=" + URLEncoder.encode(DefaultGraphURI);
+            try{
+                return "&default-graph-uri=" + URLEncoder.encode(DefaultGraphURI, "UTF-8");
+            }
+            catch (UnsupportedEncodingException exp){
+                return "";
+            }
 		}else {
 			return "";
 			}
@@ -105,7 +116,11 @@ public class SPARQLEndpoint {
 
         String sparqlendpoint  = this.sparqlendpointURL;
         String url = sparqlendpoint + "?query=";
-        url += URLEncoder.encode(query);
+        try{
+            url += URLEncoder.encode(query, "UTF-8");
+        }
+        catch (UnsupportedEncodingException exp){
+        }
         url += this._getDefaultGraphURI(DefaultGraphURI);
         url +=this._getFormat(Format);
         
