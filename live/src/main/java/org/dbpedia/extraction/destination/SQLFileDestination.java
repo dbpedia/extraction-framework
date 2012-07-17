@@ -142,7 +142,7 @@ public class SQLFileDestination implements Destination {
              extractorID = "org.dbpedia.extraction.mappings.AbstractExtractor";
         else if(dataset.equals(DBpediaDatasets.ShortAbstracts().name()))
              extractorID = "org.dbpedia.extraction.mappings.AbstractExtractor";
-        else if(dataset.equals(DBpediaDatasets.Revisions().name()))
+        else if(dataset.equals(DBpediaDatasets.RevisionIds().name()))
              extractorID = "org.dbpedia.extraction.mappings.RevisionIdExtractor";
         else
             extractorID = "org.dbpedia.extraction.mappings.MappingExtractor";
