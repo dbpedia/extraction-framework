@@ -95,9 +95,8 @@ object CanonicalizeUris {
       val oldPrefix = uriPrefix(language)
       
       def newUris(oldUri: String): Set[String] = {
-        // if it's not a DBpedia URI, copy it unchanged
-        if (! oldUri.startsWith(oldPrefix)) Set(oldUri)
-        map.getOrElse(oldUri, Set())
+        if (oldUri.startsWith(oldPrefix)) map.getOrElse(oldUri, Set())
+        else Set(oldUri) // not a DBpedia URI, copy it unchanged
       }
       
       val mapper = new QuadMapper(fileFinder)
