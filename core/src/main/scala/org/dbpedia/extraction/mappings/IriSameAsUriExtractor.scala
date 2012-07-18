@@ -28,6 +28,7 @@ extends Extractor
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {
+    // TODO: only extract triple if IRI is different from URI
     Seq(quad(subjectUri, subjectUri, page.sourceUri))
   }
 }
