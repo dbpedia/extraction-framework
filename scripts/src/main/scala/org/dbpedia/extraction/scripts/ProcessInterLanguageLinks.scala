@@ -100,20 +100,22 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   - at most 1024 languages (2^10). We currently use 111.
   - at most ~130 million unique titles (2^27). There currently are ~9 million.
   
-  The current code throws ArrayIndexOutOfBoundsExceptions if there are more than 2^10 languages
-  or more than 2^27 titles.
+  If we break these limits, we're in trouble.
+  
+  The current code throws ArrayIndexOutOfBoundsExceptions if there are more than 2^10 languages.
   
   Arbitrary limitations:
   - at most ~17 million links per language (2^24). English currently has ~11 million.
-  - at most ~17 million unique titles (2^24). English currently has ~11 million.
+  - at most ~17 million unique titles (2^24). The top 100 languages currently have ~9 million.
   
   If we break these limits, we can simply increase the array sizes and give the JVM more heap.
   
   The current code throws an ArrayIndexOutOfBoundsException if there are more than 2^24 links
-  for a language.
+  for a language or more than 2^24 unique titles.
   
-  Note: In the extremely unlikely case that there are exactly 2^10 languages and exactly 2^27 titles, 
-  the 'last' URI will be coded as -1, but -1 is also used as the null value. Strange errors will occur.
+  Note: In the extremely unlikely case that there are exactly 2^10 languages and exactly 2^27
+  unique titles, the 'last' URI will be encoded as -1, but -1 is also used as the null value. 
+  Strange errors will occur.
   
   */
   
@@ -224,7 +226,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
               // subject title in high 27 bits, object language and title in low 37 bits
               val link = subj << 37 | obj
               
-              // Note: If there are more than 2^24 links for a language, this will throw an ArrayIndexOutOfBoundsException                
+              // Note: If there are more than 2^24 links for a language, this will throw an ArrayIndexOutOfBoundsException
               langLinks(linkCount) = link
               linkCount += 1
             }
