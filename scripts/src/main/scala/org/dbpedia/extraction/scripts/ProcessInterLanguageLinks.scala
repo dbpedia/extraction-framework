@@ -25,7 +25,7 @@ object ProcessInterLanguageLinks {
       /*1*/ "dump file (relative to base dir, use '-' to disable), " +
       /*2*/ "result dataset name extension (e.g. '-chapters', use '-' for empty string), " +
       /*3*/ "triples file suffix (e.g. '.nt.gz'); " +
-      /*4*/ "optional: generic domain language (e.g. 'en', use '-' to disable), " +
+      /*4*/ "generic domain language (e.g. 'en', use '-' to disable), " +
       /*5*/ "link languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))

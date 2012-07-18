@@ -9,25 +9,15 @@ import IOUtils._
 
 /**
  */
-class QuadReader(baseDir: File, val language: Language, suffix: String) {
+class QuadReader(finder: DateFinder) {
   
-  private val finder = new Finder[File](baseDir, language)
-  
-  private var date: String = null
-  
-  def find(part: String): File = {
-    val name = part + suffix
-    if (date == null) date = finder.dates(name).last
-    finder.file(date, name)
-  }
-      
   /**
    * @param input file name part, e.g. interlanguage-links-same-as
    * @param proc process quad
    */
-  def readQuads(input: String)(proc: Quad => Unit): Unit = {
-    val file = find(input)
-    println(language.wikiCode+": reading "+file+" ...")
+  def readQuads(input: String, auto: Boolean = false)(proc: Quad => Unit): Unit = {
+    val file = finder.find(input, auto)
+    println(finder.language.wikiCode+": reading "+file+" ...")
     var lineCount = 0
     val start = System.nanoTime
     readLines(file) { line =>
@@ -45,7 +35,7 @@ class QuadReader(baseDir: File, val language: Language, suffix: String) {
   
   private def logRead(lines: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(language.wikiCode+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    println(finder.language.wikiCode+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
 }
