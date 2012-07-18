@@ -8,7 +8,9 @@ import IOUtils._
 /**
  * Maps old quads/triples to new quads/triples.
  */
-class QuadMapper(reader: QuadReader) {
+class QuadMapper(finder: DateFinder) {
+  
+  private val reader = new QuadReader(finder)
   
   /**
    * @param input dataset name
@@ -17,16 +19,16 @@ class QuadMapper(reader: QuadReader) {
    * @param objects
    */
   def mapQuads(input: String, output: String, required: Boolean = true)(map: Quad => Traversable[Quad]): Unit = {
-    val wikiCode = reader.language.wikiCode
+    val wikiCode = finder.language.wikiCode
     
-    val inFile = reader.find(input)
+    val inFile = finder.find(input)
     if (! inFile.exists()) {
       if (required) throw new IllegalArgumentException(wikiCode+": file "+inFile+" does not exist")
       println(wikiCode+": WARNING - file "+inFile+" does not exist")
       return
     }
 
-    val outFile = reader.find(output)
+    val outFile = finder.find(output)
     println(wikiCode+": writing "+outFile+" ...")
     var mapCount = 0
     val writer = write(outFile)

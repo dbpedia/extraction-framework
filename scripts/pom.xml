@@ -78,13 +78,13 @@
                             <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-mapped-nt.txt.gz -mapped .nt.gz en @mappings -->
                         </launcher>
                         <launcher>
-                            <id>MapSubjectUris</id>
-                            <mainClass>org.dbpedia.extraction.scripts.MapSubjectUris</mainClass>
+                            <id>CanonicalizeUris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CanonicalizeUris</mainClass>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
-                            <!-- ../run MapSubjectUris /home/dbpedia interlanguage-links-same-as labels,short-abstracts,long-abstracts -en-uris .nt.gz dbpedia.org 10000- -->
+                            <!-- ../run CanonicalizeUris /home/dbpedia interlanguage-links-same-as .nt.gz labels,short-abstracts,long-abstracts -en-uris .nt.gz en en 10000- -->
                         </launcher>
                         <launcher>
                             <id>ResolveTransitiveLinks</id>

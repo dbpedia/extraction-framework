@@ -85,14 +85,16 @@ object MapObjectUris {
     
     for (language <- languages) {
       
+      val finder = new DateFinder(baseDir, language, suffix)
+      
       // Redirects can have only one target, so we don't really need a MultiMap here.
       // But MapSubjectUris also uses a MultiMap... TODO: Make this configurable.
       val map = new HashMap[String, Set[String]] with MultiMap[String, String]
       
-      val reader = new QuadReader(baseDir, language, suffix)
+      val reader = new QuadReader(finder)
       for (mappping <- mappings) {
         var count = 0
-        reader.readQuads(mappping) { quad =>
+        reader.readQuads(mappping, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           map.addBinding(quad.subject, quad.value)
           count += 1
@@ -100,7 +102,7 @@ object MapObjectUris {
         println("found "+count+" mappings")
       }
       
-      val mapper = new QuadMapper(reader)
+      val mapper = new QuadMapper(finder)
       for (input <- inputs) {
         mapper.mapQuads(input, input + extension, required = false) { quad =>
           if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
