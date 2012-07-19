@@ -14,6 +14,11 @@ for file in $(find -name '*.gz' | sort) ; do copy=${file/%.gz/.bz2} ; if [[ "$fi
 # using pigz (parallel gzip), in background process, write log output to compress.log
 for file in $(find -name '*.bz2' | sort) ; do copy=${file/%.bz2/.gz} ; if [[ ! -s "$copy" ]] ; then echo $file ; bzip2 -d <$file | pigz -c >$copy ; fi ; done &>compress.log &
 
+# find out if all pairs of files (in this case, -skos-categories and -skos-categories-redirected) 
+# have almost the same number of bytes (and are therefore almost certainly identical except 
+# different dates in header and footer)
+find -name *-skos-categories*.nt.gz -ls | sort -k 11 | awk '{if (p == 0) p = $7; else { if (p > $7 + 5 || p < $7 - 5) { print p " " $7 " " $11; } p=0; } }'
+
 # sort a triples file by property (field 2)
 # -s means 'stable' - without it, other fields are also sorted, which is a waste of time
 sort -s -k 2,2 enwiki-20120601-infobox-properties.ttl >enwiki-20120601-infobox-properties.sorted.ttl
