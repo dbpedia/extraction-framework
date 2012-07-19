@@ -1,0 +1,43 @@
+--drop procedure setup_wiktionary_graphs;
+create procedure setup_wiktionary_graphs()
+{
+    log_message ('setup the global graph, that imports the local wiktionaries');
+    TRUNCATE DB.DBA.RDF_GRAPH_GROUP;
+    TRUNCATE DB.DBA.RDF_GRAPH_GROUP_MEMBER;
+    DB.DBA.RDF_GRAPH_GROUP_CREATE ('http://wiktionary.dbpedia.org/', 0);
+}
+
+
+--drop procedure load_wiktionary_nt;
+create procedure load_wiktionary_nt(in lang varchar)
+{
+    log_message (sprintf ('load %s', lang));
+    declare path varchar;
+    path := sprintf ('output/%s/wiktionary.dbpedia.org_%s.nt', lang, lang);
+    declare graph varchar;
+    graph := sprintf ('http://%s.wiktionary.dbpedia.org/', lang);
+    log_message ('drop graph');
+    sparql DROP GRAPH <graph>
+    log_message ('load graph from file');
+    DB.DBA.TTLP_MT(file_to_string_output (path), '', graph, 1, 1, 3);
+    commit work;
+    checkpoint();
+    log_message ('import graph into global one');
+    DB.DBA.RDF_GRAPH_GROUP_INS ('http://wiktionary.dbpedia.org/', graph);
+}
+
+--drop procedure  init_wiktionary;
+create procedure init_wiktionary()
+{
+    log_message ('start loading wiktionary from scratch');
+    log_message ('delete everything');
+    RDF_GLOBAL_RESET();
+    setup_wiktionary_graphs();
+    load_wiktionary_nt("de");
+    load_wiktionary_nt("en");
+    load_wiktionary_nt("fr"):
+    load_wiktionary_nt("ru");
+}
+
+ECHO $ARGV[0];
+--load_wiktionary();
