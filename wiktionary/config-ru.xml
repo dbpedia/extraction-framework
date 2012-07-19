@@ -1108,7 +1108,46 @@
 		<mapping from="Могаукский" to="Mohawk"/>
 		<mapping from="moh" to="Mohawk"/>
 		<mapping from="-moh-" to="Mohawk"/>
-	</mappings>			
+	</mappings>
+
+
+    <postprocessing enabled="true" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.postprocessor.LemonOverlay">
+        <config>
+            <blockProperty uri="http://www.monnet-project.eu/lemon#sense" />
+            <inputTargetClass uri="http://wiktionary.dbpedia.org/terms/Sense" />
+            <followProperties>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPoSUsage"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasLangUsage"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSense"/>
+            </followProperties>
+            <collectProperties>
+                <property uri="http://purl.org/dc/elements/1.1/language"/>
+                <property uri="http://www.w3.org/2000/01/rdf-schema#label"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPoS"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasMeaning"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasTranslation"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasExampleSentence"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasProverb"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasPronunciationPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAntonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAudioSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasAudioPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasCollocation"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasEtymology"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyphenationSingular"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyphenationPlural"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyperonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasHyponym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSynonym"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasSource"/>
+                <property uri="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+                <property uri="http://www.w3.org/2002/07/owl#sameAs"/>
+            </collectProperties>
+            <outputStartClass uri="http://www.monnet-project.eu/lemon#LexicalEntry" />
+            <outputAggregatedClass uri="http://www.monnet-project.eu/lemon#LexicalSense" />
+        </config>
+    </postprocessing>
 
     <saveVars>
         <var name="pos" />
