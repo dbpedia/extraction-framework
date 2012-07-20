@@ -1,0 +1,9 @@
+ORIG=$1;
+echo "split $ORIG";
+split -C 1000m "$ORIG" "$ORIG.part."
+find . -name "$ORIG.part.*" | while read FILE; do 
+ echo "rapper to $FILE.fixed";
+ rapper -i turtle -o ntriples "$FILE" > "$FILE.fixed";
+done
+echo "cat to $ORIG.fixed";
+cat $ORIG.part.*.fixed > "$ORIG.fixed";

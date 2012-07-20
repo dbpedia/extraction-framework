@@ -24,6 +24,14 @@ LEXICALWORDCOUNT=`grep hasLangUsage $FILE | cut -f1 -d '>' | sed 's/<//;s/>//' |
 echo "$LEXICALWORDCOUNT unique words parsed (at least a language usage detected)"
 AVGTRIPELSPERWORD=`echo "scale = 2; $TRIPLECOUNT / $LEXICALWORDCOUNT" | bc -l `
 echo "$AVGTRIPELSPERWORD triples/word"
+echo "---------"
+
+SUBJECTCOUNT=`cat $FILE  | cut -f1 -d '>' | sed 's/<//;s/>//' | sort -u | wc -l | cut -f1 -d ' '`
+OBJECTCOUNT=`cat $FILE  | cut -f3 -d '>' | sed 's/<//;s/>//' | sort -u | wc -l | cut -f1 -d ' '`
+RESOURCECOUNT=`echo "$SUBJECTCOUNT+$OBJECTCOUNT" | bc -l `
+echo "$RESOURCECOUNT unique resources used."
+echo "---------"
+
 
 cat $FILE  | cut -f2 -d '>' | sed 's/<//;s/>//' | awk '{count[$1]++}END{for(j in count) print "<" j ">" "\t"count[j]}' > $PROPERTYCOUNTFILE
 PREDICATECOUNT=`wc -l $PROPERTYCOUNTFILE | cut -f1 -d ' '`
