@@ -448,7 +448,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
 object WiktionaryPageExtractor {
   //load config from xml
-  private val config = XML.loadFile("config.xml")
+  private val config = XML.loadFile("config/config.xml")
 
   val properties : Map[String, String] = (config \ "properties" \ "property").map(
       (n : XMLNode) =>
@@ -478,7 +478,7 @@ object WiktionaryPageExtractor {
   val escapeSeqCloseBrace = "%#*+~/" //an unlikely sequence of characters (duh)
   val escapeSeqComma = "%#*+~§" //an unlikely sequence of characters (duh)
 
-  private val languageConfig = XML.loadFile("config-"+language+".xml")
+  private val languageConfig = XML.loadFile("config/config-"+language+".xml")
 
   private val mappings : Map[String, String] = (languageConfig \\ "mapping").map(
       (n : XMLNode) => //language specific mappings (from language ("Spanisch") to global vocabulary ("spanish"))

@@ -466,7 +466,7 @@ class MyNodeList(val nl : List[Node]) {
             p.get.children.toReadableString
         } else {
             ""
-        }        
+        }
     } else {
         ""
     }
