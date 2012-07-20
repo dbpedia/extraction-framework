@@ -1,16 +1,15 @@
 package org.dbpedia.helper;
 
-import com.bbn.parliament.jena.joseki.bridge.util.NTriplesUtil;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
+import org.apache.log4j.Logger;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
-import org.openrdf.model.impl.URIImpl;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URLEncoder;
 
 import static org.dbpedia.extraction.util.RichString.toRichString;
 
@@ -30,7 +29,7 @@ import org.openrdf.rio.ntriples.NTriplesUtil;*/
  */
 public class CoreUtil {
     //Initialize the logger
-    private static Logger logger = Logger.getLogger(CoreUtil.class.getName());
+    private static Logger logger = Logger.getLogger(CoreUtil.class);
 
     public static String convertToSPARULPattern(RDFNode requiredResource)
     {
@@ -50,7 +49,7 @@ public class CoreUtil {
             return convertToSPARULPattern(valResource, storeSpecific);
         }
         catch(Exception exp){
-            logger.log(Level.WARNING, "Invalid resource object is passed", exp);
+            logger.warn("Invalid resource object is passed", exp);
             return requiredResource.toString();
         }
     }
@@ -62,8 +61,17 @@ public class CoreUtil {
 
             //strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
 //            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-            strSPARULPattern = org.openrdf.rio.ntriples.NTriplesUtil.toNTriplesString(new URIImpl(((Resource) requiredResource).getURI()));
+//            strSPARULPattern = org.openrdf.rio.ntriples.NTriplesUtil.toNTriplesString(new URIImpl(((Resource) requiredResource).getURI()));
 
+//            String encoded = URIEncoder.encodeURI();
+            try{
+                URI uri = new URI(((Resource) requiredResource).getURI());
+//                strSPARULPattern = "<" + URLEncoder.encode (((Resource) requiredResource).getURI(), "UTF-8") + ">";
+                strSPARULPattern = "<" + uri + ">";
+            }
+            catch (Exception exp){
+                logger.error("Resource \"" + requiredResource  + "\" cannot be URL encoded.");
+            }
         }
         /*else if(requiredResource instanceof BNode){
 
@@ -157,5 +165,28 @@ public class CoreUtil {
      */
     public static String wikipediaEncode(String page_title) {
         return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
-     }
+    }
+
+    /**
+     * Encodes a URI, as in case of DBpedia the page title is the only part that should be
+     * @param   uri the URI of the page that should be encoded
+     * @return Encoded URI
+     */
+    public static String encodeURI(String uri){
+        int lastSlashIndex = uri.lastIndexOf("/");
+
+        String namespacePart = uri.substring(0, lastSlashIndex);
+        String pageTitlePart = uri.substring(lastSlashIndex+1);
+
+        String resultingURI = uri;
+
+        try{
+            resultingURI = namespacePart + "/" + URLEncoder.encode(pageTitlePart, "UTF-8");
+        }
+        catch (UnsupportedEncodingException exp){
+            logger.error("Page \"" + pageTitlePart + "\" cannot be encoded");
+        }
+
+        return resultingURI;
+    }
 }

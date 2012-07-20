@@ -1,15 +1,16 @@
 package org.dbpedia.helper;
 
+import com.bbn.parliament.jena.joseki.bridge.util.NTriplesUtil;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
+import org.apache.log4j.Logger;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
 import java.io.StringWriter;
+import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static org.dbpedia.extraction.util.RichString.toRichString;
 
@@ -34,7 +35,7 @@ import org.openrdf.rio.ntriples.NTriplesUtil;*/
 public class Triple extends StatementImpl {
 
     //Initializing the Logger
-    private static final Logger logger = Logger.getLogger(Triple.class.getName());
+    private static final Logger logger = Logger.getLogger(Triple.class);
     private static String pageCacheKey = null;
     private static Resource pageCacheValue = null;
 
@@ -59,10 +60,10 @@ public class Triple extends StatementImpl {
 
         }
         catch(NoSuchAlgorithmException nsae){
-            logger.log(Level.WARNING, "FAILED to create hash code for " + this.toNTriples(), nsae);
+            logger.warn("FAILED to create hash code for " + this.toNTriples(), nsae);
         }
         catch(Exception exp){
-            logger.log(Level.WARNING, exp.getMessage(), exp);
+            logger.warn(exp.getMessage(), exp);
         }
         return hashCode;
     }
@@ -86,11 +87,26 @@ public class Triple extends StatementImpl {
 
         Model ntriplesModel = ModelFactory.createDefaultModel();
 
-        ntriplesModel.add(ResourceFactory.createStatement(this.getSubject(), this.getPredicate(), this.getObject()));
+        ntriplesModel.add(this.getSubject(), this.getPredicate(), this.getObject());
+        String strNTriples = "";
+        try{
+//            URI uri = new URI(((Resource) this.getSubject()).getURI());
+//            ntriplesModel.add(ResourceFactory.createStatement(ResourceFactory.createResource(uri.toString()), this.getPredicate(), this.getObject()));
+//            strNTriples = NTriplesUtil.toNTriplesString(this.getSubject()) + " " +
+//                    NTriplesUtil.toNTriplesString(this.getPredicate()) + " " +
+//                    NTriplesUtil.toNTriplesString(this.getObject()) + " .\n" ;
+        }
+        catch (Exception exp){
+
+        }
+//                strSPARULPattern = "<" + URLEncoder.encode (((Resource) requiredResource).getURI(), "UTF-8") + ">";
+
         ntriplesModel.write(out, "N-TRIPLE");
 
 
+
         return out.toString();
+//        return strNTriples;
     }
     public static Resource page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
@@ -104,6 +120,6 @@ public class Triple extends StatementImpl {
            pageCacheValue = uri;
        }
        return pageCacheValue;
-   }
+    }
 
 }
