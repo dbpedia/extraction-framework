@@ -28,7 +28,6 @@ create procedure init_wiktionary()
     mylog ('start loading wiktionary from scratch');
     mylog ('delete everything');
     RDF_GLOBAL_RESET();
-    setup_wiktionary_graphs();
     mylog ('setup the global graph, that imports the local wiktionaries');
     delete from DB.DBA.RDF_GRAPH_GROUP;
     delete from DB.DBA.RDF_GRAPH_GROUP_MEMBER;
