@@ -14,12 +14,15 @@ create procedure load_wiktionary_nt(in lang varchar, in base varchar)
     graph := sprintf ('http://%s.wiktionary.dbpedia.org/', lang);
     mylog (sprintf ('drop graph %s', graph));
     exec (sprintf ('sparql DROP SILENT GRAPH <%s>', graph));
+    declare globalg varchar;
+    globalg := 'http://wiktionary.dbpedia.org/';
+    exec (sprintf ('sparql INSERT INTO <%s> {<%s> <http://www.w3.org/2002/07/owl#imports> <%s>}', globalg, globalg, graph));
     mylog (sprintf ('load from file %s into graph %s', path, graph));
     exec ('checkpoint');
     DB.DBA.TTLP_MT(file_to_string_output (path), '', graph, 1, 1, 3);
     exec ('checkpoint');
     mylog ('import graph into global one');
-    DB.DBA.RDF_GRAPH_GROUP_INS ('http://wiktionary.dbpedia.org/', graph);
+    DB.DBA.RDF_GRAPH_GROUP_INS (globalg, graph);
 };
 
 --drop procedure  init_wiktionary;
@@ -41,7 +44,7 @@ create procedure main()
     --atomic(0);
     checkpoint_interval(60);
 
-    mylog (sprintf ('error -> rollback'));
+    mylog (sprintf ('error '||__SQL_STATE||': '||__SQL_MESSAGE||' -> rollback'));
     --raw_exit();
     return;
   };
@@ -50,12 +53,12 @@ create procedure main()
 
     -- change values here to configure the loading
     declare path varchar;
-    path := '/home/jonas/programming/java/dbpedia.hg.old/wiktionary/';
+    path := '/root/jonas/dbpedia/wiktionary/';
 
     init_wiktionary();
-    --load_wiktionary_nt('en', path);
-    --load_wiktionary_nt('de', path);
-    --load_wiktionary_nt('fr', path);
+    load_wiktionary_nt('en', path);
+    load_wiktionary_nt('de', path);
+    load_wiktionary_nt('fr', path);
     load_wiktionary_nt('ru', path);
 
     commit work;
