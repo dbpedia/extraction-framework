@@ -9,6 +9,7 @@ import org.openrdf.model.impl.URIImpl;
 */
 
 import com.hp.hpl.jena.rdf.model.*;
+import org.dbpedia.helper.CoreUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -81,7 +82,7 @@ public class ExtractionResult{
 
              Model tmpModel = ModelFactory.createDefaultModel();
 
-             predicateTriples.addTriple(ResourceFactory.createResource(subject),
+             predicateTriples.addTriple(ResourceFactory.createResource(CoreUtil.encodeURI(subject)),
                      ResourceFactory.createProperty(Constants.RDF_TYPE), ResourceFactory.createResource(Constants.RDF_PROPERTY));
 			 predicateTriples.addTriple(ResourceFactory.createResource(subject),ResourceFactory.createProperty(Constants.RDFS_LABEL),
                      tmpModel.createLiteral(this.getPredicateLabel(subject)));

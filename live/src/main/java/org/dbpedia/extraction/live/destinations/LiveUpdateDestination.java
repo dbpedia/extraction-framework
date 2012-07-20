@@ -16,6 +16,7 @@ import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.publisher.PublishingData;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.wikiparser.WikiTitle;
+import org.dbpedia.helper.CoreUtil;
 import org.ini4j.Options;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -100,7 +101,7 @@ public class LiveUpdateDestination implements Destination{
 
 //        this.uri = RDFTriple.page(pageTitle);
 //        this.uri =   RDFTriple.page(pageTitle);
-        this.uri =  ResourceFactory.createResource(pageURI);
+        this.uri =  ResourceFactory.createResource(CoreUtil.encodeURI(pageURI));
         this.language = language;
         this.oaiId = oaiID;
 
@@ -158,6 +159,7 @@ public class LiveUpdateDestination implements Destination{
             else
                 resourceURI = Constants.DB_RESOURCE_NS + pageWikiTitle.namespace().name() + ":" + pageURLEncodedTitle;
 
+//            this.uri =  ResourceFactory.createResource(CoreUtil.encodeURI(resourceURI));
             this.uri =  ResourceFactory.createResource(resourceURI);
             this.language = language;
             this.oaiId = oaiID;
@@ -303,7 +305,7 @@ public class LiveUpdateDestination implements Destination{
         if(hmTriple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
                 pattern += hmTriple.get("s") + " " + hmTriple.get("p") + " " + hmTriple.get("o")+" . \n";
         else//The statement must be converted to SPARUL
-            pattern += Util.convertToSPARULPattern(ResourceFactory.createResource(hmTriple.get("s").toString()))
+            pattern += Util.convertToSPARULPattern(ResourceFactory.createResource(CoreUtil.encodeURI(hmTriple.get("s").toString())))
                 + " " + Util.convertToSPARULPattern(ResourceFactory.createProperty(hmTriple.get("p").toString()))
                 + " " + Util.convertToSPARULPattern(tmpModel.createLiteral(hmTriple.get("o").toString()))+" . \n";
 
@@ -327,7 +329,7 @@ public class LiveUpdateDestination implements Destination{
 
             List<Quad> listQuads = JavaConversions.seqAsJavaList(quadList);
             for(Quad quad : listQuads){
-                rs.addTriple(ResourceFactory.createResource(quad.subject()), ResourceFactory.createProperty(quad.predicate()),
+                rs.addTriple(ResourceFactory.createResource(CoreUtil.encodeURI(quad.subject())), ResourceFactory.createProperty(quad.predicate()),
                         constructTripleObject(quad));
             }
 
@@ -358,7 +360,7 @@ public class LiveUpdateDestination implements Destination{
         Model tmpModel = ModelFactory.createDefaultModel();
 
         for(Quad quad : JavaConversions.asJavaIterable(graph)){
-            rs.addTriple(ResourceFactory.createResource(quad.subject()), ResourceFactory.createProperty(quad.predicate()),
+            rs.addTriple(ResourceFactory.createResource(CoreUtil.encodeURI(quad.subject())), ResourceFactory.createProperty(quad.predicate()),
                     constructTripleObject(quad));
         }
 
@@ -966,7 +968,7 @@ public class LiveUpdateDestination implements Destination{
 		//TESTS<<<<<<<<<<<<
 	}
 
-    public void _jdbc_ttlp_insert_triples(HashMap triplesToAdd){
+    private void _jdbc_ttlp_insert_triples(HashMap triplesToAdd){
         if(this.debug_turn_off_insert){
             return;
             }
@@ -1039,7 +1041,7 @@ public class LiveUpdateDestination implements Destination{
         //TESTS<<<<<<<<<<<<
     }
 
-    public void _jdbc_ttlp_insert_triples(ArrayList triplesToAdd){
+    private void _jdbc_ttlp_insert_triples(ArrayList triplesToAdd){
         if(this.debug_turn_off_insert){
             return;
             }
