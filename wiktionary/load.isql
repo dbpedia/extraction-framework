@@ -4,29 +4,20 @@ create procedure mylog(in msg varchar)
   log_message (sprintf ('wiktionary load script: %s', msg));
 }
 
---drop procedure setup_wiktionary_graphs;
-create procedure setup_wiktionary_graphs()
-{
-    mylog ('setup the global graph, that imports the local wiktionaries');
-    delete from DB.DBA.RDF_GRAPH_GROUP;
-    delete from DB.DBA.RDF_GRAPH_GROUP_MEMBER;
-    DB.DBA.RDF_GRAPH_GROUP_CREATE ('http://wiktionary.dbpedia.org/', 0);
-};
-
 --drop procedure load_wiktionary_nt;
-create procedure load_wiktionary_nt(in lang varchar)
+create procedure load_wiktionary_nt(in lang varchar, in base varchar)
 {
     mylog (sprintf ('load %s', lang));
     declare path varchar;
-    path := sprintf ('/home/jonas/programming/java/dbpedia.hg.old/wiktionary/output/%s/wiktionary.dbpedia.org_%s.nt', lang, lang);
+    path := sprintf ('%soutput/%s/wiktionary.dbpedia.org_%s.nt', base, lang, lang);
     declare graph varchar;
     graph := sprintf ('http://%s.wiktionary.dbpedia.org/', lang);
-    mylog ('drop graph');
+    mylog (sprintf ('drop graph %s', graph));
     exec (sprintf ('sparql DROP SILENT GRAPH <%s>', graph));
-    mylog ('load graph from file');
+    mylog (sprintf ('load from file %s into graph %s', path, graph));
     DB.DBA.TTLP_MT(file_to_string_output (path), '', graph, 1, 1, 3);
     commit work;
-    --checkpoint;
+    exec ('checkpoint');
     mylog ('import graph into global one');
     DB.DBA.RDF_GRAPH_GROUP_INS ('http://wiktionary.dbpedia.org/', graph);
 };
@@ -38,20 +29,42 @@ create procedure init_wiktionary()
     mylog ('delete everything');
     RDF_GLOBAL_RESET();
     setup_wiktionary_graphs();
+    mylog ('setup the global graph, that imports the local wiktionaries');
+    delete from DB.DBA.RDF_GRAPH_GROUP;
+    delete from DB.DBA.RDF_GRAPH_GROUP_MEMBER;
+    DB.DBA.RDF_GRAPH_GROUP_CREATE ('http://wiktionary.dbpedia.org/', 0);
 };
-
-create procedure load_wiktionaries()
-{
---load_wiktionary_nt('en');
---load_wiktionary_nt('de');
---load_wiktionary_nt('fr');
-load_wiktionary_nt('ru');
-}
 
 create procedure main()
 {
-     init_wiktionary();
-     load_wiktionaries();
+  declare exit handler for sqlstate '*' {
+    rollback work;
+    --atomic(0);
+
+    mylog (sprintf ('error -> rollback'));
+    --raw_exit();
+    return;
+  };
+    --atomic(1);
+    checkpoint_interval(0);
+
+    -- change values here to configure the loading
+    declare path varchar;
+    path := '/home/jonas/programming/java/dbpedia.hg.old/wiktionary/';
+
+    init_wiktionary();
+    --load_wiktionary_nt('en', path);
+    --load_wiktionary_nt('de', path);
+    --load_wiktionary_nt('fr', path);
+    load_wiktionary_nt('ru', path);
+
+    commit work;
+    checkpoint_interval(60);
+    --atomic(0);
 }
 
+SET AUTOCOMMIT OFF;
 main();
+SET AUTOCOMMIT ON;
+
+
