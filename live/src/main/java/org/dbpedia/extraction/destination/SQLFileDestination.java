@@ -6,6 +6,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
 import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
+import org.apache.log4j.Logger;
 import org.dbpedia.extraction.destinations.DBpediaDatasets;
 import org.dbpedia.extraction.destinations.Destination;
 import org.dbpedia.extraction.destinations.Quad;
@@ -23,8 +24,6 @@ import java.nio.channels.FileLock;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -42,8 +41,8 @@ import org.openrdf.model.impl.URIImpl;*/
 public class SQLFileDestination implements Destination {
 
     //Constants used for inserting into the table
-    private static final String FILENAME = "/home/mohamed/DBpediaDumpOutput/SqlLog.sql";
-    private static final Logger logger = Logger.getLogger(SQLFileDestination.class.getName());
+    private static final String FILENAME = "DBpediaDumpOutput/SqlLog.sql";
+    private static final Logger logger = Logger.getLogger(SQLFileDestination.class);
 
     public Map<String, Map<String, Map<String, String>>> jsonObject = new HashMap<String, Map<String, Map<String, String>>>();
     private String oaiId;
@@ -206,7 +205,7 @@ public class SQLFileDestination implements Destination {
 //            outputStreamWriter.close();
         }
         catch (Exception exp){
-            logger.log(Level.WARNING, "SQL statement cannot be written to file", exp);
+            logger.error("SQL statement cannot be written to file", exp);
         }
     }
 }
