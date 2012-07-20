@@ -23,7 +23,6 @@ public class PublishedDataCompressor extends Thread{
     Logger logger = Logger.getLogger(PublishedDataCompressor.class);
 
     private Date lastProcessingDate = new Date();
-    // TODO: SimpleDateFormat is not thread-safe
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
 
     //This thread should have a low priority, in order not interfere with or slow down the main thread, which is responsible for handling live updates.
@@ -63,23 +62,23 @@ public class PublishedDataCompressor extends Thread{
             while(true){
 
                 try{
-                //Prepare year, month, day, adn hour for last compression date, and current date
-                CompressionDate lastCompressionDate = new CompressionDate(lastProcessingDate);
-                CompressionDate currentCompressionDate = new CompressionDate(new Date());
+                    //Prepare year, month, day, adn hour for last compression date, and current date
+                    CompressionDate lastCompressionDate = new CompressionDate(lastProcessingDate);
+                    CompressionDate currentCompressionDate = new CompressionDate(new Date());
 
-                if(currentCompressionDate.getYear() != lastCompressionDate.getYear())
-                    compressYear(dateFormatter.format(lastProcessingDate));
-                else if(currentCompressionDate.getMonth() != lastCompressionDate.getMonth())
-                    compressMonth(dateFormatter.format(lastProcessingDate));
-                else if(currentCompressionDate.getDay() != lastCompressionDate.getDay())
-                    compressDay(dateFormatter.format(lastProcessingDate));
-                else if(currentCompressionDate.getHour() != lastCompressionDate.getHour())
-                    compressHour(dateFormatter.format(lastProcessingDate));
-                else //No difference, so we should do nothing
-                     continue;
+                    if(currentCompressionDate.getYear() != lastCompressionDate.getYear())
+                        compressYear(dateFormatter.format(lastProcessingDate));
+                    else if(currentCompressionDate.getMonth() != lastCompressionDate.getMonth())
+                        compressMonth(dateFormatter.format(lastProcessingDate));
+                    else if(currentCompressionDate.getDay() != lastCompressionDate.getDay())
+                        compressDay(dateFormatter.format(lastProcessingDate));
+                    else if(currentCompressionDate.getHour() != lastCompressionDate.getHour())
+                        compressHour(dateFormatter.format(lastProcessingDate));
+                    else //No difference, so we should do nothing
+                        continue;
 //                compressPublishData(lastProcessingDate);
-                _writeLastProcessingDateToFile(lastProcessingDateFilename);
-                lastProcessingDate = _readLastProcessingDateFromFile(lastProcessingDateFilename);
+                    _writeLastProcessingDateToFile(lastProcessingDateFilename);
+                    lastProcessingDate = _readLastProcessingDateFromFile(lastProcessingDateFilename);
                 }
                 catch (Exception compressionException){
 
@@ -291,7 +290,7 @@ public class PublishedDataCompressor extends Thread{
 
     private void compressMonth(String lastProcessing){
 
-       //If we want to compress a  month, then we should compress month, day, and hour folders, as definitely they should differ
+        //If we want to compress a  month, then we should compress month, day, and hour folders, as definitely they should differ
         compressDay(lastProcessing);
         compressHour(lastProcessing);
 
@@ -404,29 +403,29 @@ public class PublishedDataCompressor extends Thread{
         byte[] buf = new byte[buffersize];
         for(int i=0; i<flist.length; i++)
         {
-           if(flist[i].isDirectory())
-           {
-               convertToTar(flist[i], tos);
-               continue;
-           }
+            if(flist[i].isDirectory())
+            {
+                convertToTar(flist[i], tos);
+                continue;
+            }
 
             String abs = dir.getAbsolutePath();
             String fabs = flist[i].getAbsolutePath();
             if(fabs.startsWith(abs))
-               fabs = fabs.substring(abs.length());
-          FileInputStream fis = new FileInputStream(flist[i]);
-                TarEntry te = new TarEntry(fabs);
-          te.setSize(flist[i].length());
-               tos.setLongFileMode(TarOutputStream.LONGFILE_GNU);
-          tos.putNextEntry(te);
-          int count = 0;
-          while((count = fis.read(buf,0,buffersize)) != -1)
-          {
-            tos.write(buf,0,count);
-          }
-          tos.closeEntry();
-          fis.close();
-       }
+                fabs = fabs.substring(abs.length());
+            FileInputStream fis = new FileInputStream(flist[i]);
+            TarEntry te = new TarEntry(fabs);
+            te.setSize(flist[i].length());
+            tos.setLongFileMode(TarOutputStream.LONGFILE_GNU);
+            tos.putNextEntry(te);
+            int count = 0;
+            while((count = fis.read(buf,0,buffersize)) != -1)
+            {
+                tos.write(buf,0,count);
+            }
+            tos.closeEntry();
+            fis.close();
+        }
 
     }
 
@@ -437,11 +436,11 @@ public class PublishedDataCompressor extends Thread{
      */
     private void compressFileUsingGZip(String filename){
 
-         FileInputStream in = null;
+        FileInputStream in = null;
 
-         File outputFile = null;
-         OutputStream osCompressedFinal = null;
-         OutputStream out = null;
+        File outputFile = null;
+        OutputStream osCompressedFinal = null;
+        OutputStream out = null;
 
         try{
             //Prepare required streams
@@ -449,7 +448,7 @@ public class PublishedDataCompressor extends Thread{
             in = new FileInputStream(filename);
 
             outputFile = new File(filename + ".gz");
-		    osCompressedFinal = new FileOutputStream(outputFile);
+            osCompressedFinal = new FileOutputStream(outputFile);
             out = new GzipCompressorOutputStream(osCompressedFinal);
 
             // Transfer bytes from the input file to the GZIP output stream
@@ -504,7 +503,7 @@ public class PublishedDataCompressor extends Thread{
 
         public CompressionDate(String requiredDate){
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
-    //        int year = Calendar.getInstance().get(Calendar.YEAR);
+            //        int year = Calendar.getInstance().get(Calendar.YEAR);
 //            String strCurrentDate = dateFormatter.format(requiredDate);
 
 
@@ -516,10 +515,10 @@ public class PublishedDataCompressor extends Thread{
             _hour = Integer.parseInt(requiredDateParts[3]);
         }
 
-         public CompressionDate(Date requiredDate){
+        public CompressionDate(Date requiredDate){
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
-    //        int year = Calendar.getInstance().get(Calendar.YEAR);
-             String []requiredDateParts = dateFormatter.format(requiredDate).split("-");
+            //        int year = Calendar.getInstance().get(Calendar.YEAR);
+            String []requiredDateParts = dateFormatter.format(requiredDate).split("-");
 
 
             //Split the two dates, to get year, month, day, and hour individually
