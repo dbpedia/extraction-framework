@@ -1,9 +1,21 @@
 ORIG=$1;
+P=`pwd`;
+TDIR="/tmp/splitrapper/";
+mkdir $TDIR
+cd $TDIR
 echo "split $ORIG";
-split -C 1000m "$ORIG" "$ORIG.part."
+split -C 1000m "$P$ORIG" "$ORIG.part."
 find . -name "$ORIG.part.*" | while read FILE; do 
  echo "rapper to $FILE.fixed";
  rapper -i turtle -o ntriples "$FILE" > "$FILE.fixed";
 done
 echo "cat to $ORIG.fixed";
 cat $ORIG.part.*.fixed > "$ORIG.fixed";
+echo "aranging files";
+mv "$ORIG.fixed" $P;
+rm $TDIR
+cd $P;
+mv "$ORIG" "$ORIG.orig";
+mv "$ORIG.fixed" "$ORIG"
+echo "bzip2 the file";
+bzip2 -k "$ORIG"
