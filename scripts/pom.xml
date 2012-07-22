@@ -98,6 +98,15 @@
                             <!-- the following should be redirected (as of 2012-07-11) -->
                             <!-- disambiguations,infobox-properties,mappingbased-properties,page-links,persondata,topical-concepts -->
                         </launcher>
+                        <launcher>
+                            <id>DecodeHtmlCharacterReferences</id>
+                            <mainClass>org.dbpedia.extraction.scripts.DecodeHtmlCharacterReferences</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                            <!-- ../run DecodeHtmlCharacterReferences /home/dbpedia labels,short-abstracts,long-abstracts -fixed .nt.gz false 10000- -->
+                        </launcher>
                     </launchers>
                 </configuration>
 
