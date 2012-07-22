@@ -19,6 +19,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.dbpedia.util.text.Appender;
+import org.dbpedia.util.text.DefaultAppender;
 import org.dbpedia.util.text.ParseException;
 import org.dbpedia.util.text.ParseExceptionHandler;
 import org.dbpedia.util.text.ParseExceptionThrower;
@@ -36,6 +38,9 @@ public class HtmlCoder
   
   /** the error handler, used in {@link #error(int, String, String)} */
   private ParseExceptionHandler _handler = ParseExceptionThrower.INSTANCE;
+  
+  /** the appender, used in {@link #append(int, int, int)} and  {@link #append(int, int, String)}. */
+  private Appender _appender = DefaultAppender.INSTANCE;
   
   /** {@link String} to transcode */
   private String _in;
@@ -78,6 +83,17 @@ public class HtmlCoder
   {
     if (handler == null) throw new NullPointerException("handler");
     _handler = handler;
+  }
+
+  /**
+   * Set the {@link Appender appender}. Before this method is called,
+   * a {@link DefaultAppender} is used.
+   * @param handler the {@link Appender appender}, must not be {@code null}
+   */
+  public void setAppender( Appender appender )
+  {
+    if (appender == null) throw new NullPointerException("appender");
+    _appender = appender;
   }
 
   /**
@@ -163,7 +179,8 @@ public class HtmlCoder
       decoded = -1;
       try
       {
-        if (_in.charAt(pos + 2) == 'x')
+        char hex = _in.charAt(pos + 2);
+        if (hex == 'x' || hex == 'X')
         {
           decoded = Integer.parseInt(_in.substring(pos + 3, sem), 16);
         }
@@ -235,7 +252,7 @@ public class HtmlCoder
     if (_out == null) _out = new StringBuilder();
     _out.append(_in, _last, pos);
     _last = pos + skip;
-    _out.appendCodePoint(code);
+    _appender.appendCodePoint(_out, code);
   }
 
   /**
@@ -252,7 +269,7 @@ public class HtmlCoder
     if (_out == null) _out = new StringBuilder();
     _out.append(_in, _last, pos);
     _last = pos + skip;
-    _out.append(str);
+    _appender.append(_out, str);
   }
 
   /** 
