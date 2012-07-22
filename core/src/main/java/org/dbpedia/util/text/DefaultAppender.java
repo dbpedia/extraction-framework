@@ -6,9 +6,9 @@ implements Appender
   /** the singleton instance */
   public static final Appender INSTANCE = new DefaultAppender();
   
-  public void appendCodePoint(StringBuilder builder, int codePoint)
+  public void append(StringBuilder builder, int code)
   {
-    builder.appendCodePoint(codePoint);
+    builder.appendCodePoint(code);
   }
 
   public void append(StringBuilder builder, String str)

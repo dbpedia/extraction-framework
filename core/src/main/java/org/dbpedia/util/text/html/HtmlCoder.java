@@ -252,7 +252,7 @@ public class HtmlCoder
     if (_out == null) _out = new StringBuilder();
     _out.append(_in, _last, pos);
     _last = pos + skip;
-    _appender.appendCodePoint(_out, code);
+    _appender.append(_out, code);
   }
 
   /**
