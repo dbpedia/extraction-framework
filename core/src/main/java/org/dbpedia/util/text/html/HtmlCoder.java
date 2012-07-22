@@ -295,6 +295,9 @@ public class HtmlCoder
   /**
    * Generates Java code for mapping the HTML entities specified in
    * <a href="http://www.w3.org/TR/html4/sgml/entities.html">http://www.w3.org/TR/html4/sgml/entities.html</a>
+   * 
+   * TODO: HTML 5 has a lot more (probably ~2000): http://www.w3.org/TR/html5/named-character-references.html
+   * 
    * @throws IOException if reading fails 
    */
   public static void generate() 
