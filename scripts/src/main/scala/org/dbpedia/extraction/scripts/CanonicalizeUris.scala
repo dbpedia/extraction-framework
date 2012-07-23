@@ -24,14 +24,14 @@ object CanonicalizeUris {
   
   def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length == 9, 
+    require(args != null && args.length >= 9, 
       "need at least nine args: " +
       /*0*/ "base dir, " +
       /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'interlanguage-links-same-as,interlanguage-links-see-also'), "+
       /*2*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
       /*3*/ "comma-separated names of input datasets (e.g. 'labels,short-abstracts,long-abstracts'), "+
       /*4*/ "output dataset name extension (e.g. '-en-uris'), "+
-      /*5*/ "input/output file suffix (e.g. '.nq.gz', '.ttl', '.ttl.bz2'), " +
+      /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
       /*6*/ "wiki code of generic domain (e.g. 'en', use '-' to disable), " +
       /*7*/ "wiki code of new URIs (e.g. 'en'), " +
       /*8*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
@@ -52,10 +52,10 @@ object CanonicalizeUris {
     val extension = args(4)
     require(extension.nonEmpty, "no result name extension")
     
-    // Suffix of mapping files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
+    // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val fileSuffix = args(5)
-    require(fileSuffix.nonEmpty, "no input/output file suffix")
+    val fileSuffixes = split(args(5))
+    require(fileSuffixes.nonEmpty, "no input/output file suffixes")
     
     // Language using generic domain (usually en)
     val generic = if (args(6) == "-") null else Language(args(6))
@@ -106,34 +106,37 @@ object CanonicalizeUris {
         else Set(newUri(oldUri))
       }
       
-      // copy date, but use different suffix
-      val fileFinder = new DateFinder(baseDir, language, fileSuffix, mappingFinder.date)
-      
-      val mapper = new QuadMapper(fileFinder)
-      for (input <- inputs) {
-        mapper.mapQuads(input, input + extension, required = false) { quad =>
-          val pred = newUri(quad.predicate)
-          val subjects = newUris(quad.subject)
-          if (subjects.isEmpty) {
-            // no mapping for this subject URI - discard the quad. TODO: make this configurable
-            List()
-          }
-          else if (quad.datatype == null) {
-            // URI value - change subject and object URIs, copy everything else
-            val objects = newUris(quad.value)
-            if (objects.isEmpty) {
-              // no mapping for this object URI - discard the quad. TODO: make this configurable
+      for (fileSuffix <- fileSuffixes) {
+        // copy date, but use different suffix
+        val fileFinder = new DateFinder(baseDir, language, fileSuffix, mappingFinder.date)
+        
+        val mapper = new QuadMapper(fileFinder)
+        for (input <- inputs) {
+          mapper.mapQuads(input, input + extension, required = false) { quad =>
+            val pred = newUri(quad.predicate)
+            val subjects = newUris(quad.subject)
+            if (subjects.isEmpty) {
+              // no mapping for this subject URI - discard the quad. TODO: make this configurable
               List()
-            } else {
-              // map subject, predicate and object URI, copy everything else
-              for (subj <- subjects; obj <- objects) yield quad.copy(subject = subj, predicate = pred, value = obj)
             }
-          } else {
-            // literal value - change subject and predicate URI, copy everything else
-            for (subj <- subjects) yield quad.copy(subject = subj, predicate = pred)
+            else if (quad.datatype == null) {
+              // URI value - change subject and object URIs, copy everything else
+              val objects = newUris(quad.value)
+              if (objects.isEmpty) {
+                // no mapping for this object URI - discard the quad. TODO: make this configurable
+                List()
+              } else {
+                // map subject, predicate and object URI, copy everything else
+                for (subj <- subjects; obj <- objects) yield quad.copy(subject = subj, predicate = pred, value = obj)
+              }
+            } else {
+              // literal value - change subject and predicate URI, copy everything else
+              for (subj <- subjects) yield quad.copy(subject = subj, predicate = pred)
+            }
           }
         }
       }
+      
     }
     
   }
