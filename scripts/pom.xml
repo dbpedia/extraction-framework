@@ -76,7 +76,7 @@
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
-                            <!-- ../run CanonicalizeUris /home/dbpedia interlanguage-links-same-as .nt.gz labels,short-abstracts,long-abstracts -en-uris .nt.gz en en 10000- -->
+                            <!-- ../run CanonicalizeUris /data/dbpedia interlanguage-links-same-as .nt.gz labels,short-abstracts,long-abstracts -en-uris .nt.gz en en 10000- -->
                         </launcher>
                         <launcher>
                             <id>ResolveTransitiveLinks</id>
@@ -85,7 +85,7 @@
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
-                            <!-- ../run ResolveTransitiveLinks /home/dbpedia redirects transitive-redirects .nt.gz 10000- -->
+                            <!-- ../run ResolveTransitiveLinks /data/dbpedia redirects transitive-redirects .nt.gz 10000- -->
                         </launcher>
                         <launcher>
                             <id>MapObjectUris</id>
@@ -94,7 +94,7 @@
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
-                            <!-- ../run MapObjectUris /home/dbpedia transitive-redirects infobox-properties,mappingbased-properties,... -redirected .nt.gz 10000- -->
+                            <!-- ../run MapObjectUris /data/dbpedia transitive-redirects .nt.gz infobox-properties,mappingbased-properties,... -redirected .nt.gz,.nq.gz,.nt.bz2,.nq.bz2 10000- -->
                             <!-- the following should be redirected (as of 2012-07-11) -->
                             <!-- disambiguations,infobox-properties,mappingbased-properties,page-links,persondata,topical-concepts -->
                         </launcher>
@@ -105,7 +105,7 @@
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
-                            <!-- ../run DecodeHtmlCharacterReferences /home/dbpedia labels,short-abstracts,long-abstracts -fixed .nt.gz false 10000- -->
+                            <!-- ../run DecodeHtmlCharacterReferences /data/dbpedia labels,short-abstracts,long-abstracts -fixed .nt.gz false 10000- -->
                         </launcher>
                     </launchers>
                 </configuration>
