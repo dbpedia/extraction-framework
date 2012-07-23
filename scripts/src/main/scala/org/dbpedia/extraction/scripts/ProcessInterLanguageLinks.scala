@@ -375,26 +375,25 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         if (bidi) {
           writeTriple(sameAs, sameAsUri, langKey, link)
           sameAsCount += 1
+          sameAsTotal += 1
         }
         else {
           writeTriple(seeAlso, seeAlsoUri, langKey, link)
           seeAlsoCount += 1
+          seeAlsoTotal += 1
         }
           
         index += 1
+        total += 1
         if (index % 10000000 == 0) logWrite(wikiCode, index, sameAsCount, seeAlsoCount, start)
+        if (total % 10000000 == 0) logWrite("total", total, sameAsTotal, seeAlsoTotal, startTotal)
       }
+      logWrite(wikiCode, index, sameAsCount, seeAlsoCount, start)
       
       closeDataset(sameAs)
       closeDataset(seeAlso)
-      
-      logWrite(wikiCode, index, sameAsCount, seeAlsoCount, start)
-      
-      total += index
-      sameAsTotal += sameAsCount
-      seeAlsoTotal += seeAlsoCount
-      logWrite("total", total, sameAsTotal, seeAlsoTotal, startTotal)
     }
+    logWrite("total", total, sameAsTotal, seeAlsoTotal, startTotal)
   }
   
   private def logWrite(name: String, total: Int, sameAs: Int, seeAlso: Int, start: Long): Unit = {
