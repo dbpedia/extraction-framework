@@ -59,8 +59,8 @@ object CanonicalizeUris {
     
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val fileSuffixes = split(args(5))
-    require(fileSuffixes.nonEmpty, "no input/output file suffixes")
+    val suffixes = split(args(5))
+    require(suffixes.nonEmpty, "no input/output file suffixes")
     
     // Language using generic domain (usually en)
     val generic = if (args(6) == "-") null else Language(args(6))
@@ -80,7 +80,7 @@ object CanonicalizeUris {
       val oldPrefix = uriPrefix(language)
       val oldResource = oldPrefix+"resource/"
       
-      val mappingFinder = new DateFinder(baseDir, language, mappingSuffix)
+      val mappingFinder = new DateFinder(baseDir, language)
       
       // inter language links can link multiple articles between two languages, for example
       // http://de.wikipedia.org/wiki/Prostitution_in_der_Antike -> http://en.wikipedia.org/wiki/Prostitution_in_ancient_Rome
@@ -91,7 +91,7 @@ object CanonicalizeUris {
       val reader = new QuadReader(mappingFinder)
       for (mappping <- mappings) {
         var count = 0
-        reader.readQuads(mappping, auto = true) { quad =>
+        reader.readQuads(mappping + mappingSuffix, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           if (quad.value.startsWith(newResource)) {
             // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
@@ -118,13 +118,13 @@ object CanonicalizeUris {
         else Set(newUri(oldUri))
       }
       
-      for (fileSuffix <- fileSuffixes) {
+      for (suffix <- suffixes) {
         // copy date, but use different suffix
-        val fileFinder = new DateFinder(baseDir, language, fileSuffix, mappingFinder.date)
+        val fileFinder = new DateFinder(baseDir, language, mappingFinder.date)
         
         val mapper = new QuadMapper(fileFinder)
         for (input <- inputs) {
-          mapper.mapQuads(input, input + extension, required = false) { quad =>
+          mapper.mapQuads(input + suffix, input + extension + suffix, required = false) { quad =>
             val pred = newUri(quad.predicate)
             val subjects = newUris(quad.subject)
             if (subjects.isEmpty) {
