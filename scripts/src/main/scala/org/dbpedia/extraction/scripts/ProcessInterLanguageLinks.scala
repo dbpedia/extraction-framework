@@ -105,7 +105,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   The current code throws ArrayIndexOutOfBoundsExceptions if there are more than 2^10 languages.
   
   Arbitrary limitations:
-  - at most ~17 million links per language (2^24). English currently has ~11 million.
+  - at most ~17 million links per language (2^24). English currently has ~13 million.
   - at most ~17 million unique titles (2^24). The top 100 languages currently have ~12 million.
   
   If we break these limits, we can simply increase the array sizes and give the JVM more heap.
@@ -193,7 +193,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     links = new Array[Array[Long]](languages.length)
     
-    // Enough space for ~17 million links. English has ~11 million links.
+    // Enough space for ~17 million links. English has ~13 million links.
     var langLinks = new Array[Long](1 << 24)
     
     var lineTotal = 0
