@@ -45,6 +45,12 @@ import java.io.File
  * redirect resolution into interlanguage link resolution. We're pretty strict when we generate
  * interlanguage-links-same-as. If we resolve redirects in interlanguage-links, we would probably
  * gain a few interlanguage-links (tenths of a percent), but we would not eliminate errors.
+ * 
+ * Example call:
+ * ../run MapObjectUris /data/dbpedia transitive-redirects .nt.gz infobox-properties,mappingbased-properties,... -redirected .nt.gz,.nq.gz 10000-
+ * 
+ * The following should be redirected (as of 2012-07-11)
+ * disambiguations,infobox-properties,mappingbased-properties,page-links,persondata,topical-concepts
  */
 object MapObjectUris {
   

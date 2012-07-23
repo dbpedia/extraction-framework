@@ -11,6 +11,8 @@ import org.dbpedia.util.text.{ParseExceptionCounter,Appender}
 import java.lang.StringBuilder
 
 /**
+ * Example call:
+ * ../run DecodeHtmlCharacterReferences /data/dbpedia labels,short-abstracts,long-abstracts -fixed .nt.gz false 10000-
  */
 object DecodeHtmlCharacterReferences {
   

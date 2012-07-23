@@ -18,6 +18,14 @@ import java.lang.StringBuilder
 
 /**
  * Create a dataset file with owl:sameAs links to Freebase.
+ * 
+ * Example calls:
+ * 
+ * URIs and N-Triple escaping
+ * ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-links.nt.gz freebase-datadump-quadruples.tsv.bz2
+ * 
+ * IRIs and Turtle escaping
+ * ../run CreateFreebaseLinks true true /data/dbpedia .ttl.gz freebase-links.ttl.gz freebase-datadump-quadruples.tsv.bz2
  */
 object CreateFreebaseLinks
 {
