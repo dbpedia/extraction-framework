@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dump
+package org.dbpedia.extraction.scripts
 
 object CreateDownloadPage {
   
