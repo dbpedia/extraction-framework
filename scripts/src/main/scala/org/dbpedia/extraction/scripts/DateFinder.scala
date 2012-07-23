@@ -9,9 +9,11 @@ import IOUtils._
 
 /**
  */
-class DateFinder(val baseDir: File, val language: Language, private var _date: String = null) {
+class DateFinder(val baseDir: File, val language: Language) {
   
   private val finder = new Finder[File](baseDir, language)
+  
+  private var _date: String = null
   
   def date = if (_date != null) _date else throw new IllegalStateException("date not set")
   

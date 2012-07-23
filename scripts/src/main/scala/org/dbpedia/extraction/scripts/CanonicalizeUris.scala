@@ -80,7 +80,7 @@ object CanonicalizeUris {
       val oldPrefix = uriPrefix(language)
       val oldResource = oldPrefix+"resource/"
       
-      val mappingFinder = new DateFinder(baseDir, language)
+      val finder = new DateFinder(baseDir, language)
       
       // inter language links can link multiple articles between two languages, for example
       // http://de.wikipedia.org/wiki/Prostitution_in_der_Antike -> http://en.wikipedia.org/wiki/Prostitution_in_ancient_Rome
@@ -88,7 +88,7 @@ object CanonicalizeUris {
       // TODO: in other cases, we probably want to treat multiple values as errors. Make this configurable.
       val map = new HashMap[String, Set[String]] with MultiMap[String, String]
       
-      val reader = new QuadReader(mappingFinder)
+      val reader = new QuadReader(finder)
       for (mappping <- mappings) {
         var count = 0
         reader.readQuads(mappping + mappingSuffix, auto = true) { quad =>
@@ -118,33 +118,28 @@ object CanonicalizeUris {
         else Set(newUri(oldUri))
       }
       
-      for (suffix <- suffixes) {
-        // copy date, but use different suffix
-        val fileFinder = new DateFinder(baseDir, language, mappingFinder.date)
-        
-        val mapper = new QuadMapper(fileFinder)
-        for (input <- inputs) {
-          mapper.mapQuads(input + suffix, input + extension + suffix, required = false) { quad =>
-            val pred = newUri(quad.predicate)
-            val subjects = newUris(quad.subject)
-            if (subjects.isEmpty) {
-              // no mapping for this subject URI - discard the quad. TODO: make this configurable
+      val mapper = new QuadMapper(finder)
+      for (input <- inputs; suffix <- suffixes) {
+        mapper.mapQuads(input + suffix, input + extension + suffix, required = false) { quad =>
+          val pred = newUri(quad.predicate)
+          val subjects = newUris(quad.subject)
+          if (subjects.isEmpty) {
+            // no mapping for this subject URI - discard the quad. TODO: make this configurable
+            List()
+          }
+          else if (quad.datatype == null) {
+            // URI value - change subject and object URIs, copy everything else
+            val objects = newUris(quad.value)
+            if (objects.isEmpty) {
+              // no mapping for this object URI - discard the quad. TODO: make this configurable
               List()
-            }
-            else if (quad.datatype == null) {
-              // URI value - change subject and object URIs, copy everything else
-              val objects = newUris(quad.value)
-              if (objects.isEmpty) {
-                // no mapping for this object URI - discard the quad. TODO: make this configurable
-                List()
-              } else {
-                // map subject, predicate and object URI, copy everything else
-                for (subj <- subjects; obj <- objects) yield quad.copy(subject = subj, predicate = pred, value = obj)
-              }
             } else {
-              // literal value - change subject and predicate URI, copy everything else
-              for (subj <- subjects) yield quad.copy(subject = subj, predicate = pred)
+              // map subject, predicate and object URI, copy everything else
+              for (subj <- subjects; obj <- objects) yield quad.copy(subject = subj, predicate = pred, value = obj)
             }
+          } else {
+            // literal value - change subject and predicate URI, copy everything else
+            for (subj <- subjects) yield quad.copy(subject = subj, predicate = pred)
           }
         }
       }
