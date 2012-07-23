@@ -25,7 +25,7 @@ object DecodeHtmlCharacterReferences {
       /*0*/ "base dir, "+
       /*1*/ "comma-separated names of input datasets (e.g. 'labels,short-abstracts,long-abstracts'), "+
       /*2*/ "output dataset name extension (e.g. '-fixed'), "+
-      /*3*/ "input/output file suffix (e.g. '.nq.gz', '.ttl', '.ttl.bz2'), "+
+      /*3*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
       /*4*/ "boolean encoding flag: true for Turtle, false for N-Triples, "+ 
       /*5*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
@@ -37,10 +37,10 @@ object DecodeHtmlCharacterReferences {
     val extension = args(2)
     require(extension.nonEmpty, "no result name extension")
     
-    // Suffix of mapping files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
+    // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val fileSuffix = args(3)
-    require(fileSuffix.nonEmpty, "no input/output file suffix")
+    val fileSuffixes = split(args(3))
+    require(fileSuffixes.nonEmpty, "no input/output file suffixes")
     
     // turtle encoding?
     val turtle = args(4).toBoolean
@@ -61,21 +61,29 @@ object DecodeHtmlCharacterReferences {
     
     for (language <- languages) {
       
-      val finder = new DateFinder(baseDir, language, fileSuffix)
       // use first input file to find date. TODO: rather brittle. is there a better way?
+      var finder = new DateFinder(baseDir, language, fileSuffixes(0))
       finder.find(inputs(0), auto = true)
+      val date = finder.date
       
-      val mapper = new QuadMapper(finder)
-      for (input <- inputs) {
-        val file = finder.find(input)
-        mapper.mapQuads(input, input + extension, required = false) { quad =>
-          if (quad.datatype == null) throw new IllegalArgumentException("expected object literal, found object uri: "+quad)
-          val decoded = coder.code(quad.value)
-          List(quad.copy(value = decoded))
+      for (fileSuffix <- fileSuffixes) {
+        new DateFinder(baseDir, language, fileSuffix, date)
+        // use first input file to find date. TODO: rather brittle. is there a better way?
+        finder.find(inputs(0), auto = true)
+        
+        val mapper = new QuadMapper(finder)
+        for (input <- inputs) {
+          val file = finder.find(input)
+          mapper.mapQuads(input, input + extension, required = false) { quad =>
+            if (quad.datatype == null) throw new IllegalArgumentException("expected object literal, found object uri: "+quad)
+            val decoded = coder.code(quad.value)
+            List(quad.copy(value = decoded))
+          }
+          println(language.wikiCode+": "+file+" : found "+counter.errors()+" HTML character reference errors")
+          counter.reset()
         }
-        println(language.wikiCode+": "+file+" : found "+counter.errors()+" HTML character reference errors")
-        counter.reset()
       }
+      
     }
     
   }
