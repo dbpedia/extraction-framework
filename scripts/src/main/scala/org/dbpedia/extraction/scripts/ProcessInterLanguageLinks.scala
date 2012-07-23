@@ -214,9 +214,9 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
           case Quad(quad) if (quad.datatype == null) => {
             
             val subj = parseUri(quad.subject)
-            val subjLang = (subj >>> 27).asInstanceOf[Int]
+            val subjLang = (subj >>> 27).toInt
             // subj is -1 if its domain was not recognized (problem with generic/specific domain setting?)
-            require (subj != -1 && subjLang == langKey, "subject has wrong language - expected "+wikiCode+", found "+(if (subj == -1) "none" else languages(subjLang).wikiCode)+": "+line)
+            require (subj != -1 && subjLang == langKey, "subject has wrong language - expected "+wikiCode+", found "+(if (subj == -1) "none" else subjLang)+": "+line)
             
             require (quad.predicate == interLinkUri, "wrong property - expected "+interLinkUri+", found "+quad.predicate+": "+line)
             
@@ -282,7 +282,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         
         // Title key in lowest 27 bits, language key in next higher 10 bits.
         // No need to mask title key - it is less than 2^24.
-        langKey << 27 | titleKey
+        langKey.toLong << 27 | titleKey.toLong
       }
     }
   }
@@ -324,11 +324,11 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
    */
   private def writeTriple(writer: Writer, predUri: String, subjLang: Int, link: Long): Unit = {
     // get subject title from upper 27 bits
-    val subjTitle = (link >>> 37).asInstanceOf[Int]
+    val subjTitle = (link >>> 37).toInt
     // get object language from middle 10 bits
-    val objLang = (link >>> 27).asInstanceOf[Int] & 0x3FF
+    val objLang = (link >>> 27).toInt & 0x3FF
     // get object title from lower 27 bits
-    val objTitle = (link & 0x7FFFFFF).asInstanceOf[Int]
+    val objTitle = (link & 0x7FFFFFF).toInt
     writer.write("<"+uriPrefix+domains(subjLang)+uriPath+titles(subjTitle)+"> <"+predUri+"> <"+uriPrefix+domains(objLang)+uriPath+titles(objTitle)+"> .\n")
   }
   
@@ -354,7 +354,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       var seeAlsoCount = 0
       val start = System.nanoTime
       
-      val subjLang = langKey.asInstanceOf[Long]
+      val subjLang = langKey.toLong
       
       val langLinks = links(langKey)
       
@@ -366,7 +366,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         
         val link = langLinks(index)
         
-        val objLang = ((link >>> 27) & 0x3FF).asInstanceOf[Int]
+        val objLang = ((link >>> 27) & 0x3FF).toInt
         
         // inverse link: subject titel and object title switched, lang changed
         val inverse = link << 37 | subjLang  << 27 | link >>> 37 
