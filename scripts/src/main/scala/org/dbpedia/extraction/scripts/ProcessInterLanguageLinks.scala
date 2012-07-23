@@ -36,7 +36,7 @@ object ProcessInterLanguageLinks {
     
     // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .ttl or .nt files, using IRIs or URIs.
-    // WARNING: DOES NOT WORK WITH .nq OR .tql.
+    // WARNING: This script rejects .nq OR .tql, because it writes ONLY TRIPLES, NOT QUADS.
     val fileSuffix = args(3)
     
     val processor = new ProcessInterLanguageLinks(baseDir, dumpFile, fileSuffix, extension)
@@ -186,7 +186,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     println("reading triples...")
     
-    // Enough space for ~16 million unique titles. The languages with 10000+ articles have ~12 million titles.
+    // Enough space for ~17 million unique titles. The languages with 10000+ articles have ~12 million titles.
     titles = new Array[String](1 << 24)
     titleKeys = new HashMap[String, Int]()
     titleCount = 0
@@ -211,7 +211,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       val start = System.nanoTime
       readLines(file) { line =>
         line match {
-          case Quad(quad) if (quad.datatype == null) => {
+          case Quad(quad) if (quad.datatype == null && quad.context == null) => {
             
             val subj = parseUri(quad.subject)
             val subjLang = (subj >>> 27).toInt
