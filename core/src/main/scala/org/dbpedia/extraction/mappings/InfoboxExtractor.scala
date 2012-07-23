@@ -12,7 +12,8 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
  * This extractor extracts all properties from all infoboxes.
- * Extracted information is represented using properties in the http://dbpedia.org/property/ namespace.
+ * Extracted information is represented using properties in the http://xx.dbpedia.org/property/ 
+ * namespace (where xx is the language code).
  * The names of the these properties directly reflect the name of the Wikipedia infobox property.
  * Property names are not cleaned or merged.
  * Property types are not part of a subsumption hierarchy and there is no consistent ontology for the infobox dataset.
@@ -34,6 +35,8 @@ extends Extractor
 
     private val language = context.language.wikiCode
 
+    // FIXME: this uses the http://xx.dbpedia.org/property/ namespace, but the 
+    // http://dbpedia.org/ontology/ namespace would probably make more sense.
     private val usesTemplateProperty = context.language.propertyUri.append("wikiPageUsesTemplate")
 
     private val MinPropertyCount = 2
