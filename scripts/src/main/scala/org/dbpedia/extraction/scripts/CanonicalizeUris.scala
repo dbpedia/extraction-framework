@@ -10,10 +10,11 @@ import java.io.File
  * Maps old URIs in triple files to new URIs:
  * - read one or more triple files that contain the URI mapping:
  *   - the predicate is ignored
- *   - only triples whose object URI has a certain domain are used
+ *   - only triples whose object URI has the target domain are used
  * - read one or more files that need their URIs changed
- *   - the predicate is copied (and otherwise ignored)
- *   - triples containing URIs that cannot be mapped are discarded
+ *   - DBpedia URIs in subject, predicate or object position are mapped
+ *   - non-DBpedia URIs and literal values are copied unchanged
+ *   - triples containing DBpedia URIs in subject or object position that cannot be mapped are discarded
  */
 object CanonicalizeUris {
   
@@ -59,16 +60,20 @@ object CanonicalizeUris {
     // Language using generic domain (usually en)
     val generic = if (args(6) == "-") null else Language(args(6))
     
-    def uriPrefix(language: Language): String = "http://"+(if (language == generic) "dbpedia.org" else language.dbpediaDomain)+"/resource/"      
+    def uriPrefix(language: Language): String = "http://"+(if (language == generic) "dbpedia.org" else language.dbpediaDomain)+"/"      
     
     val newLanguage = Language(args(7))
+    
     val newPrefix = uriPrefix(newLanguage)
-    val newPredicateNs = newLanguage.propertyUri.append("")
+    val newResource = newPrefix+"resource/"
     
     val languages = parseLanguages(baseDir, args.drop(8))
     require(languages.nonEmpty, "no languages")
     
     for (language <- languages) {
+      
+      val oldPrefix = uriPrefix(language)
+      val oldResource = oldPrefix+"resource/"
       
       val mappingFinder = new DateFinder(baseDir, language, mappingSuffix)
       
@@ -83,7 +88,7 @@ object CanonicalizeUris {
         var count = 0
         reader.readQuads(mappping, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
-          if (quad.value.startsWith(newPrefix)) {
+          if (quad.value.startsWith(newResource)) {
             map.addBinding(quad.subject, quad.value)
             count += 1
           }
@@ -91,27 +96,23 @@ object CanonicalizeUris {
         println("found "+count+" mappings")
       }
       
-      // copy date, but use different suffix
-      val fileFinder = new DateFinder(baseDir, language, fileSuffix, mappingFinder.date)
-      
-      val oldPrefix = uriPrefix(language)
+      def newUri(oldUri: String): String = {
+        if (oldUri.startsWith(oldPrefix)) newPrefix + oldUri.substring(oldPrefix.length)
+        else oldUri // not a DBpedia URI, copy it unchanged
+      }
       
       def newUris(oldUri: String): Set[String] = {
-        if (oldUri.startsWith(oldPrefix)) map.getOrElse(oldUri, Set())
-        else Set(oldUri) // not a DBpedia URI, copy it unchanged
+        if (oldUri.startsWith(oldResource)) map.getOrElse(oldUri, Set())
+        else Set(newUri(oldUri))
       }
       
-      val oldPredicateNs = language.propertyUri.append("")
-      
-      def newPredicate(oldPredicate: String): String = {
-        if (oldPredicate.startsWith(oldPredicateNs)) newPredicateNs + oldPredicate.substring(oldPredicateNs.length)
-        else oldPredicate // not a DBpedia URI, copy it unchanged
-      }
+      // copy date, but use different suffix
+      val fileFinder = new DateFinder(baseDir, language, fileSuffix, mappingFinder.date)
       
       val mapper = new QuadMapper(fileFinder)
       for (input <- inputs) {
         mapper.mapQuads(input, input + extension, required = false) { quad =>
-          val pred = newPredicate(quad.predicate)
+          val pred = newUri(quad.predicate)
           val subjects = newUris(quad.subject)
           if (subjects.isEmpty) {
             // no mapping for this subject URI - discard the quad. TODO: make this configurable
