@@ -58,7 +58,7 @@ class QuadMapper(finder: DateFinder) {
       writer.write("# completed "+formatCurrentTimestamp+"\n")
     }
     finally writer.close()
-    println(wikiCode+": found "+mapCount+" URI mappings")
+    println(wikiCode+": mapped "+mapCount+" quads")
   }
   
 }
