@@ -12,7 +12,7 @@ import IOUtils._
 class QuadReader(finder: DateFinder) {
   
   /**
-   * @param input file name part, e.g. interlanguage-links-same-as
+   * @param input file name, e.g. interlanguage-links-same-as.nt.gz
    * @param proc process quad
    */
   def readQuads(input: String, auto: Boolean = false)(proc: Quad => Unit): Unit = {

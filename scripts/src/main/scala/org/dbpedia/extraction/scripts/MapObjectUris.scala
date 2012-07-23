@@ -91,8 +91,8 @@ object MapObjectUris {
     
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val fileSuffixes = split(args(5))
-    require(fileSuffixes.nonEmpty, "no input/output file suffixes")
+    val suffixes = split(args(5))
+    require(suffixes.nonEmpty, "no input/output file suffixes")
     
     // Use all remaining args as keys or comma or whitespace separated lists of keys
     val languages = parseLanguages(baseDir, args.drop(6))
@@ -100,16 +100,16 @@ object MapObjectUris {
     
     for (language <- languages) {
       
-      val mappingFinder = new DateFinder(baseDir, language, mappingSuffix)
+      val finder = new DateFinder(baseDir, language)
       
       // Redirects can have only one target, so we don't really need a MultiMap here.
       // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
       val map = new HashMap[String, Set[String]] with MultiMap[String, String]
       
-      val reader = new QuadReader(mappingFinder)
+      val reader = new QuadReader(finder)
       for (mappping <- mappings) {
         var count = 0
-        reader.readQuads(mappping, auto = true) { quad =>
+        reader.readQuads(mappping + mappingSuffix, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
           // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
@@ -124,18 +124,13 @@ object MapObjectUris {
         println("found "+count+" mappings")
       }
       
-      for (fileSuffix <- fileSuffixes) {
-        // copy date, but use different suffix
-        val fileFinder = new DateFinder(baseDir, language, fileSuffix, mappingFinder.date)
-        
-        val mapper = new QuadMapper(fileFinder)
-        for (input <- inputs) {
-          mapper.mapQuads(input, input + extension, required = false) { quad =>
-            if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
-            else map.get(quad.value) match {
-              case Some(uris) => for (uri <- uris) yield quad.copy(value = uri) // change object URI
-              case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
-            }
+      val mapper = new QuadMapper(finder)
+      for (input <- inputs; suffix <- suffixes) {
+        mapper.mapQuads(input + suffix, input + extension + suffix, required = false) { quad =>
+          if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
+          else map.get(quad.value) match {
+            case Some(uris) => for (uri <- uris) yield quad.copy(value = uri) // change object URI
+            case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
           }
         }
       }

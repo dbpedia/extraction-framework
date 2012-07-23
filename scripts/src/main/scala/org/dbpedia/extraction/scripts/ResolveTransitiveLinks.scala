@@ -45,14 +45,14 @@ object ResolveTransitiveLinks {
     
     for (language <- languages) {
       
-      val finder = new DateFinder(baseDir, language, suffix)
+      val finder = new DateFinder(baseDir, language)
       
       // use LinkedHashMap to preserve order
       val map = new LinkedHashMap[String, String]()
       
       var predicate: String = null
       val reader = new QuadReader(finder)
-      reader.readQuads(input, auto = true) { quad =>
+      reader.readQuads(input + suffix, auto = true) { quad =>
         if (quad.context != null) throw new IllegalArgumentException("expected triple, found quad: "+quad)
         if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
         if (predicate == null) predicate = quad.predicate
@@ -67,7 +67,7 @@ object ResolveTransitiveLinks {
         println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
       }
       
-      val file = finder.find(output)
+      val file = finder.find(output + suffix)
       println(language.wikiCode+": writing "+file+" ...")
       val writer = write(file)
       try {

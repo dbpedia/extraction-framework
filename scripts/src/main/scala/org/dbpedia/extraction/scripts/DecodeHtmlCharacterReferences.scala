@@ -1,10 +1,7 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.destinations.Quad
-import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
-import scala.collection.mutable.{Set,HashMap,MultiMap,ArrayBuffer}
 import java.io.File
 import org.dbpedia.util.text.html.{HtmlCoder,XmlCodes}
 import org.dbpedia.util.text.{ParseExceptionCounter,Appender}
@@ -41,8 +38,8 @@ object DecodeHtmlCharacterReferences {
     
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val fileSuffixes = split(args(3))
-    require(fileSuffixes.nonEmpty, "no input/output file suffixes")
+    val suffixes = split(args(3))
+    require(suffixes.nonEmpty, "no input/output file suffixes")
     
     // turtle encoding?
     val turtle = args(4).toBoolean
@@ -63,27 +60,19 @@ object DecodeHtmlCharacterReferences {
     
     for (language <- languages) {
       
+      val finder = new DateFinder(baseDir, language)
       // use first input file to find date. TODO: rather brittle. is there a better way?
-      var finder = new DateFinder(baseDir, language, fileSuffixes(0))
-      finder.find(inputs(0), auto = true)
-      val date = finder.date
+      finder.find(inputs(0) + suffixes(0), auto = true)
       
-      for (fileSuffix <- fileSuffixes) {
-        new DateFinder(baseDir, language, fileSuffix, date)
-        // use first input file to find date. TODO: rather brittle. is there a better way?
-        finder.find(inputs(0), auto = true)
-        
-        val mapper = new QuadMapper(finder)
-        for (input <- inputs) {
-          val file = finder.find(input)
-          mapper.mapQuads(input, input + extension, required = false) { quad =>
-            if (quad.datatype == null) throw new IllegalArgumentException("expected object literal, found object uri: "+quad)
-            val decoded = coder.code(quad.value)
-            List(quad.copy(value = decoded))
-          }
-          println(language.wikiCode+": "+file+" : found "+counter.errors()+" HTML character reference errors")
-          counter.reset()
+      val mapper = new QuadMapper(finder)
+      for (input <- inputs; suffix <- suffixes) {
+        mapper.mapQuads(input + suffix, input + extension + suffix, required = false) { quad =>
+          if (quad.datatype == null) throw new IllegalArgumentException("expected object literal, found object uri: "+quad)
+          val decoded = coder.code(quad.value)
+          List(quad.copy(value = decoded))
         }
+        println(language.wikiCode+": "+finder.find(input + suffix)+" : found "+counter.errors()+" HTML character reference errors")
+        counter.reset()
       }
       
     }
