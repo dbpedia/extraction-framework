@@ -73,7 +73,7 @@ object DecodeHtmlCharacterReferences {
           val decoded = coder.code(quad.value)
           List(quad.copy(value = decoded))
         }
-        println(language.wikiCode+": "+file+": found "+counter.errors()+" HTML character reference errors")
+        println(language.wikiCode+": "+file+" : found "+counter.errors()+" HTML character reference errors")
         counter.reset()
       }
     }
