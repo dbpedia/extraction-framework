@@ -18,6 +18,8 @@ import java.io.File
  *   
  * Example call:
  * ../run CanonicalizeUris /data/dbpedia interlanguage-links-same-as .nt.gz labels,short-abstracts,long-abstracts -en-uris .nt.gz,.nq.gz en en 10000-
+ * 
+ * TODO: merge with MapObjectUris?
  */
 object CanonicalizeUris {
   
@@ -92,6 +94,13 @@ object CanonicalizeUris {
         reader.readQuads(mappping, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           if (quad.value.startsWith(newResource)) {
+            // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
+            // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
+            // line, which means that the character array for the whole line is kept in memory, which
+            // basically means that the whole redirects file is kept in memory. We should
+            // - only store the resource title in the map
+            // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
+            // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
             map.addBinding(quad.subject, quad.value)
             count += 1
           }
