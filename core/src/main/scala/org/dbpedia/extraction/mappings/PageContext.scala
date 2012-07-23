@@ -49,8 +49,7 @@ private class UriGenerator
             text = text.replace('(', ' ')
             text = text.replace(')', ' ')
             text = text.replaceAll("\\<.*?\\>", "") //strip tags
-            text = text.replaceAll("\\s+", "_") //remove white space
-            text = text.trim
+            text = WikiUtil.cleanSpace(text)
             if(text.length > 50) text = text.substring(0, 50)
             text = WikiUtil.wikiEncode(text)
 
