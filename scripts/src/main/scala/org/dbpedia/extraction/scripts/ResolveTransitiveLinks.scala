@@ -8,6 +8,9 @@ import java.io.File
 /**
  * Replace triples in a dataset by their transitive closure.
  * All triples must use the same property. Cycles are removed.
+ *
+ * Example call:
+ * ../run ResolveTransitiveLinks /data/dbpedia redirects transitive-redirects .nt.gz 10000-
  */
 object ResolveTransitiveLinks {
   

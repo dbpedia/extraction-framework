@@ -15,6 +15,9 @@ import java.io.File
  *   - DBpedia URIs in subject, predicate or object position are mapped
  *   - non-DBpedia URIs and literal values are copied unchanged
  *   - triples containing DBpedia URIs in subject or object position that cannot be mapped are discarded
+ *   
+ * Example call:
+ * ../run CanonicalizeUris /data/dbpedia interlanguage-links-same-as .nt.gz labels,short-abstracts,long-abstracts -en-uris .nt.gz,.nq.gz en en 10000-
  */
 object CanonicalizeUris {
   

@@ -15,6 +15,33 @@ import scala.collection.immutable.SortedSet
 import scala.collection.mutable.{Map,HashSet,HashMap}
 import java.util.Arrays.{copyOf,sort,binarySearch}
 
+/**
+ * Split inter-language links into bidirectional and unidirectional links.
+ * 
+ * Example calls:
+ * 
+ * 'fr,de' mean specific languages. '-' means no language uses generic domain.
+ * '-fr-de' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-fr-de.ttl.gz and enwiki-20120601-interlanguage-links-see-also-fr-de.ttl.gz
+ * ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-fr-de.txt.gz -fr-de .ttl.gz - fr,de
+ *
+ * '10000-' means languages by article count range. 'en' uses generic domain.
+ * '-' means no file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as.ttl.gz
+ * ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-ttl.txt.gz - .ttl.gz en 10000-
+ *
+ * '-' means don't write dump file.
+ * ../run ProcessInterLanguageLinks /data/dbpedia - -fr-de .ttl.gz - fr,de
+ *
+ * if no languages are given, read links from dump file, not from triple files.
+ * ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links.txt.gz - .ttl.gz
+ *
+ * generate links for all DBpedia I18N chapters in nt format
+ * '-chapters' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-chapters.ttl.gz
+ * ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-chapters-nt.txt.gz -chapters .nt.gz en cs,en,fr,de,el,it,ja,ko,pl,pt,ru,es
+ *
+ * generate links for all languages that have a namespace on mappings.dbpedia.org in nt format
+ * '-mapped' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-mapped.ttl.gz
+ * ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-mapped-nt.txt.gz -mapped .nt.gz en @mappings
+ */
 object ProcessInterLanguageLinks {
   
   def main(args: Array[String]) {
