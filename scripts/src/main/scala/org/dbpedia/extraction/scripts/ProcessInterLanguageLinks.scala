@@ -256,12 +256,15 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
               // Note: If there are more than 2^24 links for a language, this will throw an ArrayIndexOutOfBoundsException
               langLinks(linkCount) = link
               linkCount += 1
+              linkTotal += 1
             }
           }
           case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
         }
         lineCount += 1
+        lineTotal += 1
         if (lineCount % 1000000 == 0) logRead(wikiCode, lineCount, linkCount, start)
+        if (lineTotal % 1000000 == 0) logRead("total", lineTotal, linkTotal, startTotal)
       }
       logRead(wikiCode, lineCount, linkCount, start)
       
@@ -272,10 +275,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       // truncate array to actual size
       links(langKey) = copyOf(langLinks, linkCount)
       
-      lineTotal += lineCount
-      linkTotal += linkCount
-      logRead("total", lineTotal, linkTotal, startTotal)
     }
+    logRead("total", lineTotal, linkTotal, startTotal)
     
     // garbage collector
     titleKeys = null
@@ -362,6 +363,13 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
    * Write links to interlanguage-links-same-as and interlanguage-links-see-also triple files.
    * Must be called after either readDump() or readTriples() and sortLinks().
    * Accesses the following fields: titles, domains, links
+   * 
+   * TODO: it would be nice if we could also produce quad files, not just triple files.
+   * But: we don't want to store all context URIs in memory, so we should process the
+   * input files again in this method, not just serialize the link array. We would have to
+   * refactor readTriples() so we can re-use its main loop for writeTriples() as well. Only
+   * the innermost part of the main loop would differ, and of course some stuff before and
+   * after the main loop.
    */
   def writeTriples() {
     
