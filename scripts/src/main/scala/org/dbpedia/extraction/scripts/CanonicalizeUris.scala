@@ -61,7 +61,9 @@ object CanonicalizeUris {
     
     def uriPrefix(language: Language): String = "http://"+(if (language == generic) "dbpedia.org" else language.dbpediaDomain)+"/resource/"      
     
-    val newPrefix = uriPrefix(Language(args(7)))
+    val newLanguage = Language(args(7))
+    val newPrefix = uriPrefix(newLanguage)
+    val newPredicateNs = newLanguage.propertyUri.append("")
     
     val languages = parseLanguages(baseDir, args.drop(8))
     require(languages.nonEmpty, "no languages")
@@ -99,9 +101,17 @@ object CanonicalizeUris {
         else Set(oldUri) // not a DBpedia URI, copy it unchanged
       }
       
+      val oldPredicateNs = language.propertyUri.append("")
+      
+      def newPredicate(oldPredicate: String): String = {
+        if (oldPredicate.startsWith(oldPredicateNs)) newPredicateNs + oldPredicate.substring(oldPredicateNs.length)
+        else oldPredicate // not a DBpedia URI, copy it unchanged
+      }
+      
       val mapper = new QuadMapper(fileFinder)
       for (input <- inputs) {
         mapper.mapQuads(input, input + extension, required = false) { quad =>
+          val pred = newPredicate(quad.predicate)
           val subjects = newUris(quad.subject)
           if (subjects.isEmpty) {
             // no mapping for this subject URI - discard the quad. TODO: make this configurable
@@ -114,12 +124,12 @@ object CanonicalizeUris {
               // no mapping for this object URI - discard the quad. TODO: make this configurable
               List()
             } else {
-              // map subject and object URI, copy everything else
-              for (subj <- subjects; obj <- objects) yield quad.copy(subject = subj, value = obj)
+              // map subject, predicate and object URI, copy everything else
+              for (subj <- subjects; obj <- objects) yield quad.copy(subject = subj, predicate = pred, value = obj)
             }
           } else {
-            // literal value - change subject URI, copy everything else
-            for (subj <- subjects) yield quad.copy(subject = subj)
+            // literal value - change subject and predicate URI, copy everything else
+            for (subj <- subjects) yield quad.copy(subject = subj, predicate = pred)
           }
         }
       }
