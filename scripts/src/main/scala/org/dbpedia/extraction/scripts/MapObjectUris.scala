@@ -51,6 +51,7 @@ import java.io.File
  * 
  * The following should be redirected (as of 2012-07-11)
  * disambiguations,infobox-properties,mappingbased-properties,page-links,persondata,topical-concepts
+ * (specific-mappingbased-properties is not necessary, it has only literal values)
  */
 object MapObjectUris {
   
