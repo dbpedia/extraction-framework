@@ -81,7 +81,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   Algorithm:
   
-  Each URI is a combination of language code and title string. There are only ~9 million 
+  Each URI is a combination of language code and title string. There are only ~12 million 
   unique title strings in the top ~100 languages, so we save space by building an index of title 
   strings and using 27 bits (enough for ~130 million titles) of the index number instead of the 
   title string. We use 10 bits (enough for 1024 languages) of the language index instead of the
@@ -98,7 +98,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   Limitations caused by this bit layout:
   - at most 1024 languages (2^10). We currently use 111.
-  - at most ~130 million unique titles (2^27). There currently are ~9 million.
+  - at most ~130 million unique titles (2^27). There currently are ~12 million.
   
   If we break these limits, we're in trouble.
   
@@ -106,7 +106,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   Arbitrary limitations:
   - at most ~17 million links per language (2^24). English currently has ~11 million.
-  - at most ~17 million unique titles (2^24). The top 100 languages currently have ~9 million.
+  - at most ~17 million unique titles (2^24). The top 100 languages currently have ~12 million.
   
   If we break these limits, we can simply increase the array sizes and give the JVM more heap.
   
@@ -186,7 +186,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     println("reading triples...")
     
-    // Enough space for ~16 million unique titles. The languages with 10000+ articles have ~9 million titles.
+    // Enough space for ~16 million unique titles. The languages with 10000+ articles have ~12 million titles.
     titles = new Array[String](1 << 24)
     titleKeys = new HashMap[String, Int]()
     titleCount = 0
@@ -239,7 +239,6 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       logRead(wikiCode, lineCount, linkCount, start)
       
       var sortStart = System.nanoTime
-      println(wikiCode+": sorting "+linkCount+" links...")
       sort(langLinks, 0, linkCount)
       println(wikiCode+": sorted "+linkCount+" links in "+prettyMillis((System.nanoTime - sortStart) / 1000000))
       
@@ -432,12 +431,12 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         index += 1
       }
       
+      println("writing links...")
       for (langKey <- 0 until langCount) {
         val linkStart = System.nanoTime
         val wikiCode = languages(langKey).wikiCode
         val langLinks = links(langKey)
         val linkCount = langLinks.length
-        println(wikiCode+": writing "+linkCount+" links...")
         writer.write(intToHex(linkCount, 8)+"\n")
         index = 0
         while (index < linkCount) {
