@@ -61,7 +61,7 @@ object MapObjectUris {
       /*2*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
       /*3*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), "+
       /*4*/ "output dataset name extension (e.g. '-redirected'), "+
-      /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2')" +
+      /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
       /*6*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))
@@ -80,10 +80,10 @@ object MapObjectUris {
     val extension = args(4)
     require(extension.nonEmpty, "no result name extension")
     
-    // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
+    // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
     val fileSuffixes = split(args(5))
-    require(fileSuffixes.nonEmpty, "no file suffixes")
+    require(fileSuffixes.nonEmpty, "no input/output file suffixes")
     
     // Use all remaining args as keys or comma or whitespace separated lists of keys
     val languages = parseLanguages(baseDir, args.drop(6))
@@ -94,7 +94,7 @@ object MapObjectUris {
       val mappingFinder = new DateFinder(baseDir, language, mappingSuffix)
       
       // Redirects can have only one target, so we don't really need a MultiMap here.
-      // But MapSubjectUris also uses a MultiMap... TODO: Make this configurable.
+      // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
       val map = new HashMap[String, Set[String]] with MultiMap[String, String]
       
       val reader = new QuadReader(mappingFinder)
