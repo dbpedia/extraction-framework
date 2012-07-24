@@ -106,10 +106,9 @@ object MapObjectUris {
       // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
       val map = new HashMap[String, Set[String]] with MultiMap[String, String]
       
-      val reader = new QuadReader(finder)
       for (mappping <- mappings) {
         var count = 0
-        reader.readQuads(mappping + mappingSuffix, auto = true) { quad =>
+        QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
           // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
@@ -124,9 +123,8 @@ object MapObjectUris {
         println("found "+count+" mappings")
       }
       
-      val mapper = new QuadMapper(finder)
       for (input <- inputs; suffix <- suffixes) {
-        mapper.mapQuads(input + suffix, input + extension + suffix, required = false) { quad =>
+        QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
           if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
           else map.get(quad.value) match {
             case Some(uris) => for (uri <- uris) yield quad.copy(value = uri) // change object URI

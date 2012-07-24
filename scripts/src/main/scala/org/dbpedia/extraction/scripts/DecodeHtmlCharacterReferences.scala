@@ -59,20 +59,18 @@ object DecodeHtmlCharacterReferences {
     coder.setAppender(appender)
     
     for (language <- languages) {
-      
       val finder = new DateFinder(baseDir, language)
-      // use first input file to find date. TODO: rather brittle. is there a better way?
-      finder.find(inputs(0) + suffixes(0), auto = true)
-      
-      val mapper = new QuadMapper(finder)
+      // use first input file to find date. TODO: breaks if first file doesn't exist. is there a better way?
+      var first = true
       for (input <- inputs; suffix <- suffixes) {
-        mapper.mapQuads(input + suffix, input + extension + suffix, required = false) { quad =>
+        QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, auto = first, required = false) { quad =>
           if (quad.datatype == null) throw new IllegalArgumentException("expected object literal, found object uri: "+quad)
           val decoded = coder.code(quad.value)
           List(quad.copy(value = decoded))
         }
         println(language.wikiCode+": "+finder.find(input + suffix)+" : found "+counter.errors()+" HTML character reference errors")
         counter.reset()
+        first = false
       }
       
     }

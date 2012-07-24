@@ -88,10 +88,9 @@ object CanonicalizeUris {
       // TODO: in other cases, we probably want to treat multiple values as errors. Make this configurable.
       val map = new HashMap[String, Set[String]] with MultiMap[String, String]
       
-      val reader = new QuadReader(finder)
       for (mappping <- mappings) {
         var count = 0
-        reader.readQuads(mappping + mappingSuffix, auto = true) { quad =>
+        QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           if (quad.value.startsWith(newResource)) {
             // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
@@ -118,9 +117,8 @@ object CanonicalizeUris {
         else Set(newUri(oldUri))
       }
       
-      val mapper = new QuadMapper(finder)
       for (input <- inputs; suffix <- suffixes) {
-        mapper.mapQuads(input + suffix, input + extension + suffix, required = false) { quad =>
+        QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
           val pred = newUri(quad.predicate)
           val subjects = newUris(quad.subject)
           if (subjects.isEmpty) {
