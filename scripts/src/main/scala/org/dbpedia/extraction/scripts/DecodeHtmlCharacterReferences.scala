@@ -34,7 +34,7 @@ object DecodeHtmlCharacterReferences {
     require(inputs.nonEmpty, "no input datasets")
     
     val extension = args(2)
-    require(extension.nonEmpty, "no result name extension")
+    require(extension.nonEmpty, "no output name extension")
     
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
