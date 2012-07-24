@@ -10,9 +10,9 @@ import org.dbpedia.util.text.uri.UriDecoder
  * new rules.
  *  
  * Example call:
- * ../run DecodeUris /data/dbpedia/links bbcwildlife,bookmashup _fixed _links.nt.gz
+ * ../run RecodeUris /data/dbpedia/links bbcwildlife,bookmashup _fixed _links.nt.gz
  */
-object DecodeUris {
+object RecodeUris {
   
   private def split(arg: String): Array[String] = { 
     arg.split(",").map(_.trim).filter(_.nonEmpty)
