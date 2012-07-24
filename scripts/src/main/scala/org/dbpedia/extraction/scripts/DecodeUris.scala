@@ -10,7 +10,7 @@ import org.dbpedia.util.text.uri.UriDecoder
  * new rules.
  *  
  * Example call:
- * ../run DecodeUris /data/dbpedia/links bbcwildlife,bookmashup _fixed _links.nt.gz false false
+ * ../run DecodeUris /data/dbpedia/links bbcwildlife,bookmashup _fixed _links.nt.gz
  */
 object DecodeUris {
   
