@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.live.feeder;
 
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
 import org.dbpedia.extraction.live.priority.Priority;
@@ -30,11 +31,11 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
 
     private static Logger logger = Logger.getLogger(UnmodifiedPagesUpdateFeeder.class);
 
-//    String oaiUri = "http://en.wikipedia.org/wiki/Special:OAIRepository";
-    String oaiUri = "http://live.dbpedia.org/syncwiki/Special:OAIRepository";
+    String oaiUri = LiveOptions.options.get("oaiUri");
+    String baseWikiUri = LiveOptions.options.get("baseWikiUri");
+    String oaiPrefix = LiveOptions.options.get("oaiPrefix");
+    
     Calendar calendar = new GregorianCalendar();
-
-
     String endDate = "2011-04-01T15:00:00Z";
     String startDate = "2011-03-01T15:00:00Z";
 
@@ -45,10 +46,6 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
     int articleDelay = 0;
     boolean articleRenewal = false;
 
-//    String baseWikiUri = "http://en.wikipedia.org/wiki/";
-//    String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
-    String baseWikiUri = "http://live.dbpedia.org/syncwiki/";
-    String oaiPrefix = "oai:live.dbpedia.org:dbpediawiki:";
 
 //    public LiveUpdateFeeder(){
 //        super("Live extraction feeder");

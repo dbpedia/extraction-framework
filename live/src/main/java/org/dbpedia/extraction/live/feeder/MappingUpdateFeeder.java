@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.live.feeder;
 
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.core.Util;
 import org.dbpedia.extraction.live.helper.MappingAffectedPagesHelper;
 import org.dbpedia.extraction.live.transformer.NodeToRecordTransformer;
@@ -53,10 +54,9 @@ public class MappingUpdateFeeder extends Thread{
 
     public void run(){
 
-        String mappingsOAIUri = "http://mappings.dbpedia.org/index.php/Special:OAIRepository";
-        String baseWikiUri = "http://mappings.dbpedia.org/wiki/";
-        String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
-
+        String mappingsOAIUri = LiveOptions.options.get("mappingsOAIUri");
+        String oaiPrefix = LiveOptions.options.get("mappingsOaiPrefix");
+        String baseWikiUri = LiveOptions.options.get("mappingsBaseWikiUri");
 
         int pollInterval = 2;
         int sleepInterval = 1;
