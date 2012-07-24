@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
-import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
-import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.extraction.util.WikiUtil.wikiEncode
 import java.io.File
-import java.lang.StringBuilder
-import java.net.URLDecoder
+import java.net.URI
+import org.dbpedia.util.text.uri.UriDecoder
 
 /**
+ * Decodes DBpedia URIs that percent-encode too many characters and encodes them following our
+ * new rules.
+ *  
  * Example call:
  * ../run DecodeUris /data/dbpedia/links bbcwildlife,bookmashup _fixed _links.nt.gz false false
  */
@@ -19,14 +20,12 @@ object DecodeUris {
   
   def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length >= 6, 
-      "need at least six args: "+
+    require(args != null && args.length == 4, 
+      "need four args: "+
       /*0*/ "directory, "+
       /*1*/ "comma-separated names of input files (e.g. 'bbcwildlife,bookmashup'), "+
       /*2*/ "output dataset name extension (e.g. '_fixed'), "+
-      /*3*/ "file extension (e.g. '_links.nt.gz'), "+
-      /*4*/ "boolean encoding flag: true for Turtle, false for N-Triples, "+
-      /*4*/ "boolean encoding flag: true for IRIs, false for URIs"
+      /*3*/ "file extension (e.g. '_links.nt.gz')"
     )
     
     val dir = new File(args(0))
@@ -38,15 +37,9 @@ object DecodeUris {
     require(extension.nonEmpty, "no output name extension")
     
     // Suffix of input/output files, for example "_links.nt.gz"
-    // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
+    // This script works with .nt or .nq files using URIs, NOT with .ttl or .tql files and NOT with IRIs.
     val suffix = args(3)
-    require(suffix.nonEmpty, "no input/output file suffixes")
-    
-    // turtle encoding?
-    val turtle = args(4).toBoolean
-    
-    // do the files use IRIs or URIs?
-    val iris = args(5).toBoolean
+    require(suffix.nonEmpty, "no input/output file suffix")
     
     for (input <- inputs) {
       val inFile = new File(dir, input + suffix)
@@ -66,6 +59,43 @@ object DecodeUris {
     
   }
   
-  def fixUri(uri: String): String = WikiUtil.wikiEncode(URLDecoder.decode(uri, "UTF-8"))
-  
+  def fixUri(uri: String): String = {
+    
+    if (uri.startsWith("http://dbpedia.org/")) {
+      
+      // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
+      // "#%<>?[\]^`{|}
+      
+      // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
+      if (uri.contains("\\")) throw new IllegalArgumentException("URI contains backslash: ["+uri+"]")
+      
+      // we can't handle queries, we re-encode question marks
+      if (uri.contains("?")) throw new IllegalArgumentException("URI contains query: ["+uri+"]")
+      
+      // we can't handle fragments, we re-encode hash signs
+      if (uri.contains("#")) throw new IllegalArgumentException("URI contains fragment: ["+uri+"]")
+      
+      // The other characters that we re-encode are extremely unlikely to occur:
+      // "<>[]^`{|}
+      
+      // decoding the whole URI is ugly, but should work for us.
+      val decoded = UriDecoder.decode(uri)
+      
+      // UriDecoder.decode returns the same object if nothing has changed
+      if (uri.eq(decoded)) {
+        uri
+      }
+      else {
+        // re-encode URI according to our own rules
+        val encoded = wikiEncode(decoded)
+        // we may have decoded non-ASCII characters, so we have to re-encode them
+        new URI(encoded).toASCIIString
+      }
+    }
+    else {
+      // just copy non-DBpedia URIs
+      uri
+    }
+  }
+
 }
