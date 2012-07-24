@@ -24,16 +24,18 @@ object LiveExtractionManager
   var oaiID : String = "";
   var Num=1;
 
-
+/* Old code not used
   
   //Setting and loading the configuration file
   private val configFile = new File("./live/liveconfig.properties");
-//  LiveExtractionConfigLoader.loadConfig(configFile);
-
+  //  LiveExtractionConfigLoader.loadConfig(configFile);
+ 
   //Load properties
   val properties = new Properties();
   properties.load(new FileReader(configFile));
 
+* end of old code
+*/
  
   def extractFromPage(Element :scala.xml.Elem)
     {

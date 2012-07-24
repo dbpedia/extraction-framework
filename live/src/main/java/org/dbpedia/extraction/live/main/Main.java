@@ -209,7 +209,7 @@ public class Main
 //
 //		int pollInterval = 30;
 //		int sleepInterval = 5;
-//		String lastResponseDateFile = "./live/lastResponseDate.dat";
+//		String lastResponseDateFile = "lastResponseDate.dat";
 //
 //        String propsedStartDate = getLastResponseDate(lastResponseDateFile);
 //        if(propsedStartDate != null)
