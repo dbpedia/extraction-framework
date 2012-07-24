@@ -215,10 +215,6 @@ public class LiveUpdateDestination implements Destination{
     //this is set in ExtractionGroup
     //they are the produces entries from ExtractorConfigurator
     public void addFilter(ArrayList<MatchPattern> filter){
-//            for (Object objFilter : filter){
-//                String one = (String)objFilter;
-//                this.producesFilterList.add(one);
-//                }
         producesFilterList = filter;
     }
 
@@ -228,42 +224,20 @@ public class LiveUpdateDestination implements Destination{
     public void start() { }
 
     public void accept(ExtractionResult extractionResult) {
-//        Model addedTriplesModel = ModelFactory.createDefaultModel();
-
         ArrayList triples = extractionResult.getTriples();
         addedTriplesList = (ArrayList<RDFTriple>) triples;
         for (Object objTriple : triples){
             RDFTriple triple = (RDFTriple) objTriple;
             this.tripleFromExtractor.add(triple);
 
-//            //Convert OpenRDF statement to a JENA Triple
-//            Triple trip = Converter.convert(triple);
-//
-//            //Convert JENA Triple to JENA Statement
-//            ModelCom com = new ModelCom(addedTriplesModel.getGraph());
-//
-//            addedTriplesModel.add(com.asStatement(trip));
         }
-        //should always be called, as it collects the new Json Object
-//        System.out.println("//////////////////////////////////////////////////////////////////////////////////");
-//        System.out.println("Number of triples = " + addedTriplesModel.size());
-//        StmtIterator iter = addedTriplesModel.listStatements();
-//        while(iter.hasNext())
-//            System.out.println(iter.next());
-//        System.out.println("//////////////////////////////////////////////////////////////////////////////////");
 
-//        logger.info("PublishingDataQueue = " + Main.publishingDataQueue.size());
         this.hash.compare(extractionResult);
 
         HashMap hmDeletedTriples = this.hash.getTriplesToDelete();
         Iterator deletedTriplesKeysIterator = hmDeletedTriples.keySet().iterator();
         if(deletedTriplesString == null)
             deletedTriplesString = "";
-//        while (deletedTriplesKeysIterator.hasNext()){
-//             String keyPredicateHash = (String)deletedTriplesKeysIterator.next();
-//
-//            deletedTriplesString += convertHashMapToString((HashMap)hmDeletedTriples.get(keyPredicateHash));
-//        }
 
         while (deletedTriplesKeysIterator.hasNext()){
              String keyPredicateHash = (String)deletedTriplesKeysIterator.next();
@@ -334,24 +308,8 @@ public class LiveUpdateDestination implements Destination{
             }
 
             accept(rs);
-
-            //org.dbpedia.extraction.destinations.Quad quad = (org.dbpedia.extraction.destinations.Quad) obj;
-
-            //System.out.println(quad);
-
-            //RDFTriple triple = new RDFTriple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
-            //System.out.println(triple);
-            //System.out.println(quad.Render());
         }
 
-
-
-//        scala.collection.Map data = graph.quadsByDataset();
-//        scala.collection.immutable.List quadlist = (scala.collection.immutable.List)graph.quads;
-//        quadlist[1];
-//        for(Object objQuad: quadlist){
-//
-//        }
     }
 
     public void write(Seq<Quad> graph, String extr){
@@ -386,10 +344,6 @@ public class LiveUpdateDestination implements Destination{
 
 
     private RDFNode constructTripleObject(Quad quad){
-        //String Lang = quad.getLanguage();
-        //Datatype datatype = quad.getDatatype();
-
-        // EDITED by Claus
         String Lang = quad.language().toString();
         String datatype = quad.datatype();
         Model tmpModel = ModelFactory.createDefaultModel();
@@ -407,7 +361,6 @@ public class LiveUpdateDestination implements Destination{
     public int countLiveAbstracts(){
         String testquery = "SELECT COUNT(*) as ?count FROM <" + this.graphURI + "> {" +
                 this.subjectSPARULpattern + " <" + Constants.DBCOMM_ABSTRACT + "> ?o }";
-        //echo $testquery;
         SPARQLEndpoint se = SPARQLEndpoint.getDefaultEndpoint();
         return se.executeCount(testquery, this.getClass(), this.graphURI);
     }
@@ -531,18 +484,22 @@ public class LiveUpdateDestination implements Destination{
                 Util.convertToSPARULPattern(triple.getPredicate()) + " " + "?o"+" . \n";
         String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
-        ResultSet result = this._jdbc_sparul_execute(sparul);
+//        ResultSet result = this._jdbc_sparul_execute(sparul);
+//
+//        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+//        try{
+//            if(result!= null){
+//                result.close();
+//                result.getStatement().close();
+//            }
+//        }
+//        catch (SQLException sqlExp){
+//            logger.warn("SQL statement of result cannot be closed in function removeOldRDFSAbstractOrComment");
+//        }
 
-        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
-        try{
-            if(result!= null){
-                result.close();
-                result.getStatement().close();
-            }
-        }
-        catch (SQLException sqlExp){
-            logger.warn("SQL statement of result cannot be closed in function removeOldRDFSAbstractOrComment");
-        }
+//        boolean isSuccessful = this._jdbcSPARULExecute("SPARQL " + sparul);
+        boolean isSuccessful = this._jdbcDeleteTriples(pattern);
+        logger.info("Deleted = " + isSuccessful);
     }
 
     /**
@@ -555,25 +512,24 @@ public class LiveUpdateDestination implements Destination{
                 Util.convertToSPARULPattern(triple.getPredicate()) + " " + "?o"+" . \n";
         String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
-        ResultSet result = this._jdbc_sparul_execute(sparul);
-
-        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
-        try{
-            if(result!= null){
-                result.close();
-                result.getStatement().close();
-            }
-        }
-        catch (SQLException sqlExp){
-            logger.warn("SQL statement of result cannot be closed in function removeOldMetaInformation");
-        }
+//        ResultSet result = this._jdbc_sparul_execute(sparul);
+//
+//        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+//        try{
+//            if(result!= null){
+//                result.close();
+//                result.getStatement().close();
+//            }
+//        }
+//        catch (SQLException sqlExp){
+//            logger.warn("SQL statement of result cannot be closed in function removeOldMetaInformation");
+//        }
+//        boolean isSuccessful =this._jdbcSPARULExecute("SPARQL " + sparul);
+        boolean isSuccessful = this._jdbcDeleteTriples(pattern);
+        logger.info("Deleted = " + isSuccessful);
     }
 
 	private void _primaryStrategy(){
-		/*
-		 * PREPARATION
-		 *
-		 * */
 
         if(!TheContainer.wasSet(LUD_SPARQLFILTER)){
 			SPARQLToRDFTriple store = null;
@@ -600,10 +556,6 @@ public class LiveUpdateDestination implements Destination{
 
 		Timer.stop(timerName);
 
-		/*
-		 * STRATEGIES FOR INSERTION
-		 * will do nothing if Options.getOption('debug_turn_off_insert') is true
-		 * */
 		this._jdbc_ttlp_insert_triples(this.tripleFromExtractor);
 		logger.info("no of queries, insert: " + this.counterInserts + " delete: " + this.counterDelete + " jdbc_total: " + this.counterTotalJDBCOperations);
 
@@ -639,9 +591,6 @@ public class LiveUpdateDestination implements Destination{
                     + " " + Util.convertToSPARULPattern(tmpModel.createLiteral(triple.get("o").toString()))+" . \n";
 
             strDeletedTriples += pattern;
-//            (new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
-//            RDFTriple currentTriple = new RDFTriple(new URIImpl(triple.get("s").toString()), new URIImpl(triple.get("p")), (Value)triple.get("o"));
-//            addedTriplesList.add(currentTriple);
 
             if(triple.get("s").equals(this.subjectSPARULpattern)){
                directCount++;
@@ -659,8 +608,11 @@ public class LiveUpdateDestination implements Destination{
         //TESTS<<<<<<<<<<<
 
         this.counterDelete +=1;
-        ResultSet result = this._jdbc_sparul_execute(sparul);
-        if(result == null){
+//        ResultSet result = this._jdbc_sparul_execute(sparul);
+//        boolean isDeletionSuccessful = this._jdbcSPARULExecute("SPARQL " + sparul);
+        boolean isDeletionSuccessful = this._jdbcDeleteTriples(pattern);
+
+        if(!isDeletionSuccessful){
             logger.info("using fallback strategy (deleting single triples)" );
             strDeletedTriples="";
             fromStoreIterator = fromStore.entrySet().iterator();
@@ -681,18 +633,23 @@ public class LiveUpdateDestination implements Destination{
                 strDeletedTriples += pattern;
 
                 sparul = "DELETE FROM <" + this.graphURI +"> { " + pattern + " }" + " WHERE {\n" + pattern + " }";
-                ResultSet sparulResults = this._jdbc_sparul_execute(sparul);
+//                ResultSet sparulResults = this._jdbc_sparul_execute(sparul);
+//
+//                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+//                try{
+//                    if(sparulResults!= null){
+//                        sparulResults.close();
+//                        sparulResults.getStatement().close();
+//                    }
+//                }
+//                catch (SQLException sqlExp){
+//                    logger.warn("SQL statement of _alt_delete_all_triples cannot be closed");
+//                }
 
-                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
-                try{
-                    if(sparulResults!= null){
-                        sparulResults.close();
-                        sparulResults.getStatement().close();
-                    }
-                }
-                catch (SQLException sqlExp){
-                    logger.warn("SQL statement of _alt_delete_all_triples cannot be closed");
-                }
+//                boolean isSuccessful =this._jdbcSPARULExecute("SPARQL " + sparul);
+                boolean isSuccessful = this._jdbcDeleteTriples(pattern);
+                logger.info("Deleted = " + isSuccessful);
+
 
             }
         }
@@ -732,7 +689,7 @@ public class LiveUpdateDestination implements Destination{
                 logger.warn("TEST FAILED, AFTER SHOULD BE SMALLER, testing each triple:\neachtriplelog");
                 logger.warn("Count executed again, yields :"+ this._testsubject(this.uri.toString()));
 
-                if(result == null){
+                if(!isDeletionSuccessful){
                     logger.warn("Used Fallback last query no advanced testing implemented yet ");
                 }else{
                     logger.warn("Delete query: \nsparul");
@@ -745,15 +702,15 @@ public class LiveUpdateDestination implements Destination{
         }
 
         //Closing the underlying statement, in order to avoid overwhelming Virtuoso
-        try{
-            if(result !=  null){
-                result.close();
-                result.getStatement().close();
-            }
-        }
-        catch (SQLException sqlExp){
-            logger.warn("SQL statement of _alt_delete_all_triples cannot be closed");
-        }
+//        try{
+//            if(result !=  null){
+//                result.close();
+//                result.getStatement().close();
+//            }
+//        }
+//        catch (SQLException sqlExp){
+//            logger.warn("SQL statement of _alt_delete_all_triples cannot be closed");
+//        }
 
     }
 
@@ -879,9 +836,12 @@ public class LiveUpdateDestination implements Destination{
 
         Timer.start(timerName);
 
-        if(this._jdbc_sparul_execute(sparul) != null){
+//        boolean isDeletionSuccessful = this._jdbcSPARULExecute(sparul);
+
+        if(this._jdbcSPARULExecute("SPARQL " + sparul) ){
             this.counterDelete+=1;
-            }
+        }
+
         String needed = Timer.stopAsString(timerName);
         logger.info("deleted subject_not_static, needed " + needed);
 
@@ -920,16 +880,13 @@ public class LiveUpdateDestination implements Destination{
 
     private void _jdbc_clean_sparul_delete_subresources(String log){
 		Resource subject = this.uri;
-        //TODO Make sure that this string is concatenated correctly
 		String sparul = "DELETE FROM <" + this.graphURI + ">	{ ?subresource ?p  ?o .  } FROM <" + this.graphURI + ">";
-        //TODO Make sure that this string is concatenated correctly
         String where = " where { " + this.subjectSPARULpattern + " ?somep ?subresource . ?subresource ?p  ?o . FILTER (?subresource LIKE <"
         + subject + "/%>)}";
 		sparul += where ;
 
         int countbefore = 0, countafter = 0;
 
-		//TESTS>>>>>>>>>>>>
 		if(debug_run_tests){
 				countbefore = this._testwherepart(where);
 			}
@@ -940,9 +897,14 @@ public class LiveUpdateDestination implements Destination{
             (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
 		Timer.start(timerName);
-		if(this._jdbc_sparul_execute(sparul) != null){
-			this.counterDelete+=1;
-			};
+//		if(this._jdbc_sparul_execute(sparul) != null){
+//			this.counterDelete+=1;
+//			};
+
+        if(this._jdbcSPARULExecute("SPARQL " + sparul) ){
+            this.counterDelete+=1;
+        }
+
 		String needed = Timer.stopAsString(timerName);
 		logger.info("deleted subresources, needed "+needed );
 		//TESTS>>>>>>>>>>>>
@@ -1007,13 +969,11 @@ public class LiveUpdateDestination implements Destination{
         logger.info("length globalTriplePattern: " + globalTripleNTriplePattern.length());
 
         Timer.stop(secondTimerName);
-        //TESTS>>>>>>>>>>>>
         int countbefore = 0;
         String where = "WHERE { " + this.subjectSPARULpattern + " ?p ?o } ";
         if(debug_run_tests){
             countbefore = this._testwherepart(where );
         }
-        //TESTS<<<<<<<<<<<<
 
         String insertTimerName = "LiveUpdateDestination._jdbc_ttlp_insert_triples.insert_operation" +
             (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
@@ -1107,28 +1067,7 @@ public class LiveUpdateDestination implements Destination{
                 logger.info("SUCCESS");
             }
         }
-        //TESTS<<<<<<<<<<<<
     }
-
-//    private void writeSPARULtoFiles(String deleteSPARUL, String insertSPARUL){
-//        String out = "";
-//        out += implode(";\n", deleteSPARUL );
-//        out += "\n";
-//        out += implode(";\n", insertSPARUL );
-//
-//        String dirs = LiveOptions.options.get("outputdirs");
-//        foreach(dirs as dir){
-//            @mkdir(dir);
-//            uri = this->uri->getURI();
-//            uri = substr(uri,strlen(DB_RESOURCE_NS));
-//            uri = str_replace("/","%2F", uri);
-//            uri = urlencode(DB_RESOURCE_NS).uri;
-//            uri = substr(uri,0, 233);
-//            file = dir."/".uri;
-//            Logger::toFile(file ,out,true);
-//            //Logger::toFile($file ,"\n**DEBUG***********\n".$logString,false);
-//        }
-//    }
 
     private ResultSet _jdbc_sparul_execute(String query){
         try{
@@ -1145,17 +1084,10 @@ public class LiveUpdateDestination implements Destination{
                 jdbc_result = true;
             }else{
                 String virtuosoPl = "sparql " + query + "";
+                virtuosoPl = virtuosoPl.replace("\"\"\"", "\"");
                 results = this.jdbc.exec( virtuosoPl, "LiveUpdateDestination");
-                if(results != null){
-    //                tmparray= odbc_fetch_array ($jdbc_result);
 
-    //                if(count($tmparray)==0){
-    //                    $this->log(INFO, "odbc_exec returned empty array");
-    //                }else{
-    //                    foreach ($tmparray as $key => $value){
-    //                        $this->log(INFO, "odbc_exec returned: ".$tmparray[$key]);
-    //                        }
-    //                }
+                if(results != null){
 
                     //Calculate the number of rows returned by the query
                     results.last();
@@ -1163,9 +1095,6 @@ public class LiveUpdateDestination implements Destination{
                     if(NumberOfRows <=0)
                         logger.info("JDBC.exec returned empty array");
                     else{
-//                        foreach ($tmparray as $key => $value){
-//                            this.logger.log(Level.INFO, "odbc_exec returned: " + tmparray[$key]);
-//                        }
                         results.first();
                         while(results.next()){
                             logger.info("jdbc_exec returned: " + results.getString(0));
@@ -1193,7 +1122,58 @@ public class LiveUpdateDestination implements Destination{
             return null;
         }
 
+    }
 
+    private boolean _jdbcSPARULExecute(String sparulStmt){
+        boolean isSuccessful = false;
+        try{
+
+            sparulStmt = sparulStmt.replace("\"\"\"", "\"");
+
+            PreparedStatement stmt = jdbc.prepare(sparulStmt, "LiveUpdateDestination");
+            isSuccessful = jdbc.executeStatement(stmt, new String[]{});
+            stmt.close();
+        }
+        catch (SQLException exp){
+            logger.error("SPARUL Statement \"" + sparulStmt + "\" cannot be executed");
+        }
+        return isSuccessful;
+    }
+
+    /**
+     * Deletes the specified triples from the store
+     * @param sparulPattern The pattern containing the triples that should be deleted
+     * @return  Whether the deletion was successful or not
+     */
+    private boolean _jdbcDeleteTriples(String sparulPattern){
+        boolean isSuccessful = false;
+        int numberOfTriplesToDelete = sparulPattern.split("\n").length;
+
+        String sparulDeleteStatement = "SPARQL DELETE FROM <" + this.graphURI + "> { \n" + sparulPattern + " }" + " WHERE {\n" + sparulPattern + " }";
+
+        try{
+
+            sparulPattern = sparulPattern.replace("\"\"\"", "\"");
+            if(this.jdbc == null)
+                this.jdbc = JDBC.getDefaultConnection();
+
+            ResultSet results = this.jdbc.exec( sparulDeleteStatement, "LiveUpdateDestination");
+            //The string returned from Virtuoso is of the form "Delete from <http://dbpedia.org>, x triples -- etc",
+            //so we should split the string int order to get the actual number of affected triples
+            results.last();
+            int numberOfAffectedTriples = Integer.parseInt(results.getString(1).split("--")[0].split(",")[1].trim().split(" ")[0]);
+
+            if(numberOfAffectedTriples < numberOfTriplesToDelete)//if the number of affected triples is less, then deletion was not successful
+                return false;
+            else
+                return true;
+
+
+        }
+        catch (Exception exp){
+            logger.error("SPARUL Statement \"" + sparulPattern + "\" cannot be executed");
+        }
+        return isSuccessful;
     }
 
 
@@ -1345,6 +1325,4 @@ public class LiveUpdateDestination implements Destination{
         }
 
     }
-
-
 }
