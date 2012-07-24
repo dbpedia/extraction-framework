@@ -44,6 +44,7 @@ object TurtleUtils {
 
 /**
  * Escapes a Unicode string according to Turtle / N-Triples format.
+ * TODO: allow StringBuilder to be null, create one if necessary.
  * @param sb must not be null
  * @param turtle if true, non-ASCII characters are not escaped (allowed by Turtle); 
  * if false, non-ASCII characters are escaped (required by N-Triples / N-Quads).
