@@ -51,8 +51,7 @@ object ResolveTransitiveLinks {
       val map = new LinkedHashMap[String, String]()
       
       var predicate: String = null
-      val reader = new QuadReader(finder)
-      reader.readQuads(input + suffix, auto = true) { quad =>
+      QuadReader.readQuads(finder, input + suffix, auto = true) { quad =>
         if (quad.context != null) throw new IllegalArgumentException("expected triple, found quad: "+quad)
         if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
         if (predicate == null) predicate = quad.predicate

@@ -48,7 +48,7 @@ object CountTypes {
     
     for (language <- languages) {
       val finder = new DateFinder(baseDir, language)
-      new QuadReader(finder).readQuads(input + suffix, true) { quad =>
+      QuadReader.readQuads(finder, input + suffix, auto = true) { quad =>
         if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
       }
     }

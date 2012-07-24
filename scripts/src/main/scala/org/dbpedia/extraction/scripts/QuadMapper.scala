@@ -4,13 +4,12 @@ import java.lang.StringBuilder
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import IOUtils._
+import java.io.File
 
 /**
  * Maps old quads/triples to new quads/triples.
  */
-class QuadMapper(finder: DateFinder) {
-  
-  private val reader = new QuadReader(finder)
+object QuadMapper {
   
   /**
    * @param input dataset name
@@ -18,24 +17,32 @@ class QuadMapper(finder: DateFinder) {
    * @param subjects
    * @param objects
    */
-  def mapQuads(input: String, output: String, required: Boolean = true)(map: Quad => Traversable[Quad]): Unit = {
-    val wikiCode = finder.language.wikiCode
+  def mapQuads(finder: DateFinder, input: String, output: String, auto: Boolean = false, required: Boolean = true)(map: Quad => Traversable[Quad]): Unit = {
+    // auto only makes sense on the first call to finder.find(), afterwards the date is set
+    mapQuads(finder.language.wikiCode, finder.find(input, auto), finder.find(output), required)(map)
+  }
     
-    val inFile = finder.find(input)
+  /**
+   * @param input dataset name
+   * @param output dataset name
+   * @param subjects
+   * @param objects
+   */
+  def mapQuads(tag: String, inFile: File, outFile: File, required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
+    
     if (! inFile.exists()) {
-      if (required) throw new IllegalArgumentException(wikiCode+": file "+inFile+" does not exist")
-      println(wikiCode+": WARNING - file "+inFile+" does not exist")
+      if (required) throw new IllegalArgumentException(tag+": file "+inFile+" does not exist")
+      println(tag+": WARNING - file "+inFile+" does not exist")
       return
     }
 
-    val outFile = finder.find(output)
-    println(wikiCode+": writing "+outFile+" ...")
+    println(tag+": writing "+outFile+" ...")
     var mapCount = 0
     val writer = write(outFile)
     try {
       // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
       writer.write("# started "+formatCurrentTimestamp+"\n")
-      reader.readQuads(input) { old =>
+      QuadReader.readQuads(tag, inFile) { old =>
         for (quad <- map(old)) {
           val sb = new StringBuilder
           sb append '<' append quad.subject append "> <" append quad.predicate append "> "
@@ -58,7 +65,7 @@ class QuadMapper(finder: DateFinder) {
       writer.write("# completed "+formatCurrentTimestamp+"\n")
     }
     finally writer.close()
-    println(wikiCode+": mapped "+mapCount+" quads")
+    println(tag+": mapped "+mapCount+" quads")
   }
   
 }
