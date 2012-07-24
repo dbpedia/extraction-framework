@@ -23,10 +23,19 @@ object RichFile {
  */
 class RichFile(file: File) extends FileLike[File] {
   
-  def exists: Boolean = file.exists
+  override def toString: String = file.toString
+    
+  override def name: String = {
+    val name = file.getName
+    // java.io.File.getName returns "" for "/" and ""
+    // we emulate java.nio.file.Path.getFileName, which returns null for "/" but "" for ""
+    if (name.nonEmpty) name else if (file.isAbsolute) null else name
+  }
+  
+  override def exists: Boolean = file.exists
   
   // TODO: more efficient type than List?
-  def names: List[String] = names(null) 
+  override def names: List[String] = names(null) 
   
   // TODO: more efficient type than List?
   def names(pattern: Pattern): List[String] = {
@@ -36,7 +45,7 @@ class RichFile(file: File) extends FileLike[File] {
   } 
   
   // TODO: more efficient type than List?
-  def list: List[File] = list(null) 
+  override def list: List[File] = list(null) 
   
   // TODO: more efficient type than List?
   def list(pattern: Pattern): List[File] = {
@@ -45,7 +54,7 @@ class RichFile(file: File) extends FileLike[File] {
     list.toList
   }
   
-  def resolve(name: String): File = new File(file, name)
+  override def resolve(name: String): File = new File(file, name)
   
   /**
    * Retrieves the relative path in respect to a given base directory.
@@ -54,8 +63,7 @@ class RichFile(file: File) extends FileLike[File] {
    * does not end with a slash.
    * @throws IllegalArgumentException if parent is not a parent directory of child.
    */
-  def relativize(child: File): String =
-  {
+  def relativize(child: File): String = {
     // Note: toURI encodes file paths, getPath decodes them
     var path = UriUtils.relativize(file.toURI, child.toURI).getPath
     if (path endsWith "/") path = path.substring(0, path.length() - 1)
@@ -67,19 +75,19 @@ class RichFile(file: File) extends FileLike[File] {
    * all contained file and sub directories.
    * @throws IOException if the directory or any of its sub directories could not be deleted
    */
-  def delete(recursive: Boolean = false): Unit = {
+  override def delete(recursive: Boolean = false): Unit = {
     if (recursive && file.isDirectory) file.listFiles.foreach(_.delete(true))
     if (! file.delete()) throw new IOException("failed to delete file ["+file+"]")
   }
   
-  def isFile: Boolean = file.isFile
+  override def isFile: Boolean = file.isFile
   
-  def isDirectory: Boolean = file.isDirectory
+  override def isDirectory: Boolean = file.isDirectory
   
-  def hasFiles: Boolean = file.list().length > 0
+  override def hasFiles: Boolean = file.list().length > 0
   
-  def inputStream(): InputStream = new FileInputStream(file)
+  override def inputStream(): InputStream = new FileInputStream(file)
   
-  def outputStream(append: Boolean = false): OutputStream = new FileOutputStream(file, append)
+  override def outputStream(append: Boolean = false): OutputStream = new FileOutputStream(file, append)
   
 }
