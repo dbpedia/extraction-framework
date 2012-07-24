@@ -1,12 +1,11 @@
 package org.dbpedia.helper;
 
-import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.*;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -189,4 +188,26 @@ public class CoreUtil {
 
         return resultingURI;
     }
+
+    /**
+     * Writes a triple as NTriples string
+     * @param triple    The required triple
+     * @return  The NTriples represntation of the passed triple
+     */
+    public static String writeTripleAsNTriples(Statement triple)
+    {
+//
+//        Model testModel = ModelFactory.createDefaultModel();
+//        testModel.add(triple);
+//
+//        StringWriter out = new StringWriter();
+//
+//        testModel.write(out, "N-TRIPLE");
+//
+//        String strOutput = out.toString();
+
+        return convertToSPARULPattern(triple.getSubject()) + " " + convertToSPARULPattern(triple.getPredicate())
+                +" " + convertToSPARULPattern(triple.getObject()) + " .";
+    }
+
 }
