@@ -2,9 +2,9 @@ package org.dbpedia.extraction.util
 
 import java.io.{File,InputStream,FileInputStream,FileOutputStream,IOException}
 import java.net.{URL,HttpRetryException,HttpURLConnection}
-import java.net.URLDecoder.decode
 import java.net.HttpURLConnection.{HTTP_OK,HTTP_MOVED_PERM,HTTP_MOVED_TEMP}
 import scala.collection.{Map,Set}
+import org.dbpedia.util.text.uri.UriDecoder.decode
 
 /**
  * @param file Target file. If file exists and overwrite is false, do not call url, 
@@ -75,7 +75,7 @@ class WikiCaller(url: URL, followRedirects: Boolean) {
         // Decoding the whole URL is ok here. The strict equality test below will detect any mixup 
         // caused by decoding. Note: I tried encoding "|" as "%7C" in the original URL above. 
         // api.php works, but in location response headers Wikipedia uses "%257C". That's a bug.
-        location = decode(location, "UTF-8")
+        location = decode(location)
         val url2 = new URL(location)
         
         if (! followRedirects && (code == HTTP_MOVED_PERM || code == HTTP_MOVED_TEMP) && (url2.getPath == url.getPath && url2.getQuery == url.getQuery)) {
