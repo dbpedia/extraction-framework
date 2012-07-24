@@ -5,6 +5,7 @@ import java.util.zip.{GZIPInputStream,GZIPOutputStream}
 import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputStream,OutputStreamWriter,InputStreamReader}
 import scala.io.Codec
 import org.dbpedia.extraction.util.RichReader.wrapReader
+import org.dbpedia.extraction.util.FileLike
 
 /**
  * TODO: move this class to core, but modify the code such that there are no run-time dependencies
@@ -23,21 +24,21 @@ object IOUtils {
     "bz2" -> { new BZip2CompressorInputStream(_, true) } 
   )
   
-  def open[T](file: File, opener: File => T, wrappers: Map[String, T => T]): T = {
-    val name = file.getName
+  def open[T](file: FileLike[_], opener: FileLike[_] => T, wrappers: Map[String, T => T]): T = {
+    val name = file.name
     val suffix = name.substring(name.lastIndexOf('.') + 1)
     wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
   }
   
-  def output(file: File) = open(file, new FileOutputStream(_), zippers)
+  def output(file: FileLike[_]) = open(file, _.outputStream(), zippers)
   
-  def input(file: File) = open(file, new FileInputStream(_), unzippers)
+  def input(file: FileLike[_]) = open(file, _.inputStream(), unzippers)
   
-  def write(file: File) = new OutputStreamWriter(output(file), Codec.UTF8)
+  def write(file: FileLike[_]) = new OutputStreamWriter(output(file), Codec.UTF8)
   
-  def read(file: File) = new InputStreamReader(input(file), Codec.UTF8)
+  def read(file: FileLike[_]) = new InputStreamReader(input(file), Codec.UTF8)
   
-  def readLines[U](file: File)(proc: String => U): Unit = {
+  def readLines[U](file: FileLike[_])(proc: String => U): Unit = {
     val reader = read(file)
     try {
       for (line <- reader) {

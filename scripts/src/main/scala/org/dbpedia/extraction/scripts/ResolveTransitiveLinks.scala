@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.mutable.LinkedHashMap
 import java.io.File

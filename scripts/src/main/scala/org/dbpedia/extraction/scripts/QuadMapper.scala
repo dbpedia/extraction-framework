@@ -3,6 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.lang.StringBuilder
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import IOUtils._
 import java.io.File
 
