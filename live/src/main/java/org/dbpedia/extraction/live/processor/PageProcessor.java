@@ -98,10 +98,10 @@ public class PageProcessor extends Thread{
                 //Write response date to file in both cases of live update and mapping update
                 if(requiredPage.pagePriority == Priority.MappingPriority)
                     LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
-                            requiredPage.lastResponseDate);
+                            requiredPage.pageTimestamp);
                 else if(requiredPage.pagePriority == Priority.LivePriority)
                     LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
-                            requiredPage.lastResponseDate);
+                            requiredPage.pageTimestamp);
 
 //                }
 
