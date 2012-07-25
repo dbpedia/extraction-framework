@@ -60,15 +60,15 @@ object ResolveTransitiveLinks {
         map(quad.subject) = quad.value
       }
 
-      println("resolving "+map.size+" links...")
+      printerrln("resolving "+map.size+" links...")
       val cycles = new TransitiveClosure(map).resolve()
-      println("found "+cycles.size+" cycles:")
+      printerrln("found "+cycles.size+" cycles:")
       for (cycle <- cycles.sortBy(- _.size)) {
-        println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
+        printerrln("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
       }
       
       val file = finder.find(output + suffix)
-      println(language.wikiCode+": writing "+file+" ...")
+      printerrln(language.wikiCode+": writing "+file+" ...")
       val writer = write(file)
       try {
         for ((subjUri, objUri) <- map) {

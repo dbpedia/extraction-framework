@@ -5,6 +5,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import scala.collection.mutable.{Set,HashMap,MultiMap,ArrayBuffer}
 import java.io.File
+import IOUtils._
 
 /**
  * Maps old URIs in triple files to new URIs:
@@ -104,7 +105,7 @@ object CanonicalizeUris {
             count += 1
           }
         }
-        println("found "+count+" mappings")
+        printerrln("found "+count+" mappings")
       }
       
       def newUri(oldUri: String): String = {

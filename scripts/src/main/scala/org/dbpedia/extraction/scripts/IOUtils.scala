@@ -14,6 +14,8 @@ import java.nio.charset.Charset
  * the classpath. Even better, look for several different bzip2 implementations on the classpath...
  */
 object IOUtils {
+  
+  def printerrln(x: Any) = Console.err.println(x)
 
   val zippers = Map[String, OutputStream => OutputStream] (
     "gz" -> { new GZIPOutputStream(_) }, 

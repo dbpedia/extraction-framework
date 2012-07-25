@@ -33,11 +33,11 @@ object QuadMapper {
     
     if (! inFile.exists()) {
       if (required) throw new IllegalArgumentException(tag+": file "+inFile+" does not exist")
-      println(tag+": WARNING - file "+inFile+" does not exist")
+      printerrln(tag+": WARNING - file "+inFile+" does not exist")
       return
     }
 
-    println(tag+": writing "+outFile+" ...")
+    printerrln(tag+": writing "+outFile+" ...")
     var mapCount = 0
     val writer = write(outFile)
     try {
@@ -66,7 +66,7 @@ object QuadMapper {
       writer.write("# completed "+formatCurrentTimestamp+"\n")
     }
     finally writer.close()
-    println(tag+": mapped "+mapCount+" quads")
+    printerrln(tag+": mapped "+mapCount+" quads")
   }
   
 }

@@ -4,6 +4,7 @@ import org.dbpedia.extraction.util.WikiUtil.{wikiEncode,cleanSpace}
 import java.io.File
 import java.net.URI
 import org.dbpedia.util.text.uri.UriDecoder
+import IOUtils._
 
 /**
  * Decodes DBpedia URIs that percent-encode too many characters and encodes them following our
@@ -62,7 +63,7 @@ object RecodeUris {
           List(quad.copy(subject = subj, predicate = pred))
         }
       }
-      println(input+": changed "+changeCount+" quads")
+      printerrln(input+": changed "+changeCount+" quads")
     }
     
   }
@@ -84,7 +85,7 @@ object RecodeUris {
       
       // we can't handle fragments, we re-encode hash signs
       if (uri.contains("#")) {
-        println("URI contains fragment: ["+uri+"]")
+        printerrln("URI contains fragment: ["+uri+"]")
         input = uri.substring(0, uri.indexOf('#'))
       }
       
