@@ -17,7 +17,6 @@ public class TheContainer {
     static Logger logger = null;
     static{
         logger = Logger.getLogger(TheContainer.class);
-//        Assert.assertNotNull("Logger cannot be null", logger);
     }
 
     private static HashMap container = new HashMap();

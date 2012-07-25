@@ -56,9 +56,8 @@ object LiveExtractionConfigLoader extends ActionListener
     url = new URL("http://mappings.dbpedia.org/api.php"),
     language = Language.apply(LiveOptions.options.get("language")) );
 
-  println ("COMMONS SOURCE = " +LiveOptions.options.get("commonsDumpsPath"));
-  //    val commonsSource =  XMLSource.fromFile(getDumpFile(new File(LiveOptions.options.get("commonsDumpsPath")),
-  //        "commons"), _.namespace == WikiTitle.Namespace.File)
+  println ("COMMONS SOURCE = " + LiveOptions.options.get("commonsDumpsPath"));
+
   val commonsSource = null;
 
   def actionPerformed(e: ActionEvent) =
@@ -86,21 +85,6 @@ object LiveExtractionConfigLoader extends ActionListener
     articlesDump
   }
 
-  //    //This function loads the configuration from the file passed
-  //    def loadConfig(configFile : File)
-  //      {
-  //        //Load properties from the passed config file
-  //        val properties = new Properties()
-  //        properties.load(new FileReader(configFile))
-  //
-  //        //Load configuration
-  //        config = new Config(properties)
-  //        //val MyTimer = new Timer(config.updateOntologyAndMappingsPeriod * 60 * 1000, this);
-  //        val MyTimer = new Timer(LiveConfigReader.updateOntologyAndMappingsPeriod * 60 * 1000, this);
-  //        MyTimer.start();
-  //
-  //      }
-
 
   /**
    * Loads the configuration and creates extraction jobs for all configured languages.
@@ -113,11 +97,8 @@ object LiveExtractionConfigLoader extends ActionListener
     //        if(config.multihreadingMode)
     if(LiveConfigReader.multihreadingMode)
     {
-      //Create a non-strict view of the extraction jobs
-
-      //            val extractionJobs = config.extractors.keySet.view.map(createExtractionJob(articlesSource))
       val extractionJobs = convertExtractorMapToScalaMap(LiveConfigReader.extractorClasses).keySet.view.map(createExtractionJob(articlesSource))
-      //            val extractionJobs = config.extractors.keySet.view.map(createExtractionJob(articlesSource))
+
       for(extractionJob <- extractionJobs)
       {
         extractionJob.start();
@@ -125,10 +106,7 @@ object LiveExtractionConfigLoader extends ActionListener
     }
     else
     {
-      //            config.extractors.keySet.foreach(LangName => startSingleThreadExtraction(articlesSource)(LangName));
-      //LiveConfigReader.extractors.keySet.foreach(LangName => startSingleThreadExtraction(articlesSource)(LangName));
       startSingleThreadExtraction(articlesSource)(Language.apply(LiveOptions.options.get("language")));
-      //startSingleThreadExtraction(articlesSource)(Language.Default);
     }
   }
 
@@ -144,59 +122,7 @@ object LiveExtractionConfigLoader extends ActionListener
 
   private def createExtractionJob(articlesSource : Source)(language : Language) : LiveExtractionJob =
   {
-    /*// In case of single threading
-      //Extractor
-      if(extractor==null)
-      {
-        val emptySource = new MemorySource();
 
-        LiveExtractor.loadRedirects(articlesSource);
-        LiveExtractor.makeExtractionContext(config.mappingsSource, emptySource, articlesSource, language)
-        extractor = LiveExtractor.startExtraction(config.ontologySource, config.mappingsSource, emptySource, articlesSource, config.extractors(language), language)
-
-      }
-      //Destination
-      val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
-
-      val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq")
-      val destination = new CompositeDestination(tripleDestination, quadDestination)
-      //println("Article source = " + articlesSource.size);
-      //if(CurrentJob == null)
-        //CurrentJob = new ExtractionJob(extractor, articlesSource, tripleDestination, "Extraction Job for " + language.wikiCode + " Wikipedia")
-
-    val parser = WikiParser()
-      articlesSource.foreach(CurrentWikiPage =>
-              {
-               if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.Main ||
-                  CurrentWikiPage.title.namespace == WikiTitle.Namespace.File ||
-                  CurrentWikiPage.title.namespace == WikiTitle.Namespace.Category)
-                 {
-                    val TempDest = new  StringDestination();
-                    //println(CurrentWikiPage.title.namespace);
-                    val CurrentPageNode = parser(CurrentWikiPage)
-                    println("The Current page id = "+ CurrentPageNode.id)
-                    //println(extractor);
-                    val RequiredGraph = extractor(parser(CurrentWikiPage));
-
-                    tripleDestination.write(RequiredGraph)
-                    //println(TempDest);
-                    //println("The end of the loop");
-                 }
-
-              })
-
-
-    //else
-        //{
-          //CurrentJob.interrupt();
-          //CurrentJob = new ExtractionJob(extractor, articlesSource, tripleDestination, "Extraction Job for " + language.wikiCode + " Wikipedia");
-        //}
-
-      //println("job ID = " + CurrentJob.getId());
-      CurrentJob;
-
-      //null;
-    */
     // In case of multi-threading
     //Extractor
     if(extractors == null || reloadOntologyAndMapping)
@@ -206,17 +132,6 @@ object LiveExtractionConfigLoader extends ActionListener
       reloadOntologyAndMapping = false;
     }
 
-    //Destination
-    //        val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir,
-    //          dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt", true)
-    //
-    //        val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir,
-    //          dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq", true)
-    //        val destination = new CompositeDestination(tripleDestination, quadDestination)
-    //println("Article source = " + articlesSource.size);
-    //val liveDest = new LiveUpdateDestination();
-
-    //new ExtractionJob(extractor, articlesSource, tripleDestination, "Extraction Job for " + language.wikiCode + " Wikipedia");
     new LiveExtractionJob(null, articlesSource, language, "Extraction Job for " + language.wikiCode + " Wikipedia");
 
   }
@@ -228,29 +143,10 @@ object LiveExtractionConfigLoader extends ActionListener
     //Extractor
     if(extractors==null || reloadOntologyAndMapping)
     {
-      /*//Load the ontology at the beginning because it is a very heavy step so it's better to perform it only once in the beginning
-      LiveExtractor.loadOntology(config.ontologySource);
-
-      val emptySource = new MemorySource();
-
-      LiveExtractor.loadRedirects(articlesSource);
-      LiveExtractor.makeExtractionContext(config.mappingsSource, emptySource, articlesSource, language)
-      extractor = LiveExtractor.load(config.ontologySource, config.mappingsSource, emptySource, articlesSource, config.extractors(language), language)
-      */
       extractors = LoadOntologyAndMappings(articlesSource, language);
       logger.log(Level.INFO, "Ontology and mappings reloaded");
       reloadOntologyAndMapping = false;
     }
-
-
-    //Destination
-    //      val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir,
-    //        dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt", true)
-    //
-    //
-    //      val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir,
-    //        dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq", true)
-    //      val destination = new CompositeDestination(tripleDestination, quadDestination)
 
     var liveDest : LiveUpdateDestination = null;
     val parser = WikiParser()
@@ -263,7 +159,7 @@ object LiveExtractionConfigLoader extends ActionListener
       Main.totalNumberOfUpdatedInstances = Main.totalNumberOfUpdatedInstances + 1;
 
       val endingSlashPos = wikipageURL.lastIndexOf("/");
-      //val dbpediaPageURL = "http://dbpedia.org/resource" + wikipageURL.substring(endingSlashPos);
+
       val dbpediaPageURL = "http://live.dbpedia.org/resource" + wikipageURL.substring(endingSlashPos);
 
       Main.recentlyUpdatedInstances(instanceNumber) = new RecentlyUpdatedInstance(wikipageTitle, dbpediaPageURL, wikipageURL);
@@ -271,12 +167,6 @@ object LiveExtractionConfigLoader extends ActionListener
     }
     articlesSource.foreach(CurrentWikiPage =>
     {
-      /*println(CurrentWikiPage.title.namespace.toString)
-
-      if(CurrentWikiPage.title.namespace == WikiTitle.Namespace.UserTalk || CurrentWikiPage.title.namespace == WikiTitle.Namespace.User){
-        logger.info("User or user ctalk");
-        return ;
-      }*/
 
       if(CurrentWikiPage.title.namespace == Namespace.Main ||
         CurrentWikiPage.title.namespace == Namespace.File ||
@@ -284,17 +174,6 @@ object LiveExtractionConfigLoader extends ActionListener
       {
         val CurrentPageNode = parser(CurrentWikiPage)
 
-
-
-        //                 extractor.foreach(ex => println(ex(parser(CurrentWikiPage))));
-
-        //                 println(extractor.map(ex => ex(parser(CurrentWikiPage)))
-        //                  .reduceLeft(_ merge _))
-
-        //                 val RequiredGraph = extractor(parser(CurrentWikiPage));
-        //
-        /*println(CurrentPageNode.title);
-        println(CurrentPageNode.title.encodedWithNamespace);*/
         val testPage = CurrentWikiPage.asInstanceOf[LiveWikiPage];
         //As the page title always starts with "en:", as it is the language of the page, and we are working only on
         // English language, then we should remove that part as it will repeated without any advantage.
@@ -303,10 +182,7 @@ object LiveExtractionConfigLoader extends ActionListener
         val strWikipage = "http://" + CurrentPageNode.title.language + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
         liveDest = new LiveUpdateDestination(CurrentPageNode.title, language.locale.getLanguage(),
           CurrentPageNode.id.toString)
-        //
-        //                 println(LiveConfigReader.extractors.get(language));
-        //
-        //
+
         liveDest.setPageID(CurrentPageNode.id);
         liveDest.setOAIID(LiveExtractionManager.oaiID);
 
@@ -328,19 +204,12 @@ object LiveExtractionConfigLoader extends ActionListener
 
         liveDest.close();
 
-        //                 tripleDestination.write(RequiredGraph);
-        //                 tripleDestination.close();
         logger.log(Level.INFO, "page number " + CurrentPageNode.id + " has been processed");
 
         //Updating information needed for statistics
 
         updateStatistics(CurrentWikiPage.title.decoded, strWikipage)
       }
-      //              else{
-      //               val CurrentPageNode = parser(CurrentWikiPage)
-      //               logger.log(Level.INFO, "page number " + CurrentPageNode.id + " cannot be processed");
-      //             }
-
 
     });
   }
@@ -350,23 +219,6 @@ object LiveExtractionConfigLoader extends ActionListener
   //@param  language  The required language
   //    private def LoadOntologyAndMappings(articlesSource: Source, language: Language): Extractor = {
   private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[RootExtractor] = {
-    //Load the ontology at the beginning because it is a very heavy step so it's better to perform it only once in the beginning
-    //      LiveExtractor.loadOntology(config.ontologySource);
-    //org.dbpedia.extraction.live.extractor.LiveExtractor.loadOntology(this.ontologySource)
-
-    //val emptySource = new MemorySource();
-
-    //org.dbpedia.extraction.live.extractor.LiveExtractor.loadRedirects(articlesSource);
-    //      LiveExtractor.makeExtractionContext(config.mappingsSource, emptySource, articlesSource, language)
-    //org.dbpedia.extraction.live.extractor.LiveExtractor.makeExtractionContext(this.mappingsSource, emptySource, articlesSource, language)
-    //println(config.extractors(language))
-    //      LiveExtractor.load(config.ontologySource, config.mappingsSource, emptySource, articlesSource, config.extractors(language), language)
-
-    //      LiveExtractor.load(ontologySource, mappingsSource, emptySource, articlesSource,
-    //        convertExtractorListToScalaList(LiveConfigReader.extractorClasses.get(language)), language)
-
-    //        org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, emptySource, articlesSource,
-    //          convertExtractorListToScalaList(LiveConfigReader.getExtractors(language,ExtractorStatus.ACTIVE)), language)
 
     val extractorClasses = convertExtractorListToScalaList(LiveConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
     org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, articlesSource, commonsSource,
@@ -407,20 +259,6 @@ object LiveExtractionConfigLoader extends ActionListener
 
   private class Config(config : Properties)
   {
-    /** Resources directory */
-    //TODO remove?
-    //        private val resourcesDir = new File("./src/main/resources")
-    //        if(!resourcesDir.exists) throw new IllegalArgumentException("Resource directory not found in " + resourcesDir.getCanonicalPath)
-
-    /** Dump directory */
-    //        if(config.getProperty("dumpDir") == null)
-    //          throw new IllegalArgumentException("Property 'dumpDir' is not defined.")
-    //        val dumpDir = new File(config.getProperty("dumpDir"))
-
-    /** Output directory */
-    //        if(config.getProperty("outputDir") == null)
-    //          throw new IllegalArgumentException("Property 'outputDir' is not defined.")
-    //        val outputDir = new File(config.getProperty("outputDir"))
 
     /** Languages */
     if(config.getProperty("languages") == null)
@@ -449,29 +287,6 @@ object LiveExtractionConfigLoader extends ActionListener
     val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
       url = new URL("http://mappings.dbpedia.org/api.php"),
       language = Language.apply(LiveOptions.options.get("language")) );
-    //        var pagecount :Long = 0;
-    //        mappingsSource.foreach(page =>
-    //          {
-    //            println(page.toXML);
-    //            println(page.title.namespace);
-    //            pagecount = pagecount + 1;
-    //          });
-    //      println(pagecount);
-    //      pagecount = 1;
-    //
-    //      ontologySource.foreach(page =>
-    //          {
-    //            println(page.title);
-    //            pagecount = pagecount + 1;
-    //          });
-    //      println(pagecount);
-
-    /** Commons source */
-    //        val commonsSource = XMLSource.fromFile(getDumpFile("commons"), _.namespace == WikiTitle.Namespace.File)
-
-    /**
-     * Retrieves the dump stream for a specific language edition.
-     */
 
     /**
      *  Loads the extractors classes from the configuration.

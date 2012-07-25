@@ -82,15 +82,6 @@ public class MappingUpdateFeeder extends Thread{
                 String lastResponseDate = XMLUtil.getPageModificationDate(doc);
                 MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, lastResponseDate);
 
-                //System.out.println(lastResponseDate);
-//                Traversable<WikiPage> trav = wikiPageSource;
-//                Iterable<WikiPage> iter = JavaConversions.asIterable(trav);
-//                for(WikiPage CurrentWikiPage :iter){
-//                    WikiTitle mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.toString(), Language.apply(LiveOptions.options.get("language")));
-//                    System.out.println(mappingTitle);
-//                }
-                
-
             }
             catch(Exception exp){
                 logger.error(ExceptionUtil.toString(exp));

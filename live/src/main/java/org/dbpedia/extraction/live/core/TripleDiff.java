@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 public class TripleDiff {
 
-    private static Logger logger ;
+    private static Logger logger = Logger.getLogger(TripleDiff.class);
     private Resource resource;
     private String language;
     private ArrayList<MatchPattern> producesFilterList = new ArrayList();
@@ -27,7 +27,6 @@ public class TripleDiff {
 
     public TripleDiff(Resource Resource, String Language,  ArrayList<MatchPattern> ProducesFilterList, SPARQLToRDFTriple Store){
         try{
-            logger = Logger.getLogger(Class.forName("TripleDiff").getName());
             this.resource = Resource;
             this.language = Language;
             this.producesFilterList = ProducesFilterList;

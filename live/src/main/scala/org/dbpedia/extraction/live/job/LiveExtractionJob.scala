@@ -28,9 +28,6 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
     private val parser = WikiParser()
     var destination : LiveUpdateDestination = null;
 
-    //private val _progress = new ExtractionProgress()
-
-    //def progress = _progress
 
     private val pageQueue = new ArrayBlockingQueue[(Int, WikiPage, LiveUpdateDestination)](20)
 
@@ -44,7 +41,6 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
 
         try
         {
-            //_progress.startTime = System.currentTimeMillis
 
             //Start extraction jobs
             extractionJobs.foreach(_.start);
@@ -65,13 +61,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
           try{
             extractionJobs.foreach(_.interrupt);
             extractionJobs.foreach(_.join);
-            //completionWriter.close();
-//            System.out.println("Before close in thread " + Thread.currentThread.getId);
-//            if(destination == null)
-//              destination = new LiveUpdateDestination(page.title.toString, language.locale.getLanguage, page.id.toString);
-//
-//            destination.close();
-//            System.out.println("After close in thread " + Thread.currentThread.getId);
+
             logger.info(label + " finished");
           }
           catch{
@@ -172,8 +162,6 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
                     }
                 }
 
-            //Write the extraction success
-            //completionWriter.write(id, page.title, success)
         }
     }
 }

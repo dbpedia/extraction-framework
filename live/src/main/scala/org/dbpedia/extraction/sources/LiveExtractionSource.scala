@@ -70,20 +70,10 @@ object LiveExtractionSource
       for(page <- xml \\ "page";
           rev <- page \\ "revision")
       {
-        //println((page \ "title").text);
-        //println((page \ "id").text);
-
-
         var link = ((page \ "title").text)
 
 
         link = link.trim().replaceAll("\\s","_")
-//        val mytitle = WikiUtil.wikiEncode(link, language)
-
-        /*f( new WikiPage( title     = WikiTitle.parse(link, language),
-id        = (page \ "id").text.toLong,
-revision  = (rev \ "id").text.toLong,
-source    = (rev \ "text").text ) )*/
 
         val contrib = (rev \ "contributor");
         var contribName:String = "";
@@ -107,11 +97,6 @@ source    = (rev \ "text").text ) )*/
           contributorName = contribName
         )
         )
-
-        /*f( new WikiPage( title     = mytitle,
-id        = (page \ "id").text.toLong,
-revision  = (rev \ "id").text.toLong,
-source    = (rev \ "text").text ) )*/
 
 
       }

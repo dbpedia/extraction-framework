@@ -1,12 +1,14 @@
 package org.dbpedia.helper;
 
-import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -59,48 +61,22 @@ public class CoreUtil {
         String strSPARULPattern = "";
         if(requiredResource instanceof Resource){
 
-            //strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-//            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-//            strSPARULPattern = org.openrdf.rio.ntriples.NTriplesUtil.toNTriplesString(new URIImpl(((Resource) requiredResource).getURI()));
-
-//            String encoded = URIEncoder.encodeURI();
             try{
                 URI uri = new URI(((Resource) requiredResource).getURI());
-//                strSPARULPattern = "<" + URLEncoder.encode (((Resource) requiredResource).getURI(), "UTF-8") + ">";
                 strSPARULPattern = "<" + uri + ">";
             }
             catch (Exception exp){
                 logger.error("Resource \"" + requiredResource  + "\" cannot be URL encoded.");
             }
         }
-        /*else if(requiredResource instanceof BNode){
-
-            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-            strSPARULPattern = strSPARULPattern.replace("%", "_");
-
-        }*/
         else if(requiredResource instanceof Literal){
 
-            /*if((storeSpecific == null) || (storeSpecific.equals("")))
-                storeSpecific = LiveOptions.options.get("Store.SPARULdialect");*/
-
             String quotes="";
-
-            //TODO this point should be checked i.e. whether we must place 2 double quotes or not
 
             if(storeSpecific.toUpperCase().equals("VIRTUOSO"))
                 quotes = "\"\"\"";
             else
                 quotes = "\"";
-
-            /*if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
-                strSPARULPattern = quotes + escapeString( requiredResource.toString()) + quotes;
-            else if(((Literal) requiredResource).getDatatype() == null)
-                strSPARULPattern = quotes + escapeString(requiredResource.toString() ) + quotes +
-                        "@" + ((Literal) requiredResource).getLanguage();
-            else
-                strSPARULPattern = quotes + escapeString(requiredResource.toString()) + quotes + "^^<" +
-                        ((Literal) requiredResource).getDatatype() + ">";*/
 
             if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
                 strSPARULPattern = quotes + escapeString( ((Literal) requiredResource).getValue().toString()) + quotes;
@@ -143,7 +119,6 @@ public class CoreUtil {
             {
                 outputString.append("\\u");
 
-                //val hexStr = c.toHexString().toUpperCase
                 String hexStr = Integer.toHexString(c).toUpperCase();
                 int pad = 4 - hexStr.length();
 
@@ -197,15 +172,6 @@ public class CoreUtil {
      */
     public static String writeTripleAsNTriples(Statement triple)
     {
-//
-//        Model testModel = ModelFactory.createDefaultModel();
-//        testModel.add(triple);
-//
-//        StringWriter out = new StringWriter();
-//
-//        testModel.write(out, "N-TRIPLE");
-//
-//        String strOutput = out.toString();
 
         return convertToSPARULPattern(triple.getSubject()) + " " + convertToSPARULPattern(triple.getPredicate())
                 +" " + convertToSPARULPattern(triple.getObject()) + " .";

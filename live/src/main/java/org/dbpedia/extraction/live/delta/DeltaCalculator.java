@@ -22,7 +22,7 @@ import java.util.*;
  */
 public class DeltaCalculator {
     //Initializing the Logger
-    private static Logger logger = null;
+    private static Logger logger = Logger.getLogger(DeltaCalculator.class);
 
     private static final String DBPEDIA_TABLENAME = "dbpedia_triples";
     private static final String DBPEDIA_DIFF_TABLENAME = "dbpedia_triples_diff";
@@ -30,16 +30,6 @@ public class DeltaCalculator {
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";
 
-    static
-    {
-        try
-        {
-            logger = Logger.getLogger(Class.forName("org.dbpedia.extraction.live.delta.DeltaCalculator").getName());
-        }
-        catch (Exception exp){
-
-        }
-    }
 
     public static enum TriplesType
     {
