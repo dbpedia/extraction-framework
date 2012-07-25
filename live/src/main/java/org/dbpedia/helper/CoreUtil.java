@@ -22,7 +22,6 @@ import org.openrdf.model.Value;
 import org.openrdf.rio.ntriples.NTriplesUtil;*/
 
 /**
- * TODO: why is this class necessary? Quad.render() does pretty much the same thing...
  * Created by IntelliJ IDEA.
  * User: Mohamed Morsey
  * Date: Aug 19, 2010

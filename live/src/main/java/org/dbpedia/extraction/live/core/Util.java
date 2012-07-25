@@ -1,15 +1,15 @@
 package org.dbpedia.extraction.live.core;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.dbpedia.helper.CoreUtil;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.dbpedia.helper.CoreUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -103,117 +103,8 @@ public class Util extends CoreUtil{
         return row(in, 0);
     }
 
-//    public static String convertToSPARULPattern(Value requiredResource)
-//    {
-//        String storeSpecific = "VIRTUOSO";
-//        return convertToSPARULPattern(requiredResource, storeSpecific);
-//    }
-//
-//    public  static String convertToSPARULPattern(Object requiredResource){
-//        String storeSpecific = "VIRTUOSO";
-//        return convertToSPARULPattern(requiredResource, storeSpecific);
-//    }
-//
-//    private static String convertToSPARULPattern(Object requiredResource, String storeSpecific)
-//    {
-//        try{
-//            Value valResource = (Value) requiredResource;
-//            return convertToSPARULPattern(valResource, storeSpecific);
-//        }
-//        catch(Exception exp){
-//            logger.error("Invalid resource object is passed");
-//            return requiredResource.toString();
-//        }
-//    }
-//
-//    public static String convertToSPARULPattern(Value requiredResource, String storeSpecific)
-//    {
-//        String strSPARULPattern = "";
-//        if(requiredResource instanceof URI){
-//
-//            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-//
-//        }
-//        else if(requiredResource instanceof BNode){
-//
-//            strSPARULPattern = NTriplesUtil.toNTriplesString(requiredResource);
-//            strSPARULPattern = strSPARULPattern.replace("%", "_");
-//
-//        }
-//        else if(requiredResource instanceof Literal){
-//
-//            //If the application is working in multithreading mode, we must attach the thread id to the timer name
-//            //to avoid the case that a thread stops the timer of another thread.
-//            String timerName = "Converting literal to SPARULPattern" +
-//                    (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
-//
-//            Timer.start(timerName);
-//
-//            if((storeSpecific == null) || (storeSpecific.equals("")))
-//                storeSpecific = LiveOptions.options.get("Store.SPARULdialect");
-//
-//            String quotes="";
-//
-//            //TODO this point should be checked i.e. whether we must place 2 double quotes or not
-//
-//            if(storeSpecific.toUpperCase().equals("VIRTUOSO"))
-//                quotes = "\"\"\"";
-//            else
-//                quotes = "\"";
-//
-////            if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
-////                strSPARULPattern = quotes + escape( requiredResource.stringValue()) + quotes;
-////            else if(((Literal) requiredResource).getDatatype() == null)
-////                strSPARULPattern = quotes + escape(requiredResource.stringValue()) + quotes +
-////                        "@" + ((Literal) requiredResource).getLanguage();
-////            else
-////                strSPARULPattern = quotes + escape(requiredResource.stringValue()) + quotes + "^^<" +
-////                        ((Literal) requiredResource).getDatatype() + ">";
-//
-//            if((((Literal) requiredResource).getDatatype() == null) && (((Literal) requiredResource).getLanguage() == null))
-//                strSPARULPattern = quotes + escapeString( requiredResource.stringValue()) + quotes;
-//            else if(((Literal) requiredResource).getDatatype() == null)
-//                strSPARULPattern = quotes + escapeString(requiredResource.stringValue()) + quotes +
-//                        "@" + ((Literal) requiredResource).getLanguage();
-//            else
-//                strSPARULPattern = quotes + escapeString(requiredResource.stringValue()) + quotes + "^^<" +
-//                        ((Literal) requiredResource).getDatatype() + ">";
-//
-//            Timer.stop(timerName);
-//        }
-//        return strSPARULPattern;
-//    }
 
-// Input is an UTF-8 encoded string. Output is the string in N-Triples encoding.
-    // Checks for invalid UTF-8 byte sequences and replaces them with \uFFFD (white
-    // question mark inside black diamond character)
-    //
-    // Sources:
-    // http://www.w3.org/TR/rdf-testcases/#ntrip_strings
-    // http://en.wikipedia.org/wiki/UTF-8
-    // http://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-test.txt
     private static String escape(String str) {
-        // Replaces all byte sequences that need escaping. Characters that can
-        // remain unencoded in N-Triples are not touched by the regex. The
-        // replaced sequences are:
-        //
-        // 0x00-0x1F   non-printable characters
-        // 0x22        double quote (")
-        // 0x5C        backslash (\)
-        // 0x7F        non-printable character (Control)
-        // 0x80-0xBF   unexpected continuation byte,
-        // 0xC0-0xFF   first byte of multi-byte character,
-        //             followed by one or more continuation byte (0x80-0xBF)
-        //
-        // The regex accepts multi-byte sequences that don't have the correct
-        // number of continuation bytes (0x80-0xBF). This is handled by the
-        // callback.
-
-
-//        return preg_replace_callback(
-//                "/[\\x00-\\x1F\\x22\\x5C\\x7F]|[\\x80-\\xBF]|[\\xC0-\\xFF][\\x80-\\xBF]*/",
-//                array('RDFliteral', 'escape_callback'),
-//                $str);
         StringBuffer resultingString = new StringBuffer();
         Pattern regex = Pattern.compile("/[\\x00-\\x1F\\x22\\x5C\\x7F]|[\\x80-\\xBF]|[\\xC0-\\xFF][\\x80-\\xBF]*/");
 
@@ -326,50 +217,6 @@ public class Util extends CoreUtil{
         return resultingString.toString();
     }
 
-//    private static String escapeString(String input){
-//        StringBuilder outputString = new StringBuilder();
-//		for (char c :input.toCharArray())
-//		{
-//			if (c == '\\' || c == '"')
-//			{
-//				outputString.append('\\' + c);
-//			}
-//			else if (c == '\n')
-//			{
-//				outputString.append("\\n");
-//			}
-//			else if (c == '\r')
-//			{
-//				outputString.append("\\r");
-//			}
-//			else if (c == '\t')
-//			{
-//				outputString.append("\\t");
-//			}
-//			else if (c >= 32 && c < 127)
-//			{
-//				outputString.append(c);
-//			}
-//			else
-//			{
-//				outputString.append("\\u");
-//
-//				//val hexStr = c.toHexString().toUpperCase
-//                String hexStr = Integer.toHexString(c).toUpperCase();
-//				int pad = 4 - hexStr.length();
-//
-//				while (pad > 0)
-//				{
-//					outputString.append('0');
-//					pad -= 1;
-//				}
-//
-//				outputString.append(hexStr);
-//			}
-//		}
-//		return outputString.toString();
-//	}
-
     public static boolean isStringNullOrEmpty(String str)
     {
         if((str == null) || (str.equals("")))
@@ -377,14 +224,6 @@ public class Util extends CoreUtil{
         return false;
 
     }
-
-//    public static String wikipediaEncode(String page_title) {
-// 	String strEncodedPageTitle = URLEncoder.encode(page_title.trim().replace(" ","_"));
-// 	// Decode slash "/", colon ":", as wikimedia does not encode these
-// 	strEncodedPageTitle = strEncodedPageTitle.replace("%2F","/");
-// 	strEncodedPageTitle =  strEncodedPageTitle.replace("%3A",":");
-// 	return strEncodedPageTitle;
-// 	}
 
     public static String getDBpediaCategoryPrefix(String language){
         try
