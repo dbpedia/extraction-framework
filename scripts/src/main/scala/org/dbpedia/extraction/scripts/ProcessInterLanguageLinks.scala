@@ -264,7 +264,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         lineCount += 1
         lineTotal += 1
         if (lineCount % 1000000 == 0) logRead(wikiCode, lineCount, linkCount, start)
-        if (lineTotal % 1000000 == 0) logRead("total", lineTotal, linkTotal, startTotal)
+        if (lineTotal % 10000000 == 0) logRead("total", lineTotal, linkTotal, startTotal)
       }
       logRead(wikiCode, lineCount, linkCount, start)
       
