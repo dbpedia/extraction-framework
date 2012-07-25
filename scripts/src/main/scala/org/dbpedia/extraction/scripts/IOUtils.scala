@@ -15,8 +15,6 @@ import java.nio.charset.Charset
  */
 object IOUtils {
   
-  def printerrln(x: Any) = Console.err.println(x)
-
   val zippers = Map[String, OutputStream => OutputStream] (
     "gz" -> { new GZIPOutputStream(_) }, 
     "bz2" -> { new BZip2CompressorOutputStream(_) } 

@@ -5,6 +5,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.mutable.LinkedHashMap
 import java.io.File
+import scala.Console.err
 
 /**
  * Replace triples in a dataset by their transitive closure.
@@ -60,15 +61,15 @@ object ResolveTransitiveLinks {
         map(quad.subject) = quad.value
       }
 
-      printerrln("resolving "+map.size+" links...")
+      err.println("resolving "+map.size+" links...")
       val cycles = new TransitiveClosure(map).resolve()
-      printerrln("found "+cycles.size+" cycles:")
+      err.println("found "+cycles.size+" cycles:")
       for (cycle <- cycles.sortBy(- _.size)) {
-        printerrln("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
+        err.println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
       }
       
       val file = finder.find(output + suffix)
-      printerrln(language.wikiCode+": writing "+file+" ...")
+      err.println(language.wikiCode+": writing "+file+" ...")
       val writer = write(file)
       try {
         for ((subjUri, objUri) <- map) {

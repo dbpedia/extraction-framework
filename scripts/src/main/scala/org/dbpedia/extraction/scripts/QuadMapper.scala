@@ -4,7 +4,8 @@ import java.lang.StringBuilder
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import IOUtils._
+import scala.Console.err
+import IOUtils.write
 import java.io.File
 
 /**
@@ -33,11 +34,11 @@ object QuadMapper {
     
     if (! inFile.exists()) {
       if (required) throw new IllegalArgumentException(tag+": file "+inFile+" does not exist")
-      printerrln(tag+": WARNING - file "+inFile+" does not exist")
+      err.println(tag+": WARNING - file "+inFile+" does not exist")
       return
     }
 
-    printerrln(tag+": writing "+outFile+" ...")
+    err.println(tag+": writing "+outFile+" ...")
     var mapCount = 0
     val writer = write(outFile)
     try {
@@ -66,7 +67,7 @@ object QuadMapper {
       writer.write("# completed "+formatCurrentTimestamp+"\n")
     }
     finally writer.close()
-    printerrln(tag+": mapped "+mapCount+" quads")
+    err.println(tag+": mapped "+mapCount+" quads")
   }
   
 }
