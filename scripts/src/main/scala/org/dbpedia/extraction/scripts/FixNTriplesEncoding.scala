@@ -12,7 +12,7 @@ import java.lang.StringBuilder
  * Encodes non-ASCII chars in N-Triples files.
  *  
  * Example call:
- * ../run FixNTriplesEncoding /data/dbpedia/links bbcwildlife,bookmashup _fixed _links.nt.gz
+ * ../run FixNTriplesEncoding /data/dbpedia/links bbcwildlife,italian-public-schools _fixed _links.nt.gz
  */
 object FixNTriplesEncoding {
   
@@ -56,6 +56,7 @@ object FixNTriplesEncoding {
         readLines(inFile) { line =>
           val escaped = new TurtleEscaper(turtle = false).escapeTurtle(line)
           writer.write(escaped)
+          writer.write('\n')
           if (! line.eq(escaped)) escCount += 1
           lineCount += 1
           if (lineCount % 1000000 == 0) log(lineCount, escCount, start)
@@ -102,6 +103,7 @@ class TurtleEscaper(var builder: StringBuilder = null, turtle: Boolean) {
       index += Character.charCount(code)
       if (replaced) last = index
     }
+    if (builder != null) builder.append(input, last, index)
     if (builder != null) builder.toString else input
   }
   
