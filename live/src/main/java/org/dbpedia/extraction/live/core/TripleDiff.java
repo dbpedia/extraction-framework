@@ -182,23 +182,7 @@ public class TripleDiff {
 
     public HashMap simplerDiff(ArrayList triplesFromExtractor){
         String query = this.createSPARQLQuery();
-		//echo query;die;
-	 /**
-    * sub,pred,obj, must be an array, either:
-	* [action] = "fix"
-	* [value]  = "http://dbpedia.org/resource/subject"
-	* or a sparql variable ?o like:
-	* [action] = "variable"
-	* [value]  = "o"
-	* * or use this.subject:
-	* [action] = "classattribute"
-	* [value]  = null
-	* */
-/*
-		pvar = "?p";
-		ovar = "?o";
-		query = "SELECT * WHERE {<".this->resource->getURI()."> ".pvar." ".ovar. " \n";
-*/
+
         HashMap s = new HashMap();
         HashMap p = new HashMap();
         HashMap o = new HashMap();
@@ -273,12 +257,8 @@ public class TripleDiff {
 
 		result.put("subResourceAsObjectStore", subResourceAsObjectStore);
 
-		//result['subResourceAsObjectExtractor'] = $subResourceAsObjectExtractor;
-		//$result['differentSubjectExtractor'] = $differentSubjectExtractor;
 
 		result.put("triplesFromStore", triplesFromStore);
-		//$result['remainderStore'] = $remainderStore ;
-		//$result['remainderExtractor'] = $remainderStore ;
 
 		Timer.stop(timerName);
 
@@ -299,12 +279,6 @@ public class TripleDiff {
         return result;
     }
 
-    //        private  function log($lvl, $message){
-//
-//                    Logger::logComponent('destination', get_class($this), $lvl , $message);
-//            }
-//
-//
     private String createSPARQLQuery(){
         String pvar = "?p";
         String ovar = "?o";
@@ -389,19 +363,12 @@ public class TripleDiff {
 
 			if(error) {
 				logger.error("TripleDiff: Uninterpretable filter in one Extractor ");
-                //TODO the following code is not converted
-//				ob_start();
-//				// write content
-//				print_r($rule);
-//				$content = ob_get_contents();
-//				ob_end_clean();
+
 				logger.error("\n" + rule.toString());
                 System.exit(1);
 			}
 		}
 		if(piris.size() > 0){
-            //TODO piris is handled as if it is an array
-            //$terms[] ='!('.$pVar.' in ( '.implode(",", $piris).'))';
 			terms.add("!(" + pVar + " in ( " + implode(piris, ",") + "))");
 		}
 		if(oiris.size() > 0){
