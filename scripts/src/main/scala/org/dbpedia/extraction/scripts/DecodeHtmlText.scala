@@ -9,9 +9,9 @@ import java.lang.StringBuilder
 
 /**
  * Example call:
- * ../run DecodeHtmlCharacterReferences /data/dbpedia labels,short-abstracts,long-abstracts -fixed .nt.gz false 10000-
+ * ../run DecodeHtmlText /data/dbpedia labels,short-abstracts,long-abstracts -fixed .nt.gz false 10000-
  */
-object DecodeHtmlCharacterReferences {
+object DecodeHtmlText {
   
   private def split(arg: String): Array[String] = { 
     arg.split(",").map(_.trim).filter(_.nonEmpty)
