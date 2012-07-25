@@ -6,13 +6,11 @@ import org.dbpedia.extraction.ontology.RdfNamespace.fullUri
 import org.dbpedia.extraction.ontology.DBpediaNamespace.ONTOLOGY
 import org.dbpedia.extraction.ontology.RdfNamespace
 
-class Counter(var num: Int = 0) {
-  def ++ = num += 1
-}
+class Counter(var num: Int = 0)
 
 /**
  * Example call:
- * ../run CountTypes /data/dbpedia labels,short-abstracts,long-abstracts -fixed .nt.gz false 10000-
+ * ../run CountTypes /data/dbpedia instance-types .ttl.gz owl:Thing,Person,Place 10000-
  */
 object CountTypes {
   
@@ -22,12 +20,12 @@ object CountTypes {
   
   def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length >= 4, 
-      "need at least four args: "+
+    require(args != null && args.length >= 5, 
+      "need at least five args: "+
       /*0*/ "base dir, "+
       /*1*/ "name of input dataset (e.g. 'instance-types'), "+
       /*2*/ "input file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-      /*3*/ "comma-separated type names (e.g. 'owl:Thing,Person,Place' - names without prefix are in DBpedia ontology), "+
+      /*3*/ "comma-separated type names (e.g. 'owl:Thing,Person,Place' - DBpedia ontology if no prefix), "+
       /*4*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))
@@ -55,8 +53,13 @@ object CountTypes {
       QuadReader.readQuads(finder, input + suffix, auto = true) { quad =>
         if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
         if (quad.predicate != rdfType) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
-        typeMap.get(quad.value).map(_.++)
+        typeMap.get(quad.value).map(_.num += 1)
       }
+      println(language.wikiCode+" "+input)
+      for ((name, counter) <- typeMap) {
+        println(name+"\t"+counter.num)
+      }
+      println()
     }
     
   }
