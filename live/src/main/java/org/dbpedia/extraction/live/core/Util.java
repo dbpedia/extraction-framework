@@ -29,6 +29,8 @@ public class Util extends CoreUtil{
         {
             logger = Logger.getLogger(Util.class.getName());
 
+            //TODO use core for these...
+            
             //Initialize the MEDIAWIKI_NAMESPACES hashmap
             MEDIAWIKI_NAMESPACES = new HashMap <String, HashMap<String, String>>();
 
@@ -59,7 +61,16 @@ public class Util extends CoreUtil{
             germanHashmap.put(Constants.MW_FILEALTERNATIVE_NAMESPACE, "Bild");
             MEDIAWIKI_NAMESPACES.put("de", germanHashmap);
             /////////////////////////////////////////////////
-
+                        
+            //Initialize a hashmap for the Greek language "el" key
+            HashMap<String, String> greekHashmap = new HashMap<String, String> ();
+            greekHashmap.put(Constants.MW_CATEGORY_NAMESPACE, "Κατηγορία");
+            greekHashmap.put(Constants.MW_TEMPLATE_NAMESPACE, "Πρότυπο");
+            greekHashmap.put(Constants.MW_FILE_NAMESPACE, "Αρχείο");
+            greekHashmap.put(Constants.MW_FILEALTERNATIVE_NAMESPACE, "Εικόνα");
+            MEDIAWIKI_NAMESPACES.put("el", greekHashmap);
+            /////////////////////////////////////////////////
+             
             //Initialize a hashmap for the Korean language "ko" key
             HashMap<String, String> koreanHashmap = new HashMap<String, String> ();
             koreanHashmap.put(Constants.MW_CATEGORY_NAMESPACE, "??");

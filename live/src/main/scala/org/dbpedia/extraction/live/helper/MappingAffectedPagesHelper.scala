@@ -8,9 +8,10 @@ import org.dbpedia.extraction.sources.{XMLSource, Source}
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager
 import xml.{XML, Elem}
 import java.util.PriorityQueue
-import org.dbpedia.extraction.live.priority.PagePriority;
-import org.dbpedia.extraction.live.priority.Priority;
+import org.dbpedia.extraction.live.priority.PagePriority
+import org.dbpedia.extraction.live.priority.Priority
 import org.dbpedia.extraction.live.main._;
+import org.dbpedia.extraction.live.core.LiveOptions
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,12 +27,13 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
 
     src.foreach(CurrentWikiPage =>
       {
-          val mappingTitle = WikiTitle.parse(CurrentWikiPage.title.toString, Language.English)
-          val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, Language.English)
+    	  val language = Language.apply(LiveOptions.options.get("language"))
+          val mappingTitle = WikiTitle.parse(CurrentWikiPage.title.toString, language)
+          val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
 
           //val wikiApiUrl = new URL("http://" + Language.English.wikiCode + ".wikipedia.org/w/api.php")
           val wikiApiUrl = new URL("http://live.dbpedia.org/syncw/api.php")
-          val api = new WikiApi(wikiApiUrl, Language.English)
+          val api = new WikiApi(wikiApiUrl, language)
 
           val pageIDs = api.retrieveTemplateUsageIDs(templateTitle, 500);
           var NumberOfPagesToBeInvalidated = 0;

@@ -32,8 +32,8 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
     private static Logger logger = Logger.getLogger(UnmodifiedPagesUpdateFeeder.class);
 
     String oaiUri = LiveOptions.options.get("oaiUri");
-    String baseWikiUri = LiveOptions.options.get("baseWikiUri");
-    String oaiPrefix = LiveOptions.options.get("oaiPrefix");
+    //String baseWikiUri = LiveOptions.options.get("baseWikiUri");
+    //String oaiPrefix = LiveOptions.options.get("oaiPrefix");
     
     Calendar calendar = new GregorianCalendar();
     String endDate = "2011-04-01T15:00:00Z";

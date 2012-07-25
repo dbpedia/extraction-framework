@@ -49,12 +49,12 @@ object LiveExtractionConfigLoader extends ActionListener
   /** Ontology source */
   val ontologySource = WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
     url = new URL("http://mappings.dbpedia.org/api.php"),
-    language = Language.English );
+    language = Language.apply(LiveOptions.options.get("language")) );
 
   /** Mappings source */
-  val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.English)),
+  val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
     url = new URL("http://mappings.dbpedia.org/api.php"),
-    language = Language.English );
+    language = Language.apply(LiveOptions.options.get("language")) );
 
   println ("COMMONS SOURCE = " +LiveOptions.options.get("commonsDumpsPath"));
   //    val commonsSource =  XMLSource.fromFile(getDumpFile(new File(LiveOptions.options.get("commonsDumpsPath")),
@@ -127,7 +127,7 @@ object LiveExtractionConfigLoader extends ActionListener
     {
       //            config.extractors.keySet.foreach(LangName => startSingleThreadExtraction(articlesSource)(LangName));
       //LiveConfigReader.extractors.keySet.foreach(LangName => startSingleThreadExtraction(articlesSource)(LangName));
-      startSingleThreadExtraction(articlesSource)(Language.English);
+      startSingleThreadExtraction(articlesSource)(Language.apply(LiveOptions.options.get("language")));
       //startSingleThreadExtraction(articlesSource)(Language.Default);
     }
   }
@@ -443,12 +443,12 @@ object LiveExtractionConfigLoader extends ActionListener
     /** Ontology source */
     val ontologySource = WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
       url = new URL("http://mappings.dbpedia.org/api.php"),
-      language = Language.English );
+      language = Language.apply(LiveOptions.options.get("language")) );
 
     /** Mappings source */
-    val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.English)),
+    val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
       url = new URL("http://mappings.dbpedia.org/api.php"),
-      language = Language.English );
+      language = Language.apply(LiveOptions.options.get("language")) );
     //        var pagecount :Long = 0;
     //        mappingsSource.foreach(page =>
     //          {
