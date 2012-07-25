@@ -42,19 +42,27 @@ object RecodeUris {
     require(suffix.nonEmpty, "no input/output file suffix")
     
     for (input <- inputs) {
+      var changeCount = 0
       val inFile = new File(dir, input + suffix)
       val outFile = new File(dir, input + extension + suffix)
       QuadMapper.mapQuads(input, inFile, outFile, required = true) { quad =>
+        var changed = false
         val subj = fixUri(quad.subject)
+        changed = changed || subj != quad.subject
         val pred = fixUri(quad.predicate)
+        changed = changed || pred != quad.predicate
         if (quad.datatype == null) {
           val obj = fixUri(quad.value)
+          changed = changed || obj != quad.value
+          if (changed) changeCount += 1
           List(quad.copy(subject = subj, predicate = pred, value = obj))
         }
         else {
+          if (changed) changeCount += 1
           List(quad.copy(subject = subj, predicate = pred))
         }
       }
+      println(input+": changed "+changeCount+" quads")
     }
     
   }
