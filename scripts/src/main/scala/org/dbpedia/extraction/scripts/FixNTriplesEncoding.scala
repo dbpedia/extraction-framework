@@ -10,6 +10,8 @@ import java.lang.StringBuilder
 
 /**
  * Encodes non-ASCII chars in N-Triples files.
+ * DOES NOT ESCAPE DOUBLE QUOTES (") AND BACKSLASHES (\) - we assume that the file is mostly
+ * in correct N-Triples format and just contains a few non-ASCII chars.
  *  
  * Example call:
  * ../run FixNTriplesEncoding /data/dbpedia/links bbcwildlife,italian-public-schools _fixed _links.nt.gz
@@ -54,7 +56,7 @@ object FixNTriplesEncoding {
       val writer = write(outFile)
       try {
         readLines(inFile) { line =>
-          val escaped = new TurtleEscaper(turtle = false).escapeTurtle(line)
+          val escaped = new TurtleEscaper().escapeTurtle(line)
           writer.write(escaped)
           writer.write('\n')
           if (! line.eq(escaped)) changeCount += 1
@@ -76,13 +78,17 @@ object FixNTriplesEncoding {
 }
 
 /**
- * Escapes a Unicode string according to Turtle / N-Triples format.
+ * Escapes a Unicode string according to Turtle / N-Triples format. 
+ * DOES NOT ESCAPE DOUBLE QUOTES (") AND BACKSLASHES (\) - we assume that the file is mostly
+ * in correct N-Triples format and just contains a few non-ASCII chars.
  * @param builder may be null
  * @param input may be null
  * @param turtle if true, non-ASCII characters are not escaped (allowed by Turtle); 
  * if false, non-ASCII characters are escaped (required by N-Triples / N-Quads).
  */
-class TurtleEscaper(var builder: StringBuilder = null, turtle: Boolean) {
+class TurtleEscaper {
+  
+  private var builder: StringBuilder = null
   
   private var input: String = null
   
@@ -112,13 +118,10 @@ class TurtleEscaper(var builder: StringBuilder = null, turtle: Boolean) {
    */
   private def escapeTurtle(index: Int, code: Int): Boolean = {
     // TODO: use a lookup table for c <= 0xA0? c <= 0xFF?
-         if (code == '\\') append(index, "\\\\")
-    else if (code == '\"') append(index, "\\\"")
-    else if (code == '\n') append(index, "\\n")
+         if (code == '\n') append(index, "\\n")
     else if (code == '\r') append(index, "\\r")
     else if (code == '\t') append(index, "\\t")
     else if (code >= 0x0020 && code < 0x007F) false
-    else if (turtle) false
     else if (code <= 0xFFFF) appendHex(index, 'u', code, 4)
     else appendHex(index, 'U', code, 8)
   }
