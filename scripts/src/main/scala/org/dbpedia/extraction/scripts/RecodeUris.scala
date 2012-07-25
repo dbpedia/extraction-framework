@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.WikiUtil.{wikiEncode,cleanSpace}
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import java.io.File
 import java.net.URI
 import org.dbpedia.util.text.uri.UriDecoder
