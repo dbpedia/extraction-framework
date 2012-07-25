@@ -2,6 +2,7 @@ package org.dbpedia.helper;
 
 import com.hp.hpl.jena.rdf.model.*;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
@@ -163,7 +164,7 @@ public class CoreUtil {
      * @return encoded page title
      */
     public static String wikipediaEncode(String page_title) {
-        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
+        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.apply(LiveOptions.options.get("language")).locale());
     }
 
     /**

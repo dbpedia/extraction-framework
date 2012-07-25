@@ -4,6 +4,7 @@ import com.bbn.parliament.jena.joseki.bridge.util.NTriplesUtil;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
@@ -110,7 +111,7 @@ public class Triple extends StatementImpl {
     }
     public static Resource page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
-           String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.English().locale());
+           String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.apply(LiveOptions.options.get("language")).locale());
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
            //TODO make resource domain configurable

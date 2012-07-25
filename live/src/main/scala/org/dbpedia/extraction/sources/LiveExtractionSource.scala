@@ -6,6 +6,7 @@ import xml.Elem
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.mappings.AugmenterExtractorUtils
 import java.io.{InputStreamReader, FileInputStream, File}
+import org.dbpedia.extraction.live.core.LiveOptions
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,7 +44,7 @@ object LiveExtractionSource
       val stream = new FileInputStream(file)
       val reader = new InputStreamReader(stream)
 
-      new WikipediaDumpParser(reader, Language.English, javaFilter, f ).run()
+      new WikipediaDumpParser(reader, Language.apply(LiveOptions.options.get("language")), javaFilter, f ).run()
 
       stream.close()
     }
@@ -62,8 +63,9 @@ object LiveExtractionSource
 
       //val MyPage =  xml \\ "page";
       //println("LiveExtractionXMLSource PAGE = "+ MyPage);
-      //TODO set correct language
-      val language = Language.English
+      
+      //TODO Set this at higher level
+      val language = Language.apply(LiveOptions.options.get("language"));
 
       for(page <- xml \\ "page";
           rev <- page \\ "revision")

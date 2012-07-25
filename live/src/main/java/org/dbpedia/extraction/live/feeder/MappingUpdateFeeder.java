@@ -55,8 +55,8 @@ public class MappingUpdateFeeder extends Thread{
     public void run(){
 
         String mappingsOAIUri = LiveOptions.options.get("mappingsOAIUri");
-        String oaiPrefix = LiveOptions.options.get("mappingsOaiPrefix");
-        String baseWikiUri = LiveOptions.options.get("mappingsBaseWikiUri");
+        String mappingsOaiPrefix = LiveOptions.options.get("mappingsOaiPrefix");
+        String mappingsBaseWikiUri = LiveOptions.options.get("mappingsBaseWikiUri");
 
         int pollInterval = 2;
         int sleepInterval = 1;
@@ -72,7 +72,7 @@ public class MappingUpdateFeeder extends Thread{
             try{
                 Document doc = recordIterator.next();
 
-                NodeToRecordTransformer transformer = new NodeToRecordTransformer(baseWikiUri, mappingsOAIUri, oaiPrefix);
+                NodeToRecordTransformer transformer = new NodeToRecordTransformer(mappingsBaseWikiUri, mappingsOAIUri, mappingsOaiPrefix);
 
                 scala.xml.Node element = scala.xml.XML.loadString(XMLUtil.toString(doc));
                 org.dbpedia.extraction.sources.Source wikiPageSource = LiveExtractionSource.fromXML((scala.xml.Elem) element);
@@ -86,7 +86,7 @@ public class MappingUpdateFeeder extends Thread{
 //                Traversable<WikiPage> trav = wikiPageSource;
 //                Iterable<WikiPage> iter = JavaConversions.asIterable(trav);
 //                for(WikiPage CurrentWikiPage :iter){
-//                    WikiTitle mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.toString(), Language.English);
+//                    WikiTitle mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.toString(), Language.apply(LiveOptions.options.get("language")));
 //                    System.out.println(mappingTitle);
 //                }
                 

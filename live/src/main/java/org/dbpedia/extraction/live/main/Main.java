@@ -286,7 +286,7 @@ public class Main
 //                WikiTitle t = LiveExtractionManager.ConstructWikiTitle();
 //
 //                WikiTitle TestTitle = WikiTitle.parse(((Record) record).getMetadata().getTitle().getFullTitle(),
-//                        org.dbpedia.extraction.util.Language.English());
+//                        org.dbpedia.extraction.util.Language.apply(LiveOptions.options.get("language")));
 //
 //                //System.out.println(p.toXML());
 //                System.out.println("////////////////META DATA//////////////");

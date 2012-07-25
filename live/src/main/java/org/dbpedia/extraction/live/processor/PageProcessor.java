@@ -2,6 +2,7 @@ package org.dbpedia.extraction.live.processor;
 
 import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
@@ -70,7 +71,7 @@ public class PageProcessor extends Thread{
 
             Node node = XML.loadString(resultingString);
             Elem xmlElem = (Elem) node;
-            Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.English());
+            //Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.apply(LiveOptions.options.get("language")));
             LiveExtractionManager.extractFromPage(xmlElem);
             /////////////////////////////////////////////////////////////
 
