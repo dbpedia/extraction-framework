@@ -11,6 +11,8 @@ import scala.collection.mutable
 import scala.collection.mutable.HashMap
 import scala.collection.Map
 import IOUtils.write
+import org.dbpedia.extraction.util.Finder
+import scala.Console.err
 
 class Counter(var num: Long = 0L)
 
@@ -59,14 +61,22 @@ object CountTypes {
     
     for (language <- languages) {
       val languageTypes = new HashMap[String, Counter]()
-      val finder = new DateFinder(baseDir, language)
-      QuadReader.readQuads(finder, input + suffix, auto = true) { quad =>
-        if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
-        if (quad.predicate != rdfType) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
-        countType(quad.value, languageTypes)
-        if (total) countType(quad.value, totalTypes)
+      val finder = new Finder(baseDir, language)
+      val dates = finder.dates(input + suffix, required = false)
+      if (dates.isEmpty) {
+        err.println(language.wikiCode+": WARNING: no file ["+input+"] found")
       }
-      printTypes(finder.find(output), language.wikiCode+" "+input, languageTypes)
+      else {
+        val date = dates.last
+        val file = finder.file(date, input + suffix)
+        QuadReader.readQuads(language.wikiCode, file) { quad =>
+          if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+          if (quad.predicate != rdfType) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+          countType(quad.value, languageTypes)
+          if (total) countType(quad.value, totalTypes)
+        }
+        printTypes(finder.file(date, output), language.wikiCode+" "+input, languageTypes)
+      }
     }
     if (total) printTypes(new File(baseDir, output), "total", totalTypes)
     
