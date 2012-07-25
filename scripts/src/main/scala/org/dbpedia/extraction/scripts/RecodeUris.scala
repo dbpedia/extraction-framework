@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.WikiUtil.wikiEncode
+import org.dbpedia.extraction.util.WikiUtil.{wikiEncode,cleanSpace}
 import java.io.File
 import java.net.URI
 import org.dbpedia.util.text.uri.UriDecoder
@@ -71,6 +71,8 @@ object RecodeUris {
     
     if (uri.startsWith("http://dbpedia.org/")) {
       
+      var input = uri
+      
       // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
       // "#%<>?[\]^`{|}
       
@@ -81,24 +83,25 @@ object RecodeUris {
       if (uri.contains("?")) throw new IllegalArgumentException("URI contains query: ["+uri+"]")
       
       // we can't handle fragments, we re-encode hash signs
-      if (uri.contains("#")) throw new IllegalArgumentException("URI contains fragment: ["+uri+"]")
+      if (uri.contains("#")) {
+        println("URI contains fragment: ["+uri+"]")
+        input = uri.substring(0, uri.indexOf('#'))
+      }
       
       // The other characters that we re-encode are extremely unlikely to occur:
       // "<>[]^`{|}
       
       // decoding the whole URI is ugly, but should work for us.
-      val decoded = UriDecoder.decode(uri)
+      var decoded = UriDecoder.decode(input)
       
-      // UriDecoder.decode returns the same object if nothing has changed
-      if (uri.eq(decoded)) {
-        uri
-      }
-      else {
-        // re-encode URI according to our own rules
-        val encoded = wikiEncode(decoded)
-        // we may have decoded non-ASCII characters, so we have to re-encode them
-        new URI(encoded).toASCIIString
-      }
+      decoded = cleanSpace(decoded)
+      decoded = decoded.replace('\n', ' ')
+      decoded = decoded.replace('\t', ' ')
+      
+      // re-encode URI according to our own rules
+      val encoded = wikiEncode(decoded)
+      // we may have decoded non-ASCII characters, so we have to re-encode them
+      new URI(encoded).toASCIIString
     }
     else {
       // just copy non-DBpedia URIs
