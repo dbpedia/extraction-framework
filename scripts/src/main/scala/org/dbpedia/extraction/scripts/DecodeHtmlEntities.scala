@@ -3,7 +3,8 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import IOUtils._
+import scala.Console.err
+import IOUtils.{readLines,write}
 import java.lang.StringBuilder
 import org.dbpedia.util.text.html.{HtmlCoder,XmlCodes}
 import org.dbpedia.util.text.{ParseExceptionCounter}
@@ -55,8 +56,8 @@ object DecodeHtmlEntities {
     for (input <- inputs) {
       val inFile = new File(dir, input + suffix)
       val outFile = new File(dir, input + extension + suffix)
-      printerrln("reading "+inFile+" ...")
-      printerrln("writing "+outFile+" ...")
+      err.println("reading "+inFile+" ...")
+      err.println("writing "+outFile+" ...")
       var lineCount = 0
       var changeCount = 0
       val start = System.nanoTime
@@ -73,7 +74,7 @@ object DecodeHtmlEntities {
       }
       finally writer.close()
       log(lineCount, changeCount, start)
-      printerrln("found "+counter.errors()+" HTML character reference errors")
+      err.println("found "+counter.errors()+" HTML character reference errors")
       counter.reset()
     }
     
@@ -81,7 +82,7 @@ object DecodeHtmlEntities {
 
   private def log(lines: Int, changed: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    printerrln("read "+lines+" lines, changed "+changed+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    err.println("read "+lines+" lines, changed "+changed+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
 }

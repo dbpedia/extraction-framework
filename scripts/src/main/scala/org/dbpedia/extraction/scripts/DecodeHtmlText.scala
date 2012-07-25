@@ -6,7 +6,7 @@ import java.io.File
 import org.dbpedia.util.text.html.{HtmlCoder,XmlCodes}
 import org.dbpedia.util.text.{ParseExceptionCounter,Appender}
 import java.lang.StringBuilder
-import IOUtils._
+import scala.Console.err
 
 /**
  * Example call:
@@ -69,7 +69,7 @@ object DecodeHtmlText {
           val decoded = coder.code(quad.value)
           List(quad.copy(value = decoded))
         }
-        printerrln(language.wikiCode+": "+finder.find(input + suffix)+" : found "+counter.errors()+" HTML character reference errors")
+        err.println(language.wikiCode+": "+finder.find(input + suffix)+" : found "+counter.errors()+" HTML character reference errors")
         counter.reset()
         first = false
       }

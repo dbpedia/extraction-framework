@@ -12,7 +12,8 @@ import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
 import CreateFreebaseLinks._
-import IOUtils._
+import scala.Console.err
+import IOUtils.{readLines,write}
 import java.util.regex.Matcher
 import java.lang.StringBuilder
 
@@ -124,7 +125,7 @@ object CreateFreebaseLinks
   
   private def collectUris(set: Set[String], file: File, add: Boolean): Unit = {
     val start = System.nanoTime
-    printerrln((if (add) "Add" else "Subtract")+"ing DBpedia URIs in "+file+"...")
+    err.println((if (add) "Add" else "Subtract")+"ing DBpedia URIs in "+file+"...")
     var lines = 0
     readLines(file) { line =>
       if (line.nonEmpty && line.charAt(0) != '#') {
@@ -141,7 +142,7 @@ object CreateFreebaseLinks
   
   private def log(lines: Int, start: Long): Unit = {
     val nanos = System.nanoTime - start
-    printerrln("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+    err.println("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
 }
@@ -150,7 +151,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
     
   def findLinks(dbpedia: Set[String], inFile: File, outFile: File): Unit = {
     val start = System.nanoTime
-    printerrln("Searching for Freebase links in "+inFile+"...")
+    err.println("Searching for Freebase links in "+inFile+"...")
     var lines = 0
     var links = 0
     val writer = write(outFile)
@@ -165,7 +166,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
             try recode(key)
             catch {
               case ex => {
-                printerrln("BAD LINE: ["+line+"]: "+ex)
+                err.println("BAD LINE: ["+line+"]: "+ex)
                 ""
               }
             }
@@ -191,7 +192,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
   
   private def log(lines: Int, links: Int, start: Long): Unit = {
     val nanos = System.nanoTime - start
-    printerrln("processed "+lines+" lines, found "+links+" Freebase links in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+    err.println("processed "+lines+" lines, found "+links+" Freebase links in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
   /**

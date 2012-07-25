@@ -5,7 +5,8 @@ import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import IOUtils._
+import scala.Console.err
+import IOUtils.readLines
 
 /**
  */
@@ -25,7 +26,7 @@ object QuadReader {
    * @param proc process quad
    */
   def readQuads(tag: String, file: File)(proc: Quad => Unit): Unit = {
-    printerrln(tag+": reading "+file+" ...")
+    err.println(tag+": reading "+file+" ...")
     var lineCount = 0
     val start = System.nanoTime
     readLines(file) { line =>
@@ -43,7 +44,7 @@ object QuadReader {
   
   private def logRead(tag: String, lines: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    printerrln(tag+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    err.println(tag+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
 }
