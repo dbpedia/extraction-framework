@@ -124,7 +124,7 @@ object CreateFreebaseLinks
   
   private def collectUris(set: Set[String], file: File, add: Boolean): Unit = {
     val start = System.nanoTime
-    println((if (add) "Add" else "Subtract")+"ing DBpedia URIs in "+file+"...")
+    printerrln((if (add) "Add" else "Subtract")+"ing DBpedia URIs in "+file+"...")
     var lines = 0
     readLines(file) { line =>
       if (line.nonEmpty && line.charAt(0) != '#') {
@@ -141,7 +141,7 @@ object CreateFreebaseLinks
   
   private def log(lines: Int, start: Long): Unit = {
     val nanos = System.nanoTime - start
-    println("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+    printerrln("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
 }
@@ -150,7 +150,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
     
   def findLinks(dbpedia: Set[String], inFile: File, outFile: File): Unit = {
     val start = System.nanoTime
-    println("Searching for Freebase links in "+inFile+"...")
+    printerrln("Searching for Freebase links in "+inFile+"...")
     var lines = 0
     var links = 0
     val writer = write(outFile)
@@ -165,7 +165,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
             try recode(key)
             catch {
               case ex => {
-                println("BAD LINE: ["+line+"]: "+ex)
+                printerrln("BAD LINE: ["+line+"]: "+ex)
                 ""
               }
             }
@@ -191,7 +191,7 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
   
   private def log(lines: Int, links: Int, start: Long): Unit = {
     val nanos = System.nanoTime - start
-    println("processed "+lines+" lines, found "+links+" Freebase links in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+    printerrln("processed "+lines+" lines, found "+links+" Freebase links in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
   /**

@@ -48,8 +48,8 @@ object FixNTriplesEncoding {
     for (input <- inputs) {
       val inFile = new File(dir, input + suffix)
       val outFile = new File(dir, input + extension + suffix)
-      println("reading "+inFile+" ...")
-      println("writing "+outFile+" ...")
+      printerrln("reading "+inFile+" ...")
+      printerrln("writing "+outFile+" ...")
       var lineCount = 0
       var changeCount = 0
       val start = System.nanoTime
@@ -72,7 +72,7 @@ object FixNTriplesEncoding {
 
   private def log(lines: Int, changed: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println("read "+lines+" lines, changed "+changed+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    printerrln("read "+lines+" lines, changed "+changed+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
 }

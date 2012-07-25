@@ -211,7 +211,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
    */
   def readTriples(): Unit = {
     
-    println("reading triples...")
+    printerrln("reading triples...")
     
     // Enough space for ~17 million unique titles. The languages with 10000+ articles have ~12 million titles.
     titles = new Array[String](1 << 24)
@@ -232,7 +232,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       val wikiCode = languages(langKey).wikiCode
       val file = find(langKey, interLinkExtension, true)
       
-      println(wikiCode+": reading "+file+" ...")
+      printerrln(wikiCode+": reading "+file+" ...")
       var lineCount = 0
       var linkCount = 0
       val start = System.nanoTime
@@ -270,7 +270,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       
       var sortStart = System.nanoTime
       sort(langLinks, 0, linkCount)
-      println(wikiCode+": sorted "+linkCount+" links in "+prettyMillis((System.nanoTime - sortStart) / 1000000))
+      printerrln(wikiCode+": sorted "+linkCount+" links in "+prettyMillis((System.nanoTime - sortStart) / 1000000))
       
       // truncate array to actual size
       links(langKey) = copyOf(langLinks, linkCount)
@@ -316,7 +316,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   private def logRead(name: String, lines: Int, links: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(name+": read "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    printerrln(name+": read "+lines+" lines, found "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
   /**
@@ -373,7 +373,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
    */
   def writeTriples() {
     
-    println("writing triples...")
+    printerrln("writing triples...")
     
     var total = 0
     var sameAsTotal = 0
@@ -433,7 +433,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   private def logWrite(name: String, total: Int, sameAs: Int, seeAlso: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(name+": wrote "+total+" links: "+sameAs+" sameAs ("+(100F*sameAs/total)+"%), "+seeAlso+" seeAlso ("+(100F*seeAlso/total)+"%) in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / total)+" micros per link)")
+    printerrln(name+": wrote "+total+" links: "+sameAs+" sameAs ("+(100F*sameAs/total)+"%), "+seeAlso+" seeAlso ("+(100F*seeAlso/total)+"%) in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / total)+" micros per link)")
   }
   
   /**
@@ -443,12 +443,12 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   private def writeDump(): Unit = {
     
     val writeStart = System.nanoTime
-    println("writing dump file "+dumpFile+" ...")
+    printerrln("writing dump file "+dumpFile+" ...")
     val writer = write(dumpFile)
     try {
       var index = 0
       
-      println("writing languages, dates and domains...")
+      printerrln("writing languages, dates and domains...")
       val langCount = languages.length
       writer.write(intToHex(langCount, 8)+"\n")
       index = 0
@@ -457,7 +457,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         index += 1
       }
       
-      println("writing titles...")
+      printerrln("writing titles...")
       writer.write(intToHex(titleCount, 8)+"\n")
       index = 0
       while (index < titleCount) {
@@ -465,7 +465,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         index += 1
       }
       
-      println("writing links...")
+      printerrln("writing links...")
       for (langKey <- 0 until langCount) {
         val linkStart = System.nanoTime
         val wikiCode = languages(langKey).wikiCode
@@ -482,7 +482,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       }
     }
     finally writer.close()
-    println("wrote dump file "+dumpFile+" in "+prettyMillis((System.nanoTime - writeStart) / 1000000))
+    printerrln("wrote dump file "+dumpFile+" in "+prettyMillis((System.nanoTime - writeStart) / 1000000))
   }
   
   /**
@@ -492,12 +492,12 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   def readDump(): Unit = {
     
     val readStart = System.nanoTime
-    println("reading dump file "+dumpFile+" ...")
+    printerrln("reading dump file "+dumpFile+" ...")
     val reader = new BufferedReader(read(dumpFile))
     try {
       var index = 0
       
-      println("reading languages, dates  and domains...")
+      printerrln("reading languages, dates  and domains...")
       val langCount = hexToInt(reader.readLine())
       languages = new Array[Language](langCount)
       dates = new Array[String](langCount)
@@ -512,7 +512,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         index += 1
       }
       
-      println("reading titles...")
+      printerrln("reading titles...")
       titleCount = hexToInt(reader.readLine())
       titles = new Array[String](titleCount)
       index = 0
@@ -527,7 +527,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         val wikiCode = languages(langKey).wikiCode
         val linkCount = hexToInt(reader.readLine())
         val langLinks = new Array[Long](linkCount)
-        println(wikiCode+": reading "+linkCount+" links...")
+        printerrln(wikiCode+": reading "+linkCount+" links...")
         index = 0
         while (index < linkCount) {
           langLinks(index) = hexToLong(reader.readLine())
@@ -539,11 +539,11 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       }
     }
     finally reader.close()
-    println("read dump file "+dumpFile+" in "+prettyMillis((System.nanoTime - readStart) / 1000000))
+    printerrln("read dump file "+dumpFile+" in "+prettyMillis((System.nanoTime - readStart) / 1000000))
   }
   
   private def logDump(name: String, did: String, index: Int, start: Long): Unit = {
-    println(name+": "+did+" "+index+" links in "+prettyMillis((System.nanoTime - start) / 1000000))
+    printerrln(name+": "+did+" "+index+" links in "+prettyMillis((System.nanoTime - start) / 1000000))
   }
 
 }

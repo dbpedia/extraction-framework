@@ -25,7 +25,7 @@ object QuadReader {
    * @param proc process quad
    */
   def readQuads(tag: String, file: File)(proc: Quad => Unit): Unit = {
-    println(tag+": reading "+file+" ...")
+    printerrln(tag+": reading "+file+" ...")
     var lineCount = 0
     val start = System.nanoTime
     readLines(file) { line =>
@@ -43,7 +43,7 @@ object QuadReader {
   
   private def logRead(tag: String, lines: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(tag+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    printerrln(tag+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
 }

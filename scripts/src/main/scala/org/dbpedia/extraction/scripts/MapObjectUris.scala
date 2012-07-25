@@ -3,6 +3,7 @@ package org.dbpedia.extraction.scripts
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
+import IOUtils._
 
 /**
  * Maps old object URIs in triple files to new object URIs:
@@ -120,7 +121,7 @@ object MapObjectUris {
           map.addBinding(quad.subject, quad.value)
           count += 1
         }
-        println("found "+count+" mappings")
+        printerrln("found "+count+" mappings")
       }
       
       for (input <- inputs; suffix <- suffixes) {
