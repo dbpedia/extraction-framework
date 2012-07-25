@@ -6,6 +6,7 @@ import java.io.{File,InputStream,OutputStream,Writer,FileInputStream,FileOutputS
 import scala.io.Codec
 import org.dbpedia.extraction.util.RichReader.wrapReader
 import org.dbpedia.extraction.util.FileLike
+import java.nio.charset.Charset
 
 /**
  * TODO: move this class to core, but modify the code such that there are no run-time dependencies
@@ -34,9 +35,9 @@ object IOUtils {
   
   def input(file: FileLike[_]) = open(file, _.inputStream(), unzippers)
   
-  def write(file: FileLike[_]) = new OutputStreamWriter(output(file), Codec.UTF8)
+  def write(file: FileLike[_], charset: Charset = Codec.UTF8) = new OutputStreamWriter(output(file), charset)
   
-  def read(file: FileLike[_]) = new InputStreamReader(input(file), Codec.UTF8)
+  def read(file: FileLike[_], charset: Charset = Codec.UTF8) = new InputStreamReader(input(file), charset)
   
   def readLines[U](file: FileLike[_])(proc: String => U): Unit = {
     val reader = read(file)
