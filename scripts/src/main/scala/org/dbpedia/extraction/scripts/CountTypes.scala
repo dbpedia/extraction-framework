@@ -24,8 +24,8 @@ object CountTypes {
   
   def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length >= 5, 
-      "need at least five args: "+
+    require(args != null && args.length >= 4, 
+      "need at least four args: "+
       /*0*/ "base dir, "+
       /*1*/ "name of input dataset (e.g. 'instance-types'), "+
       /*2*/ "input file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
