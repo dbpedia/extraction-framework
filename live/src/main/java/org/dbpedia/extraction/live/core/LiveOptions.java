@@ -16,16 +16,11 @@ import java.io.IOException;
 public class LiveOptions {
     //Initializing the Options file
     public static Options options;
-    private static Logger logger;
+    private static Logger logger = Logger.getLogger(LiveOptions.class);;
     static{
         try{
-            logger = Logger.getLogger(LiveOptions.class);
 
-            //Assert.assertNotNull("Logger cannot be null", logger);
-
-            File OptionsFile = new File("live.ini");
-
-            //Assert.assertTrue("dbpedia_default.ini file does not exist", OptionsFile.exists());
+            File OptionsFile = new File("./live/live.ini");
 
             options = new Options(OptionsFile);
         }

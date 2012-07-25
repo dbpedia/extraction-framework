@@ -49,13 +49,6 @@ public class LiveUpdateFeeder extends Thread{
     int articleDelay = 0;
     boolean articleRenewal = false;
 
-//    public LiveUpdateFeeder(){
-//        super("Live extraction feeder");
-//
-//        start();
-//
-//    }
-
     public LiveUpdateFeeder(String name, int priority){
 
         this.setPriority(priority);

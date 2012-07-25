@@ -26,92 +26,16 @@ import org.openrdf.model.impl.URIImpl;*/
 public class RDFTriple extends Triple {
     
     //Initializing the Logger
-    private static Logger logger = null;
+    private static Logger logger = Logger.getLogger(RDFTriple.class);
     private static String pageCacheKey = null;
     private static Resource pageCacheValue = null;
 
     private String SPARULPattern = null;
 
-    static
-    {
-        try
-        {
-            logger = Logger.getLogger(RDFTriple.class.getName());
-            //Assert.assertNotNull("Logger cannot be null", logger);
-        }
-        catch (Exception exp){
-
-        }
-    }
-
     public RDFTriple(Resource subject, Property predicate, RDFNode object)
     {
         super(subject, predicate, object);
     }
-
-//    public String getMD5HashCode()
-//    {
-//        String hashCode = null;
-//        try
-//        {
-//            MessageDigest algorithm = MessageDigest.getInstance("MD5");
-//
-//            algorithm.reset();
-//            algorithm.update(this.toString().getBytes());
-//
-//            byte messageDigest[] = algorithm.digest();
-//
-////           hashCode = messageDigest.toString();
-//            hashCode = getHexString(messageDigest);
-//
-////            try{
-////                MessageDigest algorithm = MessageDigest.getInstance("MD5");
-////
-////            algorithm.reset();
-////                String str = "Hello World";
-////            algorithm.update(str.getBytes("iso-8859-1"), 0, str.length());
-////
-////            byte messageDigest[] = algorithm.digest();
-////
-////           hashCode = getHexString(messageDigest);
-////
-////            }
-////            catch(Exception exp){
-////
-////            }
-//
-//
-//
-//        }
-//        catch(NoSuchAlgorithmException nsae){
-//            logger.error("FAILED to create hash code for " + this.toNTriples());
-//        }
-//        catch(Exception exp){
-//            logger.error(exp.getMessage());
-//        }
-//        return hashCode;
-//    }
-//
-//public static String getHexString(byte[] b) throws Exception {
-//  String result = "";
-//  for (int i=0; i < b.length; i++) {
-//    result +=
-//          Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
-//  }
-//  return result;
-//}
-
-
-//    public String toNTriples()
-//    {
-//        String strNTriples = NTriplesUtil.toNTriplesString(this.getSubject()) + " " +
-//            NTriplesUtil.toNTriplesString(this.getPredicate()) + " " +
-//            NTriplesUtil.toNTriplesString(this.getObject()) + " .\n" ;
-//
-//        //Assert.assertTrue("NTriples string cannot be null or empty", (strNTriples != null && strNTriples != ""));
-//
-//		return strNTriples;
-//    }
 
    public String toSPARULPattern()
    {
@@ -127,8 +51,6 @@ public class RDFTriple extends Triple {
    }
 
    public static Resource page(String pageID) {
-
-       //Assert.assertTrue("PageID cannot be null or empty", (pageID != null && pageID != ""));
        String encPageID = "";
        if(!pageID.equals(pageCacheKey)){
            try{
@@ -145,7 +67,6 @@ public class RDFTriple extends Triple {
                logger.error("Unsupported encoding is used in encoding the page title");
            }
        }
-       //Assert.assertNotNull("PageID cannot be null", pageCacheValue);
        return pageCacheValue;
    }
     

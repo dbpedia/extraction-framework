@@ -43,11 +43,6 @@ public class RecentlyUpdatedInstance implements Comparable<RecentlyUpdatedInstan
      * @param updateTime  How much time ago was the page processed
      */
     public RecentlyUpdatedInstance(String instanceName, String dbpediaPage, String wikipediaPage, Date updateTime){
-        /*_instanceName = instanceName;
-        _dbpediaPage = dbpediaPage;
-        _wikipediaPage = wikipediaPage;
-        _updateTime = updateTime;
-        _hasDelta = false;*/
         this(instanceName, dbpediaPage, wikipediaPage, updateTime, false);
     }
 

@@ -31,14 +31,11 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
           val mappingTitle = WikiTitle.parse(CurrentWikiPage.title.toString, language)
           val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
 
-          //val wikiApiUrl = new URL("http://" + Language.English.wikiCode + ".wikipedia.org/w/api.php")
           val wikiApiUrl = new URL("http://live.dbpedia.org/syncw/api.php")
           val api = new WikiApi(wikiApiUrl, language)
 
           val pageIDs = api.retrieveTemplateUsageIDs(templateTitle, 500);
-          var NumberOfPagesToBeInvalidated = 0;
           pageIDs.foreach(CurrentPageID => {
-            //val CurrentPageID = wikititle.toLong;
             Main.pageQueue.add(new PagePriority(CurrentPageID, Priority.MappingPriority, lastResponseDate));
 
             //We add the pageID here immediately without checking if it exist first, as put checks if it exists the old value will be replace,

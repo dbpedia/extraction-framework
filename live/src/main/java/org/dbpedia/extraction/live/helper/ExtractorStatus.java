@@ -8,5 +8,5 @@ package org.dbpedia.extraction.live.helper;
  * This enumeration contains all available extractor statuses
  */
 public enum ExtractorStatus {
-    KEEP, ACTIVE, PURGE;
+    KEEP, ACTIVE, PURGE
 }

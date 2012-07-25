@@ -28,11 +28,6 @@ public class PublishedDataCompressor extends Thread{
     //This thread should have a low priority, in order not interfere with or slow down the main thread, which is responsible for handling live updates.
     public PublishedDataCompressor(String name, int priority){
 
-        /*writeLastProcessingDateFromFile("/home/mohamed/LeipzigUniversity/dbpedia_publish/lastProcessingDate.dat",
-                new Date());*/
-
-//        compressPublishData(new Date());
-
         this.setPriority(priority);
         this.setName(name);
         this.start();
@@ -50,11 +45,6 @@ public class PublishedDataCompressor extends Thread{
         //Run should work every hour only and sleep the rest of time, as it is not needed
 
         try{
-
-//            Map<String, String> config = Publisher.loadIniFile(new File("./live/dbpedia_default.ini"));
-//            String publishBaseName = config.get("publishDiffRepoPath");
-//            compressYear("2010-04-08-11");
-
             String publishBaseName = LiveOptions.options.get("publishDiffRepoPath");
             String lastProcessingDateFilename = publishBaseName + "/lastProcessingDate.dat";
             lastProcessingDate = _readLastProcessingDateFromFile(lastProcessingDateFilename);
@@ -76,7 +66,7 @@ public class PublishedDataCompressor extends Thread{
                         compressHour(dateFormatter.format(lastProcessingDate));
                     else //No difference, so we should do nothing
                         continue;
-//                compressPublishData(lastProcessingDate);
+
                     _writeLastProcessingDateToFile(lastProcessingDateFilename);
                     lastProcessingDate = _readLastProcessingDateFromFile(lastProcessingDateFilename);
                 }
@@ -190,10 +180,6 @@ public class PublishedDataCompressor extends Thread{
             osWriter = new OutputStreamWriter(fsLastProcessingDateFile);
             osWriter.write(dateFormatter.format(new Date()));
             osWriter.close();
-
-//            BufferedReader inputReader = new BufferedReader(new FileReader(filename));
-//            String line = inputReader.readLine();
-//            inputReader.close();
         }
         catch (Exception exp){
             logger.warn("The date of last Processing process cannot be written to file.\n");
@@ -272,8 +258,6 @@ public class PublishedDataCompressor extends Thread{
 
         try{
             //Convert it into TAR first
-            /*convertToTar(new File(yearPath), new TarOutputStream(
-                                        new FileOutputStream(new File(tarOutputFilename))));*/
 
             TarOutputStream osTarYear =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
             convertToTar(new File(yearPath), osTarYear);
@@ -284,7 +268,6 @@ public class PublishedDataCompressor extends Thread{
         }
         catch(IOException exp){
             logger.error("TAR output file for " + yearPath + " cannot be created. Compression process cannot continue");
-            return;
         }
     }
 
@@ -320,7 +303,6 @@ public class PublishedDataCompressor extends Thread{
         }
         catch(IOException exp){
             logger.error("TAR output file for " + monthPath + " cannot be created. Compression process cannot continue");
-            return;
         }
 
     }
@@ -354,7 +336,6 @@ public class PublishedDataCompressor extends Thread{
         }
         catch(IOException exp){
             logger.error("TAR output file for " + dayPath + " cannot be created. Compression process cannot continue");
-            return;
         }
 
 
@@ -385,7 +366,6 @@ public class PublishedDataCompressor extends Thread{
         }
         catch(IOException exp){
             logger.error("TAR output file for " + hourPath + " cannot be created. Compression process cannot continue");
-            return;
         }
     }
 
@@ -468,7 +448,6 @@ public class PublishedDataCompressor extends Thread{
             File tarFileToDelete = new File(filename);
             tarFileToDelete.delete();
 
-            //out.write(new FileInputStream(tarOutputFilename).)
         }
         catch(IOException exp){
             logger.error("File: " + filename + " cannot be compressed");
@@ -503,9 +482,6 @@ public class PublishedDataCompressor extends Thread{
 
         public CompressionDate(String requiredDate){
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
-            //        int year = Calendar.getInstance().get(Calendar.YEAR);
-//            String strCurrentDate = dateFormatter.format(requiredDate);
-
 
             //Split the two dates, to get year, month, day, and hour individually
             String []requiredDateParts = requiredDate.split("-");
@@ -517,7 +493,6 @@ public class PublishedDataCompressor extends Thread{
 
         public CompressionDate(Date requiredDate){
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH");
-            //        int year = Calendar.getInstance().get(Calendar.YEAR);
             String []requiredDateParts = dateFormatter.format(requiredDate).split("-");
 
 
@@ -534,99 +509,4 @@ public class PublishedDataCompressor extends Thread{
         }
 
     }
-    /*
-    public File zipFolder(File inFolder, File outFile)
-
-     {
-          try
-          {
-
-               //compress outfile stream
-
-               GzipCompressorOutputStream out = new ZipOutputStream(
-
-                                             new BufferedOutputStream(
-
-                                                  new FileOutputStream(outFile)));
-
-
-
-               //writting stream
-
-               BufferedInputStream in = null;
-
-
-
-               byte[] data    = new byte[BUFFER];
-
-               String files[] = inFolder.list();
-
-
-
-               for (int i=0; i<files.length; i++)
-
-               {
-
-                    //System.out.println("Adding: " + files[i]);
-
-                    in = new BufferedInputStream(new FileInputStream(inFolder.getPath() + "/" + files[i]), BUFFER);
-
-
-
-                    out.putNextEntry(new ZipEntry(files[i])); //write data header (name, size, etc)
-
-                    int count;
-
-                    while((count = in.read(data,0,BUFFER)) != -1)
-
-                    {
-
-                         out.write(data, 0, count);
-
-                    }
-
-                    out.closeEntry(); //close each entry
-
-               }
-
-               cleanUp(out);
-
-               cleanUp(in);
-
-          }
-
-          catch(Exception e)
-
-          {
-
-               e.printStackTrace();
-
-          }
-
-          return new File(outFile + ".zip");
-
-     }
-
-
-
-     private void cleanUp(InputStream in) throws Exception
-
-     {
-
-          in.close();
-
-     }
-
-
-
-     private void cleanUp(OutputStream out) throws Exception
-
-     {
-
-          out.flush();
-
-          out.close();
-
-     }
-     */
 }

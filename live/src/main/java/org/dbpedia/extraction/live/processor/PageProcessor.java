@@ -54,18 +54,12 @@ public class PageProcessor extends Thread{
             String mediaWikiPrefix = "mediawiki";
 
             GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
-            /*if(record.getErrors().getLength() > 0)
-                logger.info("There is an error");*/
             Document doc = record.getDocument();
 
             /////////////////////////////////////////////////////////////
             String strDoc = XMLUtil.toString(doc);
             Pattern invalidCharactersPattern = Pattern.compile("&#[\\d{0-9}]+;");
             Matcher invalidCharactersMatcher = invalidCharactersPattern.matcher(strDoc);
-            /*while (invalidCharactersMatcher.find()){
-                logger.info("START = " + invalidCharactersMatcher.start());
-                logger.info("END = " + invalidCharactersMatcher.end());
-            }*/
 
             String resultingString = invalidCharactersMatcher.replaceAll("");
 
@@ -74,12 +68,6 @@ public class PageProcessor extends Thread{
             //Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.apply(LiveOptions.options.get("language")));
             LiveExtractionManager.extractFromPage(xmlElem);
             /////////////////////////////////////////////////////////////
-
-
-            //Elem element = (Elem) XML.loadString(XMLUtil.toString(doc));
-            //Source wikiPageSource = XMLSource.fromXML(element);
-
-            //LiveExtractionManager.extractFromPage(element);
 
         }
         catch(Exception exp){
@@ -94,15 +82,11 @@ public class PageProcessor extends Thread{
             try{
                 PagePriority requiredPage = Main.pageQueue.poll();
 
-//                logger.info("Reached");
                 if(requiredPage == null)
                 {
                     Thread.sleep(100);
                     continue;
                 }
-
-//                    if(!Main.pageQueue.isEmpty()){
-//                    PagePriority requiredPage = Main.pageQueue.peek();
 
                 //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
                 if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
@@ -110,7 +94,6 @@ public class PageProcessor extends Thread{
                     processPage(requiredPage.pageID);
                 }
                 System.out.println("Page # " + requiredPage + " has been removed and processed");
-//                    Main.pageQueue.remove();
 
                 //Write response date to file in both cases of live update and mapping update
                 if(requiredPage.pagePriority == Priority.MappingPriority)

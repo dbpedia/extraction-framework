@@ -102,9 +102,6 @@ public class ExtractionResult{
 
 	private void _addToTripleArray(RDFTriple triple)
     {
-        //TODO we should call the validation of RDFTriple
-        //TODO We can depend now only on the validation provided by org.openrdf
-
 		//if(triple.validate())
         {
             this.triples.add(triple);

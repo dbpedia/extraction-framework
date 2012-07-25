@@ -23,7 +23,7 @@ import java.util.*;
 public class SPARQLEndpoint {
 
     //Initializing the Logger
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private Logger logger = Logger.getLogger(SPARQLEndpoint.class);
 
     String sparqlendpointURL;
 	String defaultGraphURI;
@@ -52,10 +52,6 @@ public class SPARQLEndpoint {
         String SparqlendpointURL = LiveOptions.options.get("sparqlendpoint");
         String DefaultGraphURI = LiveOptions.options.get("graphURI");
 
-        //Assert.assertTrue("SparqlendpointURL read from options file cannot be null or empty",
-//                         (SparqlendpointURL != null && SparqlendpointURL != ""));
-        //Assert.assertTrue("SparqlendpointURL read from options file cannot be null or empty",
-//                         (DefaultGraphURI != null && DefaultGraphURI != ""));
 
         return new SPARQLEndpoint(SparqlendpointURL, DefaultGraphURI);
     }
@@ -98,7 +94,6 @@ public class SPARQLEndpoint {
 
     private String _getFormat(){
         return _getFormat(null);
-        //this.getClass();
     }
 
     public String executeQuery(String query,Class logComponent){
@@ -111,8 +106,6 @@ public class SPARQLEndpoint {
 
 
     public String executeQuery(String query,Class logComponent, String DefaultGraphURI,String Format){
-        //Assert.assertTrue("SparqlendpointURL cannot be null or empty",
-//                                 (query != null && query != ""));
 
         String sparqlendpoint  = this.sparqlendpointURL;
         String url = sparqlendpoint + "?query=";
@@ -139,8 +132,6 @@ public class SPARQLEndpoint {
             HttpURLConnection con = (HttpURLConnection)new URL(url).openConnection();
             con.setRequestMethod("POST");
 
-            //TODO there is a property called CURLOPT_RETURNTRANSFER that ensures that the returned result is in string
-            //TODO I think it is not needed
             con.connect();
             BufferedReader bufRdr = new BufferedReader(new InputStreamReader(con.getInputStream()));
 

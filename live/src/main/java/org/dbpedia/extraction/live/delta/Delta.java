@@ -146,10 +146,6 @@ public class Delta {
     public String formulateModifiedTriplesAsNTriples(boolean bListTriplesForResourceOnly){
         if(_modifiedTriples == null)
             return "";
-        /*RDFWriter rdfWriter = _modifiedTriples.getWriter("N-TRIPLE");
-        StringWriter writer = new StringWriter();
-        rdfWriter.write(_modifiedTriples, writer,"");
-        return writer.getBuffer().toString();*/
 
         if(!bListTriplesForResourceOnly){
             RDFWriter rdfWriter = _modifiedTriples.getWriter("N-TRIPLE");

@@ -1,6 +1,5 @@
 package org.dbpedia.helper;
 
-import com.bbn.parliament.jena.joseki.bridge.util.NTriplesUtil;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
 import org.apache.log4j.Logger;
@@ -9,7 +8,6 @@ import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
 import java.io.StringWriter;
-import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -82,39 +80,20 @@ public class Triple extends StatementImpl {
     public String toNTriples()
     {
         StringWriter out = new StringWriter();
-        /*String strNTriples = NTriplesUtil.toNTriplesString(this.getSubject()) + " " +
-            NTriplesUtil.toNTriplesString(this.getPredicate()) + " " +
-            NTriplesUtil.toNTriplesString(this.getObject()) + " .\n" ;*/
 
         Model ntriplesModel = ModelFactory.createDefaultModel();
 
         ntriplesModel.add(this.getSubject(), this.getPredicate(), this.getObject());
-        String strNTriples = "";
-        try{
-//            URI uri = new URI(((Resource) this.getSubject()).getURI());
-//            ntriplesModel.add(ResourceFactory.createStatement(ResourceFactory.createResource(uri.toString()), this.getPredicate(), this.getObject()));
-//            strNTriples = NTriplesUtil.toNTriplesString(this.getSubject()) + " " +
-//                    NTriplesUtil.toNTriplesString(this.getPredicate()) + " " +
-//                    NTriplesUtil.toNTriplesString(this.getObject()) + " .\n" ;
-        }
-        catch (Exception exp){
-
-        }
-//                strSPARULPattern = "<" + URLEncoder.encode (((Resource) requiredResource).getURI(), "UTF-8") + ">";
-
         ntriplesModel.write(out, "N-TRIPLE");
 
-
-
         return out.toString();
-//        return strNTriples;
     }
     public static Resource page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
            String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.apply(LiveOptions.options.get("language")).locale());
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
-           //TODO make resource domain configurable
+
            String resourceURI = "http://dbpedia.org/resource/"+ returnPageID;
            Resource uri = ResourceFactory.createResource(resourceURI);
            pageCacheKey = pageID;

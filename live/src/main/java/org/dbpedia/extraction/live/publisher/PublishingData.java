@@ -77,10 +77,6 @@ public class PublishingData {
 
         for(RDFTriple triple: triplesList){
             //Convert OpenRDF statement to a JENA Triple
-//            Triple trip = Converter.convert(triple);
-              /*Triple trip = Triple.create(SesameJenaUtilities.makeJenaSubject(triple.getSubject()), SesameJenaUtilities.makeJenaPredicate(triple.getPredicate()),
-			 SesameJenaUtilities.makeJenaObject(triple.getObject()));*/
-
             Statement stmt = ResourceFactory.createStatement(triple.getSubject(), triple.getPredicate(), triple.getObject());
 
             //Convert JENA Triple to JENA Statement

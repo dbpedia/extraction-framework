@@ -14,27 +14,20 @@ import java.util.HashMap;
  */
 public class JDBC{
 
-    public static final int JDBC_MAX_LONGREAD_LENGTH = 8000;
     //Initializing the Logger
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private Logger logger = Logger.getLogger(JDBC.class);
 
     String dsn;
     String user;
     String pw;
     static Connection con = null;
-    String previous;
     final int wait = 5;
-    final int cutstring = 1000;
 
     public JDBC(String DSN, String USER, String Password)
     {
         this.dsn = DSN;
         this.user = USER;
         this.pw = Password;
-
-        //Assert.assertTrue("DSN cannot be null or empty", (dsn != null && dsn != ""));
-        //Assert.assertTrue("Username cannot be null or empty", (user != null && user != ""));
-        //Assert.assertTrue("Password cannot be null or empty", (pw != null && pw != ""));
 
         if(con == null)
             this.connect();
@@ -61,12 +54,7 @@ public class JDBC{
             //Make sure that the JDBC driver for virtuoso exists
             Class.forName("virtuoso.jdbc4.Driver");
 
-            //odbc_close_all();//TODO all old JDBC connections must be closed here
-
-            boolean FailedOnce = false;
-
             Connection Conn = DriverManager.getConnection(this.dsn, this.user, this.pw);
-            //logger.log(Level.INFO, "Connection to Virtuoso has been established");
             while(Conn == null){
                 logger.warn("JDBC connection to " + this.dsn + " failed, waiting for "
                         + wait + " and retrying");
@@ -97,10 +85,12 @@ public class JDBC{
         connect(false);
     }
 
-    /*
-      * returns the jdbc statement
-      * */
-    //TODO this function must be modified to reflect the prepare process 
+    /**
+     * Prepares a sql/sparql statement
+     * @param query The required query
+     * @param logComponent  The component used in logging
+     * @return  A prepared statement object
+     */
     public PreparedStatement prepare(String query, String logComponent)
     {
         try{
@@ -151,9 +141,8 @@ public class JDBC{
     }
 
     //This function executes the passed query
-    public ResultSet exec(String query, String logComponent)//TODO what is logComponent
+    public ResultSet exec(String query, String logComponent)
     {
-        //Assert.assertTrue("Query cannot be null or empty", (query != null && query != ""));
         ResultSet result = null;
         try
         {
@@ -167,7 +156,7 @@ public class JDBC{
             Timer.start(timerName);
             Statement requiredStatement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             result = requiredStatement.executeQuery(query);
-            //Timer.stop(logComponent + "::exec query");
+
             Timer.stop(timerName);
             logger.info(logComponent + "::SUCCESS ( "+ result +" ): ");
         }
@@ -192,8 +181,6 @@ public class JDBC{
             query = "sparql define output:format \" RDF/XML\" "  + query;
 
             ResultSet resultSet = this.exec(query, logComponent);
-
-            //TODO this part of the code must be converted
 
             String data = "";
             while(resultSet.next())
