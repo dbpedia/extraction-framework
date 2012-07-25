@@ -103,8 +103,7 @@ class TurtleEscaper(var builder: StringBuilder = null, turtle: Boolean) {
       index += Character.charCount(code)
       if (replaced) last = index
     }
-    if (builder != null) builder.append(input, last, index)
-    if (builder != null) builder.toString else input
+    if (builder == null) input else builder.append(input, last, index).toString
   }
   
   /**
