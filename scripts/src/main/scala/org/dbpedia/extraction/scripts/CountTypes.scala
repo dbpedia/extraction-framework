@@ -5,12 +5,14 @@ import java.io.File
 import org.dbpedia.extraction.ontology.RdfNamespace.fullUri
 import org.dbpedia.extraction.ontology.DBpediaNamespace.ONTOLOGY
 import org.dbpedia.extraction.ontology.RdfNamespace
+import scala.collection.immutable.SortedMap
 
 class Counter(var num: Int = 0)
 
 /**
  * Example call:
  * ../run CountTypes /data/dbpedia instance-types .ttl.gz owl:Thing,Person,Place 10000-
+ * owl:Thing,Person,Place,PopulatedPlace,Work,Album,VideoGame,Organisation,Company
  */
 object CountTypes {
   
@@ -48,7 +50,7 @@ object CountTypes {
     val rdfType = RdfNamespace.RDF.append("type")
     
     for (language <- languages) {
-      val typeMap = types.map(name => (name, new Counter)).toMap
+      val typeMap = SortedMap(types.map(name => (name, new Counter)): _*)
       val finder = new DateFinder(baseDir, language)
       QuadReader.readQuads(finder, input + suffix, auto = true) { quad =>
         if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
