@@ -49,7 +49,7 @@ object FixNTriplesEncoding {
       println("reading "+inFile+" ...")
       println("writing "+outFile+" ...")
       var lineCount = 0
-      var escCount = 0
+      var changeCount = 0
       val start = System.nanoTime
       val writer = write(outFile)
       try {
@@ -57,20 +57,20 @@ object FixNTriplesEncoding {
           val escaped = new TurtleEscaper(turtle = false).escapeTurtle(line)
           writer.write(escaped)
           writer.write('\n')
-          if (! line.eq(escaped)) escCount += 1
+          if (! line.eq(escaped)) changeCount += 1
           lineCount += 1
-          if (lineCount % 1000000 == 0) log(lineCount, escCount, start)
+          if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
         }
       }
       finally writer.close()
-      log(lineCount, escCount, start)
+      log(lineCount, changeCount, start)
     }
     
   }
 
-  private def log(lines: Int, esc: Int, start: Long): Unit = {
+  private def log(lines: Int, changed: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println("read "+lines+" lines, changed "+esc+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    println("read "+lines+" lines, changed "+changed+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
 }
