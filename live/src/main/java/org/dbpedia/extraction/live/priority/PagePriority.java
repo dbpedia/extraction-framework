@@ -38,12 +38,13 @@ public class PagePriority implements Comparable<PagePriority> {
 			if (this.pageTimestamp == "" || page.pageTimestamp == "")
 				return 0;
 			else
+				// String compare should do for this (and it's thread safe)
 				return this.pageTimestamp.compareTo(page.pageTimestamp);
 		}
 	}
 
 	public String toString() {
 		return "Page ID = " + this.pageID + ", its priority = " + pagePriority
-				+ ", and its timestamp = " + lastResponseDate;
+				+ ", and its timestamp = " + pageTimestamp;
 	}
 }
