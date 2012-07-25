@@ -3,6 +3,7 @@ package org.dbpedia.extraction.scripts
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{Set,HashMap,MultiMap,ArrayBuffer}
 import java.io.File
 import scala.Console.err

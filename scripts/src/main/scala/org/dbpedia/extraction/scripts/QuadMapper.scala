@@ -3,7 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.lang.StringBuilder
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
-import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util.FileLike
 import scala.Console.err
 import IOUtils.write
 import java.io.File
@@ -19,7 +19,7 @@ object QuadMapper {
    * @param subjects
    * @param objects
    */
-  def mapQuads(finder: DateFinder, input: String, output: String, auto: Boolean = false, required: Boolean = true)(map: Quad => Traversable[Quad]): Unit = {
+  def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, auto: Boolean = false, required: Boolean = true)(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
     mapQuads(finder.language.wikiCode, finder.find(input, auto), finder.find(output), required)(map)
   }
@@ -30,9 +30,9 @@ object QuadMapper {
    * @param subjects
    * @param objects
    */
-  def mapQuads(tag: String, inFile: File, outFile: File, required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
+  def mapQuads(tag: String, inFile: FileLike[_], outFile: FileLike[_], required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
     
-    if (! inFile.exists()) {
+    if (! inFile.exists) {
       if (required) throw new IllegalArgumentException(tag+": file "+inFile+" does not exist")
       err.println(tag+": WARNING - file "+inFile+" does not exist")
       return
