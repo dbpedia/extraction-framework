@@ -4,6 +4,7 @@ import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import java.io.File
 import org.dbpedia.extraction.ontology.RdfNamespace.fullUri
 import org.dbpedia.extraction.ontology.DBpediaNamespace.ONTOLOGY
+import org.dbpedia.extraction.ontology.RdfNamespace
 
 class Counter(var num: Int = 0) {
   def ++ = num += 1
@@ -40,16 +41,21 @@ object CountTypes {
     require(suffix.nonEmpty, "no input file suffix")
     
     // split and trim type names and construct map from type URI to counter.
-    val types = split(args(3)).map(_.trim).filter(_.nonEmpty).map(name => (fullUri(ONTOLOGY, name), new Counter)).toMap
+    val types = split(args(3)).map(_.trim).filter(_.nonEmpty).map(fullUri(ONTOLOGY, _))
     require(types.nonEmpty, "no type names")
     
     val languages = parseLanguages(baseDir, args.drop(4))
     require(languages.nonEmpty, "no languages")
     
+    val rdfType = RdfNamespace.RDF.append("type")
+    
     for (language <- languages) {
+      val typeMap = types.map(name => (name, new Counter)).toMap
       val finder = new DateFinder(baseDir, language)
       QuadReader.readQuads(finder, input + suffix, auto = true) { quad =>
         if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+        if (quad.predicate != rdfType) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+        typeMap.get(quad.value).map(_.++)
       }
     }
     
