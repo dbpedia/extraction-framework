@@ -20,7 +20,7 @@ public class LiveOptions {
     static{
         try{
 
-            File OptionsFile = new File("./live/live.ini");
+            File OptionsFile = new File("/live.ini");
 
             options = new Options(OptionsFile);
         }
