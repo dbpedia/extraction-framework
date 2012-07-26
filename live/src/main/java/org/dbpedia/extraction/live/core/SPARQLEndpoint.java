@@ -220,9 +220,9 @@ public class SPARQLEndpoint {
     public void test(){
         String query = "SELECT count(*) as ?count WHERE {<http://dbpedia.org/resource/London> ?p ?o .}";
         int c =  this.executeCount(query, this.getClass());
-        System.out.println(c + "\n");
+        logger.info(c + "\n");
         if(c>5){
-             System.out.println("bigger than 5" + "\n");
+             logger.info("bigger than 5" + "\n");
             }
         System.exit(0);
     }

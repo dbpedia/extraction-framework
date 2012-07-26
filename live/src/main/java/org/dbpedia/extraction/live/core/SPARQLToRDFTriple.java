@@ -259,7 +259,7 @@ public class SPARQLToRDFTriple {
         }else if (unknown.get("type").equals("typed-literal")){
             return tmpModel.createLiteral(unknown.get("value").toString(), unknown.get("datatype").toString());
         }else{
-            System.out.println("tail in SPARQLToRDFTriple.toObject ");
+            logger.info("tail in SPARQLToRDFTriple.toObject ");
             System.exit(1);
             }
         return null;

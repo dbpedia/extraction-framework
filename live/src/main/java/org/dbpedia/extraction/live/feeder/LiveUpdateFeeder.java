@@ -138,7 +138,7 @@ public class LiveUpdateFeeder extends Thread{
 			}
 			else if(record instanceof DeletionRecord) {
 				DeletionRecord x = (DeletionRecord)record;
-				System.out.println(x.getOaiId());
+				logger.info(x.getOaiId());
 			}
 			else {
 				throw new RuntimeException("Should not happen");
