@@ -86,14 +86,14 @@ public class Main
 //        TestJDBCConnection.Connect();
 //        //con.Connect();
 //        URIImpl uri = new URIImpl("http://www.w3.org/2001/XMLSchema#date");
-//        //System.out.println(con.toNTriples(new LiteralImpl("Hello World",new URIImpl("http://www.w3.org/2001/XMLSchema#date"))));
-//        System.out.println(uri.toString());
+//        //logger.info(con.toNTriples(new LiteralImpl("Hello World",new URIImpl("http://www.w3.org/2001/XMLSchema#date"))));
+//        logger.info(uri.toString());
         //Mapping update testing
         
 //        String strDate = "2010-07-25T18:55:52Z";
 //        String[] arr = strDate.split("-|:|T|Z");
 
-//        System.out.println(Util.getDBpediaCategoryPrefix("en"));
+//        logger.info(Util.getDBpediaCategoryPrefix("en"));
 
 
         /*
@@ -108,7 +108,7 @@ public class Main
             String strFullPageIdentifier = nodes.item(0).getChildNodes().item(0).getNodeValue();
             String startDate = XMLUtil.getPageModificationDate(doc);
 
-            System.out.println(strFullPageIdentifier + "        " + startDate);
+            logger.info(strFullPageIdentifier + "        " + startDate);
 
         } */
 
@@ -165,12 +165,12 @@ public class Main
                 String strFullPageIdentifier = nodes.item(i).getChildNodes().item(0).getNodeValue();
                 String startDate = XMLUtil.getPageModificationDate(doc);
 
-                System.out.println("Start date = " + startDate);
+                logger.info("Start date = " + startDate);
                 int colonPos = strFullPageIdentifier.lastIndexOf(":");
                 String strPageID = strFullPageIdentifier.substring(colonPos+1);
 
                 long pageID = new Long(strPageID);
-                System.out.println("Page ID = " + pageID);
+                logger.info("Page ID = " + pageID);
 
             }
 
@@ -179,7 +179,7 @@ public class Main
 
         */
 
-//        System.out.println(Util.getDBpediaCategoryPrefix("en"));
+//        logger.info(Util.getDBpediaCategoryPrefix("en"));
 
 //        MappingsUpdate update = new MappingsUpdate(4,"High Priority process");
 //        //MyThread thr1 = new MyThread(3, "Low Priority");
@@ -229,7 +229,7 @@ public class Main
 //        //int NumberOfDocument = 1;
 //        //Caller.Call();
 //        //Caller MyCaller = new Caller();
-//        //System.out.println(recordIterator.getClass());
+//        //logger.info(recordIterator.getClass());
 //        while(recordIterator.hasNext())
 //        {
 //            try
@@ -239,12 +239,12 @@ public class Main
 //                Record currentNodeRec = (Record)transformer.transform(xml);
 //
 //                scala.xml.Node element = XML.loadString(XMLUtil.toString(xml));
-//    //            System.out.println("//////////////////////////////////////////////////////////");
+//    //            logger.info("//////////////////////////////////////////////////////////");
 //                String lastResponseDate = XMLUtil.getPageModificationDate(xml);
 //
-//    //            System.out.println(lastResponseDate);
-//    //            System.out.println(XMLUtil.toString(xml));
-//    //            System.out.println("//////////////////////////////////////////////////////////");
+//    //            logger.info(lastResponseDate);
+//    //            logger.info(XMLUtil.toString(xml));
+//    //            logger.info("//////////////////////////////////////////////////////////");
 //                org.dbpedia.extraction.sources.Source wikiPageSource = XMLSource.fromXML((Elem)element);
 //
 //                LiveExtractionManager.extractFromPage((Elem)element);
@@ -281,31 +281,31 @@ public class Main
 //
 //                /*
 //                ///////////////////////////Start of my code//////////////////////////
-//                //System.out.println(((Record)record).getMetadata());
+//                //logger.info(((Record)record).getMetadata());
 //                //org.dbpedia.extraction.wikiparser.WikiTitle t= new org.dbpedia.extraction.wikiparser.WikiTitle("Template:Automobile");
 //                WikiTitle t = LiveExtractionManager.ConstructWikiTitle();
 //
 //                WikiTitle TestTitle = WikiTitle.parse(((Record) record).getMetadata().getTitle().getFullTitle(),
 //                        org.dbpedia.extraction.util.Language.apply(LiveOptions.options.get("language")));
 //
-//                //System.out.println(p.toXML());
-//                System.out.println("////////////////META DATA//////////////");
-//                //System.out.println(((Record) record).getMetadata());
+//                //logger.info(p.toXML());
+//                logger.info("////////////////META DATA//////////////");
+//                //logger.info(((Record) record).getMetadata());
 //                String strOAIID = ((Record) record).getMetadata().getOaiId();
 //                String strRevision = ((Record)record).getMetadata().getRevision();
 //                String []Parts = strOAIID.split(":");
-//                System.out.println("Page Title =" + TestTitle + ", Page ID = " + Parts[Parts.length-1] + ", Revision = " + strRevision);
-//                //System.out.println(((Record) record).getMetadata());
-//                System.out.println("////////////////CONTENT//////////////");
-//                //System.out.println(((Record) record).getContent().getXml());
+//                logger.info("Page Title =" + TestTitle + ", Page ID = " + Parts[Parts.length-1] + ", Revision = " + strRevision);
+//                //logger.info(((Record) record).getMetadata());
+//                logger.info("////////////////CONTENT//////////////");
+//                //logger.info(((Record) record).getContent().getXml());
 //
 //                WikiPage p = new WikiPage(TestTitle,Long.parseLong(Parts[Parts.length-1]) ,Long.parseLong(strRevision),
 //                        ((Record) record).getContent().getText());
-//                //System.out.println(p.toXML());
+//                //logger.info(p.toXML());
 //                SimpleWikiParser parser = new SimpleWikiParser();
 //                PageNode pageNode = parser.apply(p);
 //
-//                //System.out.println(Namespace);
+//                //logger.info(Namespace);
 //                //AbstractExtractor extra = new AbstractExtractor(null);
 //                //extra.apply(parser.apply(p));
 //                //new AbstractExtractor(parser.apply(p));
@@ -313,21 +313,21 @@ public class Main
 //
 //                LiveExtractionManager.extractFromPage(p.toXML());
 //                //XMLSource.fromXML(
-//                System.out.println(p.toXML().getClass());
+//                logger.info(p.toXML().getClass());
 //
 //                //ExtractionContext ec = new ExtractionContext();
 //
 //
-//                //System.out.println(pageNode);
+//                //logger.info(pageNode);
 //                //PageNode n = new PageNode(TestTitle, p.id, p.revision, false, false, )
-//                System.out.println("//////////////////////////////");
+//                logger.info("//////////////////////////////");
 //                return;
 //                ///////////////////////////End of my code//////////////////////////
 //                */
 //			}
 //			else if(record instanceof DeletionRecord) {
 //				DeletionRecord x = (DeletionRecord)record;
-//				System.out.println(x.getOaiId());
+//				logger.info(x.getOaiId());
 //			}
 //			else {
 //				throw new RuntimeException("Should not happen");
