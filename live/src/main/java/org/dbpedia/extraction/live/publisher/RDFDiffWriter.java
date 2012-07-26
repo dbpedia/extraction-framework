@@ -103,7 +103,7 @@ public class RDFDiffWriter
         logger.info("Attempting to write diff-file: " + fileName);
 
 		File outputFile = new File(fileName);
-        System.out.println(fileName);
+        logger.info(fileName);
 		OutputStream tmp = new FileOutputStream(outputFile);
 
 		OutputStream out;
@@ -159,7 +159,7 @@ public class RDFDiffWriter
         logger.info("Attempting to write diff-file: " + fileName);
 
 		File outputFile = new File(fileName);
-        System.out.println(fileName);
+        logger.info(fileName);
 		tmp = new FileOutputStream(outputFile);
 
 		if(zip) {

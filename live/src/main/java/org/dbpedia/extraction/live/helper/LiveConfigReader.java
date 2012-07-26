@@ -165,7 +165,7 @@ public class LiveConfigReader {
             }
 
 //            LiveExtractionConfigLoader.convertExtractorListToScalaList(extractorClasses);
-            System.out.println(extractors);
+            logger.info(extractors);
 
         }
         catch(Exception exp){

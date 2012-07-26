@@ -257,9 +257,9 @@ public class RDFUtil
         String str = Conversion.toStringNTriples(rdfGraph);
         Model result = ModelFactory.createDefaultModel();
 
-        System.out.println("-----");
-        System.out.println(str);
-        System.out.println("-----");
+        logger.info("-----");
+        logger.info(str);
+        logger.info("-----");
 
         //System.exit(0);
         result.read(new ByteArrayInputStream(str.getBytes()), null, "N-TRIPLE");

@@ -391,7 +391,7 @@ public class TripleDiff {
 
     public static String assembleTerms(ArrayList terms, String op) {
 		if(!(op.equals("&&") || op.equals("||"))){
-            System.out.println("wrong operator in assembleTerms TripleDiff.java " + op);
+            logger.info("wrong operator in assembleTerms TripleDiff.java " + op);
             System.exit(1);
         }
 		String retval = "";

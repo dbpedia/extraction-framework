@@ -76,7 +76,6 @@ public class LiveUpdateDestination implements Destination{
 	private Hash hash;
 
 	//helpers
-	private HashMap tiplesFromExtractors = new HashMap();
 	private JDBC jdbc;
 	private String subjectSPARULpattern;
 
@@ -469,7 +468,7 @@ public class LiveUpdateDestination implements Destination{
     private void removeOldRDFSAbstractOrComment(RDFTriple triple){
         String pattern = Util.convertToSPARULPattern(triple.getSubject()) + " " +
                 Util.convertToSPARULPattern(triple.getPredicate()) + " " + "?o"+" . \n";
-        String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
+//        String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
 //        ResultSet result = this._jdbc_sparul_execute(sparul);
 //
@@ -526,7 +525,7 @@ public class LiveUpdateDestination implements Destination{
 
 		Timer.start(timerName);
 		this._jdbc_clean_sparul_delete_subresources();
-		this._jdbc_sparul_delete_subject_not_static(graphURI,this.subjectSPARULpattern , TheContainer.get(LUD_SPARQLFILTER ) );
+		this._jdbc_sparul_delete_subject_not_static(this.subjectSPARULpattern , TheContainer.get(LUD_SPARQLFILTER ) );
 
 		Timer.stop(timerName);
 
@@ -544,7 +543,7 @@ public class LiveUpdateDestination implements Destination{
             (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
         Timer.start(timerName);
-        String sparul = "";
+        String sparul;
         String pattern = "";
         int directCount = 0;
         Model tmpModel = ModelFactory.createDefaultModel();
@@ -553,10 +552,8 @@ public class LiveUpdateDestination implements Destination{
         while(fromStoreIterator.hasNext()){
 
             Map.Entry pairs = (Map.Entry)fromStoreIterator.next();
-            String Hash = pairs.getKey().toString();
             HashMap triple = (HashMap)pairs.getValue();
 
-            //TODO this statement is modified because the triples returned from the store are without <>
             if(triple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
                     pattern += triple.get("s") + " " + triple.get("p") + " " + triple.get("o")+" . \n";
             else//The statement must be converted to SPARUL
@@ -572,7 +569,7 @@ public class LiveUpdateDestination implements Destination{
 
         }
 
-        sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
+//        sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
         int countbefore = 0;
         //TESTS>>>>>>>>>>>>
@@ -605,7 +602,7 @@ public class LiveUpdateDestination implements Destination{
 
                 strDeletedTriples += pattern;
 
-                sparul = "DELETE FROM <" + this.graphURI +"> { " + pattern + " }" + " WHERE {\n" + pattern + " }";
+//                sparul = "DELETE FROM <" + this.graphURI +"> { " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
                 boolean isSuccessful = this._jdbcDeleteTriples(pattern);
                 logger.info("Deleted = " + isSuccessful);
@@ -639,7 +636,7 @@ public class LiveUpdateDestination implements Destination{
                 while(fromStoreIterator.hasNext()){
                     Map.Entry pairs = (Map.Entry)fromStoreIterator.next();
 
-                    String Hash = pairs.getKey().toString();
+//                    String Hash = pairs.getKey().toString();
                     HashMap triple = (HashMap)pairs.getValue();
                     String testpattern = "where { " + triple.get("s") + " " + triple.get("p") + " " + triple.get("o")+" + } \n";
                     int testOnePattern = this._testwherepart(testpattern);
@@ -759,7 +756,7 @@ public class LiveUpdateDestination implements Destination{
 			return se.executeCount(testquery, this.getClass(), this.graphURI);
 	}
 
-    private void _jdbc_sparul_delete_subject_not_static(String graphURI, String subjectpattern, String filterWithLang){
+    private void _jdbc_sparul_delete_subject_not_static(String subjectPattern, String filterWithLang){
         //***********************
         //DELETE ALL NON STATIC TRIPLES
         //**********************
@@ -768,7 +765,7 @@ public class LiveUpdateDestination implements Destination{
         //do not delete special properties see below
         String tmpFilter = (filterWithLang.trim().length() > 0) ? "FILTER( \n" + filterWithLang + "). " : " ";
         String sparul = "DELETE FROM <" + this.graphURI + "> { " + this.subjectSPARULpattern + " ?p ?o } FROM <" + this.graphURI + "> ";
-        String where = " WHERE { " + subjectpattern + " ?p ?o . " + tmpFilter + '}';
+        String where = " WHERE { " + subjectPattern + " ?p ?o . " + tmpFilter + '}';
         sparul += where;
             //TESTS>>>>>>>>>>>>
         int countbefore = 0;
@@ -1010,7 +1007,6 @@ public class LiveUpdateDestination implements Destination{
 
     private ResultSet _jdbc_sparul_execute(String query){
         try{
-            boolean jdbc_result = false;
             ResultSet results = null;
             //dryRun means only to log the query without executing it
             boolean dryRun = Boolean.parseBoolean(LiveOptions.options.get("dryRun"));
@@ -1020,7 +1016,6 @@ public class LiveUpdateDestination implements Destination{
 
             if(dryRun){
                 logger.info(query);
-                jdbc_result = true;
             }else{
                 String virtuosoPl = "sparql " + query + "";
                 virtuosoPl = virtuosoPl.replace("\"\"\"", "\"");
@@ -1119,7 +1114,7 @@ public class LiveUpdateDestination implements Destination{
     private boolean _jdbc_ttlp_execute(String ntriples, String graphURI){
 
         try{
-            boolean jdbc_result = false;
+            boolean jdbc_result;
 
             boolean dryRun = Boolean.parseBoolean(LiveOptions.options.get("dryRun"));
             if(this.jdbc == null)
@@ -1195,12 +1190,12 @@ public class LiveUpdateDestination implements Destination{
      */
     private void _removeTriplesForExtractor(String extractorID){
         HashMap map = this.hash.getTriplesForExtractor(extractorID);
-        System.out.println(map);
+        logger.info(map);
     }
 
     private void writeAddedTriples(ArrayList arrTriplesToBeAdded){
 
-        System.out.println("///////////////////////////////////////ADDED TRIPLES////////////////////////////////");
+        logger.info("///////////////////////////////////////ADDED TRIPLES////////////////////////////////");
 
         for(int i = 0; i < arrTriplesToBeAdded.size(); i++){
             RDFTriple t = (RDFTriple)arrTriplesToBeAdded.get(i);
@@ -1208,21 +1203,21 @@ public class LiveUpdateDestination implements Destination{
 
         }
 
-        System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
+        logger.info("/////////////////////////////////////////////////////////////////////////////////////");
     }
 
      private void writeDeletedTriples(ArrayList arrTriplesToBeDeleted){
 
-        System.out.println("///////////////////////////////////////ADDED TRIPLES////////////////////////////////");
+        logger.info("///////////////////////////////////////ADDED TRIPLES////////////////////////////////");
 
         for(int i = 0; i < arrTriplesToBeDeleted.size(); i++){
             RDFTriple t = (RDFTriple) arrTriplesToBeDeleted.get(i);
-//            System.out.println(arrTriplesToBeDeleted.get(i));
+//            logger.info(arrTriplesToBeDeleted.get(i));
             logger.info(t.toNTriples());
 
         }
 
-        System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
+        logger.info("/////////////////////////////////////////////////////////////////////////////////////");
     }
 
 /**

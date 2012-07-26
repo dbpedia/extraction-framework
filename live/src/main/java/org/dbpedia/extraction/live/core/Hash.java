@@ -45,37 +45,23 @@ public class Hash{
     public String oaiId;
 
     private static JDBC jdbc;
-    private HashMap hashesFromStore=null;
+    private HashMap<String, HashMap> hashesFromStore=null;
     private boolean hasHash = false;
     private boolean active = false;
 
     private HashMap originalHashes=null;//This object will contain a copy of the original triples, in order to compare them later
 
-    public HashMap newJSONObject = new HashMap();
-    private HashMap originalJSONObject ;
-    //normal rdftriples
-    private HashMap addTriples = new HashMap();
+    public HashMap<String, HashMap<String, HashMap>> newJSONObject = new HashMap<String, HashMap<String, HashMap>>();
+
+    private HashMap<String, String> addTriples = new HashMap<String, String>();
     //special array with sparulpattern
-    private HashMap deleteTriples = new HashMap();
+    private HashMap<String, HashMap> deleteTriples = new HashMap<String, HashMap>();
 
     private String Subject = null; //TODO This member is not explicitly typed in the php file, so we must make sure of its type
 
     //I managed to move this member from function _compareHelper as the variables sequences used in deleting old
     // abstracts may coincide, so it is better to keep it as a static member and reset it from time to time.
     private static int delCount = 0 ;
-
-//    static
-//    {
-//        try
-//        {
-//            logger = Logger.getLogger(Class.forName("org.dbpedia.extraction.live.core.Hash").getName());
-//        }
-//        catch (Exception exp){
-//
-//        }
-//    }
-
-
 
     public static void initDB()
     {
@@ -105,9 +91,9 @@ public class Hash{
                 }
             }
             //test if table exists
-            String testSQLStatment = "SELECT TOP 1 * FROM " + TABLENAME;
+            String testSQLStatement = "SELECT TOP 1 * FROM " + TABLENAME;
 
-            ResultSet result = jdbc.exec(testSQLStatment, "Hash::initDB");
+            ResultSet result = jdbc.exec(testSQLStatement, "Hash::initDB");
 
             if(result == null)
             {
@@ -115,11 +101,11 @@ public class Hash{
                         + FIELD_RESOURCE+ " VARCHAR(510)," + FIELD_JSON_BLOB + " LONG VARCHAR ) ";
 
                 ResultSet ResultMake = jdbc.exec(SQLStatement, "Hash::initDB");
-                ResultSet ResultSecondTest = jdbc.exec(testSQLStatment, "Hash::initDB");
+                ResultSet ResultSecondTest = jdbc.exec(testSQLStatement, "Hash::initDB");
 
                 if(ResultMake == null || ResultSecondTest ==null)
                 {
-                    System.out.println("could not create table " + TABLENAME );
+                    logger.info("could not create table " + TABLENAME );
                     System.exit(1);
                 }
                 else
@@ -176,7 +162,7 @@ public class Hash{
 
         if(Boolean.parseBoolean(LiveOptions.options.get("LiveUpdateDestination.useHashForOptimization")))
         {
-            this.jdbc = JDBC.getDefaultConnection();
+            jdbc = JDBC.getDefaultConnection();
             this.hasHash = this._retrieveHashValues();
             this.active = true;
         }
@@ -186,10 +172,10 @@ public class Hash{
     {
         try
         {
-            String sqlStatement = "Select " + FIELD_RESOURCE + ", " + FIELD_JSON_BLOB + " From " + TABLENAME +" Where "
+            String sqlStatement = "SELECT " + FIELD_RESOURCE + ", " + FIELD_JSON_BLOB + " FROM " + TABLENAME +" WHERE "
                     + FIELD_OAIID +" = " + this.oaiId;
 
-            ResultSet jdbcResult= this.jdbc.exec(sqlStatement, "Hash._retrieveHashValues");
+            ResultSet jdbcResult= jdbc.exec(sqlStatement, "Hash._retrieveHashValues");
 
 
             //Calculate the number of rows returned by the query
@@ -208,9 +194,6 @@ public class Hash{
 
             jdbcResult.beforeFirst();
             String Temp = "";
-
-            //TODO In the original code there is a variable called $data that is initialized to false and is concatenated
-            //TODO with Temp
 
             while(jdbcResult.next())
             {
@@ -249,7 +232,7 @@ public class Hash{
 
             JSONParser parser = new JSONParser();
             parser.parse(Temp);
-            hashesFromStore = (HashMap) parser.parse(Temp, containerFactory);
+            hashesFromStore = (HashMap<String, HashMap>) parser.parse(Temp, containerFactory);
             originalHashes = (HashMap) parser.parse(Temp, containerFactory);
             //this.hashesFromStore = json_decode(Temp, true);
 
@@ -286,10 +269,10 @@ public class Hash{
 
         String jsonEncodedString = JSONValue.toJSONString(this.newJSONObject);
 
-        String sql = "Update " + TABLENAME + " Set " + FIELD_RESOURCE +" = ? , " + FIELD_JSON_BLOB + " = ? Where "
+        String sql = "UPDATE " + TABLENAME + " SET " + FIELD_RESOURCE +" = ? , " + FIELD_JSON_BLOB + " = ? WHERE "
                 + FIELD_OAIID + " = " + this.oaiId;
 
-        PreparedStatement stmt = this.jdbc.prepare(sql , "Hash::updateDB");
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::updateDB");
 
         boolean updateExecutedSuccessfully= jdbc.executeStatement(stmt, new String[]{this.Subject, jsonEncodedString} );
 
@@ -323,8 +306,9 @@ public class Hash{
 
         try {
             future.get(); // blocking call - the main thread blocks until task is done
-        } catch (InterruptedException e) {
-        } catch (ExecutionException e) {
+        }
+        catch (Exception exp) {
+            logger.error("Inserting new diff triples failed.");
         }
 
 
@@ -337,20 +321,20 @@ public class Hash{
             return;
         }
 
-        CallableStatement updateOldDiffTriplesStsmt = jdbc.prepareCallableStatement("update_dbpedia_triples_diff_for_resource(?,?,?,?)",
+        CallableStatement updateOldDiffTriplesStmt = jdbc.prepareCallableStatement("update_dbpedia_triples_diff_for_resource(?,?,?,?)",
                 "Hash::updateDB");
 
         String addedTripleString = delta.formulateAddedTriplesAsNTriples(true);
         String deletedTripleString = delta.formulateDeletedTriplesAsNTriples(true);
         String modifiedTripleString = delta.formulateModifiedTriplesAsNTriples(true);
 
-        jdbc.executeCallableStatement(updateOldDiffTriplesStsmt,new String[]{this.Subject, addedTripleString, deletedTripleString
+        jdbc.executeCallableStatement(updateOldDiffTriplesStmt,new String[]{this.Subject, addedTripleString, deletedTripleString
                 , modifiedTripleString});
 
         //Closing the underlying statement, in order to avoid overwhelming Virtuoso
         try{
-            if(updateOldDiffTriplesStsmt != null){
-                updateOldDiffTriplesStsmt.close();
+            if(updateOldDiffTriplesStmt != null){
+                updateOldDiffTriplesStmt.close();
             }
         }
         catch (SQLException sqlExp){
@@ -389,7 +373,7 @@ public class Hash{
         Timer.start(timerName);
 
         String jsonEncodedString = JSONValue.toJSONString(this.newJSONObject);
-        String sql = "Insert Into " + TABLENAME + "(" + FIELD_OAIID + ", " +
+        String sql = "INSERT INTO " + TABLENAME + "(" + FIELD_OAIID + ", " +
                 FIELD_RESOURCE + " , " + FIELD_JSON_BLOB + " ) VALUES ( ?, ? , ?  ) ";
 
         PreparedStatement stmt = jdbc.prepare(sql , "Hash::insertIntoDB");
@@ -514,15 +498,15 @@ public class Hash{
         }
 
         ArrayList <String>keys = new ArrayList<String>();
-        HashMap newHashSet = new HashMap();
+        HashMap<String, HashMap> newHashSet = new HashMap<String, HashMap>();
         for(int i=0; i<triples.size(); i++)
         {
-            HashMap tmp = new HashMap();
+            HashMap<String, String> tmp = new HashMap<String, String>();
 
             tmp.put("s", Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getSubject()));
             tmp.put("p",  Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getPredicate()));
             tmp.put("o",  Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getObject()));
-            tmp.put("triple", triples.get(i));
+            tmp.put("triple", triples.get(i).toString());
 
             //using keys guarantees set properties
             keys.add(((RDFTriple)triples.get(i)).getMD5HashCode());
@@ -534,28 +518,28 @@ public class Hash{
         while(tripleHashsetIterator.hasNext())
         {
             total++;
-            Map.Entry pairs = (Map.Entry)tripleHashsetIterator.next();
-            String hash = pairs.getKey().toString();
+            Map.Entry<String, HashMap> pairs = (Map.Entry<String, HashMap>)tripleHashsetIterator.next();
+            String hash = pairs.getKey();
 
             //triple exists
             if((this.hashesFromStore.get(extractorID) != null) &&(
-                    ((HashMap)this.hashesFromStore.get(extractorID)).get(hash)) != null)
+                    (this.hashesFromStore.get(extractorID)).get(hash)) != null)
             {
 
                 //This is the first triple to be added to the list of triples that should be removed from the store,
                 //so we must construct the Hashmap
-                HashMap tmpHashmap = null;
+                HashMap<String, HashMap> tmpHashmap = null;
                 if(this.newJSONObject.get(extractorID) == null){
-                    tmpHashmap = new HashMap();
+                    tmpHashmap = new HashMap<String, HashMap>();
                 }
                 else//Hashmap already exists, so we can use it directly 
-                    tmpHashmap = (HashMap)this.newJSONObject.get(extractorID);
+                    tmpHashmap = this.newJSONObject.get(extractorID);
 
-                tmpHashmap.put(hash, ((HashMap)this.hashesFromStore.get(extractorID)).get(hash));
+                tmpHashmap.put(hash, (HashMap)this.hashesFromStore.get(extractorID).get(hash));
 
                 this.newJSONObject.put(extractorID, tmpHashmap);
 
-                ((HashMap)this.hashesFromStore.get(extractorID)).remove(hash);
+                this.hashesFromStore.get(extractorID).remove(hash);
 
                 matchCount++;
             }
@@ -563,30 +547,29 @@ public class Hash{
             {
                 //Intialize the hashmap if it is already null
                 if(addTriples == null)
-                    addTriples = new HashMap();
+                    addTriples = new HashMap<String, String>();
 
-                this.addTriples.put(hash, ((HashMap)pairs.getValue()).get("triple"));
+                this.addTriples.put(hash, pairs.getValue().get("triple").toString());
 
                 //unset($tripleArray['triple']);
                 ((HashMap)pairs.getValue()).remove("triple");
 
-                //$this->newJSONObject[$extractorID][$hash] = $tripleArray;
-                HashMap destinationHashMap = (HashMap)this.newJSONObject.get(extractorID);
+                HashMap<String, HashMap> destinationHashMap = this.newJSONObject.get(extractorID);
                 destinationHashMap.put(hash, pairs.getValue());
 
                 addCount++;
             }
         }
 
-        HashMap hmHashAndTriples = (HashMap)hashesFromStore.get(extractorID);
+        HashMap hmHashAndTriples = hashesFromStore.get(extractorID);
         Iterator hashesForIterator = hmHashAndTriples.entrySet().iterator();
         while(hashesForIterator.hasNext())
         {
-            Map.Entry pairs = (Map.Entry)hashesForIterator.next();
+            Map.Entry<String, HashMap> pairs = (Map.Entry<String, HashMap>)hashesForIterator.next();
 
             //initialize the hashmap if it is already null 
             if(deleteTriples == null)
-                deleteTriples = new HashMap();
+                deleteTriples = new HashMap<String, HashMap>();
 
             this.deleteTriples.put(pairs.getKey(), pairs.getValue());
             delCount++;
@@ -704,12 +687,12 @@ public class Hash{
 
         //Timer.start("Hash.compare._generateHashSetFromTriples");
 
-        HashMap newHashSet = new HashMap();
+        HashMap<String, HashMap> newHashSet = new HashMap<String, HashMap>();
         for (Object objTriple : triples)
         {
             RDFTriple triple = (RDFTriple)objTriple;
 
-            HashMap tmp = new HashMap();
+            HashMap<String, String> tmp = new HashMap<String, String>();
             tmp.put("s", Util.convertToSPARULPattern(triple.getSubject()));
             tmp.put("p", Util.convertToSPARULPattern(triple.getPredicate()));
             tmp.put("o", Util.convertToSPARULPattern(triple.getObject()));
@@ -717,7 +700,7 @@ public class Hash{
             String hashValue = triple.getMD5HashCode();
 
             //We should add the triple also to the addTriples map in order to ensure that it is also inserted to the store   
-            addTriples.put(hashValue, triple);
+            addTriples.put(hashValue, triple.toString());
 
             //using keys guarantees set properties
             newHashSet.put(hashValue, tmp);
@@ -740,7 +723,7 @@ public class Hash{
     public HashMap getTriplesForExtractor(String extractorID){
 
         if((this._isExtractorInHash(extractorID)) && (this.hashesFromStore.get(extractorID) != null)){
-            return (HashMap)this.hashesFromStore.get(extractorID);
+            return this.hashesFromStore.get(extractorID);
         }
         return null;
     }
@@ -749,7 +732,7 @@ public class Hash{
         try{
             if(hashesFromStore == null)//No previous hashes for the current page exist, i.e. no further processing required
                 return;
-            HashMap mapHashesInStore = (HashMap)hashesFromStore.get(extractorID);
+            HashMap mapHashesInStore = hashesFromStore.get(extractorID);
             this.newJSONObject.put(extractorID, mapHashesInStore);
         }
         catch (Exception exp){

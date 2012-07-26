@@ -93,7 +93,7 @@ public class PageProcessor extends Thread{
                     Main.existingPagesTree.remove(requiredPage.pageID);
                     processPage(requiredPage.pageID);
                 }
-                System.out.println("Page # " + requiredPage + " has been removed and processed");
+                logger.info("Page # " + requiredPage + " has been removed and processed");
 
                 //Write response date to file in both cases of live update and mapping update
                 if(requiredPage.pagePriority == Priority.MappingPriority)
