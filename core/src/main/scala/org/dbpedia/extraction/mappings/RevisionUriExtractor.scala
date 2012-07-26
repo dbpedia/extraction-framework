@@ -6,8 +6,8 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 /**
- * Extracts links to the article revision that the data was extracted from.
- * http://www.w3.org/ns/prov#wasDerivedFrom
+ * Extracts links to the article revision that the data was extracted from, e.g.
+ * <http://dbpedia.org/resource/Foo> <http://www.w3.org/ns/prov#wasDerivedFrom> <http://en.wikipedia.org/wiki/Foo?oldid=123456> .
  */
 class RevisionUriExtractor (
   context: {
@@ -23,7 +23,7 @@ extends Extractor
 
   private val quad = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.RevisionUris, derivedFromProperty, null) _
 
-  override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
-    Seq(quad(subjectUri, node.sourceUri, node.sourceUri))
+  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+    Seq(quad(subjectUri, page.sourceUri, page.sourceUri))
   }
 }
