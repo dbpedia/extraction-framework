@@ -184,7 +184,7 @@ public class Publisher extends Thread{
 
     public void initSync(){
         try{
-            String configFileName  = "./live/live.ini";
+            String configFileName  = "./live.ini";
             File configFile = new File(configFileName);
 
             Map<String, String> config = loadIniFile(configFile);

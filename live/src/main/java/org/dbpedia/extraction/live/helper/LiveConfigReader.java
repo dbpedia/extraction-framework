@@ -32,7 +32,7 @@ public class LiveConfigReader {
 
     private static Logger logger = Logger.getLogger(LiveConfigReader.class);
     // private static DOMParser parser = new DOMParser();
-    private static final String liveConfigFile = "./live/live.xml";
+    private static final String liveConfigFile = "./live.xml";
 
     private static DocumentBuilderFactory dbFactory;
     private static DocumentBuilder dBuilder;
@@ -165,7 +165,7 @@ public class LiveConfigReader {
             }
 
 //            LiveExtractionConfigLoader.convertExtractorListToScalaList(extractorClasses);
-            logger.info(extractors);
+            System.out.println(extractors);
 
         }
         catch(Exception exp){
