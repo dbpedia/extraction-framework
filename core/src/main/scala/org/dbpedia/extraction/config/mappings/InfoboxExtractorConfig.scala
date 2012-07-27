@@ -20,6 +20,6 @@ object InfoboxExtractorConfig
     val TrailingNumberRegex = """[0-9]+$""".r
     
     // Template Statistics (not valid triples => do not load / disable in live)
-    val extractTemplateStatistics = 0 //1-> yes, 0->no
+    val extractTemplateStatistics = false 
 
 }
