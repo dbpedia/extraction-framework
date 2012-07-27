@@ -40,9 +40,9 @@ awk '{if ($1 != "#") { if ($2 != last) {last = $2; close(file); counter++; len =
 du -B 1 -s */* | awk '{split($2, arr, "/"); if (arr[2] != "index.html") { if (name == arr[1]) { system("rm -fr " dir); print dir " <<< gone"; gone += size } else if (name != "") { print dir " <<< kept"; kept += size } name = arr[1]; size = $1; dir = $2 } } END {print dir " <<< kept"; print gone / 1024 / 1024 / 1024; print kept / 1024 / 1024 / 1024 }'
 
 # for all .gz files, print packed size in bytes, lines, unpacked size in bytes, store in packed-lines-bytes.gz.txt
-for file in $(find -name '*.gz' | sort) ; do echo -n $file ; stat --printf=' %s ' $file ; gzip -d <$file | wc -cl ; done &>packed-lines-bytes.gz.txt &
-# for all .bz2 files, print packed size in bytes, lines, unpacked size in bytes, store in packed-lines-bytes.bz2.txt
-for file in $(find -name '*.bz2' | sort) ; do echo -n $file ; stat --printf=' %s ' $file ; bzip2 -d <$file | wc -cl ; done &>packed-lines-bytes.bz2.txt &
+for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done >packed-lines-bytes.gz.txt
+# for all .gz files, print name without leading './' and trailing '.gz', print lines, bytes, gzip size, store in lines-bytes-packed.txt
+for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done | awk '{sub(/^\.\//, "", $1); sub(/.gz$/, "", $1); print $1 " lines:" $3 " bytes:" $4 " gzip:" $2}' >lines-bytes-packed.txt
 
 # rename all files for which a -redirected dataset now exists to -unredirected
 find -mindepth 3 -type f | grep -E '(disambiguations|infobox-properties|mappingbased-properties|page-links|persondata|topical-concepts)' | grep -v -E '(specific-mappingbased|redirected)' | awk '{new=$0; sub(/\.\//, "", new); sub(/\./, "-unredirected.", new); system("echo mv " $0 " " new)}'
