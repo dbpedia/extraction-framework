@@ -46,3 +46,6 @@ for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip
 
 # rename all files for which a -redirected dataset now exists to -unredirected
 find -mindepth 3 -type f | grep -E '(disambiguations|infobox-properties|mappingbased-properties|page-links|persondata|topical-concepts)' | grep -v -E '(specific-mappingbased|redirected)' | awk '{new=$0; sub(/\.\//, "", new); sub(/\./, "-unredirected.", new); system("echo mv " $0 " " new)}'
+
+# create symbolic links for all *.bz2 files from old directory and name structure to new one
+find /home/release/wikipedia -maxdepth 3 -name '*.bz2' | grep -v -E '(ontology.owl|pages-articles.xml)' | env LC_ALL=C sort | while read path ; do file=${path##*/} ; lang=${file%%wiki*} ; tail=${file#*-*-} ; name=${tail%%.*} ; suffix=${tail#*.} ; echo $path ; ln -s $path 3.8/$lang/${name//-/_}_$lang.$suffix ; done
