@@ -35,7 +35,7 @@ object WikiUtil
      * Replaces multiple spaces (U+0020) by one, removes spaces from start and end, 
      * replaces spaces by underscores, and percent-encodes the following characters:
      * 
-     * "#%<>?[\\]^`{|}
+     * "#%<>?[\]^`{|}
      *
      * The result is usable in most parts of a IRI. The ampersand '&' is not escaped though.
      * 
