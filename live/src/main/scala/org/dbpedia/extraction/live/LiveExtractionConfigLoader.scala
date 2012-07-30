@@ -328,7 +328,7 @@ object LiveExtractionConfigLoader extends ActionListener
   }
 
   private class LiveConfig(){
-    val xmlConfigTree = XML.loadFile("D:/Leipzig University/DBpediaExtraction/live/live.config");
+    val xmlConfigTree = XML.loadFile("./live.config");
     var currentNode = xmlConfigTree \\ "extractor";
     println(currentNode.toString)
   }

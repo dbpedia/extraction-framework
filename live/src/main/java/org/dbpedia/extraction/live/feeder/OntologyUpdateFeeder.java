@@ -49,9 +49,9 @@ public class OntologyUpdateFeeder extends Thread {
     public static void main(String[] args)
         throws Exception
     {
-        PropertyConfigurator.configure("live/log4j.properties");
+        PropertyConfigurator.configure("log4j.properties");
 
-        Ini ini = new Ini(new File("live/cfg/mappings.dbpedia.org/config.ini"));
+        Ini ini = new Ini(new File("cfg/mappings.dbpedia.org/config.ini"));
 
         OntologyUpdateFeederConfig config = new OntologyUpdateFeederConfig();
         ini.get("HARVESTER").to(config);
@@ -59,7 +59,7 @@ public class OntologyUpdateFeeder extends Thread {
         ini.get("PROPERTY_DEFINITION_EXTRACTOR").to(config);
         ini.get("LOGGING").to(config);
 
-        File lastResponseDateFile = new File("live/cfg/mappings.dbpedia.org/last-response-date.txt");
+        File lastResponseDateFile = new File("cfg/mappings.dbpedia.org/last-response-date.txt");
 
         String startDate = config.isStartNow()
                 ? LastResponseDateManager.getNow()
@@ -72,7 +72,7 @@ public class OntologyUpdateFeeder extends Thread {
 
         logger.info("Loading uri namespaces");
         Model prefixModel = ModelFactory.createDefaultModel();
-        InputStream in = new FileInputStream(new File("live/cfg/mappings.dbpedia.org/prefixes.ttl"));
+        InputStream in = new FileInputStream(new File("cfg/mappings.dbpedia.org/prefixes.ttl"));
         prefixModel.read(in, null, "TTL");
         in.close();
         Map<String, String> prefixMap = prefixModel.getNsPrefixMap();
