@@ -49,3 +49,6 @@ find -mindepth 3 -type f | grep -E '(disambiguations|infobox-properties|mappingb
 
 # create symbolic links for all *.bz2 files from old directory and name structure to new one
 find /home/release/wikipedia -maxdepth 3 -name '*.bz2' | grep -v -E '(ontology.owl|pages-articles.xml)' | env LC_ALL=C sort | while read path ; do file=${path##*/} ; lang=${file%%wiki*} ; tail=${file#*-*-} ; name=${tail%%.*} ; suffix=${tail#*.} ; echo $path ; ln -s $path 3.8/$lang/${name//-/_}_$lang.$suffix ; done
+
+# generate wiki syntax for page like http://wiki.dbpedia.org/DumpDatesDBpedia38
+find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/, "", $2); print "||" $2 "|" substr($3,1,4) "-" substr($3,5,2) "-" substr($3,7,2) "||"}'
