@@ -2,15 +2,21 @@ package org.dbpedia.extraction.scripts
 
 object CreateDownloadPage {
   
+  val current = "3.8"
+    
+  val previous = Array("3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
+  
+  val dumpDates = "in late May / early June 2012"
+  
   def main(args: Array[String]) {
-    print(intro("3.7", "3.6", "3.5.1", "3.0RC"))
+    print(intro)
   }
   
   /**
    * @param current current version number, e.g. "3.7"
    * @param previous previous version numbers, e.g. "3.6", "3.5.1", "3.0RC"
    */
-  def intro(current: String, previous: String *): String = {
+  def intro: String = {
 "==DBpedia "+current+" Downloads==\n"+
 "\n"+
 "This pages provides downloads of the DBpedia datasets. The DBpedia datasets are licensed under the terms of the " +
@@ -24,6 +30,12 @@ object CreateDownloadPage {
 "\n"+
 "See also the ((ChangeLog change log)) for recent changes and developments.\n"+
 "\n"+
-"{{ToC numerate=1 from=h2 to=h2}}\n"
+"{{ToC numerate=1 from=h2 to=h2}}\n" +
+"\n" +
+"=== Wikipedia Input Files ===\n" +
+"\n" +
+"The datasets were extracted from ((http://dumps.wikimedia.org/ Wikipedia dumps)) generated " +
+dumpDates+" (see also all ((DumpDatesDBpedia"+current.replace(".", "")+" specific dates and times)))."
   }
+  
 }
