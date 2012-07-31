@@ -1,5 +1,11 @@
 package org.dbpedia.extraction.scripts
 
+import java.util.Locale
+import java.io.File
+import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.scripts.IOUtils.readLines
+import scala.collection.mutable.HashMap
+
 abstract class Fileset(
   val name: String,
   val file: String,
@@ -7,26 +13,29 @@ abstract class Fileset(
   val formats: List[String],
   val languages: Boolean
 ) {
-  def fullName(language: String, suffix: String)
+  def path(language: String, suffix: String)
+  val anchor = name.replace(" ", "").toLowerCase(Locale.ENGLISH)
 }
 
 class Dataset(name: String, file: String, text: String)
 extends Fileset(name, file, text, List("nt", "nq"), true)
 {  
-  override def fullName(language: String, suffix: String) = "/"+language+"/"+file+"_"+language+"."+suffix+".bz2"
+  override def path(language: String, suffix: String) = "/"+language+"/"+file+"_"+language+"."+suffix+".bz2"
 }
 
 class Linkset(name: String, file: String, text: String)
 extends Fileset(name, file, text, List("nt"), false)
 {
-  override def fullName(language: String, suffix: String) = "/links/"+file+"_links."+suffix+".bz2"
+  override def path(language: String, suffix: String) = "/links/"+file+"_links."+suffix+".bz2"
 }
 
 class Ontology(name: String, file: String, text: String)
 extends Fileset(name, file, text, List("owl"), false)
 {
-  override def fullName(language: String, suffix: String) = "/"+file+"."+suffix+".bz2"
+  override def path(language: String, suffix: String) = "/"+file+"."+suffix+".bz2"
 }
+
+class Numbers(val name: String, val lines: Int, val bytes: Long, val gzip: Long, val bzip2: Long)
 
 object CreateDownloadPage {
   
@@ -58,7 +67,7 @@ new Dataset("Geographic Coordinates", "geo_coordinates", "//Geographic coordinat
 new Dataset("Raw Infobox Properties", "infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Ontology Infobox Properties (/ontology/ namespace) should always be preferred over this data.//"),
 new Dataset("Raw Infobox Property Definitions", "infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
 new Dataset("Homepages", "homepages", "//Links to homepages of persons, organizations etc.//"),
-new Dataset("Persondata", "persondata", "//Information about persons (date and place of birth etc.) extracted from the English, French and German Wikipedia, represented using the FOAF vocabulary.//"),
+new Dataset("Persondata", "persondata", "//Information about persons (date and place of birth etc.) extracted from the English and German Wikipedia, represented using the FOAF vocabulary.//"),
 new Dataset("PND", "pnd", "//Dataset containing PND (Personennamendatei) identifiers.//"),
 new Dataset("Articles Categories", "article_categories", "//Links from concepts to categories using the SKOS vocabulary.//"),
 new Dataset("Categories (Labels)", "category_labels", "//Labels for Categories.//"),
@@ -115,7 +124,24 @@ new Linkset("Links to WordNet", "wordnet", "//Classification links to ((http://w
 new Linkset("Links to YAGO2", "yago", "//Dataset containing links between DBpedia and YAGO, YAGO type information for DBpedia resources and the YAGO class hierarchy. Currently maintained by Johannes Hoffart.//")
 )
 
+var numbers: Map[String, Numbers] = null
+
+def readNumbers(file: File): Unit = {
+  
+  val numbers = new HashMap
+  
+  // read lines in this format: 
+  // ontology.owl  lines: 4622  bytes: 811552  gzip: 85765  bzip2: 50140
+  // frwiki/20120601/frwiki-20120601-persondata.nq  lines: 2  bytes: 64  gzip: 61  bzip2: 85
+  // enwiki/20120601/links/revyu_links.nt  lines: 6  bytes: 1008  gzip: 361  bzip2: 441
+  readLines(file) { line =>
+    
+  }
+}
+
 def main(args: Array[String]) {
+  require(args != null && args.length == 1 && args(0).nonEmpty, "need 1 arg: file containing lines, unpacked and packed sizes of data files")
+  readNumbers(new File(args(0)))
   print(main)
   print(f)
 }
