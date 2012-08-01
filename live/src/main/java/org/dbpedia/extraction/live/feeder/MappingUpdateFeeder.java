@@ -80,7 +80,6 @@ public class MappingUpdateFeeder extends Thread{
 
                 //Last modification date of the mapping
                 String lastResponseDate = XMLUtil.getPageModificationDate(doc);
-                logger.info("lastResponseDate = " + lastResponseDate);
                 MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, lastResponseDate);
 
             }
