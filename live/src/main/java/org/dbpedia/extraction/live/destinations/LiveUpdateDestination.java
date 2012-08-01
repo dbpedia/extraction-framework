@@ -364,7 +364,7 @@ public class LiveUpdateDestination implements Destination{
                 UpdateTriplesWithTimeLimit triplesUpdaterWithLimit = new UpdateTriplesWithTimeLimit();
                 FutureTask<Integer> updateExecutionTask = new FutureTask<Integer>(triplesUpdaterWithLimit);
                 try{
-                    timedCall(updateExecutionTask, 1, TimeUnit.MINUTES);
+                    timedCall(updateExecutionTask, 30, TimeUnit.SECONDS);
                 }
                 catch (Exception exp){
 
@@ -375,11 +375,12 @@ public class LiveUpdateDestination implements Destination{
                     UpdateTriplesPrimarilyWithTimeLimit triplesUpdaterPrimarilyWithLimit = new UpdateTriplesPrimarilyWithTimeLimit();
                     FutureTask<Integer> primarilyUpdateExecutionTask = new FutureTask<Integer>(triplesUpdaterPrimarilyWithLimit);
                     try{
-                        timedCall(updateExecutionTask, 2, TimeUnit.MINUTES);
+                        timedCall(primarilyUpdateExecutionTask, 1, TimeUnit.MINUTES);
                     }
                     catch (TimeoutException timeoutExp){
                         logger.error("Updating instance " + this.uri + " FAILED, both with main and primary methods...");
                         logger.error("Instance " + this.uri + " not updated");
+                        jdbc.reconnect();
                     }
 
                 }
