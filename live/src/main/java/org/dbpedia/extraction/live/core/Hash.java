@@ -53,7 +53,7 @@ public class Hash{
 
     public HashMap<String, HashMap<String, HashMap>> newJSONObject = new HashMap<String, HashMap<String, HashMap>>();
 
-    private HashMap<String, String> addTriples = new HashMap<String, String>();
+    private HashMap<String, RDFTriple> addTriples = new HashMap<String, RDFTriple>();
     //special array with sparulpattern
     private HashMap<String, HashMap> deleteTriples = new HashMap<String, HashMap>();
 
@@ -501,12 +501,12 @@ public class Hash{
         HashMap<String, HashMap> newHashSet = new HashMap<String, HashMap>();
         for(int i=0; i<triples.size(); i++)
         {
-            HashMap<String, String> tmp = new HashMap<String, String>();
+            HashMap<String, Object> tmp = new HashMap<String, Object>();
 
             tmp.put("s", Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getSubject()));
             tmp.put("p",  Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getPredicate()));
             tmp.put("o",  Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getObject()));
-            tmp.put("triple", triples.get(i).toString());
+            tmp.put("triple", triples.get(i));
 
             //using keys guarantees set properties
             keys.add(((RDFTriple)triples.get(i)).getMD5HashCode());
@@ -547,9 +547,9 @@ public class Hash{
             {
                 //Intialize the hashmap if it is already null
                 if(addTriples == null)
-                    addTriples = new HashMap<String, String>();
+                    addTriples = new HashMap<String, RDFTriple>();
 
-                this.addTriples.put(hash, pairs.getValue().get("triple").toString());
+                this.addTriples.put(hash, (RDFTriple)pairs.getValue().get("triple"));
 
                 //unset($tripleArray['triple']);
                 ((HashMap)pairs.getValue()).remove("triple");
@@ -700,7 +700,7 @@ public class Hash{
             String hashValue = triple.getMD5HashCode();
 
             //We should add the triple also to the addTriples map in order to ensure that it is also inserted to the store   
-            addTriples.put(hashValue, triple.toString());
+            addTriples.put(hashValue, triple);
 
             //using keys guarantees set properties
             newHashSet.put(hashValue, tmp);

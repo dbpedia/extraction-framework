@@ -367,9 +367,20 @@ public class LiveUpdateDestination implements Destination{
                     timedCall(updateExecutionTask, 1, TimeUnit.MINUTES);
                 }
                 catch (Exception exp){
+
+//                    updateTriplesPrimarily();
+
                     //If normal update process fails with the allowed timeframe, then we should use the primary update
                     //strategy
-                    updateTriplesPrimarily();
+                    UpdateTriplesPrimarilyWithTimeLimit triplesUpdaterPrimarilyWithLimit = new UpdateTriplesPrimarilyWithTimeLimit();
+                    FutureTask<Integer> primarilyUpdateExecutionTask = new FutureTask<Integer>(triplesUpdaterPrimarilyWithLimit);
+                    try{
+                        timedCall(updateExecutionTask, 2, TimeUnit.MINUTES);
+                    }
+                    catch (TimeoutException timeoutExp){
+                        logger.error("Updating instance " + this.uri + " FAILED, both with main and primary methods...");
+                        logger.error("Instance " + this.uri + " not updated");
+                    }
 
                 }
             }
@@ -824,7 +835,7 @@ public class LiveUpdateDestination implements Destination{
 
     private void _jdbc_clean_sparul_delete_subresources(String log){
 		Resource subject = this.uri;
-		String sparul = "DELETE FROM <" + this.graphURI + ">	{ ?subresource ?p  ?o .  } FROM <" + this.graphURI + ">";
+		String sparul = "DELETE FROM <" + this.graphURI + ">	{ ?subresource ?p  ?o .  }"; //FROM <" + this.graphURI + ">";
         String where = " where { " + this.subjectSPARULpattern + " ?somep ?subresource . ?subresource ?p  ?o . FILTER (?subresource LIKE <"
         + subject + "/%>)}";
 		sparul += where ;
@@ -1220,7 +1231,7 @@ public class LiveUpdateDestination implements Destination{
         logger.info("/////////////////////////////////////////////////////////////////////////////////////");
     }
 
-/**
+    /**
      * This class implements Callable interface, which provides the ability to place certain time limit on the execution
      * time of a function, so it must end after a specific time limit.
      * This helps in case of hanging while extraction from a page
@@ -1253,4 +1264,37 @@ public class LiveUpdateDestination implements Destination{
         }
 
     }
+
+    /**
+     * It the complement of class UpdateTriplesWithTimeLimit, that should be used in case of failure of the main
+     * update methodology, but we should also run it within a specific timeframe in order not to block the extraction process
+     * upon a failure in Virtuoso, e.g. Stack Overflow error sometimes occurs and the deletion process block and so the
+     * whole system blocks.
+     * Ideally the timeframe assigned to it should be higher than that assigned to UpdateTriplesWithTimeLimit
+     */
+    private class UpdateTriplesPrimarilyWithTimeLimit implements Callable<Integer> {
+
+        public UpdateTriplesPrimarilyWithTimeLimit(){
+
+        }
+        public Integer call(){
+
+            logger.info("Inside hasHash In thread "+ Thread.currentThread().getId());
+
+            String timerName = "LiveUpdateDestination._primaryStrategy" +
+                    (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
+
+            Timer.start(timerName);
+            _primaryStrategy();
+            Timer.stop(timerName);
+
+            hash.deleteFromDB();
+            hash.insertIntoDB();
+
+            return 0;
+
+        }
+
+    }
+
 }
