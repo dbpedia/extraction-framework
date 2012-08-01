@@ -256,7 +256,7 @@ public class JDBC{
     /**
      * This function closes the connection in order to release all resources it holds, and creates a new connection  
      */
-    private  void reconnect(){
+    public void reconnect(){
         try{
             con.close();
             con = null;
