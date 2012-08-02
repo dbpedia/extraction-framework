@@ -80,37 +80,6 @@ public class Main
 	public static void main(String[] args)
 		throws Exception
 	{
-//        TestJDBCConnection con = new TestJDBCConnection();
-//        //con.Connect();
-//        //con.convertUnicode();
-//        TestJDBCConnection.Connect();
-//        //con.Connect();
-//        URIImpl uri = new URIImpl("http://www.w3.org/2001/XMLSchema#date");
-//        //logger.info(con.toNTriples(new LiteralImpl("Hello World",new URIImpl("http://www.w3.org/2001/XMLSchema#date"))));
-//        logger.info(uri.toString());
-        //Mapping update testing
-        
-//        String strDate = "2010-07-25T18:55:52Z";
-//        String[] arr = strDate.split("-|:|T|Z");
-
-//        logger.info(Util.getDBpediaCategoryPrefix("en"));
-
-
-        /*
-        authenticate("dbpedia", Files.readFile(new File("pw.txt")).trim());
-        Iterator<Document> myTestIterator = new OAIUnmodifiedRecordIterator(
-                "http://en.wikipedia.org/wiki/Special:OAIRepository", "2011-02-19T14:20:53Z", "2011-02-19T14:29:53Z");
-        while(myTestIterator.hasNext()){
-            Document doc = myTestIterator.next();
-
-            //Extract the page identifier from the XML returned. It is available in a tag <identifier>
-            NodeList nodes = doc.getElementsByTagName("identifier");
-            String strFullPageIdentifier = nodes.item(0).getChildNodes().item(0).getNodeValue();
-            String startDate = XMLUtil.getPageModificationDate(doc);
-
-            logger.info(strFullPageIdentifier + "        " + startDate);
-
-        } */
 
         readOldStatistics();
 
@@ -145,217 +114,6 @@ public class Main
 
         PublishedDataCompressor compressor = new PublishedDataCompressor("PublishedDataCompressor", Thread.MIN_PRIORITY);
 
-
-        /*
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(2011, 04, 01, 22, 0, 0);
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-
-        String str = dateFormatter.format(new Date());
-
-
-        Iterator<Document> myTestIterator = new OAIUnmodifiedRecordIterator(
-                "http://live.dbpedia.org/syncwiki/Special:OAIRepository", "2011-02-19T14:20:00Z", "2011-02-19T14:29:59Z");
-        while(myTestIterator.hasNext()){
-            Document doc = myTestIterator.next();
-            NodeList nodes = doc.getElementsByTagName("identifier");
-
-            for(int i=0; i < nodes.getLength(); i++){
-                String strFullPageIdentifier = nodes.item(i).getChildNodes().item(0).getNodeValue();
-                String startDate = XMLUtil.getPageModificationDate(doc);
-
-                logger.info("Start date = " + startDate);
-                int colonPos = strFullPageIdentifier.lastIndexOf(":");
-                String strPageID = strFullPageIdentifier.substring(colonPos+1);
-
-                long pageID = new Long(strPageID);
-                logger.info("Page ID = " + pageID);
-
-            }
-
-
-        }
-
-        */
-
-//        logger.info(Util.getDBpediaCategoryPrefix("en"));
-
-//        MappingsUpdate update = new MappingsUpdate(4,"High Priority process");
-//        //MyThread thr1 = new MyThread(3, "Low Priority");
-//        LiveFeeder feeder = new LiveFeeder();
-//        PageQueueProcessor processor = new PageQueueProcessor();
-
-        //update.startThread();
-        //update.startThread();
-
-
-        //update.getMappingsUpdate();
-
-//        update.testPriorityQueue();
-        //TestMappingPages.GetMappingPages();
-
-//        Assert.assertEquals(5,5);
-//
-//		authenticate("dbpedia", Files.readFile(new File("pw.txt")).trim());
-//
-//		String oaiUri = "http://en.wikipedia.org/wiki/Special:OAIRepository";
-//
-//		Calendar calendar = new GregorianCalendar();
-//		calendar.set(2010, 06, 10, 22, 0, 0);
-//
-//		//Date startDate = calendar.getTime();
-//		String startDate = "2010-06-01T15:00:00Z";
-//
-//		int pollInterval = 30;
-//		int sleepInterval = 5;
-//		String lastResponseDateFile = "lastResponseDate.dat";
-//
-//        String propsedStartDate = getLastResponseDate(lastResponseDateFile);
-//        if(propsedStartDate != null)
-//            startDate = propsedStartDate;
-//
-//
-//		int articleDelay = 0;
-//		boolean articleRenewal = false;
-//		String baseWikiUri = "http://en.wikipedia.org/wiki/";
-//		String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
-//
-//
-//		 // Create an iterator which keeps polling the OAIRepository
-//		Iterator<Document> recordIterator =
-//			OAIUtil.createEndlessRecordIterator(oaiUri, startDate, pollInterval * 1000, sleepInterval * 1000);
-//
-//        //int NumberOfDocument = 1;
-//        //Caller.Call();
-//        //Caller MyCaller = new Caller();
-//        //logger.info(recordIterator.getClass());
-//        while(recordIterator.hasNext())
-//        {
-//            try
-//            {
-//                Document xml = recordIterator.next();
-//                NodeToRecordTransformer transformer = new NodeToRecordTransformer(baseWikiUri, oaiUri, oaiPrefix);
-//                Record currentNodeRec = (Record)transformer.transform(xml);
-//
-//                scala.xml.Node element = XML.loadString(XMLUtil.toString(xml));
-//    //            logger.info("//////////////////////////////////////////////////////////");
-//                String lastResponseDate = XMLUtil.getPageModificationDate(xml);
-//
-//    //            logger.info(lastResponseDate);
-//    //            logger.info(XMLUtil.toString(xml));
-//    //            logger.info("//////////////////////////////////////////////////////////");
-//                org.dbpedia.extraction.sources.Source wikiPageSource = XMLSource.fromXML((Elem)element);
-//
-//                LiveExtractionManager.extractFromPage((Elem)element);
-//                writeLastResponseDate(lastResponseDateFile, lastResponseDate);
-//            }
-//            catch(Exception exp)
-//            {
-//                Logger logger = Logger.getLogger(Main.class);
-//                logger.error(ExceptionUtil.toString(exp));
-//            }
-//
-//        }
-//
-//		// Optional: Create an iterator which does not return elements unless
-//		// they have reached a certain age.
-//		// Concretely for Wikipedia articles this means:
-//		// Only return articles that have not been edited for at least x seconds
-//		TimeWindowIterator timeWindowIterator = null;
-//		if(articleDelay != 0) {
-//			timeWindowIterator = new TimeWindowIterator(recordIterator, articleDelay, false, articleRenewal);
-//			recordIterator = timeWindowIterator;
-//		}
-//
-//		// Transform the XML fragments to Java domain objects
-//        //This iterator is not needed any more
-//		Iterator<IRecord> iterator = new TransformIterator<Document, IRecord>(recordIterator, new NodeToRecordTransformer(baseWikiUri, oaiUri, oaiPrefix));
-//
-//
-//    		while(iterator.hasNext()) {
-//			IRecord record = iterator.next();
-//
-//
-//			if(record instanceof Record) {
-//
-//                /*
-//                ///////////////////////////Start of my code//////////////////////////
-//                //logger.info(((Record)record).getMetadata());
-//                //org.dbpedia.extraction.wikiparser.WikiTitle t= new org.dbpedia.extraction.wikiparser.WikiTitle("Template:Automobile");
-//                WikiTitle t = LiveExtractionManager.ConstructWikiTitle();
-//
-//                WikiTitle TestTitle = WikiTitle.parse(((Record) record).getMetadata().getTitle().getFullTitle(),
-//                        org.dbpedia.extraction.util.Language.apply(LiveOptions.options.get("language")));
-//
-//                //logger.info(p.toXML());
-//                logger.info("////////////////META DATA//////////////");
-//                //logger.info(((Record) record).getMetadata());
-//                String strOAIID = ((Record) record).getMetadata().getOaiId();
-//                String strRevision = ((Record)record).getMetadata().getRevision();
-//                String []Parts = strOAIID.split(":");
-//                logger.info("Page Title =" + TestTitle + ", Page ID = " + Parts[Parts.length-1] + ", Revision = " + strRevision);
-//                //logger.info(((Record) record).getMetadata());
-//                logger.info("////////////////CONTENT//////////////");
-//                //logger.info(((Record) record).getContent().getXml());
-//
-//                WikiPage p = new WikiPage(TestTitle,Long.parseLong(Parts[Parts.length-1]) ,Long.parseLong(strRevision),
-//                        ((Record) record).getContent().getText());
-//                //logger.info(p.toXML());
-//                SimpleWikiParser parser = new SimpleWikiParser();
-//                PageNode pageNode = parser.apply(p);
-//
-//                //logger.info(Namespace);
-//                //AbstractExtractor extra = new AbstractExtractor(null);
-//                //extra.apply(parser.apply(p));
-//                //new AbstractExtractor(parser.apply(p));
-//                //OntologyReader rdr = new OntologyReader();
-//
-//                LiveExtractionManager.extractFromPage(p.toXML());
-//                //XMLSource.fromXML(
-//                logger.info(p.toXML().getClass());
-//
-//                //ExtractionContext ec = new ExtractionContext();
-//
-//
-//                //logger.info(pageNode);
-//                //PageNode n = new PageNode(TestTitle, p.id, p.revision, false, false, )
-//                logger.info("//////////////////////////////");
-//                return;
-//                ///////////////////////////End of my code//////////////////////////
-//                */
-//			}
-//			else if(record instanceof DeletionRecord) {
-//				DeletionRecord x = (DeletionRecord)record;
-//				logger.info(x.getOaiId());
-//			}
-//			else {
-//				throw new RuntimeException("Should not happen");
-//			}
-//		}
-
-
-		//IHandler<DeletionRecord> deletionWorkflow = getDeletionWorkflow(ini);
-		//IHandler<Record> workflow = getWorkflow(ini);
-
-
-		// Set up the filter
-		//IFilter<RecordMetadata> metadataFilter = new DefaultDbpediaMetadataFilter();
-
-		//StatisticWrapperFilter<RecordMetadata> filterStats = new StatisticWrapperFilter<RecordMetadata>(metadataFilter);
-		//metadataFilter = filterStats;
-
-
-		/*
-		if(throughputEnabled) {
-			metadataFilter =
-				new StatisticWriterFilter<RecordMetadata>(
-						metadataFilter,
-						new FileWriter(
-								throughputFile,
-								throughputAppend), throughputInterval);
-		}
-		*/
 	}
 
     private static String getLastResponseDate(String strFileName)
@@ -444,17 +202,20 @@ public class Main
 
                         //We should write _instancesUpdatedIn5Minutes if it's not 0, otherwise we write instancesUpdatedIn5Minutes
                         //as the application may have started running less than 5 minutes ago
-                        int val = _instancesUpdatedIn5Minutes > 0? _instancesUpdatedIn5Minutes : instancesUpdatedIn5Minutes;
+//                        int val = _instancesUpdatedIn5Minutes > 0? _instancesUpdatedIn5Minutes : instancesUpdatedIn5Minutes;
+                        int val = _instancesUpdatedIn5Minutes > _instancesUpdatedInMinute ? _instancesUpdatedIn5Minutes : _instancesUpdatedInMinute;
                         writer.write(val + "\r\n");
 
                         //We should write _instancesUpdatedInHour if it's not 0, otherwise we write instancesUpdatedInHour
                         //as the application may have started running less than an hour ago
-                        val = _instancesUpdatedInHour > 0? _instancesUpdatedInHour : instancesUpdatedInHour;
+//                        val = _instancesUpdatedInHour > 0? _instancesUpdatedInHour : instancesUpdatedInHour;
+                        val = _instancesUpdatedInHour > _instancesUpdatedIn5Minutes ? _instancesUpdatedInHour : _instancesUpdatedIn5Minutes;
                         writer.write(val + "\r\n");
 
                         //We should write _instancesUpdatedInDay if it's not 0, otherwise we write instancesUpdatedInDay
                         //as the application may have started running less than a day ago
-                        val = _instancesUpdatedInDay > 0? _instancesUpdatedInDay : instancesUpdatedInDay;
+//                        val = _instancesUpdatedInDay > 0? _instancesUpdatedInDay : instancesUpdatedInDay;
+                        val = _instancesUpdatedInDay > _instancesUpdatedInHour ? _instancesUpdatedInDay : _instancesUpdatedInHour;
                         writer.write(val + "\r\n");
 
                         writer.write(totalNumberOfUpdatedInstances + "\r\n");
