@@ -8,6 +8,7 @@ import org.dbpedia.extraction.scripts.IOUtils.readLines
 import scala.collection.mutable.{Map,HashMap}
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import scala.collection.mutable.ArrayBuffer
 
 object CreateDownloadPage {
   
@@ -17,7 +18,7 @@ val downloads = "http://downloads.dbpedia.org/"
  
 val dumps = "http://dumps.wikimedia.org/"
   
-val suffix = ".bz2"
+val zipSuffix = ".bz2"
 
 val titles = new HashMap[String, String]()
 
@@ -54,18 +55,16 @@ def loadTitles(file: File): Unit = {
 }
 
 // path: dbpedia_3.8.owl, af/geo_coordinates_af.nq, links/revyu_links.nt
-class FileInfo(val path: String) {
+class FileInfo(val path: String, val title: String) {
   
   // example: 3.8/af/geo_coordinates_af.nq.bz2
-  val fullPath = current+"/"+path+suffix
+  val fullPath = current+"/"+path+zipSuffix
   
   // example: http://downloads.dbpedia.org/3.8/af/geo_coordinates_af.nq.bz2
   val downloadUrl = downloads+fullPath
   
   // example: http://downloads.dbpedia.org/preview.php?file=3.8_sl_af_sl_geo_coordinates_af.nq.bz2
   val previewUrl = downloads+"preview.php?file="+fullPath.replace("/", "_sl_")
-  
-  val title = titles(path)
 }
   
 abstract class Fileset(
@@ -76,7 +75,14 @@ abstract class Fileset(
   val languages: Boolean
 ) 
 {
-  def file(language: String, format: String): FileInfo
+  // null if data file didn't contain any info about this file
+  def file(language: String, modifier: String, format: String) = {
+    val p = path(language, modifier, format)
+    val t = titles.getOrElse(p, null)
+    if (t == null) null else new FileInfo(p, t)
+  }
+  
+  protected def path(language: String, modifier: String, format: String): String
   
   val anchor = name.replace(" ", "").toLowerCase(Locale.ENGLISH)
 }
@@ -85,21 +91,21 @@ class Ontology(name: String, file: String, text: String)
 extends Fileset(name, file, text, List("owl"), false)
 {
   // dbpedia_3.8.owl
-  override def file(language: String, format: String) = new FileInfo(file+"."+format)
+  override protected def path(language: String, modifier: String, format: String) = file+modifier+"."+format
 }
 
 class Dataset(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("nt", "nq"), true)
+extends Fileset(name, file, text, List("nt", "nq", "ttl"), true)
 {  
   // example: af/geo_coordinates_af.nt
-  override def file(language: String, format: String) = new FileInfo(language+"/"+file+"_"+language+"."+format)
+  override protected def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"_"+language+"."+format
 }
 
 class Linkset(name: String, file: String, text: String)
 extends Fileset(name, file, text, List("nt"), false)
 {
   // example: links/revyu_links.nt
-  override def file(language: String, format: String) = new FileInfo("links/"+file+"_links."+format)
+  override protected def path(language: String, modifier: String, format: String) = "links/"+file+modifier+"_links."+format
 }
 
 def tag(version: String): String = version.replace(".", "")
@@ -109,27 +115,38 @@ val previous = Array("3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "
 val dumpDates = "in late May / early June 2012"
   
 val allLanguages = 111
-  
+
+// en must be first. we use languages.drop(1) in Datasets(Boolean)
 val languages = Array("en","bg","ca","cs","de","el","es","fr","hu","it","ko","pl","pt","ru","sl","tr")
 
 val ontology =
 new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in OWL. See ((http://jens-lehmann.org/files/2009/dbpedia_jws.pdf our JWS paper)) for more details.//")
 
-val ontologyDatasets = List(
+val Datasets = new ArrayBuffer[List[Dataset]]
+
+{
+
+Datasets += List(
 new Dataset("Ontology Infobox Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the ontology-based extraction.//"),
 new Dataset("Ontology Infobox Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the ontology-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
 new Dataset("Ontology Infobox Properties (Specific)", "specific_mappingbased_properties", "//Infobox data from the ontology-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//")
 )
 
-val secondDatasets = List(
+Datasets += List(
 new Dataset("Titles", "labels", "//Titles of all Wikipedia Articles in the corresponding language.//"),
 new Dataset("Short Abstracts", "short_abstracts", "//Short Abstracts (max. 500 chars long) of Wikipedia articles//"),
 new Dataset("Extended Abstracts", "long_abstracts", "//Additional, extended English abstracts.//"),
-new Dataset("Images", "images", "//Main image and corresponding thumbnail from Wikipedia article.//"),
+new Dataset("Images", "images", "//Main image and corresponding thumbnail from Wikipedia article.//")
+)
+
+Datasets += List(
 new Dataset("Geographic Coordinates", "geo_coordinates", "//Geographic coordinates extracted from Wikipedia.//"),
 new Dataset("Raw Infobox Properties", "infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Ontology Infobox Properties (/ontology/ namespace) should always be preferred over this data.//"),
 new Dataset("Raw Infobox Property Definitions", "infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
-new Dataset("Homepages", "homepages", "//Links to homepages of persons, organizations etc.//"),
+new Dataset("Homepages", "homepages", "//Links to homepages of persons, organizations etc.//")
+)
+
+Datasets += List(
 new Dataset("Persondata", "persondata", "//Information about persons (date and place of birth etc.) extracted from the English and German Wikipedia, represented using the FOAF vocabulary.//"),
 new Dataset("PND", "pnd", "//Dataset containing PND (Personennamendatei) identifiers.//"),
 new Dataset("Inter-Language Links", "interlanguage_links", "//Dataset linking a DBpedia resource to the same or a related resource in other languages, extracted from the ((http://en.wikipedia.org/wiki/Help:Interlanguage_links inter-language links)) of a Wikipedia article.//"),
@@ -137,22 +154,33 @@ new Dataset("Bijective Inter-Language Links", "interlanguage_links_same_as", "//
 new Dataset("Non-bijective Inter-Language Links", "interlanguage_links_see_also", "//Dataset containing the inter-language links between a DBpedia resource and related resources in other languages that are not bijective, i.e. there is a link from a resource to a related resource, but no link pointing back. When inter-language links are not bijective, the Wikipedia articles are usually not about the same subject.//")
 )
 
-val thirdDatasets = List(
+Datasets += List(
 new Dataset("Articles Categories", "article_categories", "//Links from concepts to categories using the SKOS vocabulary.//"),
 new Dataset("Categories (Labels)", "category_labels", "//Labels for Categories.//"),
-new Dataset("Categories (Skos)", "skos_categories", "//Information which concept is a category and how categories are related using the SKOS Vocabulary.//"),
+new Dataset("Categories (Skos)", "skos_categories", "//Information which concept is a category and how categories are related using the SKOS Vocabulary.//")
+)
+
+Datasets += List(
 new Dataset("External Links", "external_links", "//Links to external web pages about a concept.//"),
 new Dataset("Links to Wikipedia Article", "wikipedia_links", "//Dataset linking DBpedia resource to corresponding article in Wikipedia.//"),
-new Dataset("Wikipedia Pagelinks", "page_links", "//Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.//"),
+new Dataset("Wikipedia Pagelinks", "page_links", "//Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.//")
+)
+
+Datasets += List(
 new Dataset("Redirects", "redirects", "//Dataset containing redirects between articles in Wikipedia.//"),
 new Dataset("Transitive Redirects", "redirects_transitive", "//Redirects dataset in which multiple redirects have been resolved and redirect cycles have been removed.//"),
-new Dataset("Disambiguation links", "disambiguations", "//Links extracted from Wikipedia ((http://en.wikipedia.org/wiki/Wikipedia:Disambiguation disambiguation)) pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.//"),
+new Dataset("Disambiguation links", "disambiguations", "//Links extracted from Wikipedia ((http://en.wikipedia.org/wiki/Wikipedia:Disambiguation disambiguation)) pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.//")
+)
+
+Datasets += List(
 new Dataset("Page IDs", "page_ids", "//Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.//"),
 new Dataset("Revision IDs", "revision_ids", "//Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from.//"),
 new Dataset("Revision URIs", "revision_uris", "//Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.//")
 )
 
-val linksets = List(
+}
+
+val Linksets = List(
 new Linkset("Links to Amsterdam Museum data", "amsterdammuseum", "//Links to((http://semanticweb.cs.vu.nl/lod/am/ Amsterdam Museum data)). Update mechanism: TODO.//"),
 new Linkset("Links to BBC Wildlife", "bbcwildlife", "//Links to ((http://www.bbc.co.uk/nature/wildlife BBC Wildlife)). Update mechanism: TODO.//"),
 new Linkset("Links to RDF Bookmashup", "bookmashup", "//Links between books in DBpedia and data about them provided by the ((http://www4.wiwiss.fu-berlin.de/bizer/bookmashup/ RDF Book Mashup)). Provided by Georgi Kobilarov. Update mechanism: unclear/copy over from previous release.//"),
@@ -193,11 +221,12 @@ new Linkset("Links to YAGO2", "yago", "//Dataset containing links between DBpedi
 def main(args: Array[String]) {
   require(args != null && args.length == 1 && args(0).nonEmpty, "need 1 arg: file containing data file paths and their content numbers")
   loadTitles(new File(args(0)))
-  // print(main)
-  print(f)
+  generate
 }
 
-def main: String = {
+def generate: Unit = {
+
+val s = new StringPlusser+
 mark("", "start")+
 "==DBpedia "+current+" Downloads==\n"+
 "\n"+
@@ -205,7 +234,7 @@ mark("", "start")+
 "((http://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License Creative Commons Attribution-ShareAlike License)) " +
 "and the ((http://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License GNU Free Documentation License)). " +
 "http://m.okfn.org/images/ok_buttons/od_80x15_red_green.png The downloads are provided as N-Triples and N-Quads, " +
-"where the N-Quads version contains additional provenance information for each statement. All files are bz2 packed.\n"+
+"where the N-Quads version contains additional provenance information for each statement. All files are ((http://www.bzip.org/ bzip2)) packed.\n"+
 "\n"+
 // ((Downloads36 DBpedia 3.6)), ((Downloads35 DBpedia 3.5.1)), ...
 "Older Versions: "+previous.map(version => "((Downloads"+tag(version)+" DBpedia "+version+"))").mkString(", ")+"\n"+
@@ -219,35 +248,107 @@ mark("", "start")+
 "The datasets were extracted from (("+dumps+" Wikipedia dumps)) generated "+dumpDates+
 " (see also all ((DumpDatesDBpedia"+tag(current)+" specific dates and times))).\n" +
 "\n" +
-include("f")+
-include("a")+
+include("Ontology")+
+include("DataEn")+
+include("DataI18N")+
 include("c")+
 include("d")+
-include("nlp")+
+include("NLP")+
 mark("", "end")
+
+write("", s.toString)
+
+datasets(false)
+datasets(true)
 }
   
-def f: String = {
+def ontologyPage: Unit = {
+  
+val page = "Ontology"
+
+val file = ontology.file(null, null, "owl")
+
+val s = new StringPlusser+
+mark(page, "start")+
+"===Ontology===\n"+
+"#||\n"+
+"||**Dataset**|**all languages**||\n"+
+"||((#"+ontology.anchor+" "+ontology.name+"))\n"+
+"|"+
+"<#<small>"+
+"<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a> "+
+"<small><a href=\""+file.previewUrl+"\">?</a></small>"+
+"</small>#>\n"+
+"||\n"+
+"||#\n"+
+mark(page, "end")
+
+write(page, s.toString)
+}
+
+def datasets(i18n: Boolean): Unit = {
+  
+val page = if (i18n) "DataI18N" else "DataEn"
 
 val s = new StringPlusser
 
-s+ 
-mark("f", "start")+
-"===Core Datasets===\n" +
-"**NOTE: You can find DBpedia dumps in "+allLanguages+" languages at our (("+downloads+current+"/ DBpedia download server)).**\n" +
-"\n" +
-"//Click on the dataset names to obtain additional information. Click on the question mark next to a download link to preview file contents.//\n" +
-"#||\n" +
+s+mark(page, "start")
+
+if (i18n) {
+s+
+"===i18n Datasets===\n"+
+"These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. ((Datasets#h18-19 more...))\n"+
+"\n"+
+"//CAUTION:// the URIs in these dumps have language-specific namespaces (e.g. http://el.dbpedia.org/...).\n"
+}
+else {
+s+
+"===Core Datasets===\n"+
+"These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. ((Datasets#h18-19 more...))\n"+
+"\n"+
+"The URIs in these dumps use the generic namespace http://dbpedia.org/ .\n"
+}
+
+s+
+"\n"+
+"**NOTE: You can find DBpedia dumps in "+allLanguages+" languages at our (("+downloads+current+"/ DBpedia download server)).**\n"+
+"\n"+
+"//Click on the dataset names to obtain additional information. Click on the question mark next to a download link to preview file contents.//\n"
+
+for (subpage <- 0 until Datasets.length) {
+  s+include(page+subpage)
+}
+mark(page, "end")
+
+write(page, s.toString)
+
+val langs = if (i18n) /*drop en*/ languages.drop(1) else languages
+
+for (subpage <- 0 until Datasets.length) {
+  datasets(page+subpage, Datasets(subpage), langs, i18n)
+}
+
+}
+
+
+def datasets(page: String, filesets: List[Fileset], languages: Array[String], i18n: Boolean): Unit = {
+  
+val s = new StringPlusser
+
+s+
+mark(page, "start")+
+"#||\n"+
 languages.mkString("||**Dataset**|**","**|**","**||")+"\n"
 
-for (fileset <- ontology :: ontologyDatasets) {
+for (fileset <- filesets) {
 s+"||((#"+fileset.anchor+" "+fileset.name+"))\n"
 var first = true
 for (language <- languages) {
+  val modifier = if (i18n || language == "en") "" else "_en_uris"
   s+"|"
   for (format <- fileset.formats) {
-    val file = fileset.file(language, format)
-    if (fileset.languages || first) {
+    val file = fileset.file(language, modifier, format)
+    if (file != null && (fileset.languages || first)) {
       s+
       "<#<small>"+
       "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a> "+
@@ -255,7 +356,7 @@ for (language <- languages) {
       "</small>#>\n"
     }
     else {
-      s+"--"
+      s+"<#--#>\n"
     }
   }
   first = false
@@ -265,20 +366,23 @@ s+"||\n"
 
 s+
 "||#\n"+
-"\n"+
-include("h")+
-include("g")+
-mark("f", "end")
+mark(page, "end")
 
-s.toString
+write(page, s.toString)
 }
 
-def mark(suffix: String, pos: String): String = {
-"<!-- Downloads"+tag(current)+suffix+" "+pos+" -->\n"
+def mark(page: String, pos: String): String = {
+"<#<!-- Downloads"+tag(current)+page+" "+pos+" -->#>\n"
 }
 
-def include(ext: String): String = {
-"{{include page=/Downloads"+tag(current)+ext+" nomark=1}}\n\n"
+def include(page: String): String = {
+"{{include page=/Downloads"+tag(current)+page+" nomark=1}}\n\n"
+}
+
+def write(page: String, content: String): Unit = {
+  val writer = IOUtils.write(new File("Downloads"+tag(current)+page+".wacko"))
+  try writer.write(content)
+  finally writer.close()
 }
   
 }
