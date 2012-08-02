@@ -22,19 +22,19 @@ val zipSuffix = ".bz2"
 
 val titles = new HashMap[String, String]()
 
-val format = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.ENGLISH))
+val formatter = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.ENGLISH))
 
 private def niceDecimal(num: Long): String = {
-  if (num < 1000) format.format(num)
-  else if (num < 1000000) format.format(num / 1000F)+"K"
-  else format.format(num / 1000000F)+"M"
+  if (num < 1000) formatter.format(num)
+  else if (num < 1000000) formatter.format(num / 1000F)+"K"
+  else formatter.format(num / 1000000F)+"M"
 }
 
 private def niceBytes(bytes: Long): String = {
-  if (bytes < 1024) format.format(bytes)
-  else if (bytes < 1048576) format.format(bytes / 1024F)+"KB"
-  else if (bytes < 1073741824) format.format(bytes / 1048576F)+"MB"
-  else format.format(bytes / 1073741824F)+"GB"
+  if (bytes < 1024) formatter.format(bytes)
+  else if (bytes < 1048576) formatter.format(bytes / 1024F)+"KB"
+  else if (bytes < 1073741824) formatter.format(bytes / 1048576F)+"MB"
+  else formatter.format(bytes / 1073741824F)+"GB"
 }
 
 def loadTitles(file: File): Unit = {
@@ -258,15 +258,18 @@ mark("", "end")
 
 write("", s.toString)
 
-datasets(false)
-datasets(true)
+ontologyPage()
+datasetPages(false)
+datasetPages(true)
 }
   
-def ontologyPage: Unit = {
+def ontologyPage(): Unit = {
   
 val page = "Ontology"
 
-val file = ontology.file(null, null, "owl")
+val format = "owl"
+  
+val file = ontology.file("", "", format)
 
 val s = new StringPlusser+
 mark(page, "start")+
@@ -286,7 +289,7 @@ mark(page, "end")
 write(page, s.toString)
 }
 
-def datasets(i18n: Boolean): Unit = {
+def datasetPages(i18n: Boolean): Unit = {
   
 val page = if (i18n) "DataI18N" else "DataEn"
 
@@ -325,13 +328,13 @@ write(page, s.toString)
 val langs = if (i18n) /*drop en*/ languages.drop(1) else languages
 
 for (subpage <- 0 until Datasets.length) {
-  datasets(page+subpage, Datasets(subpage), langs, i18n)
+  datasetPage(page+subpage, Datasets(subpage), langs, i18n)
 }
 
 }
 
 
-def datasets(page: String, filesets: List[Fileset], languages: Array[String], i18n: Boolean): Unit = {
+def datasetPage(page: String, filesets: List[Fileset], languages: Array[String], i18n: Boolean): Unit = {
   
 val s = new StringPlusser
 
