@@ -20,7 +20,6 @@
                 <artifactId>maven-scala-plugin</artifactId>
 
                 <configuration>
-                    <!-- TODO configure a launcher for each script -->
                     <launchers>
                         <launcher>
                             <id>CreateFreebaseLinks</id>
@@ -87,6 +86,11 @@
                         <launcher>
                             <id>CountTypes</id>
                             <mainClass>org.dbpedia.extraction.scripts.CountTypes</mainClass>
+                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>CreateDownloadPage</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CreateDownloadPage</mainClass>
                             <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
                         </launcher>
                     </launchers>
