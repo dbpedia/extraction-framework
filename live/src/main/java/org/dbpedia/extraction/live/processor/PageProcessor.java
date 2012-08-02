@@ -80,13 +80,8 @@ public class PageProcessor extends Thread{
     public void run(){
         while(true){
             try{
-                PagePriority requiredPage = Main.pageQueue.poll();
-
-                if(requiredPage == null)
-                {
-                    Thread.sleep(100);
-                    continue;
-                }
+                // block if empty
+                PagePriority requiredPage = Main.pageQueue.take();
 
                 //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
                 if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
