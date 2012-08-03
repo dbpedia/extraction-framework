@@ -6,7 +6,7 @@ import java.net.URLEncoder
 import org.dbpedia.extraction.wikiparser._
 
 /**
- * TODO: move this to PageNode?
+ * TODO: get rid of this class, move the code to PageNode.
  */
 class PageContext()
 {
