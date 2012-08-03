@@ -77,7 +77,7 @@ class WikiDownloader(val apiUrl : String) {
             in.ifElement("query-continue") { _ =>
               in.element("allpages") { allpages => gapfrom = allpages attr "gapfrom" } 
             }
-            in.ifElement("query") { _ => // note: empty namespace returns no <query> 
+            in.ifElement("query") { _ => // note: there's no <query> element if the namespace contains no pages
               in.element("pages") { _ =>
                 in.elements("page") { page =>
                   in.element("revisions") { _ =>
