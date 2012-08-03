@@ -52,3 +52,9 @@ find /home/release/wikipedia -maxdepth 3 -name '*.bz2' | grep -v -E '(ontology.o
 
 # generate wiki syntax for page like http://wiki.dbpedia.org/DumpDatesDBpedia38
 find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/, "", $2); print "||" $2 "|" substr($3,1,4) "-" substr($3,5,2) "-" substr($3,7,2) "||"}'
+
+# count number of same-as links in Wikipedia article namespace from English to other extracted languages. Result in 3.8: 10524022
+gzip -d < enwiki/20120601/enwiki-20120601-interlanguage-links-same-as.ttl.gz | grep -v -E 'resource/(Category|Template):' | wc -l
+
+# count number of abstracts, i.e. non-redirect, non-disambig pages in Wikipedia article namespace, in all extracted languages. Result in 3.8: 20805392
+grep 'short-abstracts\.ttl' lines-bytes-packed.txt | awk '{s+=$3} END {print s}'
