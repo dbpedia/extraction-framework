@@ -311,15 +311,14 @@ def datasetPages(page: String, filesets: Seq[List[Fileset]]): Unit = {
       "===Canonicalized Datasets===\n"+
       "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. ((Datasets#h18-19 more...))\n"+
       "\n"+
-      "All IRIs/URIs in these dumps use the generic namespace http://dbpedia.org/ . " +
-      "The N-Triples files (.nt, .nq) use URIs for English and IRIs for all other languages. The Turtle (.ttl) files use IRIs for //all// languages, even for English.\n"
+      "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace ~http://dbpedia.org/. The N-Triples files (.nt, .nq) use URIs, e.g. ((http://dbpedia.org/resource/Bo%C3%B6tes)), while the Turtle (.ttl) files use IRIs, e.g. ((http://dbpedia.org/resource/Boötes)).\n"
     }
     case DataI18NPage => {
       s+
       "===Internationalized Datasets===\n"+
       "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. ((Datasets#h18-19 more...))\n"+
       "\n"+
-      "These dumps contain IRIs using language-specific namespaces (e.g. http://el.dbpedia.org/...).\n"
+      "The internationalized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. <#<!--Wacko Wiki HTML-escapes some characters, even in URIs. We use percent-encoding to avoid that.-->#>((http://el.dbpedia.org/resource/%CE%92%CE%B5%CF%81%CE%BF%CE%BB%CE%AF%CE%BD%CE%BF http://el.dbpedia.org/resource/Βερολίνο)).\n"
     }
     case LinksPage => {
       s+
