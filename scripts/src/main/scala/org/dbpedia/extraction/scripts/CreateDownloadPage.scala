@@ -8,7 +8,6 @@ import org.dbpedia.extraction.scripts.IOUtils.readLines
 import scala.collection.mutable.{Map,HashMap}
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import scala.collection.mutable.ArrayBuffer
 
 object CreateDownloadPage {
   
@@ -110,21 +109,21 @@ extends Fileset(name, file, text, List("nt"), false)
 
 def tag(version: String): String = version.replace(".", "")
 
-val previous = Array("3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
+val previous = List("3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
 
 val dumpDates = "in late May / early June 2012"
   
 val allLanguages = 111
 
 // en must be first. we use languages.drop(1) in datasetPages(Boolean)
-val languages = Array("en","bg","ca","cs","de","el","es","fr","hu","it","ko","pl","pt","ru","sl","tr")
+val languages = List("en","bg","ca","cs","de","el","es","fr","hu","it","ko","pl","pt","ru","sl","tr")
 
 val ontology =
 new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in OWL. See ((http://jens-lehmann.org/files/2009/dbpedia_jws.pdf our JWS paper)) for more details.//")
 
-val OntologyPage = "Ontology"
-  
-val datasets = Array(
+// We have to split the main datasets into many small sub-pages because wacko wiki is true to its
+// name and fails to display a page (or even print a proper error message) when it's too long. 
+val datasets = List(
   List(
     new Dataset("Ontology Infobox Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the ontology-based extraction.//"),
     new Dataset("Ontology Infobox Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the ontology-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
@@ -171,11 +170,8 @@ val datasets = Array(
   )
 )
 
-val DataC14NPage = "DataC14N"
-val DataI18NPage = "DataI18N"
-
 val linksets = List(
-  new Linkset("Links to Amsterdam Museum data", "amsterdammuseum", "//Links to((http://semanticweb.cs.vu.nl/lod/am/ Amsterdam Museum data)). Update mechanism: TODO.//"),
+  new Linkset("Links to Amsterdam Museum data", "amsterdammuseum", "//Links to ((http://semanticweb.cs.vu.nl/lod/am/ Amsterdam Museum data)). Update mechanism: TODO.//"),
   new Linkset("Links to BBC Wildlife", "bbcwildlife", "//Links to ((http://www.bbc.co.uk/nature/wildlife BBC Wildlife)). Update mechanism: TODO.//"),
   new Linkset("Links to RDF Bookmashup", "bookmashup", "//Links between books in DBpedia and data about them provided by the ((http://www4.wiwiss.fu-berlin.de/bizer/bookmashup/ RDF Book Mashup)). Provided by Georgi Kobilarov. Update mechanism: unclear/copy over from previous release.//"),
   new Linkset("Links to Bricklink", "bricklink", "//Links between DBpedia and ((http://kasabi.com/dataset/bricklink Bricklink)).//"),
@@ -212,7 +208,12 @@ val linksets = List(
   new Linkset("Links to YAGO2", "yago", "//Dataset containing links between DBpedia and YAGO, YAGO type information for DBpedia resources and the YAGO class hierarchy. Currently maintained by Johannes Hoffart.//")
 )
 
+val OntologyPage = "Ontology"
+val DataC14NPage = "DataC14N"
+val DataI18NPage = "DataI18N"
 val LinksPage = "Links"
+val DescPage = "Desc"
+val NLPPage = "NLP"
 
 def main(args: Array[String]) {
   require(args != null && args.length == 1 && args(0).nonEmpty, "need 1 arg: file containing data file paths and their content numbers")
@@ -247,8 +248,8 @@ def generate: Unit = {
   include(DataC14NPage)+
   include(DataI18NPage)+
   include(LinksPage)+
-  include("d")+
-  include("NLP")+
+  include(DescPage)+
+  include(NLPPage)+
   mark("", "end")
   
   write("", s.toString)
@@ -256,7 +257,9 @@ def generate: Unit = {
   ontologyPage(OntologyPage)
   datasetPages(DataC14NPage, datasets)
   datasetPages(DataI18NPage, datasets)
-  datasetPages(LinksPage, Array(linksets))
+  datasetPages(LinksPage, List(linksets))
+  descriptionPage(DescPage)
+  nlpPage(NLPPage)
 }
   
 def ontologyPage(page: String): Unit = {
@@ -291,17 +294,17 @@ def datasetPages(page: String, filesets: Seq[List[Fileset]]): Unit = {
   page match {
     case DataC14NPage => {
       s+
-      "===Internationalized Datasets===\n"+
-      "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. ((Datasets#h18-19 more...))\n"+
-      "\n"+
-      "//CAUTION:// the URIs in these dumps have language-specific namespaces (e.g. http://el.dbpedia.org/...).\n"
-    }
-    case DataI18NPage => {
-      s+
       "===Canonicalized Datasets===\n"+
       "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. ((Datasets#h18-19 more...))\n"+
       "\n"+
       "The URIs in these dumps use the generic namespace http://dbpedia.org/ .\n"
+    }
+    case DataI18NPage => {
+      s+
+      "===Internationalized Datasets===\n"+
+      "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. ((Datasets#h18-19 more...))\n"+
+      "\n"+
+      "The URIs in these dumps have language-specific namespaces (e.g. http://el.dbpedia.org/...).\n"
     }
     case LinksPage => {
       s+
@@ -328,8 +331,8 @@ def datasetPages(page: String, filesets: Seq[List[Fileset]]): Unit = {
   
   val langs = page match {
     case DataC14NPage => languages
-    case DataI18NPage => languages.drop(1)
-    case LinksPage => Array("links")
+    case DataI18NPage => languages.drop(1) /*drop en*/
+    case LinksPage => List("links")
   }
   
   for (subPage <- 0 until filesets.length) {
@@ -339,7 +342,7 @@ def datasetPages(page: String, filesets: Seq[List[Fileset]]): Unit = {
 }
 
 
-def datasetPage(page: String, subPage: Int, filesets: List[Fileset], languages: Array[String]): Unit = {
+def datasetPage(page: String, subPage: Int, filesets: List[Fileset], languages: Seq[String]): Unit = {
   
   val s = new StringPlusser
   
@@ -385,12 +388,48 @@ def datasetPage(page: String, subPage: Int, filesets: List[Fileset], languages: 
   write(page+subPage, s.toString)
 }
 
+def descriptionPage(page: String): Unit = {
+  val s = new StringPlusser
+  
+  s+
+  mark(page, "start")+
+  "=== Dataset Descriptions ===\n"+
+  "\n"
+  
+  for (fileset <- ontology :: datasets.flatten ++ linksets) {
+    s+
+    "{{a name=\""+fileset.anchor+"\"}}\n"+
+    "==== "+fileset.name+" ====\n"+
+    fileset.text+"\n"
+  }
+  
+  s+
+  mark(page, "end")
+ 
+  write(page, s.toString)
+}
+
+def nlpPage(page: String): Unit = {
+  val s = new StringPlusser
+  
+  s+
+  mark(page, "start")+
+  "===NLP Datasets===\n" +
+  "\n"+
+  "DBpedia also includes a number of ((Datasets/NLP NLP Datasets)) -- datasets specifically targeted " +
+  "at supporting Computational Linguistics and Natural Language Processing (NLP) tasks. Among those, " +
+  "we highlight the Lexicalization Dataset, Topic Signatures, Thematic Concepts and Grammatical Genders.\n"+
+  mark(page, "end")
+ 
+  write(page, s.toString)
+}
+
 def mark(page: String, pos: String): String = {
   "<#<!-- http://wiki.dbpedia.org/Downloads"+tag(current)+page+"/edit "+pos+" -->#>\n"
 }
 
 def include(page: String): String = {
-  "{{include page=/Downloads"+tag(current)+page+" nomark=1}}\n\n"
+  "{{include page=/Downloads"+tag(current)+page+" nomark=1}}\n"
 }
 
 def write(page: String, content: String): Unit = {
