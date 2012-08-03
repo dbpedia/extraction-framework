@@ -311,7 +311,7 @@ def datasetPages(page: String, filesets: Seq[List[Fileset]]): Unit = {
       "===Canonicalized Datasets===\n"+
       "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. ((Datasets#h18-19 more...))\n"+
       "\n"+
-      "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace ~http://dbpedia.org/. The N-Triples files (.nt, .nq) use URIs, e.g. ((http://dbpedia.org/resource/Bo%C3%B6tes)), while the Turtle (.ttl) files use IRIs, e.g. ((http://dbpedia.org/resource/Boötes)).\n"
+      "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace ~http://dbpedia.org/. For backwards compatibility, the N-Triples files (.nt, .nq) use URIs, e.g. ((http://dbpedia.org/resource/Bo%C3%B6tes)). The Turtle (.ttl) files use IRIs, e.g. ((http://dbpedia.org/resource/Boötes)).\n"
     }
     case DataI18NPage => {
       s+
