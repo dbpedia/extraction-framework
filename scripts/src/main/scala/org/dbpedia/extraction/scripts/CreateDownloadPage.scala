@@ -239,7 +239,7 @@ def generate: Unit = {
   "((http://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License Creative Commons Attribution-ShareAlike License)) " +
   "and the ((http://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License GNU Free Documentation License)). " +
   "http://m.okfn.org/images/ok_buttons/od_80x15_red_green.png The downloads are provided as N-Triples and N-Quads, " +
-  "where the N-Quads version contains additional provenance information for each statement. All files are ((http://www.bzip.org/ bzip2)) packed.\n"+
+  "where the N-Quads version contains additional provenance information for each statement. All files are ((http://www.bzip.org/ bzip2)) [[*1]] packed.\n"+
   "\n"+
   // ((Downloads36 DBpedia 3.6)), ((Downloads35 DBpedia 3.5.1)), ...
   "Older Versions: "+previous.map(version => "((Downloads"+tag(version)+" DBpedia "+version+"))").mkString(", ")+"\n"+
@@ -259,7 +259,12 @@ def generate: Unit = {
   include(LinksPage)+
   include(DescPage)+
   include(NLPPage)+
-  mark("")
+  "\n" +
+  "[[#1]] Most files were packed with ((http://compression.ca/pbzip2/ pbzip2)), which generates concatenated streams. " +
+  "Some older bzip2 decompressors, for example ((https://issues.apache.org/jira/browse/COMPRESS-162 Apache Commons Compress before version 1.4)), " +
+  "cannot handle this format. Please make sure that you use the latest version and let us know if you experience any problems.\n"+
+  "\n" +
+    mark("")
   
   write("", s.toString)
   
