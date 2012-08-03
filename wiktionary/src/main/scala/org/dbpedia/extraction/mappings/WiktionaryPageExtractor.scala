@@ -156,7 +156,8 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         Logging.printMsg("page node: "+pageStack.head.toWikiText(), 2)
         consumed = false
 
-        val possibleBlocks = curOpenBlocks.map(_.blocks).foldLeft(List[Block]()){ _ ::: _ } //:: pageConfig
+        //collect open blocks. reverse them, so innermost blocks are regarded first (when matching their templates and indicator templates)
+        val possibleBlocks = curOpenBlocks.map(_.blocks).reverse.flatten //:: pageConfig
         //val possibleTemplates = curOpenBlocks.foldLeft(List[Tpl]()){(all,cur)=>all ::: cur.templates} 
         //println("possibleTemplates="+ possibleTemplates.map(t=>t.name) )
         //println("possibleBlocks="+ possibleBlocks.map(_.name) )
@@ -447,6 +448,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 }
 
 object WiktionaryPageExtractor {
+
   //load config from xml
   private val config = XML.loadFile("config/config.xml")
 
@@ -477,6 +479,9 @@ object WiktionaryPageExtractor {
   val escapeSeqOpenBrace = "%#*+~&" //an unlikely sequence of characters (duh)
   val escapeSeqCloseBrace = "%#*+~/" //an unlikely sequence of characters (duh)
   val escapeSeqComma = "%#*+~§" //an unlikely sequence of characters (duh)
+
+  val matchingStrategy = properties.get("matchingStrategy").getOrElse("levenshtein")
+  val matchingThreshold = properties.get("matchingThreshold").getOrElse("levenshtein")
 
   private val languageConfig = XML.loadFile("config/config-"+language+".xml")
 
@@ -593,7 +598,7 @@ class Matcher {
    * threshold for glosses to match
    * sim(glossA, glossB) >= threshold => id(glossA) := id(glossB)
    */
-  val threshold = 0.5
+  val threshold = WiktionaryPageExtractor.matchingThreshold.toFloat
     
   def clean(in:String) = in.toLowerCase
 
@@ -694,11 +699,13 @@ class Matcher {
       0.9f
     } else {
       //harder to computer similarity
-
-      //dice(ngrams(s1,3), ngrams(s2,3))
-      //jaccard(ngrams(s1,3), ngrams(s2,3))
-      //overlap(ngrams(s1,3), ngrams(s2,3))
-      levenshtein(s1, s2)
+      WiktionaryPageExtractor.matchingStrategy match {
+        case "levenshtein" => levenshtein(s1, s2)
+        case "dice" =>        dice(ngrams(s1,3), ngrams(s2,3))
+        case "jaccard" =>     jaccard(ngrams(s1,3), ngrams(s2,3))
+        case "overlap" =>     overlap(ngrams(s1,3), ngrams(s2,3))
+        case _ => levenshtein(s1, s2)
+      }
     }
   }
 
