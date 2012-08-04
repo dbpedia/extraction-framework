@@ -58,3 +58,22 @@ gzip -d < enwiki/20120601/enwiki-20120601-interlanguage-links-same-as.ttl.gz | g
 
 # count number of abstracts, i.e. non-redirect, non-disambig pages in Wikipedia article namespace, in all extracted languages. Result in 3.8: 20805392
 grep 'short-abstracts\.ttl' lines-bytes-packed.txt | awk '{s+=$3} END {print s}'
+
+# count mappings (per language and total)
+grep -c '<page>' mappings/Mapping_* | sed 's/[_:.]/ /g' | sort -k 4 -n -r | awk '{s+=$4; print $2 " " $4} END {print "total " s}'
+
+# ontology: count classes
+grep -c '<owl:Class' dbpedia_3.* 
+
+# ontology: count object properties 
+grep -c '<owl:ObjectProperty' dbpedia_3.*
+
+# ontology: count datatype properties, not specialized 
+grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' dbpedia_3.*
+
+# ontology: count datatype properties, not specialized 
+grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' dbpedia_3.*
+
+# ontology: count specialized datatype properties
+grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+">' dbpedia_3.*
+
