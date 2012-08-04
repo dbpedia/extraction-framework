@@ -3,6 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.util.Locale
 import java.io.File
 import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.StringPlusser
 import org.dbpedia.extraction.scripts.IOUtils.readLines
 import scala.collection.mutable.{Map,HashMap}
@@ -90,7 +91,7 @@ abstract class Fileset(
   
   protected def path(language: String, modifier: String, format: String): String
   
-  val anchor = name.replace(" ", "").toLowerCase(Locale.ENGLISH)
+  val anchor = name.replaceChars(" ()", "-").toLowerCase(Locale.ENGLISH)
 }
 
 class Ontology(name: String, file: String, text: String)
@@ -139,8 +140,8 @@ val datasets = List(
   ),
   List(
     new Dataset("Titles", "labels", "//Titles of all Wikipedia Articles in the corresponding language.//"),
-    new Dataset("Short Abstracts", "short_abstracts", "//Short Abstracts (max. 500 chars long) of Wikipedia articles//"),
-    new Dataset("Extended Abstracts", "long_abstracts", "//Additional, extended English abstracts.//"),
+    new Dataset("Short Abstracts", "short_abstracts", "//Short Abstracts (max. 500 characters long) of Wikipedia articles.//"),
+    new Dataset("Extended Abstracts", "long_abstracts", "//Full abstracts of Wikipedia articles, usually the first section.//"),
     new Dataset("Images", "images", "//Main image and corresponding thumbnail from Wikipedia article.//")
   ),
   List(
@@ -262,7 +263,8 @@ def generate: Unit = {
   "\n" +
   "[[#1]] Most files were packed with ((http://compression.ca/pbzip2/ pbzip2)), which generates concatenated streams. " +
   "Some older bzip2 decompressors, for example ((https://issues.apache.org/jira/browse/COMPRESS-162 Apache Commons Compress before version 1.4)), " +
-  "cannot handle this format. Please make sure that you use the latest version and let us know if you experience any problems.\n"+
+  "cannot handle this format. Please make sure that you use the latest version. " +
+  "((https://lists.sourceforge.net/lists/listinfo/dbpedia-discussion/ Let us know)) if you experience any problems.\n"+
   "\n" +
     mark("")
   
