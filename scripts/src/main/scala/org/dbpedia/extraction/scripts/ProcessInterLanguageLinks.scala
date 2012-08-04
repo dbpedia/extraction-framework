@@ -144,6 +144,9 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   unique titles, the 'last' URI will be encoded as -1, but -1 is also used as the null value. 
   Strange errors will occur.
   
+  TODO: it's a waste of space to store each character of each title separately. Maybe a trie 
+  could reduce space requirements.
+  
   */
   
   /** language code -> language. built in setLanguages() or readDump(), used everywhere. */
@@ -402,7 +405,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
         
         val objLang = ((link >>> 27) & 0x3FF).toInt
         
-        // inverse link: subject titel and object title switched, lang changed
+        // inverse link: subject title and object title switched, lang changed
         val inverse = link << 37 | subjLang  << 27 | link >>> 37 
       
         // look for inverse link
