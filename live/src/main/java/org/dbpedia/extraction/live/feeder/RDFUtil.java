@@ -1,38 +1,30 @@
 package org.dbpedia.extraction.live.feeder;
 
-import java.io.*;
-import java.lang.reflect.Field;
-import java.net.URI;
-import java.security.MessageDigest;
-import java.util.*;
-
-
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
 import com.hp.hpl.jena.shared.PrefixMapping;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
-import groups.ITypeData;
+import org.aksw.commons.jena_owlapi.Conversion;
 import org.aksw.commons.util.strings.StringUtils;
 import org.apache.commons.collections15.Transformer;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.coode.owlapi.rdf.model.RDFGraph;
-import org.coode.owlapi.rdf.model.RDFResourceNode;
 import org.coode.owlapi.rdf.model.RDFTranslator;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.coode.owlapi.rdf.model.RDFLiteralNode;
-import org.coode.owlapi.rdf.model.RDFResourceNode;
-import org.coode.owlapi.rdf.model.RDFTriple;
-import org.semanticweb.owlapi.model.IRI;
-import org.aksw.commons.jena_owlapi.Conversion;
 
-import javax.swing.table.DefaultTableModel;
-import javax.xml.transform.Source;
+import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 
 public class RDFUtil
@@ -265,9 +257,9 @@ public class RDFUtil
         String str = Conversion.toStringNTriples(rdfGraph);
         Model result = ModelFactory.createDefaultModel();
 
-        System.out.println("-----");
-        System.out.println(str);
-        System.out.println("-----");
+        logger.info("-----");
+        logger.info(str);
+        logger.info("-----");
 
         //System.exit(0);
         result.read(new ByteArrayInputStream(str.getBytes()), null, "N-TRIPLE");

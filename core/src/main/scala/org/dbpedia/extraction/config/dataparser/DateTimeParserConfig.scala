@@ -25,16 +25,18 @@ object DateTimeParserConfig
     // -1 is for BC
     //TODO matches anything e.g. 20 bd
     val eraStrMap =  Map(
-        "en" -> Map("BCE" -> 1, "BC" -> (-1), "CE"-> 1, "AD"-> 1, "AC"-> (-1), "CE"-> 1),
-        "el" -> Map("ΠΧ"-> (-1), "Π\\.Χ\\."-> (-1), "Π\\.Χ"-> (-1) , "ΜΧ"-> 1 , "Μ\\.Χ\\."-> 1, "Μ\\.Χ"-> 1),
-        "pt" -> Map("AC"-> (-1), "A\\.C\\."-> (-1), "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
-        "es" -> Map("AC"-> (-1), "A\\.C\\."-> (-1), "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1)
+        "en" -> Map("BCE" -> -1, "BC" -> -1, "CE"-> 1, "AD"-> 1, "AC"-> -1, "CE"-> 1),
+        "el" -> Map("ΠΧ"-> -1, "Π\\.Χ\\."-> -1, "Π\\.Χ"-> -1 , "ΜΧ"-> 1 , "Μ\\.Χ\\."-> 1, "Μ\\.Χ"-> 1),
+        "it" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "PEV"-> -1, "P\\.E\\.V\\."-> -1, "EV"-> 1, "E\\.V\\." -> 1),
+        "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
+        "es" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1)
     )
 
     //suffixes for 1st, 2nd etc. (maybe add this to infobox extractor RankRegex val)
     val cardinalityRegexMap = Map(
         "en" -> "st|nd|rd|th",
         "el" -> "η|ης",
+        "it" -> "°|\\.°|°\\.",
         "pt" -> "°|\\.°|°\\.",
         "es" -> "°|\\.°|°\\."
     )
@@ -88,15 +90,27 @@ object DateTimeParserConfig
             "věk"                   -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
         ),
         "el" -> Map(
-            "ημερομηνία γέννησης και ηλικία"-> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
-            "ημερομηνία θανάτου και ηλικία" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
-            "ημερομηνία γέννησης"           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
-            "ηθηλ"                          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
-            "ηγη"                           -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+            "ημερομηνία γέννησης και ηλικία" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "ημερομηνία θανάτου και ηλικία"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Ημερομηνία εκκίνησης και ηλικία"-> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "ημερομηνία γέννησης"            -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "ηθηλ"                           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "ηγη"                            -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
         ),
         "eu" -> Map(
             "adina"                -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "adin parentesigabea"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
+        "it" -> Map(
+            "Data nascita"        -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "data nascita"        -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "data di nascita"     -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "data di nascita"     -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "nascita anno"        -> Map ("year" -> "1"),
+            "nascita mese"        -> Map ("month" -> "1"),
+            "nascita giorno"      -> Map ("day" -> "1"),
+            "data di morte"       -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "Morte"               -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
         ),
         "pt" -> Map(
             "Nascimento"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),

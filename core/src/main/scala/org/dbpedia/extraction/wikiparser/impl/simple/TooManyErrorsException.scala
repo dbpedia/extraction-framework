@@ -5,4 +5,4 @@ import org.dbpedia.extraction.wikiparser.WikiParserException
 /**
  * Thrown if the parser encounters too many errors.
  */
-private final class TooManyErrorsException(wikiLineNumber : Int = 0, wikiLine : String = "Unknown") extends WikiParserException("Too many errors", wikiLineNumber, wikiLine)
+private final class TooManyErrorsException(line: Int, text: String) extends WikiParserException("Too many errors", line, text)

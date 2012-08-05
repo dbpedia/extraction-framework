@@ -14,7 +14,8 @@ case class TableNode( caption : Option[String],
                       override val children : List[TableRowNode],
                       override val line : Int ) extends Node(children, line)
 {
-    def toWikiText() : String = ""  //TODO implement!!!
+    def toWikiText = ""  //TODO implement!!!
+    def toPlainText = ""  //TODO implement!!!
 }
 
 /**
@@ -26,7 +27,8 @@ case class TableNode( caption : Option[String],
 case class TableRowNode( override val children : List[TableCellNode],
                          override val line : Int ) extends Node(children, line)
 {
-    def toWikiText() : String = ""  //TODO implement!!!
+    def toWikiText = ""  //TODO implement!!!
+    def toPlainText = ""  //TODO implement!!!
 }
 
 /**
@@ -35,9 +37,14 @@ case class TableRowNode( override val children : List[TableCellNode],
  * @param children The contents of this cell
  * @param line  The (first) line where this table cell is located in the source
  */
-//TODO include rowspan and columnspan properties
-case class TableCellNode( override val children : List[Node],
-                          override val line : Int ) extends Node(children, line)
+case class TableCellNode (
+  override val children : List[Node],
+  override val line: Int,
+  var rowSpan: Int, // FIXME: var for TableMapping.preprocessTable()
+  var colSpan: Int // FIXME: var for TableMapping.preprocessTable()
+) 
+extends Node(children, line)
 {
-    def toWikiText() : String = ""  //TODO implement!!!
+    def toWikiText = ""  //TODO implement!!!
+    def toPlainText = ""  //TODO implement!!!
 }

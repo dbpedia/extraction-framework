@@ -4,24 +4,19 @@ import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.sources.LiveWikiPage
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.toRichString
 import java.net.URI
 import java.util.logging.{Level, Logger}
 import java.lang.IllegalArgumentException
 
-/**
- * Port of the DBpedia WikiParser for PHP.
- */
-//TODO section names should only contain the contents of the TextNodes
-final class SimpleWikiParser extends WikiParser
+import SimpleWikiParser._
+
+object SimpleWikiParser
 {
     private val logger = Logger.getLogger(classOf[SimpleWikiParser].getName)
 
     private val MaxNestingLevel = 10
     private val MaxErrors = 1000
-
-    //TODO move matchers to companion object
 
     private val commentEnd = new Matcher(List("-->"));
 
@@ -30,7 +25,7 @@ final class SimpleWikiParser extends WikiParser
     private val mathEnd = new Matcher(List("</math>"));
     private val codeEnd = new Matcher(List("</code>"));
     private val sourceEnd = new Matcher(List("</source>"));
-
+        
     private val internalLinkLabelOrEnd = new Matcher(List("|", "]]", "\n"));
     private val internalLinkEnd = new Matcher(List("]]", "\n"), true);
 
@@ -53,7 +48,14 @@ final class SimpleWikiParser extends WikiParser
     private val tableCellEnd3 = new Matcher(List("\n ", "\n|}", "\n|-", "\n|", "\n!", "||", "!!"), true);
 
     private val sectionEnd = new Matcher(List("=\n", "=\r", "\n"), true);
+}
 
+/**
+ * Port of the DBpedia WikiParser for PHP.
+ */
+//TODO section names should only contain the contents of the TextNodes
+final class SimpleWikiParser extends WikiParser
+{
     /**
      * Parses WikiText source and builds an Abstract Syntax Tree.
      *
@@ -67,32 +69,32 @@ final class SimpleWikiParser extends WikiParser
         val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
 
         //Check if this page is a Redirect
-        val redirectRegex = """(?is)\s*(?:""" + Redirect(page.title.language).getOrElse(Set("#redirect")).mkString("|") + """)\s*:?\s*\[\[.*"""
+        // TODO: the regex used in org.dbpedia.extraction.mappings.Redirects.scala is probably a bit better
+        val redirectRegex = """(?is)\s*(?:""" + Redirect(page.title.language).mkString("|") + """)\s*:?\s*\[\[.*"""
+        // TODO: also extract the redirect target.
+        // TODO: compare extracted redirect target to the one found by Wikipedia (stored in the WikiPage object).
+        // Problems:
+        // - if the WikiPage object was not read from XML dump or api.php, redirect may not be set in WikiPage
+        // - generating the XML dump files takes several days, and the wikitext is obviously not generated at the
+        //   same time as the redirect target, so sometimes they do not match.
+        // In a nutshell: if the redirect in WikiPage is different from what we find, we're probably correct.
         val isRedirect = page.source.matches(redirectRegex)
 
         //Check if this page is a Disambiguation
         //TODO resolve template titles
-        val disambiguationNames = Disambiguation(page.title.language).getOrElse(Set("Disambig"))
+        val disambiguationNames = Disambiguation.get(page.title.language).getOrElse(Set("Disambig"))
         val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
-      try{
-      //println("NODECHILDREN = " +  page.asInstanceOf[LiveWikiPage].toXML);
-        return new LivePageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation,
-          page.asInstanceOf[LiveWikiPage].timestamp, nodes)
-      }
-      catch{
-        case e: Exception => ;
-      }
+
         //Return page node
-        new PageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation, nodes)
+        new PageNode(page.title, page.id, page.revision, page.timestamp, isRedirect, isDisambiguation, nodes)
     }
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
     {
-        case TemplateNode(title, _, _) if names.contains(title.decoded) => true
-        case TemplateNode(title, _, _) => false
+        case TemplateNode(title, _, _) => names.contains(title.decoded)
         case _ => node.children.exists(node => findTemplate(node, names, language))
     }
-
+    
     private def  parseUntil(matcher : Matcher, source : Source, level : Int) : List[Node] =
     {
         val line = source.line
@@ -109,7 +111,7 @@ final class SimpleWikiParser extends WikiParser
             throw new TooManyErrorsException(line, source.findLine(line))
         }
 
-    	var nodes = List[Node]()
+        var nodes = List[Node]()
         var lastPos = source.pos
         var lastLine = source.line
         var currentText = ""
@@ -131,27 +133,28 @@ final class SimpleWikiParser extends WikiParser
             //If this text is at the beginning => remove leading whitespace
             if(nodes.isEmpty)
             {
-            	currentText = currentText.replaceAll("^\\s+", "")
+                currentText = currentText.replaceAll("^\\s+", "")
             }
-
+            
             //If this text is at the end => remove trailing whitespace and return
             if((!m.matched && level == 0) || !m.isStdTag)
             {
-            	if(currentText.isEmpty)
-            	{
-            		return nodes.reverse
-            	}
-            	else
-            	{
+                if(currentText.isEmpty)
+                {
+                    return nodes.reverse
+                }
+                else
+                {
                 nodes ::= TextNode(currentText, lastLine)
-            		return nodes.reverse
-            	}
+                    return nodes.reverse
+                }
             }
 
             //Check result of seek
             if(!m.matched)
             {
-               throw new WikiParserException("Node not closed; expected "+matcher, line, source.findLine(line));
+                // FIXME: matcher.toString is not defined, message will be useless
+                throw new WikiParserException("Node not closed; expected "+matcher, line, source.findLine(line));
             }
             else
             {
@@ -220,7 +223,7 @@ final class SimpleWikiParser extends WikiParser
             lastPos = source.pos;
             lastLine = source.line;
         }
-
+        
         nodes.reverse
     }
 
@@ -243,7 +246,7 @@ final class SimpleWikiParser extends WikiParser
         }
         //else we found "/>"
     }
-
+    
     private def createNode(source : Source, level : Int) : Node =
     {
         if(source.lastTag("[") || source.lastTag("http"))
@@ -252,9 +255,9 @@ final class SimpleWikiParser extends WikiParser
         }
         else if(source.lastTag("{{"))
         {
-            val nextToken = source.getString(source.pos, source.pos+1)
-            if ( nextToken == "{")
+            if (source.pos < source.length && source.getString(source.pos, source.pos+1) == "{")
             {
+                source.pos = source.pos+1   //advance 1 char
                 return parseTemplateParameter(source, level)
             }
 
@@ -271,24 +274,32 @@ final class SimpleWikiParser extends WikiParser
         else
             throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
     }
-
+    
     private def parseLink(source : Source, level : Int) : LinkNode =
     {
         val startPos = source.pos
         val startLine = source.line
-
+        
         if(source.lastTag("[["))
         {
+            // FIXME: this block is a 98% copy of the next block
+          
             //val m = source.find(internalLinkLabelOrEnd)
 
             //Set destination
             //val destination = source.getString(startPos, source.pos - m.tag.length).trim
             val destination = parseUntil(internalLinkLabelOrEnd, source, level)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
-            val destinationUri = if(destination.size == 0){""} else if(destination(0).isInstanceOf[TextNode]){
+            val destinationUri =
+            if(destination.size == 0) {
+              ""
+            } else if(destination(0).isInstanceOf[TextNode]) {
               destination(0).asInstanceOf[TextNode].text
             } else {
-              null //has a semantic within the wiktionary module, and should never occur for wikipedia
+              // The following line didn't make sense. createInternalLinkNode() will simply throw a NullPointerException.
+              // null // has a semantic within the wiktionary module, and should never occur for wikipedia
+              
+              throw new WikiParserException("Failed to parse internal link: " + destination, startLine, source.findLine(startLine))
             }
 
             //Parse label
@@ -303,21 +314,30 @@ final class SimpleWikiParser extends WikiParser
                     List(new TextNode(destinationUri, source.line))
                 }
 
-            createLinkNode(source, destinationUri, nodes, startLine, false, destination)
+            createInternalLinkNode(source, destinationUri, nodes, startLine, destination)
         }
         else if(source.lastTag("["))
         {
+            // FIXME: this block is a 98% copy of the previous block
+          
             //val tag = source.find(externalLinkLabelOrEnd)
 
             //Set destination
             //val destinationURI = source.getString(startPos, source.pos - 1).trim
             val destination = parseUntil(externalLinkLabelOrEnd, source, level)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
-            val destinationURI = if(destination.size == 0){""} else if(destination(0).isInstanceOf[TextNode]){
+            val destinationURI = 
+            if (destination.size == 0) {
+              ""
+            } else if(destination(0).isInstanceOf[TextNode]) {
               destination(0).asInstanceOf[TextNode].text
             } else {
-              null //has a semantic within the wiktionary module, and should never occur for wikipedia
+              // The following line didn't make sense. createExternalLinkNode() will simply throw a NullPointerException.
+              // null // has a semantic within the wiktionary module, and should never occur for wikipedia
+              
+              throw new WikiParserException("Failed to parse external link: " + destination, startLine, source.findLine(startLine))
             }
+            
             //Parse label
             val nodes =
                 if(source.lastTag(" "))
@@ -330,11 +350,11 @@ final class SimpleWikiParser extends WikiParser
                     List(new TextNode(destinationURI, source.line))
                 }
 
-            createLinkNode(source, destinationURI, nodes, startLine, true, destination)
+            createExternalLinkNode(source, destinationURI, nodes, startLine, destination)
         }
         else
         {
-            val result = source.find(this.linkEnd)
+            val result = source.find(linkEnd)
             //The end tag (e.g. ' ') is not part of the link itself
             source.seek(-result.tag.length)
 
@@ -343,56 +363,63 @@ final class SimpleWikiParser extends WikiParser
             //Use destination as label
             val nodes = List(new TextNode(destinationURI, source.line))
 
-            createLinkNode(source, destinationURI, nodes, startLine, true, nodes)
+            createExternalLinkNode(source, destinationURI, nodes, startLine, nodes)
         }
     }
 
-    private def createLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, external : Boolean, destinationNodes : List[Node]) : LinkNode =
+    private def createExternalLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, destinationNodes : List[Node]) : LinkNode =
     {
-        if(external)
+        try
         {
-            try
-            {
-        	    ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
-            }
-            catch
-            {
-                case _ : IllegalArgumentException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
-            }
+            ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
+        }
+        catch
+        {
+            case _ : IllegalArgumentException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+        }
+    }
+    
+    private def createInternalLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, destinationNodes : List[Node]) : LinkNode =
+    {
+        val destinationTitle = WikiTitle.parse(destination, source.language)
+
+        if(destinationTitle.language == source.language)
+        {
+            InternalLinkNode(destinationTitle, nodes, line, destinationNodes)
         }
         else
         {
-            val destinationTitle = WikiTitle.parse(destination, source.language)
-
-            if(destinationTitle.language == source.language)
-            {
-                InternalLinkNode(destinationTitle, nodes, line, destinationNodes)
-            }
-            else
-            {
-                 InterWikiLinkNode(destinationTitle, nodes, line, destinationNodes)
-            }
+            InterWikiLinkNode(destinationTitle, nodes, line, destinationNodes)
         }
     }
 
     private def parseTemplateParameter(source : Source, level : Int) : TemplateParameterNode =
     {
         val line = source.line
-        source.pos = source.pos+1   //advance 1 char
-        val nodes = parseUntil(templateParameterEnd , source, level)
+        val keyNodes = parseUntil(templateParameterEnd , source, level)
 
-        if(nodes.size != 1 || !nodes.head.isInstanceOf[TextNode])
+        if(keyNodes.size != 1 || ! keyNodes.head.isInstanceOf[TextNode])
                 throw new WikiParserException("Template variable contains invalid elements", line, source.findLine(line))
+        
+        // FIXME: removing "<includeonly>" here is a hack.
+        // We need a preprocessor that resolves stuff like <includeonly>...</includeonly> 
+        // based on configuration flags.
+        val key = keyNodes.head.toWikiText.replace("<includeonly>", "").replace("</includeonly>", "").replace("<noinclude>", "").replace("</noinclude>", "")
 
-        new TemplateParameterNode( nodes.head.toWikiText(), source.lastTag("|"), line)
+        // FIXME: parseUntil(templateParameterEnd) should be correct. Without it, we don't actually 
+        // consume the source until the end of the template parameter. But if we use it, the parser
+        // fails for roughly twice as many pages, so for now we deactivate it with "if (true)".
+        val nodes = if (true || source.lastTag("}}}")) List.empty else parseUntil(templateParameterEnd, source, level)
+
+        new TemplateParameterNode(key, nodes, line)
     }
 
     private def parseTemplate(source : Source, level : Int) : Node =
     {
-    	val startLine = source.line
-    	var title : WikiTitle = null;
-    	var properties = List[PropertyNode]()
-    	var curKeyIndex = 1
+        val startLine = source.line
+        var title : WikiTitle = null;
+        var properties = List[PropertyNode]()
+        var curKeyIndex = 1
 
         while(true)
         {
@@ -407,12 +434,12 @@ final class SimpleWikiParser extends WikiParser
                     case _ => throw new WikiParserException("Invalid Template name", startLine, source.findLine(startLine))
                 }
 
-                val decodedName = WikiUtil.cleanSpace(templateName).capitalizeLocale(source.language.locale)
+                val decodedName = WikiUtil.cleanSpace(templateName).capitalize(source.language.locale)
                 if(source.lastTag(":"))
                 {
                     return parseParserFunction(decodedName, source, level)
                 }
-                title = new WikiTitle(decodedName, WikiTitle.Namespace.Template, source.language)
+                title = new WikiTitle(decodedName, Namespace.Template, source.language)
             }
             else
             {
@@ -421,7 +448,7 @@ final class SimpleWikiParser extends WikiParser
 
                 if(propertyNode.key == curKeyIndex.toString)
                 {
-            	    curKeyIndex += 1
+                    curKeyIndex += 1
                 }
             }
 
@@ -431,47 +458,46 @@ final class SimpleWikiParser extends WikiParser
                 return TemplateNode(title, properties.reverse, startLine)
             }
         }
-
-    	throw new WikiParserException("Template not closed", startLine, source.findLine(startLine))
+        
+        throw new WikiParserException("Template not closed", startLine, source.findLine(startLine))
     }
 
     private def parseProperty(source : Source, defaultKey : String, level : Int) : PropertyNode =
     {
-    	val line = source.line
-    	var nodes = parseUntil(propertyValueOrEnd, source, level)
-    	var key = defaultKey
-
+        val line = source.line
+        var nodes = parseUntil(propertyValueOrEnd, source, level)
+        var key = defaultKey
+ 
         if(source.lastTag("="))
         {
             //The currently parsed node is a key
-        	if(nodes.size != 1 || !nodes.head.isInstanceOf[TextNode])
-        		throw new WikiParserException("Template property key contains invalid elements", line, source.findLine(line))
-
+            if(nodes.size != 1 || !nodes.head.isInstanceOf[TextNode])
+                throw new WikiParserException("Template property key contains invalid elements", line, source.findLine(line))
+            
             key = nodes.head.retrieveText.get.trim
 
             //Parse the corresponding value
             nodes = parseUntil(propertyEnd, source, level);
         }
-
+        
         PropertyNode(key, nodes, line)
     }
 
     private def parseParserFunction(decodedName : String, source : Source, level : Int) : ParserFunctionNode =
     {
-        val title = new WikiTitle(decodedName + ":", WikiTitle.Namespace.Template, source.language)
         val children = parseUntil(parserFunctionEnd, source, level)
         val startLine = source.line
 
-        ParserFunctionNode(title, children, startLine)
+        ParserFunctionNode(decodedName, children, startLine)
     }
-
+    
     private def parseTable(source : Source, level : Int) : TableNode =
     {
-    	val startPos = source.pos
-    	val line = source.line
-
-    	var nodes = List[TableRowNode]()
-    	var caption : Option[String] = None
+        val startPos = source.pos
+        val line = source.line
+ 
+        var nodes = List[TableRowNode]()
+        var caption : Option[String] = None
 
         //Parse rows
         var done = false
@@ -497,7 +523,7 @@ final class SimpleWikiParser extends WikiParser
                 {
                     //Move to first cell
                     val m2 = source.find(tableRowEnd2) //"|}", "|-", "|", "!"
-
+    
                     if(m2.tagIndex == 0 || m2.tagIndex == 1)
                     {
                         //Empty row
@@ -505,26 +531,26 @@ final class SimpleWikiParser extends WikiParser
                         return TableNode(caption, nodes.reverse, line);
                     }
                 }
-
+                
                 //Parse row
-	            nodes ::= parseTableRow(source, level)
-
-	            //Reached table end?
-	            if(source.lastTag("|}"))
-	            {
-	                done = true
-	            }
+                nodes ::= parseTableRow(source, level)
+    
+                //Reached table end?
+                if(source.lastTag("|}"))
+                {
+                    done = true
+                }
             }
         }
-
-    	TableNode(caption, nodes.reverse, line);
+        
+        TableNode(caption, nodes.reverse, line);
     }
 
     private def parseTableRow(source : Source, level : Int) : TableRowNode =
     {
-    	val line = source.line
-    	var nodes = List[TableCellNode]()
-
+        val line = source.line
+        var nodes = List[TableCellNode]()
+        
         while(true)
         {
             //Parse table cell
@@ -536,16 +562,16 @@ final class SimpleWikiParser extends WikiParser
                 return new TableRowNode(nodes.reverse, line)
             }
         }
-
+        
         null
     }
 
     private def parseTableCell(source : Source, level : Int) : TableCellNode =
     {
         val startPos = source.pos
-    	val startLine = source.line
-    	var rowspan = 1
-    	var colspan = 1
+        val startLine = source.line
+        var rowspan = 1
+        var colspan = 1
         var nodes = parseUntil(tableCellEnd1, source, level)
 
         val lookBack = source.getString(source.pos - 2, source.pos)
@@ -569,11 +595,8 @@ final class SimpleWikiParser extends WikiParser
                 source.find(tableCellEnd2);
             }
         }
-
-        val node = new TableCellNode(nodes, startLine)
-        node.setAnnotation("rowspan", rowspan)
-        node.setAnnotation("colspan", colspan)
-        node
+        
+        new TableCellNode(nodes, startLine, rowspan, colspan)
     }
 
     private def parseTableParam(name : String, str : String) : Int =
@@ -604,11 +627,11 @@ final class SimpleWikiParser extends WikiParser
 
         try
         {
-        	valueStr.toInt;
+            valueStr.toInt;
         }
         catch
         {
-        	case _ => 1
+            case _ => 1
         }
     }
 

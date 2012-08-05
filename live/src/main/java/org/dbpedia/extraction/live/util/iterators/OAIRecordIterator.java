@@ -9,8 +9,8 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.w3c.dom.Document;
 
 
@@ -60,7 +60,7 @@ public class OAIRecordIterator
 					.compile("//*[local-name()='responseDate']/text()");
 		}
 		catch (Exception e) {
-			logger.error(ExceptionUtils.getFullStackTrace(e));
+			logger.error(ExceptionUtil.toString(e));
 		}
 	}
 
@@ -70,53 +70,36 @@ public class OAIRecordIterator
 		if (endReached)
 			return null;
 
-        boolean retry = true;
-        while(retry) {
+		try {
+			ListRecords listRecords = null;
 
-            try {
-                ListRecords listRecords = null;
+			// Note: We crash if ListRecords fail.
+			if (resumptionToken == null) {
+				listRecords = new ListRecords(oaiBaseUri, startDate, null,
+						null, "mediawiki");
+			}
+			else
+				listRecords = new ListRecords(oaiBaseUri, resumptionToken);
 
-                // Note: We crash if ListRecords fail.
-                if (resumptionToken == null) {
-                    listRecords = new ListRecords(oaiBaseUri, startDate, null,
-                            null, "mediawiki");
-                }
-                else
-                    listRecords = new ListRecords(oaiBaseUri, resumptionToken);
+			logger.debug("Executed: " + listRecords.getRequestURL());
 
-                logger.debug("Executed: " + listRecords.getRequestURL());
+			resumptionToken = listRecords.getResumptionToken();
 
-                resumptionToken = listRecords.getResumptionToken();
+			if (resumptionToken != null && !resumptionToken.trim().isEmpty())
+				logger.debug("Got resumptionToken: '" + resumptionToken + "'");
+			else
+				endReached = true;
 
-                if (resumptionToken != null && !resumptionToken.trim().isEmpty())
-                    logger.debug("Got resumptionToken: '" + resumptionToken + "'");
-                else
-                    endReached = true;
+			Document document = listRecords.getDocument();
 
-                Document document = listRecords.getDocument();
+			lastResponseDate = (String) lastResponseDateExpr.evaluate(document,
+					XPathConstants.STRING);
 
-                lastResponseDate = (String) lastResponseDateExpr.evaluate(document,
-                        XPathConstants.STRING);
-
-                return Collections.singleton(document).iterator();
-            }
-            catch (Exception e) {
-                String str = ExceptionUtils.getFullStackTrace(e);
-
-                if(!str.contains("500 for URL")) {
-                    logger.error(str);
-                    retry = false;
-                } else  {
-                    logger.warn("Received HTTP status code 500, retrying in 30 sec");
-                }
-            }
-
-            try {
-                Thread.sleep(30);
-            } catch (Exception e) {
-                logger.warn("Sleep interrupted", e);
-            }
-        }
+			return Collections.singleton(document).iterator();
+		}
+		catch (Exception e) {
+			logger.warn(ExceptionUtil.toString(e));
+		}
 
 		return null;
 	}

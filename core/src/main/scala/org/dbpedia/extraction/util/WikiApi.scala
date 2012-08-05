@@ -2,20 +2,30 @@ package org.dbpedia.extraction.util
 
 import java.util.logging.Logger
 import java.io.IOException
-import xml.{XML, Elem}
-import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import scala.xml.{XML, Elem}
+import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import org.dbpedia.extraction.sources.WikiPage
 import java.net.{URLEncoder, URL}
-import runtime.Long
+import WikiApi._
+
+object WikiApi
+{
+  /** name of api.php parameter for page IDs */
+  val PageIDs = "pageids"
+  
+  /** name of api.php parameter for revision IDs */
+  val RevisionIDs = "revids"
+}
 
 /**
  * Executes queries to the MediaWiki API.
+ * 
+ * TODO: replace this class by code adapted from WikiDownloader. 
  *
- * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php. Default: english Wikipedia
+ * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php.
  * @param language The language of the MediaWiki.
  */
-class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language : Language = Language.Default)
+class WikiApi(url: URL, language: Language)
 {
     private val logger = Logger.getLogger(classOf[WikiApi].getName)
 
@@ -37,44 +47,62 @@ class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language
      */
     def retrievePagesByNamespace[U](namespace : Namespace, f : WikiPage => U, fromPage : String = "")
     {
+        // TODO: instead of first getting the page ids and then the pages, use something like 
+        // ?action=query&generator=allpages&prop=revisions&rvprop=ids|content&format=xml&gapnamespace=0
+        // -> "generator" instead of "list" and "gapnamespace" instead of "apnamespace" ("gap" is for "generator all pages")
+ 
         //Retrieve list of pages
-        val response = query("?action=query&format=xml&list=allpages&apfrom=" + fromPage + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.id)
+        val response = query("?action=query&format=xml&list=allpages&apfrom=" + fromPage + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
 
         //Extract page ids
         val pageIds = for(p <- response \ "query" \ "allpages" \ "p") yield (p \ "@pageid").head.text.toLong
 
         //Retrieve pages
-        retrievePagesByID(pageIds).foreach(f)
+        retrievePagesByPageID(pageIds).foreach(f)
 
         //Retrieve remaining pages
         for(continuePage <- response \ "query-continue" \ "allpages" \ "@apfrom" headOption)
         {
+            // TODO: use iteration instead of recursion
             retrievePagesByNamespace(namespace, f, continuePage.text)
         }
     }
 
-    /**
-     * Retrieves multiple pages by their ID.
-     *
-     * @param pageIds The IDs of the pages to be downloaded.
-     * @param f The function to be called on each page.
-     */
-    def retrievePagesByID[U](pageIds : Iterable[Long]) = new Traversable[WikiPage]
-    {
-        override def foreach[U](f : WikiPage => U) : Unit =
-        {
-            for(ids <- pageIds.grouped(pageDownloadLimit))
-            {
-                val response = query("?action=query&format=xml&prop=revisions&pageids=" + ids.mkString("|") + "&rvprop=ids|content")
 
-                for(page <- response \ "query" \ "pages" \ "page";
-                    rev <- page \ "revisions" \ "rev" )
-                {
-                    f( new WikiPage( title     = WikiTitle.parse((page \ "@title").head.text, language),
-                                     id        = (page \ "@pageid").head.text.toLong,
-                                     revision  = (rev \ "@revid").head.text.toLong,
-                                     source    = rev.text ) )
-                }
+    /**
+     * Retrieves multiple pages by their page ID.
+     *
+     * @param pageIds The page IDs of the pages to be downloaded.
+     */
+    def retrievePagesByPageID[U](pageIds : Iterable[Long]): Traversable[WikiPage] =
+    {
+      retrievePagesByID(PageIDs, pageIds)
+    }
+    
+    /**
+     * Retrieves multiple pages by their revision ID.
+     *
+     * @param revisionIds The revision IDs of the pages to be downloaded.
+     */
+    def retrievePagesByRevisionID[U](revisionIds: Iterable[Long]): Traversable[WikiPage] =
+    {
+      retrievePagesByID(RevisionIDs, revisionIds)
+    }
+    
+    /**
+     * Retrieves multiple pages by page or revision IDs.
+     *
+     * @param param WikiApi.PageIDs ("pageids") or WikiApi.RevisionIDs ("revids") 
+     * @param ids page or revision IDs of the pages to be downloaded.
+     */
+    def retrievePagesByID[U](param: String, ids : Iterable[Long]) = new Traversable[WikiPage]
+    {
+        override def foreach[U](proc : WikiPage => U) : Unit =
+        {
+            for(group <- ids.grouped(pageDownloadLimit))
+            {
+                val response = query("?action=query&format=xml&prop=revisions&"+param+"=" + group.mkString("|") + "&rvprop=ids|content|timestamp")
+                processPages(response, proc)
             }
         }
     }
@@ -83,25 +111,30 @@ class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language
      * Retrieves multiple pages by their title.
      *
      * @param pageIds The titles of the pages to be downloaded.
-     * @param f The function to be called on each page.
      */
-    def retrievePagesByTitle[U](titles : Traversable[WikiTitle]) = new Traversable[WikiPage]
+    def retrievePagesByTitle[U](titles : Iterable[WikiTitle]) = new Traversable[WikiPage]
     {
-        override def foreach[U](f : WikiPage => U) : Unit =
+        override def foreach[U](proc : WikiPage => U) : Unit =
         {
-            for(titleGroup <- titles.toIterable.grouped(pageDownloadLimit))
+            for(titleGroup <- titles.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(_.encodedWithNamespace).mkString("|") + "&rvprop=ids|content")
-
-                for(page <- response \ "query" \ "pages" \ "page";
-                    rev <- page \ "revisions" \ "rev" )
-                {
-                    f( new WikiPage( title     = WikiTitle.parse((page \ "@title").head.text, language),
-                                     id        = (page \ "@pageid").head.text.toLong,
-                                     revision  = (rev \ "@revid").head.text.toLong,
-                                     source    = rev.text ) )
-                }
+                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(_.encodedWithNamespace).mkString("|") + "&rvprop=ids|content|timestamp")
+                processPages(response, proc)
             }
+        }
+    }
+    
+    def processPages[U](response : Elem, proc : WikiPage => U) : Unit =
+    {
+        for(page <- response \ "query" \ "pages" \ "page";
+            rev <- page \ "revisions" \ "rev" )
+        {
+            proc( new WikiPage( title     = WikiTitle.parse((page \ "@title").head.text, language),
+                             redirect  = null, // TODO: read redirect from XML
+                             id        = (page \ "@pageid").head.text,
+                             revision  = (rev \ "@revid").head.text,
+                             timestamp = (rev \ "@timestamp").head.text,
+                             source    = rev.text ) )
         }
     }
 
@@ -111,13 +144,13 @@ class WikiApi(url : URL = new URL("http://en.wikipedia.org/w/api.php"), language
      * @param title The title of the template
      * @param maxCount The maximum number of pages to retrieve
      */
-    def retrieveTemplateUsages(title : WikiTitle, maxCount : Int = 500) : Traversable[WikiTitle] =
+    def retrieveTemplateUsages(title : WikiTitle, maxCount : Int = 500) : Seq[WikiTitle] =
     {
         val response = query("?action=query&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace + "&einamespace=0&eifilterredir=nonredirects&eilimit=" + maxCount)
 
         for(page <- response \ "query" \ "embeddedin" \ "ei";
             title <- page \ "@title" )
-            yield new WikiTitle(title.text)
+            yield new WikiTitle(title.text, Namespace.Main, language)
     }
 
   /**

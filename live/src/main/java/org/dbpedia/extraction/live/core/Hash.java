@@ -1,15 +1,21 @@
 package org.dbpedia.extraction.live.core;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.delta.Delta;
+import org.dbpedia.extraction.live.delta.DeltaCalculator;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
+import org.dbpedia.extraction.live.main.Main;
+import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 
-import java.sql.Blob;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.StringReader;
+import java.sql.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 
 /**
@@ -20,13 +26,18 @@ import java.util.*;
  * This class holds the hashing capabilities that are used for storing and retrieving triples from the database table   
  */
 public class Hash{
-    
+
+    public static enum TriplesType
+    {
+        PreviousTriples, LatestTriples
+    }
+
     //Initializing the Logger
-    private static Logger logger = null;
+    private static Logger logger = Logger.getLogger(Hash.class);
 
     //Constant initialization
-    private final int JDBC_MAX_LONGREAD_LENGTH = 8000;
     private static final String TABLENAME = "dbpedia_triples";
+    private static final String DIFF_TABLENAME = "dbpedia_triples_diff";
     private static final String FIELD_OAIID = "oaiid";
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";
@@ -34,34 +45,23 @@ public class Hash{
     public String oaiId;
 
     private static JDBC jdbc;
-    private HashMap hashesFromStore=null;
-    private String hashesFromExtractor = null;
+    private HashMap<String, HashMap> hashesFromStore=null;
     private boolean hasHash = false;
     private boolean active = false;
 
-    public HashMap newJSONObject = new HashMap();
-    private HashMap originalJSONObject ;
-    //normal rdftriples
-    private HashMap addTriples = new HashMap();
+    private HashMap originalHashes=null;//This object will contain a copy of the original triples, in order to compare them later
+
+    public HashMap<String, HashMap<String, HashMap>> newJSONObject = new HashMap<String, HashMap<String, HashMap>>();
+
+    private HashMap<String, RDFTriple> addTriples = new HashMap<String, RDFTriple>();
     //special array with sparulpattern
-    private HashMap deleteTriples = new HashMap();
+    private HashMap<String, HashMap> deleteTriples = new HashMap<String, HashMap>();
 
     private String Subject = null; //TODO This member is not explicitly typed in the php file, so we must make sure of its type
 
     //I managed to move this member from function _compareHelper as the variables sequences used in deleting old
     // abstracts may coincide, so it is better to keep it as a static member and reset it from time to time.
     private static int delCount = 0 ;
-
-    static
-    {
-        try
-        {
-            logger = Logger.getLogger(Class.forName("org.dbpedia.extraction.live.core.Hash").getName());
-        }
-        catch (Exception exp){
-
-        }
-    }
 
     public static void initDB()
     {
@@ -80,34 +80,75 @@ public class Hash{
                 if(result != null)
                 {
                     logger.info("dropped hashtable");
+                    try{
+                        result.close();
+                        result.getStatement().close();
+                    }
+                    catch (SQLException sqlExp){
+                        logger.warn("SQL statement cannot be closed");
+                    }
+
                 }
             }
             //test if table exists
-            String testSQLStatment = "SELECT TOP 1 * FROM " + TABLENAME;
+            String testSQLStatement = "SELECT TOP 1 * FROM " + TABLENAME;
 
-            ResultSet result = jdbc.exec(testSQLStatment, "Hash::initDB");
+            ResultSet result = jdbc.exec(testSQLStatement, "Hash::initDB");
 
             if(result == null)
             {
                 String SQLStatement = "CREATE TABLE " + TABLENAME + " ( " + FIELD_OAIID + "INTEGER NOT NULL PRIMARY KEY, "
-                    + FIELD_RESOURCE+ " VARCHAR(510)," + FIELD_JSON_BLOB + " LONG VARCHAR ) ";
+                        + FIELD_RESOURCE+ " VARCHAR(510)," + FIELD_JSON_BLOB + " LONG VARCHAR ) ";
 
                 ResultSet ResultMake = jdbc.exec(SQLStatement, "Hash::initDB");
-                ResultSet ResultSecondTest = jdbc.exec(testSQLStatment, "Hash::initDB");
+                ResultSet ResultSecondTest = jdbc.exec(testSQLStatement, "Hash::initDB");
 
                 if(ResultMake == null || ResultSecondTest ==null)
                 {
-                    System.out.println("could not create table " + TABLENAME );
+                    logger.info("could not create table " + TABLENAME );
                     System.exit(1);
                 }
                 else
                 {
                     logger.info("created table " + TABLENAME);
                 }
+
+                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                try{
+                    if(ResultMake != null){
+                        ResultMake.close();
+                        ResultMake.getStatement().close();
+                    }
+                }
+                catch (SQLException sqlExp){
+                    logger.warn("SQL statement cannot be closed");
+                }
+
+                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                try{
+                    if(ResultSecondTest != null){
+                        ResultSecondTest.close();
+                        ResultSecondTest.getStatement().close();
+                    }
+                }
+                catch (SQLException sqlExp){
+                    logger.warn("SQL statement cannot be closed");
+                }
+
             }
             else
             {
                 logger.info("Hash:: table " + TABLENAME + " found");
+
+                //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                try{
+                    result.close();
+                    result.getStatement().close();
+                }
+                catch (SQLException sqlExp){
+                    logger.warn("SQL statement cannot be closed");
+                }
+
             }
         }
     }
@@ -121,7 +162,7 @@ public class Hash{
 
         if(Boolean.parseBoolean(LiveOptions.options.get("LiveUpdateDestination.useHashForOptimization")))
         {
-            this.jdbc = JDBC.getDefaultConnection();
+            jdbc = JDBC.getDefaultConnection();
             this.hasHash = this._retrieveHashValues();
             this.active = true;
         }
@@ -131,12 +172,12 @@ public class Hash{
     {
         try
         {
-            String sqlStatement = "Select " + FIELD_RESOURCE + ", " + FIELD_JSON_BLOB + " From " + TABLENAME +" Where "
+            String sqlStatement = "SELECT " + FIELD_RESOURCE + ", " + FIELD_JSON_BLOB + " FROM " + TABLENAME +" WHERE "
                     + FIELD_OAIID +" = " + this.oaiId;
 
-            ResultSet jdbcResult= this.jdbc.exec(sqlStatement, "Hash._retrieveHashValues");
+            ResultSet jdbcResult= jdbc.exec(sqlStatement, "Hash._retrieveHashValues");
 
-            
+
             //Calculate the number of rows returned by the query
             //jdbcResult.last();
             //int NumberOfRows = jdbcResult.getRow();
@@ -147,16 +188,13 @@ public class Hash{
 
             if(NumberOfRows <= 0)
             {
-				logger.info(this.Subject + " : no hash found");
-				return false;
-			}
+                logger.info(this.Subject + " : no hash found");
+                return false;
+            }
 
             jdbcResult.beforeFirst();
             String Temp = "";
 
-            //TODO In the original code there is a variable called $data that is initialized to false and is concatenated
-            //TODO with Temp
-            
             while(jdbcResult.next())
             {
                 Blob blob = jdbcResult.getBlob(2);
@@ -166,24 +204,36 @@ public class Hash{
                 //Temp += jdbcResult.getBlob(2);
             }
 
-            jdbcResult.close();
-            
+            //jdbcResult.close();
+            //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+            try{
+                if(jdbcResult != null){
+                    jdbcResult.close();
+                    jdbcResult.getStatement().close();
+                }
+            }
+            catch (SQLException sqlExp){
+                logger.warn("SQL statement cannot be closed");
+            }
+
+
             //This class is object is created to force the JSON decoder to return a HashMap, as hashesFromStore is a HashMap 
             ContainerFactory containerFactory = new ContainerFactory(){
                 public List creatArrayContainer() {
-                  return new LinkedList();
+                    return new LinkedList();
                 }
 
                 public Map createObjectContainer() {
-                  return new HashMap();
+                    return new HashMap();
                 }
 
-              };
+            };
 
 
             JSONParser parser = new JSONParser();
             parser.parse(Temp);
-            hashesFromStore = (HashMap) parser.parse(Temp, containerFactory);
+            hashesFromStore = (HashMap<String, HashMap>) parser.parse(Temp, containerFactory);
+            originalHashes = (HashMap) parser.parse(Temp, containerFactory);
             //this.hashesFromStore = json_decode(Temp, true);
 
             if(this.hashesFromStore == null)
@@ -192,6 +242,7 @@ public class Hash{
                 logger.warn(Temp);
                 return false;
             }
+
             logger.info(this.Subject + " retrieved hashes from " + this.hashesFromStore + " extractors ");
             return true;
         }
@@ -204,29 +255,29 @@ public class Hash{
 
     public void updateDB()
     {
-		if(this.active == false)
+        if(!this.active)
         {
-			return;
-		}
+            return;
+        }
 
         //If the application is working in multithreading mode, we must attach the thread id to the timer name
         //to avoid the case that a thread stops the timer of another thread.
         String timerName = "Hash::updateDB" +
                 (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
-		Timer.start(timerName);
+        Timer.start(timerName);
 
         String jsonEncodedString = JSONValue.toJSONString(this.newJSONObject);
 
-		String sql = "Update " + TABLENAME + " Set " + FIELD_RESOURCE +" = ? , " + FIELD_JSON_BLOB + " = ? Where "
+        String sql = "UPDATE " + TABLENAME + " SET " + FIELD_RESOURCE +" = ? , " + FIELD_JSON_BLOB + " = ? WHERE "
                 + FIELD_OAIID + " = " + this.oaiId;
 
-        PreparedStatement stmt = this.jdbc.prepare(sql , "Hash::updateDB");
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::updateDB");
 
         boolean updateExecutedSuccessfully= jdbc.executeStatement(stmt, new String[]{this.Subject, jsonEncodedString} );
 
-	    String needed = Timer.stopAsString(timerName);
-        if(updateExecutedSuccessfully == false)
+        String needed = Timer.stopAsString(timerName);
+        if(!updateExecutedSuccessfully)
         {
             logger.fatal("FAILED to update hashes " + sql);
         }
@@ -234,12 +285,80 @@ public class Hash{
         {
             logger.info(this.Subject + " updated hashes for " + this.newJSONObject.size() + " extractors " + needed);
         }
-	}
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            stmt.close();
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement stmt cannot be closed in function updateDB");
+        }
+
+        ExecutorService es = Executors.newSingleThreadExecutor();
+
+        final Future future = es.submit(new Callable() {
+            public Object call() throws Exception {
+                _insertNewDiffTriples();
+                return null;
+            }
+        });
+
+
+        try {
+            future.get(); // blocking call - the main thread blocks until task is done
+        }
+        catch (Exception exp) {
+            logger.error("Inserting new diff triples failed.");
+        }
+
+
+    }
+
+    private void _insertNewDiffTriples(){
+        Delta delta = DeltaCalculator.calculateDiff(this.Subject, originalHashes, newJSONObject);
+
+        if(this.Subject.contains("/File:")){
+            return;
+        }
+
+        CallableStatement updateOldDiffTriplesStmt = jdbc.prepareCallableStatement("update_dbpedia_triples_diff_for_resource(?,?,?,?)",
+                "Hash::updateDB");
+
+        String addedTripleString = delta.formulateAddedTriplesAsNTriples(true);
+        String deletedTripleString = delta.formulateDeletedTriplesAsNTriples(true);
+        String modifiedTripleString = delta.formulateModifiedTriplesAsNTriples(true);
+
+        jdbc.executeCallableStatement(updateOldDiffTriplesStmt,new String[]{this.Subject, addedTripleString, deletedTripleString
+                , modifiedTripleString});
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(updateOldDiffTriplesStmt != null){
+                updateOldDiffTriplesStmt.close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement cannot be closed");
+        }
+
+        boolean hasDelta = (addedTripleString.compareTo("") != 0 && deletedTripleString.compareTo("") != 0)
+                && modifiedTripleString.compareTo("") != 0;
+
+
+
+        if(hasDelta){
+
+            int itemPos = Arrays.asList(Main.recentlyUpdatedInstances).indexOf(new RecentlyUpdatedInstance(this.Subject));
+            Main.recentlyUpdatedInstances[itemPos].setHasDelta(true);
+        }
+
+    }
+
 
     /**
      * Inserts a new record into dbpedia_triples table, in order to later use it to compare hashes
      */
-	public void insertIntoDB()
+    public void insertIntoDB()
     {
         if(!this.active)
         {
@@ -252,19 +371,19 @@ public class Hash{
                 (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
         Timer.start(timerName);
-        
+
         String jsonEncodedString = JSONValue.toJSONString(this.newJSONObject);
-        String sql = "Insert Into " + TABLENAME + "(" + FIELD_OAIID + ", " +
+        String sql = "INSERT INTO " + TABLENAME + "(" + FIELD_OAIID + ", " +
                 FIELD_RESOURCE + " , " + FIELD_JSON_BLOB + " ) VALUES ( ?, ? , ?  ) ";
 
-        PreparedStatement stmt = this.jdbc.prepare(sql , "Hash::insertIntoDB");
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::insertIntoDB");
 
         boolean insertExecutedSuccessfully= jdbc.executeStatement(stmt, new String[]{this.oaiId, this.Subject,
                 jsonEncodedString} );
 
-	    String needed = Timer.stopAsString(timerName);
+        String needed = Timer.stopAsString(timerName);
 
-        if(insertExecutedSuccessfully == false)
+        if(!insertExecutedSuccessfully)
         {
             logger.fatal("FAILED to insert hashes for " + this.newJSONObject.size() + " extractors ");
         }
@@ -272,7 +391,50 @@ public class Hash{
         {
             logger.info(this.Subject + " inserted hashes for " + this.newJSONObject.size() + " extractors " + needed);
         }
-	}
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            stmt.close();
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement stmt cannot be closed in function insertIntoDB");
+        }
+
+        Delta delta = DeltaCalculator.calculateDiff(this.Subject, originalHashes, newJSONObject);
+        //First delete old diff triples
+        CallableStatement deleteOldDiffTriplesStsmt = jdbc.prepareCallableStatement("DELETE_ALL_RESOURCE_TRIPLES_FROM_dbpedia_triples_diff(?)",
+                "Hash::updateDB");
+        jdbc.executeCallableStatement(deleteOldDiffTriplesStsmt,new String[]{this.Subject});
+
+        //Insert the added triples as an N-Triples string
+        CallableStatement insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)",
+                "Hash::updateDB");
+        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt,new String[]{this.Subject, Integer.toString(Delta.DiffType.ADDED.getCode()),
+                delta.formulateAddedTriplesAsNTriples(true)});
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(deleteOldDiffTriplesStsmt != null){
+                deleteOldDiffTriplesStsmt.close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement deleteOldDiffTriplesStsmt cannot be closed in insertIntoDB");
+        }
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            if(insertNewDiffTriplesStsmt != null){
+                insertNewDiffTriplesStsmt.close();
+            }
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement insertNewDiffTriplesStsmt cannot be closed in insertIntoDB");
+        }
+
+        //Main.
+
+    }
 
     /**
      * Deletes a record for a specific resource from dbpedia_triples table.
@@ -292,19 +454,27 @@ public class Hash{
 
         String sql = "DELETE FROM " + TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
 
-        PreparedStatement stmt = this.jdbc.prepare(sql , "Hash::deleteFromDB");
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::deleteFromDB");
 
         boolean deleteExecutedSuccessfully= jdbc.executeStatement(stmt, new String[]{} );
 
-	    String needed = Timer.stopAsString(timerName);
+        String needed = Timer.stopAsString(timerName);
 
-        if(deleteExecutedSuccessfully == false)
+        if(!deleteExecutedSuccessfully)
         {
             logger.fatal("FAILED to delete hashes for " + this.newJSONObject.size() + " extractors ");
         }
         else
         {
             logger.info("Hashes for " + this.Subject + " has been deleted");
+        }
+
+        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+        try{
+            stmt.close();
+        }
+        catch (SQLException sqlExp){
+            logger.warn("SQL statement stmt cannot be closed in function deleteFromDB");
         }
     }
 
@@ -324,17 +494,14 @@ public class Hash{
 
         if((triples != null) && (triples.size()!=0))
         {
-            //$this->newJSONObject[$extractorID] = array();
-            //TODO this items must be an array
             this.newJSONObject.put(extractorID, new HashMap());
         }
 
         ArrayList <String>keys = new ArrayList<String>();
-       //TODO newHashSet must be an array
-        HashMap newHashSet = new HashMap();
+        HashMap<String, HashMap> newHashSet = new HashMap<String, HashMap>();
         for(int i=0; i<triples.size(); i++)
         {
-            HashMap tmp = new HashMap();
+            HashMap<String, Object> tmp = new HashMap<String, Object>();
 
             tmp.put("s", Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getSubject()));
             tmp.put("p",  Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getPredicate()));
@@ -346,96 +513,63 @@ public class Hash{
             newHashSet.put(((RDFTriple)triples.get(i)).getMD5HashCode(), tmp);
         }
 
-//        newHashSet.remove(keys.get(20));
-//        newHashSet.remove(keys.get(21));
-//        newHashSet.remove(keys.get(22));
-//        newHashSet.remove(keys.get(23));
-//        newHashSet.remove(keys.get(24));
-//        newHashSet.remove(keys.get(25));
-//        newHashSet.remove(keys.get(26));
-//        newHashSet.remove(keys.get(27));
-//        newHashSet.remove(keys.get(28));
-//        newHashSet.remove(keys.get(29));
-//        newHashSet.remove(keys.get(30));
-
         Iterator tripleHashsetIterator = newHashSet.entrySet().iterator();
 
         while(tripleHashsetIterator.hasNext())
         {
             total++;
-            Map.Entry pairs = (Map.Entry)tripleHashsetIterator.next();
-            String hash = pairs.getKey().toString();
+            Map.Entry<String, HashMap> pairs = (Map.Entry<String, HashMap>)tripleHashsetIterator.next();
+            String hash = pairs.getKey();
 
             //triple exists
             if((this.hashesFromStore.get(extractorID) != null) &&(
-                    ((HashMap)this.hashesFromStore.get(extractorID)).get(hash)) != null)
+                    (this.hashesFromStore.get(extractorID)).get(hash)) != null)
             {
-
-//                this.newJSONObject.put(extractorID, hash);
-//                HashMap sourceHashMap = new HashMap();
-//                sourceHashMap.put(hash, ((HashMap)this.hashesFromStore.get(extractorID)).get(hash));
-//
-//                HashMap destinationHashMap =  (HashMap)this.newJSONObject.get(extractorID);
-//                destinationHashMap.put(hash, sourceHashMap);
-//
-//                this.hashesFromStore.remove(extractorID);
 
                 //This is the first triple to be added to the list of triples that should be removed from the store,
                 //so we must construct the Hashmap
-                HashMap tmpHashmap = null;
+                HashMap<String, HashMap> tmpHashmap = null;
                 if(this.newJSONObject.get(extractorID) == null){
-                    tmpHashmap = new HashMap();
+                    tmpHashmap = new HashMap<String, HashMap>();
                 }
                 else//Hashmap already exists, so we can use it directly 
-                    tmpHashmap = (HashMap)this.newJSONObject.get(extractorID);
+                    tmpHashmap = this.newJSONObject.get(extractorID);
 
-                tmpHashmap.put(hash, ((HashMap)this.hashesFromStore.get(extractorID)).get(hash));
+                tmpHashmap.put(hash, (HashMap)this.hashesFromStore.get(extractorID).get(hash));
 
                 this.newJSONObject.put(extractorID, tmpHashmap);
 
-                ((HashMap)this.hashesFromStore.get(extractorID)).remove(hash);
+                this.hashesFromStore.get(extractorID).remove(hash);
 
                 matchCount++;
             }
             else
             {
-                //add it
-                //$this->addTriples[$hash] = $tripleArray['triple'];
                 //Intialize the hashmap if it is already null
                 if(addTriples == null)
-                    addTriples = new HashMap();
+                    addTriples = new HashMap<String, RDFTriple>();
 
-                this.addTriples.put(hash, ((HashMap)pairs.getValue()).get("triple"));
+                this.addTriples.put(hash, (RDFTriple)pairs.getValue().get("triple"));
 
                 //unset($tripleArray['triple']);
                 ((HashMap)pairs.getValue()).remove("triple");
 
-                //$this->newJSONObject[$extractorID][$hash] = $tripleArray;
-                HashMap destinationHashMap = (HashMap)this.newJSONObject.get(extractorID);
+                HashMap<String, HashMap> destinationHashMap = this.newJSONObject.get(extractorID);
                 destinationHashMap.put(hash, pairs.getValue());
 
                 addCount++;
             }
-         }
+        }
 
-    //  foreach($this->hashesFromStore[$extractorID] as $hash => $triple)
-        HashMap hmHashAndTriples = (HashMap)hashesFromStore.get(extractorID);
+        HashMap hmHashAndTriples = hashesFromStore.get(extractorID);
         Iterator hashesForIterator = hmHashAndTriples.entrySet().iterator();
         while(hashesForIterator.hasNext())
         {
-            Map.Entry pairs = (Map.Entry)hashesForIterator.next();
+            Map.Entry<String, HashMap> pairs = (Map.Entry<String, HashMap>)hashesForIterator.next();
 
             //initialize the hashmap if it is already null 
             if(deleteTriples == null)
-                deleteTriples = new HashMap();
-
-            //In case of Abstract extraction we should convert BLOB into string in order to decode non-English characters
-            //as they are stored as a sequence of unicode escaped characters e.g. \u664B must be converted into 晋, in order
-            //for the triple to found and renewed with the new triple value.
-            if(extractorID.toLowerCase().contains("abstractextractor")){
-                String strUnicodeDecoded = new String((String)((HashMap) (pairs.getValue())).get("o"));
-                ((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
-            }
+                deleteTriples = new HashMap<String, HashMap>();
 
             this.deleteTriples.put(pairs.getKey(), pairs.getValue());
             delCount++;
@@ -447,13 +581,13 @@ public class Hash{
 
     }
 
-/*
+    /*
      * returns the diff of the extractionresult with the db
- * used for collecting triples and compare them to the hash
- * name: compare
- * @param $extractionResult
- * @return
- */
+     * used for collecting triples and compare them to the hash
+     * name: compare
+     * @param $extractionResult
+     * @return
+     */
     public void compare(ExtractionResult  extractionResult)
     {
         if(!this.active)
@@ -466,7 +600,7 @@ public class Hash{
         String timerName = "Hash.compare" +
                 (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
         Timer.start(timerName);
-        
+
         String extractorID = extractionResult.getExtractorID();
         ArrayList triples = extractionResult.getTriples();
         String nicename = extractorID.replace(Constants.DB_META_NS, "");
@@ -496,24 +630,24 @@ public class Hash{
     {
         logger.info("removing " + this.deleteTriples.size() + " previous triples ");
         return this.addTriples;
-	}
-	public HashMap getTriplesToDelete()
+    }
+    public HashMap getTriplesToDelete()
     {
         logger.info("adding " + this.addTriples.size() + " triples ");
         return this.deleteTriples;
-	}
+    }
 
 
-	private boolean _isExtractorInHash(String extractorID)
+    private boolean _isExtractorInHash(String extractorID)
     {
-		return ((this.hashesFromStore != null)&&(this.hashesFromStore.get(extractorID) != null));
-	}
+        return ((this.hashesFromStore != null)&&(this.hashesFromStore.get(extractorID) != null));
+    }
 
-/*
- * name: _addToJSON
- * @param
- * @return
- */
+    /*
+    * name: _addToJSON
+    * @param
+    * @return
+    */
     private void _addToJSON(String extractorID, ArrayList triples)
     {
         //If the application is working in multithreading mode, we must attach the thread id to the timer name
@@ -532,10 +666,6 @@ public class Hash{
 //            addTriples.put()
             this.newJSONObject.put(extractorID, newTriplesToBeAdded);
             String nicename = extractorID.replace(Constants.DB_META_NS, "");
-
-            //TODO array_keys($this->newJSONObject[$extractorID]) should be mapped to java, but I think I converted it
-            //TODO correctly
-            //$this->log(DEBUG, ' added : '.count(array_keys($this->newJSONObject[$extractorID])).' of '. count($triples).' triples to JSON object for '.$nicename. '[removed duplicates]' );
 
             HashMap hmTemp = (HashMap)this.newJSONObject.get(extractorID);
             logger.info(" added : " + hmTemp.size() + " of " +
@@ -557,13 +687,12 @@ public class Hash{
 
         //Timer.start("Hash.compare._generateHashSetFromTriples");
 
-        HashMap newHashSet = new HashMap();
+        HashMap<String, HashMap> newHashSet = new HashMap<String, HashMap>();
         for (Object objTriple : triples)
         {
             RDFTriple triple = (RDFTriple)objTriple;
 
-            HashMap tmp = new HashMap();
-            //TODO we should use the function toSPARULPattern with getSubject, getPredicate, and getObject
+            HashMap<String, String> tmp = new HashMap<String, String>();
             tmp.put("s", Util.convertToSPARULPattern(triple.getSubject()));
             tmp.put("p", Util.convertToSPARULPattern(triple.getPredicate()));
             tmp.put("o", Util.convertToSPARULPattern(triple.getObject()));
@@ -578,14 +707,6 @@ public class Hash{
         }
         Timer.stop(timerName);
         return newHashSet;
-
-        //add the generated triples to the list of triples that should be added to the store
-//            Iterator tripleHashsetIterator = newTriplesToBeAdded.entrySet().iterator();
-//            while(tripleHashsetIterator.hasNext()){
-//                Map.Entry pairs = (Map.Entry)tripleHashsetIterator.next();
-//                String hash = pairs.getKey().toString();
-//                addTriples.put(hash, pairs.getValue());
-//            }
     }
 
 
@@ -593,13 +714,6 @@ public class Hash{
     {
         return this.hasHash;
     }
-
-    //TODO this method depends on class logger, and we may or may not need it, as we have a class fro logging in java. 
-    /*private boolean log(Level lvl, String message)
-    {
-        logger.logp(lvl, this.getClass().getName(), "core", message);    
-        Logger::logComponent('core', get_class(this), lvl , message);
-    }*/
 
     /**
      * Returns the previously generated triples for an extractor
@@ -609,7 +723,7 @@ public class Hash{
     public HashMap getTriplesForExtractor(String extractorID){
 
         if((this._isExtractorInHash(extractorID)) && (this.hashesFromStore.get(extractorID) != null)){
-            return (HashMap)this.hashesFromStore.get(extractorID);
+            return this.hashesFromStore.get(extractorID);
         }
         return null;
     }
@@ -618,12 +732,131 @@ public class Hash{
         try{
             if(hashesFromStore == null)//No previous hashes for the current page exist, i.e. no further processing required
                 return;
-            HashMap mapHashesInStore = (HashMap)hashesFromStore.get(extractorID);
+            HashMap mapHashesInStore = hashesFromStore.get(extractorID);
             this.newJSONObject.put(extractorID, mapHashesInStore);
         }
         catch (Exception exp){
             logger.warn("Hashes for extractor " + extractorID + " cannot be fetched");
         }
     }
+
+    public static Model getTriples(String requiredResource, TriplesType typeOfRequiredTriples)
+    {
+        try
+        {
+            String sqlStatement = "";
+
+            if(typeOfRequiredTriples == TriplesType.LatestTriples)
+                sqlStatement = "SELECT " + FIELD_OAIID + ", " + FIELD_JSON_BLOB + " FROM " + TABLENAME +" WHERE "
+                        + FIELD_RESOURCE +" = '" + requiredResource + "'";
+            else
+                sqlStatement = "SELECT " + FIELD_OAIID + ", " + FIELD_JSON_BLOB + " FROM " + DIFF_TABLENAME +" WHERE "
+                        + FIELD_RESOURCE +" = '" + requiredResource + "'";
+
+            JDBC con = JDBC.getDefaultConnection();
+
+            ResultSet jdbcResult= con.exec(sqlStatement, "getTriples");
+            int NumberOfRows = 0;
+
+            while(jdbcResult.next())
+                NumberOfRows++;
+
+            if(NumberOfRows <= 0)
+            {
+                logger.info("No triples found for " + requiredResource);
+                return null;
+            }
+
+            jdbcResult.beforeFirst();
+            String Temp = "";
+
+            while(jdbcResult.next())
+            {
+                Blob blob = jdbcResult.getBlob(2);
+                byte[] bdata = blob.getBytes(1, (int) blob.length());
+                Temp += new String(bdata);
+            }
+
+//            jdbcResult.close();
+
+            //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+            try{
+                if(jdbcResult != null){
+                    jdbcResult.close();
+                    jdbcResult.getStatement().close();
+                }
+            }
+            catch (SQLException sqlExp){
+                logger.warn("SQL statement cannot be closed");
+            }
+
+            //This class is object is created to force the JSON decoder to return a HashMap, as hashesFromStore is a HashMap
+            ContainerFactory containerFactory = new ContainerFactory(){
+                public List creatArrayContainer() {
+                    return new LinkedList();
+                }
+
+                public Map createObjectContainer() {
+                    return new HashMap();
+                }
+
+            };
+
+
+            JSONParser parser = new JSONParser();
+            parser.parse(Temp);
+            HashMap hashRetrieved = (HashMap) parser.parse(Temp, containerFactory);
+            //this.hashesFromStore = json_decode(Temp, true);
+
+            if(hashRetrieved == null)
+            {
+                logger.warn("conversion to JSON failed, not using hash this time");
+                return null;
+            }
+
+            logger.info(requiredResource + " retrieved triples");
+
+            //The following code snippet is responsible for extracting the triples from the HashMap retrieved from the
+            //database and convert it into Jena Model in order to ease comparison of triples
+            Model requiredTriples = ModelFactory.createDefaultModel();
+            Iterator currentTriplesIterator = hashRetrieved.entrySet().iterator();
+            while (currentTriplesIterator.hasNext()){
+                Map.Entry pairsWithExtractorKey = (Map.Entry)currentTriplesIterator.next();
+                HashMap extractorTriplesHashMap = (HashMap) pairsWithExtractorKey.getValue();
+
+                if(extractorTriplesHashMap == null)
+                    continue;
+
+                Iterator extractorTriplesIterator = extractorTriplesHashMap.entrySet().iterator();
+
+                while (extractorTriplesIterator.hasNext()){
+                    Map.Entry pairsTripleWithHash = (Map.Entry)extractorTriplesIterator.next();
+
+
+                    HashMap hmActualTriple = (HashMap)pairsTripleWithHash.getValue();
+
+                    //I convert the triple into a string by concatenating its 3 parts, in order to ease its parsing
+                    //and conversion into Jena statement object
+                    String tripleString = hmActualTriple.get("s") + " " + hmActualTriple.get("p") + " " +
+                            hmActualTriple.get("o") + " .";
+
+                    tripleString = tripleString.replace("\"\"\"", "\"");
+
+                    Model tmpModel = requiredTriples.read(new StringReader(tripleString), null, "N-TRIPLE");
+                    requiredTriples.add(tmpModel);
+                }
+
+            }
+            ///////////////End of conversion code//////////////////////
+
+            return requiredTriples;
+        }
+        catch(Exception exp)
+        {
+            logger.warn(exp.getMessage());
+            return null;
+        }
+    }
+
 
 }

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.dbpedia.extraction</groupId>
-        <artifactId>main</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <groupId>org.dbpedia</groupId>
+        <artifactId>extraction</artifactId>
+        <version>3.8</version>
     </parent>
 
+    <groupId>org.dbpedia.extraction</groupId>
     <artifactId>dump</artifactId>
-    <packaging>jar</packaging>
     <name>DBpedia Dump Extraction</name>
 
     <build>
@@ -23,22 +22,85 @@
 
                 <configuration>
                     <launchers>
+
                         <launcher>
-                            <id>Extract</id>
-                            <mainClass>org.dbpedia.extraction.dump.Extract</mainClass>
+                            <id>import</id>
+                            <mainClass>org.dbpedia.extraction.dump.sql.Import</mainClass>
                             <jvmArgs>
-                                <jvmArg>-Xmx1024m</jvmArg>
+                                <jvmArg>-server</jvmArg>
                             </jvmArgs>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>/home/release/data/projects/mediawiki/core/maintenance/tables.sql</arg>
+                                <arg>localhost</arg><!-- MySQL host:port -->
+                                <arg>true</arg><!-- require-download-complete -->
+                                <arg>10000-</arg><!-- languages and article count ranges, comma-separated -->
+                            </args>
                         </launcher>
 
                         <launcher>
-                            <id>Compress</id>
-                            <mainClass>org.dbpedia.extraction.dump.Compress</mainClass>
+                            <id>extraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx1024m</jvmArg>
+                            </jvmArgs>
+                            <args>
+                                <arg>extraction.properties</arg>
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>compress</id>
+                            <mainClass>org.dbpedia.extraction.dump.compress.Compress</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xmx1024m</jvmArg>
                             </jvmArgs>
                             <!-- mvn scala:run -Dlauncher=Compress "-DaddArgs=/data|/data-compressed" -->
                         </launcher>
+
+                        <launcher>
+                            <id>download</id>
+                            <mainClass>org.dbpedia.extraction.dump.download.Download</mainClass>
+                            <args>
+                                <arg>config=download.properties</arg>
+                                <!--
+                                <arg>progress-pretty=true</arg>
+                                <arg>dir=/home/release/wikipedia</arg>
+                                <arg>csv=http://s23.org/wikistats/wikipedias_csv</arg>
+                                <arg>base=http://dumps.wikimedia.org</arg>
+                                <arg>other=http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/maintenance/tables.sql</arg>
+                                <arg>dump=10000-:image.sql.gz,imagelinks.sql.gz,langlinks.sql.gz,templatelinks.sql.gz,categorylinks.sql.gz</arg>
+                                <arg>dump=commons,10000-:pages-articles.xml.bz2</arg>
+                                <arg>unzip=true</arg>
+                                <arg>retry-max=5</arg>
+                                <arg>retry-millis=10000</arg>
+                                -->
+                            </args>
+                        </launcher>
+                        
+                        <launcher>
+                            <id>purge-download</id>
+                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>download-complete</arg>
+                                <arg>1</arg><!-- keep only one latest download -->
+                                <arg>*.sql.gz,*.xml.bz2,*.sql,*-pages-articles.xml,index.html</arg><!-- delete these files -->
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>purge-extraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>extraction-complete</arg>
+                                <arg>2</arg><!-- keep two extractions -->
+                                <arg>*.nt,*.nq,*.tql,*.ttl,*.trix,*-redirects.obj</arg><!-- delete these files -->
+                            </args>
+                        </launcher>
+
                     </launchers>
                 </configuration>
 
@@ -58,6 +120,12 @@
             <artifactId>commons-compress</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.20</version>
+        </dependency>
+        
     </dependencies>
 
 </project>

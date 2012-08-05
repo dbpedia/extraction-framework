@@ -37,7 +37,7 @@ class AugmenterExtractorTest extends FlatSpec with ShouldMatchers
 
     val context = new
     {
-        def language : Language = Language.fromWikiCode("en").get
+        def language : Language = Language.English
     }
 
     val decoratee = new DummyExtractor(context)
@@ -45,7 +45,7 @@ class AugmenterExtractorTest extends FlatSpec with ShouldMatchers
 
 
     val canon = new HashMap[String, Set[String]] with MultiMap[String, String]
-    labelToURIs.foreach(e => e._2.foreach(x => canon.add(AugmenterExtractorUtils.canonicalize(e._1), x)))
+    labelToURIs.foreach(e => e._2.foreach(x => canon.addBinding(AugmenterExtractorUtils.canonicalize(e._1), x)))
 
     println(canon)
 
@@ -53,7 +53,7 @@ class AugmenterExtractorTest extends FlatSpec with ShouldMatchers
 
     val graph = extractor.extract(null, "http://subjectPageURI", null)
 
-    println(graph.quads)
+    println(graph)
   }
 
 

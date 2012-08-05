@@ -1,59 +1,34 @@
 package org.dbpedia.extraction.live.feeder;
 
-import com.ctc.wstx.util.StringVector;
-import com.hp.hpl.jena.graph.query.Expression;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
-import com.hp.hpl.jena.shared.NamespaceEndsWithNameCharException;
 import com.hp.hpl.jena.shared.PrefixMapping;
 import com.hp.hpl.jena.shared.impl.PrefixMappingImpl;
-import com.hp.hpl.jena.sparql.util.PrefixMapping2;
-import com.hp.hpl.jena.util.FileUtils;
-import com.hp.hpl.jena.vocabulary.OWL;
-import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
-import info.aduna.platform.support.MacOSXPlatform;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.PropertyConfigurator;
-import org.dbpedia.extraction.live.core.Util;
-import org.dbpedia.extraction.live.helper.ExtractorSpecification;
+import org.dbpedia.extraction.live.feeder.TBoxExtractor2;
 import org.dbpedia.extraction.live.util.*;
 import org.dbpedia.extraction.live.util.sparql.ISparulExecutor;
 import org.dbpedia.extraction.live.util.sparql.VirtuosoJdbcSparulExecutor;
-import org.dbpedia.extraction.ontology.Ontology;
-import org.dbpedia.extraction.ontology.io.OntologyOWLWriter;
 import org.dbpedia.extraction.ontology.io.OntologyReader;
-import org.dbpedia.extraction.sources.LiveExtractionXMLSource;
+import org.dbpedia.extraction.sources.LiveExtractionSource;
 import org.dbpedia.extraction.sources.Source;
 import org.ini4j.Ini;
-import org.mindswap.pellet.tbox.impl.TBoxBase;
-import org.openrdf.query.algebra.Var;
-import org.semanticweb.owlapi.io.SystemOutDocumentTarget;
-import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.apache.commons.collections15.MultiMap;
-import org.apache.commons.collections15.multimap.MultiHashMap;
 import virtuoso.jdbc4.VirtuosoDataSource;
 
-import javax.swing.plaf.metal.MetalIconFactory;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.zip.DeflaterInputStream;
 
 
 
@@ -189,7 +164,7 @@ public class OntologyUpdateFeeder extends Thread {
                 } else {
 
                     scala.xml.Node element = scala.xml.XML.loadString(str);
-                    Source source = LiveExtractionXMLSource.fromXML((scala.xml.Elem) element);
+                    Source source = LiveExtractionSource.fromXML((scala.xml.Elem) element);
                     extractor.handle(source);
 
                 }

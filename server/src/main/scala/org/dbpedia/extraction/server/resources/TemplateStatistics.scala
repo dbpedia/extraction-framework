@@ -2,450 +2,262 @@ package org.dbpedia.extraction.server.resources
 
 import javax.ws.rs._
 import org.dbpedia.extraction.server.Server
-import collection.immutable.ListMap
-import org.dbpedia.extraction.util.{WikiUtil, Language}
-import org.dbpedia.extraction.server.util.CreateMappingStats._
-import java.io._
-import org.dbpedia.extraction.server.util.{CreateMappingStats, IgnoreList}
-import java.lang.Boolean
+import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.server.stats.MappingStats
+import org.dbpedia.extraction.server.util.StringUtils.urlEncode
+import java.net.URI
+import java.io.PrintWriter
+import scala.xml.Elem
 
-@Path("/statistics/{lang}")
-class TemplateStatistics(@PathParam("lang") langCode: String) extends Base
+/**
+ * Displays the statistics for all templates of a language.
+ * 
+ * TODO: Some URLs contain spaces. We should convert spaces to underscores in most cases, but in
+ * some cases we have to use %20.
+ */
+@Path("/statistics/{lang}/")
+class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String, @QueryParam("show") @DefaultValue("20") show: Int = 20)
 {
-    private val language = Language.fromWikiCode(langCode)
-                                   .getOrElse(throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
-
-    if (!Server.config.languages.contains(language))
-        throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
-
-    private val createMappingStats = new CreateMappingStats(language)
-
-    private var wikipediaStatistics: WikipediaStats = null
-    if (new File(createMappingStats.mappingStatsObjectFileName).isFile)
-    {
-        Server.logger.info("Loading serialized WikiStats object from " + createMappingStats.mappingStatsObjectFileName)
-        wikipediaStatistics = CreateMappingStats.deserialize(createMappingStats.mappingStatsObjectFileName)
-		Server.logger.info("done")
+  @GET
+  @Produces(Array("application/xhtml+xml"))
+  def get: Elem = {
+    if (langCode == "*") allLanguages else singleLanguage
+  }
+      
+  /**
+   * Displays the statistics for all languages.
+   */
+  private def allLanguages: Elem =
+  {
+    var templateCount = 0L
+    var mappedTemplateCount = 0L
+  
+    var templateUseCount = 0L
+    var mappedTemplateUseCount = 0L
+  
+    var propertyCount = 0L
+    var mappedPropertyCount = 0L
+    
+    var propertyUseCount = 0L
+    var mappedPropertyUseCount = 0L
+      
+    for ((language, manager) <- Server.instance.managers) {
+      
+      val holder = manager.holder
+      
+      templateCount += holder.templateCount
+      mappedTemplateCount += holder.mappedTemplateCount
+    
+      templateUseCount += holder.templateUseCount
+      mappedTemplateUseCount += holder.mappedTemplateUseCount
+    
+      propertyCount += holder.propertyCount
+      mappedPropertyCount += holder.mappedPropertyCount
+      
+      propertyUseCount += holder.propertyUseCount
+      mappedPropertyUseCount += holder.mappedPropertyUseCount
     }
-    else
-    {
-        Server.logger.info("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFileName)
-        throw new FileNotFoundException("Can not load WikipediaStats from " + createMappingStats.mappingStatsObjectFileName)
-    }
+  
+    val mappedTemplateRatio = mappedTemplateCount.toDouble / templateCount.toDouble
+    val mappedPropertyRatio = mappedPropertyCount.toDouble / propertyCount.toDouble
+    
+    val mappedTemplateUseRatio = mappedTemplateUseCount.toDouble / templateUseCount.toDouble
+    val mappedPropertyUseRatio = mappedPropertyUseCount.toDouble / propertyUseCount.toDouble
+    
+    val percentageMappedTemplates: String = "%2.2f".format(mappedTemplateRatio * 100)
+    val percentageMappedProperties: String = "%2.2f".format(mappedPropertyRatio * 100)
+    val percentageMappedTemplateUse: String = "%2.2f".format(mappedTemplateUseRatio * 100)
+    val percentageMappedPropertyUse: String = "%2.2f".format(mappedPropertyUseRatio * 100)
+    
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Mapping Statistics for all languages</title>
+    </head>
+    <body>
+      <h2 align="center">Mapping Statistics for <u>all languages</u></h2>
+      <p align="center">{percentageMappedTemplates} % of all templates are mapped ({mappedTemplateCount} of {templateCount}).</p>
+      <p align="center">{percentageMappedProperties} % of all properties are mapped ({mappedPropertyCount} of {propertyCount}).</p>
+      <p align="center">{percentageMappedTemplateUse} % of all template occurrences in Wikipedia are mapped ({mappedTemplateUseCount} of {templateUseCount}).</p>
+      <p align="center">{percentageMappedPropertyUse} % of all property occurrences in Wikipedia are mapped ({mappedPropertyUseCount} of {propertyUseCount}).</p>
+    </body>
+    </html>
+  }
+  
+  private def singleLanguage: Elem = {
+      
+    val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
-    private val mappings = getClassMappings
-    private val mappingStatistics = createMappingStats.countMappedStatistics(mappings, wikipediaStatistics)
-    private val ignoreList: IgnoreList = createMappingStats.loadIgnorelist()
+    if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
 
-    private val mappingUrlPrefix =
-        if (langCode == "en") "http://mappings.dbpedia.org/index.php/Mapping:"
-        else "http://mappings.dbpedia.org/index.php/Mapping_"+langCode+":"
+    val manager = Server.instance.managers(language)
 
+    val statsHolder = manager.holder
+    
+    val sortedStats = statsHolder.mappedStatistics.sortBy(ms => (- ms.templateCount, ms.templateName))
 
-    private val mappedGoodColor = "#65c673"
-    private val mappedMediumColor = "#ecea48"
-    private val mappedBadColor = "#e0ab3a"
-    private val notMappedColor = "#df5c56"
+    val reversedRedirects = statsHolder.reversedRedirects
+    val percentageMappedTemplates: String = "%2.2f".format(statsHolder.mappedTemplateRatio * 100)
+    val percentageMappedProperties: String = "%2.2f".format(statsHolder.mappedPropertyRatio * 100)
+    val percentageMappedTemplateUse: String = "%2.2f".format(statsHolder.mappedTemplateUseRatio * 100)
+    val percentageMappedPropertyUse: String = "%2.2f".format(statsHolder.mappedPropertyUseRatio * 100)
 
-    private val goodThreshold = 0.8
-    private val mediumThreshold = 0.4
+    val mappingUrlPrefix = Server.instance.paths.pagesUrl+"/"+Namespace.mappings(language).name(Language.Mappings).replace(' ','_')+":"
 
-    private val renameColor = "#df5c56"
-    private val ignoreColor = "#cdcdcd"
+    val mappedGoodColor = "#65c673"
+    val mappedMediumColor = "#ecea48"
+    val mappedBadColor = "#e0ab3a"
+    val notMappedColor = "#df5c56"
 
-    @GET
-    @Produces(Array("application/xhtml+xml"))
-    def get =
-    {
-        var statsMap: Map[MappingStats, Int] = Map()
-        for (mappingStat <- mappingStatistics)
-        {
-            statsMap += ((mappingStat, mappingStat.templateCount))
-        }
-        val sortedStatsMap = ListMap(statsMap.toList.sortBy
-        {
-            case (key, value) => (-value, key)
-        }: _*)
+    val goodThreshold = 0.8
+    val mediumThreshold = 0.4
 
-        val reversedRedirects = wikipediaStatistics.checkForRedirects(sortedStatsMap, mappings, language)
-        val percentageMappedTemplates: String = "%2.2f".format(getNumberOfMappedTemplates(statsMap).toDouble / getNumberOfTemplates(statsMap).toDouble * 100)
-        val percentageMappedTemplateOccurrences: String = "%2.2f".format(getRatioOfMappedTemplateOccurrences(statsMap) * 100)
-        val percentageMappedPropertyOccurrences: String = "%2.2f".format(getRatioOfAllMappedPropertyOccurrences(statsMap) * 100)
+    val renameColor = "#b03060"
+    val ignoreColor = "#cdcdcd"
 
-        // print percentage to file for Pablo's counter
-        val out = new PrintWriter(createMappingStats.percentageFileName)
-        out.write(percentageMappedTemplateOccurrences)
-        out.close()
+    // TODO: stream xml to browser. We produce up to 10MB HTML. XML in memory is even bigger.
+      
+        // print percentage to file for Pablo's counter. TODO: this is not the right place to do this. 
+        // Should be done when stats change, not when someone accesses this page.
+        val out = new PrintWriter(manager.percentageFile)
+        try out.write(percentageMappedTemplateUse) finally out.close()
 
-        //Server.logger.info("ratioTemp: " + percentageMappedTemplates)
-        //Server.logger.info("ratioTempUses: " + percentageMappedTemplateOccurrences)
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
             <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              <title>Mapping Statistics for {langCode}</title>
             </head>
             <body>
                 <h2 align="center">Mapping Statistics for <u>{langCode}</u></h2>
-                <p align="center">
-                    {percentageMappedTemplates}
-                    % templates are mapped (
-                    {getNumberOfMappedTemplates(statsMap)}
-                    of
-                    {getNumberOfTemplates(statsMap)}
-                    ).</p>
-                <p align="center">
-                    {percentageMappedTemplateOccurrences}
-                    % of all template occurrences in Wikipedia (
-                    {langCode}
-                    ) are mapped (
-                    {getNumberOfMappedTemplateOccurrences(statsMap)}
-                    of
-                    {getNumberOfTemplateOccurrences(statsMap)}
-                    ).</p>
-                <p align="center">
-                    {percentageMappedPropertyOccurrences}
-                    % of all property occurrences in Wikipedia (
-                    {langCode}
-                    ) are mapped (
-                    {getAllMappedPropertyOccurrences(statsMap)}
-                    of
-                    {getAllPropertyOccurrences(statsMap)}
-                    ).</p>
+                <p align="center">{percentageMappedTemplates} % of all templates in Wikipedia ({langCode}) are mapped 
+                ({statsHolder.mappedTemplateCount} of {statsHolder.templateCount}).</p>
+                <p align="center">{percentageMappedProperties} % of all properties in Wikipedia ({langCode}) are mapped 
+                ({statsHolder.mappedPropertyCount} of {statsHolder.propertyCount}).</p>
+                <p align="center">{percentageMappedTemplateUse} % of all template occurrences in Wikipedia ({langCode}) are mapped 
+                ({statsHolder.mappedTemplateUseCount} of {statsHolder.templateUseCount}).</p>
+                <p align="center">{percentageMappedPropertyUse} % of all property occurrences in Wikipedia ({langCode}) are mapped
+                ({statsHolder.mappedPropertyUseCount} of {statsHolder.propertyUseCount}).</p>
 
                 <table align="center">
                     <caption>The color codes:</caption>
-                    <tr>
-                        <td bgcolor={mappedGoodColor}>template is mapped with more than
-                            {"%2.0f".format(goodThreshold*100)}%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor={mappedMediumColor}>template is mapped with more than
-                            {"%2.0f".format(mediumThreshold*100)}%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor={mappedBadColor}>template is mapped with less than
-                            {"%2.0f".format(mediumThreshold*100)}%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor={notMappedColor}>template is not mapped</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor={renameColor}>template mapping must be renamed</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor={ignoreColor}>template is on the ignorelist (is not an infobox that contains relevant properties)</td>
-                    </tr>
+                    <tr><td bgcolor={mappedGoodColor}>template is mapped with more than {"%2.0f".format(goodThreshold*100)}%</td></tr>
+                    <tr><td bgcolor={mappedMediumColor}>template is mapped with more than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
+                    <tr><td bgcolor={mappedBadColor}>template is mapped with less than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
+                    <tr><td bgcolor={notMappedColor}>template is not mapped</td></tr>
+                    <tr><td bgcolor={renameColor}>template mapping must be renamed</td></tr>
+                    <tr><td bgcolor={ignoreColor}>template is on the ignorelist (is not an infobox that contains relevant properties)</td></tr>
                 </table>
+                { templateCountLinks }
+        <table align="center">
+          <tr>
+            <td>occurrences</td> <td colspan="2">template (with link to property statistics)</td>
+            <td>num properties</td> <td>mapped properties (%)</td>
+            <td>num property occurrences</td> <td>mapped property occurrences (%)</td> <td></td>
+          </tr>
+          {
+          var shown = 0
+          // TODO: Solve problem of templates for which no properties are found in the template documentation (e.g. Geobox).
+          for (mappingStat <- sortedStats if /* mappingStat.propertyCount > 0 && */ shown < show) yield
+          {
+            shown += 1
+            val templateName = manager.templateNamespace + mappingStat.templateName
+            val targetRedirect = reversedRedirects.get(templateName)
 
-                <table align="center">
-                    <tr>
-                        <td>occurrences</td> <td colspan="2">template (with link to property statistics)</td>
-                        <td>num properties</td> <td>mapped properties (%)</td>
-                        <td>num property occurrences</td> <td>mapped property occurrences (%)</td> <td></td>
-                    </tr>
-                    {
-                    // TODO: Solve problem of templates for which no properties are found in the template documentation (e.g. Geobox).
-                    for ((mappingStat, counter) <- sortedStatsMap.filter(_._1.getNumberOfProperties(ignoreList) > 0)) yield
-                        {
-                            val decodedTemplateName = createMappingStats.doubleDecode(createMappingStats.encodedTemplateNamespacePrefix, language) + mappingStat.templateName
-                            val encodedTemplateName = createMappingStats.doubleEncode(decodedTemplateName, language)
-                            // de and el aren't encoded
-                            val targetRedirect = reversedRedirects.get(encodedTemplateName)
+            val percentMappedProps: String = "%2.2f".format(mappingStat.mappedPropertyRatio * 100)
+            val percentMappedPropOccur: String = "%2.2f".format(mappingStat.mappedPropertyUseRatio * 100)
+            var mappingsWikiLink = mappingUrlPrefix + mappingStat.templateName
+            
+            var bgcolor: String =
+            if (! mappingStat.isMapped) notMappedColor
+            else if (mappingStat.mappedPropertyUseRatio > goodThreshold) mappedGoodColor
+            else if(mappingStat.mappedPropertyUseRatio > mediumThreshold) mappedMediumColor
+            else mappedBadColor
 
-                            val percentMappedProps: String = "%2.2f".format(mappingStat.getRatioOfMappedProperties(ignoreList) * 100)
-                            val percentMappedPropOccur: String = "%2.2f".format(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) * 100)
-                            var minTempOccurToShow = 99
-                            if (langCode != "en") minTempOccurToShow = 49
-                            if (counter > minTempOccurToShow)
-                            {
-                                var mappingsWikiLink = mappingUrlPrefix + decodedTemplateName.substring(createMappingStats.doubleDecode(createMappingStats.encodedTemplateNamespacePrefix, language).length())
-                                var bgcolor: String =
-                                    if(!mappingStat.isMapped)
-                                    {
-                                        notMappedColor
-                                    }
-                                    else
-                                    {
-                                        if(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) > goodThreshold)
-                                        {
-                                            mappedGoodColor
-                                        }
-                                        else if(mappingStat.getRatioOfMappedPropertyOccurrences(ignoreList) > mediumThreshold)
-                                        {
-                                            mappedMediumColor
-                                        }
-                                        else
-                                        {
-                                            mappedBadColor
-                                        }
-                                    }
-
-
-                                var mustRenamed : Boolean = false
-                                var redirectMsg = ""
-                                for (redirect <- targetRedirect)
-                                {
-                                    if (mappingStat.isMapped)
-                                    {
-                                        //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(createMappingStats.templateNamespacePrefix.length()) + " is redundant!"
-                                    }
-                                    else
-                                    {
-                                        mappingsWikiLink = mappingUrlPrefix + redirect.substring(createMappingStats.encodedTemplateNamespacePrefix.length())
-                                        bgcolor = renameColor
-                                        mustRenamed = true
-                                        redirectMsg = "Mapping of " + createMappingStats.doubleDecode(redirect.substring(createMappingStats.encodedTemplateNamespacePrefix.length()), language) + " must be renamed to "
-                                    }
-                                }
-
-                                var isIgnored: Boolean = false
-                                var ignoreMsg: String = "add to ignore list"
-                                if (ignoreList.isTemplateIgnored(mappingStat.templateName))
-                                {
-                                    isIgnored = true
-                                    ignoreMsg = "remove from ignore list"
-                                    bgcolor = ignoreColor
-                                }
-
-                                <tr bgcolor={bgcolor}>
-                                    <td align="right">
-                                        {counter}
-                                    </td>
-                                {
-                                    if (mustRenamed)
-                                    {
-                                        <td>
-                                            {redirectMsg}<a href={"../../templatestatistics/" + langCode + "/" + createMappingStats.encodeSlash(WikiUtil.wikiEncode(mappingStat.templateName)) + "/"}>
-                                            {WikiUtil.wikiDecode(mappingStat.templateName, language)}
-                                        </a>
-                                        </td>
-                                    }
-                                    else
-                                    {
-
-                                        <td>
-                                            <a href={"../../templatestatistics/" + langCode + "/" + createMappingStats.encodeSlash(WikiUtil.wikiEncode(mappingStat.templateName)) + "/"}>
-                                                {WikiUtil.wikiDecode(mappingStat.templateName, language)}
-                                            </a>{redirectMsg}
-                                        </td>
-                                    }
-                                }<td>
-                                    <a href={mappingsWikiLink}>
-                                        Edit
-                                    </a>
-                                </td>
-                                        <td align="right">
-                                            {mappingStat.getNumberOfProperties(ignoreList)}
-                                        </td> <td align="right">
-                                    {percentMappedProps}
-                                </td>
-                                        <td align="right">
-                                            {mappingStat.getNumberOfPropertyOccurrences(ignoreList)}
-                                        </td> <td align="right">
-                                    {percentMappedPropOccur}
-                                </td>
-                                    {if (Server.adminRights && mappingStat.getNumberOfMappedProperties(ignoreList) == 0)
-                                    {
-                                        <td>
-                                        <a href={createMappingStats.encodeSlash(WikiUtil.wikiEncode(mappingStat.templateName)) + "/" + isIgnored.toString}>
-                                            {ignoreMsg}
-                                        </a>
-                                        </td>
-                                    }}
-                                </tr>
-                            }
-                        }
-                    }
-                </table>
-            </body>
-        </html>
-    }
-
-
-    @GET
-    @Path("/{template}/{ignorelist}")
-    @Produces(Array("application/xhtml+xml"))
-    def ignoreListAction(@PathParam("template") template: String, @PathParam("ignorelist") ignored: String) =
-    {
-        if (Server.adminRights)
-        {
-            if (ignored == "true")
-            {
-                ignoreList.removeTemplate(createMappingStats.decodeSlash(WikiUtil.wikiDecode(template)))
-                <h2>removed from ignore list</h2>
+            var mustRename = false
+            var redirectMsg = ""
+            for (redirect <- targetRedirect) {
+              if (mappingStat.isMapped) {
+                  //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(createMappingStats.templateNamespace.length()) + " is redundant!"
+              } else {
+                  mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespace.length)
+                  bgcolor = renameColor
+                  mustRename = true
+                  redirectMsg = "Mapping of " + redirect.substring(manager.templateNamespace.length) + " must be renamed to "
+              }
             }
-            else
+  
+            var isIgnored = false
+            var ignoreMsg = "add to ignore list"
+            if (manager.ignoreList.isTemplateIgnored(mappingStat.templateName))
             {
-                ignoreList.addTemplate(createMappingStats.decodeSlash(WikiUtil.wikiDecode(template)))
-                <h2>added to ignore list</h2>
+                isIgnored = true
+                ignoreMsg = "remove from ignore list"
+                bgcolor = ignoreColor
             }
+
+          <tr bgcolor={bgcolor}>
+          <td align="right"><a name={urlEncode(mappingStat.templateName)}/>{mappingStat.templateCount}</td>
+          { if (mustRename) {
+          <td>
+            {redirectMsg}
+            <a href={"../../templatestatistics/"+langCode+"/?template="+mappingStat.templateName+cookieQuery('&')}>
+              {mappingStat.templateName}
+            </a>
+          </td>
+          } else {
+          <td>
+            <a href={"../../templatestatistics/"+langCode+"/?template="+mappingStat.templateName+cookieQuery('&')}>
+              {mappingStat.templateName}
+            </a>
+            {redirectMsg}
+          </td>
+          } }
+          <td><a href={mappingsWikiLink}>Edit</a></td>
+          <td align="right">{mappingStat.propertyCount}</td> 
+          <td align="right">{percentMappedProps}</td>
+          <td align="right">{mappingStat.propertyUseCount}</td>
+          <td align="right">{percentMappedPropOccur}</td>
+          { if (Server.instance.adminRights(password)) {
+          <td>
+            <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+mappingStat.templateName+cookieQuery('&', show)}>
+              {ignoreMsg}
+            </a>
+          </td>
+          } }
+          </tr>
+          }
         }
-        val html =
-            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-                <head>
-                    <script type="text/javascript">
-                        <!--
-                        window.location="../";
-                        //-->
-                    </script>
-                </head>
-                <body>
-                </body>
-            </html>
-        createMappingStats.saveIgnorelist(ignoreList)
-        html
+      </table>
+      { templateCountLinks }
+    </body>
+    </html>
+  }
+    
+  private def cookieQuery(sep: Char, show: Int = -1) : String = {
+    var vsep = sep
+    
+    val sb = new StringBuilder
+    
+    if (Server.instance.adminRights(password)) {
+      sb append vsep append "p=" append password
+      vsep = '&'
     }
-
-    @GET
-    @Path("/ihavethepowertoignore")
-    @Produces(Array("application/xhtml+xml"))
-    def setAdmin() =
-    {
-        if (Server.adminRights == true)
-        {
-            Server.adminRights = false
-        }
-        else
-        {
-            Server.adminRights = true
-        }
-        val html =
-            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-                <head>
-                    <script type="text/javascript">
-                        <!--
-                        window.location="../";
-                        //-->
-                    </script>
-                </head>
-                <body>
-                </body>
-            </html>
-        html
+    
+    if (show != -1) { 
+      sb append vsep append "show=" append show
+      vsep = '&' // for future additions below
     }
-
-    /**
-     * @return Set[String, ClassMapping] (encoded template name with Template%3A prefix, ClassMapping)
-     */
-    def getClassMappings =
-    {
-        val mappings = Server.extractor.mappings(language)
-        mappings.templateMappings ++ mappings.conditionalMappings
-    }
-
-    def loadStatistics(fileName: String): Set[MappingStats] =
-    {
-        val input = new ObjectInputStream(new FileInputStream(fileName))
-        val m = input.readObject()
-        input.close()
-        m.asInstanceOf[Set[MappingStats]]
-    }
-
-    def getRatioOfMappedTemplateOccurrences(stats: Map[MappingStats, Int]) =
-    {
-        var mappedRatio: Double = 0
-        mappedRatio = getNumberOfMappedTemplateOccurrences(stats).toDouble / getNumberOfTemplateOccurrences(stats).toDouble
-        mappedRatio
-    }
-
-    def getNumberOfTemplates(stats: Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + 1
-            }
-        }
-        counter
-    }
-
-    def getNumberOfTemplateOccurrences(stats: Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + templateCounter
-            }
-        }
-        counter
-    }
-
-    def getNumberOfMappedTemplateOccurrences(stats: Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (mappingStat.isMapped && !ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + templateCounter
-            }
-        }
-        counter
-    }
-
-    def getNumberOfMappedTemplates(stats: Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (mappingStat.isMapped && !ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + 1
-            }
-        }
-        counter
-    }
-
-    def getRatioOfAllMappedProperties(stats: Map[MappingStats, Int]) =
-    {
-        var mappedRatio: Double = 0
-        var numMP: Int = 0
-        var numP: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            numMP = numMP + mappingStat.getNumberOfMappedProperties(ignoreList)
-            numP = numP + mappingStat.getNumberOfProperties(ignoreList)
-        }
-        mappedRatio = numMP.toDouble / numP.toDouble
-        mappedRatio
-    }
-
-    def getRatioOfAllMappedPropertyOccurrences(stats: Map[MappingStats, Int]) =
-    {
-        var mappedRatio: Double = 0
-        mappedRatio = getAllMappedPropertyOccurrences(stats).toDouble / getAllPropertyOccurrences(stats).toDouble
-        mappedRatio
-    }
-
-    def getAllPropertyOccurrences(stats: Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + mappingStat.getNumberOfPropertyOccurrences(ignoreList)
-            }
-        }
-        counter
-    }
-
-    def getAllMappedPropertyOccurrences(stats: Map[MappingStats, Int]) =
-    {
-        var counter: Int = 0
-        for ((mappingStat, templateCounter) <- stats)
-        {
-            if (!ignoreList.isTemplateIgnored(mappingStat.templateName))
-            {
-                counter = counter + mappingStat.getNumberOfMappedPropertyOccurrences(ignoreList)
-            }
-        }
-        counter
-    }
+    
+    sb toString
+  }
+  
+  private def templateCountLinks: Elem = {
+    <p align="center">Show 
+      <a href={cookieQuery('?', 20)}>top&nbsp;20</a> |
+      <a href={cookieQuery('?', 100)}>top&nbsp;100</a> |
+      <a href={cookieQuery('?', 100000)}>all&nbsp;templates</a>
+    </p>
+  }
+  
 }

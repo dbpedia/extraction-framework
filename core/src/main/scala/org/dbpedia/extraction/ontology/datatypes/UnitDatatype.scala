@@ -8,12 +8,12 @@ package org.dbpedia.extraction.ontology.datatypes
  */
 abstract class UnitDatatype(name : String, val unitLabels : Set[String]) extends Datatype(name)
 {
-	/** Set by DimensionDatatype */
-	@volatile private[datatypes] var _dimension : DimensionDatatype = null
+    /** Set by DimensionDatatype */
+    @volatile private[datatypes] var _dimension : DimensionDatatype = null
 
     /** The dimension of this unit */
-	def dimension = _dimension
-	
+    def dimension = _dimension
+    
     /**
      * Converts a value from this unit to the standard unit for the dimension.
      *

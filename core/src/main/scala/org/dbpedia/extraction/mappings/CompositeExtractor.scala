@@ -1,15 +1,28 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.Graph
-import org.dbpedia.extraction.wikiparser.{PageNode}
+import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.wikiparser.PageNode
 
-class CompositeExtractor(extractors : List[Extractor]) extends Extractor
+class CompositeExtractor(extractors: Mapping[PageNode]*)
+extends CompositeMapping[PageNode](extractors: _*)
+with Extractor
+
+/**
+ * Creates new extractors.
+ */
+object CompositeExtractor
 {
-    require(!extractors.isEmpty, "!extractors.isEmpty")
-    
-    override def extract(node : PageNode, subjectUri : String, context : PageContext) : Graph =
+    /**
+     * Creates a new extractor.
+     * 
+     * TODO: using reflection here loses compile-time type safety.
+     *
+     * @param extractors List of extractor classes to be instantiated
+     * @param context Any type of object that implements the required parameter methods for the extractors
+     */
+    def load(classes: Seq[Class[_ <: Extractor]], context: AnyRef): Extractor =
     {
-        extractors.map(extractor => extractor.extract(node, subjectUri, context))
-                  .reduceLeft(_ merge _)
+        val extractors = classes.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
+        new CompositeExtractor(extractors: _*)
     }
 }

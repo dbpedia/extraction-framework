@@ -1,50 +1,41 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle, InterWikiLinkNode}
-import org.dbpedia.extraction.config.mappings.InterLanguageLinksExtractorConfig
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.ArrayBuffer
 
 
 /**
- * Extracts interwiki links and creates owl:sameAs triples
+ * Extracts interwiki links
  */
-class InterLanguageLinksExtractor( context : {
-                                       def ontology : Ontology
-                                       def language : Language } ) extends Extractor
+class InterLanguageLinksExtractor(context: { def ontology : Ontology; def language : Language }) extends Extractor
 {
-    private val language = context.language.wikiCode
+  private val interLanguageLinksProperty = context.ontology.properties("wikiPageInterLanguageLink")
 
-    require( InterLanguageLinksExtractorConfig.supportedLanguages.contains(language), "Interlanguage Links supports the following languages: " + InterLanguageLinksExtractorConfig.supportedLanguages.mkString(", ")+"; not "+language)
+  override val datasets = Set(DBpediaDatasets.InterLanguageLinks)
 
-    private val interLanguageLinksProperty = context.ontology.getProperty("owl:sameAs")
-                                             .getOrElse(throw new NoSuchElementException("Ontology property 'owl:sameAs' does not exist in DBpedia Ontology."))
-    //context.ontology.getProperty("interLanguageLinks")
+  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  {
+    if (page.title.namespace != Namespace.Main) return Seq.empty
+    
+    var quads = new ArrayBuffer[Quad]()
 
-
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
-    {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
-        
-        var quads = List[Quad]()
-
-        retrieveTranslationTitles (node,InterLanguageLinksExtractorConfig.intLinksMap(language)).foreach { tuple:(Language, WikiTitle) =>
-            val (tlang, title) = tuple
-            quads ::= new Quad(context.language, DBpediaDatasets.SameAs, subjectUri, interLanguageLinksProperty,
-                OntologyNamespaces.getResource(title.encodedWithNamespace, tlang), title.sourceUri, null)
+    for (node <- page.children) { // was page.children.reverse - why?
+      node match {
+        case link: InterWikiLinkNode => {
+          val dst = link.destination
+          if (dst.isInterLanguageLink) {
+            val dstLang = dst.language
+            quads += new Quad(context.language, DBpediaDatasets.InterLanguageLinks, subjectUri, interLanguageLinksProperty, dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri)
+          }
         }
-        new Graph(quads)
+        case _ => // ignore
+      }
     }
+    
+    quads
+  }
 
-    private def retrieveTranslationTitles(page : PageNode, trans_lang : Set[String]) : Map[Language, WikiTitle] =
-    {
-        var results = Map[Language, WikiTitle]()
-
-        for(InterWikiLinkNode(destination, _, _, _) <- page.children.reverse if destination.isInterlanguageLink && trans_lang.contains(destination.language.wikiCode) )
-        {
-            results += (destination.language -> destination)
-        }
-        results
-    }
 }

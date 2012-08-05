@@ -3,17 +3,17 @@ package org.dbpedia.extraction.dataparser
 import org.dbpedia.extraction.ontology.datatypes.{UnitDatatype, DimensionDatatype, Datatype}
 import org.dbpedia.extraction.config.dataparser.DurationParserConfig
 import org.dbpedia.extraction.util.Language
-import java.text.{ParseException, NumberFormat}
+import java.text.ParseException
 import java.util.logging.{Logger, Level}
 import util.matching.Regex
 
-class DurationParser( extractionContext : { def language : Language } )
+class DurationParser( context : { def language : Language } )
 {
-    private val language = extractionContext.language.wikiCode
+    private val language = context.language.wikiCode
 
-    private val numberFormat = NumberFormat.getInstance(extractionContext.language.locale)
+    private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(classOf[DoubleParser].getName)
+    private val logger = Logger.getLogger(getClass.getName)
 
     private val timeUnits = DurationParserConfig.timesMap.getOrElse(language, DurationParserConfig.timesMap("en"))
 
@@ -143,7 +143,7 @@ class DurationParser( extractionContext : { def language : Language } )
         val numberStr = m.subgroups(0)
         try
         {
-            Some(numberFormat.parse(numberStr).toString)
+            Some(parserUtils.parse(numberStr).toString)
         }
         catch
         {

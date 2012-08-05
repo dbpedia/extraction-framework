@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.wiktionary
 
-import _root_.org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import java.net.URL
 import java.io._
 import java.util.logging.Logger
-import _root_.org.dbpedia.extraction.util.StringUtils._
-import _root_.org.dbpedia.extraction.util.FileUtils._
+import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichFile.toRichFile
 import io.{Codec, Source}
 
 /**

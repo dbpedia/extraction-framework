@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, Node}
-import tools.nsc.doc.model.ProtectedInInstance
 
 /**
  * Extracts data from a node in the abstract syntax tree.
