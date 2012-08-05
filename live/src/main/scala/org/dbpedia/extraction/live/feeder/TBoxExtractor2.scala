@@ -2,20 +2,16 @@ package org.dbpedia.extraction.live.feeder
 
 import java.lang.String
 import org.aksw.commons.util.strings.StringUtils
-import com.sun.xml.internal.ws.developer.MemberSubmissionAddressing.Validation
 import org.apache.log4j.Logger
 import java.net.URI
-import com.hp.hpl.jena.query.QueryFactory
 import com.hp.hpl.jena.rdf.model.{Resource, ResourceFactory, ModelFactory, Model}
-import javax.management.remote.rmi._RMIConnection_Stub
 import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.wikiparser.WikiParser._
 import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle, PageNode}
-import collection.mutable.{HashMap, MultiMap}
-import org.dbpedia.extraction.wikiparser.WikiTitle.Namespace
+import collection.mutable.MultiMap
 import com.hp.hpl.jena.shared.PrefixMapping
-import java.util.{GregorianCalendar, Calendar}
-import com.hp.hpl.jena.vocabulary.{DC, DCTerms}
+import java.util.GregorianCalendar
+import com.hp.hpl.jena.vocabulary.DCTerms
+import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
  * @author Claus Stadler

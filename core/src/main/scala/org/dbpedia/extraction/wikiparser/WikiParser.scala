@@ -27,5 +27,5 @@ object WikiParser extends (() => WikiParser)
     /**
      * Creates a new WikiParser instance.
      */
-	def apply() : WikiParser = new SimpleWikiParser()
+    def apply() : WikiParser = new SimpleWikiParser()
 }

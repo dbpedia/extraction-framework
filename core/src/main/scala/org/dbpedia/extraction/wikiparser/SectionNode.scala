@@ -10,5 +10,7 @@ package org.dbpedia.extraction.wikiparser
  */
 case class SectionNode(name : String, level : Int, override val children : List[Node], override val line : Int) extends Node(children, line)
 {
-    def toWikiText() : String = ("="*level) + name + ("="*level) + children.map(_.toWikiText).mkString("")
+    def toWikiText = ("="*level)+name+("="*level)+"\n"+children.map(_.toWikiText).mkString
+    
+    def toPlainText = name+"\n\n"+children.map(_.toPlainText).mkString
 }

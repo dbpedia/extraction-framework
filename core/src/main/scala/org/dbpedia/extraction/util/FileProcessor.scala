@@ -2,7 +2,7 @@ package org.dbpedia.extraction.util
 
 import java.io.{File, FileNotFoundException}
 import scala.io.{Source, Codec}
-import org.dbpedia.extraction.util.FileUtils._
+import org.dbpedia.extraction.util.RichFile._
 
 /**
  * Recursively iterates through a directory and calls a user-defined function on each file. 

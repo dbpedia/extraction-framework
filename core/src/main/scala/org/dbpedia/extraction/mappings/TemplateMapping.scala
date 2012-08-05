@@ -1,47 +1,40 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser.{Node, PropertyNode, TemplateNode}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Graph, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.{Buffer,ArrayBuffer}
+import org.dbpedia.extraction.wikiparser.AnnotationKey
 
-case class TemplateMapping( mapToClass : OntologyClass,
-                       correspondingClass : OntologyClass,
-                       correspondingProperty : OntologyProperty,
-                       mappings : List[PropertyMapping],
-                       context : {
-                           def ontology : Ontology
-                           def language : Language }  ) extends ClassMapping
+class TemplateMapping( 
+  mapToClass : OntologyClass,
+  correspondingClass : OntologyClass,
+  correspondingProperty : OntologyProperty,
+  val mappings : List[PropertyMapping], // must be public val for statistics
+  context: {
+    def ontology : Ontology
+    def language : Language 
+  }  
+) 
+extends Mapping[TemplateNode]
 {
-    private val (propertyMappings, constantMappings) = splitMappings
+    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
 
-    override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph =
-    {
-        val graph = node match
-        {
-            case templateNode : TemplateNode => extractTemplate(templateNode, subjectUri, pageContext)
-            case _ => new Graph()
-        }
-
-        //do these only once
-        constantMappings.map(mapping => mapping.extract(node.asInstanceOf[TemplateNode], subjectUri, null))
-                                .foldRight(graph)(_ merge _)
-    }
-
-    def extractTemplate(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override def extract(node: TemplateNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
     {
         val pageNode = node.root
+        val graph = new ArrayBuffer[Quad]
 
-        pageNode.annotation(TemplateMapping.CLASS_ANNOTATION) match
+        pageNode.getAnnotation(TemplateMapping.CLASS_ANNOTATION) match
         {
             case None => //So far, no template has been mapped on this page
             {
                 //Add ontology instance
-                val typeGraph = createInstance(subjectUri, node)
+                createInstance(graph, subjectUri, node)
 
                 //Extract properties
-                propertyMappings.map(mapping => mapping.extract(node, subjectUri, pageContext))
-                                .foldLeft(typeGraph)(_ merge _)
+                graph ++= mappings.flatMap(_.extract(node, subjectUri, pageContext))
             }
             case Some(pageClasses) => //This page already has a root template.
             {
@@ -49,13 +42,13 @@ case class TemplateMapping( mapToClass : OntologyClass,
                 val instanceUri = generateUri(subjectUri, node, pageContext)
 
                 //Add ontology instance
-                var graph = createInstance(instanceUri, node)
+                createInstance(graph, instanceUri, node)
 
                 //Check if the root template has been mapped to the corresponding Class of this template
                 if (correspondingClass != null && correspondingProperty != null)
                 {
                     var found = false;
-                    for(pageClass <- pageClasses.asInstanceOf[List[OntologyClass]])
+                    for(pageClass <- pageClasses)
                     {
                         if(correspondingClass.name == pageClass.name)
                         {
@@ -66,43 +59,34 @@ case class TemplateMapping( mapToClass : OntologyClass,
                     if(found)
                     {
                         //Connect new instance to the instance created from the root template
-                        val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
-                        graph = graph.merge(new Graph(quad))
+                        graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
                     }
                 }
 
                 //Extract properties
-                propertyMappings.map(mapping => mapping.extract(node, instanceUri, pageContext))
-                               .foldLeft(graph)(_ merge _)
+                graph ++= mappings.flatMap(_.extract(node, instanceUri, pageContext))
             }
         }
+        
+        graph
     }
 
-    private def createInstance(uri : String, node : Node) : Graph =
+    private def createInstance(graph: Buffer[Quad], uri : String, node : Node): Unit =
     {
-        //Collect all classes
-        def collectClasses(clazz : OntologyClass) : List[OntologyClass] =
-        {
-            clazz :: clazz.subClassOf.flatMap(collectClasses) ::: clazz.equivalentClasses.flatMap(collectClasses).toList
-        }
-
-        val classes = collectClasses(mapToClass).distinct
+        val classes = mapToClass.relatedClasses
 
         //Set annotations
         node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
         node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
 
-        if(node.root.annotation(TemplateMapping.CLASS_ANNOTATION).isEmpty)
+        if(node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION).isEmpty)
         {
             node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
         }
-
+        
         //Create type statements
-        val quads = for(clazz <- classes) yield new Quad(context.language, DBpediaDatasets.OntologyTypes, uri,
-                                                         context.ontology.getProperty("rdf:type").get,
-                                                         clazz.uri, node.sourceUri )
-
-        new Graph(quads.toList)
+        for (cls <- classes)
+          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
     }
 
     /**
@@ -142,28 +126,11 @@ case class TemplateMapping( mapToClass : OntologyClass,
 
         pageContext.generateUri(subjectUri, nameProperty)
     }
-
-    private def splitMappings : (List[PropertyMapping],List[PropertyMapping]) =
-    {
-        var propertyMappings : List[PropertyMapping] = List()
-        var constantPropertyMappings : List[PropertyMapping] = List()
-        for(mapping <- mappings)
-        {
-            if(mapping.isInstanceOf[ConstantMapping])
-            {
-                constantPropertyMappings ::= mapping
-            }
-            else
-            {
-                propertyMappings ::= mapping
-            }
-        }
-        (propertyMappings, constantPropertyMappings)
-    }
 }
 
 private object TemplateMapping
 {
-    val CLASS_ANNOTATION = "TemplateMapping.class";
-    val INSTANCE_URI_ANNOTATION = "TemplateMapping.uri";
+    val CLASS_ANNOTATION = new AnnotationKey[Seq[OntologyClass]]
+    
+    val INSTANCE_URI_ANNOTATION = new AnnotationKey[String]
 }

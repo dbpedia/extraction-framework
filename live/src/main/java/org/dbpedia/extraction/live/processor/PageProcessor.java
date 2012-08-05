@@ -2,6 +2,7 @@ package org.dbpedia.extraction.live.processor;
 
 import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
@@ -12,8 +13,13 @@ import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.sources.Source;
 import org.dbpedia.extraction.sources.XMLSource;
+import org.dbpedia.extraction.util.Language;
 import org.w3c.dom.Document;
 import scala.xml.*;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,7 +30,7 @@ import scala.xml.*;
  * process on it.
  */
 public class PageProcessor extends Thread{
-    
+
     private static Logger logger = Logger.getLogger(PageProcessor.class);
 
     public PageProcessor(String name, int priority){
@@ -48,13 +54,20 @@ public class PageProcessor extends Thread{
             String mediaWikiPrefix = "mediawiki";
 
             GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
-            /*if(record.getErrors().getLength() > 0)
-                logger.info("There is an error");*/
             Document doc = record.getDocument();
-            Elem element = (Elem) XML.loadString(XMLUtil.toString(doc));
-            Source wikiPageSource = XMLSource.fromXML(element);
 
-            LiveExtractionManager.extractFromPage(element);
+            /////////////////////////////////////////////////////////////
+            String strDoc = XMLUtil.toString(doc);
+            Pattern invalidCharactersPattern = Pattern.compile("&#[\\d{0-9}]+;");
+            Matcher invalidCharactersMatcher = invalidCharactersPattern.matcher(strDoc);
+
+            String resultingString = invalidCharactersMatcher.replaceAll("");
+
+            Node node = XML.loadString(resultingString);
+            Elem xmlElem = (Elem) node;
+            //Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.apply(LiveOptions.options.get("language")));
+            LiveExtractionManager.extractFromPage(xmlElem);
+            /////////////////////////////////////////////////////////////
 
         }
         catch(Exception exp){
@@ -67,26 +80,25 @@ public class PageProcessor extends Thread{
     public void run(){
         while(true){
             try{
-                    if(!Main.pageQueue.isEmpty()){
-                    PagePriority requiredPage = Main.pageQueue.peek();
-                    System.out.println("Page # " + requiredPage + " has been removed and processed");
+                // block if empty
+                PagePriority requiredPage = Main.pageQueue.take();
 
-                    //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
-                    if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
-                        Main.existingPagesTree.remove(requiredPage.pageID);
-                        processPage(requiredPage.pageID);
-                    }
-                    Main.pageQueue.remove();
-
-                    //Write response date to file in both cases of live update and mapping update
-                    if(requiredPage.pagePriority == Priority.MappingPriority)
-                        LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
-                                requiredPage.lastResponseDate);
-                    else if(requiredPage.pagePriority == Priority.LivePriority)
-                        LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
-                                            requiredPage.lastResponseDate);
-
+                //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
+                if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
+                    Main.existingPagesTree.remove(requiredPage.pageID);
+                    processPage(requiredPage.pageID);
                 }
+                logger.info("Page # " + requiredPage + " has been removed and processed");
+
+                //Write response date to file in both cases of live update and mapping update
+                if(requiredPage.pagePriority == Priority.MappingPriority)
+                    LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
+                            requiredPage.pageTimestamp);
+                else if(requiredPage.pagePriority == Priority.LivePriority)
+                    LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
+                            requiredPage.pageTimestamp);
+
+//                }
 
             }
             catch (Exception exp){
@@ -95,7 +107,7 @@ public class PageProcessor extends Thread{
 
 
         }
-        
+
     }
 
 }

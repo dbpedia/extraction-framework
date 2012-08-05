@@ -1,16 +1,21 @@
 package org.dbpedia.extraction.wiktionary
 
-import _root_.org.dbpedia.extraction.destinations.formatters.{NTriplesFormatter, NQuadsFormatter}
-import _root_.org.dbpedia.extraction.destinations.{FileDestination, CompositeDestination}
-import _root_.org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.destinations.{CompositeDestination,Dataset,Destination,DatasetDestination}
+import org.dbpedia.extraction.mappings._
 import java.net.URL
-import _root_.org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import collection.immutable.ListMap
+import collection.mutable.HashMap
 import java.util.Properties
 import java.io.{FileReader, File}
-import _root_.org.dbpedia.extraction.util.StringUtils._
-import _root_.org.dbpedia.extraction.util.Language
-import _root_.org.dbpedia.extraction.sources.{WikiSource, MemorySource, XMLSource}
+import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.sources.{WikiSource, MemorySource, XMLSource}
+import java.io.OutputStreamWriter
+import org.dbpedia.extraction.destinations.WriterDestination
+import java.io.FileOutputStream
+import java.nio.charset.Charset
 
 /**
  * Loads the dump extraction configuration.
@@ -51,7 +56,9 @@ object ConfigLoader
         val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList
 
         //Load property updateDumps
-        val update = Option(config.getProperty("updateDumps")).getOrElse(return false).trim.toLowerCase match
+        // FIXME: I changed getOrElse(return false) to getOrElse("false"). jc@sahnwaldt.de 2012-03-22
+        // getOrElse(return false) triggered a Scala warning (ignored return value) and was probably a bug
+        val update = Option(config.getProperty("updateDumps")).getOrElse("false").trim.toLowerCase match
         {
             case BooleanLiteral(b) => b
             case _ => throw new IllegalArgumentException("Invalid value for property 'updateDumps'")
@@ -67,28 +74,37 @@ object ConfigLoader
     private def createExtractionJob(config : Config)(language : Language) : ExtractionJob =
     {
         /** Mappings source */
-        val mappingsSource = WikiTitle.Namespace.mappingNamespace(language) match
-        {
-            case Some(namespace) => WikiSource.fromNamespaces(namespaces = Set(namespace),
+        val mappingsSource = WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))),
                                                               url = new URL("http://mappings.dbpedia.org/api.php"),
-                                                              language = Language.Default)
-            case None => new MemorySource()
-        }
+                                                              language = language)
 
         //Articles source
-        val articlesSource = XMLSource.fromFile(config.getDumpFile(language.wikiCode),
-            title => title.namespace == WikiTitle.Namespace.Main || title.namespace == WikiTitle.Namespace.File ||
-                    title.namespace == WikiTitle.Namespace.Category || title.namespace == WikiTitle.Namespace.Template)
+        val articlesSource = XMLSource.fromFile(config.getDumpFile(language.wikiCode), language,
+            title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
+                    title.namespace == Namespace.Category || title.namespace == Namespace.Template)
 
         //Extractor
-        val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
+        // val extractor = Extractor.load(config.ontologySource, mappingsSource, config.commonsSource, articlesSource, config.extractors(language), language)
+        // FIXME: the following line compiles, but will crash when it is executed.
+        val extractor = CompositeExtractor.load(config.extractors(language), new { config.ontologySource; mappingsSource; config.commonsSource; articlesSource; language } )
+        val datasets = extractor.datasets
+        
+        val charset = Charset.forName("UTF-8")
+        def destination(quads: Boolean, fileSuffix: String) = {
+          val formatter = new TerseFormatter(quads, false)
+          val destinations = new HashMap[String, Destination]()
+          for (dataset <- datasets) {
+            val file = new File(config.outputDir, language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + '.' + fileSuffix)
+            val open = () => new OutputStreamWriter(new FileOutputStream(file), charset)
+            destinations(dataset.name) = new WriterDestination(open, formatter)
+          }
+          new DatasetDestination(destinations)
+        }
 
         //Destination
-        val tripleDestination = new FileDestination(new NTriplesFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nt")
-        val quadDestination = new FileDestination(new NQuadsFormatter(), config.outputDir, dataset => language.filePrefix + "/" + dataset.name + "_" + language.filePrefix + ".nq")
-        val destination = new CompositeDestination(tripleDestination, quadDestination)
+        val destinations = new CompositeDestination(destination(false, "nt"), destination(true, "nq"))
 
-        new ExtractionJob(extractor, articlesSource, destination, "Extraction Job for " + language.wikiCode + " Wikipedia")
+        new ExtractionJob(new RootExtractor(extractor), articlesSource, destinations, "Extraction Job for " + language.wikiCode + " Wikipedia")
     }
 
     private class Config(config : Properties)
@@ -103,19 +119,18 @@ object ConfigLoader
 
         /** Languages */
         if(config.getProperty("languages") == null) throw new IllegalArgumentException("Property 'languages' not defined.")
-        private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList
-                        .map(code => Language.fromWikiCode(code).getOrElse(throw new IllegalArgumentException("Invalid language: '" + code + "'")))
+        private val languages = config.getProperty("languages").split("\\s+").map(_.trim).toList.map(Language)
 
         /** Extractor classes */
         val extractors = loadExtractorClasses()
 
         /** Ontology source */
-        val ontologySource = null//WikiSource.fromNamespaces(namespaces = Set(WikiTitle.Namespace.OntologyClass, WikiTitle.Namespace.OntologyProperty),
+        val ontologySource = null//WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
                                    //                    url = new URL("http://mappings.dbpedia.org/api.php"),
-                                     //                  language = Language.Default )
+                                     //                  language = Language.English )
 
         /** Commons source */
-        val commonsSource = null //XMLSource.fromFile(getDumpFile("commons"), _.namespace == WikiTitle.Namespace.File)
+        val commonsSource = null //XMLSource.fromFile(getDumpFile("commons"), _.namespace == Namespace.File)
 
         /**
          * Retrieves the dump stream for a specific language edition.
@@ -132,21 +147,21 @@ object ConfigLoader
          *
          * @return A Map which contains the extractor classes for each language
          */
-        private def loadExtractorClasses() : Map[Language, List[Class[Extractor]]] =
+        private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
         {
             //Load extractor classes
             if(config.getProperty("extractors") == null) throw new IllegalArgumentException("Property 'extractors' not defined.")
             val stdExtractors = loadExtractorConfig(config.getProperty("extractors"))
 
             //Create extractor map
-            var extractors = ListMap[Language, List[Class[Extractor]]]()
+            var extractors = ListMap[Language, List[Class[_ <: Extractor]]]()
             for(language <- languages) extractors += ((language, stdExtractors))
 
             //Load language specific extractors
             val LanguageExtractor = "extractors\\.(.*)".r
 
             for(LanguageExtractor(code) <- config.stringPropertyNames.toArray;
-                language = Language.fromISOCode(code).getOrElse(throw new IllegalArgumentException("Invalid language: " + code));
+                language = Language(code)
                 if extractors.contains(language))
             {
                 extractors += ((language, stdExtractors ::: loadExtractorConfig(config.getProperty("extractors." + code))))
@@ -158,11 +173,10 @@ object ConfigLoader
         /**
          * Parses a enumeration of extractor classes.
          */
-        private def loadExtractorConfig(configStr : String) : List[Class[Extractor]] =
+        private def loadExtractorConfig(configStr : String) : List[Class[_ <: Extractor]] =
         {
             configStr.split("\\s+").map(_.trim).toList
-            .map(className => ClassLoader.getSystemClassLoader().loadClass(className))
-            .map(_.asInstanceOf[Class[Extractor]])
+            .map(className => ClassLoader.getSystemClassLoader().loadClass(className).asSubclass(classOf[Extractor]))
         }
     }
 }

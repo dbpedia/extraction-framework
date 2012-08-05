@@ -28,8 +28,8 @@ object Conversion
       val value = q.value
 
       if(q.datatype != null) {
-        if(q.datatype.uri == "http://www.w3.org/2001/XMLSchema#string") {
-          val langTag = q.language.locale.getLanguage
+        if(q.datatype == "http://www.w3.org/2001/XMLSchema#string") {
+          val langTag = q.language
 
           result.add(subject, predicate, value, langTag)
         } else {

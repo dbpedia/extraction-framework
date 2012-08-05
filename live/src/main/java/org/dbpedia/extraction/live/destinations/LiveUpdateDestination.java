@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.live.destinations;
 
+import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
+import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.destinations.Dataset;
 import org.dbpedia.extraction.destinations.Destination;
-import org.dbpedia.extraction.destinations.Graph;
 import org.dbpedia.extraction.destinations.Quad;
 import org.dbpedia.extraction.live.core.*;
 import org.dbpedia.extraction.live.core.Timer;
@@ -13,21 +14,29 @@ import org.dbpedia.extraction.live.helper.LiveConfigReader;
 import org.dbpedia.extraction.live.helper.MatchPattern;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.publisher.PublishingData;
-import org.dbpedia.extraction.ontology.datatypes.Datatype;
 import org.dbpedia.extraction.util.Language;
+import org.dbpedia.extraction.wikiparser.WikiTitle;
+import org.dbpedia.helper.CoreUtil;
 import org.ini4j.Options;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.model.impl.LiteralImpl;
-import org.openrdf.model.impl.URIImpl;
+import scala.Function1;
 import scala.collection.JavaConversions;
+import scala.collection.Seq;
+import scala.collection.Traversable;
+import scala.runtime.AbstractFunction1;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.*;
+
+/*import org.openrdf.model.URI;
+import org.openrdf.model.impl.LiteralImpl;
+import org.openrdf.model.impl.URIImpl;*/
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,7 +46,7 @@ import java.util.concurrent.*;
  * This class represents the destination that should be updated when live data is extracted i.e. Virtuoso server
  */
 public class LiveUpdateDestination implements Destination{
-    
+
     private static Logger logger = Logger.getLogger(LiveUpdateDestination.class);
 
     //This is used for placing a time limit on the execution of triples update process
@@ -45,16 +54,14 @@ public class LiveUpdateDestination implements Destination{
 
     public static Options options = new Options();
 
-    final String LUD_STORE = "lud_store";
     final String LUD_SPARQLFILTER = "lud_sparqlfilter";
-    final String LUD_SPARULFORLANGUAGES = "lud_sparulforlanguages";
     final int TEST_DELAY = 0;
 
     /*
 	 * Options they should be initiialized
 	 * only once at the beginning
 	 * */
-	private URI uri;
+	private Resource uri;
 	private String language;
 	private String oaiId;
     private long pageId;
@@ -69,7 +76,6 @@ public class LiveUpdateDestination implements Destination{
 	private Hash hash;
 
 	//helpers
-	private HashMap tiplesFromExtractors = new HashMap();
 	private JDBC jdbc;
 	private String subjectSPARULpattern;
 
@@ -88,12 +94,21 @@ public class LiveUpdateDestination implements Destination{
     ArrayList<RDFTriple> addedTriplesList;
     String deletedTriplesString;
 
-    public LiveUpdateDestination(String pageTitle, String Language, String oaiID){
+    public LiveUpdateDestination(String pageURI, String language, String oaiID){
+//        this.uri =   RDFTriple.page(pageTitle);
+        this.uri =  ResourceFactory.createResource(CoreUtil.encodeURI(pageURI));
+        this.language = language;
+        this.oaiId = oaiID;
 
-        this.uri = RDFTriple.page(pageTitle);
-        language = Language;
-        oaiId = oaiID;
+        initDestination();
 
+
+    }
+
+    /**
+     * Initializes the destination variables
+     */
+    private void initDestination() {
         this.graphURI  = LiveOptions.options.get("graphURI");
         this.annotationGraphURI = LiveOptions.options.get("annotationGraphURI");
         this.generateOWLAxiomAnnotations = LiveOptions.options.get("generateOWLAxiomAnnotations");
@@ -122,13 +137,38 @@ public class LiveUpdateDestination implements Destination{
 
 
         //Add the extractors to the destination and divide them into 3 groups according to the status
-        for(ExtractorSpecification extractorSpec : LiveConfigReader.extractors.get(new Language(this.language, new Locale(this.language)))){
+        for(ExtractorSpecification extractorSpec : LiveConfigReader.extractors.get(Language.apply(this.language))){
             addExtractor(extractorSpec);
         }
+    }
 
+    public LiveUpdateDestination(WikiTitle pageWikiTitle, String language, String oaiID){
+        String pageWikiEncodedTitle = pageWikiTitle.encoded().toString();
+        try{
+            String pageURLEncodedTitle = URLEncoder.encode(pageWikiEncodedTitle, "UTF-8");
+
+            String resourceURI;
+
+            if(pageWikiTitle.namespace().code() == 0)//Name space 0 is the Main namespace, so we don't need a prefix like in case of File:...
+                resourceURI = Constants.DB_RESOURCE_NS + pageURLEncodedTitle;
+            else
+                resourceURI = Constants.DB_RESOURCE_NS + pageWikiTitle.namespace().name() + ":" + pageURLEncodedTitle;
+
+            this.uri =  ResourceFactory.createResource(resourceURI);
+            this.language = language;
+            this.oaiId = oaiID;
+
+            initDestination();
+
+        }
+        catch (UnsupportedEncodingException exp){
+            logger.error("Page \"" + pageWikiEncodedTitle + "\" cannot be encoded");
+        }
 
     }
 
+    @Override
+    public void open() {}
 
     private static <T> T timedCall(FutureTask<T> task, long timeout, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
         THREAD_POOL.execute(task);
@@ -137,22 +177,18 @@ public class LiveUpdateDestination implements Destination{
 
     /**
      * Handles the extractor according to its status, so it can be added to active, purge or keep extractors
-     * @param extractorSpec The specification of the extractor 
+     * @param extractorSpec The specification of the extractor
      */
     private void addExtractor(ExtractorSpecification extractorSpec){
         switch(extractorSpec.status){
             case ACTIVE:
-//                addActiveExtractor(extractorSpec.extractorID);
                 activeExtractors.add(extractorSpec.extractorID);
                 break;
             case KEEP:
                 addFilter(extractorSpec.generatedTriplePatterns);
                 keepExtractors.add(extractorSpec.extractorID);
-                //extractorSpec.generatedTriplePatterns
-                //this.addActiveExtractor(extractorSpec.extractorID);
                 break;
             case PURGE:
-//                addPurgeExtractor(extractorSpec.extractorID);
                 purgeExtractors.add(extractorSpec.extractorID);
                 break;
         }
@@ -169,55 +205,29 @@ public class LiveUpdateDestination implements Destination{
     //this is set in ExtractionGroup
     //they are the produces entries from ExtractorConfigurator
     public void addFilter(ArrayList<MatchPattern> filter){
-//            for (Object objFilter : filter){
-//                String one = (String)objFilter;
-//                this.producesFilterList.add(one);
-//                }
-        producesFilterList = filter; 
+        producesFilterList = filter;
     }
 
     private void _prepare(String languageProperties){
-        } 
+        }
 
     public void start() { }
-    
-    public void accept(ExtractionResult extractionResult) {
-//        Model addedTriplesModel = ModelFactory.createDefaultModel();
 
+    public void accept(ExtractionResult extractionResult) {
         ArrayList triples = extractionResult.getTriples();
         addedTriplesList = (ArrayList<RDFTriple>) triples;
         for (Object objTriple : triples){
             RDFTriple triple = (RDFTriple) objTriple;
             this.tripleFromExtractor.add(triple);
 
-//            //Convert OpenRDF statement to a JENA Triple
-//            Triple trip = Converter.convert(triple);
-//
-//            //Convert JENA Triple to JENA Statement
-//            ModelCom com = new ModelCom(addedTriplesModel.getGraph());
-//
-//            addedTriplesModel.add(com.asStatement(trip));
         }
-        //should always be called, as it collects the new Json Object
-//        System.out.println("//////////////////////////////////////////////////////////////////////////////////");
-//        System.out.println("Number of triples = " + addedTriplesModel.size());
-//        StmtIterator iter = addedTriplesModel.listStatements();
-//        while(iter.hasNext())
-//            System.out.println(iter.next());
-//        System.out.println("//////////////////////////////////////////////////////////////////////////////////");
 
-//        logger.info("PublishingDataQueue = " + Main.publishingDataQueue.size());
         this.hash.compare(extractionResult);
 
         HashMap hmDeletedTriples = this.hash.getTriplesToDelete();
         Iterator deletedTriplesKeysIterator = hmDeletedTriples.keySet().iterator();
         if(deletedTriplesString == null)
             deletedTriplesString = "";
-//        while (deletedTriplesKeysIterator.hasNext()){
-//             String keyPredicateHash = (String)deletedTriplesKeysIterator.next();
-//
-//            deletedTriplesString += convertHashMapToString((HashMap)hmDeletedTriples.get(keyPredicateHash));
-//        }
 
         while (deletedTriplesKeysIterator.hasNext()){
              String keyPredicateHash = (String)deletedTriplesKeysIterator.next();
@@ -253,69 +263,56 @@ public class LiveUpdateDestination implements Destination{
      * @return  String representation of the triple
      */
     private String convertHashMapToString(HashMap hmTriple){
+        Model tmpModel = ModelFactory.createDefaultModel();
 
         String pattern = "";
         if(hmTriple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
                 pattern += hmTriple.get("s") + " " + hmTriple.get("p") + " " + hmTriple.get("o")+" . \n";
         else//The statement must be converted to SPARUL
-            pattern += Util.convertToSPARULPattern(new URIImpl(hmTriple.get("s").toString()))
-                + " " + Util.convertToSPARULPattern(new URIImpl(hmTriple.get("p").toString()))
-                + " " + Util.convertToSPARULPattern(new LiteralImpl(hmTriple.get("o").toString()))+" . \n";
+            pattern += Util.convertToSPARULPattern(ResourceFactory.createResource(CoreUtil.encodeURI(hmTriple.get("s").toString())))
+                + " " + Util.convertToSPARULPattern(ResourceFactory.createProperty(hmTriple.get("p").toString()))
+                + " " + Util.convertToSPARULPattern(tmpModel.createLiteral(hmTriple.get("o").toString()))+" . \n";
 
         return pattern;
     }
 
-    public void write(Graph graph){
+    public void write(Seq<Quad> graph){
 
-        List tripleList = JavaConversions.asList(graph.quads());
-        Map<Dataset, scala.collection.immutable.List<Quad>> tripleWithDataset = JavaConversions.asMap(graph.quadsByDataset());
+        Function1<Quad,String> quadDataset = new AbstractFunction1<Quad,String>() {
+          public String apply(Quad quad) { return quad.dataset(); }
+        };
+        Map<String, Traversable<Quad>> tripleWithDataset = JavaConversions.mapAsJavaMap(graph.groupBy(quadDataset));
 
-        Set keySet = tripleWithDataset.keySet();
-        Iterator keysIterator = keySet.iterator();
-        //for(Object obj : tripleList){
+        Set<String> keySet = tripleWithDataset.keySet();
+        Iterator<String> keysIterator = keySet.iterator();
+
         while(keysIterator.hasNext()){
-            Dataset dsKey = (Dataset) keysIterator.next();
+            String dsKey = keysIterator.next();
             scala.collection.immutable.List<Quad> quadList = (scala.collection.immutable.List<Quad>)tripleWithDataset.get(dsKey);
-            ExtractionResult rs = new ExtractionResult(pageId, language, dsKey.name());
+            ExtractionResult rs = new ExtractionResult(pageId, language, dsKey);
 
-            List<Quad> listQuads = JavaConversions.asList(quadList);
+            List<Quad> listQuads = JavaConversions.seqAsJavaList(quadList);
             for(Quad quad : listQuads){
-                rs.addTriple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
+                rs.addTriple(ResourceFactory.createResource(CoreUtil.encodeURI(quad.subject())), ResourceFactory.createProperty(quad.predicate()),
+                        constructTripleObject(quad));
             }
 
             accept(rs);
-
-            //org.dbpedia.extraction.destinations.Quad quad = (org.dbpedia.extraction.destinations.Quad) obj;
-
-            //System.out.println(quad);
-
-            //RDFTriple triple = new RDFTriple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
-            //System.out.println(triple);
-            //System.out.println(quad.Render());
         }
 
-
-
-//        scala.collection.Map data = graph.quadsByDataset();
-//        scala.collection.immutable.List quadlist = (scala.collection.immutable.List)graph.quads;
-//        quadlist[1];
-//        for(Object objQuad: quadlist){
-//
-//        }
     }
 
-    public void write(Graph graph, String extr){
+    public void write(Seq<Quad> graph, String extr){
 
         ExtractionResult rs = new ExtractionResult(pageId, language, extr);
+        Model tmpModel = ModelFactory.createDefaultModel();
 
-        scala.collection.immutable.List<Quad> quadList = (scala.collection.immutable.List<Quad>)graph.quads();
-        List<Quad> listQuads = JavaConversions.asList(quadList);
-        for(Quad quad : listQuads){
-            rs.addTriple(new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
+        for(Quad quad : JavaConversions.asJavaIterable(graph)){
+            rs.addTriple(ResourceFactory.createResource(CoreUtil.encodeURI(quad.subject())), ResourceFactory.createProperty(quad.predicate()),
+                    constructTripleObject(quad));
         }
 
         accept(rs);
-//        writeAddedTriples(rs.getTriples());
     }
 
     public void setLanguage(String Language){
@@ -335,38 +332,29 @@ public class LiveUpdateDestination implements Destination{
     }
 
 
-    private Value constructTripleObject(Quad quad){
-        //String Lang = quad.getLanguage();
-        //Datatype datatype = quad.getDatatype();
-
-        // EDITED by Claus
+    private RDFNode constructTripleObject(Quad quad){
         String Lang = quad.language().toString();
-        Datatype datatype = quad.datatype();
-        
+        String datatype = quad.datatype();
+        Model tmpModel = ModelFactory.createDefaultModel();
+
         if (datatype != null){
-            if (datatype.uri().equals("http://www.w3.org/2001/XMLSchema#string"))
-            {
-                return new LiteralImpl(quad.value(), Lang);
-            }
+            if (datatype.equals("http://www.w3.org/2001/XMLSchema#string"))
+                return tmpModel.createLiteral(quad.value(), Lang);
             else
-            {
-                 return new LiteralImpl(quad.value(), new URIImpl(datatype.uri()));
-            }
+                 return tmpModel.createTypedLiteral(quad.value(), datatype);
         }
         else
-        {
-            return new URIImpl(quad.value());
-        }
+            return ResourceFactory.createResource(quad.value());
     }
 
     public int countLiveAbstracts(){
         String testquery = "SELECT COUNT(*) as ?count FROM <" + this.graphURI + "> {" +
                 this.subjectSPARULpattern + " <" + Constants.DBCOMM_ABSTRACT + "> ?o }";
-        //echo $testquery;
         SPARQLEndpoint se = SPARQLEndpoint.getDefaultEndpoint();
         return se.executeCount(testquery, this.getClass(), this.graphURI);
     }
-    
+
+    @Override
     public void close() {
         try{
             int abstractCount = this.countLiveAbstracts();
@@ -376,17 +364,28 @@ public class LiveUpdateDestination implements Destination{
                 UpdateTriplesWithTimeLimit triplesUpdaterWithLimit = new UpdateTriplesWithTimeLimit();
                 FutureTask<Integer> updateExecutionTask = new FutureTask<Integer>(triplesUpdaterWithLimit);
                 try{
-                    timedCall(updateExecutionTask, 1, TimeUnit.MINUTES);
+                    timedCall(updateExecutionTask, 30, TimeUnit.SECONDS);
                 }
                 catch (Exception exp){
+
+//                    updateTriplesPrimarily();
+
                     //If normal update process fails with the allowed timeframe, then we should use the primary update
                     //strategy
-                    updateTriplesPrimarily();
+                    UpdateTriplesPrimarilyWithTimeLimit triplesUpdaterPrimarilyWithLimit = new UpdateTriplesPrimarilyWithTimeLimit();
+                    FutureTask<Integer> primarilyUpdateExecutionTask = new FutureTask<Integer>(triplesUpdaterPrimarilyWithLimit);
+                    try{
+                        timedCall(primarilyUpdateExecutionTask, 1, TimeUnit.MINUTES);
+                    }
+                    catch (TimeoutException timeoutExp){
+                        logger.error("Updating instance " + this.uri + " FAILED, both with main and primary methods...");
+                        logger.error("Instance " + this.uri + " not updated");
+                        jdbc.reconnect();
+                    }
 
                 }
             }
             else {
-//                logger.info("Inside NoHash In thread "+ Thread.currentThread().getId());
 
                 //If the application is working in multithreading mode, we must attach the thread id to the timer name
                 //to avoid the case that a thread stops the timer of another thread.
@@ -402,18 +401,16 @@ public class LiveUpdateDestination implements Destination{
 
             int abstractCountAfter = this.countLiveAbstracts();
 
-            boolean errorOccured = false;
-            String success = "";
+            boolean errorOccurred = false;
 
             if((abstractCountAfter-abstractCount)>0 && abstractCountAfter!=1){
-                errorOccured = true;
-                success = "FAILURE";
+                errorOccurred = true;
         }
-        if(errorOccured)
+        if(errorOccurred)
             logger.fatal(" abstracts before/after: " + abstractCount +" / " +abstractCountAfter);
         else
             logger.info(" abstracts before/after: " + abstractCount +" / " +abstractCountAfter);
-            
+
         }
         catch(Exception exp){
 
@@ -460,9 +457,12 @@ public class LiveUpdateDestination implements Destination{
                 RDFTriple triple = (RDFTriple) addTriples.get(tripleHash);
                 String predicate =  triple.getPredicate().toString();
                 if((predicate.compareTo(Constants.RDFS_COMMENT) == 0) || (predicate.compareTo(Constants.DB_ABSTRACT) == 0)){
-//                    RDFTriple xyz = new RDFTriple(triple.getSubject(), triple.getPredicate(), new URIImpl("?ooooo"));
                     removeOldRDFSAbstractOrComment(triple);
 
+                }
+                else if((predicate.compareTo(Constants.DBM_EDITLINK) == 0) || (predicate.compareTo(Constants.DBM_REVISION) == 0)
+                        || (predicate.compareTo(Constants.DC_MODIFIED) == 0)){
+                    removeOldMetaInformation(triple);
                 }
             }
 
@@ -480,17 +480,41 @@ public class LiveUpdateDestination implements Destination{
     private void removeOldRDFSAbstractOrComment(RDFTriple triple){
         String pattern = Util.convertToSPARULPattern(triple.getSubject()) + " " +
                 Util.convertToSPARULPattern(triple.getPredicate()) + " " + "?o"+" . \n";
-        String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
+//        String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
-        ResultSet result = this._jdbc_sparul_execute(sparul);
+//        ResultSet result = this._jdbc_sparul_execute(sparul);
+//
+//        //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+//        try{
+//            if(result!= null){
+//                result.close();
+//                result.getStatement().close();
+//            }
+//        }
+//        catch (SQLException sqlExp){
+//            logger.warn("SQL statement of result cannot be closed in function removeOldRDFSAbstractOrComment");
+//        }
+
+//        boolean isSuccessful = this._jdbcSPARULExecute("SPARQL " + sparul);
+        boolean isSuccessful = this._jdbcDeleteTriples(pattern);
+        logger.info("Deleted = " + isSuccessful);
     }
 
+    /**
+     * Removes the old meta information for the passed triple, sometimes the meta information cannot be removed and so
+     * multiple meta information may exist for the same page
+     * @param triple    A triple containing subject, predicate, and object for which the old meta information should be removed.
+     */
+    private void removeOldMetaInformation(RDFTriple triple){
+        String pattern = Util.convertToSPARULPattern(triple.getSubject()) + " " +
+                Util.convertToSPARULPattern(triple.getPredicate()) + " " + "?o"+" . \n";
+        String sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
+
+        boolean isSuccessful = this._jdbcDeleteTriples(pattern);
+        logger.info("Deleted = " + isSuccessful);
+    }
 
 	private void _primaryStrategy(){
-		/*
-		 * PREPARATION
-		 *
-		 * */
 
         if(!TheContainer.wasSet(LUD_SPARQLFILTER)){
 			SPARQLToRDFTriple store = null;
@@ -513,14 +537,10 @@ public class LiveUpdateDestination implements Destination{
 
 		Timer.start(timerName);
 		this._jdbc_clean_sparul_delete_subresources();
-		this._jdbc_sparul_delete_subject_not_static(graphURI,this.subjectSPARULpattern , TheContainer.get(LUD_SPARQLFILTER ) );
+		this._jdbc_sparul_delete_subject_not_static(this.subjectSPARULpattern , TheContainer.get(LUD_SPARQLFILTER ) );
 
 		Timer.stop(timerName);
 
-		/*
-		 * STRATEGIES FOR INSERTION
-		 * will do nothing if Options.getOption('debug_turn_off_insert') is true
-		 * */
 		this._jdbc_ttlp_insert_triples(this.tripleFromExtractor);
 		logger.info("no of queries, insert: " + this.counterInserts + " delete: " + this.counterDelete + " jdbc_total: " + this.counterTotalJDBCOperations);
 
@@ -535,29 +555,25 @@ public class LiveUpdateDestination implements Destination{
             (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
         Timer.start(timerName);
-        String sparul = "";
+        String sparul;
         String pattern = "";
         int directCount = 0;
+        Model tmpModel = ModelFactory.createDefaultModel();
 //         Iterator predicatesIterator = this.predicates.entrySet().iterator();
         Iterator fromStoreIterator = fromStore.entrySet().iterator();
         while(fromStoreIterator.hasNext()){
 
             Map.Entry pairs = (Map.Entry)fromStoreIterator.next();
-            String Hash = pairs.getKey().toString();
             HashMap triple = (HashMap)pairs.getValue();
 
-            //TODO this statement is modified because the triples returned from the store are without <>
             if(triple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
                     pattern += triple.get("s") + " " + triple.get("p") + " " + triple.get("o")+" . \n";
             else//The statement must be converted to SPARUL
-                pattern += Util.convertToSPARULPattern(new URIImpl(triple.get("s").toString()))
-                    + " " + Util.convertToSPARULPattern(new URIImpl(triple.get("p").toString()))
-                    + " " + Util.convertToSPARULPattern(new LiteralImpl(triple.get("o").toString()))+" . \n";
+                pattern += Util.convertToSPARULPattern(new ResourceImpl(triple.get("s").toString()))
+                    + " " + Util.convertToSPARULPattern(new PropertyImpl(triple.get("p").toString()))
+                    + " " + Util.convertToSPARULPattern(tmpModel.createLiteral(triple.get("o").toString()))+" . \n";
 
             strDeletedTriples += pattern;
-//            (new URIImpl(quad.subject()), new URIImpl(quad.predicate()), constructTripleObject(quad));
-//            RDFTriple currentTriple = new RDFTriple(new URIImpl(triple.get("s").toString()), new URIImpl(triple.get("p")), (Value)triple.get("o"));
-//            addedTriplesList.add(currentTriple);
 
             if(triple.get("s").equals(this.subjectSPARULpattern)){
                directCount++;
@@ -565,7 +581,7 @@ public class LiveUpdateDestination implements Destination{
 
         }
 
-        sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
+//        sparul = "DELETE FROM <" + this.graphURI + "> { \n  " + pattern + " }" + " WHERE {\n" + pattern + " }";
 
         int countbefore = 0;
         //TESTS>>>>>>>>>>>>
@@ -575,8 +591,10 @@ public class LiveUpdateDestination implements Destination{
         //TESTS<<<<<<<<<<<
 
         this.counterDelete +=1;
-        ResultSet result = this._jdbc_sparul_execute(sparul);
-        if(result == null){
+
+        boolean isDeletionSuccessful = this._jdbcDeleteTriples(pattern);
+
+        if(!isDeletionSuccessful){
             logger.info("using fallback strategy (deleting single triples)" );
             strDeletedTriples="";
             fromStoreIterator = fromStore.entrySet().iterator();
@@ -590,14 +608,18 @@ public class LiveUpdateDestination implements Destination{
                 if(triple.get("s").toString().contains("<"))//The format is right no need to convert it to SPARUL pattern
                     pattern = triple.get("s") + " " + triple.get("p") + " " + triple.get("o")+" . \n";
                 else//The statement must be converted to SPARUL
-                    pattern += Util.convertToSPARULPattern(new URIImpl(triple.get("s").toString()))
-                        + " " + Util.convertToSPARULPattern(new URIImpl(triple.get("p").toString()))
-                        + " " + Util.convertToSPARULPattern(new LiteralImpl(triple.get("o").toString()))+" . \n";
+                    pattern += Util.convertToSPARULPattern(new ResourceImpl(triple.get("s").toString()))
+                        + " " + Util.convertToSPARULPattern(new PropertyImpl(triple.get("p").toString()))
+                        + " " + Util.convertToSPARULPattern(tmpModel.createLiteral(triple.get("o").toString()))+" . \n";
 
                 strDeletedTriples += pattern;
 
-                sparul = "DELETE FROM <" + this.graphURI +"> { " + pattern + " }" + " WHERE {\n" + pattern + " }";
-                this._jdbc_sparul_execute(sparul);
+//                sparul = "DELETE FROM <" + this.graphURI +"> { " + pattern + " }" + " WHERE {\n" + pattern + " }";
+
+                boolean isSuccessful = this._jdbcDeleteTriples(pattern);
+                logger.info("Deleted = " + isSuccessful);
+
+
             }
         }
         String needed = Timer.stopAsString(timerName);
@@ -611,7 +633,7 @@ public class LiveUpdateDestination implements Destination{
                 Thread.sleep(TEST_DELAY);
             }
             catch (Exception exp){
-                
+
             }
 
 
@@ -626,7 +648,7 @@ public class LiveUpdateDestination implements Destination{
                 while(fromStoreIterator.hasNext()){
                     Map.Entry pairs = (Map.Entry)fromStoreIterator.next();
 
-                    String Hash = pairs.getKey().toString();
+//                    String Hash = pairs.getKey().toString();
                     HashMap triple = (HashMap)pairs.getValue();
                     String testpattern = "where { " + triple.get("s") + " " + triple.get("p") + " " + triple.get("o")+" + } \n";
                     int testOnePattern = this._testwherepart(testpattern);
@@ -636,7 +658,7 @@ public class LiveUpdateDestination implements Destination{
                 logger.warn("TEST FAILED, AFTER SHOULD BE SMALLER, testing each triple:\neachtriplelog");
                 logger.warn("Count executed again, yields :"+ this._testsubject(this.uri.toString()));
 
-                if(result == null){
+                if(!isDeletionSuccessful){
                     logger.warn("Used Fallback last query no advanced testing implemented yet ");
                 }else{
                     logger.warn("Delete query: \nsparul");
@@ -746,7 +768,7 @@ public class LiveUpdateDestination implements Destination{
 			return se.executeCount(testquery, this.getClass(), this.graphURI);
 	}
 
-    private void _jdbc_sparul_delete_subject_not_static(String graphURI, String subjectpattern, String filterWithLang){
+    private void _jdbc_sparul_delete_subject_not_static(String subjectPattern, String filterWithLang){
         //***********************
         //DELETE ALL NON STATIC TRIPLES
         //**********************
@@ -755,7 +777,7 @@ public class LiveUpdateDestination implements Destination{
         //do not delete special properties see below
         String tmpFilter = (filterWithLang.trim().length() > 0) ? "FILTER( \n" + filterWithLang + "). " : " ";
         String sparul = "DELETE FROM <" + this.graphURI + "> { " + this.subjectSPARULpattern + " ?p ?o } FROM <" + this.graphURI + "> ";
-        String where = " WHERE { " + subjectpattern + " ?p ?o . " + tmpFilter + '}';
+        String where = " WHERE { " + subjectPattern + " ?p ?o . " + tmpFilter + '}';
         sparul += where;
             //TESTS>>>>>>>>>>>>
         int countbefore = 0;
@@ -772,9 +794,10 @@ public class LiveUpdateDestination implements Destination{
 
         Timer.start(timerName);
 
-        if(this._jdbc_sparul_execute(sparul) != null){
+        if(this._jdbcSPARULExecute("SPARQL " + sparul) ){
             this.counterDelete+=1;
-            }
+        }
+
         String needed = Timer.stopAsString(timerName);
         logger.info("deleted subject_not_static, needed " + needed);
 
@@ -812,17 +835,14 @@ public class LiveUpdateDestination implements Destination{
 
 
     private void _jdbc_clean_sparul_delete_subresources(String log){
-		URI subject = this.uri;
-        //TODO Make sure that this string is concatenated correctly
-		String sparul = "DELETE FROM <" + this.graphURI + ">	{ ?subresource ?p  ?o .  } FROM <" + this.graphURI + ">";
-        //TODO Make sure that this string is concatenated correctly
+		Resource subject = this.uri;
+		String sparul = "DELETE FROM <" + this.graphURI + ">	{ ?subresource ?p  ?o .  }"; //FROM <" + this.graphURI + ">";
         String where = " where { " + this.subjectSPARULpattern + " ?somep ?subresource . ?subresource ?p  ?o . FILTER (?subresource LIKE <"
         + subject + "/%>)}";
 		sparul += where ;
 
-        int countbefore = 0, countafter = 0; 
+        int countbefore = 0, countafter = 0;
 
-		//TESTS>>>>>>>>>>>>
 		if(debug_run_tests){
 				countbefore = this._testwherepart(where);
 			}
@@ -833,9 +853,11 @@ public class LiveUpdateDestination implements Destination{
             (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
 		Timer.start(timerName);
-		if(this._jdbc_sparul_execute(sparul) != null){
-			this.counterDelete+=1;
-			};
+
+        if(this._jdbcSPARULExecute("SPARQL " + sparul) ){
+            this.counterDelete+=1;
+        }
+
 		String needed = Timer.stopAsString(timerName);
 		logger.info("deleted subresources, needed "+needed );
 		//TESTS>>>>>>>>>>>>
@@ -860,8 +882,8 @@ public class LiveUpdateDestination implements Destination{
         }
 		//TESTS<<<<<<<<<<<<
 	}
-    
-    public void _jdbc_ttlp_insert_triples(HashMap triplesToAdd){
+
+    private void _jdbc_ttlp_insert_triples(HashMap triplesToAdd){
         if(this.debug_turn_off_insert){
             return;
             }
@@ -900,13 +922,11 @@ public class LiveUpdateDestination implements Destination{
         logger.info("length globalTriplePattern: " + globalTripleNTriplePattern.length());
 
         Timer.stop(secondTimerName);
-        //TESTS>>>>>>>>>>>>
         int countbefore = 0;
         String where = "WHERE { " + this.subjectSPARULpattern + " ?p ?o } ";
         if(debug_run_tests){
             countbefore = this._testwherepart(where );
         }
-        //TESTS<<<<<<<<<<<<
 
         String insertTimerName = "LiveUpdateDestination._jdbc_ttlp_insert_triples.insert_operation" +
             (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
@@ -934,7 +954,7 @@ public class LiveUpdateDestination implements Destination{
         //TESTS<<<<<<<<<<<<
     }
 
-    public void _jdbc_ttlp_insert_triples(ArrayList triplesToAdd){
+    private void _jdbc_ttlp_insert_triples(ArrayList triplesToAdd){
         if(this.debug_turn_off_insert){
             return;
             }
@@ -955,11 +975,6 @@ public class LiveUpdateDestination implements Destination{
         String globalTripleNTriplePattern = "";
         int tripleCounter = triplesToAdd.size();
         logger.info("number of triple inserts: " + tripleCounter );
-
-
-        /*foreach (triplesToAdd as triple){
-                globalTripleNTriplePattern += triple.toNTriples();
-        }*/
 
         for(Object objTriple : triplesToAdd){
             RDFTriple triple = (RDFTriple) objTriple;
@@ -1000,32 +1015,10 @@ public class LiveUpdateDestination implements Destination{
                 logger.info("SUCCESS");
             }
         }
-        //TESTS<<<<<<<<<<<<
     }
-
-//    private void writeSPARULtoFiles(String deleteSPARUL, String insertSPARUL){
-//        String out = "";
-//        out += implode(";\n", deleteSPARUL );
-//        out += "\n";
-//        out += implode(";\n", insertSPARUL );
-//
-//        String dirs = LiveOptions.options.get("outputdirs");
-//        foreach(dirs as dir){
-//            @mkdir(dir);
-//            uri = this->uri->getURI();
-//            uri = substr(uri,strlen(DB_RESOURCE_NS));
-//            uri = str_replace("/","%2F", uri);
-//            uri = urlencode(DB_RESOURCE_NS).uri;
-//            uri = substr(uri,0, 233);
-//            file = dir."/".uri;
-//            Logger::toFile(file ,out,true);
-//            //Logger::toFile($file ,"\n**DEBUG***********\n".$logString,false);
-//        }
-//    }
 
     private ResultSet _jdbc_sparul_execute(String query){
         try{
-            boolean jdbc_result = false;
             ResultSet results = null;
             //dryRun means only to log the query without executing it
             boolean dryRun = Boolean.parseBoolean(LiveOptions.options.get("dryRun"));
@@ -1035,20 +1028,12 @@ public class LiveUpdateDestination implements Destination{
 
             if(dryRun){
                 logger.info(query);
-                jdbc_result = true;
             }else{
                 String virtuosoPl = "sparql " + query + "";
+                virtuosoPl = virtuosoPl.replace("\"\"\"", "\"");
                 results = this.jdbc.exec( virtuosoPl, "LiveUpdateDestination");
-                if(results != null){
-    //                tmparray= odbc_fetch_array ($jdbc_result);
 
-    //                if(count($tmparray)==0){
-    //                    $this->log(INFO, "odbc_exec returned empty array");
-    //                }else{
-    //                    foreach ($tmparray as $key => $value){
-    //                        $this->log(INFO, "odbc_exec returned: ".$tmparray[$key]);
-    //                        }
-    //                }
+                if(results != null){
 
                     //Calculate the number of rows returned by the query
                     results.last();
@@ -1056,18 +1041,25 @@ public class LiveUpdateDestination implements Destination{
                     if(NumberOfRows <=0)
                         logger.info("JDBC.exec returned empty array");
                     else{
-//                        foreach ($tmparray as $key => $value){
-//                            this.logger.log(Level.INFO, "odbc_exec returned: " + tmparray[$key]);
-//                        }
                         results.first();
                         while(results.next()){
                             logger.info("jdbc_exec returned: " + results.getString(0));
                         }
                     }
 
+                    //Closing the underlying statement, in order to avoid overwhelming Virtuoso
+                    try{
+                        results.close();
+                        results.getStatement().close();
+                    }
+                    catch (SQLException sqlExp){
+                        logger.warn("SQL statement results cannot be closed in function _jdbc_sparul_execute");
+                    }
                 }
-                    this.counterTotalJDBCOperations+=1;
+
+                this.counterTotalJDBCOperations+=1;
                 logger.trace(virtuosoPl);
+
             }
             return results;
 
@@ -1076,14 +1068,65 @@ public class LiveUpdateDestination implements Destination{
             return null;
         }
 
+    }
 
+    private boolean _jdbcSPARULExecute(String sparulStmt){
+        boolean isSuccessful = false;
+        try{
+
+            sparulStmt = sparulStmt.replace("\"\"\"", "\"");
+
+            PreparedStatement stmt = jdbc.prepare(sparulStmt, "LiveUpdateDestination");
+            isSuccessful = jdbc.executeStatement(stmt, new String[]{});
+            stmt.close();
+        }
+        catch (SQLException exp){
+            logger.error("SPARUL Statement \"" + sparulStmt + "\" cannot be executed");
+        }
+        return isSuccessful;
+    }
+
+    /**
+     * Deletes the specified triples from the store
+     * @param sparulPattern The pattern containing the triples that should be deleted
+     * @return  Whether the deletion was successful or not
+     */
+    private boolean _jdbcDeleteTriples(String sparulPattern){
+        boolean isSuccessful = false;
+        int numberOfTriplesToDelete = sparulPattern.split("\n").length;
+
+        String sparulDeleteStatement = "SPARQL DELETE FROM <" + this.graphURI + "> { \n" + sparulPattern + " }" + " WHERE {\n" + sparulPattern + " }";
+
+        try{
+
+            sparulPattern = sparulPattern.replace("\"\"\"", "\"");
+            if(this.jdbc == null)
+                this.jdbc = JDBC.getDefaultConnection();
+
+            ResultSet results = this.jdbc.exec( sparulDeleteStatement, "LiveUpdateDestination");
+            //The string returned from Virtuoso is of the form "Delete from <http://dbpedia.org>, x triples -- etc",
+            //so we should split the string int order to get the actual number of affected triples
+            results.last();
+            int numberOfAffectedTriples = Integer.parseInt(results.getString(1).split("--")[0].split(",")[1].trim().split(" ")[0]);
+
+            if(numberOfAffectedTriples < numberOfTriplesToDelete)//if the number of affected triples is less, then deletion was not successful
+                return false;
+            else
+                return true;
+
+
+        }
+        catch (Exception exp){
+            logger.error("SPARUL Statement \"" + sparulPattern + "\" cannot be executed");
+        }
+        return isSuccessful;
     }
 
 
     private boolean _jdbc_ttlp_execute(String ntriples, String graphURI){
 
         try{
-            boolean jdbc_result = false;
+            boolean jdbc_result;
 
             boolean dryRun = Boolean.parseBoolean(LiveOptions.options.get("dryRun"));
             if(this.jdbc == null)
@@ -1099,20 +1142,16 @@ public class LiveUpdateDestination implements Destination{
                 PreparedStatement stmt = this.jdbc.prepare(virtuosoPl , "LiveUpdateDestination");
                 stmt.setString(1, ntriples);
                 jdbc_result = stmt.execute();
-                //$jdbc_result = odbc_execute(stmt, array($ntriples) );
 
-                if(jdbc_result == false){
+                if(!jdbc_result){
                     logger.error("ttlp insert failes");
                     logger.error(virtuosoPl);
-                    //logger.log(Level.SEVERE, substr(odbc_errormsg(),0,100));
                     logger.error(ntriples.substring(0,100));
 
                 }else{
                     logger.info("insert returned a true via jdbc_execute");
                 }
 
-                //old line, now we use odbc_prepare
-                //$result = $this->odbc->exec( $virtuosoPl,'LiveUpdateDestination');
                 this.counterTotalJDBCOperations += 1;
                 logger.trace(virtuosoPl);
             }
@@ -1132,9 +1171,8 @@ public class LiveUpdateDestination implements Destination{
         for (String extractorID : purgeExtractors){
             HashMap triplesMap = this.hash.getTriplesForExtractor(extractorID);
             if(triplesMap != null){
-//                this.hash.newJSONObject.remove(extractorID);
                 _alt_delete_all_triples(triplesMap);
-//                this.hash.updateDB();
+
             }
 
         }
@@ -1142,7 +1180,7 @@ public class LiveUpdateDestination implements Destination{
         //Publish the deleted triples
         PublishingData pubData = new PublishingData(addedTriplesList,deletedTriplesString);
         Main.publishingDataQueue.add(pubData);
-//            _removeTriplesForExtractor(extractorID);
+
     }
 
     /**
@@ -1164,38 +1202,37 @@ public class LiveUpdateDestination implements Destination{
      */
     private void _removeTriplesForExtractor(String extractorID){
         HashMap map = this.hash.getTriplesForExtractor(extractorID);
-        System.out.println(map);
+        logger.info(map);
     }
 
     private void writeAddedTriples(ArrayList arrTriplesToBeAdded){
 
-        System.out.println("///////////////////////////////////////ADDED TRIPLES////////////////////////////////");
+        logger.info("///////////////////////////////////////ADDED TRIPLES////////////////////////////////");
 
         for(int i = 0; i < arrTriplesToBeAdded.size(); i++){
             RDFTriple t = (RDFTriple)arrTriplesToBeAdded.get(i);
-//            System.out.println(arrTriplesToBeAdded.get(i));
-            System.out.println(t.toNTriples());
+            logger.info(t.toNTriples());
 
         }
 
-        System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
+        logger.info("/////////////////////////////////////////////////////////////////////////////////////");
     }
 
      private void writeDeletedTriples(ArrayList arrTriplesToBeDeleted){
 
-        System.out.println("///////////////////////////////////////ADDED TRIPLES////////////////////////////////");
+        logger.info("///////////////////////////////////////ADDED TRIPLES////////////////////////////////");
 
         for(int i = 0; i < arrTriplesToBeDeleted.size(); i++){
             RDFTriple t = (RDFTriple) arrTriplesToBeDeleted.get(i);
-//            System.out.println(arrTriplesToBeDeleted.get(i));
-            System.out.println(t.toNTriples());
+//            logger.info(arrTriplesToBeDeleted.get(i));
+            logger.info(t.toNTriples());
 
         }
 
-        System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
+        logger.info("/////////////////////////////////////////////////////////////////////////////////////");
     }
 
-/**
+    /**
      * This class implements Callable interface, which provides the ability to place certain time limit on the execution
      * time of a function, so it must end after a specific time limit.
      * This helps in case of hanging while extraction from a page
@@ -1216,8 +1253,8 @@ public class LiveUpdateDestination implements Destination{
                 Timer.start(timerName);
                 HashMap addTriples = hash.getTriplesToAdd();
                 HashMap deleteTriples = hash.getTriplesToDelete();
+
                 //update db
-//                this.hash.updateDB();
                 //update triples
                 _hashedUpdate(addTriples, deleteTriples);
                 hash.updateDB();
@@ -1229,5 +1266,36 @@ public class LiveUpdateDestination implements Destination{
 
     }
 
+    /**
+     * It the complement of class UpdateTriplesWithTimeLimit, that should be used in case of failure of the main
+     * update methodology, but we should also run it within a specific timeframe in order not to block the extraction process
+     * upon a failure in Virtuoso, e.g. Stack Overflow error sometimes occurs and the deletion process block and so the
+     * whole system blocks.
+     * Ideally the timeframe assigned to it should be higher than that assigned to UpdateTriplesWithTimeLimit
+     */
+    private class UpdateTriplesPrimarilyWithTimeLimit implements Callable<Integer> {
+
+        public UpdateTriplesPrimarilyWithTimeLimit(){
+
+        }
+        public Integer call(){
+
+            logger.info("Inside hasHash In thread "+ Thread.currentThread().getId());
+
+            String timerName = "LiveUpdateDestination._primaryStrategy" +
+                    (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
+
+            Timer.start(timerName);
+            _primaryStrategy();
+            Timer.stop(timerName);
+
+            hash.deleteFromDB();
+            hash.insertIntoDB();
+
+            return 0;
+
+        }
+
+    }
 
 }

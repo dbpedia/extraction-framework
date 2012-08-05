@@ -2,7 +2,6 @@ package org.dbpedia.extraction.live.core;
 
 import org.apache.log4j.Logger;
 import org.ini4j.*;
-import scala.tools.nsc.io.Directory;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,21 +16,16 @@ import java.io.IOException;
 public class LiveOptions {
     //Initializing the Options file
     public static Options options;
-    private static Logger logger;
+    private static Logger logger = Logger.getLogger(LiveOptions.class);;
     static{
         try{
-            logger = Logger.getLogger(LiveOptions.class);
 
-            //Assert.assertNotNull("Logger cannot be null", logger);
-
-            File OptionsFile = new File("./live/dbpedia_default.ini");
-
-            //Assert.assertTrue("dbpedia_default.ini file does not exist", OptionsFile.exists());
+            File OptionsFile = new File("./live.ini");
 
             options = new Options(OptionsFile);
         }
         catch (IOException exp){
-            logger.fatal("dbpedia_default.ini file not found");
+            logger.fatal("live.ini file not found");
             System.exit(1);
         }
         catch (Exception exp){

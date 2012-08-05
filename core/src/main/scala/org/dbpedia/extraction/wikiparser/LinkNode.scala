@@ -8,7 +8,17 @@ import java.net.URI
  * The children of this node represent the label of the link.
  * If the source does not define a label explicitly, a TextNode containing the link destination will be the only child.
  */
-sealed abstract class LinkNode(override val children : List[Node], override val line : Int) extends Node(children, line)
+sealed abstract class LinkNode(children : List[Node], line : Int)
+extends Node(children, line)
+{
+    def toPlainText = children.map(_.toPlainText).mkString
+}
+
+sealed abstract class WikiLinkNode(destination: WikiTitle, children: List[Node], line: Int, destinationNodes: List[Node]) 
+extends LinkNode(children, line)
+{
+    def toWikiText = "[[" + destination.decodedWithNamespace + "|" + children.map(_.toWikiText).mkString + "]]"
+}
 
 /**
  * Represents an external Link.
@@ -19,9 +29,10 @@ sealed abstract class LinkNode(override val children : List[Node], override val 
  * @param children The nodes of the label of this link
  * @param line The source line number of this link
  */
-case class ExternalLinkNode(destination : URI, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) extends LinkNode(children, line)
+case class ExternalLinkNode(destination : URI, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
+extends LinkNode(children, line)
 {
-    def toWikiText() : String = "[" + destination.toString + " " + children.map(_.toWikiText).mkString("") + "]"
+    def toWikiText = "[" + destination.toString + " " + children.map(_.toWikiText).mkString + "]"
 }
 
 /**
@@ -33,10 +44,8 @@ case class ExternalLinkNode(destination : URI, override val children : List[Node
  * @param children The nodes of the label of this link
  * @param line The source line number of this link
  */
-case class InternalLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) extends LinkNode(children, line)
-{
-    def toWikiText() : String = "[[" + destination.decodedWithNamespace + "|" + children.map(_.toWikiText).mkString("") + "]]"
-}
+case class InternalLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
+extends WikiLinkNode(destination, children, line, destinationNodes)
 
 /**
  * Represents an InterWiki Link.
@@ -47,7 +56,5 @@ case class InternalLinkNode(destination : WikiTitle, override val children : Lis
  * @param children The nodes of the label of this link
  * @param line The source line number of this link
  */
-case class InterWikiLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) extends LinkNode(children, line)
-{
-    def toWikiText() : String = "[[" + destination.decodedWithNamespace + "|" + children.map(_.toWikiText).mkString("") + "]]"
-}
+case class InterWikiLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) 
+extends WikiLinkNode(destination, children, line, destinationNodes)

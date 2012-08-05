@@ -40,7 +40,7 @@ class AbstractExtractorTest
 
     private val context = new {
         def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
-        def language = Language.Default
+        def language = Language.English
     }
     private val extractor = new AbstractExtractor(context)
 
@@ -48,7 +48,7 @@ class AbstractExtractorTest
 
     private def render(fileName : String) : String =
     {
-        val page = new FileSource(testDataRootDir, _ endsWith fileName).head
+        val page = new FileSource(testDataRootDir, Language.English, _ endsWith fileName).head
         val generatedAbstract = extractor.getAbstractWikiText(parser(page))
         extractor.retrievePage(page.title, generatedAbstract)
     }
