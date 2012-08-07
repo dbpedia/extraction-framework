@@ -91,7 +91,7 @@ abstract class Fileset(
   
   protected def path(language: String, modifier: String, format: String): String
   
-  val anchor = name.replaceChars(" ()", "-").toLowerCase(Locale.ENGLISH)
+  def anchor(prefix: String = "") = (prefix+name).replaceChars(" ()", "-").toLowerCase(Locale.ENGLISH)
 }
 
 class Ontology(name: String, file: String, text: String)
@@ -270,15 +270,15 @@ def generate: Unit = {
   
   write("", s.toString)
   
-  ontologyPage(OntologyPage)
-  datasetPages(DataC14NPage, datasets)
-  datasetPages(DataI18NPage, datasets)
-  datasetPages(LinksPage, List(linksets))
+  ontologyPage(OntologyPage, "download-")
+  datasetPages(DataC14NPage, "download-c14n-", datasets)
+  datasetPages(DataI18NPage, "download-i18n-", datasets)
+  datasetPages(LinksPage, "download-", List(linksets))
   descriptionPage(DescPage)
   nlpPage(NLPPage)
 }
   
-def ontologyPage(page: String): Unit = {
+def ontologyPage(page: String, anchor: String): Unit = {
   val format = "owl"
     
   val file = ontology.file("", "", format)
@@ -288,7 +288,7 @@ def ontologyPage(page: String): Unit = {
   "===Ontology===\n"+
   "#||\n"+
   "||**Dataset**|**"+format+"**||\n"+
-  "||((#"+ontology.anchor+" "+ontology.name+"))\n"+
+  "||{{a name=\""+ontology.anchor(anchor)+"\"}}((#"+ontology.anchor()+" "+ontology.name+"))\n"+
   "|"+
   "<#<small>"+
   "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a> "+
@@ -301,7 +301,7 @@ def ontologyPage(page: String): Unit = {
   write(page, s.toString)
 }
 
-def datasetPages(page: String, filesets: Seq[List[Fileset]]): Unit = {
+def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Unit = {
   
   val s = new StringPlusser
   
@@ -352,13 +352,13 @@ def datasetPages(page: String, filesets: Seq[List[Fileset]]): Unit = {
   }
   
   for (subPage <- 0 until filesets.length) {
-    datasetPage(page, subPage, filesets(subPage), langs)
+    datasetPage(page, subPage, anchor, filesets(subPage), langs)
   }
 
 }
 
 
-def datasetPage(page: String, subPage: Int, filesets: List[Fileset], languages: Seq[String]): Unit = {
+def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Fileset], languages: Seq[String]): Unit = {
   
   val s = new StringPlusser
   
@@ -368,7 +368,7 @@ def datasetPage(page: String, subPage: Int, filesets: List[Fileset], languages: 
   languages.mkString("||**Dataset**|**","**|**","**||")+"\n"
   
   for (fileset <- filesets) {
-    s+"||((#"+fileset.anchor+" "+fileset.name+"))\n"
+    s+"||{{a name=\""+fileset.anchor(anchor)+"\"}}((#"+fileset.anchor()+" "+fileset.name+"))\n"
     var first = true
     for (language <- languages) {
       
@@ -384,7 +384,7 @@ def datasetPage(page: String, subPage: Int, filesets: List[Fileset], languages: 
         if (file != null && (fileset.languages || first)) {
           s+
           "<#<small>"+
-          "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a> "+
+          "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a>\u00A0"+ // 00A0 is non-breaking space
           "<small><a href=\""+file.previewUrl+"\">?</a></small>"+
           "</small>#>\n"
         }
@@ -414,7 +414,7 @@ def descriptionPage(page: String): Unit = {
   
   for (fileset <- ontology :: datasets.flatten ++ linksets) {
     s+
-    "{{a name=\""+fileset.anchor+"\"}}\n"+
+    "{{a name=\""+fileset.anchor()+"\"}}\n"+
     "==== "+fileset.name+" ====\n"+
     fileset.text+"\n"
   }
