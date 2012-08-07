@@ -208,7 +208,7 @@ val linksets = List(
   new Linkset("Links to Italian Public Schools", "italian_public_schools", "//Links between DBpedia and ((http://www.linkedopendata.it/datasets/scuole Italian Public Schools)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/italian-public-schools Silk link specification)).//"),
   new Linkset("Links to LinkedGeoData", "linkedgeodata", "//Links between DBpedia and ((http://linkedgeodata.org LinkedGeoData)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedgeodata Silk link specifications)).//"),
   new Linkset("Links to LinkedMDB", "linkedmdb", "//Links between DBpedia and ((http://www.linkedmdb.org LinkedMDB)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedmdb Silk link specifications)).//"),
-  new Linkset("Links to MusicBrainz", "musicbrainz", "//Links between artists, albums and songs in DBpedia and data about them from ((http://zitgist.com/music/ MusicBrainz)). Update mechanism: copy over from previous release.//"),
+  new Linkset("Links to MusicBrainz", "musicbrainz", "//Links between artists, albums and songs in DBpedia and data about them from ((http://musicbrainz.org/ MusicBrainz)). Update mechanism: copy over from previous release.//"),
   new Linkset("Links to New York Times", "nytimes", "//Links between ((http://www.nytimes.com/ New York Times)) subject headings and DBpedia concepts. Links copied from the original data set.//"),
   new Linkset("Links to OpenCyc", "opencyc", "//Links between DBpedia and ((http://opencyc.org/ OpenCyc)) concepts. ((OpenCyc Details)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/opencyc PHP script)).//"),
   new Linkset("Links to OpenEI (Open Energy Info)", "openei", "//Links between DBpedia and ((http://en.openei.org OpenEI)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/openei Silk link specifications)).//"),
@@ -219,7 +219,7 @@ val linksets = List(
   new Linkset("Links to US Census", "uscensus", "//Links between US cities and states in DBpedia and data about them from ((http://www.rdfabout.com/demo/census/ US Census)). Update mechanism: copy over from previous release.//"),
   new Linkset("Links to WikiCompany", "wikicompany", "//Links between companies in DBpedia and companies in ((http://www4.wiwiss.fu-berlin.de/wikicompany/ WikiCompany)). Update mechanism: copy over from previous release.//"),
   new Linkset("Links to WordNet Classes", "wordnet", "//Classification links to ((http://www.w3.org/TR/wordnet-rdf/ RDF representations)) of ((http://wordnet.princeton.edu/ WordNet)) classes. Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to YAGO2", "yago", "//Dataset containing links between DBpedia and YAGO, YAGO type information for DBpedia resources and the YAGO class hierarchy. Currently maintained by Johannes Hoffart.//")
+  new Linkset("Links to YAGO2", "yago", "//Dataset containing links between DBpedia and ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)), YAGO type information for DBpedia resources and the YAGO class hierarchy. Currently maintained by Johannes Hoffart.//")
 )
 
 val OntologyPage = "Ontology"
