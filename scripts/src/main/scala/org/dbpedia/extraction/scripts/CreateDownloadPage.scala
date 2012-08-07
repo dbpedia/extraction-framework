@@ -19,11 +19,15 @@ import java.text.DecimalFormatSymbols
  */
 object CreateDownloadPage {
   
+// UPDATE for new release
 val current = "3.8"
   
-val downloads = "http://downloads.dbpedia.org/"
+// UPDATE when DBpedia Wiki changes. Wiki link to page Datasets, section about internationalized datasets.
+val i18nDatasetsSection = "Datasets#h18-19"
+  
+val dbpediaUrl = "http://downloads.dbpedia.org/"
  
-val dumps = "http://dumps.wikimedia.org/"
+val wikipediaUrl = "http://dumps.wikimedia.org/"
   
 val zipSuffix = ".bz2"
 
@@ -68,10 +72,10 @@ class FileInfo(val path: String, val title: String) {
   val fullPath = current+"/"+path+zipSuffix
   
   // example: http://downloads.dbpedia.org/3.8/af/geo_coordinates_af.nq.bz2
-  val downloadUrl = downloads+fullPath
+  val downloadUrl = dbpediaUrl+fullPath
   
   // example: http://downloads.dbpedia.org/preview.php?file=3.8_sl_af_sl_geo_coordinates_af.nq.bz2
-  val previewUrl = downloads+"preview.php?file="+fullPath.replace("/", "_sl_")
+  val previewUrl = dbpediaUrl+"preview.php?file="+fullPath.replace("/", "_sl_")
 }
   
 abstract class Fileset(
@@ -251,7 +255,7 @@ def generate: Unit = {
   "\n" +
   "=== Wikipedia Input Files ===\n" +
   "\n" +
-  "The datasets were extracted from (("+dumps+" Wikipedia dumps)) generated "+dumpDates+
+  "The datasets were extracted from (("+wikipediaUrl+" Wikipedia dumps)) generated "+dumpDates+
   " (see also all ((DumpDatesDBpedia"+tag(current)+" specific dates and times))).\n" +
   "\n" +
   include(OntologyPage)+
@@ -311,29 +315,29 @@ def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Un
     case DataC14NPage => {
       s+
       "===Canonicalized Datasets===\n"+
-      "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. ((Datasets#h18-19 more...))\n"+
+      "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
       "\n"+
-      "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace ~http://dbpedia.org/. For backwards compatibility, the N-Triples files (.nt, .nq) use URIs, e.g. ((http://dbpedia.org/resource/Bo%C3%B6tes)). The Turtle (.ttl) files use IRIs, e.g. ((http://dbpedia.org/resource/Boötes)).\n"
+      "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace //~http://dbpedia.org/resource/ //. For backwards compatibility, the N-Triples files (.nt, .nq) use URIs, e.g. //~http://dbpedia.org/resource/Bo%C3%B6tes //. The Turtle (.ttl) files use IRIs, e.g. //~http://dbpedia.org/resource/Boötes //.\n"
     }
     case DataI18NPage => {
       s+
       "===Internationalized Datasets===\n"+
-      "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. ((Datasets#h18-19 more...))\n"+
+      "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
       "\n"+
-      "The internationalized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. <#<!--Wacko Wiki HTML-escapes some characters, even in URIs. We use percent-encoding to avoid that.-->#>((http://el.dbpedia.org/resource/%CE%92%CE%B5%CF%81%CE%BF%CE%BB%CE%AF%CE%BD%CE%BF http://el.dbpedia.org/resource/Βερολίνο)).\n"
+      "The internationalized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. //~http://es.dbpedia.org/resource/Boötes//.\n"
     }
     case LinksPage => {
       s+
       "===Links to other datasets===\n"+
       "These datasets contain triples linking DBpedia to many other datasets.\n"+
       "\n"+
-      "The URIs in these dumps use the generic namespace http://dbpedia.org/ .\n"
+      "The URIs in these dumps use the generic namespace //~http://dbpedia.org/resource/ //.\n"
     }
   }
   
   s+
   "\n"+
-  "**NOTE: You can find DBpedia dumps in "+allLanguages+" languages at our (("+downloads+current+"/ DBpedia download server)).**\n"+
+  "**NOTE: You can find DBpedia dumps in "+allLanguages+" languages at our (("+dbpediaUrl+current+"/ DBpedia download server)).**\n"+
   "\n"+
   "//Click on the dataset names to obtain additional information. Click on the question mark next to a download link to preview file contents.//\n"
   
