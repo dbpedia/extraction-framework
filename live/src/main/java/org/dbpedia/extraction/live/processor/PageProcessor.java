@@ -49,8 +49,9 @@ public class PageProcessor extends Thread{
 
     private void processPage(long pageID){
         try{
-            String oaiUri = "http://live.dbpedia.org/syncwiki/Special:OAIRepository";
-            String oaiPrefix = "oai:live.dbpedia.org:dbpediawiki:";
+            String oaiUri = LiveOptions.options.get("oaiUri");
+            String oaiPrefix = LiveOptions.options.get("oaiPrefix");
+            String baseWikiUri = LiveOptions.options.get("baseWikiUri");
             String mediaWikiPrefix = "mediawiki";
 
             GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
@@ -65,6 +66,7 @@ public class PageProcessor extends Thread{
 
             Node node = XML.loadString(resultingString);
             Elem xmlElem = (Elem) node;
+            //logger.warn("Page ID " + pageID + " :" + resultingString);
             //Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.apply(LiveOptions.options.get("language")));
             LiveExtractionManager.extractFromPage(xmlElem);
             /////////////////////////////////////////////////////////////
