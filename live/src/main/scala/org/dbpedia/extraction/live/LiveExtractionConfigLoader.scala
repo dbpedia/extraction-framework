@@ -18,7 +18,6 @@ import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
 import org.dbpedia.extraction.live.main.Main
 
 
-import org.dbpedia.extraction.sources.LiveWikiPage
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.dump.extract.ExtractionJob
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -174,7 +173,7 @@ object LiveExtractionConfigLoader extends ActionListener
       {
         val CurrentPageNode = parser(CurrentWikiPage)
 
-        val testPage = CurrentWikiPage.asInstanceOf[LiveWikiPage];
+        val testPage = CurrentWikiPage;
         //As the page title always starts with "en:", as it is the language of the page, and we are working only on
         // English language, then we should remove that part as it will repeated without any advantage.
 //        val semicolonPosition = CurrentPageNode.title.decodedWithNamespace.indexOf(";");
