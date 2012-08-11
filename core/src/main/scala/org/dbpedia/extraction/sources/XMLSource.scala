@@ -8,8 +8,8 @@ import java.io.Reader
 
 /**
  *  Loads wiki pages from an XML stream using the MediaWiki export format.
- * 
- *  The MediaWiki export format is specified by 
+ *
+ *  The MediaWiki export format is specified by
  *  http://www.mediawiki.org/xml/export-0.4
  *  http://www.mediawiki.org/xml/export-0.5
  *  http://www.mediawiki.org/xml/export-0.6
@@ -53,7 +53,7 @@ object XMLSource
 private class XMLReaderSource(source: () => Reader, language: Language, filter: WikiTitle => Boolean) extends Source
 {
     override def foreach[U](proc : WikiPage => U) : Unit = {
-      val reader = source() 
+      val reader = source()
       try new WikipediaDumpParser(reader, language, filter.asInstanceOf[WikiTitle => java.lang.Boolean], proc).run()
       finally reader.close()
     }
@@ -71,11 +71,16 @@ private class XMLSource(xml : Elem, language: Language) extends Source
         for(page <- xml \ "page";
             rev <- page \ "revision")
         {
+            val _contributorID = if ( (rev \ "contributor" \ "id" ).text == null) "0"
+                                 else (rev \ "contributor" \ "id" ).text
             f( new WikiPage( title     = WikiTitle.parse((page \ "title").text, language),
-                             redirect  = null, // TODO: read redirect title from XML 
+                             redirect  = null, // TODO: read redirect title from XML
                              id        = (page \ "id").text,
                              revision  = (rev \ "id").text,
                              timestamp = (rev \ "timestamp").text,
+                             contributorID = _contributorID,
+                             contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip" ).text
+                                               else (rev \ "contributor" \ "username" ).text,
                              source    = (rev \ "text").text ) )
         }
     }
