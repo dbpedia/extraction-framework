@@ -13,8 +13,9 @@ import org.dbpedia.extraction.live.util.*;
 import org.dbpedia.extraction.live.util.sparql.ISparulExecutor;
 import org.dbpedia.extraction.live.util.sparql.VirtuosoJdbcSparulExecutor;
 import org.dbpedia.extraction.ontology.io.OntologyReader;
-import org.dbpedia.extraction.sources.LiveExtractionSource;
 import org.dbpedia.extraction.sources.Source;
+import org.dbpedia.extraction.sources.XMLSource;
+import org.dbpedia.extraction.util.Language;
 import org.ini4j.Ini;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -164,7 +165,7 @@ public class OntologyUpdateFeeder extends Thread {
                 } else {
 
                     scala.xml.Node element = scala.xml.XML.loadString(str);
-                    Source source = LiveExtractionSource.fromXML((scala.xml.Elem) element);
+                    Source source = XMLSource.fromXML((scala.xml.Elem) element, Language.apply("en"));
                     extractor.handle(source);
 
                 }
