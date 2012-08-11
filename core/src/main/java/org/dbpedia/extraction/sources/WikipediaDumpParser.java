@@ -49,7 +49,13 @@ public class WikipediaDumpParser
   
   /** */
   private static final String REVISION_ELEM = "revision";
-  
+
+  /** */
+  private static final String CONTRIBUTOR_ELEM = "contributor";
+  private static final String CONTRIBUTOR_ID = "id";
+  private static final String CONTRIBUTOR_IP = "ip";
+  private static final String CONTRIBUTOR_NAME = "username";
+
   /** */
   private static final String TEXT_ELEM = "text";
   
@@ -270,6 +276,8 @@ public class WikipediaDumpParser
     String text = null;
     String timestamp = null;
     String revisionId = null;
+    String contributorID = null;
+    String contributorName = null;
     
     while (nextTag() == START_ELEMENT)
     {
@@ -288,6 +296,41 @@ public class WikipediaDumpParser
         revisionId = readString(ID_ELEM, false);
         // now at </id>
       }
+      else if (isStartElement(CONTRIBUTOR_ELEM))
+      {
+        // now at <contributor>, move to next tag
+        nextTag();
+        // now should have ip / (author & id), when ip is present we don't have author / id
+        // TODO Create a getElementName function to make this cleaner
+        if (isStartElement(CONTRIBUTOR_IP)) {
+          contributorID = "0";
+          contributorName = readString(CONTRIBUTOR_IP, false);
+        }
+        else
+        {
+          // usually we have contributor name first but we have to check
+          if (isStartElement(CONTRIBUTOR_NAME))
+          {
+            contributorName = readString(CONTRIBUTOR_NAME, false);
+            nextTag();
+            if (isStartElement(CONTRIBUTOR_ID))
+              contributorID = readString(CONTRIBUTOR_ID, false);
+          }
+          else
+          {
+            // when contributor ID is first
+            if (isStartElement(CONTRIBUTOR_ID))
+            {
+              contributorID = readString(CONTRIBUTOR_ID, false);
+              nextTag();
+              if (isStartElement(CONTRIBUTOR_NAME))
+                contributorName = readString(CONTRIBUTOR_NAME, false);
+            }
+          }
+        }
+        nextTag();
+        requireEndElement(CONTRIBUTOR_ELEM);
+      }
       else
       {
         // skip all other elements, don't care about the name, don't skip end tag
@@ -298,7 +341,7 @@ public class WikipediaDumpParser
     requireEndElement(REVISION_ELEM);
     // now at </revision>
     
-    return new WikiPage(title, redirect, pageId, revisionId, timestamp, text);
+    return new WikiPage(title, redirect, pageId, revisionId, timestamp, contributorID, contributorName, text);
   }
   
   /* Methods for low-level work. Ideally, only these methods would access _reader while the
@@ -338,7 +381,7 @@ public class WikipediaDumpParser
     if (nextTag) _reader.nextTag();
     return text;
   }
-  
+
   private void skipElement(String name, boolean nextTag) throws XMLStreamException
   {
     XMLStreamUtils.requireStartElement(_reader, _namespace, name); 
