@@ -9,7 +9,8 @@ import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.OAIUtil;
 import org.dbpedia.extraction.live.util.XMLUtil;
-import org.dbpedia.extraction.sources.LiveExtractionSource;
+import org.dbpedia.extraction.sources.XMLSource;
+import org.dbpedia.extraction.util.Language;
 import org.w3c.dom.Document;
 
 import java.util.Calendar;
@@ -75,7 +76,7 @@ public class MappingUpdateFeeder extends Thread{
                 NodeToRecordTransformer transformer = new NodeToRecordTransformer(mappingsBaseWikiUri, mappingsOAIUri, mappingsOaiPrefix);
 
                 scala.xml.Node element = scala.xml.XML.loadString(XMLUtil.toString(doc));
-                org.dbpedia.extraction.sources.Source wikiPageSource = LiveExtractionSource.fromXML((scala.xml.Elem) element);
+                org.dbpedia.extraction.sources.Source wikiPageSource = XMLSource.fromXML((scala.xml.Elem) element, Language.apply("en"));
 //                org.dbpedia.extraction.sources.Source wikiPageSource = XMLSource.fromXML((scala.xml.Elem) element);
 
                 //Last modification date of the mapping

@@ -2,13 +2,9 @@ package org.dbpedia.extraction.live.extraction
 
 import xml.Elem
 
-import java.util.Properties;
-import java.io.File
-
-import org.dbpedia.extraction.wikiparser._
-
 import java.io._
-import org.dbpedia.extraction.sources.{LiveExtractionSource,XMLSource,WikiSource}
+import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.live.core.LiveOptions
 
