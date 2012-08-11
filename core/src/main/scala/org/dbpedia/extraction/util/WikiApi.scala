@@ -134,6 +134,8 @@ class WikiApi(url: URL, language: Language)
                              id        = (page \ "@pageid").head.text,
                              revision  = (rev \ "@revid").head.text,
                              timestamp = (rev \ "@timestamp").head.text,
+                             contributorID = "-1",
+                             contributorName = (rev \ "@user").head.text,
                              source    = rev.text ) )
         }
     }

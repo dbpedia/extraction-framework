@@ -13,23 +13,26 @@ import org.dbpedia.extraction.util.StringUtils._
  * @param id The page ID
  * @param revision The revision of this page
  * @param timestamp The timestamp of the revision, in milliseconds since 1970-01-01 00:00:00 UTC
+ * @param contributorID The ID of the latest contributor
+ * @param contributorName The name of the latest contributor
  * @param source The WikiText source of this page
  */
-class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val revision: Long, val timestamp: Long, val source : String)
+class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val revision: Long, val timestamp: Long,
+               val contributorID: Long, val contributorName: String, val source : String)
 {
-    def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, source : String) =
-      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), source)
+    def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String) =
+      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source)
     
     def this(title: WikiTitle, source : String) =
-      this(title, null, -1, -1, -1, source)
+      this(title, null, -1, -1, -1, -1, "", source)
     
-    override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + source + ")"
+    override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + ")"
     
     /**
      * Serializes this page to XML using the MediaWiki export format.
      * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.6.
      */
-    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, source)
+    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source)
 }
 
 object WikiPage {
@@ -38,8 +41,9 @@ object WikiPage {
    * XML for one page, Wikipedia dump format.
    * TODO: make sure that XML is valid according to the schema. If not, add dummy elements / attributes where required.
    * TODO: use redirect
+   * TODO: use <contributor> / <ip> if contributorID == 0
    */
-  def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source : String) = {
+  def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source : String) = {
     <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.6/ http://www.mediawiki.org/xml/export-0.6.xsd"
@@ -53,6 +57,10 @@ object WikiPage {
           <id>{formatLong(revision)}</id>
           <timestamp>{formatTimestamp(timestamp)}</timestamp>
           <text xml:space="preserve">{source}</text>
+          <contributor>
+                  <username>{contributorName}</username>
+                  <id>{formatLong(contributorID)}</id>
+                </contributor>
         </revision>
       </page>
     </mediawiki>
