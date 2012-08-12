@@ -56,9 +56,7 @@ public class StatisticsData {
         }
     }
 
-    public static String generateStatistics(int noOfDetailedIntances) {
-
-        // TODO: check for concurrency here (multiple calls of this function)
+    public static synchronized String generateStatistics(int noOfDetailedIntances) {
 
         long now = System.currentTimeMillis();
         long duration24Hour = 24 * 60 * 60 * 1000; // One day
@@ -118,8 +116,6 @@ public class StatisticsData {
         retValue += stats1d + "\r\n";
         retValue += statsAll + stats1d + "\r\n";
         retValue += detailedInstances;
-
-        // TODO remove locks
 
         return retValue;
     }
