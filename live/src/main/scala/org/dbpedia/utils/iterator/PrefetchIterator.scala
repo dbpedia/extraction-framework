@@ -1,6 +1,6 @@
 package org.dbpedia.test;
 
-import org.apache.commons.lang.exception.ExceptionUtils
+import org.apache.commons.lang3.exception.ExceptionUtils
 import org.apache.log4j.Logger
 
 
@@ -46,7 +46,7 @@ abstract class PrefetchIterator[T]
 			} while(current != null && !current.hasNext); 
 		}
 		catch {
-			case e => logger.error(ExceptionUtils.getFullStackTrace(e));
+			case e => logger.error(ExceptionUtils.getStackTrace(e));
 		}
 		if (current == null)
 			finished = true;

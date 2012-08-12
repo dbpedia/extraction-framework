@@ -3,7 +3,7 @@ package org.dbpedia.extraction.live.util.iterators;
 import java.util.Iterator;
 
 
-import org.apache.commons.lang.time.StopWatch;
+import org.apache.commons.lang3.time.StopWatch;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 
