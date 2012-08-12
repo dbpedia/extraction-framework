@@ -2,7 +2,7 @@ package org.dbpedia.extraction.live.util.iterators;
 
 import java.util.Iterator;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
 
