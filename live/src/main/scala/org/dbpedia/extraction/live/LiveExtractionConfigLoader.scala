@@ -1,28 +1,25 @@
 package org.dbpedia.extraction.live.extraction
 
-import _root_.org.dbpedia.extraction.mappings._
+import xml.XML
+
 import java.net.URL
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.File
-import _root_.org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.{WikiSource, Source}
-import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
 import java.util.logging.{Level, Logger}
 import java.awt.event.{ActionListener, ActionEvent}
+import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.sources.{WikiSource, Source}
+import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
 import org.dbpedia.extraction.destination.LiveUpdateDestination
-import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
 import org.dbpedia.extraction.live.job.LiveExtractionJob
-import xml.XML
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
 import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
 import org.dbpedia.extraction.live.main.Main
-
-
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.dump.extract.ExtractionJob
 import org.dbpedia.extraction.wikiparser.Namespace
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
 
 /**

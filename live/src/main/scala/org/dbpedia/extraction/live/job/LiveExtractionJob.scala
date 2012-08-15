@@ -1,16 +1,13 @@
 package org.dbpedia.extraction.live.job
 
-import _root_.org.dbpedia.extraction.destinations.Destination
-import _root_.org.dbpedia.extraction.mappings.Extractor
-import _root_.org.dbpedia.extraction.sources.{Source, WikiPage}
-import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser, Namespace}
-import java.util.concurrent.{ArrayBlockingQueue}
+import java.util.concurrent.ArrayBlockingQueue
 import java.util.logging.{Level, Logger}
-import scala.util.control.ControlThrowable
 import java.net.URLEncoder
-import org.dbpedia.extraction.destination.LiveUpdateDestination
-import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
 import java.io.{InvalidClassException, File}
+import scala.util.control.ControlThrowable
+import org.dbpedia.extraction.sources.{Source, WikiPage}
+import org.dbpedia.extraction.wikiparser.{WikiParser, Namespace}
+import org.dbpedia.extraction.destination.LiveUpdateDestination
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.RootExtractor
 
