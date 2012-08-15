@@ -95,7 +95,7 @@ class ListTripleGenerator
 				tripleGenerator.generate(result, subject, property, part, lang);
 			}
 			catch (Exception e) {
-				logger.warn(ExceptionUtils.getFullStackTrace(e));
+				logger.warn(ExceptionUtils.getStackTrace(e));
 			}
 		}
 
@@ -200,7 +200,7 @@ class MosTripleGenerator
 
 			result.add(subject, MyVocabulary.DBM_ERROR, result.createLiteral(msg));
 
-			logger.warn(ExceptionUtils.getFullStackTrace(e));
+			logger.warn(ExceptionUtils.getStackTrace(e));
 		}
 
 		return result;

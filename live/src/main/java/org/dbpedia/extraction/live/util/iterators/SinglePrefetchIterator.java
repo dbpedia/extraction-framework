@@ -50,7 +50,7 @@ public abstract class SinglePrefetchIterator<T>
 		}
 		catch(Exception e) {
 			current = null;		
-			logger.error(ExceptionUtils.getFullStackTrace(e));
+			logger.error(ExceptionUtils.getStackTrace(e));
 		}
 	}
 

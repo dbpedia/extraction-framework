@@ -38,7 +38,7 @@ public class RDFUtil
 		try{
 			md5 = MessageDigest.getInstance("MD5");
 		}catch(Exception e) {
-			logger.fatal(ExceptionUtils.getFullStackTrace(e));
+			logger.fatal(ExceptionUtils.getStackTrace(e));
 			throw new RuntimeException(e);
 		}
 	}

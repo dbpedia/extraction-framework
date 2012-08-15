@@ -329,7 +329,7 @@ public class SQLUtil
 				resultSet.close();
 		}
 		catch(SQLException e) {
-			logger.error(ExceptionUtils.getFullStackTrace(e));
+			logger.error(ExceptionUtils.getStackTrace(e));
 		}
 	}
 
