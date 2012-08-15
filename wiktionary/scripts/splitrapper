@@ -1,3 +1,4 @@
+#!/bin/sh
 P=`pwd`;
 P="$P/";
 ORIG=$1;
@@ -19,5 +20,4 @@ cd $P;
 rm -rf $TDIR;
 mv "$ORIG" "$ORIG.orig";
 mv "$ORIG.fixed" "$ORIG";
-echo "bzip2 the file";
-bzip2 -f -k "$ORIG";
+
