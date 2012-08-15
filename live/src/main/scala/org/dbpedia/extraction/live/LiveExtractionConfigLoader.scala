@@ -10,6 +10,7 @@ import org.dbpedia.extraction.sources.{WikiSource, Source}
 import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
 import java.util.logging.{Level, Logger}
 import java.awt.event.{ActionListener, ActionEvent}
+import org.dbpedia.extraction.destination.LiveUpdateDestination
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
 import org.dbpedia.extraction.live.job.LiveExtractionJob
 import xml.XML
