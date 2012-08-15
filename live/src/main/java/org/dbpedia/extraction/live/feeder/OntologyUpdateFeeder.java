@@ -181,7 +181,7 @@ public class OntologyUpdateFeeder extends Thread {
 
 
             } catch (Exception exp) {
-                logger.error(ExceptionUtils.getFullStackTrace(exp));
+                logger.error(ExceptionUtils.getStackTrace(exp));
             }
         }
 
