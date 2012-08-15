@@ -306,10 +306,14 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       } else subjComp < 0
     })
 
+    val statQuad = new Quad(langObj, datasetURI, cache.blockURIs("page"), vf.createURI(termsNS+"statistics"), vf.createLiteral(""+quadsSorted.size+"-"+(page.toWikiText.count(_.equals('\n'))+1)+""), tripleContext)
+    val quadsWithStat = quadsSorted ::: List(statQuad)
+
     Logging.printMsg(""+quadsSorted.size+" quads extracted for "+entityId, 1)
-    quadsSorted.foreach( q => { Logging.printMsg(q.renderNTriple, 1) } )
+    quadsWithStat.foreach( q => { Logging.printMsg(q.renderNTriple, 1) } )
     Logging.printMsg("finish "+subjectUri+" threadID="+Thread.currentThread().getId(), 2)
-    new Graph(quadsSorted)
+    
+    new Graph(quadsWithStat)
   }
 
   /**
@@ -438,7 +442,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                 vf.createLiteral(o.trim)
               }
             quads += new Quad(langObj, datasetURI, vf.createURI(s), vf.createURI(p), oObj, tripleContext)
-            } catch {
+            } catch {   
               case ce : ContinueException => //skip
               case e : Exception => throw e //propagate
             }
