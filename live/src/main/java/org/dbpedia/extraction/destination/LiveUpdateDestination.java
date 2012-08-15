@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.live.destinations;
+package org.dbpedia.extraction.destination;
 
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;

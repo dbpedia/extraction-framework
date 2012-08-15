@@ -8,6 +8,7 @@ import java.util.concurrent.{ArrayBlockingQueue}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable
 import java.net.URLEncoder
+import org.dbpedia.extraction.destination.LiveUpdateDestination
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
 import java.io.{InvalidClassException, File}
 import org.dbpedia.extraction.util.Language
