@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.live.statistics;
 
+import org.dbpedia.extraction.live.util.DateUtil;
+
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
@@ -59,14 +61,10 @@ public class StatisticsData {
     public static synchronized String generateStatistics(int noOfDetailedIntances) {
 
         long now = System.currentTimeMillis();
-        long duration24Hour = 24 * 60 * 60 * 1000; // One day
-        long duration01Hour = 60 * 60 * 1000; // One hour
-        long duration05Min = 5 * 60 * 1000; // Five Minutes
-        long duration01Min = 60 * 1000; // One Minute
 
         // remove old statistics
         while (!statisticsTimestampQueue.isEmpty()) {
-            if (now - statisticsTimestampQueue.peekLast() > duration24Hour) {
+            if (now - statisticsTimestampQueue.peekLast() > DateUtil.getDuration1DayMillis()) {
                 statisticsTimestampQueue.pollLast(); // remove from list if older than a day
                 statsAll++;
             } else
@@ -87,11 +85,11 @@ public class StatisticsData {
 
             long d = now - (long) timeIter.next();
 
-            if (d < duration01Hour) {
+            if (d < DateUtil.getDuration1HourMillis()) {
                 stats1h++;
-                if (d < duration05Min) {
+                if (d < 5*DateUtil.getDuration1MinMillis()) {
                     stats5m++;
-                    if (d < duration01Min) {
+                    if (d < DateUtil.getDuration1MinMillis()) {
                         stats1m++;
                     }
                 }
