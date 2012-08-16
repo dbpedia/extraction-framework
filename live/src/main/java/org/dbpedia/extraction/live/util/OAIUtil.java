@@ -27,7 +27,7 @@ public class OAIUtil
 {
 	private static String getStartDate(String date)
 	{
-		return date == null ? UTCHelper.transformToUTC(System
+		return date == null ? DateUtil.transformToUTC(System
 				.currentTimeMillis()) : date;
 	}
 

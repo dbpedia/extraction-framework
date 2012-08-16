@@ -21,7 +21,7 @@ public class LastResponseDateManager {
     private static Logger logger = Logger.getLogger(LastResponseDateManager.class);
 
     public static String getNow() {
-        return UTCHelper.transformToUTC(new Date());
+        return DateUtil.transformToUTC(new Date());
     }
 
     /**
