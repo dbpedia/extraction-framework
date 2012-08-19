@@ -44,14 +44,16 @@ object LiveExtractionConfigLoader extends ActionListener
   val logger = Logger.getLogger("LiveExtractionConfigLoader");
 
   /** Ontology source */
-  val ontologySource = WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
-    url = new URL("http://mappings.dbpedia.org/api.php"),
-    language = Language.apply(LiveOptions.options.get("language")) );
+  val ontologySource = WikiSource.fromNamespaces(
+    namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
+    url = new URL(Language.Mappings.apiUri),
+    language = Language.Mappings );
 
   /** Mappings source */
-  val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
-    url = new URL("http://mappings.dbpedia.org/api.php"),
-    language = Language.apply(LiveOptions.options.get("language")) );
+  val mappingsSource =  WikiSource.fromNamespaces(
+    namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
+    url = new URL(Language.Mappings.apiUri),
+    language = Language.Mappings );
 
   println ("COMMONS SOURCE = " + LiveOptions.options.get("commonsDumpsPath"));
 
@@ -164,12 +166,13 @@ object LiveExtractionConfigLoader extends ActionListener
     }
     articlesSource.foreach(CurrentWikiPage =>
     {
-
       if(CurrentWikiPage.title.namespace == Namespace.Main ||
         CurrentWikiPage.title.namespace == Namespace.File ||
         CurrentWikiPage.title.namespace == Namespace.Category)
       {
         val CurrentPageNode = parser(CurrentWikiPage)
+
+
 
         val testPage = CurrentWikiPage;
         //As the page title always starts with "en:", as it is the language of the page, and we are working only on
