@@ -66,7 +66,7 @@ public class MappingUpdateFeeder extends Thread {
 
         // Create an iterator which keeps polling the OAIRepository
         Iterator<Document> recordIterator =
-                OAIUtil.createEndlessRecordIterator(mappingsOAIUri, startDate, pollInterval * 1000, sleepInterval * 1000);
+                OAIUtil.createEndlessRecordIterator(mappingsOAIUri, startDate, 0, pollInterval * 1000, sleepInterval * 1000);
 
         while (recordIterator.hasNext()) {
             try {

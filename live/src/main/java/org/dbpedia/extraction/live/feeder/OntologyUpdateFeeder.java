@@ -99,7 +99,7 @@ public class OntologyUpdateFeeder extends Thread {
 
         // Create an iterator which keeps polling the OAIRepository
         Iterator<Document> recordIterator =
-                OAIUtil.createEndlessRecordIterator(mappingsOAIUri, startDate, config.getPollInterval() * 1000, config.getSleepInterval() * 1000);
+                OAIUtil.createEndlessRecordIterator(mappingsOAIUri, startDate, 0, config.getPollInterval() * 1000, config.getSleepInterval() * 1000);
 
 
         OntologyUpdateFeeder feeder = new OntologyUpdateFeeder(recordIterator, extractor, lastResponseDateFile);

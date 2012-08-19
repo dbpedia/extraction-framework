@@ -1,106 +1,121 @@
 package org.dbpedia.extraction.live.util.iterators;
 
-import java.util.Collections;
-import java.util.Iterator;
+import ORG.oclc.oai.harvester2.verb.ListRecords;
+import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.util.ExceptionUtil;
+import org.w3c.dom.Document;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
-
-
-import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.util.ExceptionUtil;
-import org.w3c.dom.Document;
-
-
-import ORG.oclc.oai.harvester2.verb.ListRecords;
+import java.util.Collections;
+import java.util.Iterator;
 
 /**
  * Iterator for iterating over a oai repository. The end is reached, if no
  * resumption token is found.
- * 
+ *
  * @author raven
- * 
  */
 public class OAIRecordIterator
-	extends PrefetchIterator<Document>
-{
-	private static Logger	logger					= Logger
-															.getLogger(OAIRecordIterator.class);
+        extends PrefetchIterator<Document> {
+    private static Logger logger = Logger
+            .getLogger(OAIRecordIterator.class);
 
-	private boolean			endReached				= false;
-	private String			resumptionToken			= null;
-	private String			oaiBaseUri;
-	private String			startDate;
+    private boolean endReached = false;
+    private String resumptionToken = null;
+    private String oaiBaseUri;
+    private String startDate;
+    private String endDate;
 
-	private String			lastResponseDate		= null;
+    private String lastResponseDate = null;
 
-	private XPathExpression	lastResponseDateExpr	= null;
+    private XPathExpression lastResponseDateExpr = null;
 
-	public String getLastResponseDate()
-	{
-		return lastResponseDate;
-	}
+    private long pollDelay = 0;
+    private long prefetchDelay = 0;
+    private boolean firstRun = true;
 
-	public String getStartDate()
-	{
-		return startDate;
-	}
+    public String getLastResponseDate() {
+        return lastResponseDate;
+    }
 
-	public OAIRecordIterator(String oaiBaseUri, String startDate)
-	{
-		this.oaiBaseUri = oaiBaseUri;
-		this.startDate = startDate;
-		this.lastResponseDate = startDate;
+    public String getStartDate() {
+        return startDate;
+    }
 
-		try {
-			XPath xpath = XPathFactory.newInstance().newXPath();
-			lastResponseDateExpr = xpath
-					.compile("//*[local-name()='responseDate']/text()");
-		}
-		catch (Exception e) {
-			logger.error(ExceptionUtil.toString(e));
-		}
-	}
+    public OAIRecordIterator(String oaiBaseUri, String startDate, String endDate, long pollDelay, long prefetchDelay) {
+        this.oaiBaseUri = oaiBaseUri;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.lastResponseDate = startDate;
+        this.pollDelay = pollDelay;
+        this.prefetchDelay = prefetchDelay;
+        this.firstRun = true;
 
-	@Override
-	public Iterator<Document> prefetch()
-	{
-		if (endReached)
-			return null;
+        try {
+            XPath xpath = XPathFactory.newInstance().newXPath();
+            lastResponseDateExpr = xpath
+                    .compile("//*[local-name()='responseDate']/text()");
+        } catch (Exception e) {
+            logger.error(ExceptionUtil.toString(e));
+        }
+    }
 
-		try {
-			ListRecords listRecords = null;
+    @Override
+    public Document next() {
+        if (pollDelay > 0) {
+            try {
+                Thread.sleep(pollDelay, 0);
+            } catch (Exception e) {
+                logger.warn(ExceptionUtil.toString(e));
+            }
+        }
 
-			// Note: We crash if ListRecords fail.
-			if (resumptionToken == null) {
-				listRecords = new ListRecords(oaiBaseUri, startDate, null,
-						null, "mediawiki");
-			}
-			else
-				listRecords = new ListRecords(oaiBaseUri, resumptionToken);
+        return super.next();
+    }
 
-			logger.debug("Executed: " + listRecords.getRequestURL());
+    @Override
+    public Iterator<Document> prefetch() {
+        try {
+            // Do not wait on init
+            long curPrefetchDelay = firstRun ? 0 : prefetchDelay;
+            firstRun = false;
 
-			resumptionToken = listRecords.getResumptionToken();
+            if (endReached)
+                return null;
 
-			if (resumptionToken != null && !resumptionToken.trim().isEmpty())
-				logger.debug("Got resumptionToken: '" + resumptionToken + "'");
-			else
-				endReached = true;
+            if (curPrefetchDelay > 0) {
+                Thread.sleep(curPrefetchDelay, 0);
+            }
 
-			Document document = listRecords.getDocument();
+            ListRecords listRecords = null;
 
-			lastResponseDate = (String) lastResponseDateExpr.evaluate(document,
-					XPathConstants.STRING);
+            // Note: We crash if ListRecords fail.
+            if (resumptionToken == null) {
+                listRecords = new ListRecords(oaiBaseUri, startDate, endDate, null, "mediawiki");
+            } else
+                listRecords = new ListRecords(oaiBaseUri, resumptionToken);
 
-			return Collections.singleton(document).iterator();
-		}
-		catch (Exception e) {
-			logger.warn(ExceptionUtil.toString(e));
-		}
+            logger.debug("Executed: " + listRecords.getRequestURL());
 
-		return null;
-	}
+            resumptionToken = listRecords.getResumptionToken();
+
+            if (resumptionToken != null && !resumptionToken.trim().isEmpty())
+                logger.debug("Got resumptionToken: '" + resumptionToken + "'");
+            else
+                endReached = true;
+
+            Document document = listRecords.getDocument();
+
+            lastResponseDate = (String) lastResponseDateExpr.evaluate(document, XPathConstants.STRING);
+
+            return Collections.singleton(document).iterator();
+        } catch (Exception e) {
+            logger.warn(ExceptionUtil.toString(e));
+        }
+
+        return null;
+    }
 }
