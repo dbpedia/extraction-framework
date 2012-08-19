@@ -8,14 +8,12 @@ import com.hp.hpl.jena.shared.PrefixMapping;
 import com.hp.hpl.jena.shared.impl.PrefixMappingImpl;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.PropertyConfigurator;
-import org.dbpedia.extraction.live.feeder.TBoxExtractor2;
 import org.dbpedia.extraction.live.util.*;
 import org.dbpedia.extraction.live.util.sparql.ISparulExecutor;
 import org.dbpedia.extraction.live.util.sparql.VirtuosoJdbcSparulExecutor;
 import org.dbpedia.extraction.ontology.io.OntologyReader;
 import org.dbpedia.extraction.sources.Source;
 import org.dbpedia.extraction.sources.XMLSource;
-import org.dbpedia.extraction.util.Language;
 import org.ini4j.Ini;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +28,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 
 /**
@@ -48,8 +45,7 @@ public class OntologyUpdateFeeder extends Thread {
 
 
     public static void main(String[] args)
-        throws Exception
-    {
+            throws Exception {
         PropertyConfigurator.configure("log4j.properties");
 
         Ini ini = new Ini(new File("cfg/mappings.dbpedia.org/config.ini"));
@@ -66,7 +62,7 @@ public class OntologyUpdateFeeder extends Thread {
                 ? LastResponseDateManager.getNow()
                 : LastResponseDateManager.getLastResponseDate(lastResponseDateFile);
 
-        if(startDate == null) {
+        if (startDate == null) {
             startDate = "2009-01-01T15:00:00Z";
         }
 
@@ -136,8 +132,7 @@ public class OntologyUpdateFeeder extends Thread {
 
 
     public void _run()
-            throws Exception
-    {
+            throws Exception {
         Pattern oaiPattern = Pattern.compile("<identifier>(.*)</identifier>", Pattern.MULTILINE);
 
 
@@ -153,9 +148,9 @@ public class OntologyUpdateFeeder extends Thread {
 
 
                 String str = XMLUtil.toString(doc);
-                if(str.contains("header status=\"deleted\"")) {
+                if (str.contains("header status=\"deleted\"")) {
                     Matcher matcher = oaiPattern.matcher(str);
-                    if(matcher.find()) {
+                    if (matcher.find()) {
                         String oaiId = matcher.group(1);
                         Resource oai = ResourceFactory.createResource(oaiId);
 
@@ -165,7 +160,7 @@ public class OntologyUpdateFeeder extends Thread {
                 } else {
 
                     scala.xml.Node element = scala.xml.XML.loadString(str);
-                    Source source = XMLSource.fromXML((scala.xml.Elem) element, Language.apply("en"));
+                    Source source = XMLSource.fromOAIXML((scala.xml.Elem) element);
                     extractor.handle(source);
 
                 }
@@ -176,7 +171,7 @@ public class OntologyUpdateFeeder extends Thread {
                 String timeStamp = XPathUtil.evalToString(doc, DBPediaXPathUtil.getDatestampExpr());
 
                 Files.createFile(lastResponseDateFile, timeStamp);
-                
+
                 //MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, lastResponseDate);
 
 
@@ -190,7 +185,6 @@ public class OntologyUpdateFeeder extends Thread {
 
 
 // JUNK BELOW THIS LINK
-
 
 
 /*
@@ -234,9 +228,9 @@ public class OntologyUpdateFeeder extends Thread {
 
         System.exit(0);
 */
-        //File file = new File("live/testdata.dat");
-        //File file = new File("live/testdata-class-spaceshuttle.xml");
-        /*
+//File file = new File("live/testdata.dat");
+//File file = new File("live/testdata-class-spaceshuttle.xml");
+/*
         File file = new File("live/testdata-class-organisation.xml");
         System.out.println(file.getAbsolutePath());
         String data = Files.readFile(file);
@@ -250,16 +244,16 @@ public class OntologyUpdateFeeder extends Thread {
 
         ISparulExecutor executor = new VirtuosoJdbcSparulExecutor(conn, "http://test.org");
 */
-        /*
-        String rootPrefix = "http://dbpedia.org/ontology/";
-        String expressionPrefix = "http://dbpedia.org/ontology/expr";
-        String reifierPrefix = "http://dbpedia.org/meta/axiom";
-        String dataGraphName = "http://live.dbpedia.org/ontology";
-        String metaGraphName = "http://live.dbpedia.org/ontology/meta";
-        String baseUri = "http://mappings.dbpedia.org/";
-        */
+/*
+String rootPrefix = "http://dbpedia.org/ontology/";
+String expressionPrefix = "http://dbpedia.org/ontology/expr";
+String reifierPrefix = "http://dbpedia.org/meta/axiom";
+String dataGraphName = "http://live.dbpedia.org/ontology";
+String metaGraphName = "http://live.dbpedia.org/ontology/meta";
+String baseUri = "http://mappings.dbpedia.org/";
+*/
 
-        //RDFExpression expr = RDFUtil.interpretMos("Person", tmp, reifierPrefix, false);
+//RDFExpression expr = RDFUtil.interpretMos("Person", tmp, reifierPrefix, false);
 
 /*
         TBoxTripleDestination destination = new TBoxTripleDestination(executor, dataGraphName, metaGraphName, reifierPrefix);
