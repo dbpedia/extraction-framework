@@ -1,97 +1,86 @@
 package org.dbpedia.extraction.live.util;
 
 
-import java.io.File;
+import org.apache.commons.collections15.iterators.TransformIterator;
+import org.dbpedia.extraction.live.transformer.NodeToDocumentTransformer;
+import org.dbpedia.extraction.live.util.iterators.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+import javax.xml.xpath.XPathExpression;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 
-import javax.xml.xpath.XPathExpression;
 
+public class OAIUtil {
+    private static String getStartDate(String date) {
+        return date == null ? DateUtil.transformToUTC(System
+                .currentTimeMillis()) : date;
+    }
 
-import org.apache.commons.collections15.iterators.TransformIterator;
-import org.dbpedia.extraction.live.transformer.NodeToDocumentTransformer;
-import org.dbpedia.extraction.live.util.iterators.ChainIterator;
-import org.dbpedia.extraction.live.util.iterators.DelayIterator;
-import org.dbpedia.extraction.live.util.iterators.DuplicateOAIRecordRemoverIterator;
-import org.dbpedia.extraction.live.util.iterators.EndlessOAIMetaIterator;
-import org.dbpedia.extraction.live.util.iterators.OAIRecordIterator;
-import org.dbpedia.extraction.live.util.iterators.XPathQueryIterator;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+    public static Iterator<Document> createEndlessRecordIterator(
+            String oaiBaseUri, String startDate, long relativeEndFromNow, int pollDelay, int resumptionDelay) {
 
+        XPathExpression expr = DBPediaXPathUtil.getRecordExpr();
 
+        //Iterator<Document> metaIterator = createEndlessIterator(oaiBaseUri,
+        //        startDate, relativeEndFromNow, pollDelay, resumptionDelay);
+        Iterator<Document> metaIterator = new EndlessOAIMetaIterator(
+                        oaiBaseUri, startDate, relativeEndFromNow, pollDelay, resumptionDelay);
 
+        Iterator<Node> nodeIterator = new XPathQueryIterator(metaIterator, expr);
 
-public class OAIUtil
-{
-	private static String getStartDate(String date)
-	{
-		return date == null ? DateUtil.transformToUTC(System
-				.currentTimeMillis()) : date;
-	}
+        // 'Dirty' because it can contain duplicates.
+        Iterator<Document> dirtyRecordIterator = new TransformIterator<Node, Document>(
+                nodeIterator, new NodeToDocumentTransformer());
 
-	public static Iterator<Document> createEndlessRecordIterator(
-			String oaiBaseUri, String startDate, int pollDelay,
-			int resumptionDelay)
-	{
-		XPathExpression expr = DBPediaXPathUtil.getRecordExpr();
-		
-		Iterator<Document> metaIterator = createEndlessIterator(oaiBaseUri,
-				startDate, pollDelay, resumptionDelay);
+        // This iterator removed them
+        Iterator<Document> recordIterator = new DuplicateOAIRecordRemoverIterator(
+                dirtyRecordIterator);
 
-		Iterator<Node> nodeIterator = new XPathQueryIterator(metaIterator, expr);
-		
-		// 'Dirty' because it can contain duplicates.
-		Iterator<Document> dirtyRecordIterator = new TransformIterator<Node, Document>(
-				nodeIterator, new NodeToDocumentTransformer());
-
-		// This iterator removed them
-		Iterator<Document> recordIterator = new DuplicateOAIRecordRemoverIterator(
-				dirtyRecordIterator);
-		
-		return recordIterator;
-	}
-
-	public static Iterator<Document> createEndlessIterator(String oaiBaseUri,
-			String startDate, int pollDelay, int resumptionDelay)
-	{
+        return recordIterator;
+    }
+/*
+    public static Iterator<Document> createEndlessIterator(String oaiBaseUri, String startDate, long relativeEndFromNow,
+                                                           int pollDelay, int resumptionDelay) {
         startDate = getStartDate(startDate);
 
-		// This iterator always fetches fresh data from the oai repo
-		// when next() is called
-		Iterator<Iterator<Document>> metaIterator = new EndlessOAIMetaIterator(
-				oaiBaseUri, startDate, resumptionDelay);
+        // This iterator always fetches fresh data from the oai repo
+        // when next() is called
+        Iterator<Document> metaIterator = new EndlessOAIMetaIterator(
+                oaiBaseUri, startDate, relativeEndFromNow, resumptionDelay);
 
-		// This iterator puts a minimum delay between two next calls
-		if (pollDelay > 0)
-			metaIterator = new DelayIterator<Iterator<Document>>(metaIterator,
-					pollDelay);
+        // This iterator puts a minimum delay between two next calls
+        if (pollDelay > 0)
+            metaIterator = new DelayIterator<Iterator<Document>>(metaIterator,
+                    pollDelay);
 
-		// This iterator makes the multiple iterators look like a single one
-		ChainIterator<Document> chainIterator = new ChainIterator<Document>(
-				metaIterator);
+        // This iterator makes the multiple iterators look like a single one
+        ChainIterator<Document> chainIterator = new ChainIterator<Document>(
+                metaIterator);
 
-		return chainIterator;
-	}
+        return chainIterator;
+    }
 
-	public static Iterator<Document> createIterator(String oaiBaseUri,
-			String startDate, int resumptionDelay)
-	{
-		startDate = getStartDate(startDate);
+    public static Iterator<Document> createIterator(String oaiBaseUri,
+                                                    String startDate, int resumptionDelay) {
+        startDate = getStartDate(startDate);
 
-		Iterator<Document> iterator = new OAIRecordIterator(oaiBaseUri,
-				startDate);
+        Iterator<Document> iterator = new OAIRecordIterator(oaiBaseUri,
+                startDate);
 
-		if (resumptionDelay > 0)
-			iterator = new DelayIterator<Document>(iterator, resumptionDelay);
+        if (resumptionDelay > 0)
+            iterator = new DelayIterator<Document>(iterator, resumptionDelay);
 
-		return iterator;
-	}
+        return iterator;
+    }
+      */
+    public static String getOAIDateFormatString() {
+        return "yyyy-mm-dd'T'HH:mm:ss'Z'";
+    }
 
-	public static DateFormat getOAIDateFormat()
-	{
-		return new SimpleDateFormat("yyyy-mm-dd'T'HH:mm:ss'Z'");
-	}
-
+    public static DateFormat getOAIDateFormat() {
+        return new SimpleDateFormat(getOAIDateFormatString());
+    }
 }
