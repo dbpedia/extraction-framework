@@ -103,21 +103,10 @@ private class OAIXMLSource(xml : Elem) extends Source
     override def foreach[U](f : WikiPage => U) : Unit =
     {
         val lang = (xml \\ "mediawiki" \ "@{http://www.w3.org/XML/1998/namespace}lang").head.text
-        for(page <- xml \\ "page";
-            rev <- page \ "revision")
-        {
-            val _contributorID = if ( (rev \ "contributor" \ "id" ).text == null) "0"
-                                 else (rev \ "contributor" \ "id" ).text
-            f( new WikiPage( title     = WikiTitle.parse((page \ "title").text, Language.apply(lang)),
-                             redirect  = null, // TODO: read redirect title from XML
-                             id        = (page \ "id").text,
-                             revision  = (rev \ "id").text,
-                             timestamp = (rev \ "timestamp").text,
-                             contributorID = _contributorID,
-                             contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip" ).text
-                                               else (rev \ "contributor" \ "username" ).text,
-                             source    = (rev \ "text").text ) )
-        }
+        val source = new XMLSource( (xml \\ "mediawiki").head.asInstanceOf[Elem], Language.apply(lang))
+        source.foreach(wikiPage => {
+          f(wikiPage)
+        })
     }
 
     override def hasDefiniteSize = true
