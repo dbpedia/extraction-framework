@@ -306,7 +306,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       } else subjComp < 0
     })
 
-    val statQuad = new Quad(langObj, datasetURI, cache.blockURIs("page"), vf.createURI(termsNS+"statistics"), vf.createLiteral(""+quadsSorted.size+"-"+(page.toWikiText.count(_.equals('\n'))+1)+""), tripleContext)
+    val statQuad = new Quad(langObj, datasetURI, cache.blockURIs("page"), vf.createURI(termsNS+"statistics"), vf.createLiteral(""+quadsSorted.size+"-"+(page.toWikiText.count(_.equals('\n'))+1-countEmptyLines(page.toWikiText))), tripleContext)
     val quadsWithStat = quadsSorted ::: List(statQuad)
 
     Logging.printMsg(""+quadsSorted.size+" quads extracted for "+entityId, 1)
@@ -317,11 +317,21 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
   }
 
   /**
-   * silly helper function
+   * silly helper functions
    */
   protected def restore(st : Stack[Node], backup : Stack[Node]) : Unit = {
     st.clear
     st pushAll backup.reverse
+  }
+
+  val emptyLinePat = java.util.regex.Pattern.compile( """^\s*$""", java.util.regex.Pattern.MULTILINE )
+  private def countEmptyLines(s:String) : Int = {
+    val m= emptyLinePat.matcher(s)
+    var i = 0
+    while(m.find()){
+      i = i+1
+    }
+    i
   }
 
   def handleFlatBindings(bindings : VarBindings, block : Block, tpl : Tpl, cache : Cache, thisBlockURI : String) : List[Quad] = {
