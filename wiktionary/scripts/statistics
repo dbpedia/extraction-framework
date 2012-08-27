@@ -48,15 +48,23 @@ if ($handle) {
         $a = explode("-",$buffer);
         $triples = (int)$a[0];
         $lines = (int)$a[1];
-        $sum += ($triples / $lines);
+        if($lines != 0){
+            $sum += ($triples / $lines);
+        } else {
+            $sum += 1;
+        }
     }
     if (!feof($handle)) {
         echo "Fehler: unerwarteter fgets() Fehlschlag\n";
     }
     fclose($handle);
 }
-$AVGTRIPLESPERLINE=$sum / $LEXICALWORDCOUNT;
-echo $AVGTRIPLESPERLINE." average triples/line ".PHP_EOL;
+if($LEXICALWORDCOUNT != 0){
+    $AVGTRIPLESPERLINE=$sum / $LEXICALWORDCOUNT;
+}else{
+    $AVGTRIPLESPERLINE=0;
+}
+echo $AVGTRIPLESPERLINE." triples/line (averaged)".PHP_EOL;
 echo "---------".PHP_EOL;
 
 if ($argc == 3){

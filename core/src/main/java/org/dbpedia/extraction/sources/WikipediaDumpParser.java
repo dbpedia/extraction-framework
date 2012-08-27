@@ -196,7 +196,17 @@ public class WikipediaDumpParser
 
     //Read page
     WikiPage page = null;
-    while (_reader.nextTag() == START_ELEMENT)
+    int nextTagObj = 0;
+    boolean error = true;
+    while (error){
+        try {
+           nextTagObj = _reader.nextTag();
+            error = false;
+        } catch (Exception e){
+            //ignore
+        }
+    }
+    while (nextTagObj == START_ELEMENT)
     {
       if (isStartElement(_reader, MEDIAWIKI_NS, REVISION_ELEM))
       {
