@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
 
-import static org.dbpedia.extraction.util.RichString.toRichString;
+import static org.dbpedia.extraction.util.RichString.wrapString;
 
 /*import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
@@ -138,7 +138,7 @@ public class CoreUtil {
      * @return encoded page title
      */
     public static String wikipediaEncode(String page_title) {
-        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.apply(LiveOptions.options.get("language")).locale());
+        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
     }
 
     /**

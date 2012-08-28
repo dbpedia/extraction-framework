@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.util
 
-import org.dbpedia.extraction.util.RichString.toRichString
+import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.util.text.uri.UriDecoder
 
 /**

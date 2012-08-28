@@ -1,12 +1,10 @@
 package org.dbpedia.extraction.server.stats
 
-import scala.Serializable
-import java.io.{File,PrintWriter}
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.server.util.CollectionReader
+import java.io.{File,FileOutputStream,OutputStreamWriter}
 import scala.collection.mutable
-import java.io._
 import scala.io.Source
+import org.dbpedia.extraction.server.util.CollectionReader
+import IgnoreList._
 
 object IgnoreList
 {
@@ -15,7 +13,7 @@ object IgnoreList
   val PropertiesTag = "properties|"
 }
 
-import IgnoreList._
+
 
 /**
  * Contains the ignored templates and properties

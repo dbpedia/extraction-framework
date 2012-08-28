@@ -4,18 +4,16 @@ import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
-import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser,WikiTitle}
+import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser}
 import org.dbpedia.extraction.dump.download.Download
-import org.dbpedia.extraction.dump.util.ConfigUtils
 import org.dbpedia.extraction.util.{Language,Finder}
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
-import java.util.Properties
 import java.io._
-import java.nio.charset.Charset
 import java.net.URL
 import org.apache.commons.compress.compressors.bzip2._
 import java.util.zip._
+import scala.io.Codec.UTF8
 
 /**
  * Loads the dump extraction configuration.
@@ -25,8 +23,6 @@ import java.util.zip._
  */
 class ConfigLoader(config: Config)
 {
-     private val Utf8 = Charset.forName("UTF-8")
-        
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
      *
@@ -122,18 +118,18 @@ class ConfigLoader(config: Config)
         var destination: Destination = new CompositeDestination(formats.toSeq: _*)
         destination = new MarkerDestination(destination, finder.file(date, Extraction.Complete), false)
         
-        val jobLabel = lang.wikiCode+" ("+extractorClasses.size+" extractors, "+datasets.size+" datasets)"
-        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, destination, jobLabel)
+        val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
+        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description)
     }
     
     private def writer(file: File): () => Writer = {
       val zip = zipper(file.getName)
-      () => new OutputStreamWriter(zip(new FileOutputStream(file)), Utf8)
+      () => new OutputStreamWriter(zip(new FileOutputStream(file)), UTF8)
     }
 
     private def reader(file: File): () => Reader = {
       val unzip = unzipper(file.getName)
-      () => new InputStreamReader(unzip(new FileInputStream(file)), Utf8)
+      () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8)
     }
 
     /**
@@ -164,7 +160,7 @@ class ConfigLoader(config: Config)
     
     private val unzippers = Map[String, InputStream => InputStream] (
       "gz" -> { new GZIPInputStream(_) }, 
-      "bz2" -> { new BZip2CompressorInputStream(_) } 
+      "bz2" -> { new BZip2CompressorInputStream(_, true) } 
     )
     
     //language-independent val
@@ -196,7 +192,7 @@ class ConfigLoader(config: Config)
     
     private def latestDate(finder: Finder[_]): String = {
       val fileName = if (config.requireComplete) Download.Complete else config.source
-      ConfigUtils.latestDate(finder, fileName)
+      finder.dates(fileName).last
     }
     
 }

@@ -4,7 +4,8 @@ import java.io.File
 import java.net.{URL,MalformedURLException}
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.io.{Source,Codec}
-import org.dbpedia.extraction.dump.util.ConfigUtils
+import org.dbpedia.extraction.util.{ConfigUtils,Language}
+import org.dbpedia.extraction.wikiparser.Namespace
 
 class DownloadConfig
 {
@@ -12,9 +13,13 @@ class DownloadConfig
   
   var baseDir: File = null
   
-  val languages = new HashMap[String, Set[String]]
+  val languages = new HashMap[Language, Set[String]]
   
   val ranges = new HashMap[(Int,Int), Set[String]]
+  
+  var dateRange = ("00000000","99999999")
+  
+  var dumpCount = 1
   
   var retryMax = 0
   
@@ -41,13 +46,15 @@ class DownloadConfig
    */
   def parse(dir: File, args: TraversableOnce[String]): Unit = {
     
-    val DumpFiles = new TwoListArg("dump", ":", ",")
+    val DownloadFiles = new TwoListArg("download", ":", ",")
     
-    for(a <- args; arg = a.trim) arg match
+    for (a <- args; arg = a.trim) arg match
     {
       case Ignored(_) => // ignore
-      case Arg("base", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
-      case Arg("dir", path) => baseDir = resolveFile(dir, path)
+      case Arg("base-url", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
+      case Arg("base-dir", path) => baseDir = resolveFile(dir, path)
+      case Arg("download-dates", range) => dateRange = parseDateRange(range, arg)
+      case Arg("download-count", count) => dumpCount = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-max", count) => retryMax = toInt(count, 1, Int.MaxValue, arg)
       case Arg("retry-millis", millis) => retryMillis = toInt(millis, 0, Int.MaxValue, arg)
       case Arg("unzip", bool) => unzip = toBoolean(bool, arg)
@@ -56,11 +63,13 @@ class DownloadConfig
         val file = resolveFile(dir, path)
         if (! file.isFile) throw Usage("Invalid file "+file, arg)
         parse(file)
-      case DumpFiles(keys, files) =>
+      case DownloadFiles(keys, files) =>
         if (files.exists(_ isEmpty)) throw Usage("Invalid file name", arg)
         for (key <- keys) key match {
-          case ConfigUtils.Range(from, to) => add(ranges, toRange(from, to, arg), files)
-          case ConfigUtils.Language(language) => add(languages, language, files)
+          // FIXME: copy & paste in ConfigUtils and extract.Config
+          case "@mappings" => for (language <- Namespace.mappings.keySet) add(languages, language, files)
+          case ConfigUtils.RangeRegex(from, to) => add(ranges, toRange(from, to, arg), files)
+          case ConfigUtils.LanguageRegex(code) => add(languages, Language(code), files)
           case other => throw Usage("Invalid language / range '"+other+"'", arg)
         }
       case _ => throw Usage("Invalid argument '"+arg+"'")
@@ -78,6 +87,23 @@ class DownloadConfig
     ConfigUtils.toRange(from, to)
   }
   catch { case nfe: NumberFormatException => throw Usage("invalid range", arg, nfe) }
+  
+  private val DateRange = """(\d{8})?(?:-(\d{8})?)?""".r
+  
+  private def parseDateRange(range: String, arg: String): (String, String) = {
+    range match {
+      case DateRange(from, to) =>
+        // "" and "-" are invalid
+        if (from.isEmpty && (to == null || to.isEmpty)) throw Usage("invalid date range", arg)
+        // "-to" means "min-to"
+        var lo = if (from.isEmpty) "00000000" else from
+        // "from" means "from-from", "from-" means "from-max"
+        var hi = if (to == null) lo else if (to.isEmpty) "99999999" else to
+        if (lo > hi) throw Usage("invalid date range", arg)
+        (lo, hi)
+      case _ => throw Usage("invalid date range", arg)
+    }
+  }
   
   private def toInt(str: String, min: Int, max: Int, arg: String): Int =
   try {
@@ -118,21 +144,24 @@ config=/example/path/file.cfg
   Path to exisiting UTF-8 text file whose lines contain arguments in the format given here.
   Absolute or relative path. File paths in that config file will be interpreted relative to
   the config file.
-base=http://dumps.wikimedia.org/
+base-url=http://dumps.wikimedia.org/
   Base URL of dump server. Required if dump files are given.
-dir=/example/path
+base-dir=/example/path
   Path to existing target directory. Required.
-dump=en,zh-yue,1000-2000,...:file1,file2,...
-  Download given files for given languages from server. Each key is either a language code
-  or a range. In the latter case, languages with a matching number of articles will be used. 
+download-dates=20120530-20120610
+  Only dumps whose page date is in this range will be downloaded. By default, all dumps are 
+  included, starting with the newest. Open ranges like 20120530- or -20120610 are allowed.
+download-count=1
+  Max number of dumps to download. Default is 1.
+download=en,zh-yue,1000-2000,...:file1,file2,...
+  Download given files for given languages from server. Each key is either '@mappings', a language 
+  code, or a range. In the latter case, languages with a matching number of articles will be used. 
   If the start of the range is omitted, 0 is used. If the end of the range is omitted, 
   infinity is used. For each language, a new sub-directory is created in the target directory.
   Each file is a file name like 'pages-articles.xml.bz2', to which a prefix like 
   'enwiki-20120307-' will be added. This argument can be used multiple times, for example 
-  'dump=en:foo.xml dump=de:bar.xml'
-other=http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3/maintenance/tables.sql
-  URL of other file to download to the target directory. Optional. This argument can be used 
-  multiple times, for example 'other=http://a.b/c.de other=http://f.g/h.ij'
+  'download=en:foo.xml download=de:bar.xml'. '@mappings' means all languages that have a 
+   mapping namespace on http://mappings.dbpedia.org.
 retry-max=5
   Number of total attempts if the download of a file fails. Default is no retries.
 retry-millis=1000

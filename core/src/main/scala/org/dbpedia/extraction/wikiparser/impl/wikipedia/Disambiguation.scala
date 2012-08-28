@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.wikiparser.impl.wikipedia
 
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.RichString.toRichString
+import org.dbpedia.extraction.util.RichString.wrapString
 
 /**
  * Holds the redirect identifiers of the different Wikipedia languages.

@@ -4,11 +4,12 @@ import org.dbpedia.extraction.mappings.Extractor
 import scala.collection.mutable.HashMap
 import java.util.Properties
 import java.io.File
-import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.immutable.{SortedSet,SortedMap}
-import org.dbpedia.extraction.dump.util.{ConfigUtils,WikiInfo}
+import org.dbpedia.extraction.util.{Language,WikiInfo}
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
+import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange}
 import scala.io.Codec
 
 private class Config(config: Properties)
@@ -21,8 +22,8 @@ extends ConfigParser(config)
   // - allow multiple config files, given on command line
 
   /** Dump directory */
-  val dumpDir = getFile("dir")
-  if (dumpDir == null) throw error("property 'dir' not defined.")
+  val dumpDir = getFile("base-dir")
+  if (dumpDir == null) throw error("property 'base-dir' not defined.")
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
@@ -39,9 +40,17 @@ extends ConfigParser(config)
 
   val extractorClasses = loadExtractorClasses()
   
+  val namespaces = loadNamespaces()
+  
   private def getFile(key: String): File = {
     val value = config.getProperty(key)
     if (value == null) null else new File(value)
+  }
+  
+  private def loadNamespaces(): Set[Namespace] = {
+    val names = splitValue("namespaces", ',')
+    if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
+    else names.map(name => Namespace(Language.English, name)).toSet
   }
   
   /**
@@ -72,7 +81,7 @@ extends ConfigParser(config)
       }
     }
 
-    SortedMap(classes.toSeq: _*)(Language.wikiCodeOrdering)
+    SortedMap(classes.toSeq: _*)
   }
   
   private def loadLanguages(): Set[Language] = {
@@ -88,11 +97,12 @@ extends ConfigParser(config)
     
     var ranges = Set[(Int,Int)]()
   
-    // FIXME: copy & paste in DownloadConfig and Import
+    // FIXME: copy & paste in DownloadConfig and ConfigUtils
     
     for (key <- keys) key match {
-      case ConfigUtils.Range(from, to) => ranges += ConfigUtils.toRange(from, to)
-      case ConfigUtils.Language(language) => languages += Language(language)
+      case "@mappings" => languages ++= Namespace.mappings.keySet
+      case RangeRegex(from, to) => ranges += toRange(from, to)
+      case LanguageRegex(language) => languages += Language(language)
       case other => throw new Exception("Invalid language / range '"+other+"'")
     }
     
@@ -111,13 +121,11 @@ extends ConfigParser(config)
       for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
       {
         // ...add its language
-        languages += Language(wiki.language)
+        languages += wiki.language
       }
     }
     
-    if (languages.isEmpty) languages = Namespace.mappings.keySet
-
-    SortedSet[Language](languages.toSeq: _*)(Language.wikiCodeOrdering)
+    SortedSet[Language](languages.toSeq: _*)
   }
 
   private def loadExtractorClass(name: String): Class[_ <: Extractor] = {
