@@ -1,16 +1,15 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.OntologyNamespaces
 import org.dbpedia.extraction.util.Language
 
 /**
  * Parses links to other instances.
  */
 
-class ObjectParser( extractionContext : { def language : Language }, val strict : Boolean = false) extends DataParser
+class ObjectParser( context : { def language : Language }, val strict : Boolean = false) extends DataParser
 {
-    private val flagTemplateParser = new FlagTemplateParser(extractionContext)
+    private val flagTemplateParser = new FlagTemplateParser(context)
 
     override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
@@ -31,12 +30,12 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
     {
         val pageNode = node.root
 
-        if (!strict)
+        if (! strict)
         {
             for (child <- node :: node.children) child match
             {
                 //ordinary links
-                case InternalLinkNode(destination, _, _, _) if destination.namespace == WikiTitle.Namespace.Main =>
+                case InternalLinkNode(destination, _, _, _) if destination.namespace == Namespace.Main =>
                 {
                     return Some(getUri(destination, pageNode))
                 }
@@ -44,7 +43,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
                 //creating links if the same string is a link on this page
                 case TextNode(text, _) => getAdditionalWikiTitle(text, pageNode) match
                 {
-                    case Some(destination) if destination.namespace == WikiTitle.Namespace.Main =>
+                    case Some(destination) if destination.namespace == Namespace.Main =>
                     {
                         return Some(getUri(destination, pageNode))
                     }
@@ -56,7 +55,7 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
                 {
                     case Some(destination) =>  // should always be Main namespace
                     {
-                        return Some(OntologyNamespaces.getResource(destination.encodedWithNamespace, extractionContext.language))
+                        return Some(context.language.resourceUri.append(destination.decodedWithNamespace))
                     }
                     case None =>
                 }
@@ -90,10 +89,10 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
      */
     private def getAdditionalWikiTitle(surfaceForm : String, pageNode : PageNode) : Option[WikiTitle] =
     {
-        surfaceForm.trim.capitalize match
+        surfaceForm.trim.toLowerCase(context.language.locale) match
         {
             case "" => None
-            case sf : String => getTitleForSurfaceForm(sf, pageNode)
+            case sf: String => getTitleForSurfaceForm(sf, pageNode)
         }
     }
 
@@ -103,8 +102,9 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
         {
             case linkNode : InternalLinkNode =>
             {
+                // TODO: Here we match the link label. Should we also match the link target?
                 val linkText = linkNode.children.collect{case TextNode(text, _) => text}.mkString("")
-                if(linkText.capitalize == surfaceForm)
+                if(linkText.toLowerCase(context.language.locale) == surfaceForm)
                 {
                     return Some(linkNode.destination)
                 }
@@ -133,11 +133,12 @@ class ObjectParser( extractionContext : { def language : Language }, val strict 
     private def getUri(destination : WikiTitle, pageNode : PageNode) : String =
     {
         // prepend page title to the URI if the destination links to a subsection on this page, e.g. starring = #Cast
-         val uriSuffix = if(destination.decoded startsWith "#") (pageNode.title.encodedWithNamespace + destination.encoded)
-                         else destination.encodedWithNamespace
+        // FIXME: how do we want to treat fragment URIs? Currently, "#" is percent-encoded as "%23"
+        val uriSuffix = if(destination.decoded startsWith "#") (pageNode.title.decodedWithNamespace + destination.decoded)
+                         else destination.decodedWithNamespace
         // TODO this is not the final solution:
         // parsing the list of items in the subsection would be better, but the signature of parse would have to change to return a List
 
-        OntologyNamespaces.getResource(uriSuffix, destination.language)
+        destination.language.resourceUri.append(uriSuffix)
     }
 }

@@ -5,6 +5,9 @@ import org.dbpedia.extraction.util.WikiUtil
 import java.net.URLEncoder
 import org.dbpedia.extraction.wikiparser._
 
+/**
+ * TODO: move this to PageNode?
+ */
 class PageContext()
 {
     private val uriGenerator = new UriGenerator()
@@ -16,9 +19,9 @@ class PageContext()
 
 private class UriGenerator
 {
-	var uris = Map[String, Int]()
+    var uris = Map[String, Int]()
 
-	def generate(baseUri : String, node : Node) : String =
+    def generate(baseUri : String, node : Node) : String =
     {
         node match
         {
@@ -34,46 +37,46 @@ private class UriGenerator
 
     def generate(baseUri : String, name : String) : String =
     {
-		var uri : String = baseUri
+        var uri : String = baseUri
 
-		if(name != "")
-		{
+        if(name != "")
+        {
             var text = name
 
-	        //Normalize text
-	        text = WikiUtil.removeWikiEmphasis(text)
-	        text = text.replace("&nbsp;", " ")//TODO decode all html entities here
-	        text = text.replace('(', ' ')
-	        text = text.replace(')', ' ')
-	        text = text.replaceAll("\\<.*?\\>", "") //strip tags
+            //Normalize text
+            text = WikiUtil.removeWikiEmphasis(text)
+            text = text.replace("&nbsp;", " ")//TODO decode all html entities here
+            text = text.replace('(', ' ')
+            text = text.replace(')', ' ')
+            text = text.replaceAll("\\<.*?\\>", "") //strip tags
             text = text.replaceAll("\\s+", "_") //remove white space
-	        text = text.trim
-	        if(text.length > 50) text = text.substring(0, 50)
-	        text = URLEncoder.encode(text, "UTF-8")
+            text = text.trim
+            if(text.length > 50) text = text.substring(0, 50)
+            text = WikiUtil.wikiEncode(text)
 
-	        //Test if the base URI ends with a prefix of text
-	        var i = baseUri.length - 1
-	        var done = false
-	        while(!done && i > 0 && baseUri.length - i < text.length)
-	        {
-	        	if(baseUri.regionMatches(true, i, text, 0, baseUri.length - i))
-	        	{
-	        		text = text.substring(baseUri.length - i)
-	        		done = true
-	        	}
+            //Test if the base URI ends with a prefix of text
+            var i = baseUri.length - 1
+            var done = false
+            while(!done && i > 0 && baseUri.length - i < text.length)
+            {
+                if(baseUri.regionMatches(true, i, text, 0, baseUri.length - i))
+                {
+                    text = text.substring(baseUri.length - i)
+                    done = true
+                }
 
-	        	i -= 1
-	        }
+                i -= 1
+            }
 
-	        //Remove leading underscore
-	        if(!text.isEmpty && text(0) == '_')
-	        {
-	        	text = text.substring(1)
-	        }
+            //Remove leading underscore
+            if(!text.isEmpty && text(0) == '_')
+            {
+                text = text.substring(1)
+            }
 
-	        //Generate URI
-	        uri = baseUri + "__" + text
-		}
+            //Generate URI
+            uri = baseUri + "__" + text
+        }
 
         val index = uris.getOrElse(uri, 0) + 1
         uris = uris.updated(uri, index)

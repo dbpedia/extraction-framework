@@ -1,14 +1,19 @@
 package org.dbpedia.extraction.wikiparser
 
 /**
- * Represents a template parameter.
+ * Represents a template property.
  *
- * @param parameter The key by which this parameter is identified in the template.
- * @param opt true if this parameter is optional (if it has a default value - which is not accessible yet)
+ * @param key The key by which this property is identified in the template.
+ * @param children The contents of the value of this property
  * @param line The source line number of this property
  */
-case class TemplateParameterNode(parameter : String, opt : Boolean, override val line : Int) extends Node(List.empty, line)
+case class TemplateParameterNode(parameter : String, override val children : List[Node], override val line : Int) extends Node(children, line)
 {
-    def toWikiText() : String = "{{{" + parameter + (if (opt == true) "|" else "") + "}}}"
-
+    def toWikiText = {
+      val rest = if (children.isEmpty) "" else "|"+children.map(_.toWikiText).mkString
+      "{{{"+parameter+rest+"}}}"
+    }
+    
+    // template parameters are skipped for plain text
+    def toPlainText = ""
 }

@@ -18,15 +18,15 @@ import org.dbpedia.extraction.util.{WikiUtil, FileProcessor}
  * @param language The Language of the sources.
  * @throws FileNotFoundException if the given base could not be found
  */
-class FileSource(baseDir : File, filter : (String => Boolean) = (path => !path.startsWith(".") && !path.contains("/.")), language : Language = Language.Default) extends Source
+class FileSource(baseDir : File, language : Language, filter : (String => Boolean) = (path => !path.startsWith(".") && !path.contains("/."))) extends Source
 {
     private val logger = Logger.getLogger(classOf[FileSource].getName)
-	private val fileProcessor = new FileProcessor(baseDir, filter)
+    private val fileProcessor = new FileProcessor(baseDir, filter)
 
     override def foreach[U](f : WikiPage => U) : Unit =
-	{
-		fileProcessor.processFiles((path : String, source: String) =>
-		{
+    {
+        fileProcessor.processFiles((path : String, source: String) =>
+        {
             // cut off '#1.txt' or '.txt' if necessary
             var sep = path.lastIndexOf('#')
             if (sep == -1)
@@ -37,21 +37,21 @@ class FileSource(baseDir : File, filter : (String => Boolean) = (path => !path.s
             val slash = path.indexOf('/');
             
             var pageName = if(sep > slash) path.substring(0, sep) else path
-            pageName = WikiUtil.wikiDecode(pageName, language)
+            pageName = WikiUtil.wikiDecode(pageName)
                 
             try
             {
-            	val title = WikiTitle.parse(pageName, language)
+                val title = WikiTitle.parse(pageName, language)
 
-            	f(new WikiPage(title, 0, 0, source))
+                f(new WikiPage(title, source))
             }
             catch
             {
                 case ex : ControlThrowable => throw ex
-            	case ex : Exception => logger.log(Level.WARNING, "Error processing page  " + pageName, ex)
+                case ex : Exception => logger.log(Level.WARNING, "Error processing page  " + pageName, ex)
             }
         })
-	}
+    }
 
     override def hasDefiniteSize = true
 }

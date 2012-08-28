@@ -215,8 +215,9 @@ public class HtmlCoder
   {
     ParseException error = new HtmlReferenceException(_in, pos, description, reference);
     _handler.error(error);
-    // if handler didn't throw exception, escape bad reference and go on
-    append(pos, 1, "&amp;");
+    // if handler didn't throw exception, keep or escape bad reference and go on
+    String encoded = _encode.encode('&');
+    append(pos, 1, encoded != null ? encoded : "&");
     return 1;
   }
   

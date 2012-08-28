@@ -47,7 +47,8 @@ import WiktionaryPageExtractor._ //companion
  */
 
 class WiktionaryPageExtractor( context : {} ) extends Extractor {
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Graph =
+  override val datasets = scala.collection.immutable.Set.empty[Dataset]
+  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {
     //return new Graph()
     val cache = new Cache
@@ -69,13 +70,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     for(start <- ignoreStart){
         if(entityId.startsWith(start)){
             Logging.printMsg("ignored "+entityId,1)
-            return new Graph(quads.toList)
+            return quads.toList
         }
     }
     for(end <- ignoreEnd){
         if(entityId.endsWith(end)){
             Logging.printMsg("ignored "+entityId,1)
-            return new Graph(quads.toList)
+            return quads.toList
         }
     }
 
@@ -153,7 +154,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         if(counter % 100 == 0){
             Logging.printMsg(""+counter+"/"+page.children.size+" nodes inspected "+entityId,1)
         }
-        Logging.printMsg("page node: "+pageStack.head.toWikiText(), 2)
+        Logging.printMsg("page node: "+pageStack.head.toWikiText, 2)
         consumed = false
 
         //collect open blocks. reverse them, so innermost blocks are regarded first (when matching their templates and indicator templates)
@@ -313,7 +314,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     quadsWithStat.foreach( q => { Logging.printMsg(q.renderNTriple, 1) } )
     Logging.printMsg("finish "+subjectUri+" threadID="+Thread.currentThread().getId(), 2)
     
-    new Graph(quadsWithStat)
+    quadsWithStat
   }
 
   /**
@@ -475,16 +476,37 @@ object WiktionaryPageExtractor {
 
   val language = properties("language")
   val logLevel = properties("logLevel").toInt
-
-  val langObj = new Language(language, new Locale(language))
-
-  val vf = ValueFactoryImpl.getInstance
-  Logging.level = logLevel
-  Logging.printMsg("wiktionary loglevel = "+logLevel,0)
-
+  
   val ns = properties.get("ns").getOrElse("http://undefined.com/")
   val resourceNS = ns +"resource/"
   val termsNS = ns +"terms/"
+
+  /**
+  * OpenRDF factory
+  */
+  val vf = ValueFactoryImpl.getInstance
+
+  /**
+  * Quad needs some objects, store them here to reuse them
+  */
+
+  /**
+  * the language of all produced literals
+  */
+  val langObj : Language= Language(language)
+  /**
+  * the name of the dataset
+  */
+  val datasetURI : Dataset = new Dataset("wiktionary.dbpedia.org")
+  
+  /**
+  * the graph of all produced quads
+  */
+  val tripleContext = vf.createURI(ns.replace("http://", "http://"+language+"."))
+  
+  Logging.level = logLevel
+  Logging.printMsg("wiktionary loglevel = "+logLevel,0)
+
 
   val varPattern = new Regex("\\$[a-zA-Z0-9]+")  
 
@@ -558,15 +580,6 @@ object WiktionaryPageExtractor {
   */
   val pageConfig = new Page((languageConfig \ "page")(0))
 
-  /**
-  * ? Quad needs this :)
-  */
-  val datasetURI : Dataset = new Dataset("wiktionary.dbpedia.org")
-  
-  /**
-  * the graph of all produced quads
-  */
-  val tripleContext = vf.createURI(ns.replace("http://", "http://"+language+"."))
 
   /**
   * urify

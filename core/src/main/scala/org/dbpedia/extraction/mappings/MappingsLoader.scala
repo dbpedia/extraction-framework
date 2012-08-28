@@ -1,22 +1,22 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
-
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
+
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
  * This should be replaced by a general loader later on, which loads the mapping objects based on the grammar (which can be defined using annotations)
  */
 object MappingsLoader
 {
+    // Note: we pass the encoded page title as log parameter so we can render a link on the server
     private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
     
     def load( context : {
@@ -27,60 +27,64 @@ object MappingsLoader
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
-		val templateMappings = new HashMap[String, TemplateMapping]()
-		val tableMappings = new ArrayBuffer[TableMapping]()
-		val conditionalMappings = new HashMap[String, ConditionalMapping]()
+        val classMappings = new HashMap[String, Mapping[TemplateNode]]()
+        val tableMappings = new ArrayBuffer[TableMapping]()
 
-		for ( page <- context.mappingPageSource;
-		      node <- page.children if node.isInstanceOf[TemplateNode] )
+        for ( page <- context.mappingPageSource;
+              node <- page.children if node.isInstanceOf[TemplateNode] )
         {
-		    val tnode = node.asInstanceOf[TemplateNode]
+            val tnode = node.asInstanceOf[TemplateNode]
             val name = page.title.decoded
 
-		    try
+            try
             {
-		        tnode.title.decoded match
-		        {
-                	case "TemplateMapping" =>
-                	{
-            			if(!templateMappings.contains(name))
-            			{
-            			     val mapping = loadTemplateMapping(tnode, context)
-            			     
-            			     templateMappings(name) = mapping
-            			}
-            			else
-            			{
-            			    logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "'")
-            			}
-                	}
-                	case "TableMapping" =>
-                	{
-                	    tableMappings += new TableMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
+                tnode.title.decoded match
+                {
+                    case "TemplateMapping" =>
+                    {
+                        if(! classMappings.contains(name))
+                        {
+                             classMappings(name) = loadTemplateMapping(tnode, context)
+                        }
+                        else
+                        {
+                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
+                        }
+                    }
+                    case "TableMapping" =>
+                    {
+                        tableMappings += new TableMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
                                                            loadOntologyClass(tnode, "correspondingClass", false, context.ontology),
                                                            loadOntologyProperty(tnode, "correspondingProperty", false, context.ontology),
                                                            loadTemplateProperty(tnode, "keywords"),
                                                            loadTemplateProperty(tnode, "header"),
                                                            loadPropertyMappings(tnode, "mappings", context),
                                                            context )
-                	}
-                	case "ConditionalMapping" =>
-                	{
-                	    conditionalMappings(name) = loadConditionalMapping(tnode, context)
-                	}
-                	case _ => //Unknown mapping element
-		        }
+                    }
+                    case "ConditionalMapping" =>
+                    {
+                        if(! classMappings.contains(name))
+                        {
+                             classMappings(name) = loadConditionalMapping(tnode, context)
+                        }
+                        else
+                        {
+                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
+                        }
+                    }
+                    case _ => throw new IllegalArgumentException("Unknown mapping element "+tnode.title.decoded)
+                }
             }
             catch
             {
-                case ex => ex.printStackTrace(); logger.warning("Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage);
+                case ex => logger.log(Level.WARNING, "Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage, page.title.encodedWithNamespace)
             }
         }
 
         logger.info("Mappings loaded ("+context.language.wikiCode+")")
 
-		new Mappings(templateMappings.toMap, tableMappings.toList, conditionalMappings.toMap)
-	}
+        new Mappings(classMappings.toMap, tableMappings.toList)
+    }
 
     private def loadTemplateMapping(tnode : TemplateNode, context : {
                                                             def ontology : Ontology
@@ -110,12 +114,12 @@ object MappingsLoader
             }
             catch
             {
-                case ex : Exception => logger.warning("Couldn't load property mapping on page " + node.root.title + ". Details: " + ex.getMessage)
+                case ex : Exception => logger.log(Level.WARNING, "Couldn't load property mapping on page " + node.root.title.decodedWithNamespace + ". Details: " + ex.getMessage, node.root.title.encodedWithNamespace)
             }
         }
 
-	    mappings.reverse
-	}
+        mappings.reverse
+    }
 
     private def loadPropertyMapping(tnode : TemplateNode, context : {
                                                             def ontology : Ontology
@@ -147,14 +151,15 @@ object MappingsLoader
         }
         case "CombineDateMapping" =>
         {
-            new CombineDateMapping( loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
-                                    loadTemplateProperty(tnode, "templateProperty1"),
-                                    loadDatatype(tnode, "unit1", true, context.ontology),
-                                    loadTemplateProperty(tnode, "templateProperty2"),
-                                    loadDatatype(tnode, "unit2", true, context.ontology),
-                                    loadTemplateProperty(tnode, "templateProperty3", false),
-                                    loadDatatype(tnode, "unit3", false, context.ontology),
-                                    context )
+					// TODO: change the syntax on the mappings wiki to allow an arbitrary number of template properties.
+          val templateProperties = new HashMap[String, Datatype]()
+          val templateProperty1 = loadTemplateProperty(tnode, "templateProperty1", true)
+          templateProperties(templateProperty1) = loadDatatype(tnode, "unit1", true, context.ontology)
+          val templateProperty2 = loadTemplateProperty(tnode, "templateProperty2", true)
+          templateProperties(templateProperty2) = loadDatatype(tnode, "unit2", true, context.ontology)
+          val templateProperty3 = loadTemplateProperty(tnode, "templateProperty3", false)
+          if (templateProperty3 != null) templateProperties(templateProperty3) = loadDatatype(tnode, "unit3", true, context.ontology)
+          new CombineDateMapping(loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology), templateProperties, context)
         }
         case "CalculateMapping" =>
         {
@@ -191,7 +196,7 @@ object MappingsLoader
         }
         case title => throw new IllegalArgumentException("Unknown property type " + title + " on page " + tnode.root.title)
     }
-	
+    
     private def loadConditionalMapping(tnode : TemplateNode,  context : {
                                                                  def ontology : Ontology
                                                                  def redirects : Redirects
@@ -202,9 +207,7 @@ object MappingsLoader
                  conditionNode @ TemplateNode(_,_,_,_) <- casesProperty.children ) 
             yield loadConditionMapping(conditionNode, context)
         
-        new ConditionalMapping( conditionMappings,
-                                loadPropertyMappings(tnode, "defaultMappings", context),
-                                context )
+        new ConditionalMapping(conditionMappings, loadPropertyMappings(tnode, "defaultMappings", context))
     }
     
     private def loadConditionMapping(tnode : TemplateNode, context : {
@@ -222,83 +225,51 @@ object MappingsLoader
         new ConditionMapping( loadTemplateProperty(tnode, "templateProperty", false),
                               loadTemplateProperty(tnode, "operator", false),
                               loadTemplateProperty(tnode, "value", false),
-                              loadTemplateMapping(mapping, context),
-                              context )
+                              // TODO: allow nested ConditionalMapping - don't use loadTemplateMapping() 
+                              // here, move the switch block in load() to its own method and use that
+                              loadTemplateMapping(mapping, context))
     }
-	
-	private def loadOntologyClass(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyClass =
-	{
-	    val className = loadTemplateProperty(node, propertyName, required)
-	    
-	    ontology.getClass(className) match
-	    {
-	        case Some(ontClass) => ontClass
-            case _ =>
-            {
-                if(required)
-                    throw new IllegalArgumentException("Ontology class " + className + " not found.")
-                else
-                    null
-            }
-	    }
-	}
-	
-    private def loadOntologyProperty(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyProperty =
+    
+    private def loadOntologyClass(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyClass = {
+      loadOntologyValue(node, propertyName, ontology.classes, required, "Ontology class not found: ")
+    }
+    
+  private def loadOntologyProperty(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyProperty = {
+    loadOntologyValue(node, propertyName, ontology.properties, required, "Ontology property not found: ")
+  }
+  
+  private def loadDatatype(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : Datatype = {
+    loadOntologyValue(node, propertyName, ontology.datatypes, required, "Datatype not found: ")
+  }
+  
+  private def loadOntologyValue[T](node : TemplateNode, propertyName : String, map: Map[String, T], required: Boolean, msg: String) : T = {
+    val name = loadTemplateProperty(node, propertyName, required)
+    map.getOrElse(name, if (! required) null.asInstanceOf[T] else throw new IllegalArgumentException(msg+name))
+  }
+      
+    
+    private def loadTemplateProperty(node : TemplateNode, propertyName : String, required : Boolean = true) : String = 
     {
-        val ontPropertyName = loadTemplateProperty(node, propertyName, required)
-        
-        ontology.getProperty(ontPropertyName) match
+        val value = node.property(propertyName).flatMap(propertyNode => StringParser.parse(propertyNode))
+
+        value match
         {
-            case Some(ontProperty) => ontProperty
-            case _ =>
+            case Some(str) => str
+            case None =>
             {
                 if(required)
-                    throw new IllegalArgumentException("Ontology property " + ontPropertyName + " not found.")
+                    throw new IllegalArgumentException("Missing property '" + propertyName + "' in template '" + node.title.decoded + "' starting on line " + node.line + ".")
                 else
                     null
             }
         }
     }
-    
-    private def loadDatatype(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : Datatype =
-    {
-        val datatypeName = loadTemplateProperty(node, propertyName, required)
-        
-        ontology.getDatatype(datatypeName) match
-        {
-            case Some(ontologyDatatypeName) => ontologyDatatypeName
-            case _ =>
-            {
-                if(required)
-                    throw new IllegalArgumentException("Datatype " + datatypeName + " not found.")
-                else
-                    null
-            }
-        } 
-    }
-	
-	private def loadTemplateProperty(node : TemplateNode, propertyName : String, required : Boolean = true) : String = 
-	{
-        val value = node.property(propertyName).flatMap(propertyNode => StringParser.parse(propertyNode))
-
-	    value match
-	    {
-	        case Some(str) => str
-	        case None =>
-	        {
-    	        if(required)
-    	            throw new IllegalArgumentException("Missing property '" + propertyName + "' in template '" + node.title.decoded + "' starting on line " + node.line + ".")
-    	        else
-    	            null
-	        }
-	    }
-	}
 
     private def loadLanguage(node : TemplateNode, propertyName : String, required : Boolean) : Language =
     {
         loadTemplateProperty(node, propertyName, required) match
         {
-            case lang : String => Language.fromWikiCode(lang).getOrElse(throw new IllegalArgumentException("Language " + lang + " unknown"))
+            case lang : String => Language(lang)
             case null => null
         }
     }

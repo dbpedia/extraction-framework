@@ -68,10 +68,7 @@ class CachingGraphDAO(val decoratee : HTTPGraphDAO, val basePath : String)
       try {
         println("Cache hit for: " + file);
         val tmp = SerializationUtils.deserializeXML(file)
-        tmp match {
-          case v : T => return Some(v)
-          case _ => return None
-        }
+        Some(tmp.asInstanceOf[T])
       }
       catch {
         case e => {

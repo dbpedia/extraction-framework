@@ -2,7 +2,7 @@ package org.dbpedia.extraction.live.feeder;
 
 import org.apache.commons.collections15.iterators.TransformIterator;
 import org.apache.log4j.Logger;
-import org.apache.xerces.parsers.DOMParser;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
 import org.dbpedia.extraction.live.priority.Priority;
@@ -34,10 +34,11 @@ public class LiveUpdateFeeder extends Thread{
 
     private static Logger logger = Logger.getLogger(LiveUpdateFeeder.class);
 
-//    String oaiUri = "http://en.wikipedia.org/wiki/Special:OAIRepository";
-    String oaiUri = "http://live.dbpedia.org/syncwiki/Special:OAIRepository";
+    String oaiUri = LiveOptions.options.get("oaiUri");
+    String baseWikiUri = LiveOptions.options.get("baseWikiUri");
+    String oaiPrefix = LiveOptions.options.get("oaiPrefix");
+    
     Calendar calendar = new GregorianCalendar();
-
     //Date startDate = calendar.getTime();
     String startDate = "2011-04-01T15:00:00Z";
 
@@ -47,21 +48,6 @@ public class LiveUpdateFeeder extends Thread{
 
     int articleDelay = 0;
     boolean articleRenewal = false;
-
-//    String baseWikiUri = "http://en.wikipedia.org/wiki/";
-//    String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
-    String baseWikiUri = "http://live.dbpedia.org/syncwiki/";
-    String oaiPrefix = "oai:live.dbpedia.org:dbpediawiki:";
-
-    //This parser is used to parse the XML text generated from the page, in order to get the PageID
-    DOMParser parser = new DOMParser();
-
-//    public LiveUpdateFeeder(){
-//        super("Live extraction feeder");
-//
-//        start();
-//
-//    }
 
     public LiveUpdateFeeder(String name, int priority){
 
@@ -152,7 +138,7 @@ public class LiveUpdateFeeder extends Thread{
 			}
 			else if(record instanceof DeletionRecord) {
 				DeletionRecord x = (DeletionRecord)record;
-				System.out.println(x.getOaiId());
+				logger.info(x.getOaiId());
 			}
 			else {
 				throw new RuntimeException("Should not happen");

@@ -2,16 +2,16 @@ package org.dbpedia.extraction.live.helper
 
 import java.net.URL
 import org.dbpedia.extraction.util.{Language, WikiApi}
-import org.dbpedia.extraction.wikiparser.WikiTitle
-import ORG.oclc.oai.harvester2.verb.GetRecord
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.live.util.XMLUtil
 import org.dbpedia.extraction.sources.{XMLSource, Source}
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager
 import xml.{XML, Elem}
 import java.util.PriorityQueue
-import org.dbpedia.extraction.live.priority.PagePriority;
-import org.dbpedia.extraction.live.priority.Priority;
+import org.dbpedia.extraction.live.priority.PagePriority
+import org.dbpedia.extraction.live.priority.Priority
 import org.dbpedia.extraction.live.main._;
+import org.dbpedia.extraction.live.core.LiveOptions
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,17 +27,15 @@ def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
 
     src.foreach(CurrentWikiPage =>
       {
-          val mappingTitle = WikiTitle.parseEncoded(CurrentWikiPage.title.toString, Language.Default)
-          val templateTitle = new WikiTitle(mappingTitle.decoded, WikiTitle.Namespace.Template, Language.Default)
+    	  val language = Language.apply(LiveOptions.options.get("language"))
+          val mappingTitle = WikiTitle.parse(CurrentWikiPage.title.toString, language)
+          val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
 
-          //val wikiApiUrl = new URL("http://" + Language.Default.wikiCode + ".wikipedia.org/w/api.php")
           val wikiApiUrl = new URL("http://live.dbpedia.org/syncw/api.php")
-          val api = new WikiApi(wikiApiUrl, Language.Default)
+          val api = new WikiApi(wikiApiUrl, language)
 
           val pageIDs = api.retrieveTemplateUsageIDs(templateTitle, 500);
-          var NumberOfPagesToBeInvalidated = 0;
           pageIDs.foreach(CurrentPageID => {
-            //val CurrentPageID = wikititle.toLong;
             Main.pageQueue.add(new PagePriority(CurrentPageID, Priority.MappingPriority, lastResponseDate));
 
             //We add the pageID here immediately without checking if it exist first, as put checks if it exists the old value will be replace,

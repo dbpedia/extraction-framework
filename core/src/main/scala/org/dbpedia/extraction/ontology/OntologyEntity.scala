@@ -1,18 +1,22 @@
 package org.dbpedia.extraction.ontology
 
+import org.dbpedia.extraction.util.Language
+
 
 /**
  * Represents a (named) entity in the ontology
- *
+ * 
+ * TODO: an entitiy should contain its base uri and prefix.
+ * 
  * @param name The name of this entity
  * @param labels The labels of this entity. Map: LanguageCode -> Label
  * @param comments Comments describing this entity. Map: LanguageCode -> Comment
  */
-abstract class OntologyEntity(val name : String, val labels : Map[String, String], val comments : Map[String, String])
+abstract class OntologyEntity(val name : String, val labels : Map[Language, String], val comments : Map[Language, String])
 {
-    require(name != null, "name != null")
-    require(labels != null, "labels != null")
-    require(comments != null, "comments != null")
+    require(name != null, "name of ontology entity is null")
+    require(labels != null, "missing labels for ontology entity "+name)
+    require(comments != null, "missing comments for ontology entity "+name)
 
     /**
      * The URI of this entity.
@@ -23,7 +27,7 @@ abstract class OntologyEntity(val name : String, val labels : Map[String, String
 
     override def equals(other : Any) = other match
     {
-        case otherType : OntologyType => (name == otherType.name)
+        case that: OntologyEntity => (this.getClass == that.getClass && this.name == that.name)
         case _ => false
     }
 

@@ -17,6 +17,7 @@
 
 package org.dbpedia.extraction.live.helper;
 
+import org.apache.log4j.Logger;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
@@ -45,6 +46,8 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
  * @version $Id: SesameJenaUtilities.java,v 1.5 2006/09/02 20:59:00 cyganiak Exp $
  */
 public class SesameJenaUtilities {
+
+    private static Logger logger = Logger.getLogger(SesameJenaUtilities.class);
 
 	final static public String s_bnodePrefix = "urn:bnode:";
 
@@ -205,12 +208,12 @@ public class SesameJenaUtilities {
 	 */
 	private static RDFDatatype getTypedLiteral(String dtype){
 		try{
-		System.out.println("DATATYPE = " + dtype);
-		RDFDatatype dt = TypeMapper.getInstance().getTypeByName(dtype);
-		return dt;
+            logger.info("DATATYPE = " + dtype);
+            RDFDatatype dt = TypeMapper.getInstance().getTypeByName(dtype);
+            return dt;
 		}
 		catch(Exception exp){
-		return null;
+            return null;
 		}
 	}
 

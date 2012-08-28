@@ -8,10 +8,6 @@ import java.io.ObjectOutputStream;
 import java.util.*;
 
 
-//import static org.hamcrest.CoreMatchers.not;
-//import static org.hamcrest.core.Is.is;
-
-
 /**
  * Created by IntelliJ IDEA.
  * User: Mohamed Morsey
@@ -22,40 +18,17 @@ import java.util.*;
 public class Timer{
     
     //Initializing the Logger
-    private static Logger logger;
+    private static Logger logger = Logger.getLogger(Timer.class);
 
     public static HashMap time = new HashMap();
     public static  HashMap start = new HashMap();
     public static long startingTime;
 
-    static
-    {
-        try
-        {
-            logger = Logger.getLogger(Class.forName("org.dbpedia.extraction.live.core.Timer").getName());
-            //Assert.assertNotNull("The logger of Timer class cannot be null", logger);
-        }
-        catch (Exception exp){
-
-        }
-    }
 
     //Initializes the starting time of the timer  
     static public void init()
     {
-        try
-        {
-        //logger = Logger.getLogger(Class.forName("Timer").getName());
-            
 	    startingTime = System.nanoTime();
-
-
-        //TODO this was originally microtime and we converted it to nanoTime but still not sure that it is correct or not
-        }
-        catch(Exception exp)
-        {
-
-        }
 	}
 
     //@return   the period elapsed since the timer was started
@@ -66,7 +39,7 @@ public class Timer{
 
     //TODO the following function cannot be transformed
     static public String timerLabel(String component,Object obj, String rest){
-        return component.toString()+ "." + obj.getClass().toString() + "." + rest;
+        return component + "." + obj.getClass().toString() + "." + rest;
 	}
 
     //Starts the timer with the passed name
@@ -85,15 +58,15 @@ public class Timer{
         }
         catch(Exception exp)
         {
-            
+            logger.error("Cannot start timer \"" + TimerName + "\"");
+
         }
     }
 
-    //TODO this code must be converted to java valid code
     static public void staticTimer(String name, long timeToAdd)
     {
         //Assert.assertNotNull("Timer name cannot be null, in function staticTimer", name);
-        //Assert.assertTrue("timeToAdd must be greateer than 0", timeToAdd != 0);
+        //Assert.assertTrue("timeToAdd must be greater than 0", timeToAdd != 0);
         check(name);
 
         HashMap hmTotal = (HashMap)time.get(name);
@@ -116,12 +89,10 @@ public class Timer{
             return -1;
         }
         long before = Long.parseLong(start.get(TimerName).toString());
-        //unset(self::$start[$name]);
-        //Assert.assertTrue("before time of the timer must be greater than 0", before>0);
+
         start.remove(TimerName);
         long TimeNeeded = System.nanoTime() - before;
 
-        //TODO this code must be converted to java valid code
         check(TimerName);
         HashMap CurrentMap = (HashMap)time.get(TimerName);
 
@@ -143,7 +114,6 @@ public class Timer{
 
 	static private void check(String TimerName)
     {
-        //Assert.assertNotNull("Timer name cannot be null, in function check", TimerName);
         if(time.get(TimerName) == null)
         {
             time.put(TimerName, new HashMap());
@@ -158,7 +128,6 @@ public class Timer{
     {
         try
         {
-            //Assert.assertNotNull("statisticsDirectory cannot be null, in function writeTimeToFile", statisticsDirectory);
             HashMap Overall = new HashMap();
             Overall.put("startingtime", startingTime);
             Overall.put("lasttime", System.nanoTime());
@@ -261,8 +230,6 @@ public class Timer{
             tempString += Util.deck(key.toString());
 
             Message += Util.row(tempString,0);
-          /*Message += "total: " + total+ " sec\t(" + percent + ")\thits: " + hits +
-                    "\tavg: " + avg + "\t" + key +"\n";*/
         }
 
         return Message;
