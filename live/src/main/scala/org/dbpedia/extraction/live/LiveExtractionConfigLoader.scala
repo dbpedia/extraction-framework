@@ -1,27 +1,25 @@
 package org.dbpedia.extraction.live.extraction
 
-import _root_.org.dbpedia.extraction.mappings._
+import xml.XML
+
 import java.net.URL
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.File
-import _root_.org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.{WikiSource, Source}
-import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
 import java.util.logging.{Level, Logger}
 import java.awt.event.{ActionListener, ActionEvent}
-import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
+import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.sources.{WikiSource, Source}
+import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
+import org.dbpedia.extraction.destination.LiveUpdateDestination
 import org.dbpedia.extraction.live.job.LiveExtractionJob
-import xml.XML
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
 import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
 import org.dbpedia.extraction.live.main.Main
-
-
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.dump.extract.ExtractionJob
 import org.dbpedia.extraction.wikiparser.Namespace
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
 
 /**
@@ -46,14 +44,16 @@ object LiveExtractionConfigLoader extends ActionListener
   val logger = Logger.getLogger("LiveExtractionConfigLoader");
 
   /** Ontology source */
-  val ontologySource = WikiSource.fromNamespaces(namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
-    url = new URL("http://mappings.dbpedia.org/api.php"),
-    language = Language.apply(LiveOptions.options.get("language")) );
+  val ontologySource = WikiSource.fromNamespaces(
+    namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
+    url = new URL(Language.Mappings.apiUri),
+    language = Language.Mappings );
 
   /** Mappings source */
-  val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
-    url = new URL("http://mappings.dbpedia.org/api.php"),
-    language = Language.apply(LiveOptions.options.get("language")) );
+  val mappingsSource =  WikiSource.fromNamespaces(
+    namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
+    url = new URL(Language.Mappings.apiUri),
+    language = Language.Mappings );
 
   println ("COMMONS SOURCE = " + LiveOptions.options.get("commonsDumpsPath"));
 
@@ -166,12 +166,13 @@ object LiveExtractionConfigLoader extends ActionListener
     }
     articlesSource.foreach(CurrentWikiPage =>
     {
-
       if(CurrentWikiPage.title.namespace == Namespace.Main ||
         CurrentWikiPage.title.namespace == Namespace.File ||
         CurrentWikiPage.title.namespace == Namespace.Category)
       {
         val CurrentPageNode = parser(CurrentWikiPage)
+
+
 
         val testPage = CurrentWikiPage;
         //As the page title always starts with "en:", as it is the language of the page, and we are working only on

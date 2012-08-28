@@ -8,7 +8,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import org.aksw.commons.jena_owlapi.Conversion;
 import org.aksw.commons.util.strings.StringUtils;
 import org.apache.commons.collections15.Transformer;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.coode.owlapi.rdf.model.RDFGraph;
 import org.coode.owlapi.rdf.model.RDFTranslator;
@@ -38,7 +38,7 @@ public class RDFUtil
 		try{
 			md5 = MessageDigest.getInstance("MD5");
 		}catch(Exception e) {
-			logger.fatal(ExceptionUtils.getFullStackTrace(e));
+			logger.fatal(ExceptionUtils.getStackTrace(e));
 			throw new RuntimeException(e);
 		}
 	}
