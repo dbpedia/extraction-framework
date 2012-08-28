@@ -1,7 +1,7 @@
 package org.dbpedia.test;
 
 import org.apache.log4j.Logger
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 
 /**
@@ -49,7 +49,7 @@ abstract class SinglePrefetchIterator[T >: Null <: AnyRef]
 		catch {
 			case e => {
 				current = null;		
-				logger.error(ExceptionUtils.getFullStackTrace(e));
+				logger.error(ExceptionUtils.getStackTrace(e));
 			}
 		}
 	}
