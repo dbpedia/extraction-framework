@@ -13,6 +13,7 @@ object DisambiguationExtractorConfig
          "fr" -> " (homonymie)",
          "it" -> " (disambigua)",
          "ko" -> " (동음이의)",
+         "nl" -> " (doorverwijspagina)", //TODO make it Set() for multiple “nl” -> " (disambigueren)"
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
          "ru" -> " (значения)"

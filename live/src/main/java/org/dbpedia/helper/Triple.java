@@ -10,8 +10,10 @@ import org.dbpedia.extraction.util.WikiUtil;
 import java.io.StringWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static org.dbpedia.extraction.util.RichString.toRichString;
+import static org.dbpedia.extraction.util.RichString.wrapString;
 
 /*
 import org.openrdf.model.impl.StatementImpl;
@@ -90,7 +92,7 @@ public class Triple extends StatementImpl {
     }
     public static Resource page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
-           String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.apply(LiveOptions.options.get("language")).locale());
+           String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.English().locale());
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
 

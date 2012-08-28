@@ -49,7 +49,7 @@ object TurtleUtils {
   
   private def appendHex(sb: StringBuilder, c: Int, u: Char, d: Int) {
     sb append "\\" append u
-    NumberUtils.toHex(sb, c, d) 
+    NumberUtils.intToHex(sb, c, d) 
   }
   
 }

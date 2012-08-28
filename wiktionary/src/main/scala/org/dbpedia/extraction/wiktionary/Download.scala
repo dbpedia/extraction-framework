@@ -5,7 +5,7 @@ import java.net.URL
 import java.io._
 import java.util.logging.Logger
 import org.dbpedia.extraction.util.StringUtils._
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import io.{Codec, Source}
 
 /**
@@ -70,7 +70,7 @@ private object DumpDownloader
         for(subDirs <- Option(dir.listFiles()); subDir <- subDirs; if subDir.getName != date.toString && subDir.getName.matches("\\d{8}") )
         {
             logger.info("Deleting outdated dump " + subDir.getName)
-            subDir.deleteRecursive()
+            subDir.delete(true)
         }
 
         //Generate a list of the expected links to the dump files
@@ -147,7 +147,7 @@ private object DumpDownloader
     {
         require(url.toString.endsWith(".bz2"), "Unsupported extension")
 
-        val inputStream = new BZip2CompressorInputStream(url.openStream())
+        val inputStream = new BZip2CompressorInputStream(url.openStream(), true)
         val outputStream = new FileOutputStream(file)
         val buffer = new Array[Byte](65536)
 

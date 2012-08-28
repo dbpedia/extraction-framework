@@ -1,96 +1,12 @@
 package org.dbpedia.extraction.server.stats
 
+import java.io.{File,FileOutputStream,OutputStreamWriter}
 import java.util.logging.Logger
-import io.Source
-import java.lang.IllegalArgumentException
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.{WikiUtil, Language}
-import scala.Serializable
-import scala.collection
 import scala.collection.mutable
-import java.io._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Dataset}
-import org.dbpedia.extraction.server.stats.CreateMappingStats._
-import java.net.{URLDecoder, URLEncoder}
+import scala.io.Source
+import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-
-/**
- * TODO: Clean up this code a bit. Fix the worst deviations from Turtle/N-Triples spec, 
- * clearly document the others. Unescape \U stuff while parsing the line. Return Quad objects 
- * instead of arrays. Throw exceptions instead of returning None. Move to its own class.
- */
-class UriTriple(uris: Int) {
-  
-  def skipSpace(line: String, start: Int): Int = {
-    var index = start
-    while (index < line.length && line.charAt(index) == ' ') {
-      index += 1 // skip space
-    } 
-    index
-  }
-  
-  /** @param line must not start or end with whitespace - use line.trim. */
-  def unapplySeq(line: String) : Option[Seq[String]] =  {
-    var count = 0
-    var index = 0
-    val triple = new Array[String](3)
-    
-    while (count < uris) {
-      if (index == line.length || line.charAt(index) != '<') return None
-      val end = line.indexOf('>', index + 1)
-      if (end == -1) return None
-      triple(count) = line.substring(index + 1, end)
-      count += 1
-      index = skipSpace(line, end + 1)
-    }
-    
-    if (uris == 2) { // literal
-      if (index == line.length || line.charAt(index) != '"') return None
-      var end = index + 1
-      while (line.charAt(end) != '"') {
-        if (line.charAt(end) == '\\') end += 1
-        end += 1
-        if (end >= line.length) return None
-      } 
-      triple(2) = line.substring(index + 1, end)
-      index = end + 1
-      if (index == line.length) return None
-      val ch = line.charAt(index)
-      if (ch == '@') { // FIXME: this code: @[a-z][a-z0-9-]* / NT spec: '@' [a-z]+ ('-' [a-z0-9]+ )* / Turtle spec: "@" [a-zA-Z]+ ( "-" [a-zA-Z0-9]+ )* 
-        index += 1 // skip '@'
-        if (index == line.length) return None
-        var c = line.charAt(index)
-        if (c < 'a' || c > 'z') return None
-        do {
-          index += 1 // skip last lang char
-          if (index == line.length) return None
-          c = line.charAt(index)
-        } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'))
-      }
-      else if (ch == '^') { // type uri: ^^<...>
-        if (! line.startsWith("^^<", index)) return None
-        index = line.indexOf('>', index + 3)
-        if (index == -1) return None
-        index += 1 // skip '>'
-      } 
-      else if (ch != ' ' && ch != '.') {
-        return None
-      }
-      index = skipSpace(line, index)
-    }
-    if (line.charAt(index) != '.') return None
-    index = skipSpace(line, index + 1)
-    if (index != line.length) return None
-    Some(triple)
-  }
-  
-}
-    
-object ObjectTriple extends UriTriple(3)
-
-object DatatypeTriple extends UriTriple(2)
+import org.dbpedia.extraction.util.{Language,WikiUtil}
 
 class MappingStatsBuilder(statsDir : File, language: Language, pretty: Boolean)
 extends MappingStatsConfig(statsDir, language)
@@ -149,10 +65,10 @@ extends MappingStatsConfig(statsDir, language)
       val redirects = new mutable.HashMap[String, String]()
       eachLine(file) {
         line => line.trim match {
-          case ObjectTriple(subj, pred, obj) => {
-            val templateName = cleanUri(subj)
+          case Quad(quad) if (quad.datatype == null) => {
+            val templateName = cleanUri(quad.subject)
             if (templateName.startsWith(templateNamespace)) {
-              redirects(templateName) = cleanUri(obj)
+              redirects(templateName) = cleanUri(quad.value)
             }
           }
           case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object triple syntax: " + line)
@@ -185,9 +101,9 @@ extends MappingStatsConfig(statsDir, language)
         eachLine(file) {
             line => line.trim match {
                 // if there is a wikiPageUsesTemplate relation
-                case ObjectTriple(subj, pred, obj) => if (unescape(pred) contains "wikiPageUsesTemplate")
+                case Quad(quad) => if (quad.datatype == null && unescape(quad.predicate).contains("wikiPageUsesTemplate"))
                 {
-                    var templateName = cleanUri(obj)
+                    var templateName = cleanUri(quad.value)
                     
                     // resolve redirect for *object*
                     templateName = redirects.getOrElse(templateName, templateName)
@@ -196,7 +112,6 @@ extends MappingStatsConfig(statsDir, language)
                     // and increment templateCount
                     resultMap.getOrElseUpdate(templateName, new TemplateStatsBuilder).templateCount += 1
                 }
-                case DatatypeTriple(_,_,_) => // ignore
                 case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object or datatype triple syntax: " + line)
             }
         }
@@ -207,10 +122,10 @@ extends MappingStatsConfig(statsDir, language)
         // iterate through template parameters
         eachLine(file) {
             line => line.trim match {
-                case DatatypeTriple(subj, pred, obj) =>
+                case Quad(quad) if (quad.datatype != null) =>
                 {
-                    var templateName = cleanUri(subj)
-                    val propertyName = cleanValue(obj)
+                    var templateName = cleanUri(quad.subject)
+                    val propertyName = cleanValue(quad.value)
                     
                     // resolve redirect for *subject*
                     templateName = redirects.getOrElse(templateName, templateName)
@@ -233,9 +148,9 @@ extends MappingStatsConfig(statsDir, language)
         // iterate through infobox test
         eachLine(file) {
             line => line.trim match {
-                case DatatypeTriple(subj, pred, obj) => {
-                    var templateName = cleanUri(pred)
-                    val propertyName = cleanValue(obj)
+                case Quad(quad) if (quad.datatype != null) => {
+                    var templateName = cleanUri(quad.predicate)
+                    val propertyName = cleanValue(quad.value)
                     
                     // resolve redirect for template
                     templateName = redirects.getOrElse(templateName, templateName)

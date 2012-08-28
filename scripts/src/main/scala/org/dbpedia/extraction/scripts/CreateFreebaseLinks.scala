@@ -1,17 +1,20 @@
 package org.dbpedia.extraction.scripts
 
-import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
-import java.util.zip.{GZIPInputStream,GZIPOutputStream}
-import scala.io.{Source,Codec}
 import scala.collection.mutable.{Set,HashSet}
-import java.io.{File,InputStream,OutputStream,FileInputStream,FileOutputStream,OutputStreamWriter,FileNotFoundException}
-import java.net.{URI,URISyntaxException}
-import org.dbpedia.extraction.util.{Finder,Language,StringUtils,TurtleUtils}
-import org.dbpedia.extraction.util.WikiUtil._
-import org.dbpedia.extraction.util.RichString.toRichString
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import java.io.{File,FileNotFoundException}
+import java.net.URI
+import org.dbpedia.extraction.util.{Finder,Language}
+import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
+import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
+import org.dbpedia.extraction.util.NumberUtils.hexToInt
+import org.dbpedia.extraction.util.WikiUtil.{wikiEncode,cleanSpace}
+import org.dbpedia.extraction.util.RichString.wrapString
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
 import CreateFreebaseLinks._
+import IOUtils._
+import java.util.regex.Matcher
+import java.lang.StringBuilder
 
 /**
  * Create a dataset file with owl:sameAs links to Freebase.
@@ -39,6 +42,8 @@ object CreateFreebaseLinks
    * some don't have an id. So it seems best to use URIs like 
    * http://rdf.freebase.com/ns/m.0p_47
    * Freebase RDF also uses this URI syntax for resources that do not have an id.
+   * Besides, finding the id for a DBpedia title would require more code, since the mid 
+   * is on the same line as the Wikipedia title, but the id is on a different line.
    */
   private val Infix = "> <http://www.w3.org/2002/07/owl#sameAs> <http://rdf.freebase.com/ns/"
     
@@ -48,25 +53,21 @@ object CreateFreebaseLinks
   private val Suffix = "> .\n"
     
   /**
-   * Freebase escapes most non-alphanumeric characters in keys by a dollar sign followed
-   * by the UTF-16 code of the character. See http://wiki.freebase.com/wiki/MQL_key_escaping .
+   * Freebase escapes most non-alphanumeric characters in keys by a dollar sign followed by the 
+   * hexadecimal UTF-16 code of the character. See http://wiki.freebase.com/wiki/MQL_key_escaping .
    */
   private val KeyEscape = """\$(\p{XDigit}{4})""".r
 
-  private val zippers = Map[String, OutputStream => OutputStream] (
-    "gz" -> { new GZIPOutputStream(_) }, 
-    "bz2" -> { new BZip2CompressorOutputStream(_) } 
-  )
+  /**
+   * Append character for hexadecimal UTF-16 code to given string builder.
+   */
+  private def unescapeKey(sb: StringBuilder, matcher: Matcher): Unit = {
+    sb.append(hexToInt(matcher.group(1)).toChar) // may be faster than Integer.parseInt
+    // sb.append(Integer.parseInt(matcher.group(1), 16).toChar)
+  }
   
-  private val unzippers = Map[String, InputStream => InputStream] (
-    "gz" -> { new GZIPInputStream(_) }, 
-    "bz2" -> { new BZip2CompressorInputStream(_) } 
-  )
-  
-  private def open[T](file: File, opener: File => T, wrappers: Map[String, T => T]): T = {
-    val name = file.getName
-    val suffix = name.substring(name.lastIndexOf('.') + 1)
-    wrappers.getOrElse(suffix, identity[T] _)(opener(file)) 
+  private def unescapeKey(key: String): String = {
+    key.replaceBy(KeyEscape.pattern, unescapeKey)
   }
   
   def main(args : Array[String]) {
@@ -117,26 +118,22 @@ object CreateFreebaseLinks
     val start = System.nanoTime
     println((if (add) "Add" else "Subtract")+"ing DBpedia URIs in "+file+"...")
     var lines = 0
-    val in = open(file, new FileInputStream(_), unzippers)
-    try {
-      for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
-        if (line.nonEmpty && line.charAt(0) != '#') {
-          val close = line.indexOf('>', Prefix.length)
-          if (! line.startsWith(Prefix) || close == -1) throw new IllegalArgumentException(line)
-          val rdfKey = line.substring(Prefix.length, close)
-          if (add) set += rdfKey else set -= rdfKey
-          lines += 1
-          if (lines % 1000000 == 0) log(lines, start)
-        }
+    readLines(file) { line =>
+      if (line.nonEmpty && line.charAt(0) != '#') {
+        val close = line.indexOf('>', Prefix.length)
+        if (! line.startsWith(Prefix) || close == -1) throw new IllegalArgumentException(line)
+        val rdfKey = line.substring(Prefix.length, close)
+        if (add) set += rdfKey else set -= rdfKey
+        lines += 1
+        if (lines % 1000000 == 0) log(lines, start)
       }
     }
-    finally in.close()
     log(lines, start)
   }
   
   private def log(lines: Int, start: Long): Unit = {
     val nanos = System.nanoTime - start
-    println("processed "+lines+" lines in "+StringUtils.prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+    println("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
 }
@@ -148,48 +145,45 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
     println("Searching for Freebase links in "+inFile+"...")
     var lines = 0
     var links = 0
-    val out = open(outFile, new FileOutputStream(_), zippers)
+    val writer = write(outFile)
     try {
-      val writer = new OutputStreamWriter(out, "UTF-8")
-      
-      val in = open(inFile, new FileInputStream(_), unzippers)
-      try {
-        for (line <- Source.fromInputStream(in, "UTF-8").getLines) {
-          line match {
-            case WikipediaKey(mid, key) => {
-              
-              val rdfKey = 
-              try recode(key)
-              catch {
-                case ex => {
-                  println("BAD LINE: ["+line+"]: "+ex)
-                  ""
-                }
-              }
-              
-              if (! mid.startsWith("/m/")) throw new IllegalArgumentException(line)
-              val rdfMid = "m."+mid.substring(3)
-              if (dbpedia.contains(rdfKey)) {
-                writer.write(Prefix+rdfKey+Infix+rdfMid+Suffix)
-                links += 1
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
+      writer.write("# started "+formatCurrentTimestamp+"\n")
+      readLines(inFile) { line =>
+        line match {
+          case WikipediaKey(mid, key) => {
+            
+            val rdfKey = 
+            try recode(key)
+            catch {
+              case ex => {
+                println("BAD LINE: ["+line+"]: "+ex)
+                ""
               }
             }
-            case _ => // ignore all other lines
+            
+            if (! mid.startsWith("/m/")) throw new IllegalArgumentException(line)
+            val rdfMid = "m."+mid.substring(3)
+            if (dbpedia.contains(rdfKey)) {
+              writer.write(Prefix+rdfKey+Infix+rdfMid+Suffix)
+              links += 1
+            }
           }
-          lines += 1
-          if (lines % 1000000 == 0) log(lines, links, start)
+          case _ => // ignore all other lines
         }
+        lines += 1
+        if (lines % 1000000 == 0) log(lines, links, start)
       }
-      finally in.close()
-      writer.close()
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.header
+      writer.write("# completed "+formatCurrentTimestamp+"\n")
     }
-    finally out.close()
+    finally writer.close()
     log(lines, links, start)
   }
   
   private def log(lines: Int, links: Int, start: Long): Unit = {
     val nanos = System.nanoTime - start
-    println("processed "+lines+" lines, found "+links+" Freebase links in "+StringUtils.prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
+    println("processed "+lines+" lines, found "+links+" Freebase links in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
   /**
@@ -198,15 +192,15 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
    * to IRI and in the end cut off the prefix again.
    */
   private val Dummy = "dummy:///"
-  
+    
   /**
    * Undo Freebase key encoding, do URI escaping and Turtle / N-Triple escaping. 
    */
   private def recode(key: String): String = {
-    val plain = key.replaceLiteral(KeyEscape.pattern, m => Integer.parseInt(m.group(1), 16).toChar.toString)
+    val plain = unescapeKey(key)
     var uri = wikiEncode(cleanSpace(plain))
     if (! iris) uri = new URI(Dummy+uri).toASCIIString.substring(Dummy.length)
-    TurtleUtils.escapeTurtle(uri, turtle)
+    escapeTurtle(uri, turtle)
   }
 
 }
