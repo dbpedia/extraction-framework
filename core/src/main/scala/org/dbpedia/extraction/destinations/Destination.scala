@@ -1,21 +1,25 @@
 package org.dbpedia.extraction.destinations
 
 /**
- * Represents an abstraction over a destination of RDF statements.
- *
- * Implementing classes of this trait must override the write method.
- * Optionally, the close method can be overriden in order to finalize the destination.
- * Each implementing class must be thread-safe.
+ * A destination for RDF quads.
  */
 trait Destination
 {
-    /**
-     * Writes a new statement to this destination.
-     */
-    def write(graph : Graph) : Unit
+  /**
+   * Opens this destination. This method should only be called once during the lifetime
+   * of a destination, and it should not be called concurrently with other methods of this class.
+   */
+  def open(): Unit
+  
+  /**
+   * Writes quads to this destination. Implementing classes should make sure that this method
+   * can safely be executed concurrently by multiple threads.
+   */
+  def write(graph : Seq[Quad]): Unit
 
-    /**
-     * Closes this destination.
-     */
-    def close() : Unit = {}
+  /**
+   * Closes this destination. This method should only be called once during the lifetime
+   * of a destination, and it should not be called concurrently with other methods of this class.
+   */
+  def close(): Unit
 }

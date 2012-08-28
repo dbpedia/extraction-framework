@@ -3,16 +3,15 @@ package org.dbpedia.extraction.live.job
 import _root_.org.dbpedia.extraction.destinations.Destination
 import _root_.org.dbpedia.extraction.mappings.Extractor
 import _root_.org.dbpedia.extraction.sources.{Source, WikiPage}
-
-import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
+import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser, Namespace}
 import java.util.concurrent.{ArrayBlockingQueue}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable
 import java.net.URLEncoder
-import org.dbpedia.extraction.dump.{CompletionWriter, CompletionReader}
 import org.dbpedia.extraction.live.destinations.LiveUpdateDestination
 import java.io.{InvalidClassException, File}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.mappings.RootExtractor
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,22 +21,15 @@ import org.dbpedia.extraction.util.Language
  * To change this template use File | Settings | File Templates.
  */
 
-class LiveExtractionJob(extractor : Extractor, source : Source, language : Language, val label : String = "Extraction Job") extends Thread
+class LiveExtractionJob(extractor : RootExtractor, source : Source, language : Language, val label : String = "Extraction Job") extends Thread
 {
     private val logger = Logger.getLogger(classOf[LiveExtractionJob].getName)
 
     private val parser = WikiParser()
     var destination : LiveUpdateDestination = null;
 
-    //private val _progress = new ExtractionProgress()
-
-    //def progress = _progress
 
     private val pageQueue = new ArrayBlockingQueue[(Int, WikiPage, LiveUpdateDestination)](20)
-
-    private val completionReader = new CompletionReader(new File("./live/" + URLEncoder.encode(label, "UTF-8")))
-
-    //private val completionWriter = new CompletionWriter(new File("./" + URLEncoder.encode(label, "UTF-8") + ".tmp"))
 
     private var currentID = 0
 
@@ -49,7 +41,6 @@ class LiveExtractionJob(extractor : Extractor, source : Source, language : Langu
 
         try
         {
-            //_progress.startTime = System.currentTimeMillis
 
             //Start extraction jobs
             extractionJobs.foreach(_.start);
@@ -70,13 +61,7 @@ class LiveExtractionJob(extractor : Extractor, source : Source, language : Langu
           try{
             extractionJobs.foreach(_.interrupt);
             extractionJobs.foreach(_.join);
-            //completionWriter.close();
-//            System.out.println("Before close in thread " + Thread.currentThread.getId);
-//            if(destination == null)
-//              destination = new LiveUpdateDestination(page.title.toString, language.locale.getLanguage, page.id.toString);
-//
-//            destination.close();
-//            System.out.println("After close in thread " + Thread.currentThread.getId);
+
             logger.info(label + " finished");
           }
           catch{
@@ -93,18 +78,17 @@ class LiveExtractionJob(extractor : Extractor, source : Source, language : Langu
     private def queuePage(page : WikiPage)
     {
         //Only extract from the following namespaces
-        if(page.title.namespace != WikiTitle.Namespace.Main &&
-           page.title.namespace != WikiTitle.Namespace.File &&
-           page.title.namespace != WikiTitle.Namespace.Category)
+        if(page.title.namespace != Namespace.Main &&
+           page.title.namespace != Namespace.File &&
+           page.title.namespace != Namespace.Category)
         {
            return
         }
 
         try
         {
-            val done = completionReader.read(currentID, page.title)
             destination = new LiveUpdateDestination(page.title.toString, language.locale.getLanguage, page.id.toString);
-            if(!done) pageQueue.put((currentID, page, destination))
+            pageQueue.put((currentID, page, destination))
             currentID += 1
         }
         catch
@@ -161,6 +145,7 @@ class LiveExtractionJob(extractor : Extractor, source : Source, language : Langu
                     //liveDest = new LiveUpdateDestination(CurrentPageNode.title.toString, language.locale.getLanguage(), CurrentPageNode.id.toString)
                     //var actualDestination = destination.asInstanceOf[LiveUpdateDestination];
 
+                    destination.open();
                     destination.write(graph);
                     destination.close();
                     //_progress.synchronized(_progress.extractedPages +=1);
@@ -177,8 +162,6 @@ class LiveExtractionJob(extractor : Extractor, source : Source, language : Langu
                     }
                 }
 
-            //Write the extraction success
-            //completionWriter.write(id, page.title, success)
         }
     }
 }

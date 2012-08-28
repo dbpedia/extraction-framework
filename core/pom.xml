@@ -1,39 +1,81 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.dbpedia.extraction</groupId>
-        <artifactId>main</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <groupId>org.dbpedia</groupId>
+        <artifactId>extraction</artifactId>
+        <version>3.8</version>
     </parent>
 
+    <groupId>org.dbpedia.extraction</groupId>
     <artifactId>core</artifactId>
-    <packaging>jar</packaging>
     <name>DBpedia Core Libraries</name>
 
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+
+                <configuration>
+                    <launchers>
+                    
+                        <launcher>
+                            <id>download-ontology</id>
+                            <mainClass>org.dbpedia.extraction.util.OntologyDownloader</mainClass>
+                            <args>
+                                <arg>../ontology.xml</arg> 
+                                <arg>../ontology.owl</arg> 
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>download-mappings</id>
+                            <mainClass>org.dbpedia.extraction.util.MappingsDownloader</mainClass>
+                            <args>
+                                <arg>../mappings</arg> 
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>generate-settings</id>
+                            <mainClass>org.dbpedia.extraction.wikiparser.impl.wikipedia.GenerateWikiSettings</mainClass>
+                            <args>
+                                <arg>src/main/settings</arg><!-- wiki config xml files folder -->
+                                <arg>true</arg><!-- download info again and overwrite existing files? -->
+                            </args>
+                        </launcher>
+
+                    </launchers>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
+
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.openrdf</groupId>
-            <artifactId>openrdf</artifactId>
-            <version>1.0</version>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.9.2</artifactId>
+            <version>1.7.2</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.8.2</version>
+          <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -46,7 +88,13 @@
 	        <artifactId>ptk-nodegen-maven-plugin</artifactId>
 	        <version>1.1.0</version>
         </dependency>
-                    
+        <dependency>
+            <groupId>org.openrdf</groupId>
+            <artifactId>openrdf</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>
+

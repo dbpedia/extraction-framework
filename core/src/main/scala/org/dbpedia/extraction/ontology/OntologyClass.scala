@@ -1,25 +1,54 @@
 package org.dbpedia.extraction.ontology
 
+import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.{Buffer,ArrayBuffer}
+
 /**
  * Represents an ontology class.
  *
  * @param name The name of this class e.g. foaf:Person
  * @param labels The labels of this type. Map: LanguageCode -> Label
  * @param comments Comments describing this type. Map: LanguageCode -> Comment
- * @param subClassOf The super class of this class. owl:Thing is the only class for which this may be null.
+ * @param subClassOf The super class of this class. May be null for owl:Thing or classes in 
+ * namespaces that we don't validate. See OntologyNamespaces.skipValidation() TODO: use type ListSet, not List?
  * @param equivalentClasses
  */
-class OntologyClass(name : String, labels : Map[String, String], comments : Map[String, String],
-                    val subClassOf : List[OntologyClass], val equivalentClasses : Set[OntologyClass]) extends OntologyType(name, labels, comments)
+class OntologyClass(
+  name : String, 
+  labels : Map[Language, String], 
+  comments : Map[Language, String],
+  val baseClasses : List/*TODO:ListSet?*/[OntologyClass], 
+  val equivalentClasses : Set[OntologyClass]
+) 
+extends OntologyType(name, labels, comments)
 {
-    require(name != null, "name != null")
-    require(labels != null, "labels != null")
-    require(comments != null, "comments != null")
-    require(subClassOf != null, "subClassOf != null")
-    require(name == "owl:Thing" || OntologyNamespaces.skipValidation(name) || subClassOf.nonEmpty, "subClassOf.nonEmpty")
-    require(equivalentClasses != null, "equivalentClasses != null")
+    require(baseClasses != null, "missing base classes for class "+name)
+    require(baseClasses.nonEmpty || name == "owl:Thing" || ! RdfNamespace.validate(name), "missing base classes for class "+name+", although this class is not the root and it should be validated")
+    require(equivalentClasses != null, "missing equivalent classes for class "+name)
+    
+    /**
+     * Transitive closure of sub-class and equivalent-class relations, including this class.
+     */
+    lazy val relatedClasses: Seq[OntologyClass] = {
+      val classes = new ArrayBuffer[OntologyClass]()
+      collectClasses(classes)
+      classes
+    }
+    
+    private def collectClasses(classes: Buffer[OntologyClass]): Unit = {
+      // Note: If this class was already collected, we do nothing, so we silently skip cycles in 
+      // class relations here. Some cycles are allowed (for example between equivalent classes, 
+      // but there are other cases), others aren't. At this point, it's not easy to distinguish valid 
+      // and invalid cycles, so we ignore them all. Cycles should be checked when classes are loaded.
+      // Note: a set would be nicer than a buffer to check contains(), but we want to keep the order.
+      if (! classes.contains(this)) {
+        classes += this
+        equivalentClasses.foreach(_.collectClasses(classes))
+        baseClasses.foreach(_.collectClasses(classes))
+      }
+    } 
 
-    override val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
+    override val uri = RdfNamespace.fullUri(DBpediaNamespace.ONTOLOGY, name)
 
-    lazy val isExternalClass = !uri.startsWith(OntologyNamespaces.DBPEDIA_CLASS_NAMESPACE)
+    val isExternalClass = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)
 }

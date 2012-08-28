@@ -20,6 +20,7 @@ import org.sweble.wikitext.`lazy`.preprocessor._
 import org.sweble.wikitext.`lazy`.postprocessor.AstCompressor
 import org.sweble.wikitext.`lazy`.encval.IllegalCodePoint
 import org.sweble.wikitext.`lazy`.AstNodeTypes
+import org.sweble.wikitext.`lazy`.utils.XmlAttribute
 
 import de.fau.cs.osr.ptk.common.ast.ContentNode
 import de.fau.cs.osr.ptk.common.ast.AstNode
@@ -96,7 +97,8 @@ final class SwebleWrapper extends WikiParser
         //merge fragmented TextNodes (again... this time the DBpedia nodes)
         val nodesClean = mergeConsecutiveTextNodes(nodes)
         //println(nodesClean)
-        new PageNode(page.title, page.id, page.revision, isRedirect, isDisambiguation, nodesClean)
+        new PageNode(page.title, page.id, page.revision, page.timestamp,
+                page.contributorID,  page.contributorName, isRedirect, isDisambiguation, nodesClean)
     }
 
     def transformNodes(nl : NodeList) : List[Node] = {
@@ -136,7 +138,7 @@ final class SwebleWrapper extends WikiParser
                 })
                 val name : String = nodeList2string(t.getName) 
                 val nameClean = WikiUtil.cleanSpace(name)
-                val title = new WikiTitle(nameClean, WikiTitle.Namespace.Template)
+                val title = new WikiTitle(nameClean, Namespace.Template, language)
                 val tpl = new TemplateNode(title, properties, line, transformNodes(t.getName))
                 List(tpl)
             }
@@ -187,7 +189,7 @@ final class SwebleWrapper extends WikiParser
                 i = i+1; 
                 lb add nodes.head; //the # symbol hopefully :)
                 lb add new TemplateNode(
-                    new WikiTitle("enum-expanded"), 
+                    new WikiTitle("enum-expanded", Namespace.Template, language), 
                     List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line, List(new TextNode("enum-expanded", line)));
                 lb addAll nodes.tail; 
                 lb} ).toList
@@ -201,7 +203,7 @@ final class SwebleWrapper extends WikiParser
             }).flatten
             case b : Bold => transformNodes(b.getContent) // ignore style
             case i : Italics => transformNodes(i.getContent) // ignore style
-            case tplParam : TemplateParameter => List(new TemplateParameterNode(tplParam.getName, tplParam.getDefaultValue != null, line))
+            case tplParam : TemplateParameter => List(new TemplateParameterNode(tplParam.getName, transformNodes(tplParam.getDefaultValue.getValue()), line))
             /*case pf : ParserFunctionBase => {
                 val title = new WikiTitle(pf.getName + ":", WikiTitle.Namespace.Template, language)
                 val children = List[Node]() //not implemented yet
@@ -214,9 +216,14 @@ final class SwebleWrapper extends WikiParser
                     filter((n:AstNode) => n.isInstanceOf[TableRow]).
                     map((n:AstNode) => {
                         val tr = n.asInstanceOf[TableRow]
-                        val cells = tr.getBody.iterator.toList.map((rowElement:AstNode) => {
-                            new TableCellNode(transformNodes(rowElement.iterator.toList), line)
-                        })
+                        val cells = tr.getBody.iterator.toList.map((re:AstNode) => { 
+                            re match { 
+                                case tableCell:TableCell => {
+                                    Some(new TableCellNode(transformNodes(tableCell.iterator.toList), line, getXMLAttribute(tableCell, "rowspan").getOrElse("1").toInt, getXMLAttribute(tableCell, "colspan").getOrElse("1").toInt))
+                                }
+                                case _ => None
+                            }
+}).filter(_.isDefined).map(_.get)
                         new TableRowNode(cells, line)
                     })
                 List(new TableNode(caption, rows, line))
@@ -361,6 +368,21 @@ final class SwebleWrapper extends WikiParser
             n
 		}
 	}
+
+    def getXMLAttribute(node : TableCell, name : String) : Option[String] = {
+        val xmlAttrs = node.getXmlAttributes()
+        xmlAttrs.foreach((an:AstNode) => { 
+            an match { 
+                case (xmlAttr : XmlAttribute) => {
+                    if(xmlAttr.getName == name && xmlAttr.getHasValue()){
+                        return Some(nodeList2string(xmlAttr.getValue))
+                    }
+                }
+                case _ =>
+            }
+        })
+        None
+    }
 
     def getWrap(node : AstNode) : Tuple2[String, String]= {
         val rtd = node.getAttribute("RTD").asInstanceOf[RtData]

@@ -2,26 +2,25 @@ package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Logger,Level}
 import org.dbpedia.extraction.wikiparser.Node
-import java.text.{NumberFormat, ParseException}
+import java.text.ParseException
 import org.dbpedia.extraction.util.Language
 
 /**
  * Parses integer numbers.
  */
-class IntegerParser( extractionContext : { def language : Language } ,
+class IntegerParser( context : { def language : Language } ,
                      strict : Boolean = false,
                      multiplicationFactor : Double = 1.0,
                      validRange : Double => Boolean = (i => true)) extends DataParser
 {
-    private val numberFormat = NumberFormat.getNumberInstance(extractionContext.language.locale)
+    private val parserUtils = new ParserUtils(context)
 
-    private val parserUtils = new ParserUtils(extractionContext)
-
-    private val logger = Logger.getLogger(classOf[IntegerParser].getName)
+    private val logger = Logger.getLogger(getClass.getName)
 
     override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
 
-    private val IntegerRegex = """\D*?(\-?[0-9\-\,\.]+).*""".r
+    // we allow digits, minus, comma, dot and space in numbers
+    private val IntegerRegex = """\D*?(-?[0-9-,. ]+).*""".r
 
     override def parse(node : Node) : Option[Long] =
     {
@@ -50,7 +49,7 @@ class IntegerParser( extractionContext : { def language : Language } ,
 
         try
         {
-            val result = numberFormat.parse(numberStr).doubleValue
+            val result = parserUtils.parse(numberStr).doubleValue
             if( validRange(result) )
             {
                 Some(result)

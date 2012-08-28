@@ -5,13 +5,15 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import java.io.File
 
 /**
  * Lazily loads extraction context parameters when they are required, not before.
  * Is NOT able to update the ontology or the mappings.
  * This manager is good for testing locally.
  */
-class StaticExtractionManager(languages : Set[Language], extractors : List[Class[Extractor]]) extends ExtractionManager(languages, extractors)
+class StaticExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths)
+extends ExtractionManager(languages, paths)
 {
     @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
@@ -21,7 +23,7 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
 
     @volatile private lazy val _mappings : Map[Language, Mappings] = loadMappings
 
-    @volatile private lazy val _extractors : Map[Language, Extractor] = loadExtractors
+    @volatile private lazy val _extractors : Map[Language, RootExtractor] = loadExtractors
 
 
     def extractor(language : Language) = _extractors(language)
@@ -34,6 +36,13 @@ class StaticExtractionManager(languages : Set[Language], extractors : List[Class
 
     def mappings(language : Language) = _mappings(language)
 
+    /**
+     * Called on startup to initialize all mapping stats managers.
+     */
+    def updateAll = {
+      for ((language, mappings) <- _mappings) update(language, mappings)
+    }
+        
     def updateOntologyPage(page : WikiPage)
     {
         throw new Exception("updating of ontologyPages not supported with this configuration; please use DynamicExtractionManager")

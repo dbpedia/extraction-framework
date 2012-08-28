@@ -12,48 +12,76 @@ import org.dbpedia.extraction.util.Language
  * Represents a statement in the N-Quads format
  * @see http://sw.deri.org/2008/07/n-quads/
  */
-//TODO write out equivalent properties
-class Quad(	val language : Language,
-val dataset : Dataset,
-val subject : String,
-val predicate : String,
-val value : String,
-val context : String,
-val datatype : Datatype )
+class Quad(
+  val language: String,
+  val dataset: String,
+  val subject: String,
+  val predicate: String,
+  val value: String,
+  val context: String,
+  val datatype: String
+)
 {
+  def this(
+    language : Language,
+    dataset : Dataset,
+    subject : String,
+    predicate : String,
+    value : String,
+    context : String,
+    datatype : Datatype
+  ) = this(
+      language.isoCode,
+      dataset.name,
+      subject,
+      predicate,
+      value,
+      context,
+      if (datatype == null) null else datatype.uri
+    )
 
-  //a constructor for OntologyProperty
-  def this(language : Language,
-           dataset : Dataset,
-           subject : String,
-           predicate : OntologyProperty,
-           value : String,
-           context : String,
-           datatype : Datatype = null) = this(language, dataset, subject, Quad.validatePredicate(predicate, datatype), value, context, Quad.getType(predicate, datatype))
+  def this(
+    language : Language,
+    dataset : Dataset,
+    subject : String,
+    predicate : OntologyProperty,
+    value : String,
+    context : String,
+    datatype : Datatype = null
+  ) = this(
+      language,
+      dataset,
+      subject,
+      predicate.uri,
+      value,
+      context,
+      Quad.getType(datatype, predicate)
+    )
+
 
   //a constructor for openrdf
-  def this(language : Language,
-           dataset : Dataset,
-           subject : Resource,
-           predicate : URI,
-           value : Value,
-           context : Resource) = {
-      this(
-          language, 
-          dataset, 
-          subject.stringValue, 
-          predicate.stringValue, 
-          value.stringValue, 
-          context.stringValue, 
-          if(value.isInstanceOf[Literal] && value.asInstanceOf[Literal].getDatatype != null){
-            new Datatype(value.asInstanceOf[Literal].getDatatype.toString)
-          } else if(value.isInstanceOf[Literal]) {
-            new Datatype("xsd:string")
-          } else {
-            null
-          }
-      )
-  }
+  def this(
+    language : Language,
+    dataset : Dataset,
+    subject : Resource,
+    predicate : URI,
+    value : Value,
+    context : Resource
+  ) = this(
+      language.locale.getLanguage, 
+      dataset.name, 
+      subject.stringValue, 
+      predicate.stringValue, 
+      value.stringValue, 
+      context.stringValue, 
+      if(value.isInstanceOf[Literal] && value.asInstanceOf[Literal].getDatatype != null){
+        value.asInstanceOf[Literal].getDatatype.toString
+      } else if(value.isInstanceOf[Literal]) {
+        "http://www.w3.org/2001/XMLSchema#string"
+      } else {
+        null
+      }
+  )
 
   //Validate input
 	if(subject == null) throw new NullPointerException("subject")
@@ -78,16 +106,16 @@ val datatype : Datatype )
   {
     "<" + subject + "> <" + predicate + "> " +
 	  (if (datatype != null) {
-			if (datatype.uri == "http://www.w3.org/2001/XMLSchema#string"){
+			if (datatype == "http://www.w3.org/2001/XMLSchema#string"){
 				"\"" +
 				escapeString(value) + 
 				"\"" +
-				"@" + language.locale.getLanguage
+				"@" + language
 			} else {
 				"\"" +
 				escapeString(value) + 
 				"\"" +
-				"^^<" + datatype.uri + ">"
+				"^^<" + datatype + ">"
 			}
 		} else {
 				"<" +
@@ -172,32 +200,12 @@ val datatype : Datatype )
 
 object Quad
 {
-    private def validatePredicate(predicate : OntologyProperty, datatype : Datatype) : String = predicate.uri //TODO
-
-    // TODO: why check this special case here, but not others? We should
-	// check that the given type is a sub type of the predicate range.
-	//	if ($this->predicate instanceof \dbpedia\ontology\OntologyDataTypeProperty)
-	//	{
-	//		if (($this->type instanceof \dbpedia\ontology\dataTypes\DimensionDataType))
-	//		{
-	//			$this->validationErrors[] = "- Ontology Property Range is not a Unit: '".$this->type->getName()."'";
-	//			$valid = false;
-	//		}
-	//	}
-
-    private def getType(predicate : OntologyProperty, datatype : Datatype) : Datatype =
-    {
-        if(datatype != null)
-        {
-             datatype
-        }
-        else
-        {
-            predicate.range match
-            {
-                case dt : Datatype => dt
-                case _ => null
-            }
-        }
+  private def getType(datatype : Datatype, predicate : OntologyProperty): Datatype =
+  {
+    if (datatype != null) datatype
+    else predicate.range match {
+      case datatype: Datatype => datatype
+      case _ => null
     }
+  }
 }

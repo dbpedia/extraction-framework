@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -22,7 +23,7 @@ import java.util.*;
 public class SPARQLEndpoint {
 
     //Initializing the Logger
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private Logger logger = Logger.getLogger(SPARQLEndpoint.class);
 
     String sparqlendpointURL;
 	String defaultGraphURI;
@@ -51,10 +52,6 @@ public class SPARQLEndpoint {
         String SparqlendpointURL = LiveOptions.options.get("sparqlendpoint");
         String DefaultGraphURI = LiveOptions.options.get("graphURI");
 
-        //Assert.assertTrue("SparqlendpointURL read from options file cannot be null or empty",
-//                         (SparqlendpointURL != null && SparqlendpointURL != ""));
-        //Assert.assertTrue("SparqlendpointURL read from options file cannot be null or empty",
-//                         (DefaultGraphURI != null && DefaultGraphURI != ""));
 
         return new SPARQLEndpoint(SparqlendpointURL, DefaultGraphURI);
     }
@@ -62,9 +59,19 @@ public class SPARQLEndpoint {
     private String _getDefaultGraphURI(String DefaultGraphURI){
         
         if((!Util.isStringNullOrEmpty(this.defaultGraphURI))&& DefaultGraphURI == null){
-			return "&default-graph-uri=" + URLEncoder.encode(this.defaultGraphURI);
+            try{
+                return "&default-graph-uri=" + URLEncoder.encode(this.defaultGraphURI, "UTF-8");
+            }
+            catch (UnsupportedEncodingException exp){
+                return "";
+            }
 		} else if(!Util.isStringNullOrEmpty(DefaultGraphURI)){
-			return "&default-graph-uri=" + URLEncoder.encode(DefaultGraphURI);
+            try{
+                return "&default-graph-uri=" + URLEncoder.encode(DefaultGraphURI, "UTF-8");
+            }
+            catch (UnsupportedEncodingException exp){
+                return "";
+            }
 		}else {
 			return "";
 			}
@@ -87,7 +94,6 @@ public class SPARQLEndpoint {
 
     private String _getFormat(){
         return _getFormat(null);
-        //this.getClass();
     }
 
     public String executeQuery(String query,Class logComponent){
@@ -100,12 +106,14 @@ public class SPARQLEndpoint {
 
 
     public String executeQuery(String query,Class logComponent, String DefaultGraphURI,String Format){
-        //Assert.assertTrue("SparqlendpointURL cannot be null or empty",
-//                                 (query != null && query != ""));
 
         String sparqlendpoint  = this.sparqlendpointURL;
         String url = sparqlendpoint + "?query=";
-        url += URLEncoder.encode(query);
+        try{
+            url += URLEncoder.encode(query, "UTF-8");
+        }
+        catch (UnsupportedEncodingException exp){
+        }
         url += this._getDefaultGraphURI(DefaultGraphURI);
         url +=this._getFormat(Format);
         
@@ -124,8 +132,6 @@ public class SPARQLEndpoint {
             HttpURLConnection con = (HttpURLConnection)new URL(url).openConnection();
             con.setRequestMethod("POST");
 
-            //TODO there is a property called CURLOPT_RETURNTRANSFER that ensures that the returned result is in string
-            //TODO I think it is not needed
             con.connect();
             BufferedReader bufRdr = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
@@ -214,9 +220,9 @@ public class SPARQLEndpoint {
     public void test(){
         String query = "SELECT count(*) as ?count WHERE {<http://dbpedia.org/resource/London> ?p ?o .}";
         int c =  this.executeCount(query, this.getClass());
-        System.out.println(c + "\n");
+        logger.info(c + "\n");
         if(c>5){
-             System.out.println("bigger than 5" + "\n");
+             logger.info("bigger than 5" + "\n");
             }
         System.exit(0);
     }

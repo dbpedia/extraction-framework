@@ -2,17 +2,34 @@ package org.dbpedia.extraction.server.resources.stylesheets
 
 import xml.Elem
 import javax.ws.rs.{GET, Produces, Path}
+import org.dbpedia.extraction.destinations.formatters.{Formatter,TriXFormatter}
+import java.io.Writer
+
+object TriX
+{
+    /**
+     * @param number of "../" steps to prepend to the path to "stylesheets/trix.xsl"
+     */
+    def writeHeader(writer: Writer, parents : Int): Formatter = 
+    {
+      writer.write("<?xml-stylesheet type=\"text/xsl\" href=\""+("../"*parents)+"stylesheets/trix.xsl\"?>\n")
+      new TriXFormatter(true)
+    }
+}
 
 @Path("/stylesheets/trix.xsl")
 class TriX
 {
     @GET
-    @Produces(Array("application/xslt+xml"))
+    @Produces(Array("text/xsl"))
     def get : Elem =
     {
         <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:trix="http://www.w3.org/2004/03/trix/trix-1/">
           <xsl:template match="/trix:TriX">
             <html>
+              <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              </head>
               <body>
                 <h2>DBpedia Extraction Results</h2>
                   <table border="1" cellpadding="3" cellspacing="0">
@@ -34,21 +51,8 @@ class TriX
                       </xsl:if>
                       <xsl:for-each select="trix:triple">
                         <tr>
-                          <td>
-                            <xsl:value-of select="*[position()=1]"/>
-                          </td>
-                          <td>
-                            <xsl:value-of select="*[position()=2]"/>
-                          </td>
-                          <td>
-                            <xsl:value-of select="*[position()=3]"/>
-                          </td>
-                          <td>
-                            <a>
-                              <xsl:attribute name="href"><xsl:value-of select="substring-before($context, '#')"/></xsl:attribute>
-                              <xsl:value-of select="$context"/>
-                            </a>
-                          </td>
+                          <xsl:apply-templates/>
+                          <td><a href="{$context}"><xsl:value-of select="$context"/></a></td>
                         </tr>
                       </xsl:for-each>
                   </xsl:for-each>
@@ -56,6 +60,17 @@ class TriX
               </body>
             </html>
           </xsl:template>
+
+          <!-- generate links from <uri> elements -->
+          <xsl:template match="trix:uri">
+            <td><a href="{.}"><xsl:value-of select="."/></a></td>
+          </xsl:template>
+
+          <!-- just display text for other elements -->
+          <xsl:template match="*">
+            <td><xsl:value-of select="."/></td>
+          </xsl:template>
+
         </xsl:stylesheet>
     }
 }

@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import org.dbpedia.extraction.ontology.{Ontology, OntologyNamespaces}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
@@ -13,19 +13,17 @@ class ArticleCategoriesExtractor( context : {
                                       def ontology : Ontology
                                       def language : Language } ) extends Extractor
 {
-    private val dctermsSubjectProperty = context.ontology.getProperty("dct:subject").get
+    private val dctermsSubjectProperty = context.ontology.properties("dct:subject")
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
+    override val datasets = Set(DBpediaDatasets.ArticleCategories)
+
+    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
+        if(node.title.namespace != Namespace.Main) return Seq.empty
         
         val links = collectCategoryLinks(node).filter(isCategoryForArticle(_))
 
-        val quads : List[Quad] = links.map(link =>
-            new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri)
-        )
-
-        new Graph(quads)
+        links.map(link => new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri))
     }
 
     private def isCategoryForArticle(linkNode : InternalLinkNode) = linkNode.destinationNodes match
@@ -38,16 +36,14 @@ class ArticleCategoriesExtractor( context : {
     {
         node match
         {
-            case linkNode : InternalLinkNode if linkNode.destination.namespace == WikiTitle.Namespace.Category => List(linkNode)
+            case linkNode : InternalLinkNode if linkNode.destination.namespace == Namespace.Category => List(linkNode)
             case _ => node.children.flatMap(collectCategoryLinks)
         }
     }
 
     private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespaces.getNameForNamespace(context.language, WikiTitle.Namespace.Category)
-
-        //OntologyNamespaces.getUri(categoryNamespace + ":" + destination.encoded, OntologyNamespaces.DBPEDIA_INSTANCE_NAMESPACE)
-        OntologyNamespaces.getResource(categoryNamespace + ":" + destination.encoded, context.language)
+        val categoryNamespace = Namespace.Category.name(context.language)
+        context.language.resourceUri.append(categoryNamespace+':'+destination.decoded)
     }   
 }

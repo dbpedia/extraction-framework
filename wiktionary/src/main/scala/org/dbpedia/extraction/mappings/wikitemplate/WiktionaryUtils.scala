@@ -4,6 +4,7 @@ import collection.mutable.{ListBuffer, Stack}
 import io.{Source}
 import util.control.Breaks._
 import java.util.regex.Pattern
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.sources.WikiPage
@@ -257,7 +258,7 @@ object MyStack {
     //println("after normalizations >"+str+"<")
     val page : PageNode = parser(
         new WikiPage(
-          new WikiTitle("wiktionary extraction subtemplate"),0,0, str //parsing
+          new WikiTitle("wiktionary extraction subtemplate", Namespace.Main, Language.English), str //parsing
         )
     )
     val nodes = new Stack[Node]()
@@ -291,8 +292,8 @@ object MyStack {
 }
 
 /**
- * super cool possibility of scala to _kind of_ extend the language with own constructs:
- * i "define" the "keywords" measure and report...
+ * possibility of scala to _kind of_ extend the language with own constructs:
+ * i "define" the keywords measure and report...
  * code within the measure-block is executed with timekeeping (how many millisoconds the execution took)
  * the result is handed over to the report block, which needs to be a function (which prints it or so)
  */

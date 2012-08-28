@@ -1,27 +1,34 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 /**
  * Extracts labels to articles based on their title.
  */
-class LabelExtractor( context : {
-                          def ontology : Ontology
-                          def language : Language } ) extends Extractor
+class LabelExtractor( 
+  context : {
+    def ontology : Ontology
+    def language : Language 
+  } 
+) 
+extends Extractor
 {
-    val labelProperty = context.ontology.getProperty("rdfs:label").get
+  val labelProperty = context.ontology.properties("rdfs:label")
+  
+  override val datasets = Set(DBpediaDatasets.Labels)
+
+  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
+  {
+    if(page.title.namespace != Namespace.Main) return Seq.empty
+
+    // TODO: use templates like {{lowercase}}, magic words like {{DISPLAYTITLE}}, 
+    // remove stuff like "(1999 film)" from title...
+    val label = page.title.decoded
     
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
-    {
-        if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
-
-        val label = node.root.title.decoded
-        if(label.isEmpty) return new Graph()
-
-        new Graph(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label,
-                           node.sourceUri, context.ontology.getDatatype("xsd:string").get ))
-    }
+    if(label.isEmpty) Seq.empty
+    else Seq(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label, page.sourceUri, context.ontology.datatypes("xsd:string")))
+  }
 }

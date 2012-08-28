@@ -1,10 +1,9 @@
 package org.dbpedia.extraction.live.helper;
 
 import org.apache.log4j.Logger;
-import org.apache.xerces.parsers.DOMParser;
+// import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.core.Constants;
 import org.dbpedia.extraction.live.core.Util;
-import org.dbpedia.extraction.live.util.UTCHelper;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
 import org.dbpedia.extraction.mappings.Extractor;
 import org.dbpedia.extraction.mappings.SkosCategoriesExtractor;
@@ -16,7 +15,10 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -27,10 +29,10 @@ import java.util.*;
  * This class reads the configuration file of the live extraction.
  */
 public class LiveConfigReader {
-    
-    private static Logger logger = Logger.getLogger(LiveConfigReader.class); 
-    private static DOMParser parser = new DOMParser();
-    private static final String liveConfigFile = "./live/live.xml";
+
+    private static Logger logger = Logger.getLogger(LiveConfigReader.class);
+    // private static DOMParser parser = new DOMParser();
+    private static final String liveConfigFile = "./live.xml";
 
     private static DocumentBuilderFactory dbFactory;
     private static DocumentBuilder dBuilder;
@@ -66,7 +68,7 @@ public class LiveConfigReader {
     //Initialize the static members
     static{
         try{
-            
+
             dbFactory = DocumentBuilderFactory.newInstance();
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(new File(liveConfigFile));
@@ -74,7 +76,7 @@ public class LiveConfigReader {
             readMultihreadingMode();
             readUpdateOntologyAndMappingsPeriod();
 
-            
+
             /** Ontology source */
 //            JavaConversions.asEnumeration(WikiTitle.Namespace());
 //    Source ontologySource = WikiSource.fromNamespaces(Set(WikiTitle.Namespace().OntologyClass, WikiTitle.Namespace.OntologyProperty),
@@ -108,7 +110,7 @@ public class LiveConfigReader {
      * Reads each langauge along with its set of extractors
      */
     private static void readExtractors(){
-         NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
+        NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
         //iterate and build the required list of extractors
         extractors = new HashMap<Language,List<ExtractorSpecification>>();
         extractorClasses = new HashMap<Language,List<Class<Extractor>>>();
@@ -118,7 +120,7 @@ public class LiveConfigReader {
 
             Element elemLanguage = (Element)languageNodes.item(i);
             String languageName = elemLanguage.getAttribute(NAME_ATTRIBUTENAME);
-            Language language = new Language(languageName, new Locale(languageName));
+            Language language = Language.apply(languageName);
             readLanguageExtractors(elemLanguage, language);
         }
     }
@@ -140,7 +142,7 @@ public class LiveConfigReader {
                 Element elemExtractor = (Element)extractorNodes.item(i);
                 String extractorID = elemExtractor.getAttribute(NAME_ATTRIBUTENAME);
                 ExtractorStatus status = ExtractorStatus.valueOf(elemExtractor.getAttribute(EXTRACTOR_STATUS_ATTRIBUTENAME));
-                
+
                 langExtractorClasses.add((Class<Extractor>)(ClassLoader.getSystemClassLoader().loadClass(extractorID)));
 
                 //Those types of extractors need special type of handling as we must call the function _addGenerics for
@@ -223,7 +225,7 @@ public class LiveConfigReader {
 
                 try{
                     if(Constants.class.getField(predicate).get(Constants.class) != null)
-                        predicate = Constants.class.getField(predicate).get(Constants.class).toString(); 
+                        predicate = Constants.class.getField(predicate).get(Constants.class).toString();
                 }
                 catch(Exception exp){}
 
@@ -243,7 +245,7 @@ public class LiveConfigReader {
         }
 
 
-        
+
         return patterns.size()>0? patterns : null;
     }
 

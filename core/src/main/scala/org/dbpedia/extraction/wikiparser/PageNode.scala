@@ -1,4 +1,5 @@
 package org.dbpedia.extraction.wikiparser
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Represents a page.
@@ -6,30 +7,29 @@ package org.dbpedia.extraction.wikiparser
  * @param title The title of this page
  * @param id The page ID
  * @param revision The revision of this page
+ * @param timestamp The timestamp of the revision, in milliseconds since 1970-01-01 00:00:00 UTC
+ * @param contributorID The ID of the latest contributor
+ * @param contributorName The name of the latest contributor
  * @param isRedirect True, if this is a Redirect page
  * @param isDisambiguation True, if this is a Disambiguation page
  * @param children The contents of this page
  */
-case class PageNode(title : WikiTitle, id : Long, revision : Long, isRedirect : Boolean, isDisambiguation : Boolean,
-                    override val children : List[Node] = List.empty) extends Node(children, 0)
+class PageNode (
+  val title: WikiTitle, 
+  val id: Long, 
+  val revision: Long,
+  val timestamp: Long,
+  val contributorID: Long,
+  val contributorName: String,
+  val isRedirect: Boolean,
+  val isDisambiguation: Boolean,
+  children: List[Node] = List.empty
+) 
+extends Node(children, 0)
 {
-    def toWikiText() : String = children.map(_.toWikiText()).mkString("")
+    def toWikiText = children.map(_.toWikiText).mkString
 
-    def toXML =
-    {
-        <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd"
-                   version="0.4"
-                   xml:lang="en">
-          <page>
-            <title>{title.decodedWithNamespace}</title>
-            <id>{id}</id>
-            <revision>
-              <id>{revision}</id>
-              <text xml:space="preserve">{toWikiText()}</text>
-            </revision>
-          </page>
-        </mediawiki>
-    }
+    def toPlainText = children.map(_.toPlainText).mkString
+
+    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText)
 }

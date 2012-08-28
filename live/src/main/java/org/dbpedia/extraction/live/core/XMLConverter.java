@@ -1,19 +1,17 @@
 package org.dbpedia.extraction.live.core;
 
+import org.apache.log4j.Logger;
+import org.w3c.dom.*;
+import org.xml.sax.InputSource;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
 //import org.jbind.xml.dom3.core.DomDocument;
 //import org.jbind.xml.dom3.core.DomElement;
-import org.w3c.dom.*;
-import org.xml.sax.InputSource;
-
-import javax.xml.bind.attachment.AttachmentMarshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.dom.DOMSource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,7 +35,6 @@ public class XMLConverter{
      * @var array
      */
     protected HashMap _namespaces = new HashMap();
-    //_namespaces.put("xml", "http://www.w3.org/XML/1998/namespace");
 
     public static void init()
     {
@@ -82,10 +79,6 @@ public class XMLConverter{
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document xmlDoc = builder.parse(new InputSource(new StringReader(xmlSparqlResults)));
 
-            /*DomDocument document = new DomDocument();
-            document.createTextNode()
-            //This is used to remove white spaces instead of document->preserveWhiteSpace = false used in php
-            document.normalize();*/
             xmlDoc.normalize();
 
             this.detectNamespacesFromDocument(xmlDoc);

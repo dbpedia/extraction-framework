@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings.wikitemplate.wiktionary.postprocessor
 
+import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
 import org.dbpedia.extraction.mappings.wikitemplate.PostProcessor
 import xml.{Node => XMLNode, NodeSeq}
 import org.dbpedia.extraction.destinations.{Quad, Dataset}
@@ -31,9 +32,9 @@ class LemonOverlay (config : NodeSeq) extends PostProcessor {
   def process(i : List[Quad], subject: String) : List[Quad] = {
     val mm = MemoryModel.fromQuads(i)
     if(i.size > 0){    
-        val language = i.head.language
-        val dataset = i.head.dataset
-        val context = vf.createURI(i.head.context)
+        val language = WiktionaryPageExtractor.langObj
+        val dataset = WiktionaryPageExtractor.datasetURI
+        val context = WiktionaryPageExtractor.tripleContext
         val subjectURI = vf.createURI(subject)
         val blocks = Collector.collect(mm, subject, MMap(), this)
         val newQuads = new ListBuffer[Quad]()
