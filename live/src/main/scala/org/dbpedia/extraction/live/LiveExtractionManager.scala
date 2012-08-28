@@ -1,12 +1,10 @@
 package org.dbpedia.extraction.live.extraction
 
-import xml.Elem
 
 import java.io._
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.live.core.LiveOptions
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,7 +22,7 @@ object LiveExtractionManager
 
   def extractFromPage(Element :scala.xml.Elem)
     {
-      val articlesSource = XMLSource.fromXML(Element, Language.apply(LiveOptions.options.get("language")));
+      val articlesSource = XMLSource.fromOAIXML(Element);
       LiveExtractionConfigLoader.startExtraction(articlesSource);
     }
 

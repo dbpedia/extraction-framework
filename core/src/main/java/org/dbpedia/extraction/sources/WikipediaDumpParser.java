@@ -298,38 +298,45 @@ public class WikipediaDumpParser
       }
       else if (isStartElement(CONTRIBUTOR_ELEM))
       {
-        // now at <contributor>, move to next tag
-        nextTag();
-        // now should have ip / (author & id), when ip is present we don't have author / id
-        // TODO Create a getElementName function to make this cleaner
-        if (isStartElement(CONTRIBUTOR_IP)) {
-          contributorID = "0";
-          contributorName = readString(CONTRIBUTOR_IP, false);
-        }
-        else
-        {
-          // usually we have contributor name first but we have to check
-          if (isStartElement(CONTRIBUTOR_NAME))
-          {
-            contributorName = readString(CONTRIBUTOR_NAME, false);
-            nextTag();
-            if (isStartElement(CONTRIBUTOR_ID))
-              contributorID = readString(CONTRIBUTOR_ID, false);
+        // Check if this is an empty (deleted) contributor tag (i.e. <contributor deleted="deleted" /> )
+        // which has no explicit </contributor> end element. If it is - skip it.
+        String deleted = _reader.getAttributeValue(null, "deleted");
+        if (deleted != null && deleted.equals("deleted")) {
+          nextTag();
+        } else {
+          // now at <contributor>, move to next tag
+          nextTag();
+          // now should have ip / (author & id), when ip is present we don't have author / id
+          // TODO Create a getElementName function to make this cleaner
+          if (isStartElement(CONTRIBUTOR_IP)) {
+            contributorID = "0";
+            contributorName = readString(CONTRIBUTOR_IP, false);
           }
           else
           {
-            // when contributor ID is first
-            if (isStartElement(CONTRIBUTOR_ID))
+            // usually we have contributor name first but we have to check
+            if (isStartElement(CONTRIBUTOR_NAME))
             {
-              contributorID = readString(CONTRIBUTOR_ID, false);
+              contributorName = readString(CONTRIBUTOR_NAME, false);
               nextTag();
-              if (isStartElement(CONTRIBUTOR_NAME))
-                contributorName = readString(CONTRIBUTOR_NAME, false);
+              if (isStartElement(CONTRIBUTOR_ID))
+                contributorID = readString(CONTRIBUTOR_ID, false);
+            }
+            else
+            {
+              // when contributor ID is first
+              if (isStartElement(CONTRIBUTOR_ID))
+              {
+                contributorID = readString(CONTRIBUTOR_ID, false);
+                nextTag();
+                if (isStartElement(CONTRIBUTOR_NAME))
+                  contributorName = readString(CONTRIBUTOR_NAME, false);
+              }
             }
           }
+          nextTag();
+          requireEndElement(CONTRIBUTOR_ELEM);
         }
-        nextTag();
-        requireEndElement(CONTRIBUTOR_ELEM);
       }
       else
       {

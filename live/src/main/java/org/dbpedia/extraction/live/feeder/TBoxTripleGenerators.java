@@ -16,7 +16,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import org.apache.commons.collections15.MultiMap;
 import org.apache.commons.collections15.multimap.MultiHashMap;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.util.StringUtil;
 
@@ -95,7 +95,7 @@ class ListTripleGenerator
 				tripleGenerator.generate(result, subject, property, part, lang);
 			}
 			catch (Exception e) {
-				logger.warn(ExceptionUtils.getFullStackTrace(e));
+				logger.warn(ExceptionUtils.getStackTrace(e));
 			}
 		}
 
@@ -200,7 +200,7 @@ class MosTripleGenerator
 
 			result.add(subject, MyVocabulary.DBM_ERROR, result.createLiteral(msg));
 
-			logger.warn(ExceptionUtils.getFullStackTrace(e));
+			logger.warn(ExceptionUtils.getStackTrace(e));
 		}
 
 		return result;

@@ -12,7 +12,7 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
 
@@ -329,7 +329,7 @@ public class SQLUtil
 				resultSet.close();
 		}
 		catch(SQLException e) {
-			logger.error(ExceptionUtils.getFullStackTrace(e));
+			logger.error(ExceptionUtils.getStackTrace(e));
 		}
 	}
 

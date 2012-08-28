@@ -5,9 +5,10 @@ import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
 import org.dbpedia.extraction.live.priority.Priority;
+import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.LastResponseDateManager;
+import org.dbpedia.extraction.live.util.OAIUtil;
 import org.dbpedia.extraction.live.util.XMLUtil;
-import org.dbpedia.extraction.live.util.iterators.OAIUnmodifiedRecordIterator;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -56,7 +57,7 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
 
     public UnmodifiedPagesUpdateFeeder(String name, int priority){
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(OAIUtil.getOAIDateFormatString());
 
         this.setPriority(priority);
         this.setName(name);
@@ -108,9 +109,8 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
 
     public void run() {
 
-        //oaiUri, startDate, pollInterval * 1000, sleepInterval * 1000);
-        Iterator<Document> myTestIterator = new OAIUnmodifiedRecordIterator(
-                oaiUri, startDate, endDate);
+        Iterator<Document> myTestIterator =
+        			OAIUtil.createEndlessRecordIterator(oaiUri, startDate, DateUtil.getDuration1MonthMillis(), pollInterval * 1000, sleepInterval * 1000);
 
         while(myTestIterator.hasNext()){
             Document doc = myTestIterator.next();
