@@ -1,81 +1,75 @@
 package org.dbpedia.extraction.live.util.iterators;
 
-import java.io.File;
+import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.util.DateUtil;
+import org.dbpedia.extraction.live.util.OAIUtil;
+import org.w3c.dom.Document;
+
 import java.util.Collections;
 import java.util.Iterator;
-
-import org.apache.log4j.Logger;
-import org.w3c.dom.Document;
 
 /**
  * An iterator which blocks until more data becomes available. poll interval in
  * ms can be set.
- * 
+ * <p/>
  * This is an interator over iterators. Use a chain iterator to make that look
  * as a single iterator.
- * 
  */
 public class EndlessOAIMetaIterator
-	extends PrefetchIterator<Iterator<Document>>
-{
-	private static Logger		logger			= Logger
-														.getLogger(EndlessOAIMetaIterator.class);
+        extends PrefetchIterator<Document> {
+    private static Logger logger = Logger
+            .getLogger(EndlessOAIMetaIterator.class);
 
-	private String				oaiBaseUri;
-	private String				startDate;
-	private String				nextDate;
-	private int					resumptionDelay;
-	private File                file;
-	private OAIRecordIterator	lastIterator	= null;
+    private String oaiBaseUri = null;
+    private String startDate = null;
+    private String endDate = null;
+    private long relativeEndFromNow = 0; // Milliseconds
+    private long pollDelay = 0;
+    private long resumptionDelay = 0;
+    private OAIRecordIterator lastIterator = null;
 
-	public EndlessOAIMetaIterator(String oaiBaseUri, String startDate,
-			int resumptionDelay)
-	{
-		this.oaiBaseUri = oaiBaseUri;
-		this.startDate = startDate;
-		//this.nextDate = startDate;
-        
-		this.resumptionDelay = resumptionDelay;
-		this.file = file;
-	}
+    public EndlessOAIMetaIterator(String oaiBaseUri, String startDate, long relativeEndFromNow,
+                                  long pollDelay, long resumptionDelay) {
+        this.oaiBaseUri = oaiBaseUri;
+        this.startDate = startDate;
+        this.relativeEndFromNow = relativeEndFromNow;
+        this.pollDelay = pollDelay;
+        this.resumptionDelay = resumptionDelay;
+    }
 
-	public String getStartDate()
-	{
-		return startDate;
-	}
+    public String getStartDate() {
+        return startDate;
+    }
 
-	public String getNextDate()
-	{
-		return nextDate;
-	}
+    public String getendDate() {
+        return endDate;
+    }
 
-	@Override
-	protected Iterator<Iterator<Document>> prefetch()
-	{
-		// Whenever this method is called it means that the iterator we
-		// returned reached its end.
-		// Here we get its lastResponseDate for creating a new iterator
-		if (lastIterator != null)
-			nextDate = lastIterator.getLastResponseDate();
-		else
-			nextDate = startDate;
+    @Override
+    protected Iterator<Document> prefetch() {
+        // Whenever this method is called it means that the iterator we
+        // returned reached its end.
+        // Here we get its lastResponseDate for creating a new iterator
 
-		logger.trace("Using date: " + nextDate);
+        if (lastIterator != null)
+            startDate = lastIterator.getLastResponseDate();
 
-		Iterator<Document> iterator;
-		OAIRecordIterator it = new OAIRecordIterator(oaiBaseUri, nextDate);
-		iterator = it;
-		
-//		if(file != null)
-//			iterator = new SaveResponseTimeIterator(it, file);
-		
-		
-		if (resumptionDelay > 0)
-			iterator = new DelayIterator<Document>(iterator, resumptionDelay);
+        endDate = (relativeEndFromNow == 0) ?
+                null :
+                DateUtil.formatMillisWithPattern(System.currentTimeMillis() + relativeEndFromNow, OAIUtil.getOAIDateFormatString());
 
-		lastIterator = it;
-		// System.out.println("Using last response date: " + nextDate);
+        logger.trace("Using date: " + startDate);
 
-		return Collections.singleton(iterator).iterator();
-	}
+        Iterator<Document> iterator;
+        OAIRecordIterator it = new OAIRecordIterator(oaiBaseUri, startDate, endDate, pollDelay, resumptionDelay);
+        iterator = it;
+
+
+        //if (resumptionDelay > 0)
+        //    iterator = new DelayIterator<Document>(iterator, resumptionDelay);
+
+        lastIterator = it;
+
+        return Collections.singletonList(iterator).get(0);
+    }
 }

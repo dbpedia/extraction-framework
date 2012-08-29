@@ -75,7 +75,7 @@ public class LiveUpdateFeeder extends Thread{
 
         // Create an iterator which keeps polling the OAIRepository
 		Iterator<Document> recordIterator =
-			OAIUtil.createEndlessRecordIterator(oaiUri, startDate, pollInterval * 1000, sleepInterval * 1000);
+			OAIUtil.createEndlessRecordIterator(oaiUri, startDate, 0, pollInterval * 1000, sleepInterval * 1000);
 
         while(recordIterator.hasNext())
         {

@@ -45,6 +45,13 @@ object XMLSource
      * @param xml The xml which contains the pages
      */
     def fromXML(xml : Elem, language: Language) : Source  = new XMLSource(xml, language)
+
+    /**
+       *  Creates an XML Source from a parsed XML OAI response.
+       *
+       * @param xml The xml which contains the pages
+     */
+    def fromOAIXML(xml : Elem) : Source  = new OAIXMLSource(xml)
 }
 
 /**
@@ -83,6 +90,23 @@ private class XMLSource(xml : Elem, language: Language) extends Source
                                                else (rev \ "contributor" \ "username" ).text,
                              source    = (rev \ "text").text ) )
         }
+    }
+
+    override def hasDefiniteSize = true
+}
+
+/**
+ * OAI XML source which reads from a parsed XML response.
+ */
+private class OAIXMLSource(xml : Elem) extends Source
+{
+    override def foreach[U](f : WikiPage => U) : Unit =
+    {
+        val lang = (xml \\ "mediawiki" \ "@{http://www.w3.org/XML/1998/namespace}lang").head.text
+        val source = new XMLSource( (xml \\ "mediawiki").head.asInstanceOf[Elem], Language.apply(lang))
+        source.foreach(wikiPage => {
+          f(wikiPage)
+        })
     }
 
     override def hasDefiniteSize = true

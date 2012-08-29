@@ -2,14 +2,13 @@ package org.dbpedia.extraction.dump.sql
 
 import java.io.File
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.{Finder,Language,WikiInfo}
+import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.wikiparser.Namespace
-import org.dbpedia.extraction.dump.util.WikiInfo
 import scala.io.Codec
 import scala.collection.mutable.{Set,HashSet,Map,HashMap}
 import scala.collection.immutable.SortedSet
-import org.dbpedia.extraction.dump.util.ConfigUtils
 import org.dbpedia.extraction.dump.download.Download
 import java.util.Properties
 import scala.io.Source
@@ -24,36 +23,7 @@ object Import {
     val requireComplete = args(3).toBoolean
     
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    var keys: Seq[String] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield lang
-        
-    var languages = SortedSet[Language]()(Language.wikiCodeOrdering)
-    
-    val ranges = new HashSet[(Int,Int)]
-  
-    for (key <- keys) key match {
-      case ConfigUtils.Range(from, to) => ranges += ConfigUtils.toRange(from, to)
-      case ConfigUtils.Language(language) => languages += Language(language)
-      case other => throw new Exception("Invalid language / range '"+other+"'")
-    }
-    
-    // resolve page count ranges to languages
-    if (ranges.nonEmpty)
-    {
-      val listFile = new File(baseDir, WikiInfo.FileName)
-      
-      // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
-      // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
-      // these non-ASCII chars anyway, so we don't have to unescape them.
-      println("parsing "+listFile)
-      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
-      
-      // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
-      {
-        // ...add its language
-        languages += Language(wiki.language)
-      }
-    }
+    var languages = parseLanguages(baseDir, args.drop(4))
     
     val source = Source.fromFile(tablesFile)(Codec.UTF8)
     val tables =
@@ -72,7 +42,7 @@ object Import {
         
         val finder = new Finder[File](baseDir, language, "wiki")
         val tagFile = if (requireComplete) Download.Complete else "pages-articles.xml"
-        val date = ConfigUtils.latestDate(finder, tagFile)
+        val date = finder.dates(tagFile).last
         val file = finder.file(date, "pages-articles.xml")
         
         val database = finder.wikiName
@@ -95,10 +65,6 @@ object Import {
     }
     finally conn.close()
     
-  }
-  
-  private def add[K](map: Map[K,Set[String]], key: K, values: Array[String]) = {
-    map.getOrElseUpdate(key, new HashSet[String]) ++= values
   }
   
 }

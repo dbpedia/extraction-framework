@@ -6,6 +6,7 @@ import java.util.logging.{Level,Logger}
 import scala.collection.immutable.SortedMap
 import org.dbpedia.extraction.mappings.{LabelExtractor,MappingExtractor}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.mappings.Mappings
 import org.dbpedia.extraction.server.stats.MappingStatsManager
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
@@ -17,7 +18,7 @@ class Server(private val password : String, langs : Seq[Language], val paths: Pa
 {
     val managers = {
       val tuples = langs.map(lang => lang -> new MappingStatsManager(paths.statsDir, lang))
-      SortedMap(tuples: _*)(Language.wikiCodeOrdering)
+      SortedMap(tuples: _*)
     }
         
     val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), langs, paths)
