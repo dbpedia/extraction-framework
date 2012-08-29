@@ -108,7 +108,14 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
   val OntologyClass = values(200)
   val OntologyProperty = values(202)
   
-  def get(lang : Language, name : String) : Option[Namespace] = {
+  def apply(lang: Language, name: String): Namespace = {
+    get(lang, name) match {
+      case Some(namespace) => namespace
+      case None => throw new IllegalArgumentException("unknown namespace name '"+name+"' for language '"+lang.wikiCode+"'")
+    }
+  }
+  
+  def get(lang: Language, name: String): Option[Namespace] = {
     dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
       case None => Namespaces.codes(lang).get(name.toLowerCase(lang.locale)) match {
         case None => None

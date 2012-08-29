@@ -63,6 +63,10 @@ object PolicyParser {
 
 }
 
+/**
+ * Remove dependencies on ConfigParser and Properties, move class to
+ * org.dbpedia.extraction.destinations.formatters.UriPolicyParser.
+ */
 class PolicyParser(config : Properties)
 extends ConfigParser(config)
 {

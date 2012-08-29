@@ -12,7 +12,7 @@ import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, WikiUtil}
 import java.net.URLDecoder
-import org.dbpedia.extraction.util.RichString.toRichString
+import org.dbpedia.extraction.util.RichString.wrapString
 import scala.collection.mutable.ArrayBuffer
 
 /**

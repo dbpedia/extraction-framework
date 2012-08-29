@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.server.stats
 
+import java.io.File
 import java.util.logging.Logger
 import scala.io.Source
 import org.dbpedia.extraction.mappings.Mappings
-import org.dbpedia.extraction.util.Language
-import java.io.File
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.util.Language
 
 class MappingStatsManager(statsDir : File, language: Language)
 extends MappingStatsConfig(statsDir, language)

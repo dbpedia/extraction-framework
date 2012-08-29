@@ -35,15 +35,76 @@
                             <mainClass>org.dbpedia.extraction.scripts.CreateFreebaseLinks</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xms512m</jvmArg>
-                                <jvmArg>-Xmx4096m</jvmArg><!-- 4G is ok with CMS or G1, other GCs need >= 4.5G -->
-                                <!-- <jvmArg>-XX:+PrintGC</jvmArg> -->
-                                <!-- <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> -->
+                                <jvmArg>-Xmx4096m</jvmArg><!-- we load all DBpedia titles, so we need some space. Didn't test how much is actually necessary, 4G is probably too much. -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                                <!-- <jvmArg>-XX:+UseG1GC</jvmArg> --><!-- ~20% slower than CMS --> 
-                                <!-- <jvmArg>-XX:+PrintGCDetails</jvmArg> --><!-- not necessary with CMS, annoying with G1 -->
                             </jvmArgs>
+                            <!-- URIs and N-Triple escaping -->
                             <!-- ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-links.nt.bz2 freebase-datadump-quadruples.tsv.bz2 -->
+                            <!-- IRIs and Turtle escaping -->
+                            <!-- ../run CreateFreebaseLinks true true /data/dbpedia .ttl.gz freebase-links.nt.bz2 freebase-datadump-quadruples.tsv.bz2 -->
+                        </launcher>
+                        <launcher>
+                            <id>ProcessInterLanguageLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.ProcessInterLanguageLinks</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms5632m</jvmArg>
+                                <jvmArg>-Xmx6656m</jvmArg><!-- all languages (10000+ articles) need 5.5G (5632M) with .ttl and IRIs, 6.5G (6656M) with .nt and URIs (more and longer unique titles). -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <!-- <jvmArg>-XX:+PrintGC</jvmArg> -->
+                                <!-- <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> -->
+                            </jvmArgs>
+                            <!-- 'fr,de' mean specific languages. '-' means no language uses generic domain. -->
+                            <!-- '-fr-de' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-fr-de.ttl.gz and enwiki-20120601-interlanguage-links-see-also-fr-de.ttl.gz -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-fr-de.txt.gz -fr-de .ttl.gz - fr,de -->
+                            
+                            <!-- '10000-' means languages by article count range. 'en' uses generic domain. -->
+                            <!-- '-' means no file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as.ttl.gz -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-ttl.txt.gz - .ttl.gz en 10000- -->
+                            
+                            <!-- '-' means don't write dump file. -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia - -fr-de .ttl.gz - fr,de -->
+                            
+                            <!-- if no languages are given, read links from dump file, not from triple files. -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links.txt.gz - .ttl.gz -->
+                            
+                            <!-- generate links for all DBpedia I18N chapters in nt format -->
+                            <!-- '-chapters' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-chapters.ttl.gz -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-chapters-nt.txt.gz -chapters .nt.gz en cs,en,fr,de,el,it,ja,ko,pl,pt,ru,es -->
+                            
+                            <!-- generate links for all languages that have a namespace on mappings.dbpedia.org in nt format -->
+                            <!-- '-mapped' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-mapped.ttl.gz -->
+                            <!-- ../run ProcessInterLanguageLinks /data/dbpedia interlanguage-links-mapped-nt.txt.gz -mapped .nt.gz en @mappings -->
+                        </launcher>
+                        <launcher>
+                            <id>MapSubjectUris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.MapSubjectUris</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                            <!-- ../run MapSubjectUris /home/dbpedia interlanguage-links-same-as labels,short-abstracts,long-abstracts -en-uris .nt.gz dbpedia.org 10000- -->
+                        </launcher>
+                        <launcher>
+                            <id>ResolveTransitiveLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.ResolveTransitiveLinks</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                            <!-- ../run ResolveTransitiveLinks /home/dbpedia redirects transitive-redirects .nt.gz 10000- -->
+                        </launcher>
+                        <launcher>
+                            <id>MapObjectUris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.MapObjectUris</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                            <!-- ../run MapObjectUris /home/dbpedia transitive-redirects infobox-properties,mappingbased-properties,... -redirected .nt.gz 10000- -->
+                            <!-- the following should be redirected (as of 2012-07-11) -->
+                            <!-- disambiguations,infobox-properties,mappingbased-properties,page-links,persondata,topical-concepts -->
                         </launcher>
                     </launchers>
                 </configuration>

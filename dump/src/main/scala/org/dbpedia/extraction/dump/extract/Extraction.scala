@@ -18,7 +18,9 @@ object Extraction
     
     // Load properties
     val properties = new Properties()
-    properties.load(new InputStreamReader(new FileInputStream(args(0)), "UTF-8"))
+    val in = new FileInputStream(args(0))
+    try properties.load(new InputStreamReader(in, "UTF-8"))
+    finally in.close()
 
     //Load extraction jobs from configuration
     val jobs = new ConfigLoader(new Config(properties)).getExtractionJobs()

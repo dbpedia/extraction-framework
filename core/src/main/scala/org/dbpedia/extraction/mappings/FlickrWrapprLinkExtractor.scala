@@ -29,13 +29,13 @@ extends Extractor
   
   override val datasets = Set(DBpediaDatasets.FlickrWrapprLinks)
   
-  private val quad = QuadBuilder.stringPredicate(language, DBpediaDatasets.FlickrWrapprLinks, hasPhotoCollectionProperty) _
+  private val quad = QuadBuilder.stringPredicate(language, DBpediaDatasets.FlickrWrapprLinks, hasPhotoCollectionProperty, null) _
   
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {
     if (page.title.namespace != Namespace.Main || page.isRedirect || page.isDisambiguation) return Seq.empty
     
     // Note: subjectUri is probably identical to the URI we use here, but we want to be sure. 
-    Seq(quad(language.resourceUri.append(page.title.encoded), flickrWrapprUrlPrefix+page.title.encoded, page.sourceUri, null))
+    Seq(quad(language.resourceUri.append(page.title.decodedWithNamespace), flickrWrapprUrlPrefix+page.title.encoded, page.sourceUri))
   }
 }

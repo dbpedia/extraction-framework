@@ -9,7 +9,7 @@ MYDB=$3
 
 # FIXME: check $COMMAND
 
-# TODO: check $DATABASE? It may be empty, but should be a well-formed database name.
+# TODO: check $MYDB? It may be empty, but should be a well-formed database name.
 
 if [[ -z "$MYDIR" ]]
 then

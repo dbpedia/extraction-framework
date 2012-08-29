@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server.stats
 
 import java.io._
-import org.dbpedia.extraction.util.RichFile.toRichFile
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.wikiparser.Namespace
 
 /**

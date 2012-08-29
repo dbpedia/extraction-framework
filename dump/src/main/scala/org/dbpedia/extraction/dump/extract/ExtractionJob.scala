@@ -12,25 +12,25 @@ import org.dbpedia.extraction.util.SimpleWorkers
  *
  * @param extractor The Extractor
  * @param source The extraction source
+ * @param namespaces Only extract pages in these namespaces
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
  * @param label user readable label of this extraction job.
  */
-class ExtractionJob(extractor: RootExtractor, source: Source, destination: Destination, label: String)
+class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String)
 {
   private val logger = Logger.getLogger(getClass.getName)
 
-  private val progress = new ExtractionProgress(label)
+  private val progress = new ExtractionProgress(label, description)
   
   private val parser = WikiParser()
-
-  // Only extract from the following namespaces
-  private val namespaces = Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
 
   private val workers = SimpleWorkers { page: WikiPage =>
     var success = false
     try {
-      val graph = extractor(parser(page))
-      destination.write(graph)
+      if (namespaces.contains(page.title.namespace)) {
+        val graph = extractor(parser(page))
+        destination.write(graph)
+      }
       success = true
     } catch {
       case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"'", ex)
@@ -46,12 +46,7 @@ class ExtractionJob(extractor: RootExtractor, source: Source, destination: Desti
 
     workers.start()
     
-    for (page <- source) {
-      // If we use XMLSource, we probably checked this already, but anyway...
-      if (namespaces.contains(page.title.namespace)) {
-        workers.process(page)
-      }
-    }
+    for (page <- source) workers.process(page)
     
     workers.stop()
     

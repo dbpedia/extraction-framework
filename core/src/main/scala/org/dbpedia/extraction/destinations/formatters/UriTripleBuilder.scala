@@ -9,7 +9,7 @@ import UriPolicy._
  */
 abstract class UriTripleBuilder(policies: Array[Policy] = null) extends TripleBuilder {
   
-  protected val badUri = "BAD URI: "
+  protected val BadUri = "BAD URI: "
   
   def subjectUri(subj: String) = uri(subj, SUBJECT)
   
@@ -20,14 +20,15 @@ abstract class UriTripleBuilder(policies: Array[Policy] = null) extends TripleBu
   def uri(uri: String, pos: Int): Unit
   
   protected def parseUri(str: String, pos: Int): String = {
+    if (str == null) return BadUri+str
     try {
       var uri = new URI(str)
-      if (! uri.isAbsolute()) throw new URISyntaxException(str, "URI is not absolute (but must be in RDF)")
+      if (! uri.isAbsolute()) return BadUri+"not absolute: "+str
       if (policies != null) uri = policies(pos)(uri)
       uri.toString
     } catch {
       case usex: URISyntaxException =>
-        badUri+usex.getMessage() 
+        BadUri+usex.getMessage() 
     }
   }
 }

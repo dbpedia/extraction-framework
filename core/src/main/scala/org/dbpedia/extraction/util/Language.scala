@@ -10,13 +10,12 @@ import org.dbpedia.extraction.ontology.DBpediaNamespace
  * For each language, there is only one instance of this class.
  * TODO: rename this class to WikiCode or so.
  */
-class Language private(val wikiCode : String, val isoCode: String) extends Serializable
+class Language private(val wikiCode : String, val isoCode: String)
 {
-    // TODO: make this transient and add a readObject method. Better yet: never use Serializable
     val locale = new Locale(isoCode)
     
     /** 
-     * Note that Wikipedia dump files use this prefix (with underscores), 
+     * Note that Wikipedia dump files use this prefix (with underscores), e.g. be_x_old,
      * but Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
      */
     val filePrefix = wikiCode.replace("-", "_")
@@ -73,7 +72,7 @@ object Language extends (String => Language)
 {
   implicit val wikiCodeOrdering = Ordering.by[Language, String](_.wikiCode)
   
-  val Values = locally {
+  val map: Map[String, Language] = locally {
     
     def language(code : String, iso: String): Language = new Language(code, iso)
     
@@ -229,26 +228,34 @@ object Language extends (String => Language)
     languages.toMap // toMap makes immutable
   }
   
-  // TODO: remove this. It is too often used in error.
-  val English = Values("en")
+  /**
+   * English Wikipedia
+   */
+  val English = map("en")
   
-  val Mappings = Values("mappings")
+  /**
+   * DBpedia mappings wiki
+   */
+  val Mappings = map("mappings")
   
-  val Commons = Values("commons")
+  /**
+   * Wikimedia commons
+   */
+  val Commons = map("commons")
   
   /**
    * Gets a language object for a Wikipedia language code.
    * Throws IllegalArgumentException if language code is unknown.
    */
-  def apply( code: String ) : Language = Values.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
+  def apply(code: String) : Language = map.getOrElse(code, throw new IllegalArgumentException("unknown language code "+code))
   
   /**
    * Gets a language object for a Wikipedia language code, or None if given code is unknown.
    */
-  def get(code: String) : Option[Language] = Values.get(code)
+  def get(code: String) : Option[Language] = map.get(code)
   
   /**
    * Gets a language object for a Wikipedia language code, or the default if the given code is unknown.
    */
-  def getOrElse(code: String, default: => Language) : Language = Values.getOrElse(code, default)
+  def getOrElse(code: String, default: => Language) : Language = map.getOrElse(code, default)
 }

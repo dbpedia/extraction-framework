@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.ontology.Ontology
@@ -24,7 +24,9 @@ extends Extractor
   private val skosPrefLabelProperty = context.ontology.properties("skos:prefLabel")
   private val skosBroaderProperty = context.ontology.properties("skos:broader")
   private val skosRelatedProperty = context.ontology.properties("skos:related")
-
+  private val language = context.language
+  private val quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.SkosCategories, null) _
+  
   override val datasets = Set(DBpediaDatasets.SkosCategories)
 
   override def extract(node : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
@@ -33,18 +35,21 @@ extends Extractor
 
     var quads = new ArrayBuffer[Quad]()
 
-    quads += new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
-    quads += new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+    quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
+    quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
 
     for(link <- collectCategoryLinks(node))
     {
       val property = link.destinationNodes match
       {
+        // TODO: comment: What's going on here? What does it mean if text starts with ":"?
         case TextNode(text, _) :: Nil  if text.startsWith(":") => skosRelatedProperty
         case _ => skosBroaderProperty
       }
+      
+      val objectUri = language.resourceUri.append(link.destination.decodedWithNamespace)
 
-      quads += new Quad(context.language, DBpediaDatasets.SkosCategories, subjectUri, property, getUri(link.destination), link.sourceUri)
+      quads += quad(subjectUri, property, objectUri, link.sourceUri)
     }
 
     quads
@@ -57,11 +62,5 @@ extends Extractor
       case linkNode : InternalLinkNode if linkNode.destination.namespace == Namespace.Category => List(linkNode)
       case _ => node.children.flatMap(collectCategoryLinks)
     }
-  }
-
-  private def getUri(destination : WikiTitle) : String =
-  {
-    val categoryNamespace = Namespace.Category.name(context.language)
-    context.language.resourceUri.append(categoryNamespace+':'+destination.decoded)
   }
 }

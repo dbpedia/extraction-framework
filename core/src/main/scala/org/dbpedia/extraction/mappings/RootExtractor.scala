@@ -4,6 +4,7 @@ import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.wikiparser._
 
 /**
+ * TODO: get rid of this class... get initial URI from page...?
  */
 class RootExtractor(val extractor: Mapping[PageNode])
 {
