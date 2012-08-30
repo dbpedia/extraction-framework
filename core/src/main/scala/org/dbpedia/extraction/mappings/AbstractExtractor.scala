@@ -35,7 +35,7 @@ extends Extractor
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
     //TODO make this configurable
-    private val apiUrl = "http://localhost/mediawiki/api.php"
+    private val apiUrl = "http://localhost/mw-modified/api.php"
 
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
