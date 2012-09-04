@@ -129,6 +129,8 @@ class WikiApi(url: URL, language: Language)
         for(page <- response \ "query" \ "pages" \ "page";
             rev <- page \ "revisions" \ "rev" )
         {
+            // "userid" is not supported on older mediawiki versions and the Mapping mediawiki does not support it yet
+            // TODO: update mapping mediawiki and assign name & id directly
             val _contributorID = (rev \ "@userid")
             val _contributorName = (rev \ "@user")
 
