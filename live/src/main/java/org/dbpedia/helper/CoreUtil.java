@@ -5,7 +5,6 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
@@ -13,7 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
 
-import static org.dbpedia.extraction.util.RichString.toRichString;
+
+import static org.dbpedia.extraction.util.RichString.wrapString;
 
 /*import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
@@ -22,6 +22,7 @@ import org.openrdf.model.Value;
 import org.openrdf.rio.ntriples.NTriplesUtil;*/
 
 /**
+ * TODO: why is this class necessary? Quad.render() does pretty much the same thing...
  * Created by IntelliJ IDEA.
  * User: Mohamed Morsey
  * Date: Aug 19, 2010
@@ -30,7 +31,7 @@ import org.openrdf.rio.ntriples.NTriplesUtil;*/
  */
 public class CoreUtil {
     //Initialize the logger
-    private static Logger logger = Logger.getLogger(CoreUtil.class);
+    private static Logger logger = Logger.getLogger(CoreUtil.class.getName());
 
     public static String convertToSPARULPattern(RDFNode requiredResource)
     {
@@ -90,6 +91,7 @@ public class CoreUtil {
         return strSPARULPattern;
     }
 
+
     private static String escapeString(String input){
         StringBuilder outputString = new StringBuilder();
         for (char c :input.toCharArray())
@@ -118,6 +120,7 @@ public class CoreUtil {
             {
                 outputString.append("\\u");
 
+                //val hexStr = c.toHexString().toUpperCase
                 String hexStr = Integer.toHexString(c).toUpperCase();
                 int pad = 4 - hexStr.length();
 
@@ -134,12 +137,14 @@ public class CoreUtil {
     }
 
     /**
+     * @deprecated please use WikiUtil.wikiEncode!
      * @param page_title: decoded page title
      * @return encoded page title
      */
+    @Deprecated
     public static String wikipediaEncode(String page_title) {
-        return toRichString(WikiUtil.wikiEncode(page_title)).capitalize(Language.apply(LiveOptions.options.get("language")).locale());
-    }
+        return wrapString(WikiUtil.wikiEncode(page_title)).capitalize(Language.English().locale());
+     }
 
     /**
      * Encodes a URI, as in case of DBpedia the page title is the only part that should be
