@@ -143,27 +143,15 @@ public class LiveUpdateDestination implements Destination{
     }
 
     public LiveUpdateDestination(WikiTitle pageWikiTitle, String language, String oaiID){
-        String pageWikiEncodedTitle = pageWikiTitle.encoded().toString();
-        try{
-            String pageURLEncodedTitle = URLEncoder.encode(pageWikiEncodedTitle, "UTF-8");
+        String resourceURI = pageWikiTitle.resourceIri();
+        if (LiveOptions.options.get("language_use_IRI") == "false")
+            resourceURI = CoreUtil.encodeURI(resourceURI);
 
-            String resourceURI;
+        this.uri =  ResourceFactory.createResource(resourceURI);
+        this.language = language;
+        this.oaiId = oaiID;
 
-            if(pageWikiTitle.namespace().code() == 0)//Name space 0 is the Main namespace, so we don't need a prefix like in case of File:...
-                resourceURI = Constants.DB_RESOURCE_NS + pageURLEncodedTitle;
-            else
-                resourceURI = Constants.DB_RESOURCE_NS + pageWikiTitle.namespace().name() + ":" + pageURLEncodedTitle;
-
-            this.uri =  ResourceFactory.createResource(resourceURI);
-            this.language = language;
-            this.oaiId = oaiID;
-
-            initDestination();
-
-        }
-        catch (UnsupportedEncodingException exp){
-            logger.error("Page \"" + pageWikiEncodedTitle + "\" cannot be encoded");
-        }
+        initDestination();
 
     }
 
