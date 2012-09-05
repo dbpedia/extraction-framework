@@ -5,6 +5,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
@@ -159,12 +160,18 @@ public class CoreUtil {
 
         String resultingURI = uri;
 
-        try{
-            resultingURI = namespacePart + "/" + URLEncoder.encode(pageTitlePart, "UTF-8");
+        resultingURI = namespacePart + "/" + pageTitlePart;
+
+        // TODO: temp solution / find another way to do this
+        if (LiveOptions.options.get("language_use_IRI") == "false") {
+            try{
+                resultingURI = namespacePart + "/" + URLEncoder.encode(pageTitlePart, "UTF-8");
+            }
+            catch (UnsupportedEncodingException exp){
+                logger.error("Page \"" + pageTitlePart + "\" cannot be encoded");
+            }
         }
-        catch (UnsupportedEncodingException exp){
-            logger.error("Page \"" + pageTitlePart + "\" cannot be encoded");
-        }
+
 
         return resultingURI;
     }
