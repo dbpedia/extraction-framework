@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.live.statistics;
 
 import org.dbpedia.extraction.live.util.DateUtil;
-
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
@@ -12,6 +11,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  * Time: 5:51 PM
  * This class holds and processes statistics
  */
+
 public class StatisticsData {
     // stats* variables hold the number of updated pages
     private static long stats1m = 0;
@@ -29,23 +29,31 @@ public class StatisticsData {
     protected StatisticsData() {
     }
 
-    public static void setStats1m(long value) {
+    public static synchronized void setAllStats(long s1m, long s5m, long s1h, long s1d, long sall) {
+        stats1m = s1m;
+        stats5m = s5m;
+        stats1h = s1h;
+        stats1d = s1d;
+        statsAll = sall;
+    }
+
+    public static synchronized void setStats1m(long value) {
         stats1m = value;
     }
 
-    public static void setStats5m(long value) {
+    public static synchronized void setStats5m(long value) {
         stats5m = value;
     }
 
-    public static void setStats1h(long value) {
+    public static synchronized void setStats1h(long value) {
         stats1h = value;
     }
 
-    public static void setStats1d(long value) {
+    public static synchronized void setStats1d(long value) {
         stats1d = value;
     }
 
-    public static void setStatsAll(long value) {
+    public static synchronized void setStatsAll(long value) {
         statsAll = value;
     }
 

@@ -7,7 +7,8 @@ import scala.math.Ordering;
  * User: Dimitris Kontokostas
  * Date: 8/1/12
  * Time: 5:20 PM
- * Contains an item forTo change this template use File | Settings | File Templates.
+ * This is a temporary solution to stay compatible with the existing code. This class holds
+ * data to calculate statistics on live extraction
  */
 public class StatisticsItem implements Comparable<StatisticsItem> {
     private String pageName = "";
