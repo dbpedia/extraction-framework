@@ -4,7 +4,6 @@ import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
-import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
@@ -92,15 +91,7 @@ public class PageProcessor extends Thread{
                 }
                 logger.info("Page # " + requiredPage + " has been removed and processed");
 
-                //Write response date to file in both cases of live update and mapping update
-                if(requiredPage.pagePriority == Priority.MappingPriority)
-                    LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
-                            requiredPage.pageTimestamp);
-                else if(requiredPage.pagePriority == Priority.LivePriority)
-                    LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
-                            requiredPage.pageTimestamp);
 
-//                }
 
             }
             catch (Exception exp){
