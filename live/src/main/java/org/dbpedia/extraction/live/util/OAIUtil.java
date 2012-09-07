@@ -20,7 +20,7 @@ public class OAIUtil {
     }
 
     public static Iterator<Document> createEndlessRecordIterator(
-            String oaiBaseUri, String startDate, long relativeEndFromNow, int pollDelay, int resumptionDelay) {
+            String oaiBaseUri, String startDate, long relativeEndFromNow, long pollDelay, long resumptionDelay) {
 
         XPathExpression expr = DBPediaXPathUtil.getRecordExpr();
 

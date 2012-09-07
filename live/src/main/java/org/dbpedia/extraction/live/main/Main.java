@@ -3,10 +3,10 @@ package org.dbpedia.extraction.live.main;
 
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
-import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
-import org.dbpedia.extraction.live.feeder.UnmodifiedPagesUpdateFeeder;
+import org.dbpedia.extraction.live.feeder.OAIFeeder;
 import org.dbpedia.extraction.live.priority.PagePriority;
+import org.dbpedia.extraction.live.priority.Priority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.PublishedDataCompressor;
 import org.dbpedia.extraction.live.publisher.Publisher;
@@ -104,13 +104,21 @@ public class Main
         Publisher publisher = new Publisher("Publisher", 4);
 
         //All feeders, one for live update, one for mapping affected pages, and the last one is for unmodified pages
-        MappingUpdateFeeder mappingFeeder = new MappingUpdateFeeder("Mapping feeder thread", 4);
-        LiveUpdateFeeder liveFeeder = new LiveUpdateFeeder("Live feeder thread", 6);
-        UnmodifiedPagesUpdateFeeder unmodifiedFeeder = new UnmodifiedPagesUpdateFeeder("Unmodified pages update feeder",
-                Thread.MIN_PRIORITY);
+        //MappingUpdateFeeder mappingFeeder = new MappingUpdateFeeder("Mapping feeder thread", 4);
 
+        OAIFeeder liveFeeder = new OAIFeeder("LiveFeeder", Thread.MIN_PRIORITY, Priority.LivePriority,
+                        LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
+                        3000, 1000, "2012-04-01T15:00:00Z", 0,
+                        "/home/jim/livedata/");
+        liveFeeder.startFeeder();
+
+        /*OAIFeeder unmodifiedFeeder = new OAIFeeder("UnmodifiedFeeder", Thread.MIN_PRIORITY, Priority.UnmodifiedPagePriority,
+                LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
+                30000, 1000, "2011-04-01T15:00:00Z", DateUtil.getDuration1MonthMillis(),
+                "/home/jim/livedata/");
+        unmodifiedFeeder.startFeeder();
+         */
         PageProcessor processor = new PageProcessor("Page processing thread", 8);
-
 
         PublishedDataCompressor compressor = new PublishedDataCompressor("PublishedDataCompressor", Thread.MIN_PRIORITY);
 
