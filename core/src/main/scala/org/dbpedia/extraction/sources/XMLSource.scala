@@ -102,7 +102,9 @@ private class OAIXMLSource(xml : Elem) extends Source
 {
     override def foreach[U](f : WikiPage => U) : Unit =
     {
-        val lang = (xml \\ "mediawiki" \ "@{http://www.w3.org/XML/1998/namespace}lang").head.text
+
+        val lang = if ( (xml \\ "mediawiki" \ "@{http://www.w3.org/XML/1998/namespace}lang").text == null) "en"
+                   else (xml \\ "mediawiki" \ "@{http://www.w3.org/XML/1998/namespace}lang").text
         val source = new XMLSource( (xml \\ "mediawiki").head.asInstanceOf[Elem], Language.apply(lang))
         source.foreach(wikiPage => {
           f(wikiPage)
