@@ -4,15 +4,9 @@ import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
-import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
-import org.dbpedia.extraction.live.priority.Priority;
-import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
-import org.dbpedia.extraction.sources.Source;
-import org.dbpedia.extraction.sources.XMLSource;
-import org.dbpedia.extraction.util.Language;
 import org.w3c.dom.Document;
 import scala.xml.*;
 
