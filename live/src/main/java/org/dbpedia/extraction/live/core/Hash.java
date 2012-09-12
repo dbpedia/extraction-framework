@@ -6,8 +6,6 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.delta.Delta;
 import org.dbpedia.extraction.live.delta.DeltaCalculator;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
-import org.dbpedia.extraction.live.main.Main;
-import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -347,9 +345,9 @@ public class Hash{
 
 
         if(hasDelta){
-
-            int itemPos = Arrays.asList(Main.recentlyUpdatedInstances).indexOf(new RecentlyUpdatedInstance(this.Subject));
-            Main.recentlyUpdatedInstances[itemPos].setHasDelta(true);
+            // TODO #Statistics add delta to statistics
+            // int itemPos = Arrays.asList(Main.recentlyUpdatedInstances).indexOf(new RecentlyUpdatedInstance(this.Subject));
+            // Main.recentlyUpdatedInstances[itemPos].setHasDelta(true);
         }
 
     }

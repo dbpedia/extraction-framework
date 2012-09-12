@@ -15,7 +15,7 @@ import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
 import org.dbpedia.extraction.destination.LiveUpdateDestination
 import org.dbpedia.extraction.live.job.LiveExtractionJob
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
-import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
+import org.dbpedia.extraction.live.statistics.StatisticsData
 import org.dbpedia.extraction.live.main.Main
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.dump.extract.ExtractionJob
@@ -149,21 +149,7 @@ object LiveExtractionConfigLoader extends ActionListener
 
     var liveDest : LiveUpdateDestination = null;
     val parser = WikiParser()
-    def updateStatistics(wikipageTitle: String, wikipageURL: String): Unit = {
-      //Increment the number of processed instances
-      Main.instancesUpdatedInMinute = Main.instancesUpdatedInMinute + 1;
-      Main.instancesUpdatedIn5Minutes = Main.instancesUpdatedIn5Minutes + 1;
-      Main.instancesUpdatedInHour = Main.instancesUpdatedInHour + 1;
-      Main.instancesUpdatedInDay = Main.instancesUpdatedInDay + 1;
-      Main.totalNumberOfUpdatedInstances = Main.totalNumberOfUpdatedInstances + 1;
 
-      val endingSlashPos = wikipageURL.lastIndexOf("/");
-
-      val dbpediaPageURL = "http://live.dbpedia.org/resource" + wikipageURL.substring(endingSlashPos);
-
-      Main.recentlyUpdatedInstances(instanceNumber) = new RecentlyUpdatedInstance(wikipageTitle, dbpediaPageURL, wikipageURL);
-      instanceNumber  = (instanceNumber + 1) % Main.recentlyUpdatedInstances.length;
-    }
     articlesSource.foreach(CurrentWikiPage =>
     {
       if(CurrentWikiPage.title.namespace == Namespace.Main ||
@@ -208,7 +194,8 @@ object LiveExtractionConfigLoader extends ActionListener
 
         //Updating information needed for statistics
 
-        updateStatistics(CurrentWikiPage.title.decoded, strWikipage)
+        // TODO #Statistics temporary solution for compatibillity, must be be updated soon
+        StatisticsData.addItem(CurrentWikiPage.title.decoded, strWikipage,strWikipage,0, System.currentTimeMillis)
       }
 
     });
