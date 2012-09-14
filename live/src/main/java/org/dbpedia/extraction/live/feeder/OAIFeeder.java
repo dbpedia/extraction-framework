@@ -155,7 +155,9 @@ public class OAIFeeder extends Thread {
     protected void handleFeedItem(Document doc) {
 
         long pageID = getPageID(doc);
-        latestResponseDate = getPageModificationDate(doc);
+        String tmpDate = getPageModificationDate(doc);
+        if (tmpDate != null || tmpDate != "")
+            latestResponseDate = tmpDate;
 
         addPageIDtoQueue(pageID, latestResponseDate);
     }

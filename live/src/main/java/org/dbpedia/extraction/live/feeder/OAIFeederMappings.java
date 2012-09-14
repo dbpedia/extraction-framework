@@ -33,7 +33,10 @@ public class OAIFeederMappings extends OAIFeeder  {
         scala.xml.Node element = scala.xml.XML.loadString(XMLUtil.toString(doc));
         org.dbpedia.extraction.sources.Source wikiPageSource = XMLSource.fromOAIXML((scala.xml.Elem) element);
 
-        latestResponseDate = getPageModificationDate(doc);
+        String tmpDate = getPageModificationDate(doc);
+        if (tmpDate != null || tmpDate != "")
+            latestResponseDate = tmpDate;
+
         // TODO move this function here
         MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, latestResponseDate );
 
