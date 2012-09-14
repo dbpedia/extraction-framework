@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.feeder;
 
+
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
@@ -14,6 +15,7 @@ import org.w3c.dom.NodeList;
 import java.io.File;
 import java.util.Iterator;
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: Dimitris Kontokostas
@@ -23,7 +25,7 @@ import java.util.Iterator;
  * or subclass and override "handleFeedItem" function
  */
 public class OAIFeeder extends Thread {
-    protected Logger logger;
+    protected static Logger logger;
     protected String feederName;
     protected int threadPriority;
     protected Priority queuePriority;
@@ -42,7 +44,7 @@ public class OAIFeeder extends Thread {
     protected String latestResponseDate;
 
     protected Iterator<Document> oaiRecordIterator;
-    private Boolean keepRunning = true;
+    private volatile boolean keepRunning = true;
 
     public OAIFeeder(String feederName, int threadPriority, Priority queuePriority,
                      String oaiUri, String oaiPrefix, String baseWikiUri,
@@ -77,8 +79,7 @@ public class OAIFeeder extends Thread {
             if (!lastResponseFile.exists()) {
                 //lastResponseFile.mkdirs();
                 lastResponseFile.createNewFile();
-            }
-            else {
+            } else {
                 latestResponseDate = Files.readFile(lastResponseFile).trim();
                 if (latestResponseDate == "")
                     latestResponseDate = defaultStartDateTime;
@@ -90,9 +91,8 @@ public class OAIFeeder extends Thread {
         return latestResponseDate;
     }
 
-    protected void setLastResponseDate(String responseDate) {
+    protected synchronized void setLastResponseDate(String responseDate) {
         Files.createFile(lastResponseFile, responseDate);
-        logger.warn("Writing " + responseDate + " to " + lastResponseFile.getAbsolutePath());
     }
 
     public void startFeeder() {
@@ -102,15 +102,8 @@ public class OAIFeeder extends Thread {
         }
     }
 
-    /* For future handling of SIGTERM Signal */
     public void stopFeeder() {
         keepRunning = false;
-
-
-    }
-
-    protected void exitFeeder() {
-        logger.warn("Writing last response date");
         setLastResponseDate(latestResponseDate);
     }
 
@@ -155,8 +148,7 @@ public class OAIFeeder extends Thread {
             }
 
         }
-        exitFeeder();
-
+        stopFeeder();
     }
 
     /* This function should be overwritten by sub classes */
