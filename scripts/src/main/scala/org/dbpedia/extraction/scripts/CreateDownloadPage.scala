@@ -317,14 +317,14 @@ def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Un
       "===Canonicalized Datasets===\n"+
       "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
       "\n"+
-      "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace //~http://dbpedia.org/resource/ //. For backwards compatibility, the N-Triples files (.nt, .nq) use URIs, e.g. //~http://dbpedia.org/resource/Bo%C3%B6tes //. The Turtle (.ttl) files use IRIs, e.g. //~http://dbpedia.org/resource/Boötes //.\n"
+      "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace //~http://dbpedia.org/resource/ //. For backwards compatibility, the N-Triples files (.nt, .nq) use URIs, e.g. //~http://dbpedia.org/resource/Bras%C3%ADlia //. The Turtle (.ttl) files use IRIs, e.g. //~http://dbpedia.org/resource/Brasília //.\n"
     }
     case DataI18NPage => {
       s+
       "===Internationalized Datasets===\n"+
       "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
       "\n"+
-      "The internationalized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. //~http://es.dbpedia.org/resource/Boötes//.\n"
+      "The internationalized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. //~http://pt.dbpedia.org/resource/Brasília//.\n"
     }
     case LinksPage => {
       s+
