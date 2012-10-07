@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
 import java.util.Locale
-import org.dbpedia.extraction.destinations.{Graph, Quad, Dataset}
+import org.dbpedia.extraction.destinations.{Quad, Dataset}
 import org.openrdf.model.{Literal, URI, Resource, Value}
 import org.openrdf.model.impl.ValueFactoryImpl
 import util.control.Breaks._
@@ -292,11 +292,11 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     }
     
     //remove duplicate triples
-    val quadsDistinct = quads.groupBy(_.renderNTriple).map(_._2.head).toList
+    val quadsDistinct = quads.groupBy(_.toString).map(_._2.head).toList
 
     //postprocessing (schema transformation)
     val quadsPostProcessed = if(postprocessor.isDefined && quadsDistinct.size > 0){
-        postprocessor.get.process(quadsDistinct, cache.blockURIs("page").stringValue).groupBy(_.renderNTriple).map(_._2.head).toList
+        postprocessor.get.process(quadsDistinct, cache.blockURIs("page").stringValue).groupBy(_.toString).map(_._2.head).toList
     } else quadsDistinct
     
     //sorting (by length, if equal length: alphabetical)
@@ -311,7 +311,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     val quadsWithStat = quadsSorted ::: List(statQuad)
 
     Logging.printMsg(""+quadsSorted.size+" quads extracted for "+entityId, 1)
-    quadsWithStat.foreach( q => { Logging.printMsg(q.renderNTriple, 1) } )
+    quadsWithStat.foreach( q => { Logging.printMsg(q.toString, 1) } )
     Logging.printMsg("finish "+subjectUri+" threadID="+Thread.currentThread().getId(), 2)
     
     quadsWithStat

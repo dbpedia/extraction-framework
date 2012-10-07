@@ -117,10 +117,48 @@
                 </exclusions>
             </dependency>
 
-        </dependencies>
+        <dependency>
+            <groupId>org.sweble.wikitext</groupId>
+            <artifactId>swc-engine</artifactId>
+            <version>1.1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+	        <groupId>de.fau.cs.osr.ptk</groupId>
+	        <artifactId>ptk-nodegen-maven-plugin</artifactId>
+	        <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openrdf</groupId>
+            <artifactId>openrdf</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+	        <groupId>org.openrdf</groupId>
+	        <artifactId>openrdf-model</artifactId>
+	        <version>1.2.7</version>
+        </dependency>
+
+
+    </dependencies>
+
     </dependencyManagement>
 
     <repositories>
+
+        <repository>
+          <id>osr-public-releases</id>
+          <name>OSR Public Releases</name>
+          <url>http://mojo.informatik.uni-erlangen.de/nexus/content/repositories/public-releases</url>
+        </repository>
+
+        <repository>
+          <id>osr-public-snapshots</id>
+          <name>OSR Public snapshots</name>
+          <url>http://mojo.informatik.uni-erlangen.de/nexus/content/repositories/public-snapshots</url>
+        </repository>
+
         <repository>
             <id>maven2-repository.dev.java.net</id>
             <name>Java.net Repository for Maven</name>
