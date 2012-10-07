@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 import sys.process._
-import org.dbpedia.extraction.dump.Extract
+import org.dbpedia.extraction.dump.extract.Extraction
 
 object Starter {
   def main(args:Array[String]) = {
@@ -14,7 +14,7 @@ object Starter {
 
       //invoke mvn
       //todo inject above properties
-      Extract.main(Array())
+      Extraction.main(Array())
     }
   }
 }
