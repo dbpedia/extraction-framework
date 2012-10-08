@@ -34,7 +34,8 @@ object SimpleWikiParser
 
     private val linkEnd = new Matcher(List(" ", "{","}", "[", "]", "\n", "\t"));
 
-    private val propertyValueOrEnd = new Matcher(List("=", "|", "}}"), true);
+    // '|=' is not valid wiki markup but safe to include, see http://sourceforge.net/tracker/?func=detail&atid=935521&aid=3572779&group_id=190976
+    private val propertyValueOrEnd = new Matcher(List("|=","=", "|", "}}"), true);
     private val propertyEnd = new Matcher(List("|", "}}"), true);
     private val templateParameterEnd = new Matcher(List("|", "}}}"), true);
     private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true);
