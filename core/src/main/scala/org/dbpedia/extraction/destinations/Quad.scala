@@ -3,7 +3,7 @@ package org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{OntologyProperty,OntologyType}
 import java.io.CharConversionException
-import org.openrdf.model._
+import org.openrdf.model.{Resource, URI, Value, Literal}
 import java.io.CharConversionException
 import java.io.CharConversionException
 import org.dbpedia.extraction.util.Language
@@ -88,10 +88,10 @@ class Quad(
   ) = this(
       language.locale.getLanguage, 
       dataset.name, 
-      subject.stringValue, 
-      predicate.stringValue, 
-      value.stringValue, 
-      context.stringValue, 
+      subject.stringValue(), 
+      predicate.stringValue(), 
+      value.stringValue(), 
+      context.stringValue(), 
       if(value.isInstanceOf[Literal] && value.asInstanceOf[Literal].getDatatype != null){
         value.asInstanceOf[Literal].getDatatype.toString
       } else if(value.isInstanceOf[Literal]) {
