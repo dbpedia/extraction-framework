@@ -65,7 +65,7 @@ object CreateMappingStats
             
             logger.info("creating statistics for "+language.wikiCode)
             
-            val finder = new Finder[File](inputDir, language)
+            val finder = new Finder[File](inputDir, language, "wiki")
             
             // Note: org.dbpedia.extraction.dump.extract.Extraction.Complete = "extraction-complete"
             // TODO: move that constant to core, or use config value
