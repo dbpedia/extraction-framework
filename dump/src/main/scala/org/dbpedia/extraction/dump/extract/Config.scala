@@ -30,6 +30,8 @@ extends ConfigParser(config)
   
   val source = config.getProperty("source", "pages-articles.xml")
 
+  val wikiName = config.getProperty("wikiName", "wiki")
+
   /** Local ontology file, downloaded for speed and reproducibility */
   val ontologyFile = getFile("ontology")
 

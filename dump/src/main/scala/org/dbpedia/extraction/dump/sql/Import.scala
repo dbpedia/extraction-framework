@@ -40,7 +40,7 @@ object Import {
     try {
       for (language <- languages) {
         
-        val finder = new Finder[File](baseDir, language)
+        val finder = new Finder[File](baseDir, language, "wiki")
         val tagFile = if (requireComplete) Download.Complete else "pages-articles.xml"
         val date = finder.dates(tagFile).last
         val file = finder.file(date, "pages-articles.xml")

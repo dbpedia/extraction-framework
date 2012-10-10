@@ -92,7 +92,7 @@ object CreateFreebaseLinks
     // output file, may be .gz or .bz2 zipped 
     val outFile = new File(args(5))
     
-    val finder = new Finder[File](dir, Language.English)
+    val finder = new Finder[File](dir, Language.English, "wiki")
     val date = finder.dates("download-complete").last
     
     def find(dataset: Dataset): File = {

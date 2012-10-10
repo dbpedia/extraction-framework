@@ -14,7 +14,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, language: Language, fileNa
 {
   private val DateLink = """<a href="(\d{8})/">""".r
   
-  private val finder = new Finder[File](baseDir, language)
+  private val finder = new Finder[File](baseDir, language, "wiki")
   private val wiki = finder.wikiName
   private val mainPage = new URL(baseUrl, wiki+"/") // here the server does NOT use index.html 
   private val mainDir = new File(baseDir, wiki)
