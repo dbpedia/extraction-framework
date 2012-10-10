@@ -11,7 +11,7 @@ import IOUtils._
  */
 class QuadReader(baseDir: File, val language: Language, suffix: String) {
   
-  private val finder = new Finder[File](baseDir, language)
+  private val finder = new Finder[File](baseDir, language, "wiki")
   
   private var date: String = null
   

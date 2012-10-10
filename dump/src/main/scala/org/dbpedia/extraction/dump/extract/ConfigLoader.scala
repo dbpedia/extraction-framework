@@ -43,7 +43,7 @@ class ConfigLoader(config: Config)
      */
     private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: Extractor]]) : ExtractionJob =
     {
-        val finder = new Finder[File](config.dumpDir, lang)
+        val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
         val date = latestDate(finder)
         
@@ -184,7 +184,7 @@ class ConfigLoader(config: Config)
     //language-independent val
     private lazy val _commonsSource =
     {
-      val finder = new Finder[File](config.dumpDir, Language("commons"))
+      val finder = new Finder[File](config.dumpDir, Language("commons"), config.wikiName)
       val date = latestDate(finder)
       val file = finder.file(date, config.source)
       XMLSource.fromReader(reader(file), Language.Commons, _.namespace == Namespace.File)
@@ -194,5 +194,5 @@ class ConfigLoader(config: Config)
       val fileName = if (config.requireComplete) Download.Complete else config.source
       finder.dates(fileName).last
     }
-    
 }
+

@@ -2,12 +2,16 @@ package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{OntologyProperty,OntologyType}
+import java.io.CharConversionException
+import org.openrdf.model.{Resource, URI, Value, Literal}
+import java.io.CharConversionException
+import java.io.CharConversionException
 import org.dbpedia.extraction.util.Language
 import Quad._
 
 /**
- * Represents a statement.
- * 
+ * Represents a statement in the N-Quads format
+ * @see http://sw.deri.org/2008/07/n-quads/
  * @param language ISO code, may be null
  * @param dataset DBpedia dataset name, may be null
  * @param subject URI/IRI, must not be null
@@ -37,13 +41,13 @@ class Quad(
 )
 {
   def this(
-    language: Language,
-    dataset: Dataset,
-    subject: String,
-    predicate: String,
-    value: String,
-    context: String,
-    datatype: Datatype
+    language : Language,
+    dataset : Dataset,
+    subject : String,
+    predicate : String,
+    value : String,
+    context : String,
+    datatype : Datatype
   ) = this(
       language.isoCode,
       dataset.name,
@@ -72,10 +76,43 @@ class Quad(
       findType(datatype, predicate.range)
     )
 
-  // Validate input
-  if (subject == null) throw new NullPointerException("subject")
-  if (predicate == null) throw new NullPointerException("predicate")
-  if (value == null) throw new NullPointerException("value")
+
+  //a constructor for openrdf
+  def this(
+    language : Language,
+    dataset : Dataset,
+    subject : Resource,
+    predicate : URI,
+    value : Value,
+    context : Resource
+  ) = this(
+      language.locale.getLanguage, 
+      dataset.name, 
+      subject.stringValue(), 
+      predicate.stringValue(), 
+      value.stringValue(), 
+      context.stringValue(), 
+      if(value.isInstanceOf[Literal] && value.asInstanceOf[Literal].getDatatype != null){
+        value.asInstanceOf[Literal].getDatatype.toString
+      } else if(value.isInstanceOf[Literal]) {
+        "http://www.w3.org/2001/XMLSchema#string"
+      } else {
+        null
+      }
+  )
+
+  //Validate input
+	if(subject == null) throw new NullPointerException("subject")
+	if(predicate == null) throw new NullPointerException("predicate")
+	if(value == null) throw new NullPointerException("value")
+	if(context == null) throw new NullPointerException("context")
+
+    if(value.isEmpty) throw new IllegalArgumentException("Value is empty")
+
+	//what does that do? is it just to trigger exceptions?
+	//new URI(subject)
+	//new URI(context)
+	//if(datatype == null) new URI(value)
   
   def copy(
     dataset: String = this.dataset,
@@ -94,7 +131,7 @@ class Quad(
     context,
     datatype
   )
-  
+
   override def toString() = {
    "Quad("+
    "dataset="+dataset+","+
@@ -106,6 +143,10 @@ class Quad(
    "context="+context+
    ")"
   }
+
+    override def equals(obj:Any) : Boolean = {
+        obj.isInstanceOf[Quad] && obj.asInstanceOf[Quad].toString.equals(this.toString)
+    }
 }
 
 object Quad

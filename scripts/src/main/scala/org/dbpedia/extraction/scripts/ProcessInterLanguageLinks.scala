@@ -173,7 +173,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
    * @param part file name part, e.g. interlanguage-links-see-also-chapters
    */
   private def find(langCode: Int, part: String, auto: Boolean = false): File = {
-    val finder = new Finder[File](baseDir, languages(langCode))
+    val finder = new Finder[File](baseDir, languages(langCode), "wiki")
     val name = part+fileSuffix
     var date = dates(langCode)
     if (date == null) {

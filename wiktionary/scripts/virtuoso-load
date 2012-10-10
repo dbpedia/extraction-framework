@@ -1,0 +1,22 @@
+#!/usr/bin/php -q
+<?php 
+if($argc < 3){
+  echo "usage: ".$argv[0]." <init> <language>+".PHP_EOL.
+	"init [true|false] true if DB should be emptied first".PHP_EOL.
+	"<language> foldername in output folder, at least one".PHP_EOL;
+  exit(1);
+}
+$init = $argv[1];
+$languages =  array_slice($argv, 2);
+$pwd = getcwd().DIRECTORY_SEPARATOR;
+$cmd = "SET AUTOCOMMIT OFF; main('".$init."', vector('".implode("', '", $languages)."'), '$pwd'); SET AUTOCOMMIT ON;";
+$file = "scripts".DIRECTORY_SEPARATOR."config.json";
+$config = json_decode(file_get_contents($file), true);
+
+$host = $config['host'];
+$user = $config['user'];
+$pass = $config['pass'];
+$isql = $config['isql'];
+$isql = "$isql $host $user $pass \"scripts".DIRECTORY_SEPARATOR."load.isql\" \"EXEC=$cmd\" ";
+echo $isql.PHP_EOL;
+passthru($isql);
