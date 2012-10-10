@@ -2,16 +2,16 @@ package org.dbpedia.helper;
 
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
-import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.WikiUtil;
 
 import java.io.StringWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static org.dbpedia.extraction.util.RichString.toRichString;
+import static org.dbpedia.extraction.util.RichString.wrapString;
 
 /*
 import org.openrdf.model.impl.StatementImpl;
@@ -34,7 +34,7 @@ import org.openrdf.rio.ntriples.NTriplesUtil;*/
 public class Triple extends StatementImpl {
 
     //Initializing the Logger
-    private static final Logger logger = Logger.getLogger(Triple.class);
+    private static final Logger logger = Logger.getLogger(Triple.class.getName());
     private static String pageCacheKey = null;
     private static Resource pageCacheValue = null;
 
@@ -59,10 +59,10 @@ public class Triple extends StatementImpl {
 
         }
         catch(NoSuchAlgorithmException nsae){
-            logger.warn("FAILED to create hash code for " + this.toNTriples(), nsae);
+            logger.log(Level.WARNING, "FAILED to create hash code for " + this.toNTriples(), nsae);
         }
         catch(Exception exp){
-            logger.warn(exp.getMessage(), exp);
+            logger.log(Level.WARNING, exp.getMessage(), exp);
         }
         return hashCode;
     }
@@ -80,26 +80,30 @@ public class Triple extends StatementImpl {
     public String toNTriples()
     {
         StringWriter out = new StringWriter();
+        /*String strNTriples = NTriplesUtil.toNTriplesString(this.getSubject()) + " " +
+            NTriplesUtil.toNTriplesString(this.getPredicate()) + " " +
+            NTriplesUtil.toNTriplesString(this.getObject()) + " .\n" ;*/
 
         Model ntriplesModel = ModelFactory.createDefaultModel();
 
-        ntriplesModel.add(this.getSubject(), this.getPredicate(), this.getObject());
+        ntriplesModel.add(ResourceFactory.createStatement(this.getSubject(), this.getPredicate(), this.getObject()));
         ntriplesModel.write(out, "N-TRIPLE");
+
 
         return out.toString();
     }
     public static Resource page(String pageID) {
        if(!pageID.equals(pageCacheKey)){
-           String encPageID = toRichString(WikiUtil.wikiEncode(pageID)).capitalize(Language.apply(LiveOptions.options.get("language")).locale());
+           String encPageID = wrapString(WikiUtil.wikiEncode(pageID)).capitalize(Language.English().locale());
            String strSubstring = encPageID.substring(0,1);
            String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
-
+           //TODO make resource domain configurable
            String resourceURI = "http://dbpedia.org/resource/"+ returnPageID;
            Resource uri = ResourceFactory.createResource(resourceURI);
            pageCacheKey = pageID;
            pageCacheValue = uri;
        }
        return pageCacheValue;
-    }
+   }
 
 }
