@@ -26,7 +26,7 @@ public class SQLFileReader {
 
 
     private static final String FILENAME = "./SqlLog.sql";
-    private static final String TABLENAME = "dbpedia_triples";
+    private static final String TABLENAME = "DBPEDIA_TRIPLES";
     private static final String FIELD_OAIID = "oaiid";
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";
