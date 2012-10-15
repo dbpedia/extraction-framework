@@ -24,8 +24,8 @@ public class DeltaCalculator {
     //Initializing the Logger
     private static Logger logger = Logger.getLogger(DeltaCalculator.class);
 
-    private static final String DBPEDIA_TABLENAME = "dbpedia_triples";
-    private static final String DBPEDIA_DIFF_TABLENAME = "dbpedia_triples_diff";
+    private static final String DBPEDIA_TABLENAME = "DBPEDIA_TRIPLES";
+    private static final String DBPEDIA_DIFF_TABLENAME = "DBPEDIA_TRIPLES_DIFF";
     private static final String FIELD_OAIID = "oaiid";
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";

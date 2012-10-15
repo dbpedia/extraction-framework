@@ -34,8 +34,8 @@ public class Hash{
     private static Logger logger = Logger.getLogger(Hash.class);
 
     //Constant initialization
-    private static final String TABLENAME = "dbpedia_triples";
-    private static final String DIFF_TABLENAME = "dbpedia_triples_diff";
+    private static final String TABLENAME = "DBPEDIA_TRIPLES";
+    private static final String DIFF_TABLENAME = "DBPEDIA_TRIPLES_DIFF";
     private static final String FIELD_OAIID = "oaiid";
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";
@@ -319,7 +319,7 @@ public class Hash{
             return;
         }
 
-        CallableStatement updateOldDiffTriplesStmt = jdbc.prepareCallableStatement("update_dbpedia_triples_diff_for_resource(?,?,?,?)",
+        CallableStatement updateOldDiffTriplesStmt = jdbc.prepareCallableStatement("DBPEDIA_UPDATE_TRIPLES_DIFF_FOR_RESOURCE(?,?,?,?)",
                 "Hash::updateDB");
 
         String addedTripleString = delta.formulateAddedTriplesAsNTriples(true);
@@ -400,12 +400,12 @@ public class Hash{
 
         Delta delta = DeltaCalculator.calculateDiff(this.Subject, originalHashes, newJSONObject);
         //First delete old diff triples
-        CallableStatement deleteOldDiffTriplesStsmt = jdbc.prepareCallableStatement("DELETE_ALL_RESOURCE_TRIPLES_FROM_dbpedia_triples_diff(?)",
+        CallableStatement deleteOldDiffTriplesStsmt = jdbc.prepareCallableStatement("DBPEDIA_DELETE_ALL_RESOURCE_TRIPLES_FROM_DBPEDIA_TRIPLES_DIFF_TABLE(?)",
                 "Hash::updateDB");
         jdbc.executeCallableStatement(deleteOldDiffTriplesStsmt,new String[]{this.Subject});
 
         //Insert the added triples as an N-Triples string
-        CallableStatement insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)",
+        CallableStatement insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("DBPEDIA_INSERT_IN_DBPEDIA_TRIPLES_DIFF_TABLE(?, ?, ?)",
                 "Hash::updateDB");
         jdbc.executeCallableStatement(insertNewDiffTriplesStsmt,new String[]{this.Subject, Integer.toString(Delta.DiffType.ADDED.getCode()),
                 delta.formulateAddedTriplesAsNTriples(true)});
