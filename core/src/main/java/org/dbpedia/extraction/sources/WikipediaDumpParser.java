@@ -65,7 +65,7 @@ public class WikipediaDumpParser
    * This parser is currently only compatible with the 0.6 format.
    * TODO: make the parser smarter, ignore elements that are not present in older formats.
    */
-  private final String _namespace = "http://www.mediawiki.org/xml/export-0.6/";
+  private final String _namespace = null;  //"http://www.mediawiki.org/xml/export-0.6/";
   
   /**
    * Language used to parse page titles. If null, get language from siteinfo.
