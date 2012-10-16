@@ -254,11 +254,21 @@ extends Extractor
         }
 
         // Re-generate wiki text for found range of nodes
-        val text = pageNode.children.slice(start, end)
+        var text = pageNode.children.slice(start, end)
                 .filter(renderNode)
                 .map(_.toWikiText)
                 .mkString("").trim
-        
+
+        // Strip HTML tags (when not used with non-modified wiki)
+        try {
+          val stripped : String = scala.xml.parsing.XhtmlParser(scala.io.Source.fromString("<span>" + text + "</span>")).text.trim
+          text = stripped
+        }
+        catch
+        {
+          case ex  : Exception =>   ;
+        }
+
         // decode HTML entities - the result is plain text
         val coder = new HtmlCoder(XmlCodes.NONE)
         coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
