@@ -26,14 +26,14 @@ create table "DB"."DBA"."DBPEDIA_TRIPLES_DIFF"
 
 ALTER TABLE "DB"."DBA"."DBPEDIA_TRIPLES_DIFF"
   ADD CONSTRAINT "oaiid_fk" FOREIGN KEY ("oaiid")
-    REFERENCES "DB"."DBA"."dbpedia_triples" ("oaiid");
+    REFERENCES "DB"."DBA"."DBPEDIA_TRIPLES" ("oaiid");
 
 ALTER TABLE "DB"."DBA"."DBPEDIA_TRIPLES_DIFF"
   ADD CONSTRAINT "diff_type_id_fk" FOREIGN KEY ("diff_type_id")
-    REFERENCES "DB"."DBA"."TRIPLE_DIFF_TYPE" ("DIFF_TYPE_ID");
+    REFERENCES "DB"."DBA"."DBPEDIA_TRIPLES_DIFF_TYPE" ("DIFF_TYPE_ID");
 
 
-CREATE PROCEDURE DBPEDIA_UPDATE_TRIPLES_DIFF_FOR_RESOURCE(IN param_resource VARCHAR(510), IN param_added_triple LONG VARCHAR,
+create procedure DBPEDIA_UPDATE_TRIPLES_DIFF_FOR_RESOURCE(IN param_resource VARCHAR(510), IN param_added_triple LONG VARCHAR,
 IN param_deleted_triple LONG VARCHAR, IN param_modified_triple LONG VARCHAR)
 
 {
