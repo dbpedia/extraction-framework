@@ -176,9 +176,24 @@ extends Extractor
      */
     private def readInAbstract(inputStream : InputStream) : String =
     {
-        // for XML format
-        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
-        (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      // for XML format
+      val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
+      val abstractText = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      cleanHTML(abstractText);
+    }
+
+    private def cleanHTML(html : String) : String =
+    {
+      var cleaned = html
+      try {
+         val stripped : String = scala.xml.parsing.XhtmlParser(scala.io.Source.fromString("<span>" + html + "</span>")).text.trim
+         cleaned = stripped
+       }
+       catch
+       {
+         case ex  : Exception =>   ;
+       }
+       cleaned
     }
 
     private def postProcess(pageTitle: WikiTitle, text: String): String =
@@ -258,16 +273,6 @@ extends Extractor
                 .filter(renderNode)
                 .map(_.toWikiText)
                 .mkString("").trim
-
-        // Strip HTML tags (when not used with non-modified wiki)
-        try {
-          val stripped : String = scala.xml.parsing.XhtmlParser(scala.io.Source.fromString("<span>" + text + "</span>")).text.trim
-          text = stripped
-        }
-        catch
-        {
-          case ex  : Exception =>   ;
-        }
 
         // decode HTML entities - the result is plain text
         val coder = new HtmlCoder(XmlCodes.NONE)
