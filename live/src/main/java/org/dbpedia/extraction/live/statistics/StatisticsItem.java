@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.live.statistics;
 
-import scala.math.Ordering;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Dimitris Kontokostas
@@ -48,8 +46,20 @@ public class StatisticsItem implements Comparable<StatisticsItem> {
         return pageTimestamp;
     }
 
-    public boolean isOlderThanMillis(long refTime, long duration){
+    public boolean isOlderThanMillis(long refTime, long duration) {
         return (refTime - pageTimestamp) > duration;
+    }
+
+    public String getPageTitle() {
+        return pageName;
+    }
+
+    public String getDBpediaURI() {
+        return pageDBpedia;
+    }
+
+    public String getWikipediaURI() {
+        return pageWikipedia;
     }
 
     public int getPageID() {
@@ -72,7 +82,7 @@ public class StatisticsItem implements Comparable<StatisticsItem> {
         }
     }
 
-    public String toString(){
-        return pageName + "\t" + pageDBpedia + "\t" +  pageWikipedia + "\t" + pageTimestamp + "\t" + pageHasDelta;
+    public String toString() {
+        return pageName + "\t" + pageDBpedia + "\t" + pageWikipedia + "\t" + pageTimestamp + "\t" + pageHasDelta;
     }
 }
