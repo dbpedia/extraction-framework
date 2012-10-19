@@ -165,7 +165,9 @@ object LiveExtractionConfigLoader extends ActionListener
         // English language, then we should remove that part as it will repeated without any advantage.
 //        val semicolonPosition = CurrentPageNode.title.decodedWithNamespace.indexOf(";");
 //        val pageNodeTitleWithoutLanguage = CurrentPageNode.title.toString.substring(0, semicolonPosition)
-        val strWikipage = "http://" + CurrentPageNode.title.language + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
+        // TODO change these correct these uris
+        val strWikipage = "http://" + CurrentPageNode.title.language.isoCode + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
+        val strDBppage = "http://" + CurrentPageNode.title.language.isoCode + ".dbpedia.org/resource/" + CurrentPageNode.title.encodedWithNamespace ;
         liveDest = new LiveUpdateDestination(CurrentPageNode.title, language.locale.getLanguage(),
           CurrentPageNode.id.toString)
 
@@ -195,7 +197,7 @@ object LiveExtractionConfigLoader extends ActionListener
         //Updating information needed for statistics
 
         // TODO #Statistics temporary solution for compatibillity, must be be updated soon
-        StatisticsData.addItem(CurrentWikiPage.title.decoded, strWikipage,strWikipage,0, System.currentTimeMillis)
+        StatisticsData.addItem(CurrentWikiPage.title.decoded, strDBppage,strWikipage,0, System.currentTimeMillis)
       }
 
     });

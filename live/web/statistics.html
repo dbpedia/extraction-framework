@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DBpedia live statistics</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="refresh" content="60"/>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+  <link rel="stylesheet" href="statistics.css" type="text/css"/>
+  <script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+      // Get JSON statistics data
+      $.getJSON('statistics.json', function(data) {
+        // Update general statistics
+        var timestamp = data.timestamp;
+        $("#page-timestamp").html(data.timestamp);
+        $("#updates-1m").html(data.upd1m);
+        $("#updates-5m").html(data.upd5m);
+        $("#updates-1h").html(data.upd1h);
+        $("#updates-1d").html(data.upd1d);
+        $("#updates-at").html(data.updat);
+        
+        // Generate table
+        var table='<table class="detail-table">';
+        var items = data.latest;
+        for(var i = 0; i < items.length; i++){
+          var date = new Date(items[i].timestamp*1000);
+          var formattedTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+          table+='<tr><td class="id">'+i+
+          '</td><td class="title">'+items[i].title+
+          '</td><td class="uri">'+ ( timestamp - items[i].timestamp ) +' seconds ago</td>' +
+          '</td><td class="uri"><a href="'+items[i].dbpediaURI+'">DBpedia</a></td>' +
+          '</td><td class="uri"><a href="'+items[i].wikipediaURI+'">Wikipedia</a></td>' +
+          '</td><td class="uri">'+items[i].delta+'</td>' +
+          '</tr>'; 
+        }
+        table+='</table>';
+        $("#entity-details").html(table);
+      });
+    });
+  </script>
+
+</head>
+  
+<body>
+ 
+<h1 >Simple statistics for the DBpedia Dutch live extraction process.</h1>
+<hr/>
+<p>This page was generated <span id="page-timestamp"></span> seconds ago.</p>
+<hr/>
+
+<h2>Entity Statistics</h2>
+Number of instances updated within:
+<ul class ="entity-statistics">
+<li class="entity-statistics-item">last minute:    <span id="updates-1m"></span></li>
+<li class="entity-statistics-item">last 5 minutes: <span id="updates-5m"></span></li>
+<li class="entity-statistics-item">Last hour:      <span id="updates-1h"></span></div>
+<li class="entity-statistics-item">last day:       <span id="updates-1d"></span></li>
+<li class="entity-statistics-item">all time:       <span id="updates-at"></span></li>
+</ul>
+
+<h2>Recently Updated Entities</h2>
+<div id="entity-details"></div>
+
+</body>
+</html>
+

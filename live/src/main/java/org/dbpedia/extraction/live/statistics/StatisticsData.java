@@ -108,21 +108,70 @@ public class StatisticsData {
         }
         stats1d = statisticsTimestampQueue.size();
 
-        String detailedInstances = "";
+        // generate json contents
+        StringBuffer sb = new StringBuffer("");
+
+        sb.append("{");
+        sb.append("\"upd1m\": \"" + stats1m + "\",\n");
+        sb.append("\"upd5m\": \"" + stats5m + "\",\n");
+        sb.append("\"upd1h\": \"" + stats1h + "\",\n");
+        sb.append("\"upd1d\": \"" + stats1d + "\",\n");
+        sb.append("\"updat\": \"" + statsAll + stats1d + "\",\n");
+        sb.append("\"timestamp\": \"" + System.currentTimeMillis() + "\",\n");
+        sb.append("\"latest\": [");
+
+
         Iterator<StatisticsItem> detIter = statisticsDetailedQueue.iterator();
         while (detIter.hasNext()) {
-            detailedInstances += detIter.next().toString() + "\r\n";
+            StatisticsItem item = detIter.next();
+            sb.append("\n{");
+            sb.append("\"title\":\"" + item.getPageTitle() + "\",");
+            sb.append("\"dbpediaURI\": \"" + item.getDBpediaURI() + "\",");
+            sb.append("\"wikipediaURI\": \"" + item.getWikipediaURI() + "\",");
+            sb.append("\"timestamp\": \"" + item.getTimestamp() + "\",");
+            sb.append("\"delta\": \"" + item.getHasDelta() + "\"");
+            sb.append("}");
+            if (detIter.hasNext())
+                sb.append(",");
         }
+        sb.append("]}");
 
-        // generate file contents
-        String retValue = "";
-        retValue += stats1m + "\r\n";
-        retValue += stats5m + "\r\n";
-        retValue += stats1h + "\r\n";
-        retValue += stats1d + "\r\n";
-        retValue += statsAll + stats1d + "\r\n";
-        retValue += detailedInstances;
-
-        return retValue;
+        return sb.toString();
     }
 }
+
+/*
+
+ {
+     "upd-1m": "99",
+     "upd-5m": "478",
+     "upd-1h": "3452",
+     "upd-1d": "3452",
+     "upd-at": "3452",
+     "latest": [
+         {
+             "title": "Yuko Matsumiya",
+             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
+             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
+             "timestamp": "1350637099091",
+             "delta": "false"
+         },
+         {
+             "title": "Yuko Matsumiya",
+             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
+             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
+             "timestamp": "1350637099091",
+             "delta": "false"
+         },
+         {
+             "title": "Yuko Matsumiya",
+             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
+             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
+             "timestamp": "1350637099091",
+             "delta": "false"
+         }
+     ]
+ }
+
+
+* */
