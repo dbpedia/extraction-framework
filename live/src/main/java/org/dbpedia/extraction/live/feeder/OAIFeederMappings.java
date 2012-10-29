@@ -38,8 +38,17 @@ public class OAIFeederMappings extends OAIFeeder  {
             latestResponseDate = tmpDate;
 
         // TODO move this function here
-        if (!isPageDeleted(doc))
-            MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, latestResponseDate );
+        if (!isPageDeleted(doc)) {
+            scala.collection.immutable.List<Object> ids = MappingAffectedPagesHelper.GetMappingPages(wikiPageSource);
+            for (int i = 0; i<ids.length(); i++ ) {
+                scala.collection.Iterator<Object> iter = ids.iterator();
+                while (iter.hasNext())
+                    addPageIDtoQueue((Long) iter.next(), latestResponseDate);
+            }
+
+
+
+        }
         else {
             // TODO find which template the deleted infobox was referring to
         }
