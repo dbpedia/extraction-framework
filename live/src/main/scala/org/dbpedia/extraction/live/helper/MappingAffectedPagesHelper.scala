@@ -3,15 +3,11 @@ package org.dbpedia.extraction.live.helper
 import java.net.URL
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.live.util.XMLUtil
-import org.dbpedia.extraction.sources.{XMLSource, Source}
-import org.dbpedia.extraction.live.extraction.LiveExtractionManager
+import org.dbpedia.extraction.sources.{Source}
 import xml.{XML, Elem}
-import java.util.PriorityQueue
-import org.dbpedia.extraction.live.priority.PagePriority
-import org.dbpedia.extraction.live.priority.Priority
-import org.dbpedia.extraction.live.main._;
+
 import org.dbpedia.extraction.live.core.LiveOptions
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,30 +19,23 @@ import org.dbpedia.extraction.live.core.LiveOptions
  */
 
 object MappingAffectedPagesHelper {
-def GetMappingPages(src : Source, lastResponseDate :String ): Unit ={
+  def GetMappingPages(src : Source) : List[Long] = {
+
+    val langCode = LiveOptions.options.get("language")
+    val mappingNamespace = "Mapping_" + langCode + ":"
+    val language = Language.apply(langCode)
+    var idList : List[Long]  = List()
 
     src.foreach(CurrentWikiPage =>
-      {
-    	  val language = Language.apply(LiveOptions.options.get("language"))
-          val mappingTitle = WikiTitle.parse(CurrentWikiPage.title.toString, language)
-          val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
+    {
+        if (CurrentWikiPage.title.encodedWithNamespace.startsWith(mappingNamespace)) {
 
+          val templateTitle = new WikiTitle(CurrentWikiPage.title.decoded, Namespace.Template, language)
           val wikiApiUrl = new URL(LiveOptions.options.get("localApiURL"))
           val api = new WikiApi(wikiApiUrl, language)
-
-          val pageIDs = api.retrieveTemplateUsageIDs(templateTitle, 500);
-          pageIDs.foreach(CurrentPageID => {
-            Main.pageQueue.add(new PagePriority(CurrentPageID, Priority.MappingPriority, lastResponseDate));
-
-            //We add the pageID here immediately without checking if it exist first, as put checks if it exists the old value will be replace,
-            //so if it does not exist already it will be added, if it was added with lower priority, its priority will increase, and if it already exists with
-            //with the same priority then no change
-            Main.existingPagesTree.put(CurrentPageID, true);//Also insert it into the TreeMap, so it will not be double-processed
-          }
-        );
-        //println("The size of the pageQueue = "+ Main.pageQueue.size())
-        //println(Main.pageQueue)
-      }
-    );
+          idList = idList :::  api.retrieveTemplateUsageIDs(templateTitle);
+        }
+    });
+    idList
   }
 }
