@@ -38,7 +38,11 @@ public class OAIFeederMappings extends OAIFeeder  {
             latestResponseDate = tmpDate;
 
         // TODO move this function here
-        MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, latestResponseDate );
+        if (!isPageDeleted(doc))
+            MappingAffectedPagesHelper.GetMappingPages(wikiPageSource, latestResponseDate );
+        else {
+            // TODO find which template the deleted infobox was referring to
+        }
 
 
     }

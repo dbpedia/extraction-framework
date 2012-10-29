@@ -121,6 +121,11 @@ public class OAIFeeder extends Thread {
         return new Long(strPageID);
     }
 
+    protected boolean isPageDeleted(Document doc) {
+        // TODO <header status="deleted"> vs <header>
+        return doc.getElementsByTagName("header").item(0).getAttributes().getLength() != 0;
+    }
+
     protected void addPageIDtoQueue(long pageID, String modificationDate) {
 
         Main.pageQueue.add(new PagePriority(pageID, queuePriority, modificationDate));
@@ -159,6 +164,10 @@ public class OAIFeeder extends Thread {
         if (tmpDate != null || tmpDate != "")
             latestResponseDate = tmpDate;
 
-        addPageIDtoQueue(pageID, latestResponseDate);
+        if (!isPageDeleted(doc))
+            addPageIDtoQueue(pageID, latestResponseDate);
+        else {
+            // TODO page deleted case
+        }
     }
 }
