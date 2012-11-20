@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.feeder;
 
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.helper.MappingAffectedPagesHelper;
 import org.dbpedia.extraction.live.priority.Priority;
 import org.dbpedia.extraction.live.util.XMLUtil;
@@ -13,46 +14,43 @@ import org.w3c.dom.Document;
  * Time: 10:08 AM
  * An OAI Feeder for the mappings wiki
  */
-public class OAIFeederMappings extends OAIFeeder  {
+public class OAIFeederMappings extends OAIFeeder {
+
+    private String mappingNamespace = "";
 
     public OAIFeederMappings(String feederName, int threadPriority, Priority queuePriority,
-                     String oaiUri, String oaiPrefix, String baseWikiUri,
-                     long pollInterval, long sleepInterval, String defaultStartDateTime, long relativeEndFromNow,
-                     String folderBasePath) {
+                             String oaiUri, String oaiPrefix, String baseWikiUri,
+                             long pollInterval, long sleepInterval, String defaultStartDateTime, long relativeEndFromNow,
+                             String folderBasePath) {
 
         super(feederName, threadPriority, queuePriority,
-             oaiUri, oaiPrefix, baseWikiUri,
-             pollInterval, sleepInterval, defaultStartDateTime, relativeEndFromNow,
-             folderBasePath);
+                oaiUri, oaiPrefix, baseWikiUri,
+                pollInterval, sleepInterval, defaultStartDateTime, relativeEndFromNow,
+                folderBasePath);
+
+        String langCode = LiveOptions.options.get("language");
+        mappingNamespace = "Mapping " + langCode + ":";
 
     }
 
     @Override
-    protected void handleFeedItem(Document doc) {
+    protected void handleFeedItem(FeederItem item) {
 
-        scala.xml.Node element = scala.xml.XML.loadString(XMLUtil.toString(doc));
-        org.dbpedia.extraction.sources.Source wikiPageSource = XMLSource.fromOAIXML((scala.xml.Elem) element);
+        // ignore irrelevant mappings
+        if (!item.getItemName().startsWith(mappingNamespace))
+            return;
 
-        String tmpDate = getPageModificationDate(doc);
-        if (tmpDate != null || tmpDate != "")
-            latestResponseDate = tmpDate;
-
-        // TODO move this function here
-        if (!isPageDeleted(doc)) {
-            scala.collection.immutable.List<Object> ids = MappingAffectedPagesHelper.GetMappingPages(wikiPageSource);
-            for (int i = 0; i<ids.length(); i++ ) {
-                scala.collection.Iterator<Object> iter = ids.iterator();
-                while (iter.hasNext())
-                    addPageIDtoQueue((Long) iter.next(), latestResponseDate);
-            }
-
-
-
-        }
-        else {
+        if (!item.isDeleted()) {
+            scala.collection.immutable.List<Object> ids = MappingAffectedPagesHelper.GetMappingPages(item.getItemName());
+            scala.collection.Iterator<Object> iter = ids.iterator();
+            while (iter.hasNext())
+                addPageIDtoQueue((Long) iter.next(), latestResponseDate);
+            iter = null;
+            ids  = null;
+        } else {
             // TODO find which template the deleted infobox was referring to
         }
 
-
+        latestResponseDate = item.getModificationDate();
     }
 }

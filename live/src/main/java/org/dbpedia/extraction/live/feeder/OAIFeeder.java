@@ -8,9 +8,6 @@ import org.dbpedia.extraction.live.priority.Priority;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
 import org.dbpedia.extraction.live.util.OAIUtil;
-import org.dbpedia.extraction.live.util.XMLUtil;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
 import java.io.File;
 import java.util.Iterator;
@@ -43,7 +40,7 @@ public class OAIFeeder extends Thread {
     protected File lastResponseFile;
     protected String latestResponseDate;
 
-    protected Iterator<Document> oaiRecordIterator;
+    protected Iterator<FeederItem> oaiRecordIterator;
     private volatile boolean keepRunning = true;
 
     public OAIFeeder(String feederName, int threadPriority, Priority queuePriority,
@@ -70,7 +67,7 @@ public class OAIFeeder extends Thread {
         lastResponseFile = new File(folderBasePath + feederName + ".dat");
 
         getLastResponseDate();
-        oaiRecordIterator = OAIUtil.createEndlessRecordIterator(oaiUri, latestResponseDate, relativeEndFromNow, pollInterval, sleepInterval);
+        oaiRecordIterator = OAIUtil.createEndlessFeederItemIterator(oaiUri, latestResponseDate, relativeEndFromNow, pollInterval, sleepInterval);
     }
 
     protected String getLastResponseDate() {
@@ -107,25 +104,6 @@ public class OAIFeeder extends Thread {
         setLastResponseDate(latestResponseDate);
     }
 
-    protected String getPageModificationDate(Document doc) {
-        return XMLUtil.getPageModificationDate(doc);
-    }
-
-    protected long getPageID(Document doc) {
-
-        NodeList nodes = doc.getElementsByTagName("identifier");
-        String strFullPageIdentifier = nodes.item(0).getChildNodes().item(0).getNodeValue();
-        int colonPos = strFullPageIdentifier.lastIndexOf(":");
-        String strPageID = strFullPageIdentifier.substring(colonPos + 1);
-
-        return new Long(strPageID);
-    }
-
-    protected boolean isPageDeleted(Document doc) {
-        // TODO <header status="deleted"> vs <header>
-        return doc.getElementsByTagName("header").item(0).getAttributes().getLength() != 0;
-    }
-
     protected void addPageIDtoQueue(long pageID, String modificationDate) {
 
         Main.pageQueue.add(new PagePriority(pageID, queuePriority, modificationDate));
@@ -157,17 +135,13 @@ public class OAIFeeder extends Thread {
     }
 
     /* This function should be overwritten by sub classes */
-    protected void handleFeedItem(Document doc) {
+    protected void handleFeedItem(FeederItem item) {
 
-        long pageID = getPageID(doc);
-        String tmpDate = getPageModificationDate(doc);
-        if (tmpDate != null || tmpDate != "")
-            latestResponseDate = tmpDate;
-
-        if (!isPageDeleted(doc))
-            addPageIDtoQueue(pageID, latestResponseDate);
-        else {
+        //if (!item.isDeleted())      {
+            addPageIDtoQueue(item.getItemID(), item.getModificationDate());
+        //} else {
             // TODO page deleted case
-        }
+        //}
+        latestResponseDate = item.getModificationDate();
     }
 }
