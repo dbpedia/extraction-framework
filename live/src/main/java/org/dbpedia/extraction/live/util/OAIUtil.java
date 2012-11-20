@@ -2,7 +2,9 @@ package org.dbpedia.extraction.live.util;
 
 
 import org.apache.commons.collections15.iterators.TransformIterator;
+import org.dbpedia.extraction.live.feeder.FeederItem;
 import org.dbpedia.extraction.live.transformer.NodeToDocumentTransformer;
+import org.dbpedia.extraction.live.transformer.NodeToFeederItemTransformer;
 import org.dbpedia.extraction.live.util.iterators.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -17,6 +19,27 @@ public class OAIUtil {
     private static String getStartDate(String date) {
         return date == null ? DateUtil.transformToUTC(System
                 .currentTimeMillis()) : date;
+    }
+
+    public static Iterator<FeederItem> createEndlessFeederItemIterator(
+            String oaiBaseUri, String startDate, long relativeEndFromNow, long pollDelay, long resumptionDelay) {
+
+        XPathExpression expr = DBPediaXPathUtil.getRecordExpr();
+
+        Iterator<Document> metaIterator = new EndlessOAIMetaIterator(
+                        oaiBaseUri, startDate, relativeEndFromNow, pollDelay, resumptionDelay);
+
+        Iterator<Node> nodeIterator = new XPathQueryIterator(metaIterator, expr);
+
+        // 'Dirty' because it can contain duplicates.
+        Iterator<FeederItem> dirtyRecordIterator = new TransformIterator<Node, FeederItem>(
+                nodeIterator, new NodeToFeederItemTransformer());
+
+         // This iterator removed them
+        Iterator<FeederItem> recordIterator = new DuplicateFeederItemRemoverIterator(
+                dirtyRecordIterator);
+
+        return recordIterator;
     }
 
     public static Iterator<Document> createEndlessRecordIterator(
