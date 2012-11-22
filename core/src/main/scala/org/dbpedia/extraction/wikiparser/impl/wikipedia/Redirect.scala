@@ -233,7 +233,7 @@ object Redirect
     private def scn_redirects = Set("#RINVIA","#RINVIO","#RIMANDO","#REDIRECT")
     private def sco_redirects = Set("#REDIRECT")
     private def sd_redirects = Set("#چوريو","#REDIRECT")
-    private def se_redirects = Set("#OĐĐASITSTIVREN","#STIVREN","#REDIRECT")
+    private def se_redirects = Set("#STIVREN","#OĐĐASITSTIVREN","#REDIRECT")
     private def sg_redirects = Set("#REDIRECTION","#REDIRECT")
     private def sh_redirects = Set("#PREUSMJERI","#PREUSMERI","#REDIRECT")
     private def si_redirects = Set("#යළියොමුව","#REDIRECT")
