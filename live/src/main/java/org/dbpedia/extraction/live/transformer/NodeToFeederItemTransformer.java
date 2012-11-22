@@ -31,12 +31,15 @@ public class NodeToFeederItemTransformer implements Transformer<Node, FeederItem
 			if (node == null)
 				return null;
 
-            long nodeItemID = Long.parseLong(XPathUtil.evalToString(node, DBPediaXPathUtil.getPageIdExpr()));
+            String tmpID = XPathUtil.evalToString(node, DBPediaXPathUtil.getOAIIdentifierExpr());
+            long nodeItemID = tmpID.equals("")? 0 : Long.parseLong(tmpID.substring(tmpID.lastIndexOf(":")+1));
             String nodeItemName =XPathUtil.evalToString(node, DBPediaXPathUtil.getTitleExpr())                      ;
             String nodeModificationDate = XPathUtil.evalToString(node, DBPediaXPathUtil.getTimestampExpr());
             boolean nodeDeleted = XPathUtil.evalToString(node, DBPediaXPathUtil.getOAIIsRecordDeletedExpr()).equals("deleted");
+            // TODO add this for debugging, remove it later
+            String xml = XMLUtil.toString(node);
 
-            return new FeederItem(nodeItemID, nodeItemName, nodeModificationDate, nodeDeleted);
+            return new FeederItem(nodeItemID, nodeItemName, nodeModificationDate, nodeDeleted, xml);
 		}
 		catch (Exception e) {
 			logger.warn(ExceptionUtil.toString(e));

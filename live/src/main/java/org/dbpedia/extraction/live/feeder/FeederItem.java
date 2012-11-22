@@ -12,12 +12,14 @@ public class FeederItem {
     private String itemName = "";
     private String modificationDate = "";
     private boolean deleted = false;
+    private String xml = "";
 
-    public FeederItem(long itemID, String itemName, String modificationDate, boolean deleted){
+    public FeederItem(long itemID, String itemName, String modificationDate, boolean deleted, String xml){
         this.itemID = itemID;
         this.itemName = itemName;
         this.modificationDate = modificationDate;
         this.deleted = deleted;
+        this.xml = xml;
     }
 
     public long getItemID() {
