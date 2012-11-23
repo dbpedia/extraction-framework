@@ -1,17 +1,10 @@
 package org.dbpedia.extraction.live.processor;
 
-import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
-import org.dbpedia.extraction.live.util.XMLUtil;
-import org.w3c.dom.Document;
-import scala.xml.*;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -42,28 +35,10 @@ public class PageProcessor extends Thread{
 
     private void processPage(long pageID){
         try{
-            String oaiUri = LiveOptions.options.get("oaiUri");
-            String oaiPrefix = LiveOptions.options.get("oaiPrefix");
-            String baseWikiUri = LiveOptions.options.get("baseWikiUri");
-            String mediaWikiPrefix = "mediawiki";
-
-            GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
-            Document doc = record.getDocument();
-
-            /////////////////////////////////////////////////////////////
-            String strDoc = XMLUtil.toString(doc);
-            Pattern invalidCharactersPattern = Pattern.compile("&#[\\d{0-9}]+;");
-            Matcher invalidCharactersMatcher = invalidCharactersPattern.matcher(strDoc);
-
-            String resultingString = invalidCharactersMatcher.replaceAll("");
-
-            Node node = XML.loadString(resultingString);
-            Elem xmlElem = (Elem) node;
-            //logger.warn("Page ID " + pageID + " :" + resultingString);
-            //Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.apply(LiveOptions.options.get("language")));
-            LiveExtractionManager.extractFromPage(xmlElem);
-            /////////////////////////////////////////////////////////////
-
+            LiveExtractionManager.extractFromPageID(
+                    pageID,
+                    LiveOptions.options.get("localApiURL"),
+                    LiveOptions.options.get("language"));
         }
         catch(Exception exp){
             logger.error("Error in processing page number " + pageID + ", and the reason is " + exp.getMessage(), exp);

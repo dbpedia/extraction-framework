@@ -150,34 +150,32 @@ object LiveExtractionConfigLoader extends ActionListener
     var liveDest : LiveUpdateDestination = null;
     val parser = WikiParser()
 
-    articlesSource.foreach(CurrentWikiPage =>
+    for (cpage <- articlesSource.map(parser))
     {
-      if(CurrentWikiPage.title.namespace == Namespace.Main ||
-        CurrentWikiPage.title.namespace == Namespace.File ||
-        CurrentWikiPage.title.namespace == Namespace.Category)
+
+      if(cpage.title.namespace == Namespace.Main ||
+        cpage.title.namespace == Namespace.File ||
+        cpage.title.namespace == Namespace.Category)
       {
-        val CurrentPageNode = parser(CurrentWikiPage)
 
-
-
-        val testPage = CurrentWikiPage;
+        //val testPage = CurrentWikiPage;
         //As the page title always starts with "en:", as it is the language of the page, and we are working only on
         // English language, then we should remove that part as it will repeated without any advantage.
 //        val semicolonPosition = CurrentPageNode.title.decodedWithNamespace.indexOf(";");
 //        val pageNodeTitleWithoutLanguage = CurrentPageNode.title.toString.substring(0, semicolonPosition)
         // TODO change these correct these uris
-        val strWikipage = "http://" + CurrentPageNode.title.language.isoCode + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
-        val strDBppage = "http://" + CurrentPageNode.title.language.isoCode + ".dbpedia.org/resource/" + CurrentPageNode.title.encodedWithNamespace ;
-        liveDest = new LiveUpdateDestination(CurrentPageNode.title, language.locale.getLanguage(),
-          CurrentPageNode.id.toString)
+        val strWikipage = "http://" + cpage.title.language.isoCode + ".wikipedia.org/wiki/" + cpage.title.encodedWithNamespace ;
+        val strDBppage = "http://" + cpage.title.language.isoCode + ".dbpedia.org/resource/" + cpage.title.encodedWithNamespace ;
+        liveDest = new LiveUpdateDestination(cpage.title, language.locale.getLanguage(),
+          cpage.id.toString)
 
-        liveDest.setPageID(CurrentPageNode.id);
+        liveDest.setPageID(cpage.id);
         liveDest.setOAIID(LiveExtractionManager.oaiID);
 
         //Add triples generated from active extractors
         extractors.foreach(extractor => {
           println(extractor.getClass())
-          var RequiredGraph = extractor(parser(CurrentWikiPage));
+          var RequiredGraph = extractor(cpage);
 
           //When the DBpedia framework is updated, there is a class called "RootExtractor", which contain internally the
           // required extractor, so we should get it from inside
@@ -192,15 +190,15 @@ object LiveExtractionConfigLoader extends ActionListener
 
         liveDest.close();
 
-        logger.log(Level.INFO, "page number " + CurrentPageNode.id + " has been processed");
+        logger.log(Level.INFO, "page number " + cpage.id + " has been processed");
 
         //Updating information needed for statistics
 
         // TODO #Statistics temporary solution for compatibillity, must be be updated soon
-        StatisticsData.addItem(CurrentWikiPage.title.decoded, strDBppage,strWikipage,0, System.currentTimeMillis)
+        StatisticsData.addItem(cpage.title.decoded, strDBppage,strWikipage,0, System.currentTimeMillis)
       }
 
-    });
+    }
   }
 
   //This method loads the ontology and mappings
