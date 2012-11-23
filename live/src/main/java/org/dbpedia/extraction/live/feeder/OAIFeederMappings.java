@@ -40,16 +40,18 @@ public class OAIFeederMappings extends OAIFeeder {
         if (!item.getItemName().startsWith(mappingNamespace))
             return;
 
-        if (!item.isDeleted()) {
-            scala.collection.immutable.List<Object> ids = MappingAffectedPagesHelper.GetMappingPages(item.getItemName());
+        String title = item.getItemName().substring(item.getItemName().indexOf(":")+1);
+
+        //if (!item.isDeleted()) {
+            scala.collection.immutable.List<Object> ids = MappingAffectedPagesHelper.GetMappingPages(title);
             scala.collection.Iterator<Object> iter = ids.iterator();
             while (iter.hasNext())
                 addPageIDtoQueue((Long) iter.next(), latestResponseDate);
             iter = null;
             ids  = null;
-        } else {
+        //} else {
             // TODO find which template the deleted infobox was referring to
-        }
+        //}
 
         latestResponseDate = item.getModificationDate();
     }
