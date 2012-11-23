@@ -3,7 +3,9 @@ package org.dbpedia.extraction.live.extraction
 
 import java.io._
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.extraction.sources.XMLSource
+import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
+import java.net.URL
+import org.dbpedia.extraction.util.Language
 
 
 /**
@@ -23,7 +25,17 @@ object LiveExtractionManager
   def extractFromPage(Element :scala.xml.Elem)
     {
       val articlesSource = XMLSource.fromOAIXML(Element);
-      LiveExtractionConfigLoader.startExtraction(articlesSource);
+      extract(articlesSource);
     }
 
+  def extractFromPageID(pageID :Long, apiURL :String, landCode :String)
+    {
+      val articlesSource = WikiSource.fromPageIDs(List(pageID), new URL(apiURL), Language.apply(landCode));
+      extract(articlesSource);
+    }
+
+  def extract(source :Source)
+      {
+        LiveExtractionConfigLoader.startExtraction(source);
+      }
 }
