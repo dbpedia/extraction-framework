@@ -1,35 +1,31 @@
-dumpDir=d:/wikipediaDump
-outputDir=d:/output
-updateDumps=true
+# download and extraction target dir   (same folder structure as DBpedia)
+base-dir=/home/jim/Downloads/wiktionary
 
-extractors=org.dbpedia.extraction.mappings.LabelExtractor \
-           org.dbpedia.extraction.mappings.WikiPageExtractor \
-           org.dbpedia.extraction.mappings.InfoboxExtractor \
-           org.dbpedia.extraction.mappings.PageLinksExtractor \
-           org.dbpedia.extraction.mappings.GeoExtractor
+wikiName=wiktionary
 
-extractors.en=org.dbpedia.extraction.mappings.CategoryLabelExtractor \
-              org.dbpedia.extraction.mappings.ArticleCategoriesExtractor \
-              org.dbpedia.extraction.mappings.ImageExtractor \
-              org.dbpedia.extraction.mappings.ExternalLinksExtractor \
-              org.dbpedia.extraction.mappings.HomepageExtractor \
-              org.dbpedia.extraction.mappings.DisambiguationExtractor \
-              org.dbpedia.extraction.mappings.PersondataExtractor \
-              org.dbpedia.extraction.mappings.PndExtractor \
-              org.dbpedia.extraction.mappings.SkosCategoriesExtractor \
-              org.dbpedia.extraction.mappings.RedirectExtractor \
-              org.dbpedia.extraction.mappings.MappingExtractor \
-              org.dbpedia.extraction.mappings.PageIdExtractor \
-              org.dbpedia.extraction.mappings.RevisionIdExtractor
+# supports multiple languages at once
+languages=en,de,fr,ru
 
-extractors.de=org.dbpedia.extraction.mappings.HomepageExtractor \
-              org.dbpedia.extraction.mappings.PersondataExtractor \
-              org.dbpedia.extraction.mappings.PndExtractor \
+extractors=WiktionaryPageExtractor
 
-extractors.el=org.dbpedia.extraction.mappings.HomepageExtractor
+# ontology=../ontology.xml
+# mappings=../mappings
 
-extractors.fr=org.dbpedia.extraction.mappings.HomepageExtractor
+# URI policies. Allowed flags: uri, generic, xml-safe. Each flag may have one of the suffixes
+# -subjects, -predicates, -objects, -datatype, -context to match only URIs in a certain position.
+# Without a suffix, a flag matches all URI positions.
 
-languages=en de fr af an ar ast az bat-smg be be-x-old bg bn bpy br bs ca ceb cs cy da el eo es et eu fa fi fy gl gu \
-          he hi hr ht hu id io is it ja jv ka ko ku la lb lt lv mk ml mr ms nap nds new nl nn no oc pl pms pt qu ro ru \
-          scn sh simple sk sl sq sr su sv sw ta te th tl tr uk ur vi vo zh zh-yue wa cv ksh lmo ga
+# uri-policy.uri=xml-safe-predicates:*
+uri-policy.iri=xml-safe-predicates:*
+
+# File formats. Allowed flags: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
+# May be followed by a semicolon and a URI policy name. If format name ends with .gz or .bz2, files
+# are zipped on the fly.
+
+# NT is unreadable anyway - might as well use URIs for en
+# format.nt=n-triples;uri-policy.uri
+# format.nq=n-quads;uri-policy.uri
+
+# Turtle is much more readable - use nice IRIs for all languages
+format.ttl=turtle-triples;uri-policy.iri
+# format.tql=turtle-quads;uri-policy.iri
