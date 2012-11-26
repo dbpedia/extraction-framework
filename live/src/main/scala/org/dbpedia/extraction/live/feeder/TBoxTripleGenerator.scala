@@ -103,6 +103,8 @@ class TBoxTripleGenerator() {
 
     val literalTripleGenerator = new LiteralTripleGenerator()
 
+    val labelsTripleGenerator = new LabelsTripleGenerator()
+
     val mosListTripleGenerator = new ListTripleGenerator(",",
       new MosTripleGenerator(exprPrefixRef, prefixResolver))
 
