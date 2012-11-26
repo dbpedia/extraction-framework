@@ -47,7 +47,9 @@ import WiktionaryPageExtractor._ //companion
  */
 
 class WiktionaryPageExtractor( context : {} ) extends Extractor {
-  override val datasets = scala.collection.immutable.Set.empty[Dataset]
+
+  override val datasets = Set(datasetURI) //new Dataset("wiktionary"))
+
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {
     //return new Graph()
