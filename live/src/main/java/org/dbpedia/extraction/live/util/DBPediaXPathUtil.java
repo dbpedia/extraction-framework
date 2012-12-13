@@ -51,6 +51,11 @@ public class DBPediaXPathUtil
 		return expr;
 	}
 
+    public static XPathExpression getOAIResponseDateExpr()
+    {
+        return get("oaiResponseDate", "//*[local-name()='responseDate']/text()");
+    }
+
 	public static XPathExpression getOAIIdentifierExpr()
 	{
 		return get("oaiIdentifier", "//*[local-name()='header']/*[local-name()='identifier']/text()");
