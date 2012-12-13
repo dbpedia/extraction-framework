@@ -27,17 +27,23 @@ public class NodeToFeederItemTransformer implements Transformer<Node, FeederItem
 
 	public FeederItem transform(Node node)
 	{
+        Document document = null;
 		try {
 			if (node == null)
 				return null;
 
-            String tmpID = XPathUtil.evalToString(node, DBPediaXPathUtil.getOAIIdentifierExpr());
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            document = dbf.newDocumentBuilder().newDocument();
+            Node clone = document.importNode(node, true);
+            document.appendChild(clone);
+
+            String tmpID = XPathUtil.evalToString(document, DBPediaXPathUtil.getOAIIdentifierExpr());
             long nodeItemID = tmpID.equals("")? 0 : Long.parseLong(tmpID.substring(tmpID.lastIndexOf(":")+1));
-            String nodeItemName =XPathUtil.evalToString(node, DBPediaXPathUtil.getTitleExpr())                      ;
-            String nodeModificationDate = XPathUtil.evalToString(node, DBPediaXPathUtil.getTimestampExpr());
-            boolean nodeDeleted = XPathUtil.evalToString(node, DBPediaXPathUtil.getOAIIsRecordDeletedExpr()).equals("deleted");
+            String nodeItemName =XPathUtil.evalToString(document, DBPediaXPathUtil.getTitleExpr())                      ;
+            String nodeModificationDate = XPathUtil.evalToString(document, DBPediaXPathUtil.getTimestampExpr());
+            boolean nodeDeleted = XPathUtil.evalToString(document, DBPediaXPathUtil.getOAIIsRecordDeletedExpr()).equals("deleted");
             // TODO add this for debugging, remove it later
-            String xml = XMLUtil.toString(node);
+            String xml = XMLUtil.toString(document);
 
             return new FeederItem(nodeItemID, nodeItemName, nodeModificationDate, nodeDeleted, xml);
 		}
