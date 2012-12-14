@@ -1,6 +1,9 @@
-package org.dbpedia.extraction.live.core;
+package org.dbpedia.extraction.live.storage;
 
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.LiveOptions;
+import org.dbpedia.extraction.live.core.Timer;
+import org.dbpedia.extraction.live.core.XMLConverter;
 
 import java.sql.*;
 import java.util.HashMap;

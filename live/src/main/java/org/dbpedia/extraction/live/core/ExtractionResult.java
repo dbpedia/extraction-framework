@@ -9,6 +9,7 @@ import org.openrdf.model.impl.URIImpl;
 */
 
 import com.hp.hpl.jena.rdf.model.*;
+import org.dbpedia.extraction.live.storage.RDFTriple;
 import org.dbpedia.helper.CoreUtil;
 
 import java.io.UnsupportedEncodingException;

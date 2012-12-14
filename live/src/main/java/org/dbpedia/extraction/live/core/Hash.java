@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.delta.Delta;
 import org.dbpedia.extraction.live.delta.DeltaCalculator;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
+import org.dbpedia.extraction.live.storage.JDBC;
+import org.dbpedia.extraction.live.storage.RDFTriple;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;

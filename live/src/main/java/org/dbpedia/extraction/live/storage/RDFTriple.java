@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.live.core;
+package org.dbpedia.extraction.live.storage;
 
 
 import com.hp.hpl.jena.rdf.model.Property;
@@ -6,6 +6,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.Constants;
 import org.dbpedia.helper.Triple;
 
 import java.io.UnsupportedEncodingException;

@@ -1,9 +1,10 @@
-package org.dbpedia.extraction.live.core;
+package org.dbpedia.extraction.live.storage;
 
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
 import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.*;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -79,17 +80,17 @@ public class SPARQLToRDFTriple {
             //to avoid the case that a thread stops the timer of another thread.
             String timerName = this.getClass() + ":jdbc_request" +
                     (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
-            Timer.start(timerName);
+            org.dbpedia.extraction.live.core.Timer.start(timerName);
 
              jarr = this.jdbc.execAsJson(query, "SPARQLToRDFTriple");
-            Timer.stop(timerName);
+            org.dbpedia.extraction.live.core.Timer.stop(timerName);
         }else{
             //If the application is working in multithreading mode, we must attach the thread id to the timer name
             //to avoid the case that a thread stops the timer of another thread.
             String timerName = this.getClass() + ":http_request" +
                     (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
-            Timer.start(timerName);
+            org.dbpedia.extraction.live.core.Timer.start(timerName);
             json = this.sparqlEndpoint.executeQuery(query, this.getClass());
 
             JSONParser parser = new JSONParser();
@@ -118,7 +119,7 @@ public class SPARQLToRDFTriple {
                 jarr = (HashMap)jarr.get("results");
                 }
 
-            Timer.stop(timerName);
+            org.dbpedia.extraction.live.core.Timer.stop(timerName);
         }
 
         Resource s = null;
@@ -182,9 +183,9 @@ public class SPARQLToRDFTriple {
         String timerName = this.getClass() + ":http_request" +
                 (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
-        Timer.start(timerName);
+        org.dbpedia.extraction.live.core.Timer.start(timerName);
         String json = this.sparqlEndpoint.executeQuery(query, this.getClass());
-        Timer.stop(timerName);
+        org.dbpedia.extraction.live.core.Timer.stop(timerName);
 
         JSONParser parser = new JSONParser();
         HashMap jarr = new HashMap(); 
