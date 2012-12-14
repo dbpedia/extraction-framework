@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.dbpedia.extraction.live.helper.MatchPattern;
 import org.dbpedia.extraction.live.helper.MatchType;
+import org.dbpedia.extraction.live.storage.RDFTriple;
+import org.dbpedia.extraction.live.storage.SPARQLToRDFTriple;
 
 import java.util.ArrayList;
 import java.util.HashMap;

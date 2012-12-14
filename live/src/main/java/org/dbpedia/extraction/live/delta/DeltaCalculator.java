@@ -2,7 +2,7 @@ package org.dbpedia.extraction.live.delta;
 
 import com.hp.hpl.jena.rdf.model.*;
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.core.JDBC;
+import org.dbpedia.extraction.live.storage.JDBC;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 

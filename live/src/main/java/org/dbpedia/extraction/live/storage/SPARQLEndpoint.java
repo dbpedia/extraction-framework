@@ -1,6 +1,7 @@
-package org.dbpedia.extraction.live.core;
+package org.dbpedia.extraction.live.storage;
 
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.core.*;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -126,7 +127,7 @@ public class SPARQLEndpoint {
             //to avoid the case that a thread stops the timer of another thread.
             timerName = logComponent + ".http_sparqlquery" +
                     (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
-            Timer.start(timerName);
+            org.dbpedia.extraction.live.core.Timer.start(timerName);
 
             logger.info(logComponent + ".url = " + url);
             HttpURLConnection con = (HttpURLConnection)new URL(url).openConnection();
@@ -152,7 +153,7 @@ public class SPARQLEndpoint {
             this.logger.error(logComponent + error);
         }
         finally{
-            Timer.stop(timerName);
+            org.dbpedia.extraction.live.core.Timer.stop(timerName);
             this.logger.info(logComponent + "returned: " + contents.length() + " of json code");
         }
 
@@ -179,7 +180,7 @@ public class SPARQLEndpoint {
             //to avoid the case that a thread stops the timer of another thread.
             timerName = logComponent + ".http.count" +
                     (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
-            Timer.start(timerName);
+            org.dbpedia.extraction.live.core.Timer.start(timerName);
 
             String json = this.executeQuery(query, logComponent, DefaultGraphURI, Format);
 
@@ -197,7 +198,7 @@ public class SPARQLEndpoint {
 
             JSONParser parser = new JSONParser();
             HashMap jarr = (HashMap) parser.parse(json);
-            Timer.stop(timerName);
+            org.dbpedia.extraction.live.core.Timer.stop(timerName);
     
             if((jarr.get("results") != null) && (((HashMap)jarr.get("results")).get("bindings") != null) ){
                 HashMap bindings = (HashMap)((HashMap)jarr.get("results")).get("bindings");

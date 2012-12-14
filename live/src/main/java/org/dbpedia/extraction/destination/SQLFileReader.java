@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import org.apache.log4j.*;
-import org.dbpedia.extraction.live.core.JDBC;
+import org.dbpedia.extraction.live.storage.JDBC;
 
 
 /**

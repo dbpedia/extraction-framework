@@ -5,7 +5,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.impl.ModelCom;
-import org.dbpedia.extraction.live.core.RDFTriple;
+import org.dbpedia.extraction.live.storage.RDFTriple;
 
 import java.util.ArrayList;
 
