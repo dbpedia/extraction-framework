@@ -3,9 +3,7 @@ package org.dbpedia.extraction.live.feeder;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.helper.MappingAffectedPagesHelper;
 import org.dbpedia.extraction.live.priority.Priority;
-import org.dbpedia.extraction.live.util.XMLUtil;
-import org.dbpedia.extraction.sources.XMLSource;
-import org.w3c.dom.Document;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,7 +32,7 @@ public class OAIFeederMappings extends OAIFeeder {
     }
 
     @Override
-    protected void handleFeedItem(FeederItem item) {
+    protected void handleFeedItem(LiveQueueItem item) {
 
         // ignore irrelevant mappings
         if (!item.getItemName().startsWith(mappingNamespace))

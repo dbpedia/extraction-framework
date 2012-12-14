@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.live.util.iterators;
 
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.feeder.FeederItem;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.util.OAIUtil;
 
 import java.text.DateFormat;
@@ -21,25 +21,25 @@ import java.util.*;
  * oai:en.wikipedia.org:enwiki:123
  */
 public class DuplicateFeederItemRemoverIterator
-        extends PrefetchIterator<FeederItem> {
+        extends PrefetchIterator<LiveQueueItem> {
     private Logger logger = Logger
             .getLogger(DuplicateOAIRecordRemoverIterator.class);
 
-    private Iterator<FeederItem> iterator;
+    private Iterator<LiveQueueItem> iterator;
     private Date currentTimestamp = new Date(0L);
     private Set<Long> currentIdentifiers = new HashSet<Long>();
     private DateFormat dateFormat = new SimpleDateFormat(
             OAIUtil.getOAIDateFormatString());
 
-    public DuplicateFeederItemRemoverIterator(Iterator<FeederItem> iterator) {
+    public DuplicateFeederItemRemoverIterator(Iterator<LiveQueueItem> iterator) {
         this.iterator = iterator;
     }
 
     @Override
-    protected Iterator<FeederItem> prefetch()
+    protected Iterator<LiveQueueItem> prefetch()
             throws Exception {
         while (iterator.hasNext()) {
-            FeederItem item = iterator.next();
+            LiveQueueItem item = iterator.next();
 
             Date timestamp = dateFormat.parse(item.getModificationDate());
 

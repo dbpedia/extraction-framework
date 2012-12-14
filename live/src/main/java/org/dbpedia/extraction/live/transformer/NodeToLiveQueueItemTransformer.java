@@ -2,7 +2,7 @@ package org.dbpedia.extraction.live.transformer;
 
 import org.apache.commons.collections15.Transformer;
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.feeder.FeederItem;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.util.DBPediaXPathUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.XMLUtil;
@@ -10,22 +10,20 @@ import org.dbpedia.extraction.live.util.XPathUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Dimitris Kontokostas
  * Date: 11/19/12
  * Time: 8:38 PM
- * An iterator which takes an iterator of nodes and creates converts them to a FeederItem.
+ * An iterator which takes an iterator of nodes and creates converts them to a LiveQueueItem.
  */
-public class NodeToFeederItemTransformer implements Transformer<Node, FeederItem>
+public class NodeToLiveQueueItemTransformer implements Transformer<Node, LiveQueueItem>
 {
-	private static Logger logger = Logger.getLogger(NodeToFeederItemTransformer.class);
+	private static Logger logger = Logger.getLogger(NodeToLiveQueueItemTransformer.class);
 
-	public FeederItem transform(Node node)
+	public LiveQueueItem transform(Node node)
 	{
         Document document = null;
 		try {
@@ -45,7 +43,7 @@ public class NodeToFeederItemTransformer implements Transformer<Node, FeederItem
             // TODO add this for debugging, remove it later
             String xml = XMLUtil.toString(document);
 
-            return new FeederItem(nodeItemID, nodeItemName, nodeModificationDate, nodeDeleted, xml);
+            return new LiveQueueItem(nodeItemID, nodeItemName, nodeModificationDate, nodeDeleted, xml);
 		}
 		catch (Exception e) {
 			logger.warn(ExceptionUtil.toString(e));

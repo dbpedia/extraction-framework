@@ -2,9 +2,9 @@ package org.dbpedia.extraction.live.util;
 
 
 import org.apache.commons.collections15.iterators.TransformIterator;
-import org.dbpedia.extraction.live.feeder.FeederItem;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.transformer.NodeToDocumentTransformer;
-import org.dbpedia.extraction.live.transformer.NodeToFeederItemTransformer;
+import org.dbpedia.extraction.live.transformer.NodeToLiveQueueItemTransformer;
 import org.dbpedia.extraction.live.util.iterators.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -21,7 +21,7 @@ public class OAIUtil {
                 .currentTimeMillis()) : date;
     }
 
-    public static Iterator<FeederItem> createEndlessFeederItemIterator(
+    public static Iterator<LiveQueueItem> createEndlessFeederItemIterator(
             String oaiBaseUri, String startDate, long relativeEndFromNow, long pollDelay, long resumptionDelay) {
 
         XPathExpression expr = DBPediaXPathUtil.getRecordExpr();
@@ -32,11 +32,11 @@ public class OAIUtil {
         Iterator<Node> nodeIterator = new XPathQueryIterator(metaIterator, expr);
 
         // 'Dirty' because it can contain duplicates.
-        Iterator<FeederItem> dirtyRecordIterator = new TransformIterator<Node, FeederItem>(
-                nodeIterator, new NodeToFeederItemTransformer());
+        Iterator<LiveQueueItem> dirtyRecordIterator = new TransformIterator<Node, LiveQueueItem>(
+                nodeIterator, new NodeToLiveQueueItemTransformer());
 
          // This iterator removed them
-        Iterator<FeederItem> recordIterator = new DuplicateFeederItemRemoverIterator(
+        Iterator<LiveQueueItem> recordIterator = new DuplicateFeederItemRemoverIterator(
                 dirtyRecordIterator);
 
         return recordIterator;
