@@ -356,6 +356,29 @@
         <templateRepresentativeProperty tplName="Ü" pKey="2" />
         <templateRepresentativeProperty tplName="Üxx" pKey="2" />
     </templateRepresentativeProperties>
+    <nodeHandlers>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Deutsch Substantiv Übersicht">
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Verb-Tabelle">
+            <mapping label="Gegenwart_ich" uri="http://wiktionary.dbpedia.org/terms/firstPersonPresent" />
+            <mapping label="Gegenwart_du" uri="http://wiktionary.dbpedia.org/terms/secondPersonPresent" />
+            <mapping label="Gegenwart_er, sie, es" uri="http://wiktionary.dbpedia.org/terms/thirdPersonPresent" />
+            <mapping label="1.Vergangenheit_ich" uri="http://wiktionary.dbpedia.org/terms/simplePast" />
+            <mapping label="Partizip II" uri="http://wiktionary.dbpedia.org/terms/participlePast" />
+            <mapping label="Konjunktiv II" uri="http://wiktionary.dbpedia.org/terms/subjunctive" />
+            <mapping label="Befehl_du" uri="http://wiktionary.dbpedia.org/terms/imperativeSecondPerson" />
+            <mapping label="Befehl_ihr" uri="http://wiktionary.dbpedia.org/terms/imperativeThirdPerson" />
+            <mapping label="Hilfsverb" uri="http://wiktionary.dbpedia.org/terms/hasAuxiliaryVerb" />
+        </nodeHandler>
+    </nodeHandlers>
     <saveVars>
         <var name="pos" />
         <var name="language" />

@@ -105,12 +105,12 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                 nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map())
           })
       }
-      val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, VarBindingsHierarchical]] = new ListBuffer
+      val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, wikitemplate.VarBindingsHierarchical]] = new ListBuffer
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
       for(prolog <- languageConfig \ "page" \ "prologs" \ "template"){
         val prologtpl = Tpl.fromNode(prolog)
         Logging.printMsg("try "+prologtpl.name, 2)
-         try {
+        try {
           proAndEpilogBindings.append( (prologtpl, VarBinder.parseNodesWithTemplate(prologtpl.wiki.clone, pageStack)) )
         } catch {
           case e : WiktionaryException => proAndEpilogBindings.append( (prologtpl, e.vars) )
@@ -168,32 +168,45 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         //try matching this blocks templates
         var triedTemplatesCounter = 0
         while(triedTemplatesCounter < curBlock.templates.size && pageStack.size > 0){
-        for(tpl <- curBlock.templates){
-          triedTemplatesCounter += 1
-          //println(""+triedTemplatesCounter+"/"+curBlock.templates.size)
-          //for(tpl <- possibleTemplates){
-          Logging.printMsg("trying template "+tpl.name, 3)
-          val pageCopy = pageStack.clone 
-          //println(pageStack.take(1).map(_.dumpStrShort).mkString)
-          try {
-            //println("vs")
-            //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
+          for(tpl <- curBlock.templates){
+            triedTemplatesCounter += 1
+            //println(""+triedTemplatesCounter+"/"+curBlock.templates.size)
+            //for(tpl <- possibleTemplates){
+            Logging.printMsg("trying template "+tpl.name, 3)
+            val pageCopy = pageStack.clone
+            //println(pageStack.take(1).map(_.dumpStrShort).mkString)
+            try {
+              //println("vs")
+              //println(block.indTpl.tpl.map(_.dumpStrShort).mkString )
 
-            val blockBindings = VarBinder.parseNodesWithTemplate(tpl.wiki.clone, pageStack)
+              val blockBindings = VarBinder.parseNodesWithTemplate(tpl.wiki.clone, pageStack)
 
-            //generate triples
-            //println(tpl.name +": "+ blockBindings.dump())
-            quads appendAll handleFlatBindings(blockBindings.getFlat(), curBlock, tpl, cache, cache.blockURIs(curBlock.name).stringValue)
+              //generate triples
+              //println(tpl.name +": "+ blockBindings.dump())
+              quads appendAll handleFlatBindings(blockBindings.getFlat(), curBlock, tpl, cache, cache.blockURIs(curBlock.name).stringValue)
 
-            //no exception -> success -> stuff below here will be executed on success
-            consumed = true
-            //reset counter, so all templates need to be tried again
-            triedTemplatesCounter = 0
-            Logging.printMsg("finished template "+tpl.name+" successfully", 3)
-          } catch {
-            case e : WiktionaryException => restore(pageStack, pageCopy) //did not match
+              //no exception -> success -> stuff below here will be executed on success
+              consumed = true
+              //reset counter, so all templates need to be tried again
+              triedTemplatesCounter = 0
+              Logging.printMsg("finished template "+tpl.name+" successfully", 3)
+            } catch {
+              case e : WiktionaryException => restore(pageStack, pageCopy) //did not match
+            }
           }
         }
+
+        if(pageStack.size > 0){
+          if(nodeHandlers.contains("parsing")){
+            nodeHandlers("parsing").foreach((nh : NodeHandler) => {
+              var result = nh.process(pageStack, cache.blockURIs(curBlock.name).stringValue, cache, Map())
+              if(result.isInstanceOf[NodeHandlerVarBindingsResult]){
+                //quads appendAll handleFlatBindings(result.asInstanceOf[NodeHandlerVarBindingsResult].varBindings.getFlat(), curBlock, tpl, cache, cache.blockURIs(curBlock.name).stringValue)
+              } else if(result.isInstanceOf[NodeHandlerTriplesResult]){
+                quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
+              }
+            })
+          }
         }
 
         if(pageStack.size > 0){
@@ -562,18 +575,18 @@ object WiktionaryPageExtractor {
     configs.map( (n : XMLNode) => {
 
     if(n.attribute("nhClass").isDefined){
-        Class.forName((n \ "@nhClass").text).getConstructor(classOf[NodeSeq]).newInstance((n \ "parameters")).asInstanceOf[NodeHandler]
+        Class.forName((n \ "@nhClass").text).getConstructor(classOf[NodeSeq]).newInstance((n)).asInstanceOf[NodeHandler]
     } else {
         if(n.attribute("builtin").isDefined){
             (n \ "@builtin").text match {
-             case "skipAny" => new SkipAny(scala.xml.NodeSeq.Empty)
+              case "InfoBoxMapper" => new InfoBoxMapper(n)
              case _ => throw new Exception("unknown nodeHandler. builtin type unknown.")
             }
         } else {
             throw new Exception("unknown nodeHandler. use nhClass or builtin attributes.")
         }
     }
-}) 
+  })
 })
   val templateRepresentativeProperty = (languageConfig \ "templateRepresentativeProperties" \ "templateRepresentativeProperty").map(n=> ((n \ "@tplName").text, (n \ "@pKey").text) ).toMap
   
