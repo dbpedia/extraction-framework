@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.live.feeder;
+package org.dbpedia.extraction.live.queue;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,14 +7,14 @@ package org.dbpedia.extraction.live.feeder;
  * Time: 6:18 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FeederItem {
+public class LiveQueueItem {
     private long itemID = 0;
     private String itemName = "";
     private String modificationDate = "";
     private boolean deleted = false;
     private String xml = "";
 
-    public FeederItem(long itemID, String itemName, String modificationDate, boolean deleted, String xml){
+    public LiveQueueItem(long itemID, String itemName, String modificationDate, boolean deleted, String xml){
         this.itemID = itemID;
         this.itemName = itemName;
         this.modificationDate = modificationDate;

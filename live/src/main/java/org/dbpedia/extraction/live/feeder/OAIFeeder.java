@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
 import org.dbpedia.extraction.live.priority.Priority;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
 import org.dbpedia.extraction.live.util.OAIUtil;
@@ -40,7 +41,7 @@ public class OAIFeeder extends Thread {
     protected File lastResponseFile;
     protected String latestResponseDate;
 
-    protected Iterator<FeederItem> oaiRecordIterator;
+    protected Iterator<LiveQueueItem> oaiRecordIterator;
     private volatile boolean keepRunning = true;
 
     public OAIFeeder(String feederName, int threadPriority, Priority queuePriority,
@@ -135,7 +136,7 @@ public class OAIFeeder extends Thread {
     }
 
     /* This function should be overwritten by sub classes */
-    protected void handleFeedItem(FeederItem item) {
+    protected void handleFeedItem(LiveQueueItem item) {
 
         //if (!item.isDeleted())      {
             addPageIDtoQueue(item.getItemID(), item.getModificationDate());
