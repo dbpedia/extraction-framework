@@ -25,7 +25,7 @@ import org.openrdf.model.impl.URIImpl;*/
  * This class constructs RDF triples.
  */
 public class RDFTriple extends Triple {
-    
+
     //Initializing the Logger
     private static Logger logger = Logger.getLogger(RDFTriple.class);
     private static String pageCacheKey = null;
@@ -33,42 +33,38 @@ public class RDFTriple extends Triple {
 
     private String SPARULPattern = null;
 
-    public RDFTriple(Resource subject, Property predicate, RDFNode object)
-    {
+    public RDFTriple(Resource subject, Property predicate, RDFNode object) {
         super(subject, predicate, object);
     }
 
-   public String toSPARULPattern()
-   {
+    public String toSPARULPattern() {
         //init
-        if(this.SPARULPattern == null)
-        {
+        if (this.SPARULPattern == null) {
 
             this.SPARULPattern = org.dbpedia.extraction.live.core.Util.convertToSPARULPattern(this.getSubject()) + " " +
                     org.dbpedia.extraction.live.core.Util.convertToSPARULPattern(this.getPredicate()) + " " +
                     org.dbpedia.extraction.live.core.Util.convertToSPARULPattern(this.getObject()) + " . ";
         }
         return this.SPARULPattern;
-   }
+    }
 
-   public static Resource page(String pageID) {
-       String encPageID = "";
-       if(!pageID.equals(pageCacheKey)){
-           try{
-               encPageID = URLEncoder.encode(org.dbpedia.extraction.live.core.Util.wikipediaEncode(pageID), "UTF-8");
-               String strSubstring = encPageID.substring(0,1);
-               //strSubstring = strSubstring.toUpperCase() + encPageID.substring(1);
-               String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
-               String resourceURI = Constants.DB_RESOURCE_NS + returnPageID;
-               Resource uri = ResourceFactory.createResource(resourceURI);
-               pageCacheKey = pageID;
-               pageCacheValue = uri;
-           }
-           catch (UnsupportedEncodingException exp){
-               logger.error("Unsupported encoding is used in encoding the page title");
-           }
-       }
-       return pageCacheValue;
-   }
-    
+    public static Resource page(String pageID) {
+        String encPageID = "";
+        if (!pageID.equals(pageCacheKey)) {
+            try {
+                encPageID = URLEncoder.encode(org.dbpedia.extraction.live.core.Util.wikipediaEncode(pageID), "UTF-8");
+                String strSubstring = encPageID.substring(0, 1);
+                //strSubstring = strSubstring.toUpperCase() + encPageID.substring(1);
+                String returnPageID = strSubstring.toUpperCase() + encPageID.substring(1);
+                String resourceURI = Constants.DB_RESOURCE_NS + returnPageID;
+                Resource uri = ResourceFactory.createResource(resourceURI);
+                pageCacheKey = pageID;
+                pageCacheValue = uri;
+            } catch (UnsupportedEncodingException exp) {
+                logger.error("Unsupported encoding is used in encoding the page title");
+            }
+        }
+        return pageCacheValue;
+    }
+
 }
