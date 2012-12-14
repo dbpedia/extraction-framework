@@ -398,7 +398,7 @@ object VarBinder {
  */
 class VarBindingsHierarchical (){
   val children  = new ListBuffer[VarBindingsHierarchical]()
-  val bindings = new HashMap[String, List[Node]]()
+  val bindings = Map[String, List[Node]]()
 
   /**
    * add a binding
