@@ -1,9 +1,6 @@
 package org.dbpedia.extraction.live.priority;
 
-import org.apache.log4j.Logger;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 
 /**
  * Created by IntelliJ IDEA. User: Mohamed Morsey Date: Jul 28, 2010 Time:
@@ -16,16 +13,16 @@ import java.util.Date;
 public class PagePriority implements Comparable<PagePriority> {
 
 	public long pageID;
-	public Priority pagePriority;
+	public LiveQueuePriority pagePriority;
 	public String pageTimestamp;
 
-	public PagePriority(long pageid, Priority priority, String timestamp) {
+	public PagePriority(long pageid, LiveQueuePriority priority, String timestamp) {
 		pageID = pageid;
 		pagePriority = priority;
 		pageTimestamp = timestamp;
 	}
 
-	public PagePriority(long pageid, Priority priority) {
+	public PagePriority(long pageid, LiveQueuePriority priority) {
 		this(pageid, priority, "");
 	}
 
