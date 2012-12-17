@@ -33,7 +33,10 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     
     /** page IRI for this page title */
     val pageIri = language.baseUri+"/wiki/"+encodedWithNamespace
-    
+
+    /** resource IRI for this page title */
+    val resourceIri = language.resourceUri + encodedWithNamespace
+
     private def withNamespace(encode : Boolean) : String =
     {
       var ns = namespace.name(language)

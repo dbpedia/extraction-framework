@@ -34,7 +34,8 @@ object SimpleWikiParser
 
     private val linkEnd = new Matcher(List(" ", "{","}", "[", "]", "\n", "\t"));
 
-    private val propertyValueOrEnd = new Matcher(List("=", "|", "}}"), true);
+    // '|=' is not valid wiki markup but safe to include, see http://sourceforge.net/tracker/?func=detail&atid=935521&aid=3572779&group_id=190976
+    private val propertyValueOrEnd = new Matcher(List("|=","=", "|", "}}"), true);
     private val propertyEnd = new Matcher(List("|", "}}"), true);
     private val templateParameterEnd = new Matcher(List("|", "}}}"), true);
     private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true);
@@ -86,7 +87,7 @@ final class SimpleWikiParser extends WikiParser
         val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
 
         //Return page node
-        new PageNode(page.title, page.id, page.revision, page.timestamp, isRedirect, isDisambiguation, nodes)
+        new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, isRedirect, isDisambiguation, nodes)
     }
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
