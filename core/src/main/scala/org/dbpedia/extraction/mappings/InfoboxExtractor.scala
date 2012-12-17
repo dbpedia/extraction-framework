@@ -8,11 +8,12 @@ import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
+import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import scala.collection.mutable.ArrayBuffer
 
 /**
  * This extractor extracts all properties from all infoboxes.
- * Extracted information is represented using properties in the http://xx.dbpedia.org/property/ 
+ * Extracted information is represented using properties in the http://xx.dbpedia.org/property/
  * namespace (where xx is the language code).
  * The names of the these properties directly reflect the name of the Wikipedia infobox property.
  * Property names are not cleaned or merged.
@@ -35,7 +36,7 @@ extends Extractor
 
     private val language = context.language.wikiCode
 
-    // FIXME: this uses the http://xx.dbpedia.org/property/ namespace, but the 
+    // FIXME: this uses the http://xx.dbpedia.org/property/ namespace, but the
     // http://dbpedia.org/ontology/ namespace would probably make more sense.
     private val usesTemplateProperty = context.language.propertyUri.append("wikiPageUsesTemplate")
 
@@ -43,14 +44,11 @@ extends Extractor
 
     private val MinPercentageOfExplicitPropertyKeys = 0.75
 
-    private val ignoreTemplates = Set("redirect", "seealso", "see_also", "main", "cquote", "chess diagram", "ipa", "lang")
+    private val ignoreTemplates = InfoboxExtractorConfig.ignoreTemplates
 
-    private val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r)
+    private val ignoreTemplatesRegex = InfoboxExtractorConfig.ignoreTemplatesRegex
 
-    private val ignoreProperties = Map (
-        "en"-> Set("image", "image_photo"),
-        "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
-    )
+    private val ignoreProperties = InfoboxExtractorConfig.ignoreProperties
 
     private val labelProperty = context.ontology.properties("rdfs:label")
     private val typeProperty = context.ontology.properties("rdf:type")
@@ -61,11 +59,11 @@ extends Extractor
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // TODO: i18n
-    private val RankRegex = """(?i)([0-9]+)\s?(?:st|nd|rd|th)""".r
+    private val RankRegex = InfoboxExtractorConfig.RankRegex
 
-    private val SplitWordsRegex = """_+|\s+|\-|:+""".r
+    private val SplitWordsRegex = InfoboxExtractorConfig.SplitWordsRegex
 
-    private val TrailingNumberRegex = """[0-9]+$""".r
+    private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Parsers
@@ -130,10 +128,13 @@ extends Extractor
                         {
                             quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
-                            val stat_template = context.language.resourceUri.append(template.title.decodedWithNamespace)
-                            val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
-                            quads += new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
+                            if (InfoboxExtractorConfig.extractTemplateStatistics == true) 
+                            {
+                            	val stat_template = context.language.resourceUri.append(template.title.decodedWithNamespace)
+                            	val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
+                            	quads += new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
                                                stat_property, node.sourceUri, context.ontology.datatypes("xsd:string"))
+                            }
                         }
                         catch
                         {
