@@ -3,8 +3,8 @@ package org.dbpedia.extraction.live.processor;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
-import org.dbpedia.extraction.live.main.Main;
-import org.dbpedia.extraction.live.priority.PagePriority;
+import org.dbpedia.extraction.live.queue.LiveQueue;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
 
 
 /**
@@ -50,18 +50,9 @@ public class PageProcessor extends Thread{
     public void run(){
         while(true){
             try{
-                // block if empty
-                PagePriority requiredPage = Main.pageQueue.take();
-
-                //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
-                if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
-                    Main.existingPagesTree.remove(requiredPage.pageID);
-                    processPage(requiredPage.pageID);
-                }
-                logger.info("Page # " + requiredPage + " has been removed and processed");
-
-
-
+                LiveQueueItem page = LiveQueue.take();
+                processPage(page.getItemID());
+                logger.info("Page #" + page.getItemName() + " has been removed and processed");
             }
             catch (Exception exp){
                 logger.error("Failed to process page");

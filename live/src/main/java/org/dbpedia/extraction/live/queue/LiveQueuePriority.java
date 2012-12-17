@@ -1,23 +1,23 @@
-package org.dbpedia.extraction.live.priority;
+package org.dbpedia.extraction.live.queue;
 
 /**
  * Created by IntelliJ IDEA. User: Mohamed Morsey Date: May 15, 2011 Time:
  * 5:24:57 AM Different priority values allowed for a page.
  */
-public enum Priority {
+public enum LiveQueuePriority {
 	LivePriority, MappingPriority, OntologyPriority, UnmodifiedPagePriority;
 
 	@Override
 	public String toString() {
 		switch (this) {
 		case LivePriority:
-			return "Live Priority";
+			return "Live LiveQueuePriority";
 		case MappingPriority:
-			return "Mapping Priority";
+			return "Mapping LiveQueuePriority";
 		case OntologyPriority:
-			return "Ontology Priority";
+			return "Ontology LiveQueuePriority";
 		case UnmodifiedPagePriority:
-			return "Unmodified Priority";
+			return "Unmodified LiveQueuePriority";
 		default:
 			return "";
 		}
