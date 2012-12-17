@@ -2,10 +2,9 @@ package org.dbpedia.extraction.live.feeder;
 
 
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.live.main.Main;
-import org.dbpedia.extraction.live.priority.PagePriority;
-import org.dbpedia.extraction.live.priority.Priority;
+import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
+import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
 import org.dbpedia.extraction.live.util.OAIUtil;
@@ -26,7 +25,7 @@ public class OAIFeeder extends Thread {
     protected static Logger logger;
     protected String feederName;
     protected int threadPriority;
-    protected Priority queuePriority;
+    protected LiveQueuePriority queuePriority;
 
     protected String oaiUri;
     protected String oaiPrefix;
@@ -44,7 +43,7 @@ public class OAIFeeder extends Thread {
     protected Iterator<LiveQueueItem> oaiRecordIterator;
     private volatile boolean keepRunning = true;
 
-    public OAIFeeder(String feederName, int threadPriority, Priority queuePriority,
+    public OAIFeeder(String feederName, int threadPriority, LiveQueuePriority queuePriority,
                      String oaiUri, String oaiPrefix, String baseWikiUri,
                      long pollInterval, long sleepInterval, String defaultStartDateTime, long relativeEndFromNow,
                      String folderBasePath) {
@@ -105,14 +104,10 @@ public class OAIFeeder extends Thread {
         setLastResponseDate(latestResponseDate);
     }
 
-    protected void addPageIDtoQueue(long pageID, String modificationDate) {
+    protected void addPageIDtoQueue(LiveQueueItem item) {
 
-        Main.pageQueue.add(new PagePriority(pageID, queuePriority, modificationDate));
-
-        // We should check first if  pageID exists, as if it does not exist then it will be added, if it exists before either with same or higher
-        // priority then it will not be added
-        if (!Main.existingPagesTree.containsKey(pageID))
-            Main.existingPagesTree.put(pageID, false);//Also insert it into the TreeMap, so it will not be double-processed
+        LiveQueue.add(item);
+        latestResponseDate = item.getModificationDate();
     }
 
     public void run() {
@@ -139,10 +134,9 @@ public class OAIFeeder extends Thread {
     protected void handleFeedItem(LiveQueueItem item) {
 
         //if (!item.isDeleted())      {
-            addPageIDtoQueue(item.getItemID(), item.getModificationDate());
+            addPageIDtoQueue(item);
         //} else {
             // TODO page deleted case
         //}
-        latestResponseDate = item.getModificationDate();
     }
 }
