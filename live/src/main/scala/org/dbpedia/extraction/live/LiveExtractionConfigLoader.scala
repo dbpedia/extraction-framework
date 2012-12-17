@@ -157,15 +157,6 @@ object LiveExtractionConfigLoader extends ActionListener
         cpage.title.namespace == Namespace.File ||
         cpage.title.namespace == Namespace.Category)
       {
-
-        //val testPage = CurrentWikiPage;
-        //As the page title always starts with "en:", as it is the language of the page, and we are working only on
-        // English language, then we should remove that part as it will repeated without any advantage.
-//        val semicolonPosition = CurrentPageNode.title.decodedWithNamespace.indexOf(";");
-//        val pageNodeTitleWithoutLanguage = CurrentPageNode.title.toString.substring(0, semicolonPosition)
-        // TODO change these correct these uris
-        val strWikipage = "http://" + cpage.title.language.isoCode + ".wikipedia.org/wiki/" + cpage.title.encodedWithNamespace ;
-        val strDBppage = "http://" + cpage.title.language.isoCode + ".dbpedia.org/resource/" + cpage.title.encodedWithNamespace ;
         liveDest = new LiveUpdateDestination(cpage.title, language.locale.getLanguage(),
           cpage.id.toString)
 
@@ -194,8 +185,8 @@ object LiveExtractionConfigLoader extends ActionListener
 
         //Updating information needed for statistics
 
-        // TODO #Statistics temporary solution for compatibillity, must be be updated soon
-        StatisticsData.addItem(cpage.title.decoded, strDBppage,strWikipage,0, System.currentTimeMillis)
+        // TODO: Remove statistics for now, we have triple store for basic statistics
+        //StatisticsData.addItem(cpage.title.decoded, strDBppage,strWikipage,0, System.currentTimeMillis)
       }
 
     }
