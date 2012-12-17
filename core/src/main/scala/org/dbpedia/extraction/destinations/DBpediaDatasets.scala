@@ -21,6 +21,7 @@ object DBpediaDatasets
     val SkosCategories = new Dataset("skos_categories")
     val RevisionUris = new Dataset("revision_uris")
     val RevisionIds = new Dataset("revision_ids")
+    val RevisionMeta = new Dataset("revision_meta")
     val PageIds = new Dataset("page_ids")
     val InterLanguageLinks = new Dataset("interlanguage_links")
     val Genders = new Dataset("genders")
