@@ -2,7 +2,7 @@ package org.dbpedia.extraction.live.feeder;
 
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.helper.MappingAffectedPagesHelper;
-import org.dbpedia.extraction.live.priority.Priority;
+import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 
 /**
@@ -16,7 +16,7 @@ public class OAIFeederMappings extends OAIFeeder {
 
     private String mappingNamespace = "";
 
-    public OAIFeederMappings(String feederName, int threadPriority, Priority queuePriority,
+    public OAIFeederMappings(String feederName, int threadPriority, LiveQueuePriority queuePriority,
                              String oaiUri, String oaiPrefix, String baseWikiUri,
                              long pollInterval, long sleepInterval, String defaultStartDateTime, long relativeEndFromNow,
                              String folderBasePath) {
@@ -44,13 +44,11 @@ public class OAIFeederMappings extends OAIFeeder {
             scala.collection.immutable.List<Object> ids = MappingAffectedPagesHelper.GetMappingPages(title);
             scala.collection.Iterator<Object> iter = ids.iterator();
             while (iter.hasNext())
-                addPageIDtoQueue((Long) iter.next(), latestResponseDate);
+                addPageIDtoQueue(new LiveQueueItem((Long) iter.next(), latestResponseDate));
             iter = null;
             ids  = null;
         //} else {
             // TODO find which template the deleted infobox was referring to
         //}
-
-        latestResponseDate = item.getModificationDate();
     }
 }
