@@ -172,14 +172,18 @@ extends Extractor
 
     private def getImageUrl(fileName: String): (String, String) =
     {
-      val urlPrefix = if(freeWikipediaImages.contains(URLDecoder.decode(fileName, "UTF-8"))) wikipediaUrlLangPrefix else commonsUrlPrefix
+      // TODO: URLDecoder.decode() translates '+' to space. Is that correct here?
+      val decoded = URLDecoder.decode(fileName, "UTF-8")
+      
+      val urlPrefix = if(freeWikipediaImages.contains(decoded)) wikipediaUrlLangPrefix else commonsUrlPrefix
 
       val md = MessageDigest.getInstance("MD5")
-      val messageDigest = md.digest(URLDecoder.decode(fileName, "UTF-8").getBytes)
+      val messageDigest = md.digest(decoded.getBytes("UTF-8"))
       var md5 = (new BigInteger(1, messageDigest)).toString(16)
 
       // If the lenght of the MD5 hash is less than 32, then we should pad leading zeros to it, as converting it to
       // BigInteger will result in removing all leading zeros.
+      // FIXME: this is the least efficient way of building a string.
       while (md5.length < 32)
         md5 = "0" + md5;
 

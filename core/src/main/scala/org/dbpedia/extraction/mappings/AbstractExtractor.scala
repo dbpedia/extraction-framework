@@ -178,22 +178,8 @@ extends Extractor
     {
       // for XML format
       val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
-      val abstractText = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
-      cleanHTML(abstractText);
-    }
-
-    private def cleanHTML(html : String) : String =
-    {
-      var cleaned = html
-      try {
-         val stripped : String = scala.xml.parsing.XhtmlParser(scala.io.Source.fromString("<span>" + html + "</span>")).text.trim
-         cleaned = stripped
-       }
-       catch
-       {
-         case ex  : Exception =>   ;
-       }
-       cleaned
+      val text = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      decodeHtml(text)
     }
 
     private def postProcess(pageTitle: WikiTitle, text: String): String =
@@ -269,16 +255,19 @@ extends Extractor
         }
 
         // Re-generate wiki text for found range of nodes
-        var text = pageNode.children.slice(start, end)
+        val text = pageNode.children.slice(start, end)
                 .filter(renderNode)
                 .map(_.toWikiText)
                 .mkString("").trim
-
+        
         // decode HTML entities - the result is plain text
-        val coder = new HtmlCoder(XmlCodes.NONE)
-        coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
-        coder.code(text)
-        // TODO: do we need double decode?
+        decodeHtml(text)
+    }
+    
+    def decodeHtml(text: String): String = {
+      val coder = new HtmlCoder(XmlCodes.NONE)
+      coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
+      coder.code(text)
     }
 
 }

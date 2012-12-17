@@ -44,31 +44,38 @@ object RichPath {
 
 class RichPath(path: Path) extends FileLike[Path] {
   
+  override def toString: String = path.toString
+  
+  override def name: String = {
+    val last = path.getFileName()
+    if (last == null) null else last.toString
+  }
+  
   /**
    * @throws NotDirectoryException if the path is not a directory
    */
-  def hasFiles: Boolean = {
+  override def hasFiles: Boolean = {
     val stream = Files.newDirectoryStream(path)
     try stream.iterator.hasNext finally stream.close
   }
   
-  def delete(recursive: Boolean = false): Unit = {
+  override def delete(recursive: Boolean = false): Unit = {
     if (recursive && Files.isDirectory(path)) Files.walkFileTree(path, DeletionVisitor)
     else Files.delete(path)
   }
   
-  def resolve(name: String): Path = path.resolve(name)
+  override def resolve(name: String): Path = path.resolve(name)
   
-  def exists: Boolean = Files.exists(path)
+  override def exists: Boolean = Files.exists(path)
   
   // TODO: more efficient type than List?
-  def names: List[String] = names("*")
+  override def names: List[String] = names("*")
 
   // TODO: more efficient type than List?
   def names(glob: String): List[String] = list(glob).map(_.getFileName.toString) 
   
   // TODO: more efficient type than List?
-  def list: List[Path] = list("*")
+  override def list: List[Path] = list("*")
     
   // TODO: more efficient type than List?
   def list(glob: String): List[Path] = { 
@@ -76,13 +83,13 @@ class RichPath(path: Path) extends FileLike[Path] {
     try stream.toList finally stream.close
   }
   
-  def isFile: Boolean = Files.isRegularFile(path)
+  override def isFile: Boolean = Files.isRegularFile(path)
   
-  def isDirectory: Boolean = Files.isDirectory(path)
+  override def isDirectory: Boolean = Files.isDirectory(path)
   
-  def inputStream(): InputStream = Files.newInputStream(path)
+  override def inputStream(): InputStream = Files.newInputStream(path)
   
-  def outputStream(append: Boolean = false): OutputStream = {
+  override def outputStream(append: Boolean = false): OutputStream = {
     if (append) Files.newOutputStream(path, APPEND, CREATE) // mimic behavior of new FileOutputStream(file, true)
     else Files.newOutputStream(path)
   }

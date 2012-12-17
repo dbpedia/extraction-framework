@@ -4,6 +4,7 @@ import scala.collection.mutable.HashMap
 import scala.collection.mutable.SynchronizedMap
 import java.lang.StringBuilder
 import org.dbpedia.extraction.util.StringUtils.{escape,replacements}
+import org.dbpedia.extraction.util.WikiUtil
 
 /**
  * Base class of all nodes in the abstract syntax tree.
@@ -126,7 +127,7 @@ abstract class Node(val children : List[Node], val line : Int)
         if (section != null)
         {
             sb append '#' append "section="
-            escape(sb, section.name, Node.fragmentEscapes)
+            escape(sb, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes)
             sb append "&relative-line=" append (line - section.line)
             sb append "&absolute-line=" append line
         }
