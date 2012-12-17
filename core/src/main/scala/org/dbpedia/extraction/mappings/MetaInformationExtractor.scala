@@ -24,7 +24,7 @@ class MetaInformationExtractor( context : {
   val editLinkPredicate = "http://dbpedia.org/meta/editlink"
   val revisionPredicate = "http://dbpedia.org/meta/revision"
 
-  override val datasets = Set(DBpediaDatasets.Revisions)
+  override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
   //override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
@@ -34,16 +34,16 @@ class MetaInformationExtractor( context : {
     val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit";
     val revisionLink = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&oldid=" + page.revision;
 
-    val quadModificationDate = new Quad(context.language, DBpediaDatasets.Revisions, page.title.pageIri, modificationDatePredicate,
+    val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, modificationDatePredicate,
       formatTimestamp(page.timestamp), page.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
 
-    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.Revisions, page.title.pageIri, extractionDatePredicate,
+    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, extractionDatePredicate,
       formatCurrentTimestamp, page.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
 
-    val quadEditlink = new Quad(context.language, DBpediaDatasets.Revisions, page.title.pageIri, editLinkPredicate,
+    val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, editLinkPredicate,
       editLink, page.sourceUri, null )
 
-    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.Revisions, page.title.pageIri, revisionPredicate,
+    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, revisionPredicate,
       revisionLink, page.sourceUri, null )
 
 
