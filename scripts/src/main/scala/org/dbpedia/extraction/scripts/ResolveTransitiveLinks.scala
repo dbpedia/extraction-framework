@@ -1,13 +1,18 @@
 package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.scripts.IOUtils._
 import scala.collection.mutable.LinkedHashMap
 import java.io.File
+import scala.Console.err
 
 /**
  * Replace triples in a dataset by their transitive closure.
  * All triples must use the same property. Cycles are removed.
+ *
+ * Example call:
+ * ../run ResolveTransitiveLinks /data/dbpedia redirects transitive-redirects .nt.gz 10000-
  */
 object ResolveTransitiveLinks {
   
@@ -42,12 +47,13 @@ object ResolveTransitiveLinks {
     
     for (language <- languages) {
       
+      val finder = new DateFinder(baseDir, language)
+      
       // use LinkedHashMap to preserve order
       val map = new LinkedHashMap[String, String]()
       
       var predicate: String = null
-      val reader = new QuadReader(baseDir, language, suffix)
-      reader.readQuads(input) { quad =>
+      QuadReader.readQuads(finder, input + suffix, auto = true) { quad =>
         if (quad.context != null) throw new IllegalArgumentException("expected triple, found quad: "+quad)
         if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
         if (predicate == null) predicate = quad.predicate
@@ -55,15 +61,15 @@ object ResolveTransitiveLinks {
         map(quad.subject) = quad.value
       }
 
-      println("resolving "+map.size+" links...")
+      err.println("resolving "+map.size+" links...")
       val cycles = new TransitiveClosure(map).resolve()
-      println("found "+cycles.size+" cycles:")
+      err.println("found "+cycles.size+" cycles:")
       for (cycle <- cycles.sortBy(- _.size)) {
-        println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
+        err.println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
       }
       
-      val file = reader.find(output)
-      println(language.wikiCode+": writing "+file+" ...")
+      val file = finder.find(output + suffix)
+      err.println(language.wikiCode+": writing "+file+" ...")
       val writer = write(file)
       try {
         for ((subjUri, objUri) <- map) {
