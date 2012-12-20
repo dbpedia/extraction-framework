@@ -3,8 +3,10 @@ package org.dbpedia.extraction.live.processor;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
+import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
+import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 
 
 /**
@@ -51,6 +53,10 @@ public class PageProcessor extends Thread{
         while(true){
             try{
                 LiveQueueItem page = LiveQueue.take();
+                // If a mapping page set extractor to reload mappings and ontology
+                if (page.getPriority() == LiveQueuePriority.MappingPriority) {
+                    LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
+                }
                 processPage(page.getItemID());
                 logger.info("Page #" + page.getItemName() + " has been removed and processed");
             }
