@@ -43,8 +43,9 @@ public class OAIFeederMappings extends OAIFeeder {
         //if (!item.isDeleted()) {
             scala.collection.immutable.List<Object> ids = MappingAffectedPagesHelper.GetMappingPages(title);
             scala.collection.Iterator<Object> iter = ids.iterator();
+            long now = System.currentTimeMillis();
             while (iter.hasNext())
-                addPageIDtoQueue(new LiveQueueItem((Long) iter.next(), latestResponseDate));
+                addPageIDtoQueue(new LiveQueueItem((Long) iter.next(), latestResponseDate), now);
             iter = null;
             ids  = null;
         //} else {

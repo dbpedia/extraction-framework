@@ -41,6 +41,7 @@ object LiveExtractionConfigLoader extends ActionListener
   private var extractors : List[RootExtractor] = null;
   private var CurrentJob : ExtractionJob = null;
   private var reloadOntologyAndMapping = true;
+  private var ontologyAndMappingsUpdateTime : Long = 0;
   val logger = Logger.getLogger("LiveExtractionConfigLoader");
 
   /** Ontology source */
@@ -62,6 +63,12 @@ object LiveExtractionConfigLoader extends ActionListener
   def actionPerformed(e: ActionEvent) =
   {
     reloadOntologyAndMapping = true;
+  }
+
+  def reload(t : Long) =
+  {
+    if (t > ontologyAndMappingsUpdateTime)
+      reloadOntologyAndMapping = true;
   }
 
   /**
@@ -198,6 +205,7 @@ object LiveExtractionConfigLoader extends ActionListener
   //    private def LoadOntologyAndMappings(articlesSource: Source, language: Language): Extractor = {
   private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[RootExtractor] = {
 
+    ontologyAndMappingsUpdateTime = System.currentTimeMillis
     val extractorClasses = convertExtractorListToScalaList(LiveConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
     org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, articlesSource, commonsSource,
             extractorClasses, language)

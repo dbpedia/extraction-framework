@@ -13,6 +13,7 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
     private String itemName = "";
     private String modificationDate = "";
     private boolean deleted = false;
+    private long statQueueAdd = 0;
     // tODO: remove this
     private String xml = "";
 
@@ -51,6 +52,14 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
 
     public boolean isDeleted() {
         return deleted;
+    }
+
+    public void setStatQueueAdd(long t){
+        statQueueAdd = (t == -1) ? System.currentTimeMillis() : t;
+    }
+
+    public long getStatQueueAdd(){
+        return statQueueAdd;
     }
 
     @Override

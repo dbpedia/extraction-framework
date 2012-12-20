@@ -104,8 +104,10 @@ public class OAIFeeder extends Thread {
         setLastResponseDate(latestResponseDate);
     }
 
-    protected void addPageIDtoQueue(LiveQueueItem item) {
+    protected void addPageIDtoQueue(LiveQueueItem item, long millis) {
 
+        item.setStatQueueAdd(millis);
+        item.setPriority(this.queuePriority);
         LiveQueue.add(item);
         latestResponseDate = item.getModificationDate();
     }
@@ -134,7 +136,7 @@ public class OAIFeeder extends Thread {
     protected void handleFeedItem(LiveQueueItem item) {
 
         //if (!item.isDeleted())      {
-            addPageIDtoQueue(item);
+            addPageIDtoQueue(item, -1);
         //} else {
             // TODO page deleted case
         //}
