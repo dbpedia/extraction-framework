@@ -1014,8 +1014,6 @@ public class Hash{
         //Formulate SPARUL delete statement to delete all triples
         String graphURI  = LiveOptions.options.get("graphURI");
 
-        StringBuilder patternToDelete = new StringBuilder();
-
         StmtIterator iterator = getDeletedTriplesToPublish().listStatements();
 
         while(iterator.hasNext()){
@@ -1023,21 +1021,25 @@ public class Hash{
 
             String pattern = Util.convertToSPARULPattern(stmtToDelete.getSubject())
                     + " " + Util.convertToSPARULPattern(stmtToDelete.getPredicate())
-                    + " " + Util.convertToSPARULPattern(stmtToDelete.getObject())+" . \n";
+                    + " " + "?o" + " . \n";
             pattern = pattern.replace("\"\"\"", "\"");
 
-            patternToDelete.append(pattern);
-            logger.info(pattern);
+            String sparulDeleteStatement = "SPARQL DELETE FROM <" + graphURI + "> {" + pattern +"}\n" +
+                    "WHERE {" + pattern + "}";
+
+            ResultSet results = jdbc.exec( sparulDeleteStatement, "LiveUpdateDestination");
         }
 
-        String sparulDeleteStatement = "SPARQL DELETE FROM <" + graphURI + "> {" + patternToDelete.toString() +"}\n" +
-                "WHERE {" + patternToDelete.toString() + "}";
-
-        ResultSet results = jdbc.exec( sparulDeleteStatement, "LiveUpdateDestination");
-
         //Delete the resource from the table as well
-        String sql = "DELETE FROM " + TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
+        //1- delete from the diff table
+        //2- delete from the main table
+        String sql = "DELETE FROM " + DIFF_TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
         PreparedStatement stmt = jdbc.prepare(sql , "Hash::deleteResourceCompletely");
+        jdbc.executeStatement(stmt, new String[]{} );
+
+
+        sql = "DELETE FROM " + TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
+        stmt = jdbc.prepare(sql , "Hash::deleteResourceCompletely");
 
         return jdbc.executeStatement(stmt, new String[]{} );
 
