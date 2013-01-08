@@ -2,6 +2,7 @@ package org.dbpedia.extraction.live.processor;
 
 import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.destination.LiveUpdateDestination;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
@@ -55,6 +56,9 @@ public class PageProcessor extends Thread{
             String mediaWikiPrefix = "mediawiki";
 
             GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
+            if(record.toString().contains("header status=\"deleted\"")){
+                LiveUpdateDestination.deleteResourceCompletely(pageID);
+            }
             Document doc = record.getDocument();
 
             /////////////////////////////////////////////////////////////
@@ -77,6 +81,7 @@ public class PageProcessor extends Thread{
         }
 
     }
+
 
 
     public void run(){

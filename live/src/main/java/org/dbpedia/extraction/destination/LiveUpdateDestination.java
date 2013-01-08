@@ -26,8 +26,6 @@ import scala.collection.Seq;
 import scala.collection.Traversable;
 import scala.runtime.AbstractFunction1;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -1181,6 +1179,17 @@ public class LiveUpdateDestination implements Destination{
             this.hash.updateJSONObjectForExtractor(extractorID);
         }
 
+    }
+
+    /**
+     * Completely deletes a page with all of its triples.
+     * Used in case of deleted Wikipedia articles
+     * @param pageID    The ID of the page to be deleted
+     * @return  True if the deletion process was successful
+     */
+    public static boolean deleteResourceCompletely(long pageID){
+        Hash hashOfDeletedPage = new Hash(String.valueOf(pageID), "");
+        return hashOfDeletedPage.deleteResourceCompletely();
     }
 
     /**

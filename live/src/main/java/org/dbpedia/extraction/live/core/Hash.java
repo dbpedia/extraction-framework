@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.live.core;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.*;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.delta.Delta;
 import org.dbpedia.extraction.live.delta.DeltaCalculator;
@@ -13,6 +13,8 @@ import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -42,6 +44,10 @@ public class Hash{
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";
 
+	//This is a hack because of a bug in Jena framework, i.e. for a literal literal.getString()
+    //differs from literal.getValue().toString()
+    private boolean hashContainsInvalidObjectValue = false;
+
     public String oaiId;
 
     private static JDBC jdbc;
@@ -56,6 +62,11 @@ public class Hash{
     private HashMap<String, RDFTriple> addTriples = new HashMap<String, RDFTriple>();
     //special array with sparulpattern
     private HashMap<String, HashMap> deleteTriples = new HashMap<String, HashMap>();
+
+	//Those 2 models are used to hold the list of old, and new triples respectively
+    //So we can diff them at the end to get a list of add and/or deleted triples that should be published
+    Model triplesFromStoreModel = ModelFactory.createDefaultModel();
+    Model newTriplesModel = ModelFactory.createDefaultModel();
 
     private String Subject = null; //TODO This member is not explicitly typed in the php file, so we must make sure of its type
 
@@ -235,6 +246,7 @@ public class Hash{
             hashesFromStore = (HashMap<String, HashMap>) parser.parse(Temp, containerFactory);
             originalHashes = (HashMap) parser.parse(Temp, containerFactory);
             //this.hashesFromStore = json_decode(Temp, true);
+			_recalculateHashes();
 
             if(this.hashesFromStore == null)
             {
@@ -251,6 +263,132 @@ public class Hash{
             logger.warn(exp.getMessage());
             return false;
         }
+    }
+
+	private void _recalculateHashes(){
+        /*HashMap<String, HashMap> auxHashesFromStore = new HashMap<String, HashMap>();
+
+
+        Iterator<Map.Entry<String, HashMap>> hashesFromStoreIter = this.hashesFromStore.entrySet().iterator();
+		//        Iterator hmTestIter = hmTest.values().iterator();
+        while (hashesFromStoreIter.hasNext()){
+            Map.Entry<String, HashMap> entry = hashesFromStoreIter.next();
+            String extractorID = entry.getKey();
+            HashMap hmExtractorTriples = entry.getValue();
+
+            HashMap auxExtractorTriples = null;
+            if(hmExtractorTriples == null)
+                auxHashesFromStore.put(extractorID, null);
+            else if(hmExtractorTriples.size() == 0)
+                auxHashesFromStore.put(extractorID, new HashMap());
+            else {
+                auxExtractorTriples = new HashMap();
+                Iterator extractorTriplesIter = hmExtractorTriples.entrySet().iterator();
+                while (extractorTriplesIter.hasNext()){
+                    Map.Entry singleTriple = (Map.Entry) extractorTriplesIter.next();
+                    String tripleHash = (String)singleTriple.getKey();
+
+                    String subject = ((String)((HashMap)singleTriple.getValue()).get("s")).replace("<","").replace(">", "");
+                    String predicate = ((String)((HashMap)singleTriple.getValue()).get("p")).replace("<","").replace(">", "");
+                    String object = ((String)((HashMap)singleTriple.getValue()).get("o")).replace("<", "").replace(">", "").replace("\"\"", "\"").replace("\"\"","\"");
+
+                    RDFTriple testTriple = new RDFTriple(ResourceFactory.createResource(subject),
+                            ResourceFactory.createProperty(predicate), new ResourceImpl(object));
+                    String correctHashOfTriple = testTriple.getMD5HashCode();
+
+                    auxExtractorTriples.put(correctHashOfTriple, singleTriple.getValue());
+                }
+
+                auxHashesFromStore.put(extractorID, auxExtractorTriples);
+            }
+
+        }
+
+        hashesFromStore = auxHashesFromStore;*/
+        /***************Test Code*******************/
+
+        HashMap<String, HashMap> auxHashesFromStore = new HashMap<String, HashMap>();
+
+
+        Iterator<Map.Entry<String, HashMap>> hashesFromStoreIter = this.hashesFromStore.entrySet().iterator();
+//        Iterator hmTestIter = hmTest.values().iterator();
+        while (hashesFromStoreIter.hasNext()){
+            Map.Entry<String, HashMap> entry = hashesFromStoreIter.next();
+            String extractorID = entry.getKey();
+            HashMap hmExtractorTriples = entry.getValue();
+
+            if(hmExtractorTriples == null)
+                auxHashesFromStore.put(extractorID, null);
+            else if(hmExtractorTriples.size() == 0)
+                auxHashesFromStore.put(extractorID, new HashMap());
+            else {
+                Iterator extractorTriplesIter = hmExtractorTriples.entrySet().iterator();
+                while (extractorTriplesIter.hasNext()){
+                    Map.Entry singleTripleEntry = (Map.Entry) extractorTriplesIter.next();
+                    String tripleHash = (String)singleTripleEntry.getKey();
+
+                    HashMap hmTriple = (HashMap)singleTripleEntry.getValue();
+
+                    //In case of incorrect triple, then remove it from hashesFromStore, in order not compare with it later
+                    if(((String)hmTriple.get("o")).contains("jena"))
+                        extractorTriplesIter.remove();
+                    else {
+
+                    Model tmpModel = constructTripleFromHashmap(hmTriple);
+
+                    /*RDFTriple existingTriple = new RDFTriple(ResourceFactory.createResource(strSubject).addProperty(),
+                            ResourceFactory.createProperty(strPredicate), new ResourceImpl(strObject));
+                    triplesFromStoreModel.add(existingTriple);*/
+//                    tmpModel.commit();
+                    triplesFromStoreModel.add(tmpModel);
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    /**
+     * Reconstructs a Jena statement from its hashmap (stored in the database file) and places it into a model
+     * @param hmTriple  Hashmap containing the triple as S ->, P ->, O ->
+     * @return  Model with the reconstructed statement
+     */
+    private Model constructTripleFromHashmap(HashMap hmTriple) {
+        try{
+            String strSubject = ((String)(hmTriple).get("s")).replace("<","").replace(">", "");
+            String strPredicate = ((String)(hmTriple).get("p")).replace("<","").replace(">", "");
+            String strObject = ((String)(hmTriple).get("o")).replace("<", "").replace(">", "").replace("\"\"", "\"").replace("\"\"","");
+
+            Model tmpModel = ModelFactory.createDefaultModel();
+
+            Resource subject = tmpModel.createResource(URLDecoder.decode(strSubject, "UTF-8"));
+            if(strObject.contains("@en")){
+                String object = strObject.replace("@en","");
+                //As the object is stored in dbpedia_triples table as a UTF encoded string, e.g. \u1F08, we should decode it
+                subject.addProperty(tmpModel.createProperty(strPredicate),
+                        triplesFromStoreModel.createLiteral(StringEscapeUtils.unescapeJava(object),"en"));
+            }
+            else if(strObject.contains("^^"))
+            {
+                if(strObject.contains("jena")){
+                    hashContainsInvalidObjectValue = true;
+                    return ModelFactory.createDefaultModel();
+                }
+
+                String []objectParts = strObject.split("\\^\\^");
+                String object = objectParts[0];
+                String datatype = objectParts[1];
+                subject.addProperty(tmpModel.createProperty(strPredicate), triplesFromStoreModel.createTypedLiteral(object, datatype));
+            }
+            else
+                subject.addProperty(tmpModel.createProperty(strPredicate), triplesFromStoreModel.createResource(URLDecoder.decode(strObject, "UTF-8")));
+            return tmpModel;
+        }
+        catch (UnsupportedEncodingException exp){
+            return ModelFactory.createDefaultModel();
+        }
+
     }
 
     public void updateDB()
@@ -626,6 +764,14 @@ public class Hash{
         Timer.stop(timerName);
     }
 
+	public Model getAddedTriplesToPublish(){
+        return newTriplesModel.difference(triplesFromStoreModel);
+    }
+
+    public Model getDeletedTriplesToPublish(){
+        return triplesFromStoreModel.difference(newTriplesModel);
+    }
+
     public HashMap getTriplesToAdd()
     {
         logger.info("removing " + this.deleteTriples.size() + " previous triples ");
@@ -858,5 +1004,43 @@ public class Hash{
         }
     }
 
+	/**
+     * Completely deletes a page with all of its triples.
+     * Used in case of deleted Wikipedia articles
+     * @return  True if the deletion process was successful
+     */
+    public boolean deleteResourceCompletely(){
+
+        //Formulate SPARUL delete statement to delete all triples
+        String graphURI  = LiveOptions.options.get("graphURI");
+
+        StringBuilder patternToDelete = new StringBuilder();
+
+        StmtIterator iterator = getDeletedTriplesToPublish().listStatements();
+
+        while(iterator.hasNext()){
+            com.hp.hpl.jena.rdf.model.Statement stmtToDelete = iterator.next();
+
+            String pattern = Util.convertToSPARULPattern(stmtToDelete.getSubject())
+                    + " " + Util.convertToSPARULPattern(stmtToDelete.getPredicate())
+                    + " " + Util.convertToSPARULPattern(stmtToDelete.getObject())+" . \n";
+            pattern = pattern.replace("\"\"\"", "\"");
+
+            patternToDelete.append(pattern);
+            logger.info(pattern);
+        }
+
+        String sparulDeleteStatement = "SPARQL DELETE FROM <" + graphURI + "> {" + patternToDelete.toString() +"}\n" +
+                "WHERE {" + patternToDelete.toString() + "}";
+
+        ResultSet results = jdbc.exec( sparulDeleteStatement, "LiveUpdateDestination");
+
+        //Delete the resource from the table as well
+        String sql = "DELETE FROM " + TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::deleteResourceCompletely");
+
+        return jdbc.executeStatement(stmt, new String[]{} );
+
+    }
 
 }
