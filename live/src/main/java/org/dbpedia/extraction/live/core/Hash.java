@@ -1014,21 +1014,44 @@ public class Hash{
         //Formulate SPARUL delete statement to delete all triples
         String graphURI  = LiveOptions.options.get("graphURI");
 
+        ArrayList<String> listDistinctSubjects = new ArrayList<String>();
+
         StmtIterator iterator = getDeletedTriplesToPublish().listStatements();
+
+        StringBuffer sparulDeleteStatement = new StringBuffer("SPARQL DELETE FROM <" + graphURI + "> {?s ?p ?o}\n" +
+                "WHERE {?s ?p ?o. filter(?s IN (");
 
         while(iterator.hasNext()){
             com.hp.hpl.jena.rdf.model.Statement stmtToDelete = iterator.next();
 
-            String pattern = Util.convertToSPARULPattern(stmtToDelete.getSubject())
-                    + " " + Util.convertToSPARULPattern(stmtToDelete.getPredicate())
-                    + " " + "?o" + " . \n";
-            pattern = pattern.replace("\"\"\"", "\"");
+            if(!listDistinctSubjects.contains(stmtToDelete.getSubject().toString()))
+                listDistinctSubjects.add(stmtToDelete.getSubject().toString());
 
+            /*String pattern = Util.convertToSPARULPattern(stmtToDelete.getSubject())
+                    + " " + "?p"
+                    + " " + "?o" + " . \n";
             String sparulDeleteStatement = "SPARQL DELETE FROM <" + graphURI + "> {" + pattern +"}\n" +
                     "WHERE {" + pattern + "}";
 
-            ResultSet results = jdbc.exec( sparulDeleteStatement, "LiveUpdateDestination");
+            ResultSet results = jdbc.exec( sparulDeleteStatement, "LiveUpdateDestination");*/
         }
+
+        boolean firstSubject = true;//Used to avoid adding a comma before the first subject
+
+        for(String subject:listDistinctSubjects){
+            if(firstSubject)
+                firstSubject = false;
+            else
+                sparulDeleteStatement.append(",");
+
+            sparulDeleteStatement.append("<");
+            sparulDeleteStatement.append(subject);
+            sparulDeleteStatement.append(">");
+
+        }
+        sparulDeleteStatement.append("))}");
+
+        ResultSet results = jdbc.exec(sparulDeleteStatement.toString(), "LiveUpdateDestination");
 
         //Delete the resource from the table as well
         //1- delete from the diff table
