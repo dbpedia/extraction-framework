@@ -34,7 +34,7 @@ class Quad(
   val value: String,
   val context: String,
   val datatype: String
-)
+) extends Ordered[Quad]
 {
   def this(
     language: Language,
@@ -105,6 +105,19 @@ class Quad(
    "datatype="+datatype+","+
    "context="+context+
    ")"
+  }
+
+  def compare(that: Quad): Int = {
+    val s = subject.compareTo(that.subject)
+    if (s != 0)
+      s
+    else {
+      val p = predicate.compareTo(that.predicate)
+      if (p != 0)
+        p
+      else
+        value.compareTo(that.value)
+    }
   }
 }
 
