@@ -78,7 +78,7 @@ extends ConfigParser(config)
   /**
    * parse all URI policy lines
    */
-  private def parsePolicies(): Map[String, Array[Policy]] = {
+  def parsePolicies(): Map[String, Array[Policy]] = {
     
     val policies = new HashMap[String, Array[Policy]]()
     for (key <- config.stringPropertyNames) {
@@ -94,7 +94,7 @@ extends ConfigParser(config)
   /**
    * Parse all format lines.
    */
-  private def parseFormats(policies: Map[String, Array[Policy]]): Map[String, Formatter] = {
+  def parseFormats(policies: Map[String, Array[Policy]]): Map[String, Formatter] = {
     
     val formats = new HashMap[String, Formatter]()
     
@@ -144,7 +144,7 @@ extends ConfigParser(config)
   /**
    * Parses a policy line like "uri-policy.main=uri:en,fr; generic:en"
    */
-  private def parsePolicy(key: String): Array[Policy] = {
+  def parsePolicy(key: String): Array[Policy] = {
     
     val predicates = Array.fill(POSITIONS)(new ArrayBuffer[(Int, Policy)])
     
