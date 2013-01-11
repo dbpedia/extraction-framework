@@ -12,7 +12,7 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{WikiSource, Source}
 import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
-import org.dbpedia.extraction.destination.LiveUpdateDestination
+import org.dbpedia.extraction.destinations.LiveUpdateDestination
 import org.dbpedia.extraction.live.job.LiveExtractionJob
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
 import org.dbpedia.extraction.live.statistics.StatisticsData

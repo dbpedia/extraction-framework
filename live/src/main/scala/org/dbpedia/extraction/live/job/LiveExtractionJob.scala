@@ -7,7 +7,7 @@ import java.io.{InvalidClassException, File}
 import scala.util.control.ControlThrowable
 import org.dbpedia.extraction.sources.{Source, WikiPage}
 import org.dbpedia.extraction.wikiparser.{WikiParser, Namespace}
-import org.dbpedia.extraction.destination.LiveUpdateDestination
+import org.dbpedia.extraction.destinations.LiveUpdateDestination
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.RootExtractor
 
