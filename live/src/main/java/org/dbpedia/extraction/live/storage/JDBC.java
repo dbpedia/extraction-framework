@@ -247,5 +247,18 @@ public class JDBC {
 
     }
 
+    /**
+     * This function closes the connection
+     */
+    public void close() {
+        try {
+            con.close();
+            con = null;
+        } catch (SQLException exp) {
+            logger.warn("Connection cannot be closed Function close");
+        }
+
+    }
+
 
 }
