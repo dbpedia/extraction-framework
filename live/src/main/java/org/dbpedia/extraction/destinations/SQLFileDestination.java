@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.destination;
+package org.dbpedia.extraction.destinations;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;

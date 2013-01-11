@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.destination;
+package org.dbpedia.extraction.destinations;
 
 import java.io.FileInputStream;
 import java.sql.PreparedStatement;
