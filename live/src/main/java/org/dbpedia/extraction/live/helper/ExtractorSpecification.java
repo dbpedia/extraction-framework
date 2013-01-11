@@ -39,11 +39,11 @@ public class ExtractorSpecification {
             return false;
         if (status == ExtractorStatus.KEEP)
             return true;
-
-        for (MatchPattern rule: generatedTriplePatterns){
-            if (!rule.accept(quad))
-                return false;
-        }
+        if (generatedTriplePatterns != null)
+            for (MatchPattern rule: generatedTriplePatterns){
+                if (!rule.accept(quad))
+                    return false;
+            }
         return true;
     }
 
