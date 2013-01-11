@@ -138,9 +138,10 @@ public class LiveUpdateDestination implements Destination{
         }
 
 
-        //Add the extractors to the destination and divide them into 3 groups according to the status
-        for(ExtractorSpecification extractorSpec : LiveConfigReader.extractors.get(Language.apply(this.language))){
-            addExtractor(extractorSpec);
+        ///Add the extractors to the destination and divide them into 3 groups according to the status
+        Map<String, ExtractorSpecification> specs = LiveConfigReader.extractors.get(Language.apply(this.language));
+        for(Object spec : specs.values()){
+            addExtractor((ExtractorSpecification) spec);
         }
     }
 
