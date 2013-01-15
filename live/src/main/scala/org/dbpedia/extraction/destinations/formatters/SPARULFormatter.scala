@@ -9,7 +9,7 @@ import UriPolicy._
  *                 Must have five (UriPolicy.POSITIONS) elements. If null, URIs will not be modified.
  */
 class SPARULFormatter(insOrDel: Boolean, graph: String, policies: Array[Policy] = null)
-  extends TerseFormatter(false, false, policies) {
+  extends TripleFormatter(() => new SPARULBuilder(policies))  {
   override def header = (if (insOrDel) "INSERT DATA INTO" else "DELETE DATA FROM") + " <" + graph + "> {\n"
 
   override def footer = " } "
