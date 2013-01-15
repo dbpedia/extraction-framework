@@ -34,12 +34,12 @@ public class JDBCUtil {
         ResultSet result = null;
         try {
             conn = JDBCPoolConnection.getPoolConnection();
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt = conn.createStatement();
             result = stmt.executeQuery(query);
 
             return true;
         } catch (Exception e) {
-
+            logger.warn(e.getMessage());
             return false;
         } finally {
             try {
