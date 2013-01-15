@@ -115,9 +115,29 @@ class Quad(
       val p = predicate.compareTo(that.predicate)
       if (p != 0)
         p
-      else
-        value.compareTo(that.value)
+      else {
+        val o = value.compareTo(that.value)
+        if (o != 0 || datatype == null || that.datatype == null)
+          o
+        else
+          datatype.compareTo(that.datatype)
+      }
+
     }
+  }
+
+  override def equals(obj: Any) = {
+    if (obj.isInstanceOf[Quad]) {
+      val q = obj.asInstanceOf[Quad]
+      (this.subject.equals(q.subject)
+        && this.predicate.equals(q.predicate)
+        && this.value.equals(q.value)
+        && this.language.equals(q.language)
+        && (this.datatype == null || q.datatype == null || this.datatype.equals(q.datatype))
+        )
+    }
+    else
+      false
   }
 }
 
