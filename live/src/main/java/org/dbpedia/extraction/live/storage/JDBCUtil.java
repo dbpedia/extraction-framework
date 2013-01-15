@@ -3,10 +3,7 @@ package org.dbpedia.extraction.live.storage;
 
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * This class contains usefull funtions to deal with JDBC
@@ -84,7 +81,7 @@ public class JDBCUtil {
 
             return true;
         } catch (Exception e) {
-
+            logger.warn(e.getMessage());
             return false;
         } finally {
             try {
@@ -111,13 +108,13 @@ public class JDBCUtil {
     /*
     * Custon function for retrieving JSON Cache contents
     * */
-    public static String getJSONCacheContent(long pageID) {
+    public static String getJSONCacheContent(String query, long pageID, int column) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet result = null;
         try {
             conn = JDBCPoolConnection.getPoolConnection();
-            stmt = conn.prepareStatement(getJSONCacheSelect());
+            stmt = conn.prepareStatement(query);
 
             stmt.setLong(1, pageID);
 
@@ -126,7 +123,9 @@ public class JDBCUtil {
             StringBuilder json = new StringBuilder();
 
             if (result.next()) {
-                return result.getBlob(1).toString();
+                Blob blob = result.getBlob(column);
+                byte[] bdata = blob.getBytes(1, (int) blob.length());
+                return new String(bdata);
             } else {
                 return "";
             }
@@ -157,15 +156,4 @@ public class JDBCUtil {
     }
 
 
-    public static String getJSONCacheSelect() {
-        return "SELECT content FROM DBPEDIA_TRIPLES WHERE oaiid = ?";
-    }
-
-    public static String getJSONCacheInsert() {
-        return "INSERT INTO DBPEDIA_TRIPLES (oaiid, resource, content) VALUES ( ?, ? , ?  ) ";
-    }
-
-    public static String getJSONCacheDelete() {
-        return "DELETE FROM DBPEDIA_TRIPLES WHERE oaiid = ?";
-    }
 }
