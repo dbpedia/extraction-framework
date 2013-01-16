@@ -25,8 +25,6 @@ public class Main {
     private static final Logger logger = Logger.getLogger(Main.class);
 
     //Used for publishing triples to files
-//    public static Queue<PublishingData> publishingDataQueue = new LinkedList<PublishingData>();
-
     public static BlockingQueue<DiffData> publishingDataQueue = new LinkedBlockingDeque<DiffData>();
 
     // TODO make these non-static
