@@ -237,7 +237,7 @@ public class LiveUpdateDestination implements Destination{
 		}
 		deletedTriplesString += strDeletedTriple;
         }
-
+        /*
         PublishingData pubData;
         if(!Util.isStringNullOrEmpty(deletedTriplesString))
             pubData = new PublishingData(addedTriplesList, deletedTriplesString);
@@ -245,7 +245,7 @@ public class LiveUpdateDestination implements Destination{
             pubData = new PublishingData(addedTriplesList, true);
 //        logger.info("Inside ACCEPT");
         Main.publishingDataQueue.add(pubData);
-
+        */
     }
 
     /**
@@ -1167,11 +1167,11 @@ public class LiveUpdateDestination implements Destination{
             }
 
         }
-
+        /*
         //Publish the deleted triples
         PublishingData pubData = new PublishingData(addedTriplesList,deletedTriplesString);
         Main.publishingDataQueue.add(pubData);
-
+        */
     }
 
     /**

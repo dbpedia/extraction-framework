@@ -4,11 +4,11 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
+import org.dbpedia.extraction.live.publisher.DiffData;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.PublishedDataCompressor;
 import org.dbpedia.extraction.live.publisher.Publisher;
-import org.dbpedia.extraction.live.publisher.PublishingData;
 import org.dbpedia.extraction.live.statistics.Statistics;
 import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
@@ -27,7 +27,7 @@ public class Main {
     //Used for publishing triples to files
 //    public static Queue<PublishingData> publishingDataQueue = new LinkedList<PublishingData>();
 
-    public static BlockingQueue<PublishingData> publishingDataQueue = new LinkedBlockingDeque<PublishingData>();
+    public static BlockingQueue<DiffData> publishingDataQueue = new LinkedBlockingDeque<DiffData>();
 
     // TODO make these non-static
     private volatile static OAIFeederMappings feederMappings = null;
