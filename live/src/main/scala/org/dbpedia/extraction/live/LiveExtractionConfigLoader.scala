@@ -156,7 +156,7 @@ object LiveExtractionConfigLoader extends ActionListener
       reloadOntologyAndMapping = false;
     }
 
-    var liveDest : LiveUpdateDestination = null;
+    //var liveDest : LiveUpdateDestination = null;
     val parser = WikiParser()
 
     for (cpage <- articlesSource.map(parser))
