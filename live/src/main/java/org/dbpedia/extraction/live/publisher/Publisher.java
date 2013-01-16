@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.live.publisher;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import org.dbpedia.extraction.live.main.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +24,8 @@ public class Publisher extends Thread{
 
     private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
 
-    Model addedTriplesModel = ModelFactory.createDefaultModel();
-    StringBuffer deletedTriplesString = new StringBuffer();
+    HashSet<String> addedTriples = new HashSet<String>();
+    HashSet<String> deletedTriples = new HashSet<String>();
 
 //    protected static Options cliOptions;
 
@@ -320,54 +318,36 @@ public class Publisher extends Thread{
 
         Main.publishingDataQueue.remove(null);
 
-        PublishingData pubData = Main.publishingDataQueue.poll();
+        DiffData pubData = Main.publishingDataQueue.poll();
 
-        if(pubData!=null){
-            addedTriplesModel.add(pubData.triplesModel);
-            if((pubData.triplesString != null) && (pubData.triplesString != ""))
-                deletedTriplesString.append("\n" + pubData.triplesString);
+        if(pubData != null){
+            addedTriples.addAll(pubData.toAdd);
+            deletedTriples.addAll(pubData.toDelete);
         }
 
         if(sequenceNumber % 300 == 0){
-            String nonDuplicatedTriples = stripDuplicateDeletedTriples();
 
-            RDFDiffWriter.write(nonDuplicatedTriples, false, fileName, true);
-            RDFDiffWriter.write(addedTriplesModel, true, fileName, true);
+            StringBuilder addString = new StringBuilder();
+            for (String s: addedTriples ) {
+                addString.append(s);
+                addString.append('\n');
+            }
+            RDFDiffWriter.write(addString.toString(), true, fileName, true);
+            addedTriples.clear();
 
-            addedTriplesModel = ModelFactory.createDefaultModel();
-            deletedTriplesString.delete(0, deletedTriplesString.length()) ;
+            StringBuilder delString = new StringBuilder();
+            for (String s: deletedTriples ) {
+                delString.append(s);
+                delString.append('\n');
+            }
+            RDFDiffWriter.write(delString.toString(), false, fileName, true);
+            deletedTriples.clear();
+
             fileNumber++;
             writeLastPublishedFileSequence();
         }
 
     }
-
-    /**
-     * Removes the duplicated triples that may exist in
-     * @return  A string containing all deleted triples without any dupliactes
-     */
-    private String stripDuplicateDeletedTriples() {
-
-        String aHunk = deletedTriplesString.toString();
-
-        if(aHunk.compareTo("") == 0)
-            return "";
-
-        StringBuilder result = new StringBuilder();
-        Set<String> uniqueLines = new LinkedHashSet<String>();
-
-        String[] chunks = aHunk.split("\n");
-        uniqueLines.addAll(Arrays.asList(chunks));
-
-        for (String chunk : uniqueLines) {
-            if(chunk.compareTo("") != 0)
-                result.append(chunk).append("\n");
-        }
-
-        return result.toString();
-    }
-
-
 
     /**
      * Writes the publication date in the format Year-Month-Day-Hour-Counter, in a file called lastPublishedFile.txt
