@@ -12,14 +12,16 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{WikiSource, Source}
 import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
-import org.dbpedia.extraction.destinations.LiveUpdateDestination
+import org.dbpedia.extraction.destinations._
+import org.dbpedia.extraction.destinations.formatters._
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.live.job.LiveExtractionJob
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
-import org.dbpedia.extraction.live.statistics.StatisticsData
-import org.dbpedia.extraction.live.main.Main
 import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.dump.extract.ExtractionJob
+import org.dbpedia.extraction.dump.extract.{PolicyParser, ExtractionJob}
 import org.dbpedia.extraction.wikiparser.Namespace
+import collection.mutable.ArrayBuffer
+import org.dbpedia.extraction.live.storage.JSONCache
 
 
 /**
@@ -164,31 +166,57 @@ object LiveExtractionConfigLoader extends ActionListener
         cpage.title.namespace == Namespace.File ||
         cpage.title.namespace == Namespace.Category)
       {
-        liveDest = new LiveUpdateDestination(cpage.title, language.locale.getLanguage(),
-          cpage.id.toString)
+        //liveDest = new LiveUpdateDestination(cpage.title, language.locale.getLanguage(),
+        //  cpage.id.toString)
 
-        liveDest.setPageID(cpage.id);
-        liveDest.setOAIID(LiveExtractionManager.oaiID);
+        //liveDest.setPageID(cpage.id);
+        //liveDest.setOAIID(LiveExtractionManager.oaiID);
+
+        // TODO move it out of here
+        val prop: Properties = new Properties
+        val policy: String = LiveOptions.options.get("uri-policy.main")
+        prop.setProperty("uri-policy.main", policy)
+        val policyParser = new PolicyParser(prop)
+        val policies = policyParser.parsePolicy(policy)
+
+        val liveCache = new JSONCache(cpage.id, cpage.title.decoded)
+
+        var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
+        destList += new SPARULDestination(true) // add triples
+        destList += new SPARULDestination(false) // delete triples
+        destList += new JSONCacheUpdateDestination(liveCache)
+        destList += new PublisherDiffDestination(policies)
+        destList += new LoggerDestination(cpage.id, cpage.title.decoded) // Just to log extraction results
+
+        val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
+
+        val extractorDiffDest = new JSONCacheExtractorDestination(liveCache, compositeDest) // filters triples to add/remove/leave
+        // TODO get liveconfigReader permanently
+        val extractorRestrictDest = new ExtractorRestrictDestination ( LiveConfigReader.extractors.get(Language.apply(language.isoCode)), extractorDiffDest)
+
+        extractorRestrictDest.open
+        //val startTime = System.currentTimeMillis
 
         //Add triples generated from active extractors
         extractors.foreach(extractor => {
-          println(extractor.getClass())
-          var RequiredGraph = extractor(cpage);
+          //println(extractor.getClass())
+          val RequiredGraph = extractor(cpage);
 
-          //When the DBpedia framework is updated, there is a class called "RootExtractor", which contain internally the
-          // required extractor, so we should get it from inside
-          liveDest.write(RequiredGraph, extractor.extractor.getClass().getName());
+          extractorRestrictDest.write(extractor.extractor.getClass().getName(), "", RequiredGraph, Seq(), Seq())
+          //liveDest.write(RequiredGraph, extractor.extractor.getClass().getName());
         });
 
+        extractorRestrictDest.close
+
         //Remove triples generated from purge extractors
-        liveDest.removeTriplesForPurgeExtractors();
+        //liveDest.removeTriplesForPurgeExtractors();
 
         //Keep triples generated from keep extractors
-        liveDest.retainTriplesForKeepExtractors();
+        //liveDest.retainTriplesForKeepExtractors();
 
-        liveDest.close();
+        //liveDest.close();
 
-        logger.log(Level.INFO, "page number " + cpage.id + " has been processed");
+        //logger.log(Level.INFO, "page number " + cpage.id + " has been processed in " + (System.currentTimeMillis() - startTime));
 
         //Updating information needed for statistics
 
