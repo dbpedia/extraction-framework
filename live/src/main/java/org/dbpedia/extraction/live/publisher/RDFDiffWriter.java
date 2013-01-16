@@ -83,7 +83,6 @@ public class RDFDiffWriter
 			parentDir.mkdir();
 
 		String fileNameExtension = "nt";
-		String jenaFormat = "N-TRIPLE";
 
 		if(zip)
 			fileNameExtension += ".gz";
