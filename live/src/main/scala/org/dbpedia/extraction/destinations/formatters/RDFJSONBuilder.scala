@@ -3,6 +3,9 @@ package org.dbpedia.extraction.destinations.formatters
 import scala.util.parsing.json.JSONFormat
 import UriPolicy._
 
+/*
+* Serializes a single quad to JDF/JSON
+* */
 class RDFJSONBuilder(policies: Array[Policy] = null)
   extends UriTripleBuilder(policies) {
 
