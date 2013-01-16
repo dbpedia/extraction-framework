@@ -399,8 +399,8 @@ public class LiveUpdateDestination implements Destination{
         }
         if(errorOccurred)
             logger.fatal(" abstracts before/after: " + abstractCount +" / " +abstractCountAfter);
-        else
-            logger.info(" abstracts before/after: " + abstractCount +" / " +abstractCountAfter);
+        //else
+        //    logger.info(" abstracts before/after: " + abstractCount +" / " +abstractCountAfter);
 
         }
         catch(Exception exp){
@@ -533,7 +533,7 @@ public class LiveUpdateDestination implements Destination{
 		Timer.stop(timerName);
 
 		this._jdbc_ttlp_insert_triples(this.tripleFromExtractor);
-		logger.info("no of queries, insert: " + this.counterInserts + " delete: " + this.counterDelete + " jdbc_total: " + this.counterTotalJDBCOperations);
+		//logger.info("no of queries, insert: " + this.counterInserts + " delete: " + this.counterDelete + " jdbc_total: " + this.counterTotalJDBCOperations);
 
 	}
 
@@ -586,7 +586,7 @@ public class LiveUpdateDestination implements Destination{
         boolean isDeletionSuccessful = this._jdbcDeleteTriples(pattern);
 
         if(!isDeletionSuccessful){
-            logger.info("using fallback strategy (deleting single triples)" );
+            //logger.info("using fallback strategy (deleting single triples)" );
             strDeletedTriples="";
             fromStoreIterator = fromStore.entrySet().iterator();
             while(fromStoreIterator.hasNext()){
@@ -614,7 +614,7 @@ public class LiveUpdateDestination implements Destination{
             }
         }
         String needed = Timer.stopAsString(timerName);
-        logger.info("alt: deleted " + fromStore.size() + " triples directly (" + directCount+")" + needed);
+        //logger.info("alt: deleted " + fromStore.size() + " triples directly (" + directCount+")" + needed);
 
         deletedTriplesString += strDeletedTriples;
         //echo sparul;
@@ -628,9 +628,9 @@ public class LiveUpdateDestination implements Destination{
             }
 
 
-            logger.info("delaying: " + TEST_DELAY);
+            //logger.info("delaying: " + TEST_DELAY);
             int countafter =  this._testsubject(this.uri.toString());
-            logger.info("TEST _alt_delete_all_triples, before: " + countbefore + " after: "+countafter+" triples");
+            //logger.info("TEST _alt_delete_all_triples, before: " + countbefore + " after: "+countafter+" triples");
             int diff = countbefore-countafter;
             if( diff !=  directCount ){
 
@@ -657,7 +657,7 @@ public class LiveUpdateDestination implements Destination{
                 logger.warn("Test query: \n"+this._testsubjectQuery(this.uri.toString()));
 
             }  else{
-                logger.info("SUCCESS");
+                //logger.info("SUCCESS");
             }
         }
 
@@ -790,7 +790,7 @@ public class LiveUpdateDestination implements Destination{
         }
 
         String needed = Timer.stopAsString(timerName);
-        logger.info("deleted subject_not_static, needed " + needed);
+        //logger.info("deleted subject_not_static, needed " + needed);
 
         //TESTS>>>>>>>>>>>>
         if(debug_run_tests){
@@ -850,7 +850,7 @@ public class LiveUpdateDestination implements Destination{
         }
 
 		String needed = Timer.stopAsString(timerName);
-		logger.info("deleted subresources, needed "+needed );
+		//logger.info("deleted subresources, needed "+needed );
 		//TESTS>>>>>>>>>>>>
 		if(debug_run_tests){
             try{
@@ -910,7 +910,7 @@ public class LiveUpdateDestination implements Destination{
         }
 
 
-        logger.info("length globalTriplePattern: " + globalTripleNTriplePattern.length());
+        //logger.info("length globalTriplePattern: " + globalTripleNTriplePattern.length());
 
         Timer.stop(secondTimerName);
         int countbefore = 0;
@@ -965,7 +965,7 @@ public class LiveUpdateDestination implements Destination{
         Timer.start(secondTimerName);
         String globalTripleNTriplePattern = "";
         int tripleCounter = triplesToAdd.size();
-        logger.info("number of triple inserts: " + tripleCounter );
+        //logger.info("number of triple inserts: " + tripleCounter );
 
         for(Object objTriple : triplesToAdd){
             RDFTriple triple = (RDFTriple) objTriple;
@@ -973,7 +973,7 @@ public class LiveUpdateDestination implements Destination{
         }
 
 
-        logger.info("length globalTriplePattern: " + globalTripleNTriplePattern.length());
+        //logger.info("length globalTriplePattern: " + globalTripleNTriplePattern.length());
 
         Timer.stop(secondTimerName);
         //TESTS>>>>>>>>>>>>
@@ -999,11 +999,11 @@ public class LiveUpdateDestination implements Destination{
         if(debug_run_tests){
             int countafter = this._testwherepart(where);
 
-            logger.info("TEST _jdbc_ttlp_insert_triples, before: " + countbefore + " after: " + countafter + " triples");
+            //logger.info("TEST _jdbc_ttlp_insert_triples, before: " + countbefore + " after: " + countafter + " triples");
             if(countafter - countbefore < 0 && tripleCounter >0){
                 logger.warn("TEST FAILED, INSERT TRIPLES AFTER SHOULD BE BIGGER THAN BEFORE");
             }else{
-                logger.info("SUCCESS");
+                //logger.info("SUCCESS");
             }
         }
     }
@@ -1135,12 +1135,12 @@ public class LiveUpdateDestination implements Destination{
                 jdbc_result = stmt.execute();
 
                 if(!jdbc_result){
-                    logger.error("ttlp insert failes");
-                    logger.error(virtuosoPl);
-                    logger.error(ntriples.substring(0,100));
+                    //logger.error("ttlp insert failes");
+                   // logger.error(virtuosoPl);
+                    //logger.error(ntriples.substring(0,100));
 
                 }else{
-                    logger.info("insert returned a true via jdbc_execute");
+                   // logger.info("insert returned a true via jdbc_execute");
                 }
 
                 this.counterTotalJDBCOperations += 1;
@@ -1271,7 +1271,7 @@ public class LiveUpdateDestination implements Destination{
         }
         public Integer call(){
 
-            logger.info("Inside hasHash In thread "+ Thread.currentThread().getId());
+            //logger.info("Inside hasHash In thread "+ Thread.currentThread().getId());
 
             String timerName = "LiveUpdateDestination._primaryStrategy" +
                     (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
