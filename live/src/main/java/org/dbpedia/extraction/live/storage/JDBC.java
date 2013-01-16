@@ -147,7 +147,7 @@ public class JDBC {
             result = requiredStatement.executeQuery(query);
 
             Timer.stop(timerName);
-            logger.info(logComponent + "::SUCCESS ( " + result + " ): ");
+            //logger.info(logComponent + "::SUCCESS ( " + result + " ): ");
         } catch (Exception exp) {
             logger.warn(exp.getMessage() + " Function executeStatement ");
             //Try to reconnect, as the number of allowed statements may be exceeded

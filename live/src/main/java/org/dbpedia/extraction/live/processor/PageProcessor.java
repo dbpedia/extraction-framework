@@ -45,7 +45,6 @@ public class PageProcessor extends Thread{
         catch(Exception exp){
             logger.error("Error in processing page number " + pageID + ", and the reason is " + exp.getMessage(), exp);
         }
-
     }
 
 
@@ -58,7 +57,7 @@ public class PageProcessor extends Thread{
                     LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
                 }
                 processPage(page.getItemID());
-                logger.info("Page #" + page.getItemName() + " has been removed and processed");
+                //logger.info("Page #" + page.getItemName() + " has been removed and processed");
             }
             catch (Exception exp){
                 logger.error("Failed to process page");

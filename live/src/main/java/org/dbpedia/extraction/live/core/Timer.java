@@ -51,8 +51,8 @@ public class Timer{
             //Assert.assertNotNull("Timer name cannot be null, in function start", TimerName);
             if(start.get(TimerName) != null)
             {
-               logger.warn("Timer: "+ TimerName +" already started. overwriting, and thread id is " +
-                       Thread.currentThread().getId() + " thread name = " + Thread.currentThread().getName());
+               //logger.warn("Timer: "+ TimerName +" already started. overwriting, and thread id is " +
+                //       Thread.currentThread().getId() + " thread name = " + Thread.currentThread().getName());
             }
             start.put(TimerName, System.nanoTime());
         }

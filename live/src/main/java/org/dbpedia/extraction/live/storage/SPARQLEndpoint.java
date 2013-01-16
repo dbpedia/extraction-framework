@@ -127,7 +127,7 @@ public class SPARQLEndpoint {
                     (LiveExtractionConfigLoader.isMultithreading() ? Thread.currentThread().getId() : "");
             org.dbpedia.extraction.live.core.Timer.start(timerName);
 
-            logger.info(logComponent + ".url = " + url);
+            //logger.info(logComponent + ".url = " + url);
             HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
             con.setRequestMethod("POST");
 
@@ -150,7 +150,7 @@ public class SPARQLEndpoint {
             this.logger.error(logComponent + error);
         } finally {
             org.dbpedia.extraction.live.core.Timer.stop(timerName);
-            this.logger.info(logComponent + "returned: " + contents.length() + " of json code");
+            //this.logger.info(logComponent + "returned: " + contents.length() + " of json code");
         }
 
         return contents;

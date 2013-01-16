@@ -188,7 +188,7 @@ public class Hash{
 
             if(NumberOfRows <= 0)
             {
-                logger.info(this.Subject + " : no hash found");
+                //logger.info(this.Subject + " : no hash found");
                 return false;
             }
 
@@ -243,7 +243,7 @@ public class Hash{
                 return false;
             }
 
-            logger.info(this.Subject + " retrieved hashes from " + this.hashesFromStore + " extractors ");
+            //logger.info(this.Subject + " retrieved hashes from " + this.hashesFromStore + " extractors ");
             return true;
         }
         catch(Exception exp)
@@ -389,7 +389,7 @@ public class Hash{
         }
         else
         {
-            logger.info(this.Subject + " inserted hashes for " + this.newJSONObject.size() + " extractors " + needed);
+            //logger.info(this.Subject + " inserted hashes for " + this.newJSONObject.size() + " extractors " + needed);
         }
 
         //Closing the underlying statement, in order to avoid overwhelming Virtuoso
@@ -628,12 +628,12 @@ public class Hash{
 
     public HashMap getTriplesToAdd()
     {
-        logger.info("removing " + this.deleteTriples.size() + " previous triples ");
+        //logger.info("removing " + this.deleteTriples.size() + " previous triples ");
         return this.addTriples;
     }
     public HashMap getTriplesToDelete()
     {
-        logger.info("adding " + this.addTriples.size() + " triples ");
+        //logger.info("adding " + this.addTriples.size() + " triples ");
         return this.deleteTriples;
     }
 
@@ -668,8 +668,8 @@ public class Hash{
             String nicename = extractorID.replace(Constants.DB_META_NS, "");
 
             HashMap hmTemp = (HashMap)this.newJSONObject.get(extractorID);
-            logger.info(" added : " + hmTemp.size() + " of " +
-                    triples.size() + " triples to JSON object for " + nicename +  "[removed duplicates]" );
+            //logger.info(" added : " + hmTemp.size() + " of " +
+            //        triples.size() + " triples to JSON object for " + nicename +  "[removed duplicates]" );
         }
         Timer.stop(timerName);
     }
