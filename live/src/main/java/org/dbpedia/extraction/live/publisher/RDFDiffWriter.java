@@ -7,9 +7,6 @@ package org.dbpedia.extraction.live.publisher;
  * This class writes the triples to a file, for live synchronization, it is originally developed by Claus Stadler
  */
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.RDFWriter;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
 import org.apache.log4j.Logger;
 
@@ -62,63 +59,6 @@ public class RDFDiffWriter
 		return result;
 	}
 
-
-    /**
-     * Writes the passed model to file
-     * @param model The model containing the triples that should be written
-     * @param added Whether the model contains triples that should be added or removed
-     * @param baseName  The base file name
-     * @param zip   Whether the file should be compressed or not
-     * @throws IOException
-     */
-    public static void write(Model model, boolean added, String baseName, boolean zip)
-		throws IOException
-	{
-        //No data to be written
-        if(model.size() <= 0)
-            return;
-		File file = new File(baseName);
-		File parentDir = file.getParentFile();
-		if(parentDir != null)
-			parentDir.mkdir();
-
-		String fileNameExtension = "nt";
-		String jenaFormat = "N-TRIPLE";
-
-		if(zip)
-			fileNameExtension += ".gz";
-
-
-		RDFWriter rdfWriter = ModelFactory.createDefaultModel().getWriter(jenaFormat);
-
-
-        String fileName = "";
-        
-        if(added)
-            fileName = baseName + ".added." + fileNameExtension;
-        else
-            fileName = baseName + ".removed." + fileNameExtension;
-
-
-        logger.info("Attempting to write diff-file: " + fileName);
-
-		File outputFile = new File(fileName);
-        logger.info(fileName);
-		OutputStream tmp = new FileOutputStream(outputFile);
-
-		OutputStream out;
-		if(zip) {
-			out = new GzipCompressorOutputStream(tmp);
-		}
-		else {
-			out = tmp;
-		}
-
-		rdfWriter.write(model, out, "");
-
-		out.flush();
-		out.close();
-	}
 
     /**
      * Writes the passed model to file
