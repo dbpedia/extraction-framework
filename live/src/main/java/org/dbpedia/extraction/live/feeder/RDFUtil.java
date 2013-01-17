@@ -6,12 +6,12 @@ import com.hp.hpl.jena.shared.PrefixMapping;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import org.aksw.commons.jena_owlapi.Conversion;
-import org.aksw.commons.util.strings.StringUtils;
 import org.apache.commons.collections15.Transformer;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.coode.owlapi.rdf.model.RDFGraph;
 import org.coode.owlapi.rdf.model.RDFTranslator;
+import org.dbpedia.extraction.util.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClassExpression;
@@ -364,7 +364,7 @@ public class RDFUtil
 			return null;
         }
 
-        String id = StringUtils.md5Hash(node.toString());
+        String id = StringUtils.md5sum(node.toString());
 		Resource newId = oldToNew.get(id);
 
 		if (newId == null) {
