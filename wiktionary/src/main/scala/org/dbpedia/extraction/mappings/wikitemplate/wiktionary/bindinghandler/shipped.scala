@@ -46,7 +46,7 @@ class GermanTranslationHelper extends TranslationHelper {
         i.foreach(binding=>{
             try {
             val lRaw = binding("lang")(0).asInstanceOf[TemplateNode].title.encoded
-            val language = WiktionaryPageExtractor.map(lRaw)
+            val language = WiktionaryPageExtractor.map(lRaw.toLowerCase)
             val line = binding("line")
             var curSense = "1"
             line.foreach(node=>{
@@ -60,6 +60,8 @@ class GermanTranslationHelper extends TranslationHelper {
                     val tplType = node.asInstanceOf[TemplateNode].title.decoded
                     if(tplType == "Ü" || tplType == "Üxx"){
                         val translationTargetWord = getCleanWord(node.asInstanceOf[TemplateNode].property("2").get.children(0).asInstanceOf[TextNode].text)
+                        if(translationTargetWord.isEmpty)
+                          throw new Exception("translationTargetWord.isEmpty")
                         Logging.printMsg("translationTargetWord: "+translationTargetWord, 4)
                         expandSense(curSense).foreach(sense =>{
                             val translationSourceWord = if(sense.forall(_.isDigit)){ 

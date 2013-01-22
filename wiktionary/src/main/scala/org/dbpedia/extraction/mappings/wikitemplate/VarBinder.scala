@@ -385,7 +385,7 @@ object VarBinder {
   /**
    * silly helper function
    */
-  protected def restore(st : Stack[Node], backup : Stack[Node]) : Unit = {
+  def restore(st : Stack[Node], backup : Stack[Node]) : Unit = {
     st.clear
     st pushAll backup.reverse
   }

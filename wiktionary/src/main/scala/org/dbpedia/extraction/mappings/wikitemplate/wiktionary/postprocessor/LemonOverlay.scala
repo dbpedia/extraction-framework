@@ -52,7 +52,7 @@ class LemonOverlay (config : NodeSeq) extends PostProcessor {
             }
           }
         }
-        newQuads.appendAll(i) //keep orignal quads -> overlay
+        newQuads.appendAll(i) //keep original quads -> overlay
         newQuads.toList
     } else i
   }

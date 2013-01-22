@@ -358,6 +358,16 @@
     </templateRepresentativeProperties>
     <nodeHandlers>
         <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Deutsch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" />
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" />
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
             <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
             <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
             <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
@@ -377,6 +387,11 @@
             <mapping label="Befehl_du" uri="http://wiktionary.dbpedia.org/terms/imperativeSecondPerson" />
             <mapping label="Befehl_ihr" uri="http://wiktionary.dbpedia.org/terms/imperativeThirdPerson" />
             <mapping label="Hilfsverb" uri="http://wiktionary.dbpedia.org/terms/hasAuxiliaryVerb" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Deutsch Adjektiv Übersicht">
+            <mapping label="Positiv" uri="http://wiktionary.dbpedia.org/terms/hasPositiveForm" />
+            <mapping label="Komparativ" uri="http://wiktionary.dbpedia.org/terms/hasComparativeForm" />
+            <mapping label="Superlativ" uri="http://wiktionary.dbpedia.org/terms/hasSuperlativeForm" />
         </nodeHandler>
     </nodeHandlers>
     <saveVars>

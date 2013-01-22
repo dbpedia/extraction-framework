@@ -27,6 +27,7 @@ import org.dbpedia.extraction.mappings.wikitemplate.TimeMeasurement._
 import org.dbpedia.extraction.mappings.wikitemplate.VarBinder._
 import org.dbpedia.extraction.mappings.wikitemplate.Logging._
 import org.dbpedia.extraction.mappings.wikitemplate.MyLinkNode._
+import Matcher._
 import WiktionaryPageExtractor._ //companion
 
 
@@ -47,14 +48,13 @@ import WiktionaryPageExtractor._ //companion
  */
 
 class WiktionaryPageExtractor( context : {} ) extends Extractor {
-
   override val datasets = Set(datasetURI) //new Dataset("wiktionary"))
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {
     //return new Graph()
     val cache = new Cache
-    
+
     Logging.printMsg("start "+subjectUri+" threadID="+Thread.currentThread().getId(),2)
     // wait a random number of seconds. kills parallelism - otherwise debug output from different threads is mixed
     if(logLevel > 0){
@@ -70,16 +70,16 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     //skip some useless pages
     //println(entityId)
     for(start <- ignoreStart){
-        if(entityId.startsWith(start)){
-            Logging.printMsg("ignored "+entityId,1)
-            return quads.toList
-        }
+      if(entityId.startsWith(start)){
+        Logging.printMsg("ignored "+entityId,1)
+        return quads.toList
+      }
     }
     for(end <- ignoreEnd){
-        if(entityId.endsWith(end)){
-            Logging.printMsg("ignored "+entityId,1)
-            return quads.toList
-        }
+      if(entityId.endsWith(end)){
+        Logging.printMsg("ignored "+entityId,1)
+        return quads.toList
+      }
     }
 
     Logging.printMsg("processing "+entityId, 1)
@@ -91,20 +91,22 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
       //generate template-unrelated triples that are configured for the page
       try {
-        quads appendAll makeTriples(pageConfig.rt, new HashMap[String, List[Node]], pageConfig.name, cache) 
+        quads appendAll makeTriples(pageConfig.rt, new HashMap[String, List[Node]], pageConfig.name, cache)
       } catch {
         case e : WiktionaryException => Logging.printMsg("#error generating page triples: "+e.toString, 2)
       }
-      
+
       //println(page.children)
 
       val pageStack = new Stack[Node]().pushAll(page.children.reverse).filterSpaces
       //apply "first" nodehandlers
-      if(nodeHandlers.contains("first")){
-          nodeHandlers("first").foreach((nh : NodeHandler) => {
-                nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map())
-          })
-      }
+      beforeNodeHandlers.foreach((nh : NodeHandler) => {
+        var result = nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map(), pageConfig)
+        if(result.isInstanceOf[NodeHandlerTriplesResult]){
+          quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
+        }
+      })
+
       val proAndEpilogBindings : ListBuffer[Tuple2[Tpl, wikitemplate.VarBindingsHierarchical]] = new ListBuffer
       //handle prolog (beginning) (e.g. "see also") - not related to blocks, but to the main entity of the page
       for(prolog <- languageConfig \ "page" \ "prologs" \ "template"){
@@ -139,7 +141,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       //handle the bindings from pro- and epilog
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
         try {
-         quads appendAll handleFlatBindings(tplBindings.getFlat(), pageConfig, tpl, cache, cache.blockURIs("page").stringValue)
+          quads appendAll handleFlatBindings(tplBindings.getFlat(), pageConfig, tpl, cache, cache.blockURIs("page").stringValue)
         } catch { case _ => } //returned bindings are wrong
       }})
       Logging.printMsg("pro- and epilog bindings handled", 2)
@@ -154,14 +156,14 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       while(pageStack.size > 0){
         counter += 1
         if(counter % 100 == 0){
-            Logging.printMsg(""+counter+"/"+page.children.size+" nodes inspected "+entityId,1)
+          Logging.printMsg(""+counter+"/"+page.children.size+" nodes inspected "+entityId,1)
         }
         Logging.printMsg("page node: "+pageStack.head.toWikiText, 2)
         consumed = false
 
         //collect open blocks. reverse them, so innermost blocks are regarded first (when matching their templates and indicator templates)
         val possibleBlocks = curOpenBlocks.map(_.blocks).reverse.flatten //:: pageConfig
-        //val possibleTemplates = curOpenBlocks.foldLeft(List[Tpl]()){(all,cur)=>all ::: cur.templates} 
+        //val possibleTemplates = curOpenBlocks.foldLeft(List[Tpl]()){(all,cur)=>all ::: cur.templates}
         //println("possibleTemplates="+ possibleTemplates.map(t=>t.name) )
         //println("possibleBlocks="+ possibleBlocks.map(_.name) )
 
@@ -197,16 +199,12 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         }
 
         if(pageStack.size > 0){
-          if(nodeHandlers.contains("parsing")){
-            nodeHandlers("parsing").foreach((nh : NodeHandler) => {
-              var result = nh.process(pageStack, cache.blockURIs(curBlock.name).stringValue, cache, Map())
-              if(result.isInstanceOf[NodeHandlerVarBindingsResult]){
-                //quads appendAll handleFlatBindings(result.asInstanceOf[NodeHandlerVarBindingsResult].varBindings.getFlat(), curBlock, tpl, cache, cache.blockURIs(curBlock.name).stringValue)
-              } else if(result.isInstanceOf[NodeHandlerTriplesResult]){
-                quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
-              }
-            })
-          }
+          parsingNodeHandlers.foreach((nh : NodeHandler) => {
+            var result = nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map(), pageConfig)
+            if(result.isInstanceOf[NodeHandlerTriplesResult]){
+              quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
+            }
+          })
         }
 
         if(pageStack.size > 0){
@@ -242,11 +240,11 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
                   curBlock = block //switch to new block
                   Logging.printMsg("block indicator template "+blockIndTpl.name+" matched", 2)
-                  
+
                   //check where in the hierarchy the new opended block is
                   if(!curOpenBlocks.contains(block)){
                     // the new block is not up in the hierarchy
-                    // go one step down/deeper 
+                    // go one step down/deeper
                     //println("new block detected: "+block.name+" in curOpenBlocks= "+curOpenBlocks.map(_.name))
                     curOpenBlocks append block
                   } else {
@@ -255,16 +253,16 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                     //println("parent block detected: "+block.name+" in curOpenBlocks= "+curOpenBlocks.map(_.name))
                     val newOpen = curOpenBlocks.takeWhile(_ != block)
                     curOpenBlocks.clear()
-                    curOpenBlocks.appendAll(newOpen) 
+                    curOpenBlocks.appendAll(newOpen)
                     //take a new turn
                     curOpenBlocks.append(block)// up
                   }
-                  
+
                   //generate template-unrelated triples that are configured for the block
                   try {
-                    quads appendAll makeTriples(block.rt, new HashMap[String, List[Node]], block.name, cache) 
+                    quads appendAll makeTriples(block.rt, new HashMap[String, List[Node]], block.name, cache)
                   } catch {
-                    case e : WiktionaryException => Logging.printMsg("#error generating block triples: "+e.toString, 2)
+                    case e : WiktionaryException => Logging.printMsg("error generating block triples: "+e.toString, 2)
                   }
                   break; //dont match another block indicator template right away (continue with this blocks templates)
                 } catch {
@@ -281,23 +279,35 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           }
         }
         if(!consumed){
-          Logging.printMsg("skipping unconsumable node ", 2)
-          val unconsumeableNode = pageStack.pop
-          unconsumeableNode match {
-            case tn : TextNode => if(tn.text.startsWith(" ") || tn.text.startsWith("\n")){
+          var anyMatched = false
+          afterNodeHandlers.foreach((nh : NodeHandler) => {
+            var result = nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map(), pageConfig)
+            if(result.isInstanceOf[NodeHandlerTriplesResult]){
+              anyMatched = true
+              quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
+            }
+          })
+
+          if(!anyMatched){
+            Logging.printMsg("skipping unconsumable node ", 2)
+
+            val unconsumeableNode = pageStack.pop
+            unconsumeableNode match {
+              case tn : TextNode => if(tn.text.startsWith(" ") || tn.text.startsWith("\n")){
                 val afterSpace = tn.text.substring(1)
                 if(afterSpace.length != 0){
-                    pageStack.push(tn.copy(text=afterSpace))
+                  pageStack.push(tn.copy(text=afterSpace))
                 }
-            } else {
+              } else {
                 //skip this line
                 val lineEnd = tn.text.indexOf("\n")
                 val afterFirstBreak = tn.text.substring(tn.text.indexOf("\n")+1)
                 if(lineEnd >= 0 && afterFirstBreak.length != 0){
-                    pageStack.push(tn.copy(text=afterFirstBreak))
+                  pageStack.push(tn.copy(text=afterFirstBreak))
                 }
+              }
+              case _ =>
             }
-            case _ => 
           }
         }
       }
@@ -305,17 +315,23 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     } report {
       duration : Long => Logging.printMsg("took "+ duration +"ms", 1)
     }
-    
+
     //remove duplicate triples
     val quadsDistinct = quads.groupBy(_.toString).map(_._2.head).toList
 
     //postprocessing (schema transformation)
     val quadsPostProcessed = if(postprocessor.isDefined && quadsDistinct.size > 0){
-        postprocessor.get.process(quadsDistinct, cache.blockURIs("page").stringValue).groupBy(_.toString).map(_._2.head).toList
+      postprocessor.get.process(quadsDistinct, cache.blockURIs("page").stringValue).groupBy(_.toString).map(_._2.head).toList
     } else quadsDistinct
-    
+
+    val quadsFiltered = quadsPostProcessed.filter((q : Quad) =>
+           !q.subject.toString.equals(resourceNS)
+        && !q.subject.toString.equals(resourceNS+"-")
+        && !q.value.toString.equals("")
+        && !q.predicate.toString.equals(""))
+
     //sorting (by length, if equal length: alphabetical)
-    val quadsSorted = quadsPostProcessed.sortWith((q1, q2)=>{
+    val quadsSorted = quadsFiltered.sortWith((q1, q2)=>{
       val subjComp = myCompare(q1.subject.toString, q2.subject.toString)
       if(subjComp == 0){
         myCompare(q1.predicate.toString, q2.predicate.toString) < 0
@@ -328,17 +344,12 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     Logging.printMsg(""+quadsSorted.size+" quads extracted for "+entityId, 1)
     quadsWithStat.foreach( q => { Logging.printMsg(q.toString, 1) } )
     Logging.printMsg("finish "+subjectUri+" threadID="+Thread.currentThread().getId(), 2)
-    
+
     quadsWithStat
   }
+}
 
-  /**
-   * silly helper functions
-   */
-  protected def restore(st : Stack[Node], backup : Stack[Node]) : Unit = {
-    st.clear
-    st pushAll backup.reverse
-  }
+object WiktionaryPageExtractor {
 
   val emptyLinePat = java.util.regex.Pattern.compile( """^\s*$""", java.util.regex.Pattern.MULTILINE )
   private def countEmptyLines(s:String) : Int = {
@@ -422,6 +433,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                         val res = funName match {
                             case "uri" => urify(funArg)
                             case "map" => map(funArg)
+                            case "lastword" => funArg.split(" ").last.trim
                             case "assertMapped" => if(!hasMapping(funArg)){throw new Exception("assertion failed: existing key in mapings for "+funArg)} else {funArg}
                             case "assertNumeric" => if(!funArg.forall(_.isDigit)){throw new Exception("assertion failed: numeric "+funArg)} else {funArg}
                             case "getId" => cache.matcher.getId(funArg)
@@ -475,9 +487,6 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
           })
     quads.toList
   }
-}
-
-object WiktionaryPageExtractor {
 
   //load config from xml
   private val config = XML.loadFile("config/config.xml")
@@ -571,23 +580,28 @@ object WiktionaryPageExtractor {
   /**
   * load nodeHandlers from config
   */
-  val nodeHandlers = (languageConfig \ "nodeHandlers" \ "nodeHandler").map(_.head).toList.groupBy((n : XMLNode) => (n \ "@order").text).mapValues( (configs : List[XMLNode]) => { 
-    configs.map( (n : XMLNode) => {
+  val nodeHandlers: Map[String, List[NodeHandler]] = (languageConfig \ "nodeHandlers" \ "nodeHandler").map(_.head).toList.groupBy((n : XMLNode) => (n \ "@order").text).mapValues( (configs : List[XMLNode]) => {
+      configs.map( (n : XMLNode) => {
 
-    if(n.attribute("nhClass").isDefined){
-        Class.forName((n \ "@nhClass").text).getConstructor(classOf[NodeSeq]).newInstance((n)).asInstanceOf[NodeHandler]
-    } else {
-        if(n.attribute("builtin").isDefined){
-            (n \ "@builtin").text match {
-              case "InfoBoxMapper" => new InfoBoxMapper(n)
-             case _ => throw new Exception("unknown nodeHandler. builtin type unknown.")
-            }
+        if(n.attribute("nhClass").isDefined){
+            Class.forName((n \ "@nhClass").text).getConstructor(classOf[NodeSeq]).newInstance((n)).asInstanceOf[NodeHandler]
         } else {
-            throw new Exception("unknown nodeHandler. use nhClass or builtin attributes.")
+            if(n.attribute("builtin").isDefined){
+                (n \ "@builtin").text match {
+                  case "InfoBoxMapper" => new InfoBoxMapper(n)
+                 case _ => throw new Exception("unknown nodeHandler. builtin type unknown.")
+                }
+            } else {
+                throw new Exception("unknown nodeHandler. use nhClass or builtin attributes.")
+            }
         }
-    }
+    })
   })
-})
+
+  val parsingNodeHandlers : List[NodeHandler] = if(nodeHandlers.contains("parsing")){nodeHandlers("parsing")} else List[NodeHandler]()
+  val beforeNodeHandlers : List[NodeHandler] = if(nodeHandlers.contains("before")){nodeHandlers("before")} else List[NodeHandler]()
+  val afterNodeHandlers : List[NodeHandler] = if(nodeHandlers.contains("after")){nodeHandlers("after")} else List[NodeHandler]()
+
   val templateRepresentativeProperty = (languageConfig \ "templateRepresentativeProperties" \ "templateRepresentativeProperty").map(n=> ((n \ "@tplName").text, (n \ "@pKey").text) ).toMap
   
   /**
@@ -600,10 +614,27 @@ object WiktionaryPageExtractor {
   * urify
   * do some pseudo-urlencoding 
   */
-  def urify(in:String):String = in.replace("	"," ").replace(" ", "_").replace("'", "").replace("(", "").replace(")", "").replace("[ ", "").replace("]", "").replace("{", "").replace("}", "").replace("*", "").replace("+", "").replace("#", "").replace("/", "").replace("\\", "").replace("<", "").replace(">", "")//URLEncoder.encode(in.trim, "UTF-8")
+  def urify(in:String):String = in.replace("	"," ")
+    .replace(" ", "_")
+    .replace("'", "")
+    .replace("(", "")
+    .replace(")", "")
+    .replace("[ ", "")
+    .replace("]", "")
+    .replace("{", "")
+    .replace("}", "")
+    .replace("*", "")
+    .replace("+", "")
+    .replace("#", "")
+    .replace("/", "")
+    .replace("\\", "")
+    .replace("<", "")
+    .replace(">", "")
+  //URLEncoder.encode(Matcher.clean(in), "UTF-8")
 
   val cleanPattern = new Regex("[^\\p{L} ]")
   def getCleaned(dirty:String) = cleanPattern.replaceAllIn(dirty, "").trim
+
   def myCompare(s1 : String, s2 : String) : Int = {
       val s1l = s1.length
       val s2l = s2.length 
@@ -621,6 +652,8 @@ object WiktionaryPageExtractor {
 
   def map(in:String):String = {
     val clean = getCleaned(in)
+    if(!mappings.contains(clean))
+      Logging.printMsg("missing mapping for \""+clean+"\"", 2)
     mappings.getOrElse(clean, clean)
   }
 }
@@ -641,8 +674,7 @@ class Matcher {
    * sim(glossA, glossB) >= threshold => id(glossA) := id(glossB)
    */
   val threshold = WiktionaryPageExtractor.matchingThreshold.toFloat
-    
-  def clean(in:String) = in.toLowerCase
+
 
   /**
    * find best id for gloss
@@ -731,7 +763,9 @@ class Matcher {
     }
     cache(glossCleaned) = id
   }
-
+  def clear = ids.clear
+}
+object Matcher{
   def sim(s1 : String, s2 : String) : Float = {
     if(s1.equals(s2)){
       //equal match
@@ -785,20 +819,20 @@ class Matcher {
     }
   }
   def levenshtein_dist(s1: String, s2: String) : Int = {
-      val memo = scala.collection.mutable.Map[(List[Char],List[Char]),Int]()
-      def min(a:Int, b:Int, c:Int) = scala.math.min( scala.math.min( a, b ), c)
-      def sd(s1: List[Char], s2: List[Char]): Int = {
-        if (memo.contains((s1,s2)) == false)
-          memo((s1,s2)) = (s1, s2) match {
-            case (_, Nil) => s1.length
-            case (Nil, _) => s2.length
-            case (c1::t1, c2::t2)  => min( sd(t1,s2) + 1, sd(s1,t2) + 1,
-                                           sd(t1,t2) + (if (c1==c2) 0 else 1) )
-          }
-        memo((s1,s2))
-      }
+    val memo = scala.collection.mutable.Map[(List[Char],List[Char]),Int]()
+    def min(a:Int, b:Int, c:Int) = scala.math.min( scala.math.min( a, b ), c)
+    def sd(s1: List[Char], s2: List[Char]): Int = {
+      if (memo.contains((s1,s2)) == false)
+        memo((s1,s2)) = (s1, s2) match {
+          case (_, Nil) => s1.length
+          case (Nil, _) => s2.length
+          case (c1::t1, c2::t2)  => min( sd(t1,s2) + 1, sd(s1,t2) + 1,
+            sd(t1,t2) + (if (c1==c2) 0 else 1) )
+        }
+      memo((s1,s2))
+    }
 
-      sd( s1.toList, s2.toList )
+    sd( s1.toList, s2.toList )
   }
   def levenshtein(s1: String, s2: String) : Float = {
     val s1Size = s1.size
@@ -806,7 +840,9 @@ class Matcher {
     1 - (levenshtein_dist(s1, s2).toFloat / (scala.math.max(s1Size, s2Size) ))
   }
 
-  def clear = ids.clear
+  val cleaner = "\\W".r
+
+  def clean(in:String) = cleaner.replaceAllIn(in.toLowerCase,"")
 }
 
 class Cache {
