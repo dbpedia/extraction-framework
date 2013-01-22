@@ -38,6 +38,11 @@ import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.util.Language
 
+
+/**
+ * this class transforms a Sweble AST to DBpedia AST.
+ * the implementation is dirty
+ */
 final class SwebleWrapper extends WikiParser
 {
     var lastLine = 0
@@ -145,7 +150,10 @@ final class SwebleWrapper extends WikiParser
             case tn : Text => List(new TextNode(tn.getContent, line))
             case ws : Whitespace => List(new TextNode(ws.getContent.get(0).asInstanceOf[Text].getContent, line)) //as text
             case il : InternalLink => {
-                val destinationURL = WikiTitle.parse(il.getTarget(), language)
+                val target = il.getTarget()
+                val target2 = if(target != null && !target.equals("")){ if(target.startsWith("#")) target.substring(1) else target} else "none"
+                val destinationURL = WikiTitle.parse(target2, language)
+
                 val destinationNodes = List[Node](new TextNode(il.getTarget, line)) //parsing of target not yet supported
                 val titleNodes = if(!il.getTitle.getContent.isEmpty){transformNodes(il.getTitle.getContent)} else {List(new TextNode(il.getTarget, line))}
 

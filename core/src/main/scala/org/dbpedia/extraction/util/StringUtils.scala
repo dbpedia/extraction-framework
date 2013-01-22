@@ -13,7 +13,7 @@ object StringUtils
   private val timestampFormat = new ThreadLocal[DateFormat] {
     override def initialValue() = {
       // Note: the 'X' at the end of the format string and timezone "UTC" are important
-      val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
+      val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
       format.setTimeZone(TimeZone.getTimeZone("UTC"))
       format
     }
