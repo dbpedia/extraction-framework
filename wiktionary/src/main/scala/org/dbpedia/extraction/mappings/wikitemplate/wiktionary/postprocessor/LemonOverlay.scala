@@ -32,22 +32,21 @@ class LemonOverlay (config : NodeSeq) extends PostProcessor {
   def process(i : List[Quad], subject: String) : List[Quad] = {
     val mm = MemoryModel.fromQuads(i)
     if(i.size > 0){    
-        val language = WiktionaryPageExtractor.langObj
         val dataset = WiktionaryPageExtractor.datasetURI
         val context = WiktionaryPageExtractor.tripleContext
         val subjectURI = vf.createURI(subject)
         val blocks = Collector.collect(mm, subject, MMap(), this)
         val newQuads = new ListBuffer[Quad]()
-        newQuads append new Quad(language, dataset, subjectURI, instanceURI, outputStartClass, context)
+        newQuads append new Quad(dataset, subjectURI, instanceURI, outputStartClass, context)
         for(block <- blocks){
           val blockId = vf.createURI(block(blockIdProperty).head.asInstanceOf[Literal].stringValue)
-          newQuads append new Quad(language, dataset, subjectURI, blockProperty, blockId, context)
-          newQuads append new Quad(language, dataset, blockId, instanceURI, outputAggregatedClass, context)
+          newQuads append new Quad(dataset, subjectURI, blockProperty, blockId, context)
+          newQuads append new Quad(dataset, blockId, instanceURI, outputAggregatedClass, context)
           for(property <- block.keySet){
             val propertyURI = vf.createURI(property)
             for(value <- block(property)){
               if(collectProperties.contains(property)){
-                newQuads append new Quad(language, dataset, blockId, propertyURI, value, context)
+                newQuads append new Quad(dataset, blockId, propertyURI, value, context)
               }
             }
           }
@@ -104,7 +103,6 @@ object Collector  {
 
         if(properties.contains(config.instanceRelation) && myContains(properties(config.instanceRelation), config.inputTargetClass)){
             //end condition for recursion
-            //println("end condition reached")
             val values = new ListBuffer[Value]()
             values.append(config.vf.createLiteral(cur))
             collected(config.blockIdProperty) = values
@@ -137,13 +135,14 @@ class MemoryModel (val d : MMap[String, MMap[String, ListBuffer[Value]]]) {
   def hasS(s:String) = d.contains(s)
   def getPO(s:String) = d(s)
   def getO(s:String, p:String) = d(s)(p)
+
   def getQuads(langObj:Language, datasetURI:Dataset, tripleContext:Resource) : List[Quad] = {
     val quads = new ListBuffer[Quad]()
-println(d.keySet)
+
     for(s <- d.keySet){
         for(p <- d(s).keySet){
             for(o <- d(s)(p)){
-                quads.append(new Quad(langObj, datasetURI, ValueFactoryImpl.getInstance.createURI(s), ValueFactoryImpl.getInstance.createURI(p), o, tripleContext))
+                quads.append(new Quad(datasetURI, ValueFactoryImpl.getInstance.createURI(s), ValueFactoryImpl.getInstance.createURI(p), o, tripleContext))
             }
         }
     }
@@ -152,7 +151,18 @@ println(d.keySet)
 }
 
 object MemoryModel {
-  def getValue(q:Quad) : Value = if(q.datatype == null){ValueFactoryImpl.getInstance.createURI(q.value)} else {ValueFactoryImpl.getInstance.createLiteral(q.value)}
+  def getValue(q:Quad) : Value = {
+    val ret = if(q.datatype == null && q.language == null)
+      ValueFactoryImpl.getInstance.createURI(q.value)
+    else if(q.datatype != null && !q.datatype.equals("http://www.w3.org/2001/XMLSchema#string"))
+      ValueFactoryImpl.getInstance.createLiteral(q.value, ValueFactoryImpl.getInstance.createURI(q.datatype))
+    else if(q.language != null)
+      ValueFactoryImpl.getInstance.createLiteral(q.value, q.language)
+    else
+      ValueFactoryImpl.getInstance.createLiteral(q.value)
+
+    ret
+  }
   
   def fromQuads(g:List[Quad]) : MemoryModel = {
     val d = MMap[String, MMap[String, ListBuffer[Value]]]()

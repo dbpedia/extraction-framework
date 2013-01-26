@@ -22,18 +22,19 @@ trait TranslationHelper extends BindingHandler {
     val translateCleanPattern = new Regex("\\([^\\)]*\\)")
     def getCleanWord(dirty:String) = translateCleanPattern.replaceAllIn(dirty.split(",").head, "").trim
     
-    def getTranslateTriples(source : Resource, property : URI, word : String, language : String, thisBlockURI : String) : List[Quad] = {
+    def getTranslateTriples(source : Resource, property : URI, word : String, language : String, llangLowerShort : String, thisBlockURI : String) : List[Quad] = {
         val quads = new ListBuffer[Quad]()
         val wordObj = vf.createURI(WiktionaryPageExtractor.resourceNS+WiktionaryPageExtractor.urify(word))
         val wordLangObj = vf.createURI(WiktionaryPageExtractor.resourceNS+WiktionaryPageExtractor.urify(word)+"-"+WiktionaryPageExtractor.urify(language))
         //main translate triple
-        quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, source, property, wordLangObj, WiktionaryPageExtractor.tripleContext)
+        quads += new Quad(WiktionaryPageExtractor.datasetURI, source, property, wordLangObj, WiktionaryPageExtractor.tripleContext)
         //the triple inversed
         //quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordLangObj, property, source, WiktionaryPageExtractor.tripleContext) 
         //a triple about the target word
-        quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasLangUsage"), wordLangObj, WiktionaryPageExtractor.tripleContext)
+        quads += new Quad(WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasLangUsage"), wordLangObj, WiktionaryPageExtractor.tripleContext)
         //a label for the target word
-        quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word), WiktionaryPageExtractor.tripleContext)
+      quads += new Quad(WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word), WiktionaryPageExtractor.tripleContext)
+      quads += new Quad(WiktionaryPageExtractor.datasetURI, wordLangObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word, llangLowerShort), WiktionaryPageExtractor.tripleContext)
         quads.toList
     }
 }
@@ -46,7 +47,8 @@ class GermanTranslationHelper extends TranslationHelper {
         i.foreach(binding=>{
             try {
             val lRaw = binding("lang")(0).asInstanceOf[TemplateNode].title.encoded
-            val language = WiktionaryPageExtractor.map(lRaw.toLowerCase)
+            val llangLowerShort = lRaw.toLowerCase
+            val language = WiktionaryPageExtractor.map(llangLowerShort)
             val line = binding("line")
             var curSense = "1"
             line.foreach(node=>{
@@ -69,7 +71,7 @@ class GermanTranslationHelper extends TranslationHelper {
                             } else {
                                 vf.createURI(thisBlockURI)
                             }
-                            quads.appendAll(getTranslateTriples(translationSourceWord, translateProperty, translationTargetWord, language, thisBlockURI))
+                            quads.appendAll(getTranslateTriples(translationSourceWord, translateProperty, translationTargetWord, language, llangLowerShort, thisBlockURI))
                         })
                     }
                 }
@@ -110,7 +112,7 @@ class EnglishTranslationHelper extends TranslationHelper {
                         val translationTargetLanguage = node.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text
                         val translationTargetWord = getCleanWord(node.asInstanceOf[TemplateNode].property("2").get.children(0).asInstanceOf[TextNode].text)
                         Logging.printMsg("translationTargetWord: "+translationTargetWord, 4)
-                        quads.appendAll(getTranslateTriples(translationSourceWord, translateProperty, translationTargetWord, language, thisBlockURI))
+                        quads.appendAll(getTranslateTriples(translationSourceWord, translateProperty, translationTargetWord, language, translationTargetLanguage, thisBlockURI))
                     }
                   }
                 } catch {
@@ -142,7 +144,7 @@ class LinkListHelper extends BindingHandler {
                 try{
                 if(node.isInstanceOf[LinkNode]){
                     val destination = node.asInstanceOf[LinkNode].getFullDestination(WiktionaryPageExtractor.resourceNS)
-                    quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
+                    quads += new Quad(WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
 
                 }
                 } catch {
@@ -182,7 +184,7 @@ class ExplicitSenseLinkListHelper extends BindingHandler {
                           vf.createURI(thisBlockURI)
                         }
                         val destination = node.asInstanceOf[LinkNode].getFullDestination(WiktionaryPageExtractor.resourceNS)
-                        quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
+                        quads += new Quad(WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
                     })
                 } 
                 } catch {
@@ -225,7 +227,7 @@ class MatchedSenseLinkListHelper extends BindingHandler {
                           vf.createURI(thisBlockURI)
                         }
                         val destination = node.asInstanceOf[LinkNode].getFullDestination(WiktionaryPageExtractor.resourceNS)
-                        quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
+                        quads += new Quad(WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
                     } 
                 } catch {
                    case e:Exception=> Logging.printMsg("error processing translation item: "+e.getMessage, 4)//ignore

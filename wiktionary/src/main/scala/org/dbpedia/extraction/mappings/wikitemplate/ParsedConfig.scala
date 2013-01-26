@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.mappings.wikitemplate
 
-import xml.Node
 import xml.NodeSeq._
 import collection.mutable.{ListBuffer, Stack}
 import xml.{XML, Node => XMLNode}
@@ -8,6 +7,7 @@ import scala.util.matching.Regex
 import org.dbpedia.extraction.wikiparser._
 
 import MyStack._
+import collection.mutable
 
 /**.
  * User: Jonas Brekle <jonas.brekle@gmail.com>
@@ -19,22 +19,27 @@ import MyStack._
  * these classes represent configuration from the xml
  * they are simple wrappers that provide a object representation to avoid xml in the extractor
  */
-class TripleTemplate(t : XMLNode)  {
+class TripleTemplate(t : XMLNode) {
 
-val s : String = (t \ "@s").text
-val p : String = (t \ "@p").text
-val o : String = (t \ "@o").text
-val oType : String = if(t.attribute("oType").isDefined){(t \ "@oType").text} else {"URI"}
-val oNewBlock : Boolean =t.attribute("oNewBlock").isDefined && (t \ "@oNewBlock").text.equals("true") 
-val optional : Boolean = t.attribute("optional").isDefined && (t \ "@optional").text.equals("true") 
+  val s : String = (t \ "@s").text
+  val p : String = (t \ "@p").text
+  val o : String = (t \ "@o").text
+  val oLang : String = if(t.attribute("oLang").isDefined){(t \ "@oLang").text} else {null}
+  val oDatatype : String = if(t.attribute("oDatatype").isDefined){(t \ "@oDatatype").text} else {null}
+  val oType : String = if(t.attribute("oType").isDefined){(t \ "@oType").text} else {"URI"}
+  val oNewBlock : Boolean =t.attribute("oNewBlock").isDefined && (t \ "@oNewBlock").text.equals("true")
+  val optional : Boolean = t.attribute("optional").isDefined && (t \ "@optional").text.equals("true")
 }
 
-class ResultTemplate(val triples : Seq[TripleTemplate]){}
+class ResultTemplate(val triples : Seq[TripleTemplate])
 
 class PostProcessing(var clazz : String, var parameters : Map[String, String]){}
 
-class Tpl (val name : String, val wiki : Stack[org.dbpedia.extraction.wikiparser.Node], val pp : Option[PostProcessing], val resultTemplates : Seq[ResultTemplate])
+class Tpl (val name : String, val wiki : Stack[Node], val pp : Option[PostProcessing], val resultTemplates : Seq[ResultTemplate])
 object Tpl {
+
+  val Cache = mutable.Map[String, Tpl]()
+
   //$var, ()*+? for repetitions, and ~~link~~ to subsumpt the three link types
   def expandTpl(orig : String) : String = {
     //println(orig)
@@ -61,7 +66,13 @@ object Tpl {
     return tplExpanded
   }
 
-  def fromNode(n:XMLNode) = {
+  def fromNode(n:XMLNode) : Tpl = {
+    val name = (n \ "@name").text
+
+    if(Tpl.Cache.contains(name)){
+      return Tpl.Cache(name)
+    }
+
     val pp = if(n.attribute("ppClass").isDefined){Some(new PostProcessing((n \ "@ppClass").text, (n \ "parameters" \ "parameter").map(n=>{ ((n \ "@name").text, (n \ "@value").text) }).toMap))} else None
 
     val tplString = (n \ "wikiTemplate").text
@@ -69,9 +80,9 @@ object Tpl {
     val tplExpanded = expandTpl(tplString)
 
     //println(tplExpanded);
-    val tpl = MyStack.fromString(tplExpanded).filterNewLines
+    val tplText = MyStack.fromString(tplExpanded).filterNewLines
     if(tplExpanded.startsWith("\n")){
-        tpl.push(new TextNode("\n",0))
+      tplText.push(new TextNode("\n",0))
     }
     //println((n \ "@name").text + tpl)
     val rt = (n \ "resultTemplates" \ "resultTemplate").map(
@@ -83,12 +94,15 @@ object Tpl {
    )
     
     //return
-    new Tpl(
+    val tpl = new Tpl(
       (n \ "@name").text,
-      tpl,
+      tplText,
       pp, 
       rt
     )
+
+    Tpl.Cache(name) = tpl
+    tpl
   }
 }
 

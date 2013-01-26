@@ -34,7 +34,7 @@ class InfoBoxMapper(config : NodeSeq) extends NodeHandler {
       n.push(node)
       return new NodeHandlerNoResult
     } else {
-      Console.println("found node")
+
       val mapped = node.asInstanceOf[TemplateNode].children.filter(prop => mapping.contains(prop.key)).map(prop => (mapping(prop.key), prop.children))
 
       val varBindings = new VarBindings
@@ -45,12 +45,6 @@ class InfoBoxMapper(config : NodeSeq) extends NodeHandler {
         varBindings += map
       }
 
-      /*for( (name, value) <- mapped) {
-        val obj = vf.createLiteral(value.toReadableString)
-        val quad = new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, vf.createURI(thisBlockURI), vf.createURI(name), obj, WiktionaryPageExtractor.tripleContext)
-        Console.println("->quad "+quad)
-        quads += quad
-      }*/
       var tpl = new Tpl("nodehandlerdummy", new Stack(), None, templates)
       val quads = WiktionaryPageExtractor.handleFlatBindings(varBindings, block, tpl, cache, thisBlockUri)
       return new NodeHandlerTriplesResult(quads.toList)

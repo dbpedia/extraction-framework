@@ -79,15 +79,18 @@ class Quad(
 
   //a constructor for openrdf
   def this(
-    language : Language,
     dataset : Dataset,
     subject : Resource,
     predicate : URI,
     value : Value,
     context : Resource
   ) = this(
-      language.locale.getLanguage, 
-      dataset.name, 
+      if(value.isInstanceOf[Literal] && value.asInstanceOf[Literal].getLanguage != null){
+        value.asInstanceOf[Literal].getLanguage
+      } else {
+        null
+      },
+      dataset.name,
       subject.stringValue(), 
       predicate.stringValue(), 
       value.stringValue(), 

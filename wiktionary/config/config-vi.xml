@@ -245,7 +245,7 @@
             <!-- a link to the wiktionary page -->
             <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://en.wiktionary.org/wiki/uri($entityId)" oType="URI"/>
             <!-- provenance: list of authors -->
-            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://usefulinc.com/ns/doap#creator" o="http://en.wiktionary.org/w/index.php?title=uri($entityId)&amp;action=history" oType="URI"/>
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://purl.org/dc/elements/1.1/creator" o="http://en.wiktionary.org/w/index.php?title=uri($entityId)&amp;action=history" oType="URI"/>
             <!-- a type declaration -->
             <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/LexicalEntity" oType="URI"/>
         </triples>
@@ -567,7 +567,7 @@ $etymology
 )+
 </wikiTemplate>
                     </template>
-                    <template name="coordinateTerms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
+                    <!--template name="coordinateTerms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCoordinateTerm"/>                   
                         </parameters> 
@@ -575,7 +575,7 @@ $etymology
 (* {{sense|$sense}}$line
 )+
 </wikiTemplate>
-                    </template>
+                    </template-->
                     <template name="hyponyms" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.MatchedSenseLinkListHelper">
                         <parameters>
                             <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasHyponym"/>                   
