@@ -338,6 +338,7 @@
                 <property uri="http://wiktionary.dbpedia.org/terms/hasAudioSingular"/>
                 <property uri="http://wiktionary.dbpedia.org/terms/hasAudioPlural"/>
                 <property uri="http://wiktionary.dbpedia.org/terms/hasCollocation"/>
+                <property uri="http://wiktionary.dbpedia.org/terms/hasRelatedTerm"/>
                 <property uri="http://wiktionary.dbpedia.org/terms/hasEtymology"/>
                 <property uri="http://wiktionary.dbpedia.org/terms/hasHyphenationSingular"/>
                 <property uri="http://wiktionary.dbpedia.org/terms/hasHyphenationPlural"/>
@@ -405,7 +406,7 @@
             <!-- a link to the wiktionary page -->
             <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/2000/01/rdf-schema#seeAlso" o="http://de.wiktionary.org/wiki/uri($entityId)" oType="URI"/>
             <!-- provenance: list of authors -->
-            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://usefulinc.com/ns/doap#creator" o="http://de.wiktionary.org/w/index.php?title=uri($entityId)&amp;action=history" oType="URI"/>
+            <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://purl.org/dc/elements/1.1/creator" o="http://de.wiktionary.org/w/index.php?title=uri($entityId)&amp;action=history" oType="URI"/>
             <!-- a type declaration -->
             <triple s="http://wiktionary.dbpedia.org/resource/uri($entityId)" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/LexicalEntity" oType="URI"/>
         </triples>
@@ -479,7 +480,7 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
+                                    <triple s="$block-clean($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasExampleSentence" o="$example" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates> 
@@ -509,9 +510,9 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-uri($meaningId)de" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)de" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
-                                    <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasSense" o="$block-clean($meaningId)de" oType="URI"/>
+                                    <triple s="$block-clean($meaningId)de" p="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" o="http://wiktionary.dbpedia.org/terms/Sense" oType="URI"/>
+                                    <triple s="$block-clean($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasMeaning" o="$meaning" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>
@@ -524,7 +525,7 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$etymology" oType="literal" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$etymology" oType="literal" oLang="ru" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>
@@ -536,7 +537,7 @@
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$etymology" oType="literal" />
+                                    <triple s="$block-clean($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasEtymology" o="$etymology" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>
@@ -579,12 +580,12 @@ Singular=$flection-singular
                             </resultTemplate>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPronunciationPlural" o="$pronunciationPlural" oType="literal" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPronunciationPlural" o="$pronunciationPlural" oType="literal" oLang="de-fonipa"/>
                                 </triples>
                             </resultTemplate>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular" o="$pronunciationSingular" oType="literal" />
+                                    <triple s="$block" p="http://wiktionary.dbpedia.org/terms/hasPronunciationSingular" o="$pronunciationSingular" oType="literal" oLang="de-fonipa"/>
                                 </triples>
                             </resultTemplate>
                         </resultTemplates>
@@ -597,7 +598,7 @@ Singular=$flection-singular
                         <resultTemplates>
                             <resultTemplate>
                                 <triples>
-                                    <triple s="$block-uri($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasReference" o="$reference" oType="literal" />
+                                    <triple s="$block-clean($meaningId)de" p="http://wiktionary.dbpedia.org/terms/hasReference" o="$reference" oType="literal" />
                                 </triples>
                             </resultTemplate>
                         </resultTemplates> 
@@ -677,7 +678,7 @@ Singular=$flection-singular
                     </template>
                     <template name="relatedWords" ppClass="org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler.ExplicitSenseLinkListHelper">
                         <parameters>
-                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasCoordinateTerm"/>
+                            <parameter name="linkProperty" value="http://wiktionary.dbpedia.org/terms/hasRelatedTerm"/>
                         </parameters> 
                         <wikiTemplate>{{Sinnverwandte Wörter}}
 (:[$meaningId] $line

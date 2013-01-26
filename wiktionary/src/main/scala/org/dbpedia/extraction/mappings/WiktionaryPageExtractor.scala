@@ -98,7 +98,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
       //println(page.children)
 
-      val pageStack = new Stack[Node]().pushAll(page.children.reverse).filterSpaces
+      val pageStack = new Stack[org.dbpedia.extraction.wikiparser.Node]().pushAll(page.children.reverse).filterSpaces
       //apply "first" nodehandlers
       beforeNodeHandlers.foreach((nh : NodeHandler) => {
         var result = nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map(), pageConfig)
@@ -338,7 +338,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       } else subjComp < 0
     })
 
-    val statQuad = new Quad(langObj, datasetURI, cache.blockURIs("page"), vf.createURI(termsNS+"statistics"), vf.createLiteral(""+quadsSorted.size+"-"+(page.toWikiText.count(_.equals('\n'))+1-countEmptyLines(page.toWikiText))), tripleContext)
+    val statQuad = new Quad(datasetURI, cache.blockURIs("page"), vf.createURI(termsNS+"statistics"), vf.createLiteral(""+quadsSorted.size+"-"+(page.toWikiText.count(_.equals('\n'))+1-countEmptyLines(page.toWikiText))), tripleContext)
     val quadsWithStat = quadsSorted ::: List(statQuad)
 
     Logging.printMsg(""+quadsSorted.size+" quads extracted for "+entityId, 1)
@@ -391,47 +391,51 @@ object WiktionaryPageExtractor {
   def escape(s:String) : String = s.replace("(", escapeSeqOpenBrace).replace(")", escapeSeqCloseBrace).replace(",", escapeSeqComma)
   def unescape(s:String) : String = s.replace(escapeSeqOpenBrace, "(").replace(escapeSeqCloseBrace, ")").replace(escapeSeqComma, ",")
 
-  def makeTriples(rt : ResultTemplate, binding : HashMap[String, List[Node]], blockName : String, cache : Cache) : List[Quad] = {
+  def makeTriples(rt : ResultTemplate, binding : HashMap[String, List[org.dbpedia.extraction.wikiparser.Node]], blockName : String, cache : Cache) : List[Quad] = {
           Logging.printMsg("bindings "+binding, 2)
           val quads = new ListBuffer[Quad]
           rt.triples.foreach( (tt : TripleTemplate) => {
             try{
             //apply the same placeholder-processing to s, p and o => DRY:
-            val in = Map("s"->tt.s, "p"->tt.p, "o"->tt.o)
+            val in = Map("s"->tt.s, "p"->tt.p, "o"->tt.o,"oLang"->tt.oLang, "oDatatype"->tt.oDatatype)
             val out = in.map( kv => {
-                val replacedVars = varPattern.replaceAllIn( kv._2, (m) => {
-                        val varName = m.matched.substring(1);//exclude the $ symbol
-                        val replacement = if(binding.contains(varName)){
-                            binding(varName).toReadableString
-                        } else if(cache.savedVars.contains(varName)){
-                            cache.savedVars(varName)
-                        } else if(!tt.optional){ 
-                            throw new Exception("missing binding for "+varName)
-                        } else {
-                            //println("continue")
-                            throw new ContinueException("skip optional triple")
-                        }
-                        //to prevent, that recorded ) symbols mess up the regex of map and uri
-                        val varValue = escape(replacement)
-                        if(saveVars.contains(varName)){
-                            cache.savedVars(varName.toUpperCase) = varValue
-                        }
-                        varValue
-                })
-                //println("replacedVars: "+replacedVars)
-                var functionsResolved = replacedVars
-                var matched = false
-                var i = 0
-                do{ //replace function calls inside out (the pattern each time only matches the innermost fun)
-                    i += 1
-                    matched = false                    
-                    functionsResolved = funPattern.replaceAllIn(functionsResolved, (m) => {
-                        matched = true
-                        val funName = m.group(1)
-                        val funArgEscaped = m.group(2)
-                        val funArg = unescape(funArgEscaped)
-                        val res = funName match {
+                if(kv._2 == null)
+                  (kv._1, null)
+                else {
+                  val replacedVars = varPattern.replaceAllIn( kv._2, (m) => {
+                    val varName = m.matched.substring(1);//exclude the $ symbol
+                    val replacement = if(binding.contains(varName)){
+                        binding(varName).toReadableString
+                    } else if(cache.savedVars.contains(varName)){
+                        cache.savedVars(varName)
+                    } else if(!tt.optional){
+                        throw new Exception("missing binding for "+varName)
+                    } else {
+                        //println("continue")
+                        throw new ContinueException("skip optional triple")
+                    }
+                    //to prevent, that recorded ) symbols mess up the regex of map and uri
+                    val varValue = escape(replacement)
+                    if(saveVars.contains(varName)){
+                        cache.savedVars(varName.toUpperCase) = varValue
+                    }
+                    varValue
+                  })
+                  //println("replacedVars: "+replacedVars)
+                  var functionsResolved = replacedVars
+                  var matched = false
+                  var i = 0
+                  do{ //replace function calls inside out (the pattern each time only matches the innermost fun)
+                      i += 1
+                      matched = false
+                      functionsResolved = funPattern.replaceAllIn(functionsResolved, (m) => {
+                          matched = true
+                          val funName = m.group(1)
+                          val funArgEscaped = m.group(2)
+                          val funArg = unescape(funArgEscaped)
+                          val res = funName match {
                             case "uri" => urify(funArg)
+                            case "clean" => clean(funArg)
                             case "map" => map(funArg)
                             case "lastword" => funArg.split(" ").last.trim
                             case "assertMapped" => if(!hasMapping(funArg)){throw new Exception("assertion failed: existing key in mapings for "+funArg)} else {funArg}
@@ -441,17 +445,20 @@ object WiktionaryPageExtractor {
                             case "getOrMakeId" => cache.matcher.getOrMakeId(funArg)
                             case "saveId" => {val args = funArgEscaped.split(", "); val str = args(0); val id = args(1); cache.matcher.saveId(id, str); id}
                             case _ =>  {matched = false; funArg} // if unknown keep arg only
-                        }
-                        res
-                    }) 
-                } while (matched && i < 10)
-                (kv._1, unescape(functionsResolved))
+                          }
+                          res
+                      })
+                  } while (matched && i < 10)
+                  (kv._1, unescape(functionsResolved))
+                }
             })
             
             val s = out("s")
             val p = out("p")
             val o = out("o")
-            
+            val oDatatype = out("oDatatype")
+            val oLang = out("oLang")
+
             //to trigger exceptions if URL doesnt start with http:// etc, i dont use a real regex because its to heavy for every URI            
             new URL(s)
             if(s.contains(" ")){
@@ -477,9 +484,17 @@ object WiktionaryPageExtractor {
                 }
                 oURI
               } else {
-                vf.createLiteral(o.trim)
+                if (oLang == null)
+                  vf.createLiteral(o.trim, language)
+                else if(oLang.equals("null"))
+                  vf.createLiteral(o.trim)
+                else
+                  vf.createLiteral(o.trim, oLang)
               }
-            quads += new Quad(langObj, datasetURI, vf.createURI(s), vf.createURI(p), oObj, tripleContext)
+
+            val quad = new Quad(datasetURI, vf.createURI(s), vf.createURI(p), oObj, tripleContext)
+            quads += quad
+
             } catch {   
               case ce : ContinueException => //skip
               case e : Exception => throw e //propagate
@@ -514,10 +529,6 @@ object WiktionaryPageExtractor {
   * Quad needs some objects, store them here to reuse them
   */
 
-  /**
-  * the language of all produced literals
-  */
-  val langObj : Language= Language(language)
   /**
   * the name of the dataset
   */
@@ -630,6 +641,7 @@ object WiktionaryPageExtractor {
     .replace("\\", "")
     .replace("<", "")
     .replace(">", "")
+  //dont use real encoder because Wiktioanary uses UTF-8 characters in URLs too
   //URLEncoder.encode(Matcher.clean(in), "UTF-8")
 
   val cleanPattern = new Regex("[^\\p{L} ]")
@@ -653,7 +665,7 @@ object WiktionaryPageExtractor {
   def map(in:String):String = {
     val clean = getCleaned(in)
     if(!mappings.contains(clean))
-      Logging.printMsg("missing mapping for \""+clean+"\"", 2)
+      Logging.printMsg("missing mapping for \""+clean+"\"", 0)
     mappings.getOrElse(clean, clean)
   }
 }
@@ -846,12 +858,12 @@ object Matcher{
 }
 
 class Cache {
-    //to cache last used blockURIs (from block name to its uri)
-    val blockURIs = new HashMap[String, URI]
-    //to save variable bindings
-    val savedVars = new HashMap[String, String]()
-    //which variables to save
-    val matcher = new Matcher
+  //to cache last used blockURIs (from block name to its uri)
+  val blockURIs = new HashMap[String, URI]
+  //to save variable bindings
+  val savedVars = new HashMap[String, String]()
+  //which variables to save
+  val matcher = new Matcher
 }
 
 
