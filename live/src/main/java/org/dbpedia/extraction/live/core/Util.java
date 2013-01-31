@@ -2,7 +2,6 @@ package org.dbpedia.extraction.live.core;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.dbpedia.helper.CoreUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -18,7 +17,7 @@ import java.util.regex.Pattern;
  * Time: 6:06:54 PM
  * This class contains some utility functions used in live extraction.
  */
-public class Util extends CoreUtil{
+public class Util {
 
     //Initializing the Logger
     private static Logger logger = null;
