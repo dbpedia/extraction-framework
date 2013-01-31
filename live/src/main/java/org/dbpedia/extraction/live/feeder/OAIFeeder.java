@@ -75,15 +75,15 @@ public class OAIFeeder extends Thread {
         try {
             if (!lastResponseFile.exists()) {
                 //lastResponseFile.mkdirs();
-                lastResponseFile.createNewFile();
+                setLastResponseDate(defaultStartDateTime);
             } else {
-                latestResponseDate = Files.readFile(lastResponseFile).trim();
-                if (latestResponseDate == "")
-                    latestResponseDate = defaultStartDateTime;
+                latestResponseDate = (Files.readFile(lastResponseFile)).trim();
             }
         } catch (Exception exp) {
             logger.error(ExceptionUtil.toString(exp));
         }
+        if (latestResponseDate.isEmpty())
+            latestResponseDate = defaultStartDateTime;
         logger.warn("Resuming from date: " + latestResponseDate);
         return latestResponseDate;
     }
