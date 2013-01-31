@@ -38,7 +38,7 @@ public class LiveQueue {
 
             while (iterator.hasNext()) {
                 LiveQueueItem e = iterator.next();
-                if (e.getItemID() == e.getItemID()) {
+                if (e.getItemID() == item.getItemID()) {
 
                     LiveQueuePriority existingPriority = e.getPriority();
                     LiveQueuePriority newPriority = item.getPriority();
