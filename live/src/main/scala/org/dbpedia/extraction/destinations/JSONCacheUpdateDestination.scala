@@ -44,7 +44,7 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
       sb.setCharAt(sb.lastIndexOf(","), ' ')
 
 
-    val success = cache.updateCache(sb.toString)
+    val success = cache.updateCache(sb.toString, "", "") //TODO add subjects / diffs
     // TODO better logging
     if (!success) logger.log(Level.INFO, "Updating JSON Cache failed")
 

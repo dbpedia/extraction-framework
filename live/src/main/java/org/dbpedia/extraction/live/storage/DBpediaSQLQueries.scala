@@ -10,19 +10,19 @@ object DBpediaSQLQueries {
     * JSON Cache Queries (select, update, insert, delete)
     * */
   def getJSONCacheSelect: String = {
-    "SELECT content FROM DBPEDIA_TRIPLES WHERE oaiid = ?"
+    "SELECT timesUpdated, json, subjects FROM DBPEDIALIVE_CACHE WHERE pageID = ?"
   }
 
   def getJSONCacheInsert: String = {
-    "INSERT INTO DBPEDIA_TRIPLES (oaiid, resource, content) VALUES ( ?, ? , ?  ) "
+    "INSERT INTO DBPEDIALIVE_CACHE (pageID, title, updated, timesUpdated, json, subjects, diff) VALUES ( ?, ? , now() , ? , ? , ? , ?  ) "
   }
 
   def getJSONCacheUpdate: String = {
-    "UPDATE DBPEDIA_TRIPLES SET resource = ?, content = ? WHERE oaiid = ? "
+    "UPDATE DBPEDIALIVE_CACHE SET title = ?, updated = now(), timesUpdated = ?, json = ?, subjects = ?, diff = ? WHERE pageID = ? "
   }
 
   def getJSONCacheDelete: String = {
-    "DELETE FROM DBPEDIA_TRIPLES WHERE oaiid = ?"
+    "DELETE FROM DBPEDIALIVE_CACHE WHERE pageID = ?"
   }
 
 }
