@@ -18,6 +18,8 @@ class JSONCache(pageID: Long, pageTitle: String) {
   var extractorHash = new HashMap[String, String]
   var extractorTriples = new HashMap[String, List[Any]]
   var extractorJSON = new HashMap[String, String]
+
+  var cacheObj : JSONCacheObject = null
   var cacheExists = false
 
   initCache
@@ -68,23 +70,23 @@ class JSONCache(pageID: Long, pageTitle: String) {
     extractorJSON.getOrElse(extractor, "")
   }
 
-  def updateCache(json: String): Boolean = {
+  def updateCache(json: String, subjects: String, diff: String): Boolean = {
     // Check wheather to update or insert
     if (cacheExists) {
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, json, "" + this.pageID))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, "0",  json, subjects, diff,  "" + this.pageID))
     }
     else
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, json))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, "0",  json, subjects, diff))
   }
 
   private def initCache {
     try {
-      val jsonText: String = JDBCUtil.getJSONCacheContent(DBpediaSQLQueries.getJSONCacheSelect, this.pageID,1)
-      if (jsonText == "") return
+      cacheObj = JDBCUtil.getCacheContent(DBpediaSQLQueries.getJSONCacheSelect, this.pageID)
+      if (cacheObj == null) return
 
       cacheExists = true
 
-      val json: Option[Any] = JSON.parseFull(jsonText)
+      val json: Option[Any] = JSON.parseFull(cacheObj.json)
       val map: Map[String, Any] = json.get.asInstanceOf[Map[String, Any]]
 
       map.foreach {
@@ -106,5 +108,9 @@ class JSONCache(pageID: Long, pageTitle: String) {
     }
   }
 
+
+}
+
+class JSONCacheObject(val pageID: Long, val updatedTimes: Int, val json: String, val subjects: String) {
 
 }

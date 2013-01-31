@@ -106,9 +106,9 @@ public class JDBCUtil {
     }
 
     /*
-    * Custon function for retrieving JSON Cache contents
+    * Custon function for retrieving Cache contents (this is application specific)
     * */
-    public static String getJSONCacheContent(String query, long pageID, int column) {
+    public static JSONCacheObject getCacheContent(String query, long pageID) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -123,16 +123,21 @@ public class JDBCUtil {
             StringBuilder json = new StringBuilder();
 
             if (result.next()) {
-                Blob blob = result.getBlob(column);
-                byte[] bdata = blob.getBytes(1, (int) blob.length());
-                return new String(bdata);
+                int timesUpdated = result.getInt("timesUpdated");
+                Blob jsonBlob = result.getBlob("json");
+                byte[] jsonData = jsonBlob.getBytes(1, (int) jsonBlob.length());
+
+                Blob subjectsBlob = result.getBlob("subjects");
+                byte[] subjectsData = subjectsBlob.getBytes(1, (int) subjectsBlob.length());
+
+                return new JSONCacheObject(pageID, timesUpdated, new String(jsonData), new String(subjectsData));
             } else {
-                return "";
+                return null;
             }
 
         } catch (Exception e) {
             logger.warn(e.getMessage());
-            return "";
+            return null;
         } finally {
             try {
                 if (result != null)
