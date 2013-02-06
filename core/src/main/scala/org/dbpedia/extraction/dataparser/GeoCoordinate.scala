@@ -13,6 +13,7 @@ class GeoCoordinate( latDeg : Double = 0.0, latMin : Double = 0.0, latSec : Doub
     val longitude = (lonDeg + (lonMin + lonSec / 60.0 ) / 60.0) * (if(lonHem == "W") -1.0 else 1.0)
 
     require(latHem == "N" || latHem == "S", "Invalid hemisphere: '" + latHem + "'")
+    // TODO: remove lonHem == "O"
     require(lonHem == "W" || lonHem == "O" || lonHem == "E", "Invalid hemisphere: '" + lonHem + "'")
     require(latitude >= -90.0 && latitude <= 90.0, "Latitude must be in the range [-90, 90]")
     require(longitude >= -180 && longitude <= 180.0, "Longitude must be in the range [-180, 180]")

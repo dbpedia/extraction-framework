@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.live.feeder;
 
 import org.apache.log4j.Logger;
-import org.apache.xerces.parsers.DOMParser;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.priority.PagePriority;
 import org.dbpedia.extraction.live.priority.Priority;
+import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.LastResponseDateManager;
+import org.dbpedia.extraction.live.util.OAIUtil;
 import org.dbpedia.extraction.live.util.XMLUtil;
-import org.dbpedia.extraction.live.util.iterators.OAIUnmodifiedRecordIterator;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -31,11 +32,11 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
 
     private static Logger logger = Logger.getLogger(UnmodifiedPagesUpdateFeeder.class);
 
-//    String oaiUri = "http://en.wikipedia.org/wiki/Special:OAIRepository";
-    String oaiUri = "http://live.dbpedia.org/syncwiki/Special:OAIRepository";
+    String oaiUri = LiveOptions.options.get("oaiUri");
+    //String baseWikiUri = LiveOptions.options.get("baseWikiUri");
+    //String oaiPrefix = LiveOptions.options.get("oaiPrefix");
+    
     Calendar calendar = new GregorianCalendar();
-
-
     String endDate = "2011-04-01T15:00:00Z";
     String startDate = "2011-03-01T15:00:00Z";
 
@@ -46,13 +47,6 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
     int articleDelay = 0;
     boolean articleRenewal = false;
 
-//    String baseWikiUri = "http://en.wikipedia.org/wiki/";
-//    String oaiPrefix = "oai:en.wikipedia.org:enwiki:";
-    String baseWikiUri = "http://live.dbpedia.org/syncwiki/";
-    String oaiPrefix = "oai:live.dbpedia.org:dbpediawiki:";
-
-    //This parser is used to parse the XML text generated from the page, in order to get the PageID
-    DOMParser parser = new DOMParser();
 
 //    public LiveUpdateFeeder(){
 //        super("Live extraction feeder");
@@ -63,7 +57,7 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
 
     public UnmodifiedPagesUpdateFeeder(String name, int priority){
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(OAIUtil.getOAIDateFormatString());
 
         this.setPriority(priority);
         this.setName(name);
@@ -115,9 +109,8 @@ public class UnmodifiedPagesUpdateFeeder extends Thread{
 
     public void run() {
 
-        //oaiUri, startDate, pollInterval * 1000, sleepInterval * 1000);
-        Iterator<Document> myTestIterator = new OAIUnmodifiedRecordIterator(
-                oaiUri, startDate, endDate);
+        Iterator<Document> myTestIterator =
+        			OAIUtil.createEndlessRecordIterator(oaiUri, startDate, DateUtil.getDuration1MonthMillis(), pollInterval * 1000, sleepInterval * 1000);
 
         while(myTestIterator.hasNext()){
             Document doc = myTestIterator.next();

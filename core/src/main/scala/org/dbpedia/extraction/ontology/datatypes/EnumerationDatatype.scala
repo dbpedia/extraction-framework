@@ -8,16 +8,16 @@ import scala.util.matching.Regex
 //TODO make immutable
 class EnumerationDatatype(name : String) extends Datatype(name)
 {
-	private var literals = List[Literal]()
+    private var literals = List[Literal]()
 
     /**
      * Adds a new literal to this enumeration
      */
-	def addLiteral(name : String, keywords : List[String] = List.empty)
-	{
-		literals = new Literal(name, keywords) :: literals
-	}
-	
+    def addLiteral(name : String, keywords : List[String] = List.empty)
+    {
+        literals = new Literal(name, keywords) :: literals
+    }
+    
     def parse(text : String) : Option[String] =
     {
         for( literal <- literals; _ <- literal.regex.findFirstIn(text) )

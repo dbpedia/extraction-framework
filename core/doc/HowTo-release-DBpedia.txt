@@ -9,52 +9,52 @@ This file describes the main steps necessary for creating a new DBpedia
 release. It might not be complete. Please also consult with the others!
 
 
- 1. improve extraction framework by implementing ToDos
+ - improve extraction framework by implementing ToDos
     - check also the bug tracker on SourceForge (http://sourceforge.net/tracker/?group_id=190976&atid=935520)
 
- 2. clean up the ontology and improve the (mappings on the wiki http://mappings.dbpedia.org/)
+ - clean up the ontology and improve the (mappings on the wiki http://mappings.dbpedia.org/)
 
- 3. download Wikipedia XML and SQL dumps using dump/Download.scala
-    - specify minimum number of articles a Wikipedia must have in order to be included
-    - make sure that namespace recognition works for all downloaded languages (check core/wikiparser.impl.wikipedia.Namespaces.scala)
+ - download Wikipedia XML dumps using ...dump.download.Download.scala
+   - specify minimum number of articles a Wikipedia must have in order to be included
+   
+ - Use a defined state of the mappings wiki
+   - Run maven launchers core/download-ontology and core/download-mappings
+   - Commit the files to the hg repository
+   - Don't change the files anymore. The whole extraction should use the same version.
 
- 4. distribute the dumps onto multiple computers
-    - every computer must have the commons dump
+ - for AbstractExtractor: insert Wikipedia dumps into a local MySQL database using ...dump.sql.Import.scala
+   - adjust the LocalSettings.php of mw-modified: specify username+password for the database and the database prefix
+   TODO: more in-depth explanations about abstract extraction
 
- 5. for AbstractExtractor: insert Wikipedia dumps into a local MySQL database using the script import.sh
-    - adjust the LocalSettings.php of mw-modified: specify username+password for the database and the database prefix
+ - extract datasets for all languages
+   - run the MappingExtractor for all languages that have mappings on the wiki
+   - consider starting the abstract extraction earlier (e.g. before cleaning up the mappings) because it takes quite long
 
+ - test load part of http://wiki.dbpedia.org/DatasetsLoaded into an RDF store
+   - especially new extended datasets (YAGO, Feebase etc.) to see whether there are syntax errors
+   - browse through the data to make sure everything is there (e.g. using Pubby)
 
- 6. extract datasets for all languages
-    - run the MappingExtractor for all languages that have mappings on the wiki
-    - consider starting the abstract extraction earlier (e.g. before cleaning up the mappings) because it takes quite long
+ - compress all dumps to .bz2 files using ...dump.compress.Compress.scala or the bash one-liner
+   - compress OWL manually
 
+ - run SVN/related_apps/downloadpagecreator/downloadpagecreator.php (configure variables at top of script beforehand)
+   - paste the created code in http://wiki.dbpedia.org/Downloads
+   - split the download page into multiple wiki pages. If the wiki code is too long for a sinlge page it gets truncated and produces rubbish web pages
 
- 7. test load part of http://wiki.dbpedia.org/DatasetsLoaded into an RDF store
-    - especially new extended datasets (YAGO, Feebase etc.) to see whether there are syntax errors
-    - browse through the data to make sure everything is there (e.g. using Pubby)
+ - pack all files specified on http://wiki.dbpedia.org/DatasetsLoaded / datasets-loaded.txt to OpenLink
 
- 8. export OWL: http://mappings.dbpedia.org/server/ontology/export
+ - pack all already compressed files into one archive ''all_languages.tar''
 
- 9. compress all dumps to .bz2 files using dump/Compress.scala
-    - compress OWL manually
+ - send:
+   - all data specified on http://wiki.dbpedia.org/DatasetsLoaded zipped to OpenLink
+   - all_languages.tar to Jens from Uni Leipzig
 
-10. run SVN/related_apps/downloadpagecreator/downloadpagecreator.php (configure variables at top of script beforehand)
-    - paste the created code in http://wiki.dbpedia.org/Downloads
-      - split the download page into multiple wiki pages. If the wiki code is too long for a sinlge page it gets truncated and produces rubbish web pages
+ - update http://wiki.dbpedia.org/
+   - get some statistics for: classes, triples, mappings, ...
 
-11. compress all already compressed files into one archive ''all_languages.tar''
+ - write the release notes
 
-12. send:
-    - all data specified on http://wiki.dbpedia.org/DatasetsLoaded zipped to OpenLink (ask Chris for contacts)
-    - all_languages.tar to Jens from Uni Leipzig
+ - check if all example links on http://wiki.dbpedia.org/ are still working with the new end point
 
-13. update http://wiki.dbpedia.org/
-    - get some statistics for: classes, triples, mappings, ...
-
-14. write the release notes
-
-15. check if all example links on http://wiki.dbpedia.org/ are still working with the new end point
-
-16. update Wikipedia article
+ - update Wikipedia article
 

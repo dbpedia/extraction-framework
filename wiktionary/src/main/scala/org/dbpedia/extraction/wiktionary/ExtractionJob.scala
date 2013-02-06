@@ -1,10 +1,9 @@
 package org.dbpedia.extraction.wiktionary
 
-import _root_.org.dbpedia.extraction.destinations.Destination
-import _root_.org.dbpedia.extraction.mappings.Extractor
-import _root_.org.dbpedia.extraction.sources.{Source, WikiPage}
-
-import _root_.org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
+import org.dbpedia.extraction.destinations.Destination
+import org.dbpedia.extraction.mappings.RootExtractor
+import org.dbpedia.extraction.sources.{Source, WikiPage}
+import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser, Namespace}
 import java.util.concurrent.{ArrayBlockingQueue}
 import java.util.logging.{Level, Logger}
 import scala.util.control.ControlThrowable
@@ -19,7 +18,7 @@ import java.net.URLEncoder
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
  * @param label A user readable label of this extraction job
  */
-class ExtractionJob(extractor : Extractor, source : Source, destination : Destination, val label : String = "Extraction Job") extends Thread
+class ExtractionJob(extractor : RootExtractor, source : Source, destination : Destination, val label : String = "Extraction Job") extends Thread
 {
     private val logger = Logger.getLogger(classOf[ExtractionJob].getName)
 
@@ -46,6 +45,8 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
         try
         {
             _progress.startTime = System.currentTimeMillis
+            
+            destination.open()
 
             //Start extraction jobs
             extractionJobs.foreach(_.start)
@@ -75,9 +76,9 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
     private def queuePage(page : WikiPage)
     {
         //Only extract from the following namespaces
-        if(page.title.namespace != WikiTitle.Namespace.Main &&
-           page.title.namespace != WikiTitle.Namespace.File &&
-           page.title.namespace != WikiTitle.Namespace.Category)
+        if(page.title.namespace != Namespace.Main &&
+           page.title.namespace != Namespace.File &&
+           page.title.namespace != Namespace.Category)
         {
            return 
         }
@@ -147,7 +148,7 @@ class ExtractionJob(extractor : Extractor, source : Source, destination : Destin
                     case ex : Exception =>
                     {
                         _progress.synchronized(_progress.failedPages += 1)
-                        logger.log(Level.INFO, "Error processing page '" + page.title + "'", ex)
+                        logger.log(Level.WARNING, "Error processing page '" + page.title + "'", ex)
                         false
                     }
                 }

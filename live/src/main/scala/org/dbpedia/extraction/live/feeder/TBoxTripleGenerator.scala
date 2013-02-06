@@ -1,26 +1,15 @@
 package org.dbpedia.extraction.live.feeder
 
-import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology._
-import io.OntologyReader
-import org.dbpedia.extraction.ontology.datatypes._
-import org.dbpedia.extraction.util.StringUtils._
-import java.util.Locale
 import org.dbpedia.extraction.sources.Source
 import com.hp.hpl.jena.shared.PrefixMapping
 import org.slf4j.LoggerFactory
 import collection.immutable.Traversable;
 import com.hp.hpl.jena.vocabulary.{RDF, RDFS, OWL}
-import javax.crypto.interfaces.PBEKey
-import javax.security.auth.Subject
 import collection.mutable.{Set, Map, MultiMap, HashMap}
 import com.hp.hpl.jena.rdf.model.{ModelFactory, ResourceFactory, Resource, Model}
-import com.hp.hpl.jena.sparql.util.ModelUtils
-import javax.xml.crypto.dsig.keyinfo.KeyValue
-import com.ctc.wstx.io.ReaderSource
-import javax.management.remote.rmi._RMIConnection_Stub
-import sun.awt.motif.X11GB18030_0
+import org.dbpedia.extraction.ontology.io.OntologyReader
 
 /**
  * This extractor extracts all properties from all infoboxes.
@@ -114,6 +103,8 @@ class TBoxTripleGenerator() {
 
     val literalTripleGenerator = new LiteralTripleGenerator()
 
+    val labelsTripleGenerator = new LabelsTripleGenerator()
+
     val mosListTripleGenerator = new ListTripleGenerator(",",
       new MosTripleGenerator(exprPrefixRef, prefixResolver))
 
@@ -125,6 +116,7 @@ class TBoxTripleGenerator() {
       * fallbackSubClassGenerator);
       */
 
+    classToGenerator.put("labels", labelsTripleGenerator)
     classToGenerator.put("rdfs:label", literalTripleGenerator);
     classToGenerator.put("rdfs:comment", literalTripleGenerator);
     classToGenerator.put("owl:equivalentClass", mosListTripleGenerator);
@@ -134,6 +126,7 @@ class TBoxTripleGenerator() {
 
     classDefaults.put("rdfs:subClassOf", fallbackSubClassGenerator);
 
+    propertyToGenerator.put("labels", labelsTripleGenerator)
     propertyToGenerator.put("rdfs:label", literalTripleGenerator);
     propertyToGenerator.put("rdfs:comment", literalTripleGenerator);
     propertyToGenerator.put("owl:equivalentProperty",
@@ -144,6 +137,7 @@ class TBoxTripleGenerator() {
     propertyToGenerator.put("rdfs:range", mosListTripleGenerator);
     propertyToGenerator.put("rdf:type", mosListTripleGenerator);
 
+    dataToGenerator.put("labels", labelsTripleGenerator);
     dataToGenerator.put("rdfs:label", literalTripleGenerator);
     dataToGenerator.put("rdfs:comment", literalTripleGenerator);
     dataToGenerator.put("owl:equivalentProperty", mosListTripleGenerator);
@@ -249,7 +243,7 @@ class TBoxTripleGenerator() {
       //logger.info(templateName)
 
       if (templateName == OntologyReader.CLASSTEMPLATE_NAME) {
-        val name = OntologyReader.getClassName(pageNode.title)
+//        val name = OntologyReader.getClassName(pageNode.title)
         //processClass(result, root, page, templateNode)
         processX(result, root, templateNode, classToGenerator, classDefaults, OWL.Class)
 
@@ -260,13 +254,13 @@ class TBoxTripleGenerator() {
         }*/
       }
       else if(templateName == OntologyReader.OBJECTPROPERTY_NAME) {
-        val name = OntologyReader.getPropertyName(pageNode.title)
+//        val name = OntologyReader.getPropertyName(pageNode.title)
 
         processX(result, root, templateNode, propertyToGenerator, objectDefaults, OWL.ObjectProperty)
 
 
       } else if(templateName == OntologyReader.DATATYPEPROPERTY_NAME) {
-        val name = OntologyReader.getPropertyName(pageNode.title)
+//        val name = OntologyReader.getPropertyName(pageNode.title)
 
         processX(result, root, templateNode, dataToGenerator, dataDefaults, OWL.DatatypeProperty)
       }

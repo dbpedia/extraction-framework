@@ -2,6 +2,8 @@ package org.dbpedia.extraction.destinations
 
 /**
  * Defines the datasets which are extracted by DBpedia.
+ * TODO: use a Scala Enumeration
+ * TODO: add references to the extractor classes.
  */
 object DBpediaDatasets
 {
@@ -19,7 +21,11 @@ object DBpediaDatasets
     val SkosCategories = new Dataset("skos_categories")
     val Revisions = new Dataset("revisions")
     val PageIds = new Dataset("page_ids")
-    val SameAs = new Dataset("interlanguage_links")
+    val InterLanguageLinks = new Dataset("interlanguage_links")
+    val Genders = new Dataset("genders")
+    val TopicalConcepts = new Dataset("topical_concepts")
+    val IriSameAsUri = new Dataset("iri_same_as_uri")
+    val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
 
     /**
      * Mapping based
@@ -31,9 +37,9 @@ object DBpediaDatasets
     /**
      *  Infobox
      */
-    val Infoboxes = new Dataset("infobox_properties")
-    val InfoboxProperties = new Dataset("infobox_property_definitions")
-    val TemplateVariables = new Dataset("templateParameters")
+    val InfoboxProperties = new Dataset("infobox_properties")
+    val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions")
+    val TemplateVariables = new Dataset("template_parameters")
     val InfoboxTest = new Dataset("infobox_test")
 
     /**

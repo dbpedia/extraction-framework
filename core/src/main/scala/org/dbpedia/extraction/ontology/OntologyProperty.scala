@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.ontology
 
+import org.dbpedia.extraction.util.Language
+
 /**
  * Represents an ontology property.
  * There are 2 sub classes of this class: OntologyObjectProperty and OntologyDatatypeProperty.
@@ -11,17 +13,24 @@ package org.dbpedia.extraction.ontology
  * @param isFunctional Defines whether this is a functional property.
  * A functional property is a property that can have only one (unique) value y for each instance x (see: http://www.w3.org/TR/owl-ref/#FunctionalProperty-def)
  */
-class OntologyProperty( name : String, labels : Map[String, String], comments : Map[String, String],
-                        val domain : OntologyClass, val range : OntologyType, val isFunctional : Boolean = false,
-                        val equivalentProperties : Set[OntologyProperty] = Set()) extends OntologyEntity(name, labels, comments)
+class OntologyProperty(
+  name: String,
+  labels: Map[Language, String],
+  comments: Map[Language, String],
+  val domain: OntologyClass,
+  val range: OntologyType,
+  val isFunctional: Boolean,
+  val equivalentProperties: Set[OntologyProperty]
+)
+extends OntologyEntity(name, labels, comments)
 {
-    require(OntologyNamespaces.skipValidation(name) || domain != null, "domain != null")
-    require(OntologyNamespaces.skipValidation(name) || range != null, "range != null")
-    require(equivalentProperties != null, "equivalentPropertyNames != null")
+    require(! RdfNamespace.validate(name) || domain != null, "missing domain for property "+name)
+    require(! RdfNamespace.validate(name) || range != null, "missing range for property "+name)
+    require(equivalentProperties != null, "missing equivalent properties for property "+name)
     
-    val uri = OntologyNamespaces.getUri(name, OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
+    val uri = RdfNamespace.fullUri(DBpediaNamespace.ONTOLOGY, name)
 
-    lazy val isExternalProperty = !uri.startsWith(OntologyNamespaces.DBPEDIA_PROPERTY_NAMESPACE)
+    val isExternalProperty = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)
     
     override def toString = uri
 

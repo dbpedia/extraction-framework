@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.live.core;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.*;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.delta.Delta;
 import org.dbpedia.extraction.live.delta.DeltaCalculator;
@@ -13,6 +13,8 @@ import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -29,53 +31,48 @@ public class Hash{
 
     public static enum TriplesType
     {
-        PreviousTriples, LatestTriples;
+        PreviousTriples, LatestTriples
     }
-    
+
     //Initializing the Logger
-    private static Logger logger = null;
+    private static Logger logger = Logger.getLogger(Hash.class);
 
     //Constant initialization
-    private final int JDBC_MAX_LONGREAD_LENGTH = 8000;
     private static final String TABLENAME = "dbpedia_triples";
     private static final String DIFF_TABLENAME = "dbpedia_triples_diff";
     private static final String FIELD_OAIID = "oaiid";
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";
 
+	//This is a hack because of a bug in Jena framework, i.e. for a literal literal.getString()
+    //differs from literal.getValue().toString()
+    private boolean hashContainsInvalidObjectValue = false;
+
     public String oaiId;
 
     private static JDBC jdbc;
-    private HashMap hashesFromStore=null;
-    private String hashesFromExtractor = null;
+    private HashMap<String, HashMap> hashesFromStore=null;
     private boolean hasHash = false;
     private boolean active = false;
 
     private HashMap originalHashes=null;//This object will contain a copy of the original triples, in order to compare them later
 
-    public HashMap newJSONObject = new HashMap();
-    private HashMap originalJSONObject ;
-    //normal rdftriples
-    private HashMap addTriples = new HashMap();
+    public HashMap<String, HashMap<String, HashMap>> newJSONObject = new HashMap<String, HashMap<String, HashMap>>();
+
+    private HashMap<String, RDFTriple> addTriples = new HashMap<String, RDFTriple>();
     //special array with sparulpattern
-    private HashMap deleteTriples = new HashMap();
+    private HashMap<String, HashMap> deleteTriples = new HashMap<String, HashMap>();
+
+	//Those 2 models are used to hold the list of old, and new triples respectively
+    //So we can diff them at the end to get a list of add and/or deleted triples that should be published
+    Model triplesFromStoreModel = ModelFactory.createDefaultModel();
+    Model newTriplesModel = ModelFactory.createDefaultModel();
 
     private String Subject = null; //TODO This member is not explicitly typed in the php file, so we must make sure of its type
 
     //I managed to move this member from function _compareHelper as the variables sequences used in deleting old
     // abstracts may coincide, so it is better to keep it as a static member and reset it from time to time.
     private static int delCount = 0 ;
-
-    static
-    {
-        try
-        {
-            logger = Logger.getLogger(Class.forName("org.dbpedia.extraction.live.core.Hash").getName());
-        }
-        catch (Exception exp){
-
-        }
-    }
 
     public static void initDB()
     {
@@ -105,21 +102,21 @@ public class Hash{
                 }
             }
             //test if table exists
-            String testSQLStatment = "SELECT TOP 1 * FROM " + TABLENAME;
+            String testSQLStatement = "SELECT TOP 1 * FROM " + TABLENAME;
 
-            ResultSet result = jdbc.exec(testSQLStatment, "Hash::initDB");
+            ResultSet result = jdbc.exec(testSQLStatement, "Hash::initDB");
 
             if(result == null)
             {
                 String SQLStatement = "CREATE TABLE " + TABLENAME + " ( " + FIELD_OAIID + "INTEGER NOT NULL PRIMARY KEY, "
-                    + FIELD_RESOURCE+ " VARCHAR(510)," + FIELD_JSON_BLOB + " LONG VARCHAR ) ";
+                        + FIELD_RESOURCE+ " VARCHAR(510)," + FIELD_JSON_BLOB + " LONG VARCHAR ) ";
 
                 ResultSet ResultMake = jdbc.exec(SQLStatement, "Hash::initDB");
-                ResultSet ResultSecondTest = jdbc.exec(testSQLStatment, "Hash::initDB");
+                ResultSet ResultSecondTest = jdbc.exec(testSQLStatement, "Hash::initDB");
 
                 if(ResultMake == null || ResultSecondTest ==null)
                 {
-                    System.out.println("could not create table " + TABLENAME );
+                    logger.info("could not create table " + TABLENAME );
                     System.exit(1);
                 }
                 else
@@ -176,7 +173,7 @@ public class Hash{
 
         if(Boolean.parseBoolean(LiveOptions.options.get("LiveUpdateDestination.useHashForOptimization")))
         {
-            this.jdbc = JDBC.getDefaultConnection();
+            jdbc = JDBC.getDefaultConnection();
             this.hasHash = this._retrieveHashValues();
             this.active = true;
         }
@@ -186,12 +183,12 @@ public class Hash{
     {
         try
         {
-            String sqlStatement = "Select " + FIELD_RESOURCE + ", " + FIELD_JSON_BLOB + " From " + TABLENAME +" Where "
+            String sqlStatement = "SELECT " + FIELD_RESOURCE + ", " + FIELD_JSON_BLOB + " FROM " + TABLENAME +" WHERE "
                     + FIELD_OAIID +" = " + this.oaiId;
 
-            ResultSet jdbcResult= this.jdbc.exec(sqlStatement, "Hash._retrieveHashValues");
+            ResultSet jdbcResult= jdbc.exec(sqlStatement, "Hash._retrieveHashValues");
 
-            
+
             //Calculate the number of rows returned by the query
             //jdbcResult.last();
             //int NumberOfRows = jdbcResult.getRow();
@@ -202,16 +199,13 @@ public class Hash{
 
             if(NumberOfRows <= 0)
             {
-				logger.info(this.Subject + " : no hash found");
-				return false;
-			}
+                logger.info(this.Subject + " : no hash found");
+                return false;
+            }
 
             jdbcResult.beforeFirst();
             String Temp = "";
 
-            //TODO In the original code there is a variable called $data that is initialized to false and is concatenated
-            //TODO with Temp
-            
             while(jdbcResult.next())
             {
                 Blob blob = jdbcResult.getBlob(2);
@@ -233,25 +227,26 @@ public class Hash{
                 logger.warn("SQL statement cannot be closed");
             }
 
-            
+
             //This class is object is created to force the JSON decoder to return a HashMap, as hashesFromStore is a HashMap 
             ContainerFactory containerFactory = new ContainerFactory(){
                 public List creatArrayContainer() {
-                  return new LinkedList();
+                    return new LinkedList();
                 }
 
                 public Map createObjectContainer() {
-                  return new HashMap();
+                    return new HashMap();
                 }
 
-              };
+            };
 
 
             JSONParser parser = new JSONParser();
             parser.parse(Temp);
-            hashesFromStore = (HashMap) parser.parse(Temp, containerFactory);
+            hashesFromStore = (HashMap<String, HashMap>) parser.parse(Temp, containerFactory);
             originalHashes = (HashMap) parser.parse(Temp, containerFactory);
             //this.hashesFromStore = json_decode(Temp, true);
+			_recalculateHashes();
 
             if(this.hashesFromStore == null)
             {
@@ -270,31 +265,157 @@ public class Hash{
         }
     }
 
+	private void _recalculateHashes(){
+        /*HashMap<String, HashMap> auxHashesFromStore = new HashMap<String, HashMap>();
+
+
+        Iterator<Map.Entry<String, HashMap>> hashesFromStoreIter = this.hashesFromStore.entrySet().iterator();
+		//        Iterator hmTestIter = hmTest.values().iterator();
+        while (hashesFromStoreIter.hasNext()){
+            Map.Entry<String, HashMap> entry = hashesFromStoreIter.next();
+            String extractorID = entry.getKey();
+            HashMap hmExtractorTriples = entry.getValue();
+
+            HashMap auxExtractorTriples = null;
+            if(hmExtractorTriples == null)
+                auxHashesFromStore.put(extractorID, null);
+            else if(hmExtractorTriples.size() == 0)
+                auxHashesFromStore.put(extractorID, new HashMap());
+            else {
+                auxExtractorTriples = new HashMap();
+                Iterator extractorTriplesIter = hmExtractorTriples.entrySet().iterator();
+                while (extractorTriplesIter.hasNext()){
+                    Map.Entry singleTriple = (Map.Entry) extractorTriplesIter.next();
+                    String tripleHash = (String)singleTriple.getKey();
+
+                    String subject = ((String)((HashMap)singleTriple.getValue()).get("s")).replace("<","").replace(">", "");
+                    String predicate = ((String)((HashMap)singleTriple.getValue()).get("p")).replace("<","").replace(">", "");
+                    String object = ((String)((HashMap)singleTriple.getValue()).get("o")).replace("<", "").replace(">", "").replace("\"\"", "\"").replace("\"\"","\"");
+
+                    RDFTriple testTriple = new RDFTriple(ResourceFactory.createResource(subject),
+                            ResourceFactory.createProperty(predicate), new ResourceImpl(object));
+                    String correctHashOfTriple = testTriple.getMD5HashCode();
+
+                    auxExtractorTriples.put(correctHashOfTriple, singleTriple.getValue());
+                }
+
+                auxHashesFromStore.put(extractorID, auxExtractorTriples);
+            }
+
+        }
+
+        hashesFromStore = auxHashesFromStore;*/
+        /***************Test Code*******************/
+
+        HashMap<String, HashMap> auxHashesFromStore = new HashMap<String, HashMap>();
+
+
+        Iterator<Map.Entry<String, HashMap>> hashesFromStoreIter = this.hashesFromStore.entrySet().iterator();
+//        Iterator hmTestIter = hmTest.values().iterator();
+        while (hashesFromStoreIter.hasNext()){
+            Map.Entry<String, HashMap> entry = hashesFromStoreIter.next();
+            String extractorID = entry.getKey();
+            HashMap hmExtractorTriples = entry.getValue();
+
+            if(hmExtractorTriples == null)
+                auxHashesFromStore.put(extractorID, null);
+            else if(hmExtractorTriples.size() == 0)
+                auxHashesFromStore.put(extractorID, new HashMap());
+            else {
+                Iterator extractorTriplesIter = hmExtractorTriples.entrySet().iterator();
+                while (extractorTriplesIter.hasNext()){
+                    Map.Entry singleTripleEntry = (Map.Entry) extractorTriplesIter.next();
+                    String tripleHash = (String)singleTripleEntry.getKey();
+
+                    HashMap hmTriple = (HashMap)singleTripleEntry.getValue();
+
+                    //In case of incorrect triple, then remove it from hashesFromStore, in order not compare with it later
+                    if(((String)hmTriple.get("o")).contains("jena"))
+                        extractorTriplesIter.remove();
+                    else {
+
+                    Model tmpModel = constructTripleFromHashmap(hmTriple);
+
+                    /*RDFTriple existingTriple = new RDFTriple(ResourceFactory.createResource(strSubject).addProperty(),
+                            ResourceFactory.createProperty(strPredicate), new ResourceImpl(strObject));
+                    triplesFromStoreModel.add(existingTriple);*/
+//                    tmpModel.commit();
+                    triplesFromStoreModel.add(tmpModel);
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    /**
+     * Reconstructs a Jena statement from its hashmap (stored in the database file) and places it into a model
+     * @param hmTriple  Hashmap containing the triple as S ->, P ->, O ->
+     * @return  Model with the reconstructed statement
+     */
+    private Model constructTripleFromHashmap(HashMap hmTriple) {
+        try{
+            String strSubject = ((String)(hmTriple).get("s")).replace("<","").replace(">", "");
+            String strPredicate = ((String)(hmTriple).get("p")).replace("<","").replace(">", "");
+            String strObject = ((String)(hmTriple).get("o")).replace("<", "").replace(">", "").replace("\"\"", "\"").replace("\"\"","");
+
+            Model tmpModel = ModelFactory.createDefaultModel();
+
+            Resource subject = tmpModel.createResource(URLDecoder.decode(strSubject, "UTF-8"));
+            if(strObject.contains("@en")){
+                String object = strObject.replace("@en","");
+                //As the object is stored in dbpedia_triples table as a UTF encoded string, e.g. \u1F08, we should decode it
+                subject.addProperty(tmpModel.createProperty(strPredicate),
+                        triplesFromStoreModel.createLiteral(StringEscapeUtils.unescapeJava(object),"en"));
+            }
+            else if(strObject.contains("^^"))
+            {
+                if(strObject.contains("jena")){
+                    hashContainsInvalidObjectValue = true;
+                    return ModelFactory.createDefaultModel();
+                }
+
+                String []objectParts = strObject.split("\\^\\^");
+                String object = objectParts[0];
+                String datatype = objectParts[1];
+                subject.addProperty(tmpModel.createProperty(strPredicate), triplesFromStoreModel.createTypedLiteral(object, datatype));
+            }
+            else
+                subject.addProperty(tmpModel.createProperty(strPredicate), triplesFromStoreModel.createResource(URLDecoder.decode(strObject, "UTF-8")));
+            return tmpModel;
+        }
+        catch (UnsupportedEncodingException exp){
+            return ModelFactory.createDefaultModel();
+        }
+
+    }
+
     public void updateDB()
     {
-		if(this.active == false)
+        if(!this.active)
         {
-			return;
-		}
+            return;
+        }
 
         //If the application is working in multithreading mode, we must attach the thread id to the timer name
         //to avoid the case that a thread stops the timer of another thread.
         String timerName = "Hash::updateDB" +
                 (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
-		Timer.start(timerName);
+        Timer.start(timerName);
 
         String jsonEncodedString = JSONValue.toJSONString(this.newJSONObject);
 
-		String sql = "Update " + TABLENAME + " Set " + FIELD_RESOURCE +" = ? , " + FIELD_JSON_BLOB + " = ? Where "
+        String sql = "UPDATE " + TABLENAME + " SET " + FIELD_RESOURCE +" = ? , " + FIELD_JSON_BLOB + " = ? WHERE "
                 + FIELD_OAIID + " = " + this.oaiId;
 
-        PreparedStatement stmt = this.jdbc.prepare(sql , "Hash::updateDB");
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::updateDB");
 
         boolean updateExecutedSuccessfully= jdbc.executeStatement(stmt, new String[]{this.Subject, jsonEncodedString} );
 
-	    String needed = Timer.stopAsString(timerName);
-        if(updateExecutedSuccessfully == false)
+        String needed = Timer.stopAsString(timerName);
+        if(!updateExecutedSuccessfully)
         {
             logger.fatal("FAILED to update hashes " + sql);
         }
@@ -311,157 +432,47 @@ public class Hash{
             logger.warn("SQL statement stmt cannot be closed in function updateDB");
         }
 
-        //This code aims to update the table called "dbpedia_triples_for_diff", which enables the calculation of the diff
-        //for resources in the statistics page.
-
-//        String jsonOriginalHashesEncodedString = JSONValue.toJSONString(this.hashesFromStore);
-//
-//		String sqlUpdateDiffTable = "Update " + DIFF_TABLENAME + " Set " + FIELD_RESOURCE +" = ? , " + FIELD_JSON_BLOB + " = ? Where "
-//                + FIELD_OAIID + " = " + this.oaiId;
-//
-//        PreparedStatement stmtUpdateDiffTable = this.jdbc.prepare(sqlUpdateDiffTable , "Hash::updateDB");
-//
-//        updateExecutedSuccessfully= jdbc.executeStatement(stmtUpdateDiffTable, new String[]{this.Subject, jsonOriginalHashesEncodedString} );
-//
-//        if(!updateExecutedSuccessfully)
-//        {
-//            logger.fatal("FAILED to update hashes for the DIFF table " + sqlUpdateDiffTable);
-//        }
-        /*else
-        {
-            logger.info(this.Subject + " updated hashes for " + this.newJSONObject.size() + " extractors " + needed);
-        }
-        */
-
-         ExecutorService es = Executors.newSingleThreadExecutor();
+        ExecutorService es = Executors.newSingleThreadExecutor();
 
         final Future future = es.submit(new Callable() {
-                    public Object call() throws Exception {
-                        _insertNewDiffTriples();
-                        return null;
-                    }
-                });
+            public Object call() throws Exception {
+                _insertNewDiffTriples();
+                return null;
+            }
+        });
 
 
         try {
             future.get(); // blocking call - the main thread blocks until task is done
-        } catch (InterruptedException e) {
-        } catch (ExecutionException e) {
+        }
+        catch (Exception exp) {
+            logger.error("Inserting new diff triples failed.");
         }
 
 
-	}
+    }
 
     private void _insertNewDiffTriples(){
         Delta delta = DeltaCalculator.calculateDiff(this.Subject, originalHashes, newJSONObject);
-
-        /*
-
-        //Delete old triples of that subject
-        String sparulDelete = "DELETE FROM GRAPH<" + LiveOptions.options.get("addedTriplesGraphURI") + "> { ?s ?p ?o  }\n" +
-                " WHERE {?s ?p ?o. filter(?s = <" + this.Subject+ ">) }";
-
-        String virtuosoPl = "sparql " + sparulDelete + "";
-        jdbc.exec(virtuosoPl, "Hash::updateDB");
-
-
-        sparulDelete = "DELETE FROM GRAPH<" + LiveOptions.options.get("deletedTriplesGraphURI") + "> { ?s ?p ?o  }\n" +
-                " WHERE {?s ?p ?o. filter(?s = <" + this.Subject+ ">) }";
-
-        virtuosoPl = "sparql " + sparulDelete + "";
-
-        jdbc.exec(virtuosoPl, "Hash::updateDB");
-
-        sparulDelete = "DELETE FROM GRAPH<" + LiveOptions.options.get("modifiedTriplesGraphURI") + "> { ?s ?p ?o  }\n" +
-                " WHERE {?s ?p ?o. filter(?s = <" + this.Subject+ ">) }";
-
-        virtuosoPl = "sparql " + sparulDelete + "";
-
-        jdbc.exec(virtuosoPl, "Hash::updateDB");
-
-        ///////////////////////////////Insert  the new diff into the corresponding graph
-        String sparulInsert = "INSERT IN GRAPH <" + LiveOptions.options.get("addedTriplesGraphURI") + "> {" +
-                delta.formulateAddedTriplesAsNTriples(true) + "}";
-
-        virtuosoPl = "sparql " + sparulInsert + "";
-        jdbc.exec(virtuosoPl, "Hash::updateDB");
-
-
-        sparulInsert = "INSERT IN GRAPH <" + LiveOptions.options.get("deletedTriplesGraphURI") + "> {" +
-                delta.formulateDeletedTriplesAsNTriples(true) + "}";
-
-        virtuosoPl = "sparql " + sparulInsert + "";
-
-        jdbc.exec(virtuosoPl, "Hash::updateDB");
-
-        sparulInsert = "INSERT IN GRAPH <" + LiveOptions.options.get("modifiedTriplesGraphURI") + "> {" +
-                delta.formulateModifiedTriplesAsNTriples(true) + "}";
-
-        virtuosoPl = "sparql " + sparulInsert + "";
-
-        jdbc.exec(virtuosoPl, "Hash::updateDB");
-        */
-
-        //First delete old diff triples
-
-
-//        Model m = delta.getDeletedTriples();
-//        m.add(ResourceFactory.createStatement(ResourceFactory.createResource("http://dbpedia.org/ontology/author"),
-//             ResourceFactory.createProperty("http://dbpedia.org/ontology/author"),
-//             ResourceFactory.createPlainLiteral("Lionel Messi")));
-//        RDFWriter rw = m.getWriter("N-TRIPLE");
-//        StringWriter myStringWriter = new StringWriter();
-//        rw.write(m, myStringWriter,"");
-//        logger.info(myStringWriter.getBuffer().toString());
-//        StmtIterator stmtIterator = m.listStatements();
-//        while (stmtIterator.hasNext()){
-//            Statement stmt2 = stmtIterator.nextStatement();
-//
-//            logger.info(stmt2.asTriple().toString());
-//        }
-
-        /*
-        CallableStatement deleteOldDiffTriplesStsmt = jdbc.prepareCallableStatement("DELETE_ALL_RESOURCE_TRIPLES_FROM_dbpedia_triples_diff(?)",
-                        "Hash::updateDB");
-        jdbc.executeCallableStatement(deleteOldDiffTriplesStsmt,new String[]{this.Subject});
-
-        //Insert the added triples as an N-Triples string
-        CallableStatement insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)",
-                "Hash::updateDB");
-        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt,new String[]{this.Subject, Integer.toString(Delta.DiffType.ADDED.getCode()),
-                delta.formulateAddedTriplesAsNTriples(true)});
-
-        //Insert the deleted triples as an N-Triples string
-        insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)", "Hash::updateDB");
-        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt, new String[]{this.Subject, Integer.toString(Delta.DiffType.DELETED.getCode()),
-                delta.formulateDeletedTriplesAsNTriples(true)});
-
-        //Insert the modified triples as an N-Triples string
-        insertNewDiffTriplesStsmt = jdbc.prepareCallableStatement("INSERT_IN_dbpedia_triples_diff(?, ?, ?)", "Hash::updateDB");
-        jdbc.executeCallableStatement(insertNewDiffTriplesStsmt, new String[]{this.Subject, Integer.toString(Delta.DiffType.MODIFIED.getCode()),
-                delta.formulateModifiedTriplesAsNTriples(true)});
-
-        */
-
 
         if(this.Subject.contains("/File:")){
             return;
         }
 
-        CallableStatement updateOldDiffTriplesStsmt = jdbc.prepareCallableStatement("update_dbpedia_triples_diff_for_resource(?,?,?,?)",
+        CallableStatement updateOldDiffTriplesStmt = jdbc.prepareCallableStatement("update_dbpedia_triples_diff_for_resource(?,?,?,?)",
                 "Hash::updateDB");
 
         String addedTripleString = delta.formulateAddedTriplesAsNTriples(true);
         String deletedTripleString = delta.formulateDeletedTriplesAsNTriples(true);
         String modifiedTripleString = delta.formulateModifiedTriplesAsNTriples(true);
 
-        jdbc.executeCallableStatement(updateOldDiffTriplesStsmt,new String[]{this.Subject, addedTripleString, deletedTripleString
-        , modifiedTripleString});
+        jdbc.executeCallableStatement(updateOldDiffTriplesStmt,new String[]{this.Subject, addedTripleString, deletedTripleString
+                , modifiedTripleString});
 
         //Closing the underlying statement, in order to avoid overwhelming Virtuoso
         try{
-            if(updateOldDiffTriplesStsmt != null){
-                updateOldDiffTriplesStsmt.close();
+            if(updateOldDiffTriplesStmt != null){
+                updateOldDiffTriplesStmt.close();
             }
         }
         catch (SQLException sqlExp){
@@ -485,7 +496,7 @@ public class Hash{
     /**
      * Inserts a new record into dbpedia_triples table, in order to later use it to compare hashes
      */
-	public void insertIntoDB()
+    public void insertIntoDB()
     {
         if(!this.active)
         {
@@ -498,19 +509,19 @@ public class Hash{
                 (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
 
         Timer.start(timerName);
-        
+
         String jsonEncodedString = JSONValue.toJSONString(this.newJSONObject);
-        String sql = "Insert Into " + TABLENAME + "(" + FIELD_OAIID + ", " +
+        String sql = "INSERT INTO " + TABLENAME + "(" + FIELD_OAIID + ", " +
                 FIELD_RESOURCE + " , " + FIELD_JSON_BLOB + " ) VALUES ( ?, ? , ?  ) ";
 
-        PreparedStatement stmt = this.jdbc.prepare(sql , "Hash::insertIntoDB");
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::insertIntoDB");
 
         boolean insertExecutedSuccessfully= jdbc.executeStatement(stmt, new String[]{this.oaiId, this.Subject,
                 jsonEncodedString} );
 
-	    String needed = Timer.stopAsString(timerName);
+        String needed = Timer.stopAsString(timerName);
 
-        if(insertExecutedSuccessfully == false)
+        if(!insertExecutedSuccessfully)
         {
             logger.fatal("FAILED to insert hashes for " + this.newJSONObject.size() + " extractors ");
         }
@@ -527,42 +538,10 @@ public class Hash{
             logger.warn("SQL statement stmt cannot be closed in function insertIntoDB");
         }
 
-        //This code aims to update the table called "dbpedia_triples_for_diff", which enables the calculation of the diff
-        //for resources in the statistics page.
-
-//        String jsonNewHashesEncodedString = JSONValue.toJSONString(this.newJSONObject);
-//        String sqlInsertIntoDiffTable = "Insert Into " + TABLENAME + "(" + FIELD_OAIID + ", " +
-//                FIELD_RESOURCE + " , " + FIELD_JSON_BLOB + " ) VALUES ( ?, ? , ?  ) ";
-//
-//        PreparedStatement stmtInsertIntoDiffTable = this.jdbc.prepare(sqlInsertIntoDiffTable , "Hash::insertIntoDB");
-//
-//        insertExecutedSuccessfully= jdbc.executeStatement(stmtInsertIntoDiffTable, new String[]{this.oaiId, this.Subject,
-//                jsonNewHashesEncodedString} );
-//
-//        if(insertExecutedSuccessfully == false)
-//        {
-//            logger.fatal("FAILED to insert hashes the DIFF table");
-//        }
-        /*else
-        {
-            logger.info(this.Subject + " inserted hashes for " + this.newJSONObject.size() + " extractors " + needed);
-        }*/
-
-        /*
-        //In that case there is no old triples, so all triples are considered new triples
-        Delta delta = DeltaCalculator.calculateDiff(this.Subject, null, newJSONObject);
-        ///////////////////////////////Insert  the new diff into the corresponding graph
-        String sparulInsert = "INSERT IN GRAPH <" + LiveOptions.options.get("addedTriplesGraphURI") + "> {" +
-                delta.formulateAddedTriplesAsNTriples(true) + "}";
-
-        String virtuosoPl = "sparql " + sparulInsert + "";
-        jdbc.exec(virtuosoPl, "Hash::updateDB");
-        */
-
         Delta delta = DeltaCalculator.calculateDiff(this.Subject, originalHashes, newJSONObject);
         //First delete old diff triples
         CallableStatement deleteOldDiffTriplesStsmt = jdbc.prepareCallableStatement("DELETE_ALL_RESOURCE_TRIPLES_FROM_dbpedia_triples_diff(?)",
-                        "Hash::updateDB");
+                "Hash::updateDB");
         jdbc.executeCallableStatement(deleteOldDiffTriplesStsmt,new String[]{this.Subject});
 
         //Insert the added triples as an N-Triples string
@@ -593,7 +572,7 @@ public class Hash{
 
         //Main.
 
-	}
+    }
 
     /**
      * Deletes a record for a specific resource from dbpedia_triples table.
@@ -613,13 +592,13 @@ public class Hash{
 
         String sql = "DELETE FROM " + TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
 
-        PreparedStatement stmt = this.jdbc.prepare(sql , "Hash::deleteFromDB");
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::deleteFromDB");
 
         boolean deleteExecutedSuccessfully= jdbc.executeStatement(stmt, new String[]{} );
 
-	    String needed = Timer.stopAsString(timerName);
+        String needed = Timer.stopAsString(timerName);
 
-        if(deleteExecutedSuccessfully == false)
+        if(!deleteExecutedSuccessfully)
         {
             logger.fatal("FAILED to delete hashes for " + this.newJSONObject.size() + " extractors ");
         }
@@ -653,17 +632,14 @@ public class Hash{
 
         if((triples != null) && (triples.size()!=0))
         {
-            //$this->newJSONObject[$extractorID] = array();
-            //TODO this items must be an array
             this.newJSONObject.put(extractorID, new HashMap());
         }
 
         ArrayList <String>keys = new ArrayList<String>();
-       //TODO newHashSet must be an array
-        HashMap newHashSet = new HashMap();
+        HashMap<String, HashMap> newHashSet = new HashMap<String, HashMap>();
         for(int i=0; i<triples.size(); i++)
         {
-            HashMap tmp = new HashMap();
+            HashMap<String, Object> tmp = new HashMap<String, Object>();
 
             tmp.put("s", Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getSubject()));
             tmp.put("p",  Util.convertToSPARULPattern(((RDFTriple)triples.get(i)).getPredicate()));
@@ -675,102 +651,63 @@ public class Hash{
             newHashSet.put(((RDFTriple)triples.get(i)).getMD5HashCode(), tmp);
         }
 
-//        newHashSet.remove(keys.get(20));
-//        newHashSet.remove(keys.get(21));
-//        newHashSet.remove(keys.get(22));
-//        newHashSet.remove(keys.get(23));
-//        newHashSet.remove(keys.get(24));
-//        newHashSet.remove(keys.get(25));
-//        newHashSet.remove(keys.get(26));
-//        newHashSet.remove(keys.get(27));
-//        newHashSet.remove(keys.get(28));
-//        newHashSet.remove(keys.get(29));
-//        newHashSet.remove(keys.get(30));
-
         Iterator tripleHashsetIterator = newHashSet.entrySet().iterator();
 
         while(tripleHashsetIterator.hasNext())
         {
             total++;
-            Map.Entry pairs = (Map.Entry)tripleHashsetIterator.next();
-            String hash = pairs.getKey().toString();
+            Map.Entry<String, HashMap> pairs = (Map.Entry<String, HashMap>)tripleHashsetIterator.next();
+            String hash = pairs.getKey();
 
             //triple exists
             if((this.hashesFromStore.get(extractorID) != null) &&(
-                    ((HashMap)this.hashesFromStore.get(extractorID)).get(hash)) != null)
+                    (this.hashesFromStore.get(extractorID)).get(hash)) != null)
             {
-
-//                this.newJSONObject.put(extractorID, hash);
-//                HashMap sourceHashMap = new HashMap();
-//                sourceHashMap.put(hash, ((HashMap)this.hashesFromStore.get(extractorID)).get(hash));
-//
-//                HashMap destinationHashMap =  (HashMap)this.newJSONObject.get(extractorID);
-//                destinationHashMap.put(hash, sourceHashMap);
-//
-//                this.hashesFromStore.remove(extractorID);
 
                 //This is the first triple to be added to the list of triples that should be removed from the store,
                 //so we must construct the Hashmap
-                HashMap tmpHashmap = null;
+                HashMap<String, HashMap> tmpHashmap = null;
                 if(this.newJSONObject.get(extractorID) == null){
-                    tmpHashmap = new HashMap();
+                    tmpHashmap = new HashMap<String, HashMap>();
                 }
                 else//Hashmap already exists, so we can use it directly 
-                    tmpHashmap = (HashMap)this.newJSONObject.get(extractorID);
+                    tmpHashmap = this.newJSONObject.get(extractorID);
 
-                tmpHashmap.put(hash, ((HashMap)this.hashesFromStore.get(extractorID)).get(hash));
+                tmpHashmap.put(hash, (HashMap)this.hashesFromStore.get(extractorID).get(hash));
 
                 this.newJSONObject.put(extractorID, tmpHashmap);
 
-                ((HashMap)this.hashesFromStore.get(extractorID)).remove(hash);
+                this.hashesFromStore.get(extractorID).remove(hash);
 
                 matchCount++;
             }
             else
             {
-                //add it
-                //$this->addTriples[$hash] = $tripleArray['triple'];
                 //Intialize the hashmap if it is already null
                 if(addTriples == null)
-                    addTriples = new HashMap();
+                    addTriples = new HashMap<String, RDFTriple>();
 
-                this.addTriples.put(hash, ((HashMap)pairs.getValue()).get("triple"));
+                this.addTriples.put(hash, (RDFTriple)pairs.getValue().get("triple"));
 
                 //unset($tripleArray['triple']);
                 ((HashMap)pairs.getValue()).remove("triple");
 
-                //$this->newJSONObject[$extractorID][$hash] = $tripleArray;
-                HashMap destinationHashMap = (HashMap)this.newJSONObject.get(extractorID);
+                HashMap<String, HashMap> destinationHashMap = this.newJSONObject.get(extractorID);
                 destinationHashMap.put(hash, pairs.getValue());
 
                 addCount++;
             }
-         }
+        }
 
-    //  foreach($this->hashesFromStore[$extractorID] as $hash => $triple)
-        HashMap hmHashAndTriples = (HashMap)hashesFromStore.get(extractorID);
+        HashMap hmHashAndTriples = hashesFromStore.get(extractorID);
         Iterator hashesForIterator = hmHashAndTriples.entrySet().iterator();
         while(hashesForIterator.hasNext())
         {
-            Map.Entry pairs = (Map.Entry)hashesForIterator.next();
+            Map.Entry<String, HashMap> pairs = (Map.Entry<String, HashMap>)hashesForIterator.next();
 
             //initialize the hashmap if it is already null 
             if(deleteTriples == null)
-                deleteTriples = new HashMap();
-
-            //In case of Abstract extraction we should convert BLOB into string in order to decode non-English characters
-            //as they are stored as a sequence of unicode escaped characters e.g. \u664B must be converted into 晋, in order
-            //for the triple to found and renewed with the new triple value.
-            if(extractorID.toLowerCase().contains("abstractextractor")){
-                String strUnicodeDecoded = new String((String)((HashMap) (pairs.getValue())).get("o"));
-                ((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
-            }
-//            else if(extractorID.toLowerCase().contains("contributorextractor")){
-//                ((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
-//            }
-            else if(extractorID.toLowerCase().contains("metainformationextractor")){
-                ((HashMap) (pairs.getValue())).put("o", "?o"+delCount);
-            }
+                deleteTriples = new HashMap<String, HashMap>();
 
             this.deleteTriples.put(pairs.getKey(), pairs.getValue());
             delCount++;
@@ -801,7 +738,7 @@ public class Hash{
         String timerName = "Hash.compare" +
                 (LiveExtractionConfigLoader.isMultithreading()? Thread.currentThread().getId():"");
         Timer.start(timerName);
-        
+
         String extractorID = extractionResult.getExtractorID();
         ArrayList triples = extractionResult.getTriples();
         String nicename = extractorID.replace(Constants.DB_META_NS, "");
@@ -827,28 +764,36 @@ public class Hash{
         Timer.stop(timerName);
     }
 
+	public Model getAddedTriplesToPublish(){
+        return newTriplesModel.difference(triplesFromStoreModel);
+    }
+
+    public Model getDeletedTriplesToPublish(){
+        return triplesFromStoreModel.difference(newTriplesModel);
+    }
+
     public HashMap getTriplesToAdd()
     {
         logger.info("removing " + this.deleteTriples.size() + " previous triples ");
         return this.addTriples;
-	}
-	public HashMap getTriplesToDelete()
+    }
+    public HashMap getTriplesToDelete()
     {
         logger.info("adding " + this.addTriples.size() + " triples ");
         return this.deleteTriples;
-	}
+    }
 
 
-	private boolean _isExtractorInHash(String extractorID)
+    private boolean _isExtractorInHash(String extractorID)
     {
-		return ((this.hashesFromStore != null)&&(this.hashesFromStore.get(extractorID) != null));
-	}
+        return ((this.hashesFromStore != null)&&(this.hashesFromStore.get(extractorID) != null));
+    }
 
-/*
- * name: _addToJSON
- * @param
- * @return
- */
+    /*
+    * name: _addToJSON
+    * @param
+    * @return
+    */
     private void _addToJSON(String extractorID, ArrayList triples)
     {
         //If the application is working in multithreading mode, we must attach the thread id to the timer name
@@ -867,10 +812,6 @@ public class Hash{
 //            addTriples.put()
             this.newJSONObject.put(extractorID, newTriplesToBeAdded);
             String nicename = extractorID.replace(Constants.DB_META_NS, "");
-
-            //TODO array_keys($this->newJSONObject[$extractorID]) should be mapped to java, but I think I converted it
-            //TODO correctly
-            //$this->log(DEBUG, ' added : '.count(array_keys($this->newJSONObject[$extractorID])).' of '. count($triples).' triples to JSON object for '.$nicename. '[removed duplicates]' );
 
             HashMap hmTemp = (HashMap)this.newJSONObject.get(extractorID);
             logger.info(" added : " + hmTemp.size() + " of " +
@@ -892,13 +833,12 @@ public class Hash{
 
         //Timer.start("Hash.compare._generateHashSetFromTriples");
 
-        HashMap newHashSet = new HashMap();
+        HashMap<String, HashMap> newHashSet = new HashMap<String, HashMap>();
         for (Object objTriple : triples)
         {
             RDFTriple triple = (RDFTriple)objTriple;
 
-            HashMap tmp = new HashMap();
-            //TODO we should use the function toSPARULPattern with getSubject, getPredicate, and getObject
+            HashMap<String, String> tmp = new HashMap<String, String>();
             tmp.put("s", Util.convertToSPARULPattern(triple.getSubject()));
             tmp.put("p", Util.convertToSPARULPattern(triple.getPredicate()));
             tmp.put("o", Util.convertToSPARULPattern(triple.getObject()));
@@ -913,14 +853,6 @@ public class Hash{
         }
         Timer.stop(timerName);
         return newHashSet;
-
-        //add the generated triples to the list of triples that should be added to the store
-//            Iterator tripleHashsetIterator = newTriplesToBeAdded.entrySet().iterator();
-//            while(tripleHashsetIterator.hasNext()){
-//                Map.Entry pairs = (Map.Entry)tripleHashsetIterator.next();
-//                String hash = pairs.getKey().toString();
-//                addTriples.put(hash, pairs.getValue());
-//            }
     }
 
 
@@ -928,13 +860,6 @@ public class Hash{
     {
         return this.hasHash;
     }
-
-    //TODO this method depends on class logger, and we may or may not need it, as we have a class fro logging in java. 
-    /*private boolean log(Level lvl, String message)
-    {
-        logger.logp(lvl, this.getClass().getName(), "core", message);    
-        Logger::logComponent('core', get_class(this), lvl , message);
-    }*/
 
     /**
      * Returns the previously generated triples for an extractor
@@ -944,7 +869,7 @@ public class Hash{
     public HashMap getTriplesForExtractor(String extractorID){
 
         if((this._isExtractorInHash(extractorID)) && (this.hashesFromStore.get(extractorID) != null)){
-            return (HashMap)this.hashesFromStore.get(extractorID);
+            return this.hashesFromStore.get(extractorID);
         }
         return null;
     }
@@ -953,7 +878,7 @@ public class Hash{
         try{
             if(hashesFromStore == null)//No previous hashes for the current page exist, i.e. no further processing required
                 return;
-            HashMap mapHashesInStore = (HashMap)hashesFromStore.get(extractorID);
+            HashMap mapHashesInStore = hashesFromStore.get(extractorID);
             this.newJSONObject.put(extractorID, mapHashesInStore);
         }
         catch (Exception exp){
@@ -969,10 +894,10 @@ public class Hash{
 
             if(typeOfRequiredTriples == TriplesType.LatestTriples)
                 sqlStatement = "SELECT " + FIELD_OAIID + ", " + FIELD_JSON_BLOB + " FROM " + TABLENAME +" WHERE "
-                    + FIELD_RESOURCE +" = '" + requiredResource + "'";
+                        + FIELD_RESOURCE +" = '" + requiredResource + "'";
             else
                 sqlStatement = "SELECT " + FIELD_OAIID + ", " + FIELD_JSON_BLOB + " FROM " + DIFF_TABLENAME +" WHERE "
-                    + FIELD_RESOURCE +" = '" + requiredResource + "'";
+                        + FIELD_RESOURCE +" = '" + requiredResource + "'";
 
             JDBC con = JDBC.getDefaultConnection();
 
@@ -984,9 +909,9 @@ public class Hash{
 
             if(NumberOfRows <= 0)
             {
-				logger.info("No triples found for " + requiredResource);
-				return null;
-			}
+                logger.info("No triples found for " + requiredResource);
+                return null;
+            }
 
             jdbcResult.beforeFirst();
             String Temp = "";
@@ -1014,14 +939,14 @@ public class Hash{
             //This class is object is created to force the JSON decoder to return a HashMap, as hashesFromStore is a HashMap
             ContainerFactory containerFactory = new ContainerFactory(){
                 public List creatArrayContainer() {
-                  return new LinkedList();
+                    return new LinkedList();
                 }
 
                 public Map createObjectContainer() {
-                  return new HashMap();
+                    return new HashMap();
                 }
 
-              };
+            };
 
 
             JSONParser parser = new JSONParser();
@@ -1063,8 +988,6 @@ public class Hash{
 
                     tripleString = tripleString.replace("\"\"\"", "\"");
 
-                   // tripleString = "<http://dbpedia.org/resource/Version_1.0_Editorial_Team/Wikipedia_articles_by_quality_log> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Project-Class_Wikipedia_articles> . ";
-                    //String tripleStatement =  requiredTriples.createStatement(hmActualTriple.get("s") );
                     Model tmpModel = requiredTriples.read(new StringReader(tripleString), null, "N-TRIPLE");
                     requiredTriples.add(tmpModel);
                 }
@@ -1081,70 +1004,68 @@ public class Hash{
         }
     }
 
-    /*public static void calculateDiff(){
-        try{
-            //2 sets of triples, one for the latest version of the triples, and one for the previous set
-            Model latestTriples = getTriples("http://dbpedia.org/resource/Anarchism", TriplesType.LatestTriples);
-            Model previousTriples = getTriples("http://dbpedia.org/resource/Anarchism", TriplesType.PreviousTriples);
-            ////////////////////////////////////////////////////////////////////////////
+	/**
+     * Completely deletes a page with all of its triples.
+     * Used in case of deleted Wikipedia articles
+     * @return  True if the deletion process was successful
+     */
+    public boolean deleteResourceCompletely(){
 
-            previousTriples.add(ResourceFactory.createStatement(ResourceFactory.createResource("http://dbpedia.org/resource/Anarchism"),
-                    ResourceFactory.createProperty("http://dbpedia.org/ontology/author"),
-                    ResourceFactory.createPlainLiteral("Lionel Messi")));
+        //Formulate SPARUL delete statement to delete all triples
+        String graphURI  = LiveOptions.options.get("graphURI");
 
-            latestTriples.add(ResourceFactory.createStatement(ResourceFactory.createResource("http://dbpedia.org/resource/Anarchism"),
-                    ResourceFactory.createProperty("http://dbpedia.org/ontology/author"),
-                    ResourceFactory.createPlainLiteral("Crestiano Ronaldo")));
+        ArrayList<String> listDistinctSubjects = new ArrayList<String>();
 
-            ////////////////////////////////////////////////////////////////////////////
-            //Diffing the latest and the previous set, gives us a list of all added and modified triples, in their new form
-            Model addedAndModifiedTriples = latestTriples.difference(previousTriples);
+        StmtIterator iterator = getDeletedTriplesToPublish().listStatements();
 
-            //Diffing the latest and the previous set, gives us a list of all added and modified triples, but in their old form
-            Model deletedAndModifiedTriples = previousTriples.difference(latestTriples);
+        StringBuffer sparulDeleteStatement = new StringBuffer("SPARQL DELETE FROM <" + graphURI + "> {?s ?p ?o}\n" +
+                "WHERE {?s ?p ?o. filter(?s IN (");
 
-            //This model will contain the modified triples only, in their new form
-            Model modifiedTriples = ModelFactory.createDefaultModel();
+        while(iterator.hasNext()){
+            com.hp.hpl.jena.rdf.model.Statement stmtToDelete = iterator.next();
 
-            //This model will contain the modified triples only, in old new form
-            Model modifiedTriplesWithOldValues = ModelFactory.createDefaultModel();
+            if(!listDistinctSubjects.contains(stmtToDelete.getSubject().toString()))
+                listDistinctSubjects.add(stmtToDelete.getSubject().toString());
 
-            //Iterate through the two lists and compare the subject and predicate values, if they are the same, then
-            //those triples are the same but the object is modified
-            StmtIterator addedAndModifiedTriplesIterator = addedAndModifiedTriples.listStatements();
-            while (addedAndModifiedTriplesIterator.hasNext()){
-                Statement addedOrModifiedStatement = addedAndModifiedTriplesIterator.nextStatement();
+            /*String pattern = Util.convertToSPARULPattern(stmtToDelete.getSubject())
+                    + " " + "?p"
+                    + " " + "?o" + " . \n";
+            String sparulDeleteStatement = "SPARQL DELETE FROM <" + graphURI + "> {" + pattern +"}\n" +
+                    "WHERE {" + pattern + "}";
 
-                StmtIterator deletedAndModifiedTriplesIterator = deletedAndModifiedTriples.listStatements();
-
-                while(deletedAndModifiedTriplesIterator.hasNext()){
-
-                    Statement deletedOrModifiedStatement = deletedAndModifiedTriplesIterator.nextStatement();
-
-                    //If the subject and the predicate are the same, then the change is in object value, which means
-                    //that this a modified triple
-                    if((addedOrModifiedStatement.getSubject().getURI().compareTo(deletedOrModifiedStatement.getSubject().getURI()) == 0)
-                            && (addedOrModifiedStatement.getPredicate().getURI().compareTo(deletedOrModifiedStatement.getPredicate().getURI()) == 0)){
-
-                        modifiedTriples.add(addedOrModifiedStatement);
-                        modifiedTriplesWithOldValues.add(deletedOrModifiedStatement);
-
-                    }
-
-                }
-            }
-
-            //The added triples can now be calculated by just diffing addedAndModifiedTriples and modifiedTriples
-            Model addedTriples = addedAndModifiedTriples.difference(modifiedTriples);
-            Model deletedTriples = deletedAndModifiedTriples.difference(modifiedTriplesWithOldValues);
-
-            int yyyy = 0;
-        }
-        catch(Exception exp){
-            logger.warn(exp.getMessage());
-
+            ResultSet results = jdbc.exec( sparulDeleteStatement, "LiveUpdateDestination");*/
         }
 
-    }*/
+        boolean firstSubject = true;//Used to avoid adding a comma before the first subject
+
+        for(String subject:listDistinctSubjects){
+            if(firstSubject)
+                firstSubject = false;
+            else
+                sparulDeleteStatement.append(",");
+
+            sparulDeleteStatement.append("<");
+            sparulDeleteStatement.append(subject);
+            sparulDeleteStatement.append(">");
+
+        }
+        sparulDeleteStatement.append("))}");
+
+        ResultSet results = jdbc.exec(sparulDeleteStatement.toString(), "LiveUpdateDestination");
+
+        //Delete the resource from the table as well
+        //1- delete from the diff table
+        //2- delete from the main table
+        String sql = "DELETE FROM " + DIFF_TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
+        PreparedStatement stmt = jdbc.prepare(sql , "Hash::deleteResourceCompletely");
+        jdbc.executeStatement(stmt, new String[]{} );
+
+
+        sql = "DELETE FROM " + TABLENAME + " WHERE " + FIELD_OAIID + " = " + this.oaiId;
+        stmt = jdbc.prepare(sql , "Hash::deleteResourceCompletely");
+
+        return jdbc.executeStatement(stmt, new String[]{} );
+
+    }
 
 }

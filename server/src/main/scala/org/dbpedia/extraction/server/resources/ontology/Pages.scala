@@ -6,24 +6,30 @@ import javax.ws.rs._
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.server.Server
 import java.util.logging.Logger
-import org.dbpedia.extraction.server.resources.Base
+import org.dbpedia.extraction.server.util.PageUtils
+import org.dbpedia.extraction.util.Language
 
-@Path("/ontology/pages")
-class Pages extends Base
+@Path("/ontology/pages/")
+class Pages
 {
     val logger = Logger.getLogger(classOf[Pages].getName)
 
     /**
      * Retrieves an overview page
      */
+    // TODO: remove this method. Clients should get the ontology pages directly from the
+    // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
     @GET
     @Produces(Array("application/xhtml+xml"))
     def getPages : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          </head>
           <body>
             <h2>Ontology pages</h2>
-            { Server.extractor.ontologyPages.values.map(page => <a href={"pages/" + page.title.encodedWithNamespace}>{page.title}</a><br/>) }
+            { Server.instance.extractor.ontologyPages.values.toArray.sortBy(_.title.decodedWithNamespace).map(PageUtils.relativeLink(_) ++ <br/>) }
           </body>
         </html>
     }
@@ -31,13 +37,16 @@ class Pages extends Base
     /**
      * Retrieves an ontology page
      */
+    // TODO: remove this method. Clients should get the ontology pages directly from the
+    // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
     @GET
     @Path("/{title}")
     @Produces(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
     def getPage(@PathParam("title") @Encoded title : String) : Elem =
     {
         logger.info("Get ontology page: " + title)
-        Server.extractor.ontologyPages(WikiTitle.parseEncoded(title)).toXML
+        Server.instance.extractor.ontologyPages(WikiTitle.parse(title, Language.Mappings)).toDumpXML
     }
 
     /**
@@ -46,13 +55,14 @@ class Pages extends Base
     @PUT
     @Path("/{title}")
     @Consumes(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
     def putPage(@PathParam("title") @Encoded title : String, pageXML : Elem)
     {
         try
         {
-            for(page <- XMLSource.fromXML(pageXML))
+            for(page <- XMLSource.fromXML(pageXML, Language.Mappings))
             {
-                Server.extractor.updateOntologyPage(page)
+                Server.instance.extractor.updateOntologyPage(page)
                 logger.info("Updated ontology page: " + title)
             }
         }
@@ -72,9 +82,10 @@ class Pages extends Base
     @DELETE
     @Path("/{title}")
     @Consumes(Array("application/xml"))
+    // FIXME: Why @Encoded? Probably wrong.
     def deletePage(@PathParam("title") @Encoded title : String)
     {
-        Server.extractor.removeOntologyPage(WikiTitle.parseEncoded(title))
+        Server.instance.extractor.removeOntologyPage(WikiTitle.parse(title, Language.Mappings))
         logger.info("Deleted ontology page: " + title)
     }
 }

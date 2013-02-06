@@ -2,6 +2,8 @@ package org.dbpedia.extraction.live.processor;
 
 import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.destination.LiveUpdateDestination;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
 import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
@@ -12,11 +14,10 @@ import org.dbpedia.extraction.live.util.LastResponseDateManager;
 import org.dbpedia.extraction.live.util.XMLUtil;
 import org.dbpedia.extraction.sources.Source;
 import org.dbpedia.extraction.sources.XMLSource;
+import org.dbpedia.extraction.util.Language;
 import org.w3c.dom.Document;
 import scala.xml.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,9 +31,8 @@ import java.util.regex.Pattern;
  * process on it.
  */
 public class PageProcessor extends Thread{
-    
+
     private static Logger logger = Logger.getLogger(PageProcessor.class);
-    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     public PageProcessor(String name, int priority){
         this.setPriority(priority);
@@ -50,37 +50,30 @@ public class PageProcessor extends Thread{
 
     private void processPage(long pageID){
         try{
-            String oaiUri = "http://live.dbpedia.org/syncwiki/Special:OAIRepository";
-            String oaiPrefix = "oai:live.dbpedia.org:dbpediawiki:";
+            String oaiUri = LiveOptions.options.get("oaiUri");
+            String oaiPrefix = LiveOptions.options.get("oaiPrefix");
+            String baseWikiUri = LiveOptions.options.get("baseWikiUri");
             String mediaWikiPrefix = "mediawiki";
 
             GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
-            /*if(record.getErrors().getLength() > 0)
-                logger.info("There is an error");*/
+            if(record.toString().contains("header status=\"deleted\"")){
+                LiveUpdateDestination.deleteResourceCompletely(pageID);
+            }
             Document doc = record.getDocument();
 
             /////////////////////////////////////////////////////////////
             String strDoc = XMLUtil.toString(doc);
             Pattern invalidCharactersPattern = Pattern.compile("&#[\\d{0-9}]+;");
             Matcher invalidCharactersMatcher = invalidCharactersPattern.matcher(strDoc);
-            /*while (invalidCharactersMatcher.find()){
-                logger.info("START = " + invalidCharactersMatcher.start());
-                logger.info("END = " + invalidCharactersMatcher.end());
-            }*/
 
             String resultingString = invalidCharactersMatcher.replaceAll("");
 
             Node node = XML.loadString(resultingString);
             Elem xmlElem = (Elem) node;
-            Source wikiPageSource = XMLSource.fromXML(xmlElem);
+            //logger.warn("Page ID " + pageID + " :" + resultingString);
+            //Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.apply(LiveOptions.options.get("language")));
             LiveExtractionManager.extractFromPage(xmlElem);
             /////////////////////////////////////////////////////////////
-
-
-            //Elem element = (Elem) XML.loadString(XMLUtil.toString(doc));
-            //Source wikiPageSource = XMLSource.fromXML(element);
-
-            //LiveExtractionManager.extractFromPage(element);
 
         }
         catch(Exception exp){
@@ -90,9 +83,11 @@ public class PageProcessor extends Thread{
     }
 
 
+
     public void run(){
         while(true){
             try{
+                // block if empty
                 PagePriority requiredPage = Main.pageQueue.take();
 
                 //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
@@ -102,15 +97,15 @@ public class PageProcessor extends Thread{
                 }
                 logger.info("Page # " + requiredPage + " has been removed and processed");
 
-
                 //Write response date to file in both cases of live update and mapping update
                 if(requiredPage.pagePriority == Priority.MappingPriority)
                     LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
-                            dateFormatter.format(new Date(requiredPage.getLastResponseDate())));
+                            requiredPage.pageTimestamp);
                 else if(requiredPage.pagePriority == Priority.LivePriority)
                     LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
-                            dateFormatter.format(new Date(requiredPage.getLastResponseDate())));
+                            requiredPage.pageTimestamp);
 
+//                }
 
             }
             catch (Exception exp){
@@ -119,7 +114,7 @@ public class PageProcessor extends Thread{
 
 
         }
-        
+
     }
 
 }

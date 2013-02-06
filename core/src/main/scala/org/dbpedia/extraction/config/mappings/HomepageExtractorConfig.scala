@@ -3,7 +3,6 @@ package org.dbpedia.extraction.config.mappings
 
 object HomepageExtractorConfig
 {
-
     //TODO rewritten as map, need to clean up per language
     //private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
     val propertyNamesMap = Map(
@@ -12,8 +11,11 @@ object HomepageExtractorConfig
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
         "en" -> Set("website", "homepage", "web", "site"),
         "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
+        "eu" -> Set("webgunea"),
         "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
         "ga" -> Set("suíomh"),
+        "it" -> Set("homepage", "sito", "sito web"),
+        "nl" -> Set("website", "homepage", "hoofdpagina", "webpagina", "web", "site"),
         "pl" -> Set("web", "strona"),
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
         "ru" -> Set("сайт")
@@ -30,6 +32,8 @@ object HomepageExtractorConfig
         "eu" -> "Kanpo loturak?",
         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
         "ga" -> "(?:Naisc sheachtracha|Nasc sheachtrach)",
+        "it" -> "Collegamenti esterni",
+        "nl" -> "Externe links?",
         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
         "ru" -> "Ссылки"
@@ -37,15 +41,19 @@ object HomepageExtractorConfig
 
     val officialMap = Map(
         "ca" -> "oficial",
-        "en" -> "official",
         "de" -> "offizielle",
         "el" -> "(?:επίσημος|επίσημη)",
+        "en" -> "official",
+        "es" -> "oficial",
         "eu" -> "ofiziala?",
-        "ga" -> "oifigiúil",
         "fr" -> "officiel",
+        "ga" -> "oifigiúil",
+        "it" -> "ufficiale",
+        "nl" -> "(?:officieel|officiële)",
         "pl" -> "oficjalna",
         "pt" -> "oficial",
-        "es" -> "oficial"
+        "ru" -> "официальный"
+        // TODO: ru is from http://translate.google.com/#en|ru|official%20homepage - check if it's correct
     )
 
 }

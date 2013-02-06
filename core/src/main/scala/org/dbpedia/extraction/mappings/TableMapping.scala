@@ -1,64 +1,45 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+import scala.collection.mutable.ArrayBuffer
 
-class TableMapping( mapToClass : OntologyClass,
-                    correspondingClass : OntologyClass,
-                    correspondingProperty : OntologyProperty,
-                    keywords : String,
-                    header : String,
-                    mappings : List[PropertyMapping],
-                    context : {
-                        def ontology : Ontology
-                        def language : Language }   ) extends ClassMapping
+class TableMapping( 
+  mapToClass : OntologyClass,
+  correspondingClass : OntologyClass,
+  correspondingProperty : OntologyProperty,
+  keywords : String,
+  header : String,
+  mappings : List[PropertyMapping],
+  context : {
+    def ontology : Ontology
+    def language : Language 
+  }
+) 
+extends Mapping[TableNode]
 {
-    val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase) }
+    val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase(context.language.locale)) }
 
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
 
-    override def extract(node : Node, subjectUri : String, pageContext : PageContext) : Graph = node match
+    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyProperties,DBpediaDatasets.OntologyTypes)
+
+    override def extract(tableNode : TableNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
-        case tableNode : TableNode => extractTable(tableNode, subjectUri, pageContext)
-        case _ => new Graph()
-    }
-
-    def extractTable(tableNode : TableNode, subjectUri : String, pageContext : PageContext) : Graph =
-    {
-        def writeType(rowNode : Node, instanceUri :String, clazz : OntologyClass, graph : Graph) : Graph =
-        {
-            var thisGraph = graph
-
-            val quad = new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.getProperty("rdf:type").get, clazz.uri, rowNode.sourceUri)
-            thisGraph = graph.merge(new Graph(quad))
-
-            for(baseClass <- clazz.subClassOf)
-            {
-                thisGraph = graph.merge(writeType(rowNode, instanceUri, baseClass, thisGraph))
-            }
-
-            for(eqClass <- clazz.equivalentClasses)
-            {
-                thisGraph = graph.merge(writeType(rowNode, instanceUri, eqClass, thisGraph))
-            }
-
-            thisGraph
-        }
-
         val tableHeader = extractTableHeader(tableNode)
 
         //TODO ignore tables with less than 2 rows
 
         if(!containsKeywords(tableHeader))
         {
-            return new Graph()
+            return Seq.empty
         }
 
         val processedTableNode = preprocessTable(tableNode)
 
-        var graph = new Graph()
+        var graph = new ArrayBuffer[Quad]()
 
         for( rowNode <- processedTableNode.children.tail;
              templateNode <- createTemplateNode(rowNode, tableHeader) )
@@ -70,19 +51,18 @@ class TableMapping( mapToClass : OntologyClass,
             val instanceUri = pageContext.generateUri(correspondingInstance.getOrElse(subjectUri), rowNode.children.head);
 
             //Add new ontology instance
-            graph = writeType(rowNode, instanceUri, mapToClass, graph)
+            for (cls <- mapToClass.relatedClasses)
+              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, rowNode.sourceUri)
 
             //Link new instance to the corresponding Instance
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                val quad = new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
-                graph = graph.merge(new Graph(quad))
+                graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
             }
 
             //Extract properties
-            graph = mappings.map(mapping => mapping.extract(templateNode, instanceUri, pageContext))
-                .foldLeft(graph)(_ merge _)
+            graph ++= mappings.flatMap(_.extract(templateNode, instanceUri, pageContext))
         }
 
         graph
@@ -98,7 +78,7 @@ class TableMapping( mapToClass : OntologyClass,
         for( headerRow <- node.children.headOption.toList;
              headerCell <- headerRow.children;
              text <- headerCell.retrieveText )
-        yield text.toLowerCase
+        yield text.toLowerCase(context.language.locale)
     }
 
     /**
@@ -113,11 +93,13 @@ class TableMapping( mapToClass : OntologyClass,
 
     private def preprocessTable(tableNode : TableNode) : TableNode =
     {
+        // TODO: use mutable List (or Seq) and += instead of ::=, get rid of .reverse below
         var newRows = tableNode.children.head :: Nil
 
         var previousRow = newRows.head.children
         for(rowNode <- tableNode.children.tail)
         {
+            // TODO: use mutable List (or Seq) and += instead of ::=, get rid of .reverse below
             var newRow = List[TableCellNode]()
 
             val previousRowIter = previousRow.iterator
@@ -128,9 +110,10 @@ class TableMapping( mapToClass : OntologyClass,
             var done = false
             while(!done)
             {
-                if(previousCell != null && previousCell.annotation("rowspan").get.asInstanceOf[Int] > 1)
+                if(previousCell != null && previousCell.rowSpan > 1)
                 {
-                    previousCell.setAnnotation("rowspan", previousCell.annotation("rowspan").get.asInstanceOf[Int] - 1)
+                    // TODO: make a copy of previousCell, don't modify it
+                    previousCell.rowSpan -= 1
                     newRow ::= previousCell
 
                     previousCell = if(previousRowIter.hasNext) previousRowIter.next() else null
@@ -245,7 +228,7 @@ class TableMapping( mapToClass : OntologyClass,
         var lastPageTemplate : Option[Node] = None
         for(pageTemplate <- tableNode.root.children; if pageTemplate.isInstanceOf[TemplateNode] )
         {
-            if(pageTemplate.line < tableNode.line && !pageTemplate.annotation(TemplateMapping.CLASS_ANNOTATION).isEmpty)
+            if(pageTemplate.line < tableNode.line && pageTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION).isDefined)
             {
                 lastPageTemplate = Some(pageTemplate)
             }
@@ -254,13 +237,13 @@ class TableMapping( mapToClass : OntologyClass,
         //Check if found template has been mapped to corresponding Class
         var correspondingInstance : Option[String] = None
         for( correspondingTemplate <- lastPageTemplate;
-             templateClasses <- correspondingTemplate.annotation(TemplateMapping.CLASS_ANNOTATION);
-             templateClass <- templateClasses.asInstanceOf[List[OntologyClass]];
+             templateClasses <- correspondingTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
+             templateClass <- templateClasses;
              if correspondingClass == null || templateClass.name == correspondingClass.name )
         {
             //TODO if correspondingClass == null check if templateClass subClassOf correspondingProperty.range
 
-            return Some(correspondingTemplate.annotation(TemplateMapping.INSTANCE_URI_ANNOTATION).get.asInstanceOf[String])
+            return Some(correspondingTemplate.getAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION).get)
         }
 
         None

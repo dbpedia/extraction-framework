@@ -22,7 +22,7 @@ import java.util.*;
  */
 public class DeltaCalculator {
     //Initializing the Logger
-    private static Logger logger = null;
+    private static Logger logger = Logger.getLogger(DeltaCalculator.class);
 
     private static final String DBPEDIA_TABLENAME = "dbpedia_triples";
     private static final String DBPEDIA_DIFF_TABLENAME = "dbpedia_triples_diff";
@@ -30,16 +30,6 @@ public class DeltaCalculator {
     private static final String FIELD_RESOURCE = "resource";
     private static final String FIELD_JSON_BLOB = "content";
 
-    static
-    {
-        try
-        {
-            logger = Logger.getLogger(Class.forName("org.dbpedia.extraction.live.delta.DeltaCalculator").getName());
-        }
-        catch (Exception exp){
-
-        }
-    }
 
     public static enum TriplesType
     {
@@ -54,10 +44,10 @@ public class DeltaCalculator {
 
             if(typeOfRequiredTriples == TriplesType.LatestTriples)
                 sqlStatement = "SELECT " + FIELD_OAIID + ", " + FIELD_JSON_BLOB + " FROM " + DBPEDIA_TABLENAME +" WHERE "
-                    + FIELD_RESOURCE +" = '" + requiredResource + "'";
+                        + FIELD_RESOURCE +" = '" + requiredResource + "'";
             else
                 sqlStatement = "SELECT " + FIELD_OAIID + ", " + FIELD_JSON_BLOB + " FROM " + DBPEDIA_DIFF_TABLENAME +" WHERE "
-                    + FIELD_RESOURCE +" = '" + requiredResource + "'";
+                        + FIELD_RESOURCE +" = '" + requiredResource + "'";
 
             JDBC con = JDBC.getDefaultConnection();
 
@@ -70,8 +60,8 @@ public class DeltaCalculator {
             if(NumberOfRows <= 0)
             {
 //				logger.info("No triples found for " + requiredResource);
-				return ModelFactory.createDefaultModel();
-			}
+                return ModelFactory.createDefaultModel();
+            }
 
             jdbcResult.beforeFirst();
             String Temp = "";
@@ -90,20 +80,20 @@ public class DeltaCalculator {
                 jdbcResult.getStatement().close();
             }
             catch (SQLException sqlExp){
-                logger.warn("SQL statement cannot be closed");
+                logger.warn("SQL statement jdbcResult cannot be closed in function getTriples");
             }
 
             //This class is object is created to force the JSON decoder to return a HashMap, as hashesFromStore is a HashMap
             ContainerFactory containerFactory = new ContainerFactory(){
                 public List creatArrayContainer() {
-                  return new LinkedList();
+                    return new LinkedList();
                 }
 
                 public Map createObjectContainer() {
-                  return new HashMap();
+                    return new HashMap();
                 }
 
-              };
+            };
 
 
             JSONParser parser = new JSONParser();
@@ -145,7 +135,7 @@ public class DeltaCalculator {
 
                     tripleString = tripleString.replace("\"\"\"", "\"");
 
-                   // tripleString = "<http://dbpedia.org/resource/Version_1.0_Editorial_Team/Wikipedia_articles_by_quality_log> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Project-Class_Wikipedia_articles> . ";
+                    // tripleString = "<http://dbpedia.org/resource/Version_1.0_Editorial_Team/Wikipedia_articles_by_quality_log> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Project-Class_Wikipedia_articles> . ";
                     //String tripleStatement =  requiredTriples.createStatement(hmActualTriple.get("s") );
                     Model tmpModel = requiredTriples.read(new StringReader(tripleString), null, "N-TRIPLE");
                     requiredTriples.add(tmpModel);

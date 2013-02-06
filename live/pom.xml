@@ -1,45 +1,91 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <artifactId>main</artifactId>
-        <groupId>org.dbpedia.extraction</groupId>
-        <version>2.0-SNAPSHOT</version>
+        <groupId>org.dbpedia</groupId>
+        <artifactId>extraction</artifactId>
+        <version>3.8</version>
     </parent>
 
     <groupId>org.dbpedia.extraction</groupId>
     <artifactId>live</artifactId>
     <name>Live extraction</name>
-    <!--
-      <properties>
-        <junit.version>4.8.1</junit.version>
-      </properties>
-    -->
-    <!--
-	<build>
-	  <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <skipTests>false</skipTests>
-            </configuration>
-          </plugin>
-		</plugins>
-	</build>
-	-->
+
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <!--version>2.13.2-SNAPSHOT</version-->
+
+                <configuration>
+                    <launchers>
+                        <launcher>
+                            <id>Extract</id>
+                            <mainClass>org.dbpedia.extraction.live.main.Main</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx4096m</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                    </launchers>
+                </configuration>
+                <executions>
+
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+
+                    <execution>
+                        <id>test-compile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <phase>test-compile</phase>
+                    </execution>
+
+                    <execution>
+                        <id>process-resources</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
 
     <dependencies>
 
         <dependency>
-          <groupId>xalan</groupId>
-          <artifactId>xalan</artifactId>
-          <version>2.7.1</version>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.9.1</version>
         </dependency>
 
         <dependency>
-            <groupId>org.dbpedia.extraction</groupId>
-            <artifactId>dump</artifactId>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.1</version>
         </dependency>
 
         <dependency>
@@ -48,39 +94,42 @@
         </dependency>
 
         <dependency>
-            <groupId>net.sourceforge.collections</groupId>
-            <artifactId>collections-generic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mod4j.org.apache.commons</groupId>
-            <artifactId>lang</artifactId>
+            <groupId>org.dbpedia.extraction</groupId>
+            <artifactId>dump</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>net.sourceforge.collections</groupId>
+            <artifactId>collections-generic</artifactId>
+            <version>4.01</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+        </dependency>
+        
+        <!-- TODO: why mod4j? why not commons-lang? -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
 
         <dependency>
             <groupId>org.oclc.oai</groupId>
             <artifactId>harvester2</artifactId>
+            <version>0.1.12</version>
         </dependency>
 
+        <!-- TODO: find a version in a public repo. -->
         <dependency>
             <groupId>org.openrdf</groupId>
             <artifactId>openrdf</artifactId>
@@ -97,89 +146,68 @@
             <groupId>com.hp.hpl.jena</groupId>
             <artifactId>jena</artifactId>
             <version>2.6.2</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>com.hp.hpl.jena</groupId>
             <artifactId>arq</artifactId>
             <version>2.8.3</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openanzo</groupId>
-            <artifactId>anzo-client-jena</artifactId>
-            <version>3.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aksw.commons</groupId>
-            <artifactId>util</artifactId>
-            <version>0.2-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.aksw.commons</groupId>
-            <artifactId>sparql</artifactId>
-            <version>0.2-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.aksw.commons</groupId>
-            <artifactId>model</artifactId>
-            <version>0.2-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
-
-        <!-- This dependency should have scope=test rather than scope=compile -->
-        <!--
-        <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>${junit.version}</version>
-          <scope>test</scope>
-        </dependency>
-        -->
-
-        <!-- OMFG! This dependency is horrible - this is a dead XML api project
-   from 2004. In the meanwhile, all this XML stuff is probably already part
-   of some standard java library -->
-        <dependency>
-            <groupId>org.jbind</groupId>
-            <artifactId>jbind</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.ini4j</groupId>
             <artifactId>ini4j</artifactId>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.hp.hpl.jena</groupId>
-            <artifactId>jena</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hp.hpl.jena</groupId>
-            <artifactId>arq</artifactId>
+            <version>0.5.1</version>
         </dependency>
 
         <!-- XStream for xml serialization (of jena result sets) -->
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
+            <version>1.3.1</version>
         </dependency>
+
+        <!-- TODO: find a version in a public repo. -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>1.1</version>
+        </dependency>
+
         <dependency>
             <groupId>ant</groupId>
             <artifactId>ant</artifactId>
             <version>1.6.5</version>
         </dependency>
 
-    </dependencies>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.9.2</artifactId>
+            <version>1.7.2</version>
+            <scope>test</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>org.aksw.commons</groupId>
+            <artifactId>util</artifactId>
+            <version>0.4</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aksw.commons</groupId>
+            <artifactId>sparql</artifactId>
+            <version>0.4</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aksw.commons</groupId>
+            <artifactId>model</artifactId>
+            <version>0.4</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
 
 </project>

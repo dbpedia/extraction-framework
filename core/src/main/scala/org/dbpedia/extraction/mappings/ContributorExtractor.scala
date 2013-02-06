@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{Graph, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.net.{URLEncoder, URI}
 
 /**
@@ -15,45 +15,49 @@ import java.net.{URLEncoder, URI}
  */
 
 class ContributorExtractor( context : {
-                                      def ontology : Ontology
-                                      def language : Language } ) extends Extractor
+  def ontology : Ontology
+  def language : Language } ) extends Extractor
 {
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Graph =
-  {
-    if(node.title.namespace != WikiTitle.Namespace.Main) return new Graph()
 
-    if(node.asInstanceOf[LivePageNode].contributorID <= 0) return new Graph()
+  override val datasets = Set(DBpediaDatasets.Revisions)
+
+  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  {
+    if(node.title.namespace != Namespace.Main) return Seq.empty
+
+    if(node.contributorID <= 0) return Seq.empty
 
     val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded;
 
     //Required predicates
     val contributorPredicate = "http://dbpedia.org/meta/contributor";
     //val contributorNamePredicate = "http://dbpedia.org/property/contributorName";
-    val contributorIDPredicate = "http://dbpedia.org/property/contributorID";
+    val contributorIDPredicate = "http://dbpedia.org/meta/contributorID";
 
     //Object values
-    val contributorName =  node.asInstanceOf[LivePageNode].contributorName;
+    val contributorName =  node.contributorName;
 
     //The username may contain spaces, so we should replace the spaces with underscores "_", as they ar not allowed in
     //URLs
     val contributorNameWithoutSpaces = contributorName.replace (" ", "_");
     val contributorURL =  "http://dbpedia.org/contributor/" + URLEncoder.encode (contributorNameWithoutSpaces,"UTF-8");
 
-    val contributorID =  node.asInstanceOf[LivePageNode].contributorID;
+    val contributorID =  node.contributorID;
 
-//    val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, contributorPredicate,
-//      contributorName, node.sourceUri, context.ontology.getDatatype("xsd:string").get );
+    //    val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, contributorPredicate,
+    //      contributorName, node.sourceUri, context.ontology.getDatatype("xsd:string").get );
     //Required Quads
     val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, contributorPredicate,
       contributorURL, node.sourceUri, null );
 
-    val quadContributorName = new Quad(context.language, DBpediaDatasets.Revisions, contributorURL, context.ontology.getProperty("rdfs:label").get,
-      contributorName, node.sourceUri, context.ontology.getDatatype("xsd:string").get );
+    val quadContributorName = new Quad(context.language, DBpediaDatasets.Revisions, contributorURL,
+      context.ontology.properties.get("rdfs:label").get,
+      contributorName, node.sourceUri, context.ontology.datatypes.get("xsd:string").get );
 
     val quadContributorID = new Quad(context.language, DBpediaDatasets.Revisions, contributorURL, contributorIDPredicate,
-      contributorID.toString, node.sourceUri, context.ontology.getDatatype("xsd:integer").get );
+      contributorID.toString, node.sourceUri, context.ontology.datatypes.get("xsd:integer").get );
 
-    new Graph(List(quadPageWithContributor, quadContributorName, quadContributorID));
+    Seq(quadPageWithContributor, quadContributorName, quadContributorID);
 
   }
 }

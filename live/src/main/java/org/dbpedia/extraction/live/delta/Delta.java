@@ -4,6 +4,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.SimpleSelector;
+import org.dbpedia.helper.CoreUtil;
 
 import java.io.StringWriter;
 
@@ -127,7 +128,7 @@ public class Delta {
             return writer.getBuffer().toString();
         }
         else {
-            SimpleSelector resourceSelector = new SimpleSelector(ResourceFactory.createResource(_resource), null, null, null);
+            SimpleSelector resourceSelector = new SimpleSelector(ResourceFactory.createResource(CoreUtil.encodeURI(_resource)), null, null, null);
             Model filteredModel = _deletedTriples.query(resourceSelector);
 
             RDFWriter rdfWriter = filteredModel.getWriter("N-TRIPLE");
@@ -145,10 +146,6 @@ public class Delta {
     public String formulateModifiedTriplesAsNTriples(boolean bListTriplesForResourceOnly){
         if(_modifiedTriples == null)
             return "";
-        /*RDFWriter rdfWriter = _modifiedTriples.getWriter("N-TRIPLE");
-        StringWriter writer = new StringWriter();
-        rdfWriter.write(_modifiedTriples, writer,"");
-        return writer.getBuffer().toString();*/
 
         if(!bListTriplesForResourceOnly){
             RDFWriter rdfWriter = _modifiedTriples.getWriter("N-TRIPLE");
@@ -157,7 +154,7 @@ public class Delta {
             return writer.getBuffer().toString();
         }
         else {
-            SimpleSelector resourceSelector = new SimpleSelector(ResourceFactory.createResource(_resource), null, null, null);
+            SimpleSelector resourceSelector = new SimpleSelector(ResourceFactory.createResource(CoreUtil.encodeURI(_resource)), null, null, null);
             Model filteredModel = _modifiedTriples.query(resourceSelector);
 
             RDFWriter rdfWriter = filteredModel.getWriter("N-TRIPLE");

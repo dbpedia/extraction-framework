@@ -9,11 +9,13 @@ object DisambiguationExtractorConfig
          "el" -> " (αποσαφήνιση)",
          "en" -> " (disambiguation)",
          "es" -> " (desambiguación)",
+         "eu" -> " (argipena)",
+         "fr" -> " (homonymie)",
          "it" -> " (disambigua)",
+         "ko" -> " (동음이의)",
+         "nl" -> " (doorverwijspagina)", //TODO make it Set() for multiple “nl” -> " (disambigueren)"
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
          "ru" -> " (значения)"
     )
-
-    val supportedLanguages = disambiguationTitlePartMap.keySet
 }

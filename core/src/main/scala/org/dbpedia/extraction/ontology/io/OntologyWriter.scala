@@ -21,13 +21,13 @@ class OntologyWriter
         }
 
         //Write classes
-        for(clazz <- ontology.classes if clazz.name.indexOf(':') == -1)
+        for(clazz <- ontology.classes.values if clazz.name.indexOf(':') == -1)
         {
             writeClass(clazz, dir, specializations)
         }
 
         //Write properties
-        for(property <- ontology.properties if property.name.indexOf(':') == -1)
+        for(property <- ontology.properties.values if property.name.indexOf(':') == -1)
         {
             writeProperty(property, dir)
         }
@@ -56,9 +56,9 @@ class OntologyWriter
                 writer.write("\n| rdfs:comment@ " + language + " = " + comment)
             }
 
-            for(superClass <- clazz.subClassOf if superClass.name != "owl:Thing")
+            for(baseClass <- clazz.baseClasses if baseClass.name != "owl:Thing")
             {
-                writer.write("\n| rdfs:subClassOf = " + superClass.name)
+                writer.write("\n| rdfs:subClassOf = " + baseClass.name)
             }
 
             writer.write("\n| owl:equivalentClass = " + clazz.equivalentClasses.map(_.name).mkString(", "))

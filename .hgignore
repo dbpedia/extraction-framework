@@ -1,15 +1,17 @@
-/target/
+syntax:glob
+target/
 .idea/
-.iml$
-glob:config.properties
-$.tmp
-/wiktionary
+*.iml
+.cache
+*.log
+*.lck
+*.tmp
+java_pid*
+extraction.properties
+download.properties
+live.xml
+live.ini
 
 syntax: regexp
-^dump/log\.xml$
-syntax: regexp
-\.tmp$
-syntax: regexp
-\.classpath$
-syntax: regexp
-\.project$
+^server/src/main/statistics/percentage.+$
+^server/src/main/statistics/mappingstats.+$

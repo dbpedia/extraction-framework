@@ -4,6 +4,7 @@ import collection.mutable.{ListBuffer, Stack}
 import io.{Source}
 import util.control.Breaks._
 import java.util.regex.Pattern
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.sources.WikiPage
@@ -12,7 +13,7 @@ import MyNode._
 import MyStringTrimmer._
 
 case class WiktionaryException(s: String, vars : VarBindingsHierarchical, unexpectedNode : Option[Node]) extends  Exception(s) {}
-case class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
+class VarException extends  WiktionaryException("no endmarker found", new VarBindingsHierarchical(), None) {}
 
 class MyStack(s : Stack[Node]) {
   val stack : Stack[Node] = s
@@ -156,7 +157,7 @@ object MyStack {
     //println("read file "+name+">"+str+"<")
     val page : PageNode = new SimpleWikiParser().apply(
         new WikiPage(
-          new WikiTitle("test template"),0,0, if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
+          new WikiTitle("test template", Namespace.Main, Language.English), if(str.startsWith("\n")){str} else {"\n"+ str} //force leading \n
         )
     )
     //println("dumping subtemplate")

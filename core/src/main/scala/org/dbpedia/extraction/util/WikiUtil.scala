@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.util
 
-import java.net.URLEncoder
-import java.net.URLDecoder
-import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.RichString.wrapString
+import org.dbpedia.util.text.uri.UriDecoder
 
 /**
  * Contains several utility functions related to WikiText.
@@ -10,82 +9,73 @@ import org.dbpedia.extraction.util.StringUtils._
 object WikiUtil
 {
     /**
-     * replace underscores by spaces, normalize duplicate spaces, trim spaces from start and end
-     * @param string string using '_' instead of ' '
+     * replace underscores by spaces, replace non-breaking space by normal space, remove 
+     * exotic whitespace, normalize duplicate spaces, trim whitespace (any char <= U+0020) 
+     * from start and end.
+     * 
+     * Also see WikiTitle.parse().
+     * 
+     * TODO: better treatment of U+20xx: remove some, replace some by space, others by LF
+     * 
+     * FIXME: There is no logic to our decoding / encoding of strings, URIs, etc. It's done 
+     * in too many places. We must set a policy and use distinct classes, not generic strings.
+     * 
+     * @param string string possibly using '_' instead of ' '
      */
-    def cleanSpace( string : String ) : String =
+    def cleanSpace(string: String): String =
     {
-        string.replace('_', ' ').replaceAll(" +", " ").trim
+      // FIXME: removing these chars may avoid some errors, but also introduces others. 
+      // For example, the local name of the 'Project' namespace on fa wikipedia contains U+200C.
+      string.replaceChars("_\u00A0\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "  ").replaceAll(" +", " ").trim
     }
     
-    /**
-     * All of the following names will be encoded to '%C3%89mile_Zola': 
-     * 'Émile Zola', 'émile Zola', 'Émile_Zola', ' Émile  Zola ', '  Émile _ Zola  '
-     * 
-     * TODO: maybe we should expect (require) the name to be normalized, e.g. with uppercase
-     * first letter and without duplicate spaces or spaces at start or end? Would make this
-     * method much simpler.
-     *   
-     * @param name Non-encoded MediaWiki page name, e.g. 'Émile Zola'.
-     * Must not include the namespace (e.g. 'Template:').
-     */
-    def wikiEncode(name : String, language : Language = Language.Default, capitalize : Boolean = true) : String =
-    {
-        // replace spaces by underscores.
-        // Note: MediaWiki apparently replaces only spaces by underscores, not other whitespace. 
-        var encoded = name.replace(' ', '_');
-        
-        // normalize duplicate underscores
-        encoded = encoded.replaceAll("_+", "_");
-        
-        // trim underscores from start 
-        encoded = encoded.replaceAll("^_", "");
-        
-        // trim underscores from end 
-        encoded = encoded.replaceAll("_$", "");
-
-        // make first character uppercase
-        // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt. 
-        // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
-        // capitalize can be false for encoding property names, e.g. in the InfoboxExtractor
-        if(capitalize)
-        {
-            encoded = encoded.capitalizeLocale(language.locale)
-        }
-
-        // URL-encode everything but ':' '/' '&' and ',' - just like MediaWiki
-        encoded = URLEncoder.encode(encoded, "UTF-8");
-        encoded = encoded.replace("%3A", ":");
-        encoded = encoded.replace("%2F", "/");
-        encoded = encoded.replace("%26", "&");
-        encoded = encoded.replace("%2C", ",");
-
-        encoded;
-    }
+    private val iriReplacements = StringUtils.replacements('%', "\"#%<>?[\\]^`{|}")
     
     /**
-     * All of the following names will be encoded to 'Émile Zola': 
-     * '%C3%89mile_Zola', '%C3%A9mile_Zola', ' %C3%A9mile Zola ', ' %C3%A9mile _ Zola ', '  Émile _ Zola  '
+     * Replaces multiple spaces (U+0020) by one, removes spaces from start and end, 
+     * replaces spaces by underscores, and percent-encodes the following characters:
      * 
-     * TODO: maybe we should expect (require) the name to be normalized, e.g. with uppercase
-     * first letter and without duplicate spaces or spaces at start or end? 
-     * Would make this method much simpler.
-     *   
+     * "#%<>?[\\]^`{|}
+     *
+     * The result is usable in most parts of a IRI. The ampersand '&' is not escaped though.
+     * 
+     * Should only be used for canonical MediaWiki page names. Not for fragments, not for queries.
+     * 
+     * TODO: a canonical MediaWiki page name does not contain multiple spaces. We should not
+     * clean spaces but simply throw an exception if the name is not canonical.
+     * 
+     * @param name Canonical MediaWiki page name, e.g. 'Émile Zola'
+     */
+    def wikiEncode(name : String): String =
+    {
+      // TODO: all this replacing is inefficient, one loop over the string would be nicer.
+      
+      // replace spaces by underscores.
+      // Note: MediaWiki apparently replaces only spaces by underscores, not other whitespace.
+      var encoded = name.replace(' ', '_');
+      
+      // normalize duplicate underscores
+      encoded = encoded.replaceAll("_+", "_");
+      
+      // trim underscores from start 
+      encoded = encoded.replaceAll("^_", "");
+      
+      // trim underscores from end 
+      encoded = encoded.replaceAll("_$", "");
+
+      val sb = StringUtils.escape(null, encoded, iriReplacements)
+      
+      if (sb == null) encoded else sb.toString
+    }
+    
+        
+    /**
      * @param name encoded MediaWiki page name, e.g. '%C3%89mile_Zola'.
      * Must not include the namespace (e.g. 'Template:').
      */
-    def wikiDecode(name : String, language : Language = Language.Default, capitalize : Boolean = true) : String =
+    def wikiDecode(name : String) : String =
     {
-        // Capitalize must be Locale-specific. We must use a different method for languages tr, az, lt.
-        // Example: [[istanbul]] generates a link to İstanbul (dot on the I) on tr.wikipedia.org
-        var decoded = cleanSpace(URLDecoder.decode(name, "UTF-8"))
-
-        if(capitalize)
-        {
-            decoded = decoded.capitalizeLocale(language.locale)
-        }
-
-        decoded
+        cleanSpace(UriDecoder.decode(name))
     }
 
     private val wikiEmphasisRegex1 = "(?s)'''''(.*?)'''''".r

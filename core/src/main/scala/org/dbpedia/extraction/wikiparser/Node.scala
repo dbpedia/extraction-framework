@@ -2,57 +2,65 @@ package org.dbpedia.extraction.wikiparser
 
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.SynchronizedMap
-import java.net.URLEncoder
+import java.lang.StringBuilder
+import org.dbpedia.extraction.util.StringUtils.{escape,replacements}
 
 /**
  * Base class of all nodes in the abstract syntax tree.
- * This class is thread-safe.
+ * 
+ * This class is NOT thread-safe.
  */
 abstract class Node(val children : List[Node], val line : Int)
 {
-    @volatile private var _parent : Node = null
+    /**
+     * CAUTION: code outside this class should change the parent only under very rare circumstances.
+     */
+    var parent: Node = null
     
     //Set the parent of all children
-    for(child <- children) child._parent = this
+    for(child <- children) child.parent = this
 
-    /**
-     * The parent node.
-     */
-    def parent = _parent
-
-    //TODO hack until a better way is found to replace TableMappings by TemplateMappings and append them to the original AST
-    def parent_=(n : Node) = _parent = n
-
-    private val annotations = new HashMap[String, Any]() with SynchronizedMap[String, Any]
+    private val annotations = new HashMap[AnnotationKey[_], Any]()
 
     /**
      * Convert back to original (or equivalent) wiki markup string.
      */
-    def toWikiText() : String
+    def toWikiText: String
+
+    /**
+     * Get plain text content of this node and all child nodes, without markup. Since templates
+     * are not expanded, this will not work well for templates.
+     */
+    def toPlainText: String
 
     /**
      *  Retrieves the root node of this AST.
      *
      * @return The root Node
      */
-    def root : PageNode =
+    lazy val root : PageNode =
     {
         var node = this
+        
         while(node.parent != null)
         {
             node = node.parent;
         }
-        return node.asInstanceOf[PageNode];
+        
+        node.asInstanceOf[PageNode];
     }
    
     /**
      * Retrieves the section of this node
      * 
-     * @return The section of this node
+     * @return The section of this node, may be null
      */
-    def section : SectionNode =
-    {
+    lazy val section : SectionNode = findSection
+    
+    private def findSection : SectionNode = {
+      
         var section : SectionNode = null;
+        
         for(node <- root.children)
         {
             if(node.line > line)
@@ -65,39 +73,33 @@ abstract class Node(val children : List[Node], val line : Int)
                 section = node.asInstanceOf[SectionNode];
             }
         }
-        return section
+        
+        section
     }
 
     /**
-     * Retrieves the text denoted by this node.
-     * Only works on nodes that only contain text.
-     * Returns null if this node contains child nodes other than TextNode.
+     * Retrieves some text from this node. Only works on a TextNode or a Node that has 
+     * a single TextNode child. Returns None iff this node is not a TextNode and contains 
+     * child nodes other than a single TextNode.
+     * 
+     * TODO: the behavior of this method is weird, but I don't dare to change it because existing
+     * code may rely on its current behavior. New code should probably use toPlainText.
      */
-    def retrieveText : Option[String] =
-    {
-    	if(isInstanceOf[TextNode])
-    	{
-    		return Some(asInstanceOf[TextNode].text)
-    	}
-    	else if(children.length == 1 && children(0).isInstanceOf[TextNode])
-        {
-            return Some(children(0).asInstanceOf[TextNode].text)
-        }
-        else
-        {
-            return None
-        }
+    final def retrieveText: Option[String] = retrieveText(true)
+
+    protected def retrieveText(recurse: Boolean): Option[String] = {
+      if (recurse && children.length == 1) children(0).retrieveText(false) else None
     }
 
-    /*
+    /**
      * Returns an annotation.
      *
      * @param key key of the annotation
      * @return The value of the annotation as an option if an annotation with the given key exists. None, otherwise.
      */
-    def annotation(key : String) : Option[Any] =
-    {
-    	return annotations.get(key)
+    @unchecked // we know the type is ok - setAnnotation doesn't allow any other type
+    def getAnnotation[T](key: AnnotationKey[T]): Option[T] = {
+      annotations.get(key).asInstanceOf[Option[T]]
     }
 
     /**
@@ -106,47 +108,47 @@ abstract class Node(val children : List[Node], val line : Int)
      * @param key The key of the annotation
      * @param value The value of the annotation
      */
-    def setAnnotation(key : String, value : Any)
-    {
-    	annotations(key) = value
+    def setAnnotation[T](key: AnnotationKey[T], value: T): Unit = {
+      annotations(key) = value
     }
     
     /**
-     * URL of source page and line number.
+     * IRI of source page and line number.
+     * TODO: rename to sourceIri.
      */
     def sourceUri : String =
     {
-        //Get current section
-        val section = this.section
+        val sb = new StringBuilder
+        
+        sb append root.title.pageIri
+        if (root.revision >= 0) sb append "?oldid=" append root.revision
 
-        //Build source URI
-        var sourceURI = sourceUriPrefix
-
-        if(section != null)
+        if (section != null)
         {
-            sourceURI += "section=" + URLEncoder.encode(section.name, "UTF-8")
-            sourceURI += "&relative-line=" + (line - section.line)
-            sourceURI += "&absolute-line=" + line
+            sb append '#' append "section="
+            escape(sb, section.name, Node.fragmentEscapes)
+            sb append "&relative-line=" append (line - section.line)
+            sb append "&absolute-line=" append line
         }
-        else if(line >= 1)
+        else if (line >= 1)
         {
-            sourceURI += "absolute-line=" + line
+            sb append '#' append "absolute-line=" append line
         }
         
-        return sourceURI
+        sb.toString
     }
 
-    /**
-     * Get first part of source URL.
-     * TODO: It's ugly to have such a special-purpose function here. Is there a better way?
-     * @return first part of source URL, containing the page name and the separator character, 
-     * but not the line number etc.
-     */
-    private def sourceUriPrefix : String =
-    {
-        val page = root
+}
 
-        // TODO: make base URI configurable
-        "http://" + page.title.language.wikiCode + ".wikipedia.org/wiki/" + page.title.encodedWithNamespace + '#'
-    }
+object Node {
+  // For this list of characters, see ifragment in RFC 3987 and 
+  // https://sourceforge.net/mailarchive/message.php?msg_id=28982391
+  // Only difference to ipchar: don't escape '?'. We don't escape '/' anyway.
+  private val fragmentEscapes = {
+    val chars = ('\u0000' to '\u001F').mkString + "\"#%<>[\\]^`{|}" + ('\u007F' to '\u009F').mkString
+    val replace = replacements('%', chars)
+    // don't escape space, replace it by underscore
+    replace(' ') = "_"
+    replace
+  }
 }
