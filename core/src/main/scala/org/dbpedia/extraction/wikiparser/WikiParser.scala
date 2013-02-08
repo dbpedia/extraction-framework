@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-//import impl.simple.SimpleWikiParser
+import impl.simple.SimpleWikiParser
 import impl.sweble.SwebleWrapper
 import org.dbpedia.extraction.sources.WikiPage
 
@@ -28,5 +28,5 @@ object WikiParser extends (() => WikiParser)
     /**
      * Creates a new WikiParser instance.
      */
-	def apply() : WikiParser = new SwebleWrapper() //SimpleWikiParser()
+	def apply() : WikiParser = new SimpleWikiParser() //SwebleWrapper()
 }
