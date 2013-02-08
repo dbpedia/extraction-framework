@@ -23,6 +23,9 @@ public class LiveQueue {
     // this is a Map<long,int>, long is the pageID and int the number of same items in the queue (see add())
     private static HashMap<Long,Integer> uniqueMap = new HashMap(1000);
 
+    // Keeps track of the size of each priority
+    private static HashMap<LiveQueuePriority,Long> counts = new HashMap<LiveQueuePriority, Long>(10);
+
     private LiveQueue() {
     }
 
@@ -52,6 +55,7 @@ public class LiveQueue {
                         } else {
                             // remove existing
                             iterator.remove();
+                            counts.put(item.getPriority(), getPrioritySize(e.getPriority()) - 1);
                         }
                     } else {
                         // if new priority is lower or the same do nothing
@@ -61,6 +65,7 @@ public class LiveQueue {
             }
         }
         uniqueMap.put(item.getItemID(), finalValue);
+        counts.put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
         queue.add(item);
     }
 
@@ -71,6 +76,13 @@ public class LiveQueue {
         if (value != 1) {  // not single item
             uniqueMap.put(item.getItemID(), value - 1);
         }
+        // update counts
+        counts.put(item.getPriority(), getPrioritySize(item.getPriority()) -1);
         return item;
+    }
+
+    public static long getPrioritySize(LiveQueuePriority priority){
+        Object value = counts.get(priority);
+        return (value == null) ? 0 : ((Long) value);
     }
 }
