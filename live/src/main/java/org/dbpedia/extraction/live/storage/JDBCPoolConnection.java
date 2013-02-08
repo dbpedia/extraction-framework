@@ -34,7 +34,8 @@ public class JDBCPoolConnection {
             config.setPartitionCount(1);
             connectionPool = new BoneCP(config); // setup the connection pool
         } catch (Exception e) {
-            logger.fatal("Could not initialize databse connection! Exiting...");
+            logger.fatal(e.getMessage());
+            logger.fatal("Could not initialize DB connection! Exiting...");
             System.exit(1);
         }
     }

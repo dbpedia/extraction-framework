@@ -23,9 +23,6 @@ class SPARULDestination(insOrDel: Boolean, policies: Array[Policy] = null) exten
     sparql.append(formatter.header)
   }
 
-  override def write(graph: Seq[Quad]) {
-  }
-
   def write(extractor: String, hash: String, addGraph: Seq[Quad], deleteGraph: Seq[Quad], unmodifiedGraph: Seq[Quad]) {
     if (insOrDel == true) {
       tripleSize += addGraph.length
@@ -46,6 +43,7 @@ class SPARULDestination(insOrDel: Boolean, policies: Array[Policy] = null) exten
     if (tripleSize == 0) return
     val success = JDBCUtil.execSPARUL("SPARQL " + sparql.toString)
     // TODO Better logging
-    if (!success) logger.log(Level.SEVERE, "SPARUL Update for page failed")
+    if (!success)
+      logger.log(Level.SEVERE, "SPARUL Update for page failed")
   }
 }
