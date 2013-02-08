@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.live.helper;
 
+import org.dbpedia.extraction.destinations.Quad;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Mohamed Morsey
@@ -27,6 +29,11 @@ public class MatchPattern {
         predicate = Predicate;
         object = Object;
         pexact = PExact;
+    }
+
+    public boolean accept(Quad quad){
+        //TODO implement pattern check (Not supported by previous framework)
+        return true;
     }
     
     public String toString(){

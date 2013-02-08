@@ -144,7 +144,7 @@ final class SwebleWrapper extends WikiParser
                 val name : String = nodeList2string(t.getName) 
                 val nameClean = WikiUtil.cleanSpace(name)
                 val title = new WikiTitle(nameClean, Namespace.Template, language)
-                val tpl = new TemplateNode(title, properties, line, transformNodes(t.getName))
+                val tpl = new TemplateNode(title, properties, line/*, transformNodes(t.getName)*/)
                 List(tpl)
             }
             case tn : Text => List(new TextNode(tn.getContent, line))
@@ -198,7 +198,7 @@ final class SwebleWrapper extends WikiParser
                 lb add nodes.head; //the # symbol hopefully :)
                 lb add new TemplateNode(
                     new WikiTitle("enum-expanded", Namespace.Template, language), 
-                    List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line, List(new TextNode("enum-expanded", line)));
+                    List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line /*, List(new TextNode("enum-expanded", line))*/);
                 lb addAll nodes.tail; 
                 lb} ).toList
             }

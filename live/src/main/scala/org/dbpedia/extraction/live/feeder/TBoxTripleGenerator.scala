@@ -103,8 +103,6 @@ class TBoxTripleGenerator() {
 
     val literalTripleGenerator = new LiteralTripleGenerator()
 
-    val labelsTripleGenerator = new LabelsTripleGenerator()
-
     val mosListTripleGenerator = new ListTripleGenerator(",",
       new MosTripleGenerator(exprPrefixRef, prefixResolver))
 
@@ -116,7 +114,6 @@ class TBoxTripleGenerator() {
       * fallbackSubClassGenerator);
       */
 
-    classToGenerator.put("labels", labelsTripleGenerator)
     classToGenerator.put("rdfs:label", literalTripleGenerator);
     classToGenerator.put("rdfs:comment", literalTripleGenerator);
     classToGenerator.put("owl:equivalentClass", mosListTripleGenerator);
@@ -126,7 +123,6 @@ class TBoxTripleGenerator() {
 
     classDefaults.put("rdfs:subClassOf", fallbackSubClassGenerator);
 
-    propertyToGenerator.put("labels", labelsTripleGenerator)
     propertyToGenerator.put("rdfs:label", literalTripleGenerator);
     propertyToGenerator.put("rdfs:comment", literalTripleGenerator);
     propertyToGenerator.put("owl:equivalentProperty",
@@ -137,7 +133,6 @@ class TBoxTripleGenerator() {
     propertyToGenerator.put("rdfs:range", mosListTripleGenerator);
     propertyToGenerator.put("rdf:type", mosListTripleGenerator);
 
-    dataToGenerator.put("labels", labelsTripleGenerator);
     dataToGenerator.put("rdfs:label", literalTripleGenerator);
     dataToGenerator.put("rdfs:comment", literalTripleGenerator);
     dataToGenerator.put("owl:equivalentProperty", mosListTripleGenerator);

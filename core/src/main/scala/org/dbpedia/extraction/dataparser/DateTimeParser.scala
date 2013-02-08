@@ -73,7 +73,7 @@ class DateTimeParser ( context : {
     {
         try
         {
-            for( child @ TemplateNode(_, _, _, _) <- node.children;
+            for( child @ TemplateNode(_, _, _) <- node.children;
                  date <- catchTemplate(child))
             {
                 return Some(date)

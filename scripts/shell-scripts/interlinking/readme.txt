@@ -1,6 +1,9 @@
 Author: Dimitris Kontokostas (jimkont [at] gmail . com)
 Date: 2010-12-13
 
+Note: CanonicalizeUris.scala works mostly like this script. Example:
+../run CanonicalizeUris /data/dbpedia interlanguage-links-same-as .nt.gz freebase-links -el-uris .nt.bz2 en el el
+
 Generates the linking datasets for a non-english languages using the extracted triples form the sameAs Extractor
 this is needed mainly for languages extracting with the original name article (IRI/URI) and also for others to filter the triples
 

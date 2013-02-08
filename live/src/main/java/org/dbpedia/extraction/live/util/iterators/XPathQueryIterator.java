@@ -43,15 +43,15 @@ public class XPathQueryIterator
                 nodeList = (NodeList) xPathExpression.evaluate(document,
                         XPathConstants.NODESET);
 
-                logger.debug(nodeList.getLength() + " nodes matched");
+                //logger.debug(nodeList.getLength() + " nodes matched");
             } catch (Exception e) {
                 logger.warn(ExceptionUtil.toString(e));
             }
 
             if (nodeList == null || nodeList.getLength() == 0) {
-                logger.warn("No nodes matched in a document");
-                String data = XMLUtil.toString(document);
-                logger.trace("Document was:\n" + data);
+                //logger.warn("No nodes matched in a document");
+                //String data = XMLUtil.toString(document);
+                //logger.trace("Document was:\n" + data);
 
                 continue;
             }

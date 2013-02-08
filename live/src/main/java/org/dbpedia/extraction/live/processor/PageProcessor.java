@@ -1,24 +1,12 @@
 package org.dbpedia.extraction.live.processor;
 
-import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
-import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
-import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
-import org.dbpedia.extraction.live.main.Main;
-import org.dbpedia.extraction.live.priority.PagePriority;
-import org.dbpedia.extraction.live.priority.Priority;
-import org.dbpedia.extraction.live.util.LastResponseDateManager;
-import org.dbpedia.extraction.live.util.XMLUtil;
-import org.dbpedia.extraction.sources.Source;
-import org.dbpedia.extraction.sources.XMLSource;
-import org.dbpedia.extraction.util.Language;
-import org.w3c.dom.Document;
-import scala.xml.*;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
+import org.dbpedia.extraction.live.queue.LiveQueue;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
+import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 
 
 /**
@@ -49,59 +37,27 @@ public class PageProcessor extends Thread{
 
     private void processPage(long pageID){
         try{
-            String oaiUri = LiveOptions.options.get("oaiUri");
-            String oaiPrefix = LiveOptions.options.get("oaiPrefix");
-            String baseWikiUri = LiveOptions.options.get("baseWikiUri");
-            String mediaWikiPrefix = "mediawiki";
-
-            GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
-            Document doc = record.getDocument();
-
-            /////////////////////////////////////////////////////////////
-            String strDoc = XMLUtil.toString(doc);
-            Pattern invalidCharactersPattern = Pattern.compile("&#[\\d{0-9}]+;");
-            Matcher invalidCharactersMatcher = invalidCharactersPattern.matcher(strDoc);
-
-            String resultingString = invalidCharactersMatcher.replaceAll("");
-
-            Node node = XML.loadString(resultingString);
-            Elem xmlElem = (Elem) node;
-            //logger.warn("Page ID " + pageID + " :" + resultingString);
-            //Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.apply(LiveOptions.options.get("language")));
-            LiveExtractionManager.extractFromPage(xmlElem);
-            /////////////////////////////////////////////////////////////
-
+            LiveExtractionManager.extractFromPageID(
+                    pageID,
+                    LiveOptions.options.get("localApiURL"),
+                    LiveOptions.options.get("language"));
         }
         catch(Exception exp){
             logger.error("Error in processing page number " + pageID + ", and the reason is " + exp.getMessage(), exp);
         }
-
     }
 
 
     public void run(){
         while(true){
             try{
-                // block if empty
-                PagePriority requiredPage = Main.pageQueue.take();
-
-                //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
-                if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
-                    Main.existingPagesTree.remove(requiredPage.pageID);
-                    processPage(requiredPage.pageID);
+                LiveQueueItem page = LiveQueue.take();
+                // If a mapping page set extractor to reload mappings and ontology
+                if (page.getPriority() == LiveQueuePriority.MappingPriority) {
+                    LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
                 }
-                logger.info("Page # " + requiredPage + " has been removed and processed");
-
-                //Write response date to file in both cases of live update and mapping update
-                if(requiredPage.pagePriority == Priority.MappingPriority)
-                    LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
-                            requiredPage.pageTimestamp);
-                else if(requiredPage.pagePriority == Priority.LivePriority)
-                    LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
-                            requiredPage.pageTimestamp);
-
-//                }
-
+                processPage(page.getItemID());
+                //logger.info("Page #" + page.getItemName() + " has been removed and processed");
             }
             catch (Exception exp){
                 logger.error("Failed to process page");

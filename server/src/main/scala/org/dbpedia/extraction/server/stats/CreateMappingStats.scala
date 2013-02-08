@@ -17,13 +17,13 @@ import org.dbpedia.extraction.wikiparser.Namespace
  * - on how many pages / how often in total is a template used?
  * - how often is each paramater (property) used?
  * 
- * Needs the following files (where xx is the wiki file prefix and yyyy-mm-dd is a date):
+ * Needs the following files (where xx is the wiki file prefix and yyyymmdd is a date):
  * 
- * xxwiki-yyyy-mm-dd-infobox-properties.ttl
- * xxwiki-yyyy-mm-dd-infobox-property-definitions.ttl
- * xxwiki-yyyy-mm-dd-infobox-test.ttl
- * xxwiki-yyyy-mm-dd-redirects.ttl
- * xxwiki-yyyy-mm-dd-template-parameters.ttl
+ * xxwiki-yyyymmdd-infobox-properties.ttl
+ * xxwiki-yyyymmdd-infobox-property-definitions.ttl
+ * xxwiki-yyyymmdd-infobox-test.ttl
+ * xxwiki-yyyymmdd-transitive-redirects.ttl
+ * xxwiki-yyyymmdd-template-parameters.ttl
  * 
  * All DBpedia URIs in these files must use specific domains, even en.dbpedia.org.
  * 

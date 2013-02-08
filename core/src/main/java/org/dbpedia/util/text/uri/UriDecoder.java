@@ -3,7 +3,7 @@ package org.dbpedia.util.text.uri;
 import java.nio.charset.Charset;
 
 /**
- * Similar to java.net.URLDecoder, but ignores invalid escape sequences.
+ * Similar to java.net.URLDecoder, but ignores invalid escape sequences and doesn't translate '+' to space.
  */
 public class UriDecoder {
   

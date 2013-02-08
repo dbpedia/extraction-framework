@@ -1,13 +1,12 @@
 package org.dbpedia.extraction.live.statistics;
 
-import scala.math.Ordering;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Dimitris Kontokostas
  * Date: 8/1/12
  * Time: 5:20 PM
- * Contains an item forTo change this template use File | Settings | File Templates.
+ * This is a temporary solution to stay compatible with the existing code. This class holds
+ * data to calculate statistics on live extraction
  */
 public class StatisticsItem implements Comparable<StatisticsItem> {
     private String pageName = "";
@@ -47,8 +46,20 @@ public class StatisticsItem implements Comparable<StatisticsItem> {
         return pageTimestamp;
     }
 
-    public boolean isOlderThanMillis(long refTime, long duration){
+    public boolean isOlderThanMillis(long refTime, long duration) {
         return (refTime - pageTimestamp) > duration;
+    }
+
+    public String getPageTitle() {
+        return pageName;
+    }
+
+    public String getDBpediaURI() {
+        return pageDBpedia;
+    }
+
+    public String getWikipediaURI() {
+        return pageWikipedia;
     }
 
     public int getPageID() {
@@ -71,7 +82,7 @@ public class StatisticsItem implements Comparable<StatisticsItem> {
         }
     }
 
-    public String toString(){
-        return pageName + "\t" + pageDBpedia + "\t" +  pageWikipedia + "\t" + pageTimestamp + "\t" + pageHasDelta;
+    public String toString() {
+        return pageName + "\t" + pageDBpedia + "\t" + pageWikipedia + "\t" + pageTimestamp + "\t" + pageHasDelta;
     }
 }

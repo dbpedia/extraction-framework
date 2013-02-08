@@ -59,7 +59,7 @@ public class LiveConfigReader {
     private static final String NOTICE_TAGNAME = "notice";
 
 
-    public static Map<Language,List<ExtractorSpecification>>  extractors = null;
+    public static Map<Language,Map<String, ExtractorSpecification>>  extractors = null;
 
     public static Map<Language,List<Class<Extractor>>> extractorClasses = null;
     public static int updateOntologyAndMappingsPeriod = 5;
@@ -112,7 +112,7 @@ public class LiveConfigReader {
     private static void readExtractors(){
         NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
         //iterate and build the required list of extractors
-        extractors = new HashMap<Language,List<ExtractorSpecification>>();
+        extractors = new HashMap<Language,Map<String,ExtractorSpecification>>();
         extractorClasses = new HashMap<Language,List<Class<Extractor>>>();
 
 
@@ -133,7 +133,7 @@ public class LiveConfigReader {
     private static void readLanguageExtractors(Element elemLanguageExtractors, Language lang){
         try{
             NodeList extractorNodes = elemLanguageExtractors.getElementsByTagName(EXTRACTOR_TAGNAME);
-            ArrayList<ExtractorSpecification> langExtractors = new ArrayList<ExtractorSpecification>(10);
+            Map<String, ExtractorSpecification> langExtractors = new HashMap<String, ExtractorSpecification>(10);
             ArrayList<Class<Extractor>> langExtractorClasses = new ArrayList<Class<Extractor>>(10);
 
             //iterate and build the required list of extractors
@@ -157,7 +157,7 @@ public class LiveConfigReader {
                     patternsList.add(extractorSpecificPattern);
 
                 //Construct the extractor specification object and adds it to the extractors list
-                langExtractors.add(new ExtractorSpecification(extractorID, status,
+                langExtractors.put(extractorID, new ExtractorSpecification(extractorID, status,
                         patternsList, _getExtractorNotices(elemExtractor)));
 
                 extractors.put(lang, langExtractors);
@@ -275,7 +275,9 @@ public class LiveConfigReader {
     public static List<Class<Extractor>> getExtractors(Language lang, ExtractorStatus requiredStatus){
 
         List<Class<Extractor>> extractorsList = extractorClasses.get(lang);
-        for(ExtractorSpecification spec : extractors.get(lang)){
+        Map<String, ExtractorSpecification> specs = extractors.get(lang);
+        for(Object value : specs.values()){
+            ExtractorSpecification spec = (ExtractorSpecification) value;
             if(spec.status != requiredStatus){
 
                 try{

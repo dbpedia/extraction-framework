@@ -106,7 +106,7 @@ extends Extractor
     nodes match
     {
       // TODO: use language-specific name
-      case (templateNode @ TemplateNode(title, _, _, _)) :: _
+      case (templateNode @ TemplateNode(title, _, _)) :: _
           if ((title.decoded == "Official") || ((context.redirects.map.contains(title.decoded)) && (context.redirects.map(title.decoded) == "Official"))) =>
       {
         templateNode.property("1") match

@@ -7,7 +7,7 @@ import java.io.{InvalidClassException, File}
 import scala.util.control.ControlThrowable
 import org.dbpedia.extraction.sources.{Source, WikiPage}
 import org.dbpedia.extraction.wikiparser.{WikiParser, Namespace}
-import org.dbpedia.extraction.destination.LiveUpdateDestination
+import org.dbpedia.extraction.destinations.LiveDestination
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.RootExtractor
 
@@ -19,15 +19,17 @@ import org.dbpedia.extraction.mappings.RootExtractor
  * To change this template use File | Settings | File Templates.
  */
 
+// TODO: Change the behaviour of this file. After the Deletion of LiveUpdateDestination is does not work (not used
+
 class LiveExtractionJob(extractor : RootExtractor, source : Source, language : Language, val label : String = "Extraction Job") extends Thread
 {
     private val logger = Logger.getLogger(classOf[LiveExtractionJob].getName)
 
     private val parser = WikiParser()
-    var destination : LiveUpdateDestination = null;
+    var destination : LiveDestination = null;
 
 
-    private val pageQueue = new ArrayBlockingQueue[(Int, WikiPage, LiveUpdateDestination)](20)
+    private val pageQueue = new ArrayBlockingQueue[(Int, WikiPage, LiveDestination)](20)
 
     private var currentID = 0
 
@@ -84,9 +86,9 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
         }
 
         try
-        {
-            destination = new LiveUpdateDestination(page.title.toString, language.locale.getLanguage, page.id.toString);
-            pageQueue.put((currentID, page, destination))
+        {   // TODO comment for now, FIX later
+            //destination = new LiveUpdateDestination(page.title.toString, language.locale.getLanguage, page.id.toString);
+            //pageQueue.put((currentID, page, destination))
             currentID += 1
         }
         catch
@@ -129,15 +131,15 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
             }
         }
 
-        private def extract(page : (Int, WikiPage, LiveUpdateDestination)) = extractPage(page._1, page._2, page._3)
+        private def extract(page : (Int, WikiPage, LiveDestination)) = extractPage(page._1, page._2, page._3)
 
-        private def extractPage(id : Int, page : WikiPage, destination : LiveUpdateDestination) : Unit =
+        private def extractPage(id : Int, page : WikiPage, destination : LiveDestination) : Unit =
         {
             //Extract the page
             val success =
                 try
                 {
-                  if(!destination.isInstanceOf[LiveUpdateDestination])
+                  if(!destination.isInstanceOf[LiveDestination])
                     throw new InvalidClassException("Required LiveUpdateDestination class not passed");
                     val graph = extractor(parser(page));
                     //liveDest = new LiveUpdateDestination(CurrentPageNode.title.toString, language.locale.getLanguage(), CurrentPageNode.id.toString)

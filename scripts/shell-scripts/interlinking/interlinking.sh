@@ -1,6 +1,9 @@
 #!/bin/bash
 #Author: Dimitris Kontokostas (jimkont [at] gmail . com)
  
+# Note: CanonicalizeUris.scala works mostly like this script. Example:
+# ../run CanonicalizeUris /data/dbpedia interlanguage-links-same-as .nt.gz freebase-links -el-uris .nt.bz2 en el el
+
 # This script works with directory structure produced by dump/Download.scala and reads the  
 
 #scripts directory, in case it is called from elsewhere

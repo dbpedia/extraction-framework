@@ -35,7 +35,7 @@ extends Extractor
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
     //TODO make this configurable
-    private val apiUrl = "http://localhost/mw-modified/api.php"
+    private val apiUrl = "http://localhost/mediawiki/api.php"
 
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
 
@@ -176,9 +176,10 @@ extends Extractor
      */
     private def readInAbstract(inputStream : InputStream) : String =
     {
-        // for XML format
-        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
-        (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      // for XML format
+      val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
+      val text = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      decodeHtml(text)
     }
 
     private def postProcess(pageTitle: WikiTitle, text: String): String =
@@ -260,10 +261,13 @@ extends Extractor
                 .mkString("").trim
         
         // decode HTML entities - the result is plain text
-        val coder = new HtmlCoder(XmlCodes.NONE)
-        coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
-        coder.code(text)
-        // TODO: do we need double decode?
+        decodeHtml(text)
+    }
+    
+    def decodeHtml(text: String): String = {
+      val coder = new HtmlCoder(XmlCodes.NONE)
+      coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
+      coder.code(text)
     }
 
 }

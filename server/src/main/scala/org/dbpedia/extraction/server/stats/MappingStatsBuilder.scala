@@ -75,20 +75,6 @@ extends MappingStatsConfig(statsDir, language)
         }
       }
       
-      println("Resolving "+redirects.size+" redirects")
-      // resolve transitive closure
-      for ((source, target) <- redirects)
-      {
-          var cyclePrevention: Set[String] = Set()
-          var closure = target
-          while (redirects.contains(closure) && !cyclePrevention.contains(closure))
-          {
-              closure = redirects.get(closure).get
-              cyclePrevention += closure
-          }
-          redirects(source) = closure
-      }
-
       redirects
     }
     

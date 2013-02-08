@@ -12,9 +12,9 @@ private object Finder {
  * Helps to find files and directories in a directory structure as used by the Wikipedia
  * dump download site, for example baseDir/enwiki/20120403/enwiki-20120403-pages-articles.xml.bz2
  */
-class Finder[T](baseDir: T, language: Language, wikiNameGiven : String)(implicit wrap: T => FileLike[T]) {
+class Finder[T](val baseDir: T, val language: Language, val wikiNameGiven: String)(implicit wrap: T => FileLike[T]) {
   
-  def this(baseDir: String, language: Language, wikiNameGiven : String)(implicit parse: String => T, wrap: T => FileLike[T]) = 
+  def this(baseDir: String, language: Language, wikiNameGiven: String)(implicit parse: String => T, wrap: T => FileLike[T]) = 
     this(parse(baseDir), language, wikiNameGiven)
   
   /**

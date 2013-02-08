@@ -5,6 +5,7 @@ import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.destinations.QuadBuilder
+import java.net.URI
 
 /**
  * Extracts sameAs links for resources with themselves. Only makes sense when serialization is
@@ -28,6 +29,8 @@ extends Extractor
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {
-    Seq(quad(subjectUri, subjectUri, page.sourceUri))
+    // only extract triple if IRI is actually different from URI
+    if (new URI(subjectUri).toASCIIString() == subjectUri) Seq.empty
+    else Seq(quad(subjectUri, subjectUri, page.sourceUri))
   }
 }
