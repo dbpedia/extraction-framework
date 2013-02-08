@@ -162,6 +162,7 @@ object Language extends (String => Language)
       "mappings" -> "en",      // mappings wiki uses en, mostly
       "mdf" -> "ru",           // Moksha
       "mhr" -> "ru",           // Mari
+      "min" -> "zh",           // Minangkabau TODO: not sure about this mappings
       "minnan" -> "zh",
       "mrj" -> "ru",
       "mus" -> "en",           // Muscogee / Creek
