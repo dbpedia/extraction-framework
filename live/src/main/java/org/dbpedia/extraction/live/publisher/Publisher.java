@@ -235,25 +235,11 @@ public class Publisher extends Thread{
 
     public void run()
     {
-        long stepCount = 0;
-        long totalStartTime = System.nanoTime();
         while(true) {
             try {
-                System.out.print("");
-
-                if(!Main.publishingDataQueue.isEmpty()){
-                    long stepStartTime = System.nanoTime();
-
-                    ++stepCount;
-                    liveSync.step();
-
-                    long now = System.nanoTime();
-                    double stepDuration = (now - stepStartTime) / 1000000000.0;
-                    double totalDuration = (now - totalStartTime) / 1000000000.0;
-                    double avgStepDuration = totalDuration / stepCount;
-                    logger.info("Step #" + stepCount + " took " + stepDuration + "sec; Average step duration is " + avgStepDuration + "sec.");
-                }
-
+                // Block until next pubData
+                DiffData pubData = Main.publishingDataQueue.take();
+                liveSync.step(pubData);
             } catch(Throwable t) {
                 logger.error("An exception was encountered in the Publisher update loop", t);
             }
@@ -261,7 +247,7 @@ public class Publisher extends Thread{
         }
     }
 
-    private void step()
+    private void step(DiffData pubData)
             throws Exception
     {
         // Load the state config
@@ -269,9 +255,9 @@ public class Publisher extends Thread{
         File osmStateFile = new File(filename);
         loadIniFile(osmStateFile, config);
 
-        publishDiff(sequenceNumber);
+        publishDiff(pubData, sequenceNumber);
 
-        logger.info("Downloading new state");
+        //logger.info("Downloading new state");
         sequenceNumber++;
     }
 
@@ -285,7 +271,7 @@ public class Publisher extends Thread{
     }
 
 
-    private void publishDiff(long id)//, IDiff<Model> diff)
+    private void publishDiff(DiffData pubData, long id)//, IDiff<Model> diff)
             throws IOException
     {
         Calendar  currentDateCalendar= Calendar.getInstance();
@@ -303,7 +289,7 @@ public class Publisher extends Thread{
                 "/" + String.format("%02d",currentDateCalendar.get(Calendar.DAY_OF_MONTH)) + "/"
                 + String.format("%02d",currentDateCalendar.get(Calendar.HOUR_OF_DAY)) +  "/"
                 + format(fileNumber);
-        logger.info("Publishing data path = " + fileName);
+        //logger.info("Publishing data path = " + fileName);
 
 
         File parent = new File(fileName).getParentFile();
@@ -316,9 +302,6 @@ public class Publisher extends Thread{
 
 
 
-        Main.publishingDataQueue.remove(null);
-
-        DiffData pubData = Main.publishingDataQueue.poll();
 
         if(pubData != null){
             addedTriples.addAll(pubData.toAdd);
