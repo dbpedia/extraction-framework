@@ -101,7 +101,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(group <- ids.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&"+param+"=" + group.mkString("|") + "&rvprop=ids|content|timestamp")
+                val response = query("?action=query&format=xml&prop=revisions&"+param+"=" + group.mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }
@@ -118,7 +118,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(titleGroup <- titles.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(_.encodedWithNamespace).mkString("|") + "&rvprop=ids|content|timestamp")
+                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(_.encodedWithNamespace).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }
@@ -129,14 +129,19 @@ class WikiApi(url: URL, language: Language)
         for(page <- response \ "query" \ "pages" \ "page";
             rev <- page \ "revisions" \ "rev" )
         {
-            proc( new WikiPage( title     = WikiTitle.parse((page \ "@title").head.text, language),
-                             redirect  = null, // TODO: read redirect from XML
-                             id        = (page \ "@pageid").head.text,
-                             revision  = (rev \ "@revid").head.text,
-                             timestamp = (rev \ "@timestamp").head.text,
-                             contributorID = "-1",
-                             contributorName = (rev \ "@user").head.text,
-                             source    = rev.text ) )
+            // "userid" is not supported on older mediawiki versions and the Mapping mediawiki does not support it yet
+            // TODO: update mapping mediawiki and assign name & id directly
+            val _contributorID = (rev \ "@userid")
+            val _contributorName = (rev \ "@user")
+
+            proc( new WikiPage( title        = WikiTitle.parse((page \ "@title").head.text, language),
+                             redirect        = null, // TODO: read redirect from XML
+                             id              = (page \ "@pageid").head.text,
+                             revision        = (rev \ "@revid").head.text,
+                             timestamp       = (rev \ "@timestamp").head.text,
+                             contributorID   = if (_contributorID == null || _contributorID.length != 1) "0" else _contributorID.head.text,
+                             contributorName = if (_contributorName == null || _contributorName.length != 1) "" else _contributorName.head.text,
+                             source          = rev.text ) )
         }
     }
 

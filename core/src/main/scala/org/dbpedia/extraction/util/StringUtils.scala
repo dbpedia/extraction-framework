@@ -4,6 +4,7 @@ import java.lang.StringBuilder
 import org.dbpedia.extraction.util.NumberUtils.intToHex
 import java.text.{DateFormat,SimpleDateFormat}
 import java.util.TimeZone
+import java.security.MessageDigest
 
 /**
  */
@@ -13,7 +14,7 @@ object StringUtils
   private val timestampFormat = new ThreadLocal[DateFormat] {
     override def initialValue() = {
       // Note: the 'X' at the end of the format string and timezone "UTC" are important
-      val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+      val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
       format.setTimeZone(TimeZone.getTimeZone("UTC"))
       format
     }
@@ -230,6 +231,21 @@ object StringUtils
     if (sb != null) sb.append(chars, last, chars.length - last)
     
     sb
+  }
+
+  /*
+  * Caclulate the md5sum of the @input String
+  *
+  * @input the string we want to calculate the md5sum for
+  * @return the md5sum hash of the input string
+  * */
+  def md5sum(input: String): String = {
+    val inputBytes = input.getBytes("UTF-8")
+    val md5 = MessageDigest.getInstance("MD5")
+    md5.reset()
+    md5.update(inputBytes)
+
+    md5.digest().map(0xFF & _).map { "%02x".format(_) }.foldLeft(""){_ + _}
   }
   
   object IntLiteral {

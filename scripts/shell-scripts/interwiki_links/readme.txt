@@ -1,6 +1,8 @@
 Author: Dimitris Kontokostas (jimkont [at] gmail . com)
 Date: 2011-03-30
 
+Note: ProcessInterLanguageLinks.scala does pretty much the same thing as this script, 
+but for many languages at once and probably faster (~20  minutes for ~100 languages).
 
 creates owl:sameAs / rdfs:seeAlso links between to DBpedia's.
 owl:sameAs are created only when there are 2-way links between articles

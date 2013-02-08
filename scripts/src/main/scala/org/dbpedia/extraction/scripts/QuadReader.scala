@@ -5,29 +5,29 @@ import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import IOUtils._
+import scala.Console.err
+import IOUtils.readLines
+import org.dbpedia.extraction.util.FileLike
 
 /**
  */
-class QuadReader(baseDir: File, val language: Language, suffix: String) {
+object QuadReader {
   
-  private val finder = new Finder[File](baseDir, language, "wiki")
-  
-  private var date: String = null
-  
-  def find(part: String): File = {
-    val name = part + suffix
-    if (date == null) date = finder.dates(name).last
-    finder.file(date, name)
-  }
-      
   /**
-   * @param input file name part, e.g. interlanguage-links-same-as
+   * @param input file name, e.g. interlanguage-links-same-as.nt.gz
    * @param proc process quad
    */
-  def readQuads(input: String)(proc: Quad => Unit): Unit = {
-    val file = find(input)
-    println(language.wikiCode+": reading "+file+" ...")
+  def readQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, auto: Boolean = false)(proc: Quad => Unit): Unit = {
+    readQuads(finder.language.wikiCode, finder.find(input, auto))(proc)
+  }
+  
+  /**
+   * @param tag for logging
+   * @param file input file
+   * @param proc process quad
+   */
+  def readQuads(tag: String, file: FileLike[_])(proc: Quad => Unit): Unit = {
+    err.println(tag+": reading "+file+" ...")
     var lineCount = 0
     val start = System.nanoTime
     readLines(file) { line =>
@@ -35,17 +35,17 @@ class QuadReader(baseDir: File, val language: Language, suffix: String) {
         case Quad(quad) => {
           proc(quad)
           lineCount += 1
-          if (lineCount % 1000000 == 0) logRead(lineCount, start)
+          if (lineCount % 1000000 == 0) logRead(tag, lineCount, start)
         }
         case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match quad or triple syntax: " + line)
       }
     }
-    logRead(lineCount, start)
+    logRead(tag, lineCount, start)
   }
   
-  private def logRead(lines: Int, start: Long): Unit = {
+  private def logRead(tag: String, lines: Int, start: Long): Unit = {
     val micros = (System.nanoTime - start) / 1000
-    println(language.wikiCode+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
+    err.println(tag+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
   
 }

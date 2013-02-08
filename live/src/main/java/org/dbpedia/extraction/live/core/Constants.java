@@ -21,7 +21,7 @@ public class Constants{
     public static final String EXACT = "exactmatch";
     public static final String DB_RESOURCE_NS = DBPEDIA_NS + "resource/";
     public static final String DB_YAGO_NS = DBPEDIA_NS + "class/yago/";
-    public static final String DB_ONTOLOGY_NS = DBPEDIA_NS + "ontology/";
+    public static final String DB_ONTOLOGY_NS = "http://dbpedia.org/ontology/";
     public static final String DB_COMMUNITY_NS = DBPEDIA_NS + "ontology/";
     public static final String PAGE_ID = DB_PROPERTY_NS + "pageId";
     public static final String WIKI_PAGE_ID = DB_ONTOLOGY_NS + "wikiPageID";

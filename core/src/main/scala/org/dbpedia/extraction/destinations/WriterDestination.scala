@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.destinations
 
 import java.io.Writer
+import org.dbpedia.extraction.destinations.formatters.Formatter
 
 /**
  * Writes quads to a writer.
  * 
  * @param called in open() to obtain the writer.
  */
-class WriterDestination(factory: () => Writer, formatter : org.dbpedia.extraction.destinations.formatters.Formatter)
+class WriterDestination(factory: () => Writer, formatter : Formatter)
 extends Destination
 {
   private var writer: Writer = null

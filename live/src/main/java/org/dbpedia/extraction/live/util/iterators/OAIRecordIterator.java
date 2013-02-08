@@ -2,6 +2,7 @@ package org.dbpedia.extraction.live.util.iterators;
 
 import ORG.oclc.oai.harvester2.verb.ListRecords;
 import org.apache.log4j.Logger;
+import org.dbpedia.extraction.live.util.DBPediaXPathUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.w3c.dom.Document;
 
@@ -56,8 +57,7 @@ public class OAIRecordIterator
 
         try {
             XPath xpath = XPathFactory.newInstance().newXPath();
-            lastResponseDateExpr = xpath
-                    .compile("//*[local-name()='responseDate']/text()");
+            lastResponseDateExpr = DBPediaXPathUtil.getOAIResponseDateExpr();
         } catch (Exception e) {
             logger.error(ExceptionUtil.toString(e));
         }

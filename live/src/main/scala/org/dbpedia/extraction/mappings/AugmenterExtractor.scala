@@ -4,10 +4,8 @@ import java.lang.String
 import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import collection.mutable.{HashSet, Set, MultiMap, HashMap}
-import com.hp.hpl.jena.query.QuerySolution
 import io.Source
-import com.hp.hpl.jena.rdf.model.{ModelFactory, Model, Literal}
-import com.hp.hpl.jena.datatypes.TypeMapper
+
 
 
 object AugmentExtractorConstants

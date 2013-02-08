@@ -36,7 +36,7 @@ extends Extractor
     // Iterate through all root templates.
     // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).
     for( 
-      templateNode @ TemplateNode(_, _, _, _) <- page.children;
+      templateNode @ TemplateNode(_, _, _) <- page.children;
       coordinate <- geoCoordinateParser.parse(templateNode) 
     )
     {

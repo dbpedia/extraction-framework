@@ -51,7 +51,7 @@ extends UriTripleBuilder(policies) {
    * @param datatype must not be null
    */
   override def typedLiteral(value: String, datatype: String): Unit = {
-    this add spaces(depth) add "<typedLiteral" +
+    this add spaces(depth) add "<typedLiteral"
     this add " datatype=" add '"' escapeUri(datatype, DATATYPE) add '"'
     this add '>' escape value add "</typedLiteral>\n"
   }

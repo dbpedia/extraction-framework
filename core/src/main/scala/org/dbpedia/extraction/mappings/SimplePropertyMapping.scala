@@ -11,7 +11,7 @@ import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty,OntologyClass,O
 import scala.collection.mutable.ArrayBuffer
 
 class SimplePropertyMapping (
-  val templateProperty : String, // IntermediaNodeMapping and CreateMappingStats requires this to be public
+  val templateProperty : String, // IntermediateNodeMapping and CreateMappingStats requires this to be public
   ontologyProperty : OntologyProperty,
   unit : Datatype,
   private var language : Language,

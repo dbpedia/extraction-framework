@@ -168,7 +168,7 @@ public class OntologyUpdateFeeder extends Thread {
                 //System.out.println(str);
 
 
-                String timeStamp = XPathUtil.evalToString(doc, DBPediaXPathUtil.getDatestampExpr());
+                String timeStamp = XPathUtil.evalToString(doc, DBPediaXPathUtil.getOAIDatestampExpr());
 
                 Files.createFile(lastResponseDateFile, timeStamp);
 

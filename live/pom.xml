@@ -23,8 +23,15 @@
                 <configuration>
                     <launchers>
                         <launcher>
-                            <id>Extract</id>
+                            <id>live</id>
                             <mainClass>org.dbpedia.extraction.live.main.Main</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx4096m</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>test</id>
+                            <mainClass>org.dbpedia.extraction.live.main.TestingMain</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xmx4096m</jvmArg>
                             </jvmArgs>
@@ -77,18 +84,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
-            <version>2.9.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>xalan</groupId>
-            <artifactId>xalan</artifactId>
-            <version>2.7.1</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.dbpedia.extraction</groupId>
             <artifactId>core</artifactId>
         </dependency>
@@ -103,7 +98,7 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>net.sourceforge.collections</groupId>
             <artifactId>collections-generic</artifactId>
@@ -115,8 +110,13 @@
             <artifactId>log4j</artifactId>
             <version>1.2.14</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp</artifactId>
+            <version>0.7.1.RELEASE</version>
+        </dependency>
         
-        <!-- TODO: why mod4j? why not commons-lang? -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -129,17 +129,10 @@
             <version>0.1.12</version>
         </dependency>
 
-        <!-- TODO: find a version in a public repo. -->
-        <dependency>
-            <groupId>org.openrdf</groupId>
-            <artifactId>openrdf</artifactId>
-            <version>1.0</version>
-        </dependency>
-
         <dependency>
             <groupId>com.openlink.virtuoso</groupId>
             <artifactId>virtjdbc4</artifactId>
-            <version>6.1.2</version>
+            <version>6.1.6</version>
         </dependency>
 
         <dependency>
@@ -149,29 +142,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.hp.hpl.jena</groupId>
-            <artifactId>arq</artifactId>
-            <version>2.8.3</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.ini4j</groupId>
             <artifactId>ini4j</artifactId>
             <version>0.5.1</version>
-        </dependency>
-
-        <!-- XStream for xml serialization (of jena result sets) -->
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.3.1</version>
-        </dependency>
-
-        <!-- TODO: find a version in a public repo. -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>1.1</version>
         </dependency>
 
         <dependency>
@@ -189,25 +162,22 @@
 
         <dependency>
             <groupId>org.aksw.commons</groupId>
-            <artifactId>util</artifactId>
-            <version>0.4</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aksw.commons</groupId>
-            <artifactId>sparql</artifactId>
-            <version>0.4</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aksw.commons</groupId>
             <artifactId>model</artifactId>
             <version>0.4</version>
             <scope>compile</scope>
         </dependency>
 
     </dependencies>
-
+    <repositories>
+        
+        <!-- for our special openrdf and json JARs -->
+        <repository>
+            <id>aksw</id>
+            <url>http://maven.aksw.org/archiva/repository/internal</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        
+    </repositories>
 </project>
