@@ -34,15 +34,15 @@ class JSONCacheExtractorDestination(cache: JSONCache, pipe: LiveDestination) ext
     val cachedHash = cache.getHashForExtractor(extractor) //get the cached md5sum
     if (!cachedHash.equals("") && cachedHash.equals(newHash)) {
       // everything is the same, pipe to unmodified
-      pipe.write(extractor, cachedHash, Seq(), graphRemove, quads)
+      pipe.write(extractor, cachedHash, Seq(), graphRemove.toSet.toSeq, quads.toSet.toSeq)
       return
     }
 
     val existing = Sorting.stableSort(cache.getTriplesForExtractor(extractor))
 
-    val toAdd = quads.filterNot(q => existing.contains(q))
-    val toDelete = existing.filterNot(q => quads.contains(q))
-    val unmodified = quads.filter(q => existing.contains(q))
+    val toAdd = quads.filterNot(q => existing.contains(q)).toSet.toSeq
+    val toDelete = existing.filterNot(q => quads.contains(q)).toSet.toSeq
+    val unmodified = quads.filter(q => existing.contains(q)).toSet.toSeq
 
     pipe.write(extractor, newHash, toAdd, toDelete, unmodified)
   }
