@@ -87,7 +87,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     measure {
       //this is also the base-url (all nested blocks will get uris with this as a prefix)
       cache.blockURIs("page") = vf.createURI(resourceNS + urify(entityId))
-      cache.savedVars("block") = cache.blockURIs("page").stringValue
+      cache.savedVars("block") = cache.blockURIs("page").toString
 
       //generate template-unrelated triples that are configured for the page
       try {
@@ -101,7 +101,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       val pageStack = new Stack[org.dbpedia.extraction.wikiparser.Node]().pushAll(page.children.reverse).filterSpaces
       //apply "first" nodehandlers
       beforeNodeHandlers.foreach((nh : NodeHandler) => {
-        var result = nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map(), pageConfig)
+        var result = nh.process(pageStack, cache.blockURIs("page").toString, cache, Map(), pageConfig)
         if(result.isInstanceOf[NodeHandlerTriplesResult]){
           quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
         }
@@ -141,7 +141,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       //handle the bindings from pro- and epilog
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
         try {
-          quads appendAll handleFlatBindings(tplBindings.getFlat(), pageConfig, tpl, cache, cache.blockURIs("page").stringValue)
+          quads appendAll handleFlatBindings(tplBindings.getFlat(), pageConfig, tpl, cache, cache.blockURIs("page").getURI)
         } catch { case _ => } //returned bindings are wrong
       }})
       Logging.printMsg("pro- and epilog bindings handled", 2)
@@ -185,7 +185,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
               //generate triples
               //println(tpl.name +": "+ blockBindings.dump())
-              quads appendAll handleFlatBindings(blockBindings.getFlat(), curBlock, tpl, cache, cache.blockURIs(curBlock.name).stringValue)
+              quads appendAll handleFlatBindings(blockBindings.getFlat(), curBlock, tpl, cache, cache.blockURIs(curBlock.name).getURI)
 
               //no exception -> success -> stuff below here will be executed on success
               consumed = true
@@ -200,7 +200,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
         if(pageStack.size > 0){
           parsingNodeHandlers.foreach((nh : NodeHandler) => {
-            var result = nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map(), pageConfig)
+            var result = nh.process(pageStack, cache.blockURIs("page").toString, cache, Map(), pageConfig)
             if(result.isInstanceOf[NodeHandlerTriplesResult]){
               quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
             }
@@ -227,9 +227,9 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
                   val blockIndBindings = VarBinder.parseNodesWithTemplate(blockIndTpl.wiki.clone, pageStack)
 
                   val parentBlockUri = if(!curOpenBlocks.contains(block)){
-                    cache.blockURIs(curBlock.name).stringValue
+                    cache.blockURIs(curBlock.name).getURI
                   } else {
-                    cache.blockURIs(block.parent.name).stringValue
+                    cache.blockURIs(block.parent.name).getURI
                   }
                   cache.savedVars("block") = parentBlockUri
 
@@ -281,7 +281,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
         if(!consumed){
           var anyMatched = false
           afterNodeHandlers.foreach((nh : NodeHandler) => {
-            var result = nh.process(pageStack, cache.blockURIs("page").stringValue, cache, Map(), pageConfig)
+            var result = nh.process(pageStack, cache.blockURIs("page").getURI, cache, Map(), pageConfig)
             if(result.isInstanceOf[NodeHandlerTriplesResult]){
               anyMatched = true
               quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
@@ -321,20 +321,20 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
 
     //postprocessing (schema transformation)
     val quadsPostProcessed = if(postprocessor.isDefined && quadsDistinct.size > 0){
-      postprocessor.get.process(quadsDistinct, cache.blockURIs("page").stringValue).groupBy(_.toString).map(_._2.head).toList
+      postprocessor.get.process(quadsDistinct, cache.blockURIs("page").getURI).groupBy(_.toString).map(_._2.head).toList
     } else quadsDistinct
 
     val quadsFiltered = quadsPostProcessed.filter((q : Statement) =>
-           !q.getSubject.stringValue().equals(resourceNS)
-        && !q.getSubject.stringValue().equals(resourceNS+"-")
-        && !q.getObject.stringValue().equals("")
-        && !q.getPredicate.stringValue().equals(""))
+           !q.getSubject.toString().equals(resourceNS)
+        && !q.getSubject.toString().equals(resourceNS+"-")
+        && !q.getObject.toString().equals("")
+        && !q.getPredicate.toString().equals(""))
 
     //sorting (by length, if equal length: alphabetical)
     val quadsSorted = quadsFiltered.sortWith((q1 : Statement, q2 : Statement)=>{
-      val subjComp = myCompare(q1.getSubject.stringValue(), q2.getSubject.stringValue())
+      val subjComp = myCompare(q1.getSubject.toString(), q2.getSubject.toString())
       if(subjComp == 0){
-        myCompare(q1.getPredicate.stringValue(), q2.getPredicate.stringValue()) < 0
+        myCompare(q1.getPredicate.toString(), q2.getPredicate.toString()) < 0
       } else subjComp < 0
     })
 
@@ -521,7 +521,7 @@ object WiktionaryPageExtractor {
   /**
   * OpenRDF factory
   */
-  val vf = ValueFactoryImpl.getInstance
+  val vf = new ValueFactoryImpl()
 
   /**
   * Quad needs some objects, store them here to reuse them
@@ -675,10 +675,10 @@ object WiktionaryPageExtractor {
         null
       },
       datasetURI.name,
-      s.getSubject.stringValue(),
-      s.getPredicate.stringValue(),
-      s.getObject.stringValue(),
-      tripleContext.stringValue(),
+      s.getSubject.toString(),
+      s.getPredicate.toString(),
+      s.getObject.toString(),
+      tripleContext.toString(),
       if(s.getObject.isInstanceOf[Literal] && s.getObject.asInstanceOf[Literal].getDatatype != null){
         s.getObject.asInstanceOf[Literal].getDatatype.toString
       } else if(s.getObject.isInstanceOf[Literal]) {

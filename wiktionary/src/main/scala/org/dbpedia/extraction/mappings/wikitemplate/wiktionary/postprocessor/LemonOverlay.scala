@@ -37,7 +37,7 @@ class LemonOverlay (config : NodeSeq) extends PostProcessor {
         val newQuads = new ListBuffer[Statement]()
         newQuads append vf.createStatement(subjectURI, instanceURI, outputStartClass)
         for(block <- blocks){
-          val blockId = vf.createURI(block(blockIdProperty).head.asInstanceOf[Literal].stringValue)
+          val blockId = vf.createURI(block(blockIdProperty).head.toString)
           newQuads append vf.createStatement(subjectURI, blockProperty, blockId)
           newQuads append vf.createStatement(blockId, instanceURI, outputAggregatedClass)
           for(property <- block.keySet){
@@ -59,7 +59,7 @@ object Collector  {
    
     def myContains(haystack:ListBuffer[Value], needle:String) : Boolean = {
         for(v <- haystack){
-            if(v.stringValue.equals(needle)){
+            if(v.toString.equals(needle)){
                 return true
             }
         }
@@ -133,7 +133,7 @@ class MemoryModel (val d : MMap[String, MMap[String, ListBuffer[Value]]]) {
   def hasS(s:String) = d.contains(s)
   def getPO(s:String) = d(s)
   def getO(s:String, p:String) = d(s)(p)
-  val vf = ValueFactoryImpl.getInstance
+  val vf = WiktionaryPageExtractor.vf
 
   def getQuads() : List[Statement] = {
     val quads = new ListBuffer[Statement]()
@@ -154,19 +154,19 @@ object MemoryModel {
   def fromQuads(g:List[Statement]) : MemoryModel = {
     val d = MMap[String, MMap[String, ListBuffer[Value]]]()
     for(q <- g){
-      if(d.contains(q.getSubject.stringValue())){
-        val s = d(q.getSubject.stringValue())
-        if(s.contains(q.getPredicate.stringValue())){
-          s(q.getPredicate.stringValue()).append(q.getObject)
+      if(d.contains(q.getSubject.toString())){
+        val s = d(q.getSubject.toString())
+        if(s.contains(q.getPredicate.getURI())){
+          s(q.getPredicate.getURI()).append(q.getObject)
         } else {
           val values = new ListBuffer[Value]()
           values.append(q.getObject)
-          s(q.getPredicate.stringValue()) = values
+          s(q.getPredicate.getURI()) = values
         }
       } else {
         val values = new ListBuffer[Value]()
         values.append(q.getObject)
-        d(q.getSubject.stringValue()) = MMap(q.getPredicate.stringValue() -> values)
+        d(q.getSubject.toString()) = MMap(q.getPredicate.getURI() -> values)
       }
     }
     new MemoryModel( d)

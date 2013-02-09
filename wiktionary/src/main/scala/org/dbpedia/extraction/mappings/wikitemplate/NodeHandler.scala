@@ -15,7 +15,7 @@ import collection.mutable
 trait NodeHandler {
     def process(n : Stack[Node], thisBlockUri : String, cache : Cache, parameters : Map[String, String], block : Block) : NodeHandlerResult
    
-    val vf = ValueFactoryImpl.getInstance
+    val vf = WiktionaryPageExtractor.vf
 }
 
 class InfoBoxMapper(config : NodeSeq) extends NodeHandler {

@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.wikitemplate
 
 import org.openrdf.model.impl.ValueFactoryImpl
-import org.dbpedia.extraction.mappings.Cache
+import org.dbpedia.extraction.mappings.{WiktionaryPageExtractor, Cache}
 import collection.mutable.ListBuffer
 import org.dbpedia.extraction.destinations.Quad
 import org.openrdf.model.Statement
@@ -22,6 +22,6 @@ trait BindingHandler {
         senses.toList
     }
     def process(i : VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Statement]
-   
-    val vf = ValueFactoryImpl.getInstance
+
+    val vf = WiktionaryPageExtractor.vf
 }
