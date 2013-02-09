@@ -5,6 +5,6 @@ import org.dbpedia.extraction.destinations.Quad
 import org.openrdf.model.Statement
 
 trait PostProcessor {
-    val vf = ValueFactoryImpl.getInstance
+    val vf = new ValueFactoryImpl()
     def process(i : List[Statement], subject: String) : List[Statement]
 }

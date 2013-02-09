@@ -38,10 +38,20 @@
         </dependency>
         <dependency>
                 <groupId>org.openrdf</groupId>
-                <artifactId>openrdf</artifactId>
-                <version>1.0</version>
+                <artifactId>openrdf-model</artifactId>
+                <version>1.2.7</version>
             </dependency>
       </dependencies>
+
+      <repositories>
+
+          <repository>
+              <id>aduna</id>
+              <name>Aduna Software</name>
+              <url>http://repo.aduna-software.org/maven2/releases/</url>
+          </repository>
+
+      </repositories>
 
 
       <build>
@@ -97,14 +107,4 @@
       </plugin>
     </plugins>
   </build>
-    <repositories>
-        <!-- for our special openrdf and json JARs -->
-        <repository>
-            <id>aksw</id>
-            <url>http://maven.aksw.org/archiva/repository/internal</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
