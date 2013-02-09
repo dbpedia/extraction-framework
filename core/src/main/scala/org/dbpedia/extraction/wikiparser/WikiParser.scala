@@ -23,10 +23,17 @@ trait WikiParser extends (WikiPage => PageNode)
 /**
  * Creates new WikiParser instances.
  */
-object WikiParser extends (() => WikiParser)
+object WikiParser
 {
     /**
      * Creates a new WikiParser instance.
      */
-	def apply() : WikiParser = new SimpleWikiParser() //SwebleWrapper()
+	def getInstance(name : String = null) : WikiParser =  {
+    Console.println("parser: "+name)
+    if (name == null || name.equals("simple")){
+      new SimpleWikiParser()
+    } else {
+      new SwebleWrapper()
+    }
+  }
 }

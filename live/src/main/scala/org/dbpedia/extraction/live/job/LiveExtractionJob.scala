@@ -25,7 +25,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
 {
     private val logger = Logger.getLogger(classOf[LiveExtractionJob].getName)
 
-    private val parser = WikiParser()
+    private val parser = WikiParser.getInstance()
     var destination : LiveDestination = null;
 
 

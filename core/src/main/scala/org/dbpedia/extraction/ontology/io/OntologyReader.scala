@@ -19,7 +19,7 @@ class OntologyReader
     {
         logger.info("Loading ontology pages")
 
-        read(source.map(WikiParser()))
+        read(source.map(WikiParser.getInstance()))
     }
 
     /**
@@ -170,7 +170,7 @@ class OntologyReader
     private def loadSpecificProperties(name : String, node : TemplateNode) : List[SpecificPropertyBuilder] =
     {
         for(PropertyNode(_, children, _) <- node.property("specificProperties").toList;
-            templateNode @ TemplateNode(title, _, _) <- children if title.decoded == OntologyReader.SPECIFICPROPERTY_NAME;
+            templateNode @ TemplateNode(title, _, _, _) <- children if title.decoded == OntologyReader.SPECIFICPROPERTY_NAME;
             specificProperty <- loadSpecificProperty(name, templateNode))
             yield specificProperty
     }
@@ -254,7 +254,7 @@ class OntologyReader
       val propertyName = templateName + 's' // label -> labels
       node.children.filter(_.key.equals(propertyName)).flatMap { property =>
         for (child <- property.children) yield child match {
-          case template @ TemplateNode(title, _, _) if title.decoded equalsIgnoreCase templateName => {
+          case template @ TemplateNode(title, _, _, _) if title.decoded equalsIgnoreCase templateName => {
             readPropertyTemplate(template)
           }
           case TextNode(text, _) if text.trim.isEmpty => {

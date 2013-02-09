@@ -157,7 +157,7 @@ object LiveExtractionConfigLoader extends ActionListener
     }
 
     //var liveDest : LiveUpdateDestination = null;
-    val parser = WikiParser()
+    val parser = WikiParser.getInstance()
 
     for (cpage <- articlesSource.map(parser))
     {

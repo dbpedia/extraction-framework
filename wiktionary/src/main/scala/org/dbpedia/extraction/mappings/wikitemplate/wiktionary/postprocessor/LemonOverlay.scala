@@ -6,7 +6,7 @@ import xml.{Node => XMLNode, NodeSeq}
 import org.dbpedia.extraction.destinations.{Quad, Dataset}
 import org.dbpedia.extraction.util.Language
 
-import org.openrdf.model.{Value, Resource, Literal}
+import org.openrdf.model.{Statement, Value, Resource, Literal}
 import org.openrdf.model.impl.ValueFactoryImpl
 import collection.mutable.{ListBuffer, Map=>MMap}
 
@@ -29,24 +29,22 @@ class LemonOverlay (config : NodeSeq) extends PostProcessor {
     val instanceRelation = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     val instanceURI = vf.createURI(instanceRelation)
 
-  def process(i : List[Quad], subject: String) : List[Quad] = {
+  def process(i : List[Statement], subject: String) : List[Statement] = {
     val mm = MemoryModel.fromQuads(i)
-    if(i.size > 0){    
-        val dataset = WiktionaryPageExtractor.datasetURI
-        val context = WiktionaryPageExtractor.tripleContext
+    if(i.size > 0){
         val subjectURI = vf.createURI(subject)
         val blocks = Collector.collect(mm, subject, MMap(), this)
-        val newQuads = new ListBuffer[Quad]()
-        newQuads append new Quad(dataset, subjectURI, instanceURI, outputStartClass, context)
+        val newQuads = new ListBuffer[Statement]()
+        newQuads append vf.createStatement(subjectURI, instanceURI, outputStartClass)
         for(block <- blocks){
           val blockId = vf.createURI(block(blockIdProperty).head.asInstanceOf[Literal].stringValue)
-          newQuads append new Quad(dataset, subjectURI, blockProperty, blockId, context)
-          newQuads append new Quad(dataset, blockId, instanceURI, outputAggregatedClass, context)
+          newQuads append vf.createStatement(subjectURI, blockProperty, blockId)
+          newQuads append vf.createStatement(blockId, instanceURI, outputAggregatedClass)
           for(property <- block.keySet){
             val propertyURI = vf.createURI(property)
             for(value <- block(property)){
               if(collectProperties.contains(property)){
-                newQuads append new Quad(dataset, blockId, propertyURI, value, context)
+                newQuads append vf.createStatement(blockId, propertyURI, value)
               }
             }
           }
@@ -135,14 +133,15 @@ class MemoryModel (val d : MMap[String, MMap[String, ListBuffer[Value]]]) {
   def hasS(s:String) = d.contains(s)
   def getPO(s:String) = d(s)
   def getO(s:String, p:String) = d(s)(p)
+  val vf = ValueFactoryImpl.getInstance
 
-  def getQuads(langObj:Language, datasetURI:Dataset, tripleContext:Resource) : List[Quad] = {
-    val quads = new ListBuffer[Quad]()
+  def getQuads() : List[Statement] = {
+    val quads = new ListBuffer[Statement]()
 
     for(s <- d.keySet){
         for(p <- d(s).keySet){
             for(o <- d(s)(p)){
-                quads.append(new Quad(datasetURI, ValueFactoryImpl.getInstance.createURI(s), ValueFactoryImpl.getInstance.createURI(p), o, tripleContext))
+                quads.append(vf.createStatement(vf.createURI(s), vf.createURI(p), o))
             }
         }
     }
@@ -151,35 +150,23 @@ class MemoryModel (val d : MMap[String, MMap[String, ListBuffer[Value]]]) {
 }
 
 object MemoryModel {
-  def getValue(q:Quad) : Value = {
-    val ret = if(q.datatype == null && q.language == null)
-      ValueFactoryImpl.getInstance.createURI(q.value)
-    else if(q.datatype != null && !q.datatype.equals("http://www.w3.org/2001/XMLSchema#string"))
-      ValueFactoryImpl.getInstance.createLiteral(q.value, ValueFactoryImpl.getInstance.createURI(q.datatype))
-    else if(q.language != null)
-      ValueFactoryImpl.getInstance.createLiteral(q.value, q.language)
-    else
-      ValueFactoryImpl.getInstance.createLiteral(q.value)
 
-    ret
-  }
-  
-  def fromQuads(g:List[Quad]) : MemoryModel = {
+  def fromQuads(g:List[Statement]) : MemoryModel = {
     val d = MMap[String, MMap[String, ListBuffer[Value]]]()
     for(q <- g){
-      if(d.contains(q.subject)){
-        val s = d(q.subject)
-        if(s.contains(q.predicate)){
-          s(q.predicate).append(MemoryModel.getValue(q))
+      if(d.contains(q.getSubject.stringValue())){
+        val s = d(q.getSubject.stringValue())
+        if(s.contains(q.getPredicate.stringValue())){
+          s(q.getPredicate.stringValue()).append(q.getObject)
         } else {
           val values = new ListBuffer[Value]()
-          values.append(MemoryModel.getValue(q))
-          s(q.predicate) = values
+          values.append(q.getObject)
+          s(q.getPredicate.stringValue()) = values
         }
       } else {
         val values = new ListBuffer[Value]()
-        values.append(MemoryModel.getValue(q))
-        d(q.subject) = MMap(q.predicate -> values)
+        values.append(q.getObject)
+        d(q.getSubject.stringValue()) = MMap(q.getPredicate.stringValue() -> values)
       }
     }
     new MemoryModel( d)

@@ -145,7 +145,7 @@ class Mappings(@PathParam("lang") langCode : String)
     }
 
 
-    protected val parser = WikiParser()
+    protected val parser = WikiParser.getInstance()
 
     /**
      * Validates a mapping page from the Wiki, or all mapping pages if title is "*".

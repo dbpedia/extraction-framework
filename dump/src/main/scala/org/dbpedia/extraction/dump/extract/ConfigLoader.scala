@@ -33,15 +33,15 @@ class ConfigLoader(config: Config)
     {
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
-      config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2))
+      config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2, parser))
     }
     
-    private val parser = WikiParser()
+    private val parser = WikiParser.getInstance(config.parser)
     
     /**
      * Creates ab extraction job for a specific language.
      */
-    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: Extractor]]) : ExtractionJob =
+    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: Extractor]], parser : WikiParser) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
@@ -119,7 +119,7 @@ class ConfigLoader(config: Config)
         destination = new MarkerDestination(destination, finder.file(date, Extraction.Complete), false)
         
         val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
-        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description)
+        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description, parser)
     }
     
     private def writer(file: File): () => Writer = {

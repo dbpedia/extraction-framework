@@ -286,7 +286,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
 
 
 
-    private val wikiParser = WikiParser()
+    private val wikiParser = WikiParser.getInstance()
     private val datatypes =  OntologyDatatypes.load().map(dt => (dt.name, dt)).toMap
 
     private def parse(language : String, datatypeName : String, input : String) : Option[Double] =
