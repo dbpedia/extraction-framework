@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.wikitemplate
 
 import org.openrdf.model.impl.ValueFactoryImpl
+import org.openrdf.model.Statement
 import org.dbpedia.extraction.mappings.{WiktionaryPageExtractor, Cache}
 import collection.mutable.Stack
 import org.dbpedia.extraction.wikiparser.{TemplateNode, TextNode, Node}
@@ -56,4 +57,4 @@ class NodeHandlerResult
 
 class NodeHandlerNoResult extends NodeHandlerResult
 
-class NodeHandlerTriplesResult(val triples : List[Quad]) extends NodeHandlerResult { }
+class NodeHandlerTriplesResult(val triples : List[Statement]) extends NodeHandlerResult { }

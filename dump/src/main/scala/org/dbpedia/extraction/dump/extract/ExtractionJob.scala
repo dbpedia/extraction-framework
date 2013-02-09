@@ -16,13 +16,11 @@ import org.dbpedia.extraction.util.SimpleWorkers
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
  * @param label user readable label of this extraction job.
  */
-class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String)
+class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String, parser : WikiParser)
 {
   private val logger = Logger.getLogger(getClass.getName)
 
   private val progress = new ExtractionProgress(label, description)
-  
-  private val parser = WikiParser()
 
   private val workers = SimpleWorkers { page: WikiPage =>
     var success = false

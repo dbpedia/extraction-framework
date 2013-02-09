@@ -514,7 +514,7 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
         parse("el", "xsd:date", "{{ηθηλ|1996|03|18}}") should equal (Some("1996-03-18"))
     }
 
-    private val wikiParser = WikiParser()
+    private val wikiParser = WikiParser.getInstance()
 
     private def parse(language : String, datatype : String, input : String) : Option[String] =
     {

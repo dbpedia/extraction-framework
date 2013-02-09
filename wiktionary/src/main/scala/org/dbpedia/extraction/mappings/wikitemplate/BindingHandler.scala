@@ -4,6 +4,7 @@ import org.openrdf.model.impl.ValueFactoryImpl
 import org.dbpedia.extraction.mappings.Cache
 import collection.mutable.ListBuffer
 import org.dbpedia.extraction.destinations.Quad
+import org.openrdf.model.Statement
 
 trait BindingHandler {
     def expandSense(s:String):List[String] = {
@@ -20,7 +21,7 @@ trait BindingHandler {
         })
         senses.toList
     }
-    def process(i : VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad]
+    def process(i : VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Statement]
    
     val vf = ValueFactoryImpl.getInstance
 }

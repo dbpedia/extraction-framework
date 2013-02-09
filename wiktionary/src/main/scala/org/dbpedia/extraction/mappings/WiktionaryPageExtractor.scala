@@ -4,8 +4,8 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
 import java.util.Locale
 import org.dbpedia.extraction.destinations.{Quad, Dataset}
-import org.openrdf.model.{Literal, URI, Resource, Value}
-import org.openrdf.model.impl.ValueFactoryImpl
+import org.openrdf.model.{Literal, URI, Resource, Value, Statement }
+import org.openrdf.model.impl.{ValueFactoryImpl }
 import util.control.Breaks._
 import java.io.FileNotFoundException
 import java.io.FileWriter
@@ -62,7 +62,7 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       Thread sleep r.nextInt(10)*1000
     }
 
-    val quads = new ListBuffer[Quad]()
+    val quads = new ListBuffer[Statement]()
 
     val entityId = page.title.decoded
     cache.savedVars("entityId") = entityId
@@ -72,13 +72,13 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
     for(start <- ignoreStart){
       if(entityId.startsWith(start)){
         Logging.printMsg("ignored "+entityId,1)
-        return quads.toList
+        return quads.map(mapStatement(_))
       }
     }
     for(end <- ignoreEnd){
       if(entityId.endsWith(end)){
         Logging.printMsg("ignored "+entityId,1)
-        return quads.toList
+        return quads.map(mapStatement(_))
       }
     }
 
@@ -324,28 +324,28 @@ class WiktionaryPageExtractor( context : {} ) extends Extractor {
       postprocessor.get.process(quadsDistinct, cache.blockURIs("page").stringValue).groupBy(_.toString).map(_._2.head).toList
     } else quadsDistinct
 
-    val quadsFiltered = quadsPostProcessed.filter((q : Quad) =>
-           !q.subject.toString.equals(resourceNS)
-        && !q.subject.toString.equals(resourceNS+"-")
-        && !q.value.toString.equals("")
-        && !q.predicate.toString.equals(""))
+    val quadsFiltered = quadsPostProcessed.filter((q : Statement) =>
+           !q.getSubject.stringValue().equals(resourceNS)
+        && !q.getSubject.stringValue().equals(resourceNS+"-")
+        && !q.getObject.stringValue().equals("")
+        && !q.getPredicate.stringValue().equals(""))
 
     //sorting (by length, if equal length: alphabetical)
-    val quadsSorted = quadsFiltered.sortWith((q1, q2)=>{
-      val subjComp = myCompare(q1.subject.toString, q2.subject.toString)
+    val quadsSorted = quadsFiltered.sortWith((q1 : Statement, q2 : Statement)=>{
+      val subjComp = myCompare(q1.getSubject.stringValue(), q2.getSubject.stringValue())
       if(subjComp == 0){
-        myCompare(q1.predicate.toString, q2.predicate.toString) < 0
+        myCompare(q1.getPredicate.stringValue(), q2.getPredicate.stringValue()) < 0
       } else subjComp < 0
     })
 
-    val statQuad = new Quad(datasetURI, cache.blockURIs("page"), vf.createURI(termsNS+"statistics"), vf.createLiteral(""+quadsSorted.size+"-"+(page.toWikiText.count(_.equals('\n'))+1-countEmptyLines(page.toWikiText))), tripleContext)
+    val statQuad = vf.createStatement(cache.blockURIs("page"), vf.createURI(termsNS+"statistics"), vf.createLiteral(""+quadsSorted.size+"-"+(page.toWikiText.count(_.equals('\n'))+1-countEmptyLines(page.toWikiText))))
     val quadsWithStat = quadsSorted ::: List(statQuad)
 
     Logging.printMsg(""+quadsSorted.size+" quads extracted for "+entityId, 1)
     quadsWithStat.foreach( q => { Logging.printMsg(q.toString, 1) } )
     Logging.printMsg("finish "+subjectUri+" threadID="+Thread.currentThread().getId(), 2)
 
-    quadsWithStat
+    quadsWithStat.map(mapStatement(_))
   }
 }
 
@@ -361,8 +361,8 @@ object WiktionaryPageExtractor {
     i
   }
 
-  def handleFlatBindings(bindings : VarBindings, block : Block, tpl : Tpl, cache : Cache, thisBlockURI : String) : List[Quad] = {
-    val quads = new ListBuffer[Quad]
+  def handleFlatBindings(bindings : VarBindings, block : Block, tpl : Tpl, cache : Cache, thisBlockURI : String) : List[Statement] = {
+    val quads = new ListBuffer[Statement]
 
     if(tpl.pp.isDefined){
         val handler = Class.forName(tpl.pp.get.clazz).newInstance.asInstanceOf[BindingHandler]
@@ -391,9 +391,9 @@ object WiktionaryPageExtractor {
   def escape(s:String) : String = s.replace("(", escapeSeqOpenBrace).replace(")", escapeSeqCloseBrace).replace(",", escapeSeqComma)
   def unescape(s:String) : String = s.replace(escapeSeqOpenBrace, "(").replace(escapeSeqCloseBrace, ")").replace(escapeSeqComma, ",")
 
-  def makeTriples(rt : ResultTemplate, binding : HashMap[String, List[org.dbpedia.extraction.wikiparser.Node]], blockName : String, cache : Cache) : List[Quad] = {
+  def makeTriples(rt : ResultTemplate, binding : HashMap[String, List[org.dbpedia.extraction.wikiparser.Node]], blockName : String, cache : Cache) : List[Statement] = {
           Logging.printMsg("bindings "+binding, 2)
-          val quads = new ListBuffer[Quad]
+          val quads = new ListBuffer[Statement]
           rt.triples.foreach( (tt : TripleTemplate) => {
             try{
             //apply the same placeholder-processing to s, p and o => DRY:
@@ -492,10 +492,8 @@ object WiktionaryPageExtractor {
                   vf.createLiteral(o.trim, oLang)
               }
 
-            val quad = new Quad(datasetURI, vf.createURI(s), vf.createURI(p), oObj, tripleContext)
-            quads += quad
-
-            } catch {   
+            quads += vf.createStatement(vf.createURI(s), vf.createURI(p), oObj)
+            } catch {
               case ce : ContinueException => //skip
               case e : Exception => throw e //propagate
             }
@@ -667,6 +665,28 @@ object WiktionaryPageExtractor {
     if(!mappings.contains(clean))
       Logging.printMsg("missing mapping for \""+clean+"\"", 0)
     mappings.getOrElse(clean, clean)
+  }
+
+  def mapStatement(s:Statement):Quad = {
+    new Quad(
+      if(s.getObject.isInstanceOf[Literal] && s.getObject.asInstanceOf[Literal].getLanguage != null){
+        s.getObject.asInstanceOf[Literal].getLanguage
+      } else {
+        null
+      },
+      datasetURI.name,
+      s.getSubject.stringValue(),
+      s.getPredicate.stringValue(),
+      s.getObject.stringValue(),
+      tripleContext.stringValue(),
+      if(s.getObject.isInstanceOf[Literal] && s.getObject.asInstanceOf[Literal].getDatatype != null){
+        s.getObject.asInstanceOf[Literal].getDatatype.toString
+      } else if(s.getObject.isInstanceOf[Literal]) {
+        "http://www.w3.org/2001/XMLSchema#string"
+      } else {
+        null
+      }
+    )
   }
 }
 

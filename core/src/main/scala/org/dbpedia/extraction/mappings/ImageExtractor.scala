@@ -94,7 +94,7 @@ extends Extractor
                     if (currentSections > 1) return None
                     currentSections += 1
                 }
-                case TemplateNode(_, children, _) =>
+                case TemplateNode(_, children, _, _) =>
                 {
                     for (property <- children;
                          textNode @ TextNode(text, _) <- property.children;
@@ -133,7 +133,7 @@ extends Extractor
                 if (sections > 1) return None
                 return searchImage(tail, sections + 1)
             }
-            case TemplateNode(_, children, _) :: tail =>
+            case TemplateNode(_, children, _, _) :: tail =>
             {
                 for (property <- children;
                      textNode @ TextNode(text, _) <- property.children;

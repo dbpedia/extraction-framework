@@ -92,7 +92,7 @@ final class SimpleWikiParser extends WikiParser
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
     {
-        case TemplateNode(title, _, _) => names.contains(title.decoded)
+        case TemplateNode(title, _, _, _) => names.contains(title.decoded)
         case _ => node.children.exists(node => findTemplate(node, names, language))
     }
     
@@ -297,9 +297,6 @@ final class SimpleWikiParser extends WikiParser
             } else if(destination(0).isInstanceOf[TextNode]) {
               destination(0).asInstanceOf[TextNode].text
             } else {
-              // The following line didn't make sense. createInternalLinkNode() will simply throw a NullPointerException.
-              // null // has a semantic within the wiktionary module, and should never occur for wikipedia
-              
               throw new WikiParserException("Failed to parse internal link: " + destination, startLine, source.findLine(startLine))
             }
 

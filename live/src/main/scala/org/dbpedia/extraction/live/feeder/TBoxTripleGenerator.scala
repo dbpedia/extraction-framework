@@ -150,7 +150,7 @@ class TBoxTripleGenerator() {
   def read(source: Source): MultiMap[Resource, Model]  = {
     logger.info("Loading ontology pages")
 
-    return read(source.map(WikiParser()))
+    return read(source.map(WikiParser.getInstance()))
   }
 
 

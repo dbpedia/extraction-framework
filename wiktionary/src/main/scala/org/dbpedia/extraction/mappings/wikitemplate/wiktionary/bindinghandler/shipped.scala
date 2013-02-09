@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler
 
-import org.openrdf.model.{Literal, URI, Resource, Value}
+import org.openrdf.model._
 import org.openrdf.model.impl.ValueFactoryImpl
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
@@ -10,6 +10,9 @@ import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
 import org.dbpedia.extraction.mappings.wikitemplate._
 import org.dbpedia.extraction.mappings.Cache
 import collection.mutable.ListBuffer
+import org.dbpedia.extraction.wikiparser.TextNode
+import scala.Some
+import org.dbpedia.extraction.wikiparser.TemplateNode
 
 //implicit conversion magic
 import MyNodeList._
@@ -22,27 +25,27 @@ trait TranslationHelper extends BindingHandler {
     val translateCleanPattern = new Regex("\\([^\\)]*\\)")
     def getCleanWord(dirty:String) = translateCleanPattern.replaceAllIn(dirty.split(",").head, "").trim
     
-    def getTranslateTriples(source : Resource, property : URI, word : String, language : String, llangLowerShort : String, thisBlockURI : String) : List[Quad] = {
-        val quads = new ListBuffer[Quad]()
+    def getTranslateTriples(source : Resource, property : URI, word : String, language : String, llangLowerShort : String, thisBlockURI : String) : List[Statement] = {
+        val quads = new ListBuffer[Statement]()
         val wordObj = vf.createURI(WiktionaryPageExtractor.resourceNS+WiktionaryPageExtractor.urify(word))
         val wordLangObj = vf.createURI(WiktionaryPageExtractor.resourceNS+WiktionaryPageExtractor.urify(word)+"-"+WiktionaryPageExtractor.urify(language))
         //main translate triple
-        quads += new Quad(WiktionaryPageExtractor.datasetURI, source, property, wordLangObj, WiktionaryPageExtractor.tripleContext)
+        quads += vf.createStatement(source, property, wordLangObj)
         //the triple inversed
         //quads += new Quad(WiktionaryPageExtractor.langObj, WiktionaryPageExtractor.datasetURI, wordLangObj, property, source, WiktionaryPageExtractor.tripleContext) 
         //a triple about the target word
-        quads += new Quad(WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasLangUsage"), wordLangObj, WiktionaryPageExtractor.tripleContext)
+        quads += vf.createStatement(wordObj, vf.createURI("http://wiktionary.dbpedia.org/terms/hasLangUsage"), wordLangObj)
         //a label for the target word
-      quads += new Quad(WiktionaryPageExtractor.datasetURI, wordObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word), WiktionaryPageExtractor.tripleContext)
-      quads += new Quad(WiktionaryPageExtractor.datasetURI, wordLangObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word, llangLowerShort), WiktionaryPageExtractor.tripleContext)
+        quads += vf.createStatement(wordObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word))
+        quads += vf.createStatement(wordLangObj, vf.createURI("http://www.w3.org/2000/01/rdf-schema#label"), vf.createLiteral(word, llangLowerShort))
         quads.toList
     }
 }
 
 class GermanTranslationHelper extends TranslationHelper {
     val sensePattern = "\\[(\\d+)\\]".r
-    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad] = {
-        val quads = ListBuffer[Quad]()
+    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Statement] = {
+        val quads = ListBuffer[Statement]()
         val translateProperty = vf.createURI(WiktionaryPageExtractor.termsNS+"hasTranslation")
         i.foreach(binding=>{
             try {
@@ -91,8 +94,8 @@ class GermanTranslationHelper extends TranslationHelper {
 class EnglishTranslationHelper extends TranslationHelper {
     //todo make configurabel. problem: multiple values for one property
     val targetTemplates = List("t", "t+","t-", "tø", "trad+", "trad-")
-    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad] = {
-        val quads = ListBuffer[Quad]()
+    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Statement] = {
+        val quads = ListBuffer[Statement]()
         val translateProperty = vf.createURI(WiktionaryPageExtractor.termsNS+"hasTranslation")
         
         i.foreach( binding => {
@@ -132,8 +135,8 @@ class EnglishTranslationHelper extends TranslationHelper {
 *
 */
 class LinkListHelper extends BindingHandler {
-    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad] = {
-        val quads = ListBuffer[Quad]()
+    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Statement] = {
+        val quads = ListBuffer[Statement]()
         val linkProperty = vf.createURI(parameters("linkProperty"))
         val sourceWord = vf.createURI(thisBlockURI)
         i.foreach(binding=>{
@@ -144,7 +147,7 @@ class LinkListHelper extends BindingHandler {
                 try{
                 if(node.isInstanceOf[LinkNode]){
                     val destination = node.asInstanceOf[LinkNode].getFullDestination(WiktionaryPageExtractor.resourceNS)
-                    quads += new Quad(WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
+                    quads += vf.createStatement(sourceWord, linkProperty, vf.createURI(destination))
 
                 }
                 } catch {
@@ -166,8 +169,8 @@ class LinkListHelper extends BindingHandler {
 *
 */
 class ExplicitSenseLinkListHelper extends BindingHandler {
-    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad] = {
-        val quads = ListBuffer[Quad]()
+    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Statement] = {
+        val quads = ListBuffer[Statement]()
         val linkProperty = vf.createURI(parameters("linkProperty"))
         i.foreach(binding=>{
             try {
@@ -184,7 +187,7 @@ class ExplicitSenseLinkListHelper extends BindingHandler {
                           vf.createURI(thisBlockURI)
                         }
                         val destination = node.asInstanceOf[LinkNode].getFullDestination(WiktionaryPageExtractor.resourceNS)
-                        quads += new Quad(WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
+                        quads += vf.createStatement(sourceWord, linkProperty, vf.createURI(destination))
                     })
                 } 
                 } catch {
@@ -205,8 +208,8 @@ class ExplicitSenseLinkListHelper extends BindingHandler {
 *
 */
 class MatchedSenseLinkListHelper extends BindingHandler {
-    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Quad] = {
-        val quads = ListBuffer[Quad]()
+    def process(i:VarBindings, thisBlockURI : String, cache : Cache, parameters : Map[String, String]) : List[Statement] = {
+        val quads = ListBuffer[Statement]()
         val linkProperty = vf.createURI(parameters("linkProperty"))
         i.foreach(binding=>{
             try {
@@ -227,7 +230,7 @@ class MatchedSenseLinkListHelper extends BindingHandler {
                           vf.createURI(thisBlockURI)
                         }
                         val destination = node.asInstanceOf[LinkNode].getFullDestination(WiktionaryPageExtractor.resourceNS)
-                        quads += new Quad(WiktionaryPageExtractor.datasetURI, sourceWord, linkProperty, vf.createURI(destination), WiktionaryPageExtractor.tripleContext)
+                        quads += vf.createStatement(sourceWord, linkProperty, vf.createURI(destination))
                     } 
                 } catch {
                    case e:Exception=> Logging.printMsg("error processing translation item: "+e.getMessage, 4)//ignore

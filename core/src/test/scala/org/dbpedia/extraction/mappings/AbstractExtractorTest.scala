@@ -44,7 +44,7 @@ class AbstractExtractorTest
     }
     private val extractor = new AbstractExtractor(context)
 
-    private val parser = WikiParser()
+    private val parser = WikiParser.getInstance()
 
     private def render(fileName : String) : String =
     {

@@ -59,7 +59,7 @@ object LiveExtractor
         private lazy val _ontology = new OntologyReader().read(_ontologySource)
         def ontology : Ontology = _ontology
 
-        private lazy val _mappingPageSource = _mappingsSource.map(WikiParser())
+        private lazy val _mappingPageSource = _mappingsSource.map(WikiParser.getInstance())
         def mappingPageSource : Traversable[PageNode] = _mappingPageSource
 
         private lazy val _mappings = MappingsLoader.load(this)
