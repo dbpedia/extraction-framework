@@ -47,8 +47,12 @@ class InfoBoxMapper(config : NodeSeq) extends NodeHandler {
       }
 
       var tpl = new Tpl("nodehandlerdummy", new Stack(), None, templates)
+      try{
       val quads = WiktionaryPageExtractor.handleFlatBindings(varBindings, block, tpl, cache, thisBlockUri)
       return new NodeHandlerTriplesResult(quads.toList)
+      } catch {
+        case e : Exception => return new NodeHandlerNoResult
+      }
     }
   }
 }

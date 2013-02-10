@@ -634,6 +634,7 @@ object WiktionaryPageExtractor {
     .replace("}", "")
     .replace("*", "")
     .replace("+", "")
+    .replace(";", "")
     .replace("#", "")
     .replace("/", "")
     .replace("\\", "")

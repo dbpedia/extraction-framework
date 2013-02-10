@@ -168,10 +168,15 @@ final class SwebleWrapper extends WikiParser
                 }
             }
             case el : ExternalLink => {
-                val destinationURL = new URI(el.getTarget)
-                val destinationNodes = List[Node](new TextNode(el.getTarget, line)) //parsing of target not yet supported
-                val titleNodes = transformNodes(el.getTitle) 
-                List(new ExternalLinkNode(destinationURL, titleNodes, line, destinationNodes))
+              var destinationURL : URI = null
+              try {
+                destinationURL = new URI(el.getTarget)
+              } catch {
+                case e : Exception => destinationURL = new URI("http://example.org")
+              }
+              val destinationNodes = List[Node](new TextNode(el.getTarget, line)) //parsing of target not yet supported
+              val titleNodes = transformNodes(el.getTitle)
+              List(new ExternalLinkNode(destinationURL, titleNodes, line, destinationNodes))
             }
             case url : Url => {
                 val destinationURL = new URI(url)
@@ -211,7 +216,11 @@ final class SwebleWrapper extends WikiParser
             }).flatten
             case b : Bold => transformNodes(b.getContent) // ignore style
             case i : Italics => transformNodes(i.getContent) // ignore style
-            case tplParam : TemplateParameter => List(new TemplateParameterNode(tplParam.getName, transformNodes(tplParam.getDefaultValue.getValue()), line))
+            case tplParam : TemplateParameter => {
+              if(tplParam != null && tplParam.getDefaultValue != null)
+                List(new TemplateParameterNode(tplParam.getName, transformNodes(tplParam.getDefaultValue.getValue()), line))
+              else List[Node]()
+            }
             /*case pf : ParserFunctionBase => {
                 val title = new WikiTitle(pf.getName + ":", WikiTitle.Namespace.Template, language)
                 val children = List[Node]() //not implemented yet
