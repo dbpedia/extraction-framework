@@ -29,7 +29,7 @@ object WikiParser
      * Creates a new WikiParser instance.
      */
 	def getInstance(name : String = null) : WikiParser =  {
-    Console.println("parser: "+name)
+    //Console.println("parser: "+name)
     if (name == null || name.equals("simple")){
       new SimpleWikiParser()
     } else {
