@@ -45,22 +45,10 @@ extends Mapping[TemplateNode]
                 createInstance(graph, instanceUri, node)
 
                 //Check if the root template has been mapped to the corresponding Class of this template
-                if (correspondingClass != null && correspondingProperty != null)
+                if (correspondingClass != null && correspondingProperty != null && pageClasses.contains(correspondingClass))
                 {
-                    var found = false;
-                    for(pageClass <- pageClasses)
-                    {
-                        if(correspondingClass.name == pageClass.name)
-                        {
-                            found = true
-                        }
-                    }
-
-                    if(found)
-                    {
-                        //Connect new instance to the instance created from the root template
-                        graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
-                    }
+                    //Connect new instance to the instance created from the root template
+                    graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
                 }
 
                 //Extract properties
