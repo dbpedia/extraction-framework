@@ -38,14 +38,20 @@ extends Mapping[TemplateNode]
             }
             case Some(pageClasses) => //This page already has a root template.
             {
-                //Create a new instance URI
-                val instanceUri = generateUri(subjectUri, node, pageContext)
+                //Check if the root template has been mapped to the corresponding Class of this template
+                val createCorrespondingProperty = correspondingClass != null && correspondingProperty != null && pageClasses.contains(correspondingClass)
+
+                //Create a new instance URI. If the mappings has no corresponding property and the current mapping is a subclass or superclass
+                //of all previous mappings then do not create a new instance
+                val instanceUri =
+                  if ( (!createCorrespondingProperty) && isSubOrSuperClass(mapToClass, pageClasses) ) subjectUri
+                  else generateUri(subjectUri, node, pageContext)
 
                 //Add ontology instance
                 createInstance(graph, instanceUri, node)
 
-                //Check if the root template has been mapped to the corresponding Class of this template
-                if (correspondingClass != null && correspondingProperty != null && pageClasses.contains(correspondingClass))
+
+                if (createCorrespondingProperty)
                 {
                     //Connect new instance to the instance created from the root template
                     graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
@@ -113,6 +119,27 @@ extends Mapping[TemplateNode]
         }
 
         pageContext.generateUri(subjectUri, nameProperty)
+    }
+
+  /**
+   * Checks if current class is a subclass or supoerclass of a list
+   *
+   * @param cl The class we have to check for sub/super-classsing
+   * @param clSeq the list of classes we have to check against
+   *
+   * @return True if a subclass The generated URI
+   */
+    private def isSubOrSuperClass(cl : OntologyClass, clSeq : Seq[OntologyClass]) : Boolean =
+    {
+
+        for (i <- clSeq)
+        {
+            //if a class is contained in the others related classes (hierarchy) it is a subclass or superclass
+            //it must be true for all items so we return false if not true for one item
+            if ( ! (i.relatedClasses.contains(cl) || cl.relatedClasses.contains(i) ))
+                return false
+        }
+        true
     }
 }
 
