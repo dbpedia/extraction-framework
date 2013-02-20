@@ -48,8 +48,12 @@ extends Mapping[TemplateNode]
                   else generateUri(subjectUri, node, pageContext)
 
                 //Add ontology instance
-                createInstance(graph, instanceUri, node)
-
+                if (instanceUri == subjectUri) {
+                  createMissingTypes(graph, instanceUri, node)
+                }
+                else {
+                  createInstance(graph, instanceUri, node)
+                }
 
                 if (createCorrespondingProperty)
                 {
@@ -63,6 +67,29 @@ extends Mapping[TemplateNode]
         }
         
         graph
+    }
+
+    private def createMissingTypes(graph: Buffer[Quad], uri : String, node : Node): Unit =
+    {
+        val pageClasses = node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION) match {
+          case Some(classes) => classes
+          case None => return
+        }
+
+        // Compute missing types, i.e. the set difference between
+        val (mainSet, secondarySet) =
+          if (mapToClass.relatedClasses.size >=  pageClasses.size) (mapToClass.relatedClasses, pageClasses)
+          else (pageClasses, mapToClass.relatedClasses)
+
+        val diffSet = mainSet.diff(secondarySet)
+
+        // Set missing annotations
+        node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, pageClasses ++ diffSet)
+
+        // Create missing type statements
+        for (cls <- diffSet)
+          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+
     }
 
     private def createInstance(graph: Buffer[Quad], uri : String, node : Node): Unit =
