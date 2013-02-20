@@ -73,17 +73,21 @@ extends Mapping[TemplateNode]
     {
         val pageClasses = node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION) match {
           case Some(classes) => classes
-          case None => return
+          case None => Seq.empty
         }
 
-        // Compute missing types, i.e. the set difference between
+        // Compute missing types, i.e. the set difference between the page classes and this TemplateMapping relatedClasses
         val (mainSet, secondarySet) =
           if (mapToClass.relatedClasses.size >=  pageClasses.size) (mapToClass.relatedClasses, pageClasses)
           else (pageClasses, mapToClass.relatedClasses)
 
         val diffSet = mainSet.diff(secondarySet)
 
-        // Set missing annotations
+        // Set annotations
+        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass.relatedClasses);
+        node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
+
+        // Set missing annotations in the PageNode
         node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, pageClasses ++ diffSet)
 
         // Create missing type statements
