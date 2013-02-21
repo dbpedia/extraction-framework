@@ -167,7 +167,10 @@ extends Mapping[TemplateNode]
         {
             //if a class is contained in the others related classes (hierarchy) it is a subclass or superclass
             //it must be true for all items so we return false if not true for one item
-            if ( ! (i.relatedClasses.contains(cl) || cl.relatedClasses.contains(i) ))
+            //we exclude the external class definitions like schema.org
+            if ( ! (i.isExternalClass ||
+              i.relatedClasses.contains(cl) ||
+              cl.relatedClasses.contains(i) ))
                 return false
         }
         true
