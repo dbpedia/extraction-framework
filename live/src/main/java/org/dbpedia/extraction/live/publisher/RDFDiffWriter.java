@@ -88,14 +88,22 @@ public class RDFDiffWriter
 
 		out.flush();
 
+        } catch (IOException e) {
+            throw e;
         }
         finally {
-            if(out != null)
-                out.close();
-
-            /*if((out != null) && (out != tmp))
-                out.close();*/
-
+            try {
+                if(out != null)
+                    out.close();
+            } catch (IOException e) {
+                throw e;
+            }
+            try {
+                if(tmp != null)
+                    tmp.close();
+            } catch (IOException e) {
+                throw e;
+            }
         }
 
 	}
