@@ -5,8 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,32 +29,15 @@ public class Publisher extends Thread{
 
     private Map<String, String> config;
 
-//	private IUpdateStrategy diffStrategy;
-
-
     private long sequenceNumber = 0;
     private static long fileNumber = 0;
 
     //This member is used to determine whether we have advanced to another hour, so we should reset sequenceNumber
     private static int hourNumber = -1;
 
-    private String graphName;
-
     private String publishDiffBaseName;
 
-//	private SAXParser parser = createParser();
-
     Publisher liveSync;
-
-//	private ISparulExecutor graphDAO;
-//
-//	private ChangeSink workFlow;
-//
-//	private NodePositionDAO nodePositionDao;
-
-
-
-    //private RDFDiffWriter rdfDiffWriter;
 
     public Publisher(String name, int priority){
         this.setPriority(priority);
@@ -261,14 +242,7 @@ public class Publisher extends Thread{
         sequenceNumber++;
     }
 
-    private void advance(long id)
-            throws IOException
-    {
-        URL sourceURL = new URL(config.get("baseUrl") + "/" + getFragment(id) + ".state.txt");
-        File targetFile = new File(config.get("osmReplicationConfigPath") + "/state.txt");
 
-        URIUtil.download(sourceURL, targetFile);
-    }
 
 
     private void publishDiff(DiffData pubData, long id)//, IDiff<Model> diff)
@@ -296,12 +270,6 @@ public class Publisher extends Thread{
 
         if(parent != null)
             parent.mkdirs();
-
-        RDFDiffWriter rdfDiffWriter = new RDFDiffWriter(fileName);
-
-
-
-
 
         if(pubData != null){
             addedTriples.addAll(pubData.toAdd);
@@ -379,54 +347,15 @@ public class Publisher extends Thread{
         return result;
     }
 
-    String getFragment(long id)
-    {
-        List<Long> parts = RDFDiffWriter.chunkValue(id, 1000, 1000);
 
-        String fragment = ""; //Long.toString(parts.get(0));
-        for(Long part : parts) {
-            fragment += "/" + format(part);
-        }
 
-        return fragment;
-    }
 
-    InputStream getChangeSetStream(long id)
-            throws IOException
-    {
-        URL url = getChangeSetURL(id);
-        return url.openStream();
-    }
 
-    File getChangeFile(long id)
-            throws IOException
-    {
-        URL url = getChangeSetURL(id);
-        File file = new File(config.get("tmpPath") + ".diff.osc.gz");
 
-//		URIUtil.download(url, file);
 
-        return file;
-    }
 
-    URL getStateURL(long id)
-            throws MalformedURLException
-    {
-        return new URL(getBaseURL(id) + ".state.txt");
-    }
 
-    URL getChangeSetURL(long id)
-            throws MalformedURLException
-    {
-        return new URL(getBaseURL(id) + ".osc.gz");
-    }
 
-    String getBaseURL(long id)
-    {
 
-        String urlStr = config.get("baseUrl") + "/" + getFragment(id);
-
-        return urlStr;
-    }
 
 }

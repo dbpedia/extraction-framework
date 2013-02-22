@@ -36,30 +36,6 @@ public class RDFDiffWriter
 		this.baseName = baseName;
 	}
 
-	public static List<Long> chunkValue(long id, long ...chunkSizes)
-	{
-		long denominator = 1;
-		for(long chunkSize : chunkSizes)
-			denominator *= chunkSize;
-
-		List<Long> result = new ArrayList<Long>();
-
-		long remainder = id;
-		for(long chunkSize : chunkSizes) {
-			long div = remainder / denominator;
-			remainder = remainder % denominator;
-
-			result.add(div);
-
-			denominator = denominator / chunkSize;
-		}
-
-		result.add(remainder);
-
-		return result;
-	}
-
-
     /**
      * Writes the passed model to file
      * @param triplesString The triples to be written as a string, in N-TRIPLES format
