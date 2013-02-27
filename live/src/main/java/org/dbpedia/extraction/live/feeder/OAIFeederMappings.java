@@ -17,14 +17,14 @@ public class OAIFeederMappings extends OAIFeeder {
 
     private String mappingNamespace = "";
 
-    public OAIFeederMappings(String feederName, int threadPriority, LiveQueuePriority queuePriority,
+    public OAIFeederMappings(String feederName, LiveQueuePriority queuePriority,
                              String oaiUri, String oaiPrefix, String baseWikiUri,
-                             long pollInterval, long sleepInterval, String defaultStartDateTime, long relativeEndFromNow,
+                             long pollInterval, long sleepInterval, String defaultStartTime,
                              String folderBasePath) {
 
-        super(feederName, threadPriority, queuePriority,
+        super(feederName, queuePriority,
                 oaiUri, oaiPrefix, baseWikiUri,
-                pollInterval, sleepInterval, defaultStartDateTime, relativeEndFromNow,
+                pollInterval, sleepInterval, defaultStartTime,
                 folderBasePath);
 
         String langCode = LiveOptions.options.get("language");
@@ -44,7 +44,7 @@ public class OAIFeederMappings extends OAIFeeder {
         //if (!item.isDeleted()) {
             long now = System.currentTimeMillis();
             for (Object newItem: JavaConversions.asJavaIterable(MappingAffectedPagesHelper.GetMappingPages(title))) {
-                addPageIDtoQueue(new LiveQueueItem((Long) newItem, latestResponseDate), now);
+                addPageIDtoQueue(new LiveQueueItem((Long) newItem, latestProcessDate), now);
             }
         //} else {
             // TODO find which template the deleted infobox was referring to

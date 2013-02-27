@@ -44,20 +44,15 @@ public class Main {
     }
 
     public static void initLive() {
-        feederMappings = new OAIFeederMappings("FeederMappings", Thread.MIN_PRIORITY, LiveQueuePriority.MappingPriority,
+        feederMappings = new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
                 LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
-                2000, 1000, LiveOptions.options.get("uploaded_dump_date"), 0,
+                2000, 1000, LiveOptions.options.get("uploaded_dump_date"),
                 LiveOptions.options.get("working_directory"));
 
 
-        feederLive = new OAIFeeder("FeederLive", Thread.NORM_PRIORITY, LiveQueuePriority.LivePriority,
+        feederLive = new OAIFeeder("FeederLive", LiveQueuePriority.LivePriority,
                 LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
-                3000, 1000, LiveOptions.options.get("uploaded_dump_date"), 0,
-                LiveOptions.options.get("working_directory"));
-
-        feederUnmodified = new OAIFeeder("FeederUnmodified", Thread.MIN_PRIORITY, LiveQueuePriority.UnmodifiedPagePriority,
-                LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
-                30000, 1000, LiveOptions.options.get("uploaded_dump_date"), DateUtil.getDuration1MonthMillis(),
+                3000, 1000, LiveOptions.options.get("uploaded_dump_date"),
                 LiveOptions.options.get("working_directory"));
 
         statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
@@ -92,9 +87,9 @@ public class Main {
         try {
             logger.warn("Stopping DBpedia Live components");
             // Feeders
-            if (feederLive != null) feederLive.stopFeeder();
-            if (feederUnmodified != null) feederUnmodified.stopFeeder();
-            if (feederMappings != null) feederMappings.stopFeeder();
+            //if (feederLive != null) feederLive.stopFeeder();
+            //if (feederUnmodified != null) feederUnmodified.stopFeeder();
+            //if (feederMappings != null) feederMappings.stopFeeder();
             // Statistics
             if (statistics != null) statistics.stopStatistics();
             // Publisher
