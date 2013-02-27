@@ -5,6 +5,7 @@ import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.Feeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
+import org.dbpedia.extraction.live.feeder.UnmodifiedFeeder;
 import org.dbpedia.extraction.live.publisher.DiffData;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
@@ -59,6 +60,10 @@ public class Main {
                 LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
                 3000, 1000, LiveOptions.options.get("uploaded_dump_date"),
                 LiveOptions.options.get("working_directory")));
+
+        feeders .add( new UnmodifiedFeeder("FeederUnmodified", LiveQueuePriority.UnmodifiedPagePriority,
+                30, 5000,500,30000,
+                LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
 
         statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
                 DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());

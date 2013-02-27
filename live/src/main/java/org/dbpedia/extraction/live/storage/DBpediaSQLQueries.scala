@@ -10,7 +10,7 @@ object DBpediaSQLQueries {
     * JSON Cache Queries (select, update, insert, delete)
     * */
   def getJSONCacheSelect: String = {
-    "SELECT timesUpdated, json, subjects FROM DBPEDIALIVE_CACHE WHERE pageID = ?"
+    "SELECT timesUpdated, json, subjects FROM DBPEDIALIVE_CACHE WHERE pageID = ? "
   }
 
   def getJSONCacheInsert: String = {
@@ -23,6 +23,10 @@ object DBpediaSQLQueries {
 
   def getJSONCacheDelete: String = {
     "DELETE FROM DBPEDIALIVE_CACHE WHERE pageID = ?"
+  }
+
+  def getJSONCacheUnmodified: String = {
+    "SELECT pageID, updated FROM DBPEDIALIVE_CACHE WHERE datediff(updated,now()) >= ? ORDER BY updated ASC LIMIT ? "
   }
 
 }
