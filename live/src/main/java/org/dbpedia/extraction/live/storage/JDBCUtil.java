@@ -21,7 +21,7 @@ public class JDBCUtil {
         if (!sparul.startsWith("SPARQL"))
             query = "SPARQL " + query;
 
-        return execSQL(query);
+        return execSQL(query, true);
     }
 
     /*
@@ -29,11 +29,19 @@ public class JDBCUtil {
     * */
     public static boolean execSQL(String query) {
 
+        return execSQL(query, false);
+    }
+
+    /*
+    * Execs an SQL query and returns true if everything went ok or false  in case of exception
+    * */
+    public static boolean execSQL(String query, boolean sparql) {
+
         Connection conn = null;
         Statement stmt = null;
         ResultSet result = null;
         try {
-            conn = JDBCPoolConnection.getPoolConnection();
+            conn = (sparql == false) ?  JDBCPoolConnection.getCachePoolConnection() : JDBCPoolConnection.getStorePoolConnection();
             stmt = conn.createStatement();
             result = stmt.executeQuery(query);
 
@@ -71,7 +79,7 @@ public class JDBCUtil {
         PreparedStatement stmt = null;
         ResultSet result = null;
         try {
-            conn = JDBCPoolConnection.getPoolConnection();
+            conn = JDBCPoolConnection.getCachePoolConnection();
             stmt = conn.prepareStatement(preparedQuery);
 
             for (int i = 0; i < parameterList.length; i++) {
@@ -113,14 +121,12 @@ public class JDBCUtil {
         PreparedStatement stmt = null;
         ResultSet result = null;
         try {
-            conn = JDBCPoolConnection.getPoolConnection();
+            conn = JDBCPoolConnection.getCachePoolConnection();
             stmt = conn.prepareStatement(query);
 
             stmt.setLong(1, pageID);
 
             result = stmt.executeQuery();
-
-            StringBuilder json = new StringBuilder();
 
             if (result.next()) {
                 int timesUpdated = result.getInt("timesUpdated");
