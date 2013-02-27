@@ -65,13 +65,17 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
     @Override
     public int compareTo(LiveQueueItem item) {
         if (this.itemPriority != item.itemPriority)
-        			return this.itemPriority.compareTo(item.itemPriority);
-        		else {
-        		}
+        	return this.itemPriority.compareTo(item.itemPriority);
+
         if (this.modificationDate == "" || item.modificationDate == "")
             return 0;
-        else
+        else {
             // String compare should do for this (and it's thread safe)
-            return this.modificationDate.compareTo(item.modificationDate);
+            if (this.itemPriority == LiveQueuePriority.UnmodifiedPagePriority)
+                // When in unmodified do reverse ordering to prevent older from starvation
+                return item.modificationDate.compareTo(this.modificationDate);
+            else
+                return this.modificationDate.compareTo(item.modificationDate);
+        }
     }
 }
