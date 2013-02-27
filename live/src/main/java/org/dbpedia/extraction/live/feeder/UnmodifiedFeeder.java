@@ -48,9 +48,11 @@ public class UnmodifiedFeeder extends Feeder {
 
     @Override
     protected List<LiveQueueItem> getNextItems() {
-        while (LiveQueue.getQueueSize() > threshold) {
+        long size = LiveQueue.getQueueSize();
+        while (size > threshold) {
             try {
-                Thread.sleep(sleepTime);
+                int m = (int) (size / threshold);
+                Thread.sleep(m * sleepTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 return Collections.emptyList();
