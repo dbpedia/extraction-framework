@@ -31,6 +31,7 @@ public abstract class Feeder extends Thread {
 
     public Feeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime, String folderBasePath) {
         this.feederName = feederName;
+        this.setName("Feeder_"+feederName);
         logger = Logger.getLogger(feederName);
         this.queuePriority = queuePriority;
 
