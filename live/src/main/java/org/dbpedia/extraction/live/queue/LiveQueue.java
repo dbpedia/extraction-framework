@@ -81,8 +81,20 @@ public class LiveQueue {
         return item;
     }
 
+    public static long getQueueSize(){
+        return queue.size();
+    }
+
     public static long getPrioritySize(LiveQueuePriority priority){
         Object value = counts.get(priority);
         return (value == null) ? 0 : ((Long) value);
+    }
+
+    public static String getPriorityDate(LiveQueuePriority priority){
+        for (LiveQueueItem i : queue){
+            if (i.getPriority() == priority)
+                return i.getModificationDate();
+        }
+        return "";
     }
 }
