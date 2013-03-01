@@ -84,8 +84,8 @@ class JSONCache(pageID: Long, pageTitle: String) {
     try {
       cacheObj = JDBCUtil.getCacheContent(DBpediaSQLQueries.getJSONCacheSelect, this.pageID)
       if (cacheObj == null) return
-
       cacheExists = true
+      if (cacheObj.json.equals("")) return
 
       val json: Option[Any] = JSON.parseFull(cacheObj.json)
       val map: Map[String, Any] = json.get.asInstanceOf[Map[String, Any]]
