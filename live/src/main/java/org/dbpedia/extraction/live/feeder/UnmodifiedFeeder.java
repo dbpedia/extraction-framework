@@ -58,6 +58,16 @@ public class UnmodifiedFeeder extends Feeder {
                 return Collections.emptyList();
             }
         }
-        return JDBCUtil.getCacheUnmodified(minDaysAgo, chunk);
+        List<LiveQueueItem> items = JDBCUtil.getCacheUnmodified(minDaysAgo, chunk);
+        if (items.size() == 0) {
+            try {
+
+                Thread.sleep(5 * sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                return Collections.emptyList();
+            }
+        }
+        return items;
     }
 }
