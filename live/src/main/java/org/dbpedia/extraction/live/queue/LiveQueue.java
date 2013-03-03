@@ -19,25 +19,25 @@ import java.util.concurrent.PriorityBlockingQueue;
 public class LiveQueue {
     private static Logger logger;
 
-    private static PriorityBlockingQueue<LiveQueueItem> queue = new PriorityBlockingQueue<LiveQueueItem>(1000);
+    private static PriorityBlockingQueue<LiveQueueItem> queue = null;
     // this is a Map<long,int>, long is the pageID and int the number of same items in the queue (see add())
-    private static HashMap<Long,Integer> uniqueMap = new HashMap(1000);
+    private static HashMap<Long,Integer> uniqueMap = null;
 
     // Keeps track of the size of each priority
-    private static HashMap<LiveQueuePriority,Long> counts = new HashMap<LiveQueuePriority, Long>(10);
+    private static HashMap<LiveQueuePriority,Long> counts;
 
     private LiveQueue() {
     }
 
     public static void add(LiveQueueItem item) {
-        Object value = uniqueMap.get(item.getItemID());
+        Object value = getUniqueMap().get(item.getItemID());
         int finalValue = 1; // default value in it does not exists
 
         if (value != null) {
             // Existing item, assign to highest priority
             // NOTE: mappings priority also need to update the mappings/ontology so keep both
             Iterator<LiveQueueItem> iterator;
-            iterator = queue.iterator();
+            iterator = getQueue().iterator();
 
             while (iterator.hasNext()) {
                 LiveQueueItem e = iterator.next();
@@ -55,7 +55,7 @@ public class LiveQueue {
                         } else {
                             // remove existing
                             iterator.remove();
-                            counts.put(item.getPriority(), getPrioritySize(e.getPriority()) - 1);
+                            getCounts().put(item.getPriority(), getPrioritySize(e.getPriority()) - 1);
                         }
                     } else {
                         // if new priority is lower or the same do nothing
@@ -64,29 +64,29 @@ public class LiveQueue {
                 }
             }
         }
-        uniqueMap.put(item.getItemID(), finalValue);
-        counts.put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
-        queue.add(item);
+        getUniqueMap().put(item.getItemID(), finalValue);
+        getCounts().put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
+        getQueue().add(item);
     }
 
     public static LiveQueueItem take() throws InterruptedException {
 
-        LiveQueueItem item = queue.take();
-        int value = (Integer) uniqueMap.remove(item.getItemID());
+        LiveQueueItem item = getQueue().take();
+        int value = (Integer) getUniqueMap().remove(item.getItemID());
         if (value != 1) {  // not single item
-            uniqueMap.put(item.getItemID(), value - 1);
+            getUniqueMap().put(item.getItemID(), value - 1);
         }
         // update counts
-        counts.put(item.getPriority(), getPrioritySize(item.getPriority()) -1);
+        getCounts().put(item.getPriority(), getPrioritySize(item.getPriority()) -1);
         return item;
     }
 
     public static long getQueueSize(){
-        return queue.size();
+        return getQueue().size();
     }
 
     public static long getPrioritySize(LiveQueuePriority priority){
-        Object value = counts.get(priority);
+        Object value = getCounts().get(priority);
         return (value == null) ? 0 : ((Long) value);
     }
 
@@ -96,5 +96,38 @@ public class LiveQueue {
                 return i.getModificationDate();
         }
         return "";
+    }
+
+    private static PriorityBlockingQueue<LiveQueueItem> getQueue() {
+        if (queue == null) {
+            synchronized (LiveQueue.class) {
+                if (queue == null) {
+                    queue = new PriorityBlockingQueue<LiveQueueItem>(1000);
+                }
+            }
+        }
+        return queue;
+    }
+
+    private static HashMap<Long,Integer> getUniqueMap() {
+        if (uniqueMap == null) {
+            synchronized (LiveQueue.class) {
+                if (uniqueMap == null) {
+                    uniqueMap = new HashMap(1000);
+                }
+            }
+        }
+        return uniqueMap;
+    }
+
+    private static HashMap<LiveQueuePriority,Long> getCounts() {
+        if (counts == null) {
+            synchronized (LiveQueue.class) {
+                if (counts == null) {
+                    counts = new HashMap<LiveQueuePriority, Long>(10);
+                }
+            }
+        }
+        return counts;
     }
 }
