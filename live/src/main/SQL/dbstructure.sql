@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `DBPEDIALIVE_CACHE` (
   `title` varchar(512) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `timesUpdated` smallint(6) NOT NULL DEFAULT '0',
-  `json` text COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `json` longtext COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `subjects` text COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `diff` text COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
 
