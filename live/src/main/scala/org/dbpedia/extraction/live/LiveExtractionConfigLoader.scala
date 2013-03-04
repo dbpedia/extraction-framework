@@ -199,8 +199,18 @@ object LiveExtractionConfigLoader extends ActionListener
 
         //Add triples generated from active extractors
         extractors.foreach(extractor => {
-          //println(extractor.getClass())
-          val RequiredGraph = extractor(cpage);
+          //Try to get extractor contents, onError just return empty triples
+          val RequiredGraph =
+            try{
+              extractor(cpage);
+            }
+            catch {
+              case ex: Exception => {
+                logger.log(Level.FINE, "Error in " + extractor.extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
+                Seq()
+              }
+
+            }
 
           extractorRestrictDest.write(extractor.extractor.getClass().getName(), "", RequiredGraph, Seq(), Seq())
           //liveDest.write(RequiredGraph, extractor.extractor.getClass().getName());
