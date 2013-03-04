@@ -53,7 +53,6 @@ object HomepageExtractorConfig
         "pl" -> "oficjalna",
         "pt" -> "oficial",
         "ru" -> "официальный"
-        // TODO: ru is from http://translate.google.com/#en|ru|official%20homepage - check if it's correct
     )
 
 }
