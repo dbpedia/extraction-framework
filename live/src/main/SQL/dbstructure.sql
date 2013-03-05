@@ -1,17 +1,17 @@
-DROP   TABLE "DB"."DBA"."DBPEDIALIVE_CACHE";
-CREATE TABLE "DB"."DBA"."DBPEDIALIVE_CACHE"
-(
-  "pageID" INTEGER, -- the pageID of the wikipedia entry
-  "title" VARCHAR(510), -- the title of the wikipedia entry
-  "updated" DATETIME, -- timestamp of the last cache update
-  "timesUpdated" DECIMAL, -- how many times it was updated (every X times we'll do a clean update')
-  "json" LONG VARCHAR, -- the JSON cache
-  "subjects" LONG VARCHAR, -- the list of distinct subject a wikipedia entry generated (for clean update / delete)
-  "diff" LONG VARCHAR, -- the latest diff (added, deleted, unmodified) for debugging
+--
+-- Table structure for table `DBPEDIALIVE_CACHE`
+--
 
-  PRIMARY KEY ("pageID")
-);
+DROP TABLE IF EXISTS `DBPEDIALIVE_CACHE`;
+CREATE TABLE IF NOT EXISTS `DBPEDIALIVE_CACHE` (
+  `pageID` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(512) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timesUpdated` smallint(6) NOT NULL DEFAULT '0',
+  `json` longtext COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `subjects` text COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `diff` text COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
 
--- This index helps in the unmodified pages feeder
-CREATE INDEX updated_index
-ON "DB"."DBA"."DBPEDIALIVE_CACHE" (updated);
+  PRIMARY KEY (`pageID`),
+  KEY `updated_index` (`updated`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

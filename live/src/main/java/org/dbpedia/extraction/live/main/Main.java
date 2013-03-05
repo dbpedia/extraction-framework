@@ -2,9 +2,12 @@ package org.dbpedia.extraction.live.main;
 
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
+import org.dbpedia.extraction.live.feeder.Feeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
+import org.dbpedia.extraction.live.feeder.UnmodifiedFeeder;
 import org.dbpedia.extraction.live.publisher.DiffData;
+import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.PublishedDataCompressor;
@@ -17,6 +20,8 @@ import org.dbpedia.extraction.live.util.Files;
 import java.io.File;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -28,10 +33,10 @@ public class Main {
     public static BlockingQueue<DiffData> publishingDataQueue = new LinkedBlockingDeque<DiffData>();
 
     // TODO make these non-static
-    private volatile static OAIFeederMappings feederMappings = null;
-    private volatile static OAIFeeder feederLive = null;
-    private volatile static OAIFeeder feederUnmodified = null;
+
     private volatile static Statistics statistics = null;
+
+    private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
 
     public static void authenticate(final String username, final String password) {
         Authenticator.setDefault(new Authenticator() {
@@ -44,21 +49,21 @@ public class Main {
     }
 
     public static void initLive() {
-        feederMappings = new OAIFeederMappings("FeederMappings", Thread.MIN_PRIORITY, LiveQueuePriority.MappingPriority,
+
+        feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
                 LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
-                2000, 1000, LiveOptions.options.get("uploaded_dump_date"), 0,
-                LiveOptions.options.get("working_directory"));
+                2000, 1000, LiveOptions.options.get("uploaded_dump_date"),
+                LiveOptions.options.get("working_directory")));
 
 
-        feederLive = new OAIFeeder("FeederLive", Thread.NORM_PRIORITY, LiveQueuePriority.LivePriority,
+        feeders .add( new OAIFeeder("FeederLive", LiveQueuePriority.LivePriority,
                 LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
-                3000, 1000, LiveOptions.options.get("uploaded_dump_date"), 0,
-                LiveOptions.options.get("working_directory"));
+                3000, 1000, LiveOptions.options.get("uploaded_dump_date"),
+                LiveOptions.options.get("working_directory")));
 
-        feederUnmodified = new OAIFeeder("FeederUnmodified", Thread.MIN_PRIORITY, LiveQueuePriority.UnmodifiedPagePriority,
-                LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
-                30000, 1000, LiveOptions.options.get("uploaded_dump_date"), DateUtil.getDuration1MonthMillis(),
-                LiveOptions.options.get("working_directory"));
+        feeders .add( new UnmodifiedFeeder("FeederUnmodified", LiveQueuePriority.UnmodifiedPagePriority,
+                30, 5000,500,30000,
+                LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
 
         statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
                 DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());
@@ -69,9 +74,8 @@ public class Main {
     public static void startLive() {
         try {
 
-            feederMappings.startFeeder();
-            feederLive.startFeeder();
-            feederUnmodified.startFeeder();
+            for (Feeder f: feeders)
+                f.startFeeder();
 
             PageProcessor processor = new PageProcessor("Page processing thread", 8);
 
@@ -91,10 +95,11 @@ public class Main {
     public static void stopLive() {
         try {
             logger.warn("Stopping DBpedia Live components");
-            // Feeders
-            if (feederLive != null) feederLive.stopFeeder();
-            if (feederUnmodified != null) feederUnmodified.stopFeeder();
-            if (feederMappings != null) feederMappings.stopFeeder();
+
+            for (Feeder f: feeders)
+                // Stop the feeders, taking the most recent date form the queue
+                f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
+
             // Statistics
             if (statistics != null) statistics.stopStatistics();
             // Publisher

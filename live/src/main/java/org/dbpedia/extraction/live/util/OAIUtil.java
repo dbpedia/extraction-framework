@@ -22,12 +22,12 @@ public class OAIUtil {
     }
 
     public static Iterator<LiveQueueItem> createEndlessFeederItemIterator(
-            String oaiBaseUri, String startDate, long relativeEndFromNow, long pollDelay, long resumptionDelay) {
+            String oaiBaseUri, String startDate, long pollDelay, long resumptionDelay) {
 
         XPathExpression expr = DBPediaXPathUtil.getRecordExpr();
 
         Iterator<Document> metaIterator = new EndlessOAIMetaIterator(
-                        oaiBaseUri, startDate, relativeEndFromNow, pollDelay, resumptionDelay);
+                        oaiBaseUri, startDate, pollDelay, resumptionDelay);
 
         Iterator<Node> nodeIterator = new XPathQueryIterator(metaIterator, expr);
 
@@ -50,7 +50,7 @@ public class OAIUtil {
         //Iterator<Document> metaIterator = createEndlessIterator(oaiBaseUri,
         //        startDate, relativeEndFromNow, pollDelay, resumptionDelay);
         Iterator<Document> metaIterator = new EndlessOAIMetaIterator(
-                        oaiBaseUri, startDate, relativeEndFromNow, pollDelay, resumptionDelay);
+                        oaiBaseUri, startDate, pollDelay, resumptionDelay);
 
         Iterator<Node> nodeIterator = new XPathQueryIterator(metaIterator, expr);
 
