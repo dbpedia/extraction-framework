@@ -7,6 +7,7 @@ import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
+import org.dbpedia.extraction.live.storage.JSONCache;
 
 
 /**
@@ -41,15 +42,19 @@ public class PageProcessor extends Thread{
     }
 
 
-    private void processPage(long pageID){
+    private void processPage(LiveQueueItem item){
         try{
-            LiveExtractionManager.extractFromPageID(
-                    pageID,
+            Boolean extracted = LiveExtractionConfigLoader.extractPage(
+                    item,
                     LiveOptions.options.get("localApiURL"),
                     LiveOptions.options.get("language"));
+
+            if (!extracted)
+                JSONCache.setErrorOnCache(item.getItemID(), -1);
         }
         catch(Exception exp){
-            logger.error("Error in processing page number " + pageID + ", and the reason is " + exp.getMessage(), exp);
+            logger.error("Error in processing page number " + item.getItemID() + ", and the reason is " + exp.getMessage(), exp);
+            JSONCache.setErrorOnCache(item.getItemID(), -2);
         }
     }
 
@@ -62,7 +67,7 @@ public class PageProcessor extends Thread{
                 if (page.getPriority() == LiveQueuePriority.MappingPriority) {
                     LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
                 }
-                processPage(page.getItemID());
+                processPage(page);
                 //logger.info("Page #" + page.getItemName() + " has been removed and processed");
             }
             catch (Exception exp){
