@@ -29,4 +29,8 @@ object DBpediaSQLQueries {
     "SELECT pageID, updated FROM DBPEDIALIVE_CACHE WHERE datediff(updated,now()) <= ? ORDER BY updated ASC LIMIT ? "
   }
 
+  def getJSONCacheUpdateError: String = {
+    "UPDATE DBPEDIALIVE_CACHE SET error = ?, updated = now() WHERE pageID = ? "
+  }
+
 }

@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `DBPEDIALIVE_CACHE` (
   `json` longtext COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `subjects` text COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `diff` text COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `error` SMALLINT NOT NULL DEFAULT '0',
 
   PRIMARY KEY (`pageID`),
   KEY `updated_index` (`updated`)

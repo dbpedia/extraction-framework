@@ -112,6 +112,12 @@ class JSONCache(pageID: Long, pageTitle: String) {
 
 }
 
+object JSONCache {
+  def setErrorOnCache(pageID: Long, error: Int) {
+    JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateError, Array[String]("" + error, "" + pageID))
+  }
+}
+
 class JSONCacheObject(val pageID: Long, val updatedTimes: Int, val json: String, val subjects: String) {
 
 }
