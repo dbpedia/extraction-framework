@@ -1,11 +1,13 @@
 package org.dbpedia.extraction.live.storage
 
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.destinations.{SPARULDestination, Quad}
 import java.util.logging.{Level, Logger}
 import scala.util.parsing.json._
-import collection.mutable.{ArrayBuffer, HashMap}
+import collection.mutable.{ListBuffer, ArrayBuffer, HashMap}
 import collection.mutable
 import org.dbpedia.extraction.live.core.LiveOptions
+import org.dbpedia.extraction.destinations.formatters.SPARULFormatter
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 
 /**
  * This class retrieves the stored cache for a resource extraction.
@@ -62,6 +64,14 @@ class JSONCache(pageID: Long, pageTitle: String) {
     quads
   }
 
+  def getAllHashedTriples(): Seq[Quad] = {
+    var quads = ListBuffer[Quad]()
+    for(key: String <- extractorTriples.keySet.seq) {
+      quads ++= getTriplesForExtractor(key)
+    }
+    quads.distinct
+  }
+
   def setExtractorJSON(extractor: String, json: String) {
     extractorJSON += (extractor -> json)
   }
@@ -115,6 +125,19 @@ class JSONCache(pageID: Long, pageTitle: String) {
 object JSONCache {
   def setErrorOnCache(pageID: Long, error: Int) {
     JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateError, Array[String]("" + error, "" + pageID))
+  }
+
+  def deleteCacheItem(pageID: Long, policies: Array[Policy] = null) {
+    val cache = new JSONCache(pageID, "")
+    val triples = cache.getAllHashedTriples()
+
+    val dest = new SPARULDestination(false, policies)
+
+    dest.open
+    dest.write("dummy extractor","dummy hash", Seq(), triples, Seq())
+    dest.close
+
+    JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheDelete, Array[String]("" + pageID))
   }
 }
 
