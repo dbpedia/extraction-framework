@@ -22,20 +22,16 @@ object LiveExtractionManager
   var oaiID : String = "";
   var Num=1;
 
-  def extractFromPage(Element :scala.xml.Elem)
-    {
-      val articlesSource = XMLSource.fromOAIXML(Element);
-      extract(articlesSource);
-    }
 
   def extractFromPageID(pageID :Long, apiURL :String, landCode :String)
     {
-      val articlesSource = WikiSource.fromPageIDs(List(pageID), new URL(apiURL), Language.apply(landCode));
-      extract(articlesSource);
+      val lang = Language.apply(landCode)
+      val articlesSource = WikiSource.fromPageIDs(List(pageID), new URL(apiURL), lang);
+      extract(articlesSource,lang);
     }
 
-  def extract(source :Source)
+  def extract(source :Source, language: Language)
       {
-        LiveExtractionConfigLoader.startExtraction(source);
+        LiveExtractionConfigLoader.startExtraction(source, language);
       }
 }
