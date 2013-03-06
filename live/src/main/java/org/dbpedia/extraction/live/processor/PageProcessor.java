@@ -22,19 +22,12 @@ public class PageProcessor extends Thread{
     private static Logger logger = Logger.getLogger(PageProcessor.class);
     private volatile boolean keepRunning = true;
 
-
-    public PageProcessor(String name, int priority){
-        this.setPriority(priority);
-        this.setName("PageProcessor_" + name);
-        start();
-    }
-
     public PageProcessor(String name){
-        this(name, Thread.NORM_PRIORITY);
+        this.setName("PageProcessor_" + name);
     }
 
     public PageProcessor(){
-        this("PageProcessor", Thread.NORM_PRIORITY);
+        this("PageProcessor");
     }
 
     public void startProcessor() {

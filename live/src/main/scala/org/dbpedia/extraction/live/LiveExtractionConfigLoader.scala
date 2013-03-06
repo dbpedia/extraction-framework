@@ -98,11 +98,14 @@ object LiveExtractionConfigLoader
   {
     // In case of single threading
     //Extractor
-    if(extractors==null || reloadOntologyAndMapping)
-    {
-      extractors = LoadOntologyAndMappings(articlesSource, language);
-      logger.log(Level.INFO, "Ontology and mappings reloaded");
-      reloadOntologyAndMapping = false;
+    if(extractors==null || reloadOntologyAndMapping) {
+      this.synchronized {
+        if(extractors==null || reloadOntologyAndMapping) {
+          extractors = LoadOntologyAndMappings(articlesSource, language);
+          logger.log(Level.INFO, "Ontology and mappings reloaded");
+          reloadOntologyAndMapping = false;
+        }
+      }
     }
 
     //var liveDest : LiveUpdateDestination = null;
