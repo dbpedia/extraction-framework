@@ -37,6 +37,7 @@ public class Main {
     private volatile static Statistics statistics = null;
 
     private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
+    private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
 
     public static void authenticate(final String username, final String password) {
         Authenticator.setDefault(new Authenticator() {
@@ -65,6 +66,11 @@ public class Main {
                 30, 5000,500,30000,
                 LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
 
+        int threads = Integer.parseInt(LiveOptions.options.get("ProcessingThreads"));
+        for (int i=0; i < threads ; i++){
+            processors.add( new PageProcessor("N" + (i+1)));
+        }
+
         statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
                 DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());
 
@@ -77,7 +83,8 @@ public class Main {
             for (Feeder f: feeders)
                 f.startFeeder();
 
-            PageProcessor processor = new PageProcessor("Page processing thread", 8);
+            for (PageProcessor p: processors)
+                p.startProcessor();
 
             Publisher publisher = new Publisher("Publisher", 4);
             PublishedDataCompressor compressor = new PublishedDataCompressor("PublishedDataCompressor", Thread.MIN_PRIORITY);
@@ -99,6 +106,9 @@ public class Main {
             for (Feeder f: feeders)
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
+
+            for (PageProcessor p: processors)
+                p.stopProcessor();
 
             // Statistics
             if (statistics != null) statistics.stopStatistics();

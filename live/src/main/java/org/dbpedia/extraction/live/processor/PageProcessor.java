@@ -20,10 +20,12 @@ import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 public class PageProcessor extends Thread{
 
     private static Logger logger = Logger.getLogger(PageProcessor.class);
+    private volatile boolean keepRunning = true;
+
 
     public PageProcessor(String name, int priority){
         this.setPriority(priority);
-        this.setName(name);
+        this.setName("PageProcessor_" + name);
         start();
     }
 
@@ -34,6 +36,17 @@ public class PageProcessor extends Thread{
     public PageProcessor(){
         this("PageProcessor", Thread.NORM_PRIORITY);
     }
+
+    public void startProcessor() {
+        if (keepRunning == true) {
+            start();
+        }
+    }
+
+    public void stopProcessor() {
+        keepRunning = false;
+    }
+
 
     private void processPage(long pageID){
         try{
@@ -49,7 +62,7 @@ public class PageProcessor extends Thread{
 
 
     public void run(){
-        while(true){
+        while(keepRunning){
             try{
                 LiveQueueItem page = LiveQueue.take();
                 // If a mapping page set extractor to reload mappings and ontology
