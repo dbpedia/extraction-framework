@@ -18,10 +18,11 @@ import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.live.job.LiveExtractionJob
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
 import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.dump.extract.{PolicyParser, ExtractionJob}
+import org.dbpedia.extraction.dump.extract.{PolicyParser}
 import org.dbpedia.extraction.wikiparser.Namespace
 import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.live.storage.JSONCache
+import org.dbpedia.extraction.live.queue.LiveQueueItem
 
 
 /**
@@ -87,6 +88,13 @@ object LiveExtractionConfigLoader
     articlesDump
   }
 
+  def extractPage(item: LiveQueueItem, apiURL :String, landCode :String): Boolean =
+  {
+    val lang = Language.apply(landCode)
+    val articlesSource = WikiSource.fromPageIDs(List(item.getItemID), new URL(apiURL), lang);
+    startExtraction(articlesSource,lang)
+  }
+
 
   /**
    * Loads the configuration and creates extraction jobs for all configured languages.
@@ -94,7 +102,7 @@ object LiveExtractionConfigLoader
    * @param configFile The configuration file
    * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
    */
-  def startExtraction(articlesSource : Source, language : Language):Unit =
+  def startExtraction(articlesSource : Source, language : Language):Boolean =
   {
     // In case of single threading
     //Extractor
@@ -110,6 +118,7 @@ object LiveExtractionConfigLoader
 
     //var liveDest : LiveUpdateDestination = null;
     val parser = WikiParser.getInstance()
+    var complete = false;
 
     for (cpage <- articlesSource.map(parser))
     {
@@ -160,10 +169,12 @@ object LiveExtractionConfigLoader
         });
 
         extractorRestrictDest.close
+        complete = true
 
       }
 
     }
+    complete
   }
 
   //This method loads the ontology and mappings
