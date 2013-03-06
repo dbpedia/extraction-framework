@@ -110,11 +110,11 @@ public abstract class Feeder extends Thread {
 
     /* This function should be overwritten by sub classes */
     protected void handleFeedItem(LiveQueueItem item) {
-        addPageIDtoQueue(item, -1);
+        addPageIDtoQueue(item);
     }
 
-    protected void addPageIDtoQueue(LiveQueueItem item, long millis) {
-        item.setStatQueueAdd(millis);
+    protected void addPageIDtoQueue(LiveQueueItem item) {
+        item.setStatQueueAdd(-1);
         item.setPriority(this.queuePriority);
         LiveQueue.add(item);
         latestProcessDate = item.getModificationDate();

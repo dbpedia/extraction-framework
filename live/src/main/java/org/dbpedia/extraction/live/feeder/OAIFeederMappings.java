@@ -42,9 +42,8 @@ public class OAIFeederMappings extends OAIFeeder {
         String title = item.getItemName().substring(item.getItemName().indexOf(":")+1);
 
         //if (!item.isDeleted()) {
-            long now = System.currentTimeMillis();
             for (Object newItem: JavaConversions.asJavaIterable(MappingAffectedPagesHelper.GetMappingPages(title))) {
-                addPageIDtoQueue(new LiveQueueItem((Long) newItem, latestProcessDate), now);
+                addPageIDtoQueue(new LiveQueueItem((Long) newItem, item.getModificationDate()));
             }
         //} else {
             // TODO find which template the deleted infobox was referring to
