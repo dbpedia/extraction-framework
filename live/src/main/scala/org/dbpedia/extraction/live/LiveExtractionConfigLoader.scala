@@ -62,6 +62,14 @@ object LiveExtractionConfigLoader
 
   val commonsSource = null;
 
+  val policies = {
+    val prop: Properties = new Properties
+    val policy: String = LiveOptions.options.get("uri-policy.main")
+    prop.setProperty("uri-policy.main", policy)
+    val policyParser = new PolicyParser(prop)
+    policyParser.parsePolicy(policy)
+  }
+
   def reload(t : Long) =
   {
     if (t > ontologyAndMappingsUpdateTime)
@@ -128,18 +136,13 @@ object LiveExtractionConfigLoader
         cpage.title.namespace == Namespace.Category)
       {
 
-        // TODO move it out of here
-        val prop: Properties = new Properties
-        val policy: String = LiveOptions.options.get("uri-policy.main")
-        prop.setProperty("uri-policy.main", policy)
-        val policyParser = new PolicyParser(prop)
-        val policies = policyParser.parsePolicy(policy)
+
 
         val liveCache = new JSONCache(cpage.id, cpage.title.decoded)
 
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
-        destList += new SPARULDestination(true) // add triples
-        destList += new SPARULDestination(false) // delete triples
+        destList += new SPARULDestination(true, policies) // add triples
+        destList += new SPARULDestination(false, policies) // delete triples
         destList += new JSONCacheUpdateDestination(liveCache)
         destList += new PublisherDiffDestination(policies)
         destList += new LoggerDestination(cpage.id, cpage.title.decoded) // Just to log extraction results
