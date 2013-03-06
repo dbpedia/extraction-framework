@@ -2,7 +2,6 @@ package org.dbpedia.extraction.live.processor;
 
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
-import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
@@ -67,16 +66,14 @@ public class PageProcessor extends Thread{
                 if (page.getPriority() == LiveQueuePriority.MappingPriority) {
                     LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
                 }
-                processPage(page);
-                //logger.info("Page #" + page.getItemName() + " has been removed and processed");
+                if (page.isDeleted() == true)
+                    JSONCache.deleteCacheItem(page.getItemID(),LiveExtractionConfigLoader.policies());
+                else
+                    processPage(page);
             }
             catch (Exception exp){
                 logger.error("Failed to process page");
             }
-
-
         }
-
     }
-
 }
