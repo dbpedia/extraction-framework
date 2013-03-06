@@ -30,7 +30,7 @@ object DBpediaSQLQueries {
   }
 
   def getJSONCacheUpdateError: String = {
-    "UPDATE DBPEDIALIVE_CACHE SET error = ?, updated = now() WHERE pageID = ? "
+    "UPDATE DBPEDIALIVE_CACHE SET error = ?, updated = now(), timesUpdated = timesUpdated + 1 WHERE pageID = ? "
   }
 
 }
