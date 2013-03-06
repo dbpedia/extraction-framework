@@ -33,7 +33,7 @@ import org.dbpedia.extraction.live.storage.JSONCache
  * the required triples from the wikipage.
  */
 
-object LiveExtractionConfigLoader extends ActionListener
+object LiveExtractionConfigLoader
 {
   //This number is used for filling the recentlyUpdatedInstances array which is in Main class, this array is used
   //for statistics
@@ -41,7 +41,6 @@ object LiveExtractionConfigLoader extends ActionListener
 
   //    private var config : Config = null;
   private var extractors : List[RootExtractor] = null;
-  private var CurrentJob : ExtractionJob = null;
   private var reloadOntologyAndMapping = true;
   private var ontologyAndMappingsUpdateTime : Long = 0;
   val logger = Logger.getLogger("LiveExtractionConfigLoader");
@@ -61,11 +60,6 @@ object LiveExtractionConfigLoader extends ActionListener
   println ("COMMONS SOURCE = " + LiveOptions.options.get("commonsDumpsPath"));
 
   val commonsSource = null;
-
-  def actionPerformed(e: ActionEvent) =
-  {
-    reloadOntologyAndMapping = true;
-  }
 
   def reload(t : Long) =
   {
@@ -100,52 +94,7 @@ object LiveExtractionConfigLoader extends ActionListener
    * @param configFile The configuration file
    * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
    */
-  def startExtraction(articlesSource : Source) : Unit =
-  {
-    //        if(config.multihreadingMode)
-    if(LiveConfigReader.multihreadingMode)
-    {
-      val extractionJobs = convertExtractorMapToScalaMap(LiveConfigReader.extractorClasses).keySet.view.map(createExtractionJob(articlesSource))
-
-      for(extractionJob <- extractionJobs)
-      {
-        extractionJob.start();
-      }
-    }
-    else
-    {
-      startSingleThreadExtraction(articlesSource)(Language.apply(LiveOptions.options.get("language")));
-    }
-  }
-
-  def isMultithreading():Boolean =
-  {
-    //    config.multihreadingMode;
-    LiveConfigReader.multihreadingMode;
-  }
-
-  /**
-   * Creates an extraction job for a specific language.
-   */
-
-  private def createExtractionJob(articlesSource : Source)(language : Language) : LiveExtractionJob =
-  {
-
-    // In case of multi-threading
-    //Extractor
-    if(extractors == null || reloadOntologyAndMapping)
-    {
-      extractors = LoadOntologyAndMappings(articlesSource, language);
-      logger.log(Level.INFO, "Ontology and mappings reloaded");
-      reloadOntologyAndMapping = false;
-    }
-
-    new LiveExtractionJob(null, articlesSource, language, "Extraction Job for " + language.wikiCode + " Wikipedia");
-
-  }
-
-
-  private def startSingleThreadExtraction(articlesSource : Source)(language : Language):Unit =
+  def startExtraction(articlesSource : Source, language : Language):Unit =
   {
     // In case of single threading
     //Extractor
@@ -166,11 +115,6 @@ object LiveExtractionConfigLoader extends ActionListener
         cpage.title.namespace == Namespace.File ||
         cpage.title.namespace == Namespace.Category)
       {
-        //liveDest = new LiveUpdateDestination(cpage.title, language.locale.getLanguage(),
-        //  cpage.id.toString)
-
-        //liveDest.setPageID(cpage.id);
-        //liveDest.setOAIID(LiveExtractionManager.oaiID);
 
         // TODO move it out of here
         val prop: Properties = new Properties
@@ -195,7 +139,6 @@ object LiveExtractionConfigLoader extends ActionListener
         val extractorRestrictDest = new ExtractorRestrictDestination ( LiveConfigReader.extractors.get(Language.apply(language.isoCode)), extractorDiffDest)
 
         extractorRestrictDest.open
-        //val startTime = System.currentTimeMillis
 
         //Add triples generated from active extractors
         extractors.foreach(extractor => {
@@ -209,29 +152,12 @@ object LiveExtractionConfigLoader extends ActionListener
                 logger.log(Level.FINE, "Error in " + extractor.extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
                 Seq()
               }
-
             }
-
           extractorRestrictDest.write(extractor.extractor.getClass().getName(), "", RequiredGraph, Seq(), Seq())
-          //liveDest.write(RequiredGraph, extractor.extractor.getClass().getName());
         });
 
         extractorRestrictDest.close
 
-        //Remove triples generated from purge extractors
-        //liveDest.removeTriplesForPurgeExtractors();
-
-        //Keep triples generated from keep extractors
-        //liveDest.retainTriplesForKeepExtractors();
-
-        //liveDest.close();
-
-        //logger.log(Level.INFO, "page number " + cpage.id + " has been processed in " + (System.currentTimeMillis() - startTime));
-
-        //Updating information needed for statistics
-
-        // TODO: Remove statistics for now, we have triple store for basic statistics
-        //StatisticsData.addItem(cpage.title.decoded, strDBppage,strWikipage,0, System.currentTimeMillis)
       }
 
     }
