@@ -103,12 +103,12 @@ public class Main {
         try {
             logger.warn("Stopping DBpedia Live components");
 
+            for (PageProcessor p: processors)
+                p.stopProcessor();
+
             for (Feeder f: feeders)
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
-
-            for (PageProcessor p: processors)
-                p.stopProcessor();
 
             // Statistics
             if (statistics != null) statistics.stopStatistics();
