@@ -49,7 +49,8 @@ extends Extractor
       
       val objectUri = language.resourceUri.append(link.destination.decodedWithNamespace)
 
-      quads += quad(subjectUri, property, objectUri, link.sourceUri)
+      if (! objectUri.equals(subjectUri))
+        quads += quad(subjectUri, property, objectUri, link.sourceUri)
     }
 
     quads
