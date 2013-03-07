@@ -132,7 +132,7 @@ object LiveExtractionConfigLoader
     {
 
       if(cpage.title.namespace == Namespace.Main ||
-        cpage.title.namespace == Namespace.File ||
+        cpage.title.namespace == Namespace.Template ||
         cpage.title.namespace == Namespace.Category)
       {
 
@@ -174,6 +174,11 @@ object LiveExtractionConfigLoader
         extractorRestrictDest.close
         complete = true
 
+      }
+      else
+      {
+        // If not in the allowed namespace, delete cache (if exists)
+        JSONCache.deleteCacheOnlyItem(cpage.id)
       }
 
     }
