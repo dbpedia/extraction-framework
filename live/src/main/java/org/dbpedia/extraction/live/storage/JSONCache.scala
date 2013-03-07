@@ -137,6 +137,10 @@ object JSONCache {
     dest.write("dummy extractor","dummy hash", Seq(), triples, Seq())
     dest.close
 
+    deleteCacheOnlyItem(pageID)
+  }
+
+  def deleteCacheOnlyItem(pageID: Long) {
     JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheDelete, Array[String]("" + pageID))
   }
 }
