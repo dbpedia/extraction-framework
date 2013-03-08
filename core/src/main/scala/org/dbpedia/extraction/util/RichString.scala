@@ -3,8 +3,9 @@ package org.dbpedia.extraction.util
 import java.util.Locale
 import java.lang.StringBuilder
 import scala.util.matching.Regex
-import RichString.wrapString
+import RichString._
 import java.util.regex.{Pattern,Matcher}
+import java.util.Arrays.{sort,binarySearch}
 
 /**
  * Defines additional methods on strings, which are missing in the standard library.
@@ -12,6 +13,11 @@ import java.util.regex.{Pattern,Matcher}
 object RichString
 {
     implicit def wrapString(str : String) = new RichString(str)
+
+    private val dontCapitalize = Array('ß', 'ﬁ', 'ﬀ', 'ﬂ', 'ﬃ', 'ﬄ', 'ﬅ', 'ﬆ')
+    
+    // sort array so we can use binary search
+    { sort(dontCapitalize) }
 }
 
 /**
@@ -21,15 +27,26 @@ class RichString(str : String)
 {
     /**
      * Converts the first character in this String to upper case using the rules of the given Locale.
-     * Does not convert a 'ß' at the start of the string to 'SS'.
-     * TODO: there are probably other cases like 'ß' that should not be capitalized
+     * Does NOT convert the following chars at the start of the string:
+     * 'ß' -> "SS"
+     * 'ﬁ' -> "FI"
+     * 'ﬀ' -> "FF"
+     * 'ﬂ' -> "FL"
+     * 'ﬃ' -> "FFI"
+     * 'ﬄ' -> "FFL"
+     * 'ﬅ' -> "ST"
+     * 'ﬆ' -> "ST"
+     * 
+     * TODO: there are probably many other cases. Maybe we should use Character.toUpperCase()
+     * instead of String.toUpperCase()? What would MediaWiki do?
      * 
      * @param locale The locale used to capitalize the String
      */
     def capitalize(locale : Locale) : String = {
-      if (str.isEmpty) "" 
-      else if (str.startsWith("ß")) str 
-      else str.head.toString.toUpperCase(locale) + str.tail
+      if (str.isEmpty) return ""
+      val first = str(0)
+      if (binarySearch(dontCapitalize, first) >= 0) return str
+      first.toString.toUpperCase(locale) + str.substring(1)
     }
 
     /**
