@@ -208,6 +208,7 @@ object Language extends (String => Language)
       "vep" -> "fi",
       "vls" -> "nl",           // West Flemish
       "war" -> "tl",           // Waray-Waray language
+      "wikidata" -> "en",       // use en for ease
       "wuu" -> "zh",           // Wu Chinese
       "xal" -> "ru",           // Kalmyk
       "xmf" -> "ka",
@@ -243,6 +244,11 @@ object Language extends (String => Language)
    * Wikimedia commons
    */
   val Commons = map("commons")
+
+  /**
+   * Wikimedia Wikidata
+   */
+  val Wikidata = map("wikidata")
   
   /**
    * Gets a language object for a Wikipedia language code.
