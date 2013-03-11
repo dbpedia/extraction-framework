@@ -89,7 +89,7 @@ public abstract class Feeder extends Thread {
     * */
     public synchronized void setLatestProcessedDate(String date) {
         if (date == null || date.equals(""))
-            date = defaultStartTime;
+            date = latestProcessDate;
 
         Files.createFile(latestProcessDateFile, date);
     }
