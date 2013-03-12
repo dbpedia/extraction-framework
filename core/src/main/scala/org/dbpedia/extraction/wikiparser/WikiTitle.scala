@@ -124,6 +124,8 @@ object WikiTitle
         //Check if it contains a language
         if (parts.length > 1)
         {
+          // TODO Wikidata has a namespace "Wikidata"
+          // TODO temporary fix, this way interwiki links to wikidata will not work
           val p0 = parts(0).trim.toLowerCase(sourceLanguage.locale)
           if (!p0.equals("wikidata"))
           {
