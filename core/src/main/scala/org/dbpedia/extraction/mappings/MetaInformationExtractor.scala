@@ -20,7 +20,6 @@ class MetaInformationExtractor( context : {
   def language : Language } ) extends Extractor
 {
   val modificationDatePredicate = context.ontology.properties("dct:modified")
-  val extractionDatePredicate = context.ontology.properties("dct:dateSubmitted")
   val editLinkPredicate = "http://dbpedia.org/meta/editlink"
   val revisionPredicate = "http://dbpedia.org/meta/revision"
 
@@ -37,7 +36,7 @@ class MetaInformationExtractor( context : {
     val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, modificationDatePredicate,
       formatTimestamp(page.timestamp), page.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
 
-    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, extractionDatePredicate,
+    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
       formatCurrentTimestamp, page.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
 
     val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, editLinkPredicate,
