@@ -55,7 +55,7 @@ object GenerateWikiSettings {
     // Note: langlist is sometimes not correctly sorted (done by hand), but no problem for us.
     val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
     var languages = try source.getLines.toList finally source.close
-    languages = "mappings" :: "commons" :: languages
+    languages = "mappings" :: "commons" :: "wikidata" :: languages
     
     // newInstance is expensive, call it only once
     val factory = XMLInputFactory.newInstance
@@ -88,7 +88,7 @@ object GenerateWikiSettings {
         case ioex: IOException => {
           val error = ioex.getMessage
           errors(code) = error
-          println(" - "+error)
+          println(" - Error: "+error)
         }
       }
     }

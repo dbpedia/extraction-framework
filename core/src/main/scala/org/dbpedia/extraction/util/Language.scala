@@ -48,6 +48,7 @@ class Language private(val wikiCode : String, val isoCode: String)
     val baseUri = wikiCode match {
       case "commons" => "http://commons.wikimedia.org"
       case "mappings" => "http://mappings.dbpedia.org"
+      case "wikidata" => "http://www.wikidata.org"
       case _ => "http://"+wikiCode+".wikipedia.org"
     }
     
