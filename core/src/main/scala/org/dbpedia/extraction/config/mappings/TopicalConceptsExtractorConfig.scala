@@ -8,9 +8,9 @@ object TopicalConceptsExtractorConfig
                                "Artigo principal", // for pt.wikipedia.org
                                "AP",               // for es.wikipedia.org
                                "Article principal",// for fr.wikipedia.org
+                               "Catmore",          // for el.wikipedia.org
                                "Nagusia",          // for eu.wikipedia.org
                                "Основная статья по теме категории", "Catmain", //for ru.wikipedia.org
                                "Infocat", "Infocatm" // for ca.wikipedia.org
                             )
-
 }
