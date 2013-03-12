@@ -124,12 +124,16 @@ object WikiTitle
         //Check if it contains a language
         if (parts.length > 1)
         {
-            for (lang <- Language.get(parts(0).trim.toLowerCase(sourceLanguage.locale)))
+          val p0 = parts(0).trim.toLowerCase(sourceLanguage.locale)
+          if (!p0.equals("wikidata"))
+          {
+            for (lang <- Language.get(p0))
             {
-                 language = lang
-                 isInterLanguageLink = ! leadingColon
-                 parts = parts.tail
+              language = lang
+              isInterLanguageLink = ! leadingColon
+              parts = parts.tail
             }
+          }
         }
 
         //Check if it contains a namespace
