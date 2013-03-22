@@ -23,18 +23,20 @@ import java.lang.StringBuilder
  * Example calls:
  * 
  * URIs and N-Triple escaping
- * ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-links.nt.gz freebase-datadump-quadruples.tsv.bz2
+ * ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-rdf-<date>.gz freebase-links.nt.gz
  * 
  * IRIs and Turtle escaping
- * ../run CreateFreebaseLinks true true /data/dbpedia .ttl.gz freebase-links.ttl.gz freebase-datadump-quadruples.tsv.bz2
+ * ../run CreateFreebaseLinks true true /data/dbpedia .ttl.gz freebase-rdf-<date>.gz freebase-links.ttl.gz
+ *
+ * See https://developers.google.com/freebase/data for a reference of the Freebase RDF data dumps
  */
 object CreateFreebaseLinks
 {
   /**
    * We look for lines that contain wikipedia key entries.
-   * Freebase calls these four columns source, property, destination and value. 
    */
-  private val WikipediaKey = """^([^\s]+)\t/type/object/key\t/wikipedia/en\t([^\s]+)$""".r
+  // private val WikipediaKey = """^([^\s]+)\t/type/object/key\t/wikipedia/en\t([^\s]+)$""".r
+  private val WikipediaKey = """^ns:([^\s]+)\tns:type\.object\.key\t"/wikipedia/en/([^\s]+)"\.$""".r
   
   /**
    * Lines in relevant DBpedia N-Triples / Turtle files start with this prefix.
@@ -93,9 +95,9 @@ object CreateFreebaseLinks
     // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
     val suffix = args(3)
     
-    // Freebase input file, may be .gz or .bz2 zipped 
-    // must have the format described on http://wiki.freebase.com/wiki/Data_dumps#Quad_dump
-    // Latest: http://download.freebase.com/datadumps/latest/freebase-datadump-quadruples.tsv.bz2      
+    // Freebase RDF input file, may be .gz or .bz2 zipped
+    // must have the format described on https://developers.google.com/freebase/data
+    // Latest: http://download.freebaseapps.com
     val inFile = new File(args(4))
     
     // output file, may be .gz or .bz2 zipped 
@@ -171,8 +173,8 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
               }
             }
             
-            if (! mid.startsWith("/m/")) throw new IllegalArgumentException(line)
-            val rdfMid = "m."+mid.substring(3)
+            if (! mid.startsWith("m.")) throw new IllegalArgumentException(line)
+            val rdfMid = mid
             if (dbpedia.contains(rdfKey)) {
               writer.write(Prefix+rdfKey+Infix+rdfMid+Suffix)
               links += 1
