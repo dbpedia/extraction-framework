@@ -3,13 +3,14 @@ package org.dbpedia.extraction.config.mappings
 
 object InfoboxExtractorConfig
 {
-    val ignoreTemplates = Set("redirect", "seealso", "see_also", "main", "cquote", "chess diagram", "ipa", "lang")
+    val ignoreTemplates = Set("redirect", "seealso", "see_also", "main", "cquote", "chess diagram", "ipa", "lang", "تحويل")
 
-    val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r)
+    val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r, "اقتباس.*".r)
 
     val ignoreProperties = Map (
         "en"-> Set("image", "image_photo"),
-        "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
+        "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης"),
+        "ar"-> Set("صورة")
     )
     
     // TODO: i18n
