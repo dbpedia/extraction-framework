@@ -19,7 +19,7 @@ object Import {
     
     val baseDir = new File(args(0))
     val tablesFile = new File(args(1))
-    val server = args(2)
+    val url = args(2)
     val requireComplete = args(3).toBoolean
     
     // Use all remaining args as keys or comma or whitespace separated lists of keys
@@ -35,8 +35,7 @@ object Import {
     
     val info = new Properties()
     info.setProperty("allowMultiQueries", "true")
-    info.setProperty("characterEncoding", "UTF-8")
-    val conn = new com.mysql.jdbc.Driver().connect("jdbc:mysql://"+server+"/", info)
+    val conn = new com.mysql.jdbc.Driver().connect(url, info)
     try {
       for (language <- languages) {
         
@@ -47,7 +46,7 @@ object Import {
         
         val database = finder.wikiName
         
-        println("importing pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server "+server)
+        println("importing pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server URL "+url)
         
         val source = XMLSource.fromFile(file, language, title => namespaces.contains(title.namespace))
         
@@ -60,7 +59,7 @@ object Import {
         
         new Importer(conn).process(source)
         
-        println("imported  pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server "+server)
+        println("imported  pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server URL "+url)
       }
     }
     finally conn.close()
