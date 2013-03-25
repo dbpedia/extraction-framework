@@ -16,6 +16,8 @@ object DateTimeParserConfig
         "pl" -> Map("stycznia"->1,"lutego"->2,"marca"->3,"kwietnia"->4,"maja"->5,"czerwca"->6,"lipca"->7,"sierpnia"->8,"września"->9,"października"->10,"listopada"->11,"grudnia"->12),
         "pt" -> Map("janeiro"->1,"fevereiro"->2,"março"->3,"abril"->4,"maio"->5,"junho"->6,"julho"->7,"agosto"->8,"setembro"->9,"outubro"->10,"novembro"->11,"dezembro"->12,
                     "jan"->1,"fev"->2,"mar"->3,"abr"->4,"mai"->5,"jun"->6,"jul"->7,"ago"->8,"set"->9,"out"->10,"nov"->11,"dez"->12),
+        "ar" -> Map("جانفي"->1,"فيفري"->2,"مارس"->3,"أفريل"->4,"ماي"->5,"جوان"->6,"جويلية"->7,"أوت"->8,"سبتمبر"->9,"أكتوبر"->10,"نوفمبر"->11,"ديسمبر"->12,
+                   "يناير"->1,"فبراير"->2,"أبريل"->4,"مايو"->5,"يونيو"->6,"يوليو"->7,"يوليوز"->7,"أغسطس"->8,"غشت"->8,"شتنبر"->9,"نونبر"->11,"دجنبر"->12),
         "ru" -> Map("январь"->1,"февраль"->2,"март"->3,"апрель"->4,"май"->5,"июнь"->6,"июль"->7,"август"->8,"сентябрь"->9,"октябрь"->10,"ноябрь"->11,"декабрь"->12,
                     "янв"->1,"фев"->2,"мар"->3,"апр"->4,"май"->5,"июн"->6,"июл"->7,"авг"->8,"сен"->9,"окт"->10,"ноя"->11,"дек"->12)
     )
@@ -27,6 +29,7 @@ object DateTimeParserConfig
     //TODO matches anything e.g. 20 bd
     val eraStrMap =  Map(
         "en" -> Map("BCE" -> -1, "BC" -> -1, "CE"-> 1, "AD"-> 1, "AC"-> -1, "CE"-> 1),
+        "ar" -> Map("ق.م." -> -1, "م." -> 1),
         "el" -> Map("ΠΧ"-> -1, "Π\\.Χ\\."-> -1, "Π\\.Χ"-> -1 , "ΜΧ"-> 1 , "Μ\\.Χ\\."-> 1, "Μ\\.Χ"-> 1),
         "it" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "PEV"-> -1, "P\\.E\\.V\\."-> -1, "EV"-> 1, "E\\.V\\." -> 1),
         "nl" -> Map("v\\.Chr\\." -> -1, "n\\.C\\."-> 1, "v\\.C\\." -> -1, "n\\.Chr\\."-> 1, "voor Chr\\." -> -1, "na Chr\\."-> 1), 
@@ -74,7 +77,14 @@ object DateTimeParserConfig
         ),
 
         //alphabetically for other languages
-
+        "ar" -> Map(
+            "تاريخ الازدياد و العمر"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age"
+            "تاريخ الوفاة و العمر"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date and age"
+            "تاريخ الولادة"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date"
+            "تاريخ الوفاة"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date"
+            "تاريخ الازدياد"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Bda"
+            "تاريخ البدأ"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3") //"Dob"
+        ),
         "ca" -> Map(
             "Edat"                  -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "Data naixement i edat" -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),

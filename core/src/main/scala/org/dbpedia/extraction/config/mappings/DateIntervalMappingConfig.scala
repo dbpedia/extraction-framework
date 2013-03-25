@@ -6,6 +6,7 @@ object DateIntervalMappingConfig
     val presentMap = Map(
         "en" -> "present",
         "ga" -> "inniu",
-        "pl" -> "nadal"
+        "pl" -> "nadal",
+        "ar" -> "الحاضر"
     )
 }

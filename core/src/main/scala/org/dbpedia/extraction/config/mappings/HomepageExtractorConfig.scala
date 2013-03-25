@@ -18,7 +18,8 @@ object HomepageExtractorConfig
         "nl" -> Set("website", "homepage", "hoofdpagina", "webpagina", "web", "site"),
         "pl" -> Set("web", "strona"),
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
-        "ru" -> Set("сайт")
+        "ru" -> Set("сайт"),
+        "ar" -> Set("الموقع", "الصفحة الرسمية", "موقع", "الصفحة الرئيسية", "صفحة ويب", "موقع ويب")
     )
 
     val supportedLanguages = propertyNamesMap.keySet
@@ -33,10 +34,11 @@ object HomepageExtractorConfig
         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
         "ga" -> "(?:Naisc sheachtracha|Nasc sheachtrach)",
         "it" -> "Collegamenti esterni",
-        "nl" -> "(?:Externe links|Externe link)",
+        "nl" -> "Externe links?",
         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
-        "ru" -> "Ссылки"
+        "ru" -> "Ссылки",
+        "ar" -> "وصلات خارجية"
     )
 
     val officialMap = Map(
@@ -52,7 +54,9 @@ object HomepageExtractorConfig
         "nl" -> "(?:officieel|officiële)",
         "pl" -> "oficjalna",
         "pt" -> "oficial",
-        "ru" -> "официальный"
+        "ru" -> "официальный",
+        "ar" -> "رسمي"
+        // TODO: ru is from http://translate.google.com/#en|ru|official%20homepage - check if it's correct
     )
 
 }
