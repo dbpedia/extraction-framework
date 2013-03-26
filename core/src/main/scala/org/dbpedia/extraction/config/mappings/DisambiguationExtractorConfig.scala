@@ -4,6 +4,7 @@ package org.dbpedia.extraction.config.mappings
 object DisambiguationExtractorConfig
 {
     val disambiguationTitlePartMap = Map(
+         "ar" -> " (توضيح)",
          "ca" -> " (desambiguació)",
          "de" -> " (Begriffsklärung)",
          "el" -> " (αποσαφήνιση)",
@@ -16,7 +17,6 @@ object DisambiguationExtractorConfig
          "nl" -> " (doorverwijspagina)", //TODO make it Set() for multiple “nl” -> " (disambigueren)"
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
-         "ru" -> " (значения)",
-         "ar" -> " (توضيح)"
+         "ru" -> " (значения)"
     )
 }
