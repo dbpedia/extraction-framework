@@ -7,6 +7,8 @@ object FlagTemplateParserConfig
 {
     private val langCodeMap = Map(
         //english (en) as _
+        // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
+        // Don't change this else if you know how it is done.
         "ar" ->
           Map(
             "AFG"->"أفغانستان",
