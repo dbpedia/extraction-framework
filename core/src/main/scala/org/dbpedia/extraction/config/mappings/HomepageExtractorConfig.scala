@@ -6,6 +6,7 @@ object HomepageExtractorConfig
     //TODO rewritten as map, need to clean up per language
     //private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
     val propertyNamesMap = Map(
+        "ar" -> Set("الموقع", "الصفحة الرسمية", "موقع", "الصفحة الرئيسية", "صفحة ويب", "موقع ويب"),
         "ca" -> Set("pàgina", "web", "lloc"),
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
@@ -18,13 +19,13 @@ object HomepageExtractorConfig
         "nl" -> Set("website", "homepage", "hoofdpagina", "webpagina", "web", "site"),
         "pl" -> Set("web", "strona"),
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
-        "ru" -> Set("сайт"),
-        "ar" -> Set("الموقع", "الصفحة الرسمية", "موقع", "الصفحة الرئيسية", "صفحة ويب", "موقع ويب")
+        "ru" -> Set("сайт")
     )
 
     val supportedLanguages = propertyNamesMap.keySet
 
     val externalLinkSectionsMap = Map(
+        "ar" -> "وصلات خارجية",
         "ca" -> "(?:Enllaços externs|Enllaço extern)",
         "de" -> "Weblinks?",
         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
@@ -37,11 +38,11 @@ object HomepageExtractorConfig
         "nl" -> "Externe links?",
         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
-        "ru" -> "Ссылки",
-        "ar" -> "وصلات خارجية"
+        "ru" -> "Ссылки"
     )
 
     val officialMap = Map(
+        "ar" -> "رسمي",
         "ca" -> "oficial",
         "de" -> "offizielle",
         "el" -> "(?:επίσημος|επίσημη)",
@@ -54,8 +55,7 @@ object HomepageExtractorConfig
         "nl" -> "(?:officieel|officiële)",
         "pl" -> "oficjalna",
         "pt" -> "oficial",
-        "ru" -> "официальный",
-        "ar" -> "رسمي"
+        "ru" -> "официальный"
         // TODO: ru is from http://translate.google.com/#en|ru|official%20homepage - check if it's correct
     )
 
