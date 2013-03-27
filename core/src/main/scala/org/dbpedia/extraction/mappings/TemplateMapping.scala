@@ -44,7 +44,7 @@ extends Mapping[TemplateNode]
                 //Create a new instance URI. If the mappings has no corresponding property and the current mapping is a subclass or superclass
                 //of all previous mappings then do not create a new instance
                 val instanceUri =
-                  if ( (!createCorrespondingProperty) && isSubOrSuperClass(mapToClass, pageClasses) ) subjectUri
+                  if ( (!createCorrespondingProperty) && isSubclassOrSuperclass(mapToClass, pageClasses) ) subjectUri
                   else generateUri(subjectUri, node, pageContext)
 
                 //Add ontology instance
@@ -151,22 +151,22 @@ extends Mapping[TemplateNode]
   /**
    * Checks if current class is a subclass or supoerclass of a list
    *
-   * @param cl The class we have to check for sub/super-classsing
-   * @param clSeq the list of classes we have to check against
+   * @param mappedClass The class we have to check for sub/super-classsing
+   * @param existingClasses the list of classes we have to check against
    *
    * @return True if a subclass The generated URI
    */
-    private def isSubOrSuperClass(cl : OntologyClass, clSeq : Seq[OntologyClass]) : Boolean =
+    private def isSubclassOrSuperclass(mappedClass : OntologyClass, existingClasses : Seq[OntologyClass]) : Boolean =
     {
 
-        for (i <- clSeq)
+        for (c <- existingClasses)
         {
             //if a class is contained in the others related classes (hierarchy) it is a subclass or superclass
             //it must be true for all items so we return false if not true for one item
             //we exclude the external class definitions like schema.org
-            if ( ! (i.isExternalClass ||
-              i.relatedClasses.contains(cl) ||
-              cl.relatedClasses.contains(i) ))
+            if ( ! (c.isExternalClass ||
+              c.relatedClasses.contains(mappedClass) ||
+              mappedClass.relatedClasses.contains(c) ))
                 return false
         }
         true
