@@ -3,9 +3,9 @@ package org.dbpedia.extraction.config.dataparser
 object DateTimeParserConfig
 {
     //names of months; have to be in lower-case
-    // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
-    // Don't change this else if you know how it is done.
     val monthsMap = Map(
+        // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
+        // Don't change this else if you know how it is done.
         "ar" -> Map("جانفي"->1,"فيفري"->2,"مارس"->3,"أفريل"->4,"ماي"->5,"جوان"->6,"جويلية"->7,"أوت"->8,"سبتمبر"->9,"أكتوبر"->10,"نوفمبر"->11,"ديسمبر"->12,
           "يناير"->1,"فبراير"->2,"أبريل"->4,"مايو"->5,"يونيو"->6,"يوليو"->7,"يوليوز"->7,"أغسطس"->8,"غشت"->8,"شتنبر"->9,"نونبر"->11,"دجنبر"->12),
         "de" -> Map("januar"->1,"februar"->2,"märz"->3,"maerz"->3,"april"->4,"mai"->5,"juni"->6,"juli"->7,"august"->8,"september"->9,"oktober"->10,"november"->11,"dezember"->12),
