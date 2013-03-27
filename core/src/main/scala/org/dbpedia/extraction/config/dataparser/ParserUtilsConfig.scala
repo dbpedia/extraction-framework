@@ -3,9 +3,6 @@ package org.dbpedia.extraction.config.dataparser
 
 object ParserUtilsConfig
 {
-    // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
-    // Don't change this else if you know how it is done.
-
     val scalesMap = Map(
         "en" -> Map(
             "thousand" -> 3,
@@ -17,6 +14,8 @@ object ParserUtilsConfig
             "trillion" -> 12,
             "quadrillion" -> 15
         ),
+        // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
+        // Don't change this else if you know how it is done.
         "ar" -> Map(
           "عشرة" -> 1,
           "مئة" -> 2,
