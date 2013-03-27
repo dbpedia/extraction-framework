@@ -5,7 +5,11 @@ object HomepageExtractorConfig
 {
     //TODO rewritten as map, need to clean up per language
     //private val propertyNames = Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web", "ιστότοπος", "Ιστοσελίδα", "strona", "página", "sitio", "pagina", "сайт")
+    // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
+    // Don't change this else if you know how it is done.
+
     val propertyNamesMap = Map(
+        "ar" -> Set("الموقع", "الصفحة الرسمية", "موقع", "الصفحة الرئيسية", "صفحة ويب", "موقع ويب"),
         "ca" -> Set("pàgina", "web", "lloc"),
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
@@ -24,6 +28,7 @@ object HomepageExtractorConfig
     val supportedLanguages = propertyNamesMap.keySet
 
     val externalLinkSectionsMap = Map(
+        "ar" -> "وصلات خارجية",
         "ca" -> "(?:Enllaços externs|Enllaço extern)",
         "de" -> "Weblinks?",
         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
@@ -40,6 +45,7 @@ object HomepageExtractorConfig
     )
 
     val officialMap = Map(
+        "ar" -> "رسمي",
         "ca" -> "oficial",
         "de" -> "offizielle",
         "el" -> "(?:επίσημος|επίσημη)",
