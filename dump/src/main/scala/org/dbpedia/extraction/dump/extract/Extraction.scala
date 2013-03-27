@@ -14,6 +14,7 @@ object Extraction
 
   def main(args : Array[String]): Unit =
   {
+    //Note: /wiktionary/src/main/scala/org/dbpedia/extraction/mappings/Starter.scala calls this function and needs 4 params total 
     require(args != null && args.length == 1 && args(0).nonEmpty, "missing argument: config file name")
     
     // Load properties
