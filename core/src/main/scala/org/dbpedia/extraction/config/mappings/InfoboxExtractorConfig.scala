@@ -3,12 +3,16 @@ package org.dbpedia.extraction.config.mappings
 
 object InfoboxExtractorConfig
 {
-    val ignoreTemplates = Set("redirect", "seealso", "see_also", "main", "cquote", "chess diagram", "ipa", "lang")
+    // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
+    // Don't change this else if you know how it is done.
+
+    val ignoreTemplates = Set("redirect", "seealso", "see_also", "main", "cquote", "chess diagram", "ipa", "lang", "تحويل")
 
     val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r)
 
     val ignoreProperties = Map (
         "en"-> Set("image", "image_photo"),
+        "ar"-> Set("صورة"),
         "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
     )
     
