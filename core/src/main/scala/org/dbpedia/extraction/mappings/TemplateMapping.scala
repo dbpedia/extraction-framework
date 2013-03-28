@@ -43,7 +43,7 @@ extends Mapping[TemplateNode]
             {
                 //Check if the root template has been mapped to the corresponding Class of this template
                 val createCorrespondingProperty = correspondingClass != null && correspondingProperty != null && pageClasses.contains(correspondingClass)
-                `
+
                 // If we have more than one of the same template it means that we want to create multiple resources. See for example
                 // the pages: enwiki:Volkswagen_Golf , enwiki:List_of_Playboy_Playmates_of_2012
                 val pageTemplateSet = pageNode.getAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION).getOrElse(Seq.empty)
@@ -169,17 +169,19 @@ extends Mapping[TemplateNode]
     private def isSubclassOrSuperclass(mappedClass : OntologyClass, existingClasses : Seq[OntologyClass]) : Boolean =
     {
 
-        for (c <- existingClasses)
-        {
-            //if a class is contained in the others related classes (hierarchy) it is a subclass or superclass
-            //it must be true for all items so we return false if not true for one item
-            //we exclude the external class definitions like schema.org
-            if ( ! (c.isExternalClass ||
-              c.relatedClasses.contains(mappedClass) ||
-              mappedClass.relatedClasses.contains(c) ))
-                return false
-        }
-        true
+      if (existingClasses.size == 0) return false
+      // NOTE: Minor Hack, in existing classes the first element is always to lowest in hierarchy
+      val existingClass = existingClasses.head
+
+      //if a class is contained in the others related classes (hierarchy) it is a subclass or superclass
+      //it must be true for all items so we return false if not true for one item
+      //we exclude the external class definitions like schema.org
+      if ( ! (existingClass.isExternalClass ||
+        existingClass.relatedClasses.contains(mappedClass) ||
+        mappedClass.relatedClasses.contains(existingClass) ))
+          return false
+
+      true
     }
 }
 
