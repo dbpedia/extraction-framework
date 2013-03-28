@@ -33,6 +33,9 @@ extends Mapping[TemplateNode]
                 //Add ontology instance
                 createInstance(graph, subjectUri, node)
 
+                //Save existing template (this is the first one)
+                node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, Seq(node.title.decoded))
+
                 //Extract properties
                 graph ++= mappings.flatMap(_.extract(node, subjectUri, pageContext))
             }
@@ -40,11 +43,18 @@ extends Mapping[TemplateNode]
             {
                 //Check if the root template has been mapped to the corresponding Class of this template
                 val createCorrespondingProperty = correspondingClass != null && correspondingProperty != null && pageClasses.contains(correspondingClass)
+                `
+                // If we have more than one of the same template it means that we want to create multiple resources. See for example
+                // the pages: enwiki:Volkswagen_Golf , enwiki:List_of_Playboy_Playmates_of_2012
+                val pageTemplateSet = pageNode.getAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION).getOrElse(Seq.empty)
+                val templateAlreadyExists = pageTemplateSet.contains(node.title.decoded)
+                if (!templateAlreadyExists)
+                  node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, pageTemplateSet ++ Seq(node.title.decoded))
 
                 //Create a new instance URI. If the mappings has no corresponding property and the current mapping is a subclass or superclass
                 //of all previous mappings then do not create a new instance
                 val instanceUri =
-                  if ( (!createCorrespondingProperty) && isSubclassOrSuperclass(mapToClass, pageClasses) ) subjectUri
+                  if ( (!createCorrespondingProperty) && (!templateAlreadyExists) && isSubclassOrSuperclass(mapToClass, pageClasses) ) subjectUri
                   else generateUri(subjectUri, node, pageContext)
 
                 //Add ontology instance
@@ -84,7 +94,7 @@ extends Mapping[TemplateNode]
         node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
 
         // Set missing annotations in the PageNode
-        node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, pageClasses ++ diffSet)
+        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, pageClasses ++ diffSet)
 
         // Create missing type statements
         for (cls <- diffSet)
@@ -176,6 +186,6 @@ extends Mapping[TemplateNode]
 private object TemplateMapping
 {
     val CLASS_ANNOTATION = new AnnotationKey[Seq[OntologyClass]]
-    
+    val TEMPLATELIST_ANNOTATION = new AnnotationKey[Seq[String]]
     val INSTANCE_URI_ANNOTATION = new AnnotationKey[String]
 }
