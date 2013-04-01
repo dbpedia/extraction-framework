@@ -11,6 +11,12 @@ import java.util.Properties
 
 import PolicyParser._
 
+/**
+ * Methods to parse the lines for 'uri-policy' and 'format' in extraction
+ * configuration files. These lines determine how extracted triples are
+ * formatted when they are written to files. For details see
+ * https://github.com/dbpedia/extraction-framework/wiki/Serialization-format-properties
+ */
 object PolicyParser {
   
   /**
