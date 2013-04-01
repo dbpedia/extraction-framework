@@ -105,7 +105,7 @@ extends Mapping[TemplateNode]
         node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
 
         // Set missing annotations in the PageNode
-        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, pageClasses ++ diffSet)
+        node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, pageClasses ++ diffSet)
 
         // Create missing type statements
         for (cls <- diffSet)
