@@ -24,10 +24,10 @@ import collection.mutable
  * Example calls:
  * 
  * URIs and N-Triple escaping
- * ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-rdf-<date>.gz freebase-links.nt.gz
+ * ../run CreateFreebaseLinks /data/dbpedia .nt.gz freebase-rdf-<date>.gz freebase-links.nt.gz
  * 
  * IRIs and Turtle escaping
- * ../run CreateFreebaseLinks true true /data/dbpedia .ttl.gz freebase-rdf-<date>.gz freebase-links.ttl.gz
+ * ../run CreateFreebaseLinks /data/dbpedia .ttl.gz freebase-rdf-<date>.gz freebase-links.ttl.gz
  *
  * See https://developers.google.com/freebase/data for a reference of the Freebase RDF data dumps
  */
@@ -56,7 +56,7 @@ object CreateFreebaseLinks
    * http://rdf.freebase.com/ns/m.0p_47
    * Freebase RDF also uses this URI syntax for resources that do not have an id.
    * Besides, finding the id for a DBpedia title would require more code, since the mid 
-   * is on the same line as the Wikipedia title, but the id is on a different line.
+   * is on the same line as the Wikipedia page id, but the id is on a different line.
    */
   private val Infix = "> <http://www.w3.org/2002/07/owl#sameAs> <http://rdf.freebase.com/ns/"
     
@@ -67,25 +67,19 @@ object CreateFreebaseLinks
   
   def main(args : Array[String]) {
     
-    // do the DBpedia files use IRIs or URIs?
-    val iris = args(0).toBoolean
-    
-    // do the DBpedia files use Turtle or N-Triples escaping?
-    val turtle = args(1).toBoolean
-    
     // base dir of DBpedia files
-    val dir = new File(args(2))
+    val dir = new File(args(0))
     
     // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
-    val suffix = args(3)
+    val suffix = args(1)
     
     // Freebase RDF input file, may be .gz or .bz2 zipped
     // must have the format described on https://developers.google.com/freebase/data
     // Latest: http://download.freebaseapps.com
-    val inFile = new File(args(4))
+    val inFile = new File(args(2))
     
     // output file, may be .gz or .bz2 zipped 
-    val outFile = new File(args(5))
+    val outFile = new File(args(3))
     
     val finder = new Finder[File](dir, Language.English, "wiki")
     val date = finder.dates("download-complete").last
@@ -111,7 +105,7 @@ object CreateFreebaseLinks
     // wiki_page_id -> wiki_title
     var finalDbpediaMap : Map[String, String] = dbpediaMap.map(_.swap).toMap[String, String]
 
-    new CreateFreebaseLinks(iris, turtle).findLinks(finalDbpediaMap, inFile, outFile)
+    findLinks(finalDbpediaMap, inFile, outFile)
   }
 
   private def collectUris(map: mutable.Map[String, String], file: File, add: Boolean): Unit = {
@@ -148,11 +142,7 @@ object CreateFreebaseLinks
     err.println("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
-}
-
-class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
-    
-  def findLinks(dbpedia: Map[String, String], inFile: File, outFile: File): Unit = {
+  private def findLinks(dbpedia: Map[String, String], inFile: File, outFile: File): Unit = {
     val start = System.nanoTime
     err.println("Searching for Freebase links in "+inFile+"...")
     var lines = 0
