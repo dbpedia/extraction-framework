@@ -44,10 +44,10 @@ object WikiPage {
    * TODO: use <contributor> / <ip> if contributorID == 0
    */
   def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source : String) = {
-    <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"
+    <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.6/ http://www.mediawiki.org/xml/export-0.6.xsd"
-      version="0.6"
+      xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.8/ http://www.mediawiki.org/xml/export-0.8.xsd"
+      version="0.8"
       xml:lang={title.language.isoCode}>
       <page>
         <title>{title.decodedWithNamespace}</title>
@@ -56,11 +56,12 @@ object WikiPage {
         <revision>
           <id>{formatLong(revision)}</id>
           <timestamp>{formatTimestamp(timestamp)}</timestamp>
-          <text xml:space="preserve">{source}</text>
           <contributor>
-                  <username>{contributorName}</username>
-                  <id>{formatLong(contributorID)}</id>
-                </contributor>
+            <username>{contributorName}</username>
+            <id>{formatLong(contributorID)}</id>
+          </contributor>
+          <text xml:space="preserve">{source}</text>
+
         </revision>
       </page>
     </mediawiki>

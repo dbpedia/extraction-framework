@@ -68,7 +68,7 @@ public class WikipediaDumpParser
   private XMLStreamReader _reader;
   
   /** 
-   * This parser is currently only compatible with the 0.6 format.
+   * This parser is currently only compatible with the 0.8 format.
    * TODO: make the parser smarter, ignore elements that are not present in older formats.
    */
   private final String _namespace = null;  //"http://www.mediawiki.org/xml/export-0.8/";
