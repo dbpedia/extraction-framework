@@ -2,7 +2,7 @@
 
 ## Documentation
 
-Documentation is available from the [official DBpedia website](http://dbpedia.org) and the [DBpedia Github wiki](https://github.com/dbpedia/dbpedia/wiki).
+Documentation is available from the [official DBpedia website](http://dbpedia.org) and the [DBpedia Github wiki](https://github.com/dbpedia/extraction-framework/wiki).
 
 
 ## License
