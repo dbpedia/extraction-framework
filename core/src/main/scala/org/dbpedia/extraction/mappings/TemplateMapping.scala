@@ -41,20 +41,31 @@ extends Mapping[TemplateNode]
             }
             case Some(pageClasses) => //This page already has a root template.
             {
-                //Check if the root template has been mapped to the corresponding Class of this template
-                val createCorrespondingProperty = correspondingClass != null && correspondingProperty != null && pageClasses.contains(correspondingClass)
+                // Depending on the following conditions we create a new "blank node" or append the data to the main resource.
+                // Example case for creating new resources are the pages: enwiki:Volkswagen_Golf , enwiki:List_of_Playboy_Playmates_of_2012
+                // Example case we could append to existing class are where we have to different mapped templates that one is a subclass of the other
 
+                // Condition #1
+                //  Check if the root template has been mapped to the corresponding Class of this template
+                //  If the mapping already defines a corresponding class & propery then we should create a new resource
+                val condition1_createCorrespondingProperty = correspondingClass != null && correspondingProperty != null && pageClasses.contains(correspondingClass)
+
+                // Condition #2
                 // If we have more than one of the same template it means that we want to create multiple resources. See for example
                 // the pages: enwiki:Volkswagen_Golf , enwiki:List_of_Playboy_Playmates_of_2012
                 val pageTemplateSet = pageNode.getAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION).getOrElse(Seq.empty)
-                val templateAlreadyExists = pageTemplateSet.contains(node.title.decoded)
-                if (!templateAlreadyExists)
+                val condition2_template_exists = pageTemplateSet.contains(node.title.decoded)
+                if (!condition2_template_exists)
                   node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, pageTemplateSet ++ Seq(node.title.decoded))
 
-                //Create a new instance URI. If the mappings has no corresponding property and the current mapping is a subclass or superclass
-                //of all previous mappings then do not create a new instance
+                // Condition #3
+                // The current mapping is a subclass or a superclass of all previous classes
+                // We test this with isSubclassOrSuperclass(mapToClass, pageClasses)
+                // might not need to evaluate it at all if conditions #1 & #2 are not met
+
+                // If all above conditions are met then use the main resource, otherwise create a new one
                 val instanceUri =
-                  if ( (!createCorrespondingProperty) && (!templateAlreadyExists) && isSubclassOrSuperclass(mapToClass, pageClasses) ) subjectUri
+                  if ( (!condition1_createCorrespondingProperty) && (!condition2_template_exists) && isSubclassOrSuperclass(mapToClass, pageClasses) ) subjectUri
                   else generateUri(subjectUri, node, pageContext)
 
                 //Add ontology instance
@@ -65,7 +76,7 @@ extends Mapping[TemplateNode]
                   createInstance(graph, instanceUri, node)
                 }
 
-                if (createCorrespondingProperty)
+                if (condition1_createCorrespondingProperty)
                 {
                     //Connect new instance to the instance created from the root template
                     graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
