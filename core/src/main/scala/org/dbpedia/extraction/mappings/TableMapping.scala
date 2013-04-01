@@ -238,7 +238,7 @@ extends Mapping[TableNode]
         var correspondingInstance : Option[String] = None
         for( correspondingTemplate <- lastPageTemplate;
              templateClasses <- correspondingTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
-             templateClass <- templateClasses;
+             templateClass <- templateClasses.relatedClasses;
              if correspondingClass == null || templateClass.name == correspondingClass.name )
         {
             //TODO if correspondingClass == null check if templateClass subClassOf correspondingProperty.range
