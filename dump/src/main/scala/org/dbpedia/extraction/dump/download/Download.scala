@@ -64,7 +64,7 @@ object Download extends DownloadConfig
       val todo = keys.from(key)
       println("done: "+done.size+" - "+done.mkString(","))
       println("todo: "+todo.size+" - "+keys.from(key).mkString(","))
-      new LanguageDownloader(baseUrl, baseDir, key, languages(key), downloader).downloadDates(dateRange, dumpCount)
+      new LanguageDownloader(baseUrl, baseDir, wikiName, key, languages(key), downloader).downloadDates(dateRange, dumpCount)
     }
   }
   
