@@ -9,6 +9,8 @@ import org.dbpedia.extraction.wikiparser.Namespace
 
 class DownloadConfig
 {
+  var wikiName = "wiki"
+
   var baseUrl: URL = null
   
   var baseDir: File = null
@@ -51,6 +53,7 @@ class DownloadConfig
     for (a <- args; arg = a.trim) arg match
     {
       case Ignored(_) => // ignore
+      case Arg("wikiName", wikiNameConfig) => wikiName = wikiNameConfig
       case Arg("base-url", url) => baseUrl = toURL(if (url endsWith "/") url else url+"/", arg) // must have slash at end
       case Arg("base-dir", path) => baseDir = resolveFile(dir, path)
       case Arg("download-dates", range) => dateRange = parseDateRange(range, arg)

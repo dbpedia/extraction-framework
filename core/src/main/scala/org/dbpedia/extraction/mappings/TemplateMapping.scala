@@ -33,18 +33,38 @@ extends Mapping[TemplateNode]
                 //Add ontology instance
                 createInstance(graph, subjectUri, node)
 
+                //Save existing template (this is the first one)
+                node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, Seq(node.title.decoded))
+
                 //Extract properties
                 graph ++= mappings.flatMap(_.extract(node, subjectUri, pageContext))
             }
-            case Some(pageClasses) => //This page already has a root template.
+            case Some(pageClass) => //This page already has a root template.
             {
-                //Check if the root template has been mapped to the corresponding Class of this template
-                val createCorrespondingProperty = correspondingClass != null && correspondingProperty != null && pageClasses.contains(correspondingClass)
+                // Depending on the following conditions we create a new "blank node" or append the data to the main resource.
+                // Example case for creating new resources are the pages: enwiki:Volkswagen_Golf , enwiki:List_of_Playboy_Playmates_of_2012
+                // Example case we could append to existing class are where we have to different mapped templates that one is a subclass of the other
 
-                //Create a new instance URI. If the mappings has no corresponding property and the current mapping is a subclass or superclass
-                //of all previous mappings then do not create a new instance
+                // Condition #1
+                //  Check if the root template has been mapped to the corresponding Class of this template
+                //  If the mapping already defines a corresponding class & propery then we should create a new resource
+                val condition1_createCorrespondingProperty = correspondingClass != null && correspondingProperty != null && pageClass.relatedClasses.contains(correspondingClass)
+
+                // Condition #2
+                // If we have more than one of the same template it means that we want to create multiple resources. See for example
+                // the pages: enwiki:Volkswagen_Golf , enwiki:List_of_Playboy_Playmates_of_2012
+                val pageTemplateSet = pageNode.getAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION).getOrElse(Seq.empty)
+                val condition2_template_exists = pageTemplateSet.contains(node.title.decoded)
+                if (!condition2_template_exists)
+                  node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, pageTemplateSet ++ Seq(node.title.decoded))
+
+                // Condition #3
+                // The current mapping is a subclass or a superclass of previous class
+                val condition3_subclass = mapToClass.relatedClasses.contains(pageClass) || pageClass.relatedClasses.contains(mapToClass)
+
+                // If all above conditions are met then use the main resource, otherwise create a new one
                 val instanceUri =
-                  if ( (!createCorrespondingProperty) && isSubOrSuperClass(mapToClass, pageClasses) ) subjectUri
+                  if ( (!condition1_createCorrespondingProperty) && (!condition2_template_exists) && condition3_subclass ) subjectUri
                   else generateUri(subjectUri, node, pageContext)
 
                 //Add ontology instance
@@ -55,7 +75,7 @@ extends Mapping[TemplateNode]
                   createInstance(graph, instanceUri, node)
                 }
 
-                if (createCorrespondingProperty)
+                if (condition1_createCorrespondingProperty)
                 {
                     //Connect new instance to the instance created from the root template
                     graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
@@ -71,20 +91,18 @@ extends Mapping[TemplateNode]
 
     private def createMissingTypes(graph: Buffer[Quad], uri : String, node : Node): Unit =
     {
-        val pageClasses = node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION) match {
-          case Some(classes) => classes
-          case None => Seq.empty
-        }
+        val pageClass = node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION).getOrElse(throw new IllegalArgumentException("missing class Annotation"))
 
         // Compute missing types, i.e. the set difference between the page classes and this TemplateMapping relatedClasses
-        val diffSet = mapToClass.relatedClasses.filterNot(c => pageClasses.contains(c))
+        val diffSet = mapToClass.relatedClasses.filterNot(c => pageClass.relatedClasses.contains(c))
 
         // Set annotations
-        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass.relatedClasses);
+        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass);
         node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
 
-        // Set missing annotations in the PageNode
-        node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, pageClasses ++ diffSet)
+        // Set new annotation (if new map is a subclass)
+        if (mapToClass.relatedClasses.contains(pageClass))
+          node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass)
 
         // Create missing type statements
         for (cls <- diffSet)
@@ -97,12 +115,12 @@ extends Mapping[TemplateNode]
         val classes = mapToClass.relatedClasses
 
         //Set annotations
-        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
+        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass);
         node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
 
         if(node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION).isEmpty)
         {
-            node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
+            node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass);
         }
         
         //Create type statements
@@ -147,35 +165,11 @@ extends Mapping[TemplateNode]
 
         pageContext.generateUri(subjectUri, nameProperty)
     }
-
-  /**
-   * Checks if current class is a subclass or supoerclass of a list
-   *
-   * @param cl The class we have to check for sub/super-classsing
-   * @param clSeq the list of classes we have to check against
-   *
-   * @return True if a subclass The generated URI
-   */
-    private def isSubOrSuperClass(cl : OntologyClass, clSeq : Seq[OntologyClass]) : Boolean =
-    {
-
-        for (i <- clSeq)
-        {
-            //if a class is contained in the others related classes (hierarchy) it is a subclass or superclass
-            //it must be true for all items so we return false if not true for one item
-            //we exclude the external class definitions like schema.org
-            if ( ! (i.isExternalClass ||
-              i.relatedClasses.contains(cl) ||
-              cl.relatedClasses.contains(i) ))
-                return false
-        }
-        true
-    }
 }
 
 private object TemplateMapping
 {
-    val CLASS_ANNOTATION = new AnnotationKey[Seq[OntologyClass]]
-    
+    val CLASS_ANNOTATION = new AnnotationKey[OntologyClass]
+    val TEMPLATELIST_ANNOTATION = new AnnotationKey[Seq[String]]
     val INSTANCE_URI_ANNOTATION = new AnnotationKey[String]
 }

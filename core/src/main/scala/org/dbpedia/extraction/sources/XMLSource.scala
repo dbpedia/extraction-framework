@@ -13,6 +13,7 @@ import java.io.Reader
  *  http://www.mediawiki.org/xml/export-0.4
  *  http://www.mediawiki.org/xml/export-0.5
  *  http://www.mediawiki.org/xml/export-0.6
+ *  http://www.mediawiki.org/xml/export-0.8
  *  etc.
  */
 object XMLSource
