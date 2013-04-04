@@ -47,7 +47,13 @@ import WiktionaryPageExtractor._ //companion
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */
 
-class WiktionaryPageExtractor( context : {} ) extends Extractor {
+class WiktionaryPageExtractor(
+  context : {
+   def redirects : Redirects
+   def language : Language
+  }
+)
+extends Extractor {
   override val datasets = Set(datasetURI) //new Dataset("wiktionary"))
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =

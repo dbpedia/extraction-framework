@@ -4,6 +4,10 @@ object DateTimeParserConfig
 {
     //names of months; have to be in lower-case
     val monthsMap = Map(
+        // For "ar" configuration, right-to-left rendering may seem like a bug, but it's not.
+        // Don't change this unless you know how it is done.
+        "ar" -> Map("جانفي"->1,"فيفري"->2,"مارس"->3,"أفريل"->4,"ماي"->5,"جوان"->6,"جويلية"->7,"أوت"->8,"سبتمبر"->9,"أكتوبر"->10,"نوفمبر"->11,"ديسمبر"->12,
+          "يناير"->1,"فبراير"->2,"أبريل"->4,"مايو"->5,"يونيو"->6,"يوليو"->7,"يوليوز"->7,"أغسطس"->8,"غشت"->8,"شتنبر"->9,"نونبر"->11,"دجنبر"->12),
         "de" -> Map("januar"->1,"februar"->2,"märz"->3,"maerz"->3,"april"->4,"mai"->5,"juni"->6,"juli"->7,"august"->8,"september"->9,"oktober"->10,"november"->11,"dezember"->12),
         "el" -> Map("ιανουάριος"->1,"φεβρουάριος"->2,"μάρτιος"->3,"απρίλιος"->4,"μάϊος"->5,"μάιος"->5,"ιούνιος"->6,"ιούλιος"->7,"αύγουστος"->8,"σεπτέμβριος"->9,"οκτώβριος"->10,"νοέμβριος"->11,"δεκέμβριος"->12,
                     "ιανουαρίου"->1,"φεβρουαρίου"->2,"μαρτίου"->3,"απριλίου"->4,"μαΐου"->5,"μαίου"->5,"ιουνίου"->6,"ιουλίου"->7,"αυγούστου"->8,"σεπτεμβρίου"->9,"οκτωβρίου"->10,"νοεμβρίου"->11,"δεκεμβρίου"->12),
@@ -27,21 +31,24 @@ object DateTimeParserConfig
     //TODO matches anything e.g. 20 bd
     val eraStrMap =  Map(
         "en" -> Map("BCE" -> -1, "BC" -> -1, "CE"-> 1, "AD"-> 1, "AC"-> -1, "CE"-> 1),
+        // For "ar" configuration, right-to-left rendering may seem like a bug, but it's not.
+        // Don't change this unless you know how it is done.
+        "ar" -> Map("ق.م." -> -1, "م." -> 1),
         "el" -> Map("ΠΧ"-> -1, "Π\\.Χ\\."-> -1, "Π\\.Χ"-> -1 , "ΜΧ"-> 1 , "Μ\\.Χ\\."-> 1, "Μ\\.Χ"-> 1),
+        "es" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
         "it" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "PEV"-> -1, "P\\.E\\.V\\."-> -1, "EV"-> 1, "E\\.V\\." -> 1),
         "nl" -> Map("v\\.Chr\\." -> -1, "n\\.C\\."-> 1, "v\\.C\\." -> -1, "n\\.Chr\\."-> 1, "voor Chr\\." -> -1, "na Chr\\."-> 1), 
-        "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
-        "es" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1)
+        "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1)
     )
 
     //suffixes for 1st, 2nd etc. (maybe add this to infobox extractor RankRegex val)
     val cardinalityRegexMap = Map(
         "en" -> "st|nd|rd|th",
         "el" -> "η|ης",
+        "es" -> "°|\\.°|°\\.",
         "it" -> "°|\\.°|°\\.",
         "nl" -> "ste|de|e",
-        "pt" -> "°|\\.°|°\\.",
-        "es" -> "°|\\.°|°\\."
+        "pt" -> "°|\\.°|°\\."
     )
 
     //specifies for a template name (lower-cased) the property keys of year, month and day
@@ -73,8 +80,18 @@ object DateTimeParserConfig
                                           "elseYear" -> "4", "elseMonth"-> "5", "elseDay" -> "6")
         ),
 
-        //alphabetically for other languages
-
+        // alphabetically for other languages
+        
+        // For "ar" configuration, right-to-left rendering may seem like a bug, but it's not.
+        // Don't change this unless you know how it is done.
+        "ar" -> Map(
+          "تاريخ الازدياد و العمر"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age"
+          "تاريخ الوفاة و العمر"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date and age"
+          "تاريخ الولادة"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date"
+          "تاريخ الوفاة"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date"
+          "تاريخ الازدياد"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+          "تاريخ البدأ"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
         "ca" -> Map(
             "Edat"                  -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "Data naixement i edat" -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),

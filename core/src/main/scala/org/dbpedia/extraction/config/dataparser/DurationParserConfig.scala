@@ -37,6 +37,28 @@ object DurationParserConfig
             "years" -> "year",
             "yr" -> "year"
         ),
+        // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
+        // Don't change this else if you know how it is done.
+        "ar" -> Map(
+          "ثانية" -> "second",
+          "ثا" -> "second",
+          "ثواني" -> "second",
+          "دقيقة" -> "minute",
+          "د" -> "minute",
+          "دقائق" -> "minute",
+          "ساعة" -> "hour",
+          "سا" -> "hour",
+          "ساعات" -> "hour",
+          "يوم" -> "day",
+          "أيام" -> "day",
+          "شهر" -> "month",
+          "شهور" -> "month",
+          "سنة" -> "year",
+          "عام" -> "year",
+          "سنوات" -> "year",
+          "أعوام" -> "year",
+          "حول" -> "year"
+        ),
         "de" -> Map(
             "Sekunde" -> "second",
             "Sekunden" -> "second",

@@ -1,5 +1,5 @@
 # download and extraction target dir
-base-dir=/home/release/wikipedia
+base-dir=sample-xml-dumps
 
 # Source file. If source file name ends with .gz or .bz2, it is unzipped on the fly. 
 # Must exist in the directory xxwiki/yyyymmdd and have the prefix xxwiki-yyyymmdd-
@@ -9,39 +9,40 @@ base-dir=/home/release/wikipedia
 # source=pages-articles.xml
 
 # alternatives:
+source=pages-articles.xml
 # source=pages-articles.xml.bz2
 # source=pages-articles.xml.gz
 
 # use only directories that contain a 'download-complete' file? Default is false.
-require-download-complete=true
+# require-download-complete=true
 
-languages=en,es,fr,pt
+# List of languages or article count ranges, e.g. 'en,de,fr' or '10000-20000' or '10000-', or '@mappings'
+languages=wikidata
 
 # unqualified extractor class names are prefixed by org.dbpedia.extraction.mappings.
 
-extractors=TopicalConceptsExtractor
-
-namespaces=category
+extractors=WikidataExtractor
 
 # if ontology and mapping files are not given or do not exist, download info from mappings.dbpedia.org
 ontology=../ontology.xml
 mappings=../mappings
 
-# Serialization URI policies and file formats. Quick guide:
-# uri-policy keys: uri, generic, xml-safe
-# uri-policy position modifiers: -subjects, -predicates, -objects, -datatypes, -contexts
-# uri-policy values: comma-separated languages or '*' for all languages
-# format values: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
-# See http://wiki.dbpedia.org/SerializationFormatProperties for details.
+# URI policies. Allowed flags: uri, generic, xml-safe. Each flag may have one of the suffixes
+# -subjects, -predicates, -objects, -datatype, -context to match only URIs in a certain position. 
+# Without a suffix, a flag matches all URI positions.
 
-# For backwards compatibility, en uses generic URIs. All others use local IRIs.
 uri-policy.uri=uri:en; generic:en; xml-safe-predicates:*
 uri-policy.iri=generic:en; xml-safe-predicates:*
 
+# File formats. Allowed flags: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
+# May be followed by a semicolon and a URI policy name. If format name ends with .gz or .bz2, files
+# are zipped on the fly.
+
 # NT is unreadable anyway - might as well use URIs for en
-format.nt.gz=n-triples;uri-policy.uri
-format.nq.gz=n-quads;uri-policy.uri
+# format.nt.gz=n-triples;uri-policy.uri
+# format.nq.gz=n-quads;uri-policy.uri
 
 # Turtle is much more readable - use nice IRIs for all languages
-format.ttl.gz=turtle-triples;uri-policy.iri
-format.tql.gz=turtle-quads;uri-policy.iri
+# format.ttl.gz=turtle-triples;uri-policy.iri
+# format.tql.gz=turtle-quads;uri-policy.iri
+format.ttl=turtle-triples;uri-policy.iri

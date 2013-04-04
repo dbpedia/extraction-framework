@@ -16,6 +16,7 @@ import scala.Console.err
 import IOUtils.{readLines,write}
 import java.util.regex.Matcher
 import java.lang.StringBuilder
+import collection.mutable
 
 /**
  * Create a dataset file with owl:sameAs links to Freebase.
@@ -23,20 +24,21 @@ import java.lang.StringBuilder
  * Example calls:
  * 
  * URIs and N-Triple escaping
- * ../run CreateFreebaseLinks false false /data/dbpedia .nt.gz freebase-rdf-<date>.gz freebase-links.nt.gz
+ * ../run CreateFreebaseLinks /data/dbpedia .nt.gz freebase-rdf-<date>.gz freebase-links.nt.gz
  * 
  * IRIs and Turtle escaping
- * ../run CreateFreebaseLinks true true /data/dbpedia .ttl.gz freebase-rdf-<date>.gz freebase-links.ttl.gz
+ * ../run CreateFreebaseLinks /data/dbpedia .ttl.gz freebase-rdf-<date>.gz freebase-links.ttl.gz
  *
  * See https://developers.google.com/freebase/data for a reference of the Freebase RDF data dumps
  */
 object CreateFreebaseLinks
 {
   /**
-   * We look for lines that contain wikipedia key entries.
+   * We look for lines that contain wikipedia key entries. Specifically we are retrieving English Wikipedia Page Ids
    */
-  // private val WikipediaKey = """^([^\s]+)\t/type/object/key\t/wikipedia/en\t([^\s]+)$""".r
-  private val WikipediaKey = """^ns:([^\s]+)\tns:type\.object\.key\t"/wikipedia/en/([^\s]+)"\.$""".r
+  private val FreebaseWikipediaId = """^ns:([^\s]+)\tns:type\.object\.key\t"/wikipedia/en_id/([^\s]+)"\.$""".r
+  private val WikipediaResId = """^<http://dbpedia\.org/resource/([^\s]+)> .* "(\d+)"\^\^<http://www\.w3\.org/2001/XMLSchema\#integer> \.$""".r
+  private val DBpediaResId = """^<http://dbpedia\.org/resource/([^\s]+)> .*""".r
   
   /**
    * Lines in relevant DBpedia N-Triples / Turtle files start with this prefix.
@@ -54,7 +56,7 @@ object CreateFreebaseLinks
    * http://rdf.freebase.com/ns/m.0p_47
    * Freebase RDF also uses this URI syntax for resources that do not have an id.
    * Besides, finding the id for a DBpedia title would require more code, since the mid 
-   * is on the same line as the Wikipedia title, but the id is on a different line.
+   * is on the same line as the Wikipedia page id, but the id is on a different line.
    */
   private val Infix = "> <http://www.w3.org/2002/07/owl#sameAs> <http://rdf.freebase.com/ns/"
     
@@ -62,46 +64,22 @@ object CreateFreebaseLinks
    * Closing part of N-Triples / Turtle lines. 
    */
   private val Suffix = "> .\n"
-    
-  /**
-   * Freebase escapes most non-alphanumeric characters in keys by a dollar sign followed by the 
-   * hexadecimal UTF-16 code of the character. See http://wiki.freebase.com/wiki/MQL_key_escaping .
-   */
-  private val KeyEscape = """\$(\p{XDigit}{4})""".r
-
-  /**
-   * Append character for hexadecimal UTF-16 code to given string builder.
-   */
-  private def unescapeKey(sb: StringBuilder, matcher: Matcher): Unit = {
-    sb.append(hexToInt(matcher.group(1)).toChar) // may be faster than Integer.parseInt
-    // sb.append(Integer.parseInt(matcher.group(1), 16).toChar)
-  }
-  
-  private def unescapeKey(key: String): String = {
-    key.replaceBy(KeyEscape.pattern, unescapeKey)
-  }
   
   def main(args : Array[String]) {
     
-    // do the DBpedia files use IRIs or URIs?
-    val iris = args(0).toBoolean
-    
-    // do the DBpedia files use Turtle or N-Triples escaping?
-    val turtle = args(1).toBoolean
-    
     // base dir of DBpedia files
-    val dir = new File(args(2))
+    val dir = new File(args(0))
     
     // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
-    val suffix = args(3)
+    val suffix = args(1)
     
     // Freebase RDF input file, may be .gz or .bz2 zipped
     // must have the format described on https://developers.google.com/freebase/data
     // Latest: http://download.freebaseapps.com
-    val inFile = new File(args(4))
+    val inFile = new File(args(2))
     
     // output file, may be .gz or .bz2 zipped 
-    val outFile = new File(args(5))
+    val outFile = new File(args(3))
     
     val finder = new Finder[File](dir, Language.English, "wiki")
     val date = finder.dates("download-complete").last
@@ -112,29 +90,46 @@ object CreateFreebaseLinks
       file
     }
   
-    val labels = find(DBpediaDatasets.Labels)
+    val pageIds = find(DBpediaDatasets.PageIds)
     val redirects = find(DBpediaDatasets.Redirects)
     val disambig = find(DBpediaDatasets.DisambiguationLinks)
-    
-    val dbpedia = new HashSet[String]()
-    
-    collectUris(dbpedia, labels, true)
-    collectUris(dbpedia, redirects, false)
-    collectUris(dbpedia, disambig, false)
-    
-    new CreateFreebaseLinks(iris, turtle).findLinks(dbpedia, inFile, outFile)
+
+    // wiki_title -> wiki_page_id
+    val dbpediaMap = mutable.Map[String, String]()
+
+    collectUris(dbpediaMap, pageIds, true)
+    collectUris(dbpediaMap, redirects, false)
+    collectUris(dbpediaMap, disambig, false)
+
+    // Reverse the map now
+    // wiki_page_id -> wiki_title
+    var finalDbpediaMap : Map[String, String] = dbpediaMap.map(_.swap).toMap[String, String]
+
+    findLinks(finalDbpediaMap, inFile, outFile)
   }
-  
-  private def collectUris(set: Set[String], file: File, add: Boolean): Unit = {
+
+  private def collectUris(map: mutable.Map[String, String], file: File, add: Boolean): Unit = {
     val start = System.nanoTime
     err.println((if (add) "Add" else "Subtract")+"ing DBpedia URIs in "+file+"...")
     var lines = 0
     readLines(file) { line =>
       if (line.nonEmpty && line.charAt(0) != '#') {
-        val close = line.indexOf('>', Prefix.length)
-        if (! line.startsWith(Prefix) || close == -1) throw new IllegalArgumentException(line)
-        val rdfKey = line.substring(Prefix.length, close)
-        if (add) set += rdfKey else set -= rdfKey
+        val (rdfKey, wikiPageId) = line match {
+          // This will match lines in the page_ids file
+          case WikipediaResId(rdfKey, wikiPageId) =>  (rdfKey, wikiPageId)
+          // This will match other files, e.g. redirects and disambiguations
+          case DBpediaResId(rdfKey) => (rdfKey, null)
+          case _ => throw new IllegalArgumentException("Invalid format for line: " + line)
+        }
+
+        if (add) {
+          if (rdfKey == null || wikiPageId == null) throw new IllegalArgumentException("There was a problem with line: " + line)
+          map += (rdfKey -> wikiPageId)
+        } else {
+          if (rdfKey == null) throw new IllegalArgumentException("There was a problem with line: " + line)
+          map -= rdfKey
+        }
+
         lines += 1
         if (lines % 1000000 == 0) log(lines, start)
       }
@@ -147,11 +142,7 @@ object CreateFreebaseLinks
     err.println("processed "+lines+" lines in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
   
-}
-
-class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
-    
-  def findLinks(dbpedia: Set[String], inFile: File, outFile: File): Unit = {
+  private def findLinks(dbpedia: Map[String, String], inFile: File, outFile: File): Unit = {
     val start = System.nanoTime
     err.println("Searching for Freebase links in "+inFile+"...")
     var lines = 0
@@ -162,21 +153,10 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
       writer.write("# started "+formatCurrentTimestamp+"\n")
       readLines(inFile) { line =>
         line match {
-          case WikipediaKey(mid, key) => {
-            
-            val rdfKey = 
-            try recode(key)
-            catch {
-              case ex => {
-                err.println("BAD LINE: ["+line+"]: "+ex)
-                ""
-              }
-            }
-            
+          case FreebaseWikipediaId(mid, wikiId) => {
             if (! mid.startsWith("m.")) throw new IllegalArgumentException(line)
-            val rdfMid = mid
-            if (dbpedia.contains(rdfKey)) {
-              writer.write(Prefix+rdfKey+Infix+rdfMid+Suffix)
+            if (dbpedia.contains(wikiId)) {
+              writer.write(Prefix+dbpedia(wikiId)+Infix+mid+Suffix)
               links += 1
             }
           }
@@ -196,22 +176,4 @@ class CreateFreebaseLinks(iris: Boolean, turtle: Boolean) {
     val nanos = System.nanoTime - start
     err.println("processed "+lines+" lines, found "+links+" Freebase links in "+prettyMillis(nanos / 1000000)+" ("+(nanos.toFloat/lines)+" nanos per line)")
   }
-  
-  /**
-   * To convert titles from IRI to URI format, we need a well-formed IRI. Because titles may 
-   * contain colons and slashes, we have to append them to a dummy URI prefix, then convert them 
-   * to IRI and in the end cut off the prefix again.
-   */
-  private val Dummy = "dummy:///"
-    
-  /**
-   * Undo Freebase key encoding, do URI escaping and Turtle / N-Triple escaping. 
-   */
-  private def recode(key: String): String = {
-    val plain = unescapeKey(key)
-    var uri = wikiEncode(cleanSpace(plain))
-    if (! iris) uri = new URI(Dummy+uri).toASCIIString.substring(Dummy.length)
-    escapeTurtle(uri, turtle)
-  }
-
 }

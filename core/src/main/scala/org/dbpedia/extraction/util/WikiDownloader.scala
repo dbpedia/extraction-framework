@@ -48,7 +48,7 @@ class WikiDownloader(val apiUrl : String) {
       val out = new XMLEventBuilder(xmlOut, events)
       out.document(charset.name){
         // TODO: the generated file is probably not valid according to this schema. 
-        out.elementNS("mediawiki", "http://www.mediawiki.org/xml/export-0.6/") {
+        out.elementNS("mediawiki", "http://www.mediawiki.org/xml/export-0.8/") {
           for (namespace <- namespaces) addPages(namespace, out)
         }
       }

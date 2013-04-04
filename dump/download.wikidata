@@ -1,0 +1,21 @@
+# NOTE: format is not java.util.Properties, but org.dbpedia.extraction.dump.download.DownloadConfig
+
+# Default download server. It lists mirrors which may be faster. 
+base-url=http://dumps.wikimedia.org/
+
+# Replace by your target folder.
+base-dir=/home/jim/data
+
+# Replace xx by your language.
+download=wikidata:pages-articles.xml.bz2
+
+# Only needed for the ImageExtractor
+# download=commons:pages-articles.xml.bz2
+
+# Unzip files while downloading? Not necessary, extraction will unzip on the fly. Let's save space.
+# unzip=false
+unzip=true
+
+# Sometimes connecting to the server fails, so we try five times with pauses of 10 seconds.
+retry-max=5
+retry-millis=10000
