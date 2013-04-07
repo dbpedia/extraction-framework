@@ -33,9 +33,8 @@ class WikidataExtractor(
     // Filter the namespace we want to parse
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
-    // This is the JSON we want to parse  (note that this is encoded html)
-    // Need to decode it before we actually use it. E.g. see the following link
-    // http://www.wikidata.org/w/api.php?action=query&prop=revisions&rvlimit=1&rvprop=content&format=xml&titles=Q4124681
+    // This is the JSON we want to parse.
+    // May contain JSON escaped characters like \u042F
     val json = page.toWikiText
 
     // We now need to parse the json content. This is a sample of what can be found
