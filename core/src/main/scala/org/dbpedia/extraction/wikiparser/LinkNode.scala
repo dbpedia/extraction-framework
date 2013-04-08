@@ -12,14 +12,12 @@ sealed abstract class LinkNode(children : List[Node], line : Int)
 extends Node(children, line)
 {
     def toPlainText = children.map(_.toPlainText).mkString
-    def toText = children.map(_.toPlainText).mkString
 }
 
 sealed abstract class WikiLinkNode(destination: WikiTitle, children: List[Node], line: Int, destinationNodes: List[Node]) 
 extends LinkNode(children, line)
 {
     def toWikiText = "[[" + destination.decodedWithNamespace + "|" + children.map(_.toWikiText).mkString + "]]"
-    override def toText = "[[" + children.map(_.toWikiText).mkString + "]]"
 }
 
 /**
@@ -35,7 +33,6 @@ case class ExternalLinkNode(destination : URI, override val children : List[Node
 extends LinkNode(children, line)
 {
     def toWikiText = "[" + destination.toString + " " + children.map(_.toWikiText).mkString + "]"
-    override def toText = toWikiText
 }
 
 /**
