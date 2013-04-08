@@ -7,4 +7,8 @@ branches:
 install: /bin/true
 script: "mvn clean install"
 notifications:
-  email: off
+  email:
+    recipients:
+      - dbpedia-developers@lists.sourceforge.net
+    on_success: change
+    on_failure: change
