@@ -61,6 +61,8 @@ public class WikipediaDumpParser
   
   private static final String TIMESTAMP_ELEM = "timestamp";
 
+  private static final String FORMAT_ELEM = "format";
+
   /** the character stream */
   private Reader _stream;
 
@@ -278,6 +280,7 @@ public class WikipediaDumpParser
     String revisionId = null;
     String contributorID = null;
     String contributorName = null;
+    String format = null;
     
     while (nextTag() == START_ELEMENT)
     {
@@ -338,6 +341,10 @@ public class WikipediaDumpParser
           requireEndElement(CONTRIBUTOR_ELEM);
         }
       }
+      else if (isStartElement(FORMAT_ELEM)) {
+          format = readString(FORMAT_ELEM, false);
+          // now at </format>
+      }
       else
       {
         // skip all other elements, don't care about the name, don't skip end tag
@@ -348,7 +355,7 @@ public class WikipediaDumpParser
     requireEndElement(REVISION_ELEM);
     // now at </revision>
     
-    return new WikiPage(title, redirect, pageId, revisionId, timestamp, contributorID, contributorName, text);
+    return new WikiPage(title, redirect, pageId, revisionId, timestamp, contributorID, contributorName, text, format);
   }
   
   /* Methods for low-level work. Ideally, only these methods would access _reader while the
