@@ -89,7 +89,8 @@ private class XMLSource(xml : Elem, language: Language) extends Source
                              contributorID = _contributorID,
                              contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip" ).text
                                                else (rev \ "contributor" \ "username" ).text,
-                             source    = (rev \ "text").text ) )
+                             source    = (rev \ "text").text,
+                             format    = (rev \ "format").text) )
         }
     }
 
