@@ -130,6 +130,7 @@ object MappingsLoader
         {
             new SimplePropertyMapping( loadTemplateProperty(tnode, "templateProperty"),
                                        loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
+                                       loadTemplateProperty(tnode, "select", false),
                                        loadDatatype(tnode, "unit", false, context.ontology),
                                        loadLanguage(tnode, "language", false),
                                        loadDouble(tnode, "factor", false),
