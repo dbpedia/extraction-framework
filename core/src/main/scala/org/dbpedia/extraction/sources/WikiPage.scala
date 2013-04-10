@@ -3,6 +3,7 @@ package org.dbpedia.extraction.sources
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.sources.WikiPage._
 import org.dbpedia.extraction.util.StringUtils._
+import WikiPageFormat._
 
 /**
  * Represents a wiki page
@@ -18,15 +19,19 @@ import org.dbpedia.extraction.util.StringUtils._
  * @param source The WikiText source of this page
  */
 class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val revision: Long, val timestamp: Long,
-               val contributorID: Long, val contributorName: String, val source : String)
+               val contributorID: Long, val contributorName: String, val source : String, val format: WikiPageFormat)
 {
+
     def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String) =
-      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source)
+      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source, WikiPageFormat.WikiText)
+
+    def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
+      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source, WikiPageFormat.mimeToWikiPageFormat(format))
     
     def this(title: WikiTitle, source : String) =
-      this(title, null, -1, -1, -1, 0, "", source)
+      this(title, null, -1, -1, -1, 0, "", source, WikiPageFormat.WikiText)
     
-    override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + ")"
+    override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
     
     /**
      * Serializes this page to XML using the MediaWiki export format.
