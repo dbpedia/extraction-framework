@@ -3,6 +3,7 @@ package org.dbpedia.extraction.wikiparser
 import impl.simple.SimpleWikiParser
 import impl.sweble.SwebleWrapper
 import org.dbpedia.extraction.sources.WikiPage
+import impl.WikiParserWrapper
 
 /**
  * Parses WikiText source and builds an Abstract Syntax Tree.
@@ -29,11 +30,6 @@ object WikiParser
      * Creates a new WikiParser instance.
      */
 	def getInstance(name : String = null) : WikiParser =  {
-    //Console.println("parser: "+name)
-    if (name == null || name.equals("simple")){
-      new SimpleWikiParser()
-    } else {
-      new SwebleWrapper()
-    }
+    new WikiParserWrapper(name)
   }
 }

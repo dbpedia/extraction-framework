@@ -35,6 +35,14 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
             quads += quad(subjectUri, dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri)
           }
         }
+        case link: WikidataInterWikiLinkNode => {
+          val dst = link.destination
+          if (dst.isInterLanguageLink) {
+            val dstLang = dst.language
+            val srcLang = link.source.language
+            quads += quad(srcLang.resourceUri.append(link.source.decodedWithNamespace), dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri)
+          }
+        }
         case _ => // ignore
       }
     }
