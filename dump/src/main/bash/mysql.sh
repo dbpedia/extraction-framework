@@ -29,7 +29,9 @@ then
     echo "run:"
     echo "Connect to MySQL server listening at socket <mysql dir>/mysql.sock, execute SQL from standard input."
     echo
-    echo "<mysql dir> must be an absolute path of an existing directory."
+    echo "MYSQL_HOME must be set to the absolute path of your MySQL installation directory. Current value: $MYSQL_HOME"
+    echo
+    echo "<mysql dir> must be an absolute path of an existing directory where MySQL will store its data."
     echo
     echo "<database> only used by run, optional."
     echo
