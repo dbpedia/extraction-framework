@@ -67,7 +67,7 @@ class JsonWikiParser {
         Language.map.get(key) match {
           case Some(lang) =>
             val destinationTitle = WikiTitle.parse(key + ":" + value, lang)
-            nodes ::= WikidataInterWikiLinkNode(sourceTitle, destinationTitle, nodes, 0, List[Node]())
+            nodes ::= WikidataInterWikiLinkNode(sourceTitle, destinationTitle)
           case _ =>
         }
       case _ =>
