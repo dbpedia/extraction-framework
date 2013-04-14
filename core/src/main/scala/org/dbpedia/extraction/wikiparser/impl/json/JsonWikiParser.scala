@@ -46,7 +46,11 @@ class JsonWikiParser {
       case _ => throw new IllegalStateException("Invalid JSON representation!")
     }
 
-    val JObject(interLinks) = (jsonObjMap \ "links") //.getOrElse("links", Map[String, String]()).asInstanceOf[Map[String,String]]
+    val interLinks = (jsonObjMap \ "links") match {
+      case JObject(links) => links
+      case _ => List()
+    }
+
     val interLinksMap = collection.mutable.Map[String, String]()
 
     interLinks.foreach { interLink : JField =>
