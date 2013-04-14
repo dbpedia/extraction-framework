@@ -61,13 +61,10 @@ extends WikiLinkNode(destination, children, line, destinationNodes)
 
 /**
  * Represents an InterWiki Link in Wikidata.
- * The children of this node represent the label of the link.
- * If the source does not define a label explicitly, a TextNode containing the link destination will be the only child.
+ * Not really a Wikitext node, so we use dummy values for line and children.
  *
  * @param source The source WikiTitle of this link (wikidata page uri is usually not what one wants to get)
  * @param destination The destination WikiTitle of this link
- * @param children The nodes of the label of this link
- * @param line The source line number of this link
  */
-case class WikidataInterWikiLinkNode(source: WikiTitle, destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
-extends WikiLinkNode(destination, children, line, destinationNodes)
+case class WikidataInterWikiLinkNode(source: WikiTitle, destination : WikiTitle)
+extends WikiLinkNode(destination, List[Node](), 0, List[Node]())
