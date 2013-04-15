@@ -38,7 +38,11 @@ object PolicyParser {
       ("xml-safe", 2, xmlSafe),
       ("generic", 3, generic)
     )
-    
+
+    val partialPolicies = Seq[(String, Int, Predicate => Policy, Seq[(String, Int)])] (
+      ("validate-uri-length", 4, validateUriLength, Seq(("-predicates", PREDICATE)))
+    )
+
     /**
      * Tuples of suffix and position code.
      */
@@ -54,8 +58,17 @@ object PolicyParser {
     val product = for ((prefix, prio, factory) <- policies; (suffix, position) <- positions) yield {
       prefix+suffix -> (prio, position, factory)
     }
-    
-    product.toMap
+
+    val partialPoliciesProduct =
+      for (
+        (prefix, prio, factory, positions) <- partialPolicies;
+        (suffix, position) <- positions
+      )
+      yield {
+      prefix+suffix -> (prio, position, factory)
+    }
+
+    (product ++ partialPoliciesProduct).toMap
   }
   
   val formatters = Map[String, Array[Policy] => Formatter] (
