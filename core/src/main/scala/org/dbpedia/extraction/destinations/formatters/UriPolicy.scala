@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import java.net.URI
+import java.net.{URISyntaxException, URI}
 import org.dbpedia.extraction.util.Language
 import scala.xml.Utility.{isNameChar,isNameStart}
 
@@ -30,6 +30,9 @@ object UriPolicy {
   
   // indicates that a predicate matches all positions
   val ALL = -1
+
+  // URI/IRI length
+  val MAX_URI_LENGTH = 512
   
   def uri(activeFor: Predicate): Policy = {
     
@@ -56,6 +59,18 @@ object UriPolicy {
       var frag = iri.getRawFragment
       
       uri(scheme, user, host, port, path, query, frag)
+    }
+    else {
+      iri
+    }
+  }
+
+  def validateUriLength(activeFor: Predicate): Policy = {
+
+    iri =>
+    if (activeFor(iri)) {
+      if (iri.toString.length > MAX_URI_LENGTH) throw new URISyntaxException(iri.toString, "URI/IRI is too long!")
+      else iri
     }
     else {
       iri
