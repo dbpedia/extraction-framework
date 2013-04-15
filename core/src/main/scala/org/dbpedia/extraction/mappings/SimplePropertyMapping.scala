@@ -14,6 +14,9 @@ class SimplePropertyMapping (
   val templateProperty : String, // IntermediateNodeMapping and CreateMappingStats requires this to be public
   ontologyProperty : OntologyProperty,
   select : String,
+  prefix : String,
+  suffix : String,
+  transform : String,
   unit : Datatype,
   private var language : Language,
   factor : Double,
@@ -32,6 +35,19 @@ extends PropertyMapping
         case null => identity
         case _ => throw new IllegalArgumentException("Only 'first' or 'last' are allowed in property 'select'")
       }
+
+    private def valueTransformer(value : String) = {
+
+      val prefixedValue = prefix match {
+        case p : String => p + value
+        case _ => value
+      }
+
+      suffix match {
+        case s : String => prefixedValue + s
+        case _ => prefixedValue
+      }
+    }
 
     if(language == null) language = context.language
 
@@ -154,7 +170,7 @@ extends PropertyMapping
 
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.size > 0)
         {
-            val parseResults = parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional)
+            val parseResults = parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
 
             for( parseResult <- selector(parseResults) )
             {
@@ -163,6 +179,7 @@ extends PropertyMapping
                     case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri)
                     case value => writeValue(value, subjectUri, propertyNode.sourceUri)
                 }
+
                 graph ++= g
             }
         }
