@@ -1,5 +1,8 @@
 package org.dbpedia.extraction.wikiparser
 
+import java.net.{URISyntaxException, URI}
+import org.dbpedia.extraction.util.Language
+
 /**
  * Utility functions for working with nodes.
  */
@@ -59,11 +62,27 @@ object NodeUtil
         propertyNode
     }
 
+    private def buildPropertyNode(text : String, line : Int, language : Language, transformCmd : String, transformFunc : String => String) : Node = {
+
+      val textNode = new TextNode(transformFunc(text), line)
+
+      transformCmd match {
+        case "internal" => new InternalLinkNode(WikiTitle.parse(textNode.text, language), List(textNode), line)
+        case "external" => try {
+          new ExternalLinkNode(new URI(textNode.text), List(textNode), line)
+        } catch {
+          // If the provided text is not a valid URI
+          case ex : URISyntaxException => textNode
+        }
+        case _ => textNode
+      }
+    }
+
     /**
      * Utility function which splits a property node based on a regex
      * If trimResults == true, the regex is extended to eat up whitespace at beginning and end when splitting.
      */
-    def splitPropertyNode(inputNode : PropertyNode, regex : String, trimResults : Boolean = false) : List[PropertyNode] =
+    def splitPropertyNode(inputNode : PropertyNode, regex : String, trimResults : Boolean = false, transformCmd : String = null, transformFunc : String => String = identity) : List[PropertyNode] =
     {
         var propertyNodes = List[PropertyNode]()
         var currentNodes = List[Node]()
@@ -80,14 +99,24 @@ object NodeUtil
                 {
                     if(parts.size > 1 && i < parts.size - 1)
                     {
-                        if(parts(i).size > 0) currentNodes = new TextNode(parts(i), line) :: currentNodes
+                        if(parts(i).size > 0) {
+
+                          val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc)
+
+                          currentNodes = currentNode :: currentNodes
+                        }
                         currentNodes = currentNodes.reverse
                         propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
                         currentNodes = List[Node]()
                     }
                     else
                     {
-                        if(parts(i).size > 0) currentNodes = new TextNode(parts(i), line) :: currentNodes
+                        if(parts(i).size > 0) {
+
+                          val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc)
+
+                          currentNodes = currentNode :: currentNodes
+                        }
                     }
                 }
             }

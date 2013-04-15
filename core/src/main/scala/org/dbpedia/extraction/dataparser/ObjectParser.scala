@@ -2,6 +2,12 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
+import scala.Predef._
+import org.dbpedia.extraction.wikiparser.PropertyNode
+import org.dbpedia.extraction.wikiparser.TextNode
+import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.extraction.wikiparser.InternalLinkNode
+import scala.Some
 
 /**
  * Parses links to other instances.
@@ -14,11 +20,11 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
     override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
-    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
+    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean, transformCmd : String = null, transformFunc : String => String = identity ) =
     {
         if(split)
         {
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true, transformCmd = transformCmd, transformFunc = transformFunc).flatMap( node => parse(node).toList )
         }
         else
         {
@@ -38,6 +44,11 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
                 case InternalLinkNode(destination, _, _, _) if destination.namespace == Namespace.Main =>
                 {
                     return Some(getUri(destination, pageNode))
+                }
+
+                case ExternalLinkNode(destination, _, _, _) =>
+                {
+                    return Some(destination.toString)
                 }
 
                 //creating links if the same string is a link on this page
