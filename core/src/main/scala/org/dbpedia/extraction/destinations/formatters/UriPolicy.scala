@@ -65,7 +65,7 @@ object UriPolicy {
     }
   }
 
-  def validateUriLength(activeFor: Predicate): Policy = {
+  def rejectLongUri(activeFor: Predicate): Policy = {
 
     iri =>
     if (activeFor(iri)) {
