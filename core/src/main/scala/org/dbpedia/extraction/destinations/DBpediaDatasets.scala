@@ -18,6 +18,7 @@ object DBpediaDatasets
     val Pnd = new Dataset("pnd")
     val Redirects = new Dataset("redirects")
     val ArticleCategories = new Dataset("article_categories")
+    val ArticleTemplates = new Dataset("article_templates")
     val SkosCategories = new Dataset("skos_categories")
     val RevisionUris = new Dataset("revision_uris")
     val RevisionIds = new Dataset("revision_ids")
