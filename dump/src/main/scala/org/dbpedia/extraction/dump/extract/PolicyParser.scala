@@ -34,13 +34,10 @@ object PolicyParser {
      * URIs should be made xml-safe).
      */
     val policies = Seq[(String, Int, Predicate => Policy)] (
-      ("uri", 1, uri),
-      ("xml-safe", 2, xmlSafe),
-      ("generic", 3, generic)
-    )
-
-    val partialPolicies = Seq[(String, Int, Predicate => Policy, Seq[(String, Int)])] (
-      ("validate-uri-length", 4, validateUriLength, Seq(("-predicates", PREDICATE)))
+      ("reject-long", 1, rejectLongUri),
+      ("uri", 2, uri),
+      ("xml-safe", 3, xmlSafe),
+      ("generic", 4, generic)
     )
 
     /**
@@ -59,16 +56,7 @@ object PolicyParser {
       prefix+suffix -> (prio, position, factory)
     }
 
-    val partialPoliciesProduct =
-      for (
-        (prefix, prio, factory, positions) <- partialPolicies;
-        (suffix, position) <- positions
-      )
-      yield {
-      prefix+suffix -> (prio, position, factory)
-    }
-
-    (product ++ partialPoliciesProduct).toMap
+    product.toMap
   }
   
   val formatters = Map[String, Array[Policy] => Formatter] (
