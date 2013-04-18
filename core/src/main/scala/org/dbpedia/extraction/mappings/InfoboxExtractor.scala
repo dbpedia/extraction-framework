@@ -36,10 +36,6 @@ extends Extractor
 
     private val language = context.language.wikiCode
 
-    // FIXME: this uses the http://xx.dbpedia.org/property/ namespace, but the
-    // http://dbpedia.org/ontology/ namespace would probably make more sense.
-    private val usesTemplateProperty = context.language.propertyUri.append("wikiPageUsesTemplate")
-
     private val MinPropertyCount = 2
 
     private val MinPercentageOfExplicitPropertyKeys = 0.75
@@ -98,8 +94,6 @@ extends Extractor
         
         var quads = new ArrayBuffer[Quad]()
 
-        val seenTemplates = new HashSet[String]()
-
         /** Retrieve all templates on the page which are not ignored */
         for { template <- collectTemplates(node)
           resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
@@ -153,14 +147,6 @@ extends Extractor
                         }
                     }
 
-                }
-
-                if (propertiesFound && (!seenTemplates.contains(template.title.decoded)))
-                {
-                    val templateUri = context.language.resourceUri.append(template.title.decodedWithNamespace)
-                    quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, subjectUri, usesTemplateProperty,
-                                       templateUri, template.sourceUri, null)
-                    seenTemplates.add(template.title.decoded)
                 }
             }
         }
