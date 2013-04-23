@@ -11,7 +11,7 @@ import org.dbpedia.extraction.util.Language
 class IntegerParser( context : { def language : Language } ,
                      strict : Boolean = false,
                      multiplicationFactor : Double = 1.0,
-                     validRange : Double => Boolean = (i => i%1==0)) extends DataParser
+                     validRange : Double => Boolean = (i => true)) extends DataParser
 {
     private val parserUtils = new ParserUtils(context)
 
