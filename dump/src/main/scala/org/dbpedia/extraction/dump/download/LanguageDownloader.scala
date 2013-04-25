@@ -37,7 +37,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
         DateLink.findAllIn(line).matchData.foreach(dates += _.group(1))
       }
       
-      if (dates.size() == 0) throw new Exception("found no date - "+mainPage+" is probably broken or unreachable. check your network / proxy settings.")
+      if (dates.size == 0) throw new Exception("found no date - "+mainPage+" is probably broken or unreachable. check your network / proxy settings.")
 
       var count = 0
     
