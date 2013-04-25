@@ -27,8 +27,7 @@ extends Extractor {
     {
 	if (context.language.wikiCode == "fr") {
             if(page.title.namespace != Namespace.Template || page.isRedirect || !page.title.decoded.contains("évolution population") || page.title.decoded.contains("Discussion") || page.title.decoded.contains("Modèles")) return Seq.empty
-  		println(page.title.decoded) 
-    	        for (node <- page.children) {
+  	        for (node <- page.children) {
 	            if (node.toWikiText.contains("|pop=")) {
 		        populationRegex.findAllIn(node.toWikiText).matchData foreach {
 			    m =>
