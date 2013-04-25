@@ -3,6 +3,7 @@ package org.dbpedia.extraction.dataparser
 import org.dbpedia.extraction.config.dataparser.ParserUtilsConfig
 import java.text.{NumberFormat,DecimalFormatSymbols}
 import org.dbpedia.extraction.util.Language
+import java.util.Locale
 
 /**
  * Utility functions used by the data parsers.
@@ -19,15 +20,22 @@ class ParserUtils( context : { def language : Language } )
     
     private val groupingSeparator = DecimalFormatSymbols.getInstance(context.language.locale).getGroupingSeparator
     
-    private val decimalSeparator = DecimalFormatSymbols.getInstance(context.language.locale).getDecimalSeparator
+    private val defaultDecimalSeparator = DecimalFormatSymbols.getInstance(context.language.locale).getDecimalSeparator
+    private val decimalSeparatorsRegex = ParserUtilsConfig.decimalSeparators.get(context.language.wikiCode) match
+      {
+        case Some(sep) => ("["+sep+"]").r
+        case None => ("""\"""+defaultDecimalSeparator).r 
+      }
+
 
     // TODO: use "\s+" instead of "\s?" between number and scale?
     // TODO: in some Asian languages, digits are not separated by thousands but by ten thousands or so...
-    private val regex = ("""(?i)([\D]*)([0-9]+(?:\""" + groupingSeparator + """[0-9]{3})*)(\""" + decimalSeparator + """[0-9]+)?\s?\[?\[?(""" + scales.keySet.mkString("|") + """)\]?\]?(.*)""").r
+    private val regex = ("""(?i)([\D]*)([0-9]+(?:\""" + groupingSeparator + """[0-9]{3})*)(""" + decimalSeparatorsRegex + """[0-9]+)?\s?\[?\[?(""" + scales.keySet.mkString("|") + """)\]?\]?(.*)""").r
     
     def parse(str: String): Number = {
       // space is sometimes used as grouping separator
-      numberFormat.get.parse(str.replace(' ', groupingSeparator))
+      val cleanedString = decimalSeparatorsRegex.replaceAllIn(str, ""+defaultDecimalSeparator)
+      numberFormat.get.parse(cleanedString.replace(' ', groupingSeparator))
     }
 
     /**
