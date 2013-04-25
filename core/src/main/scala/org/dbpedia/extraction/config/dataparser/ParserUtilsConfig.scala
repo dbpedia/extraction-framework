@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.config.dataparser
 
+import java.util.Locale
 
 object ParserUtilsConfig
 {
@@ -84,7 +85,23 @@ object ParserUtilsConfig
             "billón" -> 12,
             "trillón" -> 18,
             "cuatrillón" -> 24
+        ),
+        "fr" -> Map(
+            "mille" -> 3,
+            "million" -> 6,
+            "milliard" -> 9,
+            "billion" -> 12,
+            "trillion" -> 18
         )
+    )
+    
+    /**
+     * By default the locale used for number parsing is the language locale.
+     * However, this may not be suited for some languages, for instance French where "." is used as a decimal separator instead of "," (because the decimal separator ',' would interfere with template separators)
+     * Add an entry when other separators than the locale default are used.
+     */
+    val decimalSeparators = Map(
+        "fr" -> ",|."
     )
 
 }
