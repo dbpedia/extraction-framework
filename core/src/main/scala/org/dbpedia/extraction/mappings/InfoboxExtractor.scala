@@ -69,7 +69,7 @@ extends Extractor
                                    .filter(_.isInstanceOf[DimensionDatatype])
                                    .map(dimension => new UnitValueParser(context, dimension, true))
 
-    private val intParser = new IntegerParser(context, true)
+    private val intParser = new IntegerParser(context, true, validRange = (i => i%1==0))
 
     private val doubleParser = new DoubleParser(context, true)
 
