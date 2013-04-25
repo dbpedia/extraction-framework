@@ -36,6 +36,11 @@ object DBpediaDatasets
     val OntologyTypes = new Dataset("instance_types")
     val OntologyProperties = new Dataset("mappingbased_properties")
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
+    
+    /**
+     * French population template
+     */
+     val FrenchPopulation = new Dataset("french_population")
 
     /**
      *  Infobox
