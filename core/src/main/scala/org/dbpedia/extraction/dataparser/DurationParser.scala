@@ -22,7 +22,7 @@ class DurationParser( context : { def language : Language } )
     val TimeValueColonUnitRegex = ("""^\D*?(-)?\s?(\d+)?\:(\d\d)\:?(\d\d)?\s*(""" + timeUnitsRegex + """)?(\W\D*?|\W*?)$""").r
 
     // TODO: this regex does not support minus signs
-    val TimeValueUnitRegex = ("""(\d[,\.\s\d]*\s*)(""" + timeUnitsRegex + """)"""+ """"(\s|$)""").r
+    val TimeValueUnitRegex = ("""(\d[,\.\s\d]*\s*)(""" + timeUnitsRegex + """)(\s|$)""").r
 
     def parseToSeconds(input : String, inputDatatype : Datatype) : Option[Double] =
     {
