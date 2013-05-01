@@ -74,15 +74,17 @@ extends ConfigParser(config)
     //Create extractor map
     val classes = new HashMap[Language, List[Class[_ <: Extractor]]]()
     
+    /*
+    TODO: maybe we should check in the first loop if property "extractors."+language.wikiCode
+    exists and if it does, add its specific extractors. Better: refactor the whole config mess.
+    Currently, the "languages" property just defines for which languages the default extractors
+    should be loaded. It does not define which languages should be processed in general,
+    all the "extractors.xx" properties are independent from the "languages" property.
+    It should be possible to say: run extractors A,B,C for languages xx,yy,zz. That
+    would make the configuration much simpler, less repetitive and more flexible.
+    */
     for(language <- languages) {
       classes(language) = stdExtractors
-      // TODO: maybe we should check here if property "extractors."+language.wikiCode exists
-      // and if it does, add its specific extractors. Better: refactor the whole config mess.
-      // Currently, the "languages" property just defines for which languages the default extractors
-      // should be loaded. It does not define which languages should be processed in general,
-      // all the "extractors.xx" properties are independent from the "languages" property.
-      // It should be possible to say: run extractors A,B,C for languages xx,yy,zz. That
-      // would make the configuration much simpler, less repetitive and more flexible.
     }
 
     for (key <- config.stringPropertyNames) {
