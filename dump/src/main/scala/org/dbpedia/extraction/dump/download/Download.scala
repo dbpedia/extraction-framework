@@ -2,8 +2,9 @@ package org.dbpedia.extraction.dump.download
 
 import java.io.File
 import scala.io.Codec
+import java.net.Authenticator
 import scala.collection.mutable.HashSet
-import org.dbpedia.extraction.util.{WikiInfo,Language}
+import org.dbpedia.extraction.util.{WikiInfo,Language,ProxyAuthenticator}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import scala.collection.immutable.SortedSet
 
@@ -25,6 +26,7 @@ object Download extends DownloadConfig
     if ((languages.nonEmpty || ranges.nonEmpty) && baseUrl == null) throw Usage("No base URL")
     if (languages.isEmpty && ranges.isEmpty) throw Usage("No files to download")
     if (! baseDir.exists && ! baseDir.mkdir) throw Usage("Target directory '"+baseDir+"' does not exist and cannot be created")
+    Authenticator.setDefault(new ProxyAuthenticator())
     
     class Downloader extends FileDownloader with Counter with LastModified with Retry {
       val progressStep = 1L << 21 // 2M

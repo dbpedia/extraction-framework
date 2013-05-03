@@ -2,6 +2,7 @@ package org.dbpedia.extraction.dump.extract
 
 import java.util.Properties
 import java.io.{FileNotFoundException, FileInputStream, InputStreamReader}
+import org.dbpedia.extraction.util.ProxyAuthenticator
 
 /**
  * Dump extraction script.
@@ -13,7 +14,7 @@ object Extraction {
 
   def main(args: Array[String]): Unit = {
     require(args != null && args.length >= 1 && args(0).nonEmpty, "missing required argument: config file name")
-
+    Authenticator.setDefault(new ProxyAuthenticator())
     // Load properties
     val properties = new Properties()
     try {
