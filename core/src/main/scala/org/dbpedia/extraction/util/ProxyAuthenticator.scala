@@ -9,7 +9,7 @@ class ProxyAuthenticator () extends Authenticator {
         if (getRequestorType() == RequestorType.PROXY) {
             val prot = getRequestingProtocol().toLowerCase()
             val host = System.getProperty(prot + ".proxyHost", "")
-            val port = System.getProperty(prot + ".proxyPort", "")
+            val port = System.getProperty(prot + ".proxyPort", "80")
             val user = System.getProperty(prot + ".proxyUser", "")
             val password = System.getProperty(prot + ".proxyPassword", "")
             
