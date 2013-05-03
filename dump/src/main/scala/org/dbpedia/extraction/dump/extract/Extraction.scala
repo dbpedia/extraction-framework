@@ -3,6 +3,7 @@ package org.dbpedia.extraction.dump.extract
 import java.util.Properties
 import java.io.{FileNotFoundException, FileInputStream, InputStreamReader}
 import org.dbpedia.extraction.util.ProxyAuthenticator
+import java.net.Authenticator
 
 /**
  * Dump extraction script.
