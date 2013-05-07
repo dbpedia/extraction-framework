@@ -111,9 +111,29 @@ extends Extractor
             {
                 for(property <- propertyList; if (!property.key.forall(_.isDigit))) {
                     // TODO clean HTML
-
-                    val cleanedPropertyNode = NodeUtil.removeParentheses(property)
-
+                    var currentNodes = List[Node]()
+                    var cleanedPropertyNode = new PropertyNode("", List[Node](), 0)
+          
+                    if (language == "fr") {
+                        for(child <- property.children) child match {
+                            case TemplateNode(title, children, line, titleParsed) => {
+                                if (title.decoded matches """[C-c]lr""") {
+                                    currentNodes = currentNodes ::: List[Node](new TextNode("<br />", line))
+                                }
+                            }
+                            case TextNode(text, line) => {
+                                if (!(text.trim == ",")) {
+                                    currentNodes = currentNodes ::: List[Node](child)
+                                }
+                            }
+                            case _ => currentNodes = currentNodes ::: List[Node](child)
+                        }
+                        cleanedPropertyNode = new PropertyNode(property.key, currentNodes, property.line)
+                        cleanedPropertyNode.parent = property.parent
+                    }
+                    else {
+                        cleanedPropertyNode = NodeUtil.removeParentheses(property)
+                    }
                     val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, """<br\s*\/?>""")
                     for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
                     {
