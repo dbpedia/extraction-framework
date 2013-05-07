@@ -118,7 +118,7 @@ extends Extractor
                         for(child <- property.children) child match {
                             case TemplateNode(title, children, line, titleParsed) => {
                                 for (regex <- InfoboxExtractorConfig.splitPropertyNodeRegex.get(language).getOrElse(InfoboxExtractorConfig.splitPropertyNodeRegex("en"))) {
-                                    if (title.decoded matches """[C-c]lr""") {
+                                    if (title.decoded matches regex) {
                                         currentNodes = currentNodes ::: List[Node](new TextNode("<br />", line))
                                     }
                                 }
