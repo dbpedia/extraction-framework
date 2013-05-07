@@ -113,12 +113,14 @@ extends Extractor
                     // TODO clean HTML
                     var currentNodes = List[Node]()
                     var cleanedPropertyNode = new PropertyNode("", List[Node](), 0)
-          
+                   
                     if (language == "fr") {
                         for(child <- property.children) child match {
                             case TemplateNode(title, children, line, titleParsed) => {
-                                if (title.decoded matches """[C-c]lr""") {
-                                    currentNodes = currentNodes ::: List[Node](new TextNode("<br />", line))
+                                for (regex <- InfoboxExtractorConfig.splitPropertyNodeRegex.get(language).getOrElse(InfoboxExtractorConfig.splitPropertyNodeRegex("en"))) {
+                                    if (title.decoded matches """[C-c]lr""") {
+                                        currentNodes = currentNodes ::: List[Node](new TextNode("<br />", line))
+                                    }
                                 }
                             }
                             case TextNode(text, line) => {
@@ -134,7 +136,7 @@ extends Extractor
                     else {
                         cleanedPropertyNode = NodeUtil.removeParentheses(property)
                     }
-                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, """<br\s*\/?>""")
+                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, (InfoboxExtractorConfig.splitPropertyNodeRegex.get("en").get)(0))
                     for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
                     {
                         val propertyUri = getPropertyUri(property.key)
@@ -217,8 +219,10 @@ extends Extractor
 
     private def extractNumber(node : PropertyNode) : Option[(String, Datatype)] =
     {
-        intParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:integer"))))
-        doubleParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:double"))))
+        if (!node.toString.contains(" ")) {
+            intParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:integer"))))
+            doubleParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:double"))))
+        }
         None
     }
 
