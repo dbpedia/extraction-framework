@@ -219,10 +219,8 @@ extends Extractor
 
     private def extractNumber(node : PropertyNode) : Option[(String, Datatype)] =
     {
-        if (!node.toString.contains(" ")) {
-            intParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:integer"))))
-            doubleParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:double"))))
-        }
+        intParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:integer"))))
+        doubleParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:double"))))
         None
     }
 
