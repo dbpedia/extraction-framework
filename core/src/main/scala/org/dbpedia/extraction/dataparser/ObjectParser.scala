@@ -11,13 +11,17 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
 {
     private val flagTemplateParser = new FlagTemplateParser(context)
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |;|,"""
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
     override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
     {
         if(split)
         {
+            val splitPropertyNodes = NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true)
+            for (property <- splitPropertyNodes) {
+                println("property : " + cleanString(property))
+            }
             NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
         }
         else
@@ -29,9 +33,11 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
     override def parse(node : Node) : Option[String] =
     {
         val pageNode = node.root
-
+        
         if (! strict)
         {
+            println("après : " + node)
+            println()
             for (child <- node :: node.children) child match
             {
                 //ordinary links
@@ -47,7 +53,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
                     {
                         return Some(getUri(destination, pageNode))
                     }
-                    case _ =>
+                    case _ => 
                 }
 
                 //resolve templates to create links
@@ -140,5 +146,24 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         // parsing the list of items in the subsection would be better, but the signature of parse would have to change to return a List
 
         destination.language.resourceUri.append(uriSuffix)
+    }
+    
+    private def cleanString (propertyNode: PropertyNode) : PropertyNode = {
+        var currentNodes = List[Node]()
+        var cleanedPropertyNode = new PropertyNode("", List[Node](), 0)
+        
+        for(property <- propertyNode.children) property match {
+            case TextNode(text, line) => {
+                if (!(text matches ("""<br\s*\/?>"""))) {
+                    currentNodes = currentNodes ::: List[Node](new TextNode(StringParser.stringParse(text), line))
+                }
+            }
+            case _ => currentNodes = currentNodes ::: List[Node](property)
+        }
+        
+        cleanedPropertyNode = new PropertyNode(propertyNode.key, currentNodes, propertyNode.line)
+        cleanedPropertyNode.parent = propertyNode.parent
+        
+        return cleanedPropertyNode
     }
 }

@@ -111,31 +111,9 @@ extends Extractor
             {
                 for(property <- propertyList; if (!property.key.forall(_.isDigit))) {
                     // TODO clean HTML
-                    var currentNodes = List[Node]()
-                    var cleanedPropertyNode = new PropertyNode("", List[Node](), 0)
+                    var cleanedPropertyNode = ListParser.parseList(property, language).get
                    
-                    if (language == "fr") {
-                        for(child <- property.children) child match {
-                            case TemplateNode(title, children, line, titleParsed) => {
-                                for (regex <- InfoboxExtractorConfig.splitPropertyNodeRegex.get(language).getOrElse(InfoboxExtractorConfig.splitPropertyNodeRegex("en"))) {
-                                    if (title.decoded matches regex) {
-                                        currentNodes = currentNodes ::: List[Node](new TextNode("<br />", line))
-                                    }
-                                }
-                            }
-                            case TextNode(text, line) => {
-                                if (!(text.trim == ",")) {
-                                    currentNodes = currentNodes ::: List[Node](child)
-                                }
-                            }
-                            case _ => currentNodes = currentNodes ::: List[Node](child)
-                        }
-                        cleanedPropertyNode = new PropertyNode(property.key, currentNodes, property.line)
-                        cleanedPropertyNode.parent = property.parent
-                    }
-                    else {
-                        cleanedPropertyNode = NodeUtil.removeParentheses(property)
-                    }
+                    cleanedPropertyNode = NodeUtil.removeParentheses(cleanedPropertyNode)
                     val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, (InfoboxExtractorConfig.splitPropertyNodeRegex.get("en").get)(0))
                     for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
                     {
