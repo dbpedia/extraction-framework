@@ -11,18 +11,19 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
 {
     private val flagTemplateParser = new FlagTemplateParser(context)
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |;|,"""
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |;|,|/"""
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
     override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
     {
         if(split)
         {
-            val splitPropertyNodes = NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true)
-            for (property <- splitPropertyNodes) {
-                println("property : " + cleanString(property))
-            }
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
+	    println("avant : " + propertyNode)
+	    println()
+	    val cleanPropertyNodes = textNodeToInternalLinkNode(propertyNode)
+	    println("après : " + cleanPropertyNodes)
+	    println()
+            NodeUtil.splitPropertyNode(cleanPropertyNodes, splitPropertyNodeRegex, trimResults = true).flatMap(node => parse(node).toList)
         }
         else
         {
@@ -36,8 +37,6 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         
         if (! strict)
         {
-            println("après : " + node)
-            println()
             for (child <- node :: node.children) child match
             {
                 //ordinary links
@@ -148,15 +147,21 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         destination.language.resourceUri.append(uriSuffix)
     }
     
-    private def cleanString (propertyNode: PropertyNode) : PropertyNode = {
+    private def textNodeToInternalLinkNode (propertyNode: PropertyNode) : PropertyNode = {
         var currentNodes = List[Node]()
         var cleanedPropertyNode = new PropertyNode("", List[Node](), 0)
         
         for(property <- propertyNode.children) property match {
             case TextNode(text, line) => {
-                if (!(text matches ("""<br\s*\/?>"""))) {
-                    currentNodes = currentNodes ::: List[Node](new TextNode(StringParser.stringParse(text), line))
+                if (!(text matches """<br\s*\/?>""") && text != "") {
+		    var newString = StringParser.stringParse(text)
+		    if (newString != "") {
+                        currentNodes = currentNodes ::: List[Node](new InternalLinkNode(new WikiTitle(newString, Namespace.Main, context.language), List[Node](), line, List[Node](new TextNode(newString, line))))
+		    }
                 }
+		else {
+		    currentNodes = currentNodes ::: List[Node](property)
+		}
             }
             case _ => currentNodes = currentNodes ::: List[Node](property)
         }
