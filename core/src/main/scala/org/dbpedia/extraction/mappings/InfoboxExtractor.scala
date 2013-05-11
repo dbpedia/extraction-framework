@@ -111,10 +111,10 @@ extends Extractor
             {
                 for(property <- propertyList; if (!property.key.forall(_.isDigit))) {
                     // TODO clean HTML
-
-                    val cleanedPropertyNode = NodeUtil.removeParentheses(property)
-
-                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, """<br\s*\/?>""")
+                    var cleanedPropertyNode = ListParser.parseList(property, language).get
+                   
+                    cleanedPropertyNode = NodeUtil.removeParentheses(cleanedPropertyNode)
+                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, (InfoboxExtractorConfig.splitPropertyNodeRegex.get("en").get)(0))
                     for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
                     {
                         val propertyUri = getPropertyUri(property.key)
