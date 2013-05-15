@@ -14,7 +14,7 @@ object StringParser extends DataParser
     override val splitPropertyNodeRegex = """<br\s*\/?>"""
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
-    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
+    override def parsePropertyNode(propertyNode : PropertyNode, split : Boolean) =
     {
         if(split)
         {
