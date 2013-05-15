@@ -18,12 +18,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
     {
         if(split)
         {
-	    println("avant : " + propertyNode)
-	    println()
-	    val cleanPropertyNodes = textNodeToInternalLinkNode(propertyNode)
-	    println("après : " + cleanPropertyNodes)
-	    println()
-            NodeUtil.splitPropertyNode(cleanPropertyNodes, splitPropertyNodeRegex, trimResults = true).flatMap(node => parse(node).toList)
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap(node => parse(node).toList)
         }
         else
         {
@@ -145,30 +140,5 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         // parsing the list of items in the subsection would be better, but the signature of parse would have to change to return a List
 
         destination.language.resourceUri.append(uriSuffix)
-    }
-    
-    private def textNodeToInternalLinkNode (propertyNode: PropertyNode) : PropertyNode = {
-        var currentNodes = List[Node]()
-        var cleanedPropertyNode = new PropertyNode("", List[Node](), 0)
-        
-        for(property <- propertyNode.children) property match {
-            case TextNode(text, line) => {
-                if (!(text matches """<br\s*\/?>""") && text != "") {
-		    var newString = StringParser.stringParse(text)
-		    if (newString != "") {
-                        currentNodes = currentNodes ::: List[Node](new InternalLinkNode(new WikiTitle(newString, Namespace.Main, context.language), List[Node](), line, List[Node](new TextNode(newString, line))))
-		    }
-                }
-		else {
-		    currentNodes = currentNodes ::: List[Node](property)
-		}
-            }
-            case _ => currentNodes = currentNodes ::: List[Node](property)
-        }
-        
-        cleanedPropertyNode = new PropertyNode(propertyNode.key, currentNodes, propertyNode.line)
-        cleanedPropertyNode.parent = propertyNode.parent
-        
-        return cleanedPropertyNode
     }
 }

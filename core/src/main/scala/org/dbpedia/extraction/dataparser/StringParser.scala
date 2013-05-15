@@ -49,33 +49,6 @@ object StringParser extends DataParser
             Some(text)
         }
     }
-    
-    def stringParse (value : String) : String = {
-        //Clean text
-	var text = value
-	var sb = new StringBuilder ()
-        text = smallTagRegex.replaceAllIn (text, "")
-        text = tagRegex.replaceAllIn (text, "") //strip tags
-        text = WikiUtil.removeWikiEmphasis (text)
-        text = text.replace ("&nbsp;", " ")//TODO decode all html entities here
-	text = text.replace (",", "")
-        text = text.trim
-	for (character <- text) {
-	    if (((character > 64 && character < 91) || (character > 96 && character < 123) || (character > 191 && character < 256)) || (character == 40 || character == 41 || character == 32)) {
-	    	sb.append (character)
-	    }
-	}
-	text = sb.toString ()
-	text = text.trim
-        if (text.isEmpty)
-        {
-            ""
-        }
-        else
-        {
-            text
-        }
-    }
   
     private def nodeToString(node : Node, sb : StringBuilder)
     {
