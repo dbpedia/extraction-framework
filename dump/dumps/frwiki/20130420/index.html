@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>frwiki dump progress on 20130420</title>
+        <style type="text/css">
+                html, body {
+                        background-color: #eee;
+                        color: black;
+                }
+                .siteinfo {
+                        text-align: center;
+                }
+                li {
+                        background-color: #f4f4f4;
+                        list-style-type: none;
+                }
+                li li {
+                        background-color: white;
+                }
+                li ul {
+                        margin-top: 4px;
+                        margin-bottom: 8px;
+                }
+                .detail {
+                        font-weight: normal;
+                        font-style: italic;
+                }
+                .updates {
+                        font: monospace;
+                        font-size: smaller;
+                }
+                .status {
+                        font-weight: bold;
+                }
+                .status, .checksum {
+                        padding-left: 1em;
+                        padding-right: 1em;
+                }
+                .in-progress {
+                        font-weight: bold;
+                }
+                .failed {
+                        color: Maroon;
+                        font-weight: bold;
+                }
+                .waiting {
+                        color: Silver; /* Gray ? */
+                }
+                .progress {
+                        font-family: monospace;
+                        font-size: 80%;
+                        margin-left: .5in;
+                }
+        </style>
+</head>
+
+<body>
+        <h1>frwiki dump progress on 20130420</h1>
+
+        <p class="siteinfo">
+                This is the Wikimedia dump service.
+                Please read the <a href='../../legal.html'>copyrights</a> information.
+                See <a href="http://meta.wikimedia.org/wiki/Data_dumps">Meta:Data dumps</a>
+                for documentation on the provided data formats.
+        </p>
+
+        <p>See <a href="../../backup-index.html">all databases list</a>.</p>
+
+        <p class="previous">
+                This dump is in progress; see also the <a href="../20130328/">previous dump from 2013-03-28</a>
+        </p>
+
+        <p class="status">
+                <span class='in-progress'>Dump in progress</span>
+        </p>
+
+        <p class="checksum">
+                Verify downloaded files against the <a href="/frwiki/20130420/frwiki-20130420-md5sums.txt">MD5 checksums</a>
+                to check for corrupted files.
+        </p>
+
+        <ul>
+                <li class='waiting'><span class='updates'></span> <span class='status'>waiting</span> <span class='title'>Articles, templates, media/file descriptions, and primary meta-pages, in multiple bz2 streams, 100 pages per stream</span><ul><li class='missing'>frwiki-20130420-pages-articles-multistream.xml.bz2</li>
+<li class='missing'>frwiki-20130420-pages-articles-multistream-index.txt.bz2</li></ul></li>
+<li class='waiting'><span class='updates'></span> <span class='status'>waiting</span> <span class='title'>All pages with complete edit history (.7z)</span><ul><li class='missing'>frwiki-20130420-pages-meta-history.xml.7z</li></ul></li>
+<li class='in-progress'><span class='updates'>2013-04-21 18:04:17</span> <span class='status'>in-progress</span> <span class='title'>All pages with complete page edit history (.bz2)</span><div class='progress'>2013-04-25 16:03:52: frwiki (ID 5693) 942823 pages (2.8|104871.0/sec all|curr), 44576000 revs (131.7|111.2/sec all|curr), 98.4%|98.4% prefetched (all|curr), ETA 2013-04-29 20:45:09 [max 92327341]</div>
+<ul><li class='file'>frwiki-20130420-pages-meta-history.xml.bz2 39.0 GB (written) </li></ul></li>
+<li class='done'><span class='updates'>2013-04-21 18:03:21</span> <span class='status'>done</span> <span class='title'>Log events to all pages and users.</span><ul><li class='detail'>This contains the log of actions performed on pages and users.</li>
+<li class='file'><a href="/frwiki/20130420/frwiki-20130420-pages-logging.xml.gz">frwiki-20130420-pages-logging.xml.gz</a> 1.6 GB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-21 15:05:52</span> <span class='status'>done</span> <span class='title'>All pages, current versions only.</span><div class='progress'>2013-04-21 15:05:50: frwiki (ID 26236) 5736389 pages (373.7|5439939.0/sec all|curr), 5736389 revs (373.7|368.9/sec all|curr), 92.5%|92.5% prefetched (all|curr), ETA 2013-04-24 07:27:04 [max 92313416]</div>
+<ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-pages-meta-current.xml.bz2">frwiki-20130420-pages-meta-current.xml.bz2</a> 3.2 GB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-21 10:49:16</span> <span class='status'>done</span> <span class='title'><big><b>Articles, templates, media/file descriptions, and primary meta-pages.</b></big></span><div class='progress'>2013-04-21 10:49:13: frwiki (ID 12824) 3197395 pages (397.2|3184961.3/sec all|curr), 3197395 revs (397.2|393.5/sec all|curr), 88.4%|88.4% prefetched (all|curr), ETA 2013-04-24 01:08:32 [max 92309363]</div>
+<ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-pages-articles.xml.bz2">frwiki-20130420-pages-articles.xml.bz2</a> 2.2 GB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-21 08:33:04</span> <span class='status'>done</span> <span class='title'>First-pass for page XML data dumps</span><div class='progress'>2013-04-21 08:27:04: frwiki (ID 14001) 5736389 pages (147.7|11514671.5/sec all|curr), 87840651 revs (2261.9|1306.8/sec all|curr), ETA 2013-04-21 08:59:55 [max 92299264]</div>
+<ul><li class='detail'>These files contain no page text, only revision metadata.</li>
+<li class='file'><a href="/frwiki/20130420/frwiki-20130420-stub-meta-history.xml.gz">frwiki-20130420-stub-meta-history.xml.gz</a> 6.1 GB</li>
+<li class='file'><a href="/frwiki/20130420/frwiki-20130420-stub-meta-current.xml.gz">frwiki-20130420-stub-meta-current.xml.gz</a> 472.7 MB</li>
+<li class='file'><a href="/frwiki/20130420/frwiki-20130420-stub-articles.xml.gz">frwiki-20130420-stub-articles.xml.gz</a> 275.8 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 21:39:25</span> <span class='status'>done</span> <span class='title'>Extracted page abstracts for Yahoo</span><div class='progress'>2013-04-20 21:39:19: frwiki (ID 18385) 5734849 pages (150.9|1752812.7/sec all|curr), 5734849 revs (150.9|259.5/sec all|curr), ETA 2013-04-21 00:07:15 [max 7074056]</div>
+<ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-abstract.xml">frwiki-20130420-abstract.xml</a> 1.5 GB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:05:46</span> <span class='status'>done</span> <span class='title'>List of page titles</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-all-titles-in-ns0.gz">frwiki-20130420-all-titles-in-ns0.gz</a> 14.8 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:05:19</span> <span class='status'>done</span> <span class='title'>Interwiki link tracking records</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-iwlinks.sql.gz">frwiki-20130420-iwlinks.sql.gz</a> 9.5 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:05:13</span> <span class='status'>done</span> <span class='title'>Redirect list</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-redirect.sql.gz">frwiki-20130420-redirect.sql.gz</a> 16.2 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:05:08</span> <span class='status'>done</span> <span class='title'>Nonexistent pages that have been protected.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-protected_titles.sql.gz">frwiki-20130420-protected_titles.sql.gz</a> 135 KB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:05:06</span> <span class='status'>done</span> <span class='title'>Name/value pairs for pages.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-page_props.sql.gz">frwiki-20130420-page_props.sql.gz</a> 30.2 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:04:45</span> <span class='status'>done</span> <span class='title'>Newer per-page restrictions table.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-page_restrictions.sql.gz">frwiki-20130420-page_restrictions.sql.gz</a> 158 KB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:04:42</span> <span class='status'>done</span> <span class='title'>Base per-page data (id, title, old restrictions, etc).</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-page.sql.gz">frwiki-20130420-page.sql.gz</a> 171.4 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:04:00</span> <span class='status'>done</span> <span class='title'>Category information.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-category.sql.gz">frwiki-20130420-category.sql.gz</a> 4.5 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:03:57</span> <span class='status'>done</span> <span class='title'>User group assignments.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-user_groups.sql.gz">frwiki-20130420-user_groups.sql.gz</a> 3 KB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:03:55</span> <span class='status'>done</span> <span class='title'>Set of defined interwiki prefixes and links for this wiki.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-interwiki.sql.gz">frwiki-20130420-interwiki.sql.gz</a> 719 bytes</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 11:03:53</span> <span class='status'>done</span> <span class='title'>Wiki interlanguage link records.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-langlinks.sql.gz">frwiki-20130420-langlinks.sql.gz</a> 123.1 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:59:37</span> <span class='status'>done</span> <span class='title'>Wiki external URL link records.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-externallinks.sql.gz">frwiki-20130420-externallinks.sql.gz</a> 208.7 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:58:37</span> <span class='status'>done</span> <span class='title'>Wiki template inclusion link records.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-templatelinks.sql.gz">frwiki-20130420-templatelinks.sql.gz</a> 301.9 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:52:32</span> <span class='status'>done</span> <span class='title'>Wiki media/files usage records.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-imagelinks.sql.gz">frwiki-20130420-imagelinks.sql.gz</a> 98.2 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:51:34</span> <span class='status'>done</span> <span class='title'>Wiki category membership link records.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-categorylinks.sql.gz">frwiki-20130420-categorylinks.sql.gz</a> 295.1 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:48:55</span> <span class='status'>done</span> <span class='title'>Wiki page-to-page link records.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-pagelinks.sql.gz">frwiki-20130420-pagelinks.sql.gz</a> 978.7 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:40:32</span> <span class='status'>done</span> <span class='title'>Metadata on prior versions of uploaded media/files.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-oldimage.sql.gz">frwiki-20130420-oldimage.sql.gz</a> 1.2 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:40:30</span> <span class='status'>done</span> <span class='title'>Metadata on current versions of uploaded media/files.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-image.sql.gz">frwiki-20130420-image.sql.gz</a> 5.3 MB</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:40:26</span> <span class='status'>done</span> <span class='title'>A few statistics such as the page count.</span><ul><li class='file'><a href="/frwiki/20130420/frwiki-20130420-site_stats.sql.gz">frwiki-20130420-site_stats.sql.gz</a> 803 bytes</li></ul></li>
+<li class='done'><span class='updates'>2013-04-20 10:40:24</span> <span class='status'>done</span> <span class='title'>Data for various events (deletions, uploads, etc). (private)</span></li>
+<li class='done'><span class='updates'>2013-04-20 10:34:54</span> <span class='status'>done</span> <span class='title'>Deleted page and revision data. (private)</span></li>
+<li class='done'><span class='updates'>2013-04-20 10:33:58</span> <span class='status'>done</span> <span class='title'>Data for blocks of IP addresses, ranges, and users. (private)</span></li>
+<li class='done'><span class='updates'>2013-04-20 10:33:56</span> <span class='status'>done</span> <span class='title'>Users' watchlist settings. (private)</span></li>
+<li class='done'><span class='updates'>2013-04-20 10:32:57</span> <span class='status'>done</span> <span class='title'>User account data. (private)</span></li>
+        </ul>
+
+</body>
+</html>
