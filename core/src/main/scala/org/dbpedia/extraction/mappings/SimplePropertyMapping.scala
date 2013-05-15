@@ -154,14 +154,15 @@ extends PropertyMapping
 
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.size > 0)
         {
-            val parseResults = parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional)
+            var newPropertyNode = ListParser.parseList(propertyNode, language.wikiCode).get
+            val parseResults = parser.parsePropertyNode(newPropertyNode, !ontologyProperty.isFunctional)
 
             for( parseResult <- selector(parseResults) )
             {
                 val g = parseResult match
                 {
-                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri)
-                    case value => writeValue(value, subjectUri, propertyNode.sourceUri)
+                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, newPropertyNode.sourceUri)
+                    case value => writeValue(value, subjectUri, newPropertyNode.sourceUri)
                 }
                 graph ++= g
             }
