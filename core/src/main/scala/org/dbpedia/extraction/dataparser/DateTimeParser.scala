@@ -42,7 +42,7 @@ class DateTimeParser ( context : {
     private val postfix = if(strict) """\s*""" else ".*"
 
     // catch dates like: "8 June 07" or "07 June 45"
-    private val DateRegex1 = ("""(?iu)""" + prefix + """([0-9]{1,2})\s*("""+monthRegex+""")\s*([0-9]{2})(?!\d).*""" + postfix).r
+    private val DateRegex1 = ("""(?iu)""" + prefix + """([0-9]{1,2})\s*("""+monthRegex+""")\s*([0-9]{2})(?!\d)\s*(?!\s)(?!"""+ eraRegex +""").*""" + postfix).r
 
     // catch dates like: "[[29 January]] [[300 AD]]", "[[23 June]] [[2008]] (UTC)", "09:32, 6 March 2000 (UTC)" or "3 June 1981"
     private val DateRegex2 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*("""+monthRegex+""")\]?\]?,? \[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?(?!\d)""" + postfix).r
@@ -218,7 +218,7 @@ class DateTimeParser ( context : {
     {
         for(DateRegex1(day, month, year) <- List(input))
         {
-            // the century (1900 or 2000) depends on the last 2-digit number in the inputstring: >10 -> 1900
+            // the century (1900 or 2000) depends on the last 2-digit number in the inputstring: >20 -> 1900
             // TODO: replace with more flexible test
             var century = "20"
             if (year.toInt > 20)
