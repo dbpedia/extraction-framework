@@ -146,7 +146,12 @@ class DateTimeParser ( context : {
                 {
                     try
                     {
-                        return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
+                    	//month can be either given by its name or by its number 
+                    	val monthNum = months.get(month.toLowerCase) match {
+	                    	case Some(s) => s
+	                    	case None => month.toInt
+                    	}
+                        return Some(new Date(Some(year.toInt), Some(monthNum), Some(day.toInt), datatype))
                     }
                     catch
                     {
