@@ -10,7 +10,22 @@ object StringParser extends DataParser
 {
     private val smallTagRegex = """<small[^>]*>(.*?)<\/small>""".r
     private val tagRegex = """\<.*?\>""".r
+    
+    override val splitPropertyNodeRegex = """<br\s*\/?>"""
+    // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
+    override def parsePropertyNode(propertyNode : PropertyNode, split : Boolean) =
+    {
+        if(split)
+        {
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap(node => parse(node).toList)
+        }
+        else
+        {
+            parse(propertyNode).toList
+        }
+    }
+    
     override def parse(node : Node) : Option[String] =
     {
         //Build text from node

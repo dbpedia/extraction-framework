@@ -11,14 +11,14 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
 {
     private val flagTemplateParser = new FlagTemplateParser(context)
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""
+    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |;|,|/"""
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
     override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
     {
         if(split)
         {
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap(node => parse(node).toList)
         }
         else
         {
@@ -29,7 +29,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
     override def parse(node : Node) : Option[String] =
     {
         val pageNode = node.root
-
+        
         if (! strict)
         {
             for (child <- node :: node.children) child match
@@ -47,7 +47,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
                     {
                         return Some(getUri(destination, pageNode))
                     }
-                    case _ =>
+                    case _ => 
                 }
 
                 //resolve templates to create links
