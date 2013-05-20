@@ -16,11 +16,6 @@ object InfoboxExtractorConfig
         "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
     )
     
-    val splitPropertyNodeRegex = Map (
-        "en"-> List("""<br\s*\/?>"""),
-        "fr"-> List("""[C-c]lr""")
-    )
-    
     // TODO: i18n
     val RankRegex = """(?i)([0-9]+)\s?(?:st|nd|rd|th)""".r
 

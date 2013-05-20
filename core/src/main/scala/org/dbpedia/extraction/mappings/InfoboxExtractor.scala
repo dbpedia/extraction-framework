@@ -114,7 +114,7 @@ extends Extractor
                     var cleanedPropertyNode = ListParser.parseList(property, language).get
                    
                     cleanedPropertyNode = NodeUtil.removeParentheses(cleanedPropertyNode)
-                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, (InfoboxExtractorConfig.splitPropertyNodeRegex.get("en").get)(0))
+                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, """<br\s*\/?>""")
                     for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
                     {
                         val propertyUri = getPropertyUri(property.key)
