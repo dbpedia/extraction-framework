@@ -13,12 +13,12 @@ object ListParser extends DataParser {
 	"fr"-> List("""[C-c]lr""")
     )
 
-    def parseList(node : Node, language : String) : Option[PropertyNode] = {
+    def parseList (node : Node, language : String) : Option[PropertyNode] = {
         var propertyNode = node.asInstanceOf[PropertyNode]
         
-        if (splitPropertyNodesRegex.contains(language)) {
+        if (splitPropertyNodesRegex.contains (language)) {
             var currentNodes = List[Node]()
-            var cleanedPropertyNode = new PropertyNode("", List[Node](), 0)
+            var cleanedPropertyNode = new PropertyNode ("", List[Node](), 0)
         
             for(child <- propertyNode.children) child match {
                 case TemplateNode(title, children, line, titleParsed) => {
