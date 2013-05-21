@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dataparser
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.config.dataparser.DateTimeParserConfig
+import org.dbpedia.extraction.config.dataparser.{DataParserConfig, DateTimeParserConfig}
 import org.dbpedia.extraction.util.{Language, Date}
 import org.dbpedia.extraction.mappings.Redirects
 
@@ -31,7 +31,9 @@ class DateTimeParser ( context : {
 
     // parse logic configurations
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexDateTime.contains(language))
+                                            DataParserConfig.splitPropertyNodeRegexDateTime.get(language).get
+                                          else DataParserConfig.splitPropertyNodeRegexDateTime.get("en").get
 
     private val monthRegex = months.keySet.mkString("|")
     private val eraRegex = eraStr.keySet.mkString("|")

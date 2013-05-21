@@ -9,6 +9,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.Redirects
 import java.lang.Double
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 class UnitValueParser( extractionContext : {
                            def ontology : Ontology
@@ -26,7 +27,9 @@ class UnitValueParser( extractionContext : {
 
     private val language = extractionContext.language.wikiCode
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or """  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexUnitValue.contains(language))
+                                            DataParserConfig.splitPropertyNodeRegexUnitValue.get(language).get
+                                          else DataParserConfig.splitPropertyNodeRegexUnitValue.get("en").get
     
     private val prefix = if(strict) """\s*""" else """[\D]*?"""
 

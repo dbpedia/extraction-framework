@@ -4,6 +4,7 @@ import java.util.logging.{Logger,Level}
 import org.dbpedia.extraction.wikiparser.Node
 import java.text.ParseException
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 /**
  * Parses integer numbers.
@@ -17,7 +18,11 @@ class IntegerParser( context : { def language : Language } ,
 
     private val logger = Logger.getLogger(getClass.getName)
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    private language = context.language.wikiCode
+
+    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexInteger.contains(language))
+                                            DataParserConfig.splitPropertyNodeRegexInteger.get(language).get
+                                          else DataParserConfig.splitPropertyNodeRegexInteger.get("en").get
 
     // we allow digits, minus, comma, dot and space in numbers
     private val IntegerRegex = """\D*?(-?[0-9-,. ]+).*""".r
