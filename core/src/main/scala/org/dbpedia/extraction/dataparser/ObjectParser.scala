@@ -2,6 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 /**
  * Parses links to other instances.
@@ -11,7 +12,10 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
 {
     private val flagTemplateParser = new FlagTemplateParser(context)
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or | in |/|;|,"""
+    private val language = context.language.wikiCode
+
+    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexObject.contains(language)) DataParserConfig.splitPropertyNodeRegexObject.get(language).get
+                                          else DataParserConfig.splitPropertyNodeRegexObject.get("en").get
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
     override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =

@@ -10,6 +10,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import scala.collection.mutable.ArrayBuffer
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 /**
  * This extractor extracts all properties from all infoboxes.
@@ -61,6 +62,9 @@ extends Extractor
 
     private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
 
+    private val splitPropertyNodeRegexInfobox = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(language))
+                                                  DataParserConfig.splitPropertyNodeRegexInfobox.get(language).get
+                                                else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Parsers
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +118,7 @@ extends Extractor
 
                     val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
-                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, """<br\s*\/?>""")
+                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
                     for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
                     {
                         val propertyUri = getPropertyUri(property.key)
