@@ -17,12 +17,15 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
     override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexObject.contains(language)) DataParserConfig.splitPropertyNodeRegexObject.get(language).get
                                           else DataParserConfig.splitPropertyNodeRegexObject.get("en").get
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
+    
+    override val splitPropertyNodeRegexInfoboxTemplates = if (DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.contains(language)) DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.get(language).get
+                                                          else ""
 
     override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
     {
         if(split)
         {
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegexInfoboxTemplates, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
         }
         else
         {

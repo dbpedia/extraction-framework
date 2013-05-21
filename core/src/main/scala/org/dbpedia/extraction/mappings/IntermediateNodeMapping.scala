@@ -20,10 +20,15 @@ class IntermediateNodeMapping (
 extends PropertyMapping
 {
   private val logger = Logger.getLogger(classOf[IntermediateNodeMapping].getName)
+  
+   private val language = context.language.wikiCode
 
   private val splitRegex = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(context.language.wikiCode))
                              DataParserConfig.splitPropertyNodeRegexInfobox.get(context.language.wikiCode).get
                            else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
+                           
+  private val splitPropertyNodeRegexInfoboxTemplates = if (DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.contains(language)) DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.get(language).get
+                                                          else ""
 
   override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
     
@@ -37,7 +42,7 @@ extends PropertyMapping
       case _ => None
     }).toSet //e.g. Set(leader_name, leader_title)
 
-    val valueNodes = affectedTemplatePropertyNodes.map(NodeUtil.splitPropertyNode(_, splitRegex))
+    val valueNodes = affectedTemplatePropertyNodes.map(NodeUtil.splitPropertyNode(_, splitPropertyNodeRegexInfoboxTemplates, splitRegex))
 
     //more than one template proerty is affected (e.g. leader_name, leader_title)
     if(affectedTemplatePropertyNodes.size > 1)

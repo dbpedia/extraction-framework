@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.extraction.util.{WikiUtil,Language}
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 /**
  * Parses a human-readable character string from a node. 
@@ -10,6 +11,18 @@ object StringParser extends DataParser
 {
     private val smallTagRegex = """<small[^>]*>(.*?)<\/small>""".r
     private val tagRegex = """\<.*?\>""".r
+
+    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) =
+    {
+        if(split)
+        {
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegexInfoboxTemplates, splitPropertyNodeRegex, trimResults = true).flatMap( node => parse(node).toList )
+        }
+        else
+        {
+            parse(propertyNode).toList
+        }
+    }
 
     override def parse(node : Node) : Option[String] =
     {

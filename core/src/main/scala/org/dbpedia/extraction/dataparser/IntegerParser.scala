@@ -18,7 +18,7 @@ class IntegerParser( context : { def language : Language } ,
 
     private val logger = Logger.getLogger(getClass.getName)
 
-    private language = context.language.wikiCode
+    private val language = context.language.wikiCode
 
     override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexInteger.contains(language))
                                             DataParserConfig.splitPropertyNodeRegexInteger.get(language).get

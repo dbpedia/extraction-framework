@@ -5,11 +5,12 @@ import java.util.logging.{Level, Logger}
 import util.control.ControlThrowable
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 import org.dbpedia.extraction.mappings.Redirects
+import org.dbpedia.extraction.util.Language
 
 /**
  * Parses geographical coordinates.
  */
-class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) extends DataParser
+class GeoCoordinateParser( extractionContext : { def redirects : Redirects }) extends DataParser
 {
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 

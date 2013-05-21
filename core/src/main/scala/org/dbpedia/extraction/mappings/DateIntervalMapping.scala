@@ -9,6 +9,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
 import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, TemplateNode}
 import java.lang.IllegalStateException
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 class DateIntervalMapping ( 
   val templateProperty : String, //TODO CreateMappingStats requires this to be public. Is there a better way?
@@ -25,11 +26,14 @@ extends PropertyMapping
 
   private val startDateParser = new DateTimeParser(context, startDateOntologyProperty.range.asInstanceOf[Datatype])
   private val endDateParser = new DateTimeParser(context, endDateOntologyProperty.range.asInstanceOf[Datatype])
-
+  private val language = context.language.wikiCode
   private val presentString = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
 
   // TODO: the parser should resolve HTML entities
   private val intervalSplitRegex = "(—|–|-|&mdash;|&ndash;)"
+  
+  private val splitPropertyNodeRegexInfoboxTemplates = if (DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.contains(language)) DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.get(language).get
+                                                          else ""
   
   override val datasets = Set(DBpediaDatasets.OntologyProperties)
 
@@ -96,12 +100,12 @@ extends PropertyMapping
   private def splitPropertyNodes(propertyNode : PropertyNode) : List[PropertyNode] =
   {
     //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
-    val splitNodes = NodeUtil.splitPropertyNode(propertyNode, intervalSplitRegex)
+    val splitNodes = NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegexInfoboxTemplates, intervalSplitRegex)
 
     //Did we split a date? e.g. 2009-10-13
     if(splitNodes.size > 2)
     {
-      NodeUtil.splitPropertyNode(propertyNode, "\\s" + intervalSplitRegex + "\\s")
+      NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegexInfoboxTemplates, "\\s" + intervalSplitRegex + "\\s")
     }
     else
     {
