@@ -97,9 +97,9 @@ class DownloadConfig
     range match {
       case DateRange(from, to) =>
         // "" and "-" are invalid
-        if (from.isEmpty && (to == null || to.isEmpty)) throw Usage("invalid date range", arg)
+        if ((from == null || from.isEmpty) && (to == null || to.isEmpty)) throw Usage("invalid date range", arg)
         // "-to" means "min-to"
-        var lo = if (from.isEmpty) "00000000" else from
+        var lo = if (from == null || from.isEmpty) "00000000" else from
         // "from" means "from-from", "from-" means "from-max"
         var hi = if (to == null) lo else if (to.isEmpty) "99999999" else to
         if (lo > hi) throw Usage("invalid date range", arg)
