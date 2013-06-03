@@ -6,7 +6,7 @@ import java.net.URLEncoder
 import java.io.{InvalidClassException, File}
 import scala.util.control.ControlThrowable
 import org.dbpedia.extraction.sources.{Source, WikiPage}
-import org.dbpedia.extraction.wikiparser.{WikiParser, Namespace}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.LiveDestination
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.RootExtractor
@@ -25,7 +25,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
 {
     private val logger = Logger.getLogger(classOf[LiveExtractionJob].getName)
 
-    private val parser = WikiParser.getInstance()
+    private val parser = new impl.simple.SimpleWikiParser
     var destination : LiveDestination = null;
 
 
@@ -53,7 +53,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
         {
             case ex : ControlThrowable =>
             case ex : InterruptedException =>
-            case ex => logger.log(Level.SEVERE, "Error reading pages. Shutting down...", ex)
+            case ex : Throwable => logger.log(Level.SEVERE, "Error reading pages. Shutting down...", ex)
         }
         finally
         {
@@ -65,9 +65,9 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
             logger.info(label + " finished");
           }
           catch{
-            //case ex => logger.log(Level.SEVERE, "Error in step " + stepnumber + ", In thread "+
+            //case ex : Throwable => logger.log(Level.SEVERE, "Error in step " + stepnumber + ", In thread "+
               //Thread.currentThread.getId + " Destination = " + destination.toString);
-            case ex => logger.log(Level.SEVERE, "Error in thread number " + Thread.currentThread().getId +
+            case ex : Throwable => logger.log(Level.SEVERE, "Error in thread number " + Thread.currentThread().getId +
               " and destination = " + destination);
 
           }
@@ -93,7 +93,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
         }
         catch
         {
-            case ex =>
+            case ex : Throwable =>
             {
                 logger.log(Level.SEVERE, "Inconsistet completion log. Shutting down...", ex)
                 throw new RuntimeException with ControlThrowable

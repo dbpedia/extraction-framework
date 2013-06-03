@@ -9,6 +9,7 @@ import java.net.Authenticator
  * Dump extraction script.
  */
 object Extraction {
+  
   val Started = "extraction-started"
 
   val Complete = "extraction-complete"

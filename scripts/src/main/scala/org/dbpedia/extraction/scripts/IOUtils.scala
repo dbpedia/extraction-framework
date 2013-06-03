@@ -35,9 +35,9 @@ object IOUtils {
   
   def input(file: FileLike[_]) = open(file, _.inputStream(), unzippers)
   
-  def write(file: FileLike[_], charset: Charset = Codec.UTF8) = new OutputStreamWriter(output(file), charset)
+  def write(file: FileLike[_], charset: Charset = Codec.UTF8.charSet) = new OutputStreamWriter(output(file), charset)
   
-  def read(file: FileLike[_], charset: Charset = Codec.UTF8) = new InputStreamReader(input(file), charset)
+  def read(file: FileLike[_], charset: Charset = Codec.UTF8.charSet) = new InputStreamReader(input(file), charset)
   
   def readLines[U](file: FileLike[_])(proc: String => U): Unit = {
     val reader = read(file)

@@ -148,7 +148,7 @@ extends Extractor {
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
         try {
           quads appendAll handleFlatBindings(tplBindings.getFlat(), pageConfig, tpl, cache, cache.blockURIs("page").getURI)
-        } catch { case _ => } //returned bindings are wrong
+        } catch { case _ : Throwable => } //returned bindings are wrong
       }})
       Logging.printMsg("pro- and epilog bindings handled", 2)
 
@@ -384,7 +384,7 @@ object WiktionaryPageExtractor {
           bindingsMatchedAnyResultTemplate = true
         } catch {
           case e1:java.util.NoSuchElementException => Logging.printMsg("missing binding: "+e1, 3)
-          case e => Logging.printMsg("exception while processing bindings: "+e, 3)
+          case e : Throwable => Logging.printMsg("exception while processing bindings: "+e, 3)
         }
       })
     })

@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.mappings.Redirects
-import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
 import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
@@ -298,7 +298,7 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
 
 
 
-    private val wikiParser = WikiParser.getInstance()
+    private val wikiParser = new impl.simple.SimpleWikiParser
     private val datatypes =  OntologyDatatypes.load().map(dt => (dt.name, dt)).toMap
 
     private def parse(language : String, datatypeName : String, input : String) : Option[Double] =

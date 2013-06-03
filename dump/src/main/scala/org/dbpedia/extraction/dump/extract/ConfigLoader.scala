@@ -4,7 +4,7 @@ import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
-import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichFile.wrapFile
@@ -36,7 +36,7 @@ class ConfigLoader(config: Config)
       config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2, parser))
     }
     
-    private val parser = WikiParser.getInstance(config.parser)
+    private val parser = new impl.simple.SimpleWikiParser
     
     /**
      * Creates ab extraction job for a specific language.
@@ -124,12 +124,12 @@ class ConfigLoader(config: Config)
     
     private def writer(file: File): () => Writer = {
       val zip = zipper(file.getName)
-      () => new OutputStreamWriter(zip(new FileOutputStream(file)), UTF8)
+      () => new OutputStreamWriter(zip(new FileOutputStream(file)), UTF8.charSet)
     }
 
     private def reader(file: File): () => Reader = {
       val unzip = unzipper(file.getName)
-      () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8)
+      () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8.charSet)
     }
 
     /**

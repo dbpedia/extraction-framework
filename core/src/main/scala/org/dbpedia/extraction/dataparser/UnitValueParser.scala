@@ -239,7 +239,7 @@ class UnitValueParser( extractionContext : {
                     value = Some((ftToCm + inToCm).toString)
                     unit = Some("centimetre")
                 }
-                catch { case _ => }
+                catch { case _ : Throwable => }
             }
         }
         // http://en.wikipedia.org/wiki/Template:Auto_in

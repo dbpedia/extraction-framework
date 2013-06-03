@@ -120,4 +120,11 @@ class RichString(str : String)
       sb.toString
     }
     
+  /**
+   * Split string on given character or whitespace, trim each part, remove empty parts
+   */
+  def trimSplit(sep: Char): Array[String] = {
+    str.split("["+sep+"\\s]+", -1).map(_.trim).filter(_.nonEmpty)
+  }
+
 }
