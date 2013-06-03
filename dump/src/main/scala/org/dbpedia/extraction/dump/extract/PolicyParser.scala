@@ -3,6 +3,7 @@ package org.dbpedia.extraction.dump.extract
 import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.RichString.wrapString
 import scala.collection.mutable.{HashMap,ArrayBuffer}
 import scala.collection.immutable.ListMap
 import scala.collection.Map
@@ -27,10 +28,19 @@ object PolicyParser {
     /**
      * Triples of prefix, priority and factory.
      * 
-     * Priority is important: First convert IRI to URI, then append '_' if necessary,
-     * then convert specific domain to generic domain. The second step must happen 
-     * after URI conversion (because a URI may need an underscore where a IRI doesn't), 
-     * and before the third step (because we need the specific domain to decide which 
+     * Priority is important:
+     * 
+     * 1. check length
+     * 2. convert IRI to URI
+     * 3. append '_' if necessary
+     * 4. convert specific domain to generic domain.
+     * 
+     * The length check must happen before the URI conversion, because for a non-Latin IRI the URI
+     * may be several times as long, e.g. one Chinese character has several UTF-8 bytes, each of
+     * which needs three characters after percent-encoding.
+     *  
+     * The third step must happen after URI conversion (because a URI may need an underscore where
+     * a IRI doesn't), and before the last step (because we need the specific domain to decide which 
      * URIs should be made xml-safe).
      */
     val policies = Seq[(String, Int, Predicate => Policy)] (
@@ -68,71 +78,12 @@ object PolicyParser {
     "n-quads" -> { new TerseFormatter(true, false, _) }
   )
 
-}
-
-/**
- * TODO: Remove dependencies on ConfigParser and Properties, move class to
- * org.dbpedia.extraction.destinations.formatters.UriPolicyParser.
- */
-class PolicyParser(config : Properties)
-extends ConfigParser(config)
-{
-  def parseFormats(): Map[String, Formatter] = {
-    val policies = parsePolicies
-    parseFormats(policies)
-  }
-  
-  /**
-   * parse all URI policy lines
-   */
-  def parsePolicies(): Map[String, Array[Policy]] = {
-    
-    val policies = new HashMap[String, Array[Policy]]()
-    for (key <- config.stringPropertyNames) {
-      if (key.startsWith("uri-policy")) {
-        try policies(key) = parsePolicy(key)
-        catch { case e: Exception => throw error("invalid URI policy: '"+key+"="+config.getProperty(key)+"'", e) }
-      }
-    }
-    
-    policies
-  }
-  
-  /**
-   * Parse all format lines.
-   */
-  def parseFormats(policies: Map[String, Array[Policy]]): Map[String, Formatter] = {
-    
-    val formats = new HashMap[String, Formatter]()
-    
-    for (key <- config.stringPropertyNames) {
-      
-      if (key.startsWith("format.")) {
-        
-        val suffix = key.substring("format.".length)
-        
-        val settings = splitValue(key, ';')
-        require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy")
-        
-        val formatter = formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString("'","','","'")))
-        
-        val policy =
-          if (settings.length == 1) null
-          else policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
-        
-        formats(suffix) = formatter.apply(policy)
-      }
-    }
-    
-    formats
-  }
-  
   /**
    * Parses a list of languages like "en,fr" or "*" or even "en,*,fr"
    */
   private def parsePredicate(languages: String): Predicate = {
     
-    val codes = split(languages, ',').toSet
+    val codes = languages.trimSplit(',').toSet
     
     // "*" matches all dbpedia domains
     if (codes("*")) {
@@ -151,15 +102,15 @@ extends ConfigParser(config)
   /**
    * Parses a policy line like "uri-policy.main=uri:en,fr; generic:en"
    */
-  def parsePolicy(key: String): Array[Policy] = {
+  def parsePolicyValue(value: String): Array[Policy] = {
     
     val predicates = Array.fill(POSITIONS)(new ArrayBuffer[(Int, Policy)])
     
     // parse a value like "uri:en,fr; xml-safe-predicates:*"
-    for (policy <- splitValue(key, ';')) {
+    for (policy <- value.trimSplit(';')) {
       // parse a part like "uri:en,fr" or "xml-safe-predicates:*"
-      split(policy, ':') match {
-        case List(name, languages) =>
+      policy.trimSplit(':') match {
+        case Array(name, languages) =>
           // get factory for a name like "xml-safe-predicates"
           policies.get(name) match {
             case Some((prio, position, factory)) => {
@@ -185,4 +136,8 @@ extends ConfigParser(config)
     ordered.map(_.reduceLeft(_ andThen _))
   }
   
+  protected def error(message: String, cause: Throwable = null): IllegalArgumentException = {
+    new IllegalArgumentException(message, cause)
+  }
+    
 }

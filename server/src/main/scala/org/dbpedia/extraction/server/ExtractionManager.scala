@@ -47,7 +47,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
      */
     def updateAll
     
-    protected val parser = WikiParser.getInstance()
+    protected val parser = new impl.simple.SimpleWikiParser()
 
     def extract(source: Source, destination: Destination, language: Language): Unit = {
       val extract = extractor(language)

@@ -1,11 +1,14 @@
 package org.dbpedia.extraction.dump.extract
 
+import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.mappings.Extractor
 import scala.collection.mutable.HashMap
 import java.util.Properties
 import java.io.File
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.JavaConversions.asScalaSet
+import scala.collection.Map
 import scala.collection.immutable.{SortedSet,SortedMap}
 import org.dbpedia.extraction.util.{Language,WikiInfo}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
@@ -13,7 +16,6 @@ import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange
 import scala.io.Codec
 
 private class Config(config: Properties)
-extends ConfigParser(config)
 {
   // TODO: rewrite this, similar to download stuff:
   // - Don't use java.util.Properties, allow multiple values for one key
@@ -32,15 +34,62 @@ extends ConfigParser(config)
 
   val wikiName = config.getProperty("wikiName", "wiki")
 
-  val parser = config.getProperty("parser", "simple")
-
   /** Local ontology file, downloaded for speed and reproducibility */
   val ontologyFile = getFile("ontology")
 
   /** Local mappings files, downloaded for speed and reproducibility */
   val mappingsDir = getFile("mappings")
   
-  val formats = new PolicyParser(config).parseFormats()
+  val formats = parseFormats()
+  
+  def parseFormats(): Map[String, Formatter] = {
+    val policies = parsePolicies
+    parseFormats(policies)
+  }
+  
+  /**
+   * parse all URI policy lines
+   */
+  def parsePolicies(): Map[String, Array[Policy]] = {
+    
+    val policies = new HashMap[String, Array[Policy]]()
+    for (key <- config.stringPropertyNames) {
+      if (key.startsWith("uri-policy")) {
+        try policies(key) = PolicyParser.parsePolicyValue(config.getProperty(key))
+        catch { case e: Exception => throw error("invalid URI policy: '"+key+"="+config.getProperty(key)+"'", e) }
+      }
+    }
+    
+    policies
+  }
+  
+  /**
+   * Parse all format lines.
+   */
+  def parseFormats(policies: Map[String, Array[Policy]]): Map[String, Formatter] = {
+    
+    val formats = new HashMap[String, Formatter]()
+    
+    for (key <- config.stringPropertyNames) {
+      
+      if (key.startsWith("format.")) {
+        
+        val suffix = key.substring("format.".length)
+        
+        val settings = splitValue(key, ';')
+        require(settings.length == 2, "key '"+key+"' must have two values separated by ';' - file format and uri policy name")
+        
+        val policy = policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
+        val formatter = PolicyParser.formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+PolicyParser.formatters.keys.toSeq.sorted.mkString("'","','","'")))
+        
+        formats(suffix) = formatter.apply(policy)
+      }
+    }
+    
+    formats
+  }
+  
+
 
   val extractorClasses = loadExtractorClasses()
   
@@ -147,4 +196,18 @@ extends ConfigParser(config)
     classOf[Extractor].getClassLoader.loadClass(className).asSubclass(classOf[Extractor])
   }
   
+  private def splitValue(key: String, sep: Char): List[String] = {
+    val values = config.getProperty(key)
+    if (values == null) List.empty
+    else split(values, sep)
+  }
+
+  private def split(value: String, sep: Char): List[String] = {
+    value.split("["+sep+"\\s]+", -1).map(_.trim).filter(_.nonEmpty).toList
+  }
+
+  private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
+    new IllegalArgumentException(message, cause)
+  }
+    
 }

@@ -46,7 +46,7 @@ abstract class PrefetchIterator[T]
 			} while(current != null && !current.hasNext); 
 		}
 		catch {
-			case e => logger.error(ExceptionUtils.getStackTrace(e));
+			case e : Throwable => logger.error(ExceptionUtils.getStackTrace(e));
 		}
 		if (current == null)
 			finished = true;

@@ -221,8 +221,8 @@ final class SimpleWikiParser extends WikiParser
                 }
             }
 
-            lastPos = source.pos;
-            lastLine = source.line;
+            lastPos = source.pos
+            lastLine = source.line
         }
         
         nodes.reverse
@@ -629,7 +629,7 @@ final class SimpleWikiParser extends WikiParser
         }
         catch
         {
-            case _ => 1
+            case _ : NumberFormatException => 1
         }
     }
 

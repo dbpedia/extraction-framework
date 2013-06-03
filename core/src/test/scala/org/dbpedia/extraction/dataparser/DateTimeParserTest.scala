@@ -4,7 +4,7 @@ import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.FlatSpec
-import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
 import org.dbpedia.extraction.util.Language
 
@@ -514,7 +514,7 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
         parse("el", "xsd:date", "{{ηθηλ|1996|03|18}}") should equal (Some("1996-03-18"))
     }
 
-    private val wikiParser = WikiParser.getInstance()
+    private val wikiParser = new impl.simple.SimpleWikiParser
 
     private def parse(language : String, datatype : String, input : String) : Option[String] =
     {

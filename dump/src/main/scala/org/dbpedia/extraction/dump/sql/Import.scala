@@ -75,7 +75,7 @@ object Import {
   
   private def reader(file: File): () => Reader = {
     val unzip = unzipper(file.getName)
-    () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8)
+    () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8.charSet)
   }
 
   /**

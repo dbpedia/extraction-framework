@@ -250,11 +250,11 @@ object StringUtils
   
   object IntLiteral {
     def apply(x : Int) = x.toString
-    def unapply(x : String) : Option[Int] =  try Some(x.toInt) catch { case _ => None }
+    def unapply(x : String) : Option[Int] =  try Some(x.toInt) catch { case _ : NumberFormatException => None }
   }
 
   object BooleanLiteral {
     def apply(x : Boolean) = x.toString
-    def unapply(x : String) : Option[Boolean] =  try Some(x.toBoolean) catch { case _ => None }
+    def unapply(x : String) : Option[Boolean] =  try Some(x.toBoolean) catch { case _ : NumberFormatException => None }
   }
 }
