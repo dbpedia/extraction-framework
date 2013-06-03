@@ -378,7 +378,7 @@ object OntologyDatatypes
         builder.addUnit(new FactorUnitDatatype("gigametre", Set("Gm","gigametre"), 1000000000.0));
         builder.addUnit(new FactorUnitDatatype("inch", Set("in","inch","''","\""), 0.0254));
         builder.addUnit(new FactorUnitDatatype("hand", Set("hand"), 0.1016));
-        builder.addUnit(new FactorUnitDatatype("foot", Set("ft","feet","foot",/*el*/ "πόδια"), 0.3048));
+        builder.addUnit(new FactorUnitDatatype("foot", Set("ft","feet","foot", "'",/*el*/ "πόδια"), 0.3048));
         builder.addUnit(new FactorUnitDatatype("yard", Set("yd","yard"), 0.9144));
         builder.addUnit(new FactorUnitDatatype("fathom", Set("fathom"), 1.8288));
         builder.addUnit(new FactorUnitDatatype("rod", Set("rd","perch","pole","rod"), 5.0292));
