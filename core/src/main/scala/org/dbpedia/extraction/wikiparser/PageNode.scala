@@ -31,5 +31,5 @@ extends Node(children, 0)
 
     def toPlainText = children.map(_.toPlainText).mkString
 
-    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText)
+    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
 }

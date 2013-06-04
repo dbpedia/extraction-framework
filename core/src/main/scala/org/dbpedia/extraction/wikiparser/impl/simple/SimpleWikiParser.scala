@@ -66,6 +66,8 @@ final class SimpleWikiParser extends WikiParser
      */
     def apply(page : WikiPage) : PageNode =
     {
+        if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki") throw new IllegalArgumentException("need format 'text/x-wiki', found '"+page.format+"'")
+        
         //Parse source
         val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
 
