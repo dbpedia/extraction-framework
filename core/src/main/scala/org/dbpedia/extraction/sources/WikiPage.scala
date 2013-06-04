@@ -3,7 +3,6 @@ package org.dbpedia.extraction.sources
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.sources.WikiPage._
 import org.dbpedia.extraction.util.StringUtils._
-import WikiPageFormat._
 
 /**
  * Represents a wiki page
@@ -17,27 +16,25 @@ import WikiPageFormat._
  * @param contributorID The ID of the latest contributor
  * @param contributorName The name of the latest contributor
  * @param source The WikiText source of this page
+ * @param format e.g. "text/x-wiki"
  */
 class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val revision: Long, val timestamp: Long,
-               val contributorID: Long, val contributorName: String, val source : String, val format: WikiPageFormat)
+               val contributorID: Long, val contributorName: String, val source : String, val format: String)
 {
 
-    def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String) =
-      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source, WikiPageFormat.WikiText)
-
     def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
-      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source, WikiPageFormat.mimeToWikiPageFormat(format))
-    
+      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source, format)
+
     def this(title: WikiTitle, source : String) =
-      this(title, null, -1, -1, -1, 0, "", source, WikiPageFormat.WikiText)
+      this(title, null, -1, -1, -1, 0, "", source, "")
     
     override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
     
     /**
      * Serializes this page to XML using the MediaWiki export format.
-     * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.6.
+     * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.8.
      */
-    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source)
+    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
 }
 
 object WikiPage {
@@ -48,7 +45,7 @@ object WikiPage {
    * TODO: use redirect
    * TODO: use <contributor> / <ip> if contributorID == 0
    */
-  def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source : String) = {
+  def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String) = {
     <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.8/ http://www.mediawiki.org/xml/export-0.8.xsd"
@@ -66,7 +63,7 @@ object WikiPage {
             <id>{formatLong(contributorID)}</id>
           </contributor>
           <text xml:space="preserve">{source}</text>
-
+          <format>{format}</format>
         </revision>
       </page>
     </mediawiki>
@@ -76,13 +73,13 @@ object WikiPage {
    * XML for one page, api.php format.
    * TODO: use redirect
    */
-  def toApiXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source : String) = {
+  def toApiXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String, format: String) = {
     <api>
       <query>
         <pages>
           <page pageid={formatLong(id)} ns={formatInt(title.namespace.code)} title={title.decodedWithNamespace} >
             <revisions>
-              <rev revid={formatLong(revision)} timestamp={formatTimestamp(timestamp)} xml:space="preserve">{source}</rev> 
+              <rev contentformat={format} revid={formatLong(revision)} timestamp={formatTimestamp(timestamp)} xml:space="preserve">{source}</rev> 
             </revisions>
           </page>
         </pages>
