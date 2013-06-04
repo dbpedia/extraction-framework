@@ -67,7 +67,7 @@ class DownloadConfig
         if (! file.isFile) throw Usage("Invalid file "+file, arg)
         parse(file)
       case DownloadFiles(keys, files) =>
-        if (files.exists(_ isEmpty)) throw Usage("Invalid file name", arg)
+        if (files.exists(_.isEmpty)) throw Usage("Invalid file name", arg)
         for (key <- keys) key match {
           // FIXME: copy & paste in ConfigUtils and extract.Config
           case "@mappings" => for (language <- Namespace.mappings.keySet) add(languages, language, files)
