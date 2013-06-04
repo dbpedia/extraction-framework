@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters.{Formatter, PolicyParser}
+import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.destinations.formatters.UriPolicy
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
 import org.dbpedia.extraction.mappings.Extractor
 import scala.collection.mutable.HashMap
@@ -51,7 +52,7 @@ private class Config(config: Properties)
     val policies = new HashMap[String, Array[Policy]]()
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("uri-policy")) {
-        try policies(key) = PolicyParser.parsePolicyValue(config.getProperty(key))
+        try policies(key) = UriPolicy.parsePolicy(config.getProperty(key))
         catch { case e: Exception => throw error("invalid URI policy: '"+key+"="+config.getProperty(key)+"'", e) }
       }
     }
@@ -76,7 +77,7 @@ private class Config(config: Properties)
         require(settings.length == 2, "key '"+key+"' must have two values separated by ';' - file format and uri policy name")
         
         val policy = policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
-        val formatter = PolicyParser.formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+PolicyParser.formatters.keys.toSeq.sorted.mkString("'","','","'")))
+        val formatter = UriPolicy.formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+UriPolicy.formatters.keys.toSeq.sorted.mkString("'","','","'")))
         
         formats(suffix) = formatter.apply(policy)
       }
