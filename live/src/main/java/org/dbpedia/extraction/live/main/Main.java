@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.live.main;
 
-import org.apache.log4j.Logger;
+
+import org.apache.log4j.PropertyConfigurator;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.Feeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
@@ -16,6 +17,8 @@ import org.dbpedia.extraction.live.statistics.Statistics;
 import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.Authenticator;
@@ -27,7 +30,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class Main {
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     //Used for publishing triples to files
     public static BlockingQueue<DiffData> publishingDataQueue = new LinkedBlockingDeque<DiffData>();
@@ -50,6 +53,8 @@ public class Main {
     }
 
     public static void initLive() {
+
+        PropertyConfigurator.configure("log4j.properties");
 
         feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
                 LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),

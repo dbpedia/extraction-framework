@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.live.job
 
 import java.util.concurrent.ArrayBlockingQueue
-import java.util.logging.{Level, Logger}
+import org.apache.log4j.Logger
 import java.net.URLEncoder
 import java.io.{InvalidClassException, File}
 import scala.util.control.ControlThrowable
@@ -53,7 +53,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
         {
             case ex : ControlThrowable =>
             case ex : InterruptedException =>
-            case ex => logger.log(Level.SEVERE, "Error reading pages. Shutting down...", ex)
+            case ex => logger.fatal("Error reading pages. Shutting down...", ex)
         }
         finally
         {
@@ -67,7 +67,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
           catch{
             //case ex => logger.log(Level.SEVERE, "Error in step " + stepnumber + ", In thread "+
               //Thread.currentThread.getId + " Destination = " + destination.toString);
-            case ex => logger.log(Level.SEVERE, "Error in thread number " + Thread.currentThread().getId +
+            case ex => logger.error("Error in thread number " + Thread.currentThread().getId +
               " and destination = " + destination);
 
           }
@@ -95,7 +95,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
         {
             case ex =>
             {
-                logger.log(Level.SEVERE, "Inconsistet completion log. Shutting down...", ex)
+                logger.fatal("Inconsistet completion log. Shutting down...", ex)
                 throw new RuntimeException with ControlThrowable
             }
         }
@@ -156,8 +156,8 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
                     case ex : Exception =>
                     {
                         //_progress.synchronized(_progress.failedPages += 1)
-                        logger.log(Level.SEVERE, "Destination = " + destination.toString);
-                        logger.log(Level.SEVERE, "Error processing page '" + page.title + "'", ex)
+                        logger.error("Destination = " + destination.toString);
+                        logger.error("Error processing page '" + page.title + "'", ex)
                         false
                     }
                 }
