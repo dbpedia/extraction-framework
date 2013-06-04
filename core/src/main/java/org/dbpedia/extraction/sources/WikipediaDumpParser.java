@@ -192,7 +192,7 @@ public class WikipediaDumpParser
   }
 
   private void readPage()
-  throws XMLStreamException
+  throws XMLStreamException, InterruptedException
   {
     requireStartElement(PAGE_ELEM);
     nextTag();
@@ -264,7 +264,7 @@ public class WikipediaDumpParser
       {
         // emulate Scala exception handling. Ugly...
         if (e instanceof ControlThrowable) throw Exceptions.unchecked(e);
-        if (e instanceof InterruptedException) throw Exceptions.unchecked(e);
+        if (e instanceof InterruptedException) throw (InterruptedException)e;
         else logger.log(Level.WARNING, "Error processing page  " + title, e);
       }
     }
@@ -403,12 +403,12 @@ public class WikipediaDumpParser
     if (nextTag) _reader.nextTag();
   }
   
-  private boolean isStartElement(String name) throws XMLStreamException
+  private boolean isStartElement(String name)
   {
     return XMLStreamUtils.isStartElement(_reader, _namespace, name);
   }
   
-  private boolean isEndElement(String name) throws XMLStreamException
+  private boolean isEndElement(String name)
   {
     return XMLStreamUtils.isEndElement(_reader, _namespace, name);
   }
