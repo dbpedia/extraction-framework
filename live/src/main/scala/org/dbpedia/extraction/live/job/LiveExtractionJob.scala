@@ -10,6 +10,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.LiveDestination
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.RootExtractor
+import org.dbpedia.util.Exceptions;
 
 /**
  * Created by IntelliJ IDEA.
@@ -157,7 +158,7 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
                     {
                         //_progress.synchronized(_progress.failedPages += 1)
                         logger.log(Level.SEVERE, "Destination = " + destination.toString);
-                        logger.log(Level.SEVERE, "Error processing page '" + page.title + "'", ex)
+                        logger.log(Level.SEVERE, "Error processing page '"+page.title+"': "+Exceptions.toString(ex, 200))
                         false
                     }
                 }

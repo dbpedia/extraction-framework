@@ -6,6 +6,7 @@ import org.dbpedia.extraction.mappings.RootExtractor
 import org.dbpedia.extraction.sources.{Source,WikiPage}
 import org.dbpedia.extraction.wikiparser.{Namespace,WikiParser}
 import org.dbpedia.extraction.util.SimpleWorkers
+import org.dbpedia.util.Exceptions
 
 /**
  * Executes a extraction.
@@ -31,7 +32,7 @@ class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Na
       }
       success = true
     } catch {
-      case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"'", ex)
+      case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"': "+Exceptions.toString(ex, 200))
     }
     progress.countPage(success)
   }
