@@ -47,7 +47,7 @@ object Redirect
     private def br_redirects = Set("#ADKAS","#REDIRECT")
     private def bs_redirects = Set("#PREUSMJERI","#REDIRECT")
     private def bug_redirects = Set("#ALIH","#REDIRECT")
-    private def bxr_redirects = Set("#REDIRECT")
+    private def bxr_redirects = Set("#перенаправление","#перенапр","#REDIRECT")
     private def ca_redirects = Set("#REDIRECT")
     private def cbk_zam_redirects = Set("#REDIRECCIÓN","#REDIRECCION","#REDIRECT")
     private def cdo_redirects = Set("#REDIRECT")
