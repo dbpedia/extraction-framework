@@ -234,7 +234,7 @@ public class Exceptions
     int len = str.length();
     if (len <= max) return str;
     // use (max+1)/2 because (max+1)/2+max/2 == max (if max >= 0), whether max is even or odd
-    return str.substring(0, (max+1)/2)+"[.."+(len - max)+" chars..]"+str.substring(len - max/2);
+    return str.substring(0, (max+1)/2)+"[ ..."+(len - max)+" chars omitted... ]"+str.substring(len - max/2);
   }
   
 }
