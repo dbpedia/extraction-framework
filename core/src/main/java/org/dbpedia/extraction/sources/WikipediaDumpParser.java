@@ -265,7 +265,7 @@ public class WikipediaDumpParser
         // emulate Scala exception handling. Ugly...
         if (e instanceof ControlThrowable) throw Exceptions.unchecked(e);
         if (e instanceof InterruptedException) throw (InterruptedException)e;
-        else logger.log(Level.WARNING, "Error processing page  " + title, e);
+        else logger.log(Level.WARNING, "Error processing page  " + title + ": "+abridge(e.toString(), 200));
       }
     }
     
@@ -426,5 +426,12 @@ public class WikipediaDumpParser
   private int nextTag() throws XMLStreamException
   {
     return _reader.nextTag();
+  }
+  
+  private static String abridge(String str, int max) {
+    int len = str.length();
+    if (len <= max) return str;
+    // use (max+1)/2 because (max+1)/2+max/2 == max always holds, whether max is even or odd
+    return str.substring(0, (max+1)/2)+"[.."+(len - max)+" chars..]"+str.substring(len - max/2);
   }
 }
