@@ -18,7 +18,6 @@
 
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
-                <!--version>2.13.2-SNAPSHOT</version-->
 
                 <configuration>
                     <launchers>
@@ -38,33 +37,7 @@
                         </launcher>
                     </launchers>
                 </configuration>
-                <executions>
 
-                    <execution>
-                        <id>compile</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <phase>compile</phase>
-                    </execution>
-
-                    <execution>
-                        <id>test-compile</id>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <phase>test-compile</phase>
-                    </execution>
-
-                    <execution>
-                        <id>process-resources</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <phase>process-resources</phase>
-                    </execution>
-
-                </executions>
             </plugin>
 
             <plugin>
@@ -166,8 +139,8 @@
 
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.9.2</artifactId>
-            <version>1.7.2</version>
+            <artifactId>scalatest_2.10</artifactId>
+            <version>1.9.1</version>
             <scope>test</scope>
         </dependency>
 
