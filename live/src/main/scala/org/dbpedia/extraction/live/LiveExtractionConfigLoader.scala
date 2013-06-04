@@ -6,7 +6,7 @@ import java.net.URL
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.File
-import java.util.logging.{Level, Logger}
+import org.apache.log4j.Logger
 import java.awt.event.{ActionListener, ActionEvent}
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
@@ -118,7 +118,7 @@ object LiveExtractionConfigLoader
       this.synchronized {
         if(extractors==null || reloadOntologyAndMapping) {
           extractors = LoadOntologyAndMappings(articlesSource, language);
-          logger.log(Level.INFO, "Ontology and mappings reloaded");
+          logger.info("Ontology and mappings reloaded");
           reloadOntologyAndMapping = false;
         }
       }
@@ -164,7 +164,7 @@ object LiveExtractionConfigLoader
             }
             catch {
               case ex: Exception => {
-                logger.log(Level.FINE, "Error in " + extractor.extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
+                logger.error("Error in " + extractor.extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
                 Seq()
               }
             }

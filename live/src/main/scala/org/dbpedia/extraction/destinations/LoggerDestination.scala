@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.destinations
 
 import scala.collection.Seq
-import java.util.logging.{Level, Logger}
+import org.apache.log4j.Logger
 
 /**
  * Just logs the extraction output to the screen
@@ -32,7 +32,7 @@ class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination
 
   override def close = {
     val total = addedTriples + unmodifiedTriples
-    logger.log(Level.INFO, "Page with ID:" + pageID + " produced " + total +
+    logger.info("Page with ID:" + pageID + " produced " + total +
       " Triples (A:" + addedTriples + "/D:" + deletedTriples + "/U:" + unmodifiedTriples +
       ") in " + (System.currentTimeMillis - now) + "ms. (Title: " + pageTitle + ")")
   }
