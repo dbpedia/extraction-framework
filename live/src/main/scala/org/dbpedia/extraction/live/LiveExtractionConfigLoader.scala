@@ -13,7 +13,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{WikiSource, Source}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations._
-import org.dbpedia.extraction.destinations.formatters.PolicyParser
+import org.dbpedia.extraction.destinations.formatters.UriPolicy
 import org.dbpedia.extraction.live.job.LiveExtractionJob
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
 import org.dbpedia.extraction.live.core.LiveOptions
@@ -60,7 +60,7 @@ object LiveExtractionConfigLoader
   val commonsSource = null;
 
   val policies = {
-    PolicyParser.parsePolicyValue(LiveOptions.options.get("uri-policy.main"))
+    UriPolicy.parsePolicy(LiveOptions.options.get("uri-policy.main"))
   }
 
   def reload(t : Long) =
