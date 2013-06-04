@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import org.dbpedia.extraction.destinations.formatters.{Formatter, PolicyParser}
+import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
 import org.dbpedia.extraction.mappings.Extractor
 import scala.collection.mutable.HashMap
 import java.util.Properties
@@ -17,11 +17,7 @@ import scala.io.Codec
 
 private class Config(config: Properties)
 {
-  // TODO: rewrite this, similar to download stuff:
-  // - Don't use java.util.Properties, allow multiple values for one key
-  // - Resolve config file names and load them as well
-  // - Use pattern matching to parse arguments
-  // - allow multiple config files, given on command line
+  // TODO: get rid of all config file parsers, use Spring
 
   /** Dump directory */
   val dumpDir = getFile("base-dir")

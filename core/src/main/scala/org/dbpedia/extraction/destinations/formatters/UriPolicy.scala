@@ -31,8 +31,8 @@ object UriPolicy {
   // indicates that a predicate matches all positions
   val ALL = -1
 
-  // URI/IRI length
-  val MAX_URI_LENGTH = 512
+  // max length (arbitrary choice)
+  val MAX_LENGTH = 500
   
   def uri(activeFor: Predicate): Policy = {
     
@@ -54,9 +54,9 @@ object UriPolicy {
       val user = iri.getRawUserInfo
       val host = "dbpedia.org"
       val port = iri.getPort
-      var path = iri.getRawPath
-      var query = iri.getRawQuery
-      var frag = iri.getRawFragment
+      val path = iri.getRawPath
+      val query = iri.getRawQuery
+      val frag = iri.getRawFragment
       
       uri(scheme, user, host, port, path, query, frag)
     }
@@ -65,16 +65,14 @@ object UriPolicy {
     }
   }
 
-  def rejectLongUri(activeFor: Predicate): Policy = {
+  def rejectLong(activeFor: Predicate): Policy = {
 
     iri =>
     if (activeFor(iri)) {
-      if (iri.toString.length > MAX_URI_LENGTH) throw new URISyntaxException(iri.toString, "URI/IRI is too long!")
-      else iri
+      val str = iri.toString
+      if (str.length > MAX_LENGTH) throw new URISyntaxException(str, "length "+str.length+" exceeds maximum "+MAX_LENGTH)
     }
-    else {
-      iri
-    }
+    iri
   }
   
   /**

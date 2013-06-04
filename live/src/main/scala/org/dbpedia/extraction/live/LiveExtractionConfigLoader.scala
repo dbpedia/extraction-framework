@@ -13,12 +13,10 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{WikiSource, Source}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations._
-import org.dbpedia.extraction.destinations.formatters._
-import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import org.dbpedia.extraction.destinations.formatters.PolicyParser
 import org.dbpedia.extraction.live.job.LiveExtractionJob
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
 import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.dump.extract.{PolicyParser}
 import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.live.storage.JSONCache
 import org.dbpedia.extraction.live.queue.LiveQueueItem
