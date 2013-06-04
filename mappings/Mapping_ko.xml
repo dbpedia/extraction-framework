@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.6/"><page><title>Mapping ko:NBA 팀 정보</title><ns>242</ns><id>4629</id><revision><id>15529</id><timestamp>2011-10-13T00:35:54Z</timestamp><text>{{TemplateMapping
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping ko:NBA 팀 정보</title><ns>242</ns><id>4629</id><revision><id>15529</id><timestamp>2011-10-13T00:35:54Z</timestamp><text>{{TemplateMapping
 | mapToClass = BasketballTeam
 | mappings =
 	{{PropertyMapping | templateProperty = conference| ontologyProperty = league }}
@@ -1749,7 +1749,96 @@ stat4- 까지 작성 가능
     {{PropertyMapping | templateProperty = h | ontologyProperty = hsvCoordinateHue}}
     {{PropertyMapping | templateProperty = s | ontologyProperty = hsvCoordinateSaturation}}
     {{PropertyMapping | templateProperty = v | ontologyProperty = hsvCoordinateValue}}
-}}</text></revision></page><page><title>Mapping ko:서적 정보</title><ns>242</ns><id>4476</id><revision><id>15332</id><timestamp>2011-09-28T01:05:25Z</timestamp><text>&lt;!--책_정보--&gt;
+}}</text></revision></page><page><title>Mapping ko:생물 분류</title><ns>242</ns><id>6805</id><revision><id>25134</id><timestamp>2013-04-25T09:59:11Z</timestamp><text>&lt;!--생물_분류_(20130420_임경태)--&gt;
+{{ConditionalMapping
+| cases =
+{{Condition
+    | templateProperty = 계
+    | operator = contains
+    | value = 척삭동물
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Animal
+                }}
+ }}
+
+   {{Condition
+    | templateProperty = 문
+     | operator = contains
+    | value = 동물
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Animal
+                }}
+ }}
+
+   {{Condition
+    | templateProperty = 계
+     | operator = contains
+    | value = 식물
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Plant
+                }}
+ }}
+
+   {{Condition
+    | operator = otherwise
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Species
+                }}
+ }}
+
+| defaultMappings =
+    {{PropertyMapping | templateProperty = 역 | ontologyProperty = domain }}
+    {{PropertyMapping | templateProperty = 계 | ontologyProperty = kingdom }}
+    {{PropertyMapping | templateProperty = 색 | ontologyProperty = colourName }}
+    {{PropertyMapping | templateProperty = 색 | ontologyProperty = colour }}
+    {{PropertyMapping | templateProperty = 문 | ontologyProperty = division }}
+    {{PropertyMapping | templateProperty = 문 | ontologyProperty = phylum }}
+    {{PropertyMapping | templateProperty = 강 | ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = 아강| ontologyProperty = class }}
+    {{PropertyMapping | templateProperty = 목 | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = 아목 | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = 하목 | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = 소목 | ontologyProperty = order }}
+    {{PropertyMapping | templateProperty = 과 | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = 상과 | ontologyProperty = family }}
+    {{PropertyMapping | templateProperty = 속 | ontologyProperty = genus }}
+    {{PropertyMapping | templateProperty = 종 | ontologyProperty = species }}
+    {{PropertyMapping | templateProperty = 학명 | ontologyProperty = binomial }}
+    {{PropertyMapping | templateProperty = 상태 | ontologyProperty = conservationStatus }}
+    {{PropertyMapping | templateProperty = 상태_기준 | ontologyProperty = conservationStatusSystem }}
+    {{PropertyMapping | templateProperty = 이름 | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = 이명 | ontologyProperty = synonym }}
+}}
+
+
+&lt;!--이름 = 
+| 화석_범위 = 
+| 그림 = 
+| 그림_설명 = 
+| 상태 = 
+| 상태_기준 =
+| 색 = 
+| 역 = 
+| 계 = 
+| 문 = 
+| 강 = 
+| 아강 = 
+| 목 = 
+| 과 = 
+| 아과 = 
+| 속 = 
+| 종 = 
+| 아종 = 
+| 학명 = 
+| 학명_명명 = 
+| 하위 = 
+| 하위_고리 = 
+| 지도 = 
+| 지도_크기 = 
+| 지도_설명 = 
+| 크기 = 
+| 이명 = 
+--&gt;</text></revision></page><page><title>Mapping ko:서적 정보</title><ns>242</ns><id>4476</id><revision><id>15332</id><timestamp>2011-09-28T01:05:25Z</timestamp><text>&lt;!--책_정보--&gt;
 {{TemplateMapping
 | mapToClass = Book
 | mappings =
@@ -2211,7 +2300,122 @@ stat4- 까지 작성 가능
 	{{PropertyMapping | templateProperty = iso1 | ontologyProperty = iso6391Code }}
 	{{PropertyMapping | templateProperty = iso2 | ontologyProperty = iso6392Code }}
 	{{PropertyMapping | templateProperty = iso3 | ontologyProperty = iso6393Code }}
-}}</text></revision></page><page><title>Mapping ko:영화 정보</title><ns>242</ns><id>4591</id><revision><id>15476</id><timestamp>2011-09-30T00:28:59Z</timestamp><text>
+}}</text></revision></page><page><title>Mapping ko:연예인 정보</title><ns>242</ns><id>6756</id><revision><id>24999</id><timestamp>2013-04-18T08:44:24Z</timestamp><text>&lt;!--인물_정보--&gt;
+{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = 이름 | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = 본명 | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = 출생일 | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = 출생지 | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = 사망일 | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = 사망지 | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = 거주지 | ontologyProperty = residence }}
+	{{PropertyMapping | templateProperty = 국적 | ontologyProperty = nationality }}
+	{{DateIntervalMapping | templateProperty = 활동기간 | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
+	{{PropertyMapping | templateProperty = 종교 | ontologyProperty = religion }}
+	{{PropertyMapping | templateProperty = 배우자 | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = 웹사이트 | ontologyProperty = foaf:homepage }}
+}}
+
+ 
+&lt;!-- Sample data by 수지
+{{논란중}}
+{{연예인 정보
+| 이름       = 수지
+| 본명       = 배수지
+| 출생일     = {{출생일과 나이|1994|10|10}}
+| 출생지     = {{국기나라|대한민국}} [[광주광역시]] 
+| 사진       = Suzy 2013.jpg
+| 크기       = 
+| 설명       = 
+| 국가       = {{국기나라|대한민국}}
+| 종교       = 
+| 활동 영역  = [[가수]], [[배우]], [[모델]]
+| 활동 기간  = [[2010년]] ~ 현재
+| 대표작(곡) = 드라마 《드림하이》 &lt;br /&gt; 영화 《건축학개론》
+| 현 출연작  =
+| 전 출연작  =
+| 데뷔일     = [[2010년]]
+| 데뷔작(곡) = [[Bad But Good]]
+| 은퇴일     = 
+| 은퇴작(곡) = 
+| 거주지     = 
+| 소속사     = [[JYP 엔터테인먼트]]
+| 레이블 = [[AQ 엔터테인먼트]]
+| 소속팀     = [[미스에이]]
+| 장르       = [[대중음악]], [[K-pop]]
+| 배우자     = 
+| 가족사항   = 부모님, 언니, 남동생
+| 종교       = 
+| 수상       = [[2011년]] KBS 연기대상 신인연기상&lt;br /&gt; [[2012년]] 제48회 백상예술대상 영화부문 신인연기상&lt;br /&gt; [[2012년]] KBS 연예대상 쇼오락부문 신인상
+| 웹사이트   = {{트위터|missA_suzy|수지}}
+}}
+{{연예인 정보
+| 이름 = 
+| 본명 = 
+| 출생일 =
+| 출생지 = 
+| 사망일 = 
+| 사망지 = 
+| 사진 = 
+| 크기 = 
+| 설명 = 
+| 국적 = 
+| 종교 = 
+| 활동 영역 = 
+| 활동 기간 =
+| 대표작(곡) = 
+| 현 출연작 =
+| 전 출연작 =
+| 데뷔일 = 
+| 데뷔작(곡) = 
+| 은퇴일 = 
+| 은퇴작(곡) = 
+| 거주지 = 
+| 소속사 = 
+| 레이블 =
+| 소속팀 =
+| 장르 = 
+| 배우자 = 
+| 가족사항 = 
+| 종교 = 
+| 수상 = 
+| 웹사이트 = 
+}}
+
+
+--&gt;
+&lt;-- 
+
+
+{{연예인 정보
+| 사진 = 
+| 크기 = 
+| 설명 = 
+| 국적 = 
+| 종교 = 
+| 활동 영역 = 
+| 활동 기간 =
+| 대표작(곡) = 
+| 현 출연작 =
+| 전 출연작 =
+| 데뷔일 = 
+| 데뷔작(곡) = 
+| 은퇴일 = 
+| 은퇴작(곡) = 
+| 거주지 = 
+| 소속사 = 
+| 레이블 =
+| 소속팀 =
+| 장르 = 
+| 배우자 = 
+| 가족사항 = 
+| 종교 = 
+| 수상 = 
+| 웹사이트 = 
+}}
+--&gt;</text></revision></page><page><title>Mapping ko:영화 정보</title><ns>242</ns><id>4591</id><revision><id>15476</id><timestamp>2011-09-30T00:28:59Z</timestamp><text>
 &lt;!--영화_정보--&gt;
 {{TemplateMapping
 | mapToClass = Film
