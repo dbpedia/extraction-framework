@@ -114,7 +114,7 @@ object GenerateWikiSettings {
 
     var s = new StringPlusser
     for ((language, message) <- errors) s +"// "+language+" - "+message+"\n"
-    val errorStr = s toString
+    val errorStr = s.toString
     
     generate("Namespaces.scala", Map("namespaces" -> namespaceStr, "errors" -> errorStr))
     generate("Redirect.scala", Map("redirects" -> redirectStr, "errors" -> errorStr))
@@ -174,7 +174,7 @@ object GenerateWikiSettings {
     
     s +"\n"
     
-    s toString
+    s.toString
   }
   
 }

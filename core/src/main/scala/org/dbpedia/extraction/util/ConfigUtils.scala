@@ -66,8 +66,8 @@ object ConfigUtils {
   val RangeRegex = """(\d*)-(\d*)""".r
   
   def toRange(from: String, to: String): (Int, Int) = {
-    val lo: Int = if (from isEmpty) 0 else from.toInt
-    val hi: Int = if (to isEmpty) Int.MaxValue else to.toInt
+    val lo: Int = if (from.isEmpty) 0 else from.toInt
+    val hi: Int = if (to.isEmpty) Int.MaxValue else to.toInt
     if (lo > hi) throw new NumberFormatException
     (lo, hi)
   }

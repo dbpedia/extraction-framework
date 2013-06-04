@@ -249,7 +249,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
       vsep = '&' // for future additions below
     }
     
-    sb toString
+    sb.toString
   }
   
   private def templateCountLinks: Elem = {
