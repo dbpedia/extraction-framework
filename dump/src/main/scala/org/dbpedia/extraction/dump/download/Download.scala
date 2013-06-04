@@ -64,8 +64,8 @@ object Download extends DownloadConfig
     keys.foreach { key => 
       val done = keys.until(key)
       val todo = keys.from(key)
-      println("done: "+done.size+" - "+done.mkString(","))
-      println("todo: "+todo.size+" - "+keys.from(key).mkString(","))
+      println("done: "+done.size+" - "+done.map(_.wikiCode).mkString(","))
+      println("todo: "+todo.size+" - "+keys.from(key).map(_.wikiCode).mkString(","))
       new LanguageDownloader(baseUrl, baseDir, wikiName, key, languages(key), downloader).downloadDates(dateRange, dumpCount)
     }
   }
