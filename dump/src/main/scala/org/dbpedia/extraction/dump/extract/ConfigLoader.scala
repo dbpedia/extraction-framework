@@ -20,6 +20,8 @@ import scala.io.Codec.UTF8
  * 
  * TODO: clean up. The relations between the objects, classes and methods have become a bit chaotic.
  * There is no clean separation of concerns.
+ * 
+ * TODO: get rid of all config file parsers, use Spring
  */
 class ConfigLoader(config: Config)
 {
