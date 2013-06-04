@@ -1,6 +1,5 @@
-package org.dbpedia.extraction.dump.extract
+package org.dbpedia.extraction.destinations.formatters
 
-import org.dbpedia.extraction.destinations.formatters.{Formatter,TerseFormatter,TriXFormatter}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.RichString.wrapString
@@ -9,8 +8,6 @@ import scala.collection.immutable.ListMap
 import scala.collection.Map
 import scala.collection.JavaConversions.asScalaSet
 import java.util.Properties
-
-import PolicyParser._
 
 /**
  * Methods to parse the lines for 'uri-policy' and 'format' in extraction
@@ -44,7 +41,7 @@ object PolicyParser {
      * URIs should be made xml-safe).
      */
     val policies = Seq[(String, Int, Predicate => Policy)] (
-      ("reject-long", 1, rejectLongUri),
+      ("reject-long", 1, rejectLong),
       ("uri", 2, uri),
       ("xml-safe", 3, xmlSafe),
       ("generic", 4, generic)
