@@ -12,6 +12,6 @@ class StringPlusser {
   def + (value: Float):   this.type = { sb append value; this }
   def + (value: Double):  this.type = { sb append value; this }
   
-  override def toString = sb toString
+  override def toString = sb.toString
 }
 

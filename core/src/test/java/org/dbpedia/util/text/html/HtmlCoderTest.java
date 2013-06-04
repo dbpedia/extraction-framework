@@ -119,7 +119,7 @@ extends TestCase
    * @param codes code points
    * @return string containing given code points
    */
-  private String cp( int ... codes )
+  private static String cp( int ... codes )
   {
     StringBuilder sb = new StringBuilder();
     for (int code : codes)

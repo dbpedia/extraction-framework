@@ -41,7 +41,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     {
       var ns = namespace.name(language)
       if (encode) ns = WikiUtil.wikiEncode(ns).capitalize(language.locale)
-      (if (ns isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
+      (if (ns.isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
     }
     
     /**
