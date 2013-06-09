@@ -2,7 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.scripts.IOUtils._
+import org.dbpedia.extraction.util.IOUtils
 import scala.collection.mutable.LinkedHashMap
 import java.io.File
 import scala.Console.err
@@ -70,7 +70,7 @@ object ResolveTransitiveLinks {
       
       val file = finder.find(output + suffix)
       err.println(language.wikiCode+": writing "+file+" ...")
-      val writer = write(file)
+      val writer = IOUtils.writer(file)
       try {
         for ((subjUri, objUri) <- map) {
           writer.write("<"+subjUri+"> <"+predicate+"> <"+objUri+"> .\n")

@@ -5,7 +5,7 @@ import java.io.File
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.StringPlusser
-import org.dbpedia.extraction.scripts.IOUtils.readLines
+import org.dbpedia.extraction.util.IOUtils
 import scala.collection.mutable.{Map,HashMap}
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -53,7 +53,7 @@ def loadTitles(file: File): Unit = {
   // dbpedia_3.8.owl  lines: 4622  bytes: 811552  gzip: 85765  bzip2: 50140
   // links/revyu_links.nt  lines: 6  bytes: 1008  gzip: 361  bzip2: 441
   // af/geo_coordinates_af.nt lines: 82 bytes: 11524 gzip: 1141 bzip2: 1228
-  readLines(file) { line =>
+  IOUtils.readLines(file) { line =>
     val parts = line.split("\\s+", -1)
     if (parts.length != 9) throw new IllegalArgumentException("bad line format")
     val path = parts(0)
@@ -456,7 +456,7 @@ def include(page: String): String = {
 }
 
 def write(page: String, content: String): Unit = {
-  val writer = IOUtils.write(new File("Downloads"+tag(current)+page+".wacko"))
+  val writer = IOUtils.writer(new File("Downloads"+tag(current)+page+".wacko"))
   try writer.write(content)
   finally writer.close()
 }

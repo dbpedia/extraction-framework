@@ -5,7 +5,7 @@ import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import org.dbpedia.extraction.util.FileLike
 import scala.Console.err
-import IOUtils.write
+import org.dbpedia.extraction.util.IOUtils
 import java.io.File
 
 /**
@@ -40,7 +40,7 @@ object QuadMapper {
 
     err.println(tag+": writing "+outFile+" ...")
     var mapCount = 0
-    val writer = write(outFile)
+    val writer = IOUtils.writer(outFile)
     try {
       // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
       writer.write("# started "+formatCurrentTimestamp+"\n")

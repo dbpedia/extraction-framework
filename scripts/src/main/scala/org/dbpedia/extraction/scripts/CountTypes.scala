@@ -10,7 +10,7 @@ import scala.collection.immutable.SortedMap
 import scala.collection.mutable
 import scala.collection.mutable.HashMap
 import scala.collection.Map
-import IOUtils.write
+import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.Finder
 import scala.Console.err
 
@@ -88,7 +88,7 @@ object CountTypes {
   
   private def printTypes(file: File, tag: String, types: Map[String, Counter]): Unit = {
     val sorted = SortedMap(types.toArray: _*)
-    val writer = write(file)
+    val writer = IOUtils.writer(file)
     try {
       for ((name, counter) <- sorted) {
         writer.write(name+"\t"+counter.num+"\n")
