@@ -11,9 +11,8 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
 import java.io._
 import java.net.URL
-import org.apache.commons.compress.compressors.bzip2._
-import java.util.zip._
 import scala.io.Codec.UTF8
+import org.dbpedia.extraction.util.IOUtils
 
 /**
  * Loads the dump extraction configuration.
@@ -125,46 +124,13 @@ class ConfigLoader(config: Config)
     }
     
     private def writer(file: File): () => Writer = {
-      val zip = zipper(file.getName)
-      () => new OutputStreamWriter(zip(new FileOutputStream(file)), UTF8.charSet)
+      () => IOUtils.writer(file)
     }
 
     private def reader(file: File): () => Reader = {
-      val unzip = unzipper(file.getName)
-      () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8.charSet)
+      () => IOUtils.reader(file)
     }
 
-    /**
-     * @return stream zipper function
-     */
-    private def zipper(name: String): OutputStream => OutputStream = {
-      zippers.getOrElse(suffix(name), identity)
-    }
-    
-    /**
-     * @return stream zipper function
-     */
-    private def unzipper(name: String): InputStream => InputStream = {
-      unzippers.getOrElse(suffix(name), identity)
-    }
-    
-    /**
-     * @return file suffix
-     */
-    private def suffix(name: String): String = {
-      name.substring(name.lastIndexOf('.') + 1)
-    }
-    
-    private val zippers = Map[String, OutputStream => OutputStream] (
-      "gz" -> { new GZIPOutputStream(_) }, 
-      "bz2" -> { new BZip2CompressorOutputStream(_) } 
-    )
-    
-    private val unzippers = Map[String, InputStream => InputStream] (
-      "gz" -> { new GZIPInputStream(_) }, 
-      "bz2" -> { new BZip2CompressorInputStream(_, true) } 
-    )
-    
     //language-independent val
     private lazy val _ontology =
     {

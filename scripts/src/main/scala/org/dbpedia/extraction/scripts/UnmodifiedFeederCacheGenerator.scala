@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.scripts.IOUtils._
+import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import java.io.File
@@ -19,7 +19,7 @@ object UnmodifiedFeederCacheGenerator {
   def main(args: Array[String]): Unit = {
 
     require(args != null && args.length >= 4,
-      "need at least nine args: " +
+      "need at least four args: " +
         /*0*/ "base dir, " +
         /*1*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
         /*2*/ "timestamp to use for cache (e.g. '2013-02-27', 'now()' ), "  +
@@ -42,7 +42,7 @@ object UnmodifiedFeederCacheGenerator {
     for (language <- languages) {
 
       val finder = new DateFinder(baseDir, language)
-      val writer = write(new File(language.wikiCode + "-cache_generate.sql"))
+      val writer = IOUtils.writer(new File(language.wikiCode + "-cache_generate.sql"))
 
       try {
         QuadReader.readQuads(finder, "page-ids" + suffix, auto = true) {

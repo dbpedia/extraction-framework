@@ -12,9 +12,8 @@ import scala.collection.immutable.SortedSet
 import org.dbpedia.extraction.dump.download.Download
 import java.util.Properties
 import scala.io.Source
-import org.apache.commons.compress.compressors.bzip2._
-import java.util.zip._
 import scala.io.Codec.UTF8
+import org.dbpedia.extraction.util.IOUtils
 
 object Import {
   
@@ -52,7 +51,7 @@ object Import {
         
         println("importing pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server URL "+url)
         
-        val source = XMLSource.fromReader(reader(file), language, title => namespaces.contains(title.namespace))
+        val source = XMLSource.fromReader(() => IOUtils.reader(file), language, title => namespaces.contains(title.namespace))
         
         val stmt = conn.createStatement()
         try {
@@ -70,32 +69,5 @@ object Import {
     
   }
   
-  // TODO: The rest is copied from ConfigLoader.scala. We should find a central place for the 
-  // auto-unzip stuff. Maybe in core, but I don't like the added dependency on commons-compress.
-  
-  private def reader(file: File): () => Reader = {
-    val unzip = unzipper(file.getName)
-    () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8.charSet)
-  }
-
-  /**
-   * @return stream zipper function
-   */
-  private def unzipper(name: String): InputStream => InputStream = {
-    unzippers.getOrElse(suffix(name), identity)
-  }
-  
-  /**
-   * @return file suffix
-   */
-  private def suffix(name: String): String = {
-    name.substring(name.lastIndexOf('.') + 1)
-  }
-  
-  private val unzippers = Map[String, InputStream => InputStream] (
-    "gz" -> { new GZIPInputStream(_) }, 
-    "bz2" -> { new BZip2CompressorInputStream(_, true) } 
-  )
-    
 }
 
