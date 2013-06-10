@@ -2,7 +2,6 @@ package org.dbpedia.extraction.destinations
 
 /**
  * Defines the datasets which are extracted by DBpedia.
- * TODO: use a Scala Enumeration
  * TODO: add references to the extractor classes.
  */
 object DBpediaDatasets
@@ -47,7 +46,7 @@ object DBpediaDatasets
      */
     val InfoboxProperties = new Dataset("infobox_properties")
     val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions")
-    val TemplateVariables = new Dataset("template_parameters")
+    val TemplateParameters = new Dataset("template_parameters")
     val InfoboxTest = new Dataset("infobox_test")
 
     /**

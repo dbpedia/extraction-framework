@@ -126,7 +126,7 @@ extends Extractor
                         {
                             quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
-                            if (InfoboxExtractorConfig.extractTemplateStatistics == true) 
+                            if (InfoboxExtractorConfig.extractTemplateStatistics) 
                             {
                             	val stat_template = context.language.resourceUri.append(template.title.decodedWithNamespace)
                             	val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim

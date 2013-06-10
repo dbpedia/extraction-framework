@@ -15,7 +15,7 @@ extends MappingStatsConfig(statsDir, language)
 
     private val resourceUriPrefix = language.resourceUri.append("")
 
-    def buildStats(redirectsFile: File, infoboxPropsFile: File, templParamsFile: File, paramsUsageFile: File): Unit =
+    def buildStats(redirectsFile: File, articleTemplatesFile: File, templateParametersFile: File, infoboxTestFile: File): Unit =
     {
         var templatesMap = new mutable.HashMap[String, TemplateStatsBuilder]()
         
@@ -25,16 +25,16 @@ extends MappingStatsConfig(statsDir, language)
         
         println("Using Template namespace " + templateNamespace + " for language " + language.wikiCode)
         
-        println("Counting templates in " + infoboxPropsFile)
-        countTemplates(infoboxPropsFile, templatesMap, redirects)
+        println("Counting templates in " + articleTemplatesFile)
+        countTemplates(articleTemplatesFile, templatesMap, redirects)
         println("Found " + templatesMap.size + " different templates")
 
 
-        println("Loading property definitions from " + templParamsFile)
-        propertyDefinitions(templParamsFile, templatesMap, redirects)
+        println("Loading property definitions from " + templateParametersFile)
+        propertyDefinitions(templateParametersFile, templatesMap, redirects)
 
-        println("Counting properties in " + paramsUsageFile)
-        countProperties(paramsUsageFile, templatesMap, redirects)
+        println("Counting properties in " + infoboxTestFile)
+        countProperties(infoboxTestFile, templatesMap, redirects)
         
         val wikiStats = new WikipediaStats(language, redirects.toMap, templatesMap.map(e => (e._1, e._2.build)).toMap)
         
@@ -81,24 +81,24 @@ extends MappingStatsConfig(statsDir, language)
      */
     private def countTemplates(file: File, resultMap: mutable.Map[String, TemplateStatsBuilder], redirects: mutable.Map[String, String]): Unit =
     {
-        // iterate through infobox properties
-        eachLine(file) {
-            line => line.trim match {
-                // if there is a wikiPageUsesTemplate relation
-                case Quad(quad) => if (quad.datatype == null && unescape(quad.predicate).contains("wikiPageUsesTemplate"))
-                {
-                    var templateName = cleanUri(quad.value)
-                    
-                    // resolve redirect for *object*
-                    templateName = redirects.getOrElse(templateName, templateName)
+      // iterate through infobox properties
+      eachLine(file) {
+        line => line.trim match {
+          // predicate must be wikiPageUsesTemplate
+          case Quad(quad) if (quad.datatype == null && unescape(quad.predicate).contains("wikiPageUsesTemplate")) =>
+          {
+            var templateName = cleanUri(quad.value)
+            
+            // resolve redirect for *object*
+            templateName = redirects.getOrElse(templateName, templateName)
 
-                    // lookup the *object* in the resultMap, create a new TemplateStats object if not found,
-                    // and increment templateCount
-                    resultMap.getOrElseUpdate(templateName, new TemplateStatsBuilder).templateCount += 1
-                }
-                case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object or datatype triple syntax: " + line)
-            }
+            // lookup the *object* in the resultMap, create a new TemplateStats object if not found,
+            // and increment templateCount
+            resultMap.getOrElseUpdate(templateName, new TemplateStatsBuilder).templateCount += 1
+          }
+          case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match object or datatype triple syntax: " + line)
         }
+      }
     }
 
     private def propertyDefinitions(file: File, resultMap: mutable.Map[String, TemplateStatsBuilder], redirects: mutable.Map[String, String]): Unit =

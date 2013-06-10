@@ -19,8 +19,7 @@ import org.dbpedia.extraction.wikiparser.Namespace
  * 
  * Needs the following files (where xx is the wiki file prefix and yyyymmdd is a date):
  * 
- * xxwiki-yyyymmdd-infobox-properties.ttl
- * xxwiki-yyyymmdd-infobox-property-definitions.ttl
+ * xxwiki-yyyymmdd-article-templates.ttl
  * xxwiki-yyyymmdd-infobox-test.ttl
  * xxwiki-yyyymmdd-transitive-redirects.ttl
  * xxwiki-yyyymmdd-template-parameters.ttl
@@ -79,16 +78,17 @@ object CreateMappingStats
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
             val redirects = inputFile(DBpediaDatasets.Redirects)
-            // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxProperties = inputFile(DBpediaDatasets.InfoboxProperties)
+            
+            // extracted by org.dbpedia.extraction.mappings.ArticleTemplatesExtractor
+            val articleTemplates = inputFile(DBpediaDatasets.ArticleTemplates)
             // extracted by org.dbpedia.extraction.mappings.TemplateParameterExtractor
-            val templateParameters = inputFile(DBpediaDatasets.TemplateVariables)
+            val templateParameters = inputFile(DBpediaDatasets.TemplateParameters)
             // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
             val infoboxTest = inputFile(DBpediaDatasets.InfoboxTest)
             
             val builder = new MappingStatsBuilder(statsDir, language, pretty)
     
-            builder.buildStats(redirects, infoboxProperties, templateParameters, infoboxTest)
+            builder.buildStats(redirects, articleTemplates, templateParameters, infoboxTest)
             
             // load them right back to check that the format is ok
             new MappingStatsManager(statsDir, language)
