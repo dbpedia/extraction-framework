@@ -111,6 +111,7 @@ extends MappingStatsConfig(statsDir, language)
       while (i < propertyName.length) {
         val c = propertyName.charAt(i)
         if (c == '{' || c == '|' || c == '}') return false
+        i += 1
       }
       return true
     }
