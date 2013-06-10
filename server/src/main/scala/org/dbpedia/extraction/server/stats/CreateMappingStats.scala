@@ -51,10 +51,10 @@ object CreateMappingStats
         
         val statsDir = new File(args(1))
         
-        val pretty = args(2).toBoolean
-        
-        val suffix = args(3).trim
+        val suffix = args(2).trim
 
+        val pretty = args(3).toBoolean
+        
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
         var languages: Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
           
