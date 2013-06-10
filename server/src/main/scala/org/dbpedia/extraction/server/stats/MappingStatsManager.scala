@@ -14,8 +14,6 @@ extends MappingStatsConfig(statsDir, language)
 
     val ignoreList = new IgnoreList(new File(statsDir, "ignorelist_"+language.wikiCode+".txt"), updateStats)
 
-    val percentageFile = new File(statsDir, "percentage." + language.wikiCode)
-
     val wikiStats = loadStats
     
     @volatile var holder: MappingStatsHolder = null
