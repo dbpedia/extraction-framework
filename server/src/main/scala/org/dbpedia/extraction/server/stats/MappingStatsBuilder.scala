@@ -3,10 +3,10 @@ package org.dbpedia.extraction.server.stats
 import java.io.{File,FileOutputStream,OutputStreamWriter}
 import java.util.logging.Logger
 import scala.collection.mutable
-import scala.io.Source
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.util.{Language,WikiUtil}
+import org.dbpedia.extraction.util.{Language,WikiUtil,IOUtils}
+import org.dbpedia.extraction.util.RichFile.wrapFile
 
 class MappingStatsBuilder(statsDir : File, language: Language, pretty: Boolean)
 extends MappingStatsConfig(statsDir, language)
@@ -44,20 +44,18 @@ extends MappingStatsConfig(statsDir, language)
     }
 
     private def eachLine(file: File)(process: String => Unit) : Unit = {
-        val millis = System.currentTimeMillis
-        var count = 0
-        val source = Source.fromFile(file, "UTF-8")
-        try {
-            for (line <- source.getLines()) {
-                process(line)
-                count += 1
-                if (count % 1000000 == 0) {
-                    if (pretty) print(count+" lines\r")
-                    else println(count+" lines")
-                }
-            }
-        } finally source.close
-        println(count+" lines - "+prettyMillis(System.currentTimeMillis - millis))
+      val millis = System.currentTimeMillis
+      var count = 0
+      IOUtils.readLines(file) {
+        line =>
+        process(line)
+        count += 1
+        if (count % 1000000 == 0) {
+            if (pretty) print(count+" lines\r")
+            else println(count+" lines")
+        }
+      }
+      println(count+" lines - "+prettyMillis(System.currentTimeMillis - millis))
     }
 
     private def loadTemplateRedirects(file: File): mutable.Map[String, String] =
