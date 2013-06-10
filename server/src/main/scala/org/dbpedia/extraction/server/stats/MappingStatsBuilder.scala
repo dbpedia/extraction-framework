@@ -100,31 +100,50 @@ extends MappingStatsConfig(statsDir, language)
         }
       }
     }
+    
+    /**
+     * Our wikitext parser is not very precise - some template parameter names are broken.
+     * Only use names that contain none of the following chars: { | }
+     */
+    private def goodProperty(propertyName: String): Boolean =
+    {
+      var i = 0
+      while (i < propertyName.length) {
+        val c = propertyName.charAt(i)
+        if (c == '{' || c == '|' || c == '}') return false
+      }
+      return true
+    }
 
     private def propertyDefinitions(file: File, resultMap: mutable.Map[String, TemplateStatsBuilder], redirects: mutable.Map[String, String]): Unit =
     {
-        // iterate through template parameters
-        eachLine(file) {
-            line => line.trim match {
-                case Quad(quad) if (quad.datatype != null) =>
-                {
-                    var templateName = cleanUri(quad.subject)
-                    val propertyName = cleanValue(quad.value)
-                    
-                    // resolve redirect for *subject*
-                    templateName = redirects.getOrElse(templateName, templateName)
-
-                    // lookup the *subject* in the resultMap
-                    // skip the templates that are not used in any page
-                    for (stats <- resultMap.get(templateName))
-                    {
-                        // add object to properties map with count 0
-                        stats.properties.put(propertyName, 0)
-                    }
-                }
-                case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match datatype triple syntax: " + line)
+      // iterate through template parameters
+      eachLine(file) {
+        line => line.trim match {
+          case Quad(quad) =>
+          {
+            var templateName = cleanUri(quad.subject)
+            val propertyName = cleanValue(quad.value)
+            
+            if (goodProperty(propertyName)) {
+              
+              // resolve redirect for *subject*
+              templateName = redirects.getOrElse(templateName, templateName)
+                  
+              // lookup the *subject* in the resultMap
+              // skip the templates that are not used in any page
+              for (stats <- resultMap.get(templateName))
+              {
+                // add object to properties map with count 0
+                stats.properties.put(propertyName, 0)
+              }
+              
             }
+            
+          }
+          case str => if (str.nonEmpty && ! str.startsWith("#")) throw new IllegalArgumentException("line did not match datatype triple syntax: " + line)
         }
+      }
     }
 
     private def countProperties(file: File, resultMap: mutable.Map[String, TemplateStatsBuilder], redirects: mutable.Map[String, String]) : Unit =
