@@ -118,11 +118,6 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
     // TODO: stream xml to browser. We produce up to 10MB HTML. XML in memory is even bigger.
       
-        // print percentage to file for Pablo's counter. TODO: this is not the right place to do this. 
-        // Should be done when stats change, not when someone accesses this page.
-        val out = new PrintWriter(manager.percentageFile)
-        try out.write(percentageMappedTemplateUse) finally out.close()
-
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
             <head>
               <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
