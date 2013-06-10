@@ -105,14 +105,9 @@ extends MappingStatsConfig(statsDir, language)
      * Our wikitext parser is not very precise - some template parameter names are broken.
      * Only use names that contain none of the following chars: { | }
      */
-    private def goodProperty(propertyName: String): Boolean =
+    private def goodProperty(name: String): Boolean =
     {
-      var i = 0
-      while (i < propertyName.length) {
-        val c = propertyName.charAt(i)
-        if (c == '{' || c == '|' || c == '}') return false
-        i += 1
-      }
+      for (c <- name) if (c == '{' || c == '|' || c == '}') return false
       return true
     }
 
