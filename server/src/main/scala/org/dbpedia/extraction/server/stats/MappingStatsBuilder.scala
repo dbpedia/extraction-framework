@@ -17,30 +17,37 @@ extends MappingStatsConfig(statsDir, language)
 
     def buildStats(redirectsFile: File, articleTemplatesFile: File, templateParametersFile: File, infoboxTestFile: File): Unit =
     {
-        var templatesMap = new mutable.HashMap[String, TemplateStatsBuilder]()
-        
-        println("Reading redirects from " + redirectsFile)
-        val redirects = loadTemplateRedirects(redirectsFile)
-        println("Found " + redirects.size + " redirects")
-        
-        println("Using Template namespace " + templateNamespace + " for language " + language.wikiCode)
-        
-        println("Counting templates in " + articleTemplatesFile)
-        countTemplates(articleTemplatesFile, templatesMap, redirects)
-        println("Found " + templatesMap.size + " different templates")
+      var templatesMap = new mutable.HashMap[String, TemplateStatsBuilder]()
+      
+      println("Reading redirects from " + redirectsFile)
+      val redirects = loadTemplateRedirects(redirectsFile)
+      println("Found " + redirects.size + " redirects")
+      
+      println("Using Template namespace " + templateNamespace + " for language " + language.wikiCode)
+      
+      println("Counting templates in " + articleTemplatesFile)
+      countTemplates(articleTemplatesFile, templatesMap, redirects)
+      println("Found " + templatesMap.size + " different templates")
 
 
-        println("Loading property definitions from " + templateParametersFile)
-        propertyDefinitions(templateParametersFile, templatesMap, redirects)
+      println("Loading property definitions from " + templateParametersFile)
+      propertyDefinitions(templateParametersFile, templatesMap, redirects)
 
-        println("Counting properties in " + infoboxTestFile)
-        countProperties(infoboxTestFile, templatesMap, redirects)
+      println("Counting properties in " + infoboxTestFile)
+      countProperties(infoboxTestFile, templatesMap, redirects)
+      
+      // for some templates, all properties have occurrence count 0. drop these templates.
+      // retain only the templates for which some properties have occurrence count != 0.
+      templatesMap.retain((k, v) => v.properties.exists(_._2 != 0))
+      
+      // TemplateStatsBuilder -> TemplateStats
+      val builtTemplatesMap = templatesMap.map(e => (e._1, e._2.build))
         
-        val wikiStats = new WikipediaStats(language, redirects.toMap, templatesMap.map(e => (e._1, e._2.build)).toMap)
-        
-        logger.info("Serializing "+language.wikiCode+" wiki statistics to " + mappingStatsFile)
-        val output = new OutputStreamWriter(new FileOutputStream(mappingStatsFile), "UTF-8")
-        try wikiStats.write(output) finally output.close()
+      val wikiStats = new WikipediaStats(language, redirects.toMap, builtTemplatesMap.toMap)
+      
+      logger.info("Serializing "+language.wikiCode+" wiki statistics to " + mappingStatsFile)
+      val output = new OutputStreamWriter(new FileOutputStream(mappingStatsFile), "UTF-8")
+      try wikiStats.write(output) finally output.close()
     }
 
     private def eachLine(file: File)(process: String => Unit) : Unit = {
