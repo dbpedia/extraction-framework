@@ -51,7 +51,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         </head>
         <body>
-            <h2 align="center">Template Statistics  for <a href={mappingUrlPrefix + template}>{wikiDecode(template)}</a></h2>
+            <h2 align="center">Statistics for template <a href={language.baseUri+"/wiki/"+template}>{wikiDecode(template)}</a> and its <a href={mappingUrlPrefix + template}>DBpedia mapping</a></h2>
             <p align="center">
                 {percentageMapped}
                 % properties are mapped (
