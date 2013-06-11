@@ -25,7 +25,7 @@ class TemplateStatsBuilder
  * @param templateCount apparently the number of pages that use the template. a page that uses
  * the template multiple times is counted only once.
  */
-class TemplateStats(var templateCount : Int, val properties: Map[String, Int]) {
+class TemplateStats(val templateCount : Int, val properties: Map[String, Int]) {
   
     override def toString = "TemplateStats[count:" + templateCount + ",properties:" + properties.mkString(",") + "]"
 }
