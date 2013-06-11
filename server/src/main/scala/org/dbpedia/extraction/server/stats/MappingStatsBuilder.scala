@@ -41,7 +41,7 @@ extends MappingStatsConfig(statsDir, language)
       templatesMap.retain((k, v) => v.properties.exists(_._2 != 0))
       
       // TemplateStatsBuilder -> TemplateStats
-      val builtTemplatesMap = templatesMap.map(e => (e._1, e._2.build))
+      val builtTemplatesMap = templatesMap.mapValues(_.build)
         
       val wikiStats = new WikipediaStats(language, redirects.toMap, builtTemplatesMap.toMap)
       
