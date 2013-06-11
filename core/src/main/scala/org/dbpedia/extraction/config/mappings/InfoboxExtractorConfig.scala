@@ -23,7 +23,11 @@ object InfoboxExtractorConfig
 
     val TrailingNumberRegex = """[0-9]+$""".r
     
-    // Template Statistics (not valid triples => do not load / disable in live)
+    // When you generate statistics, set the following to true. To get full coverage, you should
+    // probably set most other parameters here to zero or empty values. 
     val extractTemplateStatistics = false 
 
+    val minPropertyCount = 2
+
+    val minRatioOfExplicitPropertyKeys = 0.75
 }
