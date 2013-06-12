@@ -36,9 +36,9 @@ extends MappingStatsConfig(statsDir, language)
       println("Counting properties in " + infoboxTestFile)
       countProperties(infoboxTestFile, templatesMap, redirects)
       
-      // for some templates, all properties have occurrence count 0. drop these templates.
-      // retain only the templates for which some properties have occurrence count != 0.
-      templatesMap.retain((k, v) => v.properties.exists(_._2 != 0))
+      // Retain only the templates for which some properties occur in at least 10% of template
+      // instances. Templates that are usually empty are unlikely to be useful for DBpedia.
+      templatesMap.retain((k, v) => v.properties.values.max * 10 > v.templateCount)
       
       // TemplateStatsBuilder -> TemplateStats
       val builtTemplatesMap = templatesMap.mapValues(_.build)
