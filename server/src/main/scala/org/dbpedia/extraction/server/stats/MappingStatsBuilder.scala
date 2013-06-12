@@ -38,7 +38,7 @@ extends MappingStatsConfig(statsDir, language)
       
       // Retain only the templates for which some properties occur in at least 10% of template
       // instances. Templates that are usually empty are unlikely to be useful for DBpedia.
-      templatesMap.retain((k, v) => v.properties.values.max * 10 > v.templateCount)
+      templatesMap.retain((k, v) => v.properties.nonEmpty && v.properties.values.max * 10 > v.templateCount)
       
       // TemplateStatsBuilder -> TemplateStats
       val builtTemplatesMap = templatesMap.mapValues(_.build)
