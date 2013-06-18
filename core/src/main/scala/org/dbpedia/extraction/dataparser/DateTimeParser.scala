@@ -45,7 +45,7 @@ class DateTimeParser ( context : {
     private val DateRegex1 = ("""(?iu)""" + prefix + """([0-9]{1,2})\s*("""+monthRegex+""")\s*([0-9]{2})(?!\d)\s*(?!\s)(?!"""+ eraRegex +""").*""" + postfix).r
 
     // catch dates like: "[[29 January]] [[300 AD]]", "[[23 June]] [[2008]] (UTC)", "09:32, 6 March 2000 (UTC)" or "3 June 1981"
-    private val DateRegex2 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*("""+monthRegex+""")\]?\]?,? \[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?(?!\d)""" + postfix).r
+    private val DateRegex2 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*("""+monthRegex+""")\]?\]?,? \[?\[?(-?[0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?(?!\d)""" + postfix).r
 
     // catch dates like: "[[January 20]] [[1995 AD]]", "[[June 17]] [[2008]] (UTC)" or "January 20 1995"
     private val DateRegex3 = ("""(?iu)""" + prefix + """\[?\[?("""+monthRegex+""")\s*,?\s+([0-9]{1,2})\]?\]?\s*[.,]?\s+\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?""" + postfix).r
@@ -151,7 +151,15 @@ class DateTimeParser ( context : {
 	                    	case Some(s) => s
 	                    	case None => month.toInt
                     	}
-                        return Some(new Date(Some(year.toInt), Some(monthNum), Some(day.toInt), datatype))
+                    	//year can contain era
+                    	val yearNum = year match {
+                    	  case YearRegex(year, era) => {
+                    	    val eraIdentifier = getEraSign(era)
+                    	    (eraIdentifier+year).toInt
+                    	  } 
+                    	  case YearRegex(year) => year.toInt
+                    	}
+                        return Some(new Date(Some(yearNum), Some(monthNum), Some(day.toInt), datatype))
                     }
                     catch
                     {
