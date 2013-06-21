@@ -539,6 +539,21 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
     {
         parse("fr", "xsd:date", "13 juillet -100 av. J.-C.") should equal (Some("-0100-07-13"))
     }*/
+    "DataParser" should "not read \"15\" as a date" in
+    {
+        parse("fr", "xsd:date", "15") should equal (None)
+    }
+    "DataParser" should "not read \"15.25\" as a date" in
+    {
+    	parse("en", "xsd:date", "15.25") should equal (None)
+    	parse("fr", "xsd:date", "15.25") should equal (None)
+    }
+    "DataParser" should "not read \"15,25\" as a date" in
+    {
+    	parse("en", "xsd:date", "15,25") should equal (None)
+    	parse("fr", "xsd:date", "15,25") should equal (None)
+    }
+    
 
     private val wikiParser = WikiParser.getInstance()
 
