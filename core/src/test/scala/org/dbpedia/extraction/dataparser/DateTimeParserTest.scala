@@ -513,6 +513,47 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
     {
         parse("el", "xsd:date", "{{ηθηλ|1996|03|18}}") should equal (Some("1996-03-18"))
     }
+  
+    
+    "DataParser" should "return date (1996 March the 18th)" in
+    {
+        parse("fr", "xsd:date", "{{Date|18|03|1996}}") should equal (Some("1996-03-18"))
+    }
+    "DataParser" should "return date (1996 September the 19th)" in
+    {
+        parse("fr", "xsd:date", "{{date|19|septembre|1996}}") should equal (Some("1996-09-19"))
+    }
+    "DataParser" should "return date (March the 15th of the year 44 before J.-C.)" in
+    {
+        parse("fr", "xsd:date", "15 mars 44 av. J.-C.") should equal (Some("-0044-03-15"))
+    }
+    "DataParser" should "return date (March the 15th of the year 44 after J.-C.)" in
+    {
+        parse("fr", "xsd:date", "15 mars 44 ap. J.-C.") should equal (Some("0044-03-15"))
+    }
+    "DataParser" should "return date (March the 15th of the year 1944)" in
+    {
+        parse("fr", "xsd:date", "15 mars 44") should equal (Some("1944-03-15"))
+    }
+    /*"DataParser" should "return date (Jully the 13th of the year 100 before J.-C.)" in
+    {
+        parse("fr", "xsd:date", "13 juillet -100 av. J.-C.") should equal (Some("-0100-07-13"))
+    }*/
+    "DataParser" should "not read \"15\" as a date" in
+    {
+        parse("fr", "xsd:date", "15") should equal (None)
+    }
+    "DataParser" should "not read \"15.25\" as a date" in
+    {
+    	parse("en", "xsd:date", "15.25") should equal (None)
+    	parse("fr", "xsd:date", "15.25") should equal (None)
+    }
+    "DataParser" should "not read \"15,25\" as a date" in
+    {
+    	parse("en", "xsd:date", "15,25") should equal (None)
+    	parse("fr", "xsd:date", "15,25") should equal (None)
+    }
+    
 
     private val wikiParser = WikiParser.getInstance()
 

@@ -162,13 +162,13 @@ extends Extractor
     {
         // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
         extractUnitValue(node).foreach(result => return List(result))
-        extractNumber(node).foreach(result =>  return List(result))
-        extractRankNumber(node).foreach(result => return List(result))
         extractDates(node) match
         {
             case dates if !dates.isEmpty => return dates
             case _ => 
         }
+        extractNumber(node).foreach(result =>  return List(result))
+        extractRankNumber(node).foreach(result => return List(result))
         extractLinks(node) match
         {
             case links if !links.isEmpty => return links
