@@ -38,7 +38,8 @@ object DateTimeParserConfig
         "es" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
         "it" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "PEV"-> -1, "P\\.E\\.V\\."-> -1, "EV"-> 1, "E\\.V\\." -> 1),
         "nl" -> Map("v\\.Chr\\." -> -1, "n\\.C\\."-> 1, "v\\.C\\." -> -1, "n\\.Chr\\."-> 1, "voor Chr\\." -> -1, "na Chr\\."-> 1), 
-        "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1)
+        "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
+        "fr" -> Map("av\\. J\\.-C\\."-> -1, "ap\\. J\\.-C\\." -> 1)
     )
 
     //suffixes for 1st, 2nd etc. (maybe add this to infobox extractor RankRegex val)
@@ -48,7 +49,8 @@ object DateTimeParserConfig
         "es" -> "°|\\.°|°\\.",
         "it" -> "°|\\.°|°\\.",
         "nl" -> "ste|de|e",
-        "pt" -> "°|\\.°|°\\."
+        "pt" -> "°|\\.°|°\\.",
+        "fr" -> "er|nd|ème"
     )
 
     //specifies for a template name (lower-cased) the property keys of year, month and day
@@ -188,6 +190,11 @@ object DateTimeParserConfig
             "Дата народження"     -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "Народився"           -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "Дата смерті"         -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
+        ),
+        "fr" -> Map(
+            "date"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "date de naissance"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "date de décès"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
         )
     )
 
