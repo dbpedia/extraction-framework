@@ -29,24 +29,36 @@ class SimplePropertyMapping (
 extends PropertyMapping
 {
     val selector: List[_] => List[_] =
-      select match {
-        case "first" => _.take(1)
-        case "last" => _.reverse.take(1)
-        case null => identity
-        case _ => throw new IllegalArgumentException("Only 'first' or 'last' are allowed in property 'select'")
-      }
+        select match {
+            case "first" => _.take(1)
+            case "last" => _.reverse.take(1)
+            case null => identity
+            case _ => throw new IllegalArgumentException("Only 'first' or 'last' are allowed in property 'select'")
+        }
 
+  /**
+   * Transforms a text value appending/prepending a suffix/prefix.
+   * Note that the value will be trimmed iff the function needs to apply suffix/prefix.
+   * Otherwise the value will be left untouched.
+   *
+   * The suffix/prefix will never be trimmed.
+   *
+   * @param value The text value to transform
+   * @return  Transformed text (after applying prefix/suffix)
+   */
     private def valueTransformer(value : String) = {
 
-      val prefixedValue = prefix match {
-        case p : String => p + value
-        case _ => value
-      }
+        val p = prefix match {
+            case _ : String => prefix
+            case _ => ""
+        }
 
-      suffix match {
-        case s : String => prefixedValue + s
-        case _ => prefixedValue
-      }
+        val s = suffix match {
+            case _ : String => suffix
+            case _ => ""
+        }
+
+        p + value.trim + s
     }
 
     if(language == null) language = context.language

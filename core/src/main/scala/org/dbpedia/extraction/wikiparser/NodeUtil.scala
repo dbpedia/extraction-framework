@@ -2,6 +2,7 @@ package org.dbpedia.extraction.wikiparser
 
 import java.net.{URISyntaxException, URI}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.UriUtils
 
 /**
  * Utility functions for working with nodes.
@@ -64,18 +65,19 @@ object NodeUtil
 
     private def buildPropertyNode(text : String, line : Int, language : Language, transformCmd : String, transformFunc : String => String) : Node = {
 
-      val textNode = new TextNode(transformFunc(text), line)
+        val textNode = new TextNode(transformFunc(text), line)
 
-      transformCmd match {
-        case "internal" => new InternalLinkNode(WikiTitle.parse(textNode.text, language), List(textNode), line)
-        case "external" => try {
-          new ExternalLinkNode(new URI(textNode.text), List(textNode), line)
-        } catch {
-          // If the provided text is not a valid URI
-          case ex : URISyntaxException => textNode
+        transformCmd match
+        {
+            case "internal" => new InternalLinkNode(WikiTitle.parse(textNode.text, language), List(textNode), line)
+            case "external" => try {
+                new ExternalLinkNode(UriUtils.encode(textNode.text), List(textNode), line)
+            } catch {
+                // If the provided text is not a valid URI
+                case e : Exception => textNode
+            }
+            case _ => textNode
         }
-        case _ => textNode
-      }
     }
 
     /**
