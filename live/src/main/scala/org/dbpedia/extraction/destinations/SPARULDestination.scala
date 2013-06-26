@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.destinations
 
-import java.util.logging.{Level, Logger}
+import org.apache.log4j.Logger
 import formatters.UriPolicy._
 import org.dbpedia.extraction.destinations.formatters.SPARULFormatter
 import org.dbpedia.extraction.live.core.LiveOptions
@@ -44,6 +44,6 @@ class SPARULDestination(insOrDel: Boolean, policies: Array[Policy] = null) exten
     val success = JDBCUtil.execSPARUL("SPARQL " + sparql.toString)
     // TODO Better logging
     if (!success)
-      logger.log(Level.SEVERE, "SPARUL Update for page failed")
+      logger.error("SPARUL Update for page failed")
   }
 }

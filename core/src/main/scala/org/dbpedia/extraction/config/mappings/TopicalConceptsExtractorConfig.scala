@@ -15,6 +15,8 @@ object TopicalConceptsExtractorConfig
                                "Catmore",          // for el.wikipedia.org
                                "Nagusia",          // for eu.wikipedia.org
                                "Основная статья по теме категории", "Catmain", //for ru.wikipedia.org
-                               "Infocat", "Infocatm" // for ca.wikipedia.org
+                               "Infocat", "Infocatm", // for ca.wikipedia.org
+                               "Voce principale",   // for it.wikipedia.org
+                               "torna a"          // for it.wikipedia.org
                             )
 }

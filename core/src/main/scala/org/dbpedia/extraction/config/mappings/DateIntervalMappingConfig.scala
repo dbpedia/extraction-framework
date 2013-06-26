@@ -9,6 +9,7 @@ object DateIntervalMappingConfig
         "ar" -> "الحاضر",
         "en" -> "present",
         "ga" -> "inniu",
+        "id" -> "sekarang",
         "pl" -> "nadal"
     )
 }

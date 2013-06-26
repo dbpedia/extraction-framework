@@ -49,7 +49,7 @@ class UnitValueParser( extractionContext : {
     private val UnitRegex = ("""(?iu)""" + """(?<!\w)(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)(?!\d)""").r
     
     /** Merging strings with feet and inches: 'x ft y in' and convert them into centimetres */
-    private val UnitValueRegex1a = ("""(?iu)""" + prefix + """(-?[0-9]+)\040*ft\040*([0-9]+)\040*in\b""" + postfix).r
+    private val UnitValueRegex1a = ("""(?iu)""" + prefix + """(-?[0-9]+)\040*(?:ft|feet|foot|\047|\054|\140)\040*([0-9]+)\040*(?:in\b|inch\b|inches\b|\047\047|\054\054|\140\140\042)""" + postfix).r
     
     /** Catches number and unit: e.q. 1.120.500,55 km */
     private val UnitValueRegex1b = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
@@ -200,13 +200,14 @@ class UnitValueParser( extractionContext : {
         // http://en.wikipedia.org/wiki/Template:Height
         // {{height|first_unit=first_value|second_unit=second_value|...}}
         else if (templateName == "Height")
-        { 
+        {
             for (property <- templateNode.property("1"))
             {
                 value = property.children.collect{case TextNode(text, _) => text}.headOption
                 unit = Some(property.key)
             }
             // If the TemplateNode has a second PropertyNode ...
+            /*
             for (secondProperty <- templateNode.property("2"))
             {
                 val secondUnit = secondProperty.key
@@ -224,6 +225,21 @@ class UnitValueParser( extractionContext : {
                     }
                     catch { case _ => }
                 }
+            } */
+            for (feet <- templateNode.property("ft");
+                 inch <- templateNode.property("in"))
+            {
+                try
+                {
+                    val ftVal =  feet.children.collect{case TextNode(text, _) => text}.headOption
+                    val ftToCm = ftVal.get.toDouble * 30.48
+                    val inVal =  inch.children.collect{case TextNode(text, _) => text}.headOption
+                    val inToCm = inVal.get.toDouble * 2.54
+
+                    value = Some((ftToCm + inToCm).toString)
+                    unit = Some("centimetre")
+                }
+                catch { case _ => }
             }
         }
         // http://en.wikipedia.org/wiki/Template:Auto_in

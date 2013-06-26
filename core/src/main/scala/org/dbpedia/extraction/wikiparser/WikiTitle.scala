@@ -35,7 +35,7 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
     val pageIri = language.baseUri+"/wiki/"+encodedWithNamespace
 
     /** resource IRI for this page title */
-    val resourceIri = language.resourceUri + encodedWithNamespace
+    val resourceIri = language.resourceUri.append(encodedWithNamespace)
 
     private def withNamespace(encode : Boolean) : String =
     {

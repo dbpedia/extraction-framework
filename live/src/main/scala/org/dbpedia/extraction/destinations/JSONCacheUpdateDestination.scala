@@ -4,7 +4,7 @@ import org.dbpedia.extraction.destinations.formatters.RDFJSONFormatter
 import scala.collection.Seq
 import util.Sorting
 import collection.mutable.ArrayBuffer
-import java.util.logging.{Level, Logger}
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.live.storage.JSONCache
 
 
@@ -46,7 +46,7 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
 
     val success = cache.updateCache(sb.toString, "", "") //TODO add subjects / diffs
     // TODO better logging
-    if (!success) logger.log(Level.INFO, "Updating JSON Cache failed")
+    if (!success) logger.info( "Updating JSON Cache failed")
 
   }
 

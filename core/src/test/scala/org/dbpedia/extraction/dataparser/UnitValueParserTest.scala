@@ -12,21 +12,17 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyDatatypes}
 class UnitValueParserTest extends FlatSpec with ShouldMatchers
 {
    // Length - Positive Tests - Input is valid
-   "UnitValueParser" should "return Length(10 m)" in
+    "UnitValueParser" should "return Length(10 m)" in
     {
         parse("en", "Length", "10m") should be (approximatelyEqualTo(Some(10.0)))
     }
-   "UnitValueParser" should "return Length(10 metres)" in
+    "UnitValueParser" should "return Length(10 metres)" in
     {
         parse("en", "Length", "10metres") should equal (Some(10.0))
     }
-   "UnitValueParser" should "return Length(1 metre)" in
+    "UnitValueParser" should "return Length(1 metre)" in
     {
         parse("en", "Length", "1 metre") should equal (Some(1.0))
-    }
-    "UnitValueParser" should "return Length(6 ft 6 in)" in
-    {
-        parse("en", "Length", "6 ft 6 in") should be (approximatelyEqualTo(Some(1.8542)))
     }
     "UnitValueParser" should "return Length({{convert|1610|mm|in|1|abbr=on}})" in
     {
@@ -44,25 +40,41 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
     {
         parse("en", "Length", "{{Infobox mountain | prominence_m = 471 }}") should equal (Some(471))
     }
-     "UnitValueParser" should "return Length({{Geobox|Range|highest_elevation=4810.9 }})" in
+    "UnitValueParser" should "return Length({{Geobox|Range|highest_elevation=4810.9 }})" in
     {
         parse("en", "Length", "{{Geobox|Range|highest_elevation=4810.9 }}") should equal (Some(4810.9))
     }
-     "UnitValueParser" should "return Length({{convert|112|mm|in|abbr=on}})" in
+    "UnitValueParser" should "return Length({{convert|112|mm|in|abbr=on}})" in
     {
         parse("en", "Length", "{{convert|112|mm|in|abbr=on}}") should equal (Some(0.112))
     }
-      "UnitValueParser" should "return Length({{convert|112|in|mm|abbr=on}})" in
+    "UnitValueParser" should "return Length({{convert|112|in|mm|abbr=on}})" in
     {
         parse("en", "Length", "{{convert|112|in|mm|abbr=on}}") should be (approximatelyEqualTo(Some(2.8448)))
     }
-      "UnitValueParser" should "return Length({{Infobox road | length_mi = 2451 }})" in
+    "UnitValueParser" should "return Length({{Infobox road | length_mi = 2451 }})" in
     {
         parse("en", "Length", "{{Infobox road | length_mi = 2451 }}") should equal (Some(3944502.14))
     }
-      "UnitValueParser" should "return Length(The 7 foot 1 inch Chamberlain )" in
+    "UnitValueParser" should "return Length(6 ft 6 in)" in
     {
-        parse("en", "Length", "The 7 foot 1 inch Chamberlain ") should be  (approximatelyEqualTo(Some(1.8542)))
+        parse("en", "Length", "6 ft 6 in") should be (approximatelyEqualTo(Some(1.9812)))
+    }
+    "UnitValueParser" should "return Length(6 feet 6 inch)" in
+    {
+        parse("en", "Length", "6 feet 6 inch") should be (approximatelyEqualTo(Some(1.9812)))
+    }
+    "UnitValueParser" should "return Length(6' 6\")" in
+    {
+        parse("en", "Length", "6' 6''") should be (approximatelyEqualTo(Some(1.9812)))
+    }
+    "UnitValueParser" should "return Length(6')" in
+    {
+        parse("en", "Length", "6'") should be (approximatelyEqualTo(Some(1.8288)))
+    }
+    "UnitValueParser" should "return Length(The 7 foot 1 inch Chamberlain )" in
+    {
+        parse("en", "Length", "The 7 foot 1 inch Chamberlain ") should be  (approximatelyEqualTo(Some(2.1589)))
     }
     "UnitValueParser" should "return Length(10 in)" in
     {

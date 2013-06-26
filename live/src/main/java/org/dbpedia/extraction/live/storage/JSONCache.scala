@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.live.storage
 
 import org.dbpedia.extraction.destinations.{SPARULDestination, Quad}
-import java.util.logging.{Level, Logger}
+import org.apache.log4j.Logger
 import scala.util.parsing.json._
 import collection.mutable.{ListBuffer, ArrayBuffer, HashMap}
 import collection.mutable
@@ -114,7 +114,7 @@ class JSONCache(pageID: Long, pageTitle: String) {
     }
     catch {
       case e: Exception => {
-        logger.log(Level.INFO, e.getMessage)
+        logger.info(e.getMessage)
       }
     }
   }

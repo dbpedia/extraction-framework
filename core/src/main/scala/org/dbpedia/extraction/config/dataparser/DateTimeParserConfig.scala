@@ -15,6 +15,7 @@ object DateTimeParserConfig
         "es" -> Map("enero"->1,"febrero"->2,"marzo"->3,"abril"->4,"mayo"->5,"junio"->6,"julio"->7,"agosto"->8,"septiembre"->9,"octubre"->10,"noviembre"->11,"diciembre"->12),
         "fr" -> Map("janvier"->1,"février"->2,"mars"->3,"avril"->4,"mai"->5,"juin"->6,"juillet"->7,"août"->8,"septembre"->9,"octobre"->10,"novembre"->11,"décembre"->12),
         "hr" -> Map("siječanj"->1,"veljača"->2,"ožujak"->3,"travanj"->4,"svibanj"->5,"lipanj"->6,"srpanj"->7,"kolovoz"->8,"rujan"->9,"listopad"->10,"studeni"->11,"prosinac"->12),
+        "id" -> Map("januari"->1,"februari"->2,"maret"->3,"april"->4,"mei"->5,"juni"->6,"juli"->7,"agustus"->8,"september"->9,"oktober"->10,"november"->11,"desember"->12),
         "it" -> Map("gennaio"->1,"febbraio"->2,"marzo"->3,"aprile"->4,"maggio"->5,"giugno"->6,"luglio"->7,"agosto"->8,"settembre"->9,"ottobre"->10,"novembre"->11,"dicembre"->12),
         "nl" -> Map("januari"->1,"februari"->2,"maart"->3,"april"->4,"mei"->5,"juni"->6,"juli"->7,"augustus"->8,"september"->9,"oktober"->10,"november"->11,"december"->12),
         "pl" -> Map("stycznia"->1,"lutego"->2,"marca"->3,"kwietnia"->4,"maja"->5,"czerwca"->6,"lipca"->7,"sierpnia"->8,"września"->9,"października"->10,"listopada"->11,"grudnia"->12),
@@ -38,7 +39,8 @@ object DateTimeParserConfig
         "es" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
         "it" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "PEV"-> -1, "P\\.E\\.V\\."-> -1, "EV"-> 1, "E\\.V\\." -> 1),
         "nl" -> Map("v\\.Chr\\." -> -1, "n\\.C\\."-> 1, "v\\.C\\." -> -1, "n\\.Chr\\."-> 1, "voor Chr\\." -> -1, "na Chr\\."-> 1), 
-        "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1)
+        "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
+        "fr" -> Map("av\\. J\\.-C\\."-> -1, "ap\\. J\\.-C\\." -> 1)
     )
 
     //suffixes for 1st, 2nd etc. (maybe add this to infobox extractor RankRegex val)
@@ -48,7 +50,8 @@ object DateTimeParserConfig
         "es" -> "°|\\.°|°\\.",
         "it" -> "°|\\.°|°\\.",
         "nl" -> "ste|de|e",
-        "pt" -> "°|\\.°|°\\."
+        "pt" -> "°|\\.°|°\\.",
+        "fr" -> "er|nd|ème"
     )
 
     //specifies for a template name (lower-cased) the property keys of year, month and day
@@ -77,7 +80,11 @@ object DateTimeParserConfig
             //conditional mapping .. for multiple matching ifPropertyNumHasValue could be a regex (not implemented for multiple)
             "birthdeathage"       -> Map ("ifPropertyNum" -> "1", "ifPropertyNumHasValue" -> "B", //"BirthDeathAge"
                                           "year" -> "2", "month"-> "3", "day" -> "4",
-                                          "elseYear" -> "4", "elseMonth"-> "5", "elseDay" -> "6")
+                                          "elseYear" -> "4", "elseMonth"-> "5", "elseDay" -> "6"),
+            "NBA Year"            -> Map ("year" -> "1"),
+            "Nbay"                -> Map ("year" -> "1"),
+            "NHL_Year"            -> Map ("year" -> "1"),
+            "nhly"                -> Map ("year" -> "1")
         ),
 
         // alphabetically for other languages
@@ -121,6 +128,24 @@ object DateTimeParserConfig
             "adina"                -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "adin parentesigabea"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
         ),
+        "id" -> Map(
+            "Mula tanggal dan usia"         -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Tanggal lahir dan umur"        -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Tanggal kematian dan umur"     -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Umur pada tanggal"             -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "umur"                          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Tanggal lahir dan umur2/doc"   -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Tanggal lahir dan umur2"       -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "lahirmati"                     -> Map ("year" -> "2", "month"-> "3", "day" -> "4"),
+            "birth date and age"            -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age"
+            "birth date and age2"           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age2"
+            "death date and age"            -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date and age"
+            "birth date"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date"
+            "death date"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date"
+            "bda"                           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Bda"
+            "dob"                           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Dob"
+            "start date"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3") //"Start date"
+        ), 
         "it" -> Map(
             "Data nascita"        -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "data nascita"        -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
@@ -188,6 +213,11 @@ object DateTimeParserConfig
             "Дата народження"     -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "Народився"           -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "Дата смерті"         -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
+        ),
+        "fr" -> Map(
+            "date"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "date de naissance"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "date de décès"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
         )
     )
 
