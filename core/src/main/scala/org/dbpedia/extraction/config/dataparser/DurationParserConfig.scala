@@ -217,6 +217,14 @@ object DurationParserConfig
             "meses" -> "month",
             "año" -> "year",
             "años" -> "year"
-        )
+        ),
+        "id" -> Map(
+            "detik" -> "second",
+            "menit" -> "minute",
+            "jam" -> "hour",
+            "hari" -> "day",
+            "bulan" -> "month",
+            "tahun" -> "year"
+		)
     )
 }
