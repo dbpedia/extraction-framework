@@ -20,6 +20,10 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
      {
          parse("en", "12.5 mio") should equal (Some(12500000))
      }
+    "IntegerParser" should "return 1432 for '1,432 <small>''2006 Census''</small>'@en" in
+     {
+         parse("en", "1,432 <small>''2006 Census''</small>") should equal (Some(1432))
+     }
     "IntegerParser" should "return 12500000 for '12,5 mio kg'@de" in
      {
          parse("de", "12,5 mio kg") should equal (Some(12500000))
