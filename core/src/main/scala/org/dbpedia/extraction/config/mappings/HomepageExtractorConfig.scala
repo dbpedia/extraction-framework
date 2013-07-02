@@ -22,7 +22,8 @@ object HomepageExtractorConfig
         "nl" -> Set("website", "homepage", "hoofdpagina", "webpagina", "web", "site"),
         "pl" -> Set("web", "strona"),
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
-        "ru" -> Set("сайт")
+        "ru" -> Set("сайт"),
+        "eo" -> Set("ĉefpaĝo", "retejo")
     )
 
     val supportedLanguages = propertyNamesMap.keySet
@@ -41,7 +42,8 @@ object HomepageExtractorConfig
         "nl" -> "(?:Externe links|Externe link)",
         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
-        "ru" -> "Ссылки"
+        "ru" -> "Ссылки",
+        "eo" -> "Eksteraj ligiloj"
     )
 
     val officialMap = Map(
@@ -58,7 +60,8 @@ object HomepageExtractorConfig
         "nl" -> "(?:officieel|officiële)",
         "pl" -> "oficjalna",
         "pt" -> "oficial",
-        "ru" -> "официальный"
+        "ru" -> "официальный",
+        "eo" -> "oficiala"
     )
 
 }
