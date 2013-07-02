@@ -20,6 +20,7 @@ object DisambiguationExtractorConfig
          "nl" -> " (doorverwijspagina)", //TODO make it Set() for multiple “nl” -> " (disambigueren)"
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
-         "ru" -> " (значения)"
+         "ru" -> " (значения)",
+         "eo" -> " (apartigilo)"
     )
 }
