@@ -14,6 +14,7 @@ object HomepageExtractorConfig
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
         "en" -> Set("website", "homepage", "web", "site"),
+        "eo" -> Set("ĉefpaĝo", "retejo"),
         "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
         "eu" -> Set("webgunea"),
         "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
@@ -22,8 +23,7 @@ object HomepageExtractorConfig
         "nl" -> Set("website", "homepage", "hoofdpagina", "webpagina", "web", "site"),
         "pl" -> Set("web", "strona"),
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
-        "ru" -> Set("сайт"),
-        "eo" -> Set("ĉefpaĝo", "retejo")
+        "ru" -> Set("сайт")
     )
 
     val supportedLanguages = propertyNamesMap.keySet
@@ -34,6 +34,7 @@ object HomepageExtractorConfig
         "de" -> "Weblinks?",
         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
         "en" -> "External links?",
+        "eo" -> "Eksteraj ligiloj",
         "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo)",
         "eu" -> "Kanpo loturak?",
         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
@@ -42,8 +43,7 @@ object HomepageExtractorConfig
         "nl" -> "(?:Externe links|Externe link)",
         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
-        "ru" -> "Ссылки",
-        "eo" -> "Eksteraj ligiloj"
+        "ru" -> "Ссылки"
     )
 
     val officialMap = Map(
@@ -52,6 +52,7 @@ object HomepageExtractorConfig
         "de" -> "offizielle",
         "el" -> "(?:επίσημος|επίσημη)",
         "en" -> "official",
+        "eo" -> "oficiala",
         "es" -> "oficial",
         "eu" -> "ofiziala?",
         "fr" -> "officiel",
@@ -60,8 +61,7 @@ object HomepageExtractorConfig
         "nl" -> "(?:officieel|officiële)",
         "pl" -> "oficjalna",
         "pt" -> "oficial",
-        "ru" -> "официальный",
-        "eo" -> "oficiala"
+        "ru" -> "официальный"
     )
 
 }
