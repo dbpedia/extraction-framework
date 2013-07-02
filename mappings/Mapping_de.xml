@@ -7351,4 +7351,54 @@ Im Englischen nicht bekannt/verwendet:
 
       Maybe useful properties but without a counterpart so far:
        {{ PropertyMapping | templateProperty = VERWALTUNGSSITZ | ontologyProperty = }}
---&gt;</text></revision></page></mediawiki>
+--&gt;</text></revision></page><page><title>Mapping de:Normdaten</title><ns>208</ns><id>7387</id><revision><id>26366</id><timestamp>2013-06-24T09:15:28Z</timestamp><text>{{ ConditionalMapping
+    | cases = {{ Condition
+        | templateProperty = TYP
+        | operator = equals
+        | value = p
+        | mapping = {{ TemplateMapping
+            | mapToClass = Person
+        }}
+    }}
+    {{ Condition
+        | templateProperty = TYP
+        | operator = equals
+        | value = g
+        | mapping = {{ TemplateMapping
+            | mapToClass = Place
+        }}
+    }}
+    {{ Condition
+        | templateProperty = TYP
+        | operator = equals
+        | value = k
+        | mapping = {{ TemplateMapping
+            | mapToClass = Organisation
+        }}
+    }}
+    {{ Condition
+        | templateProperty = TYP
+        | operator = equals
+        | value = w
+        | mapping = {{ TemplateMapping
+            | mapToClass = Work
+        }}
+    }}
+    {{ Condition
+        | templateProperty = TYP
+        | operator = equals
+        | value = v
+        | mapping = {{ TemplateMapping
+            | mapToClass = owl:Thing
+        }}
+    }}
+    {{ Condition
+        | templateProperty = TYP
+        | operator = equals
+        | value = s
+        | mapping = {{ TemplateMapping
+            | mapToClass = owl:Thing
+        }}
+    }}
+    | defaultMappings = {{ PropertyMapping | templateProperty = GND | ontologyProperty = individualisedGnd }}
+}}</text></revision></page></mediawiki>
