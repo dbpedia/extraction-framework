@@ -11,6 +11,7 @@ object DisambiguationExtractorConfig
          "de" -> " (Begriffsklärung)",
          "el" -> " (αποσαφήνιση)",
          "en" -> " (disambiguation)",
+         "eo" -> " (apartigilo)",
          "es" -> " (desambiguación)",
          "eu" -> " (argipena)",
          "fr" -> " (homonymie)",
@@ -20,7 +21,6 @@ object DisambiguationExtractorConfig
          "nl" -> " (doorverwijspagina)", //TODO make it Set() for multiple “nl” -> " (disambigueren)"
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
-         "ru" -> " (значения)",
-         "eo" -> " (apartigilo)"
+         "ru" -> " (значения)"
     )
 }

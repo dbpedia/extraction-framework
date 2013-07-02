@@ -46,6 +46,14 @@ object ParserUtilsConfig
             "τρισεκατομμυρια" -> 12,
             "τετράκις εκατομμύρια" -> 15
         ),
+        "eo" -> Map(
+            "mil" -> 3,
+            "miliono" -> 6,
+            "miliardo" -> 9,
+            "biliono" -> 12,
+            "biliardo" -> 15,
+            "triliono" -> 18
+        ),
         
         "nl" -> Map(
             "honderd" -> 2,
@@ -92,14 +100,6 @@ object ParserUtilsConfig
             "milliard" -> 9,
             "billion" -> 12,
             "trillion" -> 18
-        ),
-        "eo" -> Map(
-            "mil" -> 3,
-            "miliono" -> 6,
-            "miliardo" -> 9,
-            "biliono" -> 12,
-            "biliardo" -> 15,
-            "triliono" -> 18
         )
     )
     
