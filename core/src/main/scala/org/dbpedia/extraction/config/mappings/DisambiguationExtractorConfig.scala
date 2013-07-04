@@ -11,6 +11,7 @@ object DisambiguationExtractorConfig
          "de" -> " (Begriffsklärung)",
          "el" -> " (αποσαφήνιση)",
          "en" -> " (disambiguation)",
+         "eo" -> " (apartigilo)",
          "es" -> " (desambiguación)",
          "eu" -> " (argipena)",
          "fr" -> " (homonymie)",

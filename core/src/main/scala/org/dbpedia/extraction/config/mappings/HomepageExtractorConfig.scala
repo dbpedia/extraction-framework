@@ -14,6 +14,7 @@ object HomepageExtractorConfig
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
         "en" -> Set("website", "homepage", "web", "site"),
+        "eo" -> Set("ĉefpaĝo", "retejo"),
         "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
         "eu" -> Set("webgunea"),
         "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
@@ -33,6 +34,7 @@ object HomepageExtractorConfig
         "de" -> "Weblinks?",
         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
         "en" -> "External links?",
+        "eo" -> "Eksteraj ligiloj",
         "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo)",
         "eu" -> "Kanpo loturak?",
         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
@@ -50,6 +52,7 @@ object HomepageExtractorConfig
         "de" -> "offizielle",
         "el" -> "(?:επίσημος|επίσημη)",
         "en" -> "official",
+        "eo" -> "oficiala",
         "es" -> "oficial",
         "eu" -> "ofiziala?",
         "fr" -> "officiel",
