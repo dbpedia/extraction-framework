@@ -46,7 +46,29 @@ object ParserUtilsConfig
             "τρισεκατομμυρια" -> 12,
             "τετράκις εκατομμύρια" -> 15
         ),
-        
+        "eo" -> Map(
+            "mil" -> 3,
+            "miliono" -> 6,
+            "miliardo" -> 9,
+            "biliono" -> 12,
+            "biliardo" -> 15,
+            "triliono" -> 18
+        ),
+        "es" -> Map(
+            "mil" -> 3,
+            "millón" -> 6,
+            "millardo" -> 9,
+            "billón" -> 12,
+            "trillón" -> 18,
+            "cuatrillón" -> 24
+        ),
+        "fr" -> Map(
+            "mille" -> 3,
+            "million" -> 6,
+            "milliard" -> 9,
+            "billion" -> 12,
+            "trillion" -> 18
+        ),
         "nl" -> Map(
             "honderd" -> 2,
             "duizend" -> 3,
@@ -77,21 +99,6 @@ object ParserUtilsConfig
             "biliony" -> 12,
             "bilionów" -> 12,
             "bln" -> 12
-        ),
-        "es" -> Map(
-            "mil" -> 3,
-            "millón" -> 6,
-            "millardo" -> 9,
-            "billón" -> 12,
-            "trillón" -> 18,
-            "cuatrillón" -> 24
-        ),
-        "fr" -> Map(
-            "mille" -> 3,
-            "million" -> 6,
-            "milliard" -> 9,
-            "billion" -> 12,
-            "trillion" -> 18
         )
     )
     
