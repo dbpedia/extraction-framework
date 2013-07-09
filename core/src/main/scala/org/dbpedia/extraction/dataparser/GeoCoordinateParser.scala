@@ -14,6 +14,8 @@ class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) e
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
     private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
+    
+    private val singleCoordParser = new SingleGeoCoordinateParser()
 
     override def parse(node : Node) : Option[GeoCoordinate] =
     {
@@ -101,8 +103,16 @@ class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) e
             //{{coord|latitude|longitude|coordinate parameters|template parameters}}
             case latitude :: longitude :: _ =>
             {
-                Some(new GeoCoordinate( latDeg = latitude.toDouble,
-                                        lonDeg = longitude.toDouble,
+              val latitudeDeg = singleCoordParser.parseSingleCoordinate(latitude) match{
+                case Some(d) => d.toDouble
+                case None => latitude.toDouble
+              }
+              val longitudeDeg = singleCoordParser.parseSingleCoordinate(longitude) match{
+                case Some(d) => d.toDouble
+                case None => longitude.toDouble
+              }
+                Some(new GeoCoordinate( latDeg = latitudeDeg,
+                                        lonDeg = longitudeDeg,
                                         belongsToArticle = belongsToArticle))
             }
             case _ => None
