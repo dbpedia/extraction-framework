@@ -3,13 +3,12 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
-import java.util.logging.{Logger, Level}
+import java.util.logging.{Logger, Level, LogRecord}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
-import java.util.logging.LogRecord
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
