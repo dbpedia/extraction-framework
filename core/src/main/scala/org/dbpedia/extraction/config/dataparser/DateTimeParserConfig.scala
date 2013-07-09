@@ -77,7 +77,11 @@ object DateTimeParserConfig
             //conditional mapping .. for multiple matching ifPropertyNumHasValue could be a regex (not implemented for multiple)
             "birthdeathage"       -> Map ("ifPropertyNum" -> "1", "ifPropertyNumHasValue" -> "B", //"BirthDeathAge"
                                           "year" -> "2", "month"-> "3", "day" -> "4",
-                                          "elseYear" -> "4", "elseMonth"-> "5", "elseDay" -> "6")
+                                          "elseYear" -> "4", "elseMonth"-> "5", "elseDay" -> "6"),
+            "NBA Year"            -> Map ("year" -> "1"),
+            "Nbay"                -> Map ("year" -> "1"),
+            "NHL_Year"            -> Map ("year" -> "1"),
+            "nhly"                -> Map ("year" -> "1")
         ),
 
         // alphabetically for other languages
