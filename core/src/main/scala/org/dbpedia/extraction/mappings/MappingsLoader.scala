@@ -9,6 +9,7 @@ import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
+import java.util.logging.LogRecord
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -77,7 +78,7 @@ object MappingsLoader
             }
             catch
             {
-                case ex : Throwable => logger.log(Level.WARNING, "Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage, page.title.encodedWithNamespace)
+                case ex : Throwable => log(Level.WARNING, "Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage, Array(page.title.encodedWithNamespace), ex)
             }
         }
 
@@ -114,7 +115,7 @@ object MappingsLoader
             }
             catch
             {
-                case ex : Exception => logger.log(Level.WARNING, "Couldn't load property mapping on page " + node.root.title.decodedWithNamespace + ". Details: " + ex.getMessage, node.root.title.encodedWithNamespace)
+                case ex : Exception => log(Level.WARNING, "Couldn't load property mapping on page " + node.root.title.decodedWithNamespace + ". Details: " + ex.getMessage, Array(node.root.title.encodedWithNamespace), ex)
             }
         }
 
@@ -289,5 +290,22 @@ object MappingsLoader
         {
             case e : NumberFormatException => throw new IllegalArgumentException("Invalid value for " + propertyName + ". Must be double.")
         }
+    }
+    
+    /**
+     * java.util.logging is so stupid. It doesn't even have methods that allow passing params AND
+     * exceptions. We have to write our own method. Copy & paste from several Logger.log() methods
+     * PLUS the private Logger.doLog() method that sets the logger name. To really emulate the
+     * behavior of Logger.log(), we would also have to copy the handling of the resource bundle
+     * from  doLog()... luckily, we don't care about internationalization.
+     */
+    private def log(level: Level, msg: String, params: Array[Object], thrown: Throwable): Unit =
+    {
+      if (! logger.isLoggable(level)) return
+      val lr = new LogRecord(level, msg)
+      lr.setLoggerName(logger.getName())
+      lr.setParameters(params)
+      lr.setThrown(thrown)
+      logger.log(lr)
     }
 }
