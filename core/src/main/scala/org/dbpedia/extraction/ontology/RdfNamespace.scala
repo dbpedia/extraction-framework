@@ -60,6 +60,7 @@ object RdfNamespace {
   val SKOS = ns("skos", "http://www.w3.org/2004/02/skos/core#")
   val SCHEMA = ns("schema", "http://schema.org/", false) 
   val BIBO = ns("bibo", "http://purl.org/ontology/bibo/", false)
+  val WIKIDATA = ns("wikidata", "http://www.wikidata.org/entity/", false)
   
   /**
    * @return namespace for prefix and suffix, default namespace and full name if no match found 
