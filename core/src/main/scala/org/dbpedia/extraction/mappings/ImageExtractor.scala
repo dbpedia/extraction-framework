@@ -202,6 +202,13 @@ extends Extractor
 
 private object ImageExtractor
 {
+    // FIXME: This is so dumb. We're parsing the commons dump every time we initialize the ImageExtractor.
+    // Which means that we waste about an hour of CPU time for nine of the ten languages that currently
+    // use the ImageExtractor. And we're not even doing it in parallel - we're using just a single CPU!
+    // Things like this need to be done in pre-processing steps: parse the commons dump once, store the
+    // result in some file, or even in memory, load it when necessary. Similar for the language dumps:
+    // parse a language dump once (using multiple CPUs), extract redirects, images and maybe other stuff,
+    // store the result, load the result when needed.
     private def loadImages(source: Source, freeImages: MutableSet[String], nonFreeImages: MutableSet[String], wikiCode: String)
     {
         val logger = Logger.getLogger(classOf[ImageExtractor].getName)
