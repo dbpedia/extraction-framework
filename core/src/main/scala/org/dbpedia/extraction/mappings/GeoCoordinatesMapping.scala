@@ -36,7 +36,7 @@ extends PropertyMapping
   private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName)
 
   private val geoCoordinateParser = new GeoCoordinateParser(context)
-  private val singleGeoCoordinateParser = new SingleGeoCoordinateParser()
+  private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
   private val doubleParser = new DoubleParser(context)
   private val stringParser = StringParser
 

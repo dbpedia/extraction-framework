@@ -18,7 +18,6 @@ class GeoCoordinate( lat : Latitude,
             new Longitude(lonDeg, lonMin, lonSec, lonHem),
             belongsToArticle
             )
-  //def this(latDeg : Double, longDeg : Double)= this(new Latitude(latDeg), new Longitude(longDeg))
             
    val latitude = lat.toDouble
    val longitude = long.toDouble

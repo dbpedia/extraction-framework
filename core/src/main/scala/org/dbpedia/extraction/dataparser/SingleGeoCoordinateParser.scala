@@ -1,17 +1,29 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
 import java.util.logging.{Level, Logger}
 import util.control.ControlThrowable
+import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 import org.dbpedia.extraction.mappings.Redirects
 
 /**
  * Parses a single geographical coordinate, ie. either a latitude or a longitude.
  */
-class SingleGeoCoordinateParser() extends DataParser
+class SingleGeoCoordinateParser(context : { def language : Language }) extends DataParser
 {
     private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
+    private val language = context.language.wikiCode
+    
+    private val lonHemLetterMap = GeoCoordinateParserConfig.longitudeLetterMap.getOrElse(language,GeoCoordinateParserConfig.longitudeLetterMap("en"))
+    private val latHemLetterMap = GeoCoordinateParserConfig.latitudeLetterMap.getOrElse(language,GeoCoordinateParserConfig.latitudeLetterMap("en"))
+    
+	private val lonHemRegex = lonHemLetterMap.keySet.mkString("|")
+	private val LongitudeRegex = ("""([0-9]{1,2})/([0-9]{1,2})/([0-9]{0,2}(?:.[0-9]{1,2})?)[/]?[\s]?("""+ lonHemRegex +""")""").r
+	
+	private val latHemRegex = latHemLetterMap.keySet.mkString("|")
+	private val LatitudeRegex = ("""([0-9]{1,2})/([0-9]{1,2})/([0-9]{0,2}(?:.[0-9]{1,2})?)[/]?[\s]?("""+ latHemRegex +""")""").r
+	
 
     override def parse(node : Node) : Option[SingleGeoCoordinate] =
     {
@@ -35,21 +47,11 @@ class SingleGeoCoordinateParser() extends DataParser
     
     def parseSingleCoordinate(coordStr : String) : Option[SingleGeoCoordinate] = 
     {
-    	import SingleGeoCoordinateParser.LatitudeRegex
-    	import SingleGeoCoordinateParser.LongitudeRegex
-    	
     	coordStr match {
-    	  case LatitudeRegex(latDeg, latMin, latSec, latHem) => Some(new Latitude(latDeg.toDouble, latMin.toDouble, ("0"+latSec).toDouble, latHem))
-    	  case LongitudeRegex(lonDeg, lonMin, lonSec, lonHem) => Some(new Longitude(lonDeg.toDouble, lonMin.toDouble, ("0"+lonSec).toDouble, lonHem))
+    	  case LatitudeRegex(latDeg, latMin, latSec, latHem) => Some(new Latitude(latDeg.toDouble, latMin.toDouble, ("0"+latSec).toDouble, latHemLetterMap.getOrElse(latHem,"N")))
+    	  case LongitudeRegex(lonDeg, lonMin, lonSec, lonHem) => Some(new Longitude(lonDeg.toDouble, lonMin.toDouble, ("0"+lonSec).toDouble, lonHemLetterMap.getOrElse(lonHem,"E")))
     	  case _ => None
     	}
     }
         
-}
-
-object SingleGeoCoordinateParser
-{
-    private val LatitudeRegex = """([0-9]{1,2})/([0-9]{1,2})/([0-9]{0,2}(?:.[0-9]{1,2})?)[/]?[\s]?(N|S)""".r
-    private val LongitudeRegex = """([0-9]{1,2})/([0-9]{1,2})/([0-9]{0,2}(?:.[0-9]{1,2})?)[/]?[\s]?(E|W|O)""".r
-
 }

@@ -80,7 +80,7 @@ extends Extractor
     private val dataTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
                                   .map(datatype => new DateTimeParser(context, new Datatype(datatype), true))
 
-    private val singleGeoCoordinateParser = new SingleGeoCoordinateParser()
+    private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
                                   
     private val objectParser = new ObjectParser(context, true)
 

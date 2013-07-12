@@ -9,9 +9,8 @@ class Longitude( lonDeg : Double = 0.0, lonMin : Double = 0.0, lonSec : Double =
                      val belongsToArticle : Boolean = false )
 extends SingleGeoCoordinate
 {
-    override def toDouble = (lonDeg + (lonMin + lonSec / 60.0 ) / 60.0) * (if(lonHem == "W" || lonHem == "O") -1.0 else 1.0)
+    override def toDouble = (lonDeg + (lonMin + lonSec / 60.0 ) / 60.0) * (if(lonHem == "W") -1.0 else 1.0)
 
-    require(lonHem == "E" || lonHem == "W" || lonHem == "O", "Invalid hemisphere: '" + lonHem + "'")
-    // TODO: remove lonHem == "O"
-    require(toDouble >= -90.0 && toDouble <= 90.0, "Longitude must be in the range [-90, 90]")
+    require(lonHem == "E" || lonHem == "W", "Invalid hemisphere: '" + lonHem + "'")
+    require(toDouble >= -180.0 && toDouble <=180.0, "Longitude must be in the range [-180, 180]")
 }
