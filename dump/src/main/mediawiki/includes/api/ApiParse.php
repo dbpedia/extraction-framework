@@ -244,7 +244,7 @@ class ApiParse extends ApiBase {
 
 		if ( isset( $prop['text'] ) ) {
 			$result_array['text'] = array();
-			ApiResult::setContent( $result_array['text'], $p_result->getText() );
+			ApiResult::setContent( $result_array['text'], DBpediaFunctions::cleanHtml( $p_result->getText() ) );
 		}
 
 		if ( !is_null( $params['summary'] ) ) {
