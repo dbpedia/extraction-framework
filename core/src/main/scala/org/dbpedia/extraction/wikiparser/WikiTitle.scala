@@ -72,6 +72,19 @@ class WikiTitle (
      * TODO: also use fragment?
      */
     override def hashCode() = language.hashCode ^ decoded.hashCode ^ namespace.hashCode
+
+    /**
+     * If somehow a different namespace is also given for this title, store it here. Otherwise,
+     * this field is null.
+     * 
+     * Why do we need this nonsense? http://gd.wikipedia.org/?curid=4184 and http://gd.wikipedia.org/?curid=4185&redirect=no
+     * have the same title "Teamplaid:Gàidhlig", but they are in different namespaces: 4184 is in
+     * the template namespace, 4185 is in the main namespace. It looks like MediaWiki can handle this
+     * somehow, but when we try to import both pages from the XML dump file into the database,
+     * MySQL rightly complains about the duplicate title. As a workaround, we simply reject pages
+     * for which the <ns> namespace doesn't fit the <title> namespace. 
+     */
+    var otherNamespace: Namespace = null
 }
     
 object WikiTitle
