@@ -18,7 +18,13 @@ import scala.collection.mutable.ListBuffer
  * @param namespace Namespace used to be optional, but that leads to mistakes
  * @param language Language used to be optional, but that leads to mistakes
  */
-class WikiTitle (val decoded : String, val namespace : Namespace, val language : Language, val isInterLanguageLink : Boolean = false, val fragment : String = null)
+class WikiTitle (
+  val decoded: String,
+  val namespace: Namespace,
+  val language: Language,
+  val isInterLanguageLink: Boolean = false,
+  val fragment: String = null
+)
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
