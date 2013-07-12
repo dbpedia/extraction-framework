@@ -15,10 +15,21 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
+if ( isset( $_REQUEST['uselang'] ) ) {
+	$languageCode = $_REQUEST['uselang'];
+} else if ( isset( $_REQUEST['lang'] ) ) {
+	# used for script and css URLs
+	$languageCode = $_REQUEST['lang'];
+} else {
+	die( "Missing request parameter 'uselang' or 'lang'\n" );
+}
+
+$underscoreLanguageCode = str_replace('-', '_', $languageCode);
+
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
-$wgSitename = "Wikipedia";
+$wgSitename = "Wikipedia_".$underscoreLanguageCode;
 $wgMetaNamespace = "Project";
 
 ## The URL base path to the directory containing the wiki;
@@ -37,24 +48,24 @@ $wgStylePath = "$wgScriptPath/skins";
 
 ## The relative URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo             = "/wiki/skins/common/images/wiki.png";
+$wgLogo             = "$wgStylePath/common/images/wiki.png";
 
 ## UPO means: this is also a user preference option
 
-$wgEnableEmail = true;
-$wgEnableUserEmail = true; # UPO
+$wgEnableEmail = false;
+$wgEnableUserEmail = false; # UPO
 
 $wgEmergencyContact = "apache@localhost";
 $wgPasswordSender = "apache@localhost";
 
 $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
-$wgEmailAuthentication = true;
+$wgEmailAuthentication = false;
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = "localhost";
-$wgDBname = "my_wiki";
+$wgDBserver = ":/data/dbpedia-release/mysql/mysql.sock";
+$wgDBname = $underscoreLanguageCode."wiki";
 $wgDBuser = "root";
 $wgDBpassword = "";
 
@@ -65,17 +76,18 @@ $wgDBprefix = "";
 $wgDBTableOptions = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
 
 # Experimental charset support for MySQL 5.0.
-$wgDBmysql5 = false;
+$wgDBmysql5 = true;
 
 ## Shared memory settings
-$wgMainCacheType = CACHE_NONE;
+$wgMainCacheType = CACHE_ACCEL;
+$wgEnableParserCache = true;
 $wgMemCachedServers = array();
 
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
 $wgEnableUploads = false;
-#$wgUseImageMagick = true;
-#$wgImageMagickConvertCommand = "/usr/bin/convert";
+$wgUseImageMagick = true;
+$wgImageMagickConvertCommand = "/usr/bin/convert";
 
 # InstantCommons allows wiki to use images from http://commons.wikimedia.org
 $wgUseInstantCommons = false;
@@ -97,7 +109,7 @@ $wgShellLocale = "en_US.utf8";
 #$wgCacheDirectory = "$IP/cache";
 
 # Site language code, should be one of the list in ./languages/Names.php
-$wgLanguageCode = "en";
+$wgLanguageCode = $languageCode;
 
 $wgSecretKey = "788a8ef2c3ee638b9d5834c29967d6ea81424432df516b65c5910d41e014a5b1";
 
@@ -131,3 +143,23 @@ $wgResourceLoaderMaxQueryLength = -1;
 # End of automatically generated settings.
 # Add more configuration options below.
 
+# Enabled Extensions. Most extensions are enabled by including the base extension file here
+# but check specific extension documentation for more details
+require_once( "$IP/extensions/Babel/Babel.php" );
+require_once( "$IP/extensions/CategoryTree/CategoryTree.php" );
+require_once( "$IP/extensions/CharInsert/CharInsert.php" );
+require_once( "$IP/extensions/Cite/Cite.php" );
+require_once( "$IP/extensions/ExpandTemplates/ExpandTemplates.php" );
+# require_once( "$IP/extensions/FlaggedRevs/FlaggedRevs.php" );
+require_once( "$IP/extensions/ImageMap/ImageMap.php" );
+require_once( "$IP/extensions/InputBox/InputBox.php" );
+require_once( "$IP/extensions/Interwiki/Interwiki.php" );
+require_once( "$IP/extensions/Math/Math.php" );
+require_once( "$IP/extensions/OggHandler/OggHandler.php" );
+require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
+require_once( "$IP/extensions/Poem/Poem.php" );
+require_once( "$IP/extensions/StringFunctionsEscaped/StringFunctionsEscaped.php" );
+require_once( "$IP/extensions/SyntaxHighlight_GeSHi/SyntaxHighlight_GeSHi.php" );
+require_once( "$IP/extensions/timeline/Timeline.php" );
+require_once( "$IP/extensions/wikihiero/wikihiero.php" );
+require_once( "$IP/DBpediaFunctions.php" );
