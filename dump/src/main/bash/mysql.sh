@@ -4,16 +4,17 @@
 set -e
 
 COMMAND=$1
-MYDIR=$2
-MYDB=$3
+MYHOME=$2
+MYDIR=$3
+MYDB=$4
 
 # FIXME: check $COMMAND
 
 # TODO: check $MYDB? It may be empty, but should be a well-formed database name.
 
-if [[ -z "$MYDIR" ]]
+if [[ -z $MYHOME || -z $MYDIR || ( $COMMAND != "install" && $COMMAND != "start" && $COMMAND != "stop" && $COMMAND != "run" ) ]]
 then
-    echo "usage: $0 (install|start|stop|run) <mysql dir> <database>"
+    echo "usage: $0 (install|start|stop|run) <mysql home> <mysql dir> <database>"
     echo
     echo "install:"
     echo "Install MySQL databases in <mysql dir>/data."
@@ -29,22 +30,21 @@ then
     echo "run:"
     echo "Connect to MySQL server listening at socket <mysql dir>/mysql.sock, execute SQL from standard input."
     echo
-    echo "MYSQL_HOME must be set to the absolute path of your MySQL installation directory. Current value: $MYSQL_HOME"
+    echo "<mysql home> must be the absolute path of your MySQL installation directory."
     echo
     echo "<mysql dir> must be an absolute path of an existing directory where MySQL will store its data."
     echo
     echo "<database> only used by run, optional."
     echo
     echo "Example:"
-    echo "$0 ~/data/mysql"
+    echo "$0 ~/bin/mysql ~/data/mysql"
     exit 1
 fi
 
 # FIXME: check that MYDIR is an absolute path, or better: make it absolute
 
 # We need to be in MySQL install dir because of http://bugs.mysql.com/bug.php?id=34981
-# FIXME: check that MYSQL_HOME is set
-cd $MYSQL_HOME
+cd $MYHOME
 
 case "$COMMAND" in
 install)
@@ -65,10 +65,6 @@ stop)
 ;;
 run)
     ./bin/mysql --no-defaults --default-character-set=utf8 --socket="$MYDIR/mysql.sock" "$MYDB"
-;;
-*)
-    # FIXME: check $COMMAND, make sure we'll never get here
-    echo "I hate you."
 ;;
 esac
 
