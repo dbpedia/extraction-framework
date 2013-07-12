@@ -51,7 +51,16 @@ object Import {
         
         println("importing pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server URL "+url)
         
-        val source = XMLSource.fromReader(() => IOUtils.reader(file), language, title => namespaces.contains(title.namespace))
+        /*
+        Ignore the page if a different namespace is also given for the title.
+        http://gd.wikipedia.org/?curid=4184 and http://gd.wikipedia.org/?curid=4185&redirect=no
+        have the same title "Teamplaid:Gàidhlig", but they are in different namespaces: 4184 is
+        in the template namespace (good), 4185 is in the main namespace (bad). It looks like
+        MediaWiki can handle this somehow, but when we try to import both pages from the XML dump
+        into the database, MySQL rightly complains about the duplicate title. As a workaround,
+        we simply reject pages for which the <ns> namespace doesn't fit the <title> namespace. 
+        */
+        val source = XMLSource.fromReader(() => IOUtils.reader(file), language, title => title.otherNamespace == null && namespaces.contains(title.namespace))
         
         val stmt = conn.createStatement()
         try {
