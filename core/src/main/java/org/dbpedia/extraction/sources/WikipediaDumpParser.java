@@ -202,13 +202,6 @@ public class WikipediaDumpParser
     WikiTitle title = parseTitle(titleStr);
     // now after </title>
 
-    //Skip bad titles and filtered pages
-    if(title == null || ! _filter.apply(title))
-    {
-        while(! isEndElement(PAGE_ELEM)) _reader.next();
-        return;
-    }
-
     int nsCode;
     try
     {
@@ -221,10 +214,18 @@ public class WikipediaDumpParser
 
     // now after </ns>
     
-    if (title.namespace().code() != nsCode)
+    if (title != null && title.namespace().code() != nsCode)
     {
       Namespace expected = Namespace.values().apply(nsCode);
       logger.log(Level.WARNING, "Error parsing title: found namespace "+title.namespace()+", expected "+expected+" in title "+titleStr);
+      title.otherNamespace_$eq(expected);
+    }
+
+    //Skip bad titles and filtered pages
+    if (title == null || ! _filter.apply(title))
+    {
+        while(! isEndElement(PAGE_ELEM)) _reader.next();
+        return;
     }
 
     //Read page id
