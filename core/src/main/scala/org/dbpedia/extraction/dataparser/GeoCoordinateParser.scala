@@ -3,19 +3,36 @@ package org.dbpedia.extraction.dataparser
 import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
 import java.util.logging.{Level, Logger}
 import util.control.ControlThrowable
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 import org.dbpedia.extraction.mappings.Redirects
 
 /**
  * Parses geographical coordinates.
  */
-class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) extends DataParser
+class GeoCoordinateParser( 
+    extractionContext : {  
+      def language : Language  
+      def redirects : Redirects 
+      } 
+    ) extends DataParser
 {
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
     private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
     
-    private val singleCoordParser = new SingleGeoCoordinateParser()
+    private val singleCoordParser = new SingleGeoCoordinateParser(extractionContext)
+    
+    private val language = extractionContext.language.wikiCode
+    
+    private val lonHemLetterMap = GeoCoordinateParserConfig.longitudeLetterMap.getOrElse(language,GeoCoordinateParserConfig.longitudeLetterMap("en"))
+    private val latHemLetterMap = GeoCoordinateParserConfig.latitudeLetterMap.getOrElse(language,GeoCoordinateParserConfig.latitudeLetterMap("en"))
+    private val lonHemRegex = lonHemLetterMap.keySet.mkString("|")
+    private val latHemRegex = latHemLetterMap.keySet.mkString("|")
+    
+    private val Coordinate = ("""([0-9]{1,2})º([0-9]{1,2})\'([0-9]{1,2}(?:\.[0-9]{1,2})?)?\"?[\s]?("""+ latHemRegex +""")[\s]([0-9]{1,3})º([0-9]{1,2})\'([0-9]{1,2}(?:\.[0-9]{1,2})?)?\"?[\s]?("""+ lonHemRegex +""")""").r
+    private val LatDir = ("""("""+latHemRegex+""")""").r
+    
 
     override def parse(node : Node) : Option[GeoCoordinate] =
     {
@@ -68,8 +85,6 @@ class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) e
      */ 
     private def catchCoordTemplate(node : TemplateNode) : Option[GeoCoordinate] =
     {
-        import GeoCoordinateParser.LatDir
-
         val belongsToArticle = node.property("display").toList.flatMap(displayNode =>
                                displayNode.retrieveText.toList.flatMap(text =>
                                text.split(",") ) ).exists(option =>
@@ -122,8 +137,6 @@ class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) e
 
     private def parseGeoCoordinate(coordStr : String) : Option[GeoCoordinate] =
     {
-       import GeoCoordinateParser.Coordinate
-
        coordStr match
        {
            case Coordinate(latDeg, latMin, latSec, latDir, lonDeg, lonMin, lonSec, lonDir) =>
@@ -134,11 +147,4 @@ class GeoCoordinateParser( extractionContext : { def redirects : Redirects } ) e
            case _ => None
        }
     }
-}
-
-object GeoCoordinateParser
-{
-    private val Coordinate = """([0-9]{1,2})º([0-9]{1,2})\'([0-9]{1,2}(?:\.[0-9]{1,2})?)?\"?[\s]?(N|S)[\s]([0-9]{1,3})º([0-9]{1,2})\'([0-9]{1,2}(?:\.[0-9]{1,2})?)?\"?[\s]?(E|W|O)""".r
-
-    private val LatDir = "(N|S)".r
 }
