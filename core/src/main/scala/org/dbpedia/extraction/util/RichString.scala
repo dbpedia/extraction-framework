@@ -14,7 +14,7 @@ object RichString
 {
     implicit def wrapString(str : String) = new RichString(str)
 
-    private val dontCapitalize = Array('ß', 'ﬁ', 'ﬀ', 'ﬂ', 'ﬃ', 'ﬄ', 'ﬅ', 'ﬆ')
+    private val dontCapitalize = Array('ß', 'ﬁ', 'ﬀ', 'ﬂ', 'ﬃ', 'ﬄ', 'ﬅ', 'ﬆ', 'ⱬ')
     
     // sort array so we can use binary search
     { sort(dontCapitalize) }
@@ -36,6 +36,7 @@ class RichString(str : String)
      * 'ﬄ' -> "FFL"
      * 'ﬅ' -> "ST"
      * 'ﬆ' -> "ST"
+     * 'ⱬ' -> "Ⱬ"
      * 
      * TODO: there are probably many other cases. Maybe we should use Character.toUpperCase()
      * instead of String.toUpperCase()? What would MediaWiki do?
