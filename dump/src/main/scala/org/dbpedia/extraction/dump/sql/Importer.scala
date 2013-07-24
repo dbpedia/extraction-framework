@@ -147,7 +147,7 @@ class Importer(conn: Connection) {
   
   private def logPages(): Unit = {
     val millis = System.currentTimeMillis - time
-    println("imported "+pages+" pages in "+millis+" millis ("+(millis.toDouble/pages)+" millis per page)")
+    println("imported "+pages+" pages in "+StringUtils.prettyMillis(millis)+" ("+(millis.toDouble/pages)+" millis per page)")
   }
   
 }
