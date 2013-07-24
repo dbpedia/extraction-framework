@@ -47,11 +47,13 @@ public class OAIFeeder extends Feeder {
 
         this.pollInterval = pollInterval;
         this.sleepInterval = sleepInterval;
-
-
-        oaiRecordIterator = OAIUtil.createEndlessFeederItemIterator(oaiUri, latestProcessDate, pollInterval, sleepInterval);
     }
 
+
+    @Override
+    protected void initFeeder() {
+        oaiRecordIterator = OAIUtil.createEndlessFeederItemIterator(oaiUri, latestProcessDate, pollInterval, sleepInterval);
+    }
 
     @Override
     protected List<LiveQueueItem> getNextItems() {
