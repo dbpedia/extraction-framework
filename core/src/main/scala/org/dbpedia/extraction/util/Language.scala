@@ -8,7 +8,7 @@ import org.dbpedia.extraction.ontology.DBpediaNamespace
  * Represents a MediaWiki instance and the language used on it. Initially, this class was
  * only used for xx.wikipedia.org instances, but now we also use it for mappings.dbpedia.org.
  * For each language, there is only one instance of this class.
- * TODO: rename this class to WikiCode or so.
+ * TODO: rename this class to WikiCode or so, distinguish between enwiki / enwiktionary etc.
  */
 class Language private(val wikiCode : String, val isoCode: String)
 {
