@@ -1,22 +1,21 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.{File,Writer,BufferedReader}
-import org.dbpedia.extraction.destinations.Quad
+import java.io.{File,OutputStreamWriter}
+import scala.Console.{err,out}
+import scala.collection.mutable.{Map,HashMap,ArrayBuffer}
+import java.util.Arrays.{copyOf,sort}
 import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
-import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
+import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
-import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
-import org.dbpedia.extraction.destinations.DBpediaDatasets
+import org.dbpedia.extraction.util.StringUtils.{prettyMillis}
 import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
-import scala.Console.err
-import org.dbpedia.extraction.util.IOUtils
-import scala.collection.mutable.{Map,HashMap}
-import java.util.Arrays.{copyOf,sort,binarySearch}
+import org.dbpedia.extraction.destinations.{Destination,Quad,QuadBuilder,Dataset,WriterDestination}
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import ProcessWikidataLinks._
-import org.dbpedia.extraction.destinations.Destination
-import scala.collection.mutable.ArrayBuffer
+import org.dbpedia.extraction.destinations.WriterDestination
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 
 /**
  * Generate separate triple files for each language from Wikidata link file.
@@ -72,27 +71,22 @@ object ProcessWikidataLinks {
     require(args != null && (args.length == 4 || args.length >= 6),
       "need at least four args: " +
       /*0*/ "base dir, " +
-      /*1*/ "result dataset name extension (e.g. '-chapters', use '-' for empty string), " +
-      /*2*/ "triples file suffix (e.g. '.nt.gz'); " +
-      /*3*/ "generic domain language (e.g. 'en', use '-' to disable), " +
-      /*4*/ "link languages or article count ranges (e.g. 'en,fr' or '10000-')")
+      /*1*/ "input file, " +
+      /*2*/ "generic domain language (e.g. 'en', use '-' to disable), " +
+      /*3*/ "link languages or article count ranges (e.g. 'en,fr' or '10000-')")
     
     val baseDir = new File(args(0))
     
-    val inputFile: File = null
-    
-    val extension = if (args(1) == "-") "" else args(2)
-    
-    val fileSuffix = args(2)
-    
-    val processor = new ProcessWikidataLinks(baseDir, fileSuffix, extension)
+    var inputFile = new File(args(1))
+    if (! inputFile.isAbsolute) inputFile = new File(baseDir, args(1))
     
     // Language using generic domain (usually en)
-    val generic = if (args(3) == "-") null else Language(args(3))
+    val generic = if (args(2) == "-") null else Language(args(2))
     
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    val languages = parseLanguages(baseDir, args.drop(4))
+    val languages = parseLanguages(baseDir, args.drop(3))
     
+    val processor = new ProcessWikidataLinks()
     processor.setLanguages(languages, generic)
     processor.readLinks(inputFile)
     processor.writeTriples()
@@ -107,11 +101,11 @@ object ProcessWikidataLinks {
   
   private val LANGUAGES = 1 << LANG_BITS
   private val LINKS = 1 << 25
-  private val TITLES = 1 << 23
+  private val TITLES = 1 << 25
   
 }
 
-class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String) {
+class ProcessWikidataLinks() {
 
   /*
   
@@ -134,7 +128,7 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
   
   Arbitrary limitations:
   - at most ~34 million links (2^25). There currently are ~30 million.
-  - at most ~8.4 million unique titles (2^23).
+  - at most ~34 million unique titles (2^25).
   
   If we break these limits, we can simply increase the array sizes and give the JVM more heap.
   
@@ -186,7 +180,7 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
     var titleCount = 0
     val titleKeys = new HashMap[String, Int]().withDefaultValue(-1)
     
-    links = Array[Long](LINKS)
+    links = new Array[Long](LINKS)
     var linkCount = 0
     
     val startNanos = System.nanoTime
@@ -212,19 +206,21 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
             titleKey = titleCount
             titles(titleKey) = title
             titleKeys(title) = titleKey
+            titleCount += 1
           }
           
           links(linkCount) = id.toLong << (LANG_BITS + TITLE_BITS) | langKey.toLong << TITLE_BITS | titleKey.toLong
           linkCount += 1
-          if (linkCount % 10000000 == 0) logRead("links", linkCount, startNanos)
+          if (linkCount % 200000 == 0) logRead("link", linkCount, startNanos)
         }
       }
       
       lineCount += 1
-      if (lineCount % 10000000 == 0) logRead("lines", lineCount, startNanos)
+      if (lineCount % 200000 == 0) logRead("line", lineCount, startNanos)
     }
-    logRead("lines", lineCount, startNanos)
-    logRead("links", linkCount, startNanos)
+    logRead("line", lineCount, startNanos)
+    logRead("link", linkCount, startNanos)
+    logRead("title", titleCount, startNanos)
     
     // truncate arrays to actual size
     links = copyOf(links, linkCount)
@@ -237,7 +233,7 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
 
   private def logRead(name: String, count: Int, startNanos: Long): Unit = {
     val micros = (System.nanoTime - startNanos) / 1000
-    err.println("read "+count+" "+name+" in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per line)")
+    err.println("read "+count+" "+name+"s in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per "+name+")")
   }
   
   /**
@@ -246,29 +242,26 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
    * Accesses the following fields: titles, domains, links
    */
   def writeTriples() {
+    
+    err.println("writing triples...")
+    
     val destinations = new Array[Destination](languages.length)
-    // open destinations for all given languages, store them in array
-    // TODO: how to configure formatters?
+    
+    var lang = 0
+    while (lang < languages.length) {
+      destinations(lang) = new WriterDestination(() => new OutputStreamWriter(out), new TerseFormatter(true, true))
+      lang += 1
+    }
+    // TODO: find language folders, configure formatters
     
     destinations.foreach(_.open())
-    writeTriples(destinations)
-    destinations.foreach(_.close())
-  }
     
-  /**
-   * We only need this method because Scala doesn't have a useful break statement, so we
-   * simulate it by return.
-   */
-  private def writeTriples(destinations: Array[Destination]) {
-      
-    val dataset = "wikidata_links"
     val sameAs = RdfNamespace.OWL.append("sameAs")
     val resourceUris = languages.map(lang => if (lang == generic) new DBpediaNamespace("http://dbpedia.org/resource/") else lang.resourceUri)
     
     var currentId = -1
     val uris = new Array[String](languages.length)
     
-    err.println("writing triples...")
     val startNanos = System.nanoTime
     
     var index = 0
@@ -297,7 +290,7 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
               
               val quads = new ArrayBuffer[Quad]()
               
-              quads += new Quad(null, dataset, subjUri, sameAs, entityUri, pageUri, null)
+              quads += new Quad(null, null, subjUri, sameAs, entityUri, pageUri, null: String)
               
               var objLang = 0
               while (objLang < languages.length) {
@@ -305,7 +298,7 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
                 val objUri = uris(objLang)
                 if (objUri != null) {
                   
-                  quads += new Quad(null, dataset, subjUri, sameAs, objUri, pageUri, null)
+                  quads += new Quad(null, null, subjUri, sameAs, objUri, pageUri, null: String)
                 }
                 
                 objLang += 1
@@ -321,6 +314,7 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
         
         // id is -1 at the end of the process - nothing to do anymore
         if (id == -1) {
+          destinations.foreach(_.close())
           logWrite(index, startNanos)
           return;
         }
@@ -342,7 +336,7 @@ class ProcessWikidataLinks(baseDir: File, fileSuffix: String, extension: String)
       uris(lang) = uri
       
       index += 1
-      if (index % 10000000 == 0) logWrite(index, startNanos)
+      if (index % 200000 == 0) logWrite(index, startNanos)
     }
     
   }
