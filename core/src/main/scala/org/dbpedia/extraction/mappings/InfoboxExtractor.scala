@@ -100,7 +100,7 @@ extends Extractor
     {
         if(node.title.namespace != Namespace.Main) return Seq.empty
         
-        var quads = new ArrayBuffer[Quad]()
+        val quads = new ArrayBuffer[Quad]()
 
         /** Retrieve all templates on the page which are not ignored */
         for { template <- collectTemplates(node)
