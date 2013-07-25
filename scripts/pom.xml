@@ -46,6 +46,19 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>ProcessWikidataLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.ProcessWikidataLinks</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xms1024m</jvmArg>
+                                <jvmArg>-Xmx3072m</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>CanonicalizeUris</id>
                             <mainClass>org.dbpedia.extraction.scripts.CanonicalizeUris</mainClass>
                             <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
