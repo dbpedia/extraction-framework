@@ -11,16 +11,19 @@ private object Finder {
 /**
  * Helps to find files and directories in a directory structure as used by the Wikipedia
  * dump download site, for example baseDir/enwiki/20120403/enwiki-20120403-pages-articles.xml.bz2
+ * 
+ * TODO: wikiNameSuffix doesn't belong here, it should be part of the Language class (which should
+ * be renamed to WikiCode or so)
  */
-class Finder[T](val baseDir: T, val language: Language, val wikiNameGiven: String)(implicit wrap: T => FileLike[T]) {
+class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: String)(implicit wrap: T => FileLike[T]) {
   
-  def this(baseDir: String, language: Language, wikiNameGiven: String)(implicit parse: String => T, wrap: T => FileLike[T]) = 
-    this(parse(baseDir), language, wikiNameGiven)
+  def this(baseDir: String, language: Language, wikiNameSuffix: String)(implicit parse: String => T, wrap: T => FileLike[T]) = 
+    this(parse(baseDir), language, wikiNameSuffix)
   
   /**
    * directory name/file prefix for language, e.g. "en" -> "enwiki"
    */
-  val wikiName = language.filePrefix + wikiNameGiven
+  val wikiName = language.filePrefix + wikiNameSuffix
 
   /**
    * Directory for language, e.g. "baseDir/enwiki"
