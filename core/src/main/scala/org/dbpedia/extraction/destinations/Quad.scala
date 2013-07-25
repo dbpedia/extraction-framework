@@ -107,6 +107,9 @@ class Quad(
    ")"
   }
 
+  /**
+   * FIXME: inconsistent with equals
+   */
   def compare(that: Quad): Int = {
     val s = subject.compareTo(that.subject)
     if (s != 0)
@@ -126,6 +129,9 @@ class Quad(
     }
   }
 
+  /**
+   * FIXME: only subject, predicate and value are guaranteed to be non-null
+   */
   override def equals(obj: Any) = {
     if (obj.isInstanceOf[Quad]) {
       val q = obj.asInstanceOf[Quad]
