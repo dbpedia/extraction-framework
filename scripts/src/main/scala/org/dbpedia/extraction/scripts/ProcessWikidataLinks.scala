@@ -207,16 +207,17 @@ class ProcessWikidataLinks() {
             titles(titleKey) = title
             titleKeys(title) = titleKey
             titleCount += 1
+            if (titleCount % 1000000 == 0) logRead("title", titleCount, startNanos)
           }
           
           links(linkCount) = id.toLong << (LANG_BITS + TITLE_BITS) | langKey.toLong << TITLE_BITS | titleKey.toLong
           linkCount += 1
-          if (linkCount % 200000 == 0) logRead("link", linkCount, startNanos)
+          if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
         }
       }
       
       lineCount += 1
-      if (lineCount % 200000 == 0) logRead("line", lineCount, startNanos)
+      if (lineCount % 1000000 == 0) logRead("line", lineCount, startNanos)
     }
     logRead("line", lineCount, startNanos)
     logRead("link", linkCount, startNanos)
@@ -244,15 +245,17 @@ class ProcessWikidataLinks() {
   def writeTriples() {
     
     err.println("writing triples...")
+    val startNanos = System.nanoTime
     
-    val destinations = new Array[Destination](languages.length)
+    // destinations for all languages plus one for Wikidata
+    val destinations = new Array[Destination](languages.length + 1)
     
     var lang = 0
-    while (lang < languages.length) {
-      destinations(lang) = new WriterDestination(() => new OutputStreamWriter(out), new TerseFormatter(true, true))
+    while (lang < destinations.length) {
+      // TODO: find language folders, configure formatters
+      destinations(lang) = new WriterDestination(() => new OutputStreamWriter(out), new TerseFormatter(false, true))
       lang += 1
     }
-    // TODO: find language folders, configure formatters
     
     destinations.foreach(_.open())
     
@@ -260,9 +263,9 @@ class ProcessWikidataLinks() {
     val resourceUris = languages.map(lang => if (lang == generic) new DBpediaNamespace("http://dbpedia.org/resource/") else lang.resourceUri)
     
     var currentId = -1
-    val uris = new Array[String](languages.length)
     
-    val startNanos = System.nanoTime
+    // URIs for all languages plus one for Wikidata
+    val uris = new Array[String](languages.length + 1)
     
     var index = 0
     while (index <= links.length) {
@@ -276,28 +279,26 @@ class ProcessWikidataLinks() {
       
       if (currentId != id) {
         
-        // currentId is -1 at the start of the process - nothing to do yet
+        // write collected links for previous id
+        
         if (currentId != -1) {
+          // currentId is -1 at the start of the process - nothing to do yet
 
-          val entityUri = "http://www.wikidata.org/entity/Q"+currentId
+          uris(uris.length - 1) = "http://www.wikidata.org/entity/Q"+currentId
           val pageUri = "http://www.wikidata.org/wiki/Q"+currentId
           
           var subjLang = 0
-          while (subjLang < languages.length) {
+          while (subjLang < uris.length) {
             
             val subjUri = uris(subjLang)
             if (subjUri != null) {
-              
               val quads = new ArrayBuffer[Quad]()
               
-              quads += new Quad(null, null, subjUri, sameAs, entityUri, pageUri, null: String)
-              
               var objLang = 0
-              while (objLang < languages.length) {
+              while (objLang < uris.length) {
                 
                 val objUri = uris(objLang)
-                if (objUri != null) {
-                  
+                if (objUri != null && subjLang != objLang) {
                   quads += new Quad(null, null, subjUri, sameAs, objUri, pageUri, null: String)
                 }
                 
@@ -312,31 +313,32 @@ class ProcessWikidataLinks() {
           
         }
         
-        // id is -1 at the end of the process - nothing to do anymore
         if (id == -1) {
+          // id is -1 at the end of the process - nothing to do anymore
           destinations.foreach(_.close())
           logWrite(index, startNanos)
           return;
         }
-          
+        
+        // prepare to collect links for next id
+        currentId = id
+        
         var lang = 0
-        while (lang < languages.length) {
+        while (lang < uris.length) {
           uris(lang) = null
           lang += 1
         }
-        
-        currentId = id
       }
       
       val lang = (link >>> TITLE_BITS).toInt & LANG_MASK
       val title = (link & TITLE_MASK).toInt
       
       val uri = resourceUris(lang).append(titles(title))
-      if (uris(lang) != null) throw new IllegalArgumentException("duplicate link for item "+id+", language "+languages(lang).wikiCode+": "+uris(lang)+", "+uri)
-      uris(lang) = uri
+      if (uris(lang) == null) uris(lang) = uri 
+      else if (uris(lang) != uri) throw new IllegalArgumentException("multiple links for item "+id+", language "+languages(lang).wikiCode+": "+uris(lang)+", "+uri)
       
       index += 1
-      if (index % 200000 == 0) logWrite(index, startNanos)
+      if (index % 1000000 == 0) logWrite(index, startNanos)
     }
     
   }
