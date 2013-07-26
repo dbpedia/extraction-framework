@@ -44,11 +44,14 @@ public abstract class Feeder extends Thread {
         return queuePriority;
     }
 
+    protected abstract void initFeeder();
+
     /*
     * Starts the feeder (it can only start once
     * */
     public void startFeeder() {
         if (keepRunning == true) {
+            initFeeder();
             start();
         }
     }
@@ -104,6 +107,8 @@ public abstract class Feeder extends Thread {
                 }
             } catch (Exception exp) {
                 logger.error(ExceptionUtil.toString(exp));
+                // On error re-initiate feeder
+                initFeeder();
             }
         }
     }
