@@ -203,6 +203,17 @@ object DateTimeParserConfig
             "Start date"           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "Start date and age"   -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
         ),
+        "sk" -> Map(
+            "Počiatočný dátum a vek" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            // FIXME: The following can take a second date as params 4-6
+            "Dátum narodenia a vek"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Dnv"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Vek"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Vek v dňoch"            -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Vek v rokoch a dňoch"   -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Dátum úmrtia a vek"     -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Dúv"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
         "sl" -> Map(
             "Datum rojstva"             -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "Datum rojstva in starost"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
