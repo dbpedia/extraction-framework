@@ -7,10 +7,12 @@ import java.util.HashSet;
  */
 public class DiffData {
 
+    public long pageID = 0;
     public HashSet<String> toAdd = null;
     public HashSet<String> toDelete = null;
 
-    public DiffData(HashSet<String> add, HashSet<String> delete){
+    public DiffData(long id, HashSet<String> add, HashSet<String> delete){
+        pageID = id;
         toAdd = new HashSet<String>(add);
         toDelete = new HashSet<String>(delete);
     }
