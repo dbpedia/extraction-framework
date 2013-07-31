@@ -90,14 +90,14 @@ class InfoboxExtractorTest
 		val diffInG = g.diff(d)
 
 		if (!diffInD.isEmpty){
-			println("-- triples expected, not found: --")
+			println("-- triples not expected: --")
 			diffInD.foreach(println)
-			println("-- end triples expected, not found --")
+			println("-- end triples not expected --")
 		}
 		if (!diffInG.isEmpty){
-			println("-- triples not expected: --")
+			println("-- triples expected, not found: --")
 			diffInG.foreach(println)
-			println("-- end triples not expected --")
+			println("-- end triples expected, not found --")
 		}
 				
 		assert(d == g, "difference for "+ fileNameWiki +", nb triples-diff: " + (diffInD.size+diffInG.size))
