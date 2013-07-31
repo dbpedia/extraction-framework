@@ -42,6 +42,8 @@ public class Main {
 
     private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
+    private volatile static Publisher publisher ;
+    private volatile static PublishedDataCompressor compressor;
 
     public static void authenticate(final String username, final String password) {
         Authenticator.setDefault(new Authenticator() {
@@ -92,8 +94,8 @@ public class Main {
             for (PageProcessor p: processors)
                 p.startProcessor();
 
-            Publisher publisher = new Publisher("Publisher", 4);
-            PublishedDataCompressor compressor = new PublishedDataCompressor("PublishedDataCompressor", Thread.MIN_PRIORITY);
+            publisher = new Publisher("Publisher", 4);
+            compressor = new PublishedDataCompressor("PublishedDataCompressor", Thread.MIN_PRIORITY);
 
             statistics.startStatistics();
 
@@ -116,12 +118,11 @@ public class Main {
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
 
-            PublisherService.writeLastPublishPath();
-
             // Statistics
             if (statistics != null) statistics.stopStatistics();
+
             // Publisher
-            // TODO
+            publisher.flush();
             // Page Processor
             // TODO
 
