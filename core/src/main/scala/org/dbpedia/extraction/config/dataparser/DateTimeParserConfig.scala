@@ -52,7 +52,7 @@ object DateTimeParserConfig
     //suffixes for 1st, 2nd etc. (maybe add this to infobox extractor RankRegex val)
     val cardinalityRegexMap = Map(
         "en" -> "st|nd|rd|th",
-        "cs" -> "\\."
+        "cs" -> "\\.",
         "el" -> "η|ης",
         "eo" -> "-a|-an",
         "es" -> "°|\\.°|°\\.",
