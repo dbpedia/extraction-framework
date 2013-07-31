@@ -8,6 +8,7 @@ object DateTimeParserConfig
         // Don't change this unless you know how it is done.
         "ar" -> Map("جانفي"->1,"فيفري"->2,"مارس"->3,"أفريل"->4,"ماي"->5,"جوان"->6,"جويلية"->7,"أوت"->8,"سبتمبر"->9,"أكتوبر"->10,"نوفمبر"->11,"ديسمبر"->12,
           "يناير"->1,"فبراير"->2,"أبريل"->4,"مايو"->5,"يونيو"->6,"يوليو"->7,"يوليوز"->7,"أغسطس"->8,"غشت"->8,"شتنبر"->9,"نونبر"->11,"دجنبر"->12),
+        "cs" -> Map("leden"->1,"únor"->2,"březen"->3,"duben"->4,"květen"->5,"červen"->6,"červenec"->7,"srpen"->8,"září"->9,"říjen"->10,"listopad"->11,"prosinec"->12),
         "de" -> Map("januar"->1,"februar"->2,"märz"->3,"maerz"->3,"april"->4,"mai"->5,"juni"->6,"juli"->7,"august"->8,"september"->9,"oktober"->10,"november"->11,"dezember"->12),
         "el" -> Map("ιανουάριος"->1,"φεβρουάριος"->2,"μάρτιος"->3,"απρίλιος"->4,"μάϊος"->5,"μάιος"->5,"ιούνιος"->6,"ιούλιος"->7,"αύγουστος"->8,"σεπτέμβριος"->9,"οκτώβριος"->10,"νοέμβριος"->11,"δεκέμβριος"->12,
                     "ιανουαρίου"->1,"φεβρουαρίου"->2,"μαρτίου"->3,"απριλίου"->4,"μαΐου"->5,"μαίου"->5,"ιουνίου"->6,"ιουλίου"->7,"αυγούστου"->8,"σεπτεμβρίου"->9,"οκτωβρίου"->10,"νοεμβρίου"->11,"δεκεμβρίου"->12),
@@ -19,11 +20,16 @@ object DateTimeParserConfig
         "id" -> Map("januari"->1,"februari"->2,"maret"->3,"april"->4,"mei"->5,"juni"->6,"juli"->7,"agustus"->8,"september"->9,"oktober"->10,"november"->11,"desember"->12),
         "it" -> Map("gennaio"->1,"febbraio"->2,"marzo"->3,"aprile"->4,"maggio"->5,"giugno"->6,"luglio"->7,"agosto"->8,"settembre"->9,"ottobre"->10,"novembre"->11,"dicembre"->12),
         "nl" -> Map("januari"->1,"februari"->2,"maart"->3,"april"->4,"mei"->5,"juni"->6,"juli"->7,"augustus"->8,"september"->9,"oktober"->10,"november"->11,"december"->12),
-        "pl" -> Map("stycznia"->1,"lutego"->2,"marca"->3,"kwietnia"->4,"maja"->5,"czerwca"->6,"lipca"->7,"sierpnia"->8,"września"->9,"października"->10,"listopada"->11,"grudnia"->12),
+        "pl" -> Map("stycznia"->1,"lutego"->2,"marca"->3,"kwietnia"->4,"maja"->5,"czerwca"->6,"lipca"->7,"sierpnia"->8,"września"->9,"października"->10,"listopada"->11,"grudnia"->12,
+                    "styczeń"->1,"luty"->2,"marzec"->3,"kwiecień"->4,"maj"->5,"czerwiec"->6,"lipiec"->7,"sierpień"->8,"wrzesień"->9,"październik"->10,"listopad"->11,"grudzień"->12),
         "pt" -> Map("janeiro"->1,"fevereiro"->2,"março"->3,"abril"->4,"maio"->5,"junho"->6,"julho"->7,"agosto"->8,"setembro"->9,"outubro"->10,"novembro"->11,"dezembro"->12,
                     "jan"->1,"fev"->2,"mar"->3,"abr"->4,"mai"->5,"jun"->6,"jul"->7,"ago"->8,"set"->9,"out"->10,"nov"->11,"dez"->12),
         "ru" -> Map("январь"->1,"февраль"->2,"март"->3,"апрель"->4,"май"->5,"июнь"->6,"июль"->7,"август"->8,"сентябрь"->9,"октябрь"->10,"ноябрь"->11,"декабрь"->12,
-                    "янв"->1,"фев"->2,"мар"->3,"апр"->4,"май"->5,"июн"->6,"июл"->7,"авг"->8,"сен"->9,"окт"->10,"ноя"->11,"дек"->12)
+                    "янв"->1,"фев"->2,"мар"->3,"апр"->4,"май"->5,"июн"->6,"июл"->7,"авг"->8,"сен"->9,"окт"->10,"ноя"->11,"дек"->12,
+                    "января"->1,"февраля"->2,"марта"->3,"апреля"->4,"мая"->5,"июня"->6,"июля"->7,"августа"->8,"сентября"->9,"октября"->10,"ноября"->11,"декабря"->12),
+        "sk" -> Map("január"->1,"február"->2,"marec"->3,"apríl"->4,"máj"->5,"jún"->6,"júl"->7,"august"->8,"september"->9,"október"->10,"november"->11,"december"->12),
+        "uk" -> Map("січень"->1,"лютий"->2,"березень"->3,"квітень"->4,"травень"->5,"червень"->6,"липень"->7,"серпень"->8,"вересень"->9,"жовтень"->10,"листопад"->11,"грудень"->12,
+                    "січня"->1,"лютого"->2,"березня"->3,"квітня"->4,"травня"->5,"червня"->6,"липня"->7,"серпня"->8,"вересня"->9,"жовтня"->10,"листопада"->11,"грудня"->12)
     )
 
     //set of wiki codes for which this parser can be applied
@@ -48,18 +54,20 @@ object DateTimeParserConfig
     //suffixes for 1st, 2nd etc. (maybe add this to infobox extractor RankRegex val)
     val cardinalityRegexMap = Map(
         "en" -> "st|nd|rd|th",
+        "cs" -> "\\.",
         "el" -> "η|ης",
         "eo" -> "-a|-an",
         "es" -> "°|\\.°|°\\.",
         "fr" -> "er|nd|ème",
         "it" -> "°|\\.°|°\\.",
         "nl" -> "ste|de|e",
-        "pt" -> "°|\\.°|°\\."
+        "pt" -> "°|\\.°|°\\.",
+        "sk" -> "\\."
     )
 
     //specifies for a template name (lower-cased) the property keys of year, month and day
     val templateDateMap = Map(
-        // Sometimes the templates are used wrong like the folifPropertyNumlowing, but this is handled properly
+        // Sometimes the templates are used wrong like the following, but this is handled properly
         // {{birth date|df=yes|1833|10|21}}
 
         // http://en.wikipedia.org/wiki/Template:Birth_date_and_age
@@ -202,6 +210,17 @@ object DateTimeParserConfig
             // English template names
             "Start date"           -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
             "Start date and age"   -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+        ),
+        "sk" -> Map(
+            "Počiatočný dátum a vek" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            // FIXME: The following can take a second date as params 4-6
+            "Dátum narodenia a vek"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Dnv"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Vek"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Vek v dňoch"            -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Vek v rokoch a dňoch"   -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Dátum úmrtia a vek"     -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "Dúv"                    -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
         ),
         "sl" -> Map(
             "Datum rojstva"             -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
