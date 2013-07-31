@@ -8,6 +8,7 @@ import org.dbpedia.extraction.live.feeder.OAIFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
 import org.dbpedia.extraction.live.feeder.UnmodifiedFeeder;
 import org.dbpedia.extraction.live.publisher.DiffData;
+import org.dbpedia.extraction.live.publisher.PublisherService;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
@@ -114,6 +115,8 @@ public class Main {
             for (Feeder f: feeders)
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
+
+            PublisherService.writeLastPublishPath();
 
             // Statistics
             if (statistics != null) statistics.stopStatistics();
