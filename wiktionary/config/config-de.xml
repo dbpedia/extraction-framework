@@ -346,7 +346,6 @@
                 <property uri="http://wiktionary.dbpedia.org/terms/hasHyponym"/>
                 <property uri="http://wiktionary.dbpedia.org/terms/hasSynonym"/>
                 <property uri="http://wiktionary.dbpedia.org/terms/hasSource"/>
-                <property uri="http://wiktionary.dbpedia.org/terms/nominativeSingular"/>
                 <property uri="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
                 <property uri="http://www.w3.org/2002/07/owl#sameAs"/>
             </collectProperties>
@@ -419,6 +418,249 @@
             <mapping label="Vokativ Singular" uri="http://wiktionary.dbpedia.org/terms/vocativeSingular" />
             <mapping label="Vokativ Plural" uri="http://wiktionary.dbpedia.org/terms/vocativePlural" />
         </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Polnisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="pl"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="pl"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Lokativ Singular" uri="http://wiktionary.dbpedia.org/terms/locativeSingular" />
+            <mapping label="Lokativ Plural" uri="http://wiktionary.dbpedia.org/terms/locativePlural" />
+            <mapping label="Vokativ Singular" uri="http://wiktionary.dbpedia.org/terms/vocativeSingular" />
+            <mapping label="Vokativ Plural" uri="http://wiktionary.dbpedia.org/terms/vocativePlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Lettisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="lv"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="lv"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Lokativ Singular" uri="http://wiktionary.dbpedia.org/terms/locativeSingular" />
+            <mapping label="Lokativ Plural" uri="http://wiktionary.dbpedia.org/terms/locativePlural" />
+            <mapping label="Vokativ Singular" uri="http://wiktionary.dbpedia.org/terms/vocativeSingular" />
+            <mapping label="Vokativ Plural" uri="http://wiktionary.dbpedia.org/terms/vocativePlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Ukrainisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="uk"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="uk"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Lokativ Singular" uri="http://wiktionary.dbpedia.org/terms/locativeSingular" />
+            <mapping label="Lokativ Plural" uri="http://wiktionary.dbpedia.org/terms/locativePlural" />
+            <mapping label="Vokativ Singular" uri="http://wiktionary.dbpedia.org/terms/vocativeSingular" />
+            <mapping label="Vokativ Plural" uri="http://wiktionary.dbpedia.org/terms/vocativePlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Slowakisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="sk"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="sk"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Lokativ Singular" uri="http://wiktionary.dbpedia.org/terms/locativeSingular" />
+            <mapping label="Lokativ Plural" uri="http://wiktionary.dbpedia.org/terms/locativePlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Weißrussisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="be"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="be"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Lokativ Singular" uri="http://wiktionary.dbpedia.org/terms/locativeSingular" />
+            <mapping label="Lokativ Plural" uri="http://wiktionary.dbpedia.org/terms/locativePlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Russisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="ru"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="ru"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Präpositiv Singular" uri="http://wiktionary.dbpedia.org/terms/prepositionalSingular" />
+            <mapping label="Präpositiv Plural" uri="http://wiktionary.dbpedia.org/terms/prepositionalPlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Slowenisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="sl"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="sl"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Dual" uri="http://wiktionary.dbpedia.org/terms/nominativeDual" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Dual" uri="http://wiktionary.dbpedia.org/terms/genitiveDual" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Dual" uri="http://wiktionary.dbpedia.org/terms/dativeDual" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Dual" uri="http://wiktionary.dbpedia.org/terms/accusativeDual" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Dual" uri="http://wiktionary.dbpedia.org/terms/instrumentalDual" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Lokativ Singular" uri="http://wiktionary.dbpedia.org/terms/locativeSingular" />
+            <mapping label="Lokativ Dual" uri="http://wiktionary.dbpedia.org/terms/locativeDual" />
+            <mapping label="Lokativ Plural" uri="http://wiktionary.dbpedia.org/terms/locativePlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Obersorbisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="hsb"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="hsb"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Dual" uri="http://wiktionary.dbpedia.org/terms/nominativeDual" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Dual" uri="http://wiktionary.dbpedia.org/terms/genitiveDual" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Dual" uri="http://wiktionary.dbpedia.org/terms/dativeDual" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Dual" uri="http://wiktionary.dbpedia.org/terms/accusativeDual" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Dual" uri="http://wiktionary.dbpedia.org/terms/instrumentalDual" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Lokativ Singular" uri="http://wiktionary.dbpedia.org/terms/locativeSingular" />
+            <mapping label="Lokativ Dual" uri="http://wiktionary.dbpedia.org/terms/locativeDual" />
+            <mapping label="Lokativ Plural" uri="http://wiktionary.dbpedia.org/terms/locativePlural" />
+            <mapping label="Vokativ Singular" uri="http://wiktionary.dbpedia.org/terms/vocativeSingular" />
+            <mapping label="Vokativ Dual" uri="http://wiktionary.dbpedia.org/terms/vocativeDual" />
+            <mapping label="Vokativ Plural" uri="http://wiktionary.dbpedia.org/terms/vocativePlural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Niedersorbisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="dsb"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="dsb"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Nominativ Singular" uri="http://wiktionary.dbpedia.org/terms/nominativeSingular" />
+            <mapping label="Nominativ Dual" uri="http://wiktionary.dbpedia.org/terms/nominativeDual" />
+            <mapping label="Nominativ Plural" uri="http://wiktionary.dbpedia.org/terms/nominativePlural" />
+            <mapping label="Genitiv Singular" uri="http://wiktionary.dbpedia.org/terms/genitiveSingular" />
+            <mapping label="Genitiv Dual" uri="http://wiktionary.dbpedia.org/terms/genitiveDual" />
+            <mapping label="Genitiv Plural" uri="http://wiktionary.dbpedia.org/terms/genitivePlural" />
+            <mapping label="Dativ Singular" uri="http://wiktionary.dbpedia.org/terms/dativeSingular" />
+            <mapping label="Dativ Dual" uri="http://wiktionary.dbpedia.org/terms/dativeDual" />
+            <mapping label="Dativ Plural" uri="http://wiktionary.dbpedia.org/terms/dativePlural" />
+            <mapping label="Akkusativ Singular" uri="http://wiktionary.dbpedia.org/terms/accusativeSingular" />
+            <mapping label="Akkusativ Dual" uri="http://wiktionary.dbpedia.org/terms/accusativeDual" />
+            <mapping label="Akkusativ Plural" uri="http://wiktionary.dbpedia.org/terms/accusativePlural" />
+            <mapping label="Instrumental Singular" uri="http://wiktionary.dbpedia.org/terms/instrumentalSingular" />
+            <mapping label="Instrumental Dual" uri="http://wiktionary.dbpedia.org/terms/instrumentalDual" />
+            <mapping label="Instrumental Plural" uri="http://wiktionary.dbpedia.org/terms/instrumentalPlural" />
+            <mapping label="Lokativ Singular" uri="http://wiktionary.dbpedia.org/terms/locativeSingular" />
+            <mapping label="Lokativ Dual" uri="http://wiktionary.dbpedia.org/terms/locativeDual" />
+            <mapping label="Lokativ Plural" uri="http://wiktionary.dbpedia.org/terms/locativePlural" />
+        </nodeHandler>
         <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Englisch Substantiv Übersicht">
             <resultTemplates>
                 <resultTemplate>
@@ -427,6 +669,80 @@
                         <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
                         <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
                         <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="en"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Singular" uri="http://wiktionary.dbpedia.org/terms/singular" />
+            <mapping label="Plural" uri="http://wiktionary.dbpedia.org/terms/plural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Katalanisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="ca"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="ca"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Singular" uri="http://wiktionary.dbpedia.org/terms/singular" />
+            <mapping label="Plural" uri="http://wiktionary.dbpedia.org/terms/plural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Okzitanisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="oc"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="oc"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Singular" uri="http://wiktionary.dbpedia.org/terms/singular" />
+            <mapping label="Plural" uri="http://wiktionary.dbpedia.org/terms/plural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Suaheli Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="sw"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="sw"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Singular" uri="http://wiktionary.dbpedia.org/terms/singular" />
+            <mapping label="Plural" uri="http://wiktionary.dbpedia.org/terms/plural" />
+<!-- these will get wrong types
+            <mapping label="Klasse Sg" uri="http://wiktionary.dbpedia.org/terms/singularClass" />
+            <mapping label="Klasse Pl" uri="http://wiktionary.dbpedia.org/terms/pluralClass" />
+-->
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Italienisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="it"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="it"/>
+                    </triples>
+                </resultTemplate>
+            </resultTemplates>
+            <mapping label="Singular" uri="http://wiktionary.dbpedia.org/terms/singular" />
+            <mapping label="Plural" uri="http://wiktionary.dbpedia.org/terms/plural" />
+        </nodeHandler>
+        <nodeHandler order="parsing" builtin="InfoBoxMapper" tplname="Spanisch Substantiv Übersicht">
+            <resultTemplates>
+                <resultTemplate>
+                    <triples>
+                        <triple s="$block" p="$predicate-literal" o="$value" oType="literal" oLang="es"/>
+                        <triple s="$block" p="$predicate" o="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://wiktionary.dbpedia.org/terms/isFlexionOf" o="$block" oType="URI" />
+                        <triple s="http://wiktionary.dbpedia.org/resource/uri(lastword($value))" p="http://www.w3.org/2000/01/rdf-schema#label" o="lastword($value)" oType="literal" oLang="es"/>
                     </triples>
                 </resultTemplate>
             </resultTemplates>
