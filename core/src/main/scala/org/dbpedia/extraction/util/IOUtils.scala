@@ -65,6 +65,9 @@ object IOUtils {
   def reader(file: FileLike[_], charset: Charset = Codec.UTF8.charSet): Reader =
     new InputStreamReader(inputStream(file), charset)
   
+  /**
+   * TODO: add charset parameter.
+   */
   def readLines(file: FileLike[_])(proc: String => Unit): Unit = {
     val reader = this.reader(file)
     try {
