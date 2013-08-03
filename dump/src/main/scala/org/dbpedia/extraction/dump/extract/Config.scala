@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.destinations.formatters.UriPolicy
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
+import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import org.dbpedia.extraction.mappings.Extractor
 import scala.collection.mutable.HashMap
 import java.util.Properties
@@ -13,7 +11,8 @@ import scala.collection.Map
 import scala.collection.immutable.{SortedSet,SortedMap}
 import org.dbpedia.extraction.util.{Language,WikiInfo}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
-import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange}
+import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange,splitValue,getFile}
+import org.dbpedia.extraction.util.RichString.wrapString
 import scala.io.Codec
 
 private class Config(config: Properties)
@@ -21,84 +20,30 @@ private class Config(config: Properties)
   // TODO: get rid of all config file parsers, use Spring
 
   /** Dump directory */
-  val dumpDir = getFile("base-dir")
+  val dumpDir = getFile(config, "base-dir")
   if (dumpDir == null) throw error("property 'base-dir' not defined.")
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
   
-  val source = config.getProperty("source", "pages-articles.xml")
+  val source = config.getProperty("source", "pages-articles.xml.bz2")
 
   val wikiName = config.getProperty("wikiName", "wiki")
 
   /** Local ontology file, downloaded for speed and reproducibility */
-  val ontologyFile = getFile("ontology")
+  val ontologyFile = getFile(config, "ontology")
 
   /** Local mappings files, downloaded for speed and reproducibility */
-  val mappingsDir = getFile("mappings")
+  val mappingsDir = getFile(config, "mappings")
   
-  val formats = parseFormats()
-  
-  def parseFormats(): Map[String, Formatter] = {
-    val policies = parsePolicies
-    parseFormats(policies)
-  }
-  
-  /**
-   * parse all URI policy lines
-   */
-  def parsePolicies(): Map[String, Array[Policy]] = {
-    
-    val policies = new HashMap[String, Array[Policy]]()
-    for (key <- config.stringPropertyNames) {
-      if (key.startsWith("uri-policy")) {
-        try policies(key) = UriPolicy.parsePolicy(config.getProperty(key))
-        catch { case e: Exception => throw error("invalid URI policy: '"+key+"="+config.getProperty(key)+"'", e) }
-      }
-    }
-    
-    policies
-  }
-  
-  /**
-   * Parse all format lines.
-   */
-  def parseFormats(policies: Map[String, Array[Policy]]): Map[String, Formatter] = {
-    
-    val formats = new HashMap[String, Formatter]()
-    
-    for (key <- config.stringPropertyNames) {
-      
-      if (key.startsWith("format.")) {
-        
-        val suffix = key.substring("format.".length)
-        
-        val settings = splitValue(key, ';')
-        require(settings.length == 2, "key '"+key+"' must have two values separated by ';' - file format and uri policy name")
-        
-        val policy = policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
-        val formatter = UriPolicy.formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+UriPolicy.formatters.keys.toSeq.sorted.mkString("'","','","'")))
-        
-        formats(suffix) = formatter.apply(policy)
-      }
-    }
-    
-    formats
-  }
-  
-
+  val formats = parseFormats(config, "uri-policy", "format")
 
   val extractorClasses = loadExtractorClasses()
   
   val namespaces = loadNamespaces()
   
-  private def getFile(key: String): File = {
-    val value = config.getProperty(key)
-    if (value == null) null else new File(value)
-  }
-  
   private def loadNamespaces(): Set[Namespace] = {
-    val names = splitValue("namespaces", ',')
+    val names = splitValue(config, "namespaces", ',')
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
     else names.map(name => Namespace(Language.English, name)).toSet
   }
@@ -115,7 +60,7 @@ private class Config(config: Properties)
     //Load extractor classes
     if(config.getProperty("extractors") == null) throw error("Property 'extractors' not defined.")
     
-    val stdExtractors = splitValue("extractors", ',').map(loadExtractorClass)
+    val stdExtractors = splitValue(config, "extractors", ',').toList.map(loadExtractorClass)
 
     //Create extractor map
     val classes = new HashMap[Language, List[Class[_ <: Extractor]]]()
@@ -136,7 +81,7 @@ private class Config(config: Properties)
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("extractors.")) {
         val language = Language(key.substring("extractors.".length()))
-        classes(language) = stdExtractors ++ splitValue(key, ',').map(loadExtractorClass)
+        classes(language) = stdExtractors ++ splitValue(config, key, ',').map(loadExtractorClass)
       }
     }
 
@@ -150,7 +95,7 @@ private class Config(config: Properties)
     // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
     // extract=mapped:MappingExtractor means all languages with a mapping namespace
     
-    var keys = splitValue("languages", ',')
+    val keys = splitValue(config, "languages", ',')
         
     var languages = Set[Language]()
     
@@ -193,16 +138,6 @@ private class Config(config: Properties)
     classOf[Extractor].getClassLoader.loadClass(className).asSubclass(classOf[Extractor])
   }
   
-  private def splitValue(key: String, sep: Char): List[String] = {
-    val values = config.getProperty(key)
-    if (values == null) List.empty
-    else split(values, sep)
-  }
-
-  private def split(value: String, sep: Char): List[String] = {
-    value.split("["+sep+"\\s]+", -1).map(_.trim).filter(_.nonEmpty).toList
-  }
-
   private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
     new IllegalArgumentException(message, cause)
   }

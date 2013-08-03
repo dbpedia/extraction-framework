@@ -1,7 +1,9 @@
 package org.dbpedia.extraction.util
 
-import java.io.File
+import java.util.Properties
+import java.io.{File,FileInputStream,InputStreamReader}
 import scala.collection.immutable.SortedSet
+import org.dbpedia.extraction.util.RichString.wrapString
 import scala.io.Codec
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.mutable.{HashSet,HashMap}
@@ -10,6 +12,27 @@ import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 
 object ConfigUtils {
   
+  def loadConfig(file: String, charset: String): Properties = {
+    val config = new Properties()
+    
+    val in = new FileInputStream(file)
+    try config.load(new InputStreamReader(in, charset))
+    finally in.close()
+    
+    config
+  }
+  
+  def getFile(config: Properties, key: String): File = {
+    val value = config.getProperty(key)
+    if (value == null) null else new File(value)
+  }
+  
+  def splitValue(config: Properties, key: String, sep: Char): Array[String] = {
+    val values = config.getProperty(key)
+    if (values == null) Array.empty
+    else values.trimSplit(sep)
+  }
+
   /**
    * @param baseDir directory of wikipedia.csv, needed to resolve article count ranges
    * @param args array of space- or comma-separated language codes or article count ranges
