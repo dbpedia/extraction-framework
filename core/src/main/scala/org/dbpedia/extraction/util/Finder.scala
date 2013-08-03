@@ -44,9 +44,9 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
    */
   def dates(suffix: String = null, required: Boolean = true): List[String] = {
     
-    val suffixFilter = 
-      if (suffix == null) {date: String => true} 
-      else {date: String => file(date, suffix).exists}
+    val suffixFilter: String => Boolean = 
+      if (suffix == null) {date => true} 
+      else {date => file(date, suffix).exists}
     
     val dates = wikiDir.names.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
     
