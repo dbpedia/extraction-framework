@@ -64,12 +64,14 @@ object DecodeHtmlEntities {
       val writer = IOUtils.writer(outFile, charset)
       try {
         IOUtils.readLines(inFile) { line =>
-          val decoded = coder.code(line)
-          writer.write(decoded)
-          writer.write('\n')
-          if (! line.eq(decoded)) changeCount += 1
-          lineCount += 1
-          if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
+          if (line != null) {
+            val decoded = coder.code(line)
+            writer.write(decoded)
+            writer.write('\n')
+            if (! line.eq(decoded)) changeCount += 1
+            lineCount += 1
+            if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
+          }
         }
       }
       finally writer.close()

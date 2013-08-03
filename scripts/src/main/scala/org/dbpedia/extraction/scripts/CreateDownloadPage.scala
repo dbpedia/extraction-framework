@@ -54,6 +54,7 @@ def loadTitles(file: File): Unit = {
   // links/revyu_links.nt  lines: 6  bytes: 1008  gzip: 361  bzip2: 441
   // af/geo_coordinates_af.nt lines: 82 bytes: 11524 gzip: 1141 bzip2: 1228
   IOUtils.readLines(file) { line =>
+    if (line == null) return // all done
     val parts = line.split("\\s+", -1)
     if (parts.length != 9) throw new IllegalArgumentException("bad line format")
     val path = parts(0)

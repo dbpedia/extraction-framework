@@ -66,9 +66,11 @@ object IOUtils {
     new InputStreamReader(inputStream(file), charset)
   
   /**
-   * TODO: add charset parameter.
+   * open input stream, wrap in unzipper stream if file suffix indicates compressed file,
+   * wrap in reader, wrap in buffered reader, process all lines. The last value passed to
+   * proc will be null.
    */
-  def readLines(file: FileLike[_])(proc: String => Unit): Unit = {
+  def readLines(file: FileLike[_], charset: Charset = Codec.UTF8.charSet)(proc: String => Unit): Unit = {
     val reader = this.reader(file)
     try {
       for (line <- reader) {

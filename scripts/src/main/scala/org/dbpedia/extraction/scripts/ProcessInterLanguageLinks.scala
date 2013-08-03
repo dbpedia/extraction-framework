@@ -241,6 +241,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       val start = System.nanoTime
       IOUtils.readLines(file) { line =>
         line match {
+          case null => // ignore last value
           case Quad(quad) if (quad.datatype == null && quad.context == null) => {
             
             val subj = parseUri(quad.subject)

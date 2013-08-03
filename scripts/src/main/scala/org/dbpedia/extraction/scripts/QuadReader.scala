@@ -32,6 +32,7 @@ object QuadReader {
     val start = System.nanoTime
     IOUtils.readLines(file) { line =>
       line match {
+        case null => // ignore last value
         case Quad(quad) => {
           proc(quad)
           lineCount += 1
