@@ -31,9 +31,9 @@
                             </jvmArgs>
                             <args>
                                 <!-- base folder of downloaded dumps -->
-                                <arg>/home/release/wikipedia</arg>
+                                <arg>/data/dbpedia-release/data</arg>
                                 <!-- location of SQL file containing MediaWiki table definitions  -->
-                                <arg>/home/release/data/projects/mediawiki/core/maintenance/tables.sql</arg>
+                                <arg>/home/dbpedia-release/bin/mediawiki/core/maintenance/tables.sql</arg>
                                 <!-- JDBC URL of MySQL server. Import creates a new database for each wiki. -->
                                 <arg>jdbc:mysql://localhost/?characterEncoding=UTF-8</arg>
                                 <!-- require-download-complete -->
@@ -48,10 +48,15 @@
                         <launcher>
                             <id>extraction</id>
                             <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
-                                <jvmArg>-Xmx1024m</jvmArg>
                                 <!--
+                                <jvmArg>-Xmx4096m</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                                 <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
                                 <jvmArg>-Dhttp.proxyPort=80</jvmArg>
                                 <jvmArg>-Dhttp.proxyUser=user</jvmArg>
