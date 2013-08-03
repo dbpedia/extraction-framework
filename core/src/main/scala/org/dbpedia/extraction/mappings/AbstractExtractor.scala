@@ -28,7 +28,14 @@ extends Extractor
 {
     private val maxRetries = 3
 
-    private val timeoutMs = 4000
+    /** timeout for connection to web server, milliseconds */
+    private val connectMs = 2000
+
+    /** timeout for result from web server, milliseconds */
+    private val readMs = 8000
+
+    /** sleep between retries, milliseconds, multiplied by CPU load */
+    private val sleepFactorMs = 4000
 
     private val language = context.language.wikiCode
 
@@ -117,8 +124,8 @@ extends Extractor
           // Send data
           val conn = url.openConnection
           conn.setDoOutput(true)
-          conn.setConnectTimeout(timeoutMs)
-          conn.setReadTimeout(timeoutMs)
+          conn.setConnectTimeout(connectMs)
+          conn.setReadTimeout(readMs)
           val writer = new OutputStreamWriter(conn.getOutputStream)
           writer.write(parameters)
           writer.flush()
@@ -130,23 +137,28 @@ extends Extractor
         catch
         {
           case ex: Exception => {
+            
+            // The web server may still be trying to render the page. If we send new requests
+            // at once, there will be more and more tasks running in the web server and the
+            // system eventually becomes overloaded. So we wait a moment. The higher the load,
+            // the longer we wait.
+
+            var loadFactor = Double.NaN
+            var sleepMs = sleepFactorMs
+ 
+            // if the load average is not available, a negative value is returned
+            val load = osBean.getSystemLoadAverage()
+            if (load >= 0) {
+              loadFactor = load / availableProcessors
+              sleepMs = (loadFactor * sleepFactorMs).toInt
+            }
 
             if (counter < maxRetries) {
-              var loadFactor = -1.0
-              var sleepMs = timeoutMs
- 
-              // if the load average is not available, a negative value is returned
-              val load = osBean.getSystemLoadAverage()
-              if (load >= 0) {
-                loadFactor = load / availableProcessors
-                sleepMs = (loadFactor * timeoutMs).toInt
-              }
-
               logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying after " + sleepMs + " ms. Load factor: " + loadFactor, ex)
               Thread.sleep(sleepMs)
             }
             else {
-              logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up.", ex)
+              logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
             }
           }
         }
