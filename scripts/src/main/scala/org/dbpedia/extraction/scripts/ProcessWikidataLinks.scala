@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.{File,OutputStreamWriter}
+import java.io.{File,Writer}
 import scala.Console.{err,out}
-import scala.collection.mutable.{Map,HashMap,ArrayBuffer}
+import scala.collection.Map
+import scala.collection.mutable.{HashMap,ArrayBuffer}
 import java.util.Arrays.{copyOf,sort}
 import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getFile,splitValue}
 import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
@@ -16,6 +17,11 @@ import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import ProcessWikidataLinks._
 import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.util.Finder
+import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
+import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.destinations.CompositeDestination
+import java.util.Arrays
 
 /**
  * Generate separate triple files for each language from Wikidata link file.
@@ -68,30 +74,34 @@ object ProcessWikidataLinks {
   
   def main(args: Array[String]) {
     
-    require(args != null && (args.length == 4 || args.length >= 6),
-      "need at least four args: " +
-      /*0*/ "base dir, " +
-      /*1*/ "input file, " +
-      /*2*/ "generic domain language (e.g. 'en', use '-' to disable), " +
-      /*3*/ "link languages or article count ranges (e.g. 'en,fr' or '10000-')")
+    require(args != null && args.length == 1 && args(0).nonEmpty, "missing required argument: config file name")
+
+    val config = loadConfig(args(0), "UTF-8")
     
-    val baseDir = new File(args(0))
+    val baseDir = getFile(config, "base-dir")
+    if (baseDir == null) throw error("property 'base-dir' not defined.")
+    if (! baseDir.exists) throw error("dir "+baseDir+" does not exist")
     
-    var inputFile = new File(args(1))
-    if (! inputFile.isAbsolute) inputFile = new File(baseDir, args(1))
+    val input = config.getProperty("input")
+    if (input == null) throw error("property 'input' not defined.")
     
-    // Language using generic domain (usually en)
-    val generic = if (args(2) == "-") null else Language(args(2))
+    val output = config.getProperty("output")
+    if (output == null) throw error("property 'output' not defined.")
     
-    // Use all remaining args as keys or comma or whitespace separated lists of keys
-    val languages = parseLanguages(baseDir, args.drop(3))
+    val languages = parseLanguages(baseDir, splitValue(config, "languages", ','))
     
-    val processor = new ProcessWikidataLinks()
-    processor.setLanguages(languages, generic)
-    processor.readLinks(inputFile)
-    processor.writeTriples()
+    val formats = parseFormats(config, "uri-policy", "format")
+    
+    val processor = new ProcessWikidataLinks(baseDir)
+    processor.setLanguages(languages)
+    processor.readLinks(input)
+    processor.writeTriples(output, formats)
   }
   
+  private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
+    new IllegalArgumentException(message, cause)
+  }
+    
   private val ITEM_BITS = 27
   private val ITEM_MASK = (1 << ITEM_BITS) - 1 // 27 1-bits
   private val LANG_BITS = 10
@@ -99,13 +109,13 @@ object ProcessWikidataLinks {
   private val TITLE_BITS = 27
   private val TITLE_MASK = (1 << TITLE_BITS) - 1 // 27 1-bits
   
-  private val LANGUAGES = 1 << LANG_BITS
+  private val LANGUAGES = (1 << LANG_BITS) - 1 // Wikidata is one 'language'
   private val LINKS = 1 << 25
   private val TITLES = 1 << 25
   
 }
 
-class ProcessWikidataLinks() {
+class ProcessWikidataLinks(baseDir: File) {
 
   /*
   
@@ -140,10 +150,8 @@ class ProcessWikidataLinks() {
   
   */
   
-  /** language code -> language. built in setLanguages(), used everywhere. */
+  /** language code -> language. Wikidata is first. built in setLanguages(), used everywhere. */
   private var languages: Array[Language] = null
-  /** language using generic IRIs (http://dbpedia.org). set in setLanguages(), used by writeTriples(). */
-  private var generic: Language = null
   
   /** title code -> title. built by readLinks(), used by writeTriples() */
   private var titles: Array[String] = null
@@ -152,15 +160,23 @@ class ProcessWikidataLinks() {
   private var links: Array[Long] = null
   
   /**
-   * Build domain index. Must be called before readLinks(). 
-   * Initializes the following fields: languages, dates, domains, wikiCodes
+   * Build domain index. Must be called before readLinks(). Sort given array in place. 
+   * Initializes the following fields: languages
    */
-  def setLanguages(languages: Array[Language], generic: Language) {
+  def setLanguages(languages: Array[Language]) {
+    
     if (languages.length > LANGUAGES) throw new ArrayIndexOutOfBoundsException("got "+languages.length+" languages, can't handle more than "+LANGUAGES)
+    
     // sort alphabetically, nicer triples files
     sort(languages, Language.wikiCodeOrdering)
-    this.languages = languages
-    this.generic = generic
+    
+    this.languages = new Array[Language](languages.length + 1)
+    this.languages(0) = Language.Wikidata
+    var index = 0
+    while (index < languages.length) {
+      this.languages(index + 1) = languages(index)
+      index += 1
+    }
   }
   
   /**
@@ -168,11 +184,14 @@ class ProcessWikidataLinks() {
    * Must be called before writeTriples().
    * Initializes the following fields: titles, links
    */
-  def readLinks(file: File): Unit = {
+  def readLinks(fileName: String): Unit = {
+    
+    val startNanos = System.nanoTime
+    err.println("reading links...")
     
     // map wiki code (e.g. "enwiki") -> language code (e.g. 5)
     val langKeys = new HashMap[String, Int]().withDefaultValue(-1)
-    for (index <- 0 until languages.length) {
+    for (index <- 1 until languages.length) {
       langKeys(languages(index).filePrefix+"wiki") = index
     }
     
@@ -183,13 +202,15 @@ class ProcessWikidataLinks() {
     links = new Array[Long](LINKS)
     var linkCount = 0
     
-    val startNanos = System.nanoTime
-    var lineCount = -1
+    val finder = new Finder[File](baseDir, Language.Wikidata, "wiki")
+    val date = finder.dates().last
+    val file = finder.file(date, fileName)
     
+    var lineCount = -1
     IOUtils.readLines(file) { line =>
       
-      // process all lines but the first
-      if (lineCount != -1) {
+      // process all lines but the first and after last
+      if (lineCount != -1 && line != null) {
         
         val parts = line.split('\t')
         require(parts.length == 4, "invalid link line: ["+line+"]")
@@ -234,7 +255,7 @@ class ProcessWikidataLinks() {
 
   private def logRead(name: String, count: Int, startNanos: Long): Unit = {
     val micros = (System.nanoTime - startNanos) / 1000
-    err.println("read "+count+" "+name+"s in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per "+name+")")
+    err.println(name+"s: read "+count+" in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per "+name+")")
   }
   
   /**
@@ -242,30 +263,38 @@ class ProcessWikidataLinks() {
    * Must be called after readLinks() and sortLinks().
    * Accesses the following fields: titles, domains, links
    */
-  def writeTriples() {
+  def writeTriples(fileName: String, formats: Map[String, Formatter]) {
     
     err.println("writing triples...")
     val startNanos = System.nanoTime
     
-    // destinations for all languages plus one for Wikidata
-    val destinations = new Array[Destination](languages.length + 1)
+    // destinations for all languages
+    val destinations = new Array[Destination](languages.length)
     
     var lang = 0
     while (lang < destinations.length) {
-      // TODO: find language folders, configure formatters
-      destinations(lang) = new WriterDestination(() => new OutputStreamWriter(out), new TerseFormatter(false, true))
+      
+      val finder = new Finder[File](baseDir, languages(lang), "wiki")
+      val date = finder.dates().last
+      
+      val formatDestinations = new ArrayBuffer[Destination]()
+      for ((suffix, format) <- formats) {
+        val file = finder.file(date, fileName+'.'+suffix)
+        formatDestinations += new WriterDestination(writer(file), format)
+      }
+      destinations(lang) = new CompositeDestination(formatDestinations.toSeq: _*)
+      
       lang += 1
     }
     
     destinations.foreach(_.open())
     
     val sameAs = RdfNamespace.OWL.append("sameAs")
-    val resourceUris = languages.map(lang => if (lang == generic) new DBpediaNamespace("http://dbpedia.org/resource/") else lang.resourceUri)
     
     var currentId = -1
     
-    // URIs for all languages plus one for Wikidata
-    val uris = new Array[String](languages.length + 1)
+    // URIs for all languages
+    val uris = new Array[String](languages.length)
     
     var index = 0
     while (index <= links.length) {
@@ -284,8 +313,9 @@ class ProcessWikidataLinks() {
         if (currentId != -1) {
           // currentId is -1 at the start of the process - nothing to do yet
 
-          uris(uris.length - 1) = "http://www.wikidata.org/entity/Q"+currentId
-          val pageUri = "http://www.wikidata.org/wiki/Q"+currentId
+          // special treatment for Wikidata (language 0)
+          uris(0) = languages(0).resourceUri.append("Q"+currentId)
+          val pageUri = languages(0).baseUri+"/wiki/Q"+currentId
           
           var subjLang = 0
           while (subjLang < uris.length) {
@@ -317,7 +347,7 @@ class ProcessWikidataLinks() {
           // id is -1 at the end of the process - nothing to do anymore
           destinations.foreach(_.close())
           logWrite(index, startNanos)
-          return;
+          return
         }
         
         // prepare to collect links for next id
@@ -333,12 +363,12 @@ class ProcessWikidataLinks() {
       val lang = (link >>> TITLE_BITS).toInt & LANG_MASK
       val title = (link & TITLE_MASK).toInt
       
-      val uri = resourceUris(lang).append(titles(title))
+      val uri = languages(lang).resourceUri.append(titles(title))
       if (uris(lang) == null) uris(lang) = uri 
       else if (uris(lang) != uri) throw new IllegalArgumentException("multiple links for item "+id+", language "+languages(lang).wikiCode+": "+uris(lang)+", "+uri)
       
       index += 1
-      if (index % 1000000 == 0) logWrite(index, startNanos)
+      if (index % 100000 == 0) logWrite(index, startNanos)
     }
     
   }
@@ -348,4 +378,8 @@ class ProcessWikidataLinks() {
     err.println("wrote "+links+" links in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / links)+" micros per link)")
   }
   
+  private def writer(file: File): () => Writer = {
+    () => IOUtils.writer(file)
+  }
+
 }
