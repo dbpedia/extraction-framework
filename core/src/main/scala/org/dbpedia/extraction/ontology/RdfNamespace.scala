@@ -9,6 +9,7 @@ import scala.collection.mutable.HashMap
  */
 class RdfNamespace(val prefix: String, val namespace: String, val validate: Boolean) {
   
+  // TODO: rename to '+'? Or add alias method '+'?
   def append(suffix: String): String =
   {
     val sb = new StringBuilder
