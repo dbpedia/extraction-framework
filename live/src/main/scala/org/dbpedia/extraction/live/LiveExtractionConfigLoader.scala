@@ -144,7 +144,7 @@ object LiveExtractionConfigLoader
         destList += new SPARULDestination(true, policies) // add triples
         destList += new SPARULDestination(false, policies) // delete triples
         destList += new JSONCacheUpdateDestination(liveCache)
-        destList += new PublisherDiffDestination(policies)
+        destList += new PublisherDiffDestination(cpage.id, policies)
         destList += new LoggerDestination(cpage.id, cpage.title.decoded) // Just to log extraction results
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations

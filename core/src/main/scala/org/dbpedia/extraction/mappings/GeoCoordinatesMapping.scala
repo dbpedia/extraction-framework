@@ -36,6 +36,7 @@ extends PropertyMapping
   private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName)
 
   private val geoCoordinateParser = new GeoCoordinateParser(context)
+  private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
   private val doubleParser = new DoubleParser(context)
   private val stringParser = StringParser
 
@@ -76,8 +77,8 @@ extends PropertyMapping
       for( 
         latitudeProperty <- node.property(latitude);
         longitudeProperty <- node.property(longitude);
-        lat <- doubleParser.parse(latitudeProperty);
-        lon <- doubleParser.parse(longitudeProperty)
+        lat <- singleGeoCoordinateParser.parse(latitudeProperty).map(_.toDouble) orElse doubleParser.parse(latitudeProperty);
+        lon <- singleGeoCoordinateParser.parse(longitudeProperty).map(_.toDouble) orElse doubleParser.parse(longitudeProperty)
       )
       {
         try

@@ -23,13 +23,11 @@ public class Publisher extends Thread{
 
     private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
 
-    HashSet<String> addedTriples = new HashSet<String>();
-    HashSet<String> deletedTriples = new HashSet<String>();
+    private HashSet<String> addedTriples = new HashSet<String>();
+    private HashSet<String> deletedTriples = new HashSet<String>();
 
-//    protected static Options cliOptions;
-
-    private static long fileNumber = 0;
-
+    private long counter = 0;
+    private HashSet<Long> pageCache = new HashSet<Long>();
 
     private String publishDiffBaseName = LiveOptions.options.get("publishDiffRepoPath");
 
@@ -47,13 +45,20 @@ public class Publisher extends Thread{
         this("Publisher", Thread.NORM_PRIORITY);
     }
 
-    public void run()
-    {
+    public void run()  {
+
+        counter = 1;
         while(true) {
             try {
                 // Block until next pubData
                 DiffData pubData = Main.publishingDataQueue.take();
-                publishDiff(pubData);
+
+                if (pageCache.contains(pubData.pageID) || counter % 300 == 0) {
+                    flush();
+                }
+                bufferDiff(pubData);
+                counter++;
+                pageCache.add(pubData.pageID);
             } catch(Throwable t) {
                 logger.error("An exception was encountered in the Publisher update loop", t);
             }
@@ -61,28 +66,26 @@ public class Publisher extends Thread{
         }
     }
 
-    // TODO delay write to reduce I/O but make sure the same page is not included in a batch
-    private void publishDiff(DiffData pubData)
-            throws IOException
-    {
-
-        String fileName = publishDiffBaseName + "/" + PublisherService.getNextPublishPath();
-
-        File parent = new File(fileName).getParentFile();
-
-        if(parent != null)
-            parent.mkdirs();
-
+    private void bufferDiff(DiffData pubData) {
         if(pubData != null){
             addedTriples.addAll(pubData.toAdd);
             deletedTriples.addAll(pubData.toDelete);
         }
+    }
 
+    //TODO possible concurrency issues but look minor for now
+    public void flush() throws IOException  {
 
+        pageCache.clear();
+        counter = 1;
+        String fileName = publishDiffBaseName + "/" + PublisherService.getNextPublishPath();
+        File parent = new File(fileName).getParentFile();
+
+        if(parent != null)
+            parent.mkdirs();
         StringBuilder addString = new StringBuilder();
         for (String s: addedTriples ) {
             addString.append(s);
-            addString.append('\n');
         }
         RDFDiffWriter.write(addString.toString(), true, fileName, true);
         addedTriples.clear();
@@ -90,11 +93,8 @@ public class Publisher extends Thread{
         StringBuilder delString = new StringBuilder();
         for (String s: deletedTriples ) {
             delString.append(s);
-            delString.append('\n');
         }
         RDFDiffWriter.write(delString.toString(), false, fileName, true);
         deletedTriples.clear();
-
     }
-
 }
