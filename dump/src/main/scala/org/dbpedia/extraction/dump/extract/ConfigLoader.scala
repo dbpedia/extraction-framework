@@ -104,20 +104,19 @@ class ConfigLoader(config: Config)
         val extractor = CompositeExtractor.load(extractorClasses, context)
         val datasets = extractor.datasets
         
-        var formats = new ArrayBuffer[Destination]()
+        val formatDestinations = new ArrayBuffer[Destination]()
         for ((suffix, format) <- config.formats) {
           
-          val destinations = new HashMap[String, Destination]()
+          val datasetDestinations = new HashMap[String, Destination]()
           for (dataset <- datasets) {
             val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix)
-            destinations(dataset.name) = new WriterDestination(writer(file), format)
+            datasetDestinations(dataset.name) = new WriterDestination(writer(file), format)
           }
           
-          formats += new DatasetDestination(destinations)
+          formatDestinations += new DatasetDestination(datasetDestinations)
         }
         
-        var destination: Destination = new CompositeDestination(formats.toSeq: _*)
-        destination = new MarkerDestination(destination, finder.file(date, Extraction.Complete), false)
+        val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete), false)
         
         val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
         new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description, parser)
