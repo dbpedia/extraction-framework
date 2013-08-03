@@ -57,12 +57,14 @@ object FixNTriplesEncoding {
       val writer = IOUtils.writer(outFile)
       try {
         IOUtils.readLines(inFile) { line =>
-          val escaped = new TurtleEscaper().escapeTurtle(line)
-          writer.write(escaped)
-          writer.write('\n')
-          if (! line.eq(escaped)) changeCount += 1
-          lineCount += 1
-          if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
+          if (line != null) {
+            val escaped = new TurtleEscaper().escapeTurtle(line)
+            writer.write(escaped)
+            writer.write('\n')
+            if (! line.eq(escaped)) changeCount += 1
+            lineCount += 1
+            if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
+          }
         }
       }
       finally writer.close()

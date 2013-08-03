@@ -113,7 +113,7 @@ object CreateFreebaseLinks
     err.println((if (add) "Add" else "Subtract")+"ing DBpedia URIs in "+file+"...")
     var lines = 0
     IOUtils.readLines(file) { line =>
-      if (line.nonEmpty && line.charAt(0) != '#') {
+      if (line != null && line.nonEmpty && line.charAt(0) != '#') {
         val (rdfKey, wikiPageId) = line match {
           // This will match lines in the page_ids file
           case WikipediaResId(rdfKey, wikiPageId) =>  (rdfKey, wikiPageId)
@@ -153,6 +153,7 @@ object CreateFreebaseLinks
       writer.write("# started "+formatCurrentTimestamp+"\n")
       IOUtils.readLines(inFile) { line =>
         line match {
+          case null => // ignore last value
           case FreebaseWikipediaId(mid, wikiId) => {
             if (! mid.startsWith("m.")) throw new IllegalArgumentException(line)
             if (dbpedia.contains(wikiId)) {

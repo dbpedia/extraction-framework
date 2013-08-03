@@ -53,13 +53,14 @@ extends MappingStatsConfig(statsDir, language)
     private def eachLine(file: File)(process: String => Unit) : Unit = {
       val millis = System.currentTimeMillis
       var count = 0
-      IOUtils.readLines(file) {
-        line =>
-        process(line)
-        count += 1
-        if (count % 1000000 == 0) {
-            if (pretty) print(count+" lines\r")
-            else println(count+" lines")
+      IOUtils.readLines(file) { line =>
+        if (line != null) {
+          process(line)
+          count += 1
+          if (count % 1000000 == 0) {
+              if (pretty) print(count+" lines\r")
+              else println(count+" lines")
+          }
         }
       }
       println(count+" lines - "+prettyMillis(System.currentTimeMillis - millis))
