@@ -1,10 +1,14 @@
 package org.dbpedia.extraction.destinations.formatters
 
+import java.util.Properties
 import java.net.{URISyntaxException, URI}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.ConfigUtils.splitValue
 import org.dbpedia.extraction.util.RichString.wrapString
 import scala.xml.Utility.{isNameChar,isNameStart}
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.Map
+import scala.collection.mutable.{ArrayBuffer,HashMap}
+import scala.collection.JavaConversions.asScalaSet
 
 object UriPolicy {
   
@@ -42,7 +46,7 @@ object UriPolicy {
   /**
    * Key is full policy name, value is triple of priority, position code and factory.
    */
-  val policies: Map[String, (Int, Int, Predicate => Policy)] = locally {
+  private val policies: Map[String, (Int, Int, Predicate => Policy)] = locally {
     
     /**
      * Triples of prefix, priority and factory.
@@ -88,7 +92,7 @@ object UriPolicy {
     product.toMap
   }
   
-  val formatters = Map[String, Array[Policy] => Formatter] (
+  private val formatters = Map[String, Array[Policy] => Formatter] (
     "trix-triples" -> { new TriXFormatter(false, _) },
     "trix-quads" -> { new TriXFormatter(true, _) },
     "turtle-triples" -> { new TerseFormatter(false, true, _) },
@@ -97,6 +101,64 @@ object UriPolicy {
     "n-quads" -> { new TerseFormatter(true, false, _) }
   )
 
+  /**
+   * Parse all URI policy and format lines.
+   * @param uriPolicyPrefix property key prefix, e.g. "uri-policy"
+   * @param formatPrefix format key prefix, e.g. "format"
+   * @return map from file suffix (without '.' dot) to formatter
+   */
+  def parseFormats(config: Properties, uriPolicyPrefix: String, formatPrefix: String): Map[String, Formatter] = {
+    val policies = parsePolicies(config, uriPolicyPrefix)
+    parseFormats(config, formatPrefix, policies)
+  }
+  
+  /**
+   * Parse all format lines.
+   * @param prefix format key prefix, e.g. "format"
+   * @return map from file suffix (without '.' dot) to formatter
+   */
+  def parseFormats(config: Properties, prefix: String, policies: Map[String, Array[Policy]]): Map[String, Formatter] = {
+    
+    val dottedPrefix = prefix + "."
+    val formats = new HashMap[String, Formatter]()
+    
+    for (key <- config.stringPropertyNames) {
+      
+      if (key.startsWith(dottedPrefix)) {
+        
+        val suffix = key.substring(dottedPrefix.length)
+        
+        val settings = splitValue(config, key, ';')
+        require(settings.length == 2, "key '"+key+"' must have two values separated by ';' - file format and uri policy name")
+        
+        val formatter = formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString("'","','","'")))
+        val policy = policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
+        
+        formats(suffix) = formatter.apply(policy)
+      }
+    }
+    
+    formats
+  }
+  
+  /**
+   * parse all URI policy lines
+   * @param prefix property key prefix, e.g. "uri-policy"
+   * @return map from URI policy name (including prefix) to an array of policies (with one entry for each position in a quad)
+   */
+  def parsePolicies(config: Properties, prefix: String): Map[String, Array[Policy]] = {
+    
+    val policies = new HashMap[String, Array[Policy]]()
+    for (key <- config.stringPropertyNames) {
+      if (key.startsWith(prefix)) {
+        try policies(key) = parsePolicy(config.getProperty(key))
+        catch { case e: Exception => throw error("invalid URI policy: '"+key+"="+config.getProperty(key)+"'", e) }
+      }
+    }
+    
+    policies
+  }
+  
   /**
    * Parses a policy list like "uri:en,fr; generic:en"
    */
