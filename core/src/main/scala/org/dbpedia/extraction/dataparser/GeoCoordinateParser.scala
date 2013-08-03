@@ -11,8 +11,6 @@ import org.dbpedia.extraction.util.Language
 /**
  * Parses geographical coordinates.
  */
-class GeoCoordinateParser( extractionContext : { def redirects : Redirects }) extends DataParser
-=======
 class GeoCoordinateParser( 
     extractionContext : {  
       def language : Language  
