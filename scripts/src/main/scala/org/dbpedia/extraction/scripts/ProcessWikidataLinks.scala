@@ -1,27 +1,24 @@
 package org.dbpedia.extraction.scripts
 
+import java.util.Arrays.{copyOf,sort}
 import java.io.{File,Writer}
 import scala.Console.{err,out}
 import scala.collection.Map
 import scala.collection.mutable.{HashMap,ArrayBuffer}
-import java.util.Arrays.{copyOf,sort}
 import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getFile,splitValue}
 import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
-import org.dbpedia.extraction.util.StringUtils.{prettyMillis}
-import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
-import org.dbpedia.extraction.destinations.{Destination,Quad,QuadBuilder,Dataset,WriterDestination}
-import org.dbpedia.extraction.destinations.formatters.TerseFormatter
-import ProcessWikidataLinks._
-import org.dbpedia.extraction.destinations.WriterDestination
-import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.util.StringUtils.prettyMillis
+import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.destinations.{Destination,Quad,WriterDestination}
 import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.CompositeDestination
-import java.util.Arrays
+import org.dbpedia.extraction.util.SimpleWorkers
+import ProcessWikidataLinks._
 
 /**
  * Generate separate triple files for each language from Wikidata link file.
@@ -287,15 +284,22 @@ class ProcessWikidataLinks(baseDir: File) {
       lang += 1
     }
     
+    // let multiple threads write quads to files, use all CPUs
+    val workers = SimpleWorkers { job: (Int, Seq[Quad]) =>
+      destinations(job._1).write(job._2)
+    }
+    
+    // first open all destinations
     destinations.foreach(_.open())
+    // then start worker threads
+    workers.start()
     
     val sameAs = RdfNamespace.OWL.append("sameAs")
     
-    var currentId = -1
-    
-    // URIs for all languages
+    // URIs for current item
     val uris = new Array[String](languages.length)
     
+    var currentId = -1
     var index = 0
     while (index <= links.length) {
       
@@ -335,7 +339,7 @@ class ProcessWikidataLinks(baseDir: File) {
                 objLang += 1
               }
               
-              destinations(subjLang).write(quads)
+              workers.process((subjLang, quads))
             }
             
             subjLang += 1
@@ -345,6 +349,9 @@ class ProcessWikidataLinks(baseDir: File) {
         
         if (id == -1) {
           // id is -1 at the end of the process - nothing to do anymore
+          // first wait for worker threads to finish
+          workers.stop()
+          // then close destinations
           destinations.foreach(_.close())
           logWrite(index, startNanos)
           return
