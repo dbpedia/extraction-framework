@@ -61,55 +61,88 @@
                         <launcher>
                             <id>CanonicalizeUris</id>
                             <mainClass>org.dbpedia.extraction.scripts.CanonicalizeUris</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs><jvmArg>-server</jvmArg>
+                            <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>ResolveTransitiveLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.ResolveTransitiveLinks</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>MapObjectUris</id>
                             <mainClass>org.dbpedia.extraction.scripts.MapObjectUris</mainClass>
                             <jvmArgs>
-                                <jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                                <jvmArg>-Xmx4096m</jvmArg><!-- we load all English redirects, so we need some space. Didn't test how much is actually necessary, 4G is probably too much. -->
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx12G</jvmArg><!-- we load multiple languages at once, so we need a lot of space -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>DecodeHtmlText</id>
                             <mainClass>org.dbpedia.extraction.scripts.DecodeHtmlText</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>DecodeHtmlEntities</id>
                             <mainClass>org.dbpedia.extraction.scripts.DecodeHtmlEntities</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>RecodeUris</id>
                             <mainClass>org.dbpedia.extraction.scripts.RecodeUris</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>FixNTriplesEncoding</id>
                             <mainClass>org.dbpedia.extraction.scripts.FixNTriplesEncoding</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>CountTypes</id>
                             <mainClass>org.dbpedia.extraction.scripts.CountTypes</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>CreateDownloadPage</id>
                             <mainClass>org.dbpedia.extraction.scripts.CreateDownloadPage</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                         <launcher>
                             <id>UnmodifiedFeederCacheGenerator</id>
                             <mainClass>org.dbpedia.extraction.scripts.UnmodifiedFeederCacheGenerator</mainClass>
-                            <jvmArgs><jvmArg>-server</jvmArg><jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
                         </launcher>
                     </launchers>
                 </configuration>
