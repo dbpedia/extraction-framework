@@ -65,7 +65,11 @@
                             <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx8G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -81,7 +85,7 @@
                             <mainClass>org.dbpedia.extraction.scripts.MapObjectUris</mainClass>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
-                                <jvmArg>-Xmx12G</jvmArg><!-- we load multiple languages at once, so we need a lot of space -->
+                                <jvmArg>-Xmx8G</jvmArg><!-- processing languages in parallel takes a lot of space -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                                 <jvmArg>-XX:+PrintGC</jvmArg>
