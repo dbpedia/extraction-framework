@@ -67,6 +67,13 @@ object CreateFreebaseLinks
   
   def main(args : Array[String]) {
     
+    require(args != null && args.length == 4, 
+      "need four args: " +
+      /*0*/ "base dir, " +
+      /*1*/ "DBpedia file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
+      /*2*/ "input file (e.g. '/data/dbpedia/freebase-rdf-2013-06-16-00-00.gz'), "+
+      /*3*/ "output file (e.g. '/data/dbpedia/freebase-links.nt.gz')")
+    
     // base dir of DBpedia files
     val dir = new File(args(0))
     
