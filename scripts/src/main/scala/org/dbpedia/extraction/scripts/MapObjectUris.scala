@@ -103,8 +103,7 @@ object MapObjectUris {
     require(languages.nonEmpty, "no languages")
     
     // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
-    // and a queue that's 50% longer than necessary 
-    val workers = SimpleWorkers(1.5, 1.5) { language: Language =>
+    val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
       
       val finder = new DateFinder(baseDir, language)
       
