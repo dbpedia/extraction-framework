@@ -30,6 +30,8 @@
                                 <jvmArg>-Xmx4096m</jvmArg><!-- we load all DBpedia titles, so we need some space. Didn't test how much is actually necessary, 4G is probably too much. -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -41,8 +43,8 @@
                                 <jvmArg>-Xmx7680m</jvmArg><!-- all languages (10000+ articles) need 6.5G (6656M) with .ttl and IRIs, 7.5G (7680M) with .nt and URIs (more and longer unique titles). -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                                <!-- <jvmArg>-XX:+PrintGC</jvmArg> -->
-                                <!-- <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> -->
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -65,7 +67,7 @@
                             <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
-                                <jvmArg>-Xmx8G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-Xmx4G</jvmArg><!-- processing languages in parallel takes a lot of space -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                                 <jvmArg>-XX:+PrintGC</jvmArg>
