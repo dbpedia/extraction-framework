@@ -178,7 +178,14 @@ object CanonicalizeUris {
     }
     
     workers.start()
-    for (language <- languages) workers.process(language)
+    
+    for (language <- languages) {
+      // mapping the target language to itself doesn't make sense
+      if (language != newLanguage) {
+        workers.process(language)
+      }
+    }
+    
     workers.stop()
   }
   
