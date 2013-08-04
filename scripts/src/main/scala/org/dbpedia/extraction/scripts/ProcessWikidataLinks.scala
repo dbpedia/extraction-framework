@@ -284,8 +284,9 @@ class ProcessWikidataLinks(baseDir: File) {
       lang += 1
     }
     
-    // let multiple threads write quads to files, use all CPUs
-    val workers = SimpleWorkers { job: (Int, Seq[Quad]) =>
+    // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
+    // and a queue that's 50% longer than necessary 
+    val workers = SimpleWorkers(1.5, 1.5) { job: (Int, Seq[Quad]) =>
       destinations(job._1).write(job._2)
     }
     
