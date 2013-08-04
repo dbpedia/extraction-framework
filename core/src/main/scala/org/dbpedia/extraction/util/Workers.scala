@@ -27,12 +27,12 @@ object SimpleWorkers {
   
   /**
    * Convenience 'constructor'. Allows very concise syntax:
-   * val workers = SimpleWorkers(queueDepth) { foo: Foo =>
+   * val workers = SimpleWorkers(loadFactor, queueDepth) { foo: Foo =>
    *   // do something with foo...
    * }
    */
-  def apply[T <: AnyRef](queueDepth: Int)(proc: T => Unit): Workers[T] = {
-    apply(defaultThreads, defaultThreads * queueDepth)(proc)
+  def apply[T <: AnyRef](loadFactor: Double, queueDepth: Double)(proc: T => Unit): Workers[T] = {
+    apply((defaultThreads * loadFactor).toInt, (defaultThreads * loadFactor * queueDepth).toInt)(proc)
   }
   
   /**
@@ -64,7 +64,7 @@ object ResourceWorkers {
   
   /**
    * Convenience 'constructor'. Allows very concise syntax:
-   * val workers = ResourceWorkers(queueDepth) {
+   * val workers = ResourceWorkers(loadFactor, queueDepth) {
    *   new Worker[Foo] {
    *     def init() = { /* init... */ }
    *     def process(value: T) = { /* work... */ }
@@ -72,8 +72,8 @@ object ResourceWorkers {
    *   }
    * }
    */
-  def apply[T <: AnyRef](queueDepth: Int)(factory: => Worker[T]): Workers[T] = {
-    apply(defaultThreads, defaultThreads * queueDepth)(factory)
+  def apply[T <: AnyRef](loadFactor: Double, queueDepth: Double)(factory: => Worker[T]): Workers[T] = {
+    apply((defaultThreads * loadFactor).toInt, (defaultThreads * loadFactor * queueDepth).toInt)(factory)
   }
   
   /**
