@@ -25,7 +25,7 @@ extends Extractor
 
   private val hasPhotoCollectionProperty = language.propertyUri.append("hasPhotoCollection")
   
-  private val flickrWrapprUrlPrefix = "http://www4.wiwiss.fu-berlin.de/flickrwrappr/photos/"
+  private val flickrWrapprUrlPrefix = "http://wifo5-03.informatik.uni-mannheim.de/flickrwrappr/photos/"
   
   override val datasets = Set(DBpediaDatasets.FlickrWrapprLinks)
   
