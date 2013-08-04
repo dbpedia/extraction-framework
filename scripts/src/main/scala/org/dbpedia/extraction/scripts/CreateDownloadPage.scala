@@ -20,8 +20,22 @@ import java.text.DecimalFormatSymbols
 object CreateDownloadPage {
   
 // UPDATE for new release
-val current = "3.8"
+val current = "3.9"
   
+// UPDATE for new release
+val previous = List("3.8", "3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
+
+// UPDATE for new release
+val dumpDates = "in late March / early April 2013"
+  
+// UPDATE for new release
+val allLanguages = 119
+
+// CCHECK / UPDATE for new release
+// All languages that have a significant number of mapped articles.
+// en must be first, we use languages.drop(1) in datasetPages()
+val languages = List("en","bg","ca","cs","de","es","eu","fr","hu","id","it","ja","ko","nl","pl","pt","ru","tr")
+
 // UPDATE when DBpedia Wiki changes. Wiki link to page Datasets, section about internationalized datasets.
 val i18nDatasetsSection = "Datasets#h18-19"
   
@@ -43,14 +57,14 @@ private def niceDecimal(num: Long): String = {
 
 private def niceBytes(bytes: Long): String = {
   if (bytes < 1024) formatter.format(bytes)
-  else if (bytes < 1048576) formatter.format(bytes / 1024F)+"KB"
-  else if (bytes < 1073741824) formatter.format(bytes / 1048576F)+"MB"
-  else formatter.format(bytes / 1073741824F)+"GB"
+  else if (bytes < 1048576) formatter.format(bytes / 1024F)+"KiB"
+  else if (bytes < 1073741824) formatter.format(bytes / 1048576F)+"MiB"
+  else formatter.format(bytes / 1073741824F)+"GiB"
 }
 
 def loadTitles(file: File): Unit = {
   // read lines in this format: 
-  // dbpedia_3.8.owl  lines: 4622  bytes: 811552  gzip: 85765  bzip2: 50140
+  // dbpedia_3.9.owl  lines: 4622  bytes: 811552  gzip: 85765  bzip2: 50140
   // links/revyu_links.nt  lines: 6  bytes: 1008  gzip: 361  bzip2: 441
   // af/geo_coordinates_af.nt lines: 82 bytes: 11524 gzip: 1141 bzip2: 1228
   IOUtils.readLines(file) { line =>
@@ -66,16 +80,16 @@ def loadTitles(file: File): Unit = {
   }
 }
 
-// path: dbpedia_3.8.owl, af/geo_coordinates_af.nq, links/revyu_links.nt
+// path: dbpedia_3.9.owl, af/geo_coordinates_af.nq, links/revyu_links.nt
 class FileInfo(val path: String, val title: String) {
   
-  // example: 3.8/af/geo_coordinates_af.nq.bz2
+  // example: 3.9/af/geo_coordinates_af.nq.bz2
   val fullPath = current+"/"+path+zipSuffix
   
-  // example: http://downloads.dbpedia.org/3.8/af/geo_coordinates_af.nq.bz2
+  // example: http://downloads.dbpedia.org/3.9/af/geo_coordinates_af.nq.bz2
   val downloadUrl = dbpediaUrl+fullPath
   
-  // example: http://downloads.dbpedia.org/preview.php?file=3.8_sl_af_sl_geo_coordinates_af.nq.bz2
+  // example: http://downloads.dbpedia.org/preview.php?file=3.9_sl_af_sl_geo_coordinates_af.nq.bz2
   val previewUrl = dbpediaUrl+"preview.php?file="+fullPath.replace("/", "_sl_")
 }
   
@@ -102,7 +116,7 @@ abstract class Fileset(
 class Ontology(name: String, file: String, text: String)
 extends Fileset(name, file, text, List("owl"), false)
 {
-  // dbpedia_3.8.owl
+  // dbpedia_3.9.owl
   override protected def path(language: String, modifier: String, format: String) = file+modifier+"."+format
 }
 
@@ -122,16 +136,6 @@ extends Fileset(name, file, text, List("nt"), false)
 
 def tag(version: String): String = version.replace(".", "")
 
-val previous = List("3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
-
-val dumpDates = "in late May / early June 2012"
-  
-val allLanguages = 111
-
-// All languages that have a significant number of mapped articles.
-// en must be first, we use languages.drop(1) in datasetPages()
-val languages = List("en","bg","ca","cs","de","el","es","fr","hu","it","ko","pl","pt","ru","sl","tr")
-
 val ontology =
 new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in OWL. See ((http://jens-lehmann.org/files/2009/dbpedia_jws.pdf our JWS paper)) for more details.//")
 
@@ -140,7 +144,7 @@ new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in 
 val datasets = List(
   List(
     new Dataset("Ontology Infobox Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the ontology-based extraction.//"),
-    new Dataset("Ontology Infobox Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the ontology-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
+    new Dataset("Ontology Infobox Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the ontology-based extraction. The dataset used to be called 'Mapping Based Properties'. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
     new Dataset("Ontology Infobox Properties (Specific)", "specific_mappingbased_properties", "//Infobox data from the ontology-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//")
   ),
   List(
@@ -180,7 +184,7 @@ val datasets = List(
   ),
   List(
     new Dataset("Page IDs", "page_ids", "//Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.//"),
-    new Dataset("Revision IDs", "revision_ids", "//Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.8, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.//"),
+    new Dataset("Revision IDs", "revision_ids", "//Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.//"),
     new Dataset("Revision URIs", "revision_uris", "//Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.//")
   )
 )
@@ -205,6 +209,7 @@ val linksets = List(
   new Linkset("Links to GADM", "gadm", "//Links between DBpedia and ((http://gadm.geovocab.org/ GADM)). Update mechanism: copy over from previous release.//"),
   new Linkset("Links to GeoNames", "geonames", "//Links between geographic places in DBpedia and data about them from ((http://www.geonames.org/ GeoNames)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/geonames Silk link specifications)).//"),
   new Linkset("Links to GeoSpecies", "geospecies", "//Links between DBpedia and ((http://lod.geospecies.org/ GeoSpecies)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/geospecies Silk link specification)).//"),
+  new Linkset("Links to GHO", "gho", "//Links between DBpedia and ((http://gho.aksw.org GHO)) (Global Health Observatory). Links created by ((http://aksw.org/Projects/LIMES LIMES)).//"),
   new Linkset("Links to Project Gutenberg", "gutenberg", "//Links between writers in DBpedia and data about them from ((www4.wiwiss.fu-berlin.de/gutendata/ Project Gutenberg)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/gutenberg Silk link specification)).//"),
   new Linkset("Links to Italian Public Schools", "italian_public_schools", "//Links between DBpedia and ((http://www.linkedopendata.it/datasets/scuole Italian Public Schools)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/italian-public-schools Silk link specification)).//"),
   new Linkset("Links to LinkedGeoData", "linkedgeodata", "//Links between DBpedia and ((http://linkedgeodata.org LinkedGeoData)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedgeodata Silk link specifications)).//"),
@@ -322,10 +327,10 @@ def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Un
     }
     case DataI18NPage => {
       s+
-      "===Internationalized Datasets===\n"+
+      "===Localized Datasets===\n"+
       "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
       "\n"+
-      "The internationalized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. //~http://pt.dbpedia.org/resource/Brasília//.\n"
+      "The localized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. //~http://pt.dbpedia.org/resource/Brasília//.\n"
     }
     case LinksPage => {
       s+
@@ -446,10 +451,13 @@ def nlpPage(page: String): Unit = {
 }
 
 def mark(page: String): String = {
-  "<#<!--\n"+
-  "DO NOT EDIT - generated by CreateDownloadPage.scala\n"+
-  "http://wiki.dbpedia.org/Downloads"+tag(current)+page+"/edit\n"+
-  "-->#>\n"
+  "\n<#<!--\n\n\n"+
+  "PLEASE DO NOT EDIT THIS WIKI PAGE!\n\n\n" +
+  "YOUR CHANGES WILL BE LOST IN THE NEXT RELEASE!\n\n\n" +
+  "Please edit CreateDownloadPage.scala instead.\n\n\n" +
+  "Paste the result of CreateDownloadPage.scala here:\n"+
+  "http://wiki.dbpedia.org/Downloads"+tag(current)+page+"/edit\n\n\n"+
+  "-->#>\n\n\n"
 }
 
 def include(page: String): String = {
