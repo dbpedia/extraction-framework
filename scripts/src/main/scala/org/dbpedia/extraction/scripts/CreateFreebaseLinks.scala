@@ -71,11 +71,11 @@ object CreateFreebaseLinks
       "need four args: " +
       /*0*/ "base dir, " +
       /*1*/ "DBpedia file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-      /*2*/ "input file (e.g. '/data/dbpedia/freebase-rdf-2013-06-16-00-00.gz'), "+
-      /*3*/ "output file (e.g. '/data/dbpedia/freebase-links.nt.gz')")
+      /*2*/ "input file, relative to base dir (e.g. 'freebase-rdf-2013-06-16-00-00.gz'), "+
+      /*3*/ "output file, relative to base dir (e.g. 'freebase-links.nt.gz')")
     
     // base dir of DBpedia files
-    val dir = new File(args(0))
+    val baseDir = new File(args(0))
     
     // suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on
     val suffix = args(1)
@@ -83,12 +83,12 @@ object CreateFreebaseLinks
     // Freebase RDF input file, may be .gz or .bz2 zipped
     // must have the format described on https://developers.google.com/freebase/data
     // Latest: http://download.freebaseapps.com
-    val inFile = new File(args(2))
+    val inFile = new File(baseDir, args(2))
     
     // output file, may be .gz or .bz2 zipped 
-    val outFile = new File(args(3))
+    val outFile = new File(baseDir, args(3))
     
-    val finder = new Finder[File](dir, Language.English, "wiki")
+    val finder = new Finder[File](baseDir, Language.English, "wiki")
     val date = finder.dates("download-complete").last
     
     def find(dataset: Dataset): File = {
