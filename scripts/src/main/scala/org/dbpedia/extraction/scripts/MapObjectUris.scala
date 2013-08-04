@@ -115,7 +115,7 @@ object MapObjectUris {
       for (mappping <- mappings) {
         var count = 0
         QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
-          if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
           // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
           // line, which means that the character array for the whole line is kept in memory, which
@@ -126,7 +126,7 @@ object MapObjectUris {
           map.addBinding(quad.subject, quad.value)
           count += 1
         }
-        err.println("found "+count+" mappings")
+        err.println(language.wikiCode+": found "+count+" mappings")
       }
       
       for (input <- inputs; suffix <- suffixes) {
