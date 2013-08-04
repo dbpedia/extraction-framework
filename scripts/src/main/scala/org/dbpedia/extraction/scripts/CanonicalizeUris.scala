@@ -2,6 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.SimpleWorkers
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{Set,HashMap,MultiMap,ArrayBuffer}
@@ -17,9 +18,38 @@ import scala.Console.err
  *   - DBpedia URIs in subject, predicate or object position are mapped
  *   - non-DBpedia URIs and literal values are copied unchanged
  *   - triples containing DBpedia URIs in subject or object position that cannot be mapped are discarded
- *   
- * Example call:
+ * 
+ * As of DBpedia release 3.8 and 3.9, the following datasets should be canonicalized:
+ * 
+ * article-categories
+ * category-labels
+ * disambiguations
+ * disambiguations-redirected
+ * external-links
+ * geo-coordinates
+ * homepages
+ * images
+ * infobox-properties
+ * infobox-properties-redirected
+ * infobox-property-definitions
+ * instance-types
+ * labels
+ * long-abstracts
+ * mappingbased-properties
+ * mappingbased-properties-redirected
+ * page-links
+ * page-links-redirected
+ * persondata
+ * persondata-redirected
+ * pnd
+ * short-abstracts
+ * skos-categories
+ * specific-mappingbased-properties
+ * 
+ * Example calls:
  * ../run CanonicalizeUris /data/dbpedia interlanguage-links-same-as .nt.gz labels,short-abstracts,long-abstracts -en-uris .nt.gz,.nq.gz en en 10000-
+ * 
+ * ../run CanonicalizeUris /data/dbpedia interlanguage-links-same-as .nt.gz article-categories,category-labels,disambiguations,disambiguations-redirected,external-links,geo-coordinates,homepages,images,infobox-properties,infobox-properties-redirected,infobox-property-definitions,instance-types,labels,long-abstracts,mappingbased-properties,mappingbased-properties-redirected,page-links,page-links-redirected,persondata,persondata-redirected,pnd,short-abstracts,skos-categories,specific-mappingbased-properties -en-uris .nt.gz,.nq.gz en en 10000-
  * 
  * TODO: merge with MapObjectUris?
  */
@@ -77,7 +107,8 @@ object CanonicalizeUris {
     val languages = parseLanguages(baseDir, args.drop(8))
     require(languages.nonEmpty, "no languages")
     
-    for (language <- languages) {
+    // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
+    val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
       
       val oldPrefix = uriPrefix(language)
       val oldResource = oldPrefix+"resource/"
@@ -93,7 +124,7 @@ object CanonicalizeUris {
       for (mappping <- mappings) {
         var count = 0
         QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
-          if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
           if (quad.value.startsWith(newResource)) {
             // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
             // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
@@ -106,7 +137,7 @@ object CanonicalizeUris {
             count += 1
           }
         }
-        err.println("found "+count+" mappings")
+        err.println(language.wikiCode+": found "+count+" mappings")
       }
       
       def newUri(oldUri: String): String = {
@@ -146,6 +177,9 @@ object CanonicalizeUris {
       
     }
     
+    workers.start()
+    for (language <- languages) workers.process(language)
+    workers.stop()
   }
   
 }
