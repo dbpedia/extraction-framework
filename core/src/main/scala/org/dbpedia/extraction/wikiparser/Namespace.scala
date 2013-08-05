@@ -119,6 +119,8 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
   
   def get(lang: Language, name: String): Option[Namespace] = {
     dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
+      // TODO: name.toLowerCase(lang.locale) doesn't quite work. On the other hand, MediaWiki
+      // upper / lower case namespace names don't make sense either. Example: http://tr.wikipedia.org/?oldid=13637892
       case None => Namespaces.codes(lang).get(name.toLowerCase(lang.locale)) match {
         case None => None
         case Some(code) => values.get(code)
