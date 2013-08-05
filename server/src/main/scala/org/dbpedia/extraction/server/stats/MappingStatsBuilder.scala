@@ -7,6 +7,7 @@ import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.{Language,WikiUtil,IOUtils}
 import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util.TurtleUtils.unescapeTurtle
 
 class MappingStatsBuilder(statsDir : File, language: Language, pretty: Boolean)
 extends MappingStatsConfig(statsDir, language)
@@ -103,7 +104,7 @@ extends MappingStatsConfig(statsDir, language)
       eachLine(file) {
         line => line.trim match {
           // predicate must be wikiPageUsesTemplate
-          case Quad(quad) if (quad.datatype == null && unescape(quad.predicate).contains("wikiPageUsesTemplate")) =>
+          case Quad(quad) if (quad.datatype == null && unescapeTurtle(quad.predicate).contains("wikiPageUsesTemplate")) =>
           {
             var templateName = cleanUri(quad.value)
             
@@ -186,57 +187,11 @@ extends MappingStatsConfig(statsDir, language)
         WikiUtil.wikiDecode(uri.substring(resourceUriPrefix.length))
     }
     
-    private def cleanUri(uri: String) : String = cleanName(stripUri(unescape(uri)))
+    private def cleanUri(uri: String) : String = cleanName(stripUri(unescapeTurtle(uri)))
     
-    private def cleanValue(value: String) : String = cleanName(unescape(value))
+    private def cleanValue(value: String) : String = cleanName(unescapeTurtle(value))
     
     // values may contain line breaks, which mess up our file format, so let's remove them.
     private def cleanName(name: String) : String = name.replaceAll("\r|\n", "")
 
-    private def unescape(value: String): String = {
-        val sb = new java.lang.StringBuilder
-
-        val inputLength = value.length
-        var offset = 0
-
-        while (offset < inputLength)
-        {
-            val c = value.charAt(offset)
-            if (c != '\\') sb append c
-            else
-            {
-                offset += 1
-                // FIXME: check string length 
-                val specialChar = value.charAt(offset)
-                specialChar match
-                {
-                    case '"' => sb append '"'
-                    case 't' => sb append '\t'
-                    case 'r' => sb append '\r'
-                    case '\\' => sb append '\\'
-                    case 'n' => sb append '\n'
-                    case 'u' =>
-                    {
-                        offset += 1
-                        // FIXME: check string length 
-                        val codepoint = value.substring(offset, offset + 4)
-                        val character = Integer.parseInt(codepoint, 16).asInstanceOf[Char]
-                        sb append character
-                        offset += 3
-                    }
-                    case 'U' =>
-                    {
-                        offset += 1
-                        // FIXME: check string length 
-                        val codepoint = value.substring(offset, offset + 8)
-                        val character = Integer.parseInt(codepoint, 16)
-                        sb appendCodePoint character
-                        offset += 7
-                    }
-                }
-            }
-            offset += 1
-        }
-        sb.toString
-    }
 }
