@@ -8,11 +8,9 @@ import org.dbpedia.extraction.live.feeder.OAIFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
 import org.dbpedia.extraction.live.feeder.UnmodifiedFeeder;
 import org.dbpedia.extraction.live.publisher.DiffData;
-import org.dbpedia.extraction.live.publisher.PublisherService;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
-import org.dbpedia.extraction.live.publisher.PublishedDataCompressor;
 import org.dbpedia.extraction.live.publisher.Publisher;
 import org.dbpedia.extraction.live.statistics.Statistics;
 import org.dbpedia.extraction.live.util.DateUtil;
@@ -43,7 +41,6 @@ public class Main {
     private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
     private volatile static Publisher publisher ;
-    private volatile static PublishedDataCompressor compressor;
 
     public static void authenticate(final String username, final String password) {
         Authenticator.setDefault(new Authenticator() {
@@ -95,7 +92,6 @@ public class Main {
                 p.startProcessor();
 
             publisher = new Publisher("Publisher", 4);
-            compressor = new PublishedDataCompressor("PublishedDataCompressor", Thread.MIN_PRIORITY);
 
             statistics.startStatistics();
 
