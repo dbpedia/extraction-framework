@@ -46,7 +46,7 @@ private class NamespaceBuilder {
   def create(code: Int, name: String, dbpedia: Boolean) : Namespace = {
     val namespace = new Namespace(code, name, dbpedia)
     val previous = values.put(code, namespace)
-    require(previous.isEmpty, "duplicate namespace: ["+previous+"] and ["+namespace+"]")
+    require(previous.isEmpty, "duplicate namespace: ["+previous.get+"] and ["+namespace+"]")
     if (dbpedia) dbpedias(name.toLowerCase(Language.Mappings.locale)) = namespace
     namespace
   }
