@@ -21,10 +21,9 @@ extends Extractor
 {
   private val language = context.language
 
-  // val sameAsProperty = context.ontology.properties("owl:sameAs")
-  val sameAsProperty = "http://www.w3.org/2002/07/owl#sameAs"
+  val sameAsProperty = context.ontology.properties("owl:sameAs")
   
-  val quad = QuadBuilder.stringPredicate(language, DBpediaDatasets.IriSameAsUri, sameAsProperty, null) _
+  val quad = QuadBuilder(context.language, DBpediaDatasets.IriSameAsUri, sameAsProperty, null) _
 
   override val datasets = Set(DBpediaDatasets.IriSameAsUri)
 

@@ -69,11 +69,11 @@ final class SimpleWikiParser extends WikiParser
         if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki") throw new IllegalArgumentException("need format 'text/x-wiki', found '"+page.format+"'")
         
         //Parse source
-        val nodes: List[Node] = List.empty // parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
+        val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
 
         //Check if this page is a Redirect
         // TODO: the regex used in org.dbpedia.extraction.mappings.Redirects.scala is probably a bit better
-        val redirectRegex = null // """(?is)\s*(?:""" + Redirect(page.title.language).mkString("|") + """)\s*:?\s*\[\[.*"""
+        val redirectRegex = """(?is)\s*(?:""" + Redirect(page.title.language).mkString("|") + """)\s*:?\s*\[\[.*"""
         // TODO: also extract the redirect target.
         // TODO: compare extracted redirect target to the one found by Wikipedia (stored in the WikiPage object).
         // Problems:
@@ -81,12 +81,12 @@ final class SimpleWikiParser extends WikiParser
         // - generating the XML dump files takes several days, and the wikitext is obviously not generated at the
         //   same time as the redirect target, so sometimes they do not match.
         // In a nutshell: if the redirect in WikiPage is different from what we find, we're probably correct.
-        val isRedirect = false // page.source.matches(redirectRegex)
+        val isRedirect = page.source.matches(redirectRegex)
 
         //Check if this page is a Disambiguation
         //TODO resolve template titles
-        val disambiguationNames = null // Disambiguation.get(page.title.language).getOrElse(Set("Disambig"))
-        val isDisambiguation = false // nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
+        val disambiguationNames = Disambiguation.get(page.title.language).getOrElse(Set("Disambig"))
+        val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
 
         //Return page node
         new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, isRedirect, isDisambiguation, nodes)
