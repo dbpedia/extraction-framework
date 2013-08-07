@@ -12,6 +12,7 @@ import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
 import org.dbpedia.extraction.util.IOUtils
+import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
  * See https://developers.google.com/freebase/data for a reference of the Freebase RDF data dumps
@@ -57,18 +58,21 @@ object ProcessFreebaseLinks
       lang += 1
     }
     
-    val prefix = "ns:m."
-    
     val startNanos = System.nanoTime
     err.println("reading Freebase file...")
     
-    var lineCount = 0
-    var linkCount = 0
+    // Freebase files are huge - use Long to count lines, not Int
+    var lineCount = 0L
+    var linkCount = 0L
     IOUtils.readLines(inputFile) { line =>
       if (line != null) {
-        if (line.startsWith(prefix)) {
+        val quad = parseLink(line)
+        if (quad != null) {
           linkCount += 1
-          if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
+          if (linkCount % 1000000 == 0) {
+            err.println(quad)
+            logRead("link", linkCount, startNanos)
+          }
         }
         lineCount += 1
         if (lineCount % 1000000 == 0) logRead("line", lineCount, startNanos)
@@ -78,8 +82,65 @@ object ProcessFreebaseLinks
     logRead("link", linkCount, startNanos)
     
   }
+  
+  /*
+The lines that we are interested in look like this:
 
-  private def logRead(name: String, count: Int, startNanos: Long): Unit = {
+ns:m.0104jp	ns:common.topic.topic_equivalent_webpage	<http://pt.wikipedia.org/wiki/Buna>.
+
+Fields are separated by tabs, not spaces. We simply extract the MID, the language and the title.
+
+There are similar lines that we currently don't care about:
+
+ns:m.0104jp	ns:common.topic.topic_equivalent_webpage	<http://pt.wikipedia.org/wiki/index.html?curid=1409578>.
+
+Wikipedia titles always start with capital letters, so we can exclude these lines because their
+titles start with lower-case i.
+  */
+  
+  val prefix = "ns:m."
+  val midStart = prefix.length
+  
+  val infix = "\tns:common.topic.topic_equivalent_webpage\t<http://"
+  val infixLength = infix.length
+  
+  val wikipedia = ".wikipedia.org/wiki/"
+  val wikipediaLength = infix.length
+  
+  val suffix = ">."
+  val suffixLength = suffix.length
+  
+  val sameAs = RdfNamespace.OWL.append("sameAs")
+
+  private def parseLink(line: String): Quad = {
+    
+    if (! line.startsWith(prefix)) return null
+    
+    val midEnd = line.indexOf('\t', midStart)
+    if (midEnd == -1) return null
+    
+    if (! line.startsWith(infix, midEnd)) return null
+    val langStart = midEnd + infixLength
+    
+    val langEnd = line.indexOf('.', langStart)
+    if (langEnd == -1) return null
+    
+    if (! line.startsWith(wikipedia, langEnd)) return null
+    val titleStart = langEnd + wikipediaLength
+    
+    if (line.charAt(titleStart) == 'i') return null
+    
+    if (! line.endsWith(suffix)) return null
+    val titleEnd = line.length - suffixLength
+    
+    val mid = line.substring(midStart, midEnd)
+    val lang = line.substring(langStart, langEnd)
+    val title = line.substring(titleStart)
+    
+    return new Quad(lang, null, "http://"+lang+".dbpedia.org/resource/"+title, sameAs, "http://rdf.freebase.com/ns/m."+mid, null, null)
+  }
+
+  private def logRead(name: String, count: Long, startNanos: Long): Unit = {
     val micros = (System.nanoTime - startNanos) / 1000
     err.println(name+"s: read "+count+" in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per "+name+")")
   }
