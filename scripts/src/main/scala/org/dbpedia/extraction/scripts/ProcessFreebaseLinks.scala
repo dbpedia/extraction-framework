@@ -135,7 +135,7 @@ titles start with lower-case i.
     
     val mid = line.substring(midStart, midEnd)
     val lang = line.substring(langStart, langEnd)
-    val title = line.substring(titleStart)
+    val title = line.substring(titleStart, titleEnd)
     
     return new Quad(lang, null, "http://"+lang+".dbpedia.org/resource/"+title, sameAs, "http://rdf.freebase.com/ns/m."+mid, null, null)
   }
