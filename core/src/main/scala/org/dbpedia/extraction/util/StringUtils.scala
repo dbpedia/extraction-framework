@@ -158,6 +158,24 @@ object StringUtils
    * 
    * TODO: This method cannot replace code points > 0xFFFF.
    * 
+   * @param input input string
+   * @param replace mapping from characters to replacement strings.
+   * @return new string if characters had to be escaped, input string otherwise
+   */
+  def escape(input: String, replace: Array[String]): String = {
+      val sb = StringUtils.escape(null, input, replace)
+      if (sb == null) input else sb.toString
+  }
+    
+  /**
+   * Build a copy of the given string, replacing some chars by replacement strings. 
+   * The replacement array is indexed by character value. Only characters for which
+   * the replacement array contains a non-null value will be replaced.
+   * 
+   * TODO: don't double-escape existing escape sequences
+   * 
+   * TODO: This method cannot replace code points > 0xFFFF.
+   * 
    * @param replace mapping from characters to replacement strings.
    * @param target If null, the method may return null or a new StringBuilder. 
    * Otherwise, the method will return the given target.
