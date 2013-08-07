@@ -2,13 +2,13 @@ package org.dbpedia.extraction.scripts
 
 import java.io.{File,Writer}
 import scala.Console.err
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getFile,splitValue}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
-import org.dbpedia.extraction.util.Finder
+import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
 import org.dbpedia.extraction.util.IOUtils
@@ -40,12 +40,10 @@ object ProcessFreebaseLinks
     val formats = parseFormats(config, "uri-policy", "format")
 
     // destinations for all languages
-    val destinations = new Array[Destination](languages.length)
+    val destinations = new HashMap[String, Destination]()
     
-    var lang = 0
-    while (lang < destinations.length) {
-      
-      val finder = new Finder[File](baseDir, languages(lang), "wiki")
+    for (language <- languages) {
+      val finder = new Finder[File](baseDir, language, "wiki")
       val date = finder.dates().last
       
       val formatDestinations = new ArrayBuffer[Destination]()
@@ -53,13 +51,17 @@ object ProcessFreebaseLinks
         val file = finder.file(date, output+'.'+suffix)
         formatDestinations += new WriterDestination(writer(file), format)
       }
-      destinations(lang) = new CompositeDestination(formatDestinations.toSeq: _*)
-      
-      lang += 1
+      destinations(language.wikiCode) = new CompositeDestination(formatDestinations.toSeq: _*)
     }
     
+    // I didn't find a way to create a singleton Seq without a lot of copying, so we re-use this array.
+    // It's silly, but I don't want to be an accomplice in Scala's wanton disregard of efficiency.
+    val quads = new ArrayBuffer[Quad](1)
+    
     val startNanos = System.nanoTime
-    err.println("reading Freebase file...")
+    err.println("reading Freebase file, writing DBpedia files...")
+    
+    destinations.values.foreach(_.open())
     
     // Freebase files are huge - use Long to count lines, not Int
     var lineCount = 0L
@@ -68,35 +70,43 @@ object ProcessFreebaseLinks
       if (line != null) {
         val quad = parseLink(line)
         if (quad != null) {
-          linkCount += 1
-          if (linkCount % 1000000 == 0) {
-            err.println(quad)
-            logRead("link", linkCount, startNanos)
+          val destination = destinations.get(quad.language)
+          if (destination.isDefined) {
+            quads(0) = quad
+            destination.get.write(quads)
+            linkCount += 1
+            if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
           }
         }
         lineCount += 1
         if (lineCount % 1000000 == 0) logRead("line", lineCount, startNanos)
       }
     }
+    
+    destinations.values.foreach(_.close())
+    
     logRead("line", lineCount, startNanos)
     logRead("link", linkCount, startNanos)
     
   }
-  
-  /*
-The lines that we are interested in look like this:
+
+/*
+
+The lines that we are interested in look exactly like this:
 
 ns:m.0104jp	ns:common.topic.topic_equivalent_webpage	<http://pt.wikipedia.org/wiki/Buna>.
 
-Fields are separated by tabs, not spaces. We simply extract the MID, the language and the title.
+Fields are separated by tabs, not spaces. We simply extract the MID, the language and the title,
+create DBpedia and Freebase URIs and create a Quad from them.
 
 There are similar lines that we currently don't care about:
 
 ns:m.0104jp	ns:common.topic.topic_equivalent_webpage	<http://pt.wikipedia.org/wiki/index.html?curid=1409578>.
 
 Wikipedia titles always start with capital letters, so we can exclude these lines because their
-titles start with lower-case i.
-  */
+titles start with lower-case 'i'.
+
+*/
   
   val prefix = "ns:m."
   val midStart = prefix.length
@@ -128,6 +138,7 @@ titles start with lower-case i.
     if (! line.startsWith(wikipedia, langEnd)) return null
     val titleStart = langEnd + wikipediaLength
     
+    // exclude ".../wiki/index.html?curid=..." lines
     if (line.charAt(titleStart) == 'i') return null
     
     if (! line.endsWith(suffix)) return null
