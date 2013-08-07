@@ -105,7 +105,7 @@ titles start with lower-case i.
   val infixLength = infix.length
   
   val wikipedia = ".wikipedia.org/wiki/"
-  val wikipediaLength = infix.length
+  val wikipediaLength = wikipedia.length
   
   val suffix = ">."
   val suffixLength = suffix.length
@@ -142,7 +142,7 @@ titles start with lower-case i.
 
   private def logRead(name: String, count: Long, startNanos: Long): Unit = {
     val micros = (System.nanoTime - startNanos) / 1000
-    err.println(name+"s: read "+count+" in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per "+name+")")
+    err.println(name+"s: "+count+" in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per "+name+")")
   }
 
   private def writer(file: File): () => Writer = {
