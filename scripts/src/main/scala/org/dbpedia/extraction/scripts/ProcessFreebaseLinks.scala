@@ -40,7 +40,10 @@ object ProcessFreebaseLinks
     val formats = parseFormats(config, "uri-policy", "format")
 
     // destinations for all languages
-    val destinations = new HashMap[String, Destination]()
+    val destinations = new HashMap[String, Destination]() {
+      // This seems to be the only way to avoid creating an Option object during map lookup 
+      override def default(key: String): Destination = null
+    }
     
     for (language <- languages) {
       val finder = new Finder[File](baseDir, language, "wiki")
@@ -57,6 +60,8 @@ object ProcessFreebaseLinks
     // I didn't find a way to create a singleton Seq without a lot of copying, so we re-use this array.
     // It's silly, but I don't want to be an accomplice in Scala's wanton disregard of efficiency.
     val quads = new ArrayBuffer[Quad](1)
+    // Initialize first element
+    quads += null
     
     val startNanos = System.nanoTime
     err.println("reading Freebase file, writing DBpedia files...")
@@ -70,10 +75,10 @@ object ProcessFreebaseLinks
       if (line != null) {
         val quad = parseLink(line)
         if (quad != null) {
-          val destination = destinations.get(quad.language)
-          if (destination.isDefined) {
+          val destination = destinations(quad.language)
+          if (destination != null) {
             quads(0) = quad
-            destination.get.write(quads)
+            destination.write(quads)
             linkCount += 1
             if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
           }
