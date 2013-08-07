@@ -22,6 +22,18 @@
                 <configuration>
                     <launchers>
                         <launcher>
+                        <launcher>
+                            <id>CreateIriSameAsUriLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CreateIriSameAsUriLinks</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx1024m</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                            </jvmArgs>
+                        </launcher>
                             <id>ProcessFreebaseLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.ProcessFreebaseLinks</mainClass>
                             <jvmArgs>
