@@ -109,6 +109,19 @@ object Workers {
   
 /**
  * A simple fixed size thread-pool.
+ * 
+ * TODO: If a worker thread dies because of an uncaught exception, it just goes away and we
+ * may not fully use all CPUs. Maybe we should start a new worker thread? Or use a thread pool
+ * who does that for us? On the other hand - what about worker.init() and worker.destroy()?
+ * We probably don't want to call them twice. No, I guess it's better to let the thread die.
+ * Users can always catch Throwable in their implementation of Worker.process().
+ * 
+ * FIXME: If all worker threads die because of uncaught exceptions, the master thread will
+ * probably still add tasks to the queue and block forever. When a worker thread dies, it should
+ * count down the number of live threads and if none are left interrupt the master thread if it is 
+ * blocking in process(). But what if there are multiple master threads? Ough. We need more ways to
+ * communicate between masters and workers...
+ *  
  * @param threads number of threads in pool
  * @param queueLength max length of work queue
  * @param factory called during initialization of this class to create a worker for each thread
