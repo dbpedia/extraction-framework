@@ -2,7 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import java.io.{File,Writer}
 import scala.Console.err
-import scala.collection.mutable.{ArrayBuffer, HashMap}
+import scala.collection.mutable.{ArrayBuffer,HashMap,TreeSet}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getFile,splitValue}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
@@ -57,6 +57,8 @@ object ProcessFreebaseLinks
       destinations(language.wikiCode) = new CompositeDestination(formatDestinations.toSeq: _*)
     }
     
+    val undefined = new TreeSet[String]()
+    
     // I didn't find a way to create a singleton Seq without a lot of copying, so we re-use this array.
     // It's silly, but I don't want to be an accomplice in Scala's wanton disregard of efficiency.
     val quads = new ArrayBuffer[Quad](1)
@@ -73,12 +75,18 @@ object ProcessFreebaseLinks
     var linkCount = 0L
     IOUtils.readLines(inputFile) { line =>
       if (line != null) {
-        // write quad if there is some destination for this language
-        for (quad <- parseLink(line); destination <- destinations.get(quad.language)) {
-          quads(0) = quad
-          destination.write(quads)
-          linkCount += 1
-          if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
+        for (quad <- parseLink(line)) {
+          val destination = destinations.get(quad.language)
+          // write quad if there is some destination for this language
+          if (destination.isDefined) {
+            quads(0) = quad
+            destination.get.write(quads)
+            linkCount += 1
+            if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
+          }
+          else {
+            undefined += quad.language
+          }
         }
         lineCount += 1
         if (lineCount % 1000000 == 0) logRead("line", lineCount, startNanos)
@@ -90,6 +98,7 @@ object ProcessFreebaseLinks
     logRead("line", lineCount, startNanos)
     logRead("link", linkCount, startNanos)
     
+    err.println("links for these languages were found but not written because configuration didn't include them: "+undefined.mkString(","))
   }
 
 /*
