@@ -22,12 +22,11 @@
                 <configuration>
                     <launchers>
                         <launcher>
-                            <id>CreateFreebaseLinks</id>
-                            <mainClass>org.dbpedia.extraction.scripts.CreateFreebaseLinks</mainClass>
+                            <id>ProcessFreebaseLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.ProcessFreebaseLinks</mainClass>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
-                                <jvmArg>-Xms512m</jvmArg>
-                                <jvmArg>-Xmx4096m</jvmArg><!-- we load all DBpedia titles, so we need some space. Didn't test how much is actually necessary, 4G is probably too much. -->
+                                <jvmArg>-Xmx1024m</jvmArg>
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                                 <jvmArg>-XX:+PrintGC</jvmArg>
