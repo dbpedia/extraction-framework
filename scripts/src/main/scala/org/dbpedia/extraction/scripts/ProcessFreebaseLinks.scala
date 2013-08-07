@@ -82,7 +82,6 @@ object ProcessFreebaseLinks
         val quad = parseLink(line)
         if (quad != null) {
           val destination = destinations(quad.language)
-          // write quad if there is some destination for this language
           if (destination != null) {
             quads(0) = quad
             destination.write(quads)
