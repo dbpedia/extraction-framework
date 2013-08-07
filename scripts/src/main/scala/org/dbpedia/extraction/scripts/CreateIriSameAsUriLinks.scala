@@ -5,9 +5,13 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getFile,splitValue}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import scala.collection.mutable.ArrayBuffer
-import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
+import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.Finder
+import java.net.URI
+import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.util.SimpleWorkers
+import org.dbpedia.extraction.util.Language
 
 object CreateIriSameAsUriLinks {
   
@@ -22,7 +26,6 @@ object CreateIriSameAsUriLinks {
     
     val input = config.getProperty("input")
     if (input == null) throw error("property 'input' not defined.")
-    val inputFile = new File(baseDir, input)
     
     val output = config.getProperty("output")
     if (output == null) throw error("property 'output' not defined.")
@@ -31,23 +34,41 @@ object CreateIriSameAsUriLinks {
     
     val formats = parseFormats(config, "uri-policy", "format")
 
-    for (language <- languages) {
+    val sameAs = RdfNamespace.OWL.append("sameAs")
+    
+    // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
+    val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
       
       val finder = new Finder[File](baseDir, language, "wiki")
       val date = finder.dates().last
+      
+      val inputFile = finder.file(date, input)
       
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
         val file = finder.file(date, output+'.'+suffix)
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
-      val destinations = new CompositeDestination(formatDestinations.toSeq: _*)
+      val destination = new CompositeDestination(formatDestinations.toSeq: _*)
       
-      //   for each triple in input file
-      //     object = new URI(subject).toASCIIString
-      //     if (object != subject) 
-      //     write triple(subject, sameAs, object) to destination
+      destination.open()
+      
+      QuadMapper.mapQuads(language.wikiCode, inputFile, destination, true) { quad =>
+        val iri = quad.subject
+        val uri = new URI(iri).toASCIIString
+        if (uri == iri) List.empty
+        else List(new Quad(null, null, iri, sameAs, uri, null, null: String))
+      }
+
+      destination.close()
     }
+    
+    workers.start()
+    
+    for (language <- languages) workers.process(language)
+    
+    workers.stop()
+
   }
 
   private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
