@@ -13,6 +13,9 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
 import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.util.text.uri.UriDecoder
+import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.extraction.util.StringUtils
 
 /**
  * See https://developers.google.com/freebase/data for a reference of the Freebase RDF data dumps
@@ -107,20 +110,23 @@ titles start with lower-case 'i'.
 
 */
   
-  val prefix = "ns:m."
-  val midStart = prefix.length
+  private val prefix = "ns:m."
+  private val midStart = prefix.length
   
-  val infix = "\tns:common.topic.topic_equivalent_webpage\t<http://"
-  val infixLength = infix.length
+  private val infix = "\tns:common.topic.topic_equivalent_webpage\t<http://"
+  private val infixLength = infix.length
   
-  val wikipedia = ".wikipedia.org/wiki/"
-  val wikipediaLength = wikipedia.length
+  private val wikipedia = ".wikipedia.org/wiki/"
+  private val wikipediaLength = wikipedia.length
   
-  val suffix = ">."
-  val suffixLength = suffix.length
+  private val suffix = ">."
+  private val suffixLength = suffix.length
   
-  val sameAs = RdfNamespace.OWL.append("sameAs")
+  private val sameAs = RdfNamespace.OWL.append("sameAs")
 
+  // store our own private copy of the mutable array
+  private val replacements = WikiUtil.iriReplacements
+  
   private def parseLink(line: String): Option[Quad] = {
     
     if (! line.startsWith(prefix)) return None
@@ -145,7 +151,14 @@ titles start with lower-case 'i'.
     
     val mid = line.substring(midStart, midEnd)
     val lang = line.substring(langStart, langEnd)
-    val title = line.substring(titleStart, titleEnd)
+    var title = line.substring(titleStart, titleEnd)
+    
+    // Some Freebase URIs are percent-encoded - let's decode them
+    title = UriDecoder.decode(title)
+    
+    // Now let's re-encode the parts that we really want encoded.
+    // Also, some Freebase URIs contain percent signs that we need to encode.
+    title = StringUtils.escape(title, replacements)
     
     return Some(new Quad(lang, null, "http://"+lang+".dbpedia.org/resource/"+title, sameAs, "http://rdf.freebase.com/ns/m."+mid, null, null))
   }
