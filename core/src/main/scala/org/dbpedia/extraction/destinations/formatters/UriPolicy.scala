@@ -10,6 +10,9 @@ import scala.collection.Map
 import scala.collection.mutable.{ArrayBuffer,HashMap}
 import scala.collection.JavaConversions.asScalaSet
 
+/**
+ * TODO: use scala.collection.Map[String, String] instead of java.util.Properties?
+ */
 object UriPolicy {
   
   /**
@@ -129,10 +132,14 @@ object UriPolicy {
         val suffix = key.substring(dottedPrefix.length)
         
         val settings = splitValue(config, key, ';')
-        require(settings.length == 2, "key '"+key+"' must have two values separated by ';' - file format and uri policy name")
+        require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy name")
         
-        val formatter = formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString("'","','","'")))
-        val policy = policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
+        val formatter =
+          formatters.getOrElse(settings(0), throw error("first value for key '"+key+"' is '"+settings(0)+"' but must be one of "+formatters.keys.toSeq.sorted.mkString("'","','","'")))
+        
+        val policy =
+          if (settings.length == 1) null
+          else policies.getOrElse(settings(1), throw error("second value for key '"+key+"' is '"+settings(1)+"' but must be a configured uri-policy, i.e. one of "+policies.keys.mkString("'","','","'")))
         
         formats(suffix) = formatter.apply(policy)
       }

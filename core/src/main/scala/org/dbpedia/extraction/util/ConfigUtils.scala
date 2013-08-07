@@ -10,6 +10,9 @@ import scala.collection.mutable.{HashSet,HashMap}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 
 
+/**
+ * TODO: use scala.collection.Map[String, String] instead of java.util.Properties?
+ */
 object ConfigUtils {
   
   def loadConfig(file: String, charset: String): Properties = {
