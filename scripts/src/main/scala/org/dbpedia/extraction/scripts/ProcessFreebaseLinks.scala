@@ -14,7 +14,7 @@ import org.dbpedia.extraction.util.IOUtils
 /**
  * See https://developers.google.com/freebase/data for a reference of the Freebase RDF data dumps
  */
-object CreateFreebaseLinks
+object ProcessFreebaseLinks
 {
   def main(args : Array[String]) {
     require(args != null && args.length == 1 && args(0).nonEmpty, "missing required argument: config file name")
