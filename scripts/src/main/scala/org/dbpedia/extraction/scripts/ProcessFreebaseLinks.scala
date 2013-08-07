@@ -98,7 +98,7 @@ object ProcessFreebaseLinks
     logRead("line", lineCount, startNanos)
     logRead("link", linkCount, startNanos)
     
-    err.println("links for these languages were found but not written because configuration didn't include them: "+undefined.mkString(","))
+    err.println("links for these languages were found but not written because configuration didn't include them: "+undefined.mkString("[",",","]"))
   }
 
 /*
