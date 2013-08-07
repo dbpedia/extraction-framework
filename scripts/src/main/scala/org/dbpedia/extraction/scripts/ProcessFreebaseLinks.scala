@@ -45,7 +45,6 @@ object ProcessFreebaseLinks
     // destinations for all languages
     val destinations = new HashMap[String, Destination]() {
       // This seems to be the only way to avoid creating an Option object during map lookup.
-      // Using null instead of None here and in parseLink() makes the whole process 4% faster. 
       override def default(k: String): Destination = null
     }
     
