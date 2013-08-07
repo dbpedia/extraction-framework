@@ -16,7 +16,7 @@ extends Destination
 {
   override def open() = destinations.values.foreach(_.open())
 
-  override def write(graph : Seq[Quad]) : Unit = {
+  override def write(graph : Traversable[Quad]) : Unit = {
     for((dataset, quads) <- graph.groupBy(_.dataset)) {
       destinations.get(dataset).foreach(_.write(quads))
     }

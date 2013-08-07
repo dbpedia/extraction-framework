@@ -23,7 +23,7 @@ extends Destination
    * but without it, different sequences of quads will be interleaved, which is harder to read
    * and makes certain parsing optimizations impossible.
    */
-  override def write(graph : Seq[Quad]) = synchronized {
+  override def write(graph : Traversable[Quad]) = synchronized {
     for(quad <- graph) {
       writer.write(formatter.render(quad))
     }
