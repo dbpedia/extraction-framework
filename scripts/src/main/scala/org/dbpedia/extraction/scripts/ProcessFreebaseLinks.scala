@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.{File,Writer}
+import java.io.File
 import scala.Console.err
 import scala.collection.mutable.{ArrayBuffer,HashMap,TreeSet}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
