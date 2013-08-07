@@ -19,7 +19,9 @@ import org.dbpedia.extraction.destinations.formatters.UriPolicy
 object QuadMapper {
   
   /**
+   * @deprecated use one of the map functions below 
    */
+  @Deprecated
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, auto: Boolean = false, required: Boolean = true)(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
     mapQuads(finder.language.wikiCode, finder.find(input, auto), finder.find(output), required)(map)
