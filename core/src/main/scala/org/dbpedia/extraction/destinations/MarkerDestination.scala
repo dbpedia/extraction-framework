@@ -23,7 +23,7 @@ extends Destination
     destination.open()
   }
 
-  override def write(graph: Seq[Quad]): Unit = {
+  override def write(graph: Traversable[Quad]): Unit = {
     destination.write(graph)
   } 
 

@@ -13,10 +13,10 @@ extends Destination
     
     override def open() = destination.open()
     
-    override def write(graph : Seq[Quad]) = if (count < limit) {
-      val quads = if (count + graph.length <= limit) graph else graph.take(limit - count)
+    override def write(graph : Traversable[Quad]) = if (count < limit) {
+      val quads = if (count + graph.size <= limit) graph else graph.take(limit - count)
       destination.write(quads)
-      count += quads.length
+      count += quads.size
     }
 
     override def close() = destination.close()

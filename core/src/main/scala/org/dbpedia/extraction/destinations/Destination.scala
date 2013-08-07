@@ -15,7 +15,7 @@ trait Destination
    * Writes quads to this destination. Implementing classes should make sure that this method
    * can safely be executed concurrently by multiple threads.
    */
-  def write(graph : Seq[Quad]): Unit
+  def write(graph : Traversable[Quad]): Unit
 
   /**
    * Closes this destination. This method should only be called once during the lifetime
