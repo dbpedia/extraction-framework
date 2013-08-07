@@ -11,7 +11,7 @@ import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestinatio
 import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
-import org.dbpedia.extraction.util.IOUtils
+import org.dbpedia.extraction.util.IOUtils.{readLines,writer}
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.util.text.uri.UriDecoder
 import org.dbpedia.extraction.util.WikiUtil
@@ -55,7 +55,7 @@ object ProcessFreebaseLinks
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
         val file = finder.file(date, output+'.'+suffix)
-        formatDestinations += new WriterDestination(writer(file), format)
+        formatDestinations += new WriterDestination(() => writer(file), format)
       }
       destinations(language.wikiCode) = new CompositeDestination(formatDestinations.toSeq: _*)
     }
@@ -76,7 +76,7 @@ object ProcessFreebaseLinks
     // Freebase files are huge - use Long to count lines, not Int
     var lineCount = 0L
     var linkCount = 0L
-    IOUtils.readLines(inputFile) { line =>
+    readLines(inputFile) { line =>
       if (line != null) {
         val quad = parseLink(line)
         if (quad != null) {
@@ -181,10 +181,6 @@ titles start with lower-case 'i'.
   private def logRead(name: String, count: Long, startNanos: Long): Unit = {
     val micros = (System.nanoTime - startNanos) / 1000
     err.println(name+"s: "+count+" in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per "+name+")")
-  }
-
-  private def writer(file: File): () => Writer = {
-    () => IOUtils.writer(file)
   }
 
   private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
