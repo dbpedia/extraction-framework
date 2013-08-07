@@ -147,7 +147,13 @@ class LiveExtractionJob(extractor : RootExtractor, source : Source, language : L
                     //var actualDestination = destination.asInstanceOf[LiveUpdateDestination];
 
                     destination.open();
-                    destination.write(graph);
+
+                    // FIXME FIXME FIXME: LiveDestination used to extend Destination. LiveDestination inherited write(Seq[Quad])
+                    // but changed it to always throw an exception, so I don't see how the following line could have worked.
+                    // There are two new write() methods in LiveDestination. One of these should probably be used here.
+                    // jcsahnwaldt 2013-08-07 
+                    // destination.write(graph);
+
                     destination.close();
                     //_progress.synchronized(_progress.extractedPages +=1);
                     true
