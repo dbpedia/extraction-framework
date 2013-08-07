@@ -43,7 +43,9 @@ object ProcessFreebaseLinks
     val formats = parseFormats(config, "uri-policy", "format")
 
     // destinations for all languages
-    val destinations = new HashMap[String, Destination]()
+    val destinations = new HashMap[String, Destination]() {
+      override def default(k: String): Destination = null
+    }
     
     for (language <- languages) {
       val finder = new Finder[File](baseDir, language, "wiki")
@@ -66,7 +68,7 @@ object ProcessFreebaseLinks
     quads += null
     
     val startNanos = System.nanoTime
-    err.println("reading Freebase file, writing DBpedia files...")
+    err.println("reading Freebase file "+input+", writing DBpedia files...")
     
     destinations.values.foreach(_.open())
     
@@ -75,12 +77,13 @@ object ProcessFreebaseLinks
     var linkCount = 0L
     IOUtils.readLines(inputFile) { line =>
       if (line != null) {
-        for (quad <- parseLink(line)) {
-          val destination = destinations.get(quad.language)
+        val quad = parseLink(line)
+        if (quad != null) {
+          val destination = destinations(quad.language)
           // write quad if there is some destination for this language
-          if (destination.isDefined) {
+          if (destination != null) {
             quads(0) = quad
-            destination.get.write(quads)
+            destination.write(quads)
             linkCount += 1
             if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
           }
@@ -136,26 +139,26 @@ titles start with lower-case 'i'.
   // store our own private copy of the mutable array
   private val replacements = WikiUtil.iriReplacements
   
-  private def parseLink(line: String): Option[Quad] = {
+  private def parseLink(line: String): Quad = {
     
-    if (! line.startsWith(prefix)) return None
+    if (! line.startsWith(prefix)) return null
     
     val midEnd = line.indexOf('\t', midStart)
-    if (midEnd == -1) return None
+    if (midEnd == -1) return null
     
-    if (! line.startsWith(infix, midEnd)) return None
+    if (! line.startsWith(infix, midEnd)) return null
     val langStart = midEnd + infixLength
     
     val langEnd = line.indexOf('.', langStart)
-    if (langEnd == -1) return None
+    if (langEnd == -1) return null
     
-    if (! line.startsWith(wikipedia, langEnd)) return None
+    if (! line.startsWith(wikipedia, langEnd)) return null
     val titleStart = langEnd + wikipediaLength
     
     // exclude ".../wiki/index.html?curid=..." lines
-    if (line.charAt(titleStart) == 'i') return None
+    if (line.charAt(titleStart) == 'i') return null
     
-    if (! line.endsWith(suffix)) return None
+    if (! line.endsWith(suffix)) return null
     val titleEnd = line.length - suffixLength
     
     val mid = line.substring(midStart, midEnd)
@@ -165,11 +168,14 @@ titles start with lower-case 'i'.
     // Some Freebase URIs are percent-encoded - let's decode them
     title = UriDecoder.decode(title)
     
+    // Freebase has some references to sections. Hardly any use for DBpedia.
+    if (title.indexOf('#') != -1) return null
+    
     // Now let's re-encode the parts that we really want encoded.
     // Also, some Freebase URIs contain percent signs that we need to encode.
     title = StringUtils.escape(title, replacements)
     
-    return Some(new Quad(lang, null, "http://"+lang+".dbpedia.org/resource/"+title, sameAs, "http://rdf.freebase.com/ns/m."+mid, null, null))
+    return new Quad(lang, null, "http://"+lang+".dbpedia.org/resource/"+title, sameAs, "http://rdf.freebase.com/ns/m."+mid, null, null)
   }
 
   private def logRead(name: String, count: Long, startNanos: Long): Unit = {
