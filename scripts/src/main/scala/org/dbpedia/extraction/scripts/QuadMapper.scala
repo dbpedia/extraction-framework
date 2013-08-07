@@ -11,7 +11,7 @@ import java.io.File
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
-import org.dbpedia.extraction.destinations.formatters.UriPolicy
+import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
 
 /**
  * Maps old quads/triples to new quads/triples.
@@ -73,13 +73,17 @@ object QuadMapper {
   
   /**
    */
-  def mapQuads(tag: String, inFile: FileLike[_], outFile: FileLike[_], required: Boolean, quads: Boolean, turtle: Boolean, policies: Array[UriPolicy.Policy] = null)(map: Quad => Traversable[Quad]): Unit = {
+  def mapQuads(tag: String, inFile: FileLike[_], outFile: FileLike[_], required: Boolean, quads: Boolean, turtle: Boolean, policies: Array[Policy] = null)(map: Quad => Traversable[Quad]): Unit = {
     err.println(tag+": writing "+outFile+" ...")
     val destination = new WriterDestination(() => writer(outFile), new TerseFormatter(quads, turtle, policies))
     mapQuads(tag, inFile, destination, required)(map)
   }
   
   /**
+   * TODO: do we really want to open and close the destination here? Users may want to map quads
+   * from multiple input files to one destination. On the other hand, if the input file doesn't
+   * exist, we probably shouldn't open the destination at all, so it's ok that it's happening in
+   * this method after checking the input file.
    */
   def mapQuads(tag: String, inFile: FileLike[_], destination: Destination, required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
     
