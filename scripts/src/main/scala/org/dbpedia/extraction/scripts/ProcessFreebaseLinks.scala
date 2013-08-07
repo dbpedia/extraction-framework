@@ -40,10 +40,7 @@ object ProcessFreebaseLinks
     val formats = parseFormats(config, "uri-policy", "format")
 
     // destinations for all languages
-    val destinations = new HashMap[String, Destination]() {
-      // This seems to be the only way to avoid creating an Option object during map lookup 
-      override def default(key: String): Destination = null
-    }
+    val destinations = new HashMap[String, Destination]()
     
     for (language <- languages) {
       val finder = new Finder[File](baseDir, language, "wiki")
@@ -73,15 +70,12 @@ object ProcessFreebaseLinks
     var linkCount = 0L
     IOUtils.readLines(inputFile) { line =>
       if (line != null) {
-        val quad = parseLink(line)
-        if (quad != null) {
-          val destination = destinations(quad.language)
-          if (destination != null) {
-            quads(0) = quad
-            destination.write(quads)
-            linkCount += 1
-            if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
-          }
+        // write quad if there is some destination for this language
+        for (quad <- parseLink(line); destination <- destinations.get(quad.language)) {
+          quads(0) = quad
+          destination.write(quads)
+          linkCount += 1
+          if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
         }
         lineCount += 1
         if (lineCount % 1000000 == 0) logRead("line", lineCount, startNanos)
@@ -127,33 +121,33 @@ titles start with lower-case 'i'.
   
   val sameAs = RdfNamespace.OWL.append("sameAs")
 
-  private def parseLink(line: String): Quad = {
+  private def parseLink(line: String): Option[Quad] = {
     
-    if (! line.startsWith(prefix)) return null
+    if (! line.startsWith(prefix)) return None
     
     val midEnd = line.indexOf('\t', midStart)
-    if (midEnd == -1) return null
+    if (midEnd == -1) return None
     
-    if (! line.startsWith(infix, midEnd)) return null
+    if (! line.startsWith(infix, midEnd)) return None
     val langStart = midEnd + infixLength
     
     val langEnd = line.indexOf('.', langStart)
-    if (langEnd == -1) return null
+    if (langEnd == -1) return None
     
-    if (! line.startsWith(wikipedia, langEnd)) return null
+    if (! line.startsWith(wikipedia, langEnd)) return None
     val titleStart = langEnd + wikipediaLength
     
     // exclude ".../wiki/index.html?curid=..." lines
-    if (line.charAt(titleStart) == 'i') return null
+    if (line.charAt(titleStart) == 'i') return None
     
-    if (! line.endsWith(suffix)) return null
+    if (! line.endsWith(suffix)) return None
     val titleEnd = line.length - suffixLength
     
     val mid = line.substring(midStart, midEnd)
     val lang = line.substring(langStart, langEnd)
     val title = line.substring(titleStart, titleEnd)
     
-    return new Quad(lang, null, "http://"+lang+".dbpedia.org/resource/"+title, sameAs, "http://rdf.freebase.com/ns/m."+mid, null, null)
+    return Some(new Quad(lang, null, "http://"+lang+".dbpedia.org/resource/"+title, sameAs, "http://rdf.freebase.com/ns/m."+mid, null, null))
   }
 
   private def logRead(name: String, count: Long, startNanos: Long): Unit = {
