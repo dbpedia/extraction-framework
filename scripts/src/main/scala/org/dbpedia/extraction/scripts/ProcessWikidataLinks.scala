@@ -2,7 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import java.util.Arrays.{copyOf,sort}
 import java.io.{File,Writer}
-import scala.Console.{err,out}
+import scala.Console.err
 import scala.collection.Map
 import scala.collection.mutable.{HashMap,ArrayBuffer}
 import org.dbpedia.extraction.util.{Finder,Language}
