@@ -1,7 +1,9 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.{File,Writer}
+import scala.Console.err
 import scala.collection.mutable.ArrayBuffer
+import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getFile,splitValue}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import org.dbpedia.extraction.destinations.formatters.Formatter
@@ -27,6 +29,7 @@ object ProcessFreebaseLinks
     
     val input = config.getProperty("input")
     if (input == null) throw error("property 'input' not defined.")
+    val inputFile = new File(baseDir, input)
     
     val output = config.getProperty("output")
     if (output == null) throw error("property 'output' not defined.")
@@ -54,6 +57,31 @@ object ProcessFreebaseLinks
       lang += 1
     }
     
+    val prefix = "ns:m."
+    
+    val startNanos = System.nanoTime
+    err.println("reading Freebase file...")
+    
+    var lineCount = 0
+    var linkCount = 0
+    IOUtils.readLines(inputFile) { line =>
+      if (line != null) {
+        if (line.startsWith(prefix)) {
+          linkCount += 1
+          if (linkCount % 1000000 == 0) logRead("link", linkCount, startNanos)
+        }
+        lineCount += 1
+        if (lineCount % 1000000 == 0) logRead("line", lineCount, startNanos)
+      }
+    }
+    logRead("line", lineCount, startNanos)
+    logRead("link", linkCount, startNanos)
+    
+  }
+
+  private def logRead(name: String, count: Int, startNanos: Long): Unit = {
+    val micros = (System.nanoTime - startNanos) / 1000
+    err.println(name+"s: read "+count+" in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per "+name+")")
   }
 
   private def writer(file: File): () => Writer = {
