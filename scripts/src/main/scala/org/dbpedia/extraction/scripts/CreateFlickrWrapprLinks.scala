@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.scripts
 
+import scala.Console.err
 import java.io.File
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
@@ -10,7 +11,6 @@ import scala.collection.mutable.{ArrayBuffer,HashSet}
 import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.Finder
-import java.net.URI
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -112,19 +112,30 @@ object CreateFlickrWrapprLinks {
       // Initialize first element
       quads += null
       
+      err.println(language.wikiCode+": writing triples...")
+      val startNanos = System.nanoTime
+      
       destination.open()
       
+      var count = 0
       for (title <- titles) {
         val subj = subjPrefix + title
         val obj = objPrefix + title
         quads(0) = new Quad(null, null, subj, pred, obj, null, null: String)
         destination.write(quads)
+        count += 1
+        if (count % 100000 == 0) logWrite(language.wikiCode, count, startNanos)
       }
       
       destination.close()
       
     }
 
+  }
+  
+  private def logWrite(name: String, count: Int, startNanos: Long): Unit = {
+    val micros = (System.nanoTime - startNanos) / 1000
+    err.println(name+": wrote "+count+" triples in "+StringUtils.prettyMillis(micros / 1000)+" ("+(micros.toFloat / count)+" micros per triple)")
   }
   
   private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
