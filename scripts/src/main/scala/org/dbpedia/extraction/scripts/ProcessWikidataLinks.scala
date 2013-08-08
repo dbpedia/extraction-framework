@@ -82,7 +82,7 @@ object ProcessWikidataLinks {
     
     val output = getString(config, "output", true)
     
-    val languages = parseLanguages(baseDir, splitValue(config, "languages", ','))
+    val languages = parseLanguages(baseDir, splitValue(config, "languages", ',', true))
     
     val formats = parseFormats(config, "uri-policy", "format")
     

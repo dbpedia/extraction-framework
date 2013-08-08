@@ -42,7 +42,7 @@ private class Config(config: Properties)
   val namespaces = loadNamespaces()
   
   private def loadNamespaces(): Set[Namespace] = {
-    val names = splitValue(config, "namespaces", ',')
+    val names = splitValue(config, "namespaces", ',', false)
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
     // Special case for namespace "Main" - its Wikipedia name is the empty string ""
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
@@ -57,10 +57,7 @@ private class Config(config: Properties)
   {
     val languages = loadLanguages()
 
-    //Load extractor classes
-    if(config.getProperty("extractors") == null) throw error("Property 'extractors' not defined.")
-    
-    val stdExtractors = splitValue(config, "extractors", ',').toList.map(loadExtractorClass)
+    val stdExtractors = splitValue(config, "extractors", ',', false).toList.map(loadExtractorClass)
 
     //Create extractor map
     val classes = new HashMap[Language, List[Class[_ <: Extractor]]]()
@@ -81,7 +78,7 @@ private class Config(config: Properties)
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("extractors.")) {
         val language = Language(key.substring("extractors.".length()))
-        classes(language) = stdExtractors ++ splitValue(config, key, ',').map(loadExtractorClass)
+        classes(language) = stdExtractors ++ splitValue(config, key, ',', true).map(loadExtractorClass)
       }
     }
 
@@ -95,7 +92,7 @@ private class Config(config: Properties)
     // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
     // extract=mapped:MappingExtractor means all languages with a mapping namespace
     
-    val keys = splitValue(config, "languages", ',')
+    val keys = splitValue(config, "languages", ',', false)
         
     var languages = Set[Language]()
     
