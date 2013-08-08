@@ -132,6 +132,7 @@ object CreateFlickrWrapprLinks {
       
       destination.close()
       
+      logWrite(language.wikiCode, count, startNanos)
     }
 
   }
