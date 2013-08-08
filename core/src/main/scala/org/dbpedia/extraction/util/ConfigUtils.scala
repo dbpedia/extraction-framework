@@ -27,9 +27,16 @@ object ConfigUtils {
   
   def getFile(config: Properties, key: String, required: Boolean): File = {
     val string = getString(config, key, required)
-    if (string == null) null else new File(string)
+    if (string == null) null
+    else new File(string)
   }
   
+  def splitValue(config: Properties, key: String, sep: Char, required: Boolean): Array[String] = {
+    val string = getString(config, key, required)
+    if (string == null) Array.empty
+    else string.trimSplit(sep)
+  }
+
   def getString(config: Properties, key: String, required: Boolean): String = {
     val string = config.getProperty(key)
     if (string != null) string
@@ -37,12 +44,6 @@ object ConfigUtils {
     else throw new IllegalArgumentException("property '"+key+"' not defined.")
   }
   
-  def splitValue(config: Properties, key: String, sep: Char): Array[String] = {
-    val values = config.getProperty(key)
-    if (values == null) Array.empty
-    else values.trimSplit(sep)
-  }
-
   /**
    * @param baseDir directory of wikipedia.csv, needed to resolve article count ranges
    * @param args array of space- or comma-separated language codes or article count ranges

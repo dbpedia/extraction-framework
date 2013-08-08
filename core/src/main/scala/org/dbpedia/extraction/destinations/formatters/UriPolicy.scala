@@ -131,7 +131,7 @@ object UriPolicy {
         
         val suffix = key.substring(dottedPrefix.length)
         
-        val settings = splitValue(config, key, ';')
+        val settings = splitValue(config, key, ';', true)
         require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy name")
         
         val formatter =
