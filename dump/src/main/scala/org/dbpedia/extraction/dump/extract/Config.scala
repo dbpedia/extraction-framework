@@ -11,7 +11,7 @@ import scala.collection.Map
 import scala.collection.immutable.{SortedSet,SortedMap}
 import org.dbpedia.extraction.util.{Language,WikiInfo}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
-import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange,splitValue,getFile}
+import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange,getValue,getStrings}
 import org.dbpedia.extraction.util.RichString.wrapString
 import scala.io.Codec
 
@@ -20,7 +20,7 @@ private class Config(config: Properties)
   // TODO: get rid of all config file parsers, use Spring
 
   /** Dump directory */
-  val dumpDir = getFile(config, "base-dir", true)
+  val dumpDir = getValue(config, "base-dir", true)(new File(_))
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
@@ -30,10 +30,10 @@ private class Config(config: Properties)
   val wikiName = config.getProperty("wikiName", "wiki")
 
   /** Local ontology file, downloaded for speed and reproducibility */
-  val ontologyFile = getFile(config, "ontology", false)
+  val ontologyFile = getValue(config, "ontology", false)(new File(_))
 
   /** Local mappings files, downloaded for speed and reproducibility */
-  val mappingsDir = getFile(config, "mappings", false)
+  val mappingsDir = getValue(config, "mappings", false)(new File(_))
   
   val formats = parseFormats(config, "uri-policy", "format")
 
@@ -42,7 +42,7 @@ private class Config(config: Properties)
   val namespaces = loadNamespaces()
   
   private def loadNamespaces(): Set[Namespace] = {
-    val names = splitValue(config, "namespaces", ',', false)
+    val names = getStrings(config, "namespaces", ',', false)
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
     // Special case for namespace "Main" - its Wikipedia name is the empty string ""
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
@@ -57,7 +57,7 @@ private class Config(config: Properties)
   {
     val languages = loadLanguages()
 
-    val stdExtractors = splitValue(config, "extractors", ',', false).toList.map(loadExtractorClass)
+    val stdExtractors = getStrings(config, "extractors", ',', false).toList.map(loadExtractorClass)
 
     //Create extractor map
     val classes = new HashMap[Language, List[Class[_ <: Extractor]]]()
@@ -78,7 +78,7 @@ private class Config(config: Properties)
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("extractors.")) {
         val language = Language(key.substring("extractors.".length()))
-        classes(language) = stdExtractors ++ splitValue(config, key, ',', true).map(loadExtractorClass)
+        classes(language) = stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)
       }
     }
 
@@ -92,7 +92,7 @@ private class Config(config: Properties)
     // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
     // extract=mapped:MappingExtractor means all languages with a mapping namespace
     
-    val keys = splitValue(config, "languages", ',', false)
+    val keys = getStrings(config, "languages", ',', false)
         
     var languages = Set[Language]()
     

@@ -6,7 +6,7 @@ import scala.Console.err
 import scala.collection.Map
 import scala.collection.mutable.{HashMap,ArrayBuffer}
 import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getFile,splitValue}
+import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
 import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
@@ -75,14 +75,14 @@ object ProcessWikidataLinks {
 
     val config = loadConfig(args(0), "UTF-8")
     
-    val baseDir = getFile(config, "base-dir", true)
+    val baseDir = getValue(config, "base-dir", true)(new File(_))
     if (! baseDir.exists) throw error("dir "+baseDir+" does not exist")
     
     val input = getString(config, "input", true)
     
     val output = getString(config, "output", true)
     
-    val languages = parseLanguages(baseDir, splitValue(config, "languages", ',', true))
+    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
     
     val formats = parseFormats(config, "uri-policy", "format")
     

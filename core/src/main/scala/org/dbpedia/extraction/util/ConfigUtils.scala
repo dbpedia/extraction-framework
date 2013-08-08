@@ -25,18 +25,22 @@ object ConfigUtils {
     config
   }
   
-  def getFile(config: Properties, key: String, required: Boolean): File = {
-    val string = getString(config, key, required)
-    if (string == null) null
-    else new File(string)
+  def getValues[T](config: Properties, key: String, sep: Char, required: Boolean)(map: String => T): Seq[T] = {
+    getStrings(config, key, sep, required).map(map(_))
   }
-  
-  def splitValue(config: Properties, key: String, sep: Char, required: Boolean): Array[String] = {
+
+  def getStrings(config: Properties, key: String, sep: Char, required: Boolean): Seq[String] = {
     val string = getString(config, key, required)
-    if (string == null) Array.empty
+    if (string == null) Seq.empty
     else string.trimSplit(sep)
   }
 
+  def getValue[T](config: Properties, key: String, required: Boolean)(map: String => T): T = {
+    val string = getString(config, key, required)
+    if (string == null) null.asInstanceOf[T]
+    else map(string)
+  }
+  
   def getString(config: Properties, key: String, required: Boolean): String = {
     val string = config.getProperty(key)
     if (string != null) string
@@ -50,7 +54,7 @@ object ConfigUtils {
    * @return languages, sorted by language code
    */
   // TODO: copy & paste in org.dbpedia.extraction.dump.download.DownloadConfig, org.dbpedia.extraction.dump.extract.Config
-  def parseLanguages(baseDir: File, args: Array[String]): Array[Language] = {
+  def parseLanguages(baseDir: File, args: Seq[String]): Array[Language] = {
     
     var keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
         
