@@ -4,7 +4,7 @@ import java.io.File
 import scala.Console.err
 import scala.collection.mutable.{ArrayBuffer,HashMap,TreeSet}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getFile,splitValue}
+import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getFile,splitValue}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
@@ -27,16 +27,13 @@ object ProcessFreebaseLinks
 
     val config = loadConfig(args(0), "UTF-8")
     
-    val baseDir = getFile(config, "base-dir")
-    if (baseDir == null) throw error("property 'base-dir' not defined.")
+    val baseDir = getFile(config, "base-dir", true)
     if (! baseDir.exists) throw error("dir "+baseDir+" does not exist")
     
-    val input = config.getProperty("input")
-    if (input == null) throw error("property 'input' not defined.")
+    val input = getString(config, "input", true)
     val inputFile = new File(baseDir, input)
     
-    val output = config.getProperty("output")
-    if (output == null) throw error("property 'output' not defined.")
+    val output = getString(config, "output", true)
     
     val languages = parseLanguages(baseDir, splitValue(config, "languages", ','))
     

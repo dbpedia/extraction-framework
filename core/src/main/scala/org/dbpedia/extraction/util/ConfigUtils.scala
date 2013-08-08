@@ -25,9 +25,16 @@ object ConfigUtils {
     config
   }
   
-  def getFile(config: Properties, key: String): File = {
-    val value = config.getProperty(key)
-    if (value == null) null else new File(value)
+  def getFile(config: Properties, key: String, required: Boolean): File = {
+    val string = getString(config, key, required)
+    if (string == null) null else new File(string)
+  }
+  
+  def getString(config: Properties, key: String, required: Boolean): String = {
+    val string = config.getProperty(key)
+    if (string != null) string
+    else if (! required) null
+    else throw new IllegalArgumentException("property '"+key+"' not defined.")
   }
   
   def splitValue(config: Properties, key: String, sep: Char): Array[String] = {

@@ -20,8 +20,7 @@ private class Config(config: Properties)
   // TODO: get rid of all config file parsers, use Spring
 
   /** Dump directory */
-  val dumpDir = getFile(config, "base-dir")
-  if (dumpDir == null) throw error("property 'base-dir' not defined.")
+  val dumpDir = getFile(config, "base-dir", true)
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
@@ -31,10 +30,10 @@ private class Config(config: Properties)
   val wikiName = config.getProperty("wikiName", "wiki")
 
   /** Local ontology file, downloaded for speed and reproducibility */
-  val ontologyFile = getFile(config, "ontology")
+  val ontologyFile = getFile(config, "ontology", false)
 
   /** Local mappings files, downloaded for speed and reproducibility */
-  val mappingsDir = getFile(config, "mappings")
+  val mappingsDir = getFile(config, "mappings", false)
   
   val formats = parseFormats(config, "uri-policy", "format")
 
