@@ -1,0 +1,134 @@
+package org.dbpedia.extraction.scripts
+
+import java.io.File
+import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
+import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
+import scala.collection.Set
+import scala.collection.mutable
+import scala.collection.mutable.{ArrayBuffer,HashSet}
+import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
+import org.dbpedia.extraction.util.IOUtils.writer
+import org.dbpedia.extraction.util.Finder
+import java.net.URI
+import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.util.TurtleUtils
+import org.dbpedia.util.text.uri.UriDecoder
+import org.dbpedia.extraction.util.StringUtils
+import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.extraction.wikiparser.WikiTitle
+
+object CreateFlickrWrapprLinks {
+  
+  def main(args: Array[String]): Unit = {
+    require(args != null && args.length == 1 && args(0).nonEmpty, "missing required argument: config file name")
+
+    val config = loadConfig(args(0), "UTF-8")
+    
+    val baseDir = getValue(config, "base-dir", true)(new File(_))
+    if (! baseDir.exists) throw error("dir "+baseDir+" does not exist")
+    
+    val include = getStrings(config, "include-subjects", ',', true)
+    val exclude = getStrings(config, "exclude-subjects", ',', true)
+    
+    val names = getStrings(config, "namespaces", ',', false)
+    val namespaces =
+      if (names.isEmpty) null
+      // Special case for namespace "Main" - its Wikipedia name is the empty string ""
+      else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
+
+    val output = getString(config, "output", true)
+    
+    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
+    
+    val predSuffix = getString(config, "property-suffix", true)
+    
+    val objPrefix = getString(config, "object-prefix", true)
+    
+    val generic = getValue(config, "generic", false)(Language(_))
+    
+    val formats = parseFormats(config, "uri-policy", "format")
+    
+    // store our own private copy of the mutable array
+    val replacements = WikiUtil.iriReplacements
+    
+    for (language <- languages) {
+      
+      val property = language.propertyUri.append("hasPhotoCollection")
+
+      val finder = new Finder[File](baseDir, language, "wiki")
+      val date = finder.dates().last
+      
+      val subjPrefix = if (language == generic) "http://dbpedia.org/resource/" else language.resourceUri.append("")
+      val titles = new HashSet[String]
+      
+      def processTitles(name: String, include: Boolean): Unit = {
+        
+        QuadReader.readQuads(language.wikiCode+" "+(if (include) "+" else "-")+" "+name, finder.file(date, name)) { quad =>
+          val subject = quad.subject
+          if (! subject.startsWith(subjPrefix)) error("bad subject: "+subject)
+          
+          var title = subject.substring(subjPrefix.length)
+          
+          title = TurtleUtils.unescapeTurtle(title)
+          
+          if (namespaces == null) {
+            // no need to check namespace - do as little as possible, just turn URI into IRI
+            title = UriDecoder.decode(title)
+            title = StringUtils.escape(title, replacements)
+          }
+          else {
+            // have to check namespace - need full WikiTitle parsing
+            val wiki = WikiTitle.parse(title, language)
+            if (namespaces.contains(wiki.namespace)) title = wiki.encodedWithNamespace
+            else title = null
+          }
+          
+          if (title != null) {
+            if (include) titles += title 
+            else titles -= title
+          }
+        }
+        
+      }
+      
+      for (name <- include) processTitles(name, true)
+      for (name <- exclude) processTitles(name, false)
+      
+      val formatDestinations = new ArrayBuffer[Destination]()
+      for ((suffix, format) <- formats) {
+        val file = finder.file(date, output+'.'+suffix)
+        formatDestinations += new WriterDestination(() => writer(file), format)
+      }
+      val destination = new CompositeDestination(formatDestinations.toSeq: _*)
+      
+      val pred = language.propertyUri.append(predSuffix)
+      
+      // I didn't find a way to create a singleton Seq without a lot of copying, so we re-use this array.
+      // It's silly, but I don't want to be an accomplice in Scala's wanton disregard of efficiency.
+      val quads = new ArrayBuffer[Quad](1)
+      // Initialize first element
+      quads += null
+      
+      destination.open()
+      
+      for (title <- titles) {
+        val subj = subjPrefix + title
+        val obj = objPrefix + title
+        quads(0) = new Quad(null, null, subj, pred, obj, null, null: String)
+        destination.write(quads)
+      }
+      
+      destination.close()
+      
+    }
+
+  }
+  
+  private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
+    new IllegalArgumentException(message, cause)
+  }
+    
+}
