@@ -61,16 +61,19 @@ object CreateFlickrWrapprLinks {
       val finder = new Finder[File](baseDir, language, "wiki")
       val date = finder.dates().last
       
-      val subjPrefix = if (language == generic) "http://dbpedia.org/resource/" else language.resourceUri.append("")
+      val inPrefix = if (language == generic) "http://dbpedia.org/resource/" else language.resourceUri.append("")
+      
+      val subjPrefix = language.resourceUri.append("")
+      
       val titles = new HashSet[String]
       
       def processTitles(name: String, include: Boolean): Unit = {
         
         QuadReader.readQuads(language.wikiCode+": "+(if (include) "add" else "sub")+" uris in "+name, finder.file(date, name)) { quad =>
           val subject = quad.subject
-          if (! subject.startsWith(subjPrefix)) error("bad subject: "+subject)
+          if (! subject.startsWith(inPrefix)) error("bad subject: "+subject)
           
-          var title = subject.substring(subjPrefix.length)
+          var title = subject.substring(inPrefix.length)
           
           title = TurtleUtils.unescapeTurtle(title)
           
@@ -87,7 +90,7 @@ object CreateFlickrWrapprLinks {
           }
           
           if (title != null) {
-            if (include) titles += title 
+            if (include) titles += title
             else titles -= title
           }
         }
