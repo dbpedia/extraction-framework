@@ -3,7 +3,7 @@ package org.dbpedia.extraction.destinations.formatters
 import java.util.Properties
 import java.net.{URISyntaxException, URI}
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.ConfigUtils.splitValue
+import org.dbpedia.extraction.util.ConfigUtils.getStrings
 import org.dbpedia.extraction.util.RichString.wrapString
 import scala.xml.Utility.{isNameChar,isNameStart}
 import scala.collection.Map
@@ -131,7 +131,7 @@ object UriPolicy {
         
         val suffix = key.substring(dottedPrefix.length)
         
-        val settings = splitValue(config, key, ';', true)
+        val settings = getStrings(config, key, ';', true)
         require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy name")
         
         val formatter =
