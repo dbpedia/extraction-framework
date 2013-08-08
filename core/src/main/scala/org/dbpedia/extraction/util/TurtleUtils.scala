@@ -82,7 +82,7 @@ object TurtleUtils {
         i += 2
       }
       else {
-        sb append c
+        sb appendCodePoint c
         i += Character.charCount(c)
       }
     }
