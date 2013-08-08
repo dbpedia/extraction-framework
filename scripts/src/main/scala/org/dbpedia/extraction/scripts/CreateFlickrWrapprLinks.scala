@@ -66,7 +66,7 @@ object CreateFlickrWrapprLinks {
       
       def processTitles(name: String, include: Boolean): Unit = {
         
-        QuadReader.readQuads(language.wikiCode+" "+(if (include) "+" else "-")+" "+name, finder.file(date, name)) { quad =>
+        QuadReader.readQuads(language.wikiCode+": "+(if (include) "add" else "sub")+" uris in "+name, finder.file(date, name)) { quad =>
           val subject = quad.subject
           if (! subject.startsWith(subjPrefix)) error("bad subject: "+subject)
           
