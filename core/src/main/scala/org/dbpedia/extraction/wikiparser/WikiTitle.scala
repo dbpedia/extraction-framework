@@ -102,7 +102,7 @@ object WikiTitle
      * @param link MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
      */
-    def parse(title : String, sourceLanguage : Language) =
+    def parse(title : String, sourceLanguage : Language): WikiTitle =
     {
         val coder = new HtmlCoder(XmlCodes.NONE)
         coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
