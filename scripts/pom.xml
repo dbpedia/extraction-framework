@@ -22,15 +22,24 @@
                 <configuration>
                     <launchers>
                         <launcher>
+                            <id>CreateFlickrWrapprLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CreateFlickrWrapprLinks</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx4G</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>CreateIriSameAsUriLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.CreateIriSameAsUriLinks</mainClass>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-Xmx1024m</jvmArg>
-                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                                <jvmArg>-XX:+PrintGC</jvmArg>
-                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -39,10 +48,7 @@
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-Xmx1024m</jvmArg>
-                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                                <jvmArg>-XX:+PrintGC</jvmArg>
-                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
