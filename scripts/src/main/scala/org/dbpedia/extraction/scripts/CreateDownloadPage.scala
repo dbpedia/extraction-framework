@@ -102,10 +102,13 @@ abstract class Fileset(
 ) 
 {
   // null if data file didn't contain any info about this file
-  def file(language: String, modifier: String, format: String) = {
+  def file(language: String, modifier: String, format: String, required: Boolean) = {
     val p = path(language, modifier, format)
     val t = titles.getOrElse(p, null)
-    if (t == null) null else new FileInfo(p, t)
+    
+    if (t != null) new FileInfo(p, t)
+    else if (! required) null
+    else throw new IllegalArgumentException("found no data for "+p)
   }
   
   protected def path(language: String, modifier: String, format: String): String
@@ -291,7 +294,7 @@ def generate: Unit = {
 def ontologyPage(page: String, anchor: String): Unit = {
   val format = "owl"
     
-  val file = ontology.file("", "", format)
+  val file = ontology.file("", "", format, true)
   
   val s = new StringPlusser+
   mark(page)+
@@ -390,7 +393,7 @@ def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Files
       
       s+"|"
       for (format <- fileset.formats) {
-        val file = fileset.file(language, modifier, format)
+        val file = fileset.file(language, modifier, format, false)
         if (file != null && (fileset.languages || first)) {
           s+
           "<#<small>"+
