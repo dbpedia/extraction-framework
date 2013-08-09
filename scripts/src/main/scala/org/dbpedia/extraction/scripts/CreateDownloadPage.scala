@@ -70,7 +70,7 @@ def loadTitles(file: File): Unit = {
   IOUtils.readLines(file) { line =>
     if (line == null) return // all done
     val parts = line.split("\\s+", -1)
-    if (parts.length != 9) throw new IllegalArgumentException("bad line format")
+    if (parts.length != 7) throw new IllegalArgumentException("bad line format: "+line)
     val path = parts(0)
     val lines = parts(2).toLong
     val bytes = parts(4).toLong
@@ -455,7 +455,7 @@ def mark(page: String): String = {
   "PLEASE DO NOT EDIT THIS WIKI PAGE!\n\n\n" +
   "YOUR CHANGES WILL BE LOST IN THE NEXT RELEASE!\n\n\n" +
   "Please edit CreateDownloadPage.scala instead.\n\n\n" +
-  "Paste the result of CreateDownloadPage.scala here:\n"+
+  "Paste this result page of CreateDownloadPage.scala here:\n"+
   "http://wiki.dbpedia.org/Downloads"+tag(current)+page+"/edit\n\n\n"+
   "-->#>\n\n\n"
 }
