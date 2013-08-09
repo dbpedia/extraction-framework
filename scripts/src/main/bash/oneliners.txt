@@ -4,6 +4,11 @@ for file in $(find -name '*.gz' | sort) ; do echo $file ; gzip -d <$file | bzip2
 # pbzip2 is much faster with multiple cores / CPUs
 for file in $(find -name '*.gz' | sort) ; do echo $file ; gzip -d <$file | pbzip2 -c >${file/%.gz/.bz2} ; done &>compress.log &
 
+# copy (and re-compress) all files listed in files.txt from .gz to .bz2 files on a separate partition
+# in background process, write log output to log file, including timestamps
+# pigz may be faster than gzip even for decompression. pbzip2 is much faster with multiple cores / CPUs.
+( date ; for f in $(cat files.txt) ; do echo $f ; pigz -d </data/dbpedia-release/3.9/$f.gz | pbzip2 -c >/data2/dbpedia-release/3.9/$f.bz2 ; date ; done ) &> files.log &
+
 # Don't overwrite existing non-empty .bz2 files.
 for file in $(find -name '*.gz' | sort) ; do copy=${file/%.gz/.bz2} ; if [[ ! -s $copy ]] ; then echo $file ; gzip -d <$file | pbzip2 -c >$copy ; fi ; done &>compress.log &
 
