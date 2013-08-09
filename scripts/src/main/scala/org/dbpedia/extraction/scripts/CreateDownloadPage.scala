@@ -70,7 +70,7 @@ def loadTitles(file: File): Unit = {
   IOUtils.readLines(file) { line =>
     if (line == null) return // all done
     val parts = line.split("\\s+", -1)
-    if (parts.length != 7) throw new IllegalArgumentException("bad line format: "+line)
+    if (parts.length != 9) throw new IllegalArgumentException("bad line format: "+line)
     val path = parts(0)
     val lines = parts(2).toLong
     val bytes = parts(4).toLong
