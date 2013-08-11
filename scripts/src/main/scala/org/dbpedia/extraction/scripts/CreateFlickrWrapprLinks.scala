@@ -61,6 +61,7 @@ object CreateFlickrWrapprLinks {
       
       val inPrefix = if (language == generic) "http://dbpedia.org/resource/" else language.resourceUri.append("")
       
+      // we have to use the local URI for writing - formatters will make it generic if necessary
       val subjPrefix = language.resourceUri.append("")
       
       val titles = new HashSet[String]
