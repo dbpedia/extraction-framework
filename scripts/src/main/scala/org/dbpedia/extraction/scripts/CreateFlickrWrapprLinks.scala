@@ -56,8 +56,6 @@ object CreateFlickrWrapprLinks {
     
     for (language <- languages) {
       
-      val property = language.propertyUri.append("hasPhotoCollection")
-
       val finder = new Finder[File](baseDir, language, "wiki")
       val date = finder.dates().last
       
