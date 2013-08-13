@@ -3,7 +3,6 @@
 <head>
   <title>DBpedia live statistics</title>
   <meta charset="utf-8" />
-  <meta http-equiv="refresh" content="300"/>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
 
   <link rel="stylesheet" href="statistics.css" type="text/css"/>
@@ -36,9 +35,9 @@ function loadLatest(endpoint, graph, minutes, rows) {
     var query = "SELECT ?wiki, ?dbp, bif:datediff('second',  xsd:DateTime(?extracted), now()) AS ?secondsAgo " +
 	" FROM <" + graph + "> " +
         " WHERE { " +
-        " ?wiki foaf:primaryTopic ?dbp ; " +
-        "  dcterms:dateSubmitted ?extracted; " +
-        "  dcterms:modified ?modified. " +
+        " ?wiki foaf:primaryTopic ?dbp . " +
+        " ?dbp dcterms:modified ?extracted . " +
+        " ?wiki dcterms:modified ?modified. " +
         "  FILTER ( ?extracted > bif:dateadd('minute', -" + minutes +", now())) " +
         " }  " +
         " ORDER BY DESC(?extracted) " +
