@@ -39,7 +39,7 @@ function loadLatest(endpoint, graph, minutes, rows) {
         " ?wiki foaf:primaryTopic ?dbp ; " +
         "  dcterms:dateSubmitted ?extracted; " +
         "  dcterms:modified ?modified. " +
-        " FILTER ( bif:datediff('minute', now(),  xsd:DateTime(?extracted)) <= " + minutes +" ) " +
+        "  FILTER ( ?extracted > bif:dateadd('minute', -" + minutes +", now())) " +
         " }  " +
         " ORDER BY DESC(?extracted) " +
         " LIMIT " + rows;
