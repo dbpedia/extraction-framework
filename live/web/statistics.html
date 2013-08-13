@@ -6,33 +6,58 @@
   <script src="http://code.jquery.com/jquery-latest.js"></script>
 
   <link rel="stylesheet" href="statistics.css" type="text/css"/>
+
+  <style type="text/css">
+      table.detail-table {
+          width:100%;
+      }
+
+      table.detail-table th {
+          background-color: #6969FF;
+          font-weight: bold;
+      }
+
+      table.detail-table td{
+          text-align:center;
+      }
+
+      table.detail-table tr.row-0 {
+          background-color: #F0FFFF;
+      }
+
+      table.detail-table tr.row-1 {
+          background-color: #FFFFDD;
+      }
+
+      p.info {
+          width:100%;
+          text-align:center;
+      }
+
+  </style>
+
   <script language="javascript" type="text/javascript">
 
 // Global Vars
 var endpoint = "http://live.nl.dbpedia.org/sparql";
 var graph    = "http://nl.dbpedia.org";
-var minutes  = 10;
-var rows     = 30;
 
 $(document).ready(function() {
-/*
-    // Get JSON statistics data
-    $.getJSON('statistics.json', function(data) {
-        // Update general statistics
-        var timestamp = data.timestamp;
-//      $("#page-timestamp").html(Date.now() - data.timestamp/1000);
-        $("#updates-1m").html(data.upd1m);
-        $("#updates-5m").html(data.upd5m);
-        $("#updates-1h").html(data.upd1h);
-        $("#updates-1d").html(data.upd1d);
-        $("#updates-at").html(data.updat);
+
+    loadLatest(endpoint, graph);
+
+    $( "#results-refresh" ).click(function() {
+        loadLatest(endpoint, graph);
     });
-*/
-    loadLatest(endpoint, graph, minutes, rows);
 });
 
-function loadLatest(endpoint, graph, minutes, rows) {
-    var query = "SELECT ?wiki, ?dbp, bif:datediff('second',  xsd:DateTime(?extracted), now()) AS ?secondsAgo " +
+function loadLatest(endpoint, graph) {
+
+    var rows    = $('#results-rows').val();
+    var minutes = $('#results-minutes').val();
+    var type    = $('#results-type').val();
+
+    var query = "SELECT ?wiki, ?dbp, bif:datediff('second',  xsd:DateTime(?extracted), now()) AS ?secondsAgo, ?extracted, ?modified " +
 	" FROM <" + graph + "> " +
         " WHERE { " +
         " ?wiki foaf:primaryTopic ?dbp . " +
@@ -40,9 +65,10 @@ function loadLatest(endpoint, graph, minutes, rows) {
         " ?wiki dcterms:modified ?modified. " +
         "  FILTER ( ?extracted > bif:dateadd('minute', -" + minutes +", now())) " +
         " }  " +
-        " ORDER BY DESC(?extracted) " +
+        " ORDER BY DESC(?" + type + ") " +
         " LIMIT " + rows;
     var url = endpoint + "?format=json&query="+encodeURIComponent(query);
+    $("#entity-details").html("<p class=\"info\">Please wait, we are fetching the updates from the endpoint...</p> ");
 
     $.get(url, function(data){
 
@@ -50,27 +76,28 @@ function loadLatest(endpoint, graph, minutes, rows) {
         places = [];
 
         var table='<table class="detail-table">';
-            table+='<tr><th>id</th><th>Title</th><th>Updated</th><th>DBpedia URI</th><th>Wikipedia URI</th><th>Δ</th></tr>';        
+            table+='<tr><th>id</th><th>Title</th><th>Updated</th><th>DBpedia URI</th><th>Extracted</th><th>Wikipedia URI</th><th>Modified</th></tr>';
 
         var diff = 0;
         for(var i = 0; i < results.length; i++){
             var curTime = parseInt(results[i].secondsAgo.value);
 	    if (i == 0 && curTime < 0)
                 diff = -curTime;
-            table += renderRow(i+1, results[i].wiki.value, results[i].dbp.value,curTime + diff);
+            table += renderRow(i+1, results[i].wiki.value, results[i].dbp.value,curTime + diff, results[i].extracted.value, results[i].modified.value);
         }
         table+='</table>';
             $("#entity-details").html(table);
     });
 }
 
-function renderRow(i, wiki, dbp, secondsAgo){
+function renderRow(i, wiki, dbp, secondsAgo, extracted, modified){
     var tableRow='<tr class="row-' + i % 2 + '"><td class="id">'+i+'</td>' +
           '<td class="title">' +  wiki.substr(wiki.lastIndexOf("/")+1)+'</td>' +
           '<td class="timestamp">'+ secondsAgo +' seconds ago</td>' +
           '<td class="uri"><a href="'+dbp.replace("http://", "http://live.")+'">DBpedia</a></td>' +
+          '<td class="timestamp">'+ extracted +'</td>' +
           '<td class="uri"><a href="'+wiki+'">Wikipedia</a></td>' +
-          '<td class="uri"><!--<a href="http://live.nl.dbpedia.org/delta.vsp?uri='+dbp+'">diff</a>-->-</td>' +
+          '<td class="timestamp">'+ modified +'</td>' +
           '</tr>';
 
     return tableRow;
@@ -83,20 +110,19 @@ function renderRow(i, wiki, dbp, secondsAgo){
  
 <h1 >Simple statistics for the DBpedia Dutch live extraction process.</h1>
 
-<p class="info">This page is automatically refreshed every 5 minutes<span id="page-timestamp"></span>.</p>
 
-<!--
-<h2>Entity Statistics</h2>
-Number of instances updated within:
-<ul class ="entity-statistics">
-<li class="entity-statistics-item">last minute:    <span id="updates-1m"></span></li>
-<li class="entity-statistics-item">last 5 minutes: <span id="updates-5m"></span></li>
-<li class="entity-statistics-item">Last hour:      <span id="updates-1h"></span></div>
-<li class="entity-statistics-item">last day:       <span id="updates-1d"></span></li>
-<li class="entity-statistics-item">all time:       <span id="updates-at"></span></li>
-</ul>
--->
-<h2>Recently Updated Entities</h2>
+<p>
+    <strong>Show</strong> the top
+    <input id="results-rows" value="30" size="3"/>
+    entries updated in the past
+    <input id="results-minutes" value="5" size="2"/>
+    minutes, ordered by
+    <select id="results-type">
+        <option value="extracted">extraction in DBpedia</option>
+        <option value="modified">modification in Wikipedia</option>
+    </select>
+    <button id="results-refresh">Refresh results</button>
+</p>
 <div id="entity-details"></div>
 
 </body>
