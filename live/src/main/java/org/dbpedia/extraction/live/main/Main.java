@@ -36,7 +36,7 @@ public class Main {
 
     // TODO make these non-static
 
-    private volatile static Statistics statistics = null;
+    //private volatile static Statistics statistics = null;
 
     private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
@@ -76,8 +76,8 @@ public class Main {
             processors.add( new PageProcessor("N" + (i+1)));
         }
 
-        statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
-                DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());
+        //statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
+        //        DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());
 
 
     }
@@ -93,7 +93,7 @@ public class Main {
 
             publisher = new Publisher("Publisher", 4);
 
-            statistics.startStatistics();
+            //statistics.startStatistics();
 
             logger.info("DBpedia-Live components started");
         } catch (Exception exp) {
@@ -115,7 +115,7 @@ public class Main {
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
 
             // Statistics
-            if (statistics != null) statistics.stopStatistics();
+            //if (statistics != null) statistics.stopStatistics();
 
             // Publisher
             publisher.flush();
