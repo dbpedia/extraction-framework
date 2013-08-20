@@ -34,7 +34,7 @@ val allLanguages = 119
 // CCHECK / UPDATE for new release
 // All languages that have a significant number of mapped articles.
 // en must be first, we use languages.drop(1) in datasetPages()
-val languages = List("en","bg","ca","cs","de","es","eu","fr","hu","id","it","ja","ko","nl","pl","pt","ru","tr")
+val languages = List("en","bg","ca","de","es","eu","fr","id","it","ja","ko","nl","pl","pt","ru","tr")
 
 // UPDATE when DBpedia Wiki changes. Wiki link to page Datasets, section about internationalized datasets.
 val i18nDatasetsSection = "Datasets#h18-19"
@@ -69,7 +69,7 @@ def loadTitles(file: File): Unit = {
   // af/geo_coordinates_af.nt lines:82 bytes:11524 gzip:1141 bzip2:1228
   IOUtils.readLines(file) { line =>
     if (line == null) return // all done
-    val parts = line.split("\\s+|:", -1)
+    val parts = line.split("\\s+", -1)
     if (parts.length != 9) throw new IllegalArgumentException("bad line format: "+line)
     val path = parts(0)
     val lines = parts(2).toLong
@@ -238,9 +238,12 @@ val LinksPage = "Links"
 val DescPage = "Desc"
 val NLPPage = "NLP"
 
+var target: File = null
+
 def main(args: Array[String]) {
-  require(args != null && args.length == 1 && args(0).nonEmpty, "need 1 arg: file containing data file paths and their content numbers")
+  require(args != null && args.length >= 1 && args(0).nonEmpty, "need one arg: file containing data file paths and their content numbers; second arg: target folder (optional)")
   loadTitles(new File(args(0)))
+  if (args.length > 1) target = new File(args(1))
   generate
 }
 
@@ -454,7 +457,7 @@ def nlpPage(page: String): Unit = {
 }
 
 def mark(page: String): String = {
-  "\n<#<!--\n\n\n"+
+  "<#<!--\n\n\n"+
   "PLEASE DO NOT EDIT THIS WIKI PAGE!\n\n\n" +
   "YOUR CHANGES WILL BE LOST IN THE NEXT RELEASE!\n\n\n" +
   "Please edit CreateDownloadPage.scala instead.\n\n\n" +
@@ -468,7 +471,7 @@ def include(page: String): String = {
 }
 
 def write(page: String, content: String): Unit = {
-  val writer = IOUtils.writer(new File("Downloads"+tag(current)+page+".wacko"))
+  val writer = IOUtils.writer(new File(target, "Downloads"+tag(current)+page+".wacko"))
   try writer.write(content)
   finally writer.close()
 }
