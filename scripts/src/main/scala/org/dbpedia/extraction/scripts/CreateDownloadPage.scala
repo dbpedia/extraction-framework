@@ -64,9 +64,9 @@ private def niceBytes(bytes: Long): String = {
 
 def loadTitles(file: File): Unit = {
   // read lines in this format: 
-  // dbpedia_3.9.owl  lines: 4622  bytes: 811552  gzip: 85765  bzip2: 50140
-  // links/revyu_links.nt  lines: 6  bytes: 1008  gzip: 361  bzip2: 441
-  // af/geo_coordinates_af.nt lines: 82 bytes: 11524 gzip: 1141 bzip2: 1228
+  // dbpedia_3.9.owl lines:4622 bytes:811552 gzip:85765 bzip2:50140
+  // links/revyu_links.nt lines:6 bytes:1008 gzip:361 bzip2:441
+  // af/geo_coordinates_af.nt lines:82 bytes:11524 gzip:1141 bzip2:1228
   IOUtils.readLines(file) { line =>
     if (line == null) return // all done
     val parts = line.split("\\s+|:", -1)
