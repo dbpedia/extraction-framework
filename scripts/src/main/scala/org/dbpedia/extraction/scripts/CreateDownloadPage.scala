@@ -34,7 +34,7 @@ val allLanguages = 119
 // CCHECK / UPDATE for new release
 // All languages that have a significant number of mapped articles.
 // en must be first, we use languages.drop(1) in datasetPages()
-val languages = List("en","bg","ca","de","es","eu","fr","id","it","ja","ko","nl","pl","pt","ru","tr")
+val languages = List("en","ca","de","es","eu","fr","id","it","ja","ko","nl","pl","pt","ru","tr")
 
 // UPDATE when DBpedia Wiki changes. Wiki link to page Datasets, section about internationalized datasets.
 val i18nDatasetsSection = "Datasets#h18-19"
