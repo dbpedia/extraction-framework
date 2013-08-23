@@ -20,11 +20,7 @@
 
     <modules>
         <module>core</module>
-        <module>server</module>
-        <module>dump</module>
         <module>scripts</module>
-        <module>live</module>
-        <module>wiktionary</module>
     </modules>
 
     <build>
@@ -86,6 +82,25 @@
                     <source>${java.compiler.version}</source>
                     <target>${java.compiler.version}</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.3.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>1.7</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
