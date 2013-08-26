@@ -97,8 +97,7 @@ abstract class Fileset(
   val name: String,
   val file: String,
   val text: String,
-  val formats: List[String],
-  val languages: Boolean
+  val formats: List[String]
 ) 
 {
   // null if data file didn't contain any info about this file
@@ -117,21 +116,21 @@ abstract class Fileset(
 }
 
 class Ontology(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("owl"), false)
+extends Fileset(name, file, text, List("owl"))
 {
   // dbpedia_3.9.owl
   override protected def path(language: String, modifier: String, format: String) = file+modifier+"."+format
 }
 
 class Dataset(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("nt", "nq", "ttl"), true)
+extends Fileset(name, file, text, List("nt", "nq", "ttl"))
 {  
   // example: af/geo_coordinates_af.nt
   override protected def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"_"+language+"."+format
 }
 
 class Linkset(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("nt"), false)
+extends Fileset(name, file, text, List("nt"))
 {
   // example: links/revyu_links.nt
   override protected def path(language: String, modifier: String, format: String) = "links/"+file+modifier+"_links."+format
@@ -398,7 +397,7 @@ def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Files
       s+"|"
       for (format <- fileset.formats) {
         val file = fileset.file(language, modifier, format, false)
-        if (file != null && (fileset.languages || first)) {
+        if (file != null) {
           s+
           "<#<small>"+
           "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a>\u00A0"+ // 00A0 is non-breaking space
