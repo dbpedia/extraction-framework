@@ -80,6 +80,13 @@ def loadTitles(file: File): Unit = {
   }
 }
 
+val OntologyPage = "Ontology"
+val DataC14NPage = "DataC14N"
+val DataL10NPage = "DataL10N"
+val LinksPage = "Links"
+val DescPage = "Desc"
+val NLPPage = "NLP"
+
 // path: dbpedia_3.9.owl, af/geo_coordinates_af.nq, links/revyu_links.nt
 class FileInfo(val path: String, val title: String) {
   
@@ -97,7 +104,8 @@ abstract class Fileset(
   val name: String,
   val file: String,
   val text: String,
-  val formats: List[String]
+  val formats: List[String],
+  val pages: Set[String]
 ) 
 {
   // null if data file didn't contain any info about this file
@@ -110,31 +118,26 @@ abstract class Fileset(
     else throw new IllegalArgumentException("found no data for "+p)
   }
   
-  protected def path(language: String, modifier: String, format: String): String
+  // example: links/revyu_links.nt
+  // example: af/geo_coordinates_af.nt
+  def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"_"+language+"."+format
   
   def anchor(prefix: String = "") = (prefix+name).replaceChars(" ()", "-").toLowerCase(Locale.ENGLISH)
 }
 
 class Ontology(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("owl"))
+extends Fileset(name, file, text, List("owl"), Set(OntologyPage))
 {
   // dbpedia_3.9.owl
-  override protected def path(language: String, modifier: String, format: String) = file+modifier+"."+format
+  override def path(language: String, modifier: String, format: String) = file+modifier+"."+format
 }
 
-class Dataset(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("nt", "nq", "ttl"))
-{  
-  // example: af/geo_coordinates_af.nt
-  override protected def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"_"+language+"."+format
-}
+class Dataset(name: String, file: String, text: String, pages: Set[String] = null)
+extends Fileset(name, file, text, List("nt", "nq", "ttl"), pages)
 
 class Linkset(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("nt"))
-{
-  // example: links/revyu_links.nt
-  override protected def path(language: String, modifier: String, format: String) = "links/"+file+modifier+"_links."+format
-}
+extends Fileset(name, file, text, List("nt"), Set(LinksPage))
+
 
 def tag(version: String): String = version.replace(".", "")
 
@@ -146,7 +149,7 @@ new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in 
 val datasets = List(
   List(
     new Dataset("Ontology Infobox Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the ontology-based extraction.//"),
-    new Dataset("Ontology Infobox Types (Heuristic)", "instance_types_inferred", "//Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//"),
+    new Dataset("Ontology Infobox Types (Heuristic)", "instance_types_inferred", "//Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//", Set(DataC14NPage)),
     new Dataset("Ontology Infobox Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the ontology-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
     new Dataset("Ontology Infobox Properties (Specific)", "specific_mappingbased_properties", "//Infobox data from the ontology-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//")
   ),
@@ -230,13 +233,6 @@ val linksets = List(
   new Linkset("Links to WordNet Classes", "wordnet", "//Classification links to ((http://www.w3.org/TR/wordnet-rdf/ RDF representations)) of ((http://wordnet.princeton.edu/ WordNet)) classes. Update mechanism: copy over from previous release.//"),
   new Linkset("Links to YAGO2", "yago", "//Dataset containing links between DBpedia and ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)), YAGO type information for DBpedia resources and the YAGO class hierarchy. Currently maintained by Johannes Hoffart.//")
 )
-
-val OntologyPage = "Ontology"
-val DataC14NPage = "DataC14N"
-val DataL10NPage = "DataL10N"
-val LinksPage = "Links"
-val DescPage = "Desc"
-val NLPPage = "NLP"
 
 var target: File = null
 
@@ -383,7 +379,7 @@ def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Files
   "#||\n"+
   languages.mkString("||**Dataset**|**","**|**","**||")+"\n"
   
-  for (fileset <- filesets) {
+  for (fileset <- filesets; if fileset.pages == null || fileset.pages.contains(page)) {
     s+"||{{a name=\""+fileset.anchor(anchor)+"\"}}((#"+fileset.anchor()+" "+fileset.name+"))\n"
     var first = true
     for (language <- languages) {
