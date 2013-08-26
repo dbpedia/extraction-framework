@@ -76,7 +76,7 @@ def loadTitles(file: File): Unit = {
     val bytes = parts(4).toLong
     val gzip = parts(6).toLong
     val bzip2 = parts(8).toLong
-    titles(path) = "Lines: "+niceDecimal(lines)+"; Filesize(download): "+niceBytes(bzip2)+"; Filesize(unpacked): "+niceBytes(bytes)
+    titles(path) = "Lines:\u00A0"+niceDecimal(lines)+"; File\u00A0size\u00A0(download):\u00A0"+niceBytes(bzip2)+"; File\u00A0size\u00A0(unpacked):\u00A0"+niceBytes(bytes)
   }
 }
 
