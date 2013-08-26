@@ -101,7 +101,7 @@ abstract class Fileset(
 ) 
 {
   // null if data file didn't contain any info about this file
-  def file(language: String, modifier: String, format: String, required: Boolean) = {
+  def file(language: String, modifier: String, format: String, required: Boolean): FileInfo = {
     val p = path(language, modifier, format)
     val t = titles.getOrElse(p, null)
     
@@ -305,11 +305,11 @@ def ontologyPage(page: String, anchor: String): Unit = {
   "#||\n"+
   "||**Dataset**|**"+format+"**||\n"+
   "||{{a name=\""+ontology.anchor(anchor)+"\"}}((#"+ontology.anchor()+" "+ontology.name+"))\n"+
-  "|"+
-  "<#<small>"+
-  "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a> "+
-  "<small><a href=\""+file.previewUrl+"\">?</a></small>"+
-  "</small>#>\n"+
+  "|";
+
+  link(s, file, format);
+
+  s+
   "||\n"+
   "||#\n"+
   mark(page)
@@ -398,11 +398,7 @@ def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Files
       for (format <- fileset.formats) {
         val file = fileset.file(language, modifier, format, false)
         if (file != null) {
-          s+
-          "<#<small>"+
-          "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a>\u00A0"+ // 00A0 is non-breaking space
-          "<small><a href=\""+file.previewUrl+"\">?</a></small>"+
-          "</small>#>\n"
+          link(s, file, format);
         }
         else {
           s+"<#--#>\n"
@@ -418,6 +414,14 @@ def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Files
   mark(page+subPage)
   
   write(page+subPage, s.toString)
+}
+
+def link(s: StringPlusser, file: FileInfo, format: String): Unit = {
+  s+
+  "<#<small>"+
+  "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a>\u00A0"+ // 00A0 is non-breaking space
+  "<small><a href=\""+file.previewUrl+"\">?</a></small>"+
+  "</small>#>\n"
 }
 
 def descriptionPage(page: String): Unit = {
