@@ -26,7 +26,9 @@ val current = "3.9"
 val previous = List("3.8", "3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
 
 // UPDATE for new release
-val dumpDates = "in late March / early April 2013"
+val dumpDates =
+"The datasets were extracted from ((http://dumps.wikimedia.org/ Wikipedia dumps)) generated in " +
+"late March / early April 2013 and a ((http://www.wikidata.org/ Wikidata)) dump generated in June 2013";
   
 // UPDATE for new release
 val allLanguages = 119
@@ -41,8 +43,6 @@ val l10nDatasetsSection = "Datasets#h18-19"
   
 val dbpediaUrl = "http://downloads.dbpedia.org/"
  
-val wikipediaUrl = "http://dumps.wikimedia.org/"
-  
 val zipSuffix = ".bz2"
 
 val titles = new HashMap[String, String]()
@@ -169,9 +169,7 @@ val datasets = List(
   List(
     new Dataset("Persondata", "persondata", "//Information about persons (date and place of birth etc.) extracted from the English and German Wikipedia, represented using the FOAF vocabulary.//"),
     new Dataset("PND", "pnd", "//Dataset containing PND (Personennamendatei) identifiers.//"),
-    new Dataset("Inter-Language Links", "interlanguage_links", "//Dataset linking a DBpedia resource to the same or a related resource in other languages, extracted from the ((http://en.wikipedia.org/wiki/Help:Interlanguage_links inter-language links)) of a Wikipedia article.//"),
-    new Dataset("Bijective Inter-Language Links", "interlanguage_links_same_as", "//Dataset containing the bijective inter-language links between a DBpedia resource and the same resource in other languages, i.e. there is a link from a resource to the same resource in a different language and a link pointing back. When inter-language links are bijective, the Wikipedia articles are usually about the same subject.//"),
-    new Dataset("Non-bijective Inter-Language Links", "interlanguage_links_see_also", "//Dataset containing the inter-language links between a DBpedia resource and related resources in other languages that are not bijective, i.e. there is a link from a resource to a related resource in a different language, but no link pointing back. When inter-language links are not bijective, the Wikipedia articles are usually not about the same subject.//")
+    new Dataset("Inter-Language Links", "wikidata_links", "//Dataset linking a DBpedia resource to the same resource in other languages, extracted from the ((http://www.wikidata.org/ Wikidata)) entity for the resource.//")
   ),
   List(
     new Dataset("Articles Categories", "article_categories", "//Links from concepts to categories using the SKOS vocabulary.//"),
@@ -264,8 +262,7 @@ def generate: Unit = {
   "\n" +
   "=== Wikipedia Input Files ===\n" +
   "\n" +
-  "The datasets were extracted from (("+wikipediaUrl+" Wikipedia dumps)) generated "+dumpDates+
-  " (see also all ((DumpDatesDBpedia"+tag(current)+" specific dates and times))).\n" +
+  dumpDates+" (see also all ((DumpDatesDBpedia"+tag(current)+" specific dates and times))).\n" +
   "\n" +
   include(OntologyPage)+
   include(DataC14NPage)+
