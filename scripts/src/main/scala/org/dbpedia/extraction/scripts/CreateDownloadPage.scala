@@ -37,7 +37,7 @@ val allLanguages = 119
 val languages = List("en","ca","de","es","eu","fr","id","it","ja","ko","nl","pl","pt","ru","tr")
 
 // UPDATE when DBpedia Wiki changes. Wiki link to page Datasets, section about internationalized datasets.
-val i18nDatasetsSection = "Datasets#h18-19"
+val l10nDatasetsSection = "Datasets#h18-19"
   
 val dbpediaUrl = "http://downloads.dbpedia.org/"
  
@@ -234,7 +234,7 @@ val linksets = List(
 
 val OntologyPage = "Ontology"
 val DataC14NPage = "DataC14N"
-val DataI18NPage = "DataI18N"
+val DataL10NPage = "DataL10N"
 val LinksPage = "Links"
 val DescPage = "Desc"
 val NLPPage = "NLP"
@@ -273,7 +273,7 @@ def generate: Unit = {
   "\n" +
   include(OntologyPage)+
   include(DataC14NPage)+
-  include(DataI18NPage)+
+  include(DataL10NPage)+
   include(LinksPage)+
   include(DescPage)+
   include(NLPPage)+
@@ -289,7 +289,7 @@ def generate: Unit = {
   
   ontologyPage(OntologyPage, "download-")
   datasetPages(DataC14NPage, "download-c14n-", datasets)
-  datasetPages(DataI18NPage, "download-i18n-", datasets)
+  datasetPages(DataL10NPage, "download-l10n-", datasets)
   datasetPages(LinksPage, "download-", List(linksets))
   descriptionPage(DescPage)
   nlpPage(NLPPage)
@@ -328,14 +328,14 @@ def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Un
     case DataC14NPage => {
       s+
       "===Canonicalized Datasets===\n"+
-      "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
+      "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. (("+l10nDatasetsSection+" more...))\n"+
       "\n"+
       "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace //~http://dbpedia.org/resource/ //. For backwards compatibility, the N-Triples files (.nt, .nq) use URIs, e.g. //~http://dbpedia.org/resource/Bras%C3%ADlia //. The Turtle (.ttl) files use IRIs, e.g. //~http://dbpedia.org/resource/Brasília //.\n"
     }
-    case DataI18NPage => {
+    case DataL10NPage => {
       s+
       "===Localized Datasets===\n"+
-      "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
+      "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. (("+l10nDatasetsSection+" more...))\n"+
       "\n"+
       "The localized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. //~http://pt.dbpedia.org/resource/Brasília//.\n"
     }
@@ -364,7 +364,7 @@ def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Un
   
   val langs = page match {
     case DataC14NPage => languages
-    case DataI18NPage => languages.drop(1) /*drop en*/
+    case DataL10NPage => languages.drop(1) /*drop en*/
     case LinksPage => List("links")
   }
   
@@ -391,7 +391,7 @@ def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Files
       
       val modifier = page match {
         case DataC14NPage => if (language == "en") "" else "_en_uris"
-        case DataI18NPage => ""
+        case DataL10NPage => ""
         case LinksPage => ""
       }
       
