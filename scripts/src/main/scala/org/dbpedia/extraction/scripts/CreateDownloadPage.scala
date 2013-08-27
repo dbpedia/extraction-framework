@@ -169,7 +169,7 @@ val datasets = List(
   List(
     new Dataset("Persondata", "persondata", "//Information about persons (date and place of birth etc.) extracted from the English and German Wikipedia, represented using the FOAF vocabulary.//"),
     new Dataset("PND", "pnd", "//Dataset containing PND (Personennamendatei) identifiers.//"),
-    new Dataset("Inter-Language Links", "wikidata_links", "//Dataset linking a DBpedia resource to the same resource in other languages, extracted from the ((http://www.wikidata.org/ Wikidata)) entity for the resource.//")
+    new Dataset("Inter-Language Links", "wikidata_links", "//Dataset linking a DBpedia resource to the same resource in other languages and in ((http://www.wikidata.org Wikidata)). Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.//")
   ),
   List(
     new Dataset("Articles Categories", "article_categories", "//Links from concepts to categories using the SKOS vocabulary.//"),
