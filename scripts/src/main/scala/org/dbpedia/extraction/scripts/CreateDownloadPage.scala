@@ -28,7 +28,9 @@ val previous = List("3.8", "3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3
 // UPDATE for new release
 val dumpDates =
 "The datasets were extracted from ((http://dumps.wikimedia.org/ Wikipedia dumps)) generated in " +
-"late March / early April 2013 and a ((http://www.wikidata.org/ Wikidata)) dump generated in June 2013";
+"late March / early April 2013. We used a ((http://www.wikidata.org/ Wikidata)) cross-language " +
+"link dump from June 2013 to interconnect concepts between languages. " +
+"See also all ((DumpDatesDBpedia"+tag(current)+" specific dump dates and times)).\n";
   
 // UPDATE for new release
 val allLanguages = 119
@@ -142,7 +144,7 @@ extends Fileset(name, file, text, List("nt"), Set(LinksPage))
 def tag(version: String): String = version.replace(".", "")
 
 val ontology =
-new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in OWL. See ((http://jens-lehmann.org/files/2009/dbpedia_jws.pdf our JWS paper)) for more details.//")
+new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in OWL. See ((http://svn.aksw.org/papers/2013/SWJ_DBpedia/public.pdf our SWJ paper)) for more details.//")
 
 // We have to split the main datasets into many small sub-pages because wacko wiki is true to its
 // name and fails to display a page (or even print a proper error message) when it's too long. 
@@ -262,7 +264,7 @@ def generate: Unit = {
   "\n" +
   "=== Wikipedia Input Files ===\n" +
   "\n" +
-  dumpDates+" (see also all ((DumpDatesDBpedia"+tag(current)+" specific dates and times))).\n" +
+  dumpDates+
   "\n" +
   include(OntologyPage)+
   include(DataC14NPage)+
