@@ -88,3 +88,10 @@ grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' 
 # ontology: count specialized datatype properties
 grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+">' dbpedia_3.*
 
+# remove all lines in file bad.nt from file all.nt, write result to clean.nt
+awk '{ if (f==1) { r[$0] } else if (! ($0 in r)) { print $0 } }' f=1 bad.nt f=2 all.nt >clean.nt
+# remove Windows line breaks first, awk looks only for \n:
+tr -d "\d" bad.nt >bad-unix.nt
+# remove duplicate bad triples
+sort -u bad-unix.nt >bad-sorted.nt
+ 
