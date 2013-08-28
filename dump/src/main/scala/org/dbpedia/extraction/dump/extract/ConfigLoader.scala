@@ -110,7 +110,7 @@ class ConfigLoader(config: Config)
           val datasetDestinations = new HashMap[String, Destination]()
           for (dataset <- datasets) {
             val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix)
-            datasetDestinations(dataset.name) = new WriterDestination(writer(file), format)
+            datasetDestinations(dataset.name) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
           }
           
           formatDestinations += new DatasetDestination(datasetDestinations)

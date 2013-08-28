@@ -7,17 +7,13 @@ package org.dbpedia.extraction.destinations
  * TODO: Maybe this should be a mixin trait?
  */
 class LimitingDestination(destination: Destination, limit: Int)
-extends Destination
+extends WrapperDestination(destination)
 {
     private var count = 0
-    
-    override def open() = destination.open()
     
     override def write(graph : Traversable[Quad]) = if (count < limit) {
       val quads = if (count + graph.size <= limit) graph else graph.take(limit - count)
       destination.write(quads)
       count += quads.size
     }
-
-    override def close() = destination.close()
 }
