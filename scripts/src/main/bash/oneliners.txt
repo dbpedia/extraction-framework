@@ -94,4 +94,7 @@ awk '{ if (f==1) { r[$0] } else if (! ($0 in r)) { print $0 } }' f=1 bad.nt f=2 
 tr -d "\d" bad.nt >bad-unix.nt
 # remove duplicate bad triples
 sort -u bad-unix.nt >bad-sorted.nt
+
+# temporarily open port 8880 for incoming TCP. rule disappears on restart. 
+sudo iptables -I INPUT -i eth0 -p tcp --dport 8880 -m state --state NEW,ESTABLISHED -j ACCEPT
  
