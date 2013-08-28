@@ -10,8 +10,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.compiler.version>1.6</java.compiler.version>
-        <scala.version>2.10.1</scala.version>
+        <java.version>1.7</java.version>
+        <scala.version>2.10.2</scala.version>
         <scalatest.scala.version>2.10</scalatest.scala.version>
         <scalatest.version>1.9.1</scalatest.version>
         <scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
@@ -83,8 +83,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>${java.compiler.version}</source>
-                    <target>${java.compiler.version}</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
 
@@ -99,7 +99,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>1.7</version>
+                                    <version>${java.version}</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
