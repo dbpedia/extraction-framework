@@ -39,6 +39,7 @@
                             <jvmArgs>
                                 <jvmArg>-Xms512m</jvmArg>
                                 <jvmArg>-Xmx4096m</jvmArg><!-- 4G is ok with CMS or G1, other GCs need >= 4.5G -->
+                                <jvmArg>-XX:-OmitStackTraceInFastThrow</jvmArg><!-- always show full exception to make sure that validation messages are useful -->
                                 <jvmArg>-XX:+PrintGC</jvmArg>
                                 <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
