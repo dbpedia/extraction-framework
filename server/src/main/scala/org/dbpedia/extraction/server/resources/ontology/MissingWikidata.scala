@@ -35,7 +35,7 @@ class MissingWikidata {
           nodes += <a href={pagesUrl+"/OntologyProperty:"+item.name}>{item.name}</a>
           count += 1
         }
-        nodes.insert(0, <h4>{count} missing labels</h4>)
+        nodes.insert(0, <h4>{count} missing Wikidata properties</h4>)
         nodes
       }
     </body>
