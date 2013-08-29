@@ -97,4 +97,7 @@ sort -u bad-unix.nt >bad-sorted.nt
 
 # temporarily open port 8880 for incoming TCP. rule disappears on restart. 
 sudo iptables -I INPUT -i eth0 -p tcp --dport 8880 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# check that all links from the download page to the download server are correct
+wget --background --spider --recursive --level 1 --domains=downloads.dbpedia.org --span-hosts http://wiki.dbpedia.org/Downloads39
  
