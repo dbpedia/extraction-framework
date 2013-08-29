@@ -28,9 +28,9 @@ extends ExtractionManager(languages, paths)
 
     def extractor(language : Language) = _extractors(language)
 
-    def ontology = _ontology
+    def ontology() = _ontology
 
-    def ontologyPages = _ontologyPages
+    def ontologyPages() = _ontologyPages
 
     def mappingPageSource(language : Language) = _mappingPages(language).values
 
@@ -39,7 +39,7 @@ extends ExtractionManager(languages, paths)
     /**
      * Called on startup to initialize all mapping stats managers.
      */
-    def updateAll = {
+    def updateAll() = {
       for ((language, mappings) <- _mappings) update(language, mappings)
     }
         
