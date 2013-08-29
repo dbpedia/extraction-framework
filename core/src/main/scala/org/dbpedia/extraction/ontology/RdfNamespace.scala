@@ -58,7 +58,7 @@ object RdfNamespace {
   val DCT = ns("dct", "http://purl.org/dc/terms/")
   val DCTERMS = ns("dcterms", "http://purl.org/dc/terms/")
   val SKOS = ns("skos", "http://www.w3.org/2004/02/skos/core#")
-  val WIKIDATA = ns("wd", "http://www.wikidata.org/entity/")
+  val WIKIDATA = ns("wd", "http://www.wikidata.org/entity/", false)
   val SCHEMA = ns("schema", "http://schema.org/", false) 
   val BIBO = ns("bibo", "http://purl.org/ontology/bibo/", false)
   
