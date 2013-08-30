@@ -120,9 +120,7 @@ abstract class Fileset(
     else throw new IllegalArgumentException("found no data for "+p)
   }
   
-  // example: links/revyu_links.nt
-  // example: af/geo_coordinates_af.nt
-  def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"_"+language+"."+format
+  def path(language: String, modifier: String, format: String): String
   
   def anchor(prefix: String = "") = (prefix+name).replaceChars(" ()", "-").toLowerCase(Locale.ENGLISH)
 }
@@ -136,10 +134,17 @@ extends Fileset(name, file, text, List("owl"), Set(OntologyPage))
 
 class Dataset(name: String, file: String, text: String, pages: Set[String] = null)
 extends Fileset(name, file, text, List("nt", "nq", "ttl"), pages)
+{
+  // example: af/geo_coordinates_af.nt
+  override def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"_"+language+"."+format
+}
 
 class Linkset(name: String, file: String, text: String)
 extends Fileset(name, file, text, List("nt"), Set(LinksPage))
-
+{
+  // example: links/yago_types.nt
+  override def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"."+format
+}
 
 def tag(version: String): String = version.replace(".", "")
 
