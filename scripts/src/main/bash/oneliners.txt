@@ -36,6 +36,8 @@ sort -s -k 2,2 enwiki-20120601-infobox-properties.ttl >enwiki-20120601-infobox-p
 # 29 is the length of the string '<http://dbpedia.org/property/'
 # 50 is an arbitrary cutoff to avoid overly long file names
 awk '{if ($1 != "#") { if ($2 != last) {last = $2; close(file); counter++; len = length($2) - 29; if (len > 50) len = 50; name = substr($2, 29, len); gsub(/\//, "", name); file = "split-by-property/" sprintf("%.6d", counter) "-" name ".ttl" } print >> file } }' enwiki-20120601-infobox-properties.sorted.ttl
+# split by property, use part after last slash as property name. no special handling of comment lines.
+awk '{ if ($2 != last) {last = $2; close(file); count = split(substr($2, 2, length($2) - 2), parts, "/"); file = parts[count]".ttl" } print >> file }' xyz.ttl
 
 # delete all but the latest directory for each language and print how many GB were freed / kept
 # assumes that the shell sorts the result of */* alphabetically
@@ -47,7 +49,9 @@ du -B 1 -s */* | awk '{split($2, arr, "/"); if (arr[2] != "index.html") { if (na
 # for all .gz files, print packed size in bytes, lines, unpacked size in bytes, store in packed-lines-bytes.gz.txt
 for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done >packed-lines-bytes.gz.txt
 # for all .gz files, print name without leading './' and trailing '.gz', print lines, bytes, gzip size, store in lines-bytes-packed.txt
-for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done | awk '{sub(/^\.\//, "", $1); sub(/.gz$/, "", $1); print $1 " lines: " $3 " bytes: " $4 " gzip: " $2}' >lines-bytes-packed.txt
+for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done | awk '{sub(/^\.\//, "", $1); sub(/.gz$/, "", $1); print $1" lines: "$3" bytes: "$4" gzip: "$2}' >lines-bytes-packed.txt
+# for all .nt files, print name, lines, and size of .nt, .nt.gz, .nt.bz2 files
+for i in *.nt ; do stat -n -f '%z' $i ; stat -n -f ' %z' $i.gz ; stat -n -f ' %z' $i.bz2 ; wc -l $i ; done | awk '{print $5" lines: "$4" bytes: "$1" gzip: "$2" bzip2: "$3}'
 
 # rename all files for which a -redirected dataset now exists to -unredirected
 find -mindepth 3 -type f | grep -E '(disambiguations|infobox-properties|mappingbased-properties|page-links|persondata|topical-concepts)' | grep -v -E '(specific-mappingbased|redirected)' | awk '{new=$0; sub(/\.\//, "", new); sub(/\./, "-unredirected.", new); system("echo mv " $0 " " new)}'
