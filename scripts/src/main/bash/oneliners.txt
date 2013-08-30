@@ -50,8 +50,10 @@ du -B 1 -s */* | awk '{split($2, arr, "/"); if (arr[2] != "index.html") { if (na
 for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done >packed-lines-bytes.gz.txt
 # for all .gz files, print name without leading './' and trailing '.gz', print lines, bytes, gzip size, store in lines-bytes-packed.txt
 for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done | awk '{sub(/^\.\//, "", $1); sub(/.gz$/, "", $1); print $1" lines: "$3" bytes: "$4" gzip: "$2}' >lines-bytes-packed.txt
-# for all .nt files, print name, lines, and size of .nt, .nt.gz, .nt.bz2 files
+# Mac: for all .nt files, print name, lines, and size of .nt, .nt.gz, .nt.bz2 files
 for i in *.nt ; do stat -n -f '%z' $i ; stat -n -f ' %z' $i.gz ; stat -n -f ' %z' $i.bz2 ; wc -l $i ; done | awk '{print $5" lines: "$4" bytes: "$1" gzip: "$2" bzip2: "$3}'
+# same for Linux
+for i in *.nt ; do stat --printf '%s' $i ; stat --printf ' %s' $i.gz ; stat --printf ' %s ' $i.bz2 ; wc -l $i ; done | awk '{print $5" lines: "$4" bytes: "$1" gzip: "$2" bzip2: "$3}'
 
 # rename all files for which a -redirected dataset now exists to -unredirected
 find -mindepth 3 -type f | grep -E '(disambiguations|infobox-properties|mappingbased-properties|page-links|persondata|topical-concepts)' | grep -v -E '(specific-mappingbased|redirected)' | awk '{new=$0; sub(/\.\//, "", new); sub(/\./, "-unredirected.", new); system("echo mv " $0 " " new)}'
@@ -94,8 +96,10 @@ grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+
 
 # remove all lines in file bad.nt from file all.nt, write result to clean.nt
 awk '{ if (f==1) { r[$0] } else if (! ($0 in r)) { print $0 } }' f=1 bad.nt f=2 all.nt >clean.nt
-# remove Windows line breaks first, awk looks only for \n:
-tr -d "\d" bad.nt >bad-unix.nt
+# remove all triples in file bad.nt from quad file all.nq
+awk '{ if (f==1) { r[$0] } else { quad = $0; NF -= 2; triple = $0" ." ; if (! (triple in r)) { print quad } } }' f=1 bad.nt f=2 all.nq >clean.nq
+# remove Windows line breaks first, awk looks only for \n. '\015' is octal for '\d', but is more portable:
+tr -d '\015' bad.nt >bad-unix.nt
 # remove duplicate bad triples
 sort -u bad-unix.nt >bad-sorted.nt
 
@@ -104,4 +108,11 @@ sudo iptables -I INPUT -i eth0 -p tcp --dport 8880 -m state --state NEW,ESTABLIS
 
 # check that all links from the download page to the download server are correct
 wget --background --spider --recursive --level 1 --domains=downloads.dbpedia.org --span-hosts http://wiki.dbpedia.org/Downloads39
- 
+
+# Try to decode URIs.
+# Notes:
+# - sed replaces '%' by '\x', "read -r" ignores backslash, "echo -e" converts '\xHH' to byte
+# - only works when the shell uses UTF-8
+# - if there are other chars than '#' and '?' that have to be re-escaped, extend the last sed
+# - may fail for other reasons, depending on file content, shell settings, etc.
+sed 's/%/\\x/g' abc.nt | while read -r line ; do echo -e $line ; done | sed 's/"/%22/g; s/\?/%3F/g' > abc.ttl
