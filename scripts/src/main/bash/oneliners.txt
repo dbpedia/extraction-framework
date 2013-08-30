@@ -109,10 +109,11 @@ sudo iptables -I INPUT -i eth0 -p tcp --dport 8880 -m state --state NEW,ESTABLIS
 # check that all links from the download page to the download server are correct
 wget --background --spider --recursive --level 1 --domains=downloads.dbpedia.org --span-hosts http://wiki.dbpedia.org/Downloads39
 
-# Try to decode URIs.
+# Try to decode URIs: 
+# sed replaces non-ASCII-escaping '%' by '\x', "read -r" ignores backslash, "echo -e" converts '\xHH' to byte
 # Notes:
-# - sed replaces '%' by '\x', "read -r" ignores backslash, "echo -e" converts '\xHH' to byte
 # - only works when the shell uses UTF-8
-# - if there are other chars than '#' and '?' that have to be re-escaped, extend the last sed
+# - you should check that only valid escaped ASCII chars occur in the file: %25 %22 %3F %5C %5E %60
+# - the others are invalid in Wikipedia titles: %23 %3C %3E %5B %5D %7B %7C %7D 
 # - may fail for other reasons, depending on file content, shell settings, etc.
-sed 's/%/\\x/g' abc.nt | while read -r line ; do echo -e $line ; done | sed 's/"/%22/g; s/\?/%3F/g' > abc.ttl
+sed -r 's/%([89ABCDEF])/\\x\1/g' abc.nt | while read -r line ; do echo -e $line ; done > abc.ttl
