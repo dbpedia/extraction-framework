@@ -43,29 +43,10 @@ import ProcessWikidataLinks._
  * Fields are tab-separated. Titles contain spaces. Lines are sorted by row ID. For us this means
  * they're basically random.
  * 
- * Example calls:
+ * Example call:
  * 
- * 'fr,de' mean specific languages. '-' means no language uses generic domain.
- * '-fr-de' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-fr-de.ttl.gz and enwiki-20120601-interlanguage-links-see-also-fr-de.ttl.gz
- * ../run ProcessWikidataLinks /data/dbpedia -fr-de .ttl.gz - fr,de
+ * ../run ProcessWikidataLinks process.wikidata.links.properties
  *
- * '10000-' means languages by article count range. 'en' uses generic domain.
- * '-' means no file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as.ttl.gz
- * ../run ProcessWikidataLinks /data/dbpedia - .ttl.gz en 10000-
- *
- * '-' means don't write dump file.
- * ../run ProcessWikidataLinks /data/dbpedia - -fr-de .ttl.gz - fr,de
- *
- * if no languages are given, read links from dump file, not from triple files.
- * ../run ProcessWikidataLinks /data/dbpedia - .ttl.gz
- *
- * generate links for all DBpedia I18N chapters in nt format
- * '-chapters' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-chapters.ttl.gz
- * ../run ProcessWikidataLinks /data/dbpedia -chapters .nt.gz en cs,en,fr,de,el,it,ja,ko,pl,pt,ru,es
- *
- * generate links for all languages that have a namespace on mappings.dbpedia.org in nt format
- * '-mapped' is file name part, full names are e.g. enwiki-20120601-interlanguage-links-same-as-mapped.ttl.gz
- * ../run ProcessWikidataLinks /data/dbpedia -mapped .nt.gz en @mappings
  */
 object ProcessWikidataLinks {
   
