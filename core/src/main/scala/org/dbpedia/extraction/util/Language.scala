@@ -204,6 +204,7 @@ object Language extends (String => Language)
       "tet" -> "id",           // Tetum
       "tpi" -> "en",           // Tok Pisin
       "tum" -> "ny",           // Tumbuka
+      "tyv" -> "ru",           // Tuvan
       "udm" -> "ru",           // Udmurt
       "vec" -> "it",           // Venetian
       "vep" -> "fi",
