@@ -68,7 +68,7 @@ class DateTimeParser ( context : {
 
     private val MonthYearRegex = ("""(?iu)""" + prefix + """("""+monthRegex+""")\]?\]?,?\s*\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?""" + postfix).r
 
-    private val YearRegex = ("""(?iu)""" + prefix + """(?<![\d\pL\w])(\d{1,4})(?!\d)\s*(""" + eraRegex + """)?""" + postfix).r
+    private val YearRegex = ("""(?iu)""" + prefix + """(?<![\d\pL\w])(-?\d{1,4})(?!\d)\s*(""" + eraRegex + """)?""" + postfix).r
 
 
     override def parse(node : Node) : Option[Date] =
@@ -164,6 +164,7 @@ class DateTimeParser ( context : {
                     catch
                     {
                         case e : IllegalArgumentException =>
+                        case e : MatchError => 
                     }
                 }
             }
