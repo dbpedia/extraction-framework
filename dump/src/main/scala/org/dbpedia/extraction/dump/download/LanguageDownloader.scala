@@ -80,7 +80,9 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     
     // all the links we need
     val links = new HashMap[String, String]()
-    for (fileName <- fileNames) links(fileName) = "<a href=\""+wiki+"-"+date+"-"+fileName+"\">"
+    // Here we should set "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
+    // but "\"/"+wiki+"/"+date+"/" does not exists in incremental updates, keeping the trailing "\">" should do the trick
+    for (fileName <- fileNames) links(fileName) = wiki+"-"+date+"-"+fileName+"\">"
     
     downloader.downloadTo(datePage, dateDir) // creates index.html
     forEachLine(new File(dateDir, "index.html")) { line => 
