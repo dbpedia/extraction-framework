@@ -237,9 +237,10 @@ val linksets = List(
   new Linkset("Links to US Census", "uscensus_links", "//Links between US cities and states in DBpedia and data about them from ((http://www.rdfabout.com/demo/census/ US Census)). Update mechanism: copy over from previous release.//"),
   new Linkset("Links to WikiCompany", "wikicompany_links", "//Links between companies in DBpedia and companies in ((http://www4.wiwiss.fu-berlin.de/wikicompany/ WikiCompany)). Update mechanism: copy over from previous release.//"),
   new Linkset("Links to WordNet Classes", "wordnet_links", "//Classification links to ((http://www.w3.org/TR/wordnet-rdf/ RDF representations)) of ((http://wordnet.princeton.edu/ WordNet)) classes. Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to YAGO2", "yago_links", "//Dataset containing links between DBpedia and ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) instances. Update mechanism: generated from latest YAGO2 datasets.//"),
-  new Linkset("YAGO2 types", "yago_types", "//Dataset containing ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) type information for DBpedia resources. Update mechanism: generated from latest YAGO2 datasets.//"),
-  new Linkset("YAGO2 type hierarchy", "yago_taxonomy", "//Dataset containing the ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) class hierarchy. Update mechanism: generated from latest YAGO2 datasets.//")
+  new Linkset("YAGO links", "yago_links", "//Dataset containing owl:sameAs links between DBpedia and ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) instances. Update mechanism: generated from latest YAGO datasets.//"),
+  new Linkset("YAGO type links", "yago_type_links", "//Dataset containing owl:equivalentClass links between types in the ~http://dbpedia.org/class/yago/ and ~http://yago-knowledge.org/resource/ namespaces. Update mechanism: generated from latest YAGO datasets.//"),
+  new Linkset("YAGO types", "yago_types", "//Dataset containing ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) type information for DBpedia resources. Update mechanism: generated from latest YAGO datasets.//"),
+  new Linkset("YAGO type hierarchy", "yago_taxonomy", "//Dataset containing the hierarchy of ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) classes in the ~http://dbpedia.org/class/yago/ namespace. Update mechanism: generated from latest YAGO datasets.//")
 )
 
 var target: File = null
