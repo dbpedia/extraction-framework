@@ -61,7 +61,7 @@ class TBoxExtractor2(val prefixMapping: PrefixMapping, val baseUri: String, val 
       */
     }
     else {
-      logger.error("Unexpected title: " + title);
+      //logger.error("Unexpected title: " + title);
       return null;
     }
 
