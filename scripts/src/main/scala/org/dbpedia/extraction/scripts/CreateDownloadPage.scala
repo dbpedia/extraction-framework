@@ -155,11 +155,11 @@ new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in 
 // name and fails to display a page (or even print a proper error message) when it's too long. 
 val datasets = List(
   List(
-    new Dataset("Ontology Infobox Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the ontology-based extraction.//"),
-    new Dataset("Ontology Infobox Types (Heuristic)", "instance_types_heuristic", "//Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//", Set(DataC14NPage)),
-    new Dataset("Ontology Infobox Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the ontology-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
-    new Dataset("Ontology Infobox Properties (Cleaned)", "mappingbased_properties_cleaned", "//This file contains the statements from the Ontology Infobox Properties, with incorrect statements identified by heuristic inference being removed.//", Set(DataC14NPage)),
-    new Dataset("Ontology Infobox Properties (Specific)", "specific_mappingbased_properties", "//Infobox data from the ontology-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//")
+    new Dataset("Mapping-based Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the mapping-based extraction.//"),
+    new Dataset("Mapping-based Types (Heuristic)", "instance_types_heuristic", "//Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//", Set(DataC14NPage)),
+    new Dataset("Mapping-based Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the mapping-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
+    new Dataset("Mapping-based Properties (Cleaned)", "mappingbased_properties_cleaned", "//This file contains the statements from the Mapping-based Properties, with incorrect statements identified by heuristic inference being removed.//", Set(DataC14NPage)),
+    new Dataset("Mapping-based Properties (Specific)", "specific_mappingbased_properties", "//Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//")
   ),
   List(
     new Dataset("Titles", "labels", "//Titles of all Wikipedia Articles in the corresponding language.//"),
@@ -169,8 +169,8 @@ val datasets = List(
   ),
   List(
     new Dataset("Geographic Coordinates", "geo_coordinates", "//Geographic coordinates extracted from Wikipedia.//"),
-    new Dataset("Raw Infobox Properties", "infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Ontology Infobox Properties (/ontology/ namespace) should always be preferred over this data.//"),
-    new Dataset("Raw Infobox Property Definitions", "infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
+    new Dataset("Raw Infobox Properties", "raw_infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace) should always be preferred over this data.//"),
+    new Dataset("Raw Infobox Property Definitions", "raw_infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
     new Dataset("Homepages", "homepages", "//Links to homepages of persons, organizations etc.//")
   ),
   List(
