@@ -22,22 +22,22 @@ http://wiki.dbpedia.org/Downloads39Desc/edit
 {{a name="dbpedia-ontology"}}
 ==== DBpedia Ontology ====
 //The DBpedia ontology in OWL. See ((http://svn.aksw.org/papers/2013/SWJ_DBpedia/public.pdf our SWJ paper)) for more details.//
-{{a name="ontology-infobox-types"}}
-==== Ontology Infobox Types ====
-//Contains triples of the form $object rdf:type $class from the ontology-based extraction.//
-{{a name="ontology-infobox-types-heuristic"}}
-==== Ontology Infobox Types (Heuristic) ====
+{{a name="mapping-based-types"}}
+==== Mapping-based Types ====
+//Contains triples of the form $object rdf:type $class from the mapping-based extraction.//
+{{a name="mapping-based-types-heuristic"}}
+==== Mapping-based Types (Heuristic) ====
 //Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//
-{{a name="ontology-infobox-properties"}}
-==== Ontology Infobox Properties ====
-//High-quality data extracted from Infoboxes using the ontology-based extraction. The predicates in this dataset are in the /ontology/ namespace.//
+{{a name="mapping-based-properties"}}
+==== Mapping-based Properties ====
+//High-quality data extracted from Infoboxes using the mapping-based extraction. The predicates in this dataset are in the /ontology/ namespace.//
   Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.
-{{a name="ontology-infobox-properties-cleaned"}}
-==== Ontology Infobox Properties (Cleaned) ====
-//This file contains the statements from the Ontology Infobox Properties, with incorrect statements identified by heuristic inference being removed.//
-{{a name="ontology-infobox-properties-specific"}}
-==== Ontology Infobox Properties (Specific) ====
-//Infobox data from the ontology-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//
+{{a name="mapping-based-properties-cleaned"}}
+==== Mapping-based Properties (Cleaned) ====
+//This file contains the statements from the Mapping-based Properties, with incorrect statements identified by heuristic inference being removed.//
+{{a name="mapping-based-properties-specific"}}
+==== Mapping-based Properties (Specific) ====
+//Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//
 {{a name="titles"}}
 ==== Titles ====
 //Titles of all Wikipedia Articles in the corresponding language.//
@@ -55,7 +55,7 @@ http://wiki.dbpedia.org/Downloads39Desc/edit
 //Geographic coordinates extracted from Wikipedia.//
 {{a name="raw-infobox-properties"}}
 ==== Raw Infobox Properties ====
-//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Ontology Infobox Properties (/ontology/ namespace) should always be preferred over this data.//
+//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace) should always be preferred over this data.//
 {{a name="raw-infobox-property-definitions"}}
 ==== Raw Infobox Property Definitions ====
 //All properties / predicates used in infoboxes.//
