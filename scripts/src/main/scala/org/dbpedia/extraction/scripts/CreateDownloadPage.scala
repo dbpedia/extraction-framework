@@ -475,7 +475,7 @@ def mark(page: String): String = {
 }
 
 def include(page: String): String = {
-  "{{include page=/Downloads"+tag(current)+page+" nomark=1}}\n"
+  "{{Include page=/Downloads"+tag(current)+page+" nomark=1}}\n"
 }
 
 def write(page: String, content: String): Unit = {
