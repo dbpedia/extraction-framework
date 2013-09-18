@@ -1,0 +1,34 @@
+About 400K lines in alternateNames.txt have this format:
+
+8078498 12 link http://en.wikipedia.org/wiki/Takht-e_Qeysar 1 1 1
+
+The fields are tab-separated.
+The first field is probably some ID, but not relevant for us.
+The second field is the geonames ID.
+The "link" is sometimes missing.
+The numbers after the URL occur only rarely, but the tabs are always there.
+
+# keep only tab-separated page title, geonames ID, language:
+# sed -n means "don't print"
+# sed -r means extended regex syntax 
+# s///p means "print match" 
+sed -r -n 's%^[0-9]+\t([0-9]+)\t.*\t.*https?://([^\./:]+)\.wikipedia\.org/wiki/([^\t]+)\t.*$%\3 \1 \2%p' alternateNames.txt > geonames.ttl.1
+
+# unescape percent-escapes, preserving tabs:
+sed -r 's/%([0-9A-F])/\\x\1/g; s/\t/\\t/g' geonames.ttl.1 | while read -r line ; do echo -e $line ; done > geonames.ttl.2
+
+# do it again - some are escaped twice:
+sed -r 's/%([0-9A-F])/\\x\1/g; s/\t/\\t/g' geonames.ttl.2 | while read -r line ; do echo -e $line ; done > geonames.ttl.3
+
+# some titles contain spaces instead of underscore - fix that:
+sed 's/ /_/g' geonames.ttl.3 > geonames.ttl.4
+
+# stable sort by geonames ID (probably won't change the file, but anyway):
+env LC_ALL=C sort -k 2 -n -s geonames.ttl.4 > geonames.ttl.5
+
+# remove duplicate lines:
+env LC_ALL=C uniq geonames.ttl.5 > geonames.ttl.6
+
+# there are still a few hundred lines that map one geonames ID to multiple pages for a language...
+uniq -f 1 -D geonames.ttl.6
+# ... but it's probably better to keep them than to drop them.
