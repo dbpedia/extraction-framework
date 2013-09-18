@@ -1,3 +1,9 @@
+Download and unzip
+
+http://download.geonames.org/export/dump/alternateNames.zip
+
+Keep alternateNames.txt
+
 About 400K lines in alternateNames.txt have this format:
 
 8078498 12 link http://en.wikipedia.org/wiki/Takht-e_Qeysar 1 1 1
@@ -20,15 +26,24 @@ sed -r 's/%([0-9A-F])/\\x\1/g; s/\t/\\t/g' geonames.ttl.1 | while read -r line ;
 # do it again - some are escaped twice:
 sed -r 's/%([0-9A-F])/\\x\1/g; s/\t/\\t/g' geonames.ttl.2 | while read -r line ; do echo -e $line ; done > geonames.ttl.3
 
-# some titles contain spaces instead of underscore - fix that:
-sed 's/ /_/g' geonames.ttl.3 > geonames.ttl.4
+# drop useless titles (there's one title with question marks, it's useless as well): 
+grep -v '[][^{}|#<>?]' geonames.ttl.3 > geonames.ttl.4 
+
+# some titles contain spaces instead of underscore - fix that, and re-percent-escape some chars:
+sed 's/ /_/g; s/%/%25/g; s/"/%22/g; s/\?/%3F/g; s/\^/%5E/g; s/`/%60/g' geonames.ttl.4 > geonames.ttl.5
 
 # stable sort by geonames ID (probably won't change the file, but anyway):
-env LC_ALL=C sort -k 2 -n -s geonames.ttl.4 > geonames.ttl.5
+env LC_ALL=C sort -k 2 -n -s geonames.ttl.5 > geonames.ttl.6
 
 # remove duplicate lines:
-env LC_ALL=C uniq geonames.ttl.5 > geonames.ttl.6
+env LC_ALL=C uniq geonames.ttl.6 > geonames.ttl.7
 
 # there are still a few hundred lines that map one geonames ID to multiple pages for a language...
-uniq -f 1 -D geonames.ttl.6
+uniq -f 1 -D geonames.ttl.7
 # ... but it's probably better to keep them than to drop them.
+
+# stable sort by language...
+env LC_ALL=C sort -k 3 -s geonames.ttl.7 > geonames.ttl.8
+
+# ...and split by language
+awk '{ if ($3 != last) { last = $3; close(file); file = "geonames."$3".ttl" } print "<http://"$3".dbpedia.org/resource/"$1"> <http://www.w3.org/2002/07/owl#sameAs> <http://sws.geonames.org/"$2"/> ." >> file }' geonames.ttl.8
