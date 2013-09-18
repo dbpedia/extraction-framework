@@ -80,19 +80,16 @@ grep 'short_abstracts\w*\.ttl' lines-bytes-packed.txt | grep -v 'en_uris' | awk 
 grep -c '<page>' mappings/Mapping_* | sed 's/[_:.]/ /g' | sort -k 4 -n -r | awk '{s+=$4; print $2 " " $4} END {print "total " s}'
 
 # ontology: count classes
-grep -c '<owl:Class' dbpedia_3.* 
+grep -c '<owl:Class' ontology.owl 
 
 # ontology: count object properties 
-grep -c '<owl:ObjectProperty' dbpedia_3.*
+grep -c '<owl:ObjectProperty' ontology.owl
 
 # ontology: count datatype properties, not specialized 
-grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' dbpedia_3.*
-
-# ontology: count datatype properties, not specialized 
-grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' dbpedia_3.*
+grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' ontology.owl
 
 # ontology: count specialized datatype properties
-grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+">' dbpedia_3.*
+grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+">' ontology.owl
 
 # remove all lines in file bad.nt from file all.nt, write result to clean.nt
 awk '{ if (f==1) { r[$0] } else if (! ($0 in r)) { print $0 } }' f=1 bad.nt f=2 all.nt >clean.nt
