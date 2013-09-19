@@ -12,12 +12,12 @@ import scala.Console.err
  * new rules.
  *  
  * Example call:
- * ../run RecodeUris /data/dbpedia/links bbcwildlife,bookmashup _fixed _links.nt.gz
+ * ../run RecodeUris /data/dbpedia/links _fixed _links.nt.gz bbcwildlife,bookmashup 
  */
 object RecodeUris {
   
   private def split(arg: String): Array[String] = { 
-    arg.split(",").map(_.trim).filter(_.nonEmpty)
+    arg.split("[,\\s]+").map(_.trim).filter(_.nonEmpty)
   }
   
   def main(args: Array[String]): Unit = {
@@ -25,23 +25,23 @@ object RecodeUris {
     require(args != null && args.length == 4, 
       "need four args: "+
       /*0*/ "directory, "+
-      /*1*/ "comma-separated names of input files (e.g. 'bbcwildlife,bookmashup'), "+
-      /*2*/ "output dataset name extension (e.g. '_fixed'), "+
-      /*3*/ "file extension (e.g. '_links.nt.gz')"
+      /*1*/ "output dataset name extension (e.g. '_fixed'), "+
+      /*2*/ "file extension (e.g. '_links.nt.gz')"+
+      /*3*/ "comma- or space-separated names of input files (e.g. 'bbcwildlife,bookmashup'), "
     )
     
     val dir = new File(args(0))
     
-    val inputs = split(args(1))
-    require(inputs.nonEmpty, "no input file names")
-    
-    val extension = args(2)
+    val extension = args(1)
     require(extension.nonEmpty, "no output name extension")
     
     // Suffix of input/output files, for example "_links.nt.gz"
     // This script works with .nt or .nq files using URIs, NOT with .ttl or .tql files and NOT with IRIs.
-    val suffix = args(3)
+    val suffix = args(2)
     require(suffix.nonEmpty, "no input/output file suffix")
+    
+    val inputs = split(args(3))
+    require(inputs.nonEmpty, "no input file names")
     
     for (input <- inputs) {
       var changeCount = 0
