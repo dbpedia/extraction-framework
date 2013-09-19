@@ -22,32 +22,29 @@ object RecodeUris {
   
   def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length >= 4, 
-      "need at least four args: "+
-      /*0*/ "directory, "+
-      /*1*/ "input file suffix, "+
-      /*2*/ "output file suffix, "+
-      /*3*/ "comma- or space-separated names of input files (e.g. 'bbcwildlife,bookmashup')"
+    require(args != null && args.length >= 3, 
+      "need at least three args: "+
+      /*0*/ "input file suffix, "+
+      /*1*/ "output file suffix, "+
+      /*2*/ "comma- or space-separated names of input files (e.g. 'bbcwildlife,bookmashup')"
     )
-    
-    val dir = new File(args(0))
     
     // Suffix of input/output files, for example ".nt.gz"
     
-    val inSuffix = args(1)
+    val inSuffix = args(0)
     require(inSuffix.nonEmpty, "no input file suffix")
     
-    val outSuffix = args(2)
+    val outSuffix = args(1)
     require(outSuffix.nonEmpty, "no output file suffix")
     
-    val inputs = split(args(3))
+    val inputs = split(args(2))
     require(inputs.nonEmpty, "no input file names")
     require(inputs.forall(_.endsWith(inSuffix)), "input file names must end with input file suffix")
     
     for (input <- inputs) {
       var changeCount = 0
-      val inFile = new File(dir, input)
-      val outFile = new File(dir, input.substring(0, input.length - inSuffix.length) + outSuffix)
+      val inFile = new File(input)
+      val outFile = new File(input.substring(0, input.length - inSuffix.length) + outSuffix)
       QuadMapper.mapQuads(input, inFile, outFile, required = true) { quad =>
         var changed = false
         val subj = fixUri(quad.subject)
