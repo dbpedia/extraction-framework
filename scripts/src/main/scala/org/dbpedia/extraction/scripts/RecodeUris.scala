@@ -22,8 +22,8 @@ object RecodeUris {
   
   def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length == 4, 
-      "need four args: "+
+    require(args != null && args.length >= 4, 
+      "need at least four args: "+
       /*0*/ "directory, "+
       /*1*/ "output dataset name extension (e.g. '_fixed'), "+
       /*2*/ "file extension (e.g. '_links.nt.gz')"+
