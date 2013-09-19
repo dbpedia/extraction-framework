@@ -12,7 +12,7 @@ import scala.Console.err
  * new rules.
  *  
  * Example call:
- * ../run RecodeUris /data/dbpedia/links _fixed _links.nt.gz bbcwildlife,bookmashup 
+ * ../run RecodeUris /data/dbpedia/links .nt.gz _fixed.nt.gz bbcwildlife.nt.gz,bookmashup.nt.gz 
  */
 object RecodeUris {
   
@@ -25,28 +25,29 @@ object RecodeUris {
     require(args != null && args.length >= 4, 
       "need at least four args: "+
       /*0*/ "directory, "+
-      /*1*/ "output dataset name extension (e.g. '_fixed'), "+
-      /*2*/ "file extension (e.g. '_links.nt.gz')"+
-      /*3*/ "comma- or space-separated names of input files (e.g. 'bbcwildlife,bookmashup'), "
+      /*1*/ "input file suffix, "+
+      /*2*/ "output file suffix, "+
+      /*3*/ "comma- or space-separated names of input files (e.g. 'bbcwildlife,bookmashup')"
     )
     
     val dir = new File(args(0))
     
-    val extension = args(1)
-    require(extension.nonEmpty, "no output name extension")
+    // Suffix of input/output files, for example ".nt.gz"
     
-    // Suffix of input/output files, for example "_links.nt.gz"
-    // This script works with .nt or .nq files using URIs, NOT with .ttl or .tql files and NOT with IRIs.
-    val suffix = args(2)
-    require(suffix.nonEmpty, "no input/output file suffix")
+    val inSuffix = args(1)
+    require(inSuffix.nonEmpty, "no input file suffix")
+    
+    val outSuffix = args(2)
+    require(outSuffix.nonEmpty, "no output file suffix")
     
     val inputs = split(args(3))
     require(inputs.nonEmpty, "no input file names")
+    require(inputs.forall(_.endsWith(inSuffix)), "input file names must end with input file suffix")
     
     for (input <- inputs) {
       var changeCount = 0
-      val inFile = new File(dir, input + suffix)
-      val outFile = new File(dir, input + extension + suffix)
+      val inFile = new File(dir, input)
+      val outFile = new File(dir, input.substring(0, input.length - inSuffix.length) + outSuffix)
       QuadMapper.mapQuads(input, inFile, outFile, required = true) { quad =>
         var changed = false
         val subj = fixUri(quad.subject)

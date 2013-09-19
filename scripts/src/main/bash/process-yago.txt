@@ -160,12 +160,11 @@ cp yagoDBpediaInstances.ttl.3 yago_links.ttl
 == convert from IRIs to URIs ==
 
 cd git/extraction-framework/scripts
-../run RecodeUris  /data2/dbpedia-release/yago/39 _uris .ttl yago_links,yago_taxonomy,yago_types,yago_type_links
+../run RecodeUris  /data2/dbpedia-release/yago/39 .ttl .nt yago_links.ttl yago_taxonomy.ttl yago_types.ttl yago_type_links.ttl
 
 == pack as GZip and BZip2 ==
 
 cd /data2/dbpedia-release/yago/39
-for i in *_uris.ttl ; do mv $i ${i/_uris.ttl/.nt} ; done
 for i in * ; do echo $i.gz ; pigz -c <$i >$i.gz ; echo $i.bz2 ; pbzip2 -c <$i >$i.bz2 ; done
 
 
