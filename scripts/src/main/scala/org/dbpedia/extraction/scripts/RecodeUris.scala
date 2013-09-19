@@ -16,10 +16,6 @@ import scala.Console.err
  */
 object RecodeUris {
   
-  private def split(arg: String): Array[String] = { 
-    arg.split("[,\\s]+").map(_.trim).filter(_.nonEmpty)
-  }
-  
   def main(args: Array[String]): Unit = {
     
     require(args != null && args.length >= 3, 
@@ -37,7 +33,8 @@ object RecodeUris {
     val outSuffix = args(1)
     require(outSuffix.nonEmpty, "no output file suffix")
     
-    val inputs = split(args(2))
+    // Use all remaining args as comma or whitespace separated paths
+    var inputs = args.drop(2).flatMap(_.split("[,\\s]")).map(_.trim).filter(_.nonEmpty)
     require(inputs.nonEmpty, "no input file names")
     require(inputs.forall(_.endsWith(inSuffix)), "input file names must end with input file suffix")
     
