@@ -69,9 +69,11 @@ object RecodeUris {
     
   }
   
+  private val DBPEDIA_URI = "^http://([a-z-]+.)?dbpedia.org/resource/.*$".r.pattern
+  
   def fixUri(uri: String): String = {
     
-    if (uri.startsWith("http://dbpedia.org/")) {
+    if (DBPEDIA_URI.matcher(uri).matches()) {
       
       var input = uri
       
