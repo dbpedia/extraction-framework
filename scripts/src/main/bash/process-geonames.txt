@@ -48,10 +48,18 @@ env LC_ALL=C sort -k 3 -s geonames.ttl.7 > geonames.ttl.8
 # ...and split by language
 awk '{ if ($3 != last) { last = $3; close(file); system("mkdir "$3); file = $3"/geonames_links_"$3".ttl" } print "<http://"$3".dbpedia.org/resource/"$1"> <http://www.w3.org/2002/07/owl#sameAs> <http://sws.geonames.org/"$2"/> ." >> file }' geonames.ttl.8
 
+# remove languages that have no DBpedia folder
+rm -fr se/
+
 # succumb to English URI hegemony
 mv en/geonames_links_en.ttl geonames_links_en.ttl
 sed 's%http://en\.dbpedia\.org%http://dbpedia\.org%g' geonames_links_en.ttl > en/geonames_links_en.ttl
 rm geonames_links_en.ttl
 
+# generate .nt from .ttl files
 cd ~/git/extraction-framework/scripts
 ../run RecodeUris .ttl .nt /data/dbpedia-release/geonames/*/*.ttl
+
+# rename and copy to main folders
+for i in */*.{gz,bz2} ; do suffix=${i#*.} ; wiki=${i%%/*}wiki ; path=$(echo /data/dbpedia-release/data/full/$wiki/2013*) ; date=${path##*/} ; cp $i $path/$wiki-$date-geonames-links.$suffix ; done
+
