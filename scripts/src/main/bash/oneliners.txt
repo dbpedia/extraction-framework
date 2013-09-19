@@ -114,3 +114,12 @@ wget --background --spider --recursive --level 1 --domains=downloads.dbpedia.org
 # - the others are invalid in Wikipedia titles: %23 %3C %3E %5B %5D %7B %7C %7D 
 # - may fail for other reasons, depending on file content, shell settings, etc.
 sed -r 's/%([89ABCDEF])/\\x\1/g' abc.nt | while read -r line ; do echo -e $line ; done > abc.ttl
+
+# find all *page-links*.{nt,ttl} files
+find -name '*page-links*.nt.gz' -o -name '*page-links*.ttl.gz' | sort > ../page-links.txt
+
+# generate in-link counts
+cat ../page-links.txt | while read i ; do echo $i; gzip -d < $i | grep -v '^#' | cut -d ' ' -f 3 | env LC_ALL=C sort | uniq -c | sort -k 1,1 -n -s -r | awk '{print $2" <http://dbpedia.org/ontology/wikiPageInLinkCount> \""$1"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-in-link-counts} ; done &> ../page-in-link-counts.log &
+
+# generate out-link count (the first sort is not really necessary - our triples are already grouped by subject, and grouping is enough for uniq - but it's nicer that the in-link and out-link are sorted similarly)
+cat ../page-links.txt | while read i ; do echo $i; gzip -d < $i | grep -v '^#' | cut -d ' ' -f 1 | env LC_ALL=C sort | uniq -c | sort -k 1,1 -n -s -r | awk '{print $2" <http://dbpedia.org/ontology/wikiPageOutLinkCount> \""$1"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-out-link-counts} ; done &> ../page-out-link-counts.log &
