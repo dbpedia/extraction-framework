@@ -33,7 +33,7 @@ public class PublisherService {
         Calendar curDate = Calendar.getInstance();
 
         if  (   (curDate.get(Calendar.HOUR_OF_DAY) == hour) &&
-                (curDate.get(Calendar.DAY_OF_MONTH) == day) &&
+                (curDate.get(Calendar.DAY_OF_MONTH) + 1 == day) &&
                 (curDate.get(Calendar.MONTH) == month) &&
                 (curDate.get(Calendar.YEAR) == year)
             ){
@@ -44,7 +44,7 @@ public class PublisherService {
             sequence = 0;
             hour = curDate.get(Calendar.HOUR_OF_DAY);
             day =  curDate.get(Calendar.DAY_OF_MONTH);
-            month =curDate.get(Calendar.MONTH);
+            month =curDate.get(Calendar.MONTH) + 1;
             year = curDate.get(Calendar.YEAR);
         }
 
@@ -88,7 +88,7 @@ public class PublisherService {
             sequence = -1;  // will increase on  getNextPublishPath
             hour = curDate.get(Calendar.HOUR_OF_DAY);
             day =  curDate.get(Calendar.DAY_OF_MONTH);
-            month =curDate.get(Calendar.MONTH);
+            month =curDate.get(Calendar.MONTH) + 1;
             year = curDate.get(Calendar.YEAR);
         }
         else {
