@@ -37,11 +37,10 @@ import scala.Console.err
  * long-abstracts
  * mappingbased-properties
  * mappingbased-properties-redirected
- * page-in-link-counts
- * page-in-link-counts-redirected
+ * page-in-link-counts (redirected)
  * page-links
  * page-links-redirected
- * page-out-link-counts
+ * page-out-link-counts (redirected)
  * persondata
  * persondata-redirected
  * pnd
