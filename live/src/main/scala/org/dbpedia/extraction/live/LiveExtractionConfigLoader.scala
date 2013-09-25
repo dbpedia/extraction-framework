@@ -64,7 +64,7 @@ object LiveExtractionConfigLoader
     val policy: String = LiveOptions.options.get("uri-policy.main")
     prop.setProperty("uri-policy.main", policy)
     val policyParser = new PolicyParser(prop)
-    policyParser.parsePolicy(policy)
+    policyParser.parsePolicy("uri-policy.main")
   }
 
   def reload(t : Long) =
