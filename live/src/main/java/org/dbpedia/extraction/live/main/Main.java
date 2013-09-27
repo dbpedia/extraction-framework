@@ -54,7 +54,7 @@ public class Main {
 
     public static void initLive() {
 
-        PropertyConfigurator.configure("log4j.properties");
+        PropertyConfigurator.configure("log4j.live.properties");
 
         feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
                 LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
