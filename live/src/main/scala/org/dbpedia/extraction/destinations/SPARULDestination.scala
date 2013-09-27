@@ -43,7 +43,10 @@ class SPARULDestination(insOrDel: Boolean, policies: Array[Policy] = null) exten
     if (tripleSize == 0) return
     val success = JDBCUtil.execSPARUL("SPARQL " + sparql.toString)
     // TODO Better logging
-    if (!success)
+    if (!success) {
       logger.error("SPARUL Update for page failed")
+      System.exit(1)
+    }
+
   }
 }
