@@ -15,7 +15,7 @@ extends Ordered[Date]
     require(day.isEmpty || (day.get > 0 && day.get <=31), "day must not be in the range (0,31]")
     if ((!day.isEmpty) && (!month.isEmpty) )
     {
-      require(!(day.get == 31 && (month.get == 2 || month.get == 4 || month.get == 6 || month.get == 9)), "Months 02, 04, 06, 09 do not have 31 days")
+      require(!(day.get == 31 && (month.get == 2 || month.get == 4 || month.get == 6 || month.get == 9 || month.get == 11)), "Months 02, 04, 06, 09 do not have 31 days")
       require(!(day.get > 29 && month.get == 2 ), "Months 02, 04, 06, 09 do not have 31 days")
     }
 
