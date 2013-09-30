@@ -12,7 +12,13 @@ extends Ordered[Date]
     // Year '0000' will soon be allowed. See http://www.w3.org/TR/xmlschema-2/#year-zero
     require(year.isEmpty || year.get != 0, "year must not be 0")
     require(month.isEmpty || month.get != 0, "month must not be 0")
-    require(day.isEmpty || day.get != 0, "day must not be 0")
+    require(day.isEmpty || (day.get > 0 && day.get <=31), "day must not be in the range (0,31]")
+    if ((!day.isEmpty) && (!month.isEmpty) )
+    {
+      require(!(day.get == 31 && (month.get == 2 || month.get == 4 || month.get == 6 || month.get == 9)), "Months 02, 04, 06, 09 do not have 31 days")
+      require(!(day.get > 29 && month.get == 2 ), "Months 02, 04, 06, 09 do not have 31 days")
+    }
+
 
     datatype.name match
     {
