@@ -100,6 +100,7 @@ public abstract class Feeder extends Thread {
     protected abstract List<LiveQueueItem> getNextItems();
 
     public void run() {
+        int counter = 0;
         while (keepRunning) {
             try {
                 for (LiveQueueItem item : getNextItems()) {
@@ -110,6 +111,11 @@ public abstract class Feeder extends Thread {
                 // On error re-initiate feeder
                 initFeeder();
             }
+            if (counter % 500 == 0) {
+                setLatestProcessedDate(null);
+                counter = 0;
+            }
+            counter ++;
         }
     }
 
