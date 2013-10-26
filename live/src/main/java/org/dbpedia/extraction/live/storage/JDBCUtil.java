@@ -52,6 +52,9 @@ public class JDBCUtil {
             return true;
         } catch (Exception e) {
             logger.warn(e.getMessage());
+            String message = e.getMessage();
+            if (message.contains("datetime"))
+                return true;
             return false;
         } finally {
             try {
