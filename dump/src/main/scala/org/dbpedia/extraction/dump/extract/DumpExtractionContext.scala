@@ -4,7 +4,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.wikiparser.PageNode
-import org.dbpedia.extraction.mappings.{Mappings, Redirects}
+import org.dbpedia.extraction.mappings.{Disambiguations, Mappings, Redirects}
 
 /**
  * TODO: remove this class. Different extractors need different resources. We should use some kind
@@ -35,5 +35,7 @@ trait DumpExtractionContext
     def articlesSource : Source
 
     def redirects : Redirects
+
+    def disambiguations : Disambiguations
 }
 

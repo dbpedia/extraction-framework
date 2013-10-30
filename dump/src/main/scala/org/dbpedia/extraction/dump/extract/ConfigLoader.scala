@@ -97,6 +97,14 @@ class ConfigLoader(config: Config)
             }
             
             def redirects : Redirects = _redirects
+
+            private val _disambiguations =
+            {
+              val cache = finder.file(date, "disambiguations-ids.obj")
+              Disambiguations.load(reader(finder.file(date, config.disambiguations)), cache, language)
+            }
+
+            def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
         }
 
         //Extractors
