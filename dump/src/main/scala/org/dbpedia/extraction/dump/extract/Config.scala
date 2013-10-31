@@ -29,6 +29,7 @@ extends ConfigParser(config)
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
   
   val source = config.getProperty("source", "pages-articles.xml")
+  val disambiguations = config.getProperty("disambiguations", "page_props.sql.gz")
 
   val wikiName = config.getProperty("wikiName", "wiki")
 
