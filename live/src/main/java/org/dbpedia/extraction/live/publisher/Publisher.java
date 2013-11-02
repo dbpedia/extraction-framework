@@ -55,6 +55,7 @@ public class Publisher extends Thread{
 
                 if (pageCache.contains(pubData.pageID) || counter % 300 == 0) {
                     flush();
+                    counter = 0;
                 }
                 bufferDiff(pubData);
                 counter++;
