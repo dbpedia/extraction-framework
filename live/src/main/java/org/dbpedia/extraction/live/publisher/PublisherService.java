@@ -33,8 +33,8 @@ public class PublisherService {
         Calendar curDate = Calendar.getInstance();
 
         if  (   (curDate.get(Calendar.HOUR_OF_DAY) == hour) &&
-                (curDate.get(Calendar.DAY_OF_MONTH) + 1 == day) &&
-                (curDate.get(Calendar.MONTH) == month) &&
+                (curDate.get(Calendar.DAY_OF_MONTH) == day) &&
+                (curDate.get(Calendar.MONTH) + 1 == month) &&
                 (curDate.get(Calendar.YEAR) == year)
             ){
 
@@ -48,7 +48,7 @@ public class PublisherService {
             year = curDate.get(Calendar.YEAR);
         }
 
-        // TODO write latest path not from here and not so aften (too much I/O)
+        // TODO write latest path not from here and not so often (too much I/O)
         writeLastPublishPath();
 
         return getCurrentPublishPath();
