@@ -70,6 +70,9 @@ object LiveExtractor
         private lazy val _redirects = Redirects.loadFromSource(articlesSource, language)
         def redirects : Redirects = _redirects
 
+        //TODO automate this task
+        def disambiguations : Disambiguations = new Disambiguations(Set[Long]())
+
         def commonsSource : Source = _commonsSource
       }
   }
