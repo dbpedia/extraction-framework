@@ -6,6 +6,7 @@ import org.dbpedia.extraction.destinations.formatters.SPARULFormatter
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.live.storage.JDBCUtil
 import scala.collection.Seq
+import org.dbpedia.extraction.live.main.Main
 
 /**
  * Writes modified triples to triple store. Can do one operation (insert / delete) at a time so initialize accordingly
@@ -45,6 +46,7 @@ class SPARULDestination(insOrDel: Boolean, policies: Array[Policy] = null) exten
     // TODO Better logging
     if (!success) {
       logger.error("SPARUL Update for page failed")
+      Main.stopLive
       System.exit(1)
     }
 
