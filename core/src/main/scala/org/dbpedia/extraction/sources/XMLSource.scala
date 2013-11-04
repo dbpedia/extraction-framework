@@ -5,6 +5,8 @@ import java.io.{File,FileInputStream,InputStreamReader}
 import scala.xml.Elem
 import org.dbpedia.extraction.util.Language
 import java.io.Reader
+import java.util.concurrent.{Executors, Callable}
+import scala.collection.JavaConversions._
 
 /**
  *  Loads wiki pages from an XML stream using the MediaWiki export format.
@@ -29,6 +31,10 @@ object XMLSource
       fromReader(() => new InputStreamReader(new FileInputStream(file), "UTF-8"), language, filter)
     }
 
+    def fromMultipleFiles(files: List[File], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+      fromReaders(files.map { f => () => new InputStreamReader(new FileInputStream(f), "UTF-8") }.toList, language, filter)
+    }
+
     /**
      * Creates an XML Source from a reader.
      *
@@ -38,6 +44,10 @@ object XMLSource
      */
     def fromReader(source: () => Reader, language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
       new XMLReaderSource(source, language, filter)
+    }
+
+    def fromReaders(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+      new MultipleXMLReaderSource(sources, language, filter)
     }
 
     /**
@@ -53,6 +63,38 @@ object XMLSource
        * @param xml The xml which contains the pages
      */
     def fromOAIXML(xml : Elem) : Source  = new OAIXMLSource(xml)
+}
+
+/**
+ * XML source which reads from a file
+ */
+private class MultipleXMLReaderSource(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean) extends Source
+{
+  val executorService = Executors.newFixedThreadPool(Runtime.getRuntime.availableProcessors())
+
+  override def foreach[U](proc : WikiPage => U) : Unit = {
+
+    try {
+
+      def tasks = sources.map { source =>
+        new Callable[Unit]() {
+          def call() {
+            val reader = source()
+            try new WikipediaDumpParser(reader, language, filter.asInstanceOf[WikiTitle => java.lang.Boolean], proc).run()
+            finally reader.close()
+          }
+        }
+      }
+
+      // Wait for the tasks to finish
+      executorService.invokeAll(tasks)
+
+    } finally {
+      executorService.shutdown()
+    }
+  }
+
+  override def hasDefiniteSize = true
 }
 
 /**
