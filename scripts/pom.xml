@@ -33,6 +33,16 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>WikipediaDumpSplitter</id>
+                            <mainClass>org.dbpedia.extraction.scripts.WikipediaDumpSplitter</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xms512m</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>ProcessInterLanguageLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.ProcessInterLanguageLinks</mainClass>
                             <jvmArgs>

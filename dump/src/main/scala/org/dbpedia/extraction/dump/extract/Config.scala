@@ -31,6 +31,7 @@ extends ConfigParser(config)
   // Watch out, this could be a regex
   val source = config.getProperty("source", "pages-articles.xml")
   val disambiguations = config.getProperty("disambiguations", "page_props.sql.gz")
+  val xmlHeader = config.getProperty("xml-header", null)
 
   val wikiName = config.getProperty("wikiName", "wiki")
 

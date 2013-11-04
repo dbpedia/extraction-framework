@@ -86,7 +86,33 @@ class ConfigLoader(config: Config)
 
             private val _articlesSource =
             {
-              val articlesReaders = readers(config.source, finder, date)
+              // Sort by file name. In case of multistream dump chunks, the last file already has an ending root tag
+              // Multistream chunks are NOT valid MediaWiki dump files:
+              // - only the last chunk has a closing </mediawiki> tag
+              // - chunks do not have a MediaWiki XML header
+              // We must compose a valid XML stream to make it parseable by the DEF WikiParser
+              val articlesFiles = files(config.source, finder, date).sorted
+
+              // if config.xmlHeader != null we must wrap the content
+              val streams = articlesFiles.zipWithIndex.map { case (file, i) =>
+
+                if (config.xmlHeader == null) {
+                  stream(file)
+                }
+                else {
+
+                  val s = new SequenceInputStream(
+                    stream(finder.file(date,config.xmlHeader)),
+                    stream(file))
+
+                  // Add a closing root tag if this is not the last chunk
+                  if (i != (articlesFiles.size - 1)) new SequenceInputStream(s, new ByteArrayInputStream("</mediawiki>".getBytes()))
+                  else s
+
+                }
+              }
+
+              val articlesReaders = streams.map(stream => () => new InputStreamReader(stream, UTF8))
 
               XMLSource.fromReaders(articlesReaders, language,
                 title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
@@ -146,6 +172,11 @@ class ConfigLoader(config: Config)
       () => new OutputStreamWriter(zip(new FileOutputStream(file)), UTF8)
     }
 
+    private def stream(file: File): InputStream = {
+      val unzip = unzipper(file.getName)
+      unzip(new FileInputStream(file))
+    }
+
     private def reader(file: File): () => Reader = {
       val unzip = unzipper(file.getName)
       () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8)
@@ -153,9 +184,14 @@ class ConfigLoader(config: Config)
 
     private def readers(source: String, finder: Finder[File], date: String): List[() => Reader] = {
 
+      files(source, finder, date).map(reader(_))
+    }
+
+    private def files(source: String, finder: Finder[File], date: String): List[File] = {
+
       if (config.source.startsWith("@")) { // the articles source is a regex - we want to match multiple files
-        finder.matchFiles(date, config.source.substring(1)).map(reader(_))
-      } else List(reader(finder.file(date, config.source)))
+        finder.matchFiles(date, config.source.substring(1))
+      } else List(finder.file(date, config.source))
     }
 
     /**
