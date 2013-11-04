@@ -138,8 +138,9 @@ object LiveExtractionConfigLoader
         val liveCache = new JSONCache(cpage.id, cpage.title.decoded)
 
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
-        destList += new SPARULDestination(true, policies) // add triples
+        // *Delete first* When a triple is deleted from one extractor and added from another extractor
         destList += new SPARULDestination(false, policies) // delete triples
+        destList += new SPARULDestination(true, policies) // add triples
         destList += new JSONCacheUpdateDestination(liveCache)
         destList += new PublisherDiffDestination(cpage.id, policies)
         destList += new LoggerDestination(cpage.id, cpage.title.decoded) // Just to log extraction results
