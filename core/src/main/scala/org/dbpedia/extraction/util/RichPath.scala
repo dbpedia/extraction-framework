@@ -82,7 +82,9 @@ class RichPath(path: Path) extends FileLike[Path] {
     val stream = Files.newDirectoryStream(path, glob)
     try stream.toList finally stream.close
   }
-  
+
+  override def size: Long = Files.size(path)
+
   override def isFile: Boolean = Files.isRegularFile(path)
   
   override def isDirectory: Boolean = Files.isDirectory(path)

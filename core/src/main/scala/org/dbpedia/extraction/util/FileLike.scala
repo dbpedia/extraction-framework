@@ -27,6 +27,8 @@ abstract class FileLike[T <% FileLike[T]] {
   
   def delete(recursive: Boolean = false): Unit
 
+  def size(): Long
+
   def isFile: Boolean
 
   def isDirectory: Boolean
