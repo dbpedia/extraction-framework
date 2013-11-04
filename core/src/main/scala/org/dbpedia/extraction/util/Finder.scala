@@ -74,4 +74,17 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameGiven: Strin
    * "baseDir/enwiki/20120403/enwiki-20120403-pages-articles.xml"
    */
   def file(date: String, suffix: String) = directory(date).resolve(wikiName+'-'+date+'-'+suffix)
+
+  /**
+   * Files which match the supplied pattern in data directory for language.
+   * Files are sorted by size (descending)
+   *
+   * @param date
+   * @param pattern
+   * @return
+   */
+  def matchFiles(date: String, pattern: String): List[T] = {
+    val regex = (wikiName + "-" + date + "-" + pattern).r
+    directory(date).list.sortBy(_.size()).reverse.map(_.name).filter(regex.findAllIn(_).matchData.nonEmpty).map(directory(date).resolve(_))
+  }
 }

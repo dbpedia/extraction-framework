@@ -10,7 +10,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 
 /**
  */
-class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language: Language, fileNames: Set[String], downloader: Downloader)
+class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language: Language, fileNames: Set[(String, Boolean)], downloader: Downloader)
 {
   private val DateLink = """<a href="(\d{8})/">""".r
   
@@ -50,7 +50,24 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     }
     finally started.delete
   }
-  
+
+  private def expandFilenameRegex(date: String, index: File, filenameRegexes: Set[String]): Set[String] = {
+
+    // Prepare regexes
+    val regexes = filenameRegexes.map { regex =>
+      ("<a href=\"/(" + wiki + "/" + date + "/" + wiki + "-" + date + "-" + regex + ")\">").r
+    }
+
+    // Result
+    val filenames = Set[String]()
+
+    forEachLine(index) { line =>
+      regexes.foreach(regex => regex.findAllIn(line).matchData.foreach(filenames += _.group(1)))
+    }
+
+    filenames
+  }
+
   def downloadDate(date: String): Boolean = {
     
     val datePage = new URL(mainPage, date+"/") // here we could use index.html
@@ -58,9 +75,15 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     if (! dateDir.exists && ! dateDir.mkdirs) throw new Exception("Target directory '"+dateDir+"' does not exist and cannot be created")
     
     val complete = finder.file(date, Download.Complete)
-    
-    val urls = fileNames.map(fileName => new URL(baseUrl, wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName))
-    
+
+    // First download the files list to expand regexes
+    downloader.downloadTo(datePage, dateDir) // creates index.html
+
+    // Collect regexes
+    val urlsFromRegexes = expandFilenameRegex(date, new File(dateDir, "index.html"), fileNames.filter(_._2).map(_._1)).map(new URL(baseUrl, _))
+
+    val urls = urlsFromRegexes ++ fileNames.filter(!_._2).map(fileName => new URL(baseUrl, wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName._1))
+
     if (complete.exists) {
       // Previous download process said that this dir is complete. Note that we MUST check the
       // 'complete' file - the previous download may have crashed before all files were fully
@@ -78,13 +101,15 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
       complete.delete
     }
     
-    // all the links we need
+    // all the links we need - only for non regexes (we have already checked regex ones)
     val links = new HashMap[String, String]()
+    for (fileName <- fileNames.filter(!_._2)) links(fileName._1) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
     // Here we should set "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
     // but "\"/"+wiki+"/"+date+"/" does not exists in incremental updates, keeping the trailing "\">" should do the trick
-    for (fileName <- fileNames) links(fileName) = wiki+"-"+date+"-"+fileName+"\">"
+    // for (fileName <- fileNames) links(fileName) = wiki+"-"+date+"-"+fileName+"\">"
     
-    downloader.downloadTo(datePage, dateDir) // creates index.html
+    // downloader.downloadTo(datePage, dateDir) // creates index.html
+
     forEachLine(new File(dateDir, "index.html")) { line => 
       links.foreach{ case (fileName, link) => if (line contains link) links -= fileName }
     }

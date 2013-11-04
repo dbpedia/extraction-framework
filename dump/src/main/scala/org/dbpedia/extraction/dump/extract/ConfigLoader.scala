@@ -80,12 +80,16 @@ class ConfigLoader(config: Config)
                 MappingsLoader.load(this)
             }
             def mappings : Mappings = _mappings
-    
+
             private val _articlesSource =
             {
-                XMLSource.fromReader(reader(finder.file(date, config.source)), language,                    
-                    title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
-                             title.namespace == Namespace.Category || title.namespace == Namespace.Template)
+              val readers = if (config.source.startsWith("@")) {
+                finder.matchFiles(date, config.source.substring(1)).map(reader(_))
+              } else List(reader(finder.file(date, config.source)))
+
+              XMLSource.fromReaders(readers, language,
+                title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
+                  title.namespace == Namespace.Category || title.namespace == Namespace.Template)
             }
             
             def articlesSource = _articlesSource
