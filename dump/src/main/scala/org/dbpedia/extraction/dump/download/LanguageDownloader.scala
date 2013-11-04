@@ -103,7 +103,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     
     // all the links we need - only for non regexes (we have already checked regex ones)
     val links = new HashMap[String, String]()
-    for (fileName <- fileNames.filter(!_._2)) links(fileName._1) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
+    for (fileName <- fileNames.filter(!_._2)) links(fileName._1) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName._1+"\">"
     // Here we should set "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
     // but "\"/"+wiki+"/"+date+"/" does not exists in incremental updates, keeping the trailing "\">" should do the trick
     // for (fileName <- fileNames) links(fileName) = wiki+"-"+date+"-"+fileName+"\">"
