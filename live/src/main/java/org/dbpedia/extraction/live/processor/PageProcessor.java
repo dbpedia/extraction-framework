@@ -66,8 +66,10 @@ public class PageProcessor extends Thread{
                 if (page.getPriority() == LiveQueuePriority.MappingPriority) {
                     LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
                 }
-                if (page.isDeleted() == true)
+                if (page.isDeleted() == true) {
                     JSONCache.deleteCacheItem(page.getItemID(),LiveExtractionConfigLoader.policies());
+                    logger.info("Deleted page with ID: " + page.getItemID() + " (" + page.getItemName() + ")");
+                }
                 else
                     processPage(page);
             }
