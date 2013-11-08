@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.mappings.{Mappings,RootExtractor}
+import org.dbpedia.extraction.mappings.{Redirects, Mappings, RootExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
@@ -20,8 +20,8 @@ import scala.actors.Actor
  * mappingPageSource is called by loadMappings in the base class, 
  * ontologyPages is called by loadOntology in the base class.
  */
-class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths) 
-extends ExtractionManager(languages, paths)
+class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths, redirects: Map[Language, Redirects])
+extends ExtractionManager(languages, paths, redirects)
 {
     // TODO: remove this field. Clients should get the ontology pages directly from the
     // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
