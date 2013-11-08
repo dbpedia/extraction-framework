@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.live.storage
 
-import org.dbpedia.extraction.destinations.{SPARULDestination, Quad}
+import org.dbpedia.extraction.destinations._
 import org.apache.log4j.Logger
 import scala.util.parsing.json._
 import collection.mutable.{ListBuffer, ArrayBuffer, HashMap}
@@ -131,11 +131,15 @@ object JSONCache {
     val cache = new JSONCache(pageID, "")
     val triples = cache.getAllHashedTriples()
 
-    val dest = new SPARULDestination(false, policies)
+    var destList = new ArrayBuffer[LiveDestination]()
+    destList += new SPARULDestination(false, policies) // delete triples
+    destList += new PublisherDiffDestination(pageID, policies) //  unpublish in changesetes
+    val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
 
-    dest.open
-    dest.write("dummy extractor","dummy hash", Seq(), triples, Seq())
-    dest.close
+
+    compositeDest.open
+    compositeDest.write("dummy extractor","dummy hash", Seq(), triples, Seq())
+    compositeDest.close
 
     deleteCacheOnlyItem(pageID)
   }
