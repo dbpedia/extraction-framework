@@ -14,6 +14,7 @@ import java.net.URL
 import org.apache.commons.compress.compressors.bzip2._
 import java.util.zip._
 import scala.io.Codec.UTF8
+import java.util.logging.Logger
 
 /**
  * Loads the dump extraction configuration.
@@ -23,7 +24,9 @@ import scala.io.Codec.UTF8
  */
 class ConfigLoader(config: Config)
 {
-    /**
+  private val logger = Logger.getLogger(classOf[ConfigLoader].getName)
+
+  /**
      * Loads the configuration and creates extraction jobs for all configured languages.
      *
      * @param configFile The configuration file
@@ -105,7 +108,13 @@ class ConfigLoader(config: Config)
             private val _disambiguations =
             {
               val cache = finder.file(date, "disambiguations-ids.obj")
-              Disambiguations.load(reader(finder.file(date, config.disambiguations)), cache, language)
+              try {
+                Disambiguations.load(reader(finder.file(date, config.disambiguations)), cache, language)
+              } catch {
+                case ex: Exception =>
+                  logger.info("Could not load disambiguations - error: " + ex.getMessage)
+                  null
+              }
             }
 
             def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
