@@ -7,6 +7,7 @@ import org.dbpedia.extraction.live.util.DateUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -123,7 +124,7 @@ public class JDBCUtil {
     /*
     * Custon function for retrieving Cache contents (this is application specific)
     * */
-    public static JSONCacheObject getCacheContent(String query, long pageID) {
+    public static JSONCacheItem getCacheContent(String query, long pageID) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -142,8 +143,14 @@ public class JDBCUtil {
 
                 Blob subjectsBlob = result.getBlob("subjects");
                 byte[] subjectsData = subjectsBlob.getBytes(1, (int) subjectsBlob.length());
+                String subjects = new String(subjectsData);
+                HashSet<String> subjectSet = new HashSet();
+                for (String item: subjects.split("\n")) {
+                    if (!item.trim().isEmpty())
+                        subjectSet.add(item);
+                }
 
-                return new JSONCacheObject(pageID, timesUpdated, new String(jsonData), new String(subjectsData));
+                return new JSONCacheItem(pageID, timesUpdated, new String(jsonData), subjectSet);
             } else {
                 return null;
             }

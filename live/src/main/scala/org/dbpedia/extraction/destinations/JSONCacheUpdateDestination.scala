@@ -6,6 +6,7 @@ import util.Sorting
 import collection.mutable.ArrayBuffer
 import org.apache.log4j.Logger
 import org.dbpedia.extraction.live.storage.JSONCache
+import java.util.HashSet
 
 
 /*
@@ -18,6 +19,7 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
   var extractors = new ArrayBuffer[String](20)
   var hashes = new ArrayBuffer[String](20)
   val formatter: RDFJSONFormatter = new RDFJSONFormatter
+  val subjects = new HashSet[String]
 
   def open {
   }
@@ -26,6 +28,9 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
 
     hashes += hash
     extractors += extractor
+    for (quad <- graphAdd) subjects.add(quad.subject);
+    for (quad <- graphRemove) subjects.add(quad.subject);
+    for (quad <- graphUnmodified) subjects.add(quad.subject);
 
   }
 
@@ -44,7 +49,7 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
       sb.setCharAt(sb.lastIndexOf(","), ' ')
 
 
-    val success = cache.updateCache(sb.toString, "", "") //TODO add subjects / diffs
+    val success = cache.updateCache(sb.toString, subjects, "") //TODO add subjects / diffs
     // TODO better logging
     if (!success) logger.info( "Updating JSON Cache failed")
 
