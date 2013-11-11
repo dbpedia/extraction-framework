@@ -14,11 +14,11 @@ import org.dbpedia.extraction.live.main.Main
 
 class SPARULDestination(insOrDel: Boolean, policies: Array[Policy] = null) extends LiveDestination {
 
-  private val logger = Logger.getLogger(classOf[SPARULDestination].getName)
+  protected val logger = Logger.getLogger(classOf[SPARULDestination].getName)
 
-  private val formatter = new SPARULFormatter(insOrDel, LiveOptions.options.get("graphURI"), policies)
-  private var sparql = new StringBuffer
-  private var tripleSize = 0
+  protected val formatter = new SPARULFormatter(insOrDel, LiveOptions.options.get("graphURI"), policies)
+  protected var sparql = new StringBuffer
+  protected var tripleSize = 0
 
   def open {
     sparql.append(formatter.header)
