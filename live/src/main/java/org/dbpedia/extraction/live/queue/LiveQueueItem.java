@@ -14,7 +14,6 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
     private String modificationDate = "";
     private boolean deleted = false;
     private long statQueueAdd = 0;
-    // tODO: remove this
     private String xml = "";
 
     public LiveQueueItem(long itemID, String modificationDate){
@@ -60,6 +59,10 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
 
     public long getStatQueueAdd(){
         return statQueueAdd;
+    }
+
+    public String getXML(){
+        return xml;
     }
 
     @Override
