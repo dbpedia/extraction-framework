@@ -27,8 +27,7 @@ class JSONCache(pageID: Long, pageTitle: String) {
   initCache
 
   def performCleanUpdate() : Boolean = {
-    return !cacheObj.json.isEmpty
-    //return cacheObj != null && cacheObj.updatedTimes >=5
+    return cacheObj != null && cacheObj.updatedTimes >=5
   }
 
   def getHashForExtractor(extractor: String): String = {
