@@ -4,7 +4,7 @@ import java.net.{URL, URI}
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.util.Language
 import javax.ws.rs._
-import javax.ws.rs.core.Response
+import javax.ws.rs.core.{MediaType, Response}
 import java.util.logging.{Logger,Level}
 import scala.xml.Elem
 import scala.io.{Source,Codec}
@@ -91,8 +91,7 @@ class Extraction(@PathParam("lang") langCode : String)
      */
     @GET
     @Path("extract")
-    @Produces(Array("application/xml"))
-    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String) : String =
+    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String) : Response =
     {
         if (title == null && revid < 0) throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
         
@@ -113,8 +112,17 @@ class Extraction(@PathParam("lang") langCode : String)
         
         val destination = new WriterDestination(() => writer, formatter)
         Server.instance.extractor.extract(source, destination, language)
-        
-        writer.toString
+
+        Response.ok(writer.toString).`type`(selectContentType(format)).build()
+    }
+
+    private def selectContentType(format: String): String = {
+
+      format match
+      {
+        case "trix" => MediaType.APPLICATION_XML
+        case _ => MediaType.TEXT_PLAIN
+      }
     }
 
     /**
