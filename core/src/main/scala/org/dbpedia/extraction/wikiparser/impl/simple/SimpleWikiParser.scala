@@ -5,7 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.RichString.wrapString
-import java.net.URI
+import java.net.{MalformedURLException, URL, URI}
 import java.util.logging.{Level, Logger}
 import java.lang.IllegalArgumentException
 
@@ -275,8 +275,16 @@ final class SimpleWikiParser extends WikiParser
         else
             throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
     }
-    
-    private def parseLink(source : Source, level : Int) : LinkNode =
+
+  /**
+   * Try to parse a link node.
+   * Pay attention to invalid ExternalLinkNodes, as they are very likely to be plain text nodes
+   *
+   * @param source
+   * @param level
+   * @return
+   */
+    private def parseLink(source : Source, level : Int) : Node =
     {
         val startPos = source.pos
         val startLine = source.line
@@ -335,7 +343,9 @@ final class SimpleWikiParser extends WikiParser
               
               throw new WikiParserException("Failed to parse external link: " + destination, startLine, source.findLine(startLine))
             }
-            
+
+            var hasLabel = true
+
             //Parse label
             val nodes =
                 if(source.lastTag(" "))
@@ -345,10 +355,16 @@ final class SimpleWikiParser extends WikiParser
                 else
                 {
                     //No label found => Use destination as label
+                    hasLabel = false
                     List(new TextNode(destinationURI, source.line))
                 }
 
-            createExternalLinkNode(source, destinationURI, nodes, startLine, destination)
+            try {
+              createExternalLinkNode(source, destinationURI, nodes, startLine, destination)
+            } catch {
+              case _ : WikiParserException => // if the URL is not valid then it is a plain text node
+                new TextNode("[" + destinationURI + (if (hasLabel) " " + nodes.map(_.toPlainText).mkString else "") + "]", source.line)
+            }
         }
         else
         {
@@ -369,11 +385,13 @@ final class SimpleWikiParser extends WikiParser
     {
         try
         {
-            ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
+            // TODO: Add a validation routine which conforms to Mediawiki
+            // This will fail for news:// or gopher:// protocols
+            ExternalLinkNode(new URL(destination).toURI, nodes, line, destinationNodes)
         }
         catch
         {
-            case _ : IllegalArgumentException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+            case _ : MalformedURLException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
         }
     }
     
