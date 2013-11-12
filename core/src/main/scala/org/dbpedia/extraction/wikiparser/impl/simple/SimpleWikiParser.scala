@@ -5,7 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.RichString.wrapString
-import java.net.{MalformedURLException, URL, URI}
+import java.net.{URISyntaxException, MalformedURLException, URL, URI}
 import java.util.logging.{Level, Logger}
 import java.lang.IllegalArgumentException
 
@@ -391,7 +391,8 @@ final class SimpleWikiParser extends WikiParser
         }
         catch
         {
-            case _ : MalformedURLException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+            // As per URL.toURI documentation non-strictly RFC 2396 compliant URLs cannot be parsed to URIs
+            case _ : MalformedURLException | _ : URISyntaxException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
         }
     }
     
