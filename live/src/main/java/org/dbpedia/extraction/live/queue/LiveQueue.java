@@ -24,7 +24,10 @@ public class LiveQueue {
     private static HashMap<Long,Integer> uniqueMap = null;
 
     // Keeps track of the size of each priority
-    private static HashMap<LiveQueuePriority,Long> counts;
+    private static HashMap<LiveQueuePriority,Long> counts = null;
+
+    // Keeps track of the max modification date per priority
+    private static HashMap<LiveQueuePriority,String> modificationDate = null;
 
     private LiveQueue() {
     }
@@ -67,6 +70,12 @@ public class LiveQueue {
         getUniqueMap().put(item.getItemID(), finalValue);
         getCounts().put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
         getQueue().add(item);
+
+        String modDate = getModDates().get(item.getPriority());
+        // if cache doesn't exist or greater date
+        if (modDate == null || modDate.compareTo(item.getModificationDate()) > 0)
+            getModDates().put(item.getPriority(),item.getModificationDate());
+
     }
 
     public static LiveQueueItem take() throws InterruptedException {
@@ -95,6 +104,9 @@ public class LiveQueue {
             if (i.getPriority() == priority)
                 return i.getModificationDate();
         }
+        String d = getModDates().get(priority);
+        if (d != null)
+            return d;
         return "";
     }
 
@@ -129,5 +141,16 @@ public class LiveQueue {
             }
         }
         return counts;
+    }
+
+    private static HashMap<LiveQueuePriority,String> getModDates() {
+        if (modificationDate == null) {
+            synchronized (LiveQueue.class) {
+                if (modificationDate == null) {
+                    modificationDate = new HashMap<LiveQueuePriority, String>(5);
+                }
+            }
+        }
+        return modificationDate;
     }
 }
