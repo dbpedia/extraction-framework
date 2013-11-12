@@ -70,12 +70,6 @@ public class LiveQueue {
         getUniqueMap().put(item.getItemID(), finalValue);
         getCounts().put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
         getQueue().add(item);
-
-        String modDate = getModDates().get(item.getPriority());
-        // if cache doesn't exist or greater date
-        if (modDate == null || modDate.compareTo(item.getModificationDate()) > 0)
-            getModDates().put(item.getPriority(),item.getModificationDate());
-
     }
 
     public static LiveQueueItem take() throws InterruptedException {
@@ -87,6 +81,7 @@ public class LiveQueue {
         }
         // update counts
         getCounts().put(item.getPriority(), getPrioritySize(item.getPriority()) -1);
+        getModDates().put(item.getPriority(),item.getModificationDate());
         return item;
     }
 
