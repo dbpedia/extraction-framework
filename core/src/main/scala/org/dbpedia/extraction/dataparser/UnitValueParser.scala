@@ -198,9 +198,13 @@ class UnitValueParser( extractionContext : {
             }
         }
         // http://en.wikipedia.org/wiki/Template:Height
-        // {{height|first_unit=first_value|second_unit=second_value|...}}
+        // {{height|m=1.77|precision=0}}
+        // {{height|ft=6|in=1}}
+        // {{height|ft=6}}
+        // TODO: {{height|ft=5|in=7+1/2}}
         else if (templateName == "Height")
         {
+            // TODO: Should not be needed anymore, remove?
             for (property <- templateNode.property("1"))
             {
                 value = property.children.collect{case TextNode(text, _) => text}.headOption
@@ -226,20 +230,37 @@ class UnitValueParser( extractionContext : {
                     catch { case _ => }
                 }
             } */
-            for (feet <- templateNode.property("ft");
-                 inch <- templateNode.property("in"))
-            {
-                try
-                {
-                    val ftVal =  feet.children.collect{case TextNode(text, _) => text}.headOption
-                    val ftToCm = ftVal.get.toDouble * 30.48
-                    val inVal =  inch.children.collect{case TextNode(text, _) => text}.headOption
-                    val inToCm = inVal.get.toDouble * 2.54
 
-                    value = Some((ftToCm + inToCm).toString)
-                    unit = Some("centimetre")
+            // Metre and foot/inch parameters cannot co-exist
+            if (templateNode.property("m").isDefined) {
+                for (metres <- templateNode.property("m"))
+                {
+                    try
+                    {
+                        val mVal = metres.children.collect {case TextNode(text, _) => text}.headOption
+                        val mToCm = mVal.get.toDouble * 100.0
+                        value = Some(mToCm.toString)
+                        unit = Some("centimetre")
+                    }
+                    catch { case _ => }
                 }
-                catch { case _ => }
+            }
+            else {
+                for (feet <- templateNode.property("ft");
+                     inch <- templateNode.property("in"))
+                {
+                    try
+                    {
+                        val ftVal =  feet.children.collect{case TextNode(text, _) => text}.headOption
+                        val ftToCm = ftVal.get.toDouble * 30.48
+                        val inVal =  inch.children.collect{case TextNode(text, _) => text}.headOption
+                        val inToCm = inVal.get.toDouble * 2.54
+
+                        value = Some((ftToCm + inToCm).toString)
+                        unit = Some("centimetre")
+                    }
+                    catch { case _ => }
+                }
             }
         }
         // http://en.wikipedia.org/wiki/Template:Auto_in
