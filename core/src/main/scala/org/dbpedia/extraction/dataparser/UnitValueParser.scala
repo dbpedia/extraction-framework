@@ -231,6 +231,8 @@ class UnitValueParser( extractionContext : {
                 }
             } */
 
+            val defaultValue : PropertyNode = PropertyNode("", List(TextNode("0", 0)), 0)
+
             // Metre and foot/inch parameters cannot co-exist
             if (templateNode.property("m").isDefined) {
                 for (metres <- templateNode.property("m"))
@@ -246,8 +248,8 @@ class UnitValueParser( extractionContext : {
                 }
             }
             else {
-                for (feet <- templateNode.property("ft");
-                     inch <- templateNode.property("in"))
+                for (feet <- templateNode.property("ft").orElse(Some(defaultValue));
+                     inch <- templateNode.property("in").orElse(Some(defaultValue)))
                 {
                     try
                     {
@@ -323,6 +325,28 @@ class UnitValueParser( extractionContext : {
                 value = valueProperty.children.collect{case TextNode(text, _) => text}.headOption
             }
             unit = Some("metre")
+        }
+        // https://en.wikipedia.org/wiki/Template:Duration
+        // {{duration|h=1|m=20|s=32}}
+        // {{duration|m=20|s=32}}
+        // {{duration|1|20|32}}
+        // {{duration||20|32}}
+        //
+        // Parameters are optional and their default value is 0
+        else if (templateName == "Duration")
+        {
+            val defaultValue = PropertyNode("", List(TextNode("0", 0)), 0)
+
+            val hours = templateNode.property("h").getOrElse(templateNode.property("1").getOrElse(defaultValue))
+            val minutes = templateNode.property("m").getOrElse(templateNode.property("2").getOrElse(defaultValue))
+            val seconds = templateNode.property("s").getOrElse(templateNode.property("3").getOrElse(defaultValue))
+
+            val h = hours.children.collect { case TextNode(t, _) => t }.headOption.getOrElse("0").toDouble
+            val m = minutes.children.collect { case TextNode(t, _ ) => t }.headOption.getOrElse("0").toDouble
+            val s = seconds.children.collect { case TextNode(t, _) => t}.headOption.getOrElse("0").toDouble
+
+            value = Some((h * 3600.0 + m * 60.0 + s).toString)
+            unit = Some("second")
         }
         // If there is no mapping defined for the template -> return null and log it
         else
