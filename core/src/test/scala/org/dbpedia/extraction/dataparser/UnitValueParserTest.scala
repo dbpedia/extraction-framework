@@ -105,6 +105,66 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
         parse("en", "Length", "longwards of 0.7 µm") should equal (Some(0.0000007))
     }
 
+    // https://en.wikipedia.org/wiki/Template:Height
+    /**
+     * {{height|m=1.77|precision=0}}	1.77 m (5 ft 10 in)
+     * {{height|m=1.77|frac=16}}	1.77 m (5 ft 9 11⁄16 in)
+     * {{height|ft=6}}	6 ft 0 in (1.83 m)
+     * {{height|ft=6|in=1}}	6 ft 1 in (1.85 m)
+     * {{height|ft=6|in=1|precision=1}}	6 ft 1 in (1.9 m)
+     * {{height|ft=5|in=7+1/2}}	5 ft 7 1⁄2 in (1.71 m)
+     * {{height|ft=5|in=7+1/2|precision=1}}	5 ft 7 1⁄2 in (1.7 m)
+     * {{height|in=10}}	0 ft 10 in (0.25 m)
+     * {{height|m=1.72|precision=0}}	1.72 m (5 ft 8 in)
+     * {{height|ft=6|in=2|abbr=mos}}	6 feet 2 inches (1.88 m)
+     * {{height|ft=6|in=2}}	6 ft 2 in (1.88 m)
+     * {{height|ft=5|in=7+1/2|precision=3}}	5 ft 7 1⁄2 in (1.715 m)
+     */
+
+    // {{height|m=1.77|precision=0}}
+    // {{height|m=1.77|frac=16}}
+    it should "return 1.77 m with {{height|m=1.77|precision=0}}" in {
+      parse("en", "Length", "{{height|m=1.77|precision=0}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.77 m with {{height|m=1.77|frac=16}}" in {
+      parse("en", "Length", "{{height|m=1.77|frac=16}}") should equal (Some(1.77))
+    }
+
+    // {{height|ft=6}}
+    it should "return 1.8288 m with {{height|ft=6}}" in {
+      parse("en", "Length", "{{height|ft=6}}") should equal (Some(1.8288))
+    }
+
+    // {{height|ft=6|in=1}}
+    // {{height|ft=6|in=1|precision=1}}
+    it should "return 1.85 m with {{height|ft=6|in=1}}" in {
+      parse("en", "Length", "{{height|ft=6|in=1}}") should be (Some(1.8542))
+    }
+
+    it should "return 1.85 m with {{height|ft=6|in=1|precision=1}}" in {
+      parse("en", "Length", "{{height|ft=6|in=1|precision=1}}") should equal (Some(1.8542))
+    }
+
+    // {{height|in=10}}
+    it should "return 0.254 m with {{height|in=10}}" in {
+      parse("en", "Length", "{{height|in=10}}") should equal (Some(0.254))
+    }
+
+    // {{height|m=1.72|precision=0}}
+    it should "return 1.72 m with {{height|m=1.72|precision=0}}" in {
+      parse("en", "Length", "{{height|m=1.72|precision=0}}") should equal (Some(1.72))
+    }
+
+    // {{height|ft=6|in=2|abbr=mos}}
+    // {{height|ft=6|in=2}}
+    it should "return 1.88 m with {{height|ft=6|in=2|abbr=mos}}" in {
+      parse("en", "Length", "{{height|ft=6|in=2|abbr=mos}}") should equal (Some(1.8796))
+    }
+
+    it should "return 1.88 m with {{height|ft=6|in=2}}" in {
+      parse("en", "Length", "{{height|ft=6|in=2}}") should equal (Some(1.8796))
+    }
 
     //Area - Positive Tests - Input is valid
 
@@ -234,12 +294,163 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
     {
         parse("en", "Time", "2:35 min") should equal (Some(155))
     }
-  /*
-    "UnitValueParser" should "return Time(2:35 min)" in
-    {
-        parse("en", "Time", "2:35 min") should equal (Some(155))
+
+    /**
+     * Tests for https://en.wikipedia.org/wiki/Template:Duration
+     *
+     * Named parameters:
+     * {{Duration|h=1|m=22|s=34}} renders as: 1:22:34
+     * {{Duration|m=74|s=32}} renders as: 74:32
+     * {{Duration|m=2|s=34}} renders as: 2:34
+     * {{Duration|h=1|s=34}} renders as: 1:00:34
+     * {{Duration|h=1}} renders as: 1:00:00
+     * {{Duration|h=0|m=22|s=34}} renders as: 0:22:34
+     * {{Duration|h=0|m=0|s=34}} renders as: 0:00:34
+     * {{Duration|h=1|m=22|s=34.5678}} renders as: 1:22:34.5678
+     * {{Duration|h=1|m=22|s=3}} renders as: 1:22:03
+     * {{Duration|h=1|m=2|s=34}} renders as: 1:02:34
+     * {{Duration|h=1|m=2|s=3}} renders as: 1:02:03
+     * {{Duration|h=1|m=2}} renders as: 1:02:00
+     * {{Duration|s=34}} renders as: 0:34
+     * {{Duration|m=0|s=34}} renders as: 0:34
+     * {{Duration|h=1|m=0|s=34}} renders as: 1:00:34
+     * {{Duration|h=1|m=22|s=0}} renders as: 1:22:00
+     *
+     * Numbered parameters:
+     * {{Duration|1|22|34}} renders as: 1:22:34
+     * {{Duration||74|32}} renders as: 74:32
+     * {{Duration|1|2|34}} renders as: 1:02:34
+     * {{Duration|1|2|3}} renders as: 1:02:03
+     * {{Duration|0|22|34}} renders as: 0:22:34
+     * {{Duration|0|0|34}} renders as: 0:00:34
+     * {{Duration||0|34}} renders as: 0:34
+     * {{Duration|||34}} renders as: 0:34
+     * {{Duration|1|22|34.5678}} renders as: 1:22:34.5678
+     * {{Duration||1|22}} renders as: 1:22
+     * {{Duration|1|22}} renders as: 1:22:00
+     * {{Duration|1|22|0}} renders as: 1:22:00
+     * {{Duration|0|0|0}} renders as:
+     * {{Duration|||}} renders as:
+     *
+     */
+
+    // {{Duration|h=1|m=22|s=34}}
+    // {{Duration|1|22|34}}
+    it should "return 1 * 3600.0 + 22 * 60.0 + 34 seconds" in {
+      val expected = Some(1 * 3600.0 + 22 * 60.0 + 34)
+      parse("en", "Time", "{{Duration|h=1|m=22|s=34}}") should equal (expected)
+      parse("en", "Time", "{{Duration|1|22|34}}") should equal (expected)
     }
-  */
+
+    // {{Duration|m=74|s=32}}
+    // {{Duration||74|32}}
+    it should "return 74 * 60.0 + 32 seconds" in {
+      val expected = Some(74 * 60.0 + 32)
+      parse("en", "Time", "{{Duration|m=74|s=32}}") should equal (expected)
+      parse("en", "Time", "{{Duration||74|32}}") should equal (expected)
+    }
+
+    // {{Duration|m=2|s=34}}
+    it should "return 2 * 60 + 34 seconds" in {
+      parse("en", "Time", "{{Duration|m=2|s=34}}") should equal (Some(2 * 60.0 + 34))
+    }
+
+    // {{Duration|h=1|s=34}}
+    // {{Duration|h=1|m=0|s=34}}
+    it should "return 3634.0 seconds" in {
+      val expected = Some(3634.0)
+      parse("en", "Time", "{{Duration|h=1|s=34}}") should equal (expected)
+      parse("en", "Time", "{{Duration|h=1|m=0|s=34}}") should equal (expected)
+    }
+
+    // {{Duration|h=1}}
+    it should "return 1 * 3600.0 seconds" in {
+      parse("en", "Time", "{{Duration|h=1}}") should equal (Some(1 * 3600.0))
+    }
+
+    // {{Duration|h=0|m=22|s=34}}
+    // {{Duration|0|22|34}}
+    it should "return 22 * 60.0 + 34 seconds" in {
+      parse("en", "Time", "{{Duration|h=0|m=22|s=34}}") should equal (Some(22 * 60.0 + 34))
+      parse("en", "Time", "{{Duration|0|22|34}}") should equal (Some(22 * 60.0 + 34))
+    }
+
+    // {{Duration|h=1|m=22|s=34.5678}}
+    // {{Duration|1|22|34.5678}}
+    it should "return 1 * 3600.0 + 22 * 60.0 + 34.5678 seconds" in {
+      parse("en", "Time", "{{Duration|h=1|m=22|s=34.5678}}") should equal (Some(1 * 3600.0 + 22 * 60.0 + 34.5678))
+      parse("en", "Time", "{{Duration|1|22|34.5678}}") should equal (Some(1 * 3600.0 + 22 * 60.0 + 34.5678))
+    }
+
+    // {{Duration|h=1|m=22|s=3}}
+    it should "return 1 * 3600.0 + 22 * 60.0 + 3 seconds" in {
+      parse("en", "Time", "{{Duration|h=1|m=22|s=3}}") should equal (Some(1 * 3600.0 + 22 * 60.0 + 3))
+    }
+
+    // {{Duration|h=1|m=2|s=34}}
+    // {{Duration|1|2|34}}
+    it should "return 1 * 3600.0 + 2 * 60.0 + 34 seconds" in {
+      val expected = Some(1 * 3600.0 + 2 * 60.0 + 34)
+      parse("en", "Time", "{{Duration|h=1|m=2|s=34}}") should equal (expected)
+      parse("en", "Time", "{{Duration|1|2|34}}") should equal (expected)
+    }
+
+    // {{Duration|h=1|m=2|s=3}}
+    // {{Duration|1|2|3}}
+    it should "return 1 * 3600.0 + 2 * 60.0 + 3 seconds" in {
+      val expected = Some(1 * 3600.0 + 2 * 60.0 + 3)
+      parse("en", "Time", "{{Duration|h=1|m=2|s=3}}") should equal (expected)
+      parse("en", "Time", "{{Duration|1|2|3}}") should equal (expected)
+    }
+
+    // {{Duration|h=1|m=2}}
+    it should "return 1 * 3600.0 + 2 * 60.0 seconds" in {
+      parse("en", "Time", "{{Duration|h=1|m=2}}") should equal (Some(1 * 3600.0 + 2 * 60.0))
+    }
+
+    // {{Duration|s=34}}
+    // {{Duration|m=0|s=34}}
+    // {{Duration|h=0|m=0|s=34}}
+    // {{Duration|0|0|34}}
+    // {{Duration||0|34}}
+    // {{Duration|||34}}
+    it should "return 34 seconds" in {
+      parse("en", "Time", "{{Duration|s=34}}") should equal (Some(34))
+      parse("en", "Time", "{{Duration|m=0|s=34}}") should equal (Some(34))
+      parse("en", "Time", "{{Duration|h=0|m=0|s=34}}") should equal (Some(34))
+      parse("en", "Time", "{{Duration|0|0|34}}") should equal (Some(34))
+      parse("en", "Time", "{{Duration||0|34}}") should equal (Some(34))
+      parse("en", "Time", "{{Duration|||34}}") should equal (Some(34))
+    }
+
+    // {{Duration|h=1|m=22|s=0}}
+    // {{Duration|1|22}}
+    // {{Duration|1|22|0}}
+    it should "return 1 * 3600.0 + 22 * 60.0 seconds" in {
+      parse("en", "Time", "{{Duration|h=1|m=22|s=0}}") should equal (Some(3600.0 + 22 * 60.0))
+      parse("en", "Time", "{{Duration|1|22}}") should equal (Some(3600.0 + 22 * 60.0))
+      parse("en", "Time", "{{Duration|1|22|0}}") should equal (Some(3600.0 + 22 * 60.0))
+    }
+
+    // {{Duration||1|22}}
+    it should "return 1 * 60.0 + 22 seconds" in {
+      parse("en", "Time", "{{Duration||1|22}}") should equal (Some(1 * 60.0 + 22))
+    }
+
+    // {{Duration|0|0|0}}
+    // {{Duration|||}}
+    it should "return 0 seconds" in {
+      parse("en", "Time", "{{Duration|0|0|0}}") should equal (Some(0))
+      parse("en", "Time", "{{Duration|||}}") should equal (Some(0))
+    }
+
+    /*
+      "UnitValueParser" should "return Time(2:35 min)" in
+      {
+          parse("en", "Time", "2:35 min") should equal (Some(155))
+      }
+    */
+
     "UnitValueParser" should "return Mass(12,5 kg)" in
     {
         parse("en", "Mass", "12,5 kg") should equal (Some(12500))

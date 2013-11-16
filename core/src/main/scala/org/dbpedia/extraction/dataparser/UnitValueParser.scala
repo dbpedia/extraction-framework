@@ -231,6 +231,8 @@ class UnitValueParser( extractionContext : {
                 }
             } */
 
+            val defaultValue : PropertyNode = PropertyNode("", List(TextNode("0", 0)), 0)
+
             // Metre and foot/inch parameters cannot co-exist
             if (templateNode.property("m").isDefined) {
                 for (metres <- templateNode.property("m"))
@@ -246,8 +248,8 @@ class UnitValueParser( extractionContext : {
                 }
             }
             else {
-                for (feet <- templateNode.property("ft");
-                     inch <- templateNode.property("in"))
+                for (feet <- templateNode.property("ft").orElse(Some(defaultValue));
+                     inch <- templateNode.property("in").orElse(Some(defaultValue)))
                 {
                     try
                     {
