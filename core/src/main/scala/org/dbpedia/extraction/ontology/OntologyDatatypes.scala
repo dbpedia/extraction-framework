@@ -115,10 +115,12 @@ object OntologyDatatypes
         builder.addUnit(new FactorUnitDatatype("squareHectometre", Set("hm2","square hectometre",/*el*/ "στρέμμα","στρέμματα"), 10000.0));
         builder.addUnit(new FactorUnitDatatype("squareKilometre", Set("km²","km2","square kilometre","km\u00B2",/*el*/ "τετρ. χιλ.","χλμ2","χλμ²"), 1000000.0));
         builder.addUnit(new FactorUnitDatatype("hectare", Set("ha","hectare",/*el*/ "εκτάρια"), 10000.0));
-        builder.addUnit(new FactorUnitDatatype("squareInch", Set("sqin","square inch"), 0.00064516));
-        builder.addUnit(new FactorUnitDatatype("squareFoot", Set("sqft","ft2","ft²","square foot"), 0.09290304));
-        builder.addUnit(new FactorUnitDatatype("squareYard", Set("sqyd","square yard"), 0.83612736));
-        builder.addUnit(new FactorUnitDatatype("acre", Set("acre","acres",/*el*/ "Έικρ"), 4046.564224));
+        builder.addUnit(new FactorUnitDatatype("squareInch", Set("sqin","square inch", "sq in"), 0.00064516));
+        builder.addUnit(new FactorUnitDatatype("squareFoot", Set("sqft","ft2","ft²","square foot", "sq ft"), 0.09290304));
+        builder.addUnit(new FactorUnitDatatype("squareYard", Set("sqyd","square yard", "sq yd"), 0.83612736));
+        // https://en.wikipedia.org/wiki/Acre
+        // the international acre is exactly 4,046.8564224 square metres
+        builder.addUnit(new FactorUnitDatatype("acre", Set("acre","acres",/*el*/ "Έικρ"), 4046.8564224));
         builder.addUnit(new FactorUnitDatatype("squareMile", Set("sqmi","mi2","mi²","square mile",/*el*/ "τετραγωνικά μίλια"), 2589988.110336));
         builder.addUnit(new FactorUnitDatatype("squareNauticalMile", Set("sqnmi","nmi2","square nautical mile"), 3429904.0));
         types :::= builder.build
@@ -386,7 +388,10 @@ object OntologyDatatypes
         builder.addUnit(new FactorUnitDatatype("furlong", Set("furlong"), 201.168));
         builder.addUnit(new FactorUnitDatatype("mile", Set("mi","miles","mile",/*el*/ "μίλι","μίλια"), 1609.344));
         builder.addUnit(new FactorUnitDatatype("nautialMile", Set("nmi","nautial mile"), 1852.01));
-        builder.addUnit(new FactorUnitDatatype("astronomicalUnit", Set("AU","astronomical unit"), 149597870691.0));
+        // From https://en.wikipedia.org/wiki/Astronomical_unit
+        // ...until in August 2012 the International Astronomical Union adopted the current definition of
+        // 1 astronomical unit = 149597870700 meters.
+        builder.addUnit(new FactorUnitDatatype("astronomicalUnit", Set("AU","astronomical unit"), 149597870700.0));
         builder.addUnit(new FactorUnitDatatype("lightYear", Set("ly","light-year"), 9460730472580800.0));
         builder.addUnit(new FactorUnitDatatype("kilolightYear", Set("kly","kilolight-year"), 9.4607304725808E+18));
         types :::= builder.build
@@ -462,13 +467,18 @@ object OntologyDatatypes
 
         builder.addDimension("Temperature");
         builder.addUnit(new StandardUnitDatatype("kelvin", Set("K","kelvin",/*el*/ "Κ","κέλβιν")));
-      builder.addUnit(new FactorUnitDatatype("degreeCelsius", Set("°C","degree celsius","C","Celsius",/*el*/ "βαθμοί"), 1.0, 273.15));
+        builder.addUnit(new FactorUnitDatatype("degreeCelsius", Set("°C","degree celsius","C","Celsius",/*el*/ "βαθμοί"), 1.0, 273.15));
         builder.addUnit(new FactorUnitDatatype("degreeFahrenheit", Set("°F","F","Fahrenheit","degree fahrenheit"), 5.0 / 9.0, 459.67));
         builder.addUnit(new FactorUnitDatatype("degreeRankine", Set("°R","R","degree rankine"), 5.0 / 9.0, 0));
         types :::= builder.build
 
         builder.addDimension("Time");
         builder.addUnit(new StandardUnitDatatype("second", Set("s","sec","secs","second","seconds",/*el*/ "δ","δευτερόλεπτα")));
+        //Add commonly used fractions of second
+        builder.addUnit(new FactorUnitDatatype("millisecond", Set("ms","millisecond","milliseconds"), 0.001));
+        builder.addUnit(new FactorUnitDatatype("microsecond", Set("µs","microsecond","microseconds"), 1.0E-6));
+        builder.addUnit(new FactorUnitDatatype("nanosecond", Set("ns","nanosecond","nanoseconds"), 1.0E-9));
+        // end of fractions
         builder.addUnit(new FactorUnitDatatype("minute", Set("m","min","min.","mins","minute","minutes",/*el*/ "λ","λεπτά"), 60.0));
         builder.addUnit(new FactorUnitDatatype("hour", Set("h","hr","hr.","hour","hours","std",/*el*/ "ω","ώρες","ώρα"), 3600.0));
         builder.addUnit(new FactorUnitDatatype("day", Set("d","days","day",/*el*/ "μ","μέρα","μέρες"), 86400.0));
