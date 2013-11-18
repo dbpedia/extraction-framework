@@ -7,7 +7,10 @@ import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
 import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
 import org.dbpedia.extraction.util.Language
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
 
+@RunWith(classOf[JUnitRunner])
 class SingleGeoCoordinateParserTest extends FlatSpec with ShouldMatchers
 {
 
