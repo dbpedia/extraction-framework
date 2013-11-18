@@ -19,7 +19,10 @@ object StringParser extends DataParser
 
         //Clean text
         var text = sb.toString()
-        text = smallTagRegex.replaceAllIn(text, "$1")
+        // Replace text in <small></small> tags with an "equivalent" string representation
+        // Simply extracting the content puts this data at the same level as other text appearing
+        // in the node, which might not be the editor's semantics
+        text = smallTagRegex.replaceAllIn(text, "($1)")
         text = tagRegex.replaceAllIn(text, "") //strip tags
         text = WikiUtil.removeWikiEmphasis(text)
         text = text.replace("&nbsp;", " ")//TODO decode all html entities here

@@ -42,29 +42,42 @@ class UnitValueParser( extractionContext : {
         case dt => throw new IllegalArgumentException("Invalid datatype: " + dt)
     })
 
-    private val ValueRegex1 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
+    // Allow leading decimal separator, e.g. .0254 = 0.0254
+    // See https://github.com/dbpedia/extraction-framework/issues/71
+    private val ValueRegex1 = ("""(?iu)""" + prefix + """(-?\.?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
 
-    private val ValueRegex2 = ("""(?iu)""" + prefix + """(-?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
+    // Allow leading decimal separator, e.g. ,0254 = 0,0254
+    // See https://github.com/dbpedia/extraction-framework/issues/71
+    private val ValueRegex2 = ("""(?iu)""" + prefix + """(-?\,?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
 
     private val UnitRegex = ("""(?iu)""" + """(?<!\w)(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)(?!\d)""").r
     
     /** Merging strings with feet and inches: 'x ft y in' and convert them into centimetres */
     private val UnitValueRegex1a = ("""(?iu)""" + prefix + """(-?[0-9]+)\040*(?:ft|feet|foot|\047|\054|\140)\040*([0-9]+)\040*(?:in\b|inch\b|inches\b|\047\047|\054\054|\140\140\042)""" + postfix).r
     
-    /** Catches number and unit: e.q. 1.120.500,55 km */
-    private val UnitValueRegex1b = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
+    /** Catches number and unit: e.q. 1,120,500.55 km */
+    // Allow leading decimal separator, e.g. .0254 = 0.0254
+    // See https://github.com/dbpedia/extraction-framework/issues/71
+    private val UnitValueRegex1b = ("""(?iu)""" + prefix + """(?<!-)(-?\.?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+                                    """)(?!/)(?!\\)(?!\w)""" + postfix).r
     
     /** If different units are present, e.g.: 10 mi. (16.0934 km); the first will be returned */
     //TODO remove?
-    private val UnitValueRegex1c = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+    // Allow leading decimal separator, e.g. .0254 = 0.0254
+    // See https://github.com/dbpedia/extraction-framework/issues/71
+    private val UnitValueRegex1c = ("""(?iu)""" + prefix + """(?<!-)(-?\.?[0-9]+(?:[\, ][0-9]{3})*(?:\.[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
                                     """)[\s]*\([\s]*(?:[0-9]+(?:\.[0-9]+)?)[\s]*(?:""" + unitRegexLabels + """)[\s]*\)[\s]*""" + postfix).r
                                    
     /** Catches number and unit: e.q. 1.120.500,55 km */
-    private val UnitValueRegex2b = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
+    // Allow leading decimal separator, e.g. .0254 = 0.0254
+    // See https://github.com/dbpedia/extraction-framework/issues/71
+    private val UnitValueRegex2b = ("""(?iu)""" + prefix + """(?<!-)(-?\,?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels + """)(?!/)(?!\\)(?!\w)""" + postfix).r
     
     /** If different units are present, e.g.: 10 mi. (16.0934 km); the first will be returned */
     //TODO remove?
-    private val UnitValueRegex2c = ("""(?iu)""" + prefix + """(?<!-)(-?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
+    // Allow leading decimal separator, e.g. .0254 = 0.0254
+    // See https://github.com/dbpedia/extraction-framework/issues/71
+    private val UnitValueRegex2c = ("""(?iu)""" + prefix + """(?<!-)(-?\,?[0-9]+(?:[\. ][0-9]{3})*(?:\,[0-9]+)?)(?:&nbsp;)*\040*\(?\[?\[?(""" + unitRegexLabels +
                                     """)[\s]*\([\s]*(?:[0-9]+(?:\,[0-9]+)?)[\s]*(?:""" + unitRegexLabels + """)[\s]*\)[\s]*""" + postfix).r
 
 
@@ -449,7 +462,7 @@ class UnitValueParser( extractionContext : {
                 case _ => None
             }
         }
-        // for wikipedia artikels in german, french, italian, spanish ...
+        // for wikipedia articles in german, french, italian, spanish ...
         // numbers with a , as decimal separator and a . as thousand separator
         else
         {
@@ -490,7 +503,9 @@ class UnitValueParser( extractionContext : {
             // The unit is explicitly provided
             case Some(unitName) => inputDatatype match
             {
-                case inputUnit : UnitDatatype => inputUnit.dimension.unit(unitName) match
+                // We are matching using case-insensitive regexes hence we must lowercase the unit name
+                // to be consistent
+                case inputUnit : UnitDatatype => inputUnit.dimension.unit(unitName.toLowerCase) match
                 {
                     case Some(unit) => unit
                     case None =>
@@ -499,7 +514,9 @@ class UnitValueParser( extractionContext : {
                         return None
                     }
                 }
-                case inputDimension : DimensionDatatype => inputDimension.unit(unitName) match
+                // We are matching using case-insensitive regexes hence we must lowercase the unit name
+                // to be consistent
+                case inputDimension : DimensionDatatype => inputDimension.unit(unitName.toLowerCase) match
                 {
                     case Some(unit) => unit
                     case None =>
