@@ -25,8 +25,7 @@ class IntegerParser( context : { def language : Language } ,
                                           else DataParserConfig.splitPropertyNodeRegexInteger.get("en").get
 
     // we allow digits, minus, comma, dot and space in numbers
-    // DO NOT ALLOW SPACES. Why should we allow spaces?!?
-    private val IntegerRegex = """\D*?(?:\D\d+\s+)?(-?[0-9,\.]+).*""".r
+    private val IntegerRegex = """\D*?(?:\D\d+\s+)?(-?[0-9,\. ]+).*""".r
 
     override def parse(node : Node) : Option[Long] =
     {

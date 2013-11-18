@@ -39,6 +39,10 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
      {
          parse("de", "40.000.000") should equal (Some(40000000))
      }
+    "IntegerParser" should "return 40000000 for '40 000 000'@fr" in
+     {
+         parse("fr", "40 000 000") should equal (Some(40000000))
+     }
     "IntegerParser" should "return 40000 for '40,000.000 (estimated)'@en" in
      {
          parse("en", "40,000.000 (estimated)") should equal (Some(40000))
