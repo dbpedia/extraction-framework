@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
 import org.dbpedia.extraction.config.transform.TemplateTransformConfig
+import org.dbpedia.extraction.mappings.template.PropertyValueBuilder
 
 /**
  * Represents a template.
@@ -29,6 +30,8 @@ case class TemplateNode (
     {
         return propertyMap.get(key);
     }
+
+    def property(builder: PropertyValueBuilder) : Option[PropertyNode] = builder(this)
 
     def keySet :  scala.collection.Set[String] = propertyMap.keySet
 

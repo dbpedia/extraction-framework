@@ -7,6 +7,7 @@ import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
+import org.dbpedia.extraction.mappings.template.PropertyValueBuilder
 
 /**
  * Extracts geo-coodinates.
@@ -14,17 +15,17 @@ import scala.collection.mutable.ArrayBuffer
 class GeoCoordinatesMapping( 
   ontologyProperty : OntologyProperty,
   //TODO CreateMappingStats requires this properties to be public. Is there a better way?
-  val coordinates : String,
-  val latitude : String,
-  val longitude : String,
-  val longitudeDegrees : String,
-  val longitudeMinutes : String,
-  val longitudeSeconds : String,
-  val longitudeDirection : String,
-  val latitudeDegrees : String,
-  val latitudeMinutes : String,
-  val latitudeSeconds : String,
-  val latitudeDirection : String,
+  val coordinates : PropertyValueBuilder,
+  val latitude : PropertyValueBuilder,
+  val longitude : PropertyValueBuilder,
+  val longitudeDegrees : PropertyValueBuilder,
+  val longitudeMinutes : PropertyValueBuilder,
+  val longitudeSeconds : PropertyValueBuilder,
+  val longitudeDirection : PropertyValueBuilder,
+  val latitudeDegrees : PropertyValueBuilder,
+  val latitudeMinutes : PropertyValueBuilder,
+  val latitudeSeconds : PropertyValueBuilder,
+  val latitudeDirection : PropertyValueBuilder,
   context : {
     def ontology : Ontology
     def redirects : Redirects   // redirects required by GeoCoordinatesParser
