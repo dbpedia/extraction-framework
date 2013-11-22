@@ -35,8 +35,17 @@ object CreateFreebaseLinks
 {
   /**
    * We look for lines that contain wikipedia key entries. Specifically we are retrieving English Wikipedia Page Ids
+   *
+   * <http://rdf.freebase.com/ns/m.076zr3b>	<http://rdf.freebase.com/ns/type.object.key>	"/wikipedia/en_id/23981875"	.
    */
-  private val FreebaseWikipediaId = """^ns:([^\s]+)\tns:type\.object\.key\t"/wikipedia/en_id/([^\s]+)"\.$""".r
+  private val FreebaseWikipediaId = (
+    """^<http://rdf\.freebase\.com/ns/([^>]+)>""" +
+    """\t""" +
+    """<http://rdf\.freebase\.com/ns/type\.object\.key>""" +
+    """\t""" +
+    """"/wikipedia/en_id/([^\s]+)"\t?\.$"""
+  ).r
+
   private val WikipediaResId = """^<http://dbpedia\.org/resource/([^\s]+)> .* "(\d+)"\^\^<http://www\.w3\.org/2001/XMLSchema\#integer> \.$""".r
   private val DBpediaResId = """^<http://dbpedia\.org/resource/([^\s]+)> .*""".r
   
