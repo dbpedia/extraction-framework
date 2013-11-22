@@ -47,7 +47,8 @@ object XMLSource
     }
 
     def fromReaders(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
-      new MultipleXMLReaderSource(sources, language, filter)
+      if (sources.size == 1) fromReader(sources.head, language, filter) // no need to create an ExecutorService
+      else new MultipleXMLReaderSource(sources, language, filter)
     }
 
     /**
