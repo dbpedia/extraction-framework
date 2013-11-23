@@ -142,7 +142,7 @@ object LiveExtractionConfigLoader
 
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
         if (liveCache.performCleanUpdate) {
-          destList += new SPARULDelAllDestination(liveCache.cacheObj.subjects)
+          destList += new SPARULDelAllDestination(liveCache.cacheObj.subjects, policies)
           destList += new SPARULAddAllDestination(policies)
         } else {
           // *Delete first* When a triple is deleted from one extractor and added from another extractor
