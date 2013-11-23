@@ -27,7 +27,8 @@ extends ConfigParser(config)
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
-  
+
+  // Watch out, this could be a regex
   val source = config.getProperty("source", "pages-articles.xml")
   val disambiguations = config.getProperty("disambiguations", "page_props.sql.gz")
 
