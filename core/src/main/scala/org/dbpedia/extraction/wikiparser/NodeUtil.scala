@@ -58,12 +58,82 @@ object NodeUtil
 
         propertyNode
     }
+    
+    def splitPropertyNode(inputNode : PropertyNode, templateRegex : String, stringRegex : String, trimResults : Boolean = false) : List[PropertyNode] =
+    {
+        var cleanedPropertyNode = new PropertyNode("", List[Node](), 0)
+        
+        if (templateRegex != "") {
+            var tmpNodes = List[Node]()
+
+            for(child <- inputNode.children) child match {
+                case TemplateNode(title, children, line, titleParsed) => {
+                    if (title.decoded matches templateRegex) {
+                        tmpNodes = tmpNodes ::: List[Node](new TextNode("<br />", line))
+                    }
+                }
+                case _ => tmpNodes = tmpNodes ::: List[Node](child)
+            }
+            cleanedPropertyNode = new PropertyNode(inputNode.key, tmpNodes, inputNode.line)
+            cleanedPropertyNode.parent = inputNode.parent
+        }
+        else {
+            cleanedPropertyNode = inputNode
+        }
+        
+        var propertyNodes = List[PropertyNode]()
+        var currentNodes = List[Node]()
+
+        val fullRegex = if(trimResults) "\\s*(" + stringRegex + ")\\s*" else stringRegex
+
+        for(child <- cleanedPropertyNode.children) child match
+        {
+            case TextNode(text, line) =>
+            {
+                val parts = text.split(fullRegex, -1)
+
+                for(i <- 0 until parts.size)
+                {
+                    if(parts.size > 1 && i < parts.size - 1)
+                    {
+                        if(parts(i).size > 0) currentNodes = new TextNode(parts(i), line) :: currentNodes
+                        currentNodes = currentNodes.reverse
+                        propertyNodes = PropertyNode(cleanedPropertyNode.key, currentNodes, cleanedPropertyNode.line) :: propertyNodes
+                        currentNodes = List[Node]()
+                    }
+                    else
+                    {
+                        if(parts(i).size > 0) currentNodes = new TextNode(parts(i), line) :: currentNodes
+                    }
+                }
+            }
+            case _ => currentNodes = child :: currentNodes
+        }
+
+        //Add last property node
+        currentNodes = currentNodes.reverse
+        if(currentNodes.nonEmpty)
+        {
+            propertyNodes = PropertyNode(cleanedPropertyNode.key, currentNodes, cleanedPropertyNode.line) :: propertyNodes
+        }
+
+        propertyNodes = propertyNodes.reverse
+
+        //Create a synthetic template node for each property node
+        val inputTemplateNode = cleanedPropertyNode.parent.asInstanceOf[TemplateNode]
+        val templateNodes = for(propertyNode <- propertyNodes) yield TemplateNode(inputTemplateNode.title, propertyNode :: Nil, inputTemplateNode.line)
+
+        //Set link to the original AST
+        templateNodes.foreach(tnode => tnode.parent = inputTemplateNode.parent)
+
+        propertyNodes
+    }
 
     /**
      * Utility function which splits a property node based on a regex
      * If trimResults == true, the regex is extended to eat up whitespace at beginning and end when splitting.
      */
-    def splitPropertyNode(inputNode : PropertyNode, regex : String, trimResults : Boolean = false) : List[PropertyNode] =
+    /*def splitPropertyNode(inputNode : PropertyNode, regex : String, trimResults : Boolean = false) : List[PropertyNode] =
     {
         var propertyNodes = List[PropertyNode]()
         var currentNodes = List[Node]()
@@ -111,7 +181,7 @@ object NodeUtil
         templateNodes.foreach(tnode => tnode.parent = inputTemplateNode.parent)
 
         propertyNodes
-    }
+    }*/
 
     /**
      * Utility function which splits a text nodes based on a regex  .

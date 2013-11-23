@@ -39,7 +39,7 @@ object DataParserConfig {
 
   // Templates used instead of <br>
   val splitPropertyNodeRegexInfoboxTemplates  = Map (
-    "fr" -> List("""[C-c]lr""")
+    "fr" -> """[Cc]lr"""
   )
 
 }

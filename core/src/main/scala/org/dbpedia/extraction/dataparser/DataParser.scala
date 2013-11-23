@@ -16,6 +16,8 @@ abstract class DataParser
      * Parser dependent splitting of nodes. Default is overridden by some parsers.
      */
     val splitPropertyNodeRegex = DataParserConfig.splitPropertyNodeRegex.get("en").get
+    
+    val splitPropertyNodeRegexInfoboxTemplates = DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.get("fr").get
 
     /**
      * (Split node and) return parse result.
@@ -24,7 +26,7 @@ abstract class DataParser
     {
         if(split)
         {
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => parse(node).toList )
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegexInfoboxTemplates, splitPropertyNodeRegex).flatMap( node => parse(node).toList )
         }
         else
         {

@@ -84,7 +84,7 @@ class UnitValueParser( extractionContext : {
     private val PrefixUnitValueRegex1 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
 
     private val PrefixUnitValueRegex2 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
-
+  
     override def parse(node : Node) : Option[(Double, UnitDatatype)] =
     {
         val errors = if(logger.isLoggable(Level.FINE)) Some(new ParsingErrors()) else None

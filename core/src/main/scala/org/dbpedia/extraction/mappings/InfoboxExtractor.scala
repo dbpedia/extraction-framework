@@ -65,6 +65,10 @@ extends Extractor
     private val splitPropertyNodeRegexInfobox = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(language))
                                                   DataParserConfig.splitPropertyNodeRegexInfobox.get(language).get
                                                 else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
+    
+    private val splitPropertyNodeRegexInfoboxTemplates = if (DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.contains(language))
+                                                           DataParserConfig.splitPropertyNodeRegexInfoboxTemplates.get(language).get
+                                                         else ""
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Parsers
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +124,7 @@ extends Extractor
 
                     val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
-                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
+                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfoboxTemplates, splitPropertyNodeRegexInfobox)
                     for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
                     {
                         val propertyUri = getPropertyUri(property.key)
@@ -232,7 +236,7 @@ extends Extractor
         }
 
         //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
-        val splitNodes = NodeUtil.splitPropertyNode(node, "(—|–|-|&mdash;|&ndash;|,|;)")
+        val splitNodes = NodeUtil.splitPropertyNode(node, splitPropertyNodeRegexInfoboxTemplates, "(—|–|-|&mdash;|&ndash;|,|;)")
 
         splitNodes.flatMap(extractDate(_)) match
         {
@@ -253,7 +257,7 @@ extends Extractor
 
     private def extractLinks(node : PropertyNode) : List[(String, Datatype)] =
     {
-        val splitNodes = NodeUtil.splitPropertyNode(node, """\s*\W+\s*""")
+        val splitNodes = NodeUtil.splitPropertyNode(node, splitPropertyNodeRegexInfoboxTemplates, """\s*\W+\s*""")
 
         splitNodes.flatMap(splitNode => objectParser.parse(splitNode)) match
         {
