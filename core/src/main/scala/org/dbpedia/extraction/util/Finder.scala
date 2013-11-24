@@ -39,10 +39,11 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameGiven: Strin
    * May be null, in which case we just look for date directories.
    * @return dates in ascending order
    */
-  def dates(suffix: String = null, required: Boolean = true): List[String] = {
+  def dates(suffix: String = null, required: Boolean = true, isSuffixRegex: Boolean = false): List[String] = {
     
     val suffixFilter = 
       if (suffix == null) {date: String => true} 
+      else if (isSuffixRegex) {date: String => matchFiles(date, suffix).nonEmpty}
       else {date: String => file(date, suffix).exists}
     
     val dates = wikiDir.names.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
