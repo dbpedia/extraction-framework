@@ -86,11 +86,9 @@ class ConfigLoader(config: Config)
 
             private val _articlesSource =
             {
-              val readers = if (config.source.startsWith("@")) {
-                finder.matchFiles(date, config.source.substring(1)).map(reader(_))
-              } else List(reader(finder.file(date, config.source)))
+              val articlesReaders = readers(config.source, finder, date)
 
-              XMLSource.fromReaders(readers, language,
+              XMLSource.fromReaders(articlesReaders, language,
                 title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
                   title.namespace == Namespace.Category || title.namespace == Namespace.Template)
             }
@@ -153,6 +151,13 @@ class ConfigLoader(config: Config)
       () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8)
     }
 
+    private def readers(source: String, finder: Finder[File], date: String): List[() => Reader] = {
+
+      if (config.source.startsWith("@")) { // the articles source is a regex - we want to match multiple files
+        finder.matchFiles(date, config.source.substring(1)).map(reader(_))
+      } else List(reader(finder.file(date, config.source)))
+    }
+
     /**
      * @return stream zipper function
      */
@@ -207,13 +212,14 @@ class ConfigLoader(config: Config)
     {
       val finder = new Finder[File](config.dumpDir, Language("commons"), config.wikiName)
       val date = latestDate(finder)
-      val file = finder.file(date, config.source)
-      XMLSource.fromReader(reader(file), Language.Commons, _.namespace == Namespace.File)
+      XMLSource.fromReaders(readers(config.source, finder, date), Language.Commons, _.namespace == Namespace.File)
     }
-    
+
     private def latestDate(finder: Finder[_]): String = {
-      val fileName = if (config.requireComplete) Download.Complete else config.source
-      finder.dates(fileName).last
+      val isSourceRegex = config.source.startsWith("@")
+      val source = if (isSourceRegex) config.source.substring(1) else config.source
+      val fileName = if (config.requireComplete) Download.Complete else source
+      finder.dates(fileName, isSuffixRegex = isSourceRegex).last
     }
 }
 
