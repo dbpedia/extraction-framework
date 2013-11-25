@@ -86,33 +86,7 @@ class ConfigLoader(config: Config)
 
             private val _articlesSource =
             {
-              // Sort by file name. In case of multistream dump chunks, the last file already has an ending root tag
-              // Multistream chunks are NOT valid MediaWiki dump files:
-              // - only the last chunk has a closing </mediawiki> tag
-              // - chunks do not have a MediaWiki XML header
-              // We must compose a valid XML stream to make it parseable by the DEF WikiParser
-              val articlesFiles = files(config.source, finder, date).sorted
-
-              // if config.xmlHeader != null we must wrap the content
-              val streams = articlesFiles.zipWithIndex.map { case (file, i) =>
-
-                if (config.xmlHeader == null) {
-                  stream(file)
-                }
-                else {
-
-                  val s = new SequenceInputStream(
-                    stream(finder.file(date,config.xmlHeader)),
-                    stream(file))
-
-                  // Add a closing root tag if this is not the last chunk
-                  if (i != (articlesFiles.size - 1)) new SequenceInputStream(s, new ByteArrayInputStream("</mediawiki>".getBytes()))
-                  else s
-
-                }
-              }
-
-              val articlesReaders = streams.map(stream => () => new InputStreamReader(stream, UTF8))
+              val articlesReaders = readers(config.source, finder, date)
 
               XMLSource.fromReaders(articlesReaders, language,
                 title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
@@ -170,11 +144,6 @@ class ConfigLoader(config: Config)
     private def writer(file: File): () => Writer = {
       val zip = zipper(file.getName)
       () => new OutputStreamWriter(zip(new FileOutputStream(file)), UTF8)
-    }
-
-    private def stream(file: File): InputStream = {
-      val unzip = unzipper(file.getName)
-      unzip(new FileInputStream(file))
     }
 
     private def reader(file: File): () => Reader = {

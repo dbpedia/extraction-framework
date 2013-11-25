@@ -8,6 +8,9 @@ import scala.Console._
 import org.dbpedia.extraction.util.StringUtils._
 import scala.collection.SortedSet
 import java.lang.Boolean
+import java.nio.ByteBuffer
+import java.util.zip.GZIPOutputStream
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
 
 /**
  * Split multistream Wikipedia dumps (e.g. [1]) into size-configurable chunks
@@ -118,8 +121,19 @@ object WikipediaDumpSplitter {
     }
 
     // Save the Mediawiki XML header
-    chunk = startChunk(output, chunkNamePrefix, "header", chunkNameExtension)
-    copyToChunk(dump, chunk, 0, offsetsSeq(0))
+    val header = startChunk(output, chunkNamePrefix, "header", chunkNameExtension)
+    copyToChunk(dump, header, 0, offsetsSeq(0))
+
+    // Generate a dummy Mediawiki XML footer
+    var footerStream : OutputStream = null
+    val footer = startChunk(output, chunkNamePrefix, "footer", chunkNameExtension)
+
+    try {
+      footerStream = zipper(dump.name)(new FileOutputStream(footer))
+      footerStream.write("</mediawiki>\n".getBytes)
+    } finally {
+      footerStream.close()
+    }
 
     // Process chunks
     var low = offsetsSeq(0)
@@ -139,11 +153,11 @@ object WikipediaDumpSplitter {
 
     val digits = (boundaries.size + 1).toString.length
 
-    for ((low,high) <- boundaries) {
+    for (((low,high), index) <- boundaries.zipWithIndex) {
       chunkNumber += 1
       chunk = startChunk(output, chunkNamePrefix, chunkId(chunkNumber, digits), chunkNameExtension)
       if (replace) {
-        copyToChunk(dump, chunk, low, high - low)
+        copyToChunk(dump, chunk, low, high - low, header, if (index != (boundaries.size - 1)) footer else null)
       }
     }
   }
@@ -156,16 +170,33 @@ object WikipediaDumpSplitter {
     new File(dir, prefix + '.' + chunk + '.' + extension)
   }
 
-  private def copyToChunk(from: File, to: File, offset: Long, chunkSize: Long): Long = {
+  private def copyToChunk(from: File, to: File, offset: Long, chunkSize: Long, header: File = null, footer: File = null): Long = {
 
     err.println("Generating chunk " + to.name + " from file " + from.name)
 
     val fromChannel = new FileInputStream(from).getChannel
     val toChannel = new FileOutputStream(to).getChannel
+    val headerChannel = if (header != null) new FileInputStream(header).getChannel else null
+    val footerChannel = if (footer != null) new FileInputStream(footer).getChannel else null
 
     try {
-      fromChannel.transferTo(offset, chunkSize, toChannel)
+
+      toChannel.position(0)
+
+      val headerTransferred =  if (header != null) {
+        headerChannel.transferTo(0, headerChannel.size(), toChannel)
+      } else 0
+
+      val transferred  = fromChannel.transferTo(offset, chunkSize, toChannel)
+
+      val footerTransferred = if (footer != null) {
+        footerChannel.transferTo(0, footerChannel.size(), toChannel)
+      } else 0
+
+      headerTransferred + transferred + footerTransferred
+
     } finally {
+      if (headerChannel != null) headerChannel.close()
       fromChannel.close()
       toChannel.close()
       err.println("Done generating chunk " + to.name + " from file " + from.name)
@@ -176,5 +207,24 @@ object WikipediaDumpSplitter {
     val nanos = System.nanoTime - start
     err.println("processed " + lines + " lines, collected " + collected + " offsets - " + prettyMillis(nanos / 1000000) + " (" +
       (nanos.toFloat/lines) + " nanos per line)")
+  }
+
+  private val zippers = Map[String, OutputStream => OutputStream] (
+    "gz" -> { new GZIPOutputStream(_) },
+    "bz2" -> { new BZip2CompressorOutputStream(_) }
+  )
+
+  /**
+   * @return stream zipper function
+   */
+  private def zipper(name: String): OutputStream => OutputStream = {
+    zippers.getOrElse(suffix(name), identity)
+  }
+
+  /**
+   * @return file suffix
+   */
+  private def suffix(name: String): String = {
+    name.substring(name.lastIndexOf('.') + 1)
   }
 }
