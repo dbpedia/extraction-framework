@@ -6,6 +6,7 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.{Namespace,TemplateNode}
 import MappingStats.InvalidTarget
+import org.dbpedia.extraction.mappings.template.PropertyValueBuilder._ // implicit wrappers
 
 object MappingStatsHolder {
   

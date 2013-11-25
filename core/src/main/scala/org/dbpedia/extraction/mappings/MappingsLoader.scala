@@ -9,6 +9,7 @@ import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.mappings.template.{IdentityValueBuilder, DefaultValueBuilder, ConstantValueBuilder, PropertyValueBuilder}
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -175,17 +176,17 @@ object MappingsLoader
         case "GeocoordinatesMapping" =>
         {
             new GeoCoordinatesMapping( loadOntologyProperty(tnode, "ontologyProperty", false, context.ontology),
-                                       loadTemplateProperty(tnode, "coordinates", false),
-                                       loadTemplateProperty(tnode, "latitude", false),
-                                       loadTemplateProperty(tnode, "longitude", false),
-                                       loadTemplateProperty(tnode, "longitudeDegrees", false),
-                                       loadTemplateProperty(tnode, "longitudeMinutes", false),
-                                       loadTemplateProperty(tnode, "longitudeSeconds", false),
-                                       loadTemplateProperty(tnode, "longitudeDirection", false),
-                                       loadTemplateProperty(tnode, "latitudeDegrees", false),
-                                       loadTemplateProperty(tnode, "latitudeMinutes", false),
-                                       loadTemplateProperty(tnode, "latitudeSeconds", false),
-                                       loadTemplateProperty(tnode, "latitudeDirection", false),
+                                       loadTemplatePropertyBuilder(tnode, "coordinates", false),
+                                       loadTemplatePropertyBuilder(tnode, "latitude", false),
+                                       loadTemplatePropertyBuilder(tnode, "longitude", false),
+                                       loadTemplatePropertyBuilder(tnode, "longitudeDegrees", false),
+                                       loadTemplatePropertyBuilder(tnode, "longitudeMinutes", false),
+                                       loadTemplatePropertyBuilder(tnode, "longitudeSeconds", false),
+                                       loadTemplatePropertyBuilder(tnode, "longitudeDirection", false),
+                                       loadTemplatePropertyBuilder(tnode, "latitudeDegrees", false),
+                                       loadTemplatePropertyBuilder(tnode, "latitudeMinutes", false),
+                                       loadTemplatePropertyBuilder(tnode, "latitudeSeconds", false),
+                                       loadTemplatePropertyBuilder(tnode, "latitudeDirection", false),
                                        context )
         }
         case "ConstantMapping" =>
@@ -235,20 +236,19 @@ object MappingsLoader
       loadOntologyValue(node, propertyName, ontology.classes, required, "Ontology class not found: ")
     }
     
-  private def loadOntologyProperty(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyProperty = {
-    loadOntologyValue(node, propertyName, ontology.properties, required, "Ontology property not found: ")
-  }
-  
-  private def loadDatatype(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : Datatype = {
-    loadOntologyValue(node, propertyName, ontology.datatypes, required, "Datatype not found: ")
-  }
-  
-  private def loadOntologyValue[T](node : TemplateNode, propertyName : String, map: Map[String, T], required: Boolean, msg: String) : T = {
-    val name = loadTemplateProperty(node, propertyName, required)
-    map.getOrElse(name, if (! required) null.asInstanceOf[T] else throw new IllegalArgumentException(msg+name))
-  }
-      
-    
+    private def loadOntologyProperty(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyProperty = {
+      loadOntologyValue(node, propertyName, ontology.properties, required, "Ontology property not found: ")
+    }
+
+    private def loadDatatype(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : Datatype = {
+      loadOntologyValue(node, propertyName, ontology.datatypes, required, "Datatype not found: ")
+    }
+
+    private def loadOntologyValue[T](node : TemplateNode, propertyName : String, map: Map[String, T], required: Boolean, msg: String) : T = {
+      val name = loadTemplateProperty(node, propertyName, required)
+      map.getOrElse(name, if (! required) null.asInstanceOf[T] else throw new IllegalArgumentException(msg+name))
+    }
+
     private def loadTemplateProperty(node : TemplateNode, propertyName : String, required : Boolean = true) : String = 
     {
         val value = node.property(propertyName).flatMap(propertyNode => StringParser.parse(propertyNode))
@@ -265,6 +265,58 @@ object MappingsLoader
             }
         }
     }
+
+    /**
+     *
+     * @param node
+     * @param propertyName
+     * @param required
+     * @return
+     */
+    private def loadTemplatePropertyBuilder(node : TemplateNode, propertyName : String, required : Boolean = true) : PropertyValueBuilder =
+    {
+      // check property existence - an exception will be thrown in required = true and the template property does not exist
+      val propertyString = loadTemplateProperty(node, propertyName, required)
+
+      // check if the template property value contains a template itself
+      val propertyNode = node.property(propertyName)
+      val propertyValueTemplate = findPropertyValueTemplate(propertyNode)
+
+      var builder : PropertyValueBuilder = new IdentityValueBuilder(propertyString)
+
+      propertyValueTemplate match {
+
+        // The requested propertyName is present and contains a template
+        case Some(template) => template.title.decoded match {
+
+          case "ConstantValue" =>
+
+            builder = new ConstantValueBuilder( loadTemplateProperty(template, "1", true),
+                                                loadTemplateProperty(template, "2", true) )
+
+          case "DefaultValue" =>
+
+            builder = new DefaultValueBuilder( loadTemplateProperty(template, "1", true),
+                                               loadTemplateProperty(template, "2", true) )
+
+          case _ => throw new IllegalArgumentException("Unknown template property value builder for property '" + propertyName +
+            "' in template '" + node.title.decoded + "' starting on line " + node.line + ".")
+        }
+
+        // Either the requested propertyName is missing or it does not contain any template
+        case _ => // do nothing, we have already set the default value for builder
+      }
+
+      builder
+    }
+
+    private def findPropertyValueTemplate(node : Option[PropertyNode]) : Option[TemplateNode] = {
+      node match {
+        case Some(propertyNode) => propertyNode.children.find(n => n.isInstanceOf[TemplateNode]).asInstanceOf[Option[TemplateNode]]
+        case None => None
+      }
+    }
+
 
     private def loadLanguage(node : TemplateNode, propertyName : String, required : Boolean) : Language =
     {
