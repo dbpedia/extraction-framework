@@ -153,9 +153,14 @@ class ConfigLoader(config: Config)
 
     private def readers(source: String, finder: Finder[File], date: String): List[() => Reader] = {
 
+      files(source, finder, date).map(reader(_))
+    }
+
+    private def files(source: String, finder: Finder[File], date: String): List[File] = {
+
       if (config.source.startsWith("@")) { // the articles source is a regex - we want to match multiple files
-        finder.matchFiles(date, config.source.substring(1)).map(reader(_))
-      } else List(reader(finder.file(date, config.source)))
+        finder.matchFiles(date, config.source.substring(1))
+      } else List(finder.file(date, config.source))
     }
 
     /**
