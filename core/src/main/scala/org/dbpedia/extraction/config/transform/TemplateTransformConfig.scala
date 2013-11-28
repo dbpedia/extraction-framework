@@ -49,9 +49,20 @@ object TemplateTransformConfig {
         PropertyNode("link-title", List(TextNode("", node.line)), node.line)
       }
 
+      var uri = new URI(extractTextFromPropertyNode(node.property("1")))
+
+      // Check if this uri has a scheme. If it does not, add a default http:// scheme
+      // From https://en.wikipedia.org/wiki/Template:URL:
+      // The first parameter is parsed to see if it takes the form of a complete URL.
+      // If it doesn't start with a URI scheme (such as "http:", "https:", or "ftp:"),
+      // an "http://" prefix will be prepended to the specified generated target URL of the link.
+      if (uri.getScheme == null) {
+        uri = new URI("http://" + uri.toString)
+      }
+
       List(
         ExternalLinkNode(
-          new URI(extractTextFromPropertyNode(node.property("1"))),
+          uri,
           node.property("2").getOrElse(defaultLinkTitle(node)).children,
           node.line
         )
