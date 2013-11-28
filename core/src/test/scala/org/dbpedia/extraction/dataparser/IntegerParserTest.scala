@@ -27,6 +27,10 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
      {
          parse("en", "1,432 <small>''2006 Census''</small>") should equal (Some(1432))
      }
+    "IntegerParser" should "return 1432 for '1,432 <small>(2006 Census)</small>'@en" in
+     {
+         parse("en", "1,432 <small>(2006 Census)</small>") should equal (Some(1432))
+     }
     "IntegerParser" should "return 12500000 for '12,5 mio kg'@de" in
      {
          parse("de", "12,5 mio kg") should equal (Some(12500000))
@@ -51,10 +55,17 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
      {
          parse("de", "40.000,000") should equal (Some(40000))
      }
+
+   /**
+    * TODO: Space is used in some languages as group separator (e.g. fr) - we should
+    * not allow spaces unless they are in the correct position e.g. \d+\s\d{3}
+    */
+    /*
     "IntegerParser" should "return 40000 for 'context 40,000 1context'@en" in
      {
          parse("en", "context 40,000 1context") should equal (Some(40000))
      }
+    */
     "IntegerParser" should "return 40000 for 'context1 40,000 context'@en" in
      {
          parse("en", "context1 40,000 context") should equal (Some(40000))
