@@ -64,4 +64,17 @@ object HomepageExtractorConfig
         "ru" -> "официальный"
     )
 
+    // Map(language -> Map(templateName -> templatePropertyKey))
+    val templateOfficialWebsite = Map(
+        "ca" -> Map("Oficial" -> "1"),
+        "el" -> Map("Επίσημη ιστοσελίδα" -> "1"),
+        "en" -> Map("Official website" -> "1"),
+        "eo" -> Map("Oficiala_retejo" -> "1"),
+        "es" -> Map("Página_web" -> "1"),
+        "fr" -> Map("Site_officiel" -> "url"),
+        "ga" -> Map("Páxina_web" -> "1"),
+        "pt" -> Map("Oficial" -> "1"),
+        "ru" -> Map("Официальный сайт" -> "1")
+    )
+
 }
