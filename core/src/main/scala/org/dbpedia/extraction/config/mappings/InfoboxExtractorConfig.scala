@@ -8,12 +8,14 @@ object InfoboxExtractorConfig
 
     val ignoreTemplates = Set("redirect", "seealso", "see_also", "main", "cquote", "chess diagram", "ipa", "lang", "تحويل")
 
-    val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r)
+    val ignoreTemplatesRegex = List("cite.*".r, "citation.*".r, "assessment.*".r, "zh-.*".r, "llang.*".r, "IPA-.*".r, "citajxo.*".r)
 
     val ignoreProperties = Map (
         "en"-> Set("image", "image_photo"),
         "ar"-> Set("صورة"),
-        "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης")
+        "id"-> Set("foto", "gambar"),
+        "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης"),
+        "eo"-> Set("dosiero")
     )
     
     // TODO: i18n

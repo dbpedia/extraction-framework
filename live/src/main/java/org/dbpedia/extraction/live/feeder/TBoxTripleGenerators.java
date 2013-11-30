@@ -120,6 +120,79 @@ class LiteralTripleGenerator
 	}
 }
 
+/**Since the templates are changed and the format of listing the labels are changed as well, a new generator is required
+ * They now has the form of
+ *   {{label|el|Πληροφορίες προσώπου}}
+ {{label|en|person}}
+ {{label|de|Person}}
+ {{label|sl|Oseba}}
+ {{label|pt|pessoa}}
+ {{label|fr|personne}}
+ {{label|es|persona}}
+ {{label|ja|人_(法律)}}
+ {{label|nl|persoon}}
+ * */
+
+class LabelsTripleGenerator implements ITripleGenerator{
+    private static Logger logger = Logger.getLogger(LabelsTripleGenerator.class);
+    @Override
+    public Model generate(Model result, Resource subject, Property property, String value,
+                          String lang)
+    {
+        // Ignore empty triples
+        value = value.trim();
+        if (value.isEmpty())
+            return result;
+
+        //The labels are separated with a new line
+        String []labels = value.split("\n");
+        for(String lblForLanguage:labels){
+
+            //The label is like "{{label|en|person}}", so we should remove braces and split with '|'
+            String labelParts [] = lblForLanguage.replace("{","").replace("}","").split("\\|");
+            String labelLanguage = labelParts[1];
+            String labelValue = labelParts[2];
+            logger.info("Label = " + labelValue);
+            result.add(subject, ResourceFactory.createProperty("http://www.w3.org/2000/01/rdf-schema#label"), result.createLiteral(labelValue, labelLanguage));
+        }
+
+//        result.add(subject, property, result.createLiteral(value, lang));
+        return result;
+    }
+}
+
+/**
+ * Similar to LabelsTripleGenerator but for comments
+ * */
+
+class CommentsTripleGenerator implements ITripleGenerator{
+    private static Logger logger = Logger.getLogger(LabelsTripleGenerator.class);
+    @Override
+    public Model generate(Model result, Resource subject, Property property, String value,
+                          String lang)
+    {
+        // Ignore empty triples
+        value = value.trim();
+        if (value.isEmpty())
+            return result;
+
+        //The labels are separated with a new line
+        String []labels = value.split("\n");
+        for(String lblForLanguage:labels){
+
+            //The label is like "{{label|en|person}}", so we should remove braces and split with '|'
+            String labelParts [] = lblForLanguage.replace("{","").replace("}","").split("\\|");
+            String labelLanguage = labelParts[1];
+            String labelValue = labelParts[2];
+            logger.info("comment = " + labelValue);
+            result.add(subject, ResourceFactory.createProperty("http://www.w3.org/2000/01/rdf-schema#comment"), result.createLiteral(labelValue, labelLanguage));
+        }
+
+//        result.add(subject, property, result.createLiteral(value, lang));
+        return result;
+    }
+}
+
 class StringReference
 {
 	private String	value;

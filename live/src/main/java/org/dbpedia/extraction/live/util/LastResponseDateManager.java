@@ -74,7 +74,7 @@ public class LastResponseDateManager {
 
         }
 
-        return strLastResponseDate;
+        return strLastResponseDate.trim();
 
     }
 

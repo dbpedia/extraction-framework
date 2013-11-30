@@ -2,7 +2,6 @@ package org.dbpedia.extraction.ontology.io
 
 import java.util.logging.Logger
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.RichString.wrapString
@@ -20,7 +19,7 @@ class OntologyReader
     {
         logger.info("Loading ontology pages")
 
-        read(source.map(new SimpleWikiParser()))
+        read(source.map(WikiParser.getInstance()))
     }
 
     /**
@@ -73,10 +72,12 @@ class OntologyReader
                 val name = getName(page.title, _.capitalize(page.title.language.locale))
 
                 ontologyBuilder.classes ::= loadClass(name, templateNode)
+                // Fill the equivalentClass map
 
-                for(specificProperty <- loadSpecificProperties(name, templateNode))
+              for(specificProperty <- loadSpecificProperties(name, templateNode))
                 {
                     ontologyBuilder.specializedProperties ::= specificProperty
+                    // To check for equivalent Property Map
                 }
             }
             else if(templateName == OntologyReader.OBJECTPROPERTY_NAME || templateName == OntologyReader.DATATYPEPROPERTY_NAME)
@@ -86,6 +87,7 @@ class OntologyReader
                 for(property <- loadOntologyProperty(name, templateNode))
                 {
                     ontologyBuilder.properties ::= property
+                    // Fill the equivalentProperty map
                 }
             }
             // TODO: read datatypes
@@ -299,6 +301,8 @@ class OntologyReader
         var properties = List[PropertyBuilder]()
         var datatypes = List[Datatype]()
         var specializedProperties = List[SpecificPropertyBuilder]()
+        var equivalentPropertiesMap = Map[OntologyProperty,Set[OntologyProperty]] ()
+        var equivalentClassesMap = Map[OntologyProperty,Set[OntologyProperty]] ()
 
         def build() : Ontology  =
         {
@@ -309,7 +313,9 @@ class OntologyReader
             new Ontology( classes.flatMap(_.build(classMap)).map(c => (c.name, c)).toMap,
                           properties.flatMap(_.build(classMap, typeMap)).map(p => (p.name, p)).toMap,
                           datatypes.map(t => (t.name, t)).toMap,
-                          specializedProperties.flatMap(_.build(classMap, propertyMap, typeMap)).toMap )
+                          specializedProperties.flatMap(_.build(classMap, propertyMap, typeMap)).toMap,
+                          equivalentPropertiesMap,
+                          equivalentClassesMap)
         }
     }
 

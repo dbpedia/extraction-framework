@@ -21,7 +21,7 @@ object DurationParserConfig
             "minu" -> "minute",
             "hour" -> "hour",
             "h" -> "hour",
-            "hour" -> "hour",
+            "hours" -> "hour",
             "hr" -> "hour",
             "hr." -> "hour",
             "hrs" -> "hour",
@@ -217,6 +217,35 @@ object DurationParserConfig
             "meses" -> "month",
             "año" -> "year",
             "años" -> "year"
-        )
+        ),
+        "it" -> Map(
+            "secondo" -> "second",
+            "secondi" -> "second",
+            "sec" -> "second",
+            "s" -> "second",
+            "minuto" -> "minute",
+            "minuti" -> "minute",
+            "min" -> "minute",
+            "m" -> "minute",
+            "ora" -> "hour",
+            "ore" -> "hour",
+            "h" -> "hour",
+            "giorno" -> "day",
+            "giorni" -> "day",
+            "g" -> "day",
+            "gg" -> "day",
+            "mese" -> "month",
+            "mesi" -> "month",
+            "anno" -> "year",
+            "anni" -> "year"
+        ),
+        "id" -> Map(
+            "detik" -> "second",
+            "menit" -> "minute",
+            "jam" -> "hour",
+            "hari" -> "day",
+            "bulan" -> "month",
+            "tahun" -> "year"
+		)
     )
 }

@@ -4,6 +4,7 @@ import org.dbpedia.extraction.config.dataparser.ParserUtilsConfig
 import java.text.{NumberFormat,DecimalFormatSymbols}
 import org.dbpedia.extraction.util.Language
 import java.util.Locale
+import java.util.regex.Pattern
 
 /**
  * Utility functions used by the data parsers.
@@ -30,7 +31,7 @@ class ParserUtils( context : { def language : Language } )
 
     // TODO: use "\s+" instead of "\s?" between number and scale?
     // TODO: in some Asian languages, digits are not separated by thousands but by ten thousands or so...
-    private val regex = ("""(?i)([\D]*)([0-9]+(?:\""" + groupingSeparator + """[0-9]{3})*)(""" + decimalSeparatorsRegex + """[0-9]+)?\s?\[?\[?(""" + scales.keySet.mkString("|") + """)\]?\]?(.*)""").r
+    private val regex = ("""(?i)([\D]*)([0-9]+(?:\""" + groupingSeparator + """[0-9]{3})*)(""" + decimalSeparatorsRegex + """[0-9]+)?\s?\[?\[?(""" + scales.keySet.map(Pattern.quote).mkString("|") + """)\]?\]?(.*)""").r
     
     def parse(str: String): Number = {
       // space is sometimes used as grouping separator

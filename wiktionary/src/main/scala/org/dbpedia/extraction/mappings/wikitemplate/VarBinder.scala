@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.mappings.wikitemplate
 
 import org.dbpedia.extraction.wikiparser._
-import impl.simple.SimpleWikiParser
 import util.control.Breaks._
 import collection.mutable.{Stack, ListBuffer, HashMap, Set, Map, Queue, MutableList}
 import xml.{XML, Node => XMLNode}
