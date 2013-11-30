@@ -1,25 +1,22 @@
 package org.dbpedia.extraction.live.extraction
 
-import xml.XML
-
 import java.net.URL
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.File
-import java.util.logging.{Level, Logger}
-import java.awt.event.{ActionListener, ActionEvent}
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.{WikiSource, Source}
+import org.dbpedia.extraction.sources.{WikiSource, Source, XMLSource}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.UriPolicy
-import org.dbpedia.extraction.live.job.LiveExtractionJob
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
 import org.dbpedia.extraction.live.core.LiveOptions
 import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.live.storage.JSONCache
 import org.dbpedia.extraction.live.queue.LiveQueueItem
+import scala.xml._
 
 
 /**
@@ -92,7 +89,12 @@ object LiveExtractionConfigLoader
   def extractPage(item: LiveQueueItem, apiURL :String, landCode :String): Boolean =
   {
     val lang = Language.apply(landCode)
-    val articlesSource = WikiSource.fromPageIDs(List(item.getItemID), new URL(apiURL), lang);
+    val articlesSource : Source =
+      if (item.getXML.isEmpty)
+        WikiSource.fromPageIDs(List(item.getItemID), new URL(apiURL), lang)
+      else {
+        XMLSource.fromOAIXML(XML.loadString(item.getXML))
+      }
     startExtraction(articlesSource,lang)
   }
 
@@ -111,14 +113,14 @@ object LiveExtractionConfigLoader
       this.synchronized {
         if(extractors==null || reloadOntologyAndMapping) {
           extractors = LoadOntologyAndMappings(articlesSource, language);
-          logger.log(Level.INFO, "Ontology and mappings reloaded");
+          logger.info("Ontology and mappings reloaded");
           reloadOntologyAndMapping = false;
         }
       }
     }
 
     //var liveDest : LiveUpdateDestination = null;
-    val parser = new impl.simple.SimpleWikiParser
+    val parser = WikiParser.getInstance()
     var complete = false;
 
     for (cpage <- articlesSource.map(parser))
@@ -134,10 +136,16 @@ object LiveExtractionConfigLoader
         val liveCache = new JSONCache(cpage.id, cpage.title.decoded)
 
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
-        destList += new SPARULDestination(true, policies) // add triples
-        destList += new SPARULDestination(false, policies) // delete triples
+        if (liveCache.performCleanUpdate) {
+          destList += new SPARULDelAllDestination(liveCache.cacheObj.subjects, policies)
+          destList += new SPARULAddAllDestination(policies)
+        } else {
+          // *Delete first* When a triple is deleted from one extractor and added from another extractor
+          destList += new SPARULDestination(false, policies) // delete triples
+          destList += new SPARULDestination(true, policies) // add triples
+        }
         destList += new JSONCacheUpdateDestination(liveCache)
-        destList += new PublisherDiffDestination(policies)
+        destList += new PublisherDiffDestination(cpage.id, policies)
         destList += new LoggerDestination(cpage.id, cpage.title.decoded) // Just to log extraction results
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
@@ -157,7 +165,7 @@ object LiveExtractionConfigLoader
             }
             catch {
               case ex: Exception => {
-                logger.log(Level.FINE, "Error in " + extractor.extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
+                logger.error("Error in " + extractor.extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
                 Seq()
               }
             }

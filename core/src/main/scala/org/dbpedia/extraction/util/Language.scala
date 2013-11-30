@@ -96,6 +96,7 @@ object Language extends (String => Language)
     // Mappings are mostly based on similarity of the languages and in some cases on the regions where a related language is spoken.
     // See NonIsoLanguagesMappingTest and run it regularly.
     // TODO: move these to a config file
+    // TODO: is this map still necessary? Since JDK 7, Locale officially handles three-letter codes.
     val nonIsoCodes = Map(
       "ace" -> "id",           // Acehnese
       "als" -> "sq",           // Tosk Albanian
@@ -253,10 +254,10 @@ object Language extends (String => Language)
       "mappings",
       "en",
       // No DBpedia / RDF namespaces for mappings wiki. 
-      null,
-      null,
-      null,
-      null,
+      "mappings.dbpedia.org",
+      "http://mappings.dbpedia.org",
+      RdfNamespace.MAPPINGS,
+      RdfNamespace.MAPPINGS,
       "http://mappings.dbpedia.org",
       "http://mappings.dbpedia.org/api.php"
     )

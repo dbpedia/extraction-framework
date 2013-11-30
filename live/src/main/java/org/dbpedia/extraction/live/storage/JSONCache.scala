@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.live.storage
 
-import org.dbpedia.extraction.destinations.{SPARULDestination, Quad}
-import java.util.logging.{Level, Logger}
+import org.dbpedia.extraction.destinations._
+import org.apache.log4j.Logger
 import scala.util.parsing.json._
 import collection.mutable.{ListBuffer, ArrayBuffer, HashMap}
-import collection.mutable
 import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.destinations.formatters.SPARULFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import java.util.HashSet
+import scala.collection.JavaConversions._
 
 /**
  * This class retrieves the stored cache for a resource extraction.
@@ -21,10 +21,14 @@ class JSONCache(pageID: Long, pageTitle: String) {
   var extractorTriples = new HashMap[String, List[Any]]
   var extractorJSON = new HashMap[String, String]
 
-  var cacheObj : JSONCacheObject = null
+  var cacheObj : JSONCacheItem = null
   var cacheExists = false
 
   initCache
+
+  def performCleanUpdate() : Boolean = {
+    return cacheObj != null && cacheObj.updatedTimes >=5
+  }
 
   def getHashForExtractor(extractor: String): String = {
     extractorHash.getOrElse(extractor, "")
@@ -80,14 +84,25 @@ class JSONCache(pageID: Long, pageTitle: String) {
     extractorJSON.getOrElse(extractor, "")
   }
 
-  def updateCache(json: String, subjects: String, diff: String): Boolean = {
-    val updatedTimes = if ( cacheObj == null) "0" else (cacheObj.updatedTimes + 1).toString
+  def updateCache(json: String, subjectsSet: HashSet[String], diff: String): Boolean = {
+    val updatedTimes = if ( cacheObj == null || performCleanUpdate()) "0" else (cacheObj.updatedTimes + 1).toString
+    
+    // On clean Update do not reuse existing subjects
+    if (cacheObj != null && !performCleanUpdate())
+      subjectsSet.addAll(cacheObj.subjects)
+    
+    var subjects = new StringBuilder;
+    for(s <- subjectsSet) 
+      subjects.append(s).append('\n');
+    if (subjectsSet.size()>0)
+      subjects.deleteCharAt(subjects.length-1); //delete last comma
+
     // Check wheather to update or insert
     if (cacheExists) {
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, updatedTimes,  json, subjects, diff,  "" + this.pageID))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, updatedTimes,  json, subjects.toString, diff,  "" + this.pageID))
     }
     else
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, updatedTimes,  json, subjects, diff))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, updatedTimes,  json, subjects.toString, diff))
   }
 
   private def initCache {
@@ -114,7 +129,7 @@ class JSONCache(pageID: Long, pageTitle: String) {
     }
     catch {
       case e: Exception => {
-        logger.log(Level.INFO, e.getMessage)
+        logger.info(e.getMessage)
       }
     }
   }
@@ -131,11 +146,15 @@ object JSONCache {
     val cache = new JSONCache(pageID, "")
     val triples = cache.getAllHashedTriples()
 
-    val dest = new SPARULDestination(false, policies)
+    var destList = new ArrayBuffer[LiveDestination]()
+    destList += new SPARULDestination(false, policies) // delete triples
+    destList += new PublisherDiffDestination(pageID, policies) //  unpublish in changesetes
+    val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
 
-    dest.open
-    dest.write("dummy extractor","dummy hash", Seq(), triples, Seq())
-    dest.close
+
+    compositeDest.open
+    compositeDest.write("dummy extractor","dummy hash", Seq(), triples, Seq())
+    compositeDest.close
 
     deleteCacheOnlyItem(pageID)
   }
@@ -145,6 +164,6 @@ object JSONCache {
   }
 }
 
-class JSONCacheObject(val pageID: Long, val updatedTimes: Int, val json: String, val subjects: String) {
+class JSONCacheItem(val pageID: Long, val updatedTimes: Int, val json: String, val subjects: HashSet[String]) {
 
 }

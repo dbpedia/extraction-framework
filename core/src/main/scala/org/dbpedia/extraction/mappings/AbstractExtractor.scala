@@ -76,10 +76,10 @@ extends Extractor
         //Retrieve page text
         var text = retrievePage(pageNode.title, abstractWikiText)
 
-        //Ignore empty abstracts
-        // if(text.trim.isEmpty) return Seq.empty
-
         text = postProcess(pageNode.title, text)
+
+        if (text.trim.isEmpty)
+          return Seq.empty
 
         //Create a short version of the abstract
         val shortText = short(text)
@@ -88,7 +88,7 @@ extends Extractor
         val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
         val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
 
-        if (false) // (shortText.isEmpty)
+        if (shortText.isEmpty)
         {
             Seq(quadLong)
         }

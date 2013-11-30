@@ -9,7 +9,7 @@ import org.dbpedia.extraction.live.publisher.DiffData
 /**
  * This class publishes the triples to files (added / deleted)
  */
-class PublisherDiffDestination(policies: Array[Policy] = null) extends LiveDestination {
+class PublisherDiffDestination(pageID: Long, policies: Array[Policy] = null) extends LiveDestination {
 
   var formatter = new TerseFormatter(false, true, policies)
 
@@ -28,7 +28,7 @@ class PublisherDiffDestination(policies: Array[Policy] = null) extends LiveDesti
   }
 
   def close() {
-    Main.publishingDataQueue.add(new DiffData(added,deleted))
+    Main.publishingDataQueue.add(new DiffData(pageID, added,deleted))
   }
 
 

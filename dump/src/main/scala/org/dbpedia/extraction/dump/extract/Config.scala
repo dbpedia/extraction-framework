@@ -24,10 +24,14 @@ private class Config(config: Properties)
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
-  
-  val source = config.getProperty("source", "pages-articles.xml.bz2")
+
+  // Watch out, this could be a regex
+  val source = config.getProperty("source", "pages-articles.xml")
+  val disambiguations = config.getProperty("disambiguations", "page_props.sql.gz")
 
   val wikiName = config.getProperty("wikiName", "wiki")
+
+  val parser = config.getProperty("parser", "simple")
 
   /** Local ontology file, downloaded for speed and reproducibility */
   val ontologyFile = getValue(config, "ontology", false)(new File(_))

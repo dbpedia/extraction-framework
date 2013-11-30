@@ -12,6 +12,7 @@ import scala.collection.mutable.{ArrayBuffer,HashMap}
 import java.io._
 import java.net.URL
 import scala.io.Codec.UTF8
+import java.util.logging.Logger
 import org.dbpedia.extraction.util.IOUtils
 
 /**
@@ -24,6 +25,8 @@ import org.dbpedia.extraction.util.IOUtils
  */
 class ConfigLoader(config: Config)
 {
+    private val logger = Logger.getLogger(classOf[ConfigLoader].getName)
+
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
      *
@@ -37,7 +40,7 @@ class ConfigLoader(config: Config)
       config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2, parser))
     }
     
-    private val parser = new impl.simple.SimpleWikiParser
+    private val parser = WikiParser.getInstance(config.parser)
     
     /**
      * Creates ab extraction job for a specific language.
@@ -84,7 +87,9 @@ class ConfigLoader(config: Config)
     
             private val _articlesSource =
             {
-                XMLSource.fromReader(reader(finder.file(date, config.source)), language,                    
+              val articlesReaders = readers(config.source, finder, date)
+
+              XMLSource.fromReaders(articlesReaders, language,
                     title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
                              title.namespace == Namespace.Category || title.namespace == Namespace.Template)
             }
@@ -98,6 +103,20 @@ class ConfigLoader(config: Config)
             }
             
             def redirects : Redirects = _redirects
+
+            private val _disambiguations =
+            {
+              val cache = finder.file(date, "disambiguations-ids.obj")
+              try {
+                Disambiguations.load(reader(finder.file(date, config.disambiguations)), cache, language)
+              } catch {
+                case ex: Exception =>
+                  logger.info("Could not load disambiguations - error: " + ex.getMessage)
+                  null
+              }
+            }
+
+            def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
         }
 
         //Extractors
@@ -130,6 +149,22 @@ class ConfigLoader(config: Config)
       () => IOUtils.reader(file)
     }
 
+    private def readers(source: String, finder: Finder[File], date: String): List[() => Reader] = {
+
+      files(source, finder, date).map(reader(_))
+    }
+
+    private def files(source: String, finder: Finder[File], date: String): List[File] = {
+
+      val files = if (source.startsWith("@")) { // the articles source is a regex - we want to match multiple files
+        finder.matchFiles(date, source.substring(1))
+      } else List(finder.file(date, source))
+
+      logger.info(s"Source is ${source} - ${files.size} file(s) matched")
+
+      files
+    }
+
     //language-independent val
     private lazy val _ontology =
     {
@@ -153,13 +188,14 @@ class ConfigLoader(config: Config)
     {
       val finder = new Finder[File](config.dumpDir, Language("commons"), config.wikiName)
       val date = latestDate(finder)
-      val file = finder.file(date, config.source)
-      XMLSource.fromReader(reader(file), Language.Commons, _.namespace == Namespace.File)
+      XMLSource.fromReaders(readers(config.source, finder, date), Language.Commons, _.namespace == Namespace.File)
     }
-    
+
     private def latestDate(finder: Finder[_]): String = {
-      val fileName = if (config.requireComplete) Download.Complete else config.source
-      finder.dates(fileName).last
+      val isSourceRegex = config.source.startsWith("@")
+      val source = if (isSourceRegex) config.source.substring(1) else config.source
+      val fileName = if (config.requireComplete) Download.Complete else source
+      finder.dates(fileName, isSuffixRegex = isSourceRegex).last
     }
 }
 

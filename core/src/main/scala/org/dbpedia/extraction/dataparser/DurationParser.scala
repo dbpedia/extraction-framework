@@ -21,8 +21,8 @@ class DurationParser( context : { def language : Language } )
 
     val TimeValueColonUnitRegex = ("""^\D*?(-)?\s?(\d+)?\:(\d\d)\:?(\d\d)?\s*(""" + timeUnitsRegex + """)?(\W\D*?|\W*?)$""").r
 
-    // TODO: this regex does not support minus signs
-    val TimeValueUnitRegex = ("""(\d[,\.\s\d]*\s*)(""" + timeUnitsRegex + """)(\s|$)""").r
+    // Allow leading decimal separator, e.g. .0254 = 0.0254
+    val TimeValueUnitRegex = ("""(-?[\,\.]?\d[,\.\s\d]*\s*)(""" + timeUnitsRegex + """)(\s|\,|$)""").r
 
     def parseToSeconds(input : String, inputDatatype : Datatype) : Option[Double] =
     {
@@ -118,7 +118,8 @@ class DurationParser( context : { def language : Language } )
             {
                 val durationsMap = TimeValueUnitRegex.findAllIn(input).matchData.map{ m =>
                 {
-                    val unit = timeUnits.get(m.subgroups(1).replaceAll("""\W""", "")).getOrElse(return None)  // hack to deal with e.g "min)" matches
+                    // Seconds and minutes could be indicated as ','',"
+                    val unit = timeUnits.get(m.subgroups(1).replaceAll("""[^\'\"a-zA-Z]""", "")).getOrElse(return None)  // hack to deal with e.g "min)" matches
                     val num = getNum(m).getOrElse(return None)
                     (unit, num) }
                 }.toMap
@@ -140,7 +141,8 @@ class DurationParser( context : { def language : Language } )
 
     private def getNum(m : Regex.Match) : Option[String] =
     {
-        val numberStr = m.subgroups(0)
+      // Since we match also \s in TimeValueUnitRegex then we should remove spaces before computing a number
+      val numberStr = m.subgroups(0).replaceAll("""\s""", "")
         try
         {
             Some(parserUtils.parse(numberStr).toString)

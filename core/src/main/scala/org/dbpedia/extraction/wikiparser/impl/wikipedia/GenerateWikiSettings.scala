@@ -4,7 +4,7 @@ import scala.io.{Source, Codec}
 import javax.xml.stream.XMLInputFactory
 import scala.collection.{Map,Set}
 import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
-import org.dbpedia.extraction.util.{Language,LazyWikiCaller,WikiSettingsReader,StringUtils,StringPlusser}
+import org.dbpedia.extraction.util._
 import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
 import java.net.{URL,HttpRetryException}
 
@@ -51,6 +51,9 @@ object GenerateWikiSettings {
     
     // old language code -> new language code
     val languageMap = new LinkedHashMap[String, String]()
+
+    // language -> disambiguations
+    val disambiguationsMap = new LinkedHashMap[String, Set[String]]()
     
     // Note: langlist is sometimes not correctly sorted (done by hand), but no problem for us.
     //
@@ -64,8 +67,8 @@ object GenerateWikiSettings {
     // are rdirected. Do we need them? Are there other differences between wikipedia.dblist and langlist?
     //
     val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
-    var languages = try source.getLines.toList finally source.close
-    languages = "mappings" :: "commons" :: "wikidata" :: languages
+    val wikiLanguages = try source.getLines.toList finally source.close
+    val languages = "mappings" :: "commons" :: "wikidata" :: wikiLanguages
     
     // newInstance is expensive, call it only once
     val factory = XMLInputFactory.newInstance
@@ -77,16 +80,40 @@ object GenerateWikiSettings {
       print(code)
       val language = Language(code)
       val file = new File(baseDir, language.wikiCode+"wiki-configuration.xml")
+      val disambigFile = new File(baseDir, language.wikiCode+"wiki-disambiguation-templates.xml")
+
       try
       {
-        val url = new URL(language.apiUri+"?"+WikiSettingsReader.query)
-        val caller = new LazyWikiCaller(url, followRedirects, file, overwrite)
+        var url = new URL(language.apiUri+"?"+WikiSettingsReader.query)
+        var caller = new LazyWikiCaller(url, followRedirects, file, overwrite)
         val settings = caller.execute { stream =>
           val xml = factory.createXMLEventReader(stream)
           WikiSettingsReader.read(xml)
         }
         namespaceMap(code) = settings.aliases ++ settings.namespaces // order is important - aliases first
         redirectMap(code) = settings.magicwords("redirect")
+
+        if (wikiLanguages contains code) {
+          // Get disambiguation templates stored in MediaWiki:Disambiguationspage
+          url = new URL(language.apiUri+"?"+WikiDisambigReader.query)
+          caller = new LazyWikiCaller(url, followRedirects, disambigFile, overwrite)
+
+          var disambiguations = Set[String]()
+
+          try {
+            caller.execute { stream =>
+              val xml = factory.createXMLEventReader(stream)
+              disambiguations = WikiDisambigReader.read(language, xml)
+            }
+          } catch {
+            case ioex: IOException => {
+              // catch this and ignore. We are going to use curated disambiguations
+            }
+          }
+
+          disambiguations = disambiguations ++ CuratedDisambiguation.get(language).getOrElse(Set())
+          if (!disambiguations.isEmpty) disambiguationsMap(code) = disambiguations
+        }
         // TODO: also use interwikis
         println(" - OK")
       } catch {
@@ -117,13 +144,20 @@ object GenerateWikiSettings {
       s +"\""+name+"\""
     }
 
+    val disambiguationsStr =
+      build("disambiguations", "Set", languageMap, disambiguationsMap) { (s, entry) =>
+        val name = entry
+        s +"\""+name+"\""
+      }
+
     var s = new StringPlusser
     for ((language, message) <- errors) s +"// "+language+" - "+message+"\n"
     val errorStr = s.toString
     
     generate("Namespaces.scala", Map("namespaces" -> namespaceStr, "errors" -> errorStr))
     generate("Redirect.scala", Map("redirects" -> redirectStr, "errors" -> errorStr))
-    
+    generate("Disambiguation.scala", Map("disambiguations" -> disambiguationsStr, "errors" -> errorStr))
+
     println("generated wiki config for "+languages.length+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
   }
   

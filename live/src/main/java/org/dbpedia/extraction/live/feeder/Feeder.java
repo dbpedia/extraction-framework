@@ -44,11 +44,14 @@ public abstract class Feeder extends Thread {
         return queuePriority;
     }
 
+    protected abstract void initFeeder();
+
     /*
     * Starts the feeder (it can only start once
     * */
     public void startFeeder() {
         if (keepRunning == true) {
+            initFeeder();
             start();
         }
     }
@@ -97,6 +100,7 @@ public abstract class Feeder extends Thread {
     protected abstract List<LiveQueueItem> getNextItems();
 
     public void run() {
+        int counter = 0;
         while (keepRunning) {
             try {
                 for (LiveQueueItem item : getNextItems()) {
@@ -104,7 +108,14 @@ public abstract class Feeder extends Thread {
                 }
             } catch (Exception exp) {
                 logger.error(ExceptionUtil.toString(exp));
+                // On error re-initiate feeder
+                initFeeder();
             }
+            if (counter % 500 == 0) {
+                setLatestProcessedDate(null);
+                counter = 0;
+            }
+            counter ++;
         }
     }
 

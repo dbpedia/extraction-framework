@@ -84,6 +84,8 @@ extends Extractor
     private val dataTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
                                   .map(datatype => new DateTimeParser(context, new Datatype(datatype), true))
 
+    private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
+                                  
     private val objectParser = new ObjectParser(context, true)
 
     private val linkParser = new LinkParser(true)
@@ -166,13 +168,14 @@ extends Extractor
     {
         // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
         extractUnitValue(node).foreach(result => return List(result))
-        extractNumber(node).foreach(result =>  return List(result))
-        extractRankNumber(node).foreach(result => return List(result))
         extractDates(node) match
         {
             case dates if !dates.isEmpty => return dates
             case _ => 
         }
+        extractSingleCoordinate(node).foreach(result =>  return List(result))
+        extractNumber(node).foreach(result =>  return List(result))
+        extractRankNumber(node).foreach(result => return List(result))
         extractLinks(node) match
         {
             case links if !links.isEmpty => return links
@@ -217,6 +220,12 @@ extends Extractor
             case Some(RankRegex(number)) => Some((number, new Datatype("xsd:integer")))
             case _ => None
         }
+    }
+    
+    private def extractSingleCoordinate(node : PropertyNode) : Option[(String, Datatype)] =
+    {
+        singleGeoCoordinateParser.parse(node).foreach(value => return Some((value.toDouble.toString, new Datatype("xsd:double"))))
+        None
     }
 
     private def extractDates(node : PropertyNode) : List[(String, Datatype)] =

@@ -14,10 +14,14 @@ class DownloadConfig
   var baseUrl: URL = null
   
   var baseDir: File = null
-  
-  val languages = new HashMap[Language, Set[String]]
-  
-  val ranges = new HashMap[(Int,Int), Set[String]]
+
+  // Files to download for each language
+  // lang -> Set(filename, isRegex)
+  val languages = new HashMap[Language, Set[(String, Boolean)]]
+
+  // Ranges to download for each language
+  // (start,end) -> Set(filename, isRegex)
+  val ranges = new HashMap[(Int,Int), Set[(String, Boolean)]]
   
   var dateRange = ("00000000","99999999")
   
@@ -48,7 +52,7 @@ class DownloadConfig
    */
   def parse(dir: File, args: TraversableOnce[String]): Unit = {
     
-    val DownloadFiles = new TwoListArg("download", ":", ",")
+    val DownloadFiles = new TwoListArg("download", ":", ",", "@")
     
     for (a <- args; arg = a.trim) arg match
     {
@@ -67,7 +71,7 @@ class DownloadConfig
         if (! file.isFile) throw Usage("Invalid file "+file, arg)
         parse(file)
       case DownloadFiles(keys, files) =>
-        if (files.exists(_.isEmpty)) throw Usage("Invalid file name", arg)
+        if (files.exists(_._1.isEmpty)) throw Usage("Invalid file name", arg)
         for (key <- keys) key match {
           // FIXME: copy & paste in ConfigUtils and extract.Config
           case "@mappings" => for (language <- Namespace.mappings.keySet) add(languages, language, files)
@@ -79,8 +83,8 @@ class DownloadConfig
     }
   }
   
-  private def add[K](map: Map[K,Set[String]], key: K, values: Array[String]) = 
-    map.getOrElseUpdate(key, new HashSet[String]) ++= values
+  private def add[K](map: Map[K,Set[(String, Boolean)]], key: K, values: Array[(String, Boolean)]) =
+    map.getOrElseUpdate(key, new HashSet[(String, Boolean)]) ++= values
   
   private def toBoolean(s: String, arg: String): Boolean =
     if (s == "true" || s == "false") s.toBoolean else throw Usage("Invalid boolean value", arg) 
@@ -161,8 +165,9 @@ download=en,zh-yue,1000-2000,...:file1,file2,...
   code, or a range. In the latter case, languages with a matching number of articles will be used. 
   If the start of the range is omitted, 0 is used. If the end of the range is omitted, 
   infinity is used. For each language, a new sub-directory is created in the target directory.
-  Each file is a file name like 'pages-articles.xml.bz2', to which a prefix like 
-  'enwiki-20120307-' will be added. This argument can be used multiple times, for example 
+  Each file is a file name like 'pages-articles.xml.bz2' or a regex if it starts with a '@' (useful for
+  multiple files processing, i.e. multiple parts of the same file) to which a prefix like
+ 'enwiki-20120307-' will be added. This argument can be used multiple times, for example
   'download=en:foo.xml download=de:bar.xml'. '@mappings' means all languages that have a 
    mapping namespace on http://mappings.dbpedia.org.
 retry-max=5
@@ -175,21 +180,24 @@ pretty=true
   Should progress printer reuse one line? Doesn't work with log files, so default is false.
 Order is relevant - for single-value parameters, values read later overwrite earlier values.
 Empty arguments or arguments beginning with '#' are ignored.
-""" /* empty line */ 
+""" /* empty line */
     println(usage)
     
     new Exception(message, cause)
   }
 }
 
-class TwoListArg(key: String, sep1: String, sep2: String)
+class TwoListArg(key: String, sep1: String, sep2: String, partsIndicator: String)
 {
-  def unapply(arg: String): Option[(Array[String],Array[String])] = {
+  def unapply(arg: String): Option[(Array[String],Array[(String, Boolean)])] = {
     val index = arg.indexOf('=')
     if (index == -1 || arg.substring(0, index).trim != key) return None
     val parts = arg.substring(index + 1).trim.split(sep1, -1)
     if (parts.length != 2) return None
-    Some(parts(0).split(sep2, -1).map(_.trim), parts(1).split(sep2, -1).map(_.trim))
+
+    Some(parts(0).split(sep2, -1).map(_.trim), parts(1).split(sep2, -1).map { s =>
+      (if (s.trim.startsWith(partsIndicator)) s.trim.substring(partsIndicator.length()) else s.trim, s.trim.startsWith(partsIndicator))
+    })
   }
 }
 
