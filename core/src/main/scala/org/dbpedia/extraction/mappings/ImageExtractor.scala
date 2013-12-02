@@ -14,6 +14,7 @@ import org.dbpedia.extraction.util.{Language, WikiUtil}
 import java.net.URLDecoder
 import org.dbpedia.extraction.util.RichString.wrapString
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts the first image of a Wikipedia page. Constructs a thumbnail from it, and

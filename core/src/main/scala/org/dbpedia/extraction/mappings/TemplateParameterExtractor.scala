@@ -5,6 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)

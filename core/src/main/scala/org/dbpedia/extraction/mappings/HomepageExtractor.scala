@@ -6,6 +6,7 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, UriUtils}
+import scala.language.reflectiveCalls
 
 /**
  * Extracts links to the official homepage of an instance.

@@ -5,6 +5,7 @@ import java.nio.file.{Path,Paths,Files,SimpleFileVisitor,FileVisitResult}
 import java.nio.file.StandardOpenOption.{CREATE,APPEND}
 import java.nio.file.attribute.BasicFileAttributes
 import scala.collection.JavaConversions.iterableAsScalaIterable
+import scala.language.implicitConversions
 import RichPath._
 
 

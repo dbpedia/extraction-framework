@@ -12,6 +12,7 @@ import java.lang.IllegalStateException
 import scala.collection.mutable.ArrayBuffer
 import org.junit.{Ignore, Test}
 import org.dbpedia.extraction.ontology.Ontology
+import scala.language.reflectiveCalls
 
 /**
  * Compares outpur from InfoboxExtractor to gold standard.

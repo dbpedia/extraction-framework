@@ -4,6 +4,7 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
 
 /**
  * Extracts revision ids of articles, e.g.

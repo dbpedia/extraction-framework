@@ -5,6 +5,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.config.mappings.TopicalConceptsExtractorConfig
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
+import scala.language.reflectiveCalls
 
 /**
  * Relies on Cat main templates. Goes over all categories and extract DBpedia Resources that are the main subject of that category.

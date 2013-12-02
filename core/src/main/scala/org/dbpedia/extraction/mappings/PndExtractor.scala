@@ -7,6 +7,7 @@ import org.dbpedia.extraction.config.mappings.PndExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts PND (Personennamendatei) data about a person. PND is published by the 

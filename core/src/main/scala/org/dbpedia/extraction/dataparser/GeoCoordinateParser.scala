@@ -6,6 +6,7 @@ import util.control.ControlThrowable
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 import org.dbpedia.extraction.mappings.Redirects
+import scala.language.reflectiveCalls
 
 /**
  * Parses geographical coordinates.

@@ -10,6 +10,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.mappings.Redirects
 import java.lang.Double
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import scala.language.reflectiveCalls
 
 class UnitValueParser( extractionContext : {
                            def ontology : Ontology

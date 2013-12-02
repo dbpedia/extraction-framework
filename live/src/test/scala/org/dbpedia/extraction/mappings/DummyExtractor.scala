@@ -4,6 +4,7 @@ import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.destinations.{Quad, Dataset}
 import collection.mutable.ListBuffer
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
 
 class DummyExtractor(extractionContext : { def language : Language })
   extends Extractor

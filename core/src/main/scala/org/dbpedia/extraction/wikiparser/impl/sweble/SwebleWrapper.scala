@@ -5,6 +5,7 @@ import java.net.URI
 import java.util.ArrayList
 
 import scala.collection.JavaConversions._
+import scala.language.implicitConversions
 import collection.mutable.{ListBuffer}
 
 import org.sweble.wikitext.engine.CompiledPage

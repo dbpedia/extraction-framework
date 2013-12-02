@@ -6,6 +6,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.{DataParserConfig, DateTimeParserConfig}
 import org.dbpedia.extraction.util.{Language, Date}
 import org.dbpedia.extraction.mappings.Redirects
+import scala.language.reflectiveCalls
 
 /**
  * Parses a data time.
