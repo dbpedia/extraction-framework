@@ -4,6 +4,7 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
 
 /**
  * Extracts labels to articles based on their title.

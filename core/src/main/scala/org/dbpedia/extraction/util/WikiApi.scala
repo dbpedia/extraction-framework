@@ -3,6 +3,7 @@ package org.dbpedia.extraction.util
 import java.util.logging.Logger
 import java.io.IOException
 import scala.xml.{XML, Elem}
+import scala.language.postfixOps
 import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import org.dbpedia.extraction.sources.WikiPage
 import java.net.{URLEncoder, URL}

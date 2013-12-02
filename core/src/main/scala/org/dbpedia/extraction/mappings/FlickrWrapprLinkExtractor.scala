@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.destinations.QuadBuilder
+import scala.language.reflectiveCalls
 
 /**
  * Extracts links to flickr wrappr. Scala version of 

@@ -58,7 +58,7 @@ object TemplateTransformConfig {
       )
     } catch {
       // In case there are problems with the URL/URI just bail and return the original node
-      case _ => List(node)
+      case _ : Throwable => List(node)
     }
   }
 

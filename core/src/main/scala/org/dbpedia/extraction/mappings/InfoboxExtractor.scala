@@ -11,6 +11,7 @@ import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import scala.language.reflectiveCalls
 
 /**
  * This extractor extracts all properties from all infoboxes.
