@@ -5,7 +5,10 @@ import org.dbpedia.extraction.ontology.OntologyDatatypes
 import org.dbpedia.extraction.util.Language
 import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
 import org.dbpedia.extraction.wikiparser.TextNode
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
 
+@RunWith(classOf[JUnitRunner])
 class IntegerParserTest extends FlatSpec with ShouldMatchers
 {
     "IntegerParser" should "return 8 for '8.0'@en" in
@@ -20,6 +23,10 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
      {
          parse("en", "12.5 mio") should equal (Some(12500000))
      }
+    "IntegerParser" should "return 1432 for '1,432 <small>''2006 Census''</small>'@en" in
+     {
+         parse("en", "1,432 <small>''2006 Census''</small>") should equal (Some(1432))
+     }
     "IntegerParser" should "return 12500000 for '12,5 mio kg'@de" in
      {
          parse("de", "12,5 mio kg") should equal (Some(12500000))
@@ -32,6 +39,10 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
      {
          parse("de", "40.000.000") should equal (Some(40000000))
      }
+    "IntegerParser" should "return 40000000 for '40 000 000'@fr" in
+     {
+         parse("fr", "40 000 000") should equal (Some(40000000))
+     }
     "IntegerParser" should "return 40000 for '40,000.000 (estimated)'@en" in
      {
          parse("en", "40,000.000 (estimated)") should equal (Some(40000))
@@ -40,7 +51,14 @@ class IntegerParserTest extends FlatSpec with ShouldMatchers
      {
          parse("de", "40.000,000") should equal (Some(40000))
      }
-
+    "IntegerParser" should "return 40000 for 'context 40,000 1context'@en" in
+     {
+         parse("en", "context 40,000 1context") should equal (Some(40000))
+     }
+    "IntegerParser" should "return 40000 for 'context1 40,000 context'@en" in
+     {
+         parse("en", "context1 40,000 context") should equal (Some(40000))
+     }
 
     /**
      * Matcher to test if 2 values are approximately equal.

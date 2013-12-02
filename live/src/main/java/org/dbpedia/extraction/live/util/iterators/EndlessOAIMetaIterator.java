@@ -23,16 +23,14 @@ public class EndlessOAIMetaIterator
     private String oaiBaseUri = null;
     private String startDate = null;
     private String endDate = null;
-    private long relativeEndFromNow = 0; // Milliseconds
     private long pollDelay = 0;
     private long resumptionDelay = 0;
     private OAIRecordIterator lastIterator = null;
 
-    public EndlessOAIMetaIterator(String oaiBaseUri, String startDate, long relativeEndFromNow,
+    public EndlessOAIMetaIterator(String oaiBaseUri, String startDate,
                                   long pollDelay, long resumptionDelay) {
         this.oaiBaseUri = oaiBaseUri;
         this.startDate = startDate;
-        this.relativeEndFromNow = relativeEndFromNow;
         this.pollDelay = pollDelay;
         this.resumptionDelay = resumptionDelay;
     }
@@ -54,14 +52,10 @@ public class EndlessOAIMetaIterator
         if (lastIterator != null)
             startDate = lastIterator.getLastResponseDate();
 
-        endDate = (relativeEndFromNow == 0) ?
-                null :
-                DateUtil.formatMillisWithPattern(System.currentTimeMillis() + relativeEndFromNow, OAIUtil.getOAIDateFormatString());
-
         logger.trace("Using date: " + startDate);
 
         Iterator<Document> iterator;
-        OAIRecordIterator it = new OAIRecordIterator(oaiBaseUri, startDate, endDate, pollDelay, resumptionDelay);
+        OAIRecordIterator it = new OAIRecordIterator(oaiBaseUri, startDate, null, pollDelay, resumptionDelay);
         iterator = it;
 
 

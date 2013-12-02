@@ -1,0 +1,248 @@
+<#<!--
+
+
+PLEASE DO NOT EDIT THIS WIKI PAGE!
+
+
+YOUR CHANGES WILL BE LOST IN THE NEXT RELEASE!
+
+
+Please edit CreateDownloadPage.scala instead.
+
+
+Paste this result page of CreateDownloadPage.scala here:
+http://wiki.dbpedia.org/Downloads39Desc/edit
+
+
+-->#>
+
+
+=== Dataset Descriptions ===
+
+{{a name="dbpedia-ontology"}}
+==== DBpedia Ontology ====
+//The DBpedia ontology in OWL. See ((http://svn.aksw.org/papers/2013/SWJ_DBpedia/public.pdf our SWJ paper)) for more details.//
+{{a name="mapping-based-types"}}
+==== Mapping-based Types ====
+//Contains triples of the form $object rdf:type $class from the mapping-based extraction.//
+{{a name="mapping-based-types-heuristic"}}
+==== Mapping-based Types (Heuristic) ====
+//Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//
+{{a name="mapping-based-properties"}}
+==== Mapping-based Properties ====
+//High-quality data extracted from Infoboxes using the mapping-based extraction. The predicates in this dataset are in the /ontology/ namespace.//
+  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.
+{{a name="mapping-based-properties-cleaned"}}
+==== Mapping-based Properties (Cleaned) ====
+//This file contains the statements from the Mapping-based Properties, with incorrect statements identified by heuristic inference being removed.//
+{{a name="mapping-based-properties-specific"}}
+==== Mapping-based Properties (Specific) ====
+//Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//
+{{a name="titles"}}
+==== Titles ====
+//Titles of all Wikipedia Articles in the corresponding language.//
+{{a name="short-abstracts"}}
+==== Short Abstracts ====
+//Short Abstracts (max. 500 characters long) of Wikipedia articles.//
+{{a name="extended-abstracts"}}
+==== Extended Abstracts ====
+//Full abstracts of Wikipedia articles, usually the first section.//
+{{a name="images"}}
+==== Images ====
+//Main image and corresponding thumbnail from Wikipedia article.//
+{{a name="geographic-coordinates"}}
+==== Geographic Coordinates ====
+//Geographic coordinates extracted from Wikipedia.//
+{{a name="raw-infobox-properties"}}
+==== Raw Infobox Properties ====
+//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace) should always be preferred over this data.//
+{{a name="raw-infobox-property-definitions"}}
+==== Raw Infobox Property Definitions ====
+//All properties / predicates used in infoboxes.//
+{{a name="homepages"}}
+==== Homepages ====
+//Links to homepages of persons, organizations etc.//
+{{a name="persondata"}}
+==== Persondata ====
+//Information about persons (date and place of birth etc.) extracted from the English and German Wikipedia, represented using the FOAF vocabulary.//
+{{a name="pnd"}}
+==== PND ====
+//Dataset containing PND (Personennamendatei) identifiers.//
+{{a name="inter-language-links"}}
+==== Inter-Language Links ====
+//Dataset linking a DBpedia resource to the same resource in other languages and in ((http://www.wikidata.org Wikidata)). Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.//
+{{a name="articles-categories"}}
+==== Articles Categories ====
+//Links from concepts to categories using the SKOS vocabulary.//
+{{a name="categories-labels"}}
+==== Categories (Labels) ====
+//Labels for Categories.//
+{{a name="categories-skos"}}
+==== Categories (Skos) ====
+//Information which concept is a category and how categories are related using the SKOS Vocabulary.//
+{{a name="external-links"}}
+==== External Links ====
+//Links to external web pages about a concept.//
+{{a name="links-to-wikipedia-article"}}
+==== Links to Wikipedia Article ====
+//Dataset linking DBpedia resource to corresponding article in Wikipedia.//
+{{a name="wikipedia-pagelinks"}}
+==== Wikipedia Pagelinks ====
+//Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.//
+{{a name="redirects"}}
+==== Redirects ====
+//Dataset containing redirects between articles in Wikipedia.//
+{{a name="transitive-redirects"}}
+==== Transitive Redirects ====
+//Redirects dataset in which multiple redirects have been resolved and redirect cycles have been removed.//
+{{a name="disambiguation-links"}}
+==== Disambiguation links ====
+//Links extracted from Wikipedia ((http://en.wikipedia.org/wiki/Wikipedia:Disambiguation disambiguation)) pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.//
+{{a name="iri-same-as-uri-links"}}
+==== IRI-same-as-URI links ====
+//owl:sameAs links between the ((http://tools.ietf.org/html/rfc3987 IRI)) and ((http://tools.ietf.org/html/rfc3986 URI)) format of DBpedia resources. Only extracted when IRI and URI are actually different.//
+{{a name="page-ids"}}
+==== Page IDs ====
+//Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.//
+{{a name="revision-ids"}}
+==== Revision IDs ====
+//Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.//
+{{a name="revision-uris"}}
+==== Revision URIs ====
+//Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.//
+{{a name="links-to-amsterdam-museum-data"}}
+==== Links to Amsterdam Museum data ====
+//Links between DBpedia and ((http://semanticweb.cs.vu.nl/lod/am/ Amsterdam Museum)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/amsterdammuseum Silk link specification)).//
+{{a name="links-to-bbc-wildlife-finder"}}
+==== Links to BBC Wildlife Finder ====
+//Links between DBpedia and ((http://www.bbc.co.uk/wildlifefinder/ BBC Wildlife Finder)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/bbcwildlife Silk link specification)).//
+{{a name="links-to-rdf-bookmashup"}}
+==== Links to RDF Bookmashup ====
+//Links between books in DBpedia and data about them provided by the ((http://www4.wiwiss.fu-berlin.de/bizer/bookmashup/ RDF Book Mashup)). Update mechanism: copy over from previous release.//
+{{a name="links-to-bricklink"}}
+==== Links to Bricklink ====
+//Links between DBpedia and ((http://kasabi.com/dataset/bricklink Bricklink)). Links created manually.//
+{{a name="links-to-cordis"}}
+==== Links to CORDIS ====
+//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/cordis/ CORDIS)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/cordis Silk link specifications)).//
+{{a name="links-to-dailymed"}}
+==== Links to ~DailyMed ====
+//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/dailymed/ DailyMed)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dailymed Silk link specifications)).//
+{{a name="links-to-dblp"}}
+==== Links to DBLP ====
+//Links between computer scientists in DBpedia and their publications in the ((http://www.informatik.uni-trier.de/~ley/db/ DBLP)) database. Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dblp Silk link specification)).//
+{{a name="links-to-dbtune"}}
+==== Links to DBTune ====
+//Links between DBpedia and ((http://dbtune.org/ DBTune)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dbtune Silk link specifications)).//
+{{a name="links-to-diseasome"}}
+==== Links to Diseasome ====
+//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/diseasome/ Diseasome)).  Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/diseasome Silk link specifications)).//
+{{a name="links-to-drugbank"}}
+==== Links to ~DrugBank ====
+//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/drugbank/ DrugBank)).  Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/drugbank Silk link specifications)).//
+{{a name="links-to-eunis"}}
+==== Links to EUNIS ====
+//Links between DBpedia and ((http://eunis.eea.europa.eu EUNIS)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/eunis Silk link specification)).//
+{{a name="links-to-eurostat-linked-statistics"}}
+==== Links to Eurostat (Linked Statistics) ====
+//Links between DBpedia and ((http://eurostat.linked-statistics.org Eurostat (Linked Statistics))). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/eurostat_linkedstatistics Silk link specifications)).//
+{{a name="links-to-eurostat-wbsg"}}
+==== Links to Eurostat (WBSG) ====
+//Links between countries and regions in DBpedia and data about them from ((http://www4.wiwiss.fu-berlin.de/eurostat/ Eurostat (WBSG))). Links created manually.//
+{{a name="links-to-cia-world-factbook"}}
+==== Links to CIA World Factbook ====
+//Links between DBpedia and the ((http://www4.wiwiss.fu-berlin.de/factbook/ CIA World Factbook)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/factbook Silk link specifications)).//
+{{a name="links-to-flickr-wrappr"}}
+==== Links to flickr wrappr ====
+//Links between DBpedia concepts and photo collections depicting them generated by ((http://www4.wiwiss.fu-berlin.de/flickrwrappr/ flickr wrappr)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/dump/core/src/main/scala/org/dbpedia/extraction/mappings/FlickrWrapprLinkExtractor.scala Scala extractor)).//
+{{a name="links-to-freebase"}}
+==== Links to Freebase ====
+//Links between DBpedia and ((http://www.freebase.com/ Freebase (MIDs))). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/dump/scripts/src/main/scala/org/dbpedia/extraction/scripts/CreateFreebaseLinks.scala Scala script)).//
+{{a name="links-to-gadm"}}
+==== Links to GADM ====
+//Links between DBpedia and ((http://gadm.geovocab.org/ GADM)). Links created by ((https://github.com/dbpedia/dbpedia-links/tree/master/datasets/dbpedia.org/gadm.geovocab.org/scripts Java program)).//
+{{a name="links-to-geonames"}}
+==== Links to ~GeoNames ====
+//Links between geographic places in DBpedia and data about them from ((http://www.geonames.org/ GeoNames)). Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-geonames.txt generated from latest GeoNames datasets)).//
+{{a name="links-to-geospecies"}}
+==== Links to ~GeoSpecies ====
+//Links between DBpedia and ((http://lod.geospecies.org/ GeoSpecies)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/geospecies Silk link specification)).//
+{{a name="links-to-gho"}}
+==== Links to GHO ====
+//Links between DBpedia and ((http://gho.aksw.org GHO)) (Global Health Observatory). Links created by ((http://aksw.org/Projects/LIMES LIMES)).//
+{{a name="links-to-project-gutenberg"}}
+==== Links to Project Gutenberg ====
+//Links between writers in DBpedia and data about them from ((www4.wiwiss.fu-berlin.de/gutendata/ Project Gutenberg)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/gutenberg Silk link specification)).//
+{{a name="links-to-italian-public-schools"}}
+==== Links to Italian Public Schools ====
+//Links between DBpedia and ((http://www.linkedopendata.it/datasets/scuole Italian Public Schools)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/italian-public-schools Silk link specification)).//
+{{a name="links-to-linkedgeodata"}}
+==== Links to ~LinkedGeoData ====
+//Links between DBpedia and ((http://linkedgeodata.org LinkedGeoData)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedgeodata Silk link specifications)).//
+{{a name="links-to-linkedmdb"}}
+==== Links to ~LinkedMDB ====
+//Links between DBpedia and ((http://www.linkedmdb.org LinkedMDB)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedmdb Silk link specifications)).//
+{{a name="links-to-musicbrainz"}}
+==== Links to ~MusicBrainz ====
+//Links between artists, albums and songs in DBpedia and data about them from ((http://musicbrainz.org/ MusicBrainz)). Update mechanism: copy over from previous release.//
+{{a name="links-to-new-york-times"}}
+==== Links to New York Times ====
+//Links between ((http://www.nytimes.com/ New York Times)) subject headings and DBpedia concepts. Links copied from the original data set.//
+{{a name="links-to-opencyc"}}
+==== Links to ~OpenCyc ====
+//Links between DBpedia and ((http://opencyc.org/ OpenCyc)) concepts. ((OpenCyc Details)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/opencyc PHP script)).//
+{{a name="links-to-openei-open-energy-info"}}
+==== Links to ~OpenEI (Open Energy Info) ====
+//Links between DBpedia and ((http://en.openei.org OpenEI)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/openei Silk link specifications)).//
+{{a name="links-to-revyu"}}
+==== Links to Revyu ====
+//Links between DBpedia and ((http://revyu.com Revyu)). Update mechanism: copy over from previous release.//
+{{a name="links-to-sider"}}
+==== Links to SIDER ====
+//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/sider/ SIDER)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/sider Silk link specifications)).//
+{{a name="links-to-rdf-tcm"}}
+==== Links to RDF-TCM ====
+//Links between DBpedia and ((http://code.google.com/p/junsbriefcase/wiki/RDFTCMData TCMGeneDIT)). Links copied from the original data set.//
+{{a name="links-to-umbel"}}
+==== Links to UMBEL ====
+//Links between DBpedia and ((http://umbel.org/ UMBEL)). Update mechanism: copy over from previous release.//
+{{a name="links-to-us-census"}}
+==== Links to US Census ====
+//Links between US cities and states in DBpedia and data about them from ((http://www.rdfabout.com/demo/census/ US Census)). Update mechanism: copy over from previous release.//
+{{a name="links-to-wikicompany"}}
+==== Links to ~WikiCompany ====
+//Links between companies in DBpedia and companies in ((http://www4.wiwiss.fu-berlin.de/wikicompany/ WikiCompany)). Update mechanism: copy over from previous release.//
+{{a name="links-to-wordnet-classes"}}
+==== Links to ~WordNet Classes ====
+//Classification links to ((http://www.w3.org/TR/wordnet-rdf/ RDF representations)) of ((http://wordnet.princeton.edu/ WordNet)) classes. Update mechanism: copy over from previous release.//
+{{a name="yago-links"}}
+==== YAGO links ====
+//Dataset containing owl:sameAs links between DBpedia and ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) instances. Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-yago.txt generated from latest YAGO datasets)).//
+{{a name="yago-type-links"}}
+==== YAGO type links ====
+//Dataset containing owl:equivalentClass links between types in the ~http://dbpedia.org/class/yago/ and ~http://yago-knowledge.org/resource/ namespaces. Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-yago.txt generated from latest YAGO datasets)).//
+{{a name="yago-types"}}
+==== YAGO types ====
+//Dataset containing ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) type information for DBpedia resources. Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-yago.txt generated from latest YAGO datasets)).//
+{{a name="yago-type-hierarchy"}}
+==== YAGO type hierarchy ====
+//Dataset containing the hierarchy of ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) classes in the ~http://dbpedia.org/class/yago/ namespace. Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-yago.txt generated from latest YAGO datasets)).//
+<#<!--
+
+
+PLEASE DO NOT EDIT THIS WIKI PAGE!
+
+
+YOUR CHANGES WILL BE LOST IN THE NEXT RELEASE!
+
+
+Please edit CreateDownloadPage.scala instead.
+
+
+Paste this result page of CreateDownloadPage.scala here:
+http://wiki.dbpedia.org/Downloads39Desc/edit
+
+
+-->#>
+
+

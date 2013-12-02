@@ -1,25 +1,13 @@
 package org.dbpedia.extraction.live.processor;
 
-import ORG.oclc.oai.harvester2.verb.GetRecord;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.destination.LiveUpdateDestination;
 import org.dbpedia.extraction.live.core.LiveOptions;
-import org.dbpedia.extraction.live.extraction.LiveExtractionManager;
-import org.dbpedia.extraction.live.feeder.LiveUpdateFeeder;
-import org.dbpedia.extraction.live.feeder.MappingUpdateFeeder;
-import org.dbpedia.extraction.live.main.Main;
-import org.dbpedia.extraction.live.priority.PagePriority;
-import org.dbpedia.extraction.live.priority.Priority;
-import org.dbpedia.extraction.live.util.LastResponseDateManager;
-import org.dbpedia.extraction.live.util.XMLUtil;
-import org.dbpedia.extraction.sources.Source;
-import org.dbpedia.extraction.sources.XMLSource;
-import org.dbpedia.extraction.util.Language;
-import org.w3c.dom.Document;
-import scala.xml.*;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
+import org.dbpedia.extraction.live.queue.LiveQueue;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
+import org.dbpedia.extraction.live.queue.LiveQueuePriority;
+import org.dbpedia.extraction.live.storage.JSONCache;
 
 
 /**
@@ -33,88 +21,66 @@ import java.util.regex.Pattern;
 public class PageProcessor extends Thread{
 
     private static Logger logger = Logger.getLogger(PageProcessor.class);
-
-    public PageProcessor(String name, int priority){
-        this.setPriority(priority);
-        this.setName(name);
-        start();
-    }
+    private volatile boolean keepRunning = true;
 
     public PageProcessor(String name){
-        this(name, Thread.NORM_PRIORITY);
+        this.setName("PageProcessor_" + name);
     }
 
     public PageProcessor(){
-        this("PageProcessor", Thread.NORM_PRIORITY);
+        this("PageProcessor");
     }
 
-    private void processPage(long pageID){
-        try{
-            String oaiUri = LiveOptions.options.get("oaiUri");
-            String oaiPrefix = LiveOptions.options.get("oaiPrefix");
-            String baseWikiUri = LiveOptions.options.get("baseWikiUri");
-            String mediaWikiPrefix = "mediawiki";
-
-            GetRecord record = new GetRecord(oaiUri, oaiPrefix + pageID, mediaWikiPrefix);
+    public void startProcessor() {
+        if (keepRunning == true) {
+            start();
+        }
+    }
             if(record.toString().contains("header status=\"deleted\"")){
                 LiveUpdateDestination.deleteResourceCompletely(pageID);
             }
-            Document doc = record.getDocument();
 
-            /////////////////////////////////////////////////////////////
-            String strDoc = XMLUtil.toString(doc);
-            Pattern invalidCharactersPattern = Pattern.compile("&#[\\d{0-9}]+;");
-            Matcher invalidCharactersMatcher = invalidCharactersPattern.matcher(strDoc);
+    public void stopProcessor() {
+        keepRunning = false;
+    }
 
-            String resultingString = invalidCharactersMatcher.replaceAll("");
 
-            Node node = XML.loadString(resultingString);
-            Elem xmlElem = (Elem) node;
-            //logger.warn("Page ID " + pageID + " :" + resultingString);
-            //Source wikiPageSource = XMLSource.fromXML(xmlElem, Language.apply(LiveOptions.options.get("language")));
-            LiveExtractionManager.extractFromPage(xmlElem);
-            /////////////////////////////////////////////////////////////
+    private void processPage(LiveQueueItem item){
+        try{
+            Boolean extracted = LiveExtractionConfigLoader.extractPage(
+                    item,
+                    LiveOptions.options.get("localApiURL"),
+                    LiveOptions.options.get("language"));
 
+            if (!extracted)
+                JSONCache.setErrorOnCache(item.getItemID(), -1);
         }
         catch(Exception exp){
-            logger.error("Error in processing page number " + pageID + ", and the reason is " + exp.getMessage(), exp);
+            logger.error("Error in processing page number " + item.getItemID() + ", and the reason is " + exp.getMessage(), exp);
+            JSONCache.setErrorOnCache(item.getItemID(), -2);
         }
-
     }
 
 
 
     public void run(){
-        while(true){
+        while(keepRunning){
             try{
-                // block if empty
-                PagePriority requiredPage = Main.pageQueue.take();
-
-                //We should remove it also from existingPagesTree, but if it does not exist, then we should only remove it, without any further step
-                if((Main.existingPagesTree != null) && (!Main.existingPagesTree.isEmpty()) && (Main.existingPagesTree.containsKey(requiredPage.pageID))){
-                    Main.existingPagesTree.remove(requiredPage.pageID);
-                    processPage(requiredPage.pageID);
+                LiveQueueItem page = LiveQueue.take();
+                // If a mapping page set extractor to reload mappings and ontology
+                if (page.getPriority() == LiveQueuePriority.MappingPriority) {
+                    LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
                 }
-                logger.info("Page # " + requiredPage + " has been removed and processed");
-
-                //Write response date to file in both cases of live update and mapping update
-                if(requiredPage.pagePriority == Priority.MappingPriority)
-                    LastResponseDateManager.writeLastResponseDate(MappingUpdateFeeder.lastResponseDateFile,
-                            requiredPage.pageTimestamp);
-                else if(requiredPage.pagePriority == Priority.LivePriority)
-                    LastResponseDateManager.writeLastResponseDate(LiveUpdateFeeder.lastResponseDateFile,
-                            requiredPage.pageTimestamp);
-
-//                }
-
+                if (page.isDeleted() == true) {
+                    JSONCache.deleteCacheItem(page.getItemID(),LiveExtractionConfigLoader.policies());
+                    logger.info("Deleted page with ID: " + page.getItemID() + " (" + page.getItemName() + ")");
+                }
+                else
+                    processPage(page);
             }
             catch (Exception exp){
                 logger.error("Failed to process page");
             }
-
-
         }
-
     }
-
 }

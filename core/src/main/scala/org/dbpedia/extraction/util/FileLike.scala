@@ -7,6 +7,16 @@ import java.io.{InputStream,OutputStream}
  */
 abstract class FileLike[T <% FileLike[T]] {
   
+  /**
+   * @return full path
+   */
+  def toString: String
+  
+  /**
+   * @return file name, or null if file path has no parts
+   */
+  def name: String
+  
   def resolve(name: String): T
   
   def names: List[String]
@@ -16,6 +26,8 @@ abstract class FileLike[T <% FileLike[T]] {
   def exists: Boolean
   
   def delete(recursive: Boolean = false): Unit
+
+  def size(): Long
 
   def isFile: Boolean
 

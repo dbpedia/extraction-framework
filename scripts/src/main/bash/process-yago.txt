@@ -1,0 +1,168 @@
+== First steps ==
+
+Download from http://www.mpi-inf.mpg.de/yago-naga/yago/downloads.html and unzip:
+
+for i in yagoDBpediaClasses yagoTaxonomy yagoTransitiveType ; do
+  wget http://www.mpi-inf.mpg.de/yago-naga/yago/download/yago/$i.ttl.7z ;
+  7za x $i.ttl.7z ;
+  rm $i.ttl.7z ;
+done
+
+Check that @base is the same in all files - the following should print the same line several times:
+
+head -n 15 *.ttl | grep @base
+
+Check that all non-comment lines in these files contain the relevant property - each of the following commands should only return a few prefix lines:
+
+grep -v '^#' yagoTransitiveType.ttl | grep -v rdf:type
+grep -v '^#' yagoTaxonomy.ttl | grep -v rdfs:subClassOf
+grep -v '^#' yagoDBpediaClasses.ttl | grep -v owl:equivalentClass
+
+Retain only relevant lines, drop properties:
+
+grep -v '^#' yagoTransitiveType.ttl | grep rdf:type | awk '{print $1" "$3}' > yagoTransitiveType.ttl.1 
+grep -v '^#' yagoTaxonomy.ttl | grep rdfs:subClassOf | awk '{print $1" "$3}' > yagoTaxonomy.ttl.1
+grep -v '^#' yagoDBpediaClasses.ttl | grep owl:equivalentClass | awk '{print $1" "$3}' > yagoDBpediaClasses.ttl.1 
+
+== Clean up encoding ==
+
+=== yagoDBpediaClasses ===
+
+Remove lines with backslashes:
+grep -v '\\' yagoDBpediaClasses.ttl.1 >yagoDBpediaClasses.ttl.2
+
+There are some XML-escapes in yagoDBpediaClasses. Remove the lines with &gt; and &lt; - they're useless:
+grep -v -E '&gt;|&lt;' yagoDBpediaClasses.ttl.2 > yagoDBpediaClasses.ttl.3
+
+Replace &amp; and &quot; :
+sed 's/&quot;/"/g; s/&amp;/\&/g' yagoDBpediaClasses.ttl.3 > yagoDBpediaClasses.ttl.4 
+
+remove U+200E and U+200F (didn't find a way to grep for it, but less shows it):
+sed -E 's/\xE2\x80(\x8E|\x8F)//g' yagoDBpediaClasses.ttl.4 > yagoDBpediaClasses.ttl.5
+
+unescape % stuff:
+sed -r 's/%([0-9A-F])/\\x\1/g' yagoDBpediaClasses.ttl.5 | while read -r line ; do echo -e $line ; done > yagoDBpediaClasses.ttl.6
+
+then some more HTML...
+sed 's/&#039;/'\''/g; s/&#252;/ü/g' yagoDBpediaClasses.ttl.6 >yagoDBpediaClasses.ttl.7
+
+...and some lines with # that can't be fixed... 
+grep -v '#' yagoDBpediaClasses.ttl.7 >yagoDBpediaClasses.ttl.8
+
+...and then re-percent-escape some chars...
+sed 's/%/%25/g; s/"/%22/g; s/\?/%3F/g; s/\^/%5E/g; s/`/%60/g' yagoDBpediaClasses.ttl.8 >yagoDBpediaClasses.ttl.9
+
+...one more thing: "/km" -> "km"
+sed 's/\/km/km/g' yagoDBpediaClasses.ttl.9 >yagoDBpediaClasses.ttl.10
+
+I guess we're done. Whew.
+
+
+=== yagoTaxonomy ===
+
+Remove lines with backslashes:
+grep -v '\\' yagoTaxonomy.ttl.1 >yagoTaxonomy.ttl.2
+
+There are some XML-escapes in yagoTaxonomy. Remove the lines with &gt; and &lt; - they're useless:
+grep -v -E '&gt;|&lt;' yagoTaxonomy.ttl.2 > yagoTaxonomy.ttl.3
+
+Replace &amp; and &quot; :
+sed 's/&quot;/"/g; s/&amp;/\&/g' yagoTaxonomy.ttl.3 > yagoTaxonomy.ttl.4 
+
+remove U+200E and U+200F (didn't find a way to grep for it, but less shows it):
+sed -E 's/\xE2\x80(\x8E|\x8F)//g' yagoTaxonomy.ttl.4 > yagoTaxonomy.ttl.5
+
+unescape % stuff:
+sed -r 's/%([0-9A-F])/\\x\1/g' yagoTaxonomy.ttl.5 | while read -r line ; do echo -e $line ; done > yagoTaxonomy.ttl.6
+
+then some more HTML...
+sed 's/&#039;/'\''/g; s/&#252;/ü/g' yagoTaxonomy.ttl.6 >yagoTaxonomy.ttl.7
+
+...and some lines with # that can't be fixed... 
+grep -v '#' yagoTaxonomy.ttl.7 >yagoTaxonomy.ttl.8
+
+...and then re-percent-escape some chars...
+sed 's/%/%25/g; s/"/%22/g; s/\?/%3F/g; s/\^/%5E/g; s/`/%60/g' yagoTaxonomy.ttl.8 >yagoTaxonomy.ttl.9
+
+...one more thing: "/km" -> "km"
+sed 's/\/km/km/g' yagoTaxonomy.ttl.9 >yagoTaxonomy.ttl.10
+
+I guess we're done. Whew.
+
+
+=== yagoTransitiveType ===
+
+Remove lines with backslashes or curly braces:
+grep -v '[\\{}]' yagoTransitiveType.ttl.1 >yagoTransitiveType.ttl.2
+
+There are some XML-escapes in yagoTransitiveType. Remove the lines with &gt; and &lt; - they're useless:
+grep -v -E '&gt;|&lt;' yagoTransitiveType.ttl.2 > yagoTransitiveType.ttl.3
+
+Replace &amp; and &quot; :
+sed 's/&quot;/"/g; s/&amp;/\&/g' yagoTransitiveType.ttl.3 > yagoTransitiveType.ttl.4 
+
+remove U+200E and U+200F (didn't find a way to grep for it, but less shows it):
+sed -E 's/\xE2\x80(\x8E|\x8F)//g' yagoTransitiveType.ttl.4 > yagoTransitiveType.ttl.5
+
+unescape % stuff:
+sed -r 's/%([0-9A-F])/\\x\1/g' yagoTransitiveType.ttl.5 | while read -r line ; do echo -e $line ; done > yagoTransitiveType.ttl.6
+
+then some more HTML...
+sed 's/&#039;/'\''/g; s/&#252;/ü/g' yagoTransitiveType.ttl.6 >yagoTransitiveType.ttl.7
+
+...and some lines with # that can't be fixed... 
+grep -v '#' yagoTransitiveType.ttl.7 >yagoTransitiveType.ttl.8
+
+...and then re-percent-escape some chars...
+sed 's/%/%25/g; s/"/%22/g; s/\?/%3F/g; s/\^/%5E/g; s/`/%60/g' yagoTransitiveType.ttl.8 >yagoTransitiveType.ttl.9
+
+I guess we're done. Whew.
+
+
+== Convert to DBpedia format ==
+
+=== yagoDBpediaClasses ===
+
+env LC_ALL=C sort yagoDBpediaClasses.ttl.10 > yagoDBpediaClasses.ttl.11
+awk '{print $2" <http://www.w3.org/2002/07/owl#equivalentClass> <http://yago-knowledge.org/resource/"substr($1, 2)" ."}' yagoDBpediaClasses.ttl.11 >yagoDBpediaClasses.ttl.12
+env LC_ALL=C sort yagoDBpediaClasses.ttl.12 >yagoDBpediaClasses.ttl.13
+cp yagoDBpediaClasses.ttl.13 yago_type_links.ttl
+
+=== yagoTaxonomy ===
+
+env LC_ALL=C sort yagoTaxonomy.ttl.10 > yagoTaxonomy.ttl.11
+env LC_ALL=C join yagoDBpediaClasses.ttl.11 yagoTaxonomy.ttl.11 >yagoTaxonomy.ttl.12
+awk '{print $3" "$2}' yagoTaxonomy.ttl.12 > yagoTaxonomy.ttl.13
+env LC_ALL=C sort yagoTaxonomy.ttl.13 > yagoTaxonomy.ttl.14
+env LC_ALL=C join yagoDBpediaClasses.ttl.11 yagoTaxonomy.ttl.14 >yagoTaxonomy.ttl.15
+awk '{print $3" <http://www.w3.org/2000/01/rdf-schema#subClassOf> "$2" ."}' yagoTaxonomy.ttl.15 > yagoTaxonomy.ttl.16
+env LC_ALL=C sort yagoTaxonomy.ttl.16 > yagoTaxonomy.ttl.17
+cp yagoTaxonomy.ttl.17 yago_taxonomy.ttl
+
+=== yagoTransitiveType ===
+
+awk '{print $2" "$1}' yagoTransitiveType.ttl.9b > yagoTransitiveType.ttl.10
+env LC_ALL=C sort yagoTransitiveType.ttl.10 > yagoTransitiveType.ttl.11
+env LC_ALL=C join yagoDBpediaClasses.ttl.11 yagoTransitiveType.ttl.11 > yagoTransitiveType.ttl.12
+# retain only resources starting with "<" (excludes "rdfs:label" etc.), exclude lower case names (e.g. "diedIn")
+awk '{if (match($3, "^<[^a-z]")) print "<http://dbpedia.org/resource/"substr($3, 2)" <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "$2" ."}' yagoTransitiveType.ttl.12 > yagoTransitiveType.ttl.13
+env LC_ALL=C sort yagoTransitiveType.ttl.13 > yagoTransitiveType.ttl.14
+cp yagoTransitiveType.ttl.14 yago_types.ttl
+
+=== yagoDBpediaInstances ===
+
+# cut off "<http://dbpedia.org/resource/", retain trailing ">"
+awk '{print substr($1, 30)}' yagoTransitiveType.ttl.14 > yagoDBpediaInstances.ttl.1
+env LC_ALL=C sort -u yagoDBpediaInstances.ttl.1 >yagoDBpediaInstances.ttl.2
+awk '{print "<http://dbpedia.org/resource/"$1" <http://www.w3.org/2002/07/owl#sameAs> <http://yago-knowledge.org/resource/"$1" ."}' yagoDBpediaInstances.ttl.2 > yagoDBpediaInstances.ttl.3
+cp yagoDBpediaInstances.ttl.3 yago_links.ttl
+
+== convert from IRIs to URIs ==
+
+cd git/extraction-framework/scripts
+../run RecodeUris .ttl .nt  /data2/dbpedia-release/yago/39/yago_*.ttl
+
+== pack as GZip and BZip2 ==
+
+cd /data2/dbpedia-release/yago/39
+for i in * ; do echo $i.gz ; pigz -c <$i >$i.gz ; echo $i.bz2 ; pbzip2 -c <$i >$i.bz2 ; done

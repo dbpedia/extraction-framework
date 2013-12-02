@@ -5,7 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.RichString.wrapString
-import java.net.URI
+import java.net.{URISyntaxException, MalformedURLException, URL, URI}
 import java.util.logging.{Level, Logger}
 import java.lang.IllegalArgumentException
 
@@ -34,7 +34,8 @@ object SimpleWikiParser
 
     private val linkEnd = new Matcher(List(" ", "{","}", "[", "]", "\n", "\t"));
 
-    private val propertyValueOrEnd = new Matcher(List("=", "|", "}}"), true);
+    // '|=' is not valid wiki markup but safe to include, see http://sourceforge.net/tracker/?func=detail&atid=935521&aid=3572779&group_id=190976
+    private val propertyValueOrEnd = new Matcher(List("|=","=", "|", "}}"), true);
     private val propertyEnd = new Matcher(List("|", "}}"), true);
     private val templateParameterEnd = new Matcher(List("|", "}}}"), true);
     private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true);
@@ -65,6 +66,8 @@ final class SimpleWikiParser extends WikiParser
      */
     def apply(page : WikiPage) : PageNode =
     {
+        if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki") throw new IllegalArgumentException("need format 'text/x-wiki', found '"+page.format+"'")
+        
         //Parse source
         val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
 
@@ -91,7 +94,7 @@ final class SimpleWikiParser extends WikiParser
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
     {
-        case TemplateNode(title, _, _) => names.contains(title.decoded)
+        case TemplateNode(title, _, _, _) => names.contains(title.decoded)
         case _ => node.children.exists(node => findTemplate(node, names, language))
     }
     
@@ -191,7 +194,7 @@ final class SimpleWikiParser extends WikiParser
                     try
                     {
                          //Parse new node
-                         val newNode = createNode(source, level + 1)
+                         val newNode = createNodes(source, level + 1)
 
                          //Add text node
                          if(!currentText.isEmpty)
@@ -201,7 +204,7 @@ final class SimpleWikiParser extends WikiParser
                          }
 
                          //Add new node
-                         nodes ::= newNode
+                         nodes :::= newNode
                     }
                     catch
                     {
@@ -220,8 +223,8 @@ final class SimpleWikiParser extends WikiParser
                 }
             }
 
-            lastPos = source.pos;
-            lastLine = source.line;
+            lastPos = source.pos
+            lastLine = source.line
         }
         
         nodes.reverse
@@ -247,35 +250,43 @@ final class SimpleWikiParser extends WikiParser
         //else we found "/>"
     }
     
-    private def createNode(source : Source, level : Int) : Node =
+    private def createNodes(source : Source, level : Int) : List[Node] =
     {
         if(source.lastTag("[") || source.lastTag("http"))
         {
-            parseLink(source, level)
+            List(parseLink(source, level))
         }
         else if(source.lastTag("{{"))
         {
             if (source.pos < source.length && source.getString(source.pos, source.pos+1) == "{")
             {
                 source.pos = source.pos+1   //advance 1 char
-                return parseTemplateParameter(source, level)
+                return List(parseTemplateParameter(source, level))
             }
 
             parseTemplate(source, level)
         }
         else if(source.lastTag("{|"))
         {
-            parseTable(source, level)
+            List(parseTable(source, level))
         }
         else if(source.lastTag("\n="))
         {
-            parseSection(source)
+            List(parseSection(source))
         }
         else
             throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
     }
-    
-    private def parseLink(source : Source, level : Int) : LinkNode =
+
+  /**
+   * Try to parse a link node.
+   * Pay attention to invalid ExternalLinkNodes, as they are very likely to be plain text nodes
+   *
+   * @param source
+   * @param level
+   * @return
+   */
+    private def parseLink(source : Source, level : Int) : Node =
     {
         val startPos = source.pos
         val startLine = source.line
@@ -296,9 +307,6 @@ final class SimpleWikiParser extends WikiParser
             } else if(destination(0).isInstanceOf[TextNode]) {
               destination(0).asInstanceOf[TextNode].text
             } else {
-              // The following line didn't make sense. createInternalLinkNode() will simply throw a NullPointerException.
-              // null // has a semantic within the wiktionary module, and should never occur for wikipedia
-              
               throw new WikiParserException("Failed to parse internal link: " + destination, startLine, source.findLine(startLine))
             }
 
@@ -337,7 +345,9 @@ final class SimpleWikiParser extends WikiParser
               
               throw new WikiParserException("Failed to parse external link: " + destination, startLine, source.findLine(startLine))
             }
-            
+
+            var hasLabel = true
+
             //Parse label
             val nodes =
                 if(source.lastTag(" "))
@@ -347,10 +357,16 @@ final class SimpleWikiParser extends WikiParser
                 else
                 {
                     //No label found => Use destination as label
+                    hasLabel = false
                     List(new TextNode(destinationURI, source.line))
                 }
 
-            createExternalLinkNode(source, destinationURI, nodes, startLine, destination)
+            try {
+              createExternalLinkNode(source, destinationURI, nodes, startLine, destination)
+            } catch {
+              case _ : WikiParserException => // if the URL is not valid then it is a plain text node
+                new TextNode("[" + destinationURI + (if (hasLabel) " " + nodes.map(_.toPlainText).mkString else "") + "]", source.line)
+            }
         }
         else
         {
@@ -371,11 +387,14 @@ final class SimpleWikiParser extends WikiParser
     {
         try
         {
-            ExternalLinkNode(URI.create(destination), nodes, line, destinationNodes)
+            // TODO: Add a validation routine which conforms to Mediawiki
+            // This will fail for news:// or gopher:// protocols
+            ExternalLinkNode(new URL(destination).toURI, nodes, line, destinationNodes)
         }
         catch
         {
-            case _ : IllegalArgumentException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+            // As per URL.toURI documentation non-strictly RFC 2396 compliant URLs cannot be parsed to URIs
+            case _ : MalformedURLException | _ : URISyntaxException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
         }
     }
     
@@ -414,7 +433,7 @@ final class SimpleWikiParser extends WikiParser
         new TemplateParameterNode(key, nodes, line)
     }
 
-    private def parseTemplate(source : Source, level : Int) : Node =
+    private def parseTemplate(source : Source, level : Int) : List[Node] =
     {
         val startLine = source.line
         var title : WikiTitle = null;
@@ -437,7 +456,7 @@ final class SimpleWikiParser extends WikiParser
                 val decodedName = WikiUtil.cleanSpace(templateName).capitalize(source.language.locale)
                 if(source.lastTag(":"))
                 {
-                    return parseParserFunction(decodedName, source, level)
+                    return List(parseParserFunction(decodedName, source, level))
                 }
                 title = new WikiTitle(decodedName, Namespace.Template, source.language)
             }
@@ -455,7 +474,8 @@ final class SimpleWikiParser extends WikiParser
             //Reached template end?
             if(source.lastTag("}}"))
             {
-                return TemplateNode(title, properties.reverse, startLine)
+                // TODO: Find a way to leverage template redirects!!!!
+                return TemplateNode.transform(new TemplateNode(title, properties.reverse, startLine))
             }
         }
         
@@ -631,7 +651,7 @@ final class SimpleWikiParser extends WikiParser
         }
         catch
         {
-            case _ => 1
+            case _ : NumberFormatException => 1
         }
     }
 

@@ -22,7 +22,7 @@ public class DBPediaXMLUtil
 			String oaiPrefix)
 		throws Exception
 	{
-		String datestamp = XPathUtil.evalToString(node, DBPediaXPathUtil.getDatestampExpr());
+		String datestamp = XPathUtil.evalToString(node, DBPediaXPathUtil.getOAIDatestampExpr());
 		//System.out.println("DATESTAMP = " + datestamp);
 		
 		
@@ -62,7 +62,7 @@ public class DBPediaXMLUtil
 		throws Exception
 	{
 		if(isRecordDeleted(node)) {
-			String datestamp = XPathUtil.evalToString(node,DBPediaXPathUtil.getDatestampExpr());
+			String datestamp = XPathUtil.evalToString(node,DBPediaXPathUtil.getOAIDatestampExpr());
 			String oaiId = XPathUtil.evalToString(node, DBPediaXPathUtil.getOAIIdentifierExpr());
 			
 			DeletionRecord result = new DeletionRecord(oaiId, datestamp);
@@ -75,7 +75,7 @@ public class DBPediaXMLUtil
 	private static boolean isRecordDeleted(Node node)
 		throws XPathExpressionException
 	{
-		String value = XPathUtil.evalToString(node, DBPediaXPathUtil.getIsRecordDeletedExpr());
+		String value = XPathUtil.evalToString(node, DBPediaXPathUtil.getOAIIsRecordDeletedExpr());
 		
 		return "deleted".equalsIgnoreCase(value);
 	}

@@ -21,6 +21,8 @@ extends Extractor
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
   private val dcLanguage = context.ontology.properties("dc:language")
+  private val typeOntProperty = context.ontology.properties("rdf:type")
+  private val foafDocument = context.ontology.classes("foaf:Document")
 
   override val datasets = Set(DBpediaDatasets.LinksToWikipediaArticle)
 
@@ -33,6 +35,7 @@ extends Extractor
     quads += new Quad(context.language, DBpediaDatasets.LinksToWikipediaArticle, subjectUri, isPrimaryTopicOf,  page.title.pageIri, page.sourceUri)
     quads += new Quad(context.language, DBpediaDatasets.LinksToWikipediaArticle, page.title.pageIri, primaryTopic, subjectUri, page.sourceUri)
     quads += new Quad(context.language, DBpediaDatasets.LinksToWikipediaArticle, page.title.pageIri, dcLanguage, context.language.wikiCode, page.sourceUri)
+    quads += new Quad(context.language, DBpediaDatasets.LinksToWikipediaArticle, page.title.pageIri, typeOntProperty, foafDocument.uri, page.sourceUri)
 
     quads
   }

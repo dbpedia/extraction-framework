@@ -21,7 +21,7 @@ object DurationParserConfig
             "minu" -> "minute",
             "hour" -> "hour",
             "h" -> "hour",
-            "hour" -> "hour",
+            "hours" -> "hour",
             "hr" -> "hour",
             "hr." -> "hour",
             "hrs" -> "hour",
@@ -36,6 +36,28 @@ object DurationParserConfig
             "y" -> "year",
             "years" -> "year",
             "yr" -> "year"
+        ),
+        // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
+        // Don't change this else if you know how it is done.
+        "ar" -> Map(
+          "ثانية" -> "second",
+          "ثا" -> "second",
+          "ثواني" -> "second",
+          "دقيقة" -> "minute",
+          "د" -> "minute",
+          "دقائق" -> "minute",
+          "ساعة" -> "hour",
+          "سا" -> "hour",
+          "ساعات" -> "hour",
+          "يوم" -> "day",
+          "أيام" -> "day",
+          "شهر" -> "month",
+          "شهور" -> "month",
+          "سنة" -> "year",
+          "عام" -> "year",
+          "سنوات" -> "year",
+          "أعوام" -> "year",
+          "حول" -> "year"
         ),
         "de" -> Map(
             "Sekunde" -> "second",
@@ -195,6 +217,35 @@ object DurationParserConfig
             "meses" -> "month",
             "año" -> "year",
             "años" -> "year"
-        )
+        ),
+        "it" -> Map(
+            "secondo" -> "second",
+            "secondi" -> "second",
+            "sec" -> "second",
+            "s" -> "second",
+            "minuto" -> "minute",
+            "minuti" -> "minute",
+            "min" -> "minute",
+            "m" -> "minute",
+            "ora" -> "hour",
+            "ore" -> "hour",
+            "h" -> "hour",
+            "giorno" -> "day",
+            "giorni" -> "day",
+            "g" -> "day",
+            "gg" -> "day",
+            "mese" -> "month",
+            "mesi" -> "month",
+            "anno" -> "year",
+            "anni" -> "year"
+        ),
+        "id" -> Map(
+            "detik" -> "second",
+            "menit" -> "minute",
+            "jam" -> "hour",
+            "hari" -> "day",
+            "bulan" -> "month",
+            "tahun" -> "year"
+		)
     )
 }

@@ -46,7 +46,7 @@ public class OntologyUpdateFeeder extends Thread {
 
     public static void main(String[] args)
             throws Exception {
-        PropertyConfigurator.configure("log4j.properties");
+        PropertyConfigurator.configure("log4j.ontology.properties");
 
         Ini ini = new Ini(new File("cfg/mappings.dbpedia.org/config.ini"));
 
@@ -168,7 +168,7 @@ public class OntologyUpdateFeeder extends Thread {
                 //System.out.println(str);
 
 
-                String timeStamp = XPathUtil.evalToString(doc, DBPediaXPathUtil.getDatestampExpr());
+                String timeStamp = XPathUtil.evalToString(doc, DBPediaXPathUtil.getOAIDatestampExpr());
 
                 Files.createFile(lastResponseDateFile, timeStamp);
 

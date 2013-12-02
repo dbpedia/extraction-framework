@@ -61,6 +61,8 @@ public class WikipediaDumpParser
   
   private static final String TIMESTAMP_ELEM = "timestamp";
 
+  private static final String FORMAT_ELEM = "format";
+
   /** the character stream */
   private Reader _stream;
 
@@ -68,10 +70,10 @@ public class WikipediaDumpParser
   private XMLStreamReader _reader;
   
   /** 
-   * This parser is currently only compatible with the 0.6 format.
+   * This parser is currently only compatible with the 0.8 format.
    * TODO: make the parser smarter, ignore elements that are not present in older formats.
    */
-  private final String _namespace = "http://www.mediawiki.org/xml/export-0.6/";
+  private final String _namespace = null;  //"http://www.mediawiki.org/xml/export-0.8/";
   
   /**
    * Language used to parse page titles. If null, get language from siteinfo.
@@ -190,7 +192,7 @@ public class WikipediaDumpParser
   }
 
   private void readPage()
-  throws XMLStreamException
+  throws XMLStreamException, InterruptedException
   {
     requireStartElement(PAGE_ELEM);
     nextTag();
@@ -199,13 +201,6 @@ public class WikipediaDumpParser
     String titleStr = readString(TITLE_ELEM, true);
     WikiTitle title = parseTitle(titleStr);
     // now after </title>
-
-    //Skip bad titles and filtered pages
-    if(title == null || ! _filter.apply(title))
-    {
-        while(! isEndElement(PAGE_ELEM)) _reader.next();
-        return;
-    }
 
     int nsCode;
     try
@@ -219,10 +214,18 @@ public class WikipediaDumpParser
 
     // now after </ns>
     
-    if (title.namespace().code() != nsCode)
+    if (title != null && title.namespace().code() != nsCode)
     {
       Namespace expected = Namespace.values().apply(nsCode);
       logger.log(Level.WARNING, "Error parsing title: found namespace "+title.namespace()+", expected "+expected+" in title "+titleStr);
+      title.otherNamespace_$eq(expected);
+    }
+
+    //Skip bad titles and filtered pages
+    if (title == null || ! _filter.apply(title))
+    {
+        while(! isEndElement(PAGE_ELEM)) _reader.next();
+        return;
     }
 
     //Read page id
@@ -262,8 +265,8 @@ public class WikipediaDumpParser
       {
         // emulate Scala exception handling. Ugly...
         if (e instanceof ControlThrowable) throw Exceptions.unchecked(e);
-        if (e instanceof InterruptedException) throw Exceptions.unchecked(e);
-        else logger.log(Level.WARNING, "Error processing page  " + title, e);
+        if (e instanceof InterruptedException) throw (InterruptedException)e;
+        else logger.log(Level.WARNING, "error processing page  '"+title+"': "+Exceptions.toString(e, 200));
       }
     }
     
@@ -278,6 +281,7 @@ public class WikipediaDumpParser
     String revisionId = null;
     String contributorID = null;
     String contributorName = null;
+    String format = null;
     
     while (nextTag() == START_ELEMENT)
     {
@@ -338,6 +342,10 @@ public class WikipediaDumpParser
           requireEndElement(CONTRIBUTOR_ELEM);
         }
       }
+      else if (isStartElement(FORMAT_ELEM)) {
+          format = readString(FORMAT_ELEM, false);
+          // now at </format>
+      }
       else
       {
         // skip all other elements, don't care about the name, don't skip end tag
@@ -348,7 +356,7 @@ public class WikipediaDumpParser
     requireEndElement(REVISION_ELEM);
     // now at </revision>
     
-    return new WikiPage(title, redirect, pageId, revisionId, timestamp, contributorID, contributorName, text);
+    return new WikiPage(title, redirect, pageId, revisionId, timestamp, contributorID, contributorName, text, format);
   }
   
   /* Methods for low-level work. Ideally, only these methods would access _reader while the
@@ -369,7 +377,7 @@ public class WikipediaDumpParser
     }
     catch (Exception e)
     {
-      logger.log(Level.WARNING, "Error parsing page title ["+titleString+"]", e);
+      logger.log(Level.WARNING, "error parsing page title ["+titleString+"]: "+Exceptions.toString(e, 200));
       return null;
     }
   }
@@ -396,12 +404,12 @@ public class WikipediaDumpParser
     if (nextTag) _reader.nextTag();
   }
   
-  private boolean isStartElement(String name) throws XMLStreamException
+  private boolean isStartElement(String name)
   {
     return XMLStreamUtils.isStartElement(_reader, _namespace, name);
   }
   
-  private boolean isEndElement(String name) throws XMLStreamException
+  private boolean isEndElement(String name)
   {
     return XMLStreamUtils.isEndElement(_reader, _namespace, name);
   }
@@ -420,4 +428,5 @@ public class WikipediaDumpParser
   {
     return _reader.nextTag();
   }
+  
 }

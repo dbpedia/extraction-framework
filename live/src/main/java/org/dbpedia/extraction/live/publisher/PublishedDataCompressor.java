@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.publisher;
 
+// TODO: use java.util.zip.GZIPOutputStream instead, get rid of this dependency
 import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
 import org.apache.log4j.Logger;
 import org.apache.tools.tar.TarEntry;
@@ -142,7 +143,6 @@ public class PublishedDataCompressor extends Thread{
         try{
             inputReader = new BufferedReader(new FileReader(filename));
             String line = inputReader.readLine();
-            inputReader.close();
             return dateFormatter.parse(line);
         }
         catch (Exception exp){
@@ -179,7 +179,6 @@ public class PublishedDataCompressor extends Thread{
             fsLastProcessingDateFile = new FileOutputStream(filename);
             osWriter = new OutputStreamWriter(fsLastProcessingDateFile);
             osWriter.write(dateFormatter.format(new Date()));
-            osWriter.close();
         }
         catch (Exception exp){
             logger.warn("The date of last Processing process cannot be written to file.\n");
@@ -188,17 +187,19 @@ public class PublishedDataCompressor extends Thread{
             try{
                 if(osWriter != null)
                     osWriter.close();
-
-                if(fsLastProcessingDateFile != null)
+            }
+            catch (Exception exp){
+                logger.error("File " + filename + " cannot be closed due to " + exp.getMessage());
+            }
+            try{
+                 if(fsLastProcessingDateFile != null)
                     fsLastProcessingDateFile.close();
             }
             catch (Exception exp){
                 logger.error("File " + filename + " cannot be closed due to " + exp.getMessage());
             }
         }
-
-
-    }
+   }
 
 
     /**
@@ -215,8 +216,6 @@ public class PublishedDataCompressor extends Thread{
             writer = new FileWriter(filename);
             writer.write(dateFormatter.format(lastProcessing));
             writer.flush();
-            writer.close();
-
         }
         catch (Exception exp){
             logger.warn("The date of last Processing process cannot be written to file.");
@@ -256,18 +255,24 @@ public class PublishedDataCompressor extends Thread{
 
         tarOutputFilename =  LiveOptions.options.get("publishDiffRepoPath") + "/" + tarOutputFilename;
 
+        TarOutputStream osTarYear = null;
         try{
             //Convert it into TAR first
 
-            TarOutputStream osTarYear =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
+            osTarYear =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
             convertToTar(new File(yearPath), osTarYear);
-            osTarYear.close();
-
             compressFileUsingGZip(tarOutputFilename);
 
         }
         catch(IOException exp){
             logger.error("TAR output file for " + yearPath + " cannot be created. Compression process cannot continue");
+        } finally {
+            try {
+                if (osTarYear != null)
+                    osTarYear.close();
+            } catch (IOException exp) {
+                logger.error(exp.getMessage());
+            }
         }
     }
 
@@ -290,9 +295,11 @@ public class PublishedDataCompressor extends Thread{
         tarOutputFilename =  LiveOptions.options.get("publishDiffRepoPath") + "/" + lastProcessingParts[0]
                 + "/" + tarOutputFilename;
 
+        TarOutputStream osTarMonth = null;
+
         try{
             //Convert it into TAR first
-            TarOutputStream osTarMonth =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
+            osTarMonth =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
             convertToTar(new File(monthPath), osTarMonth);
             osTarMonth.close();
 
@@ -303,6 +310,13 @@ public class PublishedDataCompressor extends Thread{
         }
         catch(IOException exp){
             logger.error("TAR output file for " + monthPath + " cannot be created. Compression process cannot continue");
+        } finally {
+            try {
+                if (osTarMonth != null)
+                    osTarMonth.close();
+            } catch (IOException exp) {
+                logger.error(exp.getMessage());
+            }
         }
 
     }
@@ -324,9 +338,11 @@ public class PublishedDataCompressor extends Thread{
         tarOutputFilename =  LiveOptions.options.get("publishDiffRepoPath") + "/" + lastProcessingParts[0]
                 + "/" + lastProcessingParts[1] + "/" +  tarOutputFilename;
 
+        TarOutputStream osTarDay = null;
+
         try{
             //Convert it into TAR first
-            TarOutputStream osTarDay =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
+            osTarDay =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
             convertToTar(new File(dayPath), osTarDay);
             osTarDay.close();
             /*convertToTar(new File(dayPath), new TarOutputStream(
@@ -336,6 +352,13 @@ public class PublishedDataCompressor extends Thread{
         }
         catch(IOException exp){
             logger.error("TAR output file for " + dayPath + " cannot be created. Compression process cannot continue");
+        } finally {
+            try {
+                if (osTarDay != null)
+                    osTarDay.close();
+            } catch (IOException exp) {
+                logger.error(exp.getMessage());
+            }
         }
 
 
@@ -354,10 +377,12 @@ public class PublishedDataCompressor extends Thread{
         tarOutputFilename =  LiveOptions.options.get("publishDiffRepoPath") + "/" + lastProcessingParts[0]
                 + "/" + lastProcessingParts[1] + "/" + lastProcessingParts[2] + "/" + tarOutputFilename;
 
+        TarOutputStream osTarHour = null;
+
         try{
             //Convert it into TAR first
 
-            TarOutputStream osTarHour =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
+            osTarHour =  new TarOutputStream(new FileOutputStream(new File(tarOutputFilename)));
             convertToTar(new File(hourPath), osTarHour);
             osTarHour.close();
 
@@ -366,6 +391,13 @@ public class PublishedDataCompressor extends Thread{
         }
         catch(IOException exp){
             logger.error("TAR output file for " + hourPath + " cannot be created. Compression process cannot continue");
+        } finally {
+            try {
+                if (osTarHour != null)
+                    osTarHour.close();
+            } catch (IOException exp) {
+                logger.error(exp.getMessage());
+            }
         }
     }
 
@@ -393,18 +425,34 @@ public class PublishedDataCompressor extends Thread{
             String fabs = flist[i].getAbsolutePath();
             if(fabs.startsWith(abs))
                 fabs = fabs.substring(abs.length());
-            FileInputStream fis = new FileInputStream(flist[i]);
-            TarEntry te = new TarEntry(fabs);
-            te.setSize(flist[i].length());
-            tos.setLongFileMode(TarOutputStream.LONGFILE_GNU);
-            tos.putNextEntry(te);
-            int count = 0;
-            while((count = fis.read(buf,0,buffersize)) != -1)
-            {
-                tos.write(buf,0,count);
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(flist[i]);
+                TarEntry te = new TarEntry(fabs);
+                te.setSize(flist[i].length());
+                tos.setLongFileMode(TarOutputStream.LONGFILE_GNU);
+                tos.putNextEntry(te);
+                int count = 0;
+                while((count = fis.read(buf,0,buffersize)) != -1)
+                {
+                    tos.write(buf,0,count);
+                }
+            } catch (IOException e) {
+                throw e;
+            } finally {
+                try {
+                    if (tos != null)
+                        tos.closeEntry();
+                } catch (IOException e) {
+                    throw e;
+                }
+                try {
+                    if (fis != null)
+                        fis.close();
+                } catch (IOException e) {
+                    throw e;
+                }
             }
-            tos.closeEntry();
-            fis.close();
         }
 
     }
@@ -437,20 +485,27 @@ public class PublishedDataCompressor extends Thread{
             while ((len = in.read(buf)) > 0) {
                 out.write(buf, 0, len);
             }
-            in.close();
-
             // Complete the GZIP file
             out.flush();
-            out.close();
 
             //delete TAR file as it is not need any more
-            in.close();
             File tarFileToDelete = new File(filename);
             tarFileToDelete.delete();
 
         }
         catch(IOException exp){
             logger.error("File: " + filename + " cannot be compressed");
+        } finally {
+            try {
+                if (in != null)
+                    in.close();
+            } catch (IOException exp) {
+            }
+            try {
+                if (out != null)
+                    out.close();
+            } catch (IOException exp) {
+            }
         }
 
     }

@@ -2,7 +2,6 @@ package org.dbpedia.extraction.destinations
 
 /**
  * Defines the datasets which are extracted by DBpedia.
- * TODO: use a Scala Enumeration
  * TODO: add references to the extractor classes.
  */
 object DBpediaDatasets
@@ -18,8 +17,11 @@ object DBpediaDatasets
     val Pnd = new Dataset("pnd")
     val Redirects = new Dataset("redirects")
     val ArticleCategories = new Dataset("article_categories")
+    val ArticleTemplates = new Dataset("article_templates")
     val SkosCategories = new Dataset("skos_categories")
-    val Revisions = new Dataset("revisions")
+    val RevisionUris = new Dataset("revision_uris")
+    val RevisionIds = new Dataset("revision_ids")
+    val RevisionMeta = new Dataset("revision_meta")
     val PageIds = new Dataset("page_ids")
     val InterLanguageLinks = new Dataset("interlanguage_links")
     val Genders = new Dataset("genders")
@@ -33,13 +35,18 @@ object DBpediaDatasets
     val OntologyTypes = new Dataset("instance_types")
     val OntologyProperties = new Dataset("mappingbased_properties")
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
+    
+    /**
+     * French population template
+     */
+     val FrenchPopulation = new Dataset("french_population")
 
     /**
      *  Infobox
      */
     val InfoboxProperties = new Dataset("infobox_properties")
     val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions")
-    val TemplateVariables = new Dataset("template_parameters")
+    val TemplateParameters = new Dataset("template_parameters")
     val InfoboxTest = new Dataset("infobox_test")
 
     /**
@@ -56,4 +63,5 @@ object DBpediaDatasets
     val PageLinks = new Dataset("page_links")
     val DisambiguationLinks  = new Dataset("disambiguations")
     val Homepages = new Dataset("homepages")
+
 }

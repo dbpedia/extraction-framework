@@ -91,7 +91,7 @@ class XMLEventAnalyzer(private val xmlIn : XMLEventReader) {
         }
       }
     } while (found)
-    go(sb toString)
+    go(sb.toString)
   }
   
 }

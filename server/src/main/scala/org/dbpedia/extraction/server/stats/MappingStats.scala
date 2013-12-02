@@ -11,7 +11,7 @@ object MappingStats {
   /**
    * Signals that a template or property is mapped but not used in Wikipedia.
    * Currently only used for properties. TODO: also use for templates.
-   * We use Int.MaxValue because that means that invalid mappings or sorted first.
+   * We use Int.MaxValue because that means that invalid mappings are sorted first.
    */
   val InvalidTarget = Int.MaxValue
 }

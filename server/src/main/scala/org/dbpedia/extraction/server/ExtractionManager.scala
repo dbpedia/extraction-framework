@@ -26,9 +26,9 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
 
     def extractor(language : Language) : RootExtractor
 
-    def ontology : Ontology
+    def ontology() : Ontology
 
-    def ontologyPages : Map[WikiTitle, PageNode]
+    def ontologyPages() : Map[WikiTitle, PageNode]
 
     def mappingPageSource(language : Language) : Traversable[PageNode]
 
@@ -47,7 +47,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
      */
     def updateAll
     
-    protected val parser = WikiParser()
+    protected val parser = WikiParser.getInstance()
 
     def extract(source: Source, destination: Destination, language: Language): Unit = {
       val extract = extractor(language)
@@ -107,7 +107,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
     }
 
 
-    protected def loadOntologyPages =
+    protected def loadOntologyPages() =
     {
         val source = if (paths.ontologyFile != null && paths.ontologyFile.isFile)
         {
@@ -126,13 +126,13 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
         source.map(parser).map(page => (page.title, page)).toMap
     }
 
-    protected def loadMappingPages =
+    protected def loadMappingPages(): Map[Language, Map[WikiTitle, PageNode]] =
     {
         logger.info("Loading mapping pages")
-        languages.map(lang => (lang, loadMappingsPages(lang))).toMap
+        languages.map(lang => (lang, loadMappingPages(lang))).toMap
     }
 
-    protected def loadMappingsPages(language : Language) : Map[WikiTitle, PageNode] =
+    protected def loadMappingPages(language : Language) : Map[WikiTitle, PageNode] =
     {
         val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
         
@@ -151,7 +151,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
         source.map(parser).map(page => (page.title, page)).toMap
     }
 
-    protected def loadOntology : Ontology =
+    protected def loadOntology() : Ontology =
     {
         new OntologyReader().read(ontologyPages.values)
     }

@@ -16,11 +16,16 @@ import java.util.TimerTask;
  * Handles all statistics
  */
 public class Statistics {
+    private static Logger logger = Logger.getLogger(Statistics.class);
+    // File to read/write statistics
     private final String statisticsFileName;
+    // Number of detailed statistics instances to keep
     private final int statisticsDetailedInstances;
+    // Update interval in miliseconds
     private final long statisticsUpdateInterval;
+    // Initial delay on application startup
     private final long statisticsInitialDelay;
-    private Timer timer = new Timer("DBpedia Live Statistics Timer");
+    private Timer timer = new Timer("DBpedia-Live Statistics Timer");
 
     public Statistics(String fileName, int detailedInstances, long updateInterval, long initialDelay) {
         this.statisticsFileName = fileName;
@@ -51,11 +56,8 @@ public class Statistics {
                 long t1d = Integer.parseInt(line.readLine());
                 long tat = Integer.parseInt(line.readLine());
 
-                StatisticsData.setStats1m(t1m);
-                StatisticsData.setStats5m(t5m);
-                StatisticsData.setStats1h(t1h);
-                StatisticsData.setStats1d(t1d);
-                StatisticsData.setStatsAll(tat - t1d);
+                // TODO find cleaner way to calculate All time stats
+                StatisticsData.setAllStats(t1m,t5m,t1h,t1d,tat-t1d);
             }
 
         } catch (Exception exp) {
@@ -82,15 +84,10 @@ public class Statistics {
 
         timer.schedule(new TimerTask() {
             public void run() {
-
-                Logger logger = Logger.getLogger(Main.class);
                 Writer writer = null;
-
                 try {
-
                     writer = new FileWriter(statisticsFileName);
                     writer.write(StatisticsData.generateStatistics(statisticsDetailedInstances));
-
                 } catch (IOException exp) {
                     logger.error("DBpedia-live Statistics: Failed to generate statistics: " + exp.getMessage(), exp);
                 } catch (Exception exp) {

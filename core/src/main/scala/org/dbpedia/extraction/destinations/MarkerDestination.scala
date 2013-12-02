@@ -16,19 +16,15 @@ import java.io.{File,FileOutputStream,IOException}
  * @param start 'start mode' if true, 'end mode' if false. 
  */
 class MarkerDestination(destination: Destination, file: File, start: Boolean)
-extends Destination
+extends WrapperDestination(destination)
 {
   override def open(): Unit = {
     if (start) create() else delete()
-    destination.open()
+    super.open()
   }
 
-  override def write(graph: Seq[Quad]): Unit = {
-    destination.write(graph)
-  } 
-
   override def close(): Unit = {
-    destination.close()
+    super.close()
     if (! start) create() else delete()
   }
   

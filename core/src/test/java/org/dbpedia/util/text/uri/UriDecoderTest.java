@@ -27,7 +27,7 @@ public class UriDecoderTest extends TestCase
     good("foo%C2%A0%C0%A0", "foo\u00A0\uFFFD\uFFFD");
   }
   
-  private void good( String string, int ... codePoints )
+  private static void good( String string, int ... codePoints )
   {
     UriDecoder decoder = new UriDecoder(string);
     decoder.decode();
@@ -40,7 +40,7 @@ public class UriDecoderTest extends TestCase
     assertEquals(new String(result, 0, index), decoder.result());
   }
 
-  private void good( String string, String result )
+  private static void good( String string, String result )
   {
     UriDecoder decoder = new UriDecoder(string);
     decoder.decode();

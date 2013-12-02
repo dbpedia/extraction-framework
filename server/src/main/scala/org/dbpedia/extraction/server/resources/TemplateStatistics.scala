@@ -4,6 +4,7 @@ import javax.ws.rs._
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.WikiUtil.{wikiDecode,wikiEncode}
 import org.dbpedia.extraction.server.stats.MappingStats
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.net.URI
@@ -118,11 +119,6 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
     // TODO: stream xml to browser. We produce up to 10MB HTML. XML in memory is even bigger.
       
-        // print percentage to file for Pablo's counter. TODO: this is not the right place to do this. 
-        // Should be done when stats change, not when someone accesses this page.
-        val out = new PrintWriter(manager.percentageFile)
-        try out.write(percentageMappedTemplateUse) finally out.close()
-
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
             <head>
               <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -166,7 +162,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
             val percentMappedProps: String = "%2.2f".format(mappingStat.mappedPropertyRatio * 100)
             val percentMappedPropOccur: String = "%2.2f".format(mappingStat.mappedPropertyUseRatio * 100)
-            var mappingsWikiLink = mappingUrlPrefix + mappingStat.templateName
+            var mappingsWikiLink = mappingUrlPrefix + wikiEncode(mappingStat.templateName)
             
             var bgcolor: String =
             if (! mappingStat.isMapped) notMappedColor
@@ -178,7 +174,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
             var redirectMsg = ""
             for (redirect <- targetRedirect) {
               if (mappingStat.isMapped) {
-                  //redirectMsg = " NOTE: the mapping for " + WikiUtil.wikiDecode(redirect, language).substring(createMappingStats.templateNamespace.length()) + " is redundant!"
+                  //redirectMsg = " NOTE: the mapping for " + wikiDecode(redirect, language).substring(createMappingStats.templateNamespace.length()) + " is redundant!"
               } else {
                   mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespace.length)
                   bgcolor = renameColor
@@ -201,13 +197,13 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
           { if (mustRename) {
           <td>
             {redirectMsg}
-            <a href={"../../templatestatistics/"+langCode+"/?template="+mappingStat.templateName+cookieQuery('&')}>
+            <a href={"../../templatestatistics/"+langCode+"/?template="+wikiEncode(mappingStat.templateName)+cookieQuery('&')}>
               {mappingStat.templateName}
             </a>
           </td>
           } else {
           <td>
-            <a href={"../../templatestatistics/"+langCode+"/?template="+mappingStat.templateName+cookieQuery('&')}>
+            <a href={"../../templatestatistics/"+langCode+"/?template="+wikiEncode(mappingStat.templateName)+cookieQuery('&')}>
               {mappingStat.templateName}
             </a>
             {redirectMsg}
@@ -220,7 +216,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
           <td align="right">{percentMappedPropOccur}</td>
           { if (Server.instance.adminRights(password)) {
           <td>
-            <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+mappingStat.templateName+cookieQuery('&', show)}>
+            <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+wikiEncode(mappingStat.templateName)+cookieQuery('&', show)}>
               {ignoreMsg}
             </a>
           </td>
@@ -249,7 +245,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
       vsep = '&' // for future additions below
     }
     
-    sb toString
+    sb.toString
   }
   
   private def templateCountLinks: Elem = {

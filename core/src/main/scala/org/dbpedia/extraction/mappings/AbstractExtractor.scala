@@ -28,7 +28,14 @@ extends Extractor
 {
     private val maxRetries = 3
 
-    private val timeoutMs = 4000
+    /** timeout for connection to web server, milliseconds */
+    private val connectMs = 2000
+
+    /** timeout for result from web server, milliseconds */
+    private val readMs = 8000
+
+    /** sleep between retries, milliseconds, multiplied by CPU load */
+    private val sleepFactorMs = 4000
 
     private val language = context.language.wikiCode
 
@@ -50,6 +57,10 @@ extends Extractor
     
     override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
+    private val osBean = java.lang.management.ManagementFactory.getOperatingSystemMXBean()
+
+    private val availableProcessors = osBean.getAvailableProcessors()
+
     override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         //Only extract abstracts for pages from the Main namespace
@@ -65,10 +76,10 @@ extends Extractor
         //Retrieve page text
         var text = retrievePage(pageNode.title, abstractWikiText)
 
-        //Ignore empty abstracts
-        // if(text.trim.isEmpty) return Seq.empty
-
         text = postProcess(pageNode.title, text)
+
+        if (text.trim.isEmpty)
+          return Seq.empty
 
         //Create a short version of the abstract
         val shortText = short(text)
@@ -77,7 +88,7 @@ extends Extractor
         val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
         val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
 
-        if (false) // (shortText.isEmpty)
+        if (shortText.isEmpty)
         {
             Seq(quadLong)
         }
@@ -106,15 +117,15 @@ extends Extractor
 
       val url = new URL(apiUrl)
       
-      for(_ <- 1 to maxRetries)
+      for(counter <- 1 to maxRetries)
       {
         try
         {
           // Send data
           val conn = url.openConnection
           conn.setDoOutput(true)
-          conn.setConnectTimeout(timeoutMs)
-          conn.setReadTimeout(timeoutMs)
+          conn.setConnectTimeout(connectMs)
+          conn.setReadTimeout(readMs)
           val writer = new OutputStreamWriter(conn.getOutputStream)
           writer.write(parameters)
           writer.flush()
@@ -125,10 +136,33 @@ extends Extractor
         }
         catch
         {
-          case ex  : Exception => logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying...", ex)
+          case ex: Exception => {
+            
+            // The web server may still be trying to render the page. If we send new requests
+            // at once, there will be more and more tasks running in the web server and the
+            // system eventually becomes overloaded. So we wait a moment. The higher the load,
+            // the longer we wait.
+
+            var loadFactor = Double.NaN
+            var sleepMs = sleepFactorMs
+ 
+            // if the load average is not available, a negative value is returned
+            val load = osBean.getSystemLoadAverage()
+            if (load >= 0) {
+              loadFactor = load / availableProcessors
+              sleepMs = (loadFactor * sleepFactorMs).toInt
+            }
+
+            if (counter < maxRetries) {
+              logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying after " + sleepMs + " ms. Load factor: " + loadFactor, ex)
+              Thread.sleep(sleepMs)
+            }
+            else {
+              logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
+            }
+          }
         }
 
-        //Thread.sleep(1000)
       }
 
       throw new Exception("Could not retrieve abstract for page: " + pageTitle)
@@ -176,9 +210,10 @@ extends Extractor
      */
     private def readInAbstract(inputStream : InputStream) : String =
     {
-        // for XML format
-        val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
-        (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      // for XML format
+      val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
+      val text = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      decodeHtml(text)
     }
 
     private def postProcess(pageTitle: WikiTitle, text: String): String =
@@ -260,10 +295,13 @@ extends Extractor
                 .mkString("").trim
         
         // decode HTML entities - the result is plain text
-        val coder = new HtmlCoder(XmlCodes.NONE)
-        coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
-        coder.code(text)
-        // TODO: do we need double decode?
+        decodeHtml(text)
+    }
+    
+    def decodeHtml(text: String): String = {
+      val coder = new HtmlCoder(XmlCodes.NONE)
+      coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
+      coder.code(text)
     }
 
 }

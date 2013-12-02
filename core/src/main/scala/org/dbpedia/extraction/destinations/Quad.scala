@@ -35,6 +35,8 @@ class Quad(
   val context: String,
   val datatype: String
 )
+extends Ordered[Quad]
+with Equals
 {
   def this(
     language: Language,
@@ -106,10 +108,84 @@ class Quad(
    "context="+context+
    ")"
   }
+
+  /**
+   * sub classes that add new fields should override this method 
+   */
+  def compare(that: Quad): Int = {
+    var c = 0
+    c = this.subject.compareTo(that.subject)
+    if (c != 0) return c
+    c = this.predicate.compareTo(that.predicate)
+    if (c != 0) return c
+    c = this.value.compareTo(that.value)
+    if (c != 0) return c
+    c = safeCompare(this.datatype, that.datatype)
+    if (c != 0) return c
+    return safeCompare(this.language, that.language)
+    if (c != 0) return c
+    // ignore dataset and context
+    return 0
+  }
+  
+  /**
+   * sub classes that add new fields should override this method 
+   */
+  override def canEqual(obj: Any): Boolean = {
+    return obj.isInstanceOf[Quad] 
+  }
+
+  /**
+   * sub classes that add new fields should override this method 
+   */
+  override def equals(other: Any): Boolean = other match {
+    case that: Quad =>
+      this.eq(that) ||
+      that.canEqual(this) &&
+      this.subject == that.subject &&
+      this.predicate == that.predicate &&
+      this.value == that.value &&
+      this.datatype == that.datatype &&
+      this.language == that.language
+      // ignore dataset and context
+    case _ => false
+  }
+  
+  /**
+   * sub classes that add new fields should override this method 
+   */
+  override def hashCode(): Int = {
+    val prime = 41
+    var hash = 1
+    hash = prime * hash + subject.hashCode
+    hash = prime * hash + predicate.hashCode
+    hash = prime * hash + value.hashCode
+    hash = prime * hash + safeHash(datatype)
+    hash = prime * hash + safeHash(language)
+    // ignore dataset and context
+    return hash
+  }
+  
 }
 
 object Quad
 {
+  /**
+   * null-safe comparison. null is equal to null and less than any non-null string.
+   */
+  private def safeCompare(s1: String, s2: String): Int =
+  {
+    if (s1 == null && s2 == null) 0
+    else if (s1 == null) -1
+    else if (s2 == null) 1
+    else s1.compareTo(s2)
+  }
+  
+  private def safeHash(s: String): Int =
+  {
+    if (s == null) 0 else s.hashCode;
+  }
+  
   private def findType(datatype: Datatype, range: OntologyType): Datatype =
   {
     if (datatype != null) datatype

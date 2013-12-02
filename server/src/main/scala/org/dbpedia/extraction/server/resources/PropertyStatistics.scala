@@ -6,6 +6,7 @@ import collection.immutable.ListMap
 import scala.collection.mutable
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.util.WikiUtil.{wikiDecode,wikiEncode}
 import org.dbpedia.extraction.server.stats.MappingStats
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.io.{FileNotFoundException, File}
@@ -17,8 +18,11 @@ import java.io.{FileNotFoundException, File}
  * some cases we have to use %20.
  */
 @Path("/templatestatistics/{lang}/")
-class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("template") template: String, @QueryParam("p") password: String)
+class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("template") var template: String, @QueryParam("p") password: String)
 {
+    // get canonical template name
+    template = wikiDecode(template)
+    
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
     if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
@@ -32,14 +36,12 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
     private val ignoreColor = "#b0b0b0"
     private val notDefinedColor = "#FFF8C6"
 
-    private def wikiDecode(name: String) : String = WikiUtil.wikiDecode(name)
-
     private def passwordQuery : String = if (Server.instance.adminRights(password)) "?p="+password else ""
 
     @GET
     @Produces(Array("application/xhtml+xml"))
     def get = {
-        val ms = getMappingStats(wikiDecode(template))
+        val ms = getMappingStats(template)
         val sortedProps = ms.properties.toList.sortBy{ case (name, (count, mapped)) => (- count, name) }
 
         val percentageMapped: String = "%2.2f".format(ms.mappedPropertyRatio * 100)
@@ -51,7 +53,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         </head>
         <body>
-            <h2 align="center">Template Statistics  for <a href={mappingUrlPrefix + template}>{wikiDecode(template)}</a></h2>
+            <h2 align="center">Statistics for template <a href={language.baseUri + "/wiki/" + manager.templateNamespace + wikiEncode(template)}>{template}</a> and its <a href={mappingUrlPrefix + wikiEncode(template)}>DBpedia mapping</a></h2>
             <p align="center">
                 {percentageMapped}
                 % properties are mapped (

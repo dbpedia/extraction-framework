@@ -2,13 +2,14 @@ package org.dbpedia.extraction.dataparser
 
 import java.net.URI
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 /**
  * Parses external links.
  */
 class LinkParser(val strict : Boolean = false) extends DataParser
 {
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |/|;|,"""  //TODO this split regex might not be complete
+    override val splitPropertyNodeRegex = DataParserConfig.splitPropertyNodeRegexLink.get("en").get
 
     override def parse(node : Node) : Option[URI] =
     {

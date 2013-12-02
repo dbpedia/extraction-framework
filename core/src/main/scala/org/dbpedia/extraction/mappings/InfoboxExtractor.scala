@@ -10,10 +10,12 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import scala.collection.mutable.ArrayBuffer
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 /**
  * This extractor extracts all properties from all infoboxes.
- * Extracted information is represented using properties in the http://dbpedia.org/property/ namespace.
+ * Extracted information is represented using properties in the http://xx.dbpedia.org/property/
+ * namespace (where xx is the language code).
  * The names of the these properties directly reflect the name of the Wikipedia infobox property.
  * Property names are not cleaned or merged.
  * Property types are not part of a subsumption hierarchy and there is no consistent ontology for the infobox dataset.
@@ -33,13 +35,15 @@ extends Extractor
     // Configuration
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val language = context.language.wikiCode
+    private val ontology = context.ontology
+    
+    private val language = context.language
 
-    private val usesTemplateProperty = context.language.propertyUri.append("wikiPageUsesTemplate")
+    private val wikiCode = language.wikiCode
 
-    private val MinPropertyCount = 2
+    private val minPropertyCount = InfoboxExtractorConfig.minPropertyCount
 
-    private val MinPercentageOfExplicitPropertyKeys = 0.75
+    private val minRatioOfExplicitPropertyKeys = InfoboxExtractorConfig.minRatioOfExplicitPropertyKeys
 
     private val ignoreTemplates = InfoboxExtractorConfig.ignoreTemplates
 
@@ -47,9 +51,9 @@ extends Extractor
 
     private val ignoreProperties = InfoboxExtractorConfig.ignoreProperties
 
-    private val labelProperty = context.ontology.properties("rdfs:label")
-    private val typeProperty = context.ontology.properties("rdf:type")
-    private val propertyClass = context.ontology.classes("rdf:Property")
+    private val labelProperty = ontology.properties("rdfs:label")
+    private val typeProperty = ontology.properties("rdf:type")
+    private val propertyClass = ontology.classes("rdf:Property")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Regexes
@@ -62,21 +66,26 @@ extends Extractor
 
     private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
 
+    private val splitPropertyNodeRegexInfobox = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(wikiCode))
+                                                  DataParserConfig.splitPropertyNodeRegexInfobox.get(wikiCode).get
+                                                else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Parsers
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val unitValueParsers = context.ontology.datatypes.values
+    private val unitValueParsers = ontology.datatypes.values
                                    .filter(_.isInstanceOf[DimensionDatatype])
                                    .map(dimension => new UnitValueParser(context, dimension, true))
 
-    private val intParser = new IntegerParser(context, true)
+    private val intParser = new IntegerParser(context, true, validRange = (i => i%1==0))
 
     private val doubleParser = new DoubleParser(context, true)
 
     private val dataTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
                                   .map(datatype => new DateTimeParser(context, new Datatype(datatype), true))
 
+    private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
+                                  
     private val objectParser = new ObjectParser(context, true)
 
     private val linkParser = new LinkParser(true)
@@ -93,9 +102,7 @@ extends Extractor
     {
         if(node.title.namespace != Namespace.Main) return Seq.empty
         
-        var quads = new ArrayBuffer[Quad]()
-
-        val seenTemplates = new HashSet[String]()
+        val quads = new ArrayBuffer[Quad]()
 
         /** Retrieve all templates on the page which are not ignored */
         for { template <- collectTemplates(node)
@@ -104,33 +111,33 @@ extends Extractor
           if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
         }
         {
-            val propertyList = template.children.filterNot(property => ignoreProperties.get(language).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
+            val propertyList = template.children.filterNot(property => ignoreProperties.get(wikiCode).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
             var propertiesFound = false
 
             // check how many property keys are explicitly defined
             val countExplicitPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
-            if ((countExplicitPropertyKeys >= MinPropertyCount) && (countExplicitPropertyKeys.toDouble / propertyList.size) > MinPercentageOfExplicitPropertyKeys)
+            if ((countExplicitPropertyKeys >= minPropertyCount) && (countExplicitPropertyKeys.toDouble / propertyList.size) > minRatioOfExplicitPropertyKeys)
             {
                 for(property <- propertyList; if (!property.key.forall(_.isDigit))) {
                     // TODO clean HTML
 
                     val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
-                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, """<br\s*\/?>""")
+                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
                     for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
                     {
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
 
-                            if (InfoboxExtractorConfig.extractTemplateStatistics == true) 
+                            if (InfoboxExtractorConfig.extractTemplateStatistics) 
                             {
-                            	val stat_template = context.language.resourceUri.append(template.title.decodedWithNamespace)
+                            	val stat_template = language.resourceUri.append(template.title.decodedWithNamespace)
                             	val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
-                            	quads += new Quad(context.language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                               stat_property, node.sourceUri, context.ontology.datatypes("xsd:string"))
+                            	quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
+                                               stat_property, node.sourceUri, ontology.datatypes("xsd:string"))
                             }
                         }
                         catch
@@ -144,20 +151,12 @@ extends Extractor
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads += new Quad(context.language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads += new Quad(context.language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
                             }
                         }
                     }
 
-                }
-
-                if (propertiesFound && (!seenTemplates.contains(template.title.decoded)))
-                {
-                    val templateUri = context.language.resourceUri.append(template.title.decodedWithNamespace)
-                    quads += new Quad(context.language, DBpediaDatasets.InfoboxProperties, subjectUri, usesTemplateProperty,
-                                       templateUri, template.sourceUri, null)
-                    seenTemplates.add(template.title.decoded)
                 }
             }
         }
@@ -169,13 +168,14 @@ extends Extractor
     {
         // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
         extractUnitValue(node).foreach(result => return List(result))
-        extractNumber(node).foreach(result =>  return List(result))
-        extractRankNumber(node).foreach(result => return List(result))
         extractDates(node) match
         {
             case dates if !dates.isEmpty => return dates
             case _ => 
         }
+        extractSingleCoordinate(node).foreach(result =>  return List(result))
+        extractNumber(node).foreach(result =>  return List(result))
+        extractRankNumber(node).foreach(result => return List(result))
         extractLinks(node) match
         {
             case links if !links.isEmpty => return links
@@ -220,6 +220,12 @@ extends Extractor
             case Some(RankRegex(number)) => Some((number, new Datatype("xsd:integer")))
             case _ => None
         }
+    }
+    
+    private def extractSingleCoordinate(node : PropertyNode) : Option[(String, Datatype)] =
+    {
+        singleGeoCoordinateParser.parse(node).foreach(value => return Some((value.toDouble.toString, new Datatype("xsd:double"))))
+        None
     }
 
     private def extractDates(node : PropertyNode) : List[(String, Datatype)] =
@@ -271,15 +277,15 @@ extends Extractor
     private def getPropertyUri(key : String) : String =
     {
         // convert property key to camelCase
-        var result = key.toLowerCase(context.language.locale).trim
-        result = result.toCamelCase(SplitWordsRegex, context.language.locale)
+        var result = key.toLowerCase(language.locale).trim
+        result = result.toCamelCase(SplitWordsRegex, language.locale)
 
         // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
         result = TrailingNumberRegex.replaceFirstIn(result, "")
 
         result = WikiUtil.cleanSpace(result)
 
-        context.language.propertyUri.append(result)
+        language.propertyUri.append(result)
     }
 
     private def getPropertyLabel(key : String) : String =

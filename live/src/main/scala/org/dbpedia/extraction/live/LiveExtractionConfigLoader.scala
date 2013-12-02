@@ -1,25 +1,22 @@
 package org.dbpedia.extraction.live.extraction
 
-import xml.XML
-
 import java.net.URL
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.File
-import java.util.logging.{Level, Logger}
-import java.awt.event.{ActionListener, ActionEvent}
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.{WikiSource, Source}
-import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
-import org.dbpedia.extraction.destination.LiveUpdateDestination
-import org.dbpedia.extraction.live.job.LiveExtractionJob
+import org.dbpedia.extraction.sources.{WikiSource, Source, XMLSource}
+import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.destinations._
+import org.dbpedia.extraction.destinations.formatters.UriPolicy
 import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
-import org.dbpedia.extraction.live.statistics.RecentlyUpdatedInstance;
-import org.dbpedia.extraction.live.main.Main
 import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.dump.extract.ExtractionJob
-import org.dbpedia.extraction.wikiparser.Namespace
+import collection.mutable.ArrayBuffer
+import org.dbpedia.extraction.live.storage.JSONCache
+import org.dbpedia.extraction.live.queue.LiveQueueItem
+import scala.xml._
 
 
 /**
@@ -31,7 +28,7 @@ import org.dbpedia.extraction.wikiparser.Namespace
  * the required triples from the wikipage.
  */
 
-object LiveExtractionConfigLoader extends ActionListener
+object LiveExtractionConfigLoader
 {
   //This number is used for filling the recentlyUpdatedInstances array which is in Main class, this array is used
   //for statistics
@@ -39,8 +36,8 @@ object LiveExtractionConfigLoader extends ActionListener
 
   //    private var config : Config = null;
   private var extractors : List[RootExtractor] = null;
-  private var CurrentJob : ExtractionJob = null;
   private var reloadOntologyAndMapping = true;
+  private var ontologyAndMappingsUpdateTime : Long = 0;
   val logger = Logger.getLogger("LiveExtractionConfigLoader");
 
   /** Ontology source */
@@ -59,9 +56,14 @@ object LiveExtractionConfigLoader extends ActionListener
 
   val commonsSource = null;
 
-  def actionPerformed(e: ActionEvent) =
+  val policies = {
+    UriPolicy.parsePolicy(LiveOptions.options.get("uri-policy.main"))
+  }
+
+  def reload(t : Long) =
   {
-    reloadOntologyAndMapping = true;
+    if (t > ontologyAndMappingsUpdateTime)
+      reloadOntologyAndMapping = true;
   }
 
   /**
@@ -84,6 +86,18 @@ object LiveExtractionConfigLoader extends ActionListener
     articlesDump
   }
 
+  def extractPage(item: LiveQueueItem, apiURL :String, landCode :String): Boolean =
+  {
+    val lang = Language.apply(landCode)
+    val articlesSource : Source =
+      if (item.getXML.isEmpty)
+        WikiSource.fromPageIDs(List(item.getItemID), new URL(apiURL), lang)
+      else {
+        XMLSource.fromOAIXML(XML.loadString(item.getXML))
+      }
+    startExtraction(articlesSource,lang)
+  }
+
 
   /**
    * Loads the configuration and creates extraction jobs for all configured languages.
@@ -91,127 +105,85 @@ object LiveExtractionConfigLoader extends ActionListener
    * @param configFile The configuration file
    * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
    */
-  def startExtraction(articlesSource : Source) : Unit =
-  {
-    //        if(config.multihreadingMode)
-    if(LiveConfigReader.multihreadingMode)
-    {
-      val extractionJobs = convertExtractorMapToScalaMap(LiveConfigReader.extractorClasses).keySet.view.map(createExtractionJob(articlesSource))
-
-      for(extractionJob <- extractionJobs)
-      {
-        extractionJob.start();
-      }
-    }
-    else
-    {
-      startSingleThreadExtraction(articlesSource)(Language.apply(LiveOptions.options.get("language")));
-    }
-  }
-
-  def isMultithreading():Boolean =
-  {
-    //    config.multihreadingMode;
-    LiveConfigReader.multihreadingMode;
-  }
-
-  /**
-   * Creates an extraction job for a specific language.
-   */
-
-  private def createExtractionJob(articlesSource : Source)(language : Language) : LiveExtractionJob =
-  {
-
-    // In case of multi-threading
-    //Extractor
-    if(extractors == null || reloadOntologyAndMapping)
-    {
-      extractors = LoadOntologyAndMappings(articlesSource, language);
-      logger.log(Level.INFO, "Ontology and mappings reloaded");
-      reloadOntologyAndMapping = false;
-    }
-
-    new LiveExtractionJob(null, articlesSource, language, "Extraction Job for " + language.wikiCode + " Wikipedia");
-
-  }
-
-
-  private def startSingleThreadExtraction(articlesSource : Source)(language : Language):Unit =
+  def startExtraction(articlesSource : Source, language : Language):Boolean =
   {
     // In case of single threading
     //Extractor
-    if(extractors==null || reloadOntologyAndMapping)
-    {
-      extractors = LoadOntologyAndMappings(articlesSource, language);
-      logger.log(Level.INFO, "Ontology and mappings reloaded");
-      reloadOntologyAndMapping = false;
+    if(extractors==null || reloadOntologyAndMapping) {
+      this.synchronized {
+        if(extractors==null || reloadOntologyAndMapping) {
+          extractors = LoadOntologyAndMappings(articlesSource, language);
+          logger.info("Ontology and mappings reloaded");
+          reloadOntologyAndMapping = false;
+        }
+      }
     }
 
-    var liveDest : LiveUpdateDestination = null;
-    val parser = WikiParser()
-    def updateStatistics(wikipageTitle: String, wikipageURL: String): Unit = {
-      //Increment the number of processed instances
-      Main.instancesUpdatedInMinute = Main.instancesUpdatedInMinute + 1;
-      Main.instancesUpdatedIn5Minutes = Main.instancesUpdatedIn5Minutes + 1;
-      Main.instancesUpdatedInHour = Main.instancesUpdatedInHour + 1;
-      Main.instancesUpdatedInDay = Main.instancesUpdatedInDay + 1;
-      Main.totalNumberOfUpdatedInstances = Main.totalNumberOfUpdatedInstances + 1;
+    //var liveDest : LiveUpdateDestination = null;
+    val parser = WikiParser.getInstance()
+    var complete = false;
 
-      val endingSlashPos = wikipageURL.lastIndexOf("/");
-
-      val dbpediaPageURL = "http://live.dbpedia.org/resource" + wikipageURL.substring(endingSlashPos);
-
-      Main.recentlyUpdatedInstances(instanceNumber) = new RecentlyUpdatedInstance(wikipageTitle, dbpediaPageURL, wikipageURL);
-      instanceNumber  = (instanceNumber + 1) % Main.recentlyUpdatedInstances.length;
-    }
-    articlesSource.foreach(CurrentWikiPage =>
+    for (cpage <- articlesSource.map(parser))
     {
-      if(CurrentWikiPage.title.namespace == Namespace.Main ||
-        CurrentWikiPage.title.namespace == Namespace.File ||
-        CurrentWikiPage.title.namespace == Namespace.Category)
+
+      if(cpage.title.namespace == Namespace.Main ||
+        cpage.title.namespace == Namespace.Template ||
+        cpage.title.namespace == Namespace.Category)
       {
-        val CurrentPageNode = parser(CurrentWikiPage)
 
 
 
-        val testPage = CurrentWikiPage;
-        //As the page title always starts with "en:", as it is the language of the page, and we are working only on
-        // English language, then we should remove that part as it will repeated without any advantage.
-//        val semicolonPosition = CurrentPageNode.title.decodedWithNamespace.indexOf(";");
-//        val pageNodeTitleWithoutLanguage = CurrentPageNode.title.toString.substring(0, semicolonPosition)
-        val strWikipage = "http://" + CurrentPageNode.title.language + ".wikipedia.org/wiki/" + CurrentPageNode.title.encodedWithNamespace ;
-        liveDest = new LiveUpdateDestination(CurrentPageNode.title, language.locale.getLanguage(),
-          CurrentPageNode.id.toString)
+        val liveCache = new JSONCache(cpage.id, cpage.title.decoded)
 
-        liveDest.setPageID(CurrentPageNode.id);
-        liveDest.setOAIID(LiveExtractionManager.oaiID);
+        var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
+        if (liveCache.performCleanUpdate) {
+          destList += new SPARULDelAllDestination(liveCache.cacheObj.subjects, policies)
+          destList += new SPARULAddAllDestination(policies)
+        } else {
+          // *Delete first* When a triple is deleted from one extractor and added from another extractor
+          destList += new SPARULDestination(false, policies) // delete triples
+          destList += new SPARULDestination(true, policies) // add triples
+        }
+        destList += new JSONCacheUpdateDestination(liveCache)
+        destList += new PublisherDiffDestination(cpage.id, policies)
+        destList += new LoggerDestination(cpage.id, cpage.title.decoded) // Just to log extraction results
+
+        val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
+
+        val extractorDiffDest = new JSONCacheExtractorDestination(liveCache, compositeDest) // filters triples to add/remove/leave
+        // TODO get liveconfigReader permanently
+        val extractorRestrictDest = new ExtractorRestrictDestination ( LiveConfigReader.extractors.get(Language.apply(language.isoCode)), extractorDiffDest)
+
+        extractorRestrictDest.open
 
         //Add triples generated from active extractors
         extractors.foreach(extractor => {
-          println(extractor.getClass())
-          var RequiredGraph = extractor(parser(CurrentWikiPage));
-
-          //When the DBpedia framework is updated, there is a class called "RootExtractor", which contain internally the
-          // required extractor, so we should get it from inside
-          liveDest.write(RequiredGraph, extractor.extractor.getClass().getName());
+          //Try to get extractor contents, onError just return empty triples
+          val RequiredGraph =
+            try{
+              extractor(cpage);
+            }
+            catch {
+              case ex: Exception => {
+                logger.error("Error in " + extractor.extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
+                Seq()
+              }
+            }
+          extractorRestrictDest.write(extractor.extractor.getClass().getName(), "", RequiredGraph, Seq(), Seq())
         });
 
-        //Remove triples generated from purge extractors
-        liveDest.removeTriplesForPurgeExtractors();
+        extractorRestrictDest.close
+        complete = true
 
-        //Keep triples generated from keep extractors
-        liveDest.retainTriplesForKeepExtractors();
-
-        liveDest.close();
-
-        logger.log(Level.INFO, "page number " + CurrentPageNode.id + " has been processed");
-
-        //Updating information needed for statistics
-
-        updateStatistics(CurrentWikiPage.title.decoded, strWikipage)
+      }
+      else
+      {
+        // If not in the allowed namespace, delete cache (if exists)
+        JSONCache.deleteCacheOnlyItem(cpage.id)
       }
 
-    });
+    }
+    complete
   }
 
   //This method loads the ontology and mappings
@@ -220,6 +192,7 @@ object LiveExtractionConfigLoader extends ActionListener
   //    private def LoadOntologyAndMappings(articlesSource: Source, language: Language): Extractor = {
   private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[RootExtractor] = {
 
+    ontologyAndMappingsUpdateTime = System.currentTimeMillis
     val extractorClasses = convertExtractorListToScalaList(LiveConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
     org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, articlesSource, commonsSource,
             extractorClasses, language)

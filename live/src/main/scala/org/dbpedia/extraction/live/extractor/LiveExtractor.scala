@@ -3,7 +3,7 @@ package org.dbpedia.extraction.live.extractor
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.mappings._
 import collection.mutable.ListBuffer
@@ -59,7 +59,7 @@ object LiveExtractor
         private lazy val _ontology = new OntologyReader().read(_ontologySource)
         def ontology : Ontology = _ontology
 
-        private lazy val _mappingPageSource = _mappingsSource.map(WikiParser())
+        private lazy val _mappingPageSource = _mappingsSource.map(WikiParser.getInstance())
         def mappingPageSource : Traversable[PageNode] = _mappingPageSource
 
         private lazy val _mappings = MappingsLoader.load(this)
@@ -69,6 +69,9 @@ object LiveExtractor
 
         private lazy val _redirects = Redirects.loadFromSource(articlesSource, language)
         def redirects : Redirects = _redirects
+
+        //TODO automate this task
+        def disambiguations : Disambiguations = new Disambiguations(Set[Long]())
 
         def commonsSource : Source = _commonsSource
       }

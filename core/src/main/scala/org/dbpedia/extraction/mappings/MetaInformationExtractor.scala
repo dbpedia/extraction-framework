@@ -19,45 +19,40 @@ class MetaInformationExtractor( context : {
   def ontology : Ontology
   def language : Language } ) extends Extractor
 {
+  val modificationDatePredicate = context.ontology.properties("wikiPageModified")
+  val extractionDatePredicate = context.ontology.properties("wikiPageExtracted")
+  val editLinkPredicate = context.ontology.properties("wikiPageEditLink")
+  val revisionPredicate = context.ontology.properties("wikiPageRevisionLink")
+  val historyPredicate = context.ontology.properties("wikiPageHistoryLink")
+  val datetime = context.ontology.datatypes("xsd:dateTime")
 
-  override val datasets = Set(DBpediaDatasets.Revisions)
+  override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  //override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    if(node.title.namespace != Namespace.Main) return Seq.empty
+    if(page.title.namespace != Namespace.Main) return Seq.empty
 
-    val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded
-    val modificationDatePredicate = "http://purl.org/dc/terms/modified"
-    val editLinkPredicate = "http://dbpedia.org/meta/editlink"
-    val revisionPredicate = "http://dbpedia.org/meta/revision"
+    val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit"
+    val revisionLink = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&oldid=" + page.revision
+    val historyLink  = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=history"
 
-    //new Graph(quads)
-    //println("NODECHILDREN = " + node.children.find(x => "timestamp"))
-    //    node.children.foreach(child => println("CHILD = " + child.))
-    //    try{
-    //println("NODECHILDREN = " + node.asInstanceOf[LivePageNode].timestamp);
+    val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
+      formatTimestamp(page.timestamp), page.sourceUri, datetime )
 
+    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, extractionDatePredicate,
+      formatCurrentTimestamp, page.sourceUri, datetime )
 
+    val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, editLinkPredicate,
+      editLink, page.sourceUri, null )
 
-    val quadModificationDate = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, modificationDatePredicate,
-      formatTimestamp(node.timestamp), node.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
+    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, revisionPredicate,
+      revisionLink, page.sourceUri, null )
 
-    val editLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title.encoded +
-      "&action=edit";
-    val quadEditlink = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, editLinkPredicate,
-      editLink, node.sourceUri, null )
-
-    val revisionLink = "http://" + context.language.wikiCode + ".wikipedia.org/w/index.php?title=" + node.title.encoded +
-      "&oldid=" + node.revision;
-
-    //private val foafPrimaryTopicProperty = context.ontology.getProperty("foaf:primaryTopic").getOrElse(throw new Exception("Property 'foaf:primaryTopic' not found"))
-
-    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, revisionPredicate,
-      revisionLink, node.sourceUri, null )
+    val quadHistorylink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, historyPredicate,
+      historyLink, page.sourceUri, null )
 
 
-    Seq(quadModificationDate, quadEditlink, quadRevisionlink);
+    Seq(quadModificationDate, quadExtractionDate, quadEditlink, quadRevisionlink, quadHistorylink);
 
 
   }

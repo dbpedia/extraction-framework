@@ -237,11 +237,11 @@ extends Mapping[TableNode]
         //Check if found template has been mapped to corresponding Class
         var correspondingInstance : Option[String] = None
         for( correspondingTemplate <- lastPageTemplate;
-             templateClasses <- correspondingTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
-             templateClass <- templateClasses;
-             if correspondingClass == null || templateClass.name == correspondingClass.name )
+             templateClass <- correspondingTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
+             currentClass <- templateClass.relatedClasses;
+             if correspondingClass == null || currentClass.name == correspondingClass.name )
         {
-            //TODO if correspondingClass == null check if templateClass subClassOf correspondingProperty.range
+            //TODO if correspondingClass == null check if currentClass subClassOf correspondingProperty.range
 
             return Some(correspondingTemplate.getAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION).get)
         }

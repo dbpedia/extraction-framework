@@ -50,39 +50,56 @@ public class DBPediaXPathUtil
 		
 		return expr;
 	}
-	public static XPathExpression getPageIdExpr()
-	{
-		return get("pageId", "//*[local-name()='page']/*[local-name()='id']/text()");
-	}
-	
+
+    public static XPathExpression getOAIResponseDateExpr()
+    {
+        return get("oaiResponseDate", "//*[local-name()='responseDate']/text()");
+    }
+
 	public static XPathExpression getOAIIdentifierExpr()
 	{
 		return get("oaiIdentifier", "//*[local-name()='header']/*[local-name()='identifier']/text()");
 	}
 
-	public static XPathExpression getTimestampExpr()
-	{
-		return get("timestamp", "//*[local-name()='header']/*[local-name()='datestamp']/text()");
-	}
+    public static XPathExpression getOAIIsRecordDeletedExpr()
+   	{
+   		return get("recordDeleted", "//*[local-name()='header']/@status");
+   	}
+
+    public static XPathExpression getOAIDatestampExpr()
+   	{
+   		return get("datestamp", "//*[local-name()='datestamp']");
+   	}
 
 	public static XPathExpression getRecordExpr()
 	{
 		return get("record", "//*[local-name()='record']");
 	}
 
-	public static XPathExpression getIsRecordDeletedExpr()
-	{
-		return get("recordDeleted", "//*[local-name()='header']/@status");
-	}
-	
+    public static XPathExpression getPageIdExpr()
+   	{
+   		return get("pageId", "//*[local-name()='page']/*[local-name()='id']/text()");
+   	}
+
+
+    public static XPathExpression getTitleExpr()
+   	{
+   		return get("title", "//*[local-name()='title']");
+   	}
+
+    public static XPathExpression getRevisionExpr()
+   	{
+   		return get("revision", "//*[local-name()='revision']/*[local-name()='id']");
+   	}
+
+    public static XPathExpression getTimestampExpr()
+   	{
+   		return get("timestamp", "//*[local-name()='header']/*[local-name()='datestamp']/text()");
+   	}
+
 	public static XPathExpression getIdentifierExpr()
 	{
 		return get("identifier", "//*[local-name()='identifier']");
-	}
-
-	public static XPathExpression getDatestampExpr()
-	{
-		return get("datestamp", "//*[local-name()='datestamp']");
 	}
 
 	public static XPathExpression getContributorNameExpr()
@@ -105,18 +122,10 @@ public class DBPediaXPathUtil
 		return get("text", "//*[local-name()='text']/text()");
 	}
 
-	public static XPathExpression getRevisionExpr()
-	{
-		return get("revision", "//*[local-name()='revision']/*[local-name()='id']");
-	}
 
 	public static XPathExpression getLanguageExpr()
 	{
 		return get("lang", "//@*[local-name()= 'lang']");
 	}
 
-	public static XPathExpression getTitleExpr()
-	{
-		return get("title", "//*[local-name()='title']");
-	}
 }

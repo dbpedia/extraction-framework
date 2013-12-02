@@ -33,34 +33,52 @@ extends Mapping[TemplateNode]
                 //Add ontology instance
                 createInstance(graph, subjectUri, node)
 
+                //Save existing template (this is the first one)
+                node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, Seq(node.title.decoded))
+
                 //Extract properties
                 graph ++= mappings.flatMap(_.extract(node, subjectUri, pageContext))
             }
-            case Some(pageClasses) => //This page already has a root template.
+            case Some(pageClass) => //This page already has a root template.
             {
-                //Create a new instance URI
-                val instanceUri = generateUri(subjectUri, node, pageContext)
+                // Depending on the following conditions we create a new "blank node" or append the data to the main resource.
+                // Example case for creating new resources are the pages: enwiki:Volkswagen_Golf , enwiki:List_of_Playboy_Playmates_of_2012
+                // Example case we could append to existing class are where we have to different mapped templates that one is a subclass of the other
+
+                // Condition #1
+                //  Check if the root template has been mapped to the corresponding Class of this template
+                //  If the mapping already defines a corresponding class & propery then we should create a new resource
+                val condition1_createCorrespondingProperty = correspondingClass != null && correspondingProperty != null && pageClass.relatedClasses.contains(correspondingClass)
+
+                // Condition #2
+                // If we have more than one of the same template it means that we want to create multiple resources. See for example
+                // the pages: enwiki:Volkswagen_Golf , enwiki:List_of_Playboy_Playmates_of_2012
+                val pageTemplateSet = pageNode.getAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION).getOrElse(Seq.empty)
+                val condition2_template_exists = pageTemplateSet.contains(node.title.decoded)
+                if (!condition2_template_exists)
+                  node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, pageTemplateSet ++ Seq(node.title.decoded))
+
+                // Condition #3
+                // The current mapping is a subclass or a superclass of previous class
+                val condition3_subclass = mapToClass.relatedClasses.contains(pageClass) || pageClass.relatedClasses.contains(mapToClass)
+
+                // If all above conditions are met then use the main resource, otherwise create a new one
+                val instanceUri =
+                  if ( (!condition1_createCorrespondingProperty) && (!condition2_template_exists) && condition3_subclass ) subjectUri
+                  else generateUri(subjectUri, node, pageContext)
 
                 //Add ontology instance
-                createInstance(graph, instanceUri, node)
+                if (instanceUri == subjectUri) {
+                  createMissingTypes(graph, instanceUri, node)
+                }
+                else {
+                  createInstance(graph, instanceUri, node)
+                }
 
-                //Check if the root template has been mapped to the corresponding Class of this template
-                if (correspondingClass != null && correspondingProperty != null)
+                if (condition1_createCorrespondingProperty)
                 {
-                    var found = false;
-                    for(pageClass <- pageClasses)
-                    {
-                        if(correspondingClass.name == pageClass.name)
-                        {
-                            found = true
-                        }
-                    }
-
-                    if(found)
-                    {
-                        //Connect new instance to the instance created from the root template
-                        graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
-                    }
+                    //Connect new instance to the instance created from the root template
+                    graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
                 }
 
                 //Extract properties
@@ -71,17 +89,38 @@ extends Mapping[TemplateNode]
         graph
     }
 
+    private def createMissingTypes(graph: Buffer[Quad], uri : String, node : Node): Unit =
+    {
+        val pageClass = node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION).getOrElse(throw new IllegalArgumentException("missing class Annotation"))
+
+        // Compute missing types, i.e. the set difference between the page classes and this TemplateMapping relatedClasses
+        val diffSet = mapToClass.relatedClasses.filterNot(c => pageClass.relatedClasses.contains(c))
+
+        // Set annotations
+        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass);
+        node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
+
+        // Set new annotation (if new map is a subclass)
+        if (mapToClass.relatedClasses.contains(pageClass))
+          node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass)
+
+        // Create missing type statements
+        for (cls <- diffSet)
+          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+
+    }
+
     private def createInstance(graph: Buffer[Quad], uri : String, node : Node): Unit =
     {
         val classes = mapToClass.relatedClasses
 
         //Set annotations
-        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
+        node.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass);
         node.setAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION, uri);
 
         if(node.root.getAnnotation(TemplateMapping.CLASS_ANNOTATION).isEmpty)
         {
-            node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, classes);
+            node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass);
         }
         
         //Create type statements
@@ -130,7 +169,7 @@ extends Mapping[TemplateNode]
 
 private object TemplateMapping
 {
-    val CLASS_ANNOTATION = new AnnotationKey[Seq[OntologyClass]]
-    
+    val CLASS_ANNOTATION = new AnnotationKey[OntologyClass]
+    val TEMPLATELIST_ANNOTATION = new AnnotationKey[Seq[String]]
     val INSTANCE_URI_ANNOTATION = new AnnotationKey[String]
 }

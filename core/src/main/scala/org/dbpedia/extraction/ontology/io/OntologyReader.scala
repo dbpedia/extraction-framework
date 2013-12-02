@@ -19,7 +19,7 @@ class OntologyReader
     {
         logger.info("Loading ontology pages")
 
-        read(source.map(WikiParser()))
+        read(source.map(WikiParser.getInstance()))
     }
 
     /**
@@ -36,8 +36,8 @@ class OntologyReader
 
         ontologyBuilder.datatypes = OntologyDatatypes.load()
 
-        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map(Language.Mappings -> "Thing"), Map(Language.Mappings -> "Base class of all ontology classes"), List(), Set())
-        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map(Language.Mappings -> "Property"), Map(), List("owl:Thing"), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map(Language.Mappings -> "Thing"), Map(Language.Mappings -> "Base class of all ontology classes"), List(), Set(), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map(Language.Mappings -> "Property"), Map(), List("owl:Thing"), Set(), Set())
 
         // TODO: range should be rdfs:Class
         ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map(Language.Mappings -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
@@ -72,10 +72,12 @@ class OntologyReader
                 val name = getName(page.title, _.capitalize(page.title.language.locale))
 
                 ontologyBuilder.classes ::= loadClass(name, templateNode)
+                // Fill the equivalentClass map
 
-                for(specificProperty <- loadSpecificProperties(name, templateNode))
+              for(specificProperty <- loadSpecificProperties(name, templateNode))
                 {
                     ontologyBuilder.specializedProperties ::= specificProperty
+                    // To check for equivalent Property Map
                 }
             }
             else if(templateName == OntologyReader.OBJECTPROPERTY_NAME || templateName == OntologyReader.DATATYPEPROPERTY_NAME)
@@ -85,6 +87,7 @@ class OntologyReader
                 for(property <- loadOntologyProperty(name, templateNode))
                 {
                     ontologyBuilder.properties ::= property
+                    // Fill the equivalentProperty map
                 }
             }
             // TODO: read datatypes
@@ -114,7 +117,8 @@ class OntologyReader
                          labels = readTemplatePropertiesByLanguage(node, "rdfs:label") ++ readPropertyTemplatesByLanguage(node, "label"),
                          comments = readTemplatePropertiesByLanguage(node, "rdfs:comment") ++ readPropertyTemplatesByLanguage(node, "comment"),
                          baseClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf"),
-                         equivClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
+                         equivClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet,
+                         disjClassNames = readTemplatePropertyAsList(node, "owl:disjointWith").toSet)
     }
 
     private def loadOntologyProperty(name : String, node : TemplateNode) : Option[PropertyBuilder] =
@@ -170,7 +174,7 @@ class OntologyReader
     private def loadSpecificProperties(name : String, node : TemplateNode) : List[SpecificPropertyBuilder] =
     {
         for(PropertyNode(_, children, _) <- node.property("specificProperties").toList;
-            templateNode @ TemplateNode(title, _, _) <- children if title.decoded == OntologyReader.SPECIFICPROPERTY_NAME;
+            templateNode @ TemplateNode(title, _, _, _) <- children if title.decoded == OntologyReader.SPECIFICPROPERTY_NAME;
             specificProperty <- loadSpecificProperty(name, templateNode))
             yield specificProperty
     }
@@ -254,7 +258,7 @@ class OntologyReader
       val propertyName = templateName + 's' // label -> labels
       node.children.filter(_.key.equals(propertyName)).flatMap { property =>
         for (child <- property.children) yield child match {
-          case template @ TemplateNode(title, _, _) if title.decoded equalsIgnoreCase templateName => {
+          case template @ TemplateNode(title, _, _, _) if title.decoded equalsIgnoreCase templateName => {
             readPropertyTemplate(template)
           }
           case TextNode(text, _) if text.trim.isEmpty => {
@@ -297,6 +301,8 @@ class OntologyReader
         var properties = List[PropertyBuilder]()
         var datatypes = List[Datatype]()
         var specializedProperties = List[SpecificPropertyBuilder]()
+        var equivalentPropertiesMap = Map[OntologyProperty,Set[OntologyProperty]] ()
+        var equivalentClassesMap = Map[OntologyProperty,Set[OntologyProperty]] ()
 
         def build() : Ontology  =
         {
@@ -307,12 +313,14 @@ class OntologyReader
             new Ontology( classes.flatMap(_.build(classMap)).map(c => (c.name, c)).toMap,
                           properties.flatMap(_.build(classMap, typeMap)).map(p => (p.name, p)).toMap,
                           datatypes.map(t => (t.name, t)).toMap,
-                          specializedProperties.flatMap(_.build(classMap, propertyMap, typeMap)).toMap )
+                          specializedProperties.flatMap(_.build(classMap, propertyMap, typeMap)).toMap,
+                          equivalentPropertiesMap,
+                          equivalentClassesMap)
         }
     }
 
     private class ClassBuilder(val name : String, val labels : Map[Language, String], val comments : Map[Language, String],
-                               var baseClassNames : List[String], val equivClassNames : Set[String])
+                               var baseClassNames : List[String], val equivClassNames : Set[String], val disjClassNames : Set[String])
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
@@ -337,7 +345,7 @@ class OntologyReader
                     case None if ! RdfNamespace.validate(baseClassName) =>
                     {
                         logger.config("base class '"+baseClassName+"' of class '"+name+"' was not found, but for its namespace this was expected")
-                        Some(new OntologyClass(baseClassName, Map(), Map(), List(), Set()))
+                        Some(new OntologyClass(baseClassName, Map(), Map(), List(), Set(), Set()))
                     }
                     case None =>
                     {
@@ -352,7 +360,7 @@ class OntologyReader
                     case None if ! RdfNamespace.validate(equivClassName) =>
                     {
                         logger.config("equivalent class '"+equivClassName+"' of class '"+name+"' was not found, but for its namespace this was expected")
-                        Some(new OntologyClass(equivClassName, Map(), Map(), List(), Set()))
+                        Some(new OntologyClass(equivClassName, Map(), Map(), List(), Set(), Set()))
                     }
                     case None =>
                     {
@@ -361,10 +369,25 @@ class OntologyReader
                     }
                 }}.flatten
 
+                val disjointClasses = disjClassNames.map{ disjClassNames => classMap.get(disjClassNames) match
+                {
+                  case Some(equivClassBuilder) => equivClassBuilder.build(classMap)
+                  case None if ! RdfNamespace.validate(disjClassNames) =>
+                  {
+                    logger.config("equivalent class '"+disjClassNames+"' of class '"+name+"' was not found, but for its namespace this was expected")
+                    Some(new OntologyClass(disjClassNames, Map(), Map(), List(), Set(), Set()))
+                  }
+                  case None =>
+                  {
+                    logger.warning("equivalent class '"+disjClassNames+"' of class '"+name+"' not found")
+                    None
+                  }
+                }}.flatten
+
                 name match
                 {
-                    case "owl:Thing" => generatedClass = Some(new OntologyClass(name, labels, comments, List(), equivClasses))
-                    case _ => generatedClass = Some(new OntologyClass(name, labels, comments, baseClasses, equivClasses))
+                    case "owl:Thing" => generatedClass = Some(new OntologyClass(name, labels, comments, List(), equivClasses, disjointClasses))
+                    case _ => generatedClass = Some(new OntologyClass(name, labels, comments, baseClasses, equivClasses, disjointClasses))
                 }
 
                 buildCalled = true
@@ -402,7 +425,7 @@ class OntologyReader
                 case None if ! RdfNamespace.validate(domain) =>
                 {
                     logger.config("domain '"+domain+"' of property '"+name+"' was not found, but for its namespace this was expected")
-                    new OntologyClass(domain, Map(), Map(), List(), Set())
+                    new OntologyClass(domain, Map(), Map(), List(), Set(), Set())
                 }
                 case None => logger.warning("domain '"+domain+"' of property '"+name+"' not found"); return None
             }
@@ -427,7 +450,7 @@ class OntologyReader
                     case None if ! RdfNamespace.validate(range) =>
                     {
                         logger.config("range '"+range+"' of property '"+name+"' was not found, but for its namespace this was expected")
-                        new OntologyClass(range, Map(), Map(), List(), Set())
+                        new OntologyClass(range, Map(), Map(), List(), Set(), Set())
                     }
                     case None => logger.warning("range '"+range+"' of property '"+name+"' not found"); return None
                 }

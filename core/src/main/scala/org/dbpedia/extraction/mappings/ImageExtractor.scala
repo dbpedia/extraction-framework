@@ -94,7 +94,7 @@ extends Extractor
                     if (currentSections > 1) return None
                     currentSections += 1
                 }
-                case TemplateNode(_, children, _) =>
+                case TemplateNode(_, children, _, _) =>
                 {
                     for (property <- children;
                          textNode @ TextNode(text, _) <- property.children;
@@ -133,7 +133,7 @@ extends Extractor
                 if (sections > 1) return None
                 return searchImage(tail, sections + 1)
             }
-            case TemplateNode(_, children, _) :: tail =>
+            case TemplateNode(_, children, _, _) :: tail =>
             {
                 for (property <- children;
                      textNode @ TextNode(text, _) <- property.children;
@@ -172,14 +172,18 @@ extends Extractor
 
     private def getImageUrl(fileName: String): (String, String) =
     {
-      val urlPrefix = if(freeWikipediaImages.contains(URLDecoder.decode(fileName, "UTF-8"))) wikipediaUrlLangPrefix else commonsUrlPrefix
+      // TODO: URLDecoder.decode() translates '+' to space. Is that correct here?
+      val decoded = URLDecoder.decode(fileName, "UTF-8")
+      
+      val urlPrefix = if(freeWikipediaImages.contains(decoded)) wikipediaUrlLangPrefix else commonsUrlPrefix
 
       val md = MessageDigest.getInstance("MD5")
-      val messageDigest = md.digest(URLDecoder.decode(fileName, "UTF-8").getBytes)
+      val messageDigest = md.digest(decoded.getBytes("UTF-8"))
       var md5 = (new BigInteger(1, messageDigest)).toString(16)
 
       // If the lenght of the MD5 hash is less than 32, then we should pad leading zeros to it, as converting it to
       // BigInteger will result in removing all leading zeros.
+      // FIXME: this is the least efficient way of building a string.
       while (md5.length < 32)
         md5 = "0" + md5;
 
@@ -198,6 +202,13 @@ extends Extractor
 
 private object ImageExtractor
 {
+    // FIXME: This is so dumb. We're parsing the commons dump every time we initialize the ImageExtractor.
+    // Which means that we waste about an hour of CPU time for nine of the ten languages that currently
+    // use the ImageExtractor. And we're not even doing it in parallel - we're using just a single CPU!
+    // Things like this need to be done in pre-processing steps: parse the commons dump once, store the
+    // result in some file, or even in memory, load it when necessary. Similar for the language dumps:
+    // parse a language dump once (using multiple CPUs), extract redirects, images and maybe other stuff,
+    // store the result, load the result when needed.
     private def loadImages(source: Source, freeImages: MutableSet[String], nonFreeImages: MutableSet[String], wikiCode: String)
     {
         val logger = Logger.getLogger(classOf[ImageExtractor].getName)

@@ -2,7 +2,9 @@ package org.dbpedia.extraction.live.util;
 
 
 import org.apache.commons.collections15.iterators.TransformIterator;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.transformer.NodeToDocumentTransformer;
+import org.dbpedia.extraction.live.transformer.NodeToLiveQueueItemTransformer;
 import org.dbpedia.extraction.live.util.iterators.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -19,15 +21,36 @@ public class OAIUtil {
                 .currentTimeMillis()) : date;
     }
 
+    public static Iterator<LiveQueueItem> createEndlessFeederItemIterator(
+            String oaiBaseUri, String startDate, long pollDelay, long resumptionDelay) {
+
+        XPathExpression expr = DBPediaXPathUtil.getRecordExpr();
+
+        Iterator<Document> metaIterator = new EndlessOAIMetaIterator(
+                        oaiBaseUri, startDate, pollDelay, resumptionDelay);
+
+        Iterator<Node> nodeIterator = new XPathQueryIterator(metaIterator, expr);
+
+        // 'Dirty' because it can contain duplicates.
+        Iterator<LiveQueueItem> dirtyRecordIterator = new TransformIterator<Node, LiveQueueItem>(
+                nodeIterator, new NodeToLiveQueueItemTransformer());
+
+         // This iterator removed them
+        Iterator<LiveQueueItem> recordIterator = new DuplicateFeederItemRemoverIterator(
+                dirtyRecordIterator);
+
+        return recordIterator;
+    }
+
     public static Iterator<Document> createEndlessRecordIterator(
-            String oaiBaseUri, String startDate, long relativeEndFromNow, int pollDelay, int resumptionDelay) {
+            String oaiBaseUri, String startDate, long relativeEndFromNow, long pollDelay, long resumptionDelay) {
 
         XPathExpression expr = DBPediaXPathUtil.getRecordExpr();
 
         //Iterator<Document> metaIterator = createEndlessIterator(oaiBaseUri,
         //        startDate, relativeEndFromNow, pollDelay, resumptionDelay);
         Iterator<Document> metaIterator = new EndlessOAIMetaIterator(
-                        oaiBaseUri, startDate, relativeEndFromNow, pollDelay, resumptionDelay);
+                        oaiBaseUri, startDate, pollDelay, resumptionDelay);
 
         Iterator<Node> nodeIterator = new XPathQueryIterator(metaIterator, expr);
 

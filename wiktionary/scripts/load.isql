@@ -1,0 +1,67 @@
+--drop procedure mylog;
+create procedure mylog(in msg varchar)
+{
+  log_message (sprintf ('wiktionary load script: %s', msg));
+  dbg_printf('%s', msg);
+}
+
+--drop procedure load_wiktionary_nt;
+create procedure load_wiktionary_nt(in lang varchar, in file varchar)
+{
+    mylog (sprintf ('load %s', lang));
+    declare graph varchar;
+    graph := sprintf ('http://%s.wiktionary.dbpedia.org/', lang);
+    mylog (sprintf ('drop graph %s', graph));
+    exec (sprintf ('sparql DROP SILENT GRAPH <%s>', graph));
+    declare globalg varchar;
+    globalg := 'http://wiktionary.dbpedia.org/';
+    exec (sprintf ('sparql INSERT INTO <%s> {<%s> <http://www.w3.org/2002/07/owl#imports> <%s>}', globalg, globalg, graph));
+    mylog (sprintf ('load from file %s into graph %s', file, graph));
+    exec ('checkpoint');
+    DB.DBA.TTLP_MT(file_to_string_output (file), '', graph, 1, 1, 3);
+    exec ('checkpoint');
+    mylog ('import graph into global one');
+    DB.DBA.RDF_GRAPH_GROUP_INS (globalg, graph);
+};
+
+--drop procedure  init_wiktionary;
+create procedure init_wiktionary()
+{
+    mylog ('start loading wiktionary from scratch');
+    mylog ('delete everything');
+    RDF_GLOBAL_RESET();
+    mylog ('setup the global graph, that imports the local wiktionaries');
+    delete from DB.DBA.RDF_GRAPH_GROUP;
+    delete from DB.DBA.RDF_GRAPH_GROUP_MEMBER;
+    DB.DBA.RDF_GRAPH_GROUP_CREATE ('http://wiktionary.dbpedia.org/', 0);
+};
+
+create procedure main(in init varchar, in ls any, in base varchar)
+{
+  declare exit handler for sqlstate '*' {
+    rollback work;
+    --atomic(0);
+    checkpoint_interval(60);
+
+    mylog (sprintf ('error '||__SQL_STATE||': '||__SQL_MESSAGE||' -> rollback'));
+    --raw_exit();
+    return;
+  };
+    --atomic(1);
+    checkpoint_interval(0);
+
+    if (init = 'true') {
+        init_wiktionary();
+    }
+ 
+    foreach(varchar l in ls) do {
+        declare path varchar;
+        path := sprintf ('%soutput/%s/wiktionary.dbpedia.org_%s.nt', base, l, l);
+        load_wiktionary_nt(l, path);
+    }
+
+    commit work;
+    exec ('checkpoint');
+    checkpoint_interval(60);
+    --atomic(0);
+}

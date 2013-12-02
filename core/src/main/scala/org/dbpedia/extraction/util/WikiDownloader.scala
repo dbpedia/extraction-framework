@@ -48,7 +48,7 @@ class WikiDownloader(val apiUrl : String) {
       val out = new XMLEventBuilder(xmlOut, events)
       out.document(charset.name){
         // TODO: the generated file is probably not valid according to this schema. 
-        out.elementNS("mediawiki", "http://www.mediawiki.org/xml/export-0.6/") {
+        out.elementNS("mediawiki", "http://www.mediawiki.org/xml/export-0.8/") {
           for (namespace <- namespaces) addPages(namespace, out)
         }
       }
@@ -77,7 +77,7 @@ class WikiDownloader(val apiUrl : String) {
             in.ifElement("query-continue") { _ =>
               in.element("allpages") { allpages => gapfrom = allpages attr "gapfrom" } 
             }
-            in.ifElement("query") { _ => // note: empty namespace returns no <query> 
+            in.ifElement("query") { _ => // note: there's no <query> element if the namespace contains no pages
               in.element("pages") { _ =>
                 in.elements("page") { page =>
                   in.element("revisions") { _ =>

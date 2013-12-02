@@ -5,7 +5,7 @@ import org.dbpedia.extraction.server.resources.stylesheets.{TriX,Log}
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.wikiparser.{Namespace,WikiTitle,WikiParser}
+import org.dbpedia.extraction.wikiparser.{WikiParser, Namespace, WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.{WriterDestination,LimitingDestination}
@@ -145,7 +145,7 @@ class Mappings(@PathParam("lang") langCode : String)
     }
 
 
-    protected val parser = WikiParser()
+    protected val parser = WikiParser.getInstance()
 
     /**
      * Validates a mapping page from the Wiki, or all mapping pages if title is "*".

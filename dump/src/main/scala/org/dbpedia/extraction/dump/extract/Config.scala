@@ -1,56 +1,55 @@
 package org.dbpedia.extraction.dump.extract
 
+import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import org.dbpedia.extraction.mappings.Extractor
 import scala.collection.mutable.HashMap
 import java.util.Properties
 import java.io.File
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.JavaConversions.asScalaSet
+import scala.collection.Map
 import scala.collection.immutable.{SortedSet,SortedMap}
 import org.dbpedia.extraction.util.{Language,WikiInfo}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
-import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange}
+import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange,getValue,getStrings}
+import org.dbpedia.extraction.util.RichString.wrapString
 import scala.io.Codec
 
 private class Config(config: Properties)
-extends ConfigParser(config)
 {
-  // TODO: rewrite this, similar to download stuff:
-  // - Don't use java.util.Properties, allow multiple values for one key
-  // - Resolve config file names and load them as well
-  // - Use pattern matching to parse arguments
-  // - allow multiple config files, given on command line
+  // TODO: get rid of all config file parsers, use Spring
 
   /** Dump directory */
-  val dumpDir = getFile("base-dir")
-  if (dumpDir == null) throw error("property 'base-dir' not defined.")
+  val dumpDir = getValue(config, "base-dir", true)(new File(_))
   if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
   
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
-  
+
+  // Watch out, this could be a regex
   val source = config.getProperty("source", "pages-articles.xml")
+  val disambiguations = config.getProperty("disambiguations", "page_props.sql.gz")
+
+  val wikiName = config.getProperty("wikiName", "wiki")
+
+  val parser = config.getProperty("parser", "simple")
 
   /** Local ontology file, downloaded for speed and reproducibility */
-  val ontologyFile = getFile("ontology")
+  val ontologyFile = getValue(config, "ontology", false)(new File(_))
 
   /** Local mappings files, downloaded for speed and reproducibility */
-  val mappingsDir = getFile("mappings")
+  val mappingsDir = getValue(config, "mappings", false)(new File(_))
   
-  val formats = new PolicyParser(config).parseFormats()
+  val formats = parseFormats(config, "uri-policy", "format")
 
   val extractorClasses = loadExtractorClasses()
   
   val namespaces = loadNamespaces()
   
-  private def getFile(key: String): File = {
-    val value = config.getProperty(key)
-    if (value == null) null else new File(value)
-  }
-  
   private def loadNamespaces(): Set[Namespace] = {
-    val names = splitValue("namespaces", ',')
+    val names = getStrings(config, "namespaces", ',', false)
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template)
-    else names.map(name => Namespace(Language.English, name)).toSet
+    // Special case for namespace "Main" - its Wikipedia name is the empty string ""
+    else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
   }
   
   /**
@@ -62,14 +61,20 @@ extends ConfigParser(config)
   {
     val languages = loadLanguages()
 
-    //Load extractor classes
-    if(config.getProperty("extractors") == null) throw error("Property 'extractors' not defined.")
-    
-    val stdExtractors = splitValue("extractors", ',').map(loadExtractorClass)
+    val stdExtractors = getStrings(config, "extractors", ',', false).toList.map(loadExtractorClass)
 
     //Create extractor map
     val classes = new HashMap[Language, List[Class[_ <: Extractor]]]()
     
+    /*
+    TODO: maybe we should check in the first loop if property "extractors."+language.wikiCode
+    exists and if it does, add its specific extractors. Better: refactor the whole config mess.
+    Currently, the "languages" property just defines for which languages the default extractors
+    should be loaded. It does not define which languages should be processed in general,
+    all the "extractors.xx" properties are independent from the "languages" property.
+    It should be possible to say: run extractors A,B,C for languages xx,yy,zz. That
+    would make the configuration much simpler, less repetitive and more flexible.
+    */
     for(language <- languages) {
       classes(language) = stdExtractors
     }
@@ -77,7 +82,7 @@ extends ConfigParser(config)
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("extractors.")) {
         val language = Language(key.substring("extractors.".length()))
-        classes(language) = stdExtractors ++ splitValue(key, ',').map(loadExtractorClass)
+        classes(language) = stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)
       }
     }
 
@@ -91,7 +96,7 @@ extends ConfigParser(config)
     // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
     // extract=mapped:MappingExtractor means all languages with a mapping namespace
     
-    var keys = splitValue("languages", ',')
+    val keys = getStrings(config, "languages", ',', false)
         
     var languages = Set[Language]()
     
@@ -129,9 +134,13 @@ extends ConfigParser(config)
   }
 
   private def loadExtractorClass(name: String): Class[_ <: Extractor] = {
-    val className = if (! name.contains(".")) classOf[Extractor].getPackage.getName+'.'+name else name
+    val className = if (name.startsWith(".")) classOf[Extractor].getPackage.getName+name else name
     // TODO: class loader of Extractor.class is probably wrong for some users.
     classOf[Extractor].getClassLoader.loadClass(className).asSubclass(classOf[Extractor])
   }
   
+  private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
+    new IllegalArgumentException(message, cause)
+  }
+    
 }

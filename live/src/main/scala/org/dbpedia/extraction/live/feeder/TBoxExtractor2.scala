@@ -1,17 +1,16 @@
 package org.dbpedia.extraction.live.feeder
 
 import java.lang.String
-import org.aksw.commons.util.strings.StringUtils
 import org.apache.log4j.Logger
 import java.net.URI
 import com.hp.hpl.jena.rdf.model.{Resource, ResourceFactory, ModelFactory, Model}
 import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle, PageNode}
+import org.dbpedia.extraction.wikiparser._
 import collection.mutable.MultiMap
 import com.hp.hpl.jena.shared.PrefixMapping
 import java.util.GregorianCalendar
 import com.hp.hpl.jena.vocabulary.DCTerms
-import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.live.util.StringUtil
 
 /**
  * @author Claus Stadler
@@ -41,18 +40,18 @@ class TBoxExtractor2(val prefixMapping: PrefixMapping, val baseUri: String, val 
 
     val parts = title.encoded.split(":", 2);
 
-    val prefix = if(parts.length == 1) "" else StringUtils.lcFirst(parts(0)) + ":"
+    val prefix = if(parts.length == 1) "" else StringUtil.lcFirst(parts(0)) + ":"
     var suffix = if(parts.length == 1)  parts(0) else parts(1);
 
 
     if(title.namespace == Namespace.OntologyClass) {
-      suffix = StringUtils.ucFirst(suffix);
+      suffix = StringUtil.ucFirst(suffix);
 
 
 
     }
     else if(title.namespace == Namespace.OntologyProperty) {
-      suffix = StringUtils.lcFirst(suffix);
+      suffix = StringUtil.lcFirst(suffix);
 
       /*
       if(title.getShortTitle().equalsIgnoreCase("City")) {
@@ -61,7 +60,7 @@ class TBoxExtractor2(val prefixMapping: PrefixMapping, val baseUri: String, val 
       */
     }
     else {
-      logger.error("Unexpected title: " + title);
+      //logger.error("Unexpected title: " + title);
       return null;
     }
 
@@ -76,7 +75,7 @@ class TBoxExtractor2(val prefixMapping: PrefixMapping, val baseUri: String, val 
   }
 
   def handle(source: Source): Unit = {
-    handle(source.map(WikiParser()))
+    handle(source.map(WikiParser.getInstance()))
   }
 
   def handle(pageNodeSource: Traversable[PageNode]): Unit = {

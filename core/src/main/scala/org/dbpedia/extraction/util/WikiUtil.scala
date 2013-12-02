@@ -2,6 +2,7 @@ package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.util.text.uri.UriDecoder
+import java.util.Arrays
 
 /**
  * Contains several utility functions related to WikiText.
@@ -29,13 +30,19 @@ object WikiUtil
       string.replaceChars("_\u00A0\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "  ").replaceAll(" +", " ").trim
     }
     
-    private val iriReplacements = StringUtils.replacements('%', "\"#%<>?[\\]^`{|}")
+    /**
+     * Replacement string array for StringUtils.escape
+     */
+    def iriReplacements: Array[String] = StringUtils.replacements('%', "\"#%<>?[\\]^`{|}")
+    
+    // store our own private copy of the mutable array
+    private val replacements = iriReplacements
     
     /**
      * Replaces multiple spaces (U+0020) by one, removes spaces from start and end, 
      * replaces spaces by underscores, and percent-encodes the following characters:
      * 
-     * "#%<>?[\\]^`{|}
+     * "#%<>?[\]^`{|}
      *
      * The result is usable in most parts of a IRI. The ampersand '&' is not escaped though.
      * 
@@ -63,9 +70,7 @@ object WikiUtil
       // trim underscores from end 
       encoded = encoded.replaceAll("_$", "");
 
-      val sb = StringUtils.escape(null, encoded, iriReplacements)
-      
-      if (sb == null) encoded else sb.toString
+      StringUtils.escape(encoded, replacements)
     }
     
         

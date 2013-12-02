@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
-import java.util.logging.{Logger, Level}
+import java.util.logging.{Logger, Level, LogRecord}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
@@ -77,7 +77,7 @@ object MappingsLoader
             }
             catch
             {
-                case ex => logger.log(Level.WARNING, "Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage, page.title.encodedWithNamespace)
+                case ex : Throwable => log(Level.WARNING, "Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage, Array(page.title.encodedWithNamespace), ex)
             }
         }
 
@@ -114,7 +114,7 @@ object MappingsLoader
             }
             catch
             {
-                case ex : Exception => logger.log(Level.WARNING, "Couldn't load property mapping on page " + node.root.title.decodedWithNamespace + ". Details: " + ex.getMessage, node.root.title.encodedWithNamespace)
+                case ex : Exception => log(Level.WARNING, "Couldn't load property mapping on page " + node.root.title.decodedWithNamespace + ". Details: " + ex.getMessage, Array(node.root.title.encodedWithNamespace), ex)
             }
         }
 
@@ -130,6 +130,7 @@ object MappingsLoader
         {
             new SimplePropertyMapping( loadTemplateProperty(tnode, "templateProperty"),
                                        loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
+                                       loadTemplateProperty(tnode, "select", false),
                                        loadDatatype(tnode, "unit", false, context.ontology),
                                        loadLanguage(tnode, "language", false),
                                        loadDouble(tnode, "factor", false),
@@ -204,7 +205,7 @@ object MappingsLoader
     {
         val conditionMappings =
             for( casesProperty <- tnode.property("cases").toList;
-                 conditionNode @ TemplateNode(_,_,_) <- casesProperty.children ) 
+                 conditionNode @ TemplateNode(_,_,_,_) <- casesProperty.children )
             yield loadConditionMapping(conditionNode, context)
         
         new ConditionalMapping(conditionMappings, loadPropertyMappings(tnode, "defaultMappings", context))
@@ -288,5 +289,22 @@ object MappingsLoader
         {
             case e : NumberFormatException => throw new IllegalArgumentException("Invalid value for " + propertyName + ". Must be double.")
         }
+    }
+    
+    /**
+     * java.util.logging is so stupid. It doesn't even have methods that allow passing params AND
+     * exceptions. We have to write our own method. Copy & paste from several Logger.log() methods
+     * PLUS the private Logger.doLog() method that sets the logger name. To really emulate the
+     * behavior of Logger.log(), we would also have to copy the handling of the resource bundle
+     * from  doLog()... luckily, we don't care about internationalization.
+     */
+    private def log(level: Level, msg: String, params: Array[Object], thrown: Throwable): Unit =
+    {
+      if (! logger.isLoggable(level)) return
+      val lr = new LogRecord(level, msg)
+      lr.setLoggerName(logger.getName())
+      lr.setParameters(params)
+      lr.setThrown(thrown)
+      logger.log(lr)
     }
 }

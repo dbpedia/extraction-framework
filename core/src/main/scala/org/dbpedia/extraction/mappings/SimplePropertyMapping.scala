@@ -11,8 +11,9 @@ import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty,OntologyClass,O
 import scala.collection.mutable.ArrayBuffer
 
 class SimplePropertyMapping (
-  val templateProperty : String, // IntermediaNodeMapping and CreateMappingStats requires this to be public
+  val templateProperty : String, // IntermediateNodeMapping and CreateMappingStats requires this to be public
   ontologyProperty : OntologyProperty,
+  select : String,
   unit : Datatype,
   private var language : Language,
   factor : Double,
@@ -24,6 +25,14 @@ class SimplePropertyMapping (
 )
 extends PropertyMapping
 {
+    val selector: List[_] => List[_] =
+      select match {
+        case "first" => _.take(1)
+        case "last" => _.reverse.take(1)
+        case null => identity
+        case _ => throw new IllegalArgumentException("Only 'first' or 'last' are allowed in property 'select'")
+      }
+
     if(language == null) language = context.language
 
     ontologyProperty match
@@ -145,7 +154,9 @@ extends PropertyMapping
 
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.size > 0)
         {
-            for( parseResult <- parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional) )
+            val parseResults = parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional)
+
+            for( parseResult <- selector(parseResults) )
             {
                 val g = parseResult match
                 {
@@ -177,8 +188,8 @@ extends PropertyMapping
         
         // Write specific properties
         // FIXME: copy-and-paste in CalculateMapping
-        for(classes <- node.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
-            currentClass <- classes)
+        for(templateClass <- node.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
+            currentClass <- templateClass.relatedClasses)
         {
             for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
             {

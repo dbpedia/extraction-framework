@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.live.helper;
 
+import org.dbpedia.extraction.destinations.Quad;
+
 import java.util.ArrayList;
 
 /**
@@ -30,6 +32,19 @@ public class ExtractorSpecification {
 
     public ExtractorSpecification(String ID, ExtractorStatus extractorStatus){
         this(ID, extractorStatus, null, null);
+    }
+
+    public boolean accept(Quad quad){
+        if (status == ExtractorStatus.PURGE)
+            return false;
+        if (status == ExtractorStatus.KEEP)
+            return true;
+        if (generatedTriplePatterns != null)
+            for (MatchPattern rule: generatedTriplePatterns){
+                if (!rule.accept(quad))
+                    return false;
+            }
+        return true;
     }
 
 

@@ -46,7 +46,7 @@ private class NamespaceBuilder {
   def create(code: Int, name: String, dbpedia: Boolean) : Namespace = {
     val namespace = new Namespace(code, name, dbpedia)
     val previous = values.put(code, namespace)
-    require(previous.isEmpty, "duplicate namespace: ["+previous+"] and ["+namespace+"]")
+    require(previous.isEmpty, "duplicate namespace: ["+previous.get+"] and ["+namespace+"]")
     if (dbpedia) dbpedias(name.toLowerCase(Language.Mappings.locale)) = namespace
     namespace
   }
@@ -58,7 +58,9 @@ private class NamespaceBuilder {
   
   // The following are used quite differently on different wikipedias, so we use generic names.
   // Most languages use 100-113, but hu uses 90-99.
-  for (code <- (90 to (112, step = 2))) ns(code, "Namespace "+code, false)
+  // en added 446,447,710,711 in late 2012. Let's go up to 999 to prepare for future additions.
+  // wikidata added 120-123, 1198,1199 in early 2013. Let's go up to 1999 to prepare for future additions.
+  for (code <- (90 to 148 by 2) ++ (400 to 1998 by 2)) ns(code, "Namespace "+code, false)
     
   // Namespaces used on http://mappings.dbpedia.org, sorted by number. 
   // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
@@ -68,8 +70,9 @@ private class NamespaceBuilder {
   
   val map = Map(
     "en"->204,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,"ru"->222,
-    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"ja"->232,"hu"->238,"ko"->242,"tr"->246,"ar"->250,
-    "bg"->264,"sl"->268,"eu"->272,"hr"->284,"el"->304,"ga"->396
+    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"ja"->232,"zh"->236,"hu"->238,"ko"->242,"tr"->246,
+    "ar"->250,"id"->254,"sr"->256,"sk"->262,"bg"->264,"sl"->268,"eu"->272,"eo"->274,"et"->282,
+    "hr"->284,"el"->304,"ur"->378,"ga"->396
   )
   
   for ((lang,code) <- map) mappings(Language(lang)) = ns(code, "Mapping "+lang, true)
@@ -117,6 +120,8 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
   
   def get(lang: Language, name: String): Option[Namespace] = {
     dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
+      // TODO: name.toLowerCase(lang.locale) doesn't quite work. On the other hand, MediaWiki
+      // upper / lower case namespace names don't make sense either. Example: http://tr.wikipedia.org/?oldid=13637892
       case None => Namespaces.codes(lang).get(name.toLowerCase(lang.locale)) match {
         case None => None
         case Some(code) => values.get(code)

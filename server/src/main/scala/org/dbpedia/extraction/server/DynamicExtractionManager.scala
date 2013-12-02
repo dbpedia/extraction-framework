@@ -39,11 +39,11 @@ extends ExtractionManager(languages, paths)
 
     def extractor(language : Language) = synchronized { _extractors(language) }
 
-    def ontology = synchronized { _ontology }
+    def ontology() = synchronized { _ontology }
 
     // TODO: remove this method, refactor base class. Clients should get the ontology pages directly 
     // from the mappings wiki, not from here. We don't want to keep all ontology pages in memory.
-    def ontologyPages = synchronized { _ontologyPages }
+    def ontologyPages() = synchronized { _ontologyPages }
 
     // TODO: remove this method, refactor base class. Clients should get the mapping pages directly 
     // from the mappings wiki, not from here. We don't want to keep all mapping pages in memory.
@@ -59,7 +59,7 @@ extends ExtractionManager(languages, paths)
       println(name+": "+(System.currentTimeMillis - millis)+" millis")
     }
     
-    def updateAll = synchronized {
+    def updateAll() = synchronized {
         for ((language, mappings) <- _mappings) update(language, mappings)
     }
         

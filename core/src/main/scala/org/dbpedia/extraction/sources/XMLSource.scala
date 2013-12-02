@@ -5,6 +5,8 @@ import java.io.{File,FileInputStream,InputStreamReader}
 import scala.xml.Elem
 import org.dbpedia.extraction.util.Language
 import java.io.Reader
+import java.util.concurrent.{ExecutorService, Executors, Callable}
+import scala.collection.JavaConversions._
 
 /**
  *  Loads wiki pages from an XML stream using the MediaWiki export format.
@@ -13,6 +15,7 @@ import java.io.Reader
  *  http://www.mediawiki.org/xml/export-0.4
  *  http://www.mediawiki.org/xml/export-0.5
  *  http://www.mediawiki.org/xml/export-0.6
+ *  http://www.mediawiki.org/xml/export-0.8
  *  etc.
  */
 object XMLSource
@@ -28,6 +31,10 @@ object XMLSource
       fromReader(() => new InputStreamReader(new FileInputStream(file), "UTF-8"), language, filter)
     }
 
+    def fromMultipleFiles(files: List[File], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+      fromReaders(files.map { f => () => new InputStreamReader(new FileInputStream(f), "UTF-8") }.toList, language, filter)
+    }
+
     /**
      * Creates an XML Source from a reader.
      *
@@ -37,6 +44,11 @@ object XMLSource
      */
     def fromReader(source: () => Reader, language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
       new XMLReaderSource(source, language, filter)
+    }
+
+    def fromReaders(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+      if (sources.size == 1) fromReader(sources.head, language, filter) // no need to create an ExecutorService
+      else new MultipleXMLReaderSource(sources, language, filter)
     }
 
     /**
@@ -52,6 +64,41 @@ object XMLSource
        * @param xml The xml which contains the pages
      */
     def fromOAIXML(xml : Elem) : Source  = new OAIXMLSource(xml)
+}
+
+/**
+ * XML source which reads from a file
+ */
+private class MultipleXMLReaderSource(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean) extends Source
+{
+  var executorService : ExecutorService = null
+
+  override def foreach[U](proc : WikiPage => U) : Unit = {
+
+    if (executorService == null) executorService = Executors.newFixedThreadPool(Runtime.getRuntime.availableProcessors())
+
+    try {
+
+      def tasks = sources.map { source =>
+        new Callable[Unit]() {
+          def call() {
+            val reader = source()
+            try new WikipediaDumpParser(reader, language, filter.asInstanceOf[WikiTitle => java.lang.Boolean], proc).run()
+            finally reader.close()
+          }
+        }
+      }
+
+      // Wait for the tasks to finish
+      executorService.invokeAll(tasks)
+
+    } finally {
+      executorService.shutdown()
+      executorService = null
+    }
+  }
+
+  override def hasDefiniteSize = true
 }
 
 /**
@@ -88,7 +135,8 @@ private class XMLSource(xml : Elem, language: Language) extends Source
                              contributorID = _contributorID,
                              contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip" ).text
                                                else (rev \ "contributor" \ "username" ).text,
-                             source    = (rev \ "text").text ) )
+                             source    = (rev \ "text").text,
+                             format    = (rev \ "format").text) )
         }
     }
 
@@ -102,7 +150,9 @@ private class OAIXMLSource(xml : Elem) extends Source
 {
     override def foreach[U](f : WikiPage => U) : Unit =
     {
-        val lang = (xml \\ "mediawiki" \ "@{http://www.w3.org/XML/1998/namespace}lang").head.text
+
+        val lang = if ( (xml \\ "mediawiki" \ "@{http://www.w3.org/XML/1998/namespace}lang").text == null) "en"
+                   else (xml \\ "mediawiki" \ "@{http://www.w3.org/XML/1998/namespace}lang").text
         val source = new XMLSource( (xml \\ "mediawiki").head.asInstanceOf[Elem], Language.apply(lang))
         source.foreach(wikiPage => {
           f(wikiPage)

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.dbpedia</groupId>
         <artifactId>extraction</artifactId>
-        <version>3.8</version>
+        <version>4.0-SNAPSHOT</version>
     </parent>
 
     <groupId>org.dbpedia.extraction</groupId>
@@ -39,6 +40,7 @@
                             <jvmArgs>
                                 <jvmArg>-Xms512m</jvmArg>
                                 <jvmArg>-Xmx4096m</jvmArg><!-- 4G is ok with CMS or G1, other GCs need >= 4.5G -->
+                                <jvmArg>-XX:-OmitStackTraceInFastThrow</jvmArg><!-- always show full exception to make sure that validation messages are useful -->
                                 <jvmArg>-XX:+PrintGC</jvmArg>
                                 <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
@@ -53,6 +55,7 @@
                             <args>
                                 <arg>/home/release/wikipedia</arg><!-- base dir -->
                                 <arg>src/main/statistics</arg><!-- statistics files dir -->
+                                <arg>.gz</arg><!-- file suffix: '.gz', '.bz2' or '' -->
                                 <arg>false</arg><!-- pretty printing? ugly in log files. -->
                                 <!-- all additional args are languages, comma or whitespace separated -->
                                 <!-- if none are given, all languages with a mapping namespace are used -->
@@ -71,6 +74,11 @@
         <dependency>
             <groupId>org.dbpedia.extraction</groupId>
             <artifactId>core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-actors</artifactId>
         </dependency>
 
         <dependency>

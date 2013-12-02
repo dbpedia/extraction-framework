@@ -25,6 +25,7 @@ class Ontology
             <a href="validate/">Validate</a><br/>
             <a href="classes/">Classes</a><br/>
             <a href="labels/missing/">Missing Labels</a><br/>
+            <a href="wikidata/missing/">Missing Wikidata Properties</a><br/>
             <a href="dbpedia.owl">Ontology (OWL)</a><br/>
           </body>
         </html>
