@@ -3,6 +3,7 @@ package org.dbpedia.extraction.dataparser
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import scala.language.reflectiveCalls
 
 /**
  * Parses links to other instances.

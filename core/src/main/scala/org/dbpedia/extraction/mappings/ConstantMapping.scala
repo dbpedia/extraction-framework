@@ -5,6 +5,7 @@ import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyObjectProperty}
 import org.dbpedia.extraction.util.{WikiUtil, Language}
+import scala.language.reflectiveCalls
 
 /**
  * Used to map information that is only contained in the infobox template name, for example

@@ -5,6 +5,7 @@ import org.dbpedia.extraction.wikiparser.Node
 import java.text.ParseException
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import scala.language.reflectiveCalls
 
 /**
  * Parses double-precision floating-point numbers.

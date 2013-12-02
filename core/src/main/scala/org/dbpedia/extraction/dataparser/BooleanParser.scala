@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser.Node
 
-import scala.util.matching.Regex
+import scala.language.postfixOps
 
 /**
  * Returns true for strings that contain "true" or "yes" (only as isolated terms),

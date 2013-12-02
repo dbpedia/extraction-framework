@@ -9,6 +9,7 @@ import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.

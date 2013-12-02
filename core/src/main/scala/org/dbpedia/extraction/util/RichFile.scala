@@ -3,6 +3,7 @@ package org.dbpedia.extraction.util
 import java.io.{IOException,File,FilenameFilter,InputStream,FileInputStream,OutputStream,FileOutputStream}
 import java.util.regex.Pattern
 import RichFile._
+import scala.language.implicitConversions
 
 object RichFile {
 
