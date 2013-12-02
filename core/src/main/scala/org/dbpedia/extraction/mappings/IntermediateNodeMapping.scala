@@ -7,6 +7,7 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyPropert
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.{Buffer,ArrayBuffer}
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import scala.language.reflectiveCalls
 
 class IntermediateNodeMapping (
   nodeClass : OntologyClass,

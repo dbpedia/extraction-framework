@@ -7,6 +7,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts information about which concept is a category and how categories are related using the SKOS Vocabulary.

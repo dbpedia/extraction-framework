@@ -6,6 +6,7 @@ import org.dbpedia.extraction.util.Language
 import java.text.ParseException
 import java.util.logging.{Logger, Level}
 import util.matching.Regex
+import scala.language.reflectiveCalls
 
 class DurationParser( context : { def language : Language } )
 {
