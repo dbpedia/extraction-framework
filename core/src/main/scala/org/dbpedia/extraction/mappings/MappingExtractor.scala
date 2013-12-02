@@ -4,6 +4,7 @@ import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
 
 /**
  *  Extracts structured data based on hand-generated mappings of Wikipedia infoboxes to the DBpedia ontology.

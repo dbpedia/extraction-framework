@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import scala.xml.XML
 import scala.io.Source
+import scala.language.reflectiveCalls
 import java.io.{InputStream, OutputStreamWriter}
 import java.net.{URLEncoder, URL}
 import java.util.logging.{Logger, Level}

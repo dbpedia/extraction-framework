@@ -7,6 +7,7 @@ import org.dbpedia.extraction.util.Language
 import util.matching.Regex
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+import scala.language.reflectiveCalls
 
 /**
  * Extracts the grammatical gender of people using a heuristic.

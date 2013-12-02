@@ -5,6 +5,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.net.{URLEncoder, URI}
+import scala.language.reflectiveCalls
 
 /**
  * Created by IntelliJ IDEA.

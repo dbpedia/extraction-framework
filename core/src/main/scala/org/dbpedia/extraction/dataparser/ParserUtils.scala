@@ -5,6 +5,7 @@ import java.text.{NumberFormat,DecimalFormatSymbols}
 import org.dbpedia.extraction.util.Language
 import java.util.Locale
 import java.util.regex.Pattern
+import scala.language.reflectiveCalls
 
 /**
  * Utility functions used by the data parsers.

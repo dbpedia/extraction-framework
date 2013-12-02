@@ -5,6 +5,7 @@ import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
+import scala.language.reflectiveCalls
 
 /**
  * Extracts links from concepts to categories using the SKOS vocabulary.

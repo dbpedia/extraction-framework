@@ -6,6 +6,7 @@ import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 import org.dbpedia.extraction.mappings.Redirects
+import scala.language.reflectiveCalls
 
 /**
  * Parses a single geographical coordinate, ie. either a latitude or a longitude.

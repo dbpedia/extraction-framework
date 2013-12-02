@@ -6,6 +6,7 @@ import scala.util.matching.Regex
 import RichString._
 import java.util.regex.{Pattern,Matcher}
 import java.util.Arrays.{sort,binarySearch}
+import scala.language.implicitConversions
 
 /**
  * Defines additional methods on strings, which are missing in the standard library.
