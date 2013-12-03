@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.live.processor;
 
 import org.apache.log4j.Logger;
-import org.dbpedia.extraction.destination.LiveUpdateDestination;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.dbpedia.extraction.live.queue.LiveQueue;
@@ -36,9 +35,6 @@ public class PageProcessor extends Thread{
             start();
         }
     }
-            if(record.toString().contains("header status=\"deleted\"")){
-                LiveUpdateDestination.deleteResourceCompletely(pageID);
-            }
 
     public void stopProcessor() {
         keepRunning = false;
@@ -60,7 +56,6 @@ public class PageProcessor extends Thread{
             JSONCache.setErrorOnCache(item.getItemID(), -2);
         }
     }
-
 
 
     public void run(){
