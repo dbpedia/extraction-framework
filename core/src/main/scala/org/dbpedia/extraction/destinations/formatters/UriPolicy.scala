@@ -233,10 +233,10 @@ object UriPolicy {
   Methods that check URIs at run-time.
   */
 
-  def uri(activeFor: PolicyApplicable): Policy = {
+  def uri(applicableTo: PolicyApplicable): Policy = {
 
     iri =>
-      if (activeFor(iri)) {
+      if (applicableTo(iri)) {
         new URI(iri.toASCIIString)
       }
       else {
@@ -244,10 +244,10 @@ object UriPolicy {
       }
   }
 
-  def generic(activeFor: PolicyApplicable): Policy = {
+  def generic(applicableTo: PolicyApplicable): Policy = {
 
     iri =>
-      if (activeFor(iri)) {
+      if (applicableTo(iri)) {
 
         val scheme = iri.getScheme
         val user = iri.getRawUserInfo
@@ -267,10 +267,10 @@ object UriPolicy {
   // max length (arbitrary choice)
   val MAX_LENGTH = 500
 
-  def rejectLong(activeFor: PolicyApplicable): Policy = {
+  def rejectLong(applicableTo: PolicyApplicable): Policy = {
 
     iri =>
-      if (activeFor(iri)) {
+      if (applicableTo(iri)) {
         val str = iri.toString
         if (str.length > MAX_LENGTH) throw new URISyntaxException(str, "length "+str.length+" exceeds maximum "+MAX_LENGTH)
       }
@@ -307,10 +307,10 @@ object UriPolicy {
    * http://foo/a:           http://foo/a:_           http://foo/a:         _
    * http://foo/a:b          http://foo/a:b           http://foo/a:         b
    */
-  def xmlSafe(activeFor: PolicyApplicable): Policy = {
+  def xmlSafe(applicableTo: PolicyApplicable): Policy = {
 
     iri =>
-      if (activeFor(iri)) {
+      if (applicableTo(iri)) {
 
         val scheme = iri.getScheme
         val user = iri.getRawUserInfo
