@@ -11,7 +11,7 @@ import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a page title. Or a link to a page.
- * 
+ *
  * FIXME: a link is different from a title and should be represented by a different class.
  *
  * @param decoded Canonical page name: URL-decoded, using normalized spaces (not underscores), first letter uppercase.
@@ -36,7 +36,7 @@ class WikiTitle (
 
     /** Wiki-encoded page name with namespace e.g. "Template_talk:Automobile_generation" */
     val encodedWithNamespace = withNamespace(true)
-    
+
     /** page IRI for this page title */
     val pageIri = language.baseUri+"/wiki/"+encodedWithNamespace
 
@@ -49,7 +49,7 @@ class WikiTitle (
       if (encode) ns = WikiUtil.wikiEncode(ns).capitalize(language.locale)
       (if (ns.isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
     }
-    
+
     /**
      * Returns useful info.
      */
@@ -76,29 +76,29 @@ class WikiTitle (
     /**
      * If somehow a different namespace is also given for this title, store it here. Otherwise,
      * this field is null.
-     * 
+     *
      * Why do we need this nonsense? http://gd.wikipedia.org/?curid=4184 and http://gd.wikipedia.org/?curid=4185&redirect=no
      * have the same title "Teamplaid:Gàidhlig", but they are in different namespaces: 4184 is in
      * the template namespace, 4185 is in the main namespace. It looks like MediaWiki can handle this
      * somehow, but when we try to import both pages from the XML dump file into the database,
      * MySQL rightly complains about the duplicate title. As a workaround, we simply reject pages
-     * for which the <ns> namespace doesn't fit the <title> namespace. 
+     * for which the <ns> namespace doesn't fit the <title> namespace.
      */
     var otherNamespace: Namespace = null
 }
-    
+
 object WikiTitle
 {
     /**
      * Parses a MediaWiki link or title.
-     * 
+     *
      * FIXME: parsing mediawiki links correctly cannot be done without a lot of configuration.
      * Therefore, this method must not be static. It must be part of an object that is instatiated
      * for each mediawiki instance.
-     * 
+     *
      * FIXME: rules for links are different from those for titles. We should have distinct methods
      * for these two use cases.
-     * 
+     *
      * @param link MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
      */
@@ -107,13 +107,13 @@ object WikiTitle
         val coder = new HtmlCoder(XmlCodes.NONE)
         coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
         var decoded = coder.code(title)
-        
-        // Note: Maybe the following line decodes too much, but it seems to be 
+
+        // Note: Maybe the following line decodes too much, but it seems to be
         // quite close to what MediaWiki does.
         decoded = UriDecoder.decode(decoded)
-        
+
         var fragment : String = null
-        
+
         // we can look for hash signs after we decode - that's what MediaWiki does
         val hash = decoded.indexOf('#')
         if (hash != -1) {
@@ -121,9 +121,9 @@ object WikiTitle
           fragment = WikiUtil.cleanSpace(decoded.substring(hash + 1))
           decoded = decoded.substring(0, hash)
         }
-        
+
         decoded = WikiUtil.cleanSpace(decoded)
-        
+
         // FIXME: use interwiki prefixes from WikiSettingsDownloader.scala, e.g. [[q:Foo]] links to wikiquotes
 
         var parts = decoded.split(":", -1)
@@ -143,10 +143,10 @@ object WikiTitle
         //Check if it contains a language
         if (parts.length > 1)
         {
-          // TODO Wikidata has a namespace "Wikidata"
-          // TODO temporary fix, this way interwiki links to wikidata will not work
+          //When we have the same namespace as the wikicode it is not a language
+          //This happens in wikidata, commons and wiktionary (for now)
           val p0 = parts(0).trim.toLowerCase(sourceLanguage.locale)
-          if (!p0.equals("wikidata"))
+          if (!p0.equals(sourceLanguage.wikiCode))
           {
             for (lang <- Language.get(p0))
             {
@@ -173,5 +173,5 @@ object WikiTitle
 
         new WikiTitle(decodedName, namespace, language, isInterLanguageLink, fragment)
     }
-    
+
 }
