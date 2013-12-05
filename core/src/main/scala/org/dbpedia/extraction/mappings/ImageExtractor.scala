@@ -216,7 +216,7 @@ private object ImageExtractor
         val startTime = System.nanoTime
 
         for(page <- source if page.title.namespace == Namespace.File;
-            ImageExtractorConfig.ImageLinkRegex <- List(page.title.encoded) )
+            ImageExtractorConfig.ImageLinkRegex() <- List(page.title.encoded) )
         {
             ImageExtractorConfig.NonFreeRegex(wikiCode).findFirstIn(page.source) match
             {
