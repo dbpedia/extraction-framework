@@ -2,6 +2,7 @@ package org.dbpedia.extraction.destinations
 
 /**
  * Defines the datasets which are extracted by DBpedia.
+ * TODO: use a Scala Enumeration
  * TODO: add references to the extractor classes.
  */
 object DBpediaDatasets
@@ -63,5 +64,20 @@ object DBpediaDatasets
     val PageLinks = new Dataset("page_links")
     val DisambiguationLinks  = new Dataset("disambiguations")
     val Homepages = new Dataset("homepages")
+    
+    
+
+    /**
+     * Wikidata outputDatasets
+     */
+    val Wikidata = new Dataset("wikidata")
+    val WikidataLL = new Dataset("wikidata-ll")
+    val WikidataLabels = new Dataset("wikidata-labels")
+    val WikidataSameAs = new Dataset("wikidata-sameas")
+    val WikidataNameSpaceSameAs = new Dataset("wikidata-Namespace-sameas")
+    val WikidataFacts = new Dataset("wikidata")
+    val WikidataMappedFacts = new Dataset("wikidata-mapped")
+
+
 
 }
