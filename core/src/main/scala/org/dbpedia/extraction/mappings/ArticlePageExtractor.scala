@@ -10,7 +10,7 @@ import scala.language.reflectiveCalls
 /**
  * Extracts links to corresponding Articles in Wikipedia.
  */
-class WikiPageExtractor(
+class ArticlePageExtractor(
   context : {
     def ontology : Ontology
     def language : Language

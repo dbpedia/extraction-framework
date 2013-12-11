@@ -45,7 +45,7 @@ object CompositeExtractor
 
           case _ :PageNodeExtractor =>  pageNodeExtractors  = pageNodeExtractors :+ extractor.asInstanceOf[PageNodeExtractor]           //select all extractors which take PageNode to wrap them in WikiParseExtractor
           case _ :JsonNodeExtractor =>  jsonNodeExtractors  = jsonNodeExtractors :+ extractor.asInstanceOf[JsonNodeExtractor]
-          case _ => wikiPageExtractors  = wikiPageExtractors :+ extractor.asInstanceOf[Extractor[WikiPage]]           //select all extractors which take Wikipage to wrap them in a CompositeExtractor
+          case _ :WikiPageExtractor =>  wikiPageExtractors  = wikiPageExtractors :+ extractor.asInstanceOf[Extractor[WikiPage]]           //select all extractors which take Wikipage to wrap them in a CompositeExtractor
           case _ =>
         }
       }
