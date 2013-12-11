@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
-import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.mappings.PageNodeExtractor
 import scala.collection.mutable.HashMap
 import java.util.Properties
 import java.io.File
@@ -57,14 +57,14 @@ private class Config(config: Properties)
    *
    * @return A Map which contains the extractor classes for each language
    */
-  private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor]]] =
+  private def loadExtractorClasses() : Map[Language, List[Class[_ <: PageNodeExtractor]]] =
   {
     val languages = loadLanguages()
 
     val stdExtractors = getStrings(config, "extractors", ',', false).toList.map(loadExtractorClass)
 
     //Create extractor map
-    val classes = new HashMap[Language, List[Class[_ <: Extractor]]]()
+    val classes = new HashMap[Language, List[Class[_ <: PageNodeExtractor]]]()
     
     /*
     TODO: maybe we should check in the first loop if property "extractors."+language.wikiCode
@@ -133,10 +133,10 @@ private class Config(config: Properties)
     SortedSet[Language](languages.toSeq: _*)
   }
 
-  private def loadExtractorClass(name: String): Class[_ <: Extractor] = {
-    val className = if (name.startsWith(".")) classOf[Extractor].getPackage.getName+name else name
+  private def loadExtractorClass(name: String): Class[_ <: PageNodeExtractor] = {
+    val className = if (name.startsWith(".")) classOf[PageNodeExtractor].getPackage.getName+name else name
     // TODO: class loader of Extractor.class is probably wrong for some users.
-    classOf[Extractor].getClassLoader.loadClass(className).asSubclass(classOf[Extractor])
+    classOf[PageNodeExtractor].getClassLoader.loadClass(className).asSubclass(classOf[PageNodeExtractor])
   }
   
   private def error(message: String, cause: Throwable = null): IllegalArgumentException = {

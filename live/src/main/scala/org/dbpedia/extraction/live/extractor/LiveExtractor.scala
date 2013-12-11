@@ -28,7 +28,7 @@ object LiveExtractor
            mappingsSource : Source,
            articlesSource : Source,
            commonsSource : Source,
-           extractors : List[Class[Extractor]],
+           extractors : List[Class[PageNodeExtractor]],
            language : Language) : List[RootExtractor] =
   {
     val context = extractionContext(language, ontologySource, mappingsSource, articlesSource, commonsSource)

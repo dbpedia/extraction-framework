@@ -18,7 +18,7 @@ class TemplateMapping(
     def language : Language 
   }  
 ) 
-extends Mapping[TemplateNode]
+extends Extractor[TemplateNode]
 {
     override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
 

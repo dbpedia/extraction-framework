@@ -7,7 +7,7 @@ import org.dbpedia.extraction.util.Language
 import scala.language.reflectiveCalls
 
 class DummyExtractor(extractionContext : { def language : Language })
-  extends Extractor
+  extends PageNodeExtractor
 {
   private val dataset = new Dataset("base")
   
