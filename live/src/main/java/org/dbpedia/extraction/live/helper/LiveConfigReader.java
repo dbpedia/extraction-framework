@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.Constants;
 import org.dbpedia.extraction.live.core.Util;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
-import org.dbpedia.extraction.mappings.Extractor;
+import org.dbpedia.extraction.mappings.PageNodeExtractor;
 import org.dbpedia.extraction.mappings.SkosCategoriesExtractor;
 import org.dbpedia.extraction.util.Language;
 import org.w3c.dom.Document;
@@ -61,7 +61,7 @@ public class LiveConfigReader {
 
     public static Map<Language,Map<String, ExtractorSpecification>>  extractors = null;
 
-    public static Map<Language,List<Class<Extractor>>> extractorClasses = null;
+    public static Map<Language,List<Class<PageNodeExtractor>>> extractorClasses = null;
     public static int updateOntologyAndMappingsPeriod = 5;
     public static boolean multihreadingMode = false;
 
@@ -113,7 +113,7 @@ public class LiveConfigReader {
         NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
         //iterate and build the required list of extractors
         extractors = new HashMap<Language,Map<String,ExtractorSpecification>>();
-        extractorClasses = new HashMap<Language,List<Class<Extractor>>>();
+        extractorClasses = new HashMap<Language,List<Class<PageNodeExtractor>>>();
 
 
         for(int i=0; i<languageNodes.getLength(); i++){
@@ -134,7 +134,7 @@ public class LiveConfigReader {
         try{
             NodeList extractorNodes = elemLanguageExtractors.getElementsByTagName(EXTRACTOR_TAGNAME);
             Map<String, ExtractorSpecification> langExtractors = new HashMap<String, ExtractorSpecification>(10);
-            ArrayList<Class<Extractor>> langExtractorClasses = new ArrayList<Class<Extractor>>(10);
+            ArrayList<Class<PageNodeExtractor>> langExtractorClasses = new ArrayList<Class<PageNodeExtractor>>(10);
 
             //iterate and build the required list of extractors
             for(int i=0; i<extractorNodes.getLength(); i++){
@@ -143,7 +143,7 @@ public class LiveConfigReader {
                 String extractorID = elemExtractor.getAttribute(NAME_ATTRIBUTENAME);
                 ExtractorStatus status = ExtractorStatus.valueOf(elemExtractor.getAttribute(EXTRACTOR_STATUS_ATTRIBUTENAME));
 
-                langExtractorClasses.add((Class<Extractor>)(ClassLoader.getSystemClassLoader().loadClass(extractorID)));
+                langExtractorClasses.add((Class<PageNodeExtractor>)(ClassLoader.getSystemClassLoader().loadClass(extractorID)));
 
                 //Those types of extractors need special type of handling as we must call the function _addGenerics for
                 //them
@@ -272,9 +272,9 @@ public class LiveConfigReader {
      * @param   requiredStatus  The status of the extractors
      * @return  A list containing the extractors of the passed status 
      */
-    public static List<Class<Extractor>> getExtractors(Language lang, ExtractorStatus requiredStatus){
+    public static List<Class<PageNodeExtractor>> getExtractors(Language lang, ExtractorStatus requiredStatus){
 
-        List<Class<Extractor>> extractorsList = extractorClasses.get(lang);
+        List<Class<PageNodeExtractor>> extractorsList = extractorClasses.get(lang);
         Map<String, ExtractorSpecification> specs = extractors.get(lang);
         for(Object value : specs.values()){
             ExtractorSpecification spec = (ExtractorSpecification) value;

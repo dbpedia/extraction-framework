@@ -6,7 +6,7 @@ import org.dbpedia.extraction.wikiparser._
 /**
  * TODO: get rid of this class... get initial URI from page...?
  */
-class RootExtractor(val extractor: Mapping[PageNode])
+class RootExtractor(val extractor: Extractor[PageNode])
 {
     /**
      * Processes a wiki page and returns the extracted data.
