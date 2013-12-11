@@ -166,7 +166,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
     protected def loadExtractors(lang : Language): RootExtractor =
     {
       new RootExtractor(
-        new CompositeExtractor(
+        new CompositePageNodeExtractor(
           new LabelExtractor(new {val ontology = self.ontology; val language = lang}), 
           new MappingExtractor(new {val mappings = self.mappings(lang); val redirects = new Redirects(Map())})
         )

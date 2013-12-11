@@ -103,13 +103,13 @@ class MappingStatsHolder(val mappings: Mappings, val mappedStatistics: List[Mapp
     val mappedPropertyUseRatio = mappedPropertyUseCount.toDouble / propertyUseCount.toDouble
 }
 
-class PropertyCollector(mapping: Mapping[TemplateNode]) {
+class PropertyCollector(mapping: Extractor[TemplateNode]) {
   
   val properties = new mutable.HashSet[String]
   
   classMapping(mapping) // go get'em!
   
-  private def classMapping(mapping: Mapping[TemplateNode]) : Unit = mapping match {
+  private def classMapping(mapping: Extractor[TemplateNode]) : Unit = mapping match {
     case tm: TemplateMapping => tm.mappings.foreach(propertyMapping)
     case cm: ConditionalMapping =>
       cm.cases.foreach(conditionMapping)

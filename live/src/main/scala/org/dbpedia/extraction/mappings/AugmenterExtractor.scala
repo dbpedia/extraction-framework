@@ -71,9 +71,9 @@ object AugmenterExtractorUtils
  *
  * The newly generated triples are part of the specified dataset
  */
-class AugmenterExtractor(val decoratee : Extractor, val dataset : Dataset,
+class AugmenterExtractor(val decoratee : PageNodeExtractor, val dataset : Dataset,
         val labelToURIs : MultiMap[String, String], val relationPredicate : String)
-  extends Extractor
+  extends PageNodeExtractor
 {
   override val datasets = scala.collection.immutable.Set(dataset)
   

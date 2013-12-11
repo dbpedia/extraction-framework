@@ -18,7 +18,7 @@ class IriSameAsUriExtractor (
     def language : Language
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   private val language = context.language
 

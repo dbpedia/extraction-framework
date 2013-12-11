@@ -8,7 +8,7 @@ class ConditionalMapping(
   val cases : List[ConditionMapping], // must be public val for statistics
   val defaultMappings : List[PropertyMapping] // must be public val for statistics
 )
-extends Mapping[TemplateNode]
+extends Extractor[TemplateNode]
 {
   override val datasets = cases.flatMap(_.datasets).toSet ++ defaultMappings.flatMap(_.datasets).toSet
 

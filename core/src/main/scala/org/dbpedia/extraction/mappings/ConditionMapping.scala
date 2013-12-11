@@ -8,9 +8,9 @@ class ConditionMapping(
   templateProperty : String,
   operator : String,
   value : String,
-  val mapping : Mapping[TemplateNode] // must be public val for statistics
+  val mapping : Extractor[TemplateNode] // must be public val for statistics
 ) 
-extends Mapping[TemplateNode]
+extends Extractor[TemplateNode]
 {
   /** Check if templateProperty is defined */
   require(operator == "otherwise" || templateProperty != null, "templateProperty must be defined")

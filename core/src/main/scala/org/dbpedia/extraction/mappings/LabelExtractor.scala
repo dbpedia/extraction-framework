@@ -15,7 +15,7 @@ class LabelExtractor(
     def language : Language 
   } 
 ) 
-extends Extractor
+extends PageNodeExtractor
 {
   val labelProperty = context.ontology.properties("rdfs:label")
   

@@ -5,6 +5,6 @@ import org.dbpedia.extraction.wikiparser.{TemplateNode,TableNode}
 /**
  */
 class Mappings ( 
-  val templateMappings : Map[String, Mapping[TemplateNode]],
-  val tableMappings : List[Mapping[TableNode]] 
+  val templateMappings : Map[String, Extractor[TemplateNode]],
+  val tableMappings : List[Extractor[TableNode]]
 )

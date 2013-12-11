@@ -16,7 +16,7 @@ class RevisionUriExtractor (
     def language: Language
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   private val derivedFromProperty = "http://www.w3.org/ns/prov#wasDerivedFrom"
 
