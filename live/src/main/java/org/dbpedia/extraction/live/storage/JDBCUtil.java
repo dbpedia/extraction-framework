@@ -49,7 +49,7 @@ public class JDBCUtil {
             //When Virtuoso commits a CHECKPOINT we fail to insert anything
             //and get a Transaction deadlock exception
             //here we lock everything and try X attempts every Y seconds
-            if (e.getMessage().contains("Transaction deadlock")) {
+            if (e.toString().contains("Transaction deadlock")) {
                 synchronized (JDBCUtil.class) {
                     //The checkpoint lasts around 2-3 minutes
                     int attempts = 10;
@@ -89,7 +89,7 @@ public class JDBCUtil {
             logger.warn(e.getMessage());
             //TODO Hack until Virtuoso fixes its datetime bug
             //see http://sourceforge.net/mailarchive/forum.php?thread_name=CA%2Bu4%2Ba0RacpXoABoHL9wZJmxoTvAazwtbn3EKtay5a3%3DS7O96g%40mail.gmail.com&forum_name=virtuoso-users
-            String message = e.getMessage();
+            String message = e.toString();
             if (!message.contains("datetime"))
                 throw new Exception(e.getMessage());
         } finally {
