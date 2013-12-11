@@ -21,6 +21,6 @@ object CompositeJsonNodeExtractor
   def load(classes: Seq[Class[_ <: JsonNodeExtractor]], context: AnyRef): JsonNodeExtractor =
   {
     val extractors = classes.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
-    new CompositePageNodeExtractor(extractors: _*)
+    new CompositeJsonNodeExtractor(extractors: _*)
   }
 }

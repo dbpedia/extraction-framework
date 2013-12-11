@@ -4,6 +4,7 @@ import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.sources.{WikiPage}
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
+import org.dbpedia.extraction.wikiparser.JsonNode
 
 /**
  * User: hadyelsahar
@@ -18,7 +19,7 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
  * @param mappings  Sequence of next level Extractors
  *
  * */
- class JsonParseExtractor(mappings: Seq[JsonNodeExtractor])extends Extractor[WikiPage]{
+ class JsonParseExtractor(mappings: Extractor[JsonNode]*)extends Extractor[WikiPage]{
 
   override val datasets: Set[Dataset] = mappings.flatMap(_.datasets).toSet
 

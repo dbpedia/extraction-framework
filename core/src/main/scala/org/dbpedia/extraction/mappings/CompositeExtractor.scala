@@ -61,9 +61,7 @@ object CompositeExtractor
       val jsonParseExtractor = new JsonParseExtractor(compositeJsonNodeExtractors)
 
       //collect ParseExtractors and CompositeExtractor
-      val allExtractors = Seq[Extractor[WikiPage]](wikiParseExtractor,jsonParseExtractor) ++ wikipageCompositeExtractor
-
-      new CompositeExtractor[WikiPage](allExtractors :_*)
+      new CompositeExtractor[WikiPage](wikiParseExtractor,jsonParseExtractor ,wikipageCompositeExtractor)
     }
 
     /**
