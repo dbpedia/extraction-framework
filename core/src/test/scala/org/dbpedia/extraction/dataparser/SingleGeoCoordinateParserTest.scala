@@ -45,6 +45,10 @@ class SingleGeoCoordinateParserTest extends FlatSpec with ShouldMatchers
         val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
-        singleGeoCoordinateParser.parse(wikiParser(page)).map(_.toDouble)
+      wikiParser(page) match {
+        case Some(n) => singleGeoCoordinateParser.parse(n).map(_.toDouble)
+        case None => None
+      }
+
     }
 }

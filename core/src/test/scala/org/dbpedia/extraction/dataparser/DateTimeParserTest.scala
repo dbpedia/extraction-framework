@@ -595,6 +595,11 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
         val dateParser = new DateTimeParser(context, new Datatype(datatype), false)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
-        dateParser.parse(wikiParser(page)).map(_.toString)
+      wikiParser(page) match {
+        case Some(n) => dateParser.parse(n).map(_.toString)
+        case None => None
+      }
+
+
     }
 }

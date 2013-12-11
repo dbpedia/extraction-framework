@@ -27,7 +27,8 @@ class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Na
     var success = false
     try {
       if (namespaces.contains(page.title.namespace)) {
-        val graph = extractor(parser(page))
+        //val graph = extractor(parser(page))
+        val graph = extractor(page)
         destination.write(graph)
       }
       success = true

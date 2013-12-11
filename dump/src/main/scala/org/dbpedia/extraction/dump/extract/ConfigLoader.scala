@@ -45,7 +45,7 @@ class ConfigLoader(config: Config)
     /**
      * Creates ab extraction job for a specific language.
      */
-    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: PageNodeExtractor]], parser : WikiParser) : ExtractionJob =
+    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: Extractor[_]]], parser : WikiParser) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
@@ -67,13 +67,13 @@ class ConfigLoader(config: Config)
                 if (config.mappingsDir != null && config.mappingsDir.isDirectory)
                 {
                     val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-                    XMLSource.fromFile(file, Language.Mappings).map(parser)
+                    XMLSource.fromFile(file, Language.Mappings).map(parser).flatten
                 }
                 else
                 {
                     val namespaces = Set(namespace)
                     val url = new URL(Language.Mappings.apiUri)
-                    WikiSource.fromNamespaces(namespaces,url,Language.Mappings).map(parser)
+                    WikiSource.fromNamespaces(namespaces,url,Language.Mappings).map(parser).flatten
                 }
             }
             
@@ -120,7 +120,8 @@ class ConfigLoader(config: Config)
         }
 
         //Extractors
-        val extractor = CompositePageNodeExtractor.load(extractorClasses, context)
+        //val extractor = CompositeExtractor.load[PageNode](extractorClasses, context)
+        val extractor = CompositeExtractor.loadToParsers(extractorClasses, context)
         val datasets = extractor.datasets
         
         val formatDestinations = new ArrayBuffer[Destination]()

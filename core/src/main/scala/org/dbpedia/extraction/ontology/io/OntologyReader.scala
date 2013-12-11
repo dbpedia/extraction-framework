@@ -6,7 +6,7 @@ import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.Source
+import org.dbpedia.extraction.sources.{WikiPage, Source}
 
 /**
  * Loads an ontology from configuration files using the DBpedia mapping language.
@@ -19,13 +19,13 @@ class OntologyReader
     {
         logger.info("Loading ontology pages")
 
-        read(source.map(WikiParser.getInstance()))
+        read(source.map(WikiParser.getInstance()).flatten)
     }
 
     /**
      *  Loads an ontology from configuration files using the DBpedia mapping language.
      *
-     * @param source The source containing the ontology pages
+     * @param pageNodeSource The source containing the ontology pages
      * @return Ontology The ontology
      */
     def read(pageNodeSource : Traversable[PageNode]) : Ontology =
@@ -57,8 +57,8 @@ class OntologyReader
     /**
      * Loads all classes and properties from a page.
      *
-     * @param ontology The OntologyBuilder instance
-     * @param pageNode The page node of the configuration page
+     * @param ontologyBuilder The OntologyBuilder instance
+     * @param page The page node of the configuration page
      */
     private def load(ontologyBuilder : OntologyBuilder, page : PageNode)
     {
@@ -76,8 +76,8 @@ class OntologyReader
 
               for(specificProperty <- loadSpecificProperties(name, templateNode))
                 {
+
                     ontologyBuilder.specializedProperties ::= specificProperty
-                    // To check for equivalent Property Map
                 }
             }
             else if(templateName == OntologyReader.OBJECTPROPERTY_NAME || templateName == OntologyReader.DATATYPEPROPERTY_NAME)
@@ -86,11 +86,30 @@ class OntologyReader
 
                 for(property <- loadOntologyProperty(name, templateNode))
                 {
-                    ontologyBuilder.properties ::= property
-                    // Fill the equivalentProperty map
+                  ontologyBuilder.properties ::= property
+
+
+                  //add mappings to equivalentPropertiesBuilderMap in the form of  WikidataProp -> Set[equivalentDBprop]
+                  property.equivPropertyNames.foreach{prop =>
+
+                    if(prop.contains("wikidata:")){
+
+                      //search for wikidataprop in the equivalentPropertiesBuilderMap keys if exists add DBprop to the set of DBprop
+                      // if not create new key
+                      ontologyBuilder.equivalentPropertiesBuilderMap.find{map => map._1.name == prop} match {
+
+                        case Some(map) =>  ontologyBuilder.equivalentPropertiesBuilderMap.updated(map._1 ,property)
+                        case None => {
+                          val wikidataProp = new OntologyProperty(prop, Map(), Map(), null, null, false, Set())
+                          ontologyBuilder.equivalentPropertiesBuilderMap += wikidataProp -> Set(property)
+                        }
+                      }
+
+                    }
+                  }
+
                 }
             }
-            // TODO: read datatypes
         }
     }
 
@@ -99,7 +118,7 @@ class OntologyReader
      * A namespace like "Foaf:" is always converted to lowercase. The local name (the part
      * after the namespace prefix) is cleaned using the given function.
      *
-     * @param name page title
+     * @param title page title
      * @param clean used to process the local name
      * @return clean name, including lower-case namespace and clean local name
      * @throws IllegalArgumentException
@@ -301,8 +320,8 @@ class OntologyReader
         var properties = List[PropertyBuilder]()
         var datatypes = List[Datatype]()
         var specializedProperties = List[SpecificPropertyBuilder]()
-        var equivalentPropertiesMap = Map[OntologyProperty,Set[OntologyProperty]] ()
-        var equivalentClassesMap = Map[OntologyProperty,Set[OntologyProperty]] ()
+        var equivalentPropertiesBuilderMap = Map[OntologyProperty,Set[PropertyBuilder]] ()        //[wikidataprop,Set[DBpediaeq props]]
+        var equivalentClassesMap = Map[OntologyProperty,Set[OntologyProperty]] ()           //[wikidataclass,Set[DBpediaeq class]]
 
         def build() : Ontology  =
         {
@@ -314,7 +333,7 @@ class OntologyReader
                           properties.flatMap(_.build(classMap, typeMap)).map(p => (p.name, p)).toMap,
                           datatypes.map(t => (t.name, t)).toMap,
                           specializedProperties.flatMap(_.build(classMap, propertyMap, typeMap)).toMap,
-                          equivalentPropertiesMap,
+                          equivalentPropertiesBuilderMap.map{m=>m._1 -> m._2.flatMap(_.build(classMap, typeMap))},
                           equivalentClassesMap)
         }
     }

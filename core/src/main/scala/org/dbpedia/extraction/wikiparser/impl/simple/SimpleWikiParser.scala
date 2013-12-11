@@ -64,10 +64,16 @@ final class SimpleWikiParser extends WikiParser
      * @return The PageNode which represents the root of the AST
      * @throws WikiParserException if an error occured during parsing
      */
-    def apply(page : WikiPage) : PageNode =
+    def apply(page : WikiPage) : Option[PageNode] =
     {
-        if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki") throw new IllegalArgumentException("need format 'text/x-wiki', found '"+page.format+"'")
-        
+        //if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki") throw new IllegalArgumentException("need format 'text/x-wiki', found '"+page.format+"'")
+
+      if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki")
+      {
+        return None
+      }
+      else
+      {
         //Parse source
         val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
 
@@ -89,7 +95,10 @@ final class SimpleWikiParser extends WikiParser
         val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
 
         //Return page node
-        new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, isRedirect, isDisambiguation, nodes)
+        Some(new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, isRedirect, isDisambiguation, nodes))
+      }
+
+
     }
 
     private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
