@@ -17,7 +17,7 @@ class ExternalLinksExtractor (
     def language : Language
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   val wikiPageExternalLinkProperty = context.ontology.properties("wikiPageExternalLink")
 

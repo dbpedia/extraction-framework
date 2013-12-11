@@ -19,7 +19,7 @@ class TableMapping(
     def language : Language 
   }
 ) 
-extends Mapping[TableNode]
+extends Extractor[TableNode]
 {
     val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase(context.language.locale)) }
 

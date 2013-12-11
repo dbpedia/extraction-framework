@@ -12,7 +12,7 @@ import scala.language.reflectiveCalls
  */
 class CategoryLabelExtractor( context : {
                                   def ontology : Ontology
-                                  def language : Language } ) extends Extractor
+                                  def language : Language } ) extends PageNodeExtractor
 {
     private val labelProperty = context.ontology.properties("rdfs:label")
     

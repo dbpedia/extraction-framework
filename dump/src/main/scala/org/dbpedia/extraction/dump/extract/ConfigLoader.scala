@@ -45,7 +45,7 @@ class ConfigLoader(config: Config)
     /**
      * Creates ab extraction job for a specific language.
      */
-    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: Extractor]], parser : WikiParser) : ExtractionJob =
+    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: PageNodeExtractor]], parser : WikiParser) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
@@ -120,7 +120,7 @@ class ConfigLoader(config: Config)
         }
 
         //Extractors
-        val extractor = CompositeExtractor.load(extractorClasses, context)
+        val extractor = CompositePageNodeExtractor.load(extractorClasses, context)
         val datasets = extractor.datasets
         
         val formatDestinations = new ArrayBuffer[Destination]()

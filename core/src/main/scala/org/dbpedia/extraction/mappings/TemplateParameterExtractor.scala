@@ -16,7 +16,7 @@ class TemplateParameterExtractor(
     def language : Language 
   } 
 ) 
-extends Extractor
+extends PageNodeExtractor
 {
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesParameter")
 

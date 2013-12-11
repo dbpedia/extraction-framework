@@ -28,7 +28,7 @@ object MappingsLoader
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
-        val classMappings = new HashMap[String, Mapping[TemplateNode]]()
+        val classMappings = new HashMap[String, Extractor[TemplateNode]]()
         val tableMappings = new ArrayBuffer[TableMapping]()
 
         for ( page <- context.mappingPageSource;

@@ -53,7 +53,7 @@ class WiktionaryPageExtractor(
    def language : Language
   }
 )
-extends Extractor {
+extends PageNodeExtractor {
   override val datasets = Set(datasetURI) //new Dataset("wiktionary"))
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =

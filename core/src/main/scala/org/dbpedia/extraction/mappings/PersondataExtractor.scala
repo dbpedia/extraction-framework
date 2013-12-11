@@ -20,7 +20,7 @@ class PersondataExtractor(
     def language : Language 
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
     private val language = context.language
     private val wikiCode = language.wikiCode

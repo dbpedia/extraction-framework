@@ -18,7 +18,7 @@ class ArticleTemplatesExtractor(
      def language: Language
      def redirects: Redirects
     }
-  ) extends Extractor {
+  ) extends PageNodeExtractor {
 
   // FIXME: this uses the http://xx.dbpedia.org/property/ namespace, but the
   // http://dbpedia.org/ontology/ namespace would probably make more sense.

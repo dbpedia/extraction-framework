@@ -12,7 +12,7 @@ import scala.language.reflectiveCalls
  */
 class ArticleCategoriesExtractor( context : {
                                       def ontology : Ontology
-                                      def language : Language } ) extends Extractor
+                                      def language : Language } ) extends PageNodeExtractor
 {
     private val dctermsSubjectProperty = context.ontology.properties("dct:subject")
 

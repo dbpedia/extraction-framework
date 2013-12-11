@@ -18,7 +18,7 @@ class HomepageExtractor(
     def redirects : Redirects
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   private val language = context.language.wikiCode
 

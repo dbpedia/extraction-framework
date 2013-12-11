@@ -30,7 +30,7 @@ class ImageExtractor(
     def commonsSource: Source 
   } 
 ) 
-extends Extractor
+extends PageNodeExtractor
 {
   private val wikiCode = context.language.wikiCode
   private val language = context.language

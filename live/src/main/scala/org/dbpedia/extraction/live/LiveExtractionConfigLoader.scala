@@ -203,22 +203,22 @@ object LiveExtractionConfigLoader
    * @ param  list  The required java list
    * @return  The newly generated scala list
    */
-  private def convertExtractorListToScalaList(list : java.util.List[Class[Extractor]]): List[Class[Extractor]] =
+  private def convertExtractorListToScalaList(list : java.util.List[Class[PageNodeExtractor]]): List[Class[PageNodeExtractor]] =
   {
-    var extractorList =  List[Class[Extractor]]();
+    var extractorList =  List[Class[PageNodeExtractor]]();
 
     val listiterator = list.iterator();
     while(listiterator.hasNext){
-      extractorList = extractorList ::: List[Class[Extractor]](listiterator.next());
+      extractorList = extractorList ::: List[Class[PageNodeExtractor]](listiterator.next());
     }
     println(extractorList);
     extractorList;
   }
 
-  private def convertExtractorMapToScalaMap(map: java.util.Map[Language, java.util.List[Class[Extractor]]]):
-  Map[Language, List[Class[Extractor]]] =
+  private def convertExtractorMapToScalaMap(map: java.util.Map[Language, java.util.List[Class[PageNodeExtractor]]]):
+  Map[Language, List[Class[PageNodeExtractor]]] =
   {
-    var extractorMap =  Map[Language, List[Class[Extractor]]]();
+    var extractorMap =  Map[Language, List[Class[PageNodeExtractor]]]();
 
     val mapIterator = map.entrySet.iterator();
     while(mapIterator.hasNext){
@@ -266,14 +266,14 @@ object LiveExtractionConfigLoader
      *
      * @return A Map which contains the extractor classes for each language
      */
-    private def loadExtractorClasses() : Map[Language, List[Class[Extractor]]] =
+    private def loadExtractorClasses() : Map[Language, List[Class[PageNodeExtractor]]] =
     {
       //Load extractor classes
       if(config.getProperty("extractors") == null) throw new IllegalArgumentException("Property 'extractors' not defined.")
       val stdExtractors = loadExtractorConfig(config.getProperty("extractors"))
 
       //Create extractor map
-      var extractors = ListMap[Language, List[Class[Extractor]]]()
+      var extractors = ListMap[Language, List[Class[PageNodeExtractor]]]()
       for(language <- languages) extractors += ((language, stdExtractors))
 
       //Load language specific extractors
@@ -292,11 +292,11 @@ object LiveExtractionConfigLoader
     /**
      * Parses a enumeration of extractor classes.
      */
-    private def loadExtractorConfig(configStr : String) : List[Class[Extractor]] =
+    private def loadExtractorConfig(configStr : String) : List[Class[PageNodeExtractor]] =
     {
       configStr.split("\\s+").map(_.trim).toList
         .map(className => ClassLoader.getSystemClassLoader().loadClass(className))
-        .map(_.asInstanceOf[Class[Extractor]])
+        .map(_.asInstanceOf[Class[PageNodeExtractor]])
     }
   }
 
