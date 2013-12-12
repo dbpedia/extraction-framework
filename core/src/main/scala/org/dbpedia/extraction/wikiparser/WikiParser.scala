@@ -11,7 +11,7 @@ trait WikiParser extends (WikiPage => Option[PageNode])
 {
     /**
      * Parses WikiText source and returns its Abstract Syntax Tree.
-     *                              a
+     *
      * @param page The page
      * @return The PageNode which represents the root of the AST
      * @throws WikiParserException if an error occured during parsing
