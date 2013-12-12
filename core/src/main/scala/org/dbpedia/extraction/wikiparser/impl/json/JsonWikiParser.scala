@@ -34,9 +34,9 @@ class JsonWikiParser {
 
   def apply(page : WikiPage) : Option[JsonNode] =
   {
-    if (page.format != null && page.format.nonEmpty && page.format != "application/json")
+    if (page.format == null || page.format != "application/json")
     {
-     return None
+      None
     }
     else
     {
