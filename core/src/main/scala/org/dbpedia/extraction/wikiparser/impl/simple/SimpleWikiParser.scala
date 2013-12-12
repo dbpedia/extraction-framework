@@ -66,8 +66,6 @@ final class SimpleWikiParser extends WikiParser
      */
     def apply(page : WikiPage) : Option[PageNode] =
     {
-        //if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki") throw new IllegalArgumentException("need format 'text/x-wiki', found '"+page.format+"'")
-
       if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki")
       {
         return None
