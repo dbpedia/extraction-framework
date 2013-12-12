@@ -16,23 +16,20 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
  * send page to SimpleWikiParser, if it returns none do nothing
  * if it's parsed correctly send the PageNode to the next level extractors
  *
- * @param mappings  Sequence of next level Extractors
+ * @param extractors  Sequence of next level Extractors
  *
  * */
- class WikiParseExtractor(mappings: Extractor[PageNode]*)extends Extractor[WikiPage]{
+ class WikiParseExtractor(extractors: CompositePageNodeExtractor)extends Extractor[WikiPage]{
 
-  override val datasets: Set[Dataset] = mappings.flatMap(_.datasets).toSet
+  override val datasets: Set[Dataset] = extractors.datasets
 
   override def extract(input: WikiPage , subjectUri: String, context: PageContext): Seq[Quad] = {
-
 
     val parser = new SimpleWikiParser()
     val node = parser(input)
     node match {
-      case Some(n) =>  mappings.flatMap(_.extract(n, subjectUri, context))
+      case Some(n) =>  extractors.extract(n, subjectUri, context)
       case None => Seq.empty
     }
-
-    }
-
+  }
 }

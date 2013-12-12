@@ -10,6 +10,7 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyPropert
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
 import scala.language.reflectiveCalls
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -24,14 +25,15 @@ object MappingsLoader
                  def ontology : Ontology
                  def language : Language
                  def redirects : Redirects
-                 def mappingPageSource : Traversable[PageNode] } ) : Mappings =
+                 def mappingPageSource : Traversable[WikiPage] } ) : Mappings =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
         val classMappings = new HashMap[String, Extractor[TemplateNode]]()
         val tableMappings = new ArrayBuffer[TableMapping]()
+        val parser = WikiParser.getInstance()
 
-        for ( page <- context.mappingPageSource;
+        for ( page <- context.mappingPageSource.map(parser).flatten;
               node <- page.children if node.isInstanceOf[TemplateNode] )
         {
             val tnode = node.asInstanceOf[TemplateNode]

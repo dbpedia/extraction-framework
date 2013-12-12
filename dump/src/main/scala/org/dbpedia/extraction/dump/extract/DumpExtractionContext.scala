@@ -2,8 +2,7 @@ package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.wikiparser.PageNode
+import org.dbpedia.extraction.sources.{WikiPage, Source}
 import org.dbpedia.extraction.mappings.{Disambiguations, Mappings, Redirects}
 
 /**
@@ -27,7 +26,7 @@ trait DumpExtractionContext
     def language : Language
 
     // TODO: remove this, only used by MappingExtractor
-    def mappingPageSource : Traversable[PageNode]
+    def mappingPageSource : Traversable[WikiPage]
 
     // TODO: remove this, only used by MappingExtractor
     def mappings : Mappings
