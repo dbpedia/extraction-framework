@@ -5,6 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.language.reflectiveCalls
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Extracts labels to articles based on their title.
@@ -15,13 +16,13 @@ class LabelExtractor(
     def language : Language 
   } 
 ) 
-extends PageNodeExtractor
+extends WikiPageExtractor
 {
   val labelProperty = context.ontology.properties("rdfs:label")
   
   override val datasets = Set(DBpediaDatasets.Labels)
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
+  override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
@@ -30,6 +31,6 @@ extends PageNodeExtractor
     val label = page.title.decoded
     
     if(label.isEmpty) Seq.empty
-    else Seq(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label, page.sourceUri, context.ontology.datatypes("xsd:string")))
+    else Seq(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label, page.title.pageIri, context.ontology.datatypes("xsd:string")))
   }
 }

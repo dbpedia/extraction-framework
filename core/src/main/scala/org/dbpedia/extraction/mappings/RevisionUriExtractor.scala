@@ -5,6 +5,7 @@ import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.language.reflectiveCalls
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Extracts links to the article revision that the data was extracted from, e.g.
@@ -16,7 +17,7 @@ class RevisionUriExtractor (
     def language: Language
   }
 )
-extends PageNodeExtractor
+extends WikiPageExtractor
 {
   private val derivedFromProperty = "http://www.w3.org/ns/prov#wasDerivedFrom"
 
@@ -24,7 +25,7 @@ extends PageNodeExtractor
 
   private val quad = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.RevisionUris, derivedFromProperty, null) _
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
-    Seq(quad(subjectUri, page.sourceUri, page.sourceUri))
+  override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+    Seq(quad(subjectUri, page.title.pageIri, page.title.pageIri))
   }
 }

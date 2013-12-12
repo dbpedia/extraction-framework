@@ -17,7 +17,7 @@ import org.dbpedia.util.Exceptions
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
  * @param label user readable label of this extraction job.
  */
-class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String, parser : WikiParser)
+class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String)
 {
   private val logger = Logger.getLogger(getClass.getName)
 
