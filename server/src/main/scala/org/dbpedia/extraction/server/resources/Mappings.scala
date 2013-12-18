@@ -187,7 +187,7 @@ class Mappings(@PathParam("lang") langCode : String)
         {
             var nodes = new NodeBuffer()
             nodes += Log.header(title.count(_ == '/') + 3)
-            nodes += Server.instance.extractor.validateMapping(XMLSource.fromXML(pagesXML, language).map(parser), language) // TODO: use Language.Mappings?
+            nodes += Server.instance.extractor.validateMapping(XMLSource.fromXML(pagesXML, language).map(parser).flatten, language) // TODO: use Language.Mappings?
             logger.info("Validated mapping page: " + title)
             nodes
         }
