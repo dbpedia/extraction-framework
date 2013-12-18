@@ -62,9 +62,11 @@ extends ExtractionManager(languages, paths)
     def updateAll() = synchronized {
         for ((language, mappings) <- _mappings) update(language, mappings)
     }
-        
+
+    //TODO: what to do in case of exception or None?
     def updateOntologyPage(page : WikiPage) = asynchronous("updateOntologyPage") {
-        _ontologyPages = _ontologyPages.updated(page.title, parser(page))
+        val pageNode = parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))
+        _ontologyPages = _ontologyPages.updated(page.title, pageNode)
         _ontology = loadOntology
         _mappings = loadMappings
         _extractors = loadExtractors()
@@ -80,9 +82,11 @@ extends ExtractionManager(languages, paths)
         updateAll
     }
 
+    //TODO: what to do in case of exception or None?
     def updateMappingPage(page : WikiPage, language : Language) = asynchronous("updateMappingPage") {
         // TODO: use mutable maps. makes the next line simpler, and we need synchronization anyway.
-        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, parser(page))))
+        val pageNode = parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))
+        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, pageNode)))
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
         _extractors = _extractors.updated(language, loadExtractors(language))

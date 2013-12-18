@@ -52,7 +52,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
     def extract(source: Source, destination: Destination, language: Language): Unit = {
       val extract = extractor(language)
       destination.open()
-      for (page <- source.map(parser)) destination.write(extract(page))
+      for (page <- source) destination.write(extract(page))
       destination.close()
     }
 
@@ -93,7 +93,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
         logHandler.setLevel(Level.WARNING)
         Logger.getLogger(classOf[OntologyReader].getName).addHandler(logHandler)
 
-        val newOntologyPagesMap = newOntologyPages.map(parser).map(page => (page.title, page)).toMap
+        val newOntologyPagesMap = newOntologyPages.map(parser).flatten.map(page => (page.title, page)).toMap
         val updatedOntologyPages = (ontologyPages ++ newOntologyPagesMap).values
 
         //Load ontology
@@ -123,7 +123,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
             WikiSource.fromNamespaces(namespaces, url, language)
         }
         
-        source.map(parser).map(page => (page.title, page)).toMap
+        source.map(parser).flatten.map(page => (page.title, page)).toMap
     }
 
     protected def loadMappingPages(): Map[Language, Map[WikiTitle, PageNode]] =
@@ -148,7 +148,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
             WikiSource.fromNamespaces(Set(namespace), url, language) // TODO: use Language.Mappings?
         }
         
-        source.map(parser).map(page => (page.title, page)).toMap
+        source.map(parser).flatten.map(page => (page.title, page)).toMap
     }
 
     protected def loadOntology() : Ontology =
@@ -166,7 +166,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
     protected def loadExtractors(lang : Language): RootExtractor =
     {
       new RootExtractor(
-        new CompositePageNodeExtractor(
+        new CompositeParseExtractor(
           new LabelExtractor(new {val ontology = self.ontology; val language = lang}), 
           new MappingExtractor(new {val mappings = self.mappings(lang); val redirects = new Redirects(Map())})
         )
