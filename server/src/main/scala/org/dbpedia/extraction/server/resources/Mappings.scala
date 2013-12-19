@@ -5,7 +5,7 @@ import org.dbpedia.extraction.server.resources.stylesheets.{TriX,Log}
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.wikiparser.{WikiParser, Namespace, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, Namespace, WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.{WriterDestination,LimitingDestination}
@@ -66,7 +66,7 @@ class Mappings(@PathParam("lang") langCode : String)
           </head>
           <body>
             <h2>Mapping pages</h2>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))) ++ <br/>) }
           </body>
         </html>
     }
@@ -139,7 +139,7 @@ class Mappings(@PathParam("lang") langCode : String)
           <body>
             <h2>Validate Mappings</h2>
             <p><a href="*">Validate all mappings</a></p>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))) ++ <br/>) }
           </body>
         </html>
     }
@@ -187,7 +187,7 @@ class Mappings(@PathParam("lang") langCode : String)
         {
             var nodes = new NodeBuffer()
             nodes += Log.header(title.count(_ == '/') + 3)
-            nodes += Server.instance.extractor.validateMapping(XMLSource.fromXML(pagesXML, language).map(parser).flatten, language) // TODO: use Language.Mappings?
+            nodes += Server.instance.extractor.validateMapping(XMLSource.fromXML(pagesXML, language), language) // TODO: use Language.Mappings?
             logger.info("Validated mapping page: " + title)
             nodes
         }
@@ -215,7 +215,7 @@ class Mappings(@PathParam("lang") langCode : String)
           </head>
           <body>
             <h2>Mapping pages</h2>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))) ++ <br/>) }
           </body>
         </html>
     }

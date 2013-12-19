@@ -31,7 +31,7 @@ extends ExtractionManager(languages, paths)
 
     // TODO: remove this field. Clients should get the mapping pages directly from the
     // mappings wiki, not from here. We don't want to keep all mapping pages in memory.
-    private var _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
+    private var _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
 
     private var _mappings : Map[Language, Mappings] = loadMappings
 
@@ -85,8 +85,8 @@ extends ExtractionManager(languages, paths)
     //TODO: what to do in case of exception or None?
     def updateMappingPage(page : WikiPage, language : Language) = asynchronous("updateMappingPage") {
         // TODO: use mutable maps. makes the next line simpler, and we need synchronization anyway.
-        val pageNode = parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))
-        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, pageNode)))
+//        val pageNode = parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))
+        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, page)))
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
         _extractors = _extractors.updated(language, loadExtractors(language))
