@@ -17,7 +17,7 @@ extends ExtractionManager(languages, paths)
 {
     @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
-    @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
+    @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
 
     @volatile private lazy val _ontology : Ontology = loadOntology
 

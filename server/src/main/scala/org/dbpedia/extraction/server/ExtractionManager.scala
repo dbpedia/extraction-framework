@@ -30,7 +30,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
 
     def ontologyPages() : Map[WikiTitle, PageNode]
 
-    def mappingPageSource(language : Language) : Traversable[PageNode]
+    def mappingPageSource(language : Language) : Traversable[WikiPage]
 
     def mappings(language : Language) : Mappings
 
@@ -56,7 +56,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
       destination.close()
     }
 
-    def validateMapping(mappingsPages: Traversable[PageNode], lang: Language) : Elem =
+    def validateMapping(mappingsPages: Traversable[WikiPage], lang: Language) : Elem =
     {
         val logger = Logger.getLogger(MappingsLoader.getClass.getName)
         
@@ -126,13 +126,13 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
         source.map(parser).flatten.map(page => (page.title, page)).toMap
     }
 
-    protected def loadMappingPages(): Map[Language, Map[WikiTitle, PageNode]] =
+    protected def loadMappingPages(): Map[Language, Map[WikiTitle, WikiPage]] =
     {
         logger.info("Loading mapping pages")
         languages.map(lang => (lang, loadMappingPages(lang))).toMap
     }
 
-    protected def loadMappingPages(language : Language) : Map[WikiTitle, PageNode] =
+    protected def loadMappingPages(language : Language) : Map[WikiTitle, WikiPage] =
     {
         val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
         
@@ -148,7 +148,7 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
             WikiSource.fromNamespaces(Set(namespace), url, language) // TODO: use Language.Mappings?
         }
         
-        source.map(parser).flatten.map(page => (page.title, page)).toMap
+        source.map(page => (page.title, page)).toMap
     }
 
     protected def loadOntology() : Ontology =
