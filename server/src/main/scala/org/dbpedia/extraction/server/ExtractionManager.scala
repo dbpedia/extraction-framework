@@ -18,7 +18,7 @@ import java.net.URL
  * or they can support lazy loading of context parameters.
  */
 
-abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
+abstract class ExtractionManager(languages : Seq[Language], paths: Paths, redirects: Map[Language, Redirects])
 {
   self =>
     
@@ -167,8 +167,9 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths)
     {
       new RootExtractor(
         new CompositePageNodeExtractor(
-          new LabelExtractor(new {val ontology = self.ontology; val language = lang}), 
-          new MappingExtractor(new {val mappings = self.mappings(lang); val redirects = new Redirects(Map())})
+          new LabelExtractor(new {val ontology = self.ontology; val language = lang}),
+          new MappingExtractor(new {val mappings = self.mappings(lang);
+                                    val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))})
         )
       )
     }

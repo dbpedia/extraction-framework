@@ -4,15 +4,15 @@ import java.io.File
 import java.net.{URI,URL}
 import java.util.logging.{Level,Logger}
 import scala.collection.immutable.SortedMap
-import org.dbpedia.extraction.mappings.{LabelExtractor,MappingExtractor}
+import org.dbpedia.extraction.mappings.{Redirects, LabelExtractor, MappingExtractor, Mappings}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
-import org.dbpedia.extraction.mappings.Mappings
 import org.dbpedia.extraction.server.stats.MappingStatsManager
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
 import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.wikiparser.{WikiTitle, Namespace}
+import Server._
 
 class Server(private val password : String, langs : Seq[Language], val paths: Paths) 
 {
@@ -20,8 +20,12 @@ class Server(private val password : String, langs : Seq[Language], val paths: Pa
       val tuples = langs.map(lang => lang -> new MappingStatsManager(paths.statsDir, lang))
       SortedMap(tuples: _*)
     }
+
+    val redirects = {
+      managers.map(manager => (manager._1, buildTemplateRedirects(manager._2.wikiStats.redirects, manager._1))).toMap
+    }
         
-    val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), langs, paths)
+    val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), langs, paths, redirects)
     
     extractor.updateAll
         
@@ -79,5 +83,18 @@ object Server
         HttpServerFactory.create(uri, resources).start()
 
         logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis) + " listening on " + uri)
+    }
+
+    /**
+     * Builds template redirects from Wiki statistics as collected by {@link CreateMappingStats}
+     * Main purpose is to clean template names from the template namespace so that redirects can be used in Extractors
+     * (Extractors use decoded wiki titles)
+     * @param redirects
+     * @return
+     */
+    def buildTemplateRedirects(redirects: Map[String, String], language: Language): Redirects = {
+      new Redirects(redirects.map { case (from, to) =>
+        (WikiTitle.parse(from, language).decoded, WikiTitle.parse(to, language).decoded)
+      }.toMap)
     }
 }
