@@ -85,7 +85,6 @@ extends ExtractionManager(languages, paths)
     //TODO: what to do in case of exception or None?
     def updateMappingPage(page : WikiPage, language : Language) = asynchronous("updateMappingPage") {
         // TODO: use mutable maps. makes the next line simpler, and we need synchronization anyway.
-//        val pageNode = parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, page)))
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
