@@ -5,6 +5,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets}
 import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace, PageNode}
 import collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts data from Wikidata sources.
