@@ -8,7 +8,7 @@ object HomepageExtractorConfig
     // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
     // Don't change this else if you know how it is done.
 
-    val propertyNamesMap = Map(
+    private val propertyNamesMap = Map(
         "ar" -> Set("الموقع", "الصفحة الرسمية", "موقع", "الصفحة الرئيسية", "صفحة ويب", "موقع ويب"),
         "ca" -> Set("pàgina", "web", "lloc"),
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
@@ -26,9 +26,13 @@ object HomepageExtractorConfig
         "ru" -> Set("сайт")
     )
 
+    def propertyNames(lang : String) : Set[String] = {
+        propertyNamesMap.getOrElse(lang, Set())
+    }
+
     val supportedLanguages = propertyNamesMap.keySet
 
-    val externalLinkSectionsMap = Map(
+    private val externalLinkSectionsMap = Map(
         "ar" -> "وصلات خارجية",
         "ca" -> "(?:Enllaços externs|Enllaço extern)",
         "de" -> "Weblinks?",
@@ -46,7 +50,11 @@ object HomepageExtractorConfig
         "ru" -> "Ссылки"
     )
 
-    val officialMap = Map(
+    def externalLinkSections(lang : String) : String = {
+        externalLinkSectionsMap.getOrElse(lang, "")
+    }
+
+    private val officialMap = Map(
         "ar" -> "رسمي",
         "ca" -> "oficial",
         "de" -> "offizielle",
@@ -64,10 +72,14 @@ object HomepageExtractorConfig
         "ru" -> "официальный"
     )
 
+    def official(lang : String) : String = {
+        officialMap.getOrElse(lang, "")
+    }
+
     // Map(language -> Map(templateName -> templatePropertyKey))
-    val templateOfficialWebsite = Map(
+    private val templateOfficialWebsiteMap = Map(
         "ca" -> Map("Oficial" -> "1"),
-        "it" -> Map("Sito Ufficiale" -> "1"),
+        /* "it" -> Map("Sito Ufficiale" -> "1"), This does not exist, yet */
         "el" -> Map("Επίσημη ιστοσελίδα" -> "1"),
         "en" -> Map("Official website" -> "1"),
         "eo" -> Map("Oficiala_retejo" -> "1"),
@@ -77,5 +89,9 @@ object HomepageExtractorConfig
         "pt" -> Map("Oficial" -> "1"),
         "ru" -> Map("Официальный сайт" -> "1")
     )
+
+    def templateOfficialWebsite(lang : String) : Map[String, String] = {
+        templateOfficialWebsiteMap.getOrElse(lang, Map())
+    }
 
 }
