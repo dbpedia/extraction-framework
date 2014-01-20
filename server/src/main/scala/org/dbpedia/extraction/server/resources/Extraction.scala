@@ -10,7 +10,7 @@ import scala.xml.Elem
 import scala.io.{Source,Codec}
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.extraction.destinations.WriterDestination
+import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDestination}
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 import stylesheets.TriX
 import java.io.StringWriter
@@ -109,8 +109,10 @@ class Extraction(@PathParam("lang") langCode : String)
         val source = 
           if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
           else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
-        
-        val destination = new WriterDestination(() => writer, formatter)
+
+        // See https://github.com/dbpedia/extraction-framework/issues/144
+        // We should mimic the extraction framework behavior
+        val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
         Server.instance.extractor.extract(source, destination, language)
 
         Response.ok(writer.toString).`type`(selectContentType(format)).build()

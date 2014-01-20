@@ -68,6 +68,29 @@
                         </launcher>
 
                         <launcher>
+                            <id>stats-extraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <!-- Request statistics -->
+                                <jvmArg>-Dextract.template.stats=true</jvmArg>
+                                <!--
+                                <jvmArg>-Xmx4096m</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                                <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
+                                <jvmArg>-Dhttp.proxyPort=80</jvmArg>
+                                <jvmArg>-Dhttp.proxyUser=user</jvmArg>
+                                <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
+                                <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg>
+                                -->
+                            </jvmArgs>
+                        </launcher>
+
+                        <launcher>
                             <id>compress</id>
                             <mainClass>org.dbpedia.extraction.dump.compress.Compress</mainClass>
                             <jvmArgs>

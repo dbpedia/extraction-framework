@@ -55,21 +55,33 @@ public class Main {
     public static void initLive() {
 
         PropertyConfigurator.configure("log4j.live.properties");
-
-        feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
+            long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));
+            long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.sleepInterval"));
+            feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
                 LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
-                2000, 1000, LiveOptions.options.get("uploaded_dump_date"),
+                pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
                 LiveOptions.options.get("working_directory")));
+        }
 
-
-        feeders .add( new OAIFeeder("FeederLive", LiveQueuePriority.LivePriority,
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
+            long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.live.pollInterval"));
+            long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.live.sleepInterval"));
+            feeders .add( new OAIFeeder("FeederLive", LiveQueuePriority.LivePriority,
                 LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
-                3000, 1000, LiveOptions.options.get("uploaded_dump_date"),
+                pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
                 LiveOptions.options.get("working_directory")));
+        }
 
-        feeders .add( new UnmodifiedFeeder("FeederUnmodified", LiveQueuePriority.UnmodifiedPagePriority,
-                30, 5000,500,30000,
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled")) == true) {
+            int minDaysAgo = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.minDaysAgo"));
+            int chunk = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.chunk"));
+            int threshold = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.threshold"));
+            long sleepTime = Long.parseLong(LiveOptions.options.get("feeder.unmodified.sleepTime"));
+            feeders .add( new UnmodifiedFeeder("FeederUnmodified", LiveQueuePriority.UnmodifiedPagePriority,
+                minDaysAgo, chunk, threshold, sleepTime,
                 LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
+        }
 
         int threads = Integer.parseInt(LiveOptions.options.get("ProcessingThreads"));
         for (int i=0; i < threads ; i++){
