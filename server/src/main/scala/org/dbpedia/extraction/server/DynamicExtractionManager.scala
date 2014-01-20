@@ -65,7 +65,7 @@ extends ExtractionManager(languages, paths)
 
     //TODO: what to do in case of exception or None?
     def updateOntologyPage(page : WikiPage) = asynchronous("updateOntologyPage") {
-        val pageNode = parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))
+        val pageNode = parser(page).getOrElse(throw new Exception("Cannot update Ontology page: " + page.title.decoded + ". Parsing failed"))
         _ontologyPages = _ontologyPages.updated(page.title, pageNode)
         _ontology = loadOntology
         _mappings = loadMappings
