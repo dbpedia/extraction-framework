@@ -53,7 +53,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
         |
         |* {{Official website|example.com}}
         |
-      """.stripMargin, "TestPage", lang) should equal (quad)
+      """.stripMargin, "TestPage", lang) should equal (Some(quad))
   }
 
   it should """return http://correct.example.com from Template 'Official website' in External links section""" in {
@@ -70,7 +70,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
         |* {{Official website|2=example.com}}
         |* {{Official website|correct.example.com}}
         |
-      """.stripMargin, "TestPage", lang) should equal (quad)
+      """.stripMargin, "TestPage", lang) should equal (Some(quad))
   }
 
   "HomepageExtractor" should """return http://example.com from Template 'Official' in External links section""" in {
@@ -86,7 +86,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
         |
         |* {{Official|http://example.com}}
         |
-      """.stripMargin, "TestPage", lang) should equal (quad)
+      """.stripMargin, "TestPage", lang) should equal (Some(quad))
   }
 
   "HomepageExtractor" should """return http://example.com from Template property 'website = example.com'""" in {
@@ -96,7 +96,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
       new Quad(lang, dataset, "TestPage", HomepageExtractorTest.homepageProperty, "http://example.com", null, null)
     )
 
-    parse("""{{Infobox | website = example.com}}""", "TestPage", lang) should equal (quad)
+    parse("""{{Infobox | website = example.com}}""", "TestPage", lang) should equal (Some(quad))
   }
 
   "HomepageExtractor" should """return http://example.com from Template property 'website = http://example.com'""" in {
@@ -106,7 +106,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
       new Quad(lang, dataset, "TestPage", HomepageExtractorTest.homepageProperty, "http://example.com", null, null)
     )
 
-    parse("""{{Infobox | website = http://example.com}}""", "TestPage", lang) should equal (quad)
+    parse("""{{Infobox | website = http://example.com}}""", "TestPage", lang) should equal (Some(quad))
   }
 
   "HomepageExtractor" should """return http://example.com from Template property 'website = http://example.com or http://or.com'""" in {
@@ -116,7 +116,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
       new Quad(lang, dataset, "TestPage", HomepageExtractorTest.homepageProperty, "http://example.com", null, null)
     )
 
-    parse("""{{Infobox | website = http://example.com or http://or.com}}""", "TestPage", lang) should equal (quad)
+    parse("""{{Infobox | website = http://example.com or http://or.com}}""", "TestPage", lang) should equal (Some(quad))
   }
 
   it should """return Seq.empty from Template property 'website = N/A'""" in {
@@ -126,7 +126,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
       new Quad(lang, dataset, "TestPage", HomepageExtractorTest.homepageProperty, "http://example.com", null, null)
     )
 
-    parse("""{{Infobox | website = N/A}}""", "TestPage", lang) should equal (Seq.empty)
+    parse("""{{Infobox | website = N/A}}""", "TestPage", lang) should equal (Some(Seq.empty))
   }
 
   // end of tests
@@ -143,8 +143,11 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
     }
 
     val extractor = new HomepageExtractor(context)
+    parser(page) match {
+      case Some(pageNode) => extractor.extract(pageNode,"TestPage", new PageContext())
+      case None => Seq.empty
+    }
 
-    extractor.extract(parser(page),"TestPage", new PageContext())
   }
 }
 
