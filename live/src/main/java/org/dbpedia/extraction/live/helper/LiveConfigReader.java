@@ -3,11 +3,11 @@ package org.dbpedia.extraction.live.helper;
 import org.apache.log4j.Logger;
 // import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.core.Constants;
-import org.dbpedia.extraction.live.core.Util;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
-import org.dbpedia.extraction.mappings.PageNodeExtractor;
 import org.dbpedia.extraction.mappings.SkosCategoriesExtractor;
 import org.dbpedia.extraction.util.Language;
+import org.dbpedia.extraction.wikiparser.Namespace;
+import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -61,7 +61,7 @@ public class LiveConfigReader {
 
     public static Map<Language,Map<String, ExtractorSpecification>>  extractors = null;
 
-    public static Map<Language,List<Class<PageNodeExtractor>>> extractorClasses = null;
+    public static Map<Language, List<Class>> extractorClasses = null;
     public static int updateOntologyAndMappingsPeriod = 5;
     public static boolean multihreadingMode = false;
 
@@ -113,7 +113,7 @@ public class LiveConfigReader {
         NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
         //iterate and build the required list of extractors
         extractors = new HashMap<Language,Map<String,ExtractorSpecification>>();
-        extractorClasses = new HashMap<Language,List<Class<PageNodeExtractor>>>();
+        extractorClasses = new HashMap<Language,List<Class>>();
 
 
         for(int i=0; i<languageNodes.getLength(); i++){
@@ -133,8 +133,8 @@ public class LiveConfigReader {
     private static void readLanguageExtractors(Element elemLanguageExtractors, Language lang){
         try{
             NodeList extractorNodes = elemLanguageExtractors.getElementsByTagName(EXTRACTOR_TAGNAME);
-            Map<String, ExtractorSpecification> langExtractors = new HashMap<String, ExtractorSpecification>(10);
-            ArrayList<Class<PageNodeExtractor>> langExtractorClasses = new ArrayList<Class<PageNodeExtractor>>(10);
+            Map<String, ExtractorSpecification> langExtractors = new HashMap<String, ExtractorSpecification>(20);
+            ArrayList<Class> langExtractorClasses = new ArrayList<Class>(20);
 
             //iterate and build the required list of extractors
             for(int i=0; i<extractorNodes.getLength(); i++){
@@ -143,7 +143,7 @@ public class LiveConfigReader {
                 String extractorID = elemExtractor.getAttribute(NAME_ATTRIBUTENAME);
                 ExtractorStatus status = ExtractorStatus.valueOf(elemExtractor.getAttribute(EXTRACTOR_STATUS_ATTRIBUTENAME));
 
-                langExtractorClasses.add((Class<PageNodeExtractor>)(ClassLoader.getSystemClassLoader().loadClass(extractorID)));
+                langExtractorClasses.add((Class)(ClassLoader.getSystemClassLoader().loadClass(extractorID)));
 
                 //Those types of extractors need special type of handling as we must call the function _addGenerics for
                 //them
@@ -181,16 +181,17 @@ public class LiveConfigReader {
      * @param extractorID   The ID of the required extractor
      * @return  The match pattern suitable for the passed extractor
      */
+
     private static MatchPattern _addGenerics(Language lang, String extractorID) {
         MatchPattern pattern = null;
         if(extractorID.equals(SkosCategoriesExtractor.class.toString())){
             pattern = new MatchPattern(MatchType.STARTSWITH, "", Constants.SKOS_BROADER,
-                    ((HashMap)Util.MEDIAWIKI_NAMESPACES.get(lang)).get(Constants.MW_CATEGORY_NAMESPACE).toString() , true);
+                    Namespaces.names(lang).get(Namespace.Category()).toString(), true);
 
         }
         else if(extractorID.equals(ArticleCategoriesExtractor.class.toString())){
             pattern = new MatchPattern(MatchType.STARTSWITH, "", Constants.SKOS_SUBJECT,
-                    ((HashMap)Util.MEDIAWIKI_NAMESPACES.get(lang)).get(Constants.MW_CATEGORY_NAMESPACE).toString() , true);
+                    Namespaces.names(lang).get(Namespace.Category()).toString() , true);
         }
 
         return pattern;
@@ -272,9 +273,9 @@ public class LiveConfigReader {
      * @param   requiredStatus  The status of the extractors
      * @return  A list containing the extractors of the passed status 
      */
-    public static List<Class<PageNodeExtractor>> getExtractors(Language lang, ExtractorStatus requiredStatus){
+    public static List<Class> getExtractors(Language lang, ExtractorStatus requiredStatus){
 
-        List<Class<PageNodeExtractor>> extractorsList = extractorClasses.get(lang);
+        List<Class> extractorsList = extractorClasses.get(lang);
         Map<String, ExtractorSpecification> specs = extractors.get(lang);
         for(Object value : specs.values()){
             ExtractorSpecification spec = (ExtractorSpecification) value;
