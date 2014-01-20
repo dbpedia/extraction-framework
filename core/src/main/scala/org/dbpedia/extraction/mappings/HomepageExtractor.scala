@@ -22,11 +22,11 @@ extends PageNodeExtractor
 {
   private val language = context.language.wikiCode
 
-  private val propertyNames = HomepageExtractorConfig.propertyNamesMap(language)
+  private val propertyNames = HomepageExtractorConfig.propertyNames(language)
   
-  private val official = HomepageExtractorConfig.officialMap(language)
+  private val official = HomepageExtractorConfig.official(language)
   
-  private val externalLinkSections = HomepageExtractorConfig.externalLinkSectionsMap(language)
+  private val externalLinkSections = HomepageExtractorConfig.externalLinkSections(language)
 
   private val templateOfficialWebsite = HomepageExtractorConfig.templateOfficialWebsite(language)
 
