@@ -66,7 +66,7 @@ class Mappings(@PathParam("lang") langCode : String)
           </head>
           <body>
             <h2>Mapping pages</h2>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot get page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
           </body>
         </html>
     }
@@ -139,7 +139,7 @@ class Mappings(@PathParam("lang") langCode : String)
           <body>
             <h2>Validate Mappings</h2>
             <p><a href="*">Validate all mappings</a></p>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot validate mapping: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
           </body>
         </html>
     }
@@ -215,7 +215,7 @@ class Mappings(@PathParam("lang") langCode : String)
           </head>
           <body>
             <h2>Mapping pages</h2>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot read page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
           </body>
         </html>
     }
