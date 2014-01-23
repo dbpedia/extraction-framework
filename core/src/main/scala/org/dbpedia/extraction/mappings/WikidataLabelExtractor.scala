@@ -6,7 +6,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets}
 import org.dbpedia.extraction.wikiparser.{JsonNode, PageNode}
 import collection.mutable.ArrayBuffer
-import  org.dbpedia.extraction.wikiparser.Namespace
+import scala.language.reflectiveCalls
 
 /**
  * Extracts labels triples from Wikidata sources

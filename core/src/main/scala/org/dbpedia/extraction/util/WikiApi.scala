@@ -53,7 +53,7 @@ class WikiApi(url: URL, language: Language)
         // -> "generator" instead of "list" and "gapnamespace" instead of "apnamespace" ("gap" is for "generator all pages")
  
         //Retrieve list of pages
-        val response = query("?action=query&format=xml&list=allpages&apfrom=" + fromPage + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
+        val response = query("?action=query&format=xml&list=allpages&apfrom=" + URLEncoder.encode(fromPage, "UTF-8") + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
 
         //Extract page ids
         val pageIds = for(p <- response \ "query" \ "allpages" \ "p") yield (p \ "@pageid").head.text.toLong
@@ -119,7 +119,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(titleGroup <- titles.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(_.encodedWithNamespace).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(t => URLEncoder.encode(t.encodedWithNamespace, "UTF-8")).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }

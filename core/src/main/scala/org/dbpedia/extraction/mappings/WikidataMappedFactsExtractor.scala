@@ -8,6 +8,7 @@ import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.dataparser.{DataParser, DateTimeParser}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+import scala.language.reflectiveCalls
 
 /**
  * Extracts Wikidata claims

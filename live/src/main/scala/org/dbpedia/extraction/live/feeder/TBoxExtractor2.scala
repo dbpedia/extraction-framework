@@ -75,7 +75,7 @@ class TBoxExtractor2(val prefixMapping: PrefixMapping, val baseUri: String, val 
   }
 
   def handle(source: Source): Unit = {
-    handle(source.map(WikiParser.getInstance()))
+    handle(source.map(WikiParser.getInstance()).flatten)
   }
 
   def handle(pageNodeSource: Traversable[PageNode]): Unit = {
