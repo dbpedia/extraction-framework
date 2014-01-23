@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.mappings.{Mappings,RootExtractor}
+import org.dbpedia.extraction.mappings.{Redirects, Mappings, RootExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
@@ -20,8 +20,8 @@ import scala.actors.Actor
  * mappingPageSource is called by loadMappings in the base class, 
  * ontologyPages is called by loadOntology in the base class.
  */
-class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths) 
-extends ExtractionManager(languages, paths)
+class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths, redirects: Map[Language, Redirects])
+extends ExtractionManager(languages, paths, redirects)
 {
     // TODO: remove this field. Clients should get the ontology pages directly from the
     // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
@@ -65,7 +65,7 @@ extends ExtractionManager(languages, paths)
 
     //TODO: what to do in case of exception or None?
     def updateOntologyPage(page : WikiPage) = asynchronous("updateOntologyPage") {
-        val pageNode = parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))
+        val pageNode = parser(page).getOrElse(throw new Exception("Cannot update Ontology page: " + page.title.decoded + ". Parsing failed"))
         _ontologyPages = _ontologyPages.updated(page.title, pageNode)
         _ontology = loadOntology
         _mappings = loadMappings
@@ -85,7 +85,6 @@ extends ExtractionManager(languages, paths)
     //TODO: what to do in case of exception or None?
     def updateMappingPage(page : WikiPage, language : Language) = asynchronous("updateMappingPage") {
         // TODO: use mutable maps. makes the next line simpler, and we need synchronization anyway.
-//        val pageNode = parser(page).getOrElse(new PageNode(null,0,0,0,0,"",false,false))
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, page)))
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
