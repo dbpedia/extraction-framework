@@ -48,7 +48,7 @@ with Equals
     context: String,
     datatype: Datatype
   ) = this(
-    if (language == null ) null else language.isoCode,
+    if (language == null) null else language.isoCode,
       dataset.name,
       subject,
       predicate,
