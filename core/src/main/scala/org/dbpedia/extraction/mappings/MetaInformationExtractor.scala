@@ -39,19 +39,19 @@ class MetaInformationExtractor( context : {
     val historyLink  = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=history"
 
     val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
-      formatTimestamp(page.timestamp), page.title.pageIri, datetime )
+      formatTimestamp(page.timestamp), page.sourceUri, datetime )
 
     val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, extractionDatePredicate,
-      formatCurrentTimestamp, page.title.pageIri, datetime )
+      formatCurrentTimestamp, page.sourceUri, datetime )
 
     val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, editLinkPredicate,
-      editLink, page.title.pageIri, null )
+      editLink, page.sourceUri, null )
 
     val quadRevisionlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, revisionPredicate,
-      revisionLink, page.title.pageIri, null )
+      revisionLink, page.sourceUri, null )
 
     val quadHistorylink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, historyPredicate,
-      historyLink, page.title.pageIri, null )
+      historyLink, page.sourceUri, null )
 
 
     Seq(quadModificationDate, quadExtractionDate, quadEditlink, quadRevisionlink, quadHistorylink)

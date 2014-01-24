@@ -73,7 +73,7 @@ object DBpediaDatasets
     val WikidataLL = new Dataset("wikidata-ll")
     val WikidataLabels = new Dataset("wikidata-labels")
     val WikidataSameAs = new Dataset("wikidata-sameas")
-    val WikidataNameSpaceSameAs = new Dataset("wikidata-Namespace-sameas")
+    val WikidataNameSpaceSameAs = new Dataset("wikidata-namespace-sameas")
     val WikidataFacts = new Dataset("wikidata")
     val WikidataMappedFacts = new Dataset("wikidata-mapped")
 
