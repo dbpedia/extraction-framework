@@ -98,7 +98,7 @@ class OntologyReader
                       // if not create new key
                       ontologyBuilder.equivalentPropertiesBuilderMap.find{map => map._1.name == prop} match {
 
-                        case Some(map) =>  ontologyBuilder.equivalentPropertiesBuilderMap.updated(map._1 ,property)
+                        case Some(map) =>  ontologyBuilder.equivalentPropertiesBuilderMap.updated(map._1, property)
                         case None => {
                           val wikidataProp = new OntologyProperty(prop, Map(), Map(), null, null, false, Set())
                           ontologyBuilder.equivalentPropertiesBuilderMap += wikidataProp -> Set(property)
