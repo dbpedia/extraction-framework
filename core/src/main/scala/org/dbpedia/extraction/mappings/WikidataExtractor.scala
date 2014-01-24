@@ -29,7 +29,7 @@ class WikidataExtractor(
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.Wikidata)
 
-  override def extract(page : JsonNode , subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(page : JsonNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
   {
     // Filter the namespace we want to parse
     //if(page.title.namespace != Namespace.Main) return Seq.empty
