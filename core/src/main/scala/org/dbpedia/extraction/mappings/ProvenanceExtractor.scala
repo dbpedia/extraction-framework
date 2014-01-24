@@ -11,7 +11,7 @@ import org.dbpedia.extraction.sources.WikiPage
  * Extracts links to the article revision that the data was extracted from, e.g.
  * <http://dbpedia.org/resource/Foo> <http://www.w3.org/ns/prov#wasDerivedFrom> <http://en.wikipedia.org/wiki/Foo?oldid=123456> .
  */
-class RevisionUriExtractor (
+class ProvenanceExtractor (
   context: {
     def ontology: Ontology
     def language: Language
