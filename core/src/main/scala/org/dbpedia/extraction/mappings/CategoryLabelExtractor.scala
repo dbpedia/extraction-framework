@@ -24,6 +24,6 @@ class CategoryLabelExtractor( context : {
     override def extract(node : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Category) Seq.empty
-        else Seq(quad(subjectUri, node.title.decoded, node.title.pageIri))
+        else Seq(quad(subjectUri, node.title.decoded, node.sourceUri))
     }
 }

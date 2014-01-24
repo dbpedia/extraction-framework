@@ -50,14 +50,14 @@ class ContributorExtractor( context : {
     //      contributorName, node.sourceUri, context.ontology.getDatatype("xsd:string").get );
     //Required Quads
     val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.RevisionMeta, pageURL, contributorPredicate,
-      contributorURL, node.title.pageIri, null );
+      contributorURL, node.sourceUri, null );
 
     val quadContributorName = new Quad(context.language, DBpediaDatasets.RevisionMeta, contributorURL,
       context.ontology.properties.get("rdfs:label").get,
-      contributorName, node.title.pageIri, context.ontology.datatypes.get("xsd:string").get );
+      contributorName, node.sourceUri, context.ontology.datatypes.get("xsd:string").get );
 
     val quadContributorID = new Quad(context.language, DBpediaDatasets.RevisionMeta, contributorURL, contributorIDPredicate,
-      contributorID.toString, node.title.pageIri, context.ontology.datatypes.get("xsd:integer").get );
+      contributorID.toString, node.sourceUri, context.ontology.datatypes.get("xsd:integer").get );
 
     Seq(quadPageWithContributor, quadContributorName, quadContributorID);
 
