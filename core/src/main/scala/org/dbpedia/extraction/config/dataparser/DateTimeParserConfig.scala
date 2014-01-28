@@ -84,9 +84,13 @@ object DateTimeParserConfig
             "bda"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Bda"
             "dob"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Dob"
             "start date"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Start date"
+            "end date"            -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"End date"
 
             //Contains only text, just call findDate()  "1" is the property to look up for
             "birth-date"          -> Map ("text" -> "1"),                              //"Birth-date"
+            "start-date"          -> Map ("text" -> "1"),
+            "death-date"          -> Map ("text" -> "1"),                              //"Death-date"
+            "end-date"            -> Map ("text" -> "1"),
 
             //conditional mapping .. for multiple matching ifPropertyNumHasValue could be a regex (not implemented for multiple)
             "birthdeathage"       -> Map ("ifPropertyNum" -> "1", "ifPropertyNumHasValue" -> "B", //"BirthDeathAge"
