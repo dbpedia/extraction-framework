@@ -186,6 +186,10 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
     {
         parse("en", "xsd:date", "June, 21 2007 BC") should equal (Some("-2007-06-21"))
     }
+    "DateTimeParser" should "return date (28 June 548 (aged 48))" in
+    {
+        parse("en", "xsd:date", "28 June 548 (aged 48)") should equal (Some("0548-06-28"))
+    }
 
     /*"DateTimeParser" should "return date (|1912|10|12|)" in
     {
