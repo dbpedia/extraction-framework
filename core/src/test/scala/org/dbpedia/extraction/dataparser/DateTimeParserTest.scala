@@ -443,6 +443,30 @@ class DateTimeParserTest extends FlatSpec with ShouldMatchers
         parse("en", "xsd:date", "09:32, April 6 2000 (UTC)") should equal (Some("2000-04-06"))
     }
 
+    // https://github.com/dbpedia/extraction-framework/issues/163
+    "DateTimeParser" should """return date April 5th 2012 from 'April 5th 2012'""" in
+    {
+        parse("en", "xsd:date", "April 5th 2012") should equal (Some("2012-04-05"))
+    }
+    "DateTimeParser" should "return year 1470" in
+    {
+        parse("en", "xsd:gYear", "1470, about") should equal (Some("1470"))
+    }
+    "DateTimeParser" should """return date March 16, 1520 from '1520, March 16'""" in
+    {
+        parse("en", "xsd:date", "1520, March 16") should equal (Some("1520-03-16"))
+    }
+    "DateTimeParser" should "return date October 26, 1945" in
+    {
+        parse("en", "xsd:date", "October 26, 1945 (possibly)") should equal (Some("1945-10-26"))
+    }
+    // Should this return both dates?!
+    /*"DateTimeParser" should "return date February 20, 1784 from 'February 20 or 29, 1784'" in
+    {
+        parse("en", "xsd:date", "February 20 or 29, 1784") should equal (Some("1784-02-20"))
+    }*/
+    // end of https://github.com/dbpedia/extraction-framework/issues/163
+
     "DateTimeParser" should "return date (April 6. 2000)" in
     {
         parse("en", "xsd:date", "April 6. 2000") should equal (Some("2000-04-06"))
