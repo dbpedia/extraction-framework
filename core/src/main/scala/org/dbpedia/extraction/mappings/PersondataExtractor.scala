@@ -39,6 +39,7 @@ extends PageNodeExtractor
     private val dateParser = new DateTimeParser(context, new Datatype("xsd:date"))
     private val monthYearParser = new DateTimeParser(context, new Datatype("xsd:gMonthYear"))
     private val monthDayParser = new DateTimeParser(context, new Datatype("xsd:gMonthDay"))
+    private val yearParser = new DateTimeParser(context, new Datatype("xsd:gYear"))
 
     private val birthDateProperty = context.ontology.properties("birthDate")
     private val birthPlaceProperty = context.ontology.properties("birthPlace")
@@ -162,6 +163,10 @@ extends PageNodeExtractor
             return Some((date.toString, date.datatype))
         }
         for (date <- monthDayParser.parse(node))
+        {
+            return Some((date.toString, date.datatype))
+        }
+        for (date <- yearParser.parse(node))
         {
             return Some((date.toString, date.datatype))
         }
