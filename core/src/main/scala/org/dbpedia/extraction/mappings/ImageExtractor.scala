@@ -46,7 +46,7 @@ extends PageNodeExtractor
 
   private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
 
-  logger.info("Loadings images")
+  logger.info("Loading images")
   private val nonFreeImages = new HashSet[String]()
   private val freeWikipediaImages = new HashSet[String]()
   ImageExtractor.loadImages(context.commonsSource, null, nonFreeImages, wikiCode)
