@@ -1,0 +1,30 @@
+This is an extension to MediaWiki to provide an OAI-PMH repository
+interface by which page updates can be snarfed in a relatively sane fashion
+to a mirror site.
+
+OAI-PMH protocol specs:
+http://www.openarchives.org/OAI/openarchivesprotocol.html
+
+A harvester script forms the client half. Apply oaiharvest_table.sql to
+clients to allow saving a checkpointing record; this ensures consistent
+update ordering.
+
+
+At the moment this script is quite experimental; it may not implement the
+whole spec yet, and hooks for actually updating may not be complete.
+
+The extension adds an 'updates' table which associates last-edit timestamps
+with cur_id values. A separate table is used so it can also hold entries for
+cur rows which have been deleted, allowing this to be explicitly mentioned
+to a harvester even if it comes back after quite a while.
+
+Clients will get only the latest current update; this does not include
+complete old page entries by design, as basic mirrors generally don't need
+to maintain that extra stuff.
+
+
+As of May 19, the updater will attempt to update the links tables on edits,
+and can fetch uploaded image files automatically.
+
+(Uploads must be enabled locally with $wgEnableUploads = true; or no files
+will be fetched. image table records will be updated either way.)
