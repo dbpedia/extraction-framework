@@ -161,9 +161,7 @@
                 <version>${scalatest.version}</version>
                 <scope>test</scope>
             </dependency>
-
-    </dependencies>
-
+        </dependencies>
     </dependencyManagement>
 
     <distributionManagement>
@@ -179,5 +177,27 @@
         </snapshotRepository>
     </distributionManagement>
 
+    <profiles>
+        <profile>
+            <id>incremental</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.alchim31.maven</groupId>
+                        <artifactId>scala-maven-plugin</artifactId>
+
+                        <configuration>
+                            <!-- Enable incremental compilation -->
+                            <recompileMode>incremental</recompileMode>
+                            <!-- Use an external Zinc server for compilation.
+                            If there is no Zinc server currently running then the plugin falls back to regular incremental compilation.
+                            Seems pretty safe. -->
+                            <useZincServer>true</useZincServer>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
 
