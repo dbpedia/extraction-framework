@@ -119,7 +119,7 @@ sed -r 's/%([89ABCDEF])/\\x\1/g' abc.nt | while read -r line ; do echo -e $line 
 ls -1 */*/*-page-links*.{nt,ttl}.gz | grep -v -E 'en-uris|unredirected' > page-links.txt
 
 # generate in-link counts
-( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i; gzip -d < $i | grep -v '^#' | cut -d ' ' -f 3 | sort | uniq -c | sort -k 1,1 -n -s -r | awk '{print $2" <http://dbpedia.org/ontology/wikiPageInLinkCount> \""$1"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-in-link-counts} ; done &> page-in-link-counts.log & )
+( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i; join <(gzip -d < $i | grep -v '^#' | cut -d ' ' -f 3 | sort | uniq -c | awk '{print $2" "$1}') <(gzip -d < ${i/page-links/labels} | grep -v '^#' | cut -d ' ' -f 1 | sort) | sort -k 2,2 -n -s -r | awk '{print $1" <http://dbpedia.org/ontology/wikiPageInLinkCount> \""$2"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-in-link-counts} ; done &> page-in-link-counts.log & )
 
 # generate out-link count
 # (the first sort is not really necessary - our triples are already grouped by subject, and grouping is enough for uniq - but it's nicer that the in-link and out-link counts are sorted similarly)
