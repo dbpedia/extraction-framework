@@ -111,7 +111,7 @@ class WikiApi(url: URL, language: Language)
     /**
      * Retrieves multiple pages by their title.
      *
-     * @param pageIds The titles of the pages to be downloaded.
+     * @param titles The titles of the pages to be downloaded.
      */
     def retrievePagesByTitle[U](titles : Iterable[WikiTitle]) = new Traversable[WikiPage]
     {
@@ -119,7 +119,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(titleGroup <- titles.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(t => URLEncoder.encode(t.encodedWithNamespace, "UTF-8")).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(formatWikiTitle).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }
@@ -138,7 +138,7 @@ class WikiApi(url: URL, language: Language)
 
         proc(
           new WikiPage(
-            title        = WikiTitle.parse((page \ "@title").head.text, language),
+            title           = WikiTitle.parse((page \ "@title").head.text, language),
             redirect        = null, // TODO: read redirect from XML
             id              = (page \ "@pageid").head.text,
             revision        = (rev \ "@revid").head.text,
@@ -242,5 +242,15 @@ class WikiApi(url: URL, language: Language)
         }
 
         throw new IllegalStateException("Should never get there")
+    }
+
+  /**
+   * Formats {@param title} to be used with MediaWiki API
+   *
+   * @param title
+   * @return
+   */
+    private def formatWikiTitle(title: WikiTitle) : String = {
+        URLEncoder.encode(title.decodedWithNamespace.replace(' ', '_'), "UTF-8")
     }
 }
