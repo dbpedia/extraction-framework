@@ -1,0 +1,4 @@
+#!/bin/bash
+
+BASEDIR=$(dirname $0)
+lighttpd -D -f "$BASEDIR"/lighttpd.conf &>>"$BASEDIR"/lighttpd.log &
