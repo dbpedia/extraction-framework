@@ -136,14 +136,14 @@ sed -r 's/%([89ABCDEF])/\\x\1/g' abc.nt | while read -r line ; do echo -e $line 
 
 # At first, I counted all links, but the results were misleading or ugly. Here's a short explanation why I decided to use only certain links:
 # For in-link count:
-# * to non-existent pages: no!
+# * to non-existent pages: no! There would be too many silly page names with in-link count 1.
 # * from redirect pages: might just leave them in. no big deal. number of redirect source names will be roughly proportional to importance of page, so that's probably ok
 # * to redirect pages: already resolved
 # * from disambig pages: ok, never mind
 # * to disambig pages: ok
 # For out-link count:
 # * to non-existent pages: ok
-# * from redirect pages: no!
+# * from redirect pages: no! There would be too many pages with out-link count 1.
 # * to redirect pages: already resolved
 # * from disambig pages: ok, never mind
 # * to disambig pages: ok, never mind
