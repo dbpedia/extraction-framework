@@ -23,7 +23,7 @@ class WikidataNameSpaceSameAsExtractor(
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
   private val dcLanguage = context.ontology.properties("dc:language")
-  //private val sameasProperty = context.ontology.properties("")
+  private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
 
   // this is where we will store the output
@@ -33,9 +33,9 @@ class WikidataNameSpaceSameAsExtractor(
   {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
-    val property = "http://www.w3.org/2002/07/owl#sameAs"
+
     val objectUri = subjectUri.replace("wikidata.dbpedia.org/resource","wikidata.org/entity")
-    quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, property , objectUri, page.wikiPage.title.pageIri,null)
+    quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, sameAsProperty , objectUri, page.wikiPage.title.pageIri,null)
 
     quads
   }
