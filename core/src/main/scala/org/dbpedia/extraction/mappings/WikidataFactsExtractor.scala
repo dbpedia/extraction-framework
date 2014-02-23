@@ -58,11 +58,11 @@ class WikidataFactsExtractor(
                 for( fact <- valueFacts.keys)
                 {
                   if(valueFacts(fact)=="")
-                    quads += new Quad(null, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.title.pageIri, context.ontology.datatypes("xsd:string"))
+                    quads += new Quad(null, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, context.ontology.datatypes("xsd:string"))
                   else if (valueFacts(fact) == "CommonMediaFile")
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.title.pageIri, null)
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, null)
                   else
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.title.pageIri, context.ontology.datatypes(valueFacts(fact)))
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, context.ontology.datatypes(valueFacts(fact)))
                 }
               }
           }
@@ -77,8 +77,7 @@ class WikidataFactsExtractor(
               val UriFacts = node.getUriTriples(property)
               for( fact <- UriFacts)
               {
-                //println(subjectUri+"\t"+property+"\t"+fact)
-                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.title.pageIri, null)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, null)
               }
             }
           }

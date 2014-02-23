@@ -25,7 +25,7 @@ class WikidataSameAsExtractor(
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
   private val dcLanguage = context.ontology.properties("dc:language")
-  //private val sameasProperty = context.ontology.properties("")
+  private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
 
   // this is where we will store the output
@@ -54,7 +54,7 @@ class WikidataSameAsExtractor(
                 //links returned from the wikiparser are in the form of URIs so SimpleNode.getUriTriples method is used
                 for( llink <- node.getUriTriples(property))
                 {
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataSameAs, subjectUri, property,llink, page.wikiPage.title.pageIri,null)
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataSameAs, subjectUri, sameAsProperty,llink, page.wikiPage.sourceUri,null)
                 }
               }
               case _=> //ignore others

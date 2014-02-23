@@ -59,7 +59,7 @@ class WikidataLabelExtractor(
                   //write triples for languages that included only in the namespace
                   Language.get(lang) match
                   {
-                    case Some(l) => quads += new Quad(l, DBpediaDatasets.WikidataLabels, subjectUri, labelProperty, labelsMap(lang), page.wikiPage.title.pageIri, context.ontology.datatypes("xsd:string"))
+                    case Some(l) => quads += new Quad(l, DBpediaDatasets.WikidataLabels, subjectUri, labelProperty, labelsMap(lang), page.wikiPage.sourceUri, context.ontology.datatypes("xsd:string"))
                     case _=>
                   }
                 }

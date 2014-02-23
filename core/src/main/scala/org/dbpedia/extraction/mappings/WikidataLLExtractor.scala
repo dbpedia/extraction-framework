@@ -23,7 +23,7 @@ class WikidataLLExtractor(
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
   private val dcLanguage = context.ontology.properties("dc:language")
-  //private val sameasProperty = context.ontology.properties("")
+  private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
 
   // this is where we will store the output
@@ -55,7 +55,7 @@ class WikidataLLExtractor(
                 {
                   for (llink2 <- node.getUriTriples(property) diff List(llink))
                   {
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataLL, llink, property,llink2, page.wikiPage.title.pageIri,null)
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataLL, llink, sameAsProperty,llink2, page.wikiPage.sourceUri,null)
                   }
                 }
               }

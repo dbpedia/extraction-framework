@@ -25,7 +25,6 @@ class WikidataNameSpaceSameAsExtractor(
   private val dcLanguage = context.ontology.properties("dc:language")
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
-
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.WikidataNameSpaceSameAs )
 
@@ -35,7 +34,8 @@ class WikidataNameSpaceSameAsExtractor(
     val quads = new ArrayBuffer[Quad]()
 
     val objectUri = subjectUri.replace("wikidata.dbpedia.org/resource","wikidata.org/entity")
-    quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, sameAsProperty , objectUri, page.wikiPage.title.pageIri,null)
+
+    quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, sameAsProperty , objectUri, page.wikiPage.sourceUri,null)
 
     quads
   }
