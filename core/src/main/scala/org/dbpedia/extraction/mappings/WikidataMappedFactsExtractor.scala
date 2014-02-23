@@ -60,7 +60,7 @@ class WikidataMappedFactsExtractor(
             //check for triples that doesn't contain Label or sameas properties only
               node.NodeType match {
                 case JsonNode.CoordinatesFacts => {
-                  quads += new Quad(null, DBpediaDatasets.WikidataMappedFacts, subjectUri, context.ontology.properties(property), fact, page.wikiPage.title.pageIri)
+                  quads += new Quad(null, DBpediaDatasets.WikidataMappedFacts, subjectUri, context.ontology.properties(property), fact, page.wikiPage.sourceUri)
                 }
 
                 case JsonNode.CommonMediaFacts => {
@@ -69,7 +69,7 @@ class WikidataMappedFactsExtractor(
                   getDBpediaSameasProperties(property).foreach{dbProp =>
 
                     val fileURI = "http://commons.wikimedia.org/wiki/File:" + fact.replace(" ","_")
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp.uri,fileURI, page.wikiPage.title.pageIri,null)
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp.uri,fileURI, page.wikiPage.sourceUri,null)
 
                   }
                 }
@@ -89,7 +89,7 @@ class WikidataMappedFactsExtractor(
 
                     val dateParser = new DateTimeParser(context, dbProp.range.asInstanceOf[Datatype])
                     dateParser.parse(new TextNode(fact,0)) match {
-                      case Some(date) => quads += new Quad(context.language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp,date.toString, page.wikiPage.title.pageIri)
+                      case Some(date) => quads += new Quad(context.language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp,date.toString, page.wikiPage.sourceUri)
                       case None =>
                     }
                   }
@@ -112,7 +112,7 @@ class WikidataMappedFactsExtractor(
               for( fact <- UriFacts)
               {
                     getDBpediaSameasProperties(property).foreach({mappedProp =>
-                      quads += new Quad(Language.apply("en"), DBpediaDatasets.WikidataMappedFacts, subjectUri, mappedProp.toString,fact, page.wikiPage.title.pageIri,null)
+                      quads += new Quad(Language.apply("en"), DBpediaDatasets.WikidataMappedFacts, subjectUri, mappedProp.toString,fact, page.wikiPage.sourceUri,null)
                     })
               }
             }
