@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.{OntologyProperty, Ontology}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets}
-import org.dbpedia.extraction.wikiparser.{JsonNode, PageNode , TextNode}
+import org.dbpedia.extraction.wikiparser.{JsonNode, PageNode, TextNode}
 import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.dataparser.{DataParser, DateTimeParser}
@@ -43,7 +43,7 @@ class WikidataMappedFactsExtractor(
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 
-    //for each parser method exists a children node , you can differentiate between them through the Tiples property
+    //for each parser method exists a children node, you can differentiate between them through the Tiples property
     //for example :  skos:label  >> for labels extractor
     //               owl:sameas >> for  Language links
     for (n <- page.children) {
@@ -60,7 +60,7 @@ class WikidataMappedFactsExtractor(
             //check for triples that doesn't contain Label or sameas properties only
               node.NodeType match {
                 case JsonNode.CoordinatesFacts => {
-                  quads += new Quad(null, DBpediaDatasets.WikidataMappedFacts, subjectUri, context.ontology.properties(property) ,fact , page.wikiPage.title.pageIri)
+                  quads += new Quad(null, DBpediaDatasets.WikidataMappedFacts, subjectUri, context.ontology.properties(property), fact, page.wikiPage.title.pageIri)
                 }
 
                 case JsonNode.CommonMediaFacts => {
@@ -69,7 +69,7 @@ class WikidataMappedFactsExtractor(
                   getDBpediaSameasProperties(property).foreach{dbProp =>
 
                     val fileURI = "http://commons.wikimedia.org/wiki/File:" + fact.replace(" ","_")
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp.uri,fileURI , page.wikiPage.title.pageIri,null)
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp.uri,fileURI, page.wikiPage.title.pageIri,null)
 
                   }
                 }
@@ -78,7 +78,7 @@ class WikidataMappedFactsExtractor(
                   //lot of parsing has to be done depending on data-type categories
                   getDBpediaSameasProperties(property).foreach{dbProp =>
 
-                    quads += new Quad(null, DBpediaDatasets.WikidataMappedFacts, subjectUri,dbProp ,fact , page.wikiPage.title.pageIri)
+                    quads += new Quad(null, DBpediaDatasets.WikidataMappedFacts, subjectUri,dbProp, fact, page.wikiPage.title.pageIri)
 
                   }
                 }
@@ -112,7 +112,7 @@ class WikidataMappedFactsExtractor(
               for( fact <- UriFacts)
               {
                     getDBpediaSameasProperties(property).foreach({mappedProp =>
-                      quads += new Quad(Language.apply("en"), DBpediaDatasets.WikidataMappedFacts, subjectUri, mappedProp.toString,fact , page.wikiPage.title.pageIri,null)
+                      quads += new Quad(Language.apply("en"), DBpediaDatasets.WikidataMappedFacts, subjectUri, mappedProp.toString,fact, page.wikiPage.title.pageIri,null)
                     })
               }
             }

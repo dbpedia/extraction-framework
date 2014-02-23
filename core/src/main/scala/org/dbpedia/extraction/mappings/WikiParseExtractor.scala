@@ -23,7 +23,7 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 
   override val datasets: Set[Dataset] = extractors.datasets
 
-  override def extract(input: WikiPage , subjectUri: String, context: PageContext): Seq[Quad] = {
+  override def extract(input: WikiPage, subjectUri: String, context: PageContext): Seq[Quad] = {
 
     val parser = new SimpleWikiParser()
     val node = parser(input)

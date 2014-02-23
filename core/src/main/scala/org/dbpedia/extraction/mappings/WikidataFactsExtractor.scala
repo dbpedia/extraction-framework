@@ -39,7 +39,7 @@ class WikidataFactsExtractor(
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 
-    //for each parser method exists a children node , you can differentiate between them through the Tiples property
+    //for each parser method exists a children node, you can differentiate between them through the Tiples property
     //for example :  skos:label  >> for labels extractor
     //               owl:sameas >> for  Language links
     for (n <- page.children) {
@@ -58,11 +58,11 @@ class WikidataFactsExtractor(
                 for( fact <- valueFacts.keys)
                 {
                   if(valueFacts(fact)=="")
-                    quads += new Quad(null , DBpediaDatasets.WikidataFacts, subjectUri, property ,fact , page.wikiPage.title.pageIri, context.ontology.datatypes("xsd:string"))
+                    quads += new Quad(null, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.title.pageIri, context.ontology.datatypes("xsd:string"))
                   else if (valueFacts(fact) == "CommonMediaFile")
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property,fact , page.wikiPage.title.pageIri,null)
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.title.pageIri, null)
                   else
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property ,fact , page.wikiPage.title.pageIri, context.ontology.datatypes(valueFacts(fact)))
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.title.pageIri, context.ontology.datatypes(valueFacts(fact)))
                 }
               }
           }
@@ -78,7 +78,7 @@ class WikidataFactsExtractor(
               for( fact <- UriFacts)
               {
                 //println(subjectUri+"\t"+property+"\t"+fact)
-                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property,fact , page.wikiPage.title.pageIri,null)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.title.pageIri, null)
               }
             }
           }

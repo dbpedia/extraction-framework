@@ -11,7 +11,7 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
  *
  * JsonParseExtractor as explained in the design : https://f.cloud.github.com/assets/607468/363286/1f8da62c-a1ff-11e2-99c3-bb5136accc07.png
  *
- * send page to JsonParser , if jsonparser returns none do nothing
+ * send page to JsonParser, if jsonparser returns none do nothing
  * if it's parsed correctly send the JsonNode to the next level extractors
  *
  * @param extractors a Sequence of CompositeJsonNodeExtractor
@@ -21,7 +21,7 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 
   override val datasets: Set[Dataset] = extractors.datasets
 
-  override def extract(input: WikiPage , subjectUri: String, context: PageContext): Seq[Quad] = {
+  override def extract(input: WikiPage, subjectUri: String, context: PageContext): Seq[Quad] = {
 
     val parser = new JsonWikiParser()
     val node = parser(input)
