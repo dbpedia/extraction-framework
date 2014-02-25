@@ -82,7 +82,7 @@ extends PageNodeExtractor
 
     private val doubleParser = new DoubleParser(context, true)
 
-    private val dataTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
+    private val dateTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
                                   .map(datatype => new DateTimeParser(context, new Datatype(datatype), true))
 
     private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
@@ -248,8 +248,8 @@ extends PageNodeExtractor
     
     private def extractDate(node : PropertyNode) : Option[(String, Datatype)] =
     {
-        for (dataTimeParser <- dataTimeParsers;
-             date <- dataTimeParser.parse(node))
+        for (dateTimeParser <- dateTimeParsers;
+             date <- dateTimeParser.parse(node))
         {
             return Some((date.toString, date.datatype))
         }
