@@ -91,7 +91,8 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
     {
         val xml = new scala.xml.NodeBuffer()
 
-        //Type
+        //Type  (add rdf:Property as well, we already do it for the class instances)
+        xml += <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property" />
         if (property.isFunctional)
         {
              xml += <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty" />
