@@ -3,6 +3,8 @@ package org.dbpedia.extraction.sources
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.sources.WikiPage._
 import org.dbpedia.extraction.util.StringUtils._
+import java.lang.StringBuilder
+import org.dbpedia.extraction.util.WikiUtil
 
 /**
  * Represents a wiki page
@@ -35,6 +37,8 @@ class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val 
      * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.8.
      */
     def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
+
+    def sourceUri : String = title.pageIri + (if (revision >= 0) "?oldid=" + revision else "")
 }
 
 object WikiPage {
