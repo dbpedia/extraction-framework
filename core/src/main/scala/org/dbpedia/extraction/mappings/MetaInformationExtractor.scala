@@ -7,6 +7,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.net.URI
 import scala.language.reflectiveCalls
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,7 +19,7 @@ import scala.language.reflectiveCalls
 
 class MetaInformationExtractor( context : {
   def ontology : Ontology
-  def language : Language } ) extends PageNodeExtractor
+  def language : Language } ) extends WikiPageExtractor
 {
   val modificationDatePredicate = context.ontology.properties("wikiPageModified")
   val extractionDatePredicate = context.ontology.properties("wikiPageExtracted")
@@ -29,7 +30,7 @@ class MetaInformationExtractor( context : {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
@@ -53,7 +54,7 @@ class MetaInformationExtractor( context : {
       historyLink, page.sourceUri, null )
 
 
-    Seq(quadModificationDate, quadExtractionDate, quadEditlink, quadRevisionlink, quadHistorylink);
+    Seq(quadModificationDate, quadExtractionDate, quadEditlink, quadRevisionlink, quadHistorylink)
 
 
   }
