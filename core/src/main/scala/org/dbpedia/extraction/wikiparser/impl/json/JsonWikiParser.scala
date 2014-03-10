@@ -69,14 +69,24 @@ class JsonWikiParser {
       case _ => throw new IllegalStateException("Invalid JSON representation!")
     }
 
+
+    //wikidata new format : http://pastie.org/8859751#1015,1028
     /** get all nodes under json key  "links" which will be in the form
-     *  {
-     *   "arwiki": "نيويورك (مدينة)",
-     *   "frwiki": "New York",
-     *   "eowiki": "Novjorko",
-     *   "plwiki": "Nowy Jork"
-     *  }
+      *  "links":{
+      "enwiki":{
+         "name":"Scotland",
+         "badges":[
+
+         ]
+      },
+      "nlwiki":{
+         "name":"Schotland",
+         "badges":[
+
+         ]
+      }}
      */
+
     val interLinks = (jsonObjMap \ "links") match {
       case JObject(links) => links
       case _ => List()
@@ -84,6 +94,7 @@ class JsonWikiParser {
 
 
     var interLinksMap = collection.mutable.Map[String, List[String]]()
+
     var values = List[String]()
 
     interLinks.foreach { interLink : JField =>
@@ -91,11 +102,29 @@ class JsonWikiParser {
         //use regex to remove the convert  arwiki -> ar
 
         case WikiLanguageRegex(lang) =>  {
-          var wikiPageName :String = interLink.value.extract[String]
-          val suffix = wikiPageName.replace(" ","_")
-          val prefix = if (lang=="en") "" else lang+"."
 
-          values ::= "http://"+prefix+"dbpedia.org/resource/"+suffix+""
+          //extract wikipage name from json
+          var wikiPageName = ""
+
+          interLink.value.asInstanceOf[JObject].obj.foreach { j : JField =>
+            if (j.name == "name")
+            {
+              wikiPageName = j.value.extract[String]
+            }
+          }
+          //check if wikiPageName is not empty
+          wikiPageName match {
+            case "" =>
+            case _ => {
+
+              val suffix = wikiPageName.replace(" ","_")
+              val prefix = if (lang=="en") "" else lang+"."
+
+              values ::= "http://"+prefix+"dbpedia.org/resource/"+suffix+""
+            }
+          }
+
+
         }
         case _ =>
       }
@@ -145,6 +174,8 @@ class JsonWikiParser {
     //    "pl": "Nowy Jork",
     //  }
     // Json sample : http://pastebin.com/zygpzhJK
+    // new format after - 4/3/2014
+    // http://pastie.org/8859751#1015,1028
 
     val interLinks = (jsonObjMap \ "label") match {
       case JObject(links) => links
