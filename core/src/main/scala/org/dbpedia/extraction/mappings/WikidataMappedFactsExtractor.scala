@@ -45,7 +45,7 @@ class WikidataMappedFactsExtractor(
 
     //for each parser method exists a children node, you can differentiate between them through the Tiples property
     //for example :  skos:label  >> for labels extractor
-    //               owl:sameas >> for  Language links
+    //owl:sameas >> for  Language links
     for (n <- page.children) {
 
       n match {
@@ -130,9 +130,10 @@ class WikidataMappedFactsExtractor(
 
   def getDBpediaSameasProperties(property:String) : Set[OntologyProperty] =
   {
+    val p = property.replace("http://www.wikidata.org/entity/","http://wikidata.dbpedia.org/resource/")
     var properties = Set[OntologyProperty]()
     context.ontology.equivalentPropertiesMap.foreach({map =>
-      if (map._1.toString.matches(property))
+      if (map._1.toString.matches(p))
       {
         map._2.foreach{mappedProp =>
           properties += mappedProp
