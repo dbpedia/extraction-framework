@@ -64,7 +64,8 @@ class JsonWikiParser {
 
     val parsedText = parseOpt(json)
 
-    val jsonObjMap = parsedText match {
+    val jsonObjMap = parsedText match 
+    {
       case Some(map) => map
       case _ => throw new IllegalStateException("Invalid JSON representation!")
     }
@@ -87,7 +88,8 @@ class JsonWikiParser {
       }}
      */
 
-    val interLinks = (jsonObjMap \ "links") match {
+    val interLinks = (jsonObjMap \ "links") match 
+    {
       case JObject(links) => links
       case _ => List()
     }
@@ -152,7 +154,8 @@ class JsonWikiParser {
    *                                                      "fr" -> "New York"
    *                                                      "co" -> "New York"
    */
-  def getLabels(page: WikiPage) : List[Node] = {
+  def getLabels(page: WikiPage) : List[Node] = 
+  {
 
     var nodes = List[Node]()
     val json = page.source
@@ -177,7 +180,8 @@ class JsonWikiParser {
     // new format after - 4/3/2014
     // http://pastie.org/8859751#1015,1028
 
-    val interLinks = (jsonObjMap \ "label") match {
+    val interLinks = (jsonObjMap \ "label") match 
+    {
       case JObject(links) => links
       case _ => List()
     }
@@ -227,14 +231,16 @@ class JsonWikiParser {
    *
    * 4- depending on the output type decide to add it to the URITriples or ValuesTriples or MappedValueTriples or MappedURItriples
    */
-  def getFacts(page: WikiPage) : List[Node] = {
+  def getFacts(page: WikiPage) : List[Node] = 
+  {
 
     var nodes = List[Node]()
     val json = page.source
 
     val parsedText = parseOpt(json)
 
-    val jsonObjMap = parsedText match {
+    val jsonObjMap = parsedText match 
+    {
       case Some(map) => map
       case _ => throw new IllegalStateException("Invalid JSON representation!")
     }
@@ -248,7 +254,8 @@ class JsonWikiParser {
 
     //get claims only whose are values and has rank ==1 in List[JObject]
 
-    val claims = for {
+    val claims = for 
+    {
       JObject(claim) <- (jsonObjMap \ "claims")
       JField("rank", JInt(rank)) <- claim
       JArray(m) <- (claim \ "m")
@@ -267,7 +274,8 @@ class JsonWikiParser {
       val property = "http://www.wikidata.org/entity/P"+propID
 
 
-      (claim \ "m")(2).extract[String] match {
+      (claim \ "m")(2).extract[String] match 
+      {
 
         case "wikibase-entityid" =>
         {
@@ -363,7 +371,8 @@ class JsonWikiParser {
 
 
 //helper function for checking the type of property , used in getFacts method
-  def isCommonMediaFiles(prop:String) :Boolean = {
+  def isCommonMediaFiles(prop:String) :Boolean = 
+  {
     val commonMediaFilesProperties = List("P10","P109","P117","P14","P15","P154","P158","P18","P181","P207","P242","P367","P368","P41","P443","P491","P51","P623","P692","P94")
     commonMediaFilesProperties.contains(prop)
   }
