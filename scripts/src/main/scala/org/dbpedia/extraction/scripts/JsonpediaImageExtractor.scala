@@ -7,8 +7,8 @@ import org.eclipse.jetty.http.{HttpMethod, HttpStatus}
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
-case class JsonpediaInnerResult(url: String, description: String, section_idx: Int)
-case class JsonpediaResult(filter: String, result: List[JsonpediaInnerResult])
+case class ImageExtractionInnerResult(url: String, description: String, section_idx: Int)
+case class ImageExtractionResult(filter: String, result: List[ImageExtractionInnerResult])
 
 /**
  * Emits picture information for a wikipedia page as triples.
@@ -17,14 +17,14 @@ case class JsonpediaResult(filter: String, result: List[JsonpediaInnerResult])
  * ../run JsonpediaImageExtractor "en:Dog"
  */
 object JsonpediaImageExtractor {
-  /**
-   * Splits a wikipedia article in language and page (if possible).
-   * e.g. en:Dog -> ("en", "Dog")
-   */
   private val httpClient = new HttpClient()
   httpClient.start()
   implicit val formats = DefaultFormats
 
+  /**
+   * Splits a wikipedia article in language and page (if possible).
+   * e.g. en:Dog -> ("en", "Dog")
+   */
   private def extractImagesFrom(wikiPage: String): Seq[String] = {
     val response = httpClient.newRequest(s"http://json.it.dbpedia.org/annotate/resource/json/$wikiPage")
       .method(HttpMethod.GET)
@@ -33,7 +33,7 @@ object JsonpediaImageExtractor {
       .send()
 
     response.getStatus match {
-      case HttpStatus.OK_200 => parse(response.getContentAsString).extract[JsonpediaResult].result.map(_.url)
+      case HttpStatus.OK_200 => parse(response.getContentAsString).extract[ImageExtractionResult].result.map(_.url)
       case _ => throw new RuntimeException("error getting response from dbpedia, body was: " + response.getContentAsString)
     }
   }
