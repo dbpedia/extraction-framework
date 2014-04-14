@@ -38,14 +38,17 @@ object JsonpediaImageExtractor {
     }
   }
 
-  private def splitArticle(article: String): String = article.split(":") match {
-      case Array(_,b) => b
+  private def splitArticle(article: String): (String, String) = article.split(":") match {
+      case Array(a,b) => (a, b)
       case _ => throw new IllegalArgumentException("invalid article string")
   }
 
-  private def emitTriples(page: String, pictures: Seq[String]) = {
+  private def emitTriples(lang:String, page: String, pictures: Seq[String]) = {
     pictures.map(
-      picture => s"<http://dbpedia.org/resource/$page> <http://xmlns.com/foaf/0.1/depiction> <$picture> ."
+      picture => lang match {
+        case "en" => s"<http://dbpedia.org/resource/$page> <http://xmlns.com/foaf/0.1/depiction> <$picture> ."
+        case _ => s"<http://$lang.dbpedia.org/resource/$page> <http://xmlns.com/foaf/0.1/depiction> <$picture> ."
+      }
     ).foreach(println)
   }
 
@@ -56,9 +59,9 @@ object JsonpediaImageExtractor {
     val wikiPage = args(0)
 
     try {
-      val page = splitArticle(wikiPage)
+      val (lang, page) = splitArticle(wikiPage)
       val images = extractImagesFrom(wikiPage)
-      emitTriples(page, images)
+      emitTriples(lang, page, images)
       httpClient.stop()
     } catch {
       case ia: IllegalArgumentException => {
