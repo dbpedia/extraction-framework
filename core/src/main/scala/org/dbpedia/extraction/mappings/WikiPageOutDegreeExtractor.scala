@@ -23,7 +23,6 @@ extends PageNodeExtractor
 {
   val wikiPageOutDegreeProperty = context.ontology.properties("wikiPageOutDegree")
   val nonNegativeInteger = context.ontology.datatypes("xsd:nonNegativeInteger")
-  private val quad = QuadBuilder(context.language, DBpediaDatasets.PageIds, wikiPageOutDegreeProperty, nonNegativeInteger) _
 
   override val datasets = Set(DBpediaDatasets.OutDegree)
 
