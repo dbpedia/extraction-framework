@@ -16,7 +16,14 @@ import org.dbpedia.util.text.ParseExceptionIgnorer
 /**
  * Extracts page abstracts.
  *
- * DBpedia-customized MediaWiki instance is required.
+ * From now on we use MobileFrontend for MW <2.21 and TextExtracts for MW > 2.22
+ * The patched mw instance is no longer needed except from minor customizations in LocalSettings.php
+ * TODO: we need to adapt the TextExtracts extension to accept custom wikicode syntax.
+ * TextExtracts now uses the article entry and extracts the abstract. The retional for
+ * the new extension is that we will not need to load all articles in MySQL, just the templates
+ * At the moment, setting up the patched MW takes longer than the loading of all articles in MySQL :)
+ * so, even this way it's way better and cleaner ;)
+ * We leave the old code commented since we might re-use it soon
  */
 
 class AbstractExtractor(
@@ -45,7 +52,8 @@ extends PageNodeExtractor
     //TODO make this configurable
     private val apiUrl = "http://localhost/mediawiki/api.php"
 
-    private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
+    //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
+    private val apiParametersFormat = "uselang="+language+"&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s"
 
     // lazy so testing does not need ontology
     private lazy val shortProperty = context.ontology.properties("rdfs:comment")
@@ -71,11 +79,11 @@ extends PageNodeExtractor
         if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
 
         //Reproduce wiki text for abstract
-        val abstractWikiText = getAbstractWikiText(pageNode)
+        //val abstractWikiText = getAbstractWikiText(pageNode)
         // if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
-        var text = retrievePage(pageNode.title, abstractWikiText)
+        var text = retrievePage(pageNode.title /*, abstractWikiText*/)
 
         text = postProcess(pageNode.title, text)
 
@@ -106,7 +114,7 @@ extends PageNodeExtractor
      * @param pageTitle The encoded title of the page
      * @return The page as an Option
      */
-    def retrievePage(pageTitle : WikiTitle, pageWikiText : String) : String =
+    def retrievePage(pageTitle : WikiTitle/*, pageWikiText : String*/) : String =
     {
       // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
       // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
@@ -114,7 +122,7 @@ extends PageNodeExtractor
       val titleParam = pageTitle.encodedWithNamespace.replace("&", "%26")
       
       // Fill parameters
-      val parameters = apiParametersFormat.format(titleParam, URLEncoder.encode(pageWikiText, "UTF-8"))
+      val parameters = apiParametersFormat.format(titleParam/*, URLEncoder.encode(pageWikiText, "UTF-8")*/)
 
       val url = new URL(apiUrl)
       
@@ -207,13 +215,15 @@ extends PageNodeExtractor
     /**
      * Get the parsed and cleaned abstract text from the MediaWiki instance input stream.
      * It returns
-     * <api> <parse> <text> ABSTRACT_TEXT </text> </parse> </api>
+     * <api> <query> <pages> <page> <extract> ABSTRACT_TEXT <extract> <page> <pages> <query> <api>
+     *  ///  <api> <parse> <text> ABSTRACT_TEXT </text> </parse> </api>
      */
     private def readInAbstract(inputStream : InputStream) : String =
     {
       // for XML format
       val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
-      val text = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      //val text = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
+      val text = (XML.loadString(xmlAnswer) \ "query" \ "pages" \ "page" \ "extract").text.trim
       decodeHtml(text)
     }
 
@@ -242,19 +252,22 @@ extends PageNodeExtractor
       text
     }
 
-    private val destinationNamespacesToRender = List(Namespace.Main, Namespace.Template)
+    //private val destinationNamespacesToRender = List(Namespace.Main, Namespace.Template)
 
+    /*
     private def renderNode(node : Node) = node match
     {
         case InternalLinkNode(destination, _, _, _) => destinationNamespacesToRender contains destination.namespace
         case ParserFunctionNode(_, _, _) => false
         case _ => true
     }
+    */
 
 
     /**
      * Get the wiki text that contains the abstract text.
      */
+    /*
     def getAbstractWikiText(pageNode : PageNode) : String =
     {
         // From first TextNode
@@ -298,7 +311,8 @@ extends PageNodeExtractor
         // decode HTML entities - the result is plain text
         decodeHtml(text)
     }
-    
+    */
+
     def decodeHtml(text: String): String = {
       val coder = new HtmlCoder(XmlCodes.NONE)
       coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
