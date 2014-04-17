@@ -52,8 +52,8 @@ class AbstractExtractorTest
 
       //return empty Abstract in case that the parser Returned None
       parser(page) match {
-        case Some(n) =>  val generatedAbstract = extractor.getAbstractWikiText(n)
-                         extractor.retrievePage(page.title, generatedAbstract)
+        case Some(n) =>  val generatedAbstract = extractor.retrievePage(n.title)
+                         extractor.retrievePage(page.title/*, generatedAbstract*/)
         case None => ""
       }
 
