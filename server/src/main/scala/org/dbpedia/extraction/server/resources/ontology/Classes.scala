@@ -86,6 +86,8 @@ class Classes
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <link rel="http://xmlns.com/foaf/0.1/primaryTopic" href={"http://dbpedia.org/ontology/" + ontClass.name} />
+            <link rel="http://xmlns.com/foaf/0.1/primaryTopic" href={"http://live.dbpedia.org/ontology/" + ontClass.name} />
           </head>
           <body>
             <h2>{ontClass.name} <span style="font-size:10pt;">(<a href={"../classes#" + ontClass.name}>Show in class hierarchy</a>)</span></h2>
