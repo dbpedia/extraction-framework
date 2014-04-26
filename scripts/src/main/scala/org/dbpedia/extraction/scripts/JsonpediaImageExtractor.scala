@@ -2,10 +2,9 @@ package org.dbpedia.extraction.scripts
 
 import scala.Console.err
 import java.lang.System
-import org.eclipse.jetty.client.HttpClient
-import org.eclipse.jetty.http.{HttpMethod, HttpStatus}
-import org.json4s._
-import org.json4s.jackson.JsonMethods._
+import org.glassfish.jersey.client._
+import net.liftweb.json.{parse, DefaultFormats}
+import javax.ws.rs.core.MediaType
 
 case class ImageExtractionInnerResult(url: String, description: String, section_idx: Int)
 case class ImageExtractionResult(filter: String, result: List[ImageExtractionInnerResult])
@@ -17,27 +16,28 @@ case class ImageExtractionResult(filter: String, result: List[ImageExtractionInn
  * ../run JsonpediaImageExtractor "en:Dog"
  */
 object JsonpediaImageExtractor {
-  private val httpClient = new HttpClient()
-  httpClient.start()
+  private val client = JerseyClientBuilder.createClient()
   implicit val formats = DefaultFormats
+
+  private def extractImagesFrom(wikiPage: String): Seq[String] = {
+    val response = client.target(s"http://json.it.dbpedia.org/annotate/resource/json/$wikiPage")
+      .queryParam("filter", "url:.*jpg")
+      .queryParam("procs", "Extractors,Structure")
+      .request(MediaType.APPLICATION_JSON_TYPE)
+      .get()
+
+    val responseBody = response.readEntity(classOf[String])
+
+    response.getStatus match {
+      case 200 => parse(responseBody).extract[ImageExtractionResult].result.map(_.url)
+      case _ => throw new RuntimeException("error getting response from dbpedia, body was: " + responseBody)
+    }
+  }
 
   /**
    * Splits a wikipedia article in language and page (if possible).
    * e.g. en:Dog -> ("en", "Dog")
    */
-  private def extractImagesFrom(wikiPage: String): Seq[String] = {
-    val response = httpClient.newRequest(s"http://json.it.dbpedia.org/annotate/resource/json/$wikiPage")
-      .method(HttpMethod.GET)
-      .param("filter", "url:.*jpg")
-      .param("procs", "Extractors,Structure")
-      .send()
-
-    response.getStatus match {
-      case HttpStatus.OK_200 => parse(response.getContentAsString).extract[ImageExtractionResult].result.map(_.url)
-      case _ => throw new RuntimeException("error getting response from dbpedia, body was: " + response.getContentAsString)
-    }
-  }
-
   private def splitArticle(article: String): (String, String) = article.split(":") match {
       case Array(a,b) => (a, b)
       case _ => throw new IllegalArgumentException("invalid article string")
@@ -62,16 +62,13 @@ object JsonpediaImageExtractor {
       val (lang, page) = splitArticle(wikiPage)
       val images = extractImagesFrom(wikiPage)
       emitTriples(lang, page, images)
-      httpClient.stop()
     } catch {
-      case ia: IllegalArgumentException => {
+      case ia: IllegalArgumentException =>
         err.println(ia.getMessage)
         System.exit(1)
-      }
-      case e: RuntimeException => {
+      case e: RuntimeException =>
         err.println(e.getMessage)
         System.exit(2)
-      }
     }
   }
 }
