@@ -38,7 +38,7 @@ object JsonpediaImageExtractor {
    * Splits a wikipedia article in language and page (if possible).
    * e.g. en:Dog -> ("en", "Dog")
    */
-  private def splitArticle(article: String): (String, String) = article.split(":") match {
+  private def splitArticle(article: String): (String, String) = article.split(":", 2) match {
       case Array(a,b) => (a, b)
       case _ => throw new IllegalArgumentException("invalid article string")
   }
