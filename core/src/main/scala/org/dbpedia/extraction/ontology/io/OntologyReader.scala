@@ -41,8 +41,8 @@ class OntologyReader
 
         // TODO: range should be rdfs:Class
         ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map(Language.Mappings -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map(Language.Mappings -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map(Language.Mappings -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map(Language.Mappings -> "has label"), Map(), false, false, "owl:Thing", "rdf:langString", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map(Language.Mappings -> "has comment"), Map(), false, false, "owl:Thing", "rdf:langString", Set())
 
         for(page <- pageNodeSource)
         {
