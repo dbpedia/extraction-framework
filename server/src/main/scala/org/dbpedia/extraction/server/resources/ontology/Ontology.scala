@@ -39,6 +39,6 @@ class Ontology
     @Produces(Array("application/rdf+xml"))
     def ontology =
     {
-        new OntologyOWLWriter().write(Server.instance.extractor.ontology)
+        new OntologyOWLWriter("latest-snapshot").write(Server.instance.extractor.ontology)
     }
 }
