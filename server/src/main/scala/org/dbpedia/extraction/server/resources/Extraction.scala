@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server.resources
 
 import java.net.{URL, URI}
-import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
 import org.dbpedia.extraction.util.Language
 import javax.ws.rs._
 import javax.ws.rs.core.{MediaType, Response}
@@ -79,6 +79,7 @@ class Extraction(@PathParam("lang") langCode : String)
                <option value="turtle-quads">Turtle-Quads</option>
                <option value="n-triples">N-Triples</option>
                <option value="n-quads">N-Quads</option>
+               <option value="rdf-json">RDF/JSON</option>
              </select><br/>
              <input type="submit" value="Extract" />
            </form>
@@ -103,6 +104,7 @@ class Extraction(@PathParam("lang") langCode : String)
             case "turtle-quads" => new TerseFormatter(true, true)
             case "n-triples" => new TerseFormatter(false, false)
             case "n-quads" => new TerseFormatter(true, false)
+            case "rdf-json" => new RDFJSONFormatter()
             case _ => TriX.writeHeader(writer, 2)
         }
 

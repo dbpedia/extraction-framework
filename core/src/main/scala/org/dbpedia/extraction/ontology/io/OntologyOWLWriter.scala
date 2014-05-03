@@ -3,10 +3,8 @@ package org.dbpedia.extraction.ontology.io
 import org.dbpedia.extraction.ontology._
 import datatypes.{DimensionDatatype, UnitDatatype}
 
-class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
+class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolean = true)
 {
-
-    private val Version = "3.8";
 
     private val EXPORT_EXTERNAL = false  // export owl, foaf, rdf, rdfs etc.
     
@@ -21,7 +19,7 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
             xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
         <owl:Ontology rdf:about="">
-          <owl:versionInfo xml:lang="en">{"Version " + Version}</owl:versionInfo>
+          <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
         </owl:Ontology>
         {
             //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
