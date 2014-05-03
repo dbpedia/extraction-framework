@@ -17,12 +17,13 @@ object OntologyDownloader {
     
   def main(args: Array[String]) : Unit =
   {
-    require(args != null && args.length == 2, "expected two arguments: target file for wikitext XML dump, target file for OWL format.")
+    require(args != null && args.length == 3, "expected three arguments: target file for wikitext XML dump, target file for OWL format and ontology version.")
     val dumpFile = new File(args(0))
     val owlFile = new File(args(1))
+    val version = args(2)
     download(dumpFile)
     val ontology = load(dumpFile)
-    save(ontology, owlFile)
+    save(ontology, version, owlFile)
   }
   
   def download(dumpFile: File): Unit =
@@ -42,11 +43,11 @@ object OntologyDownloader {
     ontology
   }
   
-  def save(ontology: Ontology, owlFile: File): Unit =
+  def save(ontology: Ontology, version: String, owlFile: File): Unit =
   {
     val nanos = System.nanoTime
     println("saving ontology to "+owlFile)
-    val xml = new OntologyOWLWriter().write(ontology)
+    val xml = new OntologyOWLWriter(version).write(ontology)
     val writer = new OutputStreamWriter(new FileOutputStream(owlFile), "UTF-8")
     try writer.write(xml.toString)
     finally writer.close()

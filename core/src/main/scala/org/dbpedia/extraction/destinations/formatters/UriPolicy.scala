@@ -101,7 +101,8 @@ object UriPolicy {
     "turtle-triples" -> { new TerseFormatter(false, true, _) },
     "turtle-quads" -> { new TerseFormatter(true, true, _) },
     "n-triples" -> { new TerseFormatter(false, false, _) },
-    "n-quads" -> { new TerseFormatter(true, false, _) }
+    "n-quads" -> { new TerseFormatter(true, false, _) },
+    "rdf-json" -> { new RDFJSONFormatter(_) }
   )
 
   /**
