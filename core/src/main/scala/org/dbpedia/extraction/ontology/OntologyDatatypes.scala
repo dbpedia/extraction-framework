@@ -13,7 +13,7 @@ object OntologyDatatypes
     {
         var types = List[Datatype]()
 
-        types ::= new Datatype("rdf:langString") // Strings with language tags
+        types ::= new Datatype("rdf:langString")         // Strings with language tags
 
         types ::= new Datatype("xsd:date")
         types ::= new Datatype("xsd:time")
@@ -23,8 +23,8 @@ object OntologyDatatypes
         types ::= new Datatype("xsd:gMonth")
         types ::= new Datatype("xsd:gMonthDay")
         types ::= new Datatype("xsd:gDay")
-        types ::= new Datatype("xsd:boolean")    // Strings without language tags
-        types ::= new Datatype("xsd:string")
+        types ::= new Datatype("xsd:boolean")
+        types ::= new Datatype("xsd:string")             // Strings without language tags
         types ::= new Datatype("xsd:integer")
         types ::= new Datatype("xsd:positiveInteger")    // >0
         types ::= new Datatype("xsd:nonNegativeInteger") // >=0
