@@ -16,7 +16,8 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             xmlns:owl="http://www.w3.org/2002/07/owl#"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+            xmlns:prov="http://www.w3.org/ns/prov#">
 
         <owl:Ontology rdf:about="">
           <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
@@ -78,6 +79,11 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
         for(disjointWithClass <- ontologyClass.disjointWithClasses)
         {
           xml += <owl:disjointWith rdf:resource={disjointWithClass.uri}/>
+        }
+
+        { //provenance
+          xml += <rdf:type rdf:resource={"http://www.w3.org/ns/prov#Entity"}/>
+          xml += <prov:wasDerivedFrom rdf:resource={"http://mappings.dbpedia.org/index.php/OntologyClass:" + ontologyClass.name}/>
         }
 
         <owl:Class rdf:about={ontologyClass.uri}>
@@ -154,6 +160,11 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
         for(prop <- property.equivalentProperties)
         {
             xml += <owl:equivalentProperty rdf:resource={prop.uri} />
+        }
+
+        { //provenance
+          xml += <rdf:type rdf:resource={"http://www.w3.org/ns/prov#Entity"}/>
+          xml += <prov:wasDerivedFrom rdf:resource={"http://mappings.dbpedia.org/index.php/OntologyClass:" + property.name}/>
         }
 
         //Return xml
