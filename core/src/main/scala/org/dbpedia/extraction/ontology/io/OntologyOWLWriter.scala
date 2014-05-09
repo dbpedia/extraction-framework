@@ -164,7 +164,7 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
 
         { //provenance
           xml += <rdf:type rdf:resource={"http://www.w3.org/ns/prov#Entity"}/>
-          xml += <prov:wasDerivedFrom rdf:resource={"http://mappings.dbpedia.org/index.php/OntologyClass:" + property.name}/>
+          xml += <prov:wasDerivedFrom rdf:resource={"http://mappings.dbpedia.org/index.php/OntologyProperty:" + property.name}/>
         }
 
         //Return xml
