@@ -34,7 +34,7 @@ object Import {
     finally source.close()
     
     //With the new change in Abstract extractor we need all articles TODO FIX this sometime soon and use only categories
-    val namespaces = Set(Namespace.Template, Namespace.Category, Namespace.Main)
+    val namespaces = Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
     val namespaceList = namespaces.map(_.name).mkString("[",",","]")
     
     val info = new Properties()
