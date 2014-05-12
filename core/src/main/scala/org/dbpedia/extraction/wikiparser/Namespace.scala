@@ -107,6 +107,7 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
   val File = values(6)
   val Template = values(10)
   val Category = values(14)
+  val Module = values(828)
 
   val OntologyClass = values(200)
   val OntologyProperty = values(202)
