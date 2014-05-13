@@ -153,7 +153,7 @@ extends PageNodeExtractor
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
                                 quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("rdf:langString"))
                             }
                         }
                     }
@@ -182,7 +182,7 @@ extends PageNodeExtractor
             case links if !links.isEmpty => return links
             case _ =>
         }
-        StringParser.parse(node).map(value => (value, new Datatype("xsd:string"))).toList
+        StringParser.parse(node).map(value => (value, new Datatype("rdf:langString"))).toList
     }
 
     private def extractUnitValue(node : PropertyNode) : Option[(String, Datatype)] =
@@ -194,7 +194,7 @@ extends PageNodeExtractor
 
         if (unitValues.size > 1)
         {
-            StringParser.parse(node).map(value => (value, new Datatype("xsd:string")))
+            StringParser.parse(node).map(value => (value, new Datatype("rdf:langString")))
         }
         else if (unitValues.size == 1)
         {
