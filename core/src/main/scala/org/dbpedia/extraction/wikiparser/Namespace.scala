@@ -21,6 +21,11 @@ class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Bo
     else Namespaces.names(lang).getOrElse(code, throw new IllegalArgumentException("namespace number "+code+" not found for language '"+lang.wikiCode+"'")) 
   
   override def toString = code+"/"+name
+  
+  override def equals(other: Any): Boolean = other match {
+    case that: Namespace => (code == that.code && name == that.name)
+    case _ => false
+  }
 }
   
 /**
