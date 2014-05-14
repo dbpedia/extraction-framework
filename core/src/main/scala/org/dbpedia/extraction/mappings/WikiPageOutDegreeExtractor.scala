@@ -30,8 +30,8 @@ extends PageNodeExtractor
   {
     if(node.title.namespace != Namespace.Main) return Seq.empty
     
-    val list = PageLinksExtractor.collectInternalLinks(node)
+    val ìnternalLinks = PageLinksExtractor.collectInternalLinks(node)
 
-    Seq(new Quad(context.language, DBpediaDatasets.OutDegree, subjectUri, wikiPageOutDegreeProperty, list.size.toString, node.sourceUri, nonNegativeInteger) )
+    Seq(new Quad(context.language, DBpediaDatasets.OutDegree, subjectUri, wikiPageOutDegreeProperty, ìnternalLinks.size.toString, node.sourceUri, nonNegativeInteger) )
   }
 }
