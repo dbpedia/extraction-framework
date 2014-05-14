@@ -81,13 +81,13 @@ extends PageNodeExtractor
                             if (nameParts.size == 2)
                             {
                                 val reversedName = nameParts(1).trim + " " + nameParts(0).trim
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("xsd:string"))
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("xsd:string"))
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("rdf:langString"))
                             }
                             else
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("rdf:langString"))
                             }
                             quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceUri)
                             nameFound = true
@@ -112,7 +112,7 @@ extends PageNodeExtractor
                         {
                             for(value <- StringParser.parse(property))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("rdf:langString"))
                             }
                         }
                         case key if key == birthDate =>
