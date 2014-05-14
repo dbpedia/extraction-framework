@@ -10,7 +10,7 @@ import org.dbpedia.extraction.sources.WikiPage
 /**
  * Extracts the number of characters in a wikipedia page
  */
-class WikiPageCharactersExtractor (
+class WikiPageLengthExtractor (
   context : {
     def ontology : Ontology
     def language : Language
@@ -18,15 +18,15 @@ class WikiPageCharactersExtractor (
 )
 extends WikiPageExtractor
 {
-  val wikiPageCharacterSizeProperty = context.ontology.properties("wikiPageCharacterSize")
+  val wikiPageLengthProperty = context.ontology.properties("wikiPageLength")
   val nonNegativeInteger = context.ontology.datatypes("xsd:nonNegativeInteger")
 
-  override val datasets = Set(DBpediaDatasets.CharacterSize)
+  override val datasets = Set(DBpediaDatasets.PageLength)
 
   override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
     
-    Seq(new Quad(context.language, DBpediaDatasets.CharacterSize, subjectUri, wikiPageCharacterSizeProperty, page.source.length.toString, page.sourceUri, nonNegativeInteger) )
+    Seq(new Quad(context.language, DBpediaDatasets.PageLength, subjectUri, wikiPageLengthProperty, page.source.length.toString, page.sourceUri, nonNegativeInteger) )
   }
 }
