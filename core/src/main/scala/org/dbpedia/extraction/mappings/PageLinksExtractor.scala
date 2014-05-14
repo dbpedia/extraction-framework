@@ -27,22 +27,26 @@ extends PageNodeExtractor
   {
     if(node.title.namespace != Namespace.Main) return Seq.empty
     
-    val list = collectInternalLinks(node)
+    val list = PageLinksExtractor.collectInternalLinks(node)
     
     list.map(link => new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty, getUri(link.destination), link.sourceUri, null))
   }
 
-  private def collectInternalLinks(node : Node) : List[InternalLinkNode] =
+  private def getUri(destination : WikiTitle) : String =
+  {
+    context.language.resourceUri.append(destination.decodedWithNamespace)
+  }
+
+}
+
+object PageLinksExtractor {
+
+  def collectInternalLinks(node : Node) : List[InternalLinkNode] =
   {
     node match
     {
       case linkNode : InternalLinkNode => List(linkNode)
       case _ => node.children.flatMap(collectInternalLinks)
     }
-  }
-
-  private def getUri(destination : WikiTitle) : String =
-  {
-    context.language.resourceUri.append(destination.decodedWithNamespace)
   }
 }
