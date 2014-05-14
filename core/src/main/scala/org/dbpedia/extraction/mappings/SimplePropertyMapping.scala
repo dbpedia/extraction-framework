@@ -99,10 +99,15 @@ extends PropertyMapping
             case "xsd:negativeInteger"    => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i < 0))
             case "xsd:double" => new DoubleParser(context, multiplicationFactor = factor)
             case "xsd:float" => new DoubleParser(context, multiplicationFactor = factor)
-            case "xsd:string" =>
+            case "xsd:string" => // strings with no language tags
             {
                 checkMultiplicationFactor("xsd:string")
                 StringParser
+            }
+            case "rdf:langString" => // strings with language tags
+            {
+              checkMultiplicationFactor("rdf:langString")
+              StringParser
             }
             case "xsd:anyURI" =>
             {
