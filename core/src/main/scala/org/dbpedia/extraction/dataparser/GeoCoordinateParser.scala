@@ -119,17 +119,15 @@ class GeoCoordinateParser(
             //{{coord|latitude|longitude|coordinate parameters|template parameters}}
             case latitude :: longitude :: _ =>
             {
-              val latitudeDeg = singleCoordParser.parseSingleCoordinate(latitude) match{
+              val lat = singleCoordParser.parseSingleCoordinate(latitude) match{
                 case Some(d) => d.toDouble
                 case None => latitude.toDouble
               }
-              val longitudeDeg = singleCoordParser.parseSingleCoordinate(longitude) match{
+              val lon = singleCoordParser.parseSingleCoordinate(longitude) match{
                 case Some(d) => d.toDouble
                 case None => longitude.toDouble
               }
-                Some(new GeoCoordinate( latDeg = latitudeDeg,
-                                        lonDeg = longitudeDeg,
-                                        belongsToArticle = belongsToArticle))
+                Some(new GeoCoordinate( lat, lon, belongsToArticle))
             }
             case _ => None
         }
@@ -143,7 +141,7 @@ class GeoCoordinateParser(
            case Coordinate(latDeg, latMin, latSec, latDir, lonDeg, lonMin, lonSec, lonDir) =>
            {
                Some(new GeoCoordinate( latDeg.toDouble, latMin.toDouble, if(latSec != null) latSec.toDouble else 0.0, latDir,
-                                       lonDeg.toDouble, lonMin.toDouble, if(lonSec != null) lonSec.toDouble else 0.0, lonDir ))
+                                       lonDeg.toDouble, lonMin.toDouble, if(lonSec != null) lonSec.toDouble else 0.0, lonDir , false))
            }
            case _ => None
        }
