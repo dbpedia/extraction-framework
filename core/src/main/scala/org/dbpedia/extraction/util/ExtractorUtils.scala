@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.mappings.Extractor
-import scala.collection.mutable.HashMap
+import scala.collection.immutable.HashMap
 import java.util.Properties
 import scala.collection.JavaConversions.asScalaSet
-import scala.collection.Map
+import scala.collection.immutable.Map
 import scala.collection.immutable.SortedMap
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.ConfigUtils.{getStrings}
@@ -50,14 +50,14 @@ object ExtractorUtils {
     val classes = new HashMap[Language, Seq[Class[_ <: Extractor[_]]]]()
 
     for(language <- languages) {
-      classes(language) = stdExtractors
+      classes.updated(language, stdExtractors)
     }
 
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("extractors.")) {
         val language = Language(key.substring("extractors.".length()))
         if (languages.contains(language)) { // load language only if it declared explicitly
-          classes(language) = (stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)).distinct
+          classes.updated(language, (stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)).distinct)
         }
       }
     }
