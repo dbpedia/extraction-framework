@@ -43,7 +43,7 @@ class ConfigLoader(config: Config)
     /**
      * Creates ab extraction job for a specific language.
      */
-    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: Extractor[_]]]) : ExtractionJob =
+    private def createExtractionJob(lang : Language, extractorClasses: Seq[Class[_ <: Extractor[_]]]) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
