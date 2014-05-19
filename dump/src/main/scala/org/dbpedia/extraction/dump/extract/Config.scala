@@ -83,7 +83,9 @@ private class Config(config: Properties)
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("extractors.")) {
         val language = Language(key.substring("extractors.".length()))
-        classes(language) = stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)
+        if (languages.contains(language)) { // load language only if it declared explicitly
+          classes(language) = stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)
+        }
       }
     }
 
