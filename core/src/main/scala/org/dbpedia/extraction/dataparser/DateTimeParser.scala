@@ -49,7 +49,7 @@ class DateTimeParser ( context : {
     private val DateRegex2 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*("""+monthRegex+""")\]?\]?,? \[?\[?(-?[0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?(?!\d)""" + postfix).r
 
     // catch dates like: "[[January 20]] [[1995 AD]]", "[[June 17]] [[2008]] (UTC)" or "January 20 1995"
-    private val DateRegex3 = ("""(?iu)""" + prefix + """\[?\[?("""+monthRegex+""")\s*,?\s+([0-9]{1,2})\]?\]?\s*[.,]?\s+\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?""" + postfix).r
+    private val DateRegex3 = ("""(?iu)""" + prefix + """\[?\[?("""+monthRegex+""")\s*,?\s+([0-9]{1,2})\]?\]?(?:""" + cardinalityRegex + """)?\s*[.,]?\s+\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?""" + postfix).r
 
     // catch dates like: "24-06-1867", "24/06/1867" or "bla24-06-1867bla"
     private val DateRegex4 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{1,2}+)[-/]([0-9]{1,2}+)[-/]([0-9]{3,4}+)(?!\d)""" + postfix).r
@@ -62,6 +62,9 @@ class DateTimeParser ( context : {
 
     // catch dates like: "20 de Janeiro de 1999", "[[1º de Julho]] de [[2005]]"
     private val DateRegex7 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*d?e?\s*(""" + monthRegex + """)\]?\]?\s*d?e?\s*\[?\[?([0-9]{0,4})\s*?\]?\]?(?!\d)""" + postfix).r
+
+    // catch dates like: "1520, March 16"
+    private val DateRegex8 = ("""(?iu)""" + prefix + """([0-9]{3,4})[,]?\s+(""" + monthRegex + """)\s+([0-9]{1,2})(?:""" + cardinalityRegex + """)?\s*""").r
 
     private val DayMonthRegex1 = ("""(?iu)""" + prefix + """("""+monthRegex+""")\]?\]?\s*\[?\[?([1-9]|0[1-9]|[12][0-9]|3[01])(?!\d)""" + postfix).r
 
@@ -285,9 +288,18 @@ class DateTimeParser ( context : {
             return new Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
         }
 
-        for(DateRegex7(day, month,year) <- List(input))
+        for(DateRegex7(day, month, year) <- List(input))
         {
-            return new Some(new Date(Some(day.toInt), Some(month.toInt), Some(year.toInt), datatype))
+            return new Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
+        }
+
+        for(DateRegex8(year, month, day) <- List(input))
+        {
+            months.get(month.toLowerCase) match
+            {
+              case Some(monthNumber) => return new Some(new Date(Some((year).toInt), Some(monthNumber), Some(day.toInt), datatype))
+              case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+            }
         }
 
         None
