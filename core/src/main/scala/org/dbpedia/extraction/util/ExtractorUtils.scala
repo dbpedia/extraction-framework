@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.mappings.Extractor
-import scala.collection.immutable.HashMap
 import java.util.Properties
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.immutable.Map
@@ -29,7 +28,10 @@ object ExtractorUtils {
   }
 
   def loadExtractorClassSeq(names: Seq[String]) : Seq[Class[_ <: Extractor[_]]] = {
-    names.toList.map(ExtractorUtils.loadExtractorClass)
+    if (names == null || names.isEmpty)
+      Seq.empty
+    else
+      names.toList.map(ExtractorUtils.loadExtractorClass)
   }
 
   /** creates a map of languages and extractors from a Properties file
@@ -47,21 +49,15 @@ object ExtractorUtils {
 
     val stdExtractors = loadExtractorClassSeq(getStrings(config, "extractors", ',', false))
 
-    val classes = new HashMap[Language, Seq[Class[_ <: Extractor[_]]]]()
+    val classes =
+      (for(language <- languages)
+        yield(
+          language,
+          // Standard extractors from "extractors" plus custom defined extractors from "extractors.xx"
+          (stdExtractors ++ getStrings(config, "extractors."+language.wikiCode, ',', false).map(loadExtractorClass)).distinct)
+      ).toMap
 
-    for(language <- languages) {
-      classes.updated(language, stdExtractors)
-    }
-
-    for (key <- config.stringPropertyNames) {
-      if (key.startsWith("extractors.")) {
-        val language = Language(key.substring("extractors.".length()))
-        if (languages.contains(language)) { // load language only if it declared explicitly
-          classes.updated(language, (stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)).distinct)
-        }
-      }
-    }
-
+    // Sort keys
     SortedMap(classes.toSeq: _*)
   }
 }
