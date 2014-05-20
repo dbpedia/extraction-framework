@@ -24,7 +24,12 @@ extends WikiPageExtractor
 
   override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
   {
-    if(page.title.namespace != Namespace.Main) return Seq.empty
+    // Ignore files that are not in Main, *unless* they're
+    // File:s on the Commons.
+    if(page.title.namespace != Namespace.Main && 
+        !(page.title.namespace == Namespace.File && 
+        context.language.wikiCode == "commons")
+    ) return Seq.empty
 
     // TODO: use templates like {{lowercase}}, magic words like {{DISPLAYTITLE}}, 
     // remove stuff like "(1999 film)" from title...

@@ -32,7 +32,12 @@ class MetaInformationExtractor( context : {
 
   override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    if(page.title.namespace != Namespace.Main) return Seq.empty
+    // Ignore files that are not in Main, *unless* they're
+    // File:s on the Commons.
+    if(page.title.namespace != Namespace.Main && 
+        !(page.title.namespace == Namespace.File && 
+        context.language.wikiCode == "commons")
+    ) return Seq.empty 
 
     val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit"
     val revisionLink = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&oldid=" + page.revision
