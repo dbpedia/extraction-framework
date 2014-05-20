@@ -1,6 +1,9 @@
 <?php 
 
 /**
+ * **************************************
+ * NO LONGER NEEDED read the instructions
+ * **************************************
  * Helper functions to clean up wiki source text for dbpedia.
  */
 class DBpediaFunctions {
