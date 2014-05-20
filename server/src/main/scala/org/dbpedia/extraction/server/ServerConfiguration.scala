@@ -3,14 +3,7 @@ package org.dbpedia.extraction.server
 import java.util.Properties
 import org.dbpedia.extraction.util.ConfigUtils._
 import java.io.File
-import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.wikiparser.Namespace
-import org.dbpedia.extraction.util.{WikiInfo, Language}
-import scala.collection.{SortedMap, Map}
-import org.dbpedia.extraction.mappings.Extractor
-import scala.collection.mutable.HashMap
-import scala.util.matching.Regex
-import scala.io.Codec
+import org.dbpedia.extraction.util.ExtractorUtils
 
 /**
  * User: Dimitris Kontokostas
@@ -31,7 +24,7 @@ private class ServerConfiguration(config: Properties) {
   val _languages = getString(config, "languages",true)
   val languages = parseLanguages(null,Seq(_languages))
 
-  val mappingTestExtractorClasses = "";
-  val allExtractorClasses = "";
+  val mappingTestExtractorClasses = ExtractorUtils.loadExtractorClassSeq(getStrings(config, "mappingsTestExtractors", ',', false))
+  val customTestExtractorClasses = ExtractorUtils.loadExtractorsMapFromConfig(languages, config);
 
 }

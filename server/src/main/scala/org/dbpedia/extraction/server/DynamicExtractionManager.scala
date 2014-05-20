@@ -1,12 +1,13 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.mappings.{Redirects, Mappings, RootExtractor}
+import org.dbpedia.extraction.mappings.{Extractor, Redirects, Mappings, RootExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 import java.io.File
 import scala.actors.Actor
+import scala.collection.immutable.Map
 
 /**
  * Loads all extraction context parameters (ontology pages, mapping pages, ontology, extractors).
@@ -20,8 +21,13 @@ import scala.actors.Actor
  * mappingPageSource is called by loadMappings in the base class, 
  * ontologyPages is called by loadOntology in the base class.
  */
-class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths, redirects: Map[Language, Redirects])
-extends ExtractionManager(languages, paths, redirects)
+class DynamicExtractionManager(
+  update: (Language, Mappings) => Unit, languages : Seq[Language],
+  paths: Paths,
+  redirects: Map[Language, Redirects],
+  mappingTestExtractors: Seq[Class[_ <: Extractor[_]]],
+  customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
+extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, customTestExtractors)
 {
     // TODO: remove this field. Clients should get the ontology pages directly from the
     // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
@@ -35,9 +41,13 @@ extends ExtractionManager(languages, paths, redirects)
 
     private var _mappings : Map[Language, Mappings] = loadMappings
 
-    private var _extractors : Map[Language, RootExtractor] = loadExtractors
+    private var _mappingTestExtractors : Map[Language, RootExtractor] = loadMappingTestExtractors
 
-    def extractor(language : Language) = synchronized { _extractors(language) }
+    private var _customTestExtractors : Map[Language, RootExtractor] = loadCustomTestExtractors
+
+    def mappingExtractor(language : Language) = synchronized { _mappingTestExtractors(language) }
+
+    def customExtractor(language : Language) = synchronized { _customTestExtractors(language) }
 
     def ontology() = synchronized { _ontology }
 
@@ -69,7 +79,8 @@ extends ExtractionManager(languages, paths, redirects)
         _ontologyPages = _ontologyPages.updated(page.title, pageNode)
         _ontology = loadOntology
         _mappings = loadMappings
-        _extractors = loadExtractors()
+        _mappingTestExtractors = loadMappingTestExtractors()
+        _customTestExtractors = loadCustomTestExtractors()
         updateAll
     }
 
@@ -78,7 +89,8 @@ extends ExtractionManager(languages, paths, redirects)
         _ontologyPages = _ontologyPages - title
         _ontology = loadOntology
         _mappings = loadMappings
-        _extractors = loadExtractors()
+        _mappingTestExtractors = loadMappingTestExtractors()
+        _customTestExtractors = loadCustomTestExtractors()
         updateAll
     }
 
@@ -88,7 +100,8 @@ extends ExtractionManager(languages, paths, redirects)
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, page)))
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
-        _extractors = _extractors.updated(language, loadExtractors(language))
+        _mappingTestExtractors = _mappingTestExtractors.updated(language, loadExtractors(language, mappingTestExtractors))
+        _customTestExtractors = _customTestExtractors.updated(language, loadExtractors(language, customTestExtractors(language)))
         update(language, mappings)
     }
 
@@ -98,7 +111,8 @@ extends ExtractionManager(languages, paths, redirects)
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) - title)
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
-        _extractors = _extractors.updated(language, loadExtractors(language))
+        _mappingTestExtractors = _mappingTestExtractors.updated(language, loadExtractors(language, mappingTestExtractors))
+        _customTestExtractors = _customTestExtractors.updated(language, loadExtractors(language, customTestExtractors(language)))
         update(language, mappings)
     }
 }
