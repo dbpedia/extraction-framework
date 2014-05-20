@@ -1,5 +1,9 @@
 <?php
 /**
+ * **************************************
+ * NO LONGER NEEDED read the instructions
+ * **************************************
+ * 
  * Created on Dec 01, 2007
  *
  * Copyright © 2007 Yuri Astrakhan "<Firstname><Lastname>@gmail.com"
