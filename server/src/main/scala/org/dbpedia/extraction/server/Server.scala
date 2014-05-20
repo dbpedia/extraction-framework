@@ -1,10 +1,9 @@
 package org.dbpedia.extraction.server
 
-import java.io.File
 import java.net.{URI,URL}
 import java.util.logging.{Level,Logger}
 import scala.collection.immutable.SortedMap
-import org.dbpedia.extraction.mappings.{Redirects, LabelExtractor, MappingExtractor, Mappings}
+import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.{ConfigUtils, Language}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.server.stats.MappingStatsManager
@@ -14,10 +13,15 @@ import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.{WikiTitle, Namespace}
 import Server._
 
-class Server(private val password : String, langs : Seq[Language], val paths: Paths) 
+class Server(
+  private val password : String,
+  languages : Seq[Language],
+  val paths: Paths,
+  mappingTestExtractors: Seq[Class[_ <: Extractor[_]]],
+  customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
 {
     val managers = {
-      val tuples = langs.map(lang => lang -> new MappingStatsManager(paths.statsDir, lang))
+      val tuples = languages.map(lang => lang -> new MappingStatsManager(paths.statsDir, lang))
       SortedMap(tuples: _*)
     }
 
@@ -25,7 +29,7 @@ class Server(private val password : String, langs : Seq[Language], val paths: Pa
       managers.map(manager => (manager._1, buildTemplateRedirects(manager._2.wikiStats.redirects, manager._1))).toMap
     }
         
-    val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), langs, paths, redirects)
+    val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), languages, paths, redirects, mappingTestExtractors, customTestExtractors)
     
     extractor.updateAll
         
@@ -62,12 +66,12 @@ object Server
         val localServerUrl = new URI(configuration.localServerUrl)
         
         val serverPassword = configuration.serverPassword
-        
+
+        val languages = configuration.languages
+
         val paths = new Paths(new URL(mappingsUrl, "index.php"), new URL(mappingsUrl, "api.php"), configuration.statisticsDir, configuration.ontologyFile, configuration.mappingsDir)
         
-        val languages = configuration.languages
-        
-        _instance = new Server(serverPassword, languages, paths)
+        _instance = new Server(serverPassword, languages, paths, configuration.mappingTestExtractorClasses, configuration.customTestExtractorClasses)
         
         // Configure the HTTP server
         val resources = new PackagesResourceConfig("org.dbpedia.extraction.server.resources", "org.dbpedia.extraction.server.providers")
