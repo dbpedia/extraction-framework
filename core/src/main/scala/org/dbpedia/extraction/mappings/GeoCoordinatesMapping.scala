@@ -84,7 +84,7 @@ extends PropertyMapping
       {
         try
         {
-          return Some(new GeoCoordinate(latDeg = lat, lonDeg = lon))
+          return Some(new GeoCoordinate(lat, lon))
         }
         catch
         {
@@ -113,7 +113,7 @@ extends PropertyMapping
 
         try
         {
-          return Some(new GeoCoordinate(latDeg, latMin, latSec, latDir, lonDeg, lonMin, lonSec, lonDir))
+          return Some(new GeoCoordinate(latDeg, latMin, latSec, latDir, lonDeg, lonMin, lonSec, lonDir, false))
         }
         catch
         {
