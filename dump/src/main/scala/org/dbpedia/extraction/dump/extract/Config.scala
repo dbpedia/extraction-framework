@@ -26,7 +26,7 @@ private class Config(config: Properties)
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
   // Watch out, this could be a regex
-  val source = config.getProperty("source", "pages-articles.xml")
+  val source = config.getProperty("source", "pages-articles.xml.bz2")
   val disambiguations = config.getProperty("disambiguations", "page_props.sql.gz")
 
   val wikiName = config.getProperty("wikiName", "wiki")
@@ -68,11 +68,8 @@ private class Config(config: Properties)
     val classes = new HashMap[Language, List[Class[_ <: Extractor[_]]]]()
 
     /*
-    TODO: maybe we should check in the first loop if property "extractors."+language.wikiCode
-    exists and if it does, add its specific extractors. Better: refactor the whole config mess.
-    Currently, the "languages" property just defines for which languages the default extractors
-    should be loaded. It does not define which languages should be processed in general,
-    all the "extractors.xx" properties are independent from the "languages" property.
+    TODO: Refactor the whole config mess.
+    The languages property defines which languages should be processed in general,
     It should be possible to say: run extractors A,B,C for languages xx,yy,zz. That
     would make the configuration much simpler, less repetitive and more flexible.
     */
@@ -83,7 +80,9 @@ private class Config(config: Properties)
     for (key <- config.stringPropertyNames) {
       if (key.startsWith("extractors.")) {
         val language = Language(key.substring("extractors.".length()))
-        classes(language) = stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)
+        if (languages.contains(language)) { // load language only if it declared explicitly
+          classes(language) = stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)
+        }
       }
     }
 

@@ -154,9 +154,14 @@ require_once( "$IP/extensions/ImageMap/ImageMap.php" );
 require_once( "$IP/extensions/InputBox/InputBox.php" );
 require_once( "$IP/extensions/Interwiki/Interwiki.php" );
 require_once( "$IP/extensions/Math/Math.php" );
+require_once("$IP/extensions/GeoData/GeoData.php");
+require_once("$IP/extensions/MobileFrontend/MobileFrontend.php");
 require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
 require_once( "$IP/extensions/Poem/Poem.php" );
 require_once( "$IP/extensions/SyntaxHighlight_GeSHi/SyntaxHighlight_GeSHi.php" );
+require_once( "$IP/extensions/TextExtracts/TextExtracts.php" );
 require_once( "$IP/extensions/timeline/Timeline.php" );
 require_once( "$IP/extensions/wikihiero/wikihiero.php" );
-require_once( "$IP/DBpediaFunctions.php" );
+require_once "$IP/extensions/Scribunto/Scribunto.php";
+$wgScribuntoDefaultEngine = 'luastandalone';
+#$wgScribuntoDefaultEngine = 'luasandbox'; # faster but needs configuration read http://www.mediawiki.org/wiki/Extension:Scribunto

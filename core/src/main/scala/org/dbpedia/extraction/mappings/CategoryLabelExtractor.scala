@@ -17,7 +17,7 @@ class CategoryLabelExtractor( context : {
 {
     private val labelProperty = context.ontology.properties("rdfs:label")
     
-    private val quad = QuadBuilder(context.language, DBpediaDatasets.CategoryLabels, labelProperty, new Datatype("xsd:string")) _
+    private val quad = QuadBuilder(context.language, DBpediaDatasets.CategoryLabels, labelProperty, new Datatype("rdf:langString")) _
 
     override val datasets = Set(DBpediaDatasets.CategoryLabels)
 
