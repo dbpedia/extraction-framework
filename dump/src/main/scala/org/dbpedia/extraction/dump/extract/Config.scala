@@ -15,7 +15,7 @@ import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange
 import org.dbpedia.extraction.util.RichString.wrapString
 import scala.io.Codec
 
-private class Config(config: Properties)
+class Config(config: Properties)
 {
   // TODO: get rid of all config file parsers, use Spring
 
