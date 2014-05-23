@@ -20,15 +20,22 @@ class HomepageExtractor(
 )
 extends PageNodeExtractor
 {
-  private val language = context.language.wikiCode
+  /**
+   * Don't access context directly in methods. Cache context.language and context.redirects for use inside
+   * methods so that Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+  private val redirects = context.redirects
 
-  private val propertyNames = HomepageExtractorConfig.propertyNames(language)
-  
-  private val official = HomepageExtractorConfig.official(language)
-  
-  private val externalLinkSections = HomepageExtractorConfig.externalLinkSections(language)
+  private val languageWikiCode = context.language.wikiCode
 
-  private val templateOfficialWebsite = HomepageExtractorConfig.templateOfficialWebsite(language)
+  private val propertyNames = HomepageExtractorConfig.propertyNames(languageWikiCode)
+  
+  private val official = HomepageExtractorConfig.official(languageWikiCode)
+  
+  private val externalLinkSections = HomepageExtractorConfig.externalLinkSections(languageWikiCode)
+
+  private val templateOfficialWebsite = HomepageExtractorConfig.templateOfficialWebsite(languageWikiCode)
 
   private val homepageProperty = context.ontology.properties("foaf:homepage")
 
@@ -116,7 +123,7 @@ extends PageNodeExtractor
     {
       for(link <- UriUtils.cleanLink(new URI(url)))
       {
-        return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri))
+        return Seq(new Quad(language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri))
       }
     }
     catch
@@ -162,7 +169,7 @@ extends PageNodeExtractor
     {
       case (templateNode @ TemplateNode(title, _, _, _)) :: tail =>
       {
-        val templateRedirect = context.redirects.resolve(title).decoded
+        val templateRedirect = redirects.resolve(title).decoded
         if (templateOfficialWebsite.contains(templateRedirect)) {
           templateNode.property(templateOfficialWebsite(templateRedirect)) match
           {

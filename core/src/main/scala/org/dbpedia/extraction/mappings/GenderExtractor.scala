@@ -22,9 +22,15 @@ class GenderExtractor(
 ) 
 extends MappingExtractor(context)
 {
-  private val language = context.language.wikiCode
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
 
-  private val pronounMap: Map[String, String] = GenderExtractorConfig.pronounsMap(language)
+  private val languageWikiCode = context.language.wikiCode
+
+  private val pronounMap: Map[String, String] = GenderExtractorConfig.pronounsMap(languageWikiCode)
 
   // FIXME: don't use string constant, use context.ontology (or at least RdfNamespace.FOAF)
   private val genderProperty = "http://xmlns.com/foaf/0.1/gender"
@@ -77,7 +83,7 @@ extends MappingExtractor(context)
       // output triple for maximum gender
       if (maxGender != "" && maxCount > GenderExtractorConfig.minCount && maxCount/secondCount > GenderExtractorConfig.minDifference)
       {
-        return Seq(new Quad(context.language, DBpediaDatasets.Genders, subjectUri, genderProperty, maxGender, node.sourceUri, new Datatype("rdf:langString")))
+        return Seq(new Quad(language, DBpediaDatasets.Genders, subjectUri, genderProperty, maxGender, node.sourceUri, new Datatype("rdf:langString")))
       }
     }
 

@@ -18,6 +18,13 @@ class TemplateParameterExtractor(
 ) 
 extends PageNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language and context.ontology for use inside
+   * methods so that Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+  private val ontology = context.ontology
+
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesParameter")
 
   val parameterRegex = """(?s)\{\{\{([^|}{<>]*)[|}<>]""".r
@@ -50,8 +57,8 @@ extends PageNodeExtractor
 
     for (parameter <- parameters.distinct if parameter.nonEmpty) {
       // TODO: page.sourceUri does not include the line number
-      quads += new Quad(context.language, DBpediaDatasets.TemplateParameters, subjectUri, templateParameterProperty, 
-          parameter, page.sourceUri, context.ontology.datatypes("xsd:string"))
+      quads += new Quad(language, DBpediaDatasets.TemplateParameters, subjectUri, templateParameterProperty,
+          parameter, page.sourceUri, ontology.datatypes("xsd:string"))
     }
     
     quads

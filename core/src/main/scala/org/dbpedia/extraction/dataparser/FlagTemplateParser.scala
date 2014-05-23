@@ -10,6 +10,12 @@ import scala.language.reflectiveCalls
  */
 class FlagTemplateParser( extractionContext : { def language : Language } ) extends DataParser
 {
+    /**
+     * Don't access context directly in methods. Cache context.language for use inside methods so that
+     * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+     */
+    private val language = extractionContext.language
+
     override def parse(node : Node) : Option[WikiTitle] =
     {
         node match
@@ -29,10 +35,10 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                         {
                             case Some(countryCode : String) if(templateName.length == 3)&&(templateName == templateName.toUpperCase) =>
                             {
-                                val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
-                                langCodeMap.get(countryCode).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
+                                val langCodeMap = FlagTemplateParserConfig.getCodeMap(language.wikiCode)
+                                langCodeMap.get(countryCode).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, language)))
                             }
-                            case Some(countryName : String) => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language))
+                            case Some(countryName : String) => return Some(new WikiTitle(countryName, Namespace.Main, language))
                             case _ =>
                         }
                     }
@@ -41,8 +47,8 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                 //template name is actually country code for flagicon template
                 else if((templateName.length == 2 || templateName.length == 3) && (templateName == templateName.toUpperCase))
                 {
-                    val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
-                    langCodeMap.get(templateName).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
+                    val langCodeMap = FlagTemplateParserConfig.getCodeMap(language.wikiCode)
+                    langCodeMap.get(templateName).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, language)))
                 }
 
                 None

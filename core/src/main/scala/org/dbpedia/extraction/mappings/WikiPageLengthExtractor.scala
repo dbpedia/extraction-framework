@@ -18,6 +18,12 @@ class WikiPageLengthExtractor (
 )
 extends WikiPageExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   val wikiPageLengthProperty = context.ontology.properties("wikiPageLength")
   val nonNegativeInteger = context.ontology.datatypes("xsd:nonNegativeInteger")
 
@@ -27,6 +33,6 @@ extends WikiPageExtractor
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
     
-    Seq(new Quad(context.language, DBpediaDatasets.PageLength, subjectUri, wikiPageLengthProperty, page.source.length.toString, page.sourceUri, nonNegativeInteger) )
+    Seq(new Quad(language, DBpediaDatasets.PageLength, subjectUri, wikiPageLengthProperty, page.source.length.toString, page.sourceUri, nonNegativeInteger) )
   }
 }

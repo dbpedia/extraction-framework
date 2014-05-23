@@ -24,6 +24,13 @@ class WikidataFactsExtractor(
                          )
   extends JsonNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language and context.ontology for use inside
+   * methods so that Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+  private val ontology = context.ontology
+
   // Here we define all the ontology predicates we will use
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
@@ -58,11 +65,11 @@ class WikidataFactsExtractor(
                 for( fact <- valueFacts.keys)
                 {
                   if(valueFacts(fact)=="")
-                    quads += new Quad(null, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, context.ontology.datatypes("xsd:string"))
+                    quads += new Quad(null, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, ontology.datatypes("xsd:string"))
                   else if (valueFacts(fact) == "CommonMediaFile")
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, null)
+                    quads += new Quad(language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, null)
                   else
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, context.ontology.datatypes(valueFacts(fact)))
+                    quads += new Quad(language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, ontology.datatypes(valueFacts(fact)))
                 }
               }
           }
@@ -77,7 +84,7 @@ class WikidataFactsExtractor(
               val UriFacts = node.getUriTriples(property)
               for( fact <- UriFacts)
               {
-                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, null)
+                quads += new Quad(language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, null)
               }
             }
           }

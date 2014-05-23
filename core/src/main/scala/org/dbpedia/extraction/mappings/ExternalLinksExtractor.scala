@@ -19,6 +19,12 @@ class ExternalLinksExtractor (
 )
 extends PageNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   val wikiPageExternalLinkProperty = context.ontology.properties("wikiPageExternalLink")
 
   override val datasets = Set(DBpediaDatasets.ExternalLinks)
@@ -31,7 +37,7 @@ extends PageNodeExtractor
     for(link <- collectExternalLinks(node);
         uri <- UriUtils.cleanLink(link.destination))
     {
-      quads += new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty, uri, link.sourceUri, null)
+      quads += new Quad(language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty, uri, link.sourceUri, null)
     }
     
     quads

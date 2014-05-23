@@ -18,6 +18,12 @@ class GeoCoordinateParser(
       } 
     ) extends DataParser
 {
+    /**
+     * Don't access extractionContext directly in methods. Cache extractionContext.redirects for use inside methods
+     * so that Spark (distributed-extraction-framework) does not have to serialize the whole extractionContext object
+     */
+    private val redirects = extractionContext.redirects
+
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
     private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
@@ -64,7 +70,7 @@ class GeoCoordinateParser(
         node match
         {
             case templateNode : TemplateNode
-                if templateNames contains extractionContext.redirects.resolve(templateNode.title).decoded.toLowerCase =>
+                if templateNames contains redirects.resolve(templateNode.title).decoded.toLowerCase =>
             {
                 catchCoordTemplate(templateNode)
             }

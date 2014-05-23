@@ -21,6 +21,12 @@ class WikiPageOutDegreeExtractor (
 )
 extends PageNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   val wikiPageOutDegreeProperty = context.ontology.properties("wikiPageOutDegree")
   val nonNegativeInteger = context.ontology.datatypes("xsd:nonNegativeInteger")
 
@@ -32,6 +38,6 @@ extends PageNodeExtractor
     
     val ìnternalLinks = PageLinksExtractor.collectInternalLinks(node)
 
-    Seq(new Quad(context.language, DBpediaDatasets.OutDegree, subjectUri, wikiPageOutDegreeProperty, ìnternalLinks.size.toString, node.sourceUri, nonNegativeInteger) )
+    Seq(new Quad(language, DBpediaDatasets.OutDegree, subjectUri, wikiPageOutDegreeProperty, ìnternalLinks.size.toString, node.sourceUri, nonNegativeInteger) )
   }
 }

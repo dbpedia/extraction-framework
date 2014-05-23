@@ -24,6 +24,12 @@ class CalculateMapping (
 )
 extends PropertyMapping
 {
+  /**
+   * Cache context.ont for use inside methods so that Spark (distributed-extraction-framework)
+   * does not have to serialize the whole context object
+   */
+  private val ontology = context.ontology
+
   require(operation == "add", "Operation '" + operation + "' is not supported. Supported operations: 'add'")
 
   def parser(unit: Datatype): DataParser = ontologyProperty.range match
@@ -116,7 +122,7 @@ extends PropertyMapping
     // FIXME: copy-and-paste in SimplePropertyMapping
     for(cls <- ontologyProperty.domain.relatedClasses)
     {
-      for(specificPropertyUnit <- context.ontology.specializations.get((cls, ontologyProperty)))
+      for(specificPropertyUnit <- ontology.specializations.get((cls, ontologyProperty)))
       {
          val outputValue = specificPropertyUnit.fromStandardUnit(value)
          val propertyUri = DBpediaNamespace.ONTOLOGY.append(cls.name+'/'+ontologyProperty.name)

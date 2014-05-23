@@ -18,6 +18,13 @@ class LabelExtractor(
 ) 
 extends WikiPageExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language and context.ontology for use inside
+   * methods so that Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+  private val ontology = context.ontology
+
   val labelProperty = context.ontology.properties("rdfs:label")
   
   override val datasets = Set(DBpediaDatasets.Labels)
@@ -31,6 +38,6 @@ extends WikiPageExtractor
     val label = page.title.decoded
     
     if(label.isEmpty) Seq.empty
-    else Seq(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label, page.sourceUri, context.ontology.datatypes("rdf:langString")))
+    else Seq(new Quad(language, DBpediaDatasets.Labels, subjectUri, labelProperty, label, page.sourceUri, ontology.datatypes("rdf:langString")))
   }
 }

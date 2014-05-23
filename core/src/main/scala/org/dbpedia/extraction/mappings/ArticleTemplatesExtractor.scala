@@ -19,6 +19,11 @@ class ArticleTemplatesExtractor(
      def redirects: Redirects
     }
   ) extends PageNodeExtractor {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
 
   // FIXME: this uses the http://xx.dbpedia.org/property/ namespace, but the
   // http://dbpedia.org/ontology/ namespace would probably make more sense.
@@ -32,9 +37,9 @@ class ArticleTemplatesExtractor(
     val seenTemplates = new HashSet[String]()
 
     for (template <- collectTemplates(node)) {
-      val templateUri = context.language.resourceUri.append(template.title.decodedWithNamespace)
+      val templateUri = language.resourceUri.append(template.title.decodedWithNamespace)
       if (!seenTemplates.contains(templateUri)) {
-        quads += new Quad(context.language, DBpediaDatasets.ArticleTemplates, subjectUri, usesTemplateProperty,
+        quads += new Quad(language, DBpediaDatasets.ArticleTemplates, subjectUri, usesTemplateProperty,
           templateUri, template.sourceUri, null)
         seenTemplates.add(templateUri)
       }

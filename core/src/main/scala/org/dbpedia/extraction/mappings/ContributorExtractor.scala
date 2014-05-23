@@ -20,6 +20,11 @@ class ContributorExtractor( context : {
   def ontology : Ontology
   def language : Language } ) extends WikiPageExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
@@ -29,7 +34,7 @@ class ContributorExtractor( context : {
 
     if(node.contributorID <= 0) return Seq.empty
 
-    val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.title.encoded;
+    val pageURL = "http://" + language.wikiCode + ".wikipedia.org/wiki/" + node.title.encoded;
 
     //Required predicates
     val contributorPredicate = "http://dbpedia.org/meta/contributor";
@@ -46,17 +51,17 @@ class ContributorExtractor( context : {
 
     val contributorID =  node.contributorID;
 
-    //    val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, contributorPredicate,
+    //    val quadPageWithContributor = new Quad(language, DBpediaDatasets.Revisions, pageURL, contributorPredicate,
     //      contributorName, node.sourceUri, context.ontology.getDatatype("xsd:string").get );
     //Required Quads
-    val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.RevisionMeta, pageURL, contributorPredicate,
+    val quadPageWithContributor = new Quad(language, DBpediaDatasets.RevisionMeta, pageURL, contributorPredicate,
       contributorURL, node.sourceUri, null );
 
-    val quadContributorName = new Quad(context.language, DBpediaDatasets.RevisionMeta, contributorURL,
+    val quadContributorName = new Quad(language, DBpediaDatasets.RevisionMeta, contributorURL,
       context.ontology.properties.get("rdfs:label").get,
       contributorName, node.sourceUri, context.ontology.datatypes.get("xsd:string").get );
 
-    val quadContributorID = new Quad(context.language, DBpediaDatasets.RevisionMeta, contributorURL, contributorIDPredicate,
+    val quadContributorID = new Quad(language, DBpediaDatasets.RevisionMeta, contributorURL, contributorIDPredicate,
       contributorID.toString, node.sourceUri, context.ontology.datatypes.get("xsd:integer").get );
 
     Seq(quadPageWithContributor, quadContributorName, quadContributorID);

@@ -20,6 +20,13 @@ class TemplateMapping(
 ) 
 extends Extractor[TemplateNode]
 {
+    /**
+     * Don't access context directly in methods. Cache context.language and context.ontology for use inside
+     * methods so that Spark (distributed-extraction-framework) does not have to serialize the whole context object
+     */
+    private val language = context.language
+    private val ontology = context.ontology
+
     override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
 
     override def extract(node: TemplateNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
@@ -79,7 +86,7 @@ extends Extractor[TemplateNode]
                 if (condition1_createCorrespondingProperty)
                 {
                     //Connect new instance to the instance created from the root template
-                    graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
+                    graph += new Quad(language, DBpediaDatasets.OntologyProperties, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
                 }
 
                 //Extract properties
@@ -107,7 +114,7 @@ extends Extractor[TemplateNode]
 
         // Create missing type statements
         for (cls <- diffSet)
-          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+          graph += new Quad(language, DBpediaDatasets.OntologyTypes, uri, ontology.properties("rdf:type"), cls.uri, node.sourceUri)
 
     }
 
@@ -126,7 +133,7 @@ extends Extractor[TemplateNode]
         
         //Create type statements
         for (cls <- classes)
-          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+          graph += new Quad(language, DBpediaDatasets.OntologyTypes, uri, ontology.properties("rdf:type"), cls.uri, node.sourceUri)
     }
 
     /**

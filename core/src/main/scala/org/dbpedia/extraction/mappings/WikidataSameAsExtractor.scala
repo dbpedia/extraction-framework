@@ -21,6 +21,12 @@ class WikidataSameAsExtractor(
                          )
   extends JsonNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   // Here we define all the ontology predicates we will use
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
@@ -54,7 +60,7 @@ class WikidataSameAsExtractor(
                 //links returned from the wikiparser are in the form of URIs so SimpleNode.getUriTriples method is used
                 for( llink <- node.getUriTriples(property))
                 {
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataSameAs, subjectUri, sameAsProperty,llink, page.wikiPage.sourceUri,null)
+                    quads += new Quad(language, DBpediaDatasets.WikidataSameAs, subjectUri, sameAsProperty,llink, page.wikiPage.sourceUri,null)
                 }
               }
               case _=> //ignore others

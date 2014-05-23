@@ -19,6 +19,12 @@ class WikidataLLExtractor(
                          )
   extends JsonNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   // Here we define all the ontology predicates we will use
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
@@ -55,7 +61,7 @@ class WikidataLLExtractor(
                 {
                   for (llink2 <- node.getUriTriples(property) diff List(llink))
                   {
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataLL, llink, sameAsProperty,llink2, page.wikiPage.sourceUri,null)
+                    quads += new Quad(language, DBpediaDatasets.WikidataLL, llink, sameAsProperty,llink2, page.wikiPage.sourceUri,null)
                   }
                 }
               }

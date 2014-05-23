@@ -22,6 +22,12 @@ class DateIntervalMapping (
 ) 
 extends PropertyMapping
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   private val logger = Logger.getLogger(classOf[DateIntervalMapping].getName)
 
   private val startDateParser = new DateTimeParser(context, rangeType(startDateOntologyProperty))
@@ -70,7 +76,7 @@ extends PropertyMapping
       }
 
       //Write start date quad
-      val quad1 = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
+      val quad1 = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
 
       //Writing the end date is optional if "until present" is specified
       for(endDate <- endDateOpt)
@@ -83,7 +89,7 @@ extends PropertyMapping
         }
 
         //Write end year quad
-        val quad2 = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
+        val quad2 = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
 
         return Seq(quad1, quad2)
       }

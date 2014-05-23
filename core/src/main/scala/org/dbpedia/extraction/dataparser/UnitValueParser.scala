@@ -20,6 +20,14 @@ class UnitValueParser( extractionContext : {
                         strict : Boolean = false,
                         multiplicationFactor : Double = 1.0) extends DataParser
 {
+    /**
+     * Don't access extractionContext directly in methods. Cache extractionContext.redirects and
+     * extractionContext.ontology for use inside methods so that Spark (distributed-extraction-framework)
+     * does not have to serialize the whole extractionContext object
+     */
+    private val redirects = extractionContext.redirects
+    private val ontology = extractionContext.ontology
+
     private val logger = Logger.getLogger(getClass.getName)
 
     private val parserUtils = new ParserUtils(extractionContext)
@@ -165,7 +173,7 @@ class UnitValueParser( extractionContext : {
         }
 
         val templateNode = node.asInstanceOf[TemplateNode]
-        val templateName = extractionContext.redirects.resolve(templateNode.title).decoded
+        val templateName = redirects.resolve(templateNode.title).decoded
 
 
         val childrenChilds = for(child <- node.children) yield
@@ -405,7 +413,7 @@ class UnitValueParser( extractionContext : {
     {
         durationParser.parseToSeconds(input, inputDatatype) match
         {
-            case Some(result) => Some((result, extractionContext.ontology.datatypes("second").asInstanceOf[UnitDatatype]))
+            case Some(result) => Some((result, ontology.datatypes("second").asInstanceOf[UnitDatatype]))
             case None => None
         }
     }

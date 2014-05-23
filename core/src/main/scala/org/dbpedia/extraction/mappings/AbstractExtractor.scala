@@ -34,6 +34,12 @@ class AbstractExtractor(
 )
 extends PageNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+    private val language = context.language
+
     private val maxRetries = 3
 
     /** timeout for connection to web server, milliseconds */
@@ -45,7 +51,7 @@ extends PageNodeExtractor
     /** sleep between retries, milliseconds, multiplied by CPU load */
     private val sleepFactorMs = 4000
 
-    private val language = context.language.wikiCode
+    private val languageWikiCode = context.language.wikiCode
 
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
@@ -53,7 +59,7 @@ extends PageNodeExtractor
     private val apiUrl = "http://localhost/mediawiki/api.php"
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
-    private val apiParametersFormat = "uselang="+language+"&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s"
+    private val apiParametersFormat = "uselang="+languageWikiCode+"&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s"
 
     // lazy so testing does not need ontology
     private lazy val shortProperty = context.ontology.properties("rdfs:comment")
@@ -234,7 +240,7 @@ extends PageNodeExtractor
         false
       } else {
         val firstLetter = text.substring(0,1)
-        firstLetter != firstLetter.toUpperCase(context.language.locale)
+        firstLetter != firstLetter.toUpperCase(language.locale)
       }
 
       //HACK

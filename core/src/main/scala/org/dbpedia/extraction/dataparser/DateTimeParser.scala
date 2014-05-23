@@ -19,6 +19,12 @@ class DateTimeParser ( context : {
 {
     require(datatype != null, "datatype != null")
 
+    /**
+     * Don't access context directly in methods. Cache context.redirects for use inside methods so that
+     * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+     */
+    private val redirects = context.redirects
+
     private val logger = Logger.getLogger(getClass.getName)
 
     // language-specific configurations
@@ -101,7 +107,7 @@ class DateTimeParser ( context : {
 
     private def catchTemplate(node: TemplateNode) : Option[Date] =
     {
-        val templateName = context.redirects.resolve(node.title).decoded.toLowerCase
+        val templateName = redirects.resolve(node.title).decoded.toLowerCase
 
         for(currentTemplate <- templates.get(templateName))
         {

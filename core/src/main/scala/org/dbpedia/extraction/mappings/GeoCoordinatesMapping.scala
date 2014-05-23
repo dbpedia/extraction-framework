@@ -34,6 +34,12 @@ class GeoCoordinatesMapping(
 ) 
 extends PropertyMapping
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName)
 
   private val geoCoordinateParser = new GeoCoordinateParser(context)
@@ -135,13 +141,13 @@ extends PropertyMapping
     {
       instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
 
-      quads += new Quad(context.language,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
+      quads += new Quad(language,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
     }
 
-    quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
-    quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
-    quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
-    quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
+    quads += new Quad(language, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
+    quads += new Quad(language, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
+    quads += new Quad(language, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
+    quads += new Quad(language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
 
     quads
   }

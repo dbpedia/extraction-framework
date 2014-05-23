@@ -21,6 +21,13 @@ class TableMapping(
 ) 
 extends Extractor[TableNode]
 {
+    /**
+     * Don't access context directly in methods. Cache context.language and context.ontology for use inside
+     * methods so that Spark (distributed-extraction-framework) does not have to serialize the whole context object
+     */
+    private val language = context.language
+    private val ontology = context.ontology
+
     val keywordDef = keywords.split(';').map { _.split(',').map(_.trim.toLowerCase(context.language.locale)) }
 
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
@@ -53,13 +60,13 @@ extends Extractor[TableNode]
 
             //Add new ontology instance
             for (cls <- mapToClass.relatedClasses)
-              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, rowNode.sourceUri)
+              graph += new Quad(language, DBpediaDatasets.OntologyTypes, instanceUri, ontology.properties("rdf:type"), cls.uri, rowNode.sourceUri)
 
             //Link new instance to the corresponding Instance
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
+                graph += new Quad(language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
             }
 
             //Extract properties
@@ -79,7 +86,7 @@ extends Extractor[TableNode]
         for( headerRow <- node.children.headOption.toList;
              headerCell <- headerRow.children;
              text <- headerCell.retrieveText )
-        yield text.toLowerCase(context.language.locale)
+        yield text.toLowerCase(language.locale)
     }
 
     /**
