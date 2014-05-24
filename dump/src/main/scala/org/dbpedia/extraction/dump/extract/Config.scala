@@ -26,7 +26,7 @@ private class Config(config: Properties)
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
   // Watch out, this could be a regex
-  val source = config.getProperty("source", "pages-articles.xml")
+  val source = config.getProperty("source", "pages-articles.xml.bz2")
   val disambiguations = config.getProperty("disambiguations", "page_props.sql.gz")
 
   val wikiName = config.getProperty("wikiName", "wiki")
