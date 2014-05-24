@@ -33,7 +33,7 @@ class FileTypeExtractor(context: {
             Seq(new Quad(Language.English, DBpediaDatasets.FileInformation,
                 subjectUri,
                 fileExtensionProperty,
-                extensionMatch.group("extension"),
+                extensionMatch.group("extension").toLowerCase(),
                 page.sourceUri,
                 context.ontology.datatypes("xsd:string")
             ))
