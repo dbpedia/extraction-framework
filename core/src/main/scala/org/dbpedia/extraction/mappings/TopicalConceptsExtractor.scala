@@ -26,6 +26,12 @@ class TopicalConceptsExtractor(
 )
 extends PageNodeExtractor
 {
+    /**
+     * Don't access context directly in methods. Cache context.language for use inside methods so that
+     * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+     */
+    private val language = context.language
+
     private val skosSubjectProperty = context.ontology.properties("skos:subject")
 
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
@@ -47,14 +53,14 @@ extends PageNodeExtractor
 
             try {
                 val quads = allTemplates.flatMap{ template =>
-                    val mainResource = context.language.resourceUri.append(template.property("1").get.retrieveText.get)
-                    (new Quad(context.language,
+                    val mainResource = language.resourceUri.append(template.property("1").get.retrieveText.get)
+                    (new Quad(language,
                         DBpediaDatasets.TopicalConcepts,
                         subjectUri,
                         skosSubjectProperty,
                         mainResource,
                         template.sourceUri) ::
-                    new Quad(context.language,
+                    new Quad(language,
                         DBpediaDatasets.TopicalConcepts,
                         mainResource,
                         rdfTypeProperty,

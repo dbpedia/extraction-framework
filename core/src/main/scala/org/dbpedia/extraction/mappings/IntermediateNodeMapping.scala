@@ -20,6 +20,13 @@ class IntermediateNodeMapping (
 )
 extends PropertyMapping
 {
+  /**
+   * Don't access context directly in methods. Cache context.language and context.ontology for use inside
+   * methods so that Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+  private val ontology = context.ontology
+
   private val logger = Logger.getLogger(classOf[IntermediateNodeMapping].getName)
 
   private val splitRegex = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(context.language.wikiCode))
@@ -85,10 +92,10 @@ extends PropertyMapping
     // only generate triples if we actually extracted some values
     if(! values.isEmpty)
     {
-      graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+      graph += new Quad(language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
       
       for (cls <- nodeClass.relatedClasses)
-        graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+        graph += new Quad(language, DBpediaDatasets.OntologyTypes, instanceUri, ontology.properties("rdf:type"), cls.uri, node.sourceUri)
       
       graph ++= values
     }

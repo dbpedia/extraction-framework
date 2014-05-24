@@ -19,6 +19,12 @@ class PageLinksExtractor (
 )
 extends PageNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   val wikiPageWikiLinkProperty = context.ontology.properties("wikiPageWikiLink")
 
   override val datasets = Set(DBpediaDatasets.PageLinks)
@@ -29,12 +35,12 @@ extends PageNodeExtractor
     
     val list = PageLinksExtractor.collectInternalLinks(node)
     
-    list.map(link => new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty, getUri(link.destination), link.sourceUri, null))
+    list.map(link => new Quad(language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty, getUri(link.destination), link.sourceUri, null))
   }
 
   private def getUri(destination : WikiTitle) : String =
   {
-    context.language.resourceUri.append(destination.decodedWithNamespace)
+    language.resourceUri.append(destination.decodedWithNamespace)
   }
 
 }

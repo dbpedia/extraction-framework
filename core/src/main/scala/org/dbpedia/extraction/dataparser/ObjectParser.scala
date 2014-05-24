@@ -11,11 +11,17 @@ import scala.language.reflectiveCalls
 
 class ObjectParser( context : { def language : Language }, val strict : Boolean = false) extends DataParser
 {
+    /**
+     * Don't access context directly in methods. Cache context.language for use inside methods so that
+     * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+     */
+    private val language = context.language
+
     private val flagTemplateParser = new FlagTemplateParser(context)
 
-    private val language = context.language.wikiCode
+    private val languageWikiCode = context.language.wikiCode
 
-    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexObject.contains(language)) DataParserConfig.splitPropertyNodeRegexObject.get(language).get
+    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexObject.contains(languageWikiCode)) DataParserConfig.splitPropertyNodeRegexObject.get(languageWikiCode).get
                                           else DataParserConfig.splitPropertyNodeRegexObject.get("en").get
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
@@ -60,7 +66,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
                 {
                     case Some(destination) =>  // should always be Main namespace
                     {
-                        return Some(context.language.resourceUri.append(destination.decodedWithNamespace))
+                        return Some(language.resourceUri.append(destination.decodedWithNamespace))
                     }
                     case None =>
                 }
@@ -94,7 +100,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
      */
     private def getAdditionalWikiTitle(surfaceForm : String, pageNode : PageNode) : Option[WikiTitle] =
     {
-        surfaceForm.trim.toLowerCase(context.language.locale) match
+        surfaceForm.trim.toLowerCase(language.locale) match
         {
             case "" => None
             case sf: String => getTitleForSurfaceForm(sf, pageNode)
@@ -109,7 +115,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
             {
                 // TODO: Here we match the link label. Should we also match the link target?
                 val linkText = linkNode.children.collect{case TextNode(text, _) => text}.mkString("")
-                if(linkText.toLowerCase(context.language.locale) == surfaceForm)
+                if(linkText.toLowerCase(language.locale) == surfaceForm)
                 {
                     return Some(linkNode.destination)
                 }

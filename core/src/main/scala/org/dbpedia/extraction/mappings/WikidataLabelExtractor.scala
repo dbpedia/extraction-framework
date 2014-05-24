@@ -22,6 +22,12 @@ class WikidataLabelExtractor(
                          )
   extends JsonNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.ontology for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val ontology = context.ontology
+
   // Here we define all the ontology predicates we will use
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
@@ -59,7 +65,7 @@ class WikidataLabelExtractor(
                   //write triples for languages that included only in the namespace
                   Language.get(lang) match
                   {
-                    case Some(l) => quads += new Quad(l, DBpediaDatasets.WikidataLabels, subjectUri, labelProperty, labelsMap(lang), page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                    case Some(l) => quads += new Quad(l, DBpediaDatasets.WikidataLabels, subjectUri, labelProperty, labelsMap(lang), page.wikiPage.sourceUri, ontology.datatypes("rdf:langString"))
                     case _=>
                   }
                 }

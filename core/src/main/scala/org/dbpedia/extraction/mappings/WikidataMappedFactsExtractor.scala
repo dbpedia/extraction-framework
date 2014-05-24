@@ -28,6 +28,13 @@ class WikidataMappedFactsExtractor(
                          )
   extends JsonNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language and context.ontology for use inside
+   * methods so that Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+  private val ontology = context.ontology
+
   // Here we define all the ontology predicates we will use
   private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
   private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
@@ -60,7 +67,7 @@ class WikidataMappedFactsExtractor(
             //check for triples that doesn't contain Label or sameas properties only
               node.NodeType match {
                 case JsonNode.CoordinatesFacts => {
-                  quads += new Quad(null, DBpediaDatasets.WikidataMappedFacts, subjectUri, context.ontology.properties(property), fact, page.wikiPage.sourceUri)
+                  quads += new Quad(null, DBpediaDatasets.WikidataMappedFacts, subjectUri, ontology.properties(property), fact, page.wikiPage.sourceUri)
                 }
 
                 case JsonNode.CommonMediaFacts => {
@@ -69,7 +76,7 @@ class WikidataMappedFactsExtractor(
                   getDBpediaSameasProperties(property).foreach{dbProp =>
 
                     val fileURI = "http://commons.wikimedia.org/wiki/File:" + fact.replace(" ","_")
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp.uri,fileURI, page.wikiPage.sourceUri,null)
+                    quads += new Quad(language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp.uri,fileURI, page.wikiPage.sourceUri,null)
 
                   }
                 }
@@ -89,7 +96,7 @@ class WikidataMappedFactsExtractor(
 
                     val dateParser = new DateTimeParser(context, dbProp.range.asInstanceOf[Datatype])
                     dateParser.parse(new TextNode(fact,0)) match {
-                      case Some(date) => quads += new Quad(context.language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp,date.toString, page.wikiPage.sourceUri)
+                      case Some(date) => quads += new Quad(language, DBpediaDatasets.WikidataMappedFacts, subjectUri, dbProp,date.toString, page.wikiPage.sourceUri)
                       case None =>
                     }
                   }
@@ -132,7 +139,7 @@ class WikidataMappedFactsExtractor(
   {
     val p = property.replace("http://www.wikidata.org/entity/","http://wikidata.dbpedia.org/resource/")
     var properties = Set[OntologyProperty]()
-    context.ontology.equivalentPropertiesMap.foreach({map =>
+    ontology.equivalentPropertiesMap.foreach({map =>
       if (map._1.toString.matches(p))
       {
         map._2.foreach{mappedProp =>

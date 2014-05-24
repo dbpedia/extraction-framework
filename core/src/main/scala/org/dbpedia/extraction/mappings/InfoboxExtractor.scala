@@ -32,6 +32,11 @@ class InfoboxExtractor(
 ) 
 extends PageNodeExtractor
 {
+    /**
+     * Don't access context directly in methods. Cache context.redirects for use inside methods so that
+     * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+     */
+    private val redirects = context.redirects
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Configuration
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +112,7 @@ extends PageNodeExtractor
 
         /** Retrieve all templates on the page which are not ignored */
         for { template <- collectTemplates(node)
-          resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
+          resolvedTitle = redirects.resolve(template.title).decoded.toLowerCase
           if !ignoreTemplates.contains(resolvedTitle)
           if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
         }

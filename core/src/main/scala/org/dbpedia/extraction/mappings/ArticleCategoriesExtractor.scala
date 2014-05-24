@@ -14,6 +14,12 @@ class ArticleCategoriesExtractor( context : {
                                       def ontology : Ontology
                                       def language : Language } ) extends PageNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+    private val language = context.language
+
     private val dctermsSubjectProperty = context.ontology.properties("dct:subject")
 
     override val datasets = Set(DBpediaDatasets.ArticleCategories)
@@ -24,7 +30,7 @@ class ArticleCategoriesExtractor( context : {
         
         val links = collectCategoryLinks(node).filter(isCategoryForArticle(_))
 
-        links.map(link => new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri))
+        links.map(link => new Quad(language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri))
     }
 
     private def isCategoryForArticle(linkNode : InternalLinkNode) = linkNode.destinationNodes match
@@ -44,7 +50,7 @@ class ArticleCategoriesExtractor( context : {
 
     private def getUri(destination : WikiTitle) : String =
     {
-        val categoryNamespace = Namespace.Category.name(context.language)
-        context.language.resourceUri.append(categoryNamespace+':'+destination.decoded)
+        val categoryNamespace = Namespace.Category.name(language)
+        language.resourceUri.append(categoryNamespace+':'+destination.decoded)
     }   
 }

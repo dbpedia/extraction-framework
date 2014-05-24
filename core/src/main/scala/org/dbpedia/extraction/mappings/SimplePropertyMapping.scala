@@ -26,6 +26,12 @@ class SimplePropertyMapping (
 )
 extends PropertyMapping
 {
+    /**
+     * Don't access context directly in methods. Cache context.ontology for use inside methods so that
+     * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+     */
+    private val ontology = context.ontology
+
     val selector: List[_] => List[_] =
       select match {
         case "first" => _.take(1)
@@ -197,7 +203,7 @@ extends PropertyMapping
         for(templateClass <- node.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
             currentClass <- templateClass.relatedClasses)
         {
-            for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
+            for(specificPropertyUnit <- ontology.specializations.get((currentClass, ontologyProperty)))
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
                  val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)

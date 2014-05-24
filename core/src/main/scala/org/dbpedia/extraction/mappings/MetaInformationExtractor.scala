@@ -21,6 +21,12 @@ class MetaInformationExtractor( context : {
   def ontology : Ontology
   def language : Language } ) extends WikiPageExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.language for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val language = context.language
+
   val modificationDatePredicate = context.ontology.properties("wikiPageModified")
   val extractionDatePredicate = context.ontology.properties("wikiPageExtracted")
   val editLinkPredicate = context.ontology.properties("wikiPageEditLink")
@@ -34,23 +40,23 @@ class MetaInformationExtractor( context : {
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
-    val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit"
-    val revisionLink = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&oldid=" + page.revision
-    val historyLink  = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=history"
+    val editLink     = language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit"
+    val revisionLink = language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&oldid=" + page.revision
+    val historyLink  = language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=history"
 
-    val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
+    val quadModificationDate = new Quad(language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
       formatTimestamp(page.timestamp), page.sourceUri, datetime )
 
-    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, extractionDatePredicate,
+    val quadExtractionDate = new Quad(language, DBpediaDatasets.RevisionMeta, subjectUri, extractionDatePredicate,
       formatCurrentTimestamp, page.sourceUri, datetime )
 
-    val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, editLinkPredicate,
+    val quadEditlink = new Quad(language, DBpediaDatasets.RevisionMeta, subjectUri, editLinkPredicate,
       editLink, page.sourceUri, null )
 
-    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, revisionPredicate,
+    val quadRevisionlink = new Quad(language, DBpediaDatasets.RevisionMeta, subjectUri, revisionPredicate,
       revisionLink, page.sourceUri, null )
 
-    val quadHistorylink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, historyPredicate,
+    val quadHistorylink = new Quad(language, DBpediaDatasets.RevisionMeta, subjectUri, historyPredicate,
       historyLink, page.sourceUri, null )
 
 

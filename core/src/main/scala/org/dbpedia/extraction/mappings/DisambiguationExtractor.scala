@@ -19,6 +19,12 @@ class DisambiguationExtractor(
 )
 extends PageNodeExtractor
 {
+  /**
+   * Don't access context directly in methods. Cache context.disambiguations for use inside methods so that
+   * Spark (distributed-extraction-framework) does not have to serialize the whole context object
+   */
+  private val disambiguations = context.disambiguations
+
   private val language = context.language
 
   private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap(language.wikiCode)
@@ -29,7 +35,7 @@ extends PageNodeExtractor
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    if (page.title.namespace == Namespace.Main && (page.isDisambiguation || context.disambiguations.isDisambiguation(page.id)))
+    if (page.title.namespace == Namespace.Main && (page.isDisambiguation || disambiguations.isDisambiguation(page.id)))
     {
       val allLinks = collectInternalLinks(page)
       
