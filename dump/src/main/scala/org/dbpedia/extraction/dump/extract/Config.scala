@@ -10,7 +10,7 @@ import org.dbpedia.extraction.util.{ConfigUtils, ExtractorUtils, Language}
 import org.dbpedia.extraction.util.ConfigUtils.{getValue,getStrings}
 
 
-private class Config(config: Properties)
+class Config(config: Properties)
 {
   // TODO: get rid of all config file parsers, use Spring
 
