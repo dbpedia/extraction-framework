@@ -53,7 +53,7 @@ object ConfigUtils {
    * @param args array of space- or comma-separated language codes or article count ranges
    * @return languages, sorted by language code
    */
-  // TODO: copy & paste in org.dbpedia.extraction.dump.download.DownloadConfig, org.dbpedia.extraction.dump.extract.Config
+  // TODO: reuse this in org.dbpedia.extraction.dump.download.DownloadConfig
   def parseLanguages(baseDir: File, args: Seq[String]): Array[Language] = {
     
     var keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key

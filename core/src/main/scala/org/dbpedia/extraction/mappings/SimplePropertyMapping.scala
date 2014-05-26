@@ -68,8 +68,8 @@ extends PropertyMapping
         "Language can only be specified for datatype properties")
 
       // TODO: don't use string constant, use RdfNamespace
-      require(ontologyProperty.range.uri == "http://www.w3.org/2001/XMLSchema#string",
-        "Language can only be specified for string datatype properties")
+      require(ontologyProperty.range.uri == "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+        "Language can only be specified for rdf:langString datatype properties")
     }
     
     private val parser : DataParser = ontologyProperty.range match

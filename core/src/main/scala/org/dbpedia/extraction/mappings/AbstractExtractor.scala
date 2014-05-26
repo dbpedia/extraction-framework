@@ -34,6 +34,9 @@ class AbstractExtractor(
 )
 extends PageNodeExtractor
 {
+    //TODO make this configurable
+    protected def apiUrl: String = "http://localhost/mediawiki/api.php"
+
     private val maxRetries = 3
 
     /** timeout for connection to web server, milliseconds */
@@ -48,9 +51,6 @@ extends PageNodeExtractor
     private val language = context.language.wikiCode
 
     private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
-
-    //TODO make this configurable
-    private val apiUrl = "http://localhost/mediawiki/api.php"
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s"

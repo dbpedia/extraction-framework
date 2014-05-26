@@ -18,13 +18,20 @@ import java.net.URL
  * or they can support lazy loading of context parameters.
  */
 
-abstract class ExtractionManager(languages : Seq[Language], paths: Paths, redirects: Map[Language, Redirects])
+abstract class ExtractionManager(
+    languages : Seq[Language],
+    paths: Paths,
+    redirects: Map[Language, Redirects],
+    mappingTestExtractors: Seq[Class[_ <: Extractor[_]]],
+    customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
 {
   self =>
     
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
-    def extractor(language : Language) : RootExtractor
+    def mappingExtractor(language : Language) : RootExtractor
+
+    def customExtractor(language : Language) : RootExtractor
 
     def ontology() : Ontology
 
@@ -49,8 +56,8 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths, redire
     
     protected val parser = WikiParser.getInstance()
 
-    def extract(source: Source, destination: Destination, language: Language): Unit = {
-      val extract = extractor(language)
+    def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
+      val extract = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)
       destination.open()
       for (page <- source) destination.write(extract(page))
       destination.close()
@@ -156,22 +163,32 @@ abstract class ExtractionManager(languages : Seq[Language], paths: Paths, redire
         new OntologyReader().read(ontologyPages.values)
     }
 
-    protected def loadExtractors(): Map[Language, RootExtractor] =
+    protected def loadMappingTestExtractors(): Map[Language, RootExtractor] =
     {
-        val extractors = languages.map(lang => (lang, loadExtractors(lang))).toMap
-        logger.info("All extractors loaded for languages "+languages.map(_.wikiCode).sorted.mkString(","))
+        val extractors = languages.map(lang => (lang, loadExtractors(lang, mappingTestExtractors))).toMap
+        logger.info("All mapping test extractors loaded for languages "+languages.map(_.wikiCode).sorted.mkString(","))
         extractors
     }
 
-    protected def loadExtractors(lang : Language): RootExtractor =
+    protected def loadCustomTestExtractors(): Map[Language, RootExtractor] =
+    {
+      val extractors = languages.map(lang => (lang, loadExtractors(lang,customTestExtractors(lang)))).toMap
+      logger.info("All custom extractors loaded for languages "+languages.map(_.wikiCode).sorted.mkString(","))
+      extractors
+    }
+
+    protected def loadExtractors(lang : Language, classes: Seq[Class[_ <: Extractor[_]]]): RootExtractor =
     {
       new RootExtractor(
-        new CompositeParseExtractor(
-          new LabelExtractor(new {val ontology = self.ontology; val language = lang}),
-          new MappingExtractor(new {val mappings = self.mappings(lang);
-                                    val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))})
-        )
+        CompositeParseExtractor.load(classes,self.getExtractionContext(lang))
       )
+    }
+
+    protected def getExtractionContext(lang: Language) = {
+      new { val ontology = self.ontology;
+            val language = lang;
+            val mappings = self.mappings(lang);
+            val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))}
     }
 
     protected def loadMappings() : Map[Language, Mappings] =
