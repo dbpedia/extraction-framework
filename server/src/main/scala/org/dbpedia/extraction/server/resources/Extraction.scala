@@ -81,6 +81,10 @@ class Extraction(@PathParam("lang") langCode : String)
                <option value="n-quads">N-Quads</option>
                <option value="rdf-json">RDF/JSON</option>
              </select><br/>
+             <select name="extractors">
+               <option value="mappings">Mappings Only</option>
+               <option value="custom">All Enabled Extractors </option>
+             </select><br/>
              <input type="submit" value="Extract" />
            </form>
          </body>
@@ -92,7 +96,7 @@ class Extraction(@PathParam("lang") langCode : String)
      */
     @GET
     @Path("extract")
-    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String) : Response =
+    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String) : Response =
     {
         if (title == null && revid < 0) throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
         
@@ -108,6 +112,13 @@ class Extraction(@PathParam("lang") langCode : String)
             case _ => TriX.writeHeader(writer, 2)
         }
 
+      val customExtraction = extractors match
+      {
+        case "mappings" => false
+        case "custom" => true
+        case _ => false
+      }
+
         val source = 
           if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
           else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
@@ -115,7 +126,7 @@ class Extraction(@PathParam("lang") langCode : String)
         // See https://github.com/dbpedia/extraction-framework/issues/144
         // We should mimic the extraction framework behavior
         val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
-        Server.instance.extractor.extract(source, destination, language)
+        Server.instance.extractor.extract(source, destination, language, customExtraction)
 
         Response.ok(writer.toString).`type`(selectContentType(format)).build()
     }

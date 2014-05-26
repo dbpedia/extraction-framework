@@ -1,21 +1,16 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
-import org.dbpedia.extraction.mappings.{Extractor, PageNodeExtractor}
-import scala.collection.mutable.HashMap
+import org.dbpedia.extraction.mappings.Extractor
 import java.util.Properties
 import java.io.File
 import org.dbpedia.extraction.wikiparser.Namespace
-import scala.collection.JavaConversions.asScalaSet
 import scala.collection.Map
-import scala.collection.immutable.{SortedSet,SortedMap}
-import org.dbpedia.extraction.util.{Language,WikiInfo}
-import org.dbpedia.extraction.util.Language.wikiCodeOrdering
-import org.dbpedia.extraction.util.ConfigUtils.{LanguageRegex,RangeRegex,toRange,getValue,getStrings}
-import org.dbpedia.extraction.util.RichString.wrapString
-import scala.io.Codec
+import org.dbpedia.extraction.util.{ConfigUtils, ExtractorUtils, Language}
+import org.dbpedia.extraction.util.ConfigUtils.{getValue,getStrings}
 
-private class Config(config: Properties)
+
+class Config(config: Properties)
 {
   // TODO: get rid of all config file parsers, use Spring
 
@@ -54,89 +49,15 @@ private class Config(config: Properties)
 
   /**
    * Loads the extractors classes from the configuration.
+   * Loads only the languages defined in the languages property
    *
    * @return A Map which contains the extractor classes for each language
    */
-  private def loadExtractorClasses() : Map[Language, List[Class[_ <: Extractor[_]]]] =
+  private def loadExtractorClasses() : Map[Language, Seq[Class[_ <: Extractor[_]]]] =
   {
-    val languages = loadLanguages()
+    val languages = ConfigUtils.parseLanguages(dumpDir,getStrings(config, "languages", ',', false))
 
-    val stdExtractors = getStrings(config, "extractors", ',', false).toList.map(loadExtractorClass)
-
-    //Create extractor map
-    // type of Extractor would be 'any' because they are different types of extractors and not categorized yet
-    val classes = new HashMap[Language, List[Class[_ <: Extractor[_]]]]()
-
-    /*
-    TODO: Refactor the whole config mess.
-    The languages property defines which languages should be processed in general,
-    It should be possible to say: run extractors A,B,C for languages xx,yy,zz. That
-    would make the configuration much simpler, less repetitive and more flexible.
-    */
-    for(language <- languages) {
-      classes(language) = stdExtractors
-    }
-
-    for (key <- config.stringPropertyNames) {
-      if (key.startsWith("extractors.")) {
-        val language = Language(key.substring("extractors.".length()))
-        if (languages.contains(language)) { // load language only if it declared explicitly
-          classes(language) = stdExtractors ++ getStrings(config, key, ',', true).map(loadExtractorClass)
-        }
-      }
-    }
-
-    SortedMap(classes.toSeq: _*)
-  }
-
-  private def loadLanguages(): Set[Language] = {
-
-    /** Languages */
-    // TODO: add special parameters, similar to download:
-    // extract=10000-:InfoboxExtractor,PageIdExtractor means all languages with at least 10000 articles
-    // extract=mapped:MappingExtractor means all languages with a mapping namespace
-
-    val keys = getStrings(config, "languages", ',', false)
-
-    var languages = Set[Language]()
-
-    var ranges = Set[(Int,Int)]()
-
-    // FIXME: copy & paste in DownloadConfig and ConfigUtils
-
-    for (key <- keys) key match {
-      case "@mappings" => languages ++= Namespace.mappings.keySet
-      case RangeRegex(from, to) => ranges += toRange(from, to)
-      case LanguageRegex(language) => languages += Language(language)
-      case other => throw new Exception("Invalid language / range '"+other+"'")
-    }
-
-    // resolve page count ranges to languages
-    if (ranges.nonEmpty)
-    {
-      val listFile = new File(dumpDir, WikiInfo.FileName)
-
-      // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
-      // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
-      // these non-ASCII chars anyway, so we don't have to unescape them.
-      println("parsing "+listFile)
-      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
-
-      // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
-      {
-        // ...add its language
-        languages += wiki.language
-      }
-    }
-
-    SortedSet[Language](languages.toSeq: _*)
-  }
-
-  private def loadExtractorClass(name: String): Class[_ <: Extractor[_]] = {
-    val className = if (name.startsWith(".")) classOf[Extractor[_]].getPackage.getName+name else name
-    // TODO: class loader of Extractor.class is probably wrong for some users.
-    classOf[Extractor[_]].getClassLoader.loadClass(className).asSubclass(classOf[Extractor[_]])
+    ExtractorUtils.loadExtractorsMapFromConfig(languages, config)
   }
 
   private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
