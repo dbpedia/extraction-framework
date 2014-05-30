@@ -16,6 +16,7 @@ class Root
           <head>
             <title>DBpedia Server</title>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
           </head>
           <body>
             <h2>DBpedia Server</h2>
