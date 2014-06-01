@@ -7,7 +7,7 @@ import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
@@ -101,7 +101,7 @@ extends PageNodeExtractor
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return Seq.empty
+        if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
         
         val quads = new ArrayBuffer[Quad]()
 
