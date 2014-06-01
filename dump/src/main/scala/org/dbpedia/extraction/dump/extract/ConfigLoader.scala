@@ -6,7 +6,7 @@ import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{WikiPage, XMLSource, WikiSource, Source}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dump.download.Download
-import org.dbpedia.extraction.util.{Language,Finder}
+import org.dbpedia.extraction.util.{Language, Finder, ExtractorUtils}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
 import java.io._
@@ -89,7 +89,8 @@ class ConfigLoader(config: Config)
 
               XMLSource.fromReaders(articlesReaders, language,
                     title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
-                             title.namespace == Namespace.Category || title.namespace == Namespace.Template)
+                             title.namespace == Namespace.Category || title.namespace == Namespace.Template ||
+                             ExtractorUtils.titleContainsCommonsMetadata(title))
             }
             
             def articlesSource = _articlesSource
@@ -136,7 +137,10 @@ class ConfigLoader(config: Config)
         val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete), false)
         
         val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
-        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description)
+        if(lang == Language.Commons)
+            new ExtractionJob(new RootExtractor(extractor), context.articlesSource, ExtractorUtils.commonsNamespacesContainingMetadata, destination, lang.wikiCode, description)
+        else
+            new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description)
     }
     
     private def writer(file: File): () => Writer = {
