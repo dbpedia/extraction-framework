@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
 import java.util.Properties
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.immutable.Map
@@ -59,5 +60,27 @@ object ExtractorUtils {
 
     // Sort keys
     SortedMap(classes.toSeq: _*)
+  }
+  
+  /**
+   * List of namespaces in the Commons that might contain metadata.
+   * These should be processed by the appropriate mappings, but
+   * should probably be moved into a configuration file somewhere.
+   */
+  val commonsNamespacesContainingMetadata = Set[Namespace](
+    Namespace.Main,
+    Namespace.File,
+    Namespace.Category,
+    Namespace.get(Language.Commons, "Creator").head,
+    Namespace.get(Language.Commons, "Institution").head
+  )
+
+  /**
+   * Check if this WikiTitle is (1) on the Commons, and (2) contains metadata.
+   */
+  def titleContainsCommonsMetadata(title: WikiTitle):Boolean = {
+    // println("What we go: " + commonsNamespacesContainingMetadata + " to compare to: " + title.namespace)
+
+    (title.language == Language.Commons && commonsNamespacesContainingMetadata.contains(title.namespace))
   }
 }
