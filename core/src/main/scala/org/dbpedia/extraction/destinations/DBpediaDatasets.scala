@@ -66,6 +66,11 @@ object DBpediaDatasets
     val Homepages = new Dataset("homepages")
     val OutDegree = new Dataset("out_degree")
     
+
+    /**
+     * Files
+     */
+    val FileInformation = new Dataset("file_information")
     
 
     /**
