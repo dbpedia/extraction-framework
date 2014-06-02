@@ -137,10 +137,10 @@ class ConfigLoader(config: Config)
         val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete), false)
         
         val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
-        if(lang == Language.Commons)
-            new ExtractionJob(new RootExtractor(extractor), context.articlesSource, ExtractorUtils.commonsNamespacesContainingMetadata, destination, lang.wikiCode, description)
-        else
-            new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description)
+
+        val extractionJobNS = if(lang == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
+
+        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, extractionJobNS, destination, lang.wikiCode, description)
     }
     
     private def writer(file: File): () => Writer = {
