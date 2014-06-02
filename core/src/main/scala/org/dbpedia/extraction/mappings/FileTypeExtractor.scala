@@ -16,7 +16,7 @@ class FileTypeExtractor(context: {
     def language : Language
 }) extends WikiPageExtractor
 {
-    private val fileExtensionProperty = context.ontology.properties("type")
+    private val fileExtensionProperty = context.ontology.properties("fileExtension")
     
     override val datasets = Set(DBpediaDatasets.FileInformation)
     
