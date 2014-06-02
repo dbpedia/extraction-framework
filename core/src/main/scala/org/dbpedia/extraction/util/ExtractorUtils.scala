@@ -72,6 +72,7 @@ object ExtractorUtils {
         Namespace.Main,
         Namespace.File,
         Namespace.Category,
+        Namespace.Template,
         Namespace.get(Language.Commons, "Creator").get,
         Namespace.get(Language.Commons, "Institution").get
       )
