@@ -67,20 +67,24 @@ object ExtractorUtils {
    * These should be processed by the appropriate mappings, but
    * should probably be moved into a configuration file somewhere.
    */
-  val commonsNamespacesContainingMetadata = Set[Namespace](
-    Namespace.Main,
-    Namespace.File,
-    Namespace.Category,
-    Namespace.get(Language.Commons, "Creator").head,
-    Namespace.get(Language.Commons, "Institution").head
-  )
+  val commonsNamespacesContainingMetadata:Set[Namespace] = try {
+      Set[Namespace](
+        Namespace.Main,
+        Namespace.File,
+        Namespace.Category,
+        Namespace.get(Language.Commons, "Creator").get,
+        Namespace.get(Language.Commons, "Institution").get
+      )
+    } catch {
+      case ex: java.util.NoSuchElementException =>
+        throw new RuntimeException("Commons namespace not correctly set up: " +
+            "make sure namespaces 'Creator' and 'Institution' are defined in " + 
+            "settings/commonswiki-configuration.xml")
+    }
 
   /**
    * Check if this WikiTitle is (1) on the Commons, and (2) contains metadata.
    */
-  def titleContainsCommonsMetadata(title: WikiTitle):Boolean = {
-    // println("What we go: " + commonsNamespacesContainingMetadata + " to compare to: " + title.namespace)
-
+  def titleContainsCommonsMetadata(title: WikiTitle):Boolean =
     (title.language == Language.Commons && commonsNamespacesContainingMetadata.contains(title.namespace))
-  }
 }
