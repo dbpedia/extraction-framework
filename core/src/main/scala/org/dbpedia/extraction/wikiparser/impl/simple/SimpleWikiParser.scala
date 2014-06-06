@@ -52,10 +52,10 @@ object SimpleWikiParser
 }
 
 /**
- * Port of the DBpedia WikiParser for PHP.
+ * Port of the DBpedia WikiParser from PHP.
  */
 //TODO section names should only contain the contents of the TextNodes
-final class SimpleWikiParser extends WikiParser
+class SimpleWikiParser extends WikiParser
 {
     /**
      * Parses WikiText source and builds an Abstract Syntax Tree.
