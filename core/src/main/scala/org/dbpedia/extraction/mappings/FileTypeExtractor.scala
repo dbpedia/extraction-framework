@@ -23,7 +23,8 @@ class FileTypeExtractor(context: {
     override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
     {
         // This interface only applies to File:s.
-        if(page.title.namespace != Namespace.File) return Seq.empty
+        if(page.title.namespace != Namespace.File || page.redirect != null) 
+            return Seq.empty
 
         // Add a quad for the file type as guessed from the extension.
         val extensionRegex = new scala.util.matching.Regex("""\.(\w+)$""", "extension")
