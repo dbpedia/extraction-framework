@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import java.util.logging.Logger
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
@@ -16,6 +17,7 @@ class FileTypeExtractor(context: {
     def language : Language
 }) extends WikiPageExtractor
 {
+    private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
     private val fileExtensionProperty = context.ontology.properties("fileExtension")
     
     override val datasets = Set(DBpediaDatasets.FileInformation)
@@ -30,14 +32,21 @@ class FileTypeExtractor(context: {
         val extensionRegex = new scala.util.matching.Regex("""\.(\w+)$""", "extension")
         val extensionMatch = extensionRegex.findAllIn(page.title.decoded)
 
-        val file_type_quads = if(extensionMatch.isEmpty) Seq.empty else
+        val file_type_quads = if(extensionMatch.isEmpty) Seq.empty else {
+            val extension = extensionMatch.group("extension").toLowerCase
+
+            if(extension.length > 4)
+                logger.warning("Page '" + page.title.decodedWithNamespace + "' has an unusually long extension '" + extension + "'")
+
             Seq(new Quad(Language.English, DBpediaDatasets.FileInformation,
                 subjectUri,
                 fileExtensionProperty,
-                extensionMatch.group("extension").toLowerCase(),
+                extension,
                 page.sourceUri,
                 context.ontology.datatypes("xsd:string")
             ))
+        }
+
 
         return Seq(file_type_quads).flatten
     }
