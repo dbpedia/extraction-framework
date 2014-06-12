@@ -136,14 +136,16 @@ private class XMLSource(xml : Elem, language: Language) extends Source
                 case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
             }
 
-            if(title != null && title.namespace.code != nsCode) {
+            if(title != null && title.namespace.code != nsCode)
+            {
                 val expected: Namespace = Namespace.values.apply(nsCode)
                 //logger.log(Level.WARNING, "Error parsing title: found namespace " + title.namespace + ", expected " + expected + " in title " + titleStr)
                 title.otherNamespace = expected
             }
 
             //Skip bad titles
-            if(title != null) {
+            if(title != null)
+            {
                 val _redirect = (page \ "redirect" \ "@title").text match
                 {
                   case "" => null
