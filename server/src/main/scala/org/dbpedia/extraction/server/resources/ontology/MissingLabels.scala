@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.OntologyEntity
 import org.dbpedia.extraction.server.util.PageUtils.languageList
 import scala.xml.{Elem,Text,NodeBuffer}
 import javax.ws.rs._
+import org.dbpedia.extraction.server.resources.serverHeader
 
 @Path("/ontology/labels/missing/")
 class MissingLabels {
@@ -27,15 +28,16 @@ class MissingLabels {
     val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-    <head>
-      <title>Missing labels for language { langCode }</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
+     {serverHeader.getheader()}
     <body>
-      <h2>Missing labels for language { langCode }</h2>
-      { listLabels(language, ontology.classes, "Classes", "OntologyClass") }
-      { listLabels(language, ontology.properties, "Properties", "OntologyProperty") }
-      { listLabels(language, ontology.datatypes, "Datatypes", "Datatype") }
+      <div class="row">
+        <div class="col-md-3 col-md-offset-5">
+          <h2>Missing labels for language { langCode }</h2>
+            { listLabels(language, ontology.classes, "Classes", "OntologyClass") }
+            { listLabels(language, ontology.properties, "Properties", "OntologyProperty") }
+            { listLabels(language, ontology.datatypes, "Datatypes", "Datatype") }
+         </div>
+      </div>
     </body>
     </html>
   }

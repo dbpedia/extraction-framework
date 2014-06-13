@@ -8,6 +8,7 @@ import scala.xml.{Elem,Text,NodeBuffer}
 import javax.ws.rs._
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.server.resources.serverHeader
 
 @Path("/ontology/wikidata/missing/")
 class MissingWikidata {
@@ -22,10 +23,10 @@ class MissingWikidata {
     
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-      <title>Missing equivalent Wikidata properties</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      {serverHeader.getheader()}
     </head>
     <body>
+
       <h2>Missing equivalent Wikidata properties</h2>
       { 
         val nodes = new NodeBuffer()

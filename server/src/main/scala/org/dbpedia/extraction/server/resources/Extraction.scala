@@ -14,6 +14,7 @@ import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDest
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 import stylesheets.TriX
 import java.io.StringWriter
+import org.dbpedia.extraction.server.resources.serverHeader
 
 object Extraction
 {
@@ -62,31 +63,33 @@ class Extraction(@PathParam("lang") langCode : String)
     def get = 
     {
        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-         <head>
-           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-         </head>
+         {serverHeader.getheader()}
          <body>
-           <h2>Extract a page</h2>
-           <form action="extract" method="get">
-             Page title<br/>
-             <input type="text" name="title" value={ getTitle }/><br/>
-             Revision ID (optional, overrides title)<br/>
-             <input type="text" name="revid"/><br/>
-             Output format<br/>
-             <select name="format">
-               <option value="trix">Trix</option>
-               <option value="turtle-triples">Turtle-Triples</option>
-               <option value="turtle-quads">Turtle-Quads</option>
-               <option value="n-triples">N-Triples</option>
-               <option value="n-quads">N-Quads</option>
-               <option value="rdf-json">RDF/JSON</option>
-             </select><br/>
-             <select name="extractors">
-               <option value="mappings">Mappings Only</option>
-               <option value="custom">All Enabled Extractors </option>
-             </select><br/>
-             <input type="submit" value="Extract" />
-           </form>
+           <div class="row">
+             <div class="col-md-3 col-md-offset-5">
+              <h2>Extract a page</h2>
+               <form action="extract" method="get">
+                Page title<br/>
+                <input type="text" name="title" value={ getTitle }/><br/>
+                Revision ID (optional, overrides title)<br/>
+                <input type="text" name="revid"/><br/>
+                Output format<br/>
+                <select name="format">
+                  <option value="trix">Trix</option>
+                  <option value="turtle-triples">Turtle-Triples</option>
+                  <option value="turtle-quads">Turtle-Quads</option>
+                  <option value="n-triples">N-Triples</option>
+                  <option value="n-quads">N-Quads</option>
+                  <option value="rdf-json">RDF/JSON</option>
+                </select><br/>
+                <select name="extractors">
+                <option value="mappings">Mappings Only</option>
+                <option value="custom">All Enabled Extractors </option>
+                </select><br/>
+              <input type="submit" value="Extract" />
+            </form>
+            </div>
+           </div>
          </body>
        </html>
     }

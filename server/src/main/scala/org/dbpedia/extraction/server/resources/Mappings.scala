@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.server.resources
 
+import org.dbpedia.extraction.server.resources.serverHeader
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.server.resources.stylesheets.{TriX,Log}
 import org.dbpedia.extraction.server.Server
@@ -37,15 +38,17 @@ class Mappings(@PathParam("lang") langCode : String)
     def get : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {serverHeader.getheader()}
           <body>
-            <h2>Mappings</h2>
-            <a href="pages/">Source Pages</a><br/>
-            <a href="validate/">Validate Pages</a><br/>
-            <a href="extractionSamples/">Retrieve extraction samples</a><br/>
-            <a href={"../../statistics/"+language.wikiCode+"/"}>Statistics</a><br/>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-5">
+              <h2>Mappings</h2>
+              <a href="pages/">Source Pages</a><br/>
+              <a href="validate/">Validate Pages</a><br/>
+              <a href="extractionSamples/">Retrieve extraction samples</a><br/>
+              <a href={"../../statistics/"+language.wikiCode+"/"}>Statistics</a><br/>
+              </div>
+            </div>
           </body>
         </html>
     }
@@ -61,12 +64,14 @@ class Mappings(@PathParam("lang") langCode : String)
     def getPages : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {serverHeader.getheader()}
           <body>
+            <div class="row">
+             <div class="col-md-3 col-md-offset-5">
             <h2>Mapping pages</h2>
             { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot get page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+             </div>
+            </div>
           </body>
         </html>
     }
@@ -133,13 +138,15 @@ class Mappings(@PathParam("lang") langCode : String)
     def validate : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {serverHeader.getheader()}
           <body>
-            <h2>Validate Mappings</h2>
-            <p><a href="*">Validate all mappings</a></p>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot validate mapping: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+            <div class="row">
+             <div class="col-md-3 col-md-offset-5">
+              <h2>Validate Mappings</h2>
+              <p><a href="*">Validate all mappings</a></p>
+             { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot validate mapping: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+            </div>
+           </div>
           </body>
         </html>
     }
@@ -210,12 +217,14 @@ class Mappings(@PathParam("lang") langCode : String)
     def extractionSamples : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {serverHeader.getheader()}
           <body>
-            <h2>Mapping pages</h2>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot read page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+           <div class="row">
+            <div class="col-md-3 col-md-offset-5">
+             <h2>Mapping pages</h2>
+             { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot read page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+            </div>
+            </div>
           </body>
         </html>
     }

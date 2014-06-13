@@ -8,6 +8,7 @@ import org.dbpedia.extraction.server.Server
 import java.util.logging.Logger
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.server.resources.serverHeader
 
 @Path("/ontology/pages/")
 class Pages
@@ -24,13 +25,15 @@ class Pages
     def getPages : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {serverHeader.getheader()}
           <body>
-            <h2>Ontology pages</h2>
-            { Server.instance.extractor.ontologyPages.values.toArray.sortBy(_.title.decodedWithNamespace).map(PageUtils.relativeLink(_) ++ <br/>) }
-          </body>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-5">
+                <h2>Ontology pages</h2>
+              { Server.instance.extractor.ontologyPages.values.toArray.sortBy(_.title.decodedWithNamespace).map(PageUtils.relativeLink(_) ++ <br/>) }
+              </div>
+            </div>
+           </body>
         </html>
     }
 

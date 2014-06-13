@@ -6,7 +6,7 @@ import javax.ws.rs._
 import org.dbpedia.extraction.ontology.{OntologyType,OntologyProperty,OntologyClass}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
-
+import org.dbpedia.extraction.server.resources.serverHeader
 @Path("/ontology/classes/")
 class Classes
 {
@@ -31,9 +31,7 @@ class Classes
         val rootClass = ontology.classes("owl:Thing")
 
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {serverHeader.getheader()}
           <body>
             <h2>Ontology Classes</h2>
             <ul>
