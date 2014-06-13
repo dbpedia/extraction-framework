@@ -31,10 +31,10 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
     private val manager = Server.instance.managers(language)
 
-    private val mappedColor = "#65c673"
-    private val notMappedColor = "#e05d57"
-    private val ignoreColor = "#b0b0b0"
-    private val notDefinedColor = "#FFF8C6"
+    private val mappedColor = "success"
+    private val notMappedColor ="danger"
+    private val ignoreColor = ""
+    private val notDefinedColor = "info"
 
     private def passwordQuery : String = if (Server.instance.adminRights(password)) "?p="+password else ""
 
@@ -49,9 +49,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
         Server.logger.fine("ratioTemp: " + percentageMapped)
         Server.logger.fine("ratioTempUses: " + percentageMappedUse)
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        </head>
+          {serverHeader.getheader()}
         <body>
             <h2 align="center">Statistics for template <a href={language.baseUri + "/wiki/" + manager.templateNamespace + wikiEncode(template)}>{template}</a> and its <a href={mappingUrlPrefix + wikiEncode(template)}>DBpedia mapping</a></h2>
             <p align="center">
@@ -70,25 +68,28 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 of
                 {ms.propertyUseCount}
                 ).</p>
-            <table align="center">
+            <table class="table table-condensed" style="width:500px; margin:auto">
             <caption>The color codes:</caption>
             <tr>
-                <td bgcolor={mappedColor}>property is mapped</td>
+                <td class={mappedColor}>property is mapped</td>
             </tr>
             <tr>
-                <td bgcolor={notMappedColor}>property is not mapped</td>
+                <td class={notMappedColor}>property is not mapped</td>
             </tr>
             <tr>
-                <td bgcolor={notDefinedColor}>property is mapped but not found in the template definition</td>
+                <td class={notDefinedColor}>property is mapped but not found in the template definition</td>
             </tr>
             <tr>
-                <td bgcolor={ignoreColor}>property is ignored</td>
+                <td class={ignoreColor}>property is ignored</td>
             </tr>
             </table>
-            <table align="center">
+           <table class="tablesorter table myTable table-condensed" style="width:500px; margin:auto;margin-top:10px">
+             <thead>
                 <tr>
-                    <td>occurrences</td> <td>property</td>
+                    <th>occurrences</th> <th>property</th>
                 </tr>
+             </thead>
+             <tbody>
                 {
             for ((name, (count, mapped)) <- sortedProps) yield
             {
@@ -119,7 +120,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                     bgcolor = ignoreColor
                 }
 
-                <tr bgcolor={bgcolor}>
+                <tr class={bgcolor}>
                         <td align="right">
                         <a name={urlEncode(name)}/>
                             {counter}
@@ -137,6 +138,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                     </tr>
             }
             }
+             </tbody>
             </table>
         </body>
         </html>
