@@ -49,6 +49,8 @@ abstract class ExtractionManager(
 
     def removeMappingPage(title : WikiTitle, language : Language)
 
+    protected val disambiguations : Disambiguations = loadDisambiguations()
+
     /**
      * Called by server to update all users of this extraction manager.
      */
@@ -78,6 +80,7 @@ abstract class ExtractionManager(
           val language = lang
           val redirects: Redirects = new Redirects(Map())
           val mappingPageSource = mappingsPages
+          val disambiguations = self.disambiguations
         }
 
         //Load mappings
@@ -131,6 +134,11 @@ abstract class ExtractionManager(
         }
         
         source.map(parser).flatten.map(page => (page.title, page)).toMap
+    }
+
+    protected def loadDisambiguations() =
+    {
+        Disambiguations.empty()
     }
 
     protected def loadMappingPages(): Map[Language, Map[WikiTitle, WikiPage]] =
@@ -188,7 +196,9 @@ abstract class ExtractionManager(
       new { val ontology = self.ontology;
             val language = lang;
             val mappings = self.mappings(lang);
-            val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))}
+            val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
+            val disambiguations = self.disambiguations
+      }
     }
 
     protected def loadMappings() : Map[Language, Mappings] =
@@ -203,6 +213,7 @@ abstract class ExtractionManager(
           val language = lang
           val redirects: Redirects = new Redirects(Map())
           val mappingPageSource = self.mappingPageSource(lang)
+          val disambiguations = self.disambiguations
         }
 
         MappingsLoader.load(context)
