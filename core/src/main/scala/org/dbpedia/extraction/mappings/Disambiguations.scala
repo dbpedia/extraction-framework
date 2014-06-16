@@ -25,6 +25,11 @@ object Disambiguations
   private val logger = Logger.getLogger(classOf[Disambiguations].getName)
 
   /**
+   * return an empty Disambiguations object
+   */
+  def empty() : Disambiguations = new Disambiguations(Set.empty.asInstanceOf[Set[Long]])
+
+  /**
    */
   def load(reader : () => Reader, cache : File, lang : Language) : Disambiguations =
   {

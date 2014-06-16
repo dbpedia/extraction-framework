@@ -25,6 +25,9 @@ abstract class FileLike[T <% FileLike[T]] {
   
   def exists: Boolean
   
+  /**
+   * @throws IOException if file does not exist or cannot be deleted
+   */
   def delete(recursive: Boolean = false): Unit
 
   def size(): Long
