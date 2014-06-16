@@ -14,7 +14,6 @@ import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDest
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 import stylesheets.TriX
 import java.io.StringWriter
-import org.dbpedia.extraction.server.resources.serverHeader
 
 object Extraction
 {
@@ -63,7 +62,7 @@ class Extraction(@PathParam("lang") langCode : String)
     def get = 
     {
        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-         {serverHeader.getheader()}
+         {ServerHeader.getHeader("Extractor a page")}
          <body>
            <div class="row">
              <div class="col-md-3 col-md-offset-5">

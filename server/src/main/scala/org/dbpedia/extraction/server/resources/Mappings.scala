@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.server.resources
 
-import org.dbpedia.extraction.server.resources.serverHeader
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.server.resources.stylesheets.{TriX,Log}
 import org.dbpedia.extraction.server.Server
@@ -38,7 +37,7 @@ class Mappings(@PathParam("lang") langCode : String)
     def get : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          {serverHeader.getheader()}
+          {ServerHeader.getHeader("Mappings")}
           <body>
             <div class="row">
               <div class="col-md-3 col-md-offset-5">
@@ -64,7 +63,7 @@ class Mappings(@PathParam("lang") langCode : String)
     def getPages : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          {serverHeader.getheader()}
+          {ServerHeader.getHeader("Mapping pages")}
           <body>
             <div class="row">
              <div class="col-md-3 col-md-offset-5">
@@ -138,7 +137,7 @@ class Mappings(@PathParam("lang") langCode : String)
     def validate : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          {serverHeader.getheader()}
+          {ServerHeader.getHeader("Validate Mappings")}
           <body>
             <div class="row">
              <div class="col-md-3 col-md-offset-5">
@@ -217,7 +216,7 @@ class Mappings(@PathParam("lang") langCode : String)
     def extractionSamples : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          {serverHeader.getheader()}
+          {ServerHeader.getHeader("Mapping pages")}
           <body>
            <div class="row">
             <div class="col-md-3 col-md-offset-5">

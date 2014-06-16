@@ -4,7 +4,7 @@ import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import xml.Elem
 import org.dbpedia.extraction.ontology.io.OntologyOWLWriter
-import org.dbpedia.extraction.server.resources.serverHeader
+import org.dbpedia.extraction.server.resources.ServerHeader
 
 @Path("/ontology/")
 class Ontology
@@ -17,7 +17,7 @@ class Ontology
     def get : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          {serverHeader.getheader()}
+          {ServerHeader.getHeader("Ontology ")}
           <body>
             <div class="row">
               <div class="col-md-3 col-md-offset-5">
