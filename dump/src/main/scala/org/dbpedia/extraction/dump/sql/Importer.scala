@@ -7,7 +7,6 @@ import java.lang.StringBuilder
 import java.sql.Connection
 import java.sql.SQLException
 import scala.util.control.ControlThrowable
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
 
 /**
  * This class is basically mwdumper's SqlWriter ported to Scala.
@@ -141,7 +140,6 @@ class Importer(conn: Connection) {
     }
     catch {
       // throw our own exception that our XML parser won't catch
-      case sqle: MySQLIntegrityConstraintViolationException => println("warning : " + sqle.getMessage()) // In case of duplicate insert
       case sqle: SQLException => throw new ImporterException(sqle)
     }
     finally stmt.close
