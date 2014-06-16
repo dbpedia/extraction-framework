@@ -2,7 +2,6 @@ package org.dbpedia.extraction.server.resources
 
 import javax.ws.rs._
 import org.dbpedia.extraction.server.Server
-import org.dbpedia.extraction.server.resources.serverHeader
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil.{wikiDecode,wikiEncode}
@@ -18,7 +17,7 @@ import scala.xml.Elem
  * some cases we have to use %20.
  */
 @Path("/statistics/{lang}/")
-class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String, @QueryParam("show") @DefaultValue("20") show: Int = 20)
+class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") password: String, @QueryParam("show") @DefaultValue("20") show: Int = 20)
 {
   @GET
   @Produces(Array("application/xhtml+xml"))
@@ -72,7 +71,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
     val percentageMappedPropertyUse: String = "%2.2f".format(mappedPropertyUseRatio * 100)
     
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-      {serverHeader.getheader()}
+      {ServerHeader.getHeader("Mapping Statistics for all languages")}
     <body>
       <h2 align="center">Mapping Statistics for <u>all languages</u></h2>
       <p align="center">{percentageMappedTemplates} % of all templates are mapped ({mappedTemplateCount} of {templateCount}).</p>
@@ -103,21 +102,21 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
     val mappingUrlPrefix = Server.instance.paths.pagesUrl+"/"+Namespace.mappings(language).name(Language.Mappings).replace(' ','_')+":"
 
-    val mappedGoodColor = "success"
-    val mappedMediumColor ="active"
-    val mappedBadColor = "warning"
-    val notMappedColor = "danger"
+    val mappedSuccess = "success"
+    val mappedActive ="active"
+    val mappedWarning = "warning"
+    var notMappedDanger = "danger"
 
     val goodThreshold = 0.8
     val mediumThreshold = 0.4
 
-    val renameColor = "info" //#b03060"
-    val ignoreColor = "" //"#cdcdcd"
+    val renameInfo = "info"
+    val ignoreEmpty = ""
 
     // TODO: stream xml to browser. We produce up to 10MB HTML. XML in memory is even bigger.
       
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          {serverHeader.getheader()}
+          {ServerHeader.getHeader(s"Mapping Statistics for $langCode", true)}
             <body>
                 <h2 align="center">Mapping Statistics for <u>{langCode}</u></h2>
                 <p align="center">{percentageMappedTemplates} % of all templates in Wikipedia ({langCode}) are mapped 
@@ -131,12 +130,12 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
 
                 <table class="table table-condensed" align="center" style="width:500px; margin:auto">
                     <caption>The color codes:</caption>
-                    <tr><td class={mappedGoodColor}>template is mapped withl more than {"%2.0f".format(goodThreshold*100)}%</td></tr>
-                    <tr><td class={mappedMediumColor}>template is mapped with more than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
-                    <tr><td class={mappedBadColor}>template is mapped with less than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
-                    <tr><td class={notMappedColor}>template is not mapped</td></tr>
-                    <tr><td class={renameColor}>template mapping must be renamed</td></tr>
-                    <tr><td class={ignoreColor}>template is on the ignorelist (is not an infobox that contains relevant properties)</td></tr>
+                    <tr><td class={mappedSuccess}>template is mapped withl more than {"%2.0f".format(goodThreshold*100)}%</td></tr>
+                    <tr><td class={mappedActive}>template is mapped with more than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
+                    <tr><td class={mappedWarning}>template is mapped with less than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
+                    <tr><td class={notMappedDanger}>template is not mapped</td></tr>
+                    <tr><td class={renameInfo}>template mapping must be renamed</td></tr>
+                    <tr><td class={ignoreEmpty}>template is on the ignorelist (is not an infobox that contains relevant properties)</td></tr>
                 </table>
                 { templateCountLinks }
         <table class="tablesorter table myTable table-condensed" align="center" style="width: 70%; margin:auto">
@@ -162,10 +161,10 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
             var mappingsWikiLink = mappingUrlPrefix + wikiEncode(mappingStat.templateName)
             
             var bgcolor: String =
-            if (! mappingStat.isMapped) notMappedColor
-            else if (mappingStat.mappedPropertyUseRatio > goodThreshold) mappedGoodColor
-            else if(mappingStat.mappedPropertyUseRatio > mediumThreshold) mappedMediumColor
-            else mappedBadColor
+            if (! mappingStat.isMapped) notMappedDanger
+            else if (mappingStat.mappedPropertyUseRatio > goodThreshold) mappedSuccess
+            else if(mappingStat.mappedPropertyUseRatio > mediumThreshold) mappedActive
+            else mappedWarning
 
             var mustRename = false
             var redirectMsg = ""
@@ -174,7 +173,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
                   //redirectMsg = " NOTE: the mapping for " + wikiDecode(redirect, language).substring(createMappingStats.templateNamespace.length()) + " is redundant!"
               } else {
                   mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespace.length)
-                  bgcolor = renameColor
+                  bgcolor = renameInfo
                   mustRename = true
                   redirectMsg = "Mapping of " + redirect.substring(manager.templateNamespace.length) + " must be renamed to "
               }
@@ -186,7 +185,7 @@ class TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p") p
             {
                 isIgnored = true
                 ignoreMsg = "remove from ignore list"
-                bgcolor = ignoreColor
+                bgcolor = ignoreEmpty
             }
           <tr class={bgcolor}>
           <td align="right"><a name={urlEncode(mappingStat.templateName)}/>{mappingStat.templateCount}</td>

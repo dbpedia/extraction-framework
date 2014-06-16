@@ -31,10 +31,10 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
     private val manager = Server.instance.managers(language)
 
-    private val mappedColor = "success"
-    private val notMappedColor ="danger"
-    private val ignoreColor = ""
-    private val notDefinedColor = "info"
+    private val mappedSuccess = "success"
+    private val notMappedDanger ="danger"
+    private val ignoreEmpty = ""
+    private val notDefinedInfo = "info"
 
     private def passwordQuery : String = if (Server.instance.adminRights(password)) "?p="+password else ""
 
@@ -49,7 +49,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
         Server.logger.fine("ratioTemp: " + percentageMapped)
         Server.logger.fine("ratioTempUses: " + percentageMappedUse)
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          {serverHeader.getheader()}
+          {ServerHeader.getHeader(s"Statistics for template $template",true)}
         <body>
             <h2 align="center">Statistics for template <a href={language.baseUri + "/wiki/" + manager.templateNamespace + wikiEncode(template)}>{template}</a> and its <a href={mappingUrlPrefix + wikiEncode(template)}>DBpedia mapping</a></h2>
             <p align="center">
@@ -71,16 +71,16 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
             <table class="table table-condensed" style="width:500px; margin:auto">
             <caption>The color codes:</caption>
             <tr>
-                <td class={mappedColor}>property is mapped</td>
+                <td class={mappedSuccess}>property is mapped</td>
             </tr>
             <tr>
-                <td class={notMappedColor}>property is not mapped</td>
+                <td class={notMappedDanger}>property is not mapped</td>
             </tr>
             <tr>
-                <td class={notDefinedColor}>property is mapped but not found in the template definition</td>
+                <td class={notDefinedInfo}>property is mapped but not found in the template definition</td>
             </tr>
             <tr>
-                <td class={ignoreColor}>property is ignored</td>
+                <td class={ignoreEmpty}>property is ignored</td>
             </tr>
             </table>
            <table class="tablesorter table myTable table-condensed" style="width:500px; margin:auto;margin-top:10px">
@@ -96,17 +96,17 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 var bgcolor: String = ""
                 if (mapped)
                 {
-                    bgcolor = mappedColor
+                    bgcolor = mappedSuccess
                 }
                 else
                 {
-                    bgcolor = notMappedColor
+                    bgcolor = notMappedDanger
                 }
 
                 var counter = ""
                 if (count == MappingStats.InvalidTarget)
                 {
-                    bgcolor = notDefinedColor
+                    bgcolor = notDefinedInfo
                     counter = "na"
                 }
                 else counter = count.toString
@@ -117,7 +117,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 {
                     isIgnored = true
                     ignoreMsg = "remove from ignore list"
-                    bgcolor = ignoreColor
+                    bgcolor = ignoreEmpty
                 }
 
                 <tr class={bgcolor}>

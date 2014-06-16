@@ -8,7 +8,7 @@ import org.dbpedia.extraction.server.Server
 import java.util.logging.Logger
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.server.resources.serverHeader
+import org.dbpedia.extraction.server.resources.ServerHeader
 
 @Path("/ontology/pages/")
 class Pages
@@ -25,7 +25,7 @@ class Pages
     def getPages : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          {serverHeader.getheader()}
+          {ServerHeader.getHeader("Ontology pages")}
           <body>
             <div class="row">
               <div class="col-md-3 col-md-offset-5">

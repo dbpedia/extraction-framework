@@ -15,7 +15,7 @@ class Root
     def get =
     {
       <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-        {serverHeader.getheader()}
+        {ServerHeader.getHeader("DBpedia Server",true)}
           <body>
             <h2 align="center">DBpedia Server</h2>
             <p align="center">
@@ -79,24 +79,27 @@ class Root
     def extraction = languageList("DBpedia Test Extractors", "Extractors", "Extractor for")
 
 }
-object serverHeader {
-  def getheader()={
+object ServerHeader {
+  def getHeader(title:String, tableSorter : Boolean = false)={
     <head>
-      <title>DBpedia Server</title>
+      <title>{title}</title>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-      <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.16.4/css/theme.default.css" rel="stylesheet" type ="text/css" />
+      {if (tableSorter) getTableSorter()}
+    </head>
+  }
+  def getTableSorter() = {
+      <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.16.4/css/theme.default.css" rel="stylesheet" type="text/css"/>
       <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
       <script type="text/javascript" src="http://mottie.github.com/tablesorter/js/jquery.tablesorter.js"></script>
       <script type="text/javascript">
-        //{scala.xml.PCData("""
-                        $(document).ready(function()
-                          {
-                               $(".myTable").tablesorter();
-                            }
-                          );
-             // """)}
+        // {scala.xml.PCData( """
+                          $(document).ready(function()
+                            {
+                                 $(".myTable").tablesorter();
+                             }
+                           );
+        // """)}
       </script>
-    </head>
   }
 }
