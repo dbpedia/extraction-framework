@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
+import org.dbpedia.extraction.config.mappings.FileTypeExtractorConfig
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
@@ -19,6 +20,8 @@ class FileTypeExtractor(context: {
 {
     private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
     private val fileExtensionProperty = context.ontology.properties("fileExtension")
+    private val dcTypeProperty = context.ontology.properties("dct:type")
+    private val dcFormatProperty = context.ontology.properties("dct:format")
     
     override val datasets = Set(DBpediaDatasets.FileInformation)
     
@@ -37,6 +40,8 @@ class FileTypeExtractor(context: {
 
             if(extension.length > 4)
                 logger.warning("Page '" + page.title.decodedWithNamespace + "' has an unusually long extension '" + extension + "'")
+ 
+            val (fileType, mimeType) = FileTypeExtractorConfig.typeAndMimeType(extension)
 
             Seq(new Quad(Language.English, DBpediaDatasets.FileInformation,
                 subjectUri,
@@ -44,9 +49,20 @@ class FileTypeExtractor(context: {
                 extension,
                 page.sourceUri,
                 context.ontology.datatypes("xsd:string")
+            ), new Quad(Language.English, DBpediaDatasets.FileInformation,
+                subjectUri,
+                dcTypeProperty,
+                fileType,
+                page.sourceUri,
+                null // fileType should be a URL
+            ), new Quad(Language.English, DBpediaDatasets.FileInformation,
+                subjectUri,
+                dcFormatProperty,
+                mimeType,
+                page.sourceUri,
+                context.ontology.datatypes("xsd:string")
             ))
         }
-
 
         return Seq(file_type_quads).flatten
     }
