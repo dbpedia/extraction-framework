@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.destinations
 
-import java.io.{File,FileOutputStream,IOException}
+import java.io.IOException
 import org.dbpedia.extraction.util.FileLike
 
 /**
