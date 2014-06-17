@@ -106,7 +106,7 @@ object WikiTitle
      * FIXME: rules for links are different from those for titles. We should have distinct methods
      * for these two use cases.
      *
-     * @param link MediaWiki link e.g. "Template:Infobox Automobile"
+     * @param title MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
      */
     def parse(title : String, sourceLanguage : Language): WikiTitle =
