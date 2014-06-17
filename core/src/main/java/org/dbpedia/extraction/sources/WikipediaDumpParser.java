@@ -373,7 +373,7 @@ public class WikipediaDumpParser
   {
     try
     {
-      return WikiTitle.parse(titleString, _language);
+      return WikiTitle.parseCleanTitle(titleString, _language);
     }
     catch (Exception e)
     {
@@ -381,7 +381,7 @@ public class WikipediaDumpParser
       return null;
     }
   }
-  
+
   /**
    * @param name expected name of element. if null, don't check name.
    * @param nextTag should we advance to the next tag after the closing tag of this element?
