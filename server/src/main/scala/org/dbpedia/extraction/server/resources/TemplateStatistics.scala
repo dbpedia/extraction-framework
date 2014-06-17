@@ -102,16 +102,16 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
 
     val mappingUrlPrefix = Server.instance.paths.pagesUrl+"/"+Namespace.mappings(language).name(Language.Mappings).replace(' ','_')+":"
 
-    val mappedSuccess = "success"
-    val mappedActive ="active"
-    val mappedWarning = "warning"
-    var notMappedDanger = "danger"
+    val mappedSuccessClass = "success"
+    val mappedActiveClass ="active"
+    val mappedWarningClass = "warning"
+    var mappedDangerClass = "danger"
 
     val goodThreshold = 0.8
     val mediumThreshold = 0.4
 
-    val renameInfo = "info"
-    val ignoreEmpty = ""
+    val renameInfoClass = "info"
+    val ignoreEmptyClass = ""
 
     // TODO: stream xml to browser. We produce up to 10MB HTML. XML in memory is even bigger.
       
@@ -130,12 +130,12 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
 
                 <table class="table table-condensed" align="center" style="width:500px; margin:auto">
                     <caption>The color codes:</caption>
-                    <tr><td class={mappedSuccess}>template is mapped withl more than {"%2.0f".format(goodThreshold*100)}%</td></tr>
-                    <tr><td class={mappedActive}>template is mapped with more than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
-                    <tr><td class={mappedWarning}>template is mapped with less than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
-                    <tr><td class={notMappedDanger}>template is not mapped</td></tr>
-                    <tr><td class={renameInfo}>template mapping must be renamed</td></tr>
-                    <tr><td class={ignoreEmpty}>template is on the ignorelist (is not an infobox that contains relevant properties)</td></tr>
+                    <tr><td class={mappedSuccessClass}>template is mapped withl more than {"%2.0f".format(goodThreshold*100)}%</td></tr>
+                    <tr><td class={mappedActiveClass}>template is mapped with more than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
+                    <tr><td class={mappedWarningClass}>template is mapped with less than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
+                    <tr><td class={mappedDangerClass}>template is not mapped</td></tr>
+                    <tr><td class={renameInfoClass}>template mapping must be renamed</td></tr>
+                    <tr><td class={ignoreEmptyClass}>template is on the ignorelist (is not an infobox that contains relevant properties)</td></tr>
                 </table>
                 { templateCountLinks }
         <table class="tablesorter table myTable table-condensed" align="center" style="width: 70%; margin:auto">
@@ -160,11 +160,11 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
             val percentMappedPropOccur: String = "%2.2f".format(mappingStat.mappedPropertyUseRatio * 100)
             var mappingsWikiLink = mappingUrlPrefix + wikiEncode(mappingStat.templateName)
             
-            var bgcolor: String =
-            if (! mappingStat.isMapped) notMappedDanger
-            else if (mappingStat.mappedPropertyUseRatio > goodThreshold) mappedSuccess
-            else if(mappingStat.mappedPropertyUseRatio > mediumThreshold) mappedActive
-            else mappedWarning
+            var backgroundClass: String =
+            if (! mappingStat.isMapped) mappedDangerClass
+            else if (mappingStat.mappedPropertyUseRatio > goodThreshold) mappedSuccessClass
+            else if(mappingStat.mappedPropertyUseRatio > mediumThreshold) mappedActiveClass
+            else mappedWarningClass
 
             var mustRename = false
             var redirectMsg = ""
@@ -173,7 +173,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
                   //redirectMsg = " NOTE: the mapping for " + wikiDecode(redirect, language).substring(createMappingStats.templateNamespace.length()) + " is redundant!"
               } else {
                   mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespace.length)
-                  bgcolor = renameInfo
+                  backgroundClass = renameInfoClass
                   mustRename = true
                   redirectMsg = "Mapping of " + redirect.substring(manager.templateNamespace.length) + " must be renamed to "
               }
@@ -185,9 +185,9 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
             {
                 isIgnored = true
                 ignoreMsg = "remove from ignore list"
-                bgcolor = ignoreEmpty
+                backgroundClass = ignoreEmptyClass
             }
-          <tr class={bgcolor}>
+          <tr class={backgroundClass}>
           <td align="right"><a name={urlEncode(mappingStat.templateName)}/>{mappingStat.templateCount}</td>
           { if (mustRename) {
           <td>
