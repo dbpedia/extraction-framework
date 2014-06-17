@@ -225,19 +225,27 @@ class Mappings(@PathParam("lang") langCode : String)
     @Produces(Array("application/xml"))
     // @Encoded because title.count(_ == '/') must treat "%2F" different from "/"
     // TODO: change to @QueryParam, avoid the count(_ == '/') trick
-    def getExtractionSample(@PathParam("title") @Encoded title : String) : String =
-    {
+    def getExtractionSample(
+        @PathParam("title") @Encoded title : String,
+        @QueryParam("namespace") @DefaultValue("main") arg_namespace: String
+    ): String = {
         //Get the title of the mapping as well as its corresponding template on Wikipedia
         val mappingTitle = WikiTitle.parse(title, language) // TODO: use Language.Mappings?
         val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
+
+        // Determine the namespace
+        val namespace = Namespace.get(language, arg_namespace) match {
+            case Some(ns) => ns
+            case None => Namespace.Main
+        }
 
         //Find pages which use this mapping
         val wikiApiUrl = new URL(language.apiUri)
         val api = new WikiApi(wikiApiUrl, language)
         // TODO: one call to api.php is probably enough - get content of pages, not just titles
-        val pageTitles = api.retrieveTemplateUsages(templateTitle, 10)
+        val pageTitles = api.retrieveTemplateUsages(templateTitle, namespace, 10)
 
-        logger.info("extracting "+pageTitles.size+" pages for '" + templateTitle.encodedWithNamespace + "' language " + language)
+        logger.info("extracting "+pageTitles.size+" pages for '" + templateTitle.encodedWithNamespace + "' language " + language + " namespace " + namespace)
         
         // Extract pages
         // if there are slashes in the title, the stylesheets are further up in the directory tree
