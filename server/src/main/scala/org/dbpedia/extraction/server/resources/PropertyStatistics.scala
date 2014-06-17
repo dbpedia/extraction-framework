@@ -31,10 +31,10 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
     private val manager = Server.instance.managers(language)
 
-    private val mappedSuccess = "success"
-    private val notMappedDanger ="danger"
-    private val ignoreEmpty = ""
-    private val notDefinedInfo = "info"
+    private val mappedSuccessClass = "success"
+    private val mappedDangerClass ="danger"
+    private val ignoreEmptyClass = ""
+    private val notDefinedInfoClass = "info"
 
     private def passwordQuery : String = if (Server.instance.adminRights(password)) "?p="+password else ""
 
@@ -71,16 +71,16 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
             <table class="table table-condensed" style="width:500px; margin:auto">
             <caption>The color codes:</caption>
             <tr>
-                <td class={mappedSuccess}>property is mapped</td>
+                <td class={mappedSuccessClass}>property is mapped</td>
             </tr>
             <tr>
-                <td class={notMappedDanger}>property is not mapped</td>
+                <td class={mappedDangerClass}>property is not mapped</td>
             </tr>
             <tr>
-                <td class={notDefinedInfo}>property is mapped but not found in the template definition</td>
+                <td class={notDefinedInfoClass}>property is mapped but not found in the template definition</td>
             </tr>
             <tr>
-                <td class={ignoreEmpty}>property is ignored</td>
+                <td class={ignoreEmptyClass}>property is ignored</td>
             </tr>
             </table>
            <table class="tablesorter table myTable table-condensed" style="width:500px; margin:auto;margin-top:10px">
@@ -93,20 +93,20 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 {
             for ((name, (count, mapped)) <- sortedProps) yield
             {
-                var bgcolor: String = ""
+                var backgroundClass: String = ""
                 if (mapped)
                 {
-                    bgcolor = mappedSuccess
+                    backgroundClass = mappedSuccessClass
                 }
                 else
                 {
-                    bgcolor = notMappedDanger
+                    backgroundClass = mappedDangerClass
                 }
 
                 var counter = ""
                 if (count == MappingStats.InvalidTarget)
                 {
-                    bgcolor = notDefinedInfo
+                    backgroundClass = notDefinedInfoClass
                     counter = "na"
                 }
                 else counter = count.toString
@@ -117,10 +117,10 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 {
                     isIgnored = true
                     ignoreMsg = "remove from ignore list"
-                    bgcolor = ignoreEmpty
+                    backgroundClass = ignoreEmptyClass
                 }
 
-                <tr class={bgcolor}>
+                <tr class={backgroundClass}>
                         <td align="right">
                         <a name={urlEncode(name)}/>
                             {counter}
