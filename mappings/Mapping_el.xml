@@ -626,7 +626,7 @@
  {{PropertyMapping | templateProperty = λεζάντα | ontologyProperty =rdfs:label }}
 
  
-}}</text></revision></page><page><title>Mapping el:Βουνό</title><ns>304</ns><id>3517</id><revision><id>32338</id><timestamp>2014-03-07T16:30:37Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Βουνό</title><ns>304</ns><id>3517</id><revision><id>34998</id><timestamp>2014-05-28T22:37:40Z</timestamp><text>{{TemplateMapping
 | mapToClass = Mountain
 | mappings =
 	{{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
@@ -634,7 +634,9 @@
 
 	{{PropertyMapping | templateProperty = κορυφή | ontologyProperty = parentMountainPeak }}
         {{PropertyMapping | templateProperty = τελευταία_έκρηξη | ontologyProperty = eruptionYear }}
-	{{GeocoordinatesMapping | latitude = πλάτος  | longitudeDirection = N_ή_S  | longitude = μήκος  | latitudeDirection = E_ή_W }}
+        {{GeocoordinatesMapping | latitude = πλάτος  | longitudeDirection = N_ή_S  | longitude = μήκος  | latitudeDirection = E_ή_W }}
+        {{PropertyMapping | templateProperty = πρώτη_ανάβαση | ontologyProperty = firstAscentYear }}
+        {{PropertyMapping | templateProperty = πρώτη_ανάβαση | ontologyProperty = firstAscentPerson }}
         
 }}</text></revision></page><page><title>Mapping el:Βουνό (Ελλάδα)</title><ns>304</ns><id>2400</id><revision><id>34687</id><timestamp>2014-05-05T14:07:48Z</timestamp><text>{{TemplateMapping
 | mapToClass = Mountain
@@ -683,7 +685,7 @@
 	{{PropertyMapping | templateProperty = επόμενος | ontologyProperty =  successor }}	
 {{PropertyMapping | templateProperty = συναυτοκράτορας   | ontologyProperty = president }}
 
-}}</text></revision></page><page><title>Mapping el:Γέφυρα</title><ns>304</ns><id>3078</id><revision><id>32069</id><timestamp>2014-02-23T22:35:02Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Γέφυρα</title><ns>304</ns><id>3078</id><revision><id>34999</id><timestamp>2014-05-29T06:11:38Z</timestamp><text>{{TemplateMapping
 | mapToClass = Building
 | mappings = 
  {{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
@@ -692,6 +694,7 @@
  {{PropertyMapping | templateProperty = τοποθεσία | ontologyProperty = region }}
  {{PropertyMapping | templateProperty = διασχίζει | ontologyProperty = crosses }}
  {{PropertyMapping | templateProperty =  ιδιοκτήτης| ontologyProperty = owner }}
+ {{PropertyMapping | templateProperty = κατασκευαστής| ontologyProperty = builder }}
  {{PropertyMapping | templateProperty = σχεδιαστής | ontologyProperty = designer  }}
  {{PropertyMapping | templateProperty = μηχανικός | ontologyProperty = engineer  }}
  {{PropertyMapping | templateProperty = μήκος | ontologyProperty = length  }}
@@ -1105,32 +1108,17 @@
 | mappings =
 	
 
-}}</text></revision></page><page><title>Mapping el:Επιστήμονας</title><ns>304</ns><id>2452</id><revision><id>21359</id><timestamp>2012-12-29T14:40:01Z</timestamp><text>{{TemplateMapping
-| mapToClass = Scientist
-| mappings =
-        {{PropertyMapping | templateProperty = ακαδημαϊκοί_σύμβουλοι | ontologyProperty = academicAdvisor }}
-	{{PropertyMapping | templateProperty = διδακτορικός_σύμβουλος | ontologyProperty = doctoralAdvisor }}
-	{{PropertyMapping | templateProperty = διδακτορικοί_φοιτητές | ontologyProperty = doctoralStudent }}
-        {{PropertyMapping | templateProperty = σημαντικοί_φοιτητές | ontologyProperty = notableStudent }}
-	{{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
-        {{PropertyMapping | templateProperty = όνομα_γέννησης | ontologyProperty = birthName }}
-	{{PropertyMapping | templateProperty = ημερομηνία_γέννησης | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = τόπος_γέννησης | ontologyProperty = birthPlace }}
-	{{PropertyMapping | templateProperty = ημερομηνία_θανάτου | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = τόπος_θανάτου | ontologyProperty = deathPlace }}
-        {{PropertyMapping | templateProperty = αιτία_θανάτου | ontologyProperty = deathCause }}
-	{{PropertyMapping | templateProperty = κατοικία | ontologyProperty = residence }}
-	{{PropertyMapping | templateProperty = υπηκοότητα | ontologyProperty = citizenship }}
-	{{PropertyMapping | templateProperty = εθνικότητα | ontologyProperty = nationality }}
-        {{PropertyMapping | templateProperty = θέσεις_εργασίας | ontologyProperty = employer }}
-	{{PropertyMapping | templateProperty = σπουδές | ontologyProperty = almaMater }}
-	{{PropertyMapping | templateProperty = γνωστός_για | ontologyProperty = knownFor }}
-        {{PropertyMapping | templateProperty = επιρροές | ontologyProperty = influencedBy }}
-        {{PropertyMapping | templateProperty = επηρέασε | ontologyProperty = influenced }}
-	{{PropertyMapping | templateProperty = διακρίσεις | ontologyProperty = award }}
-	{{PropertyMapping | templateProperty = εικόνα | ontologyProperty = picture }}
-
-}}</text></revision></page><page><title>Mapping el:Εφημερίδα</title><ns>304</ns><id>3513</id><revision><id>12631</id><timestamp>2011-05-03T16:57:11Z</timestamp><text>#REDIRECT [[Mapping el:Κουτί πληροφοριών εφημερίδας]]</text></revision></page><page><title>Mapping el:Θρησκευτικό κτίριο</title><ns>304</ns><id>9363</id><revision><id>34705</id><timestamp>2014-05-06T14:00:38Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Επιστήμονας</title><ns>304</ns><id>2452</id><revision><id>34876</id><timestamp>2014-05-17T15:26:56Z</timestamp><text>{{ TemplateMapping | mapToClass = Scientist | mappings = 
+    {{ PropertyMapping | templateProperty = διδακτορικός_καθηγητής | ontologyProperty = doctoralAdvisor }}
+    {{ PropertyMapping | templateProperty = διδακτορικοί_μαθητές | ontologyProperty = doctoralStudent }}
+    {{ PropertyMapping | templateProperty = ημερομηνία γέννησης | ontologyProperty = birthDate }}
+    {{ PropertyMapping | templateProperty = τόπος γέννησης | ontologyProperty = birthPlace }}
+    {{ PropertyMapping | templateProperty = ημερομηνία θανάτου | ontologyProperty = deathDate }}
+    {{ PropertyMapping | templateProperty = τόπος θανάτου | ontologyProperty = deathPlace }}
+    {{ PropertyMapping | templateProperty = κατοικία | ontologyProperty = residence }}
+    {{ PropertyMapping | templateProperty = εθνικότητα | ontologyProperty = nationality }}
+    {{ PropertyMapping | templateProperty = γνωστός για | ontologyProperty = knownFor }}
+ }}</text></revision></page><page><title>Mapping el:Εφημερίδα</title><ns>304</ns><id>3513</id><revision><id>12631</id><timestamp>2011-05-03T16:57:11Z</timestamp><text>#REDIRECT [[Mapping el:Κουτί πληροφοριών εφημερίδας]]</text></revision></page><page><title>Mapping el:Θρησκευτικό κτίριο</title><ns>304</ns><id>9363</id><revision><id>34705</id><timestamp>2014-05-06T14:00:38Z</timestamp><text>{{TemplateMapping
 | mapToClass = Building
 | mappings =
 
@@ -1439,7 +1427,7 @@
 | mappings = {{ PropertyMapping | ontologyProperty =  country | templateProperty = Χώρα }}
 	
 
-}}</text></revision></page><page><title>Mapping el:Κλήρος</title><ns>304</ns><id>3062</id><revision><id>12738</id><timestamp>2011-05-10T07:13:19Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Κλήρος</title><ns>304</ns><id>3062</id><revision><id>35001</id><timestamp>2014-05-29T07:57:37Z</timestamp><text>{{TemplateMapping
 | mapToClass = Cleric
 | mappings =
 	{{PropertyMapping | templateProperty = έτος_γέννησης| ontologyProperty = birthDate }}
@@ -1449,6 +1437,7 @@
         {{PropertyMapping | templateProperty = εθνικότητα | ontologyProperty = nationality }}
 	{{PropertyMapping | templateProperty = μόρφωση | ontologyProperty = education }}
 	{{PropertyMapping | templateProperty = τίτλος | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = σύζυγος | ontologyProperty = spouse }}
 	{{PropertyMapping | templateProperty = οικογένεια| ontologyProperty = family }}
 }}</text></revision></page><page><title>Mapping el:Κοιλάδα</title><ns>304</ns><id>2956</id><revision><id>11102</id><timestamp>2011-03-21T13:03:59Z</timestamp><text>{{TemplateMapping
@@ -1761,7 +1750,7 @@
          {{PropertyMapping | templateProperty = eMedicineSubj | ontologyProperty = emedicineSubject }}
          {{PropertyMapping | templateProperty = MeshID | ontologyProperty = meshId }}
         
-}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών βιντεοπαιχνιδιού</title><ns>304</ns><id>2826</id><revision><id>34694</id><timestamp>2014-05-06T13:03:33Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών βιντεοπαιχνιδιού</title><ns>304</ns><id>2826</id><revision><id>34991</id><timestamp>2014-05-28T18:09:53Z</timestamp><text>{{TemplateMapping
 | mapToClass = VideoGame 
 | mappings =
 	
@@ -1777,6 +1766,10 @@
 {{PropertyMapping
 |templateProperty=εκδότης
 |ontologyProperty=publisher
+}}
+{{PropertyMapping 
+| templateProperty = τίτλος 
+| ontologyProperty = foaf:name 
 }}
 {{PropertyMapping
 |templateProperty=σχεδιαστής
@@ -2717,6 +2710,43 @@
 
 
 
+}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών οργανισμού</title><ns>304</ns><id>9410</id><revision><id>35064</id><timestamp>2014-06-03T10:59:15Z</timestamp><text>{{TemplateMapping
+|mapToClass = Organisation
+|mappings =
+ {{PropertyMapping | templateProperty = τοποθεσία | ontologyProperty = location }}
+ {{PropertyMapping | templateProperty = ιστοσελίδα | ontologyProperty = foaf:homepage}}
+ {{PropertyMapping | templateProperty = μέλη | ontologyProperty = membership}}
+ {{PropertyMapping | templateProperty = τύπος | ontologyProperty = type}}
+ {{PropertyMapping | templateProperty = affiliations | ontologyProperty = affiliation}}
+ {{PropertyMapping | templateProperty = γλώσσα | ontologyProperty = language}}
+ {{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name}}
+ {{PropertyMapping | templateProperty = leader_title | ontologyProperty = title}}
+ {{PropertyMapping | templateProperty = budget | ontologyProperty = budget | unit = Currency}}
+ {{PropertyMapping | templateProperty = leader_name2 | ontologyProperty = personName}}
+ {{PropertyMapping | templateProperty = leader_title2 | ontologyProperty = title}}
+ {{PropertyMapping | templateProperty = leader_name3 | ontologyProperty = person}}
+ {{PropertyMapping | templateProperty = leader_title3 | ontologyProperty = title}}
+ {{PropertyMapping | templateProperty = leader_name3 | ontologyProperty = personName}}
+ {{PropertyMapping | templateProperty = leader_title3 | ontologyProperty = title}}
+ {{PropertyMapping | templateProperty = leader_name4 | ontologyProperty = person}}
+ {{PropertyMapping | templateProperty = leader_title4 | ontologyProperty = title}}
+ {{PropertyMapping | templateProperty = main_organ | ontologyProperty = mainOrgan}}
+ {{PropertyMapping | templateProperty = parent_organization | ontologyProperty = parentOrganisation}}
+ {{PropertyMapping | templateProperty = num_staff | ontologyProperty = numberOfStaff}}
+ {{PropertyMapping | templateProperty = num_volunteers | ontologyProperty = numberOfVolunteers}}
+ {{PropertyMapping | templateProperty = συντομογραφία | ontologyProperty = abbreviation}}
+ {{PropertyMapping | templateProperty = συντεταγμένες | ontologyProperty = coords}}
+ {{PropertyMapping | templateProperty = motto | ontologyProperty = motto}}
+ {{PropertyMapping | templateProperty = main_organ | ontologyProperty = mainOrgan}}
+ {{PropertyMapping | templateProperty = region_served | ontologyProperty = regionServed}}
+ {{PropertyMapping | templateProperty = status | ontologyProperty = status}}
+ {{PropertyMapping | templateProperty = purpose | ontologyProperty = purpose}}
+
+
+
+
+
+
 }}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών περιοδικού</title><ns>304</ns><id>3067</id><revision><id>32138</id><timestamp>2014-02-24T21:22:29Z</timestamp><text>{{TemplateMapping
 | mapToClass = Magazine
 | mappings =
@@ -2744,7 +2774,7 @@
         {{PropertyMapping | templateProperty = ιδρύθηκε | ontologyProperty = date }}
         {{PropertyMapping | templateProperty = συνολική_κυκλοφορία | ontologyProperty = circulation }}
 	{{PropertyMapping | templateProperty = φωτογράφος | ontologyProperty = photographer }}
-}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών ποδοσφαιρικού συλλόγου</title><ns>304</ns><id>2834</id><revision><id>12684</id><timestamp>2011-05-08T23:11:06Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών ποδοσφαιρικού συλλόγου</title><ns>304</ns><id>2834</id><revision><id>35000</id><timestamp>2014-05-29T06:29:14Z</timestamp><text>{{TemplateMapping
 | mapToClass = SoccerClub
 | mappings =
 	{{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
@@ -2765,7 +2795,7 @@
         {{PropertyMapping | templateProperty = κατηγορία | ontologyProperty = league }}   
 	{{PropertyMapping | templateProperty = σεζόν | ontologyProperty = season }}    
         {{PropertyMapping | templateProperty = θέση | ontologyProperty = position }}
-	{{PropertyMapping | templateProperty = πρώτο_παιχνίδι | ontologyProperty = firstGame }}
+        {{PropertyMapping | templateProperty = πρώτο_παιχνίδι | ontologyProperty = firstGame }}
 	{{PropertyMapping | templateProperty = μεγαλύτερη_νίκη | ontologyProperty = largestWin }}
 	{{PropertyMapping | templateProperty = μεγαλύτερη_ήττα | ontologyProperty = worstDefeat }}
 	{{PropertyMapping | templateProperty = τοπ_σκόρερ | ontologyProperty = clubsRecordGoalscorer }}
@@ -2941,11 +2971,10 @@
 {{PropertyMapping | templateProperty = μερικώς | ontologyProperty = partialFailedLaunches }}
 {{PropertyMapping | templateProperty = πρώτη_πτήση | ontologyProperty = maidenFlight }}
 {{PropertyMapping | templateProperty = τελευταία_πτήση | ontologyProperty = finalFlight }}
-}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών σταδίου</title><ns>304</ns><id>9358</id><revision><id>34649</id><timestamp>2014-05-04T16:31:48Z</timestamp><text>{{ TemplateMapping | mapToClass = Stadium | mappings = 
+}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών σταδίου</title><ns>304</ns><id>9358</id><revision><id>34997</id><timestamp>2014-05-28T22:34:51Z</timestamp><text>{{ TemplateMapping | mapToClass = Stadium | mappings = 
+    {{ PropertyMapping | templateProperty = τοποθεσία | ontologyProperty = location }} 
     {{ PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
-    {{ PropertyMapping | templateProperty = άλλα_ονόματα| ontologyProperty = foaf:nick }}
- {{ PropertyMapping | templateProperty = πλ_όνομα | ontologyProperty = foaf:name }}    {{ PropertyMapping | templateProperty = τοποθεσία| ontologyProperty = location }}
-    
+    {{ PropertyMapping | templateProperty = άλλα_ονόματα| ontologyProperty = foaf:nick }}  
     {{ PropertyMapping | templateProperty = χτίσιμο| ontologyProperty = buildingEndDate }}
     {{ PropertyMapping | templateProperty = εγκαίνια| ontologyProperty = openingDate }}
     {{ PropertyMapping | templateProperty = ανακαινίσεις | ontologyProperty = rebuildingDate }}
@@ -2953,25 +2982,16 @@
     {{ PropertyMapping | templateProperty = κατεδάφιση| ontologyProperty = demolitionDate }}
     {{ PropertyMapping | templateProperty = ιδιοκτήτης| ontologyProperty = owner }}
     {{ PropertyMapping | templateProperty = αρχιτέκτονας| ontologyProperty = architect }}
-        {{PropertyMapping | templateProperty = λεζάντα | ontologyProperty = rdfs:label }}
-
-    
+    {{ PropertyMapping | templateProperty = λεζάντα | ontologyProperty = rdfs:label }}
     {{ PropertyMapping | templateProperty = κόστος| ontologyProperty = cost | unit = Currency }}
-    
-        {{ PropertyMapping | templateProperty = πρ_ονόματα| ontologyProperty = formerName }}
-    
-{{PropertyMapping | templateProperty = ιστοσελίδα  | ontologyProperty = foaf:homepage }} 
-{{PropertyMapping | templateProperty = σήμα | ontologyProperty = foaf:logo }}
-	
-	{{PropertyMapping | templateProperty = εικόνα | ontologyProperty = picture }}
-
-
-  
+    {{ PropertyMapping | templateProperty = πρ_ονόματα| ontologyProperty = formerName }}   
+    {{ PropertyMapping | templateProperty = ιστοσελίδα  | ontologyProperty = foaf:homepage }} 
+    {{ PropertyMapping | templateProperty = σήμα | ontologyProperty = foaf:logo }}
+    {{ PropertyMapping | templateProperty = εικόνα | ontologyProperty = picture }}
     {{ PropertyMapping | ontologyProperty = επιφάνεια| templateProperty = Acreage | unit = Area }}
     {{ PropertyMapping | ontologyProperty = επιφάνεια| templateProperty = acreage | unit = Area }}
     {{ PropertyMapping | templateProperty = χωρητικότητα| ontologyProperty = capacity }}
- 
-     }}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών στρατιωτικής μονάδας</title><ns>304</ns><id>2979</id><revision><id>21817</id><timestamp>2013-01-03T20:56:03Z</timestamp><text>{{TemplateMapping
+ }}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών στρατιωτικής μονάδας</title><ns>304</ns><id>2979</id><revision><id>21817</id><timestamp>2013-01-03T20:56:03Z</timestamp><text>{{TemplateMapping
 | mapToClass = MilitaryUnit
 | mappings =
 {{PropertyMapping | templateProperty = Όνομα| ontologyProperty = foaf:name }}
@@ -3047,7 +3067,7 @@
     {{ PropertyMapping | templateProperty = θέση_ανδρικού | ontologyProperty = position }}
     {{ PropertyMapping | templateProperty = θέση_γυναικείου | ontologyProperty = position  }}
     {{ PropertyMapping | templateProperty = περίοδος_γυναικείου | ontologyProperty = season }}
-}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών σχολείο</title><ns>304</ns><id>3004</id><revision><id>23523</id><timestamp>2013-01-23T19:33:04Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών σχολείο</title><ns>304</ns><id>3004</id><revision><id>34996</id><timestamp>2014-05-28T21:00:47Z</timestamp><text>{{TemplateMapping
 | mapToClass = School
 | mappings =
 {{PropertyMapping | templateProperty = όνομα| ontologyProperty = foaf:name }}
@@ -3057,6 +3077,7 @@
 {{PropertyMapping | templateProperty = γνωμικό_μετάφραση| ontologyProperty = motto}}
 
 {{PropertyMapping | templateProperty = τοποθεσία| ontologyProperty = location }}
+{{PropertyMapping | templateProperty = φύλο | ontologyProperty = gender }}
 {{PropertyMapping | templateProperty = περιοχή| ontologyProperty = region }}
 {{PropertyMapping | templateProperty = πόλη| ontologyProperty = city }}
 {{PropertyMapping | templateProperty = νομός| ontologyProperty = county }}
@@ -3165,6 +3186,7 @@
 {{PropertyMapping | templateProperty = ιστοδιεύθυνση| ontologyProperty = foaf:homepage}}
 {{PropertyMapping | templateProperty = ιστότοπος| ontologyProperty = foaf:homepage}}
 {{PropertyMapping | templateProperty = μέγιστη_ηλικία| ontologyProperty = upperAge}}
+
 }}</text></revision></page><page><title>Mapping el:Κουτί πληροφοριών τηλεοπτικής σεζόν</title><ns>304</ns><id>2825</id><revision><id>10547</id><timestamp>2010-11-19T18:10:44Z</timestamp><text>{{TemplateMapping
 | mapToClass = TelevisionShow 
 | mappings =
@@ -3884,7 +3906,7 @@
 	{{PropertyMapping | templateProperty = υψόμετρο | ontologyProperty = elevation | unit = metre }}
 	{{GeocoordinatesMapping | latitude = πλάτος  | longitudeDirection = N_ή_S  | longitude = μήκος  | latitudeDirection = E_ή_W }}
         
-}}</text></revision></page><page><title>Mapping el:Πανεπιστήμιο</title><ns>304</ns><id>2451</id><revision><id>23511</id><timestamp>2013-01-23T14:07:34Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Πανεπιστήμιο</title><ns>304</ns><id>2451</id><revision><id>34910</id><timestamp>2014-05-21T00:13:35Z</timestamp><text>{{TemplateMapping
 | mapToClass = University
 | mappings =
 {{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
@@ -3915,6 +3937,7 @@
 {{PropertyMapping | templateProperty = αριθμός φοιτητών | ontologyProperty = numberOfStudents }}
 {{PropertyMapping | templateProperty = προπτυχιακοί | ontologyProperty = numberOfUndergraduateStudents }}
 {{PropertyMapping | templateProperty = μεταπτυχιακοί | ontologyProperty = numberOfPostgraduateStudents }}
+{{PropertyMapping | templateProperty = διδακτορικοί | ontologyProperty = numberOfDoctoralStudents }}
 {{PropertyMapping | templateProperty = άλλοι| ontologyProperty = other}}
 {{PropertyMapping | templateProperty = τοποθεσία | ontologyProperty = location}}
 {{PropertyMapping | templateProperty = πόλη | ontologyProperty = city }}
@@ -4505,7 +4528,7 @@
         {{PropertyMapping | templateProperty = eMedicine_mult | ontologyProperty = emedicineSubject}} 
         {{PropertyMapping | templateProperty = εικόνα | ontologyProperty = picture}} 
 
-}}</text></revision></page><page><title>Mapping el:Πληροφορίες αστροναύτη</title><ns>304</ns><id>2461</id><revision><id>11239</id><timestamp>2011-03-30T07:34:38Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Πληροφορίες αστροναύτη</title><ns>304</ns><id>2461</id><revision><id>35057</id><timestamp>2014-06-03T10:34:05Z</timestamp><text>{{TemplateMapping
 | mapToClass = Astronaut
 | mappings =
 	{{PropertyMapping | templateProperty = τύπος | ontologyProperty = type }}
@@ -4514,7 +4537,7 @@
 	{{PropertyMapping | templateProperty = επιλογή | ontologyProperty = selection }}
 	{{PropertyMapping | templateProperty = αποστολή | ontologyProperty = mission }}
 	{{PropertyMapping | templateProperty = ημερομηνία σύνταξης | ontologyProperty = retired }}
-	{{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = γέννηση | ontologyProperty = birthDate }}
 	{{PropertyMapping | templateProperty = τόπος γέννησης | ontologyProperty = birthPlace }}
 	{{PropertyMapping | templateProperty = θάνατος | ontologyProperty = deathDate }}
@@ -4523,6 +4546,10 @@
 	{{PropertyMapping | templateProperty = τρέχον επάγγελμα | ontologyProperty = occupation }}
 	{{PropertyMapping | templateProperty = προηγούμενο επάγγελμα | ontologyProperty = occupation }}
         {{PropertyMapping | templateProperty = εθνικότητα | ontologyProperty = ethnicity }}
+        {{PropertyMapping | templateProperty = έμβλημα | ontologyProperty = foaf:logo }}
+        {{PropertyMapping | templateProperty = λεζάντα| ontologyProperty = rdfs:label }}
+        {{PropertyMapping | templateProperty = εικόνα | ontologyProperty = picture }}
+        {{PropertyMapping | templateProperty = πλάτος | ontologyProperty = width }}
 }}</text></revision></page><page><title>Mapping el:Πληροφορίες αυτοκινήτου</title><ns>304</ns><id>2846</id><revision><id>21493</id><timestamp>2012-12-30T11:33:15Z</timestamp><text>{{TemplateMapping
 | mapToClass = Automobile
 | mappings =
@@ -4835,9 +4862,10 @@
 	{{PropertyMapping | templateProperty = ιστότοπος | ontologyProperty = foaf:homepage }}
         {{PropertyMapping | templateProperty = εικόνα | ontologyProperty = picture }}
         {{PropertyMapping | templateProperty = κατηγορία | ontologyProperty = category }}
-}}</text></revision></page><page><title>Mapping el:Πληροφορίες μουσείου</title><ns>304</ns><id>2828</id><revision><id>10550</id><timestamp>2010-11-19T18:14:33Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Πληροφορίες μουσείου</title><ns>304</ns><id>2828</id><revision><id>34958</id><timestamp>2014-05-24T22:42:42Z</timestamp><text>{{TemplateMapping
 | mapToClass = Museum 
 | mappings =
+        {{PropertyMapping | templateProperty = πρόεδρος | ontologyProperty = president }}
 	
 
 }}</text></revision></page><page><title>Mapping el:Πληροφορίες μουσικού</title><ns>304</ns><id>2830</id><revision><id>23110</id><timestamp>2013-01-16T13:28:17Z</timestamp><text>{{TemplateMapping
@@ -4911,13 +4939,12 @@
 	{{PropertyMapping | templateProperty = απογραφή | ontologyProperty = censusYear }}
 	{{PropertyMapping | templateProperty = ιστοσελίδα | ontologyProperty = foaf:homepage }}
 
-}}</text></revision></page><page><title>Mapping el:Πληροφορίες ποδοσφαιριστή</title><ns>304</ns><id>2848</id><revision><id>32007</id><timestamp>2014-02-20T14:57:41Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Πληροφορίες ποδοσφαιριστή</title><ns>304</ns><id>2848</id><revision><id>34990</id><timestamp>2014-05-28T17:33:36Z</timestamp><text>{{TemplateMapping
 | mapToClass = SoccerPlayer
 | mappings =
 
 	{{PropertyMapping | templateProperty = όνομα | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = ημερομηνία γέννησης | ontologyProperty = birthDate }}
-        {{PropertyMapping | templateProperty = τόπος γέννησης | ontologyProperty = birthPlace }}
 	{{PropertyMapping | templateProperty = θέση | ontologyProperty = position }}
 	{{PropertyMapping | templateProperty = εθνική | ontologyProperty = team }}
 	{{PropertyMapping | templateProperty = πόλη γέννησης | ontologyProperty = birthPlace }}
@@ -4926,6 +4953,9 @@
 	{{PropertyMapping | templateProperty = νούμερο φανέλας | ontologyProperty = number }}
 	{{PropertyMapping | templateProperty = σύλλογοι νέων | ontologyProperty = team }}
 	{{PropertyMapping | templateProperty = σύλλογος | ontologyProperty = team }}
+	{{PropertyMapping | templateProperty = εμφανίσεις (γκολ)| ontologyProperty = numberOfMatches}}
+        {{PropertyMapping | templateProperty = προηγούμενοι σύλλογοι| ontologyProperty = team }}
+        {{PropertyMapping | templateProperty = περίοδοι προηγούμενων| ontologyProperty = years }}
         {{PropertyMapping | templateProperty = μέγεθος φωτογραφίας | ontologyProperty = imageSize }}
 	{{PropertyMapping | templateProperty = πλήρες όνομα | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = χώρα θανάτου | ontologyProperty = deathPlace }}
@@ -4934,6 +4964,17 @@
 	{{PropertyMapping | templateProperty = εικόνα | ontologyProperty = picture }}
 	{{PropertyMapping | templateProperty = σύλλογοι προπονητή| ontologyProperty = managerClub }}
         {{PropertyMapping | templateProperty = τόπος_γέννησης | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = τόπος_θανάτου| ontologyProperty = deathPlace }}
+        {{PropertyMapping | templateProperty = λεζάντα | ontologyProperty = rdfs:label }}
+        {{PropertyMapping | templateProperty = περίοδοι εθνικής| ontologyProperty = years }}
+        {{PropertyMapping | templateProperty = εμφανίσεις εθνικής (γκολ)| ontologyProperty = numberOfMatches}} 
+        {{PropertyMapping | templateProperty = περίοδοι προπονητή| ontologyProperty = years }}
+        {{ PropertyMapping | templateProperty = άλλο όνομα| ontologyProperty = foaf:nick }}  
+	{{PropertyMapping | templateProperty = περίοδοι νέων| ontologyProperty = years }}
+        {{PropertyMapping | templateProperty = ομάδανέων1 | ontologyProperty = team }}
+
+
+
 
 
 
@@ -5663,7 +5704,7 @@
         {{PropertyMapping | templateProperty = δήμαρχος | ontologyProperty = mayor }}
     
 
-}}</text></revision></page><page><title>Mapping el:Πόλη (Ελβετία)</title><ns>304</ns><id>2853</id><revision><id>33294</id><timestamp>2014-04-01T10:53:49Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping el:Πόλη (Ελβετία)</title><ns>304</ns><id>2853</id><revision><id>34995</id><timestamp>2014-05-28T20:47:12Z</timestamp><text>{{TemplateMapping
 | mapToClass = City
 | mappings =
 	
@@ -5673,6 +5714,7 @@
   {{PropertyMapping | templateProperty = Υψόμετρο | ontologyProperty = elevation | unit = metre }}
   {{PropertyMapping | templateProperty = Χάρτης | ontologyProperty = map }}
   {{PropertyMapping | templateProperty = Ιστοσελίδα | ontologyProperty = foaf:homepage }}
+  {{PropertyMapping | templateProperty = Καντόνι | ontologyProperty = canton }}
   {{PropertyMapping | templateProperty = Έκταση | ontologyProperty = areaTotal | unit = Area }}
   {{PropertyMapping | templateProperty = Έμβλημα | ontologyProperty = foaf:logo }}
  {{PropertyMapping | templateProperty = ΤαχυδρομικόςΚώδικας  | ontologyProperty = postalCode }}
@@ -6429,6 +6471,40 @@
 	{{PropertyMapping | templateProperty = Κείμενο | ontologyProperty = notes}}
 	
 
+}}</text></revision></page><page><title>Mapping el:Τόπος Λονδίνο</title><ns>304</ns><id>9409</id><revision><id>35051</id><timestamp>2014-06-03T10:25:25Z</timestamp><text>{{TemplateMapping
+| mapToClass = City
+| mappings =
+        {{PropertyMapping | templateProperty = Πόλη | ontologyProperty = city}}
+	{{PropertyMapping | templateProperty = Πολιτεία | ontologyProperty = state }}
+ 	{{PropertyMapping | templateProperty = Δήμαρχος | ontologyProperty = mayor }}
+        {{PropertyMapping | templateProperty = Έμβλημα | ontologyProperty = foaf:logo }}
+        {{PropertyMapping | templateProperty = website  | ontologyProperty = foaf:homepage }}
+        {{PropertyMapping | templateProperty = Έκταση  | ontologyProperty = areaTotal | unit = squareKilometre }}
+        {{PropertyMapping | templateProperty = Σημαία | ontologyProperty = flag }}
+        {{PropertyMapping | templateProperty = Φωτογραφία | ontologyProperty = picture }}
+	{{PropertyMapping | templateProperty = ΠυκνότηταΠληθυσμού | ontologyProperty = populationDensity | unit =   inhabitantsPerSquareKilometre}}
+	{{PropertyMapping | templateProperty = ΠληθυσμόςΑστικής | ontologyProperty = populationUrban }}
+	{{PropertyMapping | templateProperty = ΖώνηΏρας | ontologyProperty = timeZone }}
+	{{PropertyMapping | templateProperty = ΘερινήΏρα | ontologyProperty = timeZone }}
+	{{PropertyMapping | templateProperty = ΈτοςΑπογραφής | ontologyProperty = censusYear }}
+        {{PropertyMapping | templateProperty = λεζάντα| ontologyProperty = rdfs:label }}
+        {{PropertyMapping | templateProperty = ΕπεξήγησηΧάρτη | ontologyProperty = mapDescription }}
+	{{PropertyMapping | templateProperty = Προσωνυμία | ontologyProperty = foaf:nick }}
+	{{PropertyMapping | templateProperty = Δήμος  | ontologyProperty = administrativeDistrict }}
+        {{PropertyMapping | templateProperty = ΜέγεθοςΕμβλήματος| ontologyProperty = imageSize}}
+	{{PropertyMapping | templateProperty = ΜέγεθοςΣημαίας | ontologyProperty = imageSize}}
+	{{PropertyMapping | templateProperty = ΜέγεθοςΦωτογραφίας | ontologyProperty = imageSize}}
+	{{PropertyMapping | templateProperty = μέγεθος χάρτη | ontologyProperty = imageSize}}
+        {{PropertyMapping | templateProperty = υψόμετρο  | ontologyProperty = elevation | unit = metre }}
+        {{PropertyMapping | templateProperty = αεροδρόμιο  | ontologyProperty = airport }}
+        {{PropertyMapping | templateProperty = εικόνα | ontologyProperty = picture }}
+        {{PropertyMapping | templateProperty = μέγεθος εικόνας | ontologyProperty = imageSize }}
+        {{PropertyMapping | templateProperty = χάρτης| ontologyProperty = map }}
+        {{PropertyMapping | templateProperty = πληθυσμός  | ontologyProperty = populationTotal }}
+        {{PropertyMapping | templateProperty = ταχυκωδικός  | ontologyProperty = postalCode }}
+        {{PropertyMapping | templateProperty = επίσημο όνομα | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = κοινό όνομα | ontologyProperty = foaf:nick }}
+        {{PropertyMapping | templateProperty = κωδικός πόλης | ontologyProperty = areaCode }}
 }}</text></revision></page><page><title>Mapping el:Υποδομή</title><ns>304</ns><id>3033</id><revision><id>12093</id><timestamp>2011-04-12T12:07:50Z</timestamp><text>{{TemplateMapping
 | mapToClass = ArchitecturalStructure
 | mappings = 
