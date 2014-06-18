@@ -195,7 +195,7 @@ object WikiTitle
 
         val parts = title.split(":", 2)
 
-        if (parts.length > 1) {
+        if (parts.length == 2) {
             for (ns <- Namespace.get(language, parts(0))) {
                 namespace = ns
                 decodedName = parts(1)
