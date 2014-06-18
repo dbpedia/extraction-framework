@@ -126,7 +126,7 @@ private class XMLSource(xml : Elem, language: Language) extends Source
         for(page <- xml \ "page";
             rev <- page \ "revision")
         {
-            val title = WikiTitle.parse((page \ "title").text, language)
+            val title = WikiTitle.parseCleanTitle((page \ "title").text, language)
             val nsCode = try
             {
                 (page \ "ns").text.toInt
