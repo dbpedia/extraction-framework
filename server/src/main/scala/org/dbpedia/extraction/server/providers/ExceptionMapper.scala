@@ -3,6 +3,8 @@ package org.dbpedia.extraction.server.providers
 import javax.ws.rs.ext.Provider
 import javax.ws.rs.core.Response
 
+import org.dbpedia.extraction.server.resources.ServerHeader
+
 @Provider
 class ExceptionMapper extends javax.ws.rs.ext.ExceptionMapper[Throwable]
 {
@@ -10,21 +12,23 @@ class ExceptionMapper extends javax.ws.rs.ext.ExceptionMapper[Throwable]
     {
         val html =
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-              <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-              </head>
+              {ServerHeader.getHeader("DBpedia Test Extractors")}
               <body>
-                <h2>Error</h2>
-                <table>
-                  <tr>
-                    <td valign="top"><strong>Exception: </strong></td>
-                    <td>{exception}</td>
-                  </tr>
-                  <tr>
-                    <td valign="top"><strong>Stacktrace: </strong></td>
-                    <td>{exception.getStackTraceString}</td>
-                  </tr>
-                </table>
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-5">
+                    <h2>Error</h2>
+                    <table>
+                      <tr>
+                        <td valign="top"><strong>Exception: </strong></td>
+                        <td>{exception}</td>
+                      </tr>
+                      <tr>
+                        <td valign="top"><strong>Stacktrace: </strong></td>
+                        <td>{exception.getStackTraceString}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
               </body>
             </html>
 

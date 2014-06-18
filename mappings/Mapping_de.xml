@@ -672,11 +672,72 @@ Noch nicht gemappt:
 | mappings =
 {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 {{PropertyMapping | templateProperty = Absolut-vis | ontologyProperty = absoluteMagnitude }}
-}}</text></revision></page><page><title>Mapping de:Infobox Brücke</title><ns>208</ns><id>9152</id><revision><id>31759</id><timestamp>2014-02-11T16:27:37Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping de:Infobox Brücke</title><ns>208</ns><id>9152</id><revision><id>35092</id><timestamp>2014-06-04T08:48:40Z</timestamp><text>{{TemplateMapping
 | mapToClass = Bridge
 | mappings =
+	{{PropertyMapping | templateProperty = BEZEICHNUNG | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = OFFIZIELLERNAME | ontologyProperty = foaf:name }}
-}}</text></revision></page><page><title>Mapping de:Infobox Burg</title><ns>208</ns><id>9136</id><revision><id>31903</id><timestamp>2014-02-14T16:46:56Z</timestamp><text>{{ConditionalMapping
+	{{PropertyMapping | templateProperty = BILD | ontologyProperty = picture }}
+
+	{{PropertyMapping | templateProperty = ORT | ontologyProperty = locatedInArea }}
+	{{PropertyMapping | templateProperty = UNTERHALT | ontologyProperty = maintainedBy }}
+	{{PropertyMapping | templateProperty = KONSTRUKTION | ontologyProperty = type }}
+
+	{{PropertyMapping | templateProperty = QUERUNG | ontologyProperty = crosses }}
+	{{PropertyMapping | templateProperty = ÜBERFÜHRT | ontologyProperty = crosses }}
+	{{PropertyMapping | templateProperty = UNTERFÜHRT | ontologyProperty = crosses }}
+
+	{{PropertyMapping | templateProperty = LÄNGE | ontologyProperty = length | unit = Length }}
+	{{PropertyMapping | templateProperty = BREITE | ontologyProperty = width | unit = Length }}
+	{{PropertyMapping | templateProperty = HÖHE | ontologyProperty = height | unit = Length }}
+	{{PropertyMapping | templateProperty = ÖFFNUNGEN | ontologyProperty = numberOfSpans }}
+	{{PropertyMapping | templateProperty = SPANNE | ontologyProperty = mainspan | unit = Length }}
+	{{PropertyMapping | templateProperty = TRAGFÄHIG | ontologyProperty = loadLimit }}
+
+	{{PropertyMapping | templateProperty = PLANER | ontologyProperty = builder }}
+	{{PropertyMapping | templateProperty = BAUBEGINN | ontologyProperty = buildingStartDate }}
+	{{PropertyMapping | templateProperty = FERTIGSTELLUNG | ontologyProperty = buildingEndDate }}
+	{{PropertyMapping | templateProperty = BAUKOSTEN | ontologyProperty = cost }}
+	{{PropertyMapping | templateProperty = ERÖFFNUNG | ontologyProperty = openingDate }}
+	{{PropertyMapping | templateProperty = ERÖFFNUNG | ontologyProperty = openingYear }}
+	{{PropertyMapping | templateProperty = SCHLIESSUNG | ontologyProperty = closingDate }}
+	{{PropertyMapping | templateProperty = SCHLIESSUNG | ontologyProperty = closingYear }}
+
+	{{PropertyMapping | templateProperty = MAUT | ontologyProperty = toll | unit = Currency }}
+	{{PropertyMapping | templateProperty = VERKEHR | ontologyProperty = vehiclesPerDay }}
+
+	{{ GeocoordinatesMapping | latitude = BREITENGRAD | longitude = LÄNGENGRAD }}
+	{{ PropertyMapping | templateProperty = MEERESHÖHE | ontologyProperty = elevation | unit = metre }}
+
+}}
+
+&lt;!-- unused properties
+|BILDTEXT=
+|NUTZUNG=
+|ID=
+|PFEILERACHSABSTAND=
+|LICHTEWEITE=
+|PFEILHÖHE=
+|PFEILERSTÄRKE=
+|BOGENDICKE=
+|PFEILVERHÄLTNIS=
+|DURCHFLUSSPROFIL=
+|BOGENSCHLANKHEIT=
+|KONSTRUKTIONSHÖHE=
+|DURCHFAHRT=
+|LICHTEHÖHE=
+|BAUZEIT=
+|ZUSTAND=
+|EXTRA=
+|POSKARTE=
+|REGION-ISO=
+|MEERESHÖHE-BEZUG=
+|BILD-KARTE=
+|BILD-KARTE-TITEL=
+|BILD-KARTE-BREITE=
+|BILD-KARTE-BESCHREIBUNG=
+}}
+ --&gt;</text></revision></page><page><title>Mapping de:Infobox Burg</title><ns>208</ns><id>9136</id><revision><id>31903</id><timestamp>2014-02-14T16:46:56Z</timestamp><text>{{ConditionalMapping
 | cases =
 	{{Condition
 	| templateProperty = type
@@ -1022,7 +1083,12 @@ Noch nicht gemappt:
        {{ PropertyMapping | templateProperty = wctop3_5000 | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = wctop3_10000 | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = wctop3team | ontologyProperty = }}
---&gt;</text></revision></page><page><title>Mapping de:Infobox Feldhockeyspieler</title><ns>208</ns><id>4039</id><revision><id>13844</id><timestamp>2011-06-22T13:06:11Z</timestamp><text>{{ TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Episode</title><ns>208</ns><id>9378</id><revision><id>34907</id><timestamp>2014-05-19T13:18:19Z</timestamp><text>{{TemplateMapping
+| mapToClass = TelevisionEpisode
+| mappings ={{ PropertyMapping | templateProperty = Serie | ontologyProperty = series }}
+{{ PropertyMapping | templateProperty = OT | ontologyProperty = foaf:name }}
+{{ PropertyMapping | templateProperty = DT | ontologyProperty = foaf:name }}
+}}</text></revision></page><page><title>Mapping de:Infobox Feldhockeyspieler</title><ns>208</ns><id>4039</id><revision><id>13844</id><timestamp>2011-06-22T13:06:11Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Athlete
    | mappings =
        {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
@@ -1110,6 +1176,14 @@ Noch nicht gemappt:
 	{{PropertyMapping | templateProperty = Staffeln | ontologyProperty = numberOfSeasons }}
 	{{PropertyMapping | templateProperty = OS | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = Originalsprache | ontologyProperty = language }}
+
+}}</text></revision></page><page><title>Mapping de:Infobox Festival</title><ns>208</ns><id>9404</id><revision><id>35090</id><timestamp>2014-06-04T08:22:05Z</timestamp><text>{{TemplateMapping
+| mapToClass = MusicFestival
+| mappings =
+    {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = Bild | ontologyProperty = picture }} 
+    {{PropertyMapping | templateProperty = Website | ontologyProperty = foaf:homepage }}
+    {{PropertyMapping | templateProperty = Ort | ontologyProperty = locatedInArea }}
 
 }}</text></revision></page><page><title>Mapping de:Infobox Film</title><ns>208</ns><id>2502</id><revision><id>17381</id><timestamp>2012-04-25T12:16:40Z</timestamp><text>{{TemplateMapping
 | mapToClass = Film
@@ -2291,6 +2365,15 @@ Noch nicht gemappt:
 	{{PropertyMapping | templateProperty = Gewicht | ontologyProperty = weight }}
         {{PropertyMapping | templateProperty = Bild | ontologyProperty = foaf:depiction }}
 
+}}</text></revision></page><page><title>Mapping de:Infobox Hieb- und Stichwaffen</title><ns>208</ns><id>9470</id><revision><id>35208</id><timestamp>2014-06-10T12:55:11Z</timestamp><text>{{TemplateMapping
+| mapToClass = Weapon
+| mappings =
+	{{PropertyMapping | templateProperty = Herstellerland | ontologyProperty = origin }}
+	{{PropertyMapping | templateProperty = Gewicht | ontologyProperty = weight | unit = Mass }}
+	{{PropertyMapping | templateProperty = Klingenlänge | ontologyProperty = length | unit = Length }}
+	{{PropertyMapping | templateProperty = Klingenbreite | ontologyProperty = width | unit = Length }}
+	{{PropertyMapping | templateProperty = Klingenstärke | ontologyProperty = height | unit = Length }}
+	{{PropertyMapping | templateProperty = Bild | ontologyProperty = foaf:depiction }}
 }}</text></revision></page><page><title>Mapping de:Infobox Historischer Fußballverein</title><ns>208</ns><id>3606</id><revision><id>13141</id><timestamp>2011-05-23T11:20:48Z</timestamp><text>{{ TemplateMapping
    | mapToClass = SoccerClub
    | mappings =
@@ -2425,6 +2508,13 @@ Noch nicht gemappt:
 	{{GeocoordinatesMapping | latitude = LÄNGENGRAD
                                 | longitude = BREITENGRAD
         }}
+}}</text></revision></page><page><title>Mapping de:Infobox Hörfunksender</title><ns>208</ns><id>9405</id><revision><id>35040</id><timestamp>2014-06-02T14:06:53Z</timestamp><text>{{ TemplateMapping
+| mapToClass = RadioStation
+| mappings = 
+  {{ PropertyMapping | templateProperty = LR | ontologyProperty = broadcastArea }}
+  {{ PropertyMapping | templateProperty = EAS | ontologyProperty = firstAirDate }}
+  {{ PropertyMapping | templateProperty = EG | ontologyProperty = owner }}
+  {{ PropertyMapping | templateProperty = HP | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping de:Infobox Inline-Speedskater</title><ns>208</ns><id>4041</id><revision><id>13846</id><timestamp>2011-06-22T13:42:30Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Athlete
    | mappings =
@@ -3127,7 +3217,15 @@ Noch nicht gemappt:
 	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
         {{PropertyMapping | templateProperty = Bild | ontologyProperty = foaf:depiction }}
         {{PropertyMapping | templateProperty = Nerv | ontologyProperty = nerve }}
-}}</text></revision></page><page><title>Mapping de:Infobox NFL-Spieler</title><ns>208</ns><id>3469</id><revision><id>12552</id><timestamp>2011-05-02T12:53:52Z</timestamp><text>{{ TemplateMapping
+}}</text></revision></page><page><title>Mapping de:Infobox Mühle</title><ns>208</ns><id>9408</id><revision><id>35043</id><timestamp>2014-06-02T14:49:45Z</timestamp><text>{{ TemplateMapping
+   | mapToClass = Windmill
+   | mappings =
+       {{ PropertyMapping | templateProperty = NAME | ontologyProperty = foaf:name }}
+       {{ PropertyMapping | templateProperty = BILD | ontologyProperty = foaf:depiction }}
+       {{ PropertyMapping | templateProperty = STANDORT | ontologyProperty = location }}
+       {{ GeocoordinatesMapping | latitude = BREITENGRAD | longitude = LÄNGENGRAD }}
+       {{ PropertyMapping | templateProperty = BAUJAHR | ontologyProperty = buildingEndYear }}
+ }}</text></revision></page><page><title>Mapping de:Infobox NFL-Spieler</title><ns>208</ns><id>3469</id><revision><id>12552</id><timestamp>2011-05-02T12:53:52Z</timestamp><text>{{ TemplateMapping
    | mapToClass = AmericanFootballPlayer
    | mappings =
        {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -6428,6 +6526,16 @@ Im Englischen nicht bekannt/verwendet:
 	  }}
 	| defaultMappings = {{PropertyMapping | templateProperty = Umlaufdauer | ontologyProperty = orbitalPeriod | unit = day }}
 	}} --&gt;
+}}</text></revision></page><page><title>Mapping de:Infobox Platz</title><ns>208</ns><id>9407</id><revision><id>35042</id><timestamp>2014-06-02T14:42:19Z</timestamp><text>{{ TemplateMapping
+   | mapToClass = Square
+   | mappings =
+       {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
+       {{ PropertyMapping | templateProperty = Angelegt | ontologyProperty = buildingStartDate }}
+       {{ PropertyMapping | templateProperty = Nutzergruppen | ontologyProperty = currentlyUsedFor }}
+       {{ PropertyMapping | templateProperty = Baukosten | ontologyProperty = cost }}
+       {{ PropertyMapping | templateProperty = Platzfläche | ontologyProperty = area }}
+       {{ PropertyMapping | templateProperty = Bild | ontologyProperty = foaf:depiction }}
+       {{ PropertyMapping | templateProperty = Ort | ontologyProperty = location }}
 }}</text></revision></page><page><title>Mapping de:Infobox Pokerprofi</title><ns>208</ns><id>3473</id><revision><id>12563</id><timestamp>2011-05-02T13:42:13Z</timestamp><text>{{ TemplateMapping
    | mapToClass = PokerPlayer
    | mappings =
@@ -7687,7 +7795,7 @@ Im Englischen nicht bekannt/verwendet:
     {{ PropertyMapping | templateProperty = karriereende | ontologyProperty = activeYearsEndDate }}
     {{ PropertyMapping | templateProperty = karriereende | ontologyProperty = activeYearsEndYear }} }}
 &lt;!-- Properties which are not mapped (yet)
-      Useless properties: {{ PropertyMapping | templateProperty = bild | ontologyProperty = }} {{ PropertyMapping | templateProperty = update | ontologyProperty = }} Maybe useful properties but without a counterpart so far: {{ PropertyMapping | templateProperty = disziplin | ontologyProperty = }} {{ PropertyMapping | templateProperty = nationalkader | ontologyProperty = }} {{ PropertyMapping | templateProperty = status | ontologyProperty = }} {{ PropertyMapping | templateProperty = Medaillenspiegel | ontologyProperty = }} {{ PropertyMapping | templateProperty = medaillen | ontologyProperty = }} {{ PropertyMapping | templateProperty = weltcupdebuet | ontologyProperty = }} {{ PropertyMapping | templateProperty = weltcupsiege | ontologyProperty = }} {{ PropertyMapping | templateProperty = wcgesamt | ontologyProperty = }} {{ PropertyMapping | templateProperty = wcriesenslalom | ontologyProperty = }} {{ PropertyMapping | templateProperty = wcclassic | ontologyProperty = }} {{ PropertyMapping | templateProperty = wcclassicsprint | ontologyProperty = }} {{ PropertyMapping | templateProperty = wctop3riesenslalom | ontologyProperty = }} {{ PropertyMapping | templateProperty = wctop3classic | ontologyProperty = }} {{ PropertyMapping | templateProperty = wctop3classicsprint | ontologyProperty = }} --&gt;</text></revision></page><page><title>Mapping de:Infobox Tennisspieler</title><ns>208</ns><id>3509</id><revision><id>12616</id><timestamp>2011-05-03T10:59:52Z</timestamp><text>{{ TemplateMapping
+      Useless properties: {{ PropertyMapping | templateProperty = bild | ontologyProperty = }} {{ PropertyMapping | templateProperty = update | ontologyProperty = }} Maybe useful properties but without a counterpart so far: {{ PropertyMapping | templateProperty = disziplin | ontologyProperty = }} {{ PropertyMapping | templateProperty = nationalkader | ontologyProperty = }} {{ PropertyMapping | templateProperty = status | ontologyProperty = }} {{ PropertyMapping | templateProperty = Medaillenspiegel | ontologyProperty = }} {{ PropertyMapping | templateProperty = medaillen | ontologyProperty = }} {{ PropertyMapping | templateProperty = weltcupdebuet | ontologyProperty = }} {{ PropertyMapping | templateProperty = weltcupsiege | ontologyProperty = }} {{ PropertyMapping | templateProperty = wcgesamt | ontologyProperty = }} {{ PropertyMapping | templateProperty = wcriesenslalom | ontologyProperty = }} {{ PropertyMapping | templateProperty = wcclassic | ontologyProperty = }} {{ PropertyMapping | templateProperty = wcclassicsprint | ontologyProperty = }} {{ PropertyMapping | templateProperty = wctop3riesenslalom | ontologyProperty = }} {{ PropertyMapping | templateProperty = wctop3classic | ontologyProperty = }} {{ PropertyMapping | templateProperty = wctop3classicsprint | ontologyProperty = }} --&gt;</text></revision></page><page><title>Mapping de:Infobox Tennisspieler</title><ns>208</ns><id>3509</id><revision><id>35091</id><timestamp>2014-06-04T08:25:30Z</timestamp><text>{{ TemplateMapping
    | mapToClass = TennisPlayer
    | mappings =
        {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
@@ -7696,6 +7804,7 @@ Im Englischen nicht bekannt/verwendet:
        {{ PropertyMapping | templateProperty = Geburtstag | ontologyProperty = birthDate }}
        {{ PropertyMapping | templateProperty = Todestag | ontologyProperty = deathDate }}
        {{ PropertyMapping | templateProperty = Größe | ontologyProperty = height | unit = centimetre }}
+       {{ PropertyMapping | templateProperty = Grösse | ontologyProperty = height | unit = centimetre }}
        {{ PropertyMapping | templateProperty = Gewicht | ontologyProperty = weight | unit = kilogram }}
        {{ PropertyMapping | templateProperty = ErsteProfisaison | ontologyProperty = activeYearsStartYear }}
        {{ PropertyMapping | templateProperty = Rücktritt | ontologyProperty = activeYearsEndYear }}
@@ -8478,7 +8587,7 @@ Im Englischen nicht bekannt/verwendet:
 | mappings =
   {{ PropertyMapping | templateProperty = Url| ontologyProperty = foaf:homepage }}
   {{ PropertyMapping | templateProperty = Titel | ontologyProperty = foaf:name }}
-}}</text></revision></page><page><title>Mapping de:Taxobox</title><ns>208</ns><id>9135</id><revision><id>31686</id><timestamp>2014-02-10T17:36:12Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping de:Taxobox</title><ns>208</ns><id>9135</id><revision><id>35066</id><timestamp>2014-06-03T11:40:43Z</timestamp><text>{{ConditionalMapping
 | cases =
 {{Condition
     | templateProperty = divisio
@@ -8977,6 +9086,8 @@ Im Englischen nicht bekannt/verwendet:
     {{PropertyMapping | templateProperty = Taxon_Name  | ontologyProperty = foaf:name }}
     {{PropertyMapping | templateProperty = Bild | ontologyProperty = foaf:depiction }}
     {{PropertyMapping | templateProperty = Bildbeschreibung | ontologyProperty = depictionDescription }}
+    {{PropertyMapping | templateProperty = Taxon_WissName | ontologyProperty = scientificName }}
+
    
 }}</text></revision></page><page><title>Mapping de:Wahldiagramm</title><ns>208</ns><id>9187</id><revision><id>31908</id><timestamp>2014-02-14T17:44:23Z</timestamp><text>{{TemplateMapping
 | mapToClass = ElectionDiagram
