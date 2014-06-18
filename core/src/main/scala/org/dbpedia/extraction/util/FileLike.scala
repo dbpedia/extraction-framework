@@ -5,7 +5,7 @@ import java.io.{InputStream,OutputStream}
 /**
  * Allows common handling of java.io.File and java.nio.file.Path
  */
-abstract class FileLike[T <% FileLike[T]] {
+abstract class FileLike[T] {
   
   /**
    * @return full path
