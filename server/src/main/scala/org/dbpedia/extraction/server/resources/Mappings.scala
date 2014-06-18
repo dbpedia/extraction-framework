@@ -243,7 +243,10 @@ class Mappings(@PathParam("lang") langCode : String)
         val wikiApiUrl = new URL(language.apiUri)
         val api = new WikiApi(wikiApiUrl, language)
         // TODO: one call to api.php is probably enough - get content of pages, not just titles
-        val pageTitles = api.retrieveTemplateUsages(templateTitle, namespace, 10)
+        val pageTitles = api.retrieveTemplateUsages(
+            title = templateTitle, 
+            namespace = namespace, 
+            maxCount = 10)
 
         logger.info("extracting "+pageTitles.size+" pages for '" + templateTitle.encodedWithNamespace + "' language " + language + " namespace " + namespace)
         
