@@ -233,7 +233,8 @@ class Mappings(@PathParam("lang") langCode : String)
         val mappingTitle = WikiTitle.parse(title, language) // TODO: use Language.Mappings?
         val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
 
-        // Determine the namespace
+        // Determine the namespace; if no such namespace exists for this
+        // language, then default to Namespace.Main.
         val namespace = Namespace.get(language, arg_namespace) match {
             case Some(ns) => ns
             case None => Namespace.Main
