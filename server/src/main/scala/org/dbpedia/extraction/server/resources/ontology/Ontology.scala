@@ -4,6 +4,7 @@ import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import xml.Elem
 import org.dbpedia.extraction.ontology.io.OntologyOWLWriter
+import org.dbpedia.extraction.server.resources.ServerHeader
 
 @Path("/ontology/")
 class Ontology
@@ -16,17 +17,19 @@ class Ontology
     def get : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {ServerHeader.getHeader("Ontology ")}
           <body>
-            <h2>Ontology</h2>
-            <a href="pages/">Source Pages</a><br/>
-            <a href="validate/">Validate</a><br/>
-            <a href="classes/">Classes</a><br/>
-            <a href="labels/missing/">Missing Labels</a><br/>
-            <a href="wikidata/missing/">Missing Wikidata Properties</a><br/>
-            <a href="dbpedia.owl">Ontology (OWL)</a><br/>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-5">
+                <h2>Ontology</h2>
+                <a href="pages/">Source Pages</a><br/>
+                <a href="validate/">Validate</a><br/>
+                <a href="classes/">Classes</a><br/>
+                <a href="labels/missing/">Missing Labels</a><br/>
+                <a href="wikidata/missing/">Missing Wikidata Properties</a><br/>
+                <a href="dbpedia.owl">Ontology (OWL)</a><br/>
+              </div>
+            </div>
           </body>
         </html>
     }

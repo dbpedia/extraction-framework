@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.server.util
 
 import org.dbpedia.extraction.server.Server
+import org.dbpedia.extraction.server.resources.ServerHeader
 import scala.xml.Elem
 import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.util.Language
@@ -27,18 +28,19 @@ object PageUtils
    */
   def linkList(title: String, header: String, links: Seq[(String, String)]): Elem = {
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-    <head>
-      <title>{title}</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
+     {ServerHeader.getHeader(title)}
     <body>
-      <h2>{header}</h2>
-      {
-        for((url, text) <- links) yield
-        {
-          <p><a href={url}>{text}</a></p>
-        }
-      }
+      <div class="row">
+        <div class="col-md-3 col-md-offset-5">
+          <h2>{header}</h2>
+          {
+            for((url, text) <- links) yield
+            {
+              <p><a href={url}>{text}</a></p>
+            }
+          }
+        </div>
+      </div>
     </body>
     </html>
   }
