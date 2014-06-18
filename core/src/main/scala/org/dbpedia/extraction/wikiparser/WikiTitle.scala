@@ -17,19 +17,26 @@ import scala.collection.mutable.ListBuffer
  * @param decoded Canonical page name: URL-decoded, using normalized spaces (not underscores), first letter uppercase.
  * @param namespace Namespace used to be optional, but that leads to mistakes
  * @param language Language used to be optional, but that leads to mistakes
+ * @param capitalizeLink if set to false the given title will not be capitalized but left as it is
  */
 class WikiTitle (
   val decoded: String,
   val namespace: Namespace,
   val language: Language,
   val isInterLanguageLink: Boolean = false,
-  val fragment: String = null
+  val fragment: String = null,
+  val capitalizeLink : Boolean = true
 )
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
     /** Wiki-encoded page name (without namespace) e.g. Automobile_generation */
-    val encoded = WikiUtil.wikiEncode(decoded).capitalize(language.locale)
+    val encoded = if (capitalizeLink) {
+        WikiUtil.wikiEncode(decoded).capitalize(language.locale)
+    }
+    else {
+        WikiUtil.wikiEncode(decoded)
+    }
 
     /** Canonical page name with namespace e.g. "Template talk:Automobile generation" */
     val decodedWithNamespace = withNamespace(false)
@@ -99,7 +106,7 @@ object WikiTitle
      * FIXME: rules for links are different from those for titles. We should have distinct methods
      * for these two use cases.
      *
-     * @param link MediaWiki link e.g. "Template:Infobox Automobile"
+     * @param title MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
      */
     def parse(title : String, sourceLanguage : Language): WikiTitle =
@@ -174,4 +181,28 @@ object WikiTitle
         new WikiTitle(decodedName, namespace, language, isInterLanguageLink, fragment)
     }
 
+    /**
+     * Parses a clean MediaWiki link or title like it can be found, e.g., in Wikipedia dumps.
+     *
+     * NOTE: Do not use this method on links but only on very clean titles.
+     *
+     * @param title MediaWiki link e.g. "Template:Infobox Automobile"
+     * @param language The source language of this link
+     */
+    def parseCleanTitle(title: String, language: Language): WikiTitle = {
+        var namespace = Namespace.Main
+        var decodedName = title
+
+        val parts = title.split(":", 2)
+
+        if (parts.length == 2) {
+            for (ns <- Namespace.get(language, parts(0))) {
+                namespace = ns
+                decodedName = parts(1)
+            }
+        }
+
+        // we explicitly disable capitalization of the title here
+        new WikiTitle(decodedName, namespace, language, false, null, false)
+    }
 }

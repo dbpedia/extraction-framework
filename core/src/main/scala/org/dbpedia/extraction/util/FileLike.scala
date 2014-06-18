@@ -5,7 +5,7 @@ import java.io.{InputStream,OutputStream}
 /**
  * Allows common handling of java.io.File and java.nio.file.Path
  */
-abstract class FileLike[T <% FileLike[T]] {
+abstract class FileLike[T] {
   
   /**
    * @return full path
@@ -25,9 +25,7 @@ abstract class FileLike[T <% FileLike[T]] {
   
   def exists: Boolean
   
-  /**
-   * @throws IOException if file does not exist or cannot be deleted
-   */
+  @throws[java.io.IOException]("if file does not exist or cannot be deleted")
   def delete(recursive: Boolean = false): Unit
 
   def size(): Long
