@@ -156,11 +156,12 @@ class WikiApi(url: URL, language: Language)
      * Retrieves a list of pages which use a given template.
      *
      * @param title The title of the template
+     * @param namespace The namespace to search within
      * @param maxCount The maximum number of pages to retrieve
      */
-    def retrieveTemplateUsages(title : WikiTitle, maxCount : Int = 500) : Seq[WikiTitle] =
+    def retrieveTemplateUsages(title : WikiTitle, namespace: Namespace = Namespace.Main, maxCount : Int = 500) : Seq[WikiTitle] =
     {
-        val response = query("?action=query&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace + "&einamespace=0&eifilterredir=nonredirects&eilimit=" + maxCount)
+        val response = query("?action=query&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace + "&einamespace=" + namespace.code + "&eifilterredir=nonredirects&eilimit=" + maxCount)
 
         for(page <- response \ "query" \ "embeddedin" \ "ei";
             title <- page \ "@title" )
