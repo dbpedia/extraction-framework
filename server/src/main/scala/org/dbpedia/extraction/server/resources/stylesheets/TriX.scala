@@ -32,6 +32,13 @@ class TriX
               </head>
               <body>
                 <h2>DBpedia Extraction Results</h2>
+                <form>
+                    <p>Namespaces: 
+                        <a href="?namespace=Main">Main</a>,
+                        <a href="?namespace=File">File</a>,
+                        <input name="namespace" value="Custom" />
+                    </p>
+                </form>
                   <table border="1" cellpadding="3" cellspacing="0">
                     <tr bgcolor="#CCCCFF">
                       <th>Subject</th>
