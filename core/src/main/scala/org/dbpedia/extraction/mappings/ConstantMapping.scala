@@ -31,7 +31,8 @@ extends PropertyMapping
   if (ontologyProperty.isInstanceOf[OntologyObjectProperty])
   {
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
-    value = context.language.resourceUri.append(value)
+    if (!(value.contains("://")))  // when not an URI already, create a DBpedia resource URI
+      value = context.language.resourceUri.append(value)
   }
 
   override val datasets = Set(DBpediaDatasets.OntologyProperties)
