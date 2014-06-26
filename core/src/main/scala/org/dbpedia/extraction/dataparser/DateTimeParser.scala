@@ -85,7 +85,7 @@ class DateTimeParser ( context : {
                 return Some(date)
             }
 
-            for(date <- findDate(nodeToString(node)))
+            for(date <- findDate(nodeToString(node).trim))
             {
                 return Some(date)
             }
