@@ -15,8 +15,12 @@ class Config(config: Properties)
   // TODO: get rid of all config file parsers, use Spring
 
   /** Dump directory */
-  val dumpDir = getValue(config, "base-dir", true)(new File(_))
-  if (! dumpDir.exists) throw error("dir "+dumpDir+" does not exist")
+  val dumpDir = getValue(config, "base-dir", true){
+    x =>
+      val dir = new File(x)
+      if (! dir.exists) throw error("dir "+dir+" does not exist")
+      dir
+  }
 
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
