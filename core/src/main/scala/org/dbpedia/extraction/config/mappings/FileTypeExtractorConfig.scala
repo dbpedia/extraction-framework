@@ -22,7 +22,7 @@ object FileTypeExtractorConfig
     // TODO: replace outer key with a proper type class that can
     // serialize itself into quads.
     private val mimeTypeFromFileExtension = Map(
-        "http://purl.org/dc/dcmitype/StillImage" -> Map(
+        "StillImage" -> Map(
             "jpg" -> "image/jpeg",
             "jpeg" -> "image/jpeg",
             "png" -> "image/png",
@@ -35,18 +35,18 @@ object FileTypeExtractorConfig
             "xcf" -> "image/xcf",
             "kml" -> "application/vnd.google-earth.kml+xml"
         ),
-        "http://purl.org/dc/dcmitype/MovingImage" -> Map(
+        "MovingImage" -> Map(
             "ogv" -> "video/ogg",
             "webm" -> "video/webm"
         ),
-        "http://purl.org/dc/dcmitype/Sound" -> Map(
+        "Sound" -> Map(
             "oga" -> "audio/ogg",
             // "webm" -> already defined above
             "mid" -> "application/x-midi",
             "flac" -> "audio/x-flac",
             "wav" -> "audio/vnd.wave"
         ),
-        "http://purl.org/dc/dcmitype/Software" -> Map(
+        "Software" -> Map(
             "js" -> "application/javascript"
         )
     )
