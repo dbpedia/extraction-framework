@@ -42,6 +42,15 @@ class FileTypeExtractor(context: {
                 logger.warning("Page '" + page.title.decodedWithNamespace + "' has an unusually long extension '" + extension + "'")
  
             val (fileType, mimeType) = FileTypeExtractorConfig.typeAndMimeType(extension)
+            val fileTypes = context.ontology.classes(fileType).relatedClasses
+            val fileTypesQuads = fileTypes.map(relatedFileType => 
+                new Quad(Language.English, 
+                    DBpediaDatasets.FileInformation,
+                    subjectUri,
+                    dcTypeProperty,
+                    relatedFileType.uri,
+                    null
+                ))
 
             Seq(new Quad(Language.English, DBpediaDatasets.FileInformation,
                 subjectUri,
@@ -51,17 +60,11 @@ class FileTypeExtractor(context: {
                 context.ontology.datatypes("xsd:string")
             ), new Quad(Language.English, DBpediaDatasets.FileInformation,
                 subjectUri,
-                dcTypeProperty,
-                fileType,
-                page.sourceUri,
-                null // fileType should be a URL
-            ), new Quad(Language.English, DBpediaDatasets.FileInformation,
-                subjectUri,
                 dcFormatProperty,
                 mimeType,
                 page.sourceUri,
                 context.ontology.datatypes("xsd:string")
-            ))
+            )) ++ fileTypesQuads
         }
 
         return Seq(file_type_quads).flatten
