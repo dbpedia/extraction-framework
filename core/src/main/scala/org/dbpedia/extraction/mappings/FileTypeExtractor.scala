@@ -20,8 +20,11 @@ class FileTypeExtractor(context: {
 {
     private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
     private val fileExtensionProperty = context.ontology.properties("fileExtension")
+    private val rdfTypeProperty = context.ontology.properties("rdf:type")
     private val dcTypeProperty = context.ontology.properties("dct:type")
     private val dcFormatProperty = context.ontology.properties("dct:format")
+
+    private val dboFileClass = context.ontology.classes("File")
     
     override val datasets = Set(DBpediaDatasets.FileInformation)
     
@@ -42,13 +45,20 @@ class FileTypeExtractor(context: {
                 logger.warning("Page '" + page.title.decodedWithNamespace + "' has an unusually long extension '" + extension + "'")
  
             val (fileType, mimeType) = FileTypeExtractorConfig.typeAndMimeType(extension)
-            val fileTypes = context.ontology.classes(fileType).relatedClasses
-            val fileTypesQuads = fileTypes.map(relatedFileType => 
+
+            // We use dct:type for the most specific type (i.e. fileType)
+            // and rdf:type for (1) fileType and all related classes and
+            // (2) dbo:File and all related classes.
+            val rdfTypeClasses = (dboFileClass.relatedClasses ++
+                context.ontology.classes(fileType).relatedClasses).toSet
+
+            // Convert this to a set to prevent duplicates.
+            val rdfTypeQuads = rdfTypeClasses.map(rdfClass => 
                 new Quad(Language.English, 
                     DBpediaDatasets.FileInformation,
                     subjectUri,
-                    dcTypeProperty,
-                    relatedFileType.uri,
+                    rdfTypeProperty,
+                    rdfClass.uri,
                     null
                 ))
 
@@ -60,11 +70,17 @@ class FileTypeExtractor(context: {
                 context.ontology.datatypes("xsd:string")
             ), new Quad(Language.English, DBpediaDatasets.FileInformation,
                 subjectUri,
+                dcTypeProperty,
+                context.ontology.classes(fileType).uri,
+                page.sourceUri,
+                null
+            ), new Quad(Language.English, DBpediaDatasets.FileInformation,
+                subjectUri,
                 dcFormatProperty,
                 mimeType,
                 page.sourceUri,
                 context.ontology.datatypes("xsd:string")
-            )) ++ fileTypesQuads
+            )) ++ rdfTypeQuads
         }
 
         return Seq(file_type_quads).flatten
