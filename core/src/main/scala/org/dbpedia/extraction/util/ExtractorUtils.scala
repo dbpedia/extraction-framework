@@ -10,6 +10,10 @@ import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.ConfigUtils.{getStrings}
 import org.dbpedia.extraction.util.RichString.wrapString
 
+import java.net.URLDecoder
+import java.math.BigInteger
+import java.security.MessageDigest
+
 /**
  * User: Dimitris Kontokostas
  * Various utils for loading Extractors
@@ -88,4 +92,34 @@ object ExtractorUtils {
    */
   def titleContainsCommonsMetadata(title: WikiTitle):Boolean =
     (title.language == Language.Commons && commonsNamespacesContainingMetadata.contains(title.namespace))
+
+  /**
+   * Determine the image URL given a filename or page title. 
+   * Returns both the image URL and the thumbnail URL.
+   */
+  def getImageURL(urlPrefix: String, filename: String):(String, String) = {
+      // TODO: URLDecoder.decode() translates '+' to space. Is that correct here?
+      val decoded = URLDecoder.decode(filename, "UTF-8")
+      
+      val md = MessageDigest.getInstance("MD5")
+      val messageDigest = md.digest(decoded.getBytes("UTF-8"))
+      var md5 = (new BigInteger(1, messageDigest)).toString(16)
+
+      // If the lenght of the MD5 hash is less than 32, then we should pad leading zeros to it, as converting it to
+      // BigInteger will result in removing all leading zeros.
+      // FIXME: this is the least efficient way of building a string.
+      while (md5.length < 32)
+        md5 = "0" + md5;
+
+      val hash1 = md5.substring(0, 1)
+      val hash2 = md5.substring(0, 2);
+
+      val urlPart = hash1 + "/" + hash2 + "/" + filename
+      val ext = if (filename.toLowerCase.endsWith(".svg")) ".png" else ""
+
+      val imageUrl = urlPrefix + urlPart
+      val thumbnailUrl = urlPrefix + "thumb/" + urlPart + "/200px-" + filename + ext
+
+      (imageUrl, thumbnailUrl)
+  }
 }
