@@ -11,48 +11,63 @@ import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import scala.language.reflectiveCalls
 
 /**
- * Identifies the type used by a File.
+ * Identifies the type of a File page.
  */
 class FileTypeExtractor(context: { 
     def ontology: Ontology
     def language : Language
 }) extends WikiPageExtractor
 {
+    // For writing warnings about unexpected files.
     private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
+
+    // Properties we use.
     private val fileExtensionProperty = context.ontology.properties("fileExtension")
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
     private val dcTypeProperty = context.ontology.properties("dct:type")
     private val dcFormatProperty = context.ontology.properties("dct:format")
 
+    // Classes we use.
     private val dboFileClass = context.ontology.classes("File")
     
+    // All data will be written out to DBpediaDatasets.FileInformation.
     override val datasets = Set(DBpediaDatasets.FileInformation)
     
+    /**
+     * Extract a single WikiPage. We guess the file type from the file extension
+     * used by the page.
+     */
     override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
     {
-        // This interface only applies to File:s.
+        // This extraction only works on File:s.
         if(page.title.namespace != Namespace.File || page.redirect != null) 
             return Seq.empty
 
-        // Add a quad for the file type as guessed from the extension.
+        // Extract an extension.
         val extensionRegex = new scala.util.matching.Regex("""\.(\w+)$""", "extension")
-        val extensionMatch = extensionRegex.findAllIn(page.title.decoded)
+        val extensionMatch = extensionRegex.findFirstIn(page.title.decoded)
 
-        val file_type_quads = if(extensionMatch.isEmpty) Seq.empty else {
+        // If there is a match, create the appropriate file_type_quads.
+        val file_type_quads = Seq.empty
+        if(!extensionMatch.isEmpty) {
             val extension = extensionMatch.group("extension").toLowerCase
 
+            // Warn the user on long extensions.
             if(extension.length > 4)
                 logger.warning("Page '" + page.title.decodedWithNamespace + "' has an unusually long extension '" + extension + "'")
  
+            // This will return a type class (as an OntologyClass) and a mimeType.
             val (fileTypeClass, mimeType) = FileTypeExtractorConfig.typeAndMimeType(context.ontology, extension)
 
-            // We use dct:type for the most specific type (i.e. fileTypeClass)
-            // and rdf:type for (1) fileTypeClass and all related classes and
-            // (2) dbo:File and all related classes.
+            // Generate the quads. 
+            //
+            // This file has <rdf:type> <dbo:File> (and all related classes) and
+            // <rdf:type> fileTypeClass and all related class. First, let's build
+            // a Set of all these classes.
             val rdfTypeClasses = 
                 (dboFileClass.relatedClasses ++ fileTypeClass.relatedClasses).toSet
 
-            // Convert this to a set to prevent duplicates.
+            // Then, map each OntologyClass to a Quad with an <rdf:type>.
             val rdfTypeQuads = rdfTypeClasses.map(rdfClass => 
                 new Quad(Language.English, 
                     DBpediaDatasets.FileInformation,
@@ -62,27 +77,36 @@ class FileTypeExtractor(context: {
                     null
                 ))
 
-            Seq(new Quad(Language.English, DBpediaDatasets.FileInformation,
-                subjectUri,
-                fileExtensionProperty,
-                extension,
-                page.sourceUri,
-                context.ontology.datatypes("xsd:string")
-            ), new Quad(Language.English, DBpediaDatasets.FileInformation,
-                subjectUri,
-                dcTypeProperty,
-                fileTypeClass.uri,
-                page.sourceUri,
-                null
-            ), new Quad(Language.English, DBpediaDatasets.FileInformation,
-                subjectUri,
-                dcFormatProperty,
-                mimeType,
-                page.sourceUri,
-                context.ontology.datatypes("xsd:string")
-            )) ++ rdfTypeQuads
+            // To this list, we need to add three other file type quads here:
+            file_type_quads = rdfTypeQuads ++ Seq(
+                // 1. file <dbo:fileExtension> "ext"^^xsd:string
+                new Quad(Language.English, DBpediaDatasets.FileInformation,
+                    subjectUri,
+                    fileExtensionProperty,
+                    extension,
+                    page.sourceUri,
+                    context.ontology.datatypes("xsd:string")
+                ), 
+                // 2. file <dc:type> fileTypeClass
+                new Quad(Language.English, DBpediaDatasets.FileInformation,
+                    subjectUri,
+                    dcTypeProperty,
+                    fileTypeClass.uri,
+                    page.sourceUri,
+                    null
+                ), 
+                // 3. file <dc:format> "mimeType"^^xsd:string
+                new Quad(Language.English, DBpediaDatasets.FileInformation,
+                    subjectUri,
+                    dcFormatProperty,
+                    mimeType,
+                    page.sourceUri,
+                    context.ontology.datatypes("xsd:string")
+                )
+            )
         }
 
-        return Seq(file_type_quads).flatten
+        // Combine and return all the generated quads.
+        return Seq(file_type_quads)
     }
 }
