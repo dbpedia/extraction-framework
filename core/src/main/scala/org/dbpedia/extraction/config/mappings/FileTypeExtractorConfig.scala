@@ -1,26 +1,41 @@
 package org.dbpedia.extraction.config.mappings
 
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass}
 
+/**
+ * Configuration for the FileTypeExtractor.
+ */
 object FileTypeExtractorConfig
 {
-    def typeAndMimeType(extension: String):(String, String) = {
+    /**
+     * Returns the assumed OntologyClass and stringified MIME-type for a
+     * given file extension.
+     */
+    def typeAndMimeType(ontology: Ontology, extension: String):(OntologyClass, String) = {
+        // Find the entry in mimeTypeFromFileExtension that contains the
+        // extension as a key in the second-level Map.
         mimeTypeFromFileExtension.find(
             pair => pair._2.contains(extension.toLowerCase)
         ) match {
-            case Some(result) => (result._1, 
+            // If a match is found, return the results as an OntologyClass
+            // with the MIME-type as a String.
+            case Some(result) => (
+                ontology.classes(result._1), 
                 result._2.getOrElse(
                     extension.toLowerCase,
                     throw new RuntimeException("This should not be reachable")
                 )
             )
 
-            // If the extension could be found, treat it as an unknown file.
-            case None => ("owl:Thing", "application/octet-stream")
+            // If the extension could not be found, treat it as an unknown file.
+            case None => (ontology.classes("owl:Thing"), "application/octet-stream")
         }
     }
 
-    // TODO: replace outer key with a proper type class that can
-    // serialize itself into quads.
+    /**
+     * For each File class in the ontology, stores a list of possible
+     * extensions and MIME-types used by it.
+     */
     private val mimeTypeFromFileExtension = Map(
         "StillImage" -> Map(
             "jpg" -> "image/jpeg",
