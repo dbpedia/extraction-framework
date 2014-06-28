@@ -45,11 +45,10 @@ class FileTypeExtractor(context: {
 
         // Extract an extension.
         val extensionRegex = new scala.util.matching.Regex("""\.(\w+)$""", "extension")
-        val extensionMatch = extensionRegex.findFirstIn(page.title.decoded)
+        val extensionMatch = extensionRegex.findAllIn(page.title.decoded)
 
         // If there is a match, create the appropriate file_type_quads.
-        val file_type_quads = Seq.empty
-        if(!extensionMatch.isEmpty) {
+        val file_type_quads = if(extensionMatch.isEmpty) Seq.empty else { 
             val extension = extensionMatch.group("extension").toLowerCase
 
             // Warn the user on long extensions.
@@ -75,10 +74,10 @@ class FileTypeExtractor(context: {
                     rdfTypeProperty,
                     rdfClass.uri,
                     null
-                ))
+                )).toSeq
 
             // To this list, we need to add three other file type quads here:
-            file_type_quads = rdfTypeQuads ++ Seq(
+            rdfTypeQuads ++ Seq(
                 // 1. file <dbo:fileExtension> "ext"^^xsd:string
                 new Quad(Language.English, DBpediaDatasets.FileInformation,
                     subjectUri,
@@ -107,6 +106,6 @@ class FileTypeExtractor(context: {
         }
 
         // Combine and return all the generated quads.
-        return Seq(file_type_quads)
+        file_type_quads
     }
 }
