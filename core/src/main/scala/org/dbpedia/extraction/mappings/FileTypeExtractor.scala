@@ -44,13 +44,13 @@ class FileTypeExtractor(context: {
             if(extension.length > 4)
                 logger.warning("Page '" + page.title.decodedWithNamespace + "' has an unusually long extension '" + extension + "'")
  
-            val (fileType, mimeType) = FileTypeExtractorConfig.typeAndMimeType(extension)
+            val (fileTypeClass, mimeType) = FileTypeExtractorConfig.typeAndMimeType(context.ontology, extension)
 
-            // We use dct:type for the most specific type (i.e. fileType)
-            // and rdf:type for (1) fileType and all related classes and
+            // We use dct:type for the most specific type (i.e. fileTypeClass)
+            // and rdf:type for (1) fileTypeClass and all related classes and
             // (2) dbo:File and all related classes.
-            val rdfTypeClasses = (dboFileClass.relatedClasses ++
-                context.ontology.classes(fileType).relatedClasses).toSet
+            val rdfTypeClasses = 
+                (dboFileClass.relatedClasses ++ fileTypeClass.relatedClasses).toSet
 
             // Convert this to a set to prevent duplicates.
             val rdfTypeQuads = rdfTypeClasses.map(rdfClass => 
@@ -71,7 +71,7 @@ class FileTypeExtractor(context: {
             ), new Quad(Language.English, DBpediaDatasets.FileInformation,
                 subjectUri,
                 dcTypeProperty,
-                context.ontology.classes(fileType).uri,
+                fileTypeClass.uri,
                 page.sourceUri,
                 null
             ), new Quad(Language.English, DBpediaDatasets.FileInformation,
