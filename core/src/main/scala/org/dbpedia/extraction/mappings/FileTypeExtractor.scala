@@ -98,6 +98,7 @@ class FileTypeExtractor(context: {
                     subjectUri,
                     rdfTypeProperty,
                     rdfClass.uri,
+                    page.sourceUri,
                     null
                 )).toSeq
 
