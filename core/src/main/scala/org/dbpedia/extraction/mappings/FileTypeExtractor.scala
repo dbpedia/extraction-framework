@@ -5,7 +5,7 @@ import org.dbpedia.extraction.config.mappings.FileTypeExtractorConfig
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, ExtractorUtils}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import scala.language.reflectiveCalls
@@ -26,6 +26,8 @@ class FileTypeExtractor(context: {
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
     private val dcTypeProperty = context.ontology.properties("dct:type")
     private val dcFormatProperty = context.ontology.properties("dct:format")
+    private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
+    private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
 
     // Classes we use.
     private val dboFileClass = context.ontology.classes("File")
@@ -42,6 +44,29 @@ class FileTypeExtractor(context: {
         // This extraction only works on File:s.
         if(page.title.namespace != Namespace.File || page.redirect != null) 
             return Seq.empty
+
+        // Store the depiction and thumbnail for this image.
+        val (imageURL, thumbnailURL) = ExtractorUtils.getImageURL(
+            Language.Commons,
+            page.title.encoded
+        )
+        val image_url_quads = Seq(
+             new Quad(Language.English, 
+                DBpediaDatasets.FileInformation,
+                subjectUri,
+                foafDepictionProperty,
+                imageURL,
+                page.sourceUri,
+                null
+            ), new Quad(Language.English, 
+                DBpediaDatasets.FileInformation,
+                imageURL,
+                foafThumbnailProperty,
+                thumbnailURL,
+                page.sourceUri,
+                null
+            )
+        )
 
         // Extract an extension.
         val extensionRegex = new scala.util.matching.Regex("""\.(\w+)$""", "extension")
@@ -106,6 +131,6 @@ class FileTypeExtractor(context: {
         }
 
         // Combine and return all the generated quads.
-        file_type_quads
+        image_url_quads ++ file_type_quads
     }
 }

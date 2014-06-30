@@ -68,8 +68,9 @@ extends PageNodeExtractor
 
         for ((imageFileName, sourceNode) <- searchImage(node.children, 0) if !imageFileName.toLowerCase.startsWith("replace_this_image"))
         {
-            val urlPrefix = if(freeWikipediaImages.contains(URLDecoder.decode(imageFileName, "UTF-8"))) wikipediaUrlLangPrefix else commonsUrlPrefix
-            val (url, thumbnailUrl) = ExtractorUtils.getImageURL(urlPrefix, imageFileName)
+            val lang = if(freeWikipediaImages.contains(URLDecoder.decode(imageFileName, "UTF-8"))) 
+                context.language else Language.Commons
+            val (url, thumbnailUrl) = ExtractorUtils.getImageURL(lang, imageFileName)
 
             quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
             quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
