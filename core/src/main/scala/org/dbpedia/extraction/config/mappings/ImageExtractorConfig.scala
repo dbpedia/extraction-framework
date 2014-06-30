@@ -5,8 +5,6 @@ package org.dbpedia.extraction.config.mappings
  */
 object ImageExtractorConfig
 {
-    val wikipediaUrlPrefix = "http://upload.wikimedia.org/wikipedia/"
-
     // "NonFreeRegex" holds a regex with the templates for each Wikipedia language edition the state non-free license.
     // This is done in order to exclude these images completely from the extraction process and use only open-licensed images
     // Note again that this rule is only on  what to exclude (NOT include)
