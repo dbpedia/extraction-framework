@@ -39,9 +39,6 @@ extends PageNodeExtractor
 
   private val fileNamespaceIdentifier = Namespace.File.name(language)
 
-  private val wikipediaUrlLangPrefix = ImageExtractorConfig.wikipediaUrlPrefix + wikiCode +"/"
-  private val commonsUrlPrefix = ImageExtractorConfig.wikipediaUrlPrefix + "commons/"
-
   private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
 
   private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
