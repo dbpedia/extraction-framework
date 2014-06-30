@@ -93,11 +93,19 @@ object ExtractorUtils {
   def titleContainsCommonsMetadata(title: WikiTitle):Boolean =
     (title.language == Language.Commons && commonsNamespacesContainingMetadata.contains(title.namespace))
 
+  val ImagePrefix_wikipedia = "http://upload.wikimedia.org/wikipedia/commons/"
+  val ImagePrefix_commons = "http://upload.wikimedia.org/wikipedia/commons/"
+
   /**
    * Determine the image URL given a filename or page title. 
+   *    - language: the language on which this Wiki exists (most should be on Language.Commons).
+   *    - filename: the name of the file; usually aWikiTitle.encoded
+   * TODO: replace filename with a WikiTitle: this will require fixing mappings.ImageExtractor. 
    * Returns both the image URL and the thumbnail URL.
    */
-  def getImageURL(urlPrefix: String, filename: String):(String, String) = {
+  def getImageURL(language: Language, filename: String):(String, String) = {
+      val urlPrefix = "http://upload.wikimedia.org/wikipedia/" + language.wikiCode + "/"
+
       // TODO: URLDecoder.decode() translates '+' to space. Is that correct here?
       val decoded = URLDecoder.decode(filename, "UTF-8")
       
@@ -116,6 +124,7 @@ object ExtractorUtils {
 
       val urlPart = hash1 + "/" + hash2 + "/" + filename
       val ext = if (filename.toLowerCase.endsWith(".svg")) ".png" else ""
+      // TODO: add ".tif" as an extension that should have ".png" added to the end of the thumbnail.
 
       val imageUrl = urlPrefix + urlPart
       val thumbnailUrl = urlPrefix + "thumb/" + urlPart + "/200px-" + filename + ext
