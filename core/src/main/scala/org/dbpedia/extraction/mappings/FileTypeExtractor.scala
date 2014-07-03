@@ -70,7 +70,7 @@ class FileTypeExtractor(context: {
     def generateImageURLQuads(page: WikiPage, subjectUri: String): Seq[Quad] =
     {
         // Get the image and thumbnail URLs.
-        val (imageURL, thumbnailURL) = ExtractorUtils.getImageURL(
+        val (imageURL, thumbnailURL) = ExtractorUtils.getFileURLWithThumbnail(
             Language.Commons,
             page.title.encoded
         )
