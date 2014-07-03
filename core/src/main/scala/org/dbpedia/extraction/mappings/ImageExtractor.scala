@@ -55,18 +55,20 @@ extends PageNodeExtractor
   private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
   private val dcRightsProperty = context.ontology.properties("dc:rights")
 
+  private val commonsLang = Language.Commons
+
   override val datasets = Set(DBpediaDatasets.Images)
 
     override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main) return Seq.empty
-        
+ 
         var quads = new ArrayBuffer[Quad]()
 
         for ((imageFileName, sourceNode) <- searchImage(node.children, 0) if !imageFileName.toLowerCase.startsWith("replace_this_image"))
         {
             val lang = if(freeWikipediaImages.contains(URLDecoder.decode(imageFileName, "UTF-8"))) 
-                context.language else Language.Commons
+                language else commonsLang
             val (url, thumbnailUrl) = ExtractorUtils.getFileURLWithThumbnail(lang, imageFileName)
 
             quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
