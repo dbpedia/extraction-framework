@@ -21,6 +21,9 @@ class FileTypeExtractor(context: {
     // For writing warnings.
     private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
 
+    // RDF datatypes we use.
+    private val xsdString = context.ontology.datatypes("xsd:string")
+
     // RDF properties we use.
     private val fileExtensionProperty = context.ontology.properties("fileExtension")
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
@@ -134,7 +137,7 @@ class FileTypeExtractor(context: {
             fileExtensionProperty,
             extension,
             page.sourceUri,
-            context.ontology.datatypes("xsd:string")
+            xsdString
         )
 
         // 2. Figure out the file type and MIME type.
@@ -157,8 +160,9 @@ class FileTypeExtractor(context: {
             dcFormatProperty,
             mimeType,
             page.sourceUri,
-            context.ontology.datatypes("xsd:string")
+            xsdString
         )
+
 
 
         // 5. For fileTypeClass and dbo:File, add all related classes.
