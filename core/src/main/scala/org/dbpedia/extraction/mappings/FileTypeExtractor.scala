@@ -21,6 +21,12 @@ class FileTypeExtractor(context: {
     // For writing warnings.
     private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
 
+    // To store the Commons language.
+    private val commonsLang = Language.Commons
+
+    // Ontology.
+    private val ontology = context.ontology
+
     // RDF datatypes we use.
     private val xsdString = context.ontology.datatypes("xsd:string")
 
@@ -71,7 +77,7 @@ class FileTypeExtractor(context: {
     {
         // Get the image and thumbnail URLs.
         val (imageURL, thumbnailURL) = ExtractorUtils.getFileURLWithThumbnail(
-            Language.Commons,
+            commonsLang,
             page.title.encoded
         )
 
@@ -141,7 +147,7 @@ class FileTypeExtractor(context: {
         )
 
         // 2. Figure out the file type and MIME type.
-        val (fileTypeClass, mimeType) = FileTypeExtractorConfig.typeAndMimeType(context.ontology, extension)
+        val (fileTypeClass, mimeType) = FileTypeExtractorConfig.typeAndMimeType(ontology, extension)
 
         // 3. <resource> dc:type fileTypeClass
         val file_type_quad = new Quad(
