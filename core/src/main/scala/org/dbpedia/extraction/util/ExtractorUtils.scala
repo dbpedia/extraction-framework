@@ -93,9 +93,6 @@ object ExtractorUtils {
   def titleContainsCommonsMetadata(title: WikiTitle):Boolean =
     (title.language == Language.Commons && commonsNamespacesContainingMetadata.contains(title.namespace))
 
-  val ImagePrefix_wikipedia = "http://upload.wikimedia.org/wikipedia/commons/"
-  val ImagePrefix_commons = "http://upload.wikimedia.org/wikipedia/commons/"
-
   /**
    * Determine the image URL given a filename or page title. 
    *    - language: the language on which this Wiki exists (most should be on Language.Commons).
