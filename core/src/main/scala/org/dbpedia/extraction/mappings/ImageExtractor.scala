@@ -67,7 +67,7 @@ extends PageNodeExtractor
         {
             val lang = if(freeWikipediaImages.contains(URLDecoder.decode(imageFileName, "UTF-8"))) 
                 context.language else Language.Commons
-            val (url, thumbnailUrl) = ExtractorUtils.getImageURL(lang, imageFileName)
+            val (url, thumbnailUrl) = ExtractorUtils.getFileURLWithThumbnail(lang, imageFileName)
 
             quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
             quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
