@@ -100,7 +100,7 @@ object ExtractorUtils {
    * TODO: replace filename with a WikiTitle: this will require fixing mappings.ImageExtractor. 
    * Returns both the image URL and the thumbnail URL.
    */
-  def getImageURL(language: Language, filename: String):(String, String) = {
+  def getFileURLWithThumbnail(language: Language, filename: String):(String, String) = {
       val urlPrefix = "http://upload.wikimedia.org/wikipedia/" + language.wikiCode + "/"
 
       // TODO: URLDecoder.decode() translates '+' to space. Is that correct here?
