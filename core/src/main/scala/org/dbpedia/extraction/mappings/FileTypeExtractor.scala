@@ -7,7 +7,6 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import scala.language.reflectiveCalls
 
 /**
@@ -168,8 +167,6 @@ class FileTypeExtractor(context: {
             page.sourceUri,
             xsdString
         )
-
-
 
         // 5. For fileTypeClass and dbo:File, add all related classes.
         val relatedRDFClasses = (dboFileClass.relatedClasses ++ fileTypeClass.relatedClasses).toSet
