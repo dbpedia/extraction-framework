@@ -101,6 +101,7 @@ object ExtractorUtils {
    * Returns both the image URL and the thumbnail URL.
    */
   def getFileURLWithThumbnail(language: Language, filename: String):(String, String) = {
+      val thumbnailWidth = "300px";
       val urlPrefix = "http://upload.wikimedia.org/wikipedia/" + language.wikiCode + "/"
 
       // TODO: URLDecoder.decode() translates '+' to space. Is that correct here?
@@ -120,11 +121,29 @@ object ExtractorUtils {
       val hash2 = md5.substring(0, 2);
 
       val urlPart = hash1 + "/" + hash2 + "/" + filename
-      val ext = if (filename.toLowerCase.endsWith(".svg")) ".png" else ""
-      // TODO: add ".tif" as an extension that should have ".png" added to the end of the thumbnail.
-
       val imageUrl = urlPrefix + urlPart
-      val thumbnailUrl = urlPrefix + "thumb/" + urlPart + "/200px-" + filename + ext
+      
+      // Generate thumbnail.
+      // These use different parameters to control the size of the thumbnail,
+      // which vary by file type.
+      //
+      // - Some potential parameters are listed at 
+      // https://github.com/wikimedia/mediawiki-core/blob/master/thumb.php#L92
+      // - But actual parsing occurs in individual modules, such as:
+      // https://github.com/wikimedia/mediawiki-core/blob/37bc4ec3ddf/includes/media/SVG.php#L428 
+      val extensionRegex = new scala.util.matching.Regex("""\.\w+$""")
+      val thumbnailUrlSuffix = extensionRegex.findFirstIn(filename.toLowerCase) match {
+        case Some(".tif") => f"lossy-page1-$thumbnailWidth-$filename.jpg"
+        case Some(".pdf") => f"page1-$thumbnailWidth-$filename.jpg"
+
+        // TODO: figure these types: .djvu, .gif, .svg, .xcf.
+
+        // If no extension could be matched, just use the default format.
+        // Matching extensions: .bmp, .jpg, .jpeg, .png.
+        case Some(ext) =>    f"$thumbnailWidth-$filename"
+        case None =>         f"$thumbnailWidth-$filename"
+      }
+      val thumbnailUrl = urlPrefix + "thumb/" + urlPart + "/" + thumbnailUrlSuffix
 
       (imageUrl, thumbnailUrl)
   }
