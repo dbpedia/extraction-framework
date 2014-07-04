@@ -34,6 +34,8 @@ class FileTypeExtractor(context: {
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
     private val dcTypeProperty = context.ontology.properties("dct:type")
     private val dcFormatProperty = context.ontology.properties("dct:format")
+    private val dboSourceProperty = context.ontology.properties("source")
+    private val dboThumbnailProperty = context.ontology.properties("thumbnail")
     private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
     private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
 
@@ -81,7 +83,16 @@ class FileTypeExtractor(context: {
         )
 
         Seq(
-            // 1. <resource> foaf:depiction <image>
+            // 1. <resource> source <image>
+            new Quad(Language.English,
+                DBpediaDatasets.FileInformation,
+                subjectUri,
+                dboSourceProperty,
+                imageURL,
+                page.sourceUri,
+                null
+            ),
+            // 2. <resource> foaf:depiction <image>
             new Quad(Language.English,
                 DBpediaDatasets.FileInformation,
                 subjectUri,
@@ -90,7 +101,16 @@ class FileTypeExtractor(context: {
                 page.sourceUri,
                 null
             ), 
-            // 2. <image> foaf:thumbnail <image>
+            // 3. <resource> thumbnail <image>
+            new Quad(Language.English,
+                DBpediaDatasets.FileInformation,
+                subjectUri,
+                dboThumbnailProperty,
+                thumbnailURL,
+                page.sourceUri,
+                null
+            ),
+            // 4. <image> foaf:thumbnail <image>
             new Quad(Language.English,
                 DBpediaDatasets.FileInformation,
                 imageURL,
@@ -118,7 +138,7 @@ class FileTypeExtractor(context: {
 
         // Warn the user on long extensions.
         val page_title = page.title.decodedWithNamespace
-        if(extension.length > 1)
+        if(extension.length > 4)
             logger.warning(f"Page '$page_title%s' has an unusually long extension '$extension%s'")
 
         Some(extension)
