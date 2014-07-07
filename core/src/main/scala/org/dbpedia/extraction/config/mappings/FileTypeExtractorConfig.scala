@@ -47,8 +47,8 @@ object FileTypeExtractorConfig
             "tif" -> "image/tiff",
             "tiff" -> "image/tiff",
             "djvu" -> "image/vnd.djvu",
-            "xcf" -> "image/xcf",
-            "kml" -> "application/vnd.google-earth.kml+xml"
+            "xcf" -> "image/xcf"
+//            "kml" -> "application/vnd.google-earth.kml+xml"
         ),
         "MovingImage" -> Map(
             "ogv" -> "video/ogg",

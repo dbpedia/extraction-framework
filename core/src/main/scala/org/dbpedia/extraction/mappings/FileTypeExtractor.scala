@@ -34,13 +34,14 @@ class FileTypeExtractor(context: {
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
     private val dcTypeProperty = context.ontology.properties("dct:type")
     private val dcFormatProperty = context.ontology.properties("dct:format")
-    private val dboSourceProperty = context.ontology.properties("source")
+    private val dboFileURLProperty = context.ontology.properties("fileURL")
     private val dboThumbnailProperty = context.ontology.properties("thumbnail")
     private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
     private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
 
     // RDF classes we use.
-    private val dboFileClass = context.ontology.classes("File")
+    private val dboFile = context.ontology.classes("File")
+    private val dboStillImage = context.ontology.classes("StillImage")
 
     // All data will be written out to DBpediaDatasets.FileInformation.
     override val datasets = Set(DBpediaDatasets.FileInformation)
@@ -55,8 +56,19 @@ class FileTypeExtractor(context: {
         if(page.title.namespace != Namespace.File || page.redirect != null)
             return Seq.empty
 
-        // Generate the depiction and thumbnail for this image.
-        val image_url_quads = generateImageURLQuads(page, subjectUri)
+        // Generate the fileURL.
+        val fileURL = ExtractorUtils.getFileURL(page.title.encoded, commonsLang)
+        val file_url_quads = Seq(
+            // <resource> dbo:fileURL <url>
+            new Quad(Language.English,
+                DBpediaDatasets.FileInformation,
+                subjectUri,
+                dboFileURLProperty,
+                fileURL,
+                page.sourceUri,
+                null
+            )
+        )
 
         // Attempt to identify the extension, then use that to generate
         // file-type quads.
@@ -66,42 +78,31 @@ class FileTypeExtractor(context: {
         }
 
         // Combine and return all the generated quads.
-        image_url_quads ++ file_type_quads
+        file_url_quads ++ file_type_quads
     }
 
     /**
-     * Generate Quads for the image files pointed to by this image, including:
-     *  <resource> foaf:depiction <image>
-     *  <image> foaf:thumbnail <image-thumbnail>
+     * Generate Quads for the StillImage pointed to by this file, including:
+     *  <resource> foaf:depiction <file>
+     *  <file> foaf:thumbnail <image-thumbnail>
      */
     def generateImageURLQuads(page: WikiPage, subjectUri: String): Seq[Quad] =
     {
-        // Get the image and thumbnail URLs.
-        val (imageURL, thumbnailURL) = ExtractorUtils.getFileURLWithThumbnail(
-            commonsLang,
-            page.title.encoded
-        )
+        // Get the file and thumbnail URLs.
+        val fileURL = ExtractorUtils.getFileURL(page.title.encoded, commonsLang)
+        val thumbnailURL = ExtractorUtils.getThumbnailURL(page.title.encoded, commonsLang)
 
         Seq(
-            // 1. <resource> source <image>
-            new Quad(Language.English,
-                DBpediaDatasets.FileInformation,
-                subjectUri,
-                dboSourceProperty,
-                imageURL,
-                page.sourceUri,
-                null
-            ),
-            // 2. <resource> foaf:depiction <image>
+            // 1. <resource> foaf:depiction <image>
             new Quad(Language.English,
                 DBpediaDatasets.FileInformation,
                 subjectUri,
                 foafDepictionProperty,
-                imageURL,
+                fileURL,
                 page.sourceUri,
                 null
             ), 
-            // 3. <resource> thumbnail <image>
+            // 2. <resource> thumbnail <image>
             new Quad(Language.English,
                 DBpediaDatasets.FileInformation,
                 subjectUri,
@@ -110,10 +111,10 @@ class FileTypeExtractor(context: {
                 page.sourceUri,
                 null
             ),
-            // 4. <image> foaf:thumbnail <image>
+            // 3. <image> foaf:thumbnail <image>
             new Quad(Language.English,
                 DBpediaDatasets.FileInformation,
-                imageURL,
+                fileURL,
                 foafThumbnailProperty,
                 thumbnailURL,
                 page.sourceUri,
@@ -168,7 +169,11 @@ class FileTypeExtractor(context: {
         // 2. Figure out the file type and MIME type.
         val (fileTypeClass, mimeType) = FileTypeExtractorConfig.typeAndMimeType(ontology, extension)
 
-        // 3. <resource> dc:type fileTypeClass
+        // 3. StillImages have a depiction.
+        val depiction_and_thumbnail_quads = if(fileTypeClass != dboStillImage) Seq.empty
+            else generateImageURLQuads(page, subjectUri)
+
+        // 4. <resource> dc:type fileTypeClass
         val file_type_quad = new Quad(
             Language.English, DBpediaDatasets.FileInformation,
             subjectUri,
@@ -178,7 +183,7 @@ class FileTypeExtractor(context: {
             null
         )
             
-        // 4. <resource> dc:format "mimeType"^^xsd:string
+        // 5. <resource> dc:format "mimeType"^^xsd:string
         val mime_type_quad = new Quad(
             Language.English, DBpediaDatasets.FileInformation,
             subjectUri,
@@ -188,8 +193,8 @@ class FileTypeExtractor(context: {
             xsdString
         )
 
-        // 5. For fileTypeClass and dbo:File, add all related classes.
-        val relatedRDFClasses = (dboFileClass.relatedClasses ++ fileTypeClass.relatedClasses).toSet
+        // 6. For fileTypeClass and dbo:File, add all related classes.
+        val relatedRDFClasses = (dboFile.relatedClasses ++ fileTypeClass.relatedClasses).toSet
         val rdf_type_from_related_quads = relatedRDFClasses.map(rdfClass =>
             new Quad(Language.English,
                 DBpediaDatasets.FileInformation,
@@ -203,6 +208,7 @@ class FileTypeExtractor(context: {
 
         // Return all quads.
         Seq(file_extension_quad, file_type_quad, mime_type_quad) ++ 
+            depiction_and_thumbnail_quads ++
             rdf_type_from_related_quads.toSeq
     }
 }
