@@ -94,57 +94,23 @@ object ExtractorUtils {
     (title.language == Language.Commons && commonsNamespacesContainingMetadata.contains(title.namespace))
 
   /**
-   * Determine the image URL given a filename or page title. 
-   *    - language: the language on which this Wiki exists (most should be on Language.Commons).
-   *    - filename: the name of the file; usually aWikiTitle.encoded
-   * TODO: replace filename with a WikiTitle: this will require fixing mappings.ImageExtractor. 
-   * Returns both the image URL and the thumbnail URL.
+   * Determine the file URL for a filename.
+   * @param filename the name of the file.
+   * @param language the wiki on which the file exists.
+   * @return the file URL
    */
-  def getFileURLWithThumbnail(language: Language, filename: String):(String, String) = {
-      val thumbnailWidth = "300px";
-      val urlPrefix = "http://upload.wikimedia.org/wikipedia/" + language.wikiCode + "/"
+  def getFileURL(filename: String, language: Language):String = 
+      language.baseUri + "/wiki/Special:FilePath/" + filename
 
-      // TODO: URLDecoder.decode() translates '+' to space. Is that correct here?
-      val decoded = URLDecoder.decode(filename, "UTF-8")
-      
-      val md = MessageDigest.getInstance("MD5")
-      val messageDigest = md.digest(decoded.getBytes("UTF-8"))
-      var md5 = (new BigInteger(1, messageDigest)).toString(16)
-
-      // If the lenght of the MD5 hash is less than 32, then we should pad leading zeros to it, as converting it to
-      // BigInteger will result in removing all leading zeros.
-      // FIXME: this is the least efficient way of building a string.
-      while (md5.length < 32)
-        md5 = "0" + md5;
-
-      val hash1 = md5.substring(0, 1)
-      val hash2 = md5.substring(0, 2);
-
-      val urlPart = hash1 + "/" + hash2 + "/" + filename
-      val imageUrl = urlPrefix + urlPart
-      
-      // Generate thumbnail.
-      // These use different parameters to control the size of the thumbnail,
-      // which vary by file type.
-      //
-      // - Some potential parameters are listed at 
-      // https://github.com/wikimedia/mediawiki-core/blob/master/thumb.php#L92
-      // - But actual parsing occurs in individual modules, such as:
-      // https://github.com/wikimedia/mediawiki-core/blob/37bc4ec3ddf/includes/media/SVG.php#L428 
-      val extensionRegex = new scala.util.matching.Regex("""\.\w+$""")
-      val thumbnailUrlSuffix = extensionRegex.findFirstIn(filename.toLowerCase) match {
-        case Some(".tif") => f"lossy-page1-$thumbnailWidth-$filename.jpg"
-        case Some(".pdf") => f"page1-$thumbnailWidth-$filename.jpg"
-
-        // TODO: figure these types: .djvu, .gif, .svg, .xcf.
-
-        // If no extension could be matched, just use the default format.
-        // Matching extensions: .bmp, .jpg, .jpeg, .png.
-        case Some(ext) =>    f"$thumbnailWidth-$filename"
-        case None =>         f"$thumbnailWidth-$filename"
-      }
-      val thumbnailUrl = urlPrefix + "thumb/" + urlPart + "/" + thumbnailUrlSuffix
-
-      (imageUrl, thumbnailUrl)
-  }
+  /**
+   * Determine the thumbnail URL given a filename. Note that this is meaningless
+   * for non-image files: MediaWiki will return the raw file whatever width is
+   * provided.
+   * @param filename the name of the file.
+   * @param language the wiki on which this file exists.
+   * @return the thumbnail URL
+   */
+  def getThumbnailURL(filename: String, language: Language):String =
+      language.baseUri + "/wiki/Special:FilePath/" + filename + "?width=300"
+    
 }
