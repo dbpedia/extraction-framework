@@ -10,6 +10,10 @@ import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.ConfigUtils.{getStrings}
 import org.dbpedia.extraction.util.RichString.wrapString
 
+import java.net.URLDecoder
+import java.math.BigInteger
+import java.security.MessageDigest
+
 /**
  * User: Dimitris Kontokostas
  * Various utils for loading Extractors
@@ -88,4 +92,25 @@ object ExtractorUtils {
    */
   def titleContainsCommonsMetadata(title: WikiTitle):Boolean =
     (title.language == Language.Commons && commonsNamespacesContainingMetadata.contains(title.namespace))
+
+  /**
+   * Determine the file URL for a filename.
+   * @param filename the name of the file.
+   * @param language the wiki on which the file exists.
+   * @return the file URL
+   */
+  def getFileURL(filename: String, language: Language):String = 
+      language.baseUri + "/wiki/Special:FilePath/" + filename
+
+  /**
+   * Determine the thumbnail URL given a filename. Note that this is meaningless
+   * for non-image files: MediaWiki will return the raw file whatever width is
+   * provided.
+   * @param filename the name of the file.
+   * @param language the wiki on which this file exists.
+   * @return the thumbnail URL
+   */
+  def getThumbnailURL(filename: String, language: Language):String =
+      language.baseUri + "/wiki/Special:FilePath/" + filename + "?width=300"
+    
 }
