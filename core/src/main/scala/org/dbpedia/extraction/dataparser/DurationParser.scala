@@ -22,6 +22,8 @@ class DurationParser( context : { def language : Language } )
 
     val TimeValueColonUnitRegex = ("""^\D*?(-)?\s?(\d+)?\:(\d\d)\:?(\d\d)?\s*(""" + timeUnitsRegex + """)?(\W\D*?|\W*?)$""").r
 
+    val TimeValueImplicitUnitRegex = ("""^\D*?(-)?\s?(\d+)\s*(""" + timeUnitsRegex + """)\s?(\d\d)(\W\D*?|\W*?)$""").r
+
     // Allow leading decimal separator, e.g. .0254 = 0.0254
     val TimeValueUnitRegex = ("""(-?[\,\.]?\d[,\.\s\d]*\s*)(""" + timeUnitsRegex + """)(\s|\,|$)""").r
 
@@ -111,6 +113,15 @@ class DurationParser( context : { def language : Language } )
                 }
                 timeUnits.get(unit.trim).getOrElse("") match {
                     case "hour" =>  Some(new Duration(hours = v1.toDouble, minutes = v2.toDouble, seconds = v3.toDouble, reverseDirection = (sign == "-")))
+                    case _ => None
+                }
+            }
+
+            case TimeValueImplicitUnitRegex(sign, v1, unit, v2, trail) => {
+                // "xx unit yy"  unit must be hours or minutes
+                timeUnits.get(unit.trim).getOrElse("") match {
+                    case "hour" => Some(new Duration(hours = v1.toDouble, minutes = v2.toDouble, reverseDirection = (sign == "-")))
+                    case "minute" => Some(new Duration(minutes = v1.toDouble, seconds = v2.toDouble, reverseDirection = (sign == "-")))
                     case _ => None
                 }
             }
