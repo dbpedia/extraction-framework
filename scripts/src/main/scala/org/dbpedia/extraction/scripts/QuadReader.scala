@@ -6,7 +6,7 @@ import org.dbpedia.extraction.util.{Finder,Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import scala.Console.err
-import IOUtils.readLines
+import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.FileLike
 
 /**
@@ -30,8 +30,9 @@ object QuadReader {
     err.println(tag+": reading "+file+" ...")
     var lineCount = 0
     val start = System.nanoTime
-    readLines(file) { line =>
+    IOUtils.readLines(file) { line =>
       line match {
+        case null => // ignore last value
         case Quad(quad) => {
           proc(quad)
           lineCount += 1

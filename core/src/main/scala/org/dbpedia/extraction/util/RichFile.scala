@@ -3,6 +3,7 @@ package org.dbpedia.extraction.util
 import java.io.{IOException,File,FilenameFilter,InputStream,FileInputStream,OutputStream,FileOutputStream}
 import java.util.regex.Pattern
 import RichFile._
+import scala.language.implicitConversions
 
 object RichFile {
 
@@ -43,7 +44,9 @@ class RichFile(file: File) extends FileLike[File] {
     if (list == null) throw new IOException("failed to list files in ["+file+"]")
     list.toList
   } 
-  
+
+  override def size: Long = file.length()
+
   // TODO: more efficient type than List?
   override def list: List[File] = list(null) 
   

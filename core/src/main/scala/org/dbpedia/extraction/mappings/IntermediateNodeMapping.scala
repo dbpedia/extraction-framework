@@ -6,6 +6,8 @@ import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.{Buffer,ArrayBuffer}
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import scala.language.reflectiveCalls
 
 class IntermediateNodeMapping (
   nodeClass : OntologyClass,
@@ -20,7 +22,9 @@ extends PropertyMapping
 {
   private val logger = Logger.getLogger(classOf[IntermediateNodeMapping].getName)
 
-  private val splitRegex = """<br\s*\/?>"""
+  private val splitRegex = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(context.language.wikiCode))
+                             DataParserConfig.splitPropertyNodeRegexInfobox.get(context.language.wikiCode).get
+                           else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
 
   override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
     

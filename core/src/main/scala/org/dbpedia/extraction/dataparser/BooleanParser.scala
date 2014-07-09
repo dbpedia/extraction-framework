@@ -2,20 +2,18 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser.Node
 
-import scala.util.matching.Regex
+import scala.language.postfixOps
 
 /**
- * Returns true for strings that contain "true" or "yes" (in any case), 
- * false for strings that contain "false" or "no" (in any case), and
+ * Returns true for strings that contain "true" or "yes" (only as isolated terms),
+ * false for strings that contain "false" or "no" (only as isolated terms), and
  * None for other strings.
  * TODO: also look for "0"/"1"? "on"/"off"?
- * TODO: match only full strings, not strings that contain these words?
  */
 object BooleanParser extends DataParser
 {
-  // TODO: these regexes are probably not quite what we want. See BooleanParserTest
-  val FALSE_REGEX = new Regex("(?i).*?(no|false).*")
-  val TRUE_REGEX = new Regex("(?i).*?(yes|true).*")
+  val FALSE_REGEX = """(?i)(?:.*\s)*(no|false)(?:\s.*)*""".r
+  val TRUE_REGEX = """(?i)(?:.*\s)*(yes|true)(?:\s.*)*""".r
   
   override def parse( node : Node ) : Option[Boolean] =
   {

@@ -3,12 +3,14 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
-import java.util.logging.{Logger, Level}
+import java.util.logging.{Logger, Level, LogRecord}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -23,14 +25,15 @@ object MappingsLoader
                  def ontology : Ontology
                  def language : Language
                  def redirects : Redirects
-                 def mappingPageSource : Traversable[PageNode] } ) : Mappings =
+                 def mappingPageSource : Traversable[WikiPage] } ) : Mappings =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
-        val classMappings = new HashMap[String, Mapping[TemplateNode]]()
+        val classMappings = new HashMap[String, Extractor[TemplateNode]]()
         val tableMappings = new ArrayBuffer[TableMapping]()
+        val parser = WikiParser.getInstance()
 
-        for ( page <- context.mappingPageSource;
+        for ( page <- context.mappingPageSource.map(parser).flatten;
               node <- page.children if node.isInstanceOf[TemplateNode] )
         {
             val tnode = node.asInstanceOf[TemplateNode]
@@ -77,7 +80,7 @@ object MappingsLoader
             }
             catch
             {
-                case ex => logger.log(Level.WARNING, "Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage, page.title.encodedWithNamespace)
+                case ex : Throwable => log(Level.WARNING, "Couldn't load " + tnode.title.decoded + " on page " + page.title.decodedWithNamespace + ". Details: " + ex.getMessage, Array(page.title.encodedWithNamespace), ex)
             }
         }
 
@@ -114,7 +117,7 @@ object MappingsLoader
             }
             catch
             {
-                case ex : Exception => logger.log(Level.WARNING, "Couldn't load property mapping on page " + node.root.title.decodedWithNamespace + ". Details: " + ex.getMessage, node.root.title.encodedWithNamespace)
+                case ex : Exception => log(Level.WARNING, "Couldn't load property mapping on page " + node.root.title.decodedWithNamespace + ". Details: " + ex.getMessage, Array(node.root.title.encodedWithNamespace), ex)
             }
         }
 
@@ -292,5 +295,22 @@ object MappingsLoader
         {
             case e : NumberFormatException => throw new IllegalArgumentException("Invalid value for " + propertyName + ". Must be double.")
         }
+    }
+    
+    /**
+     * java.util.logging is so stupid. It doesn't even have methods that allow passing params AND
+     * exceptions. We have to write our own method. Copy & paste from several Logger.log() methods
+     * PLUS the private Logger.doLog() method that sets the logger name. To really emulate the
+     * behavior of Logger.log(), we would also have to copy the handling of the resource bundle
+     * from  doLog()... luckily, we don't care about internationalization.
+     */
+    private def log(level: Level, msg: String, params: Array[Object], thrown: Throwable): Unit =
+    {
+      if (! logger.isLoggable(level)) return
+      val lr = new LogRecord(level, msg)
+      lr.setLoggerName(logger.getName())
+      lr.setParameters(params)
+      lr.setThrown(thrown)
+      logger.log(lr)
     }
 }

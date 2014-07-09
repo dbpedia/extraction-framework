@@ -5,7 +5,7 @@ import java.io.File
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.StringPlusser
-import org.dbpedia.extraction.scripts.IOUtils.readLines
+import org.dbpedia.extraction.util.IOUtils
 import scala.collection.mutable.{Map,HashMap}
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -20,15 +20,31 @@ import java.text.DecimalFormatSymbols
 object CreateDownloadPage {
   
 // UPDATE for new release
-val current = "3.8"
+val current = "3.9"
   
+// UPDATE for new release
+val previous = List("3.8", "3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
+
+// UPDATE for new release
+val dumpDates =
+"The datasets were extracted from ((http://dumps.wikimedia.org/ Wikipedia dumps)) generated in " +
+"late March / early April 2013. We used a ((http://www.wikidata.org/ Wikidata)) cross-language " +
+"link dump from June 2013 to interconnect concepts between languages. " +
+"See also all ((DumpDatesDBpedia"+tag(current)+" specific dump dates and times)).\n";
+  
+// UPDATE for new release
+val allLanguages = 119
+
+// CCHECK / UPDATE for new release
+// All languages that have a significant number of mapped articles.
+// en must be first, we use languages.drop(1) in datasetPages()
+val languages = List("en","ca","de","es","eu","fr","id","it","ja","ko","nl","pl","pt","ru","tr")
+
 // UPDATE when DBpedia Wiki changes. Wiki link to page Datasets, section about internationalized datasets.
-val i18nDatasetsSection = "Datasets#h18-19"
+val l10nDatasetsSection = "Datasets#h18-19"
   
 val dbpediaUrl = "http://downloads.dbpedia.org/"
  
-val wikipediaUrl = "http://dumps.wikimedia.org/"
-  
 val zipSuffix = ".bz2"
 
 val titles = new HashMap[String, String]()
@@ -43,38 +59,46 @@ private def niceDecimal(num: Long): String = {
 
 private def niceBytes(bytes: Long): String = {
   if (bytes < 1024) formatter.format(bytes)
-  else if (bytes < 1048576) formatter.format(bytes / 1024F)+"KB"
-  else if (bytes < 1073741824) formatter.format(bytes / 1048576F)+"MB"
-  else formatter.format(bytes / 1073741824F)+"GB"
+  else if (bytes < 1048576) formatter.format(bytes / 1024F)+"KiB"
+  else if (bytes < 1073741824) formatter.format(bytes / 1048576F)+"MiB"
+  else formatter.format(bytes / 1073741824F)+"GiB"
 }
 
 def loadTitles(file: File): Unit = {
   // read lines in this format: 
-  // dbpedia_3.8.owl  lines: 4622  bytes: 811552  gzip: 85765  bzip2: 50140
-  // links/revyu_links.nt  lines: 6  bytes: 1008  gzip: 361  bzip2: 441
-  // af/geo_coordinates_af.nt lines: 82 bytes: 11524 gzip: 1141 bzip2: 1228
-  readLines(file) { line =>
+  // dbpedia_3.9.owl lines:4622 bytes:811552 gzip:85765 bzip2:50140
+  // links/revyu_links.nt lines:6 bytes:1008 gzip:361 bzip2:441
+  // af/geo_coordinates_af.nt lines:82 bytes:11524 gzip:1141 bzip2:1228
+  IOUtils.readLines(file) { line =>
+    if (line == null) return // all done
     val parts = line.split("\\s+", -1)
-    if (parts.length != 9) throw new IllegalArgumentException("bad line format")
+    if (parts.length != 9) throw new IllegalArgumentException("bad line format: "+line)
     val path = parts(0)
     val lines = parts(2).toLong
     val bytes = parts(4).toLong
     val gzip = parts(6).toLong
     val bzip2 = parts(8).toLong
-    titles(path) = "Lines: "+niceDecimal(lines)+"; Filesize(download): "+niceBytes(bzip2)+"; Filesize(unpacked): "+niceBytes(bytes)
+    titles(path) = "Lines:\u00A0"+niceDecimal(lines)+"; File\u00A0size\u00A0(download):\u00A0"+niceBytes(bzip2)+"; File\u00A0size\u00A0(unpacked):\u00A0"+niceBytes(bytes)
   }
 }
 
-// path: dbpedia_3.8.owl, af/geo_coordinates_af.nq, links/revyu_links.nt
+val OntologyPage = "Ontology"
+val DataC14NPage = "DataC14N"
+val DataL10NPage = "DataL10N"
+val LinksPage = "Links"
+val DescPage = "Desc"
+val NLPPage = "NLP"
+
+// path: dbpedia_3.9.owl, af/geo_coordinates_af.nq, links/revyu_links.nt
 class FileInfo(val path: String, val title: String) {
   
-  // example: 3.8/af/geo_coordinates_af.nq.bz2
+  // example: 3.9/af/geo_coordinates_af.nq.bz2
   val fullPath = current+"/"+path+zipSuffix
   
-  // example: http://downloads.dbpedia.org/3.8/af/geo_coordinates_af.nq.bz2
+  // example: http://downloads.dbpedia.org/3.9/af/geo_coordinates_af.nq.bz2
   val downloadUrl = dbpediaUrl+fullPath
   
-  // example: http://downloads.dbpedia.org/preview.php?file=3.8_sl_af_sl_geo_coordinates_af.nq.bz2
+  // example: http://downloads.dbpedia.org/preview.php?file=3.9_sl_af_sl_geo_coordinates_af.nq.bz2
   val previewUrl = dbpediaUrl+"preview.php?file="+fullPath.replace("/", "_sl_")
 }
   
@@ -83,64 +107,59 @@ abstract class Fileset(
   val file: String,
   val text: String,
   val formats: List[String],
-  val languages: Boolean
+  val pages: Set[String]
 ) 
 {
   // null if data file didn't contain any info about this file
-  def file(language: String, modifier: String, format: String) = {
+  def file(language: String, modifier: String, format: String, required: Boolean): FileInfo = {
     val p = path(language, modifier, format)
     val t = titles.getOrElse(p, null)
-    if (t == null) null else new FileInfo(p, t)
+    
+    if (t != null) new FileInfo(p, t)
+    else if (! required) null
+    else throw new IllegalArgumentException("found no data for "+p)
   }
   
-  protected def path(language: String, modifier: String, format: String): String
+  def path(language: String, modifier: String, format: String): String
   
-  def anchor(prefix: String = "") = (prefix+name).replaceChars(" ()", "-").toLowerCase(Locale.ENGLISH)
+  def anchor(prefix: String = "") = (prefix+name).replaceChars(" ()~", "-").toLowerCase(Locale.ENGLISH)
 }
 
 class Ontology(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("owl"), false)
+extends Fileset(name, file, text, List("owl"), Set(OntologyPage))
 {
-  // dbpedia_3.8.owl
-  override protected def path(language: String, modifier: String, format: String) = file+modifier+"."+format
+  // dbpedia_3.9.owl
+  override def path(language: String, modifier: String, format: String) = file+modifier+"."+format
 }
 
-class Dataset(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("nt", "nq", "ttl"), true)
-{  
+class Dataset(name: String, file: String, text: String, pages: Set[String] = null)
+extends Fileset(name, file, text, List("nt", "nq", "ttl"), pages)
+{
   // example: af/geo_coordinates_af.nt
-  override protected def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"_"+language+"."+format
+  override def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"_"+language+"."+format
 }
 
 class Linkset(name: String, file: String, text: String)
-extends Fileset(name, file, text, List("nt"), false)
+extends Fileset(name, file, text, List("nt"), Set(LinksPage))
 {
-  // example: links/revyu_links.nt
-  override protected def path(language: String, modifier: String, format: String) = "links/"+file+modifier+"_links."+format
+  // example: links/yago_types.nt
+  override def path(language: String, modifier: String, format: String) = language+"/"+file+modifier+"."+format
 }
 
 def tag(version: String): String = version.replace(".", "")
 
-val previous = List("3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
-
-val dumpDates = "in late May / early June 2012"
-  
-val allLanguages = 111
-
-// All languages that have a significant number of mapped articles.
-// en must be first, we use languages.drop(1) in datasetPages()
-val languages = List("en","bg","ca","cs","de","el","es","fr","hu","it","ko","pl","pt","ru","sl","tr")
-
 val ontology =
-new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in OWL. See ((http://jens-lehmann.org/files/2009/dbpedia_jws.pdf our JWS paper)) for more details.//")
+new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in OWL. See ((http://svn.aksw.org/papers/2013/SWJ_DBpedia/public.pdf our SWJ paper)) for more details.//")
 
 // We have to split the main datasets into many small sub-pages because wacko wiki is true to its
 // name and fails to display a page (or even print a proper error message) when it's too long. 
 val datasets = List(
   List(
-    new Dataset("Ontology Infobox Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the ontology-based extraction.//"),
-    new Dataset("Ontology Infobox Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the ontology-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
-    new Dataset("Ontology Infobox Properties (Specific)", "specific_mappingbased_properties", "//Infobox data from the ontology-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//")
+    new Dataset("Mapping-based Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the mapping-based extraction.//"),
+    new Dataset("Mapping-based Types (Heuristic)", "instance_types_heuristic", "//Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//", Set(DataC14NPage)),
+    new Dataset("Mapping-based Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the mapping-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
+    new Dataset("Mapping-based Properties (Cleaned)", "mappingbased_properties_cleaned", "//This file contains the statements from the Mapping-based Properties, with incorrect statements identified by heuristic inference being removed.//", Set(DataC14NPage)),
+    new Dataset("Mapping-based Properties (Specific)", "specific_mappingbased_properties", "//Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//")
   ),
   List(
     new Dataset("Titles", "labels", "//Titles of all Wikipedia Articles in the corresponding language.//"),
@@ -150,16 +169,14 @@ val datasets = List(
   ),
   List(
     new Dataset("Geographic Coordinates", "geo_coordinates", "//Geographic coordinates extracted from Wikipedia.//"),
-    new Dataset("Raw Infobox Properties", "infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Ontology Infobox Properties (/ontology/ namespace) should always be preferred over this data.//"),
-    new Dataset("Raw Infobox Property Definitions", "infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
+    new Dataset("Raw Infobox Properties", "raw_infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace) should always be preferred over this data.//"),
+    new Dataset("Raw Infobox Property Definitions", "raw_infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
     new Dataset("Homepages", "homepages", "//Links to homepages of persons, organizations etc.//")
   ),
   List(
     new Dataset("Persondata", "persondata", "//Information about persons (date and place of birth etc.) extracted from the English and German Wikipedia, represented using the FOAF vocabulary.//"),
     new Dataset("PND", "pnd", "//Dataset containing PND (Personennamendatei) identifiers.//"),
-    new Dataset("Inter-Language Links", "interlanguage_links", "//Dataset linking a DBpedia resource to the same or a related resource in other languages, extracted from the ((http://en.wikipedia.org/wiki/Help:Interlanguage_links inter-language links)) of a Wikipedia article.//"),
-    new Dataset("Bijective Inter-Language Links", "interlanguage_links_same_as", "//Dataset containing the bijective inter-language links between a DBpedia resource and the same resource in other languages, i.e. there is a link from a resource to the same resource in a different language and a link pointing back. When inter-language links are bijective, the Wikipedia articles are usually about the same subject.//"),
-    new Dataset("Non-bijective Inter-Language Links", "interlanguage_links_see_also", "//Dataset containing the inter-language links between a DBpedia resource and related resources in other languages that are not bijective, i.e. there is a link from a resource to a related resource in a different language, but no link pointing back. When inter-language links are not bijective, the Wikipedia articles are usually not about the same subject.//")
+    new Dataset("Inter-Language Links", "interlanguage_links", "//Dataset linking a DBpedia resource to the same resource in other languages and in ((http://www.wikidata.org Wikidata)). Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.//")
   ),
   List(
     new Dataset("Articles Categories", "article_categories", "//Links from concepts to categories using the SKOS vocabulary.//"),
@@ -179,59 +196,59 @@ val datasets = List(
   ),
   List(
     new Dataset("Page IDs", "page_ids", "//Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.//"),
-    new Dataset("Revision IDs", "revision_ids", "//Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.8, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.//"),
+    new Dataset("Revision IDs", "revision_ids", "//Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.//"),
     new Dataset("Revision URIs", "revision_uris", "//Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.//")
   )
 )
 
 val linksets = List(
-  new Linkset("Links to Amsterdam Museum data", "amsterdammuseum", "//Links between DBpedia and ((http://semanticweb.cs.vu.nl/lod/am/ Amsterdam Museum)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/amsterdammuseum Silk link specification)).//"),
-  new Linkset("Links to BBC Wildlife Finder", "bbcwildlife", "//Links between DBpedia and ((http://www.bbc.co.uk/wildlifefinder/ BBC Wildlife Finder)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/bbcwildlife Silk link specification)).//"),
-  new Linkset("Links to RDF Bookmashup", "bookmashup", "//Links between books in DBpedia and data about them provided by the ((http://www4.wiwiss.fu-berlin.de/bizer/bookmashup/ RDF Book Mashup)). Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to Bricklink", "bricklink", "//Links between DBpedia and ((http://kasabi.com/dataset/bricklink Bricklink)). Links created manually.//"),
-  new Linkset("Links to CORDIS", "cordis", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/cordis/ CORDIS)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/cordis Silk link specifications)).//"),
-  new Linkset("Links to DailyMed", "dailymed", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/dailymed/ DailyMed)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dailymed Silk link specifications)).//"),
-  new Linkset("Links to DBLP", "dblp", "//Links between computer scientists in DBpedia and their publications in the ((http://www.informatik.uni-trier.de/~ley/db/ DBLP)) database. Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dblp Silk link specification)).//"),
-  new Linkset("Links to DBTune", "dbtune", "//Links between DBpedia and ((http://dbtune.org/ DBTune)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dbtune Silk link specifications)).//"),
-  new Linkset("Links to Diseasome", "diseasome", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/diseasome/ Diseasome)).  Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/diseasome Silk link specifications)).//"),
-  new Linkset("Links to DrugBank", "drugbank", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/drugbank/ DrugBank)).  Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/drugbank Silk link specifications)).//"),
-  new Linkset("Links to EUNIS", "eunis", "//Links between DBpedia and ((http://eunis.eea.europa.eu EUNIS)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/eunis Silk link specification)).//"),
-  new Linkset("Links to Eurostat (Linked Statistics)", "eurostat_linkedstatistics", "//Links between DBpedia and ((http://eurostat.linked-statistics.org Eurostat (Linked Statistics))). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/eurostat_linkedstatistics Silk link specifications)).//"),
-  new Linkset("Links to Eurostat (WBSG)", "eurostat_wbsg", "//Links between countries and regions in DBpedia and data about them from ((http://www4.wiwiss.fu-berlin.de/eurostat/ Eurostat (WBSG))). Links created manually.//"),
-  new Linkset("Links to CIA World Factbook", "factbook", "//Links between DBpedia and the ((http://www4.wiwiss.fu-berlin.de/factbook/ CIA World Factbook)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/factbook Silk link specifications)).//"),
-  new Linkset("Links to flickr wrappr", "flickrwrappr", "//Links between DBpedia concepts and photo collections depicting them generated by ((http://www4.wiwiss.fu-berlin.de/flickrwrappr/ flickr wrappr)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/dump/core/src/main/scala/org/dbpedia/extraction/mappings/FlickrWrapprLinkExtractor.scala Scala extractor)).//"),
-  new Linkset("Links to Freebase", "freebase", "//Links between DBpedia and ((http://www.freebase.com/ Freebase (MIDs))). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/dump/scripts/src/main/scala/org/dbpedia/extraction/scripts/CreateFreebaseLinks.scala Scala script)).//"),
-  new Linkset("Links to GADM", "gadm", "//Links between DBpedia and ((http://gadm.geovocab.org/ GADM)). Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to GeoNames", "geonames", "//Links between geographic places in DBpedia and data about them from ((http://www.geonames.org/ GeoNames)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/geonames Silk link specifications)).//"),
-  new Linkset("Links to GeoSpecies", "geospecies", "//Links between DBpedia and ((http://lod.geospecies.org/ GeoSpecies)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/geospecies Silk link specification)).//"),
-  new Linkset("Links to Project Gutenberg", "gutenberg", "//Links between writers in DBpedia and data about them from ((www4.wiwiss.fu-berlin.de/gutendata/ Project Gutenberg)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/gutenberg Silk link specification)).//"),
-  new Linkset("Links to Italian Public Schools", "italian_public_schools", "//Links between DBpedia and ((http://www.linkedopendata.it/datasets/scuole Italian Public Schools)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/italian-public-schools Silk link specification)).//"),
-  new Linkset("Links to LinkedGeoData", "linkedgeodata", "//Links between DBpedia and ((http://linkedgeodata.org LinkedGeoData)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedgeodata Silk link specifications)).//"),
-  new Linkset("Links to LinkedMDB", "linkedmdb", "//Links between DBpedia and ((http://www.linkedmdb.org LinkedMDB)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedmdb Silk link specifications)).//"),
-  new Linkset("Links to MusicBrainz", "musicbrainz", "//Links between artists, albums and songs in DBpedia and data about them from ((http://musicbrainz.org/ MusicBrainz)). Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to New York Times", "nytimes", "//Links between ((http://www.nytimes.com/ New York Times)) subject headings and DBpedia concepts. Links copied from the original data set.//"),
-  new Linkset("Links to OpenCyc", "opencyc", "//Links between DBpedia and ((http://opencyc.org/ OpenCyc)) concepts. ((OpenCyc Details)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/opencyc PHP script)).//"),
-  new Linkset("Links to OpenEI (Open Energy Info)", "openei", "//Links between DBpedia and ((http://en.openei.org OpenEI)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/openei Silk link specifications)).//"),
-  new Linkset("Links to Revyu", "revyu", "//Links between DBpedia and ((http://revyu.com Revyu)). Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to SIDER", "sider", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/sider/ SIDER)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/sider Silk link specifications)).//"),
-  new Linkset("Links to RDF-TCM", "tcm", "//Links between DBpedia and ((http://code.google.com/p/junsbriefcase/wiki/RDFTCMData TCMGeneDIT)). Links copied from the original data set.//"),
-  new Linkset("Links to UMBEL", "umbel", "//Links between DBpedia and ((http://umbel.org/ UMBEL)). Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to US Census", "uscensus", "//Links between US cities and states in DBpedia and data about them from ((http://www.rdfabout.com/demo/census/ US Census)). Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to WikiCompany", "wikicompany", "//Links between companies in DBpedia and companies in ((http://www4.wiwiss.fu-berlin.de/wikicompany/ WikiCompany)). Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to WordNet Classes", "wordnet", "//Classification links to ((http://www.w3.org/TR/wordnet-rdf/ RDF representations)) of ((http://wordnet.princeton.edu/ WordNet)) classes. Update mechanism: copy over from previous release.//"),
-  new Linkset("Links to YAGO2", "yago", "//Dataset containing links between DBpedia and ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)), YAGO type information for DBpedia resources and the YAGO class hierarchy. Currently maintained by Johannes Hoffart.//")
+  new Linkset("Links to Amsterdam Museum data", "amsterdammuseum_links", "//Links between DBpedia and ((http://semanticweb.cs.vu.nl/lod/am/ Amsterdam Museum)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/amsterdammuseum Silk link specification)).//"),
+  new Linkset("Links to BBC Wildlife Finder", "bbcwildlife_links", "//Links between DBpedia and ((http://www.bbc.co.uk/wildlifefinder/ BBC Wildlife Finder)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/bbcwildlife Silk link specification)).//"),
+  new Linkset("Links to RDF Bookmashup", "bookmashup_links", "//Links between books in DBpedia and data about them provided by the ((http://www4.wiwiss.fu-berlin.de/bizer/bookmashup/ RDF Book Mashup)). Update mechanism: copy over from previous release.//"),
+  new Linkset("Links to Bricklink", "bricklink_links", "//Links between DBpedia and ((http://kasabi.com/dataset/bricklink Bricklink)). Links created manually.//"),
+  new Linkset("Links to CORDIS", "cordis_links", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/cordis/ CORDIS)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/cordis Silk link specifications)).//"),
+  new Linkset("Links to ~DailyMed", "dailymed_links", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/dailymed/ DailyMed)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dailymed Silk link specifications)).//"),
+  new Linkset("Links to DBLP", "dblp_links", "//Links between computer scientists in DBpedia and their publications in the ((http://www.informatik.uni-trier.de/~ley/db/ DBLP)) database. Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dblp Silk link specification)).//"),
+  new Linkset("Links to DBTune", "dbtune_links", "//Links between DBpedia and ((http://dbtune.org/ DBTune)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/dbtune Silk link specifications)).//"),
+  new Linkset("Links to Diseasome", "diseasome_links", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/diseasome/ Diseasome)).  Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/diseasome Silk link specifications)).//"),
+  new Linkset("Links to ~DrugBank", "drugbank_links", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/drugbank/ DrugBank)).  Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/drugbank Silk link specifications)).//"),
+  new Linkset("Links to EUNIS", "eunis_links", "//Links between DBpedia and ((http://eunis.eea.europa.eu EUNIS)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/eunis Silk link specification)).//"),
+  new Linkset("Links to Eurostat (Linked Statistics)", "eurostat_linkedstatistics_links", "//Links between DBpedia and ((http://eurostat.linked-statistics.org Eurostat (Linked Statistics))). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/eurostat_linkedstatistics Silk link specifications)).//"),
+  new Linkset("Links to Eurostat (WBSG)", "eurostat_wbsg_links", "//Links between countries and regions in DBpedia and data about them from ((http://www4.wiwiss.fu-berlin.de/eurostat/ Eurostat (WBSG))). Links created manually.//"),
+  new Linkset("Links to CIA World Factbook", "factbook_links", "//Links between DBpedia and the ((http://www4.wiwiss.fu-berlin.de/factbook/ CIA World Factbook)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/factbook Silk link specifications)).//"),
+  new Linkset("Links to flickr wrappr", "flickrwrappr_links", "//Links between DBpedia concepts and photo collections depicting them generated by ((http://www4.wiwiss.fu-berlin.de/flickrwrappr/ flickr wrappr)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/dump/core/src/main/scala/org/dbpedia/extraction/mappings/FlickrWrapprLinkExtractor.scala Scala extractor)).//"),
+  new Linkset("Links to Freebase", "freebase_links", "//Links between DBpedia and ((http://www.freebase.com/ Freebase (MIDs))). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/dump/scripts/src/main/scala/org/dbpedia/extraction/scripts/CreateFreebaseLinks.scala Scala script)).//"),
+  new Linkset("Links to GADM", "gadm_links", "//Links between DBpedia and ((http://gadm.geovocab.org/ GADM)). Links created by ((https://github.com/dbpedia/dbpedia-links/tree/master/datasets/dbpedia.org/gadm.geovocab.org/scripts Java program)).//"),
+  new Linkset("Links to ~GeoNames", "geonames_links", "//Links between geographic places in DBpedia and data about them from ((http://www.geonames.org/ GeoNames)). Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-geonames.txt generated from latest GeoNames datasets)).//"),
+  new Linkset("Links to ~GeoSpecies", "geospecies_links", "//Links between DBpedia and ((http://lod.geospecies.org/ GeoSpecies)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/geospecies Silk link specification)).//"),
+  new Linkset("Links to GHO", "gho_links", "//Links between DBpedia and ((http://gho.aksw.org GHO)) (Global Health Observatory). Links created by ((http://aksw.org/Projects/LIMES LIMES)).//"),
+  new Linkset("Links to Project Gutenberg", "gutenberg_links", "//Links between writers in DBpedia and data about them from ((www4.wiwiss.fu-berlin.de/gutendata/ Project Gutenberg)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/gutenberg Silk link specification)).//"),
+  new Linkset("Links to Italian Public Schools", "italian_public_schools_links", "//Links between DBpedia and ((http://www.linkedopendata.it/datasets/scuole Italian Public Schools)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/italian-public-schools Silk link specification)).//"),
+  new Linkset("Links to ~LinkedGeoData", "linkedgeodata_links", "//Links between DBpedia and ((http://linkedgeodata.org LinkedGeoData)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedgeodata Silk link specifications)).//"),
+  new Linkset("Links to ~LinkedMDB", "linkedmdb_links", "//Links between DBpedia and ((http://www.linkedmdb.org LinkedMDB)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/linkedmdb Silk link specifications)).//"),
+  new Linkset("Links to ~MusicBrainz", "musicbrainz_links", "//Links between artists, albums and songs in DBpedia and data about them from ((http://musicbrainz.org/ MusicBrainz)). Update mechanism: copy over from previous release.//"),
+  new Linkset("Links to New York Times", "nytimes_links", "//Links between ((http://www.nytimes.com/ New York Times)) subject headings and DBpedia concepts. Links copied from the original data set.//"),
+  new Linkset("Links to ~OpenCyc", "opencyc_links", "//Links between DBpedia and ((http://opencyc.org/ OpenCyc)) concepts. ((OpenCyc Details)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/opencyc PHP script)).//"),
+  new Linkset("Links to ~OpenEI (Open Energy Info)", "openei_links", "//Links between DBpedia and ((http://en.openei.org OpenEI)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/openei Silk link specifications)).//"),
+  new Linkset("Links to Revyu", "revyu_links", "//Links between DBpedia and ((http://revyu.com Revyu)). Update mechanism: copy over from previous release.//"),
+  new Linkset("Links to SIDER", "sider_links", "//Links between DBpedia and ((http://www4.wiwiss.fu-berlin.de/sider/ SIDER)). Links created by ((http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/dbpedia/external_datasets/sider Silk link specifications)).//"),
+  new Linkset("Links to RDF-TCM", "tcm_links", "//Links between DBpedia and ((http://code.google.com/p/junsbriefcase/wiki/RDFTCMData TCMGeneDIT)). Links copied from the original data set.//"),
+  new Linkset("Links to UMBEL", "umbel_links", "//Links between DBpedia and ((http://umbel.org/ UMBEL)). Update mechanism: copy over from previous release.//"),
+  new Linkset("Links to US Census", "uscensus_links", "//Links between US cities and states in DBpedia and data about them from ((http://www.rdfabout.com/demo/census/ US Census)). Update mechanism: copy over from previous release.//"),
+  new Linkset("Links to ~WikiCompany", "wikicompany_links", "//Links between companies in DBpedia and companies in ((http://www4.wiwiss.fu-berlin.de/wikicompany/ WikiCompany)). Update mechanism: copy over from previous release.//"),
+  new Linkset("Links to ~WordNet Classes", "wordnet_links", "//Classification links to ((http://www.w3.org/TR/wordnet-rdf/ RDF representations)) of ((http://wordnet.princeton.edu/ WordNet)) classes. Update mechanism: copy over from previous release.//"),
+  new Linkset("YAGO links", "yago_links", "//Dataset containing owl:sameAs links between DBpedia and ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) instances. Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-yago.txt generated from latest YAGO datasets)).//"),
+  new Linkset("YAGO type links", "yago_type_links", "//Dataset containing owl:equivalentClass links between types in the ~http://dbpedia.org/class/yago/ and ~http://yago-knowledge.org/resource/ namespaces. Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-yago.txt generated from latest YAGO datasets)).//"),
+  new Linkset("YAGO types", "yago_types", "//Dataset containing ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) type information for DBpedia resources. Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-yago.txt generated from latest YAGO datasets)).//"),
+  new Linkset("YAGO type hierarchy", "yago_taxonomy", "//Dataset containing the hierarchy of ((http://www.mpi-inf.mpg.de/yago-naga/yago/ YAGO)) classes in the ~http://dbpedia.org/class/yago/ namespace. Update mechanism: ((https://github.com/dbpedia/extraction-framework/blob/dump/scripts/src/main/bash/process-yago.txt generated from latest YAGO datasets)).//")
 )
 
-val OntologyPage = "Ontology"
-val DataC14NPage = "DataC14N"
-val DataI18NPage = "DataI18N"
-val LinksPage = "Links"
-val DescPage = "Desc"
-val NLPPage = "NLP"
+var target: File = null
 
 def main(args: Array[String]) {
-  require(args != null && args.length == 1 && args(0).nonEmpty, "need 1 arg: file containing data file paths and their content numbers")
+  require(args != null && args.length >= 1 && args(0).nonEmpty, "need one arg: file containing data file paths and their content numbers; second arg: target folder (optional)")
   loadTitles(new File(args(0)))
+  if (args.length > 1) target = new File(args(1))
   generate
 }
 
@@ -255,12 +272,11 @@ def generate: Unit = {
   "\n" +
   "=== Wikipedia Input Files ===\n" +
   "\n" +
-  "The datasets were extracted from (("+wikipediaUrl+" Wikipedia dumps)) generated "+dumpDates+
-  " (see also all ((DumpDatesDBpedia"+tag(current)+" specific dates and times))).\n" +
+  dumpDates+
   "\n" +
   include(OntologyPage)+
   include(DataC14NPage)+
-  include(DataI18NPage)+
+  include(DataL10NPage)+
   include(LinksPage)+
   include(DescPage)+
   include(NLPPage)+
@@ -276,7 +292,7 @@ def generate: Unit = {
   
   ontologyPage(OntologyPage, "download-")
   datasetPages(DataC14NPage, "download-c14n-", datasets)
-  datasetPages(DataI18NPage, "download-i18n-", datasets)
+  datasetPages(DataL10NPage, "download-l10n-", datasets)
   datasetPages(LinksPage, "download-", List(linksets))
   descriptionPage(DescPage)
   nlpPage(NLPPage)
@@ -285,7 +301,7 @@ def generate: Unit = {
 def ontologyPage(page: String, anchor: String): Unit = {
   val format = "owl"
     
-  val file = ontology.file("", "", format)
+  val file = ontology.file("", "", format, true)
   
   val s = new StringPlusser+
   mark(page)+
@@ -293,11 +309,11 @@ def ontologyPage(page: String, anchor: String): Unit = {
   "#||\n"+
   "||**Dataset**|**"+format+"**||\n"+
   "||{{a name=\""+ontology.anchor(anchor)+"\"}}((#"+ontology.anchor()+" "+ontology.name+"))\n"+
-  "|"+
-  "<#<small>"+
-  "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a> "+
-  "<small><a href=\""+file.previewUrl+"\">?</a></small>"+
-  "</small>#>\n"+
+  "|";
+
+  link(s, file, format);
+
+  s+
   "||\n"+
   "||#\n"+
   mark(page)
@@ -315,16 +331,16 @@ def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Un
     case DataC14NPage => {
       s+
       "===Canonicalized Datasets===\n"+
-      "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
+      "These datasets contain triples extracted from the respective Wikipedia whose subject and object resource have an equivalent English article. (("+l10nDatasetsSection+" more...))\n"+
       "\n"+
       "All DBpedia IRIs/URIs in the canonicalized datasets use the generic namespace //~http://dbpedia.org/resource/ //. For backwards compatibility, the N-Triples files (.nt, .nq) use URIs, e.g. //~http://dbpedia.org/resource/Bras%C3%ADlia //. The Turtle (.ttl) files use IRIs, e.g. //~http://dbpedia.org/resource/Brasília //.\n"
     }
-    case DataI18NPage => {
+    case DataL10NPage => {
       s+
-      "===Internationalized Datasets===\n"+
-      "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. (("+i18nDatasetsSection+" more...))\n"+
+      "===Localized Datasets===\n"+
+      "These datasets contain triples extracted from the respective Wikipedia, including the ones whose URIs do not have an equivalent English article. (("+l10nDatasetsSection+" more...))\n"+
       "\n"+
-      "The internationalized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. //~http://pt.dbpedia.org/resource/Brasília//.\n"
+      "The localized datasets use DBpedia IRIs (not URIs) and language-specific namespaces, e.g. //~http://pt.dbpedia.org/resource/Brasília//.\n"
     }
     case LinksPage => {
       s+
@@ -351,7 +367,7 @@ def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Un
   
   val langs = page match {
     case DataC14NPage => languages
-    case DataI18NPage => languages.drop(1) /*drop en*/
+    case DataL10NPage => languages.drop(1) /*drop en*/
     case LinksPage => List("links")
   }
   
@@ -371,26 +387,22 @@ def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Files
   "#||\n"+
   languages.mkString("||**Dataset**|**","**|**","**||")+"\n"
   
-  for (fileset <- filesets) {
-    s+"||{{a name=\""+fileset.anchor(anchor)+"\"}}((#"+fileset.anchor()+" "+fileset.name+"))\n"
+  for (fileset <- filesets; if fileset.pages == null || fileset.pages.contains(page)) {
+    s+"||{{a name=\""+fileset.anchor(anchor)+"\"}}((#"+fileset.anchor()+" "+fileset.name.replaceChars("~", "")+"))\n"
     var first = true
     for (language <- languages) {
       
       val modifier = page match {
         case DataC14NPage => if (language == "en") "" else "_en_uris"
-        case DataI18NPage => ""
+        case DataL10NPage => ""
         case LinksPage => ""
       }
       
       s+"|"
       for (format <- fileset.formats) {
-        val file = fileset.file(language, modifier, format)
-        if (file != null && (fileset.languages || first)) {
-          s+
-          "<#<small>"+
-          "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a>\u00A0"+ // 00A0 is non-breaking space
-          "<small><a href=\""+file.previewUrl+"\">?</a></small>"+
-          "</small>#>\n"
+        val file = fileset.file(language, modifier, format, false)
+        if (file != null) {
+          link(s, file, format);
         }
         else {
           s+"<#--#>\n"
@@ -406,6 +418,14 @@ def datasetPage(page: String, subPage: Int, anchor: String, filesets: List[Files
   mark(page+subPage)
   
   write(page+subPage, s.toString)
+}
+
+def link(s: StringPlusser, file: FileInfo, format: String): Unit = {
+  s+
+  "<#<small>"+
+  "<a href=\""+file.downloadUrl+"\" title=\""+file.title+"\">"+format+"</a>\u00A0"+ // 00A0 is non-breaking space
+  "<small><a href=\""+file.previewUrl+"\">?</a></small>"+
+  "</small>#>\n"
 }
 
 def descriptionPage(page: String): Unit = {
@@ -445,18 +465,21 @@ def nlpPage(page: String): Unit = {
 }
 
 def mark(page: String): String = {
-  "<#<!--\n"+
-  "DO NOT EDIT - generated by CreateDownloadPage.scala\n"+
-  "http://wiki.dbpedia.org/Downloads"+tag(current)+page+"/edit\n"+
-  "-->#>\n"
+  "<#<!--\n\n\n"+
+  "PLEASE DO NOT EDIT THIS WIKI PAGE!\n\n\n" +
+  "YOUR CHANGES WILL BE LOST IN THE NEXT RELEASE!\n\n\n" +
+  "Please edit CreateDownloadPage.scala instead.\n\n\n" +
+  "Paste this result page of CreateDownloadPage.scala here:\n"+
+  "http://wiki.dbpedia.org/Downloads"+tag(current)+page+"/edit\n\n\n"+
+  "-->#>\n\n\n"
 }
 
 def include(page: String): String = {
-  "{{include page=/Downloads"+tag(current)+page+" nomark=1}}\n"
+  "{{Include page=/Downloads"+tag(current)+page+" nomark=1}}\n"
 }
 
 def write(page: String, content: String): Unit = {
-  val writer = IOUtils.write(new File("Downloads"+tag(current)+page+".wacko"))
+  val writer = IOUtils.writer(new File(target, "Downloads"+tag(current)+page+".wacko"))
   try writer.write(content)
   finally writer.close()
 }

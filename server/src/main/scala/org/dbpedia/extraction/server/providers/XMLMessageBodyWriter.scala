@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.providers
 import javax.ws.rs.core.{MediaType, MultivaluedMap}
 import javax.ws.rs.ext.{Provider, MessageBodyWriter}
 import javax.ws.rs.{Produces, WebApplicationException}
-import xml.{NodeBuffer, Utility, NodeSeq, Node}
+import xml.{NodeBuffer, Utility, NodeSeq, Node, MinimizeMode}
 import java.io.{OutputStreamWriter, IOException, OutputStream}
 import java.util.Collections.singletonList
 
@@ -55,7 +55,8 @@ class XMLMessageBodyWriter extends MessageBodyWriter[AnyRef]
     private def toString( node : Seq[Node] ) : String =
     {
         val sb = new StringBuilder
-        Utility.sequenceToXML(node, sb = sb, minimizeTags = true)
+        // TODO: is MinimizeMode.Always ok for HTML?
+        Utility.sequenceToXML(node, sb = sb, minimizeTags = MinimizeMode.Always)
         sb.toString
     }
 }

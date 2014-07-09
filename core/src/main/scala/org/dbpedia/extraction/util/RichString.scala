@@ -6,6 +6,7 @@ import scala.util.matching.Regex
 import RichString._
 import java.util.regex.{Pattern,Matcher}
 import java.util.Arrays.{sort,binarySearch}
+import scala.language.implicitConversions
 
 /**
  * Defines additional methods on strings, which are missing in the standard library.
@@ -120,4 +121,11 @@ class RichString(str : String)
       sb.toString
     }
     
+  /**
+   * Split string on given character or whitespace, trim each part, remove empty parts
+   */
+  def trimSplit(sep: Char): Array[String] = {
+    str.split("["+sep+"\\s]+", -1).map(_.trim).filter(_.nonEmpty)
+  }
+
 }

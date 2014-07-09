@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config.transform.TemplateTransformConfig
+
 /**
  * Represents a template.
  *
@@ -7,7 +9,12 @@ package org.dbpedia.extraction.wikiparser
  * @param children The properties of this template
  * @param line The source line number of this property
  */
-case class TemplateNode(title : WikiTitle, override val children : List[PropertyNode], override val line : Int, titleParsed : List[Node] = List()) extends Node(children, line)
+case class TemplateNode (
+    title : WikiTitle,
+    override val children : List[PropertyNode],
+    override val line : Int,
+    titleParsed : List[Node] = List())
+  extends Node(children, line)
 {
     private val propertyMap : Map[String, PropertyNode] = Map.empty ++ (for(property <- children) yield (property.key, property))
     
@@ -29,4 +36,15 @@ case class TemplateNode(title : WikiTitle, override val children : List[Property
     
     // templates are skipped for plain text
     def toPlainText = ""
+}
+
+/**
+ *
+ */
+object TemplateNode {
+
+    def transform(node: TemplateNode) : List[Node] = {
+
+      TemplateTransformConfig(node, node.title.language)
+    }
 }

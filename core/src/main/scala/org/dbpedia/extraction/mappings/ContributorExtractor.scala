@@ -5,6 +5,8 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.net.{URLEncoder, URI}
+import scala.language.reflectiveCalls
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,18 +18,18 @@ import java.net.{URLEncoder, URI}
 
 class ContributorExtractor( context : {
   def ontology : Ontology
-  def language : Language } ) extends Extractor
+  def language : Language } ) extends WikiPageExtractor
 {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main) return Seq.empty
 
     if(node.contributorID <= 0) return Seq.empty
 
-    val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.root.title.encoded;
+    val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.title.encoded;
 
     //Required predicates
     val contributorPredicate = "http://dbpedia.org/meta/contributor";

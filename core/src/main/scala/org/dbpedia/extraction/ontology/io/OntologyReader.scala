@@ -6,7 +6,7 @@ import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.Source
+import org.dbpedia.extraction.sources.{WikiPage, Source}
 
 /**
  * Loads an ontology from configuration files using the DBpedia mapping language.
@@ -19,13 +19,13 @@ class OntologyReader
     {
         logger.info("Loading ontology pages")
 
-        read(source.map(WikiParser.getInstance()))
+        read(source.map(WikiParser.getInstance()).flatten)
     }
 
     /**
      *  Loads an ontology from configuration files using the DBpedia mapping language.
      *
-     * @param source The source containing the ontology pages
+     * @param pageNodeSource The source containing the ontology pages
      * @return Ontology The ontology
      */
     def read(pageNodeSource : Traversable[PageNode]) : Ontology =
@@ -36,13 +36,13 @@ class OntologyReader
 
         ontologyBuilder.datatypes = OntologyDatatypes.load()
 
-        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map(Language.Mappings -> "Thing"), Map(Language.Mappings -> "Base class of all ontology classes"), List(), Set())
-        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map(Language.Mappings -> "Property"), Map(), List("owl:Thing"), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("owl:Thing", Map(Language.Mappings -> "Thing"), Map(Language.Mappings -> "Base class of all ontology classes"), List(), Set(), Set())
+        ontologyBuilder.classes ::= new ClassBuilder("rdf:Property", Map(Language.Mappings -> "Property"), Map(), List("owl:Thing"), Set(), Set())
 
         // TODO: range should be rdfs:Class
         ontologyBuilder.properties ::= new PropertyBuilder("rdf:type", Map(Language.Mappings -> "has type"), Map(), true, false, "owl:Thing", "owl:Thing", Set())
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map(Language.Mappings -> "has label"), Map(), false, false, "owl:Thing", "xsd:string", Set())
-        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map(Language.Mappings -> "has comment"), Map(), false, false, "owl:Thing", "xsd:string", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:label", Map(Language.Mappings -> "has label"), Map(), false, false, "owl:Thing", "rdf:langString", Set())
+        ontologyBuilder.properties ::= new PropertyBuilder("rdfs:comment", Map(Language.Mappings -> "has comment"), Map(), false, false, "owl:Thing", "rdf:langString", Set())
 
         for(page <- pageNodeSource)
         {
@@ -57,8 +57,8 @@ class OntologyReader
     /**
      * Loads all classes and properties from a page.
      *
-     * @param ontology The OntologyBuilder instance
-     * @param pageNode The page node of the configuration page
+     * @param ontologyBuilder The OntologyBuilder instance
+     * @param page The page node of the configuration page
      */
     private def load(ontologyBuilder : OntologyBuilder, page : PageNode)
     {
@@ -72,9 +72,11 @@ class OntologyReader
                 val name = getName(page.title, _.capitalize(page.title.language.locale))
 
                 ontologyBuilder.classes ::= loadClass(name, templateNode)
+                // Fill the equivalentClass map
 
-                for(specificProperty <- loadSpecificProperties(name, templateNode))
+              for(specificProperty <- loadSpecificProperties(name, templateNode))
                 {
+
                     ontologyBuilder.specializedProperties ::= specificProperty
                 }
             }
@@ -84,10 +86,30 @@ class OntologyReader
 
                 for(property <- loadOntologyProperty(name, templateNode))
                 {
-                    ontologyBuilder.properties ::= property
+                  ontologyBuilder.properties ::= property
+
+
+                  //add mappings to equivalentPropertiesBuilderMap in the form of  WikidataProp -> Set[equivalentDBprop]
+                  property.equivPropertyNames.foreach{prop =>
+
+                    if(prop.contains("wikidata:")){
+
+                      //search for wikidataprop in the equivalentPropertiesBuilderMap keys if exists add DBprop to the set of DBprop
+                      // if not create new key
+                      ontologyBuilder.equivalentPropertiesBuilderMap.find{map => map._1.name == prop} match {
+
+                        case Some(map) =>  ontologyBuilder.equivalentPropertiesBuilderMap.updated(map._1, property)
+                        case None => {
+                          val wikidataProp = new OntologyProperty(prop, Map(), Map(), null, null, false, Set())
+                          ontologyBuilder.equivalentPropertiesBuilderMap += wikidataProp -> Set(property)
+                        }
+                      }
+
+                    }
+                  }
+
                 }
             }
-            // TODO: read datatypes
         }
     }
 
@@ -96,7 +118,7 @@ class OntologyReader
      * A namespace like "Foaf:" is always converted to lowercase. The local name (the part
      * after the namespace prefix) is cleaned using the given function.
      *
-     * @param name page title
+     * @param title page title
      * @param clean used to process the local name
      * @return clean name, including lower-case namespace and clean local name
      * @throws IllegalArgumentException
@@ -114,7 +136,8 @@ class OntologyReader
                          labels = readTemplatePropertiesByLanguage(node, "rdfs:label") ++ readPropertyTemplatesByLanguage(node, "label"),
                          comments = readTemplatePropertiesByLanguage(node, "rdfs:comment") ++ readPropertyTemplatesByLanguage(node, "comment"),
                          baseClassNames = readTemplatePropertyAsList(node, "rdfs:subClassOf"),
-                         equivClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet)
+                         equivClassNames = readTemplatePropertyAsList(node, "owl:equivalentClass").toSet,
+                         disjClassNames = readTemplatePropertyAsList(node, "owl:disjointWith").toSet)
     }
 
     private def loadOntologyProperty(name : String, node : TemplateNode) : Option[PropertyBuilder] =
@@ -297,6 +320,8 @@ class OntologyReader
         var properties = List[PropertyBuilder]()
         var datatypes = List[Datatype]()
         var specializedProperties = List[SpecificPropertyBuilder]()
+        var equivalentPropertiesBuilderMap = Map[OntologyProperty,Set[PropertyBuilder]] ()        //[wikidataprop,Set[DBpediaeq props]]
+        var equivalentClassesMap = Map[OntologyProperty,Set[OntologyProperty]] ()           //[wikidataclass,Set[DBpediaeq class]]
 
         def build() : Ontology  =
         {
@@ -307,12 +332,14 @@ class OntologyReader
             new Ontology( classes.flatMap(_.build(classMap)).map(c => (c.name, c)).toMap,
                           properties.flatMap(_.build(classMap, typeMap)).map(p => (p.name, p)).toMap,
                           datatypes.map(t => (t.name, t)).toMap,
-                          specializedProperties.flatMap(_.build(classMap, propertyMap, typeMap)).toMap )
+                          specializedProperties.flatMap(_.build(classMap, propertyMap, typeMap)).toMap,
+                          equivalentPropertiesBuilderMap.map{m=>m._1 -> m._2.flatMap(_.build(classMap, typeMap))},
+                          equivalentClassesMap)
         }
     }
 
     private class ClassBuilder(val name : String, val labels : Map[Language, String], val comments : Map[Language, String],
-                               var baseClassNames : List[String], val equivClassNames : Set[String])
+                               var baseClassNames : List[String], val equivClassNames : Set[String], val disjClassNames : Set[String])
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
@@ -337,7 +364,7 @@ class OntologyReader
                     case None if ! RdfNamespace.validate(baseClassName) =>
                     {
                         logger.config("base class '"+baseClassName+"' of class '"+name+"' was not found, but for its namespace this was expected")
-                        Some(new OntologyClass(baseClassName, Map(), Map(), List(), Set()))
+                        Some(new OntologyClass(baseClassName, Map(), Map(), List(), Set(), Set()))
                     }
                     case None =>
                     {
@@ -352,7 +379,7 @@ class OntologyReader
                     case None if ! RdfNamespace.validate(equivClassName) =>
                     {
                         logger.config("equivalent class '"+equivClassName+"' of class '"+name+"' was not found, but for its namespace this was expected")
-                        Some(new OntologyClass(equivClassName, Map(), Map(), List(), Set()))
+                        Some(new OntologyClass(equivClassName, Map(), Map(), List(), Set(), Set()))
                     }
                     case None =>
                     {
@@ -361,10 +388,25 @@ class OntologyReader
                     }
                 }}.flatten
 
+                val disjointClasses = disjClassNames.map{ disjClassNames => classMap.get(disjClassNames) match
+                {
+                  case Some(equivClassBuilder) => equivClassBuilder.build(classMap)
+                  case None if ! RdfNamespace.validate(disjClassNames) =>
+                  {
+                    logger.config("equivalent class '"+disjClassNames+"' of class '"+name+"' was not found, but for its namespace this was expected")
+                    Some(new OntologyClass(disjClassNames, Map(), Map(), List(), Set(), Set()))
+                  }
+                  case None =>
+                  {
+                    logger.warning("equivalent class '"+disjClassNames+"' of class '"+name+"' not found")
+                    None
+                  }
+                }}.flatten
+
                 name match
                 {
-                    case "owl:Thing" => generatedClass = Some(new OntologyClass(name, labels, comments, List(), equivClasses))
-                    case _ => generatedClass = Some(new OntologyClass(name, labels, comments, baseClasses, equivClasses))
+                    case "owl:Thing" => generatedClass = Some(new OntologyClass(name, labels, comments, List(), equivClasses, disjointClasses))
+                    case _ => generatedClass = Some(new OntologyClass(name, labels, comments, baseClasses, equivClasses, disjointClasses))
                 }
 
                 buildCalled = true
@@ -402,7 +444,7 @@ class OntologyReader
                 case None if ! RdfNamespace.validate(domain) =>
                 {
                     logger.config("domain '"+domain+"' of property '"+name+"' was not found, but for its namespace this was expected")
-                    new OntologyClass(domain, Map(), Map(), List(), Set())
+                    new OntologyClass(domain, Map(), Map(), List(), Set(), Set())
                 }
                 case None => logger.warning("domain '"+domain+"' of property '"+name+"' not found"); return None
             }
@@ -427,7 +469,7 @@ class OntologyReader
                     case None if ! RdfNamespace.validate(range) =>
                     {
                         logger.config("range '"+range+"' of property '"+name+"' was not found, but for its namespace this was expected")
-                        new OntologyClass(range, Map(), Map(), List(), Set())
+                        new OntologyClass(range, Map(), Map(), List(), Set(), Set())
                     }
                     case None => logger.warning("range '"+range+"' of property '"+name+"' not found"); return None
                 }

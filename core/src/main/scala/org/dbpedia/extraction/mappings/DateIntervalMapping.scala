@@ -9,6 +9,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
 import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, TemplateNode}
 import java.lang.IllegalStateException
+import scala.language.reflectiveCalls
 
 class DateIntervalMapping ( 
   val templateProperty : String, //TODO CreateMappingStats requires this to be public. Is there a better way?
@@ -23,8 +24,8 @@ extends PropertyMapping
 {
   private val logger = Logger.getLogger(classOf[DateIntervalMapping].getName)
 
-  private val startDateParser = new DateTimeParser(context, startDateOntologyProperty.range.asInstanceOf[Datatype])
-  private val endDateParser = new DateTimeParser(context, endDateOntologyProperty.range.asInstanceOf[Datatype])
+  private val startDateParser = new DateTimeParser(context, rangeType(startDateOntologyProperty))
+  private val endDateParser = new DateTimeParser(context, rangeType(endDateOntologyProperty))
 
   private val presentString = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
 
@@ -107,6 +108,12 @@ extends PropertyMapping
     {
       splitNodes
     }
+  }
+  
+  private def rangeType(property: OntologyProperty) : Datatype =
+  {
+    if (! property.range.isInstanceOf[Datatype]) throw new IllegalArgumentException("property "+property+" has range "+property.range+", which is not a datatype")
+    property.range.asInstanceOf[Datatype]    
   }
 
 }

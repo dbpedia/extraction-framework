@@ -8,6 +8,7 @@ import org.dbpedia.extraction.config.mappings.PersondataExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts information about persons (date and place of birth etc.) from the English and German Wikipedia, represented using the FOAF vocabulary.
@@ -19,7 +20,7 @@ class PersondataExtractor(
     def language : Language 
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
     private val language = context.language
     private val wikiCode = language.wikiCode
@@ -38,6 +39,7 @@ extends Extractor
     private val dateParser = new DateTimeParser(context, new Datatype("xsd:date"))
     private val monthYearParser = new DateTimeParser(context, new Datatype("xsd:gMonthYear"))
     private val monthDayParser = new DateTimeParser(context, new Datatype("xsd:gMonthDay"))
+    private val yearParser = new DateTimeParser(context, new Datatype("xsd:gYear"))
 
     private val birthDateProperty = context.ontology.properties("birthDate")
     private val birthPlaceProperty = context.ontology.properties("birthPlace")
@@ -79,13 +81,13 @@ extends Extractor
                             if (nameParts.size == 2)
                             {
                                 val reversedName = nameParts(1).trim + " " + nameParts(0).trim
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("xsd:string"))
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("xsd:string"))
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("rdf:langString"))
                             }
                             else
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("rdf:langString"))
                             }
                             quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceUri)
                             nameFound = true
@@ -110,7 +112,7 @@ extends Extractor
                         {
                             for(value <- StringParser.parse(property))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("rdf:langString"))
                             }
                         }
                         case key if key == birthDate =>
@@ -161,6 +163,10 @@ extends Extractor
             return Some((date.toString, date.datatype))
         }
         for (date <- monthDayParser.parse(node))
+        {
+            return Some((date.toString, date.datatype))
+        }
+        for (date <- yearParser.parse(node))
         {
             return Some((date.toString, date.datatype))
         }

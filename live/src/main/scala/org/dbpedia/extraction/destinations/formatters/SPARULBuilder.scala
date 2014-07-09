@@ -64,9 +64,14 @@ class SPARULBuilder (policies: Array[Policy] = null)
 
   /*
   * IRI_REF 	  ::=   	'<' ([^<>"{}|^`\]-[#x00-#x20])* '>'
+  * 
+  * TODO: This is probably unnecessary. If the URI contains an illegal character from the list
+  * above, parseUri already returned a "BAD URI" string. When that happens, the line is
+  * commented out and it doesn't matter anymore if there are any invalid characters in the URI.
   * */
   private def escapeUri(input: String) : SPARULBuilder = {
 
+    // FIXME: this should probably include square brackets - the regex in IRI_REF is confusing.
     val strip = "<>\"{}|^`\\"
 
     var index = 0

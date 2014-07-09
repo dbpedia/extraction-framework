@@ -3,6 +3,7 @@ package org.dbpedia.extraction.util
 import javax.xml.namespace.QName
 import javax.xml.stream.events.{StartDocument,StartElement}
 import javax.xml.stream.{XMLEventReader}
+import scala.language.implicitConversions
 
 /**
  * Wraps an XMLEventReader in a fluent API.
@@ -91,7 +92,7 @@ class XMLEventAnalyzer(private val xmlIn : XMLEventReader) {
         }
       }
     } while (found)
-    go(sb toString)
+    go(sb.toString)
   }
   
 }

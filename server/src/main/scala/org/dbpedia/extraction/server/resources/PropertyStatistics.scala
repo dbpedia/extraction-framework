@@ -6,6 +6,7 @@ import collection.immutable.ListMap
 import scala.collection.mutable
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.util.WikiUtil.{wikiDecode,wikiEncode}
 import org.dbpedia.extraction.server.stats.MappingStats
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.io.{FileNotFoundException, File}
@@ -17,8 +18,11 @@ import java.io.{FileNotFoundException, File}
  * some cases we have to use %20.
  */
 @Path("/templatestatistics/{lang}/")
-class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("template") template: String, @QueryParam("p") password: String)
+class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("template") var template: String, @QueryParam("p") password: String)
 {
+    // get canonical template name
+    template = wikiDecode(template)
+    
     private val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
 
     if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language "+langCode+" not defined in server"), 404)
@@ -27,19 +31,17 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
 
     private val manager = Server.instance.managers(language)
 
-    private val mappedColor = "#65c673"
-    private val notMappedColor = "#e05d57"
-    private val ignoreColor = "#b0b0b0"
-    private val notDefinedColor = "#FFF8C6"
-
-    private def wikiDecode(name: String) : String = WikiUtil.wikiDecode(name)
+    private val mappedSuccessClass = "success"
+    private val mappedDangerClass ="danger"
+    private val ignoreEmptyClass = ""
+    private val notDefinedInfoClass = "info"
 
     private def passwordQuery : String = if (Server.instance.adminRights(password)) "?p="+password else ""
 
     @GET
     @Produces(Array("application/xhtml+xml"))
     def get = {
-        val ms = getMappingStats(wikiDecode(template))
+        val ms = getMappingStats(template)
         val sortedProps = ms.properties.toList.sortBy{ case (name, (count, mapped)) => (- count, name) }
 
         val percentageMapped: String = "%2.2f".format(ms.mappedPropertyRatio * 100)
@@ -47,11 +49,9 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
         Server.logger.fine("ratioTemp: " + percentageMapped)
         Server.logger.fine("ratioTempUses: " + percentageMappedUse)
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        </head>
+          {ServerHeader.getHeader(s"Statistics for template $template",true)}
         <body>
-            <h2 align="center">Template Statistics  for <a href={mappingUrlPrefix + template}>{wikiDecode(template)}</a></h2>
+            <h2 align="center">Statistics for template <a href={language.baseUri + "/wiki/" + manager.templateNamespace + wikiEncode(template)}>{template}</a> and its <a href={mappingUrlPrefix + wikiEncode(template)}>DBpedia mapping</a></h2>
             <p align="center">
                 {percentageMapped}
                 % properties are mapped (
@@ -68,42 +68,45 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 of
                 {ms.propertyUseCount}
                 ).</p>
-            <table align="center">
+            <table class="table table-condensed" style="width:500px; margin:auto">
             <caption>The color codes:</caption>
             <tr>
-                <td bgcolor={mappedColor}>property is mapped</td>
+                <td class={mappedSuccessClass}>property is mapped</td>
             </tr>
             <tr>
-                <td bgcolor={notMappedColor}>property is not mapped</td>
+                <td class={mappedDangerClass}>property is not mapped</td>
             </tr>
             <tr>
-                <td bgcolor={notDefinedColor}>property is mapped but not found in the template definition</td>
+                <td class={notDefinedInfoClass}>property is mapped but not found in the template definition</td>
             </tr>
             <tr>
-                <td bgcolor={ignoreColor}>property is ignored</td>
+                <td class={ignoreEmptyClass}>property is ignored</td>
             </tr>
             </table>
-            <table align="center">
+           <table class="tablesorter table myTable table-condensed" style="width:500px; margin:auto;margin-top:10px">
+             <thead>
                 <tr>
-                    <td>occurrences</td> <td>property</td>
+                    <th>occurrences</th> <th>property</th>
                 </tr>
+             </thead>
+             <tbody>
                 {
             for ((name, (count, mapped)) <- sortedProps) yield
             {
-                var bgcolor: String = ""
+                var backgroundClass: String = ""
                 if (mapped)
                 {
-                    bgcolor = mappedColor
+                    backgroundClass = mappedSuccessClass
                 }
                 else
                 {
-                    bgcolor = notMappedColor
+                    backgroundClass = mappedDangerClass
                 }
 
                 var counter = ""
                 if (count == MappingStats.InvalidTarget)
                 {
-                    bgcolor = notDefinedColor
+                    backgroundClass = notDefinedInfoClass
                     counter = "na"
                 }
                 else counter = count.toString
@@ -114,10 +117,10 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                 {
                     isIgnored = true
                     ignoreMsg = "remove from ignore list"
-                    bgcolor = ignoreColor
+                    backgroundClass = ignoreEmptyClass
                 }
 
-                <tr bgcolor={bgcolor}>
+                <tr class={backgroundClass}>
                         <td align="right">
                         <a name={urlEncode(name)}/>
                             {counter}
@@ -135,6 +138,7 @@ class PropertyStatistics(@PathParam("lang") langCode: String, @QueryParam("templ
                     </tr>
             }
             }
+             </tbody>
             </table>
         </body>
         </html>

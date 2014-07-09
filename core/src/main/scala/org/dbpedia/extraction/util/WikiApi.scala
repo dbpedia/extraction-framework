@@ -3,6 +3,7 @@ package org.dbpedia.extraction.util
 import java.util.logging.Logger
 import java.io.IOException
 import scala.xml.{XML, Elem}
+import scala.language.postfixOps
 import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import org.dbpedia.extraction.sources.WikiPage
 import java.net.{URLEncoder, URL}
@@ -52,7 +53,7 @@ class WikiApi(url: URL, language: Language)
         // -> "generator" instead of "list" and "gapnamespace" instead of "apnamespace" ("gap" is for "generator all pages")
  
         //Retrieve list of pages
-        val response = query("?action=query&format=xml&list=allpages&apfrom=" + fromPage + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
+        val response = query("?action=query&format=xml&list=allpages&apfrom=" + URLEncoder.encode(fromPage, "UTF-8") + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
 
         //Extract page ids
         val pageIds = for(p <- response \ "query" \ "allpages" \ "p") yield (p \ "@pageid").head.text.toLong
@@ -110,7 +111,7 @@ class WikiApi(url: URL, language: Language)
     /**
      * Retrieves multiple pages by their title.
      *
-     * @param pageIds The titles of the pages to be downloaded.
+     * @param titles The titles of the pages to be downloaded.
      */
     def retrievePagesByTitle[U](titles : Iterable[WikiTitle]) = new Traversable[WikiPage]
     {
@@ -118,7 +119,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(titleGroup <- titles.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(_.encodedWithNamespace).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(formatWikiTitle).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }
@@ -126,34 +127,41 @@ class WikiApi(url: URL, language: Language)
     
     def processPages[U](response : Elem, proc : WikiPage => U) : Unit =
     {
-        for(page <- response \ "query" \ "pages" \ "page";
-            rev <- page \ "revisions" \ "rev" )
-        {
-            // "userid" is not supported on older mediawiki versions and the Mapping mediawiki does not support it yet
-            // TODO: update mapping mediawiki and assign name & id directly
-            val _contributorID = (rev \ "@userid")
-            val _contributorName = (rev \ "@user")
+      for(page <- response \ "query" \ "pages" \ "page";
+          rev <- page \ "revisions" \ "rev" )
+      {
+        // "userid" is not supported on older mediawiki versions and the Mapping mediawiki does not support it yet
+        // TODO: update mapping mediawiki and assign name & id directly
+        val _contributorID = (rev \ "@userid")
+        val _contributorName = (rev \ "@user")
+        val _format = (rev \ "@contentformat")
 
-            proc( new WikiPage( title        = WikiTitle.parse((page \ "@title").head.text, language),
-                             redirect        = null, // TODO: read redirect from XML
-                             id              = (page \ "@pageid").head.text,
-                             revision        = (rev \ "@revid").head.text,
-                             timestamp       = (rev \ "@timestamp").head.text,
-                             contributorID   = if (_contributorID == null || _contributorID.length != 1) "0" else _contributorID.head.text,
-                             contributorName = if (_contributorName == null || _contributorName.length != 1) "" else _contributorName.head.text,
-                             source          = rev.text ) )
-        }
+        proc(
+          new WikiPage(
+            title           = WikiTitle.parse((page \ "@title").head.text, language),
+            redirect        = null, // TODO: read redirect from XML
+            id              = (page \ "@pageid").head.text,
+            revision        = (rev \ "@revid").head.text,
+            timestamp       = (rev \ "@timestamp").head.text,
+            contributorID   = if (_contributorID == null || _contributorID.length != 1) "0" else _contributorID.head.text,
+            contributorName = if (_contributorName == null || _contributorName.length != 1) "" else _contributorName.head.text,
+            source          = rev.text,
+            format          = if (_format == null || _format.length != 1) "" else _format.head.text
+          )
+        )
+      }
     }
 
     /**
      * Retrieves a list of pages which use a given template.
      *
      * @param title The title of the template
+     * @param namespace The namespace to search within
      * @param maxCount The maximum number of pages to retrieve
      */
-    def retrieveTemplateUsages(title : WikiTitle, maxCount : Int = 500) : Seq[WikiTitle] =
+    def retrieveTemplateUsages(title : WikiTitle, namespace: Namespace = Namespace.Main, maxCount : Int = 500) : Seq[WikiTitle] =
     {
-        val response = query("?action=query&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace + "&einamespace=0&eifilterredir=nonredirects&eilimit=" + maxCount)
+        val response = query("?action=query&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace + "&einamespace=" + namespace.code + "&eifilterredir=nonredirects&eilimit=" + maxCount)
 
         for(page <- response \ "query" \ "embeddedin" \ "ei";
             title <- page \ "@title" )
@@ -235,5 +243,15 @@ class WikiApi(url: URL, language: Language)
         }
 
         throw new IllegalStateException("Should never get there")
+    }
+
+  /**
+   * Formats {@param title} to be used with MediaWiki API
+   *
+   * @param title
+   * @return
+   */
+    private def formatWikiTitle(title: WikiTitle) : String = {
+        URLEncoder.encode(title.decodedWithNamespace.replace(' ', '_'), "UTF-8")
     }
 }

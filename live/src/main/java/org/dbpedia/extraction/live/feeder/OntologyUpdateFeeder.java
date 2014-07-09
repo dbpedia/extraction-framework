@@ -46,7 +46,7 @@ public class OntologyUpdateFeeder extends Thread {
 
     public static void main(String[] args)
             throws Exception {
-        PropertyConfigurator.configure("log4j.properties");
+        PropertyConfigurator.configure("log4j.ontology.properties");
 
         Ini ini = new Ini(new File("cfg/mappings.dbpedia.org/config.ini"));
 

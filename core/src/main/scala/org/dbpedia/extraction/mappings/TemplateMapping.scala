@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyPropert
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.{Buffer,ArrayBuffer}
 import org.dbpedia.extraction.wikiparser.AnnotationKey
+import scala.language.reflectiveCalls
 
 class TemplateMapping( 
   mapToClass : OntologyClass,
@@ -17,7 +18,7 @@ class TemplateMapping(
     def language : Language 
   }  
 ) 
-extends Mapping[TemplateNode]
+extends Extractor[TemplateNode]
 {
     override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
 

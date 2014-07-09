@@ -36,7 +36,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
         vsep = '&' // for future additions below
       }
       
-      sb toString
+      sb.toString
     }
       
     @GET

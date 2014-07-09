@@ -2,7 +2,12 @@
 for file in $(find -name '*.gz' | sort) ; do echo $file ; gzip -d <$file | bzip2 -c >${file/%.gz/.bz2} ; done &>compress.log &
 
 # pbzip2 is much faster with multiple cores / CPUs
-for file in $(find -name '*.gz' | sort) ; do echo $file ; gzip -d <$file | pbzip2 -c >${file/%.gz/.bz2} ; fi ; done &>compress.log &
+for file in $(find -name '*.gz' | sort) ; do echo $file ; gzip -d <$file | pbzip2 -c >${file/%.gz/.bz2} ; done &>compress.log &
+
+# copy (and re-compress) all files listed in files.txt from .gz to .bz2 files on a separate partition
+# in background process, write log output to log file, including timestamps
+# pigz may be faster than gzip even for decompression. pbzip2 is much faster with multiple cores / CPUs.
+( date ; for f in $(cat files.txt) ; do echo $f ; pigz -d </data/dbpedia-release/3.9/$f.gz | pbzip2 -c >/data2/dbpedia-release/3.9/$f.bz2 ; date ; done ) &> files.log &
 
 # Don't overwrite existing non-empty .bz2 files.
 for file in $(find -name '*.gz' | sort) ; do copy=${file/%.gz/.bz2} ; if [[ ! -s $copy ]] ; then echo $file ; gzip -d <$file | pbzip2 -c >$copy ; fi ; done &>compress.log &
@@ -31,6 +36,8 @@ sort -s -k 2,2 enwiki-20120601-infobox-properties.ttl >enwiki-20120601-infobox-p
 # 29 is the length of the string '<http://dbpedia.org/property/'
 # 50 is an arbitrary cutoff to avoid overly long file names
 awk '{if ($1 != "#") { if ($2 != last) {last = $2; close(file); counter++; len = length($2) - 29; if (len > 50) len = 50; name = substr($2, 29, len); gsub(/\//, "", name); file = "split-by-property/" sprintf("%.6d", counter) "-" name ".ttl" } print >> file } }' enwiki-20120601-infobox-properties.sorted.ttl
+# split by property, use part after last slash as property name. no special handling of comment lines.
+awk '{ if ($2 != last) {last = $2; close(file); count = split(substr($2, 2, length($2) - 2), parts, "/"); file = parts[count]".ttl" } print >> file }' xyz.ttl
 
 # delete all but the latest directory for each language and print how many GB were freed / kept
 # assumes that the shell sorts the result of */* alphabetically
@@ -42,38 +49,111 @@ du -B 1 -s */* | awk '{split($2, arr, "/"); if (arr[2] != "index.html") { if (na
 # for all .gz files, print packed size in bytes, lines, unpacked size in bytes, store in packed-lines-bytes.gz.txt
 for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done >packed-lines-bytes.gz.txt
 # for all .gz files, print name without leading './' and trailing '.gz', print lines, bytes, gzip size, store in lines-bytes-packed.txt
-for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done | awk '{sub(/^\.\//, "", $1); sub(/.gz$/, "", $1); print $1 " lines:" $3 " bytes:" $4 " gzip:" $2}' >lines-bytes-packed.txt
+for file in $(find -name '*.gz' | sort) ; do stat --printf='%n %s ' $file ; gzip -d <$file | wc -cl ; done | awk '{sub(/^\.\//, "", $1); sub(/.gz$/, "", $1); print $1" lines: "$3" bytes: "$4" gzip: "$2}' >lines-bytes-packed.txt
+# Mac: for all .nt files, print name, lines, and size of .nt, .nt.gz, .nt.bz2 files
+for i in *.nt ; do stat -n -f '%z' $i ; stat -n -f ' %z' $i.gz ; stat -n -f ' %z' $i.bz2 ; wc -l $i ; done | awk '{print $5" lines: "$4" bytes: "$1" gzip: "$2" bzip2: "$3}'
+# same for Linux
+for i in *.nt ; do stat --printf '%s' $i ; stat --printf ' %s' $i.gz ; stat --printf ' %s ' $i.bz2 ; wc -l $i ; done | awk '{print $5" lines: "$4" bytes: "$1" gzip: "$2" bzip2: "$3}'
 
 # rename all files for which a -redirected dataset now exists to -unredirected
 find -mindepth 3 -type f | grep -E '(disambiguations|infobox-properties|mappingbased-properties|page-links|persondata|topical-concepts)' | grep -v -E '(specific-mappingbased|redirected)' | awk '{new=$0; sub(/\.\//, "", new); sub(/\./, "-unredirected.", new); system("echo mv " $0 " " new)}'
 
+# remove "-redirected" from all file names; use --interactive to ask before an existing file is overwritten  
+for i in */*/*-redirected* ; do mv --interactive  $i ${i/-redirected/}; done
+
 # create symbolic links for all *.bz2 files from old directory and name structure to new one
-find /home/release/wikipedia -maxdepth 3 -name '*.bz2' | grep -v -E '(ontology.owl|pages-articles.xml)' | env LC_ALL=C sort | while read path ; do file=${path##*/} ; lang=${file%%wiki*} ; tail=${file#*-*-} ; name=${tail%%.*} ; suffix=${tail#*.} ; echo $path ; ln -s $path 3.8/$lang/${name//-/_}_$lang.$suffix ; done
+find /home/release/wikipedia -maxdepth 3 -name '*.bz2' | grep -v -E 'ontology.owl|pages-articles.xml' | env LC_ALL=C sort | while read path ; do file=${path##*/} ; lang=${file%%wiki-*} ; tail=${file#*-*-} ; name=${tail%%.*} ; suffix=${tail#*.} ; echo $path ; ln -s $path 3.8/$lang/${name//-/_}_$lang.$suffix ; done
+
+# in lines-bytes-packed.txt, convert xxwiki/19871231/xxwiki-19871231-yyy.nt paths to xx/yyy_xx.nt paths  
+cat lines-bytes-packed.txt | while read line ; do path=${line%% *} ; rest=${line#* } ; file=${path##*/} ; lang=${file%%wiki-*} ; tail=${file#*-*-} ; name=${tail%%.*} ; suffix=${tail#*.} ; echo $lang/${name//-/_}_$lang.$suffix $rest ; done >lines-bytes-packed.dl.txt
 
 # generate wiki syntax for page like http://wiki.dbpedia.org/DumpDatesDBpedia38
 find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/, "", $2); print "||" $2 "|" substr($3,1,4) "-" substr($3,5,2) "-" substr($3,7,2) "||"}'
 
-# count number of same-as links in Wikipedia article namespace from English to other extracted languages. Result in 3.8: 10524022
-gzip -d < enwiki/20120601/enwiki-20120601-interlanguage-links-same-as.ttl.gz | grep -v -E 'resource/(Category|Template):' | wc -l
+# count number of same-as links in Wikipedia article namespace from English to other extracted languages. Result in 3.9: 16802429
+gzip -d < enwiki-20130403-interlanguage-links.ttl.gz | grep -v -E 'resource/(Category|Template):' | wc -l
 
-# count number of abstracts, i.e. non-redirect, non-disambig pages in Wikipedia article namespace, in all extracted languages. Result in 3.8: 20805392
-grep 'short-abstracts\.ttl' lines-bytes-packed.txt | awk '{s+=$3} END {print s}'
+# count number of abstracts, i.e. non-redirect, non-disambig pages in Wikipedia article namespace, in all extracted languages. Result in 3.9: 24895769
+grep 'short_abstracts\w*\.ttl' lines-bytes-packed.txt | grep -v 'en_uris' | awk '{s+=$3} END {print s}'
 
 # count mappings (per language and total)
 grep -c '<page>' mappings/Mapping_* | sed 's/[_:.]/ /g' | sort -k 4 -n -r | awk '{s+=$4; print $2 " " $4} END {print "total " s}'
 
 # ontology: count classes
-grep -c '<owl:Class' dbpedia_3.* 
+grep -c '<owl:Class' ontology.owl 
 
 # ontology: count object properties 
-grep -c '<owl:ObjectProperty' dbpedia_3.*
+grep -c '<owl:ObjectProperty' ontology.owl
 
 # ontology: count datatype properties, not specialized 
-grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' dbpedia_3.*
-
-# ontology: count datatype properties, not specialized 
-grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' dbpedia_3.*
+grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' ontology.owl
 
 # ontology: count specialized datatype properties
-grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+">' dbpedia_3.*
+grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+">' ontology.owl
 
+# remove all lines in file bad.nt from file all.nt, write result to clean.nt
+awk '{ if (f==1) { r[$0] } else if (! ($0 in r)) { print $0 } }' f=1 bad.nt f=2 all.nt >clean.nt
+# remove all triples in file bad.nt from quad file all.nq
+awk '{ if (f==1) { r[$0] } else { quad = $0; NF -= 2; triple = $0" ." ; if (! (triple in r)) { print quad } } }' f=1 bad.nt f=2 all.nq >clean.nq
+# remove Windows line breaks first, awk looks only for \n. '\015' is octal for '\d', but is more portable:
+tr -d '\015' bad.nt >bad-unix.nt
+# remove duplicate bad triples
+sort -u bad-unix.nt >bad-sorted.nt
+
+# temporarily open port 8880 for incoming TCP. rule disappears on restart. 
+sudo iptables -I INPUT -i eth0 -p tcp --dport 8880 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# check that all links from the download page to the download server are correct
+wget --background --spider --recursive --level 1 --domains=downloads.dbpedia.org --span-hosts http://wiki.dbpedia.org/Downloads39
+
+# Try to decode URIs: 
+# sed replaces non-ASCII-escaping '%' by '\x', "read -r" ignores backslash, "echo -e" converts '\xHH' to byte
+# Notes:
+# - only works when the shell uses UTF-8
+# - you should check that only valid escaped ASCII chars occur in the file: %25 %22 %3F %5C %5E %60
+# - the others are invalid in Wikipedia titles: %23 %3C %3E %5B %5D %7B %7C %7D 
+# - may fail for other reasons, depending on file content, shell settings, etc.
+sed -r 's/%([89ABCDEF])/\\x\1/g' abc.nt | while read -r line ; do echo -e $line ; done > abc.ttl
+
+
+# generate page in/out link counts
+
+# At almost 500 chars, these stretch the limits of 'one-liners'. Maybe this should be done in a Scala script, but I (JC) was too lazy.
+# Sorting and joining is probably not the most efficient way to remove certain lines, but the easiest way I found for a pure bash approach.
+
+# Explanation of the scripts:
+# The <(...) syntax is process substition and lets us join the result of processing two files without handling temporary files.
+# The outer loop just goes through all the files in page-links.txt and writes a log file. LC_ALL=C is important for sort and uniq.
+# For each file, we unzip it, drop comment lines, drop all fields but the URI the link is to/from, and sort them by name;
+# uniq -c prints the counts like " 25 <http://.../Foo>", awk switches the fields to "<http://.../Foo> 25"
+# We only count in-links to existing pages and we don't count out-links from redirect pages.
+# To do that, we unzip the labels/redirects file, drop comment lines, drop all fields but the subject URI, and sort them by name.
+# Because both lists are sorted, we can now use join to keep only the lines we want:
+# * for in-links, join keeps all existing pages (the ones that occur in the labels file)
+# * for out-links, join -v 1 drops all redirect pages (the ones that occur in the redirects file)
+# Then we sort by descending link count - triple stores won't care, but humans reading the files will. '-s' means stable sort - titles with the same link count remain sorted alphabetically. 
+# Finally, we generate Turtle/NT format and write the result to a new zip file.
+
+# At first, I counted all links, but the results were misleading or ugly. Here's a short explanation why I decided to use only certain links:
+# For in-link count:
+# * to non-existent pages: no! There would be too many silly page names with in-link count 1.
+# * from redirect pages: might just leave them in. no big deal. number of redirect source names will be roughly proportional to importance of page, so that's probably ok
+# * to redirect pages: already resolved
+# * from disambig pages: ok, never mind
+# * to disambig pages: ok
+# For out-link count:
+# * to non-existent pages: ok
+# * from redirect pages: no! There would be too many pages with out-link count 1.
+# * to redirect pages: already resolved
+# * from disambig pages: ok, never mind
+# * to disambig pages: ok, never mind
+
+# first, list all page-links files
+ls -1 */*/*-page-links*.{nt,ttl}.gz | grep -v -E 'en-uris|unredirected' > page-links.txt
+
+# generate in-link counts
+( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i; join <(gzip -d < $i | grep -v '^#' | cut -d ' ' -f 3 | sort | uniq -c | awk '{print $2" "$1}') <(gzip -d < ${i/page-links/labels} | grep -v '^#' | cut -d ' ' -f 1 | sort) | sort -k 2,2 -n -s -r | awk '{print $1" <http://dbpedia.org/ontology/wikiPageInLinkCount> \""$2"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-in-link-counts} ; done &> page-in-link-counts.log & )
+
+# generate out-link count
+# (the first sort is not really necessary - our triples are already grouped by subject, and grouping is enough for uniq - but it's nicer that the in-link and out-link counts are sorted similarly)
+( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i ; join -v 1 <(gzip -d < $i | grep -v '^#' | cut -d ' ' -f 1 | sort | uniq -c | awk '{print $2" "$1}') <(gzip -d < ${i/page-links/redirects} | grep -v '^#' | cut -d ' ' -f 1 | sort) | sort -k 2,2 -n -s -r | awk '{print $1" <http://dbpedia.org/ontology/wikiPageOutLinkCount> \""$2"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-out-link-counts} ; done &> page-out-link-counts.log & )

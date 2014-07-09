@@ -7,6 +7,7 @@ package org.dbpedia.extraction.live.publisher;
  * This class writes the triples to a file, for live synchronization, it is originally developed by Claus Stadler
  */
 
+// TODO: use java.util.zip.GZIPOutputStream instead, get rid of this dependency
 import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
 import org.apache.log4j.Logger;
 

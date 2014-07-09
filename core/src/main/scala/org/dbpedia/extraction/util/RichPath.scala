@@ -5,6 +5,7 @@ import java.nio.file.{Path,Paths,Files,SimpleFileVisitor,FileVisitResult}
 import java.nio.file.StandardOpenOption.{CREATE,APPEND}
 import java.nio.file.attribute.BasicFileAttributes
 import scala.collection.JavaConversions.iterableAsScalaIterable
+import scala.language.implicitConversions
 import RichPath._
 
 
@@ -82,7 +83,9 @@ class RichPath(path: Path) extends FileLike[Path] {
     val stream = Files.newDirectoryStream(path, glob)
     try stream.toList finally stream.close
   }
-  
+
+  override def size: Long = Files.size(path)
+
   override def isFile: Boolean = Files.isRegularFile(path)
   
   override def isDirectory: Boolean = Files.isDirectory(path)

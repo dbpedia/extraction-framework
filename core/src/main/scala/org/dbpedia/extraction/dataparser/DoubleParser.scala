@@ -4,6 +4,8 @@ import java.util.logging.{Logger,Level}
 import org.dbpedia.extraction.wikiparser.Node
 import java.text.ParseException
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import scala.language.reflectiveCalls
 
 /**
  * Parses double-precision floating-point numbers.
@@ -17,7 +19,11 @@ class DoubleParser( context : { def language : Language },
 
     private val logger = Logger.getLogger(getClass.getName)
 
-    override val splitPropertyNodeRegex = """<br\s*\/?>|\n| and | or |;"""  //TODO this split regex might not be complete
+    private val language = context.language.wikiCode
+
+    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexDouble.contains(language))
+                                            DataParserConfig.splitPropertyNodeRegexDouble.get(language).get
+                                          else DataParserConfig.splitPropertyNodeRegexDouble.get("en").get
 
     // we allow digits, minus, comma, dot and space in numbers
     private val DoubleRegex  = """\D*?(-?[0-9-,. ]+).*""".r

@@ -3,10 +3,8 @@ package org.dbpedia.extraction.ontology.io
 import org.dbpedia.extraction.ontology._
 import datatypes.{DimensionDatatype, UnitDatatype}
 
-class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
+class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolean = true)
 {
-
-    private val Version = "3.8";
 
     private val EXPORT_EXTERNAL = false  // export owl, foaf, rdf, rdfs etc.
     
@@ -18,10 +16,11 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
             xmlns:owl="http://www.w3.org/2002/07/owl#"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+            xmlns:prov="http://www.w3.org/ns/prov#">
 
         <owl:Ontology rdf:about="">
-          <owl:versionInfo xml:lang="en">{"Version " + Version}</owl:versionInfo>
+          <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
         </owl:Ontology>
         {
             //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
@@ -76,6 +75,17 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
             xml += <owl:equivalentClass rdf:resource={equivalentClass.uri}/>
         }
 
+        //disjointWith classes
+        for(disjointWithClass <- ontologyClass.disjointWithClasses)
+        {
+          xml += <owl:disjointWith rdf:resource={disjointWithClass.uri}/>
+        }
+
+        { //provenance
+          xml += <rdf:type rdf:resource={"http://www.w3.org/ns/prov#Entity"}/>
+          xml += <prov:wasDerivedFrom rdf:resource={"http://mappings.dbpedia.org/index.php/OntologyClass:" + ontologyClass.name}/>
+        }
+
         <owl:Class rdf:about={ontologyClass.uri}>
         {xml}
         </owl:Class>
@@ -85,7 +95,8 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
     {
         val xml = new scala.xml.NodeBuffer()
 
-        //Type
+        //Type  (add rdf:Property as well, we already do it for the class instances)
+        xml += <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property" />
         if (property.isFunctional)
         {
              xml += <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty" />
@@ -149,6 +160,11 @@ class OntologyOWLWriter(writeSpecificProperties : Boolean = true)
         for(prop <- property.equivalentProperties)
         {
             xml += <owl:equivalentProperty rdf:resource={prop.uri} />
+        }
+
+        { //provenance
+          xml += <rdf:type rdf:resource={"http://www.w3.org/ns/prov#Entity"}/>
+          xml += <prov:wasDerivedFrom rdf:resource={"http://mappings.dbpedia.org/index.php/OntologyProperty:" + property.name}/>
         }
 
         //Return xml

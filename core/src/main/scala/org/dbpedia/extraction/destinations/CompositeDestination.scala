@@ -17,7 +17,7 @@ class CompositeDestination(destinations : Destination *) extends Destination
     /**
      * Writes quads to all child destinations.
      */
-    override def write(graph : Seq[Quad]) = destinations.foreach(_.write(graph))
+    override def write(graph : Traversable[Quad]) = destinations.foreach(_.write(graph))
 
     /**
      * Closes all child destinations.

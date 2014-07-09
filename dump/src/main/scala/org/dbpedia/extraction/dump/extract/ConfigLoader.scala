@@ -3,26 +3,30 @@ package org.dbpedia.extraction.dump.extract
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
-import org.dbpedia.extraction.wikiparser.{Namespace,PageNode,WikiParser}
+import org.dbpedia.extraction.sources.{WikiPage, XMLSource, WikiSource, Source}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dump.download.Download
-import org.dbpedia.extraction.util.{Language,Finder}
+import org.dbpedia.extraction.util.{Language, Finder, ExtractorUtils}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
 import java.io._
 import java.net.URL
-import org.apache.commons.compress.compressors.bzip2._
-import java.util.zip._
 import scala.io.Codec.UTF8
+import java.util.logging.Logger
+import org.dbpedia.extraction.util.IOUtils
 
 /**
  * Loads the dump extraction configuration.
  * 
  * TODO: clean up. The relations between the objects, classes and methods have become a bit chaotic.
  * There is no clean separation of concerns.
+ * 
+ * TODO: get rid of all config file parsers, use Spring
  */
 class ConfigLoader(config: Config)
 {
+    private val logger = Logger.getLogger(classOf[ConfigLoader].getName)
+
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
      *
@@ -33,15 +37,13 @@ class ConfigLoader(config: Config)
     {
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
-      config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2, parser))
+      config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2))
     }
-    
-    private val parser = WikiParser.getInstance(config.parser)
     
     /**
      * Creates ab extraction job for a specific language.
      */
-    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: Extractor]], parser : WikiParser) : ExtractionJob =
+    private def createExtractionJob(lang : Language, extractorClasses: Seq[Class[_ <: Extractor[_]]]) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
@@ -63,17 +65,17 @@ class ConfigLoader(config: Config)
                 if (config.mappingsDir != null && config.mappingsDir.isDirectory)
                 {
                     val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-                    XMLSource.fromFile(file, Language.Mappings).map(parser)
+                    XMLSource.fromFile(file, Language.Mappings)
                 }
                 else
                 {
                     val namespaces = Set(namespace)
                     val url = new URL(Language.Mappings.apiUri)
-                    WikiSource.fromNamespaces(namespaces,url,Language.Mappings).map(parser)
+                    WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
                 }
             }
             
-            def mappingPageSource : Traversable[PageNode] = _mappingPageSource
+            def mappingPageSource : Traversable[WikiPage] = _mappingPageSource
     
             private lazy val _mappings =
             {
@@ -83,9 +85,12 @@ class ConfigLoader(config: Config)
     
             private val _articlesSource =
             {
-                XMLSource.fromReader(reader(finder.file(date, config.source)), language,                    
+              val articlesReaders = readers(config.source, finder, date)
+
+              XMLSource.fromReaders(articlesReaders, language,
                     title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
-                             title.namespace == Namespace.Category || title.namespace == Namespace.Template)
+                             title.namespace == Namespace.Category || title.namespace == Namespace.Template ||
+                             ExtractorUtils.titleContainsCommonsMetadata(title))
             }
             
             def articlesSource = _articlesSource
@@ -97,72 +102,71 @@ class ConfigLoader(config: Config)
             }
             
             def redirects : Redirects = _redirects
+
+            private val _disambiguations =
+            {
+              val cache = finder.file(date, "disambiguations-ids.obj")
+              try {
+                Disambiguations.load(reader(finder.file(date, config.disambiguations)), cache, language)
+              } catch {
+                case ex: Exception =>
+                  logger.info("Could not load disambiguations - error: " + ex.getMessage)
+                  null
+              }
+            }
+
+            def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
         }
 
         //Extractors
-        val extractor = CompositeExtractor.load(extractorClasses, context)
+        val extractor = CompositeParseExtractor.load(extractorClasses, context)
         val datasets = extractor.datasets
         
-        var formats = new ArrayBuffer[Destination]()
+        val formatDestinations = new ArrayBuffer[Destination]()
         for ((suffix, format) <- config.formats) {
           
-          val destinations = new HashMap[String, Destination]()
+          val datasetDestinations = new HashMap[String, Destination]()
           for (dataset <- datasets) {
             val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix)
-            destinations(dataset.name) = new WriterDestination(writer(file), format)
+            datasetDestinations(dataset.name) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
           }
           
-          formats += new DatasetDestination(destinations)
+          formatDestinations += new DatasetDestination(datasetDestinations)
         }
         
-        var destination: Destination = new CompositeDestination(formats.toSeq: _*)
-        destination = new MarkerDestination(destination, finder.file(date, Extraction.Complete), false)
+        val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete), false)
         
         val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
-        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description, parser)
+
+        val extractionJobNS = if(lang == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
+
+        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, extractionJobNS, destination, lang.wikiCode, description)
     }
     
     private def writer(file: File): () => Writer = {
-      val zip = zipper(file.getName)
-      () => new OutputStreamWriter(zip(new FileOutputStream(file)), UTF8)
+      () => IOUtils.writer(file)
     }
 
     private def reader(file: File): () => Reader = {
-      val unzip = unzipper(file.getName)
-      () => new InputStreamReader(unzip(new FileInputStream(file)), UTF8)
+      () => IOUtils.reader(file)
     }
 
-    /**
-     * @return stream zipper function
-     */
-    private def zipper(name: String): OutputStream => OutputStream = {
-      zippers.getOrElse(suffix(name), identity)
+    private def readers(source: String, finder: Finder[File], date: String): List[() => Reader] = {
+
+      files(source, finder, date).map(reader(_))
     }
-    
-    /**
-     * @return stream zipper function
-     */
-    private def unzipper(name: String): InputStream => InputStream = {
-      unzippers.getOrElse(suffix(name), identity)
+
+    private def files(source: String, finder: Finder[File], date: String): List[File] = {
+
+      val files = if (source.startsWith("@")) { // the articles source is a regex - we want to match multiple files
+        finder.matchFiles(date, source.substring(1))
+      } else List(finder.file(date, source))
+
+      logger.info(s"Source is ${source} - ${files.size} file(s) matched")
+
+      files
     }
-    
-    /**
-     * @return file suffix
-     */
-    private def suffix(name: String): String = {
-      name.substring(name.lastIndexOf('.') + 1)
-    }
-    
-    private val zippers = Map[String, OutputStream => OutputStream] (
-      "gz" -> { new GZIPOutputStream(_) }, 
-      "bz2" -> { new BZip2CompressorOutputStream(_) } 
-    )
-    
-    private val unzippers = Map[String, InputStream => InputStream] (
-      "gz" -> { new GZIPInputStream(_) }, 
-      "bz2" -> { new BZip2CompressorInputStream(_, true) } 
-    )
-    
+
     //language-independent val
     private lazy val _ontology =
     {
@@ -186,13 +190,14 @@ class ConfigLoader(config: Config)
     {
       val finder = new Finder[File](config.dumpDir, Language("commons"), config.wikiName)
       val date = latestDate(finder)
-      val file = finder.file(date, config.source)
-      XMLSource.fromReader(reader(file), Language.Commons, _.namespace == Namespace.File)
+      XMLSource.fromReaders(readers(config.source, finder, date), Language.Commons, _.namespace == Namespace.File)
     }
-    
+
     private def latestDate(finder: Finder[_]): String = {
-      val fileName = if (config.requireComplete) Download.Complete else config.source
-      finder.dates(fileName).last
+      val isSourceRegex = config.source.startsWith("@")
+      val source = if (isSourceRegex) config.source.substring(1) else config.source
+      val fileName = if (config.requireComplete) Download.Complete else source
+      finder.dates(fileName, isSuffixRegex = isSourceRegex).last
     }
 }
 

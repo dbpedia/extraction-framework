@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Shortcut for 
+# mvn -f ../pom.xml install && mvn scala:run -Dlauncher=... -DaddArgs=...
+# Must be called with one of the modules (core/, dump/, ...) as current directory.
+# Example:
+# extraction_framework/core> ../install-run LAUNCHER ARG1 ARG2 ARG3
+# is equivalent to
+# extraction_framework/core> mvn -f ../pom.xml install && mvn scala:run "-Dlauncher=LAUNCHER" "-DaddArgs=ARG1|ARG2|ARG3"
+
+# if we're not on a terminal, use batch mode to avoid ugly log files
+[ ! -t 1 ] && BATCH="-B"
+mvn $BATCH -f ../pom.xml install && . ../run "$@"

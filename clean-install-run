@@ -10,4 +10,4 @@
 
 # if we're not on a terminal, use batch mode to avoid ugly log files
 [ ! -t 1 ] && BATCH="-B"
-mvn $BATCH -f ../pom.xml clean install && . ../run "$@"
+mvn $BATCH -f ../pom.xml clean && . ../install-run "$@"

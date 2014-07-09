@@ -1,7 +1,15 @@
 package org.dbpedia.extraction.util
 
 import java.lang.StringBuilder
+import org.dbpedia.extraction.util.NumberUtils.hexToInt
 
+/**
+ * Helper methods to escape / unescape Turtle / N-Triples.
+ * 
+ * TODO: most of these methods could be much more efficient - they should only create a
+ * StringBuffer if the input actually needs to be changed. Otherwise, they should simply
+ * return the input string. See StringUtils.escape. 
+ */
 object TurtleUtils {
   
   /**
@@ -40,6 +48,46 @@ object TurtleUtils {
     sb
   }
   
+  def unescapeTurtle(value: String): String = {
+    val sb = new StringBuilder
+
+    val len = value.length
+    var i = 0
+
+    while (i < len) {
+      val c = value.codePointAt(i)
+      if (c == '\\') {
+        // FIXME: throw nice exception if string ends after slash
+        val special = value.charAt(i + 1)
+        special match {
+          case '"' => sb append '"'
+          case 't' => sb append '\t'
+          case 'r' => sb append '\r'
+          case '\\' => sb append '\\'
+          case 'n' => sb append '\n'
+          case 'u' => {
+            // FIXME: throw nice exception if there are not enough digits
+            val code = hexToInt(value, i + 2, i + 6)
+            sb append code.toChar
+            i += 4
+          }
+          case 'U' => {
+            // FIXME: throw nice exception if there are not enough digits
+            val code = hexToInt(value, i + 2, i + 10)
+            sb appendCodePoint code
+            i += 8
+          }
+          // FIXME: we found a bad escape - throw nice exception
+        }
+        i += 2
+      }
+      else {
+        sb appendCodePoint c
+        i += Character.charCount(c)
+      }
+    }
+    sb.toString
+  }
 }
 
 /**

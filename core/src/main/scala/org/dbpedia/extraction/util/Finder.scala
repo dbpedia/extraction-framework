@@ -11,16 +11,19 @@ private object Finder {
 /**
  * Helps to find files and directories in a directory structure as used by the Wikipedia
  * dump download site, for example baseDir/enwiki/20120403/enwiki-20120403-pages-articles.xml.bz2
+ * 
+ * TODO: wikiNameSuffix doesn't belong here, it should be part of the Language class (which should
+ * be renamed to WikiCode or so)
  */
-class Finder[T](val baseDir: T, val language: Language, val wikiNameGiven: String)(implicit wrap: T => FileLike[T]) {
+class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: String)(implicit wrap: T => FileLike[T]) {
   
-  def this(baseDir: String, language: Language, wikiNameGiven: String)(implicit parse: String => T, wrap: T => FileLike[T]) = 
-    this(parse(baseDir), language, wikiNameGiven)
+  def this(baseDir: String, language: Language, wikiNameSuffix: String)(implicit parse: String => T, wrap: T => FileLike[T]) = 
+    this(parse(baseDir), language, wikiNameSuffix)
   
   /**
    * directory name/file prefix for language, e.g. "en" -> "enwiki"
    */
-  val wikiName = language.filePrefix + wikiNameGiven
+  val wikiName = language.filePrefix + wikiNameSuffix
 
   /**
    * Directory for language, e.g. "baseDir/enwiki"
@@ -39,11 +42,12 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameGiven: Strin
    * May be null, in which case we just look for date directories.
    * @return dates in ascending order
    */
-  def dates(suffix: String = null, required: Boolean = true): List[String] = {
+  def dates(suffix: String = null, required: Boolean = true, isSuffixRegex: Boolean = false): List[String] = {
     
-    val suffixFilter = 
-      if (suffix == null) {date: String => true} 
-      else {date: String => file(date, suffix).exists}
+    val suffixFilter: String => Boolean = 
+      if (suffix == null) {date => true}
+      else if (isSuffixRegex) {date => matchFiles(date, suffix).nonEmpty}
+      else {date => file(date, suffix).exists}
     
     val dates = wikiDir.names.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
     
@@ -74,4 +78,17 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameGiven: Strin
    * "baseDir/enwiki/20120403/enwiki-20120403-pages-articles.xml"
    */
   def file(date: String, suffix: String) = directory(date).resolve(wikiName+'-'+date+'-'+suffix)
+
+  /**
+   * Files which match the supplied pattern in data directory for language.
+   * Files are sorted by size (descending)
+   *
+   * @param date
+   * @param pattern
+   * @return
+   */
+  def matchFiles(date: String, pattern: String): List[T] = {
+    val regex = (wikiName + "-" + date + "-" + pattern).r
+    directory(date).list.sortBy(_.size()).reverse.map(_.name).filter(regex.findAllIn(_).matchData.nonEmpty).map(directory(date).resolve(_))
+  }
 }

@@ -31,7 +31,12 @@ class WikiDisambigReader(language: Language, in: XMLEventAnalyzer) {
   
   def this(language: Language, reader: XMLEventReader) = this(language, new XMLEventAnalyzer(reader))
   
-  private val prefix = Namespaces.names(language)(Namespace.Template.code)+':'
+  // Let's use a regex since the main usage of this is in GenerateWikiSettings
+  // and potentially we do not have Namespaces class yet, or we might not have a new
+  // language yet
+  // private val prefix = Namespaces.names(language)(Namespace.Template.code)+':'
+
+  private val TemplateNameRegex = """[^:]+:(.*)""".r
   
   /**
    * @return settings
@@ -47,8 +52,11 @@ class WikiDisambigReader(language: Language, in: XMLEventAnalyzer) {
               val code = pl.attr("ns").toInt
               in.text { text =>
                 if (code == Namespace.Template.code) {
-                  if (! text.startsWith(prefix)) throw new IOException("Expected title starting with '"+prefix+"', found '"+text+"'")
-                  links += text.substring(prefix.length)
+                  // if (! text.startsWith(prefix)) throw new IOException("Expected title starting with '"+prefix+"', found '"+text+"'")
+                  text match {
+                    case TemplateNameRegex(templateName) => links += templateName
+                    case _ => throw new IOException("Invalid template link format, found '"+text+"'")
+                  }
                 }
               }
             }

@@ -36,6 +36,11 @@ public class UnmodifiedFeeder extends Feeder {
     }
 
     @Override
+    protected void initFeeder() {
+        //Nothing to init here
+    }
+
+    @Override
     public void startFeeder() {
         // Sleep to allow other feeders fill the queue
         try {
