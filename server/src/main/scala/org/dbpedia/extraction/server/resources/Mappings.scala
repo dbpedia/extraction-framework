@@ -5,7 +5,7 @@ import org.dbpedia.extraction.server.resources.stylesheets.{TriX,Log}
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.wikiparser.{Namespace,WikiTitle,WikiParser}
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, Namespace, WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.{WriterDestination,LimitingDestination}
@@ -37,15 +37,17 @@ class Mappings(@PathParam("lang") langCode : String)
     def get : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {ServerHeader.getHeader("Mappings")}
           <body>
-            <h2>Mappings</h2>
-            <a href="pages/">Source Pages</a><br/>
-            <a href="validate/">Validate Pages</a><br/>
-            <a href="extractionSamples/">Retrieve extraction samples</a><br/>
-            <a href={"../../statistics/"+language.wikiCode+"/"}>Statistics</a><br/>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-5">
+              <h2>Mappings</h2>
+              <a href="pages/">Source Pages</a><br/>
+              <a href="validate/">Validate Pages</a><br/>
+              <a href="extractionSamples/">Retrieve extraction samples</a><br/>
+              <a href={"../../statistics/"+language.wikiCode+"/"}>Statistics</a><br/>
+              </div>
+            </div>
           </body>
         </html>
     }
@@ -61,12 +63,14 @@ class Mappings(@PathParam("lang") langCode : String)
     def getPages : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {ServerHeader.getHeader("Mapping pages")}
           <body>
+            <div class="row">
+             <div class="col-md-3 col-md-offset-5">
             <h2>Mapping pages</h2>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot get page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+             </div>
+            </div>
           </body>
         </html>
     }
@@ -133,13 +137,15 @@ class Mappings(@PathParam("lang") langCode : String)
     def validate : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {ServerHeader.getHeader("Validate Mappings")}
           <body>
-            <h2>Validate Mappings</h2>
-            <p><a href="*">Validate all mappings</a></p>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+            <div class="row">
+             <div class="col-md-3 col-md-offset-5">
+              <h2>Validate Mappings</h2>
+              <p><a href="*">Validate all mappings</a></p>
+             { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot validate mapping: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+            </div>
+           </div>
           </body>
         </html>
     }
@@ -187,7 +193,7 @@ class Mappings(@PathParam("lang") langCode : String)
         {
             var nodes = new NodeBuffer()
             nodes += Log.header(title.count(_ == '/') + 3)
-            nodes += Server.instance.extractor.validateMapping(XMLSource.fromXML(pagesXML, language).map(parser), language) // TODO: use Language.Mappings?
+            nodes += Server.instance.extractor.validateMapping(XMLSource.fromXML(pagesXML, language), language) // TODO: use Language.Mappings?
             logger.info("Validated mapping page: " + title)
             nodes
         }
@@ -210,12 +216,14 @@ class Mappings(@PathParam("lang") langCode : String)
     def extractionSamples : Elem =
     {
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          </head>
+          {ServerHeader.getHeader("Mapping pages")}
           <body>
-            <h2>Mapping pages</h2>
-            { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(page) ++ <br/>) }
+           <div class="row">
+            <div class="col-md-3 col-md-offset-5">
+             <h2>Mapping pages</h2>
+             { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot read page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+            </div>
+            </div>
           </body>
         </html>
     }
@@ -225,19 +233,31 @@ class Mappings(@PathParam("lang") langCode : String)
     @Produces(Array("application/xml"))
     // @Encoded because title.count(_ == '/') must treat "%2F" different from "/"
     // TODO: change to @QueryParam, avoid the count(_ == '/') trick
-    def getExtractionSample(@PathParam("title") @Encoded title : String) : String =
-    {
+    def getExtractionSample(
+        @PathParam("title") @Encoded title : String,
+        @QueryParam("namespace") @DefaultValue("main") arg_namespace: String
+    ): String = {
         //Get the title of the mapping as well as its corresponding template on Wikipedia
         val mappingTitle = WikiTitle.parse(title, language) // TODO: use Language.Mappings?
         val templateTitle = new WikiTitle(mappingTitle.decoded, Namespace.Template, language)
+
+        // Determine the namespace; if no such namespace exists for this
+        // language, then default to Namespace.Main.
+        val namespace = Namespace.get(language, arg_namespace) match {
+            case Some(ns) => ns
+            case None => Namespace.Main
+        }
 
         //Find pages which use this mapping
         val wikiApiUrl = new URL(language.apiUri)
         val api = new WikiApi(wikiApiUrl, language)
         // TODO: one call to api.php is probably enough - get content of pages, not just titles
-        val pageTitles = api.retrieveTemplateUsages(templateTitle, 10)
+        val pageTitles = api.retrieveTemplateUsages(
+            title = templateTitle, 
+            namespace = namespace, 
+            maxCount = 10)
 
-        logger.info("extracting "+pageTitles.size+" pages for '" + templateTitle.encodedWithNamespace + "' language " + language)
+        logger.info("extracting "+pageTitles.size+" pages for '" + templateTitle.encodedWithNamespace + "' language " + language + " namespace " + namespace)
         
         // Extract pages
         // if there are slashes in the title, the stylesheets are further up in the directory tree

@@ -11,39 +11,52 @@ import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a page title. Or a link to a page.
- * 
+ *
  * FIXME: a link is different from a title and should be represented by a different class.
  *
  * @param decoded Canonical page name: URL-decoded, using normalized spaces (not underscores), first letter uppercase.
  * @param namespace Namespace used to be optional, but that leads to mistakes
  * @param language Language used to be optional, but that leads to mistakes
+ * @param capitalizeLink if set to false the given title will not be capitalized but left as it is
  */
-class WikiTitle (val decoded : String, val namespace : Namespace, val language : Language, val isInterLanguageLink : Boolean = false, val fragment : String = null)
+class WikiTitle (
+  val decoded: String,
+  val namespace: Namespace,
+  val language: Language,
+  val isInterLanguageLink: Boolean = false,
+  val fragment: String = null,
+  val capitalizeLink : Boolean = true
+)
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
     /** Wiki-encoded page name (without namespace) e.g. Automobile_generation */
-    val encoded = WikiUtil.wikiEncode(decoded).capitalize(language.locale)
+    val encoded = if (capitalizeLink) {
+        WikiUtil.wikiEncode(decoded).capitalize(language.locale)
+    }
+    else {
+        WikiUtil.wikiEncode(decoded)
+    }
 
     /** Canonical page name with namespace e.g. "Template talk:Automobile generation" */
     val decodedWithNamespace = withNamespace(false)
 
     /** Wiki-encoded page name with namespace e.g. "Template_talk:Automobile_generation" */
     val encodedWithNamespace = withNamespace(true)
-    
+
     /** page IRI for this page title */
     val pageIri = language.baseUri+"/wiki/"+encodedWithNamespace
 
     /** resource IRI for this page title */
-    val resourceIri = language.resourceUri + encodedWithNamespace
+    val resourceIri = language.resourceUri.append(encodedWithNamespace)
 
     private def withNamespace(encode : Boolean) : String =
     {
       var ns = namespace.name(language)
       if (encode) ns = WikiUtil.wikiEncode(ns).capitalize(language.locale)
-      (if (ns isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
+      (if (ns.isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
     }
-    
+
     /**
      * Returns useful info.
      */
@@ -66,35 +79,48 @@ class WikiTitle (val decoded : String, val namespace : Namespace, val language :
      * TODO: also use fragment?
      */
     override def hashCode() = language.hashCode ^ decoded.hashCode ^ namespace.hashCode
+
+    /**
+     * If somehow a different namespace is also given for this title, store it here. Otherwise,
+     * this field is null.
+     *
+     * Why do we need this nonsense? http://gd.wikipedia.org/?curid=4184 and http://gd.wikipedia.org/?curid=4185&redirect=no
+     * have the same title "Teamplaid:Gàidhlig", but they are in different namespaces: 4184 is in
+     * the template namespace, 4185 is in the main namespace. It looks like MediaWiki can handle this
+     * somehow, but when we try to import both pages from the XML dump file into the database,
+     * MySQL rightly complains about the duplicate title. As a workaround, we simply reject pages
+     * for which the <ns> namespace doesn't fit the <title> namespace.
+     */
+    var otherNamespace: Namespace = null
 }
-    
+
 object WikiTitle
 {
     /**
      * Parses a MediaWiki link or title.
-     * 
+     *
      * FIXME: parsing mediawiki links correctly cannot be done without a lot of configuration.
      * Therefore, this method must not be static. It must be part of an object that is instatiated
      * for each mediawiki instance.
-     * 
+     *
      * FIXME: rules for links are different from those for titles. We should have distinct methods
      * for these two use cases.
-     * 
-     * @param link MediaWiki link e.g. "Template:Infobox Automobile"
+     *
+     * @param title MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
      */
-    def parse(title : String, sourceLanguage : Language) =
+    def parse(title : String, sourceLanguage : Language): WikiTitle =
     {
         val coder = new HtmlCoder(XmlCodes.NONE)
         coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
         var decoded = coder.code(title)
-        
-        // Note: Maybe the following line decodes too much, but it seems to be 
+
+        // Note: Maybe the following line decodes too much, but it seems to be
         // quite close to what MediaWiki does.
         decoded = UriDecoder.decode(decoded)
-        
+
         var fragment : String = null
-        
+
         // we can look for hash signs after we decode - that's what MediaWiki does
         val hash = decoded.indexOf('#')
         if (hash != -1) {
@@ -102,9 +128,9 @@ object WikiTitle
           fragment = WikiUtil.cleanSpace(decoded.substring(hash + 1))
           decoded = decoded.substring(0, hash)
         }
-        
+
         decoded = WikiUtil.cleanSpace(decoded)
-        
+
         // FIXME: use interwiki prefixes from WikiSettingsDownloader.scala, e.g. [[q:Foo]] links to wikiquotes
 
         var parts = decoded.split(":", -1)
@@ -124,10 +150,10 @@ object WikiTitle
         //Check if it contains a language
         if (parts.length > 1)
         {
-          // TODO Wikidata has a namespace "Wikidata"
-          // TODO temporary fix, this way interwiki links to wikidata will not work
+          //When we have the same namespace as the wikicode it is not a language
+          //This happens in wikidata, commons and wiktionary (for now)
           val p0 = parts(0).trim.toLowerCase(sourceLanguage.locale)
-          if (!p0.equals("wikidata"))
+          if (!p0.equals(sourceLanguage.wikiCode))
           {
             for (lang <- Language.get(p0))
             {
@@ -154,5 +180,29 @@ object WikiTitle
 
         new WikiTitle(decodedName, namespace, language, isInterLanguageLink, fragment)
     }
-    
+
+    /**
+     * Parses a clean MediaWiki link or title like it can be found, e.g., in Wikipedia dumps.
+     *
+     * NOTE: Do not use this method on links but only on very clean titles.
+     *
+     * @param title MediaWiki link e.g. "Template:Infobox Automobile"
+     * @param language The source language of this link
+     */
+    def parseCleanTitle(title: String, language: Language): WikiTitle = {
+        var namespace = Namespace.Main
+        var decodedName = title
+
+        val parts = title.split(":", 2)
+
+        if (parts.length == 2) {
+            for (ns <- Namespace.get(language, parts(0))) {
+                namespace = ns
+                decodedName = parts(1)
+            }
+        }
+
+        // we explicitly disable capitalization of the title here
+        new WikiTitle(decodedName, namespace, language, false, null, false)
+    }
 }

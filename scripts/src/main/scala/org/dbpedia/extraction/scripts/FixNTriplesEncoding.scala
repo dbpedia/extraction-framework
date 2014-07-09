@@ -5,7 +5,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.NumberUtils
 import scala.Console.err
-import IOUtils.{readLines,write}
+import org.dbpedia.extraction.util.IOUtils
 import java.lang.StringBuilder
 
 
@@ -54,15 +54,17 @@ object FixNTriplesEncoding {
       var lineCount = 0
       var changeCount = 0
       val start = System.nanoTime
-      val writer = write(outFile)
+      val writer = IOUtils.writer(outFile)
       try {
-        readLines(inFile) { line =>
-          val escaped = new TurtleEscaper().escapeTurtle(line)
-          writer.write(escaped)
-          writer.write('\n')
-          if (! line.eq(escaped)) changeCount += 1
-          lineCount += 1
-          if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
+        IOUtils.readLines(inFile) { line =>
+          if (line != null) {
+            val escaped = new TurtleEscaper().escapeTurtle(line)
+            writer.write(escaped)
+            writer.write('\n')
+            if (! line.eq(escaped)) changeCount += 1
+            lineCount += 1
+            if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
+          }
         }
       }
       finally writer.close()

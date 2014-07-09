@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.wikiparser.TemplateNode

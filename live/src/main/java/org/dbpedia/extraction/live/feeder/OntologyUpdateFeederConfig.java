@@ -10,8 +10,8 @@ public class OntologyUpdateFeederConfig {
     private String rootPrefix = "http://dbpedia.org/ontology/";
     private String expressionPrefix = "http://dbpedia.org/ontology/expr";
     private String reifierPrefix = "http://dbpedia.org/meta/axiom";
-    private String dataGraphName = "http://live.dbpedia.org/ontology";
-    private String metaGraphName = "http://live.dbpedia.org/ontology/meta";
+    private String dataGraphName = "http://dbpedia.org/ontology";
+    private String metaGraphName = "http://dbpedia.org/ontology/meta";
     private String baseUri = "http://mappings.dbpedia.org/";
     private String prefixesFile = "";
 

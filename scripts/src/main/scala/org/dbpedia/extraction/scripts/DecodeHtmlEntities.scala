@@ -4,7 +4,7 @@ import java.io.File
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import scala.Console.err
-import IOUtils.{readLines,write}
+import org.dbpedia.extraction.util.IOUtils
 import java.lang.StringBuilder
 import org.dbpedia.util.text.html.{HtmlCoder,XmlCodes}
 import org.dbpedia.util.text.{ParseExceptionCounter}
@@ -61,15 +61,17 @@ object DecodeHtmlEntities {
       var lineCount = 0
       var changeCount = 0
       val start = System.nanoTime
-      val writer = write(outFile, charset)
+      val writer = IOUtils.writer(outFile, charset)
       try {
-        readLines(inFile) { line =>
-          val decoded = coder.code(line)
-          writer.write(decoded)
-          writer.write('\n')
-          if (! line.eq(decoded)) changeCount += 1
-          lineCount += 1
-          if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
+        IOUtils.readLines(inFile) { line =>
+          if (line != null) {
+            val decoded = coder.code(line)
+            writer.write(decoded)
+            writer.write('\n')
+            if (! line.eq(decoded)) changeCount += 1
+            lineCount += 1
+            if (lineCount % 1000000 == 0) log(lineCount, changeCount, start)
+          }
         }
       }
       finally writer.close()

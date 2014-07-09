@@ -158,6 +158,24 @@ object StringUtils
    * 
    * TODO: This method cannot replace code points > 0xFFFF.
    * 
+   * @param input input string
+   * @param replace mapping from characters to replacement strings.
+   * @return new string if characters had to be escaped, input string otherwise
+   */
+  def escape(input: String, replace: Array[String]): String = {
+      val sb = StringUtils.escape(null, input, replace)
+      if (sb == null) input else sb.toString
+  }
+    
+  /**
+   * Build a copy of the given string, replacing some chars by replacement strings. 
+   * The replacement array is indexed by character value. Only characters for which
+   * the replacement array contains a non-null value will be replaced.
+   * 
+   * TODO: don't double-escape existing escape sequences
+   * 
+   * TODO: This method cannot replace code points > 0xFFFF.
+   * 
    * @param replace mapping from characters to replacement strings.
    * @param target If null, the method may return null or a new StringBuilder. 
    * Otherwise, the method will return the given target.
@@ -233,15 +251,16 @@ object StringUtils
     sb
   }
 
-  /*
-  * Caclulate the md5sum of the @input String
-  *
-  * @input the string we want to calculate the md5sum for
-  * @return the md5sum hash of the input string
-  * */
+  /**
+   * Caclulate the MD5 sum of the input String
+   *
+   * @param input the string we want to calculate the MD5 sum for
+   * @return the md5sum hash of the input string
+   */
   def md5sum(input: String): String = {
     val inputBytes = input.getBytes("UTF-8")
     val md5 = MessageDigest.getInstance("MD5")
+    // TODO: Do we really have to call reset? We just created a new object...
     md5.reset()
     md5.update(inputBytes)
 
@@ -250,11 +269,11 @@ object StringUtils
   
   object IntLiteral {
     def apply(x : Int) = x.toString
-    def unapply(x : String) : Option[Int] =  try Some(x.toInt) catch { case _ => None }
+    def unapply(x : String) : Option[Int] =  try Some(x.toInt) catch { case _ : NumberFormatException => None }
   }
 
   object BooleanLiteral {
     def apply(x : Boolean) = x.toString
-    def unapply(x : String) : Option[Boolean] =  try Some(x.toBoolean) catch { case _ => None }
+    def unapply(x : String) : Option[Boolean] =  try Some(x.toBoolean) catch { case _ : IllegalArgumentException => None }
   }
 }

@@ -8,6 +8,7 @@ import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.{Language, Date}
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.Map
+import scala.language.reflectiveCalls
 
 /**
  * TODO: change the syntax on the mappings wiki to allow an arbitrary number of template properties.

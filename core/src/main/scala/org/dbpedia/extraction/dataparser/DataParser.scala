@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, Node}
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 /**
  * Extracts data from a node in the abstract syntax tree.
@@ -14,7 +15,7 @@ abstract class DataParser
     /**
      * Parser dependent splitting of nodes. Default is overridden by some parsers.
      */
-    val splitPropertyNodeRegex = """<br\s*\/?>|\n"""
+    val splitPropertyNodeRegex = DataParserConfig.splitPropertyNodeRegex.get("en").get
 
     /**
      * (Split node and) return parse result.

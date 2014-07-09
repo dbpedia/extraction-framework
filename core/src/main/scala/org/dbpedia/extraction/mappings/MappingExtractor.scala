@@ -3,7 +3,8 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import scala.language.reflectiveCalls
 
 /**
  *  Extracts structured data based on hand-generated mappings of Wikipedia infoboxes to the DBpedia ontology.
@@ -14,7 +15,7 @@ class MappingExtractor(
     def redirects : Redirects
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   private val templateMappings = context.mappings.templateMappings
   private val tableMappings = context.mappings.tableMappings
@@ -25,7 +26,7 @@ extends Extractor
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    if(page.title.namespace != Namespace.Main) return Seq.empty
+    if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 
     extractNode(page, subjectUri, pageContext)
   }

@@ -11,7 +11,7 @@ import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimest
 import org.dbpedia.extraction.destinations.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
 import scala.Console.err
-import IOUtils.{readLines,read,write}
+import org.dbpedia.extraction.util.IOUtils
 import scala.collection.mutable.{Map,HashMap}
 import java.util.Arrays.{copyOf,sort,binarySearch}
 
@@ -239,8 +239,9 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       var lineCount = 0
       var linkCount = 0
       val start = System.nanoTime
-      readLines(file) { line =>
+      IOUtils.readLines(file) { line =>
         line match {
+          case null => // ignore last value
           case Quad(quad) if (quad.datatype == null && quad.context == null) => {
             
             val subj = parseUri(quad.subject)
@@ -329,7 +330,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
    * @return writer for given language
    */
   private def openDataset(langKey: Int, name: String): Writer = {
-    val writer = write(find(langKey, name))
+    val writer = IOUtils.writer(find(langKey, name))
     // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
     writer.write("# started "+formatCurrentTimestamp+"\n")
     writer
@@ -447,7 +448,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     val writeStart = System.nanoTime
     err.println("writing dump file "+dumpFile+" ...")
-    val writer = write(dumpFile)
+    val writer = IOUtils.writer(dumpFile)
     try {
       var index = 0
       
@@ -496,7 +497,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
     
     val readStart = System.nanoTime
     err.println("reading dump file "+dumpFile+" ...")
-    val reader = new BufferedReader(read(dumpFile))
+    val reader = new BufferedReader(IOUtils.reader(dumpFile))
     try {
       var index = 0
       

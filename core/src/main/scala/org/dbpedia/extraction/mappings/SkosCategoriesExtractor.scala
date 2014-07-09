@@ -7,6 +7,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts information about which concept is a category and how categories are related using the SKOS Vocabulary.
@@ -17,7 +18,7 @@ class SkosCategoriesExtractor(
     def language : Language
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   private val rdfTypeProperty = context.ontology.properties("rdf:type")
   private val skosConceptClass = context.ontology.classes("skos:Concept")
@@ -36,7 +37,7 @@ extends Extractor
     var quads = new ArrayBuffer[Quad]()
 
     quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
-    quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("xsd:string"))
+    quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("rdf:langString"))
 
     for(link <- collectCategoryLinks(node))
     {

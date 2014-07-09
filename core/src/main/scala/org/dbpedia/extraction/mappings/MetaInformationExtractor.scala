@@ -6,6 +6,8 @@ import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.net.URI
+import scala.language.reflectiveCalls
+import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,36 +19,42 @@ import java.net.URI
 
 class MetaInformationExtractor( context : {
   def ontology : Ontology
-  def language : Language } ) extends Extractor
+  def language : Language } ) extends WikiPageExtractor
 {
-  val modificationDatePredicate = context.ontology.properties("dct:modified")
-  val editLinkPredicate = "http://dbpedia.org/meta/editlink"
-  val revisionPredicate = "http://dbpedia.org/meta/revision"
+  val modificationDatePredicate = context.ontology.properties("wikiPageModified")
+  val extractionDatePredicate = context.ontology.properties("wikiPageExtracted")
+  val editLinkPredicate = context.ontology.properties("wikiPageEditLink")
+  val revisionPredicate = context.ontology.properties("wikiPageRevisionLink")
+  val historyPredicate = context.ontology.properties("wikiPageHistoryLink")
+  val datetime = context.ontology.datatypes("xsd:dateTime")
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  //override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
-    val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit";
-    val revisionLink = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&oldid=" + page.revision;
+    val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit"
+    val revisionLink = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&oldid=" + page.revision
+    val historyLink  = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=history"
 
-    val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, modificationDatePredicate,
-      formatTimestamp(page.timestamp), page.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
+    val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
+      formatTimestamp(page.timestamp), page.sourceUri, datetime )
 
-    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
-      formatCurrentTimestamp, page.sourceUri,context.ontology.datatypes.get("xsd:dateTime").get )
+    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, extractionDatePredicate,
+      formatCurrentTimestamp, page.sourceUri, datetime )
 
-    val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, editLinkPredicate,
+    val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, editLinkPredicate,
       editLink, page.sourceUri, null )
 
-    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, page.title.pageIri, revisionPredicate,
+    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, revisionPredicate,
       revisionLink, page.sourceUri, null )
 
+    val quadHistorylink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, historyPredicate,
+      historyLink, page.sourceUri, null )
 
-    Seq(quadModificationDate, quadExtractionDate, quadEditlink, quadRevisionlink);
+
+    Seq(quadModificationDate, quadExtractionDate, quadEditlink, quadRevisionlink, quadHistorylink)
 
 
   }

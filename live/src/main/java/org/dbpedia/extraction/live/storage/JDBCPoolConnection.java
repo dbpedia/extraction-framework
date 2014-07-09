@@ -4,6 +4,7 @@ import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
 import org.apache.log4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
+import org.dbpedia.extraction.live.main.Main;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,6 +31,7 @@ public class JDBCPoolConnection {
         } catch (Exception e) {
             logger.fatal(e.getMessage());
             logger.fatal("Could not initialize DB connection! Exiting...");
+            Main.stopLive();
             System.exit(1);
         }
     }
@@ -58,6 +60,7 @@ public class JDBCPoolConnection {
         } catch (Exception e) {
             logger.fatal(e.getMessage());
             logger.fatal("Could not initialize DB connection! Exiting...");
+            Main.stopLive();
             System.exit(1);
         }
     }

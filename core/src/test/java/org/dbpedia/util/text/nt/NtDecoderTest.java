@@ -60,7 +60,7 @@ public class NtDecoderTest extends TestCase
     bad("\\U00110000"); // too high
   }
 
-  private void good( String string, int ... codePoints )
+  private static void good( String string, int ... codePoints )
   {
     NtDecoder decoder = new NtDecoder(string);
     decoder.decode();
@@ -73,14 +73,14 @@ public class NtDecoderTest extends TestCase
     assertEquals(new String(result, 0, index), decoder.result());
   }
 
-  private void good( String string, String result )
+  private static void good( String string, String result )
   {
     NtDecoder decoder = new NtDecoder(string);
     decoder.decode();
     assertEquals(result, decoder.result());
   }
 
-  private void bad( String string )
+  private static void bad( String string )
   {
     try
     {

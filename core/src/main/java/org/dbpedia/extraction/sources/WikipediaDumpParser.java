@@ -192,7 +192,7 @@ public class WikipediaDumpParser
   }
 
   private void readPage()
-  throws XMLStreamException
+  throws XMLStreamException, InterruptedException
   {
     requireStartElement(PAGE_ELEM);
     nextTag();
@@ -201,13 +201,6 @@ public class WikipediaDumpParser
     String titleStr = readString(TITLE_ELEM, true);
     WikiTitle title = parseTitle(titleStr);
     // now after </title>
-
-    //Skip bad titles and filtered pages
-    if(title == null || ! _filter.apply(title))
-    {
-        while(! isEndElement(PAGE_ELEM)) _reader.next();
-        return;
-    }
 
     int nsCode;
     try
@@ -221,10 +214,18 @@ public class WikipediaDumpParser
 
     // now after </ns>
     
-    if (title.namespace().code() != nsCode)
+    if (title != null && title.namespace().code() != nsCode)
     {
       Namespace expected = Namespace.values().apply(nsCode);
       logger.log(Level.WARNING, "Error parsing title: found namespace "+title.namespace()+", expected "+expected+" in title "+titleStr);
+      title.otherNamespace_$eq(expected);
+    }
+
+    //Skip bad titles and filtered pages
+    if (title == null || ! _filter.apply(title))
+    {
+        while(! isEndElement(PAGE_ELEM)) _reader.next();
+        return;
     }
 
     //Read page id
@@ -264,8 +265,8 @@ public class WikipediaDumpParser
       {
         // emulate Scala exception handling. Ugly...
         if (e instanceof ControlThrowable) throw Exceptions.unchecked(e);
-        if (e instanceof InterruptedException) throw Exceptions.unchecked(e);
-        else logger.log(Level.WARNING, "Error processing page  " + title, e);
+        if (e instanceof InterruptedException) throw (InterruptedException)e;
+        else logger.log(Level.WARNING, "error processing page  '"+title+"': "+Exceptions.toString(e, 200));
       }
     }
     
@@ -372,15 +373,15 @@ public class WikipediaDumpParser
   {
     try
     {
-      return WikiTitle.parse(titleString, _language);
+      return WikiTitle.parseCleanTitle(titleString, _language);
     }
     catch (Exception e)
     {
-      logger.log(Level.WARNING, "Error parsing page title ["+titleString+"]", e);
+      logger.log(Level.WARNING, "error parsing page title ["+titleString+"]: "+Exceptions.toString(e, 200));
       return null;
     }
   }
-  
+
   /**
    * @param name expected name of element. if null, don't check name.
    * @param nextTag should we advance to the next tag after the closing tag of this element?
@@ -403,12 +404,12 @@ public class WikipediaDumpParser
     if (nextTag) _reader.nextTag();
   }
   
-  private boolean isStartElement(String name) throws XMLStreamException
+  private boolean isStartElement(String name)
   {
     return XMLStreamUtils.isStartElement(_reader, _namespace, name);
   }
   
-  private boolean isEndElement(String name) throws XMLStreamException
+  private boolean isEndElement(String name)
   {
     return XMLStreamUtils.isEndElement(_reader, _namespace, name);
   }
@@ -427,4 +428,5 @@ public class WikipediaDumpParser
   {
     return _reader.nextTag();
   }
+  
 }

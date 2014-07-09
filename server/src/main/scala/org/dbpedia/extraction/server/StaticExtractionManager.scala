@@ -12,25 +12,35 @@ import java.io.File
  * Is NOT able to update the ontology or the mappings.
  * This manager is good for testing locally.
  */
-class StaticExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths)
-extends ExtractionManager(languages, paths)
+class StaticExtractionManager(
+  update: (Language, Mappings) => Unit, languages : Seq[Language],
+  paths: Paths,
+  redirects: Map[Language, Redirects],
+  mappingTestExtractors: Seq[Class[_ <: Extractor[_]]],
+  /** TODO: support customExtractors here*/
+  customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
+extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, customTestExtractors)
 {
     @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
 
-    @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
+    @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
 
     @volatile private lazy val _ontology : Ontology = loadOntology
 
     @volatile private lazy val _mappings : Map[Language, Mappings] = loadMappings
 
-    @volatile private lazy val _extractors : Map[Language, RootExtractor] = loadExtractors
+    @volatile private lazy val _extractors : Map[Language, RootExtractor] = loadMappingTestExtractors
 
 
-    def extractor(language : Language) = _extractors(language)
+    def mappingExtractor(language : Language) = _extractors(language)
 
-    def ontology = _ontology
+    def customExtractor(language : Language) = {
+      throw new Exception("Custom extractor not yet implemented; please use DynamicExtractionManager")
+    }
 
-    def ontologyPages = _ontologyPages
+    def ontology() = _ontology
+
+    def ontologyPages() = _ontologyPages
 
     def mappingPageSource(language : Language) = _mappingPages(language).values
 
@@ -39,7 +49,7 @@ extends ExtractionManager(languages, paths)
     /**
      * Called on startup to initialize all mapping stats managers.
      */
-    def updateAll = {
+    def updateAll() = {
       for ((language, mappings) <- _mappings) update(language, mappings)
     }
         

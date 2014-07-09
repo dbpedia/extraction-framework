@@ -2,6 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.SimpleWorkers
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{Set,HashMap,MultiMap,ArrayBuffer}
@@ -17,9 +18,40 @@ import scala.Console.err
  *   - DBpedia URIs in subject, predicate or object position are mapped
  *   - non-DBpedia URIs and literal values are copied unchanged
  *   - triples containing DBpedia URIs in subject or object position that cannot be mapped are discarded
- *   
- * Example call:
- * ../run CanonicalizeUris /data/dbpedia interlanguage-links-same-as .nt.gz labels,short-abstracts,long-abstracts -en-uris .nt.gz,.nq.gz en en 10000-
+ * 
+ * As of DBpedia release 3.8 and 3.9, the following datasets should be canonicalized:
+ * 
+ * article-categories
+ * category-labels
+ * disambiguations
+ * disambiguations-redirected
+ * external-links
+ * geo-coordinates
+ * homepages
+ * images
+ * infobox-properties
+ * infobox-properties-redirected
+ * infobox-property-definitions
+ * instance-types
+ * labels
+ * long-abstracts
+ * mappingbased-properties
+ * mappingbased-properties-redirected
+ * page-in-link-counts (redirected)
+ * page-links
+ * page-links-redirected
+ * page-out-link-counts (redirected)
+ * persondata
+ * persondata-redirected
+ * pnd
+ * short-abstracts
+ * skos-categories
+ * specific-mappingbased-properties
+ * 
+ * Example calls:
+ * ../run CanonicalizeUris /data/dbpedia interlanguage-links .nt.gz labels,short-abstracts,long-abstracts -en-uris .nt.gz,.nq.gz en en 10000-
+ * 
+ * ../run CanonicalizeUris /data/dbpedia interlanguage-links .nt.gz article-categories,category-labels,disambiguations,disambiguations-redirected,external-links,geo-coordinates,homepages,images,infobox-properties,infobox-properties-redirected,infobox-property-definitions,instance-types,labels,long-abstracts,mappingbased-properties,mappingbased-properties-redirected,page-links,page-in-link-counts,page-in-link-counts-redirected,page-links,page-links-redirected,page-out-link-counts,persondata,persondata-redirected,pnd,short-abstracts,skos-categories,specific-mappingbased-properties -en-uris .nt.gz,.nq.gz en en 10000-
  * 
  * TODO: merge with MapObjectUris?
  */
@@ -77,36 +109,34 @@ object CanonicalizeUris {
     val languages = parseLanguages(baseDir, args.drop(8))
     require(languages.nonEmpty, "no languages")
     
-    for (language <- languages) {
+    // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
+    val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
       
       val oldPrefix = uriPrefix(language)
       val oldResource = oldPrefix+"resource/"
       
       val finder = new DateFinder(baseDir, language)
       
-      // inter language links can link multiple articles between two languages, for example
-      // http://de.wikipedia.org/wiki/Prostitution_in_der_Antike -> http://en.wikipedia.org/wiki/Prostitution_in_ancient_Rome
-      // http://de.wikipedia.org/wiki/Prostitution_in_der_Antike -> http://en.wikipedia.org/wiki/Prostitution_in_ancient_Greece
-      // TODO: in other cases, we probably want to treat multiple values as errors. Make this configurable.
-      val map = new HashMap[String, Set[String]] with MultiMap[String, String]
+      val map = new HashMap[String, String]
       
       for (mappping <- mappings) {
         var count = 0
         QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
-          if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
           if (quad.value.startsWith(newResource)) {
             // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
             // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
-            // line, which means that the character array for the whole line is kept in memory, which
+            // line, which may mean that the character array for the whole line is kept in memory, which
             // basically means that the whole redirects file is kept in memory. We should
             // - only store the resource title in the map
             // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
             // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
-            map.addBinding(quad.subject, quad.value)
+            // TODO: check that there was no previous mapping?
+            map(quad.subject) = quad.value
             count += 1
           }
         }
-        err.println("found "+count+" mappings")
+        err.println(language.wikiCode+": found "+count+" mappings")
       }
       
       def newUri(oldUri: String): String = {
@@ -114,38 +144,48 @@ object CanonicalizeUris {
         else oldUri // not a DBpedia URI, copy it unchanged
       }
       
-      def newUris(oldUri: String): Set[String] = {
-        if (oldUri.startsWith(oldResource)) map.getOrElse(oldUri, Set())
-        else Set(newUri(oldUri))
+      def mapUri(oldUri: String): String = {
+        if (oldUri.startsWith(oldResource)) map.getOrElse(oldUri, null)
+        else newUri(oldUri)
       }
       
       for (input <- inputs; suffix <- suffixes) {
         QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
           val pred = newUri(quad.predicate)
-          val subjects = newUris(quad.subject)
-          if (subjects.isEmpty) {
+          val subj = mapUri(quad.subject)
+          if (subj == null) {
             // no mapping for this subject URI - discard the quad. TODO: make this configurable
             List()
           }
           else if (quad.datatype == null) {
             // URI value - change subject and object URIs, copy everything else
-            val objects = newUris(quad.value)
-            if (objects.isEmpty) {
+            val obj = mapUri(quad.value)
+            if (obj == null) {
               // no mapping for this object URI - discard the quad. TODO: make this configurable
               List()
             } else {
               // map subject, predicate and object URI, copy everything else
-              for (subj <- subjects; obj <- objects) yield quad.copy(subject = subj, predicate = pred, value = obj)
+              List(quad.copy(subject = subj, predicate = pred, value = obj))
             }
           } else {
             // literal value - change subject and predicate URI, copy everything else
-            for (subj <- subjects) yield quad.copy(subject = subj, predicate = pred)
+            List(quad.copy(subject = subj, predicate = pred))
           }
         }
       }
       
     }
     
+    workers.start()
+    
+    for (language <- languages) {
+      // mapping the target language to itself doesn't make sense
+      if (language != newLanguage) {
+        workers.process(language)
+      }
+    }
+    
+    workers.stop()
   }
   
 }

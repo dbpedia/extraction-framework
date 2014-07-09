@@ -8,12 +8,13 @@ object HomepageExtractorConfig
     // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
     // Don't change this else if you know how it is done.
 
-    val propertyNamesMap = Map(
+    private val propertyNamesMap = Map(
         "ar" -> Set("الموقع", "الصفحة الرسمية", "موقع", "الصفحة الرئيسية", "صفحة ويب", "موقع ويب"),
         "ca" -> Set("pàgina", "web", "lloc"),
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
         "en" -> Set("website", "homepage", "web", "site"),
+        "eo" -> Set("ĉefpaĝo", "retejo"),
         "es" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
         "eu" -> Set("webgunea"),
         "fr" -> Set("website", "homepage", "web", "site", "siteweb", "site web"),/*cleanup*/
@@ -25,14 +26,19 @@ object HomepageExtractorConfig
         "ru" -> Set("сайт")
     )
 
+    def propertyNames(lang : String) : Set[String] = {
+        propertyNamesMap.getOrElse(lang, Set())
+    }
+
     val supportedLanguages = propertyNamesMap.keySet
 
-    val externalLinkSectionsMap = Map(
+    private val externalLinkSectionsMap = Map(
         "ar" -> "وصلات خارجية",
         "ca" -> "(?:Enllaços externs|Enllaço extern)",
         "de" -> "Weblinks?",
         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
         "en" -> "External links?",
+        "eo" -> "Eksteraj ligiloj",
         "es" -> "(?:Enlaces externos|Enlace externo|Links externos|Link externo)",
         "eu" -> "Kanpo loturak?",
         "fr" -> "(?:Lien externe|Liens externes|Liens et documents externes)",
@@ -44,12 +50,17 @@ object HomepageExtractorConfig
         "ru" -> "Ссылки"
     )
 
-    val officialMap = Map(
+    def externalLinkSections(lang : String) : String = {
+        externalLinkSectionsMap.getOrElse(lang, "")
+    }
+
+    private val officialMap = Map(
         "ar" -> "رسمي",
         "ca" -> "oficial",
         "de" -> "offizielle",
         "el" -> "(?:επίσημος|επίσημη)",
         "en" -> "official",
+        "eo" -> "oficiala",
         "es" -> "oficial",
         "eu" -> "ofiziala?",
         "fr" -> "officiel",
@@ -60,5 +71,27 @@ object HomepageExtractorConfig
         "pt" -> "oficial",
         "ru" -> "официальный"
     )
+
+    def official(lang : String) : String = {
+        officialMap.getOrElse(lang, "")
+    }
+
+    // Map(language -> Map(templateName -> templatePropertyKey))
+    private val templateOfficialWebsiteMap = Map(
+        "ca" -> Map("Oficial" -> "1"),
+        /* "it" -> Map("Sito Ufficiale" -> "1"), This does not exist, yet */
+        "el" -> Map("Επίσημη ιστοσελίδα" -> "1"),
+        "en" -> Map("Official website" -> "1"),
+        "eo" -> Map("Oficiala_retejo" -> "1"),
+        "es" -> Map("Página_web" -> "1"),
+        "fr" -> Map("Site_officiel" -> "url"),
+        "ga" -> Map("Páxina_web" -> "1"),
+        "pt" -> Map("Oficial" -> "1"),
+        "ru" -> Map("Официальный сайт" -> "1")
+    )
+
+    def templateOfficialWebsite(lang : String) : Map[String, String] = {
+        templateOfficialWebsiteMap.getOrElse(lang, Map())
+    }
 
 }

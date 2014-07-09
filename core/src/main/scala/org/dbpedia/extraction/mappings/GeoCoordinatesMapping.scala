@@ -7,6 +7,7 @@ import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts geo-coodinates.
@@ -36,6 +37,7 @@ extends PropertyMapping
   private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName)
 
   private val geoCoordinateParser = new GeoCoordinateParser(context)
+  private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
   private val doubleParser = new DoubleParser(context)
   private val stringParser = StringParser
 
@@ -76,13 +78,13 @@ extends PropertyMapping
       for( 
         latitudeProperty <- node.property(latitude);
         longitudeProperty <- node.property(longitude);
-        lat <- doubleParser.parse(latitudeProperty);
-        lon <- doubleParser.parse(longitudeProperty)
+        lat <- singleGeoCoordinateParser.parse(latitudeProperty).map(_.toDouble) orElse doubleParser.parse(latitudeProperty);
+        lon <- singleGeoCoordinateParser.parse(longitudeProperty).map(_.toDouble) orElse doubleParser.parse(longitudeProperty)
       )
       {
         try
         {
-          return Some(new GeoCoordinate(latDeg = lat, lonDeg = lon))
+          return Some(new GeoCoordinate(lat, lon))
         }
         catch
         {
@@ -111,7 +113,7 @@ extends PropertyMapping
 
         try
         {
-          return Some(new GeoCoordinate(latDeg, latMin, latSec, latDir, lonDeg, lonMin, lonSec, lonDir))
+          return Some(new GeoCoordinate(latDeg, latMin, latSec, latDir, lonDeg, lonMin, lonSec, lonDir, false))
         }
         catch
         {

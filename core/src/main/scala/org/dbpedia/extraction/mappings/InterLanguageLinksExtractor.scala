@@ -5,12 +5,13 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 
 /**
  * Extracts interwiki links
  */
-class InterLanguageLinksExtractor(context: { def ontology : Ontology; def language : Language }) extends Extractor
+class InterLanguageLinksExtractor(context: { def ontology : Ontology; def language : Language }) extends PageNodeExtractor
 {
   private val interLanguageLinksProperty = context.ontology.properties("wikiPageInterLanguageLink")
 
@@ -33,14 +34,6 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
           if (dst.isInterLanguageLink) {
             val dstLang = dst.language
             quads += quad(subjectUri, dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri)
-          }
-        }
-        case link: WikidataInterWikiLinkNode => {
-          val dst = link.destination
-          if (dst.isInterLanguageLink) {
-            val dstLang = dst.language
-            val srcLang = link.source.language
-            quads += quad(srcLang.resourceUri.append(link.source.decodedWithNamespace), dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri)
           }
         }
         case _ => // ignore

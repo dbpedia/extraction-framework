@@ -12,41 +12,36 @@ import scala.Console.err
  * new rules.
  *  
  * Example call:
- * ../run RecodeUris /data/dbpedia/links bbcwildlife,bookmashup _fixed _links.nt.gz
+ * ../run RecodeUris /data/dbpedia/links .nt.gz _fixed.nt.gz bbcwildlife.nt.gz,bookmashup.nt.gz 
  */
 object RecodeUris {
   
-  private def split(arg: String): Array[String] = { 
-    arg.split(",").map(_.trim).filter(_.nonEmpty)
-  }
-  
   def main(args: Array[String]): Unit = {
     
-    require(args != null && args.length == 4, 
-      "need four args: "+
-      /*0*/ "directory, "+
-      /*1*/ "comma-separated names of input files (e.g. 'bbcwildlife,bookmashup'), "+
-      /*2*/ "output dataset name extension (e.g. '_fixed'), "+
-      /*3*/ "file extension (e.g. '_links.nt.gz')"
+    require(args != null && args.length >= 3, 
+      "need at least three args: "+
+      /*0*/ "input file suffix, "+
+      /*1*/ "output file suffix, "+
+      /*2*/ "comma- or space-separated names of input files (e.g. 'bbcwildlife,bookmashup')"
     )
     
-    val dir = new File(args(0))
+    // Suffix of input/output files, for example ".nt.gz"
     
-    val inputs = split(args(1))
+    val inSuffix = args(0)
+    require(inSuffix.nonEmpty, "no input file suffix")
+    
+    val outSuffix = args(1)
+    require(outSuffix.nonEmpty, "no output file suffix")
+    
+    // Use all remaining args as comma or whitespace separated paths
+    var inputs = args.drop(2).flatMap(_.split("[,\\s]")).map(_.trim).filter(_.nonEmpty)
     require(inputs.nonEmpty, "no input file names")
-    
-    val extension = args(2)
-    require(extension.nonEmpty, "no output name extension")
-    
-    // Suffix of input/output files, for example "_links.nt.gz"
-    // This script works with .nt or .nq files using URIs, NOT with .ttl or .tql files and NOT with IRIs.
-    val suffix = args(3)
-    require(suffix.nonEmpty, "no input/output file suffix")
+    require(inputs.forall(_.endsWith(inSuffix)), "input file names must end with input file suffix")
     
     for (input <- inputs) {
       var changeCount = 0
-      val inFile = new File(dir, input + suffix)
-      val outFile = new File(dir, input + extension + suffix)
+      val inFile = new File(input)
+      val outFile = new File(input.substring(0, input.length - inSuffix.length) + outSuffix)
       QuadMapper.mapQuads(input, inFile, outFile, required = true) { quad =>
         var changed = false
         val subj = fixUri(quad.subject)
@@ -69,9 +64,11 @@ object RecodeUris {
     
   }
   
+  private val DBPEDIA_URI = "^http://([a-z-]+.)?dbpedia.org/resource/.*$".r.pattern
+  
   def fixUri(uri: String): String = {
     
-    if (uri.startsWith("http://dbpedia.org/")) {
+    if (DBPEDIA_URI.matcher(uri).matches()) {
       
       var input = uri
       

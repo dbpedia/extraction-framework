@@ -7,6 +7,7 @@ import org.dbpedia.extraction.util.Language
 import util.matching.Regex
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+import scala.language.reflectiveCalls
 
 /**
  * Extracts the grammatical gender of people using a heuristic.
@@ -76,7 +77,7 @@ extends MappingExtractor(context)
       // output triple for maximum gender
       if (maxGender != "" && maxCount > GenderExtractorConfig.minCount && maxCount/secondCount > GenderExtractorConfig.minDifference)
       {
-        return Seq(new Quad(context.language, DBpediaDatasets.Genders, subjectUri, genderProperty, maxGender, node.sourceUri, new Datatype("xsd:string")))
+        return Seq(new Quad(context.language, DBpediaDatasets.Genders, subjectUri, genderProperty, maxGender, node.sourceUri, new Datatype("rdf:langString")))
       }
     }
 

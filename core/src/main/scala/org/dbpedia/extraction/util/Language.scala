@@ -3,64 +3,49 @@ package org.dbpedia.extraction.util
 import java.util.Locale
 import scala.collection.mutable.HashMap
 import org.dbpedia.extraction.ontology.DBpediaNamespace
+import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
  * Represents a MediaWiki instance and the language used on it. Initially, this class was
- * only used for xx.wikipedia.org instances, but now we also use it for mappings.dbpedia.org.
- * For each language, there is only one instance of this class.
- * TODO: rename this class to WikiCode or so.
+ * only used for xx.wikipedia.org instances, but now we also use it for mappings.dbpedia.org
+ * and www.wikidata.org. For each language, there is only one instance of this class.
+ * TODO: rename this class to WikiCode or so, distinguish between enwiki / enwiktionary etc.
+ *
+ * @param wikiCode "en", "de", "mappings", "wikidata", ...
+ * @param isoCode "en", "de", ...
+ * @param dbpediaDomain Specific DBpedia domain for this language, e.g. "en.dbpedia.org".
+ * May be null, e.g. for mappings.
+ * @param dbpediaUri Specific DBpedia base URI for this language, e.g. "http://en.dbpedia.org".
+ * May be null, e.g. for mappings.
+ * @param resourceUri Specific resource namespace for this language, e.g. "http://en.dbpedia.org/resource/"
+ * or "http://www.wikidata.org/entity/". May be null, e.g. for mappings. The value is not a string.
+ * Use resourceUri.append("Xy"), not string concatenation. 
+ * @param propertyUri Specific property namespace for this language, e.g. "http://en.dbpedia.org/property/"
+ * or "http://www.wikidata.org/entity/". May be null, e.g. for mappings. The value is not a string.
+ * Use propertyUri.append("xy"), not string concatenation. 
+ * @param baseUri URI prefix for this wiki, e.g. "http://be-x-old.wikipedia.org",
+ * "http://commons.wikimedia.org", "http://mappings.dbpedia.org".
+ * @param apiUri API URI for this wiki, e.g. "http://be-x-old.wikipedia.org/w/api.php",
+ * "http://commons.wikimedia.org/w/api.php", "http://mappings.dbpedia.org/api.php".
  */
-class Language private(val wikiCode : String, val isoCode: String)
+class Language private(
+  val wikiCode: String,
+  val isoCode: String,
+  val dbpediaDomain: String,
+  val dbpediaUri: String,
+  val resourceUri: RdfNamespace,
+  val propertyUri: RdfNamespace,
+  val baseUri: String,
+  val apiUri: String
+)
 {
     val locale = new Locale(isoCode)
     
     /** 
-     * Note that Wikipedia dump files use this prefix (with underscores), e.g. be_x_old,
-     * but Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
+     * Wikipedia dump files use this prefix (with underscores), e.g. be_x_old, but
+     * Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
      */
-    val filePrefix = wikiCode.replace("-", "_")
-    
-    /**
-     * Specific DBpedia domain for this language, e.g. "en.dbpedia.org"
-     */
-    val dbpediaDomain = wikiCode+".dbpedia.org"
-    
-    /**
-     * Specific DBpedia base URI for this language, e.g. "http://en.dbpedia.org"
-     */
-    val dbpediaUri = "http://"+dbpediaDomain
-    
-    /**
-     * Specific DBpedia resource namespace for this language, e.g. "http://en.dbpedia.org/resource/"
-     */
-    val resourceUri = new DBpediaNamespace(dbpediaUri+"/resource/")
-    
-    /**
-     * Specific DBpedia property namespace for this language, e.g. "http://en.dbpedia.org/property/"
-     */
-    val propertyUri = new DBpediaNamespace(dbpediaUri+"/property/")
-    
-    /**
-     * URI prefix for this wiki, e.g. "http://be-x-old.wikipedia.org", "http://commons.wikimedia.org",
-     * "http://mappings.dbpedia.org".
-     */
-    // TODO: this should not be hard-coded.
-    val baseUri = wikiCode match {
-      case "commons" => "http://commons.wikimedia.org"
-      case "mappings" => "http://mappings.dbpedia.org"
-      case "wikidata" => "http://www.wikidata.org"
-      case _ => "http://"+wikiCode+".wikipedia.org"
-    }
-    
-    /**
-     * API URI for this wiki, e.g. "http://be-x-old.wikipedia.org/w/api.php", "http://commons.wikimedia.org/w/api.php",
-     * "http://mappings.dbpedia.org/api.php".
-     */
-    // TODO: this should not be hard-coded.
-    val apiUri = wikiCode match {
-      case "mappings" => baseUri+"/api.php"
-      case _ => baseUri+"/w/api.php"
-    }
+    val filePrefix = wikiCode.replace('-', '_')
     
     /**
      */
@@ -75,7 +60,18 @@ object Language extends (String => Language)
   
   val map: Map[String, Language] = locally {
     
-    def language(code : String, iso: String): Language = new Language(code, iso)
+    def language(code : String, iso: String): Language = {
+      new Language(
+        code,
+        iso,
+        code+".dbpedia.org",
+        "http://"+code+".dbpedia.org",
+        new DBpediaNamespace("http://"+code+".dbpedia.org/resource/"),
+        new DBpediaNamespace("http://"+code+".dbpedia.org/property/"),
+        "http://"+code+".wikipedia.org",
+        "http://"+code+".wikipedia.org/w/api.php"
+      )
+    }
     
     val languages = new HashMap[String,Language]
     
@@ -100,6 +96,7 @@ object Language extends (String => Language)
     // Mappings are mostly based on similarity of the languages and in some cases on the regions where a related language is spoken.
     // See NonIsoLanguagesMappingTest and run it regularly.
     // TODO: move these to a config file
+    // TODO: is this map still necessary? Since JDK 7, Locale officially handles three-letter codes.
     val nonIsoCodes = Map(
       "ace" -> "id",           // Acehnese
       "als" -> "sq",           // Tosk Albanian
@@ -122,7 +119,6 @@ object Language extends (String => Language)
       "chr" -> "en",           // Cherokee
       "chy" -> "en",           // Cheyenne
       "ckb" -> "ku",           // Sorani
-      "commons" -> "en",       // commons uses en, mostly
       "crh" -> "tr",           // Crimean Tatar
       "csb" -> "pl",           // Kashubian
       "cz"  -> "cs",
@@ -160,7 +156,6 @@ object Language extends (String => Language)
       "lmo" -> "it",           // Lombard
       "ltg" -> "lv",
       "map-bms" -> "jv",       // Banyumasan
-      "mappings" -> "en",      // mappings wiki uses en, mostly
       "mdf" -> "ru",           // Moksha
       "mhr" -> "ru",           // Mari
       "min" -> "zh",           // Minangkabau TODO: not sure about this mappings
@@ -204,12 +199,12 @@ object Language extends (String => Language)
       "tet" -> "id",           // Tetum
       "tpi" -> "en",           // Tok Pisin
       "tum" -> "ny",           // Tumbuka
+      "tyv" -> "ru",           // Tuvan
       "udm" -> "ru",           // Udmurt
       "vec" -> "it",           // Venetian
       "vep" -> "fi",
       "vls" -> "nl",           // West Flemish
       "war" -> "tl",           // Waray-Waray language
-      "wikidata" -> "en",       // use en for ease
       "wuu" -> "zh",           // Wu Chinese
       "xal" -> "ru",           // Kalmyk
       "xmf" -> "ka",
@@ -228,6 +223,49 @@ object Language extends (String => Language)
     // TODO: let this loop build a list of codes with bad mappings and throw the exception later.
     for ((code, iso) <- nonIsoCodes) if (isoCodes.contains(iso)) languages(code) = language(code, iso)
     
+    languages("commons") =
+    new Language(
+      "commons",
+      "en",
+       // TODO: do DBpedia URIs make sense here? Do we use them at all? Maybe use null instead.
+      "commons.dbpedia.org",
+      "http://commons.dbpedia.org",
+      new DBpediaNamespace("http://commons.dbpedia.org/resource/"),
+      new DBpediaNamespace("http://commons.dbpedia.org/property/"),
+      "http://commons.wikimedia.org",
+      "http://commons.wikimedia.org/w/api.php"
+    )
+    
+    languages("wikidata") =
+    new Language(
+      "wikidata",
+      "en",
+       // TODO: do DBpedia URIs make sense here? Do we use them at all? Maybe use null instead.
+      "wikidata.dbpedia.org",
+      "http://wikidata.dbpedia.org",
+      RdfNamespace.WIKIDATA,
+      RdfNamespace.WIKIDATA,
+      "http://www.wikidata.org",
+      "http://www.wikidata.org/w/api.php"
+    )
+
+
+
+
+
+    languages("mappings") =
+    new Language(
+      "mappings",
+      "en",
+      // No DBpedia / RDF namespaces for mappings wiki. 
+      "mappings.dbpedia.org",
+      "http://mappings.dbpedia.org",
+      RdfNamespace.MAPPINGS,
+      RdfNamespace.MAPPINGS,
+      "http://mappings.dbpedia.org",
+      "http://mappings.dbpedia.org/api.php"
+    )
+
     languages.toMap // toMap makes immutable
   }
   

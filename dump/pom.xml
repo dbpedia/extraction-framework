@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.dbpedia</groupId>
         <artifactId>extraction</artifactId>
-        <version>3.8</version>
+        <version>4.0-SNAPSHOT</version>
     </parent>
 
     <groupId>org.dbpedia.extraction</groupId>
@@ -17,8 +18,8 @@
         <plugins>
             <plugin>
 
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
 
                 <configuration>
                     <launchers>
@@ -31,13 +32,15 @@
                             </jvmArgs>
                             <args>
                                 <!-- base folder of downloaded dumps -->
-                                <arg>/home/release/wikipedia</arg>
+                                <arg>/data/dbpedia-release/data</arg>
                                 <!-- location of SQL file containing MediaWiki table definitions  -->
-                                <arg>/home/release/data/projects/mediawiki/core/maintenance/tables.sql</arg>
+                                <arg>/home/dbpedia-release/bin/mediawiki/core/maintenance/tables.sql</arg>
                                 <!-- JDBC URL of MySQL server. Import creates a new database for each wiki. -->
                                 <arg>jdbc:mysql://localhost/?characterEncoding=UTF-8</arg>
                                 <!-- require-download-complete -->
                                 <arg>true</arg>
+                                <!-- file name: pages-articles.xml{,.bz2,.gz} -->
+                                <arg>pages-articles.xml.bz2</arg>
                                 <!-- languages and article count ranges, comma-separated, e.g. "de,en" or "@mappings" etc. -->
                                 <arg>10000-</arg>
                             </args>
@@ -46,12 +49,42 @@
                         <launcher>
                             <id>extraction</id>
                             <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
-                                <jvmArg>-Xmx1024m</jvmArg>
                                 <!--
+                                <jvmArg>-Xmx4096m</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                                 <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
                                 <jvmArg>-Dhttp.proxyPort=80</jvmArg>
+                                <jvmArg>-Dhttp.proxyUser=user</jvmArg>
+                                <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
+                                <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg>
+                                -->
+                            </jvmArgs>
+                        </launcher>
+
+                        <launcher>
+                            <id>stats-extraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <!-- Request statistics -->
+                                <jvmArg>-Dextract.template.stats=true</jvmArg>
+                                <!--
+                                <jvmArg>-Xmx4096m</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                                <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
+                                <jvmArg>-Dhttp.proxyPort=80</jvmArg>
+                                <jvmArg>-Dhttp.proxyUser=user</jvmArg>
+                                <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
                                 <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg>
                                 -->
                             </jvmArgs>
@@ -72,10 +105,12 @@
                             <!--
                             <jvmArgs>
                                 <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
-                                <jvmArg>-Dhttp.proxyPort=80</jvmArg>
+                                <jvmArg>-Dhttp.proxyPort=port</jvmArg>
+                                <jvmArg>-Dhttp.proxyUser=user</jvmArg>
+                                <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
                                 <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg> 
-                            </jvmArgs>
-                            -->
+                             </jvmArgs>
+                             -->
                             <!-- ../run download config=download.properties -->
                         </launcher>
                         
@@ -113,11 +148,6 @@
         <dependency>
             <groupId>org.dbpedia.extraction</groupId>
             <artifactId>core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
         </dependency>
 
         <dependency>

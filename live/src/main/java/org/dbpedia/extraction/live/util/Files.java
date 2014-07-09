@@ -59,11 +59,14 @@ public class Files {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		StringBuffer content = new StringBuffer();
 		try{
-		String line;
+		    String line;
+            boolean first = true;
 		
 		while ((line = br.readLine()) != null) {
-			content.append(line);
-			content.append(System.getProperty("line.separator"));
+            if (first) first = false;
+            else       content.append(System.getProperty("line.separator"));
+
+            content.append(line);
 		}
 		}finally{br.close();}
 		return content.toString();

@@ -21,6 +21,11 @@ class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Bo
     else Namespaces.names(lang).getOrElse(code, throw new IllegalArgumentException("namespace number "+code+" not found for language '"+lang.wikiCode+"'")) 
   
   override def toString = code+"/"+name
+  
+  override def equals(other: Any): Boolean = other match {
+    case that: Namespace => (code == that.code && name == that.name)
+    case _ => false
+  }
 }
   
 /**
@@ -46,7 +51,7 @@ private class NamespaceBuilder {
   def create(code: Int, name: String, dbpedia: Boolean) : Namespace = {
     val namespace = new Namespace(code, name, dbpedia)
     val previous = values.put(code, namespace)
-    require(previous.isEmpty, "duplicate namespace: ["+previous+"] and ["+namespace+"]")
+    require(previous.isEmpty, "duplicate namespace: ["+previous.get+"] and ["+namespace+"]")
     if (dbpedia) dbpedias(name.toLowerCase(Language.Mappings.locale)) = namespace
     namespace
   }
@@ -70,8 +75,9 @@ private class NamespaceBuilder {
   
   val map = Map(
     "en"->204,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,"ru"->222,
-    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"ja"->232,"hu"->238,"ko"->242,"tr"->246,"ar"->250,
-    "id"->254,"bg"->264,"sl"->268,"eu"->272,"et"->282,"hr"->284,"el"->304,"ur"->378,"ga"->396
+    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"ja"->232,"zh"->236,"hu"->238,"commons"->240,
+    "ko"->242,"tr"->246,"ar"->250,"id"->254,"sr"->256,"sk"->262,"bg"->264,"sl"->268,"eu"->272,
+    "eo"->274,"et"->282,"hr"->284,"el"->304,"be"->312,"cy"->328,"ur"->378,"ga"->396
   )
   
   for ((lang,code) <- map) mappings(Language(lang)) = ns(code, "Mapping "+lang, true)
@@ -106,6 +112,7 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
   val File = values(6)
   val Template = values(10)
   val Category = values(14)
+  val Module = values(828)
 
   val OntologyClass = values(200)
   val OntologyProperty = values(202)
@@ -119,6 +126,8 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
   
   def get(lang: Language, name: String): Option[Namespace] = {
     dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
+      // TODO: name.toLowerCase(lang.locale) doesn't quite work. On the other hand, MediaWiki
+      // upper / lower case namespace names don't make sense either. Example: http://tr.wikipedia.org/?oldid=13637892
       case None => Namespaces.codes(lang).get(name.toLowerCase(lang.locale)) match {
         case None => None
         case Some(code) => values.get(code)

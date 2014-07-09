@@ -1,12 +1,13 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.mappings.{Mappings,RootExtractor}
+import org.dbpedia.extraction.mappings.{Extractor, Redirects, Mappings, RootExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 import java.io.File
 import scala.actors.Actor
+import scala.collection.immutable.Map
 
 /**
  * Loads all extraction context parameters (ontology pages, mapping pages, ontology, extractors).
@@ -20,8 +21,13 @@ import scala.actors.Actor
  * mappingPageSource is called by loadMappings in the base class, 
  * ontologyPages is called by loadOntology in the base class.
  */
-class DynamicExtractionManager(update: (Language, Mappings) => Unit, languages : Seq[Language], paths: Paths) 
-extends ExtractionManager(languages, paths)
+class DynamicExtractionManager(
+  update: (Language, Mappings) => Unit, languages : Seq[Language],
+  paths: Paths,
+  redirects: Map[Language, Redirects],
+  mappingTestExtractors: Seq[Class[_ <: Extractor[_]]],
+  customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
+extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, customTestExtractors)
 {
     // TODO: remove this field. Clients should get the ontology pages directly from the
     // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
@@ -31,19 +37,23 @@ extends ExtractionManager(languages, paths)
 
     // TODO: remove this field. Clients should get the mapping pages directly from the
     // mappings wiki, not from here. We don't want to keep all mapping pages in memory.
-    private var _mappingPages : Map[Language, Map[WikiTitle, PageNode]] = loadMappingPages
+    private var _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
 
     private var _mappings : Map[Language, Mappings] = loadMappings
 
-    private var _extractors : Map[Language, RootExtractor] = loadExtractors
+    private var _mappingTestExtractors : Map[Language, RootExtractor] = loadMappingTestExtractors
 
-    def extractor(language : Language) = synchronized { _extractors(language) }
+    private var _customTestExtractors : Map[Language, RootExtractor] = loadCustomTestExtractors
 
-    def ontology = synchronized { _ontology }
+    def mappingExtractor(language : Language) = synchronized { _mappingTestExtractors(language) }
+
+    def customExtractor(language : Language) = synchronized { _customTestExtractors(language) }
+
+    def ontology() = synchronized { _ontology }
 
     // TODO: remove this method, refactor base class. Clients should get the ontology pages directly 
     // from the mappings wiki, not from here. We don't want to keep all ontology pages in memory.
-    def ontologyPages = synchronized { _ontologyPages }
+    def ontologyPages() = synchronized { _ontologyPages }
 
     // TODO: remove this method, refactor base class. Clients should get the mapping pages directly 
     // from the mappings wiki, not from here. We don't want to keep all mapping pages in memory.
@@ -59,15 +69,18 @@ extends ExtractionManager(languages, paths)
       println(name+": "+(System.currentTimeMillis - millis)+" millis")
     }
     
-    def updateAll = synchronized {
+    def updateAll() = synchronized {
         for ((language, mappings) <- _mappings) update(language, mappings)
     }
-        
+
+    //TODO: what to do in case of exception or None?
     def updateOntologyPage(page : WikiPage) = asynchronous("updateOntologyPage") {
-        _ontologyPages = _ontologyPages.updated(page.title, parser(page))
+        val pageNode = parser(page).getOrElse(throw new Exception("Cannot update Ontology page: " + page.title.decoded + ". Parsing failed"))
+        _ontologyPages = _ontologyPages.updated(page.title, pageNode)
         _ontology = loadOntology
         _mappings = loadMappings
-        _extractors = loadExtractors()
+        _mappingTestExtractors = loadMappingTestExtractors()
+        _customTestExtractors = loadCustomTestExtractors()
         updateAll
     }
 
@@ -76,16 +89,19 @@ extends ExtractionManager(languages, paths)
         _ontologyPages = _ontologyPages - title
         _ontology = loadOntology
         _mappings = loadMappings
-        _extractors = loadExtractors()
+        _mappingTestExtractors = loadMappingTestExtractors()
+        _customTestExtractors = loadCustomTestExtractors()
         updateAll
     }
 
+    //TODO: what to do in case of exception or None?
     def updateMappingPage(page : WikiPage, language : Language) = asynchronous("updateMappingPage") {
         // TODO: use mutable maps. makes the next line simpler, and we need synchronization anyway.
-        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, parser(page))))
+        _mappingPages = _mappingPages.updated(language, _mappingPages(language) + ((page.title, page)))
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
-        _extractors = _extractors.updated(language, loadExtractors(language))
+        _mappingTestExtractors = _mappingTestExtractors.updated(language, loadExtractors(language, mappingTestExtractors))
+        _customTestExtractors = _customTestExtractors.updated(language, loadExtractors(language, customTestExtractors(language)))
         update(language, mappings)
     }
 
@@ -95,7 +111,8 @@ extends ExtractionManager(languages, paths)
         _mappingPages = _mappingPages.updated(language, _mappingPages(language) - title)
         val mappings = loadMappings(language)
         _mappings = _mappings.updated(language, mappings)
-        _extractors = _extractors.updated(language, loadExtractors(language))
+        _mappingTestExtractors = _mappingTestExtractors.updated(language, loadExtractors(language, mappingTestExtractors))
+        _customTestExtractors = _customTestExtractors.updated(language, loadExtractors(language, customTestExtractors(language)))
         update(language, mappings)
     }
 }

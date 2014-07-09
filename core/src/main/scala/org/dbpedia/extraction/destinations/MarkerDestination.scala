@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.destinations
 
-import java.io.{File,FileOutputStream,IOException}
+import java.io.IOException
+import org.dbpedia.extraction.util.FileLike
 
 /**
  * Handles a marker file that signals that the extraction is either running ('start mode')
@@ -15,31 +16,26 @@ import java.io.{File,FileOutputStream,IOException}
  * @param file marker file
  * @param start 'start mode' if true, 'end mode' if false. 
  */
-class MarkerDestination(destination: Destination, file: File, start: Boolean)
-extends Destination
+class MarkerDestination(destination: Destination, file: FileLike[_], start: Boolean)
+extends WrapperDestination(destination)
 {
   override def open(): Unit = {
     if (start) create() else delete()
-    destination.open()
+    super.open()
   }
 
-  override def write(graph: Seq[Quad]): Unit = {
-    destination.write(graph)
-  } 
-
   override def close(): Unit = {
-    destination.close()
+    super.close()
     if (! start) create() else delete()
   }
   
   private def create(): Unit = {
-    if (file.exists()) throw new IOException("file '"+file+"' already exists")
-    new FileOutputStream(file).close()
+    if (file.exists) throw new IOException("file '"+file+"' already exists")
+    file.outputStream().close()
   }
   
   private def delete(): Unit = {
-    if (! file.exists()) return
-    if (! file.delete()) throw new IOException("failed to delete file '"+file+"'")
+    if (file.exists) file.delete()
   }
   
 }

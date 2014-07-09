@@ -6,7 +6,6 @@ import util.control.Breaks._
 import java.util.regex.Pattern
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
 
@@ -238,7 +237,7 @@ object MyStack {
   implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
   implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
 
-  val parser = WikiParser.getInstance("sweble")
+  val parser = WikiParser.getInstance()
   /**
    * parse a string as wikisyntax and return the nodes as a stack
    */
@@ -260,7 +259,7 @@ object MyStack {
         new WikiPage(
           new WikiTitle("wiktionary extraction subtemplate", Namespace.Main, Language.English), str //parsing
         )
-    )
+    ).getOrElse(throw new Exception("Parser Error") )
     val nodes = new Stack[Node]()
 
     if(appendedNewline && (page.children.last match {case TextNode("\n", _)=>true; case _ => false})){
@@ -492,6 +491,7 @@ class MyLinkNode(val n : LinkNode){
       case eln : ExternalLinkNode => eln.destination.toString
       case iln : InternalLinkNode => iln.destination.decoded
       case iwln : InterWikiLinkNode => iwln.destination.decoded
+      case _  =>  throw new IllegalStateException(n.toPlainText + ": Link type not supported!")
   }
   def getFullDestination(ns:String) : String = {
       val rawDestination = n.getDestination                    

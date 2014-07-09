@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.util
 
+import scala.language.implicitConversions
 import java.io.{Reader,BufferedReader}
 
 object RichReader
@@ -14,11 +15,14 @@ class RichReader(reader: BufferedReader) {
   
   def this(reader: Reader) = this(new BufferedReader(reader))
   
+  /**
+   * Process all lines. The last value passed to proc will be null. 
+   */
   def foreach[U](proc: String => U): Unit = {
     while (true) {
       val line = reader.readLine()
-      if (line == null) return
       proc(line)
+      if (line == null) return
     }
   }
 }

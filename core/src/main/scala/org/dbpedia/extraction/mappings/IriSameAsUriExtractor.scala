@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.destinations.QuadBuilder
 import java.net.URI
+import scala.language.reflectiveCalls
 
 /**
  * Extracts sameAs links for resources with themselves. Only makes sense when serialization is
@@ -17,7 +18,7 @@ class IriSameAsUriExtractor (
     def language : Language
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   private val language = context.language
 

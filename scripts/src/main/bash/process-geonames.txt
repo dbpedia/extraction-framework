@@ -1,0 +1,71 @@
+Download and unzip
+
+http://download.geonames.org/export/dump/alternateNames.zip
+
+Keep alternateNames.txt
+
+About 400K lines in alternateNames.txt have this format:
+
+8078498 12 link http://en.wikipedia.org/wiki/Takht-e_Qeysar 1 1 1
+
+The fields are tab-separated.
+The first field is probably some ID, but not relevant for us.
+The second field is the geonames ID.
+The "link" is sometimes missing.
+The numbers after the URL occur only rarely, but the tabs are always there.
+
+# keep only tab-separated page title, geonames ID, language:
+# sed -n means "don't print"
+# sed -r means extended regex syntax 
+# s///p means "print match" 
+sed -r -n 's%^[0-9]+\t([0-9]+)\t.*\t.*https?://([^\./:]+)\.wikipedia\.org/wiki/([^\t]+)\t.*$%\3\t\1\t\2%p' alternateNames.txt > geonames.ttl.1
+
+# unescape percent-escapes, preserving tabs:
+sed -r 's/%([0-9A-F])/\\x\1/g; s/\t/\\t/g' geonames.ttl.1 | while read -r line ; do echo -e $line ; done > geonames.ttl.2
+
+# do it again - some are escaped twice:
+sed -r 's/%([0-9A-F])/\\x\1/g; s/\t/\\t/g' geonames.ttl.2 | while read -r line ; do echo -e $line ; done > geonames.ttl.3
+
+# drop useless titles (there's one title with question marks, it's useless as well): 
+grep -v '[][^{}|#<>?]' geonames.ttl.3 > geonames.ttl.4 
+
+# several changes:
+# uppercase first letter of title
+# some titles contain spaces instead of underscore
+# re-percent-escape some chars
+sed 's/.*/\u&/g; s/ /_/g; s/%/%25/g; s/"/%22/g; s/\?/%3F/g; s/\^/%5E/g; s/`/%60/g' geonames.ttl.4 > geonames.ttl.5
+
+# stable sort by geonames ID (probably won't change the file, but anyway):
+env LC_ALL=C sort -k 2 -n -s geonames.ttl.5 > geonames.ttl.6
+
+# remove duplicate lines:
+env LC_ALL=C uniq geonames.ttl.6 > geonames.ttl.7
+
+# there are still a few hundred lines that map one geonames ID to multiple pages for a language...
+uniq -f 1 -D geonames.ttl.7
+# ... but it's probably better to keep them than to drop them.
+
+# stable sort by language...
+env LC_ALL=C sort -k 3 -s geonames.ttl.7 > geonames.ttl.8
+
+# ...and split by language
+awk '{ if ($3 != last) { last = $3; close(file); system("mkdir -p "$3); file = $3"/geonames_links_"$3".ttl" } print "<http://"$3".dbpedia.org/resource/"$1"> <http://www.w3.org/2002/07/owl#sameAs> <http://sws.geonames.org/"$2"/> ." >> file }' geonames.ttl.8
+
+# remove languages that have no DBpedia folder
+rm -fr se/
+
+# succumb to English URI hegemony
+mv en/geonames_links_en.ttl geonames_links_en.ttl
+sed 's%http://en\.dbpedia\.org%http://dbpedia\.org%g' geonames_links_en.ttl > en/geonames_links_en.ttl
+rm geonames_links_en.ttl
+
+# generate .nt from .ttl files
+cd ~/git/extraction-framework/scripts
+../run RecodeUris .ttl .nt /data/dbpedia-release/geonames/*/*.ttl
+
+# zip it
+for i in */*.{nt,ttl} ; do echo $i.gz ; pigz -c <$i >$i.gz ; echo $i.bz2 ; pbzip2 -c <$i >$i.bz2 ; done
+
+# rename and copy to main folders
+for i in */*.{gz,bz2} ; do suffix=${i#*.} ; wiki=${i%%/*}wiki ; path=$(echo /data/dbpedia-release/data/full/$wiki/2013*) ; date=${path##*/} ; cp $i $path/$wiki-$date-geonames-links.$suffix ; done
+

@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.sources
 
 import org.dbpedia.extraction.wikiparser.WikiTitle
-
 import java.util.logging.{Logger, Level}
 import java.io.File
 import util.control.ControlThrowable
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.{WikiUtil, FileProcessor}
+import org.dbpedia.util.Exceptions
 
 /**
  * Reads wiki pages from text files in the file system.
@@ -48,7 +48,7 @@ class FileSource(baseDir : File, language : Language, filter : (String => Boolea
             catch
             {
                 case ex : ControlThrowable => throw ex
-                case ex : Exception => logger.log(Level.WARNING, "Error processing page  " + pageName, ex)
+                case ex : Exception => logger.log(Level.WARNING, "error processing page '"+pageName+"': "+Exceptions.toString(ex, 200))
             }
         })
     }

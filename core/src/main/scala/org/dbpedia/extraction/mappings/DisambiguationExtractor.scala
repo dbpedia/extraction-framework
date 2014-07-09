@@ -5,17 +5,19 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
 
 /**
  * Extracts disambiguation links.
  */
 class DisambiguationExtractor(
   context : {
-    def ontology : Ontology
-    def language : Language
+    def disambiguations : Disambiguations
+    def ontology        : Ontology
+    def language        : Language
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   private val language = context.language
 
@@ -27,7 +29,7 @@ extends Extractor
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    if (page.title.namespace == Namespace.Main && page.isDisambiguation)
+    if (page.title.namespace == Namespace.Main && (page.isDisambiguation || context.disambiguations.isDisambiguation(page.id)))
     {
       val allLinks = collectInternalLinks(page)
       

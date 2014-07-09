@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.dump.download
 
 import java.io.{File,InputStream}
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
-import java.util.zip.GZIPInputStream
 import java.net.{URL,URLConnection}
+import org.dbpedia.extraction.util.IOUtils
 
 /**
  * Download decorator that renames and unzips zipped files.
@@ -33,15 +32,10 @@ trait Unzip extends Downloader {
     val name = super.targetName(url)
     val dot = name.lastIndexOf('.')
     val ext = name.substring(dot + 1)
-    unzippers.get(ext) match {
+    IOUtils.unzippers.get(ext) match {
       case Some(unzipper) => (name.substring(0, dot), unzipper)
       case None => (name, identity)
     }
   }
-  
-  private val unzippers = Map[String, InputStream => InputStream] (
-    "gz" -> { new GZIPInputStream(_) }, 
-    "bz2" -> { new BZip2CompressorInputStream(_, true) } 
-  )
   
 }

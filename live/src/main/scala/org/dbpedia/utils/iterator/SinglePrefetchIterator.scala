@@ -47,7 +47,7 @@ abstract class SinglePrefetchIterator[T >: Null <: AnyRef]
 			current = prefetch();
 		}
 		catch {
-			case e => {
+			case e : Throwable => {
 				current = null;		
 				logger.error(ExceptionUtils.getStackTrace(e));
 			}

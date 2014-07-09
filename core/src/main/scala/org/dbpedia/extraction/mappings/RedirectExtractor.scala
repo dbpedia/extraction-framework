@@ -3,7 +3,8 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import scala.language.reflectiveCalls
 
 /**
  * Extracts redirect links between Articles in Wikipedia.
@@ -14,7 +15,7 @@ class RedirectExtractor (
     def language : Language
   }
 )
-extends Extractor
+extends PageNodeExtractor
 {
   private val language = context.language
   
@@ -22,7 +23,8 @@ extends Extractor
 
   override val datasets = Set(DBpediaDatasets.Redirects)
   
-  private val namespaces = Set(Namespace.Main, Namespace.Template, Namespace.Category)
+  private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
+    else Set(Namespace.Main, Namespace.Template, Namespace.Category)
   
   private val quad = QuadBuilder(language, DBpediaDatasets.Redirects, wikiPageRedirectsProperty, null) _
 

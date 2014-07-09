@@ -2,13 +2,14 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.wikiparser._
+import scala.util.matching.Regex.Match
 
 /**
  * Parses a human-readable character string from a node. 
  */
 object StringParser extends DataParser
 {
-    private val smallTagRegex = """<small[^>]*>(.*?)<\/small>""".r
+    private val smallTagRegex = """<small[^>]*>\(?(.*?)\)?<\/small>""".r
     private val tagRegex = """\<.*?\>""".r
 
     override def parse(node : Node) : Option[String] =
@@ -19,7 +20,10 @@ object StringParser extends DataParser
 
         //Clean text
         var text = sb.toString()
-        text = smallTagRegex.replaceAllIn(text, "$1")
+        // Replace text in <small></small> tags with an "equivalent" string representation
+        // Simply extracting the content puts this data at the same level as other text appearing
+        // in the node, which might not be the editor's semantics
+        text = smallTagRegex.replaceAllIn(text, (m: Match) => if (m.group(1).nonEmpty) "($1)" else "")
         text = tagRegex.replaceAllIn(text, "") //strip tags
         text = WikiUtil.removeWikiEmphasis(text)
         text = text.replace("&nbsp;", " ")//TODO decode all html entities here

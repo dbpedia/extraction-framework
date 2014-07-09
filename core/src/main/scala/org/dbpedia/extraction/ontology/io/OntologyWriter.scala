@@ -63,6 +63,8 @@ class OntologyWriter
 
             writer.write("\n| owl:equivalentClass = " + clazz.equivalentClasses.map(_.name).mkString(", "))
 
+            writer.write("\n| owl:disjointWith = " + clazz.disjointWithClasses.map(_.name).mkString(", "))
+
             specializations.get(clazz) match
             {
                 case Some(s) => writer.write("\n| specificProperties = " + s.map{case (property, dt) =>

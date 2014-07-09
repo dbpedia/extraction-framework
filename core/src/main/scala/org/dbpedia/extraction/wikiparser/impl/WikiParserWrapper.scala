@@ -4,7 +4,6 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
-import org.dbpedia.extraction.sources.WikiPageFormat
 import json.JsonWikiParser
 
 import WikiParserWrapper._
@@ -26,18 +25,19 @@ object WikiParserWrapper {
 
 }
 
-class WikiParserWrapper(wikiTextParserName: String) extends WikiParser {
+class WikiParserWrapper(wikiTextParserName: String) extends  WikiParser{
 
-  def apply(page : WikiPage) : PageNode =
+  def apply(page : WikiPage) : Option[PageNode]  =
   {
-     page.format match {
-       case WikiPageFormat.WikiText =>
-         if (wikiTextParserName == null || wikiTextParserName.equals("simple")){
-           simpleWikiParser(page)
-         } else {
-           swebleWikiParser(page)
-         }
-       case WikiPageFormat.Json => jsonParser(page)
-     }
+    page.format match {
+      //case "application/json" => jsonParser(page)  //obslete now after core refactoring
+      case _ =>
+        if (wikiTextParserName == null || wikiTextParserName.equals("simple")){
+          simpleWikiParser(page)
+        } else {
+          swebleWikiParser(page)
+        }
+
+    }
   }
 }

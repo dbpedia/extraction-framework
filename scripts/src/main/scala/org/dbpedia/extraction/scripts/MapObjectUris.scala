@@ -5,6 +5,8 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 import scala.Console.err
+import org.dbpedia.extraction.util.SimpleWorkers
+import org.dbpedia.extraction.util.Language
 
 /**
  * Maps old object URIs in triple files to new object URIs:
@@ -100,7 +102,8 @@ object MapObjectUris {
     val languages = parseLanguages(baseDir, args.drop(6))
     require(languages.nonEmpty, "no languages")
     
-    for (language <- languages) {
+    // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
+    val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
       
       val finder = new DateFinder(baseDir, language)
       
@@ -111,7 +114,7 @@ object MapObjectUris {
       for (mappping <- mappings) {
         var count = 0
         QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
-          if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
+          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
           // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
           // line, which means that the character array for the whole line is kept in memory, which
@@ -122,7 +125,7 @@ object MapObjectUris {
           map.addBinding(quad.subject, quad.value)
           count += 1
         }
-        err.println("found "+count+" mappings")
+        err.println(language.wikiCode+": found "+count+" mappings")
       }
       
       for (input <- inputs; suffix <- suffixes) {
@@ -136,6 +139,10 @@ object MapObjectUris {
       }
       
     }
+    
+    workers.start()
+    for (language <- languages) workers.process(language)
+    workers.stop()
     
   }
   

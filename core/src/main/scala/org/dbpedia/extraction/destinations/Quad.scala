@@ -34,8 +34,11 @@ class Quad(
   val value: String,
   val context: String,
   val datatype: String
-) extends Ordered[Quad]
+)
+extends Ordered[Quad]
+with Equals
 {
+  //updated for allowing addition of Wikidata String properties with unknown language
   def this(
     language: Language,
     dataset: Dataset,
@@ -45,7 +48,7 @@ class Quad(
     context: String,
     datatype: Datatype
   ) = this(
-      language.isoCode,
+    if (language == null) null else language.isoCode,
       dataset.name,
       subject,
       predicate,
@@ -71,6 +74,7 @@ class Quad(
       context,
       findType(datatype, predicate.range)
     )
+
 
   // Validate input
   if (subject == null) throw new NullPointerException("subject")
@@ -107,42 +111,83 @@ class Quad(
    ")"
   }
 
+  /**
+   * sub classes that add new fields should override this method 
+   */
   def compare(that: Quad): Int = {
-    val s = subject.compareTo(that.subject)
-    if (s != 0)
-      s
-    else {
-      val p = predicate.compareTo(that.predicate)
-      if (p != 0)
-        p
-      else {
-        val o = value.compareTo(that.value)
-        if (o != 0 || datatype == null || that.datatype == null)
-          o
-        else
-          datatype.compareTo(that.datatype)
-      }
-
-    }
+    var c = 0
+    c = this.subject.compareTo(that.subject)
+    if (c != 0) return c
+    c = this.predicate.compareTo(that.predicate)
+    if (c != 0) return c
+    c = this.value.compareTo(that.value)
+    if (c != 0) return c
+    c = safeCompare(this.datatype, that.datatype)
+    if (c != 0) return c
+    return safeCompare(this.language, that.language)
+    if (c != 0) return c
+    // ignore dataset and context
+    return 0
+  }
+  
+  /**
+   * sub classes that add new fields should override this method 
+   */
+  override def canEqual(obj: Any): Boolean = {
+    return obj.isInstanceOf[Quad] 
   }
 
-  override def equals(obj: Any) = {
-    if (obj.isInstanceOf[Quad]) {
-      val q = obj.asInstanceOf[Quad]
-      (this.subject.equals(q.subject)
-        && this.predicate.equals(q.predicate)
-        && this.value.equals(q.value)
-        && this.language.equals(q.language)
-        && (this.datatype == null || q.datatype == null || this.datatype.equals(q.datatype))
-        )
-    }
-    else
-      false
+  /**
+   * sub classes that add new fields should override this method 
+   */
+  override def equals(other: Any): Boolean = other match {
+    case that: Quad =>
+      this.eq(that) ||
+      that.canEqual(this) &&
+      this.subject == that.subject &&
+      this.predicate == that.predicate &&
+      this.value == that.value &&
+      this.datatype == that.datatype &&
+      this.language == that.language
+      // ignore dataset and context
+    case _ => false
   }
+  
+  /**
+   * sub classes that add new fields should override this method 
+   */
+  override def hashCode(): Int = {
+    val prime = 41
+    var hash = 1
+    hash = prime * hash + subject.hashCode
+    hash = prime * hash + predicate.hashCode
+    hash = prime * hash + value.hashCode
+    hash = prime * hash + safeHash(datatype)
+    hash = prime * hash + safeHash(language)
+    // ignore dataset and context
+    return hash
+  }
+  
 }
 
 object Quad
 {
+  /**
+   * null-safe comparison. null is equal to null and less than any non-null string.
+   */
+  private def safeCompare(s1: String, s2: String): Int =
+  {
+    if (s1 == null && s2 == null) 0
+    else if (s1 == null) -1
+    else if (s2 == null) 1
+    else s1.compareTo(s2)
+  }
+  
+  private def safeHash(s: String): Int =
+  {
+    if (s == null) 0 else s.hashCode;
+  }
+  
   private def findType(datatype: Datatype, range: OntologyType): Datatype =
   {
     if (datatype != null) datatype

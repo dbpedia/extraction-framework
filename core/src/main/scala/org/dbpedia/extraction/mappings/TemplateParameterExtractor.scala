@@ -5,6 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /**
  * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
@@ -15,13 +16,13 @@ class TemplateParameterExtractor(
     def language : Language 
   } 
 ) 
-extends Extractor
+extends PageNodeExtractor
 {
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesParameter")
 
   val parameterRegex = """(?s)\{\{\{([^|}{<>]*)[|}<>]""".r
   
-  override val datasets = Set(DBpediaDatasets.TemplateVariables)
+  override val datasets = Set(DBpediaDatasets.TemplateParameters)
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
   {
@@ -49,7 +50,7 @@ extends Extractor
 
     for (parameter <- parameters.distinct if parameter.nonEmpty) {
       // TODO: page.sourceUri does not include the line number
-      quads += new Quad(context.language, DBpediaDatasets.TemplateVariables, subjectUri, templateParameterProperty, 
+      quads += new Quad(context.language, DBpediaDatasets.TemplateParameters, subjectUri, templateParameterProperty, 
           parameter, page.sourceUri, context.ontology.datatypes("xsd:string"))
     }
     

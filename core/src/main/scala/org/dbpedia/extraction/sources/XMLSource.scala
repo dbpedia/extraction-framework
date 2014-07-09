@@ -1,10 +1,13 @@
 package org.dbpedia.extraction.sources
 
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
 import java.io.{File,FileInputStream,InputStreamReader}
 import scala.xml.Elem
 import org.dbpedia.extraction.util.Language
 import java.io.Reader
+import java.util.concurrent.{ExecutorService, Executors, Callable}
+import scala.collection.JavaConversions._
+import java.util.logging.Level
 
 /**
  *  Loads wiki pages from an XML stream using the MediaWiki export format.
@@ -29,6 +32,10 @@ object XMLSource
       fromReader(() => new InputStreamReader(new FileInputStream(file), "UTF-8"), language, filter)
     }
 
+    def fromMultipleFiles(files: List[File], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+      fromReaders(files.map { f => () => new InputStreamReader(new FileInputStream(f), "UTF-8") }.toList, language, filter)
+    }
+
     /**
      * Creates an XML Source from a reader.
      *
@@ -38,6 +45,11 @@ object XMLSource
      */
     def fromReader(source: () => Reader, language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
       new XMLReaderSource(source, language, filter)
+    }
+
+    def fromReaders(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+      if (sources.size == 1) fromReader(sources.head, language, filter) // no need to create an ExecutorService
+      else new MultipleXMLReaderSource(sources, language, filter)
     }
 
     /**
@@ -53,6 +65,41 @@ object XMLSource
        * @param xml The xml which contains the pages
      */
     def fromOAIXML(xml : Elem) : Source  = new OAIXMLSource(xml)
+}
+
+/**
+ * XML source which reads from a file
+ */
+private class MultipleXMLReaderSource(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean) extends Source
+{
+  var executorService : ExecutorService = null
+
+  override def foreach[U](proc : WikiPage => U) : Unit = {
+
+    if (executorService == null) executorService = Executors.newFixedThreadPool(Runtime.getRuntime.availableProcessors())
+
+    try {
+
+      def tasks = sources.map { source =>
+        new Callable[Unit]() {
+          def call() {
+            val reader = source()
+            try new WikipediaDumpParser(reader, language, filter.asInstanceOf[WikiTitle => java.lang.Boolean], proc).run()
+            finally reader.close()
+          }
+        }
+      }
+
+      // Wait for the tasks to finish
+      executorService.invokeAll(tasks)
+
+    } finally {
+      executorService.shutdown()
+      executorService = null
+    }
+  }
+
+  override def hasDefiniteSize = true
 }
 
 /**
@@ -79,18 +126,47 @@ private class XMLSource(xml : Elem, language: Language) extends Source
         for(page <- xml \ "page";
             rev <- page \ "revision")
         {
-            val _contributorID = if ( (rev \ "contributor" \ "id" ).text == null) "0"
-                                 else (rev \ "contributor" \ "id" ).text
-            f( new WikiPage( title     = WikiTitle.parse((page \ "title").text, language),
-                             redirect  = null, // TODO: read redirect title from XML
-                             id        = (page \ "id").text,
-                             revision  = (rev \ "id").text,
-                             timestamp = (rev \ "timestamp").text,
-                             contributorID = _contributorID,
-                             contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip" ).text
-                                               else (rev \ "contributor" \ "username" ).text,
-                             source    = (rev \ "text").text,
-                             format    = (rev \ "format").text) )
+            val title = WikiTitle.parseCleanTitle((page \ "title").text, language)
+            val nsCode = try
+            {
+                (page \ "ns").text.toInt
+            }
+            catch
+            {
+                case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
+            }
+
+            if(title != null && title.namespace.code != nsCode)
+            {
+                val expected: Namespace = Namespace.values.apply(nsCode)
+                //logger.log(Level.WARNING, "Error parsing title: found namespace " + title.namespace + ", expected " + expected + " in title " + titleStr)
+                title.otherNamespace = expected
+            }
+
+            //Skip bad titles
+            if(title != null)
+            {
+                val _redirect = (page \ "redirect" \ "@title").text match
+                {
+                  case "" => null
+                  case t => WikiTitle.parse(t, language)
+                }
+                val _contributorID = (rev \ "contributor" \ "id").text match
+                {
+                  case null => "0"
+                  case id => id
+                }
+                f( new WikiPage( title     = title,
+                                 redirect  = _redirect,
+                                 id        = (page \ "id").text,
+                                 revision  = (rev \ "id").text,
+                                 timestamp = (rev \ "timestamp").text,
+                                 contributorID = _contributorID,
+                                 contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip" ).text
+                                 else (rev \ "contributor" \ "username" ).text,
+                                 source    = (rev \ "text").text,
+                                 format    = (rev \ "format").text) )
+            }
         }
     }
 
