@@ -17,7 +17,7 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
 
   override val datasets = Set(DBpediaDatasets.InterLanguageLinks)
   
-  private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
+  private val namespaces = if (context.language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
     else Set(Namespace.Main, Namespace.Template, Namespace.Category)
   
   private val quad = QuadBuilder.apply(context.language, DBpediaDatasets.InterLanguageLinks, interLanguageLinksProperty, null) _
