@@ -63,6 +63,8 @@ object RdfNamespace {
   val BIBO = ns("bibo", "http://purl.org/ontology/bibo/", false)
   val WIKIDATA = ns("wikidata", "http://wikidata.dbpedia.org/resource/", false)
   val MAPPINGS = ns("mappings", "http://mappings.dbpedia.org/wiki/", false)
+  val D0 = ns("d0", "http://www.ontologydesignpatterns.org/ont/d0.owl#")
+  val DUL = ns("dul", "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#")
   
   /**
    * @return namespace for prefix and suffix, default namespace and full name if no match found 
