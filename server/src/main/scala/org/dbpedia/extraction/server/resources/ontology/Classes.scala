@@ -20,13 +20,18 @@ class Classes
     def get : Elem =
     {
         //Map each class to a list of its sub classes
-        val subClassesMap = ontology.classes.values.toList   //Get all classes
-                // Don't filter non-DBpedia classes - it's useful to see foaf:Document etc
-                // .filter(! _.name.contains(":")) //Filter non-DBpedia classes
-                // Do filter classes that do not have a base class
-                .filter(_.baseClasses.nonEmpty)
-                .sortWith(_.name < _.name)     //Sort by name
-                .groupBy(_.baseClasses.head).toMap   //Group by super class
+        val subClassesMap = ontology.classes.values.toList //Get all classes
+          // Don't filter non-DBpedia classes - it's useful to see foaf:Document etc
+          // .filter(! _.name.contains(":")) //Filter non-DBpedia classes
+          // Do filter classes that do not have a base class
+          .filter(_.baseClasses.nonEmpty)
+          .sortWith(_.name < _.name) //Sort by name
+          // group by superclass but only consider classes which will be shown in the overview. Use owl:Thing as
+          // fallback
+          .groupBy(
+            c => (c.baseClasses.filter(base => ontology.classes.contains(base.name)) :+ ontology.classes("owl:Thing"))
+              .head).toMap
+
 
         val rootClass = ontology.classes("owl:Thing")
 
