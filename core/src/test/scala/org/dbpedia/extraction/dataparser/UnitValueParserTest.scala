@@ -293,6 +293,20 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
         parse("en", "Volume", "{{convert|612000000|USgal|m3|abbr=on}}") should be (approximatelyEqualTo(Some(2316672.0)))
     }
 
+    //Power/Energy - Positive Tests - Input is valid
+    "UnitValueParser" should "return Power(3094e6 W)" in
+    {
+        parse("en", "Power", "3,094&nbsp;MW") should equal (Some(3094000000.0))
+    }
+    "UnitValueParser" should "return Power(0.01 W)" in
+    {
+        parse("en", "Power", "10 mW") should equal (Some(0.01))
+    }
+    "UnitValueParser" should "return Energy(80e12 * 3600.0)" in
+    {
+        parse("en", "Energy", "{{convert|80|TWh|abbr=on|lk=on}}") should be  (approximatelyEqualTo(Some(80e12 * 3600.0)))
+    }
+
     //Time - Positive Tests - Input is valid
     "UnitValueParser" should "return Time(5 Days)" in
     {
