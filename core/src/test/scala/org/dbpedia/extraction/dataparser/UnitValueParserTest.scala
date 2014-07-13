@@ -307,6 +307,12 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
         parse("en", "Energy", "{{convert|80|TWh|abbr=on|lk=on}}") should be  (approximatelyEqualTo(Some(80e12 * 3600.0)))
     }
 
+    // Ratio - Positive Tests - Input is valid
+    "UnitValueParser" should "return 0.01" in
+    {
+        parse("en", "Ratio", "1%") should equal (Some(0.01))
+    }
+   
     //Time - Positive Tests - Input is valid
     "UnitValueParser" should "return Time(5 Days)" in
     {
