@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{QuadBuilder, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, ExtractorUtils}
 import scala.language.reflectiveCalls
 import org.dbpedia.extraction.util.StringUtils._
 
@@ -28,7 +28,8 @@ extends PageNodeExtractor
 
   override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    if(node.title.namespace != Namespace.Main) return Seq.empty
+    if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
+        return Seq.empty
     
     val ìnternalLinks = PageLinksExtractor.collectInternalLinks(node)
 
