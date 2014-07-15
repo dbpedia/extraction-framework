@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.mappings
 
+import java.net.URI
+
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
@@ -31,7 +33,15 @@ extends PropertyMapping
   if (ontologyProperty.isInstanceOf[OntologyObjectProperty])
   {
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
-    value = context.language.resourceUri.append(value)
+    try {
+      // if it is a URI return it directly
+      val uri = new URI(value)
+      if (uri.getScheme == null) "http://" + uri.toString
+      else uri.toString
+    } catch {
+      // otherwise create a DBpedia resource URI
+      case _ : Exception => context.language.resourceUri.append(value)
+    }
   }
 
   override val datasets = Set(DBpediaDatasets.OntologyProperties)
