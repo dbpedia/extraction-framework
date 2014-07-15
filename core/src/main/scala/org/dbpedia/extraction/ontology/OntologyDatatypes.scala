@@ -526,6 +526,11 @@ object OntologyDatatypes
         builder.addDimension("LinearMassDensity");
         builder.addUnit(new StandardUnitDatatype("gramPerKilometre", Set("g/km")));
         types :::= builder.build
+    
+        builder.addDimension("Ratio");
+        builder.addUnit(new FactorUnitDatatype("perCent", Set("%","percent","per cent"), 0.01));
+        builder.addUnit(new FactorUnitDatatype("perMil", Set("‰","permil","per mil"), 0.001));
+        types :::= builder.build
         
         return types
     }
