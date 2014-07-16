@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.dataparser.DateTimeParser
+import org.dbpedia.extraction.dataparser.{DateTimeParser,StringParser}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.OntologyProperty
@@ -27,7 +27,8 @@ extends PropertyMapping
   private val startDateParser = new DateTimeParser(context, rangeType(startDateOntologyProperty))
   private val endDateParser = new DateTimeParser(context, rangeType(endDateOntologyProperty))
 
-  private val presentString = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
+  private val presentStrings : Set[String] = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
+  private val sinceString = sinceMap.getOrElse(context.language.wikiCode, sinceMap("en"))
 
   // TODO: the parser should resolve HTML entities
   private val intervalSplitRegex = "(—|–|-|&mdash;|&ndash;)"
@@ -57,14 +58,21 @@ extends PropertyMapping
         case List(start, end) => end.retrieveText match
         {
           //if until "present" is specified in words, don't write end triple
-          case Some(text : String) if text.trim == presentString => None
+          case Some(text : String) if presentStrings.contains(text.trim.toLowerCase) => None
 
           //normal case of specified end date
           case _ => endDateParser.parse(end)
         }
 
-        //make start and end the same if there is no end specified
-        case List(start) => Some(startDate)
+        //if there was only one element found
+        case List(start) => StringParser.parse(start) match
+        {
+          //if in a "since xxx" construct, don't write end triple
+          case Some(text : String) if text.trim.toLowerCase.startsWith(sinceString) => None
+
+          //make start and end the same if there is no end specified
+          case _ => Some(startDate)
+        }
 
         case _ => throw new IllegalStateException("size of split nodes must be 0 < l < 3; is " + splitNodes.size)
       }
