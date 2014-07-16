@@ -15,7 +15,7 @@ class Config(config: Properties)
   // TODO: get rid of all config file parsers, use Spring
 
   /** Dump directory */
-  val dumpDir = getValue(config, "base-dir", true){
+  lazy val dumpDir = getValue(config, "base-dir", true){
     x =>
       val dir = new File(x)
       if (! dir.exists) throw error("dir "+dir+" does not exist")
@@ -33,10 +33,10 @@ class Config(config: Properties)
   val parser = config.getProperty("parser", "simple")
 
   /** Local ontology file, downloaded for speed and reproducibility */
-  val ontologyFile = getValue(config, "ontology", false)(new File(_))
+  lazy val ontologyFile = getValue(config, "ontology", false)(new File(_))
 
   /** Local mappings files, downloaded for speed and reproducibility */
-  val mappingsDir = getValue(config, "mappings", false)(new File(_))
+  lazy val mappingsDir = getValue(config, "mappings", false)(new File(_))
 
   val formats = parseFormats(config, "uri-policy", "format")
 
