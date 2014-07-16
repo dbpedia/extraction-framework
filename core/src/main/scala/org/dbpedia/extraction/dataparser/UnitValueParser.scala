@@ -504,26 +504,34 @@ class UnitValueParser( extractionContext : {
             // The unit is explicitly provided
             case Some(unitName) => inputDatatype match
             {
-                // We are matching using case-insensitive regexes hence we must lowercase the unit name
-                // to be consistent
-                case inputUnit : UnitDatatype => inputUnit.dimension.unit(unitName.toLowerCase) match
+                //first match case-sensitive so that MW matches and is not equivalent to mW
+                case inputUnit : UnitDatatype => inputUnit.dimension.unit(unitName) match
                 {
                     case Some(unit) => unit
-                    case None =>
+                    //only then case-insensitive to catch possible case mismatches such as Km i/o km
+                    case None => inputUnit.dimension.unit(unitName.toLowerCase) match
                     {
-                        errors.foreach(_.add("Given unit '" + unitName + "' not found"))
-                        return None
+                        case Some(unit) => unit
+                        case None =>
+                        {
+                            errors.foreach(_.add("Given unit '" + unitName + "' not found"))
+                            return None
+                        }
                     }
                 }
-                // We are matching using case-insensitive regexes hence we must lowercase the unit name
-                // to be consistent
-                case inputDimension : DimensionDatatype => inputDimension.unit(unitName.toLowerCase) match
+                //first match case-sensitive so that MW matches and is not equivalent to mW
+                case inputDimension : DimensionDatatype => inputDimension.unit(unitName) match
                 {
                     case Some(unit) => unit
-                    case None =>
+                    //only then case-insensitive to catch possible case mismatches such as Km i/o km
+                    case None => inputDimension.unit(unitName.toLowerCase) match
                     {
-                        errors.foreach(_.add("Given unit '" + unitName + "' not found in dimension " + inputDimension))
-                        return None
+                        case Some(unit) => unit
+                        case None =>
+                        {
+                            errors.foreach(_.add("Given unit '" + unitName + "' not found in dimension " + inputDimension))
+                            return None
+                        }
                     }
                 }
                 case _ => throw new Exception("Unexpected input datatype")
