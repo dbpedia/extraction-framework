@@ -35,7 +35,7 @@ extends PropertyMapping
   private val intervalSplitRegex = "(?iu)(—|–|-|&mdash;|&ndash;" + (splitString match
   {
      case text : String => "|" + text
-     case null => 
+     case null => ""
   }) + ")"
   
   override val datasets = Set(DBpediaDatasets.OntologyProperties)
