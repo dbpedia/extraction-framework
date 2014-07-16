@@ -25,4 +25,8 @@ object DateIntervalMappingConfig
         "fr" -> "depuis",
         "pl" -> "od"
     )
+
+    val splitMap = Map(
+        "fr" -> "à|au"
+    )
 }

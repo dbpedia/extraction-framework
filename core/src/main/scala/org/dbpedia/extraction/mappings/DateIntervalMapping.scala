@@ -29,9 +29,14 @@ extends PropertyMapping
 
   private val presentStrings : Set[String] = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
   private val sinceString = sinceMap.getOrElse(context.language.wikiCode, sinceMap("en"))
+  private val splitString = splitMap.getOrElse(context.language.wikiCode, null)
 
   // TODO: the parser should resolve HTML entities
-  private val intervalSplitRegex = "(—|–|-|&mdash;|&ndash;)"
+  private val intervalSplitRegex = "(?iu)(—|–|-|&mdash;|&ndash;" + (splitString match
+  {
+     case text : String => "|" + text
+     case null => 
+  }) + ")"
   
   override val datasets = Set(DBpediaDatasets.OntologyProperties)
 
