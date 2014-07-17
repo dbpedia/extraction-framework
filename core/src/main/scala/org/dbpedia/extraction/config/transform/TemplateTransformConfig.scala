@@ -28,20 +28,20 @@ object TemplateTransformConfig {
   }
 
   // General functions
-  private def textNode(text: String)(node: TemplateNode) : List[TextNode] = List(TextNode(text, node.line))
+  private def textNode(text: String)(node: TemplateNode, lang:Language) : List[TextNode] = List(TextNode(text, node.line))
 
   /**
    * Extracts all the children of the PropertyNode's in the given TemplateNode
    */
-  private def extractChildren(filter: PropertyNode => Boolean)(node: TemplateNode) : List[Node] = {
+  private def extractChildren(filter: PropertyNode => Boolean)(node: TemplateNode, lang:Language) : List[Node] = {
     // We have to reverse because flatMap prepends to the final list
     // while we want to keep the original order
     node.children.filter(filter).flatMap(_.children).reverse
   }
 
-  private def identity(node: TemplateNode) : List[Node] = List(node)
+  private def identity(node: TemplateNode, lang:Language) : List[Node] = List(node)
 
-  private def externalLinkNode(node: TemplateNode) : List[Node] = {
+  private def externalLinkNode(node: TemplateNode, lang:Language) : List[Node] = {
 
     try {
 
@@ -73,7 +73,7 @@ object TemplateTransformConfig {
     }
   }
 
-  private val transformMap : Map[String, Map[String, (TemplateNode) => List[Node]]] = Map(
+  private val transformMap : Map[String, Map[String, (TemplateNode, Language) => List[Node]]] = Map(
 
     "en" -> Map(
       "-" -> textNode("<br />") _ ,
@@ -88,7 +88,7 @@ object TemplateTransformConfig {
       // http://en.wikipedia.org/wiki/Template:ICD10
       // See https://github.com/dbpedia/extraction-framework/issues/40
       "ICD10" ->
-        ((node: TemplateNode) =>
+        ((node: TemplateNode, lang:Language) =>
           List(
             new TextNode(extractTextFromPropertyNode(node.property("1")) +
                          extractTextFromPropertyNode(node.property("2")) +
@@ -99,13 +99,62 @@ object TemplateTransformConfig {
       // http://en.wikipedia.org/wiki/Template:ICD9
       // See https://github.com/dbpedia/extraction-framework/issues/40
       "ICD9" -> extractChildren { p : PropertyNode => p.key == "1" } _
+    ),
+
+    "commons" -> Map(
+      // TODO: There must be a way of doing
+      //    unwrapTemplates extractChildren {...} _
+      // but my Scala-foo is weak.
+      "Self" -> unwrapTemplates { p: PropertyNode => !(Set("author", "attribution", "migration").contains(p.key)) } _,
+      "PD-Art" -> unwrapTemplates { p: PropertyNode => !(Set("deathyear", "country", "reason").contains(p.key)) } _,
+      "PD-Art-two" -> unwrapTemplates { p: PropertyNode => !(Set("deathyear").contains(p.key)) } _
     )
+
   )
+
+  /*
+   * Unwraps templates that contain other templates as arguments. Please ensure
+   * that the filter removes ALL children that may not be templates.
+   *
+   * Since we unwrap the template, the original template node is kept at the head
+   * of the resulting list.
+   *
+   * Examples of such templates include:
+   *    - https://commons.wikimedia.org/wiki/Template:Self
+   *    - https://commons.wikimedia.org/wiki/Template:PD-art
+   */
+  def unwrapTemplates(filter: PropertyNode => Boolean)(node: TemplateNode, lang:Language):List[Node] =
+      node :: toTemplateNodes(extractChildren(filter)(node, lang), lang) 
+
+  /**
+   * Stores the Template namespace to avoid querying Namespace.template in a loop.
+   */
+  val templateNamespace = Namespace.Template
+  
+  /**
+   * Converts TextNodes in a List[Node] to TemplateNodes. Used by unwrapTemplates.
+   * Note that there is no way to test whether this template exists at this
+   * stage: EVERY TextNode will be converted into a TemplateNode, which may or
+   * may not point to an actual template.
+   *
+   * @param nodes The nodes to convert
+   * @param lang The language in which the TemplateNode should be created.
+   * @return A List of every node in nodes, with TextNodes changed to TemplateNodes.
+   */
+  def toTemplateNodes(nodes: List[Node], lang: Language): List[Node] = {
+      println("toTemplateNodes" + nodes)
+      nodes.map(node => node match {
+        case TextNode(text, line) => List(TemplateNode(
+            new WikiTitle(text.capitalize, templateNamespace, lang), 
+            List.empty, line))
+        case node:Node => List(node)
+      }).flatten
+  }
 
   def apply(node: TemplateNode, lang: Language) : List[Node] = {
 
      val mapKey = if (transformMap.contains(lang.wikiCode)) lang.wikiCode else "en"
 
-     transformMap(mapKey).get(node.title.decoded).getOrElse(identity _)(node)
+     transformMap(mapKey).get(node.title.decoded).getOrElse(identity _)(node, lang)
   }
 }
