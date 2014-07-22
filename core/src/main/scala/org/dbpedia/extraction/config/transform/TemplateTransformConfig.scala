@@ -102,17 +102,13 @@ object TemplateTransformConfig {
     ),
 
     "commons" -> Map(
-      // TODO: There must be a way of doing
-      //    unwrapTemplates extractChildren {...} _
-      // but my Scala-foo is weak.
       "Self" -> unwrapTemplates { p: PropertyNode => !(Set("author", "attribution", "migration").contains(p.key)) } _,
       "PD-Art" -> unwrapTemplates { p: PropertyNode => Set("1").contains(p.key) } _,
       "PD-Art-two" -> unwrapTemplates { p: PropertyNode => !(Set("deathyear").contains(p.key)) } _,
       "Licensed-PD-Art" -> unwrapTemplates { p: PropertyNode => Set("1", "2").contains(p.key) } _,
+      "Licensed-PD-Art-two" -> unwrapTemplates { p: PropertyNode => Set("1", "2", "3").contains(p.key) } _,
       "Licensed-FOP" -> unwrapTemplates { p: PropertyNode => Set("1", "2").contains(p.key) } _,
       "Copyright information" -> unwrapTemplates { p: PropertyNode => !(Set("13").contains(p.key)) } _,
-
-      // {{PD-scan|2=...}} is NOT a template; so we must only process {{PD-scan|1=...}}
       "PD-scan" -> unwrapTemplates { p: PropertyNode => Set("1").contains(p.key) } _
     )
 
