@@ -106,8 +106,14 @@ object TemplateTransformConfig {
       //    unwrapTemplates extractChildren {...} _
       // but my Scala-foo is weak.
       "Self" -> unwrapTemplates { p: PropertyNode => !(Set("author", "attribution", "migration").contains(p.key)) } _,
-      "PD-Art" -> unwrapTemplates { p: PropertyNode => !(Set("deathyear", "country", "reason").contains(p.key)) } _,
-      "PD-Art-two" -> unwrapTemplates { p: PropertyNode => !(Set("deathyear").contains(p.key)) } _
+      "PD-Art" -> unwrapTemplates { p: PropertyNode => Set("1").contains(p.key) } _,
+      "PD-Art-two" -> unwrapTemplates { p: PropertyNode => !(Set("deathyear").contains(p.key)) } _,
+      "Licensed-PD-Art" -> unwrapTemplates { p: PropertyNode => Set("1", "2").contains(p.key) } _,
+      "Licensed-FOP" -> unwrapTemplates { p: PropertyNode => Set("1", "2").contains(p.key) } _,
+      "Copyright information" -> unwrapTemplates { p: PropertyNode => !(Set("13").contains(p.key)) } _,
+
+      // {{PD-scan|2=...}} is NOT a template; so we must only process {{PD-scan|1=...}}
+      "PD-scan" -> unwrapTemplates { p: PropertyNode => Set("1").contains(p.key) } _
     )
 
   )
@@ -123,13 +129,13 @@ object TemplateTransformConfig {
    *    - https://commons.wikimedia.org/wiki/Template:Self
    *    - https://commons.wikimedia.org/wiki/Template:PD-art
    */
-  def unwrapTemplates(filter: PropertyNode => Boolean)(node: TemplateNode, lang:Language):List[Node] =
+  private def unwrapTemplates(filter: PropertyNode => Boolean)(node: TemplateNode, lang:Language):List[Node] =
       node :: toTemplateNodes(extractChildren(filter)(node, lang), lang) 
 
   /**
    * Stores the Template namespace to avoid querying Namespace.template in a loop.
    */
-  val templateNamespace = Namespace.Template
+  private val templateNamespace = Namespace.Template
   
   /**
    * Converts TextNodes in a List[Node] to TemplateNodes. Used by unwrapTemplates.
@@ -137,19 +143,22 @@ object TemplateTransformConfig {
    * stage: EVERY TextNode will be converted into a TemplateNode, which may or
    * may not point to an actual template.
    *
+   * TODO: Support entire templates embedded in others, such as this example
+   * from https://commons.wikimedia.org/wiki/Template:Licensed-FOP
+   *    - {{Licensed-FOP|Spain| {{self|cc-by-sa-3.0|GFDL}} }} 
+   *
    * @param nodes The nodes to convert
    * @param lang The language in which the TemplateNode should be created.
    * @return A List of every node in nodes, with TextNodes changed to TemplateNodes.
    */
-  def toTemplateNodes(nodes: List[Node], lang: Language): List[Node] = {
-      println("toTemplateNodes" + nodes)
-      nodes.map(node => node match {
+  private def toTemplateNodes(nodes: List[Node], lang: Language): List[Node] =
+      nodes.flatMap({
         case TextNode(text, line) => List(TemplateNode(
-            new WikiTitle(text.capitalize, templateNamespace, lang), 
-            List.empty, line))
+                new WikiTitle(text.capitalize, templateNamespace, lang), 
+                List.empty, line
+            ))
         case node:Node => List(node)
-      }).flatten
-  }
+      })
 
   def apply(node: TemplateNode, lang: Language) : List[Node] = {
 
