@@ -127,25 +127,20 @@ private class XMLSource(xml : Elem, language: Language) extends Source
             rev <- page \ "revision")
         {
             val title = WikiTitle.parseCleanTitle((page \ "title").text, language)
-            try
+
+            val nsElem = page \ "ns"
+            if (nsElem.nonEmpty )
             {
-              val nsCode = (page \ "ns").text.toInt
-              if(title != null && title.namespace.code != nsCode)
+              try
               {
-                  val expected: Namespace = Namespace.values.apply(nsCode)
-                  //logger.log(Level.WARNING, "Error parsing title: found namespace " + title.namespace + ", expected " + expected + " in title " + titleStr)
-                  title.otherNamespace = expected
+                val nsCode = nsElem.text.toInt
+                require(title.namespace.code == nsCode, "XML Namespace (" + nsCode + ") does not match the computed namespace (" + title.namespace + ") in page: " + title.decodedWithNamespace)
+              }
+              catch
+              {
+                case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
               }
             }
-            catch
-            {
-                case e: NumberFormatException =>
-                  // TODO: At the moment mappings wiki has a very old schema (1.18) and does not contain the ns element
-                  // so we do not throw the exception here to keep it working
-                  //throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
-            }
-
-
 
             //Skip bad titles
             if(title != null)
