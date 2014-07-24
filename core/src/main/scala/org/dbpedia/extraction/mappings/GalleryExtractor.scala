@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
-import org.dbpedia.extraction.wikiparser.LinkNode
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.language.reflectiveCalls
@@ -29,19 +29,29 @@ extends WikiPageExtractor
 
   override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // Check for gallery tags in the page source.
-    val galleryRegex = new scala.util.matching.Regex("""<gallery(.*?)>(.+?)</gallery>""",
+    val galleryRegex = new scala.util.matching.Regex("""<gallery((?s).*?)>((?s).+?)</gallery>""",
         "tags",
         "files"
     )
     val galleryMatch = galleryRegex.findAllIn(page.source)
 
-    val galleryQuads = if(!galleryMatch.isEmpty) {
-        val files = galleryMatch.group("files").split('\n')
+    if(galleryMatch.isEmpty) return Seq.empty
 
-        // TODO: parse the line, figure out the link and the label
-        // and build InternalLinkNodes, then turn those into Quads.
-    }
+    val files = galleryMatch.group("files").split('\n')
 
-    Seq.empty
+    // TODO: figure out page numbers.
+    // TODO: parse each line into a WikiTitle and a label.
+    // See parseLink(...) in SimpleWikiParser to see how this is done.
+    files.flatMap(filename => filename match {
+        case "" => Seq.empty
+        case filename:String => Seq(new Quad(Language.English,
+            DBpediaDatasets.Images,
+            subjectUri,
+            foafDepictionProperty,
+            WikiTitle.parse(filename, context.language).pageIri,
+            page.sourceUri,
+            null
+        ))
+    })
   }
 }
