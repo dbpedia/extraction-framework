@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping commons:Artwork</title><ns>240</ns><id>9551</id><revision><id>35445</id><timestamp>2014-06-25T01:17:49Z</timestamp><text>{{TemplateMapping
+| mapToClass = Artwork
+| mappings =
+
+        {{PropertyMapping | templateProperty = Title | ontologyProperty = dct:title }}
+        {{PropertyMapping | templateProperty = title | ontologyProperty = dct:title }}
+
+        {{PropertyMapping | templateProperty = Description | ontologyProperty = dct:description }}
+        {{PropertyMapping | templateProperty = description | ontologyProperty = dct:description }}
+
+        {{PropertyMapping | templateProperty = Author | ontologyProperty = author }}
+        {{PropertyMapping | templateProperty = author | ontologyProperty = author }}
+        {{PropertyMapping | templateProperty = Artist | ontologyProperty = author }}
+        {{PropertyMapping | templateProperty = artist | ontologyProperty = author }}
+
+        {{PropertyMapping | templateProperty = Date | ontologyProperty = dct:created | unit = xsd:date}}
+        {{PropertyMapping | templateProperty = date | ontologyProperty = dct:created | unit = xsd:date}}
+        {{PropertyMapping | templateProperty = Year | ontologyProperty = dct:created | unit = xsd:date}}
+        {{PropertyMapping | templateProperty = year | ontologyProperty = dct:created | unit = xsd:date}}
+
+        {{PropertyMapping | templateProperty = Source | ontologyProperty = dct:source }}
+        {{PropertyMapping | templateProperty = source | ontologyProperty = dct:source }}
+
+        {{PropertyMapping | templateProperty = Permission | ontologyProperty = license }}
+        {{PropertyMapping | templateProperty = permission | ontologyProperty = license }}
+
+        {{PropertyMapping | templateProperty = other_versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = Other_versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = other versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = Other versions | ontologyProperty = related }}
+
+        {{PropertyMapping | templateProperty = Institution | ontologyProperty = institution }}
+        {{PropertyMapping | templateProperty = institution | ontologyProperty = institution }}
+        {{PropertyMapping | templateProperty = Gallery | ontologyProperty = institution }}
+        {{PropertyMapping | templateProperty = gallery | ontologyProperty = institution }}
+        {{PropertyMapping | templateProperty = Museum | ontologyProperty = institution }}
+        {{PropertyMapping | templateProperty = museum | ontologyProperty = institution }}
+
+        {{PropertyMapping | templateProperty = accession number | ontologyProperty = identifiedBy }}
+        {{PropertyMapping | templateProperty = Accession number | ontologyProperty = identifiedBy }}
+        {{PropertyMapping | templateProperty = Accession number | ontologyProperty = identifiedBy }}
+        {{PropertyMapping | templateProperty = id | ontologyProperty = identifiedBy }}
+        {{PropertyMapping | templateProperty = Id | ontologyProperty = identifiedBy }}
+        {{PropertyMapping | templateProperty = ID | ontologyProperty = identifiedBy }}
+
+        {{PropertyMapping | templateProperty = dimensions | ontologyProperty = dct:format }}
+        {{PropertyMapping | templateProperty = Dimensions | ontologyProperty = dct:format }}
+
+        {{PropertyMapping | templateProperty = notes | ontologyProperty = notes }}
+        {{PropertyMapping | templateProperty = Notes | ontologyProperty = notes }}
+}}</text></revision></page><page><title>Mapping commons:Authority control</title><ns>240</ns><id>9424</id><revision><id>35448</id><timestamp>2014-06-25T01:29:15Z</timestamp><text>{{TemplateMapping
+| mapToClass = Agent
+| mappings =
+
+&lt;!-- 'bare' contains layout information only and can be ignored --&gt;
+
+	{{PropertyMapping | templateProperty = VIAF | ontologyProperty = viafId }}
+	{{PropertyMapping | templateProperty = LCCN | ontologyProperty = lccnId }}
+	{{PropertyMapping | templateProperty = ISNI | ontologyProperty = isniId }}
+	{{PropertyMapping | templateProperty = ORCID | ontologyProperty = orcidId }}
+	{{PropertyMapping | templateProperty = GND | ontologyProperty = individualisedGnd }}
+	{{PropertyMapping | templateProperty = SELIBR | ontologyProperty = selibrId }}
+	{{PropertyMapping | templateProperty = BNF | ontologyProperty = bnfId }}
+	{{PropertyMapping | templateProperty = BPN | ontologyProperty = bpnId }}
+	{{PropertyMapping | templateProperty = RID | ontologyProperty = ridId }}
+	{{PropertyMapping | templateProperty = BIBSYS | ontologyProperty = bibsysId }}
+	{{PropertyMapping | templateProperty = ULAN | ontologyProperty = ulanId }}
+
+&lt;!-- no identifier-specific properties on DBpedia yet --&gt;
+	{{PropertyMapping | templateProperty = TSURL | ontologyProperty = identifiedBy | comment = Link to WP-Personeninfo on toolserver (http://toolserver.org/~apper/pd/person).}}
+	{{PropertyMapping | templateProperty = PND | ontologyProperty = individualisedGnd | comment = Personennamendatei: Deprecated authority data on persons from the German National Library. Now part of the GND. Note that only records where the name field is labeled "Person" are valid PND records that can be used in this template. }}
+	{{PropertyMapping | templateProperty = SUDOC | ontologyProperty = identifiedBy | comment = {{comment|fr|Autorité dans le SUDOC (français) ; chercher la notice d'autorité sur http://www.idref.fr/ (syntaxe : « nom, prénom »), reprendre le numéro actuellement à neuf chiffres et commençant par un zéro, juste au-dessus de « Lien permanent » ou de « Forme retenue », vers le haut de la notice.}} }}
+}}</text></revision></page><page><title>Mapping commons:Cc-by-3.0</title><ns>240</ns><id>9698</id><revision><id>36796</id><timestamp>2014-07-10T12:56:13Z</timestamp><text>{{TemplateMapping
+| mapToClass = Document
+| mappings =
+	{{ConstantMapping | ontologyProperty = license | value = http://creativecommons.org/licenses/by/3.0/}}
+
+&lt;!-- Please remove the following mapping once you verified the licence URL--&gt;
+	{{ConstantMapping | ontologyProperty = license | value = http://mappings.dbpedia.org/index.php/Category:Unverified_Commons_media_license}}
+}}
+
+[[Category:Commons media license]]
+
+&lt;!-- Please remove the following category once you verified the licence URL--&gt;
+[[Category:Unverified Commons media license]]</text></revision></page><page><title>Mapping commons:Check categories-Geograph</title><ns>240</ns><id>9568</id><revision><id>35669</id><timestamp>2014-06-30T05:18:56Z</timestamp><text>{{TemplateMapping
+| mapToClass = StillImage
+| mappings =
+
+&lt;!-- day, month, year are not relevant: they refer to the date on which the template was added --&gt;
+
+        {{GeocoordinatesMapping | latitudeDegrees = lat | longitudeDegrees = lon }}
+
+        {{PropertyMapping | templateProperty = Geographcategory | ontologyProperty = dct:subject | comment = Geograph category. Related images can be found at http://www.geograph.org.uk/search.php?reference_index=0&amp;imageclass={Geographcategory}
+}}
+
+        {{PropertyMapping | templateProperty = gridref | ontologyProperty = gridReference | comment = Refers to the [[wikipedia:Ordnance_Survey_National_Grid]]}}
+
+}}</text></revision></page><page><title>Mapping commons:Creator</title><ns>240</ns><id>9456</id><revision><id>35211</id><timestamp>2014-06-10T23:14:05Z</timestamp><text>{{TemplateMapping
+| mapToClass = Person
+| mappings =
+	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = Alternative names | ontologyProperty = alias }}
+	{{PropertyMapping | templateProperty = Nationality | ontologyProperty = nationality }}
+	{{PropertyMapping | templateProperty = Nationality | ontologyProperty = stateOfOrigin}}
+	{{PropertyMapping | templateProperty = Gender | ontologyProperty = foaf:gender}}
+	{{PropertyMapping | templateProperty = Occupation | ontologyProperty = occupation }}
+	{{PropertyMapping | templateProperty = Description | ontologyProperty = description }}
+	{{PropertyMapping | templateProperty = Birthdate | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = Birthloc | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = Deathdate | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = Deathloc | ontologyProperty = deathPlace }}
+	&lt;!-- TODO: workperiod, workloc --&gt;
+}}</text></revision></page><page><title>Mapping commons:EBI License</title><ns>240</ns><id>9570</id><revision><id>35739</id><timestamp>2014-07-07T16:13:30Z</timestamp><text>{{TemplateMapping
+| mapToClass = StillImage
+| mappings =
+
+	{{ConstantMapping | ontologyProperty = license | value=http://www.ebi.ac.uk/about/terms-of-use}}
+	{{ConstantMapping | ontologyProperty = license | value=http://creativecommons.org/publicdomain/mark/1.0/}}
+	{{PropertyMapping | templateProperty = pdb | ontologyProperty = pdb }}
+
+}}
+
+[[Category:Commons media license]]</text></revision></page><page><title>Mapping commons:Information</title><ns>240</ns><id>9550</id><revision><id>35342</id><timestamp>2014-06-18T05:34:05Z</timestamp><text>{{TemplateMapping
+| mapToClass = Work
+| mappings =
+
+        {{PropertyMapping | templateProperty = Description | ontologyProperty = dct:description }}
+        {{PropertyMapping | templateProperty = description | ontologyProperty = dct:description }}
+
+        {{PropertyMapping | templateProperty = Author | ontologyProperty = author }}
+        {{PropertyMapping | templateProperty = author | ontologyProperty = author }}
+
+        {{PropertyMapping | templateProperty = Date | ontologyProperty = dct:created }}
+        {{PropertyMapping | templateProperty = date | ontologyProperty = dct:created }}
+
+        {{PropertyMapping | templateProperty = Source | ontologyProperty = dct:source }}
+        {{PropertyMapping | templateProperty = source | ontologyProperty = dct:source }}
+
+        {{PropertyMapping | templateProperty = Permission | ontologyProperty = license }}
+        {{PropertyMapping | templateProperty = permission | ontologyProperty = license }}
+
+        {{PropertyMapping | templateProperty = other_versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = Other_versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = other versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = Other versions | ontologyProperty = related }}
+
+}}</text></revision></page><page><title>Mapping commons:Lepidoptera</title><ns>240</ns><id>9472</id><revision><id>35213</id><timestamp>2014-06-11T06:56:01Z</timestamp><text>{{TemplateMapping
+| mapToClass = Taxon
+| mappings =
+&lt;!-- Using https://commons.wikimedia.org/wiki/Category:Sphingidae as an example --&gt;
+	{{ConstantMapping | ontologyProperty = domain | value = Eukaryota }}
+	{{ConstantMapping | ontologyProperty = kingdom | value = Animalia }}
+	{{ConstantMapping | ontologyProperty = phylum | value = Arthropoda }}
+	{{ConstantMapping | ontologyProperty = class | value = Insecta }}
+	{{ConstantMapping | ontologyProperty = order | value = Lepidoptera }}
+
+&lt;!-- From values in this field --&gt;
+	{{PropertyMapping | templateProperty = familia | ontologyProperty = family }}
+	{{PropertyMapping | templateProperty = genus | ontologyProperty = genus }}
+	{{PropertyMapping | templateProperty = species | ontologyProperty = species }}
+	{{PropertyMapping | templateProperty = auth | ontologyProperty = authority }}
+
+
+&lt;!-- Not implemented
+--	{{ConstantMapping | ontologyProperty = subphylum | value = Hexapoda }}
+-- 	{{ConstantMapping | ontologyProperty = subclass | value = Pterygota }}
+--	{{ConstantMapping | ontologyProperty = infraclass | value = Neoptera }}
+--	{{ConstantMapping | ontologyProperty = superorder | value = Endopterygota }}
+--	{{PropertyMapping | templateProperty = subfamilia | ontologyProperty = subfamily }}
+--	{{PropertyMapping | templateProperty = tribus | ontologyProperty = tribe }}
+--	{{PropertyMapping | templateProperty = subspecies | ontologyProperty = subspecies }}
+--&gt;
+
+&lt;!-- How do we deal with categories?
+--	{{PropertyMapping | templateProperty = category | ontologyProperty = subfamily }}
+--&gt;
+}}</text></revision></page><page><title>Mapping commons:NARA-image-full</title><ns>240</ns><id>9458</id><revision><id>36810</id><timestamp>2014-07-15T06:27:37Z</timestamp><text>{{TemplateMapping
+| mapToClass = Artwork
+| mappings =
+
+&lt;!-- All NARA images are Images; however, this is unnecessary, since dct:format is eventually going to have a MIME-type in it
+        {{ConstantMapping | ontologyProperty = dct:type | value = http://purl.org/dc/dcmitype/Image }}
+--&gt;
+
+&lt;!-- Some standard properties --&gt;
+	{{PropertyMapping | templateProperty = Title | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = Description | ontologyProperty = dct:description }}
+        {{PropertyMapping | templateProperty = Author | ontologyProperty = author }}
+
+&lt;!-- Notes --&gt;
+        {{PropertyMapping | templateProperty = Scope and content | ontologyProperty = notes }}
+        {{PropertyMapping | templateProperty = General notes | ontologyProperty = notes }}
+
+&lt;!-- Identifiers --&gt;
+        {{PropertyMapping | templateProperty = ARC | ontologyProperty = hasNationalArchivesIdentifier | prefix = http://research.archives.gov/description/ }}
+        {{PropertyMapping | templateProperty = Local identifier | ontologyProperty = identifiedBy }}
+
+}}</text></revision></page><page><title>Mapping commons:NYPL-image-full</title><ns>240</ns><id>9556</id><revision><id>35364</id><timestamp>2014-06-18T23:36:55Z</timestamp><text>{{TemplateMapping
+| mapToClass = Artwork
+| mappings =
+
+        {{PropertyMapping | templateProperty = Description | ontologyProperty = dct:description }}
+        {{PropertyMapping | templateProperty = description | ontologyProperty = dct:description }}
+
+        {{PropertyMapping | templateProperty = Source | ontologyProperty = dct:source }}
+        {{PropertyMapping | templateProperty = source | ontologyProperty = dct:source }}
+
+        {{PropertyMapping | templateProperty = other_versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = Other_versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = other versions | ontologyProperty = related }}
+        {{PropertyMapping | templateProperty = Other versions | ontologyProperty = related }}
+
+}}</text></revision></page><page><title>Mapping commons:Uncategorized-Geograph</title><ns>240</ns><id>9567</id><revision><id>35478</id><timestamp>2014-06-26T13:30:41Z</timestamp><text>{{TemplateMapping
+| mapToClass = StillImage
+| mappings =
+
+&lt;!-- day, month, year are not relevant: they refer to the date on which the template was added --&gt;
+
+        {{PropertyMapping | templateProperty = gridref | ontologyProperty = gridReference | comment = 
+          Refers to the [[wikipedia:Ordnance_Survey_National_Grid]]
+        }}
+
+}}</text></revision></page><page><title>Mapping commons:VN</title><ns>240</ns><id>9552</id><revision><id>35347</id><timestamp>2014-06-18T06:23:54Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing
+| mappings =
+
+	{{PropertyMapping | templateProperty = sciname | ontologyProperty = scientificName }}
+
+        {{PropertyMapping | templateProperty = en | ontologyProperty = title | language = en }}
+        {{PropertyMapping | templateProperty = de | ontologyProperty = title | language = de }}
+	{{PropertyMapping | templateProperty = fr | ontologyProperty = title | language = fr}}
+	{{PropertyMapping | templateProperty = pl | ontologyProperty = title | language = pl}}
+	{{PropertyMapping | templateProperty = ja | ontologyProperty = title | language = ja}}
+	{{PropertyMapping | templateProperty = es | ontologyProperty = title | language = es}}
+	{{PropertyMapping | templateProperty = sv | ontologyProperty = title | language = sv}}
+	{{PropertyMapping | templateProperty = nl | ontologyProperty = title | language = nl}}
+	{{PropertyMapping | templateProperty = lt | ontologyProperty = title | language = lt}}
+	{{PropertyMapping | templateProperty = fi | ontologyProperty = title | language = fi}}
+	{{PropertyMapping | templateProperty = ru | ontologyProperty = title | language = ru}}
+	{{PropertyMapping | templateProperty = zh | ontologyProperty = title | language = zh}}
+	{{PropertyMapping | templateProperty = pt | ontologyProperty = title | language = pt}}
+	{{PropertyMapping | templateProperty = cs | ontologyProperty = title | language = cs}}
+	{{PropertyMapping | templateProperty = it | ontologyProperty = title | language = it}}
+	{{PropertyMapping | templateProperty = da | ontologyProperty = title | language = da}}
+	{{PropertyMapping | templateProperty = hu | ontologyProperty = title | language = hu}}
+	{{PropertyMapping | templateProperty = no | ontologyProperty = title | language = no}}
+	{{PropertyMapping | templateProperty = th | ontologyProperty = title | language = th}}
+	{{PropertyMapping | templateProperty = ca | ontologyProperty = title | language = ca}}
+	{{PropertyMapping | templateProperty = eo | ontologyProperty = title | language = eo}}
+	{{PropertyMapping | templateProperty = tr | ontologyProperty = title | language = tr}}
+	{{PropertyMapping | templateProperty = uk | ontologyProperty = title | language = uk}}
+	{{PropertyMapping | templateProperty = hsb | ontologyProperty = title | language = hsb}}
+	{{PropertyMapping | templateProperty = et | ontologyProperty = title | language = et}}
+	{{PropertyMapping | templateProperty = he | ontologyProperty = title | language = he}}
+	{{PropertyMapping | templateProperty = ko | ontologyProperty = title | language = ko}}
+	{{PropertyMapping | templateProperty = bg | ontologyProperty = title | language = bg}}
+	{{PropertyMapping | templateProperty = sl | ontologyProperty = title | language = sl}}
+	{{PropertyMapping | templateProperty = ar | ontologyProperty = title | language = ar}}
+	{{PropertyMapping | templateProperty = af | ontologyProperty = title | language = af}}
+	{{PropertyMapping | templateProperty = sk | ontologyProperty = title | language = sk}}
+	{{PropertyMapping | templateProperty = mk | ontologyProperty = title | language = mk}}
+	{{PropertyMapping | templateProperty = vi | ontologyProperty = title | language = vi}}
+	{{PropertyMapping | templateProperty = az | ontologyProperty = title | language = az}}
+	{{PropertyMapping | templateProperty = hr | ontologyProperty = title | language = hr}}
+	{{PropertyMapping | templateProperty = ka | ontologyProperty = title | language = ka}}
+	{{PropertyMapping | templateProperty = nn | ontologyProperty = title | language = nn}}
+	{{PropertyMapping | templateProperty = fa | ontologyProperty = title | language = fa}}
+	{{PropertyMapping | templateProperty = is | ontologyProperty = title | language = is}}
+
+	{{PropertyMapping | templateProperty = id | ontologyProperty = title | language = id}}
+	{{PropertyMapping | templateProperty = ro | ontologyProperty = title | language = ro}}
+	{{PropertyMapping | templateProperty = sr | ontologyProperty = title | language = sr}}
+	{{PropertyMapping | templateProperty = gl | ontologyProperty = title | language = gl}}
+	{{PropertyMapping | templateProperty = lv | ontologyProperty = title | language = lv}}
+	{{PropertyMapping | templateProperty = br | ontologyProperty = title | language = br}}
+	{{PropertyMapping | templateProperty = mrj | ontologyProperty = title | language = mrj}}
+	{{PropertyMapping | templateProperty = be | ontologyProperty = title | language = be}}
+	{{PropertyMapping | templateProperty = koi | ontologyProperty = title | language = koi}}
+	{{PropertyMapping | templateProperty = udm | ontologyProperty = title | language = udm}}
+	{{PropertyMapping | templateProperty = eu | ontologyProperty = title | language = eu}}
+	{{PropertyMapping | templateProperty = kv | ontologyProperty = title | language = kv}}
+	{{PropertyMapping | templateProperty = ms | ontologyProperty = title | language = ms}}
+	{{PropertyMapping | templateProperty = cy | ontologyProperty = title | language = cy}}
+	{{PropertyMapping | templateProperty = el | ontologyProperty = title | language = el}}
+	{{PropertyMapping | templateProperty = io | ontologyProperty = title | language = io}}
+	{{PropertyMapping | templateProperty = qu | ontologyProperty = title | language = qu}}
+	{{PropertyMapping | templateProperty = fy | ontologyProperty = title | language = fy}}
+	{{PropertyMapping | templateProperty = kk | ontologyProperty = title | language = kk}}
+	{{PropertyMapping | templateProperty = nv | ontologyProperty = title | language = nv}}
+	{{PropertyMapping | templateProperty = ml | ontologyProperty = title | language = ml}}
+	{{PropertyMapping | templateProperty = wa | ontologyProperty = title | language = wa}}
+	{{PropertyMapping | templateProperty = la | ontologyProperty = title | language = la}}
+	{{PropertyMapping | templateProperty = ta | ontologyProperty = title | language = ta}}
+
+	{{PropertyMapping | templateProperty = te | ontologyProperty = title | language = te}}
+	{{PropertyMapping | templateProperty = se | ontologyProperty = title | language = se}}
+	{{PropertyMapping | templateProperty = sh | ontologyProperty = title | language = sh}}
+	{{PropertyMapping | templateProperty = zu | ontologyProperty = title | language = zu}}
+	{{PropertyMapping | templateProperty = csb | ontologyProperty = title | language = csb}}
+	{{PropertyMapping | templateProperty = hi | ontologyProperty = title | language = hi}}
+	{{PropertyMapping | templateProperty = sah | ontologyProperty = title | language = sah}}
+	{{PropertyMapping | templateProperty = mhr | ontologyProperty = title | language = mhr}}
+	{{PropertyMapping | templateProperty = ku | ontologyProperty = title | language = ku}}
+	{{PropertyMapping | templateProperty = lb | ontologyProperty = title | language = lb}}
+	{{PropertyMapping | templateProperty = sw | ontologyProperty = title | language = sw}}
+	{{PropertyMapping | templateProperty = sq | ontologyProperty = title | language = sq}}
+	{{PropertyMapping | templateProperty = to | ontologyProperty = title | language = to}}
+	{{PropertyMapping | templateProperty = bn | ontologyProperty = title | language = bn}}
+	{{PropertyMapping | templateProperty = mn | ontologyProperty = title | language = mn}}
+	{{PropertyMapping | templateProperty = zh-min-nan | ontologyProperty = title | language = zh-min-nan}}
+	{{PropertyMapping | templateProperty = bs | ontologyProperty = title | language = bs}}
+	{{PropertyMapping | templateProperty = fo | ontologyProperty = title | language = fo}}
+	{{PropertyMapping | templateProperty = be-x-old | ontologyProperty = title | language = be-x-old}}
+	{{PropertyMapping | templateProperty = mr | ontologyProperty = title | language = mr}}
+	{{PropertyMapping | templateProperty = ga | ontologyProperty = title | language = ga}}
+	{{PropertyMapping | templateProperty = mdf | ontologyProperty = title | language = mdf}}
+	{{PropertyMapping | templateProperty = co | ontologyProperty = title | language = co}}
+	{{PropertyMapping | templateProperty = nds-nl | ontologyProperty = title | language = nds-nl}}
+	{{PropertyMapping | templateProperty = hy | ontologyProperty = title | language = hy}}
+	{{PropertyMapping | templateProperty = pcd | ontologyProperty = title | language = pcd}}
+	{{PropertyMapping | templateProperty = ba | ontologyProperty = title | language = ba}}
+	{{PropertyMapping | templateProperty = frr | ontologyProperty = title | language = frr}}
+	{{PropertyMapping | templateProperty = xh | ontologyProperty = title | language = xh}}
+	{{PropertyMapping | templateProperty = li | ontologyProperty = title | language = li}}
+	{{PropertyMapping | templateProperty = nah | ontologyProperty = title | language = nah}}
+	{{PropertyMapping | templateProperty = tl | ontologyProperty = title | language = tl}}
+	{{PropertyMapping | templateProperty = st | ontologyProperty = title | language = st}}
+	{{PropertyMapping | templateProperty = oc | ontologyProperty = title | language = oc}}
+	{{PropertyMapping | templateProperty = mi | ontologyProperty = title | language = mi}}
+	{{PropertyMapping | templateProperty = bat-smg | ontologyProperty = title | language = bat-smg}}
+	{{PropertyMapping | templateProperty = dsb | ontologyProperty = title | language = dsb}}
+	{{PropertyMapping | templateProperty = gd | ontologyProperty = title | language = gd}}
+	{{PropertyMapping | templateProperty = cv | ontologyProperty = title | language = cv}}
+	{{PropertyMapping | templateProperty = jv | ontologyProperty = title | language = jv}}
+	{{PropertyMapping | templateProperty = gv | ontologyProperty = title | language = gv}}
+	{{PropertyMapping | templateProperty = os | ontologyProperty = title | language = os}}
+	{{PropertyMapping | templateProperty = ht | ontologyProperty = title | language = ht}}
+	{{PropertyMapping | templateProperty = sc | ontologyProperty = title | language = sc}}
+	{{PropertyMapping | templateProperty = ur | ontologyProperty = title | language = ur}}
+	{{PropertyMapping | templateProperty = zh-yue | ontologyProperty = title | language = zh-yue}}
+	{{PropertyMapping | templateProperty = vec | ontologyProperty = title | language = vec}}
+	{{PropertyMapping | templateProperty = bo | ontologyProperty = title | language = bo}}
+	{{PropertyMapping | templateProperty = su | ontologyProperty = title | language = su}}
+	{{PropertyMapping | templateProperty = ve | ontologyProperty = title | language = ve}}
+	{{PropertyMapping | templateProperty = stq | ontologyProperty = title | language = stq}}
+	{{PropertyMapping | templateProperty = my | ontologyProperty = title | language = my}}
+	{{PropertyMapping | templateProperty = scn | ontologyProperty = title | language = scn}}
+	{{PropertyMapping | templateProperty = ast | ontologyProperty = title | language = ast}}
+	{{PropertyMapping | templateProperty = gn | ontologyProperty = title | language = gn}}
+	{{PropertyMapping | templateProperty = ss | ontologyProperty = title | language = ss}}
+	{{PropertyMapping | templateProperty = nds | ontologyProperty = title | language = nds}}
+	{{PropertyMapping | templateProperty = yi | ontologyProperty = title | language = yi}}
+	{{PropertyMapping | templateProperty = an | ontologyProperty = title | language = an}}
+	{{PropertyMapping | templateProperty = vls | ontologyProperty = title | language = vls}}
+	{{PropertyMapping | templateProperty = gu | ontologyProperty = title | language = gu}}
+	{{PropertyMapping | templateProperty = bar | ontologyProperty = title | language = bar}}
+	{{PropertyMapping | templateProperty = myv | ontologyProperty = title | language = myv}}
+	{{PropertyMapping | templateProperty = kn | ontologyProperty = title | language = kn}}
+	{{PropertyMapping | templateProperty = tg | ontologyProperty = title | language = tg}}
+	{{PropertyMapping | templateProperty = tn | ontologyProperty = title | language = tn}}
+	{{PropertyMapping | templateProperty = ne | ontologyProperty = title | language = ne}}
+	{{PropertyMapping | templateProperty = sco | ontologyProperty = title | language = sco}}
+	{{PropertyMapping | templateProperty = pa | ontologyProperty = title | language = pa}}
+	{{PropertyMapping | templateProperty = ay | ontologyProperty = title | language = ay}}
+	{{PropertyMapping | templateProperty = dv | ontologyProperty = title | language = dv}}
+	{{PropertyMapping | templateProperty = tt | ontologyProperty = title | language = tt}}
+	{{PropertyMapping | templateProperty = am | ontologyProperty = title | language = am}}
+	{{PropertyMapping | templateProperty = ang | ontologyProperty = title | language = ang}}
+	{{PropertyMapping | templateProperty = ts | ontologyProperty = title | language = ts}}
+	{{PropertyMapping | templateProperty = sn | ontologyProperty = title | language = sn}}
+	{{PropertyMapping | templateProperty = als | ontologyProperty = title | language = als}}
+	{{PropertyMapping | templateProperty = nrm | ontologyProperty = title | language = nrm}}
+	{{PropertyMapping | templateProperty = chr | ontologyProperty = title | language = chr}}
+	{{PropertyMapping | templateProperty = lbe | ontologyProperty = title | language = lbe}}
+	{{PropertyMapping | templateProperty = rw | ontologyProperty = title | language = rw}}
+	{{PropertyMapping | templateProperty = cr | ontologyProperty = title | language = cr}}
+	{{PropertyMapping | templateProperty = ha | ontologyProperty = title | language = ha}}
+	{{PropertyMapping | templateProperty = ln | ontologyProperty = title | language = ln}}
+	{{PropertyMapping | templateProperty = ug | ontologyProperty = title | language = ug}}
+	{{PropertyMapping | templateProperty = arz | ontologyProperty = title | language = arz}}
+	{{PropertyMapping | templateProperty = pdc | ontologyProperty = title | language = pdc}}
+	{{PropertyMapping | templateProperty = ik | ontologyProperty = title | language = ik}}
+	{{PropertyMapping | templateProperty = szl | ontologyProperty = title | language = szl}}
+	{{PropertyMapping | templateProperty = chy | ontologyProperty = title | language = chy}}
+	{{PropertyMapping | templateProperty = hak | ontologyProperty = title | language = hak}}
+	{{PropertyMapping | templateProperty = ia | ontologyProperty = title | language = ia}}
+	{{PropertyMapping | templateProperty = fur | ontologyProperty = title | language = fur}}
+	{{PropertyMapping | templateProperty = mt | ontologyProperty = title | language = mt}}
+	{{PropertyMapping | templateProperty = zea | ontologyProperty = title | language = zea}}
+	{{PropertyMapping | templateProperty = frp | ontologyProperty = title | language = frp}}
+	{{PropertyMapping | templateProperty = haw | ontologyProperty = title | language = haw}}
+	{{PropertyMapping | templateProperty = pms | ontologyProperty = title | language = pms}}
+	{{PropertyMapping | templateProperty = sa | ontologyProperty = title | language = sa}}
+	{{PropertyMapping | templateProperty = pam | ontologyProperty = title | language = pam}}
+	{{PropertyMapping | templateProperty = ce | ontologyProperty = title | language = ce}}
+	{{PropertyMapping | templateProperty = mg | ontologyProperty = title | language = mg}}
+	{{PropertyMapping | templateProperty = lmo | ontologyProperty = title | language = lmo}}
+	{{PropertyMapping | templateProperty = si | ontologyProperty = title | language = si}}
+	{{PropertyMapping | templateProperty = fiu-vro | ontologyProperty = title | language = fiu-vro}}
+	{{PropertyMapping | templateProperty = so | ontologyProperty = title | language = so}}
+	{{PropertyMapping | templateProperty = av | ontologyProperty = title | language = av}}
+	{{PropertyMapping | templateProperty = kw | ontologyProperty = title | language = kw}}
+	{{PropertyMapping | templateProperty = nap | ontologyProperty = title | language = nap}}
+	{{PropertyMapping | templateProperty = war | ontologyProperty = title | language = war}}
+	{{PropertyMapping | templateProperty = yo | ontologyProperty = title | language = yo}}
+	{{PropertyMapping | templateProperty = bxr | ontologyProperty = title | language = bxr}}
+	{{PropertyMapping | templateProperty = diq | ontologyProperty = title | language = diq}}
+	{{PropertyMapping | templateProperty = eml | ontologyProperty = title | language = eml}}
+	{{PropertyMapping | templateProperty = ps | ontologyProperty = title | language = ps}}
+	{{PropertyMapping | templateProperty = as | ontologyProperty = title | language = as}}
+	{{PropertyMapping | templateProperty = rm | ontologyProperty = title | language = rm}}
+	{{PropertyMapping | templateProperty = arc | ontologyProperty = title | language = arc}}
+	{{PropertyMapping | templateProperty = ceb | ontologyProperty = title | language = ceb}}
+	{{PropertyMapping | templateProperty = iu | ontologyProperty = title | language = iu}}
+	{{PropertyMapping | templateProperty = kl | ontologyProperty = title | language = kl}}
+	{{PropertyMapping | templateProperty = tk | ontologyProperty = title | language = tk}}
+	{{PropertyMapping | templateProperty = zh-classical | ontologyProperty = title | language = zh-classical}}
+
+	{{PropertyMapping | templateProperty = fj | ontologyProperty = title | language = fj}}
+	{{PropertyMapping | templateProperty = nb | ontologyProperty = title | language = nb}}
+
+	{{PropertyMapping | templateProperty = uz | ontologyProperty = title | language = uz}}
+	{{PropertyMapping | templateProperty = ab | ontologyProperty = title | language = ab}}
+	{{PropertyMapping | templateProperty = jbo | ontologyProperty = title | language = jbo}}
+	{{PropertyMapping | templateProperty = ksh | ontologyProperty = title | language = ksh}}
+	{{PropertyMapping | templateProperty = ky | ontologyProperty = title | language = ky}}
+	{{PropertyMapping | templateProperty = lij | ontologyProperty = title | language = lij}}
+
+	{{PropertyMapping | templateProperty = bm | ontologyProperty = title | language = bm}}
+	{{PropertyMapping | templateProperty = hif | ontologyProperty = title | language = hif}}
+	{{PropertyMapping | templateProperty = ty | ontologyProperty = title | language = ty}}
+	{{PropertyMapping | templateProperty = ee | ontologyProperty = title | language = ee}}
+
+	{{PropertyMapping | templateProperty = ilo | ontologyProperty = title | language = ilo}}
+	{{PropertyMapping | templateProperty = kaa | ontologyProperty = title | language = kaa}}
+	{{PropertyMapping | templateProperty = or | ontologyProperty = title | language = or}}
+	{{PropertyMapping | templateProperty = ti | ontologyProperty = title | language = ti}}
+	{{PropertyMapping | templateProperty = wo | ontologyProperty = title | language = wo}}
+	{{PropertyMapping | templateProperty = gan | ontologyProperty = title | language = gan}}
+	{{PropertyMapping | templateProperty = km | ontologyProperty = title | language = km}}
+	{{PropertyMapping | templateProperty = rn | ontologyProperty = title | language = rn}}
+	{{PropertyMapping | templateProperty = sm | ontologyProperty = title | language = sm}}
+	{{PropertyMapping | templateProperty = tum | ontologyProperty = title | language = tum}}
+	{{PropertyMapping | templateProperty = bcl | ontologyProperty = title | language = bcl}}
+	{{PropertyMapping | templateProperty = crh | ontologyProperty = title | language = crh}}
+	{{PropertyMapping | templateProperty = nan | ontologyProperty = title | language = nan}}
+	{{PropertyMapping | templateProperty = new | ontologyProperty = title | language = new}}
+	{{PropertyMapping | templateProperty = za | ontologyProperty = title | language = za}}
+	{{PropertyMapping | templateProperty = bpy | ontologyProperty = title | language = bpy}}
+	{{PropertyMapping | templateProperty = cdo | ontologyProperty = title | language = cdo}}
+	{{PropertyMapping | templateProperty = got | ontologyProperty = title | language = got}}
+	{{PropertyMapping | templateProperty = ig | ontologyProperty = title | language = ig}}
+	{{PropertyMapping | templateProperty = ks | ontologyProperty = title | language = ks}}
+	{{PropertyMapping | templateProperty = lad | ontologyProperty = title | language = lad}}
+	{{PropertyMapping | templateProperty = ny | ontologyProperty = title | language = ny}}
+	{{PropertyMapping | templateProperty = sd | ontologyProperty = title | language = sd}}
+	{{PropertyMapping | templateProperty = wuu | ontologyProperty = title | language = wuu}}
+	{{PropertyMapping | templateProperty = xal | ontologyProperty = title | language = xal}}
+	{{PropertyMapping | templateProperty = ch | ontologyProperty = title | language = ch}}
+	{{PropertyMapping | templateProperty = cu | ontologyProperty = title | language = cu}}
+	{{PropertyMapping | templateProperty = hz | ontologyProperty = title | language = hz}}
+	{{PropertyMapping | templateProperty = mo | ontologyProperty = title | language = mo}}
+	{{PropertyMapping | templateProperty = roa-rup | ontologyProperty = title | language = roa-rup}}
+	{{PropertyMapping | templateProperty = dk | ontologyProperty = title | language = dk}}
+	{{PropertyMapping | templateProperty = mzn | ontologyProperty = title | language = mzn}}
+	{{PropertyMapping | templateProperty = bi | ontologyProperty = title | language = bi}}
+	{{PropertyMapping | templateProperty = glk | ontologyProperty = title | language = glk}}
+	{{PropertyMapping | templateProperty = kab | ontologyProperty = title | language = kab}}
+	{{PropertyMapping | templateProperty = ki | ontologyProperty = title | language = ki}}
+	{{PropertyMapping | templateProperty = lo | ontologyProperty = title | language = lo}}
+	{{PropertyMapping | templateProperty = map-bms | ontologyProperty = title | language = map-bms}}
+	{{PropertyMapping | templateProperty = na | ontologyProperty = title | language = na}}
+	{{PropertyMapping | templateProperty = nov | ontologyProperty = title | language = nov}}
+	{{PropertyMapping | templateProperty = roa-tara | ontologyProperty = title | language = roa-tara}}
+	{{PropertyMapping | templateProperty = bh | ontologyProperty = title | language = bh}}
+	{{PropertyMapping | templateProperty = ext | ontologyProperty = title | language = ext}}
+	{{PropertyMapping | templateProperty = ff | ontologyProperty = title | language = ff}}
+	{{PropertyMapping | templateProperty = lg | ontologyProperty = title | language = lg}}
+	{{PropertyMapping | templateProperty = mus | ontologyProperty = title | language = mus}}
+	{{PropertyMapping | templateProperty = om | ontologyProperty = title | language = om}}
+	{{PropertyMapping | templateProperty = aa | ontologyProperty = title | language = aa}}
+	{{PropertyMapping | templateProperty = cho | ontologyProperty = title | language = cho}}
+	{{PropertyMapping | templateProperty = kg | ontologyProperty = title | language = kg}}
+	{{PropertyMapping | templateProperty = ng | ontologyProperty = title | language = ng}}
+	{{PropertyMapping | templateProperty = rmy | ontologyProperty = title | language = rmy}}
+	{{PropertyMapping | templateProperty = sg | ontologyProperty = title | language = sg}}
+	{{PropertyMapping | templateProperty = srn | ontologyProperty = title | language = srn}}
+	{{PropertyMapping | templateProperty = vo | ontologyProperty = title | language = vo}}
+	{{PropertyMapping | templateProperty = ak | ontologyProperty = title | language = ak}}
+	
+	{{PropertyMapping | templateProperty = kj | ontologyProperty = title | language = kj}}
+	{{PropertyMapping | templateProperty = kr | ontologyProperty = title | language = kr}}
+	{{PropertyMapping | templateProperty = mh | ontologyProperty = title | language = mh}}
+
+&lt;!-- Not recognized by mappings.dbpedia.org
+	{{PropertyMapping | templateProperty = pt-br | ontologyProperty = title | language = pt-br}}
+
+	{{PropertyMapping | templateProperty = zh-tw | ontologyProperty = title | language = zh-tw}}
+	{{PropertyMapping | templateProperty = zh-hans | ontologyProperty = title | language = zh-hans}}
+	{{PropertyMapping | templateProperty = zh-hant | ontologyProperty = title | language = zh-hant}}
+
+	{{PropertyMapping | templateProperty = en-us | ontologyProperty = title | language = en-us}}
+
+	{{PropertyMapping | templateProperty = arn | ontologyProperty = title | language = arn}}
+
+	{{PropertyMapping | templateProperty = mov | ontologyProperty = title | language = mov}}
+	{{PropertyMapping | templateProperty = mrc | ontologyProperty = title | language = mrc}}
+	{{PropertyMapping | templateProperty = ood | ontologyProperty = title | language = ood}}
+	{{PropertyMapping | templateProperty = sei  | ontologyProperty = title | language = sei }}
+--&gt;
+
+}}</text></revision></page></mediawiki>

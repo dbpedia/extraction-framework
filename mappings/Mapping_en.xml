@@ -7516,6 +7516,14 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = area_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeSeconds = lats  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeSeconds = longs  | longitudeDirection = longEW }}
+}}</text></revision></page><page><title>Mapping en:Infobox MLB</title><ns>204</ns><id>9561</id><revision><id>35412</id><timestamp>2014-06-23T10:14:03Z</timestamp><text>{{TemplateMapping 
+| mapToClass = BaseballTeam 
+| mappings = 
+   {{ PropertyMapping | templateProperty = owner | ontologyProperty = owner }}
+{{ PropertyMapping | templateProperty = manager | ontologyProperty = manager }}
+   {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = established | ontologyProperty = foundationDate }}
+
 }}</text></revision></page><page><title>Mapping en:Infobox MLB player</title><ns>204</ns><id>146</id><revision><id>14666</id><timestamp>2011-07-29T12:06:12Z</timestamp><text>{{TemplateMapping
 | mapToClass = BaseballPlayer
 | mappings =
@@ -17108,23 +17116,59 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = height | ontologyProperty = height | unit = Length }}
 	{{PropertyMapping | templateProperty = weight | ontologyProperty = weight | unit = Mass }}
 	{{PropertyMapping | templateProperty = currentteam | ontologyProperty = team }}
-}}</text></revision></page><page><title>Mapping en:Infobox dam</title><ns>204</ns><id>7219</id><revision><id>27211</id><timestamp>2013-07-09T12:33:36Z</timestamp><text>{{ ConditionalMapping | cases =
-    {{ Condition | templateProperty = installed_capacity | operator = isSet | mapping =
-        {{ TemplateMapping | mapToClass = PowerStation | mappings =
-
-	   {{ConstantMapping | ontologyProperty = fuel | value = Hydropower }}
-	   {{PropertyMapping | templateProperty = installed_capacity | ontologyProperty = powerOutput }}
-        }}
-    }} | defaultMappings =
+}}</text></revision></page><page><title>Mapping en:Infobox dam</title><ns>204</ns><id>7219</id><revision><id>35530</id><timestamp>2014-06-29T16:06:27Z</timestamp><text>{{ TemplateMapping 
+| mapToClass = Dam 
+| mappings =
+   {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+   {{PropertyMapping | templateProperty = name_official | ontologyProperty = foaf:name }}
+   {{PropertyMapping | templateProperty = country | ontologyProperty = country }}
+   {{PropertyMapping | templateProperty = location | ontologyProperty = location }}
+   {{PropertyMapping | templateProperty = owner | ontologyProperty = owner }}
+   {{PropertyMapping | templateProperty = operator | ontologyProperty = operator }}
+   {{PropertyMapping | templateProperty = dam_operator | ontologyProperty = operator }}
+   {{PropertyMapping | templateProperty = purpose | ontologyProperty = purpose }}
+   {{PropertyMapping | templateProperty = status | ontologyProperty = status }}
+   {{PropertyMapping | templateProperty = construction_began | ontologyProperty = buildingStartDate }}
+   {{PropertyMapping | templateProperty = construction_began | ontologyProperty = buildingStartYear }}
+   {{PropertyMapping | templateProperty = opening | ontologyProperty = openingDate }}
+   {{PropertyMapping | templateProperty = opening | ontologyProperty = openingYear }}
+   {{PropertyMapping | templateProperty = demolished | ontologyProperty = demolitionDate }}
+   {{PropertyMapping | templateProperty = demolished | ontologyProperty = demolitionYear }}
+   {{PropertyMapping | templateProperty = dam_height | ontologyProperty = height | unit = Length }}
+   {{PropertyMapping | templateProperty = dam_elevation_crest | ontologyProperty = elevation }}
+   {{PropertyMapping | templateProperty = dam_volume | ontologyProperty = volume }}
+   {{PropertyMapping | templateProperty = dam_length | ontologyProperty = length | unit = Length }}
+   {{PropertyMapping | templateProperty = dam_type | ontologyProperty = description }}
+   {{PropertyMapping | templateProperty = dam_crosses | ontologyProperty = river }}
+   {{IntermediateNodeMapping 
+     | nodeClass = Lake
+     | correspondingProperty = lake &lt;!-- could be reservoir to be more specific --&gt; 
+     | mappings = 
+	{{PropertyMapping | templateProperty = res_name | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = res_surface | ontologyProperty = area | unit = Area }}
+        {{PropertyMapping | templateProperty = res_capacity_total | ontologyProperty = volume | unit = Volume }}
+        {{PropertyMapping | templateProperty = res_elevation | ontologyProperty = elevation }}
+        {{PropertyMapping | templateProperty = res_catchment | ontologyProperty = watershed }}
+   }}
+   {{IntermediateNodeMapping 
+     | nodeClass = PowerStation
+     | correspondingProperty = part 
+     | mappings = 
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = country | ontologyProperty = country }}
-	{{PropertyMapping | templateProperty = owner | ontologyProperty = owner }}
-	{{PropertyMapping | templateProperty = operator | ontologyProperty = operator }}
-	{{PropertyMapping | templateProperty = status | ontologyProperty = status }}
-	{{PropertyMapping | templateProperty = construction_began | ontologyProperty = buildingStartDate }}
-	{{PropertyMapping | templateProperty = commissioned | ontologyProperty = commissioningDate }}
-	{{PropertyMapping | templateProperty = decommissioned | ontologyProperty = commissioningDate }}
-	{{GeocoordinatesMapping | latitudeDegrees = lat_d | latitudeMinutes = lat_m | latitudeSeconds = lat_s | latitudeDirection = lat_NS | longitudeDegrees = long_d | longitudeMinutes = long_m | longitudeSeconds = long_s | longitudeDirection = long_EW }}
+	{{ConstantMapping | ontologyProperty = primaryFuelType | value = Hydropower }}
+	{{PropertyMapping | templateProperty = plant_name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = plant_capacity | ontologyProperty = installedCapacity }}
+	{{PropertyMapping | templateProperty = plant_annual_gen | ontologyProperty = averageAnnualGeneration }}
+	{{PropertyMapping | templateProperty = plant_operator | ontologyProperty = operator }}
+	{{PropertyMapping | templateProperty = plant_commission | ontologyProperty = openingDate }}
+	{{PropertyMapping | templateProperty = plant_commission | ontologyProperty = openingYear }}
+	{{PropertyMapping | templateProperty = plant_decommission | ontologyProperty = closingDate }}
+	{{PropertyMapping | templateProperty = plant_type | ontologyProperty = code }}
+	{{PropertyMapping | templateProperty = plant_turbines | ontologyProperty = generationUnits }}
+	{{GeocoordinatesMapping | latitudeDegrees = plant_lat_d | latitudeMinutes = plant_lat_m | latitudeSeconds = plant_lat_s | latitudeDirection = plant_lat_NS | longitudeDegrees = plant_long_d | longitudeMinutes = plant_long_m | longitudeSeconds = plant_long_s | longitudeDirection = plant_long_EW }}
+   }}
+   {{GeocoordinatesMapping | latitudeDegrees = lat_d | latitudeMinutes = lat_m | latitudeSeconds = lat_s | latitudeDirection = lat_NS | longitudeDegrees = long_d | longitudeMinutes = long_m | longitudeSeconds = long_s | longitudeDirection = long_EW }}
+   {{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping en:Infobox darts player</title><ns>204</ns><id>6212</id><revision><id>20830</id><timestamp>2012-12-23T17:21:18Z</timestamp><text>{{TemplateMapping
 | mapToClass = DartsPlayer
 | mappings =
@@ -21683,23 +21727,47 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
 	{{PropertyMapping | templateProperty = children | ontologyProperty = child }}
 	{{PropertyMapping | templateProperty = alma_mater | ontologyProperty = almaMater }}
-}}</text></revision></page><page><title>Mapping en:Infobox power station</title><ns>204</ns><id>2737</id><revision><id>27210</id><timestamp>2013-07-09T12:32:51Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox power station</title><ns>204</ns><id>2737</id><revision><id>35732</id><timestamp>2014-07-06T14:09:14Z</timestamp><text>{{TemplateMapping
 | mapToClass = PowerStation
-| correspondingClass = PowerStation
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = official_name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = country | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = location | ontologyProperty = location }}
+	{{PropertyMapping | templateProperty = locale | ontologyProperty = location }}
 	{{PropertyMapping | templateProperty = owner | ontologyProperty = owner }}
 	{{PropertyMapping | templateProperty = operator | ontologyProperty = operator }}
-	{{PropertyMapping | templateProperty = primary_fuel | ontologyProperty = fuel }}
-	{{PropertyMapping | templateProperty = secondary_fuel | ontologyProperty = fuel }}
-	{{PropertyMapping | templateProperty = tertiary_fuel | ontologyProperty = fuel }}
-	{{PropertyMapping | templateProperty = installed_capacity | ontologyProperty = powerOutput }}
+	{{PropertyMapping | templateProperty = primary_fuel | ontologyProperty = primaryFuelType }}
+	{{PropertyMapping | templateProperty = ps_fuel_primary | ontologyProperty = primaryFuelType }}
+	{{PropertyMapping | templateProperty = secondary_fuel | ontologyProperty = otherFuelType }}
+	{{PropertyMapping | templateProperty = ps_fuel_secondary | ontologyProperty = otherFuelType }}
+	{{PropertyMapping | templateProperty = tertiary_fuel | ontologyProperty = otherFuelType }}
+	{{PropertyMapping | templateProperty = ps_fuel_tertiary | ontologyProperty = otherFuelType }}
+	{{PropertyMapping | templateProperty = primary_fuel | ontologyProperty = fuelTypeName }}
+	{{PropertyMapping | templateProperty = ps_fuel_primary | ontologyProperty = fuelTypeName }}
+	{{PropertyMapping | templateProperty = secondary_fuel | ontologyProperty = fuelTypeName }}
+	{{PropertyMapping | templateProperty = ps_fuel_secondary | ontologyProperty = fuelTypeName }}
+	{{PropertyMapping | templateProperty = tertiary_fuel | ontologyProperty = fuelTypeName }}
+	{{PropertyMapping | templateProperty = ps_fuel_tertiary | ontologyProperty = fuelTypeName }}
+	{{PropertyMapping | templateProperty = installed_capacity | ontologyProperty = installedCapacity }}
+	{{PropertyMapping | templateProperty = plant_capacity | ontologyProperty = installedCapacity }}
+	{{PropertyMapping | templateProperty = primary_fuel_capacity | ontologyProperty = installedCapacity }}
+	{{PropertyMapping | templateProperty = secondary_fuel_capacity | ontologyProperty = installedCapacity }}
+	{{PropertyMapping | templateProperty = tertiary_fuel_capacity | ontologyProperty = installedCapacity }}
+	{{PropertyMapping | templateProperty = ps_electrical_capacity | ontologyProperty = installedCapacity }}
+	{{PropertyMapping | templateProperty = average_annual_gen | ontologyProperty = averageAnnualGeneration }}
+	{{PropertyMapping | templateProperty = ps_annual_generation | ontologyProperty = averageAnnualGeneration }}
+	{{PropertyMapping | templateProperty = capacity_factor | ontologyProperty = capacityFactor }}
+	{{PropertyMapping | templateProperty = ps_electrical_cap_fac | ontologyProperty = capacityFactor }}
+	{{PropertyMapping | templateProperty = generation_units | ontologyProperty = generationUnits }}
 	{{PropertyMapping | templateProperty = status | ontologyProperty = status }}
 	{{PropertyMapping | templateProperty = construction_began | ontologyProperty = buildingStartDate }}
-	{{PropertyMapping | templateProperty = commissioned | ontologyProperty = commissioningDate }}
-	{{PropertyMapping | templateProperty = decommissioned | ontologyProperty = commissioningDate }}
+	{{PropertyMapping | templateProperty = construction_began | ontologyProperty = buildingStartYear }}
+	{{PropertyMapping | templateProperty = commissioned | ontologyProperty = openingDate }}
+	{{PropertyMapping | templateProperty = commissioned | ontologyProperty = openingYear }}
+	{{PropertyMapping | templateProperty = decommissioned | ontologyProperty = closingDate }}
 	{{GeocoordinatesMapping | latitudeDegrees = lat_d | latitudeMinutes = lat_m | latitudeSeconds = lat_s | latitudeDirection = lat_NS | longitudeDegrees = long_d | longitudeMinutes = long_m | longitudeSeconds = long_s | longitudeDirection = long_EW }}
+	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping en:Infobox prepared food</title><ns>204</ns><id>3934</id><revision><id>13672</id><timestamp>2011-06-16T15:12:29Z</timestamp><text>{{TemplateMapping
 | mapToClass = Food
 | mappings =
@@ -24328,11 +24396,12 @@ Template Properties not mapped yet:
  {{PropertyMapping | templateProperty = congress | ontologyProperty = lcc}}
  {{PropertyMapping | templateProperty = preceded_by | ontologyProperty = previousWork }}
  {{PropertyMapping | templateProperty = followed_by | ontologyProperty = subsequentWork }}
-}}</text></revision></page><page><title>Mapping en:Infobox single</title><ns>204</ns><id>242</id><revision><id>10216</id><timestamp>2010-11-09T15:37:25Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox single</title><ns>204</ns><id>242</id><revision><id>36740</id><timestamp>2014-07-09T07:03:27Z</timestamp><text>{{TemplateMapping
 | mapToClass = Single
 | mappings =
 	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = Album | ontologyProperty = album }}
+	{{PropertyMapping | templateProperty = from Album | ontologyProperty = album }}
 	{{PropertyMapping | templateProperty = A-side | ontologyProperty = aSide }}
 	{{PropertyMapping | templateProperty = B-side | ontologyProperty = bSide }}
 	{{PropertyMapping | templateProperty = Format | ontologyProperty = format }}
@@ -24350,6 +24419,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = Label | ontologyProperty = recordLabel }}
 	{{PropertyMapping | templateProperty = Last single | ontologyProperty = previousWork }}
 	{{PropertyMapping | templateProperty = Next single | ontologyProperty = subsequentWork }}
+	{{PropertyMapping | templateProperty = Cover | ontologyProperty = picture }}
 }}</text></revision></page><page><title>Mapping en:Infobox ski area</title><ns>204</ns><id>243</id><revision><id>7442</id><timestamp>2010-05-12T14:47:51Z</timestamp><text>{{TemplateMapping
 | mapToClass = SkiArea
 | mappings =
