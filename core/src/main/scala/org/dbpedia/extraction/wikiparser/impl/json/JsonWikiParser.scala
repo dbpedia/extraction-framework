@@ -5,8 +5,8 @@ import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle,JsonNode}
 
 import net.liftweb.json._
 import net.liftweb.json.JsonDSL._
-import org.json
 import org.json.JSONObject
+import org.wikidata.wdtk.datamodel.implementation.DataObjectFactoryImpl
 import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 import org.wikidata.wdtk.dumpfiles.JsonConverter
 
@@ -44,11 +44,13 @@ class JsonWikiParser {
     }
     else
     {
-        JSONObject jsonObject = new JSONObject(page.source)
-      ItemDocument itemDocument = new JsonConverter
-            .convertToItemDocument(jsonObject, page.title)
 
-      //new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, false, false, nodes)
+      val IntRegEx = new Regex("(\\d+)")
+      val jsonObject : JSONObject  = new JSONObject(page.source)
+      val jsonConverter = new JsonConverter("http://data.dbpedia.org/resource/", new DataObjectFactoryImpl())
+      val Some(title) = IntRegEx findFirstIn page.title.toString()
+      val itemDocument : ItemDocument = jsonConverter.convertToItemDocument(jsonObject, "Q"+title)
+
       Some(new JsonNode(page,itemDocument))
     }
   }

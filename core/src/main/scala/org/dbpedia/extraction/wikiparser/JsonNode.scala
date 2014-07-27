@@ -1,30 +1,12 @@
 package org.dbpedia.extraction.wikiparser
 
 import org.dbpedia.extraction.sources.WikiPage
+import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 
 /*enum to express type of node returned for parser to extractor in
  for each parser to deal with it's returned node
  todo : implement this using the AST
   */
-object JsonNode {
-  type NodeType = String
-
-  val LanguageLinks = "LanguageLinks"
-  val Labels = "Labels"
-
-  val Facts = "Facts"   //for normal Wikidata dump extractor , data weren't adapted for MappedDBpedia dump
-
-  val MappedFacts = "MappedFacts"
-
-  val CoordinatesFacts = "MappedCoordinates"
-  val TimeFacts = "TimeFacts"
-  val StringFacts = "StringFacts"
-  val CommonMediaFacts = "CommonMediaFacts"
-
-  val NotImportant = "NotImportant"
-
-}
-
 
 
 
@@ -50,30 +32,9 @@ object JsonNode {
 
 class JsonNode  (
   val wikiPage : WikiPage,
-  val uriTriples: collection.mutable.Map[String, List[String]],
-  val valueTriples: collection.mutable.Map[String, collection.mutable.Map[String,String]],
-  val NodeType : JsonNode.NodeType,
-  children: List[Node]
+  val wikiDataItem : ItemDocument
 ) 
-extends Node(children, 0)
-{
-    def getUriTriples : collection.mutable.Map[String,List[String]] = uriTriples
-    def getValueTriples : collection.mutable.Map[String,collection.mutable.Map[String,String]] = valueTriples
-    def toPlainText : String = getUriTriples.mkString+getValueTriples.mkString
-    def toWikiText : String = getUriTriples.mkString+getValueTriples.mkString
-
-
-    def this (
-             wikiPage : WikiPage,
-             uriTriples: collection.mutable.Map[String, List[String]] = collection.mutable.Map.empty,
-             valueTriples: collection.mutable.Map[String, collection.mutable.Map[String,String]]= collection.mutable.Map.empty,
-             NodeType : JsonNode.NodeType = JsonNode.NotImportant
-             ) = this(wikiPage,
-      if(uriTriples==null) collection.mutable.Map.empty else uriTriples,
-      if(valueTriples==null) collection.mutable.Map.empty else valueTriples,
-      if(NodeType == null) JsonNode.NotImportant else NodeType,
-      List.empty
-    )
+extends Node(List.empty, 0) {
+  def toPlainText: String = ""
+  def toWikiText: String = ""
 }
-
-
