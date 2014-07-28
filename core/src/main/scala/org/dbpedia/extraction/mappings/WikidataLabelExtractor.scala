@@ -40,9 +40,10 @@ class WikidataLabelExtractor(
     //               owl:sameas >> for  Language links
 
     for ((lang, value) <- page.wikiDataItem.getLabels) {
+      val literalWithoutLang = value.toString.split("\\(")(0).trim()
       Language.get(lang) match
       {
-        case Some(l) => quads += new Quad(l, DBpediaDatasets.WikidataLabels, subjectUri, labelProperty, value.toString(), page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+        case Some(dbpedia_lang) => quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLabels, subjectUri, labelProperty,literalWithoutLang , page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
         case _=>
       }
     }
