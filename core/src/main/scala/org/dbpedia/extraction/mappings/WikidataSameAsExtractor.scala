@@ -3,15 +3,15 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets}
-import org.dbpedia.extraction.wikiparser.{JsonNode, PageNode}
+import org.dbpedia.extraction.wikiparser.{WikiTitle, JsonNode, PageNode}
 import collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 import scala.collection.JavaConversions._
 /**
 * it's an extractor to extract sameas data from DBpedia-WikiData on the form of
-* <http://wikidata.dbpedia.org/resource/Q18>  <owl:sameas> <http://dbpedia.org/resource/London>
-* <http://wikidata.dbpedia.org/resource/Q18>  <owl:sameas> <http://fr.dbpedia.org/resource/London>
-* <http://wikidata.dbpedia.org/resource/Q18>  <owl:sameas> <http://co.dbpedia.org/resource/London>
+* <http://wikidata.dbpedia.org/resource/Q18>  owl:sameAs <http://dbpedia.org/resource/London>
+* <http://wikidata.dbpedia.org/resource/Q18>  owl:sameAs <http://fr.dbpedia.org/resource/London>
+* <http://wikidata.dbpedia.org/resource/Q18>  owl:sameAs <http://co.dbpedia.org/resource/London>
 */
 class WikidataSameAsExtractor(
                          context : {
@@ -36,12 +36,11 @@ class WikidataSameAsExtractor(
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
     for ((lang,siteLink) <- page.wikiDataItem.getSiteLinks) {
-      Language.get(lang.substring(0,2)) match{
+      val l=lang.toString().replace("wiki","")
+      Language.get(l) match{
         case Some(dbpedia_lang) => {
-          val prefix = if (dbpedia_lang.wikiCode=="en") "" else dbpedia_lang.wikiCode+"."
-          val suffix = siteLink.getPageTitle().toString().replace(" ","_")
-          val objectUri = "http://" + prefix + "dbpedia.org/resource/" + suffix
-          quads += new Quad(context.language, DBpediaDatasets.WikidataSameAs, subjectUri, sameAsProperty,objectUri, page.wikiPage.sourceUri,null)
+          val sitelink = WikiTitle.parse(siteLink.getPageTitle().toString(),dbpedia_lang)
+          quads += new Quad(context.language, DBpediaDatasets.WikidataSameAs, subjectUri, sameAsProperty, sitelink.resourceIri, page.wikiPage.sourceUri,null)
         }
         case _=>
       }
