@@ -33,17 +33,9 @@ extends PageNodeExtractor {
             case templateNode : TemplateNode =>
             {
                 if(templateNode.title.decoded.contains("Infobox")) {
-                    for(propertyNode <- templateNode.children) {
-                        for(property <- propertyNode.children) {
-                            property match
-                            {
-                                case internalLinkNode : InternalLinkNode => {
-                                    if (!internalLinkNode.destination.decoded.toLowerCase.equals(StringParser.parse(internalLinkNode.children(0)).mkString.toLowerCase)) {
-                                        quads += new Quad(context.language, DBpediaDatasets.LinkTitles, context.language.resourceUri.append(internalLinkNode.destination.decoded).replace(" ", "_"), context.ontology.properties("linkTitle"), StringParser.parse(internalLinkNode.children(0)).mkString, internalLinkNode.sourceUri, new Datatype("rdf:langString"))
-                                    }
-                                }
-                                case _ => quads
-                            }
+                    for (internalLinkNode <- PageLinksExtractor.collectInternalLinks(templateNode)) {
+                        if (!internalLinkNode.destination.decoded.toLowerCase.equals(StringParser.parse(internalLinkNode.children(0)).mkString.toLowerCase)) {
+                            quads += new Quad(context.language, DBpediaDatasets.LinkTitles, context.language.resourceUri.append(internalLinkNode.destination.decoded).replace(" ", "_"), context.ontology.properties("linkTitle"), StringParser.parse(internalLinkNode.children(0)).mkString, internalLinkNode.sourceUri, new Datatype("rdf:langString"))
                         }
                     }
                 }
