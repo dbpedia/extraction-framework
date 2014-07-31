@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
+import java.util.logging.Logger
 import java.net.{URISyntaxException, URI}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.UriUtils
@@ -86,6 +87,8 @@ object NodeUtil
      */
     def splitPropertyNode(inputNode : PropertyNode, regex : String, trimResults : Boolean = false, transformCmd : String = null, transformFunc : String => String = identity) : List[PropertyNode] =
     {
+        val inputTemplateNode = inputNode.parent.asInstanceOf[TemplateNode]
+
         var propertyNodes = List[PropertyNode]()
         var currentNodes = List[Node]()
 
@@ -122,6 +125,21 @@ object NodeUtil
                     }
                 }
             }
+            case ExternalLinkNode(destinationURI, children, line, destinationNodes) => 
+                try {
+                    currentNodes = new ExternalLinkNode(
+                        UriUtils.encode(transformFunc(destinationURI.toString)),
+                        children, line, destinationNodes) :: currentNodes
+                } catch {
+                    case e: URISyntaxException => {
+                        Logger.getLogger(NodeUtil.getClass.getName).warning(
+                            "(while processing template '" + inputTemplateNode.title.decodedWithNamespace + 
+                            "', property '" + inputNode.key + "')" +
+                            f" Adding prefix or suffix to '$child%s' caused an error, skipping: " + e.getMessage
+                        )
+                        currentNodes = child :: currentNodes
+                    }
+                }
             case _ => currentNodes = child :: currentNodes
         }
 
@@ -135,7 +153,6 @@ object NodeUtil
         propertyNodes = propertyNodes.reverse
 
         //Create a synthetic template node for each property node
-        val inputTemplateNode = inputNode.parent.asInstanceOf[TemplateNode]
         val templateNodes = for(propertyNode <- propertyNodes) yield TemplateNode(inputTemplateNode.title, propertyNode :: Nil, inputTemplateNode.line)
 
         //Set link to the original AST
