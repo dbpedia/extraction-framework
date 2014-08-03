@@ -1,12 +1,14 @@
-package org.dbpedia.extraction.mappings
+package org.dbpedia.extraction.mappings.wikidata
 
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.mappings.{JsonNodeExtractor, PageContext}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets}
-import org.dbpedia.extraction.wikiparser.{WikiTitle, JsonNode, PageNode}
-import collection.mutable.ArrayBuffer
-import scala.language.reflectiveCalls
+import org.dbpedia.extraction.wikiparser.{JsonNode, WikiTitle}
+
 import scala.collection.JavaConversions._
+import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 /**
 * it's an extractor to extract sameas data from DBpedia-WikiData on the form of
 * <http://wikidata.dbpedia.org/resource/Q18>  owl:sameAs <http://dbpedia.org/resource/London>
