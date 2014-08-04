@@ -23,35 +23,63 @@ class GalleryExtractor (
 )
 extends WikiPageExtractor
 {
-  private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
+    private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
 
-  override val datasets = Set(DBpediaDatasets.Images)
+    override val datasets = Set(DBpediaDatasets.Images)
 
-  override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+    /*
+     * Regular expressions
+     */
     // Check for gallery tags in the page source.
     val galleryRegex = new scala.util.matching.Regex("""<gallery((?s).*?)>((?s).+?)</gallery>""",
         "tags",
         "files"
     )
-    val galleryMatch = galleryRegex.findAllIn(page.source)
 
-    if(galleryMatch.isEmpty) return Seq.empty
+    // The structure of a [[File:...]] link.
+    // I developed the "does this look like a title" logic from https://www.mediawiki.org/wiki/Manual:Page_title
+    val fileLineRegex = new scala.util.matching.Regex("""^([^#<>\[\]\|\{\}]+)(|.*)?$""",
+        "filename",
+        "tags"
+    )
 
-    val files = galleryMatch.group("files").split('\n')
+    /**
+     * Extract gallery tags from a WikiPage.
+     */
+    override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+        // Iterate over each <gallery> set.
+        val galleryQuads = galleryRegex.findAllMatchIn(page.source).flatMap(matchData => {
+            val lineNumber = page.source.substring(0, matchData.start).count(_ == '\n')
+            val tags = matchData.group("tags")
+            val fileLines = matchData.group("files")
 
-    // TODO: figure out page numbers.
-    // TODO: parse each line into a WikiTitle and a label.
-    // See parseLink(...) in SimpleWikiParser to see how this is done.
-    files.flatMap(filename => filename match {
-        case "" => Seq.empty
-        case filename:String => Seq(new Quad(Language.English,
-            DBpediaDatasets.Images,
-            subjectUri,
-            foafDepictionProperty,
-            WikiTitle.parse(filename, context.language).pageIri,
-            page.sourceUri,
-            null
-        ))
-    })
-  }
+            val fileLineQuads = fileLines.split('\n').flatMap({
+                // Some Gallery lines might just be empty.
+                case "" => Seq.empty
+
+                // Other lines have names of files.
+                case fileLine => {
+                    val fileLineOption = fileLineRegex.findFirstMatchIn(fileLine) 
+
+                    if (fileLineOption.isEmpty) 
+                        Seq.empty
+                    else {
+                        val fileLineMatch = fileLineOption.get
+                        
+                        Seq(new Quad(Language.English, DBpediaDatasets.Images,
+                            subjectUri,
+                            foafDepictionProperty,
+                            WikiTitle.parse(fileLineMatch.group("filename"), context.language).pageIri,
+                            page.sourceUri + "#absolute-line=" + lineNumber,
+                            null
+                        ))
+                    }
+                }
+            })
+
+            fileLineQuads.toSeq
+        })
+
+        galleryQuads.toSeq
+    }
 }
