@@ -36,9 +36,6 @@ class WikidataLabelExtractor(
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 
-    //for example :  skos:label  >> for labels extractor
-    //               owl:sameas >> for  Language links
-
     for ((lang, value) <- page.wikiDataItem.getLabels) {
       val literalWithoutLang = value.toString.replace("("+lang+")", "").trim()
       Language.get(lang) match

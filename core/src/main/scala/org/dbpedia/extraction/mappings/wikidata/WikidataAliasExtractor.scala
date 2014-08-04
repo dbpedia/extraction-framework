@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.mappings.wikidata
+package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.mappings.{JsonNodeExtractor, PageContext}
@@ -11,6 +11,9 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
  * Created by ali on 7/29/14.
+ * Extracts aliases triples from Wikidata sources
+ * on the form of
+ * <http://wikidata.dbpedia.org/resource/Q446> <http://dbpedia.org/ontology/alias> "alias"@lang .
  */
 
 class WikidataAliasExtractor (

@@ -53,7 +53,6 @@ class WikidataFactsExtractor(
         val value = JSON.parseFull(mainSnak.get("value").toString())
         value match {
           case Some(map: Map[String, Any]) => {
-              println(map.get("string"))
               map.get("string") match {
                case Some(s) => quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, s.toString(), page.wikiPage.sourceUri, context.ontology.datatypes("xsd:string"))
                case _ =>
