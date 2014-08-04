@@ -9,6 +9,8 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
  * Created by ali on 7/29/14.
+ * Extracts descriptions triples from Wikidata sources
+ * on the form of <http://wikidata.dbpedia.org/resource/Q139> <http://dbpedia.org/ontology/description> "description"@lang.
  */
 class WikidataDescriptionExtractor (
                                      context : {

@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.mappings.wikidata
+package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.mappings.{JsonNodeExtractor, PageContext}
