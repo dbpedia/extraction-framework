@@ -12,7 +12,7 @@ import scala.language.reflectiveCalls
  * Extract images from galleries. I'm not sure what the best RDF representation
  * of this will be, but for now we'll start with:
  *
- *  - <Main:Gallery page> <foaf:depiction> <File:Image>
+ *  - <Main:Gallery page> <dbo:hasGalleryItem> <File:Image>
  *
  * The gallery tag is documented at https://en.wikipedia.org/wiki/Help:Gallery_tag
  */
