@@ -26,6 +26,6 @@ extends WikiPageExtractor
   private val quad = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.RevisionUris, derivedFromProperty, null) _
 
   override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
-    Seq(quad(subjectUri, page.title.pageIri, page.sourceUri))
+    Seq(quad(subjectUri, page.sourceUri, page.sourceUri))
   }
 }
