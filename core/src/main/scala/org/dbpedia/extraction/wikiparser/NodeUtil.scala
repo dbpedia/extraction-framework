@@ -87,6 +87,7 @@ object NodeUtil
      */
     def splitPropertyNode(inputNode : PropertyNode, regex : String, trimResults : Boolean = false, transformCmd : String = null, transformFunc : String => String = identity) : List[PropertyNode] =
     {
+        // Store a reference to the TemplateNode this PropertyNode belongs to.
         val inputTemplateNode = inputNode.parent.asInstanceOf[TemplateNode]
 
         var propertyNodes = List[PropertyNode]()
@@ -126,11 +127,15 @@ object NodeUtil
                 }
             }
             case ExternalLinkNode(destinationURI, children, line, destinationNodes) => 
+                // In case of an external link node, transform the URI using the
+                // transform function and attempt to use the result as a URI.
                 try {
                     currentNodes = new ExternalLinkNode(
                         UriUtils.encode(transformFunc(destinationURI.toString)),
                         children, line, destinationNodes) :: currentNodes
                 } catch {
+                    // If the new URI doesn't make syntactical sense, produce
+                    // a warning and don't modify the original node.
                     case e: URISyntaxException => {
                         Logger.getLogger(NodeUtil.getClass.getName).warning(
                             "(while processing template '" + inputTemplateNode.title.decodedWithNamespace + 
