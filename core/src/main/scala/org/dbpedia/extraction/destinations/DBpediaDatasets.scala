@@ -92,9 +92,15 @@ object DBpediaDatasets
     val WikidataNameSpaceSameAs = new Dataset("wikidata-namespace-sameas")
     
     // wikidata facts triples 
-    val WikidataFacts = new Dataset("wikidata")
+    val WikidataFacts = new Dataset("wikidata-facts")
     //wikidata facts triples with mapped properties to DBpedia ones 
     val WikidataMappedFacts = new Dataset("wikidata-mapped")
 
+    //wikidata alias output
+    //<http://wikidata.dbpedia.org/resource/Q446> <http://dbpedia.org/ontology/alias> "alias"@lang .
+    val WikidataAlias = new Dataset("wikidata-alias")
 
+    //wikidata description output
+    //wikidata.dbpedia.org/resource/Q139> <http://dbpedia.org/ontology/description> "description"@lang.
+    val WikidataDescription = new Dataset("wikidata-description")
 }
