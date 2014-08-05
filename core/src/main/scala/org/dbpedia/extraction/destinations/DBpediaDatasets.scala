@@ -29,6 +29,7 @@ object DBpediaDatasets
     val IriSameAsUri = new Dataset("iri_same_as_uri")
     val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
     val PageLength = new Dataset("page_length")
+    val ImageGalleries = new Dataset("image_galleries")
 
     /**
      * Mapping based

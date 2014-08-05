@@ -12,7 +12,7 @@ import scala.language.reflectiveCalls
  * Extract images from galleries. I'm not sure what the best RDF representation
  * of this will be, but for now we'll start with:
  *
- *  - <Main:Gallery page> <foaf:depiction> <File:Image>
+ *  - <Main:Gallery page> <dbo:hasGalleryItem> <File:Image>
  *
  * The gallery tag is documented at https://en.wikipedia.org/wiki/Help:Gallery_tag
  */
@@ -30,7 +30,7 @@ extends WikiPageExtractor
     /** Property that links a gallery page with each image on it */
     private val hasGalleryItemProperty = context.ontology.properties("hasGalleryItem")
 
-    override val datasets = Set(DBpediaDatasets.Images)
+    override val datasets = Set(DBpediaDatasets.ImageGalleries)
 
     /*
      * Regular expressions
@@ -80,14 +80,23 @@ extends WikiPageExtractor
                         Seq.empty
                     else {
                         val fileLineMatch = fileLineOption.get
+
+                        val sourceWithLineNumber = page.sourceUri + "#absolute-line=" +
+                            lineNumber
                         
                         try {
+                            // Parse the filename in the file line match.
+                            val fileWikiTitle = WikiTitle.parse(
+                                fileLineMatch.group("filename"), 
+                                context.language
+                            )
+
                             // Generate <subjectUri> <dbo:hasGalleryItem> <imageUri>
-                            Seq(new Quad(Language.English, DBpediaDatasets.Images,
+                            Seq(new Quad(Language.English, DBpediaDatasets.ImageGalleries,
                                 subjectUri,
                                 hasGalleryItemProperty,
-                                WikiTitle.parse(fileLineMatch.group("filename"), context.language).pageIri,
-                                page.sourceUri + "#absolute-line=" + lineNumber,
+                                fileWikiTitle.pageIri,
+                                sourceWithLineNumber, 
                                 null
                             ))
                         } catch {
