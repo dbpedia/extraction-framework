@@ -23,7 +23,7 @@ class GalleryExtractor (
 )
 extends WikiPageExtractor
 {
-    private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
+    private val hasGalleryItemProperty = context.ontology.properties("hasGalleryItem")
 
     override val datasets = Set(DBpediaDatasets.Images)
 
@@ -68,7 +68,7 @@ extends WikiPageExtractor
                         
                         Seq(new Quad(Language.English, DBpediaDatasets.Images,
                             subjectUri,
-                            foafDepictionProperty,
+                            hasGalleryItemProperty,
                             WikiTitle.parse(fileLineMatch.group("filename"), context.language).pageIri,
                             page.sourceUri + "#absolute-line=" + lineNumber,
                             null
