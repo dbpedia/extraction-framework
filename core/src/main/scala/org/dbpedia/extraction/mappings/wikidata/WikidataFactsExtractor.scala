@@ -6,7 +6,7 @@ import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets}
 import org.dbpedia.extraction.wikiparser.{JsonNode, PageNode}
-import org.json.JSONObject
+import org.json.{JSONException, JSONObject}
 import org.wikidata.wdtk.datamodel.implementation.DataObjectFactoryImpl
 import org.wikidata.wdtk.datamodel.interfaces.DataObjectFactory
 import collection.mutable.ArrayBuffer
@@ -16,20 +16,20 @@ import scala.util.parsing.json.JSON
 
 
 /**
-* Extracts Wikidata claims
-* on the form of
-* value triples:
-* <http://wikidata.dbpedia.org/resouce/Q64> <http://www.wikidata.org/entity/P625> "33.3333333 -123.433333333"
-* URI triples
-* <http://wikidata.dbpedia.org/resouce/Q64> <http://www.wikidata.org/entity/P625> <wikidata.dbpedia.org/resource/Q223>
-*
-*/
+ * Extracts Wikidata claims
+ * on the form of
+ * value triples:
+ * <http://wikidata.dbpedia.org/resouce/Q64> <http://www.wikidata.org/entity/P625> "33.3333333 -123.433333333"
+ * URI triples
+ * <http://wikidata.dbpedia.org/resouce/Q64> <http://www.wikidata.org/entity/P625> <wikidata.dbpedia.org/resource/Q223>
+ *
+ */
 class WikidataFactsExtractor(
-                         context : {
-                           def ontology : Ontology
-                           def language : Language
-                         }
-                         )
+                              context : {
+                                def ontology : Ontology
+                                def language : Language
+                              }
+                              )
   extends JsonNodeExtractor
 {
   // Here we define all the ontology predicates we will use
@@ -51,20 +51,29 @@ class WikidataFactsExtractor(
       try {
         val mainSnak: JSONObject = new JSONObject(claim.getMainSnak())
         val value = JSON.parseFull(mainSnak.get("value").toString())
-        value match {
-          case Some(map: Map[String, Any]) => {
-              map.get("string") match {
-               case Some(s) => quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, s.toString(), page.wikiPage.sourceUri, context.ontology.datatypes("xsd:string"))
-               case _ =>
-             }
-            }
-            case _ =>
-          }
-     }
-     catch {
-       case _:IndexOutOfBoundsException =>
-     }
+
+        getValue(value, "string") match {
+          case Some(s) => quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, s.toString(), page.wikiPage.sourceUri, context.ontology.datatypes("xsd:string"))
+          case _ =>
+        }
+
+        getValue(value, "iri") match {
+          case Some(s) => quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, s.toString(), page.wikiPage.sourceUri, null)
+          case _ =>
+        }
+      } catch {
+        case e: Exception =>
+      }
     }
     quads
+  }
+
+  def getValue(in:Any,datatype:String):Any={
+    in match{
+      case Some(map:Map[String,Any]) => {
+        if (datatype=="string") return map.get("string")
+        if (datatype=="iri") return map.get("iri")
+      }
+    }
   }
 }
