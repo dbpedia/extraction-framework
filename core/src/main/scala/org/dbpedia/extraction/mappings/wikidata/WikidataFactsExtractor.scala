@@ -1,18 +1,13 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.Collections
-
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets}
-import org.dbpedia.extraction.wikiparser.{JsonNode, PageNode}
-import org.json.{JSONException, JSONObject}
-import org.wikidata.wdtk.datamodel.implementation.DataObjectFactoryImpl
-import org.wikidata.wdtk.datamodel.interfaces.DataObjectFactory
+import org.dbpedia.extraction.wikiparser.{JsonNode}
+import org.wikidata.wdtk.datamodel.interfaces._
 import collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 import scala.collection.JavaConversions._
-import scala.util.parsing.json.JSON
 
 
 /**
@@ -48,32 +43,20 @@ class WikidataFactsExtractor(
     for ((statementGroup) <- page.wikiDataItem.getStatementGroups) {
       val claim = statementGroup.getStatements().get(0).getClaim()
       val propertyId = claim.getMainSnak().getPropertyId().toString().replace("(PropertyId)", "")
-      try {
-        val mainSnak: JSONObject = new JSONObject(claim.getMainSnak())
-        val value = JSON.parseFull(mainSnak.get("value").toString())
 
-        getValue(value, "string") match {
-          case Some(s) => quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, s.toString(), page.wikiPage.sourceUri, context.ontology.datatypes("xsd:string"))
-          case _ =>
+      if (claim.getMainSnak.isInstanceOf[ValueSnak]) {
+        val mainSnak: ValueSnak = claim.getMainSnak().asInstanceOf[ValueSnak]
+        if(mainSnak.getValue().isInstanceOf[ItemIdValue]) {
+          val value:ItemIdValue = mainSnak.getValue().asInstanceOf[ItemIdValue]
+          val s=value.toString().replace("(ItemId)","")
+          quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, s, page.wikiPage.sourceUri, null)
+        } else if(mainSnak.getValue().isInstanceOf[StringValue]){
+          val value:StringValue = mainSnak.getValue().asInstanceOf[StringValue]
+          val s=value.toString().replace("(String)","")
+          quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, s, page.wikiPage.sourceUri, context.ontology.datatypes("xsd:string"))
         }
-
-        getValue(value, "iri") match {
-          case Some(s) => quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, s.toString(), page.wikiPage.sourceUri, null)
-          case _ =>
-        }
-      } catch {
-        case e: Exception =>
       }
     }
     quads
-  }
-
-  def getValue(in:Any,datatype:String):Any={
-    in match{
-      case Some(map:Map[String,Any]) => {
-        if (datatype=="string") return map.get("string")
-        if (datatype=="iri") return map.get("iri")
-      }
-    }
   }
 }
