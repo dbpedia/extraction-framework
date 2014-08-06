@@ -8,9 +8,9 @@ import collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
- * it's an extractor to extract Mappings between Wikidata URIs to WikiData URIs inside DBpedia, in the form of :
- * <http://wikidata.dbpedia.org/resource/Q18>  <owl:sameas> <http://wikidata.org/entity/Q18>
- */
+* it's an extractor to extract Mappings between Wikidata URIs to WikiData URIs inside DBpedia, in the form of :
+* <http://wikidata.dbpedia.org/resource/Q18>  <owl:sameas> <http://wikidata.org/entity/Q18>
+*/
 class WikidataNameSpaceSameAsExtractor(
                          context : {
                            def ontology : Ontology
