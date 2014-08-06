@@ -27,6 +27,7 @@ object DateIntervalMappingConfig
     )
 
     val splitMap = Map(
+        "en" -> "to",
         "fr" -> "à|au"
     )
 }

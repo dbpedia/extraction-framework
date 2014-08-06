@@ -29,14 +29,10 @@ extends PropertyMapping
 
   private val presentStrings : Set[String] = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
   private val sinceString = sinceMap.getOrElse(context.language.wikiCode, sinceMap("en"))
-  private val splitString = splitMap.getOrElse(context.language.wikiCode, null)
+  private val splitString = splitMap.getOrElse(context.language.wikiCode, splitMap("en"))
 
   // TODO: the parser should resolve HTML entities
-  private val intervalSplitRegex = "(?iu)(—|–|-|&mdash;|&ndash;" + (splitString match
-  {
-     case text : String => "|" + text
-     case null => ""
-  }) + ")"
+  private val intervalSplitRegex = "(?iu)(—|–|-|&mdash;|&ndash;" + ( if (splitString.isEmpty) "" else "|" + splitString ) + ")"
   
   override val datasets = Set(DBpediaDatasets.OntologyProperties)
 
@@ -62,7 +58,7 @@ extends PropertyMapping
         //if there were two elements found
         case List(start, end) => end.retrieveText match
         {
-          //if until "present" is specified in words, don't write end triple
+          //if until "present" is specified through one of the special words, don't write end triple
           case Some(text : String) if presentStrings.contains(text.trim.toLowerCase) => None
 
           //normal case of specified end date
