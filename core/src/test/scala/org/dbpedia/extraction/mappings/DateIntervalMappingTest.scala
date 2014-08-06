@@ -20,6 +20,7 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
     {
         parse("en", "xsd:gYear", "1995-2002") should be (Seq("1995", "2002"))
         parse("en", "xsd:gYear", "1995—2002") should be (Seq("1995", "2002"))
+        parse("en", "xsd:gYear", "1995{{dash}}2002") should be (Seq("1995", "2002"))
     }
     "DateIntervalMapping" should "return Seq 1995 2002 @fr" in
     {
@@ -37,6 +38,12 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
     {
         parse("fr", "xsd:gYear", "depuis 1995") should be (Seq("1995"))
         parse("fr", "xsd:gYear", "de 1995 à aujourd'hui") should be (Seq("1995"))
+    }
+    "DateIntervalMapping" should "return Seq 1995 @es" in
+    {
+        parse("es", "xsd:gYear", "1995 al presente") should be (Seq("1995"))
+        parse("es", "xsd:gYear", "1995 hasta la actualidad") should be (Seq("1995"))
+        parse("es", "xsd:gYear", "1995 a la fecha") should be (Seq("1995"))
     }
     "DateIntervalMapping" should "return Seq 1995 1995" in
     {

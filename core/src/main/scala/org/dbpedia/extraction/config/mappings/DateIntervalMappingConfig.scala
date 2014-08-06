@@ -9,25 +9,29 @@ object DateIntervalMappingConfig
         "en" -> Set("present", "now"),
         "ar" -> Set("الحاضر"),
         "el" -> Set("Παρόν"),
-        "es" -> Set("presente"),
+        "es" -> Set("presente", "actualidad", "fecha"),
         "fr" -> Set("aujourd'hui", "en cours"),
         "ga" -> Set("inniu", "actualidade"),
         "id" -> Set("sekarang"),
         "it" -> Set("in attività"),
         "nl" -> Set("heden"),
         "pl" -> Set("nadal"),
-        "pt" -> Set("atualmente")
+        "pt" -> Set("presente", "atualidade", "atualmente")
     )
 
     val sinceMap = Map(
         "en" -> "since",
         "ca" -> "des del",
+        "es" -> "desde",
         "fr" -> "depuis",
-        "pl" -> "od"
+        "pl" -> "od",
+        "pt" -> "desde"
     )
 
     val splitMap = Map(
         "en" -> "to",
-        "fr" -> "à|au"
+        "es" -> "al|a la|a|hasta (?:el|la)",
+        "fr" -> "à|au",
+        "pt" -> "a"
     )
 }
