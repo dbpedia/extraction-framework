@@ -167,7 +167,14 @@ extends PageNodeExtractor
               Thread.sleep(sleepMs)
             }
             else {
-              logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
+              ex match {
+                case e : java.net.SocketTimeoutException => logger.log(Level.INFO,
+                  "Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
+                    loadFactor, ex)
+                case _ => logger.log(Level.INFO,
+                  "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
+                    loadFactor, ex)
+              }
             }
           }
         }
