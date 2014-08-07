@@ -29,6 +29,7 @@ extends PropertyMapping
 
   private val presentStrings : Set[String] = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
   private val sinceString = sinceMap.getOrElse(context.language.wikiCode, sinceMap("en"))
+  private val onwardString = onwardMap.getOrElse(context.language.wikiCode, onwardMap("en"))
   private val splitString = splitMap.getOrElse(context.language.wikiCode, splitMap("en"))
 
   // TODO: the parser should resolve HTML entities
@@ -69,7 +70,8 @@ extends PropertyMapping
         case List(start) => StringParser.parse(start) match
         {
           //if in a "since xxx" construct, don't write end triple
-          case Some(text : String) if text.trim.toLowerCase.startsWith(sinceString) => None
+          case Some(text : String) if (text.trim.toLowerCase.startsWith(sinceString) 
+                                    || text.trim.toLowerCase.endsWith(onwardString)) => None
 
           //make start and end the same if there is no end specified
           case _ => Some(startDate)

@@ -39,6 +39,11 @@ object DateIntervalMappingConfig
         "pt" -> "desde"
     )
 
+    val onwardMap = Map(
+        "en" -> "onward",
+        "es" -> "en adelante"
+    )
+
     val splitMap = Map(
         "en" -> "to",
         "es" -> "al|a la|a|hasta (?:el|la)",
