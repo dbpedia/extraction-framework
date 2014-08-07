@@ -119,7 +119,10 @@ extends PageNodeExtractor
       // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
       // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
       // TODO: there may be other characters that need to be escaped.
-      val titleParam = pageTitle.encodedWithNamespace.replace("&", "%26")
+      var titleParam = pageTitle.encodedWithNamespace
+      AbstractExtractor.CHARACTERS_TO_ESCAPE foreach { case (search, replacement) =>
+        titleParam = titleParam.replace(search, replacement);
+      }
       
       // Fill parameters
       val parameters = apiParametersFormat.format(titleParam/*, URLEncoder.encode(pageWikiText, "UTF-8")*/)
@@ -326,4 +329,23 @@ extends PageNodeExtractor
       coder.code(text)
     }
 
+}
+
+object AbstractExtractor {
+  /**
+   * List of all characters which are reserved in a query component according to RFC 2396
+   * with their escape sequences as determined by the JavaScript function encodeURIComponent.
+   */
+  val CHARACTERS_TO_ESCAPE = List(
+    (";", "%3B"),
+    ("/", "%2F"),
+    ("?", "%3F"),
+    (":", "%3A"),
+    ("@", "%40"),
+    ("&", "%26"),
+    ("=", "%3D"),
+    ("+", "%2B"),
+    (",", "%2C"),
+    ("$", "%24")
+  )
 }
