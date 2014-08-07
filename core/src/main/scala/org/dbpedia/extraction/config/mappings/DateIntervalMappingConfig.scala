@@ -8,15 +8,26 @@ object DateIntervalMappingConfig
     val presentMap = Map(
         "en" -> Set("present", "now"),
         "ar" -> Set("الحاضر"),
-        "el" -> Set("Παρόν"),
+        "be" -> Set("па гэты дзень", "па сучаснасць"),
+        "bg" -> Set("до наши дни", "настояще", "досега"),
+        "ca" -> Set("actualitat"),
+        "cs" -> Set("současnost"),
+        "el" -> Set("Παρόν", "σήμερα"),
         "es" -> Set("presente", "actualidad", "fecha"),
+        "eu" -> Set("gaur egun", "gaur egun arte", "egun"),
         "fr" -> Set("aujourd'hui", "en cours"),
         "ga" -> Set("inniu", "actualidade"),
+        "hr" -> Set("danas"),
+        "hu" -> Set("napjainkig"),
         "id" -> Set("sekarang"),
         "it" -> Set("in attività"),
         "nl" -> Set("heden"),
-        "pl" -> Set("nadal"),
-        "pt" -> Set("presente", "atualidade", "atualmente")
+        "pl" -> Set("nadal", "obecnie"),
+        "pt" -> Set("presente", "atualidade", "atualmente"),
+        "ru" -> Set("наши дни", "настоящее время", "наст. время", "н.вр."),
+        "sk" -> Set("súčasnosť"),
+        "sl" -> Set("danes"),
+        "tr" -> Set("günümüz", "günümüze", "halen")
     )
 
     val sinceMap = Map(
