@@ -27,6 +27,7 @@ extends PropertyMapping
   private val startDateParser = new DateTimeParser(context, rangeType(startDateOntologyProperty))
   private val endDateParser = new DateTimeParser(context, rangeType(endDateOntologyProperty))
 
+  private val splitPropertyNodeRegex = splitPropertyNodeMap.getOrElse(context.language.wikiCode, splitPropertyNodeMap("en"))
   private val presentStrings : Set[String] = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
   private val sinceString = sinceMap.getOrElse(context.language.wikiCode, sinceMap("en"))
   private val onwardString = onwardMap.getOrElse(context.language.wikiCode, onwardMap("en"))
@@ -39,10 +40,20 @@ extends PropertyMapping
 
   override def extract(node : TemplateNode, subjectUri: String, pageContext : PageContext) : Seq[Quad] =
   {
+    // replicate standard mechanism implemented by dataparsers
     for(propertyNode <- node.property(templateProperty))
     {
+       return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => extractInterval(node, subjectUri).toList )
+    }
+    
+    return Seq.empty
+  }
+  
+  
+  def extractInterval(propertyNode : PropertyNode, subjectUri: String) : Seq[Quad] =
+  {
       //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
-      val splitNodes = splitPropertyNodes(propertyNode)
+      val splitNodes = splitIntervalNode(propertyNode)
 
       //Can only map exactly two values onto an interval
       if(splitNodes.size > 2 || splitNodes.size  <= 0)
@@ -100,12 +111,9 @@ extends PropertyMapping
       }
 
       return Seq(quad1)
-    }
-    
-    Seq.empty
   }
 
-  private def splitPropertyNodes(propertyNode : PropertyNode) : List[PropertyNode] =
+  private def splitIntervalNode(propertyNode : PropertyNode) : List[PropertyNode] =
   {
     //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
     val splitNodes = NodeUtil.splitPropertyNode(propertyNode, intervalSplitRegex)
