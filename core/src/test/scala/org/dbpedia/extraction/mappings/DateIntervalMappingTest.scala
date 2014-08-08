@@ -16,7 +16,7 @@ import java.io.File
 class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
 {
     // gYear - Positive Tests - Input is valid
-    "DateIntervalMapping" should "return Seq 1995 2002 @en 1" in
+    "DateIntervalMapping" should "return Seq 1995 2002 @en" in
     {
         parse("en", "xsd:gYear", "1995-2002") should be (Seq("1995", "2002"))
         parse("en", "xsd:gYear", "1995—2002") should be (Seq("1995", "2002"))
@@ -26,9 +26,9 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
     {
         parse("fr", "xsd:gYear", "de 1995 à 2002") should be (Seq("1995", "2002"))
     }
-    "DateIntervalMapping" should "return Seq 1967 1977 @it" in
+    "DateIntervalMapping" should "return Seq 1967 1977 @pt" in
     {
-        parse("it", "xsd:gYear", "[[1967 na música|1967]] - [[1977 na música|1977]]") should be (Seq("1967", "1977"))
+        parse("pt", "xsd:gYear", "[[1967 na música|1967]] - [[1977 na música|1977]]") should be (Seq("1967", "1977"))
     }
     "DateIntervalMapping" should "return Seq 1995 @en" in
     {
