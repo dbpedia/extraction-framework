@@ -7,7 +7,7 @@ import java.io.File
 import org.apache.log4j.Logger
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.{WikiSource, Source, XMLSource}
+import org.dbpedia.extraction.sources.{WikiPage, WikiSource, Source, XMLSource}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.UriPolicy
@@ -17,6 +17,9 @@ import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.live.storage.JSONCache
 import org.dbpedia.extraction.live.queue.LiveQueueItem
 import scala.xml._
+import org.dbpedia.extraction.wikiparser.impl.WikiParserWrapper
+import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
+import org.dbpedia.extraction.live.extractor.LiveExtractor
 
 
 /**
@@ -30,12 +33,8 @@ import scala.xml._
 
 object LiveExtractionConfigLoader
 {
-  //This number is used for filling the recentlyUpdatedInstances array which is in Main class, this array is used
-  //for statistics
-  private var instanceNumber = 0;
-
   //    private var config : Config = null;
-  private var extractors : List[RootExtractor] = null;
+  private var extractors : List[Extractor[_]] = null;
   private var reloadOntologyAndMapping = true;
   private var ontologyAndMappingsUpdateTime : Long = 0;
   val logger = Logger.getLogger("LiveExtractionConfigLoader");
@@ -120,20 +119,19 @@ object LiveExtractionConfigLoader
     }
 
     //var liveDest : LiveUpdateDestination = null;
-    val parser = WikiParser.getInstance()
     var complete = false;
 
-    for (cpage <- articlesSource.map(parser))
+    for (wikiPage <- articlesSource)
     {
 
-      if(cpage.title.namespace == Namespace.Main ||
-        cpage.title.namespace == Namespace.Template ||
-        cpage.title.namespace == Namespace.Category)
+      if(wikiPage.title.namespace == Namespace.Main ||
+        wikiPage.title.namespace == Namespace.Template ||
+        wikiPage.title.namespace == Namespace.Category)
       {
 
 
 
-        val liveCache = new JSONCache(cpage.id, cpage.title.decoded)
+        val liveCache = new JSONCache(wikiPage.id, wikiPage.title.decoded)
 
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
         if (liveCache.performCleanUpdate) {
@@ -145,8 +143,8 @@ object LiveExtractionConfigLoader
           destList += new SPARULDestination(true, policies) // add triples
         }
         destList += new JSONCacheUpdateDestination(liveCache)
-        destList += new PublisherDiffDestination(cpage.id, policies)
-        destList += new LoggerDestination(cpage.id, cpage.title.decoded) // Just to log extraction results
+        destList += new PublisherDiffDestination(wikiPage.id, policies)
+        destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded) // Just to log extraction results
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
 
@@ -154,22 +152,52 @@ object LiveExtractionConfigLoader
         // TODO get liveconfigReader permanently
         val extractorRestrictDest = new ExtractorRestrictDestination ( LiveConfigReader.extractors.get(Language.apply(language.isoCode)), extractorDiffDest)
 
+        // We don't know in advance what parsers we will need so we initialize them as lazy and will be computed onfirst run
+        lazy val pageNode = {
+          val pageNodeParser = WikiParser.getInstance()
+          pageNodeParser(wikiPage)
+        }
+        lazy val jsonNode = {
+          val jsonNodeParser = new JsonWikiParser()
+          jsonNodeParser(wikiPage)
+        }
+        val uri = wikiPage.title.language.resourceUri.append(wikiPage.title.decodedWithNamespace)
+        val context = new PageContext()
+
         extractorRestrictDest.open
 
-        //Add triples generated from active extractors
+        //Get triples from each extractor separately
         extractors.foreach(extractor => {
           //Try to get extractor contents, onError just return empty triples
           val RequiredGraph =
             try{
-              extractor(cpage);
+              // We try to distguish between different types of extractors
+              // need to find a cleaner way of doing this
+              extractor match {
+                case pageNodeExtractor :PageNodeExtractor =>  {
+                  pageNode match {
+                    case Some(pageNodeValue) => pageNodeExtractor.extract(pageNodeValue, uri, context)
+                    case _ => Seq.empty // in case the WikiParser returned None
+                  }
+                }
+                case jsonNodeExtractor :JsonNodeExtractor =>  {
+                  jsonNode match {
+                    case Some(jsonNodeValue) => jsonNodeExtractor.extract(jsonNodeValue, uri, context)
+                    case _ => Seq.empty  // in case the jsonParser returned None
+                  }
+                }
+                case wikiPageExtractor :WikiPageExtractor =>  wikiPageExtractor.extract(wikiPage, uri, context)
+                case _ => Seq.empty
+              }
+
             }
             catch {
               case ex: Exception => {
-                logger.error("Error in " + extractor.extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
+                logger.error("Error in " + extractor.getClass().getName() + "\nError Message: " + ex.getMessage, ex)
                 Seq()
               }
             }
-          extractorRestrictDest.write(extractor.extractor.getClass().getName(), "", RequiredGraph, Seq(), Seq())
+          extractorRestrictDest.write(extractor.getClass().getName(), "", RequiredGraph, Seq(), Seq())
         });
 
         extractorRestrictDest.close
@@ -179,7 +207,7 @@ object LiveExtractionConfigLoader
       else
       {
         // If not in the allowed namespace, delete cache (if exists)
-        JSONCache.deleteCacheOnlyItem(cpage.id)
+        JSONCache.deleteCacheOnlyItem(wikiPage.id)
       }
 
     }
@@ -190,11 +218,11 @@ object LiveExtractionConfigLoader
   //@param  articlesSource  The source of the wikipage article
   //@param  language  The required language
   //    private def LoadOntologyAndMappings(articlesSource: Source, language: Language): Extractor = {
-  private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[RootExtractor] = {
+  private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[Extractor[_]] = {
 
     ontologyAndMappingsUpdateTime = System.currentTimeMillis
     val extractorClasses = convertExtractorListToScalaList(LiveConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
-    org.dbpedia.extraction.live.extractor.LiveExtractor.load(ontologySource, mappingsSource, articlesSource, commonsSource,
+    LiveExtractor.load(ontologySource, mappingsSource, articlesSource, commonsSource,
             extractorClasses, language)
   }
 
@@ -203,22 +231,24 @@ object LiveExtractionConfigLoader
    * @ param  list  The required java list
    * @return  The newly generated scala list
    */
-  private def convertExtractorListToScalaList(list : java.util.List[Class[PageNodeExtractor]]): List[Class[PageNodeExtractor]] =
+  private def convertExtractorListToScalaList(list : java.util.List[Class[_]]): List[Class[Extractor[_]]] =
   {
-    var extractorList =  List[Class[PageNodeExtractor]]();
+    var extractorList =  List[Class[Extractor[_]]]();
 
     val listiterator = list.iterator();
     while(listiterator.hasNext){
-      extractorList = extractorList ::: List[Class[PageNodeExtractor]](listiterator.next());
+      try {
+        extractorList = extractorList ::: List[Class[Extractor[_]]](listiterator.next().asInstanceOf[Class[Extractor[_]]]);
+      }
     }
-    println(extractorList);
     extractorList;
   }
 
-  private def convertExtractorMapToScalaMap(map: java.util.Map[Language, java.util.List[Class[PageNodeExtractor]]]):
-  Map[Language, List[Class[PageNodeExtractor]]] =
+  /*
+  private def convertExtractorMapToScalaMap(map: java.util.Map[Language, java.util.List[Class[Extractor[_]]]]):
+  Map[Language, List[Class[Extractor[_]]]] =
   {
-    var extractorMap =  Map[Language, List[Class[PageNodeExtractor]]]();
+    var extractorMap =  Map[Language, List[Class[Extractor[_]]]]();
 
     val mapIterator = map.entrySet.iterator();
     while(mapIterator.hasNext){
@@ -228,7 +258,7 @@ object LiveExtractionConfigLoader
     println(extractorMap);
     extractorMap;
 
-  }
+  } */
 
   private class Config(config : Properties)
   {

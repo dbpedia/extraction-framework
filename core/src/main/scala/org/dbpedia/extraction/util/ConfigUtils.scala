@@ -53,12 +53,13 @@ object ConfigUtils {
    * @param args array of space- or comma-separated language codes or article count ranges
    * @return languages, sorted by language code
    */
-  // TODO: copy & paste in org.dbpedia.extraction.dump.download.DownloadConfig, org.dbpedia.extraction.dump.extract.Config
+  // TODO: reuse this in org.dbpedia.extraction.dump.download.DownloadConfig
   def parseLanguages(baseDir: File, args: Seq[String]): Array[Language] = {
     
     var keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
         
     var languages = SortedSet[Language]()
+    var excludedLanguages = SortedSet[Language]()
     
     val ranges = new HashSet[(Int,Int)]
   
@@ -66,6 +67,7 @@ object ConfigUtils {
       case "@mappings" => languages ++= Namespace.mappings.keySet
       case RangeRegex(from, to) => ranges += toRange(from, to)
       case LanguageRegex(language) => languages += Language(language)
+      case ExcludedLanguageRegex(language) => excludedLanguages += Language(language)
       case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
     }
     
@@ -87,6 +89,8 @@ object ConfigUtils {
         languages += wiki.language
       }
     }
+
+    languages --= excludedLanguages
     
     languages.toArray
   }
@@ -97,6 +101,11 @@ object ConfigUtils {
    * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
    */
   val LanguageRegex = """([a-z][a-z0-9-]+)""".r
+
+  /**
+   * Regex used for excluding languages from the import.
+   */
+  val ExcludedLanguageRegex = """!([a-z][a-z0-9-]+)""".r
     
   /**
    * Regex for numeric range, both limits optional

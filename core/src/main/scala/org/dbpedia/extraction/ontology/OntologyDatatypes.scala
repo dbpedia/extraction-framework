@@ -13,6 +13,8 @@ object OntologyDatatypes
     {
         var types = List[Datatype]()
 
+        types ::= new Datatype("rdf:langString")         // Strings with language tags
+
         types ::= new Datatype("xsd:date")
         types ::= new Datatype("xsd:time")
         types ::= new Datatype("xsd:dateTime")
@@ -22,7 +24,7 @@ object OntologyDatatypes
         types ::= new Datatype("xsd:gMonthDay")
         types ::= new Datatype("xsd:gDay")
         types ::= new Datatype("xsd:boolean")
-        types ::= new Datatype("xsd:string")
+        types ::= new Datatype("xsd:string")             // Strings without language tags
         types ::= new Datatype("xsd:integer")
         types ::= new Datatype("xsd:positiveInteger")    // >0
         types ::= new Datatype("xsd:nonNegativeInteger") // >=0
@@ -523,6 +525,11 @@ object OntologyDatatypes
 
         builder.addDimension("LinearMassDensity");
         builder.addUnit(new StandardUnitDatatype("gramPerKilometre", Set("g/km")));
+        types :::= builder.build
+    
+        builder.addDimension("Ratio");
+        builder.addUnit(new FactorUnitDatatype("perCent", Set("%","percent","per cent"), 0.01));
+        builder.addUnit(new FactorUnitDatatype("perMil", Set("‰","permil","per mil"), 0.001));
         types :::= builder.build
         
         return types

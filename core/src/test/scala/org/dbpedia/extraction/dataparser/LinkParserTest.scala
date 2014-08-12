@@ -108,6 +108,9 @@ class LinkParserTest extends FlatSpec with ShouldMatchers
     val page = new WikiPage(WikiTitle.parse("TestPage", Language.English), input)
 
     // Not strict parsing
-    notStrictParser.parse(parser(page))
+    parser(page) match {
+      case Some(n) => notStrictParser.parse(n)
+      case None => None
+    }
   }
 }

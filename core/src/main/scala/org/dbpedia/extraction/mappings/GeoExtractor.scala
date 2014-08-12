@@ -4,7 +4,7 @@ import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, ExtractorUtils}
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
@@ -26,13 +26,14 @@ extends PageNodeExtractor
   private val latOntProperty = context.ontology.properties("geo:lat")
   private val lonOntProperty = context.ontology.properties("geo:long")
   private val pointOntProperty = context.ontology.properties("georss:point")
-  private val featureOntClass =  context.ontology.classes("gml:_Feature")
+  private val featureOntClass =  context.ontology.classes("geo:SpatialThing")
 
   override val datasets = Set(DBpediaDatasets.GeoCoordinates)
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    if (page.title.namespace != Namespace.Main) return Seq.empty
+    if (page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) 
+      return Seq.empty
     
     // Iterate through all root templates.
     // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).

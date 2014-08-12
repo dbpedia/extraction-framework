@@ -143,8 +143,11 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
     }
 
     val extractor = new HomepageExtractor(context)
+    parser(page) match {
+      case Some(pageNode) => extractor.extract(pageNode,"TestPage", new PageContext())
+      case None => Seq.empty
+    }
 
-    extractor.extract(parser(page),"TestPage", new PageContext())
   }
 }
 

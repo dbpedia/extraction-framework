@@ -41,6 +41,10 @@ class GeoCoordinateParserTest extends FlatSpec with ShouldMatchers
         val geoCoordinateParser = new GeoCoordinateParser(context)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
-        geoCoordinateParser.parse(wikiParser(page)).map({x => (x.latitude, x.longitude)})
+      wikiParser(page) match
+      {
+        case Some(n) => geoCoordinateParser.parse(n).map({x => (x.latitude, x.longitude)})
+        case None => None
+      }
     }
 }

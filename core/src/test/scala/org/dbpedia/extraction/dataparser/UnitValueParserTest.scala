@@ -293,6 +293,26 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
         parse("en", "Volume", "{{convert|612000000|USgal|m3|abbr=on}}") should be (approximatelyEqualTo(Some(2316672.0)))
     }
 
+    //Power/Energy - Positive Tests - Input is valid
+    "UnitValueParser" should "return Power(3094e6 W)" in
+    {
+        parse("en", "Power", "3,094&nbsp;MW") should equal (Some(3094000000.0))
+    }
+    "UnitValueParser" should "return Power(0.01 W)" in
+    {
+        parse("en", "Power", "10 mW") should equal (Some(0.01))
+    }
+    "UnitValueParser" should "return Energy(80e12 * 3600.0)" in
+    {
+        parse("en", "Energy", "{{convert|80|TWh|abbr=on|lk=on}}") should be  (approximatelyEqualTo(Some(80e12 * 3600.0)))
+    }
+
+    // Ratio - Positive Tests - Input is valid
+    "UnitValueParser" should "return 0.01" in
+    {
+        parse("en", "Ratio", "1%") should equal (Some(0.01))
+    }
+   
     //Time - Positive Tests - Input is valid
     "UnitValueParser" should "return Time(5 Days)" in
     {
@@ -600,6 +620,9 @@ class UnitValueParserTest extends FlatSpec with ShouldMatchers
         val unitValueParser = new UnitValueParser(context, datatype, false)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
-        unitValueParser.parse(wikiParser(page)).map{case (value, dt) => dt.toStandardUnit(value)}
+        wikiParser(page) match {
+          case Some(n) =>  unitValueParser.parse(n).map{case (value, dt) => dt.toStandardUnit(value)}
+          case None => None
+        }
     }
 }

@@ -259,7 +259,7 @@ object MyStack {
         new WikiPage(
           new WikiTitle("wiktionary extraction subtemplate", Namespace.Main, Language.English), str //parsing
         )
-    )
+    ).getOrElse(throw new Exception("Parser Error") )
     val nodes = new Stack[Node]()
 
     if(appendedNewline && (page.children.last match {case TextNode("\n", _)=>true; case _ => false})){

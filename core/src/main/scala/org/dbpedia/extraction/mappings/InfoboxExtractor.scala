@@ -7,7 +7,7 @@ import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{WikiUtil, Language, UriUtils}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
@@ -82,7 +82,7 @@ extends PageNodeExtractor
 
     private val doubleParser = new DoubleParser(context, true)
 
-    private val dataTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
+    private val dateTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
                                   .map(datatype => new DateTimeParser(context, new Datatype(datatype), true))
 
     private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
@@ -101,7 +101,7 @@ extends PageNodeExtractor
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main) return Seq.empty
+        if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
         
         val quads = new ArrayBuffer[Quad]()
 
@@ -153,7 +153,7 @@ extends PageNodeExtractor
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
                                 quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("xsd:string"))
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("rdf:langString"))
                             }
                         }
                     }
@@ -182,7 +182,7 @@ extends PageNodeExtractor
             case links if !links.isEmpty => return links
             case _ =>
         }
-        StringParser.parse(node).map(value => (value, new Datatype("xsd:string"))).toList
+        StringParser.parse(node).map(value => (value, new Datatype("rdf:langString"))).toList
     }
 
     private def extractUnitValue(node : PropertyNode) : Option[(String, Datatype)] =
@@ -194,7 +194,7 @@ extends PageNodeExtractor
 
         if (unitValues.size > 1)
         {
-            StringParser.parse(node).map(value => (value, new Datatype("xsd:string")))
+            StringParser.parse(node).map(value => (value, new Datatype("rdf:langString")))
         }
         else if (unitValues.size == 1)
         {
@@ -248,8 +248,8 @@ extends PageNodeExtractor
     
     private def extractDate(node : PropertyNode) : Option[(String, Datatype)] =
     {
-        for (dataTimeParser <- dataTimeParsers;
-             date <- dataTimeParser.parse(node))
+        for (dateTimeParser <- dateTimeParsers;
+             date <- dateTimeParser.parse(node))
         {
             return Some((date.toString, date.datatype))
         }

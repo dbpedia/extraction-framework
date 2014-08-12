@@ -25,19 +25,19 @@ object WikiParserWrapper {
 
 }
 
-class WikiParserWrapper(wikiTextParserName: String) extends WikiParser {
+class WikiParserWrapper(wikiTextParserName: String) extends  WikiParser{
 
-  def apply(page : WikiPage) : PageNode =
+  def apply(page : WikiPage) : Option[PageNode]  =
   {
-     page.format match {
-       case "application/json" => jsonParser(page)
-       case _ =>
-         if (wikiTextParserName == null || wikiTextParserName.equals("simple")){
-           simpleWikiParser(page)
-         } else {
-           swebleWikiParser(page)
-         }
+    page.format match {
+      //case "application/json" => jsonParser(page)  //obslete now after core refactoring
+      case _ =>
+        if (wikiTextParserName == null || wikiTextParserName.equals("simple")){
+          simpleWikiParser(page)
+        } else {
+          swebleWikiParser(page)
+        }
 
-     }
+    }
   }
 }
