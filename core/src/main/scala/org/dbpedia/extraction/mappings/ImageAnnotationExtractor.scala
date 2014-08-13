@@ -50,6 +50,10 @@ extends PageNodeExtractor
         case _ => false
     })
 
+    // Make sure that every {{ImageNote}} has an {{ImageNoteEnd}}
+    if(imageNoteStarts.size != imageNoteEnds.size)
+        throw new RuntimeException("This page has an unequal number of {{ImageNote}} and {{ImageNoteEnd}} templates, skipping.")
+
     // Zip the two lists so that we end up with a Seq of
     // corresponding (ImageNote, ImageNoteEnd) pairs.
     val imageNoteQuads = imageNoteStarts.zip(imageNoteEnds).flatMap(pair => { 
@@ -58,10 +62,10 @@ extends PageNodeExtractor
                 // Make sure the sequence is ("ImageNote", "ImageNoteEnd"). Otherwise,
                 // we've got an off-by-one error somewhere (such as a missing {{ImageNoteEnd}}).
                 if(!noteStart.title.decoded.equals("ImageNote"))
-                    throw new RuntimeException("Template '" + noteStart.title.decodedWithNamespace + "' found where 'Template:ImageNode' expected; check for missing Template:ImageNode.")
+                    throw new RuntimeException("Template '" + noteStart.title.decodedWithNamespace + "' found where 'Template:ImageNode' expected; check for missing Template:ImageNode, skipping page.")
 
                 if(!noteEnd.title.decoded.equals("ImageNoteEnd"))
-                    throw new RuntimeException("Template '" + noteEnd.title.decodedWithNamespace + "' found where 'Template:ImageNodeEnd' expected; check for missing Template:ImageNode.")
+                    throw new RuntimeException("Template '" + noteEnd.title.decodedWithNamespace + "' found where 'Template:ImageNodeEnd' expected; check for missing Template:ImageNode, skipping page.")
 
                 // Get the indexes of these TemplateNodes within the pageNode.
                 val indexStart = pageNode.children.indexOf(noteStart)
@@ -77,9 +81,9 @@ extends PageNodeExtractor
                         str.toInt
                     } catch {
                         case ex: NoSuchElementException =>
-                            throw new RuntimeException("Template ImageNote missing property '" + key + "' in " + subjectUri)
+                            throw new RuntimeException("Template ImageNote missing property '" + key + "', skipping page.")
                         case ex: NumberFormatException =>
-                            throw new RuntimeException("Property '" + key + "' has a non-numerical value '" + str + "', only numerical values are accepted.")
+                            throw new RuntimeException("Property '" + key + "' has a non-numerical value '" + str + "', only numerical values are accepted, skipping page.")
                     }
                 }
 
