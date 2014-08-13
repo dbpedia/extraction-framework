@@ -12,7 +12,8 @@ import org.dbpedia.extraction.util.StringUtils._
  * Extracts image annotations created using the Image Annotator gadget
  * (https://commons.wikimedia.org/wiki/Help:Gadget-ImageAnnotator)
  *
- * This uses the W3C Media Fragments 1.0: http://www.w3.org/TR/2012/REC-media-frags-20120925/ 
+ * The RDF produced uses the W3C Media Fragments 1.0 to identify parts of
+ * an image: http://www.w3.org/TR/2012/REC-media-frags-20120925/ 
  */
 class ImageAnnotationExtractor (
   context : {
@@ -23,27 +24,27 @@ class ImageAnnotationExtractor (
 extends PageNodeExtractor
 {
   private val logger = Logger.getLogger(classOf[ImageAnnotationExtractor].getName)
+  override val datasets = Set(DBpediaDatasets.ImageAnnotations)
 
   /* Properties */
   private val hasAnnotationProperty = context.ontology.properties("hasAnnotation")
   private val descriptionProperty = context.ontology.properties("description")
   private val asWikiTextProperty = context.ontology.properties("asWikiText")
 
-  override val datasets = Set(DBpediaDatasets.ImageAnnotations)
-
+  /** Extract image annotations from a particular page */
   override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    // Only Commons files please.
+    // Image annotations will only be extracted from File:s on the Commons.
     if(context.language != Language.Commons || pageNode.title.namespace != Namespace.File)
         return Seq.empty
 
-    // Get a list of every ImageNote on this page.
+    // Get a list of every {{ImageNote}} on this page.
     val imageNoteStarts = pageNode.children.filter({
         case tn: TemplateNode => tn.title.decoded.equals("ImageNote") 
         case _ => false
     })
 
-    // Get a list of every ImageNoteEnd on this page.
+    // Get a list of every {{ImageNoteEnd}} on this page.
     val imageNoteEnds = pageNode.children.filter({    
         case tn: TemplateNode => tn.title.decoded.equals("ImageNoteEnd")
         case _ => false
@@ -94,12 +95,16 @@ extends PageNodeExtractor
 
                 // Get every node between the start and end template nodes,
                 // and convert it into WikiText and plaintext.
+                //
+                // Since we use dbo:asWikiText, we add the {{ImageNote}} and
+                // {{ImageNoteEnd}} template so that it contains the entire
+                // WikiText representation of this annotation.
                 val contents = if(indexEnd - indexStart < 1) Seq.empty
                     else pageNode.children.slice(indexStart + 1, indexEnd)
                 val contents_plaintext = contents.map(_.toPlainText).mkString("").trim
                 val contents_wikitext = (noteStart +: contents :+ noteEnd).map(_.toWikiText).mkString("").trim
 
-                // Generate a quad to indicate than an annotation exists.
+                // Generate a quad to link the annotation to the original file.
                 val quad_annotation = new Quad(
                     context.language,
                     DBpediaDatasets.ImageAnnotations,
@@ -109,7 +114,7 @@ extends PageNodeExtractor
                     pageNode.sourceUri
                 )
 
-                // Generate one quad each for plaintext and wikitext content.
+                // Generate one quad each for plaintext and WikiText content.
                 val quads_contents = Seq(
                     new Quad(
                         context.language, 
@@ -129,14 +134,16 @@ extends PageNodeExtractor
                     )
                 )
 
+                // Combine quads and return them
                 quad_annotation +: quads_contents
             }
 
+            // If we don't have (TemplateNode, TemplateNode) ... eh, what?
             case _ => throw new RuntimeException("Pair ('" + pair._1 + "', '" + pair._2 + "') detected unexpectedly.")
         }
     })
 
-    // Return quads
+    // Return all quads
     imageNoteQuads.toSeq
   }
 }
