@@ -1,7 +1,10 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
+import org.apache.commons.lang3.StringEscapeUtils
+
 import scala.Console.err
+import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer,HashMap,TreeSet}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
@@ -103,27 +106,18 @@ object ProcessFreebaseLinks
 
 /*
 
-The lines that we are interested in look exactly like this: (as of August 2014)
+We use the <http://rdf.freebase.com/key/wikipedia.XX> predicate for finding the Wikipedia page for language XX.
 
-<http://rdf.freebase.com/ns/m.01c7c8>  <http://rdf.freebase.com/ns/common.topic.topic_equivalent_webpage>  <http://en.wikipedia.org/wiki/USS_George_Washington_(CVN-73)>   .
-
-Fields are separated by tabs, not spaces. We simply extract the MID, the language and the title,
-create DBpedia and Freebase URIs and create a Quad from them.
-
-There are similar lines that we currently don't care about:
-
-<http://rdf.freebase.com/ns/m.01c7c8>  <http://rdf.freebase.com/ns/common.topic.topic_equivalent_webpage> <http://pt.wikipedia.org/wiki/index.html?curid=1409578>.
-
-
-Wikipedia titles always start with capital letters, so we can exclude these lines because their
-titles start with lower-case 'i'.
+<http://rdf.freebase.com/ns/m.0108bjs0> <http://rdf.freebase.com/key/wikipedia.en>      "2014_Porsche_Tennis_Grand_Prix_$2013_Singles"  .
+Fields are separated by an arbitrary number of spaces. We simply extract the MID, the language and the title, create
+DBpedia and Freebase URIs and create a Quad from them.
 
 */
   
   private val part1 = "<http://rdf.freebase.com/ns/m."
   private val midStart = part1.length
   
-  private val predicatePart = "<http://rdf.freebase.com/ns/common.topic.topic_equivalent_webpage>"
+  private val predicatePart = "<http://rdf.freebase.com/key/wikipedia."
   private val predicatePartLength = predicatePart.length
 
   private val preLanguageCode = "<http://"
@@ -150,35 +144,25 @@ titles start with lower-case 'i'.
     val midEnd = line.indexOf('>', midStart)
     if (midEnd == -1) return null
 
-    val withoutSubject = line.substring(midEnd + 1).trim
+    val predicatePartStart = line.indexOf('<', midEnd + 1)
 
-    if (! withoutSubject.startsWith(predicatePart)) return null
+    if (! line.startsWith(predicatePart, predicatePartStart)) return null
 
-    val objectPart = withoutSubject.substring(predicatePartLength + 1).trim()
+    val langStart = predicatePartStart + predicatePartLength
 
-    val langStart = objectPart.indexOf(preLanguageCode)
-    if (langStart == -1) return null
-    
-    val langEnd = objectPart.indexOf('.', langStart + preLanguageCodeLength)
+    val langEnd = line.indexOf('>', langStart)
     if (langEnd == -1) return null
-    
-    if (! objectPart.startsWith(wikipediaUriInfix, langEnd)) return null
-    val titleStart = langEnd + wikipediaUriInfixLength
-    
-    // exclude ".../wiki/index.html?curid=..." lines
-    if (objectPart.charAt(titleStart) == 'i') return null
-    
-    if (! objectPart.endsWith(lineTerminator)) return null
-    val withoutLineTerminator = objectPart.substring(titleStart, objectPart.length - lineTerminatorLength).trim()
 
-    if (!withoutLineTerminator.endsWith(suffix)) return null
+    val titleStart = line.indexOf("\"", langEnd)
+    if (titleStart == -1) return null
 
-    val titleEnd = withoutLineTerminator.length - suffixLength
-    
+    val titleEnd = line.indexOf("\"", titleStart + 1)
+    if (titleEnd == -1) return null
+
     val mid = line.substring(midStart, midEnd)
-    val lang = objectPart.substring(langStart + preLanguageCodeLength, langEnd)
-    var title = withoutLineTerminator.substring(0, titleEnd)
-    
+    val lang = line.substring(langStart, langEnd)
+    var title = unescapeMQL(line.substring(titleStart + 1, titleEnd))
+
     // Some Freebase URIs are percent-encoded - let's decode them
     title = UriDecoder.decode(title)
     
@@ -190,6 +174,37 @@ titles start with lower-case 'i'.
     title = StringUtils.escape(title, replacements)
     
     return new Quad(lang, null, "http://"+lang+".dbpedia.org/resource/"+title, sameAs, "http://rdf.freebase.com/ns/m."+mid, null, null)
+  }
+
+  /**
+   * Unescapes the given MQL escaped key and returns the resulting string.
+   * @param key key containing MQL escape sequences
+   * @return unescaped key
+   */
+  private def unescapeMQL(key: String) : String = {
+    val inputArray: Array[Char] = key.toCharArray
+    val inputLength: Int = inputArray.length
+    val res = new Array[Char](inputLength)
+
+    var inputIndex = 0
+    var outputIndex = 0
+
+    while (inputIndex < inputLength) {
+      if (inputArray(inputIndex) == '$') {
+        // beginning of an MQL escape sequence
+        res(outputIndex) = Integer.parseInt(key.substring(inputIndex + 1, inputIndex + 5), 16).asInstanceOf[Char]
+        inputIndex += 5
+        outputIndex += 1
+      }
+      else {
+        // just copy character
+        res(outputIndex) = inputArray(inputIndex)
+        outputIndex += 1
+        inputIndex += 1
+      }
+    }
+
+    new String(res, 0, outputIndex)
   }
 
   private def logRead(name: String, count: Long, startNanos: Long): Unit = {
