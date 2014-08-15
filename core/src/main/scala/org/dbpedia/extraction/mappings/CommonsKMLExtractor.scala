@@ -45,14 +45,21 @@ extends WikiPageExtractor
      * Extract a WikiPage that consists of KML.
      */
     override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
-        // This only applies to Commons files with a .kml extension.
-        if(context.language != Language.Commons || !page.title.decoded.toLowerCase.endsWith(".kml"))
+        // This extractor only applies to Commons file named '.*/overlay.kml'.
+        if (context.language != Language.Commons || !page.title.decoded.toLowerCase.endsWith("/overlay.kml")) {
             return Seq.empty
+        }
 
-        // Take out the initial '<source lang="xml">' and final '</source>' if present.
+        // The overlay.kml page is an overlay on the actual image, so the
+        // subjectUri should be modified to point there. Since we already know it
+        // ends with '/overlay.kml', we can just take out the last 12 characters.
+        val subjectUriWithoutOverlay = subjectUri.substring(0, subjectUri.length - 12)
+
+        // Take out the initial '<source lang="xml">' and final '</source>' if present
+        // and add the XML to the output as rdf:XMLLiterals.
         val kmlContentQuads = sourceRegex.findAllMatchIn(page.source).map(result => new Quad(
             Language.English, DBpediaDatasets.KMLFiles,
-            subjectUri,
+            subjectUriWithoutOverlay,
             hasKMLDataProperty,
             result.group("kml_content"),
             page.sourceUri,
