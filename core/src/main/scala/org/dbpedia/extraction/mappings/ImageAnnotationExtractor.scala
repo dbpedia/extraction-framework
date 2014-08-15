@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.destinations.{QuadBuilder, DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
@@ -35,24 +35,23 @@ extends PageNodeExtractor
   override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
     // Image annotations will only be extracted from File:s on the Commons.
-    if(context.language != Language.Commons || pageNode.title.namespace != Namespace.File)
+    if (context.language != Language.Commons || pageNode.title.namespace != Namespace.File) {
         return Seq.empty
+    }
 
-    // Get a list of every {{ImageNote}} on this page.
-    val imageNoteStarts = pageNode.children.filter({
-        case tn: TemplateNode => tn.title.decoded.equals("ImageNote") 
-        case _ => false
-    })
-
-    // Get a list of every {{ImageNoteEnd}} on this page.
-    val imageNoteEnds = pageNode.children.filter({    
-        case tn: TemplateNode => tn.title.decoded.equals("ImageNoteEnd")
-        case _ => false
-    })
+    // Get a list of every {{ImageNote}} and {{ImageNoteEnd}} TemplateNode on this page.
+    // Use of 'collect' suggested at http://ochafik.com/blog/?p=393
+    val imageNoteStarts = pageNode.children.collect {
+        case tn: TemplateNode if tn.title.decoded.equals("ImageNote") => tn
+    }
+    val imageNoteEnds = pageNode.children.collect {
+        case tn: TemplateNode if tn.title.decoded.equals("ImageNoteEnd") => tn
+    }
 
     // Make sure that every {{ImageNote}} has an {{ImageNoteEnd}}
-    if(imageNoteStarts.size != imageNoteEnds.size)
+    if (imageNoteStarts.size != imageNoteEnds.size) {
         throw new RuntimeException("This page has an unequal number of {{ImageNote}} and {{ImageNoteEnd}} templates, skipping.")
+    }
 
     // Zip the two lists so that we end up with a Seq of
     // corresponding (ImageNote, ImageNoteEnd) pairs.
@@ -61,11 +60,13 @@ extends PageNodeExtractor
             case (noteStart: TemplateNode, noteEnd: TemplateNode) => {
                 // Make sure the sequence is ("ImageNote", "ImageNoteEnd"). Otherwise,
                 // we've got an off-by-one error somewhere (such as a missing {{ImageNoteEnd}}).
-                if(!noteStart.title.decoded.equals("ImageNote"))
+                if (!noteStart.title.decoded.equals("ImageNote")) {
                     throw new RuntimeException("Template '" + noteStart.title.decodedWithNamespace + "' found where 'Template:ImageNode' expected; check for missing Template:ImageNode, skipping page.")
+                }
 
-                if(!noteEnd.title.decoded.equals("ImageNoteEnd"))
+                if (!noteEnd.title.decoded.equals("ImageNoteEnd")) {
                     throw new RuntimeException("Template '" + noteEnd.title.decodedWithNamespace + "' found where 'Template:ImageNodeEnd' expected; check for missing Template:ImageNode, skipping page.")
+                }
 
                 // Get the indexes of these TemplateNodes within the pageNode.
                 val indexStart = pageNode.children.indexOf(noteStart)
@@ -74,7 +75,7 @@ extends PageNodeExtractor
                 // Build a URI for a portion of this image.
                 // Since all these are required properties, we'll just throw
                 // RuntimeExceptions if any of them are missing.
-                def getImageNodePropertyIntValue(key: String):Int = {
+                def getImageNodePropertyIntValue(key: String): Int = {
                     var str = ""
                     try {
                         str = noteStart.property(key).get.children.map(_.toPlainText).mkString("")
@@ -103,7 +104,7 @@ extends PageNodeExtractor
                 // Since we use dbo:asWikiText, we add the {{ImageNote}} and
                 // {{ImageNoteEnd}} template so that it contains the entire
                 // WikiText representation of this annotation.
-                val contents = if(indexEnd - indexStart < 1) Seq.empty
+                val contents = if (indexEnd - indexStart < 1) Seq.empty
                     else pageNode.children.slice(indexStart + 1, indexEnd)
                 val contents_plaintext = contents.map(_.toPlainText).mkString("").trim
                 val contents_wikitext = (noteStart +: contents :+ noteEnd).map(_.toWikiText).mkString("").trim
