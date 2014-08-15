@@ -209,8 +209,8 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
           // generate quads for the current language and prepend the sameAs statement quad to the
           // wikidata entity
           var quads = List[Quad]()
-          quads :::= sameEntities.filterKeys(_ != language).toList.sortBy(_._1).map(_._2).toList.map { e =>
-            new Quad(null, null, currentEntity.entityUri, sameAs, e.entityUri, e.context, null: String)
+          quads :::= sameEntities.filterKeys(_ != language).toList.sortBy(_._1).map { case (language, context) =>
+            new Quad(language, null, currentEntity.entityUri, sameAs, context.entityUri, context.context, null: String)
           }
           quads ::= new Quad(null, null, currentEntity.entityUri, sameAs, wikiDataEntity, currentEntity.context,
             null: String)
