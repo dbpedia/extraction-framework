@@ -159,6 +159,9 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
       }
     }
 
+    if (currentWikidataEntity.isDefined) {
+      writeQuads(currentWikidataEntity.get, currentSameEntities)
+    }
     // wait for all workers to finish writing
     workers.stop()
     // close all destinations
@@ -212,7 +215,7 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
           quads :::= sameEntities.filterKeys(_ != language).toList.sortBy(_._1).map { case (language, context) =>
             new Quad(language, null, currentEntity.entityUri, sameAs, context.entityUri, context.context, null: String)
           }
-          quads ::= new Quad(null, null, currentEntity.entityUri, sameAs, wikiDataEntity, currentEntity.context,
+          quads ::= new Quad(language, null, currentEntity.entityUri, sameAs, wikiDataEntity, currentEntity.context,
             null: String)
           destinations(language).write(quads)
         case _ => // do not write anything when there is no entity in the current language
