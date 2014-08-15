@@ -48,6 +48,7 @@ private class UriGenerator
             text = text.replace("&nbsp;", " ")//TODO decode all html entities here
             text = text.replace('(', ' ')
             text = text.replace(')', ' ')
+            text = text.replace('\n', ' ')
             text = text.replaceAll("\\<.*?\\>", "") //strip tags
             text = WikiUtil.cleanSpace(text)
             if(text.length > 50) text = text.substring(0, 50)
