@@ -9,6 +9,8 @@ import org.dbpedia.extraction.wikiparser.Namespace
 
 class DownloadConfig
 {
+  import DownloadConfig._
+
   var wikiName = "wiki"
 
   var baseUrl: URL = null
@@ -85,19 +87,22 @@ class DownloadConfig
   
   private def add[K](map: Map[K,Set[(String, Boolean)]], key: K, values: Array[(String, Boolean)]) =
     map.getOrElseUpdate(key, new HashSet[(String, Boolean)]) ++= values
-  
-  private def toBoolean(s: String, arg: String): Boolean =
+}
+
+object DownloadConfig
+{
+  def toBoolean(s: String, arg: String): Boolean =
     if (s == "true" || s == "false") s.toBoolean else throw Usage("Invalid boolean value", arg) 
   
-  private def toRange(from: String, to: String, arg: String): (Int, Int) =
+  def toRange(from: String, to: String, arg: String): (Int, Int) =
   try {
     ConfigUtils.toRange(from, to)
   }
   catch { case nfe: NumberFormatException => throw Usage("invalid range", arg, nfe) }
   
-  private val DateRange = """(\d{8})?(?:-(\d{8})?)?""".r
+  val DateRange = """(\d{8})?(?:-(\d{8})?)?""".r
   
-  private def parseDateRange(range: String, arg: String): (String, String) = {
+  def parseDateRange(range: String, arg: String): (String, String) = {
     range match {
       case DateRange(from, to) =>
         // "" and "-" are invalid
@@ -112,7 +117,7 @@ class DownloadConfig
     }
   }
   
-  private def toInt(str: String, min: Int, max: Int, arg: String): Int =
+  def toInt(str: String, min: Int, max: Int, arg: String): Int =
   try {
     val result = str.toInt
     if (result < min) throw new NumberFormatException(str+" < "+min)
@@ -121,7 +126,7 @@ class DownloadConfig
   }
   catch { case nfe: NumberFormatException => throw Usage("invalid integer", arg, nfe) }
   
-  private def toURL(s: String, arg: String): URL =
+  def toURL(s: String, arg: String): URL =
   try new URL(s)
   catch { case mue: MalformedURLException => throw Usage("Invalid URL", arg, mue) }
   
@@ -131,13 +136,12 @@ class DownloadConfig
    * @param parent may be null
    * @param path must not be null, may be empty
    */
-  private def resolveFile(parent: File, path: String): File = {
+  def resolveFile(parent: File, path: String): File = {
     val child = new File(path)
     val file = if (child.isAbsolute) child else new File(parent, path)
     // canonicalFile removes '/../' etc.
     file.getCanonicalFile
   }
-  
 }
 
 object Usage {

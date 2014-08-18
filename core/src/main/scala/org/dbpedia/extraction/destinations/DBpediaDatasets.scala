@@ -31,6 +31,7 @@ object DBpediaDatasets
     val PageLength = new Dataset("page_length")
     val ImageGalleries = new Dataset("image_galleries")
     val ImageAnnotations = new Dataset("image_annotations")
+    val KMLFiles = new Dataset("kml_files")
 
     /**
      * Mapping based
