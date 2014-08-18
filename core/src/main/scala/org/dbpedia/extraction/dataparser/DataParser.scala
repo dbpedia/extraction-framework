@@ -20,11 +20,11 @@ abstract class DataParser
     /**
      * (Split node and) return parse result.
      */
-    def parsePropertyNode( propertyNode : PropertyNode, split : Boolean ) : List[Any] =
+    def parsePropertyNode( propertyNode : PropertyNode, split : Boolean, transformCmd : String = null , transformFunc : String => String = identity ) : List[Any] =
     {
         if(split)
         {
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => parse(node).toList )
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, transformCmd = transformCmd, transformFunc = transformFunc).flatMap( node => parse(node).toList )
         }
         else
         {
