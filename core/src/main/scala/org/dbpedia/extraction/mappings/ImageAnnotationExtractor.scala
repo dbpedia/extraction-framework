@@ -95,8 +95,16 @@ extends PageNodeExtractor
                 val annotation_y = getImageNodePropertyIntValue("y")
                 val annotation_w = getImageNodePropertyIntValue("w")
                 val annotation_h = getImageNodePropertyIntValue("h")
-                val annotation_url = ExtractorUtils.getFileURL(pageNode.title.encoded, context.language) +
-                    s"#xywh=pixel:$annotation_x,$annotation_y,$annotation_w,$annotation_h"
+                val annotation_url = try {
+                    val annotation_dimx = getImageNodePropertyIntValue("dimx")
+                    val annotation_dimy = getImageNodePropertyIntValue("dimy")
+                    
+                    ExtractorUtils.getFileURL(pageNode.title.encoded, context.language) +
+                        s"?width=$annotation_dimx&height=$annotation_dimy#xywh=pixel:$annotation_x,$annotation_y,$annotation_w,$annotation_h"
+                } catch {
+                    case e: RuntimeException => ExtractorUtils.getFileURL(pageNode.title.encoded, context.language) +
+                        s"#xywh=pixel:$annotation_x,$annotation_y,$annotation_w,$annotation_h"
+                }
 
                 // Get every node between the start and end template nodes,
                 // and convert it into WikiText and plaintext.
@@ -107,20 +115,20 @@ extends PageNodeExtractor
                 val contents = if (indexEnd - indexStart < 1) Seq.empty
                     else pageNode.children.slice(indexStart + 1, indexEnd)
                 val contents_plaintext = contents.map(_.toPlainText).mkString("").trim
-                val contents_wikitext = (noteStart +: contents :+ noteEnd).map(_.toWikiText).mkString("").trim
+                val contents_wikitext = contents.map(_.toWikiText).mkString("").trim
 
                 // Generate a quad to link the annotation to the original file.
-                val quad_annotation = new Quad(
+                val quads_annotation = Seq(new Quad(
                     context.language,
                     DBpediaDatasets.ImageAnnotations,
                     subjectUri,
                     hasAnnotationProperty,
                     annotation_url,
                     pageNode.sourceUri
-                )
+                ))
 
                 // Generate one quad each for plaintext and WikiText content.
-                val quads_contents = Seq(
+                val quads_plaintext = if(contents_plaintext == "") Seq.empty else Seq(
                     new Quad(
                         context.language, 
                         DBpediaDatasets.ImageAnnotations, 
@@ -128,7 +136,10 @@ extends PageNodeExtractor
                         descriptionProperty, 
                         contents_plaintext, 
                         pageNode.sourceUri
-                    ),
+                    )
+                )
+
+                val quads_wikitext = if(contents_wikitext == "") Seq.empty else Seq(
                     new Quad(
                         context.language, 
                         DBpediaDatasets.ImageAnnotations, 
@@ -140,7 +151,7 @@ extends PageNodeExtractor
                 )
 
                 // Combine quads and return them
-                quad_annotation +: quads_contents
+                quads_annotation ++ quads_plaintext ++ quads_wikitext
             }
 
             // If we don't have (TemplateNode, TemplateNode) ... eh, what?
