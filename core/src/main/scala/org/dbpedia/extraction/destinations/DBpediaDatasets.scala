@@ -30,6 +30,7 @@ object DBpediaDatasets
     val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
     val PageLength = new Dataset("page_length")
     val ImageGalleries = new Dataset("image_galleries")
+    val ImageAnnotations = new Dataset("image_annotations")
     val KMLFiles = new Dataset("kml_files")
 
     /**
