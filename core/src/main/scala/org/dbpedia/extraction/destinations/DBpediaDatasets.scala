@@ -55,6 +55,8 @@ object DBpediaDatasets
      */
     val ShortAbstracts = new Dataset("short_abstracts")
     val LongAbstracts = new Dataset("long_abstracts")
+    val MissingShortAbstracts = new Dataset("missing_short_abstracts")
+    val MissingLongAbstracts = new Dataset("missing_long_abstracts")
 
     /**
      * Links
