@@ -87,6 +87,15 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>CreateFreebaseLinks</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CreateFreebaseLinks</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx1024m</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>ProcessInterLanguageLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.ProcessInterLanguageLinks</mainClass>
                             <jvmArgs>
