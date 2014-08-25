@@ -217,10 +217,20 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
           }
           quads ::= new Quad(language, null, currentEntity.entityUri, sameAs, wikiDataEntity, currentEntity.context,
             null: String)
+          quads ::= new Quad(language, null, currentEntity.entityUri, sameAs, getWikidataUri(wikiDataEntity),
+            currentEntity.context, null: String)
           destinations(language).write(quads)
         case _ => // do not write anything when there is no entity in the current language
       }
     }
+  }
+
+  /**
+   * Builds the wikidata.org URI for the given wikidata.dbpedia.org URI
+   */
+  def getWikidataUri(entity: String) : String = {
+    val wikidataName = entity.split("/").last
+    s"http://wikidata.org/entity/$wikidataName"
   }
 
   /**
