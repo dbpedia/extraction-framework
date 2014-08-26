@@ -17,7 +17,10 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-            xmlns:prov="http://www.w3.org/ns/prov#">
+            xmlns:prov="http://www.w3.org/ns/prov#"
+            xmlns:d0="http://www.ontologydesignpatterns.org/ont/d0.owl#"
+            xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#"
+            xmlns:wikidata="http://www.wikidata.org/entity/">
 
         <owl:Ontology rdf:about="">
           <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
