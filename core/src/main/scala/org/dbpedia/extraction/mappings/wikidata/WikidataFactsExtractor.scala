@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets}
+import org.dbpedia.extraction.destinations.{Dataset, Quad, DBpediaDatasets}
 import org.dbpedia.extraction.wikiparser.{JsonNode}
 import org.wikidata.wdtk.datamodel.interfaces._
 import collection.mutable.ArrayBuffer
@@ -41,50 +41,54 @@ class WikidataFactsExtractor(
   private val featureOntClass = context.ontology.classes("geo:SpatialThing")
 
   // this is where we will store the output
-  override val datasets = Set(DBpediaDatasets.WikidataFacts)
+  val WikidataGeoLocations = new Dataset("wikidata-geo")
+  override val datasets = Set(DBpediaDatasets.WikidataFacts,WikidataGeoLocations)
+
 
   override def extract(page : JsonNode, subjectUri : String, pageContext : PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
+    val commonMediaFilesProperties = List("P10","P109","P117","P14","P15","P154","P158","P18","P181","P207","P242","P367","P368","P41","P443","P491","P51","P623","P692","P94")
+
     for ((statementGroup) <- page.wikiDataItem.getStatementGroups) {
       val claim = statementGroup.getStatements().get(0).getClaim()
-      val propertyId = claim.getMainSnak().getPropertyId().toString().replace("(PropertyId)", "")
+      val property = claim.getMainSnak().getPropertyId().toString().replace("(PropertyId)", "").replace("http://data.dbpedia.org/resource/","http://www.wikidata.org/entity/")
 
       claim.getMainSnak() match {
         case mainSnak:ValueSnak => {
           mainSnak.getValue() match {
             case value:ItemIdValue => {
               val fact=value.toString().replace("(ItemId)","")
-              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, fact, page.wikiPage.sourceUri, null)
+              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri, null)
             }
 
             case value:StringValue => {
-              val propID=propertyId.replace("http://data.dbpedia.org/resource/","")
-              if (isCommonMediaFiles(propID)){
+              val propID=property.replace("http://www.wikidata.org/entity/","")
+              if (commonMediaFilesProperties.contains(propID)){
                 val fact = "http://commons.wikimedia.org/wiki/File:" + value.toString.replace(" ","_").replace("(String)","").trim()
-                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, fact, page.wikiPage.sourceUri,null)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri,null)
               } else {
                 val fact = value.toString.replace("(String)","").trim()
-                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, fact, page.wikiPage.sourceUri,context.ontology.datatypes("xsd:string"))
+                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri,context.ontology.datatypes("xsd:string"))
               }
             }
 
             case value:TimeValue => {
               val fact = value.getYear+"-"+value.getMonth+"-"+value.getDay
-              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, fact, page.wikiPage.sourceUri,context.ontology.datatypes("xsd:date"))
+              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri,context.ontology.datatypes("xsd:date"))
 
             }
 
             case value: GlobeCoordinatesValue => {
-              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, typeOntProperty, featureOntClass.uri, page.wikiPage.sourceUri)
-              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, latOntProperty, value.getLatitude.toString, page.wikiPage.sourceUri)
-              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, lonOntProperty, value.getLongitude.toString, page.wikiPage.sourceUri)
-              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, pointOntProperty, value.getLatitude + " " + value.getLongitude, page.wikiPage.sourceUri)
+              quads += new Quad(context.language, WikidataGeoLocations, subjectUri, typeOntProperty, featureOntClass.uri, page.wikiPage.sourceUri)
+              quads += new Quad(context.language, WikidataGeoLocations, subjectUri, latOntProperty, value.getLatitude.toString, page.wikiPage.sourceUri)
+              quads += new Quad(context.language, WikidataGeoLocations, subjectUri, lonOntProperty, value.getLongitude.toString, page.wikiPage.sourceUri)
+              quads += new Quad(context.language, WikidataGeoLocations, subjectUri, pointOntProperty, value.getLatitude + " " + value.getLongitude, page.wikiPage.sourceUri)
             }
 
             case value: QuantityValue => {
               val fact = value.getNumericValue.toString
-              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, propertyId, fact, page.wikiPage.sourceUri,context.ontology.datatypes("xsd:float"))
+              quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri,context.ontology.datatypes("xsd:float"))
 
             }
             case _=>
@@ -94,9 +98,5 @@ class WikidataFactsExtractor(
       }
     }
     quads
-  }
-  def isCommonMediaFiles(prop:String):Boolean = {
-    val commonMediaFilesProperties = List("P10","P109","P117","P14","P15","P154","P158","P18","P181","P207","P242","P367","P368","P41","P443","P491","P51","P623","P692","P94")
-    commonMediaFilesProperties.contains(prop)
   }
 }
