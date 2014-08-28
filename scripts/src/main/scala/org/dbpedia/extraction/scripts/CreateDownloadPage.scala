@@ -20,30 +20,32 @@ import java.text.DecimalFormatSymbols
 object CreateDownloadPage {
   
 // UPDATE for new release
-val current = "3.9"
+val current = "2014"
   
 // UPDATE for new release
-val previous = List("3.8", "3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
+val previous = List("3.9", "3.8", "3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
 
 // UPDATE for new release
 val dumpDates =
 "The datasets were extracted from ((http://dumps.wikimedia.org/ Wikipedia dumps)) generated in " +
-"late March / early April 2013. We used a ((http://www.wikidata.org/ Wikidata)) cross-language " +
-"link dump from June 2013 to interconnect concepts between languages. " +
+"late April / early May 2014. We used a ((http://www.wikidata.org/ Wikidata)) cross-language " +
+"link dump from June 2014 to interconnect concepts between languages. " +
 "See also all ((DumpDatesDBpedia"+tag(current)+" specific dump dates and times)).\n";
   
 // UPDATE for new release
-val allLanguages = 119
+val allLanguages = 125
 
 // CCHECK / UPDATE for new release
 // All languages that have a significant number of mapped articles.
 // en must be first, we use languages.drop(1) in datasetPages()
-val languages = List("en","ca","de","es","eu","fr","id","it","ja","ko","nl","pl","pt","ru","tr")
+val languages = List("en", "bg", "ca", "cs", "de", "es", "eu", "fr", "hu", "id", "it", "ja", "ko", "nl", "pl", "pt",
+  "ru", "tr")
 
 // UPDATE when DBpedia Wiki changes. Wiki link to page Datasets, section about internationalized datasets.
 val l10nDatasetsSection = "Datasets#h18-19"
-  
+
 val dbpediaUrl = "http://downloads.dbpedia.org/"
+val dbpediaMannheimUrl = "http://data.dws.informatik.uni-mannheim.de/dbpedia/"
  
 val zipSuffix = ".bz2"
 
@@ -150,7 +152,6 @@ def tag(version: String): String = version.replace(".", "")
 
 val ontology =
 new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in OWL. See ((http://svn.aksw.org/papers/2013/SWJ_DBpedia/public.pdf our SWJ paper)) for more details.//")
-
 // We have to split the main datasets into many small sub-pages because wacko wiki is true to its
 // name and fails to display a page (or even print a proper error message) when it's too long. 
 val datasets = List(
@@ -169,13 +170,12 @@ val datasets = List(
   ),
   List(
     new Dataset("Geographic Coordinates", "geo_coordinates", "//Geographic coordinates extracted from Wikipedia.//"),
-    new Dataset("Raw Infobox Properties", "raw_infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace) should always be preferred over this data.//"),
-    new Dataset("Raw Infobox Property Definitions", "raw_infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
+    new Dataset("Raw Infobox Properties", "infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace) should always be preferred over this data.//"),
+    new Dataset("Raw Infobox Property Definitions", "infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
     new Dataset("Homepages", "homepages", "//Links to homepages of persons, organizations etc.//")
   ),
   List(
     new Dataset("Persondata", "persondata", "//Information about persons (date and place of birth etc.) extracted from the English and German Wikipedia, represented using the FOAF vocabulary.//"),
-    new Dataset("PND", "pnd", "//Dataset containing PND (Personennamendatei) identifiers.//"),
     new Dataset("Inter-Language Links", "interlanguage_links", "//Dataset linking a DBpedia resource to the same resource in other languages and in ((http://www.wikidata.org Wikidata)). Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.//")
   ),
   List(
@@ -197,7 +197,12 @@ val datasets = List(
   List(
     new Dataset("Page IDs", "page_ids", "//Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.//"),
     new Dataset("Revision IDs", "revision_ids", "//Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.//"),
-    new Dataset("Revision URIs", "revision_uris", "//Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.//")
+    new Dataset("Revision URIs", "revision_uris", "//Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.//"),
+//    new Dataset("Anchor Texts", "anchor_texts", "//Texts used in links to refer to Wikipedia articles from other Wikipedia articles.//"),
+    new Dataset("Surface Forms", "surface_forms", "//Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name.//"),
+    new Dataset("Page Length", "page_length", "//Numbers of characters contained in a Wikipedia article's source.//"),
+    new Dataset("Page Outdegree", "out_degree", "//Number of links emerging from a Wikipedia article and pointing to another Wikipedia article.//"),
+    new Dataset("Old Interlanguage Links", "old_interlanguage_links", "//Remaining interlanguage extracted directly from Wikipedia articles. However, the main part of interlanguage links has been moved to Wikidata.//")
   )
 )
 
@@ -262,6 +267,8 @@ def generate: Unit = {
   "and the ((http://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License GNU Free Documentation License)). " +
   "http://m.okfn.org/images/ok_buttons/od_80x15_red_green.png The downloads are provided as N-Triples and N-Quads, " +
   "where the N-Quads version contains additional provenance information for each statement. All files are ((http://www.bzip.org/ bzip2)) [[*1]] packed.\n"+
+  "In addition to the RDF version of the data, we also provide a tabular version of some of the core DBpedia data sets as " +
+  "CSV and JSON files. See ((DBpediaAsTables))."+
   "\n"+
   // ((Downloads36 DBpedia 3.6)), ((Downloads35 DBpedia 3.5.1)), ...
   "Older Versions: "+previous.map(version => "((Downloads"+tag(version)+" DBpedia "+version+"))").mkString(", ")+"\n"+
@@ -353,7 +360,8 @@ def datasetPages(page: String, anchor: String, filesets: Seq[List[Fileset]]): Un
   
   s+
   "\n"+
-  "**NOTE: You can find DBpedia dumps in "+allLanguages+" languages at our (("+dbpediaUrl+current+"/ DBpedia download server)).**\n"+
+  "**NOTE: You can find DBpedia dumps in "+allLanguages+" languages at our (("+dbpediaUrl+current+"/ DBpedia download server))," +
+  "or alternatively at the (("+dbpediaMannheimUrl+current+"/ University of Mannheim DBpedia download server)).**\n"+
   "\n"+
   "//Click on the dataset names to obtain additional information. Click on the question mark next to a download link to preview file contents.//\n"
   
