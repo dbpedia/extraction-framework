@@ -66,8 +66,19 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             xml += <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment>
         }
 
+
+        val thing: List[OntologyClass] =
+          if (!ontologyClass.baseClasses.exists(_.uri.startsWith("http://dbpedia.org/")) &&
+              !ontologyClass.baseClasses.exists(_.uri == "http://www.w3.org/2002/07/owl#Thing")
+          ) {
+            List(new OntologyClass("owl:Thing", Map(), Map(), List(), Set(), Set()))
+          }
+          else {
+            List()
+          }
         //Super classes
-        for(baseClass <- ontologyClass.baseClasses)
+        val superClasses = thing ::: ontologyClass.baseClasses
+        for(baseClass <- superClasses)
         {
             xml += <rdfs:subClassOf rdf:resource={baseClass.uri}/>
         }
