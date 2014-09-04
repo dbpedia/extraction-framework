@@ -44,9 +44,10 @@ val languages = List("en", "bg", "ca", "cs", "de", "es", "eu", "fr", "hu", "id",
 // UPDATE when DBpedia Wiki changes. Wiki link to page Datasets, section about internationalized datasets.
 val l10nDatasetsSection = "Datasets#h18-19"
 
-val dbpediaUrl = "http://downloads.dbpedia.org/"
+val dbpediaLeipzigUrl = "http://downloads.dbpedia.org/"
 val dbpediaMannheimUrl = "http://data.dws.informatik.uni-mannheim.de/dbpedia/"
- 
+val dbpediaUrl = dbpediaMannheimUrl
+
 val zipSuffix = ".bz2"
 
 val titles = new HashMap[String, String]()
@@ -101,7 +102,7 @@ class FileInfo(val path: String, val title: String) {
   val downloadUrl = dbpediaUrl+fullPath
   
   // example: http://downloads.dbpedia.org/preview.php?file=3.9_sl_af_sl_geo_coordinates_af.nq.bz2
-  val previewUrl = dbpediaUrl+"preview.php?file="+fullPath.replace("/", "_sl_")
+  val previewUrl = dbpediaLeipzigUrl+"preview.php?file="+fullPath.replace("/", "_sl_")
 }
   
 abstract class Fileset(
@@ -158,19 +159,25 @@ val datasets = List(
   List(
     new Dataset("Mapping-based Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the mapping-based extraction.//"),
     new Dataset("Mapping-based Types (Heuristic)", "instance_types_heuristic", "//Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//", Set(DataC14NPage)),
-    new Dataset("Mapping-based Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the mapping-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations."),
+    new Dataset("Mapping-based Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the mapping-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
+  ),
+  List(
     new Dataset("Mapping-based Properties (Cleaned)", "mappingbased_properties_cleaned", "//This file contains the statements from the Mapping-based Properties, with incorrect statements identified by heuristic inference being removed.//", Set(DataC14NPage)),
     new Dataset("Mapping-based Properties (Specific)", "specific_mappingbased_properties", "//Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.//")
   ),
   List(
     new Dataset("Titles", "labels", "//Titles of all Wikipedia Articles in the corresponding language.//"),
-    new Dataset("Short Abstracts", "short_abstracts", "//Short Abstracts (max. 500 characters long) of Wikipedia articles.//"),
+    new Dataset("Short Abstracts", "short_abstracts", "//Short Abstracts (max. 500 characters long) of Wikipedia articles.//")
+  ),
+  List(
     new Dataset("Extended Abstracts", "long_abstracts", "//Full abstracts of Wikipedia articles, usually the first section.//"),
     new Dataset("Images", "images", "//Main image and corresponding thumbnail from Wikipedia article.//")
   ),
   List(
     new Dataset("Geographic Coordinates", "geo_coordinates", "//Geographic coordinates extracted from Wikipedia.//"),
-    new Dataset("Raw Infobox Properties", "infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace) should always be preferred over this data.//"),
+    new Dataset("Raw Infobox Properties", "infobox_properties", "//Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace) should always be preferred over this data.//")
+  ),
+  List(
     new Dataset("Raw Infobox Property Definitions", "infobox_property_definitions", "//All properties / predicates used in infoboxes.//"),
     new Dataset("Homepages", "homepages", "//Links to homepages of persons, organizations etc.//")
   ),
@@ -190,17 +197,23 @@ val datasets = List(
   ),
   List(
     new Dataset("Redirects", "redirects", "//Dataset containing redirects between articles in Wikipedia.//"),
-    new Dataset("Transitive Redirects", "redirects_transitive", "//Redirects dataset in which multiple redirects have been resolved and redirect cycles have been removed.//"),
+    new Dataset("Transitive Redirects", "redirects_transitive", "//Redirects dataset in which multiple redirects have been resolved and redirect cycles have been removed.//")
+  ),
+  List(
     new Dataset("Disambiguation links", "disambiguations", "//Links extracted from Wikipedia ((http://en.wikipedia.org/wiki/Wikipedia:Disambiguation disambiguation)) pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.//"),
     new Dataset("IRI-same-as-URI links", "iri_same_as_uri", "//owl:sameAs links between the ((http://tools.ietf.org/html/rfc3987 IRI)) and ((http://tools.ietf.org/html/rfc3986 URI)) format of DBpedia resources. Only extracted when IRI and URI are actually different.//")
   ),
   List(
     new Dataset("Page IDs", "page_ids", "//Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.//"),
     new Dataset("Revision IDs", "revision_ids", "//Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.//"),
-    new Dataset("Revision URIs", "revision_uris", "//Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.//"),
+    new Dataset("Revision URIs", "revision_uris", "//Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.//")
+  ),
+  List(
 //    new Dataset("Anchor Texts", "anchor_texts", "//Texts used in links to refer to Wikipedia articles from other Wikipedia articles.//"),
     new Dataset("Surface Forms", "surface_forms", "//Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name.//"),
-    new Dataset("Page Length", "page_length", "//Numbers of characters contained in a Wikipedia article's source.//"),
+    new Dataset("Page Length", "page_length", "//Numbers of characters contained in a Wikipedia article's source.//")
+  ),
+  List(
     new Dataset("Page Outdegree", "out_degree", "//Number of links emerging from a Wikipedia article and pointing to another Wikipedia article.//"),
     new Dataset("Old Interlanguage Links", "old_interlanguage_links", "//Remaining interlanguage extracted directly from Wikipedia articles. However, the main part of interlanguage links has been moved to Wikidata.//")
   )
