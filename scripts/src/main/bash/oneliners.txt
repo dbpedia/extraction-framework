@@ -55,6 +55,9 @@ for i in *.nt ; do stat -n -f '%z' $i ; stat -n -f ' %z' $i.gz ; stat -n -f ' %z
 # same for Linux
 for i in *.nt ; do stat --printf '%s' $i ; stat --printf ' %s' $i.gz ; stat --printf ' %s ' $i.bz2 ; wc -l $i ; done | awk '{print $5" lines: "$4" bytes: "$1" gzip: "$2" bzip2: "$3}'
 
+# determine lined-bytes-packed.txt based on the gz and bz2 files without uncompressed files on the disk, also supporting symbolic links
+ for file in `find -mindepth 1 -name '*.gz'`;  do i=${file/\.gz/}; stat -L --printf='%n %s' $i.gz ; stat -L --printf=' %s ' $i.bz2 ; zcat $i.gz | wc -cl ; done | awk '{print $1" lines: "$4" bytes: "$5" gzip: "$2" bzip2: "$3}'
+
 # rename all files for which a -redirected dataset now exists to -unredirected
 find -mindepth 3 -type f | grep -E '(disambiguations|infobox-properties|mappingbased-properties|page-links|persondata|topical-concepts)' | grep -v -E '(specific-mappingbased|redirected)' | awk '{new=$0; sub(/\.\//, "", new); sub(/\./, "-unredirected.", new); system("echo mv " $0 " " new)}'
 
@@ -70,7 +73,7 @@ cat lines-bytes-packed.txt | while read line ; do path=${line%% *} ; rest=${line
 # generate wiki syntax for page like http://wiki.dbpedia.org/DumpDatesDBpedia38
 find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/, "", $2); print "||" $2 "|" substr($3,1,4) "-" substr($3,5,2) "-" substr($3,7,2) "||"}'
 
-# count number of same-as links in Wikipedia article namespace from English to other extracted languages. Result in 3.9: 16802429
+# count number of same-as links in Wikipedia article namespace from English to other extracted languages. Result in 3.9: 16802429, 2014: 23797872
 gzip -d < enwiki-20130403-interlanguage-links.ttl.gz | grep -v -E 'resource/(Category|Template):' | wc -l
 
 # count number of abstracts, i.e. non-redirect, non-disambig pages in Wikipedia article namespace, in all extracted languages. Result in 3.9: 24895769
