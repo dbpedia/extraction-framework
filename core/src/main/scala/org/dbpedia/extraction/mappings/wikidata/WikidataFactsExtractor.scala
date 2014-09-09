@@ -27,12 +27,6 @@ class WikidataFactsExtractor(
                               )
   extends JsonNodeExtractor
 {
-  // Here we define all the ontology predicates we will use
-  private val isPrimaryTopicOf = context.ontology.properties("foaf:isPrimaryTopicOf")
-  private val primaryTopic = context.ontology.properties("foaf:primaryTopic")
-  private val dcLanguage = context.ontology.properties("dc:language")
-  private val labelProperty = context.ontology.properties("rdfs:label")
-
   //Ontology predicates for geocordinates
   private val typeOntProperty = context.ontology.properties("rdf:type")
   private val latOntProperty = context.ontology.properties("geo:lat")
