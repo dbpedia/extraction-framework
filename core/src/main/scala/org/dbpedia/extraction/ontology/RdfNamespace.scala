@@ -65,7 +65,11 @@ object RdfNamespace {
   val MAPPINGS = ns("mappings", "http://mappings.dbpedia.org/wiki/", false)
   val D0 = ns("d0", "http://www.ontologydesignpatterns.org/ont/d0.owl#", false)
   val DUL = ns("dul", "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#", false)
-  
+
+  //the following namespaces are required for supporting the entries in the mappings Wiki as of 2014-07-15
+  val CIDOCCRM = ns("cidoccrm", "http://purl.org/NET/cidoc-crm/core#", false)
+  val BIO = ns("bio", "http://purl.org/vocab/bio/0.1/", false)
+
   /**
    * @return namespace for prefix and suffix, default namespace and full name if no match found 
    */
@@ -100,5 +104,4 @@ object RdfNamespace {
     val (namespace, rest) = split(default, name)
     namespace.append(rest)
   }
-
 }
