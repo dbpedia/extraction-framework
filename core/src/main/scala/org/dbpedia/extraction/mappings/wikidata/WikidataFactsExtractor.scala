@@ -37,16 +37,18 @@ class WikidataFactsExtractor(
   // this is where we will store the output
   val WikidataGeoLocations = new Dataset("wikidata-geo")
   override val datasets = Set(DBpediaDatasets.WikidataFacts,WikidataGeoLocations)
+  val commonMediaFilesProperties = List("P10","P109","P117","P14","P15","P154","P158","P18",
+    "P181","P207","P242","P367","P368","P41","P443","P491","P51","P623","P692","P94")
 
 
   override def extract(page : JsonNode, subjectUri : String, pageContext : PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
-    val commonMediaFilesProperties = List("P10","P109","P117","P14","P15","P154","P158","P18","P181","P207","P242","P367","P368","P41","P443","P491","P51","P623","P692","P94")
 
     for ((statementGroup) <- page.wikiDataItem.getStatementGroups) {
       val claim = statementGroup.getStatements().get(0).getClaim()
-      val property = claim.getMainSnak().getPropertyId().toString().replace("(PropertyId)", "").replace("http://data.dbpedia.org/resource/","http://www.wikidata.org/entity/")
+      val property = claim.getMainSnak().getPropertyId().toString().replace("(PropertyId)", "").
+        replace("http://data.dbpedia.org/resource/","http://www.wikidata.org/entity/")
 
       claim.getMainSnak() match {
         case mainSnak:ValueSnak => {
@@ -63,7 +65,8 @@ class WikidataFactsExtractor(
                 quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri,null)
               } else {
                 val fact = value.toString.replace("(String)","").trim()
-                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property, fact, page.wikiPage.sourceUri,context.ontology.datatypes("xsd:string"))
+                quads += new Quad(context.language, DBpediaDatasets.WikidataFacts, subjectUri, property,
+                  fact, page.wikiPage.sourceUri,context.ontology.datatypes("xsd:string"))
               }
             }
 
