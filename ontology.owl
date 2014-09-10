@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns:prov="http://www.w3.org/ns/prov#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns="http://dbpedia.org/ontology/" xmlns:d0="http://www.ontologydesignpatterns.org/ont/d0.owl#" xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#" xmlns:wikidata="http://www.wikidata.org/entity/" xml:base="http://dbpedia.org/ontology/">
-  <owl:Ontology rdf:about="">
-    <owl:versionInfo xml:lang="en">4.0-SNAPSHOT</owl:versionInfo>
+<rdf:RDF xmlns:prov="http://www.w3.org/ns/prov#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns="http://dbpedia.org/ontology/" xmlns:d0="http://www.ontologydesignpatterns.org/ont/d0.owl#" xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#" xmlns:wikidata="http://www.wikidata.org/entity/" xml:cidoccrm="http://purl.org/NET/cidoc-crm/core#" xml:wgs84pos="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="http://dbpedia.org/ontology/">
+  <owl:Ontology rdf:about="http://dbpedia.org/ontology/">
+    <dc:title xml:lang="en">The DBpedia Ontology</dc:title>
+    <dc:description xml:lang="en">The DBpedia ontology provides the classes and properties used in the DBpedia data set.</dc:description>
+    <owl:versionInfo xml:lang="en">2014</owl:versionInfo>
   </owl:Ontology>
   <owl:Class rdf:about="http://dbpedia.org/ontology/BasketballLeague">
     <rdfs:label xml:lang="nl">basketbal competitie</rdfs:label>
@@ -137,7 +139,7 @@
     <rdfs:label xml:lang="sl">anatomska struktura</rdfs:label>
     <rdfs:label xml:lang="fr">structure anatomique</rdfs:label>
     <rdfs:label xml:lang="ja">&#x89E3;&#x5256;&#x69CB;&#x9020;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:BiologicalObject"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#BiologicalObject"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:AnatomicalStructure"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/TelevisionShow">
@@ -211,7 +213,7 @@
     <rdfs:label xml:lang="de">Steuer</rdfs:label>
     <rdfs:label xml:lang="fr">taxe</rdfs:label>
     <rdfs:label xml:lang="ja">&#x79DF;&#x7A0E;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Description"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Tax"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Racecourse">
@@ -517,7 +519,7 @@
     <rdfs:label xml:lang="es">resultados de una competici&#xF3;n deportiva</rdfs:label>
     <rdfs:label xml:lang="de">Ergebnisse eines Sportwettbewerbs</rdfs:label>
     <rdfs:label xml:lang="fr">r&#xE9;sultats d'une comp&#xE9;tition sportive</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:SportCompetitionResult"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Tower">
@@ -573,7 +575,7 @@
     <rdfs:comment xml:lang="en">a form of government</rdfs:comment>
     <rdfs:comment xml:lang="nl">regeringsvorm</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Type"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Concept"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:GovernmentType"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Town">
@@ -662,7 +664,7 @@
     <rdfs:label xml:lang="fr">naissance</rdfs:label>
     <rdfs:comment xml:lang="en">someone's birth as a type of personal event</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/PersonalEvent"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/%3Chttp://purl.org/vocab/bio/0.1/Birth%3E"/>
+    <owl:equivalentClass rdf:resource="http://purl.org/vocab/bio/0.1/Birth"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Birth"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Name">
@@ -673,7 +675,7 @@
     <rdfs:label xml:lang="fr">nom</rdfs:label>
     <rdfs:label xml:lang="pt">nome</rdfs:label>
     <rdfs:label xml:lang="ja">&#x540D;&#x524D;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Name"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/SumoWrestler">
@@ -817,7 +819,7 @@
     <rdfs:label xml:lang="de">Vertrieb</rdfs:label>
     <rdfs:label xml:lang="fr">vente</rdfs:label>
     <rdfs:label xml:lang="ja">&#x8CA9;&#x58F2;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Situation"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Sales"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/AdultActor">
@@ -891,7 +893,7 @@
     <rdfs:label xml:lang="en">GeneLocation</rdfs:label>
     <rdfs:label xml:lang="el">&#x3B8;&#x3AD;&#x3C3;&#x3B7; &#x3B3;&#x3BF;&#x3BD;&#x3B9;&#x3B4;&#x3AF;&#x3C9;&#x3BD;</rdfs:label>
     <rdfs:label xml:lang="ja">&#x907A;&#x4F1D;&#x5B50;&#x5EA7;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/d0:Location"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/d0.owl#Location"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:GeneLocation"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/RoadJunction">
@@ -1091,7 +1093,7 @@
     <rdfs:label xml:lang="ja">&#x30A4;&#x30D9;&#x30F3;&#x30C8;</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <owl:equivalentClass rdf:resource="http://schema.org/Event"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/dul:Event"/>
+    <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     <owl:disjointWith rdf:resource="http://dbpedia.org/ontology/Person"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Event"/>
   </owl:Class>
@@ -1108,7 +1110,7 @@
     <rdfs:label xml:lang="ja">&#x30D0;&#x30F3;&#x30C9;_(&#x97F3;&#x697D;)</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Organisation"/>
     <rdfs:subClassOf rdf:resource="http://schema.org/MusicGroup"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:SocialPerson"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialPerson"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Band"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Regency">
@@ -1644,7 +1646,7 @@
     <rdfs:comment xml:lang="en">for example: Progressivism_in_the_United_States, Classical_liberalism</rdfs:comment>
     <rdfs:comment xml:lang="el">&#x3B3;&#x3B9;&#x3B1; &#x3C0;&#x3B1;&#x3C1;&#x3B1;&#x3B4;&#x3B5;&#x3B9;&#x3B3;&#x3BC;&#x3B1;: &#x3A0;&#x3C1;&#x3BF;&#x3BF;&#x3B4;&#x3B5;&#x3C5;&#x3C4;&#x3B9;&#x3C3;&#x3BC;&#x3CC;&#x3C2; &#x3C3;&#x3C4;&#x3B9;&#x3C2; &#x397;&#x3A0;&#x391;, &#x3BA;&#x3BB;&#x3B1;&#x3C3;&#x3B9;&#x3BA;&#x3CC;&#x3C2; &#x3C6;&#x3B9;&#x3BB;&#x3B5;&#x3BB;&#x3B5;&#x3C5;&#x3B8;&#x3B5;&#x3C1;&#x3B9;&#x3C3;&#x3BC;&#x3CC;&#x3C2;</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/TopicalConcept"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/d0:CognitiveEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/d0.owl#CognitiveEntity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Ideology"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/SupremeCourtOfTheUnitedStatesCase">
@@ -1658,7 +1660,7 @@
     <rdfs:label xml:lang="de">schwarm</rdfs:label>
     <rdfs:label xml:lang="it">stormo</rdfs:label>
     <rdfs:label xml:lang="el">&#x3A3;&#x3BC;&#x3AE;&#x3BD;&#x3BF;&#x3C2;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Configuration"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Configuration"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Swarm"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Community">
@@ -1795,7 +1797,7 @@
     <rdfs:label xml:lang="de">Ger&#xE4;t</rdfs:label>
     <rdfs:label xml:lang="fr">appareil</rdfs:label>
     <rdfs:label xml:lang="ja">&#x30C7;&#x30D0;&#x30A4;&#x30B9;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:DesignedArtifact"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Device"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Volcano">
@@ -1983,7 +1985,7 @@
     <rdfs:label xml:lang="en">person function</rdfs:label>
     <rdfs:label xml:lang="nl">functie van persoon</rdfs:label>
     <rdfs:label xml:lang="fr">fonction de personne</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Role"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:PersonFunction"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/MusicalArtist">
@@ -1996,7 +1998,7 @@
     <rdfs:label xml:lang="pt">artista musical</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Artist"/>
     <rdfs:subClassOf rdf:resource="http://schema.org/MusicGroup"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:NaturalPerson"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#NaturalPerson"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:MusicalArtist"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Entomologist">
@@ -2050,7 +2052,7 @@
     <rdfs:label xml:lang="pt">Banco de dados</rdfs:label>
     <rdfs:label xml:lang="ja">&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Work"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationObject"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Database"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/ChartsPlacements">
@@ -2068,7 +2070,7 @@
     <rdfs:label xml:lang="it">etnia</rdfs:label>
     <rdfs:label xml:lang="de">ethnie</rdfs:label>
     <rdfs:label xml:lang="fr">groupe ethnique</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Collective"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Collective"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:EthnicGroup"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/BaseballTeam">
@@ -2092,7 +2094,7 @@
     <rdfs:label xml:lang="fr">jour f&#xE9;ri&#xE9;</rdfs:label>
     <rdfs:label xml:lang="ja">&#x795D;&#x65E5;</rdfs:label>
     <rdfs:comment xml:lang="fr">Un jour f&#xE9;ri&#xE9; est un jour de f&#xEA;te civile ou religieuse, ou comm&#xE9;morant un &#xE9;v&#xE9;nement.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:TimeInterval"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Holiday"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Insect">
@@ -2139,7 +2141,7 @@
     <rdfs:label xml:lang="fr">moyen de transport</rdfs:label>
     <rdfs:label xml:lang="nl">vervoermiddel</rdfs:label>
     <rdfs:label xml:lang="el">&#x3BC;&#x3B5;&#x3C4;&#x3B1;&#x3C6;&#x3BF;&#x3C1;&#x3B9;&#x3BA;&#x3CC; &#x3BC;&#x3AD;&#x3C3;&#x3BF;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:DesignedArtifact"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
     <owl:disjointWith rdf:resource="http://dbpedia.org/ontology/Person"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:MeanOfTransportation"/>
   </owl:Class>
@@ -2158,7 +2160,7 @@
     <rdfs:label xml:lang="de">arbeitseinheit</rdfs:label>
     <rdfs:label xml:lang="nl">werkeenheid</rdfs:label>
     <rdfs:comment xml:lang="en">This class is meant to convey the notion of an amount work to be done. It is different from Activity in that it has a definite end and is being measured."</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Situation"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     <owl:disjointWith rdf:resource="http://dbpedia.org/ontology/Person"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:UnitOfWork"/>
   </owl:Class>
@@ -2258,7 +2260,7 @@
     <rdfs:label xml:lang="de">Flagge</rdfs:label>
     <rdfs:label xml:lang="fr">drapeau</rdfs:label>
     <rdfs:label xml:lang="ja">&#x65D7;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Flag"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/RallyDriver">
@@ -2358,7 +2360,7 @@
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Athlete"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:FigureSkater"/>
   </owl:Class>
-  <owl:Class rdf:about="http://dbpedia.org/ontology/d0:Activity">
+  <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/d0.owl#Activity">
     <rdfs:label xml:lang="en">activity</rdfs:label>
     <rdfs:label xml:lang="it">attivit&#xE0;</rdfs:label>
     <rdfs:label xml:lang="fr">activit&#xE9;</rdfs:label>
@@ -2443,7 +2445,7 @@
     <rdfs:label xml:lang="ja">&#x6620;&#x753B;</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Work"/>
     <owl:equivalentClass rdf:resource="http://schema.org/Movie"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/Wikidata:Q11424"/>
+    <owl:equivalentClass rdf:resource="http://www.wikidata.org/entity/Q11424"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Film"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/WaterPoloPlayer">
@@ -2529,7 +2531,7 @@
     <rdfs:label xml:lang="fr">couleur</rdfs:label>
     <rdfs:label xml:lang="ja">&#x8272;</rdfs:label>
     <rdfs:comment xml:lang="en">Color or colour is the visual perceptual property corresponding in humans to the categories called red, yellow, blue and others. Color derives from the spectrum of light (distribution of light energy versus wavelength) interacting in the eye with the spectral sensitivities of the light receptors.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Quality"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Colour"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Factory">
@@ -2591,7 +2593,7 @@
     <rdfs:label xml:lang="nl">wereldranglijst snooker</rdfs:label>
     <rdfs:comment xml:lang="en">The official world ranking in snooker for a certain year/season</rdfs:comment>
     <rdfs:comment xml:lang="de">Die offizielle Weltrangliste im Snooker eines Jahres / einer Saison</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Role"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:SnookerWorldRanking"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Venue">
@@ -2751,7 +2753,7 @@
     <rdfs:label xml:lang="ja">&#x6751;</rdfs:label>
     <rdfs:comment xml:lang="en">a clustered human settlement or community, usually smaller a town</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Settlement"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/Wikidata:Q532"/>
+    <owl:equivalentClass rdf:resource="http://www.wikidata.org/entity/Q532"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Village"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/PublicServiceOutput">
@@ -2792,7 +2794,7 @@
   <owl:Class rdf:about="http://dbpedia.org/ontology/PenaltyShootOut">
     <rdfs:label xml:lang="en">penalty shoot-out</rdfs:label>
     <rdfs:label xml:lang="de">Elfmeterschie&#xDF;en</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Event"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:PenaltyShootOut"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Canal">
@@ -2808,12 +2810,6 @@
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Stream"/>
     <owl:equivalentClass rdf:resource="http://schema.org/Canal"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Canal"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://dbpedia.org/ontology/cidoccrm:E4_Period">
-    <rdfs:label xml:lang="en">E4 Period</rdfs:label>
-    <rdfs:label xml:lang="nl">E4 Periode</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:cidoccrm:E4_Period"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Employer">
     <rdfs:label xml:lang="en">Employer</rdfs:label>
@@ -2834,7 +2830,7 @@
     <rdfs:label xml:lang="fr">genre musical</rdfs:label>
     <rdfs:label xml:lang="pt">g&#xE9;nero musical</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Genre"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Concept"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:MusicGenre"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/AmusementParkAttraction">
@@ -2856,7 +2852,7 @@
     <rdfs:label xml:lang="pt">ano</rdfs:label>
     <rdfs:label xml:lang="ja">&#x5E74;</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/TimePeriod"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:TimeInterval"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Year"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Priest">
@@ -3014,7 +3010,7 @@
     <rdfs:label xml:lang="pt">atividade</rdfs:label>
     <rdfs:label xml:lang="ja">&#x6D3B;&#x52D5;</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/d0:Activity"/>
+    <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/d0.owl#Activity"/>
     <owl:disjointWith rdf:resource="http://dbpedia.org/ontology/Person"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Activity"/>
   </owl:Class>
@@ -3124,7 +3120,7 @@
     <rdfs:comment xml:lang="en">Food is any eatable or drinkable substance that is normally consumed by humans.</rdfs:comment>
     <rdfs:comment xml:lang="el">&#x3A6;&#x3B1;&#x3B3;&#x3B7;&#x3C4;&#x3CC; &#x3B5;&#x3AF;&#x3BD;&#x3B1;&#x3B9; &#x3BF;&#x3C0;&#x3BF;&#x3B9;&#x3B1;&#x3B4;&#x3AE;&#x3C0;&#x3BF;&#x3C4;&#x3B5; &#x3C6;&#x3B1;&#x3B3;&#x3CE;&#x3C3;&#x3B9;&#x3BC;&#x3B7; &#x3AE; &#x3C0;&#x3CC;&#x3C3;&#x3B9;&#x3BC;&#x3B7; &#x3BF;&#x3C5;&#x3C3;&#x3AF;&#x3B1; &#x3C0;&#x3BF;&#x3C5; &#x3BA;&#x3B1;&#x3C4;&#x3B1;&#x3BD;&#x3B1;&#x3BB;&#x3CE;&#x3BD;&#x3B5;&#x3C4;&#x3B1;&#x3B9; &#x3BA;&#x3B1;&#x3BD;&#x3BF;&#x3BD;&#x3B9;&#x3BA;&#x3AC; &#x3B1;&#x3C0;&#x3CC; &#x3B1;&#x3BD;&#x3B8;&#x3C1;&#x3CE;&#x3C0;&#x3BF;&#x3C5;&#x3C2;.</rdfs:comment>
     <rdfs:comment xml:lang="de">Lebensmittel umfasst als Oberbegriff sowohl Getr&#xE4;nke als auch die Nahrungsmittel und Genussmittel.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:FunctionalSubstance"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#FunctionalSubstance"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Food"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Song">
@@ -3303,9 +3299,9 @@
     <rdfs:label xml:lang="fr">&#x153;uvre</rdfs:label>
     <rdfs:label xml:lang="pt">obra</rdfs:label>
     <rdfs:label xml:lang="ja">&#x4ED5;&#x4E8B;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <owl:equivalentClass rdf:resource="http://schema.org/CreativeWork"/>
-    <owl:disjointWith rdf:resource="http://dbpedia.org/ontology/wgs84_pos:SpatialThing"/>
+    <owl:disjointWith rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Work"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Glacier">
@@ -3332,7 +3328,7 @@
     <rdfs:label xml:lang="en">Blazon</rdfs:label>
     <rdfs:label xml:lang="el">&#x3BF;&#x3B9;&#x3BA;&#x3CC;&#x3C3;&#x3B7;&#x3BC;&#x3BF;</rdfs:label>
     <rdfs:label xml:lang="de">Wappen</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Blazon"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Aristocrat">
@@ -3407,7 +3403,7 @@
     <rdfs:label xml:lang="nl">historische periode</rdfs:label>
     <rdfs:comment xml:lang="en">A historical Period should be linked to a Place by way of the property dct:spatial (already defined)</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/TimePeriod"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/cidoccrm:E4_Period"/>
+    <owl:equivalentClass rdf:resource="http://purl.org/NET/cidoc-crm/core#E4_Period"/>
     <owl:disjointWith rdf:resource="http://dbpedia.org/ontology/Person"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:HistoricalPeriod"/>
   </owl:Class>
@@ -3486,7 +3482,7 @@
     <rdfs:label xml:lang="de">Sprache</rdfs:label>
     <rdfs:label xml:lang="fr">langage</rdfs:label>
     <rdfs:label xml:lang="ja">&#x8A00;&#x8A9E;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <owl:equivalentClass rdf:resource="http://schema.org/Language"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Language"/>
   </owl:Class>
@@ -3623,7 +3619,7 @@
     <rdfs:label xml:lang="en">career station</rdfs:label>
     <rdfs:label xml:lang="de">Karrierestation</rdfs:label>
     <rdfs:comment xml:lang="en">this class marks a career step in the life of a person, e.g. a soccer player, holding information on the time span, matches and goals he or she achieved at a certain club</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Situation"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:CareerStation"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Skyscraper">
@@ -3685,7 +3681,7 @@
     <rdfs:label xml:lang="de">Droge</rdfs:label>
     <rdfs:label xml:lang="fr">m&#xE9;dicament</rdfs:label>
     <rdfs:label xml:lang="ja">&#x85AC;&#x7269;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:FunctionalSubstance"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#FunctionalSubstance"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Drug"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/NoteworthyPartOfBuilding">
@@ -3783,7 +3779,7 @@
     <rdfs:label xml:lang="el">&#x3BD;&#x3CC;&#x3BC;&#x3B9;&#x3C3;&#x3BC;&#x3B1;</rdfs:label>
     <rdfs:label xml:lang="de">W&#xE4;hrung</rdfs:label>
     <rdfs:label xml:lang="fr">devise</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:UnitOfMeasure"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#UnitOfMeasure"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Currency"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/ProgrammingLanguage">
@@ -3794,7 +3790,7 @@
     <rdfs:label xml:lang="fr">langage de programmation</rdfs:label>
     <rdfs:label xml:lang="pt">linguagem de programa&#xE7;&#xE3;o</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Software"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:ProgrammingLanguage"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/ChessPlayer">
@@ -3842,7 +3838,7 @@
     <owl:equivalentClass rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <owl:equivalentClass rdf:resource="http://schema.org/Person"/>
     <owl:equivalentClass rdf:resource="http://wikidata.dbpedia.org/resource/Q215627"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/dul:NaturalPerson"/>
+    <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#NaturalPerson"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Person"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Architect">
@@ -4031,7 +4027,7 @@
     <rdfs:comment xml:lang="nl">Een klooster (van het Latijnse claustrum, afgesloten ruimte) is een gebouw of een samenstel van gebouwen dat dient tot huisvesting van een groep of gemeenschap van mannen of vrouwen, vaak monniken of monialen genoemd, die zich uit de wereld heeft teruggetrokken om een godsdienstig leven te leiden. (http://nl.wikipedia.org/wiki/Klooster_%28gebouw%29).</rdfs:comment>
     <rdfs:comment xml:lang="fr">Le monast&#xE8;re est un ensemble de b&#xE2;timents o&#xF9; habite une communaut&#xE9; religieuse de moines ou de moniales. (http://http://fr.wikipedia.org/wiki/Monast%C3%A8re).</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Place"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/d0:Location"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/d0.owl#Location"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Monastery"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/RailwayTunnel">
@@ -4149,7 +4145,7 @@
     <rdfs:comment xml:lang="en">A project is a temporary endeavor undertaken to achieve defined objectives.</rdfs:comment>
     <rdfs:comment xml:lang="de">Ein Projekt ist ein zeitlich begrenztes Unternehmen, das unternommen wird, um definierte Ziele zu erreichen.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/UnitOfWork"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:PlanExecution"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PlanExecution"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Project"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/FootballLeagueSeason">
@@ -4207,7 +4203,7 @@
     <rdfs:label xml:lang="sl">nagrada</rdfs:label>
     <rdfs:label xml:lang="fr">r&#xE9;compense</rdfs:label>
     <rdfs:label xml:lang="ja">&#x8CDE;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Description"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Award"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/CelestialBody">
@@ -4219,7 +4215,7 @@
     <rdfs:label xml:lang="de">Himmelsk&#xF6;rper</rdfs:label>
     <rdfs:label xml:lang="fr">corps celeste</rdfs:label>
     <rdfs:label xml:lang="ja">&#x5929;&#x4F53;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:PhysicalBody"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:CelestialBody"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Cemetery">
@@ -4469,7 +4465,7 @@
     <rdfs:comment xml:lang="en">Analogous to a foaf:Agent, an agent is an entity that acts. This is intended to be the super class of Person and Organisation.</rdfs:comment>
     <rdfs:comment xml:lang="el">&#x391;&#x3BD;&#x3AC;&#x3BB;&#x3BF;&#x3B3;&#x3B1; &#x3BC;&#x3B5; &#x3C4;&#x3B7;&#x3BD; &#x3BA;&#x3BB;&#x3AC;&#x3C3;&#x3B7; foaf:Agent, &#x3AD;&#x3BD;&#x3B1;&#x3C2; &#x3C0;&#x3C1;&#x3AC;&#x3BA;&#x3C4;&#x3BF;&#x3C1;&#x3B1;&#x3C2; &#x3B5;&#x3AF;&#x3BD;&#x3B1;&#x3B9; &#x3BC;&#x3B9;&#x3B1; &#x3BF;&#x3BD;&#x3C4;&#x3CC;&#x3C4;&#x3B7;&#x3C4;&#x3B1; &#x3C0;&#x3BF;&#x3C5; &#x3B5;&#x3BD;&#x3B5;&#x3C1;&#x3B3;&#x3B5;&#x3AF;. &#x391;&#x3C5;&#x3C4;&#x3CC; &#x3C0;&#x3C1;&#x3BF;&#x3BF;&#x3C1;&#x3AF;&#x3B6;&#x3B5;&#x3C4;&#x3B1;&#x3B9; &#x3BD;&#x3B1; &#x3B5;&#x3AF;&#x3BD;&#x3B1;&#x3B9; &#x3BC;&#x3B9;&#x3B1; &#x3C5;&#x3C0;&#x3B5;&#x3C1;&#x3BA;&#x3BB;&#x3AC;&#x3C3;&#x3B7; &#x3C4;&#x3B7;&#x3C2; &#x3BA;&#x3BB;&#x3AC;&#x3C3;&#x3B7;&#x3C2; &#x386;&#x3C4;&#x3CC;&#x3BC;&#x3BF; &#x3BA;&#x3B1;&#x3B9; &#x39F;&#x3C1;&#x3B3;&#x3B1;&#x3BD;&#x3B9;&#x3C3;&#x3BC;&#x3CC;&#x3C2;.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/dul:Agent"/>
+    <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
     <owl:disjointWith rdf:resource="http://dbpedia.org/ontology/Place"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Agent"/>
   </owl:Class>
@@ -4535,7 +4531,7 @@
     <rdfs:label xml:lang="el">&#x3B4;&#x3B7;&#x3BC;&#x3CC;&#x3C3;&#x3B9;&#x3B5;&#x3C2; &#x3C5;&#x3C0;&#x3B7;&#x3C1;&#x3B5;&#x3C3;&#x3AF;&#x3B5;&#x3C2;</rdfs:label>
     <rdfs:comment xml:lang="el">&#x395;&#x3AF;&#x3BD;&#x3B1;&#x3B9; &#x3BF;&#x3B9; &#x3C5;&#x3C0;&#x3B7;&#x3C1;&#x3B5;&#x3C3;&#x3AF;&#x3B5;&#x3C2; &#x3C0;&#x3BF;&#x3C5; &#x3C0;&#x3C1;&#x3BF;&#x3C3;&#x3C6;&#x3AD;&#x3C1;&#x3BF;&#x3BD;&#x3C4;&#x3B1;&#x3B9; &#x3B1;&#x3C0;&#x3CC; &#x3B4;&#x3BF;&#x3BC;&#x3AD;&#x3C2; &#x3C4;&#x3BF;&#x3C5; &#x3BA;&#x3C1;&#x3AC;&#x3C4;&#x3BF;&#x3C5;&#x3C2;</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Description"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:PublicService"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/AnimangaCharacter">
@@ -4567,7 +4563,7 @@
     <rdfs:label xml:lang="de">Krankheit</rdfs:label>
     <rdfs:label xml:lang="fr">maladie</rdfs:label>
     <rdfs:label xml:lang="ja">&#x75C5;&#x6C17;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Situation"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Disease"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Bullfighter">
@@ -4666,7 +4662,7 @@
     <rdfs:label xml:lang="el">Imdb</rdfs:label>
     <rdfs:label xml:lang="de">Imdb</rdfs:label>
     <rdfs:label xml:lang="fr">Imdb</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Imdb"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/GeopoliticalOrganisation">
@@ -5595,7 +5591,7 @@
     <rdfs:comment xml:lang="fr">une liste d'&#xE9;l&#xE9;ments.</rdfs:comment>
     <rdfs:comment xml:lang="nl">Een geordende verzameling objecten.</rdfs:comment>
     <rdfs:comment xml:lang="el">&#x39C;&#x3B9;&#x3B1; &#x3B3;&#x3B5;&#x3BD;&#x3B9;&#x3BA;&#x3AE; &#x3BB;&#x3AF;&#x3C3;&#x3C4;&#x3B1; &#x3B1;&#x3C0;&#x3CC; &#x3B1;&#x3BD;&#x3C4;&#x3B9;&#x3BA;&#x3B5;&#x3AF;&#x3BC;&#x3B5;&#x3BD;&#x3B1;.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Collection"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Collection"/>
     <owl:equivalentClass rdf:resource="http://www.w3.org/2004/02/skos/core#OrderedCollection"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:List"/>
   </owl:Class>
@@ -5644,7 +5640,7 @@
     <rdfs:label xml:lang="ja">&#x751F;&#x4F53;&#x7269;&#x8CEA;</rdfs:label>
     <rdfs:comment xml:lang="en">equivalent to http://ccdb.ucsd.edu/NIF/BIRNLex-OBO-UBO.owl#birnlex_22.</rdfs:comment>
     <rdfs:comment xml:lang="el">&#x39A;&#x3AC;&#x3B8;&#x3B5; &#x3BC;&#x3CC;&#x3C1;&#x3B9;&#x3BF; &#x3C0;&#x3BF;&#x3C5; &#x3C0;&#x3B1;&#x3C1;&#x3AC;&#x3B3;&#x3B5;&#x3C4;&#x3B1;&#x3B9; &#x3C3;&#x3B5; &#x3AD;&#x3BD;&#x3B1;&#x3BD; &#x3B6;&#x3C9;&#x3BD;&#x3C4;&#x3B1;&#x3BD;&#x3CC; &#x3BF;&#x3C1;&#x3B3;&#x3B1;&#x3BD;&#x3B9;&#x3C3;&#x3BC;&#x3CC;. &#x3A3;&#x3C5;&#x3BD;&#x3AE;&#x3B8;&#x3C9;&#x3C2; &#x3BC;&#x3B5;&#x3B3;&#x3B1;&#x3BB;&#x3BF;&#x3BC;&#x3BF;&#x3C1;&#x3B9;&#x3B1;&#x3BA;&#x3AD;&#x3C2; &#x3B5;&#x3BD;&#x3CE;&#x3C3;&#x3B5;&#x3B9;&#x3C2; &#x3C0;&#x3BF;&#x3C5; &#x3C7;&#x3C1;&#x3B7;&#x3C3;&#x3B9;&#x3BC;&#x3B5;&#x3CD;&#x3BF;&#x3C5;&#x3BD; &#x3C3;&#x3C4;&#x3B7;&#x3BD; &#x3B4;&#x3BF;&#x3BC;&#x3AE; &#x3BA;&#x3B1;&#x3B9; &#x3C3;&#x3C4;&#x3BF; &#x3BC;&#x3B5;&#x3C4;&#x3B1;&#x3B2;&#x3BF;&#x3BB;&#x3B9;&#x3C3;&#x3BC;&#x3CC; &#x3C4;&#x3BF;&#x3C5; &#x3BA;&#x3C5;&#x3C4;&#x3C4;&#x3AC;&#x3C1;&#x3BF;&#x3C5;. &#x3A0;&#x3C1;&#x3C9;&#x3C4;&#x3B5;&#x390;&#x3BD;&#x3B5;&#x3C2;, &#x3BD;&#x3BF;&#x3C5;&#x3BA;&#x3BB;&#x3B5;&#x3CA;&#x3BD;&#x3B9;&#x3BA;&#x3AC; &#x3BF;&#x3BE;&#x3AD;&#x3B1;, &#x3C5;&#x3B4;&#x3B1;&#x3C4;&#x3AC;&#x3BD;&#x3B8;&#x3C1;&#x3B1;&#x3BA;&#x3B5;&#x3C2; &#x3BA;&#x3B1;&#x3B9; &#x3BB;&#x3B9;&#x3C0;&#x3AF;&#x3B4;&#x3B9;&#x3B1;.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:BiologicalObject"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#BiologicalObject"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Biomolecule"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Station">
@@ -5686,8 +5682,8 @@
     <rdfs:label xml:lang="ja">&#x7D44;&#x7E54;</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Agent"/>
     <owl:equivalentClass rdf:resource="http://schema.org/Organization"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/dul:SocialPerson"/>
-    <owl:disjointWith rdf:resource="http://dbpedia.org/ontology/wgs84_pos:SpatialThing"/>
+    <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialPerson"/>
+    <owl:disjointWith rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Organisation"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Image">
@@ -5710,7 +5706,7 @@
   <owl:Class rdf:about="http://dbpedia.org/ontology/Listen">
     <rdfs:label xml:lang="en">Listen</rdfs:label>
     <rdfs:label xml:lang="el">&#x3B1;&#x3BA;&#x3BF;&#x3CD;&#x3C9;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Event"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Listen"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Temple">
@@ -5756,9 +5752,9 @@
     <rdfs:label xml:lang="ja">&#x7ACB;&#x5730;</rdfs:label>
     <rdfs:comment xml:lang="en">Immobile things or locations.</rdfs:comment>
     <rdfs:comment xml:lang="pt">uma localiza&#xE7;&#xE3;o</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/d0:Location"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/d0.owl#Location"/>
     <owl:equivalentClass rdf:resource="http://schema.org/Place"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/Wikidata:Q532"/>
+    <owl:equivalentClass rdf:resource="http://www.wikidata.org/entity/Q532"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Place"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Embryology">
@@ -5778,7 +5774,7 @@
     <rdfs:label xml:lang="de">unbekannt</rdfs:label>
     <rdfs:label xml:lang="fr">Inconnu</rdfs:label>
     <rdfs:label xml:lang="ja">&#x7121;&#x77E5;</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Entity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Unknown"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Publisher">
@@ -5888,7 +5884,7 @@
     <rdfs:label xml:lang="pt">subst&#xE2;ncia qu&#xED;mica</rdfs:label>
     <rdfs:label xml:lang="ja">&#x5316;&#x5B66;&#x7269;&#x8CEA;</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/dul:ChemicalObject"/>
+    <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#ChemicalObject"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:ChemicalSubstance"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Athletics">
@@ -6026,7 +6022,7 @@
     <rdfs:label xml:lang="de">Spezie</rdfs:label>
     <rdfs:label xml:lang="fr">esp&#xE8;ce</rdfs:label>
     <rdfs:label xml:lang="ja">&#x7A2E;_(&#x5206;&#x985E;&#x5B66;)</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Organism"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Organism"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Species"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/GolfCourse">
@@ -6091,7 +6087,7 @@
     <rdfs:label xml:lang="fr">lieu habit&#xE9;</rdfs:label>
     <rdfs:comment xml:lang="el">&#x3A0;&#x3C5;&#x3BA;&#x3BD;&#x3BF;&#x3BA;&#x3B1;&#x3C4;&#x3BF;&#x3B9;&#x3BA;&#x3B7;&#x3BC;&#x3AD;&#x3BD;&#x3B7; &#x3C0;&#x3B5;&#x3C1;&#x3B9;&#x3BF;&#x3C7;&#x3AE;, &#x3B5;&#x3AF;&#x3BD;&#x3B1;&#x3B9; &#x3B7; &#x3C0;&#x3B5;&#x3C1;&#x3B9;&#x3BF;&#x3C7;&#x3AE; &#x3AE; &#x3C4;&#x3BF; &#x3BC;&#x3AD;&#x3C1;&#x3BF;&#x3C2; &#x3BC;&#x3B5; &#x3BC;&#x3B5;&#x3B3;&#x3AC;&#x3BB;&#x3BF; &#x3B1;&#x3C1;&#x3B9;&#x3B8;&#x3BC;&#x3CC; &#x3BA;&#x3C4;&#x3B9;&#x3C1;&#x3AF;&#x3C9;&#x3BD; &#x3BA;&#x3B1;&#x3B9; &#x3BC;&#x3B5;&#x3B3;&#x3AC;&#x3BB;&#x3BF; &#x3BC;&#x3CC;&#x3BD;&#x3B9;&#x3BC;&#x3BF; &#x3C0;&#x3BB;&#x3B7;&#x3B8;&#x3C5;&#x3C3;&#x3BC;&#x3CC;, &#x3C3;&#x3B5; &#x3C3;&#x3CD;&#x3B3;&#x3BA;&#x3C1;&#x3B9;&#x3C3;&#x3B7; &#x3BC;&#x3B5; &#x3C4;&#x3B7;&#x3BD; &#x3B3;&#x3B5;&#x3C9;&#x3B3;&#x3C1;&#x3B1;&#x3C6;&#x3B9;&#x3BA;&#x3AE; &#x3C0;&#x3B5;&#x3C1;&#x3B9;&#x3BF;&#x3C7;&#x3AE; &#x3C0;&#x3BF;&#x3C5; &#x3BA;&#x3B1;&#x3C4;&#x3B1;&#x3BB;&#x3B1;&#x3BC;&#x3B2;&#x3AC;&#x3BD;&#x3B5;&#x3B9; (&#x3BC;&#x3B5;&#x3B3;&#x3B1;&#x3BB;&#x3BF;&#x3CD;&#x3C0;&#x3BF;&#x3BB;&#x3B7;, &#x3C0;&#x3CC;&#x3BB;&#x3B7; &#x3AE; &#x3C7;&#x3C9;&#x3C1;&#x3B9;&#x3CC;).</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Place"/>
-    <owl:equivalentClass rdf:resource="http://dbpedia.org/ontology/Wikidata:Q532"/>
+    <owl:equivalentClass rdf:resource="http://www.wikidata.org/entity/Q532"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:PopulatedPlace"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Cyclist">
@@ -6178,7 +6174,7 @@
     <rdfs:label xml:lang="el">&#x3C0;&#x3BF;&#x3BB;&#x3CD;&#x3B5;&#x3B4;&#x3C1;&#x3BF;</rdfs:label>
     <rdfs:label xml:lang="it">poliedro</rdfs:label>
     <rdfs:label xml:lang="de">Polyeder</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:SpaceRegion"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Polyhedron"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Lake">
@@ -6231,13 +6227,13 @@
     <rdfs:comment xml:lang="de">Ein Buchstabe des Alphabets.</rdfs:comment>
     <rdfs:comment xml:lang="en">A letter from the alphabet.</rdfs:comment>
     <rdfs:comment xml:lang="fr">Ene lettre de l'alphabet.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:Letter"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/TopicalConcept">
     <rdfs:label xml:lang="en">topical concept</rdfs:label>
     <rdfs:label xml:lang="de">thematisches Konzept</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Concept"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:TopicalConcept"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Noble">
@@ -6752,7 +6748,7 @@
     <rdfs:label xml:lang="fr">cas juridique</rdfs:label>
     <rdfs:label xml:lang="pt">caso jur&#xED;dico</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/Case"/>
-    <rdfs:subClassOf rdf:resource="http://dbpedia.org/ontology/dul:Situation"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     <prov:wasDerivedFrom rdf:resource="http://mappings.dbpedia.org/index.php/OntologyClass:LegalCase"/>
   </owl:Class>
   <owl:Class rdf:about="http://dbpedia.org/ontology/Crustacean">
