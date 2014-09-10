@@ -118,6 +118,7 @@ wget --background --spider --recursive --level 1 --domains=downloads.dbpedia.org
 # - may fail for other reasons, depending on file content, shell settings, etc.
 sed -r 's/%([89ABCDEF])/\\x\1/g' abc.nt | while read -r line ; do echo -e $line ; done > abc.ttl
 
+find -mindepth 2 -type d | while read d; do f=${d#*/}; efile="$d/${f/\//-}-extraction-complete"; if [ -f $efile ]; then echo "$d" | awk 'BEGIN {FS="/"} {lang=$2; sub(/wiki/, "", lang); print "||"lang"|"$3"||"}'; fi; done | sort > ../languages-dates.txt
 
 # generate page in/out link counts
 
