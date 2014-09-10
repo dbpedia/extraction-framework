@@ -1,5 +1,8 @@
 package org.dbpedia.extraction.ontology.io
 
+import java.text.{SimpleDateFormat, DateFormat}
+import java.util.{Date, TimeZone, Calendar}
+
 import org.dbpedia.extraction.ontology._
 import datatypes.{DimensionDatatype, UnitDatatype}
 
@@ -10,6 +13,14 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
     
     def write(ontology : Ontology) : scala.xml.Elem =
     {
+
+        val currentTimeStamp = {
+          val tz : TimeZone = TimeZone.getTimeZone("UTC")
+          val df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+          df.setTimeZone(tz)
+          df.format(new Date())
+        }
+
         <rdf:RDF
             xmlns = "http://dbpedia.org/ontology/"
             xml:base="http://dbpedia.org/ontology/"
@@ -20,9 +31,17 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             xmlns:prov="http://www.w3.org/ns/prov#"
             xmlns:d0="http://www.ontologydesignpatterns.org/ont/d0.owl#"
             xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#"
-            xmlns:wikidata="http://www.wikidata.org/entity/">
+            xmlns:wikidata="http://www.wikidata.org/entity/"
+            xmlns:cidoccrm="http://purl.org/NET/cidoc-crm/core#"
+            xmlns:bio="http://purl.org/vocab/bio/0.1/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/">
 
-        <owl:Ontology rdf:about="">
+        <owl:Ontology rdf:about="http://dbpedia.org/ontology/">
+          <dc:title xml:lang="en">The DBpedia Ontology</dc:title>
+          <dc:description xml:lang="en">The DBpedia ontology provides the classes and properties used in the DBpedia data set.</dc:description>
+          <dc:source>http://mappings.dbpedia.org</dc:source>
+          <dc:publisher>DBpedia Maintainers</dc:publisher>
+          <dc:date>{currentTimeStamp}</dc:date>
           <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
         </owl:Ontology>
         {
