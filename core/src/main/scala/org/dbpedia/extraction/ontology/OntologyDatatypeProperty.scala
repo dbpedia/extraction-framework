@@ -16,5 +16,6 @@ import org.dbpedia.extraction.util.Language
  */
 class OntologyDatatypeProperty(name : String, labels : Map[Language, String], comments : Map[Language, String],
                                domain : OntologyClass, override val range : Datatype, isFunctional : Boolean = false,
-                               equivalentProperties : Set[OntologyProperty] = Set())
-    extends OntologyProperty(name, labels, comments, domain, range, isFunctional, equivalentProperties)
+                               equivalentProperties : Set[OntologyProperty] = Set(),
+                               superProperties : Set[OntologyProperty] = Set())
+    extends OntologyProperty(name, labels, comments, domain, range, isFunctional, equivalentProperties, superProperties)
