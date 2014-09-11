@@ -20,14 +20,16 @@ class OntologyProperty(
   val domain: OntologyClass,
   val range: OntologyType,
   val isFunctional: Boolean,
-  val equivalentProperties: Set[OntologyProperty]
+  val equivalentProperties: Set[OntologyProperty],
+  val superProperties: Set[OntologyProperty]
 )
 extends OntologyEntity(name, labels, comments)
 {
     require(! RdfNamespace.validate(name) || domain != null, "missing domain for property "+name)
     require(! RdfNamespace.validate(name) || range != null, "missing range for property "+name)
     require(equivalentProperties != null, "missing equivalent properties for property "+name)
-    
+    require(superProperties != null, "missing super properties for property "+name)
+
     val uri = RdfNamespace.fullUri(DBpediaNamespace.ONTOLOGY, name)
 
     val isExternalProperty = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)

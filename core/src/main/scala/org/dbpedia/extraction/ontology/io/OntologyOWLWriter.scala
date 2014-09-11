@@ -22,28 +22,43 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
         }
 
         <rdf:RDF
-            xmlns = "http://dbpedia.org/ontology/"
-            xml:base="http://dbpedia.org/ontology/"
-            xmlns:owl="http://www.w3.org/2002/07/owl#"
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-            xmlns:prov="http://www.w3.org/ns/prov#"
-            xmlns:d0="http://www.ontologydesignpatterns.org/ont/d0.owl#"
-            xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#"
-            xmlns:wikidata="http://www.wikidata.org/entity/"
-            xmlns:cidoccrm="http://purl.org/NET/cidoc-crm/core#"
-            xmlns:bio="http://purl.org/vocab/bio/0.1/"
-            xmlns:dc="http://purl.org/dc/elements/1.1/">
+          xml:base="http://dbpedia.org/ontology/"
+          xmlns="http://dbpedia.org/ontology/"
+          xmlns:prov="http://www.w3.org/ns/prov#"
+          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+          xmlns:owl="http://www.w3.org/2002/07/owl#"
+          xmlns:d0="http://www.ontologydesignpatterns.org/ont/d0.owl#"
+          xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#"
+          xmlns:wikidata="http://www.wikidata.org/entity/"
+          xmlns:cidoccrm="http://purl.org/NET/cidoc-crm/core#"
+          xmlns:wgs84pos="http://www.w3.org/2003/01/geo/wgs84_pos#"
+          xmlns:dc="http://purl.org/dc/elements/1.1/"
+          xmlns:dcterms="http://purl.org/dc/terms/"
+          xmlns:vann="http://purl.org/vocab/vann/" >
 
-        <owl:Ontology rdf:about="http://dbpedia.org/ontology/">
-          <dc:title xml:lang="en">The DBpedia Ontology</dc:title>
-          <dc:description xml:lang="en">The DBpedia ontology provides the classes and properties used in the DBpedia data set.</dc:description>
-          <dc:source>http://mappings.dbpedia.org</dc:source>
-          <dc:publisher>DBpedia Maintainers</dc:publisher>
-          <dc:date>{currentTimeStamp}</dc:date>
-          <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
-        </owl:Ontology>
+          <owl:Ontology rdf:about="http://dbpedia.org/ontology">
+            <rdf:type rdf:resource="http://purl.org/vocommons/voaf#Vocabulary"/>
+            <vann:preferredNamespacePrefix>dbpont</vann:preferredNamespacePrefix>
+            <vann:preferredNamespaceUri>http://dbpedia.org/ontology/</vann:preferredNamespaceUri>
+            <dcterms:title xml:lang="en">The DBpedia Ontology</dcterms:title>
+            <dcterms:description xml:lang="en">
+              The DBpedia ontology provides the classes and properties used in the DBpedia data set.
+            </dcterms:description>
+            <dcterms:source rdf:resource="http://mappings.dbpedia.org"/>
+            <dcterms:publisher>DBpedia Maintainers</dcterms:publisher>
+            <dcterms:creator>DBpedia Maintainers and Contributors</dcterms:creator>
+            <dcterms:issued>2008-11-17T12:00Z</dcterms:issued>
+            <dcterms:modified>{currentTimeStamp}</dcterms:modified>
+            <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
+            <rdfs:comment xml:lang="en">
+              This ontology is generated from the manually created specifications in the DBpedia Mappings
+              Wiki. Each release of this ontology corresponds to a new release of the DBpedia data set which
+              contains instance data extracted from the different language versions of Wikipedia. For
+              information regarding changes in this ontology, please refer to the DBpedia Mappings Wiki.
+            </rdfs:comment>
+          </owl:Ontology>
         {
             //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
             val classes = for(ontologyClass <- ontology.classes.values if (EXPORT_EXTERNAL || !ontologyClass.isExternalClass))
@@ -193,6 +208,12 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
         for(prop <- property.equivalentProperties)
         {
             xml += <owl:equivalentProperty rdf:resource={prop.uri} />
+        }
+
+        //Super Properties
+        for(prop <- property.superProperties)
+        {
+          xml += <rdfs:subPropertyOf rdf:resource={prop.uri} />
         }
 
         { //provenance
