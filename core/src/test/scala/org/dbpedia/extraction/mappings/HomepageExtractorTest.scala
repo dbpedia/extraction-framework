@@ -154,7 +154,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
 object HomepageExtractorTest {
 
   // We need the OntologyProperty for "foaf:homepage"
-  private val homepageProperty = new OntologyProperty("Foaf:homepage", Map(Language.English -> "homepage"), Map(), null, null, false, Set())
+  private val homepageProperty = new OntologyProperty("Foaf:homepage", Map(Language.English -> "homepage"), Map(), null, null, false, Set(), Set())
 
   /**
    *   val classes : Map[String, OntologyClass],
