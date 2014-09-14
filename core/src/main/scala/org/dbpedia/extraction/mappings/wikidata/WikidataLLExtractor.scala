@@ -49,8 +49,8 @@ class WikidataLLExtractor(
               Language.get(l2) match {
                 case Some(dbpedia_lang) => {
                   val sitelink2 = WikiTitle.parse(siteLink2.getPageTitle().toString(), dbpedia_lang)
-                  val dataset=datasets filter (_.name=="wikidata-ll-"+lang.wikiCode)
-                  quads += new Quad(context.language, dataset.head, sitelink1.resourceIri,
+                  val dataset = Map(lang.wikiCode -> new Dataset("wikidata-ll-"+lang.wikiCode))
+                  quads += new Quad(context.language, dataset(lang.wikiCode), sitelink1.resourceIri,
                     sameAsProperty, sitelink2.resourceIri, page.wikiPage.sourceUri,null)
                 }
                 case _ =>
@@ -61,5 +61,5 @@ class WikidataLLExtractor(
       }
     }
     quads
-    }
+  }
 }
