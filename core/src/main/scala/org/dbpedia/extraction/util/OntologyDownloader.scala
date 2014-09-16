@@ -52,7 +52,10 @@ object OntologyDownloader {
     val xml = new OntologyOWLWriter(version).write(ontology)
     val prettyPrinter = new PrettyPrinter(100, 4)
     val writer = new OutputStreamWriter(new FileOutputStream(owlFile), "UTF-8")
-    try writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + prettyPrinter.format(xml))
+    // indenting the generated XML would be nice but currently the PrettyPrinter class produces
+    // XML which cannot be property read by the OWLAPI, thus disabling this again...
+    //try writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + prettyPrinter.format(xml))
+    try writer.write(xml.toString())
     finally writer.close()
     println("saved ontology to "+owlFile+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
   }
