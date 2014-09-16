@@ -36,9 +36,11 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
           xmlns:wgs84pos="http://www.w3.org/2003/01/geo/wgs84_pos#"
           xmlns:dc="http://purl.org/dc/elements/1.1/"
           xmlns:dcterms="http://purl.org/dc/terms/"
-          xmlns:vann="http://purl.org/vocab/vann/" >
+          xmlns:vann="http://purl.org/vocab/vann/"
+          xmlns:cc="http://creativecommons.org/ns#"
+          xmlns:foaf="http://xmlns.com/foaf/0.1/" >
 
-          <owl:Ontology rdf:about="http://dbpedia.org/ontology">
+          <owl:Ontology rdf:about="http://dbpedia.org/ontology/">
             <rdf:type rdf:resource="http://purl.org/vocommons/voaf#Vocabulary"/>
             <vann:preferredNamespacePrefix>dbpont</vann:preferredNamespacePrefix>
             <vann:preferredNamespaceUri>http://dbpedia.org/ontology/</vann:preferredNamespaceUri>
@@ -46,6 +48,7 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             <dcterms:description xml:lang="en">
               The DBpedia ontology provides the classes and properties used in the DBpedia data set.
             </dcterms:description>
+            <foaf:homepage rdf:resource="http://wiki.dbpedia.org/Ontology" />
             <dcterms:source rdf:resource="http://mappings.dbpedia.org"/>
             <dcterms:publisher>DBpedia Maintainers</dcterms:publisher>
             <dcterms:creator>DBpedia Maintainers and Contributors</dcterms:creator>
@@ -58,6 +61,8 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
               contains instance data extracted from the different language versions of Wikipedia. For
               information regarding changes in this ontology, please refer to the DBpedia Mappings Wiki.
             </rdfs:comment>
+            <cc:license rdf:resource="http://www.gnu.org/copyleft/fdl.html" />
+            <cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
           </owl:Ontology>
         {
             //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
