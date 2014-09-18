@@ -21,6 +21,10 @@ object DBpediaSQLQueries {
     "UPDATE DBPEDIALIVE_CACHE SET title = ?, updated = now(), timesUpdated = ?, json = ?, subjects = ?, diff = ? WHERE pageID = ? "
   }
 
+  def getJSONCacheUpdateUnmodified: String = {
+    "UPDATE DBPEDIALIVE_CACHE SET updated = now(), timesUpdated = ? WHERE pageID = ? "
+  }
+
   def getJSONCacheDelete: String = {
     "DELETE FROM DBPEDIALIVE_CACHE WHERE pageID = ?"
   }

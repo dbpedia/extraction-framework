@@ -84,8 +84,12 @@ class JSONCache(pageID: Long, pageTitle: String) {
     extractorJSON.getOrElse(extractor, "")
   }
 
-  def updateCache(json: String, subjectsSet: HashSet[String], diff: String): Boolean = {
+  def updateCache(json: String, subjectsSet: HashSet[String], diff: String, isModified: Boolean): Boolean = {
     val updatedTimes = if ( cacheObj == null || performCleanUpdate()) "0" else (cacheObj.updatedTimes + 1).toString
+
+    if ( ! isModified) {
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateUnmodified, Array[String](updatedTimes, "" + this.pageID))
+    }
     
     // On clean Update do not reuse existing subjects
     if (cacheObj != null && !performCleanUpdate())

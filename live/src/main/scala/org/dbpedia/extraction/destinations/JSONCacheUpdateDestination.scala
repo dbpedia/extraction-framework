@@ -18,6 +18,7 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
 
   var extractors = new ArrayBuffer[String](20)
   var hashes = new ArrayBuffer[String](20)
+  var isModified = false
   val formatter: RDFJSONFormatter = new RDFJSONFormatter
   val subjects = new HashSet[String]
 
@@ -32,6 +33,9 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
     for (quad <- graphRemove) subjects.add(quad.subject);
     for (quad <- graphUnmodified) subjects.add(quad.subject);
 
+    if (graphAdd.size > 0 || graphRemove.size > 0) {
+      isModified = true
+    }
   }
 
   def close {
@@ -49,7 +53,7 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
       sb.setCharAt(sb.lastIndexOf(","), ' ')
 
 
-    val success = cache.updateCache(sb.toString, subjects, "") //TODO add subjects / diffs
+    val success = cache.updateCache(sb.toString, subjects, "", isModified) //TODO add subjects / diffs
     // TODO better logging
     if (!success) logger.info( "Updating JSON Cache failed")
 
