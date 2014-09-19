@@ -166,6 +166,54 @@ object JSONCache {
   def deleteCacheOnlyItem(pageID: Long) {
     JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheDelete, Array[String]("" + pageID))
   }
+
+  def getTriplesFromJson(jsonString: String) : Traversable[Quad] = {
+
+    val json: Option[Any] = JSON.parseFull(jsonString)
+    val map: Map[String, Any] = json.get.asInstanceOf[Map[String, Any]]
+    val quads = new ArrayBuffer[Quad]()
+
+    // Duplicated code JSONCache.init()
+    map.foreach {
+      case (key, value) => {
+        val extractor: String = key.toString
+        val contents = value.asInstanceOf[Map[String, Any]]
+        val hash: String = contents.getOrElse("hash", "").asInstanceOf[String]
+        // Do not convert quads now, maybe they exist in cache
+        val triples: List[Any] = contents.getOrElse("triples", List()).asInstanceOf[List[Any]]
+
+        // Duplicated code  JSONCache.getTriplesForExtractor
+        if (triples != null && triples.nonEmpty) {
+
+
+          triples.foreach(i => {
+            val sm = i.asInstanceOf[Map[String, Any]]
+            sm.foreach {
+              case (ks, vs) =>
+                val subject = ks.toString
+                vs.asInstanceOf[Map[String, Any]].foreach {
+                  case (kp, vp) =>
+                    val predicate = kp.toString
+                    val objLsit = vp.asInstanceOf[List[Map[String, String]]]
+                    for (obj <- objLsit) {
+                      val objValue: String = obj.getOrElse("value", "")
+                      val objType: String = obj.getOrElse("type", "")
+                      val objLang: String = obj.getOrElse("lang", LiveOptions.options.get("language"))
+                      val objDatatype: String = if (objType.equals("uri"))  null
+                                                else obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
+
+
+                      quads += new Quad(objLang, "", subject, predicate, objValue, "", objDatatype)
+
+                    }
+                }
+            }
+          })
+        }
+      }
+    }
+    quads
+  }
 }
 
 class JSONCacheItem(val pageID: Long, val updatedTimes: Int, val json: String, val subjects: HashSet[String]) {

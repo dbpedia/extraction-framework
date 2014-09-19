@@ -13,6 +13,10 @@ object DBpediaSQLQueries {
     "SELECT timesUpdated, json, subjects FROM DBPEDIALIVE_CACHE WHERE pageID = ? "
   }
 
+  def getJSONCacheSelectAll: String = {
+    "SELECT json FROM DBPEDIALIVE_CACHE"
+  }
+
   def getJSONCacheInsert: String = {
     "INSERT INTO DBPEDIALIVE_CACHE (pageID, title, updated, timesUpdated, json, subjects, diff) VALUES ( ?, ? , now() , ? , ? , ? , ?  ) "
   }

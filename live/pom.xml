@@ -26,7 +26,7 @@
                             <id>live</id>
                             <mainClass>org.dbpedia.extraction.live.main.Main</mainClass>
                             <jvmArgs>
-                                <jvmArg>-Xmx4096m</jvmArg>
+                                <jvmArg>-Xmx6096m</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -34,6 +34,13 @@
                             <mainClass>org.dbpedia.extraction.live.feeder.OntologyUpdateFeeder</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xmx2048m</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>ExportDump</id>
+                            <mainClass>org.dbpedia.extraction.live.export.DumpExport</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx4048m</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
