@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.publisher;
 
+import org.dbpedia.extraction.destinations.Quad;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
 import org.slf4j.Logger;
@@ -7,8 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,15 +15,15 @@ import java.util.regex.Pattern;
  * Time: 10:59:53 AM
  * This class publishes the triples (added and deleted) to files in order to enable synchronizing our live end-point with
  * other end-points
- * It is originally developed by Claus Stadler   
+ * It is originally developed by Claus Stadler
  */
 
 public class Publisher extends Thread{
 
     private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
 
-    private HashSet<String> addedTriples = new HashSet<String>();
-    private HashSet<String> deletedTriples = new HashSet<String>();
+    private HashSet<Quad> addedTriples = new HashSet<>();
+    private HashSet<Quad> deletedTriples = new HashSet<>();
 
     private long counter = 0;
     private HashSet<Long> pageCache = new HashSet<Long>();
@@ -84,18 +83,11 @@ public class Publisher extends Thread{
 
         if(parent != null)
             parent.mkdirs();
-        StringBuilder addString = new StringBuilder();
-        for (String s: addedTriples ) {
-            addString.append(s);
-        }
-        RDFDiffWriter.write(addString.toString(), true, fileName, true);
+
+        RDFDiffWriter.writeAsTurtle(addedTriples, true, fileName, true);
         addedTriples.clear();
 
-        StringBuilder delString = new StringBuilder();
-        for (String s: deletedTriples ) {
-            delString.append(s);
-        }
-        RDFDiffWriter.write(delString.toString(), false, fileName, true);
+        RDFDiffWriter.writeAsTurtle(deletedTriples, false, fileName, true);
         deletedTriples.clear();
     }
 }

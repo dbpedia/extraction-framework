@@ -152,7 +152,7 @@ object JSONCache {
 
     var destList = new ArrayBuffer[LiveDestination]()
     destList += new SPARULDestination(false, policies) // delete triples
-    destList += new PublisherDiffDestination(pageID, policies) //  unpublish in changesetes
+    destList += new PublisherDiffDestination(pageID) //  unpublish in changesetes
     val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
 
 

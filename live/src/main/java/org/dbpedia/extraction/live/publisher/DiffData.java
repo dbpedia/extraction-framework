@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.live.publisher;
 
+import org.dbpedia.extraction.destinations.Quad;
+
 import java.util.HashSet;
 
 /**
@@ -7,14 +9,14 @@ import java.util.HashSet;
  */
 public class DiffData {
 
-    public long pageID = 0;
-    public HashSet<String> toAdd = null;
-    public HashSet<String> toDelete = null;
+    public final long pageID;
+    public final HashSet<Quad> toAdd;
+    public final HashSet<Quad> toDelete;
 
-    public DiffData(long id, HashSet<String> add, HashSet<String> delete){
+    public DiffData(long id, HashSet<Quad> add, HashSet<Quad> delete){
         pageID = id;
-        toAdd = new HashSet<String>(add);
-        toDelete = new HashSet<String>(delete);
+        toAdd = new HashSet<>(add);
+        toDelete = new HashSet<>(delete);
     }
 }
 

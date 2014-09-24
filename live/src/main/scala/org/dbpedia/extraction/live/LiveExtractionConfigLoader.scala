@@ -143,7 +143,7 @@ object LiveExtractionConfigLoader
           destList += new SPARULDestination(true, policies) // add triples
         }
         destList += new JSONCacheUpdateDestination(liveCache)
-        destList += new PublisherDiffDestination(wikiPage.id, policies)
+        destList += new PublisherDiffDestination(wikiPage.id)
         destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded) // Just to log extraction results
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
