@@ -65,7 +65,9 @@ private class NamespaceBuilder {
   // Most languages use 100-113, but hu uses 90-99.
   // en added 446,447,710,711 in late 2012. Let's go up to 999 to prepare for future additions.
   // wikidata added 120-123, 1198,1199 in early 2013. Let's go up to 1999 to prepare for future additions.
-  for (code <- (90 to 148 by 2) ++ (400 to 1998 by 2)) ns(code, "Namespace "+code, false)
+  // en added 2600 in July 2014. Let's go up to 2999. Namespaces > 3000 are discouraged according to 
+  // https://www.mediawiki.org/wiki/Extension_default_namespaces
+  for (code <- (90 to 148 by 2) ++ (400 to 2998 by 2)) ns(code, "Namespace "+code, false)
     
   // Namespaces used on http://mappings.dbpedia.org, sorted by number. 
   // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
