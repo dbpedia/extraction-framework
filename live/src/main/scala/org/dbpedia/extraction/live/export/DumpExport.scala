@@ -3,14 +3,16 @@ package org.dbpedia.extraction.live.export
 import java.io.{File, Writer}
 import java.net.Authenticator
 import java.sql._
+import java.util.concurrent._
 
 import org.apache.log4j.Logger
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, UriPolicy}
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.live.storage.{JSONCache, DBpediaSQLQueries, JDBCPoolConnection}
-import org.dbpedia.extraction.util.{ConfigUtils, ProxyAuthenticator, IOUtils}
 import org.dbpedia.extraction.util.RichFile._
+import org.dbpedia.extraction.util.{IOUtils, ProxyAuthenticator}
+
 
 /**
  * Description
@@ -18,14 +20,20 @@ import org.dbpedia.extraction.util.RichFile._
  * @author Dimitris Kontokostas
  * @since 9/18/14 4:33 PM
  */
-class DumpExport {
+class DumpExport(val filename: String, val threads: Integer) {
   val logger: Logger = Logger.getLogger(classOf[DumpExport])
 
-  def export(filename: String) {
+  val destination: Destination = new WriterDestination(writer(new File(filename)), new TerseFormatter(false, true, policies))
 
-    val destination: Destination = new WriterDestination(writer(new File(filename)), new TerseFormatter(false,true,policies))
+  // Max threads in thread pool queu 4 x running threads
+  val linkedBlockingDeque: BlockingQueue[Runnable] = new LinkedBlockingDeque[Runnable](threads * 4);
+  val executorService: ExecutorService = new ThreadPoolExecutor(threads, threads, 30,
+      TimeUnit.SECONDS, linkedBlockingDeque, new ThreadPoolExecutor.CallerRunsPolicy());
+
+  def export() {
 
     destination.open()
+
 
     var conn: Connection = null
     var stmt: Statement = null
@@ -37,7 +45,7 @@ class DumpExport {
 
       //http://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html
       stmt = conn.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY, java.sql.ResultSet.CONCUR_READ_ONLY);
-      stmt.setFetchSize(50);//Integer.MIN_VALUE);
+      stmt.setFetchSize(Integer.MIN_VALUE);
 
       rs = stmt.executeQuery(DBpediaSQLQueries.getJSONCacheSelectAll);
 
@@ -47,14 +55,16 @@ class DumpExport {
         val jsonData = jsonBlob.getBytes(1, jsonBlob.length.asInstanceOf[Int])
         val jsonString = new String(jsonData).trim
         if (!jsonString.isEmpty) {
-          val quads = JSONCache.getTriplesFromJson(new String(jsonData))
-          destination.write(quads)
+          // Submit job to thread pool
+          executorService.execute(new QuadProcessWorker(destination,jsonString))
+          //val quads = JSONCache.getTriplesFromJson(new String(jsonString))
+          //destination.write(quads)
         }
       }
       rs.close();
       stmt.close();
     } catch {
-      case  e: Exception => {
+      case e: Exception => {
         logger.warn(e.getMessage(), e);
       }
     }
@@ -82,9 +92,20 @@ class DumpExport {
           logger.warn(e.getMessage, e)
         }
       }
+
+      executorService.shutdown();
+      try {
+        executorService.awaitTermination(Long.MaxValue, TimeUnit.NANOSECONDS);
+      } catch {
+        case e : InterruptedException  => {
+          logger.error("Error in thread termination", e)
+        }
+      }
+
+      destination.close()
     }
 
-    destination.close()
+
   }
 
   val policies = {
@@ -96,6 +117,15 @@ class DumpExport {
     () => IOUtils.writer(wrapFile(file))
   }
 
+
+}
+
+class QuadProcessWorker(val destination: Destination, val jsonString: String) extends Runnable {
+
+  override def run(): Unit = {
+    val quads = JSONCache.getTriplesFromJson(new String(jsonString))
+    destination.write(quads)
+  }
 }
 
 object DumpExport {
@@ -103,9 +133,9 @@ object DumpExport {
 
   def main(args: scala.Array[String]): Unit = {
 
-    require(args != null && args.length >= 1 && args(0).nonEmpty, "missing required argument: dump file name")
-    Authenticator.setDefault(new ProxyAuthenticator())
+    require(args != null && args.length == 2 && args(0).nonEmpty && args(1).nonEmpty, "missing required argument: $ {dump file name} {threads Number}")
+    val threads: Int = Integer.parseInt(args(1))
 
-    new DumpExport().export(args(0))
+    new DumpExport(args(0), threads).export()
   }
 }
