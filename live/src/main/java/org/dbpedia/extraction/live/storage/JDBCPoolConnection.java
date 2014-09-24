@@ -13,8 +13,8 @@ public class JDBCPoolConnection {
     //Initializing the Logger
     private static Logger logger = Logger.getLogger(JDBCPoolConnection.class);
 
-    private static BoneCP connectionStorePool = null;
-    private static BoneCP connectionCachePool = null;
+    private static volatile BoneCP connectionStorePool = null;
+    private static volatile BoneCP connectionCachePool = null;
 
     protected JDBCPoolConnection() {
     }
