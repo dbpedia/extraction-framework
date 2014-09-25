@@ -26,7 +26,7 @@ class PublisherDiffDestination(pageID: Long) extends LiveDestination {
   }
 
   def close() {
-    Main.publishingDataQueue.add(new DiffData(pageID, added,deleted))
+    Main.publishingDataQueue.put(new DiffData(pageID, added,deleted))
   }
 
 

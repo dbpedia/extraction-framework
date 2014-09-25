@@ -32,7 +32,7 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     //Used for publishing triples to files
-    public static BlockingQueue<DiffData> publishingDataQueue = new LinkedBlockingDeque<DiffData>();
+    public static BlockingQueue<DiffData> publishingDataQueue = new LinkedBlockingDeque<DiffData>(1000);
 
     // TODO make these non-static
 
