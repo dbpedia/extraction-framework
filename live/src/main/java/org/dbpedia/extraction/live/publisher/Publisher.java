@@ -53,7 +53,11 @@ public class Publisher extends Thread{
                 // Block until next pubData
                 DiffData pubData = Main.publishingDataQueue.take();
 
-                if (pageCache.contains(pubData.pageID) || counter % 300 == 0) {
+                // flush if
+                // 1) we get the same page again (possible conflict in diff order
+                // 2) we have more than 300 changesets in queue
+                // 3) the diff exceeds 1K triples
+                if (pageCache.contains(pubData.pageID) || counter % 300 == 0 || addedTriples.size() > 1000 || deletedTriples.size() > 1000) {
                     flush();
                     counter = 0;
                 }
