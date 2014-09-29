@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.live.main;
 
 
-import org.apache.log4j.PropertyConfigurator;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.Feeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
@@ -54,7 +53,6 @@ public class Main {
 
     public static void initLive() {
 
-        PropertyConfigurator.configure("log4j.live.properties");
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));
             long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.sleepInterval"));
