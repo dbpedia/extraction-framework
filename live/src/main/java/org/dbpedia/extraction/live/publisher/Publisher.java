@@ -23,13 +23,13 @@ public class Publisher extends Thread{
 
     private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
 
-    private HashSet<Quad> addedTriples = new HashSet<>();
-    private HashSet<Quad> deletedTriples = new HashSet<>();
+    private volatile HashSet<Quad> addedTriples = new HashSet<>();
+    private volatile HashSet<Quad> deletedTriples = new HashSet<>();
 
-    private long counter = 0;
-    private HashSet<Long> pageCache = new HashSet<Long>();
+    private volatile long counter = 0;
+    private volatile HashSet<Long> pageCache = new HashSet<Long>();
 
-    private String publishDiffBaseName = LiveOptions.options.get("publishDiffRepoPath");
+    private final String publishDiffBaseName = LiveOptions.options.get("publishDiffRepoPath");
 
     public Publisher(String name, int priority){
         this.setPriority(priority);
@@ -78,8 +78,12 @@ public class Publisher extends Thread{
         }
     }
 
-    //TODO possible concurrency issues but look minor for now
+    //TODO possible concurrency issues when main exits but look minor for now
     public void flush() throws IOException  {
+
+        if (addedTriples.size() == 0 && deletedTriples.size() == 0) {
+            return;
+        }
 
         pageCache.clear();
         counter = 1;
