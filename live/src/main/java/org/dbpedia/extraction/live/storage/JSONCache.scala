@@ -54,7 +54,7 @@ class JSONCache(pageID: Long, pageTitle: String) {
           for (obj <- objLsit) {
                 val objValue: String = obj.getOrElse("value","")
                 val objType: String = obj.getOrElse("type","")
-                val objLang: String = obj.getOrElse("lang", LiveOptions.options.get("language"))
+                val objLang: String = obj.getOrElse("lang", JSONCache.defaultLanguage)
                 val objDatatype: String = obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
 
                 val finalDatatype = if (objType.equals("uri")) null else objDatatype // null datatype if uri
@@ -142,6 +142,9 @@ class JSONCache(pageID: Long, pageTitle: String) {
 }
 
 object JSONCache {
+
+  val defaultLanguage = LiveOptions.options.get("language")
+
   def setErrorOnCache(pageID: Long, error: Int) {
     JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateError, Array[String]("" + error, "" + pageID))
   }
@@ -198,7 +201,7 @@ object JSONCache {
                     for (obj <- objLsit) {
                       val objValue: String = obj.getOrElse("value", "")
                       val objType: String = obj.getOrElse("type", "")
-                      val objLang: String = obj.getOrElse("lang", LiveOptions.options.get("language"))
+                      val objLang: String = obj.getOrElse("lang", defaultLanguage)
                       val objDatatype: String = if (objType.equals("uri"))  null
                                                 else obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
 
