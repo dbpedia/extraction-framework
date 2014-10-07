@@ -9,7 +9,7 @@ import org.apache.log4j.Logger
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, UriPolicy}
 import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.live.storage.{JSONCache, DBpediaSQLQueries, JDBCPoolConnection}
+import org.dbpedia.extraction.live.storage.{JDBCUtil, JSONCache, DBpediaSQLQueries, JDBCPoolConnection}
 import org.dbpedia.extraction.util.RichFile._
 import org.dbpedia.extraction.util.{IOUtils, ProxyAuthenticator}
 
@@ -31,6 +31,8 @@ class DumpExport(val filename: String, val threads: Integer) {
       TimeUnit.SECONDS, linkedBlockingDeque, new ThreadPoolExecutor.CallerRunsPolicy());
 
   def export() {
+
+    JDBCUtil.execSQL("SET names utf8");
 
     destination.open()
 

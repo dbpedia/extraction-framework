@@ -12,6 +12,7 @@ import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.Publisher;
 import org.dbpedia.extraction.live.statistics.Statistics;
+import org.dbpedia.extraction.live.storage.JDBCUtil;
 import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
@@ -52,6 +53,8 @@ public class Main {
     }
 
     public static void initLive() {
+
+        JDBCUtil.execSQL("SET names utf8");
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));
