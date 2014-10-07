@@ -58,7 +58,7 @@ class JSONCache(pageID: Long, pageTitle: String) {
                 val objDatatype: String = obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
 
                 val finalDatatype = if (objType.equals("uri")) null else objDatatype // null datatype if uri
-                quads += new Quad(objLang,"",subject, predicate, objValue, "", finalDatatype)
+                quads += new Quad(if (objLang.isEmpty) JSONCache.defaultLanguage else objLang ,"",subject, predicate, objValue, "", finalDatatype)
 
           }
         }
@@ -206,7 +206,7 @@ object JSONCache {
                                                 else obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
 
 
-                      quads += new Quad(objLang, "", subject, predicate, objValue, "", objDatatype)
+                      quads += new Quad(if (objLang.isEmpty) defaultLanguage else objLang , "", subject, predicate, objValue, "", objDatatype)
 
                     }
                 }
