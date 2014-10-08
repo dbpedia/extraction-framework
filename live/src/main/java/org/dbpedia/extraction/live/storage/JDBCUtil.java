@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class contains usefull funtions to deal with JDBC
@@ -175,12 +176,12 @@ public class JDBCUtil {
                 int timesUpdated = result.getInt("timesUpdated");
                 Blob jsonBlob = result.getBlob("json");
                 byte[] jsonData = jsonBlob.getBytes(1, (int) jsonBlob.length());
-                String jsonString = new String(jsonData.toString().getBytes("UTF8")); // convert to UTF8
+                String jsonString = new String(jsonData);//.toString().getBytes("UTF8")); // convert to UTF8
 
                 Blob subjectsBlob = result.getBlob("subjects");
                 byte[] subjectsData = subjectsBlob.getBytes(1, (int) subjectsBlob.length());
-                String subjects = new String(subjectsData.toString().getBytes("UTF8"));  // convert to UTF8
-                HashSet<String> subjectSet = new HashSet();
+                String subjects = new String(subjectsData);//.toString().getBytes("UTF8"));  // convert to UTF8
+                Set<String> subjectSet = new HashSet<>();
                 for (String item: subjects.split("\n")) {
                     if (!item.trim().isEmpty())
                         subjectSet.add(item);
