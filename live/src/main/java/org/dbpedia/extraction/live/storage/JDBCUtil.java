@@ -183,8 +183,9 @@ public class JDBCUtil {
                 String subjects = new String(subjectsData);//.toString().getBytes("UTF8"));  // convert to UTF8
                 Set<String> subjectSet = new HashSet<>();
                 for (String item: subjects.split("\n")) {
-                    if (!item.trim().isEmpty())
-                        subjectSet.add(item);
+                    String subject = item.trim();
+                    if (!subject.isEmpty())
+                        subjectSet.add(org.apache.commons.lang.StringEscapeUtils.unescapeJava(subject));
                 }
 
                 return new JSONCacheItem(pageID, timesUpdated, jsonString, subjectSet);
