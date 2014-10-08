@@ -175,17 +175,18 @@ public class JDBCUtil {
                 int timesUpdated = result.getInt("timesUpdated");
                 Blob jsonBlob = result.getBlob("json");
                 byte[] jsonData = jsonBlob.getBytes(1, (int) jsonBlob.length());
+                String jsonString = new String(jsonData.toString().getBytes("UTF8")); // convert to UTF8
 
                 Blob subjectsBlob = result.getBlob("subjects");
                 byte[] subjectsData = subjectsBlob.getBytes(1, (int) subjectsBlob.length());
-                String subjects = new String(subjectsData);
+                String subjects = new String(subjectsData.toString().getBytes("UTF8"));  // convert to UTF8
                 HashSet<String> subjectSet = new HashSet();
                 for (String item: subjects.split("\n")) {
                     if (!item.trim().isEmpty())
                         subjectSet.add(item);
                 }
 
-                return new JSONCacheItem(pageID, timesUpdated, new String(jsonData), subjectSet);
+                return new JSONCacheItem(pageID, timesUpdated, jsonString, subjectSet);
             } else {
                 return null;
             }
