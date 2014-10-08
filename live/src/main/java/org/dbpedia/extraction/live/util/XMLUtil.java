@@ -43,7 +43,7 @@ public class XMLUtil
 			toText(node, baos);
 		}
 		catch(Exception e) {
-			logger.error(ExceptionUtil.toString(e));
+			logger.error(ExceptionUtil.toString(e), e);
 			return null;
 		}
 
@@ -142,7 +142,7 @@ public class XMLUtil
 		}
 		catch(Exception e)
         {
-			logger.error(ExceptionUtil.toString(e));
+			logger.error(ExceptionUtil.toString(e), e);
 		}
 
 		return strModificationDate;

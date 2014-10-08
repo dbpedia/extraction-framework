@@ -76,7 +76,7 @@ public class PageProcessor extends Thread{
                     processPage(page);
             }
             catch (Exception exp){
-                logger.error("Failed to process page " + currentPage.getItemID() + " reason: " + exp.getMessage());
+                logger.error("Failed to process page " + currentPage.getItemID() + " reason: " + exp.getMessage(), exp);
             }
         }
     }

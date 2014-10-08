@@ -110,7 +110,7 @@ public class Main {
 
             logger.info("DBpedia-Live components started");
         } catch (Exception exp) {
-            logger.error(ExceptionUtil.toString(exp));
+            logger.error(ExceptionUtil.toString(exp), exp);
             stopLive();
         }
     }

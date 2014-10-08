@@ -38,7 +38,7 @@ public abstract class PrefetchIterator<T>
         try {
             current = prefetch();
         } catch (Exception e) {
-            logger.error(ExceptionUtil.toString(e));
+            logger.error(ExceptionUtil.toString(e), e);
         }
         if (current == null)
             finished = true;

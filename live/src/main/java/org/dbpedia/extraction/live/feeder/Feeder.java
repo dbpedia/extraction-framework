@@ -77,7 +77,7 @@ public abstract class Feeder extends Thread {
                 latestProcessDate = (Files.readFile(latestProcessDateFile)).trim();
             }
         } catch (Exception exp) {
-            logger.error(ExceptionUtil.toString(exp));
+            logger.error(ExceptionUtil.toString(exp), exp);
         }
         if (latestProcessDate.isEmpty()) {
             latestProcessDate = defaultStartTime;
@@ -107,7 +107,7 @@ public abstract class Feeder extends Thread {
                     handleFeedItem(item);
                 }
             } catch (Exception exp) {
-                logger.error(ExceptionUtil.toString(exp));
+                logger.error(ExceptionUtil.toString(exp), exp);
                 // On error re-initiate feeder
                 initFeeder();
             }

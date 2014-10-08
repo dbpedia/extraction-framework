@@ -25,11 +25,11 @@ public class LiveOptions {
             options = new Options(OptionsFile);
         }
         catch (IOException exp){
-            logger.fatal("live.ini file not found");
+            logger.fatal("live.ini file not found", exp);
             System.exit(1);
         }
         catch (Exception exp){
-            logger.error(exp.getMessage());
+            logger.error(exp.getMessage(), exp);
         }
 
     }

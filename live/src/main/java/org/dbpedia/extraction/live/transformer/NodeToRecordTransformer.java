@@ -32,7 +32,7 @@ public class NodeToRecordTransformer
 			return DBPediaXMLUtil.processOAIRecord(node, baseWikiUri, oaiUri, oaiPrefix);
 		}
 		catch (Exception e) {
-			logger.error(ExceptionUtil.toString(e));
+			logger.error(ExceptionUtil.toString(e), e);
 		}
 		return null;
 	}

@@ -35,7 +35,7 @@ public class DBPediaXPathUtil
 			return xPath.compile(expression);
 		}
 		catch (Exception e) {
-			logger.error(ExceptionUtil.toString(e));
+			logger.error(ExceptionUtil.toString(e), e);
 			throw new RuntimeException(e);
 		}
 	}

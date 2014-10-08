@@ -15,7 +15,7 @@ public class MD5Util
 		try {
 			result = _generateMD5(str);
 		} catch(Exception e) {
-			logger.error(ExceptionUtil.toString(e));
+			logger.error(ExceptionUtil.toString(e), e);
 		}
 		
 		return result;

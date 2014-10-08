@@ -87,7 +87,7 @@ public class LiveConfigReader {
 //                                                    new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
         }
         catch(Exception exp){
-            logger.error(exp.getMessage());
+            logger.error(exp.getMessage(), exp);
         }
     }
 
@@ -169,7 +169,7 @@ public class LiveConfigReader {
 
         }
         catch(Exception exp){
-            logger.error(exp.getMessage());
+            logger.error(exp.getMessage(), exp);
         }
 
     }

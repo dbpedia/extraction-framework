@@ -59,7 +59,7 @@ public class OAIRecordIterator
             XPath xpath = XPathFactory.newInstance().newXPath();
             lastResponseDateExpr = DBPediaXPathUtil.getOAIResponseDateExpr();
         } catch (Exception e) {
-            logger.error(ExceptionUtil.toString(e));
+            logger.error(ExceptionUtil.toString(e), e);
         }
     }
 
