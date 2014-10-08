@@ -3,6 +3,7 @@ package org.dbpedia.extraction.live.publisher;
 import org.dbpedia.extraction.destinations.Quad;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Holds a diff for a new extraction (called from PublisherDiffDestination)
@@ -10,13 +11,15 @@ import java.util.HashSet;
 public class DiffData {
 
     public final long pageID;
-    public final HashSet<Quad> toAdd;
-    public final HashSet<Quad> toDelete;
+    public final Set<Quad> toAdd;
+    public final Set<Quad> toDelete;
+    public final Set<Quad> subjects;
 
-    public DiffData(long id, HashSet<Quad> add, HashSet<Quad> delete){
+    public DiffData(long id, final Set<Quad> add, final Set<Quad> delete, final Set<Quad> subjects){
         pageID = id;
-        toAdd = new HashSet<>(add);
-        toDelete = new HashSet<>(delete);
+        this.toAdd = new HashSet<>(add);
+        this.toDelete = new HashSet<>(delete);
+        this.subjects = new HashSet<>(subjects);
     }
 }
 

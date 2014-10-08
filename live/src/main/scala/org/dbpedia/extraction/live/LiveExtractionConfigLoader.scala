@@ -17,7 +17,6 @@ import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.live.storage.JSONCache
 import org.dbpedia.extraction.live.queue.LiveQueueItem
 import scala.xml._
-import org.dbpedia.extraction.wikiparser.impl.WikiParserWrapper
 import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 import org.dbpedia.extraction.live.extractor.LiveExtractor
 
@@ -143,7 +142,7 @@ object LiveExtractionConfigLoader
           destList += new SPARULDestination(true, policies) // add triples
         }
         destList += new JSONCacheUpdateDestination(liveCache)
-        destList += new PublisherDiffDestination(wikiPage.id, liveCache.performCleanUpdate)
+        destList += new PublisherDiffDestination(wikiPage.id, liveCache.performCleanUpdate, liveCache.cacheObj.subjects)
         destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded) // Just to log extraction results
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations

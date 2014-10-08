@@ -25,6 +25,7 @@ public class Publisher extends Thread{
 
     private volatile HashSet<Quad> addedTriples = new HashSet<>();
     private volatile HashSet<Quad> deletedTriples = new HashSet<>();
+    private volatile HashSet<Quad> subjectsClear = new HashSet<>();
 
     private volatile long counter = 0;
     private volatile HashSet<Long> pageCache = new HashSet<Long>();
@@ -75,6 +76,7 @@ public class Publisher extends Thread{
         if(pubData != null){
             addedTriples.addAll(pubData.toAdd);
             deletedTriples.addAll(pubData.toDelete);
+            subjectsClear.addAll(pubData.subjects);
         }
     }
 
@@ -93,10 +95,19 @@ public class Publisher extends Thread{
         if(parent != null)
             parent.mkdirs();
 
-        RDFDiffWriter.writeAsTurtle(addedTriples, true, fileName, true);
-        addedTriples.clear();
+        if (! addedTriples.isEmpty()) {
+            RDFDiffWriter.writeAsTurtle(addedTriples, fileName + ".added.nt.gz");
+            addedTriples.clear();
+        }
 
-        RDFDiffWriter.writeAsTurtle(deletedTriples, false, fileName, true);
-        deletedTriples.clear();
+        if (! deletedTriples.isEmpty()) {
+            RDFDiffWriter.writeAsTurtle(deletedTriples, fileName + ".removed.nt.gz");
+            deletedTriples.clear();
+        }
+
+        if (! subjectsClear.isEmpty()) {
+            RDFDiffWriter.writeAsTurtle(subjectsClear, fileName + ".clear.nt.gz");
+            subjectsClear.clear();
+        }
     }
 }

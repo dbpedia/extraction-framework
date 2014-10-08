@@ -59,9 +59,11 @@ public class PageProcessor extends Thread{
 
 
     public void run(){
+        LiveQueueItem currentPage = new LiveQueueItem(0,"");
         while(keepRunning){
             try{
                 LiveQueueItem page = LiveQueue.take();
+                currentPage = page;
                 // If a mapping page set extractor to reload mappings and ontology
                 if (page.getPriority() == LiveQueuePriority.MappingPriority) {
                     LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
@@ -74,7 +76,7 @@ public class PageProcessor extends Thread{
                     processPage(page);
             }
             catch (Exception exp){
-                logger.error("Failed to process page: " + exp.getMessage());
+                logger.error("Failed to process page " + currentPage.getItemID() + " reason: " + exp.getMessage());
             }
         }
     }

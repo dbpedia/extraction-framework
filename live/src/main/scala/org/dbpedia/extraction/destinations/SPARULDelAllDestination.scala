@@ -13,7 +13,7 @@ import org.dbpedia.extraction.destinations.formatters.SPARULFormatter
  * Deletes all existing triples for this resource from the DB
  */
 
-class SPARULDelAllDestination(subjects: HashSet[String], policies: Array[Policy]) extends LiveDestination {
+class SPARULDelAllDestination(subjects: java.util.Set[String], policies: Array[Policy]) extends LiveDestination {
 
   protected val logger = Logger.getLogger(classOf[SPARULDelAllDestination].getName)
 
