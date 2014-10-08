@@ -58,7 +58,7 @@ public class Publisher extends Thread{
                 // 1) we get the same page again (possible conflict in diff order
                 // 2) we have more than 300 changesets in queue
                 // 3) the diff exceeds a triple limit
-                if (pageCache.contains(pubData.pageID) || counter % 300 == 0 || addedTriples.size() > 1500 || deletedTriples.size() > 1500) {
+                if (pageCache.contains(pubData.pageID) || counter % 300 == 0 || addedTriples.size() > 2000 || deletedTriples.size() > 2000) {
                     flush();
                     counter = 0;
                 }
