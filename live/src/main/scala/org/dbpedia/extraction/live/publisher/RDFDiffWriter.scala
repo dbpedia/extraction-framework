@@ -27,13 +27,10 @@ object RDFDiffWriter {
   /**
    * Writes a set of Quads in a file in TURTLE format. If zip == true it will be compressed with a .gz suffix
    * @param quads A Set og Quads to write
-   * @param added Whether the model contains triples that should be added or removed
-   * @param baseName  The base file name
-   * @param zip   Whether the file should be compressed or not
+   * @param filename  The dewstination file name
    */
-  def writeAsTurtle(quads: java.util.Set[Quad], added: Boolean, baseName: String, zip: Boolean) {
+  def writeAsTurtle(quads: java.util.Set[Quad], filename: String) {
 
-    val filename = baseName + (if (added)  ".added" else ".removed") + ".nt" + (if (zip) ".gz" else "")
     val destination: Destination = new WriterDestination(writer(new File(filename)), new TerseFormatter(false, true, policies))
 
     logger.info("Writing diff: " + filename)
