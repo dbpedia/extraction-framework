@@ -46,7 +46,7 @@ public class PageProcessor extends Thread{
             Boolean extracted = LiveExtractionConfigLoader.extractPage(
                     item,
                     LiveOptions.options.get("localApiURL"),
-                    LiveOptions.options.get("language"));
+                    LiveOptions.language);
 
             if (!extracted)
                 JSONCache.setErrorOnCache(item.getItemID(), -1);

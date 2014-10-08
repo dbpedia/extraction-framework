@@ -31,7 +31,7 @@ class SPARULDelAllDestination(subjects: HashSet[String], policies: Array[Policy]
 
   def close {
     val formatter = new SPARULFormatter(false, "", policies)
-    val language = LiveOptions.options.get("language")
+    val language = LiveOptions.language
     for (res <- subjects) {
       if (!res.contains("dbpedia.org/property") && !res.trim.isEmpty) {
         //hack! we only need the uri escape here otherwise we need to create a new formatter / builder

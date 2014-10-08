@@ -33,4 +33,6 @@ public class LiveOptions {
         }
 
     }
+
+    public static String language = LiveOptions.options.get("language");
 }
