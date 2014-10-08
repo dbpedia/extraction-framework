@@ -2,6 +2,7 @@ package org.dbpedia.extraction.live.storage
 
 import org.dbpedia.extraction.destinations._
 import org.apache.log4j.Logger
+import scala.collection.mutable
 import scala.util.parsing.json._
 import collection.mutable.{ListBuffer, ArrayBuffer, HashMap}
 import org.dbpedia.extraction.live.core.LiveOptions
@@ -157,7 +158,7 @@ object JSONCache {
 
     var destList = new ArrayBuffer[LiveDestination]()
     destList += new SPARULDestination(false, policies) // delete triples
-    destList += new PublisherDiffDestination(pageID, true, cache.cacheObj.subjects) //  unpublish in changesetes
+    destList += new PublisherDiffDestination(pageID, true, if (cache.cacheObj != null) cache.cacheObj.subjects else new java.util.HashSet[String]()) //  unpublish in changesetes
     val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
 
 

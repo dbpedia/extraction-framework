@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.destinations.formatters.RDFJSONFormatter
+import org.slf4j.LoggerFactory
 import scala.collection.Seq
 import util.Sorting
 import collection.mutable.ArrayBuffer
-import org.apache.log4j.Logger
 import org.dbpedia.extraction.live.storage.JSONCache
 import java.util.HashSet
 
@@ -13,7 +13,7 @@ import java.util.HashSet
 * This destination stores a json file with all the extractor output to compare for next extraction
 * */
 class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
-  private val logger = Logger.getLogger(classOf[JSONCacheUpdateDestination].getName)
+  private val logger = LoggerFactory.getLogger(classOf[JSONCacheUpdateDestination].getName)
 
 
   var extractors = new ArrayBuffer[String](20)

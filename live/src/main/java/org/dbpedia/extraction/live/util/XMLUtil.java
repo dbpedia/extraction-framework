@@ -22,7 +22,8 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -33,7 +34,7 @@ import org.xml.sax.SAXException;
 
 public class XMLUtil
 {
-	private static Logger logger = Logger.getLogger(XMLUtil.class);
+	private static Logger logger = LoggerFactory.getLogger(XMLUtil.class);
 	
 	public static String toString(Node node)
 	{

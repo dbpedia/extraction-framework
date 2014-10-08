@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.live.core;
 
-import org.apache.log4j.Logger;
 import org.ini4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.io.IOException;
 public class LiveOptions {
     //Initializing the Options file
     public static Options options;
-    private static Logger logger = Logger.getLogger(LiveOptions.class);;
+    private static Logger logger = LoggerFactory.getLogger(LiveOptions.class);;
     static{
         try{
 
@@ -25,7 +26,7 @@ public class LiveOptions {
             options = new Options(OptionsFile);
         }
         catch (IOException exp){
-            logger.fatal("live.ini file not found", exp);
+            logger.error("live.ini file not found", exp);
             System.exit(1);
         }
         catch (Exception exp){

@@ -2,16 +2,17 @@ package org.dbpedia.extraction.live.storage;
 
 import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class JDBCPoolConnection {
     //Initializing the Logger
-    private static Logger logger = Logger.getLogger(JDBCPoolConnection.class);
+    private static Logger logger = LoggerFactory.getLogger(JDBCPoolConnection.class);
 
     private static volatile BoneCP connectionStorePool = null;
     private static volatile BoneCP connectionCachePool = null;
@@ -29,8 +30,8 @@ public class JDBCPoolConnection {
             config.setPassword(LiveOptions.options.get("store.pw"));
             connectionStorePool = new BoneCP(config); // setup the connection pool
         } catch (Exception e) {
-            logger.fatal(e.getMessage());
-            logger.fatal("Could not initialize DB connection! Exiting...");
+            logger.error(e.getMessage());
+            logger.error("Could not initialize DB connection! Exiting...");
             Main.stopLive();
             System.exit(1);
         }
@@ -58,8 +59,8 @@ public class JDBCPoolConnection {
             config.setPassword(LiveOptions.options.get("cache.pw"));
             connectionCachePool = new BoneCP(config); // setup the connection pool
         } catch (Exception e) {
-            logger.fatal(e.getMessage());
-            logger.fatal("Could not initialize DB connection! Exiting...");
+            logger.error(e.getMessage());
+            logger.error("Could not initialize DB connection! Exiting...");
             Main.stopLive();
             System.exit(1);
         }

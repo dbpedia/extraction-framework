@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.live.storage;
 
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.util.DateUtil;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.Set;
  */
 public class JDBCUtil {
     //Initializing the Logger
-    private static Logger logger = Logger.getLogger(JDBCUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(JDBCUtil.class);
 
 
     /*

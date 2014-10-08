@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.live.helper;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 // import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.core.Constants;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
@@ -8,6 +8,7 @@ import org.dbpedia.extraction.mappings.SkosCategoriesExtractor;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.wikiparser.Namespace;
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -30,7 +31,7 @@ import java.util.Map;
  */
 public class LiveConfigReader {
 
-    private static Logger logger = Logger.getLogger(LiveConfigReader.class);
+    private static Logger logger = LoggerFactory.getLogger(LiveConfigReader.class);
     // private static DOMParser parser = new DOMParser();
     private static final String liveConfigFile = "./live.xml";
 

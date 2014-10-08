@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.live.extraction
 
 import java.net.URL
+import org.slf4j.LoggerFactory
+
 import collection.immutable.ListMap
 import java.util.Properties
 import java.io.File
-import org.apache.log4j.Logger
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.{WikiPage, WikiSource, Source, XMLSource}
@@ -36,7 +37,7 @@ object LiveExtractionConfigLoader
   private var extractors : List[Extractor[_]] = null;
   private var reloadOntologyAndMapping = true;
   private var ontologyAndMappingsUpdateTime : Long = 0;
-  val logger = Logger.getLogger("LiveExtractionConfigLoader");
+  val logger = LoggerFactory.getLogger("LiveExtractionConfigLoader");
 
   /** Ontology source */
   val ontologySource = WikiSource.fromNamespaces(
@@ -142,7 +143,7 @@ object LiveExtractionConfigLoader
           destList += new SPARULDestination(true, policies) // add triples
         }
         destList += new JSONCacheUpdateDestination(liveCache)
-        destList += new PublisherDiffDestination(wikiPage.id, liveCache.performCleanUpdate, liveCache.cacheObj.subjects)
+        destList += new PublisherDiffDestination(wikiPage.id, liveCache.performCleanUpdate, if (liveCache.cacheObj != null) liveCache.cacheObj.subjects else new java.util.HashSet[String]())
         destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded) // Just to log extraction results
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations

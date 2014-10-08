@@ -1,12 +1,13 @@
 package org.dbpedia.extraction.live.processor;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.storage.JSONCache;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -19,7 +20,7 @@ import org.dbpedia.extraction.live.storage.JSONCache;
  */
 public class PageProcessor extends Thread{
 
-    private static Logger logger = Logger.getLogger(PageProcessor.class);
+    private static Logger logger = LoggerFactory.getLogger(PageProcessor.class);
     private volatile boolean keepRunning = true;
 
     public PageProcessor(String name){

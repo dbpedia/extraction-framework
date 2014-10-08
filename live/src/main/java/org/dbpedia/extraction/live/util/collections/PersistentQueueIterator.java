@@ -8,10 +8,10 @@ import java.util.Collections;
 import java.util.Iterator;
 
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.iterators.PrefetchIterator;
-
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -27,8 +27,7 @@ import org.dbpedia.extraction.live.util.iterators.PrefetchIterator;
 public class PersistentQueueIterator
 	extends PrefetchIterator<Object>
 {
-	private static Logger	logger	= Logger
-											.getLogger(PersistentQueueIterator.class);
+	private static Logger	logger	= LoggerFactory.getLogger(PersistentQueueIterator.class);
 
 	private PersistentQueue	queue;
 	private int				startIndex;

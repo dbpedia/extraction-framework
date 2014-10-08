@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.live.util.iterators;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.util.DBPediaXPathUtil;
 import org.dbpedia.extraction.live.util.XPathUtil;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import java.text.DateFormat;
@@ -21,8 +22,7 @@ import java.util.*;
  */
 public class DuplicateOAIRecordRemoverIterator
         extends PrefetchIterator<Document> {
-    private Logger logger = Logger
-            .getLogger(DuplicateOAIRecordRemoverIterator.class);
+    private Logger logger = LoggerFactory.getLogger(DuplicateOAIRecordRemoverIterator.class);
 
     private Iterator<Document> iterator;
 

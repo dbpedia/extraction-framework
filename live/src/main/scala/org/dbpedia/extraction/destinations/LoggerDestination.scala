@@ -1,14 +1,15 @@
 package org.dbpedia.extraction.destinations
 
+import org.slf4j.LoggerFactory
+
 import scala.collection.Seq
-import org.apache.log4j.Logger
 
 /**
  * Just logs the extraction output to the screen
  */
 class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination {
 
-  private val logger = Logger.getLogger(classOf[LoggerDestination].getName)
+  private val logger = LoggerFactory.getLogger(classOf[LoggerDestination].getName)
 
   private var addedTriples = 0
   private var deletedTriples = 0

@@ -5,13 +5,13 @@ import java.net.Authenticator
 import java.sql._
 import java.util.concurrent._
 
-import org.apache.log4j.Logger
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, UriPolicy}
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.live.storage.{JDBCUtil, JSONCache, DBpediaSQLQueries, JDBCPoolConnection}
 import org.dbpedia.extraction.util.RichFile._
 import org.dbpedia.extraction.util.{IOUtils, ProxyAuthenticator}
+import org.slf4j.{Logger, LoggerFactory}
 
 
 /**
@@ -21,7 +21,7 @@ import org.dbpedia.extraction.util.{IOUtils, ProxyAuthenticator}
  * @since 9/18/14 4:33 PM
  */
 class DumpExport(val filename: String, val threads: Integer) {
-  val logger: Logger = Logger.getLogger(classOf[DumpExport])
+  val logger: Logger = LoggerFactory.getLogger(classOf[DumpExport])
 
   val destination: Destination = new WriterDestination(writer(new File(filename)), new TerseFormatter(false, true, policies))
 
