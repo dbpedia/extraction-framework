@@ -47,7 +47,7 @@ object LiveExtractionConfigLoader
 
   /** Mappings source */
   val mappingsSource =  WikiSource.fromNamespaces(
-    namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
+    namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.language))),
     url = new URL(Language.Mappings.apiUri),
     language = Language.Mappings );
 
@@ -143,7 +143,7 @@ object LiveExtractionConfigLoader
           destList += new SPARULDestination(true, policies) // add triples
         }
         destList += new JSONCacheUpdateDestination(liveCache)
-        destList += new PublisherDiffDestination(wikiPage.id)
+        destList += new PublisherDiffDestination(wikiPage.id, liveCache.performCleanUpdate)
         destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded) // Just to log extraction results
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
@@ -289,7 +289,7 @@ object LiveExtractionConfigLoader
     /** Mappings source */
     val mappingsSource =  WikiSource.fromNamespaces(namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.options.get("language")))),
       url = new URL("http://mappings.dbpedia.org/api.php"),
-      language = Language.apply(LiveOptions.options.get("language")) );
+      language = Language.apply(LiveOptions.language) );
 
     /**
      *  Loads the extractors classes from the configuration.
