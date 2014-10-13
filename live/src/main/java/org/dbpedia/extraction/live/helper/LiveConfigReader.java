@@ -44,7 +44,6 @@ public class LiveConfigReader {
     //Tag names that are use in live.config file
     private static final String EXTRACTOR_TAGNAME = "extractor";
     private static final String LANUAGE_TAGNAME = "language";
-    private static final String MULTITHREADING_MODE_TAGNAME = "multihreadingMode";
     private static final String UPDATE_ONTOLGY_AND_MAPPINGS_PERIOD_TAGNAME = "updateOntologyAndMappingsPeriod";
 
     private static final String NAME_ATTRIBUTENAME = "name";
@@ -64,7 +63,6 @@ public class LiveConfigReader {
 
     public static Map<Language, List<Class>> extractorClasses = null;
     public static int updateOntologyAndMappingsPeriod = 5;
-    public static boolean multihreadingMode = false;
 
     //Initialize the static members
     static{
@@ -74,7 +72,6 @@ public class LiveConfigReader {
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(new File(liveConfigFile));
             readExtractors();
-            readMultihreadingMode();
             readUpdateOntologyAndMappingsPeriod();
 
 
@@ -90,13 +87,6 @@ public class LiveConfigReader {
         catch(Exception exp){
             logger.error(exp.getMessage(), exp);
         }
-    }
-
-    /**
-     * Reads the value indicating whether the application should work in multithreading or single threading mode
-     */
-    private static void readMultihreadingMode() {
-        multihreadingMode = Boolean.parseBoolean(doc.getElementsByTagName(MULTITHREADING_MODE_TAGNAME).item(0).getTextContent());
     }
 
     /**
