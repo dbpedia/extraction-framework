@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.scalatest.{PrivateMethodTester, FlatSpec}
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.collection.mutable.{Set => MutableSet, HashSet}
@@ -13,7 +13,7 @@ import org.dbpedia.extraction.util.Language
  *
  */
 @RunWith(classOf[JUnitRunner])
-class ImageExtractorTest extends FlatSpec with ShouldMatchers with PrivateMethodTester {
+class ImageExtractorTest extends FlatSpec with Matchers with PrivateMethodTester {
 
   "ImageExtractor" must "load 1 free image" in {
     val freeImages = new HashSet[String]()

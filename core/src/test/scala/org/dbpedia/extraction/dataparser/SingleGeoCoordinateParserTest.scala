@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
 import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class SingleGeoCoordinateParserTest extends FlatSpec with ShouldMatchers
+class SingleGeoCoordinateParserTest extends FlatSpec with Matchers
 {
 
     "SingleGeoCoordinateParser(51/12/N)" should "return 51.2" in
