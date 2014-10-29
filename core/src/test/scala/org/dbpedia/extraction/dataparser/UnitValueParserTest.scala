@@ -5,14 +5,15 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
 import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
-import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
+import org.scalatest.Matchers
+import org.scalatest.matchers.{MatchResult, BeMatcher}
 import scala.math._
 import org.dbpedia.extraction.ontology.{Ontology, OntologyDatatypes}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class UnitValueParserTest extends FlatSpec with ShouldMatchers
+class UnitValueParserTest extends FlatSpec with Matchers
 {
    // Length - Positive Tests - Input is valid
     "UnitValueParser" should "return Length(10 m)" in
