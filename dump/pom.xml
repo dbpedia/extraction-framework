@@ -1,161 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.dbpedia</groupId>
-        <artifactId>extraction</artifactId>
-        <version>4.0-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>org.dbpedia</groupId>
+		<artifactId>extraction</artifactId>
+		<version>4.0-SNAPSHOT</version>
+	</parent>
 
-    <groupId>org.dbpedia.extraction</groupId>
-    <artifactId>dump</artifactId>
-    <name>DBpedia Dump Extraction</name>
+	<groupId>org.dbpedia.extraction</groupId>
+	<artifactId>dump</artifactId>
+	<name>DBpedia Dump Extraction</name>
 
-    <build>
-        <plugins>
-            <plugin>
+	<build>
+		<plugins>
+			<plugin>
 
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
 
-                <configuration>
-                    <launchers>
+				<configuration>
+					<launchers>
 
-                        <launcher>
-                            <id>import</id>
-                            <mainClass>org.dbpedia.extraction.dump.sql.Import</mainClass>
-                            <jvmArgs>
-                                <jvmArg>-server</jvmArg>
-                            </jvmArgs>
-                            <args>
-                                <!-- base folder of downloaded dumps -->
-                                <arg>/data/dbpedia-release/data</arg>
-                                <!-- location of SQL file containing MediaWiki table definitions  -->
-                                <arg>/home/dbpedia-release/bin/mediawiki/core/maintenance/tables.sql</arg>
-                                <!-- JDBC URL of MySQL server. Import creates a new database for each wiki. -->
-                                <arg>jdbc:mysql://localhost/?characterEncoding=UTF-8</arg>
-                                <!-- require-download-complete -->
-                                <arg>true</arg>
-                                <!-- file name: pages-articles.xml{,.bz2,.gz} -->
-                                <arg>pages-articles.xml.bz2</arg>
-                                <!-- languages and article count ranges, comma-separated, e.g. "de,en" or "@mappings" etc. -->
-                                <arg>10000-</arg>
-                            </args>
-                        </launcher>
+						<launcher>
+							<id>import</id>
+							<mainClass>org.dbpedia.extraction.dump.sql.Import</mainClass>
+							<jvmArgs>
+								<jvmArg>-server</jvmArg>
+							</jvmArgs>
+							<args>
+								<!-- base folder of downloaded dumps -->
+								<arg>/data/dbpedia-release/data</arg>
+								<!-- location of SQL file containing MediaWiki table definitions -->
+								<arg>/home/dbpedia-release/bin/mediawiki/core/maintenance/tables.sql</arg>
+								<!-- JDBC URL of MySQL server. Import creates a new database for 
+									each wiki. -->
+								<arg>jdbc:mysql://localhost/?characterEncoding=UTF-8</arg>
+								<!-- require-download-complete -->
+								<arg>true</arg>
+								<!-- file name: pages-articles.xml{,.bz2,.gz} -->
+								<arg>pages-articles.xml.bz2</arg>
+								<!-- languages and article count ranges, comma-separated, e.g. "de,en" 
+									or "@mappings" etc. -->
+								<arg>10000-</arg>
+							</args>
+						</launcher>
 
-                        <launcher>
-                            <id>extraction</id>
-                            <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+						<launcher>
+							<id>extraction</id>
+							<mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
 
-                            <jvmArgs>
-                                <jvmArg>-server</jvmArg>
-                                <!--
-                                <jvmArg>-Xmx4096m</jvmArg>
-                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
-                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                                <jvmArg>-XX:+PrintGC</jvmArg>
-                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
-                                <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
-                                <jvmArg>-Dhttp.proxyPort=80</jvmArg>
-                                <jvmArg>-Dhttp.proxyUser=user</jvmArg>
-                                <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
-                                <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg>
-                                -->
-                            </jvmArgs>
-                        </launcher>
+							<jvmArgs>
+								<jvmArg>-server</jvmArg>
+								<!-- <jvmArg>-Xmx4096m</jvmArg> <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg> 
+									<jvmArg>-XX:+UseConcMarkSweepGC</jvmArg> <jvmArg>-XX:+PrintGC</jvmArg> <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> 
+									<jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg> <jvmArg>-Dhttp.proxyPort=80</jvmArg> 
+									<jvmArg>-Dhttp.proxyUser=user</jvmArg> <jvmArg>-Dhttp.proxyPassword=password</jvmArg> 
+									<jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg> -->
+							</jvmArgs>
+						</launcher>
 
-                        <launcher>
-                            <id>stats-extraction</id>
-                            <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+						<launcher>
+							<id>stats-extraction</id>
+							<mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
 
-                            <jvmArgs>
-                                <jvmArg>-server</jvmArg>
-                                <!-- Request statistics -->
-                                <jvmArg>-Dextract.template.stats=true</jvmArg>
-                                <!--
-                                <jvmArg>-Xmx4096m</jvmArg>
-                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
-                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                                <jvmArg>-XX:+PrintGC</jvmArg>
-                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
-                                <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
-                                <jvmArg>-Dhttp.proxyPort=80</jvmArg>
-                                <jvmArg>-Dhttp.proxyUser=user</jvmArg>
-                                <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
-                                <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg>
-                                -->
-                            </jvmArgs>
-                        </launcher>
+							<jvmArgs>
+								<jvmArg>-server</jvmArg>
+								<!-- Request statistics -->
+								<jvmArg>-Dextract.template.stats=true</jvmArg>
+								<!-- <jvmArg>-Xmx4096m</jvmArg> <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg> 
+									<jvmArg>-XX:+UseConcMarkSweepGC</jvmArg> <jvmArg>-XX:+PrintGC</jvmArg> <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> 
+									<jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg> <jvmArg>-Dhttp.proxyPort=80</jvmArg> 
+									<jvmArg>-Dhttp.proxyUser=user</jvmArg> <jvmArg>-Dhttp.proxyPassword=password</jvmArg> 
+									<jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg> -->
+							</jvmArgs>
+						</launcher>
 
-                        <launcher>
-                            <id>compress</id>
-                            <mainClass>org.dbpedia.extraction.dump.compress.Compress</mainClass>
-                            <jvmArgs>
-                                <jvmArg>-Xmx1024m</jvmArg>
-                            </jvmArgs>
-                            <!-- mvn scala:run -Dlauncher=Compress "-DaddArgs=/data|/data-compressed" -->
-                        </launcher>
+						<launcher>
+							<id>compress</id>
+							<mainClass>org.dbpedia.extraction.dump.compress.Compress</mainClass>
+							<jvmArgs>
+								<jvmArg>-Xmx1024m</jvmArg>
+							</jvmArgs>
+							<!-- mvn scala:run -Dlauncher=Compress "-DaddArgs=/data|/data-compressed" -->
+						</launcher>
 
-                        <launcher>
-                            <id>download</id>
-                            <mainClass>org.dbpedia.extraction.dump.download.Download</mainClass>
-                            <!--
-                            <jvmArgs>
-                                <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
-                                <jvmArg>-Dhttp.proxyPort=port</jvmArg>
-                                <jvmArg>-Dhttp.proxyUser=user</jvmArg>
-                                <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
-                                <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg> 
-                             </jvmArgs>
-                             -->
-                            <!-- ../run download config=download.properties -->
-                        </launcher>
-                        
-                        <launcher>
-                            <id>purge-download</id>
-                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
-                            <args>
-                                <arg>/home/release/wikipedia</arg>
-                                <arg>download-complete</arg>
-                                <arg>1</arg><!-- keep only one latest download -->
-                                <arg>*.sql.gz,*.xml.bz2,*.sql,*-pages-articles.xml,index.html</arg><!-- delete these files -->
-                            </args>
-                        </launcher>
+						<launcher>
+							<id>download</id>
+							<mainClass>org.dbpedia.extraction.dump.download.Download</mainClass>
+							<!-- <jvmArgs> <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg> 
+								<jvmArg>-Dhttp.proxyPort=port</jvmArg> <jvmArg>-Dhttp.proxyUser=user</jvmArg> 
+								<jvmArg>-Dhttp.proxyPassword=password</jvmArg> <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg> 
+								</jvmArgs> -->
+							<!-- ../run download config=download.properties -->
+						</launcher>
 
-                        <launcher>
-                            <id>purge-extraction</id>
-                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
-                            <args>
-                                <arg>/home/release/wikipedia</arg>
-                                <arg>extraction-complete</arg>
-                                <arg>2</arg><!-- keep two extractions -->
-                                <arg>*.nt,*.nq,*.tql,*.ttl,*.trix,*-redirects.obj</arg><!-- delete these files -->
-                            </args>
-                        </launcher>
+						<launcher>
+							<id>purge-download</id>
+							<mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+							<args>
+								<arg>/home/release/wikipedia</arg>
+								<arg>download-complete</arg>
+								<arg>1</arg><!-- keep only one latest download -->
+								<arg>*.sql.gz,*.xml.bz2,*.sql,*-pages-articles.xml,index.html</arg><!-- 
+									delete these files -->
+							</args>
+						</launcher>
 
-                    </launchers>
-                </configuration>
+						<launcher>
+							<id>purge-extraction</id>
+							<mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+							<args>
+								<arg>/home/release/wikipedia</arg>
+								<arg>extraction-complete</arg>
+								<arg>2</arg><!-- keep two extractions -->
+								<arg>*.nt,*.nq,*.tql,*.ttl,*.trix,*-redirects.obj</arg><!-- delete 
+									these files -->
+							</args>
+						</launcher>
 
-            </plugin>
-        </plugins>
-    </build>
+					</launchers>
+				</configuration>
 
-    <dependencies>
+			</plugin>
+		</plugins>
+	</build>
 
-        <dependency>
-            <groupId>org.dbpedia.extraction</groupId>
-            <artifactId>core</artifactId>
-        </dependency>
+	<dependencies>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.20</version>
-        </dependency>
-        
-    </dependencies>
+		<dependency>
+			<groupId>org.dbpedia.extraction</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-xml</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.20</version>
+		</dependency>
+
+	</dependencies>
 
 </project>

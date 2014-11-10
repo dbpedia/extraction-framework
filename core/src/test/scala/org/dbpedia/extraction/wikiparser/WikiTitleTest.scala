@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
 import org.scalatest.FlatSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.dbpedia.extraction.util.Language
@@ -10,7 +10,7 @@ import org.dbpedia.extraction.util.Language
  *
  */
 @RunWith(classOf[JUnitRunner])
-class WikiTitleTest extends FlatSpec with ShouldMatchers {
+class WikiTitleTest extends FlatSpec with Matchers {
 
   "WikiTitle" should "return a wikilink to Commons:Test page in commonswiki" in {
     val language = Language("commons")
