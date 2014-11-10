@@ -240,6 +240,9 @@ object LiveExtractionConfigLoader
       try {
         extractorList = extractorList ::: List[Class[Extractor[_]]](listiterator.next().asInstanceOf[Class[Extractor[_]]]);
       }
+      catch {
+        case e: Exception =>  logger.warn("Cannot instantiate Extractor List", e)
+      }
     }
     extractorList;
   }

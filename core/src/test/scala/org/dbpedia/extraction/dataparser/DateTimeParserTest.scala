@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class DateTimeParserTest extends FlatSpec with ShouldMatchers
+class DateTimeParserTest extends FlatSpec with Matchers
 {
     //gYear positive tests - Input is inside equivalence class
 

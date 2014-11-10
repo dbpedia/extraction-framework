@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
 import _root_.org.dbpedia.extraction.sources.WikiPage
-import _root_.org.scalatest.matchers.ShouldMatchers
+import _root_.org.scalatest.Matchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
@@ -10,7 +10,7 @@ import org.scalatest.junit.JUnitRunner
 import java.net.URI
 
 @RunWith(classOf[JUnitRunner])
-class LinkParserTest extends FlatSpec with ShouldMatchers
+class LinkParserTest extends FlatSpec with Matchers
 {
   /**
    *  {{ URL }}	{{URL|example.com|optional display text}}

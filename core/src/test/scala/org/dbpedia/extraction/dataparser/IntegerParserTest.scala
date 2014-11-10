@@ -3,13 +3,15 @@ package org.dbpedia.extraction.dataparser
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.ontology.OntologyDatatypes
 import org.dbpedia.extraction.util.Language
-import org.scalatest.matchers.{MatchResult, BeMatcher, ShouldMatchers}
+import org.scalatest.Matchers
 import org.dbpedia.extraction.wikiparser.TextNode
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.matchers.BeMatcher
+import org.scalatest.matchers.MatchResult
 
 @RunWith(classOf[JUnitRunner])
-class IntegerParserTest extends FlatSpec with ShouldMatchers
+class IntegerParserTest extends FlatSpec with Matchers
 {
     "IntegerParser" should "return 8 for '8.0'@en" in
      {
