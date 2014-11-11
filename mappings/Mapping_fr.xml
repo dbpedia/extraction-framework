@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping fr:Chimiebox</title><ns>210</ns><id>2927</id><revision><id>18603</id><timestamp>2012-05-21T03:30:58Z</timestamp><text>{{TemplateMapping
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping fr:Album</title><ns>210</ns><id>9580</id><revision><id>35485</id><timestamp>2014-06-27T21:57:21Z</timestamp><text>{{TemplateMapping
+   | mapToClass = Album
+   | correspondingClass = Band
+   | correspondingProperty = artist
+   | mappings =
+	{{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = Titre | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = année | ontologyProperty = releaseDate }}
+	{{PropertyMapping | templateProperty = Année | ontologyProperty = releaseDate }}
+	{{PropertyMapping | templateProperty = label | ontologyProperty = recordLabel }}
+	{{PropertyMapping | templateProperty = Label | ontologyProperty = recordLabel }}
+}}</text></revision></page><page><title>Mapping fr:Chimiebox</title><ns>210</ns><id>2927</id><revision><id>18603</id><timestamp>2012-05-21T03:30:58Z</timestamp><text>{{TemplateMapping
 | mapToClass = ChemicalCompound
 | mappings =
         {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
@@ -10,17 +21,24 @@
 	{{PropertyMapping | templateProperty = ebullition | ontologyProperty = boilingPoint | unit = temperature}}
 	{{PropertyMapping | templateProperty = PubChem | ontologyProperty = pubchem }}
         {{PropertyMapping | templateProperty = DCI | ontologyProperty = inn}}
-}}</text></revision></page><page><title>Mapping fr:Infobox Aire protégée</title><ns>210</ns><id>7464</id><revision><id>26620</id><timestamp>2013-06-28T14:33:38Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Aire protégée</title><ns>210</ns><id>7464</id><revision><id>35533</id><timestamp>2014-06-29T16:53:05Z</timestamp><text>{{TemplateMapping
 | mapToClass = ProtectedArea
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-{{PropertyMapping | templateProperty = image | ontologyProperty = foaf:depiction }}
-{{PropertyMapping | templateProperty = pays | ontologyProperty = country}}
-{{PropertyMapping | templateProperty = latitude | ontologyProperty = geo:lat}}
-{{PropertyMapping | templateProperty = longitude | ontologyProperty = geo:long}}
-{{PropertyMapping | templateProperty = superficie | ontologyProperty = surfaceArea}}
-{{PropertyMapping | templateProperty = création | ontologyProperty = creationYear}}
-{{PropertyMapping | templateProperty = site web | ontologyProperty = foaf:page}}
+	{{PropertyMapping | templateProperty = image | ontologyProperty = foaf:depiction }}
+	{{PropertyMapping | templateProperty = pays | ontologyProperty = country}}
+	{{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
+	{{PropertyMapping | templateProperty = superficie | ontologyProperty = surfaceArea}}
+	{{PropertyMapping | templateProperty = création | ontologyProperty = creationYear}}
+	{{PropertyMapping | templateProperty = administration | ontologyProperty = organisation}}
+	{{PropertyMapping | templateProperty = catégorie iucn | ontologyProperty = iucnCategory}}
+	{{PropertyMapping | templateProperty = classement | ontologyProperty = heritageRegister}}
+	{{PropertyMapping | templateProperty = visiteurs | ontologyProperty = visitorsPerYear}}
+	{{PropertyMapping | templateProperty = visiteurs année | ontologyProperty = visitorStatisticsAsOf}}
+	{{PropertyMapping | templateProperty = ville proche | ontologyProperty = foaf:based_near}}
+	{{PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage}}
+        {{PropertyMapping | templateProperty = légende image | ontologyProperty = thumbnailCaption }}
+        {{PropertyMapping | templateProperty = légende_image | ontologyProperty = thumbnailCaption }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Ancienne entité territoriale</title><ns>210</ns><id>7170</id><revision><id>27862</id><timestamp>2013-07-16T14:52:45Z</timestamp><text>{{TemplateMapping 
 | mapToClass = OldTerritory 
 | mappings = 
@@ -435,6 +453,104 @@
         {{ PropertyMapping | templateProperty = émissions | ontologyProperty = show}}
         {{ PropertyMapping | templateProperty = chaînes | ontologyProperty = channel}}
         {{ PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage}}
+}}</text></revision></page><page><title>Mapping fr:Infobox Animation et bande dessinée asiatiques/Entête</title><ns>210</ns><id>9583</id><revision><id>35501</id><timestamp>2014-06-28T00:24:57Z</timestamp><text>{{ConditionalMapping
+| cases =
+  {{Condition 
+     | templateProperty = style entête
+     | operator         = equals
+     | value            = œuvre
+     | mapping          = {{TemplateMapping | mapToClass = Work | header = 0 
+                              | mappings =
+                                  {{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name}}
+                                  {{PropertyMapping | templateProperty = titreJaponais | ontologyProperty = originalTitle | language = ja}}
+                                  {{PropertyMapping | templateProperty = titreKanji | ontologyProperty = originalTitle | language = ja}}
+                          }}
+  }}
+  {{Condition 
+     | templateProperty = style entête
+     | operator         = equals
+     | value            = personnalité
+     | mapping          = {{TemplateMapping | mapToClass = Person | header = 0
+                              | mappings =
+                                  {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name}}
+                                  {{PropertyMapping | templateProperty = nomKanji | ontologyProperty = originalTitle | language = ja}}
+                                  {{PropertyMapping | templateProperty = naissance | ontologyProperty = birthDate}}
+                                  {{PropertyMapping | templateProperty = mort | ontologyProperty = deathDate}}
+                          }}
+  }}
+| defaultMappings =
+        {{PropertyMapping | templateProperty = origine | ontologyProperty = country}}
+        {{PropertyMapping | templateProperty = genre | ontologyProperty = genre}}
+        {{PropertyMapping | templateProperty = type | ontologyProperty = type}}
+        {{PropertyMapping | templateProperty = thème | ontologyProperty = subjectTerm}}
+}}</text></revision></page><page><title>Mapping fr:Infobox Animation et bande dessinée asiatiques/Livre</title><ns>210</ns><id>9582</id><revision><id>35498</id><timestamp>2014-06-27T23:59:35Z</timestamp><text>{{ConditionalMapping
+| cases =
+  {{Condition 
+     | templateProperty = origine
+     | operator         = equals
+     | value            = Japon
+     | mapping          = {{TemplateMapping | mapToClass = Manga | header = 0 }}
+  }}
+  {{Condition 
+     | templateProperty = origine
+     | operator         = equals
+     | value            = Corée du Sud
+     | mapping          = {{TemplateMapping | mapToClass = Manhwa | header = 0 }}
+  }}
+  {{Condition 
+     | templateProperty = origine
+     | operator         = equals
+     | value            = Chine
+     | mapping          = {{TemplateMapping | mapToClass = Manhua | header = 0 }}
+  }}
+  {{Condition 
+     | operator         = otherwise
+     | mapping          = {{TemplateMapping | mapToClass = Comics | header = 0 }}
+  }}
+| defaultMappings =
+        {{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name}}
+        {{PropertyMapping | templateProperty = origine | ontologyProperty = country}}
+        {{PropertyMapping | templateProperty = auteur | ontologyProperty = writer}}
+        {{PropertyMapping | templateProperty = nb_volumes | ontologyProperty = numberOfVolumes}}
+        {{PropertyMapping | templateProperty = éditeur | ontologyProperty = publisher}}
+        {{PropertyMapping | templateProperty = éditeur_francophone | ontologyProperty = publisher}}
+        {{PropertyMapping | templateProperty = éditeur_original | ontologyProperty = firstPublisher}}
+        {{PropertyMapping | templateProperty = dessinateur | ontologyProperty = illustrator}}
+        {{PropertyMapping | templateProperty = illustrateur | ontologyProperty = illustrator}}
+        {{PropertyMapping | templateProperty = premier_volume | ontologyProperty = firstPublicationDate}}
+        {{PropertyMapping | templateProperty = dernier_volume | ontologyProperty = lastPublicationDate}}
+        {{PropertyMapping | templateProperty = sortie | ontologyProperty = releaseDate}}
+        {{PropertyMapping | templateProperty = format | ontologyProperty = literaryGenre}}
+        {{PropertyMapping | templateProperty = genre | ontologyProperty = literaryGenre}}
+}}</text></revision></page><page><title>Mapping fr:Infobox Animation et bande dessinée asiatiques/Vidéo</title><ns>210</ns><id>9581</id><revision><id>35499</id><timestamp>2014-06-28T00:04:07Z</timestamp><text>{{ConditionalMapping
+| cases =
+  {{Condition 
+     | templateProperty = type
+     | operator         = equals
+     | value            = animation
+     | mapping          = {{TemplateMapping 
+                               | mapToClass = Anime 
+                               | correspondingClass = Comics
+                               | correspondingProperty = dct:source
+                               | header = 0 }}
+  }}
+| defaultMappings =
+        {{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name}}
+        {{PropertyMapping | templateProperty = origine | ontologyProperty = country}}
+        {{PropertyMapping | templateProperty = réalisateur | ontologyProperty = director}}
+        {{PropertyMapping | templateProperty = studio_animation | ontologyProperty = animator}}
+        {{PropertyMapping | templateProperty = nb_épisodes | ontologyProperty = numberOfEpisodes}}
+        {{PropertyMapping | templateProperty = début_diffusion | ontologyProperty = openingDate}}
+        {{PropertyMapping | templateProperty = fin_diffusion | ontologyProperty = closingDate}}
+        {{PropertyMapping | templateProperty = date_sortie | ontologyProperty = releaseDate}}
+        {{PropertyMapping | templateProperty = chaine | ontologyProperty = channel}}
+        {{PropertyMapping | templateProperty = scénariste | ontologyProperty = writer}}
+        {{PropertyMapping | templateProperty = compositeur | ontologyProperty = composer}}
+        {{PropertyMapping | templateProperty = producteur | ontologyProperty = producedBy}}
+        {{PropertyMapping | templateProperty = genre | ontologyProperty = genre}}
+        {{PropertyMapping | templateProperty = durée | ontologyProperty = runtime | unit = Time}}
+        {{PropertyMapping | templateProperty = licence_original | ontologyProperty = license}}
+        {{PropertyMapping | templateProperty = licence_francophone | ontologyProperty = license}}
 }}</text></revision></page><page><title>Mapping fr:Infobox Appareil photo numérique</title><ns>210</ns><id>6552</id><revision><id>24169</id><timestamp>2013-03-01T15:22:22Z</timestamp><text>{{TemplateMapping
 | mapToClass = DigitalCamera
 | mappings =
@@ -719,6 +835,52 @@
         {{PropertyMapping | templateProperty = mécènes | ontologyProperty = artPatron }}
         {{PropertyMapping | templateProperty = œuvre | ontologyProperty = created }}
         {{PropertyMapping | templateProperty = distinctions | ontologyProperty = decoration }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Association</title><ns>210</ns><id>9683</id><revision><id>35716</id><timestamp>2014-06-30T22:38:59Z</timestamp><text>{{ConditionalMapping
+| cases =
+  {{Condition 
+     | templateProperty = type
+     | operator         = contains
+     | value            = yndica
+     | mapping          = {{TemplateMapping | mapToClass = TradeUnion | header = 0 }}
+  }}
+  {{Condition 
+     | templateProperty = affiliation_internationale
+     | operator         = contains
+     | value            = yndica
+     | mapping          = {{TemplateMapping | mapToClass = TradeUnion | header = 0 }}
+  }}
+  {{Condition 
+     | operator         = otherwise
+     | mapping          = {{TemplateMapping | mapToClass = Non-ProfitOrganisation | header = 0 }}
+  }}
+| defaultMappings =
+    {{ PropertyMapping | templateProperty = association_nom | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = fondateur | ontologyProperty = foundedBy }}
+    {{ PropertyMapping | templateProperty = fondateurs | ontologyProperty = foundedBy }}
+    {{ PropertyMapping | templateProperty = fondatrice | ontologyProperty = foundedBy }}
+    {{ PropertyMapping | templateProperty = date_de_fondation | ontologyProperty = formationDate }}
+    {{ PropertyMapping | templateProperty = date_de_fondation | ontologyProperty = formationYear }}
+    {{ PropertyMapping | templateProperty = dissolution | ontologyProperty = extinctionDate }}
+    {{ PropertyMapping | templateProperty = dissolution | ontologyProperty = extinctionYear }}
+    {{ PropertyMapping | templateProperty = siege | ontologyProperty = headquarter }}
+    {{ PropertyMapping | templateProperty = zone d'influence | ontologyProperty = regionServed }}
+    {{ PropertyMapping | templateProperty = but | ontologyProperty = purpose }}
+    {{ PropertyMapping | templateProperty = president | ontologyProperty = chairperson }}
+    {{ PropertyMapping | templateProperty = presidente | ontologyProperty = chairperson }}
+    {{ PropertyMapping | templateProperty = secretaire_general | ontologyProperty = secretaryGeneral }}
+    {{ PropertyMapping | templateProperty = secretaire_generale | ontologyProperty = secretaryGeneral }}
+    {{ PropertyMapping | templateProperty = personnage_clef | ontologyProperty = keyPerson }}
+    {{ PropertyMapping | templateProperty = fonds_de_dotation | ontologyProperty = endowment }}
+    {{ PropertyMapping | templateProperty = nombre_employes | ontologyProperty = numberOfEmployees }}
+    {{ PropertyMapping | templateProperty = nombre_volontaires | ontologyProperty = numberOfVolunteers }}
+    {{ PropertyMapping | templateProperty = nombre_membres | ontologyProperty = numberOfStaff }}
+    {{ PropertyMapping | templateProperty = affiliation | ontologyProperty = affiliation }}
+    {{ PropertyMapping | templateProperty = affiliation_europeenne | ontologyProperty = affiliation }}
+    {{ PropertyMapping | templateProperty = affiliation_internationale | ontologyProperty = affiliation }}
+    {{ PropertyMapping | templateProperty = association_type | ontologyProperty = legalForm }}
+    {{ PropertyMapping | templateProperty = site | ontologyProperty = foaf:homepage }}
+    {{ PropertyMapping | templateProperty = association_logo | ontologyProperty = foaf:logo }}
+    {{ PropertyMapping | templateProperty = association_slogan | ontologyProperty = slogan }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Athlète</title><ns>210</ns><id>5927</id><revision><id>27194</id><timestamp>2013-07-09T10:58:42Z</timestamp><text>{{TemplateMapping
 | mapToClass = Athlete 
 | mappings =
@@ -830,8 +992,73 @@
       | latitude         = latitude
       | longitude        = longitude
    }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Bande dessinée</title><ns>210</ns><id>5103</id><revision><id>18844</id><timestamp>2012-07-08T11:11:02Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Bande dessinée</title><ns>210</ns><id>5103</id><revision><id>35504</id><timestamp>2014-06-28T11:46:07Z</timestamp><text>{{TemplateMapping
 | mapToClass = Comics
+| mappings = 
+ {{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name }}
+ {{PropertyMapping | templateProperty = auteur | ontologyProperty = author }}
+ {{PropertyMapping | templateProperty = scénario | ontologyProperty = writer }}
+ {{PropertyMapping | templateProperty = dessin | ontologyProperty = illustrator }}
+ {{PropertyMapping | templateProperty = éditeur | ontologyProperty = dc:publisher }}
+ {{PropertyMapping | templateProperty = prépublication | ontologyProperty = magazine }}
+
+ {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+ {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
+ {{PropertyMapping | templateProperty = série | ontologyProperty = series }}
+ {{PropertyMapping | templateProperty = genre | ontologyProperty = literaryGenre }}
+ {{PropertyMapping | templateProperty = première publication | ontologyProperty = firstPublicationDate }}
+ {{PropertyMapping | templateProperty = numéro | ontologyProperty = number }}
+ {{PropertyMapping | templateProperty = titre autre | ontologyProperty = alternativeTitle }}
+ {{PropertyMapping | templateProperty = titre original | ontologyProperty = originalTitle }}
+ {{PropertyMapping | templateProperty = personnages | ontologyProperty = mainCharacter }}
+ {{PropertyMapping | templateProperty = époque | ontologyProperty = era }}
+ {{PropertyMapping | templateProperty = thèmes | ontologyProperty = dc:subject }}
+ {{PropertyMapping | templateProperty = thèmes | ontologyProperty = subjectTerm }}
+
+ {{PropertyMapping | templateProperty = nombre d'albums | ontologyProperty = numberOfVolumes }}
+ {{PropertyMapping | templateProperty = nombre de pages | ontologyProperty = numberOfPages }}
+ {{PropertyMapping | templateProperty = ISBN | ontologyProperty = isbn }}
+ {{PropertyMapping | templateProperty = format | ontologyProperty = format }}
+ {{PropertyMapping | templateProperty = album précédent | ontologyProperty = previousWork }}
+ {{PropertyMapping | templateProperty = album suivant | ontologyProperty = subsequentWork }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Barrage</title><ns>210</ns><id>9641</id><revision><id>35615</id><timestamp>2014-06-29T22:02:25Z</timestamp><text>{{ TemplateMapping 
+| mapToClass = Dam 
+| mappings =
+   {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+   {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+   {{PropertyMapping | templateProperty = subdivision 3 | ontologyProperty = municipality }}
+   {{PropertyMapping | templateProperty = propriétaire | ontologyProperty = owner }}
+   {{PropertyMapping | templateProperty = vocation | ontologyProperty = purpose }}
+   {{PropertyMapping | templateProperty = début_travaux | ontologyProperty = buildingStartDate }}
+   {{PropertyMapping | templateProperty = début_travaux | ontologyProperty = buildingStartYear }}
+   {{PropertyMapping | templateProperty = fin_travaux | ontologyProperty = buildingEndDate }}
+   {{PropertyMapping | templateProperty = fin_travaux | ontologyProperty = buildingEndYear }}
+   {{PropertyMapping | templateProperty = mise_en_service | ontologyProperty = openingDate }}
+   {{PropertyMapping | templateProperty = mise_en_service | ontologyProperty = openingYear }}
+   {{PropertyMapping | templateProperty = hauteur_barrage | ontologyProperty = height | unit = Length }}
+   {{PropertyMapping | templateProperty = longueur_barrage | ontologyProperty = length | unit = Length }}
+   {{PropertyMapping | templateProperty = type | ontologyProperty = description }}
+   {{PropertyMapping | templateProperty = cours_eau | ontologyProperty = river }}
+   {{IntermediateNodeMapping 
+     | nodeClass = Lake
+     | correspondingProperty = lake &lt;!-- could be reservoir to be more specific --&gt; 
+     | mappings = 
+        {{PropertyMapping | templateProperty = surface_réservoir | ontologyProperty = area | unit = Area }}
+        {{PropertyMapping | templateProperty = volume_réservoir | ontologyProperty = volume | unit = Volume }}
+        {{PropertyMapping | templateProperty = altitude_réservoir | ontologyProperty = elevation }}
+   }}
+   {{IntermediateNodeMapping 
+     | nodeClass = PowerStation
+     | correspondingProperty = part 
+     | mappings = 
+	{{ConstantMapping | ontologyProperty = primaryFuelType | value = Hydropower }}
+	{{PropertyMapping | templateProperty = nom_centrale | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = capacité_énergie | ontologyProperty = installedCapacity }}
+	{{PropertyMapping | templateProperty = production_énergie | ontologyProperty = averageAnnualGeneration }}
+	{{PropertyMapping | templateProperty = type_centrale | ontologyProperty = description }}
+   }}
+   {{GeocoordinatesMapping | latitude =  latitude | longitude = longitude }}
+   {{PropertyMapping | templateProperty = url | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Biographie</title><ns>210</ns><id>4401</id><revision><id>27201</id><timestamp>2013-07-09T11:34:40Z</timestamp><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
@@ -903,26 +1130,40 @@
 	{{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = titre fr | ontologyProperty = foaf:name }}
         {{PropertyMapping | templateProperty = date composition | ontologyProperty = releaseDate }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Canton de France</title><ns>210</ns><id>8017</id><revision><id>28271</id><timestamp>2013-09-05T20:07:14Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Canton de France</title><ns>210</ns><id>8017</id><revision><id>35424</id><timestamp>2014-06-24T21:01:45Z</timestamp><text>{{TemplateMapping
 | mapToClass = GovernmentalAdministrativeRegion
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = cons | ontologyProperty = leader }}
-	{{PropertyMapping | templateProperty = cons | ontologyProperty = leaderName }} &lt;!-- seems more used though wrong--&gt;
+        {{IntermediateNodeMapping | nodeClass = PoliticalFunction | correspondingProperty = countySeat
+        | mappings =
+           {{PropertyMapping | templateProperty = cons  | ontologyProperty = person }}
+           {{PropertyMapping | templateProperty = cons  | ontologyProperty = personName }}
+           {{DateIntervalMapping
+            | templateProperty          = dates
+            | startDateOntologyProperty = activeYearsStartYear
+            | endDateOntologyProperty   = activeYearsEndYear
+           }}
+        }}
 	{{PropertyMapping | templateProperty = rég | ontologyProperty = region }}
 	{{PropertyMapping | templateProperty = dépt | ontologyProperty = department}}
 	{{PropertyMapping | templateProperty = arrt | ontologyProperty = arrondissement }}
 	{{PropertyMapping | templateProperty = circonscription | ontologyProperty = part }} &lt;!-- nothing better --&gt;
 	{{PropertyMapping | templateProperty = ville | ontologyProperty = administrativeHeadCity }}
 	{{PropertyMapping | templateProperty = insee | ontologyProperty = inseeCode }}
+	{{PropertyMapping | templateProperty = nbcomm | ontologyProperty = numberOfMunicipalities }}
 
-        {{PropertyMapping | templateProperty = km² | ontologyProperty = areaTotal }}
-        {{PropertyMapping | templateProperty = superficie | ontologyProperty = areaTotal }}
-        {{PropertyMapping | templateProperty = population | ontologyProperty = populationTotal }}
-        {{PropertyMapping | templateProperty = année_pop | ontologyProperty = censusYear }}
-        {{PropertyMapping | templateProperty = alt maxi | ontologyProperty = maximumElevation }}
-        {{PropertyMapping | templateProperty = alt mini | ontologyProperty = minimumElevation }}
-        {{PropertyMapping | templateProperty = altitude | ontologyProperty = elevation }}
+        {{IntermediateNodeMapping | nodeClass = Area | correspondingProperty = wholeArea | mappings =
+           {{PropertyMapping | templateProperty = superficie | ontologyProperty = value }} 
+        }}
+        {{IntermediateNodeMapping | nodeClass = Demographics| correspondingProperty = demographics | mappings =
+           {{PropertyMapping | templateProperty = population | ontologyProperty = populationTotal }} 
+           {{PropertyMapping | templateProperty = année_pop | ontologyProperty = year }} 
+        }}
+        {{IntermediateNodeMapping | nodeClass = Altitude | correspondingProperty = altitude | mappings =
+           {{PropertyMapping | templateProperty = alt maxi | ontologyProperty = maximumElevation }}
+           {{PropertyMapping | templateProperty = alt mini | ontologyProperty = minimumElevation }}
+           {{PropertyMapping | templateProperty = altitude | ontologyProperty = value }}
+        }}
         {{GeocoordinatesMapping | latitude = latitude| longitude = longitude}}
 }}</text></revision></page><page><title>Mapping fr:Infobox Cardinal de l'Église catholique</title><ns>210</ns><id>6544</id><revision><id>24078</id><timestamp>2013-02-28T22:35:19Z</timestamp><text>#REDIRECT [[Mapping fr:Infobox Prélat catholique]]</text></revision></page><page><title>Mapping fr:Infobox Casino</title><ns>210</ns><id>7452</id><revision><id>26570</id><timestamp>2013-06-28T13:22:50Z</timestamp><text>{{TemplateMapping
 | mapToClass = Casino
@@ -1041,6 +1282,22 @@
            {{PropertyMapping | templateProperty = argent CN | ontologyProperty = numberOfSilverMedalsWon }}
            {{PropertyMapping | templateProperty = bronze CN | ontologyProperty = numberOfBronzeMedalsWon }}
         }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Centrale</title><ns>210</ns><id>9604</id><revision><id>35572</id><timestamp>2014-06-29T21:37:38Z</timestamp><text>{{TemplateMapping 
+| mapToClass = PowerStation
+| mappings = 
+        {{PropertyMapping | templateProperty = Nom | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = Type | ontologyProperty = type }}
+        {{PropertyMapping | templateProperty = Pays | ontologyProperty = country }}
+        {{PropertyMapping | templateProperty = Propriétaire | ontologyProperty = owner }}
+        {{PropertyMapping | templateProperty = Statut | ontologyProperty = status }}
+        {{PropertyMapping | templateProperty = Mis en service | ontologyProperty = openingYear }}
+        {{PropertyMapping | templateProperty = Statut | ontologyProperty = closingYear }}
+        {{PropertyMapping | templateProperty = Énergie | ontologyProperty = primaryFuelType }}
+        {{PropertyMapping | templateProperty = Énergie | ontologyProperty = fuelTypeName }}
+        {{PropertyMapping | templateProperty = Capacité | ontologyProperty = installedCapacity | unit = Power }}
+        {{PropertyMapping | templateProperty = Production | ontologyProperty = averageAnnualGeneration | unit = Energy }}
+        {{PropertyMapping | templateProperty = Facteur charge | ontologyProperty = capacityFactor }}
+        {{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Chaîne de télévision</title><ns>210</ns><id>5058</id><revision><id>16637</id><timestamp>2012-01-25T09:46:23Z</timestamp><text>{{TemplateMapping
 | mapToClass = TelevisionStation
 }}</text></revision></page><page><title>Mapping fr:Infobox Chimie</title><ns>210</ns><id>8092</id><revision><id>34623</id><timestamp>2014-04-30T20:31:18Z</timestamp><text>{{TemplateMapping
@@ -1124,7 +1381,7 @@
         {{PropertyMapping | templateProperty = durée | ontologyProperty = filmRuntime | unit = Time}}
         {{PropertyMapping | templateProperty = année de sortie | ontologyProperty = releaseDate}}
         {{PropertyMapping | templateProperty = première diffusion | ontologyProperty = firstBroadcast}}
-}}</text></revision></page><page><title>Mapping fr:Infobox Cinéma (personnalité)</title><ns>210</ns><id>2919</id><revision><id>27277</id><timestamp>2013-07-09T15:29:57Z</timestamp><text>{{TemplateMapping 
+}}</text></revision></page><page><title>Mapping fr:Infobox Cinéma (personnalité)</title><ns>210</ns><id>2919</id><revision><id>35402</id><timestamp>2014-06-22T09:35:52Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Actor 
 | mappings = 
         {{ PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
@@ -1136,10 +1393,14 @@
         {{ PropertyMapping | templateProperty = nationalité | ontologyProperty = nationality }}
         {{ PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
         {{ PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace }}
-        {{ PropertyMapping | templateProperty = profession | ontologyProperty = occupation }}
+        {{ PropertyMapping | templateProperty = date de mort | ontologyProperty = deathDate }}
+        {{ PropertyMapping | templateProperty = lieu de mort | ontologyProperty = deathPlace }}
+        {{ PropertyMapping | templateProperty = profession | ontologyProperty = profession }}
+        {{ PropertyMapping | templateProperty = profession(s) | ontologyProperty = profession }}
         {{ PropertyMapping | templateProperty = films notables | ontologyProperty = movie }}
         {{ PropertyMapping | templateProperty = séries notables | ontologyProperty = tvShow }}
         {{ PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage }} 
+        {{ PropertyMapping | templateProperty = site internet | ontologyProperty = foaf:homepage }} 
         
 }}</text></revision></page><page><title>Mapping fr:Infobox Circuit automobile</title><ns>210</ns><id>5955</id><revision><id>19771</id><timestamp>2012-11-07T15:36:31Z</timestamp><text>{{TemplateMapping
 | mapToClass = RaceTrack
@@ -1168,7 +1429,7 @@
 	| latitude = latitude
 	| longitude = longitude
 	}}
-}}</text></revision></page><page><title>Mapping fr:Infobox Club sportif</title><ns>210</ns><id>5228</id><revision><id>17501</id><timestamp>2012-04-28T01:34:16Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Club sportif</title><ns>210</ns><id>5228</id><revision><id>35410</id><timestamp>2014-06-22T22:08:53Z</timestamp><text>{{ConditionalMapping
 | cases =
 
 {{Condition
@@ -1204,13 +1465,19 @@
 	{{PropertyMapping | templateProperty = Nom complet | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = Surnoms | ontologyProperty = foaf:nick }}
         {{PropertyMapping | templateProperty = Site web | ontologyProperty = foaf:homepage }}
+        {{PropertyMapping | templateProperty = Logo | ontologyProperty = foaf:logo }}
+        {{PropertyMapping | templateProperty = Sport | ontologyProperty = sport }}
+	{{PropertyMapping | templateProperty = Noms precedents | ontologyProperty = formerName }}
 
 	{{PropertyMapping | templateProperty = Date de fondation | ontologyProperty = formationDate }}
-        &lt;!-- {{PropertyMapping | templateProperty = Date de disparition | ontologyProperty = dissolved }} dissolved page recommends to use dissolutionDate, but it has a wierd domain type (PapulatedPlace) --&gt;
-
+	{{PropertyMapping | templateProperty = Date de fondation | ontologyProperty = formationYear }}
+        {{PropertyMapping | templateProperty = Date de disparition | ontologyProperty = extinctionDate }}
+        {{PropertyMapping | templateProperty = Date de disparition | ontologyProperty = extinctionYear }}
         {{PropertyMapping | templateProperty = Stade  | ontologyProperty = ground }}
         {{PropertyMapping | templateProperty = Capacite | ontologyProperty = capacity }}
         {{PropertyMapping | templateProperty = Siege | ontologyProperty = headquarter }}
+        {{PropertyMapping | templateProperty = Couleurs | ontologyProperty = colour }}
+        {{PropertyMapping | templateProperty = Couleurs | ontologyProperty = colourName }}
 
 	{{PropertyMapping | templateProperty = Président | ontologyProperty = chairman }}
         &lt;!--{{PropertyMapping | templateProperty = chrtitle | ontologyProperty = chairmanTitle }}--&gt;
@@ -3012,23 +3279,125 @@
 	&lt;!--{{PropertyMapping | templateProperty = destinations | ontologyProperty = destination }} should be the number of destinations --&gt;
 	&lt;!--{{PropertyMapping | templateProperty = frequent flyer | ontologyProperty = targetAirport }} --&gt;
 	&lt;!--{{PropertyMapping | templateProperty = sleutelpersonen | ontologyProperty = ceo }}--&gt;
-}}</text></revision></page><page><title>Mapping fr:Infobox Compétition sportive</title><ns>210</ns><id>4389</id><revision><id>26725</id><timestamp>2013-07-01T09:22:45Z</timestamp><text>{{TemplateMapping
-| mapToClass = SportsEvent
-| mappings =
+}}</text></revision></page><page><title>Mapping fr:Infobox Compétition sportive</title><ns>210</ns><id>4389</id><revision><id>35413</id><timestamp>2014-06-23T21:02:44Z</timestamp><text>{{ConditionalMapping
+| cases =
+ {{Condition
+    | templateProperty = charte
+    | operator = contains
+    | value = football 
+    | mapping = {{TemplateMapping
+                | mapToClass = SoccerTournament
+                | header = 0
+                | mappings =
+                        {{PropertyMapping | templateProperty = meilleur buteur  | ontologyProperty = soccerTournamentTopScorer }}
+                        {{PropertyMapping | templateProperty = tenant  | ontologyProperty = soccerTournamentLastChampion }}
+                        {{PropertyMapping | templateProperty = plus titré  | ontologyProperty = soccerTournamentMostSuccesfull }}
+                        {{PropertyMapping | templateProperty = Saison en cours  | ontologyProperty = soccerTournamentThisSeason }}
+                        {{PropertyMapping | templateProperty = vainqueur  | ontologyProperty = soccerLeagueWinner }}
+                        {{PropertyMapping | templateProperty = relégué  | ontologyProperty = soccerLeagueRelegated }}
+                        {{PropertyMapping | templateProperty = relégué fin  | ontologyProperty = soccerLeagueRelegated }}
+                        {{PropertyMapping | templateProperty = promu début  | ontologyProperty = soccerLeaguePromoted }}
+                        {{PropertyMapping | templateProperty = participants  | ontologyProperty = numberOfTeams }}
+               }}
+ }}
 
+ {{Condition
+    | templateProperty = chart
+    | operator = contains
+    | value = automobile 
+    | mapping = {{TemplateMapping 
+                       | mapToClass = SportsEvent 
+                       | header = 0 
+                       | mappings =
+                               {{PropertyMapping | templateProperty = champion pilote | ontologyProperty = champion }}
+                               {{PropertyMapping | templateProperty = champion copilote | ontologyProperty = championInDouble }}
+                               {{PropertyMapping | templateProperty = champion constructeur | ontologyProperty = champion }}
+                }}
+ }}
+
+ {{Condition
+ | templateProperty = titre
+ | operator = contains
+ | value = olympique 
+ | mapping = 
+       {{TemplateMapping 
+       | mapToClass = OlympicEvent 
+       | header = 0 
+       | mappings =
+              {{PropertyMapping | templateProperty = vainqueur | ontologyProperty = goldMedalist }}
+              {{PropertyMapping | templateProperty = deuxième  | ontologyProperty = silverMedalist }}
+              {{PropertyMapping | templateProperty = finaliste | ontologyProperty = silverMedalist }}
+              {{PropertyMapping | templateProperty = troisième | ontologyProperty = bronzeMedalist }}
+       }}
+ }}
+
+ {{Condition
+ | templateProperty = charte
+ | operator = contains
+ | value = cyclisme 
+ | mapping = 
+       {{TemplateMapping 
+       | mapToClass = CyclingRace 
+       | header = 0 
+       | mappings =
+              {{PropertyMapping | templateProperty = tenant  | ontologyProperty = recentWinner }}
+              {{PropertyMapping | templateProperty = plus titré  | ontologyProperty = mostWins }}
+       }}
+ }}
+
+ {{Condition
+    | templateProperty = charte
+    | operator = contains
+    | value = tennis 
+    | mapping = {{TemplateMapping
+                | mapToClass = TennisTournament
+                | header = 0
+                }}
+ }}
+
+ {{Condition
+ | templateProperty = charte
+ | operator = equals
+ | value = Temporaire 
+ | mapping = 
+   {{TemplateMapping |mapToClass = Event |header = 0 }}
+ }}
+
+{{Condition
+| operator = otherwise
+| mapping =
+   {{TemplateMapping |mapToClass = SportsEvent |header = 0 }}
+}}
+
+| defaultMappings =
         {{PropertyMapping | templateProperty = lieu | ontologyProperty = city }}
         {{PropertyMapping | templateProperty = lieu | ontologyProperty = country }}
+        {{PropertyMapping | templateProperty = nation | ontologyProperty = country }}
         {{PropertyMapping | templateProperty = date | ontologyProperty = date }}
         {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
         {{PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage }}
         {{PropertyMapping | templateProperty = compétition suivante | ontologyProperty = followingEvent }}
         {{PropertyMapping | templateProperty = compétition précédente | ontologyProperty = previousEvent }}
         {{PropertyMapping | templateProperty = sport | ontologyProperty = sport }}
-        {{PropertyMapping | templateProperty = participants | ontologyProperty = numberOfPeopleAttending }}
+        {{PropertyMapping | templateProperty = type  | ontologyProperty = type }}
+        {{PropertyMapping | templateProperty = catégorie | ontologyProperty = category }}
+        {{PropertyMapping | templateProperty = affluence | ontologyProperty = numberOfPeopleAttending }}
         {{PropertyMapping | templateProperty = organisateur | ontologyProperty = organisation}}
         {{PropertyMapping | templateProperty = titre | ontologyProperty = title }}
-        {{PropertyMapping | templateProperty = suivant lien | ontologyProperty = nextEvent }}
-        {{PropertyMapping | templateProperty = précédent lien | ontologyProperty = previousEvent}}
+        {{PropertyMapping | templateProperty = suivant lien | ontologyProperty = followingEvent }}
+        {{PropertyMapping | templateProperty = précédent lien | ontologyProperty = previousEvent }}
+        {{PropertyMapping | templateProperty = vainqueur | ontologyProperty = champion }}
+        {{PropertyMapping | templateProperty = édition | ontologyProperty = rank }}
+        {{PropertyMapping | templateProperty = création | ontologyProperty = foundingDate }}
+        {{PropertyMapping | templateProperty = disparition | ontologyProperty = dateOfAbandonment }}
+        {{PropertyMapping | templateProperty = disciplines  | ontologyProperty = numberOfSports }}
+        {{PropertyMapping | templateProperty = nations  | ontologyProperty = numberOfParticipatingNations }}
+        {{PropertyMapping | templateProperty = nombre d'éditions  | ontologyProperty = numberOfSeasons }}
+        {{PropertyMapping | templateProperty = site  | ontologyProperty = numberOfLocations }}
+        {{PropertyMapping | templateProperty = équipes  | ontologyProperty = numberOfTeams }}
+        {{PropertyMapping | templateProperty = matchs joués | ontologyProperty = numberOfMatches }}
+        {{PropertyMapping | templateProperty = buts  | ontologyProperty = numberOfGoals }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Conflit militaire</title><ns>210</ns><id>7460</id><revision><id>26643</id><timestamp>2013-06-28T15:09:36Z</timestamp><text>{{TemplateMapping 
 | mapToClass = MilitaryConflict 
 | mappings = 
@@ -3181,25 +3550,25 @@
         {{PropertyMapping | templateProperty = régions | ontologyProperty = region }}
         {{PropertyMapping | templateProperty = villes | ontologyProperty = city }}
         {{PropertyMapping | templateProperty = date d'arrestation | ontologyProperty = arrestDate }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Cycliste</title><ns>210</ns><id>5855</id><revision><id>27915</id><timestamp>2013-07-18T14:24:57Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Cycliste</title><ns>210</ns><id>5855</id><revision><id>35411</id><timestamp>2014-06-22T22:16:11Z</timestamp><text>{{TemplateMapping
 | mapToClass = Cyclist 
 | mappings = 
         {{ PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
         {{ PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
         {{ PropertyMapping | templateProperty = prénom | ontologyProperty = foaf:givenName }}
         {{ PropertyMapping | templateProperty = surnom | ontologyProperty = foaf:nick }}
-        {{ PropertyMapping | templateProperty = datenaissance | ontologyProperty = birthDate }}
-        {{ PropertyMapping | templateProperty = date_décès | ontologyProperty = deathDate }}
+        {{ PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate }}
+        {{ PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
         {{ PropertyMapping | templateProperty = pays | ontologyProperty = nationality }}
         {{ PropertyMapping | templateProperty = équipe | ontologyProperty = currentTeam }}
-        {{ PropertyMapping | templateProperty = type_coureur  | ontologyProperty = cyclistGenre }}
+        {{ PropertyMapping | templateProperty = type coureur  | ontologyProperty = cyclistGenre }}
         {{IntermediateNodeMapping
         | nodeClass = SportsTeam
         | correspondingProperty = amateurTeam
         | mappings =
-           {{PropertyMapping | templateProperty = équipes_amateur  | ontologyProperty = team }}
+           {{PropertyMapping | templateProperty = équipes amateur  | ontologyProperty = team }}
            {{DateIntervalMapping
-              | templateProperty          = années_amateur 
+              | templateProperty          = années amateur 
               | startDateOntologyProperty = activeYearsStartYear
               | endDateOntologyProperty   = activeYearsEndYear
            }}
@@ -3208,9 +3577,9 @@
         | nodeClass = SportsTeam
         | correspondingProperty = proTeam
         | mappings =
-           {{PropertyMapping | templateProperty = équipes_pro  | ontologyProperty = team }}
+           {{PropertyMapping | templateProperty = équipes pro  | ontologyProperty = team }}
            {{DateIntervalMapping
-              | templateProperty          = années_pro 
+              | templateProperty          = années pro 
               | startDateOntologyProperty = activeYearsStartYear
               | endDateOntologyProperty   = activeYearsEndYear
            }}
@@ -3219,46 +3588,22 @@
         | nodeClass = SportsTeam
         | correspondingProperty = leadTeam
         | mappings =
-           {{PropertyMapping | templateProperty = équipes_dirigées  | ontologyProperty = team }}
+           {{PropertyMapping | templateProperty = équipes dirigées  | ontologyProperty = team }}
            {{DateIntervalMapping
-              | templateProperty          = années_direction
+              | templateProperty          = années direction
               | startDateOntologyProperty = activeYearsStartYear
               | endDateOntologyProperty   = activeYearsEndYear
            }}
         }}
-        {{IntermediateNodeMapping
-        | nodeClass = SportsTeam
-        | correspondingProperty = amateurTeam
-        | mappings =
-           {{PropertyMapping | templateProperty = equipes_amateur  | ontologyProperty = team }}
-           {{DateIntervalMapping
-              | templateProperty          = annees_amateur 
-              | startDateOntologyProperty = activeYearsStartYear
-              | endDateOntologyProperty   = activeYearsEndYear
-           }}
-        }}
-        {{IntermediateNodeMapping
-        | nodeClass = SportsTeam
-        | correspondingProperty = proTeam
-        | mappings =
-           {{PropertyMapping | templateProperty = equipes_pro  | ontologyProperty = team }}
-           {{DateIntervalMapping
-              | templateProperty          = annees_pro 
-              | startDateOntologyProperty = activeYearsStartYear
-              | endDateOntologyProperty   = activeYearsEndYear
-           }}
-        }}
-        {{IntermediateNodeMapping
-        | nodeClass = SportsTeam
-        | correspondingProperty = leadTeam
-        | mappings =
-           {{PropertyMapping | templateProperty = equipes_dirigees  | ontologyProperty = team }}
-           {{DateIntervalMapping
-              | templateProperty          = annees_direction
-              | startDateOntologyProperty = activeYearsStartYear
-              | endDateOntologyProperty   = activeYearsEndYear
-           }}
-        }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Distinction</title><ns>210</ns><id>9559</id><revision><id>35408</id><timestamp>2014-06-22T21:31:26Z</timestamp><text>{{TemplateMapping 
+| mapToClass = Decoration 
+| mappings = 
+        {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = création | ontologyProperty = dct:created }}
+        {{PropertyMapping | templateProperty = création | ontologyProperty = creationYear }}
+        {{PropertyMapping | templateProperty = création | ontologyProperty = creator }}
+        {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
+        {{PropertyMapping | templateProperty = statut | ontologyProperty = status }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Département d'outre-mer</title><ns>210</ns><id>7019</id><revision><id>28079</id><timestamp>2013-08-27T09:13:27Z</timestamp><text>{{TemplateMapping 
 | mapToClass = OverseasDepartment 
 | mappings = 
@@ -3467,30 +3812,71 @@
            {{PropertyMapping | templateProperty = argent CN | ontologyProperty = numberOfSilverMedalsWon }}
            {{PropertyMapping | templateProperty = bronze CN | ontologyProperty = numberOfBronzeMedalsWon }}
         }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Footballeur</title><ns>210</ns><id>4388</id><revision><id>27919</id><timestamp>2013-07-18T15:48:53Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Footballeur</title><ns>210</ns><id>4388</id><revision><id>35505</id><timestamp>2014-06-28T11:59:51Z</timestamp><text>{{TemplateMapping
 | mapToClass = SoccerPlayer
 | mappings =
 	{{PropertyMapping | templateProperty = nom_du_joueur | ontologyProperty = foaf:name }}
         {{PropertyMapping | templateProperty = nom | ontologyProperty = birthName }}
+        {{PropertyMapping | templateProperty = nom de naissance | ontologyProperty = birthName }}
 	{{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
         {{PropertyMapping | templateProperty = club_actuel | ontologyProperty = currentTeam }}
+        {{PropertyMapping | templateProperty = club actuel | ontologyProperty = currentTeam }}
 	{{PropertyMapping | templateProperty = numero_en_club | ontologyProperty = number }}
+	{{PropertyMapping | templateProperty = numéro_en_club | ontologyProperty = number }}
+	{{PropertyMapping | templateProperty = numéro en club | ontologyProperty = number }}
         {{DateIntervalMapping
           | templateProperty          = période pro 
           | startDateOntologyProperty = activeYearsStartYear
           | endDateOntologyProperty   = activeYearsEndYear
         }}
         {{PropertyMapping | templateProperty = date_de_naissance | ontologyProperty = birthDate }}
+        {{PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate }}
 	{{PropertyMapping | templateProperty = ville | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace }}
         {{PropertyMapping | templateProperty = pays | ontologyProperty = nationality }}
+        {{PropertyMapping | templateProperty = nationalité | ontologyProperty = nationality }}
+        {{PropertyMapping | templateProperty = nation sportive | ontologyProperty = nationality }}
 	{{PropertyMapping | templateProperty = date_de_décès | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
 	{{PropertyMapping | templateProperty = lieu_de_décès | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace }}
         {{PropertyMapping | templateProperty = taille | ontologyProperty = height | unit = Length}}
-        {{PropertyMapping | templateProperty = poids | ontologyProperty = weight | unit = kilogram }}
 	{{PropertyMapping | templateProperty = position | ontologyProperty = position }}
         {{PropertyMapping | templateProperty = pied | ontologyProperty = foot }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Gare</title><ns>210</ns><id>5865</id><revision><id>19040</id><timestamp>2012-07-29T14:54:53Z</timestamp><text>{{TemplateMapping
+        {{PropertyMapping | templateProperty = date de mise à jour | ontologyProperty = updated }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Gare</title><ns>210</ns><id>5865</id><revision><id>35415</id><timestamp>2014-06-23T21:49:22Z</timestamp><text>{{TemplateMapping
 | mapToClass = RailwayStation
+| mappings =
+        {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = ville | ontologyProperty = city }}
+        {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+
+        {{PropertyMapping | templateProperty = exploitant | ontologyProperty = operator }}
+        {{PropertyMapping | templateProperty = propriétaire | ontologyProperty = owner }}
+        {{PropertyMapping | templateProperty = lignes | ontologyProperty = servingRailwayLine }}
+        {{PropertyMapping | templateProperty = services | ontologyProperty = servingRailwayLine }}
+        {{PropertyMapping | templateProperty = voies | ontologyProperty = numberOfTracks }}
+        {{PropertyMapping | templateProperty = titre corresp 1 | ontologyProperty = otherServingLines }}
+        {{PropertyMapping | templateProperty = titre corresp 2 | ontologyProperty = otherServingLines }}
+        {{PropertyMapping | templateProperty = titre corresp 3 | ontologyProperty = otherServingLines }}
+        {{PropertyMapping | templateProperty = titre corresp 4 | ontologyProperty = otherServingLines }}
+        {{PropertyMapping | templateProperty = transit | ontologyProperty = passengersPerYear }}
+        {{PropertyMapping | templateProperty = zone | ontologyProperty = fareZone }}
+
+        {{PropertyMapping | templateProperty = mise en service | ontologyProperty = openingDate }}
+        {{PropertyMapping | templateProperty = mise en service | ontologyProperty = openingYear }}
+        {{PropertyMapping | templateProperty = ouverture | ontologyProperty = openingDate }}
+        {{PropertyMapping | templateProperty = ouverture | ontologyProperty = openingYear }}
+        {{PropertyMapping | templateProperty = fermeture | ontologyProperty = closingDate }}
+        {{PropertyMapping | templateProperty = fermeture | ontologyProperty = closingYear }}
+        {{PropertyMapping | templateProperty = architecte | ontologyProperty = architect }}
+        {{PropertyMapping | templateProperty = protection | ontologyProperty = heritageRegister }}
+
+        {{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
+        {{PropertyMapping | templateProperty = altitude | ontologyProperty = elevation }}
+
+        {{PropertyMapping | templateProperty = commons | ontologyProperty = picturesCommonsCategory }}
+
 }}</text></revision></page><page><title>Mapping fr:Infobox Golfeur</title><ns>210</ns><id>7644</id><revision><id>27314</id><timestamp>2013-07-10T11:23:36Z</timestamp><text>{{ TemplateMapping 
 | mapToClass = GolfPlayer 
 | mappings = 
@@ -3515,6 +3901,45 @@
         {{ PropertyMapping | templateProperty = usopen | ontologyProperty = usopenWins }}
         {{ PropertyMapping | templateProperty = british | ontologyProperty = britishWins }}
         {{ PropertyMapping | templateProperty = pga | ontologyProperty = pgaWins }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Gratte-ciel</title><ns>210</ns><id>9585</id><revision><id>35510</id><timestamp>2014-06-28T15:34:58Z</timestamp><text>{{TemplateMapping
+| mapToClass = Skyscraper
+| mappings =
+	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = subdivision3 | ontologyProperty = city }}
+	{{PropertyMapping | templateProperty = quartier | ontologyProperty = borough }}
+	{{PropertyMapping | templateProperty = adresse | ontologyProperty = address }}
+	{{PropertyMapping | templateProperty = style | ontologyProperty = buildingType }}
+	{{PropertyMapping | templateProperty = statut | ontologyProperty = status }}
+	{{PropertyMapping | templateProperty = propriétaire | ontologyProperty = owner }}
+	{{PropertyMapping | templateProperty = architecte | ontologyProperty = architect }}
+	{{PropertyMapping | templateProperty = ingénieur | ontologyProperty = construction }}
+	{{PropertyMapping | templateProperty = contracteur | ontologyProperty = contractor }}
+	{{DateIntervalMapping 
+	   | templateProperty          = construction 
+	   | startDateOntologyProperty = buildingStartYear
+	   | endDateOntologyProperty   = buildingEndYear 
+	}}
+	{{PropertyMapping | templateProperty = inauguration | ontologyProperty = openingDate }}
+	{{PropertyMapping | templateProperty = inauguration | ontologyProperty = openingYear }}
+	{{PropertyMapping | templateProperty = rénovation | ontologyProperty = rebuildingDate }}
+	{{PropertyMapping | templateProperty = rénovation | ontologyProperty = rebuildingYear }}
+	{{PropertyMapping | templateProperty = démolition | ontologyProperty = demolitionDate }}
+	{{PropertyMapping | templateProperty = démolition | ontologyProperty = demolitionYear }}
+	{{PropertyMapping | templateProperty = étages | ontologyProperty = floorCount }}
+	{{PropertyMapping | templateProperty = toit | ontologyProperty = roofHeight }}
+	{{PropertyMapping | templateProperty = dernier étage | ontologyProperty = topFloorHeight }}
+	{{PropertyMapping | templateProperty = antenne flèche | ontologyProperty = towerHeight }}
+	{{GeocoordinatesMapping
+	   | latitude         = latitude
+	   | longitude        = longitude
+	}}
+	{{PropertyMapping | templateProperty = usage | ontologyProperty = currentlyUsedFor }}
+	{{PropertyMapping | templateProperty = occupant | ontologyProperty = tenant }}
+	{{PropertyMapping | templateProperty = ascenseurs | ontologyProperty = elevatorCount }}
+	{{PropertyMapping | templateProperty = superficie | ontologyProperty = floorArea | unit = Area }}
+	{{PropertyMapping | templateProperty = site officiel | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = coût | ontologyProperty = cost | unit = Currency }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Guitare</title><ns>210</ns><id>7469</id><revision><id>26637</id><timestamp>2013-06-28T15:02:12Z</timestamp><text>{{TemplateMapping
 | mapToClass = Guitar
 | mappings = 
@@ -3597,7 +4022,7 @@
            {{PropertyMapping | templateProperty = argent CN | ontologyProperty = numberOfSilverMedalsWon }}
            {{PropertyMapping | templateProperty = bronze CN | ontologyProperty = numberOfBronzeMedalsWon }}
         }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Géographique (pays)</title><ns>210</ns><id>7045</id><revision><id>27815</id><timestamp>2013-07-16T14:27:36Z</timestamp><text>{{TemplateMapping 
+}}</text></revision></page><page><title>Mapping fr:Infobox Géographique (pays)</title><ns>210</ns><id>7045</id><revision><id>35511</id><timestamp>2014-06-28T16:28:38Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Country 
 | mappings = 
         {{PropertyMapping | templateProperty = carte | ontologyProperty = map }}
@@ -3613,7 +4038,7 @@
         }}
         {{PropertyMapping | templateProperty = terres | ontologyProperty = landPercentage }} 
         {{PropertyMapping | templateProperty = eau | ontologyProperty = waterPercentage }}
-        {{PropertyMapping | templateProperty = côte | ontologyProperty = coastLength }}
+        {{PropertyMapping | templateProperty = côtes | ontologyProperty = coastLength }}
         {{PropertyMapping | templateProperty = frontières | ontologyProperty = frontierLength }}  
         {{IntermediateNodeMapping
         | nodeClass = Altitude
@@ -3863,32 +4288,46 @@
 	{{PropertyMapping | templateProperty =  pct_mgr | ontologyProperty = victoryPercentageAsMgr }}
         {{PropertyMapping | templateProperty =  Équipes | ontologyProperty = teamManager }}
         {{PropertyMapping | templateProperty =  HOFannée | ontologyProperty = hof }}	
-}}</text></revision></page><page><title>Mapping fr:Infobox Joueur de basket-ball</title><ns>210</ns><id>5862</id><revision><id>27339</id><timestamp>2013-07-10T13:08:21Z</timestamp><text>{{TemplateMapping 
+}}</text></revision></page><page><title>Mapping fr:Infobox Joueur de basket-ball</title><ns>210</ns><id>5862</id><revision><id>35418</id><timestamp>2014-06-23T22:50:31Z</timestamp><text>{{TemplateMapping 
 | mapToClass = BasketballPlayer 
 | mappings = 
+        {{ PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
         {{ PropertyMapping | templateProperty = nom_du_joueur | ontologyProperty = foaf:name }}
         {{ PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
+        {{ PropertyMapping | templateProperty = nom de naissance | ontologyProperty = birthName }}
         {{ PropertyMapping | templateProperty = nom_complet | ontologyProperty = birthName }}
+        {{ PropertyMapping | templateProperty = nationalité | ontologyProperty = nationality }}
         {{ PropertyMapping | templateProperty = pays | ontologyProperty = nationality }}
+        {{ PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate }}
         {{ PropertyMapping | templateProperty = date_de_naissance | ontologyProperty = birthDate }}
+        {{ PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace }}
         {{ PropertyMapping | templateProperty = ville | ontologyProperty = birthPlace }}
+        {{ PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
         {{ PropertyMapping | templateProperty = date_de_deces | ontologyProperty = deathDate }}
+        {{ PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace }}
         {{ PropertyMapping | templateProperty = lieu_de_deces | ontologyProperty = deathPlace }}
         {{ PropertyMapping | templateProperty = taille | ontologyProperty = height | unit = Length }}
         {{ PropertyMapping | templateProperty = poids | ontologyProperty = weight | unit = Kilogram }}
         {{ PropertyMapping | templateProperty = surnom | ontologyProperty = foaf:nick }}
+        {{ PropertyMapping | templateProperty = club actuel | ontologyProperty = currentTeam }}
         {{ PropertyMapping | templateProperty = club_actuel | ontologyProperty = currentTeam }}
+        {{ PropertyMapping | templateProperty = numéro en club | ontologyProperty = number }}
         {{ PropertyMapping | templateProperty = numero_en_club | ontologyProperty = number }}
         {{ PropertyMapping | templateProperty = position | ontologyProperty = position }}
         {{IntermediateNodeMapping
         | nodeClass = SportsEvent
         | correspondingProperty = juniorSeason
         | mappings =
+           {{PropertyMapping | templateProperty = saison junior | ontologyProperty = season }}
            {{PropertyMapping | templateProperty = saison_junior | ontologyProperty = season }}
+           {{PropertyMapping | templateProperty = club junior | ontologyProperty = juniorTeam }}
            {{PropertyMapping | templateProperty = club_junior | ontologyProperty = juniorTeam }}
         }}
+        {{ PropertyMapping | templateProperty = année draft | ontologyProperty = draftYear }}
         {{ PropertyMapping | templateProperty = annee_draft | ontologyProperty = draftYear }}
+        {{ PropertyMapping | templateProperty = position draft | ontologyProperty = draftPosition }}
         {{ PropertyMapping | templateProperty = position_draft | ontologyProperty = draftPosition }}
+        {{ PropertyMapping | templateProperty = franchise draft | ontologyProperty = draftTeam }}
         {{ PropertyMapping | templateProperty = franchise_draft | ontologyProperty = draftTeam }}
         {{IntermediateNodeMapping
         | nodeClass = SportsEvent
@@ -3896,25 +4335,34 @@
         | mappings =
            {{PropertyMapping | templateProperty = saison | ontologyProperty = season }}
            {{PropertyMapping | templateProperty = club | ontologyProperty = team }}
+           {{ PropertyMapping | templateProperty = points club | ontologyProperty = teamPoint }}
            {{ PropertyMapping | templateProperty = points_club | ontologyProperty = teamPoint }}
         }}
         {{IntermediateNodeMapping
         | nodeClass = SportsEvent
         | correspondingProperty = nationalSelection
         | mappings =
+           {{PropertyMapping | templateProperty = année sélection | ontologyProperty = selectionYear }}
            {{PropertyMapping | templateProperty = annee_selection | ontologyProperty = selectionYear }}
+           {{PropertyMapping | templateProperty = équipe nationale | ontologyProperty = nationalTeam }}
            {{PropertyMapping | templateProperty = equipe_nationale | ontologyProperty = nationalTeam }}
+           {{ PropertyMapping | templateProperty = points sélection | ontologyProperty = selectionPoint }}
            {{ PropertyMapping | templateProperty = points_selection | ontologyProperty = selectionPoint }}
         }}
         {{IntermediateNodeMapping
         | nodeClass = SportsEvent
         | correspondingProperty = managerSeason
         | mappings =
+           {{PropertyMapping | templateProperty = saison entraîneur | ontologyProperty = season }}
            {{PropertyMapping | templateProperty = saison_entraineur | ontologyProperty = season }}
+           {{PropertyMapping | templateProperty = club entraîneur | ontologyProperty = teamManager }}
            {{PropertyMapping | templateProperty = club_entraineur | ontologyProperty = teamManager }}
         }}
+        {{ PropertyMapping | templateProperty = NCBHOF année | ontologyProperty = ncbhof }}
         {{ PropertyMapping | templateProperty = NCBHOFannée | ontologyProperty = ncbhof }}
+        {{ PropertyMapping | templateProperty = HOF année | ontologyProperty = hof }}
         {{ PropertyMapping | templateProperty = HOFannée | ontologyProperty = hof }}
+        {{ PropertyMapping | templateProperty = FIBAHOF année | ontologyProperty = fibahof }}
         {{ PropertyMapping | templateProperty = FIBAHOFannée | ontologyProperty = fibahof }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Joueur de football américain</title><ns>210</ns><id>7679</id><revision><id>27341</id><timestamp>2013-07-10T13:11:11Z</timestamp><text>{{TemplateMapping
 | mapToClass = AmericanFootballPlayer
@@ -4067,24 +4515,34 @@
         {{ PropertyMapping | templateProperty = Fed Cup | ontologyProperty = fedCup }}
         {{ PropertyMapping | templateProperty = World Team Cup | ontologyProperty = worldTeamCup }}
         {{ PropertyMapping | templateProperty = Hopman Cup | ontologyProperty = hopmanCup }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Joueur de volley-ball</title><ns>210</ns><id>7693</id><revision><id>27990</id><timestamp>2013-08-05T08:24:13Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Joueur de volley-ball</title><ns>210</ns><id>7693</id><revision><id>35429</id><timestamp>2014-06-24T22:25:39Z</timestamp><text>{{TemplateMapping
 | mapToClass = VolleyballPlayer
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
         {{PropertyMapping | templateProperty = nom_complet | ontologyProperty = birthName }}
-        {{PropertyMapping | templateProperty = pays | ontologyProperty = nationality }}
+        {{PropertyMapping | templateProperty = nom de naissance | ontologyProperty = birthName }}
+        {{PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate }}
         {{PropertyMapping | templateProperty = date_de_naissance | ontologyProperty = birthDate }}
-        {{PropertyMapping | templateProperty = ville | ontologyProperty = birthPlace }}
+        {{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace }}
+        {{PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
         {{PropertyMapping | templateProperty = date_de_décès | ontologyProperty = deathDate }}
+        {{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace }}
 	{{PropertyMapping | templateProperty = lieu_de_décès | ontologyProperty = deathPlace }}
+        {{PropertyMapping | templateProperty = nationalité | ontologyProperty = nationality }}
+        {{PropertyMapping | templateProperty = pays | ontologyProperty = nationality }}
+        {{PropertyMapping | templateProperty = ville | ontologyProperty = birthPlace }}
         {{PropertyMapping | templateProperty = taille | ontologyProperty = height | unit = Length}}
         {{PropertyMapping | templateProperty = poids | ontologyProperty = weight | unit = Kilogram}}
         {{PropertyMapping | templateProperty = surnom | ontologyProperty = foaf:nick }}
+        {{PropertyMapping | templateProperty = hauteur attaque | ontologyProperty = heightAttack}}
         {{PropertyMapping | templateProperty = hauteur_attaque | ontologyProperty = heightAttack}}
+        {{PropertyMapping | templateProperty = hauteur contre | ontologyProperty = heightAgainst}}
         {{PropertyMapping | templateProperty = hauteur_contre | ontologyProperty = heightAgainst}}
         {{PropertyMapping | templateProperty = latéralité | ontologyProperty = laterality }}
+        {{PropertyMapping | templateProperty = club actuel | ontologyProperty = currentTeam }}
         {{PropertyMapping | templateProperty = club_actuel | ontologyProperty = currentTeam }}
+	{{PropertyMapping | templateProperty = numéro en club | ontologyProperty = number }}
 	{{PropertyMapping | templateProperty = numero_en_club | ontologyProperty = number }}
 	{{PropertyMapping | templateProperty = position | ontologyProperty = position }}
         
@@ -4227,11 +4685,28 @@
         {{PropertyMapping | templateProperty = idées_remarquables | ontologyProperty = knownFor }}
         {{PropertyMapping | templateProperty = 	œuvres_principales | ontologyProperty = created }}
         {{PropertyMapping | templateProperty = 	adjectifs_dérivés | ontologyProperty = derivedWord }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Livre</title><ns>210</ns><id>4462</id><revision><id>15186</id><timestamp>2011-09-16T09:05:40Z</timestamp><text>{{TemplateMapping
-| mapToClass = Book
-| mappings = 
+}}</text></revision></page><page><title>Mapping fr:Infobox Livre</title><ns>210</ns><id>4462</id><revision><id>35539</id><timestamp>2014-06-29T18:32:26Z</timestamp><text>{{ConditionalMapping
+| cases =
+  {{Condition
+  | templateProperty = théatre_fr
+  | operator         = isSet
+  | mapping          = {{TemplateMapping | mapToClass = Play | header = 0}}
+  }}
+  {{Condition
+  | templateProperty = datethéatre_fr
+  | operator         = isSet
+  | mapping          = {{TemplateMapping | mapToClass = Play | header = 0}}
+  }}
+  {{Condition
+  | operator = otherwise
+  | mapping  = {{TemplateMapping | mapToClass = Book | header = 0}}
+  }}
+
+| defaultMappings =
  {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
  {{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name }}
+ {{PropertyMapping | templateProperty = titre_orig | ontologyProperty = foaf:name }}
+ {{PropertyMapping | templateProperty = titre_orig | ontologyProperty = originalTitle }}
  {{PropertyMapping | templateProperty = traducteur | ontologyProperty = translator }}
  {{PropertyMapping | templateProperty = auteur | ontologyProperty = author }}
  {{PropertyMapping | templateProperty = dessinateur | ontologyProperty = illustrator }}
@@ -4240,15 +4715,21 @@
  {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
  {{PropertyMapping | templateProperty = série | ontologyProperty = series }}
  {{PropertyMapping | templateProperty = genre | ontologyProperty = literaryGenre }}
- &lt;!-- use dc:publisher instead --&gt;
+ {{PropertyMapping | templateProperty = éditeur | ontologyProperty = dc:publisher }}
  {{PropertyMapping | templateProperty = éditeur | ontologyProperty = publisher }}
+ {{PropertyMapping | templateProperty = éditeur_orig | ontologyProperty = firstPublisher }}
  {{PropertyMapping | templateProperty = dateparution | ontologyProperty = publicationDate }}
+ {{PropertyMapping | templateProperty = dateparution_orig | ontologyProperty = firstPublicationDate }}
  {{PropertyMapping | templateProperty = lieuparution | ontologyProperty = country }}
  {{PropertyMapping | templateProperty = type_média | ontologyProperty = mediaType }}
  {{PropertyMapping | templateProperty = pages | ontologyProperty = numberOfPages }}
+ {{PropertyMapping | templateProperty = préface | ontologyProperty = prefaceBy }}
  {{PropertyMapping | templateProperty = isbn | ontologyProperty = isbn }}
  {{PropertyMapping | templateProperty = précédent | ontologyProperty = previousWork }}
  {{PropertyMapping | templateProperty = suivant | ontologyProperty = subsequentWork }}
+ {{PropertyMapping | templateProperty = datethéatre_fr | ontologyProperty = premiereDate }}
+ {{PropertyMapping | templateProperty = datethéatre_fr | ontologyProperty = premiereYear }}
+ {{PropertyMapping | templateProperty = théatre_fr | ontologyProperty = premierePlace }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Localité de France</title><ns>210</ns><id>7104</id><revision><id>28083</id><timestamp>2013-08-27T09:23:49Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Locality 
 | mappings = 
@@ -4295,10 +4776,9 @@
         {{PropertyMapping | templateProperty = gentilé | ontologyProperty = peopleName }} 
         {{PropertyMapping | templateProperty = siteweb | ontologyProperty = foaf:homepage }} 
         {{PropertyMapping | templateProperty = géoloc-département | ontologyProperty = geolocDepartment }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Logiciel</title><ns>210</ns><id>6555</id><revision><id>26605</id><timestamp>2013-06-28T14:14:55Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Logiciel</title><ns>210</ns><id>6555</id><revision><id>35431</id><timestamp>2014-06-24T22:38:15Z</timestamp><text>{{TemplateMapping
 | mapToClass = Software
 | mappings =
-     {{PropertyMapping | templateProperty = Nom | ontologyProperty = foaf:name }}
      {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name  }}
      {{PropertyMapping | templateProperty = image | ontologyProperty = foaf:depiction }}
      {{PropertyMapping | templateProperty = licence | ontologyProperty = license }}
@@ -4310,11 +4790,15 @@
      {{PropertyMapping | templateProperty = date de première version | ontologyProperty = releaseDate  }}
      {{PropertyMapping | templateProperty = date de mise à jour | ontologyProperty = latestReleaseDate  }}
      {{PropertyMapping | templateProperty = logo | ontologyProperty = foaf:logo  }}
+     {{PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage  }}
      {{PropertyMapping | templateProperty = environnements | ontologyProperty = operatingSystem }}
      {{PropertyMapping | templateProperty = environnement | ontologyProperty = operatingSystem }}
      {{PropertyMapping | templateProperty = os | ontologyProperty = operatingSystem }}
      {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
      {{PropertyMapping | templateProperty = genre | ontologyProperty = type }}
+     {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
+     {{PropertyMapping | templateProperty = langues | ontologyProperty = language }}
+     {{PropertyMapping | templateProperty = langage de programmation | ontologyProperty = programmingLanguage }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Mannequin</title><ns>210</ns><id>7747</id><revision><id>27950</id><timestamp>2013-07-31T09:45:36Z</timestamp><text>{{TemplateMapping
 | mapToClass = Model
 | mappings =
@@ -4500,7 +4984,7 @@
         | mappings =
            {{PropertyMapping | templateProperty = superficie | ontologyProperty = value }} 
         }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Monument</title><ns>210</ns><id>4464</id><revision><id>20172</id><timestamp>2012-12-14T11:00:33Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Monument</title><ns>210</ns><id>4464</id><revision><id>35506</id><timestamp>2014-06-28T12:06:44Z</timestamp><text>{{TemplateMapping
 | mapToClass = Monument
 | mappings = 
  {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
@@ -4511,19 +4995,33 @@
  {{PropertyMapping | templateProperty = date de construction | ontologyProperty = yearOfConstruction }}
  {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
  {{PropertyMapping | templateProperty = architecte | ontologyProperty = architect }}
+ {{PropertyMapping | templateProperty = style | ontologyProperty = architecturalStyle }}
+ {{PropertyMapping | templateProperty = classement | ontologyProperty = heritageRegister }}
  {{PropertyMapping | templateProperty = nom local | ontologyProperty = foaf:name }}
  {{PropertyMapping | templateProperty = hauteur | ontologyProperty = height }}
- {{PropertyMapping | templateProperty = lien commune | ontologyProperty = foaf:homepage }}
+ {{PropertyMapping | templateProperty = destination initiale | ontologyProperty = initiallyUsedFor }}
+ {{PropertyMapping | templateProperty = destination actuelle | ontologyProperty = currentlyUsedFor }}
  {{PropertyMapping | templateProperty = site | ontologyProperty = foaf:homepage }}
+ {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
  {{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Musique (artiste)</title><ns>210</ns><id>4386</id><revision><id>27362</id><timestamp>2013-07-10T14:04:10Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Musique (artiste)</title><ns>210</ns><id>4386</id><revision><id>35509</id><timestamp>2014-06-28T12:17:47Z</timestamp><text>{{ConditionalMapping
 | cases =
+ {{Condition
+    | templateProperty = charte
+    | operator = contains
+    | value = vocal
+    | mapping = {{TemplateMapping
+                | mapToClass = Singer
+                | header = 0
+                }}
+ }}
  {{Condition
     | templateProperty = charte
     | operator = contains
     | value = groupe
     | mapping = {{TemplateMapping
                 | mapToClass = Band
+                | header = 0
                 }}
  }}
  {{Condition
@@ -4532,6 +5030,7 @@
     | value = instrumentiste
     | mapping = {{TemplateMapping
                 | mapToClass = Instrumentalist
+                | header = 0
                 }}
  }}
  {{Condition
@@ -4540,6 +5039,16 @@
     | value = scène
     | mapping = {{TemplateMapping
                 | mapToClass = BackScene
+                | header = 0
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = contains
+    | value = classique
+    | mapping = {{TemplateMapping
+                | mapToClass = ClassicalMusicArtist
+                | header = 0
                 }}
  }}
 
@@ -4547,6 +5056,7 @@
     | operator = otherwise
     | mapping = {{TemplateMapping
                 | mapToClass = MusicalArtist
+                | header = 0
                 }}
  }}
 
@@ -4555,14 +5065,15 @@
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
         {{PropertyMapping | templateProperty = nom de naissance | ontologyProperty = birthName }}
         {{PropertyMapping | templateProperty = nom alias | ontologyProperty = foaf:nick }}
+        {{PropertyMapping | templateProperty = surnom | ontologyProperty = foaf:nick }}
         {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
         {{PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate }}
-        {{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace }}
-        {{PropertyMapping | templateProperty = pays origine | ontologyProperty = nationality }}
+        {{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace | select = first }}
+        {{PropertyMapping | templateProperty = pays d'origine | ontologyProperty = nationality }}
         {{PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
-        {{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace }}
-        {{PropertyMapping | templateProperty = profession | ontologyProperty = occupation }}
-        {{PropertyMapping | templateProperty = profession autre | ontologyProperty = occupation }}
+        {{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace | select = first }}
+        {{PropertyMapping | templateProperty = profession | ontologyProperty = profession }}
+        {{PropertyMapping | templateProperty = profession autre | ontologyProperty = profession }}
         {{DateIntervalMapping
           | templateProperty          = années actives
           | startDateOntologyProperty = activeYearsStartYear
@@ -4581,28 +5092,145 @@
 | mappings =
     {{PropertyMapping | templateProperty = période | ontologyProperty = duration }}
     {{PropertyMapping | templateProperty = capacité | ontologyProperty = numberOfPeopleAttending }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Musique (œuvre)</title><ns>210</ns><id>4387</id><revision><id>27268</id><timestamp>2013-07-09T15:17:25Z</timestamp><text>{{TemplateMapping
-| mapToClass = Album
-| mappings =
+}}</text></revision></page><page><title>Mapping fr:Infobox Musique (œuvre)</title><ns>210</ns><id>4387</id><revision><id>35483</id><timestamp>2014-06-27T21:42:33Z</timestamp><text>{{ConditionalMapping
+| cases =
+ {{Condition
+    | templateProperty = charte
+    | operator = contains
+    | value = album
+    | mapping = {{TemplateMapping
+                | mapToClass = Album
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = durée | ontologyProperty = albumRuntime | unit = minute }}
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = contains
+    | value = single
+    | mapping = {{TemplateMapping
+                | mapToClass = Single
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = album | ontologyProperty = album }}
+                	{{PropertyMapping | templateProperty = face A | ontologyProperty = aSide }}
+                	{{PropertyMapping | templateProperty = face B | ontologyProperty = bSide }}
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = equals
+    | value = chanson
+    | mapping = {{TemplateMapping
+                | mapToClass = Song
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = album | ontologyProperty = album }}
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = equals
+    | value = live
+    | mapping = {{TemplateMapping
+                | mapToClass = Album
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = durée | ontologyProperty = albumRuntime | unit = minute }}
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = equals
+    | value = compilation
+    | mapping = {{TemplateMapping
+                | mapToClass = Album
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = durée | ontologyProperty = albumRuntime | unit = minute }}
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = contains
+    | value = bande originale
+    | mapping = {{TemplateMapping
+                | mapToClass = Album
+                | correspondingClass = Film
+                | correspondingProperty = movie
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = durée | ontologyProperty = albumRuntime | unit = minute }}
+                	{{PropertyMapping | templateProperty = film | ontologyProperty = related }}
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = equals
+    | value = EP
+    | mapping = {{TemplateMapping
+                | mapToClass = Album
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = durée | ontologyProperty = albumRuntime | unit = minute }}
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = equals
+    | value = extended play
+    | mapping = {{TemplateMapping
+                | mapToClass = Album
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = durée | ontologyProperty = albumRuntime | unit = minute }}
+                }}
+ }}
+ {{Condition
+    | templateProperty = charte
+    | operator = equals
+    | value = maxi
+    | mapping = {{TemplateMapping
+                | mapToClass = Album
+                | header = 0
+                | mappings =
+                	{{PropertyMapping | templateProperty = durée | ontologyProperty = albumRuntime | unit = minute }}
+                }}
+ }}
+
+{{Condition
+| operator = otherwise
+| mapping =
+   {{TemplateMapping |mapToClass = MusicalWork }}
+}}
+
+| defaultMappings =
+	{{PropertyMapping | templateProperty = charte | ontologyProperty = musicFormat }}
 	{{PropertyMapping | templateProperty = format | ontologyProperty = format }}
         {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = producteur | ontologyProperty = producer }}
 	{{PropertyMapping | templateProperty = critique | ontologyProperty = review }}
 	{{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = album | ontologyProperty = type }}
 	{{PropertyMapping | templateProperty = artiste | ontologyProperty = artist }}
-        {{PropertyMapping | templateProperty = sorti | ontologyProperty = releaseDate }}
+	{{PropertyMapping | templateProperty = sorti | ontologyProperty = releaseDate }}
 	{{PropertyMapping | templateProperty = enregistré | ontologyProperty = recordDate }}
 	{{PropertyMapping | templateProperty = enregistré lieu | ontologyProperty = recordedIn }}
 	{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
-	{{PropertyMapping | templateProperty = durée | ontologyProperty = albumRuntime | unit = minute }}
-	{{PropertyMapping | templateProperty = Language | ontologyProperty = language }}
+	{{PropertyMapping | templateProperty = durée | ontologyProperty = runtime | unit = minute }}
 	{{PropertyMapping | templateProperty = label | ontologyProperty = recordLabel }}
 	{{PropertyMapping | templateProperty = album précédent  | ontologyProperty = previousWork }}
 	{{PropertyMapping | templateProperty = album suivant | ontologyProperty = subsequentWork }}
+	{{PropertyMapping | templateProperty = single précédent  | ontologyProperty = previousWork }}
+	{{PropertyMapping | templateProperty = single suivant | ontologyProperty = subsequentWork }}
+	{{PropertyMapping | templateProperty = piste précédente  | ontologyProperty = follows }}
+	{{PropertyMapping | templateProperty = piste suivante | ontologyProperty = followedBy }}
         {{PropertyMapping | templateProperty = compositeur | ontologyProperty = composer }}
-	{{PropertyMapping | templateProperty = auteur | ontologyProperty = lyrics }}
-	{{PropertyMapping | templateProperty = auteur-compositeur | ontologyProperty = lyrics }}
+	{{PropertyMapping | templateProperty = auteur | ontologyProperty = writer }}
+	{{PropertyMapping | templateProperty = auteur-compositeur | ontologyProperty = writer }}
+	{{PropertyMapping | templateProperty = auteur-compositeur | ontologyProperty = composer }}
+	{{PropertyMapping | templateProperty = édition | ontologyProperty = publisher }}
+	{{PropertyMapping | templateProperty = classement | ontologyProperty = rank }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Musique classique (personnalité)</title><ns>210</ns><id>5925</id><revision><id>28132</id><timestamp>2013-08-31T18:27:08Z</timestamp><text>&lt;!-- For an overview over all known types see: http://fr.wikipedia.org/wiki/Mod%C3%A8le:Infobox_Musique_classique_(personnalit%C3%A9)#Charte_graphique --&gt;
 {{ConditionalMapping
 
@@ -4675,15 +5303,17 @@
 
 	{{PropertyMapping | templateProperty = charte | ontologyProperty = genre }}
 	{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Musée</title><ns>210</ns><id>5214</id><revision><id>17335</id><timestamp>2012-04-20T14:26:55Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Musée</title><ns>210</ns><id>5214</id><revision><id>35432</id><timestamp>2014-06-24T22:53:10Z</timestamp><text>{{TemplateMapping
 | mapToClass = Museum
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = nommusée | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = nom local | ontologyProperty = alternativeName }}
 	{{PropertyMapping | templateProperty = adresse | ontologyProperty = address }}
 	{{PropertyMapping | templateProperty = ville | ontologyProperty = city }}
 	{{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
 	{{PropertyMapping | templateProperty = collections | ontologyProperty = collection }}
+	{{PropertyMapping | templateProperty = œuvres  | ontologyProperty = numberOfCollectionItems }}
 	{{PropertyMapping | templateProperty = site | ontologyProperty = foaf:homepage }}
 	{{PropertyMapping | templateProperty = visiteurs | ontologyProperty = numberOfVisitors }}
 	{{PropertyMapping | templateProperty = conservateur | ontologyProperty = curator }}
@@ -4691,10 +5321,12 @@
 	{{PropertyMapping | templateProperty = ouverture | ontologyProperty = openingDate }}
 	{{PropertyMapping | templateProperty = fermeture | ontologyProperty = closingDate }}
 
-{{GeocoordinatesMapping | latitude = latitude | longitude = longitude 
-| latitudeDirection  = lat_dir | latitudeDegrees    = lat_deg | latitudeMinutes    = lat_min | latitudeSeconds    = lat_sec
-| longitudeDirection = lon_dir | longitudeDegrees   = lon_deg | longitudeMinutes   = lon_min | longitudeSeconds   = lon_sec
-}}
+	{{GeocoordinatesMapping | latitude = latitude | longitude = longitude }}
+        {{IntermediateNodeMapping | nodeClass = Area | correspondingProperty = area
+        | mappings =
+           {{PropertyMapping | templateProperty = superficie | ontologyProperty = value }} 
+        }}
+
 
 	&lt;!--{{PropertyMapping | templateProperty = location | ontologyProperty = location }}
 	
@@ -4798,6 +5430,50 @@
           | startDateOntologyProperty = activeYearsStartYear
           | endDateOntologyProperty   = activeYearsEndYear
         }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Organisation</title><ns>210</ns><id>9680</id><revision><id>35699</id><timestamp>2014-06-30T21:27:37Z</timestamp><text>{{ TemplateMapping | mapToClass = Organisation 
+| mappings = 
+    {{ PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = ancien nom | ontologyProperty = formerName }}
+    {{ PropertyMapping | templateProperty = création | ontologyProperty = formationDate }}
+    {{ PropertyMapping | templateProperty = création | ontologyProperty = formationYear }}
+    {{ PropertyMapping | templateProperty = dissolution | ontologyProperty = extinctionDate }}
+    {{ PropertyMapping | templateProperty = dissolution | ontologyProperty = extinctionYear }}
+    {{ PropertyMapping | templateProperty = siège | ontologyProperty = headquarter }}
+    {{ PropertyMapping | templateProperty = région | ontologyProperty = region }}
+    {{ PropertyMapping | templateProperty = langue | ontologyProperty = language }}
+    {{IntermediateNodeMapping
+       | nodeClass = PersonFunction
+       | correspondingProperty = leaderFunction
+       | mappings =
+            {{ PropertyMapping | templateProperty = dirigeant | ontologyProperty = person }}
+            {{ PropertyMapping | templateProperty = dirigeant | ontologyProperty = personName }}
+            {{ PropertyMapping | templateProperty = titre dirigeant | ontologyProperty = title }}
+    }}
+    {{IntermediateNodeMapping
+       | nodeClass = PersonFunction
+       | correspondingProperty = leaderFunction
+       | mappings =
+            {{ PropertyMapping | templateProperty = dirigeant2 | ontologyProperty = person }}
+            {{ PropertyMapping | templateProperty = dirigeant2 | ontologyProperty = personName }}
+            {{ PropertyMapping | templateProperty = titre dirigeant2 | ontologyProperty = title }}
+    }}
+    {{IntermediateNodeMapping
+       | nodeClass = PersonFunction
+       | correspondingProperty = leaderFunction
+       | mappings =
+            {{ PropertyMapping | templateProperty = dirigeant3 | ontologyProperty = person }}
+            {{ PropertyMapping | templateProperty = dirigeant3 | ontologyProperty = personName }}
+            {{ PropertyMapping | templateProperty = titre dirigeant3 | ontologyProperty = title }}
+    }}
+    {{ PropertyMapping | templateProperty = personne clé | ontologyProperty = keyPerson }}
+    {{ PropertyMapping | templateProperty = budget | ontologyProperty = endowment }}
+    {{ PropertyMapping | templateProperty = effectifs | ontologyProperty = numberOfStaff }}
+    {{ PropertyMapping | templateProperty = membre | ontologyProperty = numberOfMembers }}
+    {{ PropertyMapping | templateProperty = affiliation | ontologyProperty = affiliation }}
+    {{ PropertyMapping | templateProperty = type | ontologyProperty = type }}
+    {{ PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage }}
+    {{ PropertyMapping | templateProperty = devise | ontologyProperty = motto }}
+    {{GeocoordinatesMapping | latitude = latitude | longitude = longitude }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Parti politique</title><ns>210</ns><id>7472</id><revision><id>28268</id><timestamp>2013-09-05T15:34:13Z</timestamp><text>{{TemplateMapping
 | mapToClass = PoliticalParty
 | mappings =
@@ -4844,6 +5520,22 @@
         {{PropertyMapping | templateProperty = danse originale compétition | ontologyProperty = originalDanseCompetition}}
         {{PropertyMapping | templateProperty = score danse libre | ontologyProperty = freeDanseScore}}
         {{PropertyMapping | templateProperty = danse libre compétition | ontologyProperty = freeScoreCompetition}}
+}}</text></revision></page><page><title>Mapping fr:Infobox Patrimoine mondial</title><ns>210</ns><id>9596</id><revision><id>35545</id><timestamp>2014-06-29T20:33:02Z</timestamp><text>{{TemplateMapping
+| mapToClass = WorldHeritageSite
+| correspondingClass    = PopulatedPlace
+| correspondingProperty = unesco
+| mappings =
+	{{PropertyMapping | templateProperty = Nom | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = ID | ontologyProperty = id }}
+	{{PropertyMapping | templateProperty = Pays | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = Région | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = Type | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = Critères | ontologyProperty = criteria }}
+	{{PropertyMapping | templateProperty = Année | ontologyProperty = activeYearsStartYear }}
+	{{PropertyMapping | templateProperty = Retrait | ontologyProperty = activeYearsEndYear }}
+	{{PropertyMapping | templateProperty = Autre protection | ontologyProperty = heritageRegister }}
+	{{PropertyMapping | templateProperty = Superficie | ontologyProperty = areaTotal }}
+	{{GeocoordinatesMapping | latitude = Latitude | longitude = Longitude }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Pays</title><ns>210</ns><id>5095</id><revision><id>28084</id><timestamp>2013-08-27T09:31:45Z</timestamp><text>{{TemplateMapping
 | mapToClass = Country
 | mappings =
@@ -5121,7 +5813,7 @@
 	{{PropertyMapping | templateProperty = début_carrière_ent | ontologyProperty = managerYearsStartYear }}
 	{{PropertyMapping | templateProperty = fin_carrière_ent | ontologyProperty = managerYearsEndYear }}
 	{{PropertyMapping | templateProperty = statut_entraineur | ontologyProperty = statusManager }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Personnalité militaire</title><ns>210</ns><id>6548</id><revision><id>27383</id><timestamp>2013-07-10T14:50:23Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Personnalité militaire</title><ns>210</ns><id>6548</id><revision><id>35508</id><timestamp>2014-06-28T12:11:35Z</timestamp><text>{{TemplateMapping
 | mapToClass = MilitaryPerson
 | mappings = 
         {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name}}
@@ -5129,14 +5821,14 @@
         {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption}}
         {{PropertyMapping | templateProperty = surnom | ontologyProperty = foaf:nick}}
         {{PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate}}
-        {{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace}}
+        {{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace | select = first}}
         {{PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate}}
-        {{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace}}
+        {{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace | select = first}}
         {{PropertyMapping | templateProperty = date mort au combat | ontologyProperty = deadInFightDate}}
-        {{PropertyMapping | templateProperty = lieu mort au combat | ontologyProperty = deadInFightPlace}}
+        {{PropertyMapping | templateProperty = lieu mort au combat | ontologyProperty = deadInFightPlace | select = first}}
         {{PropertyMapping | templateProperty = âge au décès | ontologyProperty = deathAge}}
         {{PropertyMapping | templateProperty = origine | ontologyProperty = nationality}}
-        {{PropertyMapping | templateProperty = allegeance | ontologyProperty = allegiance}}
+        {{PropertyMapping | templateProperty = allégeance | ontologyProperty = allegiance}}
         {{PropertyMapping | templateProperty = grade | ontologyProperty = militaryRank}}
         {{PropertyMapping | templateProperty = arme | ontologyProperty = army}}
         {{PropertyMapping | templateProperty = début de carrière | ontologyProperty = activeYearsStartYear}}
@@ -5359,27 +6051,142 @@
            {{PropertyMapping | templateProperty = Deuxième #5 | ontologyProperty = secondPlace }}
            {{PropertyMapping | templateProperty = Troisième #5 | ontologyProperty = thirdPlace }}
         }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Politicien</title><ns>210</ns><id>3448</id><revision><id>27401</id><timestamp>2013-07-10T15:31:30Z</timestamp><text>{{TemplateMapping 
-| mapToClass = Politician
-| mappings = 
+}}</text></revision></page><page><title>Mapping fr:Infobox Politicien</title><ns>210</ns><id>3448</id><revision><id>35377</id><timestamp>2014-06-19T21:41:07Z</timestamp><text>{{ConditionalMapping
+| cases =
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = roi d 
+    | mapping = {{TemplateMapping
+                | mapToClass = Royalty
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = empereur
+    | mapping = {{TemplateMapping
+                | mapToClass = Royalty
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = vice-président
+    | mapping = {{TemplateMapping
+                | mapToClass = VicePresident
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = premier-ministre
+    | mapping = {{TemplateMapping
+                | mapToClass = PrimeMinister
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = président du conseil
+    | mapping = {{TemplateMapping
+                | mapToClass = PrimeMinister
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = président du gouvernement
+    | mapping = {{TemplateMapping
+                | mapToClass = PrimeMinister
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = président
+    | mapping = {{TemplateMapping
+                | mapToClass = President
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = sénateur
+    | mapping = {{TemplateMapping
+                | mapToClass = Senator
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = député
+    | mapping = {{TemplateMapping
+                | mapToClass = Deputy
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = gouverneur
+    | mapping = {{TemplateMapping
+                | mapToClass = Governor
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = chancelier
+    | mapping = {{TemplateMapping
+                | mapToClass = Chancellor
+                }}
+ }}
+ {{Condition
+    | templateProperty = fonction1
+    | operator = contains
+    | value = maire
+    | mapping = {{TemplateMapping
+                | mapToClass = Mayor
+                }}
+ }}
+
+{{Condition
+| operator = otherwise
+| mapping =
+   {{TemplateMapping |mapToClass = Politician }}
+}}
+
+| defaultMappings =
         {{ PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+        {{ PropertyMapping | templateProperty = surnom | ontologyProperty = foaf:nick }}
         {{ PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
     {{IntermediateNodeMapping
       | nodeClass = PersonFunction
       | correspondingProperty = occupation
       | mappings =
         {{PropertyMapping | templateProperty = fonction1 | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = fonction1 | ontologyProperty = category }}
         {{ PropertyMapping | templateProperty = depuis le fonction1 | ontologyProperty = functionStartDate }}
         {{ PropertyMapping | templateProperty = a partir du fonction1 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = à partir du fonction1 | ontologyProperty = activeYearsStartYear }}
         {{ PropertyMapping | templateProperty = jusqu'au fonction1 | ontologyProperty = activeYearsEndYear }}
+        {{ PropertyMapping | templateProperty = a partir du fonction1 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = à partir du fonction1 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction1 | ontologyProperty = activeYearsEndDate }}
         {{ PropertyMapping | templateProperty = élection1 | ontologyProperty = electionDate }}     
         {{ PropertyMapping | templateProperty = président 1 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = président de la république 1 | ontologyProperty = president }}
         {{ PropertyMapping | templateProperty = vice-président 1 | ontologyProperty = vicePresident }}
         {{ PropertyMapping | templateProperty = premier ministre 1 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du conseil 1 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du gouvernement 1 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = chancelier 1 | ontologyProperty = primeMinister }}
         {{ PropertyMapping | templateProperty = gouvernement 1 | ontologyProperty = government }}
         {{ PropertyMapping | templateProperty = législature 1 | ontologyProperty = termOfOffice }}
         {{ PropertyMapping | templateProperty = groupe parlementaire 1 | ontologyProperty = parliamentaryGroup }}
         {{ PropertyMapping | templateProperty = coalition 1 | ontologyProperty = coalition }}
+        {{ PropertyMapping | templateProperty = monarque 1 | ontologyProperty = monarch }}
+        {{ PropertyMapping | templateProperty = gouverneur 1 | ontologyProperty = governor }}
         {{ PropertyMapping | templateProperty = prédécesseur 1 | ontologyProperty = predecessor }}
         {{ PropertyMapping | templateProperty = successeur 1 | ontologyProperty = successor }}
     }}
@@ -5388,17 +6195,27 @@
       | correspondingProperty = occupation
       | mappings =
         {{PropertyMapping | templateProperty = fonction2 | ontologyProperty = title }}
-        {{ PropertyMapping | templateProperty = depuis le fonction2 | ontologyProperty = activeYearsStartYear }}
+        {{PropertyMapping | templateProperty = fonction2 | ontologyProperty = category }}
+        {{ PropertyMapping | templateProperty = depuis le fonction2 | ontologyProperty = functionStartDate }}
         {{ PropertyMapping | templateProperty = a partir du fonction2 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = à partir du fonction2 | ontologyProperty = activeYearsStartYear }}
         {{ PropertyMapping | templateProperty = jusqu'au fonction2 | ontologyProperty = activeYearsEndYear }}
+        {{ PropertyMapping | templateProperty = a partir du fonction2 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = à partir du fonction2 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction2 | ontologyProperty = activeYearsEndDate }}
         {{ PropertyMapping | templateProperty = élection2 | ontologyProperty = electionDate }}     
         {{ PropertyMapping | templateProperty = président 2 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = président de la république 2 | ontologyProperty = president }}
         {{ PropertyMapping | templateProperty = vice-président 2 | ontologyProperty = vicePresident }}
         {{ PropertyMapping | templateProperty = premier ministre 2 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du conseil 2 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du gouvernement 2 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = chancelier 2 | ontologyProperty = primeMinister }}
         {{ PropertyMapping | templateProperty = gouvernement 2 | ontologyProperty = government }}
         {{ PropertyMapping | templateProperty = législature 2 | ontologyProperty = termOfOffice }}
         {{ PropertyMapping | templateProperty = groupe parlementaire 2 | ontologyProperty = parliamentaryGroup }}
         {{ PropertyMapping | templateProperty = coalition 2 | ontologyProperty = coalition }}
+        {{ PropertyMapping | templateProperty = monarque 2 | ontologyProperty = monarch }}
         {{ PropertyMapping | templateProperty = prédécesseur 2 | ontologyProperty = predecessor }}
         {{ PropertyMapping | templateProperty = successeur 2 | ontologyProperty = successor }}
     }}
@@ -5407,17 +6224,25 @@
       | correspondingProperty = occupation
       | mappings =
         {{PropertyMapping | templateProperty = fonction3 | ontologyProperty = title }}
-        {{ PropertyMapping | templateProperty = depuis le fonction3 | ontologyProperty = activeYearsStartYear }}
+        {{PropertyMapping | templateProperty = fonction3 | ontologyProperty = category }}
+        {{ PropertyMapping | templateProperty = depuis le fonction3 | ontologyProperty = functionStartDate }}
         {{ PropertyMapping | templateProperty = a partir du fonction3 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = à partir du fonction3 | ontologyProperty = activeYearsStartYear }}
         {{ PropertyMapping | templateProperty = jusqu'au fonction3 | ontologyProperty = activeYearsEndYear }}
+        {{ PropertyMapping | templateProperty = a partir du fonction3 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = à partir du fonction3 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction3 | ontologyProperty = activeYearsEndDate }}
         {{ PropertyMapping | templateProperty = élection3 | ontologyProperty = electionDate }}     
         {{ PropertyMapping | templateProperty = président 3 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = président de la république 3 | ontologyProperty = president }}
         {{ PropertyMapping | templateProperty = vice-président 3 | ontologyProperty = vicePresident }}
         {{ PropertyMapping | templateProperty = premier ministre 3 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du conseil 3 | ontologyProperty = primeMinister }}
         {{ PropertyMapping | templateProperty = gouvernement 3 | ontologyProperty = government }}
         {{ PropertyMapping | templateProperty = législature 3 | ontologyProperty = termOfOffice }}
         {{ PropertyMapping | templateProperty = groupe parlementaire 3 | ontologyProperty = parliamentaryGroup }}
         {{ PropertyMapping | templateProperty = coalition 3 | ontologyProperty = coalition }}
+        {{ PropertyMapping | templateProperty = monarque 3 | ontologyProperty = monarch }}
         {{ PropertyMapping | templateProperty = prédécesseur 3 | ontologyProperty = predecessor }}
         {{ PropertyMapping | templateProperty = successeur 3 | ontologyProperty = successor }}
     }}
@@ -5426,16 +6251,25 @@
       | correspondingProperty = occupation
       | mappings =
         {{PropertyMapping | templateProperty = fonction4 | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = fonction4 | ontologyProperty = category }}
+        {{ PropertyMapping | templateProperty = depuis le fonction4 | ontologyProperty = functionStartDate }}
         {{ PropertyMapping | templateProperty = a partir du fonction4 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = à partir du fonction4 | ontologyProperty = activeYearsStartYear }}
         {{ PropertyMapping | templateProperty = jusqu'au fonction4 | ontologyProperty = activeYearsEndYear }}
+        {{ PropertyMapping | templateProperty = a partir du fonction4 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = à partir du fonction4 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction4 | ontologyProperty = activeYearsEndDate }}
         {{ PropertyMapping | templateProperty = élection4 | ontologyProperty = electionDate }}     
         {{ PropertyMapping | templateProperty = président 4 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = président de la république 4 | ontologyProperty = president }}
         {{ PropertyMapping | templateProperty = vice-président 4 | ontologyProperty = vicePresident }}
         {{ PropertyMapping | templateProperty = premier ministre 4 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du conseil 4 | ontologyProperty = primeMinister }}
         {{ PropertyMapping | templateProperty = gouvernement 4 | ontologyProperty = government }}
         {{ PropertyMapping | templateProperty = législature 4 | ontologyProperty = termOfOffice }}
         {{ PropertyMapping | templateProperty = groupe parlementaire 4 | ontologyProperty = parliamentaryGroup }}
         {{ PropertyMapping | templateProperty = coalition 4 | ontologyProperty = coalition }}
+        {{ PropertyMapping | templateProperty = monarque 4 | ontologyProperty = monarch }}
         {{ PropertyMapping | templateProperty = prédécesseur 4 | ontologyProperty = predecessor }}
         {{ PropertyMapping | templateProperty = successeur 4 | ontologyProperty = successor }}
     }}
@@ -5444,16 +6278,25 @@
       | correspondingProperty = occupation
       | mappings =
         {{PropertyMapping | templateProperty = fonction5 | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = fonction5 | ontologyProperty = category }}
+        {{ PropertyMapping | templateProperty = depuis le fonction5 | ontologyProperty = functionStartDate }}
         {{ PropertyMapping | templateProperty = a partir du fonction5 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = à partir du fonction5 | ontologyProperty = activeYearsStartYear }}
         {{ PropertyMapping | templateProperty = jusqu'au fonction5 | ontologyProperty = activeYearsEndYear }}
+        {{ PropertyMapping | templateProperty = a partir du fonction5 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = à partir du fonction5 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction5 | ontologyProperty = activeYearsEndDate }}
         {{ PropertyMapping | templateProperty = élection5 | ontologyProperty = electionDate }}     
         {{ PropertyMapping | templateProperty = président 5 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = président de la république 5 | ontologyProperty = president }}
         {{ PropertyMapping | templateProperty = vice-président 5 | ontologyProperty = vicePresident }}
         {{ PropertyMapping | templateProperty = premier ministre 5 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du conseil 5 | ontologyProperty = primeMinister }}
         {{ PropertyMapping | templateProperty = gouvernement 5 | ontologyProperty = government }}
         {{ PropertyMapping | templateProperty = législature 5 | ontologyProperty = termOfOffice }}
         {{ PropertyMapping | templateProperty = groupe parlementaire 5 | ontologyProperty = parliamentaryGroup }}
         {{ PropertyMapping | templateProperty = coalition 5 | ontologyProperty = coalition }}
+        {{ PropertyMapping | templateProperty = monarque 5 | ontologyProperty = monarch }}
         {{ PropertyMapping | templateProperty = prédécesseur 5 | ontologyProperty = predecessor }}
         {{ PropertyMapping | templateProperty = successeur 5 | ontologyProperty = successor }}
     }}
@@ -5462,31 +6305,102 @@
       | correspondingProperty = occupation
       | mappings =
         {{PropertyMapping | templateProperty = fonction6 | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = fonction6 | ontologyProperty = category }}
+        {{ PropertyMapping | templateProperty = depuis le fonction6 | ontologyProperty = functionStartDate }}
         {{ PropertyMapping | templateProperty = a partir du fonction6 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = à partir du fonction6 | ontologyProperty = activeYearsStartYear }}
         {{ PropertyMapping | templateProperty = jusqu'au fonction6 | ontologyProperty = activeYearsEndYear }}
+        {{ PropertyMapping | templateProperty = a partir du fonction6 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = à partir du fonction6 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction6 | ontologyProperty = activeYearsEndDate }}
         {{ PropertyMapping | templateProperty = élection6 | ontologyProperty = electionDate }}     
         {{ PropertyMapping | templateProperty = président 6 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = président de la république 6 | ontologyProperty = president }}
         {{ PropertyMapping | templateProperty = vice-président 6 | ontologyProperty = vicePresident }}
         {{ PropertyMapping | templateProperty = premier ministre 6 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du conseil 6 | ontologyProperty = primeMinister }}
         {{ PropertyMapping | templateProperty = gouvernement 6 | ontologyProperty = government }}
         {{ PropertyMapping | templateProperty = législature 6 | ontologyProperty = termOfOffice }}
         {{ PropertyMapping | templateProperty = groupe parlementaire 6 | ontologyProperty = parliamentaryGroup }}
         {{ PropertyMapping | templateProperty = coalition 6 | ontologyProperty = coalition }}
-        {{ PropertyMapping | templateProperty = prédécesseur 6| ontologyProperty = predecessor }}
+        {{ PropertyMapping | templateProperty = monarque 6 | ontologyProperty = monarch }}
+        {{ PropertyMapping | templateProperty = prédécesseur 6 | ontologyProperty = predecessor }}
         {{ PropertyMapping | templateProperty = successeur 6 | ontologyProperty = successor }}
     }}
+    {{IntermediateNodeMapping
+      | nodeClass = PersonFunction
+      | correspondingProperty = occupation
+      | mappings =
+        {{PropertyMapping | templateProperty = fonction7 | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = fonction7 | ontologyProperty = category }}
+        {{ PropertyMapping | templateProperty = depuis le fonction7 | ontologyProperty = functionStartDate }}
+        {{ PropertyMapping | templateProperty = a partir du fonction7 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = à partir du fonction7 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction7 | ontologyProperty = activeYearsEndYear }}
+        {{ PropertyMapping | templateProperty = a partir du fonction7 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = à partir du fonction7 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction7 | ontologyProperty = activeYearsEndDate }}
+        {{ PropertyMapping | templateProperty = élection7 | ontologyProperty = electionDate }}     
+        {{ PropertyMapping | templateProperty = président 7 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = président de la république 7 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = vice-président 7 | ontologyProperty = vicePresident }}
+        {{ PropertyMapping | templateProperty = premier ministre 7 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du conseil 7 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = gouvernement 7 | ontologyProperty = government }}
+        {{ PropertyMapping | templateProperty = législature 7 | ontologyProperty = termOfOffice }}
+        {{ PropertyMapping | templateProperty = groupe parlementaire 7 | ontologyProperty = parliamentaryGroup }}
+        {{ PropertyMapping | templateProperty = coalition 7 | ontologyProperty = coalition }}
+        {{ PropertyMapping | templateProperty = monarque 7 | ontologyProperty = monarch }}
+        {{ PropertyMapping | templateProperty = prédécesseur 7 | ontologyProperty = predecessor }}
+        {{ PropertyMapping | templateProperty = successeur 7 | ontologyProperty = successor }}
+    }}
+    {{IntermediateNodeMapping
+      | nodeClass = PersonFunction
+      | correspondingProperty = occupation
+      | mappings =
+        {{PropertyMapping | templateProperty = fonction8 | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = fonction8 | ontologyProperty = category }}
+        {{ PropertyMapping | templateProperty = depuis le fonction8 | ontologyProperty = functionStartDate }}
+        {{ PropertyMapping | templateProperty = a partir du fonction8 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = à partir du fonction8 | ontologyProperty = activeYearsStartYear }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction8 | ontologyProperty = activeYearsEndYear }}
+        {{ PropertyMapping | templateProperty = a partir du fonction8 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = à partir du fonction8 | ontologyProperty = activeYearsStartDate }}
+        {{ PropertyMapping | templateProperty = jusqu'au fonction8 | ontologyProperty = activeYearsEndDate }}
+        {{ PropertyMapping | templateProperty = élection8 | ontologyProperty = electionDate }}     
+        {{ PropertyMapping | templateProperty = président 8 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = président de la république 8 | ontologyProperty = president }}
+        {{ PropertyMapping | templateProperty = vice-président 8 | ontologyProperty = vicePresident }}
+        {{ PropertyMapping | templateProperty = premier ministre 8 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = président du conseil 8 | ontologyProperty = primeMinister }}
+        {{ PropertyMapping | templateProperty = gouvernement 8 | ontologyProperty = government }}
+        {{ PropertyMapping | templateProperty = législature 8 | ontologyProperty = termOfOffice }}
+        {{ PropertyMapping | templateProperty = groupe parlementaire 8 | ontologyProperty = parliamentaryGroup }}
+        {{ PropertyMapping | templateProperty = coalition 8 | ontologyProperty = coalition }}
+        {{ PropertyMapping | templateProperty = monarque 8 | ontologyProperty = monarch }}
+        {{ PropertyMapping | templateProperty = prédécesseur 8 | ontologyProperty = predecessor }}
+        {{ PropertyMapping | templateProperty = successeur 8 | ontologyProperty = successor }}
+    }}
     {{ PropertyMapping | templateProperty = nom naissance | ontologyProperty = birthName }}
+    {{ PropertyMapping | templateProperty = nom de naissance | ontologyProperty = birthName }}
     {{ PropertyMapping | templateProperty = naissance | ontologyProperty = birthDate }}
+    {{ PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate }}
     {{ PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace }}
     {{ PropertyMapping | templateProperty = décès | ontologyProperty = deathDate }}
+    {{ PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
     {{ PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace }}
+    {{ PropertyMapping | templateProperty = lieu du décès | ontologyProperty = deathPlace }}
     {{ PropertyMapping | templateProperty = nationalité | ontologyProperty = nationality }}
     {{ PropertyMapping | templateProperty = parti | ontologyProperty = party }}
+    {{ PropertyMapping | templateProperty = parti politique | ontologyProperty = party }}
     {{ PropertyMapping | templateProperty = entourage | ontologyProperty = relative }}
     {{ PropertyMapping | templateProperty = université | ontologyProperty = university }}
     {{ PropertyMapping | templateProperty = conjoint | ontologyProperty = spouse }}
     {{ PropertyMapping | templateProperty = enfants | ontologyProperty = child }}
-    {{ PropertyMapping | templateProperty = profession | ontologyProperty = occupation }}
+    {{ PropertyMapping | templateProperty = père | ontologyProperty = parent }}
+    {{ PropertyMapping | templateProperty = mère | ontologyProperty = parent }}
+    {{ PropertyMapping | templateProperty = dynastie | ontologyProperty = dynasty }}
+    {{ PropertyMapping | templateProperty = profession | ontologyProperty = profession }}
     {{ PropertyMapping | templateProperty = religion | ontologyProperty = religion }}
     {{ PropertyMapping | templateProperty = résidence | ontologyProperty = residence }}
     {{ PropertyMapping | templateProperty = emblème | ontologyProperty = foaf:logo }}
@@ -5523,18 +6437,27 @@
         {{PropertyMapping | templateProperty = orientation | ontologyProperty = orientation}}
         {{PropertyMapping | templateProperty = signe(s) particulier(s) | ontologyProperty = particularSign}}
         {{PropertyMapping | templateProperty = récompense | ontologyProperty = award}}
-}}</text></revision></page><page><title>Mapping fr:Infobox Presse écrite</title><ns>210</ns><id>7466</id><revision><id>34622</id><timestamp>2014-04-30T20:22:16Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Presse écrite</title><ns>210</ns><id>7466</id><revision><id>35428</id><timestamp>2014-06-24T22:07:37Z</timestamp><text>{{TemplateMapping
 | mapToClass = Newspaper
 | mappings =
-	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-{{PropertyMapping | templateProperty = propriétaire | ontologyProperty = owner }}
-{{PropertyMapping | templateProperty = fondateur | ontologyProperty = founder }}
-{{PropertyMapping | templateProperty = ISSN | ontologyProperty = issn }}
-{{PropertyMapping | templateProperty = OCLC | ontologyProperty = oclc }}
-{{PropertyMapping | templateProperty = diffusion | ontologyProperty = circulation }}
-{{PropertyMapping | templateProperty = périodicité | ontologyProperty = frequencyOfPublication }}
-{{PropertyMapping | templateProperty = autre nom | ontologyProperty = alternativeTitle }}
-{{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+  {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+  {{PropertyMapping | templateProperty = propriétaire | ontologyProperty = owner }}
+  {{PropertyMapping | templateProperty = fondateur | ontologyProperty = founder }}
+  {{PropertyMapping | templateProperty = date de fondation | ontologyProperty = foundingDate }}
+  {{PropertyMapping | templateProperty = date de fondation | ontologyProperty = foundingYear }}
+  {{PropertyMapping | templateProperty = date de fin | ontologyProperty = extinctionDate }}
+  {{PropertyMapping | templateProperty = date de fin | ontologyProperty = extinctionYear }}
+  {{PropertyMapping | templateProperty = rédacteur en chef | ontologyProperty = chiefEditor }}
+  {{PropertyMapping | templateProperty = éditeur | ontologyProperty = dc:publisher }}
+  {{PropertyMapping | templateProperty = ISSN | ontologyProperty = issn }}
+  {{PropertyMapping | templateProperty = OCLC | ontologyProperty = oclc }}
+  {{PropertyMapping | templateProperty = diffusion | ontologyProperty = circulation }}
+  {{PropertyMapping | templateProperty = périodicité | ontologyProperty = frequencyOfPublication }}
+  {{PropertyMapping | templateProperty = autre nom | ontologyProperty = alternativeTitle }}
+  {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+  {{PropertyMapping | templateProperty = ville | ontologyProperty = city }}
+  {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
+  {{PropertyMapping | templateProperty = site | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Préfecture du Japon</title><ns>210</ns><id>7127</id><revision><id>28085</id><timestamp>2013-08-27T09:44:57Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Prefecture 
 | mappings = 
@@ -5575,7 +6498,7 @@
         {{PropertyMapping | templateProperty = arbre | ontologyProperty = tree }} 
         {{PropertyMapping | templateProperty = oiseau | ontologyProperty = bird }} 
         {{PropertyMapping | templateProperty = siteweb | ontologyProperty = foaf:homepage }}  
-}}</text></revision></page><page><title>Mapping fr:Infobox Prélat catholique</title><ns>210</ns><id>6543</id><revision><id>28038</id><timestamp>2013-08-12T12:49:02Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Prélat catholique</title><ns>210</ns><id>6543</id><revision><id>35382</id><timestamp>2014-06-19T23:36:04Z</timestamp><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = titre
@@ -5583,12 +6506,33 @@
     | value = Pape
     | mapping = {{TemplateMapping
                 | mapToClass = Pope
-                }}
+                | mappings =
+                  {{IntermediateNodeMapping
+                  | nodeClass = PersonFunction
+                  | correspondingProperty = occupation
+                  | mappings =
+                     {{ConstantMapping | ontologyProperty = title | value = Pape }}
+                     {{PropertyMapping | templateProperty = début pontificat | ontologyProperty = activeYearsStartYear }}
+                     {{PropertyMapping | templateProperty = fin pontificat | ontologyProperty = activeYearsEndYear }}
+                     {{PropertyMapping | templateProperty = début pontificat | ontologyProperty = activeYearsStartDate }}
+                     {{PropertyMapping | templateProperty = fin pontificat | ontologyProperty = activeYearsEndDate }}
+                     {{PropertyMapping | templateProperty = prédécesseur pape | ontologyProperty = predecessor }}
+                     {{PropertyMapping | templateProperty = successeur pape | ontologyProperty = successor }}
+                  }}
+               }}
  }}
  {{Condition
     | templateProperty = titre
     | operator = equals
     | value = Évêque
+    | mapping = {{TemplateMapping
+                | mapToClass = ChristianBishop
+                }}
+ }}
+ {{Condition
+    | templateProperty = titre
+    | operator = equals
+    | value = Archevêque
     | mapping = {{TemplateMapping
                 | mapToClass = ChristianBishop
                 }}
@@ -5619,21 +6563,38 @@
 | defaultMappings =
   {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
   {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
-  {{PropertyMapping | templateProperty = date naissance   | ontologyProperty = birthDate }}
+  {{PropertyMapping | templateProperty = nom naissance   | ontologyProperty = birthName }}
+  {{PropertyMapping | templateProperty = date naissance  | ontologyProperty = birthDate }}
   {{PropertyMapping | templateProperty = lieu naissance  | ontologyProperty = birthPlace }}
+  {{PropertyMapping | templateProperty = date de naissance  | ontologyProperty = birthDate }}
+  {{PropertyMapping | templateProperty = lieu de naissance  | ontologyProperty = birthPlace }}
+  {{PropertyMapping | templateProperty = naissance  | ontologyProperty = birthDate }}
+  {{PropertyMapping | templateProperty = naissance  | ontologyProperty = birthPlace }}
   {{PropertyMapping | templateProperty = date décès | ontologyProperty = deathDate }}
   {{PropertyMapping | templateProperty = lieu décès | ontologyProperty = deathPlace }}
+  {{PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
+  {{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace }}
+  {{PropertyMapping | templateProperty = décès | ontologyProperty = deathDate }}
+  {{PropertyMapping | templateProperty = décès | ontologyProperty = deathPlace }}
   {{PropertyMapping | templateProperty = ordination | ontologyProperty = ordination }}
   {{PropertyMapping | templateProperty = consécration | ontologyProperty = consecration  }}
-  {{PropertyMapping | templateProperty = creation | ontologyProperty = creationChristianBishop }}
+  {{PropertyMapping | templateProperty = création | ontologyProperty = creationChristianBishop }}
+  {{PropertyMapping | templateProperty = canonisation | ontologyProperty = canonizedDate }}
+  {{PropertyMapping | templateProperty = canonisation | ontologyProperty = canonizedBy }}
+  {{PropertyMapping | templateProperty = béatification | ontologyProperty = beatifiedDate }}
+  {{PropertyMapping | templateProperty = béatification | ontologyProperty = beatifiedBy }}
   {{PropertyMapping | templateProperty = titre cardinalice | ontologyProperty = title }}
+  {{PropertyMapping | templateProperty = évêque | ontologyProperty = title }}
   {{IntermediateNodeMapping
   | nodeClass = PersonFunction
   | correspondingProperty = occupation
   | mappings =
      {{PropertyMapping | templateProperty = ministère 1 | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = ministère 1 | ontologyProperty = category }}
      {{PropertyMapping | templateProperty = date début 1 | ontologyProperty = activeYearsStartYear }}
      {{PropertyMapping | templateProperty = date fin 1 | ontologyProperty = activeYearsEndYear }}
+     {{PropertyMapping | templateProperty = date début 1 | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin 1 | ontologyProperty = activeYearsEndDate }}
      {{PropertyMapping | templateProperty = prédécesseur 1  | ontologyProperty = predecessor }}
      {{PropertyMapping | templateProperty = successeur 1 | ontologyProperty = successor }}
   }}
@@ -5642,8 +6603,11 @@
   | correspondingProperty = occupation
   | mappings =
      {{PropertyMapping | templateProperty = ministère 2 | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = ministère 2 | ontologyProperty = category }}
      {{PropertyMapping | templateProperty = date début 2 | ontologyProperty = activeYearsStartYear }}
      {{PropertyMapping | templateProperty = date fin 2 | ontologyProperty = activeYearsEndYear }}
+     {{PropertyMapping | templateProperty = date début 2 | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin 2 | ontologyProperty = activeYearsEndDate }}
      {{PropertyMapping | templateProperty = prédécesseur 2  | ontologyProperty = predecessor }}
      {{PropertyMapping | templateProperty = successeur 2 | ontologyProperty = successor }}
   }}
@@ -5652,8 +6616,11 @@
   | correspondingProperty = occupation
   | mappings =
      {{PropertyMapping | templateProperty = ministère 3 | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = ministère 3 | ontologyProperty = category }}
      {{PropertyMapping | templateProperty = date début 3 | ontologyProperty = activeYearsStartYear }}
      {{PropertyMapping | templateProperty = date fin 3 | ontologyProperty = activeYearsEndYear }}
+     {{PropertyMapping | templateProperty = date début 3 | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin 3 | ontologyProperty = activeYearsEndDate }}
      {{PropertyMapping | templateProperty = prédécesseur 3  | ontologyProperty = predecessor }}
      {{PropertyMapping | templateProperty = successeur 3 | ontologyProperty = successor }}
   }}
@@ -5662,9 +6629,12 @@
   | correspondingProperty = occupation
   | mappings =
      {{PropertyMapping | templateProperty = ministère 4 | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = ministère 4 | ontologyProperty = category }}
      {{PropertyMapping | templateProperty = date début 4 | ontologyProperty = activeYearsStartYear }}
      {{PropertyMapping | templateProperty = date fin 4 | ontologyProperty = activeYearsEndYear }}
-     {{PropertyMapping | templateProperty = prédécesseur 4  | ontologyProperty = predecessor }}
+      {{PropertyMapping | templateProperty = date début 4 | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin 4 | ontologyProperty = activeYearsEndDate }}
+    {{PropertyMapping | templateProperty = prédécesseur 4  | ontologyProperty = predecessor }}
      {{PropertyMapping | templateProperty = successeur 4 | ontologyProperty = successor }}
   }}
   {{IntermediateNodeMapping
@@ -5672,8 +6642,11 @@
   | correspondingProperty = occupation
   | mappings =
      {{PropertyMapping | templateProperty = ministère 5 | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = ministère 5 | ontologyProperty = category }}
      {{PropertyMapping | templateProperty = date début 5 | ontologyProperty = activeYearsStartYear }}
      {{PropertyMapping | templateProperty = date fin 5 | ontologyProperty = activeYearsEndYear }}
+     {{PropertyMapping | templateProperty = date début 5 | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin 5 | ontologyProperty = activeYearsEndDate }}
      {{PropertyMapping | templateProperty = prédécesseur 5  | ontologyProperty = predecessor }}
      {{PropertyMapping | templateProperty = successeur 5 | ontologyProperty = successor }}
   }}
@@ -5682,8 +6655,11 @@
   | correspondingProperty = occupation
   | mappings =
      {{PropertyMapping | templateProperty = ministère 6 | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = ministère 6 | ontologyProperty = category }}
      {{PropertyMapping | templateProperty = date début 6 | ontologyProperty = activeYearsStartYear }}
      {{PropertyMapping | templateProperty = date fin 6 | ontologyProperty = activeYearsEndYear }}
+     {{PropertyMapping | templateProperty = date début 6 | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin 6 | ontologyProperty = activeYearsEndDate }}
      {{PropertyMapping | templateProperty = prédécesseur 6  | ontologyProperty = predecessor }}
      {{PropertyMapping | templateProperty = successeur 6 | ontologyProperty = successor }}
   }}
@@ -5692,8 +6668,11 @@
   | correspondingProperty = occupation
   | mappings =
      {{PropertyMapping | templateProperty = ministère 7 | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = ministère 7 | ontologyProperty = category }}
      {{PropertyMapping | templateProperty = date début 7 | ontologyProperty = activeYearsStartYear }}
      {{PropertyMapping | templateProperty = date fin 7 | ontologyProperty = activeYearsEndYear }}
+     {{PropertyMapping | templateProperty = date début 7 | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin 7 | ontologyProperty = activeYearsEndDate }}
      {{PropertyMapping | templateProperty = prédécesseur 7  | ontologyProperty = predecessor }}
      {{PropertyMapping | templateProperty = successeur 7 | ontologyProperty = successor }}
   }}
@@ -5702,26 +6681,39 @@
   | correspondingProperty = occupation
   | mappings =
      {{PropertyMapping | templateProperty = ministère 8 | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = ministère 8 | ontologyProperty = category }}
      {{PropertyMapping | templateProperty = date début 8 | ontologyProperty = activeYearsStartYear }}
      {{PropertyMapping | templateProperty = date fin 8 | ontologyProperty = activeYearsEndYear }}
+     {{PropertyMapping | templateProperty = date début 8 | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin 8 | ontologyProperty = activeYearsEndDate }}
      {{PropertyMapping | templateProperty = prédécesseur 8  | ontologyProperty = predecessor }}
      {{PropertyMapping | templateProperty = successeur 8 | ontologyProperty = successor }}
   }}
-  {{PropertyMapping | templateProperty = fonc religieuses | ontologyProperty = occupation }}
-  {{PropertyMapping | templateProperty = fonc laïques | ontologyProperty = occupation }}
+  {{PropertyMapping | templateProperty = fonc religieuses | ontologyProperty = otherFunction }}
+  {{PropertyMapping | templateProperty = fonc laïques | ontologyProperty = otherFunction  }}
+  {{PropertyMapping | templateProperty = évêque | ontologyProperty = otherFunction  }}
   {{PropertyMapping | templateProperty = blason | ontologyProperty = blazon }}
-  {{PropertyMapping | templateProperty = ornements extérieurs | ontologyProperty = externalOrnament}}
+  {{PropertyMapping | templateProperty = blason simple | ontologyProperty = blazon }}
+  {{PropertyMapping | templateProperty = ornement extérieur | ontologyProperty = externalOrnament}}
   {{PropertyMapping | templateProperty = devise | ontologyProperty = motto }}
   {{PropertyMapping | templateProperty = va | ontologyProperty = foaf:homepage }}
   {{PropertyMapping | templateProperty = ch | ontologyProperty = foaf:homepage }}
   {{PropertyMapping | templateProperty = cr | ontologyProperty = foaf:homepage }}
   {{PropertyMapping | templateProperty = ordre | ontologyProperty = domain }}
+  {{IntermediateNodeMapping
+  | nodeClass = PersonFunction
+  | correspondingProperty = occupation
+  | mappings =
+     {{PropertyMapping | templateProperty = charge abbatiale | ontologyProperty = title }}
+     {{PropertyMapping | templateProperty = charge abbatiale | ontologyProperty = category }}
+     {{PropertyMapping | templateProperty = date début abbé | ontologyProperty = activeYearsStartYear }}
+     {{PropertyMapping | templateProperty = date fin abbé | ontologyProperty = activeYearsEndYear }}
+     {{PropertyMapping | templateProperty = date début abbé | ontologyProperty = activeYearsStartDate }}
+     {{PropertyMapping | templateProperty = date fin abbé | ontologyProperty = activeYearsEndDate }}
+     {{PropertyMapping | templateProperty = abbé précédent  | ontologyProperty = predecessor }}
+     {{PropertyMapping | templateProperty = abbé suivant | ontologyProperty = successor }}
+  }}
   {{PropertyMapping | templateProperty = bénédiction abbatiale | ontologyProperty = abbeychurchBlessing  }}
-  {{PropertyMapping | templateProperty = charge abbatiale | ontologyProperty = abbeychurchBlessingCharge }}
-  {{PropertyMapping | templateProperty = date début abbé | ontologyProperty = activeYearsStartYear}}
-  {{PropertyMapping | templateProperty = date fin abbé | ontologyProperty = activeYearsEndYear }}
-  {{PropertyMapping | templateProperty = abbé précédent | ontologyProperty = predecessor }}
-  {{PropertyMapping | templateProperty = abbé suivant | ontologyProperty = successor }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Psychologue</title><ns>210</ns><id>7824</id><revision><id>27404</id><timestamp>2013-07-10T15:40:26Z</timestamp><text>{{TemplateMapping
 | mapToClass = Psychologist
 | mappings =
@@ -5736,19 +6728,18 @@
         {{PropertyMapping | templateProperty = travaux | ontologyProperty = knownFor}}
         {{PropertyMapping | templateProperty = detracteur | ontologyProperty = detractor}}
         {{PropertyMapping | templateProperty = partisan | ontologyProperty = disciple}}
-}}</text></revision></page><page><title>Mapping fr:Infobox Rugbyman</title><ns>210</ns><id>5858</id><revision><id>28040</id><timestamp>2013-08-12T13:17:40Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Rugbyman</title><ns>210</ns><id>5858</id><revision><id>35427</id><timestamp>2014-06-24T21:50:57Z</timestamp><text>{{TemplateMapping
  | mapToClass = RugbyPlayer
  | mappings = 
          {{ PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-         {{ PropertyMapping | templateProperty = description | ontologyProperty = thumbnailCaption }}
-         {{ PropertyMapping | templateProperty = nom_complet | ontologyProperty = birthName }}
-         {{ PropertyMapping | templateProperty = date_de_naissance | ontologyProperty = birthDate }}
-         {{PropertyMapping | templateProperty = ville | ontologyProperty = birthPlace }}
-         {{PropertyMapping | templateProperty = pays | ontologyProperty = nationality }}
-         {{ PropertyMapping | templateProperty = date_de_décès | ontologyProperty = deathDate }}
-         {{ PropertyMapping | templateProperty = ville_de_décès | ontologyProperty = deathPlace }}
+         {{ PropertyMapping | templateProperty = nom complet | ontologyProperty = birthName }}
+         {{ PropertyMapping | templateProperty = nom de naissance | ontologyProperty = birthName }}
+         {{ PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate }}
+         {{PropertyMapping | templateProperty = ville de naissance | ontologyProperty = birthPlace }}
+         {{PropertyMapping | templateProperty = pays de naissance | ontologyProperty = nationality }}
+         {{ PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
+         {{ PropertyMapping | templateProperty = ville de décès | ontologyProperty = deathPlace }}
          {{PropertyMapping | templateProperty = taille | ontologyProperty = height | unit = Length}}
-         {{PropertyMapping | templateProperty = poids | ontologyProperty = weight | unit = Kilogram}}
          {{ PropertyMapping | templateProperty = surnom | ontologyProperty = foaf:nick }}
          {{PropertyMapping | templateProperty = position | ontologyProperty = position}}
          {{IntermediateNodeMapping
@@ -5757,38 +6748,50 @@
          | mappings =
             {{PropertyMapping | templateProperty = saison | ontologyProperty = season }}
             {{PropertyMapping | templateProperty = club | ontologyProperty = team }}
-            {{ PropertyMapping | templateProperty = matchs_points | ontologyProperty = teamPoint }}
+            {{ PropertyMapping | templateProperty = matchs points | ontologyProperty = teamPoint }}
          }}
          {{IntermediateNodeMapping
          | nodeClass = SportsEvent
          | correspondingProperty = juniorSeason
          | mappings =
-            {{PropertyMapping | templateProperty = saison_junior | ontologyProperty = season }}
-            {{PropertyMapping | templateProperty = club_junior | ontologyProperty = juniorTeam }}
+            {{PropertyMapping | templateProperty = saison junior | ontologyProperty = season }}
+            {{PropertyMapping | templateProperty = club junior | ontologyProperty = juniorTeam }}
          }}
          {{IntermediateNodeMapping
          | nodeClass = SportsEvent
          | correspondingProperty = nationalSelection
          | mappings =
-            {{PropertyMapping | templateProperty = annee_nationale | ontologyProperty = selectionYear }}
-            {{PropertyMapping | templateProperty = equipe_nationale | ontologyProperty = nationalTeam }}
-            {{ PropertyMapping | templateProperty = matchs_points_nationale | ontologyProperty = selectionPoint }}
+            {{PropertyMapping | templateProperty = année nationale | ontologyProperty = selectionYear }}
+            {{PropertyMapping | templateProperty = équipe nationale | ontologyProperty = nationalTeam }}
+            {{ PropertyMapping | templateProperty = matchs points nationale | ontologyProperty = selectionPoint }}
          }}
          {{IntermediateNodeMapping
          | nodeClass = SportsEvent
          | correspondingProperty = stateOfOrigin
          | mappings =
-            {{PropertyMapping | templateProperty = annee_state_of_origin | ontologyProperty = stateOfOriginYear }}
-            {{PropertyMapping | templateProperty = equipe_state_of_origin | ontologyProperty = stateOfOriginTeam }}
-            {{ PropertyMapping | templateProperty = matchs_points_state_of_origin | ontologyProperty = stateOfOriginPoint }}
+            {{PropertyMapping | templateProperty = année state of origin | ontologyProperty = stateOfOriginYear }}
+            {{PropertyMapping | templateProperty = équipe state of origin | ontologyProperty = stateOfOriginTeam }}
+            {{ PropertyMapping | templateProperty = matchs points state of origin | ontologyProperty = stateOfOriginPoint }}
          }}
          {{IntermediateNodeMapping
          | nodeClass = SportsEvent
          | correspondingProperty = managerSeason
          | mappings =
-            {{PropertyMapping | templateProperty = saison_entraineur | ontologyProperty = season }}
-            {{PropertyMapping | templateProperty = club_entraineur | ontologyProperty = teamManager }}
+            {{PropertyMapping | templateProperty = saison entraineur | ontologyProperty = season }}
+            {{PropertyMapping | templateProperty = saison entraîneur | ontologyProperty = season }}
+            {{PropertyMapping | templateProperty = club entraineur | ontologyProperty = teamManager }}
+            {{PropertyMapping | templateProperty = club entraîneur | ontologyProperty = teamManager }}
          }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Récompense</title><ns>210</ns><id>9560</id><revision><id>35409</id><timestamp>2014-06-22T21:49:26Z</timestamp><text>{{TemplateMapping 
+| mapToClass = Award 
+| mappings = 
+        {{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = date de création | ontologyProperty = dct:created }}
+        {{PropertyMapping | templateProperty = date de création | ontologyProperty = creationYear }}
+        {{PropertyMapping | templateProperty = site officiel | ontologyProperty = foaf:homepage }}
+        {{PropertyMapping | templateProperty = organisateur | ontologyProperty = organisation }}
+        {{PropertyMapping | templateProperty = nom original | ontologyProperty = originalName }}
+        {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Région de France</title><ns>210</ns><id>2930</id><revision><id>28086</id><timestamp>2013-08-27T09:46:34Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
@@ -6002,22 +7005,64 @@
         {{PropertyMapping | templateProperty = conflits | ontologyProperty = conflict}}
 }}</text></revision></page><page><title>Mapping fr:Infobox Saison de série télévisée</title><ns>210</ns><id>5100</id><revision><id>16788</id><timestamp>2012-03-07T16:36:03Z</timestamp><text>{{TemplateMapping
 | mapToClass = TelevisionSeason
-}}</text></revision></page><page><title>Mapping fr:Infobox Scientifique</title><ns>210</ns><id>7468</id><revision><id>27409</id><timestamp>2013-07-10T15:55:07Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Salle de spectacle</title><ns>210</ns><id>9595</id><revision><id>35542</id><timestamp>2014-06-29T19:50:23Z</timestamp><text>{{ConditionalMapping
+| cases =
+  {{Condition
+  | templateProperty = charte
+  | operator         = equals
+  | value            = théâtre
+  | mapping          = {{TemplateMapping | mapToClass = Theatre | header = 0}}
+  }}
+  {{Condition
+  | templateProperty = charte
+  | operator         = equals
+  | value            = opéra
+  | mapping          = {{TemplateMapping | mapToClass = Theatre | header = 0}}
+  }}
+  {{Condition
+  | operator = otherwise
+  | mapping  = {{TemplateMapping | mapToClass = Venue | header = 0}}
+  }}
+
+| defaultMappings =
+ {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+ {{PropertyMapping | templateProperty = lieu | ontologyProperty = locationCity | select = first }}
+&lt;!-- {{PropertyMapping | templateProperty = lieu | ontologyProperty = locationCountry | select = last }} --&gt;
+ {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
+ {{PropertyMapping | templateProperty = gestion | ontologyProperty = operatedBy }}
+ {{PropertyMapping | templateProperty = structure-mère | ontologyProperty = organisation }}
+ {{PropertyMapping | templateProperty = direction | ontologyProperty = leader }}
+ {{PropertyMapping | templateProperty = résidence | ontologyProperty = tenant }}
+ {{PropertyMapping | templateProperty = places | ontologyProperty = seatingCapacity }}
+ {{PropertyMapping | templateProperty = architecte | ontologyProperty = architect }}
+ {{PropertyMapping | templateProperty = inauguration | ontologyProperty = openingDate }}
+ {{PropertyMapping | templateProperty = inauguration | ontologyProperty = openingYear }}
+ {{PropertyMapping | templateProperty = fermeture | ontologyProperty = closingDate }}
+ {{PropertyMapping | templateProperty = fermeture | ontologyProperty = closingYear }}
+ {{PropertyMapping | templateProperty = anciens noms | ontologyProperty = formerName }}
+ {{PropertyMapping | templateProperty = statut | ontologyProperty = status }}
+ {{PropertyMapping | templateProperty = protection | ontologyProperty = heritageRegister }}
+ {{GeocoordinatesMapping | latitude = latitude | longitude = longitude }}
+ {{PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
+ {{PropertyMapping | templateProperty = surnom | ontologyProperty = alternativeName }}
+ {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Scientifique</title><ns>210</ns><id>7468</id><revision><id>35430</id><timestamp>2014-06-24T22:34:10Z</timestamp><text>{{TemplateMapping
 | mapToClass = Scientist
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
         {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption}}
-        {{PropertyMapping | templateProperty = date naissance | ontologyProperty = birthDate}}
-        {{PropertyMapping | templateProperty = lieu naissance | ontologyProperty = birthPlace}}
-        {{PropertyMapping | templateProperty = pays naissance | ontologyProperty = birthPlace}}
-        {{PropertyMapping | templateProperty = date décès | ontologyProperty = deathDate}}
-        {{PropertyMapping | templateProperty = lieu décès | ontologyProperty = deathPlace}}
+        {{PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate}}
+        {{PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthYear}}
+        {{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace}}
+        {{PropertyMapping | templateProperty = pays de naissance | ontologyProperty = birthPlace}}
+        {{PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate}}
+        {{PropertyMapping | templateProperty = date de décès | ontologyProperty = deathYear}}
+        {{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace}}
         {{PropertyMapping | templateProperty = domicile | ontologyProperty = residence }}
         {{PropertyMapping | templateProperty = nationalité | ontologyProperty = nationality }}
         {{PropertyMapping | templateProperty = champs | ontologyProperty = domain }}
         {{PropertyMapping | templateProperty = institutions | ontologyProperty = institution }}
-        {{PropertyMapping | templateProperty = diplômé | ontologyProperty = university }}
-        {{PropertyMapping | templateProperty = diplômée | ontologyProperty = university }}
+        {{PropertyMapping | templateProperty = diplôme | ontologyProperty = university }}
         {{PropertyMapping | templateProperty = directeur thèse | ontologyProperty = influencedBy }}
         {{PropertyMapping | templateProperty = directrice thèse | ontologyProperty = influencedBy }}
         {{PropertyMapping | templateProperty = étudiants thèse | ontologyProperty = influenced }}
@@ -6059,7 +7104,7 @@
            {{PropertyMapping | templateProperty = superficie | ontologyProperty = value }} 
         }}
         {{PropertyMapping | templateProperty = limites | ontologyProperty = limit }} 
-}}</text></revision></page><page><title>Mapping fr:Infobox Société</title><ns>210</ns><id>4449</id><revision><id>15087</id><timestamp>2011-09-13T16:53:09Z</timestamp><text>{{ TemplateMapping | mapToClass = Company 
+}}</text></revision></page><page><title>Mapping fr:Infobox Société</title><ns>210</ns><id>4449</id><revision><id>35700</id><timestamp>2014-06-30T21:29:12Z</timestamp><text>{{ TemplateMapping | mapToClass = Company 
 | mappings = 
     {{ PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = date de création | ontologyProperty = formationDate }}
@@ -6067,23 +7112,28 @@
     {{ PropertyMapping | templateProperty = fondateur | ontologyProperty = foundedBy }}
     {{ PropertyMapping | templateProperty = date de disparition | ontologyProperty = extinctionDate }}
     {{ PropertyMapping | templateProperty = date de disparition | ontologyProperty = extinctionYear }}
-    {{ PropertyMapping | templateProperty = siège (ville) | ontologyProperty = locationCity }}
-    {{ PropertyMapping | templateProperty = siège (pays) | ontologyProperty = locationCountry }}
-    {{ PropertyMapping | templateProperty = direction actuelle | ontologyProperty = location }}
+    {{ PropertyMapping | templateProperty = date de disparition | ontologyProperty = fate }}
+    {{ PropertyMapping | templateProperty = siège (ville) | ontologyProperty = headquarter }}
+    {{ PropertyMapping | templateProperty = siège (pays) | ontologyProperty = country }}
+    {{ PropertyMapping | templateProperty = direction actuelle | ontologyProperty = ceo }}
     {{ PropertyMapping | templateProperty = personnages-clés | ontologyProperty = keyPerson }}
     {{ PropertyMapping | templateProperty = secteurs d'activités | ontologyProperty = industry }}
     {{ PropertyMapping | templateProperty = produits | ontologyProperty = product }}
     {{ PropertyMapping | templateProperty = services | ontologyProperty = service }}
-    {{ PropertyMapping | templateProperty = chiffre d'affaires | ontologyProperty = operatingIncome | unit = Currency }}
+    {{ PropertyMapping | templateProperty = chiffre d'affaires | ontologyProperty = revenue | unit = Currency }}
     {{ PropertyMapping | templateProperty = résultat net | ontologyProperty = netIncome | unit = Currency }}
-    {{ PropertyMapping | templateProperty = fonds propres | ontologyProperty = revenue | unit = Currency }}
+    {{ PropertyMapping | templateProperty = fonds propres | ontologyProperty = equity | unit = Currency }}
+    {{ PropertyMapping | templateProperty = capitalisation boursière | ontologyProperty = marketCapitalisation | unit = Currency }}
+    {{ PropertyMapping | templateProperty = action | ontologyProperty = codeStockExchange }}
     {{ PropertyMapping | templateProperty = effectif | ontologyProperty = numberOfEmployees }}
     {{ PropertyMapping | templateProperty = société mère | ontologyProperty = parentCompany }}
+    {{ PropertyMapping | templateProperty = forme juridique | ontologyProperty = legalForm }}
+    {{ PropertyMapping | templateProperty = filiales | ontologyProperty = subsidiary }}
+    {{ PropertyMapping | templateProperty = actionnaires | ontologyProperty = owner }}
+    {{ PropertyMapping | templateProperty = actionnaire | ontologyProperty = owner }}
     {{ PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage }}
     {{ PropertyMapping | templateProperty = logo | ontologyProperty = foaf:logo }}
-    {{ PropertyMapping | templateProperty = forme juridique | ontologyProperty = type }}
-    {{ PropertyMapping | templateProperty = filiales | ontologyProperty = subsidiary }}
-    
+    {{ PropertyMapping | templateProperty = slogan | ontologyProperty = slogan }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Sport</title><ns>210</ns><id>5947</id><revision><id>26557</id><timestamp>2013-06-28T12:22:53Z</timestamp><text>{{TemplateMapping
 | mapToClass = Sport
 | mappings =
@@ -6630,7 +7680,7 @@
         {{PropertyMapping | templateProperty = père | ontologyProperty = father }}
         {{PropertyMapping | templateProperty = mère | ontologyProperty = mother }}
         {{PropertyMapping | templateProperty = famille | ontologyProperty = family }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Tournoi de tennis</title><ns>210</ns><id>6387</id><revision><id>22970</id><timestamp>2013-01-15T16:24:55Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Tournoi de tennis</title><ns>210</ns><id>6387</id><revision><id>35401</id><timestamp>2014-06-22T09:30:48Z</timestamp><text>{{TemplateMapping
 | mapToClass = TennisTournament
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
@@ -6651,9 +7701,15 @@
 	{{PropertyMapping | templateProperty = vainqueur double messieurs  | ontologyProperty = championInDoubleMale }}
 	{{PropertyMapping | templateProperty = vainqueur simple messieurs   | ontologyProperty = championInSingleMale }}
 	{{PropertyMapping | templateProperty = vainqueur double dames  | ontologyProperty = championInDoubleFemale }}
-	{{PropertyMapping | templateProperty = vainqueur simple dames   | ontologyProperty = championInSingleMale }}
+	{{PropertyMapping | templateProperty = vainqueur simple dames   | ontologyProperty = championInSingleFemale }}
 	{{PropertyMapping | templateProperty = vainqueur double mixte   | ontologyProperty = championInMixedDouble }}
 
+	{{PropertyMapping | templateProperty = compétition suivante   | ontologyProperty = followingEvent }}
+	{{PropertyMapping | templateProperty = compétition précédente   | ontologyProperty = previousEvent }}
+	{{GeocoordinatesMapping
+	  | latitude         = latitude
+	  | longitude        = longitude
+	}}
 
 
 &lt;!-- Entries seems to be in lower case, but not counted by statistics otherwise --&gt;
@@ -6717,7 +7773,7 @@
         {{ PropertyMapping | templateProperty = séries notables | ontologyProperty = tvShow }}
         {{ PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage }} 
         
-}}</text></revision></page><page><title>Mapping fr:Infobox Unité militaire</title><ns>210</ns><id>7465</id><revision><id>34620</id><timestamp>2014-04-30T19:33:25Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Unité militaire</title><ns>210</ns><id>7465</id><revision><id>35419</id><timestamp>2014-06-23T23:19:52Z</timestamp><text>{{TemplateMapping
 | mapToClass = MilitaryUnit
 | mappings =
 {{PropertyMapping | templateProperty = nom_unite | ontologyProperty = foaf:name }}
@@ -6735,6 +7791,7 @@
 {{PropertyMapping | templateProperty = batailles | ontologyProperty = battle }}
 {{PropertyMapping | templateProperty = anniversaire | ontologyProperty = anniversary }}
 {{PropertyMapping | templateProperty = inscriptions | ontologyProperty = battleHonours }}
+{{PropertyMapping | templateProperty = decorations | ontologyProperty = decoration }}
 {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
 {{PropertyMapping | templateProperty = role | ontologyProperty = role }}
 {{PropertyMapping | templateProperty = effectif | ontologyProperty = numberOfStaff }}
@@ -7504,7 +8561,7 @@
         }}
         {{PropertyMapping | templateProperty = sites touristiques | ontologyProperty = touristicSite }}
         {{PropertyMapping | templateProperty = url | ontologyProperty = foaf:homepage }} 
-}}</text></revision></page><page><title>Mapping fr:Infobox Ville de Bosnie-Herzégovine</title><ns>210</ns><id>5230</id><revision><id>17426</id><timestamp>2012-04-26T15:17:39Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Ville de Bosnie-Herzégovine</title><ns>210</ns><id>5230</id><revision><id>35416</id><timestamp>2014-06-23T22:18:09Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
         {{ConstantMapping | ontologyProperty = country | value = Bosnie-Herzégovine }}
@@ -7513,7 +8570,7 @@
         {{PropertyMapping | templateProperty = cp | ontologyProperty = postalCode }}
 
         {{PropertyMapping | templateProperty = population | ontologyProperty = populationTotal }}
-        {{PropertyMapping | templateProperty = année | ontologyProperty = populationAsOf }}
+        {{PropertyMapping | templateProperty = année_pop | ontologyProperty = populationAsOf }}
         {{PropertyMapping | templateProperty = maire | ontologyProperty = mayor }}
 
         {{PropertyMapping | templateProperty = division | ontologyProperty = locatedInArea }} &lt;!-- Can "nom de division" be taken into account to specify the property ? --&gt;
@@ -7525,12 +8582,17 @@
         {{PropertyMapping | templateProperty = altitude | ontologyProperty = elevation | unit = metre }}
         {{PropertyMapping | templateProperty = superficie | ontologyProperty = area | unit = squareKilometre  }}
 
+{{IntermediateNodeMapping
+  | nodeClass = Municipality
+  | correspondingProperty = municipality
+  | mappings =
         {{PropertyMapping | templateProperty = nomM | ontologyProperty = foaf:name }}
         {{PropertyMapping | templateProperty = maireM | ontologyProperty = mayor }}
         {{PropertyMapping | templateProperty = superficieM | ontologyProperty = area | unit = squareKilometre  }}
         {{PropertyMapping | templateProperty = populationM | ontologyProperty = populationTotal }}
         {{PropertyMapping | templateProperty = annéeM | ontologyProperty = populationAsOf }}
         {{PropertyMapping | templateProperty = siteM | ontologyProperty = foaf:homepage }}
+}}
 
 &lt;!--
         {{PropertyMapping | templateProperty = région | ontologyProperty = region }}
@@ -9292,60 +10354,60 @@
 | mappings =
     {{PropertyMapping | templateProperty = campus | ontologyProperty = campusType }}
     {{PropertyMapping | templateProperty = type | ontologyProperty = denomination }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Écrivain</title><ns>210</ns><id>2926</id><revision><id>27917</id><timestamp>2013-07-18T14:40:24Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Écrivain</title><ns>210</ns><id>2926</id><revision><id>35507</id><timestamp>2014-06-28T12:10:03Z</timestamp><text>{{TemplateMapping
 | mapToClass = Writer
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
 	{{PropertyMapping | templateProperty = nom de naissance | ontologyProperty = birthName }}
-	{{PropertyMapping | templateProperty = nom alias | ontologyProperty = foaf:nick }}
-        {{PropertyMapping | templateProperty = activité | ontologyProperty = occupation }}
+	{{PropertyMapping | templateProperty = surnom | ontologyProperty = foaf:nick }}
+        {{PropertyMapping | templateProperty = activités | ontologyProperty = profession }}
 	{{PropertyMapping | templateProperty = date de naissance | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = lieu de naissance | ontologyProperty = birthPlace | select = first }}
 	{{PropertyMapping | templateProperty = date de décès | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = lieu de décès | ontologyProperty = deathPlace | select = first }}
 	{{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = mouvement | ontologyProperty = movement }}
 	{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
-        {{PropertyMapping | templateProperty = distinctions | ontologyProperty = decoration }}
-        {{PropertyMapping | templateProperty = œuvres | ontologyProperty = created }}
+        {{PropertyMapping | templateProperty = distinctions | ontologyProperty = award }}
+        {{PropertyMapping | templateProperty = œuvres principales | ontologyProperty = notableWork }}
         {{PropertyMapping | templateProperty = adjectifs dérivés | ontologyProperty = derivedWord }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Édifice religieux</title><ns>210</ns><id>5880</id><revision><id>24853</id><timestamp>2013-04-10T21:18:22Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Édifice religieux</title><ns>210</ns><id>5880</id><revision><id>35405</id><timestamp>2014-06-22T20:33:58Z</timestamp><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = type
     | operator = contains
     | value = glise
-    | mapping = {{TemplateMapping | mapToClass = Church }}
+    | mapping = {{TemplateMapping | mapToClass = Church | header=0 }}
  }}
  {{Condition
     | templateProperty = type
     | operator = equals
     | value = Monastère
-    | mapping = {{TemplateMapping | mapToClass = Monastery }}
+    | mapping = {{TemplateMapping | mapToClass = Monastery | header=0 }}
  }}
  {{Condition
     | templateProperty = type
     | operator = equals
     | value = Abbaye
-    | mapping = {{TemplateMapping | mapToClass = Abbey }}
+    | mapping = {{TemplateMapping | mapToClass = Abbey | header=0 }}
  }}
  {{Condition
     | templateProperty = type
     | operator = equals
     | value = Mosquée
-    | mapping = {{TemplateMapping | mapToClass = Mosque }}
+    | mapping = {{TemplateMapping | mapToClass = Mosque | header=0 }}
  }}
  {{Condition
     | templateProperty = type
     | operator = equals
     | value = Synagogue
-    | mapping = {{TemplateMapping | mapToClass = Synagogue }}
+    | mapping = {{TemplateMapping | mapToClass = Synagogue | header=0 }}
  }}
 
 {{Condition
 | operator = otherwise
-| mapping = {{TemplateMapping |mapToClass = ReligiousBuilding }}
+| mapping = {{TemplateMapping | mapToClass = ReligiousBuilding | header=0 }}
 }}
 
 | defaultMappings =
@@ -9356,6 +10418,8 @@
 {{PropertyMapping | templateProperty = architecte  | ontologyProperty = architect }}
 
 {{PropertyMapping | templateProperty = nommonument | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = nomlocal | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = siteweb | ontologyProperty = foaf:homepage }}
 {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
 {{PropertyMapping | templateProperty = région | ontologyProperty = region }}
 {{PropertyMapping | templateProperty = département | ontologyProperty = department }}
@@ -9363,6 +10427,7 @@
 
 {{PropertyMapping | templateProperty = culte | ontologyProperty = religiousOrder }}
 {{PropertyMapping | templateProperty = rattachement | ontologyProperty = affiliation }}
+{{PropertyMapping | templateProperty = classement | ontologyProperty = heritageRegister }}
 
 {{PropertyMapping | templateProperty = photo | ontologyProperty = foaf:depiction }}
 {{PropertyMapping | templateProperty = légende | ontologyProperty = depictionDescription }}
@@ -9610,19 +10675,33 @@
         {{PropertyMapping | templateProperty = nombre_d'îles | ontologyProperty = numberOfIslands }}
         {{PropertyMapping | templateProperty = îles_principales | ontologyProperty = mainIslands }}
         {{PropertyMapping | templateProperty = île_du_point_culminant | ontologyProperty = highestPointIsland }}
-}}</text></revision></page><page><title>Mapping fr:Insérer dynastie</title><ns>210</ns><id>4450</id><revision><id>16962</id><timestamp>2012-03-16T16:37:56Z</timestamp><text>{{TemplateMapping
-| mapToClass = Person
+}}</text></revision></page><page><title>Mapping fr:Insérer dynastie</title><ns>210</ns><id>4450</id><revision><id>35463</id><timestamp>2014-06-25T22:37:49Z</timestamp><text>{{TemplateMapping
+| mapToClass            = owl:Thing
+&lt;!-- Should be corresponding to Person but that doesn't seem to work
+    | mapToClass            = PersonFunction
+    | correspondingClass    = Person
+    | correspondingProperty = occupation
+--&gt;
 | mappings =
-	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = title | ontologyProperty = title }}
+    {{IntermediateNodeMapping
+      | nodeClass = PersonFunction
+      | correspondingProperty = occupation
+      | mappings =
+        {{PropertyMapping | templateProperty = nom | ontologyProperty = title }}
+        {{PropertyMapping | templateProperty = nom | ontologyProperty = category }}
         {{DateIntervalMapping
           | templateProperty          = période
           | startDateOntologyProperty = activeYearsStartYear
           | endDateOntologyProperty   = activeYearsEndYear
         }}
+        {{DateIntervalMapping
+          | templateProperty          = période
+          | startDateOntologyProperty = activeYearsStartDate
+          | endDateOntologyProperty   = activeYearsEndDate
+        }}
 	{{PropertyMapping | templateProperty = avant | ontologyProperty = predecessor }}
 	{{PropertyMapping | templateProperty = après | ontologyProperty = successor }}
-	
+    }}
 }}</text></revision></page><page><title>Mapping fr:Personnage de Disney</title><ns>210</ns><id>7761</id><revision><id>27367</id><timestamp>2013-07-10T14:18:38Z</timestamp><text>{{TemplateMapping
 | mapToClass = DisneyCharacter
 | mappings =
@@ -9642,24 +10721,306 @@
 	{{PropertyMapping | templateProperty = caractère | ontologyProperty = mood }}
 	{{PropertyMapping | templateProperty = alias | ontologyProperty = foaf:nick }}
 	{{PropertyMapping | templateProperty = alias original | ontologyProperty = foaf:nick }}
-}}</text></revision></page><page><title>Mapping fr:Élu</title><ns>210</ns><id>4383</id><revision><id>26357</id><timestamp>2013-06-23T21:14:02Z</timestamp><text>{{TemplateMapping
-| mapToClass = TimePeriod
+}}</text></revision></page><page><title>Mapping fr:Pistes</title><ns>210</ns><id>9574</id><revision><id>35494</id><timestamp>2014-06-27T22:20:13Z</timestamp><text>{{TemplateMapping
+| mapToClass            = TrackList
+| correspondingClass    = Album
+| correspondingProperty = album
+| mappings              =
+   {{PropertyMapping | templateProperty = titre | ontologyProperty = description }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste1 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title1 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero1 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur1 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles1 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique1 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps1 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length1 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note1 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste2 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title2 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero2 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur2 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles2 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique2 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps2 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length2 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note2 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste3 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title3 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero3 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur3 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles3 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique3 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps3 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length3 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note3 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste4 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title4 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero4 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur4 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles4 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique4 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps4 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length4 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note4 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste5 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title5 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero5 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur5 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles5 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique5 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps5 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length5 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note5 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste6 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title6 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero6 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur6 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles6 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique6 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps6 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length6 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note6 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste7 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title7 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero7 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur7 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles7 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique7 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps7 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length7 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note7 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste8 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title8 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero8 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur8 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles8 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique8 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps8 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length8 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note8 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste9 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title9 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero9 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur9 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles9 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique9 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps9 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length9 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note9 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste10 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title10 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero10 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur10 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles10 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique10 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps10 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length10 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note10 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste11 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title11 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero11 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur11 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles11 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique11 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps11 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length11 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note11 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste12 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title12 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero12 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur12 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles12 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique12 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps12 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length12 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note12 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste13 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title13 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero13 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur13 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles13 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique13 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps13 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length13 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note13 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste14 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title14 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero14 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur14 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles14 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique14 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps14 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length14 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note14 | ontologyProperty = comment }}
+   }}
+   {{IntermediateNodeMapping
+   | nodeClass = Song
+   | correspondingProperty = division
+   | mappings =
+       {{PropertyMapping | templateProperty = piste15 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = title15 | ontologyProperty = foaf:name }}
+       {{PropertyMapping | templateProperty = numero15 | ontologyProperty = trackNumber }}
+       {{PropertyMapping | templateProperty = auteur15 | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = tout_ecriture | ontologyProperty = writer }}
+       {{PropertyMapping | templateProperty = paroles15 | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = tout_paroles | ontologyProperty = lyrics }}
+       {{PropertyMapping | templateProperty = musique15 | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = tout_musique | ontologyProperty = composer }}
+       {{PropertyMapping | templateProperty = temps15 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = length15 | ontologyProperty = runtime | unit = minute }}
+       {{PropertyMapping | templateProperty = note15 | ontologyProperty = comment }}
+   }}
+   {{PropertyMapping | templateProperty = total_temps | ontologyProperty = runtime | unit = minute }}
+}}</text></revision></page><page><title>Mapping fr:Écrit</title><ns>210</ns><id>9594</id><revision><id>35536</id><timestamp>2014-06-29T18:02:00Z</timestamp><text>{{TemplateMapping
+| mapToClass            = WrittenWork
+| correspondingClass    = Writer
+| correspondingProperty = author
+| mappings              =
+ {{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name }}
+ {{PropertyMapping | templateProperty = titre fr | ontologyProperty = foaf:name | language = fr}}
+ {{PropertyMapping | templateProperty = année | ontologyProperty = year }}
+ {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
+ {{PropertyMapping | templateProperty = éditeur | ontologyProperty = firstPublisher }}
+ {{PropertyMapping | templateProperty = éditeur fr | ontologyProperty = dc:publisher }}
+ {{PropertyMapping | templateProperty = coauteur | ontologyProperty = author }}
+ {{PropertyMapping | templateProperty = traducteur | ontologyProperty = translator }}
+ {{PropertyMapping | templateProperty = genre | ontologyProperty = literaryGenre }}
+ {{PropertyMapping | templateProperty = isbn | ontologyProperty = isbn }}
+ {{PropertyMapping | templateProperty = commentaire | ontologyProperty = comment }}
+}}</text></revision></page><page><title>Mapping fr:Élu</title><ns>210</ns><id>4383</id><revision><id>35532</id><timestamp>2014-06-29T16:21:11Z</timestamp><text>{{TemplateMapping
+| mapToClass = PoliticalFunction
 | correspondingClass = PopulatedPlace
 | correspondingProperty = municipality
 | mappings =
-	{{PropertyMapping | templateProperty = Identité | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = Début | ontologyProperty = activeYearsStartYear }}
-        {{PropertyMapping | templateProperty = Fin |  ontologyProperty = activeYearsEndYear }}
+	{{PropertyMapping | templateProperty = Identité | ontologyProperty = person }}
+	{{PropertyMapping | templateProperty = Identité | ontologyProperty = personName }}
+	{{PropertyMapping | templateProperty = Début | ontologyProperty = functionStartYear }}
+        {{PropertyMapping | templateProperty = Fin |  ontologyProperty = functionEndYear }}
         {{PropertyMapping | templateProperty = Parti | ontologyProperty = party }}
         {{PropertyMapping | templateProperty = Qualité | ontologyProperty = position }}
-}}</text></revision></page><page><title>Mapping fr:Élu actuel</title><ns>210</ns><id>4458</id><revision><id>26358</id><timestamp>2013-06-23T21:19:40Z</timestamp><text>{{TemplateMapping
-| mapToClass = TimePeriod
+        {{PropertyMapping | templateProperty = Qualité | ontologyProperty = startOccupation }}
+}}</text></revision></page><page><title>Mapping fr:Élu actuel</title><ns>210</ns><id>4458</id><revision><id>35531</id><timestamp>2014-06-29T16:20:46Z</timestamp><text>{{TemplateMapping
+| mapToClass = PoliticalFunction
 | correspondingClass = PopulatedPlace
 | correspondingProperty = municipality
 | mappings =
-	{{PropertyMapping | templateProperty = Identité | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = Début | ontologyProperty = activeYearsStartYear }}
-        {{ConstantMapping | templateProperty = Fin |  ontologyProperty = activeYearsEndYear | value="en cours" }}
+	{{PropertyMapping | templateProperty = Identité | ontologyProperty = person }}
+	{{PropertyMapping | templateProperty = Identité | ontologyProperty = personName }}
+	{{PropertyMapping | templateProperty = Début | ontologyProperty = functionStartYear }}
         {{PropertyMapping | templateProperty = Parti | ontologyProperty = party }}
         {{PropertyMapping | templateProperty = Qualité | ontologyProperty = position }}
+        {{PropertyMapping | templateProperty = Qualité | ontologyProperty = startOccupation }}
+        {{PropertyMapping | templateProperty = Date à jour | ontologyProperty = updated }}
 }}</text></revision></page></mediawiki>
