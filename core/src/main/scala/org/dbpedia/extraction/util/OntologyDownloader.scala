@@ -6,6 +6,8 @@ import org.dbpedia.extraction.ontology.io.{OntologyReader,OntologyOWLWriter}
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.wikiparser.Namespace
 
+import scala.xml.PrettyPrinter
+
 /**
  * Download ontology classes and properties from http://mappings.dbpedia.org/ and transform them
  * into the format of the dump files (because XMLSource understands that format). Also save the
@@ -48,8 +50,12 @@ object OntologyDownloader {
     val nanos = System.nanoTime
     println("saving ontology to "+owlFile)
     val xml = new OntologyOWLWriter(version).write(ontology)
+    val prettyPrinter = new PrettyPrinter(100, 4)
     val writer = new OutputStreamWriter(new FileOutputStream(owlFile), "UTF-8")
-    try writer.write(xml.toString)
+    // indenting the generated XML would be nice but currently the PrettyPrinter class produces
+    // XML which cannot be property read by the OWLAPI, thus disabling this again...
+    //try writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + prettyPrinter.format(xml))
+    try writer.write(xml.toString())
     finally writer.close()
     println("saved ontology to "+owlFile+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
   }
