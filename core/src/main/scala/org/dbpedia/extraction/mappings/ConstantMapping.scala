@@ -33,10 +33,11 @@ extends PropertyMapping
   if (ontologyProperty.isInstanceOf[OntologyObjectProperty])
   {
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
-    try {
+    value = try {
       // if it is a URI return it directly
       val uri = new URI(value)
-      if (uri.getScheme == null) "http://" + uri.toString
+      // if the URI is absolute, we can use it directly. otherwise we make a DBpedia resource URI
+      if (!uri.isAbsolute) context.language.resourceUri.append(value)
       else uri.toString
     } catch {
       // otherwise create a DBpedia resource URI
