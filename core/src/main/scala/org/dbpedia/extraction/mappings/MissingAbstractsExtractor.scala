@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import scala.collection.mutable
 import scala.xml.XML
 import scala.io.Source
 import scala.language.reflectiveCalls
-import java.io.{InputStream, OutputStreamWriter}
+import java.io._
 import java.net.{URLEncoder, URL}
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
@@ -14,7 +15,7 @@ import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import org.dbpedia.util.text.ParseExceptionIgnorer
 
 /**
- * Extracts page abstracts.
+ * Extracts page abstracts which are not yet extracted. For each page which is a candidate for extraction
  *
  * From now on we use MobileFrontend for MW <2.21 and TextExtracts for MW > 2.22
  * The patched mw instance is no longer needed except from minor customizations in LocalSettings.php
@@ -26,7 +27,7 @@ import org.dbpedia.util.text.ParseExceptionIgnorer
  * We leave the old code commented since we might re-use it soon
  */
 
-class AbstractExtractor(
+class MissingAbstractsExtractor(
   context : {
     def ontology : Ontology
     def language : Language
@@ -60,11 +61,11 @@ extends PageNodeExtractor
 
     // lazy so testing does not need ontology
     private lazy val longProperty = context.ontology.properties("abstract")
-    
-    private lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null) _
-    private lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _
-    
-    override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
+
+    private lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.MissingLongAbstracts, longProperty, null) _
+    private lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.MissingShortAbstracts, shortProperty, null) _
+
+    override val datasets = Set(DBpediaDatasets.MissingLongAbstracts, DBpediaDatasets.MissingShortAbstracts)
 
     private val osBean = java.lang.management.ManagementFactory.getOperatingSystemMXBean()
 
@@ -72,38 +73,50 @@ extends PageNodeExtractor
 
     override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
-        //Only extract abstracts for pages from the Main namespace
-        if(pageNode.title.namespace != Namespace.Main) return Seq.empty
-
-        //Don't extract abstracts from redirect and disambiguation pages
-        if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
-
-        //Reproduce wiki text for abstract
-        //val abstractWikiText = getAbstractWikiText(pageNode)
-        // if(abstractWikiText == "") return Seq.empty
-
-        //Retrieve page text
-        var text = retrievePage(pageNode.title /*, abstractWikiText*/)
-
-        text = postProcess(pageNode.title, text)
-
-        if (text.trim.isEmpty)
-          return Seq.empty
-
-        //Create a short version of the abstract
-        val shortText = short(text)
-
-        //Create statements
-        val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
-        val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
-
-        if (shortText.isEmpty)
-        {
-            Seq(quadLong)
+      // only run extraction if subjectUri is not in list of extracted data
+        if (MissingAbstractsExtractor.existingAbstracts(subjectUri)) {
+          Seq.empty
         }
-        else
-        {
+        else {
+          //Only extract abstracts for pages from the Main namespace
+          if (pageNode.title.namespace != Namespace.Main) {
+            return Seq.empty
+          }
+
+          //Don't extract abstracts from redirect and disambiguation pages
+          if (pageNode.isRedirect || pageNode.isDisambiguation) {
+            return Seq.empty
+          }
+
+          println(s"Detected missing abstract for '$subjectUri'")
+
+          //Reproduce wiki text for abstract
+          //val abstractWikiText = getAbstractWikiText(pageNode)
+          // if(abstractWikiText == "") return Seq.empty
+
+          //Retrieve page text
+          var text = retrievePage(pageNode.title /*, abstractWikiText*/)
+
+          text = postProcess(pageNode.title, text)
+
+          if (text.trim.isEmpty) {
+            logger.info(s"Empty abstract for subject $subjectUri")
+            return Seq.empty
+          }
+
+          //Create a short version of the abstract
+          val shortText = short(text)
+
+          //Create statements
+          val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
+          val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
+
+          if (shortText.isEmpty) {
+            Seq(quadLong)
+          }
+          else {
             Seq(quadLong, quadShort)
+          }
         }
     }
 
@@ -123,12 +136,12 @@ extends PageNodeExtractor
       AbstractExtractor.CHARACTERS_TO_ESCAPE foreach { case (search, replacement) =>
         titleParam = titleParam.replace(search, replacement);
       }
-      
+
       // Fill parameters
       val parameters = apiParametersFormat.format(titleParam/*, URLEncoder.encode(pageWikiText, "UTF-8")*/)
 
       val url = new URL(apiUrl)
-      
+
       for(counter <- 1 to maxRetries)
       {
         try
@@ -149,7 +162,7 @@ extends PageNodeExtractor
         catch
         {
           case ex: Exception => {
-            
+
             // The web server may still be trying to render the page. If we send new requests
             // at once, there will be more and more tasks running in the web server and the
             // system eventually becomes overloaded. So we wait a moment. The higher the load,
@@ -157,7 +170,7 @@ extends PageNodeExtractor
 
             var loadFactor = Double.NaN
             var sleepMs = sleepFactorMs
- 
+
             // if the load average is not available, a negative value is returned
             val load = osBean.getSystemLoadAverage()
             if (load >= 0) {
@@ -317,7 +330,7 @@ extends PageNodeExtractor
                 .filter(renderNode)
                 .map(_.toWikiText)
                 .mkString("").trim
-        
+
         // decode HTML entities - the result is plain text
         decodeHtml(text)
     }
@@ -331,7 +344,9 @@ extends PageNodeExtractor
 
 }
 
-object AbstractExtractor {
+object MissingAbstractsExtractor {
+  private val logger = Logger.getLogger(classOf[MissingAbstractsExtractor].getName)
+
   /**
    * List of all characters which are reserved in a query component according to RFC 2396
    * with their escape sequences as determined by the JavaScript function encodeURIComponent.
@@ -348,4 +363,40 @@ object AbstractExtractor {
     (",", "%2C"),
     ("$", "%24")
   )
+
+  lazy val existingAbstracts = {
+    val file = new File("existing-abstracts.tsv")
+    logger.info(s"Starting to read list of existing abstracts from file '${file.getAbsolutePath}'")
+
+    val reader = try {
+      new BufferedReader(new FileReader("existing-abstracts.tsv"))
+    }
+    catch {
+      case e: FileNotFoundException => logger.severe(s"Unable to find file '${file.getAbsolutePath}'." +
+        s"Please generate it and put it in the given location.")
+        throw e
+      case e : Throwable => throw e
+    }
+
+    val set: mutable.HashSet[String] = mutable.HashSet()
+
+    var line: String = null
+    var first = true
+    while ( {
+      line = reader.readLine(); line != null
+    }) {
+      if (first) {
+        first = false
+      }
+      else {
+        val parts = line.split("\t")
+        set.add(parts(1))
+      }
+    }
+
+    reader.close()
+
+    logger.info(s"Done reading existing abstract names: ${set.size} abstracts already existing")
+    set
+  }
 }
