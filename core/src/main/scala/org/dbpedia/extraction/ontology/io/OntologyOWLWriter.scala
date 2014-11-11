@@ -42,7 +42,7 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
 
           <owl:Ontology rdf:about="http://dbpedia.org/ontology/">
             <rdf:type rdf:resource="http://purl.org/vocommons/voaf#Vocabulary"/>
-            <vann:preferredNamespacePrefix>dbpont</vann:preferredNamespacePrefix>
+            <vann:preferredNamespacePrefix>dbo</vann:preferredNamespacePrefix>
             <vann:preferredNamespaceUri>http://dbpedia.org/ontology/</vann:preferredNamespaceUri>
             <dcterms:title xml:lang="en">The DBpedia Ontology</dcterms:title>
             <dcterms:description xml:lang="en">
