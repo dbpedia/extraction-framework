@@ -1,203 +1,207 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.dbpedia</groupId>
-    <artifactId>extraction</artifactId>
-    <packaging>pom</packaging>
-    <version>4.0-SNAPSHOT</version>
-    <name>Parent POM of the DBpedia framework</name>
+	<groupId>org.dbpedia</groupId>
+	<artifactId>extraction</artifactId>
+	<packaging>pom</packaging>
+	<version>4.0-SNAPSHOT</version>
+	<name>Parent POM of the DBpedia framework</name>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.7</java.version>
-        <scala.version>2.10.3</scala.version>
-        <scalatest.scala.version>2.10</scalatest.scala.version>
-        <scalatest.version>1.9.1</scalatest.version>
-        <scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
-        <skipTests>true</skipTests>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+		<scala.version>2.11.4</scala.version>
+		<scalatest.scala.version>2.11</scalatest.scala.version>
+		<scalatest.version>2.2.1</scalatest.version>
+		<scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
+		<skipTests>true</skipTests>
+	</properties>
 
-    <modules>
-        <module>core</module>
-        <module>server</module>
-        <module>dump</module>
-        <module>scripts</module>
-        <module>live</module>
-        <module>wiktionary</module>
-    </modules>
+	<modules>
+		<module>core</module>
+		<module>server</module>
+		<module>dump</module>
+		<module>scripts</module>
+		<module>live</module>
+		<module>wiktionary</module>
+	</modules>
 
-    <build>
+	<build>
 
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>net.alchim31.maven</groupId>
-                    <artifactId>scala-maven-plugin</artifactId>
-                    <version>3.1.6</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>net.alchim31.maven</groupId>
+					<artifactId>scala-maven-plugin</artifactId>
+					<version>3.1.6</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
-        <plugins>
+		<plugins>
 
-            <!-- 
-            Note: we could drop this plugin config and just use scala:compile, but then 
-            the Scala plugin doesn't understand sub-modules.
-            -->
-            <plugin>
+			<!-- Note: we could drop this plugin config and just use scala:compile, 
+				but then the Scala plugin doesn't understand sub-modules. -->
+			<plugin>
 
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
 
-                <configuration>
-                    <args>
-                        <arg>-unchecked</arg>
-                        <arg>-deprecation</arg>
-                        <arg>-feature</arg>
-                    </args>
-                    <jvmArgs>
-                        <jvmArg>${scala.compiler.Xmx}</jvmArg>
-                    </jvmArgs>
-                </configuration>
+				<configuration>
+					<args>
+						<arg>-unchecked</arg>
+						<arg>-deprecation</arg>
+						<arg>-feature</arg>
+					</args>
+					<jvmArgs>
+						<jvmArg>${scala.compiler.Xmx}</jvmArg>
+					</jvmArgs>
+				</configuration>
 
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <phase>compile</phase>
-                    </execution>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<phase>compile</phase>
+					</execution>
 
-                    <execution>
-                        <id>test-compile</id>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <phase>test-compile</phase>
-                    </execution>
+					<execution>
+						<id>test-compile</id>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<phase>test-compile</phase>
+					</execution>
 
-                    <execution>
-                        <id>process-resources</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <phase>process-resources</phase>
-                    </execution>
-                </executions>
-                
-            </plugin>
+					<execution>
+						<id>process-resources</id>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<phase>process-resources</phase>
+					</execution>
+				</executions>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
+			</plugin>
 
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.3.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireJavaVersion>
-                                    <version>${java.version}</version>
-                                </requireJavaVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
 
-        </plugins>
-    </build>
+			<plugin>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.3.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireJavaVersion>
+									<version>${java.version}</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-    <dependencyManagement>
-        <dependencies>
+		</plugins>
+	</build>
 
-            <dependency>
-                <groupId>org.dbpedia.extraction</groupId>
-                <artifactId>core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+	<dependencyManagement>
+		<dependencies>
 
-            <dependency>
-                <groupId>org.scala-lang</groupId>
-                <artifactId>scala-library</artifactId>
-                <version>${scala.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>org.dbpedia.extraction</groupId>
+				<artifactId>core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
-            <!-- server, live -->
-            <dependency>
-                <groupId>org.scala-lang</groupId>
-                <artifactId>scala-actors</artifactId>
-                <version>${scala.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>${scala.version}</version>
+			</dependency>
 
-            <!-- override scalatest dependency version of scala-reflect -->
-            <dependency>
-                <groupId>org.scala-lang</groupId>
-                <artifactId>scala-reflect</artifactId>
-                <version>${scala.version}</version>
-            </dependency>
+			<!-- server, live -->
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-actors</artifactId>
+				<version>${scala.version}</version>
+			</dependency>
 
-            <!-- core, live -->
-            <dependency>
-                <groupId>org.scalatest</groupId>
-                <artifactId>scalatest_${scalatest.scala.version}</artifactId>
-                <version>${scalatest.version}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+			<!-- override scalatest dependency version of scala-reflect -->
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-reflect</artifactId>
+				<version>${scala.version}</version>
+			</dependency>
 
-    <distributionManagement>
-        <repository>
-            <id>maven.aksw.internal</id>
-            <name>AKSW Internal Release Repository</name>
-            <url>http://maven.aksw.org/archiva/repository/internal</url>
-        </repository>
-        <snapshotRepository>
-            <id>maven.aksw.snapshots</id>
-            <name>AKSW Snapshot Repository</name>
-            <url>http://maven.aksw.org/archiva/repository/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
+			<!-- core, live -->
+			<dependency>
+				<groupId>org.scalatest</groupId>
+				<artifactId>scalatest_${scalatest.scala.version}</artifactId>
+				<version>${scalatest.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-xml</artifactId>
+				<version>2.11.0-M4</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    <profiles>
-        <profile>
-            <id>incremental</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>net.alchim31.maven</groupId>
-                        <artifactId>scala-maven-plugin</artifactId>
+	<distributionManagement>
+		<repository>
+			<id>maven.aksw.internal</id>
+			<name>AKSW Internal Release Repository</name>
+			<url>http://maven.aksw.org/archiva/repository/internal</url>
+		</repository>
+		<snapshotRepository>
+			<id>maven.aksw.snapshots</id>
+			<name>AKSW Snapshot Repository</name>
+			<url>http://maven.aksw.org/archiva/repository/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
-                        <configuration>
-                            <!-- Enable incremental compilation -->
-                            <recompileMode>incremental</recompileMode>
-                            <!-- Use an external Zinc server for compilation.
-                            If there is no Zinc server currently running then the plugin falls back to regular incremental compilation.
-                            Seems pretty safe. -->
-                            <useZincServer>true</useZincServer>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+	<profiles>
+		<profile>
+			<id>incremental</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>net.alchim31.maven</groupId>
+						<artifactId>scala-maven-plugin</artifactId>
+
+						<configuration>
+							<!-- Enable incremental compilation -->
+							<recompileMode>incremental</recompileMode>
+							<!-- Use an external Zinc server for compilation. If there is no Zinc 
+								server currently running then the plugin falls back to regular incremental 
+								compilation. Seems pretty safe. -->
+							<useZincServer>true</useZincServer>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
 

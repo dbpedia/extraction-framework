@@ -100,7 +100,7 @@ class OntologyReader
 
                         case Some(map) =>  ontologyBuilder.equivalentPropertiesBuilderMap.updated(map._1, property)
                         case None => {
-                          val wikidataProp = new OntologyProperty(prop, Map(), Map(), null, null, false, Set())
+                          val wikidataProp = new OntologyProperty(prop, Map(), Map(), null, null, false, Set(), Set())
                           ontologyBuilder.equivalentPropertiesBuilderMap += wikidataProp -> Set(property)
                         }
                       }
@@ -186,8 +186,9 @@ class OntologyReader
 
         //Equivalent Properties
         val equivProperties = readTemplatePropertyAsList(node, "owl:equivalentProperty").toSet
+        val superProperties = readTemplatePropertyAsList(node, "rdfs:subPropertyOf").toSet
 
-        Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range, equivProperties))
+        Some(new PropertyBuilder(name, labels, comments, isObjectProperty, isFunctional, domain, range, equivProperties, superProperties))
     }
 
     private def loadSpecificProperties(name : String, node : TemplateNode) : List[SpecificPropertyBuilder] =
@@ -419,7 +420,7 @@ class OntologyReader
 
     private class PropertyBuilder(val name : String, val labels : Map[Language, String], val comments : Map[Language, String],
                                   val isObjectProperty : Boolean, val isFunctional : Boolean, val domain : String, val range : String,
-                                  val equivPropertyNames : Set[String])
+                                  val equivPropertyNames : Set[String], val superPropertyNames : Set[String] = Set())
     {
         require(name != null, "name != null")
         require(labels != null, "labels != null")
@@ -427,6 +428,7 @@ class OntologyReader
         require(domain != null, "domain != null")
         require(range != null, "range != null")
         require(equivPropertyNames != null, "equivPropertyNames != null")
+        require(superPropertyNames != null, "superPropertyNames != null")
 
         /** Caches the property, which has been build by this builder. */
         var generatedProperty : Option[OntologyProperty] = None
@@ -453,7 +455,14 @@ class OntologyReader
             for (name <- equivPropertyNames) {
               // FIXME: handle equivalent properties in namespaces that we validate
               if (RdfNamespace.validate(name)) logger.warning("Cannot use equivalent property '"+name+"'")
-              else equivProperties += new OntologyProperty(name, Map(), Map(), null, null, false, Set())
+              else equivProperties += new OntologyProperty(name, Map(), Map(), null, null, false, Set(), Set())
+            }
+
+            var superProperties = Set.empty[OntologyProperty]
+            for (name <- superPropertyNames) {
+              // FIXME: handle equivalent properties in namespaces that we validate
+              if (RdfNamespace.validate(name)) logger.warning("Cannot use super property '"+name+"'")
+              else superProperties += new OntologyProperty(name, Map(), Map(), null, null, false, Set(), Set())
             }
 
             if(isObjectProperty)
@@ -474,7 +483,7 @@ class OntologyReader
                     case None => logger.warning("range '"+range+"' of property '"+name+"' not found"); return None
                 }
 
-                generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivProperties))
+                generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivProperties, superProperties))
             }
             else
             {
@@ -484,7 +493,7 @@ class OntologyReader
                     case None => logger.warning("range '"+range+"' of property '"+name+"' not found"); return None
                 }
 
-                generatedProperty = Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional, equivProperties))
+                generatedProperty = Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional, equivProperties, superProperties))
             }
 
             generatedProperty

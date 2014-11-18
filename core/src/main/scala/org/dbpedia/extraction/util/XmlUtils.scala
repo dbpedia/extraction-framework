@@ -7,7 +7,7 @@ object XmlUtils {
   private val escapes = {
     // see scala.xml.Utility.escape for this list of chars
     val escapes = new Array[String](64)
-    for (ch <- '\0' until ' ') escapes(ch) = ""
+    for (ch <- '\u0000' until ' ') escapes(ch) = ""
     escapes('<') = "&lt;"
     escapes('>') = "&gt;"
     escapes('&') = "&amp;"
