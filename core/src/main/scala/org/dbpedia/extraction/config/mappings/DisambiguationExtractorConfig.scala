@@ -27,6 +27,7 @@ object DisambiguationExtractorConfig
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
          "ru" -> " (значения)",
+         "sk" -> " (Rozlišovacia stránka)",
          "sr" -> " (Višeznačna odrednica)"  //TODO make it a Set() for multiple “sr” -> " (вишезначна одредница)"
     )
 }
