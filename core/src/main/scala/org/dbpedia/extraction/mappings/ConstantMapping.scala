@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URI
 
-import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.extraction.wikiparser.{TemplateNode,WikiTitle}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyObjectProperty}
@@ -37,11 +37,11 @@ extends PropertyMapping
       // if it is a URI return it directly
       val uri = new URI(value)
       // if the URI is absolute, we can use it directly. otherwise we make a DBpedia resource URI
-      if (!uri.isAbsolute) context.language.resourceUri.append(value)
-      else uri.toString
+      if (uri.isAbsolute) uri.toString
+      else getDBpediaURI(value,context.language)
     } catch {
       // otherwise create a DBpedia resource URI
-      case _ : Exception => context.language.resourceUri.append(value)
+      case _ : Exception => getDBpediaURI(value,context.language)
     }
   }
 
@@ -50,6 +50,11 @@ extends PropertyMapping
   override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
     Seq(new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value, node.sourceUri, datatype))
+  }
+
+  def getDBpediaURI(value: String, language: Language): String = {
+    val title = WikiTitle.parse(value, language)
+    language.resourceUri.append(title.decodedWithNamespace)
   }
 
 
