@@ -54,7 +54,7 @@ extends PropertyMapping
 
   def getDBpediaURI(value: String, language: Language): String = {
     val title = WikiTitle.parse(value, language)
-    language.resourceUri.append(title.decodedWithNamespace)
+    title.resourceIri
   }
 
 
