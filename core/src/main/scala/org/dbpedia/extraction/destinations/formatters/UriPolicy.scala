@@ -220,10 +220,7 @@ object UriPolicy {
         host != null && (host.equals("dbpedia.org") || host.endsWith(".dbpedia.org"))
     }
     else {
-      // "-" handles the generic domain
-      val genericDomain = if (codes("-")) Set("dbpedia.org") else Set[String]()
-      val domains = codes.filter(_ != "-").map(Language(_).dbpediaDomain) ++ genericDomain
-
+      val domains = codes.map(Language(_).dbpediaDomain)
       uri =>
         domains(uri.getHost)
     }
