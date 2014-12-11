@@ -57,7 +57,7 @@ private class UriGenerator
             text = WikiUtil.wikiEncode(text)
 
             //Test if the base URI ends with a prefix of text
-            var i = baseUri.length - 1
+            var i = Math.max(baseUri.lastIndexOf('_'), baseUri.lastIndexOf('/')) - 1
             var done = false
             while(!done && i > 0 && baseUri.length - i < text.length)
             {
