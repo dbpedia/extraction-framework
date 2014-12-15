@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.extraction.wikiparser.{PropertyNode, TemplateNode}
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.util.logging.{Logger, Level}
@@ -39,7 +39,9 @@ extends PropertyMapping
   private val geoCoordinateParser = new GeoCoordinateParser(context)
   private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
   private val doubleParser = new DoubleParser(context)
+  private val doubleParserEn = new DoubleParser(context = new {def language : Language = Language("en")})
   private val stringParser = StringParser
+  private val wikiCode = context.language.wikiCode
 
   private val typeOntProperty = context.ontology.properties("rdf:type")
   private val latOntProperty = context.ontology.properties("geo:lat")
@@ -78,8 +80,8 @@ extends PropertyMapping
       for( 
         latitudeProperty <- node.property(latitude);
         longitudeProperty <- node.property(longitude);
-        lat <- singleGeoCoordinateParser.parse(latitudeProperty).map(_.toDouble) orElse doubleParser.parse(latitudeProperty);
-        lon <- singleGeoCoordinateParser.parse(longitudeProperty).map(_.toDouble) orElse doubleParser.parse(longitudeProperty)
+        lat <- getSingleCoordinate(latitudeProperty, -90.0, 90.0, wikiCode);
+        lon <- getSingleCoordinate(longitudeProperty, -180.0, 180.0, wikiCode)
       )
       {
         try
@@ -144,5 +146,24 @@ extends PropertyMapping
     quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
 
     quads
+  }
+
+  private def getSingleCoordinate(coordinateProperty: PropertyNode, rangeMin: Double, rangeMax: Double, wikiCode: String ): Option[Double] = {
+    singleGeoCoordinateParser.parse(coordinateProperty).map(_.toDouble) orElse doubleParser.parse(coordinateProperty) match {
+      case Some(coordinateValue) =>
+        //Check if the coordinate is in the correct range
+        if (rangeMin <= coordinateValue && coordinateValue <= rangeMax) {
+          Some(coordinateValue)
+        } else if (!wikiCode.equals("en"))  {
+          // Sometimes coordinates are written with the English locale (. instead of ,)
+          doubleParserEn.parse(coordinateProperty) match {
+            case Some(enCoordinateValue) =>
+              if (rangeMin <= enCoordinateValue && enCoordinateValue <= rangeMax) {
+                // do not return invalid coordinates either way
+                Some(enCoordinateValue)
+              } else None
+          }
+        } else None
+    }
   }
 }
