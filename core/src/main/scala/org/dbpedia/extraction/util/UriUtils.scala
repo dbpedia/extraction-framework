@@ -1,10 +1,18 @@
 package org.dbpedia.extraction.util
 
-import java.net.{URISyntaxException, MalformedURLException, URI, URL}
+import java.net.{URISyntaxException, MalformedURLException, URI, URL, IDN}
 
 object UriUtils
 {
     private val knownSchemes = Set("http", "https", "ftp")
+
+    def hasKnownScheme(uri: String) : Boolean = {
+        for (scheme <- knownSchemes) {
+            if (uri.startsWith(scheme + "://"))
+                return true
+        }
+        false
+    }
     
     /**
      * TODO: comment
@@ -40,6 +48,11 @@ object UriUtils
     def encode( uri : String ) : URI =
     {
         def url = new URL(uri)
-        new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef())
+        val safeHost = try {
+            IDN.toASCII(url.getHost())
+        } catch {
+            case _ : IllegalArgumentException => url.getHost()
+        }
+        new URI(url.getProtocol(), url.getUserInfo(), safeHost, url.getPort(), url.getPath(), url.getQuery(), url.getRef())
     }
 }

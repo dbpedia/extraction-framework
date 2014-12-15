@@ -1,11 +1,8 @@
 package org.dbpedia.extraction.config.transform
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{UriUtils, Language}
 import org.dbpedia.extraction.wikiparser.TextNode
-import java.net.URI
-import scala.collection.mutable.ArrayBuffer
-import scala.collection.immutable
 
 /**
  * Template transformations.
@@ -49,16 +46,14 @@ object TemplateTransformConfig {
         PropertyNode("link-title", List(TextNode("", node.line)), node.line)
       }
 
-      var uri = new URI(extractTextFromPropertyNode(node.property("1")))
-
       // Check if this uri has a scheme. If it does not, add a default http:// scheme
       // From https://en.wikipedia.org/wiki/Template:URL:
       // The first parameter is parsed to see if it takes the form of a complete URL.
       // If it doesn't start with a URI scheme (such as "http:", "https:", or "ftp:"),
       // an "http://" prefix will be prepended to the specified generated target URL of the link.
-      if (uri.getScheme == null) {
-        uri = new URI("http://" + uri.toString)
-      }
+      val url = extractTextFromPropertyNode(node.property("1"))
+      val urlWithScheme = if (UriUtils.hasKnownScheme(url)) url else "http://" + url
+      var uri = UriUtils.encode(urlWithScheme)
 
       List(
         ExternalLinkNode(
