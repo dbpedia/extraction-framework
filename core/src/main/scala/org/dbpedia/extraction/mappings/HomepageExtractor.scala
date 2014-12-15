@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import java.net.{URI,URISyntaxException}
+import java.net.{MalformedURLException, URI, URISyntaxException}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
@@ -60,7 +60,7 @@ extends PageNodeExtractor
           {
             val cleaned = cleanProperty(text)
             if (cleaned.nonEmpty) { // do not proceed if the property value is not a valid candidate
-              val url = if (!cleaned.startsWith("http")) "http://" + cleaned else cleaned
+              val url = if (UriUtils.hasKnownScheme(cleaned)) cleaned else "http://" + cleaned
               val graph = generateStatement(subjectUri, pageContext, url, textNode)
               if (!graph.isEmpty)
               {
@@ -114,14 +114,14 @@ extends PageNodeExtractor
   {
     try
     {
-      for(link <- UriUtils.cleanLink(new URI(url)))
+      for(link <- UriUtils.cleanLink(UriUtils.encode(url)))
       {
         return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri))
       }
     }
     catch
     {
-      case ex: URISyntaxException => // TODO: log
+      case _ : URISyntaxException | _ : MalformedURLException=> // TODO: log
     }
     
     Seq.empty
@@ -146,9 +146,10 @@ extends PageNodeExtractor
       None
     } else {
       try {
-        val uri = new URI(url)
-        if (uri.getScheme == null) Some("http://" + uri.toString)
-        else Some(uri.toString)
+        // UriUtils.encode fails if not scheme is provided
+        val urlWithScheme = if (UriUtils.hasKnownScheme(url)) url else ("http://" + url)
+        val uri = UriUtils.encode(urlWithScheme)
+        Some(uri.toString)
       } catch {
         case _ : Exception => None
       }

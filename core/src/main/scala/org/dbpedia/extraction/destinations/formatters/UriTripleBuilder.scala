@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import java.net.{URI,URISyntaxException}
+import java.net.{MalformedURLException, URI, URISyntaxException}
 import UriPolicy._
+import org.dbpedia.extraction.util.UriUtils
 
 /**
  * @param policies Mapping from URI positions (as defined in UriPolicy) to URI policy functions.
@@ -22,12 +23,12 @@ abstract class UriTripleBuilder(policies: Array[Policy] = null) extends TripleBu
   protected def parseUri(str: String, pos: Int): String = {
     if (str == null) return BadUri+str
     try {
-      var uri = new URI(str)
+      var uri = UriUtils.encode(str)
       if (! uri.isAbsolute()) return BadUri+"not absolute: "+str
       if (policies != null) uri = policies(pos)(uri)
       uri.toString
     } catch {
-      case usex: URISyntaxException =>
+      case usex @ ( _ : URISyntaxException | _: MalformedURLException) =>
         BadUri+usex.getMessage() 
     }
   }

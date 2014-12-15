@@ -6,7 +6,7 @@ import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyObjectProperty}
-import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.util.{UriUtils, Language}
 import scala.language.reflectiveCalls
 
 /**
@@ -35,7 +35,7 @@ extends PropertyMapping
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
     value = try {
       // if it is a URI return it directly
-      val uri = new URI(value)
+      val uri = UriUtils.encode(value)
       // if the URI is absolute, we can use it directly. otherwise we make a DBpedia resource URI
       if (!uri.isAbsolute) context.language.resourceUri.append(value)
       else uri.toString

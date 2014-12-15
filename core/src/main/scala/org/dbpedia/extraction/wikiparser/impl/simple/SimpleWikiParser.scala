@@ -1,13 +1,12 @@
 package org.dbpedia.extraction.wikiparser.impl.simple
 
-import org.dbpedia.extraction.util.{Language, WikiUtil}
+import org.dbpedia.extraction.util.{UriUtils, Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.RichString.wrapString
-import java.net.{URISyntaxException, MalformedURLException, URL, URI}
+import java.net.{URISyntaxException, MalformedURLException}
 import java.util.logging.{Level, Logger}
-import java.lang.IllegalArgumentException
 
 import SimpleWikiParser._
 
@@ -396,7 +395,8 @@ class SimpleWikiParser extends WikiParser
         {
             // TODO: Add a validation routine which conforms to Mediawiki
             // This will fail for news:// or gopher:// protocols
-            ExternalLinkNode(new URL(destination).toURI, nodes, line, destinationNodes)
+            val destWithScheme = if (UriUtils.hasKnownScheme(destination)) destination.trim else "http://" + destination.trim
+            ExternalLinkNode(UriUtils.encode(destWithScheme), nodes, line, destinationNodes)
         }
         catch
         {

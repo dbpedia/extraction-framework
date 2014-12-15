@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.wikiparser.impl.sweble
 
-import java.io.StringWriter
 import java.net.URI
 import java.util.ArrayList
 
@@ -10,12 +9,10 @@ import collection.mutable.{ListBuffer}
 
 import org.sweble.wikitext.engine.CompiledPage
 import org.sweble.wikitext.engine.Compiler
-import org.sweble.wikitext.engine.CompilerException
 import org.sweble.wikitext.engine.Page
 import org.sweble.wikitext.engine.PageId
 import org.sweble.wikitext.engine.PageTitle
 import org.sweble.wikitext.engine.utils.SimpleWikiConfiguration
-import org.sweble.wikitext.`lazy`.utils.AstPrinter
 import org.sweble.wikitext.`lazy`.parser._
 import org.sweble.wikitext.`lazy`.preprocessor._
 import org.sweble.wikitext.`lazy`.postprocessor.AstCompressor
@@ -28,7 +25,6 @@ import de.fau.cs.osr.ptk.common.ast.AstNode
 import de.fau.cs.osr.ptk.common.AstVisitor
 import de.fau.cs.osr.ptk.common.ast.NodeList
 import de.fau.cs.osr.ptk.common.ast.Text
-import de.fau.cs.osr.ptk.common.ast.StringContentNode
 import de.fau.cs.osr.ptk.common.Warning
 import de.fau.cs.osr.ptk.common.EntityMap
 //import de.fau.cs.osr.ptk.nodegen.parser._
@@ -36,8 +32,7 @@ import de.fau.cs.osr.ptk.common.EntityMap
 
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.util.WikiUtil
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{UriUtils, WikiUtil, Language}
 
 
 /**
@@ -171,7 +166,7 @@ final class SwebleWrapper extends WikiParser
             case el : ExternalLink => {
               var destinationURL : URI = null
               try {
-                destinationURL = new URI(el.getTarget)
+                destinationURL = UriUtils.encode(el.getTarget)
               } catch {
                 case e : Exception => destinationURL = new URI("http://example.org")
               }
@@ -180,7 +175,7 @@ final class SwebleWrapper extends WikiParser
               List(new ExternalLinkNode(destinationURL, titleNodes, line, destinationNodes))
             }
             case url : Url => {
-                val destinationURL = new URI(url)
+                val destinationURL = UriUtils.encode(url)
                 val destinationNodes = List[Node](new TextNode(url, line)) //parsing of target not yet supported
                 List(new ExternalLinkNode(destinationURL, destinationNodes, line, destinationNodes))
             }

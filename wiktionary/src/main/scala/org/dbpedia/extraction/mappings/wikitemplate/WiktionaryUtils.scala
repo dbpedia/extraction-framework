@@ -4,7 +4,7 @@ import collection.mutable.{ListBuffer, Stack}
 import io.{Source}
 import util.control.Breaks._
 import java.util.regex.Pattern
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{UriUtils, Language}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
@@ -495,7 +495,7 @@ class MyLinkNode(val n : LinkNode){
   }
   def getFullDestination(ns:String) : String = {
       val rawDestination = n.getDestination                    
-      if(n.isInstanceOf[ExternalLinkNode] || rawDestination.startsWith("http://")){
+      if(n.isInstanceOf[ExternalLinkNode] || UriUtils.hasKnownScheme(rawDestination)){
           //external link
           rawDestination
       } else {
