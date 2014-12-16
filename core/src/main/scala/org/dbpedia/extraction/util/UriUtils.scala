@@ -6,13 +6,9 @@ object UriUtils
 {
     private val knownSchemes = Set("http", "https", "ftp")
 
-    def hasKnownScheme(uri: String) : Boolean = {
-        for (scheme <- knownSchemes) {
-            if (uri.startsWith(scheme + "://"))
-                return true
-        }
-        false
-    }
+    private val knownPrefixes = knownSchemes.map(_ + "://")
+
+    def hasKnownScheme(uri: String) : Boolean = knownPrefixes.exists(uri.startsWith(_))
     
     /**
      * TODO: comment
