@@ -53,7 +53,7 @@ object TemplateTransformConfig {
       // an "http://" prefix will be prepended to the specified generated target URL of the link.
       val url = extractTextFromPropertyNode(node.property("1"))
       val urlWithScheme = if (UriUtils.hasKnownScheme(url)) url else "http://" + url
-      var uri = UriUtils.encode(urlWithScheme)
+      var uri = UriUtils.parseIRI(urlWithScheme)
 
       List(
         ExternalLinkNode(

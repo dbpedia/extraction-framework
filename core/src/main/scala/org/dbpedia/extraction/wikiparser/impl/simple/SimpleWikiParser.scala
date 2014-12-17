@@ -395,8 +395,11 @@ class SimpleWikiParser extends WikiParser
         {
             // TODO: Add a validation routine which conforms to Mediawiki
             // This will fail for news:// or gopher:// protocols
-            val destWithScheme = if (UriUtils.hasKnownScheme(destination)) destination.trim else "http://" + destination.trim
-            ExternalLinkNode(UriUtils.encode(destWithScheme), nodes, line, destinationNodes)
+            //See http://www.mediawiki.org/wiki/Help:Links#External_links
+            val relProtocolDest = if (destination.startsWith("//")) "http:" + destination else destination
+            val sameHost = if (relProtocolDest.contains("{{SERVERNAME}}")) relProtocolDest.replace("{{SERVERNAME}}", source.language.baseUri.replace("http://", "")) else relProtocolDest
+
+            ExternalLinkNode(UriUtils.parseIRI(sameHost), nodes, line, destinationNodes)
         }
         catch
         {

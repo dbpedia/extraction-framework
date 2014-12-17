@@ -23,7 +23,7 @@ abstract class UriTripleBuilder(policies: Array[Policy] = null) extends TripleBu
   protected def parseUri(str: String, pos: Int): String = {
     if (str == null) return BadUri+str
     try {
-      var uri = UriUtils.encode(str)
+      var uri = new URI(str)
       if (! uri.isAbsolute()) return BadUri+"not absolute: "+str
       if (policies != null) uri = policies(pos)(uri)
       uri.toString
