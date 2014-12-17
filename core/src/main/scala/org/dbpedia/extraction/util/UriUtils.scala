@@ -35,20 +35,31 @@ object UriUtils
     }
 
     /**
-     * Encodes the give URI string - overcomes URLEncoder issues
+     * Returns a URI from a string. Solve the problem of IDN that are currently not supported from java.net.URI but only from java.net.URL
+     * We try to parse the string with URL and check if the domain name is in IDN form and then reconstruct a URI
+     *
      * @param uri
      * @return Encoded URI representation of the input URI string
      * @throws MalformedURLException if the input uri is not a valid URL
      * @throws URISyntaxException if the input uri is not a valid URI and cannot be encoded
      */
-    def encode( uri : String ) : URI =
+    def parseIRI( uri : String ) : URI =
     {
-        def url = new URL(uri)
-        val safeHost = try {
+        val uriWithScheme = if (hasKnownScheme(uri)) uri else "http://" + uri
+        val url = new URL(uriWithScheme)
+        val safeHost : String = try {
             IDN.toASCII(url.getHost())
         } catch {
             case _ : IllegalArgumentException => url.getHost()
         }
-        new URI(url.getProtocol(), url.getUserInfo(), safeHost, url.getPort(), url.getPath(), url.getQuery(), url.getRef())
+
+        // If in IDN form, replace the host with IDN.toASCII
+        // We do not add the scheme here since it could produce false URIs
+        if (safeHost.equals(url.getHost)) {
+            new URI(uri)
+        }
+        else {
+            new URI(uri.replace(url.getHost, safeHost))
+        }
     }
 }

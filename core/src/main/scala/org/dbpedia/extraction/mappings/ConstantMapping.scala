@@ -35,7 +35,7 @@ extends PropertyMapping
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
     value = try {
       // if it is a URI return it directly
-      val uri = UriUtils.encode(value)
+      val uri = UriUtils.parseIRI(value)
       // if the URI is absolute, we can use it directly. otherwise we make a DBpedia resource URI
       if (!uri.isAbsolute) context.language.resourceUri.append(value)
       else uri.toString

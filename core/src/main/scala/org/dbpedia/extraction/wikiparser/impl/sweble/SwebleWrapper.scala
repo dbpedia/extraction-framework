@@ -166,7 +166,7 @@ final class SwebleWrapper extends WikiParser
             case el : ExternalLink => {
               var destinationURL : URI = null
               try {
-                destinationURL = UriUtils.encode(el.getTarget)
+                destinationURL = UriUtils.parseIRI(el.getTarget)
               } catch {
                 case e : Exception => destinationURL = new URI("http://example.org")
               }
@@ -175,7 +175,7 @@ final class SwebleWrapper extends WikiParser
               List(new ExternalLinkNode(destinationURL, titleNodes, line, destinationNodes))
             }
             case url : Url => {
-                val destinationURL = UriUtils.encode(url)
+                val destinationURL = UriUtils.parseIRI(url)
                 val destinationNodes = List[Node](new TextNode(url, line)) //parsing of target not yet supported
                 List(new ExternalLinkNode(destinationURL, destinationNodes, line, destinationNodes))
             }
