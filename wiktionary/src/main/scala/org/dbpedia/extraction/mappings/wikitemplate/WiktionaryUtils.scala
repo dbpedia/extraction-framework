@@ -1,19 +1,18 @@
 package org.dbpedia.extraction.mappings.wikitemplate
 
-import collection.mutable.{ListBuffer, Stack}
-import io.{Source}
-import util.control.Breaks._
-import java.util.regex.Pattern
-import org.dbpedia.extraction.util.{UriUtils, Language}
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
+import org.dbpedia.extraction.mappings.wikitemplate.MyLinkNode._
+import org.dbpedia.extraction.mappings.wikitemplate.MyNode._
+import org.dbpedia.extraction.mappings.wikitemplate.MyNodeList._
+import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.util.{Language, UriUtils}
+import org.dbpedia.extraction.wikiparser._
 
-import MyStack._
-import MyNode._
-import MyString._
-import MyNodeList._
-import MyLinkNode._
+import scala.collection.mutable.{ListBuffer, Stack}
+import scala.io.Source
+import scala.language.{implicitConversions, reflectiveCalls}
+import scala.util.control.Breaks._
+
 
 case class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
 
