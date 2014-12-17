@@ -1,35 +1,28 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.util.Language
-import java.util.Locale
-import org.dbpedia.extraction.destinations.{Quad, Dataset}
-import org.openrdf.model.{Literal, URI, Resource, Value, Statement }
-import org.openrdf.model.impl.{ValueFactoryImpl }
-import util.control.Breaks._
-import java.io.FileNotFoundException
-import java.io.FileWriter
-import java.net.URLEncoder
 import java.net.URL
-import java.lang.StringBuffer
-import xml.{XML, Node => XMLNode, NodeSeq}
-import scala.util.matching.Regex
-import collection.mutable.{HashMap, Stack, ListBuffer, HashSet}
+
+import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.mappings.wikitemplate._
-import org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler._
-import org.dbpedia.extraction.mappings.wikitemplate.wiktionary.postprocessor._
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
+import org.openrdf.model.impl.ValueFactoryImpl
+import org.openrdf.model.{Literal, Statement, URI}
+
+import scala.collection.mutable.{HashMap, ListBuffer, Stack}
+import scala.util.control.Breaks._
+import scala.util.matching.Regex
+import scala.xml.{NodeSeq, XML, Node => XMLNode}
 
 //some of my utilities
+import org.dbpedia.extraction.mappings.Matcher._
+import org.dbpedia.extraction.mappings.WiktionaryPageExtractor._
 import org.dbpedia.extraction.mappings.wikitemplate.MyNodeList._
-import org.dbpedia.extraction.mappings.wikitemplate.MyNode._
 import org.dbpedia.extraction.mappings.wikitemplate.MyStack._
 import org.dbpedia.extraction.mappings.wikitemplate.TimeMeasurement._
 import org.dbpedia.extraction.mappings.wikitemplate.VarBinder._
-import org.dbpedia.extraction.mappings.wikitemplate.Logging._
-import org.dbpedia.extraction.mappings.wikitemplate.MyLinkNode._
-import Matcher._
-import WiktionaryPageExtractor._ //companion
 
+import scala.language.reflectiveCalls
 
 /**
  * parses (wiktionary) wiki pages
