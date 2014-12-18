@@ -49,15 +49,16 @@ object UriUtils
      */
     def parseIRI( uri : String ) : URI =
     {
-        val hasScheme = hasKnownScheme(uri)
 
-        // URL() throws an exception if no scheme is specified so we temporarily add it here
-        val iri = if (hasScheme) parseIRI(new URL(uri))
-                else parseIRI(new URL("http://" + uri))
+        if (hasKnownScheme(uri)) {
+            parseIRI(new URL(uri))
+        }else {
+            // URL() throws an exception if no scheme is specified so we temporarily add it here
+            val iri = parseIRI(new URL("http://" + uri))
+            // We remove the scheme
+            new URI(httpSchemeRemover.matcher(iri.toString).replaceFirst(""))
+        }
 
-        // We remove the scheme if manually added in previous step
-        if (hasScheme) iri
-        else new URI(httpSchemeRemover.matcher(iri.toString).replaceFirst(""))
     }
 
     /**
