@@ -5,7 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.RichString.wrapString
-import java.net.{URISyntaxException, MalformedURLException}
+import java.net.{URL, URISyntaxException, MalformedURLException}
 import java.util.logging.{Level, Logger}
 
 import SimpleWikiParser._
@@ -395,11 +395,14 @@ class SimpleWikiParser extends WikiParser
         {
             // TODO: Add a validation routine which conforms to Mediawiki
             // This will fail for news:// or gopher:// protocols
+
             //See http://www.mediawiki.org/wiki/Help:Links#External_links
             val relProtocolDest = if (destination.startsWith("//")) "http:" + destination else destination
+            // Do not create an external link node on links without a scheme
             val sameHost = if (relProtocolDest.contains("{{SERVERNAME}}")) relProtocolDest.replace("{{SERVERNAME}}", source.language.baseUri.replace("http://", "")) else relProtocolDest
 
-            ExternalLinkNode(UriUtils.parseIRI(sameHost), nodes, line, destinationNodes)
+            ExternalLinkNode(UriUtils.parseIRI(new URL(sameHost)), nodes, line, destinationNodes)
+
         }
         catch
         {
