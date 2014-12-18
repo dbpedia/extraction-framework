@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.util
 
-import java.net.{URISyntaxException, MalformedURLException, URI, URL, IDN}
+import java.net._
+import java.util.regex.Pattern
 
 object UriUtils
 {
@@ -34,6 +35,9 @@ object UriUtils
         path
     }
 
+    // Speedup removal of scheme
+    private val httpSchemeRemover = Pattern.compile("http://", Pattern.LITERAL)
+
     /**
      * Returns a URI from a string. Solve the problem of IDN that are currently not supported from java.net.URI but only from java.net.URL
      * We try to parse the string with URL and check if the domain name is in IDN form and then reconstruct a URI
@@ -45,8 +49,27 @@ object UriUtils
      */
     def parseIRI( uri : String ) : URI =
     {
-        val uriWithScheme = if (hasKnownScheme(uri)) uri else "http://" + uri
-        val url = new URL(uriWithScheme)
+        val hasScheme = hasKnownScheme(uri)
+
+        // URL() throws an exception if no scheme is specified so we temporarily add it here
+        val iri = if (hasScheme) parseIRI(new URL(uri))
+                else parseIRI(new URL("http://" + uri))
+
+        // We remove the scheme if manually added in previous step
+        if (hasScheme) iri
+        else new URI(httpSchemeRemover.matcher(iri.toString).replaceFirst(""))
+    }
+
+    /**
+     * Returns a URI from a URL. Solve the problem of IDN that are currently not supported from java.net.URI but only from java.net.URL
+     * We try to parse the string with URL and check if the domain name is in IDN form and then reconstruct a URI
+     *
+     * @param url
+     * @return Encoded URI representation of the input URI string
+     * @throws URISyntaxException if the input uri is not a valid URI and cannot be encoded
+     */
+    def parseIRI( url : URL ) : URI =
+    {
         val safeHost : String = try {
             IDN.toASCII(url.getHost())
         } catch {
@@ -54,12 +77,12 @@ object UriUtils
         }
 
         // If in IDN form, replace the host with IDN.toASCII
-        // We do not add the scheme here since it could produce false URIs
         if (safeHost.equals(url.getHost)) {
-            new URI(uri)
+            url.toURI
         }
         else {
-            new URI(uri.replace(url.getHost, safeHost))
+            val start = url.getProtocol + "://" + (if (url.getUserInfo != null) url.getUserInfo + "@" else "")
+            new URI(url.toString.replace(start + url.getHost, start + safeHost))
         }
     }
 }
