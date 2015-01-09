@@ -72,7 +72,10 @@ object NodeUtil
         {
             case "internal" => new InternalLinkNode(WikiTitle.parse(textNode.text, language), List(textNode), line)
             case "external" => try {
-                new ExternalLinkNode(UriUtils.parseIRI(textNode.text), List(textNode), line)
+                if (UriUtils.hasKnownScheme(textNode.text))
+                    new ExternalLinkNode(new URI(textNode.text), List(textNode), line)
+                else
+                    textNode
             } catch {
                 // If the provided text is not a valid URI
                 case e : Exception => textNode
@@ -131,7 +134,7 @@ object NodeUtil
                 // transform function and attempt to use the result as a URI.
                 try {
                     currentNodes = new ExternalLinkNode(
-                        UriUtils.parseIRI(transformFunc(destinationURI.toString)),
+                        new URI(transformFunc(destinationURI.toString)),
                         children, line, destinationNodes) :: currentNodes
                 } catch {
                     // If the new URI doesn't make syntactical sense, produce

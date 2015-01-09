@@ -5,7 +5,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.RichString.wrapString
-import java.net.{URL, URISyntaxException, MalformedURLException}
+import java.net.{URI, URISyntaxException}
 import java.util.logging.{Level, Logger}
 
 import SimpleWikiParser._
@@ -398,16 +398,20 @@ class SimpleWikiParser extends WikiParser
 
             //See http://www.mediawiki.org/wiki/Help:Links#External_links
             val relProtocolDest = if (destination.startsWith("//")) "http:" + destination else destination
-            // Do not create an external link node on links without a scheme
+
+            // Do not accept non-absolute links because '[]' can be used as wiki text
+            // e.g. CC1=CC(=CC(=C1O)[N+](=O)[O-])[N+](=O)[O-]
+            if (!UriUtils.hasKnownScheme(relProtocolDest)) throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+
             val sameHost = if (relProtocolDest.contains("{{SERVERNAME}}")) relProtocolDest.replace("{{SERVERNAME}}", source.language.baseUri.replace("http://", "")) else relProtocolDest
 
-            ExternalLinkNode(UriUtils.parseIRI(new URL(sameHost)), nodes, line, destinationNodes)
+            ExternalLinkNode(new URI(sameHost), nodes, line, destinationNodes)
 
         }
         catch
         {
             // As per URL.toURI documentation non-strictly RFC 2396 compliant URLs cannot be parsed to URIs
-            case _ : MalformedURLException | _ : URISyntaxException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+            case _ : URISyntaxException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
         }
     }
     

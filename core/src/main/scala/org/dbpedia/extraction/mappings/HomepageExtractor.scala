@@ -114,14 +114,14 @@ extends PageNodeExtractor
   {
     try
     {
-      for(link <- UriUtils.cleanLink(UriUtils.parseIRI(url)))
+      for(link <- UriUtils.cleanLink(new URI(url)))
       {
         return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri))
       }
     }
     catch
     {
-      case _ : URISyntaxException | _ : MalformedURLException=> // TODO: log
+      case _ : URISyntaxException => // TODO: log
     }
     
     Seq.empty
@@ -148,8 +148,7 @@ extends PageNodeExtractor
       try {
         // UriUtils.encode fails if not scheme is provided
         val urlWithScheme = if (UriUtils.hasKnownScheme(url)) url else ("http://" + url)
-        val uri = UriUtils.parseIRI(urlWithScheme)
-        Some(uri.toString)
+        Some(new URI(urlWithScheme).toString)
       } catch {
         case _ : Exception => None
       }
