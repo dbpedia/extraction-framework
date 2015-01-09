@@ -10,7 +10,7 @@ object UriUtils
     private val knownPrefixes = knownSchemes.map(_ + "://")
 
     def hasKnownScheme(uri: String) : Boolean = knownPrefixes.exists(uri.startsWith(_))
-    
+
     /**
      * TODO: comment
      */
@@ -35,55 +35,4 @@ object UriUtils
         path
     }
 
-    // Speedup removal of scheme
-    private val httpSchemeRemover = Pattern.compile("http://", Pattern.LITERAL)
-
-    /**
-     * Returns a URI from a string. Solve the problem of IDN that are currently not supported from java.net.URI but only from java.net.URL
-     * We try to parse the string with URL and check if the domain name is in IDN form and then reconstruct a URI
-     *
-     * @param uri
-     * @return Encoded URI representation of the input URI string
-     * @throws MalformedURLException if the input uri is not a valid URL
-     * @throws URISyntaxException if the input uri is not a valid URI and cannot be encoded
-     */
-    def parseIRI( uri : String ) : URI =
-    {
-
-        if (hasKnownScheme(uri)) {
-            parseIRI(new URL(uri))
-        }else {
-            // URL() throws an exception if no scheme is specified so we temporarily add it here
-            val iri = parseIRI(new URL("http://" + uri))
-            // We remove the scheme
-            new URI(httpSchemeRemover.matcher(iri.toString).replaceFirst(""))
-        }
-
-    }
-
-    /**
-     * Returns a URI from a URL. Solve the problem of IDN that are currently not supported from java.net.URI but only from java.net.URL
-     * We try to parse the string with URL and check if the domain name is in IDN form and then reconstruct a URI
-     *
-     * @param url
-     * @return Encoded URI representation of the input URI string
-     * @throws URISyntaxException if the input uri is not a valid URI and cannot be encoded
-     */
-    def parseIRI( url : URL ) : URI =
-    {
-        val safeHost : String = try {
-            IDN.toASCII(url.getHost())
-        } catch {
-            case _ : IllegalArgumentException => url.getHost()
-        }
-
-        // If in IDN form, replace the host with IDN.toASCII
-        if (safeHost.equals(url.getHost)) {
-            url.toURI
-        }
-        else {
-            val start = url.getProtocol + "://" + (if (url.getUserInfo != null) url.getUserInfo + "@" else "")
-            new URI(url.toString.replace(start + url.getHost, start + safeHost))
-        }
-    }
 }

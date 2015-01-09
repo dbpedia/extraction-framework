@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.config.transform
 
+import java.net.URI
+
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.{UriUtils, Language}
 import org.dbpedia.extraction.wikiparser.TextNode
@@ -51,13 +53,13 @@ object TemplateTransformConfig {
       // The first parameter is parsed to see if it takes the form of a complete URL.
       // If it doesn't start with a URI scheme (such as "http:", "https:", or "ftp:"),
       // an "http://" prefix will be prepended to the specified generated target URL of the link.
-      val url = extractTextFromPropertyNode(node.property("1"))
-      val urlWithScheme = if (UriUtils.hasKnownScheme(url)) url else "http://" + url
-      var uri = UriUtils.parseIRI(urlWithScheme)
+      val uri = new URI(extractTextFromPropertyNode(node.property("1")))
+      val uriWithScheme = if (uri.getScheme() == null) new URI("http://" + uri.toString)
+                          else uri
 
       List(
         ExternalLinkNode(
-          uri,
+          uriWithScheme,
           node.property("2").getOrElse(defaultLinkTitle(node)).children,
           node.line
         )
