@@ -28,7 +28,7 @@ abstract class UriTripleBuilder(policies: Array[Policy] = null) extends TripleBu
       if (policies != null) uri = policies(pos)(uri)
       uri.toString
     } catch {
-      case usex @ ( _ : URISyntaxException | _: MalformedURLException) =>
+      case usex: URISyntaxException =>
         BadUri+usex.getMessage() 
     }
   }
