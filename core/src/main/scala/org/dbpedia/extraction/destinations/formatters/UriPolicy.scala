@@ -241,40 +241,43 @@ object UriPolicy {
 
     iri =>
       if (applicableTo(iri)) {
-
-        // In IDN URI parses the host as Authoriry
-        // see https://github.com/dbpedia/extraction-framework/pull/300#issuecomment-67777966
-        if (iri.getHost() == null && iri.getAuthority != null ) {
-          try {
-            var host: String = iri.getAuthority
-            var user: String = null
-            var port = -1
-            val userIndex = host.indexOf('@')
-            val portIndex = host.indexOf(':')
-
-            if (userIndex >= 0) {
-              user = host.substring(0, userIndex)
-              host = host.replace(user + "@", "")
-            }
-            if (portIndex >= 0) {
-              port = Integer.parseInt(host.substring(portIndex))
-              host = host.replace(":" + port, "")
-            }
-            host = IDN.toASCII(host)
-
-            uri(iri.getScheme, user, host, port, iri.getPath, iri.getQuery, iri.getFragment)
-          } catch {
-            case _: NumberFormatException | _: IllegalArgumentException => new URI(iri.toASCIIString)
-          }
-
-        } else {
-          new URI(iri.toASCIIString)
-        }
-
+        toUri(iri)
       }
       else {
         iri
       }
+  }
+
+  def toUri(iri: URI) : URI = {
+    // In IDN URI parses the host as Authoriry
+    // see https://github.com/dbpedia/extraction-framework/pull/300#issuecomment-67777966
+    if (iri.getHost() == null && iri.getAuthority != null ) {
+      try {
+        var host: String = iri.getAuthority
+        var user: String = null
+        var port = -1
+
+        val userIndex = host.indexOf('@')
+        if (userIndex >= 0) {
+          user = host.substring(0, userIndex)
+          host = host.replace(user + "@", "")
+        }
+
+        val portIndex = host.indexOf(':')
+        if (portIndex >= 0) {
+          port = Integer.parseInt(host.substring(portIndex+1))
+          host = host.replace(":" + port, "")
+        }
+        host = IDN.toASCII(host)
+
+        new URI(uri(iri.getScheme, user, host, port, iri.getPath, iri.getQuery, iri.getFragment).toASCIIString)
+      } catch {
+        case _: NumberFormatException | _: IllegalArgumentException => new URI(iri.toASCIIString)
+      }
+
+    } else {
+      new URI(iri.toASCIIString)
+    }
   }
 
   def generic(applicableTo: PolicyApplicable): Policy = {
