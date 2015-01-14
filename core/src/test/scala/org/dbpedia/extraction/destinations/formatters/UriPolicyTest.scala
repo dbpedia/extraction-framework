@@ -14,6 +14,16 @@ class UriPolicyTest extends FlatSpec with Matchers {
       prepareToUri("http://example.com") should equal ("http://example.com")
     }
 
+  "toUri" should "return http://example.com/dbpedia" in
+    {
+      prepareToUri("http://example.com/dbpedia") should equal ("http://example.com/dbpedia")
+    }
+
+  "toUri" should "return http://example.com/dbp%C3%ABdia" in
+    {
+      prepareToUri("http://example.com/dbpëdia") should equal ("http://example.com/dbp%C3%ABdia")
+    }
+
   "toUri" should "return http://xn--detrsbonsdomaines-vsb.com" in
     {
       prepareToUri("http://detrèsbonsdomaines.com") should equal ("http://xn--detrsbonsdomaines-vsb.com")
