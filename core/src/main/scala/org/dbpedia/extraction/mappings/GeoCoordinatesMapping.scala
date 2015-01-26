@@ -47,7 +47,7 @@ extends PropertyMapping
   private val latOntProperty = context.ontology.properties("geo:lat")
   private val lonOntProperty = context.ontology.properties("geo:long")
   private val pointOntProperty = context.ontology.properties("georss:point")
-  private val featureOntClass =  context.ontology.classes("gml:_Feature")
+  private val featureOntClass =  context.ontology.classes("geo:SpatialThing")
 
   override val datasets = Set(DBpediaDatasets.OntologyProperties)
 
