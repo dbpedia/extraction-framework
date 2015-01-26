@@ -1,11 +1,16 @@
 package org.dbpedia.extraction.util
 
-import java.net.{URISyntaxException, MalformedURLException, URI, URL}
+import java.net._
+import java.util.regex.Pattern
 
 object UriUtils
 {
     private val knownSchemes = Set("http", "https", "ftp")
-    
+
+    private val knownPrefixes = knownSchemes.map(_ + "://")
+
+    def hasKnownScheme(uri: String) : Boolean = knownPrefixes.exists(uri.startsWith(_))
+
     /**
      * TODO: comment
      */
@@ -30,16 +35,4 @@ object UriUtils
         path
     }
 
-    /**
-     * Encodes the give URI string - overcomes URLEncoder issues
-     * @param uri
-     * @return Encoded URI representation of the input URI string
-     * @throws MalformedURLException if the input uri is not a valid URL
-     * @throws URISyntaxException if the input uri is not a valid URI and cannot be encoded
-     */
-    def encode( uri : String ) : URI =
-    {
-        def url = new URL(uri)
-        new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef())
-    }
 }
