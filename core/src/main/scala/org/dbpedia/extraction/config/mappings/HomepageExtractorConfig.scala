@@ -23,7 +23,8 @@ object HomepageExtractorConfig
         "nl" -> Set("website", "homepage", "hoofdpagina", "webpagina", "web", "site"),
         "pl" -> Set("web", "strona"),
         "pt" -> Set("website", "homepage", "web", "site", "siteweb", "site web", "página", "sitio", "pagina"),/*cleanup*/
-        "ru" -> Set("сайт")
+        "ru" -> Set("сайт"),
+        "bg" -> Set("сайт", "уебсайт")
     )
 
     def propertyNames(lang : String) : Set[String] = {
@@ -47,7 +48,8 @@ object HomepageExtractorConfig
         "nl" -> "(?:Externe links|Externe link)",
         "pl" -> "(?:Linki zewnętrzne|Link zewnętrzny)",
         "pt" -> "(?:Ligações externas|Ligação externa|Links externos|Link externo)",
-        "ru" -> "Ссылки"
+        "ru" -> "Ссылки",
+        "bg" -> "Външни препратки"
     )
 
     def externalLinkSections(lang : String) : String = {
@@ -69,7 +71,8 @@ object HomepageExtractorConfig
         "nl" -> "(?:officieel|officiële)",
         "pl" -> "oficjalna",
         "pt" -> "oficial",
-        "ru" -> "официальный"
+        "ru" -> "официальный",
+        "bg" -> "официален"
     )
 
     def official(lang : String) : String = {
@@ -87,7 +90,8 @@ object HomepageExtractorConfig
         "fr" -> Map("Site_officiel" -> "url"),
         "ga" -> Map("Páxina_web" -> "1"),
         "pt" -> Map("Oficial" -> "1"),
-        "ru" -> Map("Официальный сайт" -> "1")
+        "ru" -> Map("Официальный сайт" -> "1"),
+        "bg" -> Map("Официален сайт" -> "1")
     )
 
     def templateOfficialWebsite(lang : String) : Map[String, String] = {
