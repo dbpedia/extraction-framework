@@ -10,6 +10,7 @@ object HomepageExtractorConfig
 
     private val propertyNamesMap = Map(
         "ar" -> Set("الموقع", "الصفحة الرسمية", "موقع", "الصفحة الرئيسية", "صفحة ويب", "موقع ويب"),
+        "bg" -> Set("сайт", "уебсайт"),
         "ca" -> Set("pàgina", "web", "lloc"),
         "de" -> Set("website", "homepage", "webpräsenz", "web", "site", "siteweb", "site web"),/*cleanup*/
         "el" -> Set("ιστότοπος", "ιστοσελίδα"),
@@ -34,6 +35,7 @@ object HomepageExtractorConfig
 
     private val externalLinkSectionsMap = Map(
         "ar" -> "وصلات خارجية",
+        "bg" -> "Външни препратки",
         "ca" -> "(?:Enllaços externs|Enllaço extern)",
         "de" -> "Weblinks?",
         "el" -> "(?:Εξωτερικοί σύνδεσμοι|Εξωτερικές συνδέσεις)",
@@ -56,6 +58,7 @@ object HomepageExtractorConfig
 
     private val officialMap = Map(
         "ar" -> "رسمي",
+        "bg" -> "официален",
         "ca" -> "oficial",
         "de" -> "offizielle",
         "el" -> "(?:επίσημος|επίσημη)",
@@ -79,6 +82,7 @@ object HomepageExtractorConfig
     // Map(language -> Map(templateName -> templatePropertyKey))
     private val templateOfficialWebsiteMap = Map(
         "ca" -> Map("Oficial" -> "1"),
+        "bg" -> Map("Официален сайт" -> "1"),
         /* "it" -> Map("Sito Ufficiale" -> "1"), This does not exist, yet */
         "el" -> Map("Επίσημη ιστοσελίδα" -> "1"),
         "en" -> Map("Official website" -> "1"),
