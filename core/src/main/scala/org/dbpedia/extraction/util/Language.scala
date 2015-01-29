@@ -155,6 +155,7 @@ object Language extends (String => Language)
       "lij" -> "it",           // Ligurian
       "lmo" -> "it",           // Lombard
       "ltg" -> "lv",
+      "mai" -> "ne",            //Maithili -> Indian language
       "map-bms" -> "jv",       // Banyumasan
       "mdf" -> "ru",           // Moksha
       "mhr" -> "ru",           // Mari
