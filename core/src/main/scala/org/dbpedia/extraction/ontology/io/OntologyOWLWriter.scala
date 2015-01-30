@@ -1,5 +1,8 @@
 package org.dbpedia.extraction.ontology.io
 
+import java.text.{SimpleDateFormat, DateFormat}
+import java.util.{Date, TimeZone, Calendar}
+
 import org.dbpedia.extraction.ontology._
 import datatypes.{DimensionDatatype, UnitDatatype}
 
@@ -10,18 +13,57 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
     
     def write(ontology : Ontology) : scala.xml.Elem =
     {
-        <rdf:RDF
-            xmlns = "http://dbpedia.org/ontology/"
-            xml:base="http://dbpedia.org/ontology/"
-            xmlns:owl="http://www.w3.org/2002/07/owl#"
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-            xmlns:prov="http://www.w3.org/ns/prov#">
 
-        <owl:Ontology rdf:about="">
-          <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
-        </owl:Ontology>
+        val currentTimeStamp = {
+          val tz : TimeZone = TimeZone.getTimeZone("UTC")
+          val df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+          df.setTimeZone(tz)
+          df.format(new Date())
+        }
+
+        <rdf:RDF
+          xml:base="http://dbpedia.org/ontology/"
+          xmlns="http://dbpedia.org/ontology/"
+          xmlns:prov="http://www.w3.org/ns/prov#"
+          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+          xmlns:owl="http://www.w3.org/2002/07/owl#"
+          xmlns:d0="http://www.ontologydesignpatterns.org/ont/d0.owl#"
+          xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#"
+          xmlns:wikidata="http://www.wikidata.org/entity/"
+          xmlns:cidoccrm="http://purl.org/NET/cidoc-crm/core#"
+          xmlns:wgs84pos="http://www.w3.org/2003/01/geo/wgs84_pos#"
+          xmlns:dc="http://purl.org/dc/elements/1.1/"
+          xmlns:dcterms="http://purl.org/dc/terms/"
+          xmlns:vann="http://purl.org/vocab/vann/"
+          xmlns:cc="http://creativecommons.org/ns#"
+          xmlns:foaf="http://xmlns.com/foaf/0.1/" >
+
+          <owl:Ontology rdf:about="http://dbpedia.org/ontology/">
+            <rdf:type rdf:resource="http://purl.org/vocommons/voaf#Vocabulary"/>
+            <vann:preferredNamespacePrefix>dbo</vann:preferredNamespacePrefix>
+            <vann:preferredNamespaceUri>http://dbpedia.org/ontology/</vann:preferredNamespaceUri>
+            <dcterms:title xml:lang="en">The DBpedia Ontology</dcterms:title>
+            <dcterms:description xml:lang="en">
+              The DBpedia ontology provides the classes and properties used in the DBpedia data set.
+            </dcterms:description>
+            <foaf:homepage rdf:resource="http://wiki.dbpedia.org/Ontology" />
+            <dcterms:source rdf:resource="http://mappings.dbpedia.org"/>
+            <dcterms:publisher>DBpedia Maintainers</dcterms:publisher>
+            <dcterms:creator>DBpedia Maintainers and Contributors</dcterms:creator>
+            <dcterms:issued>2008-11-17T12:00Z</dcterms:issued>
+            <dcterms:modified>{currentTimeStamp}</dcterms:modified>
+            <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
+            <rdfs:comment xml:lang="en">
+              This ontology is generated from the manually created specifications in the DBpedia Mappings
+              Wiki. Each release of this ontology corresponds to a new release of the DBpedia data set which
+              contains instance data extracted from the different language versions of Wikipedia. For
+              information regarding changes in this ontology, please refer to the DBpedia Mappings Wiki.
+            </rdfs:comment>
+            <cc:license rdf:resource="http://www.gnu.org/copyleft/fdl.html" />
+            <cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+          </owl:Ontology>
         {
             //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
             val classes = for(ontologyClass <- ontology.classes.values if (EXPORT_EXTERNAL || !ontologyClass.isExternalClass))
@@ -63,8 +105,19 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             xml += <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment>
         }
 
+
+        val thing: List[OntologyClass] =
+          if (!ontologyClass.baseClasses.exists(_.uri.startsWith("http://dbpedia.org/")) &&
+              !ontologyClass.baseClasses.exists(_.uri == "http://www.w3.org/2002/07/owl#Thing")
+          ) {
+            List(new OntologyClass("owl:Thing", Map(), Map(), List(), Set(), Set()))
+          }
+          else {
+            List()
+          }
         //Super classes
-        for(baseClass <- ontologyClass.baseClasses)
+        val superClasses = thing ::: ontologyClass.baseClasses
+        for(baseClass <- superClasses)
         {
             xml += <rdfs:subClassOf rdf:resource={baseClass.uri}/>
         }
@@ -82,7 +135,6 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
         }
 
         { //provenance
-          xml += <rdf:type rdf:resource={"http://www.w3.org/ns/prov#Entity"}/>
           xml += <prov:wasDerivedFrom rdf:resource={"http://mappings.dbpedia.org/index.php/OntologyClass:" + ontologyClass.name}/>
         }
 
@@ -162,8 +214,13 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             xml += <owl:equivalentProperty rdf:resource={prop.uri} />
         }
 
+        //Super Properties
+        for(prop <- property.superProperties)
+        {
+          xml += <rdfs:subPropertyOf rdf:resource={prop.uri} />
+        }
+
         { //provenance
-          xml += <rdf:type rdf:resource={"http://www.w3.org/ns/prov#Entity"}/>
           xml += <prov:wasDerivedFrom rdf:resource={"http://mappings.dbpedia.org/index.php/OntologyProperty:" + property.name}/>
         }
 

@@ -83,6 +83,12 @@ class Redirects(val map : Map[String, String])
             }
         }
 
+        for ((source, destination) <- map if !mappings.contains(destination)) {
+          if (mappings.contains(source)) {
+            resolvedMappings(destination) = mappings(source)
+          }
+        }
+
         return (mappings ++ resolvedMappings)
     }
 }

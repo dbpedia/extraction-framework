@@ -22,7 +22,7 @@ object WikiSettingsReader {
    * The query for api.php, without the leading '?'.
    * Order of namespaces|namespacealiases|magicwords|interwikimap is important.
    */
-  val query = "action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords|interwikimap"
+  val query = "action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords|interwikimap&continue="
     
   def read(xml: XMLEventReader): WikiSettings = new WikiSettingsReader(xml).read()
 

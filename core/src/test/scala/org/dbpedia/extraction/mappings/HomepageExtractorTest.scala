@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 import org.junit.Test
 import org.dbpedia.extraction.ontology.{OntologyProperty, Ontology}
 import org.scalatest.FlatSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.dbpedia.extraction.dataparser.BooleanParser
@@ -21,7 +21,7 @@ import org.dbpedia.extraction.dataparser.BooleanParser
  *
  */
 @RunWith(classOf[JUnitRunner])
-class HomepageExtractorTest extends FlatSpec with ShouldMatchers
+class HomepageExtractorTest extends FlatSpec with Matchers
 {
   // Tests
   "HomepageExtractor" should "return http://example.com from ExternalLink in External links section" in {
@@ -154,7 +154,7 @@ class HomepageExtractorTest extends FlatSpec with ShouldMatchers
 object HomepageExtractorTest {
 
   // We need the OntologyProperty for "foaf:homepage"
-  private val homepageProperty = new OntologyProperty("Foaf:homepage", Map(Language.English -> "homepage"), Map(), null, null, false, Set())
+  private val homepageProperty = new OntologyProperty("Foaf:homepage", Map(Language.English -> "homepage"), Map(), null, null, false, Set(), Set())
 
   /**
    *   val classes : Map[String, OntologyClass],

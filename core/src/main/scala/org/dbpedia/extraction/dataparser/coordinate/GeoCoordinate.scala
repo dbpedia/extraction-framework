@@ -14,8 +14,18 @@ class GeoCoordinate( val latitude : Double,
             belongsToArticle : Boolean
             )= this( lat.toDouble, long.toDouble, belongsToArticle)
   def this(
-      latDeg : Double = 0.0, latMin : Double = 0.0, latSec : Double = 0.0, latHem : String = "N",
-      lonDeg : Double = 0.0, lonMin : Double = 0.0, lonSec : Double = 0.0, lonHem : String = "E",
+     // latDeg : Double = 0.0, latMin : Double = 0.0, latSec : Double = 0.0, latHem : String = "N",
+    //  lonDeg : Double = 0.0, lonMin : Double = 0.0, lonSec : Double = 0.0, lonHem : String = "E",
+      belongsToArticle : Boolean
+        )= this(
+            new Latitude(0.0, 0.0, 0.0, "N", true),
+            new Longitude(0.0, 0.0, 0.0, "E"),
+          //  new Latitude(latDeg, latMin, latSec, latHem, true),
+          //  new Longitude(lonDeg, lonMin, lonSec, lonHem),
+            belongsToArticle )
+  def this(
+      latDeg : Double , latMin : Double , latSec : Double , latHem : String ,
+      lonDeg : Double , lonMin : Double , lonSec : Double , lonHem : String ,
       belongsToArticle : Boolean
         )= this(
             new Latitude(latDeg, latMin, latSec, latHem, true),

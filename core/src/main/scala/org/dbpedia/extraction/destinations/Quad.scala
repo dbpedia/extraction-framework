@@ -124,7 +124,7 @@ with Equals
     if (c != 0) return c
     c = safeCompare(this.datatype, that.datatype)
     if (c != 0) return c
-    return safeCompare(this.language, that.language)
+    c = safeCompare(this.language, that.language)
     if (c != 0) return c
     // ignore dataset and context
     return 0

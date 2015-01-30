@@ -10,6 +10,9 @@ import org.dbpedia.extraction.destinations.Quad
 import xml.{XML, Node => XMLNode, NodeSeq}
 import org.dbpedia.extraction.mappings.wikitemplate.MyNodeList._
 import collection.mutable
+import scala.language.reflectiveCalls
+import scala.language.postfixOps
+
 
 
 trait NodeHandler {
