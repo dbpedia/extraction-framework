@@ -1298,7 +1298,29 @@ Noch nicht gemappt:
     {{ PropertyMapping | templateProperty = Eröffnung | ontologyProperty = openingDate }}
     {{ PropertyMapping | templateProperty = Region-ISO | ontologyProperty = isoCodeRegion }}
     {{ PropertyMapping | templateProperty = Schließung | ontologyProperty = dateOfAbandonment }}
-}}</text></revision></page><page><title>Mapping de:Infobox Flugzeug</title><ns>208</ns><id>9161</id><revision><id>31821</id><timestamp>2014-02-13T14:29:33Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping de:Infobox Flugunfall</title><ns>208</ns><id>9722</id><revision><id>36899</id><timestamp>2014-07-17T22:13:59Z</timestamp><text>{{ TemplateMapping | mapToClass = Event | mappings = 
+    {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = Crash image | ontologyProperty = foaf:depiction }}
+    {{ PropertyMapping | templateProperty = Date | ontologyProperty = date }}
+    {{ PropertyMapping | templateProperty = Site | ontologyProperty = location }}
+    {{ PropertyMapping | templateProperty = Fatalities | ontologyProperty = causalties }}
+}}
+
+&lt;!-- not mapped
+| Ship name     = * &lt;Flugnummer&gt;
+| Type          = * &lt;Art des Unfalls&gt;
+| Fatalities    = &lt;Todesopfer&gt;
+| Injuries      = &lt;Verletzte&gt;
+| Aircraft Type = * &lt;Luftfahrzeugtyp&gt;
+| Origin        = * &lt;Abflughafen&gt;
+| Stopover      = * &lt;Zwischenstopp&gt;
+| Destination   = * &lt;Zielflughafen&gt;
+| Operator      = * &lt;Betreiber/Fluggesellschaft&gt;
+| Tail Number   = &lt;Luftfahrzeugkennzeichen&gt;
+| Passengers    = &lt;Anzahl der Passagiere&gt;
+| Crew          = &lt;Anzahl der Besatzungsmitglieder&gt;
+| Survivors     = &lt;Anzahl der Überlebenden&gt;
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Flugzeug</title><ns>208</ns><id>9161</id><revision><id>31821</id><timestamp>2014-02-13T14:29:33Z</timestamp><text>{{TemplateMapping
 | mapToClass = Aircraft
 | mappings =
 	{{PropertyMapping | templateProperty = Typ | ontologyProperty = type }}
@@ -1620,7 +1642,18 @@ Noch nicht gemappt:
        The assignment to the specific national clubs gets lost when used:
        {{ PropertyMapping | templateProperty = spiele (tore) | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = länderspiele (tore) | ontologyProperty = }}
---&gt;</text></revision></page><page><title>Mapping de:Infobox Fußballverband</title><ns>208</ns><id>4083</id><revision><id>13932</id><timestamp>2011-06-27T14:10:45Z</timestamp><text>{{ TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Fußballturnier</title><ns>208</ns><id>9702</id><revision><id>36825</id><timestamp>2014-07-15T16:57:42Z</timestamp><text>{{TemplateMapping
+| mapToClass = SoccerTournament
+| mappings =
+  {{ PropertyMapping | templateProperty = bild | ontologyProperty = picture }}
+  {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+  {{ PropertyMapping | templateProperty = land | ontologyProperty = locationCountry }}
+  {{ PropertyMapping | templateProperty = bester spieler | ontologyProperty = soccerTournamentTopScorer }}
+  {{ PropertyMapping | templateProperty = sieger | ontologyProperty = champion }}
+  {{ PropertyMapping | templateProperty = jahr | ontologyProperty = year }}
+  {{ PropertyMapping | templateProperty = erstes spiel | ontologyProperty = startDate }}
+  {{ PropertyMapping | templateProperty = endspiel | ontologyProperty = endDate }}
+}}</text></revision></page><page><title>Mapping de:Infobox Fußballverband</title><ns>208</ns><id>4083</id><revision><id>13932</id><timestamp>2011-06-27T14:10:45Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Organisation
    | mappings =
        {{ PropertyMapping | templateProperty = verbandsname | ontologyProperty = foaf:name }}
