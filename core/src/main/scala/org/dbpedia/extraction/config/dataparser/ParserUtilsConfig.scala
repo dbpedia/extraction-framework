@@ -108,7 +108,8 @@ object ParserUtilsConfig
      * Add an entry when other separators than the locale default are used.
      */
     val decimalSeparators = Map(
-        "fr" -> ",|."
+        "fr" -> ",|.",
+        "bg" -> ",|."
     )
 
 }
