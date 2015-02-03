@@ -17,6 +17,7 @@ object DisambiguationExtractorConfig
          "eu" -> " (argipena)",
          "ext" -> " (desambiguáncia)",
          "fr" -> " (homonymie)",
+         "ga" -> " (idirdhealáin)",
          "gl" -> " (homónimos)",
          "he" -> " (פירושונים)",
          "hu" -> " (egyértelműsítő lap)",

@@ -69,6 +69,14 @@ object ParserUtilsConfig
             "billion" -> 12,
             "trillion" -> 18
         ),
+        "ga" -> Map(
+            "míle" -> 3,
+            "milliún" -> 6,
+            "billiún" -> 9,
+            "míle milliún" -> 9,
+            "trilliún" -> 12,
+            "cuaidrilliún" -> 15
+        ),
         "nl" -> Map(
             "honderd" -> 2,
             "duizend" -> 3,
@@ -108,7 +116,9 @@ object ParserUtilsConfig
      * Add an entry when other separators than the locale default are used.
      */
     val decimalSeparators = Map(
+        "bg" -> ",|.",
         "fr" -> ",|."
+        
     )
 
 }

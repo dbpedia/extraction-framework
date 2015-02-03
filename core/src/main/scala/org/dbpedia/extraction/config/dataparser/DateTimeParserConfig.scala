@@ -17,6 +17,7 @@ object DateTimeParserConfig
         "eo" -> Map("januaro"->1,"februaro"->2,"marto"->3,"aprilo"->4,"majo"->5,"junio"->6,"julio"->7,"aŭgusto"->8,"septembro"->9,"oktobro"->10,"novembro"->11,"decembro"->12),
         "es" -> Map("enero"->1,"febrero"->2,"marzo"->3,"abril"->4,"mayo"->5,"junio"->6,"julio"->7,"agosto"->8,"septiembre"->9,"octubre"->10,"noviembre"->11,"diciembre"->12),
         "fr" -> Map("janvier"->1,"février"->2,"mars"->3,"avril"->4,"mai"->5,"juin"->6,"juillet"->7,"août"->8,"septembre"->9,"octobre"->10,"novembre"->11,"décembre"->12),
+        "ga" -> Map("eanáir"->1,"feabhra"->2,"marta"->3,"aibreán"->4,"bealtaine"->5,"meitheamh"->6,"iúil"->7,"lúnasa"->8,"meán fómhair"->9,"deireadh fómhair"->10,"samhain"->11,"nollaig"->12),
         "hr" -> Map("siječanj"->1,"veljača"->2,"ožujak"->3,"travanj"->4,"svibanj"->5,"lipanj"->6,"srpanj"->7,"kolovoz"->8,"rujan"->9,"listopad"->10,"studeni"->11,"prosinac"->12),
         "id" -> Map("januari"->1,"februari"->2,"maret"->3,"april"->4,"mei"->5,"juni"->6,"juli"->7,"agustus"->8,"september"->9,"oktober"->10,"november"->11,"desember"->12),
         "it" -> Map("gennaio"->1,"febbraio"->2,"marzo"->3,"aprile"->4,"maggio"->5,"giugno"->6,"luglio"->7,"agosto"->8,"settembre"->9,"ottobre"->10,"novembre"->11,"dicembre"->12),
@@ -61,6 +62,7 @@ object DateTimeParserConfig
         "eo" -> "-a|-an",
         "es" -> "°|\\.°|°\\.",
         "fr" -> "er|nd|ème",
+        "ga" -> "ú",
         "it" -> "°|\\.°|°\\.",
         "nl" -> "ste|de|e",
         "pt" -> "°|\\.°|°\\.",
@@ -156,6 +158,10 @@ object DateTimeParserConfig
             "date"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "date de naissance"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "date de décès"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
+        ),
+        "ga" -> Map(
+            "dáta breithe agus aois"  -> Map ("bliain" -> "1", "mí"-> "2", "lá" -> "3"), //"Lá breithe agus aois"
+            "dáta breithe"        -> Map ("bliain" -> "1", "mí"-> "2", "lá" -> "3") //"Birth date"
         ),
         "id" -> Map(
             "Mula tanggal dan usia"         -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
