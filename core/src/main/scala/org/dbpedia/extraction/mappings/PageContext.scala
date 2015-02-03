@@ -51,13 +51,15 @@ private class UriGenerator
             text = text.replace('\n', ' ')
             text = text.replace('\r', ' ')
             text = text.replace('\t', ' ')
+            text = text.replace('\u0091', ' ')
+            text = text.replace('\u0092', ' ')
             text = text.replaceAll("\\<.*?\\>", "") //strip tags
             text = WikiUtil.cleanSpace(text)
             if(text.length > 50) text = text.substring(0, 50)
             text = WikiUtil.wikiEncode(text)
 
             //Test if the base URI ends with a prefix of text
-            var i = baseUri.length - 1
+            var i = Math.max(baseUri.lastIndexOf('_'), baseUri.lastIndexOf('/')) + 1
             var done = false
             while(!done && i > 0 && baseUri.length - i < text.length)
             {

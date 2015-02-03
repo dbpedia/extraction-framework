@@ -12,6 +12,7 @@ object ImageExtractorConfig
     // Don't change this else if you know how it is done.
     val NonFreeRegex = Map(
            "ar" -> """(?i)\{\{\s?غير حر""".r,
+           "bg" ->"""(?i)\{\{\s?non-free""".r,
            "de" -> """(?iu)\{\{\s?(Dateiüberprüfung/benachrichtigt_\(Kategorie\)|Geschützt|Geschützt-Ungeklärt|Bild-LogoSH|Bild-PD-alt-100|Bild-PD-alt-1923|Bild-WikimediaCopyright)\s?\}\}""".r ,
            "el" -> """(?iu)\{\{\s?(εύλογη χρήση|σήμα|σήμα αθλητικού σωματείου|αφίσα ταινίας|σκηνή από ταινία|γραφικά υπολογιστή|εξώφυλλο άλμπουμ|εξώφυλλο βιβλίου|μη ελεύθερο έργο τέχνης|σελίδα κόμικς|σελίδα εφημερίδας|εικόνα-βιντεοπαιχνίδι|ιδιοκτησία Wikimedia)\s?\}\}""".r ,
            "en" -> """(?i)\{\{\s?non-free""".r,

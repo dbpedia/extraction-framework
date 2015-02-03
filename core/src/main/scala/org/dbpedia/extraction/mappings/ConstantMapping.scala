@@ -6,7 +6,7 @@ import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyObjectProperty}
-import org.dbpedia.extraction.util.{WikiUtil, Language}
+import org.dbpedia.extraction.util.{UriUtils, Language}
 import scala.language.reflectiveCalls
 
 /**

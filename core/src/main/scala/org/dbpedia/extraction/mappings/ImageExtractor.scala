@@ -50,10 +50,12 @@ extends PageNodeExtractor
   ImageExtractor.loadImages(context.articlesSource, freeWikipediaImages, nonFreeImages, wikiCode)
   logger.info("Images loaded from dump")
 
+  private val imageClass = context.ontology.classes("Image")
   private val dbpediaThumbnailProperty = context.ontology.properties("thumbnail")
   private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
   private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
   private val dcRightsProperty = context.ontology.properties("dc:rights")
+  private val rdfType = context.ontology.properties("rdf:type")
 
   private val commonsLang = Language.Commons
 
@@ -75,6 +77,8 @@ extends PageNodeExtractor
             quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
             quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
             quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+            quads += new Quad(language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceUri)
+            quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceUri)
 
             val wikipediaImageUrl = language.baseUri+"/wiki/"+fileNamespaceIdentifier+":"+imageFileName
 

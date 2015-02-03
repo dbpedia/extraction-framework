@@ -9,12 +9,16 @@ class DoubleParserTest extends TestCase
 {
     def testParse() : Unit =
     {
+        testParse("bg", "42.697556", Some(42.697556))
+        testParse("bg", "42,697556", Some(42.697556))
         testParse("en", "123.45", Some(123.45))
         testParse("en", "1,234.5", Some(1234.5))
         testParse("de", "123,45", Some(123.45))
         testParse("de", "1.234,5", Some(1234.5))
         testParse("en", ".12345", Some(0.12345))
         testParse("de", ",12345", Some(0.12345))
+        testParse("nl", "1,234", Some(1.234))
+        testParse("nl", ",12345", Some(0.12345))
     }
 
     private def testParse( lang : String, value : String, expect : Option[Double] ) : Unit =
