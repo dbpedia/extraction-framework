@@ -41,13 +41,13 @@ private class NamespaceBuilder {
   
   // map from namespace name to namespace (only dbpedia namespaces)
   val dbpedias = new HashMap[String, Namespace]
-    
+
   def ns(code: Int, name: String, dbpedia: Boolean) : Namespace = {
     // also create 'talk'namespace, except for the first few namespaces, they are special
     if (code % 2 == 0 && code >= 2) create(code + 1, name+" talk", dbpedia)
     create(code, name, dbpedia)
   }
-  
+
   def create(code: Int, name: String, dbpedia: Boolean) : Namespace = {
     val namespace = new Namespace(code, name, dbpedia)
     val previous = values.put(code, namespace)
@@ -76,10 +76,11 @@ private class NamespaceBuilder {
   ns(206, "Datatype", true)
   
   val map = Map(
-    "en"->204,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,"ru"->222,
-    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"ja"->232,"zh"->236,"hu"->238,"commons"->240,
-    "ko"->242,"tr"->246,"ar"->250,"id"->254,"sr"->256,"sk"->262,"bg"->264,"sl"->268,"eu"->272,
-    "eo"->274,"et"->282,"hr"->284,"el"->304,"be"->312,"cy"->328,"ur"->378,"ga"->396
+    "en"->204,"sv"=>206,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,
+    "ru"->222,"cs"->224,"ca"->226,"bn"->228,"hi"->230,"ja"->232,"uk"=>234,"zh"->236,"hu"->238,
+    "commons"->240,"ko"->242,"tr"->246,"ar"->250,"id"->254,"sr"->256,"ro"=>258,"sk"->262,
+    "bg"->264,"sl"->268,"eu"->272,"eo"->274,"et"->282,"hr"->284,"hy"=>286,"az"=>302,"el"->304,
+    "be"->312,"cy"->328,"ur"->378,"ga"->396
   )
   
   for ((lang,code) <- map) mappings(Language(lang)) = ns(code, "Mapping "+lang, true)
