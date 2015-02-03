@@ -169,6 +169,23 @@ object DurationParserConfig
             "ans" -> "year",
             "années" -> "year"
         ),
+        "ga" -> Map(
+            "soicind" -> "second",
+            "s" -> "second",
+            "soicindí" -> "second",
+            "nóiméad" -> "minute",
+            "nóim" -> "minute",
+            "nóiméid" -> "minute",
+            "uair" -> "hour",
+            "uaireanta" -> "hour",
+            "uair an chloig" -> "hour",
+            "lá" -> "day",
+            "laethanta" -> "day",
+            "mí" -> "month",
+            "míonna" -> "month",
+            "bliain" -> "year",
+            "blianta" -> "year"
+        ),
         "nl" -> Map(
             "Seconde" -> "second",
             "Seconden" -> "second",
