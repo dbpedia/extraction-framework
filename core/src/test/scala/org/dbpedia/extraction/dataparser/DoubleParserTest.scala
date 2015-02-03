@@ -9,6 +9,8 @@ class DoubleParserTest extends TestCase
 {
     def testParse() : Unit =
     {
+        testParse("bg", "42.697556", Some(42.697556))
+        testParse("bg", "42,697556", Some(42.697556))
         testParse("en", "123.45", Some(123.45))
         testParse("en", "1,234.5", Some(1234.5))
         testParse("de", "123,45", Some(123.45))
