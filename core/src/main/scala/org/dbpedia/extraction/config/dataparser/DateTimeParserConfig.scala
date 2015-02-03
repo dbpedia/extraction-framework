@@ -159,10 +159,6 @@ object DateTimeParserConfig
             "date de naissance"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "date de décès"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
         ),
-        // http://ga.wikipedia.org/wiki/Teimpl%C3%A9ad:D%C3%A1ta_breithe_agus_aois
-        // http://ga.wikipedia.org/wiki/Teimpl%C3%A9ad:D%C3%A1ta_breithe
-        // {{Dáta breithe|1993|2|4|df=yes}} returns "4 Feabhra 1993"
-        // {{Dáta breithe agus aois|1993|2|4|mf=yes}} returns Feabhra, 1993 (21 bliain d'aois)
         "ga" -> Map(
             "dáta breithe agus aois"  -> Map ("bliain" -> "1", "mí"-> "2", "lá" -> "3"), //"Lá breithe agus aois"
             "dáta breithe"        -> Map ("bliain" -> "1", "mí"-> "2", "lá" -> "3") //"Birth date"
