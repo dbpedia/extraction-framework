@@ -5,7 +5,7 @@ import org.dbpedia.extraction.util.RichString.wrapString
 
 /**
  * Holds the disambiguation templates of the different Wikipedia languages. Do not edit Disambiguation.scala!
- * GenerateWikiConfig.scala uses the template file Disambiguation.scala.txt to generate Disambiguation.scala.
+ * GenerateWikiSettings.scala uses the template file Disambiguation.scala.txt to generate Disambiguation.scala.
  */
 object Disambiguation
 {

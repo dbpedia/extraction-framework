@@ -7,7 +7,7 @@ import scala.collection.Map
 
 /**
  * Holds the namespace and alias names of all Wikipedia languages. Do not edit Namespaces.scala!
- * GenerateWikiConfig.scala uses the template file Namespaces.scala.txt to generate Namespaces.scala.
+ * GenerateWikiSettings.scala uses the template file Namespaces.scala.txt to generate Namespaces.scala.
  */
 object Namespaces
 {

@@ -4,7 +4,7 @@ import org.dbpedia.extraction.util.Language
 
 /**
  * Holds the redirect identifiers of the different Wikipedia languages. Do not edit Redirect.scala!
- * GenerateWikiConfig.scala uses the template file Redirect.scala.txt to generate Redirect.scala.
+ * GenerateWikiSettings.scala uses the template file Redirect.scala.txt to generate Redirect.scala.
  */
 object Redirect
 {
