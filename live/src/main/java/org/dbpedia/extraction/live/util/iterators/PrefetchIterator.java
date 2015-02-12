@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.live.util.iterators;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
+import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
@@ -21,7 +22,7 @@ import java.util.Iterator;
  */
 public abstract class PrefetchIterator<T>
         implements Iterator<T> {
-    private static Logger logger = Logger.getLogger(PrefetchIterator.class);
+    private static Logger logger = LoggerFactory.getLogger(PrefetchIterator.class);
     private Iterator<T> current = null;
     private boolean finished = false;
 
@@ -38,7 +39,7 @@ public abstract class PrefetchIterator<T>
         try {
             current = prefetch();
         } catch (Exception e) {
-            logger.error(ExceptionUtil.toString(e));
+            logger.error(ExceptionUtil.toString(e), e);
         }
         if (current == null)
             finished = true;

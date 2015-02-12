@@ -1,15 +1,16 @@
 package org.dbpedia.extraction.live.util.iterators;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
+import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
 
 public class RelativeDelayIterator<T>
         implements Iterator<T> {
-    private static Logger logger = Logger.getLogger(RelativeDelayIterator.class);
+    private static Logger logger = LoggerFactory.getLogger(RelativeDelayIterator.class);
     private Iterator<T> iterator;
 
     private StopWatch stopWatch;

@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.live.helper;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 // import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.core.Constants;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
@@ -8,6 +8,7 @@ import org.dbpedia.extraction.mappings.SkosCategoriesExtractor;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.wikiparser.Namespace;
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -30,7 +31,7 @@ import java.util.Map;
  */
 public class LiveConfigReader {
 
-    private static Logger logger = Logger.getLogger(LiveConfigReader.class);
+    private static Logger logger = LoggerFactory.getLogger(LiveConfigReader.class);
     // private static DOMParser parser = new DOMParser();
     private static final String liveConfigFile = "./live.xml";
 
@@ -43,7 +44,6 @@ public class LiveConfigReader {
     //Tag names that are use in live.config file
     private static final String EXTRACTOR_TAGNAME = "extractor";
     private static final String LANUAGE_TAGNAME = "language";
-    private static final String MULTITHREADING_MODE_TAGNAME = "multihreadingMode";
     private static final String UPDATE_ONTOLGY_AND_MAPPINGS_PERIOD_TAGNAME = "updateOntologyAndMappingsPeriod";
 
     private static final String NAME_ATTRIBUTENAME = "name";
@@ -62,8 +62,6 @@ public class LiveConfigReader {
     public static Map<Language,Map<String, ExtractorSpecification>>  extractors = null;
 
     public static Map<Language, List<Class>> extractorClasses = null;
-    public static int updateOntologyAndMappingsPeriod = 5;
-    public static boolean multihreadingMode = false;
 
     //Initialize the static members
     static{
@@ -73,9 +71,6 @@ public class LiveConfigReader {
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(new File(liveConfigFile));
             readExtractors();
-            readMultihreadingMode();
-            readUpdateOntologyAndMappingsPeriod();
-
 
             /** Ontology source */
 //            JavaConversions.asEnumeration(WikiTitle.Namespace());
@@ -87,23 +82,8 @@ public class LiveConfigReader {
 //                                                    new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
         }
         catch(Exception exp){
-            logger.error(exp.getMessage());
+            logger.error(exp.getMessage(), exp);
         }
-    }
-
-    /**
-     * Reads the value indicating whether the application should work in multithreading or single threading mode
-     */
-    private static void readMultihreadingMode() {
-        multihreadingMode = Boolean.parseBoolean(doc.getElementsByTagName(MULTITHREADING_MODE_TAGNAME).item(0).getTextContent());
-    }
-
-    /**
-     * Reads the period between each reload of ontology and mappings
-     */
-    private static void readUpdateOntologyAndMappingsPeriod() {
-        updateOntologyAndMappingsPeriod = Integer.parseInt(
-                doc.getElementsByTagName(UPDATE_ONTOLGY_AND_MAPPINGS_PERIOD_TAGNAME).item(0).getTextContent());
     }
 
     /**
@@ -169,7 +149,7 @@ public class LiveConfigReader {
 
         }
         catch(Exception exp){
-            logger.error(exp.getMessage());
+            logger.error(exp.getMessage(), exp);
         }
 
     }

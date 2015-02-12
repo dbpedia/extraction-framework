@@ -7,12 +7,12 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DBPediaXPathUtil
 {
-	private static Logger			logger	= Logger
-													.getLogger(DBPediaXPathUtil.class);
+	private static Logger			logger	= LoggerFactory.getLogger(DBPediaXPathUtil.class);
 
 	private static Map<String, XPathExpression> map =
 		new HashMap<String, XPathExpression>();
@@ -35,7 +35,7 @@ public class DBPediaXPathUtil
 			return xPath.compile(expression);
 		}
 		catch (Exception e) {
-			logger.error(ExceptionUtil.toString(e));
+			logger.error(ExceptionUtil.toString(e), e);
 			throw new RuntimeException(e);
 		}
 	}

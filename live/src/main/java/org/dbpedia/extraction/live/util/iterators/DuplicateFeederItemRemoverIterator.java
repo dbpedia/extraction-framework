@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.live.util.iterators;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.util.OAIUtil;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,8 +23,7 @@ import java.util.*;
  */
 public class DuplicateFeederItemRemoverIterator
         extends PrefetchIterator<LiveQueueItem> {
-    private Logger logger = Logger
-            .getLogger(DuplicateOAIRecordRemoverIterator.class);
+    private Logger logger = LoggerFactory.getLogger(DuplicateOAIRecordRemoverIterator.class);
 
     private Iterator<LiveQueueItem> iterator;
     private Date currentTimestamp = new Date(0L);

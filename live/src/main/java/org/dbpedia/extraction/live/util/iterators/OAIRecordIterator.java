@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.live.util.iterators;
 
 import ORG.oclc.oai.harvester2.verb.ListRecords;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.util.DBPediaXPathUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import javax.xml.xpath.XPath;
@@ -21,8 +22,7 @@ import java.util.Iterator;
  */
 public class OAIRecordIterator
         extends PrefetchIterator<Document> {
-    private static Logger logger = Logger
-            .getLogger(OAIRecordIterator.class);
+    private static Logger logger = LoggerFactory.getLogger(OAIRecordIterator.class);
 
     private boolean endReached = false;
     private String resumptionToken = null;
@@ -59,7 +59,7 @@ public class OAIRecordIterator
             XPath xpath = XPathFactory.newInstance().newXPath();
             lastResponseDateExpr = DBPediaXPathUtil.getOAIResponseDateExpr();
         } catch (Exception e) {
-            logger.error(ExceptionUtil.toString(e));
+            logger.error(ExceptionUtil.toString(e), e);
         }
     }
 

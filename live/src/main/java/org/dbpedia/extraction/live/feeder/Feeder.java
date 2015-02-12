@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.live.feeder;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;
@@ -32,7 +33,7 @@ public abstract class Feeder extends Thread {
     public Feeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime, String folderBasePath) {
         this.feederName = feederName;
         this.setName("Feeder_"+feederName);
-        logger = Logger.getLogger(feederName);
+        logger = LoggerFactory.getLogger(feederName);
         this.queuePriority = queuePriority;
 
         this.defaultStartTime = defaultStartTime;   //"2011-04-01T15:00:00Z";
@@ -77,7 +78,7 @@ public abstract class Feeder extends Thread {
                 latestProcessDate = (Files.readFile(latestProcessDateFile)).trim();
             }
         } catch (Exception exp) {
-            logger.error(ExceptionUtil.toString(exp));
+            logger.error(ExceptionUtil.toString(exp), exp);
         }
         if (latestProcessDate.isEmpty()) {
             latestProcessDate = defaultStartTime;
@@ -107,7 +108,7 @@ public abstract class Feeder extends Thread {
                     handleFeedItem(item);
                 }
             } catch (Exception exp) {
-                logger.error(ExceptionUtil.toString(exp));
+                logger.error(ExceptionUtil.toString(exp), exp);
                 // On error re-initiate feeder
                 initFeeder();
             }

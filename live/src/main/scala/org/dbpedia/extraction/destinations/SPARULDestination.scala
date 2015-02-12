@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.destinations
 
-import org.apache.log4j.Logger
 import formatters.UriPolicy._
 import org.dbpedia.extraction.destinations.formatters.SPARULFormatter
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.live.storage.JDBCUtil
+import org.slf4j.LoggerFactory
 import scala.collection.Seq
 import org.dbpedia.extraction.live.main.Main
 
@@ -14,7 +14,7 @@ import org.dbpedia.extraction.live.main.Main
 
 class SPARULDestination(insOrDel: Boolean, policies: Array[Policy] = null) extends LiveDestination {
 
-  protected val logger = Logger.getLogger(classOf[SPARULDestination].getName)
+  protected val logger = LoggerFactory.getLogger(classOf[SPARULDestination].getName)
 
   protected val formatter = new SPARULFormatter(insOrDel, LiveOptions.options.get("graphURI"), policies)
   protected var sparql = new StringBuffer

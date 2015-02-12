@@ -26,7 +26,7 @@
                             <id>live</id>
                             <mainClass>org.dbpedia.extraction.live.main.Main</mainClass>
                             <jvmArgs>
-                                <jvmArg>-Xmx4096m</jvmArg>
+                                <jvmArg>-Xmx6096m</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -34,6 +34,13 @@
                             <mainClass>org.dbpedia.extraction.live.feeder.OntologyUpdateFeeder</mainClass>
                             <jvmArgs>
                                 <jvmArg>-Xmx2048m</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>exportDump</id>
+                            <mainClass>org.dbpedia.extraction.live.export.DumpExport</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx4048m</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -74,13 +81,6 @@
             <artifactId>scala-actors</artifactId>
         </dependency>
 
-        <!-- TODO: use java.util.zip.GZIPOutputStream instead, get rid of this dependency -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>1.4.1</version>
-        </dependency>
-
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
@@ -100,9 +100,25 @@
         </dependency>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.jolbox</groupId>
             <artifactId>bonecp</artifactId>
-            <version>0.7.1.RELEASE</version>
+            <version>0.8.0.RELEASE</version>
         </dependency>
         
         <dependency>
@@ -120,7 +136,7 @@
         <dependency>
             <groupId>com.openlink.virtuoso</groupId>
             <artifactId>virtjdbc4</artifactId>
-            <version>7.0.0</version>
+            <version>7-20140918</version>
         </dependency>
 
         <dependency>
@@ -130,21 +146,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.hp.hpl.jena</groupId>
-            <artifactId>jena</artifactId>
-            <version>2.6.4</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.ini4j</groupId>
             <artifactId>ini4j</artifactId>
             <version>0.5.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.7.0</version>
         </dependency>
 
         <dependency>
@@ -152,12 +156,7 @@
             <artifactId>scalatest_2.11</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.hp.hpl.jena</groupId>
-            <artifactId>arq</artifactId>
-            <version>2.8.8</version>
-        </dependency>
-     <dependency>
+     	<dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-xml</artifactId>
         </dependency>
@@ -166,20 +165,6 @@
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-parser-combinators</artifactId>
             <version>2.11.0-M4</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.aksw.commons</groupId>
-            <artifactId>model</artifactId>
-            <version>0.4</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.owldl</groupId>
-                    <artifactId>pellet</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
     </dependencies>
