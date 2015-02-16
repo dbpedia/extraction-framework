@@ -156,46 +156,28 @@
 	{{ PropertyMapping | templateProperty = дизайнер | ontologyProperty = designer}}
 	{{ PropertyMapping | templateProperty = дизайнер | ontologyProperty = designCompany}}
 
-}}</text></revision></page><page><title>Mapping bg:Актьор</title><ns>264</ns><id>5266</id><revision><id>39092</id><timestamp>2015-01-08T18:21:12Z</timestamp><text>{{ ConditionalMapping | cases =
+}}</text></revision></page><page><title>Mapping bg:Актьор</title><ns>264</ns><id>5266</id><revision><id>17550</id><timestamp>2012-04-28T16:54:15Z</timestamp><text>{{ TemplateMapping | mapToClass = Actor | mappings = 
 
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = Actor | mappings = 
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
+	{{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
 
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = Actor | mappings = 
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
+	{{ PropertyMapping | templateProperty = роден-дата  | ontologyProperty = birthDate }}
+	{{ PropertyMapping | templateProperty = роден-място | ontologyProperty = birthPlace }}
+	{{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
 
-| defaultMappings =
+	{{ PropertyMapping | templateProperty = починал-дата  | ontologyProperty = deathDate }}
+	{{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
 
-  {{ PropertyMapping | templateProperty = БАФТА | ontologyProperty = baftaAward }}
-  {{ PropertyMapping | templateProperty = близки | ontologyProperty = relative }}
-  {{ PropertyMapping | templateProperty = брачен партньор | ontologyProperty = spouse }}
-  {{ PropertyMapping | templateProperty = грами | ontologyProperty = grammyAward }}
-  {{ PropertyMapping | templateProperty = деца | ontologyProperty = child }}
-  {{ PropertyMapping | templateProperty = друго име | ontologyProperty = otherName }}
-  {{ PropertyMapping | templateProperty = еми | ontologyProperty = emmyAward }}
-  {{ PropertyMapping | templateProperty = златен глобус | ontologyProperty = goldenGlobeAward }}
-  {{ PropertyMapping | templateProperty = значими роли | ontologyProperty = knownFor }}
-  {{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
-  {{ PropertyMapping | templateProperty = местожителство | ontologyProperty = residence }}
-  {{ PropertyMapping | templateProperty = награди | ontologyProperty = award }}
-  {{ PropertyMapping | templateProperty = награди | ontologyProperty = award }}
-  {{ PropertyMapping | templateProperty = обяснение | ontologyProperty = pictureDescription }}
-  {{ PropertyMapping | templateProperty = оскари | ontologyProperty = academyAward }}
-  {{ PropertyMapping | templateProperty = партньор | ontologyProperty = partner }}
-  {{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
-  {{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
-  {{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
-  {{ PropertyMapping | templateProperty = роден-дата  | ontologyProperty = birthDate }}
-  {{ PropertyMapping | templateProperty = роден-място | ontologyProperty = birthPlace }}
-  {{ PropertyMapping | templateProperty = родители | ontologyProperty = parent }}
-  {{ PropertyMapping | templateProperty = рождено име | ontologyProperty = birthName }}
-  {{ PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }}
-  {{DateIntervalMapping | templateProperty = активност | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear}}
+	{{ PropertyMapping | templateProperty = брачен партньор | ontologyProperty = spouse }}
+	{{ PropertyMapping | templateProperty = брачен партньор | ontologyProperty = spouse }}
+
+	{{ PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }}
+
+	{{ PropertyMapping | templateProperty = еми | ontologyProperty = emmyAward }}
+	{{ PropertyMapping | templateProperty = награди | ontologyProperty = award }}
+	{{ PropertyMapping | templateProperty = златен глобус | ontologyProperty = goldenGlobeAward }}
+	{{ PropertyMapping | templateProperty = грами | ontologyProperty = grammyAward }}
+	{{ PropertyMapping | templateProperty = оскари | ontologyProperty = academyAward }}
+
 }}</text></revision></page><page><title>Mapping bg:Биография инфо</title><ns>264</ns><id>5233</id><revision><id>17569</id><timestamp>2012-04-28T17:56:47Z</timestamp><text>{{ TemplateMapping | mapToClass = Person | mappings = 
 
 	{{ PropertyMapping | templateProperty = роден-място | ontologyProperty = birthPlace }}
@@ -258,59 +240,6 @@
 
 	{{ PropertyMapping | templateProperty = латинско_име | ontologyProperty = foaf:name }}
 
-}}</text></revision></page><page><title>Mapping bg:Военно лице</title><ns>264</ns><id>5660</id><revision><id>38967</id><timestamp>2014-12-23T12:53:57Z</timestamp><text>{{ ConditionalMapping | cases =
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{TemplateMapping | mapToClass = MilitaryPerson | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{TemplateMapping | mapToClass = MilitaryPerson | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
-
-| defaultMappings =
-
-  {{PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
-  {{PropertyMapping | templateProperty = прякор | ontologyProperty = foaf:nick}}
-  {{PropertyMapping | templateProperty = описание | ontologyProperty = description }}
-  {{PropertyMapping | templateProperty = снимка | ontologyProperty = picture }}
-  {{PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
-
-  {{PropertyMapping | templateProperty = дата-на-раждане | ontologyProperty = birthDate }}
-  {{PropertyMapping | templateProperty = роден-дата | ontologyProperty = birthDate }}
-  {{PropertyMapping | templateProperty = роден-година | ontologyProperty = birthDate }}
-  {{PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
-  {{PropertyMapping | templateProperty = дата-на-смърт | ontologyProperty = deathDate }}
-  {{PropertyMapping | templateProperty = починал-година | ontologyProperty = deathDate }}
-  {{PropertyMapping | templateProperty = място-на-раждане | ontologyProperty = birthPlace }}
-  {{PropertyMapping | templateProperty = място на раждане | ontologyProperty = birthPlace }}
-  {{PropertyMapping | templateProperty = роден-страна | ontologyProperty = birthPlace }}
-  {{PropertyMapping | templateProperty = роден-град   | ontologyProperty = birthPlace }}
-  {{PropertyMapping | templateProperty = място-на-смърт | ontologyProperty = deathPlace }}
-  {{PropertyMapping | templateProperty = място на смърт | ontologyProperty = deathPlace }}
-  {{PropertyMapping | templateProperty = починал-страна | ontologyProperty = deathPlace }}
-  {{PropertyMapping | templateProperty = починал-град   | ontologyProperty = deathPlace }}
-
-  {{PropertyMapping | templateProperty = битки | ontologyProperty = battle }}
-  {{PropertyMapping | templateProperty = войни | ontologyProperty = war }}
-  {{PropertyMapping | templateProperty = войсково поделение | ontologyProperty = militaryUnit }}
-  {{PropertyMapping | templateProperty = въоръжени сили | ontologyProperty = militaryBranch }}
-  {{PropertyMapping | templateProperty = звание | ontologyProperty = militaryRank }}
-  {{PropertyMapping | templateProperty = командвания | ontologyProperty = militaryCommand }}
-  {{PropertyMapping | templateProperty = награди | ontologyProperty = award }}
-  {{PropertyMapping | templateProperty = националност | ontologyProperty = nationality }}
-  {{PropertyMapping | templateProperty = по-късна работа | ontologyProperty = occupation }}
-  {{PropertyMapping | templateProperty = портал | ontologyProperty = foaf:homepage }}
-  {{PropertyMapping | templateProperty = преданост | ontologyProperty = allegiance }}
-  {{PropertyMapping | templateProperty = родства | ontologyProperty = relation }}
-
-  {{ DateIntervalMapping | templateProperty = години на служба
-                | startDateOntologyProperty = serviceStartYear
-                | endDateOntologyProperty = serviceEndYear}}
-  {{ DateIntervalMapping | templateProperty = живял
-                | startDateOntologyProperty = birthDate
-                | endDateOntologyProperty = deathDate}}
 }}</text></revision></page><page><title>Mapping bg:Връх инфо</title><ns>264</ns><id>5288</id><revision><id>17597</id><timestamp>2012-04-28T19:51:00Z</timestamp><text>{{ TemplateMapping  | mapToClass = Mountain | mappings = 
 
 	{{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
@@ -430,549 +359,6 @@
 	{{ PropertyMapping | templateProperty = население-гъстота | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 
 
-}}</text></revision></page><page><title>Mapping bg:Държавник инфо</title><ns>264</ns><id>10421</id><revision><id>39671</id><timestamp>2015-01-21T08:46:10Z</timestamp><text>﻿{{ConditionalMapping
-| cases =
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = Politician | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = Politician | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
-
-| defaultMappings =
-
-&lt;!-- OWN PROPERTIES --&gt;
-  {{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name}} 
-  {{ PropertyMapping | templateProperty = роден_място | ontologyProperty = birthPlace}} 
-  {{ PropertyMapping | templateProperty = роден_дата | ontologyProperty = birthDate}}
-  {{ PropertyMapping | templateProperty = починал_място | ontologyProperty = deathPlace}}
-  {{ PropertyMapping | templateProperty = починал_дата | ontologyProperty = deathDate}}  
-  {{ PropertyMapping | templateProperty = националност | ontologyProperty = nationality}}
-  {{ PropertyMapping | templateProperty = гражданство | ontologyProperty = nationality}}
-  {{ PropertyMapping | templateProperty = съпруг | ontologyProperty = spouse}} 
-  {{ PropertyMapping | templateProperty = съпруга | ontologyProperty = spouse}}
-  {{ PropertyMapping | templateProperty = деца | ontologyProperty = child }}
-  {{ PropertyMapping | templateProperty = родства | ontologyProperty = relation}}
-  {{ PropertyMapping | templateProperty = уебсайт | ontologyProperty = foaf:page}}
-  {{ PropertyMapping | templateProperty = бележки | ontologyProperty = notes }}
-  {{ PropertyMapping | templateProperty = религия | ontologyProperty = religion }}
-  {{ PropertyMapping | templateProperty = погребан | ontologyProperty = buriedPlace }}
-  {{ PropertyMapping | templateProperty = погребана | ontologyProperty = buriedPlace }}	 
-  &lt;!-- {{ PropertyMapping | templateProperty = големина | ontologyProperty = }} --&gt;
-  &lt;!-- {{ PropertyMapping | templateProperty = седалище | ontologyProperty = }} --&gt;
-  &lt;!-- {{ PropertyMapping | templateProperty = отличия | ontologyProperty = }} --&gt;
-  {{ PropertyMapping | templateProperty = подпис | ontologyProperty = signature}} 
-  {{ PropertyMapping | templateProperty = портал | ontologyProperty = foaf:page}}
-  {{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture}}
-  {{ PropertyMapping | templateProperty = професия | ontologyProperty = profession}} 
-  {{ PropertyMapping | templateProperty = alma mater | ontologyProperty = almaMater}}
-  {{ PropertyMapping | templateProperty = преданост | ontologyProperty = allegiance}}
-  {{ PropertyMapping | templateProperty = войни | ontologyProperty = war}}
-  {{ PropertyMapping | templateProperty = звание | ontologyProperty = militaryRank}}
-  {{ PropertyMapping | templateProperty = род войски | ontologyProperty = militaryBranch}}
-  {{ PropertyMapping | templateProperty = войсково поделение | ontologyProperty = militaryUnit}}
-  {{ PropertyMapping | templateProperty = командвания | ontologyProperty = militaryCommand}}
-  
-  {{ DateIntervalMapping | templateProperty = години на служба
-                | startDateOntologyProperty = serviceStartYear
-                | endDateOntologyProperty = serviceEndYear
-  }}
-
-&lt;!-- PROPERTIES of длъжност, първи мандат --&gt;
-  {{IntermediateNodeMapping | nodeClass = CareerStation | correspondingProperty = careerStation | mappings = 
-    {{ PropertyMapping | templateProperty = президент | ontologyProperty = president}}
-    {{ PropertyMapping | templateProperty = длъжност | ontologyProperty = office}}
-    {{ PropertyMapping | templateProperty = мандат_край | ontologyProperty = activeYearsEndYear }} 
-    {{ PropertyMapping | templateProperty = мандат_нач | ontologyProperty = activeYearsStartYear }} 
-    {{ PropertyMapping | templateProperty = министър-председател | ontologyProperty = primeMinister}}
-    {{ PropertyMapping | templateProperty = назначен от | ontologyProperty = appointer}}
-    {{ PropertyMapping | templateProperty = наследен от | ontologyProperty = successor}}
-    {{ PropertyMapping | templateProperty = партия | ontologyProperty = party}} 
-    {{ PropertyMapping | templateProperty = пост | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = пост1 | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = пост2a | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = предшестван от | ontologyProperty = predecessor}}
-  }}
-
-  &lt;!-- PROPERTIES of длъжност, втори мандат --&gt;
-  {{IntermediateNodeMapping | nodeClass = CareerStation | correspondingProperty = careerStation | mappings = 
-   
-    {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент | ontologyProperty = vicePresident}}
-    {{ PropertyMapping | templateProperty = втори_мандат_край | ontologyProperty = activeYearsEndYear}}
-    {{ PropertyMapping | templateProperty = втори_мандат_министър-председател | ontologyProperty = primeMinister}}
-    {{ PropertyMapping | templateProperty = втори_мандат_монарх | ontologyProperty = monarch}}
-    {{ PropertyMapping | templateProperty = втори_мандат_наследен от | ontologyProperty = successor}}
-    {{ PropertyMapping | templateProperty = втори_мандат_нач | ontologyProperty = activeYearsStartYear}}
-    {{ PropertyMapping | templateProperty = втори_мандат_пост | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = втори_мандат_пост-вид | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = втори_мандат_предшестван от | ontologyProperty = predecessor}}
-    {{ PropertyMapping | templateProperty = втори_мандат_президент | ontologyProperty = president}}
-    &lt;!--{{ PropertyMapping | templateProperty = год_втори_мандат_министър-председател | ontologyProperty = }}--&gt;
-    &lt;!--{{ PropertyMapping | templateProperty = год_втори_мандат_пост | ontologyProperty = }}--&gt;
-  
-  }}
-
-
-&lt;!-- PROPERTIES of длъжност2, първи мандат --&gt;
-  {{IntermediateNodeMapping | nodeClass = CareerStation | correspondingProperty = careerStation | mappings = 
-    {{ PropertyMapping | templateProperty = длъжност2 | ontologyProperty = office}}
-    {{ PropertyMapping | templateProperty = мандат_край2 | ontologyProperty = serviceEndDate}} 
-    {{ PropertyMapping | templateProperty = мандат_нач2 | ontologyProperty = serviceStartDate}} 
-    {{ PropertyMapping | templateProperty = назначен от2 | ontologyProperty = appointer}}
-    {{ PropertyMapping | templateProperty = наследен от2 | ontologyProperty = successor}}
-    {{ PropertyMapping | templateProperty = партия2 | ontologyProperty = party}} 
-    {{ PropertyMapping | templateProperty = пост1a | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = пост2 | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = пост3a | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = предшестван от2 | ontologyProperty = predecessor}}
-  }}
-
-&lt;!-- PROPERTIES of длъжност3, първи мандат --&gt;
-  {{IntermediateNodeMapping | nodeClass = CareerStation | correspondingProperty = careerStation | mappings = 
-    {{ PropertyMapping | templateProperty = длъжност3 | ontologyProperty = office}}
-    {{ PropertyMapping | templateProperty = мандат_нач3 | ontologyProperty = serviceStartDate}} 
-    {{ PropertyMapping | templateProperty = мандат_край3 | ontologyProperty = serviceEndDate}} 
-    {{ PropertyMapping | templateProperty = назначен от3 | ontologyProperty = appointer}}
-    {{ PropertyMapping | templateProperty = предшестван от3 | ontologyProperty = predecessor}}
-    {{ PropertyMapping | templateProperty = наследен от3 | ontologyProperty = successor}}
-    {{ PropertyMapping | templateProperty = пост3 | ontologyProperty = colleague}}
-    {{ PropertyMapping | templateProperty = пост4a | ontologyProperty = colleague}}
-  }}
-
-
-&lt;!-- PROPERTIES of длъжност, трети мандат --&gt;
-&lt;!-- Трябва да влязат в собствен IntermediateNodeMapping заедно с длъжност, партия, назначен от--&gt;
-  {{IntermediateNodeMapping | nodeClass = CareerStation | correspondingProperty = careerStation | mappings = 
-    {{ PropertyMapping | templateProperty = трети_мандат_предшестван от | ontologyProperty = predecessor}}
-    {{ PropertyMapping | templateProperty = трети_мандат_наследен от | ontologyProperty = successor}}
-    {{ PropertyMapping | templateProperty = трети_мандат_вице_министър-председател | ontologyProperty = vicePrimeMinister}}
-    {{ PropertyMapping | templateProperty = трети_мандат_вицепрезидент | ontologyProperty = vicePresident}}
-    {{ PropertyMapping | templateProperty = трети_мандат_заместник-министър | ontologyProperty = vicePrimeMinister}}
-    {{ PropertyMapping | templateProperty = трети_мандат_генерал-губернатор | ontologyProperty = governorGeneral}}
-    {{ PropertyMapping | templateProperty = трети_мандат_губернатор | ontologyProperty = governor}}
-    {{ PropertyMapping | templateProperty = трети_мандат_монарх | ontologyProperty = monarch}}
-    {{ PropertyMapping | templateProperty = трети_мандат_назначен от | ontologyProperty = appointer}}
-    {{ PropertyMapping | templateProperty = трети_мандат_предшестван от | ontologyProperty = predecessor}}
-    {{ PropertyMapping | templateProperty = трети_мандат_наследен от | ontologyProperty = successor}}
-    {{ PropertyMapping | templateProperty = трети_мандат_нач | ontologyProperty = serviceStartDate}}
-    {{ PropertyMapping | templateProperty = трети_мандат_край | ontologyProperty = serviceEndDate}}
-    {{ PropertyMapping | templateProperty = трети_мандат_президент | ontologyProperty = president}}
-    {{ PropertyMapping | templateProperty = трети_мандат_канцлер | ontologyProperty = chancellor}}
-    {{ PropertyMapping | templateProperty = трети_мандат_министър-председател | ontologyProperty = primeMinister}}
-
-  }}
-
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вице_министър-председател6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = вицепрезидент6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вице_министър-председател | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вице_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вице_министър-председател2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вице_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вице_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вице_министър-председател3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вице_министър-председател4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вице_министър-председател5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент 3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент5 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_вицепрезидент5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_генерал-губернатор | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_генерал-губернатор2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_генерал-губернатор3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_губернатор | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_губернатор2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_губернатор3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник-министър6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_заместник5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_канцлер | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_канцлер1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_канцлер2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_канцлер2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_канцлер3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_канцлер3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_канцлер4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_канцлер5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_край2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_край3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_министър-председател2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_министър-председател3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_министър-председател4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_министър-председател5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_монарх2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_монарх3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_назначен от | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_назначен_от2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_назначен_от3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_наследен от2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_наследен от3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_нач2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_нач3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост2a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост3c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост4 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост5 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_пост5c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_предшестван от2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_предшестван от3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_президент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_президент2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_президент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_президент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_президент3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_президент4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = втори_мандат_президент5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = генерал-губернатор2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = генерал-губернатор3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вице_министър-председател | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вице_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вице_министър-председател2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вице_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вице_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вице_министър-председател4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вице_министър-председател5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вицепрезидент | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вицепрезидент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вицепрезидент2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вицепрезидент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вицепрезидент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вицепрезидент3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вицепрезидент4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_вицепрезидент5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник-министър6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_заместник5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_канцлер | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_канцлер1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_канцлер2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_канцлер2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_канцлер3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_канцлер3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_канцлер4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_канцлер5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_министър-председател2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_министър-председател3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_министър-председател4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_министър-председател5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост2a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост3c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост4 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост5 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_пост5c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_президент | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_президент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_президент2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_президент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_президент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_президент3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_президент4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втори_мандат_президент5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_втрети_мандат_заместник-министър | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вице_министър-председател6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_вицепрезидент6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник-министър6а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_заместник6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_канцлер6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_министър-председател6а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост2a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост3c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост4 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост5 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_пост5c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент2a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент3c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_мандат_президент6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_вице_министър-председател | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_вице_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_вице_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_вице_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_вицепрезидент | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_вицепрезидент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_вицепрезидент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_вицепрезидент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_заместник | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_заместник-министър1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_заместник-министър2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_заместник-министър3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_заместник1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_заместник3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_канцлер | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_канцлер1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_канцлер2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_канцлер3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_министър-председател | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_президент | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_президент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_президент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = год_трети_мандат_президент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = губернатор | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = губернатор2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = губернатор3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = длъжност2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = длъжност3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник-министър6а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = заместник6а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер3a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер4a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер5a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = канцлер6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = мандат_край2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = мандат_край3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = мандат_нач2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = мандат_нач3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = министър-председател6а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = монарх | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = монарх2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = монарх3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = назначен от | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = назначен от2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = назначен от3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = назначен_от3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = наследен от2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = наследен от3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост-вид | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост-вид2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост2a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост3c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост4 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост5 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = пост5c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = предшестван от2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = предшестван от3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент2 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент2a | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент3c | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент3а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент4b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент5b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = президент6b | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_вице_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_вице_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_вице_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_вицепрезидент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_вицепрезидент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_вицепрезидент3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник | ontologyProperty = }}--&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник-министър1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник-министър2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник-министър3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник-министър4а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник-министър5а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_заместник3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_канцлер1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_канцлер2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_канцлер3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_министър-председател1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_министър-председател2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_министър-председател3 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_президент1 | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_президент2а | ontologyProperty = }} --&gt;
-    &lt;!-- {{ PropertyMapping | templateProperty = трети_мандат_президент3 | ontologyProperty = }} --&gt;
 }}</text></revision></page><page><title>Mapping bg:Език</title><ns>264</ns><id>5291</id><revision><id>17602</id><timestamp>2012-04-28T21:18:40Z</timestamp><text>{{ TemplateMapping | mapToClass = Language | mappings =
 
 	{{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
@@ -1030,9 +416,7 @@
 
 	{{ PropertyMapping | templateProperty = сродни | ontologyProperty = related }}
 
-}}</text></revision></page><page><title>Mapping bg:Жена монарх</title><ns>264</ns><id>5638</id><revision><id>39083</id><timestamp>2015-01-08T17:49:00Z</timestamp><text>{{ TemplateMapping | mapToClass = Monarch | mappings = 
-
-	{{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}
+}}</text></revision></page><page><title>Mapping bg:Жена монарх</title><ns>264</ns><id>5638</id><revision><id>18018</id><timestamp>2012-04-30T11:27:31Z</timestamp><text>{{ TemplateMapping | mapToClass = Monarch | mappings = 
 
 	{{ DateIntervalMapping | templateProperty = управление
 		| startDateOntologyProperty = startDate
@@ -1059,9 +443,12 @@
 
 
 	{{ PropertyMapping | templateProperty = починала | ontologyProperty = deathPlace }}
+
 	{{ PropertyMapping | templateProperty = починал | ontologyProperty = deathDate }}
 	{{ PropertyMapping | templateProperty = починал | ontologyProperty = deathPlace }}
+	{{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
 	{{ PropertyMapping | templateProperty = погребана в | ontologyProperty = deathPlace }}
+ 
 
 	{{ PropertyMapping | templateProperty = потомци | ontologyProperty = child }}
 	{{ PropertyMapping | templateProperty = потомство | ontologyProperty = child }}
@@ -1072,20 +459,14 @@
 	{{ PropertyMapping | templateProperty = съпруга | ontologyProperty = spouse }}
 	{{ PropertyMapping | templateProperty = съпруга на | ontologyProperty = spouse }}
 	{{ PropertyMapping | templateProperty = съпруг | ontologyProperty = spouse }}
-	{{ PropertyMapping | templateProperty = втори брак    | ontologyProperty = spouse }}
-	{{ PropertyMapping | templateProperty = трети брак    | ontologyProperty = spouse }}
-	{{ PropertyMapping | templateProperty = четвърти брак | ontologyProperty = spouse }}
-	{{ PropertyMapping | templateProperty = пети брак     | ontologyProperty = spouse }}
-	{{ PropertyMapping | templateProperty = шести брак    | ontologyProperty = spouse }}
-
+ 
 	{{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
 	{{ PropertyMapping | templateProperty = пълно име | ontologyProperty = foaf:name }}
 
 	{{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = портрет-описание | ontologyProperty = pictureDescription }}
 	{{ PropertyMapping | templateProperty = изображение за личността | ontologyProperty = picture }}
-	{{ PropertyMapping | templateProperty = описание на изображението | ontologyProperty = pictureDescription }}
-	{{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
+	{{ PropertyMapping | templateProperty = описание на изображението | ontologyProperty = picture }}
 
 	{{ PropertyMapping | templateProperty = предшественик | ontologyProperty = predecessor }}
 	{{ PropertyMapping | templateProperty = наследник | ontologyProperty = successor }}
@@ -1094,7 +475,8 @@
 
 	{{ PropertyMapping | templateProperty = династия | ontologyProperty = dynasty }}
 
- 	{{ PropertyMapping | templateProperty = описание | ontologyProperty = description }}
+ 
+	{{ PropertyMapping | templateProperty = описание | ontologyProperty = description }}
 	{{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
 	{{ PropertyMapping | templateProperty = починал-години | ontologyProperty = deathDate }}
 
@@ -1281,7 +663,78 @@
 	{{ PropertyMapping | templateProperty = conflict | ontologyProperty = foaf:name }}
 	{{ PropertyMapping | templateProperty = date | ontologyProperty = date }}
 
-}}</text></revision></page><page><title>Mapping bg:Инфокутия военно лице</title><ns>264</ns><id>10319</id><revision><id>38963</id><timestamp>2014-12-23T12:27:30Z</timestamp><text>#REDIRECT [[Mapping bg:Военно лице]]</text></revision></page><page><title>Mapping bg:Картина</title><ns>264</ns><id>5623</id><revision><id>17997</id><timestamp>2012-04-30T09:03:52Z</timestamp><text>{{ TemplateMapping | mapToClass = Painting | mappings =
+}}</text></revision></page><page><title>Mapping bg:Инфокутия военно лице</title><ns>264</ns><id>5660</id><revision><id>18068</id><timestamp>2012-05-01T20:39:17Z</timestamp><text>{{ TemplateMapping | mapToClass = MilitaryPerson | mappings = 
+
+    {{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = прякор | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = псевдоним | ontologyProperty = pseudonym }}
+
+    {{ PropertyMapping | templateProperty = място на раждане | ontologyProperty = birthPlace }}
+    {{ PropertyMapping | templateProperty = място на смърт | ontologyProperty = deathPlace }}
+    {{ PropertyMapping | templateProperty = дата на раждане | ontologyProperty = birthDate }}
+    {{ PropertyMapping | templateProperty = дата на смърт | ontologyProperty = deathDate }}
+ 
+    {{ PropertyMapping | templateProperty = роден-град | ontologyProperty = birthPlace }}
+    {{ PropertyMapping | templateProperty = роден-страна | ontologyProperty = birthPlace }}
+    {{ PropertyMapping | templateProperty = роден-година | ontologyProperty = birthDate }}
+    {{ PropertyMapping | templateProperty = починал-град | ontologyProperty = deathPlace }}
+    {{ PropertyMapping | templateProperty = починал-страна | ontologyProperty = deathPlace }}
+    {{ PropertyMapping | templateProperty = роден-дата | ontologyProperty = birthDate }}
+    {{ PropertyMapping | templateProperty = починал-година | ontologyProperty = deathDate }}
+    {{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
+    {{ PropertyMapping | templateProperty = войсково поделение | ontologyProperty = militaryUnit }}
+
+
+
+	{{ DateIntervalMapping | templateProperty = години на служба
+		| startDateOntologyProperty = serviceStartYear 
+		| endDateOntologyProperty = serviceEndYear 
+	}}
+
+	{{ DateIntervalMapping | templateProperty = живял
+		| startDateOntologyProperty = birthDate
+		| endDateOntologyProperty = deathDate
+	}}
+
+    {{ PropertyMapping | templateProperty = работил | ontologyProperty = movement }}
+    {{ PropertyMapping | templateProperty = брак | ontologyProperty = spouse }}
+    {{ PropertyMapping | templateProperty = деца | ontologyProperty = child }}
+
+    {{ PropertyMapping | templateProperty = жанрове | ontologyProperty = genre }}
+ 
+    {{ PropertyMapping | templateProperty = повлиян | ontologyProperty = influencedBy }}
+    {{ PropertyMapping | templateProperty = повлиял | ontologyProperty = influenced }}
+
+    {{ PropertyMapping | templateProperty = снимка | ontologyProperty = picture }}
+    {{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
+
+
+    {{ PropertyMapping | templateProperty = звание | ontologyProperty = militaryRank }}
+
+    {{ PropertyMapping | templateProperty = въоръжени сили | ontologyProperty = militaryBranch }}
+
+    {{ PropertyMapping | templateProperty = въоръжени сили | ontologyProperty = militaryUnit }}
+	
+    {{ PropertyMapping | templateProperty = войни | ontologyProperty = war }}
+
+    {{ PropertyMapping | templateProperty = описание | ontologyProperty = war }}
+
+
+    {{ PropertyMapping | templateProperty = награди | ontologyProperty = award }}
+    {{ PropertyMapping | templateProperty = битки | ontologyProperty = battle }}
+
+
+    {{ PropertyMapping | templateProperty = командвания | ontologyProperty = militaryCommand }}
+    {{ PropertyMapping | templateProperty = командвания | ontologyProperty = command }}
+    {{ PropertyMapping | templateProperty = преданост | ontologyProperty = allegiance }}
+
+    {{ PropertyMapping | templateProperty = националност | ontologyProperty = nationality }}
+    {{ PropertyMapping | templateProperty = описание | ontologyProperty = description }}
+
+    {{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
+    {{ PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }} 
+
+}}</text></revision></page><page><title>Mapping bg:Картина</title><ns>264</ns><id>5623</id><revision><id>17997</id><timestamp>2012-04-30T09:03:52Z</timestamp><text>{{ TemplateMapping | mapToClass = Painting | mappings =
 
 	{{ PropertyMapping | templateProperty = височина | ontologyProperty = height }}
 	{{ PropertyMapping | templateProperty = ширина | ontologyProperty = width }}
@@ -1350,20 +803,8 @@
 	{{ PropertyMapping | templateProperty = печалба | ontologyProperty = netIncome | unit = Currency }}
 	{{ PropertyMapping | templateProperty = тип | ontologyProperty = netIncome | unit = type }}
 
-}}</text></revision></page><page><title>Mapping bg:Космонавт</title><ns>264</ns><id>5639</id><revision><id>38954</id><timestamp>2014-12-23T12:06:03Z</timestamp><text>{{ ConditionalMapping | cases =
+}}</text></revision></page><page><title>Mapping bg:Космонавт</title><ns>264</ns><id>5639</id><revision><id>18021</id><timestamp>2012-04-30T11:43:32Z</timestamp><text>{{ TemplateMapping | mapToClass = Astronaut | mappings = 
 
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = Astronaut | mappings = 
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
-
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = Astronaut | mappings = 
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
-
-| defaultMappings =
 	{{ DateIntervalMapping | templateProperty = управление
 		| startDateOntologyProperty = startDate
 		| endDateOntologyProperty = endDate
@@ -1404,6 +845,7 @@
 
 	{{ PropertyMapping | templateProperty = починал | ontologyProperty = deathDate }}
 	{{ PropertyMapping | templateProperty = починал | ontologyProperty = deathPlace }}
+	{{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
 
 	{{ PropertyMapping | templateProperty = потомци | ontologyProperty = child }}
 	{{ PropertyMapping | templateProperty = потомство | ontologyProperty = child }}
@@ -1442,78 +884,55 @@
 	{{ PropertyMapping | templateProperty = uuc | ontologyProperty = unicode  }}
 	{{ PropertyMapping | templateProperty = Картинка | ontologyProperty = picture }}
 
-}}</text></revision></page><page><title>Mapping bg:Монарх</title><ns>264</ns><id>5637</id><revision><id>39082</id><timestamp>2015-01-08T17:48:20Z</timestamp><text>{{ ConditionalMapping | cases =
+}}</text></revision></page><page><title>Mapping bg:Монарх</title><ns>264</ns><id>5637</id><revision><id>18015</id><timestamp>2012-04-30T11:21:11Z</timestamp><text>{{ TemplateMapping | mapToClass = Monarch | mappings = 
 
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = Monarch | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
+	{{ DateIntervalMapping | templateProperty = управление
+		| startDateOntologyProperty = startDate
+		| endDateOntologyProperty = endDate
+	}}
 
-  {{ Condition
-    | templateProperty = съпруг
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = Monarch | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
+	{{ PropertyMapping | templateProperty = коронация | ontologyProperty = titleDate }}
 
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = Monarch | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
+	{{ PropertyMapping | templateProperty = роден | ontologyProperty = birthDate }}
+	{{ PropertyMapping | templateProperty = роден | ontologyProperty = birthPlace }}
+	{{ PropertyMapping | templateProperty = роден-дата | ontologyProperty = birthDate }}
+	{{ PropertyMapping | templateProperty = роден-място | ontologyProperty = birthPlace }}
+	{{ PropertyMapping | templateProperty = място на раждане | ontologyProperty = birthPlace }}
+ 
+	{{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
+	{{ PropertyMapping | templateProperty = място на смъртта | ontologyProperty = deathPlace }}
+	{{ PropertyMapping | templateProperty = погребан | ontologyProperty = buriedPlace }}
 
-| defaultMappings =
+	{{ PropertyMapping | templateProperty = починал | ontologyProperty = deathDate }}
+	{{ PropertyMapping | templateProperty = починал | ontologyProperty = deathPlace }}
+	{{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
 
-  {{ DateIntervalMapping | templateProperty = управление
-    | startDateOntologyProperty = startDate
-    | endDateOntologyProperty = endDate
-  }}
+	{{ PropertyMapping | templateProperty = потомци | ontologyProperty = child }}
+	{{ PropertyMapping | templateProperty = потомство | ontologyProperty = child }}
 
-  {{ PropertyMapping | templateProperty = коронация | ontologyProperty = titleDate }}
+	{{ PropertyMapping | templateProperty = баща | ontologyProperty = parent }}
+	{{ PropertyMapping | templateProperty = майка | ontologyProperty = parent }}
 
-  {{ PropertyMapping | templateProperty = роден | ontologyProperty = birthDate }}
-  {{ PropertyMapping | templateProperty = роден | ontologyProperty = birthPlace }}
-  {{ PropertyMapping | templateProperty = роден-дата | ontologyProperty = birthDate }}
-  {{ PropertyMapping | templateProperty = роден-място | ontologyProperty = birthPlace }}
-  {{ PropertyMapping | templateProperty = място на раждане | ontologyProperty = birthPlace }}
+	{{ PropertyMapping | templateProperty = съпруга | ontologyProperty = spouse }}
 
-  {{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
-  {{ PropertyMapping | templateProperty = място на смъртта | ontologyProperty = deathPlace }}
-  {{ PropertyMapping | templateProperty = погребан | ontologyProperty = buriedPlace }}
+	{{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
+	{{ PropertyMapping | templateProperty = пълно име | ontologyProperty = foaf:name }}
 
-  {{ PropertyMapping | templateProperty = починал | ontologyProperty = deathDate }}
-  {{ PropertyMapping | templateProperty = починал | ontologyProperty = deathPlace }}
+	{{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
+	{{ PropertyMapping | templateProperty = портрет-описание | ontologyProperty = pictureDescription }}
+	{{ PropertyMapping | templateProperty = изображение за личността | ontologyProperty = picture }}
+	{{ PropertyMapping | templateProperty = описание на изображението | ontologyProperty = picture }}
 
-  {{ PropertyMapping | templateProperty = потомци | ontologyProperty = child }}
-  {{ PropertyMapping | templateProperty = потомство | ontologyProperty = child }}
+	{{ PropertyMapping | templateProperty = предшественик | ontologyProperty = predecessor }}
+	{{ PropertyMapping | templateProperty = наследник | ontologyProperty = successor }}
 
-  {{ PropertyMapping | templateProperty = баща | ontologyProperty = parent }}
-  {{ PropertyMapping | templateProperty = майка | ontologyProperty = parent }}
+	{{ PropertyMapping | templateProperty = династия | ontologyProperty = dynasty }}
 
-  {{ PropertyMapping | templateProperty = съпруг        | ontologyProperty = spouse }}
-  {{ PropertyMapping | templateProperty = съпруга       | ontologyProperty = spouse }}
-  {{ PropertyMapping | templateProperty = втори брак    | ontologyProperty = spouse }}
-  {{ PropertyMapping | templateProperty = трети брак    | ontologyProperty = spouse }}
-  {{ PropertyMapping | templateProperty = четвърти брак | ontologyProperty = spouse }}
-  {{ PropertyMapping | templateProperty = пети брак     | ontologyProperty = spouse }}
-  {{ PropertyMapping | templateProperty = шести брак    | ontologyProperty = spouse }}
+ 
+	{{ PropertyMapping | templateProperty = описание | ontologyProperty = description }}
+	{{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
+	{{ PropertyMapping | templateProperty = починал-години | ontologyProperty = deathDate }}
 
-  {{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
-  {{ PropertyMapping | templateProperty = пълно име | ontologyProperty = foaf:name }}
-
-  {{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
-  {{ PropertyMapping | templateProperty = изображение за личността | ontologyProperty = picture }}
-  {{ PropertyMapping | templateProperty = описание на изображението | ontologyProperty = pictureDescription }}
-  {{ PropertyMapping | templateProperty = портрет-описание | ontologyProperty = pictureDescription }}
-  {{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
-
-  {{ PropertyMapping | templateProperty = предшественик | ontologyProperty = predecessor }}
-  {{ PropertyMapping | templateProperty = наследник | ontologyProperty = successor }}
-
-  {{ PropertyMapping | templateProperty = династия | ontologyProperty = dynasty }}
-
-  {{ PropertyMapping | templateProperty = описание | ontologyProperty = description }}
-  {{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
-  {{ PropertyMapping | templateProperty = починал-години | ontologyProperty = deathDate }}
 }}</text></revision></page><page><title>Mapping bg:Музикален албум</title><ns>264</ns><id>5256</id><revision><id>17534</id><timestamp>2012-04-28T11:50:26Z</timestamp><text>{{ TemplateMapping | mapToClass = Album | mappings =
 
 	{{ PropertyMapping | templateProperty = година | ontologyProperty = releaseDate }}
@@ -1542,128 +961,62 @@
 
 	{{PropertyMapping | templateProperty = обложка | ontologyProperty = picture }}
 
-}}</text></revision></page><page><title>Mapping bg:Музикален изпълнител</title><ns>264</ns><id>5351</id><revision><id>39267</id><timestamp>2015-01-16T12:54:50Z</timestamp><text>{{ ConditionalMapping | cases =
+}}</text></revision></page><page><title>Mapping bg:Музикален изпълнител</title><ns>264</ns><id>5351</id><revision><id>18009</id><timestamp>2012-04-30T10:08:58Z</timestamp><text>{{ ConditionalMapping | cases =
+
 
 {{ Condition
-  | templateProperty = състав
-  | operator = isSet
-  | mapping = {{ TemplateMapping | mapToClass = Band }}
+	| templateProperty = състав
+	| operator = isSet
+	| mapping = {{ TemplateMapping | mapToClass = Band }}
 }}
 
 {{ Condition
-  | templateProperty = бивши_членове
-  | operator = isSet
-  | mapping = {{ TemplateMapping | mapToClass = Band }}
+	| templateProperty = бивши_членове
+	| operator = isSet
+	| mapping = {{ TemplateMapping | mapToClass = Band }}
 }}
 
 {{ Condition
-  | templateProperty = създадена
-  | operator = isSet
-  | mapping = {{ TemplateMapping | mapToClass = Band }}
+	| templateProperty = фон
+	| operator = isSet
+	| mapping = {{ TemplateMapping | mapToClass = Band }}
 }}
 
 {{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = група
-  | mapping = {{ TemplateMapping | mapToClass = Band }}
-}}
-
-{{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = квартет
-  | mapping = {{ TemplateMapping | mapToClass = Band }}
-}}
-
-{{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = ансамбъл
-  | mapping = {{ TemplateMapping | mapToClass = Band }}
-}}
-
-{{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = хор
-  | mapping = {{ TemplateMapping | mapToClass = Band }}
-}}
-
-{{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = композитор
-  | mapping = {{ TemplateMapping | mapToClass = MusicComposer }}
-}}
-
-{{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = диригент
-  | mapping = {{ TemplateMapping | mapToClass = MusicDirector }}
-}}
-
-{{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = певица
-  | mapping = {{ TemplateMapping | mapToClass = MusicalArtist | mappings =
-    {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}
-}}
-
-{{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = певец
-  | mapping = {{ TemplateMapping | mapToClass = MusicalArtist | mappings =
-    {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}
-}}
-
-{{ Condition
-  | templateProperty = фон
-  | operator = contains
-  | value = пианист
-  | mapping = {{ TemplateMapping | mapToClass = MusicalArtist | mappings =
-    {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}
-}}
-
-{{ Condition
-  | templateProperty = наставка
-  | operator = isSet
-  | mapping = {{ TemplateMapping | mapToClass = MusicalArtist | mappings =
-    {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}
-}}
-
-{{ Condition
-  | operator = otherwise
-  | mapping = {{ TemplateMapping | mapToClass = MusicalArtist | mappings =
-    {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}
+	| operator = otherwise
+	| mapping = {{ TemplateMapping | mapToClass = MusicalArtist }}
 }}
 
 | defaultMappings =
 
-  {{PropertyMapping | templateProperty = стил | ontologyProperty = genre }}
-  {{PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
-  {{PropertyMapping | templateProperty = състав | ontologyProperty = bandMember }}
-  {{PropertyMapping | templateProperty = бивши_членове | ontologyProperty = formerBandMember }}
-  {{PropertyMapping | templateProperty = свързани_изпълнители | ontologyProperty = formerBandMember }}
-  {{PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
-  {{PropertyMapping | templateProperty = картинка_текст  | ontologyProperty = pictureDescription }}
-  {{PropertyMapping | templateProperty = фон | ontologyProperty = background }}
+	{{PropertyMapping | templateProperty = стил | ontologyProperty = genre }}
 
-  {{PropertyMapping | templateProperty = рождено_име | ontologyProperty = birthName }}
-  {{PropertyMapping | templateProperty = роден_на | ontologyProperty = birthDate }}
-  {{PropertyMapping | templateProperty = роден_в | ontologyProperty = birthPlace }}
-  {{PropertyMapping | templateProperty = починал_на | ontologyProperty = deathDate }}
-  {{PropertyMapping | templateProperty = починал_в | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = състав | ontologyProperty = bandMember }}
+	{{PropertyMapping | templateProperty = бивши_членове | ontologyProperty = formerBandMember }}
+	{{PropertyMapping | templateProperty = свързани_изпълнители | ontologyProperty = formerBandMember }}
 
-  {{PropertyMapping | templateProperty = псевдоним | ontologyProperty = alias }}
+	{{PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
+	{{PropertyMapping | templateProperty = картинка_текст  | ontologyProperty = pictureDescription }}
 
-  {{PropertyMapping | templateProperty = създадена | ontologyProperty = formationDate }}
 
-  {{PropertyMapping | templateProperty = лейбъл | ontologyProperty = recordLabel}}
-  {{PropertyMapping | templateProperty = инструмент | ontologyProperty = instrument }}
+	{{PropertyMapping | templateProperty = фон | ontologyProperty = background }}
+
+	{{PropertyMapping | templateProperty = рождено_име | ontologyProperty = foaf:givenName }}
+	{{PropertyMapping | templateProperty = роден_на | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = роден_в | ontologyProperty = birthPlace }}
+
+	{{PropertyMapping | templateProperty = починал_на | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = починал_в | ontologyProperty = deathPlace }}
+
+	{{PropertyMapping | templateProperty = псевдоним | ontologyProperty = alias }}
+
+	{{PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
+
+	{{PropertyMapping | templateProperty = създадена | ontologyProperty = formationDate }}
+
+	{{PropertyMapping | templateProperty = лейбъл | ontologyProperty = recordLabel}}
+	{{PropertyMapping | templateProperty = инструмент | ontologyProperty = instrument }}
 
         {{ DateIntervalMapping
           | templateProperty          = период_на_активност 
@@ -1671,7 +1024,8 @@
           | endDateOntologyProperty   = activeYearsEndYear
         }}
 
-  {{PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }}
+
 
 }}</text></revision></page><page><title>Mapping bg:Музикална група</title><ns>264</ns><id>5299</id><revision><id>17617</id><timestamp>2012-04-28T22:38:06Z</timestamp><text>{{TemplateMapping | mapToClass = Band | mappings =
 
@@ -1785,7 +1139,7 @@
 	{{ PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }}
 	{{ PropertyMapping | templateProperty = URL | ontologyProperty = foaf:homepage }}
 
-}}</text></revision></page><page><title>Mapping bg:НМ</title><ns>264</ns><id>5240</id><revision><id>39081</id><timestamp>2015-01-08T17:47:39Z</timestamp><text>{{ TemplateMapping | mapToClass = PopulatedPlace | mappings = 
+}}</text></revision></page><page><title>Mapping bg:НМ</title><ns>264</ns><id>5240</id><revision><id>18138</id><timestamp>2012-05-05T19:01:13Z</timestamp><text>{{ TemplateMapping | mapToClass = PopulatedPlace | mappings = 
 
 	{{ PropertyMapping | templateProperty = българско название | ontologyProperty = foaf:name }}
 	{{ PropertyMapping | templateProperty = страна | ontologyProperty = locationCountry }}
@@ -1802,8 +1156,8 @@
 	{{ PropertyMapping | templateProperty = вид на района | ontologyProperty = regionType }}
 
 
-	{{ PropertyMapping | templateProperty = флаг | ontologyProperty = flag }}
-	{{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
+	{{ PropertyMapping | templateProperty = флаг | ontologyProperty = picture }}
+	{{ PropertyMapping | templateProperty = герб | ontologyProperty = picture }}
 
  
 	{{ PropertyMapping | templateProperty = климат | ontologyProperty = climate }}
@@ -1849,7 +1203,7 @@
  
 	{{ GeocoordinatesMapping | latitudeDegrees = lat_deg | latitudeMinutes = lat_min | latitudeSeconds = lat_sec | latitudeDirection = lat_dir | longitudeDegrees = lon_deg | longitudeMinutes = lon_min | longitudeSeconds = lon_sec | longitudeDirection = 	lon_dir }}
 
-}}</text></revision></page><page><title>Mapping bg:НМ във Франция</title><ns>264</ns><id>5754</id><revision><id>39089</id><timestamp>2015-01-08T17:54:19Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
+}}</text></revision></page><page><title>Mapping bg:НМ във Франция</title><ns>264</ns><id>5754</id><revision><id>18324</id><timestamp>2012-05-14T15:51:03Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
 
 	{{ PropertyMapping | templateProperty = дем | ontologyProperty = region }}
 	{{ PropertyMapping | templateProperty = област | ontologyProperty = region }}
@@ -1857,7 +1211,7 @@
 
 	{{ PropertyMapping | templateProperty = картинка-описание | ontologyProperty = pictureDescription }}
 	{{ PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
-	{{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
+	{{ PropertyMapping | templateProperty = герб | ontologyProperty = picture }}
 
 	{{ PropertyMapping | templateProperty = име-гр | ontologyProperty = originalName }}
 
@@ -1885,7 +1239,7 @@
 
 	{{ GeocoordinatesMapping | latitudeDirection = ширина | longitudeDirection = дължина }}
 
-}}</text></revision></page><page><title>Mapping bg:Община в Белгия инфо</title><ns>264</ns><id>5683</id><revision><id>39085</id><timestamp>2015-01-08T17:49:52Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
+}}</text></revision></page><page><title>Mapping bg:Община в Белгия инфо</title><ns>264</ns><id>5683</id><revision><id>18137</id><timestamp>2012-05-05T18:58:28Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
 
 	{{ PropertyMapping | templateProperty = община | ontologyProperty = municipality }}
  	{{ PropertyMapping | templateProperty = община-препратка| ontologyProperty = municipality }}
@@ -1910,7 +1264,7 @@
 
 	{{ PropertyMapping | templateProperty = описание_изглед | ontologyProperty = pictureDescription }}
 	{{ PropertyMapping | templateProperty = изглед | ontologyProperty = picture }}
-	{{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
+	{{ PropertyMapping | templateProperty = герб | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = знаме | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = картинка_описание | ontologyProperty = pictureDescription }}
@@ -1938,7 +1292,7 @@
 
 	{{ GeocoordinatesMapping | latitudeDirection = ширина | longitudeDirection = дължина }}
 
-}}</text></revision></page><page><title>Mapping bg:Община в България</title><ns>264</ns><id>5686</id><revision><id>39087</id><timestamp>2015-01-08T17:53:09Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
+}}</text></revision></page><page><title>Mapping bg:Община в България</title><ns>264</ns><id>5686</id><revision><id>18147</id><timestamp>2012-05-05T19:32:02Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
 
 	{{ PropertyMapping | templateProperty = област | ontologyProperty = region }}
 	{{ PropertyMapping | templateProperty = център | ontologyProperty = largestCity }}
@@ -1951,9 +1305,9 @@
 	{{ PropertyMapping | templateProperty = име-полски | ontologyProperty = originalName }}
  
 
-	{{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
+	{{ PropertyMapping | templateProperty = герб | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = карта | ontologyProperty = picture }}
-	{{ PropertyMapping | templateProperty = знаме | ontologyProperty = flag }}
+	{{ PropertyMapping | templateProperty = знаме | ontologyProperty = picture }}
 
 	{{ PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = картинка-описание | ontologyProperty = pictureDescription }}
@@ -1965,7 +1319,7 @@
 
 	{{ GeocoordinatesMapping | latitudeDirection = сев-ширина | longitudeDirection = изт-дължина }}
 
-}}</text></revision></page><page><title>Mapping bg:Окръзи в Полша инфо</title><ns>264</ns><id>5685</id><revision><id>39090</id><timestamp>2015-01-08T17:55:40Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
+}}</text></revision></page><page><title>Mapping bg:Окръзи в Полша инфо</title><ns>264</ns><id>5685</id><revision><id>18146</id><timestamp>2012-05-05T19:31:42Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
 
 	{{ PropertyMapping | templateProperty = войводство | ontologyProperty = region }}
 	{{ PropertyMapping | templateProperty = пощ-код | ontologyProperty = postalCode }}
@@ -1979,9 +1333,9 @@
  
 	{{ PropertyMapping | templateProperty = център | ontologyProperty = largestCity }}
 
-	{{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
+	{{ PropertyMapping | templateProperty = герб | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = карта | ontologyProperty = picture }}
-	{{ PropertyMapping | templateProperty = знаме | ontologyProperty = flag }}
+	{{ PropertyMapping | templateProperty = знаме | ontologyProperty = picture }}
 
 	{{ PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = картинка-описание | ontologyProperty = pictureDescription }}
@@ -2014,19 +1368,7 @@
 	{{ PropertyMapping | templateProperty = времетраене | ontologyProperty = runtime | unit = minute }}
 	{{ PropertyMapping | templateProperty = лейбъл | ontologyProperty = recordLabel }}
 
-}}</text></revision></page><page><title>Mapping bg:Пилот Ф1</title><ns>264</ns><id>5751</id><revision><id>38970</id><timestamp>2014-12-23T12:58:33Z</timestamp><text>{{ ConditionalMapping | cases =
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = FormulaOneRacer | mappings = 
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = FormulaOneRacer | mappings = 
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
-
-| defaultMappings =
-
+}}</text></revision></page><page><title>Mapping bg:Пилот Ф1</title><ns>264</ns><id>5751</id><revision><id>18319</id><timestamp>2012-05-14T15:33:16Z</timestamp><text>{{ TemplateMapping | mapToClass = FormulaOneRacer | mappings = 
 
 	{{ PropertyMapping | templateProperty = роден-място | ontologyProperty = birthPlace }}
 	{{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
@@ -2040,6 +1382,7 @@
 	{{ PropertyMapping | templateProperty = роден-дата | ontologyProperty = birthDate }}
 	{{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
 	{{ PropertyMapping | templateProperty = починал-години | ontologyProperty = deathDate }}
+	{{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
 
 	{{ PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
 
@@ -2066,39 +1409,22 @@
 	{{ PropertyMapping | templateProperty = най-бързи обиколки | ontologyProperty = fastestLap }}
 
 
-}}</text></revision></page><page><title>Mapping bg:Писател</title><ns>264</ns><id>5289</id><revision><id>39407</id><timestamp>2015-01-19T13:35:58Z</timestamp><text>{{ ConditionalMapping | cases =
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = Writer | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = Writer | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
+}}</text></revision></page><page><title>Mapping bg:Писател</title><ns>264</ns><id>5289</id><revision><id>17601</id><timestamp>2012-04-28T21:17:44Z</timestamp><text>{{ TemplateMapping | mapToClass = Writer | mappings = 
 
-| defaultMappings =
     {{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = псевдоним | ontologyProperty = pseudonym }}
-    {{ PropertyMapping | templateProperty = име-оригинал | ontologyProperty = originalName}}
 
     {{ PropertyMapping | templateProperty = място на раждане | ontologyProperty = birthPlace }}
     {{ PropertyMapping | templateProperty = място на смърт | ontologyProperty = deathPlace }}
     {{ PropertyMapping | templateProperty = дата на раждане | ontologyProperty = birthDate }}
     {{ PropertyMapping | templateProperty = дата на смърт | ontologyProperty = deathDate }}
-    {{DateIntervalMapping | templateProperty = период | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
 
-    {{ PropertyMapping | templateProperty = работил | ontologyProperty = profession }}
+    {{ PropertyMapping | templateProperty = работил | ontologyProperty = movement }}
     {{ PropertyMapping | templateProperty = брак | ontologyProperty = spouse }}
     {{ PropertyMapping | templateProperty = деца | ontologyProperty = child }}
 
     {{ PropertyMapping | templateProperty = жанрове | ontologyProperty = genre }}
-    {{ PropertyMapping | templateProperty = направление | ontologyProperty = genre }}
-    {{ PropertyMapping | templateProperty = течение | ontologyProperty = genre }}
-    {{ PropertyMapping | templateProperty = дебют | ontologyProperty = debutWork }}
-    {{ PropertyMapping | templateProperty = известни творби | ontologyProperty = notableWork }}
-    {{ PropertyMapping | templateProperty = награди | ontologyProperty = award }}
-
+ 
     {{ PropertyMapping | templateProperty = повлиян | ontologyProperty = influencedBy }}
     {{ PropertyMapping | templateProperty = повлиял | ontologyProperty = influenced }}
 
@@ -2106,49 +1432,39 @@
 
     {{ PropertyMapping | templateProperty = националност | ontologyProperty = nationality }}
     {{ PropertyMapping | templateProperty = описание | ontologyProperty = description }}
-    {{ PropertyMapping | templateProperty = бележки | ontologyProperty = notes }}
 
+    {{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
     {{ PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }} 
-    {{ PropertyMapping | templateProperty = подпис | ontologyProperty = signature }}
 
-}}</text></revision></page><page><title>Mapping bg:Президент инфо</title><ns>264</ns><id>5338</id><revision><id>39430</id><timestamp>2015-01-20T09:37:29Z</timestamp><text>{{ ConditionalMapping | cases =
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = OfficeHolder | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = OfficeHolder | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
+}}</text></revision></page><page><title>Mapping bg:Президент инфо</title><ns>264</ns><id>5338</id><revision><id>17670</id><timestamp>2012-04-29T09:48:48Z</timestamp><text>{{ TemplateMapping | mapToClass = OfficeHolder | mappings =
 
-| defaultMappings =
-  {{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
-  {{ PropertyMapping | templateProperty = роден-дата | ontologyProperty = birthDate }}
-  {{ PropertyMapping | templateProperty = роден-място | ontologyProperty = birthPlace }}
-  {{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
-  {{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
+	{{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
+	{{ PropertyMapping | templateProperty = роден-дата | ontologyProperty = birthDate }}
+	{{ PropertyMapping | templateProperty = роден-място | ontologyProperty = birthPlace }}
+	{{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
+	{{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
 
-  {{ PropertyMapping | templateProperty = ред | ontologyProperty = order }}
+	{{ PropertyMapping | templateProperty = ред | ontologyProperty = order }}
 
-  {{ PropertyMapping | templateProperty = дата1 | ontologyProperty = serviceStartDate }}
-  {{ PropertyMapping | templateProperty = дата2 | ontologyProperty = serviceEndDate }}
-  {{ PropertyMapping | templateProperty = партия | ontologyProperty = party }}
+	{{ PropertyMapping | templateProperty = дата1 | ontologyProperty = serviceStartDate }}
+	{{ PropertyMapping | templateProperty = дата2 | ontologyProperty = serviceEndDate }}
+	{{ PropertyMapping | templateProperty = партия | ontologyProperty = party }}
 
-  {{ PropertyMapping | templateProperty = предшестван | ontologyProperty = predecessor }}
-  {{ PropertyMapping | templateProperty = сменен | ontologyProperty = successor }}
+	{{ PropertyMapping | templateProperty = предшестван | ontologyProperty = predecessor }}
 
-  {{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
-  {{ PropertyMapping | templateProperty = жена | ontologyProperty = spouse }}
-  {{ PropertyMapping | templateProperty = съпруг | ontologyProperty = spouse }}
+	{{ PropertyMapping | templateProperty = портрет | ontologyProperty = picture }}
+	{{ PropertyMapping | templateProperty = сменен | ontologyProperty = spouse }}
+	{{ PropertyMapping | templateProperty = жена | ontologyProperty = spouse }}
+	{{ PropertyMapping | templateProperty = съпруг | ontologyProperty = spouse }}
 
-  {{ PropertyMapping | templateProperty = вицепрезидент | ontologyProperty = vicePresident }}
-  {{ PropertyMapping | templateProperty = министър-председател | ontologyProperty = primeMinister }}
+	{{ PropertyMapping | templateProperty = вицепрезидент | ontologyProperty = vicePresident }}
+	{{ PropertyMapping | templateProperty = министър-председател | ontologyProperty = primeMinister }}
 
-  {{ PropertyMapping | templateProperty = религия | ontologyProperty = religion }}
-  {{ PropertyMapping | templateProperty = alma mater | ontologyProperty = almaMater }}
+	{{ PropertyMapping | templateProperty = религия | ontologyProperty = religion }}
+	{{ PropertyMapping | templateProperty = alma mater | ontologyProperty = almaMater }}
+	{{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
 
-  {{ PropertyMapping | templateProperty = президент | ontologyProperty = president }}
+	{{ PropertyMapping | templateProperty = президент | ontologyProperty = president }}
 
 }}</text></revision></page><page><title>Mapping bg:Река инфо</title><ns>264</ns><id>5684</id><revision><id>18140</id><timestamp>2012-05-05T19:12:02Z</timestamp><text>{{ TemplateMapping | mapToClass = River | mappings = 
 
@@ -2242,48 +1558,25 @@
 
 	{{ GeocoordinatesMapping | latitudeDegrees = lat_deg | latitudeMinutes = lat_min | latitudeSeconds = lat_sec | latitudeDirection = lat_dir | longitudeDegrees = lon_deg | longitudeMinutes = lon_min | longitudeSeconds = lon_sec | longitudeDirection = lon_dir }}
 
-}}</text></revision></page><page><title>Mapping bg:Селище в България</title><ns>264</ns><id>5236</id><revision><id>39420</id><timestamp>2015-01-19T15:45:56Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
+}}</text></revision></page><page><title>Mapping bg:Селище в България</title><ns>264</ns><id>5236</id><revision><id>18144</id><timestamp>2012-05-05T19:25:24Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
 
 	{{ PropertyMapping | templateProperty = екатте | ontologyProperty = ekatteCode }}
 	{{ PropertyMapping | templateProperty = пощ-код | ontologyProperty = postalCode }}
 	{{ PropertyMapping | templateProperty = тел-код | ontologyProperty = areaCode }}
 	{{ PropertyMapping | templateProperty = надм-височина | ontologyProperty = elevation | unit = metre }}
-	{{ PropertyMapping | templateProperty = площ | ontologyProperty = area | unit = squareKilometre }}
+	{{ PropertyMapping | templateProperty = площ | ontologyProperty = areaLand | unit = squareKilometre }}
 	{{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
 
-	{{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
-	{{ PropertyMapping | templateProperty = знаме| ontologyProperty = flag }}
+	{{ PropertyMapping | templateProperty = герб | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = картинка-описание | ontologyProperty = pictureDescription }}
+
 
 	{{ PropertyMapping | templateProperty = население-нси | ontologyProperty = populationTotal }}
 	{{ PropertyMapping | templateProperty = население-нси-дата | ontologyProperty = populationAsOf }}
 
-	{{ GeocoordinatesMapping | latitude = сев-ширина | longitude = изт-дължина }}
-	{{ PropertyMapping | templateProperty = адрес-община | ontologyProperty = address }}
-	{{ PropertyMapping | templateProperty = адрес-кметство | ontologyProperty = address }}
+	{{ GeocoordinatesMapping | latitudeDirection = сев-ширина | longitudeDirection = изт-дължина }}
 
-}}</text></revision></page><page><title>Mapping bg:Селище в Италия инфо</title><ns>264</ns><id>10346</id><revision><id>39079</id><timestamp>2015-01-08T17:45:24Z</timestamp><text>{{TemplateMapping | mapToClass = Settlement
-| mappings = 
-  {{ PropertyMapping | templateProperty = височина | ontologyProperty = elevation | unit = metre}}
-  {{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon}}
-  {{ PropertyMapping | templateProperty = девиз | ontologyProperty = motto }}
-  {{ PropertyMapping | templateProperty = знаме | ontologyProperty = flag }}
-  {{ PropertyMapping | templateProperty = изглед | ontologyProperty = picture }}
-  {{ PropertyMapping | templateProperty = изглед-описание | ontologyProperty = pictureDescription }}
-  {{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
-  {{ PropertyMapping | templateProperty = име-местно | ontologyProperty = originalName }}
-  {{ PropertyMapping | templateProperty = кмет | ontologyProperty = mayor }}
-  {{ PropertyMapping | templateProperty = население | ontologyProperty = populationTotal }}
-  {{ PropertyMapping | templateProperty = население-година | ontologyProperty = populationAsOf }}
-  {{ PropertyMapping | templateProperty = община | ontologyProperty = municipality }}
-  {{ PropertyMapping | templateProperty = основаване | ontologyProperty = foundationDate }}
-  {{ PropertyMapping | templateProperty = площ | ontologyProperty = areaLand | unit = squareKilometre }}
-  {{ PropertyMapping | templateProperty = пощенски-код | ontologyProperty = postalCode }}
-  {{ PropertyMapping | templateProperty = провинция | ontologyProperty = region }}
-  {{ PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }}
-  {{ PropertyMapping | templateProperty = телефонен-код | ontologyProperty = areaCode }}
-  {{ GeocoordinatesMapping | latitudeDirection = гео-ширина | longitudeDirection = гео-дължина}}
 }}</text></revision></page><page><title>Mapping bg:Селище в РГ инфо</title><ns>264</ns><id>5255</id><revision><id>18143</id><timestamp>2012-05-05T19:19:37Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
 
 	{{ PropertyMapping | templateProperty = дем | ontologyProperty = region }}
@@ -2317,7 +1610,7 @@
 	{{ GeocoordinatesMapping | latitudeDirection = ширина | longitudeDirection = дължина }}
 --&gt;
 
-}}</text></revision></page><page><title>Mapping bg:Селище в РМ инфо</title><ns>264</ns><id>5254</id><revision><id>39084</id><timestamp>2015-01-08T17:49:31Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
+}}</text></revision></page><page><title>Mapping bg:Селище в РМ инфо</title><ns>264</ns><id>5254</id><revision><id>18133</id><timestamp>2012-05-05T18:41:11Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
 
 	{{ PropertyMapping | templateProperty = община | ontologyProperty = municipality }}
  	{{ PropertyMapping | templateProperty = община-препратка| ontologyProperty = municipality }}
@@ -2337,7 +1630,7 @@
 
 	{{ PropertyMapping | templateProperty = описание_изглед | ontologyProperty = pictureDescription }}
 	{{ PropertyMapping | templateProperty = изглед | ontologyProperty = picture }}
-	{{ PropertyMapping | templateProperty = герб| ontologyProperty = blazon }}
+	{{ PropertyMapping | templateProperty = герб| ontologyProperty = picture }}
 
 
 	{{ PropertyMapping | templateProperty = пощенски-код | ontologyProperty = postalCode }}
@@ -2348,7 +1641,7 @@
 
 	{{ GeocoordinatesMapping | latitudeDirection = ширина | longitudeDirection = дължина }}
 
-}}</text></revision></page><page><title>Mapping bg:Селище в Сърбия</title><ns>264</ns><id>5752</id><revision><id>39088</id><timestamp>2015-01-08T17:53:52Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
+}}</text></revision></page><page><title>Mapping bg:Селище в Сърбия</title><ns>264</ns><id>5752</id><revision><id>18321</id><timestamp>2012-05-14T15:38:22Z</timestamp><text>{{ TemplateMapping | mapToClass = Settlement | mappings =
 
 	{{ PropertyMapping | templateProperty = дем | ontologyProperty = region }}
 	{{ PropertyMapping | templateProperty = област | ontologyProperty = region }}
@@ -2356,7 +1649,7 @@
 
 	{{ PropertyMapping | templateProperty = описание | ontologyProperty = dc:description }}
 
-	{{ PropertyMapping | templateProperty = герб | ontologyProperty = blazon }}
+	{{ PropertyMapping | templateProperty = герб | ontologyProperty = picture }}
 	{{ PropertyMapping | templateProperty = описание-изглед | ontologyProperty = pictureDescription }}
 	{{ PropertyMapping | templateProperty = описание_изглед | ontologyProperty = pictureDescription }}
 	{{ PropertyMapping | templateProperty = изглед | ontologyProperty = picture }}
@@ -2559,39 +1852,33 @@
 	{{ PropertyMapping | templateProperty = Страна | ontologyProperty = country }}
 	{{ PropertyMapping | templateProperty = Уебсайт | ontologyProperty = foaf:homepage }}
 
-}}</text></revision></page><page><title>Mapping bg:Тенисист</title><ns>264</ns><id>5658</id><revision><id>39093</id><timestamp>2015-01-08T18:21:31Z</timestamp><text>{{ ConditionalMapping | cases =
-
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = TennisPlayer | mappings = 
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
-
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = TennisPlayer | mappings = 
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
-
-| defaultMappings =
+}}</text></revision></page><page><title>Mapping bg:Тенисист</title><ns>264</ns><id>5658</id><revision><id>18065</id><timestamp>2012-05-01T20:18:06Z</timestamp><text>{{ TemplateMapping | mapToClass = TennisPlayer | mappings = 
 
     {{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = име-латински | ontologyProperty = foaf:name }}
  
     {{ PropertyMapping | templateProperty = псевдоним | ontologyProperty = pseudonym }}
-    {{ PropertyMapping | templateProperty = прякор | ontologyProperty = pseudonym }}
+    {{ PropertyMapping | templateProperty = прякор | ontologyProperty = foaf:name }}
 
-  &lt;!-- {{ PropertyMapping | templateProperty = обновяване | ontologyProperty = date }} --&gt;
+    {{ PropertyMapping | templateProperty = обновяване | ontologyProperty = date }}
 	
-    {{ PropertyMapping | templateProperty = живее-в | ontologyProperty = residence }}
+ 
+    {{ PropertyMapping | templateProperty = живее-в | ontologyProperty = location }}
     {{ PropertyMapping | templateProperty = пари | ontologyProperty = gross }}
+
 
     {{ PropertyMapping | templateProperty = височина | ontologyProperty = height }}
     {{ PropertyMapping | templateProperty = тегло | ontologyProperty = weight }}
 
     {{ PropertyMapping | templateProperty = описание | ontologyProperty = description }}
 
+
+
     {{ PropertyMapping | templateProperty = позиция-сингъл | ontologyProperty = rankingsSingles }}
     {{ PropertyMapping | templateProperty = позиция-двойки | ontologyProperty = rankingsDoubles }}
+
+ 
+	
 
     {{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
     {{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
@@ -2614,12 +1901,14 @@
     {{ PropertyMapping | templateProperty = повлиял | ontologyProperty = influenced }}
 
     {{ PropertyMapping | templateProperty = снимка | ontologyProperty = picture }}
-    {{ PropertyMapping | templateProperty = картинка | ontologyProperty = picture }}
+    {{ PropertyMapping | templateProperty = катинка | ontologyProperty = picture }}
 
     {{ PropertyMapping | templateProperty = държава | ontologyProperty = country }}
 
     {{ PropertyMapping | templateProperty = националност | ontologyProperty = nationality }}
     {{ PropertyMapping | templateProperty = описание | ontologyProperty = description }}
+
+    {{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
     {{ PropertyMapping | templateProperty = сайт | ontologyProperty = foaf:homepage }} 
 
 }}</text></revision></page><page><title>Mapping bg:Учен информация</title><ns>264</ns><id>5257</id><revision><id>17535</id><timestamp>2012-04-28T13:08:39Z</timestamp><text>{{ TemplateMapping | mapToClass = Scientist | mappings = 
@@ -2764,20 +2053,7 @@
 
 	{{ PropertyMapping | templateProperty = прякор | ontologyProperty = commonName }}
 
-}}</text></revision></page><page><title>Mapping bg:Шахматист</title><ns>264</ns><id>5690</id><revision><id>38961</id><timestamp>2014-12-23T12:20:46Z</timestamp><text>{{ ConditionalMapping | cases =
-
-  {{ Condition
-    | templateProperty = наставка
-    | operator = isSet
-    | mapping = {{ TemplateMapping | mapToClass = ChessPlayer | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Female}}}}}}
-
-  {{ Condition
-    | operator = otherwise
-    | mapping = {{ TemplateMapping | mapToClass = ChessPlayer | mappings =
-      {{ConstantMapping | ontologyProperty = gender | value = http://dbpedia.org/resource/Male}}}}}}
-
-| defaultMappings =
+}}</text></revision></page><page><title>Mapping bg:Шахматист</title><ns>264</ns><id>5690</id><revision><id>18155</id><timestamp>2012-05-05T19:50:18Z</timestamp><text>{{ TemplateMapping | mapToClass = ChessPlayer | mappings =
 
 	{{ PropertyMapping | templateProperty = име | ontologyProperty = foaf:name }}
 	{{ PropertyMapping | templateProperty = Име | ontologyProperty = foaf:name }}
@@ -2787,9 +2063,9 @@
 	{{ PropertyMapping | templateProperty = роден-дата | ontologyProperty = birthDate }}
 	{{ PropertyMapping | templateProperty = починал-място | ontologyProperty = deathPlace }}
 	{{ PropertyMapping | templateProperty = починал-дата | ontologyProperty = deathDate }}
+	{{ PropertyMapping | templateProperty = наставка | ontologyProperty = sex }}
+ 
 
-	{{ PropertyMapping | templateProperty = звание | ontologyProperty = title }}
-	{{ PropertyMapping | templateProperty = световен шампион | ontologyProperty = worldChampionTitleYear }}
 	{{ PropertyMapping | templateProperty = ЕЛО | ontologyProperty = elo }}
 	{{ PropertyMapping | templateProperty = ЕЛО-рекорд | ontologyProperty = eloRecord }}
 	{{ PropertyMapping | templateProperty = място-държава | ontologyProperty = country }}

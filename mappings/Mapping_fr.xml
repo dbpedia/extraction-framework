@@ -2964,12 +2964,12 @@
         {{PropertyMapping | templateProperty = position | ontologyProperty = position }}
         {{PropertyMapping | templateProperty = sites touristiques | ontologyProperty = touristicSite }}
         {{PropertyMapping | templateProperty = url | ontologyProperty = foaf:homepage }} 
-}}</text></revision></page><page><title>Mapping fr:Infobox Commune du Liban</title><ns>210</ns><id>6956</id><revision><id>39132</id><timestamp>2015-01-10T12:46:33Z</timestamp><text>{{TemplateMapping 
+}}</text></revision></page><page><title>Mapping fr:Infobox Commune du Liban</title><ns>210</ns><id>6956</id><revision><id>27800</id><timestamp>2013-07-16T14:18:44Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Settlement 
 | mappings = 
         {{ConstantMapping | ontologyProperty = country | value = Liban }} 
         {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-        {{PropertyMapping | templateProperty = nomarabe | ontologyProperty = foaf:name | language = ar-ly }}
+        {{PropertyMapping | templateProperty = nomarabe | ontologyProperty = arabicName }}
         {{PropertyMapping | templateProperty = autres noms | ontologyProperty = otherName }}
         {{PropertyMapping | templateProperty = statut | ontologyProperty = status }}
         {{PropertyMapping | templateProperty = blason | ontologyProperty = blazon }} 
@@ -3729,7 +3729,7 @@
 	{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
         {{PropertyMapping | templateProperty = distinctions | ontologyProperty = decoration }}
         {{PropertyMapping | templateProperty = œuvres | ontologyProperty = created }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Empereur romain</title><ns>210</ns><id>7633</id><revision><id>39463</id><timestamp>2015-01-20T13:30:23Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Empereur romain</title><ns>210</ns><id>7633</id><revision><id>27918</id><timestamp>2013-07-18T15:04:51Z</timestamp><text>{{TemplateMapping
 | mapToClass = RomanEmperor
 | mappings =
         {{PropertyMapping | templateProperty = empereur | ontologyProperty = foaf:name }}
@@ -3750,9 +3750,9 @@
         {{PropertyMapping | templateProperty = nais | ontologyProperty = birthDate }}
         {{PropertyMapping | templateProperty = mort | ontologyProperty = deathDate }}
         {{PropertyMapping | templateProperty = inhum | ontologyProperty = deathPlace }}
-        {{PropertyMapping | templateProperty = pere | ontologyProperty = parent }}
-        {{PropertyMapping | templateProperty = mere | ontologyProperty = parent }}
-        {{PropertyMapping | templateProperty = femme | ontologyProperty = spouse}}
+        {{PropertyMapping | templateProperty = pere | ontologyProperty = father }}
+        {{PropertyMapping | templateProperty = mere | ontologyProperty = mother }}
+        {{PropertyMapping | templateProperty = femme | ontologyProperty = wife }}
         {{PropertyMapping | templateProperty = enfant | ontologyProperty = child }}       
 }}</text></revision></page><page><title>Mapping fr:Infobox Escrimeur</title><ns>210</ns><id>7639</id><revision><id>27306</id><timestamp>2013-07-10T11:01:45Z</timestamp><text>{{TemplateMapping
 | mapToClass = Fencer
@@ -7362,10 +7362,10 @@
         {{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }} 
         {{PropertyMapping | templateProperty = saison | ontologyProperty = season }} 
         {{PropertyMapping | templateProperty = géolocalisation | ontologyProperty = position }} 
-}}</text></revision></page><page><title>Mapping fr:Infobox Subdivision administrative</title><ns>210</ns><id>7154</id><revision><id>39203</id><timestamp>2015-01-12T09:31:51Z</timestamp><text>{{ TemplateMapping 
+}}</text></revision></page><page><title>Mapping fr:Infobox Subdivision administrative</title><ns>210</ns><id>7154</id><revision><id>27827</id><timestamp>2013-07-16T14:34:59Z</timestamp><text>{{ TemplateMapping 
 | mapToClass = City 
 | mappings = 
-    {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name | language = fr }}
+    {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
     {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
     {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
     {{IntermediateNodeMapping
@@ -7853,6 +7853,170 @@
 {{PropertyMapping | templateProperty = date d'ouverture | ontologyProperty = openingDate}}
 {{PropertyMapping | templateProperty = date de fermeture | ontologyProperty = closingDate}}
 
+}}</text></revision></page><page><title>Mapping fr:Infobox Ville</title><ns>210</ns><id>4453</id><revision><id>27908</id><timestamp>2013-07-17T11:18:58Z</timestamp><text>{{ TemplateMapping 
+| mapToClass = City 
+| mappings = 
+    {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
+    {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+    {{IntermediateNodeMapping
+    | nodeClass = Place
+    | correspondingProperty = takePlace
+    | mappings =
+       {{PropertyMapping | templateProperty = division | ontologyProperty = sharingOut }}
+       {{PropertyMapping | templateProperty = nom division | ontologyProperty = name }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = Place
+    | correspondingProperty = takePlace
+    | mappings =
+       {{PropertyMapping | templateProperty = division2 | ontologyProperty = sharingOut }}
+       {{PropertyMapping | templateProperty = nom division2 | ontologyProperty = name }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = Place
+    | correspondingProperty = takePlace
+    | mappings =
+       {{PropertyMapping | templateProperty = division3 | ontologyProperty = sharingOut }}
+       {{PropertyMapping | templateProperty = nom division3 | ontologyProperty = name }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = Place
+    | correspondingProperty = takePlace
+    | mappings =
+       {{PropertyMapping | templateProperty = division4 | ontologyProperty = sharingOut }}
+       {{PropertyMapping | templateProperty = nom division4 | ontologyProperty = name }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = Place
+    | correspondingProperty = takePlace
+    | mappings =
+       {{PropertyMapping | templateProperty = division5 | ontologyProperty = sharingOut }}
+       {{PropertyMapping | templateProperty = nom division5 | ontologyProperty = name }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = Place
+    | correspondingProperty = takePlace
+    | mappings =
+       {{PropertyMapping | templateProperty = division6 | ontologyProperty = sharingOut }}
+       {{PropertyMapping | templateProperty = nom division6 | ontologyProperty = name }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = autorité  | ontologyProperty = authority }}
+       {{PropertyMapping | templateProperty = titre autorité | ontologyProperty = title }}
+       {{DateIntervalMapping
+        | templateProperty          = mandat autorité
+        | startDateOntologyProperty = activeYearsStartYear
+        | endDateOntologyProperty   = activeYearsEndYear
+       }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = autorité2  | ontologyProperty = authority }}
+       {{PropertyMapping | templateProperty = titre autorité2 | ontologyProperty = title }}
+       {{DateIntervalMapping
+        | templateProperty          = mandat autorité2
+        | startDateOntologyProperty = activeYearsStartYear
+        | endDateOntologyProperty   = activeYearsEndYear
+       }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = autorité3  | ontologyProperty = authority }}
+       {{PropertyMapping | templateProperty = titre autorité3 | ontologyProperty = title }}
+       {{DateIntervalMapping
+        | templateProperty          = mandat autorité3
+        | startDateOntologyProperty = activeYearsStartYear
+        | endDateOntologyProperty   = activeYearsEndYear
+       }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = autorité4  | ontologyProperty = authority }}
+       {{PropertyMapping | templateProperty = titre autorité4 | ontologyProperty = title }}
+       {{DateIntervalMapping
+        | templateProperty          = mandat autorité4
+        | startDateOntologyProperty = activeYearsStartYear
+        | endDateOntologyProperty   = activeYearsEndYear
+       }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = maire  | ontologyProperty = mayor }}
+       {{DateIntervalMapping
+        | templateProperty          = mandat maire
+        | startDateOntologyProperty = activeYearsStartYear
+        | endDateOntologyProperty   = activeYearsEndYear
+       }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = préfet | ontologyProperty = prefect }}
+       {{DateIntervalMapping
+        | templateProperty          = mandat préfet
+        | startDateOntologyProperty = activeYearsStartYear
+        | endDateOntologyProperty   = activeYearsEndYear
+       }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = gouverneur | ontologyProperty = governor }}
+       {{DateIntervalMapping
+        | templateProperty          = mandat gouverneur
+        | startDateOntologyProperty = activeYearsStartYear
+        | endDateOntologyProperty   = activeYearsEndYear
+       }}
+    }}
+    {{PropertyMapping | templateProperty = cp | ontologyProperty = postalCode }}
+    {{PropertyMapping | templateProperty = gentilé | ontologyProperty = peopleName }}
+    {{IntermediateNodeMapping
+    | nodeClass = Demographics
+    | correspondingProperty = demographics
+    | mappings =
+       {{PropertyMapping | templateProperty = population | ontologyProperty = populationTotal }} 
+       {{PropertyMapping | templateProperty = année_pop | ontologyProperty = year }} 
+    }}
+    {{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
+    {{PropertyMapping | templateProperty = type coord | ontologyProperty = typeCoordinate }}
+    {{IntermediateNodeMapping
+    | nodeClass = Altitude
+    | correspondingProperty = altitude
+    | mappings =
+       {{PropertyMapping | templateProperty = altitude | ontologyProperty = value }} 
+       {{PropertyMapping | templateProperty = alt mini | ontologyProperty = min }}
+       {{PropertyMapping | templateProperty = alt maxi | ontologyProperty = max }}
+    }}
+    {{IntermediateNodeMapping
+        | nodeClass = Agglomeration
+        | correspondingProperty = agglomeration
+        | mappings = 
+           {{IntermediateNodeMapping
+           | nodeClass = Area
+           | correspondingProperty = wholeArea
+           | mappings =
+              {{PropertyMapping | templateProperty = superficie agglomération | ontologyProperty = value }} 
+           }}
+        }}
+    {{ PropertyMapping | templateProperty = sites touristiques | ontologyProperty = touristicSite }}
+    {{ PropertyMapping | templateProperty = carte | ontologyProperty = map }}
+    {{PropertyMapping | templateProperty = statut | ontologyProperty = status }}
+    {{PropertyMapping | templateProperty = position | ontologyProperty = position }}
+    {{PropertyMapping | templateProperty = url | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Ville2</title><ns>210</ns><id>7210</id><revision><id>27909</id><timestamp>2013-07-17T11:19:14Z</timestamp><text>{{ TemplateMapping 
 | mapToClass = City 
 | mappings = 
@@ -9303,12 +9467,12 @@
         {{PropertyMapping | templateProperty = carte | ontologyProperty = map }}
         {{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
         {{PropertyMapping | templateProperty = site_web | ontologyProperty = foaf:homepage }} 
-}}</text></revision></page><page><title>Mapping fr:Infobox Ville de Serbie</title><ns>210</ns><id>5960</id><revision><id>39131</id><timestamp>2015-01-10T12:40:24Z</timestamp><text>{{TemplateMapping 
+}}</text></revision></page><page><title>Mapping fr:Infobox Ville de Serbie</title><ns>210</ns><id>5960</id><revision><id>27844</id><timestamp>2013-07-16T14:43:51Z</timestamp><text>{{TemplateMapping 
 | mapToClass = City 
 | mappings = 
         {{ConstantMapping | ontologyProperty = country | value = Serbie }} 
-        {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name | language = fr }}
-        {{PropertyMapping | templateProperty = nom_cyrillique | ontologyProperty = foaf:name | language = sr-Cyrl }}
+        {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = nom_cyrillique | ontologyProperty = cyrilliqueName }}
         {{PropertyMapping | templateProperty = autres noms | ontologyProperty = otherName }}
         {{PropertyMapping | templateProperty = statut | ontologyProperty = status }}
         {{PropertyMapping | templateProperty = blason | ontologyProperty = blazon }}
