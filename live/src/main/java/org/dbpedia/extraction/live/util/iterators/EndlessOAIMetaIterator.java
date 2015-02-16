@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.live.util.iterators;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.OAIUtil;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import java.util.Collections;
@@ -17,8 +18,7 @@ import java.util.Iterator;
  */
 public class EndlessOAIMetaIterator
         extends PrefetchIterator<Document> {
-    private static Logger logger = Logger
-            .getLogger(EndlessOAIMetaIterator.class);
+    private static Logger logger = LoggerFactory.getLogger(EndlessOAIMetaIterator.class);
 
     private String oaiBaseUri = null;
     private String startDate = null;

@@ -1,20 +1,25 @@
 package org.dbpedia.extraction.live.publisher;
 
+import org.dbpedia.extraction.destinations.Quad;
+
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Holds a diff for a new extraction (called from PublisherDiffDestination)
  */
 public class DiffData {
 
-    public long pageID = 0;
-    public HashSet<String> toAdd = null;
-    public HashSet<String> toDelete = null;
+    public final long pageID;
+    public final Set<Quad> toAdd;
+    public final Set<Quad> toDelete;
+    public final Set<Quad> subjects;
 
-    public DiffData(long id, HashSet<String> add, HashSet<String> delete){
+    public DiffData(long id, final Set<Quad> add, final Set<Quad> delete, final Set<Quad> subjects){
         pageID = id;
-        toAdd = new HashSet<String>(add);
-        toDelete = new HashSet<String>(delete);
+        this.toAdd = new HashSet<>(add);
+        this.toDelete = new HashSet<>(delete);
+        this.subjects = new HashSet<>(subjects);
     }
 }
 

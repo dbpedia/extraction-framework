@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.live.statistics;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.main.Main;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.Timer;
@@ -16,7 +17,7 @@ import java.util.TimerTask;
  * Handles all statistics
  */
 public class Statistics {
-    private static Logger logger = Logger.getLogger(Statistics.class);
+    private static Logger logger = LoggerFactory.getLogger(Statistics.class);
     // File to read/write statistics
     private final String statisticsFileName;
     // Number of detailed statistics instances to keep

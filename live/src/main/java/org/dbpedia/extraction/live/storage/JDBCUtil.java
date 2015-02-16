@@ -1,21 +1,23 @@
 package org.dbpedia.extraction.live.storage;
 
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.util.DateUtil;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class contains usefull funtions to deal with JDBC
  */
 public class JDBCUtil {
     //Initializing the Logger
-    private static Logger logger = Logger.getLogger(JDBCUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(JDBCUtil.class);
 
 
     /*
@@ -175,17 +177,19 @@ public class JDBCUtil {
                 int timesUpdated = result.getInt("timesUpdated");
                 Blob jsonBlob = result.getBlob("json");
                 byte[] jsonData = jsonBlob.getBytes(1, (int) jsonBlob.length());
+                String jsonString = new String(jsonData);//.toString().getBytes("UTF8")); // convert to UTF8
 
                 Blob subjectsBlob = result.getBlob("subjects");
                 byte[] subjectsData = subjectsBlob.getBytes(1, (int) subjectsBlob.length());
-                String subjects = new String(subjectsData);
-                HashSet<String> subjectSet = new HashSet();
+                String subjects = new String(subjectsData);//.toString().getBytes("UTF8"));  // convert to UTF8
+                Set<String> subjectSet = new HashSet<>();
                 for (String item: subjects.split("\n")) {
-                    if (!item.trim().isEmpty())
-                        subjectSet.add(item);
+                    String subject = item.trim();
+                    if (!subject.isEmpty())
+                        subjectSet.add(org.apache.commons.lang.StringEscapeUtils.unescapeJava(subject));
                 }
 
-                return new JSONCacheItem(pageID, timesUpdated, new String(jsonData), subjectSet);
+                return new JSONCacheItem(pageID, timesUpdated, jsonString, subjectSet);
             } else {
                 return null;
             }

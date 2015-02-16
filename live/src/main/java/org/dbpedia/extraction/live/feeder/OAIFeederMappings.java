@@ -27,7 +27,7 @@ public class OAIFeederMappings extends OAIFeeder {
                 pollInterval, sleepInterval, defaultStartTime,
                 folderBasePath);
 
-        String langCode = LiveOptions.options.get("language");
+        String langCode = LiveOptions.language;
         mappingNamespace = "Mapping " + langCode + ":";
 
     }

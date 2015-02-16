@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.destinations.formatters.RDFJSONFormatter
+import org.slf4j.LoggerFactory
 import scala.collection.Seq
 import util.Sorting
 import collection.mutable.ArrayBuffer
-import org.apache.log4j.Logger
 import org.dbpedia.extraction.live.storage.JSONCache
 import java.util.HashSet
 
@@ -13,11 +13,12 @@ import java.util.HashSet
 * This destination stores a json file with all the extractor output to compare for next extraction
 * */
 class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
-  private val logger = Logger.getLogger(classOf[JSONCacheUpdateDestination].getName)
+  private val logger = LoggerFactory.getLogger(classOf[JSONCacheUpdateDestination].getName)
 
 
   var extractors = new ArrayBuffer[String](20)
   var hashes = new ArrayBuffer[String](20)
+  var isModified = false
   val formatter: RDFJSONFormatter = new RDFJSONFormatter
   val subjects = new HashSet[String]
 
@@ -32,6 +33,9 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
     for (quad <- graphRemove) subjects.add(quad.subject);
     for (quad <- graphUnmodified) subjects.add(quad.subject);
 
+    if (graphAdd.size > 0 || graphRemove.size > 0) {
+      isModified = true
+    }
   }
 
   def close {
@@ -49,7 +53,7 @@ class JSONCacheUpdateDestination(cache: JSONCache) extends LiveDestination {
       sb.setCharAt(sb.lastIndexOf(","), ' ')
 
 
-    val success = cache.updateCache(sb.toString, subjects, "") //TODO add subjects / diffs
+    val success = cache.updateCache(sb.toString, subjects, "", isModified) //TODO add subjects / diffs
     // TODO better logging
     if (!success) logger.info( "Updating JSON Cache failed")
 

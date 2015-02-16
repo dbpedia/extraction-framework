@@ -2,9 +2,9 @@ package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.live.storage.JDBCUtil
+import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import scala.collection.Seq
-import org.apache.log4j.Logger
 import java.util.HashSet
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.destinations.formatters.SPARULFormatter
@@ -13,9 +13,9 @@ import org.dbpedia.extraction.destinations.formatters.SPARULFormatter
  * Deletes all existing triples for this resource from the DB
  */
 
-class SPARULDelAllDestination(subjects: HashSet[String], policies: Array[Policy]) extends LiveDestination {
+class SPARULDelAllDestination(subjects: java.util.Set[String], policies: Array[Policy]) extends LiveDestination {
 
-  protected val logger = Logger.getLogger(classOf[SPARULDelAllDestination].getName)
+  protected val logger = LoggerFactory.getLogger(classOf[SPARULDelAllDestination].getName)
 
   def open(): Unit = ()
 
@@ -31,7 +31,7 @@ class SPARULDelAllDestination(subjects: HashSet[String], policies: Array[Policy]
 
   def close {
     val formatter = new SPARULFormatter(false, "", policies)
-    val language = LiveOptions.options.get("language")
+    val language = LiveOptions.language
     for (res <- subjects) {
       if (!res.contains("dbpedia.org/property") && !res.trim.isEmpty) {
         //hack! we only need the uri escape here otherwise we need to create a new formatter / builder

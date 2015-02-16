@@ -19,7 +19,7 @@ import org.dbpedia.extraction.live.core.LiveOptions
 object MappingAffectedPagesHelper {
   def GetMappingPages(title: String): List[Long] = {
 
-    val langCode = LiveOptions.options.get("language")
+    val langCode = LiveOptions.language
     val language = Language.apply(langCode)
     val templateTitle = new WikiTitle(title, Namespace.Template, language)
     val wikiApiUrl = new URL(LiveOptions.options.get("localApiURL"))
