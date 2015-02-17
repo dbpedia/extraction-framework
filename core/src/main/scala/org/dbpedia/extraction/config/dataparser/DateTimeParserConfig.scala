@@ -16,6 +16,7 @@ object DateTimeParserConfig
         "en" -> Map("january"->1,"february"->2,"march"->3,"april"->4,"may"->5,"june"->6,"july"->7,"august"->8,"september"->9,"october"->10,"november"->11,"december"->12),
         "eo" -> Map("januaro"->1,"februaro"->2,"marto"->3,"aprilo"->4,"majo"->5,"junio"->6,"julio"->7,"aŭgusto"->8,"septembro"->9,"oktobro"->10,"novembro"->11,"decembro"->12),
         "es" -> Map("enero"->1,"febrero"->2,"marzo"->3,"abril"->4,"mayo"->5,"junio"->6,"julio"->7,"agosto"->8,"septiembre"->9,"octubre"->10,"noviembre"->11,"diciembre"->12),
+        "eu" -> Map("urtarrila"->1,"otsaila"->2,"martxoa"->3,"apirila"->4,"maiatza"->5,"ekaina"->6,"uztaila"->7,"abuztua"->8,"iraila"->9,"urria"->10,"azaroa"->11,"abendua"->12),
         "fr" -> Map("janvier"->1,"février"->2,"mars"->3,"avril"->4,"mai"->5,"juin"->6,"juillet"->7,"août"->8,"septembre"->9,"octobre"->10,"novembre"->11,"décembre"->12),
         "ga" -> Map("eanáir"->1,"feabhra"->2,"marta"->3,"aibreán"->4,"bealtaine"->5,"meitheamh"->6,"iúil"->7,"lúnasa"->8,"meán fómhair"->9,"deireadh fómhair"->10,"samhain"->11,"nollaig"->12),
         "hr" -> Map("siječanj"->1,"veljača"->2,"ožujak"->3,"travanj"->4,"svibanj"->5,"lipanj"->6,"srpanj"->7,"kolovoz"->8,"rujan"->9,"listopad"->10,"studeni"->11,"prosinac"->12),
@@ -48,6 +49,7 @@ object DateTimeParserConfig
         "el" -> Map("ΠΧ"-> -1, "Π\\.Χ\\."-> -1, "Π\\.Χ"-> -1 , "ΜΧ"-> 1 , "Μ\\.Χ\\."-> 1, "Μ\\.Χ"-> 1),
         "eo" -> Map("a.K." -> -1, "p.K." -> -1),
         "es" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
+        "eu" -> Map("K\\.a\\."-> -1, "A\\. D\\."-> 1),
         "fr" -> Map("av\\. J\\.-C\\."-> -1, "ap\\. J\\.-C\\." -> 1),
         "ga" -> Map("B\\.C\\." -> -1, "R\\.C\\." -> -1, "r\\. Chr\\." -> -1, "BC" -> -1, "RC" -> -1, "A\\.D\\." -> 1, "AD" -> 1, "I\\.C\\." -> 1, "IC" -> 1),
         "it" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "PEV"-> -1, "P\\.E\\.V\\."-> -1, "EV"-> 1, "E\\.V\\." -> 1),
@@ -63,6 +65,7 @@ object DateTimeParserConfig
         "el" -> "η|ης",
         "eo" -> "-a|-an",
         "es" -> "°|\\.°|°\\.",
+        "eu" -> "\\.",
         "fr" -> "er|nd|ème",
         "ga" -> "ú",
         "it" -> "°|\\.°|°\\.",
@@ -154,7 +157,8 @@ object DateTimeParserConfig
         ),
         "eu" -> Map(
             "adina"                -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
-            "adin parentesigabea"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
+            "adin parentesigabea"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "data"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
         ),
         "fr" -> Map(
             "date"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
