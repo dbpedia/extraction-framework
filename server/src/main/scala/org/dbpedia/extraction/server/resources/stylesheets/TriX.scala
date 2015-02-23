@@ -20,6 +20,14 @@ object TriX
 @Path("/stylesheets/trix.xsl")
 class TriX
 {
+    /*
+    TODO: The ?namespace links only work with .../extractionSamples/... URLs
+    (handled by Mappings.getExtractionSample). With .../extract?... URLs
+    (handled by Extraction.extract), they lead to error pages.
+    We could fix this by adding a boolean parameter to writeHeader() above,
+    to the stylesheet URL produced by writeHeader(), and to this method.
+    Depending on the parameter, the namespace links should be displayed or hidden.
+    */
     @GET
     @Produces(Array("text/xsl"))
     def get : Elem =
