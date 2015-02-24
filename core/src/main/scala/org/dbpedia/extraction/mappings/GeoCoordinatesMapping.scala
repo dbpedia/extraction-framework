@@ -162,8 +162,10 @@ extends PropertyMapping
                 // do not return invalid coordinates either way
                 Some(enCoordinateValue)
               } else None
+            case None => None
           }
         } else None
+      case None => None
     }
   }
 }
