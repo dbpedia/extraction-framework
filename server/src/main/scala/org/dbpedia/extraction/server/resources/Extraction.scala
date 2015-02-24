@@ -4,7 +4,7 @@ import java.net.{URL, URI}
 import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
 import org.dbpedia.extraction.util.Language
 import javax.ws.rs._
-import javax.ws.rs.core.{MediaType, Response}
+import javax.ws.rs.core.{HttpHeaders, MediaType, Response}
 import java.util.logging.{Logger,Level}
 import scala.xml.Elem
 import scala.io.{Source,Codec}
@@ -130,7 +130,9 @@ class Extraction(@PathParam("lang") langCode : String)
         val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
         Server.instance.extractor.extract(source, destination, language, customExtraction)
 
-        Response.ok(writer.toString).`type`(selectContentType(format)).build()
+        Response.ok(writer.toString)
+          .header(HttpHeaders.CONTENT_TYPE, selectContentType(format)+"; charset=UTF-8" )
+          .build()
     }
 
     private def selectContentType(format: String): String = {
