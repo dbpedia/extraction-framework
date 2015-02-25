@@ -61,7 +61,7 @@ object RdfNamespace {
   val SKOS = ns("skos", "http://www.w3.org/2004/02/skos/core#")
   val SCHEMA = ns("schema", "http://schema.org/", false) 
   val BIBO = ns("bibo", "http://purl.org/ontology/bibo/", false)
-  val WIKIDATA = ns("wikidata", "http://wikidata.dbpedia.org/resource/", false)
+  val WIKIDATA = ns("wikidata", "http://www.wikidata.org/entity/", false)
   val MAPPINGS = ns("mappings", "http://mappings.dbpedia.org/wiki/", false)
   val D0 = ns("d0", "http://www.ontologydesignpatterns.org/ont/d0.owl#", false)
   val DUL = ns("dul", "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#", false)
