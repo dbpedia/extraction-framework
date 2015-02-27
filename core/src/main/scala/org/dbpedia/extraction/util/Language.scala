@@ -244,8 +244,8 @@ object Language extends (String => Language)
        // TODO: do DBpedia URIs make sense here? Do we use them at all? Maybe use null instead.
       "wikidata.dbpedia.org",
       "http://wikidata.dbpedia.org",
-      RdfNamespace.WIKIDATA,
-      RdfNamespace.WIKIDATA,
+      new DBpediaNamespace("http://wikidata.dbpedia.org/resource/"),
+      new DBpediaNamespace("http://wikidata.dbpedia.org/property/"),
       "http://www.wikidata.org",
       "http://www.wikidata.org/w/api.php"
     )
