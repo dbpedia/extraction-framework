@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.server.providers
 
+import java.io.{PrintWriter, StringWriter}
 import javax.ws.rs.ext.Provider
 import javax.ws.rs.core.Response
-
 import org.dbpedia.extraction.server.resources.ServerHeader
 
 @Provider
 class ExceptionMapper extends javax.ws.rs.ext.ExceptionMapper[Throwable]
 {
+      var sw = new StringWriter()
        override def toResponse(exception : Throwable) : Response =
     {
         val html =
@@ -24,7 +25,7 @@ class ExceptionMapper extends javax.ws.rs.ext.ExceptionMapper[Throwable]
                       </tr>
                       <tr>
                         <td valign="top"><strong>Stacktrace: </strong></td>
-                        <td>{exception.getStackTraceString}</td>
+                        <td>{exception.printStackTrace(new PrintWriter(sw));sw.toString()}</td>
                       </tr>
                     </table>
                   </div>
