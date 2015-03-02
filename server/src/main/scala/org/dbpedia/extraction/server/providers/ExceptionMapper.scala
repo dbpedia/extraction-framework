@@ -9,6 +9,7 @@ import org.dbpedia.extraction.server.resources.ServerHeader
 class ExceptionMapper extends javax.ws.rs.ext.ExceptionMapper[Throwable]
 {
       var sw = new StringWriter()
+      sw.synchronized()
        override def toResponse(exception : Throwable) : Response =
     {
         val html =
