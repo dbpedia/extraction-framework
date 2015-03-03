@@ -8,10 +8,10 @@ import org.dbpedia.extraction.server.resources.ServerHeader
 @Provider
 class ExceptionMapper extends javax.ws.rs.ext.ExceptionMapper[Throwable]
 {
-      var sw = new StringWriter()
-      sw.synchronized()
+      
        override def toResponse(exception : Throwable) : Response =
     {
+        var sw = new StringWriter()
         val html =
             <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
               {ServerHeader.getHeader("DBpedia Test Extractors")}
