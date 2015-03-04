@@ -43,10 +43,16 @@ extends PropertyMapping
     // replicate standard mechanism implemented by dataparsers
     for(propertyNode <- node.property(templateProperty))
     {
-       return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => extractInterval(node, subjectUri).toList )
+       // for now just return the first interval
+       // waiting to decide what to do when there are several
+       // see discussion at https://github.com/dbpedia/extraction-framework/pull/254
+       // return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => extractInterval(node, subjectUri).toList )
+       return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
+                      .map( node => extractInterval(node, subjectUri) )
+                      .dropWhile(e => e.isEmpty).headOption.getOrElse(return Seq.empty)
     }
     
-    return Seq.empty
+    Seq.empty
   }
   
   
