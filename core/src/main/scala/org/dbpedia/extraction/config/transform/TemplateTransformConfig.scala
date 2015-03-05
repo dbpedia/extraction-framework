@@ -73,6 +73,11 @@ object TemplateTransformConfig {
   private val transformMap : Map[String, Map[String, (TemplateNode, Language) => List[Node]]] = Map(
 
     "en" -> Map(
+      "Dash" -> textNode(" – ") _ ,
+      "Spaced ndash" -> textNode(" – ") _ ,
+      "Ndash" -> textNode("–") _ ,
+      "Mdash" -> textNode(" — ") _ ,
+      "Emdash" -> textNode(" — ") _ ,
       "-" -> textNode("<br />") _ ,
       "Clr" -> textNode("<br />") _ ,
       "Flatlist" -> extractChildren { p : PropertyNode => !(Set("class", "style", "indent").contains(p.key)) }  _,

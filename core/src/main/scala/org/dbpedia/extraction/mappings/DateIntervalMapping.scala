@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.dataparser.DateTimeParser
+import org.dbpedia.extraction.dataparser.{DateTimeParser,StringParser}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.OntologyProperty
@@ -27,19 +27,39 @@ extends PropertyMapping
   private val startDateParser = new DateTimeParser(context, rangeType(startDateOntologyProperty))
   private val endDateParser = new DateTimeParser(context, rangeType(endDateOntologyProperty))
 
-  private val presentString = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
+  private val splitPropertyNodeRegex = splitPropertyNodeMap.getOrElse(context.language.wikiCode, splitPropertyNodeMap("en"))
+  private val presentStrings : Set[String] = presentMap.getOrElse(context.language.wikiCode, presentMap("en"))
+  private val sinceString = sinceMap.getOrElse(context.language.wikiCode, sinceMap("en"))
+  private val onwardString = onwardMap.getOrElse(context.language.wikiCode, onwardMap("en"))
+  private val splitString = splitMap.getOrElse(context.language.wikiCode, splitMap("en"))
 
   // TODO: the parser should resolve HTML entities
-  private val intervalSplitRegex = "(—|–|-|&mdash;|&ndash;)"
+  private val intervalSplitRegex = "(?iu)(—|–|-|&mdash;|&ndash;" + ( if (splitString.isEmpty) "" else "|" + splitString ) + ")"
   
   override val datasets = Set(DBpediaDatasets.OntologyProperties)
 
   override def extract(node : TemplateNode, subjectUri: String, pageContext : PageContext) : Seq[Quad] =
   {
+    // replicate standard mechanism implemented by dataparsers
     for(propertyNode <- node.property(templateProperty))
     {
+       // for now just return the first interval
+       // waiting to decide what to do when there are several
+       // see discussion at https://github.com/dbpedia/extraction-framework/pull/254
+       // return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => extractInterval(node, subjectUri).toList )
+       return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
+                      .map( node => extractInterval(node, subjectUri) )
+                      .dropWhile(e => e.isEmpty).headOption.getOrElse(return Seq.empty)
+    }
+    
+    Seq.empty
+  }
+  
+  
+  def extractInterval(propertyNode : PropertyNode, subjectUri: String) : Seq[Quad] =
+  {
       //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
-      val splitNodes = splitPropertyNodes(propertyNode)
+      val splitNodes = splitIntervalNode(propertyNode)
 
       //Can only map exactly two values onto an interval
       if(splitNodes.size > 2 || splitNodes.size  <= 0)
@@ -56,15 +76,23 @@ extends PropertyMapping
         //if there were two elements found
         case List(start, end) => end.retrieveText match
         {
-          //if until "present" is specified in words, don't write end triple
-          case Some(text : String) if text.trim == presentString => None
+          //if until "present" is specified through one of the special words, don't write end triple
+          case Some(text : String) if presentStrings.contains(text.trim.toLowerCase) => None
 
           //normal case of specified end date
           case _ => endDateParser.parse(end)
         }
 
-        //make start and end the same if there is no end specified
-        case List(start) => Some(startDate)
+        //if there was only one element found
+        case List(start) => StringParser.parse(start) match
+        {
+          //if in a "since xxx" construct, don't write end triple
+          case Some(text : String) if (text.trim.toLowerCase.startsWith(sinceString) 
+                                    || text.trim.toLowerCase.endsWith(onwardString)) => None
+
+          //make start and end the same if there is no end specified
+          case _ => Some(startDate)
+        }
 
         case _ => throw new IllegalStateException("size of split nodes must be 0 < l < 3; is " + splitNodes.size)
       }
@@ -89,12 +117,9 @@ extends PropertyMapping
       }
 
       return Seq(quad1)
-    }
-    
-    Seq.empty
   }
 
-  private def splitPropertyNodes(propertyNode : PropertyNode) : List[PropertyNode] =
+  private def splitIntervalNode(propertyNode : PropertyNode) : List[PropertyNode] =
   {
     //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
     val splitNodes = NodeUtil.splitPropertyNode(propertyNode, intervalSplitRegex)
