@@ -1,13 +1,16 @@
 package org.dbpedia.extraction.live.storage
 
-import org.dbpedia.extraction.destinations._
+import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.apache.log4j.Logger
-import scala.collection.mutable
-import scala.util.parsing.json._
-import collection.mutable.{ListBuffer, ArrayBuffer, HashMap}
-import org.dbpedia.extraction.live.core.LiveOptions
+import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import org.dbpedia.extraction.live.core.LiveOptions
+
 import scala.collection.JavaConversions._
+import scala.collection.mutable.{ArrayBuffer, HashMap, ListBuffer}
+
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
 
 /**
  * This class retrieves the stored cache for a resource extraction.
@@ -119,8 +122,9 @@ class JSONCache(pageID: Long, pageTitle: String) {
       cacheExists = true
       if (cacheObj.json.equals("")) return
 
-      val json: Option[Any] = JSON.parseFull(cacheObj.json)
-      val map: Map[String, Any] = json.get.asInstanceOf[Map[String, Any]]
+      val mapper = new ObjectMapper() with ScalaObjectMapper
+      mapper.registerModule(DefaultScalaModule)
+      val map = mapper.readValue[Map[String, Any]](cacheObj.json)
 
       map.foreach {
         case (key, value) => {
@@ -175,8 +179,10 @@ object JSONCache {
 
   def getTriplesFromJson(jsonString: String) : Traversable[Quad] = {
 
-    val json: Option[Any] = JSON.parseFull(jsonString)
-    val map: Map[String, Any] = json.get.asInstanceOf[Map[String, Any]]
+    val mapper = new ObjectMapper() with ScalaObjectMapper
+    mapper.registerModule(DefaultScalaModule)
+    val map = mapper.readValue[Map[String, Any]](jsonString)
+
     val quads = new ArrayBuffer[Quad]()
 
     // Duplicated code JSONCache.init()
