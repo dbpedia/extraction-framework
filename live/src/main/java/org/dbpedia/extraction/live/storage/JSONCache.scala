@@ -157,7 +157,6 @@ object JSONCache {
     val triples = cache.getAllHashedTriples()
 
     var destList = new ArrayBuffer[LiveDestination]()
-    destList += new SPARULDestination(false, policies) // delete triples
     destList += new PublisherDiffDestination(pageID, true, if (cache.cacheObj != null) cache.cacheObj.subjects else new java.util.HashSet[String]()) //  unpublish in changesetes
     val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
 

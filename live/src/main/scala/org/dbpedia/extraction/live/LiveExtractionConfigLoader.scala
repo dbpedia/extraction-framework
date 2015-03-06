@@ -134,14 +134,6 @@ object LiveExtractionConfigLoader
         val liveCache = new JSONCache(wikiPage.id, wikiPage.title.decoded)
 
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
-        if (liveCache.performCleanUpdate) {
-          destList += new SPARULDelAllDestination(liveCache.cacheObj.subjects, policies)
-          destList += new SPARULAddAllDestination(policies)
-        } else {
-          // *Delete first* When a triple is deleted from one extractor and added from another extractor
-          destList += new SPARULDestination(false, policies) // delete triples
-          destList += new SPARULDestination(true, policies) // add triples
-        }
         destList += new JSONCacheUpdateDestination(liveCache)
         destList += new PublisherDiffDestination(wikiPage.id, liveCache.performCleanUpdate, if (liveCache.cacheObj != null) liveCache.cacheObj.subjects else new java.util.HashSet[String]())
         destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded) // Just to log extraction results

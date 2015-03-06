@@ -21,17 +21,6 @@ public class JDBCUtil {
 
 
     /*
-    * Execs a SPARUL Query and returns true if everything went ok or false in case of exception
-    * */
-    public static boolean execSPARUL(String sparul) {
-        String query = sparul;
-        if (!sparul.startsWith("SPARQL"))
-            query = "SPARQL " + query;
-
-        return execSQL(query, true);
-    }
-
-    /*
     * Execs an SQL query and returns true if everything went ok or false  in case of exception
     * */
     public static boolean execSQL(String query) {
@@ -48,31 +37,6 @@ public class JDBCUtil {
             _execSQL(query,sparql);
             return true;
         } catch (Exception e) {
-            //When Virtuoso commits a CHECKPOINT we fail to insert anything
-            //and get a Transaction deadlock exception
-            //here we lock everything and try X attempts every Y seconds
-            if (e.toString().contains("Transaction deadlock")) {
-                synchronized (JDBCUtil.class) {
-                    //The checkpoint lasts around 2-3 minutes
-                    int attempts = 10;
-                    int sleep = 30000;
-                    for (int i = 1; i<attempts; i++) {
-                        try {
-                            logger.warn("Transaction Deadlock, retrying query: " + i + "/" + attempts);
-                            _execSQL(query,sparql);
-                            //When no exception return true
-                            return true;
-                        } catch (Exception e1) {
-                            logger.warn("Transaction Deadlock, retrying query: " + i + "/" + attempts + "(FAILED)");
-                            try {
-                                Thread.sleep(sleep);
-                            } catch (InterruptedException e2) {
-                                //do nothing
-                            }
-                        }
-                    }
-                }
-            }
             logger.warn(e.getMessage());
         }
         return false;
@@ -84,16 +48,11 @@ public class JDBCUtil {
         Statement stmt = null;
         ResultSet result = null;
         try {
-            conn = (sparql == false) ?  JDBCPoolConnection.getCachePoolConnection() : JDBCPoolConnection.getStorePoolConnection();
+            conn = JDBCPoolConnection.getCachePoolConnection() ;
             stmt = conn.createStatement();
             result = stmt.executeQuery(query);
         } catch (Exception e) {
             logger.warn(e.getMessage());
-            //TODO Hack until Virtuoso fixes its datetime bug
-            //see http://sourceforge.net/mailarchive/forum.php?thread_name=CA%2Bu4%2Ba0RacpXoABoHL9wZJmxoTvAazwtbn3EKtay5a3%3DS7O96g%40mail.gmail.com&forum_name=virtuoso-users
-            String message = e.toString();
-            if (!message.contains("datetime"))
-                throw new Exception(e.getMessage());
         } finally {
             try {
                 if (result != null)
