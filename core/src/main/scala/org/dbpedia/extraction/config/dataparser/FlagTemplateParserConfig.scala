@@ -5,10 +5,30 @@ import java.util.Locale
 
 object FlagTemplateParserConfig
 {
-    private val langCodeMap = Map(
+    val templateMap = Map(
+        "en" -> Set(
+            "flagicon",      //{{flagicon|countryname|variant=|size=}}
+            "flag",          //{{flag|countryname|variant=|size=}}
+            "flagcountry"    //{{flagcountry|countryname|variant=|size=|name=}}
+        ),
+        "es" -> Set(
+            "bandera",       //{{bandera|countryname|variant|tamaño=}}
+            "bandera2"       //{{bandera2|countryname|variant|nombre=|tamaño=}}
+        ),
+        "fr" -> Set(
+            "drapeau",       //{{drapeau|countryname|variant|taille=}}
+            "drapeau2"       //{{drapeau2|countryname|variant|année=|domaine=|genre=|nombre=|lien=|taille=|align=}}
+        ),
+        "sv" -> Set(
+            "flagga"         //{{flagga|countryname|variant|namn=}}
+        )
+
+    )
+      
+    private lazy val  langCodeMap = Map(
         //english (en) as _
         // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
-        // Don't change this else if you know how it is done.
+        // Don't change this unless you know how it is done.
         "ar" ->
           Map(
             "AFG"->"أفغانستان",

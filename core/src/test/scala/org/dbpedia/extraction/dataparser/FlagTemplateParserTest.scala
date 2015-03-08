@@ -28,6 +28,10 @@ class FlagTemplateParserTest extends FlatSpec with ShouldMatchers
     {
         parse("en", "{{flagcountry|ITA}}") should equal (Some("Italy"))
     }
+    "FlagTemplateParser" should "return Angleterre@fr" in
+    {
+        parse("fr", "{{drapeau2|Angleterre|domaine=gentilé|genre=féminin}}") should equal (Some("Angleterre"))
+    }
     "FlagTemplateParser" should "return South Korea@en" in
     {
         parse("en", "{{KOR}}") should equal (Some("South Korea"))
