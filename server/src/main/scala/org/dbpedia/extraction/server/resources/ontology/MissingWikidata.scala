@@ -7,7 +7,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.ServerHeader
 
 @Path("/ontology/wikidata/missing/")
-class MissingWikidataClasses {
+class MissingWikidata {
 
   private val ontology = Server.instance.extractor.ontology
 
