@@ -1,4 +1,4 @@
-﻿package org.dbpedia.extraction.dataparser
+package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.sources.WikiPage
 import org.scalatest.matchers.ShouldMatchers
