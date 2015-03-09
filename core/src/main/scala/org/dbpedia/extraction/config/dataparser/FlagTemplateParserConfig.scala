@@ -2271,12 +2271,96 @@ object FlagTemplateParserConfig
            ) //end id
     )
 
+    private lazy val iocToIsoMap = Map(
+        "ALG" -> "DZA", // Algeria
+        "ANG" -> "AGO", // Angola
+        "BAH" -> "BHS", // Bahamas
+        "BAN" -> "BGD", // Bangladesh
+        "BAR" -> "BRB", // Barbados
+        "BER" -> "BMU", // Bermuda
+        "BHU" -> "BTN", // Bhutan
+        "BIZ" -> "BLZ", // Belize
+        "BOT" -> "BWA", // Botswana
+        "BUL" -> "BGR", // Bulgaria
+        "BUR" -> "BFA", // Burkina Faso
+        "CAM" -> "KHM", // Cambodia
+        "CAY" -> "CYM", // Caymans
+        "CHI" -> "CHL", // Chile
+        "CGO" -> "COG", // Congo
+        "CHA" -> "TCD", // Chad
+        "CRC" -> "CRI", // Costa Rica
+        "CRO" -> "HRV", // Croatia
+        "DEN" -> "DNK", // Denmark
+        "ESA" -> "SLV", // El Salvador
+        "FIJ" -> "FJI", // Fiji
+        "GAM" -> "GMB", // Gambia
+        "GBS" -> "GNB", // Guinea-Bissau
+        "GEQ" -> "GNQ", // Equatorial Guinea
+        "GER" -> "DEU", // Germany
+        "GRE" -> "GRC", // Greece
+        "GRN" -> "GRD", // Grenada
+        "GUA" -> "GTM", // Guatemala
+        "GUI" -> "GIN", // Guinea
+        "HAI" -> "HTI", // Haiti
+        "HON" -> "HND", // Honduras
+        "INA" -> "IDN", // Indonesia
+        "IRI" -> "IRN", // Iran
+        "ISV" -> "VIR", // U.S. Virgin Islands
+        "IVB" -> "VGB", // British Virgin Islands
+        "KSA" -> "SAU", // Saudi Arabia
+        "KUW" -> "KWT", // Kuwait
+        "LAT" -> "LVA", // Latvia
+        "LBA" -> "LBY", // Libya
+        "LES" -> "LSO", // Lesotho
+        "LIB" -> "LBN", // Lebanon
+        "MAD" -> "MDG", // Madagascar
+        "MAS" -> "MYS", // Malaysia
+        "MAW" -> "MWI", // Malawi
+        "MGL" -> "MNG", // Mongolia
+        "MON" -> "MCO", // Monaco
+        "MRI" -> "MUS", // Mauritius
+        "MTN" -> "MRT", // Mauritania
+        "MYA" -> "MMR", // Myanmar
+        "NCA" -> "NIC", // Nicaragua
+        "NED" -> "NLD", // Netherlands
+        "NEP" -> "NPL", // Nepal
+        "NGR" -> "NGA", // Nigeria
+        "NIG" -> "NER", // Niger
+        "OMA" -> "OMN", // Oman
+        "PAR" -> "PRY", // Paraguay
+        "PHI" -> "PHL", // Philippines
+        "PLE" -> "PSE", // Palestine
+        "POR" -> "PRT", // Portugal
+        "PUR" -> "PRI", // Puerto Rico
+        "RSA" -> "ZAF", // South Africa
+        "SAM" -> "WSM", // Samoa
+        "SEY" -> "SYC", // Seychelles
+        "SIN" -> "SGP", // Singapore
+        "SKN" -> "KNA", // Saint Kitts and Nevis
+        "SLO" -> "SVN", // Slovenia
+        "SOL" -> "SLB", // Solomon Islands
+        "SRI" -> "LKA", // Sri Lanka
+        "SUD" -> "SDN", // Sudan
+        "SUI" -> "CHE", // Switzerland
+        "TAN" -> "TZN", // Tanzania
+        "TGA" -> "TON", // Tonga
+        "TOG" -> "TGO", // Togo
+        "TPE" -> "TWN", // Taiwan
+        "UAE" -> "ARE", // United Arab Emirates
+        "URU" -> "URY", // Uruguay
+        "VAN" -> "VUT", // Vanuatu
+        "VIE" -> "VNM", // Vietnam
+        "VIN" -> "VCT", // Saint Vincent and the Grenadines
+        "ZAM" -> "ZMB", // Zambia
+        "ZIM" -> "ZWE"  // Zimbabwe
+    )
+  
 
     //for major languages (e.g fr, de, ...) maybe similar to "en", see
     //http://download.oracle.com/javase/1.4.2/docs/api/java/util/Locale.html
     def getCodeMap(language : String) : Map[String, String] =
     {
-        langCodeMap.get(language) match
+        val isomap = langCodeMap.get(language) match
         {
             case Some(m) => m
             case _ =>
@@ -2287,6 +2371,8 @@ object FlagTemplateParserConfig
                     .toMap
             }
         }
+        
+        isomap ++ ( iocToIsoMap map { case(k,v) => (k,isomap.getOrElse(v,"")) } filter { case (k,v) => v.length > 0 } )
     }
 
 }
