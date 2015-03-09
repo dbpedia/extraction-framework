@@ -56,6 +56,10 @@ class FlagTemplateParserTest extends FlatSpec with ShouldMatchers
     {
         parse("nl", "{{NL}}") should equal (Some("Nederland"))
     }
+    "FlagTemplateParser" should "return European Union@en" in
+    {
+        parse("en", "{{EU}}") should equal (Some("European Union"))
+    }
 
     private val parser = WikiParser.getInstance()
 

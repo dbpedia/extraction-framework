@@ -1269,6 +1269,11 @@ object FlagTemplateParserConfig
                 "YEM"->"Yémen",
                 "ZMB"->"Zambie",
                 "ZWE"->"Zimbabwe",
+                // non ISO codes
+                "UE"->"Union européenne",
+                "UK"->"Royaume-Uni",
+                "RFA"->"Allemagne de l'Ouest",
+                "RDA"->"Allemagne de l'Est"
             ), //end fr
         "eu" ->
             Map(
@@ -2368,11 +2373,17 @@ object FlagTemplateParserConfig
                 Locale.getISOCountries
                     .map(code => new Locale("en", code))
                     .map(locale => (locale.getISO3Country, locale.getDisplayCountry(Locale.US)))
-                    .toMap
+                    .toMap ++ Map("UK"->"United Kingdom", "EU"->"European Union")
             }
         }
         
-        isomap ++ ( iocToIsoMap map { case(k,v) => (k,isomap.getOrElse(v,"")) } filter { case (k,v) => v.length > 0 } )
+        isomap ++ ( ( language match
+            {
+                // NL uses iso2 lang codes
+                case "nl" => iocToIsoMap ++ Locale.getISOCountries.map(code => (code, new Locale(language, code).getISO3Country)).toMap
+                case _ => iocToIsoMap
+            }
+        ) map { case(k,v) => (k,isomap.getOrElse(v,"")) } filter { case (k,v) => v.length > 0 } )
     }
 
 }
