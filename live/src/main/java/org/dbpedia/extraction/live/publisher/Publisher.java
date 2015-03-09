@@ -23,8 +23,8 @@ public class Publisher extends Thread{
 
     private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
 
-    private final static int MAX_QUEUE_SIZE = 2000;
-    private final static int MAX_CHANGE_SETS = 300;
+    private final static int MAX_QUEUE_SIZE = 5000;
+    private final static int MAX_CHANGE_SETS = 400;
 
     private volatile HashSet<Quad> addedTriples = new HashSet<>();
     private volatile HashSet<Quad> deletedTriples = new HashSet<>();
