@@ -21,6 +21,19 @@ class MissingWikidata {
       {ServerHeader.getHeader("Missing equivalent Wikidata properties and classes")}
       <body align="center">
 
+        <h2>Missing equivalent Wikidata classes</h2>
+        {
+        val nodes = new NodeBuffer()
+        var count = 0
+        for (item <- ontology.classes.values.toArray.sortBy(_.name) if ! item.equivalentClasses.exists(_.uri.startsWith(RdfNamespace.WIKIDATA.namespace))) {
+          if (count > 0) nodes += Text(" - ")
+          nodes += <a href={pagesUrl+"/OntologyClass:"+item.name}>{item.name}</a>
+          count += 1
+        }
+        nodes.insert(0, <h4>{count} missing Wikidata classes</h4>)
+        nodes
+        }
+
         <h2>Missing equivalent Wikidata properties</h2>
         {
         val nodes = new NodeBuffer()
@@ -35,18 +48,6 @@ class MissingWikidata {
         }
         <br/>
 
-        <h2>Missing equivalent Wikidata classes</h2>
-        {
-        val nodes = new NodeBuffer()
-        var count = 0
-        for (item <- ontology.classes.values.toArray.sortBy(_.name) if ! item.equivalentClasses.exists(_.uri.startsWith(RdfNamespace.WIKIDATA.namespace))) {
-          if (count > 0) nodes += Text(" - ")
-          nodes += <a href={pagesUrl+"/OntologyClass:"+item.name}>{item.name}</a>
-          count += 1
-        }
-        nodes.insert(0, <h4>{count} missing Wikidata classes</h4>)
-        nodes
-        }
       </body>
     </html>
   }
