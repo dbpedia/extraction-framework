@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.dataparser
+﻿package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.sources.WikiPage
 import org.scalatest.matchers.ShouldMatchers
@@ -30,15 +30,23 @@ class FlagTemplateParserTest extends FlatSpec with ShouldMatchers
     }
     "FlagTemplateParser" should "return Angleterre@fr" in
     {
-        parse("fr", "{{drapeau2|Angleterre|domaine=gentil�|genre=f�minin}}") should equal (Some("Angleterre"))
+        parse("fr", "{{drapeau2|Angleterre|domaine=gentilé|genre=féminin}}") should equal (Some("Angleterre"))
     }
     "FlagTemplateParser" should "return South Korea@en" in
     {
         parse("en", "{{KOR}}") should equal (Some("South Korea"))
     }
-    "FlagTemplateParser" should "return Germany@en (CIO)" in
+    "FlagTemplateParser" should "return Germany@en (IOC)" in
     {
         parse("en", "{{GER}}") should equal (Some("Germany"))
+    }
+    "FlagTemplateParser" should "return Suisse@fr (IOC)" in
+    {
+        parse("fr", "{{SUI}}") should equal (Some("Suisse"))
+    }
+    "FlagTemplateParser" should "return Corée du Sud@fr" in
+    {
+        parse("fr", "{{KOR}}") should equal (Some("Corée du Sud"))
     }
     "FlagTemplateParser" should "return Francja@pl" in
     {
