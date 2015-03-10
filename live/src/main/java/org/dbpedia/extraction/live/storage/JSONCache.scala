@@ -122,9 +122,7 @@ class JSONCache(pageID: Long, pageTitle: String) {
       cacheExists = true
       if (cacheObj.json.equals("")) return
 
-
-      JSONCache.mapper.registerModule(DefaultScalaModule)
-      val map : Map[String, Any] = JSONCache.mapper.readValue[Map[String, Any]](cacheObj.json)
+      val map = JSONCache.mapper.readValue[Map[String, Any]](cacheObj.json)
 
       map.foreach {
         case (key, value) => {
@@ -152,6 +150,7 @@ object JSONCache {
 
   val defaultLanguage = LiveOptions.language
   val mapper = new ObjectMapper() with ScalaObjectMapper
+  JSONCache.mapper.registerModule(DefaultScalaModule)
 
   def setErrorOnCache(pageID: Long, error: Int) {
     JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateError, Array[String]("" + error, "" + pageID))
@@ -179,7 +178,7 @@ object JSONCache {
   }
 
   def getTriplesFromJson(jsonString: String) : Traversable[Quad] = {
-    val map :Map[String, Any] = mapper.readValue[Map[String, Any]](jsonString)
+    val map = mapper.readValue[Map[String, Any]](jsonString)
 
     val quads = new ArrayBuffer[Quad]()
 
