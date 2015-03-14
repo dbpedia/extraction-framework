@@ -15,9 +15,18 @@ object FlagTemplateParserConfig
             "bandera",       //{{bandera|countryname|variant|tamaño=}}
             "bandera2"       //{{bandera2|countryname|variant|nombre=|tamaño=}}
         ),
+        "eu" -> Set(
+            "bandera"        //{{bandera|countryname|variant|tamaina=}}
+        ),
         "fr" -> Set(
             "drapeau",       //{{drapeau|countryname|variant|taille=}}
             "drapeau2"       //{{drapeau2|countryname|variant|année=|domaine=|genre=|nombre=|lien=|taille=|align=}}
+        ),
+        "pl" -> Set(
+            "państwo",       //{{państwo|countryname|wariant=|nazwa=|rozmiar=|altlink=}}
+            "państwol",      //{{państwol|countryname|wariant=|nazwa=|rozmiar=|altlink=}}
+            "państwolink",   //{{państwolink|countryname|wariant=|nazwa=|rozmiar=|altlink=}}
+            "bandera"        //{{bandera|countryname|wariant=|nazwa=|rozmiar=|altlink=}}
         ),
         "sv" -> Set(
             "flagga"         //{{flagga|countryname|variant|namn=}}
@@ -1264,7 +1273,9 @@ object FlagTemplateParserConfig
                 "ZMB"->"Zambia",
                 "NZL"->"Zeelanda Berria",
                 "ZWE"->"Zimbabwe",
-                "CYP"->"Zipre"
+                "CYP"->"Zipre",
+                // Non ISO codes
+                "EH"->"Euskal Herria"
             ), // eu end
         "fr" ->
             Map(
