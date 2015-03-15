@@ -161,9 +161,18 @@ object DateTimeParserConfig
             "data"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3")
         ),
         "fr" -> Map(
-            "date"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
-            "date de naissance"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
-            "date de décès"      -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
+            "date"                            -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "date de naissance"               -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "date de décès"                   -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "date sport"                      -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
+            "date début"                      -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            "birth date and age"              -> Map ("year" -> "1", "month"-> "2", "day" -> "3"),
+            //conditional mapping
+            "naissance décès âge"             -> Map ("ifPropertyNum" -> "1", "ifPropertyNumHasValue" -> "N",
+                                                      "year" -> "4", "month"-> "3", "day" -> "2",
+                                                      "elseYear" -> "7", "elseMonth"-> "6", "elseDay" -> "5"),
+            "année de naissance et âge"       -> Map ("year" -> "1", "month"-> "2"),
+            "année de décès et âge"           -> Map ("year" -> "1", "month"-> "3")
         ),
         "ga" -> Map(
             "dáta breithe agus aois"  -> Map ("bliain" -> "1", "mí"-> "2", "lá" -> "3"), //"Lá breithe agus aois"
