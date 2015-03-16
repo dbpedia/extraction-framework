@@ -128,7 +128,7 @@ object OntologyDatatypes
         types :::= builder.build
         
         builder.addDimension("Currency");
-        builder.addUnit(new InconvertibleUnitDatatype("usDollar", Set("US","USD","Dollar","US dollar", "$",/*el*/ "δολάρια","δολάριο")));
+        builder.addUnit(new InconvertibleUnitDatatype("usDollar", Set("US","USD","Dollar","US dollar","$","US$",/*el*/ "δολάρια","δολάριο")));
         builder.addUnit(new InconvertibleUnitDatatype("euro", Set("€","EUR","Euro",/*el*/ "Ευρώ")));
         builder.addUnit(new InconvertibleUnitDatatype("poundSterling", Set("GBP","British Pound","£","Pound sterling")));
         builder.addUnit(new InconvertibleUnitDatatype("japaneseYen", Set("¥","yen","JPY","Japanese yen")));
