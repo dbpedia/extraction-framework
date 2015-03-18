@@ -44,7 +44,7 @@ extends PropertyMapping
     if(affectedTemplatePropertyNodes.size > 1)
     {
       //require their values to be all singles
-      if(valueNodes.forall(_.size == 1))
+      if(valueNodes.forall(_.size <= 1))
       {
         createInstance(graph, node, subjectUri, pageContext)
       }
