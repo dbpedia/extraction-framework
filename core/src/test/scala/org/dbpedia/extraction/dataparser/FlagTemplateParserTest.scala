@@ -60,7 +60,35 @@ class FlagTemplateParserTest extends FlatSpec with ShouldMatchers
     {
         parse("en", "{{EU}}") should equal (Some("European Union"))
     }
+    "FlagTemplateParser" should "return France@fr" in
+    {
+        parse("fr", "{{France}}") should equal (Some("France"))
+    }
+    "FlagTemplateParser" should "return Afrique du Sud@fr" in
+    {
+        parse("fr", "{{Afrique du Sud}}") should equal (Some("Afrique du Sud"))
+    }
 
+/*  Performance tests for different cases
+  
+    "FlagTemplateParser" should "return United States@en (x100000)" in
+    {
+        1 to 100000 foreach { i => parse("en", "{{flag|United States}}") }
+    }
+    "FlagTemplateParser" should "return France@en (x100000)" in
+    {
+        1 to 100000 foreach { i => parse("en", "{{flag|FRA}}") }
+    }
+    "FlagTemplateParser" should "return France@fr (x100000)" in
+    {
+        1 to 100000 foreach { i => parse("fr", "{{FRA}}") }
+    }
+    "FlagTemplateParser" should "return Afrique du Sud@fr (x100000)" in
+    {
+        1 to 100000 foreach { i => parse("fr", "{{Afrique du Sud}}") }
+    }
+*/
+  
     private val parser = WikiParser.getInstance()
 
     private def parse(language : String, input : String) : Option[String] =
