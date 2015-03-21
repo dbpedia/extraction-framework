@@ -51,7 +51,7 @@ object MappingStatsHolder {
         }
       }
       
-      val redirects = wikiStats.redirects.filterKeys(title => templateMappings.contains(title)).map(_.swap)
+      val redirects = wikiStats.redirects.filterKeys(title => templateMappings.contains(title.substring(templateNamespace.length))).map(_.swap)
       
       val holder = new MappingStatsHolder(mappings, statistics.toList, redirects, ignoreList)
       

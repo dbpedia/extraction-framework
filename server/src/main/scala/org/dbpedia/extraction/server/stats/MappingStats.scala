@@ -24,23 +24,28 @@ class MappingStats(templateStats: TemplateStats, val templateName: String, val i
    * @param all count all properties or only the ones that are mapped
    * @param use count property use in wikipedia articles or just the definition in template
    */
-  private def count(all: Boolean, use: Boolean) = {
+  private def count(all: Boolean, use: Boolean, invalid:Boolean) = {
     var sum = 0
     for ((name, (count, mapped)) <- properties) {
       if (all || mapped) {
-        if (count != InvalidTarget && ! ignoreList.isPropertyIgnored(templateName, name)) {
-          sum += (if (use) count else 1)
+        if (invalid) {
+          sum += (if (count == InvalidTarget) 1 else 0)
+        } else {
+          if (count != InvalidTarget && ! ignoreList.isPropertyIgnored(templateName, name)) {
+            sum += (if (use) count else 1)
+          }
         }
       }
     }
     sum
   }
 
-  val propertyCount = count(true, false)
-  val mappedPropertyCount = count(false, false) 
+  val propertyCount = count(true, false, false)
+  val mappedPropertyCount = count(false, false, false) 
 
-  val propertyUseCount = count(true, true)
-  val mappedPropertyUseCount = count(false, true) 
+  val propertyUseCount = count(true, true, false)
+  val mappedPropertyUseCount = count(false, true, false) 
+  val mappedPropertyUnuseCount = count(false, false, true) 
 
   val mappedPropertyRatio = mappedPropertyCount.toDouble / propertyCount.toDouble
   val mappedPropertyUseRatio = mappedPropertyUseCount.toDouble / propertyUseCount.toDouble
