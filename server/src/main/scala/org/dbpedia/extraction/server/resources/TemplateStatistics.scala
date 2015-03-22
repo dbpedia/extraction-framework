@@ -144,7 +144,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
             <th>occurrences</th> <th colspan="2">template (with link to property statistics)</th>
             <th>num properties</th> <th>mapped properties (%)</th>
             <th>num property occurrences</th> <th>mapped property occurrences (%)</th> 
-            <th>num properties mapped but unused</th> <th class="sorter-false"></th>
+            <th>num properties not found</th> <th class="sorter-false"></th>
           </tr>
           </thead>
           <tbody>
@@ -201,7 +201,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
           <td>
             <a href={"../../templatestatistics/"+langCode+"/?template="+wikiEncode(mappingStat.templateName)+cookieQuery('&')}>
               {mappingStat.templateName}
-            </a>
+            </a><br/>
             {redirectMsg}
           </td>
           } }
