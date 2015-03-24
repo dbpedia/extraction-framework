@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.config.dataparser
 
 import java.util.Locale
+import scala.collection.mutable
 
 
 object FlagTemplateParserConfig
@@ -2611,7 +2612,7 @@ object FlagTemplateParserConfig
 
     def getCodeMap(language : String) : Map[String, String] =
     {
-        storedLangCodeMap.getOrElseUpdate(language, internalGetCodeMap(language))
+        synchronized { storedLangCodeMap.getOrElseUpdate(language, internalGetCodeMap(language)) }
     }
 
     // handle languages where we need full country name templates eg {{France}} not just {{FRA}}
@@ -2619,13 +2620,13 @@ object FlagTemplateParserConfig
     {
         language match
         {
-          case "fr" => cachedCountryNames.getOrElseUpdate(language, getCodeMap(language).values.toSet)
+          case "fr" => synchronized { cachedCountryNames.getOrElseUpdate(language, getCodeMap(language).values.toSet) }
           case _ => Set[String]()
         }
     }
  
-    private val storedLangCodeMap = scala.collection.mutable.Map[String,Map[String,String]]();
-    private val cachedCountryNames = scala.collection.mutable.Map[String,Set[String]]();
+    private val storedLangCodeMap = mutable.Map[String,Map[String,String]]();
+    private val cachedCountryNames = mutable.Map[String,Set[String]]();
 
    //for major languages (e.g fr, de, ...) maybe similar to "en", see
     //http://download.oracle.com/javase/1.4.2/docs/api/java/util/Locale.html
