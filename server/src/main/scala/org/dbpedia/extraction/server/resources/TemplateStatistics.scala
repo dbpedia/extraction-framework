@@ -143,7 +143,8 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
           <tr>
             <th>occurrences</th> <th colspan="2">template (with link to property statistics)</th>
             <th>num properties</th> <th>mapped properties (%)</th>
-            <th>num property occurrences</th> <th>mapped property occurrences (%)</th> <th class="sorter-false"></th>
+            <th>num property occurrences</th> <th>mapped property occurrences (%)</th> 
+            <th>num properties not found</th> <th class="sorter-false"></th>
           </tr>
           </thead>
           <tbody>
@@ -170,7 +171,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
             var redirectMsg = ""
             for (redirect <- targetRedirect) {
               if (mappingStat.isMapped) {
-                  //redirectMsg = " NOTE: the mapping for " + wikiDecode(redirect, language).substring(createMappingStats.templateNamespace.length()) + " is redundant!"
+                  redirectMsg = " NOTE: the mapping for " + redirect.substring(manager.templateNamespace.length) + " is redundant!"
               } else {
                   mappingsWikiLink = mappingUrlPrefix + redirect.substring(manager.templateNamespace.length)
                   backgroundClass = renameInfoClass
@@ -200,7 +201,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
           <td>
             <a href={"../../templatestatistics/"+langCode+"/?template="+wikiEncode(mappingStat.templateName)+cookieQuery('&')}>
               {mappingStat.templateName}
-            </a>
+            </a><br/>
             {redirectMsg}
           </td>
           } }
@@ -209,6 +210,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
           <td align="right">{percentMappedProps}</td>
           <td align="right">{mappingStat.propertyUseCount}</td>
           <td align="right">{percentMappedPropOccur}</td>
+          <td align="right">{mappingStat.mappedPropertyUnuseCount}</td>
           { if (Server.instance.adminRights(password)) {
           <td>
             <a href={"../../ignore/"+langCode+"/template/?ignore="+(! isIgnored)+"&template="+wikiEncode(mappingStat.templateName)+cookieQuery('&', show)}>

@@ -10,6 +10,8 @@ import scala.language.reflectiveCalls
  */
 class FlagTemplateParser( extractionContext : { def language : Language } ) extends DataParser
 {
+    private val templates = FlagTemplateParserConfig.templateMap.getOrElse(extractionContext.language.wikiCode, FlagTemplateParserConfig.templateMap("en"))
+    
     override def parse(node : Node) : Option[WikiTitle] =
     {
         node match
@@ -17,18 +19,16 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
             case templateNode : TemplateNode =>
             {
                 val templateName = templateNode.title.decoded
-                //getCodeMap return en if language code is not configured
 
-                if((templateName equalsIgnoreCase "flagicon")              //{{flagicon|countryname|variant=|size=}}
-                        || (templateName equalsIgnoreCase "flag")          //{{flag|countryname|variant=|size=}}
-                        || (templateName equalsIgnoreCase "flagcountry"))  //{{flagcountry|countryname|variant=|size=|name=}}  last parameter is alternative name
+                if(templates.contains(templateName.toLowerCase))
                 {
                     for (countryNameNode <- templateNode.property("1"))
                     {
                         countryNameNode.children.collect{case TextNode(text, _) => text}.headOption match
                         {
-                            case Some(countryCode : String) if(templateName.length == 3)&&(templateName == templateName.toUpperCase) =>
+                            case Some(countryCode : String) if(countryCode.length == 2||countryCode.length == 3)&&(countryCode == countryCode.toUpperCase) =>
                             {
+                                //getCodeMap returns en if language code is not configured
                                 val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
                                 langCodeMap.get(countryCode).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
                             }

@@ -22,6 +22,8 @@ extends Extractor[TemplateNode]
 {
     override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
 
+    private val owlThing = context.ontology.classes("owl:Thing")
+
     override def extract(node: TemplateNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
     {
         val pageNode = node.root
@@ -60,8 +62,8 @@ extends Extractor[TemplateNode]
                   node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, pageTemplateSet ++ Seq(node.title.decoded))
 
                 // Condition #3
-                // The current mapping is a subclass or a superclass of previous class
-                val condition3_subclass = mapToClass.relatedClasses.contains(pageClass) || pageClass.relatedClasses.contains(mapToClass)
+                // The current mapping is a subclass or a superclass of previous class or owl:Thing
+                val condition3_subclass = mapToClass.relatedClasses.contains(pageClass) || pageClass.relatedClasses.contains(mapToClass) || mapToClass.equals(owlThing) || pageClass.equals(owlThing)
 
                 // If all above conditions are met then use the main resource, otherwise create a new one
                 val instanceUri =

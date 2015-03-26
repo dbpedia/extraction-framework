@@ -80,6 +80,8 @@ object TemplateTransformConfig {
       "Emdash" -> textNode(" — ") _ ,
       "-" -> textNode("<br />") _ ,
       "Clr" -> textNode("<br />") _ ,
+      "Nowrap" -> extractChildren { p => true }  _,
+      "Nobr" -> extractChildren { p => true }  _,
       "Flatlist" -> extractChildren { p : PropertyNode => !(Set("class", "style", "indent").contains(p.key)) }  _,
       "Plainlist" -> extractChildren { p : PropertyNode => !(Set("class", "style", "indent").contains(p.key)) } _ ,
       "Hlist" ->  extractChildren { p : PropertyNode => !(Set("class", "style", "ul_style", "li_style", "indent").contains(p.key)) } _ ,
