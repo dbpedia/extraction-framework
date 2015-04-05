@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.destinations.{Dataset, Quad, DBpediaDatasets}
-import org.dbpedia.extraction.wikiparser.{WikiTitle, JsonNode, Namespace, PageNode}
-import collection.mutable.ArrayBuffer
-import scala.language.reflectiveCalls
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace, WikiTitle}
+import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
+
 import scala.collection.JavaConversions._
-import org.dbpedia.extraction.wikiparser.Namespace
+import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 /*
 * Extract Wikidata sitelinks on the form of
@@ -19,44 +20,47 @@ import org.dbpedia.extraction.wikiparser.Namespace
 **/
 
 class WikidataLLExtractor(
-                           context : {
-                             def ontology : Ontology
-                             def language : Language
+                           context: {
+                             def ontology: Ontology
+                             def language: Language
                            }
                            )
-  extends JsonNodeExtractor
-{
+  extends JsonNodeExtractor {
   // Here we define all the ontology predicates we will use
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
   private val mappingLanguages = Namespace.mappings.keySet
-  private val datasetMap:Map[String,Dataset]= (for (lang <-mappingLanguages) yield (lang.wikiCode -> new Dataset("wikidata-ll-"+lang.wikiCode)))(collection.breakOut)
+  private val datasetMap: Map[String, Dataset] = (for (lang <- mappingLanguages) yield (lang.wikiCode -> new Dataset("wikidata-ll-" + lang.wikiCode)))(collection.breakOut)
   override val datasets = datasetMap.values.toSet
 
-  override def extract(page : JsonNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
-  {
+  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 
-    for ((wikidataLang, siteLink) <- page.wikiDataItem.getSiteLinks) {
-      val lang1 = wikidataLang.toString().replace("wiki", "")
-      if (datasetMap.keys.contains(lang1)) {
-        for ((wikidataLang2, siteLink2) <- page.wikiDataItem.getSiteLinks) {
-          val lang2 = wikidataLang2.toString().replace("wiki", "")
-          if (datasetMap.keys.contains(lang2) & lang1 != lang2) {
-            Language.get(lang1) match {
-              case Some(dbpedia_lang1) => {
-                Language.get(lang2) match {
-                  case Some(dbpedia_lang2) => {
-                    val sitelink1 = WikiTitle.parse(siteLink.getPageTitle().toString(), dbpedia_lang1)
-                    val sitelink2 = WikiTitle.parse(siteLink2.getPageTitle().toString(), dbpedia_lang2)
-                    quads += new Quad(context.language, datasetMap(lang1), sitelink1.resourceIri,
-                      sameAsProperty, sitelink2.resourceIri, page.wikiPage.sourceUri, null)
+
+    if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
+      val itemDocument: ItemDocument = page.wikiDataDocument.asInstanceOf[ItemDocument]
+
+      for ((wikidataLang, siteLink1) <- itemDocument.getSiteLinks) {
+        val lang1 = wikidataLang.toString().replace("wiki", "")
+        if (datasetMap.keys.contains(lang1)) {
+          for ((wikidataLang2, siteLink2) <- itemDocument.getSiteLinks) {
+            val lang2 = wikidataLang2.toString().replace("wiki", "")
+            if (datasetMap.keys.contains(lang2) & lang1 != lang2) {
+              Language.get(lang1) match {
+                case Some(dbpedia_lang1) => {
+                  Language.get(lang2) match {
+                    case Some(dbpedia_lang2) => {
+                      val title1 = WikiTitle.parse(siteLink1.getPageTitle(), dbpedia_lang1)
+                      val title2 = WikiTitle.parse(siteLink2.getPageTitle(), dbpedia_lang2)
+                      quads += new Quad(context.language, datasetMap(lang1), title1.resourceIri,
+                        sameAsProperty, title2.resourceIri, page.wikiPage.sourceUri, null)
+                    }
+                    case _ =>
                   }
-                  case _ =>
                 }
+                case _ =>
               }
-              case _ =>
             }
           }
         }

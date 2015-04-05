@@ -81,38 +81,25 @@ object DBpediaDatasets
 
 
     /**
-     * Wikidata outputDatasets
+     * Wikidata
      */
-
-    //for the dummy wikidata Extractor skeleton file
     val Wikidata = new Dataset("wikidata")
-
-    //language links dump in the form of
-    //<http://L1.dbpedia.org/resource/X2> <http://www.w3.org/2002/07/owl#sameAs> <http://L2.dbpedia.org/resource/X2> .
     val WikidataLL = new Dataset("wikidata-ll")
-
-    //Multi lingual labels triples
-    //<http://wikidata.dbpedia.org/resource/Q549> <http://www.w3.org/2000/01/rdf-schema#label> "Bojovnica pestrá"@sk .
-    val WikidataLabels = new Dataset("wikidata-labels")
-
-    //mappings between Wikidata entities inside DBpedia and DBpedia entities using the owl:sameas property
-    //<http://wikidata.dbpedia.org/resource/Q1934> <http://www.w3.org/2002/07/owl#sameAs> <http://ar.dbpedia.org/resource/سيدني_غوفو> .
+    val WikidataLabelsMappingsWiki = new Dataset("wikidata-labels-mappingswiki")
+    val WikidataLabelsRest = new Dataset("wikidata-labels-rest")
     val WikidataSameAs = new Dataset("wikidata-sameas")
-
-    //Mapping between Wikidata Entities URIs and Their Equivalent URIs used in DBpedia
-    //<http://wikidata.dbpedia.org/resource/Q18> <http://www.w3.org/2002/07/owl#sameAs> <http://wikidata.org/entity/Q18> .
     val WikidataNameSpaceSameAs = new Dataset("wikidata-namespace-sameas")
-
-    // wikidata facts triples
-    val WikidataFacts = new Dataset("wikidata-facts")
-    //wikidata facts triples with mapped properties to DBpedia ones
     val WikidataMappedFacts = new Dataset("wikidata-mapped")
-
-    //wikidata alias output
-    //<http://wikidata.dbpedia.org/resource/Q446> <http://dbpedia.org/ontology/alias> "alias"@lang .
-    val WikidataAlias = new Dataset("wikidata-alias")
-
-    //wikidata description output
-    //wikidata.dbpedia.org/resource/Q139> <http://dbpedia.org/ontology/description> "description"@lang.
-    val WikidataDescription = new Dataset("wikidata-description")
+    val WikidataAliasMappingsWiki = new Dataset("wikidata-alias-mappingswiki")
+    val WikidataAliasRest = new Dataset("wikidata-alias-rest")
+    val WikidataDescriptionMappingsWiki = new Dataset("wikidata-description-mappingswiki")
+    val WikidataDescriptionRest = new Dataset("wikidata-description-rest")
+    val WikidataProperty= new Dataset("wikidata-property")
+    val WikidataR2R = new Dataset("wikidata-r2r")
+    val WikidataReifiedR2R = new Dataset("wikidata-r2r-reified")
+    val WikidataReifiedR2RQualifier= new Dataset("wikidata-r2r-reified-qualifiers")
+    val WikidataRaw = new Dataset("wikidata-raw")
+    val WikidataRawReified = new Dataset("wikidata-raw-reified")
+    val WikidataRawReifiedQualifiers = new Dataset("wikidata-raw-reified-qualifiers")
+    val WikidataReference = new Dataset("wikidata-reference")
 }
