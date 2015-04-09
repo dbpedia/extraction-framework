@@ -26,7 +26,7 @@ extends PropertyMapping
                              DataParserConfig.splitPropertyNodeRegexInfobox.get(context.language.wikiCode).get
                            else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
 
-  override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
+  override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive, DBpediaDatasets.OntologyProperties)
     
 
   override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
@@ -87,8 +87,11 @@ extends PropertyMapping
     {
       graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
       
-      for (cls <- nodeClass.relatedClasses)
-        graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+      for (cls <- nodeClass.relatedClasses) {
+        // Here we split the transitive types from the direct type assignment
+        val typeDataset = if (cls.equals(nodeClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
+        graph += new Quad(context.language, typeDataset, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+      }
       
       graph ++= values
     }
