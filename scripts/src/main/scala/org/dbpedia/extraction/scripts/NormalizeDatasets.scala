@@ -23,7 +23,7 @@ import scala.Some
  *   - the predicate is ignored
  *
  * Example call:
- * ../run MapSubjectUris /data/dbpedia wikidata-sameas .nt.gz infobox-properties,page-links,... -normalized .nt.gz,.nq.gz 10000-
+ * ../run MapSubjectUris /data/dbpedia wikidata wikidata-sameas .nt.gz infobox-properties,page-links,... -normalized .nt.gz,.nq.gz 10000-
  *
  * The output name extension for triples, that are rejected because the subject does not exist, becomes
  * \-normalized-subject-rejected, * and similarly for triples with non-existant objects it becomes -normalized-object-rejected,
@@ -39,14 +39,15 @@ object NormalizeDatasets {
   }
 
   def main(args: Array[String]): Unit = {
-    require(args != null && args.length >= 6,
-      "need at least six args: " +
+    require(args != null && args.length >= 7,
+      "need at least seven args: " +
         /*0*/ "extraction config file" +
-        /*1*/ "comma-separated names of datasets mapping URIs to wikidata identifiers (eg. wikidata-sameas)"+
-        /*2*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-        /*3*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), "+
-        /*4*/ "output dataset name extension (e.g. '-normalized'), "+
-        /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2')")
+        /*1*/ "prefix of mapping file (eg. wikidata)"+
+        /*2*/ "comma-separated names of datasets mapping URIs to wikidata identifiers (eg. wikidata-sameas)" +
+        /*3*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
+        /*4*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), " +
+        /*5*/ "output dataset name extension (e.g. '-normalized'), " +
+        /*6*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.bz2', '.ttl', '.ttl.bz2')")
 
 
     val config = ConfigUtils.loadConfig(args(0), "UTF-8")
@@ -74,18 +75,20 @@ object NormalizeDatasets {
       new OntologyReader().read(ontologySource)
     }
 
-    val mappings = split(args(1))
+    val mappingPrefix = args(1)
+
+    val mappings = split(args(2))
     require(mappings.nonEmpty, "no mapping datasets")
 
     // Suffix of mapping files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val mappingSuffix = args(2)
+    val mappingSuffix = args(3)
     require(mappingSuffix.nonEmpty, "no mapping file suffix")
 
-    val inputs = split(args(3))
+    val inputs = split(args(4))
     require(inputs.nonEmpty, "no input datasets")
 
-    val outputExtension = args(4)
+    val outputExtension = args(5)
     require(outputExtension.nonEmpty, "no output name extension")
 
     val subjectRejectExtension = outputExtension + "-subject-rejected"
@@ -94,13 +97,16 @@ object NormalizeDatasets {
 
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val suffixes = split(args(5))
+    val suffixes = split(args(6))
     require(suffixes.nonEmpty, "no input/output file suffixes")
+
+    println(inputs(0) + suffixes(0))
 
     // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
     val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
 
       val finder = new DateFinder(baseDir, language)
+      val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix))
 
       // Redirects can have only one target, so we don't really need a MultiMap here.
       // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
@@ -110,7 +116,7 @@ object NormalizeDatasets {
       // Improve this with Akka or leave it to the Spark map-reduce version?
       for (mappping <- mappings) {
         var count = 0
-        QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
+        QuadReader.readQuads(mappingFinder, mappping + mappingSuffix, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
           // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
@@ -119,28 +125,33 @@ object NormalizeDatasets {
           // - only store the resource title in the map
           // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
           // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
-          map.addBinding(quad.subject, quad.value)
+          map.addBinding(quad.value, quad.subject)
           count += 1
         }
         err.println(language.wikiCode+": found "+count+" mappings")
       }
 
       for (input <- inputs; suffix <- suffixes) {
+        finder.find(input+suffix, auto = true)
         for(extension <-List(outputExtension, subjectRejectExtension, objectRejectExtension, bothRejectExtension)) {
-          QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) {
-            quad =>
-              if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
-              // Modify the triples depending upon presence or absence of subjects/objects.
-              else (map.get(quad.subject), map.get(quad.value)) match {
-                case (Some(subjectUris), Some(valueUris)) if extension == outputExtension =>
-                  for (uri1 <- subjectUris; uri2 <- valueUris) yield quad.copy(subject = uri1, value = uri2)
-                case (Some(uris), None) if extension == outputExtension && !new URI(quad.value).getHost.contains("dbpedia.org") =>
-                  for (uri <- uris) yield quad.copy(subject = uri) // Keep triples with non-dbpedia URIs in object
-                case (Some(uris), None) if extension == objectRejectExtension => List(quad)
-                case (None, Some(uris)) if extension == subjectRejectExtension => List(quad)
-                case (None, None) if extension == bothRejectExtension => List(quad)
-                case _ => Nil
-              }
+          try {
+            QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) {
+              quad =>
+                println(quad.datatype + " " +extension)
+                // Modify the triples depending upon presence or absence of subjects/objects.
+                (map.get(quad.subject), map.get(quad.value)) match {
+
+                  case (Some(uris), _) if extension == outputExtension && (quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org")) =>
+                    for (uri <- uris) yield quad.copy(subject = uri) // Keep triples with non-dbpedia URIs in object
+                  case (Some(uris), None) if extension == objectRejectExtension => List(quad)
+                  case (None, Some(uris)) if extension == subjectRejectExtension => List(quad)
+                  case (None, None) if extension == bothRejectExtension => List(quad)
+                  case _ => Nil
+                }
+            }
+          } catch {
+            case e: IllegalStateException =>
+              e.printStackTrace()
           }
         }
       }
