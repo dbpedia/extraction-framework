@@ -3,16 +3,15 @@ package org.dbpedia.extraction.scripts
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.{SimpleWorkers, ConfigUtils, Language}
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
-import java.net.URI
+import java.net.{URI, URL}
 import org.dbpedia.extraction.wikiparser.Namespace
 import java.io.File
-import org.dbpedia.extraction.util.ConfigUtils._
-import scala.collection.mutable.{Set,HashMap,MultiMap}
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import org.dbpedia.extraction.util.RichFile._
+import scala.collection.mutable.{HashMap,MultiMap}
 import scala.collection.mutable
-import scala.Predef.Set
 import scala.Console._
 import scala.Some
-import org.dbpedia.extraction.destinations.Quad
 
 /**
  * Normalize all triples into the new namespace using wikidata identifiers as base using
@@ -86,12 +85,12 @@ object NormalizeDatasets {
     val inputs = split(args(3))
     require(inputs.nonEmpty, "no input datasets")
 
-    val extension = args(4)
-    require(extension.nonEmpty, "no output name extension")
+    val outputExtension = args(4)
+    require(outputExtension.nonEmpty, "no output name extension")
 
-    val subjectRejectExtension = extension + "-subject-rejected"
-    val objectRejectExtension = extension + "-object-rejected"
-    val bothRejectExtension = extension + "-rejected"
+    val subjectRejectExtension = outputExtension + "-subject-rejected"
+    val objectRejectExtension = outputExtension + "-object-rejected"
+    val bothRejectExtension = outputExtension + "-rejected"
 
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
@@ -126,30 +125,21 @@ object NormalizeDatasets {
         err.println(language.wikiCode+": found "+count+" mappings")
       }
 
-      case class NonDbpedia
-
-      // Anonymous case function to modify the triples depending upon presence or absence of subjects/objects.
-      val matcher: (Quad, Option[mutable.Set[String]], Option[mutable.Set[String]]) => Traversable[Quad] = {
-        case (Some(subjectUris), Some(valueUris)) =>
-          for (uri1 <- subjectUris; uri2 <- valueUris) yield quad.copy(subject = uri1, value = uri2)
-        case (Some(uris), NonDbpedia) =>
-          for (uri <- uris) yield quad.copy(subject = uri)
-        case (Some(uris), None) => List(quad)
-        case (None, Some(uris)) => List(quad)
-        case (None, None) => List(quad)
-        case _ => Nil
-      }
-
       for (input <- inputs; suffix <- suffixes) {
-        for(extension <-List(extension, subjectRejectExtension, objectRejectExtension, bothRejectExtension, none)) {
+        for(extension <-List(outputExtension, subjectRejectExtension, objectRejectExtension, bothRejectExtension)) {
           QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) {
             quad =>
               if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
-              else {
-                val valueUri = new URI(quad.value)
-                // Keep non-dbpedia URIs
-                if(valueUri.contains("dbpedia.org")) matcher(quad, map.get(quad.subject), NonDbpedia)
-                else matcher(map.get(quad.subject), map.get(quad.value))
+              // Modify the triples depending upon presence or absence of subjects/objects.
+              else (map.get(quad.subject), map.get(quad.value)) match {
+                case (Some(subjectUris), Some(valueUris)) if extension == outputExtension =>
+                  for (uri1 <- subjectUris; uri2 <- valueUris) yield quad.copy(subject = uri1, value = uri2)
+                case (Some(uris), None) if extension == outputExtension && !new URI(quad.value).getHost.contains("dbpedia.org") =>
+                  for (uri <- uris) yield quad.copy(subject = uri) // Keep triples with non-dbpedia URIs in object
+                case (Some(uris), None) if extension == objectRejectExtension => List(quad)
+                case (None, Some(uris)) if extension == subjectRejectExtension => List(quad)
+                case (None, None) if extension == bothRejectExtension => List(quad)
+                case _ => Nil
               }
           }
         }
