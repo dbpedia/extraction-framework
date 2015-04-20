@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.wikiparser.impl.json
 
+import java.nio.channels.NonReadableChannelException
+
 import com.fasterxml.jackson.databind.{JsonMappingException, DeserializationFeature, ObjectMapper}
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.WikidataUtil
@@ -37,25 +39,29 @@ class JsonWikiParser {
     else {
 
       val mapper = new ObjectMapper()
-      val jsonString = fixBrokenJson(page.source)
-
       try {
-        val jacksonDocument = mapper.readValue(jsonString, classOf[JacksonTermedStatementDocument])
+        val jacksonDocument = mapper.readValue(page.source, classOf[JacksonTermedStatementDocument])
         jacksonDocument.setSiteIri(WikidataUtil.wikidataDBpNamespace)
         Some(new JsonNode(page, jacksonDocument))
 
       } catch {
-        case e: JsonMappingException => throw new JsonMappingException("no data in redirect pages")
+        case e: JsonMappingException => {
+          if (page.redirect!=null){
+            None //redirect page, nothing to extract
+          } else {
+            val jacksonDocument = mapper.readValue(fixBrokenJson(page.source), classOf[JacksonTermedStatementDocument])
+            jacksonDocument.setSiteIri(WikidataUtil.wikidataDBpNamespace)
+            Some(new JsonNode(page, jacksonDocument))
+          }
+        }
       }
-
-
     }
   }
 
   private def fixBrokenJson(jsonString:String): String = {
-    jsonString.replace("claims\":[]","claims\":{}").
-      replace("descriptions\":[]","descriptions\":{}").
-      replace("sitelinks\":[]","sitelinks\":{}").
-      replace("labels\":[]","labels\":{}")
+        jsonString.replace("claims\":[]","claims\":{}").
+        replace("descriptions\":[]","descriptions\":{}").
+        replace("sitelinks\":[]","sitelinks\":{}").
+        replace("labels\":[]","labels\":{}")
   }
 }
