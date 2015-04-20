@@ -132,10 +132,9 @@ object NormalizeDatasets {
       }
 
       for (input <- inputs; suffix <- suffixes) {
-        finder.find(input+suffix, auto = true)
         for(extension <-List(outputExtension, subjectRejectExtension, objectRejectExtension, bothRejectExtension)) {
           try {
-            QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) {
+            QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, auto = true, required = false) {
               quad =>
                 println(quad.datatype + " " +extension)
                 // Modify the triples depending upon presence or absence of subjects/objects.
