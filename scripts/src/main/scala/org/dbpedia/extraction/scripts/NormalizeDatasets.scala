@@ -6,12 +6,16 @@ import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 import org.dbpedia.extraction.util.RichFile
 import java.net.{URI, URL}
 import org.dbpedia.extraction.wikiparser.Namespace
-import java.io.File
+import java.io.{Writer, File}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.util.RichFile._
-import scala.collection.mutable.{HashMap,MultiMap}
+import scala.collection.mutable.{ArrayBuffer, HashMap, MultiMap}
 import scala.collection.mutable
 import scala.Console._
+import scala.Some
+import org.dbpedia.extraction.destinations._
+import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.util.IOUtils._
 import scala.Some
 import scala.Some
 
@@ -96,15 +100,19 @@ object NormalizeDatasets {
     val subjectRejectExtension = outputExtension + "-subject-rejected"
     val objectRejectExtension = outputExtension + "-object-rejected"
     val bothRejectExtension = outputExtension + "-rejected"
+    val extensions = List(outputExtension, subjectRejectExtension, objectRejectExtension, bothRejectExtension)
 
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val suffixes = split(args(6))
+    val suffixes = formats.keys.map("." + _)
     require(suffixes.nonEmpty, "no input/output file suffixes")
 
     // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
     val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
-      val wikiFinder = new DateFinder(baseDir, language) // Finds Wikipedia extracted datasets
+      val wikiFinder = new Finder(baseDir, language, "wiki") // Finds Wikipedia extracted datasets
+      val date = wikiFinder.dates().last
+      val datasets = for(input <- inputs; extension <- extensions) yield new Dataset(input + extension)
+      val destination = createDestination(wikiFinder, date, formats, datasets)
       val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix)) // Finds wikidata mapping dataset
 
       // Redirects can have only one target, so we don't really need a MultiMap here.
@@ -131,26 +139,36 @@ object NormalizeDatasets {
       }
 
       for (input <- inputs; suffix <- suffixes) {
-        val inFile: FileLike[File] = wrapFile(wikiFinder.find(input + suffix, auto = true))
-        val outFiles = for(extension <- List(outputExtension, subjectRejectExtension, objectRejectExtension, bothRejectExtension))
-                        yield wrapFile(wikiFinder.find(input + extension + suffix, auto = true))
+        val inFile: FileLike[File] = wrapFile(wikiFinder.file(date, input + suffix))
+        val outFiles = for(extension <- extensions)
+                        yield wrapFile(wikiFinder.file(date, input + extension + suffix))
 
-        QuadMapper.mapQuads(wikiFinder.language.wikiCode, inFile.asInstanceOf[FileLike[File]], outFiles, required = false, quads = false, turtle = true) {
-          quad =>
-            (map.get(quad.subject), map.get(quad.value)) match {
-              case (Some(subUris), Some(objUris)) =>
-                // Quads going into outputExtension dataset
-                Seq(for ((sub, obj) <- subUris zip objUris) yield quad.copy(subject = sub, value = obj),
-                  Nil, Nil, Nil)
-              case (Some(uris), _) if quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org") =>
-                // Quads going into outputExtension dataset
-                Seq(for (uri <- uris) yield quad.copy(subject = uri),
-                  Nil, Nil, Nil) // Keep triples with string literals non-dbpedia URIs in object
-              case (None, Some(uris)) => Seq(Nil, List(quad), Nil, Nil) // Subject cannot be mapped in our URIs
-              case (Some(uris), None) => Seq(Nil, Nil, List(quad), Nil) // Object does not exist
-              case (None, None) => Seq(Nil, Nil, Nil, List(quad))
-              case _ => Seq(Nil, Nil, Nil, Nil)
-            }
+        try {
+          destination.open()
+          QuadReader.readQuads(wikiFinder.language.wikiCode+": Reading triples from " + input + suffix, inFile) {
+            quad =>
+              (map.get(quad.subject), map.get(quad.value)) match {
+                case (Some(subUris), Some(objUris)) =>
+                  destination.write(for ((sub, obj) <- subUris zip objUris) yield quad.copy(subject = sub, value = obj,
+                    dataset = input + outputExtension))
+                case (Some(uris), _) if quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org") =>
+                  destination.write(for (uri <- uris) yield quad.copy(subject = uri,
+                    dataset = input + outputExtension)) // Keep triples with string literals non-dbpedia URIs in object
+                case (None, Some(uris)) =>
+                  destination.write(Seq(quad.copy(dataset = input + subjectRejectExtension))) // Subject cannot be mapped in our URIs
+                case (Some(uris), None) =>
+                  destination.write(Seq(quad.copy(dataset = input + objectRejectExtension))) // Object does not exist
+                case (None, None) =>
+                  destination.write(Seq(quad.copy(dataset = input + bothRejectExtension)))
+                  println(input + bothRejectExtension)
+                case _ =>
+              }
+          }
+          destination.close()
+        }
+        catch {
+          case e: Exception =>
+            Console.err.println(e.printStackTrace())
         }
       }
     }
@@ -158,6 +176,23 @@ object NormalizeDatasets {
     workers.start()
     for (language <- languages) workers.process(language)
     workers.stop()
+  }
 
+  private def createDestination[T <% FileLike[T]](finder: Finder[T], date: String, formats: scala.collection.Map[String, Formatter], datasets: Seq[Dataset]) : Destination = {
+    val destination = new ArrayBuffer[Destination]()
+    for ((suffix, format) <- formats) {
+      val datasetDestinations = new mutable.HashMap[String, Destination]()
+      for (dataset <- datasets) {
+        val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix)
+        datasetDestinations(dataset.name) = new WriterDestination(writer(file), format)
+      }
+
+      destination += new DatasetDestination(datasetDestinations)
+    }
+    new CompositeDestination(destination.toSeq: _*)
+  }
+
+  private def writer[T <% FileLike[T]](file: T): () => Writer = {
+    () => IOUtils.writer(file)
   }
 }
