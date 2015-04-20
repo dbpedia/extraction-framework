@@ -45,15 +45,14 @@ object NormalizeDatasets {
   }
 
   def main(args: Array[String]): Unit = {
-    require(args != null && args.length >= 7,
-      "need at least seven args: " +
+    require(args != null && args.length >= 6,
+      "need at least six args: " +
         /*0*/ "extraction config file" +
         /*1*/ "prefix of mapping file (eg. wikidata)"+
         /*2*/ "comma-separated names of datasets mapping URIs to wikidata identifiers (eg. wikidata-sameas)" +
         /*3*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
         /*4*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), " +
-        /*5*/ "output dataset name extension (e.g. '-normalized'), " +
-        /*6*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.bz2', '.ttl', '.ttl.bz2')")
+        /*5*/ "output dataset name extension (e.g. '-normalized'), ")
 
 
     val config = ConfigUtils.loadConfig(args(0), "UTF-8")
@@ -66,20 +65,6 @@ object NormalizeDatasets {
     require(languages.nonEmpty, "no languages")
 
     val formats = parseFormats(config, "uri-policy", "format")
-
-    lazy val ontology = {
-      val ontologyFile = ConfigUtils.getValue(config, "ontology", false)(new File(_))
-      val ontologySource = if (ontologyFile != null && ontologyFile.isFile) {
-        XMLSource.fromFile(ontologyFile, Language.Mappings)
-      }
-      else {
-        val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
-        val url = new URL(Language.Mappings.apiUri)
-        WikiSource.fromNamespaces(namespaces, url, Language.Mappings)
-      }
-
-      new OntologyReader().read(ontologySource)
-    }
 
     val mappingPrefix = args(1)
 
