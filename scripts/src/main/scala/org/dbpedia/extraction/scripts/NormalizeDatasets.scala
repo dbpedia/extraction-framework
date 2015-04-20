@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.util.{SimpleWorkers, ConfigUtils, Language}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
+import org.dbpedia.extraction.util.RichFile
 import java.net.{URI, URL}
 import org.dbpedia.extraction.wikiparser.Namespace
 import java.io.File
@@ -11,6 +12,7 @@ import org.dbpedia.extraction.util.RichFile._
 import scala.collection.mutable.{HashMap,MultiMap}
 import scala.collection.mutable
 import scala.Console._
+import scala.Some
 import scala.Some
 
 /**
@@ -100,13 +102,10 @@ object NormalizeDatasets {
     val suffixes = split(args(6))
     require(suffixes.nonEmpty, "no input/output file suffixes")
 
-    println(inputs(0) + suffixes(0))
-
     // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
     val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
-
-      val finder = new DateFinder(baseDir, language)
-      val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix))
+      val wikiFinder = new DateFinder(baseDir, language) // Finds Wikipedia extracted datasets
+      val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix)) // Finds wikidata mapping dataset
 
       // Redirects can have only one target, so we don't really need a MultiMap here.
       // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
@@ -132,26 +131,26 @@ object NormalizeDatasets {
       }
 
       for (input <- inputs; suffix <- suffixes) {
-        for(extension <-List(outputExtension, subjectRejectExtension, objectRejectExtension, bothRejectExtension)) {
-          try {
-            QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, auto = true, required = false) {
-              quad =>
-                println(quad.datatype + " " +extension)
-                // Modify the triples depending upon presence or absence of subjects/objects.
-                (map.get(quad.subject), map.get(quad.value)) match {
+        val inFile: FileLike[File] = wrapFile(wikiFinder.find(input + suffix, auto = true))
+        val outFiles = for(extension <- List(outputExtension, subjectRejectExtension, objectRejectExtension, bothRejectExtension))
+                        yield wrapFile(wikiFinder.find(input + extension + suffix, auto = true))
 
-                  case (Some(uris), _) if extension == outputExtension && (quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org")) =>
-                    for (uri <- uris) yield quad.copy(subject = uri) // Keep triples with non-dbpedia URIs in object
-                  case (Some(uris), None) if extension == objectRejectExtension => List(quad)
-                  case (None, Some(uris)) if extension == subjectRejectExtension => List(quad)
-                  case (None, None) if extension == bothRejectExtension => List(quad)
-                  case _ => Nil
-                }
+        QuadMapper.mapQuads(wikiFinder.language.wikiCode, inFile.asInstanceOf[FileLike[File]], outFiles, required = false, quads = false, turtle = true) {
+          quad =>
+            (map.get(quad.subject), map.get(quad.value)) match {
+              case (Some(subUris), Some(objUris)) =>
+                // Quads going into outputExtension dataset
+                Seq(for ((sub, obj) <- subUris zip objUris) yield quad.copy(subject = sub, value = obj),
+                  Nil, Nil, Nil)
+              case (Some(uris), _) if quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org") =>
+                // Quads going into outputExtension dataset
+                Seq(for (uri <- uris) yield quad.copy(subject = uri),
+                  Nil, Nil, Nil) // Keep triples with string literals non-dbpedia URIs in object
+              case (None, Some(uris)) => Seq(Nil, List(quad), Nil, Nil) // Subject cannot be mapped in our URIs
+              case (Some(uris), None) => Seq(Nil, Nil, List(quad), Nil) // Object does not exist
+              case (None, None) => Seq(Nil, Nil, Nil, List(quad))
+              case _ => Seq(Nil, Nil, Nil, Nil)
             }
-          } catch {
-            case e: IllegalStateException =>
-              e.printStackTrace()
-          }
         }
       }
     }
