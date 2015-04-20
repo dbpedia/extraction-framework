@@ -86,7 +86,42 @@ object QuadMapper {
     val destination = new WriterDestination(() => writer(outFile), new TerseFormatter(quads, turtle, policies))
     mapQuads(tag, inFile, destination, required)(map)
   }
-  
+
+  /**
+   * Map quads into multiple output files
+   * TODO: Add more docs
+   */
+  def mapQuads(tag: String, inFile: FileLike[_], outFiles: Seq[FileLike[_]], required: Boolean, quads: Boolean, turtle: Boolean)(map: Quad => Seq[Traversable[Quad]]): Unit = {
+    val policies: Array[Policy] = null
+    err.println(tag+": writing "+outFiles.mkString(",")+" ...")
+    val destinations = for(outFile <- outFiles) yield new WriterDestination(() => writer(outFile), new TerseFormatter(quads, turtle, policies)).asInstanceOf[Destination]
+    mapQuads(tag, inFile, destinations, required)(map)
+  }
+
+  /**
+   * Map quads into multiple destinations
+   */
+  def mapQuads(tag: String, inFile: FileLike[_], destinations: Seq[Destination], required: Boolean)(map: Quad => Seq[Traversable[Quad]]): Unit = {
+      if (! inFile.exists) {
+        if (required) throw new IllegalArgumentException(tag+": file "+inFile+" does not exist")
+        err.println(tag+": WARNING - file "+inFile+" does not exist")
+        return
+      }
+
+      var mapCount = 0
+      for(destination <- destinations) destination.open()
+      try {
+        QuadReader.readQuads(tag, inFile) { old =>
+          for((destination, quads) <- destinations zip map(old)) {
+            destination.write(quads)
+            if(quads.nonEmpty) mapCount += 1
+          }
+        }
+      }
+      finally for(destination <- destinations) destination.close()
+      err.println(tag+": mapped "+mapCount+" quads")
+  }
+
   /**
    * TODO: do we really want to open and close the destination here? Users may want to map quads
    * from multiple input files to one destination. On the other hand, if the input file doesn't
