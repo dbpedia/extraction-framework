@@ -18,6 +18,8 @@ import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.util.IOUtils._
 import scala.Some
 import scala.Some
+import scala.collection.parallel.mutable.ParTrieMap
+import scala.collection.concurrent.TrieMap
 
 /**
  * Normalize all triples into the new namespace using wikidata identifiers as base using
@@ -43,6 +45,9 @@ object NormalizeDatasets {
   private def split(arg: String): Array[String] = {
     arg.split(",").map(_.trim).filter(_.nonEmpty)
   }
+
+  // URI prefix for wikidata entities
+  private val WikidataResource = "http://wikidata.dbpedia.org/resource/Q"
 
   def main(args: Array[String]): Unit = {
     require(args != null && args.length >= 6,
@@ -82,10 +87,7 @@ object NormalizeDatasets {
     val outputExtension = args(5)
     require(outputExtension.nonEmpty, "no output name extension")
 
-    val subjectRejectExtension = outputExtension + "-subject-rejected"
-    val objectRejectExtension = outputExtension + "-object-rejected"
-    val bothRejectExtension = outputExtension + "-rejected"
-    val extensions = List(outputExtension, subjectRejectExtension, objectRejectExtension, bothRejectExtension)
+    val extensions = List(outputExtension, outputExtension + "-subject-rejected", outputExtension + "-object-rejected", outputExtension + "-rejected")
 
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
@@ -93,83 +95,107 @@ object NormalizeDatasets {
     require(suffixes.nonEmpty, "no input/output file suffixes")
 
     // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
-    val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
+    val jobs = for(language <- languages) yield {
       val wikiFinder = new Finder(baseDir, language, "wiki") // Finds Wikipedia extracted datasets
       val date = wikiFinder.dates().last
       val datasets = for(input <- inputs; extension <- extensions) yield new Dataset(input + extension)
       val destination = createDestination(wikiFinder, date, formats, datasets)
       val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix)) // Finds wikidata mapping dataset
 
-      // Redirects can have only one target, so we don't really need a MultiMap here.
+      // We don't need a MultiMap here if dealing with one
       // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
-      val map = new HashMap[String, mutable.Set[String]] with MultiMap[String, String]
+      val map = new HashMap[String, mutable.Set[Int]] with MultiMap[String, Int]
 
       // QuadReader iterates through the whole mappings file every time?
       // Improve this with Akka or leave it to the Spark map-reduce version?
       for (mappping <- mappings) {
         var count = 0
-        QuadReader.readQuads(mappingFinder, mappping + mappingSuffix, auto = true) { quad =>
-          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
-          // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
-          // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
-          // line, which means that the character array for the whole line is kept in memory, which
-          // basically means that the whole redirects file is kept in memory. We should
-          // - only store the resource title in the map
-          // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
-          // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
+        QuadReader.readQuads(mappingFinder, mappping + mappingSuffix, auto = true) {
+          quad =>
+            if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode + ": expected object uri, found object literal: " + quad)
+            // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
+            // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
+            // line, which means that the character array for the whole line is kept in memory, which
+            // basically means that the whole redirects file is kept in memory. We should
+            // - only store the resource title in the map
+            // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
+            // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
 
-//          // This checkLanguage manually extracts the host substring without creating a java.net.URI
+            //          // This checkLanguage manually extracts the host substring without creating a java.net.URI
             // Difference between performance: 9ms per line vs 8ms per line.
-//          def checkLanguage(quadObject: String): Boolean = {
-//            val startDomain = quadObject.substring(7) // part after http://
-//            val endDomain = startDomain.indexOf("/")
-//            val domain = if(endDomain == -1) startDomain else startDomain.substring(0, endDomain)
-//            val languagePrefix = if(language.wikiCode == "en") "" else language.wikiCode + "."
-//            if(domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
-//            else if(domain.endsWith("dbpedia.org")) false
-//            else true // accept non-dbpedia URIs
-//          }
+            //          def checkLanguage(quadObject: String): Boolean = {
+            //            val startDomain = quadObject.substring(7) // part after http://
+            //            val endDomain = startDomain.indexOf("/")
+            //            val domain = if(endDomain == -1) startDomain else startDomain.substring(0, endDomain)
+            //            val languagePrefix = if(language.wikiCode == "en") "" else language.wikiCode + "."
+            //            if(domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
+            //            else if(domain.endsWith("dbpedia.org")) false
+            //            else true // accept non-dbpedia URIs
+            //          }
 
-          def checkLanguage(quadObject: URI): Boolean = {
-            val domain = quadObject.getHost
-            val languagePrefix = if(language.wikiCode == "en") "" else language.wikiCode + "."
-            if(domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
-            else if(domain.endsWith("dbpedia.org")) false
-            else true // accept non-dbpedia URIs
-          }
+            def checkLanguage(quadObject: URI): Boolean = {
+              val domain = quadObject.getHost
+              val languagePrefix = if (language.wikiCode == "en") "" else language.wikiCode + "."
+              if (domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
+              else if (domain.endsWith("dbpedia.org")) false
+              else true // accept non-dbpedia URIs
+            }
 
-          if(quad.datatype != null || checkLanguage(new URI(quad.value))) {
-            map.addBinding(quad.value, quad.subject)
-            count += 1
-          }
+            if (quad.datatype != null || checkLanguage(new URI(quad.value))) {
+              map.addBinding(quad.value, quad.subject.substring(WikidataResource.length).toInt) // Store just the Q-value integers
+              count += 1
+            }
         }
-        err.println(language.wikiCode+": found "+count+" mappings")
+        err.println(language.wikiCode + ": found " + count + " mappings")
       }
+      new NormalizationJob(language, destination, map, wikiFinder, inputs, suffixes.toSeq, extensions)
+    }
 
+    for(job <- jobs)
+      job.run()
+
+  }
+
+  class NormalizationJob(language: Language, destination: Destination, map: HashMap[String, mutable.Set[Int]] with MultiMap[String, Int], wikiFinder: Finder[File], inputs: Seq[String], suffixes: Seq[String], extensions: Seq[String]) {
+    val outputExtension = extensions(0)
+    val subjectRejectExtension = extensions(1)
+    val objectRejectExtension = extensions(2)
+    val bothRejectExtension = extensions(3)
+
+    val workers = SimpleWorkers(1.5, 1.0) {
+      args: (Quad, String) =>
+        val (quad, input) = args
+        (map.get(quad.subject), map.get(quad.value)) match {
+          case (Some(subIds), Some(objIds)) =>
+            destination.write(for ((sub, obj) <- subIds zip objIds) yield quad.copy(subject = WikidataResource + sub, value = WikidataResource + obj,
+              dataset = input + outputExtension))
+          case (Some(ids), _) if quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org") =>
+            destination.write(for (id <- ids) yield quad.copy(subject = WikidataResource + id,
+              dataset = input + outputExtension)) // Keep triples with string literals non-dbpedia URIs in object
+          case (None, Some(ids)) =>
+            destination.write(Seq(quad.copy(dataset = input + subjectRejectExtension))) // Subject cannot be mapped in our URIs
+          case (Some(ids), None) =>
+            destination.write(Seq(quad.copy(dataset = input + objectRejectExtension))) // Object does not exist
+          case (None, None) =>
+            destination.write(Seq(quad.copy(dataset = input + bothRejectExtension)))
+          case _ =>
+        }
+    }
+
+    def run(): Unit = {
       for (input <- inputs; suffix <- suffixes) {
+        val date = wikiFinder.dates().last
         val inFile: FileLike[File] = wrapFile(wikiFinder.file(date, input + suffix))
 
         try {
           destination.open()
+          workers.start()
+
           QuadReader.readQuads(wikiFinder.language.wikiCode+": Reading triples from " + input + suffix, inFile) {
-            quad =>
-              (map.get(quad.subject), map.get(quad.value)) match {
-                case (Some(subUris), Some(objUris)) =>
-                  destination.write(for ((sub, obj) <- subUris zip objUris) yield quad.copy(subject = sub, value = obj,
-                    dataset = input + outputExtension))
-                case (Some(uris), _) if quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org") =>
-                  destination.write(for (uri <- uris) yield quad.copy(subject = uri,
-                    dataset = input + outputExtension)) // Keep triples with string literals non-dbpedia URIs in object
-                case (None, Some(uris)) =>
-                  destination.write(Seq(quad.copy(dataset = input + subjectRejectExtension))) // Subject cannot be mapped in our URIs
-                case (Some(uris), None) =>
-                  destination.write(Seq(quad.copy(dataset = input + objectRejectExtension))) // Object does not exist
-                case (None, None) =>
-                  destination.write(Seq(quad.copy(dataset = input + bothRejectExtension)))
-                  println(input + bothRejectExtension)
-                case _ =>
-              }
+            quad => workers.process((quad, input))
           }
+
+          workers.stop()
           destination.close()
         }
         catch {
@@ -178,10 +204,6 @@ object NormalizeDatasets {
         }
       }
     }
-
-    workers.start()
-    for (language <- languages) workers.process(language)
-    workers.stop()
   }
 
   private def createDestination[T <% FileLike[T]](finder: Finder[T], date: String, formats: scala.collection.Map[String, Formatter], datasets: Seq[Dataset]) : Destination = {
