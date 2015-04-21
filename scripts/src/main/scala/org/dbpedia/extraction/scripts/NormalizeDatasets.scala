@@ -6,7 +6,7 @@ import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 import org.dbpedia.extraction.util.RichFile
 import java.net.{URI, URL}
 import org.dbpedia.extraction.wikiparser.Namespace
-import java.io.{FileInputStream, ObjectInputStream, Writer, File}
+import java.io._
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.util.RichFile._
 import scala.collection.mutable.{ArrayBuffer, HashMap, MultiMap}
@@ -20,6 +20,11 @@ import scala.Some
 import scala.Some
 import scala.collection.parallel.mutable.ParTrieMap
 import scala.collection.concurrent.TrieMap
+import java.util.logging.{Logger, Level}
+import scala.Some
+import scala.Console
+import scala.Some
+import scala.Some
 
 /**
  * Normalize all triples into the new namespace using wikidata identifiers as base using
@@ -41,6 +46,8 @@ import scala.collection.concurrent.TrieMap
  */
 
 object NormalizeDatasets {
+
+  private val logger = Logger.getLogger(classOf[NormalizationJob].getName)
 
   private def split(arg: String): Array[String] = {
     arg.split(",").map(_.trim).filter(_.nonEmpty)
@@ -102,48 +109,34 @@ object NormalizeDatasets {
       val destination = createDestination(wikiFinder, date, formats, datasets)
       val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix)) // Finds wikidata mapping dataset
 
-      val map = new TrieMap[String, Int]
-
-      // QuadReader iterates through the whole mappings file once for every language, reading in only the URIs for the current lang.
-      for (mappping <- mappings) {
-        var count = 0
-        QuadReader.readQuads(mappingFinder, mappping + mappingSuffix, auto = true) {
-          quad =>
-            if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode + ": expected object uri, found object literal: " + quad)
-            // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
-            // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
-            // line, which means that the character array for the whole line is kept in memory, which
-            // basically means that the whole redirects file is kept in memory. We should
-            // - only store the resource title in the map
-            // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
-            // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
-
-            //          // This checkLanguage manually extracts the host substring without creating a java.net.URI
-            // Difference between performance: 9ms per line vs 8ms per line.
-            //          def checkLanguage(quadObject: String): Boolean = {
-            //            val startDomain = quadObject.substring(7) // part after http://
-            //            val endDomain = startDomain.indexOf("/")
-            //            val domain = if(endDomain == -1) startDomain else startDomain.substring(0, endDomain)
-            //            val languagePrefix = if(language.wikiCode == "en") "" else language.wikiCode + "."
-            //            if(domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
-            //            else if(domain.endsWith("dbpedia.org")) false
-            //            else true // accept non-dbpedia URIs
-            //          }
-
-            def checkLanguage(quadObject: URI): Boolean = {
-              val domain = quadObject.getHost
-              val languagePrefix = if (language.wikiCode == "en") "" else language.wikiCode + "."
-              if (domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
-              else if (domain.endsWith("dbpedia.org")) false
-              else true // accept non-dbpedia URIs
-            }
-
-            if (quad.datatype != null || checkLanguage(new URI(quad.value))) {
-              map(quad.value) = quad.subject.substring(WikidataResource.length).toInt // Store just the Q-value integers
-              count += 1
-            }
+      val map = {
+        // Try reading from cache
+        val cache = wikiFinder.file(date, "sameas-mappings.obj")
+        logger.info("Loading sameas mappings from cache file "+cache)
+        try
+        {
+          loadMappingsFromCache(cache)
         }
-        err.println(language.wikiCode + ": found " + count + " mappings")
+        catch
+        {
+          case ex : Exception => logger.log(Level.INFO, "Will extract redirects from source for "+language.wikiCode+" wiki, could not load cache file '"+cache+"': "+ex)
+            val map = loadMappingsFromSource(language, mappingFinder, mappings, mappingSuffix)
+
+            // Save mappings to cache
+            val dir = cache.getParentFile
+            if (! dir.exists && ! dir.mkdirs) throw new IOException("cache dir ["+dir+"] does not exist and cannot be created")
+            val outputStream = new ObjectOutputStream(new FileOutputStream(cache))
+            try
+            {
+              outputStream.writeObject(map)
+            }
+            finally
+            {
+              outputStream.close()
+            }
+            logger.info(map.size + " sameas mappings written to cache file "+cache)
+            map
+        }
       }
       new NormalizationJob(language, destination, map.toMap, wikiFinder, inputs, suffixes.toSeq, extensions)
     }
@@ -151,6 +144,69 @@ object NormalizeDatasets {
     for(job <- jobs)
       job.run()
 
+  }
+
+  private def loadMappingsFromCache(cache: File): Map[String, Int] = {
+    val inputStream = new ObjectInputStream(new FileInputStream(cache))
+    try
+    {
+      val map = inputStream.readObject().asInstanceOf[Map[String, Int]]
+
+      logger.info(map.size + " mappings loaded from cache file "+cache)
+      map
+    }
+    finally
+    {
+      inputStream.close()
+    }
+  }
+
+  private def loadMappingsFromSource(language: Language, mappingFinder: DateFinder[File], mappings: Array[String], mappingSuffix: String): Map[String, Int] = {
+    val map = new TrieMap[String, Int]
+
+    // QuadReader iterates through the whole mappings file once for every language, reading in only the URIs for the current lang.
+    for (mappping <- mappings) {
+      var count = 0
+      QuadReader.readQuads(mappingFinder, mappping + mappingSuffix, auto = true) {
+        quad =>
+          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode + ": expected object uri, found object literal: " + quad)
+          // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
+          // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
+          // line, which means that the character array for the whole line is kept in memory, which
+          // basically means that the whole redirects file is kept in memory. We should
+          // - only store the resource title in the map
+          // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
+          // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
+
+          //          // This checkLanguage manually extracts the host substring without creating a java.net.URI
+          // Difference between performance: 9ms per line vs 8ms per line.
+          //          def checkLanguage(quadObject: String): Boolean = {
+          //            val startDomain = quadObject.substring(7) // part after http://
+          //            val endDomain = startDomain.indexOf("/")
+          //            val domain = if(endDomain == -1) startDomain else startDomain.substring(0, endDomain)
+          //            val languagePrefix = if(language.wikiCode == "en") "" else language.wikiCode + "."
+          //            if(domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
+          //            else if(domain.endsWith("dbpedia.org")) false
+          //            else true // accept non-dbpedia URIs
+          //          }
+
+          def checkLanguage(quadObject: URI): Boolean = {
+            val domain = quadObject.getHost
+            val languagePrefix = if (language.wikiCode == "en") "" else language.wikiCode + "."
+            if (domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
+            else if (domain.endsWith("dbpedia.org")) false
+            else true // accept non-dbpedia URIs
+          }
+
+          if (quad.datatype != null || checkLanguage(new URI(quad.value))) {
+            map(quad.value) = quad.subject.substring(WikidataResource.length).toInt // Store just the Q-value integers
+            count += 1
+          }
+      }
+      logger.info(language.wikiCode + ": found " + count + " mappings")
+    }
+
+    map.toMap
   }
 
   class NormalizationJob(language: Language, destination: Destination, map: Map[String, Int], wikiFinder: Finder[File], inputs: Seq[String], suffixes: Seq[String], extensions: Seq[String]) {
