@@ -1,4 +1,4 @@
-# DBPedia Information Extraction Framework
+# DBpedia Information Extraction Framework
 
 ## Documentation
 
