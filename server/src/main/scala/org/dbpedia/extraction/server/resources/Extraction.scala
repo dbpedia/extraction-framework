@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server.resources
 
 import java.net.{URL, URI}
-import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
 import org.dbpedia.extraction.util.Language
 import javax.ws.rs._
 import javax.ws.rs.core.{MediaType, Response}
@@ -62,26 +62,33 @@ class Extraction(@PathParam("lang") langCode : String)
     def get = 
     {
        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-         <head>
-           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-         </head>
+         {ServerHeader.getHeader("Extractor a page")}
          <body>
-           <h2>Extract a page</h2>
-           <form action="extract" method="get">
-             Page title<br/>
-             <input type="text" name="title" value={ getTitle }/><br/>
-             Revision ID (optional, overrides title)<br/>
-             <input type="text" name="revid"/><br/>
-             Output format<br/>
-             <select name="format">
-               <option value="trix">Trix</option>
-               <option value="turtle-triples">Turtle-Triples</option>
-               <option value="turtle-quads">Turtle-Quads</option>
-               <option value="n-triples">N-Triples</option>
-               <option value="n-quads">N-Quads</option>
-             </select><br/>
-             <input type="submit" value="Extract" />
-           </form>
+           <div class="row">
+             <div class="col-md-3 col-md-offset-5">
+              <h2>Extract a page</h2>
+               <form action="extract" method="get">
+                Page title<br/>
+                <input type="text" name="title" value={ getTitle }/><br/>
+                Revision ID (optional, overrides title)<br/>
+                <input type="text" name="revid"/><br/>
+                Output format<br/>
+                <select name="format">
+                  <option value="trix">Trix</option>
+                  <option value="turtle-triples">Turtle-Triples</option>
+                  <option value="turtle-quads">Turtle-Quads</option>
+                  <option value="n-triples">N-Triples</option>
+                  <option value="n-quads">N-Quads</option>
+                  <option value="rdf-json">RDF/JSON</option>
+                </select><br/>
+                <select name="extractors">
+                <option value="mappings">Mappings Only</option>
+                <option value="custom">All Enabled Extractors </option>
+                </select><br/>
+              <input type="submit" value="Extract" />
+            </form>
+            </div>
+           </div>
          </body>
        </html>
     }
@@ -91,7 +98,7 @@ class Extraction(@PathParam("lang") langCode : String)
      */
     @GET
     @Path("extract")
-    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String) : Response =
+    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String) : Response =
     {
         if (title == null && revid < 0) throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
         
@@ -103,8 +110,16 @@ class Extraction(@PathParam("lang") langCode : String)
             case "turtle-quads" => new TerseFormatter(true, true)
             case "n-triples" => new TerseFormatter(false, false)
             case "n-quads" => new TerseFormatter(true, false)
+            case "rdf-json" => new RDFJSONFormatter()
             case _ => TriX.writeHeader(writer, 2)
         }
+
+      val customExtraction = extractors match
+      {
+        case "mappings" => false
+        case "custom" => true
+        case _ => false
+      }
 
         val source = 
           if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
@@ -113,7 +128,7 @@ class Extraction(@PathParam("lang") langCode : String)
         // See https://github.com/dbpedia/extraction-framework/issues/144
         // We should mimic the extraction framework behavior
         val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
-        Server.instance.extractor.extract(source, destination, language)
+        Server.instance.extractor.extract(source, destination, language, customExtraction)
 
         Response.ok(writer.toString).`type`(selectContentType(format)).build()
     }

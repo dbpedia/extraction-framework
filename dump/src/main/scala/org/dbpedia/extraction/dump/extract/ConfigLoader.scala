@@ -3,10 +3,10 @@ package org.dbpedia.extraction.dump.extract
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{XMLSource,WikiSource,Source}
+import org.dbpedia.extraction.sources.{WikiPage, XMLSource, WikiSource, Source}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dump.download.Download
-import org.dbpedia.extraction.util.{Language,Finder}
+import org.dbpedia.extraction.util.{Language, Finder, ExtractorUtils}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{ArrayBuffer,HashMap}
 import java.io._
@@ -37,15 +37,13 @@ class ConfigLoader(config: Config)
     {
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
-      config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2, parser))
+      config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2))
     }
-    
-    private val parser = WikiParser.getInstance(config.parser)
     
     /**
      * Creates ab extraction job for a specific language.
      */
-    private def createExtractionJob(lang : Language, extractorClasses: List[Class[_ <: PageNodeExtractor]], parser : WikiParser) : ExtractionJob =
+    private def createExtractionJob(lang : Language, extractorClasses: Seq[Class[_ <: Extractor[_]]]) : ExtractionJob =
     {
         val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
@@ -67,17 +65,17 @@ class ConfigLoader(config: Config)
                 if (config.mappingsDir != null && config.mappingsDir.isDirectory)
                 {
                     val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-                    XMLSource.fromFile(file, Language.Mappings).map(parser)
+                    XMLSource.fromFile(file, Language.Mappings)
                 }
                 else
                 {
                     val namespaces = Set(namespace)
                     val url = new URL(Language.Mappings.apiUri)
-                    WikiSource.fromNamespaces(namespaces,url,Language.Mappings).map(parser)
+                    WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
                 }
             }
             
-            def mappingPageSource : Traversable[PageNode] = _mappingPageSource
+            def mappingPageSource : Traversable[WikiPage] = _mappingPageSource
     
             private lazy val _mappings =
             {
@@ -91,7 +89,8 @@ class ConfigLoader(config: Config)
 
               XMLSource.fromReaders(articlesReaders, language,
                     title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
-                             title.namespace == Namespace.Category || title.namespace == Namespace.Template)
+                             title.namespace == Namespace.Category || title.namespace == Namespace.Template ||
+                             ExtractorUtils.titleContainsCommonsMetadata(title))
             }
             
             def articlesSource = _articlesSource
@@ -120,7 +119,7 @@ class ConfigLoader(config: Config)
         }
 
         //Extractors
-        val extractor = CompositePageNodeExtractor.load(extractorClasses, context)
+        val extractor = CompositeParseExtractor.load(extractorClasses, context)
         val datasets = extractor.datasets
         
         val formatDestinations = new ArrayBuffer[Destination]()
@@ -138,7 +137,10 @@ class ConfigLoader(config: Config)
         val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete), false)
         
         val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
-        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, config.namespaces, destination, lang.wikiCode, description, parser)
+
+        val extractionJobNS = if(lang == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
+
+        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, extractionJobNS, destination, lang.wikiCode, description)
     }
     
     private def writer(file: File): () => Writer = {

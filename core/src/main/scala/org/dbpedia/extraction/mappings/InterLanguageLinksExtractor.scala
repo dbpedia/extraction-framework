@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, ExtractorUtils}
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
@@ -17,7 +17,8 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
 
   override val datasets = Set(DBpediaDatasets.InterLanguageLinks)
   
-  private val namespaces = Set(Namespace.Main, Namespace.Template, Namespace.Category)
+  private val namespaces = if (context.language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
+    else Set(Namespace.Main, Namespace.Template, Namespace.Category)
   
   private val quad = QuadBuilder.apply(context.language, DBpediaDatasets.InterLanguageLinks, interLanguageLinksProperty, null) _
 

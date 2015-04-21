@@ -118,9 +118,13 @@ class InfoboxExtractorTest
 		val page = //new FileSource(folder, context.language, _ endsWith file).head
 		  XMLSource.fromFile(new File(folder.getPath() + "/" + file),context.language).head
 		println("resourceIri : " + page.title.resourceIri)
-		val generatedTriples = extractor.extract(parser(page),page.title.resourceIri,new PageContext())
-		//extractor.retrievePage(page.title, generatedAbstract)
-		generatedTriples
+
+    parser(page) match {
+      case Some(n) => extractor.extract(n,page.title.resourceIri,new PageContext())
+      case None => Seq.empty
+
+    }
+
 	}
 
 	private def gold(fileName : String, language : Language, folder : File) : Seq[Quad] =

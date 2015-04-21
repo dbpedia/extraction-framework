@@ -115,12 +115,45 @@ wget --background --spider --recursive --level 1 --domains=downloads.dbpedia.org
 # - may fail for other reasons, depending on file content, shell settings, etc.
 sed -r 's/%([89ABCDEF])/\\x\1/g' abc.nt | while read -r line ; do echo -e $line ; done > abc.ttl
 
-# list all page-links files
+
+# generate page in/out link counts
+
+# At almost 500 chars, these stretch the limits of 'one-liners'. Maybe this should be done in a Scala script, but I (JC) was too lazy.
+# Sorting and joining is probably not the most efficient way to remove certain lines, but the easiest way I found for a pure bash approach.
+
+# Explanation of the scripts:
+# The <(...) syntax is process substition and lets us join the result of processing two files without handling temporary files.
+# The outer loop just goes through all the files in page-links.txt and writes a log file. LC_ALL=C is important for sort and uniq.
+# For each file, we unzip it, drop comment lines, drop all fields but the URI the link is to/from, and sort them by name;
+# uniq -c prints the counts like " 25 <http://.../Foo>", awk switches the fields to "<http://.../Foo> 25"
+# We only count in-links to existing pages and we don't count out-links from redirect pages.
+# To do that, we unzip the labels/redirects file, drop comment lines, drop all fields but the subject URI, and sort them by name.
+# Because both lists are sorted, we can now use join to keep only the lines we want:
+# * for in-links, join keeps all existing pages (the ones that occur in the labels file)
+# * for out-links, join -v 1 drops all redirect pages (the ones that occur in the redirects file)
+# Then we sort by descending link count - triple stores won't care, but humans reading the files will. '-s' means stable sort - titles with the same link count remain sorted alphabetically. 
+# Finally, we generate Turtle/NT format and write the result to a new zip file.
+
+# At first, I counted all links, but the results were misleading or ugly. Here's a short explanation why I decided to use only certain links:
+# For in-link count:
+# * to non-existent pages: no! There would be too many silly page names with in-link count 1.
+# * from redirect pages: might just leave them in. no big deal. number of redirect source names will be roughly proportional to importance of page, so that's probably ok
+# * to redirect pages: already resolved
+# * from disambig pages: ok, never mind
+# * to disambig pages: ok
+# For out-link count:
+# * to non-existent pages: ok
+# * from redirect pages: no! There would be too many pages with out-link count 1.
+# * to redirect pages: already resolved
+# * from disambig pages: ok, never mind
+# * to disambig pages: ok, never mind
+
+# first, list all page-links files
 ls -1 */*/*-page-links*.{nt,ttl}.gz | grep -v -E 'en-uris|unredirected' > page-links.txt
 
 # generate in-link counts
-( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i; gzip -d < $i | grep -v '^#' | cut -d ' ' -f 3 | sort | uniq -c | sort -k 1,1 -n -s -r | awk '{print $2" <http://dbpedia.org/ontology/wikiPageInLinkCount> \""$1"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-in-link-counts} ; done &> page-in-link-counts.log & )
+( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i; join <(gzip -d < $i | grep -v '^#' | cut -d ' ' -f 3 | sort | uniq -c | awk '{print $2" "$1}') <(gzip -d < ${i/page-links/labels} | grep -v '^#' | cut -d ' ' -f 1 | sort) | sort -k 2,2 -n -s -r | awk '{print $1" <http://dbpedia.org/ontology/wikiPageInLinkCount> \""$2"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-in-link-counts} ; done &> page-in-link-counts.log & )
 
 # generate out-link count
 # (the first sort is not really necessary - our triples are already grouped by subject, and grouping is enough for uniq - but it's nicer that the in-link and out-link counts are sorted similarly)
-( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i; gzip -d < $i | grep -v '^#' | cut -d ' ' -f 1 | sort | uniq -c | sort -k 1,1 -n -s -r | awk '{print $2" <http://dbpedia.org/ontology/wikiPageOutLinkCount> \""$1"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-out-link-counts} ; done &> page-out-link-counts.log & )
+( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i ; join -v 1 <(gzip -d < $i | grep -v '^#' | cut -d ' ' -f 1 | sort | uniq -c | awk '{print $2" "$1}') <(gzip -d < ${i/page-links/redirects} | grep -v '^#' | cut -d ' ' -f 1 | sort) | sort -k 2,2 -n -s -r | awk '{print $1" <http://dbpedia.org/ontology/wikiPageOutLinkCount> \""$2"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-out-link-counts} ; done &> page-out-link-counts.log & )

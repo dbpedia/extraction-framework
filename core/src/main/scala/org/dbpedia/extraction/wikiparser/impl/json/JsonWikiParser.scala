@@ -1,16 +1,18 @@
 package org.dbpedia.extraction.wikiparser.impl.json
 
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle}
-import net.liftweb.json.DefaultFormats
-import net.liftweb.json.JsonParser._
+import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle,JsonNode}
+import org.json.JSONObject
+import org.wikidata.wdtk.datamodel.implementation.DataObjectFactoryImpl
+import org.wikidata.wdtk.datamodel.interfaces.{Claim, ItemDocument}
+import org.wikidata.wdtk.dumpfiles.JsonConverter
 import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.util.matching.Regex
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.util.Language
 
 import JsonWikiParser._
-import net.liftweb.json.JsonAST._
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,64 +22,35 @@ import net.liftweb.json.JsonAST._
  * To change this template use File | Settings | File Templates.
  */
 object JsonWikiParser {
-  private val WikiLanguageRegex = """([^\s]+)wiki""".r
+  /* the regex should search for languageslinks like "enwiki" only
+  so that "enwikivoyage" for example wouldn't be acceptable because they wouldn't match a DBpedia entity
+  */
+  private val WikiLanguageRegex = """([^\s]+)wiki$""".r
 }
+
+/**
+ * JsonWikiParser class use wikidata Toolkit to parse wikidata json
+ * wikidata json parsed and converted to wikidata ItemDocument
+ */
 
 class JsonWikiParser {
 
-  implicit val formats = DefaultFormats
-
-  def apply(page : WikiPage) : PageNode =
+  def apply(page : WikiPage) : Option[JsonNode] =
   {
-    val nodes = collectInterLanguageLinks(page)
-    // Return page node
-    new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, false, false, nodes)
+    if (page.format == null || page.format != "application/json")
+    {
+      None
+    }
+    else
+    {
+      val IntRegEx = new Regex("(\\d+)")
+      val jsonObject : JSONObject  = new JSONObject(page.source)
+      val jsonConverter = new JsonConverter("http://data.dbpedia.org/resource", new DataObjectFactoryImpl())
+      val Some(title) = IntRegEx findFirstIn page.title.toString()
+      val itemDocument : ItemDocument = jsonConverter.convertToItemDocument(jsonObject, "Q"+title)
+      Some(new JsonNode(page,itemDocument))
+    }
   }
 
-  def collectInterLanguageLinks(page: WikiPage) : List[Node] = {
-
-    var nodes = List[Node]()
-    val json = page.source
-
-    val parsedText = parseOpt(json)
-
-    val jsonObjMap = parsedText match {
-      case Some(map) => map
-      case _ => throw new IllegalStateException("Invalid JSON representation!")
-    }
-
-    val interLinks = (jsonObjMap \ "links") match {
-      case JObject(links) => links
-      case _ => List()
-    }
-
-    val interLinksMap = collection.mutable.Map[String, String]()
-
-    interLinks.foreach { interLink : JField =>
-      interLink.name match {
-          case WikiLanguageRegex(lang) =>  interLinksMap += lang -> interLink.value.extract[String]
-          case _ =>
-      }
-    }
-
-    if (! interLinksMap.contains("en")) return nodes
-
-    val sourceTitle = WikiTitle.parse(interLinksMap.get("en").get, Language.English)
-    // Do not generate a link to the defaul language itself
-    interLinksMap -= "en"
-
-    interLinksMap.foreach {
-      case (key, value) =>
-        Language.map.get(key) match {
-          case Some(lang) =>
-            val destinationTitle = WikiTitle.parse(key + ":" + value, lang)
-            //TODO comment in order to compile
-            //nodes ::= WikidataInterWikiLinkNode(sourceTitle, destinationTitle)
-          case _ =>
-        }
-      case _ =>
-    }
-
-    nodes
-  }
 }
+  

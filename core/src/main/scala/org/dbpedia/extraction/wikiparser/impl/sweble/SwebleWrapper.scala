@@ -59,7 +59,7 @@ final class SwebleWrapper extends WikiParser
 	val compiler = new Compiler(config)
     var entityMap : EntityMap = new EntityMap()
 
-    def apply(page : WikiPage) : PageNode =
+    def apply(page : WikiPage) : Option[PageNode] =
     {
         //TODO refactor, not safe
         language = page.title.language
@@ -80,7 +80,7 @@ final class SwebleWrapper extends WikiParser
 		//println(w.toString())
     
         //TODO dont transform, refactor all extractors instead
-        transformAST(page, false, false, parsed)
+        Some(transformAST(page, false, false, parsed))
     }
 
     def parse(pageId : PageId, wikitext : String) : Page = {

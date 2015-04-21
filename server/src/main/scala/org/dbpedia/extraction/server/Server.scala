@@ -1,11 +1,10 @@
 package org.dbpedia.extraction.server
 
-import java.io.File
 import java.net.{URI,URL}
 import java.util.logging.{Level,Logger}
 import scala.collection.immutable.SortedMap
-import org.dbpedia.extraction.mappings.{Redirects, LabelExtractor, MappingExtractor, Mappings}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.util.{ConfigUtils, Language}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.server.stats.MappingStatsManager
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
@@ -14,10 +13,15 @@ import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.{WikiTitle, Namespace}
 import Server._
 
-class Server(private val password : String, langs : Seq[Language], val paths: Paths) 
+class Server(
+  private val password : String,
+  languages : Seq[Language],
+  val paths: Paths,
+  mappingTestExtractors: Seq[Class[_ <: Extractor[_]]],
+  customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
 {
     val managers = {
-      val tuples = langs.map(lang => lang -> new MappingStatsManager(paths.statsDir, lang))
+      val tuples = languages.map(lang => lang -> new MappingStatsManager(paths.statsDir, lang))
       SortedMap(tuples: _*)
     }
 
@@ -25,7 +29,7 @@ class Server(private val password : String, langs : Seq[Language], val paths: Pa
       managers.map(manager => (manager._1, buildTemplateRedirects(manager._2.wikiStats.redirects, manager._1))).toMap
     }
         
-    val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), langs, paths, redirects)
+    val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), languages, paths, redirects, mappingTestExtractors, customTestExtractors)
     
     extractor.updateAll
         
@@ -50,23 +54,24 @@ object Server
         
         logger.info("DBpedia server starting")
         
-        require(args != null && args.length >= 6, "need at least six args: server URL, mappings wiki base URL, password for template ignore list, base dir for statistics, ontology file, mappings dir. Additional args are wiki codes for languages.")
+        require(args != null && args.length == 1, "need the server configuration file as argument.")
+
+        // Load properties
+        val properties = ConfigUtils.loadConfig(args(0), "UTF-8")
+
+        val configuration = new ServerConfiguration(properties)
         
-        val wikiUri = new URL(args(0))
+        val mappingsUrl = new URL(configuration.mappingsUrl)
         
-        val uri = new URI(args(1))
+        val localServerUrl = new URI(configuration.localServerUrl)
         
-        val password = args(2)
+        val serverPassword = configuration.serverPassword
+
+        val languages = configuration.languages
+
+        val paths = new Paths(new URL(mappingsUrl, "index.php"), new URL(mappingsUrl, "api.php"), configuration.statisticsDir, configuration.ontologyFile, configuration.mappingsDir)
         
-        val paths = new Paths(new URL(wikiUri, "index.php"), new URL(wikiUri, "api.php"), new File(args(3)), new File(args(4)), new File(args(5)))
-        
-        // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var langs : Seq[Language] = for(arg <- args.drop(6); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
-        
-        // if no languages are given, use all languages for which a mapping namespace is defined
-        if (langs.isEmpty) langs = Namespace.mappings.keySet.toSeq
-        
-        _instance = new Server(password, langs, paths)
+        _instance = new Server(serverPassword, languages, paths, configuration.mappingTestExtractorClasses, configuration.customTestExtractorClasses)
         
         // Configure the HTTP server
         val resources = new PackagesResourceConfig("org.dbpedia.extraction.server.resources", "org.dbpedia.extraction.server.providers")
@@ -80,9 +85,9 @@ object Server
         // But when it receives a bad URI (e.g. by Apache), Jersey does no tracing. :-( 
         // features.put(ResourceConfig.FEATURE_TRACE, true)
 
-        HttpServerFactory.create(uri, resources).start()
+        HttpServerFactory.create(localServerUrl, resources).start()
 
-        logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis) + " listening on " + uri)
+        logger.info("DBpedia server started in "+prettyMillis(System.currentTimeMillis - millis) + " listening on " + localServerUrl)
     }
 
     /**

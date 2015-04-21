@@ -75,9 +75,7 @@ object GenerateWikiSettings {
     
     println("generating wiki config for "+languages.length+" languages")
     
-    for (code <- languages)
-    {
-      print(code)
+    languages.par.map { code =>
       val language = Language(code)
       val file = new File(baseDir, language.wikiCode+"wiki-configuration.xml")
       val disambigFile = new File(baseDir, language.wikiCode+"wiki-disambiguation-templates.xml")
@@ -115,17 +113,17 @@ object GenerateWikiSettings {
           if (!disambiguations.isEmpty) disambiguationsMap(code) = disambiguations
         }
         // TODO: also use interwikis
-        println(" - OK")
+        println(s"${code} - OK")
       } catch {
         case hrex: HttpRetryException => {
           val target = hrex.getMessage
           languageMap(code) = target
-          println(" - redirected to "+target)
+          println(s"${code} - redirected to ${target}")
         }
         case ioex: IOException => {
           val error = ioex.getMessage
           errors(code) = error
-          println(" - Error: "+error)
+          println(s"${code} - Error: ${error}")
         }
       }
     }
