@@ -234,7 +234,7 @@ class WikidataR2RExtractor(
             }
 
             // coordinates dataset
-          case "http://www.w3.org/2003/01/geo/wgs84_pos#lat" | "http://www.w3.org/2003/01/geo/wgs84_pos#long"
+          case "http://www.w3.org/2003/01/geo/wgs84_pos#lat" | "http://www.w3.org/2003/01/geo/wgs84_pos#long" | "http://www.georss.org/georss/point"
                 => adjustedGraph += q.copy(dataset = DBpediaDatasets.GeoCoordinates.name)
 
             //Images dataset
