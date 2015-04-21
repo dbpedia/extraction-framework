@@ -46,7 +46,9 @@ class WikidataR2RExtractor(
 
   // this is where we will store the output
   val WikidataR2RErrorDataset = new Dataset("wikidata-r2r-mapping-errors")
-  override val datasets = Set(DBpediaDatasets.WikidataR2R, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier)
+  override val datasets = Set(DBpediaDatasets.WikidataR2R, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier,
+                              DBpediaDatasets.GeoCoordinates, DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
+                              DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs)
 
   val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
 
@@ -86,7 +88,7 @@ class WikidataR2RExtractor(
         }
       }
     }
-    quads
+    splitDatasets(quads, subjectUri, page)
   }
 
   def getQuad(page: JsonNode, subjectUri: String,statementUri:String,map: mutable.Map[String, String]): ArrayBuffer[Quad] = {
@@ -203,6 +205,57 @@ class WikidataR2RExtractor(
       }
     })
     properties
+  }
+
+  /**
+   * Splits the quads to different datasets according to custom rules
+   */
+  private def splitDatasets(originalGraph: Seq[Quad], subjectUri : String, page: JsonNode) : Seq[Quad] = {
+    val adjustedGraph = new ArrayBuffer[Quad]
+
+    originalGraph.map(q => {
+      if (q.dataset.equals(DBpediaDatasets.WikidataR2R.name)) {
+        q.predicate match {
+
+            // split type statements, some types e.g. cordinates go to separate datasets
+          case "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" =>
+            q.subject match {
+              case "http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"
+                   => adjustedGraph += q.copy(dataset = DBpediaDatasets.GeoCoordinates.name)
+              case _ => // This is the deafult types we get
+                adjustedGraph += q.copy(dataset = DBpediaDatasets.OntologyTypes.name)
+                // Generate inferred types
+                context.ontology.classes.get(q.value.replace("http://dbpedia.org/ontology/", "")) match {
+                  case Some(clazz) =>
+                    for (cls <- clazz.relatedClasses)
+                      adjustedGraph += new Quad(context.language, DBpediaDatasets.OntologyTypesTransitive, subjectUri, rdfType, cls.uri, page.wikiPage.sourceUri)
+                  case None =>
+                }
+            }
+
+            // coordinates dataset
+          case "http://www.w3.org/2003/01/geo/wgs84_pos#lat" | "http://www.w3.org/2003/01/geo/wgs84_pos#long"
+                => adjustedGraph += q.copy(dataset = DBpediaDatasets.GeoCoordinates.name)
+
+            //Images dataset
+          case  "http://xmlns.com/foaf/0.1/thumbnail" | "http://xmlns.com/foaf/0.1/depiction" | "http://dbpedia.org/ontology/thumbnail"
+                => adjustedGraph += q.copy(dataset = DBpediaDatasets.Images.name)
+
+            // sameAs links
+          case "http://www.w3.org/2002/07/owl#sameAs" =>
+            // We get the commons:Creator links
+            if (q.value.startsWith("http://commons.dbpedia.org")) {
+              adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataNameSpaceSameAs.name)
+            } else {
+              adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataSameAsExternal.name)
+            }
+
+          case _ => adjustedGraph += q
+        }
+      } else adjustedGraph += q
+    })
+
+    adjustedGraph
   }
 }
 
