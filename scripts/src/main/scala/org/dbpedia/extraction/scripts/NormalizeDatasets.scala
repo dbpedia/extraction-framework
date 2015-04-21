@@ -6,7 +6,7 @@ import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
 import org.dbpedia.extraction.util.RichFile
 import java.net.{URI, URL}
 import org.dbpedia.extraction.wikiparser.Namespace
-import java.io.{Writer, File}
+import java.io.{FileInputStream, ObjectInputStream, Writer, File}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.util.RichFile._
 import scala.collection.mutable.{ArrayBuffer, HashMap, MultiMap}
@@ -102,12 +102,9 @@ object NormalizeDatasets {
       val destination = createDestination(wikiFinder, date, formats, datasets)
       val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix)) // Finds wikidata mapping dataset
 
-      // We don't need a MultiMap here if dealing with one
-      // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
-      val map = new HashMap[String, mutable.Set[Int]] with MultiMap[String, Int]
+      val map = new TrieMap[String, Int]
 
-      // QuadReader iterates through the whole mappings file every time?
-      // Improve this with Akka or leave it to the Spark map-reduce version?
+      // QuadReader iterates through the whole mappings file once for every language, reading in only the URIs for the current lang.
       for (mappping <- mappings) {
         var count = 0
         QuadReader.readQuads(mappingFinder, mappping + mappingSuffix, auto = true) {
@@ -142,13 +139,13 @@ object NormalizeDatasets {
             }
 
             if (quad.datatype != null || checkLanguage(new URI(quad.value))) {
-              map.addBinding(quad.value, quad.subject.substring(WikidataResource.length).toInt) // Store just the Q-value integers
+              map(quad.value) = quad.subject.substring(WikidataResource.length).toInt // Store just the Q-value integers
               count += 1
             }
         }
         err.println(language.wikiCode + ": found " + count + " mappings")
       }
-      new NormalizationJob(language, destination, map, wikiFinder, inputs, suffixes.toSeq, extensions)
+      new NormalizationJob(language, destination, map.toMap, wikiFinder, inputs, suffixes.toSeq, extensions)
     }
 
     for(job <- jobs)
@@ -156,7 +153,7 @@ object NormalizeDatasets {
 
   }
 
-  class NormalizationJob(language: Language, destination: Destination, map: HashMap[String, mutable.Set[Int]] with MultiMap[String, Int], wikiFinder: Finder[File], inputs: Seq[String], suffixes: Seq[String], extensions: Seq[String]) {
+  class NormalizationJob(language: Language, destination: Destination, map: Map[String, Int], wikiFinder: Finder[File], inputs: Seq[String], suffixes: Seq[String], extensions: Seq[String]) {
     val outputExtension = extensions(0)
     val subjectRejectExtension = extensions(1)
     val objectRejectExtension = extensions(2)
@@ -166,15 +163,15 @@ object NormalizeDatasets {
       args: (Quad, String) =>
         val (quad, input) = args
         (map.get(quad.subject), map.get(quad.value)) match {
-          case (Some(subIds), Some(objIds)) =>
-            destination.write(for ((sub, obj) <- subIds zip objIds) yield quad.copy(subject = WikidataResource + sub, value = WikidataResource + obj,
-              dataset = input + outputExtension))
-          case (Some(ids), _) if quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org") =>
-            destination.write(for (id <- ids) yield quad.copy(subject = WikidataResource + id,
-              dataset = input + outputExtension)) // Keep triples with string literals non-dbpedia URIs in object
-          case (None, Some(ids)) =>
+          case (Some(subId), Some(objId)) =>
+            destination.write(Seq(quad.copy(subject = WikidataResource + subId, value = WikidataResource + objId,
+              dataset = input + outputExtension)))
+          case (Some(id), _) if quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org") =>
+            destination.write(Seq(quad.copy(subject = WikidataResource + id,
+              dataset = input + outputExtension))) // Keep triples with string literals non-dbpedia URIs in object
+          case (None, Some(id)) =>
             destination.write(Seq(quad.copy(dataset = input + subjectRejectExtension))) // Subject cannot be mapped in our URIs
-          case (Some(ids), None) =>
+          case (Some(id), None) =>
             destination.write(Seq(quad.copy(dataset = input + objectRejectExtension))) // Object does not exist
           case (None, None) =>
             destination.write(Seq(quad.copy(dataset = input + bothRejectExtension)))
@@ -183,26 +180,27 @@ object NormalizeDatasets {
     }
 
     def run(): Unit = {
+      destination.open()
+      workers.start()
+
       for (input <- inputs; suffix <- suffixes) {
         val date = wikiFinder.dates().last
         val inFile: FileLike[File] = wrapFile(wikiFinder.file(date, input + suffix))
 
         try {
-          destination.open()
-          workers.start()
-
           QuadReader.readQuads(wikiFinder.language.wikiCode+": Reading triples from " + input + suffix, inFile) {
             quad => workers.process((quad, input))
           }
 
-          workers.stop()
-          destination.close()
         }
         catch {
           case e: Exception =>
             Console.err.println(e.printStackTrace())
         }
       }
+
+      workers.stop()
+      destination.close()
     }
   }
 
