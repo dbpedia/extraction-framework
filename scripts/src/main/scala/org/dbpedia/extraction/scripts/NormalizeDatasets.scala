@@ -117,16 +117,37 @@ object NormalizeDatasets {
           // - only store the resource title in the map
           // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
           // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
-          map.addBinding(quad.value, quad.subject)
-          count += 1
+
+//          // This checkLanguage manually extracts the host substring without creating a java.net.URI
+            // Difference between performance: 9ms per line vs 8ms per line.
+//          def checkLanguage(quadObject: String): Boolean = {
+//            val startDomain = quadObject.substring(7) // part after http://
+//            val endDomain = startDomain.indexOf("/")
+//            val domain = if(endDomain == -1) startDomain else startDomain.substring(0, endDomain)
+//            val languagePrefix = if(language.wikiCode == "en") "" else language.wikiCode + "."
+//            if(domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
+//            else if(domain.endsWith("dbpedia.org")) false
+//            else true // accept non-dbpedia URIs
+//          }
+
+          def checkLanguage(quadObject: URI): Boolean = {
+            val domain = quadObject.getHost
+            val languagePrefix = if(language.wikiCode == "en") "" else language.wikiCode + "."
+            if(domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
+            else if(domain.endsWith("dbpedia.org")) false
+            else true // accept non-dbpedia URIs
+          }
+
+          if(quad.datatype != null || checkLanguage(new URI(quad.value))) {
+            map.addBinding(quad.value, quad.subject)
+            count += 1
+          }
         }
         err.println(language.wikiCode+": found "+count+" mappings")
       }
 
       for (input <- inputs; suffix <- suffixes) {
         val inFile: FileLike[File] = wrapFile(wikiFinder.file(date, input + suffix))
-        val outFiles = for(extension <- extensions)
-                        yield wrapFile(wikiFinder.file(date, input + extension + suffix))
 
         try {
           destination.open()
