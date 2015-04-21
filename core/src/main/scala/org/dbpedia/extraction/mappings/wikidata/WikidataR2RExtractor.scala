@@ -45,7 +45,6 @@ class WikidataR2RExtractor(
   private val rdfObject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#object"
 
   // this is where we will store the output
-  val WikidataR2RDataSet = new Dataset("wikidata-r2r")
   val WikidataR2RErrorDataset = new Dataset("wikidata-r2r-mapping-errors")
   override val datasets = Set(DBpediaDatasets.WikidataR2R, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier)
 
@@ -102,7 +101,7 @@ class WikidataR2RExtractor(
           } else {
 
             //Wikidata R2R mapping without reification
-            val quad = new Quad(context.language, WikidataR2RDataSet, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
+            val quad = new Quad(context.language, DBpediaDatasets.WikidataR2R, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
             quads += quad
 
             //Reification added to R2R mapping

@@ -30,7 +30,7 @@ class WikidataLLExtractor(
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
   private val mappingLanguages = Namespace.mappings.keySet
-  private val datasetMap: Map[String, Dataset] = (for (lang <- mappingLanguages) yield (lang.wikiCode -> new Dataset("wikidata-ll-" + lang.wikiCode)))(collection.breakOut)
+  private val datasetMap: Map[String, Dataset] = (for (lang <- mappingLanguages) yield (lang.wikiCode -> new Dataset("interlanguage_links-" + lang.wikiCode)))(collection.breakOut)
   override val datasets = datasetMap.values.toSet
 
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {

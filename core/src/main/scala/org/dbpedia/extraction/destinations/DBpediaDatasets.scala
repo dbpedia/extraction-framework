@@ -83,23 +83,20 @@ object DBpediaDatasets
     /**
      * Wikidata
      */
-    val Wikidata = new Dataset("wikidata")
-    val WikidataLL = new Dataset("wikidata-ll")
-    val WikidataLabelsMappingsWiki = new Dataset("wikidata-labels-mappingswiki")
-    val WikidataLabelsRest = new Dataset("wikidata-labels-rest")
-    val WikidataSameAs = new Dataset("wikidata-sameas")
-    val WikidataNameSpaceSameAs = new Dataset("wikidata-namespace-sameas")
-    val WikidataMappedFacts = new Dataset("wikidata-mapped")
-    val WikidataAliasMappingsWiki = new Dataset("wikidata-alias-mappingswiki")
-    val WikidataAliasRest = new Dataset("wikidata-alias-rest")
-    val WikidataDescriptionMappingsWiki = new Dataset("wikidata-description-mappingswiki")
-    val WikidataDescriptionRest = new Dataset("wikidata-description-rest")
-    val WikidataProperty= new Dataset("wikidata-property")
-    val WikidataR2R = new Dataset("wikidata-r2r")
-    val WikidataReifiedR2R = new Dataset("wikidata-r2r-reified")
-    val WikidataReifiedR2RQualifier= new Dataset("wikidata-r2r-reified-qualifiers")
-    val WikidataRaw = new Dataset("wikidata-raw")
-    val WikidataRawReified = new Dataset("wikidata-raw-reified")
-    val WikidataRawReifiedQualifiers = new Dataset("wikidata-raw-reified-qualifiers")
-    val WikidataReference = new Dataset("wikidata-reference")
+    val WikidataLabelsMappingsWiki = new Dataset("labels-mappingswiki")
+    val WikidataLabelsRest = new Dataset("labels-rest")
+    val WikidataSameAs = new Dataset("sameas-all-wikis")
+    val WikidataNameSpaceSameAs = new Dataset("sameas-wikidata")
+    val WikidataAliasMappingsWiki = new Dataset("alias-mappingswiki")
+    val WikidataAliasRest = new Dataset("alias-rest")
+    val WikidataDescriptionMappingsWiki = new Dataset("description-mappingswiki")
+    val WikidataDescriptionRest = new Dataset("description-rest")
+    val WikidataProperty= new Dataset("properties")
+    val WikidataR2R = new Dataset("mappingbased_properties")  // keep same name with other languages
+    val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
+    val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
+    val WikidataRaw = new Dataset("raw")
+    val WikidataRawReified = new Dataset("raw-reified")
+    val WikidataRawReifiedQualifiers = new Dataset("raw-reified-qualifiers")
+    val WikidataReference = new Dataset("references")
 }
