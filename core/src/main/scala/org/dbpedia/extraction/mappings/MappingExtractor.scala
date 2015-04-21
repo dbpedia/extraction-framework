@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
@@ -28,7 +28,10 @@ extends PageNodeExtractor
   {
     if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 
-    extractNode(page, subjectUri, pageContext)
+    val graph = extractNode(page, subjectUri, pageContext)
+
+    if (graph.isEmpty) Seq.empty
+    else splitInferredFromDirectTypes(graph, page, subjectUri)
   }
 
   /**
@@ -66,4 +69,26 @@ extends PageNodeExtractor
       graph
     }
   }
+
+  private def splitInferredFromDirectTypes(originalGraph: Seq[Quad], node : Node, subjectUri : String) : Seq[Quad] = {
+    node.getAnnotation(TemplateMapping.CLASS_ANNOTATION) match {
+      case None => {
+        originalGraph
+      }
+      case Some(nodeClass) => {
+        val adjustedGraph: Seq[Quad]=
+          for (q <- originalGraph)
+            yield
+              // We split the types for the main resource only by checking the node annotations
+              if (q.dataset.equals(DBpediaDatasets.OntologyTypes) &&
+                  q.subject.equals(subjectUri) &&
+                  !q.value.equals(nodeClass.toString) )
+                q.copy(dataset = DBpediaDatasets.OntologyTypesTransitive.name)
+              else q
+
+        adjustedGraph
+      }
+    }
+  }
+
 }

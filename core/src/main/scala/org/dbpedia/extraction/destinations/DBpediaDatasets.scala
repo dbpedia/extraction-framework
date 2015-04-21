@@ -39,6 +39,7 @@ object DBpediaDatasets
      * Mapping based
      */
     val OntologyTypes = new Dataset("instance_types")
+    val OntologyTypesTransitive = new Dataset("instance_types_transitive")
     val OntologyProperties = new Dataset("mappingbased_properties")
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
 

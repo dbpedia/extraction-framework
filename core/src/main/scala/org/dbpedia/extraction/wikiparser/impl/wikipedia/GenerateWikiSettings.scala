@@ -75,7 +75,7 @@ object GenerateWikiSettings {
     
     println("generating wiki config for "+languages.length+" languages")
     
-    languages.par.map { code =>
+    languages.map { code =>
       val language = Language(code)
       val file = new File(baseDir, language.wikiCode+"wiki-configuration.xml")
       val disambigFile = new File(baseDir, language.wikiCode+"wiki-disambiguation-templates.xml")
