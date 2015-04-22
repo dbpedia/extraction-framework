@@ -31,30 +31,28 @@ class WikidataReferenceExtractor(
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
-    if (subjectUri == "http://wikidata.dbpedia.org/resource/Q1339" ){
-      for (statementGroup <- page.wikiDataDocument.getStatementGroups) {
-        statementGroup.getStatements.foreach {
-          statement => {
-            val references = statement.getReferences
-            val property = statement.getClaim().getMainSnak().getPropertyId().getIri
-            if (!references.isEmpty) {
-              for (i <- references.indices) {
-                for (reference <- references.get(i).getAllSnaks) {
-                  reference match {
-                    case snak: ValueSnak => {
-                      val value = snak.getValue
-                      val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
-                      val datatype = if (WikidataUtil.getDatatype(value) != null) context.ontology.datatypes(WikidataUtil.getDatatype(value)) else null
-                      quads += new Quad(context.language, DBpediaDatasets.WikidataReference, statementUri, referenceProperty, WikidataUtil.getValue(value), page.wikiPage.sourceUri,datatype)
-                    }
-                    case _=>
+    for (statementGroup <- page.wikiDataDocument.getStatementGroups) {
+      statementGroup.getStatements.foreach {
+        statement => {
+          val references = statement.getReferences
+          val property = statement.getClaim().getMainSnak().getPropertyId().getIri
+          if (!references.isEmpty) {
+            for (i <- references.indices) {
+              for (reference <- references.get(i).getAllSnaks) {
+                reference match {
+                  case snak: ValueSnak => {
+                    val value = snak.getValue
+                    val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
+                    val datatype = if (WikidataUtil.getDatatype(value) != null) context.ontology.datatypes(WikidataUtil.getDatatype(value)) else null
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataReference, statementUri, referenceProperty, WikidataUtil.getValue(value), page.wikiPage.sourceUri, datatype)
                   }
+                  case _ =>
                 }
               }
             }
           }
-
         }
+
       }
     }
 
