@@ -190,7 +190,7 @@ object NormalizeDatasets {
           //            else true // accept non-dbpedia URIs
           //          }
 
-          def checkLanguage(quadObject: URI): Boolean = {
+          def checkLanguage(quadObject: URL): Boolean = {
             val domain = quadObject.getHost
             val languagePrefix = if (language.wikiCode == "en") "" else language.wikiCode + "."
             if (domain.startsWith(languagePrefix + "dbpedia.org")) true // only read current language mappings
@@ -198,7 +198,7 @@ object NormalizeDatasets {
             else true // accept non-dbpedia URIs
           }
 
-          if (quad.datatype != null || checkLanguage(new URI(quad.value))) {
+          if (quad.datatype != null || checkLanguage(new URL(quad.value))) {
             map(quad.value) = quad.subject.substring(WikidataResource.length).toInt // Store just the Q-value integers
             count += 1
           }
@@ -222,7 +222,7 @@ object NormalizeDatasets {
           case (Some(subId), Some(objId)) =>
             destination.write(Seq(quad.copy(subject = WikidataResource + subId, value = WikidataResource + objId,
               dataset = input + outputExtension)))
-          case (Some(id), _) if quad.datatype != null || !new URI(quad.value).getHost.contains("dbpedia.org") =>
+          case (Some(id), _) if quad.datatype != null || !new URL(quad.value).getHost.contains("dbpedia.org") =>
             destination.write(Seq(quad.copy(subject = WikidataResource + id,
               dataset = input + outputExtension))) // Keep triples with string literals non-dbpedia URIs in object
           case (None, Some(id)) =>
