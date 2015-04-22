@@ -213,7 +213,8 @@ object Language extends (String => Language)
       "zh-cfr" -> "zh",
       "zh-classical" -> "zh",  // Classical Chinese
       "zh-min-nan" -> "zh",    // Minnan
-      "zh-yue" -> "zh"         // Cantonese
+      "zh-yue" -> "zh",        // Cantonese
+      "mai" -> "ne"            //Maithili
     )
     
     for (iso <- isoCodes) languages(iso) = language(iso, iso)
