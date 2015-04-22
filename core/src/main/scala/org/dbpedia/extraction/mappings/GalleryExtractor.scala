@@ -12,7 +12,7 @@ import scala.language.reflectiveCalls
  * Extract images from galleries. I'm not sure what the best RDF representation
  * of this will be, but for now we'll start with:
  *
- *  - <Main:Gallery page> <dbo:hasGalleryItem> <File:Image>
+ *  - <Main:Gallery page> <dbo:galleryItem> <File:Image>
  *
  * The gallery tag is documented at https://en.wikipedia.org/wiki/Help:Gallery_tag
  */
@@ -28,7 +28,7 @@ extends WikiPageExtractor
     private val logger = Logger.getLogger(classOf[GalleryExtractor].getName)
 
     /** Property that links a gallery page with each image on it */
-    private val hasGalleryItemProperty = context.ontology.properties("hasGalleryItem")
+    private val galleryItemProperty = context.ontology.properties("galleryItem")
 
     override val datasets = Set(DBpediaDatasets.ImageGalleries)
 
@@ -91,12 +91,13 @@ extends WikiPageExtractor
                                 context.language
                             )
 
-                            // Generate <subjectUri> <dbo:hasGalleryItem> <imageUri>
+                            // Generate <subjectUri> <dbo:galleryItem> <imageUri>
                             Seq(new Quad(Language.English, DBpediaDatasets.ImageGalleries,
                                 subjectUri,
-                                hasGalleryItemProperty,
-                                fileWikiTitle.pageIri,
-                                sourceWithLineNumber, 
+                                galleryItemProperty,
+                                context.language.resourceUri.append(fileWikiTitle.decodedWithNamespace),
+                                  //                                fileWikiTitle.pageIri,
+                                sourceWithLineNumber,
                                 null
                             ))
                         } catch {
