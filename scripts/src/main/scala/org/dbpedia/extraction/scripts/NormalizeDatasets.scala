@@ -266,7 +266,8 @@ object NormalizeDatasets {
       val datasetDestinations = new mutable.HashMap[String, Destination]()
       for (dataset <- datasets) {
         val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix)
-        datasetDestinations(dataset.name) = new WriterDestination(writer(file), format)
+        val sortedFile = finder.file(date, dataset.name.replace('_', '-')+"-sorted."+suffix)
+        datasetDestinations(dataset.name) = new SortedDestination(new WriterDestination(writer(file), format), file, sortedFile)
       }
 
       destination += new DatasetDestination(datasetDestinations)
