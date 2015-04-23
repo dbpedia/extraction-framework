@@ -23,7 +23,7 @@ import scala.collection.concurrent.TrieMap
 import java.util.logging.{Logger, Level}
 import scala.Some
 import scala.Console
-import scala.Some
+import SortedDestination._
 import scala.Some
 
 /**
@@ -101,13 +101,22 @@ object NormalizeDatasets {
     val suffixes = formats.keys.map("." + _)
     require(suffixes.nonEmpty, "no input/output file suffixes")
 
+    val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix)) // Finds wikidata mapping dataset
+
+    // Generate the sorted wikidata mappings file only once
+    for(mapping <- mappings) {
+      val originalFile = mappingFinder.find(mapping + mappingSuffix, auto = true)
+      val sortedFile = mappingFinder.find(mapping+"-sorted"+mappingSuffix, auto = true)
+      logger.info(s"Sorting $originalFile into $sortedFile...")
+      sort(originalFile, sortedFile)
+    }
+
     // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
     val jobs = for(language <- languages) yield {
       val wikiFinder = new Finder(baseDir, language, "wiki") // Finds Wikipedia extracted datasets
       val date = wikiFinder.dates().last
       val datasets = for(input <- inputs; extension <- extensions) yield new Dataset(input + extension)
       val destination = createDestination(wikiFinder, date, formats, datasets)
-      val mappingFinder = new DateFinder(baseDir, Language(mappingPrefix)) // Finds wikidata mapping dataset
 
       val map = {
         // Try reading from cache
@@ -165,9 +174,9 @@ object NormalizeDatasets {
     val map = new TrieMap[String, Int]
 
     // QuadReader iterates through the whole mappings file once for every language, reading in only the URIs for the current lang.
-    for (mappping <- mappings) {
+    for (mapping <- mappings) {
       var count = 0
-      QuadReader.readQuads(mappingFinder, mappping + mappingSuffix, auto = true) {
+      QuadReader.readQuads(mappingFinder, mapping + mappingSuffix, auto = true) {
         quad =>
           if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode + ": expected object uri, found object literal: " + quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
@@ -203,6 +212,7 @@ object NormalizeDatasets {
             count += 1
           }
       }
+
       logger.info(language.wikiCode + ": found " + count + " mappings")
     }
 
