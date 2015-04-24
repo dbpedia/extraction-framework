@@ -227,7 +227,7 @@ class WikidataR2RExtractor(
                 // Generate inferred types
                 context.ontology.classes.get(q.value.replace("http://dbpedia.org/ontology/", "")) match {
                   case Some(clazz) =>
-                    for (cls <- clazz.relatedClasses)
+                    for (cls <- clazz.relatedClasses.filter(_ != clazz))
                       adjustedGraph += new Quad(context.language, DBpediaDatasets.OntologyTypesTransitive, subjectUri, rdfType, cls.uri, page.wikiPage.sourceUri)
                   case None =>
                 }
