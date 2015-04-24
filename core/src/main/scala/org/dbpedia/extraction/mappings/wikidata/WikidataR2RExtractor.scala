@@ -219,7 +219,7 @@ class WikidataR2RExtractor(
 
             // split type statements, some types e.g. cordinates go to separate datasets
           case "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" =>
-            q.subject match {
+            q.value match {
               case "http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"
                    => adjustedGraph += q.copy(dataset = DBpediaDatasets.GeoCoordinates.name)
               case _ => // This is the deafult types we get
