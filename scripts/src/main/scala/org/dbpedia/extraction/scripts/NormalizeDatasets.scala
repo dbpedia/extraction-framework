@@ -36,7 +36,7 @@ import scala.Some
  *   - the predicate is ignored
  *
  * Example call:
- * ../run MapSubjectUris /data/dbpedia wikidata wikidata-sameas .nt.gz infobox-properties,page-links,... -normalized .nt.gz,.nq.gz 10000-
+ * ../run NormalizeDatasets /data/dbpedia wikidata wikidata-sameas .ttl.bz2 mappingbased-properties,page-links,... -normalized
  *
  * The output name extension for triples, that are rejected because the subject does not exist, becomes
  * \-normalized-subject-rejected, * and similarly for triples with non-existant objects it becomes -normalized-object-rejected,
@@ -63,7 +63,7 @@ object NormalizeDatasets {
         /*1*/ "prefix of mapping file (eg. wikidata)"+
         /*2*/ "comma-separated names of datasets mapping URIs to wikidata identifiers (eg. wikidata-sameas)" +
         /*3*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-        /*4*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), " +
+        /*4*/ "comma-separated names of input datasets (e.g. 'mappingbased-properties,page-links'), " +
         /*5*/ "output dataset name extension (e.g. '-normalized'), ")
 
 
