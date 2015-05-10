@@ -187,8 +187,8 @@ object NormalizeDatasets {
           // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
           // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
 
-          //          // This checkLanguage manually extracts the host substring without creating a java.net.URI
-          // Difference between performance: 9ms per line vs 8ms per line.
+          //          // This checkLanguage manually extracts the host substring without creating a java.net.URL
+          // Difference between performance: 9ms (for URL) per line vs 8ms per line.
           //          def checkLanguage(quadObject: String): Boolean = {
           //            val startDomain = quadObject.substring(7) // part after http://
           //            val endDomain = startDomain.indexOf("/")
@@ -251,7 +251,17 @@ object NormalizeDatasets {
 
       for (input <- inputs; suffix <- suffixes) {
         val date = wikiFinder.dates().last
-        val inFile: FileLike[File] = wrapFile(wikiFinder.file(date, input + suffix))
+        val inFile: FileLike[File] = {
+          var file = wrapFile(wikiFinder.file(date, input + "-correct" suffix))
+          if(!file.exists) {
+            file = wrapFile(wikiFinder.file(date, input + "-redirected" + suffix))
+          }
+          if(!file.exists) {
+            file = wrapFile(wikiFinder.file(date, input + suffix))
+          }
+
+          file
+        }
 
         try {
           QuadReader.readQuads(wikiFinder.language.wikiCode+": Reading triples from " + input + suffix, inFile) {
