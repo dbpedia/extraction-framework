@@ -107,8 +107,10 @@ object NormalizeDatasets {
     for(mapping <- mappings) {
       val originalFile = mappingFinder.find(mapping + mappingSuffix, auto = true)
       val sortedFile = mappingFinder.find(mapping+"-sorted"+mappingSuffix, auto = true)
-      logger.info(s"Sorting $originalFile into $sortedFile...")
-      sort(originalFile, sortedFile)
+      if(!sortedFile.exists()) {
+        logger.info(s"Sorting $originalFile into $sortedFile...")
+        sort(originalFile, sortedFile)
+      }
     }
 
     // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
