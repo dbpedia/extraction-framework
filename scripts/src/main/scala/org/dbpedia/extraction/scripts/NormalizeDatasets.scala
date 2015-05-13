@@ -253,7 +253,22 @@ object NormalizeDatasets {
 
       for (input <- inputs; suffix <- suffixes) {
         val date = wikiFinder.dates().last
-        val inFile: FileLike[File] = wrapFile(wikiFinder.file(date, input + suffix))
+
+        // Check for -correct version first, then -redirected, if not present, fall back to original name
+        val inFile: FileLike[File] = {
+          val correct = wrapFile(wikiFinder.file(date, input + "-correct" + suffix))
+          if (correct.exists) {
+            correct
+          }
+          else {
+            val redirected = wrapFile(wikiFinder.file(date, input + "-redirected" + suffix))
+            if (redirected.exists) {
+              redirected
+            } else {
+              wrapFile(wikiFinder.file(date, input + suffix))
+            }
+          }
+        }
 
         try {
           QuadReader.readQuads(wikiFinder.language.wikiCode+": Reading triples from " + input + suffix, inFile) {
