@@ -264,6 +264,7 @@ object Quad
           c = line.charAt(index)
         } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'))
         language = line.substring(start, index)
+        datatype = "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString" // when there is a language we have an rdf:langString
       }
       else if (c == '^') { // type uri: ^^<...>
         if (! line.startsWith("^^<", index)) return None

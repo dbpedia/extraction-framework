@@ -16,6 +16,6 @@ class Ontology (
   val properties : Map[String, OntologyProperty],
   val datatypes : Map[String, Datatype],
   val specializations : Map[(OntologyClass, OntologyProperty), UnitDatatype],
-  val equivalentPropertiesMap : Map[OntologyProperty,Set[OntologyProperty]],
-  val equivalentClassesMap : Map[OntologyProperty,Set[OntologyProperty]]
+  val wikidataPropertiesMap : Map[String,Set[OntologyProperty]],
+  val wikidataClassesMap : Map[String,Set[OntologyClass]]
 )

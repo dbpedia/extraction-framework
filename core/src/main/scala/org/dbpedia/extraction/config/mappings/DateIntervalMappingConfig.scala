@@ -20,7 +20,7 @@ object DateIntervalMappingConfig
         "es" -> Set("presente", "actualidad", "fecha"),
         "eu" -> Set("gaur egun", "gaur egun arte", "egun"),
         "fr" -> Set("aujourd'hui", "en cours"),
-        "ga" -> Set("inniu", "actualidade"),
+        "ga" -> Set("inniu"),
         "hr" -> Set("danas"),
         "hu" -> Set("napjainkig"),
         "id" -> Set("sekarang"),
@@ -52,6 +52,7 @@ object DateIntervalMappingConfig
         "en" -> "to",
         "es" -> "al|a la|a|hasta (?:el|la)",
         "fr" -> "à|au",
+        "pl" -> "do",
         "pt" -> "a"
     )
 }

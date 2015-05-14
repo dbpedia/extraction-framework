@@ -20,9 +20,10 @@ class TemplateMapping(
 ) 
 extends Extractor[TemplateNode]
 {
-    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes,DBpediaDatasets.OntologyProperties)
+    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive, DBpediaDatasets.OntologyProperties)
 
-    private val owlThing = context.ontology.classes("owl:Thing")
+    private val classOwlThing = context.ontology.classes("owl:Thing")
+    private val propertyRdfType = context.ontology.properties("rdf:type")
 
     override def extract(node: TemplateNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
     {
@@ -63,7 +64,7 @@ extends Extractor[TemplateNode]
 
                 // Condition #3
                 // The current mapping is a subclass or a superclass of previous class or owl:Thing
-                val condition3_subclass = mapToClass.relatedClasses.contains(pageClass) || pageClass.relatedClasses.contains(mapToClass) || mapToClass.equals(owlThing) || pageClass.equals(owlThing)
+                val condition3_subclass = mapToClass.relatedClasses.contains(pageClass) || pageClass.relatedClasses.contains(mapToClass) || mapToClass.equals(classOwlThing) || pageClass.equals(classOwlThing)
 
                 // If all above conditions are met then use the main resource, otherwise create a new one
                 val instanceUri =
@@ -108,8 +109,10 @@ extends Extractor[TemplateNode]
           node.root.setAnnotation(TemplateMapping.CLASS_ANNOTATION, mapToClass)
 
         // Create missing type statements
+        // Here we do not split the transitive and the direct types because different types may come from different mappings
+        // Splitting the types of the main resource is done at the MappingExtractor.extract()
         for (cls <- diffSet)
-          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, propertyRdfType, cls.uri, node.sourceUri)
 
     }
 
@@ -127,8 +130,11 @@ extends Extractor[TemplateNode]
         }
         
         //Create type statements
-        for (cls <- classes)
-          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+        for (cls <- classes) {
+          // Here we split the transitive types from the direct type assignment
+          val typeDataset = if (cls.equals(mapToClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
+          graph += new Quad(context.language, typeDataset, uri, propertyRdfType, cls.uri, node.sourceUri)
+        }
     }
 
     /**

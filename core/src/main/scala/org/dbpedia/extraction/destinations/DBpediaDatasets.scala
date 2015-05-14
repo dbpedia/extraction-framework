@@ -39,6 +39,7 @@ object DBpediaDatasets
      * Mapping based
      */
     val OntologyTypes = new Dataset("instance_types")
+    val OntologyTypesTransitive = new Dataset("instance_types_transitive")
     val OntologyProperties = new Dataset("mappingbased_properties")
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
 
@@ -81,38 +82,23 @@ object DBpediaDatasets
 
 
     /**
-     * Wikidata outputDatasets
+     * Wikidata
      */
-
-    //for the dummy wikidata Extractor skeleton file
-    val Wikidata = new Dataset("wikidata")
-
-    //language links dump in the form of
-    //<http://L1.dbpedia.org/resource/X2> <http://www.w3.org/2002/07/owl#sameAs> <http://L2.dbpedia.org/resource/X2> .
-    val WikidataLL = new Dataset("wikidata-ll")
-
-    //Multi lingual labels triples
-    //<http://wikidata.dbpedia.org/resource/Q549> <http://www.w3.org/2000/01/rdf-schema#label> "Bojovnica pestrá"@sk .
-    val WikidataLabels = new Dataset("wikidata-labels")
-
-    //mappings between Wikidata entities inside DBpedia and DBpedia entities using the owl:sameas property
-    //<http://wikidata.dbpedia.org/resource/Q1934> <http://www.w3.org/2002/07/owl#sameAs> <http://ar.dbpedia.org/resource/سيدني_غوفو> .
-    val WikidataSameAs = new Dataset("wikidata-sameas")
-
-    //Mapping between Wikidata Entities URIs and Their Equivalent URIs used in DBpedia
-    //<http://wikidata.dbpedia.org/resource/Q18> <http://www.w3.org/2002/07/owl#sameAs> <http://wikidata.org/entity/Q18> .
-    val WikidataNameSpaceSameAs = new Dataset("wikidata-namespace-sameas")
-
-    // wikidata facts triples
-    val WikidataFacts = new Dataset("wikidata-facts")
-    //wikidata facts triples with mapped properties to DBpedia ones
-    val WikidataMappedFacts = new Dataset("wikidata-mapped")
-
-    //wikidata alias output
-    //<http://wikidata.dbpedia.org/resource/Q446> <http://dbpedia.org/ontology/alias> "alias"@lang .
-    val WikidataAlias = new Dataset("wikidata-alias")
-
-    //wikidata description output
-    //wikidata.dbpedia.org/resource/Q139> <http://dbpedia.org/ontology/description> "description"@lang.
-    val WikidataDescription = new Dataset("wikidata-description")
+    val WikidataLabelsMappingsWiki = new Dataset("labels-mappingswiki")
+    val WikidataLabelsRest = new Dataset("labels-rest")
+    val WikidataSameAs = new Dataset("sameas-all-wikis")
+    val WikidataNameSpaceSameAs = new Dataset("sameas-wikidata")
+    val WikidataSameAsExternal = new Dataset("sameas-external")
+    val WikidataAliasMappingsWiki = new Dataset("alias-mappingswiki")
+    val WikidataAliasRest = new Dataset("alias-rest")
+    val WikidataDescriptionMappingsWiki = new Dataset("description-mappingswiki")
+    val WikidataDescriptionRest = new Dataset("description-rest")
+    val WikidataProperty= new Dataset("properties")
+    val WikidataR2R = new Dataset("mappingbased_properties")  // keep same name with other languages
+    val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
+    val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
+    val WikidataRaw = new Dataset("raw")
+    val WikidataRawReified = new Dataset("raw-reified")
+    val WikidataRawReifiedQualifiers = new Dataset("raw-reified-qualifiers")
+    val WikidataReference = new Dataset("references")
 }

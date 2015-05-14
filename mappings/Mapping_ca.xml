@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping ca:Actor</title><ns>226</ns><id>2988</id><revision><id>17205</id><timestamp>2012-04-10T16:02:44Z</timestamp><text>{{TemplateMapping
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping ca:Actor</title><ns>226</ns><id>11048</id><revision><id>47377</id><timestamp>2015-03-31T16:11:19Z</timestamp><text>{{TemplateMapping
 | mapToClass = Actor
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-        {{PropertyMapping | templateProperty = nom de naixença | ontologyProperty = foaf:givenName }}
-
+        {{PropertyMapping | templateProperty = nom de naixença | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = data de naixença | ontologyProperty = birthDate }}
 	{{PropertyMapping | templateProperty = indret de naixença | ontologyProperty = birthPlace }}
         {{PropertyMapping | templateProperty = data de defunció | ontologyProperty = deathDate }}
@@ -65,12 +64,11 @@
 	{{PropertyMapping | templateProperty = idees  | ontologyProperty = notableIdea }}
 	{{PropertyMapping | templateProperty = influencies | ontologyProperty = influencedBy }}
 	{{PropertyMapping | templateProperty = influencia | ontologyProperty = influenced }}
-}}</text></revision></page><page><title>Mapping ca:Fitxa de pel·lícula</title><ns>226</ns><id>2987</id><revision><id>11060</id><timestamp>2011-03-20T01:25:18Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping ca:Fitxa de pel·lícula</title><ns>226</ns><id>2987</id><revision><id>45488</id><timestamp>2015-03-04T00:39:32Z</timestamp><text>{{TemplateMapping
 | mapToClass = Film
 | mappings =
 	{{PropertyMapping | templateProperty = títol original | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = títol | ontologyProperty = foaf:name }}
-
 	{{PropertyMapping | templateProperty = direcció | ontologyProperty = director }}
 	{{PropertyMapping | templateProperty = direcció2 | ontologyProperty = director }}
 	{{PropertyMapping | templateProperty = direcció3 | ontologyProperty = director }}
@@ -203,7 +201,7 @@
 	| endDateOntologyProperty   = activeYearsEndYear
 	}}
 --&gt;
-}}</text></revision></page><page><title>Mapping ca:Infotaula Llibre</title><ns>226</ns><id>2989</id><revision><id>13528</id><timestamp>2011-06-09T14:29:54Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping ca:Infotaula Llibre</title><ns>226</ns><id>2989</id><revision><id>45490</id><timestamp>2015-03-04T00:42:17Z</timestamp><text>{{TemplateMapping
 | mapToClass = Book
 | mappings = 
  {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
@@ -637,7 +635,28 @@
 	{{PropertyMapping | templateProperty = minority_floor_leader7 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader8 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader9 | ontologyProperty = minorityFloorLeader }}
-}}</text></revision></page><page><title>Mapping ca:Infotaula d'artista musical</title><ns>226</ns><id>2992</id><revision><id>11065</id><timestamp>2011-03-20T01:29:11Z</timestamp><text>&lt;!-- Docs are listed in Catalan, but all usages are in English, the same as on en.wikipedia --&gt;
+}}</text></revision></page><page><title>Mapping ca:Infotaula cantó de França</title><ns>226</ns><id>11010</id><revision><id>45173</id><timestamp>2015-02-12T00:50:07Z</timestamp><text>{{TemplateMapping
+| mapToClass = GovernmentalAdministrativeRegion
+| mappings =
+	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+	{{ConstantMapping | ontologyProperty = country | value = França }}
+        {{IntermediateNodeMapping | nodeClass = PoliticalFunction | correspondingProperty = countySeat
+        | mappings =
+           {{PropertyMapping | templateProperty = cons  | ontologyProperty = person }}
+           {{PropertyMapping | templateProperty = cons  | ontologyProperty = personName }}
+           {{DateIntervalMapping
+            | templateProperty          = dates
+            | startDateOntologyProperty = activeYearsStartYear
+            | endDateOntologyProperty   = activeYearsEndYear
+           }}
+        }}
+	{{PropertyMapping | templateProperty = rég | ontologyProperty = region }}
+	{{PropertyMapping | templateProperty = dépt | ontologyProperty = department}}
+	{{PropertyMapping | templateProperty = arrt | ontologyProperty = arrondissement }}
+	{{PropertyMapping | templateProperty = ville | ontologyProperty = administrativeHeadCity }}
+	{{PropertyMapping | templateProperty = insee | ontologyProperty = inseeCode }}
+	{{PropertyMapping | templateProperty = nbcomm | ontologyProperty = numberOfMunicipalities }}
+}}</text></revision></page><page><title>Mapping ca:Infotaula d'artista musical</title><ns>226</ns><id>2992</id><revision><id>45486</id><timestamp>2015-03-04T00:14:57Z</timestamp><text>&lt;!-- Docs are listed in Catalan, but all usages are in English, the same as on en.wikipedia --&gt;
 {{ConditionalMapping
 | cases =
  {{Condition
@@ -692,7 +711,6 @@
 
 | defaultMappings =
 	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
-
 	{{PropertyMapping | templateProperty = Background | ontologyProperty = background }}
 	{{PropertyMapping | templateProperty = Birth_name | ontologyProperty = foaf:givenName }}
 	{{PropertyMapping | templateProperty = Alias | ontologyProperty = alias }}
@@ -1239,13 +1257,14 @@
     {{ PropertyMapping | templateProperty = duració | ontologyProperty = runtime | unit = Time }}
     {{ PropertyMapping | templateProperty = idioma | ontologyProperty = language }}
     {{ PropertyMapping | ontologyProperty = foaf:homepage | templateProperty = website }}
- }}</text></revision></page><page><title>Mapping ca:Infotaula persona</title><ns>226</ns><id>2995</id><revision><id>11075</id><timestamp>2011-03-20T03:55:01Z</timestamp><text>{{TemplateMapping
+ }}</text></revision></page><page><title>Mapping ca:Infotaula persona</title><ns>226</ns><id>2995</id><revision><id>45170</id><timestamp>2015-02-12T00:04:20Z</timestamp><text>{{TemplateMapping
 | mapToClass = Person
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = nom_naix | ontologyProperty = birthName }}
 	{{PropertyMapping | templateProperty = data_naix | ontologyProperty = birthDate }}
 	{{PropertyMapping | templateProperty = lloc_naix | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = bateig | ontologyProperty = christeningDate }}
 	{{PropertyMapping | templateProperty = data_mort | ontologyProperty = deathDate }}
 	{{PropertyMapping | templateProperty = lloc_mort | ontologyProperty = deathPlace }}
 	{{PropertyMapping | templateProperty = nacionalitat | ontologyProperty = nationality }}
@@ -1321,7 +1340,7 @@
 	{{PropertyMapping | templateProperty = parent_peak | ontologyProperty = parentMountainPeak }}
 	{{PropertyMapping | templateProperty = Situació | ontologyProperty = locatedInArea }}
 	{{GeocoordinatesMapping | coordinates = coordinates }}
-}}</text></revision></page><page><title>Mapping ca:Partit polític</title><ns>226</ns><id>2991</id><revision><id>11064</id><timestamp>2011-03-20T01:27:40Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping ca:Partit polític</title><ns>226</ns><id>2991</id><revision><id>45491</id><timestamp>2015-03-04T00:43:22Z</timestamp><text>{{TemplateMapping
 | mapToClass = PoliticalParty
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
@@ -1337,7 +1356,6 @@
 
 	{{PropertyMapping | templateProperty = partit_europeu | ontologyProperty = party }}
 	{{PropertyMapping | templateProperty = partit_juvenil | ontologyProperty = party }}
-
 &lt;!--
 	{{PropertyMapping | templateProperty = ideologia | ontologyProperty = ? }}
 	{{PropertyMapping | templateProperty = publicació | ontologyProperty = ? }}

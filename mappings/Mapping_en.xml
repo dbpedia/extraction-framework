@@ -14,17 +14,17 @@
 {{ConstantMapping | ontologyProperty = country | value = Australia}}
 }}</text></revision></page><page><title>Mapping en:Australia-writer-stub</title><ns>204</ns><id>8239</id><revision><id>28840</id><timestamp>2013-11-26T14:00:51Z</timestamp><text>{{TemplateMapping | mapToClass = Writer
 | mappings = {{ConstantMapping | ontologyProperty = country | value = Australia }}
-}}</text></revision></page><page><title>Mapping en:Australia state or territory</title><ns>204</ns><id>3</id><revision><id>14575</id><timestamp>2011-07-27T14:58:19Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Australia state or territory</title><ns>204</ns><id>3</id><revision><id>47638</id><timestamp>2015-04-03T14:55:11Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Australia }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -120,22 +120,25 @@
 	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeSeconds = lats  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeSeconds = longs  | longitudeDirection = longEW }}
 	{{GeocoordinatesMapping | latitudeDegrees = lat deg  | latitudeMinutes = lat min  | longitudeDegrees = long deg  | longitudeMinutes = long min }}
-}}</text></revision></page><page><title>Mapping en:Authority control</title><ns>204</ns><id>8418</id><revision><id>29130</id><timestamp>2013-12-22T18:14:33Z</timestamp><text>{{TemplateMapping
-| mapToClass = Agent
+}}</text></revision></page><page><title>Mapping en:Authority control</title><ns>204</ns><id>8418</id><revision><id>45419</id><timestamp>2015-02-23T16:01:25Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing &lt;!-- GND/VIAF has other than Agents --&gt;
 | mappings =
-	{{PropertyMapping | templateProperty = VIAF | ontologyProperty = viafId }}
-	{{PropertyMapping | templateProperty = LCCN | ontologyProperty = lccnId }}
-	{{PropertyMapping | templateProperty = ISNI | ontologyProperty = isniId }}
-	{{PropertyMapping | templateProperty = ORCID | ontologyProperty = orcidId }}
-	{{PropertyMapping | templateProperty = GND | ontologyProperty = individualisedGnd }}
-	{{PropertyMapping | templateProperty = SELIBR | ontologyProperty = selibrId }}
-	{{PropertyMapping | templateProperty = BNF | ontologyProperty = bnfId }}
-	{{PropertyMapping | templateProperty = BPN | ontologyProperty = bpnId }}
-	{{PropertyMapping | templateProperty = RID | ontologyProperty = ridId }}
-	{{PropertyMapping | templateProperty = BIBSYS | ontologyProperty = bibsysId }}
-	{{PropertyMapping | templateProperty = ULAN | ontologyProperty = ulanId }}
-	{{PropertyMapping | templateProperty = MBA | ontologyProperty = mbaId }}
-	{{PropertyMapping | templateProperty = NLA | ontologyProperty = nlaId }}
+  {{PropertyMapping | templateProperty = VIAF | ontologyProperty = viafId }}
+  {{PropertyMapping | templateProperty = LCCN | ontologyProperty = lccnId }}
+  {{PropertyMapping | templateProperty = ISNI | ontologyProperty = isniId }}
+  {{PropertyMapping | templateProperty = ORCID | ontologyProperty = orcidId }}
+  {{PropertyMapping | templateProperty = GND | ontologyProperty = individualisedGnd }}
+  {{PropertyMapping | templateProperty = SELIBR | ontologyProperty = selibrId }}
+  {{PropertyMapping | templateProperty = SUDOC | ontologyProperty = sudocId }}
+  {{PropertyMapping | templateProperty = BNF | ontologyProperty = bnfId }}
+  {{PropertyMapping | templateProperty = BPN | ontologyProperty = bpnId }}
+  {{PropertyMapping | templateProperty = RID | ontologyProperty = ridId }}
+  {{PropertyMapping | templateProperty = BIBSYS | ontologyProperty = bibsysId }}
+  {{PropertyMapping | templateProperty = ULAN | ontologyProperty = ulanId }}
+  {{PropertyMapping | templateProperty = MBA | ontologyProperty = mbaId }}
+  {{PropertyMapping | templateProperty = NLA | ontologyProperty = nlaId }}
+  {{PropertyMapping | templateProperty = NDL | ontologyProperty = ndlId }}
+  {{PropertyMapping | templateProperty = RKDartists | ontologyProperty = rkdArtistsId }}
 }}</text></revision></page><page><title>Mapping en:Award-stub</title><ns>204</ns><id>8223</id><revision><id>28824</id><timestamp>2013-11-26T13:35:57Z</timestamp><text>{{TemplateMapping | mapToClass = Award }}</text></revision></page><page><title>Mapping en:BBC-tv-prog-stub</title><ns>204</ns><id>8398</id><revision><id>29082</id><timestamp>2013-12-18T15:25:18Z</timestamp><text>{{TemplateMapping | mapToClass = TelevisionShow
 | mappings =
 {{ConstantMapping | ontologyProperty = network | value = BBC}}
@@ -265,7 +268,21 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
 }}</text></revision></page><page><title>Mapping en:Denmark-Olympic-medalist-stub</title><ns>204</ns><id>8377</id><revision><id>29060</id><timestamp>2013-12-18T14:25:45Z</timestamp><text>{{TemplateMapping | mapToClass = Athlete
 | mappings = 
 {{ConstantMapping | ontologyProperty = country | value = Denmark}}
-}}</text></revision></page><page><title>Mapping en:Disease-stub</title><ns>204</ns><id>8301</id><revision><id>28980</id><timestamp>2013-12-17T17:22:47Z</timestamp><text>{{TemplateMapping | mapToClass = Disease}}</text></revision></page><page><title>Mapping en:Drugbox</title><ns>204</ns><id>8</id><revision><id>22064</id><timestamp>2013-01-09T16:58:02Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Disease-stub</title><ns>204</ns><id>8301</id><revision><id>28980</id><timestamp>2013-12-17T17:22:47Z</timestamp><text>{{TemplateMapping | mapToClass = Disease}}</text></revision></page><page><title>Mapping en:Distinguish</title><ns>204</ns><id>10467</id><revision><id>39751</id><timestamp>2015-02-03T09:49:17Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing
+| mappings =
+	{{PropertyMapping | templateProperty = 1 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 2 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 3 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 4 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 5 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 6 | ontologyProperty = owl:differentFrom | transform = internal}} 
+}}</text></revision></page><page><title>Mapping en:Distinguish2</title><ns>204</ns><id>10469</id><revision><id>39754</id><timestamp>2015-02-03T12:56:38Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing
+| mappings =
+&lt;!-- here we do not use "transform = internal" becase it can contain arbitary text--&gt;
+	{{PropertyMapping | templateProperty = 1 | ontologyProperty = owl:differentFrom}} 
+}}</text></revision></page><page><title>Mapping en:Drugbox</title><ns>204</ns><id>8</id><revision><id>22064</id><timestamp>2013-01-09T16:58:02Z</timestamp><text>{{TemplateMapping
 | mapToClass = Drug
 | mappings =
 	{{PropertyMapping | templateProperty = IUPAC_name | ontologyProperty = iupacName }}
@@ -317,11 +334,29 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
 }}</text></revision></page><page><title>Mapping en:England-politician-stub</title><ns>204</ns><id>8327</id><revision><id>29007</id><timestamp>2013-12-18T08:41:33Z</timestamp><text>{{TemplateMapping | mapToClass = Politician}}</text></revision></page><page><title>Mapping en:England-writer-stub</title><ns>204</ns><id>8236</id><revision><id>28837</id><timestamp>2013-11-26T13:59:00Z</timestamp><text>{{TemplateMapping | mapToClass = Writer
 | mappings = {{ConstantMapping | ontologyProperty = country | value = United Kingdom }}
 | mappings = {{ConstantMapping | ontologyProperty = country | value = England }}
-}}</text></revision></page><page><title>Mapping en:Entomologist-stub</title><ns>204</ns><id>8341</id><revision><id>29022</id><timestamp>2013-12-18T08:55:36Z</timestamp><text>{{TemplateMapping | mapToClass = Entomologist}}</text></revision></page><page><title>Mapping en:Equestrian-bio-stub</title><ns>204</ns><id>8400</id><revision><id>29084</id><timestamp>2013-12-18T15:28:09Z</timestamp><text>{{TemplateMapping | mapToClass = HorseRider}}</text></revision></page><page><title>Mapping en:Extrasolar-planet-stub</title><ns>204</ns><id>8324</id><revision><id>29004</id><timestamp>2013-12-18T08:39:46Z</timestamp><text>{{TemplateMapping | mapToClass = Planet}}</text></revision></page><page><title>Mapping en:Fashion-bio-stub</title><ns>204</ns><id>8188</id><revision><id>28781</id><timestamp>2013-11-26T09:01:40Z</timestamp><text>{{TemplateMapping | mapToClass = FashionDesigner }}</text></revision></page><page><title>Mapping en:Fashion-stub</title><ns>204</ns><id>8352</id><revision><id>29033</id><timestamp>2013-12-18T09:11:04Z</timestamp><text>{{TemplateMapping | mapToClass = Fashion}}</text></revision></page><page><title>Mapping en:Folk-song-stub</title><ns>204</ns><id>8321</id><revision><id>29001</id><timestamp>2013-12-18T08:37:39Z</timestamp><text>{{TemplateMapping | mapToClass = Song}}</text></revision></page><page><title>Mapping en:Food-product-stub</title><ns>204</ns><id>8277</id><revision><id>28955</id><timestamp>2013-12-17T15:25:53Z</timestamp><text>{{TemplateMapping | mapToClass = Food}}</text></revision></page><page><title>Mapping en:Food-stub</title><ns>204</ns><id>8380</id><revision><id>29063</id><timestamp>2013-12-18T14:31:56Z</timestamp><text>{{TemplateMapping | mapToClass = Food}}</text></revision></page><page><title>Mapping en:Football squad player</title><ns>204</ns><id>4121</id><revision><id>16590</id><timestamp>2012-01-14T19:01:18Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Entomologist-stub</title><ns>204</ns><id>8341</id><revision><id>29022</id><timestamp>2013-12-18T08:55:36Z</timestamp><text>{{TemplateMapping | mapToClass = Entomologist}}</text></revision></page><page><title>Mapping en:Equestrian-bio-stub</title><ns>204</ns><id>8400</id><revision><id>29084</id><timestamp>2013-12-18T15:28:09Z</timestamp><text>{{TemplateMapping | mapToClass = HorseRider}}</text></revision></page><page><title>Mapping en:Extrasolar-planet-stub</title><ns>204</ns><id>8324</id><revision><id>29004</id><timestamp>2013-12-18T08:39:46Z</timestamp><text>{{TemplateMapping | mapToClass = Planet}}</text></revision></page><page><title>Mapping en:Fashion-bio-stub</title><ns>204</ns><id>8188</id><revision><id>28781</id><timestamp>2013-11-26T09:01:40Z</timestamp><text>{{TemplateMapping | mapToClass = FashionDesigner }}</text></revision></page><page><title>Mapping en:Fashion-stub</title><ns>204</ns><id>8352</id><revision><id>29033</id><timestamp>2013-12-18T09:11:04Z</timestamp><text>{{TemplateMapping | mapToClass = Fashion}}</text></revision></page><page><title>Mapping en:Film date</title><ns>204</ns><id>11039</id><revision><id>45395</id><timestamp>2015-02-18T16:30:54Z</timestamp><text>{{TemplateMapping | mapToClass = Film | mappings =
+  {{ PropertyMapping | templateProperty = 1 | ontologyProperty = releaseDate }}
+  {{ PropertyMapping | templateProperty = 4 | ontologyProperty = releaseLocation | transform = internal }}
+  {{ PropertyMapping | templateProperty = 6 | ontologyProperty = releaseDate }}
+  {{ PropertyMapping | templateProperty = 9 | ontologyProperty = releaseLocation | transform = internal }}
+  {{ PropertyMapping | templateProperty = 11 | ontologyProperty = releaseDate }}
+  {{ PropertyMapping | templateProperty = 14 | ontologyProperty = releaseLocation | transform = internal }}
+  {{ PropertyMapping | templateProperty = 16 | ontologyProperty = releaseDate }}
+  {{ PropertyMapping | templateProperty = 19 | ontologyProperty = releaseLocation | transform = internal }}
+}}</text></revision></page><page><title>Mapping en:Folk-song-stub</title><ns>204</ns><id>8321</id><revision><id>29001</id><timestamp>2013-12-18T08:37:39Z</timestamp><text>{{TemplateMapping | mapToClass = Song}}</text></revision></page><page><title>Mapping en:Food-product-stub</title><ns>204</ns><id>8277</id><revision><id>28955</id><timestamp>2013-12-17T15:25:53Z</timestamp><text>{{TemplateMapping | mapToClass = Food}}</text></revision></page><page><title>Mapping en:Food-stub</title><ns>204</ns><id>8380</id><revision><id>29063</id><timestamp>2013-12-18T14:31:56Z</timestamp><text>{{TemplateMapping | mapToClass = Food}}</text></revision></page><page><title>Mapping en:Football box</title><ns>204</ns><id>10465</id><revision><id>39739</id><timestamp>2015-02-02T19:50:59Z</timestamp><text>{{TemplateMapping 
+| mapToClass = Event 
+| mappings = 
+   {{ PropertyMapping | templateProperty = time | ontologyProperty = time }}
+   {{ PropertyMapping | templateProperty = event | ontologyProperty = event }}
+   {{ PropertyMapping | templateProperty = goals1 | ontologyProperty = numberOfGoals }}
+
+
+}}</text></revision></page><page><title>Mapping en:Football squad player</title><ns>204</ns><id>4121</id><revision><id>38864</id><timestamp>2014-12-11T09:10:01Z</timestamp><text>{{TemplateMapping
 | mapToClass            = SportsTeamMember
 | correspondingClass    = Organisation
 | correspondingProperty = team
 | mappings              =
+  {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
   {{PropertyMapping | templateProperty = name | ontologyProperty = currentMember }}
   {{PropertyMapping | templateProperty = no | ontologyProperty = squadNumber }}
   {{PropertyMapping | templateProperty = pos | ontologyProperty = position }}
@@ -381,7 +416,7 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
    }}
    {{ PropertyMapping | templateProperty = Mm_Uniprot | ontologyProperty = uniprot }}
 }}
-}}</text></revision></page><page><title>Mapping en:Geobox</title><ns>204</ns><id>12</id><revision><id>18596</id><timestamp>2012-05-21T01:36:06Z</timestamp><text>&lt;!-- For an overview over all known types see: http://en.wikipedia.org/wiki/Template:Geobox/type --&gt;
+}}</text></revision></page><page><title>Mapping en:Geobox</title><ns>204</ns><id>12</id><revision><id>39189</id><timestamp>2015-01-11T19:46:06Z</timestamp><text>&lt;!-- For an overview over all known types see: http://en.wikipedia.org/wiki/Template:Geobox/type --&gt;
 {{ConditionalMapping
 | cases =
 &lt;!-- Buildings, human creations --&gt;
@@ -998,9 +1033,6 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
     {{PropertyMapping | templateProperty = style | ontologyProperty = architecturalStyle }}
     {{PropertyMapping | templateProperty = material | ontologyProperty = material }}
     
-    {{PropertyMapping | templateProperty = ascent | ontologyProperty = ascent}}
-    {{PropertyMapping | templateProperty = ascent_date | ontologyProperty = ascentDate}}
-
     {{PropertyMapping | templateProperty = area_code | ontologyProperty =   areaCode}}
     {{PropertyMapping | templateProperty = timezone | ontologyProperty =   timeZone}}
     {{PropertyMapping | templateProperty = timezone_DST| ontologyProperty =   daylightSavingTimeZone}}
@@ -1576,7 +1608,7 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
 	&lt;!-- {{ PropertyMapping | templateProperty = owners | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = span3 | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = trainingground3 | ontologyProperty = }} --&gt;
-}}</text></revision></page><page><title>Mapping en:Infobox Australian place</title><ns>204</ns><id>31</id><revision><id>17499</id><timestamp>2012-04-28T01:22:45Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Australian place</title><ns>204</ns><id>31</id><revision><id>47639</id><timestamp>2015-04-03T14:56:43Z</timestamp><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = type
@@ -1614,13 +1646,13 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
 
 | defaultMappings =
 	{{ConstantMapping | ontologyProperty = country | value = Australia }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -1740,17 +1772,17 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
 	
 	&lt;!-- not in template description but nonetheless used --&gt;
 	{{PropertyMapping | templateProperty = state | ontologyProperty = state }}
-}}</text></revision></page><page><title>Mapping en:Infobox Austrian district</title><ns>204</ns><id>32</id><revision><id>14577</id><timestamp>2011-07-27T15:04:44Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Austrian district</title><ns>204</ns><id>32</id><revision><id>47640</id><timestamp>2015-04-03T14:57:36Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Austria }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -2050,17 +2082,17 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
 	{{PropertyMapping | templateProperty = undergraduates | ontologyProperty = numberOfUndergraduateStudents }}
 	{{PropertyMapping | templateProperty = graduates | ontologyProperty = numberOfGraduateStudents }}
 	{{PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox Canada electoral district</title><ns>204</ns><id>56</id><revision><id>14579</id><timestamp>2011-07-27T15:09:05Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Canada electoral district</title><ns>204</ns><id>56</id><revision><id>47641</id><timestamp>2015-04-03T14:59:30Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Canada }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -2573,41 +2605,6 @@ http://en.wikipedia.org/w/index.php?title=Template:Beltasteroid-stub&amp;action=
 	{{PropertyMapping | templateProperty = pop | ontologyProperty = populationTotal }}
 	{{PropertyMapping | templateProperty = popdens | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{PropertyMapping | templateProperty = census-date | ontologyProperty = populationAsOf }}
-}}</text></revision></page><page><title>Mapping en:Infobox Cargo spacecraft</title><ns>204</ns><id>62</id><revision><id>10282</id><timestamp>2010-11-10T10:42:45Z</timestamp><text>{{TemplateMapping
-| mapToClass = Spacecraft
-| mappings =
-	{{PropertyMapping | templateProperty = type | ontologyProperty = type }}
-	{{PropertyMapping | templateProperty = organisation | ontologyProperty = owningOrganisation }}
-	{{PropertyMapping | templateProperty = station | ontologyProperty = targetSpaceStation }}
-	{{PropertyMapping | templateProperty = crew | ontologyProperty = crew }}
-	{{PropertyMapping | templateProperty = rocket | ontologyProperty = rocket }}
-	{{PropertyMapping | templateProperty = site | ontologyProperty = launchSite }}
-	{{PropertyMapping | templateProperty = launch | ontologyProperty = launch }}
-	{{PropertyMapping | templateProperty = decay | ontologyProperty = decay }}
-	{{PropertyMapping | templateProperty = COSPAR | ontologyProperty = cosparId }}
-	{{PropertyMapping | templateProperty = freeflight | ontologyProperty = freeFlightTime | unit = Time }}
-	{{PropertyMapping | templateProperty = dockedtime | ontologyProperty = dockedTime | unit = Time }}
-	{{PropertyMapping | templateProperty = port1 | ontologyProperty = port1 }}
-	{{PropertyMapping | templateProperty = dock1 | ontologyProperty = port1DockingDate }}
-	{{PropertyMapping | templateProperty = undock1 | ontologyProperty = port1UndockingDate }}
-	{{PropertyMapping | templateProperty = time1 | ontologyProperty = port1DockedTime | unit = Time  }}
-	{{PropertyMapping | templateProperty = port2 | ontologyProperty = port2 }}
-	{{PropertyMapping | templateProperty = dock2 | ontologyProperty = port2DockingDate }}
-	{{PropertyMapping | templateProperty = undock2 | ontologyProperty = port2UndockingDate }}
-	{{PropertyMapping | templateProperty = time2 | ontologyProperty = port2DockedTime | unit = Time }}
-	{{PropertyMapping | templateProperty = orbits | ontologyProperty = orbits }}
-	{{PropertyMapping | templateProperty = regime | ontologyProperty = regime }}
-	{{PropertyMapping | templateProperty = periapsis | ontologyProperty = periapsis | unit = Length }}
-	{{PropertyMapping | templateProperty = apoapsis | ontologyProperty = apoapsis | unit = Length }}
-	{{PropertyMapping | templateProperty = inclination | ontologyProperty = inclination }}
-	{{PropertyMapping | templateProperty = mass | ontologyProperty = totalMass | unit = Mass }}
-	{{PropertyMapping | templateProperty = cargo | ontologyProperty = totalCargo | unit = Mass }}
-	{{PropertyMapping | templateProperty = dry | ontologyProperty = dryCargo | unit = Mass }}
-	{{PropertyMapping | templateProperty = fuel | ontologyProperty = cargoFuel | unit = Mass }}
-	{{PropertyMapping | templateProperty = gas | ontologyProperty = cargoGas | unit = Mass }}
-	{{PropertyMapping | templateProperty = water | ontologyProperty = cargoWater | unit = Mass }}
-	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = contractors | ontologyProperty = manufacturer }}
 }}</text></revision></page><page><title>Mapping en:Infobox Chancellor</title><ns>204</ns><id>64</id><revision><id>26297</id><timestamp>2013-06-20T14:09:12Z</timestamp><text>{{TemplateMapping
 | mapToClass = Chancellor
 | mappings =
@@ -3752,17 +3749,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	&lt;!-- {{PropertyMapping | templateProperty = exits | ontologyProperty = ??? }} --&gt;
 	{{PropertyMapping | templateProperty = ds100 | ontologyProperty = abbreviation }}
 	{{PropertyMapping | templateProperty = lines | ontologyProperty = servingRailwayLine }}
-}}</text></revision></page><page><title>Mapping en:Infobox District DE</title><ns>204</ns><id>1663</id><revision><id>14585</id><timestamp>2011-07-27T15:36:29Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox District DE</title><ns>204</ns><id>1663</id><revision><id>47725</id><timestamp>2015-04-06T14:36:20Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Germany }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -3858,17 +3855,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{GeocoordinatesMapping | latitudeDegrees = lat deg | latitudeMinutes = lat min | longitudeDegrees = long deg  | longitudeMinutes = long min }}
         {{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeSeconds = lats  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeSeconds = longs  | longitudeDirection = longEW }}
-}}</text></revision></page><page><title>Mapping en:Infobox District Slovakia</title><ns>204</ns><id>1664</id><revision><id>14586</id><timestamp>2011-07-27T15:39:54Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox District Slovakia</title><ns>204</ns><id>1664</id><revision><id>47726</id><timestamp>2015-04-06T14:36:30Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Slovakia }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -3995,18 +3992,18 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = languages | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = prev_link | ontologyProperty = previousWork }}
 	{{PropertyMapping | templateProperty = next_link | ontologyProperty = subsequentWork }}
-}}</text></revision></page><page><title>Mapping en:Infobox England county</title><ns>204</ns><id>93</id><revision><id>14587</id><timestamp>2011-07-27T15:43:40Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox England county</title><ns>204</ns><id>93</id><revision><id>47643</id><timestamp>2015-04-03T15:02:54Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country| value = United_Kingdom }}
 	{{ConstantMapping | ontologyProperty = location | value = England }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -4187,19 +4184,19 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
         {{PropertyMapping | templateProperty = INSEE | ontologyProperty = inseeCode }}
         {{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
 	{{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
-}}</text></revision></page><page><title>Mapping en:Infobox French region</title><ns>204</ns><id>104</id><revision><id>14589</id><timestamp>2011-07-27T15:46:22Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox French region</title><ns>204</ns><id>104</id><revision><id>47644</id><timestamp>2015-04-03T15:04:16Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = France }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = population | ontologyProperty = populationTotal }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = arrondissements | ontologyProperty = arrondissement }}
@@ -4448,7 +4445,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = population_density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{PropertyMapping | templateProperty = population_density_sq_mi | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeDirection = longEW }}
-}}</text></revision></page><page><title>Mapping en:Infobox German location</title><ns>204</ns><id>108</id><revision><id>18222</id><timestamp>2012-05-08T15:29:24Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping en:Infobox German location</title><ns>204</ns><id>108</id><revision><id>37746</id><timestamp>2014-09-12T12:51:36Z</timestamp><text>{{ConditionalMapping
  | cases =
   {{Condition
     | templateProperty = type
@@ -4513,7 +4510,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 
   | defaultMappings =
 &lt;!-- german properties --&gt;
-	{{ConstantMapping | ontologyProperty = country | value = Germany }}
+	{{ConstantMapping | ontologyProperty = country | value = http://dbpedia.org/resource/Germany }}
 	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}	
 	{{PropertyMapping | templateProperty = German_name | ontologyProperty = foaf:name }}
         {{GeocoordinatesMapping | latitudeDegrees = lat_deg | latitudeMinutes = lat_min | latitudeSeconds = lat_sec  | longitudeDegrees = lon_deg  | longitudeMinutes = lon_min  | longitudeSeconds = lon_sec }}
@@ -4574,7 +4571,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = party | ontologyProperty = leaderParty }}
 	{{PropertyMapping | templateProperty = year | ontologyProperty = foundingYear }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox German state</title><ns>204</ns><id>2745</id><revision><id>14591</id><timestamp>2011-07-27T15:48:14Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping en:Infobox German state</title><ns>204</ns><id>2745</id><revision><id>47758</id><timestamp>2015-04-06T15:08:01Z</timestamp><text>{{ConditionalMapping
  | cases =
   {{Condition
     | templateProperty = pop_metro
@@ -4592,14 +4589,14 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
   }}
 
   | defaultMappings =
-	{{ConstantMapping | ontologyProperty = country | value = Germany }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{ConstantMapping | ontologyProperty = country | value = http://dbpedia.org/resource/Germany }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = Bundesland | ontologyProperty = federalState }}
 	{{PropertyMapping | templateProperty = Landkreis | ontologyProperty = administrativeDistrict }}
@@ -4628,12 +4625,6 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = edinburgh_distance_km | ontologyProperty = distanceToEdinburgh | unit = kilometre }}
 	{{PropertyMapping | templateProperty = london_distance_km | ontologyProperty = distanceToLondon | unit = kilometre }}
 	{{PropertyMapping | templateProperty = douglas_distance_km | ontologyProperty = distanceToDouglas | unit = kilometre }}
-	{{PropertyMapping | templateProperty = gaelic_name | ontologyProperty = gaelicName }}
-	{{PropertyMapping | templateProperty = scots_name | ontologyProperty = scottishName }}
-	{{PropertyMapping | templateProperty = welsh_name | ontologyProperty = welshName }}
-	{{PropertyMapping | templateProperty = irish_name | ontologyProperty = irishName }}
-	{{PropertyMapping | templateProperty = manx_name | ontologyProperty = manxName }}
-	{{PropertyMapping | templateProperty = cornish_name | ontologyProperty = cornishName }}
 	{{PropertyMapping | templateProperty = coastline | ontologyProperty = coastLine | unit = kilometre }}
 	{{PropertyMapping | templateProperty = temp_annual | ontologyProperty = annualTemperature | unit = degreeCelsius }}
 	{{PropertyMapping | templateProperty = temp_winter | ontologyProperty = winterTemperature | unit = degreeCelsius }}
@@ -6163,17 +6154,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = area_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 --&gt;
-}}</text></revision></page><page><title>Mapping en:Infobox Greek Isles</title><ns>204</ns><id>116</id><revision><id>14594</id><timestamp>2011-07-27T15:51:54Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Greek Isles</title><ns>204</ns><id>116</id><revision><id>47645</id><timestamp>2015-04-03T15:05:02Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Greece }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -6277,37 +6268,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
     {{PropertyMapping | templateProperty = producer | ontologyProperty = producer }}
     {{PropertyMapping | templateProperty = cartoon_name | ontologyProperty = foaf:name }}
     {{PropertyMapping | templateProperty = series | ontologyProperty = series }}
-}}</text></revision></page><page><title>Mapping en:Infobox Horseraces</title><ns>204</ns><id>7997</id><revision><id>28140</id><timestamp>2013-09-01T12:50:44Z</timestamp><text>{{TemplateMapping | mapToClass = HorseRace
-| mappings = 
-	{{ PropertyMapping | templateProperty = location | ontologyProperty = location }}
-	{{ PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage  }}
-
-	&lt;!-- {{ PropertyMapping | templateProperty = weight | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = race type | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = purse | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = qualification | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = horse race | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = distance | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = class | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = track | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = inaugurated | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = surface | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = sponsor | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = caption | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = last run | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = bonuses | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = image | ontologyProperty = }} --&gt;
-}}</text></revision></page><page><title>Mapping en:Infobox Indian jurisdiction</title><ns>204</ns><id>121</id><revision><id>14599</id><timestamp>2011-07-27T16:30:24Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Indian jurisdiction</title><ns>204</ns><id>121</id><revision><id>47647</id><timestamp>2015-04-03T15:55:04Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = India }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = type | ontologyProperty = type }}
@@ -6436,17 +6407,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = colours | ontologyProperty = colour }}
 	{{PropertyMapping | templateProperty = colours | ontologyProperty = colourName }}
 	{{PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox Israel municipality</title><ns>204</ns><id>125</id><revision><id>14595</id><timestamp>2011-07-27T15:53:26Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Israel municipality</title><ns>204</ns><id>125</id><revision><id>47648</id><timestamp>2015-04-03T16:24:08Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Israel }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = Bundesland | ontologyProperty = federalState }}
 	{{PropertyMapping | templateProperty = Landkreis | ontologyProperty = administrativeDistrict }}
@@ -6475,12 +6446,6 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = edinburgh_distance_km | ontologyProperty = distanceToEdinburgh | unit = kilometre }}
 	{{PropertyMapping | templateProperty = london_distance_km | ontologyProperty = distanceToLondon | unit = kilometre }}
 	{{PropertyMapping | templateProperty = douglas_distance_km | ontologyProperty = distanceToDouglas | unit = kilometre }}
-	{{PropertyMapping | templateProperty = gaelic_name | ontologyProperty = gaelicName }}
-	{{PropertyMapping | templateProperty = scots_name | ontologyProperty = scottishName }}
-	{{PropertyMapping | templateProperty = welsh_name | ontologyProperty = welshName }}
-	{{PropertyMapping | templateProperty = irish_name | ontologyProperty = irishName }}
-	{{PropertyMapping | templateProperty = manx_name | ontologyProperty = manxName }}
-	{{PropertyMapping | templateProperty = cornish_name | ontologyProperty = cornishName }}
 	{{PropertyMapping | templateProperty = coastline | ontologyProperty = coastLine | unit = kilometre }}
 	{{PropertyMapping | templateProperty = temp_annual | ontologyProperty = annualTemperature | unit = degreeCelsius }}
 	{{PropertyMapping | templateProperty = temp_winter | ontologyProperty = winterTemperature | unit = degreeCelsius }}
@@ -6613,7 +6578,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = altUnoSp | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = popyear | ontologyProperty = censusYear }}
 	{{GeocoordinatesMapping | latitude = latitude  | longitude = longitude  | latitudeSeconds = lat_sec  | longitudeDegrees = lon_deg  | longitudeMinutes = lon_min  | longitudeSeconds = lon_sec  | longitudeSeconds = longs  | longitudeDirection = longEW }}
-}}</text></revision></page><page><title>Mapping en:Infobox Italian comune</title><ns>204</ns><id>1670</id><revision><id>14618</id><timestamp>2011-07-28T12:55:41Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Italian comune</title><ns>204</ns><id>1670</id><revision><id>47727</id><timestamp>2015-04-06T14:36:40Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Italy }}
@@ -6636,11 +6601,11 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = population_total | ontologyProperty = populationTotal }}
 	{{PropertyMapping | templateProperty = elevation_max_m | ontologyProperty = maximumElevation | unit = metre }}
 	{{PropertyMapping | templateProperty = elevation_min_m | ontologyProperty = minimumElevation | unit = metre }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin2_country | ontologyProperty = twinCountry }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin3_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = saint | ontologyProperty = saint }}
 	{{PropertyMapping | templateProperty = day | ontologyProperty = day }}
@@ -7110,16 +7075,16 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = minority_floor_leader7 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader8 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader9 | ontologyProperty = minorityFloorLeader }}
-}}</text></revision></page><page><title>Mapping en:Infobox Kibbutz</title><ns>204</ns><id>129</id><revision><id>10648</id><timestamp>2010-11-29T11:17:48Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Kibbutz</title><ns>204</ns><id>129</id><revision><id>47649</id><timestamp>2015-04-03T16:24:45Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -7236,17 +7201,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
     {{ PropertyMapping | templateProperty = screenplay | ontologyProperty = writer }}
     {{ PropertyMapping | templateProperty = based on | ontologyProperty = basedOn }}
     {{ PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox Korean settlement</title><ns>204</ns><id>132</id><revision><id>14619</id><timestamp>2011-07-28T13:01:24Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Korean settlement</title><ns>204</ns><id>132</id><revision><id>47669</id><timestamp>2015-04-04T02:40:57Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Korea }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -7411,17 +7376,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = depth | ontologyProperty = depth | unit = kilometre }}
 &lt;!--	This coordinates are extraterrestial and there is no standard to represent them
 	{{GeocoordinatesMapping | latitude = latitude  | longitudeDirection = N_or_S  | longitude = longitude  | latitudeDirection = E_or_W }} --&gt;
-}}</text></revision></page><page><title>Mapping en:Infobox Luxembourg commune</title><ns>204</ns><id>139</id><revision><id>14622</id><timestamp>2011-07-28T13:12:28Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Luxembourg commune</title><ns>204</ns><id>139</id><revision><id>47670</id><timestamp>2015-04-04T02:41:27Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Luxembourg }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -8830,17 +8795,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	| longitudeMinutes   = lonmin
 	| longitudeSeconds   = lonsec
 	}}
-}}</text></revision></page><page><title>Mapping en:Infobox Neighborhood Portland OR</title><ns>204</ns><id>161</id><revision><id>14625</id><timestamp>2011-07-28T13:28:12Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Neighborhood Portland OR</title><ns>204</ns><id>161</id><revision><id>47671</id><timestamp>2015-04-04T02:42:07Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = city | value = Portland,_Oregon }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -9579,19 +9544,19 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
     {{ PropertyMapping | templateProperty = main_interests | ontologyProperty = mainInterest }}
     {{ PropertyMapping | templateProperty = notable_ideas | ontologyProperty = notableIdea }}
     {{ PropertyMapping | templateProperty = influences | ontologyProperty = influencedBy }}
-    {{ PropertyMapping | templateProperty = influenced | ontologyProperty = influenced }} }}</text></revision></page><page><title>Mapping en:Infobox Pittsburgh neighborhood</title><ns>204</ns><id>197</id><revision><id>14631</id><timestamp>2011-07-28T13:44:27Z</timestamp><text>{{TemplateMapping
+    {{ PropertyMapping | templateProperty = influenced | ontologyProperty = influenced }} }}</text></revision></page><page><title>Mapping en:Infobox Pittsburgh neighborhood</title><ns>204</ns><id>197</id><revision><id>47713</id><timestamp>2015-04-06T14:31:00Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = United_States }}
 	{{ConstantMapping | ontologyProperty = state | value = Pennsylvania }}
 	{{ConstantMapping | ontologyProperty = city | value = Pittsburgh,_Pennsylvania }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -10135,17 +10100,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = minority_floor_leader7 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader8 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader9 | ontologyProperty = minorityFloorLeader }}
-}}</text></revision></page><page><title>Mapping en:Infobox Pref GR</title><ns>204</ns><id>207</id><revision><id>14632</id><timestamp>2011-07-28T13:45:58Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Pref GR</title><ns>204</ns><id>207</id><revision><id>47715</id><timestamp>2015-04-06T14:34:46Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Greece }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -10240,17 +10205,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = area_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeSeconds = lats  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeSeconds = longs  | longitudeDirection = longEW }}
-}}</text></revision></page><page><title>Mapping en:Infobox Prefecture Japan</title><ns>204</ns><id>206</id><revision><id>31576</id><timestamp>2014-02-07T10:16:08Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Prefecture Japan</title><ns>204</ns><id>206</id><revision><id>47714</id><timestamp>2015-04-06T14:34:35Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Japan }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -12061,17 +12026,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = shorts1 | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = shorts2 | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = text_outline | ontologyProperty = }} --&gt;
-}}</text></revision></page><page><title>Mapping en:Infobox Province Peru</title><ns>204</ns><id>214</id><revision><id>14633</id><timestamp>2011-07-28T13:48:02Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Province Peru</title><ns>204</ns><id>214</id><revision><id>47716</id><timestamp>2015-04-06T14:34:55Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Peru }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -12166,17 +12131,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = area_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeSeconds = lats  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeSeconds = longs  | longitudeDirection = longEW }}
-}}</text></revision></page><page><title>Mapping en:Infobox Province TR</title><ns>204</ns><id>215</id><revision><id>14634</id><timestamp>2011-07-28T13:48:25Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Province TR</title><ns>204</ns><id>215</id><revision><id>47717</id><timestamp>2015-04-06T14:35:05Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Turkey }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -12271,17 +12236,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = area_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeSeconds = lats  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeSeconds = longs  | longitudeDirection = longEW }}
-}}</text></revision></page><page><title>Mapping en:Infobox Province Vietnam</title><ns>204</ns><id>1679</id><revision><id>14636</id><timestamp>2011-07-28T13:50:33Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Province Vietnam</title><ns>204</ns><id>1679</id><revision><id>47728</id><timestamp>2015-04-06T14:36:48Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Vietnam }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -12536,17 +12501,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = pop_density_as_of | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = prev_name3 | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = prev_name3_date | ontologyProperty = }} --&gt;
-}}</text></revision></page><page><title>Mapping en:Infobox Russian federal subject</title><ns>204</ns><id>226</id><revision><id>14641</id><timestamp>2011-07-28T13:55:48Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Russian federal subject</title><ns>204</ns><id>226</id><revision><id>47718</id><timestamp>2015-04-06T14:35:15Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Russia }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -12641,17 +12606,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = area_km2 | ontologyProperty = areaTotal | unit = squareKilometre }}
 	{{PropertyMapping | templateProperty = density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeSeconds = lats  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeSeconds = longs  | longitudeDirection = longEW }}
-}}</text></revision></page><page><title>Mapping en:Infobox Russian inhabited locality</title><ns>204</ns><id>1681</id><revision><id>14640</id><timestamp>2011-07-28T13:55:05Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Russian inhabited locality</title><ns>204</ns><id>1681</id><revision><id>47730</id><timestamp>2015-04-06T14:36:59Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Russia }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = region | ontologyProperty = region }}
 	{{PropertyMapping | templateProperty = province | ontologyProperty = province }}
@@ -13391,7 +13356,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = notifyDate | ontologyProperty = notifyDate }}
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = areaTotal | unit = Area }}
-}}</text></revision></page><page><title>Mapping en:Infobox South African town</title><ns>204</ns><id>6335</id><revision><id>22517</id><timestamp>2013-01-13T13:32:19Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox South African town</title><ns>204</ns><id>6335</id><revision><id>47782</id><timestamp>2015-04-06T15:10:46Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = South Africa }}
@@ -13405,7 +13370,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = subject_name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = municipality_type | ontologyProperty = type }}
         {{PropertyMapping | templateProperty = canton | ontologyProperty = canton }}
-	{{PropertyMapping | templateProperty = twintowns | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twintowns | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = iso-code-region | ontologyProperty = isoCodeRegion }}
 	{{PropertyMapping | templateProperty = district | ontologyProperty = district }}
 	{{PropertyMapping | templateProperty = within_municipality | ontologyProperty = municipality }}
@@ -13520,14 +13485,14 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = teamhonour | ontologyProperty = honours }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
 
-}}</text></revision></page><page><title>Mapping en:Infobox Swiss town</title><ns>204</ns><id>256</id><revision><id>14645</id><timestamp>2011-07-28T13:59:56Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Swiss town</title><ns>204</ns><id>256</id><revision><id>47721</id><timestamp>2015-04-06T14:35:44Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Switzerland }}
 	{{PropertyMapping | templateProperty = subject_name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = municipality_type | ontologyProperty = type }}
         {{PropertyMapping | templateProperty = canton | ontologyProperty = canton }}
-	{{PropertyMapping | templateProperty = twintowns | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twintowns | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = iso-code-region | ontologyProperty = isoCodeRegion }}
 	{{PropertyMapping | templateProperty = district | ontologyProperty = district }}
 	{{PropertyMapping | templateProperty = within_municipality | ontologyProperty = municipality }}
@@ -13768,17 +13733,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = district3 | ontologyProperty = congressionalDistrict }}
 	{{PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
 	{{GeocoordinatesMapping | latitudeDegrees = lat deg  | latitudeMinutes = lat min  |  longitudeDegrees = long deg  | longitudeMinutes = long min }}
-}}</text></revision></page><page><title>Mapping en:Infobox U.S. state</title><ns>204</ns><id>264</id><revision><id>14648</id><timestamp>2011-07-28T14:01:26Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox U.S. state</title><ns>204</ns><id>264</id><revision><id>47722</id><timestamp>2015-04-06T14:35:52Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = United_States }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -14031,17 +13996,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = language2 | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
 
-}}</text></revision></page><page><title>Mapping en:Infobox UK postcode area</title><ns>204</ns><id>267</id><revision><id>14651</id><timestamp>2011-07-28T14:03:23Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox UK postcode area</title><ns>204</ns><id>267</id><revision><id>47724</id><timestamp>2015-04-06T14:36:12Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = United_Kingdom }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -14582,17 +14547,17 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = minority_floor_leader7 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader8 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader9 | ontologyProperty = minorityFloorLeader }}
-}}</text></revision></page><page><title>Mapping en:Infobox Ukrainian raion</title><ns>204</ns><id>265</id><revision><id>14653</id><timestamp>2011-07-28T14:05:44Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Ukrainian raion</title><ns>204</ns><id>265</id><revision><id>47723</id><timestamp>2015-04-06T14:36:03Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Ukraine }}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -14901,7 +14866,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
 	{{PropertyMapping | templateProperty = nationality | ontologyProperty = nationality }}
-}}</text></revision></page><page><title>Mapping en:Infobox adult female</title><ns>204</ns><id>1657</id><revision><id>17495</id><timestamp>2012-04-28T01:07:22Z</timestamp><text>#REDIRECT [[Mapping:Infobox adult biography]]</text></revision></page><page><title>Mapping en:Infobox adult male</title><ns>204</ns><id>1658</id><revision><id>17496</id><timestamp>2012-04-28T01:07:40Z</timestamp><text>#REDIRECT [[Mapping:Infobox adult biography]]</text></revision></page><page><title>Mapping en:Infobox aircraft begin</title><ns>204</ns><id>6330</id><revision><id>22076</id><timestamp>2013-01-09T21:04:43Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox aircraft begin</title><ns>204</ns><id>6330</id><revision><id>22076</id><timestamp>2013-01-09T21:04:43Z</timestamp><text>{{TemplateMapping
 | mapToClass = Aircraft
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -14929,7 +14894,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = developed from | ontologyProperty = predecessor }}
 	{{PropertyMapping | templateProperty = variants with their own articles | ontologyProperty = successor }}
 	{{PropertyMapping | templateProperty = designer | ontologyProperty = designer }}
-}}</text></revision></page><page><title>Mapping en:Infobox airline</title><ns>204</ns><id>20</id><revision><id>34606</id><timestamp>2014-04-23T07:03:27Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox airline</title><ns>204</ns><id>20</id><revision><id>38855</id><timestamp>2014-12-08T11:23:00Z</timestamp><text>{{TemplateMapping
 | mapToClass = Airline
 | mappings =
 	{{PropertyMapping | templateProperty = hubs | ontologyProperty = hubAirport }}
@@ -15133,7 +15098,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = DorlandsPre | ontologyProperty = dorlandsPrefix }}
 	{{PropertyMapping | templateProperty = DorlandsSuf | ontologyProperty = dorlandsSuffix }}
 	{{PropertyMapping | templateProperty = Precursor | ontologyProperty = precursor }}
-}}</text></revision></page><page><title>Mapping en:Infobox artist</title><ns>204</ns><id>28</id><revision><id>17498</id><timestamp>2012-04-28T01:22:27Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping en:Infobox artist</title><ns>204</ns><id>28</id><revision><id>46609</id><timestamp>2015-03-20T06:36:39Z</timestamp><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = currentmembers
@@ -15216,11 +15181,11 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = goyaAward | ontologyProperty = goyaAward }}
 	{{PropertyMapping | templateProperty = tonyAward | ontologyProperty = tonyAward }}
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = birthname | ontologyProperty = birthName }}
-	{{PropertyMapping | templateProperty = birthdate | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = location | ontologyProperty = birthPlace }}
-	{{PropertyMapping | templateProperty = deathdate | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = deathplace | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = birth_name | ontologyProperty = birthName }}
+	{{PropertyMapping | templateProperty = birth_date | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = death_date | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = death_place | ontologyProperty = deathPlace }}
 	{{PropertyMapping | templateProperty = nationality | ontologyProperty = nationality }}
 	{{PropertyMapping | templateProperty = influencedby | ontologyProperty = influencedBy }}
 	{{PropertyMapping | templateProperty = influenced by | ontologyProperty = influencedBy }}
@@ -15232,7 +15197,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = simpchinesename | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = pinyinchinesename | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = jyutpingchinesename | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = restingplace | ontologyProperty = restingPlace }}
+	{{PropertyMapping | templateProperty = resting_place | ontologyProperty = restingPlace }}
 	{{GeocoordinatesMapping | ontologyProperty = restingPlacePosition  | coordinates = restingplacecoordinates }}
 	{{PropertyMapping | templateProperty = othername | ontologyProperty = alias }}
 	{{PropertyMapping | templateProperty = occupation | ontologyProperty = occupation }}
@@ -16428,16 +16393,16 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
     {{ PropertyMapping | ontologyProperty = pastor | templateProperty = pastor }}
     {{ PropertyMapping | ontologyProperty = architecturalStyle | templateProperty = style }}
     {{ PropertyMapping | ontologyProperty = foaf:page | templateProperty = website }}
-    {{ GeocoordinatesMapping | coordinates = coordinates | latitudeDegrees = latd | latitudeDirection = latNS | latitudeMinutes = latm | latitudeSeconds = lats | longitudeDegrees = longd | longitudeDirection = longEW | longitudeMinutes = longm | longitudeSeconds = longs }} }}</text></revision></page><page><title>Mapping en:Infobox city Japan</title><ns>204</ns><id>68</id><revision><id>14197</id><timestamp>2011-07-15T14:52:08Z</timestamp><text>{{TemplateMapping
+    {{ GeocoordinatesMapping | coordinates = coordinates | latitudeDegrees = latd | latitudeDirection = latNS | latitudeMinutes = latm | latitudeSeconds = lats | longitudeDegrees = longd | longitudeDirection = longEW | longitudeMinutes = longm | longitudeSeconds = longs }} }}</text></revision></page><page><title>Mapping en:Infobox city Japan</title><ns>204</ns><id>68</id><revision><id>47642</id><timestamp>2015-04-03T15:00:48Z</timestamp><text>{{TemplateMapping
 | mapToClass = City
 | mappings =
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = region | ontologyProperty = region }}
 	{{PropertyMapping | templateProperty = province | ontologyProperty = province }}
@@ -16787,8 +16752,8 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = afiawards | ontologyProperty = afiAward }}
 	{{PropertyMapping | templateProperty = filmfareawards | ontologyProperty = filmFareAward }}
 	{{PropertyMapping | templateProperty = grammyawards | ontologyProperty = grammyAward }}
-}}</text></revision></page><page><title>Mapping en:Infobox comic book title</title><ns>204</ns><id>6447</id><revision><id>23577</id><timestamp>2013-01-26T11:07:43Z</timestamp><text>{{TemplateMapping
-| mapToClass = Comics
+}}</text></revision></page><page><title>Mapping en:Infobox comic book title</title><ns>204</ns><id>6447</id><revision><id>38908</id><timestamp>2014-12-19T10:37:52Z</timestamp><text>{{TemplateMapping
+| mapToClass = Comic
 | mappings = 
 {{PropertyMapping | templateProperty = writers  | ontologyProperty = writer }}
 {{PropertyMapping | templateProperty = publisher  | ontologyProperty = publisher }}
@@ -16811,9 +16776,34 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = alias | ontologyProperty = foaf:nick }}
 	{{PropertyMapping | templateProperty = awards | ontologyProperty = award }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox company</title><ns>204</ns><id>75</id><revision><id>35150</id><timestamp>2014-06-06T13:54:06Z</timestamp><text>{{ TemplateMapping 
-| mapToClass = Company 
-| mappings = 
+}}</text></revision></page><page><title>Mapping en:Infobox company</title><ns>204</ns><id>75</id><revision><id>38826</id><timestamp>2014-12-02T16:16:21Z</timestamp><text>{{ ConditionalMapping 
+| cases =
+ {{Condition 
+    | templateProperty = industry
+    | operator = contains
+    | value = banking
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Bank
+                }}
+ }}
+
+ {{Condition 
+    | templateProperty = industry
+    | operator = contains
+    | value = financial
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Bank
+                }}
+ }}
+
+ {{Condition
+    | operator = otherwise
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Company
+                }}
+ }}
+
+| defaultMappings = 
     {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = type | ontologyProperty = type }}
     {{ PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
@@ -16862,7 +16852,37 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
     {{ PropertyMapping | templateProperty = production | ontologyProperty = production }}
     {{ PropertyMapping | templateProperty = company_name | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = company_type | ontologyProperty = type }} 
-}}</text></revision></page><page><title>Mapping en:Infobox computer</title><ns>204</ns><id>6188</id><revision><id>20782</id><timestamp>2012-12-23T15:45:10Z</timestamp><text>#REDIRECT [[Mapping_en:Infobox_information_appliance]]</text></revision></page><page><title>Mapping en:Infobox convention</title><ns>204</ns><id>78</id><revision><id>11128</id><timestamp>2011-03-23T15:42:30Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox computer</title><ns>204</ns><id>6188</id><revision><id>20782</id><timestamp>2012-12-23T15:45:10Z</timestamp><text>#REDIRECT [[Mapping_en:Infobox_information_appliance]]</text></revision></page><page><title>Mapping en:Infobox constellation</title><ns>204</ns><id>11196</id><revision><id>47424</id><timestamp>2015-04-01T12:21:29Z</timestamp><text>{{TemplateMapping | mapToClass = Constellation
+| mappings = 
+	{{ PropertyMapping | templateProperty = abbreviation | ontologyProperty = abbreviation }}
+	&lt;!-- {{ PropertyMapping | templateProperty = arearank | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = areatotal | ontologyProperty = }} --&gt;
+	{{ PropertyMapping | templateProperty = bordering | ontologyProperty = neighbourConstellations }}
+	&lt;!-- {{ PropertyMapping | templateProperty = brighteststarname | ontologyProperty = }} --&gt;
+	{{ PropertyMapping | templateProperty = dec | ontologyProperty = declination }}
+	&lt;!-- {{ PropertyMapping | templateProperty = latmax | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = latmin | ontologyProperty = }} --&gt;
+	{{ PropertyMapping | templateProperty = month | ontologyProperty = month }}
+	{{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+	&lt;!-- {{ PropertyMapping | templateProperty = neareststarname | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = numberbfstars | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = numberbrightstars | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = numbermainstars | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = numbermessierobjects | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = numbernearbystars | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = numberstarsplanets | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = stardistancely | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = stardistancepc | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = starmagnitude | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = symbolism | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = genitive | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = pronounce | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = family | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = meteorshowers | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = quadrant | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = notes | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = liststyle | ontologyProperty = }} --&gt;
+}}</text></revision></page><page><title>Mapping en:Infobox convention</title><ns>204</ns><id>78</id><revision><id>11128</id><timestamp>2011-03-23T15:42:30Z</timestamp><text>{{TemplateMapping
 | mapToClass = Convention
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -17267,6 +17287,14 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = company_slogan | ontologyProperty = slogan }}
 	{{PropertyMapping | templateProperty = url | ontologyProperty = foaf:homepage }}
 	{{PropertyMapping | templateProperty = launch_date | ontologyProperty = formationDate }}
+}}</text></revision></page><page><title>Mapping en:Infobox drug</title><ns>204</ns><id>11053</id><revision><id>45474</id><timestamp>2015-02-25T22:54:05Z</timestamp><text>{{TemplateMapping
+| mapToClass = Drug
+| mappings =
+	{{PropertyMapping | templateProperty = bioavailability | ontologyProperty = bioavailability }}
+	{{PropertyMapping | templateProperty = license | ontologyProperty = license }}
+        {{PropertyMapping | templateProperty = density | ontologyProperty = density }}
+	{{PropertyMapping | templateProperty = image | ontologyProperty = image}}
+        
 }}</text></revision></page><page><title>Mapping en:Infobox economist</title><ns>204</ns><id>6146</id><revision><id>20700</id><timestamp>2012-12-23T12:12:42Z</timestamp><text>{{TemplateMapping
 | mapToClass = Economist
 | mappings =
@@ -18426,6 +18454,26 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = conditions | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = caption | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = image | ontologyProperty = }} --&gt;
+}}</text></revision></page><page><title>Mapping en:Infobox horseraces</title><ns>204</ns><id>7997</id><revision><id>47171</id><timestamp>2015-03-25T10:55:01Z</timestamp><text>{{TemplateMapping | mapToClass = HorseRace
+| mappings = 
+	{{ PropertyMapping | templateProperty = location | ontologyProperty = location }}
+	{{ PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage  }}
+
+	&lt;!-- {{ PropertyMapping | templateProperty = weight | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = race type | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = purse | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = qualification | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = horse race | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = distance | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = class | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = track | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = inaugurated | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = surface | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = sponsor | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = caption | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = last run | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = bonuses | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = image | ontologyProperty = }} --&gt;
 }}</text></revision></page><page><title>Mapping en:Infobox horseracing personality</title><ns>204</ns><id>6167</id><revision><id>20749</id><timestamp>2012-12-23T13:35:35Z</timestamp><text>{{ConditionalMapping
 | cases =
 
@@ -18764,16 +18812,16 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = occupation | ontologyProperty = occupation }}
 	{{PropertyMapping | templateProperty = religion | ontologyProperty = religion }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox kommune</title><ns>204</ns><id>131</id><revision><id>16744</id><timestamp>2012-02-28T14:21:25Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox kommune</title><ns>204</ns><id>131</id><revision><id>47650</id><timestamp>2015-04-03T16:25:48Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -19328,7 +19376,7 @@ Template Properties not mapped yet:
     {{PropertyMapping | templateProperty = demolished | ontologyProperty = demolitionDate }}
     {{PropertyMapping | templateProperty = code | ontologyProperty = code }}
     {{GeocoordinatesMapping | coordinates = coordinates | ontologyProperty = location }}
-}}</text></revision></page><page><title>Mapping en:Infobox military person</title><ns>204</ns><id>1672</id><revision><id>23720</id><timestamp>2013-02-11T12:43:13Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox military person</title><ns>204</ns><id>1672</id><revision><id>38965</id><timestamp>2014-12-23T12:53:02Z</timestamp><text>{{TemplateMapping
 | mapToClass = MilitaryPerson
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -19568,7 +19616,7 @@ Template Properties not mapped yet:
     {{PropertyMapping | templateProperty = nationality | ontologyProperty = nationality }}
     {{PropertyMapping | templateProperty = Current team | ontologyProperty = team }}
     {{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox mountain</title><ns>204</ns><id>150</id><revision><id>17430</id><timestamp>2012-04-26T15:29:39Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping en:Infobox mountain</title><ns>204</ns><id>150</id><revision><id>39192</id><timestamp>2015-01-11T19:50:38Z</timestamp><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = type
@@ -19607,7 +19655,7 @@ Template Properties not mapped yet:
 
 | defaultMappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-        {{PropertyMapping | templateProperty = other_name | ontologyProperty = foaf:name }}
+        {{PropertyMapping | templateProperty = other_name | ontologyProperty = otherName }}
 	{{PropertyMapping | templateProperty = elevation | ontologyProperty = elevation | unit = Length }}
 	{{PropertyMapping | templateProperty = elevation_m | ontologyProperty = elevation | unit = metre }}
 	{{PropertyMapping | templateProperty = elevation_ft | ontologyProperty = elevation | unit = foot }}
@@ -20275,7 +20323,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = publisher | ontologyProperty = publisher }}
 	{{PropertyMapping | templateProperty = language | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox noble</title><ns>204</ns><id>6067</id><revision><id>20502</id><timestamp>2012-12-20T22:33:28Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox noble</title><ns>204</ns><id>6067</id><revision><id>47454</id><timestamp>2015-04-01T16:17:36Z</timestamp><text>{{TemplateMapping
 | mapToClass = Noble
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -20285,8 +20333,8 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = death_date | ontologyProperty = deathDate }}
 	{{PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
 	{{PropertyMapping | templateProperty = birth_date | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = burial_place | ontologyProperty = buriedPlace }}
-	{{PropertyMapping | templateProperty = place of burial | ontologyProperty = buriedPlace }}
+	{{PropertyMapping | templateProperty = burial_place | ontologyProperty = placeOfBurial }}
+	{{PropertyMapping | templateProperty = place of burial | ontologyProperty = placeOfBurial }}
 	{{PropertyMapping | templateProperty = father | ontologyProperty = parent }}
 	{{PropertyMapping | templateProperty = mother | ontologyProperty = parent }}
 	{{PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
@@ -20333,16 +20381,16 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = organization_name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = organization_motto | ontologyProperty = motto }}
         {{GeocoordinatesMapping | coordinates = coordinates }}
-}}</text></revision></page><page><title>Mapping en:Infobox of BD districts</title><ns>204</ns><id>172</id><revision><id>10697</id><timestamp>2010-11-29T12:23:13Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox of BD districts</title><ns>204</ns><id>172</id><revision><id>47672</id><timestamp>2015-04-04T02:42:55Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -22399,11 +22447,11 @@ Template Properties not mapped yet:
 | mappings =
 	{{PropertyMapping | templateProperty = Symbol | ontologyProperty = symbol }}
 	{{PropertyMapping | templateProperty = width | ontologyProperty = width }}
-}}</text></revision></page><page><title>Mapping en:Infobox public service</title><ns>204</ns><id>6748</id><revision><id>25132</id><timestamp>2013-04-24T12:52:06Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox public service</title><ns>204</ns><id>6748</id><revision><id>45379</id><timestamp>2015-02-16T16:31:34Z</timestamp><text>{{TemplateMapping
 | mapToClass = PublicService
 | mappings =
-	{{PropertyMapping | templateProperty = PS_Type | ontologyProperty = dct:type }}
-	{{PropertyMapping | templateProperty = PS_Title | ontologyProperty = dct:title }}
+	{{PropertyMapping | templateProperty = PS_Type | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = PS_Title | ontologyProperty = dc:title }}
 	{{PropertyMapping | templateProperty = PS_Description | ontologyProperty = dct:description }}
 	{{PropertyMapping | templateProperty = PS_Location | ontologyProperty = dct:spatial }}
 	{{PropertyMapping | templateProperty = PS_PeriodOfTime | ontologyProperty = dct:temporal }}
@@ -22676,7 +22724,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
 	{{PropertyMapping | templateProperty = location | ontologyProperty = location }}
 	{{PropertyMapping | templateProperty = url | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox region of Italy</title><ns>204</ns><id>2383</id><revision><id>14639</id><timestamp>2011-07-28T13:51:59Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox region of Italy</title><ns>204</ns><id>2383</id><revision><id>47732</id><timestamp>2015-04-06T14:58:42Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
 	{{ConstantMapping | ontologyProperty = country | value = Italy }}
@@ -22704,13 +22752,13 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = Italian_name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = GDP | ontologyProperty = grossDomesticProduct | unit=euro }}
 	{{PropertyMapping | templateProperty = NUTS | ontologyProperty = nutsCode}}
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = arrondissements | ontologyProperty = arrondissement }}
@@ -23075,8 +23123,8 @@ Template Properties not mapped yet:
 	&lt;!-- {{ PropertyMapping | templateProperty = sitearea_sqft | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = speed | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = virtual queue image | ontologyProperty = }} --&gt;
-}}</text></revision></page><page><title>Mapping en:Infobox royalty</title><ns>204</ns><id>1680</id><revision><id>14683</id><timestamp>2011-07-31T17:23:45Z</timestamp><text>{{TemplateMapping
-| mapToClass = BritishRoyalty
+}}</text></revision></page><page><title>Mapping en:Infobox royalty</title><ns>204</ns><id>1680</id><revision><id>46252</id><timestamp>2015-03-18T14:37:23Z</timestamp><text>{{TemplateMapping
+| mapToClass = Royalty
 | mappings =
 	{{PropertyMapping | templateProperty = royal anthem | ontologyProperty = royalAnthem }}
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -23353,16 +23401,16 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
 	{{PropertyMapping | templateProperty = death_place | ontologyProperty = deathPlace }}
 	{{PropertyMapping | templateProperty = titles | ontologyProperty = title }}
-}}</text></revision></page><page><title>Mapping en:Infobox savivaldybe</title><ns>204</ns><id>228</id><revision><id>10666</id><timestamp>2010-11-29T12:05:06Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox savivaldybe</title><ns>204</ns><id>228</id><revision><id>47719</id><timestamp>2015-04-06T14:35:23Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdministrativeRegion
 | mappings =
-	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
+	{{PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+	{{PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
 	{{PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
 	{{PropertyMapping | templateProperty = city type | ontologyProperty = cityType }}
 	{{PropertyMapping | templateProperty = area | ontologyProperty = area }}
@@ -24135,7 +24183,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = minority_floor_leader7 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader8 | ontologyProperty = minorityFloorLeader }}
 	{{PropertyMapping | templateProperty = minority_floor_leader9 | ontologyProperty = minorityFloorLeader }}
-}}</text></revision></page><page><title>Mapping en:Infobox settlement</title><ns>204</ns><id>239</id><revision><id>16286</id><timestamp>2011-12-01T19:16:11Z</timestamp><text>{{ ConditionalMapping | cases = 
+}}</text></revision></page><page><title>Mapping en:Infobox settlement</title><ns>204</ns><id>239</id><revision><id>47720</id><timestamp>2015-04-06T14:35:36Z</timestamp><text>{{ ConditionalMapping | cases = 
     {{ Condition | templateProperty = settlement_type | operator = contains | value = Metropolis | mapping = 
         {{ TemplateMapping | mapToClass = City }} }}
     {{ Condition | templateProperty = settlement_type | operator = contains | value = City | mapping = 
@@ -24157,15 +24205,15 @@ Template Properties not mapped yet:
     {{ PropertyMapping | templateProperty = nickname | ontologyProperty = foaf:nick }}
     {{ PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
     {{ PropertyMapping | templateProperty = anthem | ontologyProperty = anthem }}
-    {{ PropertyMapping | templateProperty = twin1 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin2 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin3 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin4 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin5 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin6 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin7 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin8 | ontologyProperty = twinCity }}
-    {{ PropertyMapping | templateProperty = twin9 | ontologyProperty = twinCity }}
+    {{ PropertyMapping | templateProperty = twin1 | ontologyProperty = twinTown }}
+    {{ PropertyMapping | templateProperty = twin2 | ontologyProperty = twinTown }}
+    {{ PropertyMapping | templateProperty = twin3 | ontologyProperty = twinTown }}
+    {{ PropertyMapping | templateProperty = twin4 | ontologyProperty = twinTown }}
+    {{ PropertyMapping | templateProperty = twin5 | ontologyProperty = twinTown }}
+    {{ PropertyMapping | templateProperty = twin6 | ontologyProperty = twinTown }}
+    {{ PropertyMapping | templateProperty = twin7 | ontologyProperty = twinTown }}
+    {{ PropertyMapping | templateProperty = twin8 | ontologyProperty = twinTown }}
+    {{ PropertyMapping | templateProperty = twin9 | ontologyProperty = twinTown }}
     {{ PropertyMapping | templateProperty = twin1_country | ontologyProperty = twinCountry }}
     {{ PropertyMapping | templateProperty = twin2_country | ontologyProperty = twinCountry }}
     {{ PropertyMapping | templateProperty = twin3_country | ontologyProperty = twinCountry }}
@@ -24550,7 +24598,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = language | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox song</title><ns>204</ns><id>247</id><revision><id>10218</id><timestamp>2010-11-09T15:39:00Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox song</title><ns>204</ns><id>247</id><revision><id>47397</id><timestamp>2015-03-31T23:43:27Z</timestamp><text>{{TemplateMapping
 | mapToClass = Song
 | mappings =
 	{{PropertyMapping | templateProperty = Album | ontologyProperty = album }}
@@ -24562,6 +24610,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = Type | ontologyProperty = type }}
 	{{PropertyMapping | templateProperty = Artist | ontologyProperty = artist }}
 	{{PropertyMapping | templateProperty = altArtist | ontologyProperty = artist }}
+	{{PropertyMapping | templateProperty = Lyricist | ontologyProperty = lyrics }}
 	{{PropertyMapping | templateProperty = Published | ontologyProperty = publicationDate}}
 	{{PropertyMapping | templateProperty = Released | ontologyProperty = releaseDate }}
 	{{PropertyMapping | templateProperty = Recorded | ontologyProperty = recordDate }}
@@ -25275,22 +25324,22 @@ Template Properties not mapped yet:
     {{ PropertyMapping | ontologyProperty = engineer | templateProperty = services engineer }}
     {{ PropertyMapping | ontologyProperty = operator | templateProperty = operator }}
     {{ PropertyMapping | ontologyProperty = foaf:homepage | templateProperty = Website }}
-    {{ PropertyMapping | ontologyProperty = foaf:homepage | templateProperty = website }} }}</text></revision></page><page><title>Mapping en:Infobox standard</title><ns>204</ns><id>8014</id><revision><id>28159</id><timestamp>2013-09-03T11:38:13Z</timestamp><text>{{TemplateMapping | mapToClass = Song
+    {{ PropertyMapping | ontologyProperty = foaf:homepage | templateProperty = website }} }}</text></revision></page><page><title>Mapping en:Infobox standard</title><ns>204</ns><id>8014</id><revision><id>47404</id><timestamp>2015-04-01T00:46:46Z</timestamp><text>{{TemplateMapping | mapToClass = Song
 | mappings = 
 	&lt;!-- {{ PropertyMapping | templateProperty = recorded_by | ontologyProperty = }} --&gt;
 	{{ PropertyMapping | templateProperty = title | ontologyProperty = title }}
 	{{ PropertyMapping | templateProperty = language | ontologyProperty = language }}
 	&lt;!-- {{ PropertyMapping | templateProperty = published | ontologyProperty = }} --&gt;
-	&lt;!-- {{ PropertyMapping | templateProperty = writer | ontologyProperty = }} --&gt;
+	{{ PropertyMapping | templateProperty = writer | ontologyProperty = writer }}
 	&lt;!-- {{ PropertyMapping | templateProperty = form | ontologyProperty = }} --&gt;
 	{{ PropertyMapping | templateProperty = composer | ontologyProperty = composer }}
-	&lt;!-- {{ PropertyMapping | templateProperty = lyricist | ontologyProperty = }} --&gt;
+	{{ PropertyMapping | templateProperty = lyricist | ontologyProperty = lyrics }}
 	&lt;!-- {{ PropertyMapping | templateProperty = written | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = original_artist | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = comment | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = caption | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = performed_by | ontologyProperty = }} --&gt;
-	{{ PropertyMapping | templateProperty = english_title | ontologyProperty = title }}
+	{{ PropertyMapping | templateProperty = english_title | ontologyProperty = title | language = en}}
 	&lt;!-- {{ PropertyMapping | templateProperty = image_size | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = image | ontologyProperty = }} --&gt;
 }}</text></revision></page><page><title>Mapping en:Infobox station</title><ns>204</ns><id>255</id><revision><id>16650</id><timestamp>2012-02-14T12:11:25Z</timestamp><text>
@@ -25913,12 +25962,12 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = full_name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = founded | ontologyProperty = formationDate }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox university</title><ns>204</ns><id>270</id><revision><id>14480</id><timestamp>2011-07-22T12:20:24Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox university</title><ns>204</ns><id>270</id><revision><id>46251</id><timestamp>2015-03-18T14:34:59Z</timestamp><text>{{TemplateMapping
 | mapToClass = University
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = native_name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = latin_name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = latin_name | ontologyProperty = foaf:name | language = la }}
 	{{PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
 	{{PropertyMapping | templateProperty = mottoeng | ontologyProperty = motto }}	
 	{{PropertyMapping | templateProperty = established | ontologyProperty = foundingDate }}
@@ -26472,6 +26521,74 @@ Template Properties not mapped yet:
 | mappings = 
 {{ConstantMapping | ontologyProperty = country | value = United Kingdom }}
 {{ConstantMapping | ontologyProperty = party | value = Liberal Party (UK) }}
+}}</text></revision></page><page><title>Mapping en:Listen</title><ns>204</ns><id>11029</id><revision><id>45360</id><timestamp>2015-02-16T09:29:25Z</timestamp><text>{{TemplateMapping | mapToClass = owl:Thing
+| mappings =
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename      | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title         | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description   | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename1     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title1        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description1  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename2     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title2        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description2  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename3     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title3        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description3  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename4     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title4        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description4  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename5     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title5        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description5  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename6     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title6        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description6  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename7     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title7        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description7  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename8     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title8        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description8  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename9     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title9        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description9  | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename10    | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title10       | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description10 | ontologyProperty = description }}
+  }}
 }}</text></revision></page><page><title>Mapping en:MEP-stub</title><ns>204</ns><id>8389</id><revision><id>29073</id><timestamp>2013-12-18T15:06:12Z</timestamp><text>{{TemplateMapping | mapToClass = Politician}}</text></revision></page><page><title>Mapping en:MarieByrdLand-geo-stub</title><ns>204</ns><id>8207</id><revision><id>28806</id><timestamp>2013-11-26T10:58:15Z</timestamp><text>{{TemplateMapping | mapToClass = Place 
 | mappings = 
 {{ConstantMapping | ontologyProperty = location | value = Antarctica }}
@@ -26611,7 +26728,15 @@ Template Properties not mapped yet:
 }}</text></revision></page><page><title>Mapping en:Play-stub</title><ns>204</ns><id>8367</id><revision><id>29050</id><timestamp>2013-12-18T09:48:24Z</timestamp><text>{{TemplateMapping | mapToClass = Play}}</text></revision></page><page><title>Mapping en:Poem-stub</title><ns>204</ns><id>8709</id><revision><id>29705</id><timestamp>2014-01-14T12:29:39Z</timestamp><text>{{TemplateMapping | mapToClass = Poem}}</text></revision></page><page><title>Mapping en:Poland-railstation-stub</title><ns>204</ns><id>8379</id><revision><id>29062</id><timestamp>2013-12-18T14:30:56Z</timestamp><text>{{TemplateMapping | mapToClass = RailwayStation
 | mappings =
 {{ConstantMapping | ontologyProperty = location | value = Poland}}
-}}</text></revision></page><page><title>Mapping en:Pope-stub</title><ns>204</ns><id>8180</id><revision><id>28768</id><timestamp>2013-11-25T13:57:43Z</timestamp><text>{{TemplateMapping | mapToClass = Pope}}</text></revision></page><page><title>Mapping en:Prog-lang-stub</title><ns>204</ns><id>8285</id><revision><id>28963</id><timestamp>2013-12-17T15:36:23Z</timestamp><text>{{TemplateMapping | mapToClass = ProgrammingLanguage}}</text></revision></page><page><title>Mapping en:Pyramidellidae-stub</title><ns>204</ns><id>8882</id><revision><id>30070</id><timestamp>2014-01-17T11:57:21Z</timestamp><text>{{TemplateMapping | mapToClass = Mollusca}}</text></revision></page><page><title>Mapping en:RC-bishop-stub</title><ns>204</ns><id>8173</id><revision><id>28759</id><timestamp>2013-11-21T13:32:26Z</timestamp><text>{{TemplateMapping | mapToClass = ChristianBishop }}</text></revision></page><page><title>Mapping en:RC-clergy-stub</title><ns>204</ns><id>8322</id><revision><id>29002</id><timestamp>2013-12-18T08:38:29Z</timestamp><text>{{TemplateMapping | mapToClass = Cleric}}</text></revision></page><page><title>Mapping en:Research-Project</title><ns>204</ns><id>3050</id><revision><id>11413</id><timestamp>2011-03-31T12:14:03Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Pope-stub</title><ns>204</ns><id>8180</id><revision><id>28768</id><timestamp>2013-11-25T13:57:43Z</timestamp><text>{{TemplateMapping | mapToClass = Pope}}</text></revision></page><page><title>Mapping en:Prog-lang-stub</title><ns>204</ns><id>8285</id><revision><id>28963</id><timestamp>2013-12-17T15:36:23Z</timestamp><text>{{TemplateMapping | mapToClass = ProgrammingLanguage}}</text></revision></page><page><title>Mapping en:Pyramidellidae-stub</title><ns>204</ns><id>8882</id><revision><id>30070</id><timestamp>2014-01-17T11:57:21Z</timestamp><text>{{TemplateMapping | mapToClass = Mollusca}}</text></revision></page><page><title>Mapping en:RC-bishop-stub</title><ns>204</ns><id>8173</id><revision><id>28759</id><timestamp>2013-11-21T13:32:26Z</timestamp><text>{{TemplateMapping | mapToClass = ChristianBishop }}</text></revision></page><page><title>Mapping en:RC-clergy-stub</title><ns>204</ns><id>8322</id><revision><id>29002</id><timestamp>2013-12-18T08:38:29Z</timestamp><text>{{TemplateMapping | mapToClass = Cleric}}</text></revision></page><page><title>Mapping en:Redirect-distinguish</title><ns>204</ns><id>11035</id><revision><id>45389</id><timestamp>2015-02-18T15:51:04Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing
+| mappings =
+	{{PropertyMapping | templateProperty = 2 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 3 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 4 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 5 | ontologyProperty = owl:differentFrom | transform = internal}} 
+	{{PropertyMapping | templateProperty = 6 | ontologyProperty = owl:differentFrom | transform = internal}} 
+}}</text></revision></page><page><title>Mapping en:Research-Project</title><ns>204</ns><id>3050</id><revision><id>11413</id><timestamp>2011-03-31T12:14:03Z</timestamp><text>{{TemplateMapping
 | mapToClass = ResearchProject
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -26645,6 +26770,46 @@ Template Properties not mapped yet:
 | mappings = 
 {{ConstantMapping | ontologyProperty = location | value = Victoria Land }}
 {{ConstantMapping | ontologyProperty = location | value = Antarctica }}
+}}</text></revision></page><page><title>Mapping en:See also</title><ns>204</ns><id>10472</id><revision><id>39763</id><timestamp>2015-02-04T10:19:31Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing
+| mappings =
+	{{PropertyMapping | templateProperty = 1 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+
+&lt;!--  After arg 1 there might be labels so this would yield errors need to find a way with the conditional mappings --&gt;
+&lt;!--
+	{{PropertyMapping | templateProperty = 2 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 3 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 4 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 5 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 6 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 7 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 8 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 9 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 10| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 11| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 12| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 13| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 14| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 15| ontologyProperty = rdfs:seeAlso | transform = internal}}
+--&gt;
+}}</text></revision></page><page><title>Mapping en:See also2</title><ns>204</ns><id>10470</id><revision><id>39762</id><timestamp>2015-02-04T10:19:19Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing
+| mappings =
+	{{PropertyMapping | templateProperty = 1 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 2 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 3 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 4 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 5 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 6 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 7 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 8 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 9 | ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 10| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 11| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 12| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 13| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 14| ontologyProperty = rdfs:seeAlso | transform = internal}} 
+	{{PropertyMapping | templateProperty = 15| ontologyProperty = rdfs:seeAlso | transform = internal}}
 }}</text></revision></page><page><title>Mapping en:Software-stub</title><ns>204</ns><id>8290</id><revision><id>28968</id><timestamp>2013-12-17T15:41:44Z</timestamp><text>{{TemplateMapping | mapToClass = Software}}</text></revision></page><page><title>Mapping en:Solar-eclipse-stub</title><ns>204</ns><id>8703</id><revision><id>29648</id><timestamp>2014-01-13T15:12:27Z</timestamp><text>{{TemplateMapping | mapToClass = SolarEclipse}}</text></revision></page><page><title>Mapping en:Song-stub</title><ns>204</ns><id>8317</id><revision><id>28997</id><timestamp>2013-12-18T08:33:53Z</timestamp><text>{{TemplateMapping | mapToClass = Song}}</text></revision></page><page><title>Mapping en:SouthGeorgia-geo-stub</title><ns>204</ns><id>8756</id><revision><id>29794</id><timestamp>2014-01-15T09:35:38Z</timestamp><text>{{TemplateMapping | mapToClass = Place
 | mappings = 
 {{ConstantMapping | ontologyProperty = country | value = United Kingdom}}
@@ -27448,7 +27613,7 @@ Template Properties not mapped yet:
 | mappings = 
 {{ConstantMapping | ontologyProperty = country | value = United Kingdom }}
 {{ConstantMapping | ontologyProperty = country | value = Wales }}
-}}</text></revision></page><page><title>Mapping en:Weapon-stub</title><ns>204</ns><id>8300</id><revision><id>28979</id><timestamp>2013-12-17T17:22:06Z</timestamp><text>{{TemplateMapping | mapToClass = Weapon}}</text></revision></page><page><title>Mapping en:Website-stub</title><ns>204</ns><id>8305</id><revision><id>28985</id><timestamp>2013-12-17T17:26:23Z</timestamp><text>{{TemplateMapping | mapToClass = Website}}</text></revision></page><page><title>Mapping en:Wisconsin-politician-stub</title><ns>204</ns><id>8365</id><revision><id>29048</id><timestamp>2013-12-18T09:45:48Z</timestamp><text>{{TemplateMapping | mapToClass = Politician
+}}</text></revision></page><page><title>Mapping en:Weapon-stub</title><ns>204</ns><id>8300</id><revision><id>28979</id><timestamp>2013-12-17T17:22:06Z</timestamp><text>{{TemplateMapping | mapToClass = Weapon}}</text></revision></page><page><title>Mapping en:Weather box</title><ns>204</ns><id>11052</id><revision><id>45469</id><timestamp>2015-02-25T22:42:30Z</timestamp><text></text></revision></page><page><title>Mapping en:Website-stub</title><ns>204</ns><id>8305</id><revision><id>28985</id><timestamp>2013-12-17T17:26:23Z</timestamp><text>{{TemplateMapping | mapToClass = Website}}</text></revision></page><page><title>Mapping en:Wisconsin-politician-stub</title><ns>204</ns><id>8365</id><revision><id>29048</id><timestamp>2013-12-18T09:45:48Z</timestamp><text>{{TemplateMapping | mapToClass = Politician
 | mappings =
 {{ConstantMapping | ontologyProperty = country | value = United States}}
 }}</text></revision></page><page><title>Mapping en:Wrestling-bio-stub</title><ns>204</ns><id>8299</id><revision><id>28978</id><timestamp>2013-12-17T17:20:04Z</timestamp><text>{{TemplateMapping | mapToClass = Wrestler}}</text></revision></page><page><title>Mapping en:Year dab</title><ns>204</ns><id>4816</id><revision><id>16265</id><timestamp>2011-11-22T18:41:43Z</timestamp><text>{{TemplateMapping
