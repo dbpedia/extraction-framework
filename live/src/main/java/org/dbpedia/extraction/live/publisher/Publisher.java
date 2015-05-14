@@ -31,7 +31,6 @@ public class Publisher extends Thread{
     private volatile HashSet<Quad> reInsertedTriples = new HashSet<>();
     private volatile HashSet<Quad> subjectsClear = new HashSet<>();
 
-    private volatile long counter = 0;
     private volatile HashSet<Long> pageCache = new HashSet<Long>();
 
     private final String publishDiffBaseName = LiveOptions.options.get("publishDiffRepoPath");
@@ -52,7 +51,6 @@ public class Publisher extends Thread{
 
     public void run()  {
 
-        counter = 1;
         while(true) {
             try {
                 // Block until next pubData
@@ -62,12 +60,12 @@ public class Publisher extends Thread{
                 // 1) we get the same page again (possible conflict in diff order
                 // 2) we have more than 300 changesets in queue
                 // 3) the diff exceeds a triple limit
-                if (pageCache.contains(pubData.pageID) || counter % MAX_CHANGE_SETS == 0 || addedTriples.size() > MAX_QUEUE_SIZE || deletedTriples.size() > MAX_QUEUE_SIZE || reInsertedTriples.size() > MAX_QUEUE_SIZE) {
+                if (pageCache.contains(pubData.pageID) || pageCache.size() > MAX_CHANGE_SETS || addedTriples.size() > MAX_QUEUE_SIZE || deletedTriples.size() > MAX_QUEUE_SIZE || reInsertedTriples.size() > MAX_QUEUE_SIZE) {
+
+                    pageCache.clear();
                     flush();
-                    counter = 0;
                 }
                 bufferDiff(pubData);
-                counter++;
                 pageCache.add(pubData.pageID);
             } catch(Throwable t) {
                 logger.error("An exception was encountered in the Publisher update loop", t);
@@ -92,8 +90,7 @@ public class Publisher extends Thread{
             return;
         }
 
-        pageCache.clear();
-        counter = 1;
+
         String fileName = publishDiffBaseName + "/" + PublisherService.getNextPublishPath();
         File parent = new File(fileName).getParentFile();
 
