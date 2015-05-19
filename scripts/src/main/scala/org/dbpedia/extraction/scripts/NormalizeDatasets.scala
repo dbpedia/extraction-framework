@@ -88,7 +88,7 @@ object NormalizeDatasets {
     val mappingSuffix = args(3)
     require(mappingSuffix.nonEmpty, "no mapping file suffix")
 
-    val inputs = split(args(4))
+    val inputs = split(args(4)).map(_.replace("_", "-"))
     require(inputs.nonEmpty, "no input datasets")
 
     val outputExtension = args(5)
