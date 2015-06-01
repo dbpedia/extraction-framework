@@ -23,6 +23,10 @@ import org.slf4j.{Logger, LoggerFactory}
 class DumpExport(val filename: String, val threads: Integer) {
   val logger: Logger = LoggerFactory.getLogger(classOf[DumpExport])
 
+  val policies = {
+    UriPolicy.parsePolicy(LiveOptions.options.get("uri-policy.main"))
+  }
+
   val destination: Destination = new WriterDestination(writer(new File(filename)), new TerseFormatter(false, true, policies))
 
   // Max threads in thread pool queu 4 x running threads
@@ -110,9 +114,7 @@ class DumpExport(val filename: String, val threads: Integer) {
 
   }
 
-  val policies = {
-    UriPolicy.parsePolicy(LiveOptions.options.get("uri-policy.main"))
-  }
+
 
 
   private def writer(file: File): () => Writer = {

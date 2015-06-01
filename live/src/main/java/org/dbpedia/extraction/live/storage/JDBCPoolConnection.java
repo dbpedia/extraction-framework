@@ -14,39 +14,9 @@ public class JDBCPoolConnection {
     //Initializing the Logger
     private static Logger logger = LoggerFactory.getLogger(JDBCPoolConnection.class);
 
-    private static volatile BoneCP connectionStorePool = null;
     private static volatile BoneCP connectionCachePool = null;
 
-    protected JDBCPoolConnection() {
-    }
-
-    private static void initStoreConnection() {
-
-        try {
-            BoneCPConfig config = new BoneCPConfig();
-            Class.forName(LiveOptions.options.get("store.class"));
-            config.setJdbcUrl(LiveOptions.options.get("store.dsn"));
-            config.setUsername(LiveOptions.options.get("store.user"));
-            config.setPassword(LiveOptions.options.get("store.pw"));
-            connectionStorePool = new BoneCP(config); // setup the connection pool
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            logger.error("Could not initialize DB connection! Exiting...");
-            Main.stopLive();
-            System.exit(1);
-        }
-    }
-
-
-    public static Connection getStorePoolConnection() throws SQLException {
-        if (connectionStorePool == null) {
-            synchronized (JDBCPoolConnection.class) {
-                if (connectionStorePool == null) {
-                    initStoreConnection();
-                }
-            }
-        }
-        return connectionStorePool.getConnection();
+    private JDBCPoolConnection() {
     }
 
     private static void initCacheConnection() {
@@ -80,9 +50,9 @@ public class JDBCPoolConnection {
 
 
     public static void shutdown() {
-        if (connectionStorePool != null) {
+        if (connectionCachePool != null) {
             try {
-                connectionStorePool.close();
+                connectionCachePool.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

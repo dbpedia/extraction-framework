@@ -23,11 +23,14 @@ public class Publisher extends Thread{
 
     private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
 
+    private final static int MAX_QUEUE_SIZE = 5000;
+    private final static int MAX_CHANGE_SETS = 400;
+
     private volatile HashSet<Quad> addedTriples = new HashSet<>();
     private volatile HashSet<Quad> deletedTriples = new HashSet<>();
+    private volatile HashSet<Quad> reInsertedTriples = new HashSet<>();
     private volatile HashSet<Quad> subjectsClear = new HashSet<>();
 
-    private volatile long counter = 0;
     private volatile HashSet<Long> pageCache = new HashSet<Long>();
 
     private final String publishDiffBaseName = LiveOptions.options.get("publishDiffRepoPath");
@@ -48,7 +51,6 @@ public class Publisher extends Thread{
 
     public void run()  {
 
-        counter = 1;
         while(true) {
             try {
                 // Block until next pubData
@@ -58,12 +60,12 @@ public class Publisher extends Thread{
                 // 1) we get the same page again (possible conflict in diff order
                 // 2) we have more than 300 changesets in queue
                 // 3) the diff exceeds a triple limit
-                if (pageCache.contains(pubData.pageID) || counter % 300 == 0 || addedTriples.size() > 2000 || deletedTriples.size() > 2000) {
+                if (pageCache.contains(pubData.pageID) || pageCache.size() > MAX_CHANGE_SETS || addedTriples.size() > MAX_QUEUE_SIZE || deletedTriples.size() > MAX_QUEUE_SIZE || reInsertedTriples.size() > MAX_QUEUE_SIZE) {
+
+                    pageCache.clear();
                     flush();
-                    counter = 0;
                 }
                 bufferDiff(pubData);
-                counter++;
                 pageCache.add(pubData.pageID);
             } catch(Throwable t) {
                 logger.error("An exception was encountered in the Publisher update loop", t);
@@ -76,6 +78,7 @@ public class Publisher extends Thread{
         if(pubData != null){
             addedTriples.addAll(pubData.toAdd);
             deletedTriples.addAll(pubData.toDelete);
+            reInsertedTriples.addAll(pubData.toReInsert);
             subjectsClear.addAll(pubData.subjects);
         }
     }
@@ -83,12 +86,11 @@ public class Publisher extends Thread{
     //TODO possible concurrency issues when main exits but look minor for now
     public void flush() throws IOException  {
 
-        if (addedTriples.size() == 0 && deletedTriples.size() == 0) {
+        if (addedTriples.isEmpty() && deletedTriples.isEmpty() && reInsertedTriples.isEmpty() && subjectsClear.isEmpty() ) {
             return;
         }
 
-        pageCache.clear();
-        counter = 1;
+
         String fileName = publishDiffBaseName + "/" + PublisherService.getNextPublishPath();
         File parent = new File(fileName).getParentFile();
 
@@ -103,6 +105,11 @@ public class Publisher extends Thread{
         if (! deletedTriples.isEmpty()) {
             RDFDiffWriter.writeAsTurtle(deletedTriples, fileName + ".removed.nt.gz");
             deletedTriples.clear();
+        }
+
+        if (! reInsertedTriples.isEmpty()) {
+            RDFDiffWriter.writeAsTurtle(reInsertedTriples, fileName + ".reinserted.nt.gz");
+            reInsertedTriples.clear();
         }
 
         if (! subjectsClear.isEmpty()) {

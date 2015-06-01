@@ -38,12 +38,9 @@ class PublisherDiffDestination(val pageID: Long, val cleanUpdate: Boolean, val s
 
   def close() {
 
-
-    val diffToAdd = if (cleanUpdate) new java.util.HashSet[Quad](added ++ unmodified)
-                    else new java.util.HashSet[Quad](added)
-
-    val diffToDelete = if (cleanUpdate) new java.util.HashSet[Quad]() // on clean update we don't give a delete diff
-                      else new java.util.HashSet[Quad](deleted)
+    val toAdd = new java.util.HashSet[Quad](added)
+    val toDelete = new java.util.HashSet[Quad](deleted)
+    val toReInsert = if (! cleanUpdate) new java.util.HashSet[Quad]() else new java.util.HashSet[Quad](unmodified)
 
     var resourceToClear = new java.util.HashSet[Quad]()
     if (cleanUpdate) {
@@ -64,7 +61,7 @@ class PublisherDiffDestination(val pageID: Long, val cleanUpdate: Boolean, val s
       }
     }
 
-    Main.publishingDataQueue.put(new DiffData(pageID, diffToAdd,diffToDelete, resourceToClear))
+    Main.publishingDataQueue.put(new DiffData(pageID, toAdd, toDelete, toReInsert, resourceToClear))
   }
 
 
