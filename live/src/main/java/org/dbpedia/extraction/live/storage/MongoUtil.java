@@ -29,12 +29,7 @@ public class MongoUtil {
     private static MongoCollection<Document> cache = database.getCollection("dbplCache");
 
     public static void test(){
-        Document document = new Document("pageID", 445)
-                            .append("title", "Teste 1")
-                            .append("timesUpdated", "0")
-                            .append("json", "{teste: {abc: 'add'}}")
-                            .append("subjects", "bananas, testes e coisos");
-        cache.insertOne(document);
+        insert(223, "Teste de insert", "0", "{aa: bb}", "testes", "diff");
 
         // find documents
         List<Document> foundDocument = cache.find().into(new ArrayList<Document>());
@@ -43,7 +38,7 @@ public class MongoUtil {
 
         //update(444, "Teste 2", "1", "{teste2: 'coisos'}", "sem banas e com testes 2", "diferença grande");
 
-        delete(445);
+        delete(223);
 
         // find documents
         foundDocument = cache.find().into(new ArrayList<Document>());
@@ -92,9 +87,27 @@ public class MongoUtil {
         return true;
     }
 
-    public static boolean delete(long pageID){
+    public static boolean insert(long pageID, String title, String times, String json, String subjects, String diff){
         try{
-            cache.deleteOne(eq("pageID", pageID));
+            delete(pageID); //ensure that the document is unique in the database
+
+            Document document = new Document("pageID", pageID)
+                                .append("title", title)
+                                .append("timesUpdated", times)
+                                .append("json", json)
+                                .append("subjects", subjects)
+                                .append("diff", diff);
+            cache.insertOne(document);
+        }catch (Exception e){
+            logger.warn(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean delete(long pageID) {
+        try{
+            cache.deleteMany(eq("pageID", pageID));
         }catch (Exception e){
             logger.warn(e.getMessage());
             return false;
