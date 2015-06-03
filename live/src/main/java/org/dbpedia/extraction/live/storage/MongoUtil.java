@@ -30,7 +30,7 @@ public class MongoUtil {
 
     public static void test(){
         Document document = new Document("pageID", 444)
-                            .append("pageTitle", "Teste 1")
+                            .append("title", "Teste 1")
                             .append("timesUpdated", "0")
                             .append("json", "{teste: {abc: 'add'}}")
                             .append("subjects", "bananas, testes e coisos");
@@ -49,14 +49,26 @@ public class MongoUtil {
             logger.warn(d.toString());
     }
 
-    public static boolean update(long pageID, String pageTitle, String timesUpdated, String json, String subjects, String diff){
+    public static boolean update(long pageID, String title, String times, String json, String subjects, String diff){
         try{
-            Document sets = new Document("pageTitle", pageTitle)
-                            .append("timesUpdated", timesUpdated)
+            Document sets = new Document("title", title)
+                            .append("timesUpdated", times)
                             .append("json", json)
                             .append("subjects", subjects)
                             .append("updated", now())
                             .append("diff", diff);
+            cache.updateOne(eq("pageID", pageID), new Document("$set", sets));
+        }catch (Exception e){
+            logger.warn(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean updateUnmodified(long pageID, String times){
+        try{
+            Document sets = new Document("timesUpdated", times)
+                            .append("updated", now());
             cache.updateOne(eq("pageID", pageID), new Document("$set", sets));
         }catch (Exception e){
             logger.warn(e.getMessage());
