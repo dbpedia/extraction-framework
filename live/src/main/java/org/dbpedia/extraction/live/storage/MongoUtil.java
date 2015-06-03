@@ -7,10 +7,13 @@ import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Filters.eq;
 
 /**
  * Created by Andre Pereira on 02/06/2015.
@@ -49,16 +52,23 @@ public class MongoUtil {
     public static boolean update(long pageID, String pageTitle, String timesUpdated, String json, String subjects, String diff){
         try{
             Document sets = new Document("pageTitle", pageTitle)
-                                .append("timesUpdated", timesUpdated)
-                                .append("json", json)
-                                .append("subjects", subjects)
-                                .append("diff", diff);
+                            .append("timesUpdated", timesUpdated)
+                            .append("json", json)
+                            .append("subjects", subjects)
+                            .append("updated", now())
+                            .append("diff", diff);
             cache.updateOne(eq("pageID", pageID), new Document("$set", sets));
         }catch (Exception e){
             logger.warn(e.getMessage());
             return false;
         }
         return true;
+    }
+
+    private static String now(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        return dateFormat.format(cal.getTime());
     }
 
     public static void closeClient(){
