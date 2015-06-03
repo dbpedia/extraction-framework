@@ -29,7 +29,7 @@ public class MongoUtil {
     private static MongoCollection<Document> cache = database.getCollection("dbplCache");
 
     public static void test(){
-        Document document = new Document("pageID", 444)
+        Document document = new Document("pageID", 445)
                             .append("title", "Teste 1")
                             .append("timesUpdated", "0")
                             .append("json", "{teste: {abc: 'add'}}")
@@ -41,7 +41,9 @@ public class MongoUtil {
         for(Document d: foundDocument)
             logger.warn(d.toString());
 
-        update(444, "Teste 2", "1", "{teste2: 'coisos'}", "sem banas e com testes 2", "diferença grande");
+        //update(444, "Teste 2", "1", "{teste2: 'coisos'}", "sem banas e com testes 2", "diferença grande");
+
+        delete(445);
 
         // find documents
         foundDocument = cache.find().into(new ArrayList<Document>());
@@ -70,6 +72,29 @@ public class MongoUtil {
             Document sets = new Document("timesUpdated", times)
                             .append("updated", now());
             cache.updateOne(eq("pageID", pageID), new Document("$set", sets));
+        }catch (Exception e){
+            logger.warn(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean updateError(long pageID, String times, String error){
+        try{
+            Document sets = new Document("timesUpdated", times)
+                            .append("error", error)
+                            .append("updated", now());
+            cache.updateOne(eq("pageID", pageID), new Document("$set", sets));
+        }catch (Exception e){
+            logger.warn(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean delete(long pageID){
+        try{
+            cache.deleteOne(eq("pageID", pageID));
         }catch (Exception e){
             logger.warn(e.getMessage());
             return false;
