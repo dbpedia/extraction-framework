@@ -2,6 +2,7 @@ package org.dbpedia.extraction.live.storage;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.slf4j.Logger;
@@ -29,21 +30,13 @@ public class MongoUtil {
     private static MongoCollection<Document> cache = database.getCollection("dbplCache");
 
     public static void test(){
-        insert(223, "Teste de insert", "0", "{aa: bb}", "testes", "diff");
-
         // find documents
-        List<Document> foundDocument = cache.find().into(new ArrayList<Document>());
-        for(Document d: foundDocument)
-            logger.warn(d.toString());
-
-        //update(444, "Teste 2", "1", "{teste2: 'coisos'}", "sem banas e com testes 2", "diferença grande");
-
-        delete(223);
-
-        // find documents
-        foundDocument = cache.find().into(new ArrayList<Document>());
-        for(Document d: foundDocument)
-            logger.warn(d.toString());
+        //List<Document> foundDocument = cache.find().into(new ArrayList<Document>());
+        //for(Document d: foundDocument)
+        //    logger.warn(d.toString());
+        List<String> aux = getJSONCacheSelectAll();
+        for(String s: aux)
+            logger.warn(s);
     }
 
     public static boolean update(long pageID, String title, String times, String json, String subjects, String diff){
@@ -113,6 +106,20 @@ public class MongoUtil {
             return false;
         }
         return true;
+    }
+
+    public static List<String> getJSONCacheSelectAll(){
+        ArrayList<String> result = new ArrayList<String>();
+
+        MongoCursor<Document> cursor = cache.find().iterator();
+        try {
+            while (cursor.hasNext()) {
+                result.add(cursor.next().getString("json"));
+            }
+        } finally {
+            cursor.close();
+        }
+        return result;
     }
 
     private static String now(){
