@@ -10,9 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -30,13 +28,14 @@ public class MongoUtil {
     private static MongoCollection<Document> cache = database.getCollection("dbplCache");
 
     public static void test(){
-        // find documents
-        //List<Document> foundDocument = cache.find().into(new ArrayList<Document>());
-        //for(Document d: foundDocument)
-        //    logger.warn(d.toString());
-        List<String> aux = getJSONCacheSelectAll();
+        logger.warn("------ Begin Tests --------");
+
+        JSONCacheItem t = getJSONCacheSelect(224);
+        logger.warn(t.json());
+        /*List<String> aux = getJSONCacheSelectAll();
         for(String s: aux)
-            logger.warn(s);
+            logger.warn(s);*/
+        logger.warn("------ End Tests --------");
     }
 
     public static boolean update(long pageID, String title, String times, String json, String subjects, String diff){
@@ -80,7 +79,7 @@ public class MongoUtil {
         return true;
     }
 
-    public static boolean insert(long pageID, String title, String times, String json, String subjects, String diff){
+    public static boolean insert(long pageID, String title, int times, String json, String subjects, String diff){
         try{
             delete(pageID); //ensure that the document is unique in the database
 
@@ -120,6 +119,24 @@ public class MongoUtil {
             cursor.close();
         }
         return result;
+    }
+
+    public static JSONCacheItem getJSONCacheSelect(long pageID){
+        Document doc = cache.find(eq("pageID", pageID)).first();
+        if(doc != null) {
+            int timesUpdated = doc.getInteger("timesUpdated");
+            String json = doc.getString("json");
+
+            String subjects = doc.getString("subjects");
+            Set<String> subjectSet = new HashSet<>();
+            for (String item : subjects.split("\n")) {
+                String subject = item.trim();
+                if (!subject.isEmpty())
+                    subjectSet.add(org.apache.commons.lang.StringEscapeUtils.unescapeJava(subject));
+            }
+            return new JSONCacheItem(pageID, timesUpdated, json, subjectSet);
+        }
+        return null;
     }
 
     private static String now(){
