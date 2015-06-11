@@ -11,9 +11,7 @@ import org.dbpedia.extraction.live.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -25,7 +23,7 @@ import static com.mongodb.client.model.Sorts.*;
  */
 public class MongoUtil {
     //Initializing the Logger
-    private static Logger logger = LoggerFactory.getLogger(JDBCUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(MongoUtil.class);
     //Initializing the MongoDB client
     private static MongoClient client = new MongoClient();
     //Get the test database
@@ -40,7 +38,7 @@ public class MongoUtil {
         logger.warn("------ End Tests --------");
     }
 
-    public static boolean update(long pageID, String title, int times, String json, String subjects, String diff){
+    public static boolean update(long pageID, String title, String times, String json, String subjects, String diff){
         try{
             Document sets = new Document("title", title)
                             .append("timesUpdated", times)
@@ -68,11 +66,16 @@ public class MongoUtil {
         return true;
     }
 
-    public static boolean updateError(long pageID, String times, String error){
+    public static boolean updateError(long pageID, String error){
         try{
-            Document sets = new Document("timesUpdated", times)
-                            .append("error", error)
-                            .append("updated", now());
+            Document doc = cache.find(eq("pageID", pageID)).first();
+            int times = 0;
+            if(doc != null)
+                times = Integer.parseInt(doc.getString("timesUpdated"));
+
+            Document sets = new Document("timesUpdated", "" + (times + 1))
+                                .append("error", error)
+                                .append("updated", now());
             cache.updateOne(eq("pageID", pageID), new Document("$set", sets));
         }catch (Exception e){
             logger.warn(e.getMessage());
@@ -81,7 +84,7 @@ public class MongoUtil {
         return true;
     }
 
-    public static boolean insert(long pageID, String title, int times, String json, String subjects, String diff){
+    public static boolean insert(long pageID, String title, String times, String json, String subjects, String diff){
         try{
             delete(pageID); //ensure that the document is unique in the database
 
@@ -90,8 +93,8 @@ public class MongoUtil {
                                 .append("timesUpdated", times)
                                 .append("json", json)
                                 .append("subjects", subjects)
-                                .append("updated", "0/0/0 0:0:0")
-                    .append("diff", diff);
+                                .append("updated", "0/0/0 00:00:00")
+                                .append("diff", diff);
             cache.insertOne(document);
         }catch (Exception e){
             logger.warn(e.getMessage());
@@ -131,7 +134,7 @@ public class MongoUtil {
         try {
             Document doc = cache.find(eq("pageID", pageID)).first();
             if(doc != null) {
-                int timesUpdated = doc.getInteger("timesUpdated");
+                int timesUpdated = Integer.parseInt(doc.getString("timesUpdated"));
                 String json = doc.getString("json");
 
                 String subjects = doc.getString("subjects");

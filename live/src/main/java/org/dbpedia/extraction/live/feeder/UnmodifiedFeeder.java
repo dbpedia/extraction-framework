@@ -3,7 +3,7 @@ package org.dbpedia.extraction.live.feeder;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
-import org.dbpedia.extraction.live.storage.JDBCUtil;
+import org.dbpedia.extraction.live.storage.MongoUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -60,7 +60,7 @@ public class UnmodifiedFeeder extends Feeder {
                 return Collections.emptyList();
             }
         }
-        List<LiveQueueItem> items = JDBCUtil.getCacheUnmodified(minDaysAgo, chunk);
+        List<LiveQueueItem> items = MongoUtil.getUnmodified(minDaysAgo, (int)chunk);
         if (items.size() == 0) {
             try {
 
