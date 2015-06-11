@@ -111,13 +111,16 @@ public class MongoUtil {
     }
 
     public static List<String> getAll(){
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
 
         MongoCursor<Document> cursor = cache.find().iterator();
         try {
             while (cursor.hasNext()) {
                 result.add(cursor.next().getString("json"));
             }
+        } catch (Exception e){
+            logger.warn(e.getMessage());
+            result = null;
         } finally {
             cursor.close();
         }
@@ -125,42 +128,46 @@ public class MongoUtil {
     }
 
     public static JSONCacheItem getItem(long pageID){
-        Document doc = cache.find(eq("pageID", pageID)).first();
-        if(doc != null) {
-            int timesUpdated = doc.getInteger("timesUpdated");
-            String json = doc.getString("json");
+        try {
+            Document doc = cache.find(eq("pageID", pageID)).first();
+            if(doc != null) {
+                int timesUpdated = doc.getInteger("timesUpdated");
+                String json = doc.getString("json");
 
-            String subjects = doc.getString("subjects");
-            Set<String> subjectSet = new HashSet<>();
-            for (String item : subjects.split("\n")) {
-                String subject = item.trim();
-                if (!subject.isEmpty())
-                    subjectSet.add(org.apache.commons.lang.StringEscapeUtils.unescapeJava(subject));
+                String subjects = doc.getString("subjects");
+                Set<String> subjectSet = new HashSet<>();
+                for (String item : subjects.split("\n")) {
+                    String subject = item.trim();
+                    if (!subject.isEmpty())
+                        subjectSet.add(org.apache.commons.lang.StringEscapeUtils.unescapeJava(subject));
+                }
+                return new JSONCacheItem(pageID, timesUpdated, json, subjectSet);
             }
-            return new JSONCacheItem(pageID, timesUpdated, json, subjectSet);
+        } catch (Exception e) {
+            logger.warn(e.getMessage());
         }
         return null;
     }
 
     public static ArrayList<LiveQueueItem> getUnmodified(int daysAgo, int limit){
-        ArrayList<LiveQueueItem> items = new ArrayList<LiveQueueItem>(limit);
-        FindIterable<Document> docs = cache.find(lt("updated", nowMinusDays(daysAgo)))
-                                        .sort(ascending("updated"))
-                                        .limit(limit);
-        for (Document d: docs){
-            try {
-                long pageID = d.getLong("pageID");
-                String t = d.getString("updated");
-                DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Date date = format.parse(t);
-                String timestamp = DateUtil.transformToUTC(date.getTime());
-                items.add(new LiveQueueItem(pageID, timestamp));
-            } catch (ParseException e) {
-                logger.warn(e.getMessage());
-                return null; // best option?
+        try {
+            ArrayList<LiveQueueItem> items = new ArrayList<>(limit);
+            FindIterable<Document> docs = cache.find(lt("updated", nowMinusDays(daysAgo)))
+                                            .sort(ascending("updated"))
+                                            .limit(limit);
+            for (Document d: docs){
+                    long pageID = d.getLong("pageID");
+                    String t = d.getString("updated");
+                    DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = format.parse(t);
+                    String timestamp = DateUtil.transformToUTC(date.getTime());
+                    items.add(new LiveQueueItem(pageID, timestamp));
             }
+            return items;
+        } catch (Exception e) {
+            logger.warn(e.getMessage());
+            return null;
         }
-        return items;
     }
 
     private static String nowMinusDays(int days){
