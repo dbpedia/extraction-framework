@@ -1,18 +1,24 @@
 package org.dbpedia.extraction.live.storage;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.dbpedia.extraction.live.queue.LiveQueueItem;
+import org.dbpedia.extraction.live.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Sorts.*;
 
 /**
  * Created by Andre Pereira on 02/06/2015.
@@ -30,15 +36,11 @@ public class MongoUtil {
     public static void test(){
         logger.warn("------ Begin Tests --------");
 
-        JSONCacheItem t = getJSONCacheSelect(224);
-        logger.warn(t.json());
-        /*List<String> aux = getJSONCacheSelectAll();
-        for(String s: aux)
-            logger.warn(s);*/
+
         logger.warn("------ End Tests --------");
     }
 
-    public static boolean update(long pageID, String title, String times, String json, String subjects, String diff){
+    public static boolean update(long pageID, String title, int times, String json, String subjects, String diff){
         try{
             Document sets = new Document("title", title)
                             .append("timesUpdated", times)
@@ -88,7 +90,8 @@ public class MongoUtil {
                                 .append("timesUpdated", times)
                                 .append("json", json)
                                 .append("subjects", subjects)
-                                .append("diff", diff);
+                                .append("updated", "0/0/0 0:0:0")
+                    .append("diff", diff);
             cache.insertOne(document);
         }catch (Exception e){
             logger.warn(e.getMessage());
@@ -107,7 +110,7 @@ public class MongoUtil {
         return true;
     }
 
-    public static List<String> getJSONCacheSelectAll(){
+    public static List<String> getAll(){
         ArrayList<String> result = new ArrayList<String>();
 
         MongoCursor<Document> cursor = cache.find().iterator();
@@ -121,7 +124,7 @@ public class MongoUtil {
         return result;
     }
 
-    public static JSONCacheItem getJSONCacheSelect(long pageID){
+    public static JSONCacheItem getItem(long pageID){
         Document doc = cache.find(eq("pageID", pageID)).first();
         if(doc != null) {
             int timesUpdated = doc.getInteger("timesUpdated");
@@ -137,6 +140,34 @@ public class MongoUtil {
             return new JSONCacheItem(pageID, timesUpdated, json, subjectSet);
         }
         return null;
+    }
+
+    public static ArrayList<LiveQueueItem> getUnmodified(int daysAgo, int limit){
+        ArrayList<LiveQueueItem> items = new ArrayList<LiveQueueItem>(limit);
+        FindIterable<Document> docs = cache.find(lt("updated", nowMinusDays(daysAgo)))
+                                        .sort(ascending("updated"))
+                                        .limit(limit);
+        for (Document d: docs){
+            try {
+                long pageID = d.getLong("pageID");
+                String t = d.getString("updated");
+                DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = format.parse(t);
+                String timestamp = DateUtil.transformToUTC(date.getTime());
+                items.add(new LiveQueueItem(pageID, timestamp));
+            } catch (ParseException e) {
+                logger.warn(e.getMessage());
+                return null; // best option?
+            }
+        }
+        return items;
+    }
+
+    private static String nowMinusDays(int days){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -1 * days);
+        return dateFormat.format(cal.getTime());
     }
 
     private static String now(){
