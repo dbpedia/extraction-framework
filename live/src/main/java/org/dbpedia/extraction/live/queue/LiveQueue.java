@@ -52,7 +52,7 @@ public class LiveQueue {
                     if (newPriority.compareTo(existingPriority) > 0) {
                         // check only for higher priority
                         // keep both if old in mappingsPriority
-                        if (existingPriority.equals(LiveQueuePriority.MappingPriority)) {
+                        if (existingPriority.equals(LiveQueuePriority.MappingPriority) && !newPriority.equals(LiveQueuePriority.MappingPriority)) {
                             // keep both
                             finalValue++;
                         } else {
