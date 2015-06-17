@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.live.main;
 
 
-import com.mongodb.Mongo;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.Feeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
@@ -12,10 +11,8 @@ import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.Publisher;
-import org.dbpedia.extraction.live.statistics.Statistics;
 import org.dbpedia.extraction.live.storage.JDBCUtil;
 import org.dbpedia.extraction.live.storage.MongoUtil;
-import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
 import org.slf4j.Logger;

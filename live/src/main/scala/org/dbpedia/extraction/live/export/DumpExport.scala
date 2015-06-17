@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.live.export
 
 import java.io.{File, Writer}
-import java.net.Authenticator
-import java.sql._
 import java.util
 import java.util.concurrent._
 import scala.collection.JavaConversions._
@@ -12,7 +10,7 @@ import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, UriPolicy
 import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.live.storage._
 import org.dbpedia.extraction.util.RichFile._
-import org.dbpedia.extraction.util.{IOUtils, ProxyAuthenticator}
+import org.dbpedia.extraction.util.{IOUtils}
 import org.slf4j.{Logger, LoggerFactory}
 
 
@@ -21,13 +19,10 @@ import org.slf4j.{Logger, LoggerFactory}
  *
  * @author Dimitris Kontokostas
  * @since 9/18/14 4:33 PM
+ * Modified in 2015/06/17 by André Pereira
  */
 class DumpExport(val filename: String, val threads: Integer) {
   val logger: Logger = LoggerFactory.getLogger(classOf[DumpExport])
-
-  val policies = {
-    UriPolicy.parsePolicy(LiveOptions.options.get("uri-policy.main"))
-  }
 
   val destination: Destination = new WriterDestination(writer(new File(filename)), new TerseFormatter(false, true, policies))
 
@@ -42,7 +37,7 @@ class DumpExport(val filename: String, val threads: Integer) {
     try {
       val all:util.List[String] = MongoUtil.getAll()
 
-      for (json <- all){
+      for (json <- all.toList){
         executorService.execute(new QuadProcessWorker(destination,json))
       }
     } catch {
@@ -63,7 +58,9 @@ class DumpExport(val filename: String, val threads: Integer) {
     }
   }
 
-
+  val policies = {
+    UriPolicy.parsePolicy(LiveOptions.options.get("uri-policy.main"))
+  }
 
 
   private def writer(file: File): () => Writer = {

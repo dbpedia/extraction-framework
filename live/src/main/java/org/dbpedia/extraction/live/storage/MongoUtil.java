@@ -31,13 +31,6 @@ public class MongoUtil {
     //Get the cache collection from the database
     private static MongoCollection<Document> cache = database.getCollection("dbplCache");
 
-    public static void test(){
-        logger.warn("------ Begin Tests --------");
-
-
-        logger.warn("------ End Tests --------");
-    }
-
     public static boolean update(long pageID, String title, String times, String json, String subjects, String diff){
         try{
             Document sets = new Document("title", title)
@@ -95,6 +88,26 @@ public class MongoUtil {
                                 .append("subjects", subjects)
                                 .append("updated", "0/0/0 00:00:00")
                                 .append("diff", diff);
+            cache.insertOne(document);
+        }catch (Exception e){
+            logger.warn(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean full_insert(long pageID, String title, String updated, String times, String json, String subjects, String diff, int error){
+        try{
+            delete(pageID); //ensure that the document is unique in the database
+
+            Document document = new Document("pageID", pageID)
+                                .append("title", title)
+                                .append("timesUpdated", times)
+                                .append("json", json)
+                                .append("subjects", subjects)
+                                .append("updated", updated)
+                                .append("diff", diff)
+                                .append("error", error);
             cache.insertOne(document);
         }catch (Exception e){
             logger.warn(e.getMessage());
