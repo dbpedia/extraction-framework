@@ -26,5 +26,5 @@ class AbstractExtractorWikipedia(
   extends AbstractExtractor (context)
 {
 
-  override def apiUrl: String = "http://" + context.language.wikiCode + ".wikipedia.org/w/api.php"
+  override def apiUrl: String = "https://" + context.language.wikiCode + ".wikipedia.org/w/api.php"
 }
