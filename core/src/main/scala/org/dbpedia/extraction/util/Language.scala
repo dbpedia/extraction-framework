@@ -25,8 +25,8 @@ import org.dbpedia.extraction.ontology.RdfNamespace
  * Use propertyUri.append("xy"), not string concatenation. 
  * @param baseUri URI prefix for this wiki, e.g. "http://be-x-old.wikipedia.org",
  * "http://commons.wikimedia.org", "http://mappings.dbpedia.org".
- * @param apiUri API URI for this wiki, e.g. "http://be-x-old.wikipedia.org/w/api.php",
- * "http://commons.wikimedia.org/w/api.php", "http://mappings.dbpedia.org/api.php".
+ * @param apiUri API URI for this wiki, e.g. "https://be-x-old.wikipedia.org/w/api.php",
+ * "http://commons.wikimedia.org/w/api.php", "https://mappings.dbpedia.org/api.php".
  */
 class Language private(
   val wikiCode: String,
@@ -69,7 +69,7 @@ object Language extends (String => Language)
         new DBpediaNamespace("http://"+code+".dbpedia.org/resource/"),
         new DBpediaNamespace("http://"+code+".dbpedia.org/property/"),
         "http://"+code+".wikipedia.org",
-        "http://"+code+".wikipedia.org/w/api.php"
+        "https://"+code+".wikipedia.org/w/api.php"
       )
     }
     
@@ -235,7 +235,7 @@ object Language extends (String => Language)
       new DBpediaNamespace("http://commons.dbpedia.org/resource/"),
       new DBpediaNamespace("http://commons.dbpedia.org/property/"),
       "http://commons.wikimedia.org",
-      "http://commons.wikimedia.org/w/api.php"
+      "https://commons.wikimedia.org/w/api.php"
     )
     
     languages("wikidata") =
@@ -248,7 +248,7 @@ object Language extends (String => Language)
       new DBpediaNamespace("http://wikidata.dbpedia.org/resource/"),
       new DBpediaNamespace("http://wikidata.dbpedia.org/property/"),
       "http://www.wikidata.org",
-      "http://www.wikidata.org/w/api.php"
+      "https://www.wikidata.org/w/api.php"
     )
 
 

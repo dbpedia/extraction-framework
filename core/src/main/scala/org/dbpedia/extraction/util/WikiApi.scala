@@ -49,11 +49,11 @@ class WikiApi(url: URL, language: Language)
     def retrievePagesByNamespace[U](namespace : Namespace, f : WikiPage => U, fromPage : String = "")
     {
         // TODO: instead of first getting the page ids and then the pages, use something like 
-        // ?action=query&generator=allpages&prop=revisions&rvprop=ids|content&format=xml&gapnamespace=0
+        // ?action=query&continue=&generator=allpages&prop=revisions&rvprop=ids|content&format=xml&gapnamespace=0
         // -> "generator" instead of "list" and "gapnamespace" instead of "apnamespace" ("gap" is for "generator all pages")
  
         //Retrieve list of pages
-        val response = query("?action=query&format=xml&list=allpages&apfrom=" + URLEncoder.encode(fromPage, "UTF-8") + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
+        val response = query("?action=query&continue=&format=xml&list=allpages&apfrom=" + URLEncoder.encode(fromPage, "UTF-8") + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
 
         //Extract page ids
         val pageIds = for(p <- response \ "query" \ "allpages" \ "p") yield (p \ "@pageid").head.text.toLong
@@ -102,7 +102,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(group <- ids.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&"+param+"=" + group.mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&continue=&format=xml&prop=revisions&"+param+"=" + group.mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }
@@ -119,7 +119,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(titleGroup <- titles.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&format=xml&prop=revisions&titles=" + titleGroup.map(formatWikiTitle).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&continue=&format=xml&prop=revisions&titles=" + titleGroup.map(formatWikiTitle).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }
@@ -161,7 +161,7 @@ class WikiApi(url: URL, language: Language)
      */
     def retrieveTemplateUsages(title : WikiTitle, namespace: Namespace = Namespace.Main, maxCount : Int = 500) : Seq[WikiTitle] =
     {
-        val response = query("?action=query&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace + "&einamespace=" + namespace.code + "&eifilterredir=nonredirects&eilimit=" + maxCount)
+        val response = query("?action=query&continue=&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace + "&einamespace=" + namespace.code + "&eifilterredir=nonredirects&eilimit=" + maxCount)
 
         for(page <- response \ "query" \ "embeddedin" \ "ei";
             title <- page \ "@title" )
@@ -182,7 +182,7 @@ class WikiApi(url: URL, language: Language)
         var appropriateQuery = "";
 
         do{
-          appropriateQuery = "?action=query&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace +
+          appropriateQuery = "?action=query&continue=&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace +
                               "&einamespace=0&eifilterredir=nonredirects&eilimit=" + maxCount;
           //Since the call can return only 500 matches at most we must use the eicontinue parameter to
           //get the other matches
