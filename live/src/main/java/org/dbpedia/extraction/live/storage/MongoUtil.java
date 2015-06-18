@@ -28,9 +28,13 @@ public class MongoUtil {
     private static MongoClient client = new MongoClient();
     //Get the test database
     private static MongoDatabase database = client.getDatabase("test");
-    //Get the cache collection from the database
+    //Get the cache and revisions collection from the database
     private static MongoCollection<Document> cache = database.getCollection("dbplCache");
+    private static MongoCollection<Document> revisions = database.getCollection("dbplRevisions");
 
+    /*
+    * Method that updates the item with pageID from the cache
+    */
     public static boolean update(long pageID, String title, String times, String json, String subjects, String diff){
         try{
             Document sets = new Document("title", title)
@@ -47,6 +51,9 @@ public class MongoUtil {
         return true;
     }
 
+    /*
+    * Method that sets the pageID item from the cache as updated but doesn't modify any of the other values
+    */
     public static boolean updateUnmodified(long pageID, String times){
         try{
             Document sets = new Document("timesUpdated", times)
@@ -59,6 +66,9 @@ public class MongoUtil {
         return true;
     }
 
+    /*
+    * Method that sets the pageID item from the cache as updated and adds an error
+    */
     public static boolean updateError(long pageID, String error){
         try{
             Document doc = cache.find(eq("pageID", pageID)).first();
@@ -77,6 +87,10 @@ public class MongoUtil {
         return true;
     }
 
+    /*
+    * This method inserts a new item in cache.
+    * Sets the updated field as 0/0/0 00:00:00
+    */
     public static boolean insert(long pageID, String title, String times, String json, String subjects, String diff){
         try{
             delete(pageID); //ensure that the document is unique in the database
@@ -96,6 +110,9 @@ public class MongoUtil {
         return true;
     }
 
+    /*
+    * This method inserts a new item in cache with every possible field set
+    */
     public static boolean full_insert(long pageID, String title, String updated, String times, String json, String subjects, String diff, int error){
         try{
             delete(pageID); //ensure that the document is unique in the database
@@ -116,6 +133,9 @@ public class MongoUtil {
         return true;
     }
 
+    /*
+    * Method that deletes the item with pageID from cache
+    */
     public static boolean delete(long pageID) {
         try{
             cache.deleteMany(eq("pageID", pageID));
@@ -126,6 +146,9 @@ public class MongoUtil {
         return true;
     }
 
+    /*
+    * This method returns a List<String> with every json field from every item in cache.
+    */
     public static List<String> getAll(){
         ArrayList<String> result = new ArrayList<>();
 
@@ -143,6 +166,9 @@ public class MongoUtil {
         return result;
     }
 
+    /*
+    * Method that returns a JSONCacheItem with information of the item with pageID from the cache
+    */
     public static JSONCacheItem getItem(long pageID){
         try {
             Document doc = cache.find(eq("pageID", pageID)).first();
@@ -165,6 +191,10 @@ public class MongoUtil {
         return null;
     }
 
+    /*
+    * This method returns an ArrayList<LiveQueueItem> with up to 'limit' elements.
+    * These elements are the items from cache that haven't been updated in 'daysAgo' days.
+    */
     public static ArrayList<LiveQueueItem> getUnmodified(int daysAgo, int limit){
         try {
             ArrayList<LiveQueueItem> items = new ArrayList<>(limit);
@@ -186,6 +216,10 @@ public class MongoUtil {
         }
     }
 
+    /*
+    * Method that returns a String with a timestamp regarding a date of now() minus the number of 'days'
+    * Format: yyyy/MM/dd HH:mm:ss
+    */
     private static String nowMinusDays(int days){
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
@@ -193,10 +227,31 @@ public class MongoUtil {
         return dateFormat.format(cal.getTime());
     }
 
+    /*
+    * Method that returns a String with a timestamp regarding a date of now()
+    * Format: yyyy/MM/dd HH:mm:ss
+    */
     private static String now(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime());
+    }
+
+    /*
+    * This method inserts a new item in the revisions collection.
+    */
+    public static boolean rev_insert(long pageID, String timestamp, String additions, String deletions){
+        try{
+            Document document = new Document("pageID", pageID)
+                                .append("timestamp", timestamp)
+                                .append("additions", additions)
+                                .append("deletions", deletions);
+            revisions.insertOne(document);
+        }catch (Exception e){
+            logger.warn(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     public static void closeClient(){
