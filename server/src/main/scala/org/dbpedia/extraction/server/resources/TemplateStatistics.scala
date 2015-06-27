@@ -5,10 +5,12 @@ import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil.{wikiDecode,wikiEncode}
-import org.dbpedia.extraction.server.stats.MappingStats
+import org.dbpedia.extraction.server.stats.{MappingStatsHolder, MappingStatsManager, MappingStats}
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.net.URI
 import java.io.PrintWriter
+import scala.collection.mutable
+import scala.collection.mutable.ArrayBuffer
 import scala.xml.Elem
 /**
  * Displays the statistics for all templates of a language.
@@ -24,7 +26,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
   def get: Elem = {
     if (langCode == "*") allLanguages else singleLanguage
   }
-      
+
   /**
    * Displays the statistics for all languages.
    */
@@ -252,6 +254,61 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
       <a href={cookieQuery('?', 100)}>top&nbsp;100</a> |
       <a href={cookieQuery('?', 100000)}>all&nbsp;templates</a>
     </p>
+  }
+
+  /**
+   * Retrieves mapping statistics as json
+   */
+  @GET
+  @Path("json/")
+  @Produces(Array("application/json"))
+  def getAsJson: String = {
+
+    var builder = new StringBuilder
+
+    // start object
+    builder append '{'
+
+    var statistics = new ArrayBuffer[Language]
+    if (langCode == "*")
+      for ((language, manager) <- Server.instance.managers) {
+        statistics += language
+      }
+    else {
+      val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
+      statistics += language
+    }
+
+    // list of json files per language
+    builder append statistics.map( language =>
+      getJsonTemplate(language.wikiCode, Server.instance.managers(language).holder)
+    ).mkString(",")
+
+    // end object
+    builder append '}'
+
+    builder.toString()
+  }
+
+  private def getJsonTemplate(lang: String, stats: MappingStatsHolder) : String = {
+    var builder = new StringBuilder
+
+    builder append "\"" append lang append "\""
+    builder append ": {"
+
+    builder append "\"templateMappedCount\":" append stats.mappedTemplateCount append ","
+    builder append "\"templateCount\":" append stats.templateCount append ","
+    builder append "\"propertyMappedCount\":" append stats.mappedPropertyCount append ","
+    builder append "\"propertyCount\":" append stats.propertyCount append ","
+    builder append "\"templateMappedUsedCount\":" append stats.mappedTemplateUseCount append ","
+    builder append "\"templateUsedCount\":" append stats.templateUseCount append ","
+    builder append "\"propertyMappedUsedCount\":" append stats.mappedPropertyUseCount append ","
+    builder append "\"propertyUsedCount\":" append stats.propertyUseCount
+    builder append "}"
+
+    builder.toString()
+
+
   }
   
 }
