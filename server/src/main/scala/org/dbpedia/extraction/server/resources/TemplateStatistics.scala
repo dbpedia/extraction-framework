@@ -5,14 +5,15 @@ import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.WikiUtil.{wikiDecode,wikiEncode}
-import org.dbpedia.extraction.server.stats.MappingStats
+import org.dbpedia.extraction.server.stats.{MappingStatsHolder, MappingStats}
 import org.dbpedia.extraction.server.util.StringUtils.urlEncode
 import java.net.URI
 import java.io.PrintWriter
+import scala.collection.mutable.ArrayBuffer
 import scala.xml.Elem
 /**
  * Displays the statistics for all templates of a language.
- * 
+ *
  * TODO: Some URLs contain spaces. We should convert spaces to underscores in most cases, but in
  * some cases we have to use %20.
  */
@@ -24,7 +25,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
   def get: Elem = {
     if (langCode == "*") allLanguages else singleLanguage
   }
-      
+
   /**
    * Displays the statistics for all languages.
    */
@@ -32,44 +33,44 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
   {
     var templateCount = 0L
     var mappedTemplateCount = 0L
-  
+
     var templateUseCount = 0L
     var mappedTemplateUseCount = 0L
-  
+
     var propertyCount = 0L
     var mappedPropertyCount = 0L
-    
+
     var propertyUseCount = 0L
     var mappedPropertyUseCount = 0L
-      
+
     for ((language, manager) <- Server.instance.managers) {
-      
+
       val holder = manager.holder
-      
+
       templateCount += holder.templateCount
       mappedTemplateCount += holder.mappedTemplateCount
-    
+
       templateUseCount += holder.templateUseCount
       mappedTemplateUseCount += holder.mappedTemplateUseCount
-    
+
       propertyCount += holder.propertyCount
       mappedPropertyCount += holder.mappedPropertyCount
-      
+
       propertyUseCount += holder.propertyUseCount
       mappedPropertyUseCount += holder.mappedPropertyUseCount
     }
-  
+
     val mappedTemplateRatio = mappedTemplateCount.toDouble / templateCount.toDouble
     val mappedPropertyRatio = mappedPropertyCount.toDouble / propertyCount.toDouble
-    
+
     val mappedTemplateUseRatio = mappedTemplateUseCount.toDouble / templateUseCount.toDouble
     val mappedPropertyUseRatio = mappedPropertyUseCount.toDouble / propertyUseCount.toDouble
-    
+
     val percentageMappedTemplates: String = "%2.2f".format(mappedTemplateRatio * 100)
     val percentageMappedProperties: String = "%2.2f".format(mappedPropertyRatio * 100)
     val percentageMappedTemplateUse: String = "%2.2f".format(mappedTemplateUseRatio * 100)
     val percentageMappedPropertyUse: String = "%2.2f".format(mappedPropertyUseRatio * 100)
-    
+
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
       {ServerHeader.getHeader("Mapping Statistics for all languages")}
     <body>
@@ -81,9 +82,9 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
     </body>
     </html>
   }
-  
+
   private def singleLanguage: Elem = {
-      
+
     val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
     if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
@@ -91,7 +92,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
     val manager = Server.instance.managers(language)
 
     val statsHolder = manager.holder
-    
+
     val sortedStats = statsHolder.mappedStatistics.sortBy(ms => (- ms.templateCount, ms.templateName))
 
     val reversedRedirects = statsHolder.reversedRedirects
@@ -114,16 +115,16 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
     val ignoreEmptyClass = ""
 
     // TODO: stream xml to browser. We produce up to 10MB HTML. XML in memory is even bigger.
-      
+
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
           {ServerHeader.getHeader(s"Mapping Statistics for $langCode", true)}
             <body>
                 <h2 align="center">Mapping Statistics for <u>{langCode}</u></h2>
-                <p align="center">{percentageMappedTemplates} % of all templates in Wikipedia ({langCode}) are mapped 
+                <p align="center">{percentageMappedTemplates} % of all templates in Wikipedia ({langCode}) are mapped
                 ({statsHolder.mappedTemplateCount} of {statsHolder.templateCount}).</p>
-                <p align="center">{percentageMappedProperties} % of all properties in Wikipedia ({langCode}) are mapped 
+                <p align="center">{percentageMappedProperties} % of all properties in Wikipedia ({langCode}) are mapped
                 ({statsHolder.mappedPropertyCount} of {statsHolder.propertyCount}).</p>
-                <p align="center">{percentageMappedTemplateUse} % of all template occurrences in Wikipedia ({langCode}) are mapped 
+                <p align="center">{percentageMappedTemplateUse} % of all template occurrences in Wikipedia ({langCode}) are mapped
                 ({statsHolder.mappedTemplateUseCount} of {statsHolder.templateUseCount}).</p>
                 <p align="center">{percentageMappedPropertyUse} % of all property occurrences in Wikipedia ({langCode}) are mapped
                 ({statsHolder.mappedPropertyUseCount} of {statsHolder.propertyUseCount}).</p>
@@ -143,7 +144,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
           <tr>
             <th>occurrences</th> <th colspan="2">template (with link to property statistics)</th>
             <th>num properties</th> <th>mapped properties (%)</th>
-            <th>num property occurrences</th> <th>mapped property occurrences (%)</th> 
+            <th>num property occurrences</th> <th>mapped property occurrences (%)</th>
             <th>num properties not found</th> <th class="sorter-false"></th>
           </tr>
           </thead>
@@ -160,7 +161,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
             val percentMappedProps: String = "%2.2f".format(mappingStat.mappedPropertyRatio * 100)
             val percentMappedPropOccur: String = "%2.2f".format(mappingStat.mappedPropertyUseRatio * 100)
             var mappingsWikiLink = mappingUrlPrefix + wikiEncode(mappingStat.templateName)
-            
+
             var backgroundClass: String =
             if (! mappingStat.isMapped) mappedDangerClass
             else if (mappingStat.mappedPropertyUseRatio > goodThreshold) mappedSuccessClass
@@ -179,7 +180,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
                   redirectMsg = "Mapping of " + redirect.substring(manager.templateNamespace.length) + " must be renamed to "
               }
             }
-  
+
             var isIgnored = false
             var ignoreMsg = "add to ignore list"
             if (manager.ignoreList.isTemplateIgnored(mappingStat.templateName))
@@ -206,7 +207,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
           </td>
           } }
           <td><a href={mappingsWikiLink}>Edit</a></td>
-          <td align="right">{mappingStat.propertyCount}</td> 
+          <td align="right">{mappingStat.propertyCount}</td>
           <td align="right">{percentMappedProps}</td>
           <td align="right">{mappingStat.propertyUseCount}</td>
           <td align="right">{percentMappedPropOccur}</td>
@@ -227,31 +228,85 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
     </body>
     </html>
   }
-    
+
   private def cookieQuery(sep: Char, show: Int = -1) : String = {
     var vsep = sep
-    
+
     val sb = new StringBuilder
-    
+
     if (Server.instance.adminRights(password)) {
       sb append vsep append "p=" append password
       vsep = '&'
     }
-    
-    if (show != -1) { 
+
+    if (show != -1) {
       sb append vsep append "show=" append show
       vsep = '&' // for future additions below
     }
-    
+
     sb.toString
   }
-  
+
   private def templateCountLinks: Elem = {
-    <p align="center">Show 
+    <p align="center">Show
       <a href={cookieQuery('?', 20)}>top&nbsp;20</a> |
       <a href={cookieQuery('?', 100)}>top&nbsp;100</a> |
       <a href={cookieQuery('?', 100000)}>all&nbsp;templates</a>
     </p>
   }
-  
+
+  /**
+   * Retrieves mapping statistics as json
+   */
+  @GET
+  @Path("json/")
+  @Produces(Array("application/json"))
+  def getAsJson: String = {
+
+    var builder = new StringBuilder
+
+    // start object
+    builder append '{'
+
+    var statistics = new ArrayBuffer[Language]
+    if (langCode == "*")
+      for ((language, manager) <- Server.instance.managers) {
+        statistics += language
+      }
+    else {
+      val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
+      statistics += language
+    }
+
+    // list of json files per language
+    builder append statistics.map( language =>
+      getJsonTemplate(language.wikiCode, Server.instance.managers(language).holder)
+    ).mkString(",")
+
+    // end object
+    builder append '}'
+
+    builder.toString()
+  }
+
+  private def getJsonTemplate(lang: String, stats: MappingStatsHolder) : String = {
+    var builder = new StringBuilder
+
+    builder append "\"" append lang append "\""
+    builder append ": {"
+
+    builder append "\"templateMappedCount\":" append stats.mappedTemplateCount append ","
+    builder append "\"templateCount\":" append stats.templateCount append ","
+    builder append "\"propertyMappedCount\":" append stats.mappedPropertyCount append ","
+    builder append "\"propertyCount\":" append stats.propertyCount append ","
+    builder append "\"templateMappedUsedCount\":" append stats.mappedTemplateUseCount append ","
+    builder append "\"templateUsedCount\":" append stats.templateUseCount append ","
+    builder append "\"propertyMappedUsedCount\":" append stats.mappedPropertyUseCount append ","
+    builder append "\"propertyUsedCount\":" append stats.propertyUseCount
+    builder append "}"
+
+    builder.toString()
+
+
+  }
 }
