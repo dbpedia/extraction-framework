@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.live.main;
 
 
+import org.dbpedia.extraction.live.administrative.AdminInterface;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.Feeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
@@ -159,5 +160,7 @@ public class Main {
 
         initLive();
         startLive();
+
+        new AdminInterface().start();
     }
 }
