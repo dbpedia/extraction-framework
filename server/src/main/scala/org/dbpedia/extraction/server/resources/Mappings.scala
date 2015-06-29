@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.server.resources
 
+import org.dbpedia.extraction.mappings.{MappingsLoader, Redirects}
+import org.dbpedia.extraction.server.resources.RMLMapping
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.server.resources.stylesheets.{TriX,Log}
 import org.dbpedia.extraction.server.Server
@@ -126,6 +128,85 @@ class Mappings(@PathParam("lang") langCode : String)
         // TODO: use Language.Mappings?
         Server.instance.extractor.removeMappingPage(WikiTitle.parse(title, language), language)
         logger.info("Deleted mapping page: " + title)
+    }
+
+
+    /**
+     * Retrieves a mapping as rml
+     */
+    @GET
+    @Path("pages/rdf/")
+    @Produces(Array("application/xml"))
+    def getRdf(@PathParam("title") title : String) : Elem =
+    {
+      val pages = Server.instance.extractor.mappingPageSource(language)
+
+      <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+        {ServerHeader.getHeader("Mapping pages")}
+        <body>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-5">
+              <h2>Rdf Mapping pages</h2>
+              { pages.map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot get page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
+            </div>
+          </div>
+        </body>
+      </html>
+    }
+
+    /**
+     * Retrieves a rml mapping page
+     */
+    @GET
+    @Path("pages/rdf/{title: .+$}")
+    @Produces(Array("text/turtle"))
+    def getRdfMapping(@PathParam("title") title : String) : String =
+    {
+      logger.info("Get mappings page: " + title)
+      val parsed = WikiTitle.parse(title, language)
+      val pages = Server.instance.extractor.mappingPageSource(language)
+      val page = pages.filter(_.title == parsed)
+
+  //    if(page.size != 1)
+  //      if(getAllMappings)
+  //        return ""
+  //      else
+  //        throw new Exception("Cannot get page: " + title + ". Parsing failed")  //TODO??
+
+      // context object that has only this mappingSource
+      val context = new {
+        val ontology = Server.instance.extractor.ontology()
+        val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
+        val redirects: Redirects = new Redirects(Map())
+        val mappingPageSource = page
+      }
+
+      //Load mappings
+      val rdfTemplate = new RMLMapping(parser(page.head).get, language, MappingsLoader.load(context))
+      rdfTemplate.getRdfTemplate()
+    }
+
+    /**
+     * Retrieves all rml mapping pages
+     */
+    @GET
+    @Path("pages/rdf/all")
+    @Produces(Array("text/turtle"))
+    def getAllRdfMappings() : String =
+    {
+      //getAllMappings = true
+      val builder = new StringBuilder()
+      val titles = Server.instance.extractor.mappingPageSource(language).map(x => x.title.encodedWithNamespace.replace(":", "%3A"))
+
+      for(title <- titles) {
+        val zw = try {getRdfMapping(title)}
+        catch {
+          case x => ""
+        }
+        builder.append(zw)
+      }
+      //getAllMappings = false
+      builder.toString()
     }
 
     /**

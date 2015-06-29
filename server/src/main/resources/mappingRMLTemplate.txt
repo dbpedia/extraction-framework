@@ -1,0 +1,40 @@
+@prefix rr:     <http://www.w3.org/ns/r2rml#>.
+@prefix rml:    <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql:     <http://semweb.mmlab.be/ns/ql#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix dbo:    <http://dbpedia.org/ontology/>.
+@prefix foaf:   <http://xmlns.com/foaf/0.1/>.
+
+## end of init statement
+
+## class statement
+<http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}> a rr:TriplesMap ;
+    rml:logicalSource <http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}/Source/{MAP-TO-CLASS}> ;
+    rr:subjectMap <http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}/Class/{MAP-TO-CLASS}> .
+
+<http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}/Source/{MAP-TO-CLASS}> a rml:LogicalSource ;
+    rml:source <{PAGE-URI}>;
+    rml:iterator "Infobox";
+    rml:referenceFormulation ql:wikitext.
+
+<http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}/Class/{MAP-TO-CLASS}> a rr:SubjectMap ;
+    rr:constant "http://dbpedia.org/resource/{TITLE}";
+    #check: is it dbpprop?
+    rr:class <{CLASS-URI}> ;
+    rr:termType rr:IRI .
+
+## end of class statement
+
+
+## simple predicateObject mapping => for loop for all property mappings
+
+## template mapping {TEMPLATE-PROPERTY} -> {ONTOLOGY-PROPERTY}
+<http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}/tempProp/{TEMPLATE-PROPERTY}/dboProp/{ONTOLOGY-PROPERTY}> .
+<http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}/tempProp/{TEMPLATE-PROPERTY}/dboProp/{ONTOLOGY-PROPERTY}> a rr:PredicateObjectMap ;
+    rr:predicate <{ONTOLOGY-PROPERTY}>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}/tempProp/{TEMPLATE-PROPERTY}/dboProp/{ONTOLOGY-PROPERTY}/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/{LANG}/{TITLE}/tempProp/{TEMPLATE-PROPERTY}/dboProp/{ONTOLOGY-PROPERTY}/objectMap> a rr:ObjectMap ;
+    rml:reference "{TEMPLATE-PROPERTY}".
+
+## end of simple predicateObject mapping
