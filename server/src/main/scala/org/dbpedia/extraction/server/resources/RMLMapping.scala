@@ -91,9 +91,9 @@ class RMLMapping(page: PageNode, lang: Language, mappings: org.dbpedia.extractio
 
   private def replaceParams(in: String): String =
   {
-    var out = in.replaceAllLiterally("{TITLE}", page.title.encoded.toString())
-    out = out.replaceAllLiterally("{PAGE-URI}", page.sourceUri)
-    out = out.replaceAllLiterally("{LANG}", lang.wikiCode)
+    var out = in.replaceAllLiterally("{TITLE}", page.title.encoded.toString().trim)
+    out = out.replaceAllLiterally("{PAGE-URI}", page.sourceUri.trim)
+    out = out.replaceAllLiterally("{LANG}", lang.wikiCode.trim)
     val mapToClass = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping].mapToClass.name
 
     if(mapToClass != null) {
@@ -102,10 +102,10 @@ class RMLMapping(page: PageNode, lang: Language, mappings: org.dbpedia.extractio
         case _: Throwable => null
       }
       if(dboClass != null)
-        out = out.replaceAllLiterally("{CLASS-URI}", dboClass.uri)
+        out = out.replaceAllLiterally("{CLASS-URI}", dboClass.uri.trim)
       else
         throw new Exception("class " + mapToClass + " could not be resolved")
-      out = out.replaceAllLiterally("{MAP-TO-CLASS}", mapToClass.replace(":", "%3A"))
+      out = out.replaceAllLiterally("{MAP-TO-CLASS}", mapToClass.replace(":", "%3A")).trim
     }
 
     out = "".padTo(indent, ' ') + out
@@ -120,10 +120,10 @@ class RMLMapping(page: PageNode, lang: Language, mappings: org.dbpedia.extractio
 
   private def replaceSimpleProperty(in: String, templateProperty: String, ontologyProperty: String): String =
   {
-    var out = in.replaceAllLiterally("\"{TEMPLATE-PROPERTY}\"", "\"" + templateProperty.replaceAllLiterally("%20", " ") + "\"")
-    out = out.replaceAllLiterally("{TEMPLATE-PROPERTY}", templateProperty)
+    var out = in.replaceAllLiterally("\"{TEMPLATE-PROPERTY}\"", "\"" + templateProperty.replaceAllLiterally("%20", " ").trim + "\"")
+    out = out.replaceAllLiterally("{TEMPLATE-PROPERTY}", templateProperty.trim)
     try {
-      out.replaceAllLiterally("{ONTOLOGY-PROPERTY}", Server.instance.extractor.ontology().properties(ontologyProperty).uri)
+      out.replaceAllLiterally("{ONTOLOGY-PROPERTY}", Server.instance.extractor.ontology().properties(ontologyProperty).uri.trim)
     }
     catch {
       case _: Throwable => ""
