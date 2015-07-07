@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.live.statistics;
 
 import org.dbpedia.extraction.live.util.DateUtil;
+
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
@@ -19,6 +21,10 @@ public class StatisticsData {
     private static long stats1h = 0;
     private static long stats1d = 0;
     private static long statsAll = 0;
+
+    private static final long MINUPDATEINTERVAL = 1000; //in milliseconds
+    private static long lastUpdate;
+    private static StatisticsResult result;
 
     // keep a list with triples and timestamps
     private static ConcurrentLinkedDeque<TripleItem> statisticsTriplesQueue = new ConcurrentLinkedDeque<TripleItem>();
@@ -67,8 +73,12 @@ public class StatisticsData {
     }
 
     public static synchronized String generateStatistics(int noOfDetailedIntances) {
-
         long now = System.currentTimeMillis();
+
+        // reuse results to improve performance
+        if(now - lastUpdate < MINUPDATEINTERVAL){
+            return result.toString();
+        }
 
         // remove old statistics
         while (!statisticsTimestampQueue.isEmpty()) {
@@ -84,32 +94,41 @@ public class StatisticsData {
         }*/
 
         // update stats variables
-        stats1m = 0;
-        stats5m = 0;
-        stats1h = 0;
-        stats1d = 0;
+        int instance1m = 0;
+        int instance5m = 0;
+        int instance1h = 0;
+        int instance1d = 0;
+
+        int previoushour = 0;
+
         Iterator<Long> timeIter = statisticsTimestampQueue.iterator();
         while (timeIter.hasNext()) {
-
-            long d = now - (long) timeIter.next();
+            long timestamp = (long) timeIter.next();
+            long d = now - timestamp;
 
             if (d < DateUtil.getDuration1HourMillis()) {
-                stats1h++;
+                instance1h++;
                 if (d < 5*DateUtil.getDuration1MinMillis()) {
-                    stats5m++;
+                    instance5m++;
                     if (d < DateUtil.getDuration1MinMillis()) {
-                        stats1m++;
+                        instance1m++;
                     }
                 }
             } else {
-
-                break;
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(timestamp);
+                int hour = calendar.get(Calendar.HOUR);
+                System.out.println("Hour: " + hour);
+                //break;
             }
         }
-        stats1d = statisticsTimestampQueue.size();
+        instance1d = statisticsTimestampQueue.size();
+
+        result = new StatisticsResult(instance1m, instance5m, instance1h, instance1d, statsAll);
+        return result.toString();
 
         // generate json contents
-        StringBuffer sb = new StringBuffer("");
+        /*StringBuffer sb = new StringBuffer("");
 
         sb.append("{");
         sb.append("\"upd1m\": \"" + stats1m + "\",\n");
@@ -118,7 +137,7 @@ public class StatisticsData {
         sb.append("\"upd1d\": \"" + stats1d + "\",\n");
         sb.append("\"updat\": \"" + statsAll + stats1d + "\",\n");
         sb.append("\"timestamp\": \"" + System.currentTimeMillis() + "\",\n");
-        sb.append("\"latest\": [");
+        sb.append("\"latest\": [");*/
 
 
         /*Iterator<StatisticsItem> detIter = statisticsDetailedQueue.iterator();
@@ -136,7 +155,7 @@ public class StatisticsData {
         }
         sb.append("]}");*/
 
-        return sb.toString();
+        //return sb.toString();
     }
 }
 

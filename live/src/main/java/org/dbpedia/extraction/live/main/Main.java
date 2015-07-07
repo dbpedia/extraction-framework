@@ -12,6 +12,7 @@ import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.Publisher;
+import org.dbpedia.extraction.live.statistics.Statistics;
 import org.dbpedia.extraction.live.storage.JDBCUtil;
 import org.dbpedia.extraction.live.storage.MongoUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
@@ -36,7 +37,7 @@ public class Main {
 
     // TODO make these non-static
 
-    //private volatile static Statistics statistics = null;
+    private volatile static Statistics statistics = null;
 
     private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
@@ -128,7 +129,7 @@ public class Main {
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
 
             // Statistics
-            //if (statistics != null) statistics.stopStatistics();
+            if (statistics != null) statistics.stopStatistics();
 
             // Publisher
             publisher.flush();
@@ -160,6 +161,9 @@ public class Main {
 
         initLive();
         startLive();
+
+        statistics = new Statistics("stats.txt", 100000, 7000, 50000);
+        statistics.startStatistics();
 
         new AdminInterface().start();
     }
