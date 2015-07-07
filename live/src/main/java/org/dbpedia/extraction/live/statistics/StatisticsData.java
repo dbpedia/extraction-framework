@@ -20,8 +20,8 @@ public class StatisticsData {
     private static long stats1d = 0;
     private static long statsAll = 0;
 
-    // keep a list with a detailed latetest page changes
-    private static ConcurrentLinkedDeque<StatisticsItem> statisticsDetailedQueue = new ConcurrentLinkedDeque<StatisticsItem>();
+    // keep a list with triples and timestamps
+    private static ConcurrentLinkedDeque<TripleItem> statisticsTriplesQueue = new ConcurrentLinkedDeque<TripleItem>();
 
     // keep a list with just timestamps to keep track of page change number
     private static ConcurrentLinkedDeque<Long> statisticsTimestampQueue = new ConcurrentLinkedDeque<Long>();
@@ -57,9 +57,9 @@ public class StatisticsData {
         statsAll = value;
     }
 
-    public static void addItem(String pageName, String pageDBpediaURI, String pageWikipediaURI, int pageID, long pageTimestamp) {
+    public static void addItem(int numTriples, long pageTimestamp) {
         try {
-            statisticsDetailedQueue.addFirst(new StatisticsItem(pageName, pageDBpediaURI, pageWikipediaURI, pageID, pageTimestamp));
+            statisticsTriplesQueue.addFirst(new TripleItem(numTriples, pageTimestamp));
             statisticsTimestampQueue.addFirst(pageTimestamp);
         } catch (NullPointerException e) {
             // TODO take furter action? not important...
@@ -79,9 +79,9 @@ public class StatisticsData {
                 break;
         }
 
-        while (statisticsDetailedQueue.size() > noOfDetailedIntances) {
+        /*while (statisticsDetailedQueue.size() > noOfDetailedIntances) {
             statisticsDetailedQueue.pollLast();
-        }
+        }*/
 
         // update stats variables
         stats1m = 0;
@@ -121,7 +121,7 @@ public class StatisticsData {
         sb.append("\"latest\": [");
 
 
-        Iterator<StatisticsItem> detIter = statisticsDetailedQueue.iterator();
+        /*Iterator<StatisticsItem> detIter = statisticsDetailedQueue.iterator();
         while (detIter.hasNext()) {
             StatisticsItem item = detIter.next();
             sb.append("\n{");
@@ -134,7 +134,7 @@ public class StatisticsData {
             if (detIter.hasNext())
                 sb.append(",");
         }
-        sb.append("]}");
+        sb.append("]}");*/
 
         return sb.toString();
     }

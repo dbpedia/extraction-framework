@@ -7,7 +7,7 @@ public class TripleItem {
     private int numOfTriples;
     private long timestamp;
 
-    public TripleItem(int num, int time){
+    public TripleItem(int num, long time){
         numOfTriples = num;
         timestamp = time;
     }
