@@ -49,7 +49,7 @@ public class Statistics {
         timer.schedule(new TimerTask() {
             public void run() {
                 try {
-                    logger.info(StatisticsData.generateStatistics(statisticsDetailedInstances));
+                    logger.info(StatisticsData.generateStatistics());
                 } catch (Exception exp) {
                     logger.error("DBpedia-live Statistics: I/O Error: " + exp.getMessage(), exp);
                 }

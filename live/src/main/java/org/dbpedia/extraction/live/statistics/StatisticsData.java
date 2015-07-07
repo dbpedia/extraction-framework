@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.live.statistics;
 
+import org.apache.commons.lang3.mutable.MutableLong;
 import org.dbpedia.extraction.live.util.DateUtil;
 
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.Stack;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
@@ -15,52 +17,25 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  */
 
 public class StatisticsData {
-    // stats* variables hold the number of updated pages
-    private static long stats1m = 0;
-    private static long stats5m = 0;
-    private static long stats1h = 0;
-    private static long stats1d = 0;
-    private static long statsAll = 0;
-
     private static final long MINUPDATEINTERVAL = 1000; //in milliseconds
+    private static long entityAll = 0;
     private static long lastUpdate;
     private static StatisticsResult result;
+    private static long startTime = 0;
+
+    /*Store the results of each hour of runtime
+     *This method of storing the hour results may not work as intended if the update interval is large.
+     *It's best to keep it around a few seconds
+     */
+    private static Stack<MutableLong> entityHours = new Stack<>(); //Max elements: 24 (for the hours in a day)
+    private static long newValueTimestamp = 0; //saves the timestamp of the last insertion in the stack
 
     // keep a list with triples and timestamps
     private static ConcurrentLinkedDeque<TripleItem> statisticsTriplesQueue = new ConcurrentLinkedDeque<TripleItem>();
-
     // keep a list with just timestamps to keep track of page change number
     private static ConcurrentLinkedDeque<Long> statisticsTimestampQueue = new ConcurrentLinkedDeque<Long>();
 
     protected StatisticsData() {
-    }
-
-    public static synchronized void setAllStats(long s1m, long s5m, long s1h, long s1d, long sall) {
-        stats1m = s1m;
-        stats5m = s5m;
-        stats1h = s1h;
-        stats1d = s1d;
-        statsAll = sall;
-    }
-
-    public static synchronized void setStats1m(long value) {
-        stats1m = value;
-    }
-
-    public static synchronized void setStats5m(long value) {
-        stats5m = value;
-    }
-
-    public static synchronized void setStats1h(long value) {
-        stats1h = value;
-    }
-
-    public static synchronized void setStats1d(long value) {
-        stats1d = value;
-    }
-
-    public static synchronized void setStatsAll(long value) {
-        statsAll = value;
     }
 
     public static void addItem(int numTriples, long pageTimestamp) {
@@ -72,34 +47,21 @@ public class StatisticsData {
         }
     }
 
-    public static synchronized String generateStatistics(int noOfDetailedIntances) {
+    public static synchronized String generateStatistics() {
         long now = System.currentTimeMillis();
 
-        // reuse results to improve performance
-        if(now - lastUpdate < MINUPDATEINTERVAL){
-            return result.toString();
+        //Check if hour needs changing
+        if(now - newValueTimestamp > DateUtil.getDuration1HourMillis()){
+            entityHours.push(new MutableLong(0)); //add item for new hour
+            newValueTimestamp = now;
+            if(entityHours.size() > 24) {
+                entityAll += entityHours.get(0).longValue();
+                entityHours.remove(0); //remove the 25th hour because we only want the last 24
+            }
         }
-
-        // remove old statistics
-        while (!statisticsTimestampQueue.isEmpty()) {
-            if (now - statisticsTimestampQueue.peekLast() > DateUtil.getDuration1DayMillis()) {
-                statisticsTimestampQueue.pollLast(); // remove from list if older than a day
-                statsAll++;
-            } else
-                break;
-        }
-
-        /*while (statisticsDetailedQueue.size() > noOfDetailedIntances) {
-            statisticsDetailedQueue.pollLast();
-        }*/
 
         // update stats variables
-        int instance1m = 0;
-        int instance5m = 0;
-        int instance1h = 0;
-        int instance1d = 0;
-
-        int previoushour = 0;
+        int entity1m = 0, entity5m = 0, entity1h = 0, entity1d = 0;
 
         Iterator<Long> timeIter = statisticsTimestampQueue.iterator();
         while (timeIter.hasNext()) {
@@ -107,24 +69,27 @@ public class StatisticsData {
             long d = now - timestamp;
 
             if (d < DateUtil.getDuration1HourMillis()) {
-                instance1h++;
+                entity1h++;
                 if (d < 5*DateUtil.getDuration1MinMillis()) {
-                    instance5m++;
+                    entity5m++;
                     if (d < DateUtil.getDuration1MinMillis()) {
-                        instance1m++;
+                        entity1m++;
                     }
                 }
-            } else {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(timestamp);
-                int hour = calendar.get(Calendar.HOUR);
-                System.out.println("Hour: " + hour);
-                //break;
+            }else {
+                entityHours.peek().increment();
+                timeIter.remove(); // remove from list if older than an hour
             }
         }
-        instance1d = statisticsTimestampQueue.size();
+        int ordem = 1;
+        for(MutableLong val: entityHours){
+            entity1d += val.longValue();
+            System.out.println("Ordem: " + ordem + "; Valor: " + val.longValue());
+            ordem++;
+        }
+        entity1d += entity1h;
 
-        result = new StatisticsResult(instance1m, instance5m, instance1h, instance1d, statsAll);
+        result = new StatisticsResult(entity1m, entity5m, entity1h, entity1d, entityAll + entity1d);
         return result.toString();
 
         // generate json contents
