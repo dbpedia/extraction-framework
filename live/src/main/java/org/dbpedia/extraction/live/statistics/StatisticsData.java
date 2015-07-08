@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 public class StatisticsData {
     private static final long MINUPDATEINTERVAL = 1000; //in milliseconds
     private static long entityAll = 0;
+    private static long triplesAll = 0;
     private static long lastUpdate;
     private static StatisticsResult result;
     private static long startTime = 0;
@@ -28,6 +29,7 @@ public class StatisticsData {
      *It's best to keep it around a few seconds
      */
     private static Stack<MutableLong> entityHours = new Stack<>(); //Max elements: 24 (for the hours in a day)
+    private static Stack<MutableLong> triplesHours = new Stack<>();
     private static long newValueTimestamp = 0; //saves the timestamp of the last insertion in the stack
 
     // keep a list with triples and timestamps
@@ -53,14 +55,17 @@ public class StatisticsData {
         //Check if hour needs changing
         if(now - newValueTimestamp > DateUtil.getDuration1HourMillis()){
             entityHours.push(new MutableLong(0)); //add item for new hour
+            triplesHours.push(new MutableLong(0));
             newValueTimestamp = now;
             if(entityHours.size() > 24) {
                 entityAll += entityHours.get(0).longValue();
+                triplesAll += triplesHours.get(0).longValue();
                 entityHours.remove(0); //remove the 25th hour because we only want the last 24
+                triplesHours.remove(0);
             }
         }
 
-        // update stats variables
+        // compute entity variables
         int entity1m = 0, entity5m = 0, entity1h = 0, entity1d = 0;
 
         Iterator<Long> timeIter = statisticsTimestampQueue.iterator();
@@ -81,81 +86,39 @@ public class StatisticsData {
                 timeIter.remove(); // remove from list if older than an hour
             }
         }
-        int ordem = 1;
-        for(MutableLong val: entityHours){
+        for(MutableLong val: entityHours)
             entity1d += val.longValue();
-            System.out.println("Ordem: " + ordem + "; Valor: " + val.longValue());
-            ordem++;
-        }
         entity1d += entity1h;
 
-        result = new StatisticsResult(entity1m, entity5m, entity1h, entity1d, entityAll + entity1d);
-        return result.toString();
+        // compute triples variables
+        int triples1m = 0, triples5m = 0, triples1h = 0, triples1d = 0;
 
-        // generate json contents
-        /*StringBuffer sb = new StringBuffer("");
+        Iterator<TripleItem> triplesIter = statisticsTriplesQueue.iterator();
+        while (triplesIter.hasNext()) {
+            TripleItem item = (TripleItem) triplesIter.next();
+            long timestamp = item.getTimestamp();
+            int val = item.getNumOfTriples();
+            long d = now - timestamp;
 
-        sb.append("{");
-        sb.append("\"upd1m\": \"" + stats1m + "\",\n");
-        sb.append("\"upd5m\": \"" + stats5m + "\",\n");
-        sb.append("\"upd1h\": \"" + stats1h + "\",\n");
-        sb.append("\"upd1d\": \"" + stats1d + "\",\n");
-        sb.append("\"updat\": \"" + statsAll + stats1d + "\",\n");
-        sb.append("\"timestamp\": \"" + System.currentTimeMillis() + "\",\n");
-        sb.append("\"latest\": [");*/
-
-
-        /*Iterator<StatisticsItem> detIter = statisticsDetailedQueue.iterator();
-        while (detIter.hasNext()) {
-            StatisticsItem item = detIter.next();
-            sb.append("\n{");
-            sb.append("\"title\":\"" + item.getPageTitle() + "\",");
-            sb.append("\"dbpediaURI\": \"" + item.getDBpediaURI() + "\",");
-            sb.append("\"wikipediaURI\": \"" + item.getWikipediaURI() + "\",");
-            sb.append("\"timestamp\": \"" + item.getTimestamp() + "\",");
-            sb.append("\"delta\": \"" + item.getHasDelta() + "\"");
-            sb.append("}");
-            if (detIter.hasNext())
-                sb.append(",");
+            if (d < DateUtil.getDuration1HourMillis()) {
+                triples1h+=val;
+                if (d < 5*DateUtil.getDuration1MinMillis()) {
+                    triples5m+=val;
+                    if (d < DateUtil.getDuration1MinMillis()) {
+                        triples1m+=val;
+                    }
+                }
+            }else {
+                triplesHours.peek().add(val);
+                triplesIter.remove(); // remove from list if older than an hour
+            }
         }
-        sb.append("]}");*/
+        for(MutableLong val: entityHours)
+            triples1d += val.longValue();
+        triples1d += triples1h;
 
-        //return sb.toString();
+        result = new StatisticsResult(entity1m, entity5m, entity1h, entity1d, entityAll + entity1d);
+        result.setTriples(triples1m, triples5m, triples1h, triples1d, triplesAll + triples1d);
+        return result.toString();
     }
 }
-
-/*
-
- {
-     "upd-1m": "99",
-     "upd-5m": "478",
-     "upd-1h": "3452",
-     "upd-1d": "3452",
-     "upd-at": "3452",
-     "latest": [
-         {
-             "title": "Yuko Matsumiya",
-             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "timestamp": "1350637099091",
-             "delta": "false"
-         },
-         {
-             "title": "Yuko Matsumiya",
-             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "timestamp": "1350637099091",
-             "delta": "false"
-         },
-         {
-             "title": "Yuko Matsumiya",
-             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "timestamp": "1350637099091",
-             "delta": "false"
-         }
-     ]
- }
-
-
-* */
