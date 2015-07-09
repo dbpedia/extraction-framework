@@ -18,19 +18,13 @@ import java.util.TimerTask;
  */
 public class Statistics {
     private static Logger logger = LoggerFactory.getLogger(Statistics.class);
-    // File to read/write statistics
-    private final String statisticsFileName;
-    // Number of detailed statistics instances to keep
-    private final int statisticsDetailedInstances;
     // Update interval in miliseconds
     private final long statisticsUpdateInterval;
     // Initial delay on application startup
     private final long statisticsInitialDelay;
     private Timer timer = new Timer("DBpedia-Live Statistics Timer");
 
-    public Statistics(String fileName, int detailedInstances, long updateInterval, long initialDelay) {
-        this.statisticsFileName = fileName;
-        this.statisticsDetailedInstances = detailedInstances;
+    public Statistics(long updateInterval, long initialDelay) {
         this.statisticsUpdateInterval = updateInterval;
         this.statisticsInitialDelay = initialDelay;
     }
@@ -49,7 +43,7 @@ public class Statistics {
         timer.schedule(new TimerTask() {
             public void run() {
                 try {
-                    logger.info(StatisticsData.generateStatistics());
+                    StatisticsData.generateStatistics();
                 } catch (Exception exp) {
                     logger.error("DBpedia-live Statistics: I/O Error: " + exp.getMessage(), exp);
                 }

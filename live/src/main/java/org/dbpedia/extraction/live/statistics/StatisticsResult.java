@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.live.statistics;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Andre on 07/07/2015.
  */
@@ -16,6 +18,9 @@ public class StatisticsResult {
     private long triples1d;
     private long triplesAll;
 
+    private double averageTriples;
+    private String timePassed;
+
     public StatisticsResult(){}
 
     public StatisticsResult(int m1, int m5, int h1, long d1, long all){
@@ -26,19 +31,22 @@ public class StatisticsResult {
         entityAll = all;
     }
 
+    /*Returns a JSON formatted string*/
     @Override
     public String toString() {
-        return "StatisticsResult{" +
-                "\nentity1m=" + entity1m +
-                ", \nentity5m=" + entity5m +
-                ", \nentity1h=" + entity1h +
-                ", \nentity1d=" + entity1d +
-                ", \nentityAll=" + entityAll +
-                ", \ntriples1m=" + triples1m +
-                ", \ntriples5m=" + triples5m +
-                ", \ntriples1h=" + triples1h +
-                ", \ntriples1d=" + triples1d +
-                ", \ntriplesAll=" + triplesAll +
+        return "{" +
+                "\"entity1m\":" + entity1m +
+                ",\"entity5m\":" + entity5m +
+                ",\"entity1h\":" + entity1h +
+                ",\"entity1d\":" + entity1d +
+                ",\"entityAll\":" + entityAll +
+                ",\"triples1m\":" + triples1m +
+                ",\"triples5m\":" + triples5m +
+                ",\"triples1h\":" + triples1h +
+                ",\"triples1d\":" + triples1d +
+                ",\"triplesAll\":" + triplesAll +
+                ",\"avrgTriples\":\"" + new DecimalFormat("#.##").format(averageTriples) +"\"" +
+                ",\"timePassed\":\"" + timePassed +"\"" +
                 '}';
     }
 
@@ -48,6 +56,26 @@ public class StatisticsResult {
         triples1h = th1;
         triples1d = td1;
         triplesAll = tAll;
+    }
+
+    public void finish(long timestamp){
+        averageTriples = triplesAll / (entityAll * 1.0);
+        long millis = System.currentTimeMillis() - timestamp;
+        long second = (millis / 1000) % 60;
+        long minute = (millis / (1000 * 60)) % 60;
+        long hour = (millis / (1000 * 60 * 60)) % 24;
+        long day = millis / (1000 * 60 * 60 * 24);
+
+        String format = "";
+        if(day < 10) format += "%2d days ";
+        else format += "%02d days ";
+        if(hour < 10) format += "%2d hours ";
+        else format += "%02d hours ";
+        if(minute < 10) format += "%2d mins ";
+        else format += "%02d mins ";
+        if(second < 10) format += "%2d secs";
+        else format += "%02d secs";
+        timePassed = String.format(format, day, hour, minute, second);
     }
 
     public int getEntity1m() {

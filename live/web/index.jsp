@@ -32,12 +32,12 @@
                                 <a href="#" class="btn btn-success">Start</a>
                                 <a href="#" class="btn btn-danger">Stop</a>
                             <% } %>
-                          <a href="#" class="btn btn-default">Update</a>
+                          <a id="bt_update" href="#" class="btn btn-default">Update</a>
                         </div>
                     </div>
                     <div class="col-md-6">
                         Update Interval: <b id="update_interval">0</b> seconds
-                        <input id="update_input" class="form-control ng-pristine ng-valid ng-scope" type="range" min="0" max="60" step="1" oninput="update_label()">
+                        <input id="update_input" class="form-control ng-pristine ng-valid ng-scope" type="range" value="10" min="1" max="60" step="1" oninput="update_label()">
                     </div>   
                 </div>
             </div>
@@ -92,10 +92,6 @@
                                   <td id="stat_1"></td>
                                 </tr>
                                 <tr>
-                                  <td>Entities updated since start</td>
-                                  <td id="stat_2"></td>
-                                </tr>
-                                <tr>
                                   <td>Entities updated in the last minute</td>
                                   <td id="stat_3"></td>
                                 </tr>
@@ -112,36 +108,36 @@
                                   <td id="stat_6"></td>
                                 </tr>
                                 <tr>
+                                  <td>Entities updated since start</td>
+                                  <td id="stat_2"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced in the last minute</td>
+                                  <td id="stat_8"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced in the last 5 minutes</td>
+                                  <td id="stat_9"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced in the last hour</td>
+                                  <td id="stat_10"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced in the last day</td>
+                                  <td id="stat_11"></td>
+                                </tr>
+                                <tr>
                                   <td>Triples produced since start</td>
                                   <td id="stat_7"></td>
                                 </tr>
                                 <tr>
-                                  <td>Triples produced since start</td>
-                                  <td id="stat_8"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced in the last minute</td>
-                                  <td id="stat_9"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced in the last 5 minutes</td>
-                                  <td id="stat_10"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced in the last hour</td>
-                                  <td id="stat_11"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced in the last day</td>
+                                  <td>Average triples per extraction</td>
                                   <td id="stat_12"></td>
                                 </tr>
                                 <tr>
-                                  <td>Average triples per extractions</td>
-                                  <td id="stat_13"></td>
-                                </tr>
-                                <tr>
                                   <td>Items in queue</td>
-                                  <td id="stat_14"></td>
+                                  <td id="stat_13"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -156,22 +152,44 @@
         <p style="text-align: center">&copy Copyright 2015 by DBpedia. All Rights Reserved.</p>
     </footer>
     <script type="text/javascript">
+        var timer;
         $(document).ready(function() {
-            $('#call').click(function (){
-                $.ajax({
+            update_label();
+            update();
+            $('#bt_update').click(function (){
+                update();
+            });
+        });
+
+        function update(){
+            $.ajax({
                     type: "get",
-                    url: "hello", //this is my servlet
+                    url: "stats",
                     data: "",
                     success: function(msg){
-                        console.log(msg);
-                    }
+                        stats = JSON.parse(msg);
+                        if(stats != null){
+                            $( "#stat_1" ).html(stats.timePassed);
+                            $( "#stat_2" ).html(stats.entityAll);
+                            $( "#stat_3" ).html(stats.entity1m);
+                            $( "#stat_4" ).html(stats.entity5m);
+                            $( "#stat_5" ).html(stats.entity1h);
+                            $( "#stat_6" ).html(stats.entity1d);
+                            $( "#stat_7" ).html(stats.triplesAll);
+                            $( "#stat_8" ).html(stats.triples1m);
+                            $( "#stat_9" ).html(stats.triples5m);
+                            $( "#stat_10" ).html(stats.triples1h);
+                            $( "#stat_11" ).html(stats.triples1d);
+                            $( "#stat_12" ).html(stats.avrgTriples);
+                        }
+                    }, 
                 });
-            });
-            update_label();
-        });
+        }
 
         function update_label(){
             $("#update_interval").html($("#update_input").val());
+            clearInterval(timer);
+            timer = setInterval(update, $("#update_input").val() * 1000);
         }
 
     </script>

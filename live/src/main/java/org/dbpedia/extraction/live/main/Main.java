@@ -162,7 +162,7 @@ public class Main {
         initLive();
         startLive();
 
-        statistics = new Statistics("stats.txt", 100000, 7000, 50000);
+        statistics = new Statistics(1000, 60000);
         statistics.startStatistics();
 
         new AdminInterface().start();

@@ -3,7 +3,6 @@ package org.dbpedia.extraction.live.statistics;
 import org.apache.commons.lang3.mutable.MutableLong;
 import org.dbpedia.extraction.live.util.DateUtil;
 
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -17,12 +16,10 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  */
 
 public class StatisticsData {
-    private static final long MINUPDATEINTERVAL = 1000; //in milliseconds
     private static long entityAll = 0;
     private static long triplesAll = 0;
-    private static long lastUpdate;
-    private static StatisticsResult result;
-    private static long startTime = 0;
+    private static StatisticsResult result = null;
+    private static final long startTime = System.currentTimeMillis();
 
     /*Store the results of each hour of runtime
      *This method of storing the hour results may not work as intended if the update interval is large.
@@ -34,8 +31,6 @@ public class StatisticsData {
 
     // keep a list with triples and timestamps
     private static ConcurrentLinkedDeque<TripleItem> statisticsTriplesQueue = new ConcurrentLinkedDeque<TripleItem>();
-    // keep a list with just timestamps to keep track of page change number
-    private static ConcurrentLinkedDeque<Long> statisticsTimestampQueue = new ConcurrentLinkedDeque<Long>();
 
     protected StatisticsData() {
     }
@@ -43,13 +38,16 @@ public class StatisticsData {
     public static void addItem(int numTriples, long pageTimestamp) {
         try {
             statisticsTriplesQueue.addFirst(new TripleItem(numTriples, pageTimestamp));
-            statisticsTimestampQueue.addFirst(pageTimestamp);
         } catch (NullPointerException e) {
             // TODO take furter action? not important...
         }
     }
 
-    public static synchronized String generateStatistics() {
+    public static StatisticsResult getResults(){
+        return result;
+    }
+
+    public static synchronized void generateStatistics() {
         long now = System.currentTimeMillis();
 
         //Check if hour needs changing
@@ -67,29 +65,6 @@ public class StatisticsData {
 
         // compute entity variables
         int entity1m = 0, entity5m = 0, entity1h = 0, entity1d = 0;
-
-        Iterator<Long> timeIter = statisticsTimestampQueue.iterator();
-        while (timeIter.hasNext()) {
-            long timestamp = (long) timeIter.next();
-            long d = now - timestamp;
-
-            if (d < DateUtil.getDuration1HourMillis()) {
-                entity1h++;
-                if (d < 5*DateUtil.getDuration1MinMillis()) {
-                    entity5m++;
-                    if (d < DateUtil.getDuration1MinMillis()) {
-                        entity1m++;
-                    }
-                }
-            }else {
-                entityHours.peek().increment();
-                timeIter.remove(); // remove from list if older than an hour
-            }
-        }
-        for(MutableLong val: entityHours)
-            entity1d += val.longValue();
-        entity1d += entity1h;
-
         // compute triples variables
         int triples1m = 0, triples5m = 0, triples1h = 0, triples1d = 0;
 
@@ -102,23 +77,31 @@ public class StatisticsData {
 
             if (d < DateUtil.getDuration1HourMillis()) {
                 triples1h+=val;
+                entity1h++;
                 if (d < 5*DateUtil.getDuration1MinMillis()) {
                     triples5m+=val;
+                    entity5m++;
                     if (d < DateUtil.getDuration1MinMillis()) {
                         triples1m+=val;
+                        entity1m++;
                     }
                 }
             }else {
                 triplesHours.peek().add(val);
+                entityHours.peek().increment();
                 triplesIter.remove(); // remove from list if older than an hour
             }
         }
         for(MutableLong val: entityHours)
+            entity1d += val.longValue();
+        for(MutableLong val: triplesHours)
             triples1d += val.longValue();
+
+        entity1d += entity1h;
         triples1d += triples1h;
 
         result = new StatisticsResult(entity1m, entity5m, entity1h, entity1d, entityAll + entity1d);
         result.setTriples(triples1m, triples5m, triples1h, triples1d, triplesAll + triples1d);
-        return result.toString();
+        result.finish(startTime);
     }
 }

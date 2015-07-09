@@ -12,15 +12,13 @@ import org.eclipse.jetty.webapp.WebAppContext;
 public class AdminInterface {
 
     public void start() throws InterruptedException {
-
         Server server = new Server(8080);
 
         String rootPath = AdminInterface.class.getClassLoader().getResource(".").toString();
         System.out.println("PATH: " + rootPath);
         WebAppContext webapp = new WebAppContext(rootPath + "../../web", "");
-        webapp.addServlet(new ServletHolder(new TestServlet("Hello World from TestServlet!")), "/hello");
+        webapp.addServlet(new ServletHolder(new StatsServlet()), "/stats");
         server.setHandler(webapp);
-
 
         try {
             server.start();
@@ -28,7 +26,5 @@ public class AdminInterface {
             e.printStackTrace();
         }
         server.join();
-
     }
-
 }
