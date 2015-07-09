@@ -94,6 +94,12 @@ grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' 
 # ontology: count specialized datatype properties
 grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+">' ontology.owl
 
+# ontology: count owlequivalentClass
+sed 's|<|\n<|g' ontology.owl | grep -c -E '<owl:equivalentClass'
+
+# ontology: count owlequivalentProperty
+sed 's|<|\n<|g' ontology.owl | grep -c -E '<owl:equivalentProperty'
+
 # remove all lines in file bad.nt from file all.nt, write result to clean.nt
 awk '{ if (f==1) { r[$0] } else if (! ($0 in r)) { print $0 } }' f=1 bad.nt f=2 all.nt >clean.nt
 # remove all triples in file bad.nt from quad file all.nq
