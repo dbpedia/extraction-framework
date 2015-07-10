@@ -25,8 +25,9 @@ public class StatisticsData {
      *This method of storing the hour results may not work as intended if the update interval is large.
      *It's best to keep it around a few seconds
      */
-    private static Stack<MutableLong> entityHours = new Stack<>(); //Max elements: 24 (for the hours in a day)
+    private static Stack<MutableLong> entityHours = new Stack<>(); //Max elements: 23 (for the hours in a day)
     private static Stack<MutableLong> triplesHours = new Stack<>();
+    private static Stack<String> extractedTitles = new Stack<>(); // Max elements: 17 (the amount shown in the page)
     private static long newValueTimestamp = 0; //saves the timestamp of the last insertion in the stack
 
     // keep a list with triples and timestamps
@@ -35,9 +36,12 @@ public class StatisticsData {
     protected StatisticsData() {
     }
 
-    public static void addItem(int numTriples, long pageTimestamp) {
+    public static void addItem(String pageTitle, int numTriples, long pageTimestamp) {
         try {
             statisticsTriplesQueue.addFirst(new TripleItem(numTriples, pageTimestamp));
+            extractedTitles.push(pageTitle);
+            if(extractedTitles.size() > 17)
+                extractedTitles.remove(0);
         } catch (NullPointerException e) {
             // TODO take furter action? not important...
         }
@@ -55,10 +59,10 @@ public class StatisticsData {
             entityHours.push(new MutableLong(0)); //add item for new hour
             triplesHours.push(new MutableLong(0));
             newValueTimestamp = now;
-            if(entityHours.size() > 24) {
+            if(entityHours.size() > 23) {
                 entityAll += entityHours.get(0).longValue();
                 triplesAll += triplesHours.get(0).longValue();
-                entityHours.remove(0); //remove the 25th hour because we only want the last 24
+                entityHours.remove(0); //remove the 24th hour because we only want the last 23
                 triplesHours.remove(0);
             }
         }
@@ -102,6 +106,6 @@ public class StatisticsData {
 
         result = new StatisticsResult(entity1m, entity5m, entity1h, entity1d, entityAll + entity1d);
         result.setTriples(triples1m, triples5m, triples1h, triples1d, triplesAll + triples1d);
-        result.finish(startTime);
+        result.finish(startTime, extractedTitles.toString());
     }
 }

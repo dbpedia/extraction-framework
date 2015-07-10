@@ -45,37 +45,67 @@
             <div style="display: inline-block; width: 1200px; ">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 style="text-align: left">Queued Items</h3>
-                            <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in </li>
-                                <li class="list-group-item"> Morbi leo risus</li>
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in </li>
-                                <li class="list-group-item"> Morbi leo risus</li>
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in </li>
-                                <li class="list-group-item"> Morbi leo risus</li>
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in </li>
-                                <li class="list-group-item"> Morbi leo risus</li>
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in </li>
-                                <li class="list-group-item"> Morbi leo risus</li>
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in </li>
-                            </ul>
-                            <% if (admin) { %>
-                                <h4 style="text-align: left">Add Item to Queue</h4>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">Add</button>
-                                        </span>
-                                    </div>
+                        <div class="tabbable">
+                          	<ul class="nav nav-tabs">
+                            	<li class="active"><a href="#tab1" data-toggle="tab">Queued Items</a></li>
+                            	<li><a href="#tab2" data-toggle="tab">Processed Items</a></li>
+                          	</ul>
+                          	<div class="tab-content">
+                            	<div class="tab-pane active" id="tab1">
+                              		<ul class="list-group">
+	                              		<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in </li>
+										<li class="list-group-item"> Morbi leo risus</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in </li>
+										<li class="list-group-item"> Morbi leo risus</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in </li>
+										<li class="list-group-item"> Morbi leo risus</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in </li>
+										<li class="list-group-item"> Morbi leo risus</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in </li>
+										<li class="list-group-item"> Morbi leo risus</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in </li>
+                              		</ul>
+                            	</div>
+                            	<div class="tab-pane" id="tab2">
+                                  	<ul class="list-group">
+                                  		<li class="list-group-item" id="extr_0">Dapibus ac facilisis in </li>
+										<li class="list-group-item" id="extr_1">Cras justo odio 2</li>
+										<li class="list-group-item" id="extr_2">Dapibus ac facilisis in 2 </li>
+										<li class="list-group-item" id="extr_3"> Morbi leo risus 2</li>
+										<li class="list-group-item" id="extr_4">Cras justo odio 2</li>
+										<li class="list-group-item" id="extr_5">Dapibus ac facilisis in 2 </li>
+										<li class="list-group-item" id="extr_6"> Morbi leo risus</li>
+										<li class="list-group-item" id="extr_7">Cras justo odio</li>
+										<li class="list-group-item" id="extr_8">Dapibus ac facilisis in </li>
+										<li class="list-group-item" id="extr_9"> Morbi leo risus</li>
+										<li class="list-group-item" id="extr_10">Cras justo odio</li>
+										<li class="list-group-item" id="extr_11">Dapibus ac facilisis in </li>
+										<li class="list-group-item" id="extr_12"> Morbi leo risus</li>
+										<li class="list-group-item" id="extr_13">Cras justo odio</li>
+										<li class="list-group-item" id="extr_14">Dapibus ac facilisis in </li>
+										<li class="list-group-item" id="extr_15"> Morbi leo risus</li>
+										<li class="list-group-item" id="extr_16">Cras justo odio</li>
+                                  	</ul>
+                            	</div>
+                          	</div>
+                        </div>
+                        <% if (admin) { %>
+                            <h4 style="text-align: left">Add Item to Queue</h4>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">Add</button>
+                                    </span>
                                 </div>
-                            <% } %>
+                            </div>
+                        <% } %>
                     </div>
                     <div class="col-md-6">
                         <h3 style="text-align: left">Statistics</h3>
@@ -167,6 +197,7 @@
                     url: "stats",
                     data: "",
                     success: function(msg){
+                    	console.log(msg);
                         stats = JSON.parse(msg);
                         if(stats != null){
                             $( "#stat_1" ).html(stats.timePassed);
@@ -181,6 +212,13 @@
                             $( "#stat_10" ).html(stats.triples1h);
                             $( "#stat_11" ).html(stats.triples1d);
                             $( "#stat_12" ).html(stats.avrgTriples);
+
+                            var extracted = stats.extractedTitles.split(', ');
+							for (i = 0; i < 17; i++) { 
+								console.log(id + " - " + extracted[i]);
+								var id = "#extr_" + i; 
+							    $( id ).html(extracted[16-i]);
+							}
                         }
                     }, 
                 });

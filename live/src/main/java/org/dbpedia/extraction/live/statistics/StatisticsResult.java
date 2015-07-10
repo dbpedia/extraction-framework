@@ -20,6 +20,7 @@ public class StatisticsResult {
 
     private double averageTriples;
     private String timePassed;
+    private String extracted = "";
 
     public StatisticsResult(){}
 
@@ -47,6 +48,7 @@ public class StatisticsResult {
                 ",\"triplesAll\":" + triplesAll +
                 ",\"avrgTriples\":\"" + new DecimalFormat("#.##").format(averageTriples) +"\"" +
                 ",\"timePassed\":\"" + timePassed +"\"" +
+                ",\"extractedTitles\":\"" + extracted +"\"" +
                 '}';
     }
 
@@ -58,7 +60,7 @@ public class StatisticsResult {
         triplesAll = tAll;
     }
 
-    public void finish(long timestamp){
+    public void finish(long timestamp, String titles){
         averageTriples = triplesAll / (entityAll * 1.0);
         long millis = System.currentTimeMillis() - timestamp;
         long second = (millis / 1000) % 60;
@@ -76,6 +78,7 @@ public class StatisticsResult {
         if(second < 10) format += "%2d secs";
         else format += "%02d secs";
         timePassed = String.format(format, day, hour, minute, second);
+        extracted = titles.replace("[", "").replace("]", "");
     }
 
     public int getEntity1m() {

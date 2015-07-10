@@ -8,7 +8,7 @@ import scala.collection.Seq
 /**
  * Writes extraction results to statistics
  */
-class StatisticsDestination extends LiveDestination{
+class StatisticsDestination(pageTitle: String) extends LiveDestination{
   private var total = 0
   private var now = System.currentTimeMillis
 
@@ -24,6 +24,6 @@ class StatisticsDestination extends LiveDestination{
   }
 
   override def close = {
-    StatisticsData.addItem(total, now)
+    StatisticsData.addItem(pageTitle, total, now)
   }
 }

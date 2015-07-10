@@ -137,7 +137,7 @@ object LiveExtractionConfigLoader
         destList += new JSONCacheUpdateDestination(liveCache)
         destList += new PublisherDiffDestination(wikiPage.id, liveCache.performCleanUpdate, if (liveCache.cacheObj != null) liveCache.cacheObj.subjects else new java.util.HashSet[String]())
         destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded) // Just to log extraction results
-        destList += new StatisticsDestination()
+        destList += new StatisticsDestination(wikiPage.title.decoded)
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList.toSeq: _*) // holds all main destinations
 
