@@ -107,8 +107,6 @@ public class Main {
 
             publisher = new Publisher("Publisher", 4);
 
-            //statistics.startStatistics();
-
             logger.info("DBpedia-Live components started");
         } catch (Exception exp) {
             logger.error(ExceptionUtil.toString(exp), exp);

@@ -109,68 +109,68 @@
                     </div>
                     <div class="col-md-6">
                         <h3 style="text-align: left">Statistics</h3>
-                        <table class="table table-striped table-hover ">
-                            <thead>
-                                <tr>
-                                <th>Title</th>
-                                <th>Value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                  <td>Time passed since start </td>
-                                  <td id="stat_1"></td>
-                                </tr>
-                                <tr>
-                                  <td>Entities updated in the last minute</td>
-                                  <td id="stat_3"></td>
-                                </tr>
-                                <tr>
-                                  <td>Entities updated in the last 5 minutes</td>
-                                  <td id="stat_4"></td>
-                                </tr>
-                                <tr>
-                                  <td>Entities updated in the last hour</td>
-                                  <td id="stat_5"></td>
-                                </tr>
-                                <tr>
-                                  <td>Entities updated in the last day</td>
-                                  <td id="stat_6"></td>
-                                </tr>
-                                <tr>
-                                  <td>Entities updated since start</td>
-                                  <td id="stat_2"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced in the last minute</td>
-                                  <td id="stat_8"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced in the last 5 minutes</td>
-                                  <td id="stat_9"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced in the last hour</td>
-                                  <td id="stat_10"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced in the last day</td>
-                                  <td id="stat_11"></td>
-                                </tr>
-                                <tr>
-                                  <td>Triples produced since start</td>
-                                  <td id="stat_7"></td>
-                                </tr>
-                                <tr>
-                                  <td>Average triples per extraction</td>
-                                  <td id="stat_12"></td>
-                                </tr>
-                                <tr>
-                                  <td>Items in queue</td>
-                                  <td id="stat_13"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+	                        <table class="table table-striped table-hover">
+	                            <thead>
+	                                <tr>
+		                                <th>Title</th>
+		                                <th>Value</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr>
+	                                  <td>Time passed since start </td>
+	                                  <td id="stat_1"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Entities updated in the last minute</td>
+	                                  <td id="stat_3"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Entities updated in the last 5 minutes</td>
+	                                  <td id="stat_4"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Entities updated in the last hour</td>
+	                                  <td id="stat_5"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Entities updated in the last day</td>
+	                                  <td id="stat_6"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Entities updated since start</td>
+	                                  <td id="stat_2"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Triples produced in the last minute</td>
+	                                  <td id="stat_8"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Triples produced in the last 5 minutes</td>
+	                                  <td id="stat_9"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Triples produced in the last hour</td>
+	                                  <td id="stat_10"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Triples produced in the last day</td>
+	                                  <td id="stat_11"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Triples produced since start</td>
+	                                  <td id="stat_7"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Average triples per extraction</td>
+	                                  <td id="stat_12"></td>
+	                                </tr>
+	                                <tr>
+	                                  <td>Items in queue</td>
+	                                  <td id="stat_13"></td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
                     </div>   
                 </div>
             </div>
@@ -213,11 +213,14 @@
                             $( "#stat_11" ).html(stats.triples1d);
                             $( "#stat_12" ).html(stats.avrgTriples);
 
-                            var extracted = stats.extractedTitles.split(', ');
-							for (i = 0; i < 17; i++) { 
-								console.log(id + " - " + extracted[i]);
-								var id = "#extr_" + i; 
-							    $( id ).html(extracted[16-i]);
+                            var c = 0;
+                            for (var i in stats.extractedTitles) {
+                            	if(c > 17) return; 
+                            	var id = "#extr_" + c; 
+                            	var elem = stats.extractedTitles[i];
+                            	var wiki = "<a target=\"_blank\" href=\"" + elem.wikiURI + "\">Wikipedia</a>";
+							    $( id ).html("" + elem.title + "   (" + wiki + ")");
+								c++;
 							}
                         }
                     }, 

@@ -27,7 +27,7 @@ public class StatisticsData {
      */
     private static Stack<MutableLong> entityHours = new Stack<>(); //Max elements: 23 (for the hours in a day)
     private static Stack<MutableLong> triplesHours = new Stack<>();
-    private static Stack<String> extractedTitles = new Stack<>(); // Max elements: 17 (the amount shown in the page)
+    private static Stack<ExtractedItem> extractedTitles = new Stack<>(); // Max elements: 17 (the amount shown in the page)
     private static long newValueTimestamp = 0; //saves the timestamp of the last insertion in the stack
 
     // keep a list with triples and timestamps
@@ -36,10 +36,10 @@ public class StatisticsData {
     protected StatisticsData() {
     }
 
-    public static void addItem(String pageTitle, int numTriples, long pageTimestamp) {
+    public static void addItem(String pageTitle, String wikiuri, int numTriples, long pageTimestamp) {
         try {
             statisticsTriplesQueue.addFirst(new TripleItem(numTriples, pageTimestamp));
-            extractedTitles.push(pageTitle);
+            extractedTitles.push(new ExtractedItem(pageTitle, wikiuri, ""));
             if(extractedTitles.size() > 17)
                 extractedTitles.remove(0);
         } catch (NullPointerException e) {
@@ -96,6 +96,7 @@ public class StatisticsData {
                 triplesIter.remove(); // remove from list if older than an hour
             }
         }
+        // sum last 23 hours and current hour to get the stats for the last day
         for(MutableLong val: entityHours)
             entity1d += val.longValue();
         for(MutableLong val: triplesHours)
@@ -104,6 +105,7 @@ public class StatisticsData {
         entity1d += entity1h;
         triples1d += triples1h;
 
+        // create result object
         result = new StatisticsResult(entity1m, entity5m, entity1h, entity1d, entityAll + entity1d);
         result.setTriples(triples1m, triples5m, triples1h, triples1d, triplesAll + triples1d);
         result.finish(startTime, extractedTitles.toString());

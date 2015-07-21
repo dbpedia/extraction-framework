@@ -48,7 +48,7 @@ public class StatisticsResult {
                 ",\"triplesAll\":" + triplesAll +
                 ",\"avrgTriples\":\"" + new DecimalFormat("#.##").format(averageTriples) +"\"" +
                 ",\"timePassed\":\"" + timePassed +"\"" +
-                ",\"extractedTitles\":\"" + extracted +"\"" +
+                ",\"extractedTitles\":" + extracted +
                 '}';
     }
 
@@ -78,7 +78,7 @@ public class StatisticsResult {
         if(second < 10) format += "%2d secs";
         else format += "%02d secs";
         timePassed = String.format(format, day, hour, minute, second);
-        extracted = titles.replace("[", "").replace("]", "");
+        extracted = titles;
     }
 
     public int getEntity1m() {
