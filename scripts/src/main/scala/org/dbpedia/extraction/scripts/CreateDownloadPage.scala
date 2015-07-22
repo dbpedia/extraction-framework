@@ -1,14 +1,14 @@
 package org.dbpedia.extraction.scripts
 
-import java.util.Locale
 import java.io.File
+import java.text.{DecimalFormat, DecimalFormatSymbols}
+import java.util.Locale
+
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.util.StringPlusser
-import org.dbpedia.extraction.util.IOUtils
-import scala.collection.mutable.{Map,HashMap}
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
+import org.dbpedia.extraction.util.{IOUtils, StringPlusser}
+
+import scala.collection.mutable.HashMap
 
 /**
  * Generate Wacko Wiki source text for http://wiki.dbpedia.org/Downloads and all its sub pages.
@@ -20,20 +20,19 @@ import java.text.DecimalFormatSymbols
 object CreateDownloadPage {
   
 // UPDATE for new release
-val current = "2014"
+val current = "2014-04"
   
 // UPDATE for new release
-val previous = List("3.9", "3.8", "3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
+val previous = List("2014","3.9", "3.8", "3.7", "3.6", "3.5.1", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "3.0RC", "2.0")
 
 // UPDATE for new release
 val dumpDates =
 "The datasets were extracted from ((http://dumps.wikimedia.org/ Wikipedia dumps)) generated in " +
-"late April / early May 2014. We used a ((http://www.wikidata.org/ Wikidata)) cross-language " +
-"link dump from June 2014 to interconnect concepts between languages. " +
+"February / March 2015." +
 "See also all ((DumpDatesDBpedia"+tag(current)+" specific dump dates and times)).\n";
   
 // UPDATE for new release
-val allLanguages = 125
+val allLanguages = 128
 
 // CCHECK / UPDATE for new release
 // All languages that have a significant number of mapped articles.
@@ -158,6 +157,7 @@ new Ontology("DBpedia Ontology", "dbpedia_"+current, "//The DBpedia ontology in 
 val datasets = List(
   List(
     new Dataset("Mapping-based Types", "instance_types", "//Contains triples of the form $object rdf:type $class from the mapping-based extraction.//"),
+    new Dataset("Mapping-based Types (Transitive)", "instance_types_transitive", "//Contains transitive rdf:type $class from the mapping-based extraction.//"),
     new Dataset("Mapping-based Types (Heuristic)", "instance_types_heuristic", "//Contains 3.4M additional triples of the form $object rdf:type $class that were generated using the heuristic described in ((http://www.heikopaulheim.com/documents/iswc2013.pdf Paulheim/Bizer: Type Inference on Noisy RDF Data (ISWC 2013))). The estimated precision of those statements is 95%.//", Set(DataC14NPage)),
     new Dataset("Mapping-based Properties", "mappingbased_properties", "//High-quality data extracted from Infoboxes using the mapping-based extraction. The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
   ),
