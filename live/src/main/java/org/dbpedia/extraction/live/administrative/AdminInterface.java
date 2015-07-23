@@ -18,6 +18,7 @@ public class AdminInterface {
         System.out.println("PATH: " + rootPath);
         WebAppContext webapp = new WebAppContext(rootPath + "../../web", "");
         webapp.addServlet(new ServletHolder(new StatsServlet()), "/stats");
+        webapp.addServlet(new ServletHolder(new ControlServlet()), "/control");
         server.setHandler(webapp);
 
         try {

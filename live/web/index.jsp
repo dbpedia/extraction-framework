@@ -29,8 +29,8 @@
                     <div class="col-md-6" style="padding-top: 37px">
                         <div class="btn-group btn-group-justified">
                             <% if (admin) { %>
-                                <a href="#" class="btn btn-success">Start</a>
-                                <a href="#" class="btn btn-danger">Stop</a>
+                                <a id="bt_start" href="#" class="btn btn-success">Start</a>
+                                <a id="bt_stop" href="#" class="btn btn-danger">Stop</a>
                             <% } %>
                           <a id="bt_update" href="#" class="btn btn-default">Update</a>
                         </div>
@@ -41,9 +41,19 @@
                     </div>   
                 </div>
 
-                <div id="connErrorAlert" class="alert alert-dismissible alert-danger" style="display: none;">
-				  <button type="button" class="close" onclick="hideElem('connErrorAlert')">x</button>
-				  <strong>Connection Error:</strong> There was a problem connecting to the server!
+                <div id="dangerAlert" class="alert alert-dismissible alert-danger" style="display: none;">
+				  <button type="button" class="close" onclick="hideElem('dangerAlert')">x</button>
+				  <div id = "dangerAlertText"></div>
+				</div>
+
+				<div id="successAlert" class="alert alert-dismissible alert-success" style="display: none;">
+				  <button type="button" class="close" onclick="hideElem('successAlert')">x</button>
+				  <div id = "successAlertText"></div>
+				</div>
+
+				<div id="warningAlert" class="alert alert-dismissible alert-warning" style="display: none;">
+				  <button type="button" class="close" onclick="hideElem('warningAlert')">x</button>
+				  <div id = "warningAlertText"></div>
 				</div>
 
             </div>
@@ -196,56 +206,102 @@
             $('#bt_update').click(function (){
                 update();
             });
+            $('#bt_start').click(function (){
+                control("start");
+            });
+            $('#bt_stop').click(function (){
+                control("stop");
+            });
         });
 
         function update(){
             $.ajax({
-                    type: "get",
-                    url: "stats",
-                    data: "",
-                    success: function(msg){
-                    	console.log(msg);
-                        stats = JSON.parse(msg);
-                        if(stats != null){
-                            $( "#stat_1" ).html(stats.timePassed);
-                            $( "#stat_2" ).html(stats.entityAll);
-                            $( "#stat_3" ).html(stats.entity1m);
-                            $( "#stat_4" ).html(stats.entity5m);
-                            $( "#stat_5" ).html(stats.entity1h);
-                            $( "#stat_6" ).html(stats.entity1d);
-                            $( "#stat_7" ).html(stats.triplesAll);
-                            $( "#stat_8" ).html(stats.triples1m);
-                            $( "#stat_9" ).html(stats.triples5m);
-                            $( "#stat_10" ).html(stats.triples1h);
-                            $( "#stat_11" ).html(stats.triples1d);
-                            $( "#stat_12" ).html(stats.avrgTriples);
-                            $( "#stat_13" ).html(stats.itemsQueued);
+                type: "get",
+                url: "stats",
+                data: "",
+                success: function(msg){
+                	console.log(msg);
+                    stats = JSON.parse(msg);
+                    if(stats != null){
+                        $( "#stat_1" ).html(stats.timePassed);
+                        $( "#stat_2" ).html(stats.entityAll);
+                        $( "#stat_3" ).html(stats.entity1m);
+                        $( "#stat_4" ).html(stats.entity5m);
+                        $( "#stat_5" ).html(stats.entity1h);
+                        $( "#stat_6" ).html(stats.entity1d);
+                        $( "#stat_7" ).html(stats.triplesAll);
+                        $( "#stat_8" ).html(stats.triples1m);
+                        $( "#stat_9" ).html(stats.triples5m);
+                        $( "#stat_10" ).html(stats.triples1h);
+                        $( "#stat_11" ).html(stats.triples1d);
+                        $( "#stat_12" ).html(stats.avrgTriples);
+                        $( "#stat_13" ).html(stats.itemsQueued);
 
-                            var c = 16;
-                            for (var i in stats.extractedTitles) {
-                            	if(c < 0) return; 
-                            	var id = "#extr_" + c; 
-                            	var elem = stats.extractedTitles[i];
-                            	var wiki = "<a target=\"_blank\" href=\"" + elem.wikiURI + "\">Wikipedia</a>";
-							    $( id ).html("" + elem.title + "   (" + wiki + ")");
-								c--;
-							}
-							hideElem("connErrorAlert");
-							console.log(stats.queued);
-							c = 0;
-                            for (var i in stats.queued) {
-                            	if(c > 16) return; 
-                            	var id = "#q_" + c; 
-                            	var elem = stats.queued[i];
-							    $( id ).html(elem);
-								c++;
-							}
-                        }
-                    }, 
-                    error: function (xhr, ajaxOptions, thrownError) {
-                    	$("#connErrorAlert").show();
+                        var c = 16;
+                        for (var i in stats.extractedTitles) {
+                        	if(c < 0) return; 
+                        	var id = "#extr_" + c; 
+                        	var elem = stats.extractedTitles[i];
+                        	var wiki = "<a target=\"_blank\" href=\"" + elem.wikiURI + "\">Wikipedia</a>";
+						    $( id ).html("" + elem.title + "   (" + wiki + ")");
+							c--;
+						}
+						hideElem("dangerAlert");
+						console.log(stats.queued);
+						c = 0;
+                        for (var i in stats.queued) {
+                        	if(c > 16) return; 
+                        	var id = "#q_" + c; 
+                        	var elem = stats.queued[i];
+						    $( id ).html(elem);
+							c++;
+						}
                     }
-                });
+                }, 
+                error: function (xhr, ajaxOptions, thrownError) {
+                	$("#dangerAlertText").html("<strong>Connection Error:</strong> There was a problem connecting to the server!");
+                	$("#dangerAlert").show();
+                }
+            });
+        }
+
+        function control(ty){
+        	if(ty == "start"){
+        		$("#warningAlertText").html("<strong>Please Wait!</strong> DBpedia Live is starting.");
+                $("#warningAlert").show();
+        	}
+        	var formData = {type:ty, password:"<%= req %>"}
+        	$.ajax({
+                type: "get",
+                url: "control",
+                data: formData,
+                success: function(msg){
+                	if(ty == "start"){
+                		if($.trim(msg) == "true"){
+	                		$("#warningAlert").hide();
+	                		$("#successAlertText").html("<strong>Success!</strong> DBpedia Live has been started!");
+	                		$("#successAlert").show();
+                		}else{
+                			$("#warningAlert").hide();
+	                		$("#dangerAlertText").html("<strong>Error!</strong> There has been an error starting DBpedia Live.");
+	                		$("#dangerAlert").show();
+                		}
+                	}
+                	if(ty == "stop"){
+                		if($.trim(msg) == "true"){
+	                		$("#successAlertText").html("<strong>Success!</strong> DBpedia Live was stopped!");
+	                		$("#successAlert").show();
+                		}else{
+	                		$("#dangerAlertText").html("<strong>Error!</strong> There has been an error stopping DBpedia Live.");
+	                		$("#dangerAlert").show();
+                		}
+                	}
+                }, 
+                error: function (xhr, ajaxOptions, thrownError) {
+                	$("#dangerAlertText").html("<strong>Connection Error:</strong> There was a problem connecting to the server!");
+                	$("#dangerAlert").show();
+                }
+            });
         }
 
         function update_label(){

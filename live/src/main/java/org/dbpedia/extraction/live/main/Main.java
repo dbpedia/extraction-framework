@@ -31,6 +31,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    public static String state = "stopped"; //the state DBpedia Live {stopped, running, starting}
 
     //Used for publishing triples to files
     public static BlockingQueue<DiffData> publishingDataQueue = new LinkedBlockingDeque<DiffData>(1000);
@@ -107,6 +108,10 @@ public class Main {
 
             publisher = new Publisher("Publisher", 4);
 
+            statistics = new Statistics(1000, 60000);
+            statistics.startStatistics();
+
+            state = "running";
             logger.info("DBpedia-Live components started");
         } catch (Exception exp) {
             logger.error(ExceptionUtil.toString(exp), exp);
@@ -131,11 +136,10 @@ public class Main {
 
             // Publisher
             publisher.flush();
+
+            state = "stopped";
             // Page Processor
             // TODO
-
-            //Close MongoDB connection
-            MongoUtil.closeClient();
         } catch (Exception exp) {
             logger.error(ExceptionUtil.toString(exp));
         }
@@ -149,6 +153,9 @@ public class Main {
             public void run() {
                 try {
                     stopLive();
+
+                    //Close MongoDB connection
+                    MongoUtil.closeClient();
                 } catch (Exception exp) {
 
                 }
@@ -159,9 +166,6 @@ public class Main {
 
         initLive();
         startLive();
-
-        statistics = new Statistics(1000, 60000);
-        statistics.startStatistics();
 
         new AdminInterface().start();
     }
