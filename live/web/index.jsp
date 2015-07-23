@@ -40,7 +40,14 @@
                         <input id="update_input" class="form-control ng-pristine ng-valid ng-scope" type="range" value="10" min="1" max="60" step="1" oninput="update_label()">
                     </div>   
                 </div>
+
+                <div id="connErrorAlert" class="alert alert-dismissible alert-danger" style="display: none;">
+				  <button type="button" class="close" onclick="hideElem('connErrorAlert')">x</button>
+				  <strong>Connection Error:</strong> There was a problem connecting to the server!
+				</div>
+
             </div>
+            
             <hr/>
             <div style="display: inline-block; width: 1200px; ">
                 <div class="row">
@@ -53,44 +60,44 @@
                           	<div class="tab-content">
                             	<div class="tab-pane active" id="tab1">
                               		<ul class="list-group">
-	                              		<li class="list-group-item">Cras justo odio</li>
-										<li class="list-group-item">Dapibus ac facilisis in </li>
-										<li class="list-group-item"> Morbi leo risus</li>
-										<li class="list-group-item">Cras justo odio</li>
-										<li class="list-group-item">Dapibus ac facilisis in </li>
-										<li class="list-group-item"> Morbi leo risus</li>
-										<li class="list-group-item">Cras justo odio</li>
-										<li class="list-group-item">Dapibus ac facilisis in </li>
-										<li class="list-group-item"> Morbi leo risus</li>
-										<li class="list-group-item">Cras justo odio</li>
-										<li class="list-group-item">Dapibus ac facilisis in </li>
-										<li class="list-group-item"> Morbi leo risus</li>
-										<li class="list-group-item">Cras justo odio</li>
-										<li class="list-group-item">Dapibus ac facilisis in </li>
-										<li class="list-group-item"> Morbi leo risus</li>
-										<li class="list-group-item">Cras justo odio</li>
-										<li class="list-group-item">Dapibus ac facilisis in </li>
+	                              		<li class="list-group-item" id="q_0"></li>
+										<li class="list-group-item" id="q_1"></li>
+										<li class="list-group-item" id="q_2"></li>
+										<li class="list-group-item" id="q_3"></li>
+										<li class="list-group-item" id="q_4"></li>
+										<li class="list-group-item" id="q_5"></li>
+										<li class="list-group-item" id="q_6"></li>
+										<li class="list-group-item" id="q_7"></li>
+										<li class="list-group-item" id="q_8"></li>
+										<li class="list-group-item" id="q_9"></li>
+										<li class="list-group-item" id="q_10"></li>
+										<li class="list-group-item" id="q_11"></li>
+										<li class="list-group-item" id="q_12"></li>
+										<li class="list-group-item" id="q_13"></li>
+										<li class="list-group-item" id="q_14"></li>
+										<li class="list-group-item" id="q_15"></li>
+										<li class="list-group-item" id="q_16"></li>
                               		</ul>
                             	</div>
                             	<div class="tab-pane" id="tab2">
                                   	<ul class="list-group">
-                                  		<li class="list-group-item" id="extr_0">Dapibus ac facilisis in </li>
-										<li class="list-group-item" id="extr_1">Cras justo odio 2</li>
-										<li class="list-group-item" id="extr_2">Dapibus ac facilisis in 2 </li>
-										<li class="list-group-item" id="extr_3"> Morbi leo risus 2</li>
-										<li class="list-group-item" id="extr_4">Cras justo odio 2</li>
-										<li class="list-group-item" id="extr_5">Dapibus ac facilisis in 2 </li>
-										<li class="list-group-item" id="extr_6"> Morbi leo risus</li>
-										<li class="list-group-item" id="extr_7">Cras justo odio</li>
-										<li class="list-group-item" id="extr_8">Dapibus ac facilisis in </li>
-										<li class="list-group-item" id="extr_9"> Morbi leo risus</li>
-										<li class="list-group-item" id="extr_10">Cras justo odio</li>
-										<li class="list-group-item" id="extr_11">Dapibus ac facilisis in </li>
-										<li class="list-group-item" id="extr_12"> Morbi leo risus</li>
-										<li class="list-group-item" id="extr_13">Cras justo odio</li>
-										<li class="list-group-item" id="extr_14">Dapibus ac facilisis in </li>
-										<li class="list-group-item" id="extr_15"> Morbi leo risus</li>
-										<li class="list-group-item" id="extr_16">Cras justo odio</li>
+                                  		<li class="list-group-item" id="extr_0"></li>
+										<li class="list-group-item" id="extr_1"></li>
+										<li class="list-group-item" id="extr_2"></li>
+										<li class="list-group-item" id="extr_3"></li>
+										<li class="list-group-item" id="extr_4"></li>
+										<li class="list-group-item" id="extr_5"></li>
+										<li class="list-group-item" id="extr_6"></li>
+										<li class="list-group-item" id="extr_7"></li>
+										<li class="list-group-item" id="extr_8"></li>
+										<li class="list-group-item" id="extr_9"></li>
+										<li class="list-group-item" id="extr_10"></li>
+										<li class="list-group-item" id="extr_11"></li>
+										<li class="list-group-item" id="extr_12"></li>
+										<li class="list-group-item" id="extr_13"></li>
+										<li class="list-group-item" id="extr_14"></li>
+										<li class="list-group-item" id="extr_15"></li>
+										<li class="list-group-item" id="extr_16"></li>
                                   	</ul>
                             	</div>
                           	</div>
@@ -212,18 +219,32 @@
                             $( "#stat_10" ).html(stats.triples1h);
                             $( "#stat_11" ).html(stats.triples1d);
                             $( "#stat_12" ).html(stats.avrgTriples);
+                            $( "#stat_13" ).html(stats.itemsQueued);
 
-                            var c = 0;
+                            var c = 16;
                             for (var i in stats.extractedTitles) {
-                            	if(c > 17) return; 
+                            	if(c < 0) return; 
                             	var id = "#extr_" + c; 
                             	var elem = stats.extractedTitles[i];
                             	var wiki = "<a target=\"_blank\" href=\"" + elem.wikiURI + "\">Wikipedia</a>";
 							    $( id ).html("" + elem.title + "   (" + wiki + ")");
+								c--;
+							}
+							hideElem("connErrorAlert");
+							console.log(stats.queued);
+							c = 0;
+                            for (var i in stats.queued) {
+                            	if(c > 16) return; 
+                            	var id = "#q_" + c; 
+                            	var elem = stats.queued[i];
+							    $( id ).html(elem);
 								c++;
 							}
                         }
                     }, 
+                    error: function (xhr, ajaxOptions, thrownError) {
+                    	$("#connErrorAlert").show();
+                    }
                 });
         }
 
@@ -231,6 +252,10 @@
             $("#update_interval").html($("#update_input").val());
             clearInterval(timer);
             timer = setInterval(update, $("#update_input").val() * 1000);
+        }
+
+        function hideElem(elem){
+        	$("#" + elem).hide();
         }
 
     </script>

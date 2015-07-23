@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.live.statistics;
 
+import org.dbpedia.extraction.live.queue.LiveQueue;
+
 import java.text.DecimalFormat;
 
 /**
@@ -21,6 +23,8 @@ public class StatisticsResult {
     private double averageTriples;
     private String timePassed;
     private String extracted = "";
+    private String queued = "";
+    private long itemsQueue;
 
     public StatisticsResult(){}
 
@@ -48,7 +52,9 @@ public class StatisticsResult {
                 ",\"triplesAll\":" + triplesAll +
                 ",\"avrgTriples\":\"" + new DecimalFormat("#.##").format(averageTriples) +"\"" +
                 ",\"timePassed\":\"" + timePassed +"\"" +
+                ",\"itemsQueued\":" + itemsQueue +
                 ",\"extractedTitles\":" + extracted +
+                ",\"queued\":" + queued +
                 '}';
     }
 
@@ -79,6 +85,21 @@ public class StatisticsResult {
         else format += "%02d secs";
         timePassed = String.format(format, day, hour, minute, second);
         extracted = titles;
+        setQueued();
+        itemsQueue = LiveQueue.getQueueSize();
+    }
+
+    private void setQueued(){
+        StringBuilder sb = new StringBuilder("[");
+        boolean first = true;
+        for(String s: LiveQueue.getNextQueuedItems()) {
+            if(s == null || s.equals("")) break;
+            if(!first) sb.append(",");
+            sb.append("\"" + s + "\"");
+            first = false;
+        }
+        sb.append("]");
+        queued = sb.toString();
     }
 
     public int getEntity1m() {

@@ -2,8 +2,7 @@ package org.dbpedia.extraction.live.queue;
 
 import org.slf4j.Logger;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -103,6 +102,24 @@ public class LiveQueue {
         if (d != null)
             return d;
         return "";
+    }
+
+    /*
+    * Used to get the
+    * */
+    public static ArrayList<String> getNextQueuedItems(){
+        ArrayList<String> titles = new ArrayList<>();
+        ArrayList<LiveQueueItem> items = new ArrayList<>();
+        for (int i = 1; i < 18; i++){
+            LiveQueueItem item = null;
+            try { item = take();
+            } catch (InterruptedException e) { e.printStackTrace(); }
+            titles.add(item.getItemID() + " - " + item.getItemName());
+            items.add(item);
+        }
+        for(LiveQueueItem l: items)
+            add(l);
+        return titles;
     }
 
     private static PriorityBlockingQueue<LiveQueueItem> getQueue() {
