@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.statistics;
 
+import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 
 import java.text.DecimalFormat;
@@ -55,6 +56,7 @@ public class StatisticsResult {
                 ",\"itemsQueued\":" + itemsQueue +
                 ",\"extractedTitles\":" + extracted +
                 ",\"queued\":" + queued +
+                ",\"state\":\"" + Main.state +"\"" +
                 '}';
     }
 

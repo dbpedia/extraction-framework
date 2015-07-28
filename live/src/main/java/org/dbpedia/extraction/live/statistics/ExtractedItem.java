@@ -6,10 +6,11 @@ package org.dbpedia.extraction.live.statistics;
 public class ExtractedItem {
     public String title, wikiURI, dbpediaURI;
 
-    public ExtractedItem(String title, String wikiURI, String dbpediaURI) {
+    public ExtractedItem(String title, String wikiURI) {
         this.title = title;
         this.wikiURI = wikiURI;
-        this.dbpediaURI = dbpediaURI;
+        int index = wikiURI.indexOf("/wiki/");
+        this.dbpediaURI = "http://live.dbpedia.org/resource/" + wikiURI.substring(index + 6);
     }
 
     @Override
@@ -17,7 +18,7 @@ public class ExtractedItem {
         return "{" +
                 "\"title\":\"" + title + '"' +
                 ", \"wikiURI\":\"" + wikiURI + '"' +
-                //", \"dbpediaURI\":\"" + dbpediaURI + '"' +
+                ", \"dbpediaURI\":\"" + dbpediaURI + '"' +
                 '}';
     }
 }

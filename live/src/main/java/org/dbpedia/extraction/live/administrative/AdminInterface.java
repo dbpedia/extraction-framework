@@ -9,9 +9,9 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-public class AdminInterface {
+public class AdminInterface extends Thread{
 
-    public void start() throws InterruptedException {
+    public void run() {
         Server server = new Server(8080);
 
         String rootPath = AdminInterface.class.getClassLoader().getResource(".").toString();
@@ -23,9 +23,10 @@ public class AdminInterface {
 
         try {
             server.start();
+            server.join();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        server.join();
+
     }
 }

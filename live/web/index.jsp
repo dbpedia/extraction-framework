@@ -26,8 +26,11 @@
                 <h1>DBpedia Live Administrative Interface</h1>
                 <h3 style="text-align: left">Live Control</h3>
                 <div class="row">
-                    <div class="col-md-6" style="padding-top: 37px">
-                        <div class="btn-group btn-group-justified">
+                	<div class="col-md-6">
+	                    <div style="padding-top: 8px; padding-bottom: 8px; text-align: left">
+	                    	<b>Processors State: </b> <span class="text-success" id="processorState">running</span>
+	                    </div>
+                    	<div class="btn-group btn-group-justified">
                             <% if (admin) { %>
                                 <a id="bt_start" href="#" class="btn btn-success">Start</a>
                                 <a id="bt_stop" href="#" class="btn btn-danger">Stop</a>
@@ -220,7 +223,6 @@
                 url: "stats",
                 data: "",
                 success: function(msg){
-                	console.log(msg);
                     stats = JSON.parse(msg);
                     if(stats != null){
                         $( "#stat_1" ).html(stats.timePassed);
@@ -237,17 +239,30 @@
                         $( "#stat_12" ).html(stats.avrgTriples);
                         $( "#stat_13" ).html(stats.itemsQueued);
 
+                        $( "#processorState" ).html(stats.state);
+                        switch (stats.state) {
+                        	case "stopped":
+	                        	$( "#processorState" ).attr("class", "text-danger");
+	                        	break;
+                        	case "starting":
+	                        	$( "#processorState" ).attr("class", "text-warning");
+                        		break;
+                        	case "running":
+	                        	$( "#processorState" ).attr("class", "text-success");
+	                        	break;
+                        }                        
+
                         var c = 16;
                         for (var i in stats.extractedTitles) {
                         	if(c < 0) return; 
                         	var id = "#extr_" + c; 
                         	var elem = stats.extractedTitles[i];
                         	var wiki = "<a target=\"_blank\" href=\"" + elem.wikiURI + "\">Wikipedia</a>";
-						    $( id ).html("" + elem.title + "   (" + wiki + ")");
+                        	var dbpedia = "<a target=\"_blank\" href=\"" + elem.dbpediaURI + "\">DBpedia</a>";
+						    $( id ).html("" + elem.title + "   (" + wiki + " / " + dbpedia + ")");
 							c--;
 						}
 						hideElem("dangerAlert");
-						console.log(stats.queued);
 						c = 0;
                         for (var i in stats.queued) {
                         	if(c > 16) return; 
@@ -276,26 +291,16 @@
                 url: "control",
                 data: formData,
                 success: function(msg){
-                	if(ty == "start"){
-                		if($.trim(msg) == "true"){
-	                		$("#warningAlert").hide();
-	                		$("#successAlertText").html("<strong>Success!</strong> DBpedia Live has been started!");
-	                		$("#successAlert").show();
-                		}else{
-                			$("#warningAlert").hide();
-	                		$("#dangerAlertText").html("<strong>Error!</strong> There has been an error starting DBpedia Live.");
-	                		$("#dangerAlert").show();
-                		}
+                	console.log(msg);
+                	json = JSON.parse(msg);
+                	if(json.result == true){
+                		$("#successAlertText").html("<strong>Success!</strong> " + json.message);
+                		$("#successAlert").show();
+                	}else{
+						$("#dangerAlertText").html("<strong>Error!</strong> " + json.message);
+                		$("#dangerAlert").show();
                 	}
-                	if(ty == "stop"){
-                		if($.trim(msg) == "true"){
-	                		$("#successAlertText").html("<strong>Success!</strong> DBpedia Live was stopped!");
-	                		$("#successAlert").show();
-                		}else{
-	                		$("#dangerAlertText").html("<strong>Error!</strong> There has been an error stopping DBpedia Live.");
-	                		$("#dangerAlert").show();
-                		}
-                	}
+                	$("#warningAlert").hide();
                 }, 
                 error: function (xhr, ajaxOptions, thrownError) {
                 	$("#dangerAlertText").html("<strong>Connection Error:</strong> There was a problem connecting to the server!");

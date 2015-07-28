@@ -39,7 +39,7 @@ public class StatisticsData {
     public static void addItem(String pageTitle, String wikiuri, int numTriples, long pageTimestamp) {
         try {
             statisticsTriplesQueue.addFirst(new TripleItem(numTriples, pageTimestamp));
-            extractedTitles.push(new ExtractedItem(pageTitle, wikiuri, ""));
+            extractedTitles.push(new ExtractedItem(pageTitle, wikiuri));
             if(extractedTitles.size() > 17)
                 extractedTitles.remove(0);
         } catch (NullPointerException e) {
