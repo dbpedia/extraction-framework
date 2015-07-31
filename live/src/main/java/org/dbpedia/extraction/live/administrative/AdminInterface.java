@@ -19,6 +19,7 @@ public class AdminInterface extends Thread{
         WebAppContext webapp = new WebAppContext(rootPath + "../../web", "");
         webapp.addServlet(new ServletHolder(new StatsServlet()), "/stats");
         webapp.addServlet(new ServletHolder(new ControlServlet()), "/control");
+        webapp.addServlet(new ServletHolder(new AddItemServlet()), "/additem");
         server.setHandler(webapp);
 
         try {
