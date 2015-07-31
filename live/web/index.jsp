@@ -1,7 +1,12 @@
-<%@ page import="java.io.*,java.util.*" %>
+<%@ page import="java.io.*,java.util.*,org.dbpedia.extraction.live.core.LiveOptions;" %>
 <%! String passw, path, req; %> 
 <%! boolean admin = false; %> 
+<%! String wikiAPI = LiveOptions.options.get("localApiURL"); %> 
 <%
+	response.setHeader("Cache-Control","no-cache"); 
+	response.setHeader("Pragma","no-cache"); 
+	response.setDateHeader ("Expires", -1); 
+
     path = getServletContext().getRealPath("/") + "/../adminPassword.txt";
     passw = new Scanner(new File(path)).nextLine();
     req = request.getParameter("password");
@@ -119,9 +124,9 @@
                             <h4 style="text-align: left">Add Item to Queue</h4>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control">
+                                    <input id="txt_addItem" type="text" class="form-control">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">Add</button>
+                                        <button id="bt_addItem" class="btn btn-default" type="button">Add</button>
                                     </span>
                                 </div>
                             </div>
@@ -215,6 +220,10 @@
             $('#bt_stop').click(function (){
                 control("stop");
             });
+            $('#bt_addItem').click(function (){
+               addItem();
+            });
+            
         });
 
         function update(){
@@ -262,7 +271,8 @@
 						    $( id ).html("" + elem.title + "   (" + wiki + " / " + dbpedia + ")");
 							c--;
 						}
-						hideElem("dangerAlert");
+						if($("#dangerAlert").html().indexOf("Connection Error") != -1)
+							hideElem("dangerAlert");
 						c = 0;
                         for (var i in stats.queued) {
                         	if(c > 16) return; 
@@ -309,12 +319,65 @@
             });
         }
 
+        function addItem(){
+        	var title = $("#txt_addItem").val();
+        	var itemID = getWikiItemID(title);
+        	console.log(itemID);
+        	if(itemID == -1){
+	        	$("#dangerAlertText").html("<strong>Error: </strong> There is no page with the title \"" + title + "\"");
+	            $("#dangerAlert").show();
+            }else{
+            	// request the server to add a new item to the queue
+            	var formData = {item: itemID, password:"<%= req %>"}
+	        	$.ajax({
+			        type: "GET",
+			        url: "additem",
+			        data: formData,
+			        success: function (msg) {
+			        	console.log(msg);
+			            json = JSON.parse(msg);
+	                	if(json.result == true){
+	                		$("#successAlertText").html("<strong>Success!</strong> " + json.message);
+	                		$("#successAlert").show();
+	                	}else{
+							$("#dangerAlertText").html("<strong>Error!</strong> " + json.message);
+	                		$("#dangerAlert").show();
+	                	}
+			        },
+			        error: function (errorMessage) {}
+		    	});
+            }
+        }
+
+        function getWikiItemID(item){
+			var data = { 'titles': item};
+			var res = "-1";
+        	$.ajax({
+		        type: "GET",
+		        url: "<%= wikiAPI %>?action=query&format=json&" + EncodeQueryData(data),
+		        async: false,
+		        dataType: "json",
+		        success: function (data) {
+		            var json = JSON.parse(JSON.stringify(data));
+		            res = Object.keys(json.query.pages)[0];
+		        },
+		        error: function (errorMessage) {}
+	    	});
+	    	return res;
+        }
+
         function update_label(){
             $("#update_interval").html($("#update_input").val());
             clearInterval(timer);
             timer = setInterval(update, $("#update_input").val() * 1000);
         }
 
+        function EncodeQueryData(data){
+		   var ret = [];
+		   for (var d in data)
+			  ret.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
+		   return ret.join("&");
+		}
         function hideElem(elem){
         	$("#" + elem).hide();
         }
