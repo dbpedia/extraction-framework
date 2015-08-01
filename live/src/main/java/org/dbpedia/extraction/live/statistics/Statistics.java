@@ -18,6 +18,8 @@ import java.util.TimerTask;
  */
 public class Statistics {
     private static Logger logger = LoggerFactory.getLogger(Statistics.class);
+    // Number of queued/extracted items
+    public static final int numItems = 17;
     // Update interval in miliseconds
     private final long statisticsUpdateInterval;
     // Initial delay on application startup

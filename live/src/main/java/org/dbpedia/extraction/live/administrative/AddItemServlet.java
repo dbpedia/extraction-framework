@@ -29,8 +29,6 @@ public class AddItemServlet extends HttpServlet {
         String path = getServletContext().getRealPath("/") + "/../adminPassword.txt";
         String passw = new Scanner(new File(path)).nextLine();
 
-        System.out.println("password:" + password + "--passw:" + passw + "--");
-
         if(password == null || !password.equals(passw)){
             result = false;
             message = "Wrong password!";

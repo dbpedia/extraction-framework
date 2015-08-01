@@ -27,7 +27,7 @@ public class StatisticsData {
      */
     private static Stack<MutableLong> entityHours = new Stack<>(); //Max elements: 23 (for the hours in a day)
     private static Stack<MutableLong> triplesHours = new Stack<>();
-    private static Stack<ExtractedItem> extractedTitles = new Stack<>(); // Max elements: 17 (the amount shown in the page)
+    private static Stack<ExtractedItem> extractedTitles = new Stack<>();
     private static long newValueTimestamp = 0; //saves the timestamp of the last insertion in the stack
 
     // keep a list with triples and timestamps
@@ -40,7 +40,7 @@ public class StatisticsData {
         try {
             statisticsTriplesQueue.addFirst(new TripleItem(numTriples, pageTimestamp));
             extractedTitles.push(new ExtractedItem(pageTitle, wikiuri));
-            if(extractedTitles.size() > 17)
+            if(extractedTitles.size() > Statistics.numItems)
                 extractedTitles.remove(0);
         } catch (NullPointerException e) {
             // TODO take furter action? not important...
@@ -59,10 +59,11 @@ public class StatisticsData {
             entityHours.push(new MutableLong(0)); //add item for new hour
             triplesHours.push(new MutableLong(0));
             newValueTimestamp = now;
+            //remove the 24th hour because we only want the last 23
             if(entityHours.size() > 23) {
                 entityAll += entityHours.get(0).longValue();
                 triplesAll += triplesHours.get(0).longValue();
-                entityHours.remove(0); //remove the 24th hour because we only want the last 23
+                entityHours.remove(0);
                 triplesHours.remove(0);
             }
         }

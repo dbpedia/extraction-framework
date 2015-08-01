@@ -1,7 +1,8 @@
-<%@ page import="java.io.*,java.util.*,org.dbpedia.extraction.live.core.LiveOptions;" %>
+<%@ page import="java.io.*,java.util.*,org.dbpedia.extraction.live.core.LiveOptions,org.dbpedia.extraction.live.statistics.*;" %>
 <%! String passw, path, req; %> 
 <%! boolean admin = false; %> 
 <%! String wikiAPI = LiveOptions.options.get("localApiURL"); %> 
+<%! int counter, numItems = Statistics.numItems; %> 
 <%
 	response.setHeader("Cache-Control","no-cache"); 
 	response.setHeader("Pragma","no-cache"); 
@@ -78,44 +79,16 @@
                           	<div class="tab-content">
                             	<div class="tab-pane active" id="tab1">
                               		<ul class="list-group">
-	                              		<li class="list-group-item" id="q_0"></li>
-										<li class="list-group-item" id="q_1"></li>
-										<li class="list-group-item" id="q_2"></li>
-										<li class="list-group-item" id="q_3"></li>
-										<li class="list-group-item" id="q_4"></li>
-										<li class="list-group-item" id="q_5"></li>
-										<li class="list-group-item" id="q_6"></li>
-										<li class="list-group-item" id="q_7"></li>
-										<li class="list-group-item" id="q_8"></li>
-										<li class="list-group-item" id="q_9"></li>
-										<li class="list-group-item" id="q_10"></li>
-										<li class="list-group-item" id="q_11"></li>
-										<li class="list-group-item" id="q_12"></li>
-										<li class="list-group-item" id="q_13"></li>
-										<li class="list-group-item" id="q_14"></li>
-										<li class="list-group-item" id="q_15"></li>
-										<li class="list-group-item" id="q_16"></li>
+                              		<%for ( counter = 0; counter < numItems; counter++){
+									   out.println("<li class=\"list-group-item\" id=\"q_" + counter + "\"></li>");
+									}%>
                               		</ul>
                             	</div>
                             	<div class="tab-pane" id="tab2">
                                   	<ul class="list-group">
-                                  		<li class="list-group-item" id="extr_0"></li>
-										<li class="list-group-item" id="extr_1"></li>
-										<li class="list-group-item" id="extr_2"></li>
-										<li class="list-group-item" id="extr_3"></li>
-										<li class="list-group-item" id="extr_4"></li>
-										<li class="list-group-item" id="extr_5"></li>
-										<li class="list-group-item" id="extr_6"></li>
-										<li class="list-group-item" id="extr_7"></li>
-										<li class="list-group-item" id="extr_8"></li>
-										<li class="list-group-item" id="extr_9"></li>
-										<li class="list-group-item" id="extr_10"></li>
-										<li class="list-group-item" id="extr_11"></li>
-										<li class="list-group-item" id="extr_12"></li>
-										<li class="list-group-item" id="extr_13"></li>
-										<li class="list-group-item" id="extr_14"></li>
-										<li class="list-group-item" id="extr_15"></li>
-										<li class="list-group-item" id="extr_16"></li>
+                                  	<%for ( counter = 0; counter < numItems; counter++){
+									   out.println("<li class=\"list-group-item\" id=\"extr_" + counter + "\"></li>");
+									}%>
                                   	</ul>
                             	</div>
                           	</div>
@@ -134,68 +107,68 @@
                     </div>
                     <div class="col-md-6">
                         <h3 style="text-align: left">Statistics</h3>
-	                        <table class="table table-striped table-hover">
-	                            <thead>
-	                                <tr>
-		                                <th>Title</th>
-		                                <th>Value</th>
-	                                </tr>
-	                            </thead>
-	                            <tbody>
-	                                <tr>
-	                                  <td>Time passed since start </td>
-	                                  <td id="stat_1"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Entities updated in the last minute</td>
-	                                  <td id="stat_3"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Entities updated in the last 5 minutes</td>
-	                                  <td id="stat_4"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Entities updated in the last hour</td>
-	                                  <td id="stat_5"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Entities updated in the last day</td>
-	                                  <td id="stat_6"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Entities updated since start</td>
-	                                  <td id="stat_2"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Triples produced in the last minute</td>
-	                                  <td id="stat_8"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Triples produced in the last 5 minutes</td>
-	                                  <td id="stat_9"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Triples produced in the last hour</td>
-	                                  <td id="stat_10"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Triples produced in the last day</td>
-	                                  <td id="stat_11"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Triples produced since start</td>
-	                                  <td id="stat_7"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Average triples per extraction</td>
-	                                  <td id="stat_12"></td>
-	                                </tr>
-	                                <tr>
-	                                  <td>Items in queue</td>
-	                                  <td id="stat_13"></td>
-	                                </tr>
-	                            </tbody>
-	                        </table>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+	                                <th>Title</th>
+	                                <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td>Time passed since start </td>
+                                  <td id="stat_1"></td>
+                                </tr>
+                                <tr>
+                                  <td>Entities updated in the last minute</td>
+                                  <td id="stat_3"></td>
+                                </tr>
+                                <tr>
+                                  <td>Entities updated in the last 5 minutes</td>
+                                  <td id="stat_4"></td>
+                                </tr>
+                                <tr>
+                                  <td>Entities updated in the last hour</td>
+                                  <td id="stat_5"></td>
+                                </tr>
+                                <tr>
+                                  <td>Entities updated in the last day</td>
+                                  <td id="stat_6"></td>
+                                </tr>
+                                <tr>
+                                  <td>Entities updated since start</td>
+                                  <td id="stat_2"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced in the last minute</td>
+                                  <td id="stat_8"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced in the last 5 minutes</td>
+                                  <td id="stat_9"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced in the last hour</td>
+                                  <td id="stat_10"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced in the last day</td>
+                                  <td id="stat_11"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced since start</td>
+                                  <td id="stat_7"></td>
+                                </tr>
+                                <tr>
+                                  <td>Average triples per extraction</td>
+                                  <td id="stat_12"></td>
+                                </tr>
+                                <tr>
+                                  <td>Items in queue</td>
+                                  <td id="stat_13"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>   
                 </div>
             </div>
@@ -220,9 +193,7 @@
             $('#bt_stop').click(function (){
                 control("stop");
             });
-            $('#bt_addItem').click(function (){
-               addItem();
-            });
+            $('#bt_addItem').click(addItem);
             
         });
 
@@ -261,7 +232,7 @@
 	                        	break;
                         }                        
 
-                        var c = 16;
+                        var c = <%= numItems - 1 %>;
                         for (var i in stats.extractedTitles) {
                         	if(c < 0) return; 
                         	var id = "#extr_" + c; 
@@ -275,7 +246,7 @@
 							hideElem("dangerAlert");
 						c = 0;
                         for (var i in stats.queued) {
-                        	if(c > 16) return; 
+                        	if(c > <%= numItems - 1 %>) return; 
                         	var id = "#q_" + c; 
                         	var elem = stats.queued[i];
 						    $( id ).html(elem);
