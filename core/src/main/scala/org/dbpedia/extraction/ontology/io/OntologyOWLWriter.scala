@@ -4,7 +4,7 @@ import java.text.{SimpleDateFormat, DateFormat}
 import java.util.{Date, TimeZone, Calendar}
 
 import org.dbpedia.extraction.ontology._
-import datatypes.{DimensionDatatype, UnitDatatype}
+import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype, UnitDatatype}
 
 class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolean = true)
 {
@@ -73,17 +73,20 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             val properties = for(ontologyProperty <- ontology.properties.values if (EXPORT_EXTERNAL || !ontologyProperty.isExternalProperty))
                 yield writeProperty(ontologyProperty)
 
+            val datatypes = for(ontologyDatatype <- ontology.datatypes.values )
+              yield writeDatatype(ontologyDatatype)
+
             if(writeSpecificProperties)
             {
                 //Write specific properties
                 val specificProperties = for(((clazz, property), datatype) <- ontology.specializations)
                     yield writeSpecificProperty(clazz, property, datatype)
 
-                classes ++ properties ++ specificProperties
+                classes ++ properties ++ datatypes ++ specificProperties
             }
             else
             {
-                classes ++ properties
+                classes ++ properties ++ datatypes
             }
         }
         </rdf:RDF>
@@ -242,18 +245,28 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
         }
     }
 
+    private def writeDatatype(datatype : Datatype) : scala.xml.Elem =
+    {
+
+
+        <rdfs:Datatype rdf:about={datatype.uri}>
+            { for((language, label) <- datatype.labels) yield <rdfs:label xml:lang={language.isoCode}>{label}</rdfs:label> }
+            { for((language, comment) <- datatype.comments) yield <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment> }
+        </rdfs:Datatype >
+    }
+
     private def writeSpecificProperty(clazz : OntologyClass, property : OntologyProperty, unit : UnitDatatype) : scala.xml.Elem =
     {
-        val propertyUri = DBpediaNamespace.ONTOLOGY.append(clazz.name+'/'+property.name)
+      val propertyUri = DBpediaNamespace.ONTOLOGY.append(clazz.name+'/'+property.name)
 
-        //Append the unit to the label
-        val labelPostfix = " (" + unit.unitLabels.toList.sortWith(_.size < _.size).headOption.getOrElse("") + ")"
+      //Append the unit to the label
+      val labelPostfix = " (" + unit.unitLabels.toList.sortWith(_.size < _.size).headOption.getOrElse("") + ")"
 
-        <owl:DatatypeProperty rdf:about={propertyUri}>
-            { for((language, label) <- property.labels) yield <rdfs:label xml:lang={language.isoCode}>{label + labelPostfix}</rdfs:label> }
-            { for((language, comment) <- property.comments) yield <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment> }
-            <rdfs:domain rdf:resource={clazz.uri} />
-            <rdfs:range rdf:resource={unit.uri} />
-        </owl:DatatypeProperty>
+      <owl:DatatypeProperty rdf:about={propertyUri}>
+        { for((language, label) <- property.labels) yield <rdfs:label xml:lang={language.isoCode}>{label + labelPostfix}</rdfs:label> }
+        { for((language, comment) <- property.comments) yield <rdfs:comment xml:lang={language.isoCode}>{comment}</rdfs:comment> }
+        <rdfs:domain rdf:resource={clazz.uri} />
+        <rdfs:range rdf:resource={unit.uri} />
+      </owl:DatatypeProperty>
     }
 }
