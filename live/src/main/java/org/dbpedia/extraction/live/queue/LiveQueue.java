@@ -114,11 +114,7 @@ public class LiveQueue {
             LiveQueueItem item = null;
             try { item = take();
             } catch (InterruptedException e) { e.printStackTrace(); }
-            String textToAdd;
-            if(item.getItemName().equals(""))
-                textToAdd = "Item with ID: " + item.getItemID();
-            else textToAdd = item.getItemName();
-            titles.add(textToAdd);
+            titles.add("" +item.getItemID());
             items.add(item);
         }
         for(LiveQueueItem l: items)

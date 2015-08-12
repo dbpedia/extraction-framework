@@ -203,6 +203,7 @@
                 url: "stats",
                 data: "",
                 success: function(msg){
+                	console.log(msg);
                     stats = JSON.parse(msg);
                     if(stats != null){
                         $( "#stat_1" ).html(stats.timePassed);
@@ -244,12 +245,22 @@
 						}
 						if($("#dangerAlert").html().indexOf("Connection Error") != -1)
 							hideElem("dangerAlert");
+						
+						//create array with ids and get the wiki page url
+						var arr_pages = [];
+						for (var i in stats.queued) {
+							arr_pages.push(stats.queued[i]);
+						}
+						var pages = arr_pages.join("|");
+						var json = getURLfromID(pages);
 						c = 0;
                         for (var i in stats.queued) {
                         	if(c > <%= numItems - 1 %>) return; 
                         	var id = "#q_" + c; 
-                        	var elem = stats.queued[i];
-						    $( id ).html(elem);
+                        	var key = "" + stats.queued[i];
+                        	var elem = json.query.pages[key];
+                        	var wiki = "<a target=\"_blank\" href=\"" + elem.fullurl + "\">" + elem.title +"</a>";
+						    $( id ).html(wiki);
 							c++;
 						}
                     }
@@ -318,6 +329,24 @@
 			        error: function (errorMessage) {}
 		    	});
             }
+        }
+
+        function getURLfromID(pages){
+        	var data = { 'pageids': pages};
+			var res;
+        	$.ajax({
+		        type: "GET",
+		        url: "<%= wikiAPI %>?action=query&format=json&prop=info&inprop=url&" + EncodeQueryData(data),
+		        async: false,
+		        dataType: "json",
+		        success: function (data) {
+		            res = JSON.parse(JSON.stringify(data));
+		            console.log(JSON.stringify(data));
+		        },
+		        error: function (errorMessage) {}
+	    	});
+	    	return res;
+
         }
 
         function getWikiItemID(item){
