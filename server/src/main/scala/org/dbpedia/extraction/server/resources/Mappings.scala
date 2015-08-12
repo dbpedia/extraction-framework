@@ -379,7 +379,7 @@ class Mappings(@PathParam("lang") langCode : String)
               {
                 val manager = Server.instance.managers(language)
                 val statsHolder = manager.holder
-                val reversedRedirects = statsHolder.reversedRedirects
+                val reversedRedirects = statsHolder.reversedRedirects.map(_.swap)
                 var pages = Server.instance.extractor.mappingPageSource(language).map(_.title.decoded).toSet
 
                 for((redirect_from,redirect_to) <- reversedRedirects ) yield
