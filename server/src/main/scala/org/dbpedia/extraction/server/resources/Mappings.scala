@@ -387,7 +387,7 @@ class Mappings(@PathParam("lang") langCode : String)
                 {
                   val rf = WikiTitle.parse(redirect_from, language)
                   val rt = WikiTitle.parse(redirect_to, language)
-                  val simpleMove = if (pages.contains(rt.decoded)) <span >No</span>
+                  val simpleMove = if (pages.contains(rt.decoded)) <span >Merge</span>
                   else <a href={ "http://mappings.dbpedia.org/index.php/Special:MovePage/Mapping_" + langCode + ":" +rf.decoded }>Move</a>
                   if (pages.contains(rf.decoded)) {
                     <tr>
