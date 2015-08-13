@@ -392,9 +392,9 @@ class Mappings(@PathParam("lang") langCode : String)
                   if (pages.contains(rf.decoded)) {
                     <tr>
                       <td>
-                        <a href={"http://mappings.dbpedia.org/index.php/Mapping_" + langCode + ":" +rf.decoded}>{redirect_from}</a> </td>
+                        <a href={"http://mappings.dbpedia.org/index.php/Mapping_" + langCode + ":" +rf.decoded}>{rf.decoded}</a> </td>
                     <td>
-                      <a href={"http://mappings.dbpedia.org/index.php/Mapping_" + langCode + ":" + rt.decoded}>{redirect_to}</a>
+                      <a href={"http://mappings.dbpedia.org/index.php/Mapping_" + langCode + ":" + rt.decoded}>{rt.decoded}</a>
                     </td>
                       <td> { simpleMove }
                       </td>
