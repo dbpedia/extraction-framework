@@ -18,6 +18,8 @@ public class StatsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setContentType("text/html");
+        response.setHeader("Content-Type", "application/octet-stream; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
         StatisticsResult stats = StatisticsData.getResults();
         if(stats != null)
