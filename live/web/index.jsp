@@ -120,24 +120,32 @@
                                   <td id="stat_1"></td>
                                 </tr>
                                 <tr>
-                                  <td>Entities updated in the last minute</td>
+                                  <td>Pages processed since last update</td>
+                                  <td id="stat_14"></td>
+                                </tr>
+                                <tr>
+                                  <td>Pages processed in the last minute</td>
                                   <td id="stat_3"></td>
                                 </tr>
                                 <tr>
-                                  <td>Entities updated in the last 5 minutes</td>
+                                  <td>Pages processed in the last 5 minutes</td>
                                   <td id="stat_4"></td>
                                 </tr>
                                 <tr>
-                                  <td>Entities updated in the last hour</td>
+                                  <td>Pages processed in the last hour</td>
                                   <td id="stat_5"></td>
                                 </tr>
                                 <tr>
-                                  <td>Entities updated in the last day</td>
+                                  <td>Pages processed in the last day</td>
                                   <td id="stat_6"></td>
                                 </tr>
                                 <tr>
-                                  <td>Entities updated since start</td>
+                                  <td>Pages processed since start</td>
                                   <td id="stat_2"></td>
+                                </tr>
+                                <tr>
+                                  <td>Triples produced since last update</td>
+                                  <td id="stat_15"></td>
                                 </tr>
                                 <tr>
                                   <td>Triples produced in the last minute</td>
@@ -197,6 +205,7 @@
             
         });
 
+        var ent_all = 0, trp_all = 0;
         function update(){
             $.ajax({
                 type: "get",
@@ -219,6 +228,11 @@
                         $( "#stat_11" ).html(stats.triples1d);
                         $( "#stat_12" ).html(stats.avrgTriples);
                         $( "#stat_13" ).html(stats.itemsQueued);
+                        $( "#stat_14" ).html(stats.entityAll - ent_all);
+                        $( "#stat_15" ).html(stats.triplesAll - trp_all);
+
+                        ent_all = stats.entityAll;
+                        trp_all = stats.triplesAll;
 
                         $( "#processorState" ).html(stats.state);
                         switch (stats.state) {
@@ -259,7 +273,7 @@
                         	var id = "#q_" + c; 
                         	var key = "" + stats.queued[i];
                         	var elem = json.query.pages[key];
-                        	var wiki = "<a target=\"_blank\" href=\"" + elem.fullurl + "\">" + elem.title +"</a>";
+                        	var wiki = elem.title;
 						    $( id ).html(wiki);
 							c++;
 						}
@@ -346,7 +360,6 @@
 		        error: function (errorMessage) {}
 	    	});
 	    	return res;
-
         }
 
         function getWikiItemID(item){
@@ -381,5 +394,4 @@
         function hideElem(elem){
         	$("#" + elem).hide();
         }
-
     </script>

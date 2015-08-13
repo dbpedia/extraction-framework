@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.queue;
 
+import org.dbpedia.extraction.live.statistics.Statistics;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -110,7 +111,7 @@ public class LiveQueue {
     public static ArrayList<String> getNextQueuedItems(){
         ArrayList<String> titles = new ArrayList<>();
         ArrayList<LiveQueueItem> items = new ArrayList<>();
-        for (int i = 1; i < 18; i++){
+        for (int i = 1; i <= Statistics.numItems; i++){
             LiveQueueItem item = null;
             try { item = take();
             } catch (InterruptedException e) { e.printStackTrace(); }
