@@ -263,7 +263,7 @@
 						//create array with ids and get the wiki page url
 						var arr_pages = [];
 						for (var i in stats.queued) {
-							arr_pages.push(stats.queued[i]);
+							arr_pages.push(stats.queued[i].id);
 						}
 						var pages = arr_pages.join("|");
 						var json = getURLfromID(pages);
@@ -271,10 +271,12 @@
                         for (var i in stats.queued) {
                         	if(c > <%= numItems - 1 %>) return; 
                         	var id = "#q_" + c; 
-                        	var key = "" + stats.queued[i];
+                        	var key = "" + stats.queued[i].id;
                         	var elem = json.query.pages[key];
                         	var wiki = elem.title;
-						    $( id ).html(wiki);
+                        	var priorityRaw = stats.queued[i].priority;
+                        	var priority = priorityRaw.split(" ")[0];
+						    $( id ).html(wiki + createPriorityLabel(priority));
 							c++;
 						}
                     }
@@ -284,6 +286,25 @@
                 	$("#dangerAlert").show();
                 }
             });
+        }
+
+        function createPriorityLabel(priority){
+        	var result = "<span style=\"float: right;\" class=\"label ";
+        	switch(priority) {
+			    case "Live":
+			        result += "label-primary\">Live</span>"; break;
+			    case "Manual":
+			        result += "label-danger\">Manual</span>"; break;
+			    case "Mapping":
+			        result += "label-success\">Mapping</span>"; break;
+			    case "Ontology":
+			        result += "label-warning\">Ontology</span>"; break;
+			    case "Unmodified":
+			        result += "label-info\">Unmodified</span>"; break;
+			    default:
+			        result += "label-default\">" + priority + "</span>"; break;
+			}
+			return result;
         }
 
         function control(ty){
@@ -297,7 +318,6 @@
                 url: "control",
                 data: formData,
                 success: function(msg){
-                	console.log(msg);
                 	json = JSON.parse(msg);
                 	if(json.result == true){
                 		$("#successAlertText").html("<strong>Success!</strong> " + json.message);
@@ -330,7 +350,6 @@
 			        url: "additem",
 			        data: formData,
 			        success: function (msg) {
-			        	console.log(msg);
 			            json = JSON.parse(msg);
 	                	if(json.result == true){
 	                		$("#successAlertText").html("<strong>Success!</strong> " + json.message);
@@ -355,7 +374,6 @@
 		        dataType: "json",
 		        success: function (data) {
 		            res = JSON.parse(JSON.stringify(data));
-		            console.log(JSON.stringify(data));
 		        },
 		        error: function (errorMessage) {}
 	    	});

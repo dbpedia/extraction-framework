@@ -97,7 +97,7 @@ public class StatisticsResult {
         for(String s: LiveQueue.getNextQueuedItems()) {
             if(s == null || s.equals("")) break;
             if(!first) sb.append(",");
-            sb.append("\"" + s + "\"");
+            sb.append(s);
             first = false;
         }
         sb.append("]");

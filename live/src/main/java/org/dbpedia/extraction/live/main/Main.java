@@ -90,11 +90,6 @@ public class Main {
         for (int i=0; i < threads ; i++){
             processors.add( new PageProcessor("N" + (i+1)));
         }
-
-        //statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
-        //        DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());
-
-
     }
 
     public static void startLive() {

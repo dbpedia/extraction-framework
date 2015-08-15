@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.administrative;
 
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.eclipse.jetty.server.Server;
 
 /**
@@ -12,7 +13,11 @@ import org.eclipse.jetty.webapp.WebAppContext;
 public class AdminInterface extends Thread{
 
     public void run() {
-        Server server = new Server(8080);
+        int port = 8080;
+        String portRaw = LiveOptions.options.get("adminPort");
+        if(portRaw != null) port = Integer.parseInt(portRaw);
+
+        Server server = new Server(port);
 
         String rootPath = AdminInterface.class.getClassLoader().getResource(".").toString();
         System.out.println("PATH: " + rootPath);

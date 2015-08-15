@@ -115,7 +115,7 @@ public class LiveQueue {
             LiveQueueItem item = null;
             try { item = take();
             } catch (InterruptedException e) { e.printStackTrace(); }
-            titles.add("" +item.getItemID());
+            titles.add("{\"id\":" + item.getItemID() + ", \"priority\":\"" + item.getPriority().toString() + "\"}");
             items.add(item);
         }
         for(LiveQueueItem l: items)
