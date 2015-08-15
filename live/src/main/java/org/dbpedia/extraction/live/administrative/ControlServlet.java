@@ -30,7 +30,6 @@ public class ControlServlet extends HttpServlet {
             message = "Wrong password!";
         }
         else {
-            System.out.println(Main.state);
             if (type.equals("start")) {
                 if(Main.state.equals("stopped")) {
                     Main.state = "starting";

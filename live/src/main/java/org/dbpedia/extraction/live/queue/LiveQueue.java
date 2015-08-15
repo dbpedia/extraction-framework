@@ -106,7 +106,11 @@ public class LiveQueue {
     }
 
     /*
-    * Used to get the
+    * Used to get a list of the next items in the queue.
+    *
+    * To achieve this we have to remove them from the queue one by one, save the information we need,
+    * and add them again to the queue.
+    * Although this isn't ideal, the PriorityBlockingQueue doesn't give us other viable options.
     * */
     public static ArrayList<String> getNextQueuedItems(){
         ArrayList<String> titles = new ArrayList<>();
