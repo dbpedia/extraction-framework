@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.live.administrative;
 
-import org.dbpedia.extraction.live.statistics.Statistics;
 import org.dbpedia.extraction.live.statistics.StatisticsData;
 import org.dbpedia.extraction.live.statistics.StatisticsResult;
 

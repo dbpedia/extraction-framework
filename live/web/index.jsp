@@ -4,9 +4,9 @@
 <%! String wikiAPI = LiveOptions.options.get("localApiURL"); %> 
 <%! int counter, numItems = Statistics.numItems; %> 
 <%
-	response.setHeader("Cache-Control","no-cache"); 
-	response.setHeader("Pragma","no-cache"); 
-	response.setDateHeader ("Expires", -1); 
+    response.setHeader("Cache-Control","no-cache"); 
+    response.setHeader("Pragma","no-cache"); 
+    response.setDateHeader ("Expires", -1); 
 
     path = getServletContext().getRealPath("/") + "/../adminPassword.txt";
     passw = new Scanner(new File(path)).nextLine();
@@ -32,11 +32,11 @@
                 <h1>DBpedia Live Administrative Interface</h1>
                 <h3 style="text-align: left">Live Control</h3>
                 <div class="row">
-                	<div class="col-md-6">
-	                    <div style="padding-top: 8px; padding-bottom: 8px; text-align: left">
-	                    	<b>Processors State: </b> <span class="text-success" id="processorState">running</span>
-	                    </div>
-                    	<div class="btn-group btn-group-justified">
+                    <div class="col-md-6">
+                        <div style="padding-top: 8px; padding-bottom: 8px; text-align: left">
+                            <b>Processors State: </b> <span class="text-success" id="processorState">running</span>
+                        </div>
+                        <div class="btn-group btn-group-justified">
                             <% if (admin) { %>
                                 <a id="bt_start" href="#" class="btn btn-success">Start</a>
                                 <a id="bt_stop" href="#" class="btn btn-danger">Stop</a>
@@ -51,19 +51,19 @@
                 </div>
 
                 <div id="dangerAlert" class="alert alert-dismissible alert-danger" style="display: none;">
-				  <button type="button" class="close" onclick="hideElem('dangerAlert')">x</button>
-				  <div id = "dangerAlertText"></div>
-				</div>
+                  <button type="button" class="close" onclick="hideElem('dangerAlert')">x</button>
+                  <div id = "dangerAlertText"></div>
+                </div>
 
-				<div id="successAlert" class="alert alert-dismissible alert-success" style="display: none;">
-				  <button type="button" class="close" onclick="hideElem('successAlert')">x</button>
-				  <div id = "successAlertText"></div>
-				</div>
+                <div id="successAlert" class="alert alert-dismissible alert-success" style="display: none;">
+                  <button type="button" class="close" onclick="hideElem('successAlert')">x</button>
+                  <div id = "successAlertText"></div>
+                </div>
 
-				<div id="warningAlert" class="alert alert-dismissible alert-warning" style="display: none;">
-				  <button type="button" class="close" onclick="hideElem('warningAlert')">x</button>
-				  <div id = "warningAlertText"></div>
-				</div>
+                <div id="warningAlert" class="alert alert-dismissible alert-warning" style="display: none;">
+                  <button type="button" class="close" onclick="hideElem('warningAlert')">x</button>
+                  <div id = "warningAlertText"></div>
+                </div>
 
             </div>
             
@@ -72,26 +72,26 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="tabbable">
-                          	<ul class="nav nav-tabs">
-                            	<li class="active"><a href="#tab1" data-toggle="tab">Queued Items</a></li>
-                            	<li><a href="#tab2" data-toggle="tab">Processed Items</a></li>
-                          	</ul>
-                          	<div class="tab-content">
-                            	<div class="tab-pane active" id="tab1">
-                              		<ul class="list-group">
-                              		<%for ( counter = 0; counter < numItems; counter++){
-									   out.println("<li class=\"list-group-item\" id=\"q_" + counter + "\"></li>");
-									}%>
-                              		</ul>
-                            	</div>
-                            	<div class="tab-pane" id="tab2">
-                                  	<ul class="list-group">
-                                  	<%for ( counter = 0; counter < numItems; counter++){
-									   out.println("<li class=\"list-group-item\" id=\"extr_" + counter + "\"></li>");
-									}%>
-                                  	</ul>
-                            	</div>
-                          	</div>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab1" data-toggle="tab">Queued Items</a></li>
+                                <li><a href="#tab2" data-toggle="tab">Processed Items</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab1">
+                                    <ul class="list-group">
+                                    <%for ( counter = 0; counter < numItems; counter++){
+                                       out.println("<li class=\"list-group-item\" id=\"q_" + counter + "\"></li>");
+                                    }%>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <ul class="list-group">
+                                    <%for ( counter = 0; counter < numItems; counter++){
+                                       out.println("<li class=\"list-group-item\" id=\"extr_" + counter + "\"></li>");
+                                    }%>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <% if (admin) { %>
                             <h4 style="text-align: left">Add Item to Queue</h4>
@@ -110,8 +110,8 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-	                                <th>Title</th>
-	                                <th>Value</th>
+                                    <th>Title</th>
+                                    <th>Value</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -212,7 +212,6 @@
                 url: "stats",
                 data: "",
                 success: function(msg){
-                	console.log(msg);
                     stats = JSON.parse(msg);
                     if(stats != null){
                         $( "#stat_1" ).html(stats.timePassed);
@@ -236,165 +235,164 @@
 
                         $( "#processorState" ).html(stats.state);
                         switch (stats.state) {
-                        	case "stopped":
-	                        	$( "#processorState" ).attr("class", "text-danger");
-	                        	break;
-                        	case "starting":
-	                        	$( "#processorState" ).attr("class", "text-warning");
-                        		break;
-                        	case "running":
-	                        	$( "#processorState" ).attr("class", "text-success");
-	                        	break;
+                            case "stopped":
+                                $( "#processorState" ).attr("class", "text-danger");
+                                break;
+                            case "starting":
+                                $( "#processorState" ).attr("class", "text-warning");
+                                break;
+                            case "running":
+                                $( "#processorState" ).attr("class", "text-success");
+                                break;
                         }                        
 
                         var c = <%= numItems - 1 %>;
                         for (var i in stats.extractedTitles) {
-                        	if(c < 0) return; 
-                        	var id = "#extr_" + c; 
-                        	var elem = stats.extractedTitles[i];
-                        	var wiki = "<a target=\"_blank\" href=\"" + elem.wikiURI + "\">Wikipedia</a>";
-                        	var dbpedia = "<a target=\"_blank\" href=\"" + elem.dbpediaURI + "\">DBpedia</a>";
-						    $( id ).html("" + elem.title + "   (" + wiki + " / " + dbpedia + ")");
-							c--;
-						}
-						if($("#dangerAlert").html().indexOf("Connection Error") != -1)
-							hideElem("dangerAlert");
-						
-						//create array with ids and get the wiki page url
-						var arr_pages = [];
-						for (var i in stats.queued) {
-							arr_pages.push(stats.queued[i].id);
-						}
-						var pages = arr_pages.join("|");
-						var json = getURLfromID(pages);
-						c = 0;
+                            if(c < 0) return; 
+                            var id = "#extr_" + c; 
+                            var elem = stats.extractedTitles[i];
+                            var wiki = "<a target=\"_blank\" href=\"" + elem.wikiURI + "\">Wikipedia</a>";
+                            var dbpedia = "<a target=\"_blank\" href=\"" + elem.dbpediaURI + "\">DBpedia</a>";
+                            $( id ).html("" + elem.title + "   (" + wiki + " / " + dbpedia + ")");
+                            c--;
+                        }
+                        if($("#dangerAlert").html().indexOf("Connection Error") != -1)
+                            hideElem("dangerAlert");
+                        
+                        //create array with ids and get the wiki page url
+                        var arr_pages = [];
                         for (var i in stats.queued) {
-                        	if(c > <%= numItems - 1 %>) return; 
-                        	var id = "#q_" + c; 
-                        	var key = "" + stats.queued[i].id;
-                        	var elem = json.query.pages[key];
-                        	var wiki = elem.title;
-                        	var priorityRaw = stats.queued[i].priority;
-                        	var priority = priorityRaw.split(" ")[0];
-						    $( id ).html(wiki + createPriorityLabel(priority));
-							c++;
-						}
+                            arr_pages.push(stats.queued[i].id);
+                        }
+                        var pages = arr_pages.join("|");
+                        var json = getURLfromID(pages);
+                        c = 0;
+                        for (var i in stats.queued) {
+                            if(c > <%= numItems - 1 %>) return; 
+                            var id = "#q_" + c; 
+                            var key = "" + stats.queued[i].id;
+                            var elem = json.query.pages[key];
+                            var wiki = elem.title;
+                            var priorityRaw = stats.queued[i].priority;
+                            var priority = priorityRaw.split(" ")[0];
+                            $( id ).html(wiki + createPriorityLabel(priority));
+                            c++;
+                        }
                     }
                 }, 
                 error: function (xhr, ajaxOptions, thrownError) {
-                	$("#dangerAlertText").html("<strong>Connection Error:</strong> There was a problem connecting to the server!");
-                	$("#dangerAlert").show();
+                    $("#dangerAlertText").html("<strong>Connection Error:</strong> There was a problem connecting to the server!");
+                    $("#dangerAlert").show();
                 }
             });
         }
 
         function createPriorityLabel(priority){
-        	var result = "<span style=\"float: right;\" class=\"label ";
-        	switch(priority) {
-			    case "Live":
-			        result += "label-primary\">Live</span>"; break;
-			    case "Manual":
-			        result += "label-danger\">Manual</span>"; break;
-			    case "Mapping":
-			        result += "label-success\">Mapping</span>"; break;
-			    case "Ontology":
-			        result += "label-warning\">Ontology</span>"; break;
-			    case "Unmodified":
-			        result += "label-info\">Unmodified</span>"; break;
-			    default:
-			        result += "label-default\">" + priority + "</span>"; break;
-			}
-			return result;
+            var result = "<span style=\"float: right;\" class=\"label ";
+            switch(priority) {
+                case "Live":
+                    result += "label-primary\">Live</span>"; break;
+                case "Manual":
+                    result += "label-danger\">Manual</span>"; break;
+                case "Mapping":
+                    result += "label-success\">Mapping</span>"; break;
+                case "Ontology":
+                    result += "label-warning\">Ontology</span>"; break;
+                case "Unmodified":
+                    result += "label-info\">Unmodified</span>"; break;
+                default:
+                    result += "label-default\">" + priority + "</span>"; break;
+            }
+            return result;
         }
 
         function control(ty){
-        	if(ty == "start"){
-        		$("#warningAlertText").html("<strong>Please Wait!</strong> DBpedia Live is starting.");
+            if(ty == "start"){
+                $("#warningAlertText").html("<strong>Please Wait!</strong> DBpedia Live is starting.");
                 $("#warningAlert").show();
-        	}
-        	var formData = {type:ty, password:"<%= req %>"}
-        	$.ajax({
+            }
+            var formData = {type:ty, password:"<%= req %>"}
+            $.ajax({
                 type: "get",
                 url: "control",
                 data: formData,
                 success: function(msg){
-                	json = JSON.parse(msg);
-                	if(json.result == true){
-                		$("#successAlertText").html("<strong>Success!</strong> " + json.message);
-                		$("#successAlert").show();
-                	}else{
-						$("#dangerAlertText").html("<strong>Error!</strong> " + json.message);
-                		$("#dangerAlert").show();
-                	}
-                	$("#warningAlert").hide();
+                    json = JSON.parse(msg);
+                    if(json.result == true){
+                        $("#successAlertText").html("<strong>Success!</strong> " + json.message);
+                        $("#successAlert").show();
+                    }else{
+                        $("#dangerAlertText").html("<strong>Error!</strong> " + json.message);
+                        $("#dangerAlert").show();
+                    }
+                    $("#warningAlert").hide();
                 }, 
                 error: function (xhr, ajaxOptions, thrownError) {
-                	$("#dangerAlertText").html("<strong>Connection Error:</strong> There was a problem connecting to the server!");
-                	$("#dangerAlert").show();
+                    $("#dangerAlertText").html("<strong>Connection Error:</strong> There was a problem connecting to the server!");
+                    $("#dangerAlert").show();
                 }
             });
         }
 
         function addItem(){
-        	var title = $("#txt_addItem").val();
-        	var itemID = getWikiItemID(title);
-        	console.log(itemID);
-        	if(itemID == -1){
-	        	$("#dangerAlertText").html("<strong>Error: </strong> There is no page with the title \"" + title + "\"");
-	            $("#dangerAlert").show();
+            var title = $("#txt_addItem").val();
+            var itemID = getWikiItemID(title);
+            if(itemID == -1){
+                $("#dangerAlertText").html("<strong>Error: </strong> There is no page with the title \"" + title + "\"");
+                $("#dangerAlert").show();
             }else{
-            	// request the server to add a new item to the queue
-            	var formData = {item: itemID, password:"<%= req %>"}
-	        	$.ajax({
-			        type: "GET",
-			        url: "additem",
-			        data: formData,
-			        success: function (msg) {
-			            json = JSON.parse(msg);
-	                	if(json.result == true){
-	                		$("#successAlertText").html("<strong>Success!</strong> " + json.message);
-	                		$("#successAlert").show();
-	                	}else{
-							$("#dangerAlertText").html("<strong>Error!</strong> " + json.message);
-	                		$("#dangerAlert").show();
-	                	}
-			        },
-			        error: function (errorMessage) {}
-		    	});
+                // request the server to add a new item to the queue
+                var formData = {item: itemID, password:"<%= req %>"}
+                $.ajax({
+                    type: "GET",
+                    url: "additem",
+                    data: formData,
+                    success: function (msg) {
+                        json = JSON.parse(msg);
+                        if(json.result == true){
+                            $("#successAlertText").html("<strong>Success!</strong> " + json.message);
+                            $("#successAlert").show();
+                        }else{
+                            $("#dangerAlertText").html("<strong>Error!</strong> " + json.message);
+                            $("#dangerAlert").show();
+                        }
+                    },
+                    error: function (errorMessage) {}
+                });
             }
         }
 
         function getURLfromID(pages){
-        	var data = { 'pageids': pages};
-			var res;
-        	$.ajax({
-		        type: "GET",
-		        url: "<%= wikiAPI %>?action=query&format=json&prop=info&inprop=url&" + EncodeQueryData(data),
-		        async: false,
-		        dataType: "json",
-		        success: function (data) {
-		            res = JSON.parse(JSON.stringify(data));
-		        },
-		        error: function (errorMessage) {}
-	    	});
-	    	return res;
+            var data = { 'pageids': pages};
+            var res;
+            $.ajax({
+                type: "GET",
+                url: "<%= wikiAPI %>?action=query&format=json&prop=info&inprop=url&" + EncodeQueryData(data),
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    res = JSON.parse(JSON.stringify(data));
+                },
+                error: function (errorMessage) {}
+            });
+            return res;
         }
 
         function getWikiItemID(item){
-			var data = { 'titles': item};
-			var res = "-1";
-        	$.ajax({
-		        type: "GET",
-		        url: "<%= wikiAPI %>?action=query&format=json&" + EncodeQueryData(data),
-		        async: false,
-		        dataType: "json",
-		        success: function (data) {
-		            var json = JSON.parse(JSON.stringify(data));
-		            res = Object.keys(json.query.pages)[0];
-		        },
-		        error: function (errorMessage) {}
-	    	});
-	    	return res;
+            var data = { 'titles': item};
+            var res = "-1";
+            $.ajax({
+                type: "GET",
+                url: "<%= wikiAPI %>?action=query&format=json&" + EncodeQueryData(data),
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    var json = JSON.parse(JSON.stringify(data));
+                    res = Object.keys(json.query.pages)[0];
+                },
+                error: function (errorMessage) {}
+            });
+            return res;
         }
 
         function update_label(){
@@ -404,12 +402,12 @@
         }
 
         function EncodeQueryData(data){
-		   var ret = [];
-		   for (var d in data)
-			  ret.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
-		   return ret.join("&");
-		}
+           var ret = [];
+           for (var d in data)
+              ret.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
+           return ret.join("&");
+        }
         function hideElem(elem){
-        	$("#" + elem).hide();
+            $("#" + elem).hide();
         }
     </script>
