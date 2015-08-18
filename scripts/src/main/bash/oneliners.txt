@@ -71,7 +71,7 @@ find /home/release/wikipedia -maxdepth 3 -name '*.bz2' | grep -v -E 'ontology.ow
 cat lines-bytes-packed.txt | while read line ; do path=${line%% *} ; rest=${line#* } ; file=${path##*/} ; lang=${file%%wiki-*} ; tail=${file#*-*-} ; name=${tail%%.*} ; suffix=${tail#*.} ; echo $lang/${name//-/_}_$lang.$suffix $rest ; done >lines-bytes-packed.dl.txt
 
 # generate wiki syntax for page like http://wiki.dbpedia.org/DumpDatesDBpedia38
-find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/, "", $2); print "||" $2 "|" substr($3,1,4) "-" substr($3,5,2) "-" substr($3,7,2) "||"}'
+find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/, "", $2); print $2 ": " substr($3,1,4) "-" substr($3,5,2) "-" substr($3,7,2) "<br/>"}'
 
 # count number of same-as links in Wikipedia article namespace from English to other extracted languages. Result in 3.9: 16802429, 2014: 23797872
 gzip -d < enwiki-20130403-interlanguage-links.ttl.gz | grep -v -E 'resource/(Category|Template):' | wc -l
