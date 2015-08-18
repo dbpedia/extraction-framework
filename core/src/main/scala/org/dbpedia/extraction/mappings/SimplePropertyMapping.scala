@@ -13,7 +13,7 @@ import scala.language.reflectiveCalls
 
 class SimplePropertyMapping (
   val templateProperty : String, // IntermediateNodeMapping and CreateMappingStats requires this to be public
-  ontologyProperty : OntologyProperty,
+  val ontologyProperty : OntologyProperty,
   select : String,
   prefix : String,
   suffix : String,

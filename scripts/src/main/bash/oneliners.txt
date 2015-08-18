@@ -71,7 +71,7 @@ find /home/release/wikipedia -maxdepth 3 -name '*.bz2' | grep -v -E 'ontology.ow
 cat lines-bytes-packed.txt | while read line ; do path=${line%% *} ; rest=${line#* } ; file=${path##*/} ; lang=${file%%wiki-*} ; tail=${file#*-*-} ; name=${tail%%.*} ; suffix=${tail#*.} ; echo $lang/${name//-/_}_$lang.$suffix $rest ; done >lines-bytes-packed.dl.txt
 
 # generate wiki syntax for page like http://wiki.dbpedia.org/DumpDatesDBpedia38
-find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/, "", $2); print "||" $2 "|" substr($3,1,4) "-" substr($3,5,2) "-" substr($3,7,2) "||"}'
+find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/, "", $2); print $2 ": " substr($3,1,4) "-" substr($3,5,2) "-" substr($3,7,2) "<br/>"}'
 
 # count number of same-as links in Wikipedia article namespace from English to other extracted languages. Result in 3.9: 16802429, 2014: 23797872
 gzip -d < enwiki-20130403-interlanguage-links.ttl.gz | grep -v -E 'resource/(Category|Template):' | wc -l
@@ -93,6 +93,12 @@ grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+">' 
 
 # ontology: count specialized datatype properties
 grep -c -E '<owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/\w+/\w+">' ontology.owl
+
+# ontology: count owlequivalentClass
+sed 's|<|\n<|g' ontology.owl | grep -c -E '<owl:equivalentClass'
+
+# ontology: count owlequivalentProperty
+sed 's|<|\n<|g' ontology.owl | grep -c -E '<owl:equivalentProperty'
 
 # remove all lines in file bad.nt from file all.nt, write result to clean.nt
 awk '{ if (f==1) { r[$0] } else if (! ($0 in r)) { print $0 } }' f=1 bad.nt f=2 all.nt >clean.nt
@@ -161,3 +167,20 @@ ls -1 */*/*-page-links*.{nt,ttl}.gz | grep -v -E 'en-uris|unredirected' > page-l
 # generate out-link count
 # (the first sort is not really necessary - our triples are already grouped by subject, and grouping is enough for uniq - but it's nicer that the in-link and out-link counts are sorted similarly)
 ( export LC_ALL=C ; cat page-links.txt | while read i ; do echo $i ; join -v 1 <(gzip -d < $i | grep -v '^#' | cut -d ' ' -f 1 | sort | uniq -c | awk '{print $2" "$1}') <(gzip -d < ${i/page-links/redirects} | grep -v '^#' | cut -d ' ' -f 1 | sort) | sort -k 2,2 -n -s -r | awk '{print $1" <http://dbpedia.org/ontology/wikiPageOutLinkCount> \""$2"\"^^<http://www.w3.org/2001/XMLSchema#integer> ." }' | gzip -c > ${i/page-links/page-out-link-counts} ; done &> page-out-link-counts.log & )
+
+
+
+
+### statistics ###
+
+#No of coordinates
+bzcat geo-coordinates_en.nt.bz2 mappingbased-properties_en.nt.bz2 | grep "http://www.w3.org/2003/01/geo/wgs84_pos#long" | wc -l
+
+#No of disambiguations
+bzcat disambiguations_en.nt.bz2 | cut -d ' ' -f 1 | uniq | wc -l
+
+#No of redirects
+bzcat redirects_en.nt.bz2 | cut -d ' ' -f 1 | uniq | wc -l
+
+#No of images
+bzcat images_en.nt.bz2 | grep "<http://xmlns.com/foaf/0.1/thumbnail>"  | cut -d ' ' -f 1 | uniq | wc -l

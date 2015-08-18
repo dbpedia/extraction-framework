@@ -9,7 +9,7 @@ import org.dbpedia.extraction.wikiparser.AnnotationKey
 import scala.language.reflectiveCalls
 
 class TemplateMapping( 
-  mapToClass : OntologyClass,
+  val mapToClass : OntologyClass,
   correspondingClass : OntologyClass,
   correspondingProperty : OntologyProperty,
   val mappings : List[PropertyMapping], // must be public val for statistics

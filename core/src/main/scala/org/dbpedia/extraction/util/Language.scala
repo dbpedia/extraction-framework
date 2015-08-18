@@ -25,8 +25,8 @@ import org.dbpedia.extraction.ontology.RdfNamespace
  * Use propertyUri.append("xy"), not string concatenation. 
  * @param baseUri URI prefix for this wiki, e.g. "http://be-x-old.wikipedia.org",
  * "http://commons.wikimedia.org", "http://mappings.dbpedia.org".
- * @param apiUri API URI for this wiki, e.g. "http://be-x-old.wikipedia.org/w/api.php",
- * "http://commons.wikimedia.org/w/api.php", "http://mappings.dbpedia.org/api.php".
+ * @param apiUri API URI for this wiki, e.g. "https://be-x-old.wikipedia.org/w/api.php",
+ * "http://commons.wikimedia.org/w/api.php", "https://mappings.dbpedia.org/api.php".
  */
 class Language private(
   val wikiCode: String,
@@ -69,13 +69,13 @@ object Language extends (String => Language)
         new DBpediaNamespace("http://"+code+".dbpedia.org/resource/"),
         new DBpediaNamespace("http://"+code+".dbpedia.org/property/"),
         "http://"+code+".wikipedia.org",
-        "http://"+code+".wikipedia.org/w/api.php"
+        "https://"+code+".wikipedia.org/w/api.php"
       )
     }
     
     val languages = new HashMap[String,Language]
     
-    // All two-letter codes from http://noc.wikimedia.org/conf/langlist as of 2012-04-15,
+    // All two-letter codes from http://noc.wikimedia.org/conf/langlist as of 2015-07-16,
     // minus the redirected codes cz,dk,jp,sh (they are in the nonIsoCodes map below)
     // TODO: Automate this process. Or rather, download this list dynamically. Don't generate code.
     val isoCodes = Set(
@@ -85,10 +85,10 @@ object Language extends (String => Language)
       "ha","he","hi","ho","hr","ht","hu","hy","hz","ia","id","ie","ig","ii","ik","io","is","it",
       "iu","ja","jv","ka","kg","ki","kj","kk","kl","km","kn","ko","kr","ks","ku","kv","kw","ky",
       "la","lb","lg","li","ln","lo","lt","lv","mg","mh","mi","mk","ml","mn","mo","mr","ms","mt",
-      "my","na","nb","ne","ng","nl","nn","no","nv","ny","oc","om","or","os","pa","pi","pl","ps",
-      "pt","qu","rm","rn","ro","ru","rw","sa","sc","sd","se","sg","si","sk","sl","sm","sn","so",
-      "sq","sr","ss","st","su","sv","sw","ta","te","tg","th","ti","tk","tl","tn","to","tr","ts",
-      "tt","tw","ty","ug","uk","ur","uz","ve","vi","vo","wa","wo","xh","yi","yo","za","zh","zu"
+      "my","na","ne","ng","nl","nn","no","nv","ny","oc","om","or","os","pa","pi","pl","ps","pt",
+      "qu","rm","rn","ro","ru","rw","sa","sc","sd","se","sg","si","sk","sl","sm","sn","so","sq",
+      "sr","ss","st","su","sv","sw","ta","te","tg","th","ti","tk","tl","tn","to","tr","ts","tt",
+      "tw","ty","ug","uk","ur","uz","ve","vi","vo","wa","wo","xh","yi","yo","za","zh","zu"
     )
     
     // Maps Wikipedia language codes which do not follow ISO-639-1, to a related ISO-639-1 code.
@@ -135,6 +135,7 @@ object Language extends (String => Language)
       "gag" -> "tr",
       "gan" -> "zh",           // Gan Chinese
       "glk" -> "fa",           // Gilaki
+      "gom" -> "ne",           // Goan Konkani --- Indian
       "got" -> "it",           // Gothic --- Italian???
       "hak" -> "zh",           // Hakka Chinese
       "haw" -> "en",           // Hawaiian
@@ -154,6 +155,7 @@ object Language extends (String => Language)
       "lez" -> "ru",
       "lij" -> "it",           // Ligurian
       "lmo" -> "it",           // Lombard
+      "lrc" -> "fa",           // Luri (Iran) -> persian ???
       "ltg" -> "lv",
       "mai" -> "ne",            //Maithili -> Indian language
       "map-bms" -> "jv",       // Banyumasan
@@ -235,7 +237,7 @@ object Language extends (String => Language)
       new DBpediaNamespace("http://commons.dbpedia.org/resource/"),
       new DBpediaNamespace("http://commons.dbpedia.org/property/"),
       "http://commons.wikimedia.org",
-      "http://commons.wikimedia.org/w/api.php"
+      "https://commons.wikimedia.org/w/api.php"
     )
     
     languages("wikidata") =
@@ -248,7 +250,7 @@ object Language extends (String => Language)
       new DBpediaNamespace("http://wikidata.dbpedia.org/resource/"),
       new DBpediaNamespace("http://wikidata.dbpedia.org/property/"),
       "http://www.wikidata.org",
-      "http://www.wikidata.org/w/api.php"
+      "https://www.wikidata.org/w/api.php"
     )
 
 
