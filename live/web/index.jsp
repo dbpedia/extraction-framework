@@ -1,7 +1,8 @@
 <%@ page import="java.io.*,java.util.*,org.dbpedia.extraction.live.core.LiveOptions,org.dbpedia.extraction.live.statistics.*;" %>
 <%! String passw, path, req; %> 
 <%! boolean admin = false; %> 
-<%! String wikiAPI = LiveOptions.options.get("localApiURL"); %> 
+<%! String wikiAPI = LiveOptions.options.get("localApiURL"); %>
+<%! String lang = LiveOptions.options.get("language"); %>
 <%! int counter, numItems = Statistics.numItems; %> 
 <%
     response.setHeader("Cache-Control","no-cache"); 
@@ -33,10 +34,15 @@
                 <h3 style="text-align: left">Live Control</h3>
                 <div class="row">
                     <div class="col-md-6">
-                        <div style="padding-top: 8px; padding-bottom: 8px; text-align: left">
-                            <b>Processors State: </b> <span class="text-success" id="processorState">running</span>
+                        <div style="padding-top: 8px; padding-bottom: 8px;">
+                            <span style="float: left">
+                                <b>Processors State: </b> <span class="text-success" id="processorState">running</span>
+                            </span>
+                            <span style="float: right">
+                                <b>Language: </b> <span class="text-info"> <%= lang %> </span>
+                            </span>
                         </div>
-                        <div class="btn-group btn-group-justified">
+                        <div class="btn-group btn-group-justified" style="padding-top: 8px">
                             <% if (admin) { %>
                                 <a id="bt_start" href="#" class="btn btn-success">Start</a>
                                 <a id="bt_stop" href="#" class="btn btn-danger">Stop</a>
