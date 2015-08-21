@@ -107,23 +107,14 @@ public class LiveQueue {
 
     /*
     * Used to get a list of the next items in the queue.
-    *
-    * To achieve this we have to remove them from the queue one by one, save the information we need,
-    * and add them again to the queue.
-    * Although this isn't ideal, the PriorityBlockingQueue doesn't give us other viable options.
     * */
     public static ArrayList<String> getNextQueuedItems(){
         ArrayList<String> titles = new ArrayList<>();
-        ArrayList<LiveQueueItem> items = new ArrayList<>();
-        for (int i = 1; i <= Statistics.numItems; i++){
-            LiveQueueItem item = null;
-            try { item = take();
-            } catch (InterruptedException e) { e.printStackTrace(); }
+        Iterator<LiveQueueItem> iterator = getQueue().iterator();
+        for (int i = 1; i <= Statistics.numItems && iterator.hasNext(); i++){
+            LiveQueueItem item = iterator.next();
             titles.add("{\"id\":" + item.getItemID() + ", \"priority\":\"" + item.getPriority().toString() + "\"}");
-            items.add(item);
         }
-        for(LiveQueueItem l: items)
-            add(l);
         return titles;
     }
 
