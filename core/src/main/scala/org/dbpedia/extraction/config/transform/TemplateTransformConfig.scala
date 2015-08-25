@@ -77,6 +77,7 @@ object TemplateTransformConfig {
       "Spaced ndash" -> textNode(" – ") _ ,
       "Ndash" -> textNode("–") _ ,
       "Mdash" -> textNode(" — ") _ ,
+      "Marriage" -> extractChildren { p : PropertyNode => p.key != "end" && p.key != "()" }  _,
       "Emdash" -> textNode(" — ") _ ,
       "-" -> textNode("<br />") _ ,
       "Clr" -> textNode("<br />") _ ,
