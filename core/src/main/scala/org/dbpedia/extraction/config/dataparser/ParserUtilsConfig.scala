@@ -111,6 +111,26 @@ object ParserUtilsConfig
             "trilliún" -> 12,
             "cuaidrilliún" -> 15
         ),
+        "gl" -> Map(
+            "mil" -> 3,
+            "miles" -> 3,
+            "milleiro" -> 3,
+            "milleiros" -> 3,
+            "millar" -> 3,
+            "millares" -> 3,
+            "millón" -> 6,
+            "millóns" -> 6,
+            "mil millóns" -> 9,
+            "miles de millóns" -> 9,
+            "billón" -> 12,
+            "billóns" -> 12,
+            "mil billóns" -> 15,
+            "miles de billóns" -> 15,
+            "trillón" -> 18,
+            "trillóns" -> 18,
+            "cuadrillón" -> 24,
+            "cuadrillóns" -> 24
+        ),
         "it" -> Map(
             "mille" -> 3,
             "milione" -> 6,
