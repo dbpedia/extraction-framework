@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.live.queue;
 
+import java.util.Objects;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Dimitris Kontokostas
@@ -80,5 +82,28 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
             else
                 return this.modificationDate.compareTo(item.modificationDate);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itemID, itemPriority, itemName, modificationDate, deleted, statQueueAdd, xml);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final LiveQueueItem other = (LiveQueueItem) obj;
+        return Objects.equals(this.itemID, other.itemID)
+                && Objects.equals(this.itemPriority, other.itemPriority)
+                && Objects.equals(this.itemName, other.itemName)
+                && Objects.equals(this.modificationDate, other.modificationDate)
+                && Objects.equals(this.deleted, other.deleted)
+                && Objects.equals(this.statQueueAdd, other.statQueueAdd)
+                && Objects.equals(this.xml, other.xml);
     }
 }
