@@ -66,6 +66,7 @@ public class PageProcessor extends Thread{
             try{
                 LiveQueueItem page = LiveQueue.take();
                 if (page.equals(lastPage)) {
+                    logger.info("Ignoring duplicatre page {} ({}) with priority {}", page.getItemName(), page.getItemID(), page.getPriority());
                     continue;
                 }
                 lastPage = page;
