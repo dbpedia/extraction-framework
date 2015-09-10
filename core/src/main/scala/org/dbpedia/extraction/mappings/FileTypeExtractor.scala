@@ -32,8 +32,8 @@ class FileTypeExtractor(context: {
     // RDF properties we use.
     private val fileExtensionProperty = context.ontology.properties("fileExtension")
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
-    private val dcTypeProperty = context.ontology.properties("dct:type")
-    private val dcFormatProperty = context.ontology.properties("dct:format")
+    private val dctTypeProperty = context.ontology.properties("dct:type")
+    private val dctFormatProperty = context.ontology.properties("dct:format")
     private val dboFileURLProperty = context.ontology.properties("fileURL")
     private val dboThumbnailProperty = context.ontology.properties("thumbnail")
     private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
@@ -149,7 +149,7 @@ class FileTypeExtractor(context: {
      * Generate quads that describe the file types for an extension.
      *  <resource> dbo:fileExtension "extension"^^xsd:string
      *  <resource> 
-     *  <resource> dc:type dct:StillImage
+     *  <resource> dct:type dct:StillImage
      *  <resource> rdf:type dbo:File
      *  <resource> rdf:type dbo:Document
      *  <resource> rdf:type dbo:Image
@@ -173,21 +173,21 @@ class FileTypeExtractor(context: {
         val depiction_and_thumbnail_quads = if(fileTypeClass != dboStillImage) Seq.empty
             else generateImageURLQuads(page, subjectUri)
 
-        // 4. <resource> dc:type fileTypeClass
+        // 4. <resource> dct:type fileTypeClass
         val file_type_quad = new Quad(
             Language.English, DBpediaDatasets.FileInformation,
             subjectUri,
-            dcTypeProperty,
+            dctTypeProperty,
             fileTypeClass.uri,
             page.sourceUri,
             null
         )
             
-        // 5. <resource> dc:format "mimeType"^^xsd:string
+        // 5. <resource> dct:format "mimeType"^^xsd:string
         val mime_type_quad = new Quad(
             Language.English, DBpediaDatasets.FileInformation,
             subjectUri,
-            dcFormatProperty,
+            dctFormatProperty,
             mimeType,
             page.sourceUri,
             xsdString
