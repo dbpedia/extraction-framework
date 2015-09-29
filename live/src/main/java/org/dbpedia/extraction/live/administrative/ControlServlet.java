@@ -5,9 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Created by Andre Pereira on 27/06/2015.
@@ -16,20 +14,15 @@ public class ControlServlet extends HttpServlet {
     public ControlServlet(){}
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
         String password = request.getParameter("password");
         String type = request.getParameter("type");
         boolean result = false;
         String message = "";
 
-        String path = getServletContext().getRealPath("/") + "/../adminPassword.txt";
-        String passw = new Scanner(new File(path)).nextLine();
-
-        if(!password.equals(passw)){
-            result = false;
-            message = "Wrong password!";
-        }
+        if(!AdminAuthentication.authenticate(password))
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         else {
+            response.setStatus(HttpServletResponse.SC_OK);
             if (type.equals("start")) {
                 if(Main.state.equals("stopped")) {
                     Main.state = "starting";
@@ -47,7 +40,8 @@ public class ControlServlet extends HttpServlet {
                     message = "DBpedia Live is already stopped!";
                 }else message = "DBpedia Live can't be stopped at this moment!";
             }
+            response.getWriter().println("{\"result\":" + result + ", \"message\": \"" + message + "\"}");
         }
-        response.getWriter().println("{\"result\":" + result + ", \"message\": \"" + message + "\"}");
+
     }
 }

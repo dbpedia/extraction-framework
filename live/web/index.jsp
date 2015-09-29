@@ -9,7 +9,7 @@
     response.setHeader("Pragma","no-cache"); 
     response.setDateHeader ("Expires", -1); 
 
-    path = getServletContext().getRealPath("/") + "/../adminPassword.txt";
+    path = ClassLoader.getSystemResource("adminPassword.txt").getPath();
     passw = new Scanner(new File(path)).nextLine();
     req = request.getParameter("password");
     if(req != null && req.equals(passw))
@@ -334,8 +334,12 @@
                     $("#warningAlert").hide();
                 }, 
                 error: function (xhr, ajaxOptions, thrownError) {
-                    $("#dangerAlertText").html("<strong>Connection Error:</strong> There was a problem connecting to the server!");
+                	if(thrownError == "Forbidden") message = "<strong>Forbidden:</strong> Wrong password!";
+                	else message = "<strong>Connection Error:</strong> There was a problem connecting to the server!";
+
+                    $("#dangerAlertText").html(message);
                     $("#dangerAlert").show();
+                    $("#warningAlert").hide();
                 }
             });
         }
@@ -363,7 +367,14 @@
                             $("#dangerAlert").show();
                         }
                     },
-                    error: function (errorMessage) {}
+                    error: function (xhr, ajaxOptions, thrownError) {
+	                	if(thrownError == "Forbidden") message = "<strong>Forbidden:</strong> Wrong password!";
+	                	else message = "<strong>Connection Error:</strong> There was a problem connecting to the server!";
+
+	                    $("#dangerAlertText").html(message);
+	                    $("#dangerAlert").show();
+	                    $("#warningAlert").hide();
+	                }
                 });
             }
         }

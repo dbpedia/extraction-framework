@@ -8,9 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Created by Andre on 31/07/2015.
@@ -26,13 +24,9 @@ public class AddItemServlet extends HttpServlet {
         boolean result = false;
         String message = "";
 
-        String path = getServletContext().getRealPath("/") + "/../adminPassword.txt";
-        String passw = new Scanner(new File(path)).nextLine();
-
-        if(password == null || !password.equals(passw)){
-            result = false;
-            message = "Wrong password!";
-        }else{
+        if(!AdminAuthentication.authenticate(password))
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        else{
             LiveQueueItem newItem = new LiveQueueItem(Long.parseLong(item), "");
             newItem.setPriority(LiveQueuePriority.ManualPriority);
             LiveQueue.add(newItem);
