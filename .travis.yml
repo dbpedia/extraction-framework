@@ -9,7 +9,6 @@ branches:
     - master
 before_install:
   - sed -i.bak -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g' ~/.m2/settings.xml
-install: /bin/true
 script: "mvn clean install"
 notifications:
   email:
@@ -17,3 +16,6 @@ notifications:
       - dbpedia-developers@lists.sourceforge.net
     on_success: change
     on_failure: change
+cache:
+  directories:
+  - $HOME/.m2
