@@ -1,6 +1,6 @@
-package org.dbpedia.extraction.scripts
+package org.dbpedia.extraction.util
 
-import scala.collection.mutable.{Map,HashMap,Set,HashSet,Seq,ArrayBuffer}
+import scala.collection.mutable.{ArrayBuffer, HashMap, HashSet, Map, Seq, Set}
 
 /**
  * Resolves transitive relations in a graph and removes cycles.
