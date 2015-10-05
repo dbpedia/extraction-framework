@@ -55,6 +55,7 @@ extends PageNodeExtractor
     private val labelProperty = ontology.properties("rdfs:label")
     private val typeProperty = ontology.properties("rdf:type")
     private val propertyClass = ontology.classes("rdf:Property")
+    private val rdfLangStrDt = ontology.datatypes("rdf:langString")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Regexes
@@ -153,7 +154,7 @@ extends PageNodeExtractor
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
                                 quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, rdfLangStrDt)
                             }
                         }
                     }
@@ -182,7 +183,7 @@ extends PageNodeExtractor
             case links if !links.isEmpty => return links
             case _ =>
         }
-        StringParser.parse(node).map(value => (value, new Datatype("rdf:langString"))).toList
+        StringParser.parse(node).map(value => (value, rdfLangStrDt)).toList
     }
 
     private def extractUnitValue(node : PropertyNode) : Option[(String, Datatype)] =
@@ -194,7 +195,7 @@ extends PageNodeExtractor
 
         if (unitValues.size > 1)
         {
-            StringParser.parse(node).map(value => (value, new Datatype("rdf:langString")))
+            StringParser.parse(node).map(value => (value, rdfLangStrDt))
         }
         else if (unitValues.size == 1)
         {
