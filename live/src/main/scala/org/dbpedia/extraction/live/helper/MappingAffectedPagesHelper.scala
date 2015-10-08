@@ -25,6 +25,6 @@ object MappingAffectedPagesHelper {
     val wikiApiUrl = new URL(LiveOptions.options.get("localApiURL"))
     val api = new WikiApi(wikiApiUrl, language)
 
-    api.retrieveTemplateUsageIDs(templateTitle);
+    api.retrieveTemplateUsageIDs(templateTitle).distinct;
   }
 }

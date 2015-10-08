@@ -3,7 +3,9 @@ package org.dbpedia.extraction.live.queue;
 import org.slf4j.Logger;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -19,78 +21,47 @@ import java.util.concurrent.PriorityBlockingQueue;
 public class LiveQueue {
     private static Logger logger;
 
-    private static PriorityBlockingQueue<LiveQueueItem> queue = null;
+    private static final PriorityBlockingQueue<LiveQueueItem> queue = new PriorityBlockingQueue<LiveQueueItem>(1000);
     // this is a Map<long,int>, long is the pageID and int the number of same items in the queue (see add())
-    private static HashMap<Long,Integer> uniqueMap = null;
+    private static final Set<Long> uniqueSet = new HashSet(1000);
 
     // Keeps track of the size of each priority
-    private static HashMap<LiveQueuePriority,Long> counts = null;
+    private static final HashMap<LiveQueuePriority,Long> counts = new HashMap<LiveQueuePriority, Long>(10);
 
     // Keeps track of the max modification date per priority
-    private static HashMap<LiveQueuePriority,String> modificationDate = null;
+    private static final HashMap<LiveQueuePriority,String> modificationDate = new HashMap<LiveQueuePriority, String>(5);
 
     private LiveQueue() {
     }
 
     public static void add(LiveQueueItem item) {
-        Object value = getUniqueMap().get(item.getItemID());
-        int finalValue = 1; // default value in it does not exists
 
-        if (value != null) {
-            // Existing item, assign to highest priority
-            // NOTE: mappings priority also need to update the mappings/ontology so keep both
-            Iterator<LiveQueueItem> iterator;
-            iterator = getQueue().iterator();
+        // Simplified a lot to lower the complexity
+        if (!uniqueSet.contains(item.getItemID()) ) {
 
-            while (iterator.hasNext()) {
-                LiveQueueItem e = iterator.next();
-                if (e.getItemID() == item.getItemID()) {
-
-                    LiveQueuePriority existingPriority = e.getPriority();
-                    LiveQueuePriority newPriority = item.getPriority();
-
-                    if (newPriority.compareTo(existingPriority) > 0) {
-                        // check only for higher priority
-                        // keep both if old in mappingsPriority
-                        if (existingPriority.equals(LiveQueuePriority.MappingPriority)) {
-                            // keep both
-                            finalValue++;
-                        } else {
-                            // remove existing
-                            iterator.remove();
-                            getCounts().put(item.getPriority(), getPrioritySize(e.getPriority()) - 1);
-                        }
-                    } else {
-                        // if new priority is lower or the same do nothing
-                        return;
-                    }
-                }
-            }
+            uniqueSet.add(item.getItemID());
+            counts.put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
+            queue.add(item);
         }
-        getUniqueMap().put(item.getItemID(), finalValue);
-        getCounts().put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
-        getQueue().add(item);
     }
 
     public static LiveQueueItem take() throws InterruptedException {
 
-        LiveQueueItem item = getQueue().take();
-        int value = (Integer) getUniqueMap().remove(item.getItemID());
-        if (value != 1) {  // not single item
-            getUniqueMap().put(item.getItemID(), value - 1);
-        }
+        LiveQueueItem item = queue.take();
+        uniqueSet.remove(item.getItemID());
         // update counts
-        getCounts().put(item.getPriority(), getPrioritySize(item.getPriority()) -1);
-        getModDates().put(item.getPriority(),item.getModificationDate());
+        counts.put(item.getPriority(), getPrioritySize(item.getPriority()) - 1);
+        modificationDate.put(item.getPriority(), item.getModificationDate());
+
         return item;
     }
 
     public static long getQueueSize(){
-        return getQueue().size();
+        return queue.size();
     }
 
     public static long getPrioritySize(LiveQueuePriority priority){
-        Object value = getCounts().get(priority);
+        Object value = counts.get(priority);
         return (value == null) ? 0 : ((Long) value);
     }
 
@@ -99,53 +70,10 @@ public class LiveQueue {
             if (i.getPriority() == priority)
                 return i.getModificationDate();
         }
-        String d = getModDates().get(priority);
+        String d = modificationDate.get(priority);
         if (d != null)
             return d;
         return "";
     }
 
-    private static PriorityBlockingQueue<LiveQueueItem> getQueue() {
-        if (queue == null) {
-            synchronized (LiveQueue.class) {
-                if (queue == null) {
-                    queue = new PriorityBlockingQueue<LiveQueueItem>(1000);
-                }
-            }
-        }
-        return queue;
-    }
-
-    private static HashMap<Long,Integer> getUniqueMap() {
-        if (uniqueMap == null) {
-            synchronized (LiveQueue.class) {
-                if (uniqueMap == null) {
-                    uniqueMap = new HashMap(1000);
-                }
-            }
-        }
-        return uniqueMap;
-    }
-
-    private static HashMap<LiveQueuePriority,Long> getCounts() {
-        if (counts == null) {
-            synchronized (LiveQueue.class) {
-                if (counts == null) {
-                    counts = new HashMap<LiveQueuePriority, Long>(10);
-                }
-            }
-        }
-        return counts;
-    }
-
-    private static HashMap<LiveQueuePriority,String> getModDates() {
-        if (modificationDate == null) {
-            synchronized (LiveQueue.class) {
-                if (modificationDate == null) {
-                    modificationDate = new HashMap<LiveQueuePriority, String>(5);
-                }
-            }
-        }
-        return modificationDate;
-    }
 }

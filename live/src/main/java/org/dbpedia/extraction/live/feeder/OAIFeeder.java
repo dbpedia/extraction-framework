@@ -6,6 +6,7 @@ import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.util.OAIUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class OAIFeeder extends Feeder {
     }
 
     @Override
-    protected List<LiveQueueItem> getNextItems() {
+    protected Collection<LiveQueueItem> getNextItems() {
         List<LiveQueueItem> i = new ArrayList<>();
         i.add(oaiRecordIterator.next());
         return i;

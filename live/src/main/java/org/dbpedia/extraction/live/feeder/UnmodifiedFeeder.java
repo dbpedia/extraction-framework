@@ -5,8 +5,9 @@ import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.storage.JDBCUtil;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 /**
  * This class feeds the unmodifed pages (updated before minDaysAgo) to the Live Extractor
@@ -50,7 +51,7 @@ public class UnmodifiedFeeder extends Feeder {
     }
 
     @Override
-    protected List<LiveQueueItem> getNextItems() {
+    protected Collection<LiveQueueItem> getNextItems() {
         while (LiveQueue.getQueueSize() > threshold) {
             try {
                 int m = (int) (LiveQueue.getQueueSize() / threshold);
@@ -60,7 +61,7 @@ public class UnmodifiedFeeder extends Feeder {
                 return Collections.emptyList();
             }
         }
-        List<LiveQueueItem> items = JDBCUtil.getCacheUnmodified(minDaysAgo, chunk);
+        Set<LiveQueueItem> items = JDBCUtil.getCacheUnmodified(minDaysAgo, chunk);
         if (items.size() == 0) {
             try {
 
