@@ -104,6 +104,7 @@ object Language extends (String => Language)
       "arc" -> "tr",           // Assyrian Neo-Aramaic
       "arz" -> "ar",           // Egyptian Arabic
       "ast" -> "es",           // Asturian
+      "azb" -> "az",           // Azerbaijani
       "bar" -> "de",           // Bavarian
       "bat-smg" -> "lt",       // Samogitian
       "bcl" -> "tl",           // Central Bicolano
