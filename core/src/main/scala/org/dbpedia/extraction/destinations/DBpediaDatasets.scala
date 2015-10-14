@@ -41,7 +41,7 @@ object DBpediaDatasets
     val OntologyTypes = new Dataset("instance_types")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive")
     val OntologyProperties = new Dataset("mappingbased_properties_uncleaned_unredirected")   //TODO changes here should be reflected to the related wikidata dataset
-    val OntologyPropertiesGeo = new Dataset("mappingbased_properties_geo")
+    val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased")
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
 
     /**
