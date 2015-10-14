@@ -40,7 +40,7 @@ object DBpediaDatasets
      */
     val OntologyTypes = new Dataset("instance_types")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive")
-    val OntologyProperties = new Dataset("mappingbased_properties_uncleaned_unredirected")
+    val OntologyProperties = new Dataset("mappingbased_properties_uncleaned_unredirected")   //TODO changes here should be reflected to the related wikidata dataset
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
 
     /**
@@ -94,7 +94,7 @@ object DBpediaDatasets
     val WikidataDescriptionMappingsWiki = new Dataset("description-mappingswiki")
     val WikidataDescriptionRest = new Dataset("description-rest")
     val WikidataProperty= new Dataset("properties")
-    val WikidataR2R = new Dataset("mappingbased_properties_unredirected")  // keep same name with other languages
+    val WikidataR2R = new Dataset("mappingbased_properties_uncleaned_unredirected")  // keep same name with other languages
     val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
     val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
     val WikidataRaw = new Dataset("raw_unredirected")
