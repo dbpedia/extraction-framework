@@ -40,7 +40,7 @@ object DBpediaDatasets
      */
     val OntologyTypes = new Dataset("instance_types")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive")
-    val OntologyProperties = new Dataset("mappingbased_properties_unredirected")
+    val OntologyProperties = new Dataset("mappingbased_properties_uncleaned_unredirected")
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
 
     /**
