@@ -49,7 +49,7 @@ extends PropertyMapping
   private val pointOntProperty = context.ontology.properties("georss:point")
   private val featureOntClass =  context.ontology.classes("geo:SpatialThing")
 
-  override val datasets = Set(DBpediaDatasets.OntologyProperties)
+  override val datasets = Set(DBpediaDatasets.OntologyPropertiesGeo)
 
   override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
