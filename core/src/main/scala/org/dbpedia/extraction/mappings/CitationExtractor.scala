@@ -39,7 +39,8 @@ extends PageNodeExtractor
     private val citationTemplatesRegex = List("cite.*".r, "citation.*".r) //TODO make I18n
 
     private val typeProperty = ontology.properties("rdf:type")
-    private val rdfLangStrDt = ontology.datatypes("rdf:langString")
+    //private val rdfLangStrDt = ontology.datatypes("rdf:langString")
+    private val xsdStringDt = ontology.datatypes("xsd:string")
     private val isCitedProperty = context.language.propertyUri.append("isCitedBy")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,9 +67,10 @@ extends PageNodeExtractor
                                    .filter(_.isInstanceOf[DimensionDatatype])
                                    .map(dimension => new UnitValueParser(context, dimension, true))
 
-    private val intParser = new IntegerParser(context, true, validRange = (i => i%1==0))
+    //TODO remove number parsers for now, they mess with isbn etc
+    //private val intParser = new IntegerParser(context, true, validRange = (i => i%1==0))
 
-    private val doubleParser = new DoubleParser(context, true)
+    //private val doubleParser = new DoubleParser(context, true)
 
     private val dateTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
                                   .map(datatype => new DateTimeParser(context, new Datatype(datatype), true))
@@ -141,14 +143,14 @@ extends PageNodeExtractor
             case _ => 
         }
         extractSingleCoordinate(node).foreach(result =>  return List(result))
-        extractNumber(node).foreach(result =>  return List(result))
+        //extractNumber(node).foreach(result =>  return List(result)) //TODO remove number parsing for now
         extractRankNumber(node).foreach(result => return List(result))
         extractLinks(node) match
         {
             case links if !links.isEmpty => return links
             case _ =>
         }
-        StringParser.parse(node).map(value => (value, rdfLangStrDt)).toList
+        StringParser.parse(node).map(value => (value, xsdStringDt)).toList
     }
 
     private def extractUnitValue(node : PropertyNode) : Option[(String, Datatype)] =
@@ -160,7 +162,7 @@ extends PageNodeExtractor
 
         if (unitValues.size > 1)
         {
-            StringParser.parse(node).map(value => (value, rdfLangStrDt))
+            StringParser.parse(node).map(value => (value, xsdStringDt))
         }
         else if (unitValues.size == 1)
         {
@@ -173,12 +175,14 @@ extends PageNodeExtractor
         }
     }
 
+    /*
     private def extractNumber(node : PropertyNode) : Option[(String, Datatype)] =
     {
         intParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:integer"))))
         doubleParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:double"))))
         None
     }
+    */
 
     private def extractRankNumber(node : PropertyNode) : Option[(String, Datatype)] =
     {
@@ -248,7 +252,7 @@ extends PageNodeExtractor
         result = result.toCamelCase(SplitWordsRegex, language.locale)
 
         // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
-        result = TrailingNumberRegex.replaceFirstIn(result, "")
+        //result = TrailingNumberRegex.replaceFirstIn(result, "")
 
         result = WikiUtil.cleanSpace(result)
 
