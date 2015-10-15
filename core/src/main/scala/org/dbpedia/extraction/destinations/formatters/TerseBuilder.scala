@@ -47,7 +47,8 @@ extends UriTripleBuilder(policies) {
    */
   override def typedLiteral(value: String, datatype: String): Unit = {
     this add '"' escape value add '"'
-    this add "^^" uri(datatype, DATATYPE)
+    // do not write xsd:string datatype
+    if (datatype != "http://www.w3.org/2001/XMLSchema#string") this add "^^" uri(datatype, DATATYPE)
   }
   
   override def end(context: String): Unit = {
