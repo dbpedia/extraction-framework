@@ -328,7 +328,12 @@ class SimpleWikiParser extends WikiParser
                     List(new TextNode(destinationUri, source.line))
                 }
 
-            createInternalLinkNode(source, destinationUri, nodes, startLine, destination)
+            try {
+                createInternalLinkNode(source, destinationUri, nodes, startLine, destination)
+            } catch {
+                // This happens when en interwiki link has a language that is not defined and thows an unknown namespace error
+                case e: IllegalArgumentException => throw new WikiParserException("Failed to parse internal link: " + destination, startLine, source.findLine(startLine))
+            }
         }
         else if(source.lastTag("["))
         {
