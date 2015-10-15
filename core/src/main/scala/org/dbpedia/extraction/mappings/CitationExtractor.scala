@@ -1,29 +1,23 @@
 package org.dbpedia.extraction.mappings
 
-import collection.mutable.HashSet
-import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
-import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
+import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util._
-import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
-import scala.collection.mutable.ArrayBuffer
-import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import org.dbpedia.extraction.wikiparser._
+
+import scala.collection.mutable.{ArrayBuffer, HashSet}
 import scala.language.reflectiveCalls
 
 /**
- * This extractor extracts all properties from all infoboxes.
- * Extracted information is represented using properties in the http://xx.dbpedia.org/property/
- * namespace (where xx is the language code).
- * The names of the these properties directly reflect the name of the Wikipedia infobox property.
- * Property names are not cleaned or merged.
- * Property types are not part of a subsumption hierarchy and there is no consistent ontology for the infobox dataset.
- * The infobox extractor performs only a minimal amount of property value clean-up, e.g., by converting a value like “June 2009” to the XML Schema format “2009–06”.
- * You should therefore use the infobox dataset only if your application requires complete coverage of all Wikipeda properties and you are prepared to accept relatively noisy data.
+ * This extractor extract citation data from articles
+ * to boostrap this it is based on the infoboxExtractor
  */
-class InfoboxExtractor(
+class CitationExtractor(
   context : {
     def ontology : Ontology
     def language : Language
@@ -42,20 +36,11 @@ extends PageNodeExtractor
 
     private val wikiCode = language.wikiCode
 
-    private val minPropertyCount = InfoboxExtractorConfig.minPropertyCount
+    private val citationTemplatesRegex = List("cite.*".r, "citation.*".r) //TODO make I18n
 
-    private val minRatioOfExplicitPropertyKeys = InfoboxExtractorConfig.minRatioOfExplicitPropertyKeys
-
-    private val ignoreTemplates = InfoboxExtractorConfig.ignoreTemplates
-
-    private val ignoreTemplatesRegex = InfoboxExtractorConfig.ignoreTemplatesRegex
-
-    private val ignoreProperties = InfoboxExtractorConfig.ignoreProperties
-
-    private val labelProperty = ontology.properties("rdfs:label")
     private val typeProperty = ontology.properties("rdf:type")
-    private val propertyClass = ontology.classes("rdf:Property")
     private val rdfLangStrDt = ontology.datatypes("rdf:langString")
+    private val isCitedProperty = context.language.propertyUri.append("isCitedBy")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Regexes
@@ -69,11 +54,13 @@ extends PageNodeExtractor
     private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
 
     private val splitPropertyNodeRegexInfobox = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(wikiCode))
-                                                  DataParserConfig.splitPropertyNodeRegexInfobox.get(wikiCode).get
-                                                else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
+        DataParserConfig.splitPropertyNodeRegexInfobox.get(wikiCode).get
+    else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Parsers
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     private val unitValueParsers = ontology.datatypes.values
                                    .filter(_.isInstanceOf[DimensionDatatype])
@@ -98,7 +85,8 @@ extends PageNodeExtractor
 
     private val seenProperties = HashSet[String]()
     
-    override val datasets = Set(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxTest, DBpediaDatasets.InfoboxPropertyDefinitions)
+    override val datasets = Set(DBpediaDatasets.CitationData, DBpediaDatasets.CitationLinks /*, DBpediaDatasets.CitationTypes*/)
+
 
     override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
@@ -109,56 +97,33 @@ extends PageNodeExtractor
         /** Retrieve all templates on the page which are not ignored */
         for { template <- InfoboxExtractor.collectTemplates(node)
           resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
-          if !ignoreTemplates.contains(resolvedTitle)
-          if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
+          if citationTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined)
         }
         {
-            val propertyList = template.children.filterNot(property => ignoreProperties.get(wikiCode).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
-            var propertiesFound = false
-
-            // check how many property keys are explicitly defined
-            val countExplicitPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
-            if ((countExplicitPropertyKeys >= minPropertyCount) && (countExplicitPropertyKeys.toDouble / propertyList.size) > minRatioOfExplicitPropertyKeys)
+            for (citationIri <- getCitationIRI(template) )
             {
-                for(property <- propertyList; if (!property.key.forall(_.isDigit))) {
+
+                quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceUri, null)
+
+                for (property <- template.children; if (!property.key.forall(_.isDigit))) {
+                    // exclude numbered properties
                     // TODO clean HTML
 
                     val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
                     val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
-                    for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
-                    {
+                    for (splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode)) {
                         val propertyUri = getPropertyUri(property.key)
-                        try
-                        {
-                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                        try {
+                            quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, value, splitNode.sourceUri, datatype)
 
-                            if (InfoboxExtractorConfig.extractTemplateStatistics) 
-                            {
-                            	val stat_template = language.resourceUri.append(template.title.decodedWithNamespace)
-                            	val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
-                            	quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                               stat_property, node.sourceUri, ontology.datatypes("xsd:string"))
-                            }
+
                         }
-                        catch
-                        {
-                            case ex : IllegalArgumentException => println(ex)
-                        }
-                        propertiesFound = true
-                        seenProperties.synchronized
-                        {
-                            if (!seenProperties.contains(propertyUri))
-                            {
-                                val propertyLabel = getPropertyLabel(property.key)
-                                seenProperties += propertyUri
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, rdfLangStrDt)
-                            }
+                        catch {
+                            case ex: IllegalArgumentException => println(ex)
                         }
                     }
-
                 }
             }
         }
@@ -303,26 +268,42 @@ extends PageNodeExtractor
         result
     }
 
-
-}
-
-object InfoboxExtractor {
-
-    def collectTemplates(node : Node) : List[TemplateNode] =
+    def getCitationIRI(templateNode: TemplateNode) : Option[String] =
     {
-        node match
-        {
-            case templateNode : TemplateNode => List(templateNode)
-            case _ => node.children.flatMap(collectTemplates)
+        //first try DOI
+        for (p <- templateNode.children
+          if (p.key.toLowerCase equals("doi"))
+        ) {
+            for (s <- StringParser.parse(p)) {
+                return Some("http://doi.org/" + s.trim)
+            }
         }
-    }
 
-    def collectProperties(node : Node) : List[PropertyNode] =
-    {
-        node match
-        {
-            case propertyNode : PropertyNode => List(propertyNode)
-            case _ => node.children.flatMap(collectProperties)
+        // Then url / website
+        for (p <- templateNode.children
+             if List("url", "website").contains(p.key.toLowerCase)
+        ) {
+            return linkParser.parse(p).map(_.toString)
         }
+
+        //ISBN
+        for (p <- templateNode.children
+             if (p.key.toLowerCase equals("isbn"))
+        ) {
+            for (s <- StringParser.parse(p)) {
+                return Some("http://books.google.com/books?vid=ISBN" + s.trim.toUpperCase.replace("ISBN",""))
+            }
+        }
+
+        //ISSN
+        for (p <- templateNode.children
+             if (p.key.toLowerCase equals("issn"))
+        ) {
+            for (s <- StringParser.parse(p)) {
+                return Some("http://books.google.com/books?vid=ISSN" + s.trim.toUpperCase.replace("ISSN",""))
+            }
+        }
+
+        return None
     }
 }
