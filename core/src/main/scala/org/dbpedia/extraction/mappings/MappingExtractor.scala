@@ -80,7 +80,7 @@ extends PageNodeExtractor
           for (q <- originalGraph)
             yield
               // We split the types for the main resource only by checking the node annotations
-              if (q.dataset.equals(DBpediaDatasets.OntologyTypes) &&
+              if (q.dataset.equals(DBpediaDatasets.OntologyTypes.name) &&
                   q.subject.equals(subjectUri) &&
                   !q.value.equals(nodeClass.toString) )
                 q.copy(dataset = DBpediaDatasets.OntologyTypesTransitive.name)
