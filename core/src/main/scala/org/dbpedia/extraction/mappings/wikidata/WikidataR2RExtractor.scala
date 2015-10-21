@@ -55,29 +55,44 @@ class WikidataR2RExtractor(
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
+
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
+        val duplicateList = getDuplicates(statementGroup)
         statementGroup.getStatements.foreach {
           statement => {
+
             val claim = statement.getClaim()
             val property = claim.getMainSnak().getPropertyId().getId
-
             val equivPropertySet = getEquivalentProperties(property)
             claim.getMainSnak() match {
               case mainSnak: ValueSnak => {
                 val value = mainSnak.getValue
+                val PV = property + " " + value;
 
                 val equivClassSet = getEquivalentClass(value)
                 val receiver: WikidataCommandReceiver = new WikidataCommandReceiver
                 val command: WikidataTransformationCommands = config.getCommand(property, value, equivClassSet, equivPropertySet, receiver)
                 command.execute()
 
-                val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
+                var statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
+//                println(statement.getStatementId)
+
+                if (duplicateList.contains(PV)) {
+                  val statementId=statement.getStatementId.toString;
+                  val statementHash =statementId.substring(statementId.indexOf("$")+1,statementId.indexOf("$")+6)
+                  statementUri = WikidataUtil.getStatementUriWithHash(subjectUri, property, value,statementHash)
+                  println(statementUri)
+                }
+
+                println(statementUri)
 
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
 
                 //Wikidata qualifiers R2R mapping
                 quads ++= getQualifersQuad(page, statementUri, claim)
+
+
 
               }
 
@@ -170,9 +185,28 @@ class WikidataR2RExtractor(
         }
       }
     }
+
     quads
   }
 
+  private def getDuplicates(statementGroup: StatementGroup): mutable.MutableList[String] = {
+    var duplicateList = mutable.MutableList[String]();
+    statementGroup.getStatements.foreach {
+      statement => {
+        val claim = statement.getClaim()
+        val property = claim.getMainSnak().getPropertyId().getId
+        claim.getMainSnak() match {
+          case mainSnak: ValueSnak => {
+            val value = mainSnak.getValue
+            val PV = property + " " + value;
+            duplicateList +=PV;
+            }
+        }
+      }
+    }
+    duplicateList= duplicateList.diff(duplicateList.distinct).distinct
+    duplicateList
+  }
   private def findType(datatype: Datatype, range: OntologyType): Datatype = {
     if (datatype != null) datatype
     else if (range.isInstanceOf[Datatype]) range.asInstanceOf[Datatype]
