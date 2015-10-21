@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.config.mappings.wikidata._
+import org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology._
@@ -46,7 +47,7 @@ class WikidataR2RExtractor(
 
   // this is where we will store the output
   val WikidataR2RErrorDataset = new Dataset("wikidata-r2r-mapping-errors")
-  override val datasets = Set(DBpediaDatasets.WikidataR2R, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier,
+  override val datasets = Set(DBpediaDatasets.WikidataR2R_literals, DBpediaDatasets.WikidataR2R_objects, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier,
                               DBpediaDatasets.GeoCoordinates, DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
                               DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs)
 
@@ -102,8 +103,10 @@ class WikidataR2RExtractor(
             quads += new Quad(context.language, WikidataR2RErrorDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
           } else {
 
+            //split to literal / object datasets
+            val mapDataset = if (ontologyProperty.isInstanceOf[OntologyObjectProperty]) DBpediaDatasets.WikidataR2R_objects else DBpediaDatasets.WikidataR2R_literals
             //Wikidata R2R mapping without reification
-            val quad = new Quad(context.language, DBpediaDatasets.WikidataR2R, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
+            val quad = new Quad(context.language, mapDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
             quads += quad
 
             //Reification added to R2R mapping

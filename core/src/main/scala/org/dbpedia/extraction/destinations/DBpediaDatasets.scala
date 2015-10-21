@@ -40,7 +40,8 @@ object DBpediaDatasets
      */
     val OntologyTypes = new Dataset("instance_types")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive")
-    val OntologyProperties = new Dataset("mappingbased_properties_uncleaned_unredirected")   //TODO changes here should be reflected to the related wikidata dataset
+    val OntologyPropertiesObjects = new Dataset("mappingbased_objects_uncleaned_unredirected")   //TODO changes here should be reflected to the related wikidata dataset
+    val OntologyPropertiesLiterals = new Dataset("mappingbased_literals")
     val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased")
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
 
@@ -85,17 +86,18 @@ object DBpediaDatasets
     /**
      * Wikidata
      */
-    val WikidataLabelsMappingsWiki = new Dataset("labels-mappingswiki")
-    val WikidataLabelsRest = new Dataset("labels-rest")
+    val WikidataLabelsMappingsWiki = new Dataset("labels")
+    val WikidataLabelsRest = new Dataset("labels-nmw")
     val WikidataSameAs = new Dataset("sameas-all-wikis")
     val WikidataNameSpaceSameAs = new Dataset("sameas-wikidata")
     val WikidataSameAsExternal = new Dataset("sameas-external")
-    val WikidataAliasMappingsWiki = new Dataset("alias-mappingswiki")
-    val WikidataAliasRest = new Dataset("alias-rest")
-    val WikidataDescriptionMappingsWiki = new Dataset("description-mappingswiki")
-    val WikidataDescriptionRest = new Dataset("description-rest")
+    val WikidataAliasMappingsWiki = new Dataset("alias")
+    val WikidataAliasRest = new Dataset("alias-nmw")
+    val WikidataDescriptionMappingsWiki = new Dataset("description")
+    val WikidataDescriptionRest = new Dataset("description-nmw")
     val WikidataProperty= new Dataset("properties")
-    val WikidataR2R = new Dataset("mappingbased_properties_uncleaned_unredirected")  // keep same name with other languages
+    val WikidataR2R_literals = OntologyPropertiesLiterals
+    val WikidataR2R_objects = OntologyPropertiesObjects
     val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
     val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
     val WikidataRaw = new Dataset("raw_unredirected")

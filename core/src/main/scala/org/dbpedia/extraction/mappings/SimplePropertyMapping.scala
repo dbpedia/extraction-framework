@@ -180,7 +180,7 @@ extends PropertyMapping
         }
     }
     
-    override val datasets = Set(DBpediaDatasets.OntologyProperties,DBpediaDatasets.SpecificProperties)
+    override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals, DBpediaDatasets.SpecificProperties)
 
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
@@ -210,7 +210,7 @@ extends PropertyMapping
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
-            val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
+            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
             return Seq(quad)
         }
 
@@ -219,7 +219,7 @@ extends PropertyMapping
         
         val graph = new ArrayBuffer[Quad]
 
-        graph += new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
+        graph += new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         
         // Write specific properties
         // FIXME: copy-and-paste in CalculateMapping
@@ -242,7 +242,8 @@ extends PropertyMapping
     private def writeValue(value : Any, subjectUri : String, sourceUri : String): Seq[Quad] =
     {
         val datatype = if(ontologyProperty.range.isInstanceOf[Datatype]) ontologyProperty.range.asInstanceOf[Datatype] else null
+        val mapDataset = if (datatype == null) DBpediaDatasets.OntologyPropertiesObjects else DBpediaDatasets.OntologyPropertiesLiterals
 
-        Seq(new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, datatype))
+        Seq(new Quad(language, mapDataset, subjectUri, ontologyProperty, value.toString, sourceUri, datatype))
     }
 }

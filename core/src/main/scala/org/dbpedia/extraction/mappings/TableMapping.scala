@@ -25,7 +25,7 @@ extends Extractor[TableNode]
 
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
 
-    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyProperties,DBpediaDatasets.OntologyTypes)
+    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesObjects,DBpediaDatasets.OntologyTypes)
 
     override def extract(tableNode : TableNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
@@ -59,7 +59,7 @@ extends Extractor[TableNode]
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
+                graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
             }
 
             //Extract properties
