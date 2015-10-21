@@ -55,13 +55,11 @@ class WikidataR2RExtractor(
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
-
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
         val duplicateList = getDuplicates(statementGroup)
         statementGroup.getStatements.foreach {
           statement => {
-
             val claim = statement.getClaim()
             val property = claim.getMainSnak().getPropertyId().getId
             val equivPropertySet = getEquivalentProperties(property)
@@ -76,16 +74,12 @@ class WikidataR2RExtractor(
                 command.execute()
 
                 var statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
-//                println(statement.getStatementId)
 
                 if (duplicateList.contains(PV)) {
                   val statementId=statement.getStatementId.toString;
                   val statementHash =statementId.substring(statementId.indexOf("$")+1,statementId.indexOf("$")+6)
                   statementUri = WikidataUtil.getStatementUriWithHash(subjectUri, property, value,statementHash)
-                  println(statementUri)
                 }
-
-                println(statementUri)
 
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
 

@@ -20,12 +20,8 @@ object WikidataUtil {
   }
 
   def getItemId(value:Value) = value match {
-    case v:ItemIdValue => {
-      replaceItemId(v.toString).replace(wikidataDBpNamespace,"")
-    }
-    case _ => {
-      "V"+getHash(value)
-    }
+    case v:ItemIdValue => replaceItemId(v.toString).replace(wikidataDBpNamespace,"")
+    case _ => "V"+getHash(value)
   }
 
   def getStatementUri(subject:String, property:String,value:Value):String = {
