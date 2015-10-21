@@ -217,7 +217,7 @@ class WikidataR2RExtractor(
     val adjustedGraph = new ArrayBuffer[Quad]
 
     originalGraph.map(q => {
-      if (q.dataset.equals(DBpediaDatasets.WikidataR2R.name)) {
+      if (q.dataset.equals(DBpediaDatasets.WikidataR2R_literals.name) || q.dataset.equals(DBpediaDatasets.WikidataR2R_objects.name)) {
         q.predicate match {
 
             // split type statements, some types e.g. cordinates go to separate datasets
