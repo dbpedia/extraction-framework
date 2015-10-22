@@ -1,17 +1,19 @@
 package org.dbpedia.extraction.mappings
 
-import scala.xml.XML
-import scala.io.Source
-import scala.language.reflectiveCalls
 import java.io.{InputStream, OutputStreamWriter}
-import java.net.{URLEncoder, URL}
-import java.util.logging.{Logger, Level}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
-import org.dbpedia.extraction.wikiparser._
+import java.net.URL
+import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.ParseExceptionIgnorer
+import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+
+import scala.io.Source
+import scala.language.reflectiveCalls
+import scala.xml.XML
 
 /**
  * Extracts page abstracts.
@@ -233,8 +235,16 @@ extends PageNodeExtractor
       // for XML format
       val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
       //val text = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
-      val text = (XML.loadString(xmlAnswer) \ "query" \ "pages" \ "page" \ "extract").text.trim
-      decodeHtml(text)
+      var text = (XML.loadString(xmlAnswer) \ "query" \ "pages" \ "page" \ "extract").text.trim
+      text = decodeHtml(text)
+
+      for ((regex, replacement) <- AbstractExtractor.patternsToRemove) {
+        val matches = regex.pattern.matcher(text)
+        if (matches.find()) {
+          text = matches.replaceAll(replacement)
+        }
+      }
+      text
     }
 
     private def postProcess(pageTitle: WikiTitle, text: String): String =
@@ -347,5 +357,10 @@ object AbstractExtractor {
     ("+", "%2B"),
     (",", "%2C"),
     ("$", "%24")
+  )
+
+  val patternsToRemove = List(
+    """<div style=[^/]*/>""".r -> " ",
+    """</div>""".r -> " "
   )
 }
