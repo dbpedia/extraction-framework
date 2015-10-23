@@ -31,7 +31,7 @@ class UnitValueParser( extractionContext : {
     override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexUnitValue.contains(language))
                                             DataParserConfig.splitPropertyNodeRegexUnitValue.get(language).get
                                           else DataParserConfig.splitPropertyNodeRegexUnitValue.get("en").get
-    
+
     private val prefix = if(strict) """\s*""" else """[\D]*?"""
 
     private val postfix = if(strict) """\s*""" else ".*"
@@ -97,7 +97,8 @@ class UnitValueParser( extractionContext : {
 
         for(parseResult <- StringParser.parse(node))
         {
-            val text = parserUtils.convertLargeNumbers(parseResult)
+            val correctDashes = parseResult.replaceAll("["+DataParserConfig.dashVariationsRegex+"]", "-" )
+            val text = parserUtils.convertLargeNumbers(correctDashes)
 
             inputDatatype match
             {
@@ -387,7 +388,8 @@ class UnitValueParser( extractionContext : {
         {
             input match
             {
-                case ValueRegex1(value) => Some(value)
+                case ValueRegex1(value)
+                => Some(value)
                 case _ => None
             }
         }
@@ -395,7 +397,11 @@ class UnitValueParser( extractionContext : {
         {
             input match
             {
-                case ValueRegex2(value) => Some(value)
+                case ValueRegex2(value)=>
+                    {
+                        val prefix = if (input.startsWith("-") && !value.startsWith("-")) "-" else ""
+                        Some(prefix + value)
+                    }
                 case _ => None
             }
         }

@@ -57,7 +57,9 @@ class IntegerParser( context : { def language : Language } ,
             val result = parserUtils.parse(numberStr).doubleValue
             if( validRange(result) )
             {
-                Some(result)
+                val hasMinusSign = (!input.equals(numberStr) && DataParserConfig.dashVariations.contains(input.trim.charAt(0)))
+                val negatize = if (result>=0 && hasMinusSign) -1 else 1
+                Some(negatize * result)
             }
             else
             {
