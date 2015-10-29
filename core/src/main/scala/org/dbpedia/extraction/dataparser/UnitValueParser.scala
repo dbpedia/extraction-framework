@@ -388,8 +388,11 @@ class UnitValueParser( extractionContext : {
         {
             input match
             {
-                case ValueRegex1(value)
-                => Some(value)
+                case ValueRegex1(value) => //TODO check regular expressions to capture '-'
+                {
+                    val prefix = if (input.startsWith("-") && !value.startsWith("-")) "-" else ""
+                    Some(prefix + value)
+                }
                 case _ => None
             }
         }
@@ -397,7 +400,7 @@ class UnitValueParser( extractionContext : {
         {
             input match
             {
-                case ValueRegex2(value)=>
+                case ValueRegex2(value)=>  //TODO check regular expressions to capture '-'
                     {
                         val prefix = if (input.startsWith("-") && !value.startsWith("-")) "-" else ""
                         Some(prefix + value)
