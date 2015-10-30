@@ -6,6 +6,8 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.{UriUtils, Language}
 import org.dbpedia.extraction.wikiparser.TextNode
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
  * Template transformations.
  *
@@ -32,10 +34,22 @@ object TemplateTransformConfig {
   /**
    * Extracts all the children of the PropertyNode's in the given TemplateNode
    */
-  private def extractChildren(filter: PropertyNode => Boolean)(node: TemplateNode, lang:Language) : List[Node] = {
+  private def extractChildren(filter: PropertyNode => Boolean, split : Boolean = true)(node: TemplateNode, lang:Language) : List[Node] = {
     // We have to reverse because flatMap prepends to the final list
     // while we want to keep the original order
-    node.children.filter(filter).flatMap(_.children).reverse
+    val children : List[Node] = node.children.filter(filter).flatMap(_.children).reverse
+
+    val splitChildren = new ArrayBuffer[Node]()
+    val splitTxt = if (split) "<br />" else " "
+    for ( c <- children) {
+      splitChildren += new TextNode(splitTxt, c.line)
+      splitChildren += c
+    }
+    if (splitChildren.nonEmpty) {
+      splitChildren += new TextNode(splitTxt, 0)
+    }
+    splitChildren.toList
+
   }
 
   private def identity(node: TemplateNode, lang:Language) : List[Node] = List(node)
@@ -73,12 +87,12 @@ object TemplateTransformConfig {
   private val transformMap : Map[String, Map[String, (TemplateNode, Language) => List[Node]]] = Map(
 
     "en" -> Map(
-      "Dash" -> textNode(" – ") _ ,
-      "Spaced ndash" -> textNode(" – ") _ ,
-      "Ndash" -> textNode("–") _ ,
-      "Mdash" -> textNode(" — ") _ ,
+      "Dash" -> textNode(" - ") _ ,
+      "Spaced ndash" -> textNode(" - ") _ ,
+      "Ndash" -> textNode("-") _ ,
+      "Mdash" -> textNode(" - ") _ ,
       "Marriage" -> extractChildren { p : PropertyNode => p.key != "end" && p.key != "()" }  _,
-      "Emdash" -> textNode(" — ") _ ,
+      "Emdash" -> textNode(" - ") _ ,
       "-" -> textNode("<br />") _ ,
       "Clr" -> textNode("<br />") _ ,
       "Nowrap" -> extractChildren { p => true }  _,
