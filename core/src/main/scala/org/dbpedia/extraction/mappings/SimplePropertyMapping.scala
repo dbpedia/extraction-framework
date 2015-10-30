@@ -63,6 +63,7 @@ extends PropertyMapping
     }
 
     if(language == null) language = context.language
+    val languageResourceNamespace = language.resourceUri.namespace
 
     ontologyProperty match
     {
@@ -188,14 +189,29 @@ extends PropertyMapping
 
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.size > 0)
         {
+
             val parseResults = parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
+
+            //get the property wikitext and plainText size
+            val propertyNodeWikiLength = propertyNode.toWikiText.substring(propertyNode.toWikiText.indexOf('=')+1).trim.length // exclude '| propKey ='
+            val propertyNodeTextLength = propertyNode.propertyNodeValueToPalinText.trim.length
 
             for( parseResult <- selector(parseResults) )
             {
+                // get the actual value length
+                val resultLength = {
+                  val resultString = parseResult.toString
+                  val length = resultString.length
+                  // if it is a dbpedia resource, do not count http://xx.dbpedia.org/resource/
+                  if (resultString.startsWith(languageResourceNamespace)) length - languageResourceNamespace.length else length
+                }
+
+                //we add this in the triple context
+                val resultLengthPercentageTxt = "&split=" + parseResults.size + "&wikiTextSize=" + propertyNodeWikiLength + "&plainTextSize=" + propertyNodeTextLength + "&valueSize=" + resultLength //resultLengthPercentage
                 val g = parseResult match
                 {
-                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri)
-                    case value => writeValue(value, subjectUri, propertyNode.sourceUri)
+                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
+                    case value => writeValue(value, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
                 }
 
                 graph ++= g
