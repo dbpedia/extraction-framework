@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.dataparser.{DateTimeParser,StringParser}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
@@ -34,7 +35,7 @@ extends PropertyMapping
   private val splitString = splitMap.getOrElse(context.language.wikiCode, splitMap("en"))
 
   // TODO: the parser should resolve HTML entities
-  private val intervalSplitRegex = "(?iu)(—|–|-|&mdash;|&ndash;" + ( if (splitString.isEmpty) "" else "|" + splitString ) + ")"
+  private val intervalSplitRegex = "(?iu)(" + DataParserConfig.dashVariationsRegex + "|&mdash;|&ndash;" + ( if (splitString.isEmpty) "" else "|" + splitString ) + ")"
   
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
