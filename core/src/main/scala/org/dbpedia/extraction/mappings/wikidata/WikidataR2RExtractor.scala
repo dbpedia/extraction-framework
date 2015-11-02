@@ -46,7 +46,8 @@ class WikidataR2RExtractor(
 
   // this is where we will store the output
   val WikidataR2RErrorDataset = new Dataset("wikidata-r2r-mapping-errors")
-  override val datasets = Set(DBpediaDatasets.WikidataR2R, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier,
+  val WikidataDuplicateIRIDataset = new Dataset("wikidata-duplicate-iri-split")
+  override val datasets = Set(DBpediaDatasets.WikidataR2R, WikidataR2RErrorDataset,WikidataDuplicateIRIDataset, DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier,
                               DBpediaDatasets.GeoCoordinates, DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
                               DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs)
 
@@ -66,19 +67,18 @@ class WikidataR2RExtractor(
             claim.getMainSnak() match {
               case mainSnak: ValueSnak => {
                 val value = mainSnak.getValue
-                val PV = property + " " + value;
 
                 val equivClassSet = getEquivalentClass(value)
                 val receiver: WikidataCommandReceiver = new WikidataCommandReceiver
                 val command: WikidataTransformationCommands = config.getCommand(property, value, equivClassSet, equivPropertySet, receiver)
                 command.execute()
 
-                var statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
+                val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
 
+                val PV = property + " " + value;
                 if (duplicateList.contains(PV)) {
-                  val statementId=statement.getStatementId.toString;
-                  val statementHash =statementId.substring(statementId.indexOf("$")+1,statementId.indexOf("$")+6)
-                  statementUri = WikidataUtil.getStatementUriWithHash(subjectUri, property, value,statementHash)
+                  val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId.toString)
+                  quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, context.ontology.properties("owl:sameAs"), statementUriWithHash, page.wikiPage.sourceUri, null)
                 }
 
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
@@ -201,6 +201,7 @@ class WikidataR2RExtractor(
     duplicateList= duplicateList.diff(duplicateList.distinct).distinct
     duplicateList
   }
+
   private def findType(datatype: Datatype, range: OntologyType): Datatype = {
     if (datatype != null) datatype
     else if (range.isInstanceOf[Datatype]) range.asInstanceOf[Datatype]
