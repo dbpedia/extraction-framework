@@ -207,7 +207,11 @@ extends PropertyMapping
                 }
 
                 //we add this in the triple context
-                val resultLengthPercentageTxt = "&split=" + parseResults.size + "&wikiTextSize=" + propertyNodeWikiLength + "&plainTextSize=" + propertyNodeTextLength + "&valueSize=" + resultLength //resultLengthPercentage
+                val resultLengthPercentageTxt =
+                    "&split=" + parseResults.size +
+                    "&wikiTextSize=" + propertyNodeWikiLength +
+                    "&plainTextSize=" + propertyNodeTextLength +
+                    "&valueSize=" + resultLength //resultLengthPercentage
                 val g = parseResult match
                 {
                     case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
