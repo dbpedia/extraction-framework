@@ -49,7 +49,7 @@ class WikidataR2RExtractor(
   val WikidataR2RErrorDataset = new Dataset("wikidata-r2r-mapping-errors")
   override val datasets = Set(DBpediaDatasets.WikidataR2R_literals, DBpediaDatasets.WikidataR2R_objects, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier,
                               DBpediaDatasets.GeoCoordinates, DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
-                              DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs)
+                              DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs, DBpediaDatasets.WikidataR2R_ontology)
 
   val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
 
@@ -235,6 +235,9 @@ class WikidataR2RExtractor(
                   case None =>
                 }
             }
+
+          case "http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf"
+                => adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataR2R_ontology.name)
 
             // coordinates dataset
           case "http://www.w3.org/2003/01/geo/wgs84_pos#lat" | "http://www.w3.org/2003/01/geo/wgs84_pos#long" | "http://www.georss.org/georss/point"

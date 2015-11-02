@@ -98,6 +98,7 @@ object DBpediaDatasets
     val WikidataProperty= new Dataset("properties")
     val WikidataR2R_literals = OntologyPropertiesLiterals
     val WikidataR2R_objects = OntologyPropertiesObjects
+    val WikidataR2R_ontology = new Dataset("ontology-subclassof")
     val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
     val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
     val WikidataRaw = new Dataset("raw_unredirected")
