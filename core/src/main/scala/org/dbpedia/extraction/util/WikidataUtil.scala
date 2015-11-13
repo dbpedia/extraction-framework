@@ -28,6 +28,14 @@ object WikidataUtil {
     subject+"_"+ property.replace(WikidataUtil.wikidataDBpNamespace, "").trim+"_" + getItemId(value)
   }
 
+  def getStatementUriWithHash(subject:String, property:String,value:Value,statementId:String):String = {
+    subject+"_"+ property.replace(WikidataUtil.wikidataDBpNamespace, "").trim+"_" + getItemId(value) + "_" + getStatementHash(statementId)
+  }
+
+  def getStatementHash(statementId:String): String ={
+    statementId.substring(statementId.indexOf("$")+1,statementId.indexOf("$")+6)
+  }
+
   def getHash(value:Value):String={
     val hash_string = value.toString
     StringUtils.md5sum(hash_string).substring(0,5)
