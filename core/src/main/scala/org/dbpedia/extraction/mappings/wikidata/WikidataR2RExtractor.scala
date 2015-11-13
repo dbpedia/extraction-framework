@@ -39,6 +39,7 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   private val rdfType = context.ontology.properties("rdf:type")
+  private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
   private val rdfStatement = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
   private val rdfSubject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
   private val rdfPredicate = "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
@@ -78,7 +79,7 @@ class WikidataR2RExtractor(
                 val PV = property + " " + value;
                 if (duplicateList.contains(PV)) {
                   val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId.toString)
-                  quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, context.ontology.properties("owl:sameAs"), statementUriWithHash, page.wikiPage.sourceUri, null)
+                  quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceUri, null)
                 }
 
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
