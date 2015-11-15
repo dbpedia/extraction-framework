@@ -40,6 +40,7 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   private val rdfType = context.ontology.properties("rdf:type")
+  private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
   private val rdfStatement = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
   private val rdfSubject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
   private val rdfPredicate = "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
@@ -47,8 +48,10 @@ class WikidataR2RExtractor(
 
   // this is where we will store the output
   val WikidataR2RErrorDataset = new Dataset("wikidata-r2r-mapping-errors")
-  override val datasets = Set(DBpediaDatasets.WikidataR2R_literals, DBpediaDatasets.WikidataR2R_objects, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier,
-                              DBpediaDatasets.GeoCoordinates, DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
+  val WikidataDuplicateIRIDataset = new Dataset("wikidata-duplicate-iri-split")
+  override val datasets = Set(DBpediaDatasets.WikidataR2R_literals, DBpediaDatasets.WikidataR2R_objects, WikidataR2RErrorDataset,WikidataDuplicateIRIDataset,
+                              DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier, DBpediaDatasets.GeoCoordinates,
+                              DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
                               DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs, DBpediaDatasets.WikidataR2R_ontology)
 
   val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
@@ -58,11 +61,11 @@ class WikidataR2RExtractor(
     val quads = new ArrayBuffer[Quad]()
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
+        val duplicateList = getDuplicates(statementGroup)
         statementGroup.getStatements.foreach {
           statement => {
             val claim = statement.getClaim()
             val property = claim.getMainSnak().getPropertyId().getId
-
             val equivPropertySet = getEquivalentProperties(property)
             claim.getMainSnak() match {
               case mainSnak: ValueSnak => {
@@ -75,10 +78,18 @@ class WikidataR2RExtractor(
 
                 val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
 
+                val PV = property + " " + value;
+                if (duplicateList.contains(PV)) {
+                  val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId.toString)
+                  quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceUri, null)
+                }
+
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
 
                 //Wikidata qualifiers R2R mapping
                 quads ++= getQualifersQuad(page, statementUri, claim)
+
+
 
               }
 
@@ -173,7 +184,27 @@ class WikidataR2RExtractor(
         }
       }
     }
+
     quads
+  }
+
+  private def getDuplicates(statementGroup: StatementGroup): mutable.MutableList[String] = {
+    var duplicateList = mutable.MutableList[String]();
+    statementGroup.getStatements.foreach {
+      statement => {
+        val claim = statement.getClaim()
+        val property = claim.getMainSnak().getPropertyId().getId
+        claim.getMainSnak() match {
+          case mainSnak: ValueSnak => {
+            val value = mainSnak.getValue
+            val PV = property + " " + value;
+            duplicateList +=PV;
+            }
+        }
+      }
+    }
+    duplicateList= duplicateList.diff(duplicateList.distinct).distinct
+    duplicateList
   }
 
   private def findType(datatype: Datatype, range: OntologyType): Datatype = {
