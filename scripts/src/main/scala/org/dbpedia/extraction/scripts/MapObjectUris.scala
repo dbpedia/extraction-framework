@@ -132,7 +132,11 @@ object MapObjectUris {
         QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
           if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
           else map.get(quad.value) match {
-            case Some(uris) => for (uri <- uris) yield quad.copy(value = uri, context = quad.context + "&objectMappedFrom="+quad.value) // change object URI
+            case Some(uris) =>
+              for (uri <- uris)
+                yield quad.copy(
+                  value = uri, // change object URI
+                  context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom="+quad.value) // add change provenance
             case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
           }
         }
