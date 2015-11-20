@@ -267,7 +267,7 @@ class WikidataR2RExtractor(
                 }
             }
 
-          case "http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf"
+          case "http://www.w3.org/2000/01/rdf-schema#subClassOf"
                 => adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataR2R_ontology.name)
 
             // coordinates dataset
