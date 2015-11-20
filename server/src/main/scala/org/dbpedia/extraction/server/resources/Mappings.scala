@@ -202,7 +202,7 @@ class Mappings(@PathParam("lang") langCode : String)
       for(title <- titles) {
         val zw = try {getRdfMapping(title)}
         catch {
-          case x => ""
+          case x: Throwable => ""
         }
         builder.append(zw)
       }
