@@ -33,14 +33,10 @@ import scala.util.control.Breaks._
 
 object WikidataSubClassOf {
 
-  val subClassOfDataset = new Dataset("ontology-subclassof")
-  val datasets = Seq(subClassOfDataset)
-
   def main(args: Array[String]) {
 
     val mapper = new ObjectMapper()
     mapper.registerModule(DefaultScalaModule)
-
     val json_out = new StringWriter
 
     require(args != null && args.length == 2, "Two arguments required, extraction config file and extension to work with")
