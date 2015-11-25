@@ -88,8 +88,6 @@ object WikidataSubClassOf {
       val pw = new PrintWriter(new File("../dump/auto_generated_mapping.json"))
       pw.write(json)
       pw.close()
-      println(json)
-
     }
   }
 }
