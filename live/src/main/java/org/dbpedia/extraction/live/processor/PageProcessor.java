@@ -61,9 +61,15 @@ public class PageProcessor extends Thread{
 
     public void run(){
         LiveQueueItem currentPage = new LiveQueueItem(0,"");
+        LiveQueueItem lastPage = null;
         while(keepRunning){
             try{
                 LiveQueueItem page = LiveQueue.take();
+                if (page.equals(lastPage)) {
+                    logger.info("Ignoring duplicatre page {} ({}) with priority {}", page.getItemName(), page.getItemID(), page.getPriority());
+                    continue;
+                }
+                lastPage = page;
                 currentPage = page;
                 // If a mapping page set extractor to reload mappings and ontology
                 if (page.getPriority() == LiveQueuePriority.MappingPriority) {

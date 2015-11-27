@@ -54,7 +54,10 @@ class DoubleParser( context : { def language : Language },
 
         try
         {
-            Some(parserUtils.parse(numberStr).doubleValue)
+            val result = parserUtils.parse(numberStr).doubleValue
+            val hasMinusSign = (!input.equals(numberStr) && DataParserConfig.dashVariations.contains(input.trim.charAt(0)))
+            val negatize = if (result>=0 && hasMinusSign) -1 else 1
+            Some(negatize * result)
         }
         catch
         {

@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.ontology._
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.TemplateNode
@@ -63,6 +63,7 @@ extends PropertyMapping
     }
 
     if(language == null) language = context.language
+    val languageResourceNamespace = language.resourceUri.namespace
 
     ontologyProperty match
     {
@@ -180,7 +181,7 @@ extends PropertyMapping
         }
     }
     
-    override val datasets = Set(DBpediaDatasets.OntologyProperties,DBpediaDatasets.SpecificProperties)
+    override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals, DBpediaDatasets.SpecificProperties)
 
     override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
@@ -188,14 +189,49 @@ extends PropertyMapping
 
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.size > 0)
         {
+
             val parseResults = parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
+
+            //get the property wikitext and plainText size
+            val propertyNodeWikiLength = propertyNode.toWikiText.substring(propertyNode.toWikiText.indexOf('=')+1).trim.length // exclude '| propKey ='
+            val propertyNodeTextLength = propertyNode.propertyNodeValueToPalinText.trim.length
 
             for( parseResult <- selector(parseResults) )
             {
+                val resultString = parseResult.toString
+                val isDBpediaResource = resultString.startsWith(languageResourceNamespace)
+
+                // get the actual value length
+                val resultLength = {
+                  val length = resultString.length
+                  // if it is a dbpedia resource, do not count http://xx.dbpedia.org/resource/
+                  if (isDBpediaResource) length - languageResourceNamespace.length else length
+                }
+
+                val isHashIri = {
+                  if (isDBpediaResource) {
+                    val linkTitle = resultString.replace(languageResourceNamespace, "")
+
+                    ExtractorUtils.collectInternalLinksFromNode(propertyNode) // find the link and check if it has a fragment
+                      .exists(p => p.destination.encoded.equals(linkTitle) && p.destination.fragment != null)
+
+
+                  } else false
+
+
+                }
+
+                //we add this in the triple context
+                val resultLengthPercentageTxt =
+                    "&split=" + parseResults.size +
+                    "&wikiTextSize=" + propertyNodeWikiLength +
+                    "&plainTextSize=" + propertyNodeTextLength +
+                    "&valueSize=" + resultLength +
+                    (if (isHashIri) "&objectHasFragment=" else "")
                 val g = parseResult match
                 {
-                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri)
-                    case value => writeValue(value, subjectUri, propertyNode.sourceUri)
+                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
+                    case value => writeValue(value, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
                 }
 
                 graph ++= g
@@ -210,7 +246,7 @@ extends PropertyMapping
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
-            val quad = new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
+            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
             return Seq(quad)
         }
 
@@ -219,7 +255,7 @@ extends PropertyMapping
         
         val graph = new ArrayBuffer[Quad]
 
-        graph += new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
+        graph += new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         
         // Write specific properties
         // FIXME: copy-and-paste in CalculateMapping
@@ -242,7 +278,8 @@ extends PropertyMapping
     private def writeValue(value : Any, subjectUri : String, sourceUri : String): Seq[Quad] =
     {
         val datatype = if(ontologyProperty.range.isInstanceOf[Datatype]) ontologyProperty.range.asInstanceOf[Datatype] else null
+        val mapDataset = if (datatype == null) DBpediaDatasets.OntologyPropertiesObjects else DBpediaDatasets.OntologyPropertiesLiterals
 
-        Seq(new Quad(language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value.toString, sourceUri, datatype))
+        Seq(new Quad(language, mapDataset, subjectUri, ontologyProperty, value.toString, sourceUri, datatype))
     }
 }

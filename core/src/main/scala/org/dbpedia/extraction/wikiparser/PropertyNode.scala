@@ -21,4 +21,6 @@ case class PropertyNode(key : String, override val children : List[Node], overri
     
     // properties are skipped for plain text
     def toPlainText = ""
+
+    def propertyNodeValueToPalinText = children.map(_.toPlainText).mkString
 }

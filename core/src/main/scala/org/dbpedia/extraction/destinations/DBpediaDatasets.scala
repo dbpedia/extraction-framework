@@ -13,7 +13,7 @@ object DBpediaDatasets
     val CategoryLabels = new Dataset("category_labels")
     val Images = new Dataset("images")
     val GeoCoordinates = new Dataset("geo_coordinates")
-    val Persondata = new Dataset("persondata")
+    val Persondata = new Dataset("persondata_unredirected")
     val Pnd = new Dataset("pnd")
     val Redirects = new Dataset("redirects")
     val ArticleCategories = new Dataset("article_categories")
@@ -25,7 +25,7 @@ object DBpediaDatasets
     val PageIds = new Dataset("page_ids")
     val InterLanguageLinks = new Dataset("interlanguage_links")
     val Genders = new Dataset("genders")
-    val TopicalConcepts = new Dataset("topical_concepts")
+    val TopicalConcepts = new Dataset("topical_concepts_unredirected")
     val IriSameAsUri = new Dataset("iri_same_as_uri")
     val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
     val PageLength = new Dataset("page_length")
@@ -40,7 +40,9 @@ object DBpediaDatasets
      */
     val OntologyTypes = new Dataset("instance_types")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive")
-    val OntologyProperties = new Dataset("mappingbased_properties")
+    val OntologyPropertiesObjects = new Dataset("mappingbased_objects_uncleaned_unredirected")   //TODO changes here should be reflected to the related wikidata dataset
+    val OntologyPropertiesLiterals = new Dataset("mappingbased_literals")
+    val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased")
     val SpecificProperties = new Dataset("specific_mappingbased_properties")
 
     /**
@@ -51,7 +53,7 @@ object DBpediaDatasets
     /**
      *  Infobox
      */
-    val InfoboxProperties = new Dataset("infobox_properties")
+    val InfoboxProperties = new Dataset("infobox_properties_unredirected")
     val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions")
     val TemplateParameters = new Dataset("template_parameters")
     val InfoboxTest = new Dataset("infobox_test")
@@ -69,8 +71,8 @@ object DBpediaDatasets
      */
     val LinksToWikipediaArticle = new Dataset("wikipedia_links")
     val ExternalLinks = new Dataset("external_links")
-    val PageLinks = new Dataset("page_links")
-    val DisambiguationLinks  = new Dataset("disambiguations")
+    val PageLinks = new Dataset("page_links_unredirected")
+    val DisambiguationLinks  = new Dataset("disambiguations_unredirected")
     val Homepages = new Dataset("homepages")
     val OutDegree = new Dataset("out_degree")
 
@@ -84,21 +86,30 @@ object DBpediaDatasets
     /**
      * Wikidata
      */
-    val WikidataLabelsMappingsWiki = new Dataset("labels-mappingswiki")
-    val WikidataLabelsRest = new Dataset("labels-rest")
+    val WikidataLabelsMappingsWiki = new Dataset("labels")
+    val WikidataLabelsRest = new Dataset("labels-nmw")
     val WikidataSameAs = new Dataset("sameas-all-wikis")
     val WikidataNameSpaceSameAs = new Dataset("sameas-wikidata")
     val WikidataSameAsExternal = new Dataset("sameas-external")
-    val WikidataAliasMappingsWiki = new Dataset("alias-mappingswiki")
-    val WikidataAliasRest = new Dataset("alias-rest")
-    val WikidataDescriptionMappingsWiki = new Dataset("description-mappingswiki")
-    val WikidataDescriptionRest = new Dataset("description-rest")
+    val WikidataAliasMappingsWiki = new Dataset("alias")
+    val WikidataAliasRest = new Dataset("alias-nmw")
+    val WikidataDescriptionMappingsWiki = new Dataset("description")
+    val WikidataDescriptionRest = new Dataset("description-nmw")
     val WikidataProperty= new Dataset("properties")
-    val WikidataR2R = new Dataset("mappingbased_properties")  // keep same name with other languages
+    val WikidataR2R_literals = OntologyPropertiesLiterals
+    val WikidataR2R_objects = OntologyPropertiesObjects
+    val WikidataR2R_ontology = new Dataset("ontology-subclassof")
     val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
     val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
-    val WikidataRaw = new Dataset("raw")
+    val WikidataRaw = new Dataset("raw_unredirected")
     val WikidataRawReified = new Dataset("raw-reified")
     val WikidataRawReifiedQualifiers = new Dataset("raw-reified-qualifiers")
     val WikidataReference = new Dataset("references")
+
+    /**
+     * Citations
+     */
+    val CitationLinks = new Dataset("citation_links")
+    val CitationData = new Dataset("citation_data")
+    val CitationTypes = new Dataset("citation_types")
 }

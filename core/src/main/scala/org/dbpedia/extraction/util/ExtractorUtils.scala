@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.mappings.Extractor
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{InternalLinkNode, Node, Namespace, WikiTitle}
 import java.util.Properties
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.immutable.Map
@@ -112,5 +112,17 @@ object ExtractorUtils {
    */
   def getThumbnailURL(filename: String, language: Language):String =
       language.baseUri + "/wiki/Special:FilePath/" + filename + "?width=300"
+
+  /**
+    * Collects all internal links from a Node
+    */
+  def collectInternalLinksFromNode(node : Node) : List[InternalLinkNode] =
+  {
+    node match
+    {
+      case linkNode : InternalLinkNode => List(linkNode)
+      case _ => node.children.flatMap(collectInternalLinksFromNode)
+    }
+  }
     
 }

@@ -28,11 +28,11 @@ extends PropertyMapping
 
   private val datatype = ontologyProperty.range.asInstanceOf[Datatype]
   
-  private val quad = QuadBuilder(context.language, DBpediaDatasets.OntologyProperties, ontologyProperty, datatype) _
+  private val quad = QuadBuilder(context.language, DBpediaDatasets.OntologyPropertiesLiterals, ontologyProperty, datatype) _
   
   private def parserOption(unit: Datatype) = Option(unit).map(new DateTimeParser(context, _))
 
-  override val datasets = Set(DBpediaDatasets.OntologyProperties)
+  override val datasets = Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
   override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
   {

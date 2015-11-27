@@ -28,8 +28,8 @@ extends PageNodeExtractor
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
     
-    val list = PageLinksExtractor.collectInternalLinks(node)
-    
+    val list = ExtractorUtils.collectInternalLinksFromNode(node)
+
     list.map(link => new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty, getUri(link.destination), link.sourceUri, null))
   }
 
@@ -40,14 +40,3 @@ extends PageNodeExtractor
 
 }
 
-object PageLinksExtractor {
-
-  def collectInternalLinks(node : Node) : List[InternalLinkNode] =
-  {
-    node match
-    {
-      case linkNode : InternalLinkNode => List(linkNode)
-      case _ => node.children.flatMap(collectInternalLinks)
-    }
-  }
-}

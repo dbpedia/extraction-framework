@@ -31,8 +31,6 @@ public class Publisher extends Thread{
     private volatile HashSet<Quad> reInsertedTriples = new HashSet<>();
     private volatile HashSet<Quad> subjectsClear = new HashSet<>();
 
-    private volatile HashSet<Long> pageCache = new HashSet<Long>();
-
     private final String publishDiffBaseName = LiveOptions.options.get("publishDiffRepoPath");
 
     public Publisher(String name, int priority){
@@ -51,6 +49,8 @@ public class Publisher extends Thread{
 
     public void run()  {
 
+        final HashSet<Long> pageCache = new HashSet<Long>();
+
         while(true) {
             try {
                 // Block until next pubData
@@ -58,9 +58,14 @@ public class Publisher extends Thread{
 
                 // flush if
                 // 1) we get the same page again (possible conflict in diff order
-                // 2) we have more than 300 changesets in queue
-                // 3) the diff exceeds a triple limit
-                if (pageCache.contains(pubData.pageID) || pageCache.size() > MAX_CHANGE_SETS || addedTriples.size() > MAX_QUEUE_SIZE || deletedTriples.size() > MAX_QUEUE_SIZE || reInsertedTriples.size() > MAX_QUEUE_SIZE) {
+                // 2) we have more than MAX_CHANGE_SETS changesets in queue
+                // 3) the diff exceeds a triple limit  MAX_QUEUE_SIZE
+                if (pageCache.contains(pubData.pageID) ||
+                        pageCache.size() > MAX_CHANGE_SETS ||
+                        addedTriples.size() > MAX_QUEUE_SIZE ||
+                        deletedTriples.size() > MAX_QUEUE_SIZE ||
+                        reInsertedTriples.size() > MAX_QUEUE_SIZE ||
+                        subjectsClear.size() > MAX_QUEUE_SIZE) {
 
                     pageCache.clear();
                     flush();
