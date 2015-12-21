@@ -200,6 +200,7 @@ class WikidataR2RExtractor(
             val PV = property + " " + value;
             duplicateList +=PV;
             }
+          case _ =>
         }
       }
     }
