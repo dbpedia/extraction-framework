@@ -202,7 +202,8 @@ object ParserUtilsConfig
      */
     val decimalSeparators = Map(
         "bg" -> ",|.",
-        "fr" -> ",|."
+        "fr" -> ",|.",
+        "gl" -> ","
         
     )
 
