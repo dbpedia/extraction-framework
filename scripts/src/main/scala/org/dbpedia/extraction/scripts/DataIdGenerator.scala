@@ -72,7 +72,7 @@ object DataIdGenerator {
         val subModel = defaultModel.difference(ModelFactory.createDefaultModel())
         val model = ModelFactory.createDefaultModel()
 
-        val outfile = new File(dump + "/" + lang + "/" + configMap.get("outputFileTemplate").getAsString.value + ".ttl")
+        val outfile = new File(dump + "/" + lang + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang + ".ttl")
         addPrefixes(subModel)
         addPrefixes(model)
 
@@ -86,7 +86,7 @@ object DataIdGenerator {
           }
         }
 
-        uri = subModel.createResource(webDir + lang + "/dataid.ttl")
+        uri = subModel.createResource(webDir + lang + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang + ".ttl")
         require(uri != null, "Please provide a valid directory")
         subModel.add(uri, RDF.`type`, subModel.createResource(subModel.getNsPrefixURI("dataid") + "DataId"))
 
