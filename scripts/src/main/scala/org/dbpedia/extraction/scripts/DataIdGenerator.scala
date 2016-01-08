@@ -1,15 +1,14 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.{FilenameFilter, FileOutputStream, File}
+import java.io._
 import java.net.URI
+import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.Date
 
 import com.hp.hpl.jena.rdf.model.{Model, ModelFactory, Resource}
 import com.hp.hpl.jena.vocabulary.RDF
-import org.apache.jena.atlas.json.{JsonObject, JSON}
-import org.apache.jena.riot.RDFFormat
-import org.apache.jena.riot.system.{StreamRDF, StreamRDFWriter}
+import org.apache.jena.atlas.json.{JSON, JsonObject}
 
 import scala.collection.JavaConverters._
 
@@ -45,7 +44,7 @@ object DataIdGenerator {
     val compression = configMap.get("fileExtension").getAsString.value
     require(compression.startsWith("."), "please provide a valid file extension starting with a dot")
 
-    val extensions = configMap.get("serializations").getAsArray.subList(0,configMap.get("serializations").getAsArray.size()-1).asScala
+    val extensions = configMap.get("serializations").getAsArray.subList(0,configMap.get("serializations").getAsArray.size()).asScala
     require(extensions.map(x => x.getAsString.value().startsWith(".")).foldLeft(true)(_ && _), "list of valid serialization extensions starting with a dot")
 
     val output = dump + "\\" + configMap.get("outputFileTemplate").getAsString.value
@@ -61,7 +60,7 @@ object DataIdGenerator {
 
     val defaultModel = ModelFactory.createDefaultModel()
 
-    addPrefixes(defaultModel, null)
+    addPrefixes(defaultModel)
 
     for(dir <- dump.listFiles())
     {
@@ -72,10 +71,8 @@ object DataIdGenerator {
         val model = ModelFactory.createDefaultModel()
 
         val outfile = new File(output + "_" + lang + ".ttl")
-        val stream = StreamRDFWriter.getWriterStream(new FileOutputStream(outfile), RDFFormat.TURTLE_BLOCKS)
-        stream.start()
-        addPrefixes(subModel, stream)
-        addPrefixes(model, null)
+        addPrefixes(subModel)
+        addPrefixes(model)
 
         val filterstring = ("^[^$]+_" + lang + "(" + extensions.foldLeft(new StringBuilder){ (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + ")" + compression).replace(".", "\\.")
         val filter = new FilenameFilter {
@@ -105,7 +102,7 @@ object DataIdGenerator {
         subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dataid"), "associatedAgent"), maintainer)
         subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dataid"), "associatedAgent"), contact)
 
-        addDataset(subModel, lang, "dataset", maintainer, true)
+        addDataset(subModel, lang, "dataset", creator, true)
         topset = dataset
 
         subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("foaf"), "primaryTopic"), topset)
@@ -122,25 +119,21 @@ object DataIdGenerator {
           if(lastFile != dis.substring(0, dis.lastIndexOf("_")))
           {
             lastFile = dis.substring(0, dis.lastIndexOf("_"))
-            addDataset(model, lang, lastFile, maintainer)
+            addDataset(model, lang, lastFile, creator)
             subModel.add(topset, model.createProperty(model.getNsPrefixURI("void"), "subset"), dataset)
           }
-          addDistribution(model, lang, dis, maintainer)
+          addDistribution(model, lang, dis, creator)
         }
 
-        val itrSub = subModel.listStatements
-        while(itrSub.hasNext)
-        {
-          stream.triple(itrSub.next().asTriple())
-        }
-
-
-        val itr = model.listStatements
-        while(itr.hasNext)
-        {
-          stream.triple(itr.next().asTriple())
-        }
-        stream.finish()
+        subModel.write(new FileOutputStream(outfile), "TURTLE")
+        val baos = new ByteArrayOutputStream()
+        model.write(baos, "TURTLE")
+        var outString = new String( baos.toByteArray(), Charset.defaultCharset())
+        outString = outString.replaceAll("(@prefix).*\\n", "")
+        val os = new FileOutputStream(outfile, true)
+        val printStream = new PrintStream(os)
+        printStream.print(outString)
+        printStream.close()
       }
     }
 
@@ -222,7 +215,7 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "format"), model.createLiteral(if(postfix.contains(".ttl")) "text/turtle" else if(postfix.contains(".tql") || postfix.contains(".nq")) "application/n-quads" else if(postfix.contains(".nt")) "application/n-triples" else ""))
     }
 
-    def addPrefixes(model: Model, stream: StreamRDF): Unit =
+    def addPrefixes(model: Model): Unit =
     {
       model.setNsPrefix("dataid", "http://dataid.dbpedia.org/ns/core#")
       model.setNsPrefix("dc", "http://purl.org/dc/terms/")
@@ -236,22 +229,6 @@ object DataIdGenerator {
       model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
       model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#")
       model.setNsPrefix("dmp", "http://dataid.dbpedia.org/ns/dmp#")
-
-      if(stream != null)
-      {
-        stream.prefix("dataid", "http://dataid.dbpedia.org/ns/core#")
-        stream.prefix("dc", "http://purl.org/dc/terms/")
-        stream.prefix("dcat", "http://www.w3.org/ns/dcat#")
-        stream.prefix("void", "http://rdfs.org/ns/void#")
-        stream.prefix("prov", "http://www.w3.org/ns/prov#")
-        stream.prefix("xsd", "http://www.w3.org/2001/XMLSchema#")
-        stream.prefix("owl", "http://www.w3.org/2002/07/owl#")
-        stream.prefix("foaf", "http://xmlns.com/foaf/0.1/")
-        stream.prefix("xsd", "http://www.w3.org/2001/XMLSchema#")
-        stream.prefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
-        stream.prefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#")
-        stream.prefix("dmp", "http://dataid.dbpedia.org/ns/dmp#")
-      }
     }
   }
 }
