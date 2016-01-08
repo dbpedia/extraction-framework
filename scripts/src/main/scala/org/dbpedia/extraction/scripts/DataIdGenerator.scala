@@ -5,6 +5,7 @@ import java.net.URI
 import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.logging.{Level, Logger}
 
 import com.hp.hpl.jena.rdf.model.{Model, ModelFactory, Resource}
 import com.hp.hpl.jena.vocabulary.RDF
@@ -34,6 +35,8 @@ object DataIdGenerator {
     var dataset: Resource = null
     var topset: Resource = null
 
+    val logger = Logger.getLogger(getClass.getName)
+
     // Collect arguments
     val webDir = configMap.get("webDir").getAsString.value()
     require(URI.create(webDir) != null, "Please specify a valid web directory!")
@@ -47,8 +50,7 @@ object DataIdGenerator {
     val extensions = configMap.get("serializations").getAsArray.subList(0,configMap.get("serializations").getAsArray.size()).asScala
     require(extensions.map(x => x.getAsString.value().startsWith(".")).foldLeft(true)(_ && _), "list of valid serialization extensions starting with a dot")
 
-    val output = dump + "\\" + configMap.get("outputFileTemplate").getAsString.value
-    require(!configMap.get("outputFileTemplate").getAsString.value.contains("."), "Please specify a valid output file name without extension")
+     require(!configMap.get("outputFileTemplate").getAsString.value.contains("."), "Please specify a valid output file name without extension")
 
     val dbpVersion = configMap.get("dbpediaVersion").getAsString.value
     val idVersion = configMap.get("dataidVersion").getAsString.value
@@ -70,7 +72,7 @@ object DataIdGenerator {
         val subModel = defaultModel.difference(ModelFactory.createDefaultModel())
         val model = ModelFactory.createDefaultModel()
 
-        val outfile = new File(output + "_" + lang + ".ttl")
+        val outfile = new File(dump + "/" + lang + "/" + configMap.get("outputFileTemplate").getAsString.value + ".ttl")
         addPrefixes(subModel)
         addPrefixes(model)
 
@@ -134,6 +136,7 @@ object DataIdGenerator {
         val printStream = new PrintStream(os)
         printStream.print(outString)
         printStream.close()
+        logger.log(Level.FINE, "finished DataId: " + outfile.getAbsolutePath)
       }
     }
 
