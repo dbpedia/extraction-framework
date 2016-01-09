@@ -136,7 +136,7 @@ object DataIdGenerator {
         val printStream = new PrintStream(os)
         printStream.print(outString)
         printStream.close()
-        logger.log(Level.FINE, "finished DataId: " + outfile.getAbsolutePath)
+        logger.log(Level.INFO, "finished DataId: " + outfile.getAbsolutePath)
       }
     }
 
@@ -211,8 +211,9 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
       val f = new File(dump + "\\" + lang + "\\" + currentFile)
+      logger.log(Level.INFO, "file scanned: " + f.getAbsolutePath)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(f.length.toString, model.getNsPrefixURI("xsd") + "integer") )
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), dist)
+      model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + lang + "/" + currentFile))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "mediaType"), model.createLiteral(if(compression.contains("gz")) "application/x-gzip" else if(compression.contains("bz2")) "application/x-bzip2" else ""))
       val postfix = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "format"), model.createLiteral(if(postfix.contains(".ttl")) "text/turtle" else if(postfix.contains(".tql") || postfix.contains(".nq")) "application/n-quads" else if(postfix.contains(".nt")) "application/n-triples" else ""))
