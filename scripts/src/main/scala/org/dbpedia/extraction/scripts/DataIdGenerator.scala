@@ -210,7 +210,7 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "issued"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date") )
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
-      val f = new File(dump + "\\" + lang + "\\" + currentFile)
+      val f = new File(dump + "/" + lang + "/" + currentFile)
       logger.log(Level.INFO, "file scanned: " + f.getAbsolutePath)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(f.length.toString, model.getNsPrefixURI("xsd") + "integer") )
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + lang + "/" + currentFile))
