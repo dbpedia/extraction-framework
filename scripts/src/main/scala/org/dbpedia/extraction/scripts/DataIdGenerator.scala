@@ -27,7 +27,7 @@ object DataIdGenerator {
     )
 
     val source = scala.io.Source.fromFile(args(0))
-    val jsonString = source.mkString
+    val jsonString = source.mkString.replaceAll("#.*", "")
     source.close()
 
     val configMap = JSON.parse(jsonString)
@@ -59,6 +59,8 @@ object DataIdGenerator {
 
     val license = configMap.get("licenseUri").getAsString.value
     require(URI.create(license) != null, "Please enter a valid license uri (odrl license)")
+
+    val isoCodeMap = configMap.get("wikiToIso639-3Map").getAsObject
 
     val defaultModel = ModelFactory.createDefaultModel()
 
@@ -191,7 +193,8 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral("DBpedia", "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral(currentFile, "en"))
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang))
+      if(isoCodeMap.get(lang) != null && isoCodeMap.get(lang).getAsString.value.length > 0)
+        model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "language"), model.createResource("http://lexvo.org/id/iso639-3/" + isoCodeMap.get(lang).getAsString.value()))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dataset)
     }
 
