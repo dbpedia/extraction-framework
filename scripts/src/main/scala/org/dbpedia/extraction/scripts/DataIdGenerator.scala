@@ -10,13 +10,19 @@ import java.util.logging.{Level, Logger}
 import com.hp.hpl.jena.rdf.model.{Model, ModelFactory, Resource}
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.jena.atlas.json.{JSON, JsonObject}
+import org.dbpedia.extraction.destinations.{Dataset, DBpediaDatasets}
+import org.dbpedia.extraction.util.Language
 
 import scala.collection.JavaConverters._
+import reflect.runtime.universe._
+import reflect.runtime.currentMirror
+
 
 /**
  * Created by Chile on 1/8/2016.
  */
 object DataIdGenerator {
+
 
   val dateformat = new SimpleDateFormat("yyyy-MM-dd")
   def main(args: Array[String]) {
@@ -61,8 +67,13 @@ object DataIdGenerator {
     val license = configMap.get("licenseUri").getAsString.value
     require(URI.create(license) != null, "Please enter a valid license uri (odrl license)")
 
-    val isoCodeMap = configMap.get("wikiToIso639-3Map").getAsObject
-    val datasetDescriptions = configMap.get("datasetDescriptions").getAsObject
+    val r = currentMirror.reflect(DBpediaDatasets)
+    val datasetDescriptions = r.symbol.typeSignature.members.toStream
+      .collect{case s : TermSymbol if !s.isMethod => r.reflectField(s)}
+      .map(t => t.get match {
+        case y : Dataset => y
+        case _ =>
+      }).toList.asInstanceOf[List[Dataset]]
 
     val defaultModel = ModelFactory.createDefaultModel()
 
@@ -70,32 +81,38 @@ object DataIdGenerator {
 
     for(dir <- dump.listFiles())
     {
-      val lang = dir.getName
-      val filterstring = ("^[^$]+_" + lang + "(" + extensions.foldLeft(new StringBuilder){ (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + ")" + compression).replace(".", "\\.")
-      val filter = new FilenameFilter {
-        override def accept(dir: File, name: String): Boolean = {
-          if(name.matches(filterstring))
-            return true
-          else
-            return false
-        }
-      }
-
       if(dir.isDirectory)
       {
+        val lang = Language.get(dir.getName) match{
+          case Some(l) => l
+          case _ => {
+            logger.log(Level.INFO, "no language found for: " + dir.getName)
+            null
+          }
+        }
+        val filterstring = ("^[^$]+_" + dir.getName + "(" + extensions.foldLeft(new StringBuilder){ (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + ")" + compression).replace(".", "\\.")
+        val filter = new FilenameFilter {
+          override def accept(dir: File, name: String): Boolean = {
+            if(name.matches(filterstring))
+              return true
+            else
+              return false
+          }
+        }
+
         val distributions = dir.listFiles(filter).map(x => x.getName).toList.sorted
 
-        if(distributions.map(x => x.contains("infobox-properties")).foldRight(false)(_ || _)) {
+        if(lang != null && distributions.map(x => x.contains("infobox-properties")).foldRight(false)(_ || _)) {
 
           val subModel = defaultModel.difference(ModelFactory.createDefaultModel())
           val model = ModelFactory.createDefaultModel()
 
-          val outfile = new File(dump + "/" + lang + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang + ".ttl")
+          val outfile = new File(dump + "/" + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
           addPrefixes(subModel)
           addPrefixes(model)
 
 
-          uri = subModel.createResource(webDir + lang + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang + ".ttl")
+          uri = subModel.createResource(webDir + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
           require(uri != null, "Please provide a valid directory")
           subModel.add(uri, RDF.`type`, subModel.createResource(subModel.getNsPrefixURI("dataid") + "DataId"))
 
@@ -160,7 +177,7 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dmp"), "openness"), model.createLiteral(configMap.get("dmpopenness").getAsString.value, "en"))
     }
 
-    def addAgent(model: Model, lang: String, agentMap: JsonObject): Resource =
+    def addAgent(model: Model, lang: Language, agentMap: JsonObject): Resource =
     {
       val agent = model.createResource(agentMap.get("uri").getAsString.value())
       model.add(agent, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Agent"))
@@ -169,7 +186,7 @@ object DataIdGenerator {
         model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "homepage"), model.createResource(agentMap.get("homepage").getAsString.value()))
       model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "mbox"), model.createLiteral(agentMap.get("mbox").getAsString.value()))
 
-      val context = model.createResource(webDir + lang + "/dataid.ttl?subj=" + agentMap.get("role").getAsString.value().toLowerCase + "Context")
+      val context = model.createResource(webDir + lang.wikiCode + "/dataid.ttl?subj=" + agentMap.get("role").getAsString.value().toLowerCase + "Context")
       model.add(context, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "AuthorityEntityContext"))
       model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorizedAgent"), agent)
       model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorityAgentRole"), model.createResource(model.getNsPrefixURI("dataid") + agentMap.get("role").getAsString.value()))
@@ -179,18 +196,23 @@ object DataIdGenerator {
       agent
     }
 
-    def addDataset(model: Model, lang: String, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Unit =
+    def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Unit =
     {
       dataset = model.createResource(uri.getURI + "?set=" + currentFile)
       model.add(dataset, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
       if(!toplevelSet) //not!
       {
         model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "rootResource"), topset)
-        if(datasetDescriptions.get(currentFile) != null)
-          model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(datasetDescriptions.get(currentFile).getAsString.value(), "en"))
+
+        datasetDescriptions.find(x => x.name == currentFile && x.description != null) match
+        {
+          case Some(d) => model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
+          case None =>
+        }
+
       }
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {" " + lang} else "") + " dump dataset", "en"))
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang} else "") + "_" + dbpVersion, "en"))
+      model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
+      model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "landingPage"), model.createResource("http://dbpedia.org/"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "hasAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
@@ -200,21 +222,27 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral("DBpedia", "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral(currentFile, "en"))
-      if(isoCodeMap.get(lang) != null && isoCodeMap.get(lang).getAsString.value.length > 0)
-        model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "language"), model.createResource("http://lexvo.org/id/iso639-3/" + isoCodeMap.get(lang).getAsString.value()))
+      if(lang.iso639_3 != null && lang.iso639_3.length > 0)
+        model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang.iso639_3))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dataset)
 
     }
 
-    def addDistribution(model: Model, lang: String, currentFile: String, associatedAgent: Resource): Unit =
+
+    def addDistribution(model: Model, lang: Language, currentFile: String, associatedAgent: Resource): Unit =
     {
       val dist = model.createResource(uri.getURI + "?file=" + currentFile)
       model.add(dist, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SingleFile"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "distribution"), dist)
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {" " + lang} else "") + " dump dataset", "en"))
-      if(datasetDescriptions.get(currentFile.substring(0, currentFile.lastIndexOf("_"))) != null)
-        model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(datasetDescriptions.get(currentFile.substring(0, currentFile.lastIndexOf("_"))).getAsString.value(), "en"))
-      model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang} else "") + "_" + dbpVersion, "en"))
+      model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
+
+      datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_")) && x.description != null) match
+      {
+        case Some(d) => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
+        case None =>
+      }
+
+      model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "hasAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "associatedAgent"), associatedAgent)
@@ -222,10 +250,10 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "issued"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date") )
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
-      val f = new File(dump + "/" + lang + "/" + currentFile)
+      val f = new File(dump + "/" + lang.wikiCode + "/" + currentFile)
       logger.log(Level.INFO, "file scanned: " + f.getAbsolutePath)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(f.length.toString, model.getNsPrefixURI("xsd") + "integer") )
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + lang + "/" + currentFile))
+      model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + lang.wikiCode + "/" + currentFile))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "mediaType"), model.createLiteral(if(compression.contains("gz")) "application/x-gzip" else if(compression.contains("bz2")) "application/x-bzip2" else ""))
       val postfix = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "format"), model.createLiteral(if(postfix.contains(".ttl")) "text/turtle" else if(postfix.contains(".tql") || postfix.contains(".nq")) "application/n-quads" else if(postfix.contains(".nt")) "application/n-triples" else ""))
