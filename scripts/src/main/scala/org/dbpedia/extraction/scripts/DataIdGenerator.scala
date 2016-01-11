@@ -209,8 +209,7 @@ object DataIdGenerator {
         datasetDescriptions.find(x => x.name == currentFile && x.description != null) match
         {
           case Some(d) => model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
-          case None => err.println("Could not find description gor " + lang.wikiCode + " / " + currentFile)
-          case None => err.println("Could not find description gor " + lang.wikiCode + " / " + currentFile)
+          case None => err.println("Could not find description for dataset: " + lang.wikiCode + " / " + currentFile)
         }
 
       }
@@ -242,7 +241,7 @@ object DataIdGenerator {
       datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_")) && x.description != null) match
       {
         case Some(d) => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
-        case None =>
+        case None => err.println("Could not find description for distribution: " + lang.wikiCode + " / " + currentFile)
       }
 
       model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
