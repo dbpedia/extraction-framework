@@ -16,6 +16,7 @@ import org.dbpedia.extraction.util.Language
 import scala.collection.JavaConverters._
 import reflect.runtime.universe._
 import reflect.runtime.currentMirror
+import scala.io.Source
 
 
 /**
@@ -50,6 +51,10 @@ object DataIdGenerator {
 
     val dump = new File(configMap.get("localDir").getAsString.value)
     require(dump.isDirectory() && dump.canRead(), "Please specify a valid local dump directory!")
+
+    //not required
+    val lbp = new File(configMap.get("linesBytesPacked").getAsString.value)
+    val lbpMap = Source.fromFile(configMap.get("linesBytesPacked").getAsString.value).getLines.map(_.split(";")).map(x => x(0) -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))).toMap
 
     val compression = configMap.get("fileExtension").getAsString.value
     require(compression.startsWith("."), "please provide a valid file extension starting with a dot")
@@ -144,11 +149,13 @@ object DataIdGenerator {
           for (dis <- distributions) {
             if (lastFile != dis.substring(0, dis.lastIndexOf("_"))) {
               lastFile = dis.substring(0, dis.lastIndexOf("_"))
-              addDataset(model, lang, lastFile, creator)
+              addDataset(model, lang, dis, creator)
               subModel.add(topset, model.createProperty(model.getNsPrefixURI("void"), "subset"), dataset)
             }
             addDistribution(model, lang, dis, creator)
           }
+
+          //TODO validate & publish DataIds online!!!
 
           subModel.write(new FileOutputStream(outfile), "TURTLE")
           val baos = new ByteArrayOutputStream()
@@ -198,33 +205,40 @@ object DataIdGenerator {
 
     def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Unit =
     {
-      dataset = model.createResource(uri.getURI + "?set=" + currentFile)
+      val datasetName = if(currentFile.contains("_")) currentFile.substring(0, currentFile.lastIndexOf("_")) else currentFile
+      dataset = model.createResource(uri.getURI + "?set=" + datasetName)
       model.add(dataset, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
       if(!toplevelSet) //not!
       {
         model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "rootResource"), topset)
 
-        datasetDescriptions.find(x => x.name == currentFile && x.description != null) match
+        datasetDescriptions.find(x => x.name == datasetName && x.description != null) match
         {
           case Some(d) => model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
           case None =>
         }
 
       }
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
+      model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + datasetName.substring(datasetName.lastIndexOf("/") +1) + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
+      model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(datasetName.substring(datasetName.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "landingPage"), model.createResource("http://dbpedia.org/"))
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
+      //TODO model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
+      //TODO model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dataset)
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "hasAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "associatedAgent"), associatedAgent)
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "modified"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date") )
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "issued"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date") )
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral("DBpedia", "en"))
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral(currentFile, "en"))
+      model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral(datasetName, "en"))
       if(lang.iso639_3 != null && lang.iso639_3.length > 0)
         model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang.iso639_3))
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dataset)
+
+      lbpMap.get(("core-i18n/" + lang.wikiCode + "/" + currentFile).replace(".bz2", "")) match {
+        case Some(triples) =>
+          model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "triples"), model.createTypedLiteral(triples.get("lines").get, model.getNsPrefixURI("xsd") + "integer") )
+        case None =>
+      }
 
     }
 
@@ -243,16 +257,19 @@ object DataIdGenerator {
       }
 
       model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
+      //TODO model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
+      //TODO model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "hasAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "associatedAgent"), associatedAgent)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "modified"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date") )
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "issued"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date") )
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
-      val f = new File(dump + "/" + lang.wikiCode + "/" + currentFile)
-      logger.log(Level.INFO, "file scanned: " + f.getAbsolutePath)
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(f.length.toString, model.getNsPrefixURI("xsd") + "integer") )
+
+      lbpMap.get(("core-i18n/" + lang.wikiCode + "/" + currentFile).replace(".bz2", "")) match {
+        case Some(bytes) =>
+          model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(bytes.get(("bz2")).get, model.getNsPrefixURI("xsd") + "integer") )
+        case None =>
+      }
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + lang.wikiCode + "/" + currentFile))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "mediaType"), model.createLiteral(if(compression.contains("gz")) "application/x-gzip" else if(compression.contains("bz2")) "application/x-bzip2" else ""))
       val postfix = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
