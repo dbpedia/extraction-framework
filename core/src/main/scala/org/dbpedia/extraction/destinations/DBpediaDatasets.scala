@@ -17,8 +17,8 @@ object DBpediaDatasets
     val Pnd = new Dataset("pnd")
     val Redirects = new Dataset("redirects", "Dataset containing redirects between articles in Wikipedia.")
     val ArticleCategories = new Dataset("article_categories", "Links from concepts to categories using the SKOS vocabulary.")
-    val ArticleTemplates = new Dataset("article_templates")
-    val ArticleTemplatesNested = new Dataset("article_templates_nested")
+    val ArticleTemplates = new Dataset("article_templates", "Templates used in an article (top-level)")
+    val ArticleTemplatesNested = new Dataset("article_templates_nested", "Templates used in an article (nested)")
     val SkosCategories = new Dataset("skos_categories", "Information which concept is a category and how categories are related using the SKOS Vocabulary.")
     val RevisionUris = new Dataset("revision_uris", "Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.")
     val RevisionIds = new Dataset("revision_ids", "Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.")
@@ -26,12 +26,12 @@ object DBpediaDatasets
     val PageIds = new Dataset("page_ids", "Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.")
     val InterLanguageLinks = new Dataset("interlanguage_links", "Dataset linking a DBpedia resource to the same resource in other languages and in ((http:www.wikidata.org Wikidata,,. Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
     val Genders = new Dataset("genders", "Dataset trying to identify the gender of a resource")
-    val TopicalConcepts = new Dataset("topical_concepts_unredirected")
+    val TopicalConcepts = new Dataset("topical_concepts_unredirected", "Resources that describe a category")
     val IriSameAsUri = new Dataset("iri_same_as_uri", "owl:sameAs links between the ((http:tools.ietf.org/html/rfc3987 IRI,, and ((http:tools.ietf.org/html/rfc3986 URI,, format of DBpedia resources. Only extracted when IRI and URI are actually different.")
     val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
     val PageLength = new Dataset("page_length", "Numbers of characters contained in a Wikipedia article's source.")
-    val ImageGalleries = new Dataset("image_galleries")
-    val ImageAnnotations = new Dataset("image_annotations")
+    val ImageGalleries = new Dataset("image_galleries", "An image gallery for a resource")
+    val ImageAnnotations = new Dataset("image_annotations", "Annotations of image regions")
     val KMLFiles = new Dataset("kml_files", "Description of KML files from Commons")
     val AnchorText = new Dataset("anchor_text", "Texts used in links to refer to Wikipedia articles from other Wikipedia articles.")
     val SurfaceForms = new Dataset("surface_forms", "Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name.")
@@ -41,14 +41,14 @@ object DBpediaDatasets
      */
     val OntologyTypes = new Dataset("instance_types", "Contains triples of the form $object rdf:type $class from the mapping-based extraction.")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive", "Contains transitive rdf:type $class based on the DBpedia ontology.")
-    val OntologyPropertiesObjects = new Dataset("mappingbased_objects_uncleaned_unredirected", "Errors detected in the mapping based properties. At them moment the errors are limited to ranges that are disjoint with the property definition.")   //TODO changes here should be reflected to the related wikidata dataset
-    val OntologyPropertiesLiterals = new Dataset("mappingbased_literals")
+    val OntologyPropertiesObjects = new Dataset("mappingbased_objects_uncleaned_unredirected")
+    val OntologyPropertiesLiterals = new Dataset("mappingbased_literals", "High-quality data extracted from Infoboxes using the mapping-based extraction (Literal properties only). The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
     val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased", "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki")
     val SpecificProperties = new Dataset("specific_mappingbased_properties", "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.")
 
-    val OntologyPropertiesObjectsCleaned = new Dataset("mappingbased-objects");
-    val OntologyPropertiesDisjointRange = new Dataset("mappingbased-objects-disjoint-range");
-    val OntologyPropertiesDisjointDomain = new Dataset("mappingbased-objects-disjoint-domain");
+    val OntologyPropertiesObjectsCleaned = new Dataset("mappingbased-objects", "High-quality data extracted from Infoboxes using the mapping-based extraction (Object properties only). The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.");
+    val OntologyPropertiesDisjointRange = new Dataset("mappingbased-objects-disjoint-range", "Errors detected in the mapping based properties (disjoint range).");
+    val OntologyPropertiesDisjointDomain = new Dataset("mappingbased-objects-disjoint-domain", "Errors detected in the mapping based properties (disjoint domain).");
 
 
     /**
