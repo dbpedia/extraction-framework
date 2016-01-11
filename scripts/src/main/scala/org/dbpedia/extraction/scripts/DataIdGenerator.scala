@@ -69,13 +69,17 @@ object DataIdGenerator {
     require(URI.create(license) != null, "Please enter a valid license uri (odrl license)")
 
     val r = currentMirror.reflect(DBpediaDatasets)
-    val datasetDescriptions = r.symbol.typeSignature.members.toStream
+    val datasetDescriptionsOriginal = r.symbol.typeSignature.members.toStream
       .collect{case s : TermSymbol if !s.isMethod => r.reflectField(s)}
       .map(t => t.get match {
-        case y : Dataset => if (! y.name.endsWith("unredirected")) y
-                            else List(y, new Dataset(y.name.replace("_unredirected", ""), y.description + " This dataset has Wikipedia redirects resolved."))
+        case y : Dataset => y
         case _ =>
-      }).toList.flatten.asInstanceOf[List[Dataset]]
+      }).toList.asInstanceOf[List[Dataset]]
+
+    val datasetDescriptions = datasetDescriptionsOriginal ++ datasetDescriptionsOriginal
+      .filter(_.name.endsWith("unredirected"))
+      .map(d => new Dataset(d.name.replace("_unredirected", ""), d.description + " This dataset has Wikipedia redirects resolved."))
+
 
     val defaultModel = ModelFactory.createDefaultModel()
 

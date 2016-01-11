@@ -25,7 +25,7 @@ object DBpediaDatasets
     val RevisionMeta = new Dataset("revision_meta", "Dataset containing additional revision information")
     val PageIds = new Dataset("page_ids", "Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.")
     val InterLanguageLinks = new Dataset("interlanguage_links", "Dataset linking a DBpedia resource to the same resource in other languages and in ((http:www.wikidata.org Wikidata,,. Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
-    val Genders = new Dataset("genders")
+    val Genders = new Dataset("genders", "Dataset trying to identify the gender of a resource")
     val TopicalConcepts = new Dataset("topical_concepts_unredirected")
     val IriSameAsUri = new Dataset("iri_same_as_uri", "owl:sameAs links between the ((http:tools.ietf.org/html/rfc3987 IRI,, and ((http:tools.ietf.org/html/rfc3986 URI,, format of DBpedia resources. Only extracted when IRI and URI are actually different.")
     val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
@@ -45,6 +45,11 @@ object DBpediaDatasets
     val OntologyPropertiesLiterals = new Dataset("mappingbased_literals")
     val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased", "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki")
     val SpecificProperties = new Dataset("specific_mappingbased_properties", "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.")
+
+    val OntologyPropertiesObjectsCleaned = new Dataset("mappingbased-objects");
+    val OntologyPropertiesDisjointRange = new Dataset("mappingbased-objects-disjoint-range");
+    val OntologyPropertiesDisjointDomain = new Dataset("mappingbased-objects-disjoint-domain");
+
 
     /**
      * French population template
