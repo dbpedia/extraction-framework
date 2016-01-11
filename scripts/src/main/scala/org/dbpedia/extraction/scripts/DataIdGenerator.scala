@@ -75,7 +75,7 @@ object DataIdGenerator {
         case y : Dataset => if (! y.name.endsWith("unredirected")) y
                             else List(y, new Dataset(y.name.replace("_unredirected", ""), y.description + " This dataset has Wikipedia redirects resolved."))
         case _ =>
-      }).toList.asInstanceOf[List[Dataset]]
+      }).toList.flatten.asInstanceOf[List[Dataset]]
 
     val defaultModel = ModelFactory.createDefaultModel()
 
