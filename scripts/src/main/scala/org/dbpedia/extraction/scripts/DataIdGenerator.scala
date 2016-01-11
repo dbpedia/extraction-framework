@@ -17,7 +17,7 @@ import scala.Console._
 import scala.collection.JavaConverters._
 import reflect.runtime.universe._
 import reflect.runtime.currentMirror
-import scala.io.Source
+import scala.io.{BufferedSource, Source}
 
 
 /**
@@ -54,8 +54,11 @@ object DataIdGenerator {
     require(dump.isDirectory() && dump.canRead(), "Please specify a valid local dump directory!")
 
     //not required
-    val lbp = new File(configMap.get("linesBytesPacked").getAsString.value)
-    val lbpMap = Source.fromFile(configMap.get("linesBytesPacked").getAsString.value).getLines.map(_.split(";")).map(x => x(0) -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))).toMap
+    val lbp = try {Source.fromFile(configMap.get("linesBytesPacked").getAsString.value)} catch{ case fnf : FileNotFoundException => null case f : BufferedSource => f}
+    val lbpMap = Option(lbp) match {
+      case Some(ld) => ld.getLines.map(_.split(";")).map(x => x(0) -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))).toMap
+      case None => Map[String,Map[String, String]]()
+    }
 
     val compression = configMap.get("fileExtension").getAsString.value
     require(compression.startsWith("."), "please provide a valid file extension starting with a dot")
