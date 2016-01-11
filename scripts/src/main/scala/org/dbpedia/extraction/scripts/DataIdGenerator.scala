@@ -13,6 +13,7 @@ import org.apache.jena.atlas.json.{JSON, JsonObject}
 import org.dbpedia.extraction.destinations.{Dataset, DBpediaDatasets}
 import org.dbpedia.extraction.util.Language
 
+import scala.Console._
 import scala.collection.JavaConverters._
 import reflect.runtime.universe._
 import reflect.runtime.currentMirror
@@ -71,7 +72,8 @@ object DataIdGenerator {
     val datasetDescriptions = r.symbol.typeSignature.members.toStream
       .collect{case s : TermSymbol if !s.isMethod => r.reflectField(s)}
       .map(t => t.get match {
-        case y : Dataset => y
+        case y : Dataset => if (! y.name.endsWith("unredirected")) y
+                            else List(y, new Dataset(y.name.replace("_unredirected", ""), y.description + " This dataset has Wikipedia redirects resolved."))
         case _ =>
       }).toList.asInstanceOf[List[Dataset]]
 
@@ -207,7 +209,8 @@ object DataIdGenerator {
         datasetDescriptions.find(x => x.name == currentFile && x.description != null) match
         {
           case Some(d) => model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
-          case None =>
+          case None => err.println("Could not find description gor " + lang.wikiCode + " / " + currentFile)
+          case None => err.println("Could not find description gor " + lang.wikiCode + " / " + currentFile)
         }
 
       }

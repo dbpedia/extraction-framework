@@ -21,7 +21,7 @@ object DBpediaDatasets
     val SkosCategories = new Dataset("skos_categories", "Information which concept is a category and how categories are related using the SKOS Vocabulary.")
     val RevisionUris = new Dataset("revision_uris", "Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.")
     val RevisionIds = new Dataset("revision_ids", "Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.")
-    val RevisionMeta = new Dataset("revision_meta")
+    val RevisionMeta = new Dataset("revision_meta", "Dataset containing additional revision information")
     val PageIds = new Dataset("page_ids", "Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.")
     val InterLanguageLinks = new Dataset("interlanguage_links", "Dataset linking a DBpedia resource to the same resource in other languages and in ((http:www.wikidata.org Wikidata,,. Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
     val Genders = new Dataset("genders")
@@ -47,7 +47,7 @@ object DBpediaDatasets
     /**
      * French population template
      */
-     val FrenchPopulation = new Dataset("french_population")
+     val FrenchPopulation = new Dataset("french_population", "French dataset about population.")
 
     /**
      *  Infobox
@@ -85,22 +85,22 @@ object DBpediaDatasets
     /**
      * Wikidata
      */
-    val WikidataLabelsMappingsWiki = new Dataset("labels-mappingswiki")
-    val WikidataLabelsRest = new Dataset("labels-rest")
-    val WikidataSameAs = new Dataset("sameas-all-wikis")
-    val WikidataNameSpaceSameAs = new Dataset("sameas-wikidata")
-    val WikidataSameAsExternal = new Dataset("sameas-external")
-    val WikidataAliasMappingsWiki = new Dataset("alias-mappingswiki")
-    val WikidataAliasRest = new Dataset("alias-rest")
-    val WikidataDescriptionMappingsWiki = new Dataset("description-mappingswiki")
-    val WikidataDescriptionRest = new Dataset("description-rest")
+    val WikidataLabelsMappingsWiki = new Dataset("labels_mappingswiki")
+    val WikidataLabelsRest = new Dataset("labels_rest")
+    val WikidataSameAs = new Dataset("sameas_all_wikis")
+    val WikidataNameSpaceSameAs = new Dataset("sameas_wikidata")
+    val WikidataSameAsExternal = new Dataset("sameas_external")
+    val WikidataAliasMappingsWiki = new Dataset("alias_mappingswiki")
+    val WikidataAliasRest = new Dataset("alias_rest")
+    val WikidataDescriptionMappingsWiki = new Dataset("description_mappingswiki")
+    val WikidataDescriptionRest = new Dataset("description_rest")
     val WikidataProperty= new Dataset("properties")
     val WikidataR2R = new Dataset("mappingbased_properties_uncleaned_unredirected")  // keep same name with other languages
-    val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
-    val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
+    val WikidataReifiedR2R = new Dataset("mappingbased_properties_reified") // keep same name with other languages
+    val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties_reified_qualifiers") // keep same name with other languages
     val WikidataRaw = new Dataset("raw_unredirected")
-    val WikidataRawReified = new Dataset("raw-reified")
-    val WikidataRawReifiedQualifiers = new Dataset("raw-reified-qualifiers")
+    val WikidataRawReified = new Dataset("raw_reified")
+    val WikidataRawReifiedQualifiers = new Dataset("raw_reified_qualifiers")
     val WikidataReference = new Dataset("references")
 
     /**
