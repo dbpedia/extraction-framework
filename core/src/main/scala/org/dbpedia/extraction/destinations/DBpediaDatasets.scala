@@ -93,23 +93,23 @@ object DBpediaDatasets
      * Wikidata
      */
     val WikidataLabelsMappingsWiki = new Dataset("labels")
-    val WikidataLabelsRest = new Dataset("labels-nmw")
-    val WikidataSameAs = new Dataset("sameas-all-wikis")
-    val WikidataNameSpaceSameAs = new Dataset("sameas-wikidata")
-    val WikidataSameAsExternal = new Dataset("sameas-external")
+    val WikidataLabelsRest = new Dataset("labels_nmw")
+    val WikidataSameAs = new Dataset("sameas_all_wikis")
+    val WikidataNameSpaceSameAs = new Dataset("sameas_wikidata")
+    val WikidataSameAsExternal = new Dataset("sameas_external")
     val WikidataAliasMappingsWiki = new Dataset("alias")
-    val WikidataAliasRest = new Dataset("alias-nmw")
+    val WikidataAliasRest = new Dataset("alias_nmw")
     val WikidataDescriptionMappingsWiki = new Dataset("description")
-    val WikidataDescriptionRest = new Dataset("description-nmw")
+    val WikidataDescriptionRest = new Dataset("description_nmw")
     val WikidataProperty= new Dataset("properties")
     val WikidataR2R_literals = OntologyPropertiesLiterals
     val WikidataR2R_objects = OntologyPropertiesObjects
-    val WikidataR2R_ontology = new Dataset("ontology-subclassof")
-    val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
-    val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
+    val WikidataR2R_ontology = new Dataset("ontology_subclassof")
+    val WikidataReifiedR2R = new Dataset("mappingbased_properties_reified") // keep same name with other languages
+    val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties_reified_qualifiers") // keep same name with other languages
     val WikidataRaw = new Dataset("raw_unredirected")
-    val WikidataRawReified = new Dataset("raw-reified")
-    val WikidataRawReifiedQualifiers = new Dataset("raw-reified-qualifiers")
+    val WikidataRawReified = new Dataset("raw_reified")
+    val WikidataRawReifiedQualifiers = new Dataset("raw_reified_qualifiers")
     val WikidataReference = new Dataset("references")
 
     /**
