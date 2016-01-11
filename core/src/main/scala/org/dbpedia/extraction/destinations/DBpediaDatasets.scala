@@ -16,6 +16,7 @@ object DBpediaDatasets
     val Persondata = new Dataset("persondata_unredirected", "Information about persons (date and place of birth etc., extracted from the English and German Wikipedia, represented using the FOAF vocabulary.")
     val Pnd = new Dataset("pnd")
     val Redirects = new Dataset("redirects", "Dataset containing redirects between articles in Wikipedia.")
+    val RedirectsTransitive = new Dataset("transitive-redirects", "Dataset containing transitively resolved redirects between articles in Wikipedia.")
     val ArticleCategories = new Dataset("article_categories", "Links from concepts to categories using the SKOS vocabulary.")
     val ArticleTemplates = new Dataset("article_templates", "Templates used in an article (top-level)")
     val ArticleTemplatesNested = new Dataset("article_templates_nested", "Templates used in an article (nested)")
