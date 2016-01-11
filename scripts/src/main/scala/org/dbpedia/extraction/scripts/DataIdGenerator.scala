@@ -10,14 +10,14 @@ import java.util.logging.{Level, Logger}
 import com.hp.hpl.jena.rdf.model.{Model, ModelFactory, Resource}
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.jena.atlas.json.{JSON, JsonObject}
-import org.dbpedia.extraction.destinations.{Dataset, DBpediaDatasets}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.Language
 
 import scala.Console._
 import scala.collection.JavaConverters._
-import reflect.runtime.universe._
-import reflect.runtime.currentMirror
 import scala.io.{BufferedSource, Source}
+import scala.reflect.runtime.currentMirror
+import scala.reflect.runtime.universe._
 
 
 /**

@@ -78,7 +78,7 @@ object Language extends (String => Language)
     }
     
     val languages = new HashMap[String,Language]
-    val sourcePath = getClass.getResource("wikitoisomap.json")
+    val sourcePath = getClass.getResource("/wikitoisomap.json")
     System.out.println("reading config file: " + sourcePath)
     val langMapFile: JsonConfig = WikidataExtractorConfigFactory.createConfig(sourcePath.getPath).asInstanceOf[JsonConfig]
 
