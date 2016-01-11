@@ -32,7 +32,7 @@ object DBpediaDatasets
     val PageLength = new Dataset("page_length", "Numbers of characters contained in a Wikipedia article's source.")
     val ImageGalleries = new Dataset("image_galleries")
     val ImageAnnotations = new Dataset("image_annotations")
-    val KMLFiles = new Dataset("kml_files")
+    val KMLFiles = new Dataset("kml_files", "Description of KML files from Commons")
     val AnchorText = new Dataset("anchor_text", "Texts used in links to refer to Wikipedia articles from other Wikipedia articles.")
     val SurfaceForms = new Dataset("surface_forms", "Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name.")
 
@@ -41,8 +41,9 @@ object DBpediaDatasets
      */
     val OntologyTypes = new Dataset("instance_types", "Contains triples of the form $object rdf:type $class from the mapping-based extraction.")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive", "Contains transitive rdf:type $class based on the DBpedia ontology.")
-    val OntologyProperties = new Dataset("mappingbased_properties_uncleaned_unredirected", "Errors detected in the mapping based properties. At them moment the errors are limited to ranges that are disjoint with the property definition.")   //TODO changes here should be reflected to the related wikidata dataset
-    val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased")
+    val OntologyPropertiesObjects = new Dataset("mappingbased_objects_uncleaned_unredirected", "Errors detected in the mapping based properties. At them moment the errors are limited to ranges that are disjoint with the property definition.")   //TODO changes here should be reflected to the related wikidata dataset
+    val OntologyPropertiesLiterals = new Dataset("mappingbased_literals")
+    val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased", "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki")
     val SpecificProperties = new Dataset("specific_mappingbased_properties", "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.")
 
     /**
@@ -55,7 +56,7 @@ object DBpediaDatasets
      */
     val InfoboxProperties = new Dataset("infobox_properties_unredirected", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace, should always be preferred over this data.")
     val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions", "All properties / predicates used in infoboxes.")
-    val TemplateParameters = new Dataset("template_parameters")
+    val TemplateParameters = new Dataset("template_parameters", "Dataset describing names of template parameters.")
     val InfoboxTest = new Dataset("infobox_test")
 
     /**
@@ -86,22 +87,24 @@ object DBpediaDatasets
     /**
      * Wikidata
      */
-    val WikidataLabelsMappingsWiki = new Dataset("labels_mappingswiki")
-    val WikidataLabelsRest = new Dataset("labels_rest")
-    val WikidataSameAs = new Dataset("sameas_all_wikis")
-    val WikidataNameSpaceSameAs = new Dataset("sameas_wikidata")
-    val WikidataSameAsExternal = new Dataset("sameas_external")
-    val WikidataAliasMappingsWiki = new Dataset("alias_mappingswiki")
-    val WikidataAliasRest = new Dataset("alias_rest")
-    val WikidataDescriptionMappingsWiki = new Dataset("description_mappingswiki")
-    val WikidataDescriptionRest = new Dataset("description_rest")
+    val WikidataLabelsMappingsWiki = new Dataset("labels")
+    val WikidataLabelsRest = new Dataset("labels-nmw")
+    val WikidataSameAs = new Dataset("sameas-all-wikis")
+    val WikidataNameSpaceSameAs = new Dataset("sameas-wikidata")
+    val WikidataSameAsExternal = new Dataset("sameas-external")
+    val WikidataAliasMappingsWiki = new Dataset("alias")
+    val WikidataAliasRest = new Dataset("alias-nmw")
+    val WikidataDescriptionMappingsWiki = new Dataset("description")
+    val WikidataDescriptionRest = new Dataset("description-nmw")
     val WikidataProperty= new Dataset("properties")
-    val WikidataR2R = new Dataset("mappingbased_properties_uncleaned_unredirected")  // keep same name with other languages
-    val WikidataReifiedR2R = new Dataset("mappingbased_properties_reified") // keep same name with other languages
-    val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties_reified_qualifiers") // keep same name with other languages
+    val WikidataR2R_literals = OntologyPropertiesLiterals
+    val WikidataR2R_objects = OntologyPropertiesObjects
+    val WikidataR2R_ontology = new Dataset("ontology-subclassof")
+    val WikidataReifiedR2R = new Dataset("mappingbased_properties-reified") // keep same name with other languages
+    val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties-reified-qualifiers") // keep same name with other languages
     val WikidataRaw = new Dataset("raw_unredirected")
-    val WikidataRawReified = new Dataset("raw_reified")
-    val WikidataRawReifiedQualifiers = new Dataset("raw_reified_qualifiers")
+    val WikidataRawReified = new Dataset("raw-reified")
+    val WikidataRawReifiedQualifiers = new Dataset("raw-reified-qualifiers")
     val WikidataReference = new Dataset("references")
 
     /**
