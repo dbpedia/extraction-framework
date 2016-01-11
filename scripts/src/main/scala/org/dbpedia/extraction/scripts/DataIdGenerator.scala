@@ -81,10 +81,12 @@ object DataIdGenerator {
         case _ =>
       }).toList.asInstanceOf[List[Dataset]]
 
-    val datasetDescriptions = datasetDescriptionsOriginal ++ datasetDescriptionsOriginal
+    val datasetDescriptions = datasetDescriptionsOriginal
+      .map(d => new Dataset(d.name.replace("_", "-"), d.description)) ++ datasetDescriptionsOriginal
       .filter(_.name.endsWith("unredirected"))
-      .map(d => new Dataset(d.name.replace("_unredirected", ""), d.description + " This dataset has Wikipedia redirects resolved."))
-
+      .map(d => new Dataset(d.name.replace("_unredirected", "").replace("_", "-"), d.description + " This dataset has Wikipedia redirects resolved.")) ++ datasetDescriptionsOriginal
+      .map(d => new Dataset(d.name.replace(d.name, d.name + "-en-uris").replace("_", "-"), d.description + " Normalized resources matching English DBpedia.")) ++ datasetDescriptionsOriginal
+      .map(d => new Dataset(d.name.replace(d.name, d.name + "-en-uris-unredirected").replace("_", "-"), d.description + " Normalized resources matching English DBpedia. This dataset has Wikipedia redirects resolved.")).sortBy(x => x.name)
 
     val defaultModel = ModelFactory.createDefaultModel()
 
@@ -221,7 +223,7 @@ object DataIdGenerator {
         datasetDescriptions.find(x => x.name == datasetName && x.description != null) match
         {
           case Some(d) => model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
-          case None => err.println("Could not find description for dataset: " + lang.wikiCode + " / " + currentFile)
+          case None => err.println("Could not find description for dataset: " + lang.wikiCode + "/" + currentFile)
         }
 
       }
