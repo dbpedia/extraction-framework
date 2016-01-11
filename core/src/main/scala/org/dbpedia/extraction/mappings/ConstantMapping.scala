@@ -30,7 +30,12 @@ class ConstantMapping (
 )
 extends PropertyMapping
 {
-  if (ontologyProperty.isInstanceOf[OntologyObjectProperty])
+  val isObjectProperty = ontologyProperty.isInstanceOf[OntologyObjectProperty]
+
+  //split to literal / object dataset
+  val dataset = if (isObjectProperty) DBpediaDatasets.OntologyPropertiesObjects else DBpediaDatasets.OntologyPropertiesLiterals
+
+  if (isObjectProperty)
   {
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
     value = try {
@@ -45,11 +50,11 @@ extends PropertyMapping
     }
   }
 
-  override val datasets = Set(DBpediaDatasets.OntologyProperties)
+  override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals)
 
   override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
-    Seq(new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value, node.sourceUri, datatype))
+    Seq(new Quad(context.language, dataset, subjectUri, ontologyProperty, value, node.sourceUri, datatype))
   }
 
 

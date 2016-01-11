@@ -18,6 +18,7 @@ object DBpediaDatasets
     val Redirects = new Dataset("redirects", "Dataset containing redirects between articles in Wikipedia.")
     val ArticleCategories = new Dataset("article_categories", "Links from concepts to categories using the SKOS vocabulary.")
     val ArticleTemplates = new Dataset("article_templates")
+    val ArticleTemplatesNested = new Dataset("article_templates_nested")
     val SkosCategories = new Dataset("skos_categories", "Information which concept is a category and how categories are related using the SKOS Vocabulary.")
     val RevisionUris = new Dataset("revision_uris", "Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.")
     val RevisionIds = new Dataset("revision_ids", "Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.")

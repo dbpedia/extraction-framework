@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.config.mappings.wikidata._
+import org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology._
@@ -39,6 +40,7 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   private val rdfType = context.ontology.properties("rdf:type")
+  private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
   private val rdfStatement = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
   private val rdfSubject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
   private val rdfPredicate = "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
@@ -46,9 +48,11 @@ class WikidataR2RExtractor(
 
   // this is where we will store the output
   val WikidataR2RErrorDataset = new Dataset("wikidata-r2r-mapping-errors")
-  override val datasets = Set(DBpediaDatasets.WikidataR2R, WikidataR2RErrorDataset,DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier,
-                              DBpediaDatasets.GeoCoordinates, DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
-                              DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs)
+  val WikidataDuplicateIRIDataset = new Dataset("wikidata-duplicate-iri-split")
+  override val datasets = Set(DBpediaDatasets.WikidataR2R_literals, DBpediaDatasets.WikidataR2R_objects, WikidataR2RErrorDataset,WikidataDuplicateIRIDataset,
+                              DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier, DBpediaDatasets.GeoCoordinates,
+                              DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
+                              DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs, DBpediaDatasets.WikidataR2R_ontology)
 
   val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
 
@@ -57,11 +61,11 @@ class WikidataR2RExtractor(
     val quads = new ArrayBuffer[Quad]()
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
+        val duplicateList = getDuplicates(statementGroup)
         statementGroup.getStatements.foreach {
           statement => {
             val claim = statement.getClaim()
             val property = claim.getMainSnak().getPropertyId().getId
-
             val equivPropertySet = getEquivalentProperties(property)
             claim.getMainSnak() match {
               case mainSnak: ValueSnak => {
@@ -74,10 +78,18 @@ class WikidataR2RExtractor(
 
                 val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
 
+                val PV = property + " " + value;
+                if (duplicateList.contains(PV)) {
+                  val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId.toString)
+                  quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceUri, null)
+                }
+
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
 
                 //Wikidata qualifiers R2R mapping
                 quads ++= getQualifersQuad(page, statementUri, claim)
+
+
 
               }
 
@@ -102,8 +114,10 @@ class WikidataR2RExtractor(
             quads += new Quad(context.language, WikidataR2RErrorDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
           } else {
 
+            //split to literal / object datasets
+            val mapDataset = if (ontologyProperty.isInstanceOf[OntologyObjectProperty]) DBpediaDatasets.WikidataR2R_objects else DBpediaDatasets.WikidataR2R_literals
             //Wikidata R2R mapping without reification
-            val quad = new Quad(context.language, DBpediaDatasets.WikidataR2R, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
+            val quad = new Quad(context.language, mapDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
             quads += quad
 
             //Reification added to R2R mapping
@@ -170,7 +184,28 @@ class WikidataR2RExtractor(
         }
       }
     }
+
     quads
+  }
+
+  private def getDuplicates(statementGroup: StatementGroup): mutable.MutableList[String] = {
+    var duplicateList = mutable.MutableList[String]();
+    statementGroup.getStatements.foreach {
+      statement => {
+        val claim = statement.getClaim()
+        val property = claim.getMainSnak().getPropertyId().getId
+        claim.getMainSnak() match {
+          case mainSnak: ValueSnak => {
+            val value = mainSnak.getValue
+            val PV = property + " " + value;
+            duplicateList +=PV;
+            }
+          case _ =>
+        }
+      }
+    }
+    duplicateList= duplicateList.diff(duplicateList.distinct).distinct
+    duplicateList
   }
 
   private def findType(datatype: Datatype, range: OntologyType): Datatype = {
@@ -214,7 +249,7 @@ class WikidataR2RExtractor(
     val adjustedGraph = new ArrayBuffer[Quad]
 
     originalGraph.map(q => {
-      if (q.dataset.equals(DBpediaDatasets.WikidataR2R.name)) {
+      if (q.dataset.equals(DBpediaDatasets.WikidataR2R_literals.name) || q.dataset.equals(DBpediaDatasets.WikidataR2R_objects.name)) {
         q.predicate match {
 
             // split type statements, some types e.g. cordinates go to separate datasets
@@ -232,6 +267,9 @@ class WikidataR2RExtractor(
                   case None =>
                 }
             }
+
+          case "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+                => adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataR2R_ontology.name)
 
             // coordinates dataset
           case "http://www.w3.org/2003/01/geo/wgs84_pos#lat" | "http://www.w3.org/2003/01/geo/wgs84_pos#long" | "http://www.georss.org/georss/point"

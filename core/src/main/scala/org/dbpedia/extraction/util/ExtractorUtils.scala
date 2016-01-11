@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.mappings.Extractor
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
+import org.dbpedia.extraction.wikiparser._
 import java.util.Properties
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.immutable.Map
@@ -112,5 +112,42 @@ object ExtractorUtils {
    */
   def getThumbnailURL(filename: String, language: Language):String =
       language.baseUri + "/wiki/Special:FilePath/" + filename + "?width=300"
+
+  /**
+    * Collects all internal links from a Node
+    */
+  def collectInternalLinksFromNode(node : Node) : List[InternalLinkNode] =
+  {
+    node match
+    {
+      case linkNode : InternalLinkNode => List(linkNode)
+      case _ => node.children.flatMap(collectInternalLinksFromNode)
+    }
+  }
+
+  def collectParserFunctionsFromNode(node : Node) : List[ParserFunctionNode] =
+  {
+    node match
+    {
+      case parserFunctionNode : ParserFunctionNode => List(parserFunctionNode) ++ node.children.flatMap(collectParserFunctionsFromNode)
+      case _ => node.children.flatMap(collectParserFunctionsFromNode)
+    }
+  }
+
+  def collectTemplateParametersFromNode(node : Node) : List[TemplateParameterNode] =
+  {
+    node match
+    {
+      case templateParameterNode : TemplateParameterNode => List(templateParameterNode) ++ node.children.flatMap(collectTemplateParametersFromNode)
+      case _ => node.children.flatMap(collectTemplateParametersFromNode)
+    }
+  }
+
+  def collectTemplatesFromNodeTransitive(node: Node): List[TemplateNode] = {
+    node match {
+      case templateNode: TemplateNode => List(templateNode) ++ node.children.flatMap(collectTemplatesFromNodeTransitive)
+      case _ => node.children.flatMap(collectTemplatesFromNodeTransitive)
+    }
+  }
     
 }

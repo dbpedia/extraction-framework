@@ -98,7 +98,7 @@ object MapSubjectUris {
       for (input <- inputs; suffix <- suffixes) {
         QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
           map.get(quad.subject) match {
-            case Some(uris) => for (uri <- uris) yield quad.copy(subject = uri) // change subject URI
+            case Some(uris) => for (uri <- uris) yield quad.copy(subject = uri, context = quad.context + "&subjectMappedFrom="+quad.subject) // change subject URI
             case None => List(quad) // just copy quad without mapping for subject URI. TODO: make this configurable
           }
         }

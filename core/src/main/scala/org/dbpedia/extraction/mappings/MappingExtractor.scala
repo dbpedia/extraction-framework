@@ -22,7 +22,7 @@ extends PageNodeExtractor
 
   private val resolvedMappings = context.redirects.resolveMap(templateMappings)
 
-  override val datasets = templateMappings.values.flatMap(_.datasets).toSet ++ tableMappings.flatMap(_.datasets).toSet
+  override val datasets = templateMappings.values.flatMap(_.datasets).toSet ++ tableMappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
@@ -80,7 +80,7 @@ extends PageNodeExtractor
           for (q <- originalGraph)
             yield
               // We split the types for the main resource only by checking the node annotations
-              if (q.dataset.equals(DBpediaDatasets.OntologyTypes) &&
+              if (q.dataset.equals(DBpediaDatasets.OntologyTypes.name) &&
                   q.subject.equals(subjectUri) &&
                   !q.value.equals(nodeClass.toString) )
                 q.copy(dataset = DBpediaDatasets.OntologyTypesTransitive.name)
