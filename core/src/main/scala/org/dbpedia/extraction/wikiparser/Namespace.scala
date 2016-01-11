@@ -77,8 +77,7 @@ private class NamespaceBuilder {
   ns(202, "OntologyProperty", true)
   ns(206, "Datatype", true)
 
-  val sourcePath = getClass.getResource("/mappinglanguages.json")
-  val mappingsFile: JsonConfig = WikidataExtractorConfigFactory.createConfig(sourcePath.getPath).asInstanceOf[JsonConfig]
+  val mappingsFile: JsonConfig = WikidataExtractorConfigFactory.createConfig("/mappinglanguages.json").asInstanceOf[JsonConfig]
   
   for ((lang,code) <- mappingsFile.configMap) mappings(Language(lang)) = ns(new Integer(code.get("code").get), "Mapping "+lang, true)
 }

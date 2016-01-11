@@ -2,7 +2,7 @@ package org.dbpedia.extraction.util
 
 import java.util.Locale
 
-import org.dbpedia.extraction.config.mappings.wikidata.{JsonConfig, WikidataExtractorConfigFactory}
+import org.dbpedia.extraction.config.mappings.wikidata.WikidataExtractorConfigFactory
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 
 import scala.collection.mutable.HashMap
@@ -78,13 +78,13 @@ object Language extends (String => Language)
     }
     
     val languages = new HashMap[String,Language]
-    val langMapFile: JsonConfig = WikidataExtractorConfigFactory.createConfig("/wikitoisomap.json").asInstanceOf[JsonConfig]
+    val langMapFile = WikidataExtractorConfigFactory.createConfig("/wikitoisomap.json")
 
-    for (langEntry <- langMapFile.configMap)
+    for (langEntry <- langMapFile.keys())
     {
-      langEntry._2.get("iso639_1") match {
+      langMapFile.getValue(langEntry).get("iso639_1") match {
         case Some(iso_1) if(iso_1.trim.length > 0) =>
-          languages(langEntry._1) = language(langEntry._1, iso_1, langEntry._2.get("iso639_3").get)
+          languages(langEntry) = language(langEntry, iso_1, langMapFile.getValue(langEntry).get("iso639_3").get)
         case _ =>
       }
     }
