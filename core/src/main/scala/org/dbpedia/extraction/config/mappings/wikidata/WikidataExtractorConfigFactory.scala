@@ -37,7 +37,7 @@ class JsonConfig(filePath:String) extends WikidataExtractorConfig {
   private final def readConfiguration(filePath:String):  mutable.Map[String, mutable.Map[String, String]] = {
     val configToMap = mutable.Map.empty[String, mutable.Map[String, String]]
 
-    val source = scala.io.Source.fromFile(filePath) mkString
+    val source = scala.io.Source.fromInputStream(getClass.getResourceAsStream(filePath)) mkString
 
     val factory = new JsonFactory()
     val objectMapper = new ObjectMapper(factory)
