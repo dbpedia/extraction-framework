@@ -91,10 +91,62 @@ object DataIdGenerator {
       .map(d => new Dataset(d.name.replace(d.name, d.name + "-en-uris").replace("_", "-"), d.description + " Normalized resources matching English DBpedia.")) ++ datasetDescriptionsOriginal
       .map(d => new Dataset(d.name.replace(d.name, d.name + "-en-uris-unredirected").replace("_", "-"), d.description + " Normalized resources matching English DBpedia. This dataset has Wikipedia redirects resolved.")).sortBy(x => x.name)
 
-    val defaultModel = ModelFactory.createDefaultModel()
+    def addPrefixes(model: Model): Unit =
+    {
+      model.setNsPrefix("dataid", "http://dataid.dbpedia.org/ns/core#")
+      model.setNsPrefix("dc", "http://purl.org/dc/terms/")
+      model.setNsPrefix("dcat", "http://www.w3.org/ns/dcat#")
+      model.setNsPrefix("void", "http://rdfs.org/ns/void#")
+      model.setNsPrefix("prov", "http://www.w3.org/ns/prov#")
+      model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#")
+      model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#")
+      model.setNsPrefix("foaf", "http://xmlns.com/foaf/0.1/")
+      model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#")
+      model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+      model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#")
+      model.setNsPrefix("dmp", "http://dataid.dbpedia.org/ns/dmp#")
+    }
 
-    addPrefixes(defaultModel)
+    def addAgent(model: Model, lang: Language, agentMap: JsonObject): Resource =
+    {
+      val agent = model.createResource(agentMap.get("uri").getAsString.value())
+      model.add(agent, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Agent"))
+      model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "name"), model.createLiteral(agentMap.get("name").getAsString.value()))
+      if(agentMap.get("homepage") != null)
+        model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "homepage"), model.createResource(agentMap.get("homepage").getAsString.value()))
+      model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "mbox"), model.createLiteral(agentMap.get("mbox").getAsString.value()))
 
+      Option(lang) match{
+        case Some(lang) =>{
+          val context = model.createResource(webDir + lang.wikiCode + "/dataid.ttl?subj=" + agentMap.get("role").getAsString.value().toLowerCase + "Context")
+          model.add(context, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "AuthorityEntityContext"))
+          model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorizedAgent"), agent)
+          model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorityAgentRole"), model.createResource(model.getNsPrefixURI("dataid") + agentMap.get("role").getAsString.value()))
+          model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "isInheritable"), model.createTypedLiteral("true", model.getNsPrefixURI("xsd") + "boolean" ))
+          model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorizedFor"), uri)
+        }
+        case None =>
+      }
+      agent
+    }
+
+    //creating a dcat:Catalog pointing to all DataIds
+    val catalogModel = ModelFactory.createDefaultModel()
+    addPrefixes(catalogModel)
+
+    val catalogAgent = addAgent(catalogModel, null, configMap.get("creator").getAsObject)
+
+    val catalog = catalogModel.createResource(webDir + dbpVersion + "_dataid_catalog.ttl")
+    catalogModel.add(catalog, RDF.`type`, catalogModel.createResource(catalogModel.getNsPrefixURI("dcat") + "Catalog"))
+    catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "title"), catalogModel.createLiteral("DataId catalog for DBpedia version " + dbpVersion))
+    catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "description"), catalogModel.createLiteral("DataId catalog for DBpedia version " + dbpVersion + ". Every DataId represents a language dataset of DBpedia.", "en"))
+    catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "modified"), catalogModel.createTypedLiteral(dateformat.format(new Date()), catalogModel.getNsPrefixURI("xsd") + "date"))
+    catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "issued"), catalogModel.createTypedLiteral(dateformat.format(new Date()), catalogModel.getNsPrefixURI("xsd") + "date"))
+    catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "publisher"), catalogAgent)
+    catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "license"), catalogModel.createResource(license))
+    catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("foaf"), "homepage"), catalogModel.createResource(configMap.get("creator").getAsObject.get("homepage").getAsString.value()))
+
+    //visit all subdirectories, determain if its a dbpedia language dir, and create a DataID for this language
     for(dir <- dump.listFiles())
     {
       if(dir.isDirectory)
@@ -120,13 +172,13 @@ object DataIdGenerator {
 
         if(lang != null && distributions.map(x => x.contains("infobox-properties")).foldRight(false)(_ || _)) {
 
-          val subModel = defaultModel.difference(ModelFactory.createDefaultModel())
+          val subModel = ModelFactory.createDefaultModel()
           val model = ModelFactory.createDefaultModel()
 
-          val outfile = new File(dump + "/" + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
           addPrefixes(subModel)
           addPrefixes(model)
 
+          val outfile = new File(dump + "/" + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
 
           uri = subModel.createResource(webDir + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
           require(uri != null, "Please provide a valid directory")
@@ -137,14 +189,15 @@ object DataIdGenerator {
           val contact = addAgent(subModel, lang, configMap.get("contact").getAsObject)
           require(creator != null, "Please define an dataid:Agent as a Creator in the dataid stump file (use AuthorityEntityContext).")
 
-          subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dc"), "modified"), subModel.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date"))
-          subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dc"), "issued"), subModel.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date"))
-          subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dc"), "hasVersion"), subModel.createLiteral(idVersion))
+          subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dc"), "modified"), subModel.createTypedLiteral(dateformat.format(new Date()), subModel.getNsPrefixURI("xsd") + "date"))
+          subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dc"), "issued"), subModel.createTypedLiteral(dateformat.format(new Date()), subModel.getNsPrefixURI("xsd") + "date"))
+          //TODO subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dc"), "hasVersion"), subModel.createLiteral(idVersion))
           subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dataid"), "hasAccessLevel"), subModel.createResource(subModel.getNsPrefixURI("dataid") + "PublicAccess"))
           subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dataid"), "latestVersion"), uri)
           subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dataid"), "associatedAgent"), creator)
           subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dataid"), "associatedAgent"), maintainer)
           subModel.add(uri, subModel.createProperty(subModel.getNsPrefixURI("dataid"), "associatedAgent"), contact)
+          catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dcat"), "record"), uri)
 
           addDataset(subModel, lang, "dataset", creator, true)
           topset = dataset
@@ -182,6 +235,9 @@ object DataIdGenerator {
       }
     }
 
+    //write catalog
+    catalogModel.write(new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.ttl")), "TURTLE")
+
     def addDmpStatements(model: Model, dataset: Resource): Unit =
     {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dmp"), "usefulness"), model.createLiteral(configMap.get("dmpusefulness").getAsString.value, "en"))
@@ -193,25 +249,6 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dmp"), "archiveLink"), model.createResource(configMap.get("dmparchiveLink").getAsString.value))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dmp"), "preservation"), model.createLiteral(configMap.get("dmppreservation").getAsString.value, "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dmp"), "openness"), model.createLiteral(configMap.get("dmpopenness").getAsString.value, "en"))
-    }
-
-    def addAgent(model: Model, lang: Language, agentMap: JsonObject): Resource =
-    {
-      val agent = model.createResource(agentMap.get("uri").getAsString.value())
-      model.add(agent, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Agent"))
-      model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "name"), model.createLiteral(agentMap.get("name").getAsString.value()))
-      if(agentMap.get("homepage") != null)
-        model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "homepage"), model.createResource(agentMap.get("homepage").getAsString.value()))
-      model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "mbox"), model.createLiteral(agentMap.get("mbox").getAsString.value()))
-
-      val context = model.createResource(webDir + lang.wikiCode + "/dataid.ttl?subj=" + agentMap.get("role").getAsString.value().toLowerCase + "Context")
-      model.add(context, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "AuthorityEntityContext"))
-      model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorizedAgent"), agent)
-      model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorityAgentRole"), model.createResource(model.getNsPrefixURI("dataid") + agentMap.get("role").getAsString.value()))
-      model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "isInheritable"), model.createTypedLiteral("true", model.getNsPrefixURI("xsd") + "boolean" ))
-      model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorizedFor"), uri)
-
-      agent
     }
 
     def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Unit =
@@ -233,6 +270,7 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + datasetName.substring(datasetName.lastIndexOf("/") +1) + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(datasetName.substring(datasetName.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "landingPage"), model.createResource("http://dbpedia.org/"))
+      //TODO done by DataId Hub
       //TODO model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
       //TODO model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dataset)
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "hasAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
@@ -268,6 +306,7 @@ object DataIdGenerator {
       }
 
       model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
+      //TODO done by DataId Hub
       //TODO model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
       //TODO model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "hasAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
@@ -285,22 +324,6 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "mediaType"), model.createLiteral(if(compression.contains("gz")) "application/x-gzip" else if(compression.contains("bz2")) "application/x-bzip2" else ""))
       val postfix = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "format"), model.createLiteral(if(postfix.contains(".ttl")) "text/turtle" else if(postfix.contains(".tql") || postfix.contains(".nq")) "application/n-quads" else if(postfix.contains(".nt")) "application/n-triples" else ""))
-    }
-
-    def addPrefixes(model: Model): Unit =
-    {
-      model.setNsPrefix("dataid", "http://dataid.dbpedia.org/ns/core#")
-      model.setNsPrefix("dc", "http://purl.org/dc/terms/")
-      model.setNsPrefix("dcat", "http://www.w3.org/ns/dcat#")
-      model.setNsPrefix("void", "http://rdfs.org/ns/void#")
-      model.setNsPrefix("prov", "http://www.w3.org/ns/prov#")
-      model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#")
-      model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#")
-      model.setNsPrefix("foaf", "http://xmlns.com/foaf/0.1/")
-      model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#")
-      model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
-      model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#")
-      model.setNsPrefix("dmp", "http://dataid.dbpedia.org/ns/dmp#")
     }
   }
 }
