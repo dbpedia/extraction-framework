@@ -139,6 +139,7 @@ object DataIdGenerator {
     val catalog = catalogModel.createResource(webDir + dbpVersion + "_dataid_catalog.ttl")
     catalogModel.add(catalog, RDF.`type`, catalogModel.createResource(catalogModel.getNsPrefixURI("dcat") + "Catalog"))
     catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "title"), catalogModel.createLiteral("DataId catalog for DBpedia version " + dbpVersion))
+    catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("rdfs"), "label"), catalogModel.createLiteral("DataId catalog for DBpedia version " + dbpVersion))
     catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "description"), catalogModel.createLiteral("DataId catalog for DBpedia version " + dbpVersion + ". Every DataId represents a language dataset of DBpedia.", "en"))
     catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "modified"), catalogModel.createTypedLiteral(dateformat.format(new Date()), catalogModel.getNsPrefixURI("xsd") + "date"))
     catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "issued"), catalogModel.createTypedLiteral(dateformat.format(new Date()), catalogModel.getNsPrefixURI("xsd") + "date"))
@@ -147,11 +148,11 @@ object DataIdGenerator {
     catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("foaf"), "homepage"), catalogModel.createResource(configMap.get("creator").getAsObject.get("homepage").getAsString.value()))
 
     //visit all subdirectories, determain if its a dbpedia language dir, and create a DataID for this language
-    for(dir <- dump.listFiles())
+    for(outer <- dump.listFiles().filter(_.isDirectory))
     {
-      if(dir.isDirectory)
+      for(dir <- outer.listFiles().filter(_.isDirectory))
       {
-        val lang = Language.get(dir.getName) match{
+        val lang = Language.get(dir.getName.replace("_", "-")) match{
           case Some(l) => l
           case _ => {
             logger.log(Level.INFO, "no language found for: " + dir.getName)
@@ -178,7 +179,7 @@ object DataIdGenerator {
           addPrefixes(subModel)
           addPrefixes(model)
 
-          val outfile = new File(dump + "/" + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
+          val outfile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
 
           uri = subModel.createResource(webDir + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
           require(uri != null, "Please provide a valid directory")
@@ -283,9 +284,9 @@ object DataIdGenerator {
       if(lang.iso639_3 != null && lang.iso639_3.length > 0)
         model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang.iso639_3))
 
-      lbpMap.get(("core-i18n/" + lang.wikiCode + "/" + currentFile).replace(".bz2", "")) match {
+      lbpMap.get(("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile).replace(compression, "")) match {
         case Some(triples) =>
-          model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "triples"), model.createTypedLiteral(triples.get("lines").get, model.getNsPrefixURI("xsd") + "integer") )
+          model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "triples"), model.createTypedLiteral((new Integer(triples.get("lines").get) -2), model.getNsPrefixURI("xsd") + "integer") )
         case None =>
       }
 
@@ -315,7 +316,7 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "issued"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date") )
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
 
-      lbpMap.get(("core-i18n/" + lang.wikiCode + "/" + currentFile).replace(".bz2", "")) match {
+      lbpMap.get(("core-i18n/" + lang.wikiCode + "/" + currentFile).replace(compression, "")) match {
         case Some(bytes) =>
           model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(bytes.get(("bz2")).get, model.getNsPrefixURI("xsd") + "integer") )
         case None =>
