@@ -181,7 +181,7 @@ object DataIdGenerator {
 
           val outfile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
 
-          uri = subModel.createResource(webDir + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
+          uri = subModel.createResource(webDir + outer.getName + "/" + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
           require(uri != null, "Please provide a valid directory")
           subModel.add(uri, RDF.`type`, subModel.createResource(subModel.getNsPrefixURI("dataid") + "DataId"))
 
@@ -217,7 +217,7 @@ object DataIdGenerator {
               addDataset(model, lang, dis, creator)
               subModel.add(topset, model.createProperty(model.getNsPrefixURI("void"), "subset"), dataset)
             }
-            addDistribution(model, lang, dis, creator)
+            addDistribution(model, lang, outer.getName, dis, creator)
           }
 
           //TODO validate & publish DataIds online!!!
@@ -254,7 +254,7 @@ object DataIdGenerator {
 
     def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Unit =
     {
-      val datasetName = if(currentFile.contains("_")) currentFile.substring(0, currentFile.lastIndexOf("_")) else currentFile
+      val datasetName = if(currentFile.contains("_")) currentFile.substring(0, currentFile.indexOf("_")) else currentFile
       dataset = model.createResource(uri.getURI + "?set=" + datasetName)
       model.add(dataset, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
       if(!toplevelSet) //not!
@@ -293,12 +293,12 @@ object DataIdGenerator {
     }
 
 
-    def addDistribution(model: Model, lang: Language, currentFile: String, associatedAgent: Resource): Unit =
+    def addDistribution(model: Model, lang: Language, outerDirectory: String, currentFile: String, associatedAgent: Resource): Unit =
     {
       val dist = model.createResource(uri.getURI + "?file=" + currentFile)
       model.add(dist, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SingleFile"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "distribution"), dist)
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
+      model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + currentFile + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
 
       datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_")) && x.description != null) match
       {
@@ -306,7 +306,7 @@ object DataIdGenerator {
         case None => err.println("Could not find description for distribution: " + lang.wikiCode + " / " + currentFile)
       }
 
-      model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(currentFile.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
+      model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
       //TODO done by DataId Hub
       //TODO model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), model.createLiteral(idVersion))
       //TODO model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
@@ -316,12 +316,12 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "issued"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date") )
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
 
-      lbpMap.get(("core-i18n/" + lang.wikiCode + "/" + currentFile).replace(compression, "")) match {
+      lbpMap.get((outerDirectory + "/" + lang.wikiCode + "/" + currentFile).replace(compression, "")) match {
         case Some(bytes) =>
           model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(bytes.get(("bz2")).get, model.getNsPrefixURI("xsd") + "integer") )
         case None =>
       }
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + lang.wikiCode + "/" + currentFile))
+      model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "mediaType"), model.createLiteral(if(compression.contains("gz")) "application/x-gzip" else if(compression.contains("bz2")) "application/x-bzip2" else ""))
       val postfix = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "format"), model.createLiteral(if(postfix.contains(".ttl")) "text/turtle" else if(postfix.contains(".tql") || postfix.contains(".nq")) "application/n-quads" else if(postfix.contains(".nt")) "application/n-triples" else ""))
