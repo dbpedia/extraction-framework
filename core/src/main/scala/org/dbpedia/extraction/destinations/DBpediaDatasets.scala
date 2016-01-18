@@ -26,7 +26,7 @@ object DBpediaDatasets
     val InterLanguageLinks = new Dataset("interlanguage_links")
     val Genders = new Dataset("genders")
     val TopicalConcepts = new Dataset("topical_concepts_unredirected")
-    val IriSameAsUri = new Dataset("iri_same_as_uri")
+    val UriSameAsIri = new Dataset("uri_same_as_iri")
     val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
     val PageLength = new Dataset("page_length")
     val ImageGalleries = new Dataset("image_galleries")
