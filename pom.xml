@@ -118,6 +118,14 @@
 						</goals>
 						<phase>process-resources</phase>
 					</execution>
+
+					<execution>
+						<id>doc</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
 				</executions>
 
 			</plugin>
@@ -150,6 +158,45 @@
 				</executions>
 			</plugin>
 
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -198,15 +245,9 @@
 	</dependencyManagement>
 
 	<distributionManagement>
-		<repository>
-			<id>maven.aksw.internal</id>
-			<name>AKSW Internal Release Repository</name>
-			<url>http://maven.aksw.org/repository/internal/</url>
-		</repository>
 		<snapshotRepository>
-			<id>maven.aksw.snapshots</id>
-			<name>AKSW Snapshot Repository</name>
-			<url>http://maven.aksw.org/upload/repository/snapshots</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
