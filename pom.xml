@@ -46,6 +46,7 @@
 		<scalatest.version>2.2.1</scalatest.version>
 		<scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
 		<skipTests>true</skipTests>
+		<gpg.keyname>AKSW.GPG</gpg.keyname>
 	</properties>
 
 	<modules>
@@ -161,28 +162,12 @@
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.3</version>
 				<extensions>true</extensions>
 				<configuration>
 					<serverId>ossrh</serverId>
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 			<plugin>
@@ -267,6 +252,44 @@
 								server currently running then the plugin falls back to regular incremental 
 								compilation. Seems pretty safe. -->
 							<useZincServer>true</useZincServer>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<keyname>AKSW</keyname>
+									<passphraseServerId>${gpg.keyname}</passphraseServerId>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.5.2</version>
+						<configuration>
+							<goals>deploy</goals>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<useReleaseProfile>false</useReleaseProfile>
+							<releaseProfiles>release</releaseProfiles>
+							<tagNameFormat>v@{project.version}</tagNameFormat>
+							<scmCommentPrefix>[maven-release-plugin] [ci build-cli] [ci build-webdemo] -</scmCommentPrefix>
 						</configuration>
 					</plugin>
 				</plugins>
