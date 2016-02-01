@@ -6,8 +6,37 @@
 	<groupId>org.dbpedia</groupId>
 	<artifactId>extraction</artifactId>
 	<packaging>pom</packaging>
-	<version>4.1-SNAPSHOT</version>
+	<version>4.1</version>
 	<name>Parent POM of the DBpedia framework</name>
+
+	<description>
+		DBpedia Extraction Framework is a flexible and extensible framework to extract different kinds of structured information from Wikipedia
+	</description>
+
+	<url>http://www.dbpedia.org</url>
+
+	<licenses>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.en.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>DBpedia Team</name>
+			<email>dbpedia-developers@lists.sourceforge.net</email>
+			<organization>DBpedia</organization>
+			<organizationUrl>http://www.dbpedia.org</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git@github.com:dbpedia/extraction-framework.git</connection>
+		<developerConnection>scm:git:git@github.com:dbpedia/extraction-framework.git</developerConnection>
+		<url>git@github.com:dbpedia/extraction-framework.git</url>
+	</scm>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,6 +46,7 @@
 		<scalatest.version>2.2.1</scalatest.version>
 		<scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
 		<skipTests>true</skipTests>
+		<gpg.keyname>AKSW.GPG</gpg.keyname>
 	</properties>
 
 	<modules>
@@ -89,6 +119,14 @@
 						</goals>
 						<phase>process-resources</phase>
 					</execution>
+
+					<execution>
+						<id>doc</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
 				</executions>
 
 			</plugin>
@@ -121,6 +159,29 @@
 				</executions>
 			</plugin>
 
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -169,15 +230,9 @@
 	</dependencyManagement>
 
 	<distributionManagement>
-		<repository>
-			<id>maven.aksw.internal</id>
-			<name>AKSW Internal Release Repository</name>
-			<url>http://maven.aksw.org/repository/internal/</url>
-		</repository>
 		<snapshotRepository>
-			<id>maven.aksw.snapshots</id>
-			<name>AKSW Snapshot Repository</name>
-			<url>http://maven.aksw.org/upload/repository/snapshots</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -197,6 +252,44 @@
 								server currently running then the plugin falls back to regular incremental 
 								compilation. Seems pretty safe. -->
 							<useZincServer>true</useZincServer>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<keyname>AKSW</keyname>
+									<passphraseServerId>${gpg.keyname}</passphraseServerId>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.5.2</version>
+						<configuration>
+							<goals>deploy</goals>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<useReleaseProfile>false</useReleaseProfile>
+							<releaseProfiles>release</releaseProfiles>
+							<tagNameFormat>v@{project.version}</tagNameFormat>
+							<scmCommentPrefix>[maven-release-plugin] [ci build-cli] [ci build-webdemo] -</scmCommentPrefix>
 						</configuration>
 					</plugin>
 				</plugins>
