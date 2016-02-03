@@ -37,14 +37,14 @@ object TypeConsistencyCheck {
   /**
    * different datasets where we store the mapped triples depending on their state
    */
-  val correctDataset = new Dataset("mappingbased-objects");
+  val correctDataset = DBpediaDatasets.OntologyPropertiesObjectsCleaned
   //range based datasets
-  val disjointRangeDataset = new Dataset("mappingbased-objects-disjoint-range");
+  val disjointRangeDataset = DBpediaDatasets.OntologyPropertiesDisjointRange
   val untypedRangeDataset = correctDataset //new Dataset("mappingbased-properties-untyped");
   val nonDisjointRangeDataset = correctDataset //new Dataset("mappingbased-properties-non-disjoint");
 
   //domain based datasets
-  val disjointDomainDataset = new Dataset("mappingbased-objects-disjoint-domain");
+  val disjointDomainDataset = DBpediaDatasets.OntologyPropertiesDisjointDomain
   val untypedDomainDataset = correctDataset //new Dataset("mappingbased-properties-untyped");
   val nonDisjointDomainDataset = correctDataset //new Dataset("mappingbased-properties-non-disjoint");
 
