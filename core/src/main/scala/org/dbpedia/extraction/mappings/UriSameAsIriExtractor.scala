@@ -12,7 +12,7 @@ import scala.language.reflectiveCalls
  * Extracts sameAs links for resources with themselves. Only makes sense when serialization is
  * configured such that subjects are IRIs and objects are URIs (or vice versa).
  */
-class IriSameAsUriExtractor (
+class UriSameAsIriExtractor(
   context : {
     def ontology : Ontology
     def language : Language
@@ -24,9 +24,9 @@ extends PageNodeExtractor
 
   val sameAsProperty = context.ontology.properties("owl:sameAs")
   
-  val quad = QuadBuilder(context.language, DBpediaDatasets.IriSameAsUri, sameAsProperty, null) _
+  val quad = QuadBuilder(context.language, DBpediaDatasets.UriSameAsIri, sameAsProperty, null) _
 
-  override val datasets = Set(DBpediaDatasets.IriSameAsUri)
+  override val datasets = Set(DBpediaDatasets.UriSameAsIri)
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
   {

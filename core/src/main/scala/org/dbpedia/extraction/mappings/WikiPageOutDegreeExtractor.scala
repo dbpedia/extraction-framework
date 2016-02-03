@@ -31,7 +31,7 @@ extends PageNodeExtractor
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
     
-    val ìnternalLinks = PageLinksExtractor.collectInternalLinks(node)
+    val ìnternalLinks = ExtractorUtils.collectInternalLinksFromNode(node)
 
     Seq(new Quad(context.language, DBpediaDatasets.OutDegree, subjectUri, wikiPageOutDegreeProperty, ìnternalLinks.size.toString, node.sourceUri, nonNegativeInteger) )
   }

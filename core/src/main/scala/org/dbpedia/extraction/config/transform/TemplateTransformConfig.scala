@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.config.transform
 
 import java.net.URI
+import java.text.SimpleDateFormat
+import java.util.{Locale, Calendar}
 
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.{UriUtils, Language}
@@ -106,6 +108,7 @@ object TemplateTransformConfig {
 
 
       "URL" -> externalLinkNode _ ,
+      "Official website" -> externalLinkNode _ ,
 
       // http://en.wikipedia.org/wiki/Template:ICD10
       // See https://github.com/dbpedia/extraction-framework/issues/40
@@ -120,7 +123,38 @@ object TemplateTransformConfig {
       ,
       // http://en.wikipedia.org/wiki/Template:ICD9
       // See https://github.com/dbpedia/extraction-framework/issues/40
-      "ICD9" -> extractChildren { p : PropertyNode => p.key == "1" } _
+      "ICD9" -> extractChildren { p : PropertyNode => p.key == "1" } _ /*,
+
+      // see https://www.mediawiki.org/wiki/Help:Magic_words#Variables
+      // For now all these remain commented becase the SimpleWikiPArser cannot handle well nested templates and results in many errors
+      "CURRENTDAY" ->  textNode(" " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + " ") _ ,
+      "CURRENTDAY2" -> textNode(" " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + " ") _ ,
+      "CURRENTDOW" -> textNode(" " + Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + " ") _ ,
+      "CURRENTDAYNAME" -> textNode(" " + Calendar.getInstance.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH) + " ") _ ,
+      "CURRENTHOUR" -> textNode(" " + Calendar.getInstance().get(Calendar.HOUR) + " ") _ ,
+      "CURRENTMONTH" ->  textNode(" " + Calendar.getInstance().get(Calendar.MONTH) + " ") _ ,
+      "CURRENTMONTHNAME" ->  textNode(" " + Calendar.getInstance.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH) + " ") _ ,
+      "CURRENTTIME" ->  textNode(" " + new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime) + " ") _ ,
+      "CURRENTTIMESTAMP" -> textNode(" " + new SimpleDateFormat("YYYYMMDDHHmmss").format(Calendar.getInstance().getTime) + " ") _ ,
+      "CURRENTWEEK" -> textNode(" " + Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) + " ") _ ,
+      "CURRENTYEAR" ->  textNode(" " + Calendar.getInstance().get(Calendar.YEAR) + " ") _ ,
+
+      "NAMESPACE" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.namespace.name + " ", node.line))),
+      "NAMESPACEE" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.namespace.name + " ", node.line))),
+      "NAMESPACENUMBER" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.namespace.code + " ", node.line))),
+      "REVISIONID" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.revision + " ", node.line))),
+      "REVISIONTIMESTAMP" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.timestamp + " ", node.line))),
+      "REVISIONUSER" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.contributorName + " ", node.line))),
+      //"REVISIONDAY2" -> textNode(" " + ((node: TemplateNode, lang:Language) => node.root.title.namespace.code) + " ") _ ,
+      //"REVISIONMONTH" -> textNode(" " + ((node: TemplateNode, lang:Language) => node.root.timestamp).distinct.mkString(" ")) + " ") _ ,
+      //"REVISIONYEAR" -> textNode(" " + ((node: TemplateNode, lang:Language) => node.root.title.namespace.code) + " ") _
+      //"TALKPAGENAME" -> textNode(" " + Calendar.getInstance().get(Calendar.YEAR) + " ") _ ,
+      "PAGEID" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.id + " ", node.line))),
+      "FULLPAGENAME" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.decodedWithNamespace + " ", node.line))),
+      "FULLPAGENAMEE" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.decodedWithNamespace + " ", node.line))),
+      "PAGENAME" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.decoded + " ", node.line))) ,
+      "PAGENAMEE" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.decoded + " ", node.line)))  */
+
     ),
 
     "commons" -> Map(

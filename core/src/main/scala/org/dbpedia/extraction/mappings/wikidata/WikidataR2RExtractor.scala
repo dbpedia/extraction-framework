@@ -1,12 +1,11 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.config.mappings.wikidata._
-import org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
-import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology._
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
-import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
 import scala.collection.JavaConversions._
@@ -39,6 +38,8 @@ class WikidataR2RExtractor(
                             )
   extends JsonNodeExtractor {
 
+  val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
+
   private val rdfType = context.ontology.properties("rdf:type")
   private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
   private val rdfStatement = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
@@ -54,7 +55,6 @@ class WikidataR2RExtractor(
                               DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
                               DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs, DBpediaDatasets.WikidataR2R_ontology)
 
-  val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
 
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
@@ -200,6 +200,7 @@ class WikidataR2RExtractor(
             val PV = property + " " + value;
             duplicateList +=PV;
             }
+          case _ =>
         }
       }
     }
