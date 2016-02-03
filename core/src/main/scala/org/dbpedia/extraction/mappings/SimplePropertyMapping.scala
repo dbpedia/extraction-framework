@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.ontology._
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.TemplateNode
@@ -198,12 +198,27 @@ extends PropertyMapping
 
             for( parseResult <- selector(parseResults) )
             {
+                val resultString = parseResult.toString
+                val isDBpediaResource = resultString.startsWith(languageResourceNamespace)
+
                 // get the actual value length
                 val resultLength = {
-                  val resultString = parseResult.toString
                   val length = resultString.length
                   // if it is a dbpedia resource, do not count http://xx.dbpedia.org/resource/
-                  if (resultString.startsWith(languageResourceNamespace)) length - languageResourceNamespace.length else length
+                  if (isDBpediaResource) length - languageResourceNamespace.length else length
+                }
+
+                val isHashIri = {
+                  if (isDBpediaResource) {
+                    val linkTitle = resultString.replace(languageResourceNamespace, "")
+
+                    ExtractorUtils.collectInternalLinksFromNode(propertyNode) // find the link and check if it has a fragment
+                      .exists(p => p.destination.encoded.equals(linkTitle) && p.destination.fragment != null)
+
+
+                  } else false
+
+
                 }
 
                 //we add this in the triple context
@@ -211,7 +226,8 @@ extends PropertyMapping
                     "&split=" + parseResults.size +
                     "&wikiTextSize=" + propertyNodeWikiLength +
                     "&plainTextSize=" + propertyNodeTextLength +
-                    "&valueSize=" + resultLength //resultLengthPercentage
+                    "&valueSize=" + resultLength +
+                    (if (isHashIri) "&objectHasFragment=" else "")
                 val g = parseResult match
                 {
                     case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)

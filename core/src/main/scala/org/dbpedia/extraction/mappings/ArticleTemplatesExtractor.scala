@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import collection.mutable.HashSet
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.destinations.{Dataset, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
@@ -24,28 +24,41 @@ class ArticleTemplatesExtractor(
   // http://dbpedia.org/ontology/ namespace would probably make more sense.
   private val usesTemplateProperty = context.language.propertyUri.append("wikiPageUsesTemplate")
 
-  override val datasets = Set(DBpediaDatasets.ArticleTemplates)
+  override val datasets = Set(DBpediaDatasets.ArticleTemplates, DBpediaDatasets.ArticleTemplatesNested)
 
   override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     var quads = new ArrayBuffer[Quad]()
 
     val seenTemplates = new HashSet[String]()
 
-    for (template <- collectTemplates(node)) {
-      val templateUri = context.language.resourceUri.append(template.title.decodedWithNamespace)
-      if (!seenTemplates.contains(templateUri)) {
-        quads += new Quad(context.language, DBpediaDatasets.ArticleTemplates, subjectUri, usesTemplateProperty,
-          templateUri, template.sourceUri, null)
-        seenTemplates.add(templateUri)
-      }
-    }
-    quads
+    val topLevelTemplates = collectTemplatesTopLevel(node)
+    val nestedTemplates = collectTemplatesTransitive(node).filter( !topLevelTemplates.contains(_))
+
+    val topLevelQuads = templatesToQuads(topLevelTemplates, subjectUri, DBpediaDatasets.ArticleTemplates)
+    val nestedQuads = templatesToQuads(nestedTemplates, subjectUri, DBpediaDatasets.ArticleTemplatesNested)
+
+    topLevelQuads ++ nestedQuads
   }
 
-  private def collectTemplates(node: Node): List[TemplateNode] = {
+  private def templatesToQuads(templates: List[TemplateNode], subjectUri: String, dataset: Dataset) : Seq[Quad] = {
+    templates.map( t => {
+      val templateUri = context.language.resourceUri.append(t.title.decodedWithNamespace)
+      new Quad(context.language, dataset, subjectUri, usesTemplateProperty,
+        templateUri, t.sourceUri, null)
+    })
+  }
+
+  private def collectTemplatesTopLevel(node: Node): List[TemplateNode] = {
     node match {
       case templateNode: TemplateNode => List(templateNode)
-      case _ => node.children.flatMap(collectTemplates)
+      case _ => node.children.flatMap(collectTemplatesTopLevel)
+    }
+  }
+
+  private def collectTemplatesTransitive(node: Node): List[TemplateNode] = {
+    node match {
+      case templateNode: TemplateNode => List(templateNode) ++ node.children.flatMap(collectTemplatesTransitive)
+      case _ => node.children.flatMap(collectTemplatesTransitive)
     }
   }
 }
