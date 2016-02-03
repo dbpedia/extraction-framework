@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import scala.collection.mutable.HashMap
+import org.dbpedia.extraction.config.mappings.wikidata.{JsonConfig, WikidataExtractorConfigFactory}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
+
+import scala.collection.mutable.HashMap
 
 /**
  * Namespaces codes.
@@ -74,17 +76,10 @@ private class NamespaceBuilder {
   ns(200, "OntologyClass", true)
   ns(202, "OntologyProperty", true)
   ns(206, "Datatype", true)
+
+  val mappingsFile: JsonConfig = WikidataExtractorConfigFactory.createConfig("/mappinglanguages.json").asInstanceOf[JsonConfig]
   
-  val map = Map(
-    "en"->204,"de"->208,"fr"->210,"it"->212,"es"->214,"nl"->216,"pt"->218,"pl"->220,"ru"->222,
-    "cs"->224,"ca"->226,"bn"->228,"hi"->230,"ja"->232,"uk"->234,"zh"->236,"hu"->238,"commons"->240,
-    "ko"->242,"fi"->244,"tr"->246,"ar"->250,"id"->254,"sr"->256,"ro"->258,"sk"->262,"bg"->264,"sl"->268,
-    "da"->270,"eu"->272,"eo"->274,"lt"->276,"et"->282,"hr"->284,"hy"->286,"gl"->292,"az"->302,"el"->304,
-    "sv"->306,"mk"->310,"be"->312,"cy"->328,"lv"->332,"ur"->378,"ga"->396,"war"->380,"vi"->382,"fa"->384,
-    "mt"->386,"ceb"->388
-  )
-  
-  for ((lang,code) <- map) mappings(Language(lang)) = ns(code, "Mapping "+lang, true)
+  for ((lang,code) <- mappingsFile.configMap) mappings(Language(lang)) = ns(new Integer(code.get("code").get), "Mapping "+lang, true)
 }
 
 /**

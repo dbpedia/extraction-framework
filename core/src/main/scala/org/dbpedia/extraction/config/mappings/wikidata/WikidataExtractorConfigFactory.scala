@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.config.mappings.wikidata
 
-import com.fasterxml.jackson.databind.node.JsonNodeType
-import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyClass}
-
-import scala.collection.mutable
-import org.wikidata.wdtk.datamodel.interfaces.Value
 import com.fasterxml.jackson.core.JsonFactory
-import com.fasterxml.jackson.databind.{JsonNode, ObjectReader, ObjectMapper}
+import com.fasterxml.jackson.databind.node.JsonNodeType
+import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
+import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
+import org.wikidata.wdtk.datamodel.interfaces.Value
+
 import scala.collection.JavaConversions._
+import scala.collection.mutable
+import scala.io.BufferedSource
 import scala.language.postfixOps
 
 /**
@@ -18,6 +19,8 @@ import scala.language.postfixOps
 
 trait WikidataExtractorConfig {
   def getCommand(property: String, value:Value,equivClassSet:Set[OntologyClass],equivPropertySet:Set[OntologyProperty], receiver: WikidataCommandReceiver): WikidataTransformationCommands
+  def getValue(property: String) : mutable.Map[String, String]
+  def keys(): List[String]
 }
 
 object WikidataExtractorConfigFactory {
@@ -37,7 +40,12 @@ class JsonConfig(filePath:String) extends WikidataExtractorConfig {
   private final def readConfiguration(filePath:String):  mutable.Map[String, mutable.Map[String, String]] = {
     val configToMap = mutable.Map.empty[String, mutable.Map[String, String]]
 
-    val source = scala.io.Source.fromFile(filePath) mkString
+    val stream = Option(getClass.getResourceAsStream(filePath)) match
+    {
+      case Some(x) => new BufferedSource(x)
+      case None => scala.io.Source.fromFile(filePath)
+    }
+    val source = stream mkString
 
     val factory = new JsonFactory()
     val objectMapper = new ObjectMapper(factory)
@@ -108,4 +116,7 @@ class JsonConfig(filePath:String) extends WikidataExtractorConfig {
     command
   }
 
+  override def getValue(property: String): mutable.Map[String, String] = getMap(property)
+
+  override def keys(): List[String] = configMap.keySet.toList
 }
