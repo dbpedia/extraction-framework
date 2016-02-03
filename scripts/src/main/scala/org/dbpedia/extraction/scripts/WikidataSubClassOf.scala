@@ -102,8 +102,8 @@ object WikidataSubClassOf {
       .filter(_._2.isDefined)
       //exclude owl:Thing mappings
       .filter( x => !x._2.get.equals("owl:Thing"))
-      // exclude existing mappings
-      .filter( x => existingMappings.contains(x._1) && existingMappings.get(x._1).equals(x._2))
+      // exclude existing mappings TODO
+      //.filter( x => !(existingMappings.contains(x._1) && existingMappings.get(x._1).equals(x._2)))
       // remove the opional
       .map(x => (x._1, x._2.get))
 
