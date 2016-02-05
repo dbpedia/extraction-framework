@@ -210,8 +210,6 @@ object WikidataSubClassOf {
   }
 
   private def writeConfig(dbo_class_map: mutable.Map[String, String]): Unit = {
-
-    println(dbo_class_map)
     val mapper = new ObjectMapper()
     mapper.registerModule(DefaultScalaModule)
     val json_out = new StringWriter
