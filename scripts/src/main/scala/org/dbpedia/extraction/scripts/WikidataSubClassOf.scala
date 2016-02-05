@@ -96,7 +96,6 @@ object WikidataSubClassOf {
 
 
 
-
     //wkdToDbpMappings is a map[qID -> dbp Name
     val wkdToDbpMappings = wkdEquivMap
       .filter(_._2.isDefined)
@@ -105,19 +104,9 @@ object WikidataSubClassOf {
       // exclude existing mappings
       .filter( x => !existingMappings.contains(x._1))
       // remove the opional
-      .map(x => (x._1, x._2.get))
+      .map(x => ("Q"+x._1.toString(), x._2.get))
 
-    // TODO write wkdToDbpMappings to file
     writeConfig(wkdToDbpMappings)
-    /*
-      .foreach( x => {
-        val value = mutable.Map.empty[String, String]
-        value += ("owl:equivalentClass" -> x._2.get)
-        finalMap += (class_key -> value)
-      })*/
-
-
-    //
 
   }
 
@@ -220,14 +209,9 @@ object WikidataSubClassOf {
     }
   }
 
-  private def writeConfig(dbo_class_map: mutable.Map[Int, String]): Unit = {
+  private def writeConfig(dbo_class_map: mutable.Map[String, String]): Unit = {
 
-    val dbo_class_map = mutable.Map.empty[String, mutable.Map[String, String]]
-
-    val value = mutable.Map.empty[String, String]
-    //value += ("owl:equivalentClass" -> q.subject)
-    //dbo_class_map += (class_key -> value)
-
+    println(dbo_class_map)
     val mapper = new ObjectMapper()
     mapper.registerModule(DefaultScalaModule)
     val json_out = new StringWriter
