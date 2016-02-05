@@ -190,7 +190,11 @@ extends PropertyMapping
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.size > 0)
         {
 
-            val parseResults = parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
+            val parseResults = try {
+              parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
+            } catch {
+              case _: Throwable => List()
+            }
 
             //get the property wikitext and plainText size
             val propertyNodeWikiLength = propertyNode.toWikiText.substring(propertyNode.toWikiText.indexOf('=')+1).trim.length // exclude '| propKey ='
