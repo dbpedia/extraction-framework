@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.mappings
 
+import java.util.logging.Logger
+
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
@@ -193,7 +195,12 @@ extends PropertyMapping
             val parseResults = try {
               parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
             } catch {
-              case _: Throwable => List()
+              case e: Throwable =>
+                Logger
+                  .getLogger(this.getClass.getName)
+                  .warning("Failed to parse '" + propertyNode.key + "' from template '" + node.title.decoded
+                    + "' in page '" + node.root.title.decoded + " reason: " + e.toString)
+                List()
             }
 
             //get the property wikitext and plainText size
