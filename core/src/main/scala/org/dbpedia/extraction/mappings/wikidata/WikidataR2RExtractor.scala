@@ -47,7 +47,7 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
-  val classMapFromJson="auto_generated_mapping.json"
+  val itemMap = readJson("auto_generated_mapping.json")
 
   private val rdfType = context.ontology.properties("rdf:type")
   private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
@@ -226,7 +226,6 @@ class WikidataR2RExtractor(
 
   private def getEquivalentClass(value: Value): Set[OntologyClass] = {
     var classes = Set[OntologyClass]()
-    val itemMap = readJson(classMapFromJson)
 
     value match {
       case v: ItemIdValue => {
@@ -250,8 +249,6 @@ class WikidataR2RExtractor(
     classes
   }
 
-  private def jsonMapToOntology(itemMap:Map[String,String]): Unit ={
-  }
   private def readJson(fileName:String): Map[String,String] = {
     val source = scala.io.Source.fromFile(fileName)
     val jsonString = source.getLines() mkString
