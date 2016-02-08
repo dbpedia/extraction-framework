@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.File
+import java.io.{IOException, File}
 
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.config.mappings.wikidata._
@@ -65,6 +65,9 @@ class WikidataR2RExtractor(
                               DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs, DBpediaDatasets.WikidataR2R_ontology)
 
 
+  private def loadConfigs(args:Array[String]): Unit ={
+
+  }
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
@@ -231,18 +234,22 @@ class WikidataR2RExtractor(
       case v: ItemIdValue => {
         val wikidataItem = WikidataUtil.getItemId(v)
         val valueTitle = "wikidata:" + WikidataUtil.getItemId(v)
-        val getOntologyKey = itemMap.get(wikidataItem)
-        getOntologyKey match {
-          case Some(key) =>
-            classes++=Set(context.ontology.classes(key))
-          case _ =>
-        }
-
-        context.ontology.wikidataClassesMap.foreach({ map =>
-          if (map._1.matches(valueTitle)) {
-            classes ++= map._2
+        try {
+          val getOntologyKey = itemMap.get(wikidataItem)
+          getOntologyKey match {
+            case Some(key) =>
+              classes++=Set(context.ontology.classes(key))
+            case _ =>
           }
-        })
+        } catch {
+          case ex:Exception =>
+        }
+          context.ontology.wikidataClassesMap.foreach({ map =>
+            if (map._1.matches(valueTitle)) {
+              classes ++= map._2
+            }
+          })
+
       }
       case _ =>
     }
@@ -250,12 +257,16 @@ class WikidataR2RExtractor(
   }
 
   private def readJson(fileName:String): Map[String,String] = {
-    val source = scala.io.Source.fromFile(fileName)
-    val jsonString = source.getLines() mkString
+    try {
+      val source = scala.io.Source.fromFile(fileName)
+      val jsonString = source.getLines() mkString
 
-    val mapper = new ObjectMapper() with ScalaObjectMapper
-    mapper.registerModule(DefaultScalaModule)
-    val itemMap = mapper.readValue[Map[String, String]](jsonString)
+      val mapper = new ObjectMapper() with ScalaObjectMapper
+      mapper.registerModule(DefaultScalaModule)
+      val itemMap = mapper.readValue[Map[String, String]](jsonString)
+    } catch {
+      case ioe: IOException => println("Please check class mapping file "+ioe)
+    }
 
     return itemMap
   }
