@@ -1,10 +1,14 @@
 package org.dbpedia.extraction.mappings
 
+import java.io.File
+
+import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.config.mappings.wikidata._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
+import org.dbpedia.extraction.wikiparser.JsonNode
 import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
@@ -12,6 +16,10 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
+import com.fasterxml.jackson.core.JsonFactory
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import scala.language.postfixOps
 
 /**
  * Created by ali on 10/26/14.
@@ -39,6 +47,7 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
+  val classMapFromJson="auto_generated_mapping.json"
 
   private val rdfType = context.ontology.properties("rdf:type")
   private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
@@ -59,6 +68,7 @@ class WikidataR2RExtractor(
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
+
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
         val duplicateList = getDuplicates(statementGroup)
@@ -216,10 +226,19 @@ class WikidataR2RExtractor(
 
   private def getEquivalentClass(value: Value): Set[OntologyClass] = {
     var classes = Set[OntologyClass]()
+    val itemMap = readJson(classMapFromJson)
 
     value match {
       case v: ItemIdValue => {
+        val wikidataItem = WikidataUtil.getItemId(v)
         val valueTitle = "wikidata:" + WikidataUtil.getItemId(v)
+        val getOntologyKey = itemMap.get(wikidataItem)
+        getOntologyKey match {
+          case Some(key) =>
+            classes++=Set(context.ontology.classes(key))
+          case _ =>
+        }
+
         context.ontology.wikidataClassesMap.foreach({ map =>
           if (map._1.matches(valueTitle)) {
             classes ++= map._2
@@ -229,6 +248,19 @@ class WikidataR2RExtractor(
       case _ =>
     }
     classes
+  }
+
+  private def jsonMapToOntology(itemMap:Map[String,String]): Unit ={
+  }
+  private def readJson(fileName:String): Map[String,String] = {
+    val source = scala.io.Source.fromFile(fileName)
+    val jsonString = source.getLines() mkString
+
+    val mapper = new ObjectMapper() with ScalaObjectMapper
+    mapper.registerModule(DefaultScalaModule)
+    val itemMap = mapper.readValue[Map[String, String]](jsonString)
+
+    return itemMap
   }
 
   private def getEquivalentProperties(property: String): Set[OntologyProperty] = {
@@ -296,4 +328,3 @@ class WikidataR2RExtractor(
     adjustedGraph
   }
 }
-
