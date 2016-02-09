@@ -47,7 +47,6 @@ object DataIdGenerator {
     val webDir = configMap.get("webDir").getAsString.value() + (if(configMap.get("webDir").getAsString.value().endsWith("/")) "" else "/")
     require(URI.create(webDir) != null, "Please specify a valid web directory!")
 
-
     val dump = new File(configMap.get("localDir").getAsString.value)
     require(dump.isDirectory() && dump.canRead(), "Please specify a valid local dump directory!")
 
@@ -57,6 +56,9 @@ object DataIdGenerator {
       case Some(ld) => ld.getLines.map(_.split(";")).map(x => x(0) -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))).toMap
       case None => Map[String,Map[String, String]]()
     }
+
+    val documentation = configMap.get("documentation").getAsString.value
+    require(URI.create(documentation) != null, "Please specify a valid documentation web page!")
 
     val compression = configMap.get("fileExtension").getAsString.value
     require(compression.startsWith("."), "please provide a valid file extension starting with a dot")
@@ -200,6 +202,7 @@ object DataIdGenerator {
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dc"), "license"), sparql.createResource(license))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dcat"), "mediaType"), getMediaType("sparql", "" ))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dcat"), "accessURL"), sparql.createResource(sparqlEndpoint))
+      sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("void"), "sparqlEndpoint"), sparql.createResource(sparqlEndpoint))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid-ld"), "graphName"), sparql.createResource("http://dbpedia.org"))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid"), "accessProcedure"), sparql.createLiteral("An endpoint for sparql queries: provide valid queries."))
       sparql
@@ -437,6 +440,7 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + datasetName.substring(datasetName.lastIndexOf("/") +1) + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(datasetName.substring(datasetName.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "landingPage"), model.createResource("http://dbpedia.org/"))
+      model.add(dataset, model.createProperty(model.getNsPrefixURI("foaf"), "page"), model.createResource(documentation))
       //TODO done by DataId Hub
       model.add(dataset, model.createProperty(model.getNsPrefixURI("owl"), "versionInfo"), model.createTypedLiteral(idVersion, model.getNsPrefixURI("xsd") + "string"))
       //TODO model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dataset)
