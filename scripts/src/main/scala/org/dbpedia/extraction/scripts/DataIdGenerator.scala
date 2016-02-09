@@ -25,7 +25,6 @@ import scala.reflect.runtime.universe._
   */
 object DataIdGenerator {
 
-
   val dateformat = new SimpleDateFormat("yyyy-MM-dd")
   def main(args: Array[String]) {
 
@@ -141,6 +140,47 @@ object DataIdGenerator {
       agent
     }
 
+    //model for all type statements will be merged with submodels before write...
+    val typeModel = ModelFactory.createDefaultModel()
+    addPrefixes(typeModel)
+
+    var mediaTypeMap = Map(("","") -> typeModel.createResource(typeModel.getNsPrefixURI("dataid")))  //alibi entry
+
+    def getMediaType(outer: String, inner: String): Resource =
+    {
+      try {
+        return mediaTypeMap((outer, inner))
+      }
+      catch {
+        case e : NoSuchElementException => {
+          val o = outer match {case y if(y.contains("gz")) => "application/x-gzip" case z if(z.contains("bz2")) => "application/x-bzip2" case "sparql" => "application/sparql-results+xml" case _ => null}
+          val oe = outer match {case y if(y.contains("gz")) => ".gz" case z if(z.contains("bz2")) => ".bz2" case _ => null}
+          val i = inner match {case ttl if(ttl.contains(".ttl")) => "text/turtle" case tql if(tql.contains(".tql") || tql.contains(".nq")) => "application/n-quads" case nt if(nt.contains(".nt")) => "application/n-triples" case _ => null}
+          val ie = inner match {case ttl if(ttl.contains(".ttl")) => ".ttl" case tql if(tql.contains(".tql") || tql.contains(".nq")) => ".tql" case nt if(nt.contains(".nt")) => ".nt" case _ => null}
+          val mime = typeModel.createResource(typeModel.getNsPrefixURI("dataid") + "MediaType" + (if(i != null) "_" + i.substring(i.lastIndexOf("/")+1) else "") + "_" + o.substring(o.lastIndexOf("/")+1))
+
+          typeModel.add(mime, RDF.`type`, typeModel.createResource(typeModel.getNsPrefixURI("dataid") + "MediaType"))
+          typeModel.add(mime, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeTemplate"), typeModel.createLiteral(o))
+          if(oe != null)
+            typeModel.add(mime, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeExension"), typeModel.createLiteral(oe))
+          if(i != null)
+          {
+            val it = typeModel.createResource(typeModel.getNsPrefixURI("dataid") + "MediaType_" + i.substring(i.lastIndexOf("/")+1))
+            typeModel.add(it, RDF.`type`, typeModel.createResource(typeModel.getNsPrefixURI("dataid") + "MediaType"))
+            typeModel.add(mime, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "innerMediaType"), it)
+            typeModel.add(it, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeTemplate"), typeModel.createLiteral(i))
+            typeModel.add(it, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeExension"), typeModel.createLiteral(ie))
+            if(ie == ".tql")
+              typeModel.add(it, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeExension"), typeModel.createLiteral(".nq"))
+            mediaTypeMap += (inner, null) -> it
+          }
+          mediaTypeMap += (outer, inner) -> mime
+          mime
+        }
+        case _ => null
+      }
+    }
+
     val sparql: Model = ModelFactory.createDefaultModel()
     def addSparqlEndpoint(dataset: Resource): Model = {
       if(sparql.size() > 0 || sparqlEndpoint == null)
@@ -160,9 +200,9 @@ object DataIdGenerator {
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dc"), "modified"), sparql.createTypedLiteral(dateformat.format(new Date()), sparql.getNsPrefixURI("xsd") + "date"))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dc"), "issued"), sparql.createTypedLiteral(dateformat.format(new Date()), sparql.getNsPrefixURI("xsd") + "date"))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dc"), "license"), sparql.createResource(license))
-      sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dcat"), "mediaType"), sparql.createLiteral("application/sparql-results+xml"))
-      sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dcat"), "accessURL"), sparql.createResource("sparqlEndpoint"))
-      sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid-ld"), "graphName"), sparql.createLiteral("The official DBpedia sparql endpoint", "en"))
+      sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dcat"), "mediaType"), getMediaType("sparql", "" ))
+      sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dcat"), "accessURL"), sparql.createResource(sparqlEndpoint))
+      sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid-ld"), "graphName"), sparql.createResource("http://dbpedia.org"))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid"), "accessProcedure"), sparql.createLiteral("An endpoint for sparql queries: provide valid queries."))
       sparql
     }
@@ -184,14 +224,6 @@ object DataIdGenerator {
     catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dc"), "license"), catalogModel.createResource(license))
     catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("owl"), "versionInfo"), catalogModel.createTypedLiteral(idVersion, catalogModel.getNsPrefixURI("xsd") + "string"))
     catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("foaf"), "homepage"), catalogModel.createResource(configMap.get("creator").getAsObject.get("homepage").getAsString.value()))
-
-
-
-    //model for all type statements will be merged with submodels before write...
-    val typeModel = ModelFactory.createDefaultModel()
-    addPrefixes(typeModel)
-
-    var mediaTypeMap = Map(("","") -> typeModel.createResource(typeModel.getNsPrefixURI("dataid")))  //alibi entry
 
     def addDistribution(model: Model, dataset: Resource, lang: Language, outerDirectory: String, currentFile: String, associatedAgent: Resource): Resource = {
       val dist = model.createResource(uri.getURI + "?file=" + currentFile)
@@ -229,40 +261,6 @@ object DataIdGenerator {
       inner = inner.substring(inner.indexOf(".")).replace(compression, "")
       model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "mediaType"), getMediaType(compression,inner ) )
       dist
-    }
-
-    def getMediaType(outer: String, inner: String): Resource =
-    {
-      try {
-        return mediaTypeMap((outer, inner))
-      }
-      catch {
-        case e : NoSuchElementException => {
-          val o = outer match {case y if(y.contains("gz")) => "application/x-gzip" case z if(z.contains("bz2")) => "application/x-bzip2" case _ => null}
-          val oe = outer match {case y if(y.contains("gz")) => ".gz" case z if(z.contains("bz2")) => ".bz2" case _ => null}
-          val i = inner match {case ttl if(ttl.contains(".ttl")) => "text/turtle" case tql if(tql.contains(".tql") || tql.contains(".nq")) => "application/n-quads" case nt if(nt.contains(".nt")) => "application/n-triples" case _ => null}
-          val ie = inner match {case ttl if(ttl.contains(".ttl")) => ".ttl" case tql if(tql.contains(".tql") || tql.contains(".nq")) => ".tql" case nt if(nt.contains(".nt")) => ".nt" case _ => null}
-          val mime = typeModel.createResource(typeModel.getNsPrefixURI("dataid") + "MediaType" + (if(i != null) "_" + i.substring(i.lastIndexOf("/")+1) else "") + "_" + o.substring(o.lastIndexOf("/")+1))
-
-          typeModel.add(mime, RDF.`type`, typeModel.createResource(catalogModel.getNsPrefixURI("dataid") + "MediaType"))
-          typeModel.add(mime, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeTemplate"), typeModel.createLiteral(o))
-          typeModel.add(mime, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeExension"), typeModel.createLiteral(oe))
-          if(i != null)
-          {
-            val it = typeModel.createResource(typeModel.getNsPrefixURI("dataid") + "MediaType_" + i.substring(i.lastIndexOf("/")+1))
-            typeModel.add(it, RDF.`type`, typeModel.createResource(catalogModel.getNsPrefixURI("dataid") + "MediaType"))
-            typeModel.add(mime, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "innerMediaType"), it)
-            typeModel.add(it, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeTemplate"), typeModel.createLiteral(i))
-            typeModel.add(it, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeExension"), typeModel.createLiteral(ie))
-            if(ie == ".tql")
-              typeModel.add(it, typeModel.createProperty(typeModel.getNsPrefixURI("dataid"), "typeExension"), typeModel.createLiteral(".nq"))
-            mediaTypeMap += (inner, null) -> it
-          }
-          mediaTypeMap += (outer, inner) -> mime
-          mime
-        }
-        case _ => null
-      }
     }
 
     //TODO links...
