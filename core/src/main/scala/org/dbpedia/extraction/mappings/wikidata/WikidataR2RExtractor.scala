@@ -47,7 +47,9 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
-  val itemMap = readJson("auto_generated_mapping.json")
+
+  //class mappings generated with script WikidataSubClassOf and written to json file.
+  val classMappings = readClassMappings("auto_generated_mapping.json")
 
   private val rdfType = context.ontology.properties("rdf:type")
   private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
@@ -64,10 +66,6 @@ class WikidataR2RExtractor(
                               DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
                               DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs, DBpediaDatasets.WikidataR2R_ontology)
 
-
-  private def loadConfigs(args:Array[String]): Unit ={
-
-  }
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
@@ -234,16 +232,11 @@ class WikidataR2RExtractor(
       case v: ItemIdValue => {
         val wikidataItem = WikidataUtil.getItemId(v)
         val valueTitle = "wikidata:" + WikidataUtil.getItemId(v)
-        try {
-          val getOntologyKey = itemMap.get(wikidataItem)
-          getOntologyKey match {
-            case Some(key) =>
-              classes++=Set(context.ontology.classes(key))
-            case _ =>
+
+          classMappings.get(wikidataItem) match {
+            case Some(mappings) => classes++=mappings
+            case _=>
           }
-        } catch {
-          case ex:Exception =>
-        }
           context.ontology.wikidataClassesMap.foreach({ map =>
             if (map._1.matches(valueTitle)) {
               classes ++= map._2
@@ -256,19 +249,28 @@ class WikidataR2RExtractor(
     classes
   }
 
-  private def readJson(fileName:String): Map[String,String] = {
+  private def readClassMappings(fileName:String): mutable.Map[String,Set[OntologyClass]] = {
+    val finalMap = mutable.Map[String,Set[OntologyClass]]()
+
     try {
       val source = scala.io.Source.fromFile(fileName)
       val jsonString = source.getLines() mkString
-
       val mapper = new ObjectMapper() with ScalaObjectMapper
       mapper.registerModule(DefaultScalaModule)
-      val itemMap = mapper.readValue[Map[String, String]](jsonString)
+      val mapFromJson = mapper.readValue[Map[String, String]](jsonString)
+
+      mapFromJson.foreach{
+        pair =>
+          mapFromJson.get(pair._1) match {
+            case Some(ontologyKey) => finalMap+=pair._1 -> Set(context.ontology.classes(ontologyKey))
+            case _=>
+          }
+      }
     } catch {
       case ioe: IOException => println("Please check class mapping file "+ioe)
     }
 
-    return itemMap
+    return finalMap
   }
 
   private def getEquivalentProperties(property: String): Set[OntologyProperty] = {
