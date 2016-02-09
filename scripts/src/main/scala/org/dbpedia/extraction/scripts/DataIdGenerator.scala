@@ -181,15 +181,13 @@ object DataIdGenerator {
       }
     }
 
-    val sparql: Model = ModelFactory.createDefaultModel()
+
     def addSparqlEndpoint(dataset: Resource): Model = {
-      if(sparql.size() > 0 || sparqlEndpoint == null)
-        return sparql
+      val sparql: Model = ModelFactory.createDefaultModel()
       addPrefixes(sparql)
       val sparqlAgent = addAgent(sparql, Language.Commons, configMap.get("openLink").getAsObject)
       val dist = sparql.createResource(uri.getURI + "?sparql=DBpediaSparqlEndpoint")
       sparql.add(dist, RDF.`type`, sparql.createResource(sparql.getNsPrefixURI("dataid-ld") + "SparqlEndpoint"))
-      sparql.add(dataset, sparql.createProperty(sparql.getNsPrefixURI("dcat"), "distribution"), dist)
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid"), "isDistributionOf"), dataset)
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("owl"), "versionInfo"), sparql.createTypedLiteral(idVersion, sparql.getNsPrefixURI("xsd") + "string"))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dc"), "title"), sparql.createLiteral("The official DBpedia sparql endpoint", "en"))
