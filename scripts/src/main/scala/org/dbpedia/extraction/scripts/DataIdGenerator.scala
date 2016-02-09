@@ -345,9 +345,9 @@ object DataIdGenerator {
               dataset = addDataset(mainModel, lang, dis, creator)
               topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "subset"), dataset)
               mainModel.add(dataset, mainModel.createProperty(mainModel.getNsPrefixURI("dc"), "isPartOf"), topset)
-              if(coreList.contains(dis.substring(0, dis.lastIndexOf('.')))) {
-                mainModel.add(addSparqlEndpoint(dataset))
-              }
+            }
+            if(coreList.contains(dis.substring(0, dis.lastIndexOf('.')))) {
+              mainModel.add(addSparqlEndpoint(dataset))
             }
             addDistribution(mainModel, dataset, lang, outer.getName, dis, creator)
           }
