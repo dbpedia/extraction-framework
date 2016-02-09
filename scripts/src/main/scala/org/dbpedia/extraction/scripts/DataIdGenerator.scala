@@ -253,7 +253,7 @@ object DataIdGenerator {
             model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(bytes.get(("bz2")).get, model.getNsPrefixURI("xsd") + "integer"))
           case None =>
         }
-        model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource((webDir + outerDirectory + "/" + lang.wikiCode).replace("-", "_") + "/" + currentFile))
+        model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile))
       }
       var inner = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
       inner = inner.substring(inner.indexOf(".")).replace(compression, "")
