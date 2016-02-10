@@ -231,18 +231,10 @@ class WikidataR2RExtractor(
     value match {
       case v: ItemIdValue => {
         val wikidataItem = WikidataUtil.getItemId(v)
-        val valueTitle = "wikidata:" + WikidataUtil.getItemId(v)
-
           classMappings.get(wikidataItem) match {
             case Some(mappings) => classes++=mappings
             case _=>
           }
-          context.ontology.wikidataClassesMap.foreach({ map =>
-            if (map._1.matches(valueTitle)) {
-              classes ++= map._2
-            }
-          })
-
       }
       case _ =>
     }
@@ -268,6 +260,10 @@ class WikidataR2RExtractor(
       }
     } catch {
       case ioe: IOException => println("Please check class mapping file "+ioe)
+    }
+
+    context.ontology.wikidataClassesMap.foreach {
+      classMap => finalMap+=classMap._1.replace("wikidata:","")->classMap._2
     }
 
     return finalMap
