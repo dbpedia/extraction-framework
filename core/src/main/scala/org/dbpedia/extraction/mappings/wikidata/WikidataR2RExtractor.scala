@@ -254,7 +254,11 @@ class WikidataR2RExtractor(
       mapFromJson.foreach{
         pair =>
           mapFromJson.get(pair._1) match {
-            case Some(ontologyKey) => finalMap+=pair._1 -> Set(context.ontology.classes(ontologyKey))
+            case Some(ontologyKey) => {
+              context.ontology.classes.get(ontologyKey) match {
+                case Some(oClass)=> finalMap+=pair._1 -> Set(oClass)
+                case _=>
+              }}
             case _=>
           }
       }
