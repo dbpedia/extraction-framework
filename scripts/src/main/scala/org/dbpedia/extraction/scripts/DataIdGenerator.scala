@@ -231,7 +231,11 @@ object DataIdGenerator {
       model.add(dist, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SingleFile"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "distribution"), dist)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "isDistributionOf"), dataset)
-      model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + currentFile + (if (lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
+
+      datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_"))) match {
+        case Some(d) => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
+        case None => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral(currentFile.substring(0, currentFile.lastIndexOf("_")).replace("-", " ").replace("_", " ") + " dataset" , "en"))
+      }
 
       datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_")) && x.description != null) match {
         case Some(d) => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
@@ -362,38 +366,24 @@ object DataIdGenerator {
           var outString = new String(baos.toByteArray(), Charset.defaultCharset())
           outString = "\n#### Agents & EntityContexts ####\n" +
             outString.replaceAll("(@prefix).*\\n", "")
-          var os = new FileOutputStream(outfile, true)
-          var printStream = new PrintStream(os)
-          printStream.print(outString)
-          printStream.close()
 
           baos = new ByteArrayOutputStream()
           topsetModel.write(baos, "TURTLE")
-          outString = new String(baos.toByteArray(), Charset.defaultCharset())
-          outString = "\n########## Main Dataset ##########\n" +
-            outString.replaceAll("(@prefix).*\\n", "")
-          os = new FileOutputStream(outfile, true)
-          printStream = new PrintStream(os)
-          printStream.print(outString)
-          printStream.close()
+          outString += "\n########## Main Dataset ##########\n" +
+            new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
           baos = new ByteArrayOutputStream()
           mainModel.write(baos, "TURTLE")
-          outString = new String(baos.toByteArray(), Charset.defaultCharset())
-          outString = "\n#### Datasets & Distributions ####\n" +
-            outString.replaceAll("(@prefix).*\\n", "")
-          os = new FileOutputStream(outfile, true)
-          printStream = new PrintStream(os)
-          printStream.print(outString)
-          printStream.close()
+          outString += "\n#### Datasets & Distributions ####\n" +
+            new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
           baos = new ByteArrayOutputStream()
           typeModel.write(baos, "TURTLE")
-          outString = new String(baos.toByteArray(), Charset.defaultCharset())
-          outString = "\n########### MediaTypes ###########\n" +
-            outString.replaceAll("(@prefix).*\\n", "")
-          os = new FileOutputStream(outfile, true)
-          printStream = new PrintStream(os)
+          outString += "\n########### MediaTypes ###########\n" +
+            new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
+
+          val os = new FileOutputStream(outfile, true)
+          val printStream = new PrintStream(os)
           printStream.print(outString)
           printStream.close()
 
@@ -427,6 +417,20 @@ object DataIdGenerator {
       {
         model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "rootResource"), topset)
 
+
+        datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_"))) match {
+          case Some(d) =>
+            {
+              model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
+              model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
+            }
+          case None =>
+            {
+              model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral(currentFile.substring(0, currentFile.lastIndexOf("_")).replace("-", " ").replace("_", " ") + " dataset" , "en"))
+              model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile.substring(0, currentFile.lastIndexOf("_")).replace("-", " ").replace("_", " ") + " dataset", "en"))
+            }
+        }
+
         datasetDescriptions.find(x => x.name == datasetName && x.description != null) match
         {
           case Some(d) => model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
@@ -437,8 +441,6 @@ object DataIdGenerator {
         }
       }
 
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral("DBpedia " + dbpVersion + " " + datasetName.substring(datasetName.lastIndexOf("/") +1) + (if(lang != null) {" " + lang.wikiCode} else "") + " dump dataset", "en"))
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(datasetName.substring(datasetName.lastIndexOf("/") +1) + (if(lang != null) {"_" + lang.wikiCode} else "") + "_" + dbpVersion, "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "landingPage"), model.createResource("http://dbpedia.org/"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("foaf"), "page"), model.createResource(documentation))
       //TODO done by DataId Hub

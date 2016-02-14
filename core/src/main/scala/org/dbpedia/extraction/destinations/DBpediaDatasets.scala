@@ -47,9 +47,9 @@ object DBpediaDatasets
     val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased", "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki")
     val SpecificProperties = new Dataset("specific_mappingbased_properties", "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.")
 
-    val OntologyPropertiesObjectsCleaned = new Dataset("mappingbased-objects", "High-quality data extracted from Infoboxes using the mapping-based extraction (Object properties only). The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.");
-    val OntologyPropertiesDisjointRange = new Dataset("mappingbased-objects-disjoint-range", "Errors detected in the mapping based properties (disjoint range).");
-    val OntologyPropertiesDisjointDomain = new Dataset("mappingbased-objects-disjoint-domain", "Errors detected in the mapping based properties (disjoint domain).");
+    val OntologyPropertiesObjectsCleaned = new Dataset("mappingbased-objects", "High-quality data extracted from Infoboxes using the mapping-based extraction (Object properties only). The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
+    val OntologyPropertiesDisjointRange = new Dataset("mappingbased-objects-disjoint-range", "Errors detected in the mapping based properties (disjoint range).")
+    val OntologyPropertiesDisjointDomain = new Dataset("mappingbased-objects-disjoint-domain", "Errors detected in the mapping based properties (disjoint domain).")
 
 
     /**
