@@ -290,11 +290,9 @@ object DataIdGenerator {
               return false
           }
         }
-
         val distributions = dir.listFiles(filter).map(x => x.getName).toList.sorted
 
         if(lang != null && distributions.map(x => x.contains("infobox-properties")).foldRight(false)(_ || _)) {
-
           val dataidModel = ModelFactory.createDefaultModel()
           val topsetModel = ModelFactory.createDefaultModel()
           val agentModel = ModelFactory.createDefaultModel()
@@ -306,6 +304,7 @@ object DataIdGenerator {
           addPrefixes(agentModel)
 
           val outfile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
+          logger.log(Level.INFO, "started DataId: " + outfile.getAbsolutePath)
 
           uri = dataidModel.createResource(webDir + outer.getName + "/" + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
           require(uri != null, "Please provide a valid directory")
@@ -335,6 +334,7 @@ object DataIdGenerator {
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("foaf"), "primaryTopicOf"), uri)
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "vocabulary"), topsetModel.createResource(vocabulary))
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "description"), topsetModel.createLiteral(configMap.get("description").getAsString.value, "en"))
+          topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "title"), topsetModel.createLiteral("DBpedia root dataset for language: " + lang.wikiCode + " version: " + dbpVersion, "en"))
 
           if(rights != null)
             topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "rights"), topsetModel.createLiteral(rights, "en"))
