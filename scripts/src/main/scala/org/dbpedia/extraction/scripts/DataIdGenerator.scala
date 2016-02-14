@@ -257,7 +257,10 @@ object DataIdGenerator {
         lbpMap.get((outerDirectory + "/" + lang.wikiCode + "/" + currentFile).replace(compression, ""))
         match {
           case Some(bytes) =>
-            model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(bytes.get(("bz2")).get, model.getNsPrefixURI("xsd") + "integer"))
+            {
+              model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(bytes.get(("bz2")).get, model.getNsPrefixURI("xsd") + "integer"))
+              model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "uncompressed"), model.createTypedLiteral(bytes.get(("bytes")).get, model.getNsPrefixURI("xsd") + "integer"))
+            }
           case None =>
         }
         model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile))
