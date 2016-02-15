@@ -127,7 +127,7 @@ object DataIdGenerator {
 
       Option(lang) match{
         case Some(lang) =>{
-          val context = model.createResource(webDir + lang.wikiCode + "/dataid.ttl?subj=" + agentMap.get("role").getAsString.value().toLowerCase + "Context")
+          val context = model.createResource(webDir + lang.wikiCode.replace("-", "_") + "/dataid.ttl?subj=" + agentMap.get("role").getAsString.value().toLowerCase + "Context")
           model.add(context, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "AuthorityEntityContext"))
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorizedAgent"), agent)
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorityAgentRole"), model.createResource(model.getNsPrefixURI("dataid") + agentMap.get("role").getAsString.value()))
@@ -239,10 +239,10 @@ object DataIdGenerator {
 
       datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_")) && x.description != null) match {
         case Some(d) => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
-        case None => err.println("Could not find description for distribution: " + (if (lang != null) {"_" + lang.wikiCode } else "") + " / " + currentFile)
+        case None => err.println("Could not find description for distribution: " + (if (lang != null) {"_" + lang.wikiCode.replace("-", "_") } else "") + " / " + currentFile)
       }
 
-      model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile + (if (lang != null) {"_" + lang.wikiCode } else "") + "_" + dbpVersion, "en"))
+      model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile + (if (lang != null) {"_" + lang.wikiCode.replace("-", "_") } else "") + "_" + dbpVersion, "en"))
       //TODO done by DataId Hub
       model.add(dataset, model.createProperty(model.getNsPrefixURI("owl"), "versionInfo"), model.createTypedLiteral(idVersion, model.getNsPrefixURI("xsd") + "string"))
       //TODO model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
@@ -254,7 +254,7 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
 
       if (outerDirectory != null && lang != null) {
-        lbpMap.get((outerDirectory + "/" + lang.wikiCode + "/" + currentFile).replace(compression, ""))
+        lbpMap.get((outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile).replace(compression, ""))
         match {
           case Some(bytes) =>
             {
@@ -263,7 +263,7 @@ object DataIdGenerator {
             }
           case None =>
         }
-        model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile))
+        model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + outerDirectory + "/" + lang.wikiCode.replace("-", "_").replace("-", "_") + "/" + currentFile))
       }
       var inner = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
       inner = inner.substring(inner.indexOf(".")).replace(compression, "")
@@ -306,10 +306,10 @@ object DataIdGenerator {
           addPrefixes(mainModel)
           addPrefixes(agentModel)
 
-          val outfile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
+          val outfile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
           logger.log(Level.INFO, "started DataId: " + outfile.getAbsolutePath)
 
-          uri = dataidModel.createResource(webDir + outer.getName + "/" + lang.wikiCode + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode + ".ttl")
+          uri = dataidModel.createResource(webDir + outer.getName + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
           require(uri != null, "Please provide a valid directory")
           dataidModel.add(uri, RDF.`type`, dataidModel.createResource(dataidModel.getNsPrefixURI("dataid") + "DataId"))
 
@@ -337,7 +337,7 @@ object DataIdGenerator {
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("foaf"), "primaryTopicOf"), uri)
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "vocabulary"), topsetModel.createResource(vocabulary))
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "description"), topsetModel.createLiteral(configMap.get("description").getAsString.value, "en"))
-          topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "title"), topsetModel.createLiteral("DBpedia root dataset for language: " + lang.wikiCode + " version: " + dbpVersion, "en"))
+          topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "title"), topsetModel.createLiteral("DBpedia root dataset for language: " + lang.wikiCode.replace("-", "_") + " version: " + dbpVersion, "en"))
 
           if(rights != null)
             topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "rights"), topsetModel.createLiteral(rights, "en"))
@@ -439,7 +439,7 @@ object DataIdGenerator {
           case Some(d) => model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
           case None => {
             model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral("DBpedia dataset " + datasetName + ", subset of " + topset.getLocalName, "en"))
-            err.println("Could not find description for dataset: " + lang.wikiCode + "/" + currentFile)
+            err.println("Could not find description for dataset: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
           }
         }
       }
