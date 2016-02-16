@@ -306,8 +306,9 @@ object DataIdGenerator {
           addPrefixes(mainModel)
           addPrefixes(agentModel)
 
-          val outfile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
-          logger.log(Level.INFO, "started DataId: " + outfile.getAbsolutePath)
+          val ttlOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
+          val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
+          logger.log(Level.INFO, "started DataId: " + ttlOutFile.getAbsolutePath)
 
           uri = dataidModel.createResource(webDir + outer.getName + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
           require(uri != null, "Please provide a valid directory")
@@ -363,34 +364,39 @@ object DataIdGenerator {
           //TODO validate & publish DataIds online!!!
 
           //dataidModel.add(typeModel)                                                     //adding type statements
-          dataidModel.write(new FileOutputStream(outfile), "TURTLE")
+          dataidModel.write(new FileOutputStream(ttlOutFile), "TURTLE")
+          dataidModel.add(agentModel)
           var baos = new ByteArrayOutputStream()
           agentModel.write(baos, "TURTLE")
           var outString = new String(baos.toByteArray(), Charset.defaultCharset())
           outString = "\n#### Agents & EntityContexts ####\n" +
             outString.replaceAll("(@prefix).*\\n", "")
 
+          dataidModel.add(topsetModel)
           baos = new ByteArrayOutputStream()
           topsetModel.write(baos, "TURTLE")
           outString += "\n########## Main Dataset ##########\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
+          dataidModel.add(mainModel)
           baos = new ByteArrayOutputStream()
           mainModel.write(baos, "TURTLE")
           outString += "\n#### Datasets & Distributions ####\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
+          dataidModel.add(typeModel)
           baos = new ByteArrayOutputStream()
           typeModel.write(baos, "TURTLE")
           outString += "\n########### MediaTypes ###########\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
-          val os = new FileOutputStream(outfile, true)
+          val os = new FileOutputStream(ttlOutFile, true)
           val printStream = new PrintStream(os)
           printStream.print(outString)
           printStream.close()
 
-          logger.log(Level.INFO, "finished DataId: " + outfile.getAbsolutePath)
+          dataidModel.write(new FileOutputStream(jldOutFile), "JSON-LD")
+          logger.log(Level.INFO, "finished DataId: " + ttlOutFile.getAbsolutePath)
         }
       }
     }
