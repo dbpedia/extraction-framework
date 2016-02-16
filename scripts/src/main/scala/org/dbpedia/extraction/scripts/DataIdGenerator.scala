@@ -403,6 +403,7 @@ object DataIdGenerator {
 
     //write catalog
     catalogModel.write(new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.ttl")), "TURTLE")
+    catalogModel.write(new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.json")), "JSON-LD")
 
     def addDmpStatements(model: Model, dataset: Resource): Unit =
     {
