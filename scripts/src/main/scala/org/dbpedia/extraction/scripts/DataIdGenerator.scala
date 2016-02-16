@@ -339,6 +339,7 @@ object DataIdGenerator {
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("foaf"), "primaryTopic"), topset)
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("foaf"), "primaryTopicOf"), uri)
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "vocabulary"), topsetModel.createResource(vocabulary))
+          topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "vocabulary"), topsetModel.createResource(vocabulary.replace(".owl", ".nt")))
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "description"), topsetModel.createLiteral(configMap.get("description").getAsString.value, "en"))
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("dc"), "title"), topsetModel.createLiteral("DBpedia root dataset for language: " + lang.wikiCode.replace("-", "_") + " version: " + dbpVersion, "en"))
 
