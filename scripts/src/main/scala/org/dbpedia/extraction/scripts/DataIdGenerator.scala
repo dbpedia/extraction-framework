@@ -11,7 +11,9 @@ import com.hp.hpl.jena.rdf.model.{Model, ModelFactory, Resource}
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.jena.atlas.json.{JsonString, JSON, JsonObject}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{OpenRdfUtils, Language}
+import org.openrdf.model.impl.TreeModel
+import org.openrdf.rio.RDFFormat
 
 import scala.Console._
 import scala.collection.JavaConverters._
@@ -390,12 +392,17 @@ object DataIdGenerator {
           outString += "\n########### MediaTypes ###########\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
-          val os = new FileOutputStream(ttlOutFile, true)
-          val printStream = new PrintStream(os)
+          var os = new FileOutputStream(ttlOutFile, true)
+          var printStream = new PrintStream(os)
           printStream.print(outString)
           printStream.close()
 
-          dataidModel.write(new FileOutputStream(jldOutFile), "JSON-LD")
+          outString = OpenRdfUtils.writeSerialization(OpenRdfUtils.convertToOpenRdfModel(dataidModel), RDFFormat.JSONLD)
+          os = new FileOutputStream(jldOutFile, false)
+          printStream = new PrintStream(os)
+          printStream.print(outString)
+          printStream.close()
+
           logger.log(Level.INFO, "finished DataId: " + ttlOutFile.getAbsolutePath)
         }
       }
@@ -470,15 +477,15 @@ object DataIdGenerator {
       }
       dataset
     }
-
     //write catalog
+
     catalogModel.write(new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.ttl")), "TURTLE")
-    val baos = new ByteArrayOutputStream()
-    catalogModel.write(baos, "JSON-LD")
-    val outString = new String(baos.toByteArray(), Charset.defaultCharset()).replace(".ttl\"", ".json\"")
+
+    val outString = OpenRdfUtils.writeSerialization(OpenRdfUtils.convertToOpenRdfModel(catalogModel), RDFFormat.JSONLD).replace(".ttl\"", ".json\"")
     val os = new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.json"), false)
     val printStream = new PrintStream(os)
     printStream.print(outString)
     printStream.close()
   }
+
 }
