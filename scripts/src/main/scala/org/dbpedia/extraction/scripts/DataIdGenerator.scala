@@ -401,10 +401,6 @@ object DataIdGenerator {
       }
     }
 
-    //write catalog
-    catalogModel.write(new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.ttl")), "TURTLE")
-    catalogModel.write(new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.json")), "JSON-LD")
-
     def addDmpStatements(model: Model, dataset: Resource): Unit =
     {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dmp"), "usefulness"), model.createLiteral(configMap.get("dmpusefulness").getAsString.value, "en"))
@@ -474,5 +470,15 @@ object DataIdGenerator {
       }
       dataset
     }
+
+    //write catalog
+    catalogModel.write(new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.ttl")), "TURTLE")
+    val baos = new ByteArrayOutputStream()
+    catalogModel.write(baos, "JSON-LD")
+    val outString = new String(baos.toByteArray(), Charset.defaultCharset()).replace(".ttl\"", ".json\"")
+    val os = new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.json"), false)
+    val printStream = new PrintStream(os)
+    printStream.print(outString)
+    printStream.close()
   }
 }
