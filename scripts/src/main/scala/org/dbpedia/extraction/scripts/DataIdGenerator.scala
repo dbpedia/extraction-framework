@@ -12,7 +12,6 @@ import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.jena.atlas.json.{JsonString, JSON, JsonObject}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.{OpenRdfUtils, Language}
-import org.openrdf.model.impl.TreeModel
 import org.openrdf.rio.RDFFormat
 
 import scala.Console._

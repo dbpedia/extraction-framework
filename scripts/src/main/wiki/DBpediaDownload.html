@@ -1,0 +1,58 @@
+<!-- This is just for the purpose of explaining how to integrate the automatic DL table generation from DataID in the DBpedia DL page-->
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+
+        <!-- all script and link tags (see below) have to be imported into drupal via php tags. The following tag inserts all necessary script and link tags.-->
+        <?php
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/jquery.min.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/d3.min.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/jquery.dataTables.min.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/commonScripts.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/dbpediaDownload.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/chosen/chosen.jquery.min.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/d3.tip.v0.6.3.js', 'external');
+            drupal_add_css('http://vmdbpedia.informatik.uni-leipzig.de/temporary/jquery.dataTables.css', 'external');
+            drupal_add_css('http://vmdbpedia.informatik.uni-leipzig.de/temporary/chosen/chosen.min.css', 'external');
+            drupal_add_css('table.dataTable tbody td {padding: 5px 3px;} div.tooltip { position: absolute; text-align: center; padding: 2px; font: 12px sans-serif; background: wheat; color: black; border: 0px; border-radius: 5px; max-width: 300px;}', 'inline');
+        ?>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://mbostock.github.com/d3/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="/content/jScript/commonScripts.js"></script>
+        <script type="text/javascript" src="/content/jScript/dbpediaDownload.js"></script>
+        <script type="text/javascript" src="http://vmdbpedia.informatik.uni-leipzig.de/temporary/chosen/chosen.jquery.min.js"></script>
+        <script type="text/javascript" src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.css"/>
+        <link rel="stylesheet" href="http://vmdbpedia.informatik.uni-leipzig.de/temporary/chosen/chosen.min.css"/>
+        <style type="text/css">
+            table.dataTable tbody td {padding: 5px 3px;}
+            div.tooltip {
+                position: absolute;
+                text-align: center;
+                padding: 2px;
+                font: 12px sans-serif;
+                background: wheat;
+                color: black;
+                border: 0px;
+                border-radius: 5px;
+                max-width: 300px;
+            }
+        </style>
+    </head>
+    <body>
+
+    <!--place the next tag at the position you want to display the ontology download table-->
+    <div id="ontologytable"></div>
+
+    <!--place the next two tags at the position you want to display the languages download table-->
+    <div id="canvas"></div>
+    <script>
+        var startLangs = ["en","de", "es", "fr", "ja", "nl", "pt", "ru"];
+        init("http://vmdbpedia.informatik.uni-leipzig.de/2015-04/2015-04_dataid_catalog.json", insertOntologyTable, startLangs);
+    </script>
+    </body>
+</html>
