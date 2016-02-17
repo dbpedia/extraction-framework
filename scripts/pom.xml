@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.dbpedia</groupId>
         <artifactId>extraction</artifactId>
-        <version>4.1-SNAPSHOT</version>
+        <version>4.2-SNAPSHOT</version>
     </parent>
 
     <groupId>org.dbpedia.extraction</groupId>
@@ -19,6 +19,15 @@
 
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-docs-sources</id>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>doc-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
 
                 <configuration>
                     <launchers>

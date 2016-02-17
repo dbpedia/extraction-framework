@@ -28,7 +28,7 @@ object DBpediaDatasets
     val InterLanguageLinks = new Dataset("interlanguage_links", "Dataset linking a DBpedia resource to the same resource in other languages and in ((http:www.wikidata.org Wikidata,,. Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
     val Genders = new Dataset("genders", "Dataset trying to identify the gender of a resource")
     val TopicalConcepts = new Dataset("topical_concepts_unredirected", "Resources that describe a category")
-    val IriSameAsUri = new Dataset("iri_same_as_uri", "owl:sameAs links between the ((http:tools.ietf.org/html/rfc3987 IRI,, and ((http:tools.ietf.org/html/rfc3986 URI,, format of DBpedia resources. Only extracted when IRI and URI are actually different.")
+    val UriSameAsIri = new Dataset("uri_same_as_iri", "owl:sameAs links between the ((http:tools.ietf.org/html/rfc3987 IRI,, and ((http:tools.ietf.org/html/rfc3986 URI,, format of DBpedia resources. Only extracted when IRI and URI are actually different.")
     val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
     val PageLength = new Dataset("page_length", "Numbers of characters contained in a Wikipedia article's source.")
     val ImageGalleries = new Dataset("image_galleries", "An image gallery for a resource")

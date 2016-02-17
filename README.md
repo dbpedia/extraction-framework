@@ -1,5 +1,7 @@
 # DBPedia Information Extraction Framework
 
+[![Build Status](https://travis-ci.org/dbpedia/extraction-framework.svg?branch=master)](https://travis-ci.org/dbpedia/extraction-framework)
+
 ## Documentation
 
 Documentation is available from the [official DBpedia website](http://dbpedia.org) and the [DBpedia Github wiki](https://github.com/dbpedia/extraction-framework/wiki).
