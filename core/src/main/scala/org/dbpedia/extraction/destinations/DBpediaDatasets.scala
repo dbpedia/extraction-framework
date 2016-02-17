@@ -109,6 +109,7 @@ object DBpediaDatasets
     val WikidataReifiedR2R = new Dataset("mappingbased_properties_reified") // keep same name with other languages
     val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties_reified_qualifiers") // keep same name with other languages
     val WikidataRaw = new Dataset("raw_unredirected")
+    val WikidataRawRedirected = new Dataset("raw")
     val WikidataRawReified = new Dataset("raw_reified")
     val WikidataRawReifiedQualifiers = new Dataset("raw_reified_qualifiers")
     val WikidataReference = new Dataset("references")
