@@ -15,7 +15,7 @@ do
   ADD_ARGS="$ADD_ARGS|$ARG"
 done
 
-mvn $MAVEN_DEBUG scala:run -DmainClass=org.dbpedia.extraction.scripts.SlackForwarder "-DaddArgs=http://replace with the slack webhook url.org|scripts/slackRegexMap.json|stderr.out|stdout.out" &
+mvn $MAVEN_DEBUG scala:run -DmainClass=org.dbpedia.extraction.scripts.SlackForwarder "-DaddArgs='http://replace with the slack webhook url.org'|'scripts/slackRegexMap.json'|'stderr.out'|'stdout.out'" &
 PID=$!
 
 # export MAVEN_OPTS='-Xmx4096M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGC -XX:+PrintGCTimeStamps'

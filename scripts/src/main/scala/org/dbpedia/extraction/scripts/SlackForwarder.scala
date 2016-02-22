@@ -28,8 +28,12 @@ object SlackForwarder {
     require(regexMapFile.isFile() && regexMapFile.canRead(), "Please specify a valid regex map file!")
 
     val stdoutFile : File = if(args.length>2) new File(args(2)) else null
+    if(!stdoutFile.exists())
+      stdoutFile.createNewFile()
     require(stdoutFile == null || (stdoutFile.isFile() && stdoutFile.canWrite()), "Please specify a valid file for writing the stdout stream!")
     val stderrFile : File = if(args.length>3) new File(args(3)) else null
+    if(!stderrFile.exists())
+      stderrFile.createNewFile()
     require(stderrFile == null || (stderrFile.isFile() && stderrFile.canWrite()), "Please specify a valid file for writing the stderr stream!")
 
     val outPrintStream = if(stdoutFile != null) new PrintStream(new FileOutputStream(stdoutFile)) else null
