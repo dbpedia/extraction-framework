@@ -57,7 +57,7 @@ object WikiInfo
   def fromLine(line: String): WikiInfo = {
       val fields = line.split(",", -1)
       
-      if (fields.length != 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
+      if (fields.length < 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
       
       val pages = try fields(5).toInt
       catch { case nfe: NumberFormatException => throw new Exception("expected page count in field with index [5], found line ["+line+"]") }
