@@ -3,7 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.io._
 import java.net.URI
 
-import org.apache.jena.atlas.json.JSON
+import org.apache.jena.atlas.json.{JsonObject, JSON}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
@@ -43,7 +43,7 @@ object SlackForwarder {
     val jsonString = source.mkString.replaceAll("#.*", "")
     source.close()
     val regexObj = JSON.parse(jsonString)
-    val regexMap : Map[Regex, String] = regexObj.keys().asScala.map(x => x.r -> regexObj.get(x).getAsString.toString).toMap
+    val regexMap : Map[Regex, JsonObject] = regexObj.keys().asScala.map(x => x.r -> regexObj.get(x).getAsObject).toMap
 
     val in = new BufferedReader(new InputStreamReader(System.in))
     Stream.continually(in.readLine())
@@ -61,9 +61,22 @@ object SlackForwarder {
       if(errPrintStream != null && msg.startsWith("stderr:"))
         errPrintStream.print(msg.replace("stderr:",""))
 
-      regexMap.keys.map(x => x.findFirstMatchIn(msg) match
-      {
-        case Some(y) => sendCurl(webhookurl, regexMap.get(x).get)
+      regexMap.keys.map(x => {
+        x.findFirstMatchIn(msg) match {
+          case Some(y) =>
+            {
+            if(regexMap.get(x).get.get("exit").getAsBoolean.value())
+            {
+              outPrintStream.close()
+              errPrintStream.close()
+              sendCurl(webhookurl, regexMap.get(x).get.get("msg").getAsString.value())
+              System.exit(0)
+            }
+              else
+              sendCurl(webhookurl, regexMap.get(x).get.get("msg").getAsString.value())
+
+            }
+        }
       })
 
       msgCount = msgCount+1
