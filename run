@@ -15,10 +15,12 @@ do
   ADD_ARGS="$ADD_ARGS|$ARG"
 done
 
+mvn $MAVEN_DEBUG scala:run -DmainClass=org.dbpedia.extraction.scripts.SlackForwarder &
+PID=$!
+
 # export MAVEN_OPTS='-Xmx4096M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGC -XX:+PrintGCTimeStamps'
 # export MAVEN_DEBUG='-X -e'
 
 # if we're not on a terminal, use batch mode to avoid ugly log files
 [ ! -t 1 ] && BATCH="-B"
-mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS" &
-$PID= $!
+(mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS" | sed s/^/stdout:/ > "/proc/$PID/fd/0") 2>&1 | sed s/^/stderr:/ > "/proc/$PID/fd/0"

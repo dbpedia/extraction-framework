@@ -27,7 +27,12 @@ import scala.reflect.runtime.universe._
 object DataIdGenerator {
 
   val dateformat = new SimpleDateFormat("yyyy-MM-dd")
+
   def main(args: Array[String]) {
+
+    throw new Exception("some stuff has happened")
+    return  //TODO remove just for testting
+
 
     require(args != null && args.length >= 1,
       "need three args: " +
