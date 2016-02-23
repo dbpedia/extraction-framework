@@ -30,10 +30,6 @@ object DataIdGenerator {
 
   def main(args: Array[String]) {
 
-    throw new Exception("some stuff has happened")
-    return  //TODO remove just for testting
-
-
     require(args != null && args.length >= 1,
       "need three args: " +
         /*0*/ "config file location"
@@ -301,7 +297,7 @@ object DataIdGenerator {
         }
         val distributions = dir.listFiles(filter).map(x => x.getName).toList.sorted
 
-        if(lang != null && distributions.map(x => x.contains("infobox-properties")).foldRight(false)(_ || _)) {
+        if(lang != null && distributions.map(x => x.contains("interlanguage_links")).foldRight(false)(_ || _)) {
           val dataidModel = ModelFactory.createDefaultModel()
           val topsetModel = ModelFactory.createDefaultModel()
           val agentModel = ModelFactory.createDefaultModel()
