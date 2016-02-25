@@ -465,7 +465,7 @@ object DataIdGenerator {
 
     def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Resource =
     {
-      val datasetName = if(currentFile.contains("_")) currentFile.substring(0, currentFile.indexOf("_")) else currentFile
+      val datasetName = if(currentFile.contains("_")) currentFile.substring(0, currentFile.lastIndexOf("_")) else currentFile
       val dataset = model.createResource(uri.getURI + "?set=" + datasetName)
       model.add(dataset, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
       if(!toplevelSet) //not!
