@@ -474,7 +474,7 @@ object DataIdGenerator {
         model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "rootResource"), topset)
 
 
-        datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_"))) match {
+        datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, datasetName)) match {
           case Some(d) =>
             {
               model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
@@ -487,7 +487,7 @@ object DataIdGenerator {
             }
         }
 
-        datasetDescriptions.find(x => x.name == datasetName && x.description != null) match
+        datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, datasetName) && x.description != null) match
         {
           case Some(d) => model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
           case None => {
