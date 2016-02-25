@@ -28,6 +28,7 @@ object DataIdGenerator {
 
   val dateformat = new SimpleDateFormat("yyyy-MM-dd")
   //statements
+  var stmtModel : Model = null
   var versionStatement: Resource = null
   var rightsStatement: Resource = null
   var dataidStandard: Resource = null
@@ -194,16 +195,16 @@ object DataIdGenerator {
     def addSimpleStatement(typ: String, uriVal: String, stmt: String, lang: Language = null, ref: Resource = null): Resource =
     {
       val ss = if(ref != null && ref.isURIResource)
-        staticModel.createResource(ref.getURI + "#" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8"))
+        stmtModel.createResource(ref.getURI + "#" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8"))
       else
-        staticModel.createResource(uri.getURI + "?" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8"))
-      staticModel.add(ss, RDF.`type`, staticModel.createResource(staticModel.getNsPrefixURI("dataid") + "SimpleStatement"))
+        stmtModel.createResource(uri.getURI + "?" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8"))
+      stmtModel.add(ss, RDF.`type`, stmtModel.createResource(stmtModel.getNsPrefixURI("dataid") + "SimpleStatement"))
       if(lang != null)
-        staticModel.add(ss, staticModel.createProperty(staticModel.getNsPrefixURI("dataid"), "statement"), staticModel.createLiteral(stmt, lang.isoCode))
+        stmtModel.add(ss, stmtModel.createProperty(stmtModel.getNsPrefixURI("dataid"), "statement"), stmtModel.createLiteral(stmt, lang.isoCode))
       else
-        staticModel.add(ss, staticModel.createProperty(staticModel.getNsPrefixURI("dataid"), "statement"), staticModel.createLiteral(stmt))
+        stmtModel.add(ss, stmtModel.createProperty(stmtModel.getNsPrefixURI("dataid"), "statement"), stmtModel.createLiteral(stmt))
       if(ref != null)
-        staticModel.add(ss, staticModel.createProperty(staticModel.getNsPrefixURI("dc"), "references"), ref)
+        stmtModel.add(ss, stmtModel.createProperty(stmtModel.getNsPrefixURI("dc"), "references"), ref)
       ss
     }
 
@@ -324,11 +325,13 @@ object DataIdGenerator {
           val topsetModel = ModelFactory.createDefaultModel()
           val agentModel = ModelFactory.createDefaultModel()
           val mainModel = ModelFactory.createDefaultModel()
+          stmtModel = ModelFactory.createDefaultModel()
 
           addPrefixes(dataidModel)
           addPrefixes(topsetModel)
           addPrefixes(mainModel)
           addPrefixes(agentModel)
+          addPrefixes(stmtModel)
 
           val ttlOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
           val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
@@ -417,6 +420,12 @@ object DataIdGenerator {
           baos = new ByteArrayOutputStream()
           mainModel.write(baos, "TURTLE")
           outString += "\n#### Datasets & Distributions ####\n" +
+            new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
+
+          dataidModel.add(stmtModel)
+          baos = new ByteArrayOutputStream()
+          stmtModel.write(baos, "TURTLE")
+          outString += "\n########### Statements ###########\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
           dataidModel.add(staticModel)
