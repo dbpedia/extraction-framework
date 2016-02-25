@@ -263,7 +263,8 @@ object DataIdGenerator {
       }
 
       datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, currentFile.substring(0, currentFile.lastIndexOf("_"))) && x.description != null) match {
-        case Some(d) => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
+        case Some(d) =>
+          model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
         case None => err.println("Could not find description for distribution: " + (if (lang != null) {"_" + lang.wikiCode.replace("-", "_") } else "") + " / " + currentFile)
       }
 
@@ -534,7 +535,8 @@ object DataIdGenerator {
   {
     val s1 = str1.trim.toLowerCase()
     val s2 = str2.trim.toLowerCase()
-    s1.replace("-", "_") == s1.replace("-", "_")
+    val zw = s1.replace("-", "_") == s2.replace("-", "_")
+    zw
   }
 
 }
