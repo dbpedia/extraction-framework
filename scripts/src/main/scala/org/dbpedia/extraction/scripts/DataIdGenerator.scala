@@ -257,12 +257,12 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "distribution"), dist)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "isDistributionOf"), dataset)
 
-      datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_"))) match {
+      datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, currentFile.substring(0, currentFile.lastIndexOf("_")))) match {
         case Some(d) => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
         case None => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "title"), model.createLiteral(currentFile.substring(0, currentFile.lastIndexOf("_")).replace("-", " ").replace("_", " ") + " dataset" , "en"))
       }
 
-      datasetDescriptions.find(x => x.name == currentFile.substring(0, currentFile.lastIndexOf("_")) && x.description != null) match {
+      datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, currentFile.substring(0, currentFile.lastIndexOf("_"))) && x.description != null) match {
         case Some(d) => model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "description"), model.createLiteral(d.description, "en"))
         case None => err.println("Could not find description for distribution: " + (if (lang != null) {"_" + lang.wikiCode.replace("-", "_") } else "") + " / " + currentFile)
       }
@@ -528,6 +528,13 @@ object DataIdGenerator {
     val printStream = new PrintStream(os)
     printStream.print(outString)
     printStream.close()
+  }
+
+  def stringCompareIgnoreDash(str1: String, str2: String): Boolean =
+  {
+    val s1 = str1.trim.toLowerCase()
+    val s2 = str2.trim.toLowerCase()
+    s1.replace("-", "_") == s1.replace("-", "_")
   }
 
 }
