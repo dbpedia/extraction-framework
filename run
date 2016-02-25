@@ -15,9 +15,9 @@ do
   ADD_ARGS="$ADD_ARGS|$ARG"
 done
 
-mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=SlackForwarder"  "-DaddArgs=https://hooks.slack.com/services/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|/home/mf/extraction-framework/scripts/slackRegexMap.json|/home/mf/extraction-framework/stderr.out|/home/mf/extraction-framework/stdout.out" &
-PID=$!
-echo "$PID"
+#mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=SlackForwarder"  "-DaddArgs=https://hooks.slack.com/services/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|/home/mf/extraction-framework/scripts/slackRegexMap.json|/home/mf/extraction-framework/stderr.out|/home/mf/extraction-framework/stdout.out" &
+#PID=$!
+#echo "$PID"
 
 # export MAVEN_OPTS='-Xmx4096M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGC -XX:+PrintGCTimeStamps'
 # export MAVEN_DEBUG='-X -e'
@@ -25,4 +25,4 @@ echo "$PID"
 # if we're not on a terminal, use batch mode to avoid ugly log files
 [ ! -t 1 ] && BATCH="-B"
 
-mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS" &> "/proc/$PID/fd/0"
+mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS" #&> "/proc/$PID/fd/0"
