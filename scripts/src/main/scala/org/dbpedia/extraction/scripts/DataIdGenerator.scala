@@ -27,7 +27,6 @@ import scala.reflect.runtime.universe._
 object DataIdGenerator {
 
   val dateformat = new SimpleDateFormat("yyyy-MM-dd")
-  //statements
   var stmtModel : Model = null
   var versionStatement: Resource = null
   var rightsStatement: Resource = null
@@ -545,5 +544,4 @@ object DataIdGenerator {
     val zw = s1.replace("-", "_") == s2.replace("-", "_")
     zw
   }
-
 }

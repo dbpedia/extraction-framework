@@ -139,20 +139,29 @@ function tabulate(columns) {
     {
         var obj = datasets[column][id];
         var dll = obj["dcat:downloadURL"]["@id"];
+        var ret = "<small><a href=\"" + dll + "\" ";
         if(isCononicalized)
-
-            return "<small><a href=\"" + dll + "\" title=\"Canonicalized&nbsp;version&nbsp;of&nbsp;" + row.replace(" en uris", "") + ";&nbsp;Triples:&nbsp;"
-                + readableNumber(datasets[column][row]["void:triples"]["@value"], 1000) + "; File&nbsp;size:&nbsp;" + readableNumber(obj["dcat:byteSize"]["@value"], 1024)
-                + "; File&nbsp;size&nbsp;(unpacked):&nbsp;" + readableNumber(obj["dataid:uncompressed"]["@value"], 1024)
-                + "\">" + getSerializationExtension(dll).substr(1) + "*</a>&nbsp;<a href=\"http://downloads.dbpedia.org/preview.php?file="
-                + dll.replace("http://downloads.dbpedia.org/", "").replace(/\//g,'_sl_') + "\" title=\"preview&nbsp;file\">?</a></small><br/>";
+            ret += "title=\"Canonicalized&nbsp;version&nbsp;of&nbsp;" + row.replace(" en uris", "");
         else
+            ret += "title=\"Localized&nbsp;version&nbsp;of&nbsp;" + row.replace(" en uris", "");
 
-            return "<small><a href=\"" + dll + "\" title=\"Localized&nbsp;version&nbsp;of&nbsp;" + row.replace(" en uris", "") + ";&nbsp;Triples:&nbsp;"
-                + readableNumber(datasets[column][row]["void:triples"]["@value"], 1000) + "; File&nbsp;size:&nbsp;" + readableNumber(obj["dcat:byteSize"]["@value"], 1024)
-                + "; File&nbsp;size&nbsp;(unpacked):&nbsp;" + readableNumber(obj["dataid:uncompressed"]["@value"], 1024)
-                + "\">" + getSerializationExtension(dll).substr(1) + "</a>&nbsp;<a href=\"http://downloads.dbpedia.org/preview.php?file="
-                + dll.replace("http://downloads.dbpedia.org/", "").replace(/\//g,'_sl_') + "\" title=\"preview&nbsp;file\">?</a></small><br/>";
+        if(datasets[column][row]["void:triples"])
+            ret += ";&nbsp;Triples:&nbsp;" + readableNumber(datasets[column][row]["void:triples"]["@value"], 1000);
+        if(obj["dcat:byteSize"])
+            ret += "; File&nbsp;size:&nbsp;" + readableNumber(obj["dcat:byteSize"]["@value"], 1024);
+        if(obj["dataid:uncompressed"])
+            ret += "; File&nbsp;size&nbsp;(unpacked):&nbsp;" + readableNumber(obj["dataid:uncompressed"]["@value"], 1024);
+
+        ret += "\">" + getSerializationExtension(dll).substr(1);
+        if(isCononicalized)
+            ret += "*";
+        ret += "</a>&nbsp;";
+
+        if(obj["dataid:preview"])
+            ret += "<a href=\"" + obj["dataid:preview"]["@value"] + "\" title=\"preview&nbsp;file\">?</a>";
+
+        ret += "</small><br/>";
+        return ret;
     }
 
     function getEnUrisId(id, column, row)
