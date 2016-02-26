@@ -290,6 +290,7 @@ object DataIdGenerator {
           case None =>
         }
         model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "downloadURL"), model.createResource(webDir + outerDirectory + "/" + lang.wikiCode.replace("-", "_").replace("-", "_") + "/" + currentFile))
+        model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "preview"), model.createResource("http://downloads.dbpedia.org/preview.php?file=" + dbpVersion + "_sl_" + outerDirectory + "_sl_" + lang.wikiCode.replace("-", "_").replace("-", "_") + "_sl_" + currentFile))
       }
       var inner = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
       inner = inner.substring(inner.indexOf(".")).replace(compression, "")

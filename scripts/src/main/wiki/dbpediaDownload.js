@@ -6,9 +6,10 @@ var datasets = {};
 var datasetList = null;
 var initCallback = null;
 var callbackParam = null;
+var initLangs = ["en", "fr", "wikidata", "commons"];
 
 var tableConfig = {
-    "sDom": 'l<"#languagediv">ftip',
+    "sDom": 'l<"#languagediv">ft',
     paging: false,
     "columnDefs": [
         { "orderable": false, "targets": '_all' },
@@ -34,12 +35,12 @@ function tabulate(columns) {
         .style("opacity", 0);                  // set the opacity to nil
 
     var table = d3.select("#canvas")
-            .append("table")
-            .attr("border","0")
-            .attr("id","table")
-            .attr("class","display dataTable")
-            .attr("width","100%")
-            .attr("cellspacing","0"),
+        .append("table")
+        .attr("border","0")
+        .attr("id","table")
+        .attr("class","display dataTable")
+        .attr("width","100%")
+        .attr("cellspacing","0"),
         thead = table.append("thead"),
         tbody = table.append("tbody")
             .attr("overflow-y", "auto")
@@ -68,7 +69,7 @@ function tabulate(columns) {
         th2.append("th");
         th1.append("th")
             .attr("colspan","2")
-            .html("<a href=\"" + langLink + "\" title='" + mapLanguage(columns[i]) + "'>" + columns[i] + "</a>");
+            .html("<a href=\"" + langLink + "\" title='" + getLanguageFromWikicode(columns[i]) + "'>" + columns[i] + "</a>");
     }
 
     // create a row for each object in the data
@@ -102,7 +103,8 @@ function tabulate(columns) {
                 if (d.column == "dataset")
                 {
                     canCell = null;
-                    return "<strong><a href='\"#blank\"'>" + d.row + "</a></strong>";
+                    var url = "http://wiki.dbpedia.org/services-resources/documentation/datasets#" + d.row.replace(/\s/g,'');
+                    return "<strong><a href=\"" + url + "\">" + d.row + "</a></strong>";
                 }
                 if (d.column == "-") {
                     if(canCell != null)
@@ -167,20 +169,16 @@ function tabulate(columns) {
 
     function mapMouseOver(d, eventCol){
         if(eventCol ==0) {
-            var zw = null;
-            if(datasets["en"][d.row] !== undefined)
-                zw = datasets["en"][d.row];
-            else
-                zw = datasets["de"][d.row];
             div.transition()
                 .duration(500)
                 .style("opacity", 0);
             div.transition()
                 .duration(200)
                 .style("opacity", .9);
-            div.html("<p>" + zw["dc:description"]["@value"] + "</p><br/>")
+            div.html("<p>" + getDatasetRow(d)["dc:description"]["@value"] + "</p><br/>")
                 .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY) + "px");
+                .style("top", (d3.event.pageY) + "px")
+                .style("display", "initial");
         }
     }
 
@@ -189,10 +187,21 @@ function tabulate(columns) {
             div.transition()
                 .duration(500)
                 .style("opacity", 0);
+            div.html("<p>" + getDatasetRow(d)["dc:description"]["@value"] + "</p><br/>")
+                .style("display", "none");
         }
     }
 
     return table;
+}
+
+function getDatasetRow(data)
+{
+    for(var i in initLangs)
+        if(datasets[initLangs[i]][data.row] !== undefined)
+        {
+            return datasets[initLangs[i]][data.row];
+        }
 }
 
 function getLanguageJson(langs, onload)
@@ -216,7 +225,7 @@ function langLoaded(e)
         var json = JSON.parse(e.target.responseText)
         datasets[getLangFromUri(e.target["responseURL"])] = getDatasetsAndDistributionsById(json);
         var zw = Object.keys(datasets);
-        if(zw.length == 2)
+        if(zw.length == initLangs.length)
         {
             //init done
             datasetList = getDatasetList();
@@ -232,7 +241,7 @@ function catalogLoaded(e)
     {
         var json = JSON.parse(e.target.responseText)
         ids = getDataIDsFromCatalog(json);
-        getLanguageJson(["en","de"], langLoaded);
+        getLanguageJson(initLangs, langLoaded);
     }
 }
 
@@ -276,21 +285,23 @@ function getLangFromUri(id)
 
 function getDatasetList(){
     var ret = [];
-    for(var key in datasets["en"]) {
-        if (!key.startsWith("http://") && !key.startsWith("dataid:")) {
-            if(key.trim().length > 0 && key.toLowerCase().indexOf("root dataset") == -1)
-                ret.push(key);
-        }
-    }
-    for(var key in datasets["de"]) {
-        if (!key.startsWith("http://") && !key.startsWith("dataid:")) {
-            if(key.trim().length > 0 && key.toLowerCase().indexOf("root dataset") == -1)
-                ret.push(key);
-        }
-    }
+    for(var i in initLangs)
+        ret = ret.concat(loadDatasetListOfLang(initLangs[i]));
     return ret.filter(function(item, pos, self) {
         return self.indexOf(item) == pos;
     });
+}
+
+function loadDatasetListOfLang(lang)
+{
+    var ret = [];
+    for(var key in datasets[lang]) {
+        if (!key.startsWith("http://") && !key.startsWith("dataid:")) {
+            if(key.trim().length > 0 && key.toLowerCase().indexOf("root dataset") == -1)
+                ret.push(key);
+        }
+    }
+    return ret;
 }
 
 function getDatasetsAndDistributionsById(id){
@@ -405,7 +416,7 @@ function reDrawTable(s)
             var opt = document.createElement('option');
             opt.innerHTML =  langs[i];
             opt.value = langs[i];
-            opt.label = langs[i] + " - " + mapLanguage(langs[i]);
+            opt.title = getLanguageFromWikicode(langs[i]) + " (" + langs[i] + ")";
             if(s.indexOf(langs[i].trim()) >= 0)
                 opt.setAttribute("selected", "");
             list.appendChild(opt);
@@ -425,298 +436,10 @@ function reDrawTable(s)
 
         $('#langselect').chosen();
     });
+    $.fn.dataTableExt.afnFiltering.push(
+        function( oSettings, aData, iDataIndex ) {
+            return aData.slice(1).join('').trim().length > 0;
+        }
+    );
     table = $('#table').DataTable(tableConfig);
-}
-
-function mapLanguage(iso639_3)
-{
-    var langmap = {
-        "aa": "Afar",
-        "ab": "Abkhazian",
-        "ace": "Acehnese",
-        "af": "Afrikaans",
-        "ak": "Akan",
-        "als": "Alemannic",
-        "am": "Amharic",
-        "an": "Aragonese",
-        "ang": "Anglo-Saxon",
-        "ar": "Arabic",
-        "arc": "Assyrian Neo-Aramaic",
-        "arz": "Egyptian Arabic",
-        "as": "Assamese",
-        "ast": "Asturian",
-        "av": "Avar",
-        "ay": "Aymara",
-        "az": "Azerbaijani",
-        "ba": "Bashkir",
-        "bar": "Bavarian",
-        "bat-smg": "Samogitian",
-        "bcl": "Central_Bicolano",
-        "be": "Belarusian",
-        "be-x-old": "Belarusian",
-        "bg": "Bulgarian",
-        "bh": "Bihari",
-        "bi": "Bislama",
-        "bjn": "Banjar",
-        "bm": "Bambara",
-        "bn": "Bengali",
-        "bo": "Tibetan",
-        "bpy": "Bishnupriya Manipuri",
-        "br": "Breton",
-        "bs": "Bosnian",
-        "bug": "Buginese",
-        "bxr": "Buryat ",
-        "ca": "Catalan",
-        "cbk-zam": "Zamboanga Chavacano",
-        "cdo": "Min Dong",
-        "ce": "Chechen",
-        "ceb": "Cebuano",
-        "ch": "Chamorro",
-        "cho": "Choctaw",
-        "chr": "Cherokee",
-        "chy": "Cheyenne",
-        "ckb": "Sorani",
-        "co": "Corsican",
-        "commons": "commons",
-        "cr": "Cree",
-        "crh": "Crimean Tatar",
-        "cs": "Czech",
-        "csb": "Kashubian",
-        "cu": "Old Church Slavonic",
-        "cv": "Chuvash",
-        "cy": "Welsh",
-        "da": "Danish",
-        "de": "German",
-        "diq": "Zazaki",
-        "dsb": "Lower Sorbian",
-        "dv": "Divehi",
-        "dz": "Dzongkha",
-        "ee": "Ewe",
-        "el": "Greek",
-        "eml": "Emilian-Romagnol",
-        "en": "English",
-        "eo": "Esperanto",
-        "es": "Spanish",
-        "et": "Estonian",
-        "eu": "Basque",
-        "ext": "Extremaduran",
-        "fa": "Persian",
-        "ff": "Fula",
-        "fi": "Finnish",
-        "fiu-vro": "V",
-        "fj": "Fijian",
-        "fo": "Faroese",
-        "fr": "French",
-        "frp": "Franco-Proven",
-        "frr": "North Frisian",
-        "fur": "Friulian",
-        "fy": "West Frisian",
-        "ga": "Irish",
-        "gag": "Gagauz",
-        "gan": "Gan",
-        "gd": "Scottish Gaelic",
-        "gl": "Galician",
-        "glk": "Gilaki",
-        "gn": "Guarani",
-        "got": "Gothic",
-        "gu": "Gujarati",
-        "gv": "Manx",
-        "ha": "Hausa",
-        "hak": "Hakka",
-        "haw": "Hawaiian",
-        "he": "Hebrew",
-        "hi": "Hindi",
-        "hif": "Fiji Hindi",
-        "ho": "Hiri Motu",
-        "hr": "Croatian",
-        "hsb": "Upper Sorbian",
-        "ht": "Haitian",
-        "hu": "Hungarian",
-        "hy": "Armenian",
-        "hz": "Herero",
-        "ia": "Interlingua",
-        "id": "Indonesian",
-        "ie": "Interlingue",
-        "ig": "Igbo",
-        "ii": "Sichuan Yi",
-        "ik": "Inupiak",
-        "ilo": "Ilokano",
-        "io": "Ido",
-        "is": "Icelandic",
-        "it": "Italian",
-        "iu": "Inuktitut",
-        "ja": "Japanese",
-        "jbo": "Lojban",
-        "jv": "Javanese",
-        "ka": "Georgian",
-        "kaa": "Karakalpak",
-        "kab": "Kabyle",
-        "kbd": "Kabardian Circassian",
-        "kg": "Kongo",
-        "ki": "Kikuyu",
-        "kj": "Kuanyama",
-        "kk": "Kazakh",
-        "kl": "Greenlandic",
-        "km": "Khmer",
-        "kn": "Kannada",
-        "ko": "Korean",
-        "koi": "Komi-Permyak",
-        "kr": "Kanuri",
-        "krc": "Karachay-Balkar",
-        "ks": "Kashmiri",
-        "ksh": "Ripuarian",
-        "ku": "Kurdish",
-        "kv": "Komi",
-        "kw": "Cornish",
-        "ky": "Kirghiz",
-        "la": "Latin",
-        "lad": "Ladino",
-        "lb": "Luxembourgish",
-        "lbe": "Lak",
-        "lez": "Lezgian",
-        "lg": "Luganda",
-        "li": "Limburgian",
-        "lij": "Ligurian",
-        "lmo": "Lombard",
-        "ln": "Lingala",
-        "lo": "Lao",
-        "lt": "Lithuanian",
-        "ltg": "Latgalian",
-        "lv": "Latvian",
-        "map-bms": "Banyumasan",
-        "mdf": "Moksha",
-        "mg": "Malagasy",
-        "mh": "Marshallese",
-        "mhr": "Meadow Mari",
-        "mi": "Maori",
-        "mk": "Macedonian",
-        "ml": "Malayalam",
-        "mn": "Mongolian",
-        "mo": "Moldovan",
-        "mr": "Marathi",
-        "mrj": "Hill Mari",
-        "ms": "Malay",
-        "mt": "Maltese",
-        "mus": "Muscogee",
-        "mwl": "Mirandese",
-        "my": "Burmese",
-        "myv": "Erzya",
-        "mzn": "Mazandarani",
-        "na": "Nauruan",
-        "nah": "Nahuatl",
-        "nap": "Neapolitan",
-        "nds": "Low Saxon",
-        "nds-nl": "Dutch Low Saxon",
-        "ne": "Nepali",
-        "new": "Newar",
-        "ng": "Ndonga",
-        "nl": "Dutch",
-        "nn": "Norwegian ",
-        "no": "Norwegian ",
-        "nov": "Novial",
-        "nrm": "Norman",
-        "nso": "Northern Sotho",
-        "nv": "Navajo",
-        "ny": "Chichewa",
-        "oc": "Occitan",
-        "om": "Oromo",
-        "or": "Oriya",
-        "os": "Ossetian",
-        "pa": "Punjabi",
-        "pag": "Pangasinan",
-        "pam": "Kapampangan",
-        "pap": "Papiamentu",
-        "pcd": "Picard",
-        "pdc": "Pennsylvania German",
-        "pfl": "Palatinate German",
-        "pi": "Pali",
-        "pih": "Norfolk",
-        "pl": "Polish",
-        "pms": "Piedmontese",
-        "pnb": "Western Panjabi",
-        "pnt": "Pontic",
-        "ps": "Pashto",
-        "pt": "Portuguese",
-        "qu": "Quechua",
-        "rm": "Romansh",
-        "rmy": "Romani",
-        "rn": "Kirundi",
-        "ro": "Romanian",
-        "roa-rup": "Aromanian",
-        "roa-tara": "Tarantino",
-        "ru": "Russian",
-        "rue": "Rusyn",
-        "rw": "Kinyarwanda",
-        "sa": "Sanskrit",
-        "sah": "Sakha",
-        "sc": "Sardinian",
-        "scn": "Sicilian",
-        "sco": "Scots",
-        "sd": "Sindhi",
-        "se": "Northern Sami",
-        "sg": "Sango",
-        "sh": "Serbo-Croatian",
-        "si": "Sinhalese",
-        "simple": "Simple English",
-        "sk": "Slovak",
-        "sl": "Slovenian",
-        "sm": "Samoan",
-        "sn": "Shona",
-        "so": "Somali",
-        "sq": "Albanian",
-        "sr": "Serbian",
-        "srn": "Sranan",
-        "ss": "Swati",
-        "st": "Sesotho",
-        "stq": "Saterland Frisian",
-        "su": "Sundanese",
-        "sv": "Swedish",
-        "sw": "Swahili",
-        "szl": "Silesian",
-        "ta": "Tamil",
-        "te": "Telugu",
-        "tet": "Tetum",
-        "tg": "Tajik",
-        "th": "Thai",
-        "ti": "Tigrinya",
-        "tk": "Turkmen",
-        "tl": "Tagalog",
-        "tn": "Tswana",
-        "to": "Tongan",
-        "tpi": "Tok Pisin",
-        "tr": "Turkish",
-        "ts": "Tsonga",
-        "tt": "Tatar",
-        "tum": "Tumbuka",
-        "tw": "Twi",
-        "ty": "Tahitian",
-        "udm": "Udmurt",
-        "ug": "Uyghur",
-        "uk": "Ukrainian",
-        "ur": "Urdu",
-        "uz": "Uzbek",
-        "ve": "Venda",
-        "vec": "Venetian",
-        "vep": "Vepsian",
-        "vi": "Vietnamese",
-        "vls": "West Flemish",
-        "vo": "Volap",
-        "wa": "Walloon",
-        "war": "Waray-Waray",
-        "wo": "Wolof",
-        "wuu": "Wu",
-        "xal": "Kalmyk",
-        "xh": "Xhosa",
-        "xmf": "Mingrelian",
-        "yi": "Yiddish",
-        "yo": "Yoruba",
-        "za": "Zhuang",
-        "zea": "Zeelandic",
-        "zh": "Chinese",
-        "zh-classical": "Classical Chinese",
-        "zh-min-nan": "Min Nan",
-        "zh-yue": "Cantonese",
-        "zu": "Zulu"
-    };
-    return langmap[iso639_3.replace("_", "-")];
 }
