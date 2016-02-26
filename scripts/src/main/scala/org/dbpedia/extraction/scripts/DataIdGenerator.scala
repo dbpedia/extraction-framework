@@ -216,7 +216,7 @@ object DataIdGenerator {
       sparql.add(dist, RDF.`type`, sparql.createResource(sparql.getNsPrefixURI("dataid-ld") + "SparqlEndpoint"))
       sparql.add(dataset, sparql.createProperty(sparql.getNsPrefixURI("dcat"), "distribution"), dist)
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid"), "isDistributionOf"), dataset)
-      sparql.add(dist,sparql.createProperty(sparql.getNsPrefixURI("dc"), "hasVersion"), versionStatement)
+      sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dc"), "hasVersion"), versionStatement)
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dc"), "title"), sparql.createLiteral("The official DBpedia sparql endpoint", "en"))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dc"), "description"), sparql.createLiteral("The official sparql endpoint of DBpedia, hosted graciously by OpenLink Software (http://virtuoso.openlinksw.com/), containing all datasets of the /core directory.", "en"))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("rdfs"), "label"), sparql.createLiteral("The official DBpedia sparql endpoint", "en"))
@@ -270,7 +270,7 @@ object DataIdGenerator {
 
       model.add(dist, model.createProperty(model.getNsPrefixURI("rdfs"), "label"), model.createLiteral(currentFile + (if (lang != null) {"_" + lang.wikiCode.replace("-", "_") } else "") + "_" + dbpVersion, "en"))
       //TODO done by DataId Hub
-      model.add(dataset, model.createProperty(model.getNsPrefixURI("owl"), "versionInfo"), model.createTypedLiteral(idVersion, model.getNsPrefixURI("xsd") + "string"))
+      model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), versionStatement)
       //TODO model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dist)
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "hasAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "associatedAgent"), associatedAgent)
@@ -501,7 +501,7 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "landingPage"), model.createResource("http://dbpedia.org/"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("foaf"), "page"), model.createResource(documentation))
       //TODO done by DataId Hub
-      model.add(uri, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), versionStatement)
+      model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "hasVersion"), versionStatement)
       //TODO model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "latestVersion"), dataset)
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "hasAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "associatedAgent"), associatedAgent)
