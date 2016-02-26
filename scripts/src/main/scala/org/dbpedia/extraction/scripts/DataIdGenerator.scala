@@ -195,9 +195,9 @@ object DataIdGenerator {
     def addSimpleStatement(typ: String, uriVal: String, stmt: String, lang: Language = null, ref: Resource = null): Resource =
     {
       val ss = if(ref != null && ref.isURIResource)
-        stmtModel.createResource(ref.getURI + "#" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8"))
+        stmtModel.createResource(ref.getURI + (if(uriVal != null) "#" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8") else ""))
       else
-        stmtModel.createResource(uri.getURI + "?" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8"))
+        stmtModel.createResource(uri.getURI + (if(uriVal != null) "?" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8") else ""))
       stmtModel.add(ss, RDF.`type`, stmtModel.createResource(stmtModel.getNsPrefixURI("dataid") + "SimpleStatement"))
       if(lang != null)
         stmtModel.add(ss, stmtModel.createProperty(stmtModel.getNsPrefixURI("dataid"), "statement"), stmtModel.createLiteral(stmt, lang.isoCode))
@@ -346,8 +346,8 @@ object DataIdGenerator {
           //statements
           versionStatement = addSimpleStatement("version", idVersion, idVersion)
           rightsStatement = addSimpleStatement("rights", "dbpedia-rights", rights, Language.English)
-          dataidStandard = addSimpleStatement("standard", "dataid", "DataID - dataset metadata ontology", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/core"))
-          dataidLdStandard = addSimpleStatement("standard", "dataid-ld", "DataID-LD - dataset metadata ontology with linked data extension", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/ld"))
+          dataidStandard = addSimpleStatement(null, null, "DataID - dataset metadata ontology", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/core"))
+          dataidLdStandard = addSimpleStatement(null, null, "DataID-LD - dataset metadata ontology with linked data extension", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/ld"))
 
           val creator = addAgent(agentModel, lang, configMap.get("creator").getAsObject)
           val maintainer = addAgent(agentModel, lang, configMap.get("maintainer").getAsObject)
@@ -356,7 +356,6 @@ object DataIdGenerator {
 
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "modified"), dataidModel.createTypedLiteral(dateformat.format(new Date()), dataidModel.getNsPrefixURI("xsd") + "date"))
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "issued"), dataidModel.createTypedLiteral(dateformat.format(new Date()), dataidModel.getNsPrefixURI("xsd") + "date"))
-          //dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "has"), dataidModel.createTypedLiteral(idVersion, dataidModel.getNsPrefixURI("xsd") + "string"))
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "hasAccessLevel"), dataidModel.createResource(dataidModel.getNsPrefixURI("dataid") + "PublicAccess"))
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "latestVersion"), uri)
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "associatedAgent"), creator)
