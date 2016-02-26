@@ -133,7 +133,6 @@ object DataIdGenerator {
       if(agentMap.get("homepage") != null)
         model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "homepage"), model.createResource(agentMap.get("homepage").getAsString.value()))
       model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "mbox"), model.createLiteral(agentMap.get("mbox").getAsString.value()))
-      model.add(agent,model.createProperty(model.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
 
       Option(lang) match{
         case Some(lang) =>{
