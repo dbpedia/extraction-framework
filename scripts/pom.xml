@@ -261,6 +261,14 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>WikidataSubClassOf</id>
+                            <mainClass>org.dbpedia.extraction.scripts.WikidataSubClassOf</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>SlackForwarder</id>
                             <mainClass>org.dbpedia.extraction.scripts.SlackForwarder</mainClass>
                             <jvmArgs>
@@ -327,4 +335,5 @@
             <version>2.2.1</version>
         </dependency>
     </dependencies>
+
 </project>

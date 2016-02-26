@@ -27,13 +27,13 @@ class WikiDownloader(val apiUrl : String) {
   val outFactory = XMLOutputFactory.newInstance
   val events = XMLEventFactory.newInstance
   
-  def buildURL(namespace : Namespace, gapfrom : String) : URL = 
+  def buildURL(namespace : Namespace, gapcontinue : String) : URL = 
   {
     var sb = new StringBuilder
     sb append apiUrl
     sb append "?action=query&generator=allpages&prop=revisions&rvprop=ids|content|timestamp&format=xml"
     sb append "&gapnamespace=" append namespace.code append "&gaplimit=50"
-    if (gapfrom != null) sb append "&gapfrom=" append gapfrom.replace(' ', '_')
+    if (gapcontinue != null) sb append "&gapcontinue=" append gapcontinue.replace(' ', '_')
     // I'm not sure what kind of escaping URL is doing. Seems ok if we just replace spaces.
     new URL(sb.toString)
   }
@@ -59,11 +59,11 @@ class WikiDownloader(val apiUrl : String) {
     
   def addPages(namespace : Namespace, out : XMLEventBuilder) : Unit =
   {
-    var gapfrom = ""
+    var gapcontinue = ""
     do
     {
-      val url = buildURL(namespace, gapfrom)
-      gapfrom = null
+      val url = buildURL(namespace, gapcontinue)
+      gapcontinue = null
       
       val stream = url.openStream
       try
@@ -75,7 +75,7 @@ class WikiDownloader(val apiUrl : String) {
           in.element("api") { _ =>
             in.ifElement("error") { error => throw new IOException(error attr "info") }
             in.ifElement("query-continue") { _ =>
-              in.element("allpages") { allpages => gapfrom = allpages attr "gapfrom" } 
+              in.element("allpages") { allpages => gapcontinue = allpages attr "gapcontinue" } 
             }
             in.ifElement("query") { _ => // note: there's no <query> element if the namespace contains no pages
               in.element("pages") { _ =>
@@ -104,7 +104,7 @@ class WikiDownloader(val apiUrl : String) {
         xmlIn.close
       }
       finally stream.close
-    } while (gapfrom != null)
+    } while (gapcontinue != null)
   }
   
 }
