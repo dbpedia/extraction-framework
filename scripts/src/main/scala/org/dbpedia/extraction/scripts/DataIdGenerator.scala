@@ -133,6 +133,7 @@ object DataIdGenerator {
       if(agentMap.get("homepage") != null)
         model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "homepage"), model.createResource(agentMap.get("homepage").getAsString.value()))
       model.add(agent, model.createProperty(model.getNsPrefixURI("foaf"), "mbox"), model.createLiteral(agentMap.get("mbox").getAsString.value()))
+      model.add(agent,model.createProperty(model.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
 
       Option(lang) match{
         case Some(lang) =>{
@@ -172,6 +173,7 @@ object DataIdGenerator {
 
           staticModel.add(mime, RDF.`type`, staticModel.createResource(staticModel.getNsPrefixURI("dataid") + "MediaType"))
           staticModel.add(mime, staticModel.createProperty(staticModel.getNsPrefixURI("dataid"), "typeTemplate"), staticModel.createLiteral(o))
+          staticModel.add(mime,staticModel.createProperty(staticModel.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
           if(oe != null)
             staticModel.add(mime, staticModel.createProperty(staticModel.getNsPrefixURI("dataid"), "typeExension"), staticModel.createLiteral(oe))
           if(i != null)
@@ -181,6 +183,7 @@ object DataIdGenerator {
             staticModel.add(mime, staticModel.createProperty(staticModel.getNsPrefixURI("dataid"), "innerMediaType"), it)
             staticModel.add(it, staticModel.createProperty(staticModel.getNsPrefixURI("dataid"), "typeTemplate"), staticModel.createLiteral(i))
             staticModel.add(it, staticModel.createProperty(staticModel.getNsPrefixURI("dataid"), "typeExension"), staticModel.createLiteral(ie))
+            staticModel.add(it,staticModel.createProperty(staticModel.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
             if(ie == ".tql")
               staticModel.add(it, staticModel.createProperty(staticModel.getNsPrefixURI("dataid"), "typeExension"), staticModel.createLiteral(".nq"))
             mediaTypeMap += (inner, null) -> it
@@ -230,6 +233,8 @@ object DataIdGenerator {
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("void"), "sparqlEndpoint"), sparql.createResource(sparqlEndpoint))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid-ld"), "graphName"), sparql.createResource("http://dbpedia.org"))
       sparql.add(dist, sparql.createProperty(sparql.getNsPrefixURI("dataid"), "accessProcedure"), sparql.createLiteral("An endpoint for sparql queries: provide valid queries."))
+      sparql.add(dist,sparql.createProperty(sparql.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
+      sparql.add(dist,sparql.createProperty(sparql.getNsPrefixURI("dc"), "conformsTo"), dataidLdStandard)
       sparql
     }
 
@@ -278,6 +283,7 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "modified"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "issued"), model.createTypedLiteral(dateformat.format(new Date()), model.getNsPrefixURI("xsd") + "date"))
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "license"), model.createResource(license))
+      model.add(dist,model.createProperty(model.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
 
       if (outerDirectory != null && lang != null) {
         lbpMap.get((outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile).replace(compression, ""))
@@ -362,7 +368,6 @@ object DataIdGenerator {
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "associatedAgent"), maintainer)
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "associatedAgent"), contact)
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "title"), dataidModel.createLiteral("DataID meta data for the " + lang.locale.getLanguage + " DBpedia", "en"))
-
           dataidModel.add(uri,dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
           dataidModel.add(uri,dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "conformsTo"), dataidLdStandard)
           dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "publisher"), creator)
@@ -510,6 +515,9 @@ object DataIdGenerator {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "publisher"), associatedAgent)
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral("DBpedia", "en"))
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dcat"), "keyword"), model.createLiteral(datasetName, "en"))
+      model.add(dataset,model.createProperty(model.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
+      model.add(dataset,model.createProperty(model.getNsPrefixURI("dc"), "conformsTo"), dataidLdStandard)
+
       if(lang.iso639_3 != null && lang.iso639_3.length > 0)
         model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang.iso639_3))
 
