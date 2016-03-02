@@ -53,7 +53,7 @@ class WikiApi(url: URL, language: Language)
         // -> "generator" instead of "list" and "gapnamespace" instead of "apnamespace" ("gap" is for "generator all pages")
  
         //Retrieve list of pages
-        val response = query("?action=query&continue=&format=xml&list=allpages&apfrom=" + URLEncoder.encode(fromPage, "UTF-8") + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
+        val response = query("?action=query&continue=&format=xml&list=allpages&apcontinue=" + URLEncoder.encode(fromPage, "UTF-8") + "&aplimit=" + pageListLimit + "&apnamespace=" + namespace.code)
 
         //Extract page ids
         val pageIds = for(p <- response \ "query" \ "allpages" \ "p") yield (p \ "@pageid").head.text.toLong
@@ -62,7 +62,7 @@ class WikiApi(url: URL, language: Language)
         retrievePagesByPageID(pageIds).foreach(f)
 
         //Retrieve remaining pages
-        for(continuePage <- response \ "query-continue" \ "allpages" \ "@apfrom" headOption)
+        for(continuePage <- response \ "query-continue" \ "allpages" \ "@apcontinue" headOption)
         {
             // TODO: use iteration instead of recursion
             retrievePagesByNamespace(namespace, f, continuePage.text)
