@@ -19,7 +19,7 @@ object TypeStatistics {
         /*0*/ "base directory, " +
         /*1*/ "input file suffix, " +
         /*2*/ "comma- or space-separated names of input files (e.g. 'instance_types,instance_types_transitive') without suffix and path!" +
-        /*3*/ "output file name" +
+        /*3*/ "output file name (note: in json format)" +
         /*4*/ "localized versions - boolean (if false: languages other than english will use the '_en_uris' versions of the files in the input list)" +
         /*5*/ "count also properties" +
         /*6*/ "count also values"
@@ -36,7 +36,7 @@ object TypeStatistics {
     require(inputs.forall(! _.endsWith(inSuffix)), "input file names shall not end with input file suffix")
     require(inputs.forall(! _.contains("/")), "input file names shall not contain paths")
 
-    val outfile = new File(args(3))
+    val outfile = new File(baseDir + "/" + args(3))
     if(!outfile.exists())
       outfile.createNewFile()
     require(outfile.isFile && outfile.canWrite, "output file is not writable")
