@@ -45,6 +45,8 @@ object TypeStatistics {
     val countProps = args(5).toBoolean
     val countValues = args(6).toBoolean
 
+    logger.log(Level.INFO, "starting stats count")
+
     val subjectsInLangs = new scala.collection.mutable.HashMap[String, Map[String, Int]]()
     val objectsInLangs = new scala.collection.mutable.HashMap[String, Map[String, Int]]()
     val propertiesInLangs = new scala.collection.mutable.HashMap[String, Map[String, Int]]()
@@ -56,6 +58,7 @@ object TypeStatistics {
     }
 
     writeOutput()
+    logger.log(Level.INFO, "stats count done!")
 
     def count(lang: String, files: List[RichFile], countProps: Boolean = true, countValues: Boolean = true): Unit = {
 
@@ -63,9 +66,6 @@ object TypeStatistics {
       val objects = new scala.collection.mutable.HashMap[String, Int]()
       val props = new scala.collection.mutable.HashMap[String, Int]()
 
-      for(file <- files) {
-        logger.log(Level.INFO, file.name)
-      }
       for(file <- files) {
         if(file.exists)
         {
@@ -92,10 +92,12 @@ object TypeStatistics {
 
     def writeOutput() =
     {
+      logger.log(Level.INFO, "start writing output")
       val writer = new PrintWriter(outfile)
       writer.println("{")
       for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
       {
+        logger.log(Level.INFO, "writing output for " + lang.wikiCode)
         writer.println("\t'" + lang.wikiCode + "': {")
         writer.println("\t\t'subjects': {")
         writeMap(subjectsInLangs(lang.wikiCode), writer)
@@ -110,10 +112,12 @@ object TypeStatistics {
       }
       writer.println("}")
       writer.close()
+      logger.log(Level.INFO, "finished writing output")
     }
 
     def writeMap(map: Map[String, Int], writer: PrintWriter, tabs: Int = 3): Unit =
     {
+      logger.log(Level.INFO, "sorting map of size " + map.size)
       val keylist = map.keySet.toList.sortBy(x => x)
       for(i <- 0 until map.size)
       {
