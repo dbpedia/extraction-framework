@@ -79,9 +79,9 @@ object TypeStatistics {
               case Some(s) => subjects += ((quad.subject, s + 1))
               case None => subjects += ((quad.subject, 1))
             }
-            objects.get(quad.predicate) match {
-              case Some(p) => objects += ((quad.predicate, p + 1))
-              case None => objects += ((quad.predicate, 1))
+            props.get(quad.predicate) match {
+              case Some(p) => props += ((quad.predicate, p + 1))
+              case None => props += ((quad.predicate, 1))
             }
             objects.get(quad.value) match {
               case Some(p) => objects += ((quad.value, p + 1))
@@ -123,7 +123,7 @@ object TypeStatistics {
     def writeMap(map: Map[String, Int], writer: PrintWriter, tabs: Int = 3): Unit =
     {
       logger.log(Level.INFO, "sorting map of size " + map.size)
-      val keylist = map.keySet.toList.sortBy(x => x)
+      val keylist = map.keySet
       for(i <- 0 until map.size)
       {
         writer.println("'" + keylist(i) + "': " + map.get(keylist(i)).get + (if(i == map.size-1) "" else " ,"))
