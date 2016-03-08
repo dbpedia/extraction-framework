@@ -42,8 +42,8 @@ object TypeStatistics {
     require(outfile.isFile && outfile.canWrite, "output file is not writable")
 
     val localized = args(4).toBoolean
-    val countProps = args(5).toBoolean
-    val countValues = args(6).toBoolean
+    val writeProps = args(5).toBoolean
+    val writeObjects = args(6).toBoolean
 
     logger.log(Level.INFO, "starting stats count")
 
@@ -98,18 +98,19 @@ object TypeStatistics {
       writer.println("{")
       for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
       {
-        logger.log(Level.INFO, "writing output for " + lang.wikiCode)
         writer.println("\t'" + lang.wikiCode + "': {")
         writer.println("\t\t'subjects': {")
         writeMap(subjectsInLangs(lang.wikiCode), writer, false)
         writer.println("\t\t} ,")
         writer.println("\t\t'properties': {")
-        writeMap(propertiesInLangs(lang.wikiCode), writer, countProps)
+        writeMap(propertiesInLangs(lang.wikiCode), writer, writeProps)
         writer.println("\t\t} ,")
         writer.println("\t\t'objects': {")
-        writeMap(objectsInLangs(lang.wikiCode), writer, countValues)
+        writeMap(objectsInLangs(lang.wikiCode), writer, writeObjects)
         writer.println("\t\t}")
         writer.println("\t}")
+        if(lang.wikiCode != "zh")  //TODO should work to figure out the last mapping lang
+          writer.println(",")
       }
       writer.println("}")
       writer.close()
