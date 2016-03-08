@@ -70,12 +70,13 @@ object TypeStatistics {
         if(file.exists)
         {
           QuadReader.readQuads("statistics", file) { quad =>
+
             subjects.get(quad.subject) match {
               case Some(s) => subjects += ((quad.subject, s + 1))
               case None => subjects += ((quad.subject, 1))
             }
             props.get(quad.predicate) match {
-              case Some(p) => props += ((quad.predicate, p + 1))
+              case Some(s) => props += ((quad.predicate, s + 1))
               case None => props += ((quad.predicate, 1))
             }
             objects.get(quad.value) match {
@@ -118,10 +119,10 @@ object TypeStatistics {
     def writeMap(map: Map[String, Int], writer: PrintWriter, tabs: Int = 3): Unit =
     {
       logger.log(Level.INFO, "sorting map of size " + map.size)
-      val keylist = map.keySet
+      val keymap = map.keySet.toList
       for(i <- 0 until map.size)
       {
-        writer.println("'" + keylist(i) + "': " + map.get(keylist(i)).get + (if(i == map.size-1) "" else " ,"))
+        writer.println("'" + keymap(i) + "': " + map.get(keymap(i)).get + (if(i == map.size-1) "" else " ,"))
       }
     }
 
