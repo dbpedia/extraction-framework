@@ -40,6 +40,8 @@ object TypeStatistics {
     if(!outfile.exists())
       outfile.createNewFile()
     require(outfile.isFile && outfile.canWrite, "output file is not writable")
+    val writer = new PrintWriter(outfile)
+    writer.println("{")
 
     val localized = args(4).toBoolean
     val writeProps = args(5).toBoolean
@@ -47,18 +49,15 @@ object TypeStatistics {
 
     logger.log(Level.INFO, "starting stats count")
 
-    val subjectsInLangs = new scala.collection.mutable.HashMap[String, Map[String, Int]]()
-    val objectsInLangs = new scala.collection.mutable.HashMap[String, Map[String, Int]]()
-    val propertiesInLangs = new scala.collection.mutable.HashMap[String, Map[String, Int]]()
-
     for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
     {
       val inputFiles = if(localized) getInputFileList(lang, inputs, "_en_uris") else getInputFileList(lang, inputs, "")
       count(lang.wikiCode, inputFiles)
     }
 
-    writeOutput()
-    logger.log(Level.INFO, "stats count done!")
+    writer.println("}")
+    writer.close()
+    logger.log(Level.INFO, "finished writing output")
 
     def count(lang: String, files: List[RichFile]): Unit = {
 
@@ -86,35 +85,19 @@ object TypeStatistics {
           }
         }
       }
-      subjectsInLangs += (lang -> subjects.toMap)
-      propertiesInLangs += (lang -> props.toMap)
-      objectsInLangs += (lang -> objects.toMap)
-    }
-
-    def writeOutput() : Unit=
-    {
-      logger.log(Level.INFO, "start writing output")
-      val writer = new PrintWriter(outfile)
-      writer.println("{")
-      for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
-      {
-        writer.println("\t'" + lang.wikiCode + "': {")
-        writer.println("\t\t'subjects': {")
-        writeMap(subjectsInLangs(lang.wikiCode), writer, false)
-        writer.println("\t\t} ,")
-        writer.println("\t\t'properties': {")
-        writeMap(propertiesInLangs(lang.wikiCode), writer, writeProps)
-        writer.println("\t\t} ,")
-        writer.println("\t\t'objects': {")
-        writeMap(objectsInLangs(lang.wikiCode), writer, writeObjects)
-        writer.println("\t\t}")
-        writer.println("\t}")
-        if(lang.wikiCode != "zh")  //TODO should work to figure out the last mapping lang
-          writer.println(",")
-      }
-      writer.println("}")
-      writer.close()
-      logger.log(Level.INFO, "finished writing output")
+      writer.println("\t'" + lang + "': {")
+      writer.println("\t\t'subjects': {")
+      writeMap(subjects.toMap, writer, false)
+      writer.println("\t\t} ,")
+      writer.println("\t\t'properties': {")
+      writeMap(props.toMap, writer, writeProps)
+      writer.println("\t\t} ,")
+      writer.println("\t\t'objects': {")
+      writeMap(objects.toMap, writer, writeObjects)
+      writer.println("\t\t}")
+      writer.println("\t}")
+      if(lang != "zh")  //TODO should work to figure out the last mapping lang
+        writer.println(",")
     }
 
     def writeMap(map: Map[String, Int], writer: PrintWriter, writeAll: Boolean = true, tabs: Int = 3): Unit =
