@@ -51,7 +51,7 @@ object TypeStatistics {
     val objectsInLangs = new scala.collection.mutable.HashMap[String, Map[String, Int]]()
     val propertiesInLangs = new scala.collection.mutable.HashMap[String, Map[String, Int]]()
 
-    for(lang <- Namespace.mappings.keySet) //for all mapping languages
+    for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
     {
       val inputFiles = if(localized) getInputFileList(lang, inputs, "_en_uris") else getInputFileList(lang, inputs, "")
       count(lang.wikiCode, inputFiles, countProps, countValues)
@@ -72,7 +72,7 @@ object TypeStatistics {
           var line = 0
           QuadReader.readQuads("statistics", file) { quad =>
             line = line +1
-            if(line % 10000 == 0)
+            if(line % 100000 == 0)
               logger.log(Level.INFO, "line " + line)
 
             subjects.get(quad.subject) match {
