@@ -31,7 +31,7 @@ object TypeStatistics {
     val inSuffix = args(1)
     require(inSuffix.nonEmpty, "no input file suffix")
 
-    var inputs = args.drop(2).flatMap(_.split("[,\\s]")).map(_.trim.replace("\\", "/")).filter(_.nonEmpty)
+    var inputs = args(2).split("[,\\s]").map(_.trim.replace("\\", "/")).filter(_.nonEmpty)
     require(inputs.nonEmpty, "no input file names")
     require(inputs.forall(! _.endsWith(inSuffix)), "input file names shall not end with input file suffix")
     //require(inputs.forall(! _.contains("/")), "input file names shall not contain paths")
@@ -51,7 +51,7 @@ object TypeStatistics {
 
     for(lang <- Namespace.mappings.keySet) //for all mapping languages
     {
-      val inputFiles = if(localized) getInputFileList(lang, inputs, "en_uris") else getInputFileList(lang, inputs, "")
+      val inputFiles = if(localized) getInputFileList(lang, inputs, "_en_uris") else getInputFileList(lang, inputs, "")
       count(lang.wikiCode, inputFiles, countProps, countValues)
     }
 
@@ -63,16 +63,13 @@ object TypeStatistics {
       val objects = new scala.collection.mutable.HashMap[String, Int]()
       val props = new scala.collection.mutable.HashMap[String, Int]()
 
-      var line = 0
+      for(file <- files) {
+        logger.log(Level.INFO, file.name)
+      }
       for(file <- files) {
         if(file.exists)
         {
-          logger.log(Level.INFO, "reading file " + file)
           QuadReader.readQuads("statistics", file) { quad =>
-            line = line + 1
-            if (line % 1000000 == 0)
-              logger.log(Level.INFO, "reading line " + line)
-
             subjects.get(quad.subject) match {
               case Some(s) => subjects += ((quad.subject, s + 1))
               case None => subjects += ((quad.subject, 1))
@@ -97,7 +94,7 @@ object TypeStatistics {
     {
       val writer = new PrintWriter(outfile)
       writer.println("{")
-      for(lang <- Namespace.mappings.keySet) //for all mapping languages
+      for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
       {
         writer.println("\t'" + lang.wikiCode + "': {")
         writer.println("\t\t'subjects': {")
@@ -117,10 +114,10 @@ object TypeStatistics {
 
     def writeMap(map: Map[String, Int], writer: PrintWriter, tabs: Int = 3): Unit =
     {
+      val keylist = map.keySet.toList.sortBy(x => x)
       for(i <- 0 until map.size)
       {
-        val key = map.keySet.toList(i)
-        writer.println("".padTo(tabs, "\t") + "'" + key + "': " + map.get(key).get + (if(i == map.size-1) "" else " ,"))
+        writer.println("'" + keylist(i) + "': " + map.get(keylist(i)).get + (if(i == map.size-1) "" else " ,"))
       }
     }
 
