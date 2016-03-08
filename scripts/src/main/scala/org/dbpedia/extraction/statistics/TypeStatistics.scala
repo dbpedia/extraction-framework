@@ -69,12 +69,7 @@ object TypeStatistics {
       for(file <- files) {
         if(file.exists)
         {
-          var line = 0
           QuadReader.readQuads("statistics", file) { quad =>
-            line = line +1
-            if(line % 100000 == 0)
-              logger.log(Level.INFO, "line " + line)
-
             subjects.get(quad.subject) match {
               case Some(s) => subjects += ((quad.subject, s + 1))
               case None => subjects += ((quad.subject, 1))
