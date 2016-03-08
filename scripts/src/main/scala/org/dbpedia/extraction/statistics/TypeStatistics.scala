@@ -54,13 +54,13 @@ object TypeStatistics {
     for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
     {
       val inputFiles = if(localized) getInputFileList(lang, inputs, "_en_uris") else getInputFileList(lang, inputs, "")
-      count(lang.wikiCode, inputFiles, countProps, countValues)
+      count(lang.wikiCode, inputFiles)
     }
 
     writeOutput()
     logger.log(Level.INFO, "stats count done!")
 
-    def count(lang: String, files: List[RichFile], countProps: Boolean = true, countValues: Boolean = true): Unit = {
+    def count(lang: String, files: List[RichFile]): Unit = {
 
       val subjects = new scala.collection.mutable.HashMap[String, Int]()
       val objects = new scala.collection.mutable.HashMap[String, Int]()
@@ -101,13 +101,13 @@ object TypeStatistics {
         logger.log(Level.INFO, "writing output for " + lang.wikiCode)
         writer.println("\t'" + lang.wikiCode + "': {")
         writer.println("\t\t'subjects': {")
-        writeMap(subjectsInLangs(lang.wikiCode), writer)
+        writeMap(subjectsInLangs(lang.wikiCode), writer, false)
         writer.println("\t\t} ,")
         writer.println("\t\t'properties': {")
-        writeMap(propertiesInLangs(lang.wikiCode), writer)
+        writeMap(propertiesInLangs(lang.wikiCode), writer, countProps)
         writer.println("\t\t} ,")
         writer.println("\t\t'objects': {")
-        writeMap(objectsInLangs(lang.wikiCode), writer)
+        writeMap(objectsInLangs(lang.wikiCode), writer, countValues)
         writer.println("\t\t}")
         writer.println("\t}")
       }
@@ -116,14 +116,17 @@ object TypeStatistics {
       logger.log(Level.INFO, "finished writing output")
     }
 
-    def writeMap(map: Map[String, Int], writer: PrintWriter, tabs: Int = 3): Unit =
+    def writeMap(map: Map[String, Int], writer: PrintWriter, writeAll: Boolean = true, tabs: Int = 3): Unit =
     {
       logger.log(Level.INFO, "sorting map of size " + map.size)
       val keymap = map.keySet.toList
-      for(i <- 0 until map.size)
-      {
-        writer.println("'" + keymap(i) + "': " + map.get(keymap(i)).get + (if(i == map.size-1) "" else " ,"))
-      }
+      if(writeAll)
+        for(i <- 0 until map.size)
+        {
+          writer.println("'" + keymap(i) + "': " + map.get(keymap(i)).get + (if(i == map.size-1) "" else " ,"))
+        }
+      else
+        writer.println("'count': " + map.size)
     }
 
     def getInputFileList(lang: Language, inputs: Array[String], append: String): List[RichFile] =
