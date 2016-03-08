@@ -34,7 +34,7 @@ object TypeStatistics {
     var inputs = args.drop(2).flatMap(_.split("[,\\s]")).map(_.trim.replace("\\", "/")).filter(_.nonEmpty)
     require(inputs.nonEmpty, "no input file names")
     require(inputs.forall(! _.endsWith(inSuffix)), "input file names shall not end with input file suffix")
-    require(inputs.forall(! _.contains("/")), "input file names shall not contain paths")
+    //require(inputs.forall(! _.contains("/")), "input file names shall not contain paths")
 
     val outfile = new File(baseDir + "/" + args(3))
     if(!outfile.exists())
@@ -65,23 +65,26 @@ object TypeStatistics {
 
       var line = 0
       for(file <- files) {
-        logger.log(Level.INFO, "reading file " + file)
-        QuadReader.readQuads("statistics", file) { quad =>
-          line = line + 1
-          if (line % 1000000 == 0)
-            logger.log(Level.INFO, "reading line " + line)
+        if(file.exists)
+        {
+          logger.log(Level.INFO, "reading file " + file)
+          QuadReader.readQuads("statistics", file) { quad =>
+            line = line + 1
+            if (line % 1000000 == 0)
+              logger.log(Level.INFO, "reading line " + line)
 
-          subjects.get(quad.subject) match {
-            case Some(s) => subjects += ((quad.subject, s + 1))
-            case None => subjects += ((quad.subject, 1))
-          }
-          objects.get(quad.predicate) match {
-            case Some(p) => objects += ((quad.predicate, p + 1))
-            case None => objects += ((quad.predicate, 1))
-          }
-          objects.get(quad.value) match {
-            case Some(p) => objects += ((quad.value, p + 1))
-            case None => objects += ((quad.value, 1))
+            subjects.get(quad.subject) match {
+              case Some(s) => subjects += ((quad.subject, s + 1))
+              case None => subjects += ((quad.subject, 1))
+            }
+            objects.get(quad.predicate) match {
+              case Some(p) => objects += ((quad.predicate, p + 1))
+              case None => objects += ((quad.predicate, 1))
+            }
+            objects.get(quad.value) match {
+              case Some(p) => objects += ((quad.value, p + 1))
+              case None => objects += ((quad.value, 1))
+            }
           }
         }
       }
