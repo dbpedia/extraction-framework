@@ -256,6 +256,8 @@
                             <id>TypeStatistics</id>
                             <mainClass>org.dbpedia.extraction.statistics.TypeStatistics</mainClass>
                             <jvmArgs>
+                                <jvmArg>-Xms4096m</jvmArg>
+                                <jvmArg>-Xmx8G</jvmArg><!-- processing all languages takes about 4G -->
                                 <jvmArg>-server</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>

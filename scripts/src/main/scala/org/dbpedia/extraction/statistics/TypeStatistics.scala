@@ -69,7 +69,12 @@ object TypeStatistics {
       for(file <- files) {
         if(file.exists)
         {
+          var line = 0
           QuadReader.readQuads("statistics", file) { quad =>
+            line = line +1
+            if(line % 10000 == 0)
+              logger.log(Level.INFO, "line " + line)
+
             subjects.get(quad.subject) match {
               case Some(s) => subjects += ((quad.subject, s + 1))
               case None => subjects += ((quad.subject, 1))
@@ -90,7 +95,7 @@ object TypeStatistics {
       objectsInLangs += (lang -> objects.toMap)
     }
 
-    def writeOutput() =
+    def writeOutput() : Unit=
     {
       logger.log(Level.INFO, "start writing output")
       val writer = new PrintWriter(outfile)
