@@ -327,7 +327,7 @@ object DataIdGenerator {
         }
         val distributions = dir.listFiles(filter).map(x => x.getName).toList.sorted
 
-        if(lang != null && distributions.map(x => x.contains("interlanguage-links") || x.contains("interlanguage_links")).foldRight(false)(_ || _)) {
+        if(lang != null && distributions.map(x => x.contains("short-abstracts") || x.contains("short_abstracts")).foldRight(false)(_ || _)) {
           val dataidModel = ModelFactory.createDefaultModel()
           val topsetModel = ModelFactory.createDefaultModel()
           val agentModel = ModelFactory.createDefaultModel()
