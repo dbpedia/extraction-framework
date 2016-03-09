@@ -53,7 +53,7 @@ object TypeStatistics {
 
     for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
     {
-      val inputFiles = if(localized) getInputFileList(lang, inputs, "_en_uris") else getInputFileList(lang, inputs, "")
+      val inputFiles = if(localized) getInputFileList(lang, inputs, "-en-uris") else getInputFileList(lang, inputs, "")
       count(lang.wikiCode, inputFiles)
     }
 
@@ -93,18 +93,18 @@ object TypeStatistics {
     }
 
     def writeLang(lang: String, subjects: mutable.HashMap[String, Int], objects: mutable.HashMap[String, Int], props: mutable.HashMap[String, Int], statements: Int): Unit = {
-      writer.println("\t'" + lang + "': {")
-      writer.println("\t\t'subjects': {")
+      writer.println("\t\"" + lang + "\": {")
+      writer.println("\t\t\"subjects\": {")
       writeMap(subjects.toMap, writer, false)
       writer.println("\t\t} ,")
-      writer.println("\t\t'properties': {")
+      writer.println("\t\t\"properties\": {")
       writeMap(props.toMap, writer, writeProps)
       writer.println("\t\t} ,")
-      writer.println("\t\t'objects': {")
+      writer.println("\t\t\"objects\": {")
       writeMap(objects.toMap, writer, writeObjects)
       writer.println("\t\t} ,")
-      writer.println("\t\t'statements': {")
-      writer.println("'count': " + statements)
+      writer.println("\t\t\"statements\": {")
+      writer.println("\"count\": " + statements)
       writer.println("\t\t}")
       writer.println("\t}")
       if (lang != "zh") //TODO should work to figure out the last mapping lang?
@@ -117,10 +117,10 @@ object TypeStatistics {
       if(writeAll)
         for(i <- 0 until map.size)
         {
-          writer.println("'" + keymap(i) + "': " + map.get(keymap(i)).get + (if(i == map.size-1) "" else " ,"))
+          writer.println("\"" + keymap(i).replace("http://", "") + "\": " + map.get(keymap(i)).get + (if(i == map.size-1) "" else " ,"))
         }
       else
-        writer.println("'count': " + map.size)
+        writer.println("\"count\": " + map.size)
     }
 
     def getInputFileList(lang: Language, inputs: Array[String], append: String): List[RichFile] =
