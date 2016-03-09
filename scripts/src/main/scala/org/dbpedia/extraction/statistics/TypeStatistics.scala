@@ -50,7 +50,7 @@ object TypeStatistics {
     val writeProps = if(args(5).toLowerCase == "listproperties") true else false
     val writeObjects = if(args(6).toLowerCase == "listobjects") true else false
 
-    val canonicalStr = if(args.length == 7) "_en_urs" else args(7).trim
+    val canonicalStr = if(args.length == 7) "_en_uris" else args(7).trim
 
     logger.log(Level.INFO, "starting stats count")
 
