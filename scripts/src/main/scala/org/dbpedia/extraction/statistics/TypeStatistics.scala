@@ -19,13 +19,13 @@ object TypeStatistics {
     require(args != null && args.length >= 7,
       "need at least three args: " +
         /*0*/ "base directory, " +
-        /*1*/ "input file suffix, " +
-        /*2*/ "comma- or space-separated names of input files (e.g. 'instance_types,instance_types_transitive') without suffix and path!" +
-        /*3*/ "output file name (note: in json format)" +
-        /*4*/ "localized / cononicalized - (if 'cononicalized': languages other than english will use the '_en_uris' versions of the files in the input list)" +
+        /*1*/ "input file suffix (e.g. .ttl.bz2)" +
+        /*2*/ "comma- or space-separated names of input files (e.g. 'instance_types,instance_types_transitive') without suffix, language or path!" +
+        /*3*/ "output file name (note: in json format, will be saved in the base dir)" +
+        /*4*/ "localized / canonicalized - (if 'canonicalized': languages other than english will use the canonical versions of the files in the input list)" +
         /*5*/ "listproperties / not - do not only count all property instances, but list all properties with their pertaining occurrences" +
         /*6*/ "listobjects / not - do not only count all objects instances, but list all objects with their pertaining occurrences" +
-        /*7*/ "canonical identifier - (optional) part of the filename which identifies a canonical dataset (usually _en_uris)"
+        /*7*/ "canonical identifier - (optional) part of the filename which identifies a canonical dataset (default: _en_uris, for 2015-04 its -en-uris)"
     )
 
     val baseDir = new File(args(0))
