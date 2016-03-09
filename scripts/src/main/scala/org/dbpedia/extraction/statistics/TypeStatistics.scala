@@ -6,6 +6,8 @@ import org.dbpedia.extraction.util.{RichFile, Language}
 import org.dbpedia.extraction.wikiparser.Namespace
 import java.util.logging.{Level, Logger}
 
+import scala.collection.mutable
+
 /**
   * Created by Chile on 3/7/2016.
   */
@@ -61,15 +63,17 @@ object TypeStatistics {
 
     def count(lang: String, files: List[RichFile]): Unit = {
 
-      val subjects = new scala.collection.mutable.HashMap[String, Int]()
-      val objects = new scala.collection.mutable.HashMap[String, Int]()
-      val props = new scala.collection.mutable.HashMap[String, Int]()
+      val subjects = new mutable.HashMap[String, Int]()
+      val objects = new mutable.HashMap[String, Int]()
+      val props = new mutable.HashMap[String, Int]()
+
+      var statements = 0
 
       for(file <- files) {
         if(file.exists)
         {
           QuadReader.readQuads("statistics", file) { quad =>
-
+            statements = statements +1
             subjects.get(quad.subject) match {
               case Some(s) => subjects += ((quad.subject, s + 1))
               case None => subjects += ((quad.subject, 1))
@@ -85,6 +89,10 @@ object TypeStatistics {
           }
         }
       }
+      writeLang(lang, subjects, objects, props, statements)
+    }
+
+    def writeLang(lang: String, subjects: mutable.HashMap[String, Int], objects: mutable.HashMap[String, Int], props: mutable.HashMap[String, Int], statements: Int): Unit = {
       writer.println("\t'" + lang + "': {")
       writer.println("\t\t'subjects': {")
       writeMap(subjects.toMap, writer, false)
@@ -94,15 +102,17 @@ object TypeStatistics {
       writer.println("\t\t} ,")
       writer.println("\t\t'objects': {")
       writeMap(objects.toMap, writer, writeObjects)
+      writer.println("\t\t} ,")
+      writer.println("\t\t'statements': {")
+      writer.println("'count': " + statements)
       writer.println("\t\t}")
       writer.println("\t}")
-      if(lang != "zh")  //TODO should work to figure out the last mapping lang
+      if (lang != "zh") //TODO should work to figure out the last mapping lang?
         writer.println(",")
     }
 
     def writeMap(map: Map[String, Int], writer: PrintWriter, writeAll: Boolean = true, tabs: Int = 3): Unit =
     {
-      logger.log(Level.INFO, "sorting map of size " + map.size)
       val keymap = map.keySet.toList
       if(writeAll)
         for(i <- 0 until map.size)
