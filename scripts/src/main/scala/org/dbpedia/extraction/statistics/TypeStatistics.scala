@@ -56,7 +56,7 @@ object TypeStatistics {
 
     for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
     {
-      val inputFiles = if(localized) getInputFileList(lang, inputs, canonicalStr) else getInputFileList(lang, inputs, "")
+      val inputFiles = if(localized) getInputFileList(lang, inputs, "") else getInputFileList(lang, inputs, canonicalStr)
       count(lang.wikiCode, inputFiles)
     }
 
