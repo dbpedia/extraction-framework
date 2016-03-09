@@ -22,9 +22,10 @@ object TypeStatistics {
         /*1*/ "input file suffix, " +
         /*2*/ "comma- or space-separated names of input files (e.g. 'instance_types,instance_types_transitive') without suffix and path!" +
         /*3*/ "output file name (note: in json format)" +
-        /*4*/ "localized versions - boolean (if false: languages other than english will use the '_en_uris' versions of the files in the input list)" +
-        /*5*/ "count also properties" +
-        /*6*/ "count also values"
+        /*4*/ "localized / cononicalized - (if 'cononicalized': languages other than english will use the '_en_uris' versions of the files in the input list)" +
+        /*5*/ "listproperties / not - do not only count all property instances, but list all properties with their pertaining occurrences" +
+        /*6*/ "listobjects / not - do not only count all objects instances, but list all objects with their pertaining occurrences" +
+        /*7*/ "canonical identifier - (optional) part of the filename which identifies a canonical dataset (usually _en_uris)"
     )
 
     val baseDir = new File(args(0))
@@ -45,15 +46,17 @@ object TypeStatistics {
     val writer = new PrintWriter(outfile)
     writer.println("{")
 
-    val localized = args(4).toBoolean
-    val writeProps = args(5).toBoolean
-    val writeObjects = args(6).toBoolean
+    val localized = if(args(4).toLowerCase == "localized") true else false
+    val writeProps = if(args(5).toLowerCase == "listproperties") true else false
+    val writeObjects = if(args(6).toLowerCase == "listobjects") true else false
+
+    val canonicalStr = if(args.length == 7) "_en_urs" else args(7).trim
 
     logger.log(Level.INFO, "starting stats count")
 
     for(lang <- Namespace.mappings.keySet.toList.sortBy(x => x)) //for all mapping languages
     {
-      val inputFiles = if(localized) getInputFileList(lang, inputs, "-en-uris") else getInputFileList(lang, inputs, "")
+      val inputFiles = if(localized) getInputFileList(lang, inputs, canonicalStr) else getInputFileList(lang, inputs, "")
       count(lang.wikiCode, inputFiles)
     }
 
