@@ -48,6 +48,41 @@ function readableNumber(number, divisor)
     return res.toFixed(1).toString() + " T";
 }
 
+function numberWithCommas(number) {
+    if(number === undefined || number == null)
+        return "0";
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function noNegative(number) {
+    if(number > 0)
+        return number;
+    else
+        return 0;
+}
+
+function calcPercDiff(older, newer, factional) {
+    if(older == 0)
+        return 0.0;
+    var diff = newer - older;
+    diff = diff/(older/100);
+    return diff.toFixed(factional)
+}
+
+function subArrayTest(sub, array)
+{
+    if(array.length < sub.length)
+        return false;
+    var zw = false;
+    for(var j in sub){
+        if(array.indexOf(sub[j]) == -1)
+            zw = true;
+    }
+    if(zw)
+        return false;
+    return true;
+}
+
 !function(a){"use strict";
     var b=function(d,e){this.settings=a.extend({},b.DEFAULTS),this.scrollbarWidth=c.getScrollbarWidth(),this.isInput="input"==d[0].tagName.toLowerCase(),this.active=!1,this.$el=d,this.$el.wrap('<div class="highlightTextarea"></div>'),this.$main=this.$el.parent(),this.$main.prepend('<div class="highlightTextarea-container"><div class="highlightTextarea-highlighter"></div></div>'),this.$container=this.$main.children().first(),this.$highlighter=this.$container.children(),this.setOptions(e),this.settings.id&&(this.$main[0].id=this.settings.id),this.settings.resizable&&this.applyResizable(),this.updateCss(),this.bindEvents(),this.highlight()};
     b.DEFAULTS={words:{},ranges:{},color:"#ffff00",caseSensitive:!0,resizable:!1,id:"",debug:!1},b.prototype.highlight=function(){var b=c.htmlEntities(this.$el.val()),d=this;
