@@ -166,8 +166,8 @@ object DataIdGenerator {
         case e : NoSuchElementException => {
           val o = outer match {case y if(y.contains("gz")) => "application/x-gzip" case z if(z.contains("bz2")) => "application/x-bzip2" case "sparql" => "application/sparql-results+xml" case _ => null}
           val oe = outer match {case y if(y.contains("gz")) => ".gz" case z if(z.contains("bz2")) => ".bz2" case _ => null}
-          val i = inner match {case ttl if(ttl.contains(".ttl")) => "text/turtle" case tql if(tql.contains(".tql") || tql.contains(".nq")) => "application/n-quads" case nt if(nt.contains(".nt")) => "application/n-triples" case _ => null}
-          val ie = inner match {case ttl if(ttl.contains(".ttl")) => ".ttl" case tql if(tql.contains(".tql") || tql.contains(".nq")) => ".tql" case nt if(nt.contains(".nt")) => ".nt" case _ => null}
+          val i = inner match {case ttl if(ttl.contains(".ttl")) => "text/turtle" case tql if(tql.contains(".tql") || tql.contains(".nq")) => "application/n-quads" case nt if(nt.contains(".nt")) => "application/n-triples" case xml if(xml.contains(".xml")) => "application/xml" case _ => null}
+          val ie = inner match {case ttl if(ttl.contains(".ttl")) => ".ttl" case tql if(tql.contains(".tql") || tql.contains(".nq")) => ".tql" case nt if(nt.contains(".nt")) => ".nt" case xml if(xml.contains(".xml")) => "application/xml" case _ => null}
           val mime = staticModel.createResource(staticModel.getNsPrefixURI("dataid") + "MediaType" + (if(i != null) "_" + i.substring(i.lastIndexOf("/")+1) else "") + "_" + o.substring(o.lastIndexOf("/")+1))
 
           staticModel.add(mime, RDF.`type`, staticModel.createResource(staticModel.getNsPrefixURI("dataid") + "MediaType"))
@@ -316,7 +316,7 @@ object DataIdGenerator {
             null
           }
         }
-        val filterstring = ("^[^$]+_" + dir.getName + "(" + extensions.foldLeft(new StringBuilder){ (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + ")" + compression).replace(".", "\\.")
+        val filterstring = ("^[^$]+_" + dir.getName + "(" + extensions.foldLeft(new StringBuilder){ (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + "|.xml)" + compression).replace(".", "\\.")
         val filter = new FilenameFilter {
           override def accept(dir: File, name: String): Boolean = {
             if(name.matches(filterstring))
