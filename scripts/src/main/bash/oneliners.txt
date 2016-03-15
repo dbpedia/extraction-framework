@@ -76,10 +76,13 @@ find -maxdepth 2 -mindepth 2 -type d | env LC_ALL=C sort | awk -F / '{sub(/wiki/
 # count number of same-as links in Wikipedia article namespace from English to other extracted languages. Result in 3.9: 16802429, 2014: 23797872
 gzip -d < enwiki-20130403-interlanguage-links.ttl.gz | grep -v -E 'resource/(Category|Template):' | wc -l
 
+# count intermediate node resources
+bzcat instance_types_en.ttl.bz2 instance_types_transitive_en.ttl.bz2 | cut -d ' ' -f 1 | grep "__" | uniq |  sort -u | wc -l
+
 # count number of abstracts, i.e. non-redirect, non-disambig pages in Wikipedia article namespace, in all extracted languages. Result in 3.9: 24895769
 grep 'short_abstracts\w*\.ttl' lines-bytes-packed.txt | grep -v 'en_uris' | awk '{s+=$3} END {print s}'
 
-# count mappings (per language and total)
+# count mappings (per language and total) (in the root of the extraction framework!)
 grep -c '<page>' mappings/Mapping_* | sed 's/[_:.]/ /g' | sort -k 4 -n -r | awk '{s+=$4; print $2 " " $4} END {print "total " s}'
 
 # ontology: count classes
@@ -174,7 +177,7 @@ ls -1 */*/*-page-links*.{nt,ttl}.gz | grep -v -E 'en-uris|unredirected' > page-l
 ### statistics ###
 
 #No of coordinates
-bzcat geo-coordinates_en.nt.bz2 mappingbased-properties_en.nt.bz2 | grep "http://www.w3.org/2003/01/geo/wgs84_pos#long" | wc -l
+bzcat  geo_coordinates_*.ttl.bz2 | cut -d ' ' -f 1 | sort -u | wc -l
 
 #No of disambiguations
 bzcat disambiguations_en.nt.bz2 | cut -d ' ' -f 1 | uniq | wc -l
@@ -184,3 +187,6 @@ bzcat redirects_en.nt.bz2 | cut -d ' ' -f 1 | uniq | wc -l
 
 #No of images
 bzcat images_en.nt.bz2 | grep "<http://xmlns.com/foaf/0.1/thumbnail>"  | cut -d ' ' -f 1 | uniq | wc -l
+
+#No of skos concepts
+bzcat skos_categories_en.ttl.bz2 redirects_en.ttl.bz2 instance_types_transitive_en.ttl.bz2 page_ids_en.ttl.bz2 | cut -d ' ' -f 1 | sort -u | wc -l
